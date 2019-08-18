@@ -18,6 +18,6 @@
 
 Make sure to read my blog post on Function(Overload) for more information! https://functionoverload590613498.wordpress.com/2019/08/18/i-made-my-own-sprite-editor-in-godot/
 
-Download it as a stand-alone on itch.io https://orama-interactive.itch.io/pixelorama
+Download it as a stand-alone on itch.io: https://orama-interactive.itch.io/pixelorama
 
 And if you like, consider helping me by sponsoring this project!
