@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
+
+[node name="LayerContainer" type="PanelContainer"]
+margin_top = 42.0
+margin_right = 159.0
+margin_bottom = 88.0
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 152.0
+margin_bottom = 39.0
+
+[node name="VisibilityButton" type="Button" parent="HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 32.0
+text = "V"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 56.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 60.0
+margin_top = 9.0
+margin_right = 106.0
+margin_bottom = 23.0
+text = "Layer 0"
+align = 1
+[connection signal="button_down" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_button_down"]
+[connection signal="button_up" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_button_up"]
+[connection signal="pressed" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]

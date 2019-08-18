@@ -1,0 +1,335 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://Main Theme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Graphics/left.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=4]
+[ext_resource path="res://Canvas.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=6]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="UI" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+
+[node name="ToolPanel" type="Panel" parent="UI"]
+margin_right = 320.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ToolPanel"]
+margin_right = 40.0
+margin_bottom = 44.0
+
+[node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
+margin_right = 166.0
+margin_bottom = 20.0
+
+[node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/VBoxContainer/MenuItems"]
+margin_right = 35.0
+margin_bottom = 20.0
+theme = ExtResource( 2 )
+text = "File"
+
+[node name="EditMenu" type="MenuButton" parent="UI/ToolPanel/VBoxContainer/MenuItems"]
+margin_left = 39.0
+margin_right = 75.0
+margin_bottom = 20.0
+theme = ExtResource( 2 )
+text = "Edit"
+
+[node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 166.0
+margin_bottom = 44.0
+
+[node name="Pencil" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
+margin_right = 51.0
+margin_bottom = 20.0
+button_mask = 3
+text = "Pencil"
+
+[node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/VBoxContainer/ToolsContainer/Pencil"]
+z_index = 1
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( 0, -10 )
+
+[node name="Eraser" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
+margin_left = 55.0
+margin_right = 106.0
+margin_bottom = 20.0
+button_mask = 3
+text = "Eraser"
+
+[node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/VBoxContainer/ToolsContainer/Eraser"]
+z_index = 1
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 35, -10 )
+
+[node name="Fill" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
+margin_left = 110.0
+margin_right = 166.0
+margin_bottom = 20.0
+button_mask = 3
+text = "Bucket"
+
+[node name="ColorPickers" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
+margin_top = 48.0
+margin_right = 166.0
+margin_bottom = 80.0
+
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/VBoxContainer/ColorPickers"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/VBoxContainer/ColorPickers"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+
+[node name="ViewportContainer" type="ViewportContainer" parent="UI"]
+editor/display_folded = true
+margin_left = 324.0
+margin_right = 860.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="UI/ViewportContainer"]
+size = Vector2( 536, 600 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Canvas" parent="UI/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+
+[node name="Camera2D" type="Camera2D" parent="UI/ViewportContainer/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 6 )
+
+[node name="LayerPanel" type="Panel" parent="UI"]
+margin_left = 864.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 160, 0 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel"]
+margin_right = 160.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxLayerContainer" type="VBoxContainer" parent="UI/LayerPanel/ScrollContainer"]
+margin_right = 160.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+
+[node name="LayerLabel" type="Label" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer"]
+margin_right = 160.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Layers"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer"]
+margin_top = 18.0
+margin_right = 160.0
+margin_bottom = 38.0
+
+[node name="AddLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+text = "+"
+
+[node name="RemoveLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 20.0
+disabled = true
+text = "X"
+
+[node name="MoveUpLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 67.0
+margin_bottom = 20.0
+disabled = true
+text = "^"
+
+[node name="MoveDownLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+margin_left = 71.0
+margin_right = 90.0
+margin_bottom = 20.0
+disabled = true
+text = "v"
+
+[node name="CloneLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+margin_left = 94.0
+margin_right = 118.0
+margin_bottom = 20.0
+text = "Cl"
+
+[node name="MergeDownLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+margin_left = 122.0
+margin_right = 146.0
+margin_bottom = 20.0
+disabled = true
+text = "M"
+
+[node name="CreateNewImage" type="ConfirmationDialog" parent="."]
+editor/display_folded = true
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateNewImage"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 78.0
+
+[node name="ImageSize" type="Label" parent="CreateNewImage/VBoxContainer"]
+margin_right = 184.0
+margin_bottom = 14.0
+text = "Image Size"
+
+[node name="WidthCont" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
+margin_top = 18.0
+margin_right = 184.0
+margin_bottom = 42.0
+
+[node name="WidthLabel" type="Label" parent="CreateNewImage/VBoxContainer/WidthCont"]
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
+text = "Width: "
+
+[node name="LineEdit" type="LineEdit" parent="CreateNewImage/VBoxContainer/WidthCont"]
+margin_left = 50.0
+margin_right = 108.0
+margin_bottom = 24.0
+text = "64"
+
+[node name="HeightCont" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
+margin_top = 46.0
+margin_right = 184.0
+margin_bottom = 70.0
+
+[node name="Height" type="Label" parent="CreateNewImage/VBoxContainer/HeightCont"]
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
+text = "Height:"
+
+[node name="LineEdit" type="LineEdit" parent="CreateNewImage/VBoxContainer/HeightCont"]
+margin_left = 50.0
+margin_right = 108.0
+margin_bottom = 24.0
+text = "64"
+
+[node name="OpenSprite" type="FileDialog" parent="."]
+margin_right = 515.0
+margin_bottom = 348.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*jpg, *.png ; JPG, PNG Images" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="SaveSprite" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 3.0
+margin_bottom = 48.0
+window_title = "Create a new image"
+resizable = true
+access = 2
+filters = PoolStringArray( "*.png ; PNG Image" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="ScaleImage" type="ConfirmationDialog" parent="."]
+editor/display_folded = true
+margin_right = 200.0
+margin_bottom = 114.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleImage"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 78.0
+
+[node name="ImageSize" type="Label" parent="ScaleImage/VBoxContainer"]
+margin_right = 184.0
+margin_bottom = 14.0
+text = "Image Size"
+
+[node name="WidthCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
+margin_top = 18.0
+margin_right = 184.0
+margin_bottom = 42.0
+
+[node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/WidthCont"]
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
+text = "Width: "
+
+[node name="LineEdit" type="LineEdit" parent="ScaleImage/VBoxContainer/WidthCont"]
+margin_left = 50.0
+margin_right = 108.0
+margin_bottom = 24.0
+text = "64"
+
+[node name="HeightCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
+margin_top = 46.0
+margin_right = 184.0
+margin_bottom = 70.0
+
+[node name="Height" type="Label" parent="ScaleImage/VBoxContainer/HeightCont"]
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
+text = "Height:"
+
+[node name="LineEdit" type="LineEdit" parent="ScaleImage/VBoxContainer/HeightCont"]
+margin_left = 50.0
+margin_right = 108.0
+margin_bottom = 24.0
+text = "64"
+[connection signal="popup_closed" from="UI/ToolPanel/VBoxContainer/ColorPickers/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="UI/ToolPanel/VBoxContainer/ColorPickers/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="popup_closed" from="UI/ToolPanel/VBoxContainer/ColorPickers/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="UI/ToolPanel/VBoxContainer/ColorPickers/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="mouse_entered" from="UI/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="UI/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/AddLayerButton" to="." method="_on_AddLayerButton_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/MoveUpLayer" to="." method="_on_MoveUpLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/MoveDownLayer" to="." method="_on_MoveDownLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/CloneLayer" to="." method="_on_CloneLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
+[connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
+[connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="popup_hide" from="OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
+[connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
+[connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
+[connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
