@@ -14,6 +14,7 @@ var sprite_changed_this_frame := false #for optimization purposes
 var is_making_line := false
 var line_2d : Line2D
 var draw_grid := false
+var brush = "Small"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -106,7 +107,6 @@ func _draw() -> void:
 	for texture in layers:
 		if texture[3]: #if it's visible
 			draw_texture(texture[1], location)
-	
 	#Draw grid (causes lag - unused. If you wanna test it just set draw_grid = true)
 	if draw_grid:
 		for x in size.x:
@@ -170,7 +170,25 @@ func draw_pixel(pos : Vector2, color : Color) -> void:
 	if layers[current_layer_index][0].get_pixelv(pos) != color: #don't draw the same pixel over and over
 		if Global.can_draw && Global.has_focus:
 			#sprite.lock()
-			layers[current_layer_index][0].set_pixelv(pos, color)
+			if !Global.current_left_tool == "Fill":
+				if brush == "Small":
+					layers[current_layer_index][0].set_pixelv(pos, color)
+				if brush == "Medium":
+					layers[current_layer_index][0].set_pixelv(pos, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2.UP, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2.DOWN, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2.RIGHT, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2.LEFT, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2(1,1), color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2(-1,1), color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2(1,-1), color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2(-1,-1), color)
+				if brush == "Thin":
+					layers[current_layer_index][0].set_pixelv(pos, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2.UP, color)
+					layers[current_layer_index][0].set_pixelv(pos+Vector2.DOWN, color)
+			else:
+				layers[current_layer_index][0].set_pixelv(pos, color)
 			#sprite.unlock()
 			sprite_changed_this_frame = true
 
