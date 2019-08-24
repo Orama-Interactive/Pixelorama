@@ -23,11 +23,14 @@ margin_bottom = 600.0
 rect_min_size = Vector2( 320, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/ToolPanel"]
-margin_right = 40.0
-margin_bottom = 44.0
+margin_right = 204.0
+margin_bottom = 108.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
-margin_right = 166.0
+margin_right = 204.0
 margin_bottom = 20.0
 
 [node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/VBoxContainer/MenuItems"]
@@ -45,7 +48,7 @@ text = "Edit"
 
 [node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
 margin_top = 24.0
-margin_right = 166.0
+margin_right = 204.0
 margin_bottom = 44.0
 
 [node name="Pencil" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
@@ -82,7 +85,7 @@ text = "Bucket"
 
 [node name="ColorPickers" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
 margin_top = 48.0
-margin_right = 166.0
+margin_right = 204.0
 margin_bottom = 80.0
 
 [node name="LeftColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/VBoxContainer/ColorPickers"]
@@ -98,8 +101,36 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 
+[node name="Brushes" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
+margin_top = 84.0
+margin_right = 204.0
+margin_bottom = 104.0
+
+[node name="Brush" type="Label" parent="UI/ToolPanel/VBoxContainer/Brushes"]
+margin_top = 3.0
+margin_right = 37.0
+margin_bottom = 17.0
+text = "Brush"
+
+[node name="Small" type="Button" parent="UI/ToolPanel/VBoxContainer/Brushes"]
+margin_left = 41.0
+margin_right = 88.0
+margin_bottom = 20.0
+text = "Small"
+
+[node name="Medium" type="Button" parent="UI/ToolPanel/VBoxContainer/Brushes"]
+margin_left = 92.0
+margin_right = 157.0
+margin_bottom = 20.0
+text = "Medium"
+
+[node name="Thin" type="Button" parent="UI/ToolPanel/VBoxContainer/Brushes"]
+margin_left = 161.0
+margin_right = 200.0
+margin_bottom = 20.0
+text = "Thin"
+
 [node name="ViewportContainer" type="ViewportContainer" parent="UI"]
-editor/display_folded = true
 margin_left = 324.0
 margin_right = 860.0
 margin_bottom = 600.0
@@ -188,7 +219,6 @@ disabled = true
 text = "M"
 
 [node name="CreateNewImage" type="ConfirmationDialog" parent="."]
-editor/display_folded = true
 margin_right = 200.0
 margin_bottom = 70.0
 
@@ -245,8 +275,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*jpg, *.png ; JPG, PNG Images" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "D:/Downloads/Pixelorama-master/Pixelorama-master"
+current_path = "D:/Downloads/Pixelorama-master/Pixelorama-master/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -261,11 +291,10 @@ window_title = "Create a new image"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "D:/Downloads/Pixelorama-master/Pixelorama-master"
+current_path = "D:/Downloads/Pixelorama-master/Pixelorama-master/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
-editor/display_folded = true
 margin_right = 200.0
 margin_bottom = 114.0
 
