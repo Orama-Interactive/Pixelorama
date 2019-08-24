@@ -43,7 +43,15 @@ func _ready() -> void:
 	pencil_tool.hint_tooltip = "P for left mouse button, Alt + P for right mouse button"
 	eraser_tool.hint_tooltip = "E for left mouse button, Alt + E for right mouse button"
 	fill_tool.hint_tooltip = "B for left mouse button, Alt + B for right mouse button"
-	
+
+func _process(delta):
+	if $UI/ToolPanel/VBoxContainer/Brushes/Small.pressed:
+		$UI/ViewportContainer/Viewport/Canvas.brush = "Small"
+	if $UI/ToolPanel/VBoxContainer/Brushes/Medium.pressed:
+		$UI/ViewportContainer/Viewport/Canvas.brush = "Medium"
+	if $UI/ToolPanel/VBoxContainer/Brushes/Thin.pressed:
+		$UI/ViewportContainer/Viewport/Canvas.brush = "Thin"
+
 func _input(event):
 	#Handle tool shortcuts
 	if event.is_action_pressed("right_pencil_tool"):
@@ -212,3 +220,4 @@ func _on_MergeLayer_pressed() -> void:
 	Global.canvas.layers[Global.canvas.current_layer_index - 1][0].lock()
 	Global.canvas.update_texture(Global.canvas.current_layer_index - 1)
 	_on_RemoveLayerButton_pressed()
+
