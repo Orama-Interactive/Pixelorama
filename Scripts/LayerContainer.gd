@@ -1,6 +1,7 @@
 extends PanelContainer
 
 var i
+# warning-ignore:unused_class_variable
 var currently_selected := false
 var visibility_toggled := false
 

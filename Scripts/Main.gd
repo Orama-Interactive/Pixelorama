@@ -15,34 +15,32 @@ func _ready() -> void:
 		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
 		"Quit" : KEY_MASK_CTRL + KEY_Q
 		}
-#	var edit_menu_items := {
-#		"Undo" : KEY_MASK_CTRL + KEY_Z,
-#		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
-#		"Scale Image" : 0
-#		}
+	var edit_menu_items := {
+		"Show Grid" : KEY_MASK_CTRL + KEY_G
+		#"Undo" : KEY_MASK_CTRL + KEY_Z,
+		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
+		#"Scale Image" : 0
+		}
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	var i = 0
 	for item in file_menu_items.keys():
 		file_menu.add_item(item, i, file_menu_items[item])
 		i += 1
-#	i = 0
-#	for item in edit_menu_items.keys():
-#		edit_menu.add_item(item, i, edit_menu_items[item])
-#		i += 1
+	i = 0
+	for item in edit_menu_items.keys():
+		edit_menu.add_item(item, i, edit_menu_items[item])
+		i += 1
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
-	#edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
+	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 	
-	pencil_tool = $UI/ToolPanel/VBoxContainer/ToolsContainer/Pencil
-	eraser_tool = $UI/ToolPanel/VBoxContainer/ToolsContainer/Eraser
-	fill_tool = $UI/ToolPanel/VBoxContainer/ToolsContainer/Fill
+	pencil_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Pencil
+	eraser_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Eraser
+	fill_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Fill
 	
 	pencil_tool.connect("pressed", self, "_on_Tool_pressed", [pencil_tool])
 	eraser_tool.connect("pressed", self, "_on_Tool_pressed", [eraser_tool])
 	fill_tool.connect("pressed", self, "_on_Tool_pressed", [fill_tool])
-	pencil_tool.hint_tooltip = "P for left mouse button, Alt + P for right mouse button"
-	eraser_tool.hint_tooltip = "E for left mouse button, Alt + E for right mouse button"
-	fill_tool.hint_tooltip = "B for left mouse button, Alt + B for right mouse button"
 	
 func _input(event):
 	#Handle tool shortcuts
@@ -80,6 +78,11 @@ func file_menu_id_pressed(id : int) -> void:
 		4: #Quit
 			get_tree().quit()
 
+func edit_menu_id_pressed(id : int) -> void:
+	match id:
+		0: #Show grid
+			Global.canvas.draw_grid = !Global.canvas.draw_grid
+
 func _on_CreateNewImage_confirmed() -> void:
 	var width = float($CreateNewImage/VBoxContainer/WidthCont/LineEdit.text)
 	var height = float($CreateNewImage/VBoxContainer/HeightCont/LineEdit.text)
@@ -97,12 +100,22 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		OS.alert("Can't load file")
 
 func new_canvas(size : Vector2, sprite : Image = null) -> void:
+	var left_indicator_visible = Global.canvas.left_square_indicator_visible
+	var right_indicator_visible = Global.canvas.right_square_indicator_visible
+	var left_brush_size = Global.canvas.left_brush_size
+	var right_brush_size = Global.canvas.right_brush_size
+	
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
 			child.queue_free()
 	Global.canvas.queue_free()
 	Global.canvas = load("res://Canvas.tscn").instance()
 	Global.canvas.size = size
+	Global.canvas.left_square_indicator_visible = left_indicator_visible
+	Global.canvas.right_square_indicator_visible = right_indicator_visible
+	Global.canvas.left_brush_size = left_brush_size
+	Global.canvas.right_brush_size = right_brush_size
+	
 	if sprite:
 		Global.canvas.current_sprite = sprite
 		Global.canvas.current_sprite.convert(Image.FORMAT_RGBA8)
@@ -212,3 +225,17 @@ func _on_MergeLayer_pressed() -> void:
 	Global.canvas.layers[Global.canvas.current_layer_index - 1][0].lock()
 	Global.canvas.update_texture(Global.canvas.current_layer_index - 1)
 	_on_RemoveLayerButton_pressed()
+
+func _on_LeftIndicatorCheckbox_toggled(button_pressed):
+	Global.canvas.left_square_indicator_visible = button_pressed
+
+func _on_RightIndicatorCheckbox_toggled(button_pressed):
+	Global.canvas.right_square_indicator_visible = button_pressed
+
+func _on_LeftBrushSizeEdit_value_changed(value):
+	var new_size = int(value)
+	Global.canvas.left_brush_size = new_size
+
+func _on_RightBrushSizeEdit_value_changed(value):
+	var new_size = int(value)
+	Global.canvas.right_brush_size = new_size

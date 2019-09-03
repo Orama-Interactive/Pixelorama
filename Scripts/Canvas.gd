@@ -11,6 +11,10 @@ var size := Vector2(64, 64)
 var previous_mouse_pos := Vector2.ZERO
 var mouse_inside_canvas := false #used for undo
 var sprite_changed_this_frame := false #for optimization purposes
+var left_square_indicator_visible := true
+var right_square_indicator_visible := false
+var left_brush_size := 1
+var right_brush_size := 1
 var is_making_line := false
 var line_2d : Line2D
 var draw_grid := false
@@ -68,9 +72,9 @@ func _process(delta) -> void:
 				current_color = Global.left_color_picker.color
 			elif current_mouse_button == "R":
 				current_color = Global.right_color_picker.color
-			pencil_and_eraser(mouse_pos, current_color)
+			pencil_and_eraser(mouse_pos, current_color, current_mouse_button)
 		"Eraser":
-			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0))
+			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Fill":
 			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus:
 				var current_color : Color
@@ -107,17 +111,25 @@ func _draw() -> void:
 		if texture[3]: #if it's visible
 			draw_texture(texture[1], location)
 	
-	#Draw grid (causes lag - unused. If you wanna test it just set draw_grid = true)
+	#Idea taken from flurick (on GitHub)
 	if draw_grid:
 		for x in size.x:
-			for y in size.y:
-				draw_rect(Rect2(location.x + x, location.y + y, 1, 1), Color.black, false)
+			draw_line(Vector2(x, location.y), Vector2(x, size.y), Color.black, true)
+		for y in size.y:
+			draw_line(Vector2(location.x, y), Vector2(size.x, y), Color.black, true)
 	
 	#Draw rectangle to indicate the pixel currently being hovered on
 	var mouse_pos := get_local_mouse_position() - location
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
-		draw_rect(Rect2(mouse_pos.x, mouse_pos.y, 1, 1), Color.red, false)
+		if left_square_indicator_visible:
+			var start_pos_x = mouse_pos.x - (left_brush_size >> 1)
+			var start_pos_y = mouse_pos.y - (left_brush_size >> 1)
+			draw_rect(Rect2(start_pos_x, start_pos_y, left_brush_size, left_brush_size), Color.blue, false)
+		if right_square_indicator_visible:
+			var start_pos_x = mouse_pos.x - (right_brush_size >> 1)
+			var start_pos_y = mouse_pos.y - (right_brush_size >> 1)
+			draw_rect(Rect2(start_pos_x, start_pos_y, right_brush_size, right_brush_size), Color.red, false)
 
 func generate_layer_panels() -> void:
 	for child in Global.vbox_layer_container.get_children():
@@ -141,7 +153,7 @@ func generate_layer_panels() -> void:
 		layer_container.get_child(0).get_child(1).texture = layers[i][1]
 		Global.vbox_layer_container.add_child(layer_container)
 
-func pencil_and_eraser(mouse_pos : Vector2, color : Color) -> void:
+func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String) -> void:
 	if Input.is_key_pressed(KEY_SHIFT):
 		if !is_making_line:
 			line_2d = Line2D.new()
@@ -152,34 +164,44 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color) -> void:
 			add_child(line_2d)
 			is_making_line = true
 	else:
+		var brush_size := 1
+		if current_mouse_button == "L":
+			brush_size = left_brush_size
+		elif current_mouse_button == "R":
+			brush_size = right_brush_size
+			
 		if is_making_line:
-			fill_gaps(mouse_pos, color)
+			fill_gaps(mouse_pos, color, brush_size)
 			is_making_line = false
 			line_2d.queue_free()
 		else:
 			if point_in_rectangle(mouse_pos, location, location + size):
 				mouse_inside_canvas = true
 				#Draw
-				draw_pixel(mouse_pos, color)
-				fill_gaps(mouse_pos, color) #Fill the gaps
+				draw_pixel(mouse_pos, color, brush_size)
+				fill_gaps(mouse_pos, color, brush_size) #Fill the gaps
 			#If mouse is not inside bounds but it used to be, fill the gaps
 			elif point_in_rectangle(previous_mouse_pos, location, location + size):
-				fill_gaps(mouse_pos, color)
+				fill_gaps(mouse_pos, color, brush_size)
 
-func draw_pixel(pos : Vector2, color : Color) -> void:
-	if layers[current_layer_index][0].get_pixelv(pos) != color: #don't draw the same pixel over and over
-		if Global.can_draw && Global.has_focus:
-			#sprite.lock()
-			layers[current_layer_index][0].set_pixelv(pos, color)
-			#sprite.unlock()
-			sprite_changed_this_frame = true
+func draw_pixel(pos : Vector2, color : Color, brush_size : int) -> void:
+	if Global.can_draw && Global.has_focus:
+		var start_pos_x = pos.x - (brush_size >> 1)
+		var start_pos_y = pos.y - (brush_size >> 1)
+		for cur_pos_x in range(start_pos_x, start_pos_x + brush_size):
+			#layers[current_layer_index][0].set_pixel(cur_pos_x, pos.y, color)
+			for cur_pos_y in range(start_pos_y, start_pos_y + brush_size):
+				if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color: #don't draw the same pixel over and over
+					layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
+		#layers[current_layer_index][0].set_pixelv(pos, color)
+					sprite_changed_this_frame = true
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func fill_gaps(mouse_pos : Vector2, color : Color) -> void:
+func fill_gaps(mouse_pos : Vector2, color : Color, brush_size : int) -> void:
 	var previous_mouse_pos_floored = previous_mouse_pos.floor()
 	var mouse_pos_floored = mouse_pos.floor()
 	mouse_pos_floored.x = clamp(mouse_pos_floored.x, location.x - 1, location.x + size.x)
@@ -193,7 +215,7 @@ func fill_gaps(mouse_pos : Vector2, color : Color) -> void:
 	var x = previous_mouse_pos_floored.x
 	var y = previous_mouse_pos_floored.y
 	while !(x == mouse_pos_floored.x && y == mouse_pos_floored.y):
-		draw_pixel(Vector2(x, y), color)
+		draw_pixel(Vector2(x, y), color, brush_size)
 		e2 = err << 1
 		if e2 >= dy:
 			err += dy
@@ -221,7 +243,7 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 				east += Vector2.RIGHT
 			for px in range(west.x + 1, east.x):
 				var p := Vector2(px, n.y)
-				draw_pixel(p, replace_color)
+				draw_pixel(p, replace_color, 1)
 				var north := p + Vector2.UP
 				var south := p + Vector2.DOWN
 				if north.y >= location.y && layers[current_layer_index][0].get_pixelv(north) == target_color:

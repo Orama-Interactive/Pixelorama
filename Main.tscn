@@ -21,82 +21,185 @@ size_flags_horizontal = 3
 margin_right = 320.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 320, 0 )
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ToolPanel"]
-margin_right = 40.0
-margin_bottom = 44.0
+[node name="Tools" type="VBoxContainer" parent="UI/ToolPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
-margin_right = 166.0
+[node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
+margin_right = 320.0
+margin_bottom = 294.0
+size_flags_vertical = 3
+
+[node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
+margin_right = 320.0
 margin_bottom = 20.0
 
-[node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/VBoxContainer/MenuItems"]
+[node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
 margin_right = 35.0
 margin_bottom = 20.0
 theme = ExtResource( 2 )
 text = "File"
 
-[node name="EditMenu" type="MenuButton" parent="UI/ToolPanel/VBoxContainer/MenuItems"]
+[node name="EditMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
 margin_left = 39.0
 margin_right = 75.0
 margin_bottom = 20.0
 theme = ExtResource( 2 )
 text = "Edit"
 
-[node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
+[node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 margin_top = 24.0
-margin_right = 166.0
+margin_right = 320.0
 margin_bottom = 44.0
 
-[node name="Pencil" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
+[node name="Pencil" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
+editor/display_folded = true
 margin_right = 51.0
 margin_bottom = 20.0
+hint_tooltip = "P for left mouse button
+Alt + P for right mouse button"
 button_mask = 3
 text = "Pencil"
 
-[node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/VBoxContainer/ToolsContainer/Pencil"]
-z_index = 1
+[node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Pencil"]
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( 0, -10 )
 
-[node name="Eraser" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
+[node name="Eraser" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
+editor/display_folded = true
 margin_left = 55.0
 margin_right = 106.0
 margin_bottom = 20.0
+hint_tooltip = "E for left mouse button
+Alt + E for right mouse button"
 button_mask = 3
 text = "Eraser"
 
-[node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/VBoxContainer/ToolsContainer/Eraser"]
-z_index = 1
+[node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Eraser"]
 texture = ExtResource( 4 )
 centered = false
 offset = Vector2( 35, -10 )
 
-[node name="Fill" type="Button" parent="UI/ToolPanel/VBoxContainer/ToolsContainer"]
+[node name="Fill" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
 margin_left = 110.0
 margin_right = 166.0
 margin_bottom = 20.0
+hint_tooltip = "B for left mouse button
+Alt + B for right mouse button"
 button_mask = 3
 text = "Bucket"
 
-[node name="ColorPickers" type="HBoxContainer" parent="UI/ToolPanel/VBoxContainer"]
-margin_top = 48.0
-margin_right = 166.0
-margin_bottom = 80.0
+[node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
+margin_top = 298.0
+margin_right = 320.0
+margin_bottom = 302.0
 
-[node name="LeftColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/VBoxContainer/ColorPickers"]
+[node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
+margin_top = 306.0
+margin_right = 320.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
+margin_right = 154.0
+margin_bottom = 294.0
+size_flags_horizontal = 3
+
+[node name="LeftLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_right = 154.0
+margin_bottom = 14.0
+text = "Left tool options"
+
+[node name="LeftIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 18.0
+margin_right = 154.0
+margin_bottom = 42.0
+pressed = true
+text = "Show left indicator"
+
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 46.0
 margin_right = 32.0
-margin_bottom = 32.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Color picker for the left tool"
 size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="RightColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/VBoxContainer/ColorPickers"]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 32.0
+[node name="BrushSize" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 82.0
+margin_right = 154.0
+margin_bottom = 106.0
+
+[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
+margin_top = 5.0
+margin_right = 75.0
+margin_bottom = 19.0
+text = "Brush size: "
+
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
+margin_left = 79.0
+margin_right = 153.0
+margin_bottom = 24.0
+min_value = 1.0
+value = 1.0
+suffix = "px"
+
+[node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
+margin_left = 158.0
+margin_right = 162.0
+margin_bottom = 294.0
+
+[node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
+margin_left = 166.0
+margin_right = 320.0
+margin_bottom = 294.0
+size_flags_horizontal = 3
+
+[node name="RightLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_right = 154.0
+margin_bottom = 14.0
+text = "Right tool options"
+
+[node name="RightIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 18.0
+margin_right = 154.0
+margin_bottom = 42.0
+text = "Show right indicator"
+
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 46.0
+margin_right = 32.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Color picker for the right tool"
 size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="BrushSize" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 82.0
+margin_right = 154.0
+margin_bottom = 106.0
+
+[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
+margin_top = 5.0
+margin_right = 75.0
+margin_bottom = 19.0
+text = "Brush size: "
+
+[node name="RightBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
+margin_left = 79.0
+margin_right = 153.0
+margin_bottom = 24.0
+min_value = 1.0
+value = 1.0
+suffix = "px"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="UI"]
 editor/display_folded = true
@@ -151,12 +254,14 @@ margin_bottom = 38.0
 [node name="AddLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 20.0
+hint_tooltip = "Create a new layer"
 text = "+"
 
 [node name="RemoveLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
 margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 20.0
+hint_tooltip = "Remove current layer"
 disabled = true
 text = "X"
 
@@ -164,6 +269,7 @@ text = "X"
 margin_left = 48.0
 margin_right = 67.0
 margin_bottom = 20.0
+hint_tooltip = "Move up the current layer"
 disabled = true
 text = "^"
 
@@ -171,6 +277,7 @@ text = "^"
 margin_left = 71.0
 margin_right = 90.0
 margin_bottom = 20.0
+hint_tooltip = "Move down the current layer"
 disabled = true
 text = "v"
 
@@ -178,12 +285,14 @@ text = "v"
 margin_left = 94.0
 margin_right = 118.0
 margin_bottom = 20.0
+hint_tooltip = "Clone current layer"
 text = "Cl"
 
 [node name="MergeDownLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
 margin_left = 122.0
 margin_right = 146.0
 margin_bottom = 20.0
+hint_tooltip = "Merge down current layer"
 disabled = true
 text = "M"
 
@@ -313,10 +422,14 @@ margin_left = 50.0
 margin_right = 108.0
 margin_bottom = 24.0
 text = "64"
-[connection signal="popup_closed" from="UI/ToolPanel/VBoxContainer/ColorPickers/LeftColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="UI/ToolPanel/VBoxContainer/ColorPickers/LeftColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="popup_closed" from="UI/ToolPanel/VBoxContainer/ColorPickers/RightColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="UI/ToolPanel/VBoxContainer/ColorPickers/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
+[connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
+[connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="mouse_entered" from="UI/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="UI/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/AddLayerButton" to="." method="_on_AddLayerButton_pressed"]
