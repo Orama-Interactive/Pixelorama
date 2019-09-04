@@ -35,13 +35,13 @@ margin_bottom = 294.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-editor/display_folded = true
 margin_right = 320.0
 margin_bottom = 20.0
 
 [node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
 margin_right = 35.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 text = "File"
 
@@ -49,6 +49,7 @@ text = "File"
 margin_left = 39.0
 margin_right = 75.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 text = "Edit"
 
@@ -63,6 +64,7 @@ margin_right = 51.0
 margin_bottom = 20.0
 hint_tooltip = "P for left mouse button
 Alt + P for right mouse button"
+mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Pencil"
 
@@ -78,6 +80,7 @@ margin_right = 106.0
 margin_bottom = 20.0
 hint_tooltip = "E for left mouse button
 Alt + E for right mouse button"
+mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Eraser"
 
@@ -92,6 +95,7 @@ margin_right = 166.0
 margin_bottom = 20.0
 hint_tooltip = "B for left mouse button
 Alt + B for right mouse button"
+mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Bucket"
 
@@ -120,6 +124,7 @@ text = "Left tool options"
 margin_top = 18.0
 margin_right = 154.0
 margin_bottom = 42.0
+mouse_default_cursor_shape = 2
 pressed = true
 text = "Show left indicator"
 
@@ -129,6 +134,7 @@ margin_right = 32.0
 margin_bottom = 78.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Color picker for the left tool"
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -147,6 +153,7 @@ text = "Brush size: "
 margin_left = 79.0
 margin_right = 153.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 suffix = "px"
@@ -171,6 +178,7 @@ text = "Right tool options"
 margin_top = 18.0
 margin_right = 154.0
 margin_bottom = 42.0
+mouse_default_cursor_shape = 2
 text = "Show right indicator"
 
 [node name="RightColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
@@ -179,6 +187,7 @@ margin_right = 32.0
 margin_bottom = 78.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Color picker for the right tool"
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -197,6 +206,7 @@ text = "Brush size: "
 margin_left = 79.0
 margin_right = 153.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 suffix = "px"
@@ -206,6 +216,7 @@ editor/display_folded = true
 margin_left = 324.0
 margin_right = 860.0
 margin_bottom = 600.0
+mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
 stretch = true
 
@@ -222,12 +233,14 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
 
 [node name="LayerPanel" type="Panel" parent="UI"]
+editor/display_folded = true
 margin_left = 864.0
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 160, 0 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel"]
+editor/display_folded = true
 margin_right = 160.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -255,6 +268,7 @@ margin_bottom = 38.0
 margin_right = 20.0
 margin_bottom = 20.0
 hint_tooltip = "Create a new layer"
+mouse_default_cursor_shape = 2
 text = "+"
 
 [node name="RemoveLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
@@ -262,6 +276,7 @@ margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 20.0
 hint_tooltip = "Remove current layer"
+mouse_default_cursor_shape = 8
 disabled = true
 text = "X"
 
@@ -270,6 +285,7 @@ margin_left = 48.0
 margin_right = 67.0
 margin_bottom = 20.0
 hint_tooltip = "Move up the current layer"
+mouse_default_cursor_shape = 8
 disabled = true
 text = "^"
 
@@ -278,6 +294,7 @@ margin_left = 71.0
 margin_right = 90.0
 margin_bottom = 20.0
 hint_tooltip = "Move down the current layer"
+mouse_default_cursor_shape = 8
 disabled = true
 text = "v"
 
@@ -286,6 +303,7 @@ margin_left = 94.0
 margin_right = 118.0
 margin_bottom = 20.0
 hint_tooltip = "Clone current layer"
+mouse_default_cursor_shape = 2
 text = "Cl"
 
 [node name="MergeDownLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
@@ -293,6 +311,7 @@ margin_left = 122.0
 margin_right = 146.0
 margin_bottom = 20.0
 hint_tooltip = "Merge down current layer"
+mouse_default_cursor_shape = 8
 disabled = true
 text = "M"
 

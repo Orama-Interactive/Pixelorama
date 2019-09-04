@@ -13,10 +13,13 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 152.0
 margin_bottom = 39.0
+mouse_default_cursor_shape = 2
 
 [node name="VisibilityButton" type="Button" parent="HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 32.0
+hint_tooltip = "Toggle layer's visibility"
+mouse_default_cursor_shape = 2
 text = "V"
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]

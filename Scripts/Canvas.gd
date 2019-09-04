@@ -139,8 +139,10 @@ func generate_layer_panels() -> void:
 	current_layer_index = layers.size() - 1
 	if layers.size() == 1:
 		Global.remove_layer_button.disabled = true
+		Global.remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 	else:
 		Global.remove_layer_button.disabled = false
+		Global.remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	
 	for i in range(layers.size() -1, -1, -1):
 		var layer_container = load("res://LayerContainer.tscn").instance()
