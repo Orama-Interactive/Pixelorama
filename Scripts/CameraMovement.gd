@@ -1,7 +1,7 @@
 extends Camera2D
 
 var zoom_min := Vector2(0.005, 0.005)
-var zoom_max := Vector2(0.8, 0.8)
+var zoom_max := Vector2.ONE
 
 var drag := false
 
@@ -21,5 +21,11 @@ func _input(event) -> void:
 # Zoom Camera
 func zoom_camera(dir : int) -> void:
 	var zoom_margin = zoom * dir / 10
-	if zoom + zoom_margin > zoom_min && zoom + zoom_margin < zoom_max:
+	#if zoom + zoom_margin > zoom_min && zoom + zoom_margin < zoom_max:
+	if zoom + zoom_margin > zoom_min:
 		zoom += zoom_margin
+	
+	if zoom > zoom_max:
+		zoom = zoom_max
+	
+	Global.zoom_level_label.text = "Zoom: x%s" % [stepify(1 / zoom.x, 0.01)]

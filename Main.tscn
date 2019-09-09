@@ -211,26 +211,162 @@ min_value = 1.0
 value = 1.0
 suffix = "px"
 
-[node name="ViewportContainer" type="ViewportContainer" parent="UI"]
-editor/display_folded = true
+[node name="CanvasAndTimeline" type="VBoxContainer" parent="UI"]
 margin_left = 324.0
 margin_right = 860.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline"]
+margin_right = 536.0
+margin_bottom = 448.0
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="UI/ViewportContainer"]
-size = Vector2( 536, 600 )
+[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/ViewportContainer"]
+size = Vector2( 536, 448 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Canvas" parent="UI/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="Canvas" parent="UI/CanvasAndTimeline/ViewportContainer/Viewport" instance=ExtResource( 5 )]
 
-[node name="Camera2D" type="Camera2D" parent="UI/ViewportContainer/Viewport"]
+[node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
+
+[node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
+margin_top = 452.0
+margin_right = 536.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 148 )
+size_flags_horizontal = 3
+
+[node name="TimelineContainer" type="VBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+
+[node name="ButtonContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+margin_right = 536.0
+margin_bottom = 40.0
+
+[node name="AnimationButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer"]
+margin_left = 69.0
+margin_right = 467.0
+margin_bottom = 40.0
+
+[node name="LoopAnim" type="CheckButton" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
+margin_right = 111.0
+margin_bottom = 40.0
+hint_tooltip = "Should the animation loop (play again after it reached the end)?"
+mouse_default_cursor_shape = 2
+text = "Loop"
+
+[node name="PlayBackwards" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
+margin_left = 115.0
+margin_right = 224.0
+margin_bottom = 40.0
+hint_tooltip = "Play the animation backwards (from end to beggining)"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Play Backwards"
+
+[node name="PlayForward" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
+margin_left = 228.0
+margin_right = 320.0
+margin_bottom = 40.0
+hint_tooltip = "Play the animation forward (from beggining to end)"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+toggle_mode = true
+text = "Play Forward"
+
+[node name="FPSValue" type="SpinBox" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
+margin_left = 324.0
+margin_right = 398.0
+margin_bottom = 40.0
+hint_tooltip = "How many frames per second should the animation preview be? The more FPS, the faster the animation plays."
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+suffix = "FPS"
+
+[node name="HSeparator" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+margin_top = 44.0
+margin_right = 536.0
+margin_bottom = 48.0
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+margin_top = 52.0
+margin_right = 536.0
+margin_bottom = 72.0
+
+[node name="FrameButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer"]
+margin_left = 209.0
+margin_right = 326.0
+margin_bottom = 20.0
+
+[node name="AddFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
+margin_right = 20.0
+margin_bottom = 20.0
+hint_tooltip = "Add a new frame"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+text = "+"
+
+[node name="RemoveFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
+margin_left = 24.0
+margin_right = 41.0
+margin_bottom = 20.0
+hint_tooltip = "Remove selected frame"
+mouse_default_cursor_shape = 8
+disabled = true
+text = "-"
+
+[node name="MoveFrameLeft" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
+margin_left = 45.0
+margin_right = 65.0
+margin_bottom = 20.0
+hint_tooltip = "Move selected frame to the left"
+mouse_default_cursor_shape = 8
+disabled = true
+text = "<"
+
+[node name="MoveFrameRight" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
+margin_left = 69.0
+margin_right = 89.0
+margin_bottom = 20.0
+hint_tooltip = "Move selected frame to the right"
+mouse_default_cursor_shape = 8
+disabled = true
+text = ">"
+
+[node name="CloneFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
+margin_left = 93.0
+margin_right = 117.0
+margin_bottom = 20.0
+hint_tooltip = "Clone current frame"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+text = "Cl"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+margin_top = 76.0
+margin_right = 536.0
+margin_bottom = 80.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+margin_top = 84.0
+margin_right = 536.0
+margin_bottom = 148.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_vertical_enabled = false
+
+[node name="FrameContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ScrollContainer"]
 
 [node name="LayerPanel" type="Panel" parent="UI"]
 editor/display_folded = true
@@ -239,19 +375,22 @@ margin_right = 1024.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 160, 0 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel"]
-editor/display_folded = true
+[node name="LayersAndMisc" type="VBoxContainer" parent="UI/LayerPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel/LayersAndMisc"]
 margin_right = 160.0
-margin_bottom = 600.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxLayerContainer" type="VBoxContainer" parent="UI/LayerPanel/ScrollContainer"]
+[node name="VBoxLayerContainer" type="VBoxContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer"]
 margin_right = 160.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
-[node name="LayerLabel" type="Label" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer"]
+[node name="LayerLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
 margin_right = 160.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
@@ -259,19 +398,25 @@ size_flags_vertical = 0
 text = "Layers"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
+editor/display_folded = true
 margin_top = 18.0
 margin_right = 160.0
 margin_bottom = 38.0
 
-[node name="AddLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+[node name="LayerButtons" type="HBoxContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer"]
+margin_left = 7.0
+margin_right = 153.0
+margin_bottom = 20.0
+
+[node name="AddLayerButton" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
 margin_right = 20.0
 margin_bottom = 20.0
 hint_tooltip = "Create a new layer"
 mouse_default_cursor_shape = 2
 text = "+"
 
-[node name="RemoveLayerButton" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+[node name="RemoveLayerButton" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
 margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 20.0
@@ -280,7 +425,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 text = "X"
 
-[node name="MoveUpLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+[node name="MoveUpLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
 margin_left = 48.0
 margin_right = 67.0
 margin_bottom = 20.0
@@ -289,7 +434,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 text = "^"
 
-[node name="MoveDownLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+[node name="MoveDownLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
 margin_left = 71.0
 margin_right = 90.0
 margin_bottom = 20.0
@@ -298,7 +443,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 text = "v"
 
-[node name="CloneLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+[node name="CloneLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
 margin_left = 94.0
 margin_right = 118.0
 margin_bottom = 20.0
@@ -306,7 +451,7 @@ hint_tooltip = "Clone current layer"
 mouse_default_cursor_shape = 2
 text = "Cl"
 
-[node name="MergeDownLayer" type="Button" parent="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer"]
+[node name="MergeDownLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
 margin_left = 122.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -314,6 +459,28 @@ hint_tooltip = "Merge down current layer"
 mouse_default_cursor_shape = 8
 disabled = true
 text = "M"
+
+[node name="HSeparator" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
+margin_top = 542.0
+margin_right = 160.0
+margin_bottom = 546.0
+
+[node name="CursorPosition" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
+margin_top = 550.0
+margin_right = 160.0
+margin_bottom = 564.0
+text = "[64x64]"
+
+[node name="ZoomLevel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
+margin_top = 568.0
+margin_right = 160.0
+margin_bottom = 582.0
+text = "Zoom: x7.81"
+
+[node name="EmptyLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
+margin_top = 586.0
+margin_right = 160.0
+margin_bottom = 600.0
 
 [node name="CreateNewImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -342,11 +509,14 @@ margin_right = 46.0
 margin_bottom = 19.0
 text = "Width: "
 
-[node name="LineEdit" type="LineEdit" parent="CreateNewImage/VBoxContainer/WidthCont"]
+[node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/WidthCont"]
 margin_left = 50.0
-margin_right = 108.0
+margin_right = 124.0
 margin_bottom = 24.0
-text = "64"
+min_value = 1.0
+max_value = 16384.0
+value = 64.0
+suffix = "px"
 
 [node name="HeightCont" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
 margin_top = 46.0
@@ -359,18 +529,21 @@ margin_right = 46.0
 margin_bottom = 19.0
 text = "Height:"
 
-[node name="LineEdit" type="LineEdit" parent="CreateNewImage/VBoxContainer/HeightCont"]
+[node name="HeightValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/HeightCont"]
 margin_left = 50.0
-margin_right = 108.0
+margin_right = 124.0
 margin_bottom = 24.0
-text = "64"
+min_value = 1.0
+max_value = 16384.0
+value = 64.0
+suffix = "px"
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
 margin_bottom = 348.0
-window_title = "Open a File"
+window_title = "Open File(s)"
 resizable = true
-mode = 0
+mode = 1
 access = 2
 filters = PoolStringArray( "*jpg, *.png ; JPG, PNG Images" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
@@ -385,7 +558,7 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 3.0
 margin_bottom = 48.0
-window_title = "Create a new image"
+window_title = "Export sprite"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
@@ -393,24 +566,25 @@ current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικ
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
-editor/display_folded = true
+visible = true
 margin_right = 200.0
 margin_bottom = 114.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleImage"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 192.0
-margin_bottom = 78.0
+margin_right = 257.0
+margin_bottom = 102.0
 
 [node name="ImageSize" type="Label" parent="ScaleImage/VBoxContainer"]
-margin_right = 184.0
+margin_right = 249.0
 margin_bottom = 14.0
 text = "Image Size"
 
 [node name="WidthCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
+editor/display_folded = true
 margin_top = 18.0
-margin_right = 184.0
+margin_right = 249.0
 margin_bottom = 42.0
 
 [node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/WidthCont"]
@@ -419,15 +593,19 @@ margin_right = 46.0
 margin_bottom = 19.0
 text = "Width: "
 
-[node name="LineEdit" type="LineEdit" parent="ScaleImage/VBoxContainer/WidthCont"]
+[node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/WidthCont"]
 margin_left = 50.0
-margin_right = 108.0
+margin_right = 124.0
 margin_bottom = 24.0
-text = "64"
+min_value = 1.0
+max_value = 16384.0
+value = 64.0
+suffix = "px"
 
 [node name="HeightCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
+editor/display_folded = true
 margin_top = 46.0
-margin_right = 184.0
+margin_right = 249.0
 margin_bottom = 70.0
 
 [node name="Height" type="Label" parent="ScaleImage/VBoxContainer/HeightCont"]
@@ -436,11 +614,35 @@ margin_right = 46.0
 margin_bottom = 19.0
 text = "Height:"
 
-[node name="LineEdit" type="LineEdit" parent="ScaleImage/VBoxContainer/HeightCont"]
+[node name="HeightValue" type="SpinBox" parent="ScaleImage/VBoxContainer/HeightCont"]
 margin_left = 50.0
-margin_right = 108.0
+margin_right = 124.0
 margin_bottom = 24.0
-text = "64"
+min_value = 1.0
+max_value = 16384.0
+value = 64.0
+suffix = "px"
+
+[node name="InterpolationContainer" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
+margin_top = 74.0
+margin_right = 249.0
+margin_bottom = 94.0
+
+[node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/InterpolationContainer"]
+margin_top = 3.0
+margin_right = 87.0
+margin_bottom = 17.0
+text = "Interpolation:"
+
+[node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/InterpolationContainer"]
+margin_left = 91.0
+margin_right = 249.0
+margin_bottom = 20.0
+text = "Interpolation Type"
+items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null ]
+selected = 0
+
+[node name="AnimationTimer" type="Timer" parent="."]
 [connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
@@ -449,19 +651,29 @@ text = "64"
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
-[connection signal="mouse_entered" from="UI/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="UI/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/AddLayerButton" to="." method="_on_AddLayerButton_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/MoveUpLayer" to="." method="_on_MoveUpLayer_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/MoveDownLayer" to="." method="_on_MoveDownLayer_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/CloneLayer" to="." method="_on_CloneLayer_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/ScrollContainer/VBoxLayerContainer/HBoxContainer/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasAndTimeline/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasAndTimeline/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/LoopAnim" to="." method="_on_LoopAnim_toggled"]
+[connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
+[connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
+[connection signal="value_changed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/AddFrame" to="." method="_on_AddFrame_pressed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/RemoveFrame" to="." method="_on_RemoveFrame_pressed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameLeft" to="." method="_on_MoveFrameLeft_pressed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameRight" to="." method="_on_MoveFrameRight_pressed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/CloneFrame" to="." method="_on_CloneFrame_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/AddLayerButton" to="." method="_on_AddLayerButton_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveUpLayer" to="." method="_on_MoveUpLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveDownLayer" to="." method="_on_MoveDownLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
-[connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="files_selected" from="OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="popup_hide" from="OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

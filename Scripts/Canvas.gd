@@ -4,20 +4,18 @@ class_name Canvas
 var layers := []
 var current_layer_index := 0
 var trans_background : ImageTexture
-var current_sprite : Image
 var location := Vector2.ZERO
 var size := Vector2(64, 64)
+var frame := 0
+var frame_button : VBoxContainer
+var frame_texture_rect : TextureRect
 
 var previous_mouse_pos := Vector2.ZERO
 var mouse_inside_canvas := false #used for undo
 var sprite_changed_this_frame := false #for optimization purposes
-var left_square_indicator_visible := true
-var right_square_indicator_visible := false
-var left_brush_size := 1
-var right_brush_size := 1
+
 var is_making_line := false
 var line_2d : Line2D
-var draw_grid := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,24 +25,29 @@ func _ready() -> void:
 	trans_background.create_from_image(load("res://Transparent Background.png"), 0)
 	
 	#The sprite itself
-	if !current_sprite:
-		current_sprite = Image.new()
-		current_sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	if layers.empty():
+		var sprite := Image.new()
+		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 	
-	current_sprite.lock()
-	var tex := ImageTexture.new()
-	tex.create_from_image(current_sprite, 0)
-	
-	#Store [Image, ImageTexture, Layer Name, Visibity boolean]
-	layers.append([current_sprite, tex, "Layer 0", true])
+		sprite.lock()
+		var tex := ImageTexture.new()
+		tex.create_from_image(sprite, 0)
+		
+		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
+		layers.append([sprite, tex, "Layer 0", true])
 	
 	generate_layer_panels()
-	#Set camera offset to the center of canvas
-	$"../Camera2D".offset = size / 2
-	#Set camera zoom based on the sprite size
-	var bigger = max(size.x, size.y)
-	$"../Camera2D".zoom_max = Vector2(bigger, bigger) * 0.01
-	$"../Camera2D".zoom = Vector2(bigger, bigger) * 0.002
+	
+	frame_button = load("res://FrameButton.tscn").instance()
+	frame_button.name = "Frame_%s" % frame
+	frame_button.get_node("FrameButton").frame = frame
+	frame_button.get_node("FrameID").text = str(frame)
+	Global.frame_container.add_child(frame_button)
+	
+	frame_texture_rect = Global.find_node_by_name(frame_button, "FrameTexture")
+	frame_texture_rect.texture = layers[0][1] #ImageTexture current_layer_index
+	
+	camera_zoom()
 
 # warning-ignore:unused_argument
 func _process(delta) -> void:
@@ -60,11 +63,16 @@ func _process(delta) -> void:
 		current_mouse_button = "R"
 		current_action = Global.current_right_tool
 	
+	if visible:
+		if !point_in_rectangle(mouse_pos, location, location + size):
+			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
+				if mouse_inside_canvas:
+					mouse_inside_canvas = false
+			Global.cursor_position_label.text = "[%sx%s]" % [size.x, size.y]
+		else:
+			var mouse_pos_floored := mouse_pos.floor()
+			Global.cursor_position_label.text = "[%sx%s] %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 	
-	if !point_in_rectangle(mouse_pos, location, location + size):
-		if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
-			if mouse_inside_canvas:
-				mouse_inside_canvas = false
 	match current_action:
 		"Pencil":
 			var current_color : Color
@@ -76,7 +84,7 @@ func _process(delta) -> void:
 		"Eraser":
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Fill":
-			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus:
+			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var current_color : Color
 				if current_mouse_button == "L":
 					current_color = Global.left_color_picker.color
@@ -94,9 +102,18 @@ func _process(delta) -> void:
 	if sprite_changed_this_frame:
 		update_texture(current_layer_index)
 	
-func update_texture(layer_index : int):
+func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 	get_layer_container(layer_index).get_child(0).get_child(1).texture = layers[layer_index][1]
+	
+	var whole_image := Image.new()
+	whole_image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	for layer in layers:
+		whole_image.blend_rect(layer[0], Rect2(position, size), Vector2.ZERO)
+		layer[0].lock()
+	var whole_image_texture := ImageTexture.new()
+	whole_image_texture.create_from_image(whole_image, 0)
+	frame_texture_rect.texture = whole_image_texture
 
 func get_layer_container(layer_index : int) -> PanelContainer:
 	for container in Global.vbox_layer_container.get_children():
@@ -112,7 +129,7 @@ func _draw() -> void:
 			draw_texture(texture[1], location)
 	
 	#Idea taken from flurick (on GitHub)
-	if draw_grid:
+	if Global.draw_grid:
 		for x in size.x:
 			draw_line(Vector2(x, location.y), Vector2(x, size.y), Color.black, true)
 		for y in size.y:
@@ -122,14 +139,14 @@ func _draw() -> void:
 	var mouse_pos := get_local_mouse_position() - location
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
-		if left_square_indicator_visible:
-			var start_pos_x = mouse_pos.x - (left_brush_size >> 1)
-			var start_pos_y = mouse_pos.y - (left_brush_size >> 1)
-			draw_rect(Rect2(start_pos_x, start_pos_y, left_brush_size, left_brush_size), Color.blue, false)
-		if right_square_indicator_visible:
-			var start_pos_x = mouse_pos.x - (right_brush_size >> 1)
-			var start_pos_y = mouse_pos.y - (right_brush_size >> 1)
-			draw_rect(Rect2(start_pos_x, start_pos_y, right_brush_size, right_brush_size), Color.red, false)
+		if Global.left_square_indicator_visible:
+			var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
+			var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
+			draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+		if Global.right_square_indicator_visible:
+			var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
+			var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
+			draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
 
 func generate_layer_panels() -> void:
 	for child in Global.vbox_layer_container.get_children():
@@ -155,6 +172,19 @@ func generate_layer_panels() -> void:
 		layer_container.get_child(0).get_child(1).texture = layers[i][1]
 		Global.vbox_layer_container.add_child(layer_container)
 
+func camera_zoom() -> void:
+	#Set camera offset to the center of canvas
+	Global.camera.offset = size / 2
+	#Set camera zoom based on the sprite size
+	var bigger = max(size.x, size.y)
+	var zoom_max := Vector2(bigger, bigger) * 0.01
+	if zoom_max > Vector2.ONE:
+		Global.camera.zoom_max = zoom_max
+	else:
+		Global.camera.zoom_max = Vector2.ONE
+	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
+	Global.zoom_level_label.text = "Zoom: x%s" % [stepify(1 / $"../Camera2D".zoom.x, 0.01)]
+
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String) -> void:
 	if Input.is_key_pressed(KEY_SHIFT):
 		if !is_making_line:
@@ -168,9 +198,9 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 	else:
 		var brush_size := 1
 		if current_mouse_button == "L":
-			brush_size = left_brush_size
+			brush_size = Global.left_brush_size
 		elif current_mouse_button == "R":
-			brush_size = right_brush_size
+			brush_size = Global.right_brush_size
 			
 		if is_making_line:
 			fill_gaps(mouse_pos, color, brush_size)
@@ -187,7 +217,7 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 				fill_gaps(mouse_pos, color, brush_size)
 
 func draw_pixel(pos : Vector2, color : Color, brush_size : int) -> void:
-	if Global.can_draw && Global.has_focus:
+	if Global.can_draw && Global.has_focus && Global.current_frame == frame:
 		var start_pos_x = pos.x - (brush_size >> 1)
 		var start_pos_y = pos.y - (brush_size >> 1)
 		for cur_pos_x in range(start_pos_x, start_pos_x + brush_size):

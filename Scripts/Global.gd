@@ -1,22 +1,44 @@
 extends Node
 
 # warning-ignore:unused_class_variable
+var current_frame := 0
+# warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := true
+# warning-ignore:unused_class_variable
+var draw_grid := false
+var canvases := []
 var canvas : Canvas
-var canvas_parent
+var canvas_parent : Node
+# warning-ignore:unused_class_variable
+var left_square_indicator_visible := true
+# warning-ignore:unused_class_variable
+var right_square_indicator_visible := false
+# warning-ignore:unused_class_variable
+var left_brush_size := 1
+# warning-ignore:unused_class_variable
+var right_brush_size := 1
+var camera : Camera2D
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
 var file_menu : MenuButton
 var edit_menu : MenuButton
 var left_indicator : Sprite
 var right_indicator : Sprite
+var play_forward : Button
+var play_backwards : Button
+var frame_container : HBoxContainer
+var remove_frame_button : Button
+var move_left_frame_button : Button
+var move_right_frame_button : Button
 var vbox_layer_container : VBoxContainer
 var remove_layer_button : Button
 var move_up_layer_button : Button
 var move_down_layer_button : Button
 var merge_down_layer_button : Button
+var cursor_position_label : Label
+var zoom_level_label : Label
 # warning-ignore:unused_class_variable
 var current_left_tool := "Pencil"
 # warning-ignore:unused_class_variable
@@ -25,18 +47,28 @@ var current_right_tool := "Eraser"
 func _ready() -> void:
 	var root = get_tree().get_root()
 	canvas = find_node_by_name(root, "Canvas")
+	canvases.append(canvas)
 	canvas_parent = canvas.get_parent()
+	camera = find_node_by_name(canvas_parent, "Camera2D")
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
 	left_indicator = find_node_by_name(root, "LeftIndicator")
 	right_indicator = find_node_by_name(root, "RightIndicator")
+	play_forward = find_node_by_name(root, "PlayForward")
+	play_backwards = find_node_by_name(root, "PlayBackwards")
+	frame_container = find_node_by_name(root, "FrameContainer")
+	remove_frame_button = find_node_by_name(root, "RemoveFrame")
+	move_left_frame_button = find_node_by_name(root, "MoveFrameLeft")
+	move_right_frame_button = find_node_by_name(root, "MoveFrameRight")
 	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
 	remove_layer_button = find_node_by_name(root, "RemoveLayerButton")
 	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
 	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
+	cursor_position_label = find_node_by_name(root, "CursorPosition")
+	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name	
 func find_node_by_name(root, node_name) -> Node:
@@ -49,3 +81,26 @@ func find_node_by_name(root, node_name) -> Node:
 		if found: 
 			return found
 	return null
+
+func change_frame() -> void:
+	for c in canvases:
+		c.visible = false
+	canvas = canvases[current_frame]
+	canvas.visible = true
+	canvas.generate_layer_panels()
+	handle_layer_order_buttons()
+
+func handle_layer_order_buttons() -> void:
+	if current_frame == 0:
+		move_left_frame_button.disabled = true
+		move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	else:
+		move_left_frame_button.disabled = false
+		move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	
+	if current_frame == canvases.size() - 1:
+		move_right_frame_button.disabled = true
+		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	else:
+		move_right_frame_button.disabled = false
+		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
