@@ -41,7 +41,7 @@ func _ready() -> void:
 	frame_button = load("res://FrameButton.tscn").instance()
 	frame_button.name = "Frame_%s" % frame
 	frame_button.get_node("FrameButton").frame = frame
-	frame_button.get_node("FrameID").text = str(frame)
+	frame_button.get_node("FrameID").text = str(frame + 1)
 	Global.frame_container.add_child(frame_button)
 	
 	frame_texture_rect = Global.find_node_by_name(frame_button, "FrameTexture")

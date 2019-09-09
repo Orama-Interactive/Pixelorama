@@ -369,7 +369,6 @@ scroll_vertical_enabled = false
 [node name="FrameContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ScrollContainer"]
 
 [node name="LayerPanel" type="Panel" parent="UI"]
-editor/display_folded = true
 margin_left = 864.0
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -381,7 +380,7 @@ anchor_bottom = 1.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel/LayersAndMisc"]
 margin_right = 160.0
-margin_bottom = 538.0
+margin_bottom = 520.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -461,21 +460,27 @@ disabled = true
 text = "M"
 
 [node name="HSeparator" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 542.0
+margin_top = 524.0
 margin_right = 160.0
-margin_bottom = 546.0
+margin_bottom = 528.0
 
 [node name="CursorPosition" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 550.0
+margin_top = 532.0
 margin_right = 160.0
-margin_bottom = 564.0
+margin_bottom = 546.0
 text = "[64x64]"
 
 [node name="ZoomLevel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
+margin_top = 550.0
+margin_right = 160.0
+margin_bottom = 564.0
+text = "Zoom: x7.81"
+
+[node name="CurrentFrame" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
 margin_top = 568.0
 margin_right = 160.0
 margin_bottom = 582.0
-text = "Zoom: x7.81"
+text = "Current frame: 1"
 
 [node name="EmptyLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
 margin_top = 586.0

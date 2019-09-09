@@ -39,6 +39,7 @@ var move_down_layer_button : Button
 var merge_down_layer_button : Button
 var cursor_position_label : Label
 var zoom_level_label : Label
+var current_frame_label : Label
 # warning-ignore:unused_class_variable
 var current_left_tool := "Pencil"
 # warning-ignore:unused_class_variable
@@ -69,6 +70,7 @@ func _ready() -> void:
 	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
+	current_frame_label = find_node_by_name(root, "CurrentFrame")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name	
 func find_node_by_name(root, node_name) -> Node:
@@ -83,6 +85,7 @@ func find_node_by_name(root, node_name) -> Node:
 	return null
 
 func change_frame() -> void:
+	current_frame_label.text = "Current frame: %s" % str(current_frame + 1)
 	for c in canvases:
 		c.visible = false
 	canvas = canvases[current_frame]
