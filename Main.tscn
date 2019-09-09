@@ -566,25 +566,25 @@ current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικ
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
-visible = true
+editor/display_folded = true
 margin_right = 200.0
 margin_bottom = 114.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleImage"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 257.0
+margin_right = 192.0
 margin_bottom = 102.0
 
 [node name="ImageSize" type="Label" parent="ScaleImage/VBoxContainer"]
-margin_right = 249.0
+margin_right = 184.0
 margin_bottom = 14.0
 text = "Image Size"
 
 [node name="WidthCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
 editor/display_folded = true
 margin_top = 18.0
-margin_right = 249.0
+margin_right = 184.0
 margin_bottom = 42.0
 
 [node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/WidthCont"]
@@ -605,7 +605,7 @@ suffix = "px"
 [node name="HeightCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
 editor/display_folded = true
 margin_top = 46.0
-margin_right = 249.0
+margin_right = 184.0
 margin_bottom = 70.0
 
 [node name="Height" type="Label" parent="ScaleImage/VBoxContainer/HeightCont"]
@@ -625,7 +625,7 @@ suffix = "px"
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
 margin_top = 74.0
-margin_right = 249.0
+margin_right = 184.0
 margin_bottom = 94.0
 
 [node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/InterpolationContainer"]
@@ -636,9 +636,9 @@ text = "Interpolation:"
 
 [node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/InterpolationContainer"]
 margin_left = 91.0
-margin_right = 249.0
+margin_right = 182.0
 margin_bottom = 20.0
-text = "Interpolation Type"
+text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null ]
 selected = 0
 
