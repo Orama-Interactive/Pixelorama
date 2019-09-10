@@ -164,7 +164,6 @@ func _on_OpenSprite_files_selected(paths) -> void:
 		
 		i += 1
 	Global.current_frame = i - 1
-	Global.current_frame_label.text = "Current frame: %s" % str(Global.current_frame + 1)
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
 	Global.canvas.visible = true
 	Global.handle_layer_order_buttons()
@@ -176,7 +175,7 @@ func _on_OpenSprite_files_selected(paths) -> void:
 		Global.remove_frame_button.disabled = true
 		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
-func new_canvas(size : Vector2, sprite : Image = null) -> void:
+func new_canvas(size : Vector2) -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
 			child.queue_free()
@@ -189,17 +188,9 @@ func new_canvas(size : Vector2, sprite : Image = null) -> void:
 	Global.canvas = load("res://Canvas.tscn").instance()
 	Global.canvas.size = size
 	
-#	if sprite:
-#		var layer0 := sprite
-#		layer0.convert(Image.FORMAT_RGBA8)
-#		var tex := ImageTexture.new()
-#		tex.create_from_image(layer0, 0)
-#		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
-#		Global.canvas.layers.append([layer0, tex, "Layer 0", true])
 	Global.canvas_parent.add_child(Global.canvas)
 	Global.canvases.append(Global.canvas)
 	Global.current_frame = 0
-	Global.current_frame_label.text = "Current frame: %s" % str(Global.current_frame + 1)
 	Global.remove_frame_button.disabled = true
 	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
@@ -210,7 +201,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 func export_project() -> void:
 	if export_all_frames.pressed:
 		if !export_as_single_file.pressed:
-			var i := 0
+			var i := 1
 			for canvas in Global.canvases:
 				var path := "%s_%s" % [current_path, str(i)]
 				path = path.replace(".png", "")
@@ -235,14 +226,14 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 func save_spritesheet() -> void:
 	var width
 	var height
-	if export_vertical_spritesheet.pressed:
+	if export_vertical_spritesheet.pressed: #Vertical spritesheet
 		width = Global.canvas.size.x
 		height = 0
 		for canvas in Global.canvases:
 			height += canvas.size.y
 			if canvas.size.x > width:
 				width = canvas.size.x
-	else:
+	else: #Horizontal spritesheet
 		width = 0
 		height = Global.canvas.size.y
 		for canvas in Global.canvases:
@@ -268,7 +259,6 @@ func save_spritesheet() -> void:
 func _on_OpenSprite_popup_hide() -> void:
 	if !opensprite_file_selected:
 		Global.can_draw = true
-		print(Global.can_draw)
 
 func _on_ViewportContainer_mouse_entered() -> void:
 	Global.has_focus = true
@@ -369,12 +359,11 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 func _on_AddFrame_pressed() -> void:
 	var canvas = load("res://Canvas.tscn").instance()
 	canvas.size = Global.canvas.size
-	Global.current_frame = Global.canvases.size()
-	Global.current_frame_label.text = "Current frame: %s" % str(Global.current_frame + 1)
-	canvas.frame = Global.current_frame
+	canvas.frame = Global.canvases.size()
 	for canvas in Global.canvases:
 		canvas.visible = false
 	Global.canvases.append(canvas)
+	Global.current_frame = Global.canvases.size() - 1
 	Global.canvas = canvas
 	
 	Global.canvas_parent.add_child(canvas)
@@ -394,7 +383,6 @@ func _on_RemoveFrame_pressed() -> void:
 			canvas.frame_button.get_node("FrameID").text = str(canvas.frame + 1)
 	if Global.current_frame > 0:
 		Global.current_frame -= 1
-		Global.current_frame_label.text = "Current frame: %s" % str(Global.current_frame + 1)
 	if len(Global.canvases) == 1:
 		Global.remove_frame_button.disabled = true
 		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
@@ -415,12 +403,11 @@ func _on_CloneFrame_pressed() -> void:
 		var tex := ImageTexture.new()
 		tex.create_from_image(sprite, 0)
 		canvas.layers.append([sprite, tex, layer[2], layer[3]])
-	Global.current_frame = Global.canvases.size()
-	Global.current_frame_label.text = "Current frame: %s" % str(Global.current_frame + 1)
-	canvas.frame = Global.current_frame
+	canvas.frame = Global.canvases.size()
 	for canvas in Global.canvases:
 		canvas.visible = false
 	Global.canvases.append(canvas)
+	Global.current_frame = Global.canvases.size() - 1
 	Global.canvas = canvas
 	
 	Global.canvas_parent.add_child(canvas)
@@ -454,7 +441,6 @@ func change_frame_order(rate : int) -> void:
 		canvas.frame_button.get_node("FrameID").text = str(canvas.frame + 1)
 	
 	Global.current_frame = change
-	Global.current_frame_label.text = "Current frame: %s" % str(Global.current_frame + 1)
 	Global.frame_container.move_child(frame_button, Global.current_frame)
 	Global.canvas_parent.move_child(Global.canvas, Global.current_frame)
 	#Global.canvas.generate_layer_panels()

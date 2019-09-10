@@ -1,7 +1,7 @@
 extends Node
 
 # warning-ignore:unused_class_variable
-var current_frame := 0
+var current_frame := 0 setget set_current_frame_label
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
@@ -85,7 +85,6 @@ func find_node_by_name(root, node_name) -> Node:
 	return null
 
 func change_frame() -> void:
-	current_frame_label.text = "Current frame: %s" % str(current_frame + 1)
 	for c in canvases:
 		c.visible = false
 	canvas = canvases[current_frame]
@@ -107,3 +106,7 @@ func handle_layer_order_buttons() -> void:
 	else:
 		move_right_frame_button.disabled = false
 		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+func set_current_frame_label(value) -> void:
+	current_frame = value
+	current_frame_label.text = "Current frame: %s/%s" % [str(current_frame + 1), canvases.size()]

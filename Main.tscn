@@ -480,7 +480,7 @@ text = "Zoom: x7.81"
 margin_top = 568.0
 margin_right = 160.0
 margin_bottom = 582.0
-text = "Current frame: 1"
+text = "Current frame: 1/1"
 
 [node name="EmptyLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
 margin_top = 586.0
