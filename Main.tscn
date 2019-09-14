@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="UI" type="HBoxContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -30,6 +31,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_right = 320.0
 margin_bottom = 294.0
 size_flags_vertical = 3
@@ -105,6 +107,7 @@ margin_right = 320.0
 margin_bottom = 302.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 306.0
 margin_right = 320.0
 margin_bottom = 600.0
@@ -219,14 +222,14 @@ size_flags_horizontal = 3
 
 [node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline"]
 margin_right = 536.0
-margin_bottom = 448.0
+margin_bottom = 464.0
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/ViewportContainer"]
-size = Vector2( 536, 448 )
+size = Vector2( 536, 464 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -238,10 +241,10 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
-margin_top = 452.0
+margin_top = 468.0
 margin_right = 536.0
 margin_bottom = 600.0
-rect_min_size = Vector2( 0, 148 )
+rect_min_size = Vector2( 0, 132 )
 size_flags_horizontal = 3
 
 [node name="TimelineContainer" type="VBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline"]
@@ -250,34 +253,42 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 
 [node name="ButtonContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+editor/display_folded = true
 margin_right = 536.0
-margin_bottom = 40.0
+margin_bottom = 24.0
 
 [node name="AnimationButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer"]
-margin_left = 69.0
-margin_right = 467.0
-margin_bottom = 40.0
+margin_left = 90.0
+margin_right = 446.0
+margin_bottom = 24.0
 
-[node name="LoopAnim" type="CheckButton" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_right = 111.0
-margin_bottom = 40.0
+[node name="LoopLabel" type="Label" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 19.0
+text = "Loop:"
+
+[node name="LoopAnim" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
+margin_left = 39.0
+margin_right = 69.0
+margin_bottom = 24.0
 hint_tooltip = "Should the animation loop (play again after it reached the end)?"
 mouse_default_cursor_shape = 2
-text = "Loop"
+text = "No"
 
 [node name="PlayBackwards" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 115.0
-margin_right = 224.0
-margin_bottom = 40.0
+margin_left = 73.0
+margin_right = 182.0
+margin_bottom = 24.0
 hint_tooltip = "Play the animation backwards (from end to beggining)"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "Play Backwards"
 
 [node name="PlayForward" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 228.0
-margin_right = 320.0
-margin_bottom = 40.0
+margin_left = 186.0
+margin_right = 278.0
+margin_bottom = 24.0
 hint_tooltip = "Play the animation forward (from beggining to end)"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -285,9 +296,9 @@ toggle_mode = true
 text = "Play Forward"
 
 [node name="FPSValue" type="SpinBox" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 324.0
-margin_right = 398.0
-margin_bottom = 40.0
+margin_left = 282.0
+margin_right = 356.0
+margin_bottom = 24.0
 hint_tooltip = "How many frames per second should the animation preview be? The more FPS, the faster the animation plays."
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -295,14 +306,15 @@ value = 1.0
 suffix = "FPS"
 
 [node name="HSeparator" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_top = 44.0
+margin_top = 28.0
 margin_right = 536.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_top = 52.0
+editor/display_folded = true
+margin_top = 36.0
 margin_right = 536.0
-margin_bottom = 72.0
+margin_bottom = 56.0
 
 [node name="FrameButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer"]
 margin_left = 209.0
@@ -354,14 +366,14 @@ size_flags_horizontal = 0
 text = "Cl"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_top = 76.0
+margin_top = 60.0
 margin_right = 536.0
-margin_bottom = 80.0
+margin_bottom = 64.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_top = 84.0
+margin_top = 68.0
 margin_right = 536.0
-margin_bottom = 148.0
+margin_bottom = 132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_vertical_enabled = false
@@ -379,8 +391,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
 margin_right = 160.0
-margin_bottom = 520.0
+margin_bottom = 375.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -460,6 +473,45 @@ disabled = true
 text = "M"
 
 [node name="HSeparator" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
+margin_top = 379.0
+margin_right = 160.0
+margin_bottom = 383.0
+
+[node name="OnionSkinningButtons" type="VBoxContainer" parent="UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
+margin_top = 387.0
+margin_right = 160.0
+margin_bottom = 520.0
+
+[node name="OnionSkinning" type="Label" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
+margin_right = 160.0
+margin_bottom = 31.0
+text = "Onion Skinning:
+Past Steps"
+
+[node name="PastOnionSkinning" type="SpinBox" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
+margin_top = 35.0
+margin_right = 160.0
+margin_bottom = 59.0
+
+[node name="OnionSkinningFuture" type="Label" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
+margin_top = 63.0
+margin_right = 160.0
+margin_bottom = 77.0
+text = "Future Steps"
+
+[node name="FutureOnionSkinning" type="SpinBox" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
+margin_top = 81.0
+margin_right = 160.0
+margin_bottom = 105.0
+
+[node name="BlueRedMode" type="CheckBox" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
+margin_top = 109.0
+margin_right = 160.0
+margin_bottom = 133.0
+text = "Blue-Red Mode"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
 margin_top = 524.0
 margin_right = 160.0
 margin_bottom = 528.0
@@ -546,6 +598,32 @@ suffix = "px"
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
 margin_bottom = 348.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="SaveSprite" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 3.0
+margin_bottom = 48.0
+resizable = true
+access = 2
+filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="ImportSprites" type="FileDialog" parent="."]
+margin_right = 515.0
+margin_bottom = 348.0
 window_title = "Open File(s)"
 resizable = true
 mode = 1
@@ -554,7 +632,7 @@ filters = PoolStringArray( "*jpg, *.png ; JPG, PNG Images" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
-[node name="SaveSprite" type="FileDialog" parent="."]
+[node name="ExportSprites" type="FileDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -644,7 +722,7 @@ margin_left = 91.0
 margin_right = 182.0
 margin_bottom = 20.0
 text = "Nearest"
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null ]
+items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
 
 [node name="AnimationTimer" type="Timer" parent="."]
@@ -658,7 +736,7 @@ selected = 0
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="mouse_entered" from="UI/CanvasAndTimeline/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="UI/CanvasAndTimeline/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/LoopAnim" to="." method="_on_LoopAnim_toggled"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
 [connection signal="value_changed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
@@ -673,12 +751,19 @@ selected = 0
 [connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveDownLayer" to="." method="_on_MoveDownLayer_pressed"]
 [connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
 [connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
+[connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
+[connection signal="toggled" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
-[connection signal="files_selected" from="OpenSprite" to="." method="_on_OpenSprite_files_selected"]
-[connection signal="popup_hide" from="OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
+[connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="popup_hide" from="OpenSprite" to="." method="_on_ImportSprites_popup_hide"]
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
+[connection signal="files_selected" from="ImportSprites" to="." method="_on_ImportSprites_files_selected"]
+[connection signal="popup_hide" from="ImportSprites" to="." method="_on_ImportSprites_popup_hide"]
+[connection signal="file_selected" from="ExportSprites" to="." method="_on_ExportSprites_file_selected"]
+[connection signal="popup_hide" from="ExportSprites" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

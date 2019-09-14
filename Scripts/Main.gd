@@ -1,27 +1,33 @@
 extends Control
 
-var current_path := ""
+var current_save_path := ""
+var current_export_path := ""
 var opensprite_file_selected := false
 var pencil_tool
 var eraser_tool
 var fill_tool
-var export_all_frames : CheckButton
-var export_as_single_file : CheckButton
-var export_vertical_spritesheet : CheckButton
+var import_as_new_frame : CheckBox
+var export_all_frames : CheckBox
+var export_as_single_file : CheckBox
+var export_vertical_spritesheet : CheckBox
 var fps := 1.0
-var animation_loop := false
+var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
+	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
+	OS.set("min_window_size", Vector2(1024, 600))
+	
 	var file_menu_items := {
 		"New..." : KEY_MASK_CTRL + KEY_N,
-		#The import and export key shortcuts will change,
-		#and they will be bound to Open and Save/Save as once I
-		#make a custom file for Pixelorama projects
-		"Import..." : KEY_MASK_CTRL + KEY_O,
-		"Export..." : KEY_MASK_CTRL + KEY_S,
-		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
+		"Open..." : KEY_MASK_CTRL + KEY_O,
+		"Save..." : KEY_MASK_CTRL + KEY_S,
+		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
+		"Import..." : KEY_MASK_CTRL + KEY_I,
+		"Export..." : KEY_MASK_CTRL + KEY_E,
+		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
 		"Quit" : KEY_MASK_CTRL + KEY_Q
 		}
 	var edit_menu_items := {
@@ -51,15 +57,22 @@ func _ready() -> void:
 	eraser_tool.connect("pressed", self, "_on_Tool_pressed", [eraser_tool])
 	fill_tool.connect("pressed", self, "_on_Tool_pressed", [fill_tool])
 	
-	export_all_frames = CheckButton.new()
+	#Options for Import
+	import_as_new_frame = CheckBox.new()
+	import_as_new_frame.text = "Import as new frame?"
+	$ImportSprites.get_vbox().add_child(import_as_new_frame)
+	
+	#Options for Export
+	export_all_frames = CheckBox.new()
 	export_all_frames.text = "Export all frames?"
-	export_as_single_file = CheckButton.new()
+	export_as_single_file = CheckBox.new()
 	export_as_single_file.text = "Export frames as a single file?"
-	export_vertical_spritesheet = CheckButton.new()
+	export_vertical_spritesheet = CheckBox.new()
 	export_vertical_spritesheet.text = "Vertical spritesheet?"
-	$SaveSprite.get_vbox().add_child(export_all_frames)
-	$SaveSprite.get_vbox().add_child(export_as_single_file)
-	$SaveSprite.get_vbox().add_child(export_vertical_spritesheet)
+	$ExportSprites.get_vbox().add_child(export_all_frames)
+	$ExportSprites.get_vbox().add_child(export_as_single_file)
+	$ExportSprites.get_vbox().add_child(export_vertical_spritesheet)
+	
 	
 func _input(event):
 	#Handle tool shortcuts
@@ -82,20 +95,33 @@ func file_menu_id_pressed(id : int) -> void:
 		0: #New
 			$CreateNewImage.popup_centered()
 			Global.can_draw = false
-		1: #Import
+		1: #Open
 			$OpenSprite.popup_centered()
 			Global.can_draw = false
 			opensprite_file_selected = false
-		2: #Export
-			if current_path == "":
+		2: #Save
+			if current_save_path == "":
 				$SaveSprite.popup_centered()
 				Global.can_draw = false
 			else:
-				export_project()
-		3: #Export as
+				_on_SaveSprite_file_selected(current_save_path)
+		3: #Save as
 			$SaveSprite.popup_centered()
 			Global.can_draw = false
-		4: #Quit
+		4: #Import
+			$ImportSprites.popup_centered()
+			Global.can_draw = false
+			opensprite_file_selected = false
+		5: #Export
+			if current_export_path == "":
+				$ExportSprites.popup_centered()
+				Global.can_draw = false
+			else:
+				export_project()
+		6: #Export as
+			$ExportSprites.popup_centered()
+			Global.can_draw = false
+		7: #Quit
 			get_tree().quit()
 
 func edit_menu_id_pressed(id : int) -> void:
@@ -111,30 +137,97 @@ func _on_CreateNewImage_confirmed() -> void:
 	var height = float($CreateNewImage/VBoxContainer/HeightCont/HeightValue.value)
 	new_canvas(Vector2(width, height).floor())
 
-#func _on_OpenSprite_file_selected(path : String) -> void:
-#	var image = Image.new()
-#	var err = image.load(path)
-#	if err == OK:
-#		opensprite_file_selected = true
-#		new_canvas(image.get_size(), image)
-#	else:
-#		OS.alert("Can't load file")
+func _on_OpenSprite_file_selected(path) -> void:
+	var file := File.new()
+	var err := file.open(path, File.READ)
+	if err == 0:
+		var version := file.get_line()
+		var frame := 0
+		var frame_line := file.get_line()
+		clear_canvases()
+		while frame_line == "--":
+			var canvas : Canvas = load("res://Canvas.tscn").instance()
+			Global.canvas = canvas
+			var width := file.get_16()
+			var height := file.get_16()
+			
+			var layer := 0
+			var layer_line := file.get_line()
+			
+			while layer_line == "-":
+				var buffer := file.get_buffer(width * height * 4)
+				var image := Image.new()
+				image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
+				image.lock()
+				var tex := ImageTexture.new()
+				tex.create_from_image(image, 0)
+				canvas.layers.append([image, tex, "Layer %s" % layer, true])
+				layer_line = file.get_line()
+				layer += 1
+			
+			canvas.size = Vector2(width, height)
+			Global.canvases.append(canvas)
+			canvas.frame = frame
+			Global.canvas_parent.add_child(canvas)
+			frame_line = file.get_line()
+			frame += 1
+		
+		Global.current_frame = frame - 1
+		#Load tool options
+		Global.left_color_picker.color = file.get_var()
+		Global.right_color_picker.color = file.get_var()
+		Global.left_brush_size = file.get_8()
+		Global.left_brush_size_edit.value = Global.left_brush_size
+		Global.right_brush_size = file.get_8()
+		Global.right_brush_size_edit.value = Global.right_brush_size
+		var left_palette = file.get_var()
+		var right_palette = file.get_var()
+		for color in left_palette:
+			Global.left_color_picker.get_picker().add_preset(color)
+		for color in right_palette:
+			Global.right_color_picker.get_picker().add_preset(color)
+		
+	file.close()
 
-func _on_OpenSprite_files_selected(paths) -> void:
-	for child in Global.vbox_layer_container.get_children():
-		if child is PanelContainer:
-			child.queue_free()
-	for child in Global.frame_container.get_children():
-		child.queue_free()
-	for child in Global.canvas_parent.get_children():
-		if child is Canvas:
-			child.queue_free()
-	Global.canvases.clear()
-	
+func _on_SaveSprite_file_selected(path) -> void:
+	current_save_path = path
+	var file := File.new()
+	var err := file.open(path, File.WRITE)
+	if err == 0:
+		file.store_line(ProjectSettings.get_setting("application/config/Version"))
+		for canvas in Global.canvases:
+			file.store_line("--")
+			file.store_16(canvas.size.x)
+			file.store_16(canvas.size.y)
+			for layer in canvas.layers:
+				file.store_line("-")
+				file.store_buffer(layer[0].get_data())
+			file.store_line("END_LAYERS")
+		file.store_line("END_FRAMES")
+		
+		#Save tool options
+		var left_color := Global.left_color_picker.color
+		var right_color := Global.right_color_picker.color
+		var left_brush_size := Global.left_brush_size
+		var right_brush_size := Global.right_brush_size
+		var left_palette := Global.left_color_picker.get_picker().get_presets()
+		var right_palette := Global.right_color_picker.get_picker().get_presets()
+		file.store_var(left_color)
+		file.store_var(right_color)
+		file.store_8(left_brush_size)
+		file.store_8(right_brush_size)
+		file.store_var(left_palette)
+		file.store_var(right_palette)
+	file.close()
+
+func _on_ImportSprites_files_selected(paths) -> void:
+	if !import_as_new_frame.pressed: #If we're not adding a new frame, delete the previous
+		clear_canvases()
+		
 	#Find the biggest image and let it handle the camera zoom options
 	var max_size : Vector2
 	var biggest_canvas : Canvas
-	var i := 0
+	var i := Global.canvases.size()
 	for path in paths:
 		var image = Image.new()
 		var err = image.load(path)
@@ -152,7 +245,7 @@ func _on_OpenSprite_files_selected(paths) -> void:
 			Global.canvas_parent.add_child(canvas)
 			Global.canvases.append(canvas)
 			canvas.visible = false
-			if i == 0:
+			if path == paths[0]: #If it's the first file
 				max_size = canvas.size
 				biggest_canvas = canvas
 			else:
@@ -174,8 +267,8 @@ func _on_OpenSprite_files_selected(paths) -> void:
 	else:
 		Global.remove_frame_button.disabled = true
 		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-
-func new_canvas(size : Vector2) -> void:
+		
+func clear_canvases() -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
 			child.queue_free()
@@ -185,6 +278,9 @@ func new_canvas(size : Vector2) -> void:
 		if child is Canvas:
 			child.queue_free()
 	Global.canvases.clear()
+
+func new_canvas(size : Vector2) -> void:
+	clear_canvases()
 	Global.canvas = load("res://Canvas.tscn").instance()
 	Global.canvas.size = size
 	
@@ -194,8 +290,8 @@ func new_canvas(size : Vector2) -> void:
 	Global.remove_frame_button.disabled = true
 	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
-func _on_SaveSprite_file_selected(path : String) -> void:
-	current_path = path
+func _on_ExportSprites_file_selected(path : String) -> void:
+	current_export_path = path
 	export_project()
 
 func export_project() -> void:
@@ -203,7 +299,7 @@ func export_project() -> void:
 		if !export_as_single_file.pressed:
 			var i := 1
 			for canvas in Global.canvases:
-				var path := "%s_%s" % [current_path, str(i)]
+				var path := "%s_%s" % [current_export_path, str(i)]
 				path = path.replace(".png", "")
 				path = "%s.png" % path
 				save_sprite(canvas, path)
@@ -211,7 +307,7 @@ func export_project() -> void:
 		else:
 			save_spritesheet()
 	else:
-		save_sprite(Global.canvas, current_path)
+		save_sprite(Global.canvas, current_export_path)
 
 func save_sprite(canvas : Canvas, path : String) -> void:
 	var whole_image := Image.new()
@@ -252,11 +348,11 @@ func save_spritesheet() -> void:
 		else:
 			dst += Vector2(canvas.size.x, 0)
 	
-	var err = whole_image.save_png(current_path)
+	var err = whole_image.save_png(current_export_path)
 	if err != OK:
 		OS.alert("Can't save file")
 
-func _on_OpenSprite_popup_hide() -> void:
+func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
 		Global.can_draw = true
 
@@ -446,6 +542,20 @@ func change_frame_order(rate : int) -> void:
 	#Global.canvas.generate_layer_panels()
 	Global.handle_layer_order_buttons()
 
+func _on_LoopAnim_pressed() -> void:
+	match Global.loop_animation_button.text:
+		"No":
+			#Make it loop
+			animation_loop = 1
+			Global.loop_animation_button.text = "Cycle"
+		"Cycle":
+			#Make it ping-pong
+			animation_loop = 2
+			Global.loop_animation_button.text = "Ping-Pong"
+		"Ping-Pong":
+			#Make it stop
+			animation_loop = 0
+			Global.loop_animation_button.text = "No"
 
 func _on_PlayForward_toggled(button_pressed) -> void:
 	Global.play_backwards.pressed = false
@@ -478,22 +588,35 @@ func _on_AnimationTimer_timeout() -> void:
 		if Global.current_frame < Global.canvases.size() - 1:
 			Global.current_frame += 1
 		else:
-			if animation_loop:
-				Global.current_frame = 0
-			else:
-				Global.play_forward.pressed = false
-				Global.play_forward.text = "Play Forward"
-				$AnimationTimer.stop()
+			match animation_loop:
+				0: #No loop
+					Global.play_forward.pressed = false
+					Global.play_forward.text = "Play Forward"
+					Global.play_backwards.pressed = false
+					Global.play_backwards.text = "Play Backwards"
+					$AnimationTimer.stop()
+				1: #Cycle loop
+					Global.current_frame = 0
+				2: #Ping pong loop
+					animation_forward = false
+					_on_AnimationTimer_timeout()
+			
 	else:
 		if Global.current_frame > 0:
 			Global.current_frame -= 1
 		else:
-			if animation_loop:
-				Global.current_frame = Global.canvases.size() - 1
-			else:
-				Global.play_backwards.pressed = false
-				Global.play_backwards.text = "Play Backwards"
-				$AnimationTimer.stop()
+			match animation_loop:
+				0: #No loop
+					Global.play_backwards.pressed = false
+					Global.play_backwards.text = "Play Backwards"
+					Global.play_forward.pressed = false
+					Global.play_forward.text = "Play Forward"
+					$AnimationTimer.stop()
+				1: #Cycle loop
+					Global.current_frame = Global.canvases.size() - 1
+				2: #Ping pong loop
+					animation_forward = true
+					_on_AnimationTimer_timeout()
 	
 	Global.change_frame()
 
@@ -501,5 +624,11 @@ func _on_FPSValue_value_changed(value) -> void:
 	fps = float(value)
 	$AnimationTimer.wait_time = 1 / fps
 
-func _on_LoopAnim_toggled(button_pressed) -> void:
-	animation_loop = button_pressed
+func _on_PastOnionSkinning_value_changed(value) -> void:
+	Global.onion_skinning_past_rate = int(value)
+
+func _on_FutureOnionSkinning_value_changed(value) -> void:
+	Global.onion_skinning_future_rate = int(value)
+
+func _on_BlueRedMode_toggled(button_pressed) -> void:
+	Global.onion_skinning_blue_red = button_pressed

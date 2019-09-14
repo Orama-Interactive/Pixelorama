@@ -1,11 +1,16 @@
 extends Node
 
-# warning-ignore:unused_class_variable
 var current_frame := 0 setget set_current_frame_label
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := true
+# warning-ignore:unused_class_variable
+var onion_skinning_past_rate := 0
+# warning-ignore:unused_class_variable
+var onion_skinning_future_rate := 0
+# warning-ignore:unused_class_variable
+var onion_skinning_blue_red := false
 # warning-ignore:unused_class_variable
 var draw_grid := false
 var canvases := []
@@ -20,12 +25,16 @@ var left_brush_size := 1
 # warning-ignore:unused_class_variable
 var right_brush_size := 1
 var camera : Camera2D
-var left_color_picker : ColorPickerButton
-var right_color_picker : ColorPickerButton
+
 var file_menu : MenuButton
 var edit_menu : MenuButton
 var left_indicator : Sprite
 var right_indicator : Sprite
+var left_color_picker : ColorPickerButton
+var right_color_picker : ColorPickerButton
+var left_brush_size_edit : SpinBox
+var right_brush_size_edit : SpinBox
+var loop_animation_button : Button
 var play_forward : Button
 var play_backwards : Button
 var frame_container : HBoxContainer
@@ -51,12 +60,17 @@ func _ready() -> void:
 	canvases.append(canvas)
 	canvas_parent = canvas.get_parent()
 	camera = find_node_by_name(canvas_parent, "Camera2D")
-	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
-	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
 	left_indicator = find_node_by_name(root, "LeftIndicator")
 	right_indicator = find_node_by_name(root, "RightIndicator")
+	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
+	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
+	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
+	
+	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
 	frame_container = find_node_by_name(root, "FrameContainer")

@@ -106,6 +106,8 @@ func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 	get_layer_container(layer_index).get_child(0).get_child(1).texture = layers[layer_index][1]
 	
+	#This code is used to update the texture in the animation timeline frame button
+	#but blend_rect causes major performance issues on large images
 	var whole_image := Image.new()
 	whole_image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 	for layer in layers:
@@ -122,8 +124,37 @@ func get_layer_container(layer_index : int) -> PanelContainer:
 	return null
 
 func _draw() -> void:
-	draw_texture_rect(trans_background, Rect2(location, size), true)
-	#for texture in layer_textures:
+	draw_texture_rect(trans_background, Rect2(location, size), true) #Draw transparent background
+	
+	#Onion Skinning
+	#Past
+	if Global.onion_skinning_past_rate > 0:
+		var color : Color
+		if Global.onion_skinning_blue_red:
+			color = Color.blue
+		else:
+			color = Color.white
+		for i in range(1, Global.onion_skinning_past_rate + 1):
+			if Global.current_frame >= i:
+				for texture in Global.canvases[Global.current_frame - i].layers:
+					color.a = 0.6/i
+					draw_texture(texture[1], location, color)
+	
+	#Future
+	if Global.onion_skinning_future_rate > 0:
+		var color : Color
+		if Global.onion_skinning_blue_red:
+			color = Color.red
+		else:
+			color = Color.white
+		for i in range(1, Global.onion_skinning_future_rate + 1):
+			#print(i)
+			if Global.current_frame < Global.canvases.size() - i:
+				for texture in Global.canvases[Global.current_frame + i].layers:
+					color.a = 0.6/i
+					draw_texture(texture[1], location, color)
+	
+	#Draw current frame layers
 	for texture in layers:
 		if texture[3]: #if it's visible
 			draw_texture(texture[1], location)
@@ -275,6 +306,7 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 				east += Vector2.RIGHT
 			for px in range(west.x + 1, east.x):
 				var p := Vector2(px, n.y)
+				#print(point_in_rectangle(p, location, size))
 				draw_pixel(p, replace_color, 1)
 				var north := p + Vector2.UP
 				var south := p + Vector2.DOWN
