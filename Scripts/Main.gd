@@ -14,6 +14,10 @@ var animation_forward := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
+	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
+	OS.set("min_window_size", Vector2(1024, 600))
+
 	var file_menu_items := {
 		"New..." : KEY_MASK_CTRL + KEY_N,
 		#The import and export key shortcuts will change,
