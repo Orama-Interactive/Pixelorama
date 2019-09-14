@@ -20,6 +20,7 @@ func _ready() -> void:
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1024, 600))
 	
+
 	var file_menu_items := {
 		"New..." : KEY_MASK_CTRL + KEY_N,
 		"Open..." : KEY_MASK_CTRL + KEY_O,
