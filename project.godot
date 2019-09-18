@@ -96,6 +96,26 @@ right_fill_tool={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":66,"unicode":0,"echo":false,"script":null)
  ]
 }
+left_rectangle_select_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_rectangle_select_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+copy={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+paste={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":86,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 

@@ -6,6 +6,7 @@ var opensprite_file_selected := false
 var pencil_tool
 var eraser_tool
 var fill_tool
+var rectselect_tool
 var import_as_new_frame : CheckBox
 var export_all_frames : CheckBox
 var export_as_single_file : CheckBox
@@ -20,7 +21,6 @@ func _ready() -> void:
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1024, 600))
 	
-
 	var file_menu_items := {
 		"New..." : KEY_MASK_CTRL + KEY_N,
 		"Open..." : KEY_MASK_CTRL + KEY_O,
@@ -33,7 +33,9 @@ func _ready() -> void:
 		}
 	var edit_menu_items := {
 		"Scale Image" : 0,
-		"Show Grid" : KEY_MASK_CTRL + KEY_G
+		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
+		"Show Grid" : KEY_MASK_CTRL + KEY_G,
+		"Clear Selection" : 0
 		#"Undo" : KEY_MASK_CTRL + KEY_Z,
 		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
 		}
@@ -53,10 +55,12 @@ func _ready() -> void:
 	pencil_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Pencil
 	eraser_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Eraser
 	fill_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Fill
+	rectselect_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/RectSelect
 	
 	pencil_tool.connect("pressed", self, "_on_Tool_pressed", [pencil_tool])
 	eraser_tool.connect("pressed", self, "_on_Tool_pressed", [eraser_tool])
 	fill_tool.connect("pressed", self, "_on_Tool_pressed", [fill_tool])
+	rectselect_tool.connect("pressed", self, "_on_Tool_pressed", [rectselect_tool])
 	
 	#Options for Import
 	import_as_new_frame = CheckBox.new()
@@ -89,6 +93,10 @@ func _input(event):
 		_on_Tool_pressed(fill_tool, false, false)
 	elif event.is_action_pressed("left_fill_tool"):
 		_on_Tool_pressed(fill_tool, false, true)
+	elif event.is_action_pressed("right_rectangle_select_tool"):
+		_on_Tool_pressed(rectselect_tool, false, false)
+	elif event.is_action_pressed("left_rectangle_select_tool"):
+		_on_Tool_pressed(rectselect_tool, false, true)
 
 
 func file_menu_id_pressed(id : int) -> void:
@@ -130,8 +138,16 @@ func edit_menu_id_pressed(id : int) -> void:
 		0: #Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
-		1: #Show grid
+		1: #Tile mode
+			Global.tile_mode = !Global.tile_mode
+		2: #Show grid
 			Global.draw_grid = !Global.draw_grid
+		3: #Clear selection
+			Global.selection_rectangle.polygon[0] = Vector2.ZERO
+			Global.selection_rectangle.polygon[1] = Vector2.ZERO
+			Global.selection_rectangle.polygon[2] = Vector2.ZERO
+			Global.selection_rectangle.polygon[3] = Vector2.ZERO
+			Global.selected_pixels.clear()
 
 func _on_CreateNewImage_confirmed() -> void:
 	var width = float($CreateNewImage/VBoxContainer/WidthCont/WidthValue.value)

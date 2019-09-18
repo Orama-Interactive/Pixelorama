@@ -12,6 +12,8 @@ var onion_skinning_future_rate := 0
 # warning-ignore:unused_class_variable
 var onion_skinning_blue_red := false
 # warning-ignore:unused_class_variable
+var tile_mode := false
+# warning-ignore:unused_class_variable
 var draw_grid := false
 var canvases := []
 var canvas : Canvas
@@ -25,6 +27,9 @@ var left_brush_size := 1
 # warning-ignore:unused_class_variable
 var right_brush_size := 1
 var camera : Camera2D
+var selection_rectangle : Polygon2D
+var selected_pixels := []
+var image_clipboard : Image
 
 var file_menu : MenuButton
 var edit_menu : MenuButton
@@ -60,6 +65,9 @@ func _ready() -> void:
 	canvases.append(canvas)
 	canvas_parent = canvas.get_parent()
 	camera = find_node_by_name(canvas_parent, "Camera2D")
+	
+	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
+	image_clipboard = Image.new()
 	
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")

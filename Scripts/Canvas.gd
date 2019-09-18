@@ -15,6 +15,7 @@ var mouse_inside_canvas := false #used for undo
 var sprite_changed_this_frame := false #for optimization purposes
 
 var is_making_line := false
+var is_making_selection := "None"
 var line_2d : Line2D
 
 # Called when the node enters the scene tree for the first time.
@@ -54,13 +55,15 @@ func _process(delta) -> void:
 	sprite_changed_this_frame = false
 	update()
 	var mouse_pos := get_local_mouse_position() - location
+	var mouse_pos_floored := mouse_pos.floor()
+	var mouse_pos_ceiled := mouse_pos.ceil()
 	var current_mouse_button := "None"
 	var current_action := "None"
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		current_mouse_button = "L"
+		current_mouse_button = "left_mouse"
 		current_action = Global.current_left_tool
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-		current_mouse_button = "R"
+		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
 	
 	if visible:
@@ -70,15 +73,14 @@ func _process(delta) -> void:
 					mouse_inside_canvas = false
 			Global.cursor_position_label.text = "[%sx%s]" % [size.x, size.y]
 		else:
-			var mouse_pos_floored := mouse_pos.floor()
 			Global.cursor_position_label.text = "[%sx%s] %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
-	
+	#Handle current tool
 	match current_action:
 		"Pencil":
 			var current_color : Color
-			if current_mouse_button == "L":
+			if current_mouse_button == "left_mouse":
 				current_color = Global.left_color_picker.color
-			elif current_mouse_button == "R":
+			elif current_mouse_button == "right_mouse":
 				current_color = Global.right_color_picker.color
 			pencil_and_eraser(mouse_pos, current_color, current_mouse_button)
 		"Eraser":
@@ -86,11 +88,35 @@ func _process(delta) -> void:
 		"Fill":
 			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var current_color : Color
-				if current_mouse_button == "L":
+				if current_mouse_button == "left_mouse":
 					current_color = Global.left_color_picker.color
-				elif current_mouse_button == "R":
+				elif current_mouse_button == "right_mouse":
 					current_color = Global.right_color_picker.color
 				flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
+		"RectSelect":
+			if point_in_rectangle(mouse_pos_floored, location - Vector2.ONE, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+				#If we're creating a new selection
+				if Global.selected_pixels.size() == 0 || !point_in_rectangle_equal(mouse_pos_floored, Global.selection_rectangle.polygon[0], Global.selection_rectangle.polygon[2]):
+					if Input.is_action_just_pressed(current_mouse_button):
+						Global.selection_rectangle.polygon[0] = mouse_pos_floored
+						Global.selection_rectangle.polygon[1] = mouse_pos_floored
+						Global.selection_rectangle.polygon[2] = mouse_pos_floored
+						Global.selection_rectangle.polygon[3] = mouse_pos_floored
+						is_making_selection = current_mouse_button
+						Global.selected_pixels.clear()
+					else:
+						if is_making_selection != "None": #If we're making a new selection...
+							var start_pos = Global.selection_rectangle.polygon[0]
+							if start_pos != mouse_pos_floored:
+								var end_pos := Vector2(mouse_pos_ceiled.x, mouse_pos_ceiled.y)
+								if mouse_pos.x < start_pos.x:
+									end_pos.x = mouse_pos_ceiled.x - 1
+								if mouse_pos.y < start_pos.y:
+									end_pos.y = mouse_pos_ceiled.y - 1
+								Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
+								Global.selection_rectangle.polygon[2] = end_pos
+								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
+				
 	
 	if !is_making_line:
 		previous_mouse_pos = mouse_pos
@@ -98,6 +124,30 @@ func _process(delta) -> void:
 		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
 	else:
 		line_2d.set_point_position(1, mouse_pos)
+	
+	if is_making_selection != "None": #If we're making a selection
+		if Input.is_action_just_released(is_making_selection): #Finish selection when button is released
+			var start_pos = Global.selection_rectangle.polygon[0]
+			var end_pos = Global.selection_rectangle.polygon[2]
+			if start_pos.x > end_pos.x:
+				var temp = end_pos.x
+				end_pos.x = start_pos.x
+				start_pos.x = temp
+			
+			if start_pos.y > end_pos.y:
+				var temp = end_pos.y
+				end_pos.y = start_pos.y
+				start_pos.y = temp
+			
+			Global.selection_rectangle.polygon[0] = start_pos
+			Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
+			Global.selection_rectangle.polygon[2] = end_pos
+			Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
+			
+			for xx in range(start_pos.x, end_pos.x):
+				for yy in range(start_pos.y, end_pos.y):
+					Global.selected_pixels.append(Vector2(xx, yy))
+			is_making_selection = "None"
 	
 	if sprite_changed_this_frame:
 		update_texture(current_layer_index)
@@ -158,6 +208,16 @@ func _draw() -> void:
 	for texture in layers:
 		if texture[3]: #if it's visible
 			draw_texture(texture[1], location)
+			
+			if Global.tile_mode:
+				draw_texture(texture[1], Vector2(location.x, location.y + size.y)) #Down
+				draw_texture(texture[1], Vector2(location.x - size.x, location.y + size.y)) #Down Left
+				draw_texture(texture[1], Vector2(location.x - size.x, location.y)) #Left
+				draw_texture(texture[1], location - size) #Up left
+				draw_texture(texture[1], Vector2(location.x, location.y - size.y)) #Up
+				draw_texture(texture[1], Vector2(location.x + size.x, location.y - size.y)) #Up right
+				draw_texture(texture[1], Vector2(location.x + size.x, location.y)) #Right
+				draw_texture(texture[1], location + size) #Down right
 	
 	#Idea taken from flurick (on GitHub)
 	if Global.draw_grid:
@@ -228,9 +288,9 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 			is_making_line = true
 	else:
 		var brush_size := 1
-		if current_mouse_button == "L":
+		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
-		elif current_mouse_button == "R":
+		elif current_mouse_button == "right_mouse":
 			brush_size = Global.right_brush_size
 			
 		if is_making_line:
@@ -249,18 +309,33 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 
 func draw_pixel(pos : Vector2, color : Color, brush_size : int) -> void:
 	if Global.can_draw && Global.has_focus && Global.current_frame == frame:
+		#If there is a selection and current pixel is not in it
+		var west_limit := location.x
+		var east_limit := location.x + size.x
+		var north_limit := location.y
+		var south_limit := location.y + size.y
+		if Global.selected_pixels.size() != 0:
+			west_limit = Global.selection_rectangle.polygon[0].x
+			east_limit = Global.selection_rectangle.polygon[2].x
+			north_limit = Global.selection_rectangle.polygon[0].y
+			south_limit = Global.selection_rectangle.polygon[2].y
+		
 		var start_pos_x = pos.x - (brush_size >> 1)
 		var start_pos_y = pos.y - (brush_size >> 1)
 		for cur_pos_x in range(start_pos_x, start_pos_x + brush_size):
 			#layers[current_layer_index][0].set_pixel(cur_pos_x, pos.y, color)
 			for cur_pos_y in range(start_pos_y, start_pos_y + brush_size):
 				if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color: #don't draw the same pixel over and over
-					layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
-		#layers[current_layer_index][0].set_pixelv(pos, color)
-					sprite_changed_this_frame = true
+					if point_in_rectangle_equal(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit, north_limit), Vector2(east_limit - 1, south_limit - 1)):
+						layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
+			#layers[current_layer_index][0].set_pixelv(pos, color)
+						sprite_changed_this_frame = true
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
+	
+func point_in_rectangle_equal(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
+	return p.x >= coord1.x && p.y >= coord1.y && p.x <= coord2.x && p.y <= coord2.y
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
@@ -296,23 +371,35 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 	elif pixel != target_color:
 		return
 	else:
+		var west_limit := location.x
+		var east_limit := location.x + size.x
+		var north_limit := location.y
+		var south_limit := location.y + size.y
+		if Global.selected_pixels.size() != 0:
+			west_limit = Global.selection_rectangle.polygon[0].x
+			east_limit = Global.selection_rectangle.polygon[2].x
+			north_limit = Global.selection_rectangle.polygon[0].y
+			south_limit = Global.selection_rectangle.polygon[2].y
+		
+		if !point_in_rectangle_equal(pos, Vector2(west_limit, north_limit), Vector2(east_limit - 1, south_limit - 1)):
+			return
+		
 		var q = [pos]
 		for n in q:
 			var west : Vector2 = n
 			var east : Vector2 = n
-			while west.x >= location.x && layers[current_layer_index][0].get_pixelv(west) == target_color:
+			while west.x >= west_limit && layers[current_layer_index][0].get_pixelv(west) == target_color:
 				west += Vector2.LEFT
-			while east.x < location.x + size.x && layers[current_layer_index][0].get_pixelv(east) == target_color:
+			while east.x < east_limit && layers[current_layer_index][0].get_pixelv(east) == target_color:
 				east += Vector2.RIGHT
 			for px in range(west.x + 1, east.x):
 				var p := Vector2(px, n.y)
-				#print(point_in_rectangle(p, location, size))
 				draw_pixel(p, replace_color, 1)
 				var north := p + Vector2.UP
 				var south := p + Vector2.DOWN
-				if north.y >= location.y && layers[current_layer_index][0].get_pixelv(north) == target_color:
+				if north.y >= north_limit && layers[current_layer_index][0].get_pixelv(north) == target_color:
 					q.append(north)
-				if south.y < location.y + size.y && layers[current_layer_index][0].get_pixelv(south) == target_color:
+				if south.y < south_limit && layers[current_layer_index][0].get_pixelv(south) == target_color:
 					q.append(south)
 
 func _on_Timer_timeout() -> void:

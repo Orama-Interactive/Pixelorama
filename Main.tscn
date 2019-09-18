@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Main Theme.tres" type="Theme" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=4]
 [ext_resource path="res://Canvas.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=7]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -13,7 +14,6 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="UI" type="HBoxContainer" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -31,12 +31,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_right = 320.0
 margin_bottom = 294.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_right = 320.0
 margin_bottom = 20.0
 
@@ -65,7 +65,8 @@ editor/display_folded = true
 margin_right = 51.0
 margin_bottom = 20.0
 hint_tooltip = "P for left mouse button
-Alt + P for right mouse button"
+Alt + P for right mouse button
+Hold Shift to make a line"
 mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Pencil"
@@ -81,7 +82,8 @@ margin_left = 55.0
 margin_right = 106.0
 margin_bottom = 20.0
 hint_tooltip = "E for left mouse button
-Alt + E for right mouse button"
+Alt + E for right mouse button
+Hold Shift to make a line"
 mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Eraser"
@@ -100,6 +102,17 @@ Alt + B for right mouse button"
 mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Bucket"
+
+[node name="RectSelect" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
+margin_left = 170.0
+margin_right = 249.0
+margin_bottom = 20.0
+hint_tooltip = "R for left mouse button
+Alt + R for right mouse button
+Press Shift to move the content"
+mouse_default_cursor_shape = 2
+button_mask = 3
+text = "RectSelect"
 
 [node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 298.0
@@ -239,6 +252,12 @@ render_target_update_mode = 3
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
+
+[node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/ViewportContainer/Viewport"]
+z_index = 1
+color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+script = ExtResource( 7 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
 margin_top = 468.0
@@ -511,7 +530,7 @@ margin_right = 160.0
 margin_bottom = 133.0
 text = "Blue-Red Mode"
 
-[node name="HSeparator3" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
+[node name="HSeparator2" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
 margin_top = 524.0
 margin_right = 160.0
 margin_bottom = 528.0
