@@ -94,9 +94,10 @@ func _process(delta) -> void:
 					current_color = Global.right_color_picker.color
 				flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
 		"RectSelect":
-			if point_in_rectangle(mouse_pos_floored, location - Vector2.ONE, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			#Check SelectionRectangle.gd for more code on Rectangle Selection
+			if Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				#If we're creating a new selection
-				if Global.selected_pixels.size() == 0 || !point_in_rectangle_equal(mouse_pos_floored, Global.selection_rectangle.polygon[0], Global.selection_rectangle.polygon[2]):
+				if Global.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
 					if Input.is_action_just_pressed(current_mouse_button):
 						Global.selection_rectangle.polygon[0] = mouse_pos_floored
 						Global.selection_rectangle.polygon[1] = mouse_pos_floored
@@ -146,7 +147,8 @@ func _process(delta) -> void:
 			
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					Global.selected_pixels.append(Vector2(xx, yy))
+					if xx >= location.x && xx < size.x && yy >= location.y && yy < size.y:
+						Global.selected_pixels.append(Vector2(xx, yy))
 			is_making_selection = "None"
 	
 	if sprite_changed_this_frame:
@@ -315,27 +317,24 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int) -> void:
 		var north_limit := location.y
 		var south_limit := location.y + size.y
 		if Global.selected_pixels.size() != 0:
-			west_limit = Global.selection_rectangle.polygon[0].x
-			east_limit = Global.selection_rectangle.polygon[2].x
-			north_limit = Global.selection_rectangle.polygon[0].y
-			south_limit = Global.selection_rectangle.polygon[2].y
+			west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
+			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
+			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
+			south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 		
 		var start_pos_x = pos.x - (brush_size >> 1)
 		var start_pos_y = pos.y - (brush_size >> 1)
 		for cur_pos_x in range(start_pos_x, start_pos_x + brush_size):
 			#layers[current_layer_index][0].set_pixel(cur_pos_x, pos.y, color)
 			for cur_pos_y in range(start_pos_y, start_pos_y + brush_size):
-				if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color: #don't draw the same pixel over and over
-					if point_in_rectangle_equal(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit, north_limit), Vector2(east_limit - 1, south_limit - 1)):
+				if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+					if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color: #don't draw the same pixel over and over
 						layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
 			#layers[current_layer_index][0].set_pixelv(pos, color)
 						sprite_changed_this_frame = true
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
-	
-func point_in_rectangle_equal(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
-	return p.x >= coord1.x && p.y >= coord1.y && p.x <= coord2.x && p.y <= coord2.y
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
@@ -376,12 +375,12 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 		var north_limit := location.y
 		var south_limit := location.y + size.y
 		if Global.selected_pixels.size() != 0:
-			west_limit = Global.selection_rectangle.polygon[0].x
-			east_limit = Global.selection_rectangle.polygon[2].x
-			north_limit = Global.selection_rectangle.polygon[0].y
-			south_limit = Global.selection_rectangle.polygon[2].y
+			west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
+			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
+			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
+			south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 		
-		if !point_in_rectangle_equal(pos, Vector2(west_limit, north_limit), Vector2(east_limit - 1, south_limit - 1)):
+		if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 			return
 		
 		var q = [pos]

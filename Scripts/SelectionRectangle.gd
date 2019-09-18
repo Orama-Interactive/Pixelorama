@@ -44,11 +44,14 @@ func _process(delta) -> void:
 				img.resize(polygon[2].x - polygon[0].x, polygon[2].y - polygon[0].y, 0)
 				img.lock()
 				for i in range(Global.selected_pixels.size()):
-					orig_colors.append(layer.get_pixelv(Global.selected_pixels[i]))
-					var px = Global.selected_pixels[i] - Global.selected_pixels[0]
-					img.set_pixelv(px, orig_colors[i])
-					layer.set_pixelv(Global.selected_pixels[i], Color(0, 0, 0, 0))
-					#print(layer.get_pixelv(Global.selected_pixels[i]))
+					var curr_px = Global.selected_pixels[i]
+					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
+						orig_colors.append(layer.get_pixelv(curr_px))
+						var px = curr_px - Global.selected_pixels[0]
+						img.set_pixelv(px, orig_colors[i])
+						layer.set_pixelv(curr_px, Color(0, 0, 0, 0))
+					else:
+						orig_colors.append(Color(0, 0, 0, 0))
 				Global.canvas.update_texture(Global.canvas.current_layer_index)
 			tex.create_from_image(img, 0)
 			update()
@@ -58,13 +61,13 @@ func _process(delta) -> void:
 	if is_dragging:
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):
 			#Drag
-			if orig_x + mouse_pos_floored.x >= Global.canvas.location.x && diff_x + mouse_pos_floored.x <= Global.canvas.size.x:
-				start_pos.x = orig_x + mouse_pos_floored.x
-				end_pos.x = diff_x + mouse_pos_floored.x
+			#if orig_x + mouse_pos_floored.x >= Global.canvas.location.x && diff_x + mouse_pos_floored.x <= Global.canvas.size.x:
+			start_pos.x = orig_x + mouse_pos_floored.x
+			end_pos.x = diff_x + mouse_pos_floored.x
 			
-			if orig_y + mouse_pos_floored.y >= Global.canvas.location.y && diff_y + mouse_pos_floored.y <= Global.canvas.size.y:
-				start_pos.y = orig_y + mouse_pos_floored.y
-				end_pos.y = diff_y + mouse_pos_floored.y
+			#if orig_y + mouse_pos_floored.y >= Global.canvas.location.y && diff_y + mouse_pos_floored.y <= Global.canvas.size.y:
+			start_pos.y = orig_y + mouse_pos_floored.y
+			end_pos.y = diff_y + mouse_pos_floored.y
 			polygon[0] = start_pos
 			polygon[1] = Vector2(end_pos.x, start_pos.y)
 			polygon[2] = end_pos
@@ -74,11 +77,15 @@ func _process(delta) -> void:
 			#Release Drag
 			is_dragging = false
 			if move_pixels:
-				for i in range(Global.selected_pixels.size()):
+				for i in range(orig_colors.size()):
 					if orig_colors[i].a > 0:
 						var px = polygon[0] + Global.selected_pixels[i] - Global.selected_pixels[0]
-						layer.set_pixelv(px, orig_colors[i])
+						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
+							layer.set_pixelv(px, orig_colors[i])
 				Global.canvas.update_texture(Global.canvas.current_layer_index)
+				img.fill(Color(0, 0, 0, 0))
+				tex.create_from_image(img, 0)
+				update()
 			
 			orig_colors.clear()
 			Global.selected_pixels.clear()
@@ -89,11 +96,10 @@ func _process(delta) -> void:
 	#Handle copy
 	if Input.is_action_just_pressed("copy") && Global.selected_pixels.size() > 0:
 		Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2]))
-		print(Rect2(polygon[0], polygon[2]), Global.image_clipboard.get_size())
-		print(Global.image_clipboard.get_data()[0])
 	
 	#Handle paste
-	if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && !is_dragging:
+	#if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && !is_dragging:
+	if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && Global.image_clipboard.get_size() > Vector2.ZERO:
 		layer.blend_rect(Global.image_clipboard, Rect2(Vector2.ZERO, polygon[2]-polygon[0]), polygon[0])
 		layer.lock()
 		Global.canvas.update_texture(Global.canvas.current_layer_index)

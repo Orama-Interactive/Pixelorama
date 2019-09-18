@@ -3,6 +3,7 @@ extends Control
 var current_save_path := ""
 var current_export_path := ""
 var opensprite_file_selected := false
+var view_menu : PopupMenu
 var pencil_tool
 var eraser_tool
 var fill_tool
@@ -33,14 +34,19 @@ func _ready() -> void:
 		}
 	var edit_menu_items := {
 		"Scale Image" : 0,
-		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
-		"Show Grid" : KEY_MASK_CTRL + KEY_G,
 		"Clear Selection" : 0
+		#"Undo" : KEY_MASK_CTRL + KEY_Z,
+		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
+		}
+	var view_menu_items := {
+		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
+		"Show Grid" : KEY_MASK_CTRL + KEY_G
 		#"Undo" : KEY_MASK_CTRL + KEY_Z,
 		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
 		}
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
+	view_menu = Global.view_menu.get_popup()
 	var i = 0
 	for item in file_menu_items.keys():
 		file_menu.add_item(item, i, file_menu_items[item])
@@ -49,13 +55,19 @@ func _ready() -> void:
 	for item in edit_menu_items.keys():
 		edit_menu.add_item(item, i, edit_menu_items[item])
 		i += 1
+	i = 0
+	for item in view_menu_items.keys():
+		view_menu.add_check_item(item, i, view_menu_items[item])
+		i += 1
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
+	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 	
-	pencil_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Pencil
-	eraser_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Eraser
-	fill_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Fill
-	rectselect_tool = $UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/RectSelect
+	var root = get_tree().get_root()
+	pencil_tool = Global.find_node_by_name(root, "Pencil")
+	eraser_tool = Global.find_node_by_name(root, "Eraser")
+	fill_tool = Global.find_node_by_name(root, "Fill")
+	rectselect_tool = Global.find_node_by_name(root, "RectSelect")
 	
 	pencil_tool.connect("pressed", self, "_on_Tool_pressed", [pencil_tool])
 	eraser_tool.connect("pressed", self, "_on_Tool_pressed", [eraser_tool])
@@ -78,7 +90,7 @@ func _ready() -> void:
 	$ExportSprites.get_vbox().add_child(export_as_single_file)
 	$ExportSprites.get_vbox().add_child(export_vertical_spritesheet)
 	
-	
+
 func _input(event):
 	#Handle tool shortcuts
 	if event.is_action_pressed("right_pencil_tool"):
@@ -97,7 +109,6 @@ func _input(event):
 		_on_Tool_pressed(rectselect_tool, false, false)
 	elif event.is_action_pressed("left_rectangle_select_tool"):
 		_on_Tool_pressed(rectselect_tool, false, true)
-
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:
@@ -138,21 +149,39 @@ func edit_menu_id_pressed(id : int) -> void:
 		0: #Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
-		1: #Tile mode
-			Global.tile_mode = !Global.tile_mode
-		2: #Show grid
-			Global.draw_grid = !Global.draw_grid
-		3: #Clear selection
+		1: #Clear selection
 			Global.selection_rectangle.polygon[0] = Vector2.ZERO
 			Global.selection_rectangle.polygon[1] = Vector2.ZERO
 			Global.selection_rectangle.polygon[2] = Vector2.ZERO
 			Global.selection_rectangle.polygon[3] = Vector2.ZERO
 			Global.selected_pixels.clear()
 
+func view_menu_id_pressed(id : int) -> void:
+	match id:
+		0: #Tile mode
+			Global.tile_mode = !Global.tile_mode
+			view_menu.set_item_checked(0, Global.tile_mode)
+		1: #Show grid
+			Global.draw_grid = !Global.draw_grid
+			view_menu.set_item_checked(1, Global.draw_grid)
+
 func _on_CreateNewImage_confirmed() -> void:
-	var width = float($CreateNewImage/VBoxContainer/WidthCont/WidthValue.value)
-	var height = float($CreateNewImage/VBoxContainer/HeightCont/HeightValue.value)
-	new_canvas(Vector2(width, height).floor())
+	var width := float($CreateNewImage/VBoxContainer/WidthCont/WidthValue.value)
+	var height := float($CreateNewImage/VBoxContainer/HeightCont/HeightValue.value)
+	var fill_color : Color = $CreateNewImage/VBoxContainer/FillColor/FillColor.color
+	clear_canvases()
+	Global.canvas = load("res://Canvas.tscn").instance()
+	Global.canvas.size = Vector2(width, height).floor()
+	
+	Global.canvas_parent.add_child(Global.canvas)
+	Global.canvases.append(Global.canvas)
+	Global.current_frame = 0
+	if fill_color.a > 0:
+		Global.canvas.layers[0][0].fill(fill_color)
+		Global.canvas.layers[0][0].lock()
+		Global.canvas.update_texture(0)
+	Global.remove_frame_button.disabled = true
+	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 func _on_OpenSprite_file_selected(path) -> void:
 	var file := File.new()
@@ -295,17 +324,6 @@ func clear_canvases() -> void:
 		if child is Canvas:
 			child.queue_free()
 	Global.canvases.clear()
-
-func new_canvas(size : Vector2) -> void:
-	clear_canvases()
-	Global.canvas = load("res://Canvas.tscn").instance()
-	Global.canvas.size = size
-	
-	Global.canvas_parent.add_child(Global.canvas)
-	Global.canvases.append(Global.canvas)
-	Global.current_frame = 0
-	Global.remove_frame_button.disabled = true
-	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 func _on_ExportSprites_file_selected(path : String) -> void:
 	current_export_path = path

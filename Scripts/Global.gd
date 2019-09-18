@@ -33,6 +33,7 @@ var image_clipboard : Image
 
 var file_menu : MenuButton
 var edit_menu : MenuButton
+var view_menu : MenuButton
 var left_indicator : Sprite
 var right_indicator : Sprite
 var left_color_picker : ColorPickerButton
@@ -71,6 +72,7 @@ func _ready() -> void:
 	
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
+	view_menu = find_node_by_name(root, "ViewMenu")
 	left_indicator = find_node_by_name(root, "LeftIndicator")
 	right_indicator = find_node_by_name(root, "RightIndicator")
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")

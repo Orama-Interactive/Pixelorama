@@ -36,7 +36,6 @@ margin_bottom = 294.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-editor/display_folded = true
 margin_right = 320.0
 margin_bottom = 20.0
 
@@ -54,6 +53,14 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 text = "Edit"
+
+[node name="ViewMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
+margin_left = 79.0
+margin_right = 121.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 2 )
+text = "View"
 
 [node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 margin_top = 24.0
@@ -120,7 +127,6 @@ margin_right = 320.0
 margin_bottom = 302.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_top = 306.0
 margin_right = 320.0
 margin_bottom = 600.0
@@ -272,7 +278,6 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 
 [node name="ButtonContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-editor/display_folded = true
 margin_right = 536.0
 margin_bottom = 24.0
 
@@ -320,7 +325,8 @@ margin_right = 356.0
 margin_bottom = 24.0
 hint_tooltip = "How many frames per second should the animation preview be? The more FPS, the faster the animation plays."
 mouse_default_cursor_shape = 2
-min_value = 1.0
+min_value = 0.01
+step = 0.01
 value = 1.0
 suffix = "FPS"
 
@@ -567,7 +573,7 @@ margin_bottom = 70.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 78.0
+margin_bottom = 102.0
 
 [node name="ImageSize" type="Label" parent="CreateNewImage/VBoxContainer"]
 margin_right = 184.0
@@ -575,6 +581,7 @@ margin_bottom = 14.0
 text = "Image Size"
 
 [node name="WidthCont" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
+editor/display_folded = true
 margin_top = 18.0
 margin_right = 184.0
 margin_bottom = 42.0
@@ -613,6 +620,24 @@ min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
+
+[node name="FillColor" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
+margin_top = 74.0
+margin_right = 184.0
+margin_bottom = 94.0
+
+[node name="FillColorLabel" type="Label" parent="CreateNewImage/VBoxContainer/FillColor"]
+margin_top = 3.0
+margin_right = 94.0
+margin_bottom = 17.0
+text = "Fill with color: "
+
+[node name="FillColor" type="ColorPickerButton" parent="CreateNewImage/VBoxContainer/FillColor"]
+margin_left = 98.0
+margin_right = 162.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 64, 20 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
