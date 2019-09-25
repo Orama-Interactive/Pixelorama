@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/BrushButton.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/pixel.png" type="Texture" id=2]
+
+[node name="BrushButton" type="Button"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+button_mask = 3
+script = ExtResource( 1 )
+
+[node name="BrushTexture" type="TextureRect" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 34.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+[connection signal="pressed" from="." to="." method="_on_BrushButton_pressed"]

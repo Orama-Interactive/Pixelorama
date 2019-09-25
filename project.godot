@@ -37,6 +37,7 @@ Global="*res://Scripts/Global.gd"
 
 [debug]
 
+gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
 
 [input]

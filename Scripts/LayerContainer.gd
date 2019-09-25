@@ -14,7 +14,7 @@ func _ready() -> void:
 # warning-ignore:unused_argument
 func _process(delta) -> void:
 	var mouse_pos := get_local_mouse_position() + rect_position
-	if point_in_rectangle(mouse_pos, rect_position, rect_position + rect_size) && !visibility_toggled:
+	if Rect2(rect_position, rect_position + rect_size).has_point(mouse_pos) && !visibility_toggled:
 		if Input.is_action_just_pressed("left_mouse"):
 			Global.canvas.current_layer_index = i
 			changed_selection()
@@ -47,9 +47,6 @@ func changed_selection() -> void:
 			else:
 				child.currently_selected = false
 				child.get_stylebox("panel").bg_color = Color("3d3b45")
-
-func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
-	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
 
 func _on_VisibilityButton_pressed() -> void:
 	if Global.canvas.layers[i][3]:

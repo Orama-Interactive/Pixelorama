@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Main Theme.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/Graphics/left.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=4]
-[ext_resource path="res://Canvas.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=7]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=10]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -17,8 +20,10 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
+custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="UI"]
+editor/display_folded = true
 margin_right = 320.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 320, 0 )
@@ -32,7 +37,7 @@ size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
 margin_right = 320.0
-margin_bottom = 294.0
+margin_bottom = 270.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
@@ -62,7 +67,16 @@ mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 text = "View"
 
+[node name="HelpMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
+margin_left = 125.0
+margin_right = 167.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 2 )
+text = "Help"
+
 [node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_top = 24.0
 margin_right = 320.0
 margin_bottom = 44.0
@@ -122,19 +136,20 @@ button_mask = 3
 text = "RectSelect"
 
 [node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 298.0
+margin_top = 274.0
 margin_right = 320.0
-margin_bottom = 302.0
+margin_bottom = 278.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
-margin_top = 306.0
+editor/display_folded = true
+margin_top = 282.0
 margin_right = 320.0
-margin_bottom = 600.0
+margin_bottom = 552.0
 size_flags_vertical = 3
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
 margin_right = 154.0
-margin_bottom = 294.0
+margin_bottom = 270.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
@@ -161,6 +176,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="BrushSize" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
 margin_top = 82.0
 margin_right = 154.0
 margin_bottom = 106.0
@@ -180,15 +196,51 @@ min_value = 1.0
 value = 1.0
 suffix = "px"
 
+[node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 110.0
+margin_right = 154.0
+margin_bottom = 124.0
+text = "Brush's color from"
+
+[node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 128.0
+margin_right = 154.0
+margin_bottom = 144.0
+
+[node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+margin_top = 1.0
+margin_right = 37.0
+margin_bottom = 15.0
+rect_pivot_offset = Vector2( -90, -47 )
+text = "Brush"
+
+[node name="LeftInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+margin_left = 41.0
+margin_right = 117.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+ticks_on_borders = true
+
+[node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+margin_left = 121.0
+margin_top = 1.0
+margin_right = 154.0
+margin_bottom = 15.0
+rect_pivot_offset = Vector2( -90, -47 )
+text = "Color"
+
 [node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
 margin_left = 158.0
 margin_right = 162.0
-margin_bottom = 294.0
+margin_bottom = 270.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
 margin_left = 166.0
 margin_right = 320.0
-margin_bottom = 294.0
+margin_bottom = 270.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
@@ -233,13 +285,107 @@ min_value = 1.0
 value = 1.0
 suffix = "px"
 
+[node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 110.0
+margin_right = 154.0
+margin_bottom = 124.0
+text = "Brush's color from"
+
+[node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 128.0
+margin_right = 154.0
+margin_bottom = 144.0
+
+[node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+margin_top = 1.0
+margin_right = 37.0
+margin_bottom = 15.0
+rect_pivot_offset = Vector2( -90, -47 )
+text = "Brush"
+
+[node name="RightInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+margin_left = 41.0
+margin_right = 117.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+ticks_on_borders = true
+
+[node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+margin_left = 121.0
+margin_top = 1.0
+margin_right = 154.0
+margin_bottom = 15.0
+rect_pivot_offset = Vector2( -90, -47 )
+text = "Color"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ToolPanel/Tools"]
+margin_top = 556.0
+margin_right = 320.0
+margin_bottom = 560.0
+
+[node name="BrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
+margin_top = 564.0
+margin_right = 320.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+scroll_vertical_enabled = false
+
+[node name="BrushHBoxContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/BrushesContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+
+[node name="PixelBrushButton" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer" instance=ExtResource( 5 )]
+
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="UI"]
-margin_left = 324.0
-margin_right = 860.0
+margin_left = 320.0
+margin_right = 864.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 
-[node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
+margin_right = 544.0
+margin_bottom = 464.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline/HBoxContainer"]
+margin_right = 544.0
+margin_bottom = 464.0
+mouse_default_cursor_shape = 3
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer"]
+size = Vector2( 544, 464 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Canvas" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 6 )]
+
+[node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 7 )
+
+[node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport"]
+z_index = 1
+color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+script = ExtResource( 8 )
+
+[node name="ViewportSeparator" type="VSeparator" parent="UI/CanvasAndTimeline/HBoxContainer"]
+visible = false
+margin_left = 532.0
+margin_right = 536.0
+margin_bottom = 464.0
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="UI/CanvasAndTimeline/HBoxContainer"]
+visible = false
+margin_left = 270.0
 margin_right = 536.0
 margin_bottom = 464.0
 mouse_default_cursor_shape = 3
@@ -247,27 +393,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/ViewportContainer"]
-size = Vector2( 536, 464 )
+[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2"]
+size = Vector2( 266, 464 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
+script = ExtResource( 9 )
 
-[node name="Canvas" parent="UI/CanvasAndTimeline/ViewportContainer/Viewport" instance=ExtResource( 5 )]
-
-[node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/ViewportContainer/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 6 )
-
-[node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/ViewportContainer/Viewport"]
-z_index = 1
-color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
-polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 7 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_top = 468.0
-margin_right = 536.0
+margin_right = 544.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 0, 132 )
 size_flags_horizontal = 3
@@ -278,12 +418,12 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 
 [node name="ButtonContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_right = 536.0
+margin_right = 544.0
 margin_bottom = 24.0
 
 [node name="AnimationButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer"]
-margin_left = 90.0
-margin_right = 446.0
+margin_left = 94.0
+margin_right = 450.0
 margin_bottom = 24.0
 
 [node name="LoopLabel" type="Label" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
@@ -325,25 +465,25 @@ margin_right = 356.0
 margin_bottom = 24.0
 hint_tooltip = "How many frames per second should the animation preview be? The more FPS, the faster the animation plays."
 mouse_default_cursor_shape = 2
-min_value = 0.01
-step = 0.01
+min_value = 0.1
+step = 0.1
 value = 1.0
 suffix = "FPS"
 
 [node name="HSeparator" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 margin_top = 28.0
-margin_right = 536.0
+margin_right = 544.0
 margin_bottom = 32.0
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 editor/display_folded = true
 margin_top = 36.0
-margin_right = 536.0
+margin_right = 544.0
 margin_bottom = 56.0
 
 [node name="FrameButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer"]
-margin_left = 209.0
-margin_right = 326.0
+margin_left = 213.0
+margin_right = 330.0
 margin_bottom = 20.0
 
 [node name="AddFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
@@ -392,12 +532,12 @@ text = "Cl"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 margin_top = 60.0
-margin_right = 536.0
+margin_right = 544.0
 margin_bottom = 64.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 margin_top = 68.0
-margin_right = 536.0
+margin_right = 544.0
 margin_bottom = 132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -414,11 +554,12 @@ rect_min_size = Vector2( 160, 0 )
 [node name="LayersAndMisc" type="VBoxContainer" parent="UI/LayerPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
 margin_right = 160.0
-margin_bottom = 375.0
+margin_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -498,15 +639,15 @@ disabled = true
 text = "M"
 
 [node name="HSeparator" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 379.0
+margin_top = 385.0
 margin_right = 160.0
-margin_bottom = 383.0
+margin_bottom = 389.0
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
-margin_top = 387.0
+margin_top = 392.0
 margin_right = 160.0
-margin_bottom = 520.0
+margin_bottom = 525.0
 
 [node name="OnionSkinning" type="Label" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
 margin_right = 160.0
@@ -537,32 +678,42 @@ margin_bottom = 133.0
 text = "Blue-Red Mode"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 524.0
+margin_top = 528.0
 margin_right = 160.0
-margin_bottom = 528.0
+margin_bottom = 532.0
 
 [node name="CursorPosition" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 532.0
+margin_top = 535.0
 margin_right = 160.0
-margin_bottom = 546.0
+margin_bottom = 549.0
 text = "[64x64]"
 
 [node name="ZoomLevel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 550.0
+margin_top = 552.0
 margin_right = 160.0
-margin_bottom = 564.0
+margin_bottom = 566.0
 text = "Zoom: x7.81"
 
 [node name="CurrentFrame" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 568.0
+margin_top = 569.0
 margin_right = 160.0
-margin_bottom = 582.0
+margin_bottom = 583.0
 text = "Current frame: 1/1"
 
 [node name="EmptyLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
 margin_top = 586.0
 margin_right = 160.0
 margin_bottom = 600.0
+
+[node name="SplitScreenButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -184.0
+margin_right = -164.0
+margin_bottom = 20.0
+size_flags_vertical = 0
+toggle_mode = true
+text = "<"
 
 [node name="CreateNewImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -769,6 +920,76 @@ text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
 
+[node name="AboutDialog" type="AcceptDialog" parent="."]
+editor/display_folded = true
+margin_right = 284.0
+margin_bottom = 186.0
+window_title = "About Pixelorama"
+script = ExtResource( 10 )
+
+[node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 276.0
+margin_bottom = 150.0
+
+[node name="Pixelorama" type="Label" parent="AboutDialog/AboutUI"]
+margin_right = 339.0
+margin_bottom = 31.0
+text = "Pixelorama v0.3
+"
+align = 1
+
+[node name="MadeBy" type="Label" parent="AboutDialog/AboutUI"]
+margin_top = 35.0
+margin_right = 339.0
+margin_bottom = 83.0
+text = "Your Free and Open Source Sprite Editor
+Developed by Orama Interactive
+"
+align = 1
+
+[node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
+margin_top = 87.0
+margin_right = 339.0
+margin_bottom = 107.0
+
+[node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
+margin_left = 35.0
+margin_right = 303.0
+margin_bottom = 20.0
+
+[node name="Website" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
+margin_right = 65.0
+margin_bottom = 20.0
+text = "Website"
+
+[node name="GitHub" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
+margin_left = 69.0
+margin_right = 162.0
+margin_bottom = 20.0
+text = "GitHub Repo"
+
+[node name="Donate" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
+margin_left = 166.0
+margin_right = 224.0
+margin_bottom = 20.0
+text = "Donate"
+
+[node name="Blog" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
+margin_left = 228.0
+margin_right = 268.0
+margin_bottom = 20.0
+text = "Blog"
+
+[node name="Copyright" type="Label" parent="AboutDialog/AboutUI"]
+margin_top = 111.0
+margin_right = 339.0
+margin_bottom = 142.0
+text = "
+Copyright 2019 - Orama Interactive"
+align = 1
+
 [node name="AnimationTimer" type="Timer" parent="."]
 [connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
@@ -778,8 +999,10 @@ selected = 0
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
-[connection signal="mouse_entered" from="UI/CanvasAndTimeline/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasAndTimeline/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
@@ -798,6 +1021,7 @@ selected = 0
 [connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
@@ -810,4 +1034,9 @@ selected = 0
 [connection signal="popup_hide" from="ExportSprites" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
+[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
+[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]
+[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Donate" to="AboutDialog" method="_on_Donate_pressed"]
+[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Blog" to="AboutDialog" method="_on_Blog_pressed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

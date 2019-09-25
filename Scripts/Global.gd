@@ -18,28 +18,34 @@ var draw_grid := false
 var canvases := []
 var canvas : Canvas
 var canvas_parent : Node
+var second_viewport : ViewportContainer
+var viewport_separator : VSeparator
+var split_screen_button : Button
 # warning-ignore:unused_class_variable
 var left_square_indicator_visible := true
 # warning-ignore:unused_class_variable
 var right_square_indicator_visible := false
-# warning-ignore:unused_class_variable
-var left_brush_size := 1
-# warning-ignore:unused_class_variable
-var right_brush_size := 1
 var camera : Camera2D
+var camera2 : Camera2D
 var selection_rectangle : Polygon2D
+# warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
 
 var file_menu : MenuButton
 var edit_menu : MenuButton
 var view_menu : MenuButton
+var help_menu : MenuButton
 var left_indicator : Sprite
 var right_indicator : Sprite
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
 var left_brush_size_edit : SpinBox
 var right_brush_size_edit : SpinBox
+var left_interpolate_slider : HSlider
+var right_interpolate_slider : HSlider
+
+
 var loop_animation_button : Button
 var play_forward : Button
 var play_backwards : Button
@@ -60,12 +66,34 @@ var current_left_tool := "Pencil"
 # warning-ignore:unused_class_variable
 var current_right_tool := "Eraser"
 
+#Brushes
+enum BRUSH_TYPES {PIXEL, CUSTOM}
+# warning-ignore:unused_class_variable
+var left_brush_size := 1
+# warning-ignore:unused_class_variable
+var right_brush_size := 1
+# warning-ignore:unused_class_variable
+var current_left_brush_type = BRUSH_TYPES.PIXEL
+# warning-ignore:unused_class_variable
+var current_right_brush_type = BRUSH_TYPES.PIXEL
+# warning-ignore:unused_class_variable
+var custom_brushes := []
+# warning-ignore:unused_class_variable
+var custom_left_brush_index := -1
+# warning-ignore:unused_class_variable
+var custom_right_brush_index := -1
+
+
 func _ready() -> void:
 	var root = get_tree().get_root()
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
 	canvas_parent = canvas.get_parent()
+	second_viewport = find_node_by_name(root, "ViewportContainer2")
+	viewport_separator = find_node_by_name(root, "ViewportSeparator")
+	split_screen_button = find_node_by_name(root, "SplitScreenButton")
 	camera = find_node_by_name(canvas_parent, "Camera2D")
+	camera2 = find_node_by_name(canvas_parent.get_parent().get_parent(), "Camera2D2")
 	
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	image_clipboard = Image.new()
@@ -73,12 +101,15 @@ func _ready() -> void:
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
 	view_menu = find_node_by_name(root, "ViewMenu")
+	help_menu = find_node_by_name(root, "HelpMenu")
 	left_indicator = find_node_by_name(root, "LeftIndicator")
 	right_indicator = find_node_by_name(root, "RightIndicator")
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
 	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
 	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
+	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateFactor")
+	right_interpolate_slider = find_node_by_name(root, "RightInterpolateFactor")
 	
 	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")
@@ -134,3 +165,13 @@ func handle_layer_order_buttons() -> void:
 func set_current_frame_label(value) -> void:
 	current_frame = value
 	current_frame_label.text = "Current frame: %s/%s" % [str(current_frame + 1), canvases.size()]
+
+func create_brush_button(brush_img : Image) -> void:
+	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
+	brush_button.brush_type = Global.BRUSH_TYPES.CUSTOM
+	brush_button.custom_brush_index = Global.custom_brushes.size() - 1
+	var brush_tex := ImageTexture.new()
+	brush_tex.create_from_image(brush_img, 0)
+	brush_button.get_child(0).texture = brush_tex
+	var hbox_container := find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
+	hbox_container.add_child(brush_button)

@@ -34,6 +34,7 @@ func _ready() -> void:
 		}
 	var edit_menu_items := {
 		"Scale Image" : 0,
+		"Crop Image" : 0,
 		"Clear Selection" : 0
 		#"Undo" : KEY_MASK_CTRL + KEY_Z,
 		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
@@ -41,12 +42,15 @@ func _ready() -> void:
 	var view_menu_items := {
 		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
 		"Show Grid" : KEY_MASK_CTRL + KEY_G
-		#"Undo" : KEY_MASK_CTRL + KEY_Z,
-		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
+		}
+	var help_menu_items := {
+			"About Pixelorama" : 0
 		}
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	view_menu = Global.view_menu.get_popup()
+	var help_menu : PopupMenu = Global.help_menu.get_popup()
+	
 	var i = 0
 	for item in file_menu_items.keys():
 		file_menu.add_item(item, i, file_menu_items[item])
@@ -59,9 +63,15 @@ func _ready() -> void:
 	for item in view_menu_items.keys():
 		view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
+	i = 0
+	for item in help_menu_items.keys():
+		help_menu.add_item(item, i, help_menu_items[item])
+		i += 1
+	
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 	
 	var root = get_tree().get_root()
 	pencil_tool = Global.find_node_by_name(root, "Pencil")
@@ -149,7 +159,37 @@ func edit_menu_id_pressed(id : int) -> void:
 		0: #Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
-		1: #Clear selection
+		1: #Crop Image
+			#Use first layer as a starting rectangle
+			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
+			#However, if first layer is empty, loop through all layers until we find one that isn't
+			var i := 0
+			while(i < Global.canvas.layers.size() - 1 && Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
+				i += 1
+				used_rect = Global.canvas.layers[i][0].get_used_rect()
+			
+			#Merge all layers with content
+			for j in range(Global.canvas.layers.size() - 1, i, -1):
+					if Global.canvas.layers[j][0].get_used_rect() != Rect2(0, 0, 0, 0):
+						used_rect = used_rect.merge(Global.canvas.layers[j][0].get_used_rect())
+			
+			#If no layer has any content, just return
+			if used_rect == Rect2(0, 0, 0, 0):
+				return
+			
+			#Loop through all the layers to crop them
+			for j in range(Global.canvas.layers.size() - 1, -1, -1):
+				var sprite := Image.new()
+				sprite = Global.canvas.layers[j][0].get_rect(used_rect)
+				Global.canvas.layers[j][0] = sprite
+				Global.canvas.layers[j][0].lock()
+				Global.canvas.update_texture(j)
+			
+			var width = Global.canvas.layers[0][0].get_width()
+			var height = Global.canvas.layers[0][0].get_height()
+			Global.canvas.size = Vector2(width, height).floor()
+			Global.canvas.camera_zoom()
+		2: #Clear selection
 			Global.selection_rectangle.polygon[0] = Vector2.ZERO
 			Global.selection_rectangle.polygon[1] = Vector2.ZERO
 			Global.selection_rectangle.polygon[2] = Vector2.ZERO
@@ -165,12 +205,18 @@ func view_menu_id_pressed(id : int) -> void:
 			Global.draw_grid = !Global.draw_grid
 			view_menu.set_item_checked(1, Global.draw_grid)
 
+func help_menu_id_pressed(id : int) -> void:
+	match id:
+		0: #About Pixelorama
+			$AboutDialog.popup_centered()
+			Global.can_draw = false
+
 func _on_CreateNewImage_confirmed() -> void:
 	var width := float($CreateNewImage/VBoxContainer/WidthCont/WidthValue.value)
 	var height := float($CreateNewImage/VBoxContainer/HeightCont/HeightValue.value)
 	var fill_color : Color = $CreateNewImage/VBoxContainer/FillColor/FillColor.color
 	clear_canvases()
-	Global.canvas = load("res://Canvas.tscn").instance()
+	Global.canvas = load("res://Prefabs/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
 	
 	Global.canvas_parent.add_child(Global.canvas)
@@ -187,12 +233,15 @@ func _on_OpenSprite_file_selected(path) -> void:
 	var file := File.new()
 	var err := file.open(path, File.READ)
 	if err == 0:
+		var current_version : String = ProjectSettings.get_setting("application/config/Version")
 		var version := file.get_line()
+		if current_version != version:
+			OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
 		var frame := 0
 		var frame_line := file.get_line()
 		clear_canvases()
 		while frame_line == "--":
-			var canvas : Canvas = load("res://Canvas.tscn").instance()
+			var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 			Global.canvas = canvas
 			var width := file.get_16()
 			var height := file.get_16()
@@ -233,6 +282,18 @@ func _on_OpenSprite_file_selected(path) -> void:
 		for color in right_palette:
 			Global.right_color_picker.get_picker().add_preset(color)
 		
+		#Load custom brushes
+		var brush_line := file.get_line()
+		while brush_line == "/":
+			var b_width := file.get_16()
+			var b_height := file.get_16()
+			var buffer := file.get_buffer(b_width * b_height * 4)
+			var image := Image.new()
+			image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+			Global.custom_brushes.append(image)
+			Global.create_brush_button(image)
+			brush_line = file.get_line()
+		
 	file.close()
 
 func _on_SaveSprite_file_selected(path) -> void:
@@ -264,6 +325,13 @@ func _on_SaveSprite_file_selected(path) -> void:
 		file.store_8(right_brush_size)
 		file.store_var(left_palette)
 		file.store_var(right_palette)
+		#Save custom brushes
+		for brush in Global.custom_brushes:
+			file.store_line("/")
+			file.store_16(brush.get_size().x)
+			file.store_16(brush.get_size().y)
+			file.store_buffer(brush.get_data())
+		file.store_line("END_BRUSHES")
 	file.close()
 
 func _on_ImportSprites_files_selected(paths) -> void:
@@ -279,7 +347,7 @@ func _on_ImportSprites_files_selected(paths) -> void:
 		var err = image.load(path)
 		if err == OK:
 			opensprite_file_selected = true
-			var canvas : Canvas = load("res://Canvas.tscn").instance()
+			var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 			canvas.size = image.get_size()
 			image.convert(Image.FORMAT_RGBA8)
 			image.lock()
@@ -488,7 +556,7 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size = new_size
 
 func _on_AddFrame_pressed() -> void:
-	var canvas = load("res://Canvas.tscn").instance()
+	var canvas = load("res://Prefabs/Canvas.tscn").instance()
 	canvas.size = Global.canvas.size
 	canvas.frame = Global.canvases.size()
 	for canvas in Global.canvases:
@@ -524,7 +592,7 @@ func _on_RemoveFrame_pressed() -> void:
 
 
 func _on_CloneFrame_pressed() -> void:
-	var canvas = load("res://Canvas.tscn").instance()
+	var canvas = load("res://Prefabs/Canvas.tscn").instance()
 	canvas.size = Global.canvas.size
 	#canvas.layers = Global.canvas.layers.duplicate(true)
 	for layer in Global.canvas.layers:
@@ -667,3 +735,13 @@ func _on_FutureOnionSkinning_value_changed(value) -> void:
 
 func _on_BlueRedMode_toggled(button_pressed) -> void:
 	Global.onion_skinning_blue_red = button_pressed
+
+func _on_SplitScreenButton_toggled(button_pressed) -> void:
+	if button_pressed:
+		Global.split_screen_button.text = ">"
+		Global.viewport_separator.visible = true
+		Global.second_viewport.visible = true
+	else:
+		Global.split_screen_button.text = "<"
+		Global.viewport_separator.visible = false
+		Global.second_viewport.visible = false

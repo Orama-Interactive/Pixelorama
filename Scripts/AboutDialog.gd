@@ -1,0 +1,19 @@
+extends AcceptDialog
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var current_version : String = ProjectSettings.get_setting("application/config/Version")
+	$AboutUI/Pixelorama.text = "Pixelorama %s\n" % current_version
+
+func _on_Website_pressed() -> void:
+	OS.shell_open("http://oramagamestudios.com/")
+
+func _on_GitHub_pressed() -> void:
+	OS.shell_open("https://github.com/OverloadedOrama/Pixelorama")
+
+func _on_Donate_pressed() -> void:
+	OS.shell_open("https://www.paypal.com/paypalme2/OverloadedOrama")
+	OS.shell_open("https://ko-fi.com/overloadedorama")
+
+func _on_Blog_pressed() -> void:
+	OS.shell_open("https://functionoverload590613498.wordpress.com/")

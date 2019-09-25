@@ -91,11 +91,18 @@ func _process(delta) -> void:
 			Global.selected_pixels.clear()
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					Global.selected_pixels.append(Vector2(xx, yy))	
+					Global.selected_pixels.append(Vector2(xx, yy))
 	
 	#Handle copy
 	if Input.is_action_just_pressed("copy") && Global.selected_pixels.size() > 0:
-		Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2]))
+		Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
+		#And save as custom brush
+		var brush_img := Image.new()
+		brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
+		brush_img = brush_img.get_rect(brush_img.get_used_rect()) #save only the visible pixels
+		Global.custom_brushes.append(brush_img)
+		
+		Global.create_brush_button(brush_img)
 	
 	#Handle paste
 	#if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && !is_dragging:
