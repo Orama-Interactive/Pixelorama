@@ -1,2 +1,5 @@
+# Godot-specific ignores
+.import/
+
 Scripts/Old/
 Assets/Graphics/Tools/
