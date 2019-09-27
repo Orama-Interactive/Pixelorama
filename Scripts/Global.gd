@@ -82,6 +82,14 @@ var custom_brushes := []
 var custom_left_brush_index := -1
 # warning-ignore:unused_class_variable
 var custom_right_brush_index := -1
+# warning-ignore:unused_class_variable
+var custom_left_brush_image : Image
+# warning-ignore:unused_class_variable
+var custom_right_brush_image : Image
+# warning-ignore:unused_class_variable
+var custom_left_brush_texture := ImageTexture.new()
+# warning-ignore:unused_class_variable
+var custom_right_brush_texture := ImageTexture.new()
 
 
 func _ready() -> void:
@@ -168,10 +176,43 @@ func set_current_frame_label(value) -> void:
 
 func create_brush_button(brush_img : Image) -> void:
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
-	brush_button.brush_type = Global.BRUSH_TYPES.CUSTOM
-	brush_button.custom_brush_index = Global.custom_brushes.size() - 1
+	brush_button.brush_type = BRUSH_TYPES.CUSTOM
+	brush_button.custom_brush_index = custom_brushes.size() - 1
 	var brush_tex := ImageTexture.new()
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
 	var hbox_container := find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
 	hbox_container.add_child(brush_button)
+	
+func update_left_custom_brush() -> void:
+	var custom_brush := Image.new()
+	custom_brush.copy_from(custom_brushes[custom_left_brush_index])
+	var custom_brush_size = custom_brush.get_size()
+	custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
+	custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
+	custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
+	
+func update_right_custom_brush() -> void:
+	var custom_brush := Image.new()
+	custom_brush.copy_from(custom_brushes[custom_right_brush_index])
+	var custom_brush_size = custom_brush.get_size()
+	custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
+	custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value)
+	custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
+
+func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
+	var blended_image := Image.new()
+	blended_image.copy_from(image)
+	var size := image.get_size()
+	blended_image.lock()
+	for xx in size.x:
+		for yy in size.y:
+			if color.a > 0: #If it's the pencil
+				var current_color := blended_image.get_pixel(xx, yy)
+				if current_color.a > 0:
+					#var blended_color = current_color.blend(color)
+					var new_color := current_color.linear_interpolate(color, interpolate_factor)
+					blended_image.set_pixel(xx, yy, new_color)
+			else: #If color is transparent - if it's the eraser
+				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
+	return blended_image

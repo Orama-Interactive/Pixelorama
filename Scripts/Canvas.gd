@@ -245,17 +245,30 @@ func _draw() -> void:
 			draw_line(Vector2(location.x, y), Vector2(size.x, y), Color.black, true)
 	
 	#Draw rectangle to indicate the pixel currently being hovered on
-	var mouse_pos := get_local_mouse_position() - location
+	var mouse_pos := get_local_mouse_position() + location
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
 		if Global.left_square_indicator_visible:
-			var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
-			var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
-			draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+			match Global.current_left_brush_type:
+				Global.BRUSH_TYPES.PIXEL:
+					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
+					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
+					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+				Global.BRUSH_TYPES.CUSTOM:
+					var custom_brush_size = Global.custom_left_brush_image.get_size()
+					var dst : Vector2 = mouse_pos - custom_brush_size / 4
+					draw_texture(Global.custom_left_brush_texture, dst)
+		
 		if Global.right_square_indicator_visible:
-			var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
-			var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
-			draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+			match Global.current_right_brush_type:
+				Global.BRUSH_TYPES.PIXEL:
+					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
+					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
+					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+				Global.BRUSH_TYPES.CUSTOM:
+					var custom_brush_size = Global.custom_right_brush_image.get_size()
+					var dst : Vector2 = mouse_pos - custom_brush_size / 4
+					draw_texture(Global.custom_right_brush_texture, dst)
 
 func generate_layer_panels() -> void:
 	for child in Global.vbox_layer_container.get_children():
@@ -295,33 +308,33 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 		var brush_size := 1
 		var brush_type = Global.BRUSH_TYPES.PIXEL
 		var brush_index := -1
-		var interpolate_factor := 0.5
+		var custom_brush_image : Image
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
 			brush_type = Global.current_left_brush_type
 			brush_index = Global.custom_left_brush_index
-			interpolate_factor = Global.left_interpolate_slider.value
+			custom_brush_image = Global.custom_left_brush_image
 		elif current_mouse_button == "right_mouse":
 			brush_size = Global.right_brush_size
 			brush_type = Global.current_right_brush_type
 			brush_index = Global.custom_right_brush_index
-			interpolate_factor = Global.right_interpolate_slider.value
+			custom_brush_image = Global.custom_right_brush_image
 			
 		if is_making_line:
-			fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, interpolate_factor)
+			fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image)
 			is_making_line = false
 			line_2d.queue_free()
 		else:
 			if point_in_rectangle(mouse_pos, location, location + size):
 				mouse_inside_canvas = true
 				#Draw
-				draw_pixel(mouse_pos, color, brush_size, brush_type, brush_index, interpolate_factor)
-				fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, interpolate_factor) #Fill the gaps
+				draw_pixel(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image)
+				fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image) #Fill the gaps
 			#If mouse is not inside bounds but it used to be, fill the gaps
 			elif point_in_rectangle(previous_mouse_pos, location, location + size):
-				fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, interpolate_factor)
+				fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image)
 
-func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int, brush_index : int, interpolate_factor : float) -> void:
+func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int, brush_index : int, custom_brush_image : Image) -> void:
 	if Global.can_draw && Global.has_focus && Global.current_frame == frame:
 		var west_limit := location.x
 		var east_limit := location.x + size.x
@@ -352,26 +365,26 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 								sprite_changed_this_frame = true
 			
 			Global.BRUSH_TYPES.CUSTOM:
-				var custom_brush := Image.new()
-				custom_brush.copy_from(Global.custom_brushes[brush_index])
-				var custom_brush_blended := blend_image_with_color(custom_brush, color, interpolate_factor)
-				var custom_brush_size = custom_brush_blended.get_size()
-				custom_brush_blended.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
-				custom_brush_size = custom_brush_blended.get_size()
+				var custom_brush_size = custom_brush_image.get_size()
 				var dst : Vector2 = pos - custom_brush_size / 4
 				var src_rect := Rect2(Vector2.ZERO, custom_brush_size)
 				#src_rect = src_rect.clip(Rect2(west_limit - dst.x, north_limit - dst.y, east_limit - custom_brush_size.x, south_limit - custom_brush_size.y))
 				
 				if color.a > 0: #If it's the pencil
-					layers[current_layer_index][0].blend_rect(custom_brush_blended, src_rect, dst)
+					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
 				else: #if it's transparent - if it's the eraser
+					var custom_brush := Image.new()
+					custom_brush.copy_from(Global.custom_brushes[brush_index])
+					custom_brush_size = custom_brush.get_size()
+					custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
+					var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)
 					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, dst)
 				layers[current_layer_index][0].lock()
 				update_texture(current_layer_index)
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func fill_gaps(mouse_pos : Vector2, color : Color, brush_size : int, brush_type : int, brush_index : int, interpolate_factor : float) -> void:
+func fill_gaps(mouse_pos : Vector2, color : Color, brush_size : int, brush_type : int, brush_index : int, custom_brush_image : Image) -> void:
 	var previous_mouse_pos_floored = previous_mouse_pos.floor()
 	var mouse_pos_floored = mouse_pos.floor()
 	mouse_pos_floored.x = clamp(mouse_pos_floored.x, location.x - 1, location.x + size.x)
@@ -385,7 +398,7 @@ func fill_gaps(mouse_pos : Vector2, color : Color, brush_size : int, brush_type 
 	var x = previous_mouse_pos_floored.x
 	var y = previous_mouse_pos_floored.y
 	while !(x == mouse_pos_floored.x && y == mouse_pos_floored.y):
-		draw_pixel(Vector2(x, y), color, brush_size, brush_type, brush_index, interpolate_factor)
+		draw_pixel(Vector2(x, y), color, brush_size, brush_type, brush_index, custom_brush_image)
 		e2 = err << 1
 		if e2 >= dy:
 			err += dy
@@ -438,23 +451,6 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
-
-func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
-	var blended_image := Image.new()
-	blended_image.copy_from(image)
-	var size := image.get_size()
-	blended_image.lock()
-	for xx in size.x:
-		for yy in size.y:
-			if color.a > 0: #If it's the pencil
-				var current_color := blended_image.get_pixel(xx, yy)
-				if current_color.a > 0:
-					#var blended_color = current_color.blend(color)
-					var new_color := current_color.linear_interpolate(color, interpolate_factor)
-					blended_image.set_pixel(xx, yy, new_color)
-			else: #If color is transparent - if it's the eraser
-				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
-	return blended_image
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true

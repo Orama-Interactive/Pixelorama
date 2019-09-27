@@ -550,10 +550,12 @@ func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
 func _on_LeftBrushSizeEdit_value_changed(value) -> void:
 	var new_size = int(value)
 	Global.left_brush_size = new_size
+	update_left_custom_brush()
 
 func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	var new_size = int(value)
 	Global.right_brush_size = new_size
+	update_right_custom_brush()
 
 func _on_AddFrame_pressed() -> void:
 	var canvas = load("res://Prefabs/Canvas.tscn").instance()
@@ -745,3 +747,24 @@ func _on_SplitScreenButton_toggled(button_pressed) -> void:
 		Global.split_screen_button.text = "<"
 		Global.viewport_separator.visible = false
 		Global.second_viewport.visible = false
+
+# warning-ignore:unused_argument
+func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
+	update_left_custom_brush()
+
+# warning-ignore:unused_argument
+func _on_RightColorPickerButton_color_changed(color : Color) -> void:
+	update_right_custom_brush()
+
+# warning-ignore:unused_argument
+func _on_LeftInterpolateFactor_value_changed(value : float) -> void:
+	update_left_custom_brush()
+
+# warning-ignore:unused_argument
+func _on_RightInterpolateFactor_value_changed(value : float) -> void:
+	update_right_custom_brush()
+
+func update_left_custom_brush() -> void:
+	Global.update_left_custom_brush()
+func update_right_custom_brush() -> void:
+	Global.update_right_custom_brush()
