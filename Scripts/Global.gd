@@ -185,20 +185,22 @@ func create_brush_button(brush_img : Image) -> void:
 	hbox_container.add_child(brush_button)
 	
 func update_left_custom_brush() -> void:
-	var custom_brush := Image.new()
-	custom_brush.copy_from(custom_brushes[custom_left_brush_index])
-	var custom_brush_size = custom_brush.get_size()
-	custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-	custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
-	custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
+	if custom_left_brush_index > -1:
+		var custom_brush := Image.new()
+		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
+		var custom_brush_size = custom_brush.get_size()
+		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
+		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
+		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
 	
 func update_right_custom_brush() -> void:
-	var custom_brush := Image.new()
-	custom_brush.copy_from(custom_brushes[custom_right_brush_index])
-	var custom_brush_size = custom_brush.get_size()
-	custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-	custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value)
-	custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
+	if custom_right_brush_index > -1:
+		var custom_brush := Image.new()
+		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
+		var custom_brush_size = custom_brush.get_size()
+		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
+		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value)
+		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
 	var blended_image := Image.new()
