@@ -283,6 +283,9 @@ func _on_OpenSprite_file_selected(path) -> void:
 			Global.right_color_picker.get_picker().add_preset(color)
 		
 		#Load custom brushes
+		Global.custom_brushes.clear()
+		Global.remove_brush_buttons()
+		
 		var brush_line := file.get_line()
 		while brush_line == "/":
 			var b_width := file.get_16()

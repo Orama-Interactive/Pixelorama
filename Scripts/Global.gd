@@ -44,7 +44,8 @@ var left_brush_size_edit : SpinBox
 var right_brush_size_edit : SpinBox
 var left_interpolate_slider : HSlider
 var right_interpolate_slider : HSlider
-
+var left_brush_indicator : Sprite
+var right_brush_indicator : Sprite
 
 var loop_animation_button : Button
 var play_forward : Button
@@ -119,6 +120,9 @@ func _ready() -> void:
 	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateFactor")
 	right_interpolate_slider = find_node_by_name(root, "RightInterpolateFactor")
 	
+	left_brush_indicator = find_node_by_name(root, "LeftBrushIndicator")
+	right_brush_indicator = find_node_by_name(root, "RightBrushIndicator")
+	
 	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
@@ -183,7 +187,15 @@ func create_brush_button(brush_img : Image) -> void:
 	brush_button.get_child(0).texture = brush_tex
 	var hbox_container := find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
 	hbox_container.add_child(brush_button)
-	
+
+func remove_brush_buttons() -> void:
+	var hbox_container := find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
+	for child in hbox_container.get_children():
+		if child.name != "PixelBrushButton":
+			hbox_container.remove_child(child)
+#	for i in range(0, hbox_container.get_child_count() - 1):
+#		hbox_container.remove_child(hbox_container.get_child(i))
+
 func update_left_custom_brush() -> void:
 	if custom_left_brush_index > -1:
 		var custom_brush := Image.new()

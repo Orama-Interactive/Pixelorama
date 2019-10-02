@@ -216,7 +216,6 @@ func _draw() -> void:
 		else:
 			color = Color.white
 		for i in range(1, Global.onion_skinning_future_rate + 1):
-			#print(i)
 			if Global.current_frame < Global.canvases.size() - i:
 				for texture in Global.canvases[Global.current_frame + i].layers:
 					color.a = 0.6/i
@@ -285,10 +284,8 @@ func generate_layer_panels() -> void:
 	
 	for i in range(layers.size() -1, -1, -1):
 		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-		#layer_names.insert(i, "Layer %s" % i)
 		layers[i][2] = "Layer %s" % i
 		layer_container.i = i
-		#layer_container.get_child(0).get_child(2).text = layer_names[i]
 		layer_container.get_child(0).get_child(2).text = layers[i][2]
 		layers[i][3] = true #set visible
 		layer_container.get_child(0).get_child(1).texture = layers[i][1]
