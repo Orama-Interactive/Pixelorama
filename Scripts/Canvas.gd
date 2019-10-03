@@ -134,7 +134,6 @@ func _process(delta) -> void:
 								Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
-				
 	
 	if !is_making_line:
 		previous_mouse_pos = mouse_pos
@@ -254,8 +253,8 @@ func _draw() -> void:
 					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
 				Global.BRUSH_TYPES.CUSTOM:
-					var custom_brush_size = Global.custom_left_brush_image.get_size()
-					var dst : Vector2 = mouse_pos - custom_brush_size / 4
+					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
+					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_left_brush_texture, dst)
 		
 		if Global.right_square_indicator_visible:
@@ -265,8 +264,8 @@ func _draw() -> void:
 					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
 				Global.BRUSH_TYPES.CUSTOM:
-					var custom_brush_size = Global.custom_right_brush_image.get_size()
-					var dst : Vector2 = mouse_pos - custom_brush_size / 4
+					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
+					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_right_brush_texture, dst)
 
 func generate_layer_panels() -> void:
@@ -362,10 +361,38 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 								sprite_changed_this_frame = true
 			
 			Global.BRUSH_TYPES.CUSTOM:
-				var custom_brush_size = custom_brush_image.get_size()
-				var dst : Vector2 = pos - custom_brush_size / 4
-				var src_rect := Rect2(Vector2.ZERO, custom_brush_size)
-				#src_rect = src_rect.clip(Rect2(west_limit - dst.x, north_limit - dst.y, east_limit - custom_brush_size.x, south_limit - custom_brush_size.y))
+				var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
+				pos = pos.floor()
+				var dst := rectangle_center(pos, custom_brush_size)
+				var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
+				#Rectangle with the same size as the brush, but at cursor's position
+				var pos_rect_position := rectangle_center(pos, custom_brush_size)
+				var pos_rect := Rect2(pos_rect_position, custom_brush_size + Vector2.ONE)
+				
+				#The selection rectangle
+				#If there's no rectangle, the whole canvas is considered a selection
+				var selection_rect := Rect2()
+				selection_rect.position = Vector2(west_limit, north_limit)
+				selection_rect.end = Vector2(east_limit, south_limit)
+				#Intersection of the position rectangle and selection
+				var pos_rect_clipped := pos_rect.clip(selection_rect)
+				#If the size is 0, that means that the brush wasn't positioned inside the selection
+				if pos_rect_clipped.size == Vector2.ZERO:
+					return
+				
+				#According to the relative position of pos_rect to selection_rect, ...
+				#... manipulate src_rect so only the pixels INSIDE the selection get drawn
+				if pos_rect.position.x < selection_rect.position.x:
+					src_rect.position.x += pos_rect.size.x - pos_rect_clipped.size.x
+					dst.x += pos_rect.size.x - pos_rect_clipped.size.x
+				if pos_rect.end.x > selection_rect.end.x:
+					src_rect.size.x = pos_rect_clipped.size.x
+				
+				if pos_rect.position.y < selection_rect.position.y:
+					src_rect.position.y += pos_rect.size.y - pos_rect_clipped.size.y
+					dst.y += pos_rect.size.y - pos_rect_clipped.size.y
+				if pos_rect.end.y > selection_rect.end.y:
+					src_rect.size.y = pos_rect_clipped.size.y
 				
 				if color.a > 0: #If it's the pencil
 					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
@@ -376,8 +403,9 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 					custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
 					var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)
 					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, dst)
+				
 				layers[current_layer_index][0].lock()
-				update_texture(current_layer_index)
+				sprite_changed_this_frame = true
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
@@ -446,8 +474,16 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 					q.append(south)
 			sprite_changed_this_frame = true
 
+#I wish GDScript supported function overloading, I could add more versions of these scripts...
+#...but with a Rect2() parameter instead of 2 Vector2()s
+
+#Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
+
+#Returns the position in the middle of a rectangle
+func rectangle_center(pos : Vector2, size : Vector2) -> Vector2:
+	return (pos - size / 2).floor()
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true

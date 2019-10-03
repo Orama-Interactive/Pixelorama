@@ -4,7 +4,7 @@ var current_frame := 0 setget set_current_frame_label
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
-var has_focus := true
+var has_focus := false
 # warning-ignore:unused_class_variable
 var onion_skinning_past_rate := 0
 # warning-ignore:unused_class_variable

@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
-[ext_resource path="res://Main Theme.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Graphics/left.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=4]
-[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Graphics/left.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=3]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=9]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -17,6 +16,7 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="UI" type="HBoxContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -47,7 +47,6 @@ margin_bottom = 20.0
 margin_right = 35.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 2 )
 text = "File"
 
 [node name="EditMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
@@ -55,7 +54,6 @@ margin_left = 39.0
 margin_right = 75.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 2 )
 text = "Edit"
 
 [node name="ViewMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
@@ -63,7 +61,6 @@ margin_left = 79.0
 margin_right = 121.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 2 )
 text = "View"
 
 [node name="HelpMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
@@ -71,7 +68,6 @@ margin_left = 125.0
 margin_right = 167.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 2 )
 text = "Help"
 
 [node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
@@ -90,7 +86,7 @@ button_mask = 3
 text = "Pencil"
 
 [node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Pencil"]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -10 )
 
@@ -106,7 +102,7 @@ button_mask = 3
 text = "Eraser"
 
 [node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Eraser"]
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 centered = false
 offset = Vector2( 35, -10 )
 
@@ -332,16 +328,16 @@ scroll_vertical_enabled = false
 margin_right = 36.0
 margin_bottom = 36.0
 
-[node name="PixelBrushButton" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer" instance=ExtResource( 5 )]
+[node name="PixelBrushButton" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer" instance=ExtResource( 4 )]
 
 [node name="LeftBrushIndicator" type="Sprite" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 
 [node name="RightBrushIndicator" type="Sprite" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 centered = false
 offset = Vector2( 28, 0 )
 
@@ -375,18 +371,18 @@ size = Vector2( 544, 464 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Canvas" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 6 )]
+[node name="Canvas" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 5 )]
 
 [node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport"]
 z_index = 1
 color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="ViewportSeparator" type="VSeparator" parent="UI/CanvasAndTimeline/HBoxContainer"]
 visible = false
@@ -408,12 +404,12 @@ stretch = true
 size = Vector2( 266, 464 )
 handle_input_locally = false
 render_target_update_mode = 0
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 
 [node name="Camera2D2" type="Camera2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
 editor/display_folded = true
@@ -936,7 +932,7 @@ editor/display_folded = true
 margin_right = 284.0
 margin_bottom = 186.0
 window_title = "About Pixelorama"
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
 margin_left = 8.0
