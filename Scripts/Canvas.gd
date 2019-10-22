@@ -366,8 +366,8 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 				var dst := rectangle_center(pos, custom_brush_size)
 				var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
 				#Rectangle with the same size as the brush, but at cursor's position
-				var pos_rect_position := rectangle_center(pos, custom_brush_size)
-				var pos_rect := Rect2(pos_rect_position, custom_brush_size + Vector2.ONE)
+				#var pos_rect_position := rectangle_center(pos, custom_brush_size)
+				var pos_rect := Rect2(dst, custom_brush_size + Vector2.ONE)
 				
 				#The selection rectangle
 				#If there's no rectangle, the whole canvas is considered a selection
@@ -380,19 +380,16 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 				if pos_rect_clipped.size == Vector2.ZERO:
 					return
 				
-				#According to the relative position of pos_rect to selection_rect, ...
-				#... manipulate src_rect so only the pixels INSIDE the selection get drawn
-				if pos_rect.position.x < selection_rect.position.x:
-					src_rect.position.x += pos_rect.size.x - pos_rect_clipped.size.x
-					dst.x += pos_rect.size.x - pos_rect_clipped.size.x
-				if pos_rect.end.x > selection_rect.end.x:
-					src_rect.size.x = pos_rect_clipped.size.x
-				
-				if pos_rect.position.y < selection_rect.position.y:
-					src_rect.position.y += pos_rect.size.y - pos_rect_clipped.size.y
-					dst.y += pos_rect.size.y - pos_rect_clipped.size.y
-				if pos_rect.end.y > selection_rect.end.y:
-					src_rect.size.y = pos_rect_clipped.size.y
+				#Re-position src_rect and dst based on the clipped position
+				var pos_difference := (pos_rect.position - pos_rect_clipped.position).abs()
+				#Obviously, if pos_rect and pos_rect_clipped are the same, pos_difference is Vector2.ZERO
+				src_rect.position = pos_difference
+				dst += pos_difference
+				src_rect.end -= pos_rect.end - pos_rect_clipped.end
+				#If the selection rectangle is smaller than the brush, ...
+				#... make sure pixels aren't being drawn outside the selection by adjusting src_rect's size
+				src_rect.size.x = min(src_rect.size.x, selection_rect.size.x)
+				src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
 				
 				if color.a > 0: #If it's the pencil
 					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)

@@ -18,6 +18,7 @@ var animation_forward := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	OS.set_window_title("Pixelorama %s" % ProjectSettings.get_setting("application/config/Version"))
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1024, 600))

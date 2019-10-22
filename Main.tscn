@@ -16,16 +16,15 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="UI" type="HBoxContainer" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="UI"]
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 600.0
-rect_min_size = Vector2( 320, 0 )
+rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="UI/ToolPanel"]
@@ -35,12 +34,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
-margin_right = 320.0
+editor/display_folded = true
+margin_right = 230.0
 margin_bottom = 266.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-margin_right = 320.0
+editor/display_folded = true
+margin_right = 230.0
 margin_bottom = 20.0
 
 [node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
@@ -70,12 +71,12 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Help"
 
-[node name="ToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+[node name="PaintToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 margin_top = 24.0
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 44.0
 
-[node name="Pencil" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
+[node name="Pencil" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
 margin_right = 51.0
 margin_bottom = 20.0
 hint_tooltip = "P for left mouse button
@@ -85,12 +86,12 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Pencil"
 
-[node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Pencil"]
+[node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer/Pencil"]
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -10 )
 
-[node name="Eraser" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
+[node name="Eraser" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
 margin_left = 55.0
 margin_right = 106.0
 margin_bottom = 20.0
@@ -101,12 +102,12 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Eraser"
 
-[node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer/Eraser"]
+[node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer/Eraser"]
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( 35, -10 )
 
-[node name="Fill" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
+[node name="Fill" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
 margin_left = 110.0
 margin_right = 166.0
 margin_bottom = 20.0
@@ -116,9 +117,13 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 text = "Bucket"
 
-[node name="RectSelect" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ToolsContainer"]
-margin_left = 170.0
-margin_right = 249.0
+[node name="SelectionToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+margin_top = 48.0
+margin_right = 230.0
+margin_bottom = 68.0
+
+[node name="RectSelect" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/SelectionToolsContainer"]
+margin_right = 79.0
 margin_bottom = 20.0
 hint_tooltip = "R for left mouse button
 Alt + R for right mouse button
@@ -129,32 +134,34 @@ text = "RectSelect"
 
 [node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 270.0
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 274.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
 margin_top = 278.0
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 544.0
 size_flags_vertical = 3
+custom_constants/separation = 0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 266.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 14.0
 text = "Left tool options"
 
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 18.0
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 42.0
+hint_tooltip = "Show left mouse indicator when drawing"
 mouse_default_cursor_shape = 2
 pressed = true
-text = "Show left indicator"
+text = "Left cursor"
 
 [node name="LeftColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 46.0
@@ -166,48 +173,44 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="BrushSize" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 82.0
-margin_right = 154.0
-margin_bottom = 106.0
-
-[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
-margin_top = 5.0
-margin_right = 75.0
-margin_bottom = 19.0
+margin_right = 113.0
+margin_bottom = 96.0
 text = "Brush size: "
 
-[node name="LeftBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
-margin_left = 79.0
-margin_right = 153.0
-margin_bottom = 24.0
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 100.0
+margin_right = 113.0
+margin_bottom = 124.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 suffix = "px"
 
 [node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 110.0
-margin_right = 154.0
-margin_bottom = 124.0
-text = "Brush's color from"
+margin_top = 128.0
+margin_right = 113.0
+margin_bottom = 142.0
+text = "Brush color from"
 
 [node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 128.0
-margin_right = 154.0
-margin_bottom = 144.0
+margin_top = 146.0
+margin_right = 113.0
+margin_bottom = 162.0
 
 [node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
 margin_top = 1.0
-margin_right = 37.0
+margin_right = 9.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
-text = "Brush"
+text = "B"
 
 [node name="LeftInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
-margin_left = 41.0
-margin_right = 117.0
+margin_left = 13.0
+margin_right = 101.0
 margin_bottom = 16.0
+hint_tooltip = "Choose if the brush's color should come from the brush itself (left), or the currently selected color (right)"
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
@@ -215,36 +218,36 @@ value = 0.5
 ticks_on_borders = true
 
 [node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
-margin_left = 121.0
+margin_left = 105.0
 margin_top = 1.0
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
-text = "Color"
+text = "C"
 
 [node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_left = 158.0
-margin_right = 162.0
+margin_left = 113.0
+margin_right = 117.0
 margin_bottom = 266.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-editor/display_folded = true
-margin_left = 166.0
-margin_right = 320.0
+margin_left = 117.0
+margin_right = 230.0
 margin_bottom = 266.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 14.0
 text = "Right tool options"
 
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 18.0
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 42.0
+hint_tooltip = "Show right mouse indicator when drawing"
 mouse_default_cursor_shape = 2
-text = "Show right indicator"
+text = "Right cursor"
 
 [node name="RightColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 46.0
@@ -256,48 +259,44 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="BrushSize" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 82.0
-margin_right = 154.0
-margin_bottom = 106.0
-
-[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
-margin_top = 5.0
-margin_right = 75.0
-margin_bottom = 19.0
+margin_right = 113.0
+margin_bottom = 96.0
 text = "Brush size: "
 
-[node name="RightBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
-margin_left = 79.0
-margin_right = 153.0
-margin_bottom = 24.0
+[node name="RightBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 100.0
+margin_right = 113.0
+margin_bottom = 124.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 suffix = "px"
 
 [node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 110.0
-margin_right = 154.0
-margin_bottom = 124.0
-text = "Brush's color from"
+margin_top = 128.0
+margin_right = 113.0
+margin_bottom = 142.0
+text = "Brush color from"
 
 [node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 128.0
-margin_right = 154.0
-margin_bottom = 144.0
+margin_top = 146.0
+margin_right = 113.0
+margin_bottom = 162.0
 
 [node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
 margin_top = 1.0
-margin_right = 37.0
+margin_right = 9.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
-text = "Brush"
+text = "B"
 
 [node name="RightInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
-margin_left = 41.0
-margin_right = 117.0
+margin_left = 13.0
+margin_right = 101.0
 margin_bottom = 16.0
+hint_tooltip = "Choose if the brush's color should come from the brush itself (left), or the currently selected color (right)"
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
@@ -305,21 +304,21 @@ value = 0.5
 ticks_on_borders = true
 
 [node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
-margin_left = 121.0
+margin_left = 105.0
 margin_top = 1.0
-margin_right = 154.0
+margin_right = 113.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
-text = "Color"
+text = "C"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 548.0
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 552.0
 
 [node name="BrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
 margin_top = 556.0
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 592.0
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
@@ -329,6 +328,7 @@ margin_right = 36.0
 margin_bottom = 36.0
 
 [node name="PixelBrushButton" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer" instance=ExtResource( 4 )]
+hint_tooltip = "Pixel brush"
 
 [node name="LeftBrushIndicator" type="Sprite" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
 scale = Vector2( 0.8, 0.8 )
@@ -343,23 +343,24 @@ offset = Vector2( 28, 0 )
 
 [node name="HSeparator3" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 596.0
-margin_right = 320.0
+margin_right = 230.0
 margin_bottom = 600.0
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="UI"]
-margin_left = 320.0
+margin_left = 230.0
 margin_right = 864.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
-margin_right = 544.0
+editor/display_folded = true
+margin_right = 634.0
 margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline/HBoxContainer"]
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 464.0
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -367,7 +368,7 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer"]
-size = Vector2( 544, 464 )
+size = Vector2( 634, 464 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -386,14 +387,15 @@ script = ExtResource( 7 )
 
 [node name="ViewportSeparator" type="VSeparator" parent="UI/CanvasAndTimeline/HBoxContainer"]
 visible = false
-margin_left = 532.0
-margin_right = 536.0
+margin_left = 315.0
+margin_right = 319.0
 margin_bottom = 464.0
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="UI/CanvasAndTimeline/HBoxContainer"]
+editor/display_folded = true
 visible = false
-margin_left = 270.0
-margin_right = 536.0
+margin_left = 319.0
+margin_right = 634.0
 margin_bottom = 464.0
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -401,7 +403,7 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2"]
-size = Vector2( 266, 464 )
+size = Vector2( 315, 464 )
 handle_input_locally = false
 render_target_update_mode = 0
 script = ExtResource( 8 )
@@ -412,9 +414,8 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_top = 468.0
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 0, 132 )
 size_flags_horizontal = 3
@@ -425,12 +426,12 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 
 [node name="ButtonContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 24.0
 
 [node name="AnimationButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer"]
-margin_left = 94.0
-margin_right = 450.0
+margin_left = 139.0
+margin_right = 495.0
 margin_bottom = 24.0
 
 [node name="LoopLabel" type="Label" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
@@ -443,7 +444,9 @@ text = "Loop:"
 margin_left = 39.0
 margin_right = 69.0
 margin_bottom = 24.0
-hint_tooltip = "Should the animation loop (play again after it reached the end)?"
+hint_tooltip = "No: Animation doesn't loop
+Cycle: Animation plays again when it reaches the last frame
+Ping-pong: Animation plays again but backwards when it reaches the last frame"
 mouse_default_cursor_shape = 2
 text = "No"
 
@@ -479,18 +482,18 @@ suffix = "FPS"
 
 [node name="HSeparator" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 margin_top = 28.0
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 32.0
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 editor/display_folded = true
 margin_top = 36.0
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 56.0
 
 [node name="FrameButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer"]
-margin_left = 213.0
-margin_right = 330.0
+margin_left = 258.0
+margin_right = 375.0
 margin_bottom = 20.0
 
 [node name="AddFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
@@ -539,12 +542,12 @@ text = "Cl"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 margin_top = 60.0
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 64.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
 margin_top = 68.0
-margin_right = 544.0
+margin_right = 634.0
 margin_bottom = 132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -553,6 +556,7 @@ scroll_vertical_enabled = false
 [node name="FrameContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ScrollContainer"]
 
 [node name="LayerPanel" type="Panel" parent="UI"]
+editor/display_folded = true
 margin_left = 864.0
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -941,7 +945,7 @@ margin_right = 276.0
 margin_bottom = 150.0
 
 [node name="Pixelorama" type="Label" parent="AboutDialog/AboutUI"]
-margin_right = 339.0
+margin_right = 268.0
 margin_bottom = 31.0
 text = "Pixelorama v0.3
 "
@@ -949,7 +953,7 @@ align = 1
 
 [node name="MadeBy" type="Label" parent="AboutDialog/AboutUI"]
 margin_top = 35.0
-margin_right = 339.0
+margin_right = 268.0
 margin_bottom = 83.0
 text = "Your Free and Open Source Sprite Editor
 Developed by Orama Interactive
@@ -958,12 +962,11 @@ align = 1
 
 [node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
 margin_top = 87.0
-margin_right = 339.0
+margin_right = 268.0
 margin_bottom = 107.0
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
-margin_left = 35.0
-margin_right = 303.0
+margin_right = 268.0
 margin_bottom = 20.0
 
 [node name="Website" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
@@ -991,7 +994,7 @@ text = "Blog"
 
 [node name="Copyright" type="Label" parent="AboutDialog/AboutUI"]
 margin_top = 111.0
-margin_right = 339.0
+margin_right = 268.0
 margin_bottom = 142.0
 text = "
 Copyright 2019 - Orama Interactive"
@@ -1002,13 +1005,13 @@ align = 1
 [connection signal="color_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
 [connection signal="color_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
