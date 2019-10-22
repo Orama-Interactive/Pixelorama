@@ -4,10 +4,7 @@ var current_save_path := ""
 var current_export_path := ""
 var opensprite_file_selected := false
 var view_menu : PopupMenu
-var pencil_tool
-var eraser_tool
-var fill_tool
-var rectselect_tool
+var tools := []
 var import_as_new_frame : CheckBox
 var export_all_frames : CheckBox
 var export_as_single_file : CheckBox
@@ -75,15 +72,16 @@ func _ready() -> void:
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 	
 	var root = get_tree().get_root()
-	pencil_tool = Global.find_node_by_name(root, "Pencil")
-	eraser_tool = Global.find_node_by_name(root, "Eraser")
-	fill_tool = Global.find_node_by_name(root, "Fill")
-	rectselect_tool = Global.find_node_by_name(root, "RectSelect")
+	#Node, left mouse shortcut, right mouse shortcut
+	tools.append([Global.find_node_by_name(root, "Pencil"), "left_pencil_tool", "right_pencil_tool"])
+	tools.append([Global.find_node_by_name(root, "Eraser"), "left_eraser_tool", "right_eraser_tool"])
+	tools.append([Global.find_node_by_name(root, "Fill"), "left_fill_tool", "right_fill_tool"])
+	tools.append([Global.find_node_by_name(root, "PaintAllPixelsSameColor"), "left_paint_all_tool", "right_paint_all_tool"])
+	tools.append([Global.find_node_by_name(root, "LightenDarken"), "left_lightdark_tool", "right_lightdark_tool"])
+	tools.append([Global.find_node_by_name(root, "RectSelect"), "left_rectangle_select_tool", "right_rectangle_select_tool"])
 	
-	pencil_tool.connect("pressed", self, "_on_Tool_pressed", [pencil_tool])
-	eraser_tool.connect("pressed", self, "_on_Tool_pressed", [eraser_tool])
-	fill_tool.connect("pressed", self, "_on_Tool_pressed", [fill_tool])
-	rectselect_tool.connect("pressed", self, "_on_Tool_pressed", [rectselect_tool])
+	for t in tools:
+		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 	
 	#Options for Import
 	import_as_new_frame = CheckBox.new()
@@ -103,23 +101,11 @@ func _ready() -> void:
 	
 
 func _input(event):
-	#Handle tool shortcuts
-	if event.is_action_pressed("right_pencil_tool"):
-		_on_Tool_pressed(pencil_tool, false, false)
-	elif event.is_action_pressed("left_pencil_tool"):
-		_on_Tool_pressed(pencil_tool, false, true)
-	elif event.is_action_pressed("right_eraser_tool"):
-		_on_Tool_pressed(eraser_tool, false, false)
-	elif event.is_action_pressed("left_eraser_tool"):
-		_on_Tool_pressed(eraser_tool, false, true)
-	elif event.is_action_pressed("right_fill_tool"):
-		_on_Tool_pressed(fill_tool, false, false)
-	elif event.is_action_pressed("left_fill_tool"):
-		_on_Tool_pressed(fill_tool, false, true)
-	elif event.is_action_pressed("right_rectangle_select_tool"):
-		_on_Tool_pressed(rectselect_tool, false, false)
-	elif event.is_action_pressed("left_rectangle_select_tool"):
-		_on_Tool_pressed(rectselect_tool, false, true)
+	for t in tools: #Handle tool shortcuts
+		if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
+			_on_Tool_pressed(t[0], false, false)
+		elif event.is_action_pressed(t[1]): #Shortcut for left button
+			_on_Tool_pressed(t[0], false, true)
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:

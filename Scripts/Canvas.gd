@@ -110,6 +110,30 @@ func _process(delta) -> void:
 				elif current_mouse_button == "right_mouse":
 					current_color = Global.right_color_picker.color
 				flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
+		"PaintAllPixelsSameColor":
+			if point_in_rectangle(mouse_pos, location, location + size):
+				var current_color : Color
+				if current_mouse_button == "left_mouse":
+					current_color = Global.left_color_picker.color
+				elif current_mouse_button == "right_mouse":
+					current_color = Global.right_color_picker.color
+					
+				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
+				for xx in size.x:
+					for yy in size.y:
+						var c : Color = layers[current_layer_index][0].get_pixel(xx, yy)
+						if c == pixel_color:
+							layers[current_layer_index][0].set_pixel(xx, yy, current_color)
+				sprite_changed_this_frame = true
+		"LightenDarken":
+			if point_in_rectangle(mouse_pos, location, location + size):
+				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
+				var amount := 0.05
+				var color_changed := pixel_color.lightened(amount)
+				if Input.is_key_pressed(KEY_CONTROL):
+					color_changed = pixel_color.darkened(amount)
+				layers[current_layer_index][0].set_pixelv(mouse_pos, color_changed)
+				sprite_changed_this_frame = true
 		"RectSelect":
 			#Check SelectionRectangle.gd for more code on Rectangle Selection
 			if Global.can_draw && Global.has_focus && Global.current_frame == frame:
