@@ -33,7 +33,9 @@ func _ready() -> void:
 	var edit_menu_items := {
 		"Scale Image" : 0,
 		"Crop Image" : 0,
-		"Clear Selection" : 0
+		"Clear Selection" : 0,
+		"Flip Horizontal": KEY_MASK_SHIFT + KEY_H,
+		"Flip Vertical": KEY_MASK_SHIFT + KEY_V
 		#"Undo" : KEY_MASK_CTRL + KEY_Z,
 		#"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
 		}
@@ -182,6 +184,18 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.selection_rectangle.polygon[2] = Vector2.ZERO
 			Global.selection_rectangle.polygon[3] = Vector2.ZERO
 			Global.selected_pixels.clear()
+		3: # Flip Horizontal
+			var canvas = Global.canvas
+			canvas.layers[canvas.current_layer_index][0].unlock()
+			canvas.layers[canvas.current_layer_index][0].flip_x()
+			canvas.layers[canvas.current_layer_index][0].lock()
+			canvas.update_texture(canvas.current_layer_index)
+		4: # Flip Vertical
+			var canvas = Global.canvas
+			canvas.layers[canvas.current_layer_index][0].unlock()
+			canvas.layers[canvas.current_layer_index][0].flip_y()
+			canvas.layers[canvas.current_layer_index][0].lock()
+			canvas.update_texture(canvas.current_layer_index)
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
