@@ -22,6 +22,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="UI"]
+editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 230, 0 )
@@ -71,11 +72,13 @@ mouse_default_cursor_shape = 2
 text = "Help"
 
 [node name="PaintToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_top = 24.0
 margin_right = 230.0
 margin_bottom = 44.0
 
 [node name="Pencil" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
+editor/display_folded = true
 margin_right = 51.0
 margin_bottom = 20.0
 hint_tooltip = "P for left mouse button
@@ -91,6 +94,7 @@ centered = false
 offset = Vector2( 0, -10 )
 
 [node name="Eraser" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
+editor/display_folded = true
 margin_left = 55.0
 margin_right = 106.0
 margin_bottom = 20.0
@@ -117,6 +121,7 @@ button_mask = 3
 text = "Bucket"
 
 [node name="ColorToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_top = 48.0
 margin_right = 230.0
 margin_bottom = 68.0
@@ -143,6 +148,7 @@ button_mask = 3
 text = "Lighten/Darken"
 
 [node name="SelectionToolsContainer2" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_top = 72.0
 margin_right = 230.0
 margin_bottom = 92.0
@@ -163,6 +169,7 @@ margin_right = 230.0
 margin_bottom = 274.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 278.0
 margin_right = 230.0
 margin_bottom = 544.0
@@ -342,6 +349,7 @@ margin_right = 230.0
 margin_bottom = 552.0
 
 [node name="BrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 556.0
 margin_right = 230.0
 margin_bottom = 592.0
@@ -378,7 +386,6 @@ margin_bottom = 600.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 634.0
 margin_bottom = 464.0
 size_flags_horizontal = 3
@@ -439,6 +446,7 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_top = 468.0
 margin_right = 634.0
 margin_bottom = 600.0
@@ -834,8 +842,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/danielnaoexiste/Documents/Prog/Pixelorama"
+current_path = "/home/danielnaoexiste/Documents/Prog/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -849,8 +857,8 @@ margin_bottom = 48.0
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/danielnaoexiste/Documents/Prog/Pixelorama"
+current_path = "/home/danielnaoexiste/Documents/Prog/Pixelorama/"
 
 [node name="ImportSprites" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -860,8 +868,8 @@ resizable = true
 mode = 1
 access = 2
 filters = PoolStringArray( "*jpg, *.png ; JPG, PNG Images" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/danielnaoexiste/Documents/Prog/Pixelorama"
+current_path = "/home/danielnaoexiste/Documents/Prog/Pixelorama/"
 
 [node name="ExportSprites" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -876,8 +884,8 @@ window_title = "Export sprite"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/danielnaoexiste/Documents/Prog/Pixelorama"
+current_path = "/home/danielnaoexiste/Documents/Prog/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
