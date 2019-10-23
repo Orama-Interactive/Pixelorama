@@ -211,6 +211,7 @@ func _process(delta) -> void:
 	
 	if sprite_changed_this_frame:
 		update_texture(current_layer_index)
+
 	
 func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
@@ -565,3 +566,4 @@ func rectangle_center(pos : Vector2, size : Vector2) -> Vector2:
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true
+	
