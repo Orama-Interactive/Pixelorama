@@ -34,13 +34,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 266.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 editor/display_folded = true
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 20.0
 
 [node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
@@ -72,7 +72,7 @@ text = "Help"
 
 [node name="PaintToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 margin_top = 24.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 44.0
 
 [node name="Pencil" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
@@ -118,7 +118,7 @@ text = "Bucket"
 
 [node name="ColorToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 margin_top = 48.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 68.0
 
 [node name="PaintAllPixelsSameColor" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ColorToolsContainer"]
@@ -144,7 +144,7 @@ text = "Lighten/Darken"
 
 [node name="SelectionToolsContainer2" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
 margin_top = 72.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 92.0
 
 [node name="RectSelect" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/SelectionToolsContainer2"]
@@ -159,29 +159,29 @@ text = "RectSelect"
 
 [node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 270.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 274.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
 margin_top = 278.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 544.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 266.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 14.0
 text = "Left tool options"
 
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 18.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 42.0
 hint_tooltip = "Show left mouse indicator when drawing"
 mouse_default_cursor_shape = 2
@@ -200,13 +200,13 @@ size_flags_vertical = 0
 
 [node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 82.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 96.0
 text = "Brush size: "
 
 [node name="LeftBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 100.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -215,13 +215,14 @@ suffix = "px"
 
 [node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 128.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 142.0
 text = "Brush color from"
 
 [node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
 margin_top = 146.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 162.0
 
 [node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
@@ -233,7 +234,7 @@ text = "B"
 
 [node name="LeftInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
 margin_left = 13.0
-margin_right = 101.0
+margin_right = 107.0
 margin_bottom = 16.0
 hint_tooltip = "Choose if the brush's color should come from the brush itself (left), or the currently selected color (right)"
 size_flags_horizontal = 3
@@ -243,32 +244,44 @@ value = 0.5
 ticks_on_borders = true
 
 [node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
-margin_left = 105.0
+margin_left = 111.0
 margin_top = 1.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
+[node name="LeftHorizontalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 166.0
+margin_right = 119.0
+margin_bottom = 190.0
+text = "Horiz. Mirror"
+
+[node name="LeftVerticalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_top = 194.0
+margin_right = 119.0
+margin_bottom = 218.0
+text = "Vert. Mirror"
+
 [node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_left = 113.0
-margin_right = 117.0
+margin_left = 119.0
+margin_right = 123.0
 margin_bottom = 266.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_left = 117.0
-margin_right = 230.0
+margin_left = 123.0
+margin_right = 242.0
 margin_bottom = 266.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 14.0
 text = "Right tool options"
 
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 18.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 42.0
 hint_tooltip = "Show right mouse indicator when drawing"
 mouse_default_cursor_shape = 2
@@ -286,13 +299,13 @@ size_flags_vertical = 0
 
 [node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 82.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 96.0
 text = "Brush size: "
 
 [node name="RightBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 100.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -301,13 +314,14 @@ suffix = "px"
 
 [node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 128.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 142.0
 text = "Brush color from"
 
 [node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+editor/display_folded = true
 margin_top = 146.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 162.0
 
 [node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
@@ -319,7 +333,7 @@ text = "B"
 
 [node name="RightInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
 margin_left = 13.0
-margin_right = 101.0
+margin_right = 107.0
 margin_bottom = 16.0
 hint_tooltip = "Choose if the brush's color should come from the brush itself (left), or the currently selected color (right)"
 size_flags_horizontal = 3
@@ -329,21 +343,33 @@ value = 0.5
 ticks_on_borders = true
 
 [node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
-margin_left = 105.0
+margin_left = 111.0
 margin_top = 1.0
-margin_right = 113.0
+margin_right = 119.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
+[node name="RightHorizontalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 166.0
+margin_right = 119.0
+margin_bottom = 190.0
+text = "Horiz. Mirror"
+
+[node name="RightVerticalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+margin_top = 194.0
+margin_right = 119.0
+margin_bottom = 218.0
+text = "Vert. Mirror"
+
 [node name="HSeparator2" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 548.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 552.0
 
 [node name="BrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
 margin_top = 556.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 592.0
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
@@ -368,7 +394,7 @@ offset = Vector2( 28, 0 )
 
 [node name="HSeparator3" type="HSeparator" parent="UI/ToolPanel/Tools"]
 margin_top = 596.0
-margin_right = 230.0
+margin_right = 242.0
 margin_bottom = 600.0
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="UI"]
@@ -1032,12 +1058,16 @@ align = 1
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
+[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
 [connection signal="color_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
+[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
+[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
 [connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]

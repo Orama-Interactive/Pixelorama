@@ -758,3 +758,13 @@ func update_left_custom_brush() -> void:
 	Global.update_left_custom_brush()
 func update_right_custom_brush() -> void:
 	Global.update_right_custom_brush()
+
+func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
+	Global.left_horizontal_mirror = button_pressed
+func _on_LeftVerticalMirroring_toggled(button_pressed) -> void:
+	Global.left_vertical_mirror = button_pressed
+
+func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
+	Global.right_horizontal_mirror = button_pressed
+func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
+	Global.right_vertical_mirror = button_pressed

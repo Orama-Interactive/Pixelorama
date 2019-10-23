@@ -105,13 +105,32 @@ func _process(delta) -> void:
 		"Fill":
 			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var current_color : Color
+				var horizontal_mirror := false
+				var vertical_mirror := false
+				var mirror_x := size.x - mouse_pos.x - 1
+				var mirror_y := size.y - mouse_pos.y - 1
 				if current_mouse_button == "left_mouse":
 					current_color = Global.left_color_picker.color
+					horizontal_mirror = Global.left_horizontal_mirror
+					vertical_mirror = Global.left_vertical_mirror
 				elif current_mouse_button == "right_mouse":
 					current_color = Global.right_color_picker.color
+					horizontal_mirror = Global.right_horizontal_mirror
+					vertical_mirror = Global.right_vertical_mirror
+				
 				flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
+				if horizontal_mirror:
+					var pos := Vector2(mirror_x, mouse_pos.y)
+					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
+				if vertical_mirror:
+					var pos := Vector2(mouse_pos.x, mirror_y)
+					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
+				if horizontal_mirror && vertical_mirror:
+					var pos := Vector2(mirror_x, mirror_y)
+					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
+					
 		"PaintAllPixelsSameColor":
-			if point_in_rectangle(mouse_pos, location, location + size):
+			if point_in_rectangle(mouse_pos, location, location + size) && Global.current_frame == frame:
 				var current_color : Color
 				if current_mouse_button == "left_mouse":
 					current_color = Global.left_color_picker.color
@@ -216,7 +235,6 @@ func get_layer_container(layer_index : int) -> PanelContainer:
 
 func _draw() -> void:
 	draw_texture_rect(trans_background, Rect2(location, size), true) #Draw transparent background
-	
 	#Onion Skinning
 	#Past
 	if Global.onion_skinning_past_rate > 0:
@@ -325,37 +343,43 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 			add_child(line_2d)
 			is_making_line = true
 	else:
-		var brush_size := 1
-		var brush_type = Global.BRUSH_TYPES.PIXEL
-		var brush_index := -1
-		var custom_brush_image : Image
-		if current_mouse_button == "left_mouse":
-			brush_size = Global.left_brush_size
-			brush_type = Global.current_left_brush_type
-			brush_index = Global.custom_left_brush_index
-			custom_brush_image = Global.custom_left_brush_image
-		elif current_mouse_button == "right_mouse":
-			brush_size = Global.right_brush_size
-			brush_type = Global.current_right_brush_type
-			brush_index = Global.custom_right_brush_index
-			custom_brush_image = Global.custom_right_brush_image
-			
 		if is_making_line:
-			fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image)
+			fill_gaps(mouse_pos, color, current_mouse_button)
 			is_making_line = false
 			line_2d.queue_free()
 		else:
 			if point_in_rectangle(mouse_pos, location, location + size):
 				mouse_inside_canvas = true
 				#Draw
-				draw_pixel(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image)
-				fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image) #Fill the gaps
+				draw_pixel(mouse_pos, color, current_mouse_button)
+				fill_gaps(mouse_pos, color, current_mouse_button) #Fill the gaps
 			#If mouse is not inside bounds but it used to be, fill the gaps
 			elif point_in_rectangle(previous_mouse_pos, location, location + size):
-				fill_gaps(mouse_pos, color, brush_size, brush_type, brush_index, custom_brush_image)
+				fill_gaps(mouse_pos, color, current_mouse_button)
 
-func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int, brush_index : int, custom_brush_image : Image) -> void:
+func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> void:
 	if Global.can_draw && Global.has_focus && Global.current_frame == frame:
+		var brush_size := 1
+		var brush_type = Global.BRUSH_TYPES.PIXEL
+		var brush_index := -1
+		var custom_brush_image : Image
+		var horizontal_mirror := false
+		var vertical_mirror := false	
+		if current_mouse_button == "left_mouse":
+			brush_size = Global.left_brush_size
+			brush_type = Global.current_left_brush_type
+			brush_index = Global.custom_left_brush_index
+			custom_brush_image = Global.custom_left_brush_image
+			horizontal_mirror = Global.left_horizontal_mirror
+			vertical_mirror = Global.left_vertical_mirror
+		elif current_mouse_button == "right_mouse":
+			brush_size = Global.right_brush_size
+			brush_type = Global.current_right_brush_type
+			brush_index = Global.custom_right_brush_index
+			custom_brush_image = Global.custom_right_brush_image
+			horizontal_mirror = Global.right_horizontal_mirror
+			vertical_mirror = Global.right_vertical_mirror
+		
 		var west_limit := location.x
 		var east_limit := location.x + size.x
 		var north_limit := location.y
@@ -383,6 +407,21 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 							if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color: #don't draw the same pixel over and over
 								layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
 								sprite_changed_this_frame = true
+							#Handle mirroring
+							var mirror_x := east_limit + west_limit - cur_pos_x - 1
+							var mirror_y := south_limit + north_limit - cur_pos_y - 1
+							if horizontal_mirror:
+								if layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y) != color: #don't draw the same pixel over and over
+									layers[current_layer_index][0].set_pixel(mirror_x, cur_pos_y, color)
+									sprite_changed_this_frame = true
+							if vertical_mirror:
+								if layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y) != color: #don't draw the same pixel over and over
+									layers[current_layer_index][0].set_pixel(cur_pos_x, mirror_y, color)
+									sprite_changed_this_frame = true
+							if horizontal_mirror && vertical_mirror:
+								if layers[current_layer_index][0].get_pixel(mirror_x, mirror_y) != color: #don't draw the same pixel over and over
+									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
+									sprite_changed_this_frame = true
 			
 			Global.BRUSH_TYPES.CUSTOM:
 				var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
@@ -415,22 +454,40 @@ func draw_pixel(pos : Vector2, color : Color, brush_size : int, brush_type : int
 				src_rect.size.x = min(src_rect.size.x, selection_rect.size.x)
 				src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
 				
+				#Handle mirroring
+				var mirror_x := east_limit + west_limit - dst.x - 1
+				var mirror_y := south_limit + north_limit - dst.y - 1
+				
 				if color.a > 0: #If it's the pencil
 					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
+					if horizontal_mirror:
+						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
+					if vertical_mirror:
+						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
+					if horizontal_mirror && vertical_mirror:
+						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
+					
 				else: #if it's transparent - if it's the eraser
 					var custom_brush := Image.new()
 					custom_brush.copy_from(Global.custom_brushes[brush_index])
 					custom_brush_size = custom_brush.get_size()
 					custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
 					var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)
+					
 					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, dst)
+					if horizontal_mirror:
+						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, dst.y))
+					if vertical_mirror:
+						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(dst.x, mirror_y))
+					if horizontal_mirror && vertical_mirror:
+						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, mirror_y))
 				
 				layers[current_layer_index][0].lock()
 				sprite_changed_this_frame = true
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func fill_gaps(mouse_pos : Vector2, color : Color, brush_size : int, brush_type : int, brush_index : int, custom_brush_image : Image) -> void:
+func fill_gaps(mouse_pos : Vector2, color : Color, current_mouse_button : String) -> void:
 	var previous_mouse_pos_floored = previous_mouse_pos.floor()
 	var mouse_pos_floored = mouse_pos.floor()
 	mouse_pos_floored.x = clamp(mouse_pos_floored.x, location.x - 1, location.x + size.x)
@@ -444,7 +501,7 @@ func fill_gaps(mouse_pos : Vector2, color : Color, brush_size : int, brush_type 
 	var x = previous_mouse_pos_floored.x
 	var y = previous_mouse_pos_floored.y
 	while !(x == mouse_pos_floored.x && y == mouse_pos_floored.y):
-		draw_pixel(Vector2(x, y), color, brush_size, brush_type, brush_index, custom_brush_image)
+		draw_pixel(Vector2(x, y), color, current_mouse_button)
 		e2 = err << 1
 		if e2 >= dy:
 			err += dy

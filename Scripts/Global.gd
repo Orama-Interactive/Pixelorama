@@ -78,6 +78,14 @@ var current_left_brush_type = BRUSH_TYPES.PIXEL
 # warning-ignore:unused_class_variable
 var current_right_brush_type = BRUSH_TYPES.PIXEL
 # warning-ignore:unused_class_variable
+var left_horizontal_mirror := false
+# warning-ignore:unused_class_variable
+var left_vertical_mirror := false
+# warning-ignore:unused_class_variable
+var right_horizontal_mirror := false
+# warning-ignore:unused_class_variable
+var right_vertical_mirror := false
+# warning-ignore:unused_class_variable
 var custom_brushes := []
 # warning-ignore:unused_class_variable
 var custom_left_brush_index := -1
