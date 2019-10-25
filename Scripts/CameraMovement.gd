@@ -15,7 +15,7 @@ func _input(event) -> void:
 		drag = true
 	elif event.is_action_released("camera_drag"):
 		drag = false
-		
+
 	if Global.can_draw && Global.has_focus && Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
 		if event.is_action_pressed("zoom_in"): # Wheel Up Event
 			zoom_camera(-1)
@@ -30,7 +30,7 @@ func zoom_camera(dir : int) -> void:
 	#if zoom + zoom_margin > zoom_min && zoom + zoom_margin < zoom_max:
 	if zoom + zoom_margin > zoom_min:
 		zoom += zoom_margin
-	
+
 	if zoom > zoom_max:
 		zoom = zoom_max
 	if name == "Camera2D":
