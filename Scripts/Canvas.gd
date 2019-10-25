@@ -24,30 +24,30 @@ func _ready() -> void:
 	#Background
 	trans_background = ImageTexture.new()
 	trans_background.create_from_image(load("res://Assets/Graphics/Transparent Background.png"), 0)
-	
+
 	#The sprite itself
 	if layers.empty():
 		var sprite := Image.new()
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-	
+
 		sprite.lock()
 		var tex := ImageTexture.new()
 		tex.create_from_image(sprite, 0)
-		
+
 		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
 		layers.append([sprite, tex, "Layer 0", true])
-	
+
 	generate_layer_panels()
-	
+
 	frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 	frame_button.name = "Frame_%s" % frame
 	frame_button.get_node("FrameButton").frame = frame
 	frame_button.get_node("FrameID").text = str(frame + 1)
 	Global.frame_container.add_child(frame_button)
-	
+
 	frame_texture_rect = Global.find_node_by_name(frame_button, "FrameTexture")
 	frame_texture_rect.texture = layers[0][1] #ImageTexture current_layer_index
-	
+
 	camera_zoom()
 
 func camera_zoom() -> void:
@@ -82,7 +82,7 @@ func _process(delta) -> void:
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
-	
+
 	if visible:
 		if !point_in_rectangle(mouse_pos, location, location + size):
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
@@ -117,7 +117,7 @@ func _process(delta) -> void:
 					current_color = Global.right_color_picker.color
 					horizontal_mirror = Global.right_horizontal_mirror
 					vertical_mirror = Global.right_vertical_mirror
-				
+
 				flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
 				if horizontal_mirror:
 					var pos := Vector2(mirror_x, mouse_pos.y)
@@ -128,7 +128,7 @@ func _process(delta) -> void:
 				if horizontal_mirror && vertical_mirror:
 					var pos := Vector2(mirror_x, mirror_y)
 					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
-					
+
 		"PaintAllPixelsSameColor":
 			if point_in_rectangle(mouse_pos, location, location + size) && Global.current_frame == frame:
 				var current_color : Color
@@ -136,7 +136,7 @@ func _process(delta) -> void:
 					current_color = Global.left_color_picker.color
 				elif current_mouse_button == "right_mouse":
 					current_color = Global.right_color_picker.color
-					
+
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				for xx in size.x:
 					for yy in size.y:
@@ -177,14 +177,14 @@ func _process(delta) -> void:
 								Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
-	
+
 	if !is_making_line:
 		previous_mouse_pos = mouse_pos
 		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
 		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
 	else:
 		line_2d.set_point_position(1, mouse_pos)
-	
+
 	if is_making_selection != "None": #If we're making a selection
 		if Input.is_action_just_released(is_making_selection): #Finish selection when button is released
 			var start_pos = Global.selection_rectangle.polygon[0]
@@ -193,30 +193,30 @@ func _process(delta) -> void:
 				var temp = end_pos.x
 				end_pos.x = start_pos.x
 				start_pos.x = temp
-			
+
 			if start_pos.y > end_pos.y:
 				var temp = end_pos.y
 				end_pos.y = start_pos.y
 				start_pos.y = temp
-			
+
 			Global.selection_rectangle.polygon[0] = start_pos
 			Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
 			Global.selection_rectangle.polygon[2] = end_pos
 			Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
-			
+
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
 					Global.selected_pixels.append(Vector2(xx, yy))
 			is_making_selection = "None"
-	
+
 	if sprite_changed_this_frame:
 		update_texture(current_layer_index)
 
-	
+
 func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 	get_layer_container(layer_index).get_child(0).get_child(1).texture = layers[layer_index][1]
-	
+
 	#This code is used to update the texture in the animation timeline frame button
 	#but blend_rect causes major performance issues on large images
 	var whole_image := Image.new()
@@ -249,7 +249,7 @@ func _draw() -> void:
 				for texture in Global.canvases[Global.current_frame - i].layers:
 					color.a = 0.6/i
 					draw_texture(texture[1], location, color)
-	
+
 	#Future
 	if Global.onion_skinning_future_rate > 0:
 		var color : Color
@@ -262,12 +262,12 @@ func _draw() -> void:
 				for texture in Global.canvases[Global.current_frame + i].layers:
 					color.a = 0.6/i
 					draw_texture(texture[1], location, color)
-	
+
 	#Draw current frame layers
 	for texture in layers:
 		if texture[3]: #if it's visible
 			draw_texture(texture[1], location)
-			
+
 			if Global.tile_mode:
 				draw_texture(texture[1], Vector2(location.x, location.y + size.y)) #Down
 				draw_texture(texture[1], Vector2(location.x - size.x, location.y + size.y)) #Down Left
@@ -277,14 +277,14 @@ func _draw() -> void:
 				draw_texture(texture[1], Vector2(location.x + size.x, location.y - size.y)) #Up right
 				draw_texture(texture[1], Vector2(location.x + size.x, location.y)) #Right
 				draw_texture(texture[1], location + size) #Down right
-	
+
 	#Idea taken from flurick (on GitHub)
 	if Global.draw_grid:
 		for x in size.x:
 			draw_line(Vector2(x, location.y), Vector2(x, size.y), Color.black, true)
 		for y in size.y:
 			draw_line(Vector2(location.x, y), Vector2(size.x, y), Color.black, true)
-	
+
 	#Draw rectangle to indicate the pixel currently being hovered on
 	var mouse_pos := get_local_mouse_position() + location
 	if point_in_rectangle(mouse_pos, location, location + size):
@@ -299,7 +299,7 @@ func _draw() -> void:
 					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_left_brush_texture, dst)
-		
+
 		if Global.right_square_indicator_visible:
 			match Global.current_right_brush_type:
 				Global.BRUSH_TYPES.PIXEL:
@@ -315,7 +315,7 @@ func generate_layer_panels() -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
 			child.queue_free()
-	
+
 	current_layer_index = layers.size() - 1
 	if layers.size() == 1:
 		Global.remove_layer_button.disabled = true
@@ -323,7 +323,7 @@ func generate_layer_panels() -> void:
 	else:
 		Global.remove_layer_button.disabled = false
 		Global.remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	
+
 	for i in range(layers.size() -1, -1, -1):
 		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
 		layers[i][2] = "Layer %s" % i
@@ -365,7 +365,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 		var brush_index := -1
 		var custom_brush_image : Image
 		var horizontal_mirror := false
-		var vertical_mirror := false	
+		var vertical_mirror := false
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
 			brush_type = Global.current_left_brush_type
@@ -380,7 +380,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 			custom_brush_image = Global.custom_right_brush_image
 			horizontal_mirror = Global.right_horizontal_mirror
 			vertical_mirror = Global.right_vertical_mirror
-		
+
 		var west_limit := location.x
 		var east_limit := location.x + size.x
 		var north_limit := location.y
@@ -390,12 +390,12 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
 			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
 			south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
-		
+
 		var start_pos_x
 		var start_pos_y
 		var end_pos_x
 		var end_pos_y
-		
+
 		match(brush_type):
 			Global.BRUSH_TYPES.PIXEL:
 				start_pos_x = pos.x - (brush_size >> 1)
@@ -423,7 +423,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 								if layers[current_layer_index][0].get_pixel(mirror_x, mirror_y) != color: #don't draw the same pixel over and over
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
 									sprite_changed_this_frame = true
-			
+
 			Global.BRUSH_TYPES.CUSTOM:
 				var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
 				pos = pos.floor()
@@ -432,7 +432,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 				#Rectangle with the same size as the brush, but at cursor's position
 				#var pos_rect_position := rectangle_center(pos, custom_brush_size)
 				var pos_rect := Rect2(dst, custom_brush_size + Vector2.ONE)
-				
+
 				#The selection rectangle
 				#If there's no rectangle, the whole canvas is considered a selection
 				var selection_rect := Rect2()
@@ -443,7 +443,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 				#If the size is 0, that means that the brush wasn't positioned inside the selection
 				if pos_rect_clipped.size == Vector2.ZERO:
 					return
-				
+
 				#Re-position src_rect and dst based on the clipped position
 				var pos_difference := (pos_rect.position - pos_rect_clipped.position).abs()
 				#Obviously, if pos_rect and pos_rect_clipped are the same, pos_difference is Vector2.ZERO
@@ -454,11 +454,11 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 				#... make sure pixels aren't being drawn outside the selection by adjusting src_rect's size
 				src_rect.size.x = min(src_rect.size.x, selection_rect.size.x)
 				src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
-				
+
 				#Handle mirroring
 				var mirror_x := east_limit + west_limit - dst.x - 1
 				var mirror_y := south_limit + north_limit - dst.y - 1
-				
+
 				if color.a > 0: #If it's the pencil
 					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
 					if horizontal_mirror:
@@ -467,14 +467,14 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
 					if horizontal_mirror && vertical_mirror:
 						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
-					
+
 				else: #if it's transparent - if it's the eraser
 					var custom_brush := Image.new()
 					custom_brush.copy_from(Global.custom_brushes[brush_index])
 					custom_brush_size = custom_brush.get_size()
 					custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
 					var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)
-					
+
 					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, dst)
 					if horizontal_mirror:
 						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, dst.y))
@@ -482,7 +482,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(dst.x, mirror_y))
 					if horizontal_mirror && vertical_mirror:
 						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, mirror_y))
-				
+
 				layers[current_layer_index][0].lock()
 				sprite_changed_this_frame = true
 
@@ -529,10 +529,10 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
 			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
 			south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
-		
+
 		if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 			return
-		
+
 		var q = [pos]
 		for n in q:
 			var west : Vector2 = n
@@ -566,4 +566,3 @@ func rectangle_center(pos : Vector2, size : Vector2) -> Vector2:
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true
-	

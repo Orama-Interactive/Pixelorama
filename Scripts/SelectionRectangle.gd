@@ -25,7 +25,7 @@ func _process(delta) -> void:
 	var start_pos := polygon[0]
 	var end_pos := polygon[2]
 	var layer : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
-	
+
 	if point_in_rectangle(mouse_pos, polygon[0], polygon[2]) && Global.selected_pixels.size() > 0 && (Global.current_left_tool == "RectSelect" || Global.current_right_tool == "RectSelect"):
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_pressed("right_mouse")):
@@ -57,14 +57,14 @@ func _process(delta) -> void:
 			update()
 	else:
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_CROSS
-		
+
 	if is_dragging:
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):
 			#Drag
 			#if orig_x + mouse_pos_floored.x >= Global.canvas.location.x && diff_x + mouse_pos_floored.x <= Global.canvas.size.x:
 			start_pos.x = orig_x + mouse_pos_floored.x
 			end_pos.x = diff_x + mouse_pos_floored.x
-			
+
 			#if orig_y + mouse_pos_floored.y >= Global.canvas.location.y && diff_y + mouse_pos_floored.y <= Global.canvas.size.y:
 			start_pos.y = orig_y + mouse_pos_floored.y
 			end_pos.y = diff_y + mouse_pos_floored.y
@@ -72,7 +72,7 @@ func _process(delta) -> void:
 			polygon[1] = Vector2(end_pos.x, start_pos.y)
 			polygon[2] = end_pos
 			polygon[3] = Vector2(start_pos.x, end_pos.y)
-		
+
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_released("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_released("right_mouse")):
 			#Release Drag
 			is_dragging = false
@@ -86,13 +86,13 @@ func _process(delta) -> void:
 				img.fill(Color(0, 0, 0, 0))
 				tex.create_from_image(img, 0)
 				update()
-			
+
 			orig_colors.clear()
 			Global.selected_pixels.clear()
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
 					Global.selected_pixels.append(Vector2(xx, yy))
-	
+
 	#Handle copy
 	if Input.is_action_just_pressed("copy") && Global.selected_pixels.size() > 0:
 		Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
@@ -101,9 +101,9 @@ func _process(delta) -> void:
 		brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
 		brush_img = brush_img.get_rect(brush_img.get_used_rect()) #save only the visible pixels
 		Global.custom_brushes.append(brush_img)
-		
+
 		Global.create_brush_button(brush_img)
-	
+
 	#Handle paste
 	#if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && !is_dragging:
 	if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && Global.image_clipboard.get_size() > Vector2.ZERO:
@@ -117,4 +117,3 @@ func _draw() -> void:
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
-	
