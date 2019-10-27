@@ -893,7 +893,7 @@ window_title = "Open File(s)"
 resizable = true
 mode = 1
 access = 2
-filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
+filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
 current_dir = "/home/danielnaoexiste/Documents/Prog/Pixelorama"
 current_path = "/home/danielnaoexiste/Documents/Prog/Pixelorama/"
 
