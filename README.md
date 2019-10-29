@@ -1,8 +1,8 @@
 # Pixelorama - your free and open-source sprite editor!
  A free & open-source 2D sprite editor, made with Godot Engine, using GDScript!
- 
+
  [![Pixelorama's horrible UI](https://functionoverload590613498.files.wordpress.com/2019/10/screenshot_265.png)](https://www.youtube.com/watch?v=L8o8QKB8lPs)
- 
+
 Current features as of version v0.3:
 
 - Choosing between 4 tools – pencil, eraser, fill bucket and rectangle select – and mapping them to both of your left and right mouse buttons. That’s, pretty wild, huh?
