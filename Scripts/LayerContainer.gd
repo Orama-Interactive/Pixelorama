@@ -26,14 +26,14 @@ func changed_selection() -> void:
 			if Global.canvas.current_layer_index == child.i:
 				child.currently_selected = true
 				child.get_stylebox("panel").bg_color = Color("282532")
-				
+
 				if Global.canvas.current_layer_index < Global.canvas.layers.size() - 1:
 					Global.move_up_layer_button.disabled = false
 					Global.move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				else:
 					Global.move_up_layer_button.disabled = true
 					Global.move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-					
+
 				if Global.canvas.current_layer_index > 0:
 					Global.move_down_layer_button.disabled = false
 					Global.move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND

@@ -11,7 +11,7 @@ func _on_BrushButton_pressed() -> void:
 		if custom_brush_index > -1:
 			Global.custom_left_brush_index = custom_brush_index
 			Global.update_left_custom_brush()
-	
+
 	elif Input.is_action_just_released("right_mouse"):
 		Global.current_right_brush_type = brush_type
 		Global.right_brush_indicator.get_parent().remove_child(Global.right_brush_indicator)

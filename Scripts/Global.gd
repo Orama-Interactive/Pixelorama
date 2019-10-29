@@ -1,5 +1,6 @@
 extends Node
 
+var undo_redo : UndoRedo
 var current_frame := 0 setget set_current_frame_label
 # warning-ignore:unused_class_variable
 var can_draw := false
@@ -102,6 +103,7 @@ var custom_right_brush_texture := ImageTexture.new()
 
 
 func _ready() -> void:
+	undo_redo = UndoRedo.new()
 	var root = get_tree().get_root()
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
@@ -111,10 +113,10 @@ func _ready() -> void:
 	split_screen_button = find_node_by_name(root, "SplitScreenButton")
 	camera = find_node_by_name(canvas_parent, "Camera2D")
 	camera2 = find_node_by_name(canvas_parent.get_parent().get_parent(), "Camera2D2")
-	
+
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	image_clipboard = Image.new()
-	
+
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
 	view_menu = find_node_by_name(root, "ViewMenu")
@@ -127,10 +129,10 @@ func _ready() -> void:
 	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
 	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateFactor")
 	right_interpolate_slider = find_node_by_name(root, "RightInterpolateFactor")
-	
+
 	left_brush_indicator = find_node_by_name(root, "LeftBrushIndicator")
 	right_brush_indicator = find_node_by_name(root, "RightBrushIndicator")
-	
+
 	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
@@ -147,17 +149,29 @@ func _ready() -> void:
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 	current_frame_label = find_node_by_name(root, "CurrentFrame")
 
-#Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name	
+#Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
-	if root.get_name() == node_name: 
+	if root.get_name() == node_name:
 		return root
 	for child in root.get_children():
 		if child.get_name() == node_name:
 			return child
 		var found = find_node_by_name(child, node_name)
-		if found: 
+		if found:
 			return found
 	return null
+
+func undo(canvas : Canvas, layer_index : int) -> void:
+	var action_name : String = undo_redo.get_current_action_name()
+	if action_name == "Draw" || action_name == "Rectangle Select":
+		canvas.update_texture(layer_index)
+	print("Undo: ", action_name)
+
+func redo(canvas : Canvas, layer_index : int) -> void:
+	var action_name : String = undo_redo.get_current_action_name()
+	if action_name == "Draw" || action_name == "Rectangle Select":
+		canvas.update_texture(layer_index)
+	print("Redo: ", action_name)
 
 func change_frame() -> void:
 	for c in canvases:
@@ -174,7 +188,7 @@ func handle_layer_order_buttons() -> void:
 	else:
 		move_left_frame_button.disabled = false
 		move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	
+
 	if current_frame == canvases.size() - 1:
 		move_right_frame_button.disabled = true
 		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
@@ -212,7 +226,7 @@ func update_left_custom_brush() -> void:
 		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
 		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
 		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
-	
+
 func update_right_custom_brush() -> void:
 	if custom_right_brush_index > -1:
 		var custom_brush := Image.new()
