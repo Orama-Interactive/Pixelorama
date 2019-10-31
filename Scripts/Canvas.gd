@@ -96,14 +96,14 @@ func _process(delta) -> void:
 
 	#Handle Undo/Redo
 	if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
-		if Input.is_action_just_pressed("left_mouse") || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse")):
+		if (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse")):
 			if current_action != "None":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
 				else:
 					handle_undo("Draw")
 
-		elif Input.is_action_just_released("left_mouse") || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
+		elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 			if previous_action != "None" && previous_action != "RectSelect":
 				handle_redo("Draw")
 
@@ -230,6 +230,7 @@ func _process(delta) -> void:
 		update_texture(current_layer_index)
 
 func handle_undo(action : String) -> void:
+	Global.undos += 1
 	#I'm not sure why I have to unlock it, but...
 	#...if I don't, it doesn't work properly
 	layers[current_layer_index][0].unlock()
@@ -244,6 +245,8 @@ func handle_undo(action : String) -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", self, current_layer_index)
 
 func handle_redo(action : String) -> void:
+	if Global.undos < Global.undo_redo.get_version():
+		return
 	Global.undo_redo.add_do_property(layers[current_layer_index][0], "data", layers[current_layer_index][0].data)
 	if action == "Rectangle Select":
 		Global.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)

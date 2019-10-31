@@ -1,6 +1,7 @@
 extends Node
 
 var undo_redo : UndoRedo
+var undos := 0 #The number of times we added undo properties
 var current_frame := 0 setget set_current_frame_label
 # warning-ignore:unused_class_variable
 var can_draw := false
@@ -162,12 +163,15 @@ func find_node_by_name(root, node_name) -> Node:
 	return null
 
 func undo(canvas : Canvas, layer_index : int) -> void:
+	undos -= 1
 	var action_name : String = undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select":
 		canvas.update_texture(layer_index)
 	print("Undo: ", action_name)
 
 func redo(canvas : Canvas, layer_index : int) -> void:
+	if undos < undo_redo.get_version(): #If we did undo and then redo
+		undos = undo_redo.get_version()
 	var action_name : String = undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select":
 		canvas.update_texture(layer_index)
