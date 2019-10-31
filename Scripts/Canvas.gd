@@ -95,15 +95,15 @@ func _process(delta) -> void:
 
 
 	#Handle Undo/Redo
-	if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus:
-		if Input.is_action_just_pressed("left_mouse") || Input.is_action_just_pressed("right_mouse"):
+	if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+		if Input.is_action_just_pressed("left_mouse") || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse")):
 			if current_action != "None":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
 				else:
 					handle_undo("Draw")
 
-		elif Input.is_action_just_released("left_mouse") || Input.is_action_just_released("right_mouse"):
+		elif Input.is_action_just_released("left_mouse") || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 			if previous_action != "None" && previous_action != "RectSelect":
 				handle_redo("Draw")
 
@@ -254,7 +254,9 @@ func handle_redo(action : String) -> void:
 
 func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
-	get_layer_container(layer_index).get_child(0).get_child(1).texture = layers[layer_index][1]
+	var layer_container := get_layer_container(layer_index)
+	if layer_container:
+		layer_container.get_child(0).get_child(1).texture = layers[layer_index][1]
 
 	#This code is used to update the texture in the animation timeline frame button
 	#but blend_rect causes major performance issues on large images
