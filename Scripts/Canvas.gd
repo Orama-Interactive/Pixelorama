@@ -75,6 +75,7 @@ func _process(delta) -> void:
 	var mouse_pos := get_local_mouse_position() - location
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
+	var mouse_in_canvas := point_in_rectangle(mouse_pos, location, location + size)
 	var current_mouse_button := "None"
 	var current_action := "None"
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
@@ -85,7 +86,7 @@ func _process(delta) -> void:
 		current_action = Global.current_right_tool
 
 	if visible:
-		if !point_in_rectangle(mouse_pos, location, location + size):
+		if !mouse_in_canvas:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
 					mouse_inside_canvas = false
@@ -95,15 +96,25 @@ func _process(delta) -> void:
 
 
 	#Handle Undo/Redo
-	if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
-		if (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse")):
+	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame
+	var mouse_pressed : bool = (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse"))
+
+	#If we're already pressing a mouse button and we haven't handled undo yet,...
+	#... it means that the cursor was outside the canvas. Then, ...
+	#simulate "just pressed" logic the moment the cursor gets inside the canvas
+	if Input.is_action_pressed("left_mouse") || Input.is_action_pressed("right_mouse"):
+		if mouse_in_canvas && Global.undos < Global.undo_redo.get_version():
+			mouse_pressed = true
+
+	if mouse_pressed:
+		if can_handle:
 			if current_action != "None":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
 				else:
 					handle_undo("Draw")
-
-		elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
+	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
+		if can_handle || Global.undos == Global.undo_redo.get_version():
 			if previous_action != "None" && previous_action != "RectSelect":
 				handle_redo("Draw")
 
@@ -118,7 +129,7 @@ func _process(delta) -> void:
 		"Eraser":
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Fill":
-			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var current_color : Color
 				var horizontal_mirror := false
 				var vertical_mirror := false
@@ -145,7 +156,7 @@ func _process(delta) -> void:
 					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
 
 		"PaintAllPixelsSameColor":
-			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var current_color : Color
 				if current_mouse_button == "left_mouse":
 					current_color = Global.left_color_picker.color
@@ -160,7 +171,7 @@ func _process(delta) -> void:
 							layers[current_layer_index][0].set_pixel(xx, yy, current_color)
 				sprite_changed_this_frame = true
 		"LightenDarken":
-			if point_in_rectangle(mouse_pos, location, location + size) && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				var amount := 0.05
 				var color_changed := pixel_color.lightened(amount)
