@@ -31,13 +31,13 @@ func _ready() -> void:
 		"Quit" : KEY_MASK_CTRL + KEY_Q
 		}
 	var edit_menu_items := {
+		"Undo" : KEY_MASK_CTRL + KEY_Z,
+		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
 		"Scale Image" : 0,
 		"Crop Image" : 0,
 		"Clear Selection" : 0,
 		"Flip Horizontal": KEY_MASK_SHIFT + KEY_H,
-		"Flip Vertical": KEY_MASK_SHIFT + KEY_V,
-		"Undo" : KEY_MASK_CTRL + KEY_Z,
-		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z
+		"Flip Vertical": KEY_MASK_SHIFT + KEY_V
 		}
 	var view_menu_items := {
 		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
@@ -145,10 +145,14 @@ func file_menu_id_pressed(id : int) -> void:
 
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
-		0: #Scale Image
+		0: #Undo
+			Global.undo_redo.undo()
+		1: #Redo
+			Global.undo_redo.redo()
+		2: #Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
-		1: #Crop Image
+		3: #Crop Image
 			#Use first layer as a starting rectangle
 			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
 			#However, if first layer is empty, loop through all layers until we find one that isn't
@@ -178,28 +182,28 @@ func edit_menu_id_pressed(id : int) -> void:
 			var height = Global.canvas.layers[0][0].get_height()
 			Global.canvas.size = Vector2(width, height).floor()
 			Global.canvas.camera_zoom()
-		2: #Clear selection
+		4: #Clear selection
+			Global.canvas.handle_undo("Rectangle Select")
 			Global.selection_rectangle.polygon[0] = Vector2.ZERO
 			Global.selection_rectangle.polygon[1] = Vector2.ZERO
 			Global.selection_rectangle.polygon[2] = Vector2.ZERO
 			Global.selection_rectangle.polygon[3] = Vector2.ZERO
 			Global.selected_pixels.clear()
-		3: # Flip Horizontal
-			var canvas = Global.canvas
+			Global.canvas.handle_redo("Rectangle Select")
+		5: # Flip Horizontal
+			var canvas : Canvas = Global.canvas
+			canvas.handle_undo("Draw")
 			canvas.layers[canvas.current_layer_index][0].unlock()
 			canvas.layers[canvas.current_layer_index][0].flip_x()
 			canvas.layers[canvas.current_layer_index][0].lock()
-			canvas.update_texture(canvas.current_layer_index)
-		4: # Flip Vertical
-			var canvas = Global.canvas
+			canvas.handle_redo("Draw")
+		6: # Flip Vertical
+			var canvas : Canvas = Global.canvas
+			canvas.handle_undo("Draw")
 			canvas.layers[canvas.current_layer_index][0].unlock()
 			canvas.layers[canvas.current_layer_index][0].flip_y()
 			canvas.layers[canvas.current_layer_index][0].lock()
-			canvas.update_texture(canvas.current_layer_index)
-		5: #Undo
-			Global.undo_redo.undo()
-		6: #Redo
-			Global.undo_redo.redo()
+			canvas.handle_redo("Draw")
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
@@ -492,10 +496,11 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 func _on_ScaleImage_confirmed() -> void:
 	var width = $ScaleImage/VBoxContainer/WidthCont/WidthValue.value
 	var height = $ScaleImage/VBoxContainer/HeightCont/HeightValue.value
+	var interpolation = $ScaleImage/VBoxContainer/InterpolationContainer/InterpolationType.selected
 	for i in range(Global.canvas.layers.size() - 1, -1, -1):
-		var sprite = Image.new()
+		var sprite := Image.new()
 		sprite = Global.canvas.layers[i][1].get_data()
-		sprite.resize(width, height, $ScaleImage/VBoxContainer/InterpolationContainer/InterpolationType.selected)
+		sprite.resize(width, height, interpolation)
 		Global.canvas.layers[i][0] = sprite
 		Global.canvas.layers[i][0].lock()
 		Global.canvas.update_texture(i)
