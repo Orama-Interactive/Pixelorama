@@ -258,20 +258,18 @@ func _on_OpenSprite_file_selected(path) -> void:
 			Global.canvas = canvas
 			var width := file.get_16()
 			var height := file.get_16()
-
-			var layer := 0
 			var layer_line := file.get_line()
 
 			while layer_line == "-":
 				var buffer := file.get_buffer(width * height * 4)
+				var layer_name := file.get_line()
 				var image := Image.new()
 				image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 				image.lock()
 				var tex := ImageTexture.new()
 				tex.create_from_image(image, 0)
-				canvas.layers.append([image, tex, "Layer %s" % layer, true])
+				canvas.layers.append([image, tex, layer_name, true])
 				layer_line = file.get_line()
-				layer += 1
 
 			canvas.size = Vector2(width, height)
 			Global.canvases.append(canvas)
@@ -327,6 +325,7 @@ func _on_SaveSprite_file_selected(path) -> void:
 			for layer in canvas.layers:
 				file.store_line("-")
 				file.store_buffer(layer[0].get_data())
+				file.store_line(layer[2])
 			file.store_line("END_LAYERS")
 		file.store_line("END_FRAMES")
 
