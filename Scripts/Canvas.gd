@@ -96,7 +96,7 @@ func _process(delta) -> void:
 
 
 	#Handle Undo/Redo
-	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame
+	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus
 	var mouse_pressed : bool = (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse"))
 
 	#If we're already pressing a mouse button and we haven't handled undo yet,...
@@ -107,16 +107,17 @@ func _process(delta) -> void:
 			mouse_pressed = true
 
 	if mouse_pressed:
-		if can_handle:
+		if can_handle && Global.current_frame == frame:
 			if current_action != "None":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
-		if can_handle || Global.undos == Global.undo_redo.get_version():
+		if (can_handle || Global.undos == Global.undo_redo.get_version()) && Global.current_frame == frame:
 			if previous_action != "None" && previous_action != "RectSelect":
 				handle_redo("Draw")
+				print(layers[0][0].data["data"][0])
 
 	match current_action: #Handle current tool
 		"Pencil":

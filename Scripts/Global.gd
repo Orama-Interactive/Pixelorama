@@ -171,6 +171,9 @@ func undo(canvas : Canvas, layer_index : int = -1) -> void:
 		else:
 			for i in canvas.layers.size():
 				canvas.update_texture(i)
+
+		if action_name == "Scale":
+			canvas.camera_zoom()
 	print("Undo: ", action_name)
 
 func redo(canvas : Canvas, layer_index : int = -1) -> void:
@@ -183,6 +186,9 @@ func redo(canvas : Canvas, layer_index : int = -1) -> void:
 		else:
 			for i in canvas.layers.size():
 				canvas.update_texture(i)
+
+		if action_name == "Scale":
+			canvas.camera_zoom()
 	print("Redo: ", action_name)
 
 func change_frame() -> void:

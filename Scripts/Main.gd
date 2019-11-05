@@ -170,18 +170,21 @@ func edit_menu_id_pressed(id : int) -> void:
 			if used_rect == Rect2(0, 0, 0, 0):
 				return
 
+			var width := used_rect.size.x
+			var height := used_rect.size.y
+			Global.undos += 1
+			Global.undo_redo.create_action("Scale")
+			Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
 			#Loop through all the layers to crop them
 			for j in range(Global.canvas.layers.size() - 1, -1, -1):
-				var sprite := Image.new()
-				sprite = Global.canvas.layers[j][0].get_rect(used_rect)
-				Global.canvas.layers[j][0] = sprite
-				Global.canvas.layers[j][0].lock()
-				Global.canvas.update_texture(j)
+				var sprite : Image = Global.canvas.layers[j][0].get_rect(used_rect)
+				Global.undo_redo.add_do_property(Global.canvas.layers[j][0], "data", sprite.data)
+				Global.undo_redo.add_undo_property(Global.canvas.layers[j][0], "data", Global.canvas.layers[j][0].data)
 
-			var width = Global.canvas.layers[0][0].get_width()
-			var height = Global.canvas.layers[0][0].get_height()
-			Global.canvas.size = Vector2(width, height).floor()
-			Global.canvas.camera_zoom()
+			Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
+			Global.undo_redo.add_undo_method(Global, "undo", Global.canvas)
+			Global.undo_redo.add_do_method(Global, "redo", Global.canvas)
+			Global.undo_redo.commit_action()
 		4: #Clear selection
 			Global.canvas.handle_undo("Rectangle Select")
 			Global.selection_rectangle.polygon[0] = Vector2.ZERO
@@ -237,6 +240,7 @@ func _on_CreateNewImage_confirmed() -> void:
 		Global.canvas.update_texture(0)
 	Global.remove_frame_button.disabled = true
 	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	Global.undo_redo.clear_history(false)
 
 func _on_OpenSprite_file_selected(path) -> void:
 	var file := File.new()
@@ -305,6 +309,8 @@ func _on_OpenSprite_file_selected(path) -> void:
 			Global.custom_brushes.append(image)
 			Global.create_brush_button(image)
 			brush_line = file.get_line()
+
+		Global.undo_redo.clear_history(false)
 
 	file.close()
 
@@ -393,6 +399,8 @@ func _on_ImportSprites_files_selected(paths) -> void:
 	else:
 		Global.remove_frame_button.disabled = true
 		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+
+	Global.undo_redo.clear_history(false)
 
 func clear_canvases() -> void:
 	for child in Global.vbox_layer_container.get_children():
@@ -506,13 +514,11 @@ func _on_ScaleImage_confirmed() -> void:
 		sprite.resize(width, height, interpolation)
 		Global.undo_redo.add_do_property(Global.canvas.layers[i][0], "data", sprite.data)
 		Global.undo_redo.add_undo_property(Global.canvas.layers[i][0], "data", Global.canvas.layers[i][0].data)
-		Global.canvas.layers[i][0].lock()
 
 	Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
 	Global.undo_redo.add_undo_method(Global, "undo", Global.canvas)
 	Global.undo_redo.add_do_method(Global, "redo", Global.canvas)
 	Global.undo_redo.commit_action()
-	Global.canvas.camera_zoom()
 
 func add_layer(is_new := true) -> void:
 	var new_layer := Image.new()
