@@ -44,7 +44,7 @@ func _ready() -> void:
 		"Show Grid" : KEY_MASK_CTRL + KEY_G
 		}
 	var help_menu_items := {
-			"About Pixelorama" : 0
+		"About Pixelorama" : 0
 		}
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
@@ -182,8 +182,8 @@ func edit_menu_id_pressed(id : int) -> void:
 				Global.undo_redo.add_undo_property(Global.canvas.layers[j][0], "data", Global.canvas.layers[j][0].data)
 
 			Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
-			Global.undo_redo.add_undo_method(Global, "undo", Global.canvas)
-			Global.undo_redo.add_do_method(Global, "redo", Global.canvas)
+			Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+			Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 			Global.undo_redo.commit_action()
 		4: #Clear selection
 			Global.canvas.handle_undo("Rectangle Select")
@@ -516,8 +516,8 @@ func _on_ScaleImage_confirmed() -> void:
 		Global.undo_redo.add_undo_property(Global.canvas.layers[i][0], "data", Global.canvas.layers[i][0].data)
 
 	Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
-	Global.undo_redo.add_undo_method(Global, "undo", Global.canvas)
-	Global.undo_redo.add_do_method(Global, "redo", Global.canvas)
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
 func add_layer(is_new := true) -> void:

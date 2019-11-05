@@ -117,7 +117,6 @@ func _process(delta) -> void:
 		if (can_handle || Global.undos == Global.undo_redo.get_version()) && Global.current_frame == frame:
 			if previous_action != "None" && previous_action != "RectSelect":
 				handle_redo("Draw")
-				print(layers[0][0].data["data"][0])
 
 	match current_action: #Handle current tool
 		"Pencil":
@@ -242,28 +241,46 @@ func _process(delta) -> void:
 		update_texture(current_layer_index)
 
 func handle_undo(action : String) -> void:
+	var canvases := []
+	var animation_timer := $"../../../../../../AnimationTimer"
+	var layer_index := -1
+	if animation_timer.is_stopped(): #if we're not animating, store only the current canvas
+		canvases = [self]
+		layer_index = current_layer_index
+	else: #If we're animating, store all canvases
+		canvases = Global.canvases
 	Global.undos += 1
-	#I'm not sure why I have to unlock it, but...
-	#...if I don't, it doesn't work properly
-	layers[current_layer_index][0].unlock()
-	var data = layers[current_layer_index][0].data
-	layers[current_layer_index][0].lock()
 	Global.undo_redo.create_action(action)
-	Global.undo_redo.add_undo_property(layers[current_layer_index][0], "data", data)
+	for c in canvases:
+		#I'm not sure why I have to unlock it, but...
+		#...if I don't, it doesn't work properly
+		c.layers[c.current_layer_index][0].unlock()
+		var data = c.layers[c.current_layer_index][0].data
+		c.layers[c.current_layer_index][0].lock()
+		Global.undo_redo.add_undo_property(c.layers[c.current_layer_index][0], "data", data)
 	if action == "Rectangle Select":
 		var selected_pixels = Global.selected_pixels.duplicate()
 		Global.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_undo_property(Global, "selected_pixels", selected_pixels)
-	Global.undo_redo.add_undo_method(Global, "undo", self, current_layer_index)
+	Global.undo_redo.add_undo_method(Global, "undo", canvases, layer_index)
 
 func handle_redo(action : String) -> void:
 	if Global.undos < Global.undo_redo.get_version():
 		return
-	Global.undo_redo.add_do_property(layers[current_layer_index][0], "data", layers[current_layer_index][0].data)
+	var canvases := []
+	var animation_timer := $"../../../../../../AnimationTimer"
+	var layer_index := -1
+	if animation_timer.is_stopped():
+		canvases = [self]
+		layer_index = current_layer_index
+	else:
+		canvases = Global.canvases
+	for c in canvases:
+		Global.undo_redo.add_do_property(c.layers[c.current_layer_index][0], "data", c.layers[c.current_layer_index][0].data)
 	if action == "Rectangle Select":
 		Global.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
-	Global.undo_redo.add_do_method(Global, "redo", self, current_layer_index)
+	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
 	print("Do: ", Global.undo_redo.get_current_action_name())
 

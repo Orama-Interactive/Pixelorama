@@ -6,7 +6,7 @@ var currently_selected := false
 var visibility_toggled := false
 
 func _ready() -> void:
-	var stylebox = StyleBoxFlat.new()
+	var stylebox := StyleBoxFlat.new()
 	stylebox.bg_color = Color("3d3b45")
 	add_stylebox_override("panel", stylebox)
 	changed_selection()

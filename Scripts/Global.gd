@@ -162,33 +162,35 @@ func find_node_by_name(root, node_name) -> Node:
 			return found
 	return null
 
-func undo(canvas : Canvas, layer_index : int = -1) -> void:
+func undo(canvases : Array, layer_index : int = -1) -> void:
 	undos -= 1
 	var action_name : String = undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale":
-		if layer_index > -1:
-			canvas.update_texture(layer_index)
-		else:
-			for i in canvas.layers.size():
-				canvas.update_texture(i)
+		for c in canvases:
+			if layer_index > -1:
+				c.update_texture(layer_index)
+			else:
+				for i in c.layers.size():
+					c.update_texture(i)
 
-		if action_name == "Scale":
-			canvas.camera_zoom()
+			if action_name == "Scale":
+				c.camera_zoom()
 	print("Undo: ", action_name)
 
-func redo(canvas : Canvas, layer_index : int = -1) -> void:
+func redo(canvases : Array, layer_index : int = -1) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name : String = undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale":
-		if layer_index > -1:
-			canvas.update_texture(layer_index)
-		else:
-			for i in canvas.layers.size():
-				canvas.update_texture(i)
+		for c in canvases:
+			if layer_index > -1:
+				c.update_texture(layer_index)
+			else:
+				for i in c.layers.size():
+					c.update_texture(i)
 
-		if action_name == "Scale":
-			canvas.camera_zoom()
+			if action_name == "Scale":
+				c.camera_zoom()
 	print("Redo: ", action_name)
 
 func change_frame() -> void:
