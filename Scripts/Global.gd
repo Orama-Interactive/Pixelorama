@@ -165,7 +165,7 @@ func find_node_by_name(root, node_name) -> Node:
 func undo(canvases : Array, layer_index : int = -1) -> void:
 	undos -= 1
 	var action_name : String = undo_redo.get_current_action_name()
-	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale":
+	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in canvases:
 			if layer_index > -1:
 				c.update_texture(layer_index)
@@ -175,13 +175,19 @@ func undo(canvases : Array, layer_index : int = -1) -> void:
 
 			if action_name == "Scale":
 				c.camera_zoom()
+	if "Layer" in action_name:
+		var current_layer_index := canvas.current_layer_index
+		canvas.generate_layer_panels()
+		if action_name == "Change Layer Order":
+			canvas.current_layer_index = current_layer_index
+			canvas.get_layer_container(current_layer_index).changed_selection()
 	print("Undo: ", action_name)
 
 func redo(canvases : Array, layer_index : int = -1) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name : String = undo_redo.get_current_action_name()
-	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale":
+	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in canvases:
 			if layer_index > -1:
 				c.update_texture(layer_index)
@@ -191,6 +197,12 @@ func redo(canvases : Array, layer_index : int = -1) -> void:
 
 			if action_name == "Scale":
 				c.camera_zoom()
+	if "Layer" in action_name:
+		var current_layer_index := canvas.current_layer_index
+		canvas.generate_layer_panels()
+		if action_name == "Change Layer Order":
+			canvas.current_layer_index = current_layer_index
+			canvas.get_layer_container(current_layer_index).changed_selection()
 	print("Redo: ", action_name)
 
 func change_frame() -> void:

@@ -283,7 +283,6 @@ func handle_redo(action : String) -> void:
 		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
 	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
-	print("Do: ", Global.undo_redo.get_current_action_name())
 
 func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)

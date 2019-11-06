@@ -528,15 +528,30 @@ func add_layer(is_new := true) -> void:
 	new_layer.lock()
 	var new_layer_tex := ImageTexture.new()
 	new_layer_tex.create_from_image(new_layer, 0)
-	Global.canvas.layers.append([new_layer, new_layer_tex, null, true])
-	Global.canvas.generate_layer_panels()
+
+	var new_layers := Global.canvas.layers.duplicate()
+	new_layers.append([new_layer, new_layer_tex, null, true])
+	Global.undos += 1
+	Global.undo_redo.create_action("Add Layer")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
 
 func _on_AddLayerButton_pressed() -> void:
 	add_layer()
 
 func _on_RemoveLayerButton_pressed() -> void:
-	Global.canvas.layers.remove(Global.canvas.current_layer_index)
-	Global.canvas.generate_layer_panels()
+	var new_layers := Global.canvas.layers.duplicate()
+	new_layers.remove(Global.canvas.current_layer_index)
+	Global.undos += 1
+	Global.undo_redo.create_action("Remove Layer")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
 
 func _on_MoveUpLayer_pressed() -> void:
 	change_layer_order(1)
@@ -547,23 +562,41 @@ func _on_MoveDownLayer_pressed() -> void:
 func change_layer_order(rate : int) -> void:
 	var change = Global.canvas.current_layer_index + rate
 
-	var temp = Global.canvas.layers[Global.canvas.current_layer_index]
-	Global.canvas.layers[Global.canvas.current_layer_index] = Global.canvas.layers[change]
-	Global.canvas.layers[change] = temp
-
-	Global.canvas.generate_layer_panels()
-	Global.canvas.current_layer_index = change
-	Global.canvas.get_layer_container(Global.canvas.current_layer_index).changed_selection()
+	var new_layers := Global.canvas.layers.duplicate()
+	var temp = new_layers[Global.canvas.current_layer_index]
+	new_layers[Global.canvas.current_layer_index] = new_layers[change]
+	new_layers[change] = temp
+	Global.undo_redo.create_action("Change Layer Order")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_do_property(Global.canvas, "current_layer_index", change)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_property(Global.canvas, "current_layer_index", Global.canvas.current_layer_index)
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
 
 func _on_CloneLayer_pressed() -> void:
 	add_layer(false)
 
 func _on_MergeLayer_pressed() -> void:
+	var new_layers := Global.canvas.layers.duplicate()
+	new_layers.remove(Global.canvas.current_layer_index)
 	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
-	Global.canvas.layers[Global.canvas.current_layer_index - 1][0].blend_rect(selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
-	Global.canvas.layers[Global.canvas.current_layer_index - 1][0].lock()
-	Global.canvas.update_texture(Global.canvas.current_layer_index - 1)
-	_on_RemoveLayerButton_pressed()
+
+	var new_layer := Image.new()
+	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
+	new_layer.blend_rect(selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Merge Layer")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_do_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", new_layer.data)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", Global.canvas.layers[Global.canvas.current_layer_index - 1][0].data)
+
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
 
 func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.left_square_indicator_visible = button_pressed
