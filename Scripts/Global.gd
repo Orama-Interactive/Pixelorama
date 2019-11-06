@@ -194,6 +194,11 @@ func redo(canvases : Array, layer_index : int = -1) -> void:
 	print("Redo: ", action_name)
 
 func change_frame() -> void:
+	#Make all frame buttons unpressed
+	for child in frame_container.get_children():
+		child.get_node("FrameButton").pressed = false
+	#Make only the current frame button pressed
+	frame_container.get_child(current_frame).get_node("FrameButton").pressed = true
 	for c in canvases:
 		c.visible = false
 	canvas = canvases[current_frame]

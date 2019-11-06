@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Canvas",
 "language": "GDScript",
 "path": "res://Scripts/Canvas.gd"
+}, {
+"base": "Button",
+"class": "LayerContainer",
+"language": "GDScript",
+"path": "res://Scripts/LayerContainer.gd"
 } ]
 _global_script_class_icons={
-"Canvas": ""
+"Canvas": "",
+"LayerContainer": ""
 }
 
 [application]

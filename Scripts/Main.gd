@@ -585,6 +585,8 @@ func _on_AddFrame_pressed() -> void:
 	var canvas = load("res://Prefabs/Canvas.tscn").instance()
 	canvas.size = Global.canvas.size
 	canvas.frame = Global.canvases.size()
+	for child in Global.frame_container.get_children():
+		child.get_node("FrameButton").pressed = false
 	for canvas in Global.canvases:
 		canvas.visible = false
 	Global.canvases.append(canvas)
@@ -612,6 +614,7 @@ func _on_RemoveFrame_pressed() -> void:
 		Global.remove_frame_button.disabled = true
 		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 	Global.canvas = Global.canvases[Global.current_frame]
+	Global.frame_container.get_child(Global.current_frame).get_node("FrameButton").pressed = true
 	Global.canvas.visible = true
 	Global.canvas.generate_layer_panels()
 	Global.handle_layer_order_buttons()
@@ -629,6 +632,8 @@ func _on_CloneFrame_pressed() -> void:
 		tex.create_from_image(sprite, 0)
 		canvas.layers.append([sprite, tex, layer[2], layer[3]])
 	canvas.frame = Global.canvases.size()
+	for child in Global.frame_container.get_children():
+		child.get_node("FrameButton").pressed = false
 	for canvas in Global.canvases:
 		canvas.visible = false
 	Global.canvases.append(canvas)

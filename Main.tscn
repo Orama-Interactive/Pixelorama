@@ -23,6 +23,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="UI"]
+editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 230, 0 )
@@ -35,6 +36,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 266.0
 size_flags_vertical = 3
@@ -399,19 +401,20 @@ margin_right = 230.0
 margin_bottom = 600.0
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="UI"]
+editor/display_folded = true
 margin_left = 230.0
 margin_right = 864.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
+[node name="HViewportContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
 editor/display_folded = true
 margin_right = 634.0
 margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline/HBoxContainer"]
+[node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline/HViewportContainer"]
 margin_right = 634.0
 margin_bottom = 464.0
 mouse_default_cursor_shape = 3
@@ -419,31 +422,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer"]
 size = Vector2( 634, 464 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Canvas" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="Canvas" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer/Viewport" instance=ExtResource( 5 )]
 
-[node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport"]
+[node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
 
-[node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer/Viewport"]
+[node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer/Viewport"]
 z_index = 1
 color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 7 )
 
-[node name="ViewportSeparator" type="VSeparator" parent="UI/CanvasAndTimeline/HBoxContainer"]
+[node name="ViewportSeparator" type="VSeparator" parent="UI/CanvasAndTimeline/HViewportContainer"]
 visible = false
 margin_left = 315.0
 margin_right = 319.0
 margin_bottom = 464.0
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="UI/CanvasAndTimeline/HBoxContainer"]
+[node name="ViewportContainer2" type="ViewportContainer" parent="UI/CanvasAndTimeline/HViewportContainer"]
 editor/display_folded = true
 visible = false
 margin_left = 319.0
@@ -454,13 +457,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2"]
+[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2"]
 size = Vector2( 315, 464 )
 handle_input_locally = false
 render_target_update_mode = 0
 script = ExtResource( 8 )
 
-[node name="Camera2D2" type="Camera2D" parent="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
@@ -1069,10 +1072,10 @@ align = 1
 [connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
 [connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
-[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HBoxContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayForward" to="." method="_on_PlayForward_toggled"]

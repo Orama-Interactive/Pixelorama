@@ -43,6 +43,7 @@ func _ready() -> void:
 	frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 	frame_button.name = "Frame_%s" % frame
 	frame_button.get_node("FrameButton").frame = frame
+	frame_button.get_node("FrameButton").pressed = true
 	frame_button.get_node("FrameID").text = str(frame + 1)
 	Global.frame_container.add_child(frame_button)
 
@@ -301,9 +302,9 @@ func update_texture(layer_index : int) -> void:
 	whole_image_texture.create_from_image(whole_image, 0)
 	frame_texture_rect.texture = whole_image_texture
 
-func get_layer_container(layer_index : int) -> PanelContainer:
+func get_layer_container(layer_index : int) -> LayerContainer:
 	for container in Global.vbox_layer_container.get_children():
-		if container is PanelContainer && container.i == layer_index:
+		if container is LayerContainer && container.i == layer_index:
 			return container
 	return null
 
@@ -386,7 +387,7 @@ func _draw() -> void:
 
 func generate_layer_panels() -> void:
 	for child in Global.vbox_layer_container.get_children():
-		if child is PanelContainer:
+		if child is LayerContainer:
 			child.queue_free()
 
 	current_layer_index = layers.size() - 1
@@ -399,9 +400,11 @@ func generate_layer_panels() -> void:
 
 	for i in range(layers.size() -1, -1, -1):
 		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-		layers[i][2] = "Layer %s" % i
+		if !layers[i][2]:
+			layers[i][2] = "Layer %s" % i
 		layer_container.i = i
 		layer_container.get_child(0).get_child(2).text = layers[i][2]
+		layer_container.get_child(0).get_child(3).text = layers[i][2]
 		layers[i][3] = true #set visible
 		layer_container.get_child(0).get_child(1).texture = layers[i][1]
 		Global.vbox_layer_container.add_child(layer_container)

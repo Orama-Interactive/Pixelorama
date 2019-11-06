@@ -2,17 +2,18 @@
 
 [ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
 
-[node name="LayerContainer" type="PanelContainer"]
-margin_top = 42.0
+[node name="LayerContainer" type="Button"]
 margin_right = 159.0
-margin_bottom = 88.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 0, 42 )
+toggle_mode = true
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
-margin_top = 7.0
+margin_top = 5.0
 margin_right = 152.0
-margin_bottom = 39.0
+margin_bottom = 37.0
 mouse_default_cursor_shape = 2
 
 [node name="VisibilityButton" type="Button" parent="HBoxContainer"]
@@ -36,6 +37,16 @@ margin_right = 106.0
 margin_bottom = 23.0
 text = "Layer 0"
 align = 1
-[connection signal="button_down" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_button_down"]
-[connection signal="button_up" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_button_up"]
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+visible = false
+margin_left = 110.0
+margin_right = 168.0
+margin_bottom = 32.0
+text = "Layer 0"
+editable = false
+caret_blink = true
+caret_blink_speed = 0.5
+[connection signal="pressed" from="." to="." method="_on_LayerContainer_pressed"]
 [connection signal="pressed" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
+[connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
