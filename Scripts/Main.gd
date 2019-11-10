@@ -101,7 +101,6 @@ func _ready() -> void:
 	$ExportSprites.get_vbox().add_child(export_as_single_file)
 	$ExportSprites.get_vbox().add_child(export_vertical_spritesheet)
 
-
 func _input(event):
 	for t in tools: #Handle tool shortcuts
 		if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
@@ -245,72 +244,81 @@ func _on_CreateNewImage_confirmed() -> void:
 func _on_OpenSprite_file_selected(path) -> void:
 	var file := File.new()
 	var err := file.open(path, File.READ)
-	if err == 0:
-		var current_version : String = ProjectSettings.get_setting("application/config/Version")
-		var version := file.get_line()
-		if current_version != version:
-			OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
-		var frame := 0
-		var frame_line := file.get_line()
-		clear_canvases()
-		while frame_line == "--":
-			var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
-			Global.canvas = canvas
-			var width := file.get_16()
-			var height := file.get_16()
-			var layer_line := file.get_line()
+	if err != OK: #An error occured
+		file.close()
+		return
 
-			while layer_line == "-":
-				var buffer := file.get_buffer(width * height * 4)
-				var layer_name := file.get_line()
-				var image := Image.new()
-				image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
-				image.lock()
-				var tex := ImageTexture.new()
-				tex.create_from_image(image, 0)
-				canvas.layers.append([image, tex, layer_name, true])
-				layer_line = file.get_line()
+	var current_version : String = ProjectSettings.get_setting("application/config/Version")
+	var version := file.get_line()
+	if current_version != version:
+		OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
+	var frame := 0
+	var frame_line := file.get_line()
+	clear_canvases()
+	while frame_line == "--":
+		var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
+		Global.canvas = canvas
+		var width := file.get_16()
+		var height := file.get_16()
+		var layer_line := file.get_line()
 
-			canvas.size = Vector2(width, height)
-			Global.canvases.append(canvas)
-			canvas.frame = frame
-			Global.canvas_parent.add_child(canvas)
-			frame_line = file.get_line()
-			frame += 1
-
-		Global.current_frame = frame - 1
-		#Load tool options
-		Global.left_color_picker.color = file.get_var()
-		Global.right_color_picker.color = file.get_var()
-		Global.left_brush_size = file.get_8()
-		Global.left_brush_size_edit.value = Global.left_brush_size
-		Global.right_brush_size = file.get_8()
-		Global.right_brush_size_edit.value = Global.right_brush_size
-		var left_palette = file.get_var()
-		var right_palette = file.get_var()
-		for color in left_palette:
-			Global.left_color_picker.get_picker().add_preset(color)
-		for color in right_palette:
-			Global.right_color_picker.get_picker().add_preset(color)
-
-		#Load custom brushes
-		Global.custom_brushes.clear()
-		Global.remove_brush_buttons()
-
-		var brush_line := file.get_line()
-		while brush_line == "/":
-			var b_width := file.get_16()
-			var b_height := file.get_16()
-			var buffer := file.get_buffer(b_width * b_height * 4)
+		while layer_line == "-":
+			var buffer := file.get_buffer(width * height * 4)
+			var layer_name := file.get_line()
 			var image := Image.new()
-			image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
-			Global.custom_brushes.append(image)
-			Global.create_brush_button(image)
-			brush_line = file.get_line()
+			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
+			image.lock()
+			var tex := ImageTexture.new()
+			tex.create_from_image(image, 0)
+			canvas.layers.append([image, tex, layer_name, true])
+			layer_line = file.get_line()
 
-		Global.undo_redo.clear_history(false)
+		canvas.size = Vector2(width, height)
+		Global.canvases.append(canvas)
+		canvas.frame = frame
+		Global.canvas_parent.add_child(canvas)
+		frame_line = file.get_line()
+		frame += 1
 
+	Global.current_frame = frame - 1
+	#Load tool options
+	Global.left_color_picker.color = file.get_var()
+	Global.right_color_picker.color = file.get_var()
+	Global.left_brush_size = file.get_8()
+	Global.left_brush_size_edit.value = Global.left_brush_size
+	Global.right_brush_size = file.get_8()
+	Global.right_brush_size_edit.value = Global.right_brush_size
+	var left_palette = file.get_var()
+	var right_palette = file.get_var()
+	for color in left_palette:
+		Global.left_color_picker.get_picker().add_preset(color)
+	for color in right_palette:
+		Global.right_color_picker.get_picker().add_preset(color)
+
+	#Load custom brushes
+	Global.custom_brushes.clear()
+	Global.remove_brush_buttons()
+
+	var brush_line := file.get_line()
+	while brush_line == "/":
+		var b_width := file.get_16()
+		var b_height := file.get_16()
+		var buffer := file.get_buffer(b_width * b_height * 4)
+		var image := Image.new()
+		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+		Global.custom_brushes.append(image)
+		Global.create_brush_button(image)
+		brush_line = file.get_line()
+
+	Global.undo_redo.clear_history(false)
 	file.close()
+
+	if frame > 1:
+		Global.remove_frame_button.disabled = false
+		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	else:
+		Global.remove_frame_button.disabled = true
+		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 func _on_SaveSprite_file_selected(path) -> void:
 	current_save_path = path
@@ -390,7 +398,6 @@ func _on_ImportSprites_files_selected(paths) -> void:
 	Global.current_frame = i - 1
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
 	Global.canvas.visible = true
-	Global.handle_layer_order_buttons()
 	biggest_canvas.camera_zoom()
 	if i > 1:
 		Global.remove_frame_button.disabled = false
@@ -474,6 +481,25 @@ func save_spritesheet() -> void:
 	if err != OK:
 		OS.alert("Can't save file")
 
+func _on_ScaleImage_confirmed() -> void:
+	var width = $ScaleImage/VBoxContainer/WidthCont/WidthValue.value
+	var height = $ScaleImage/VBoxContainer/HeightCont/HeightValue.value
+	var interpolation = $ScaleImage/VBoxContainer/InterpolationContainer/InterpolationType.selected
+	Global.undos += 1
+	Global.undo_redo.create_action("Scale")
+	Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
+
+	for i in range(Global.canvas.layers.size() - 1, -1, -1):
+		var sprite : Image = Global.canvas.layers[i][1].get_data()
+		sprite.resize(width, height, interpolation)
+		Global.undo_redo.add_do_property(Global.canvas.layers[i][0], "data", sprite.data)
+		Global.undo_redo.add_undo_property(Global.canvas.layers[i][0], "data", Global.canvas.layers[i][0].data)
+
+	Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
+
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
 		Global.can_draw = true
@@ -500,24 +526,21 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		Global.right_indicator.get_parent().remove_child(Global.right_indicator)
 		tool_pressed.add_child(Global.right_indicator)
 
-func _on_ScaleImage_confirmed() -> void:
-	var width = $ScaleImage/VBoxContainer/WidthCont/WidthValue.value
-	var height = $ScaleImage/VBoxContainer/HeightCont/HeightValue.value
-	var interpolation = $ScaleImage/VBoxContainer/InterpolationContainer/InterpolationType.selected
-	Global.undos += 1
-	Global.undo_redo.create_action("Scale")
-	Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
+func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
+	Global.left_square_indicator_visible = button_pressed
 
-	for i in range(Global.canvas.layers.size() - 1, -1, -1):
-		var sprite : Image = Global.canvas.layers[i][1].get_data()
-		sprite.resize(width, height, interpolation)
-		Global.undo_redo.add_do_property(Global.canvas.layers[i][0], "data", sprite.data)
-		Global.undo_redo.add_undo_property(Global.canvas.layers[i][0], "data", Global.canvas.layers[i][0].data)
+func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
+	Global.right_square_indicator_visible = button_pressed
 
-	Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
+func _on_LeftBrushSizeEdit_value_changed(value) -> void:
+	var new_size = int(value)
+	Global.left_brush_size = new_size
+	update_left_custom_brush()
+
+func _on_RightBrushSizeEdit_value_changed(value) -> void:
+	var new_size = int(value)
+	Global.right_brush_size = new_size
+	update_right_custom_brush()
 
 func add_layer(is_new := true) -> void:
 	var new_layer := Image.new()
@@ -535,12 +558,10 @@ func add_layer(is_new := true) -> void:
 	Global.undo_redo.create_action("Add Layer")
 	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
 	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
-
-func _on_AddLayerButton_pressed() -> void:
-	add_layer()
 
 func _on_RemoveLayerButton_pressed() -> void:
 	var new_layers := Global.canvas.layers.duplicate()
@@ -549,15 +570,10 @@ func _on_RemoveLayerButton_pressed() -> void:
 	Global.undo_redo.create_action("Remove Layer")
 	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
 	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
-
-func _on_MoveUpLayer_pressed() -> void:
-	change_layer_order(1)
-
-func _on_MoveDownLayer_pressed() -> void:
-	change_layer_order(-1)
 
 func change_layer_order(rate : int) -> void:
 	var change = Global.canvas.current_layer_index + rate
@@ -571,12 +587,10 @@ func change_layer_order(rate : int) -> void:
 	Global.undo_redo.add_do_property(Global.canvas, "current_layer_index", change)
 	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
 	Global.undo_redo.add_undo_property(Global.canvas, "current_layer_index", Global.canvas.current_layer_index)
+
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
-
-func _on_CloneLayer_pressed() -> void:
-	add_layer(false)
 
 func _on_MergeLayer_pressed() -> void:
 	var new_layers := Global.canvas.layers.duplicate()
@@ -598,116 +612,102 @@ func _on_MergeLayer_pressed() -> void:
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
-func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
-	Global.left_square_indicator_visible = button_pressed
-
-func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
-	Global.right_square_indicator_visible = button_pressed
-
-func _on_LeftBrushSizeEdit_value_changed(value) -> void:
-	var new_size = int(value)
-	Global.left_brush_size = new_size
-	update_left_custom_brush()
-
-func _on_RightBrushSizeEdit_value_changed(value) -> void:
-	var new_size = int(value)
-	Global.right_brush_size = new_size
-	update_right_custom_brush()
-
-func _on_AddFrame_pressed() -> void:
-	var canvas = load("res://Prefabs/Canvas.tscn").instance()
+func add_frame(is_new := true) -> void:
+	var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 	canvas.size = Global.canvas.size
 	canvas.frame = Global.canvases.size()
-	for child in Global.frame_container.get_children():
-		child.get_node("FrameButton").pressed = false
-	for canvas in Global.canvases:
-		canvas.visible = false
-	Global.canvases.append(canvas)
-	Global.current_frame = Global.canvases.size() - 1
-	Global.canvas = canvas
 
-	Global.canvas_parent.add_child(canvas)
-	Global.remove_frame_button.disabled = false
-	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	Global.move_left_frame_button.disabled = false
-	Global.move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var new_canvases := Global.canvases.duplicate()
+	new_canvases.append(canvas)
+	var new_hidden_canvases := Global.hidden_canvases.duplicate()
+	new_hidden_canvases.append(canvas)
+
+	if !is_new: #If we're cloning
+		for layer in Global.canvas.layers: #Copy every layer
+			var sprite := Image.new()
+			sprite.copy_from(layer[0])
+			sprite.lock()
+			var tex := ImageTexture.new()
+			tex.create_from_image(sprite, 0)
+			canvas.layers.append([sprite, tex, layer[2], layer[3]])
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Add Frame")
+	Global.undo_redo.add_do_method(Global, "redo", [canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
+
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", canvas)
+	Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
+	for child in Global.frame_container.get_children():
+		var frame_button = child.get_node("FrameButton")
+		Global.undo_redo.add_do_property(frame_button, "pressed", false)
+		Global.undo_redo.add_undo_property(frame_button, "pressed", frame_button.pressed)
+	for c in Global.canvases:
+		Global.undo_redo.add_do_property(c, "visible", false)
+		Global.undo_redo.add_undo_property(c, "visible", c.visible)
+
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+	Global.undo_redo.commit_action()
 
 func _on_RemoveFrame_pressed() -> void:
-	Global.canvas.frame_button.queue_free()
-	Global.canvas.queue_free()
-	Global.canvases.remove(Global.current_frame)
-	for canvas in Global.canvases:
-		if canvas.frame > Global.current_frame:
-			canvas.frame -= 1
-			canvas.frame_button.get_node("FrameButton").frame = canvas.frame
-			canvas.frame_button.get_node("FrameID").text = str(canvas.frame + 1)
-	if Global.current_frame > 0:
-		Global.current_frame -= 1
-	if len(Global.canvases) == 1:
-		Global.remove_frame_button.disabled = true
-		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-	Global.canvas = Global.canvases[Global.current_frame]
-	Global.frame_container.get_child(Global.current_frame).get_node("FrameButton").pressed = true
-	Global.canvas.visible = true
-	Global.canvas.generate_layer_panels()
-	Global.handle_layer_order_buttons()
+	var new_canvases := Global.canvases.duplicate()
+	new_canvases.erase(Global.canvas)
+	var new_hidden_canvases := Global.hidden_canvases.duplicate()
+	new_hidden_canvases.append(Global.canvas)
+	var current_frame := Global.current_frame
+	if current_frame > 0 && current_frame == new_canvases.size():
+		current_frame -= 1
 
+	Global.undos += 1
+	Global.undo_redo.create_action("Remove Frame")
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 
-func _on_CloneFrame_pressed() -> void:
-	var canvas = load("res://Prefabs/Canvas.tscn").instance()
-	canvas.size = Global.canvas.size
-	#canvas.layers = Global.canvas.layers.duplicate(true)
-	for layer in Global.canvas.layers:
-		var sprite := Image.new()
-		sprite.copy_from(layer[0])
-		sprite.lock()
-		var tex := ImageTexture.new()
-		tex.create_from_image(sprite, 0)
-		canvas.layers.append([sprite, tex, layer[2], layer[3]])
-	canvas.frame = Global.canvases.size()
-	for child in Global.frame_container.get_children():
-		child.get_node("FrameButton").pressed = false
-	for canvas in Global.canvases:
-		canvas.visible = false
-	Global.canvases.append(canvas)
-	Global.current_frame = Global.canvases.size() - 1
-	Global.canvas = canvas
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "hidden_canvases", new_hidden_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
+	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
 
-	Global.canvas_parent.add_child(canvas)
-	Global.remove_frame_button.disabled = false
-	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	Global.move_left_frame_button.disabled = false
-	Global.move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var i := 0
+	for canvas in new_canvases:
+		Global.undo_redo.add_do_property(canvas, "frame", i)
+		Global.undo_redo.add_undo_property(canvas, "frame", canvas.frame)
+		i += 1
 
-func _on_MoveFrameLeft_pressed() -> void:
-	change_frame_order(-1)
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "hidden_canvases", Global.hidden_canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 
-func _on_MoveFrameRight_pressed() -> void:
-	change_frame_order(1)
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
 
 func change_frame_order(rate : int) -> void:
-	var frame_button = Global.frame_container.get_node("Frame_%s" % Global.current_frame)
 	var change = Global.current_frame + rate
 
-	var temp = Global.canvases[Global.current_frame]
-	Global.canvases[Global.current_frame] = Global.canvases[change]
-	Global.canvases[change] = temp
+	var new_canvases := Global.canvases.duplicate()
+	var temp = new_canvases[Global.current_frame]
+	new_canvases[Global.current_frame] = new_canvases[change]
+	new_canvases[change] = temp
 
-	#Clear frame button names first, to avoid duplicates like two Frame_0s
-	for canvas in Global.canvases:
-		canvas.frame_button.name = "frame"
+	Global.undo_redo.create_action("Change Frame Order")
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global.canvas, "frame", change)
+	Global.undo_redo.add_do_property(Global.canvases[change], "frame", Global.current_frame)
+	Global.undo_redo.add_do_property(Global, "current_frame", change)
 
-	for canvas in Global.canvases:
-		canvas.frame = Global.canvases.find(canvas)
-		canvas.frame_button.name = "Frame_%s" % canvas.frame
-		canvas.frame_button.get_node("FrameButton").frame = canvas.frame
-		canvas.frame_button.get_node("FrameID").text = str(canvas.frame + 1)
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global.canvas, "frame", Global.current_frame)
+	Global.undo_redo.add_undo_property(Global.canvases[change], "frame", change)
+	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 
-	Global.current_frame = change
-	Global.frame_container.move_child(frame_button, Global.current_frame)
-	Global.canvas_parent.move_child(Global.canvas, Global.current_frame)
-	#Global.canvas.generate_layer_panels()
-	Global.handle_layer_order_buttons()
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
 
 func _on_LoopAnim_pressed() -> void:
 	match Global.loop_animation_button.text:
@@ -784,8 +784,6 @@ func _on_AnimationTimer_timeout() -> void:
 				2: #Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
-
-	Global.change_frame()
 
 func _on_FPSValue_value_changed(value) -> void:
 	fps = float(value)

@@ -36,13 +36,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 266.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 20.0
 
@@ -166,6 +164,7 @@ margin_right = 230.0
 margin_bottom = 274.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 278.0
 margin_right = 230.0
 margin_bottom = 544.0
@@ -173,6 +172,7 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
+editor/display_folded = true
 margin_right = 113.0
 margin_bottom = 266.0
 size_flags_horizontal = 3
@@ -272,6 +272,7 @@ margin_right = 117.0
 margin_bottom = 266.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
+editor/display_folded = true
 margin_left = 117.0
 margin_right = 230.0
 margin_bottom = 266.0
@@ -618,18 +619,19 @@ margin_bottom = 600.0
 rect_min_size = Vector2( 160, 0 )
 
 [node name="LayersAndMisc" type="VBoxContainer" parent="UI/LayerPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel/LayersAndMisc"]
-editor/display_folded = true
 margin_right = 160.0
 margin_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxLayerContainer" type="VBoxContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer"]
+editor/display_folded = true
 margin_right = 160.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
@@ -643,7 +645,6 @@ text = "Layers"
 align = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
-editor/display_folded = true
 margin_top = 18.0
 margin_right = 160.0
 margin_bottom = 38.0
@@ -1080,16 +1081,16 @@ align = 1
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
 [connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
 [connection signal="value_changed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/AddFrame" to="." method="_on_AddFrame_pressed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/RemoveFrame" to="." method="_on_RemoveFrame_pressed"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameLeft" to="." method="_on_MoveFrameLeft_pressed"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameRight" to="." method="_on_MoveFrameRight_pressed"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/CloneFrame" to="." method="_on_CloneFrame_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/AddLayerButton" to="." method="_on_AddLayerButton_pressed"]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameLeft" to="." method="change_frame_order" binds= [ -1 ]]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameRight" to="." method="change_frame_order" binds= [ 1 ]]
+[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/CloneFrame" to="." method="add_frame" binds= [ false ]]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/AddLayerButton" to="." method="add_layer"]
 [connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveUpLayer" to="." method="_on_MoveUpLayer_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveDownLayer" to="." method="_on_MoveDownLayer_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]

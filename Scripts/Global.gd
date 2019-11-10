@@ -2,7 +2,7 @@ extends Node
 
 var undo_redo : UndoRedo
 var undos := 0 #The number of times we added undo properties
-var current_frame := 0 setget set_current_frame_label
+var current_frame := 0 setget frame_changed
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
@@ -18,6 +18,8 @@ var tile_mode := false
 # warning-ignore:unused_class_variable
 var draw_grid := false
 var canvases := []
+# warning-ignore:unused_class_variable
+var hidden_canvases := []
 var canvas : Canvas
 var canvas_parent : Node
 var second_viewport : ViewportContainer
@@ -102,7 +104,6 @@ var custom_left_brush_texture := ImageTexture.new()
 # warning-ignore:unused_class_variable
 var custom_right_brush_texture := ImageTexture.new()
 
-
 func _ready() -> void:
 	undo_redo = UndoRedo.new()
 	var root = get_tree().get_root()
@@ -162,11 +163,11 @@ func find_node_by_name(root, node_name) -> Node:
 			return found
 	return null
 
-func undo(canvases : Array, layer_index : int = -1) -> void:
+func undo(_canvases : Array, layer_index : int = -1) -> void:
 	undos -= 1
 	var action_name : String = undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
-		for c in canvases:
+		for c in _canvases:
 			if layer_index > -1:
 				c.update_texture(layer_index)
 			else:
@@ -176,19 +177,37 @@ func undo(canvases : Array, layer_index : int = -1) -> void:
 			if action_name == "Scale":
 				c.camera_zoom()
 	if "Layer" in action_name:
-		var current_layer_index := canvas.current_layer_index
-		canvas.generate_layer_panels()
+		var current_layer_index : int = _canvases[0].current_layer_index
+		_canvases[0].generate_layer_panels()
 		if action_name == "Change Layer Order":
-			canvas.current_layer_index = current_layer_index
-			canvas.get_layer_container(current_layer_index).changed_selection()
+			_canvases[0].current_layer_index = current_layer_index
+			_canvases[0].get_layer_container(current_layer_index).changed_selection()
+
+	if action_name == "Add Frame":
+		canvas_parent.remove_child(_canvases[0])
+		frame_container.remove_child(_canvases[0].frame_button)
+		if len(canvases) == 1:
+			Global.remove_frame_button.disabled = true
+			Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	elif action_name == "Remove Frame":
+		canvas_parent.add_child(_canvases[0])
+		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
+		frame_container.add_child(_canvases[0].frame_button)
+		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		remove_frame_button.disabled = false
+		remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	elif action_name == "Change Frame Order":
+		frame_container.move_child(_canvases[0].frame_button, current_frame)
+		canvas_parent.move_child(_canvases[0], current_frame)
+
 	print("Undo: ", action_name)
 
-func redo(canvases : Array, layer_index : int = -1) -> void:
+func redo(_canvases : Array, layer_index : int = -1) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name : String = undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
-		for c in canvases:
+		for c in _canvases:
 			if layer_index > -1:
 				c.update_texture(layer_index)
 			else:
@@ -198,27 +217,45 @@ func redo(canvases : Array, layer_index : int = -1) -> void:
 			if action_name == "Scale":
 				c.camera_zoom()
 	if "Layer" in action_name:
-		var current_layer_index := canvas.current_layer_index
-		canvas.generate_layer_panels()
+		var current_layer_index : int = _canvases[0].current_layer_index
+		_canvases[0].generate_layer_panels()
 		if action_name == "Change Layer Order":
-			canvas.current_layer_index = current_layer_index
-			canvas.get_layer_container(current_layer_index).changed_selection()
+			_canvases[0].current_layer_index = current_layer_index
+			_canvases[0].get_layer_container(current_layer_index).changed_selection()
+
+	if action_name == "Add Frame":
+		canvas_parent.add_child(_canvases[0])
+		if !Global.frame_container.is_a_parent_of(_canvases[0].frame_button):
+			Global.frame_container.add_child(_canvases[0].frame_button)
+		remove_frame_button.disabled = false
+		remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	elif action_name == "Remove Frame":
+		canvas_parent.remove_child(_canvases[0])
+		frame_container.remove_child(_canvases[0].frame_button)
+		if len(canvases) == 1:
+			remove_frame_button.disabled = true
+			remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	elif action_name == "Change Frame Order":
+		frame_container.move_child(_canvases[0].frame_button, current_frame)
+		canvas_parent.move_child(_canvases[0], current_frame)
+
 	print("Redo: ", action_name)
 
-func change_frame() -> void:
-	#Make all frame buttons unpressed
-	for child in frame_container.get_children():
-		child.get_node("FrameButton").pressed = false
-	#Make only the current frame button pressed
-	frame_container.get_child(current_frame).get_node("FrameButton").pressed = true
+func frame_changed(value : int) -> void:
+	current_frame = value
+	current_frame_label.text = "Current frame: %s/%s" % [str(current_frame + 1), canvases.size()]
+
 	for c in canvases:
 		c.visible = false
 	canvas = canvases[current_frame]
 	canvas.visible = true
 	canvas.generate_layer_panels()
-	handle_layer_order_buttons()
+	#Make all frame buttons unpressed
+	for c in canvases:
+		c.frame_button.get_node("FrameButton").pressed = false
+	#Make only the current frame button pressed
+	canvas.frame_button.get_node("FrameButton").pressed = true
 
-func handle_layer_order_buttons() -> void:
 	if current_frame == 0:
 		move_left_frame_button.disabled = true
 		move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
@@ -233,9 +270,6 @@ func handle_layer_order_buttons() -> void:
 		move_right_frame_button.disabled = false
 		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
-func set_current_frame_label(value) -> void:
-	current_frame = value
-	current_frame_label.text = "Current frame: %s/%s" % [str(current_frame + 1), canvases.size()]
 
 func create_brush_button(brush_img : Image) -> void:
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
@@ -252,8 +286,6 @@ func remove_brush_buttons() -> void:
 	for child in hbox_container.get_children():
 		if child.name != "PixelBrushButton":
 			hbox_container.remove_child(child)
-#	for i in range(0, hbox_container.get_child_count() - 1):
-#		hbox_container.remove_child(hbox_container.get_child(i))
 
 func update_left_custom_brush() -> void:
 	if custom_left_brush_index > -1:
@@ -283,7 +315,6 @@ func blend_image_with_color(image : Image, color : Color, interpolate_factor : f
 			if color.a > 0: #If it's the pencil
 				var current_color := blended_image.get_pixel(xx, yy)
 				if current_color.a > 0:
-					#var blended_color = current_color.blend(color)
 					var new_color := current_color.linear_interpolate(color, interpolate_factor)
 					blended_image.set_pixel(xx, yy, new_color)
 			else: #If color is transparent - if it's the eraser

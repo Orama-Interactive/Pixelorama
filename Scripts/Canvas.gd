@@ -6,7 +6,7 @@ var current_layer_index := 0
 var trans_background : ImageTexture
 var location := Vector2.ZERO
 var size := Vector2(64, 64)
-var frame := 0
+var frame := 0 setget frame_changed
 var frame_button : VBoxContainer
 var frame_texture_rect : TextureRect
 
@@ -86,7 +86,7 @@ func _process(delta) -> void:
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
 
-	if visible:
+	if Global.current_frame == frame:
 		if !mouse_in_canvas:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
@@ -300,6 +300,12 @@ func update_texture(layer_index : int) -> void:
 	var whole_image_texture := ImageTexture.new()
 	whole_image_texture.create_from_image(whole_image, 0)
 	frame_texture_rect.texture = whole_image_texture
+
+func frame_changed(value : int) -> void:
+	frame = value
+	if frame_button:
+		frame_button.get_node("FrameButton").frame = frame
+		frame_button.get_node("FrameID").text = str(frame + 1)
 
 func get_layer_container(layer_index : int) -> LayerContainer:
 	for container in Global.vbox_layer_container.get_children():
