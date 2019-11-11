@@ -19,4 +19,18 @@ rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
+
+[node name="DeleteButton" type="Button" parent="."]
+visible = false
+modulate = Color( 1, 0.00392157, 0.00392157, 0.709804 )
+margin_left = 22.0
+margin_right = 42.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.7, 0.7 )
+text = "X"
+[connection signal="mouse_entered" from="." to="." method="_on_BrushButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_BrushButton_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_BrushButton_pressed"]
+[connection signal="mouse_entered" from="DeleteButton" to="." method="_on_BrushButton_mouse_entered"]
+[connection signal="mouse_exited" from="DeleteButton" to="." method="_on_BrushButton_mouse_exited"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

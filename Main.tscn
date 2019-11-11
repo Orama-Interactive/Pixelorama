@@ -35,8 +35,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_right = 230.0
-margin_bottom = 242.0
+margin_bottom = 224.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
@@ -162,21 +163,21 @@ button_mask = 3
 text = "RectSelect"
 
 [node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 246.0
+margin_top = 228.0
 margin_right = 230.0
-margin_bottom = 250.0
+margin_bottom = 232.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
-margin_top = 254.0
+margin_top = 236.0
 margin_right = 230.0
-margin_bottom = 496.0
+margin_bottom = 460.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
 editor/display_folded = true
 margin_right = 113.0
-margin_bottom = 242.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
@@ -271,13 +272,13 @@ text = "Vert. Mirror"
 [node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
 margin_left = 113.0
 margin_right = 117.0
-margin_bottom = 242.0
+margin_bottom = 224.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
 editor/display_folded = true
 margin_left = 117.0
 margin_right = 230.0
-margin_bottom = 242.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
@@ -369,14 +370,20 @@ margin_bottom = 218.0
 text = "Vert. Mirror"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 500.0
+margin_top = 464.0
 margin_right = 230.0
-margin_bottom = 504.0
+margin_bottom = 468.0
+
+[node name="FileBrushes" type="Label" parent="UI/ToolPanel/Tools"]
+margin_top = 472.0
+margin_right = 230.0
+margin_bottom = 486.0
+text = "Brushes From Files"
 
 [node name="BrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
-margin_top = 508.0
+margin_top = 490.0
 margin_right = 230.0
-margin_bottom = 544.0
+margin_bottom = 526.0
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
 
@@ -400,9 +407,15 @@ centered = false
 offset = Vector2( 28, 0 )
 
 [node name="HSeparator3" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 548.0
+margin_top = 530.0
+margin_right = 230.0
+margin_bottom = 534.0
+
+[node name="ProjectBrushes" type="Label" parent="UI/ToolPanel/Tools"]
+margin_top = 538.0
 margin_right = 230.0
 margin_bottom = 552.0
+text = "Custom Project Brushes"
 
 [node name="CustomBrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
 margin_top = 556.0
