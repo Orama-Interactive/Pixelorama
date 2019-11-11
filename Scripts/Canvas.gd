@@ -537,8 +537,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 				src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
 
 				#Handle mirroring
-				var mirror_x := east_limit + west_limit - dst.x - 1
-				var mirror_y := south_limit + north_limit - dst.y - 1
+				var mirror_x := east_limit + west_limit - pos.x - (pos.x - dst.x) - 1
+				var mirror_y := south_limit + north_limit - pos.y - (pos.y - dst.y) - 1
 
 				if color.a > 0: #If it's the pencil
 					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)

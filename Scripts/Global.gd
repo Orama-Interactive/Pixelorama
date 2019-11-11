@@ -167,7 +167,7 @@ func find_node_by_name(root, node_name) -> Node:
 
 func undo(_canvases : Array, layer_index : int = -1) -> void:
 	undos -= 1
-	var action_name : String = undo_redo.get_current_action_name()
+	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in _canvases:
 			if layer_index > -1:
@@ -207,7 +207,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 func redo(_canvases : Array, layer_index : int = -1) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
 		undos = undo_redo.get_version()
-	var action_name : String = undo_redo.get_current_action_name()
+	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in _canvases:
 			if layer_index > -1:
@@ -292,8 +292,27 @@ func remove_brush_buttons() -> void:
 	current_right_brush_type = BRUSH_TYPES.PIXEL
 	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	for child in hbox_container.get_children():
-		if child.name != "PixelBrushButton":
-			hbox_container.remove_child(child)
+		child.queue_free()
+		#hbox_container.remove_child(child)
+
+func undo_custom_brush(_brush_button : Button = null) -> void:
+	undos -= 1
+	var action_name := undo_redo.get_current_action_name()
+	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
+	if action_name == "Delete Custom Brush":
+		hbox_container.add_child(_brush_button)
+		hbox_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
+		_brush_button.get_node("DeleteButton").visible = false
+	print("Undo: ", action_name)
+
+func redo_custom_brush(_brush_button : Button = null) -> void:
+	if undos < undo_redo.get_version(): #If we did undo and then redo
+		undos = undo_redo.get_version()
+	var action_name := undo_redo.get_current_action_name()
+	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
+	if action_name == "Delete Custom Brush":
+		hbox_container.remove_child(_brush_button)
+	print("Redo: ", action_name)
 
 func update_left_custom_brush() -> void:
 	if custom_left_brush_index > -1:

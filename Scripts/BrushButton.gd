@@ -35,15 +35,26 @@ func _on_DeleteButton_pressed() -> void:
 			remove_child(Global.right_brush_indicator)
 			file_hbox_container.get_child(0).add_child(Global.right_brush_indicator)
 
+		Global.undos += 1
+		Global.undo_redo.create_action("Delete Custom Brush")
 		for i in range(custom_brush_index - 1, custom_hbox_container.get_child_count()):
-			if Global.custom_left_brush_index == custom_hbox_container.get_child(i).custom_brush_index:
+			var bb = custom_hbox_container.get_child(i)
+			if Global.custom_left_brush_index == bb.custom_brush_index:
 				Global.custom_left_brush_index -= 1
-			if Global.custom_right_brush_index == custom_hbox_container.get_child(i).custom_brush_index:
+			if Global.custom_right_brush_index == bb.custom_brush_index:
 				Global.custom_right_brush_index -= 1
-			custom_hbox_container.get_child(i).custom_brush_index -= 1
 
-		Global.custom_brushes.remove(custom_brush_index)
-		queue_free()
+			Global.undo_redo.add_do_property(bb, "custom_brush_index", bb.custom_brush_index - 1)
+			Global.undo_redo.add_undo_property(bb, "custom_brush_index", bb.custom_brush_index)
+
+		var custom_brushes := Global.custom_brushes.duplicate()
+		custom_brushes.remove(custom_brush_index)
+
+		Global.undo_redo.add_do_property(Global, "custom_brushes", custom_brushes)
+		Global.undo_redo.add_undo_property(Global, "custom_brushes", Global.custom_brushes)
+		Global.undo_redo.add_do_method(Global, "redo_custom_brush", self)
+		Global.undo_redo.add_undo_method(Global, "undo_custom_brush", self)
+		Global.undo_redo.commit_action()
 
 func _on_BrushButton_mouse_entered() -> void:
 	if brush_type == Global.BRUSH_TYPES.CUSTOM:
