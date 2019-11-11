@@ -374,7 +374,7 @@ func _draw() -> void:
 					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-				Global.BRUSH_TYPES.CUSTOM:
+				Global.BRUSH_TYPES.FILE, Global.BRUSH_TYPES.CUSTOM:
 					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_left_brush_texture, dst)
@@ -385,7 +385,7 @@ func _draw() -> void:
 					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-				Global.BRUSH_TYPES.CUSTOM:
+				Global.BRUSH_TYPES.FILE, Global.BRUSH_TYPES.CUSTOM:
 					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_right_brush_texture, dst)
@@ -505,7 +505,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String) -> 
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
 									sprite_changed_this_frame = true
 
-			Global.BRUSH_TYPES.CUSTOM:
+			Global.BRUSH_TYPES.FILE, Global.BRUSH_TYPES.CUSTOM:
 				var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
 				pos = pos.floor()
 				var dst := rectangle_center(pos, custom_brush_size)

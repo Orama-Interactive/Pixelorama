@@ -72,7 +72,7 @@ var current_left_tool := "Pencil"
 var current_right_tool := "Eraser"
 
 #Brushes
-enum BRUSH_TYPES {PIXEL, CUSTOM}
+enum BRUSH_TYPES {PIXEL, FILE, CUSTOM}
 # warning-ignore:unused_class_variable
 var left_brush_size := 1
 # warning-ignore:unused_class_variable
@@ -89,6 +89,8 @@ var left_vertical_mirror := false
 var right_horizontal_mirror := false
 # warning-ignore:unused_class_variable
 var right_vertical_mirror := false
+
+var brushes_from_files := 0
 # warning-ignore:unused_class_variable
 var custom_brushes := []
 # warning-ignore:unused_class_variable
@@ -271,18 +273,24 @@ func frame_changed(value : int) -> void:
 		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
-func create_brush_button(brush_img : Image) -> void:
+func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM) -> void:
+	var hbox_container : HBoxContainer
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
-	brush_button.brush_type = BRUSH_TYPES.CUSTOM
+	brush_button.brush_type = brush_type
 	brush_button.custom_brush_index = custom_brushes.size() - 1
+	if brush_type == BRUSH_TYPES.FILE:
+		hbox_container = find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
+	else:
+		hbox_container = find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	var brush_tex := ImageTexture.new()
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
-	var hbox_container := find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
 	hbox_container.add_child(brush_button)
 
 func remove_brush_buttons() -> void:
-	var hbox_container := find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
+	current_left_brush_type = BRUSH_TYPES.PIXEL
+	current_right_brush_type = BRUSH_TYPES.PIXEL
+	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	for child in hbox_container.get_children():
 		if child.name != "PixelBrushButton":
 			hbox_container.remove_child(child)

@@ -101,12 +101,33 @@ func _ready() -> void:
 	$ExportSprites.get_vbox().add_child(export_as_single_file)
 	$ExportSprites.get_vbox().add_child(export_vertical_spritesheet)
 
+	var path := "Brushes"
+	var brushes_dir := Directory.new()
+	if !brushes_dir.dir_exists(path):
+		brushes_dir.make_dir(path)
+
+	brushes_dir.open(path)
+	brushes_dir.list_dir_begin(true, true)
+	var file := brushes_dir.get_next()
+	while file != "":
+		if file.get_extension().to_upper() == "PNG":
+			var image := Image.new()
+			var err := image.load(path.plus_file(file))
+			if err == OK:
+				image.convert(Image.FORMAT_RGBA8)
+				Global.custom_brushes.append(image)
+				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE)
+		file = brushes_dir.get_next()
+	brushes_dir.list_dir_end()
+	Global.brushes_from_files = Global.custom_brushes.size()
+
 func _input(event):
-	for t in tools: #Handle tool shortcuts
-		if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
-			_on_Tool_pressed(t[0], false, false)
-		elif event.is_action_pressed(t[1]): #Shortcut for left button
-			_on_Tool_pressed(t[0], false, true)
+	if Global.has_focus:
+		for t in tools: #Handle tool shortcuts
+			if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
+				_on_Tool_pressed(t[0], false, false)
+			elif event.is_action_pressed(t[1]): #Shortcut for left button
+				_on_Tool_pressed(t[0], false, true)
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:
@@ -246,6 +267,7 @@ func _on_OpenSprite_file_selected(path) -> void:
 	var err := file.open(path, File.READ)
 	if err != OK: #An error occured
 		file.close()
+		OS.alert("Can't load file")
 		return
 
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
@@ -296,7 +318,8 @@ func _on_OpenSprite_file_selected(path) -> void:
 		Global.right_color_picker.get_picker().add_preset(color)
 
 	#Load custom brushes
-	Global.custom_brushes.clear()
+	#Global.custom_brushes.clear()
+	Global.custom_brushes.resize(Global.brushes_from_files)
 	Global.remove_brush_buttons()
 
 	var brush_line := file.get_line()
@@ -351,7 +374,8 @@ func _on_SaveSprite_file_selected(path) -> void:
 		file.store_var(left_palette)
 		file.store_var(right_palette)
 		#Save custom brushes
-		for brush in Global.custom_brushes:
+		for i in range(Global.brushes_from_files, Global.custom_brushes.size()):
+			var brush = Global.custom_brushes[i]
 			file.store_line("/")
 			file.store_16(brush.get_size().x)
 			file.store_16(brush.get_size().y)
@@ -368,31 +392,31 @@ func _on_ImportSprites_files_selected(paths) -> void:
 	var biggest_canvas : Canvas
 	var i := Global.canvases.size()
 	for path in paths:
-		var image = Image.new()
-		var err = image.load(path)
-		if err == OK:
-			opensprite_file_selected = true
-			var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
-			canvas.size = image.get_size()
-			image.convert(Image.FORMAT_RGBA8)
-			image.lock()
-			var tex := ImageTexture.new()
-			tex.create_from_image(image, 0)
-			#Store [Image, ImageTexture, Layer Name, Visibity boolean]
-			canvas.layers.append([image, tex, "Layer 0", true])
-			canvas.frame = i
-			Global.canvas_parent.add_child(canvas)
-			Global.canvases.append(canvas)
-			canvas.visible = false
-			if path == paths[0]: #If it's the first file
-				max_size = canvas.size
-				biggest_canvas = canvas
-			else:
-				if canvas.size > max_size:
-					biggest_canvas = canvas
-
-		else:
+		var image := Image.new()
+		var err := image.load(path)
+		if err != OK: #An error occured
 			OS.alert("Can't load file")
+			continue
+
+		opensprite_file_selected = true
+		var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
+		canvas.size = image.get_size()
+		image.convert(Image.FORMAT_RGBA8)
+		image.lock()
+		var tex := ImageTexture.new()
+		tex.create_from_image(image, 0)
+		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
+		canvas.layers.append([image, tex, "Layer 0", true])
+		canvas.frame = i
+		Global.canvas_parent.add_child(canvas)
+		Global.canvases.append(canvas)
+		canvas.visible = false
+		if path == paths[0]: #If it's the first file
+			max_size = canvas.size
+			biggest_canvas = canvas
+		else:
+			if canvas.size > max_size:
+				biggest_canvas = canvas
 
 		i += 1
 	Global.current_frame = i - 1
