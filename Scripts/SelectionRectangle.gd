@@ -61,11 +61,9 @@ func _process(delta) -> void:
 	if is_dragging:
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):
 			#Drag
-			#if orig_x + mouse_pos_floored.x >= Global.canvas.location.x && diff_x + mouse_pos_floored.x <= Global.canvas.size.x:
 			start_pos.x = orig_x + mouse_pos_floored.x
 			end_pos.x = diff_x + mouse_pos_floored.x
 
-			#if orig_y + mouse_pos_floored.y >= Global.canvas.location.y && diff_y + mouse_pos_floored.y <= Global.canvas.size.y:
 			start_pos.y = orig_y + mouse_pos_floored.y
 			end_pos.y = diff_y + mouse_pos_floored.y
 			polygon[0] = start_pos

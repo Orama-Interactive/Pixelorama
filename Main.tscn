@@ -29,13 +29,13 @@ rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="UI/ToolPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 224.0
 size_flags_vertical = 3
@@ -147,7 +147,6 @@ button_mask = 3
 text = "Lighten/Darken"
 
 [node name="SelectionToolsContainer2" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-editor/display_folded = true
 margin_top = 72.0
 margin_right = 230.0
 margin_bottom = 92.0
@@ -440,7 +439,6 @@ margin_bottom = 600.0
 size_flags_horizontal = 3
 
 [node name="HViewportContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 634.0
 margin_bottom = 464.0
 size_flags_horizontal = 3
@@ -501,6 +499,7 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 6 )
 
 [node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_top = 468.0
 margin_right = 634.0
 margin_bottom = 600.0
@@ -650,7 +649,6 @@ margin_bottom = 600.0
 rect_min_size = Vector2( 160, 0 )
 
 [node name="LayersAndMisc" type="VBoxContainer" parent="UI/LayerPanel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 3

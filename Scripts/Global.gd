@@ -293,7 +293,6 @@ func remove_brush_buttons() -> void:
 	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	for child in hbox_container.get_children():
 		child.queue_free()
-		#hbox_container.remove_child(child)
 
 func undo_custom_brush(_brush_button : Button = null) -> void:
 	undos -= 1
