@@ -9,6 +9,7 @@ var import_as_new_frame : CheckBox
 var export_all_frames : CheckBox
 var export_as_single_file : CheckBox
 var export_vertical_spritesheet : CheckBox
+var redone := false
 var fps := 1.0
 var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
@@ -168,7 +169,9 @@ func edit_menu_id_pressed(id : int) -> void:
 		0: #Undo
 			Global.undo_redo.undo()
 		1: #Redo
+			redone = true
 			Global.undo_redo.redo()
+			redone = false
 		2: #Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
@@ -382,6 +385,7 @@ func _on_SaveSprite_file_selected(path) -> void:
 			file.store_buffer(brush.get_data())
 		file.store_line("END_BRUSHES")
 	file.close()
+	Global.notification_label("File saved")
 
 func _on_ImportSprites_files_selected(paths) -> void:
 	if !import_as_new_frame.pressed: #If we're not adding a new frame, delete the previous
@@ -442,6 +446,8 @@ func clear_canvases() -> void:
 		if child is Canvas:
 			child.queue_free()
 	Global.canvases.clear()
+	current_save_path = ""
+	current_export_path = ""
 
 func _on_ExportSprites_file_selected(path : String) -> void:
 	current_export_path = path
@@ -461,6 +467,7 @@ func export_project() -> void:
 			save_spritesheet()
 	else:
 		save_sprite(Global.canvas, current_export_path)
+	Global.notification_label("File exported")
 
 func save_sprite(canvas : Canvas, path : String) -> void:
 	var whole_image := Image.new()

@@ -1,28 +1,30 @@
 # Pixelorama - your free and open-source sprite editor!
- A free & open-source 2D sprite editor, made with Godot Engine, using GDScript!
+ Your free & open-source 2D sprite editor, made in the Godot Engine, using GDScript!
 
- [![Pixelorama's horrible UI](https://functionoverload590613498.files.wordpress.com/2019/10/screenshot_265.png)](https://www.youtube.com/watch?v=L8o8QKB8lPs)
+ [![Pixelorama's horrible UI](https://functionoverload590613498.files.wordpress.com/2019/11/screenshot_268.png)](https://www.youtube.com/watch?v=h3OJROgAR-A)
 
-Current features as of version v0.3:
+Current features as of version v0.4:
 
-- Choosing between 4 tools – pencil, eraser, fill bucket and rectangle select – and mapping them to both of your left and right mouse buttons. That’s, pretty wild, huh?
+- Choosing between 6 tools – pencil, eraser, fill bucket, paint same color, lighten/darken and rectangle select – and mapping them to both of your left and right mouse buttons.
 - Different colors and brush sizes for each of the mouse buttons.
-- Custom brush support.
+- Support of two types of custom brushes: "From files" and "per project" brushes. Custom brushes from files get loaded from the "Brushes" folder that comes with Pixelorama, and per project brushes get saved with the rectangle select tool. 
 - Creating a new canvas with a size of your choosing.
 - Are you an animator? Then you've come to the right place! Pixelorama has its own Animation Timeline just for you!​
-- Importing PNG and JPEG images, and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames.
+- Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames.
 - Export your gorgeous art as PNG files.
 - Save snd open your projects as Pixelorama's custom file format, .pxo
+- Undo/Redo support!
+- Horizontal & vertical mirrored drawing!
 - Tile Mode for pattern creation!
 - Split screen mode to see your masterpiece twice!
 - Create straight lines for pencil and eraser by holding down Shift while you draw.
 - The middle mouse wheel isn’t forgotten, you can use it to pan around the canvas and by scrolling up and down, you can zoom in and out!
 - Keyboard shortcuts! I’m pretty sure this is a lifesaver for most of you.
-- Just like onions, Pixelorama has a multiple layer system! You can add, remove, move up and down, clone and merge as many layers as you like!
-- Scale and crop your images!
+- Just like onions, Pixelorama has a multiple layer system! You can add, remove, move up and down, clone and merge as many layers as you like! You can also rename them!
+- Scale, crop and flip your images!
 
 Make sure to read my blog post on Function(Overload) for more information! https://functionoverload590613498.wordpress.com/2019/08/18/i-made-my-own-sprite-editor-in-godot/
 
 Download it as a stand-alone on itch.io: https://orama-interactive.itch.io/pixelorama
 
-And if you like, consider helping me by sponsoring this project!
+If you like, consider helping me by sponsoring this project! It would enable me to focus more on Pixelorama, and make more projects in the future!

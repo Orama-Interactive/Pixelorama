@@ -23,6 +23,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="UI"]
+editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 230, 0 )
@@ -36,6 +37,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_right = 230.0
 margin_bottom = 224.0
 size_flags_vertical = 3
@@ -167,6 +169,7 @@ margin_right = 230.0
 margin_bottom = 232.0
 
 [node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 236.0
 margin_right = 230.0
 margin_bottom = 460.0
@@ -174,7 +177,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-editor/display_folded = true
 margin_right = 113.0
 margin_bottom = 224.0
 size_flags_horizontal = 3
@@ -260,12 +262,14 @@ text = "C"
 margin_top = 166.0
 margin_right = 113.0
 margin_bottom = 190.0
+hint_tooltip = "Enable horizontal mirrored drawing for the left tool"
 text = "Horiz. Mirror"
 
 [node name="LeftVerticalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 194.0
 margin_right = 113.0
 margin_bottom = 218.0
+hint_tooltip = "Enable vertical mirrored drawing for the left tool"
 text = "Vert. Mirror"
 
 [node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
@@ -274,7 +278,6 @@ margin_right = 117.0
 margin_bottom = 224.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-editor/display_folded = true
 margin_left = 117.0
 margin_right = 230.0
 margin_bottom = 224.0
@@ -360,12 +363,14 @@ text = "C"
 margin_top = 166.0
 margin_right = 113.0
 margin_bottom = 190.0
+hint_tooltip = "Enable horizontal mirrored drawing for the right tool"
 text = "Horiz. Mirror"
 
 [node name="RightVerticalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 194.0
 margin_right = 113.0
 margin_bottom = 218.0
+hint_tooltip = "Enable vertical mirrored drawing for the right tool"
 text = "Vert. Mirror"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/ToolPanel/Tools"]

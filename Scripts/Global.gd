@@ -20,6 +20,7 @@ var draw_grid := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
+var control : Node
 var canvas : Canvas
 var canvas_parent : Node
 var second_viewport : ViewportContainer
@@ -109,6 +110,7 @@ var custom_right_brush_texture := ImageTexture.new()
 func _ready() -> void:
 	undo_redo = UndoRedo.new()
 	var root = get_tree().get_root()
+	control = find_node_by_name(root, "Control")
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
 	canvas_parent = canvas.get_parent()
@@ -165,6 +167,12 @@ func find_node_by_name(root, node_name) -> Node:
 			return found
 	return null
 
+func notification_label(text : String) -> void:
+	var notification : Label = load("res://Prefabs/NotificationLabel.tscn").instance()
+	notification.text = text
+	notification.rect_position = Vector2(240, OS.window_size.y - 150)
+	get_tree().get_root().add_child(notification)
+
 func undo(_canvases : Array, layer_index : int = -1) -> void:
 	undos -= 1
 	var action_name := undo_redo.get_current_action_name()
@@ -202,7 +210,8 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		frame_container.move_child(_canvases[0].frame_button, current_frame)
 		canvas_parent.move_child(_canvases[0], current_frame)
 
-	print("Undo: ", action_name)
+	notification_label("Undo: %s" % action_name)
+
 
 func redo(_canvases : Array, layer_index : int = -1) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
@@ -241,7 +250,8 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		frame_container.move_child(_canvases[0].frame_button, current_frame)
 		canvas_parent.move_child(_canvases[0], current_frame)
 
-	print("Redo: ", action_name)
+	if control.redone:
+		notification_label("Redo: %s" % action_name)
 
 func frame_changed(value : int) -> void:
 	current_frame = value
@@ -302,7 +312,7 @@ func undo_custom_brush(_brush_button : Button = null) -> void:
 		hbox_container.add_child(_brush_button)
 		hbox_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
 		_brush_button.get_node("DeleteButton").visible = false
-	print("Undo: ", action_name)
+	notification_label("Undo: %s" % action_name)
 
 func redo_custom_brush(_brush_button : Button = null) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
@@ -311,7 +321,8 @@ func redo_custom_brush(_brush_button : Button = null) -> void:
 	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	if action_name == "Delete Custom Brush":
 		hbox_container.remove_child(_brush_button)
-	print("Redo: ", action_name)
+	if control.redone:
+		notification_label("Redo: %s" % action_name)
 
 func update_left_custom_brush() -> void:
 	if custom_left_brush_index > -1:
