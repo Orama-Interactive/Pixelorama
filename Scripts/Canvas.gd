@@ -652,8 +652,8 @@ func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
 
 #Returns the position in the middle of a rectangle
-func rectangle_center(pos : Vector2, size : Vector2) -> Vector2:
-	return (pos - size / 2).floor()
+func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
+	return (rect_position - rect_size / 2).floor()
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true
