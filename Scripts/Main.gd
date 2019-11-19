@@ -10,7 +10,7 @@ var export_all_frames : CheckBox
 var export_as_single_file : CheckBox
 var export_vertical_spritesheet : CheckBox
 var redone := false
-var fps := 1.0
+var fps := 6.0
 var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 
@@ -19,7 +19,7 @@ func _ready() -> void:
 	OS.set_window_title("Pixelorama %s" % ProjectSettings.get_setting("application/config/Version"))
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
-	OS.set("min_window_size", Vector2(1024, 600))
+	OS.set("min_window_size", Vector2(1152, 648))
 
 	var file_menu_items := {
 		"New..." : KEY_MASK_CTRL + KEY_N,
@@ -78,7 +78,7 @@ func _ready() -> void:
 	#Node, left mouse shortcut, right mouse shortcut
 	tools.append([Global.find_node_by_name(root, "Pencil"), "left_pencil_tool", "right_pencil_tool"])
 	tools.append([Global.find_node_by_name(root, "Eraser"), "left_eraser_tool", "right_eraser_tool"])
-	tools.append([Global.find_node_by_name(root, "Fill"), "left_fill_tool", "right_fill_tool"])
+	tools.append([Global.find_node_by_name(root, "Bucket"), "left_fill_tool", "right_fill_tool"])
 	tools.append([Global.find_node_by_name(root, "PaintAllPixelsSameColor"), "left_paint_all_tool", "right_paint_all_tool"])
 	tools.append([Global.find_node_by_name(root, "LightenDarken"), "left_lightdark_tool", "right_lightdark_tool"])
 	tools.append([Global.find_node_by_name(root, "RectSelect"), "left_rectangle_select_tool", "right_rectangle_select_tool"])
@@ -550,12 +550,21 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	var current_action := tool_pressed.name
 	if (mouse_press && Input.is_action_just_released("left_mouse")) || (!mouse_press && key_for_left):
 		Global.current_left_tool = current_action
-		Global.left_indicator.get_parent().remove_child(Global.left_indicator)
-		tool_pressed.add_child(Global.left_indicator)
 	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
 		Global.current_right_tool = current_action
-		Global.right_indicator.get_parent().remove_child(Global.right_indicator)
-		tool_pressed.add_child(Global.right_indicator)
+
+	for t in tools:
+		var tool_name : String = t[0].name
+		if tool_name == "PaintAllPixelsSameColor":
+			continue
+		if tool_name == Global.current_left_tool && tool_name == Global.current_right_tool:
+			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_l_r.png" % tool_name)
+		elif tool_name == Global.current_left_tool:
+			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_l.png" % tool_name)
+		elif tool_name == Global.current_right_tool:
+			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_r.png" % tool_name)
+		else:
+			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s.png" % tool_name)
 
 func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.left_square_indicator_visible = button_pressed
@@ -643,33 +652,24 @@ func _on_MergeLayer_pressed() -> void:
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
-func add_frame(is_new := true) -> void:
-	var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
-	canvas.size = Global.canvas.size
-	canvas.frame = Global.canvases.size()
+func add_frame() -> void:
+	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
+	new_canvas.size = Global.canvas.size
+	new_canvas.frame = Global.canvases.size()
 
 	var new_canvases := Global.canvases.duplicate()
-	new_canvases.append(canvas)
+	new_canvases.append(new_canvas)
 	var new_hidden_canvases := Global.hidden_canvases.duplicate()
-	new_hidden_canvases.append(canvas)
-
-	if !is_new: #If we're cloning
-		for layer in Global.canvas.layers: #Copy every layer
-			var sprite := Image.new()
-			sprite.copy_from(layer[0])
-			sprite.lock()
-			var tex := ImageTexture.new()
-			tex.create_from_image(sprite, 0)
-			canvas.layers.append([sprite, tex, layer[2], layer[3]])
+	new_hidden_canvases.append(new_canvas)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Frame")
-	Global.undo_redo.add_do_method(Global, "redo", [canvas])
-	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [new_canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [new_canvas])
 
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
 	Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
-	Global.undo_redo.add_do_property(Global, "canvas", canvas)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 	Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
 	for child in Global.frame_container.get_children():
 		var frame_button = child.get_node("FrameButton")
@@ -685,101 +685,54 @@ func add_frame(is_new := true) -> void:
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 	Global.undo_redo.commit_action()
 
-func _on_RemoveFrame_pressed() -> void:
-	var new_canvases := Global.canvases.duplicate()
-	new_canvases.erase(Global.canvas)
-	var new_hidden_canvases := Global.hidden_canvases.duplicate()
-	new_hidden_canvases.append(Global.canvas)
-	var current_frame := Global.current_frame
-	if current_frame > 0 && current_frame == new_canvases.size():
-		current_frame -= 1
-
-	Global.undos += 1
-	Global.undo_redo.create_action("Remove Frame")
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-
-	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global, "hidden_canvases", new_hidden_canvases)
-	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
-	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
-
-	var i := 0
-	for canvas in new_canvases:
-		Global.undo_redo.add_do_property(canvas, "frame", i)
-		Global.undo_redo.add_undo_property(canvas, "frame", canvas.frame)
-		i += 1
-
-	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global, "hidden_canvases", Global.hidden_canvases)
-	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
-	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
-
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func change_frame_order(rate : int) -> void:
-	var change = Global.current_frame + rate
-
-	var new_canvases := Global.canvases.duplicate()
-	var temp = new_canvases[Global.current_frame]
-	new_canvases[Global.current_frame] = new_canvases[change]
-	new_canvases[change] = temp
-
-	Global.undo_redo.create_action("Change Frame Order")
-	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global.canvas, "frame", change)
-	Global.undo_redo.add_do_property(Global.canvases[change], "frame", Global.current_frame)
-	Global.undo_redo.add_do_property(Global, "current_frame", change)
-
-	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global.canvas, "frame", Global.current_frame)
-	Global.undo_redo.add_undo_property(Global.canvases[change], "frame", change)
-	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
 func _on_LoopAnim_pressed() -> void:
-	match Global.loop_animation_button.text:
-		"No":
+	match Global.loop_animation_button.texture_normal.resource_path:
+		"res://Assets/Graphics/Timeline/Loop_None.png":
 			#Make it loop
 			animation_loop = 1
-			Global.loop_animation_button.text = "Cycle"
-		"Cycle":
+			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop.png")
+		"res://Assets/Graphics/Timeline/Loop.png":
 			#Make it ping-pong
 			animation_loop = 2
-			Global.loop_animation_button.text = "Ping-Pong"
-		"Ping-Pong":
+			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop_PingPong.png")
+		"res://Assets/Graphics/Timeline/Loop_PingPong.png":
 			#Make it stop
 			animation_loop = 0
-			Global.loop_animation_button.text = "No"
+			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop_None.png")
 
 func _on_PlayForward_toggled(button_pressed) -> void:
 	Global.play_backwards.pressed = false
-	Global.play_backwards.text = "Play Backwards"
 
 	if button_pressed:
-		Global.play_forward.text = "Stop"
 		$AnimationTimer.wait_time = 1 / fps
 		$AnimationTimer.start()
 		animation_forward = true
 	else:
-		Global.play_forward.text = "Play Forward"
 		$AnimationTimer.stop()
 
 func _on_PlayBackwards_toggled(button_pressed) -> void:
 	Global.play_forward.pressed = false
-	Global.play_forward.text = "Play Forward"
 
 	if button_pressed:
-		Global.play_backwards.text = "Stop"
 		$AnimationTimer.wait_time = 1 / fps
 		$AnimationTimer.start()
 		animation_forward = false
 	else:
-		Global.play_backwards.text = "Play Backwards"
 		$AnimationTimer.stop()
+
+func _on_NextFrame_pressed() -> void:
+	if Global.current_frame < Global.canvases.size() - 1:
+		Global.current_frame += 1
+
+func _on_PreviousFrame_pressed() -> void:
+	if Global.current_frame > 0:
+		Global.current_frame -= 1
+
+func _on_LastFrame_pressed() -> void:
+	Global.current_frame = Global.canvases.size() - 1
+
+func _on_FirstFrame_pressed() -> void:
+	Global.current_frame = 0
 
 func _on_AnimationTimer_timeout() -> void:
 	if animation_forward:
@@ -789,9 +742,7 @@ func _on_AnimationTimer_timeout() -> void:
 			match animation_loop:
 				0: #No loop
 					Global.play_forward.pressed = false
-					Global.play_forward.text = "Play Forward"
 					Global.play_backwards.pressed = false
-					Global.play_backwards.text = "Play Backwards"
 					$AnimationTimer.stop()
 				1: #Cycle loop
 					Global.current_frame = 0
@@ -806,9 +757,7 @@ func _on_AnimationTimer_timeout() -> void:
 			match animation_loop:
 				0: #No loop
 					Global.play_backwards.pressed = false
-					Global.play_backwards.text = "Play Backwards"
 					Global.play_forward.pressed = false
-					Global.play_forward.text = "Play Forward"
 					$AnimationTimer.stop()
 				1: #Cycle loop
 					Global.current_frame = Global.canvases.size() - 1

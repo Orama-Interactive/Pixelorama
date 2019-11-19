@@ -14,6 +14,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
+button_mask = 3
 script = ExtResource( 1 )
 
 [node name="FrameTexture" type="TextureRect" parent="FrameButton"]
@@ -26,6 +27,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 expand = true
 
+[node name="PopupMenu" type="PopupMenu" parent="FrameButton"]
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false ]
+
 [node name="FrameID" type="Label" parent="."]
 margin_top = 40.0
 margin_right = 36.0
@@ -33,3 +40,4 @@ margin_bottom = 54.0
 text = "0"
 align = 1
 [connection signal="pressed" from="FrameButton" to="FrameButton" method="_on_FrameButton_pressed"]
+[connection signal="id_pressed" from="FrameButton/PopupMenu" to="FrameButton" method="_on_PopupMenu_id_pressed"]

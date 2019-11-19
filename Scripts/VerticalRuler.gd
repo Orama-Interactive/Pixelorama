@@ -9,6 +9,7 @@ var minor_subdivision := 5
 var first : Vector2
 var last : Vector2
 
+# warning-ignore:unused_argument
 func _process(delta) -> void:
 	update()
 

@@ -54,9 +54,6 @@ func _ready() -> void:
 	camera_zoom()
 
 func camera_zoom() -> void:
-	#Set camera offset to the center of canvas
-	Global.camera.offset = size / 2
-	Global.camera2.offset = size / 2
 	#Set camera zoom based on the sprite size
 	var bigger = max(size.x, size.y)
 	var zoom_max := Vector2(bigger, bigger) * 0.01
@@ -69,6 +66,12 @@ func camera_zoom() -> void:
 	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
 	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
 	Global.zoom_level_label.text = "Zoom: x%s" % [stepify(1 / Global.camera.zoom.x, 0.01)]
+
+	#Set camera offset to the center of canvas
+	Global.camera.offset = size / 2
+	#Global.camera.offset.x = size.x / 2 + Global.main_viewport.rect_size.x / 2 * -Global.camera.zoom.x
+	#Global.camera.offset.y = size.y / 2 + Global.main_viewport.rect_size.y / 2 * -Global.camera.zoom.y
+	Global.camera2.offset = size / 2
 
 # warning-ignore:unused_argument
 func _process(delta) -> void:
@@ -131,7 +134,7 @@ func _process(delta) -> void:
 			pencil_and_eraser(mouse_pos, current_color, current_mouse_button)
 		"Eraser":
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
-		"Fill":
+		"Bucket":
 			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var current_color : Color
 				var horizontal_mirror := false
@@ -244,9 +247,8 @@ func _process(delta) -> void:
 
 func handle_undo(action : String) -> void:
 	var canvases := []
-	var animation_timer := $"../../../../../../AnimationTimer"
 	var layer_index := -1
-	if animation_timer.is_stopped(): #if we're not animating, store only the current canvas
+	if Global.animation_timer.is_stopped(): #if we're not animating, store only the current canvas
 		canvases = [self]
 		layer_index = current_layer_index
 	else: #If we're animating, store all canvases
@@ -270,9 +272,8 @@ func handle_redo(action : String) -> void:
 	if Global.undos < Global.undo_redo.get_version():
 		return
 	var canvases := []
-	var animation_timer := $"../../../../../../AnimationTimer"
 	var layer_index := -1
-	if animation_timer.is_stopped():
+	if Global.animation_timer.is_stopped():
 		canvases = [self]
 		layer_index = current_layer_index
 	else:

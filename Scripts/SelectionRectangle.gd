@@ -56,7 +56,7 @@ func _process(delta) -> void:
 			tex.create_from_image(img, 0)
 			update()
 	else:
-		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_CROSS
+		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
 
 	if is_dragging:
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):

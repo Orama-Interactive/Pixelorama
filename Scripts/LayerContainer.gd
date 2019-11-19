@@ -58,10 +58,10 @@ func changed_selection() -> void:
 func _on_VisibilityButton_pressed() -> void:
 	if Global.canvas.layers[i][3]:
 		Global.canvas.layers[i][3] = false
-		get_child(0).get_child(0).text = "I"
+		get_child(0).get_child(0).texture_normal = preload("res://Assets/Graphics/Layers/layer_invisible.png")
 	else:
 		Global.canvas.layers[i][3] = true
-		get_child(0).get_child(0).text = "V"
+		get_child(0).get_child(0).texture_normal = preload("res://Assets/Graphics/Layers/layer_visible.png")
 
 func _on_LineEdit_text_changed(new_text : String) -> void:
 	Global.canvas.layers[i][2] = new_text

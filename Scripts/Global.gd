@@ -23,6 +23,7 @@ var hidden_canvases := []
 var control : Node
 var canvas : Canvas
 var canvas_parent : Node
+var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var viewport_separator : VSeparator
 var split_screen_button : Button
@@ -41,8 +42,6 @@ var file_menu : MenuButton
 var edit_menu : MenuButton
 var view_menu : MenuButton
 var help_menu : MenuButton
-var left_indicator : Sprite
-var right_indicator : Sprite
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
 var left_brush_size_edit : SpinBox
@@ -52,18 +51,16 @@ var right_interpolate_slider : HSlider
 var left_brush_indicator : Sprite
 var right_brush_indicator : Sprite
 
-var loop_animation_button : Button
-var play_forward : Button
-var play_backwards : Button
+var loop_animation_button : BaseButton
+var play_forward : BaseButton
+var play_backwards : BaseButton
 var frame_container : HBoxContainer
-var remove_frame_button : Button
-var move_left_frame_button : Button
-var move_right_frame_button : Button
 var vbox_layer_container : VBoxContainer
-var remove_layer_button : Button
-var move_up_layer_button : Button
-var move_down_layer_button : Button
-var merge_down_layer_button : Button
+var remove_layer_button : BaseButton
+var move_up_layer_button : BaseButton
+var move_down_layer_button : BaseButton
+var merge_down_layer_button : BaseButton
+var animation_timer : Timer
 var cursor_position_label : Label
 var zoom_level_label : Label
 var current_frame_label : Label
@@ -114,11 +111,12 @@ func _ready() -> void:
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
 	canvas_parent = canvas.get_parent()
+	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
 	viewport_separator = find_node_by_name(root, "ViewportSeparator")
 	split_screen_button = find_node_by_name(root, "SplitScreenButton")
 	camera = find_node_by_name(canvas_parent, "Camera2D")
-	camera2 = find_node_by_name(canvas_parent.get_parent().get_parent(), "Camera2D2")
+	camera2 = find_node_by_name(root, "Camera2D2")
 
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	image_clipboard = Image.new()
@@ -127,8 +125,6 @@ func _ready() -> void:
 	edit_menu = find_node_by_name(root, "EditMenu")
 	view_menu = find_node_by_name(root, "ViewMenu")
 	help_menu = find_node_by_name(root, "HelpMenu")
-	left_indicator = find_node_by_name(root, "LeftIndicator")
-	right_indicator = find_node_by_name(root, "RightIndicator")
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
 	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
@@ -143,14 +139,12 @@ func _ready() -> void:
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
 	frame_container = find_node_by_name(root, "FrameContainer")
-	remove_frame_button = find_node_by_name(root, "RemoveFrame")
-	move_left_frame_button = find_node_by_name(root, "MoveFrameLeft")
-	move_right_frame_button = find_node_by_name(root, "MoveFrameRight")
 	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
 	remove_layer_button = find_node_by_name(root, "RemoveLayerButton")
 	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
 	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
+	animation_timer = find_node_by_name(root, "AnimationTimer")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 	current_frame_label = find_node_by_name(root, "CurrentFrame")
@@ -204,11 +198,9 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 		frame_container.add_child(_canvases[0].frame_button)
 		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
-		remove_frame_button.disabled = false
-		remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	elif action_name == "Change Frame Order":
-		frame_container.move_child(_canvases[0].frame_button, current_frame)
-		canvas_parent.move_child(_canvases[0], current_frame)
+		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	notification_label("Undo: %s" % action_name)
 
@@ -238,17 +230,12 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.add_child(_canvases[0])
 		if !Global.frame_container.is_a_parent_of(_canvases[0].frame_button):
 			Global.frame_container.add_child(_canvases[0].frame_button)
-		remove_frame_button.disabled = false
-		remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frame_container.remove_child(_canvases[0].frame_button)
-		if len(canvases) == 1:
-			remove_frame_button.disabled = true
-			remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 	elif action_name == "Change Frame Order":
-		frame_container.move_child(_canvases[0].frame_button, current_frame)
-		canvas_parent.move_child(_canvases[0], current_frame)
+		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	if control.redone:
 		notification_label("Redo: %s" % action_name)
@@ -267,20 +254,6 @@ func frame_changed(value : int) -> void:
 		c.frame_button.get_node("FrameButton").pressed = false
 	#Make only the current frame button pressed
 	canvas.frame_button.get_node("FrameButton").pressed = true
-
-	if current_frame == 0:
-		move_left_frame_button.disabled = true
-		move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-	else:
-		move_left_frame_button.disabled = false
-		move_left_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-
-	if current_frame == canvases.size() - 1:
-		move_right_frame_button.disabled = true
-		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-	else:
-		move_right_frame_button.disabled = false
-		move_right_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM) -> void:

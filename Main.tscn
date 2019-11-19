@@ -1,133 +1,266 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/left.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=3]
-[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Graphics/Tools/RectSelect.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Tools/Pencil_l.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Tools/Eraser_r.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Tools/Bucket.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/Tools/LightenDarken.png" type="Texture" id=6]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Graphics/left.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/right.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/HorizontalRuler.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/VerticalRuler.gd" type="Script" id=11]
+[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=15]
+[ext_resource path="res://Assets/Graphics/Timeline/Go_To_First_Frame.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Graphics/Timeline/Previous_Frame.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Graphics/Timeline/Play Backwards.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Graphics/Timeline/Pause.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Graphics/Timeline/Play.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Graphics/Timeline/Next_Frame.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/Timeline/Go_To_Last_Frame.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/Timeline/Loop_None.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/Timeline/New_Frame.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Graphics/Layers/new_layer.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Graphics/Layers/delete_layer.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Graphics/Layers/delete_layer_disabled.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Graphics/Layers/move_up.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Graphics/Layers/move_up_disabled.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Graphics/Layers/move_down.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/Layers/move_down_disabled.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Graphics/Layers/clone_layer.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Graphics/Layers/merge_down.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Graphics/Layers/merge_down_disabled.png" type="Texture" id=34]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=35]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_default_cursor_shape = 16
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="UI" type="HBoxContainer" parent="."]
+[node name="MenuAndUI" type="VBoxContainer" parent="."]
 editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 3
 custom_constants/separation = 0
 
-[node name="ToolPanel" type="Panel" parent="UI"]
-editor/display_folded = true
-margin_right = 230.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 230, 0 )
-size_flags_vertical = 3
+[node name="MenuContainer" type="Panel" parent="MenuAndUI"]
+margin_right = 1152.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+custom_styles/panel = SubResource( 1 )
 
-[node name="Tools" type="VBoxContainer" parent="UI/ToolPanel"]
-editor/display_folded = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="MenusAndTools" type="VBoxContainer" parent="UI/ToolPanel/Tools"]
-editor/display_folded = true
-margin_right = 230.0
-margin_bottom = 224.0
-size_flags_vertical = 3
-
-[node name="MenuItems" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-editor/display_folded = true
-margin_right = 230.0
+[node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 1010.0
 margin_bottom = 20.0
 
-[node name="FileMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
+[node name="FileMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_right = 35.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "File"
 
-[node name="EditMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
+[node name="EditMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 39.0
 margin_right = 75.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Edit"
 
-[node name="ViewMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
+[node name="ViewMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 79.0
 margin_right = 121.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "View"
 
-[node name="HelpMenu" type="MenuButton" parent="UI/ToolPanel/Tools/MenusAndTools/MenuItems"]
+[node name="HelpMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 125.0
 margin_right = 167.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Help"
 
-[node name="PaintToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
 editor/display_folded = true
-margin_top = 24.0
-margin_right = 230.0
-margin_bottom = 44.0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_right = 65.5
 
-[node name="Pencil" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
-margin_right = 51.0
-margin_bottom = 20.0
+[node name="ZoomLevel" type="Label" parent="MenuAndUI/MenuContainer/HBoxContainer"]
+margin_top = 7.0
+margin_right = 80.0
+margin_bottom = 21.0
+text = "Zoom: x7.81"
+
+[node name="CursorPosition" type="Label" parent="MenuAndUI/MenuContainer/HBoxContainer"]
+margin_left = 84.0
+margin_top = 7.0
+margin_right = 131.0
+margin_bottom = 21.0
+text = "[64x64]"
+align = 2
+
+[node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
+margin_top = 28.0
+margin_right = 1152.0
+margin_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+margin_right = 242.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 242, 0 )
+size_flags_vertical = 3
+
+[node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenusAndTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_right = 226.0
+margin_bottom = 230.0
+size_flags_vertical = 3
+custom_constants/separation = 17
+
+[node name="SelectionTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+margin_right = 226.0
+margin_bottom = 54.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/SelectionTools"]
+margin_right = 226.0
+margin_bottom = 18.0
+custom_constants/separation = 0
+
+[node name="SelectionTools" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/SelectionTools/VBoxContainer"]
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Selection Tools"
+
+[node name="HSeparator6" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/SelectionTools/VBoxContainer"]
+margin_top = 14.0
+margin_right = 226.0
+margin_bottom = 18.0
+
+[node name="SelectionToolsContainer2" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/SelectionTools"]
+margin_top = 22.0
+margin_right = 226.0
+margin_bottom = 54.0
+
+[node name="RectSelect" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/SelectionTools/SelectionToolsContainer2"]
+margin_right = 32.0
+margin_bottom = 32.0
+hint_tooltip = "R for left mouse button
+Alt + R for right mouse button
+Press Shift to move the content"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 2 )
+
+[node name="DrawTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+margin_top = 71.0
+margin_right = 226.0
+margin_bottom = 125.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
+margin_right = 226.0
+margin_bottom = 18.0
+custom_constants/separation = 0
+
+[node name="DrawTools" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/VBoxContainer"]
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Draw Tools"
+
+[node name="HSeparator5" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/VBoxContainer"]
+margin_top = 14.0
+margin_right = 226.0
+margin_bottom = 18.0
+
+[node name="PaintToolsContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
+margin_top = 22.0
+margin_right = 226.0
+margin_bottom = 54.0
+
+[node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
 hint_tooltip = "P for left mouse button
 Alt + P for right mouse button
 Hold Shift to make a line"
 mouse_default_cursor_shape = 2
 button_mask = 3
-text = "Pencil"
+texture_normal = ExtResource( 3 )
 
-[node name="LeftIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer/Pencil"]
-texture = ExtResource( 2 )
-centered = false
-offset = Vector2( 0, -10 )
-
-[node name="Eraser" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 20.0
+[node name="Eraser" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
 hint_tooltip = "E for left mouse button
 Alt + E for right mouse button
 Hold Shift to make a line"
 mouse_default_cursor_shape = 2
 button_mask = 3
-text = "Eraser"
+texture_normal = ExtResource( 4 )
 
-[node name="RightIndicator" type="Sprite" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer/Eraser"]
-texture = ExtResource( 3 )
-centered = false
-offset = Vector2( 35, -10 )
-
-[node name="Fill" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/PaintToolsContainer"]
-margin_left = 110.0
-margin_right = 166.0
-margin_bottom = 20.0
+[node name="Bucket" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
 hint_tooltip = "B for left mouse button
 Alt + B for right mouse button"
 mouse_default_cursor_shape = 2
 button_mask = 3
-text = "Bucket"
+texture_normal = ExtResource( 5 )
 
-[node name="ColorToolsContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-editor/display_folded = true
-margin_top = 48.0
-margin_right = 230.0
-margin_bottom = 68.0
+[node name="LightenDarken" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+hint_tooltip = "U for left mouse button
+Alt + U for right mouse button
+Ctrl to Darken"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 6 )
 
-[node name="PaintAllPixelsSameColor" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ColorToolsContainer"]
+[node name="ColorToolsContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+visible = false
+margin_top = 142.0
+margin_right = 226.0
+margin_bottom = 162.0
+
+[node name="PaintAllPixelsSameColor" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/ColorToolsContainer"]
 margin_right = 112.0
 margin_bottom = 20.0
 hint_tooltip = "Paint all pixels of the same color
@@ -137,65 +270,39 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 text = "PaintSameColor"
 
-[node name="LightenDarken" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/ColorToolsContainer"]
-margin_left = 116.0
-margin_right = 225.0
-margin_bottom = 20.0
-hint_tooltip = "U for left mouse button
-Alt + U for right mouse button
-Ctrl to Darken"
-mouse_default_cursor_shape = 2
-button_mask = 3
-text = "Lighten/Darken"
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 234.0
+margin_right = 226.0
+margin_bottom = 238.0
 
-[node name="SelectionToolsContainer2" type="HBoxContainer" parent="UI/ToolPanel/Tools/MenusAndTools"]
-margin_top = 72.0
-margin_right = 230.0
-margin_bottom = 92.0
-
-[node name="RectSelect" type="Button" parent="UI/ToolPanel/Tools/MenusAndTools/SelectionToolsContainer2"]
-margin_right = 79.0
-margin_bottom = 20.0
-hint_tooltip = "R for left mouse button
-Alt + R for right mouse button
-Press Shift to move the content"
-mouse_default_cursor_shape = 2
-button_mask = 3
-text = "RectSelect"
-
-[node name="HSeparator" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 228.0
-margin_right = 230.0
-margin_bottom = 232.0
-
-[node name="ToolOptions" type="HBoxContainer" parent="UI/ToolPanel/Tools"]
+[node name="ToolOptions" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
 editor/display_folded = true
-margin_top = 236.0
-margin_right = 230.0
-margin_bottom = 460.0
+margin_top = 242.0
+margin_right = 226.0
+margin_bottom = 472.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="LeftToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_right = 113.0
-margin_bottom = 224.0
+[node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+margin_right = 109.0
+margin_bottom = 230.0
 size_flags_horizontal = 3
 
-[node name="LeftLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_right = 113.0
+[node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+margin_right = 109.0
 margin_bottom = 14.0
 text = "Left tool options"
 
-[node name="LeftIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 18.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 42.0
 hint_tooltip = "Show left mouse indicator when drawing"
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Left cursor"
 
-[node name="LeftColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 46.0
 margin_right = 36.0
 margin_bottom = 78.0
@@ -205,90 +312,91 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 82.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 96.0
 text = "Brush size: "
 
-[node name="LeftBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 100.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 suffix = "px"
 
-[node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 128.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 142.0
 text = "Brush color from"
 
-[node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-editor/display_folded = true
+[node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 146.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 162.0
 
-[node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+[node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
 margin_top = 1.0
 margin_right = 9.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "B"
 
-[node name="LeftInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+[node name="LeftInterpolateFactor" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
 margin_left = 13.0
-margin_right = 101.0
+margin_right = 97.0
 margin_bottom = 16.0
 hint_tooltip = "Choose if the brush's color should come from the brush itself (left), or the currently selected color (right)"
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
-value = 0.5
+value = 1.0
 ticks_on_borders = true
 
-[node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
-margin_left = 105.0
+[node name="SelectedColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+margin_left = 101.0
 margin_top = 1.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
-[node name="LeftHorizontalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 166.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 190.0
 hint_tooltip = "Enable horizontal mirrored drawing for the left tool"
+mouse_default_cursor_shape = 2
 text = "Horiz. Mirror"
 
-[node name="LeftVerticalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 194.0
-margin_right = 113.0
+margin_right = 109.0
 margin_bottom = 218.0
 hint_tooltip = "Enable vertical mirrored drawing for the left tool"
+mouse_default_cursor_shape = 2
 text = "Vert. Mirror"
 
-[node name="VSeparator" type="VSeparator" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_left = 113.0
-margin_right = 117.0
-margin_bottom = 224.0
+[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+margin_left = 109.0
+margin_right = 113.0
+margin_bottom = 230.0
 
-[node name="RightToolOptions" type="VBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions"]
-margin_left = 117.0
-margin_right = 230.0
-margin_bottom = 224.0
+[node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+margin_left = 113.0
+margin_right = 226.0
+margin_bottom = 230.0
 size_flags_horizontal = 3
 
-[node name="RightLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_right = 113.0
 margin_bottom = 14.0
 text = "Right tool options"
 
-[node name="RightIndicatorCheckbox" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 18.0
 margin_right = 113.0
 margin_bottom = 42.0
@@ -296,7 +404,7 @@ hint_tooltip = "Show right mouse indicator when drawing"
 mouse_default_cursor_shape = 2
 text = "Right cursor"
 
-[node name="RightColorPickerButton" type="ColorPickerButton" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 46.0
 margin_right = 36.0
 margin_bottom = 78.0
@@ -306,13 +414,13 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="BrushSizeLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 82.0
 margin_right = 113.0
 margin_bottom = 96.0
 text = "Brush size: "
 
-[node name="RightBrushSizeEdit" type="SpinBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 100.0
 margin_right = 113.0
 margin_bottom = 124.0
@@ -321,26 +429,25 @@ min_value = 1.0
 value = 1.0
 suffix = "px"
 
-[node name="ColorComesFrom" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 128.0
 margin_right = 113.0
 margin_bottom = 142.0
 text = "Brush color from"
 
-[node name="InterpolateColor" type="HBoxContainer" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-editor/display_folded = true
+[node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 146.0
 margin_right = 113.0
 margin_bottom = 162.0
 
-[node name="BrushColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+[node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
 margin_top = 1.0
 margin_right = 9.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "B"
 
-[node name="RightInterpolateFactor" type="HSlider" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+[node name="RightInterpolateFactor" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
 margin_left = 13.0
 margin_right = 101.0
 margin_bottom = 16.0
@@ -348,10 +455,10 @@ hint_tooltip = "Choose if the brush's color should come from the brush itself (l
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
-value = 0.5
+value = 1.0
 ticks_on_borders = true
 
-[node name="SelectedColorLabel" type="Label" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+[node name="SelectedColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
 margin_left = 105.0
 margin_top = 1.0
 margin_right = 113.0
@@ -359,459 +466,513 @@ margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
-[node name="RightHorizontalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 166.0
 margin_right = 113.0
 margin_bottom = 190.0
 hint_tooltip = "Enable horizontal mirrored drawing for the right tool"
+mouse_default_cursor_shape = 2
 text = "Horiz. Mirror"
 
-[node name="RightVerticalMirroring" type="CheckBox" parent="UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 194.0
 margin_right = 113.0
 margin_bottom = 218.0
 hint_tooltip = "Enable vertical mirrored drawing for the right tool"
+mouse_default_cursor_shape = 2
 text = "Vert. Mirror"
 
-[node name="HSeparator2" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 464.0
-margin_right = 230.0
-margin_bottom = 468.0
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 476.0
+margin_right = 226.0
+margin_bottom = 480.0
 
-[node name="FileBrushes" type="Label" parent="UI/ToolPanel/Tools"]
-margin_top = 472.0
-margin_right = 230.0
-margin_bottom = 486.0
+[node name="FileBrushes" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 484.0
+margin_right = 226.0
+margin_bottom = 498.0
 text = "Brushes From Files"
 
-[node name="BrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
-margin_top = 490.0
-margin_right = 230.0
-margin_bottom = 526.0
+[node name="BrushesContainer" type="ScrollContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 502.0
+margin_right = 226.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
 
-[node name="BrushHBoxContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/BrushesContainer"]
+[node name="BrushHBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/BrushesContainer"]
 editor/display_folded = true
 margin_right = 36.0
 margin_bottom = 36.0
 
-[node name="PixelBrushButton" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer" instance=ExtResource( 4 )]
+[node name="PixelBrushButton" parent="MenuAndUI/UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer" instance=ExtResource( 7 )]
 hint_tooltip = "Pixel brush"
 
-[node name="LeftBrushIndicator" type="Sprite" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
+[node name="LeftBrushIndicator" type="Sprite" parent="MenuAndUI/UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 2 )
+texture = ExtResource( 8 )
 centered = false
 
-[node name="RightBrushIndicator" type="Sprite" parent="UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
+[node name="RightBrushIndicator" type="Sprite" parent="MenuAndUI/UI/ToolPanel/Tools/BrushesContainer/BrushHBoxContainer/PixelBrushButton"]
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 3 )
+texture = ExtResource( 9 )
 centered = false
 offset = Vector2( 28, 0 )
 
-[node name="HSeparator3" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 530.0
-margin_right = 230.0
-margin_bottom = 534.0
+[node name="HSeparator3" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 542.0
+margin_right = 226.0
+margin_bottom = 546.0
 
-[node name="ProjectBrushes" type="Label" parent="UI/ToolPanel/Tools"]
-margin_top = 538.0
-margin_right = 230.0
-margin_bottom = 552.0
+[node name="ProjectBrushes" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 550.0
+margin_right = 226.0
+margin_bottom = 564.0
 text = "Custom Project Brushes"
 
-[node name="CustomBrushesContainer" type="ScrollContainer" parent="UI/ToolPanel/Tools"]
-margin_top = 556.0
-margin_right = 230.0
-margin_bottom = 592.0
+[node name="CustomBrushesContainer" type="ScrollContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 568.0
+margin_right = 226.0
+margin_bottom = 604.0
 rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
 
-[node name="CustomBrushHBoxContainer" type="HBoxContainer" parent="UI/ToolPanel/Tools/CustomBrushesContainer"]
+[node name="CustomBrushHBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/CustomBrushesContainer"]
 
-[node name="HSeparator4" type="HSeparator" parent="UI/ToolPanel/Tools"]
-margin_top = 596.0
-margin_right = 230.0
-margin_bottom = 600.0
+[node name="HSeparator4" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 608.0
+margin_right = 226.0
+margin_bottom = 612.0
 
-[node name="CanvasAndTimeline" type="VBoxContainer" parent="UI"]
+[node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
 editor/display_folded = true
-margin_left = 230.0
-margin_right = 864.0
-margin_bottom = 600.0
+margin_left = 242.0
+margin_right = 928.0
+margin_bottom = 620.0
 size_flags_horizontal = 3
+custom_constants/separation = 0
 
-[node name="HViewportContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline"]
-margin_right = 634.0
-margin_bottom = 464.0
+[node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
+margin_right = 686.0
+margin_bottom = 478.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ViewportContainer" type="ViewportContainer" parent="UI/CanvasAndTimeline/HViewportContainer"]
-margin_right = 634.0
-margin_bottom = 464.0
-mouse_default_cursor_shape = 3
+[node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
+margin_right = 686.0
+margin_bottom = 478.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="HorizontalRuler" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+margin_right = 686.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 10 )
+
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+margin_top = 16.0
+margin_right = 686.0
+margin_bottom = 478.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="VerticalRuler" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
+margin_right = 16.0
+margin_bottom = 462.0
+rect_min_size = Vector2( 16, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 11 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
+margin_left = 16.0
+margin_right = 686.0
+margin_bottom = 462.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer"]
-size = Vector2( 634, 464 )
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer"]
+size = Vector2( 670, 462 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Canvas" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 12 )]
 
-[node name="Camera2D" type="Camera2D" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer/Viewport"]
+[node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 6 )
+script = ExtResource( 13 )
 
-[node name="SelectionRectangle" type="Polygon2D" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer/Viewport"]
+[node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 z_index = 1
 color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
-script = ExtResource( 7 )
+script = ExtResource( 14 )
 
-[node name="ViewportSeparator" type="VSeparator" parent="UI/CanvasAndTimeline/HViewportContainer"]
+[node name="ViewportSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
 visible = false
 margin_left = 315.0
 margin_right = 319.0
 margin_bottom = 464.0
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="UI/CanvasAndTimeline/HViewportContainer"]
+[node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
 editor/display_folded = true
 visible = false
 margin_left = 319.0
 margin_right = 634.0
 margin_bottom = 464.0
-mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2"]
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2"]
 size = Vector2( 315, 464 )
 handle_input_locally = false
 render_target_update_mode = 0
-script = ExtResource( 8 )
+script = ExtResource( 15 )
 
-[node name="Camera2D2" type="Camera2D" parent="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 6 )
+script = ExtResource( 13 )
 
-[node name="AnimationTimeline" type="Panel" parent="UI/CanvasAndTimeline"]
+[node name="AnimationTimeline" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline"]
 editor/display_folded = true
-margin_top = 468.0
-margin_right = 634.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 0, 132 )
+margin_top = 478.0
+margin_right = 686.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 0, 142 )
 size_flags_horizontal = 3
 
-[node name="TimelineContainer" type="VBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline"]
+[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -71.0
+margin_right = 4.0
+margin_bottom = 71.0
+
+[node name="AnimationContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 4.0
+
+[node name="TimelineContainer" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
+margin_right = 525.0
+margin_bottom = 138.0
 size_flags_horizontal = 3
 
-[node name="ButtonContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_right = 634.0
+[node name="AnimationButtons" type="Control" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+margin_right = 525.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
 
-[node name="AnimationButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer"]
-margin_left = 139.0
-margin_right = 495.0
-margin_bottom = 24.0
+[node name="CurrentFrame" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 224.0
+margin_bottom = 7.0
+text = "Current frame: 1/1"
 
-[node name="LoopLabel" type="Label" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_top = 5.0
-margin_right = 35.0
-margin_bottom = 19.0
-text = "Loop:"
+[node name="PlaybackButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -10.0
+margin_right = 70.0
+margin_bottom = 10.0
+size_flags_horizontal = 0
 
-[node name="LoopAnim" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 39.0
-margin_right = 69.0
-margin_bottom = 24.0
-hint_tooltip = "No: Animation doesn't loop
-Cycle: Animation plays again when it reaches the last frame
-Ping-pong: Animation plays again but backwards when it reaches the last frame"
+[node name="FirstFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
+margin_right = 20.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-text = "No"
+texture_normal = ExtResource( 16 )
 
-[node name="PlayBackwards" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 73.0
-margin_right = 182.0
-margin_bottom = 24.0
+[node name="PreviousFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 17 )
+
+[node name="PlayBackwards" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
+margin_left = 48.0
+margin_right = 68.0
+margin_bottom = 20.0
 hint_tooltip = "Play the animation backwards (from end to beggining)"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-text = "Play Backwards"
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 19 )
 
-[node name="PlayForward" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 186.0
-margin_right = 278.0
-margin_bottom = 24.0
+[node name="PlayForward" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
+margin_left = 72.0
+margin_right = 92.0
+margin_bottom = 20.0
 hint_tooltip = "Play the animation forward (from beggining to end)"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 toggle_mode = true
-text = "Play Forward"
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 19 )
 
-[node name="FPSValue" type="SpinBox" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons"]
-margin_left = 282.0
-margin_right = 356.0
+[node name="NextFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
+margin_left = 96.0
+margin_right = 116.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 21 )
+
+[node name="LastFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
+margin_left = 120.0
+margin_right = 140.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 22 )
+
+[node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -98.0
+margin_top = -11.0
+margin_bottom = 12.0
+size_flags_horizontal = 8
+
+[node name="FPSValue" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
+margin_right = 74.0
 margin_bottom = 24.0
 hint_tooltip = "How many frames per second should the animation preview be? The more FPS, the faster the animation plays."
 mouse_default_cursor_shape = 2
 min_value = 0.1
 step = 0.1
-value = 1.0
+value = 6.0
 suffix = "FPS"
 
-[node name="HSeparator" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
+[node name="LoopAnim" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
+margin_left = 78.0
+margin_right = 98.0
+margin_bottom = 24.0
+hint_tooltip = "No: Animation doesn't loop
+Cycle: Animation plays again when it reaches the last frame
+Ping-pong: Animation plays again but backwards when it reaches the last frame"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 23 )
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 28.0
-margin_right = 634.0
+margin_right = 525.0
 margin_bottom = 32.0
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-editor/display_folded = true
+[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 36.0
-margin_right = 634.0
-margin_bottom = 56.0
+margin_right = 525.0
+margin_bottom = 36.0
 
-[node name="FrameButtons" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer"]
-margin_left = 258.0
-margin_right = 375.0
-margin_bottom = 20.0
+[node name="FrameButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/CenterContainer"]
+margin_left = 262.0
+margin_right = 262.0
 
-[node name="AddFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
-margin_right = 20.0
-margin_bottom = 20.0
-hint_tooltip = "Add a new frame"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-text = "+"
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+margin_top = 40.0
+margin_right = 525.0
+margin_bottom = 44.0
 
-[node name="RemoveFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
-margin_left = 24.0
-margin_right = 41.0
-margin_bottom = 20.0
-hint_tooltip = "Remove selected frame"
-mouse_default_cursor_shape = 8
-disabled = true
-text = "-"
-
-[node name="MoveFrameLeft" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
-margin_left = 45.0
-margin_right = 65.0
-margin_bottom = 20.0
-hint_tooltip = "Move selected frame to the left"
-mouse_default_cursor_shape = 8
-disabled = true
-text = "<"
-
-[node name="MoveFrameRight" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
-margin_left = 69.0
-margin_right = 89.0
-margin_bottom = 20.0
-hint_tooltip = "Move selected frame to the right"
-mouse_default_cursor_shape = 8
-disabled = true
-text = ">"
-
-[node name="CloneFrame" type="Button" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons"]
-margin_left = 93.0
-margin_right = 117.0
-margin_bottom = 20.0
-hint_tooltip = "Clone current frame"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-text = "Cl"
-
-[node name="HSeparator2" type="HSeparator" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_top = 60.0
-margin_right = 634.0
-margin_bottom = 64.0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer"]
-margin_top = 68.0
-margin_right = 634.0
-margin_bottom = 132.0
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+margin_top = 48.0
+margin_right = 525.0
+margin_bottom = 138.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_vertical_enabled = false
 
-[node name="FrameContainer" type="HBoxContainer" parent="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ScrollContainer"]
+[node name="FrameAndButtonContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/ScrollContainer"]
+margin_right = 40.0
+margin_bottom = 36.0
 
-[node name="LayerPanel" type="Panel" parent="UI"]
+[node name="AddFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/ScrollContainer/FrameAndButtonContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+hint_tooltip = "Add a new frame"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource( 24 )
+
+[node name="FrameContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/ScrollContainer/FrameAndButtonContainer"]
+margin_left = 40.0
+margin_right = 40.0
+margin_bottom = 36.0
+
+[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 138.0
+
+[node name="OnionSkinningButtons" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
+margin_left = 537.0
+margin_right = 663.0
+margin_bottom = 138.0
+
+[node name="OnionSkinning" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
+margin_right = 126.0
+margin_bottom = 31.0
+text = "Onion Skinning:
+Past Steps"
+
+[node name="PastOnionSkinning" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
+margin_top = 35.0
+margin_right = 126.0
+margin_bottom = 59.0
+mouse_default_cursor_shape = 2
+
+[node name="OnionSkinningFuture" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
+margin_top = 63.0
+margin_right = 126.0
+margin_bottom = 77.0
+text = "Future Steps"
+
+[node name="FutureOnionSkinning" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
+margin_top = 81.0
+margin_right = 126.0
+margin_bottom = 105.0
+mouse_default_cursor_shape = 2
+
+[node name="BlueRedMode" type="CheckBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
+margin_top = 109.0
+margin_right = 126.0
+margin_bottom = 133.0
+mouse_default_cursor_shape = 2
+text = "Blue-Red Mode"
+
+[node name="VSeparator2" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
+margin_left = 667.0
+margin_right = 671.0
+margin_bottom = 138.0
+
+[node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
 editor/display_folded = true
-margin_left = 864.0
-margin_right = 1024.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 160, 0 )
+margin_left = 928.0
+margin_right = 1152.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 224, 0 )
 
-[node name="LayersAndMisc" type="VBoxContainer" parent="UI/LayerPanel"]
+[node name="LayersAndMisc" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 8.0
 custom_constants/separation = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/LayerPanel/LayersAndMisc"]
-margin_right = 160.0
-margin_bottom = 382.0
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_right = 224.0
+margin_bottom = 612.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxLayerContainer" type="VBoxContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer"]
-editor/display_folded = true
-margin_right = 160.0
-margin_bottom = 38.0
+[node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer"]
+margin_right = 224.0
+margin_bottom = 58.0
 size_flags_horizontal = 3
 
-[node name="LayerLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
-margin_right = 160.0
+[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
+margin_right = 224.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Layers"
 align = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
 margin_top = 18.0
-margin_right = 160.0
-margin_bottom = 38.0
+margin_right = 224.0
+margin_bottom = 22.0
 
-[node name="LayerButtons" type="HBoxContainer" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer"]
-margin_left = 7.0
-margin_right = 153.0
-margin_bottom = 20.0
+[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer"]
+editor/display_folded = true
+margin_top = 26.0
+margin_right = 224.0
+margin_bottom = 58.0
 
-[node name="AddLayerButton" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer"]
+editor/display_folded = true
+margin_left = 6.0
+margin_right = 218.0
+margin_bottom = 32.0
+
+[node name="AddLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
+margin_right = 32.0
+margin_bottom = 32.0
 hint_tooltip = "Create a new layer"
 mouse_default_cursor_shape = 2
-text = "+"
+texture_normal = ExtResource( 25 )
 
-[node name="RemoveLayerButton" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
-margin_left = 24.0
-margin_right = 44.0
-margin_bottom = 20.0
+[node name="RemoveLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
 hint_tooltip = "Remove current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-text = "X"
+texture_normal = ExtResource( 26 )
+texture_disabled = ExtResource( 27 )
 
-[node name="MoveUpLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
-margin_left = 48.0
-margin_right = 67.0
-margin_bottom = 20.0
+[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
 hint_tooltip = "Move up the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-text = "^"
+texture_normal = ExtResource( 28 )
+texture_disabled = ExtResource( 29 )
 
-[node name="MoveDownLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
-margin_left = 71.0
-margin_right = 90.0
-margin_bottom = 20.0
+[node name="MoveDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
 hint_tooltip = "Move down the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-text = "v"
+texture_normal = ExtResource( 30 )
+texture_disabled = ExtResource( 31 )
 
-[node name="CloneLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
-margin_left = 94.0
-margin_right = 118.0
-margin_bottom = 20.0
+[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
 hint_tooltip = "Clone current layer"
 mouse_default_cursor_shape = 2
-text = "Cl"
+texture_normal = ExtResource( 32 )
 
-[node name="MergeDownLayer" type="Button" parent="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
-margin_left = 122.0
-margin_right = 146.0
-margin_bottom = 20.0
+[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
 hint_tooltip = "Merge down current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-text = "M"
-
-[node name="HSeparator" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 385.0
-margin_right = 160.0
-margin_bottom = 389.0
-
-[node name="OnionSkinningButtons" type="VBoxContainer" parent="UI/LayerPanel/LayersAndMisc"]
-editor/display_folded = true
-margin_top = 392.0
-margin_right = 160.0
-margin_bottom = 525.0
-
-[node name="OnionSkinning" type="Label" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
-margin_right = 160.0
-margin_bottom = 31.0
-text = "Onion Skinning:
-Past Steps"
-
-[node name="PastOnionSkinning" type="SpinBox" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
-margin_top = 35.0
-margin_right = 160.0
-margin_bottom = 59.0
-
-[node name="OnionSkinningFuture" type="Label" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
-margin_top = 63.0
-margin_right = 160.0
-margin_bottom = 77.0
-text = "Future Steps"
-
-[node name="FutureOnionSkinning" type="SpinBox" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
-margin_top = 81.0
-margin_right = 160.0
-margin_bottom = 105.0
-
-[node name="BlueRedMode" type="CheckBox" parent="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons"]
-margin_top = 109.0
-margin_right = 160.0
-margin_bottom = 133.0
-text = "Blue-Red Mode"
-
-[node name="HSeparator2" type="HSeparator" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 528.0
-margin_right = 160.0
-margin_bottom = 532.0
-
-[node name="CursorPosition" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 535.0
-margin_right = 160.0
-margin_bottom = 549.0
-text = "[64x64]"
-
-[node name="ZoomLevel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 552.0
-margin_right = 160.0
-margin_bottom = 566.0
-text = "Zoom: x7.81"
-
-[node name="CurrentFrame" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 569.0
-margin_right = 160.0
-margin_bottom = 583.0
-text = "Current frame: 1/1"
-
-[node name="EmptyLabel" type="Label" parent="UI/LayerPanel/LayersAndMisc"]
-margin_top = 586.0
-margin_right = 160.0
-margin_bottom = 600.0
+texture_normal = ExtResource( 33 )
+texture_disabled = ExtResource( 34 )
 
 [node name="SplitScreenButton" type="Button" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -184.0
-margin_right = -164.0
-margin_bottom = 20.0
+margin_left = -244.0
+margin_top = 45.0
+margin_right = -224.0
+margin_bottom = 65.0
 size_flags_vertical = 0
 toggle_mode = true
 text = "<"
@@ -1026,7 +1187,7 @@ editor/display_folded = true
 margin_right = 284.0
 margin_bottom = 186.0
 window_title = "About Pixelorama"
-script = ExtResource( 9 )
+script = ExtResource( 35 )
 
 [node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
 margin_left = 8.0
@@ -1091,44 +1252,44 @@ Copyright 2019 - Orama Interactive"
 align = 1
 
 [node name="AnimationTimer" type="Timer" parent="."]
-[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
-[connection signal="color_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
-[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
-[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
-[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
-[connection signal="color_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
-[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
-[connection signal="toggled" from="UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
-[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
-[connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
-[connection signal="toggled" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
-[connection signal="value_changed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/ButtonContainer/AnimationButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/AddFrame" to="." method="add_frame"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/RemoveFrame" to="." method="_on_RemoveFrame_pressed"]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameLeft" to="." method="change_frame_order" binds= [ -1 ]]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/MoveFrameRight" to="." method="change_frame_order" binds= [ 1 ]]
-[connection signal="pressed" from="UI/CanvasAndTimeline/AnimationTimeline/TimelineContainer/CenterContainer/FrameButtons/CloneFrame" to="." method="add_frame" binds= [ false ]]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/AddLayerButton" to="." method="add_layer"]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
-[connection signal="pressed" from="UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
-[connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
-[connection signal="value_changed" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
-[connection signal="toggled" from="UI/LayerPanel/LayersAndMisc/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
+[connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/ScrollContainer/FrameAndButtonContainer/AddFrame" to="." method="add_frame"]
+[connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
+[connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/AddLayerButton" to="." method="add_layer"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollContainer/VBoxLayerContainer/CenterContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
