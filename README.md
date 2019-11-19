@@ -1,7 +1,7 @@
 # Pixelorama - your free and open-source sprite editor!
  Your free & open-source 2D sprite editor, made in the Godot Engine, using GDScript!
 
- [![Pixelorama's horrible UI](https://functionoverload590613498.files.wordpress.com/2019/11/screenshot_268.png)](https://www.youtube.com/watch?v=h3OJROgAR-A)
+ [![Pixelorama's horrible UI](https://functionoverload590613498.files.wordpress.com/2019/11/screenshot_268.png)](https://www.youtube.com/watch?v=h3OJROgAR-A&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-)
 
 Current features as of version v0.4:
 
