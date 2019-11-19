@@ -1,5 +1,6 @@
 extends Control
 
+var config_cache : ConfigFile = ConfigFile.new()
 var current_save_path := ""
 var current_export_path := ""
 var opensprite_file_selected := false
@@ -20,6 +21,20 @@ func _ready() -> void:
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
+
+	# Restore the window position/size if values are present in the configuration cache
+	config_cache.load("user://cache.ini")
+
+	if config_cache.has_section_key("window", "screen"):
+		OS.current_screen = config_cache.get_value("window", "screen")
+	if config_cache.has_section_key("window", "maximized"):
+		OS.window_maximized = config_cache.get_value("window", "maximized")
+
+	if !OS.window_maximized:
+		if config_cache.has_section_key("window", "position"):
+			OS.window_position = config_cache.get_value("window", "position")
+		if config_cache.has_section_key("window", "size"):
+			OS.window_size = config_cache.get_value("window", "size")
 
 	var file_menu_items := {
 		"New..." : KEY_MASK_CTRL + KEY_N,
@@ -821,3 +836,11 @@ func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.right_horizontal_mirror = button_pressed
 func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
+
+func _exit_tree() -> void:
+	# Save the window position and size to remember it when restarting the application
+	config_cache.set_value("window", "screen", OS.current_screen)
+	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
+	config_cache.set_value("window", "position", OS.window_position)
+	config_cache.set_value("window", "size", OS.window_size)
+	config_cache.save("user://cache.ini")
