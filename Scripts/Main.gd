@@ -123,6 +123,9 @@ func _ready() -> void:
 	Global.brushes_from_files = Global.custom_brushes.size()
 
 func _input(event):
+	if event.is_action_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+
 	if Global.has_focus:
 		for t in tools: #Handle tool shortcuts
 			if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
