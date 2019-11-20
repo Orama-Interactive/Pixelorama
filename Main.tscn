@@ -904,6 +904,7 @@ margin_right = 224.0
 margin_bottom = 530.0
 
 [node name="TabContainer" type="TabContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
 margin_top = 533.0
 margin_right = 224.0
 margin_bottom = 605.0
