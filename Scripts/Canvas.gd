@@ -10,6 +10,7 @@ var frame := 0 setget frame_changed
 var frame_button : VBoxContainer
 var frame_texture_rect : TextureRect
 
+var current_pixel := Vector2.ZERO #pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
 var previous_action := "None"
 var mouse_inside_canvas := false #used for undo
@@ -75,7 +76,8 @@ func camera_zoom() -> void:
 func _process(delta) -> void:
 	sprite_changed_this_frame = false
 	update()
-	var mouse_pos := get_local_mouse_position() - location
+	current_pixel = get_local_mouse_position() - location
+	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
 	var mouse_in_canvas := point_in_rectangle(mouse_pos, location, location + size)

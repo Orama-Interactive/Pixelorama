@@ -279,8 +279,6 @@ func _on_CreateNewImage_confirmed() -> void:
 		Global.canvas.layers[0][0].fill(fill_color)
 		Global.canvas.layers[0][0].lock()
 		Global.canvas.update_texture(0)
-	Global.remove_frame_button.disabled = true
-	Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 	Global.undo_redo.clear_history(false)
 
 func _on_OpenSprite_file_selected(path) -> void:
@@ -354,15 +352,8 @@ func _on_OpenSprite_file_selected(path) -> void:
 		Global.create_brush_button(image)
 		brush_line = file.get_line()
 
-	Global.undo_redo.clear_history(false)
 	file.close()
-
-	if frame > 1:
-		Global.remove_frame_button.disabled = false
-		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	else:
-		Global.remove_frame_button.disabled = true
-		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	Global.undo_redo.clear_history(false)
 
 func _on_SaveSprite_file_selected(path) -> void:
 	current_save_path = path
@@ -445,12 +436,6 @@ func _on_ImportSprites_files_selected(paths) -> void:
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
 	Global.canvas.visible = true
 	biggest_canvas.camera_zoom()
-	if i > 1:
-		Global.remove_frame_button.disabled = false
-		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	else:
-		Global.remove_frame_button.disabled = true
-		Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 	Global.undo_redo.clear_history(false)
 

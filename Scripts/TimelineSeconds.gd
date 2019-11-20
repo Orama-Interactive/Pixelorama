@@ -46,7 +46,7 @@ func _draw() -> void:
 			draw_line(Vector2(position.x + RULER_WIDTH, 0), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
 			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0)).x / 100
 			val = stepify(val, 0.01)
-			draw_string(font, Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 6), str(val))
+			draw_string(font, Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 6), "%ss" % str(val))
 		else:
 			if i % minor_subdivision == 0:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)

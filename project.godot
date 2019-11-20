@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Canvas.gd"
 }, {
+"base": "Line2D",
+"class": "Guide",
+"language": "GDScript",
+"path": "res://Scripts/Guides.gd"
+}, {
 "base": "Button",
 "class": "LayerContainer",
 "language": "GDScript",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Canvas": "",
+"Guide": "",
 "LayerContainer": ""
 }
 

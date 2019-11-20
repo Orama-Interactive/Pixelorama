@@ -34,6 +34,7 @@ var right_square_indicator_visible := false
 var camera : Camera2D
 var camera2 : Camera2D
 var selection_rectangle : Polygon2D
+var vertical_ruler : BaseButton
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
@@ -119,8 +120,8 @@ func _ready() -> void:
 	split_screen_button = find_node_by_name(root, "SplitScreenButton")
 	camera = find_node_by_name(canvas_parent, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
-
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
+	vertical_ruler = find_node_by_name(root, "VerticalRuler")
 	image_clipboard = Image.new()
 
 	file_menu = find_node_by_name(root, "FileMenu")

@@ -1,4 +1,4 @@
-extends Panel
+extends Button
 
 const RULER_WIDTH := 16
 
@@ -22,7 +22,7 @@ func _draw() -> void:
 	var zoom := 1 / Global.camera.zoom.x
 	transform.x = Vector2(zoom, zoom)
 
-	transform.origin = Global.main_viewport.rect_size / 2 + (Global.camera.offset) * -zoom
+	transform.origin = Global.main_viewport.rect_size / 2 + Global.camera.offset * -zoom
 
 	var basic_rule := 100.0
 	var i := 0
@@ -53,3 +53,15 @@ func _draw() -> void:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
 			else:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
+
+func _on_HorizontalRuler_pressed() -> void:
+	var mouse_pos := get_local_mouse_position()
+	if mouse_pos.x < RULER_WIDTH: #For double guides
+		Global.vertical_ruler._on_VerticalRuler_pressed()
+	var line_2d := Guide.new()
+	line_2d.type = line_2d.TYPE.HORIZONTAL
+	line_2d.default_color = Color.purple
+	line_2d.add_point(Vector2(-99999, Global.canvas.current_pixel.y))
+	line_2d.add_point(Vector2(99999, Global.canvas.current_pixel.y))
+	Global.canvas.add_child(line_2d)
+	Global.has_focus = false
