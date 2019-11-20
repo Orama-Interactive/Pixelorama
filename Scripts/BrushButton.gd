@@ -21,24 +21,22 @@ func _on_BrushButton_pressed() -> void:
 			Global.update_right_custom_brush()
 
 func _on_DeleteButton_pressed() -> void:
-	var file_hbox_container := Global.find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
-	var custom_hbox_container := Global.find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	if brush_type == Global.BRUSH_TYPES.CUSTOM:
 		if Global.custom_left_brush_index == custom_brush_index:
 			Global.custom_left_brush_index = -1
 			Global.current_left_brush_type = Global.BRUSH_TYPES.PIXEL
 			remove_child(Global.left_brush_indicator)
-			file_hbox_container.get_child(0).add_child(Global.left_brush_indicator)
+			Global.file_brush_container.get_child(0).add_child(Global.left_brush_indicator)
 		if Global.custom_right_brush_index == custom_brush_index:
 			Global.custom_right_brush_index = -1
 			Global.current_right_brush_type = Global.BRUSH_TYPES.PIXEL
 			remove_child(Global.right_brush_indicator)
-			file_hbox_container.get_child(0).add_child(Global.right_brush_indicator)
+			Global.file_brush_container.get_child(0).add_child(Global.right_brush_indicator)
 
 		Global.undos += 1
 		Global.undo_redo.create_action("Delete Custom Brush")
-		for i in range(custom_brush_index - 1, custom_hbox_container.get_child_count()):
-			var bb = custom_hbox_container.get_child(i)
+		for i in range(custom_brush_index - 1, Global.project_brush_container.get_child_count()):
+			var bb = Global.project_brush_container.get_child(i)
 			if Global.custom_left_brush_index == bb.custom_brush_index:
 				Global.custom_left_brush_index -= 1
 			if Global.custom_right_brush_index == bb.custom_brush_index:

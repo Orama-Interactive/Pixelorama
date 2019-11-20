@@ -1,5 +1,5 @@
 # Pixelorama - your free and open-source sprite editor!
- Your free & open-source 2D sprite editor, made in the Godot Engine, using GDScript!
+ Your free & open-source 2D sprite editor, made by Orama Interactive in the Godot Engine, using GDScript!
 
  [![Pixelorama's horrible UI](https://functionoverload590613498.files.wordpress.com/2019/11/screenshot_268.png)](https://www.youtube.com/watch?v=h3OJROgAR-A&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-)
 
@@ -23,7 +23,7 @@ Current features as of version v0.4:
 - Just like onions, Pixelorama has a multiple layer system! You can add, remove, move up and down, clone and merge as many layers as you like! You can also rename them!
 - Scale, crop and flip your images!
 
-Make sure to read my blog post on Function(Overload) for more information! https://functionoverload590613498.wordpress.com/2019/08/18/i-made-my-own-sprite-editor-in-godot/
+Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
 
 Download it as a stand-alone on itch.io: https://orama-interactive.itch.io/pixelorama
 

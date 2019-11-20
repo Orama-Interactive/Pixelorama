@@ -6,7 +6,7 @@ func _ready() -> void:
 	$AboutUI/Pixelorama.text = "Pixelorama %s\n" % current_version
 
 func _on_Website_pressed() -> void:
-	OS.shell_open("http://oramagamestudios.com/")
+	OS.shell_open("https://www.orama-interactive.com/")
 
 func _on_GitHub_pressed() -> void:
 	OS.shell_open("https://github.com/OverloadedOrama/Pixelorama")
@@ -14,6 +14,3 @@ func _on_GitHub_pressed() -> void:
 func _on_Donate_pressed() -> void:
 	OS.shell_open("https://www.paypal.com/paypalme2/OverloadedOrama")
 	OS.shell_open("https://ko-fi.com/overloadedorama")
-
-func _on_Blog_pressed() -> void:
-	OS.shell_open("https://functionoverload590613498.wordpress.com/")

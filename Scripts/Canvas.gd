@@ -69,8 +69,6 @@ func camera_zoom() -> void:
 
 	#Set camera offset to the center of canvas
 	Global.camera.offset = size / 2
-	#Global.camera.offset.x = size.x / 2 + Global.main_viewport.rect_size.x / 2 * -Global.camera.zoom.x
-	#Global.camera.offset.y = size.y / 2 + Global.main_viewport.rect_size.y / 2 * -Global.camera.zoom.y
 	Global.camera2.offset = size / 2
 
 # warning-ignore:unused_argument

@@ -13,6 +13,7 @@ var last : Vector2
 func _process(delta) -> void:
 	update()
 
+#Code taken and modified from Godot's source code
 func _draw() -> void:
 	var transform := Transform2D()
 	var ruler_transform := Transform2D()
@@ -38,15 +39,15 @@ func _draw() -> void:
 	major_subdivide = major_subdivide.scaled(Vector2(1.0 / major_subdivision, 1.0 / major_subdivision))
 	minor_subdivide = minor_subdivide.scaled(Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision))
 
-	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Vector2.ZERO);
-	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Global.main_viewport.rect_size);
+	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Vector2.ZERO)
+	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Global.main_viewport.rect_size)
 
 	for i in range(ceil(first.y), last.y):
 		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(0, i))
 		if i % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(0, position.y), Vector2(RULER_WIDTH, position.y), Color.white)
-			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0)).x
-			draw_string(font, Vector2(0, position.y), str(int(val)))
+			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(0, i)).y
+			draw_string(font, Vector2(0, position.y - 2), str(int(val)))
 		else:
 			if i % minor_subdivision == 0:
 				draw_line(Vector2(RULER_WIDTH * 0.33, position.y), Vector2(RULER_WIDTH, position.y), Color.white)

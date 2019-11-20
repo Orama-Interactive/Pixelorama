@@ -79,6 +79,8 @@ var right_brush_size := 1
 var current_left_brush_type = BRUSH_TYPES.PIXEL
 # warning-ignore:unused_class_variable
 var current_right_brush_type = BRUSH_TYPES.PIXEL
+var file_brush_container
+var project_brush_container
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
 # warning-ignore:unused_class_variable
@@ -148,6 +150,8 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 	current_frame_label = find_node_by_name(root, "CurrentFrame")
+	file_brush_container = find_node_by_name(root, "FileBrushContainer")
+	project_brush_container = find_node_by_name(root, "ProjectBrushContainer")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -257,33 +261,31 @@ func frame_changed(value : int) -> void:
 
 
 func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM) -> void:
-	var hbox_container : HBoxContainer
+	var brush_container
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
 	brush_button.custom_brush_index = custom_brushes.size() - 1
 	if brush_type == BRUSH_TYPES.FILE:
-		hbox_container = find_node_by_name(get_tree().get_root(), "BrushHBoxContainer")
+		brush_container = file_brush_container
 	else:
-		hbox_container = find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
+		brush_container = project_brush_container
 	var brush_tex := ImageTexture.new()
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
-	hbox_container.add_child(brush_button)
+	brush_container.add_child(brush_button)
 
 func remove_brush_buttons() -> void:
 	current_left_brush_type = BRUSH_TYPES.PIXEL
 	current_right_brush_type = BRUSH_TYPES.PIXEL
-	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
-	for child in hbox_container.get_children():
+	for child in project_brush_container.get_children():
 		child.queue_free()
 
 func undo_custom_brush(_brush_button : Button = null) -> void:
 	undos -= 1
 	var action_name := undo_redo.get_current_action_name()
-	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	if action_name == "Delete Custom Brush":
-		hbox_container.add_child(_brush_button)
-		hbox_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
+		project_brush_container.add_child(_brush_button)
+		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
 		_brush_button.get_node("DeleteButton").visible = false
 	notification_label("Undo: %s" % action_name)
 
@@ -291,9 +293,8 @@ func redo_custom_brush(_brush_button : Button = null) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name := undo_redo.get_current_action_name()
-	var hbox_container := find_node_by_name(get_tree().get_root(), "CustomBrushHBoxContainer")
 	if action_name == "Delete Custom Brush":
-		hbox_container.remove_child(_brush_button)
+		project_brush_container.remove_child(_brush_button)
 	if control.redone:
 		notification_label("Redo: %s" % action_name)
 
