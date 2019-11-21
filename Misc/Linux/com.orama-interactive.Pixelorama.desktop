@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Pixelorama
+GenericName=2D sprite editor
+GenericName[fr]=Éditeur de sprites 2D
+Comment=Create and edit static or animated 2D sprites
+Comment[fr]=Créez et modifiez des sprites 2D statiques ou animées
+Exec=pixelorama
+Icon=pixelorama
+Terminal=false
+Type=Application
+Categories=Graphics;2DGraphics;RasterGraphics;
