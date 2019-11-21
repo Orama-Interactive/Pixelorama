@@ -17,7 +17,7 @@ var animation_forward := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	OS.set_window_title("Pixelorama %s" % ProjectSettings.get_setting("application/config/Version"))
+	OS.set_window_title("(untitled) - Pixelorama")
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
@@ -281,7 +281,7 @@ func _on_CreateNewImage_confirmed() -> void:
 		Global.canvas.update_texture(0)
 	Global.undo_redo.clear_history(false)
 
-func _on_OpenSprite_file_selected(path) -> void:
+func _on_OpenSprite_file_selected(path : String) -> void:
 	var file := File.new()
 	var err := file.open(path, File.READ)
 	if err != OK: #An error occured
@@ -354,6 +354,9 @@ func _on_OpenSprite_file_selected(path) -> void:
 
 	file.close()
 	Global.undo_redo.clear_history(false)
+
+	OS.set_window_title(path.get_file() + " - Pixelorama")
+
 
 func _on_SaveSprite_file_selected(path) -> void:
 	current_save_path = path
