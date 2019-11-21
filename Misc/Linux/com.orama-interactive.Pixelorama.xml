@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2019 OverloadedOrama -->
+<component type="desktop">
+  <id>com.orama-interactive.Pixelorama.desktop</id>
+  <name>Pixelorama</name>
+  <summary>2D sprite editor with animation support</summary>
+  <description>
+    <p>
+      Pixelorama is a free and open source 2D sprite editor, made by Orama
+      Interactive in the Godot Engine using GDScript.
+    </p>
+  </description>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer_name>OverloadedOrama</developer_name>
+  <url type="homepage">https://www.orama-interactive.com/pixelorama</url>
+  <url type="bugtracker">https://github.com/OverloadedOrama/Pixelorama/issues</url>
+  <screenshots>
+    <screenshot type="default" width="1918" height="1054">
+      <image type="source">https://functionoverload590613498.files.wordpress.com/2019/11/screenshot_268.png</image>
+      <caption>Editing an animated sprite</caption>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.4" date="2019-11-13"/>
+  </releases>
+  <update_contact>hugo.locurcio@hugo.pro</update_contact>
+</component>
