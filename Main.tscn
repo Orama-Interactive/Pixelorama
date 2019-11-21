@@ -102,19 +102,22 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -65.5
 margin_right = 65.5
+custom_constants/separation = 20
 
 [node name="ZoomLevel" type="Label" parent="MenuAndUI/MenuContainer/HBoxContainer"]
 margin_top = 7.0
-margin_right = 80.0
+margin_right = 60.0
 margin_bottom = 21.0
-text = "Zoom: x7.81"
+rect_min_size = Vector2( 60, 0 )
+text = "781 %"
+align = 2
 
 [node name="CursorPosition" type="Label" parent="MenuAndUI/MenuContainer/HBoxContainer"]
-margin_left = 84.0
+margin_left = 80.0
 margin_top = 7.0
-margin_right = 131.0
+margin_right = 128.0
 margin_bottom = 21.0
-text = "[64x64]"
+text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]

@@ -34,4 +34,4 @@ func zoom_camera(dir : int) -> void:
 	if zoom > zoom_max:
 		zoom = zoom_max
 	if name == "Camera2D":
-		Global.zoom_level_label.text = "Zoom: x%s" % [stepify(1 / zoom.x, 0.01)]
+		Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"

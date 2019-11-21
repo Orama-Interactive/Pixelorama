@@ -66,7 +66,7 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
 	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
-	Global.zoom_level_label.text = "Zoom: x%s" % [stepify(1 / Global.camera.zoom.x, 0.01)]
+	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 
 	#Set camera offset to the center of canvas
 	Global.camera.offset = size / 2
@@ -95,9 +95,9 @@ func _process(delta) -> void:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
 					mouse_inside_canvas = false
-			Global.cursor_position_label.text = "[%sx%s]" % [size.x, size.y]
+			Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 		else:
-			Global.cursor_position_label.text = "[%sx%s] %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
+			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 
 
 	#Handle Undo/Redo
