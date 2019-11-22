@@ -6,6 +6,7 @@ enum TYPE {HORIZONTAL, VERTICAL}
 var font := preload("res://Assets/Fonts/Roboto-Regular.tres")
 var has_focus := true
 var mouse_pos := Vector2.ZERO
+var previous_points := points
 var type = TYPE.HORIZONTAL
 
 func _ready() -> void:
@@ -28,24 +29,29 @@ func _process(delta) -> void:
 			has_focus = true
 			Global.has_focus = false
 			update()
-	if has_focus && Input.is_action_pressed("left_mouse"):
-		if type == TYPE.HORIZONTAL:
-			points[0].y = round(mouse_pos.y)
-			points[1].y = round(mouse_pos.y)
-		else:
-			points[0].x = round(mouse_pos.x)
-			points[1].x = round(mouse_pos.x)
-	if Input.is_action_just_released("left_mouse"):
-		if has_focus:
+	if has_focus:
+		if Input.is_action_just_pressed("left_mouse"):
+			previous_points = points
+		if Input.is_action_pressed("left_mouse"):
+			if type == TYPE.HORIZONTAL:
+				points[0].y = round(mouse_pos.y)
+				points[1].y = round(mouse_pos.y)
+			else:
+				points[0].x = round(mouse_pos.x)
+				points[1].x = round(mouse_pos.x)
+		if Input.is_action_just_released("left_mouse"):
 			Global.has_focus = true
 			has_focus = false
-			update()
-			if type == TYPE.HORIZONTAL:
-				if points[0].y < 0 || points[0].y > Global.canvas.size.y:
-					queue_free()
-			else:
-				if points[0].x < 0 || points[0].x > Global.canvas.size.x:
-					queue_free()
+			if !outside_canvas():
+				Global.undos += 1
+				Global.undo_redo.create_action("Move Guide")
+				Global.undo_redo.add_do_method(self, "outside_canvas")
+				Global.undo_redo.add_do_property(self, "points", points)
+				Global.undo_redo.add_undo_property(self, "points", previous_points)
+				Global.undo_redo.add_undo_method(self, "outside_canvas", true)
+				Global.undo_redo.commit_action()
+				update()
+
 
 func _draw() -> void:
 	if has_focus:
@@ -57,6 +63,24 @@ func _draw() -> void:
 		else:
 			draw_set_transform(Vector2(points[0].x + font.get_height() * zoom.y, Global.camera.offset.y - (viewport_size.y / 2.25) * zoom.y), rotation, zoom * 2)
 			draw_string(font, Vector2.ZERO, "%spx" % str(round(mouse_pos.x)))
+
+func outside_canvas(undo := false) -> bool:
+	if undo:
+		Global.undos -= 1
+		Global.notification_label("Move Guide")
+	if Global.control.redone:
+		if Global.undos < Global.undo_redo.get_version(): #If we did undo and then redo
+			Global.undos = Global.undo_redo.get_version()
+			Global.notification_label("Move Guide")
+	if type == TYPE.HORIZONTAL:
+		if points[0].y < 0 || points[0].y > Global.canvas.size.y:
+			queue_free()
+			return true
+	else:
+		if points[0].x < 0 || points[0].x > Global.canvas.size.x:
+			queue_free()
+			return true
+	return false
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
