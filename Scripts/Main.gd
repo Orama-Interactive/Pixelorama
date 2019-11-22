@@ -241,6 +241,9 @@ func edit_menu_id_pressed(id : int) -> void:
 			canvas.layers[canvas.current_layer_index][0].flip_x()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
+			
+			# Sprite changed this frame, so update is needed
+			canvas.update_texture(canvas.current_layer_index)
 		6: # Flip Vertical
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
@@ -248,6 +251,9 @@ func edit_menu_id_pressed(id : int) -> void:
 			canvas.layers[canvas.current_layer_index][0].flip_y()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
+			
+			# Sprite changed this frame, so update is needed
+			canvas.update_texture(canvas.current_layer_index)
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
