@@ -314,7 +314,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			canvas.layers.append([image, tex, layer_name, true])
 			layer_line = file.get_line()
 
-		var guide_line := file.get_line()
+		var guide_line := file.get_line() #"guideline" no pun intended
 		while guide_line == "|": #Load guides
 			var guide := Guide.new()
 			guide.default_color = Color.purple
@@ -723,34 +723,43 @@ func _on_LoopAnim_pressed() -> void:
 			#Make it loop
 			animation_loop = 1
 			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop.png")
+			Global.loop_animation_button.hint_tooltip = "Cycle loop"
 		"res://Assets/Graphics/Timeline/Loop.png":
 			#Make it ping-pong
 			animation_loop = 2
 			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop_PingPong.png")
+			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
 		"res://Assets/Graphics/Timeline/Loop_PingPong.png":
 			#Make it stop
 			animation_loop = 0
 			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop_None.png")
+			Global.loop_animation_button.hint_tooltip = "No loop"
 
 func _on_PlayForward_toggled(button_pressed) -> void:
 	Global.play_backwards.pressed = false
+	if Global.canvases.size() == 1:
+		Global.play_forward.pressed = !button_pressed
+		return
 
 	if button_pressed:
-		$AnimationTimer.wait_time = 1 / fps
-		$AnimationTimer.start()
+		Global.animation_timer.wait_time = 1 / fps
+		Global.animation_timer.start()
 		animation_forward = true
 	else:
-		$AnimationTimer.stop()
+		Global.animation_timer.stop()
 
 func _on_PlayBackwards_toggled(button_pressed) -> void:
 	Global.play_forward.pressed = false
+	if Global.canvases.size() == 1:
+		Global.play_backwards.pressed = !button_pressed
+		return
 
 	if button_pressed:
-		$AnimationTimer.wait_time = 1 / fps
-		$AnimationTimer.start()
+		Global.animation_timer.wait_time = 1 / fps
+		Global.animation_timer.start()
 		animation_forward = false
 	else:
-		$AnimationTimer.stop()
+		Global.animation_timer.stop()
 
 func _on_NextFrame_pressed() -> void:
 	if Global.current_frame < Global.canvases.size() - 1:
@@ -775,7 +784,7 @@ func _on_AnimationTimer_timeout() -> void:
 				0: #No loop
 					Global.play_forward.pressed = false
 					Global.play_backwards.pressed = false
-					$AnimationTimer.stop()
+					Global.animation_timer.stop()
 				1: #Cycle loop
 					Global.current_frame = 0
 				2: #Ping pong loop
@@ -790,7 +799,7 @@ func _on_AnimationTimer_timeout() -> void:
 				0: #No loop
 					Global.play_backwards.pressed = false
 					Global.play_forward.pressed = false
-					$AnimationTimer.stop()
+					Global.animation_timer.stop()
 				1: #Cycle loop
 					Global.current_frame = Global.canvases.size() - 1
 				2: #Ping pong loop
@@ -799,7 +808,7 @@ func _on_AnimationTimer_timeout() -> void:
 
 func _on_FPSValue_value_changed(value) -> void:
 	fps = float(value)
-	$AnimationTimer.wait_time = 1 / fps
+	Global.animation_timer.wait_time = 1 / fps
 
 func _on_PastOnionSkinning_value_changed(value) -> void:
 	Global.onion_skinning_past_rate = int(value)

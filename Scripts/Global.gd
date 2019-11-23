@@ -195,9 +195,11 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frame_container.remove_child(_canvases[0].frame_button)
-		if len(canvases) == 1:
-			Global.remove_frame_button.disabled = true
-			Global.remove_frame_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		#This actually means that canvases.size is one, but it hasn't been updated yet
+		if canvases.size() == 2: #Stop animating
+			play_forward.pressed = false
+			play_backwards.pressed = false
+			animation_timer.stop()
 	elif action_name == "Remove Frame":
 		canvas_parent.add_child(_canvases[0])
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
@@ -238,6 +240,10 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frame_container.remove_child(_canvases[0].frame_button)
+		if canvases.size() == 1: #Stop animating
+			play_forward.pressed = false
+			play_backwards.pressed = false
+			animation_timer.stop()
 	elif action_name == "Change Frame Order":
 		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)

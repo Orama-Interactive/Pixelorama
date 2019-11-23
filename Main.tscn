@@ -482,6 +482,7 @@ mouse_default_cursor_shape = 2
 text = "Vert. Mirror"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 242.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -605,6 +606,7 @@ margin_right = 4.0
 margin_bottom = 71.0
 
 [node name="AnimationContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
@@ -616,7 +618,6 @@ margin_bottom = 138.0
 size_flags_horizontal = 3
 
 [node name="AnimationButtons" type="Control" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-editor/display_folded = true
 margin_right = 525.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
@@ -690,6 +691,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 20 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -713,9 +715,7 @@ suffix = "FPS"
 margin_left = 78.0
 margin_right = 98.0
 margin_bottom = 24.0
-hint_tooltip = "No: Animation doesn't loop
-Cycle: Animation plays again when it reaches the last frame
-Ping-pong: Animation plays again but backwards when it reaches the last frame"
+hint_tooltip = "No loop"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 21 )
 
@@ -806,6 +806,7 @@ margin_right = 671.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
