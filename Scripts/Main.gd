@@ -296,14 +296,14 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	var frame := 0
 	var frame_line := file.get_line()
 	clear_canvases()
-	while frame_line == "--":
+	while frame_line == "--": #Load frames
 		var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 		Global.canvas = canvas
 		var width := file.get_16()
 		var height := file.get_16()
-		var layer_line := file.get_line()
 
-		while layer_line == "-":
+		var layer_line := file.get_line()
+		while layer_line == "-": #Load layers
 			var buffer := file.get_buffer(width * height * 4)
 			var layer_name := file.get_line()
 			var image := Image.new()
@@ -313,6 +313,21 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			tex.create_from_image(image, 0)
 			canvas.layers.append([image, tex, layer_name, true])
 			layer_line = file.get_line()
+
+		var guide_line := file.get_line()
+		while guide_line == "|": #Load guides
+			var guide := Guide.new()
+			guide.default_color = Color.purple
+			guide.type = file.get_8()
+			if guide.type == guide.TYPE.HORIZONTAL:
+				guide.add_point(Vector2(-99999, file.get_16()))
+				guide.add_point(Vector2(99999, file.get_16()))
+			else:
+				guide.add_point(Vector2(file.get_16(), -99999))
+				guide.add_point(Vector2(file.get_16(), 99999))
+			guide.has_focus = false
+			canvas.add_child(guide)
+			guide_line = file.get_line()
 
 		canvas.size = Vector2(width, height)
 		Global.canvases.append(canvas)
@@ -337,7 +352,6 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		Global.right_color_picker.get_picker().add_preset(color)
 
 	#Load custom brushes
-	#Global.custom_brushes.clear()
 	Global.custom_brushes.resize(Global.brushes_from_files)
 	Global.remove_brush_buttons()
 
@@ -364,15 +378,27 @@ func _on_SaveSprite_file_selected(path) -> void:
 	var err := file.open(path, File.WRITE)
 	if err == 0:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
-		for canvas in Global.canvases:
+		for canvas in Global.canvases: #Store frames
 			file.store_line("--")
 			file.store_16(canvas.size.x)
 			file.store_16(canvas.size.y)
-			for layer in canvas.layers:
+			for layer in canvas.layers: #Store layers
 				file.store_line("-")
 				file.store_buffer(layer[0].get_data())
 				file.store_line(layer[2])
 			file.store_line("END_LAYERS")
+
+			for child in canvas.get_children(): #Store guides
+				if child is Guide:
+					file.store_line("|")
+					file.store_8(child.type)
+					if child.type == child.TYPE.HORIZONTAL:
+						file.store_16(child.points[0].y)
+						file.store_16(child.points[1].y)
+					else:
+						file.store_16(child.points[1].x)
+						file.store_16(child.points[0].x)
+			file.store_line("END_GUIDES")
 		file.store_line("END_FRAMES")
 
 		#Save tool options

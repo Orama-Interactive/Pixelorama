@@ -58,10 +58,10 @@ func _on_HorizontalRuler_pressed() -> void:
 	var mouse_pos := get_local_mouse_position()
 	if mouse_pos.x < RULER_WIDTH: #For double guides
 		Global.vertical_ruler._on_VerticalRuler_pressed()
-	var line_2d := Guide.new()
-	line_2d.type = line_2d.TYPE.HORIZONTAL
-	line_2d.default_color = Color.purple
-	line_2d.add_point(Vector2(-99999, Global.canvas.current_pixel.y))
-	line_2d.add_point(Vector2(99999, Global.canvas.current_pixel.y))
-	Global.canvas.add_child(line_2d)
+	var guide := Guide.new()
+	guide.type = guide.TYPE.HORIZONTAL
+	guide.default_color = Color.purple
+	guide.add_point(Vector2(-99999, Global.canvas.current_pixel.y))
+	guide.add_point(Vector2(99999, Global.canvas.current_pixel.y))
+	Global.canvas.add_child(guide)
 	Global.has_focus = false
