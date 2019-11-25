@@ -132,7 +132,7 @@ func _ready() -> void:
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
 				Global.custom_brushes.append(image)
-				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE)
+				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE, file)
 		file = brushes_dir.get_next()
 	brushes_dir.list_dir_end()
 	Global.brushes_from_files = Global.custom_brushes.size()

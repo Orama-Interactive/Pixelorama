@@ -4,7 +4,7 @@ const RULER_WIDTH := 16
 
 var font := preload("res://Assets/Fonts/Roboto-Small.tres")
 var major_subdivision := 2
-var minor_subdivision := 5
+var minor_subdivision := 4
 
 var first : Vector2
 var last : Vector2

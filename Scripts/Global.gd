@@ -267,7 +267,7 @@ func frame_changed(value : int) -> void:
 	canvas.frame_button.get_node("FrameButton").pressed = true
 
 
-func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM) -> void:
+func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
@@ -279,6 +279,7 @@ func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM) ->
 	var brush_tex := ImageTexture.new()
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
+	brush_button.hint_tooltip = hint_tooltip
 	brush_container.add_child(brush_button)
 
 func remove_brush_buttons() -> void:
