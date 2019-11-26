@@ -479,103 +479,102 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 		var end_pos_x
 		var end_pos_y
 
-		match(brush_type):
-			Global.BRUSH_TYPES.PIXEL:
-				start_pos_x = pos.x - (brush_size >> 1)
-				start_pos_y = pos.y - (brush_size >> 1)
-				end_pos_x = start_pos_x + brush_size
-				end_pos_y = start_pos_y + brush_size
-				for cur_pos_x in range(start_pos_x, end_pos_x):
-					for cur_pos_y in range(start_pos_y, end_pos_y):
-						if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
-							var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
-							#Don't draw the same pixel over and over and don't re-lighten/darken it
-							if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color && !(pos_floored in lighten_darken_pixels):
-								layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
-								if current_action == "LightenDarken":
-									lighten_darken_pixels.append(pos_floored)
-								sprite_changed_this_frame = true
+		if brush_type == Global.BRUSH_TYPES.PIXEL || current_action == "LightenDarken":
+			start_pos_x = pos.x - (brush_size >> 1)
+			start_pos_y = pos.y - (brush_size >> 1)
+			end_pos_x = start_pos_x + brush_size
+			end_pos_y = start_pos_y + brush_size
+			for cur_pos_x in range(start_pos_x, end_pos_x):
+				for cur_pos_y in range(start_pos_y, end_pos_y):
+					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+						var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
+						#Don't draw the same pixel over and over and don't re-lighten/darken it
+						if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color && !(pos_floored in lighten_darken_pixels):
+							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
+							if current_action == "LightenDarken":
+								lighten_darken_pixels.append(pos_floored)
+							sprite_changed_this_frame = true
 
-								#Handle mirroring
-								var mirror_x := east_limit + west_limit - cur_pos_x - 1
-								var mirror_y := south_limit + north_limit - cur_pos_y - 1
-								if horizontal_mirror:
-									if layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y) != color: #don't draw the same pixel over and over
-										layers[current_layer_index][0].set_pixel(mirror_x, cur_pos_y, color)
-										sprite_changed_this_frame = true
-								if vertical_mirror:
-									if layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y) != color: #don't draw the same pixel over and over
-										layers[current_layer_index][0].set_pixel(cur_pos_x, mirror_y, color)
-										sprite_changed_this_frame = true
-								if horizontal_mirror && vertical_mirror:
-									if layers[current_layer_index][0].get_pixel(mirror_x, mirror_y) != color: #don't draw the same pixel over and over
-										layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
-										sprite_changed_this_frame = true
+							#Handle mirroring
+							var mirror_x := east_limit + west_limit - cur_pos_x - 1
+							var mirror_y := south_limit + north_limit - cur_pos_y - 1
+							if horizontal_mirror:
+								if layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y) != color: #don't draw the same pixel over and over
+									layers[current_layer_index][0].set_pixel(mirror_x, cur_pos_y, color)
+									sprite_changed_this_frame = true
+							if vertical_mirror:
+								if layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y) != color: #don't draw the same pixel over and over
+									layers[current_layer_index][0].set_pixel(cur_pos_x, mirror_y, color)
+									sprite_changed_this_frame = true
+							if horizontal_mirror && vertical_mirror:
+								if layers[current_layer_index][0].get_pixel(mirror_x, mirror_y) != color: #don't draw the same pixel over and over
+									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
+									sprite_changed_this_frame = true
 
-			Global.BRUSH_TYPES.FILE, Global.BRUSH_TYPES.CUSTOM:
-				var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
-				pos = pos.floor()
-				var dst := rectangle_center(pos, custom_brush_size)
-				var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
-				#Rectangle with the same size as the brush, but at cursor's position
-				var pos_rect := Rect2(dst, custom_brush_size + Vector2.ONE)
+		else:
+			var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
+			pos = pos.floor()
+			var dst := rectangle_center(pos, custom_brush_size)
+			var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
+			#Rectangle with the same size as the brush, but at cursor's position
+			var pos_rect := Rect2(dst, custom_brush_size + Vector2.ONE)
 
-				#The selection rectangle
-				#If there's no rectangle, the whole canvas is considered a selection
-				var selection_rect := Rect2()
-				selection_rect.position = Vector2(west_limit, north_limit)
-				selection_rect.end = Vector2(east_limit, south_limit)
-				#Intersection of the position rectangle and selection
-				var pos_rect_clipped := pos_rect.clip(selection_rect)
-				#If the size is 0, that means that the brush wasn't positioned inside the selection
-				if pos_rect_clipped.size == Vector2.ZERO:
-					return
+			#The selection rectangle
+			#If there's no rectangle, the whole canvas is considered a selection
+			var selection_rect := Rect2()
+			selection_rect.position = Vector2(west_limit, north_limit)
+			selection_rect.end = Vector2(east_limit, south_limit)
+			#Intersection of the position rectangle and selection
+			var pos_rect_clipped := pos_rect.clip(selection_rect)
+			#If the size is 0, that means that the brush wasn't positioned inside the selection
+			if pos_rect_clipped.size == Vector2.ZERO:
+				return
 
-				#Re-position src_rect and dst based on the clipped position
-				var pos_difference := (pos_rect.position - pos_rect_clipped.position).abs()
-				#Obviously, if pos_rect and pos_rect_clipped are the same, pos_difference is Vector2.ZERO
-				src_rect.position = pos_difference
-				dst += pos_difference
-				src_rect.end -= pos_rect.end - pos_rect_clipped.end
-				#If the selection rectangle is smaller than the brush, ...
-				#... make sure pixels aren't being drawn outside the selection by adjusting src_rect's size
-				src_rect.size.x = min(src_rect.size.x, selection_rect.size.x)
-				src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
+			#Re-position src_rect and dst based on the clipped position
+			var pos_difference := (pos_rect.position - pos_rect_clipped.position).abs()
+			#Obviously, if pos_rect and pos_rect_clipped are the same, pos_difference is Vector2.ZERO
+			src_rect.position = pos_difference
+			dst += pos_difference
+			src_rect.end -= pos_rect.end - pos_rect_clipped.end
+			#If the selection rectangle is smaller than the brush, ...
+			#... make sure pixels aren't being drawn outside the selection by adjusting src_rect's size
+			src_rect.size.x = min(src_rect.size.x, selection_rect.size.x)
+			src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
 
-				#Handle mirroring
-				var mirror_x := east_limit + west_limit - pos.x - (pos.x - dst.x)
-				var mirror_y := south_limit + north_limit - pos.y - (pos.y - dst.y)
-				if int(pos_rect_clipped.size.x) % 2 != 0:
-					mirror_x -= 1
-				if int(pos_rect_clipped.size.y) % 2 != 0:
-					mirror_y -= 1
+			#Handle mirroring
+			var mirror_x := east_limit + west_limit - pos.x - (pos.x - dst.x)
+			var mirror_y := south_limit + north_limit - pos.y - (pos.y - dst.y)
+			if int(pos_rect_clipped.size.x) % 2 != 0:
+				mirror_x -= 1
+			if int(pos_rect_clipped.size.y) % 2 != 0:
+				mirror_y -= 1
 
-				if color.a > 0: #If it's the pencil
-					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
-					if horizontal_mirror:
-						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
-					if vertical_mirror:
-						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
-					if horizontal_mirror && vertical_mirror:
-						layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
+			if color.a > 0: #If it's the pencil
+				layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
+				if horizontal_mirror:
+					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
+				if vertical_mirror:
+					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
+				if horizontal_mirror && vertical_mirror:
+					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
 
-				else: #if it's transparent - if it's the eraser
-					var custom_brush := Image.new()
-					custom_brush.copy_from(Global.custom_brushes[brush_index])
-					custom_brush_size = custom_brush.get_size()
-					custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
-					var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)
+			else: #if it's transparent - if it's the eraser
+				var custom_brush := Image.new()
+				custom_brush.copy_from(Global.custom_brushes[brush_index])
+				custom_brush_size = custom_brush.get_size()
+				custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
+				var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)
 
-					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, dst)
-					if horizontal_mirror:
-						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, dst.y))
-					if vertical_mirror:
-						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(dst.x, mirror_y))
-					if horizontal_mirror && vertical_mirror:
-						layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, mirror_y))
+				layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, dst)
+				if horizontal_mirror:
+					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, dst.y))
+				if vertical_mirror:
+					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(dst.x, mirror_y))
+				if horizontal_mirror && vertical_mirror:
+					layers[current_layer_index][0].blit_rect_mask(custom_brush_blended, custom_brush, src_rect, Vector2(mirror_x, mirror_y))
 
-				layers[current_layer_index][0].lock()
-				sprite_changed_this_frame = true
+			layers[current_layer_index][0].lock()
+			sprite_changed_this_frame = true
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
