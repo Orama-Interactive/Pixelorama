@@ -45,6 +45,10 @@ var view_menu : MenuButton
 var help_menu : MenuButton
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
+var left_brush_type_button : BaseButton
+var right_brush_type_button : BaseButton
+var left_brush_type_label : Label
+var right_brush_type_label : Label
 var left_brush_size_edit : SpinBox
 var right_brush_size_edit : SpinBox
 var left_interpolate_slider : HSlider
@@ -80,8 +84,9 @@ var right_brush_size := 1
 var current_left_brush_type = BRUSH_TYPES.PIXEL
 # warning-ignore:unused_class_variable
 var current_right_brush_type = BRUSH_TYPES.PIXEL
-var file_brush_container
-var project_brush_container
+var brushes_popup : Popup
+var file_brush_container : GridContainer
+var project_brush_container : GridContainer
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
 # warning-ignore:unused_class_variable
@@ -130,11 +135,14 @@ func _ready() -> void:
 	help_menu = find_node_by_name(root, "HelpMenu")
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	left_brush_type_button = find_node_by_name(root, "LeftBrushTypeButton")
+	right_brush_type_button = find_node_by_name(root, "RightBrushTypeButton")
+	left_brush_type_label = find_node_by_name(root, "LeftBrushTypeLabel")
+	right_brush_type_label = find_node_by_name(root, "RightBrushTypeLabel")
 	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
 	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
 	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateFactor")
 	right_interpolate_slider = find_node_by_name(root, "RightInterpolateFactor")
-
 	left_brush_indicator = find_node_by_name(root, "LeftBrushIndicator")
 	right_brush_indicator = find_node_by_name(root, "RightBrushIndicator")
 
@@ -142,6 +150,7 @@ func _ready() -> void:
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
 	frame_container = find_node_by_name(root, "FrameContainer")
+
 	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
 	remove_layer_button = find_node_by_name(root, "RemoveLayerButton")
 	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
@@ -151,8 +160,10 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 	current_frame_label = find_node_by_name(root, "CurrentFrame")
-	file_brush_container = find_node_by_name(root, "FileBrushContainer")
-	project_brush_container = find_node_by_name(root, "ProjectBrushContainer")
+
+	brushes_popup = find_node_by_name(root, "BrushesPopup")
+	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
+	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -288,7 +299,7 @@ func remove_brush_buttons() -> void:
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
-func undo_custom_brush(_brush_button : Button = null) -> void:
+func undo_custom_brush(_brush_button : BaseButton = null) -> void:
 	undos -= 1
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
@@ -297,7 +308,7 @@ func undo_custom_brush(_brush_button : Button = null) -> void:
 		_brush_button.get_node("DeleteButton").visible = false
 	notification_label("Undo: %s" % action_name)
 
-func redo_custom_brush(_brush_button : Button = null) -> void:
+func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 	if undos < undo_redo.get_version(): #If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name := undo_redo.get_current_action_name()
@@ -307,7 +318,12 @@ func redo_custom_brush(_brush_button : Button = null) -> void:
 		notification_label("Redo: %s" % action_name)
 
 func update_left_custom_brush() -> void:
-	if custom_left_brush_index > -1:
+	if current_left_brush_type == BRUSH_TYPES.PIXEL:
+		var pixel := Image.new()
+		pixel = preload("res://Assets/Graphics/pixel_image.png")
+		pixel = blend_image_with_color(pixel, left_color_picker.color, 1)
+		left_brush_type_button.get_child(0).texture.create_from_image(pixel)
+	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
 		var custom_brush_size = custom_brush.get_size()
@@ -315,14 +331,23 @@ func update_left_custom_brush() -> void:
 		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
 		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
 
+		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
+
 func update_right_custom_brush() -> void:
-	if custom_right_brush_index > -1:
+	if current_right_brush_type == BRUSH_TYPES.PIXEL:
+		var pixel := Image.new()
+		pixel = preload("res://Assets/Graphics/pixel_image.png")
+		pixel = blend_image_with_color(pixel, right_color_picker.color, 1)
+		right_brush_type_button.get_child(0).texture.create_from_image(pixel)
+	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
 		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value)
 		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
+
+		right_brush_type_button.get_child(0).texture = custom_right_brush_texture
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
 	var blended_image := Image.new()

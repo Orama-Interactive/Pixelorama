@@ -132,7 +132,7 @@ func _ready() -> void:
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
 				Global.custom_brushes.append(image)
-				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE, file)
+				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE, file.trim_suffix(".png"))
 		file = brushes_dir.get_next()
 	brushes_dir.list_dir_end()
 	Global.brushes_from_files = Global.custom_brushes.size()
@@ -604,6 +604,12 @@ func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.right_square_indicator_visible = button_pressed
 
+func _on_LeftBrushTypeButton_pressed() -> void:
+	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
+
+func _on_RightBrushTypeButton_pressed() -> void:
+	Global.brushes_popup.popup(Rect2(Global.right_brush_type_button.rect_global_position, Vector2(226, 72)))
+
 func _on_LeftBrushSizeEdit_value_changed(value) -> void:
 	var new_size = int(value)
 	Global.left_brush_size = new_size
@@ -867,3 +873,4 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
+

@@ -26,7 +26,7 @@ func _ready() -> void:
 	Global.can_draw = false
 	#Background
 	trans_background = ImageTexture.new()
-	trans_background.create_from_image(load("res://Assets/Graphics/Transparent Background.png"), 0)
+	trans_background.create_from_image(preload("res://Assets/Graphics/Transparent Background.png"), 0)
 
 	#The sprite itself
 	if layers.empty():

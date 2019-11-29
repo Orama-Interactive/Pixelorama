@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pixel.png-02d24c392cbedb7afeccdbe493729855.stex"
+path="res://.import/Brush_button.png-4783b6e96c01a99d0b15c8e80d794dbf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/pixel.png"
-dest_files=[ "res://.import/pixel.png-02d24c392cbedb7afeccdbe493729855.stex" ]
+source_file="res://Assets/Graphics/Brush_button.png"
+dest_files=[ "res://.import/Brush_button.png-4783b6e96c01a99d0b15c8e80d794dbf.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
