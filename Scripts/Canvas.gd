@@ -370,7 +370,7 @@ func _draw() -> void:
 	var mouse_pos := get_local_mouse_position() + location
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
-		if Global.left_square_indicator_visible:
+		if Global.left_square_indicator_visible and Global.can_draw:
 			match Global.current_left_brush_type:
 				Global.BRUSH_TYPES.PIXEL:
 					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
@@ -381,7 +381,7 @@ func _draw() -> void:
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_left_brush_texture, dst)
 
-		if Global.right_square_indicator_visible:
+		if Global.right_square_indicator_visible and Global.can_draw:
 			match Global.current_right_brush_type:
 				Global.BRUSH_TYPES.PIXEL:
 					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
