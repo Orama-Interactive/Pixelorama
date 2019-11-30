@@ -4,12 +4,11 @@ var brush_type = Global.BRUSH_TYPES.PIXEL
 var custom_brush_index := -1
 
 func _on_BrushButton_pressed() -> void:
+	#Change left brush
 	if Global.brushes_popup.rect_global_position == Global.left_brush_type_button.rect_global_position:
 		Global.current_left_brush_type = brush_type
-		Global.left_brush_indicator.get_parent().remove_child(Global.left_brush_indicator)
-		add_child(Global.left_brush_indicator)
+		Global.custom_left_brush_index = custom_brush_index
 		if custom_brush_index > -1: #Custom brush
-			Global.custom_left_brush_index = custom_brush_index
 			if hint_tooltip == "":
 				Global.left_brush_type_label.text = "Custom brush"
 			else:
@@ -19,12 +18,10 @@ func _on_BrushButton_pressed() -> void:
 
 		Global.update_left_custom_brush()
 
-	else:
+	else: #Change right brush
 		Global.current_right_brush_type = brush_type
-		Global.right_brush_indicator.get_parent().remove_child(Global.right_brush_indicator)
-		add_child(Global.right_brush_indicator)
+		Global.custom_right_brush_index = custom_brush_index
 		if custom_brush_index > -1:
-			Global.custom_right_brush_index = custom_brush_index
 			if hint_tooltip == "":
 				Global.right_brush_type_label.text = "Custom brush"
 			else:
@@ -39,17 +36,18 @@ func _on_DeleteButton_pressed() -> void:
 		if Global.custom_left_brush_index == custom_brush_index:
 			Global.custom_left_brush_index = -1
 			Global.current_left_brush_type = Global.BRUSH_TYPES.PIXEL
-			remove_child(Global.left_brush_indicator)
-			Global.file_brush_container.get_child(0).add_child(Global.left_brush_indicator)
+			Global.left_brush_type_label.text = "Brush: Pixel"
+			Global.update_left_custom_brush()
 		if Global.custom_right_brush_index == custom_brush_index:
 			Global.custom_right_brush_index = -1
 			Global.current_right_brush_type = Global.BRUSH_TYPES.PIXEL
-			remove_child(Global.right_brush_indicator)
-			Global.file_brush_container.get_child(0).add_child(Global.right_brush_indicator)
+			Global.right_brush_type_label.text = "Brush: Pixel"
+			Global.update_right_custom_brush()
 
+		var project_brush_index = custom_brush_index - Global.brushes_from_files
 		Global.undos += 1
 		Global.undo_redo.create_action("Delete Custom Brush")
-		for i in range(custom_brush_index - 1, Global.project_brush_container.get_child_count()):
+		for i in range(project_brush_index, Global.project_brush_container.get_child_count()):
 			var bb = Global.project_brush_container.get_child(i)
 			if Global.custom_left_brush_index == bb.custom_brush_index:
 				Global.custom_left_brush_index -= 1

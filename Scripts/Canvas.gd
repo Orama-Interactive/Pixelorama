@@ -641,7 +641,7 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 					q.append(north)
 				if south.y < south_limit && layers[current_layer_index][0].get_pixelv(south) == target_color:
 					q.append(south)
-			sprite_changed_this_frame = true
+		sprite_changed_this_frame = true
 
 #I wish GDScript supported function overloading, I could add more versions of these scripts...
 #...but with a Rect2() parameter instead of 2 Vector2()s
