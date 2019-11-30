@@ -625,6 +625,11 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 
 		var q = [pos]
 		for n in q:
+			#If the difference in colors is very small, break the loop (thanks @azagaya on GitHub!)
+			var c = target_color - replace_color
+			var dist = sqrt(c.r*c.r + c.g*c.g + c.b*c.b + c.a*c.a)
+			if dist <= 0.005:
+				break
 			var west : Vector2 = n
 			var east : Vector2 = n
 			while west.x >= west_limit && layers[current_layer_index][0].get_pixelv(west) == target_color:

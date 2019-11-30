@@ -476,6 +476,7 @@ hint_tooltip = "Color picker for the right tool"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+color = Color( 1, 1, 1, 1 )
 
 [node name="BrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 82.0
