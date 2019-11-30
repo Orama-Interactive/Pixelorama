@@ -835,6 +835,19 @@ func _on_SplitScreenButton_toggled(button_pressed) -> void:
 		Global.viewport_separator.visible = false
 		Global.second_viewport.visible = false
 
+func _on_ColorSwitch_pressed() -> void:
+	var temp := Global.left_color_picker.color
+	Global.left_color_picker.color = Global.right_color_picker.color
+	Global.right_color_picker.color = temp
+	update_left_custom_brush()
+	update_right_custom_brush()
+
+func _on_ColorDefaults_pressed() -> void:
+	Global.left_color_picker.color = Color.black
+	Global.right_color_picker.color = Color.white
+	update_left_custom_brush()
+	update_right_custom_brush()
+
 # warning-ignore:unused_argument
 func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 	update_left_custom_brush()
@@ -873,4 +886,3 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
-

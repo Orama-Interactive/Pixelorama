@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Tools/RectSelect.png" type="Texture" id=2]
@@ -6,36 +6,38 @@
 [ext_resource path="res://Assets/Graphics/Tools/Eraser_r.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Graphics/Tools/Bucket.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Graphics/Tools/LightenDarken.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=7]
-[ext_resource path="res://Styles/RulerStyle.tres" type="StyleBox" id=8]
-[ext_resource path="res://Scripts/HorizontalRuler.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/VerticalRuler.gd" type="Script" id=10]
-[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=12]
-[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=13]
-[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=14]
-[ext_resource path="res://Assets/Graphics/Timeline/Go_To_First_Frame.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Graphics/Timeline/Previous_Frame.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Graphics/Timeline/Play Backwards.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Graphics/Timeline/Pause.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Graphics/Timeline/Play.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Graphics/Timeline/Next_Frame.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Graphics/Timeline/Go_To_Last_Frame.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Graphics/Timeline/Loop_None.png" type="Texture" id=22]
-[ext_resource path="res://Scripts/TimelineSeconds.gd" type="Script" id=23]
-[ext_resource path="res://Assets/Graphics/Timeline/New_Frame.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Graphics/Layers/new_layer.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Graphics/Layers/delete_layer.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Graphics/Layers/delete_layer_disabled.png" type="Texture" id=27]
-[ext_resource path="res://Assets/Graphics/Layers/move_up.png" type="Texture" id=28]
-[ext_resource path="res://Assets/Graphics/Layers/move_up_disabled.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Graphics/Layers/move_down.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Graphics/Layers/move_down_disabled.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Graphics/Layers/clone_layer.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Graphics/Layers/merge_down.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Graphics/Layers/merge_down_disabled.png" type="Texture" id=34]
-[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=35]
-[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=36]
+[ext_resource path="res://Assets/Graphics/Color switch.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Graphics/Color defaults.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=9]
+[ext_resource path="res://Styles/RulerStyle.tres" type="StyleBox" id=10]
+[ext_resource path="res://Scripts/HorizontalRuler.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/VerticalRuler.gd" type="Script" id=12]
+[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=15]
+[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=16]
+[ext_resource path="res://Assets/Graphics/Timeline/Go_To_First_Frame.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Graphics/Timeline/Previous_Frame.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Graphics/Timeline/Play Backwards.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Graphics/Timeline/Pause.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Graphics/Timeline/Play.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/Timeline/Next_Frame.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/Timeline/Go_To_Last_Frame.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/Timeline/Loop_None.png" type="Texture" id=24]
+[ext_resource path="res://Scripts/TimelineSeconds.gd" type="Script" id=25]
+[ext_resource path="res://Assets/Graphics/Timeline/New_Frame.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Graphics/Layers/new_layer.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Graphics/Layers/delete_layer.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Graphics/Layers/delete_layer_disabled.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Graphics/Layers/move_up.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/Layers/move_up_disabled.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Graphics/Layers/move_down.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Graphics/Layers/move_down_disabled.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Graphics/Layers/clone_layer.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Graphics/Layers/merge_down.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Graphics/Layers/merge_down_disabled.png" type="Texture" id=36]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=38]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
@@ -77,6 +79,7 @@ __meta__ = {
 }
 
 [node name="MenuAndUI" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
@@ -147,6 +150,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -294,20 +298,81 @@ button_mask = 3
 text = "PaintSameColor"
 
 [node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 157.0
 margin_right = 226.0
 margin_bottom = 612.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+[node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+editor/display_folded = true
 margin_right = 226.0
-margin_bottom = 4.0
+margin_bottom = 32.0
+
+[node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter"]
+margin_left = 36.0
+margin_right = 189.0
+margin_bottom = 32.0
+
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 32 )
+hint_tooltip = "Color picker for the left tool"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+flat = true
+
+[node name="ColorButtonsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
+editor/display_folded = true
+margin_left = 68.0
+margin_right = 85.0
+margin_bottom = 32.0
+
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter"]
+margin_top = 7.0
+margin_right = 17.0
+margin_bottom = 24.0
+
+[node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical"]
+margin_right = 17.0
+margin_bottom = 7.0
+hint_tooltip = "Switch left and right colors"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 7 )
+
+[node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical"]
+margin_top = 11.0
+margin_right = 17.0
+margin_bottom = 17.0
+hint_tooltip = "Reset the colors to their default state (black for left, white for right)"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 8 )
+
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
+margin_left = 89.0
+margin_right = 153.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 32 )
+hint_tooltip = "Color picker for the right tool"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+flat = true
+color = Color( 1, 1, 1, 1 )
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+margin_top = 32.0
+margin_right = 226.0
+margin_bottom = 36.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
-margin_top = 4.0
+editor/display_folded = true
+margin_top = 36.0
 margin_right = 226.0
-margin_bottom = 227.0
+margin_bottom = 243.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -326,27 +391,17 @@ mouse_default_cursor_shape = 2
 pressed = true
 text = "Left cursor"
 
-[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 46.0
-margin_right = 32.0
-margin_bottom = 78.0
-rect_min_size = Vector2( 32, 32 )
-hint_tooltip = "Color picker for the left tool"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
 [node name="BrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 82.0
+margin_top = 46.0
 margin_right = 226.0
-margin_bottom = 114.0
+margin_bottom = 78.0
 
 [node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType"]
 margin_right = 36.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 size_flags_horizontal = 0
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 9 )
 
 [node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType/LeftBrushTypeButton"]
 margin_right = 32.0
@@ -363,9 +418,9 @@ margin_bottom = 23.0
 text = "Brush: Pixel"
 
 [node name="BrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 118.0
+margin_top = 82.0
 margin_right = 226.0
-margin_bottom = 142.0
+margin_bottom = 106.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
 margin_top = 5.0
@@ -383,16 +438,16 @@ value = 1.0
 suffix = "px"
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 146.0
+margin_top = 110.0
 margin_right = 226.0
-margin_bottom = 160.0
+margin_bottom = 124.0
 text = "Brush color from"
 
 [node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 164.0
+margin_top = 128.0
 margin_right = 226.0
-margin_bottom = 180.0
+margin_bottom = 144.0
 
 [node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
 margin_top = 1.0
@@ -422,9 +477,9 @@ text = "C"
 
 [node name="Mirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 184.0
+margin_top = 148.0
 margin_right = 226.0
-margin_bottom = 208.0
+margin_bottom = 172.0
 
 [node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring"]
 margin_right = 109.0
@@ -441,13 +496,14 @@ hint_tooltip = "Enable vertical mirrored drawing for the left tool"
 mouse_default_cursor_shape = 2
 text = "Vert. Mirror"
 
-[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
-margin_top = 227.0
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+margin_top = 243.0
 margin_right = 226.0
-margin_bottom = 231.0
+margin_bottom = 247.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
-margin_top = 231.0
+editor/display_folded = true
+margin_top = 247.0
 margin_right = 226.0
 margin_bottom = 455.0
 size_flags_horizontal = 3
@@ -467,28 +523,17 @@ hint_tooltip = "Show right mouse indicator when drawing"
 mouse_default_cursor_shape = 2
 text = "Right cursor"
 
-[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 46.0
-margin_right = 32.0
-margin_bottom = 78.0
-rect_min_size = Vector2( 32, 32 )
-hint_tooltip = "Color picker for the right tool"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-color = Color( 1, 1, 1, 1 )
-
 [node name="BrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 82.0
+margin_top = 46.0
 margin_right = 226.0
-margin_bottom = 114.0
+margin_bottom = 78.0
 
 [node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType"]
 margin_right = 36.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 size_flags_horizontal = 0
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 9 )
 
 [node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType/RightBrushTypeButton"]
 margin_right = 32.0
@@ -505,9 +550,9 @@ margin_bottom = 23.0
 text = "Brush: Pixel"
 
 [node name="BrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 118.0
+margin_top = 82.0
 margin_right = 226.0
-margin_bottom = 142.0
+margin_bottom = 106.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
 margin_top = 5.0
@@ -525,15 +570,15 @@ value = 1.0
 suffix = "px"
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 146.0
+margin_top = 110.0
 margin_right = 226.0
-margin_bottom = 160.0
+margin_bottom = 124.0
 text = "Brush color from"
 
 [node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 164.0
+margin_top = 128.0
 margin_right = 226.0
-margin_bottom = 180.0
+margin_bottom = 144.0
 
 [node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
 margin_top = 1.0
@@ -562,9 +607,9 @@ rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
 [node name="Mirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 184.0
+margin_top = 148.0
 margin_right = 226.0
-margin_bottom = 208.0
+margin_bottom = 172.0
 
 [node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring"]
 margin_right = 109.0
@@ -607,13 +652,13 @@ margin_right = 686.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/focus = ExtResource( 8 )
-custom_styles/normal = ExtResource( 8 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
 action_mode = 0
 enabled_focus_mode = 0
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 editor/display_folded = true
@@ -630,13 +675,13 @@ rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/focus = ExtResource( 8 )
-custom_styles/normal = ExtResource( 8 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
 action_mode = 0
 enabled_focus_mode = 0
-script = ExtResource( 10 )
+script = ExtResource( 12 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
 margin_left = 16.0
@@ -651,18 +696,18 @@ size = Vector2( 670, 462 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 11 )]
+[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
 [node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 12 )
+script = ExtResource( 14 )
 
 [node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 z_index = 1
 color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
-script = ExtResource( 13 )
+script = ExtResource( 15 )
 
 [node name="ViewportSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
 visible = false
@@ -683,12 +728,12 @@ stretch = true
 size = Vector2( 341, 478 )
 handle_input_locally = false
 render_target_update_mode = 0
-script = ExtResource( 14 )
+script = ExtResource( 16 )
 
 [node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 12 )
+script = ExtResource( 14 )
 
 [node name="AnimationTimeline" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline"]
 editor/display_folded = true
@@ -746,14 +791,14 @@ size_flags_horizontal = 0
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 15 )
+texture_normal = ExtResource( 17 )
 
 [node name="PreviousFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 16 )
+texture_normal = ExtResource( 18 )
 
 [node name="PlayBackwards" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 48.0
@@ -762,8 +807,8 @@ margin_bottom = 20.0
 hint_tooltip = "Play the animation backwards (from end to beggining)"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource( 17 )
-texture_pressed = ExtResource( 18 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 20 )
 
 [node name="PlayForward" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 72.0
@@ -773,22 +818,22 @@ hint_tooltip = "Play the animation forward (from beggining to end)"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 toggle_mode = true
-texture_normal = ExtResource( 19 )
-texture_pressed = ExtResource( 18 )
+texture_normal = ExtResource( 21 )
+texture_pressed = ExtResource( 20 )
 
 [node name="NextFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 96.0
 margin_right = 116.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 20 )
+texture_normal = ExtResource( 22 )
 
 [node name="LastFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 120.0
 margin_right = 140.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 21 )
+texture_normal = ExtResource( 23 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
 editor/display_folded = true
@@ -817,7 +862,7 @@ margin_right = 98.0
 margin_bottom = 24.0
 hint_tooltip = "No loop"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 22 )
+texture_normal = ExtResource( 24 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 28.0
@@ -829,7 +874,7 @@ margin_top = 36.0
 margin_right = 525.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 16 )
-script = ExtResource( 23 )
+script = ExtResource( 25 )
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 56.0
@@ -847,7 +892,7 @@ margin_bottom = 36.0
 hint_tooltip = "Add a new frame"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-texture_normal = ExtResource( 24 )
+texture_normal = ExtResource( 26 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer"]
 margin_left = 40.0
@@ -948,7 +993,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 hint_tooltip = "Create a new layer"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 25 )
+texture_normal = ExtResource( 27 )
 
 [node name="RemoveLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterContainer/LayerButtons"]
 margin_left = 36.0
@@ -957,8 +1002,8 @@ margin_bottom = 32.0
 hint_tooltip = "Remove current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 26 )
-texture_disabled = ExtResource( 27 )
+texture_normal = ExtResource( 28 )
+texture_disabled = ExtResource( 29 )
 
 [node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterContainer/LayerButtons"]
 margin_left = 72.0
@@ -967,8 +1012,8 @@ margin_bottom = 32.0
 hint_tooltip = "Move up the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 28 )
-texture_disabled = ExtResource( 29 )
+texture_normal = ExtResource( 30 )
+texture_disabled = ExtResource( 31 )
 
 [node name="MoveDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterContainer/LayerButtons"]
 margin_left = 108.0
@@ -977,8 +1022,8 @@ margin_bottom = 32.0
 hint_tooltip = "Move down the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 30 )
-texture_disabled = ExtResource( 31 )
+texture_normal = ExtResource( 32 )
+texture_disabled = ExtResource( 33 )
 
 [node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterContainer/LayerButtons"]
 margin_left = 144.0
@@ -986,7 +1031,7 @@ margin_right = 176.0
 margin_bottom = 32.0
 hint_tooltip = "Clone current layer"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 32 )
+texture_normal = ExtResource( 34 )
 
 [node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterContainer/LayerButtons"]
 margin_left = 180.0
@@ -995,8 +1040,8 @@ margin_bottom = 32.0
 hint_tooltip = "Merge down current layer"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 33 )
-texture_disabled = ExtResource( 34 )
+texture_normal = ExtResource( 35 )
+texture_disabled = ExtResource( 36 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
@@ -1034,7 +1079,7 @@ scroll_horizontal_enabled = false
 [node name="FileBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/File"]
 columns = 5
 
-[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 35 )]
+[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 37 )]
 hint_tooltip = "Pixel brush"
 
 [node name="Project" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
@@ -1273,7 +1318,7 @@ editor/display_folded = true
 margin_right = 284.0
 margin_bottom = 186.0
 window_title = "About Pixelorama"
-script = ExtResource( 36 )
+script = ExtResource( 38 )
 
 [node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
 margin_left = 8.0
@@ -1333,19 +1378,21 @@ Copyright 2019 - Orama Interactive"
 align = 1
 
 [node name="AnimationTimer" type="Timer" parent="."]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
-[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
-[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
