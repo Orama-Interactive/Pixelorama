@@ -827,11 +827,9 @@ func _on_BlueRedMode_toggled(button_pressed) -> void:
 
 func _on_SplitScreenButton_toggled(button_pressed) -> void:
 	if button_pressed:
-		Global.split_screen_button.text = ">"
 		Global.viewport_separator.visible = true
 		Global.second_viewport.visible = true
 	else:
-		Global.split_screen_button.text = "<"
 		Global.viewport_separator.visible = false
 		Global.second_viewport.visible = false
 

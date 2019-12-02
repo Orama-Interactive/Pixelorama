@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Tools/RectSelect.png" type="Texture" id=2]
@@ -37,7 +37,9 @@
 [ext_resource path="res://Assets/Graphics/Layers/merge_down.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Graphics/Layers/merge_down_disabled.png" type="Texture" id=36]
 [ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=37]
-[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=38]
+[ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=39]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=40]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
@@ -1097,16 +1099,17 @@ scroll_horizontal_enabled = false
 [node name="ProjectBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/Project"]
 columns = 5
 
-[node name="SplitScreenButton" type="Button" parent="."]
+[node name="SplitScreenButton" type="TextureButton" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -244.0
-margin_top = 45.0
-margin_right = -224.0
-margin_bottom = 65.0
+margin_left = -236.921
+margin_top = 44.4745
+margin_right = -223.921
+margin_bottom = 57.4745
 size_flags_vertical = 0
 toggle_mode = true
-text = "<"
+texture_normal = ExtResource( 38 )
+texture_pressed = ExtResource( 39 )
 
 [node name="CreateNewImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -1318,7 +1321,7 @@ editor/display_folded = true
 margin_right = 284.0
 margin_bottom = 186.0
 window_title = "About Pixelorama"
-script = ExtResource( 38 )
+script = ExtResource( 40 )
 
 [node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
 margin_left = 8.0

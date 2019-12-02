@@ -26,7 +26,7 @@ var canvas_parent : Node
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var viewport_separator : VSeparator
-var split_screen_button : Button
+var split_screen_button : BaseButton
 # warning-ignore:unused_class_variable
 var left_square_indicator_visible := true
 # warning-ignore:unused_class_variable
