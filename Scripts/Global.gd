@@ -51,6 +51,8 @@ var left_brush_type_label : Label
 var right_brush_type_label : Label
 var left_brush_size_edit : SpinBox
 var right_brush_size_edit : SpinBox
+var left_color_interpolation_container : Container
+var right_color_interpolation_container : Container
 var left_interpolate_slider : HSlider
 var right_interpolate_slider : HSlider
 
@@ -139,6 +141,8 @@ func _ready() -> void:
 	right_brush_type_label = find_node_by_name(root, "RightBrushTypeLabel")
 	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
 	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
+	left_color_interpolation_container = find_node_by_name(root, "LeftColorInterpolation")
+	right_color_interpolation_container = find_node_by_name(root, "RightColorInterpolation")
 	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateFactor")
 	right_interpolate_slider = find_node_by_name(root, "RightInterpolateFactor")
 

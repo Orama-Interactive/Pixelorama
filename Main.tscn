@@ -81,7 +81,6 @@ __meta__ = {
 }
 
 [node name="MenuAndUI" type="VBoxContainer" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
@@ -152,7 +151,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -161,6 +159,7 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_right = 242.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 242, 0 )
@@ -300,7 +299,6 @@ button_mask = 3
 text = "PaintSameColor"
 
 [node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_top = 157.0
 margin_right = 226.0
 margin_bottom = 612.0
@@ -371,7 +369,6 @@ margin_right = 226.0
 margin_bottom = 36.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
-editor/display_folded = true
 margin_top = 36.0
 margin_right = 226.0
 margin_bottom = 243.0
@@ -439,26 +436,32 @@ min_value = 1.0
 value = 1.0
 suffix = "px"
 
-[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_top = 110.0
-margin_right = 226.0
-margin_bottom = 124.0
-text = "Brush color from"
-
-[node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 128.0
+visible = false
+margin_top = 110.0
 margin_right = 226.0
 margin_bottom = 144.0
 
-[node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Brush color from"
+
+[node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
+editor/display_folded = true
+margin_top = 18.0
+margin_right = 226.0
+margin_bottom = 34.0
+
+[node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation/InterpolateColor"]
 margin_top = 1.0
 margin_right = 9.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "B"
 
-[node name="LeftInterpolateFactor" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+[node name="LeftInterpolateFactor" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation/InterpolateColor"]
 margin_left = 13.0
 margin_right = 214.0
 margin_bottom = 16.0
@@ -469,7 +472,7 @@ step = 0.01
 value = 1.0
 ticks_on_borders = true
 
-[node name="SelectedColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor"]
+[node name="SelectedColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation/InterpolateColor"]
 margin_left = 218.0
 margin_top = 1.0
 margin_right = 226.0
@@ -479,9 +482,9 @@ text = "C"
 
 [node name="Mirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 148.0
+margin_top = 110.0
 margin_right = 226.0
-margin_bottom = 172.0
+margin_bottom = 134.0
 
 [node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring"]
 margin_right = 109.0
@@ -504,7 +507,6 @@ margin_right = 226.0
 margin_bottom = 247.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
-editor/display_folded = true
 margin_top = 247.0
 margin_right = 226.0
 margin_bottom = 455.0
@@ -571,25 +573,31 @@ min_value = 1.0
 value = 1.0
 suffix = "px"
 
-[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+editor/display_folded = true
+visible = false
 margin_top = 110.0
-margin_right = 226.0
-margin_bottom = 124.0
-text = "Brush color from"
-
-[node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 128.0
 margin_right = 226.0
 margin_bottom = 144.0
 
-[node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation"]
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Brush color from"
+
+[node name="InterpolateColor" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation"]
+margin_top = 18.0
+margin_right = 226.0
+margin_bottom = 34.0
+
+[node name="BrushColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation/InterpolateColor"]
 margin_top = 1.0
 margin_right = 9.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "B"
 
-[node name="RightInterpolateFactor" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+[node name="RightInterpolateFactor" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation/InterpolateColor"]
 margin_left = 13.0
 margin_right = 214.0
 margin_bottom = 16.0
@@ -600,7 +608,7 @@ step = 0.01
 value = 1.0
 ticks_on_borders = true
 
-[node name="SelectedColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor"]
+[node name="SelectedColorLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation/InterpolateColor"]
 margin_left = 218.0
 margin_top = 1.0
 margin_right = 226.0
@@ -609,9 +617,10 @@ rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
 [node name="Mirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_top = 148.0
+editor/display_folded = true
+margin_top = 110.0
 margin_right = 226.0
-margin_bottom = 172.0
+margin_bottom = 134.0
 
 [node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring"]
 margin_right = 109.0
@@ -1392,13 +1401,13 @@ align = 1
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
