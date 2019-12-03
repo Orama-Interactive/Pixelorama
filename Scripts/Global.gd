@@ -72,6 +72,9 @@ var right_color_interpolation_container : Container
 var left_interpolate_slider : HSlider
 var right_interpolate_slider : HSlider
 
+var left_fill_area_container : Container
+var right_fill_area_container : Container
+
 var left_mirror_container : Container
 var right_mirror_container : Container
 
@@ -106,6 +109,10 @@ var current_right_brush_type = BRUSH_TYPES.PIXEL
 var brushes_popup : Popup
 var file_brush_container : GridContainer
 var project_brush_container : GridContainer
+
+var left_fill_area := 0
+var right_fill_area := 0
+
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
 # warning-ignore:unused_class_variable
@@ -176,6 +183,9 @@ func _ready() -> void:
 	right_color_interpolation_container = find_node_by_name(right_tool_options_container, "RightColorInterpolation")
 	left_interpolate_slider = find_node_by_name(left_color_interpolation_container, "LeftInterpolateFactor")
 	right_interpolate_slider = find_node_by_name(right_color_interpolation_container, "RightInterpolateFactor")
+
+	left_fill_area_container = find_node_by_name(left_tool_options_container, "LeftFillArea")
+	right_fill_area_container = find_node_by_name(right_tool_options_container, "RightFillArea")
 
 	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
 	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")

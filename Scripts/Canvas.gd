@@ -83,12 +83,15 @@ func _process(delta) -> void:
 	var mouse_in_canvas := point_in_rectangle(mouse_pos, location, location + size)
 	var current_mouse_button := "None"
 	var current_action := "None"
+	var fill_area := 0 #For the bucket tool
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = "left_mouse"
 		current_action = Global.current_left_tool
+		fill_area = Global.left_fill_area
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
+		fill_area = Global.right_fill_area
 
 	if Global.current_frame == frame:
 		if !mouse_in_canvas:
@@ -136,46 +139,46 @@ func _process(delta) -> void:
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Bucket":
 			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
-				var current_color : Color
-				var horizontal_mirror := false
-				var vertical_mirror := false
-				var mirror_x := size.x - mouse_pos.x - 1
-				var mirror_y := size.y - mouse_pos.y - 1
-				if current_mouse_button == "left_mouse":
-					current_color = Global.left_color_picker.color
-					horizontal_mirror = Global.left_horizontal_mirror
-					vertical_mirror = Global.left_vertical_mirror
-				elif current_mouse_button == "right_mouse":
-					current_color = Global.right_color_picker.color
-					horizontal_mirror = Global.right_horizontal_mirror
-					vertical_mirror = Global.right_vertical_mirror
+				if fill_area == 0: #Paint the specific area of the same color
+					var current_color : Color
+					var horizontal_mirror := false
+					var vertical_mirror := false
+					var mirror_x := size.x - mouse_pos.x - 1
+					var mirror_y := size.y - mouse_pos.y - 1
+					if current_mouse_button == "left_mouse":
+						current_color = Global.left_color_picker.color
+						horizontal_mirror = Global.left_horizontal_mirror
+						vertical_mirror = Global.left_vertical_mirror
+					elif current_mouse_button == "right_mouse":
+						current_color = Global.right_color_picker.color
+						horizontal_mirror = Global.right_horizontal_mirror
+						vertical_mirror = Global.right_vertical_mirror
 
-				flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
-				if horizontal_mirror:
-					var pos := Vector2(mirror_x, mouse_pos.y)
-					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
-				if vertical_mirror:
-					var pos := Vector2(mouse_pos.x, mirror_y)
-					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
-				if horizontal_mirror && vertical_mirror:
-					var pos := Vector2(mirror_x, mirror_y)
-					flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
+					flood_fill(mouse_pos, layers[current_layer_index][0].get_pixelv(mouse_pos), current_color)
+					if horizontal_mirror:
+						var pos := Vector2(mirror_x, mouse_pos.y)
+						flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
+					if vertical_mirror:
+						var pos := Vector2(mouse_pos.x, mirror_y)
+						flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
+					if horizontal_mirror && vertical_mirror:
+						var pos := Vector2(mirror_x, mirror_y)
+						flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
 
-		"PaintAllPixelsSameColor":
-			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
-				var current_color : Color
-				if current_mouse_button == "left_mouse":
-					current_color = Global.left_color_picker.color
-				elif current_mouse_button == "right_mouse":
-					current_color = Global.right_color_picker.color
+				else: #Paint all pixels of the same color
+					var current_color : Color
+					if current_mouse_button == "left_mouse":
+						current_color = Global.left_color_picker.color
+					elif current_mouse_button == "right_mouse":
+						current_color = Global.right_color_picker.color
 
-				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
-				for xx in size.x:
-					for yy in size.y:
-						var c : Color = layers[current_layer_index][0].get_pixel(xx, yy)
-						if c == pixel_color:
-							layers[current_layer_index][0].set_pixel(xx, yy, current_color)
-				sprite_changed_this_frame = true
+					var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
+					for xx in size.x:
+						for yy in size.y:
+							var c : Color = layers[current_layer_index][0].get_pixel(xx, yy)
+							if c == pixel_color:
+								layers[current_layer_index][0].set_pixel(xx, yy, current_color)
+					sprite_changed_this_frame = true
 		"LightenDarken":
 			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)

@@ -614,6 +614,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "Bucket":
+			Global.left_fill_area_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "LightenDarken":
 			Global.left_brush_size_container.visible = true
@@ -637,6 +638,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "Bucket":
+			Global.right_fill_area_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "LightenDarken":
 			Global.right_brush_size_container.visible = true
@@ -922,6 +924,12 @@ func update_left_custom_brush() -> void:
 func update_right_custom_brush() -> void:
 	Global.update_right_custom_brush()
 
+func _on_LeftFillAreaOptions_item_selected(ID : int) -> void:
+	Global.left_fill_area = ID
+
+func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
+	Global.right_fill_area = ID
+
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed
 func _on_LeftVerticalMirroring_toggled(button_pressed) -> void:
@@ -939,3 +947,4 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
+
