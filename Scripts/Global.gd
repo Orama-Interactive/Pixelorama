@@ -48,18 +48,32 @@ var file_menu : MenuButton
 var edit_menu : MenuButton
 var view_menu : MenuButton
 var help_menu : MenuButton
+
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
+
+var left_tool_options_container : Container
+var right_tool_options_container : Container
+
+var left_brush_type_container : Container
+var right_brush_type_container : Container
 var left_brush_type_button : BaseButton
 var right_brush_type_button : BaseButton
 var left_brush_type_label : Label
 var right_brush_type_label : Label
+
+var left_brush_size_container : Container
+var right_brush_size_container : Container
 var left_brush_size_edit : SpinBox
 var right_brush_size_edit : SpinBox
+
 var left_color_interpolation_container : Container
 var right_color_interpolation_container : Container
 var left_interpolate_slider : HSlider
 var right_interpolate_slider : HSlider
+
+var left_mirror_container : Container
+var right_mirror_container : Container
 
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
@@ -139,18 +153,32 @@ func _ready() -> void:
 	edit_menu = find_node_by_name(root, "EditMenu")
 	view_menu = find_node_by_name(root, "ViewMenu")
 	help_menu = find_node_by_name(root, "HelpMenu")
+
+	left_tool_options_container = find_node_by_name(root, "LeftToolOptions")
+	right_tool_options_container = find_node_by_name(root, "RightToolOptions")
+
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
-	left_brush_type_button = find_node_by_name(root, "LeftBrushTypeButton")
-	right_brush_type_button = find_node_by_name(root, "RightBrushTypeButton")
-	left_brush_type_label = find_node_by_name(root, "LeftBrushTypeLabel")
-	right_brush_type_label = find_node_by_name(root, "RightBrushTypeLabel")
-	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
-	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
-	left_color_interpolation_container = find_node_by_name(root, "LeftColorInterpolation")
-	right_color_interpolation_container = find_node_by_name(root, "RightColorInterpolation")
-	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateFactor")
-	right_interpolate_slider = find_node_by_name(root, "RightInterpolateFactor")
+
+	left_brush_type_container = find_node_by_name(left_tool_options_container, "LeftBrushType")
+	right_brush_type_container = find_node_by_name(right_tool_options_container, "RightBrushType")
+	left_brush_type_button = find_node_by_name(left_brush_type_container, "LeftBrushTypeButton")
+	right_brush_type_button = find_node_by_name(right_brush_type_container, "RightBrushTypeButton")
+	left_brush_type_label = find_node_by_name(left_brush_type_container, "LeftBrushTypeLabel")
+	right_brush_type_label = find_node_by_name(right_brush_type_container, "RightBrushTypeLabel")
+
+	left_brush_size_container = find_node_by_name(left_tool_options_container, "LeftBrushSize")
+	right_brush_size_container = find_node_by_name(right_tool_options_container, "RightBrushSize")
+	left_brush_size_edit = find_node_by_name(left_brush_size_container, "LeftBrushSizeEdit")
+	right_brush_size_edit = find_node_by_name(right_brush_size_container, "RightBrushSizeEdit")
+
+	left_color_interpolation_container = find_node_by_name(left_tool_options_container, "LeftColorInterpolation")
+	right_color_interpolation_container = find_node_by_name(right_tool_options_container, "RightColorInterpolation")
+	left_interpolate_slider = find_node_by_name(left_color_interpolation_container, "LeftInterpolateFactor")
+	right_interpolate_slider = find_node_by_name(right_color_interpolation_container, "RightInterpolateFactor")
+
+	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
+	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")
 
 	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")

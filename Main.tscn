@@ -281,22 +281,6 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 texture_normal = ExtResource( 6 )
 
-[node name="ColorToolsContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
-visible = false
-margin_top = 142.0
-margin_right = 226.0
-margin_bottom = 162.0
-
-[node name="PaintAllPixelsSameColor" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/ColorToolsContainer"]
-margin_right = 112.0
-margin_bottom = 20.0
-hint_tooltip = "Paint all pixels of the same color
-A for left mouse button
-Alt + A for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-text = "PaintSameColor"
-
 [node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
 margin_top = 157.0
 margin_right = 226.0

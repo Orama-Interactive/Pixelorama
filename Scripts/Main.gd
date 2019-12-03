@@ -98,7 +98,6 @@ func _ready() -> void:
 	tools.append([Global.find_node_by_name(root, "Pencil"), "left_pencil_tool", "right_pencil_tool"])
 	tools.append([Global.find_node_by_name(root, "Eraser"), "left_eraser_tool", "right_eraser_tool"])
 	tools.append([Global.find_node_by_name(root, "Bucket"), "left_fill_tool", "right_fill_tool"])
-	tools.append([Global.find_node_by_name(root, "PaintAllPixelsSameColor"), "left_paint_all_tool", "right_paint_all_tool"])
 	tools.append([Global.find_node_by_name(root, "LightenDarken"), "left_lightdark_tool", "right_lightdark_tool"])
 	tools.append([Global.find_node_by_name(root, "RectSelect"), "left_rectangle_select_tool", "right_rectangle_select_tool"])
 
@@ -598,13 +597,53 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	var current_action := tool_pressed.name
 	if (mouse_press && Input.is_action_just_released("left_mouse")) || (!mouse_press && key_for_left):
 		Global.current_left_tool = current_action
+
+		#Start from 2, so the label and the cursor checkbox won't get invisible
+		for i in range(2, Global.left_tool_options_container.get_child_count()):
+			Global.left_tool_options_container.get_child(i).visible = false
+
+		#Tool options visible depending on the selected tool
+		if current_action == "Pencil":
+			Global.left_brush_type_container.visible = true
+			Global.left_brush_size_container.visible = true
+			Global.left_mirror_container.visible = true
+			if Global.current_left_brush_type != Global.BRUSH_TYPES.PIXEL:
+				Global.left_color_interpolation_container.visible = true
+		elif current_action == "Eraser":
+			Global.left_brush_type_container.visible = true
+			Global.left_brush_size_container.visible = true
+			Global.left_mirror_container.visible = true
+		elif current_action == "Bucket":
+			Global.left_mirror_container.visible = true
+		elif current_action == "LightenDarken":
+			Global.left_brush_size_container.visible = true
+			Global.left_mirror_container.visible = true
+
 	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
 		Global.current_right_tool = current_action
+		#Start from 2, so the label and the cursor checkbox won't get invisible
+		for i in range(2, Global.right_tool_options_container.get_child_count()):
+			Global.right_tool_options_container.get_child(i).visible = false
+
+		#Tool options visible depending on the selected tool
+		if current_action == "Pencil":
+			Global.right_brush_type_container.visible = true
+			Global.right_brush_size_container.visible = true
+			Global.right_mirror_container.visible = true
+			if Global.current_right_brush_type != Global.BRUSH_TYPES.PIXEL:
+				Global.right_color_interpolation_container.visible = true
+		elif current_action == "Eraser":
+			Global.right_brush_type_container.visible = true
+			Global.right_brush_size_container.visible = true
+			Global.right_mirror_container.visible = true
+		elif current_action == "Bucket":
+			Global.right_mirror_container.visible = true
+		elif current_action == "LightenDarken":
+			Global.right_brush_size_container.visible = true
+			Global.right_mirror_container.visible = true
 
 	for t in tools:
 		var tool_name : String = t[0].name
-		if tool_name == "PaintAllPixelsSameColor":
-			continue
 		if tool_name == Global.current_left_tool && tool_name == Global.current_right_tool:
 			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_l_r.png" % tool_name)
 		elif tool_name == Global.current_left_tool:
