@@ -75,6 +75,9 @@ var right_interpolate_slider : HSlider
 var left_fill_area_container : Container
 var right_fill_area_container : Container
 
+var left_ld_container : Container
+var right_ld_container : Container
+
 var left_mirror_container : Container
 var right_mirror_container : Container
 
@@ -110,8 +113,15 @@ var brushes_popup : Popup
 var file_brush_container : GridContainer
 var project_brush_container : GridContainer
 
+#0 for area of same color, 1 for all pixels of the same color
 var left_fill_area := 0
 var right_fill_area := 0
+
+#0 for lighten, 1 for darken
+var left_ld := 0
+var right_ld := 0
+var left_ld_amount := 0.1
+var right_ld_amount := 0.1
 
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
@@ -186,6 +196,9 @@ func _ready() -> void:
 
 	left_fill_area_container = find_node_by_name(left_tool_options_container, "LeftFillArea")
 	right_fill_area_container = find_node_by_name(right_tool_options_container, "RightFillArea")
+
+	left_ld_container = find_node_by_name(left_tool_options_container, "LeftLDOptions")
+	right_ld_container = find_node_by_name(right_tool_options_container, "RightLDOptions")
 
 	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
 	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")

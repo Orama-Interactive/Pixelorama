@@ -618,6 +618,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_mirror_container.visible = true
 		elif current_action == "LightenDarken":
 			Global.left_brush_size_container.visible = true
+			Global.left_ld_container.visible = true
 			Global.left_mirror_container.visible = true
 
 	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
@@ -642,6 +643,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_mirror_container.visible = true
 		elif current_action == "LightenDarken":
 			Global.right_brush_size_container.visible = true
+			Global.right_ld_container.visible = true
 			Global.right_mirror_container.visible = true
 
 	for t in tools:
@@ -929,6 +931,16 @@ func _on_LeftFillAreaOptions_item_selected(ID : int) -> void:
 
 func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
 	Global.right_fill_area = ID
+
+func _on_LeftLightenDarken_item_selected(ID : int) -> void:
+	Global.left_ld = ID
+func _on_LeftLDAmountSpinbox_value_changed(value : float) -> void:
+	Global.left_ld_amount = value
+
+func _on_RightLightenDarken_item_selected(ID : int) -> void:
+	Global.right_ld = ID
+func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
+	Global.right_ld_amount = value
 
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed

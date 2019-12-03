@@ -151,6 +151,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -159,12 +160,14 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_right = 242.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 242, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -175,12 +178,12 @@ size_flags_vertical = 3
 custom_constants/separation = 32
 
 [node name="MenusAndTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_right = 244.0
 margin_bottom = 125.0
 custom_constants/separation = 17
 
 [node name="SelectionTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_right = 244.0
 margin_bottom = 54.0
 
@@ -215,11 +218,13 @@ button_mask = 3
 texture_normal = ExtResource( 2 )
 
 [node name="DrawTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_top = 71.0
 margin_right = 244.0
 margin_bottom = 125.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
+editor/display_folded = true
 margin_right = 244.0
 margin_bottom = 18.0
 custom_constants/separation = 0
@@ -235,6 +240,7 @@ margin_right = 244.0
 margin_bottom = 18.0
 
 [node name="PaintToolsContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
+editor/display_folded = true
 margin_top = 22.0
 margin_right = 244.0
 margin_bottom = 54.0
@@ -275,8 +281,7 @@ margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
 hint_tooltip = "U for left mouse button
-Alt + U for right mouse button
-Ctrl to Darken"
+Alt + U for right mouse button"
 mouse_default_cursor_shape = 2
 button_mask = 3
 texture_normal = ExtResource( 6 )
@@ -466,6 +471,7 @@ rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
 visible = false
 margin_top = 110.0
 margin_right = 244.0
@@ -483,6 +489,39 @@ margin_bottom = 38.0
 text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
 selected = 0
+
+[node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
+visible = false
+margin_top = 110.0
+margin_right = 244.0
+margin_bottom = 158.0
+
+[node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftLDOptions"]
+margin_right = 244.0
+margin_bottom = 20.0
+text = "Lighten"
+items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
+selected = 0
+
+[node name="LeftLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftLDOptions"]
+margin_top = 24.0
+margin_right = 244.0
+margin_bottom = 48.0
+
+[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
+margin_top = 5.0
+margin_right = 55.0
+margin_bottom = 19.0
+text = "Amount:"
+
+[node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
+margin_left = 59.0
+margin_right = 133.0
+margin_bottom = 24.0
+max_value = 1.0
+step = 0.01
+value = 0.1
 
 [node name="LeftMirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
@@ -532,6 +571,7 @@ mouse_default_cursor_shape = 2
 text = "Right cursor"
 
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+editor/display_folded = true
 margin_top = 46.0
 margin_right = 244.0
 margin_bottom = 78.0
@@ -558,6 +598,7 @@ margin_bottom = 23.0
 text = "Brush: Pixel"
 
 [node name="RightBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+editor/display_folded = true
 margin_top = 82.0
 margin_right = 244.0
 margin_bottom = 106.0
@@ -621,6 +662,7 @@ rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
 [node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+editor/display_folded = true
 visible = false
 margin_top = 110.0
 margin_right = 244.0
@@ -638,6 +680,39 @@ margin_bottom = 38.0
 text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
 selected = 0
+
+[node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+editor/display_folded = true
+visible = false
+margin_top = 110.0
+margin_right = 244.0
+margin_bottom = 158.0
+
+[node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightLDOptions"]
+margin_right = 244.0
+margin_bottom = 20.0
+text = "Lighten"
+items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
+selected = 0
+
+[node name="RightLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightLDOptions"]
+margin_top = 24.0
+margin_right = 244.0
+margin_bottom = 48.0
+
+[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
+margin_top = 5.0
+margin_right = 55.0
+margin_bottom = 19.0
+text = "Amount:"
+
+[node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
+margin_left = 59.0
+margin_right = 133.0
+margin_bottom = 24.0
+max_value = 1.0
+step = 0.01
+value = 0.1
 
 [node name="RightMirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 editor/display_folded = true
@@ -1426,6 +1501,8 @@ align = 1
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLightenDarken" to="." method="_on_LeftLightenDarken_item_selected"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
@@ -1433,6 +1510,8 @@ align = 1
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightLDOptions/RightLightenDarken" to="." method="_on_RightLightenDarken_item_selected"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount/RightLDAmountSpinbox" to="." method="_on_RightLDAmountSpinbox_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]

@@ -84,14 +84,21 @@ func _process(delta) -> void:
 	var current_mouse_button := "None"
 	var current_action := "None"
 	var fill_area := 0 #For the bucket tool
+	#For the LightenDarken tool
+	var ld := 0
+	var ld_amount := 0.1
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = "left_mouse"
 		current_action = Global.current_left_tool
 		fill_area = Global.left_fill_area
+		ld = Global.left_ld
+		ld_amount = Global.left_ld_amount
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
 		fill_area = Global.right_fill_area
+		ld = Global.right_ld
+		ld_amount = Global.right_ld_amount
 
 	if Global.current_frame == frame:
 		if !mouse_in_canvas:
@@ -182,10 +189,11 @@ func _process(delta) -> void:
 		"LightenDarken":
 			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
-				var amount := 0.1
-				var color_changed := pixel_color.lightened(amount)
-				if Input.is_key_pressed(KEY_CONTROL):
-					color_changed = pixel_color.darkened(amount)
+				var color_changed : Color
+				if ld == 0: #Lighten
+					color_changed = pixel_color.lightened(ld_amount)
+				else: #Darken
+					color_changed = pixel_color.darkened(ld_amount)
 				pencil_and_eraser(mouse_pos, color_changed, current_mouse_button, current_action)
 		"RectSelect":
 			#Check SelectionRectangle.gd for more code on Rectangle Selection
