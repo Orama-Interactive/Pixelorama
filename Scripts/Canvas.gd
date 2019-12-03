@@ -548,15 +548,15 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 				mirror_x -= 1
 			if int(pos_rect_clipped.size.y) % 2 != 0:
 				mirror_y -= 1
-
+# Use custom blend function cause of godot's issue  #31124
 			if color.a > 0: #If it's the pencil
-				layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, dst)
+				blend_rect(layers[current_layer_index][0], custom_brush_image, dst)
 				if horizontal_mirror:
-					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
+					blend_rect(layers[current_layer_index][0], custom_brush_image, Vector2(mirror_x, dst.y))
 				if vertical_mirror:
-					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
+					blend_rect(layers[current_layer_index][0], custom_brush_image, Vector2(dst.x, mirror_y))
 				if horizontal_mirror && vertical_mirror:
-					layers[current_layer_index][0].blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
+					blend_rect(layers[current_layer_index][0], custom_brush_image, Vector2(mirror_x, mirror_y))
 
 			else: #if it's transparent - if it's the eraser
 				var custom_brush := Image.new()
@@ -660,3 +660,19 @@ func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true
+
+# Custom blend rect function, needed because godot's issue #31124
+func blend_rect(bg : Image, brush : Image, dst : Vector2):
+	var brush_size := brush.get_size()
+	for x in range(0, brush_size.x):
+		for y in range(0, brush_size.y):
+			var out_color := Color()
+			var brush_color := brush.get_pixel(x, y)
+			var bg_color := bg.get_pixel(x + dst.x, y + dst.y)
+			out_color.a = brush_color.a + bg_color.a * (1 - brush_color.a)
+			# blend the colors
+			if out_color.a != 0:
+				out_color.r = (brush_color.r * brush_color.a + bg_color.r * bg_color.a * (1 - brush_color.a)) / out_color.a
+				out_color.g = (brush_color.g * brush_color.a + bg_color.g * bg_color.a * (1 - brush_color.a)) / out_color.a
+				out_color.b = (brush_color.b * brush_color.a + bg_color.b * bg_color.a * (1 - brush_color.a)) / out_color.a
+				bg.set_pixel(x + dst.x, y + dst.y, out_color)
