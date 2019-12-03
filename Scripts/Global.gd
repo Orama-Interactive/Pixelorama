@@ -17,6 +17,10 @@ var onion_skinning_blue_red := false
 var tile_mode := false
 # warning-ignore:unused_class_variable
 var draw_grid := false
+# warning-ignore:unused_class_variable
+var show_rulers := true
+# warning-ignore:unused_class_variable
+var show_guides := true
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
@@ -34,6 +38,7 @@ var right_square_indicator_visible := false
 var camera : Camera2D
 var camera2 : Camera2D
 var selection_rectangle : Polygon2D
+var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
 # warning-ignore:unused_class_variable
 var selected_pixels := []
@@ -126,6 +131,7 @@ func _ready() -> void:
 	camera = find_node_by_name(canvas_parent, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
+	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
 	image_clipboard = Image.new()
 

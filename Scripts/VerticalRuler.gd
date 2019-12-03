@@ -55,6 +55,8 @@ func _draw() -> void:
 				draw_line(Vector2(RULER_WIDTH * 0.66, position.y), Vector2(RULER_WIDTH, position.y), Color.white)
 
 func _on_VerticalRuler_pressed() -> void:
+	if !Global.show_guides:
+		return
 	var guide := Guide.new()
 	guide.type = guide.TYPE.VERTICAL
 	guide.default_color = Color.purple

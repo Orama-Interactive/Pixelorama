@@ -57,7 +57,9 @@ func _ready() -> void:
 		}
 	var view_menu_items := {
 		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
-		"Show Grid" : KEY_MASK_CTRL + KEY_G
+		"Show Grid" : KEY_MASK_CTRL + KEY_G,
+		"Show Rulers": KEY_MASK_CTRL + KEY_R,
+		"Show Guides": KEY_MASK_CTRL + KEY_Y
 		}
 	var help_menu_items := {
 		"About Pixelorama" : 0
@@ -79,6 +81,8 @@ func _ready() -> void:
 	for item in view_menu_items.keys():
 		view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
+	view_menu.set_item_checked(2, true) #Show Rulers
+	view_menu.set_item_checked(3, true) #Show Guides
 	i = 0
 	for item in help_menu_items.keys():
 		help_menu.add_item(item, i, help_menu_items[item])
@@ -257,6 +261,18 @@ func view_menu_id_pressed(id : int) -> void:
 		1: #Show grid
 			Global.draw_grid = !Global.draw_grid
 			view_menu.set_item_checked(1, Global.draw_grid)
+		2: #Show rulers
+			Global.show_rulers = !Global.show_rulers
+			view_menu.set_item_checked(2, Global.show_rulers)
+			Global.horizontal_ruler.visible = Global.show_rulers
+			Global.vertical_ruler.visible = Global.show_rulers
+		3: #Show guides
+			Global.show_guides = !Global.show_guides
+			view_menu.set_item_checked(3, Global.show_guides)
+			for canvas in Global.canvases:
+				for guide in canvas.get_children():
+					if guide is Guide:
+						guide.visible = Global.show_guides
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:
