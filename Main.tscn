@@ -159,7 +159,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_right = 242.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 242, 0 )
@@ -390,44 +389,46 @@ mouse_default_cursor_shape = 2
 pressed = true
 text = "Left cursor"
 
-[node name="BrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
 margin_top = 46.0
 margin_right = 226.0
 margin_bottom = 78.0
 
-[node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType"]
+[node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushType"]
 margin_right = 36.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 size_flags_horizontal = 0
 texture_normal = ExtResource( 9 )
 
-[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType/LeftBrushTypeButton"]
+[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = SubResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="LeftBrushTypeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType"]
+[node name="LeftBrushTypeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushType"]
 margin_left = 40.0
 margin_top = 9.0
 margin_right = 116.0
 margin_bottom = 23.0
 text = "Brush: Pixel"
 
-[node name="BrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
 margin_top = 82.0
 margin_right = 226.0
 margin_bottom = 106.0
 
-[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
+[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSize"]
 margin_top = 5.0
 margin_right = 75.0
 margin_bottom = 19.0
 text = "Brush size: "
 
-[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize"]
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSize"]
 margin_left = 79.0
 margin_right = 153.0
 margin_bottom = 24.0
@@ -480,20 +481,20 @@ margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
-[node name="Mirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
+[node name="LeftMirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
 margin_top = 110.0
 margin_right = 226.0
 margin_bottom = 134.0
 
-[node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring"]
+[node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring"]
 margin_right = 109.0
 margin_bottom = 24.0
 hint_tooltip = "Enable horizontal mirrored drawing for the left tool"
 mouse_default_cursor_shape = 2
 text = "Horiz. Mirror"
 
-[node name="LeftVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring"]
+[node name="LeftVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring"]
 margin_left = 113.0
 margin_right = 214.0
 margin_bottom = 24.0
@@ -527,44 +528,44 @@ hint_tooltip = "Show right mouse indicator when drawing"
 mouse_default_cursor_shape = 2
 text = "Right cursor"
 
-[node name="BrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 46.0
 margin_right = 226.0
 margin_bottom = 78.0
 
-[node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType"]
+[node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushType"]
 margin_right = 36.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 size_flags_horizontal = 0
 texture_normal = ExtResource( 9 )
 
-[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType/RightBrushTypeButton"]
+[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = SubResource( 5 )
 expand = true
 stretch_mode = 6
 
-[node name="RightBrushTypeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType"]
+[node name="RightBrushTypeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushType"]
 margin_left = 40.0
 margin_top = 9.0
 margin_right = 116.0
 margin_bottom = 23.0
 text = "Brush: Pixel"
 
-[node name="BrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 82.0
 margin_right = 226.0
 margin_bottom = 106.0
 
-[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
+[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSize"]
 margin_top = 5.0
 margin_right = 75.0
 margin_bottom = 19.0
 text = "Brush size: "
 
-[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize"]
+[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSize"]
 margin_left = 79.0
 margin_right = 153.0
 margin_bottom = 24.0
@@ -616,20 +617,20 @@ margin_bottom = 15.0
 rect_pivot_offset = Vector2( -90, -47 )
 text = "C"
 
-[node name="Mirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
+[node name="RightMirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 editor/display_folded = true
 margin_top = 110.0
 margin_right = 226.0
 margin_bottom = 134.0
 
-[node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring"]
+[node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring"]
 margin_right = 109.0
 margin_bottom = 24.0
 hint_tooltip = "Enable horizontal mirrored drawing for the right tool"
 mouse_default_cursor_shape = 2
 text = "Horiz. Mirror"
 
-[node name="RightVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring"]
+[node name="RightVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring"]
 margin_left = 113.0
 margin_right = 214.0
 margin_bottom = 24.0
@@ -1399,17 +1400,17 @@ align = 1
 [connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
-[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/BrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftColorInterpolation/InterpolateColor/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
-[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
-[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/Mirroring/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
-[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/BrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightColorInterpolation/InterpolateColor/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
-[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
-[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/Mirroring/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
 [connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]

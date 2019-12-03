@@ -9,7 +9,8 @@ func _on_BrushButton_pressed() -> void:
 		Global.current_left_brush_type = brush_type
 		Global.custom_left_brush_index = custom_brush_index
 		if custom_brush_index > -1: #Custom brush
-			Global.left_color_interpolation_container.visible = true
+			if Global.current_left_tool == "Pencil":
+				Global.left_color_interpolation_container.visible = true
 			if hint_tooltip == "":
 				Global.left_brush_type_label.text = "Custom brush"
 			else:
@@ -24,7 +25,8 @@ func _on_BrushButton_pressed() -> void:
 		Global.current_right_brush_type = brush_type
 		Global.custom_right_brush_index = custom_brush_index
 		if custom_brush_index > -1:
-			Global.right_color_interpolation_container.visible = true
+			if Global.current_right_tool == "Pencil":
+				Global.right_color_interpolation_container.visible = true
 			if hint_tooltip == "":
 				Global.right_brush_type_label.text = "Custom brush"
 			else:
