@@ -371,23 +371,23 @@ func _draw() -> void:
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
 		if Global.left_square_indicator_visible and Global.can_draw:
-			match Global.current_left_brush_type:
-				Global.BRUSH_TYPES.PIXEL:
-					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
-					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
-					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-				Global.BRUSH_TYPES.FILE, Global.BRUSH_TYPES.CUSTOM:
+			if Global.current_left_brush_type == Global.BRUSH_TYPES.PIXEL:
+				var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
+				var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
+				draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+			else:
+				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
 					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_left_brush_texture, dst)
 
 		if Global.right_square_indicator_visible and Global.can_draw:
-			match Global.current_right_brush_type:
-				Global.BRUSH_TYPES.PIXEL:
-					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
-					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
-					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-				Global.BRUSH_TYPES.FILE, Global.BRUSH_TYPES.CUSTOM:
+			if Global.current_right_brush_type == Global.BRUSH_TYPES.PIXEL:
+				var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
+				var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
+				draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+			else:
+				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
 					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_right_brush_texture, dst)
