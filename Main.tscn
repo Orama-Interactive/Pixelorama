@@ -94,6 +94,7 @@ rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
+editor/display_folded = true
 margin_left = 2.0
 margin_top = 6.0
 margin_right = 1010.0
@@ -162,9 +163,9 @@ custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
 editor/display_folded = true
-margin_right = 242.0
+margin_right = 224.0
 margin_bottom = 620.0
-rect_min_size = Vector2( 242, 0 )
+rect_min_size = Vector2( 224, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
@@ -179,34 +180,34 @@ custom_constants/separation = 32
 
 [node name="MenusAndTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
 editor/display_folded = true
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 125.0
 custom_constants/separation = 17
 
 [node name="UtilityTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 54.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools"]
 editor/display_folded = true
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 18.0
 custom_constants/separation = 0
 
 [node name="UtilityTools" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/VBoxContainer"]
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 14.0
 text = "Utility Tools"
 
 [node name="HSeparator6" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/VBoxContainer"]
 margin_top = 14.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 18.0
 
 [node name="SelectionToolsContainer2" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools"]
 editor/display_folded = true
 margin_top = 22.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 54.0
 
 [node name="RectSelect" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/SelectionToolsContainer2"]
@@ -234,29 +235,29 @@ texture_normal = ExtResource( 3 )
 [node name="DrawTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
 editor/display_folded = true
 margin_top = 71.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 125.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
 editor/display_folded = true
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 18.0
 custom_constants/separation = 0
 
 [node name="DrawTools" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/VBoxContainer"]
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 14.0
 text = "Draw Tools"
 
 [node name="HSeparator5" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/VBoxContainer"]
 margin_top = 14.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 18.0
 
 [node name="PaintToolsContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
 editor/display_folded = true
 margin_top = 22.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 54.0
 
 [node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer"]
@@ -303,19 +304,19 @@ texture_normal = ExtResource( 7 )
 [node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
 editor/display_folded = true
 margin_top = 157.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 612.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
 editor/display_folded = true
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 32.0
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter"]
-margin_left = 36.0
-margin_right = 189.0
+margin_left = 30.0
+margin_right = 183.0
 margin_bottom = 32.0
 
 [node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
@@ -368,25 +369,26 @@ color = Color( 1, 1, 1, 1 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
 margin_top = 32.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 36.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+editor/display_folded = true
 margin_top = 36.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 243.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 14.0
 text = "Left tool options"
 align = 1
 
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 margin_top = 18.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 42.0
 hint_tooltip = "Show left mouse indicator when drawing"
 mouse_default_cursor_shape = 2
@@ -396,7 +398,7 @@ text = "Left cursor"
 [node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
 margin_top = 46.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 78.0
 
 [node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushType"]
@@ -423,7 +425,7 @@ text = "Brush: Pixel"
 [node name="LeftBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
 margin_top = 82.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 106.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftBrushSize"]
@@ -489,17 +491,17 @@ text = "C"
 editor/display_folded = true
 visible = false
 margin_top = 110.0
-margin_right = 244.0
+margin_right = 214.0
 margin_bottom = 148.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_right = 244.0
+margin_right = 214.0
 margin_bottom = 14.0
 text = "Fill area:"
 
 [node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftFillArea"]
 margin_top = 18.0
-margin_right = 244.0
+margin_right = 214.0
 margin_bottom = 38.0
 text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
@@ -541,7 +543,7 @@ value = 0.1
 [node name="LeftMirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
 margin_top = 110.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 134.0
 
 [node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions/LeftMirroring"]
@@ -561,25 +563,26 @@ text = "Vert. Mirror"
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
 margin_top = 243.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 247.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions"]
+editor/display_folded = true
 margin_top = 247.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 455.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 14.0
 text = "Right tool options"
 align = 1
 
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 margin_top = 18.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 42.0
 hint_tooltip = "Show right mouse indicator when drawing"
 mouse_default_cursor_shape = 2
@@ -588,7 +591,7 @@ text = "Right cursor"
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 editor/display_folded = true
 margin_top = 46.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 78.0
 
 [node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushType"]
@@ -615,7 +618,7 @@ text = "Brush: Pixel"
 [node name="RightBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 editor/display_folded = true
 margin_top = 82.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 106.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightBrushSize"]
@@ -732,7 +735,7 @@ value = 0.1
 [node name="RightMirroring" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 editor/display_folded = true
 margin_top = 110.0
-margin_right = 226.0
+margin_right = 214.0
 margin_bottom = 134.0
 
 [node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions/RightMirroring"]
@@ -752,27 +755,28 @@ text = "Vert. Mirror"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
 editor/display_folded = true
-margin_left = 242.0
+margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-margin_right = 686.0
+editor/display_folded = true
+margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-margin_right = 686.0
+margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="HorizontalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-margin_right = 686.0
+margin_right = 704.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
@@ -787,7 +791,7 @@ script = ExtResource( 12 )
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 editor/display_folded = true
 margin_top = 16.0
-margin_right = 686.0
+margin_right = 704.0
 margin_bottom = 478.0
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -809,14 +813,14 @@ script = ExtResource( 13 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 686.0
+margin_right = 704.0
 margin_bottom = 462.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 670, 462 )
+size = Vector2( 688, 462 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -862,7 +866,7 @@ script = ExtResource( 15 )
 [node name="AnimationTimeline" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline"]
 editor/display_folded = true
 margin_top = 478.0
-margin_right = 686.0
+margin_right = 704.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 0, 142 )
 size_flags_horizontal = 3
@@ -882,52 +886,48 @@ margin_left = 15.0
 margin_top = 4.0
 
 [node name="TimelineContainer" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_right = 525.0
+editor/display_folded = true
+margin_right = 543.0
 margin_bottom = 138.0
 size_flags_horizontal = 3
 
-[node name="AnimationButtons" type="Control" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_right = 525.0
+[node name="AnimationButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+editor/display_folded = true
+margin_right = 543.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 
 [node name="CurrentFrame" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -7.0
-margin_right = 224.0
-margin_bottom = 7.0
+margin_top = 5.0
+margin_right = 218.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Current frame: 1/1"
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
 editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -70.0
-margin_top = -10.0
-margin_right = 70.0
-margin_bottom = 10.0
-size_flags_horizontal = 0
+margin_left = 222.0
+margin_right = 362.0
+margin_bottom = 24.0
+size_flags_horizontal = 2
 
 [node name="FirstFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_right = 20.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 18 )
 
 [node name="PreviousFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 24.0
 margin_right = 44.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 19 )
 
 [node name="PlayBackwards" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 48.0
 margin_right = 68.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 hint_tooltip = "Play the animation backwards (from end to beggining)"
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -937,7 +937,7 @@ texture_pressed = ExtResource( 21 )
 [node name="PlayForward" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 72.0
 margin_right = 92.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 hint_tooltip = "Play the animation forward (from beggining to end)"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -948,27 +948,23 @@ texture_pressed = ExtResource( 21 )
 [node name="NextFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 96.0
 margin_right = 116.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 23 )
 
 [node name="LastFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 120.0
 margin_right = 140.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 24 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
 editor/display_folded = true
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -98.0
-margin_top = -11.0
-margin_bottom = 12.0
-size_flags_horizontal = 8
+margin_left = 444.0
+margin_right = 542.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
 
 [node name="FPSValue" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
 margin_right = 74.0
@@ -990,24 +986,25 @@ texture_normal = ExtResource( 25 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 28.0
-margin_right = 525.0
+margin_right = 543.0
 margin_bottom = 32.0
 
 [node name="TimelineSeconds" type="Control" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 36.0
-margin_right = 525.0
+margin_right = 543.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 16 )
 script = ExtResource( 26 )
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 margin_top = 56.0
-margin_right = 525.0
+margin_right = 543.0
 margin_bottom = 60.0
 
 [node name="FrameAndButtonContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+editor/display_folded = true
 margin_top = 64.0
-margin_right = 525.0
+margin_right = 543.0
 margin_bottom = 100.0
 
 [node name="AddFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer"]
@@ -1020,7 +1017,7 @@ texture_normal = ExtResource( 27 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer"]
 margin_left = 40.0
-margin_right = 525.0
+margin_right = 543.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1029,13 +1026,14 @@ scroll_vertical_enabled = false
 [node name="FrameContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer/ScrollContainer"]
 
 [node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_left = 529.0
-margin_right = 533.0
+margin_left = 547.0
+margin_right = 551.0
 margin_bottom = 138.0
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_left = 537.0
-margin_right = 663.0
+editor/display_folded = true
+margin_left = 555.0
+margin_right = 681.0
 margin_bottom = 138.0
 
 [node name="OnionSkinning" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
@@ -1070,8 +1068,8 @@ mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
 
 [node name="VSeparator2" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_left = 667.0
-margin_right = 671.0
+margin_left = 685.0
+margin_right = 689.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
