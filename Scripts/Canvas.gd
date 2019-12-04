@@ -568,13 +568,13 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 				mirror_y -= 1
 # Use custom blend function cause of godot's issue  #31124
 			if color.a > 0: #If it's the pencil
-				blend_rect(layers[current_layer_index][0], custom_brush_image, dst)
+				blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, dst)
 				if horizontal_mirror:
-					blend_rect(layers[current_layer_index][0], custom_brush_image, Vector2(mirror_x, dst.y))
+					blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
 				if vertical_mirror:
-					blend_rect(layers[current_layer_index][0], custom_brush_image, Vector2(dst.x, mirror_y))
+					blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
 				if horizontal_mirror && vertical_mirror:
-					blend_rect(layers[current_layer_index][0], custom_brush_image, Vector2(mirror_x, mirror_y))
+					blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
 
 			else: #if it's transparent - if it's the eraser
 				var custom_brush := Image.new()
@@ -679,18 +679,30 @@ func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true
 
-# Custom blend rect function, needed because godot's issue #31124
-func blend_rect(bg : Image, brush : Image, dst : Vector2):
+#Custom blend rect function, needed because Godot's issue #31124
+func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:
 	var brush_size := brush.get_size()
-	for x in range(0, brush_size.x):
-		for y in range(0, brush_size.y):
+	var clipped_src_rect := Rect2(Vector2.ZERO, brush_size).clip(src_rect)
+	if clipped_src_rect.size.x <= 0 || clipped_src_rect.size.y <= 0:
+		return
+	var src_underscan := Vector2(min(0, src_rect.position.x), min(0, src_rect.position.y))
+	var dest_rect := Rect2(0, 0, bg.get_width(), bg.get_height()).clip(Rect2(dst - src_underscan, clipped_src_rect.size))
+
+	for x in range(0, dest_rect.size.x):
+		for y in range(0, dest_rect.size.y):
+			var src_x := clipped_src_rect.position.x + x;
+			var src_y := clipped_src_rect.position.y + y;
+
+			var dst_x := dest_rect.position.x + x;
+			var dst_y := dest_rect.position.y + y;
+
 			var out_color := Color()
-			var brush_color := brush.get_pixel(x, y)
-			var bg_color := bg.get_pixel(x + dst.x, y + dst.y)
+			var brush_color := brush.get_pixel(src_x, src_y)
+			var bg_color := bg.get_pixel(dst_x, dst_y)
 			out_color.a = brush_color.a + bg_color.a * (1 - brush_color.a)
-			# blend the colors
+			#Blend the colors
 			if out_color.a != 0:
 				out_color.r = (brush_color.r * brush_color.a + bg_color.r * bg_color.a * (1 - brush_color.a)) / out_color.a
 				out_color.g = (brush_color.g * brush_color.a + bg_color.g * bg_color.a * (1 - brush_color.a)) / out_color.a
 				out_color.b = (brush_color.b * brush_color.a + bg_color.b * bg_color.a * (1 - brush_color.a)) / out_color.a
-				bg.set_pixel(x + dst.x, y + dst.y, out_color)
+				bg.set_pixel(dst_x, dst_y, out_color)
