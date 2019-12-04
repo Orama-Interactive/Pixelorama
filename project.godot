@@ -35,7 +35,7 @@ _global_script_class_icons={
 config/name="Pixelorama"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
-config/Version="v0.4"
+config/Version="v0.5-beta"
 
 [autoload]
 
