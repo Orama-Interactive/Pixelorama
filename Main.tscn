@@ -1237,6 +1237,7 @@ margin_right = 200.0
 margin_bottom = 70.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CreateNewImage"]
+editor/display_folded = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
@@ -1365,6 +1366,7 @@ margin_right = 200.0
 margin_bottom = 114.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleImage"]
+editor/display_folded = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
@@ -1466,11 +1468,13 @@ Developed by Orama Interactive
 align = 1
 
 [node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
+editor/display_folded = true
 margin_top = 87.0
 margin_right = 268.0
 margin_bottom = 107.0
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
+editor/display_folded = true
 margin_left = 22.0
 margin_right = 246.0
 margin_bottom = 20.0
@@ -1499,6 +1503,12 @@ margin_bottom = 142.0
 text = "
 Copyright 2019 - Orama Interactive"
 align = 1
+
+[node name="QuitDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+resizable = true
+dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 [connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
@@ -1568,4 +1578,6 @@ align = 1
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Donate" to="AboutDialog" method="_on_Donate_pressed"]
+[connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
+[connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

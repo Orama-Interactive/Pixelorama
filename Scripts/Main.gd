@@ -17,6 +17,7 @@ var animation_forward := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
 	OS.set_window_title("(untitled) - Pixelorama")
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
@@ -141,7 +142,7 @@ func _ready() -> void:
 	brushes_dir.list_dir_end()
 	Global.brushes_from_files = Global.custom_brushes.size()
 
-func _input(event):
+func _input(event) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
@@ -151,6 +152,11 @@ func _input(event):
 				_on_Tool_pressed(t[0], false, false)
 			elif event.is_action_pressed(t[1]): #Shortcut for left button
 				_on_Tool_pressed(t[0], false, true)
+
+func _notification(what) -> void:
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: #Handle exit
+		$QuitDialog.popup_centered()
+		Global.can_draw = false
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:
@@ -184,7 +190,8 @@ func file_menu_id_pressed(id : int) -> void:
 			$ExportSprites.popup_centered()
 			Global.can_draw = false
 		7: #Quit
-			get_tree().quit()
+			$QuitDialog.popup_centered()
+			Global.can_draw = false
 
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
@@ -953,6 +960,9 @@ func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
 func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
 
+func _on_QuitDialog_confirmed() -> void:
+	get_tree().quit()
+
 func _exit_tree() -> void:
 	# Save the window position and size to remember it when restarting the application
 	config_cache.set_value("window", "screen", OS.current_screen)
@@ -960,4 +970,3 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
-
