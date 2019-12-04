@@ -219,6 +219,13 @@ func _process(delta) -> void:
 								Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
+		"ColorPicker":
+			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
+				if current_mouse_button == "left_mouse":
+					Global.left_color_picker.color = pixel_color
+				elif current_mouse_button == "right_mouse":
+					Global.right_color_picker.color = pixel_color
 
 	if !is_making_line:
 		previous_mouse_pos = mouse_pos

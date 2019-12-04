@@ -120,7 +120,9 @@ var right_fill_area := 0
 #0 for lighten, 1 for darken
 var left_ld := 0
 var right_ld := 0
+# warning-ignore:unused_class_variable
 var left_ld_amount := 0.1
+# warning-ignore:unused_class_variable
 var right_ld_amount := 0.1
 
 # warning-ignore:unused_class_variable
