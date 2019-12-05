@@ -103,13 +103,21 @@ func _process(delta) -> void:
 		ld_amount = Global.right_ld_amount
 
 	if Global.current_frame == frame:
-		if !mouse_in_canvas:
+		if mouse_in_canvas && Global.has_focus:
+			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
+			if Global.current_left_tool == "Bucket":
+				Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/Bucket_Cursor.png"), 0, Vector2(6, 27))
+			elif Global.current_left_tool == "ColorPicker":
+				Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/ColorPicker_Cursor.png"), 0, Vector2(5, 28))
+			elif Global.current_left_tool != "RectSelect":
+				Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		else:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
 					mouse_inside_canvas = false
 			Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
-		else:
-			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
+			Input.set_custom_mouse_cursor(null)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 	#Handle Undo/Redo
@@ -125,7 +133,7 @@ func _process(delta) -> void:
 
 	if mouse_pressed:
 		if can_handle && Global.current_frame == frame:
-			if current_action != "None":
+			if current_action != "None" && current_action != "ColorPicker":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
 				else:
@@ -133,7 +141,7 @@ func _process(delta) -> void:
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		lighten_darken_pixels.clear()
 		if (can_handle || Global.undos == Global.undo_redo.get_version()) && Global.current_frame == frame:
-			if previous_action != "None" && previous_action != "RectSelect":
+			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
 				handle_redo("Draw")
 
 	match current_action: #Handle current tool
@@ -147,7 +155,7 @@ func _process(delta) -> void:
 		"Eraser":
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Bucket":
-			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if can_handle && Global.current_frame == frame:
 				if fill_area == 0: #Paint the specific area of the same color
 					var current_color : Color
 					var horizontal_mirror := false
@@ -189,7 +197,7 @@ func _process(delta) -> void:
 								layers[current_layer_index][0].set_pixel(xx, yy, current_color)
 					sprite_changed_this_frame = true
 		"LightenDarken":
-			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if can_handle && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				var color_changed : Color
 				if ld == 0: #Lighten
@@ -222,7 +230,7 @@ func _process(delta) -> void:
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
 		"ColorPicker":
-			if mouse_in_canvas && Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if can_handle && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				if current_mouse_button == "left_mouse":
 					Global.left_color_picker.color = pixel_color

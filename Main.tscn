@@ -154,6 +154,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -186,6 +187,7 @@ margin_bottom = 127.0
 custom_constants/separation = 17
 
 [node name="UtilityTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_right = 208.0
 margin_bottom = 55.0
 
@@ -214,7 +216,9 @@ margin_bottom = 55.0
 [node name="RectSelect" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/SelectionToolsContainer2"]
 margin_right = 32.0
 margin_bottom = 32.0
-hint_tooltip = "R for left mouse button
+hint_tooltip = "Rectangular Selection
+
+R for left mouse button
 Alt + R for right mouse button
 Press Shift to move the content"
 mouse_default_cursor_shape = 2
@@ -225,7 +229,8 @@ texture_normal = ExtResource( 3 )
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
-hint_tooltip = "Select a color from the canvas
+hint_tooltip = "Color Picker
+Select a color from the canvas
 
 O for left mouse button
 Alt + O for right mouse button"
@@ -264,7 +269,9 @@ margin_bottom = 55.0
 [node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer"]
 margin_right = 32.0
 margin_bottom = 32.0
-hint_tooltip = "P for left mouse button
+hint_tooltip = "Pencil
+
+P for left mouse button
 Alt + P for right mouse button
 Hold Shift to make a line"
 mouse_default_cursor_shape = 2
@@ -275,7 +282,9 @@ texture_normal = ExtResource( 5 )
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
-hint_tooltip = "E for left mouse button
+hint_tooltip = "Eraser
+
+E for left mouse button
 Alt + E for right mouse button
 Hold Shift to make a line"
 mouse_default_cursor_shape = 2
@@ -286,7 +295,9 @@ texture_normal = ExtResource( 6 )
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
-hint_tooltip = "B for left mouse button
+hint_tooltip = "Bucket
+
+B for left mouse button
 Alt + B for right mouse button"
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -296,13 +307,16 @@ texture_normal = ExtResource( 7 )
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
-hint_tooltip = "U for left mouse button
+hint_tooltip = "Lighten/Darken
+
+U for left mouse button
 Alt + U for right mouse button"
 mouse_default_cursor_shape = 2
 button_mask = 3
 texture_normal = ExtResource( 8 )
 
 [node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -754,6 +768,7 @@ mouse_default_cursor_shape = 2
 text = "Vert. Mirror"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -761,12 +776,14 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
+editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -1067,6 +1084,7 @@ margin_right = 689.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1237,6 +1255,10 @@ margin_left = -236.921
 margin_top = 44.4745
 margin_right = -223.921
 margin_bottom = 57.4745
+hint_tooltip = "Split screen
+
+Show/hide second canvas"
+mouse_default_cursor_shape = 2
 size_flags_vertical = 0
 toggle_mode = true
 texture_normal = ExtResource( 40 )
