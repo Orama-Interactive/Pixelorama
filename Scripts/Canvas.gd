@@ -66,11 +66,13 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
 	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
+	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 
 	#Set camera offset to the center of canvas
 	Global.camera.offset = size / 2
 	Global.camera2.offset = size / 2
+	Global.camera_preview.offset = size / 2
 
 # warning-ignore:unused_argument
 func _process(delta) -> void:

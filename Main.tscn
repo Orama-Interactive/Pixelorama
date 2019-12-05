@@ -154,7 +154,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -163,12 +162,14 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -753,7 +754,6 @@ mouse_default_cursor_shape = 2
 text = "Vert. Mirror"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -761,7 +761,6 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -788,7 +787,6 @@ enabled_focus_mode = 0
 script = ExtResource( 13 )
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-editor/display_folded = true
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 478.0
@@ -885,13 +883,11 @@ margin_left = 15.0
 margin_top = 4.0
 
 [node name="TimelineContainer" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-editor/display_folded = true
 margin_right = 562.0
 margin_bottom = 138.0
 size_flags_horizontal = 3
 
 [node name="AnimationButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-editor/display_folded = true
 margin_right = 562.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 24 )
@@ -959,7 +955,6 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 25 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-editor/display_folded = true
 margin_left = 476.0
 margin_right = 562.0
 margin_bottom = 25.0
@@ -1072,7 +1067,6 @@ margin_right = 689.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1081,27 +1075,45 @@ rect_min_size = Vector2( 224, 0 )
 [node name="LayersAndMisc" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 8.0
+margin_top = 16.0
 custom_constants/separation = 3
 
-[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_right = 224.0
-margin_bottom = 15.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 164 )
+
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CanvasPreview"]
+size = Vector2( 224, 164 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+script = ExtResource( 18 )
+
+[node name="CameraPreview" type="Camera2D" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CanvasPreview/Viewport"]
+offset = Vector2( 32, 32 )
+current = true
+zoom = Vector2( 0.15, 0.15 )
+
+[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 167.0
+margin_right = 224.0
+margin_bottom = 182.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Layers"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 18.0
+margin_top = 185.0
 margin_right = 224.0
-margin_bottom = 22.0
+margin_bottom = 189.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
-margin_top = 25.0
+margin_top = 192.0
 margin_right = 224.0
-margin_bottom = 57.0
+margin_bottom = 224.0
 
 [node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterContainer"]
 editor/display_folded = true
@@ -1166,9 +1178,9 @@ texture_disabled = ExtResource( 38 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
-margin_top = 60.0
+margin_top = 227.0
 margin_right = 224.0
-margin_bottom = 612.0
+margin_bottom = 604.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1208,7 +1220,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 32.0
+margin_top = 33.0
 margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 0, 36 )

@@ -37,6 +37,7 @@ var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 var camera : Camera2D
 var camera2 : Camera2D
+var camera_preview : Camera2D
 var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
@@ -163,6 +164,7 @@ func _ready() -> void:
 	split_screen_button = find_node_by_name(root, "SplitScreenButton")
 	camera = find_node_by_name(canvas_parent, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
+	camera_preview = find_node_by_name(root, "CameraPreview")
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
