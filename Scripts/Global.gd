@@ -2,17 +2,55 @@ extends Node
 
 var undo_redo : UndoRedo
 var undos := 0 #The number of times we added undo properties
+
+#Canvas related stuff
 var current_frame := 0 setget frame_changed
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := false
+var canvases := []
 # warning-ignore:unused_class_variable
-var onion_skinning_past_rate := 0
+var hidden_canvases := []
 # warning-ignore:unused_class_variable
-var onion_skinning_future_rate := 0
+var selected_pixels := []
+var image_clipboard : Image
+
+#Tools & options
 # warning-ignore:unused_class_variable
-var onion_skinning_blue_red := false
+var current_left_tool := "Pencil"
+# warning-ignore:unused_class_variable
+var current_right_tool := "Eraser"
+# warning-ignore:unused_class_variable
+var left_square_indicator_visible := true
+# warning-ignore:unused_class_variable
+var right_square_indicator_visible := false
+#0 for area of same color, 1 for all pixels of the same color
+# warning-ignore:unused_class_variable
+var left_fill_area := 0
+# warning-ignore:unused_class_variable
+var right_fill_area := 0
+
+#0 for lighten, 1 for darken
+# warning-ignore:unused_class_variable
+var left_ld := 0
+# warning-ignore:unused_class_variable
+var right_ld := 0
+# warning-ignore:unused_class_variable
+var left_ld_amount := 0.1
+# warning-ignore:unused_class_variable
+var right_ld_amount := 0.1
+
+# warning-ignore:unused_class_variable
+var left_horizontal_mirror := false
+# warning-ignore:unused_class_variable
+var left_vertical_mirror := false
+# warning-ignore:unused_class_variable
+var right_horizontal_mirror := false
+# warning-ignore:unused_class_variable
+var right_vertical_mirror := false
+
+#View menu options
 # warning-ignore:unused_class_variable
 var tile_mode := false
 # warning-ignore:unused_class_variable
@@ -21,9 +59,43 @@ var draw_grid := false
 var show_rulers := true
 # warning-ignore:unused_class_variable
 var show_guides := true
-var canvases := []
+
+#Onion skinning options
 # warning-ignore:unused_class_variable
-var hidden_canvases := []
+var onion_skinning_past_rate := 0
+# warning-ignore:unused_class_variable
+var onion_skinning_future_rate := 0
+# warning-ignore:unused_class_variable
+var onion_skinning_blue_red := false
+
+#Brushes
+enum BRUSH_TYPES {PIXEL, FILE, CUSTOM}
+# warning-ignore:unused_class_variable
+var left_brush_size := 1
+# warning-ignore:unused_class_variable
+var right_brush_size := 1
+# warning-ignore:unused_class_variable
+var current_left_brush_type = BRUSH_TYPES.PIXEL
+# warning-ignore:unused_class_variable
+var current_right_brush_type = BRUSH_TYPES.PIXEL
+
+var brushes_from_files := 0
+# warning-ignore:unused_class_variable
+var custom_brushes := []
+# warning-ignore:unused_class_variable
+var custom_left_brush_index := -1
+# warning-ignore:unused_class_variable
+var custom_right_brush_index := -1
+# warning-ignore:unused_class_variable
+var custom_left_brush_image : Image
+# warning-ignore:unused_class_variable
+var custom_right_brush_image : Image
+# warning-ignore:unused_class_variable
+var custom_left_brush_texture := ImageTexture.new()
+# warning-ignore:unused_class_variable
+var custom_right_brush_texture := ImageTexture.new()
+
+#Nodes
 var control : Node
 var canvas : Canvas
 var canvas_parent : Node
@@ -31,24 +103,19 @@ var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var viewport_separator : VSeparator
 var split_screen_button : BaseButton
-# warning-ignore:unused_class_variable
-var left_square_indicator_visible := true
-# warning-ignore:unused_class_variable
-var right_square_indicator_visible := false
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
 var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
-# warning-ignore:unused_class_variable
-var selected_pixels := []
-var image_clipboard : Image
 
 var file_menu : MenuButton
 var edit_menu : MenuButton
 var view_menu : MenuButton
 var help_menu : MenuButton
+var cursor_position_label : Label
+var zoom_level_label : Label
 
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
@@ -62,6 +129,9 @@ var left_brush_type_button : BaseButton
 var right_brush_type_button : BaseButton
 var left_brush_type_label : Label
 var right_brush_type_label : Label
+var brushes_popup : Popup
+var file_brush_container : GridContainer
+var project_brush_container : GridContainer
 
 var left_brush_size_container : Container
 var right_brush_size_container : Container
@@ -82,77 +152,24 @@ var right_ld_container : Container
 var left_mirror_container : Container
 var right_mirror_container : Container
 
+var animation_timer : Timer
+
+var current_frame_label : Label
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
 var play_backwards : BaseButton
 var frame_container : HBoxContainer
+
 var vbox_layer_container : VBoxContainer
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
-var animation_timer : Timer
-var cursor_position_label : Label
-var zoom_level_label : Label
-var current_frame_label : Label
-# warning-ignore:unused_class_variable
-var current_left_tool := "Pencil"
-# warning-ignore:unused_class_variable
-var current_right_tool := "Eraser"
-
-#Brushes
-enum BRUSH_TYPES {PIXEL, FILE, CUSTOM}
-# warning-ignore:unused_class_variable
-var left_brush_size := 1
-# warning-ignore:unused_class_variable
-var right_brush_size := 1
-# warning-ignore:unused_class_variable
-var current_left_brush_type = BRUSH_TYPES.PIXEL
-# warning-ignore:unused_class_variable
-var current_right_brush_type = BRUSH_TYPES.PIXEL
-var brushes_popup : Popup
-var file_brush_container : GridContainer
-var project_brush_container : GridContainer
-
-#0 for area of same color, 1 for all pixels of the same color
-var left_fill_area := 0
-var right_fill_area := 0
-
-#0 for lighten, 1 for darken
-var left_ld := 0
-var right_ld := 0
-# warning-ignore:unused_class_variable
-var left_ld_amount := 0.1
-# warning-ignore:unused_class_variable
-var right_ld_amount := 0.1
-
-# warning-ignore:unused_class_variable
-var left_horizontal_mirror := false
-# warning-ignore:unused_class_variable
-var left_vertical_mirror := false
-# warning-ignore:unused_class_variable
-var right_horizontal_mirror := false
-# warning-ignore:unused_class_variable
-var right_vertical_mirror := false
-
-var brushes_from_files := 0
-# warning-ignore:unused_class_variable
-var custom_brushes := []
-# warning-ignore:unused_class_variable
-var custom_left_brush_index := -1
-# warning-ignore:unused_class_variable
-var custom_right_brush_index := -1
-# warning-ignore:unused_class_variable
-var custom_left_brush_image : Image
-# warning-ignore:unused_class_variable
-var custom_right_brush_image : Image
-# warning-ignore:unused_class_variable
-var custom_left_brush_texture := ImageTexture.new()
-# warning-ignore:unused_class_variable
-var custom_right_brush_texture := ImageTexture.new()
 
 func _ready() -> void:
 	undo_redo = UndoRedo.new()
+	image_clipboard = Image.new()
+
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
 	canvas = find_node_by_name(root, "Canvas")
@@ -168,12 +185,13 @@ func _ready() -> void:
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
-	image_clipboard = Image.new()
 
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
 	view_menu = find_node_by_name(root, "ViewMenu")
 	help_menu = find_node_by_name(root, "HelpMenu")
+	cursor_position_label = find_node_by_name(root, "CursorPosition")
+	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
 	left_tool_options_container = find_node_by_name(root, "LeftToolOptions")
 	right_tool_options_container = find_node_by_name(root, "RightToolOptions")
@@ -187,6 +205,9 @@ func _ready() -> void:
 	right_brush_type_button = find_node_by_name(right_brush_type_container, "RightBrushTypeButton")
 	left_brush_type_label = find_node_by_name(left_brush_type_container, "LeftBrushTypeLabel")
 	right_brush_type_label = find_node_by_name(right_brush_type_container, "RightBrushTypeLabel")
+	brushes_popup = find_node_by_name(root, "BrushesPopup")
+	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
+	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 
 	left_brush_size_container = find_node_by_name(left_tool_options_container, "LeftBrushSize")
 	right_brush_size_container = find_node_by_name(right_tool_options_container, "RightBrushSize")
@@ -207,6 +228,9 @@ func _ready() -> void:
 	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
 	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")
 
+	animation_timer = find_node_by_name(root, "AnimationTimer")
+
+	current_frame_label = find_node_by_name(root, "CurrentFrame")
 	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
@@ -217,14 +241,6 @@ func _ready() -> void:
 	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
 	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
-	animation_timer = find_node_by_name(root, "AnimationTimer")
-	cursor_position_label = find_node_by_name(root, "CursorPosition")
-	zoom_level_label = find_node_by_name(root, "ZoomLevel")
-	current_frame_label = find_node_by_name(root, "CurrentFrame")
-
-	brushes_popup = find_node_by_name(root, "BrushesPopup")
-	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
-	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:

@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Layers/layer_visible.png" type="Texture" id=2]
 
-
 [node name="LayerContainer" type="Button"]
 margin_left = -0.540344
 margin_right = 11.4597
@@ -11,19 +10,25 @@ margin_bottom = 42.0
 rect_min_size = Vector2( 160, 42 )
 toggle_mode = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 4.0
-margin_top = -16.0
-margin_bottom = 16.0
+margin_left = -80.0
+margin_top = -21.0
+margin_right = 80.0
+margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 
 [node name="VisibilityButton" type="TextureButton" parent="HBoxContainer"]
+margin_top = 5.0
 margin_right = 32.0
-margin_bottom = 32.0
+margin_bottom = 37.0
 hint_tooltip = "Toggle layer's visibility"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -32,24 +37,30 @@ texture_normal = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 margin_left = 36.0
+margin_top = 5.0
 margin_right = 68.0
-margin_bottom = 32.0
+margin_bottom = 37.0
 rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 4
 expand = true
+stretch_mode = 6
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 margin_left = 72.0
-margin_top = 9.0
+margin_top = 14.0
 margin_right = 118.0
-margin_bottom = 23.0
+margin_bottom = 28.0
 text = "Layer 0"
 align = 1
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
 visible = false
-margin_left = 110.0
-margin_right = 168.0
-margin_bottom = 32.0
+margin_left = 122.0
+margin_top = 5.0
+margin_right = 202.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 80, 32 )
+size_flags_vertical = 4
 text = "Layer 0"
 editable = false
 caret_blink = true

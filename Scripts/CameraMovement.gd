@@ -8,7 +8,7 @@ var drag := false
 func _ready() -> void:
 	viewport_container = get_parent().get_parent()
 
-func _input(event) -> void:
+func _input(event : InputEvent) -> void:
 	var mouse_pos := viewport_container.get_local_mouse_position()
 	var viewport_size := viewport_container.rect_size
 	if event.is_action_pressed("camera_drag"):

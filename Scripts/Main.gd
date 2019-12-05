@@ -142,7 +142,7 @@ func _ready() -> void:
 	brushes_dir.list_dir_end()
 	Global.brushes_from_files = Global.custom_brushes.size()
 
-func _input(event) -> void:
+func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
@@ -153,7 +153,7 @@ func _input(event) -> void:
 			elif event.is_action_pressed(t[1]): #Shortcut for left button
 				_on_Tool_pressed(t[0], false, true)
 
-func _notification(what) -> void:
+func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: #Handle exit
 		$QuitDialog.popup_centered()
 		Global.can_draw = false

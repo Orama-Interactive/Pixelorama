@@ -905,6 +905,7 @@ margin_bottom = 138.0
 size_flags_horizontal = 3
 
 [node name="AnimationButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+editor/display_folded = true
 margin_right = 562.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 24 )
@@ -972,6 +973,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 25 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
+editor/display_folded = true
 margin_left = 476.0
 margin_right = 562.0
 margin_bottom = 25.0

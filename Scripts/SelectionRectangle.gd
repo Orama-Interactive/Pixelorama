@@ -18,7 +18,7 @@ func _ready() -> void:
 	tex.create_from_image(img, 0)
 
 # warning-ignore:unused_argument
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	var mouse_pos := get_local_mouse_position() - Global.canvas.location
 	var mouse_pos_floored := mouse_pos.floor()
 	var start_pos := polygon[0]

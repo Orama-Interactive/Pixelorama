@@ -22,6 +22,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 3, 0 )
 button_mask = 3
 texture_normal = ExtResource( 1 )
+stretch_mode = 5
 script = ExtResource( 2 )
 
 [node name="BrushTexture" type="TextureRect" parent="."]

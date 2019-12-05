@@ -13,7 +13,7 @@ func _ready() -> void:
 	width = 0.1
 
 # warning-ignore:unused_argument
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	width = Global.camera.zoom.x
 	mouse_pos = get_local_mouse_position()
 	var point0 := points[0]

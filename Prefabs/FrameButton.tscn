@@ -26,6 +26,7 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand = true
+stretch_mode = 6
 
 [node name="PopupMenu" type="PopupMenu" parent="FrameButton"]
 margin_right = 20.0

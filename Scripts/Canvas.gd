@@ -75,7 +75,7 @@ func camera_zoom() -> void:
 	Global.camera_preview.offset = size / 2
 
 # warning-ignore:unused_argument
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	sprite_changed_this_frame = false
 	update()
 	current_pixel = get_local_mouse_position() - location
@@ -438,10 +438,10 @@ func generate_layer_panels() -> void:
 		if !layers[i][2]:
 			layers[i][2] = "Layer %s" % i
 		layer_container.i = i
+		layer_container.get_child(0).get_child(1).texture = layers[i][1]
 		layer_container.get_child(0).get_child(2).text = layers[i][2]
 		layer_container.get_child(0).get_child(3).text = layers[i][2]
 		layers[i][3] = true #set visible
-		layer_container.get_child(0).get_child(1).texture = layers[i][1]
 		Global.vbox_layer_container.add_child(layer_container)
 
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
