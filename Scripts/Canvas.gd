@@ -12,6 +12,7 @@ var frame_texture_rect : TextureRect
 
 var current_pixel := Vector2.ZERO #pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
+var cursor_inside_canvas := false
 var previous_action := "None"
 var mouse_inside_canvas := false #used for undo
 var sprite_changed_this_frame := false #for optimization purposes
@@ -105,19 +106,23 @@ func _process(delta : float) -> void:
 	if Global.current_frame == frame:
 		if mouse_in_canvas && Global.has_focus:
 			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
-			if Global.current_left_tool == "Bucket":
-				Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/Bucket_Cursor.png"), 0, Vector2(6, 27))
-			elif Global.current_left_tool == "ColorPicker":
-				Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/ColorPicker_Cursor.png"), 0, Vector2(5, 28))
-			elif Global.current_left_tool != "RectSelect":
-				Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			if !cursor_inside_canvas:
+				cursor_inside_canvas = true
+				if Global.current_left_tool == "Bucket":
+					Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/Bucket_Cursor.png"), 0, Vector2(6, 27))
+				elif Global.current_left_tool == "ColorPicker":
+					Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/ColorPicker_Cursor.png"), 0, Vector2(5, 28))
+				elif Global.current_left_tool != "RectSelect":
+					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		else:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
 					mouse_inside_canvas = false
 			Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
-			Input.set_custom_mouse_cursor(null)
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			if cursor_inside_canvas:
+				cursor_inside_canvas = false
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				Input.set_custom_mouse_cursor(null)
 
 
 	#Handle Undo/Redo

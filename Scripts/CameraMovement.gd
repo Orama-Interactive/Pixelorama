@@ -16,7 +16,7 @@ func _input(event : InputEvent) -> void:
 	elif event.is_action_released("camera_drag"):
 		drag = false
 
-	if Global.can_draw && Global.has_focus && Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
+	if Global.can_draw && Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
 		if event.is_action_pressed("zoom_in"): # Wheel Up Event
 			zoom_camera(-1)
 		elif event.is_action_pressed("zoom_out"): # Wheel Down Event

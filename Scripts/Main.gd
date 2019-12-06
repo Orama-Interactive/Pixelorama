@@ -43,8 +43,8 @@ func _ready() -> void:
 		"Save..." : KEY_MASK_CTRL + KEY_S,
 		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
 		"Import..." : KEY_MASK_CTRL + KEY_I,
-		"Export..." : KEY_MASK_CTRL + KEY_E,
-		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
+		"Export PNG..." : KEY_MASK_CTRL + KEY_E,
+		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
 		"Quit" : KEY_MASK_CTRL + KEY_Q
 		}
 	var edit_menu_items := {
@@ -527,8 +527,9 @@ func export_project() -> void:
 func save_sprite(canvas : Canvas, path : String) -> void:
 	var whole_image := Image.new()
 	whole_image.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
+	whole_image.lock()
 	for layer in canvas.layers:
-		whole_image.blend_rect(layer[0], Rect2(canvas.position, canvas.size), Vector2.ZERO)
+		canvas.blend_rect(whole_image, layer[0], Rect2(canvas.position, canvas.size), Vector2.ZERO)
 		layer[0].lock()
 	var err = whole_image.save_png(path)
 	if err != OK:
@@ -553,10 +554,11 @@ func save_spritesheet() -> void:
 				height = canvas.size.y
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
+	whole_image.lock()
 	var dst := Vector2.ZERO
 	for canvas in Global.canvases:
 		for layer in canvas.layers:
-			whole_image.blend_rect(layer[0], Rect2(canvas.position, canvas.size), dst)
+			canvas.blend_rect(whole_image, layer[0], Rect2(canvas.position, canvas.size), dst)
 			layer[0].lock()
 		if export_vertical_spritesheet.pressed:
 			dst += Vector2(0, canvas.size.y)
@@ -744,7 +746,8 @@ func _on_MergeLayer_pressed() -> void:
 
 	var new_layer := Image.new()
 	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
-	new_layer.blend_rect(selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
+	new_layer.lock()
+	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Merge Layer")
