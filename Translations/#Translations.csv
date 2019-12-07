@@ -3,6 +3,7 @@ OK	OK	Εντάξει
 Cancel	Cancel	Άκυρο
 Open	Open	Άνοιγμα
 Please Confirm...	Please Confirm...	Παρακαλώ επιβεβαιώστε...
+Image Size	Image Size	Μέγεθος εικόνας
 Width:	Width:	Πλάτος:
 Height:	Height:	Ύψος:
 File	File	Αρχείο
@@ -25,15 +26,23 @@ Clear Selection	Clear Selection	Καθαρισμός επιλογής
 Flip Horizontal	Flip Horizontal	Οριζόντια αναστροφή
 Flip Vertical	Flip Vertical	Κάθετη αναστροφή
 Preferences	Preferences	Προτιμήσεις
-Language:	Language:	Γλώσσα:
-System Language	System Language	Γλώσσα Συστήματος
-English	English	Αγγλικά
-Greek	Greek	Ελληνικά
 Tile Mode	Tile Mode	Λειτουργία μοτίβου
 Show Grid	Show Grid	Εμφάνιση πλέγματος
 Show Rulers	Show Rulers	Εμφάνιση χαράκων
 Show Guides	Show Guides	Εμφάνιση οδηγών
 About Pixelorama	About Pixelorama	Σχετικά με το Pixelorama
+Fill with color:	Fill with color:	Γέμισμα με χρώμα:
+Interpolation:	Interpolation:	Παρεμβολή:
+Nearest	Nearest	Χωρίς
+Bilinear	Bilinear	Διγραμμική
+Cubic	Cubic	Κυβική
+Trilinear	Trilinear	Τριγραμμική
+Grid options	Grid options	Επιλογές πλέγματος
+Color:	Color:	Χρώμα:
+Language:	Language:	Γλώσσα:
+System Language	System Language	Γλώσσα Συστήματος
+English	English	Αγγλικά
+Greek	Greek	Ελληνικά
 Utility Tools	Utility Tools	Βοηθητικά Εργαλεία
 Draw Tools	Draw Tools	Εργαλεία Ζωγραφικής
 Left tool options	Left tool options	Επιλογές αριστερού εργαλείου

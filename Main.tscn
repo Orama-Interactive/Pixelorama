@@ -163,14 +163,12 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -404,10 +402,10 @@ align = 1
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 43.0
-hint_tooltip = "Show left mouse indicator when drawing"
+hint_tooltip = "Show left mouse pixel indicator or brush on the canvas when drawing"
 mouse_default_cursor_shape = 2
 pressed = true
-text = "Left cursor"
+text = "Left pixel indicator"
 
 [node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
@@ -598,9 +596,9 @@ align = 1
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 43.0
-hint_tooltip = "Show right mouse indicator when drawing"
+hint_tooltip = "Show right mouse pixel indicator or brush on the canvas when drawing"
 mouse_default_cursor_shape = 2
-text = "Right cursor"
+text = "Right pixel indicator"
 
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ToolOptions/RightToolOptions"]
 editor/display_folded = true
@@ -1273,7 +1271,6 @@ margin_right = 200.0
 margin_bottom = 70.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CreateNewImage"]
-editor/display_folded = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
@@ -1281,65 +1278,57 @@ margin_bottom = 106.0
 
 [node name="ImageSize" type="Label" parent="CreateNewImage/VBoxContainer"]
 margin_right = 184.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 text = "Image Size"
 
-[node name="WidthCont" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
-editor/display_folded = true
-margin_top = 18.0
+[node name="OptionsContainer" type="GridContainer" parent="CreateNewImage/VBoxContainer"]
+margin_top = 19.0
 margin_right = 184.0
-margin_bottom = 42.0
+margin_bottom = 98.0
+columns = 2
 
-[node name="WidthLabel" type="Label" parent="CreateNewImage/VBoxContainer/WidthCont"]
+[node name="WidthLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
 margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+margin_right = 75.0
+margin_bottom = 20.0
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/WidthCont"]
-margin_left = 50.0
-margin_right = 124.0
-margin_bottom = 24.0
+[node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
+margin_left = 79.0
+margin_right = 143.0
+margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="HeightCont" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
-margin_top = 46.0
-margin_right = 184.0
-margin_bottom = 70.0
-
-[node name="Height" type="Label" parent="CreateNewImage/VBoxContainer/HeightCont"]
-margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+[node name="Height" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
+margin_top = 34.0
+margin_right = 75.0
+margin_bottom = 49.0
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/HeightCont"]
-margin_left = 50.0
-margin_right = 124.0
-margin_bottom = 24.0
+[node name="HeightValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
+margin_left = 79.0
+margin_top = 29.0
+margin_right = 143.0
+margin_bottom = 54.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="FillColor" type="HBoxContainer" parent="CreateNewImage/VBoxContainer"]
-margin_top = 74.0
-margin_right = 184.0
-margin_bottom = 94.0
+[node name="FillColorLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
+margin_top = 61.0
+margin_right = 75.0
+margin_bottom = 76.0
+text = "Fill with color:"
 
-[node name="FillColorLabel" type="Label" parent="CreateNewImage/VBoxContainer/FillColor"]
-margin_top = 3.0
-margin_right = 94.0
-margin_bottom = 17.0
-text = "Fill with color: "
-
-[node name="FillColor" type="ColorPickerButton" parent="CreateNewImage/VBoxContainer/FillColor"]
-margin_left = 98.0
-margin_right = 162.0
-margin_bottom = 20.0
+[node name="FillColor" type="ColorPickerButton" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
+margin_left = 79.0
+margin_top = 58.0
+margin_right = 143.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0, 0, 0, 0 )
 
@@ -1409,65 +1398,58 @@ margin_bottom = 106.0
 
 [node name="ImageSize" type="Label" parent="ScaleImage/VBoxContainer"]
 margin_right = 184.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 text = "Image Size"
 
-[node name="WidthCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
-margin_top = 18.0
+[node name="OptionsContainer" type="GridContainer" parent="ScaleImage/VBoxContainer"]
+editor/display_folded = true
+margin_top = 19.0
 margin_right = 184.0
-margin_bottom = 42.0
+margin_bottom = 98.0
+columns = 2
 
-[node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/WidthCont"]
+[node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
 margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+margin_right = 72.0
+margin_bottom = 20.0
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/WidthCont"]
-margin_left = 50.0
-margin_right = 124.0
-margin_bottom = 24.0
+[node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
+margin_left = 76.0
+margin_right = 159.0
+margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="HeightCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
-editor/display_folded = true
-margin_top = 46.0
-margin_right = 184.0
-margin_bottom = 70.0
-
-[node name="Height" type="Label" parent="ScaleImage/VBoxContainer/HeightCont"]
-margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+[node name="Height" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
+margin_top = 34.0
+margin_right = 72.0
+margin_bottom = 49.0
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="ScaleImage/VBoxContainer/HeightCont"]
-margin_left = 50.0
-margin_right = 124.0
-margin_bottom = 24.0
+[node name="HeightValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
+margin_left = 76.0
+margin_top = 29.0
+margin_right = 159.0
+margin_bottom = 54.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="InterpolationContainer" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
-margin_top = 74.0
-margin_right = 184.0
-margin_bottom = 94.0
-
-[node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/InterpolationContainer"]
-margin_top = 3.0
-margin_right = 87.0
-margin_bottom = 17.0
+[node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
+margin_top = 61.0
+margin_right = 72.0
+margin_bottom = 76.0
 text = "Interpolation:"
 
-[node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/InterpolationContainer"]
-margin_left = 91.0
-margin_right = 182.0
-margin_bottom = 20.0
+[node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/OptionsContainer"]
+margin_left = 76.0
+margin_top = 58.0
+margin_right = 159.0
+margin_bottom = 79.0
 text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
@@ -1478,23 +1460,88 @@ margin_right = 200.0
 margin_bottom = 70.0
 window_title = "Preferences"
 
-[node name="LanguageContainer" type="HBoxContainer" parent="PreferencesDialog"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PreferencesDialog"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -92.0
+margin_top = 8.0
+margin_right = 92.0
+margin_bottom = 131.0
 
-[node name="LanguageLabel" type="Label" parent="PreferencesDialog/LanguageContainer"]
-margin_top = 12.0
+[node name="OptionsContainer" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
+margin_right = 184.0
+margin_bottom = 21.0
+columns = 2
+
+[node name="LanguageLabel" type="Label" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
+margin_top = 3.0
 margin_right = 57.0
-margin_bottom = 27.0
+margin_bottom = 18.0
 text = "Language:"
 
-[node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/LanguageContainer"]
+[node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
 margin_left = 61.0
 margin_right = 142.0
-margin_bottom = 40.0
+margin_bottom = 21.0
 text = "English"
-items = [ "System Language", null, false, 0, null, "Greek", null, false, 1, null, "English", null, false, 2, null ]
+items = [ "System Language", null, false, 0, null, "Greek [el]", null, false, 1, null, "English [en]", null, false, 2, null ]
 selected = 0
+
+[node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
+margin_top = 25.0
+margin_right = 184.0
+margin_bottom = 40.0
+text = "Grid options"
+
+[node name="GridOptions" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
+margin_top = 44.0
+margin_right = 184.0
+margin_bottom = 123.0
+columns = 2
+
+[node name="WidthLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
+margin_top = 5.0
+margin_right = 39.0
+margin_bottom = 20.0
+text = "Width:"
+
+[node name="GridWidthValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
+margin_left = 43.0
+margin_right = 107.0
+margin_bottom = 25.0
+min_value = 1.0
+max_value = 16384.0
+value = 1.0
+suffix = "px"
+
+[node name="Height" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
+margin_top = 34.0
+margin_right = 39.0
+margin_bottom = 49.0
+text = "Height:"
+
+[node name="GridHeightValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
+margin_left = 43.0
+margin_top = 29.0
+margin_right = 107.0
+margin_bottom = 54.0
+min_value = 1.0
+max_value = 16384.0
+value = 1.0
+suffix = "px"
+
+[node name="GridColorLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
+margin_top = 61.0
+margin_right = 39.0
+margin_bottom = 76.0
+text = "Color:"
+
+[node name="GridColor" type="ColorPickerButton" parent="PreferencesDialog/VBoxContainer/GridOptions"]
+margin_left = 43.0
+margin_top = 58.0
+margin_right = 107.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 64, 20 )
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
 editor/display_folded = true
@@ -1511,15 +1558,15 @@ margin_bottom = 158.0
 
 [node name="Pixelorama" type="Label" parent="AboutDialog/AboutUI"]
 margin_right = 268.0
-margin_bottom = 31.0
+margin_bottom = 33.0
 text = "Pixelorama v0.3
 "
 align = 1
 
 [node name="MadeBy" type="Label" parent="AboutDialog/AboutUI"]
-margin_top = 35.0
+margin_top = 37.0
 margin_right = 268.0
-margin_bottom = 83.0
+margin_bottom = 88.0
 text = "Your Free and Open Source Sprite Editor
 Developed by Orama Interactive
 "
@@ -1527,9 +1574,9 @@ align = 1
 
 [node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
 editor/display_folded = true
-margin_top = 87.0
+margin_top = 92.0
 margin_right = 268.0
-margin_bottom = 107.0
+margin_bottom = 113.0
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
 editor/display_folded = true
@@ -1538,26 +1585,26 @@ margin_right = 231.0
 margin_bottom = 21.0
 
 [node name="Website" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
-margin_right = 65.0
-margin_bottom = 20.0
+margin_right = 55.0
+margin_bottom = 21.0
 text = "Website"
 
 [node name="GitHub" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
-margin_left = 69.0
-margin_right = 162.0
-margin_bottom = 20.0
+margin_left = 59.0
+margin_right = 139.0
+margin_bottom = 21.0
 text = "GitHub Repo"
 
 [node name="Donate" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
-margin_left = 166.0
-margin_right = 224.0
-margin_bottom = 20.0
+margin_left = 143.0
+margin_right = 194.0
+margin_bottom = 21.0
 text = "Donate"
 
 [node name="Copyright" type="Label" parent="AboutDialog/AboutUI"]
-margin_top = 111.0
+margin_top = 117.0
 margin_right = 268.0
-margin_bottom = 142.0
+margin_bottom = 150.0
 text = "
 Copyright 2019 - Orama Interactive"
 align = 1
@@ -1633,7 +1680,10 @@ dialog_text = "Are you sure you want to exit Pixelorama?"
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
-[connection signal="item_selected" from="PreferencesDialog/LanguageContainer/LanguageOption" to="." method="_on_LanguageOption_item_selected"]
+[connection signal="item_selected" from="PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption" to="." method="_on_LanguageOption_item_selected"]
+[connection signal="value_changed" from="PreferencesDialog/VBoxContainer/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
+[connection signal="value_changed" from="PreferencesDialog/VBoxContainer/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
+[connection signal="color_changed" from="PreferencesDialog/VBoxContainer/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]

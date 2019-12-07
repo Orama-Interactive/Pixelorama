@@ -112,8 +112,6 @@ func _process(delta : float) -> void:
 					Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/Bucket_Cursor.png"), 0, Vector2(6, 27))
 				elif Global.current_left_tool == "ColorPicker":
 					Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/ColorPicker_Cursor.png"), 0, Vector2(5, 28))
-				elif Global.current_left_tool != "RectSelect":
-					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		else:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
@@ -121,9 +119,7 @@ func _process(delta : float) -> void:
 			Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 			if cursor_inside_canvas:
 				cursor_inside_canvas = false
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				Input.set_custom_mouse_cursor(null)
-
 
 	#Handle Undo/Redo
 	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus
@@ -276,7 +272,7 @@ func _process(delta : float) -> void:
 
 	previous_action = current_action
 	if sprite_changed_this_frame:
-		update_texture(current_layer_index)
+		update_texture(current_layer_index, (Input.is_action_just_released("left_mouse") || Input.is_action_just_released("right_mouse")))
 
 func handle_undo(action : String) -> void:
 	var canvases := []
@@ -319,22 +315,23 @@ func handle_redo(action : String) -> void:
 	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
 
-func update_texture(layer_index : int) -> void:
+func update_texture(layer_index : int, update_frame_tex := true) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 	var layer_container := get_layer_container(layer_index)
 	if layer_container:
 		layer_container.get_child(0).get_child(1).texture = layers[layer_index][1]
 
-	#This code is used to update the texture in the animation timeline frame button
-	#but blend_rect causes major performance issues on large images
-	var whole_image := Image.new()
-	whole_image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-	for layer in layers:
-		whole_image.blend_rect(layer[0], Rect2(position, size), Vector2.ZERO)
-		layer[0].lock()
-	var whole_image_texture := ImageTexture.new()
-	whole_image_texture.create_from_image(whole_image, 0)
-	frame_texture_rect.texture = whole_image_texture
+	if update_frame_tex:
+		#This code is used to update the texture in the animation timeline frame button
+		#but blend_rect causes major performance issues on large images
+		var whole_image := Image.new()
+		whole_image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		for layer in layers:
+			whole_image.blend_rect(layer[0], Rect2(position, size), Vector2.ZERO)
+			layer[0].lock()
+		var whole_image_texture := ImageTexture.new()
+		whole_image_texture.create_from_image(whole_image, 0)
+		frame_texture_rect.texture = whole_image_texture
 
 func frame_changed(value : int) -> void:
 	frame = value
@@ -394,10 +391,10 @@ func _draw() -> void:
 
 	#Idea taken from flurick (on GitHub)
 	if Global.draw_grid:
-		for x in size.x:
-			draw_line(Vector2(x, location.y), Vector2(x, size.y), Color.black, true)
-		for y in size.y:
-			draw_line(Vector2(location.x, y), Vector2(size.x, y), Color.black, true)
+		for x in range(0, size.x, Global.grid_width):
+			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
+		for y in range(0, size.y, Global.grid_height):
+			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
 
 	#Draw rectangle to indicate the pixel currently being hovered on
 	var mouse_pos := get_local_mouse_position() + location

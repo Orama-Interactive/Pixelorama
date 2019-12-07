@@ -15,6 +15,12 @@ var hidden_canvases := []
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
+# warning-ignore:unused_class_variable
+var grid_width := 1
+# warning-ignore:unused_class_variable
+var grid_height := 1
+# warning-ignore:unused_class_variable
+var grid_color := Color.black
 
 #Tools & options
 # warning-ignore:unused_class_variable

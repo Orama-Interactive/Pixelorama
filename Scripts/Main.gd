@@ -38,7 +38,7 @@ func _ready() -> void:
 
 		# Set the language option menu's default selected option to the loaded locale
 		var locale_index := loaded_locales.find(saved_locale)
-		$PreferencesDialog/LanguageContainer/LanguageOption.selected = locale_index + 1
+		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
@@ -309,9 +309,9 @@ func help_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 
 func _on_CreateNewImage_confirmed() -> void:
-	var width = $CreateNewImage/VBoxContainer/WidthCont/WidthValue.value
-	var height = $CreateNewImage/VBoxContainer/HeightCont/HeightValue.value
-	var fill_color : Color = $CreateNewImage/VBoxContainer/FillColor/FillColor.color
+	var width : int = $CreateNewImage/VBoxContainer/OptionsContainer/WidthValue.value
+	var height : int = $CreateNewImage/VBoxContainer/OptionsContainer/HeightValue.value
+	var fill_color : Color = $CreateNewImage/VBoxContainer/OptionsContainer/FillColor.color
 	clear_canvases()
 	Global.canvas = load("res://Prefabs/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
@@ -591,9 +591,9 @@ func save_spritesheet() -> void:
 		OS.alert("Can't save file")
 
 func _on_ScaleImage_confirmed() -> void:
-	var width = $ScaleImage/VBoxContainer/WidthCont/WidthValue.value
-	var height = $ScaleImage/VBoxContainer/HeightCont/HeightValue.value
-	var interpolation = $ScaleImage/VBoxContainer/InterpolationContainer/InterpolationType.selected
+	var width : int = $ScaleImage/VBoxContainer/OptionsContainer/WidthValue.value
+	var height : int = $ScaleImage/VBoxContainer/OptionsContainer/HeightValue.value
+	var interpolation : int = $ScaleImage/VBoxContainer/OptionsContainer/InterpolationType.selected
 	Global.undos += 1
 	Global.undo_redo.create_action("Scale")
 	Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
@@ -617,6 +617,15 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 
 	config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	config_cache.save("user://cache.ini")
+
+func _on_GridWidthValue_value_changed(value : float) -> void:
+	Global.grid_width = value
+
+func _on_GridHeightValue_value_changed(value : float) -> void:
+	Global.grid_height = value
+
+func _on_GridColor_color_changed(color : Color) -> void:
+	Global.grid_color = color
 
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
@@ -1003,4 +1012,3 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
-
