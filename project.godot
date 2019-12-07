@@ -178,6 +178,11 @@ right_colorpicker_tool={
  ]
 }
 
+[locale]
+
+translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation" )
+locale_filter=[ 0, [  ] ]
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

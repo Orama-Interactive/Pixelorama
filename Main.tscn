@@ -1294,7 +1294,7 @@ margin_bottom = 42.0
 margin_top = 5.0
 margin_right = 46.0
 margin_bottom = 19.0
-text = "Width: "
+text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/WidthCont"]
 margin_left = 50.0
@@ -1402,7 +1402,6 @@ margin_right = 200.0
 margin_bottom = 114.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleImage"]
-editor/display_folded = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
@@ -1414,7 +1413,6 @@ margin_bottom = 14.0
 text = "Image Size"
 
 [node name="WidthCont" type="HBoxContainer" parent="ScaleImage/VBoxContainer"]
-editor/display_folded = true
 margin_top = 18.0
 margin_right = 184.0
 margin_bottom = 42.0
@@ -1423,7 +1421,7 @@ margin_bottom = 42.0
 margin_top = 5.0
 margin_right = 46.0
 margin_bottom = 19.0
-text = "Width: "
+text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/WidthCont"]
 margin_left = 50.0
@@ -1472,6 +1470,30 @@ margin_right = 182.0
 margin_bottom = 20.0
 text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
+selected = 0
+
+[node name="PreferencesDialog" type="AcceptDialog" parent="."]
+editor/display_folded = true
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "Preferences"
+
+[node name="LanguageContainer" type="HBoxContainer" parent="PreferencesDialog"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LanguageLabel" type="Label" parent="PreferencesDialog/LanguageContainer"]
+margin_top = 12.0
+margin_right = 57.0
+margin_bottom = 27.0
+text = "Language:"
+
+[node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/LanguageContainer"]
+margin_left = 61.0
+margin_right = 142.0
+margin_bottom = 40.0
+text = "English"
+items = [ "System Language", null, false, 0, null, "Greek", null, false, 1, null, "English", null, false, 2, null ]
 selected = 0
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
@@ -1610,6 +1632,8 @@ dialog_text = "Are you sure you want to exit Pixelorama?"
 [connection signal="popup_hide" from="ExportSprites" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
+[connection signal="item_selected" from="PreferencesDialog/LanguageContainer/LanguageOption" to="." method="_on_LanguageOption_item_selected"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]

@@ -1,6 +1,7 @@
 extends Control
 
-var config_cache : ConfigFile = ConfigFile.new()
+var config_cache := ConfigFile.new()
+var loaded_locales : Array
 var current_save_path := ""
 var current_export_path := ""
 var opensprite_file_selected := false
@@ -23,9 +24,25 @@ func _ready() -> void:
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
 
-	# Restore the window position/size if values are present in the configuration cache
+	#Make sure locales are always sorted, in the same order
+	loaded_locales = TranslationServer.get_loaded_locales()
+	loaded_locales.sort()
+
+	# Load settings from the config file
 	config_cache.load("user://cache.ini")
 
+	# Load language
+	if config_cache.has_section_key("preferences", "locale"):
+		var saved_locale : String = config_cache.get_value("preferences", "locale")
+		TranslationServer.set_locale(saved_locale)
+
+		# Set the language option menu's default selected option to the loaded locale
+		var locale_index := loaded_locales.find(saved_locale)
+		$PreferencesDialog/LanguageContainer/LanguageOption.selected = locale_index + 1
+	else: # If the user doesn't have a language preference, set it to their OS' locale
+		TranslationServer.set_locale(OS.get_locale())
+
+	# Restore the window position/size if values are present in the configuration cache
 	if config_cache.has_section_key("window", "screen"):
 		OS.current_screen = config_cache.get_value("window", "screen")
 	if config_cache.has_section_key("window", "maximized"):
@@ -38,32 +55,33 @@ func _ready() -> void:
 			OS.window_size = config_cache.get_value("window", "size")
 
 	var file_menu_items := {
-		"New..." : KEY_MASK_CTRL + KEY_N,
-		"Open..." : KEY_MASK_CTRL + KEY_O,
-		"Save..." : KEY_MASK_CTRL + KEY_S,
-		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
-		"Import..." : KEY_MASK_CTRL + KEY_I,
-		"Export PNG..." : KEY_MASK_CTRL + KEY_E,
-		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
-		"Quit" : KEY_MASK_CTRL + KEY_Q
+		tr("New...") : KEY_MASK_CTRL + KEY_N,
+		tr("Open...") : KEY_MASK_CTRL + KEY_O,
+		tr("Save...") : KEY_MASK_CTRL + KEY_S,
+		tr("Save as...") : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
+		tr("Import PNG...") : KEY_MASK_CTRL + KEY_I,
+		tr("Export PNG...") : KEY_MASK_CTRL + KEY_E,
+		tr("Export PNG as...") : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
+		tr("Quit") : KEY_MASK_CTRL + KEY_Q
 		}
 	var edit_menu_items := {
-		"Undo" : KEY_MASK_CTRL + KEY_Z,
-		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
-		"Scale Image" : 0,
-		"Crop Image" : 0,
-		"Clear Selection" : 0,
-		"Flip Horizontal": KEY_MASK_SHIFT + KEY_H,
-		"Flip Vertical": KEY_MASK_SHIFT + KEY_V
+		tr("Undo") : KEY_MASK_CTRL + KEY_Z,
+		tr("Redo") : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
+		tr("Scale Image") : 0,
+		tr("Crop Image") : 0,
+		tr("Clear Selection") : 0,
+		tr("Flip Horizontal") : KEY_MASK_SHIFT + KEY_H,
+		tr("Flip Vertical") : KEY_MASK_SHIFT + KEY_V,
+		tr("Preferences") : 0
 		}
 	var view_menu_items := {
-		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
-		"Show Grid" : KEY_MASK_CTRL + KEY_G,
-		"Show Rulers": KEY_MASK_CTRL + KEY_R,
-		"Show Guides": KEY_MASK_CTRL + KEY_Y
+		tr("Tile Mode") : KEY_MASK_CTRL + KEY_T,
+		tr("Show Grid") : KEY_MASK_CTRL + KEY_G,
+		tr("Show Rulers") : KEY_MASK_CTRL + KEY_R,
+		tr("Show Guides") : KEY_MASK_CTRL + KEY_Y
 		}
 	var help_menu_items := {
-		"About Pixelorama" : 0
+		tr("About Pixelorama") : 0
 		}
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
@@ -259,6 +277,9 @@ func edit_menu_id_pressed(id : int) -> void:
 			canvas.layers[canvas.current_layer_index][0].flip_y()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
+		7: #Preferences
+			$PreferencesDialog.popup_centered()
+			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
@@ -587,6 +608,15 @@ func _on_ScaleImage_confirmed() -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
+
+func _on_LanguageOption_item_selected(ID : int) -> void:
+	if ID == 0:
+		TranslationServer.set_locale(OS.get_locale())
+	else:
+		TranslationServer.set_locale(loaded_locales[ID - 1])
+
+	config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
+	config_cache.save("user://cache.ini")
 
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
@@ -973,3 +1003,4 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
+
