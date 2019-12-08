@@ -27,7 +27,6 @@ func _input(event : InputEvent) -> void:
 # Zoom Camera
 func zoom_camera(dir : int) -> void:
 	var zoom_margin = zoom * dir / 10
-	#if zoom + zoom_margin > zoom_min && zoom + zoom_margin < zoom_max:
 	if zoom + zoom_margin > zoom_min:
 		zoom += zoom_margin
 

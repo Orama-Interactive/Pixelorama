@@ -53,7 +53,9 @@ func _ready() -> void:
 	frame_texture_rect = Global.find_node_by_name(frame_button, "FrameTexture")
 	frame_texture_rect.texture = layers[0][1] #ImageTexture current_layer_index
 
-	camera_zoom()
+	#Only handle camera zoom settings & offset on the first frame
+	if Global.canvases[0] == self:
+		camera_zoom()
 
 func camera_zoom() -> void:
 	#Set camera zoom based on the sprite size

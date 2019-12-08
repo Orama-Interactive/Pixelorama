@@ -514,6 +514,9 @@ func _on_ImportSprites_files_selected(paths) -> void:
 
 	Global.undo_redo.clear_history(false)
 
+	var first_path : String = paths[0]
+	OS.set_window_title(first_path.get_file() + " (imported) - Pixelorama")
+
 func clear_canvases() -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
