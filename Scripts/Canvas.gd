@@ -319,7 +319,7 @@ func update_texture(layer_index : int, update_frame_tex := true) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 	var layer_container := get_layer_container(layer_index)
 	if layer_container:
-		layer_container.get_child(0).get_child(1).texture = layers[layer_index][1]
+		layer_container.get_child(1).get_child(0).texture = layers[layer_index][1]
 
 	if update_frame_tex:
 		#This code is used to update the texture in the animation timeline frame button
@@ -440,9 +440,9 @@ func generate_layer_panels() -> void:
 		if !layers[i][2]:
 			layers[i][2] = "Layer %s" % i
 		layer_container.i = i
-		layer_container.get_child(0).get_child(1).texture = layers[i][1]
-		layer_container.get_child(0).get_child(2).text = layers[i][2]
-		layer_container.get_child(0).get_child(3).text = layers[i][2]
+		layer_container.get_child(1).get_child(0).texture = layers[i][1]
+		layer_container.get_child(1).get_child(1).text = layers[i][2]
+		layer_container.get_child(1).get_child(2).text = layers[i][2]
 		layers[i][3] = true #set visible
 		Global.vbox_layer_container.add_child(layer_container)
 

@@ -262,7 +262,7 @@ func find_node_by_name(root, node_name) -> Node:
 
 func notification_label(text : String) -> void:
 	var notification : Label = load("res://Prefabs/NotificationLabel.tscn").instance()
-	notification.text = text
+	notification.text = tr(text)
 	notification.rect_position = Vector2(240, OS.window_size.y - 150)
 	get_tree().get_root().add_child(notification)
 
@@ -347,7 +347,7 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 func frame_changed(value : int) -> void:
 	current_frame = value
-	current_frame_label.text = "Current frame: %s/%s" % [str(current_frame + 1), canvases.size()]
+	current_frame_label.text = tr("Current frame:") + " %s/%s" % [str(current_frame + 1), canvases.size()]
 
 	for c in canvases:
 		c.visible = false

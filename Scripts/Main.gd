@@ -126,19 +126,21 @@ func _ready() -> void:
 
 	#Options for Import
 	import_as_new_frame = CheckBox.new()
-	import_as_new_frame.text = "Import as new frame?"
+	import_as_new_frame.text = tr("IMPORT_FILE_LABEL")
 	$ImportSprites.get_vbox().add_child(import_as_new_frame)
 
 	#Options for Export
+	var export_project_hbox := HBoxContainer.new()
 	export_all_frames = CheckBox.new()
-	export_all_frames.text = "Export all frames?"
+	export_all_frames.text = tr("EXPORT_ALLFRAMES_LABEL")
 	export_as_single_file = CheckBox.new()
-	export_as_single_file.text = "Export frames as a single file?"
+	export_as_single_file.text = tr("EXPORT_FRAMES_ASFILE_LABEL")
 	export_vertical_spritesheet = CheckBox.new()
-	export_vertical_spritesheet.text = "Vertical spritesheet?"
-	$ExportSprites.get_vbox().add_child(export_all_frames)
-	$ExportSprites.get_vbox().add_child(export_as_single_file)
-	$ExportSprites.get_vbox().add_child(export_vertical_spritesheet)
+	export_vertical_spritesheet.text = tr("EXPORT_VERTICAL_SPRITESHEET_LABEL")
+	$ExportSprites.get_vbox().add_child(export_project_hbox)
+	export_project_hbox.add_child(export_all_frames)
+	export_project_hbox.add_child(export_as_single_file)
+	export_project_hbox.add_child(export_vertical_spritesheet)
 
 	var path := "Brushes"
 	var brushes_dir := Directory.new()
@@ -938,9 +940,11 @@ func _on_SplitScreenButton_toggled(button_pressed) -> void:
 	if button_pressed:
 		Global.viewport_separator.visible = true
 		Global.second_viewport.visible = true
+		$SplitScreenButton.hint_tooltip = tr("SPLITSCREEN_HIDE_HT")
 	else:
 		Global.viewport_separator.visible = false
 		Global.second_viewport.visible = false
+		$SplitScreenButton.hint_tooltip = tr("SPLITSCREEN_HT")
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp := Global.left_color_picker.color

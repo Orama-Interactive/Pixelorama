@@ -5,7 +5,7 @@ var i
 # warning-ignore:unused_class_variable
 var currently_selected := false
 
-onready var visibility_button := $HBoxContainer/VisibilityButton
+onready var visibility_button := $VisibilityButton
 onready var label := $HBoxContainer/Label
 onready var line_edit := $HBoxContainer/LineEdit
 
