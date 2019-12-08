@@ -62,9 +62,12 @@ func camera_zoom() -> void:
 	if zoom_max > Vector2.ONE:
 		Global.camera.zoom_max = zoom_max
 		Global.camera2.zoom_max = zoom_max
+		Global.camera_preview.zoom_max = zoom_max
 	else:
 		Global.camera.zoom_max = Vector2.ONE
 		Global.camera2.zoom_max = Vector2.ONE
+		Global.camera_preview.zoom_max = Vector2.ONE
+
 	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
 	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
 	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007

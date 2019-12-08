@@ -1241,7 +1241,7 @@ margin_bottom = 70.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 106.0
+margin_bottom = 33.0
 
 [node name="ImageSize" type="Label" parent="CreateNewImage/VBoxContainer"]
 margin_right = 184.0
@@ -1452,7 +1452,7 @@ text = "Language:"
 margin_left = 61.0
 margin_right = 142.0
 margin_bottom = 21.0
-text = "English"
+text = "System Language"
 items = [ "System Language", null, false, 0, null, "Greek [el]", null, false, 1, null, "English [en]", null, false, 2, null ]
 selected = 0
 
@@ -1523,7 +1523,7 @@ script = ExtResource( 42 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 276.0
-margin_bottom = 158.0
+margin_bottom = 149.0
 
 [node name="Pixelorama" type="Label" parent="AboutDialog/AboutUI"]
 margin_right = 268.0
