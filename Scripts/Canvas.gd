@@ -108,10 +108,7 @@ func _process(delta : float) -> void:
 			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 			if !cursor_inside_canvas:
 				cursor_inside_canvas = true
-				if Global.current_left_tool == "Bucket":
-					Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/Bucket_Cursor.png"), 0, Vector2(6, 27))
-				elif Global.current_left_tool == "ColorPicker":
-					Input.set_custom_mouse_cursor(preload("res://Assets/Graphics/Tools/ColorPicker_Cursor.png"), 0, Vector2(5, 28))
+				Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Tools/%s_Cursor.png" % Global.current_left_tool), 0, Vector2(3, 24))
 		else:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:

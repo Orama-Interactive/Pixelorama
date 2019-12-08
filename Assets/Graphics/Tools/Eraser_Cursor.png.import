@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Brush_r.png-2dd42e7ea71b8fd6ecbfc2c28079712f.stex"
+path="res://.import/Eraser_Cursor.png-f692572693acb37ec2194276528a81d8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Tools/Brush_r.png"
-dest_files=[ "res://.import/Brush_r.png-2dd42e7ea71b8fd6ecbfc2c28079712f.stex" ]
+source_file="res://Assets/Graphics/Tools/Eraser_Cursor.png"
+dest_files=[ "res://.import/Eraser_Cursor.png-f692572693acb37ec2194276528a81d8.stex" ]
 
 [params]
 

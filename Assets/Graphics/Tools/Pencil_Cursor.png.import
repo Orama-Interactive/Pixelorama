@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Brush.png-be161d4821aadbd04edeb9bfd3d48744.stex"
+path="res://.import/Pencil_Cursor.png-835e48cc824d523278a13c95a3b3ec6e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Tools/Brush.png"
-dest_files=[ "res://.import/Brush.png-be161d4821aadbd04edeb9bfd3d48744.stex" ]
+source_file="res://Assets/Graphics/Tools/Pencil_Cursor.png"
+dest_files=[ "res://.import/Pencil_Cursor.png-835e48cc824d523278a13c95a3b3ec6e.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Brush_l.png-f1a1213816b51e44e3c5cea82f1143f1.stex"
+path="res://.import/LightenDarken_Cursor.png-4c3a225d3133a1ea63f3ad47f599a686.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Tools/Brush_l.png"
-dest_files=[ "res://.import/Brush_l.png-f1a1213816b51e44e3c5cea82f1143f1.stex" ]
+source_file="res://Assets/Graphics/Tools/LightenDarken_Cursor.png"
+dest_files=[ "res://.import/LightenDarken_Cursor.png-4c3a225d3133a1ea63f3ad47f599a686.stex" ]
 
 [params]
 

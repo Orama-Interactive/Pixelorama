@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Brush_l_r.png-5b0b2b1d5aaa3b4883404b24ddd63152.stex"
+path="res://.import/RectSelect_Cursor.png-a7675c7d3d9b92992266b4bedca7e03f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Tools/Brush_l_r.png"
-dest_files=[ "res://.import/Brush_l_r.png-5b0b2b1d5aaa3b4883404b24ddd63152.stex" ]
+source_file="res://Assets/Graphics/Tools/RectSelect_Cursor.png"
+dest_files=[ "res://.import/RectSelect_Cursor.png-a7675c7d3d9b92992266b4bedca7e03f.stex" ]
 
 [params]
 
