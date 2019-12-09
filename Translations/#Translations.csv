@@ -98,12 +98,12 @@ VERTMIRROR_HT	Enable vertical mirrored drawing	Ενεργοποίηση ζωγρ
 Vertical	Vertical	Κάθετα
 Current frame:	Current frame:	Τρέχον καρέ:
 Current frame: 1/1	Current frame: 1/1	Τρέχον καρέ: 1/1
-FIRSTFRAME_HT	Jump to the first frame	Μετάβαση στο πρώτο καρέ
-PREVIOUSFRAME_HT	Go to the previous frame	Μετάβαση στο προηγούμενο καρέ
-PLAYBACKWARDS_HT	Play the animation backwards (from end to beginning)	Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)
-PLAYFORWARD_HT	Play the animation forward (from beginning to end)	Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)
-NEXTFRAME_HT	Go to the next frame	Μετάβαση στο επόμενο καρέ
-LASTFRAME_HT	Jump to the last frame	Μετάβαση στο τελευταίο καρέ
+FIRSTFRAME_HT	Jump to the first frame\n(Ctrl+Home)	Μετάβαση στο πρώτο καρέ\n(Ctrl+Home)
+PREVIOUSFRAME_HT	Go to the previous frame\n(Ctrl+Left)	Μετάβαση στο προηγούμενο καρέ\n(Ctrl+Αριστερά)
+PLAYBACKWARDS_HT	Play the animation backwards (from end to beginning)\n(F4)	Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n(F4)
+PLAYFORWARD_HT	Play the animation forward (from beginning to end)\n(F5)	Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n(F5)
+NEXTFRAME_HT	Go to the next frame\n(Ctrl+Right)	Μετάβαση στο επόμενο καρέ\n(Ctrl+Δεξιά)
+LASTFRAME_HT	Jump to the last frame\n(Ctrl+End)	Μετάβαση στο τελευταίο καρέ\n(Ctrl+End)
 FPS_HT	How many frames per second should the animation preview be?\nThe more FPS, the faster the animation plays.	Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\nΌσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση.
 No loop	No loop	Όχι επανάληψη
 Cycle loop	Cycle loop	Κυκλική επανάληψη
