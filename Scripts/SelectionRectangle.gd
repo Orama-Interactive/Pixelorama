@@ -96,7 +96,7 @@ func _process(delta : float) -> void:
 
 	#Handle copy
 	if Input.is_action_just_pressed("copy") && Global.selected_pixels.size() > 0:
-		#And save as custom brush
+		#Save as custom brush
 		var brush_img := Image.new()
 		brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
 		if brush_img.is_invisible():
@@ -105,6 +105,7 @@ func _process(delta : float) -> void:
 		Global.custom_brushes.append(brush_img)
 		Global.create_brush_button(brush_img)
 
+		#Have it in the clipboard so it can be pasted later
 		Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
 
 	#Handle paste

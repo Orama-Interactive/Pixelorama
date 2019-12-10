@@ -215,6 +215,7 @@ rect_min_size = Vector2( 224, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -557,7 +558,6 @@ step = 0.01
 value = 0.1
 
 [node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
-editor/display_folded = true
 margin_top = 112.0
 margin_right = 208.0
 margin_bottom = 155.0
