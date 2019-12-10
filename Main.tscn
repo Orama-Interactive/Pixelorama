@@ -214,7 +214,6 @@ rect_min_size = Vector2( 224, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -336,16 +335,19 @@ button_mask = 3
 texture_normal = ExtResource( 8 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
 size_flags_vertical = 3
 custom_constants/separation = 8
+alignment = 1
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
 editor/display_folded = true
+margin_top = 35.0
 margin_right = 208.0
-margin_bottom = 32.0
+margin_bottom = 67.0
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter"]
 margin_left = 27.0
@@ -401,17 +403,15 @@ flat = true
 color = Color( 1, 1, 1, 1 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 40.0
+margin_top = 75.0
 margin_right = 208.0
-margin_bottom = 44.0
+margin_bottom = 79.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
 editor/display_folded = true
-margin_top = 52.0
+margin_top = 87.0
 margin_right = 208.0
 margin_bottom = 242.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 margin_right = 208.0
@@ -595,9 +595,7 @@ margin_bottom = 254.0
 editor/display_folded = true
 margin_top = 262.0
 margin_right = 208.0
-margin_bottom = 453.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_bottom = 417.0
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 margin_right = 208.0
@@ -787,6 +785,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
+editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -849,8 +848,11 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 16 )
 
 [node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+visible = false
 z_index = 1
 color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+invert_enable = true
+invert_border = 0.5
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 17 )
 
@@ -1118,7 +1120,6 @@ rect_min_size = Vector2( 224, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 16.0
-custom_constants/separation = 3
 
 [node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
@@ -1140,38 +1141,45 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 16 )
 
 [node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 167.0
+margin_top = 168.0
 margin_right = 224.0
-margin_bottom = 182.0
+margin_bottom = 183.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Layers"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 185.0
+margin_top = 187.0
 margin_right = 224.0
-margin_bottom = 189.0
+margin_bottom = 191.0
 
-[node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
-margin_top = 192.0
+margin_top = 195.0
 margin_right = 224.0
-margin_bottom = 224.0
+margin_bottom = 604.0
+size_flags_vertical = 3
+custom_constants/separation = 6
 
-[node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons"]
+[node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+editor/display_folded = true
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons"]
 margin_left = 6.0
 margin_right = 218.0
 margin_bottom = 32.0
 
-[node name="AddLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons"]
+[node name="AddLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons"]
 margin_right = 32.0
 margin_bottom = 32.0
 hint_tooltip = "LAYERNEW_HT"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 29 )
 
-[node name="RemoveLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons"]
+[node name="RemoveLayerButton" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons"]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
@@ -1181,7 +1189,7 @@ disabled = true
 texture_normal = ExtResource( 30 )
 texture_disabled = ExtResource( 31 )
 
-[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons"]
+[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
@@ -1191,7 +1199,7 @@ disabled = true
 texture_normal = ExtResource( 32 )
 texture_disabled = ExtResource( 33 )
 
-[node name="MoveDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons"]
+[node name="MoveDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons"]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
@@ -1201,7 +1209,7 @@ disabled = true
 texture_normal = ExtResource( 34 )
 texture_disabled = ExtResource( 35 )
 
-[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons"]
+[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons"]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
@@ -1209,7 +1217,7 @@ hint_tooltip = "LAYERCLONE_HT"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 36 )
 
-[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons"]
+[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons"]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 32.0
@@ -1219,14 +1227,14 @@ disabled = true
 texture_normal = ExtResource( 37 )
 texture_disabled = ExtResource( 38 )
 
-[node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 227.0
+[node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+margin_top = 38.0
 margin_right = 224.0
-margin_bottom = 604.0
+margin_bottom = 409.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/ScrollLayers"]
+[node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/ScrollLayers"]
 margin_right = 224.0
 size_flags_horizontal = 3
 
@@ -1706,8 +1714,10 @@ dialog_text = "QUIT_LABEL"
 [node name="AnimationTimer" type="Timer" parent="."]
 
 [node name="LeftCursor" type="Sprite" parent="."]
+visible = false
 
 [node name="RightCursor" type="Sprite" parent="."]
+visible = false
 [connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
@@ -1752,12 +1762,12 @@ dialog_text = "QUIT_LABEL"
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons/AddLayerButton" to="." method="add_layer"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/AddLayerButton" to="." method="add_layer"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/RemoveLayerButton" to="." method="_on_RemoveLayerButton_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]

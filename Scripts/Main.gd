@@ -24,7 +24,7 @@ func _ready() -> void:
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
 
-	#Make sure locales are always sorted, in the same order
+	# Make sure locales are always sorted, in the same order
 	loaded_locales = TranslationServer.get_loaded_locales()
 	loaded_locales.sort()
 
@@ -44,33 +44,33 @@ func _ready() -> void:
 			OS.window_size = config_cache.get_value("window", "size")
 
 	var file_menu_items := {
-		tr("New...") : KEY_MASK_CTRL + KEY_N,
-		tr("Open...") : KEY_MASK_CTRL + KEY_O,
-		tr("Save...") : KEY_MASK_CTRL + KEY_S,
-		tr("Save as...") : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
-		tr("Import PNG...") : KEY_MASK_CTRL + KEY_I,
-		tr("Export PNG...") : KEY_MASK_CTRL + KEY_E,
-		tr("Export PNG as...") : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
-		tr("Quit") : KEY_MASK_CTRL + KEY_Q
+		"New..." : KEY_MASK_CTRL + KEY_N,
+		"Open..." : KEY_MASK_CTRL + KEY_O,
+		"Save..." : KEY_MASK_CTRL + KEY_S,
+		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
+		"Import PNG..." : KEY_MASK_CTRL + KEY_I,
+		"Export PNG..." : KEY_MASK_CTRL + KEY_E,
+		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
+		"Quit" : KEY_MASK_CTRL + KEY_Q
 		}
 	var edit_menu_items := {
-		tr("Undo") : KEY_MASK_CTRL + KEY_Z,
-		tr("Redo") : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
-		tr("Scale Image") : 0,
-		tr("Crop Image") : 0,
-		tr("Clear Selection") : 0,
-		tr("Flip Horizontal") : KEY_MASK_SHIFT + KEY_H,
-		tr("Flip Vertical") : KEY_MASK_SHIFT + KEY_V,
-		tr("Preferences") : 0
+		"Undo" : KEY_MASK_CTRL + KEY_Z,
+		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
+		"Scale Image" : 0,
+		"Crop Image" : 0,
+		"Clear Selection" : 0,
+		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
+		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
+		"Preferences" : 0
 		}
 	var view_menu_items := {
-		tr("Tile Mode") : KEY_MASK_CTRL + KEY_T,
-		tr("Show Grid") : KEY_MASK_CTRL + KEY_G,
-		tr("Show Rulers") : KEY_MASK_CTRL + KEY_R,
-		tr("Show Guides") : KEY_MASK_CTRL + KEY_Y
+		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
+		"Show Grid" : KEY_MASK_CTRL + KEY_G,
+		"Show Rulers" : KEY_MASK_CTRL + KEY_R,
+		"Show Guides" : KEY_MASK_CTRL + KEY_Y
 		}
 	var help_menu_items := {
-		tr("About Pixelorama") : 0
+		"About Pixelorama" : 0
 		}
 
 	# Load language
@@ -164,9 +164,9 @@ func _ready() -> void:
 	Global.brushes_from_files = Global.custom_brushes.size()
 
 func _input(event : InputEvent) -> void:
-	Global.left_cursor.position = get_global_mouse_position() + Vector2(-20, 20)
+	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
-	Global.right_cursor.position = get_global_mouse_position() + Vector2(20, 20)
+	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 	Global.right_cursor.texture = Global.right_cursor_tool_texture
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen

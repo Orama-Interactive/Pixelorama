@@ -26,6 +26,11 @@ func _process(delta : float) -> void:
 	var current_layer_index := Global.canvas.current_layer_index
 	var layer : Image = Global.canvas.layers[current_layer_index][0]
 
+	if end_pos == start_pos:
+		Global.selection_rectangle.visible = false
+	else:
+		Global.selection_rectangle.visible = true
+
 	if point_in_rectangle(mouse_pos, polygon[0], polygon[2]) && Global.selected_pixels.size() > 0 && (Global.current_left_tool == "RectSelect" || Global.current_right_tool == "RectSelect"):
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
