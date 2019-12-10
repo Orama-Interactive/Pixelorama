@@ -31,17 +31,6 @@ func _ready() -> void:
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
 
-	# Load language
-	if config_cache.has_section_key("preferences", "locale"):
-		var saved_locale : String = config_cache.get_value("preferences", "locale")
-		TranslationServer.set_locale(saved_locale)
-
-		# Set the language option menu's default selected option to the loaded locale
-		var locale_index := loaded_locales.find(saved_locale)
-		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
-	else: # If the user doesn't have a language preference, set it to their OS' locale
-		TranslationServer.set_locale(OS.get_locale())
-
 	# Restore the window position/size if values are present in the configuration cache
 	if config_cache.has_section_key("window", "screen"):
 		OS.current_screen = config_cache.get_value("window", "screen")
@@ -83,6 +72,18 @@ func _ready() -> void:
 	var help_menu_items := {
 		tr("About Pixelorama") : 0
 		}
+
+	# Load language
+	if config_cache.has_section_key("preferences", "locale"):
+		var saved_locale : String = config_cache.get_value("preferences", "locale")
+		TranslationServer.set_locale(saved_locale)
+
+		# Set the language option menu's default selected option to the loaded locale
+		var locale_index := loaded_locales.find(saved_locale)
+		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
+	else: # If the user doesn't have a language preference, set it to their OS' locale
+		TranslationServer.set_locale(OS.get_locale())
+
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	view_menu = Global.view_menu.get_popup()
