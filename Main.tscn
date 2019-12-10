@@ -121,7 +121,6 @@ shortcut = SubResource( 16 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_default_cursor_shape = 16
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -782,7 +781,6 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -809,7 +807,6 @@ enabled_focus_mode = 0
 script = ExtResource( 13 )
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-editor/display_folded = true
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 478.0
@@ -1707,6 +1704,10 @@ resizable = true
 dialog_text = "QUIT_LABEL"
 
 [node name="AnimationTimer" type="Timer" parent="."]
+
+[node name="LeftCursor" type="Sprite" parent="."]
+
+[node name="RightCursor" type="Sprite" parent="."]
 [connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]

@@ -164,6 +164,10 @@ func _ready() -> void:
 	Global.brushes_from_files = Global.custom_brushes.size()
 
 func _input(event : InputEvent) -> void:
+	Global.left_cursor.position = get_global_mouse_position() + Vector2(-20, 20)
+	Global.left_cursor.texture = Global.left_cursor_tool_texture
+	Global.right_cursor.position = get_global_mouse_position() + Vector2(20, 20)
+	Global.right_cursor.texture = Global.right_cursor_tool_texture
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
@@ -319,8 +323,8 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.canvas = load("res://Prefabs/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
 
-	Global.canvas_parent.add_child(Global.canvas)
 	Global.canvases.append(Global.canvas)
+	Global.canvas_parent.add_child(Global.canvas)
 	Global.current_frame = 0
 	if fill_color.a > 0:
 		Global.canvas.layers[0][0].fill(fill_color)
@@ -497,8 +501,8 @@ func _on_ImportSprites_files_selected(paths) -> void:
 		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
 		canvas.layers.append([image, tex, "Layer 0", true])
 		canvas.frame = i
-		Global.canvas_parent.add_child(canvas)
 		Global.canvases.append(canvas)
+		Global.canvas_parent.add_child(canvas)
 		canvas.visible = false
 		if path == paths[0]: #If it's the first file
 			max_size = canvas.size
@@ -711,6 +715,9 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_r.png" % tool_name)
 		else:
 			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s.png" % tool_name)
+
+	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tools/%s_Cursor.png" % Global.current_left_tool))
+	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tools/%s_Cursor.png" % Global.current_right_tool))
 
 func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.left_square_indicator_visible = button_pressed

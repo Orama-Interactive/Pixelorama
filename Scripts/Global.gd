@@ -12,6 +12,8 @@ var has_focus := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
+var left_cursor_tool_texture : ImageTexture
+var right_cursor_tool_texture : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
@@ -103,6 +105,8 @@ var custom_right_brush_texture := ImageTexture.new()
 
 #Nodes
 var control : Node
+var left_cursor : Sprite
+var right_cursor : Sprite
 var canvas : Canvas
 var canvas_parent : Node
 var main_viewport : ViewportContainer
@@ -178,8 +182,14 @@ func _ready() -> void:
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
+	left_cursor = find_node_by_name(root, "LeftCursor")
+	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
+	left_cursor_tool_texture = ImageTexture.new()
+	left_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tools/Pencil_Cursor.png"))
+	right_cursor_tool_texture = ImageTexture.new()
+	right_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tools/Eraser_Cursor.png"))
 	canvas_parent = canvas.get_parent()
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")

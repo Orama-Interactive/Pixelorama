@@ -113,7 +113,9 @@ func _process(delta : float) -> void:
 			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 			if !cursor_inside_canvas:
 				cursor_inside_canvas = true
-				Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Tools/%s_Cursor.png" % Global.current_left_tool), 0, Vector2(3, 24))
+				Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Cursor.png"), 0, Vector2(15, 15))
+				Global.left_cursor.visible = true
+				Global.right_cursor.visible = true
 		else:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:
@@ -121,6 +123,8 @@ func _process(delta : float) -> void:
 			Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 			if cursor_inside_canvas:
 				cursor_inside_canvas = false
+				Global.left_cursor.visible = false
+				Global.right_cursor.visible = false
 				Input.set_custom_mouse_cursor(null)
 
 	#Handle Undo/Redo
