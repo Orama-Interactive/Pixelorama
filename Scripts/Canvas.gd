@@ -489,6 +489,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 		var custom_brush_image : Image
 		var horizontal_mirror := false
 		var vertical_mirror := false
+		var ld := 0
+		var ld_amount := 0.1
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
 			brush_type = Global.current_left_brush_type
@@ -496,6 +498,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			custom_brush_image = Global.custom_left_brush_image
 			horizontal_mirror = Global.left_horizontal_mirror
 			vertical_mirror = Global.left_vertical_mirror
+			ld = Global.left_ld
+			ld_amount = Global.left_ld_amount
 		elif current_mouse_button == "right_mouse":
 			brush_size = Global.right_brush_size
 			brush_type = Global.current_right_brush_type
@@ -503,6 +507,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			custom_brush_image = Global.custom_right_brush_image
 			horizontal_mirror = Global.right_horizontal_mirror
 			vertical_mirror = Global.right_vertical_mirror
+			ld = Global.right_ld
+			ld_amount = Global.right_ld_amount
 
 		var west_limit := location.x
 		var east_limit := location.x + size.x
@@ -529,25 +535,55 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 						var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
 						#Don't draw the same pixel over and over and don't re-lighten/darken it
-						if layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y) != color && !(pos_floored in lighten_darken_pixels):
-							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
+						var current_pixel : Color = layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y)
+						if current_pixel != color && !(pos_floored in lighten_darken_pixels):
 							if current_action == "LightenDarken":
+								if ld == 0: #Lighten
+									color = current_pixel.lightened(ld_amount)
+								else:
+									color = current_pixel.darkened(ld_amount)
 								lighten_darken_pixels.append(pos_floored)
+
+							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
 							sprite_changed_this_frame = true
 
 							#Handle mirroring
 							var mirror_x := east_limit + west_limit - cur_pos_x - 1
 							var mirror_y := south_limit + north_limit - cur_pos_y - 1
 							if horizontal_mirror:
-								if layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y) != color: #don't draw the same pixel over and over
+								current_pixel = layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y)
+								if current_pixel != color: #don't draw the same pixel over and over
+									if current_action == "LightenDarken":
+										if ld == 0: #Lighten
+											color = current_pixel.lightened(ld_amount)
+										else:
+											color = current_pixel.darkened(ld_amount)
+										lighten_darken_pixels.append(pos_floored)
+
 									layers[current_layer_index][0].set_pixel(mirror_x, cur_pos_y, color)
 									sprite_changed_this_frame = true
 							if vertical_mirror:
-								if layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y) != color: #don't draw the same pixel over and over
+								current_pixel = layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y)
+								if current_pixel != color: #don't draw the same pixel over and over
+									if current_action == "LightenDarken":
+										if ld == 0: #Lighten
+											color = current_pixel.lightened(ld_amount)
+										else:
+											color = current_pixel.darkened(ld_amount)
+										lighten_darken_pixels.append(pos_floored)
+
 									layers[current_layer_index][0].set_pixel(cur_pos_x, mirror_y, color)
 									sprite_changed_this_frame = true
 							if horizontal_mirror && vertical_mirror:
-								if layers[current_layer_index][0].get_pixel(mirror_x, mirror_y) != color: #don't draw the same pixel over and over
+								current_pixel = layers[current_layer_index][0].get_pixel(mirror_x, mirror_y)
+								if current_pixel != color: #don't draw the same pixel over and over
+									if current_action == "LightenDarken":
+										if ld == 0: #Lighten
+											color = current_pixel.lightened(ld_amount)
+										else:
+											color = current_pixel.darkened(ld_amount)
+										lighten_darken_pixels.append(pos_floored)
+
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
 									sprite_changed_this_frame = true
 
