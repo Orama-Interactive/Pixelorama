@@ -457,3 +457,7 @@ func blend_image_with_color(image : Image, color : Color, interpolate_factor : f
 			else: #If color is transparent - if it's the eraser
 				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
 	return blended_image
+
+func _exit_tree() -> void:
+	# Thanks to qarmin from GitHub for pointing this out
+	undo_redo.free()

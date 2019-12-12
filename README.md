@@ -26,6 +26,7 @@ Current features as of version v0.5:
 - Greek localization support!
 
 Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
+Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
 
 Download it as a stand-alone on itch.io: https://orama-interactive.itch.io/pixelorama
 
