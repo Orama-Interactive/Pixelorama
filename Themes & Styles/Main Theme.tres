@@ -4,3 +4,5 @@
 
 [resource]
 default_font = ExtResource( 1 )
+GridContainer/constants/hseparation = 0
+GridContainer/constants/vseparation = 0

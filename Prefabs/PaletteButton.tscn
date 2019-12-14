@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_hover.tres" type="StyleBox" id=1]
+[ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_pressedr.tres" type="StyleBox" id=2]
+[ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=4]
+
+[sub_resource type="ImageTexture" id=1]
+
+[node name="PaletteButton" type="Button"]
+margin_right = 22.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 3 )
+icon = SubResource( 1 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
