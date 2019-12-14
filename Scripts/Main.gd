@@ -24,8 +24,15 @@ func _ready() -> void:
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
 
+	# `TranslationServer.get_loaded_locales()` was added in 3.2beta and isn't available in 3.1.2.
+	# The `has_method()` check and the `else` branch can be removed once 3.2 is released.
+	if TranslationServer.has_method("get_loaded_locales"):
+		loaded_locales = TranslationServer.get_loaded_locales()
+	else:
+		# Hardcoded list of locales
+		loaded_locales = ["el", "en"]
+
 	# Make sure locales are always sorted, in the same order
-	loaded_locales = TranslationServer.get_loaded_locales()
 	loaded_locales.sort()
 
 	# Load settings from the config file
