@@ -180,7 +180,7 @@ right_colorpicker_tool={
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation" )
+translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation", "res://Translations/#Translations.fr.translation" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]
