@@ -1042,4 +1042,3 @@ func _exit_tree() -> void:
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	Global.palette_container.on_palette_select(palette_name)
-	pass

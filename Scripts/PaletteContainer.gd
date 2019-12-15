@@ -41,27 +41,23 @@ var default_palette = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#Global.palettes["Default"] = default_palette
-
 	_load_palettes()
 
 	on_palette_select(current_palette)
-	pass # Replace with function body.
 
 func _clear_swatches() -> void:
 	for child in get_children():
 		if child is BaseButton:
 			child.disconnect("pressed", self, "on_color_select")
 			child.queue_free()
-	pass
 
 func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
+	current_palette = palette_name
 	if Global.palettes.has(palette_name):
 		_display_palette(Global.palettes[palette_name])
 	else:
 		_display_palette(Global.palettes["Default"])
-	pass
 
 func _display_palette(palette : Array) -> void:
 	var index := 0
@@ -73,7 +69,6 @@ func _display_palette(palette : Array) -> void:
 		new_button.connect("pressed", self, "on_color_select", [index])
 		add_child(new_button)
 		index += 1
-	pass
 
 func on_color_select(index : int) -> void:
 	var color = Color(Global.palettes[current_palette][index].data)
@@ -83,7 +78,6 @@ func on_color_select(index : int) -> void:
 	elif Input.is_action_just_released("right_mouse"):
 		Global.right_color_picker.color = color
 		Global.update_right_custom_brush()
-	pass
 
 func _load_palettes() -> void:
 	var files := []
@@ -118,7 +112,6 @@ func _load_palettes() -> void:
 
 	for item in Global.palette_option_button.items:
 		print(item)
-	pass
 
 func load_palette(path : String) -> String:
 	var file := File.new()
@@ -144,7 +137,7 @@ func load_palette(path : String) -> String:
 
 	return palette_name
 
-func _save_palette(palette : Array, name : String, path : String):
+func _save_palette(palette : Array, name : String, path : String) -> void:
 	var file := File.new()
 	file.open(path, File.WRITE)
 
@@ -154,9 +147,3 @@ func _save_palette(palette : Array, name : String, path : String):
 
 	file.store_string(JSON.print(data))
 	file.close()
-
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
