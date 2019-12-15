@@ -1025,6 +1025,10 @@ func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
 
 func _on_QuitDialog_confirmed() -> void:
+	# Darken the UI to denote that the application is currently exiting
+	# (it won't respond to user input in this state).
+	modulate = Color(0.5, 0.5, 0.5)
+
 	get_tree().quit()
 
 func _exit_tree() -> void:
