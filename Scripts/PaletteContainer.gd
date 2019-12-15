@@ -1,10 +1,6 @@
 extends GridContainer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-var palette_button = load("res://Prefabs/PaletteButton.tscn");
+var palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
 var current_palette = "Default"
 
@@ -44,7 +40,7 @@ var default_palette = [
 ]
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	#Global.palettes["Default"] = default_palette
 	
 	_load_palettes()
@@ -52,14 +48,14 @@ func _ready():
 	on_palette_select(current_palette)
 	pass # Replace with function body.
 
-func _clear_swatches():
+func _clear_swatches() -> void:
 	for child in get_children():
 		if child is BaseButton:
 			child.disconnect("pressed", self, "on_color_select")
 			child.queue_free()
 	pass
 
-func on_palette_select(palette_name):
+func on_palette_select(palette_name) -> void:
 	_clear_swatches()
 	if Global.palettes.has(palette_name):
 		_display_palette(Global.palettes[palette_name])
@@ -67,8 +63,8 @@ func on_palette_select(palette_name):
 		_display_palette(Global.palettes["Default"])
 	pass
 
-func _display_palette(palette):
-	var index = 0
+func _display_palette(palette) -> void:
+	var index := 0
 	for color_data in palette:
 		var color = Color(color_data.data)
 		var new_button = palette_button.instance()
@@ -79,11 +75,16 @@ func _display_palette(palette):
 		index += 1
 	pass
 
-func on_color_select(index):
-	Global.left_color_picker.color = default_palette[index]
+func on_color_select(index : int) -> void:
+	if Input.is_action_just_released("left_mouse"):
+		Global.left_color_picker.color = default_palette[index]
+		Global.update_left_custom_brush()
+	elif Input.is_action_just_released("right_mouse"):
+		Global.right_color_picker.color = default_palette[index]
+		Global.update_right_custom_brush()
 	pass
 
-func _load_palettes():
+func _load_palettes() -> void:
 	var files := []
 	
 	var dir := Directory.new()
@@ -110,7 +111,7 @@ func _load_palettes():
 			Global.palette_option_button.add_item(success)
 	pass
 
-func _load_palette(path):
+func _load_palette(path) -> String:
 	var file := File.new()
 	file.open(path, File.READ)
 	

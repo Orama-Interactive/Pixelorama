@@ -15,6 +15,7 @@ hint_tooltip = "Color Name"
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/normal = ExtResource( 3 )
+button_mask = 3
 icon = SubResource( 1 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
