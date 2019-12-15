@@ -13,7 +13,7 @@ func _ready() -> void:
 	changed_selection()
 
 func _input(event : InputEvent):
-	if event.is_action_released("ui_accept") && line_edit.visible:
+	if event.is_action_released("ui_accept") && line_edit.visible && event.scancode != KEY_SPACE:
 		label.visible = true
 		line_edit.visible = false
 		line_edit.editable = false

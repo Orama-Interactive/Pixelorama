@@ -61,6 +61,10 @@ func _process(delta : float) -> void:
 				Global.canvas.update_texture(Global.canvas.current_layer_index)
 			tex.create_from_image(img, 0)
 			update()
+
+			# Makes line2d invisible
+			if is_instance_valid(Global.canvas.line_2d):	# Checks to see if line_2d object still exists
+				Global.canvas.line_2d.default_color = Color(0, 0, 0, 0)
 	else:
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
 
@@ -98,6 +102,10 @@ func _process(delta : float) -> void:
 					Global.selected_pixels.append(Vector2(xx, yy))
 
 			Global.canvas.handle_redo("Rectangle Select") #Redo
+
+			# Makes line2d visible
+			if is_instance_valid(Global.canvas.line_2d):	# Checks to see if line_2d object still exists
+				Global.canvas.line_2d.default_color = Color.darkgray
 
 	#Handle copy
 	if Input.is_action_just_pressed("copy") && Global.selected_pixels.size() > 0:

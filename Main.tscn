@@ -133,14 +133,12 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="MenuContainer" type="Panel" parent="MenuAndUI"]
-editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
-editor/display_folded = true
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 1010.0
@@ -150,6 +148,7 @@ margin_right = 31.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "File"
+switch_on_hover = true
 
 [node name="EditMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 35.0
@@ -157,6 +156,7 @@ margin_right = 68.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "Edit"
+switch_on_hover = true
 
 [node name="ViewMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 72.0
@@ -164,6 +164,7 @@ margin_right = 110.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "View"
+switch_on_hover = true
 
 [node name="HelpMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 114.0
@@ -171,6 +172,7 @@ margin_right = 151.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "Help"
+switch_on_hover = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
 editor/display_folded = true
@@ -770,7 +772,6 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -804,7 +805,6 @@ enabled_focus_mode = 0
 script = ExtResource( 13 )
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-editor/display_folded = true
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 478.0
@@ -1158,7 +1158,7 @@ margin_bottom = 199.0
 [node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_top = 203.0
 margin_right = 224.0
-margin_bottom = 388.0
+margin_bottom = 384.0
 size_flags_vertical = 3
 custom_constants/separation = 6
 
@@ -1230,7 +1230,7 @@ texture_disabled = ExtResource( 38 )
 editor/display_folded = true
 margin_top = 38.0
 margin_right = 224.0
-margin_bottom = 185.0
+margin_bottom = 181.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1238,29 +1238,33 @@ size_flags_vertical = 3
 margin_right = 224.0
 size_flags_horizontal = 3
 
-[node name="PaletteLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 392.0
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 388.0
 margin_right = 224.0
-margin_bottom = 407.0
+margin_bottom = 392.0
+
+[node name="PaletteLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 396.0
+margin_right = 224.0
+margin_bottom = 411.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Palette"
 align = 1
 
-[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 411.0
+[node name="HSeparator4" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 415.0
 margin_right = 224.0
-margin_bottom = 415.0
+margin_bottom = 419.0
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 419.0
+margin_top = 423.0
 margin_right = 224.0
 margin_bottom = 604.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
@@ -1276,7 +1280,7 @@ margin_right = 68.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 30 )
 
-[node name="OptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
+[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
 margin_left = 72.0
 margin_right = 187.0
 margin_bottom = 32.0
@@ -1291,7 +1295,7 @@ text = "Edit"
 [node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
 margin_top = 36.0
 margin_right = 224.0
-margin_bottom = 185.0
+margin_bottom = 181.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1557,13 +1561,13 @@ resizable = true
 [node name="VBoxContainer" type="VBoxContainer" parent="PreferencesDialog"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -97.5
+margin_left = -92.0
 margin_top = 8.0
-margin_right = 97.5
-margin_bottom = 123.0
+margin_right = 92.0
+margin_bottom = 33.0
 
 [node name="OptionsContainer" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
-margin_right = 195.0
+margin_right = 184.0
 margin_bottom = 21.0
 columns = 2
 
@@ -1574,23 +1578,23 @@ margin_bottom = 18.0
 text = "Language:"
 
 [node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
-margin_left = 57.0
-margin_right = 195.0
+margin_left = 61.0
+margin_right = 142.0
 margin_bottom = 21.0
 text = "System Language"
-items = [ "System Language", null, false, 0, null, "Greek [el]", null, false, 1, null, "English [en]", null, false, 2, null, "French [fr]", null, false, 3, null ]
+items = [ "System Language", null, false, 0, null, "German [de]", null, false, 1, null, "Greek [el]", null, false, 2, null, "English [en]", null, false, 3, null, "French [fr]", null, false, 4, null ]
 selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 25.0
-margin_right = 195.0
+margin_right = 184.0
 margin_bottom = 40.0
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 44.0
-margin_right = 195.0
-margin_bottom = 115.0
+margin_right = 184.0
+margin_bottom = 123.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
@@ -1600,8 +1604,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_right = 103.0
+margin_left = 43.0
+margin_right = 107.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1609,32 +1613,32 @@ value = 1.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 30.0
+margin_top = 34.0
 margin_right = 39.0
-margin_bottom = 45.0
+margin_bottom = 49.0
 text = "Height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 25.0
-margin_right = 103.0
-margin_bottom = 50.0
+margin_left = 43.0
+margin_top = 29.0
+margin_right = 107.0
+margin_bottom = 54.0
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
 suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 53.0
+margin_top = 61.0
 margin_right = 39.0
-margin_bottom = 68.0
+margin_bottom = 76.0
 text = "Color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 50.0
-margin_right = 103.0
-margin_bottom = 71.0
+margin_left = 43.0
+margin_top = 58.0
+margin_right = 107.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 64, 20 )
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
@@ -1764,6 +1768,8 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
+[connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
