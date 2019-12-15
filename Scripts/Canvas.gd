@@ -256,7 +256,8 @@ func _process(delta : float) -> void:
 		is_making_line = true
 	elif Input.is_action_just_released("shift"):
 		is_making_line = false
-		line_2d.queue_free()
+		if is_instance_valid(line_2d):
+			line_2d.queue_free()
 		
 	if is_making_line:
 		line_2d.set_point_position(1, mouse_pos)
