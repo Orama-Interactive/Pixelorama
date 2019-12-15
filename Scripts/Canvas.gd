@@ -257,10 +257,10 @@ func _process(delta : float) -> void:
 	elif Input.is_action_just_released("shift"):
 		is_making_line = false
 		line_2d.queue_free()
-		
+
 	if is_making_line:
 		line_2d.set_point_position(1, mouse_pos)
-	
+
 
 	if is_making_selection != "None": #If we're making a selection
 		if Input.is_action_just_released(is_making_selection): #Finish selection when button is released
@@ -648,7 +648,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 
 			layers[current_layer_index][0].lock()
 			sprite_changed_this_frame = true
-			
+
 		previous_mouse_pos = current_pixel
 		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
 		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)

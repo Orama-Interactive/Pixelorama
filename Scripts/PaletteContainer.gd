@@ -42,9 +42,9 @@ var default_palette = [
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Global.palettes["Default"] = default_palette
-	
+
 	_load_palettes()
-	
+
 	on_palette_select(current_palette)
 	pass # Replace with function body.
 
@@ -87,14 +87,14 @@ func on_color_select(index : int) -> void:
 
 func _load_palettes() -> void:
 	var files := []
-	
+
 	var dir := Directory.new()
-	
+
 	if not dir.dir_exists("user://palettes"):
 		dir.make_dir("user://palettes");
 		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
 		dir.copy("res://Assets/Graphics/Palette/bubblegum16.json","user://palettes/bubblegum16.json");
-	
+
 	dir.open("user://palettes")
 	dir.list_dir_begin()
 
@@ -106,7 +106,7 @@ func _load_palettes() -> void:
 			files.append(file_name)
 
 	dir.list_dir_end()
-	
+
 	for file_name in files:
 		var result : String = load_palette("user://palettes/" + file_name)
 		if result:
@@ -115,7 +115,7 @@ func _load_palettes() -> void:
 			Global.palette_option_button.set_item_metadata(index, result)
 			if result == "Default":
 				Global.palette_option_button.select(index)
-		
+
 	for item in Global.palette_option_button.items:
 		print(item)
 	pass
@@ -123,7 +123,7 @@ func _load_palettes() -> void:
 func load_palette(path : String) -> String:
 	var file := File.new()
 	file.open(path, File.READ)
-	
+
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)
 	var result = {}
@@ -139,22 +139,22 @@ func load_palette(path : String) -> String:
 		if data.has("name"):
 			palette_name = data.name
 			Global.palettes[data.name] = data.colors
-	
+
 	file.close()
-	
+
 	return palette_name
 
 func _save_palette(palette : Array, name : String, path : String):
 	var file := File.new()
 	file.open(path, File.WRITE)
-	
+
 	var data := {}
 	data.name = name
 	data.colors = palette
-	
+
 	file.store_string(JSON.print(data))
 	file.close()
-	
+
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

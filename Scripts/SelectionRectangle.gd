@@ -61,7 +61,7 @@ func _process(delta : float) -> void:
 				Global.canvas.update_texture(Global.canvas.current_layer_index)
 			tex.create_from_image(img, 0)
 			update()
-			
+
 			# Makes line2d invisible
 			if weakref(Global.canvas.line_2d).get_ref():	# Checks to see if line_2d object still exists
 				Global.canvas.line_2d.default_color = Color(0, 0, 0, 0)
@@ -102,7 +102,7 @@ func _process(delta : float) -> void:
 					Global.selected_pixels.append(Vector2(xx, yy))
 
 			Global.canvas.handle_redo("Rectangle Select") #Redo
-			
+
 			# Makes line2d visible
 			if weakref(Global.canvas.line_2d).get_ref():	# Checks to see if line_2d object still exists
 				Global.canvas.line_2d.default_color = Color.darkgray

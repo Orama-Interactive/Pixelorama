@@ -12,7 +12,7 @@ Current features as of version v0.5:
 - Are you an animator? Then you've come to the right place! Pixelorama has its own Animation Timeline just for you!​
 - Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames.
 - Export your gorgeous art as PNG files.
-- Save snd open your projects as Pixelorama's custom file format, .pxo
+- Save and open your projects as Pixelorama's custom file format, .pxo
 - Undo/Redo support!
 - Horizontal & vertical mirrored drawing!
 - Tile Mode for pattern creation!

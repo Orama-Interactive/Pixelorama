@@ -267,7 +267,7 @@ func _ready() -> void:
 	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
 	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
-	
+
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	remove_palette_button = find_node_by_name(root, "RemovePalette")
 	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
