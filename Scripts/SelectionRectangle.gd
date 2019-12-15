@@ -63,7 +63,7 @@ func _process(delta : float) -> void:
 			update()
 
 			# Makes line2d invisible
-			if weakref(Global.canvas.line_2d).get_ref():	# Checks to see if line_2d object still exists
+			if is_instance_valid(Global.canvas.line_2d):	# Checks to see if line_2d object still exists
 				Global.canvas.line_2d.default_color = Color(0, 0, 0, 0)
 	else:
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
@@ -104,7 +104,7 @@ func _process(delta : float) -> void:
 			Global.canvas.handle_redo("Rectangle Select") #Redo
 
 			# Makes line2d visible
-			if weakref(Global.canvas.line_2d).get_ref():	# Checks to see if line_2d object still exists
+			if is_instance_valid(Global.canvas.line_2d):	# Checks to see if line_2d object still exists
 				Global.canvas.line_2d.default_color = Color.darkgray
 
 	#Handle copy
