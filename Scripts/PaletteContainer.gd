@@ -55,7 +55,7 @@ func _clear_swatches() -> void:
 			child.queue_free()
 	pass
 
-func on_palette_select(palette_name) -> void:
+func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
 	if Global.palettes.has(palette_name):
 		_display_palette(Global.palettes[palette_name])
@@ -63,7 +63,7 @@ func on_palette_select(palette_name) -> void:
 		_display_palette(Global.palettes["Default"])
 	pass
 
-func _display_palette(palette) -> void:
+func _display_palette(palette : Array) -> void:
 	var index := 0
 	for color_data in palette:
 		var color = Color(color_data.data)
@@ -78,11 +78,9 @@ func _display_palette(palette) -> void:
 func on_color_select(index : int) -> void:
 	var color = Color(Global.palettes[current_palette][index].data)
 	if Input.is_action_just_released("left_mouse"):
-		print("left")
 		Global.left_color_picker.color = color
 		Global.update_left_custom_brush()
 	elif Input.is_action_just_released("right_mouse"):
-		print("right")
 		Global.right_color_picker.color = color
 		Global.update_right_custom_brush()
 	pass
@@ -95,6 +93,7 @@ func _load_palettes() -> void:
 	if not dir.dir_exists("user://palettes"):
 		dir.make_dir("user://palettes");
 		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
+		dir.copy("res://Assets/Graphics/Palette/bubblegum16.json","user://palettes/bubblegum16.json");
 	
 	dir.open("user://palettes")
 	dir.list_dir_begin()
@@ -109,12 +108,19 @@ func _load_palettes() -> void:
 	dir.list_dir_end()
 	
 	for file_name in files:
-		var success = _load_palette("user://palettes/" + file_name)
-		if success:
-			Global.palette_option_button.add_item(success)
+		var result : String = load_palette("user://palettes/" + file_name)
+		if result:
+			Global.palette_option_button.add_item(result)
+			var index := Global.palette_option_button.get_item_count() - 1
+			Global.palette_option_button.set_item_metadata(index, result)
+			if result == "Default":
+				Global.palette_option_button.select(index)
+		
+	for item in Global.palette_option_button.items:
+		print(item)
 	pass
 
-func _load_palette(path) -> String:
+func load_palette(path : String) -> String:
 	var file := File.new()
 	file.open(path, File.READ)
 	
@@ -130,12 +136,25 @@ func _load_palette(path) -> String:
 		print("Error String: ", result_json.error_string)
 	else:  # If parse OK
 		var data = result_json.result
-		palette_name = data.name
-		Global.palettes[data.name] = data.colors
+		if data.has("name"):
+			palette_name = data.name
+			Global.palettes[data.name] = data.colors
+	
+	file.close()
 	
 	return palette_name
 
-func _save_palette(palette, path):
+func _save_palette(palette : Array, name : String, path : String):
+	var file := File.new()
+	file.open(path, File.WRITE)
+	
+	var data := {}
+	data.name = name
+	data.colors = palette
+	
+	file.store_string(JSON.print(data))
+	file.close()
+	
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

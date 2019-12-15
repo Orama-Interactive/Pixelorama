@@ -1034,3 +1034,8 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "position", OS.window_position)
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
+
+func _on_PaletteOptionButton_item_selected(ID) -> void:
+	var palette_name = Global.palette_option_button.get_item_metadata(ID)
+	Global.palette_container.on_palette_select(palette_name)
+	pass

@@ -133,14 +133,12 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="MenuContainer" type="Panel" parent="MenuAndUI"]
-editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
-editor/display_folded = true
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 1010.0
@@ -1766,6 +1764,8 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
+[connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]

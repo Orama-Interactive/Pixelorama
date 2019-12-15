@@ -1,0 +1,22 @@
+{
+  "name": "BubbleGum16",
+  "colors" : [
+    { "data" : "#FF000000", "name" : "no name" },
+    { "data" : "#FF7f0622", "name" : "no name" },
+    { "data" : "#FFd62411", "name" : "no name" },
+    { "data" : "#FFff8426", "name" : "no name" },
+    { "data" : "#FFffd100", "name" : "no name" },
+    { "data" : "#FFfafdff", "name" : "no name" },
+    { "data" : "#FFff80a4", "name" : "no name" },
+    { "data" : "#FFff2674", "name" : "no name" },
+    { "data" : "#FF94216a", "name" : "no name" },
+    { "data" : "#FF430067", "name" : "no name" },
+    { "data" : "#FF234975", "name" : "no name" },
+    { "data" : "#FF68aed4", "name" : "no name" },
+    { "data" : "#FFbfff3c", "name" : "no name" },
+    { "data" : "#FF10d275", "name" : "no name" },
+    { "data" : "#FF007899", "name" : "no name" },
+    { "data" : "#FF002859", "name" : "no name" },
+    ],
+    "comments": "by PineTreePizza - https://twitter.com/PineTreePizza"
+}
