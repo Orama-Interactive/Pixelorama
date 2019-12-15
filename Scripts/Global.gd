@@ -103,6 +103,10 @@ var custom_left_brush_texture := ImageTexture.new()
 # warning-ignore:unused_class_variable
 var custom_right_brush_texture := ImageTexture.new()
 
+#Palettes
+# warning-ignore:unused_class_variable
+var palettes := {}
+
 #Nodes
 var control : Node
 var left_cursor : Sprite
@@ -175,6 +179,12 @@ var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
+
+var add_palette_button : TextureButton
+var remove_palette_button : TextureButton
+var palette_option_button : OptionButton
+var edit_palette_button : BaseButton
+var palette_container : GridContainer
 
 func _ready() -> void:
 	undo_redo = UndoRedo.new()
@@ -257,6 +267,12 @@ func _ready() -> void:
 	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
 	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
+	
+	add_palette_button = find_node_by_name(root, "AddPalette")
+	remove_palette_button = find_node_by_name(root, "RemovePalette")
+	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
+	edit_palette_button = find_node_by_name(root, "EditPalette")
+	palette_container = find_node_by_name(root, "PaletteContainer")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:

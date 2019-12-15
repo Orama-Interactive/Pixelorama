@@ -8,9 +8,10 @@
 [sub_resource type="ImageTexture" id=1]
 
 [node name="PaletteButton" type="Button"]
-margin_right = 22.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+margin_right = 26.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 26, 26 )
+hint_tooltip = "Color Name"
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/normal = ExtResource( 3 )

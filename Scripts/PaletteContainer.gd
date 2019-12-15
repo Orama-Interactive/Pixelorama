@@ -6,6 +6,8 @@ extends GridContainer
 
 var palette_button = load("res://Prefabs/PaletteButton.tscn");
 
+var current_palette = "Default"
+
 var default_palette = [
 	Color("#FF000000"),
 	Color("#FF222034"),
@@ -43,17 +45,93 @@ var default_palette = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var index = 0
-	for color in default_palette:
-		var new_button = palette_button.instance()
-		new_button.get_child(0).modulate = color
-		new_button.connect("pressed", self, "_on_color_select", [index])
-		add_child(new_button)
-		index += 1
+	#Global.palettes["Default"] = default_palette
+	
+	_load_palettes()
+	
+	on_palette_select(current_palette)
 	pass # Replace with function body.
 
-func _on_color_select(index):
+func _clear_swatches():
+	for child in get_children():
+		if child is BaseButton:
+			child.disconnect("pressed", self, "on_color_select")
+			child.queue_free()
+	pass
+
+func on_palette_select(palette_name):
+	_clear_swatches()
+	if Global.palettes.has(palette_name):
+		_display_palette(Global.palettes[palette_name])
+	else:
+		_display_palette(Global.palettes["Default"])
+	pass
+
+func _display_palette(palette):
+	var index = 0
+	for color_data in palette:
+		var color = Color(color_data.data)
+		var new_button = palette_button.instance()
+		new_button.get_child(0).modulate = color
+		new_button.hint_tooltip = color_data.data.to_upper() + " " + color_data.name
+		new_button.connect("pressed", self, "on_color_select", [index])
+		add_child(new_button)
+		index += 1
+	pass
+
+func on_color_select(index):
 	Global.left_color_picker.color = default_palette[index]
+	pass
+
+func _load_palettes():
+	var files := []
+	
+	var dir := Directory.new()
+	
+	if not dir.dir_exists("user://palettes"):
+		dir.make_dir("user://palettes");
+		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
+	
+	dir.open("user://palettes")
+	dir.list_dir_begin()
+
+	while true:
+		var file_name = dir.get_next()
+		if file_name == "":
+			break
+		elif not file_name.begins_with(".") && file_name.to_lower().ends_with("json"):
+			files.append(file_name)
+
+	dir.list_dir_end()
+	
+	for file_name in files:
+		var success = _load_palette("user://palettes/" + file_name)
+		if success:
+			Global.palette_option_button.add_item(success)
+	pass
+
+func _load_palette(path):
+	var file := File.new()
+	file.open(path, File.READ)
+	
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	var result = {}
+
+	var palette_name = null
+
+	if result_json.error != OK:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)
+	else:  # If parse OK
+		var data = result_json.result
+		palette_name = data.name
+		Global.palettes[data.name] = data.colors
+	
+	return palette_name
+
+func _save_palette(palette, path):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
