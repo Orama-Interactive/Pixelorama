@@ -1,6 +1,5 @@
 id,en,el,fr,de
-OK,OK,Εντάξει,OK,"OK
-"
+OK,OK,Εντάξει,OK,OK
 Cancel,Cancel,Άκυρο,Annuler,Abbrechen
 Open,Open,Άνοιγμα,Ouvrir,Öffnen
 Please Confirm...,Please Confirm...,Παρακαλώ επιβεβαιώστε...,Veuillez confirmer...,Bitte bestätigen...
@@ -13,22 +12,17 @@ View,View,Προβολή,Affichage,Ansicht
 Help,Help,Βοήθεια,Aide,Hilfe
 New...,New...,Νέο...,Nouveau...,Neu
 Open...,Open...,Άνοιγμα...,Ouvrir...,Öffnen...
-Save...,Save...,Αποθήκευση...,Enregistrer...,"Speichern...
-"
+Save...,Save...,Αποθήκευση...,Enregistrer...,Speichern...
 Save as...,Save as...,Αποθήκευση ως...,Enregistrer sous...,Speichern als...
-Import PNG...,Import PNG...,Εισαγωγή PNG...,Importer une image PNG...,"Importiere PNG
-"
+Import PNG...,Import PNG...,Εισαγωγή PNG...,Importer une image PNG...,Importiere PNG
 Export PNG...,Export PNG...,Εξαγωγή PNG...,Exporter une image PNG...,Exportiere PNG
 Export PNG as...,Export PNG as...,Εξαγωγή PNG ως...,Exporter une image PNG sous...,Exportiere PNG als...
 Quit,Quit,Έξοδος,Quitter,Verlassen
-Undo,Undo,Αναίρεση,Annuler,"Rückgängig
-"
+Undo,Undo,Αναίρεση,Annuler,Rückgängig
 Redo,Redo,Ακύρωση αναίρεσης,Refaire,Wiederherstellen
-Scale Image,Scale Image,Κλιμάκωση εικόνας,Redimensionner l'image,"Bild skalieren
-"
+Scale Image,Scale Image,Κλιμάκωση εικόνας,Redimensionner l'image,Bild skalieren
 Crop Image,Crop Image,Περικοπή,Rogner l'image,Bild zuschneiden
-Clear Selection,Clear Selection,Καθαρισμός επιλογής,Ne rien sélectionner,"Ausgewählten Bereich löschen
-"
+Clear Selection,Clear Selection,Καθαρισμός επιλογής,Ne rien sélectionner,Ausgewählten Bereich löschen
 Flip Horizontal,Flip Horizontal,Οριζόντια αναστροφή,Miroir horizontal,Horizontal spiegeln
 Flip Vertical,Flip Vertical,Κάθετη αναστροφή,Miroir vertical,Vertikal spiegeln
 Preferences,Preferences,Προτιμήσεις,Préférences,Einstellungen
@@ -58,9 +52,9 @@ Color:,Color:,Χρώμα:,Couleur :,Farbe:
 Language:,Language:,Γλώσσα:,Langue :,Sprache:
 System Language,System Language,Γλώσσα Συστήματος,Langue système,System Sprache
 English [en],English [en],Αγγλικά [en],Anglais [en],Englisch [en]
-Γερμανός,German [de],Γερμανός [de],allemand [de],Deutsch [de]
+German [de],German [de],Γερμανικά [de],allemand [de],Deutsch [de]
 Greek [el],Greek [el],Ελληνικά [el],Grec [el],Griechisch [el]
-French [fr],French [fr],Γάλλος [fr],Français [fr],Französisch [fr]
+French [fr],French [fr],Γαλλικά [fr],Français [fr],Französisch [fr]
 About Pixelorama,About Pixelorama,Σχετικά με το Pixelorama,À propos de Pixelorama,Über Pixelorama
 MADEBY_LABEL,Your Free and Open Source Sprite Editor!\nDeveloped by Orama Interactive\n,Το δωρεάν και ανοιχτού κώδικα πρόγραμμά σας!\nΦτιαγμένο από την Orama Interactive\n,Votre éditeur de sprites libre et open source\nDéveloppé par Orama Interactive\n,Ihr kostenloser und opensource Pixeleditor!\nEntwickelt von Orama Interactive\n
 Website,Website,Ιστοσελίδα,Site Web,Website
@@ -81,8 +75,7 @@ COLORSWITCH_HT,Switch left and right colors,Εναλλαγή μεταξύ αρι
 COLORDEFAULTS_HT,"Reset the colors to their default state (black for left, white for right)","Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)","Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)","Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)."
 Raw Mode,Raw Mode,Ωμή Λειτουργία,Mode Raw,Raw-Mode
 Left tool options,Left tool options,Επιλογές αριστερού εργαλείου,Options de l'outil gauche,Linke Werkzeugoptionen
-Right tool options,Right tool options,Επιλογές δεξιού εργαλείου,Options de l'outil droit,"Rechte Werkzeugoptionen
-"
+Right tool options,Right tool options,Επιλογές δεξιού εργαλείου,Options de l'outil droit,Rechte Werkzeugoptionen
 Left pixel indicator,Left pixel indicator,Δείκτης αριστερού πιξελ,Indicateur de pixel gauche,Linke Pixelanzeige
 LEFT_INDIC_HT,Show left mouse pixel indicator or brush on the canvas when drawing,Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο αριστερό κουμπί του ποντικιού,Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous dessinez,Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird
 RIGHT_INDIC_HT,Show right mouse pixel indicator or brush on the canvas when drawing,Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού,Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez,Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird
@@ -100,8 +93,7 @@ All pixels of the same color,All pixels of the same color,Όλα τα πίξελ
 Lighten,Lighten,Φώτισμα,Éclaircir,Erhellen
 Darken,Darken,Σκούρημα,Assombrir,Verdunkeln
 Amount:,Amount:,Ποσό:,Quantité :,Menge:
-LDAMOUNT_HT,Lighten/Darken amount,Ποσό φωτίσματος ή σκουρήματος,Quantité d'éclaircissement/assombrissement,"Erhellen/Verdunkeln Menge
-"
+LDAMOUNT_HT,Lighten/Darken amount,Ποσό φωτίσματος ή σκουρήματος,Quantité d'éclaircissement/assombrissement,Erhellen/Verdunkeln Menge
 Mirroring,Mirroring,Κατοπτρισμός,Miroir,Spiegeln
 Horizontal,Horizontal,Οριζόντια,Horizontal,Horizontal spiegeln
 HORIZMIRROR_HT,Enable horizontal mirrored drawing,Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό,Dessine avec un miroir horizontal,Aktiviere horizontal gespiegelte Zeichnung 
@@ -116,8 +108,7 @@ PLAYFORWARD_HT,Play the animation forward (from beginning to end)\n(F5),Αναπ
 NEXTFRAME_HT,Go to the next frame\n(Ctrl+Right),Μετάβαση στο επόμενο καρέ\n(Ctrl+Δεξιά),Aller à la prochaine trame\n(Ctrl + Droite),Gehe zum nächsten Frame\n(Strg+Pfeil nach Rechts)
 LASTFRAME_HT,Jump to the last frame\n(Ctrl+End),Μετάβαση στο τελευταίο καρέ\n(Ctrl+End),Aller à la dernière trame\n(Ctrl + Fin),Springe zum letzten Frame\n(Strg+Ende)
 FPS_HT,"How many frames per second should the animation preview be?\nThe more FPS, the faster the animation plays.","Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\nΌσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση.","Combien d'images par seconde pour l'aperçu de l'animation ?\nPlus cette valeur est élevée, plus l'animation sera jouée rapidement.","Wie viele Frames pro Sekunde sollte die Animationsvorschau haben?\n Je mehr FPS, desto schneller wird die Animation abgespielt."
-No loop,No loop,Όχι επανάληψη,Pas de bouclage,"Keine Wiederholungsschleife
-"
+No loop,No loop,Όχι επανάληψη,Pas de bouclage,Keine Wiederholungsschleife
 Cycle loop,Cycle loop,Κυκλική επανάληψη,Bouclage en cycle,Zyklusschleife
 Ping-pong loop,Ping-pong loop,Επανάληψη πινγκ-πονγκ,Bouclage en ping-pong,Ping Pong Loop
 Onion Skinning:,Onion Skinning:,Γειτονικά καρέ:,Peau d'oignon :,Onion Skinning:
