@@ -246,12 +246,21 @@ func _process(delta : float) -> void:
 					Global.right_color_picker.color = pixel_color
 					Global.update_right_custom_brush()
 
-	if !is_making_line:
-		previous_mouse_pos = mouse_pos
-		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
-		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
-	else:
+	if Input.is_action_just_pressed("shift") and (["Pencil", "Eraser"].has(Global.current_left_tool)  or ["Pencil", "Eraser"].has(Global.current_right_tool)):
+		line_2d = Line2D.new()
+		line_2d.width = 0.5
+		line_2d.default_color = Color.darkgray
+		line_2d.add_point(previous_mouse_pos)
+		line_2d.add_point(mouse_pos)
+		add_child(line_2d)
+		is_making_line = true
+	elif Input.is_action_just_released("shift"):
+		is_making_line = false
+		line_2d.queue_free()
+		
+	if is_making_line:
 		line_2d.set_point_position(1, mouse_pos)
+	
 
 	if is_making_selection != "None": #If we're making a selection
 		if Input.is_action_just_released(is_making_selection): #Finish selection when button is released
@@ -457,29 +466,17 @@ func generate_layer_panels() -> void:
 		Global.vbox_layer_container.add_child(layer_container)
 
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
-	if Input.is_key_pressed(KEY_SHIFT):
-		if !is_making_line:
-			line_2d = Line2D.new()
-			line_2d.width = 0.5
-			line_2d.default_color = Color.darkgray
-			line_2d.add_point(previous_mouse_pos)
-			line_2d.add_point(mouse_pos)
-			add_child(line_2d)
-			is_making_line = true
+	if is_making_line:
+		fill_gaps(mouse_pos, color, current_mouse_button, current_action)
 	else:
-		if is_making_line:
+		if point_in_rectangle(mouse_pos, location, location + size):
+			mouse_inside_canvas = true
+			#Draw
+			draw_pixel(mouse_pos, color, current_mouse_button, current_action)
+			fill_gaps(mouse_pos, color, current_mouse_button, current_action) #Fill the gaps
+		#If mouse is not inside bounds but it used to be, fill the gaps
+		elif point_in_rectangle(previous_mouse_pos, location, location + size):
 			fill_gaps(mouse_pos, color, current_mouse_button, current_action)
-			is_making_line = false
-			line_2d.queue_free()
-		else:
-			if point_in_rectangle(mouse_pos, location, location + size):
-				mouse_inside_canvas = true
-				#Draw
-				draw_pixel(mouse_pos, color, current_mouse_button, current_action)
-				fill_gaps(mouse_pos, color, current_mouse_button, current_action) #Fill the gaps
-			#If mouse is not inside bounds but it used to be, fill the gaps
-			elif point_in_rectangle(previous_mouse_pos, location, location + size):
-				fill_gaps(mouse_pos, color, current_mouse_button, current_action)
 
 func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if Global.can_draw && Global.has_focus && Global.current_frame == frame:
@@ -651,6 +648,12 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 
 			layers[current_layer_index][0].lock()
 			sprite_changed_this_frame = true
+			
+		previous_mouse_pos = current_pixel
+		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
+		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
+		if is_making_line:
+			line_2d.set_point_position(0, previous_mouse_pos)
 
 #Bresenham's Algorithm
 #Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
