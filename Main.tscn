@@ -770,7 +770,6 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -804,7 +803,6 @@ enabled_focus_mode = 0
 script = ExtResource( 13 )
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-editor/display_folded = true
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 478.0
@@ -1436,8 +1434,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "D:/GitHub/Pixelorama"
+current_path = "D:/GitHub/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1452,8 +1450,8 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "D:/GitHub/Pixelorama"
+current_path = "D:/GitHub/Pixelorama/"
 
 [node name="ImportSprites" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1463,8 +1461,8 @@ resizable = true
 mode = 1
 access = 2
 filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "D:/GitHub/Pixelorama"
+current_path = "D:/GitHub/Pixelorama/"
 
 [node name="ExportSprites" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1479,8 +1477,8 @@ window_title = "Export Sprite"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "D:/GitHub/Pixelorama"
+current_path = "D:/GitHub/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -1561,13 +1559,13 @@ resizable = true
 [node name="VBoxContainer" type="VBoxContainer" parent="PreferencesDialog"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -97.5
+margin_left = -92.0
 margin_top = 8.0
-margin_right = 97.5
-margin_bottom = 123.0
+margin_right = 92.0
+margin_bottom = 33.0
 
 [node name="OptionsContainer" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
-margin_right = 195.0
+margin_right = 184.0
 margin_bottom = 21.0
 columns = 2
 
@@ -1578,23 +1576,23 @@ margin_bottom = 18.0
 text = "Language:"
 
 [node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
-margin_left = 57.0
-margin_right = 195.0
+margin_left = 61.0
+margin_right = 142.0
 margin_bottom = 21.0
 text = "System Language"
-items = [ "System Language", null, false, 0, null, "Greek [el]", null, false, 1, null, "English [en]", null, false, 2, null, "French [fr]", null, false, 3, null ]
+items = [ "System Language", null, false, 0, null, "Greek [el]", null, false, 1, null, "English [en]", null, false, 2, null ]
 selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 25.0
-margin_right = 195.0
+margin_right = 184.0
 margin_bottom = 40.0
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 44.0
-margin_right = 195.0
-margin_bottom = 115.0
+margin_right = 184.0
+margin_bottom = 123.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
@@ -1604,8 +1602,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_right = 103.0
+margin_left = 43.0
+margin_right = 107.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1613,32 +1611,32 @@ value = 1.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 30.0
+margin_top = 34.0
 margin_right = 39.0
-margin_bottom = 45.0
+margin_bottom = 49.0
 text = "Height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 25.0
-margin_right = 103.0
-margin_bottom = 50.0
+margin_left = 43.0
+margin_top = 29.0
+margin_right = 107.0
+margin_bottom = 54.0
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
 suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 53.0
+margin_top = 61.0
 margin_right = 39.0
-margin_bottom = 68.0
+margin_bottom = 76.0
 text = "Color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 50.0
-margin_right = 103.0
-margin_bottom = 71.0
+margin_left = 43.0
+margin_top = 58.0
+margin_right = 107.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 64, 20 )
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]

@@ -76,11 +76,14 @@ func _display_palette(palette) -> void:
 	pass
 
 func on_color_select(index : int) -> void:
+	var color = Color(Global.palettes[current_palette][index].data)
 	if Input.is_action_just_released("left_mouse"):
-		Global.left_color_picker.color = default_palette[index]
+		print("left")
+		Global.left_color_picker.color = color
 		Global.update_left_custom_brush()
 	elif Input.is_action_just_released("right_mouse"):
-		Global.right_color_picker.color = default_palette[index]
+		print("right")
+		Global.right_color_picker.color = color
 		Global.update_right_custom_brush()
 	pass
 
