@@ -1,10 +1,6 @@
 extends GridContainer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-var palette_button = load("res://Prefabs/PaletteButton.tscn");
+var palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
 var default_palette = [
 	Color("#FF000000"),
@@ -42,20 +38,19 @@ var default_palette = [
 ]
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	var index = 0
+func _ready() -> void:
+	var index := 0
 	for color in default_palette:
 		var new_button = palette_button.instance()
 		new_button.get_child(0).modulate = color
 		new_button.connect("pressed", self, "_on_color_select", [index])
 		add_child(new_button)
 		index += 1
-	pass # Replace with function body.
 
-func _on_color_select(index):
-	Global.left_color_picker.color = default_palette[index]
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_color_select(index : int) -> void:
+	if Input.is_action_just_released("left_mouse"):
+		Global.left_color_picker.color = default_palette[index]
+		Global.update_left_custom_brush()
+	elif Input.is_action_just_released("right_mouse"):
+		Global.right_color_picker.color = default_palette[index]
+		Global.update_right_custom_brush()
