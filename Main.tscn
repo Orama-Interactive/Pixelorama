@@ -48,8 +48,6 @@
 bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
 
 [sub_resource type="InputEventKey" id=18]
-control = true
-command = true
 scancode = 88
 
 [sub_resource type="ShortCut" id=19]
@@ -355,13 +353,11 @@ custom_constants/separation = 8
 alignment = 1
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-editor/display_folded = true
 margin_top = 35.0
 margin_right = 208.0
 margin_bottom = 67.0
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter"]
-editor/display_folded = true
 margin_left = 27.0
 margin_right = 180.0
 margin_bottom = 32.0
@@ -377,7 +373,6 @@ size_flags_vertical = 0
 flat = true
 
 [node name="ColorButtonsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
-editor/display_folded = true
 margin_left = 68.0
 margin_right = 85.0
 margin_bottom = 32.0
