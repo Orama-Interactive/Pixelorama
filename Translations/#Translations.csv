@@ -1,157 +1,157 @@
-id,en,el,fr,de
-OK,OK,Εντάξει,OK,OK
-Cancel,Cancel,Άκυρο,Annuler,Abbrechen
-Open,Open,Άνοιγμα,Ouvrir,Öffnen
-Please Confirm...,Please Confirm...,Παρακαλώ επιβεβαιώστε...,Veuillez confirmer...,Bitte bestätigen...
-Image Size,Image Size,Μέγεθος εικόνας,Taille de l'image,Bildgröße
-Width:,Width:,Πλάτος:,Largeur :,Weite
-Height:,Height:,Ύψος:,Hauteur :,Höhe
-File,File,Αρχείο,Fichier,Datei
-Edit,Edit,Επεξεργασία,Édition,Bearbeiten
-View,View,Προβολή,Affichage,Ansicht
-Help,Help,Βοήθεια,Aide,Hilfe
-New...,New...,Νέο...,Nouveau...,Neu
-Open...,Open...,Άνοιγμα...,Ouvrir...,Öffnen...
-Save...,Save...,Αποθήκευση...,Enregistrer...,Speichern...
-Save as...,Save as...,Αποθήκευση ως...,Enregistrer sous...,Speichern als...
-Import PNG...,Import PNG...,Εισαγωγή PNG...,Importer une image PNG...,Importiere PNG
-Export PNG...,Export PNG...,Εξαγωγή PNG...,Exporter une image PNG...,Exportiere PNG
-Export PNG as...,Export PNG as...,Εξαγωγή PNG ως...,Exporter une image PNG sous...,Exportiere PNG als...
-Quit,Quit,Έξοδος,Quitter,Verlassen
-Undo,Undo,Αναίρεση,Annuler,Rückgängig
-Redo,Redo,Ακύρωση αναίρεσης,Refaire,Wiederherstellen
-Scale Image,Scale Image,Κλιμάκωση εικόνας,Redimensionner l'image,Bild skalieren
-Crop Image,Crop Image,Περικοπή,Rogner l'image,Bild zuschneiden
-Clear Selection,Clear Selection,Καθαρισμός επιλογής,Ne rien sélectionner,Ausgewählten Bereich löschen
-Flip Horizontal,Flip Horizontal,Οριζόντια αναστροφή,Miroir horizontal,Horizontal spiegeln
-Flip Vertical,Flip Vertical,Κάθετη αναστροφή,Miroir vertical,Vertikal spiegeln
-Preferences,Preferences,Προτιμήσεις,Préférences,Einstellungen
-Tile Mode,Tile Mode,Λειτουργία μοτίβου,Mode tuile,Tile Mode
-Show Grid,Show Grid,Εμφάνιση πλέγματος,Afficher la grille,Zeige Gitter
-Show Rulers,Show Rulers,Εμφάνιση χαράκων,Afficher les règles,Zeige Lineale
-Show Guides,Show Guides,Εμφάνιση οδηγών,Afficher les guides,Zeige Anleitungen
-Fill with color:,Fill with color:,Γέμισμα με χρώμα:,Remplir avec la couleur :,Fülle mit Farbe
-Open a File,Open a File,Άνοιγμα αρχείου,Ouvrir un fichier,Öffne eine Datei
-Open File(s),Open File(s),Άνοιγμα αρχείου/ων,Ouvrir des fichiers,Öffne Datei(en)
-IMPORT_FILE_LABEL,Import as new frame,Εισαγωγή ως νέο καρέ,Importer en tant que trame,Importier als neues Frame
-Save Sprite as .pxo,Save Sprite as .pxo,Αποθήκευση εικόνας ως .pxo,Enregistrer la sprite au format .pxo,Speichere Sprite als .pxo
-Export Sprite,Export Sprite,Εξαγωγή εικόνας,Exporter une sprite,Exportiere Sprite
-EXPORT_ALLFRAMES_LABEL,Export all frames,Εξαγωγή όλων των καρέ,Exporter toutes les trames,Exportiere alle Frames
-EXPORT_FRAMES_ASFILE_LABEL,Export frames as a single file,Εξαγωγή όλων των καρέ στο ίδιο αρχείο,Exporter les trames en un seul fichier,Exportiere Frames als eine einzige Datei
-EXPORT_VERTICAL_SPRITESHEET_LABEL,Vertical spritesheet,Κάθετη ευθυγράμμιση,Spritesheet vertical,Vertikales Spritesheet
-Path:,Path:,Διαδρομή:,Chemin :,Pfad:
-Directories & Files:,Directories & Files:,Φάκελοι & Αρχεία:,Répertoires et fichiers :,Verzeichnisse & Dateien
-File:,File:,Αρχείο:,Fichier :,Datei:
-Interpolation:,Interpolation:,Παρεμβολή:,Interpolation :,Interpolation
-Nearest,Nearest,Χωρίς,Le plus proche,Nächstes
-Bilinear,Bilinear,Διγραμμική,Linéaire,Bilinear
-Cubic,Cubic,Κυβική,Cubique,Kubisch
-Trilinear,Trilinear,Τριγραμμική,Trilinéaire,Trilinear
-Grid options,Grid options,Επιλογές πλέγματος,Configuration de la grille,Gitter Optionen
-Color:,Color:,Χρώμα:,Couleur :,Farbe:
-Language:,Language:,Γλώσσα:,Langue :,Sprache:
-System Language,System Language,Γλώσσα Συστήματος,Langue système,System Sprache
-English [en],English [en],Αγγλικά [en],Anglais [en],Englisch [en]
-German [de],German [de],Γερμανικά [de],allemand [de],Deutsch [de]
-Greek [el],Greek [el],Ελληνικά [el],Grec [el],Griechisch [el]
-French [fr],French [fr],Γαλλικά [fr],Français [fr],Französisch [fr]
-About Pixelorama,About Pixelorama,Σχετικά με το Pixelorama,À propos de Pixelorama,Über Pixelorama
-MADEBY_LABEL,Your Free and Open Source Sprite Editor!\nDeveloped by Orama Interactive\n,Το δωρεάν και ανοιχτού κώδικα πρόγραμμά σας!\nΦτιαγμένο από την Orama Interactive\n,Votre éditeur de sprites libre et open source\nDéveloppé par Orama Interactive\n,Ihr kostenloser und opensource Pixeleditor!\nEntwickelt von Orama Interactive\n
-Website,Website,Ιστοσελίδα,Site Web,Website
-Donate,Donate,Κάντε μια δωρεά,Faire un don,Spenden
-QUIT_LABEL,Are you sure you want to exit Pixelorama?,Σίγουρα θέλετε να βγείτε από το Pixelorama;,Voulez-vous vraiment quitter Pixelorama ?,"
-Möchten sie Pixelorama wirklich verlassen?"
-Utility Tools,Utility Tools,Βοηθητικά Εργαλεία,Outils utilitaires,Dienstwerkzeuge
-RECTSELECT_HT,Rectangular Selection\n\nR for left mouse button\nAlt + R for right mouse button\n\nPress Shift to move the content,Ορθογώνια επιλογή\n\nR για το αριστερό κουμπί ποντικιού\nAlt + R για το δεξί κουμπί ποντικιού\n\nΠατήστε Shift για να μετακινηθεί το περιεχόμενο,Sélection rectangulaire\n\nR pour le bouton gauche de la souris\n\nAlt + R pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour déplacer le contenu,Rechteckige Auswahl\n\nR für die linke Maustaste\nAlt + R für die rechte Maustaste\n\nPresse Shift zum verschieben des Inhalts
-COLORPICKER_HT,Color Picker\nSelect a color from a pixel of the sprite\n\nO for left mouse button\nAlt + O for right mouse button,Επιλογέας χρωμάτων\nΕπιλέξτε ένα χρώμα από ένα εικονοστοιχείο της εικόνας\n\nΟ για το αριστερό κουμπί ποντικιού\nAlt + Ο για το δεξί κουμπί ποντικιού,Sélecteur de couleurs\nSélectionnez la couleur d'un pixel de la sprite\n\nO pour le bouton gauche de la souris\n\nAlt + O pour le bouton droit de la souris,Farbauswahl\Wähle einr Farbe von einem Pixel des Sprites\n\nO für die linke Maustaste\nAlt + O für die rechte Maustaste
-Draw Tools,Draw Tools,Εργαλεία Ζωγραφικής,Outils de dessin,Zeichnenwerkzeuge
-PENCIL_HT,Pencil\n\nP for left mouse button\nAlt + P for right mouse button\n\nHold Shift to make a line,Μολύβι\n\nP για το αριστερό κουμπί ποντικιού\nAlt + P για το δεξί κουμπί ποντικιού\n\nΚρατήστε Shift για να τραβήξετε μια γραμμή,Crayon\n\nP pour le bouton gauche de la souris\n\nAlt + P pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour dessiner une ligne,"Bleistift\n\nP für linke Maustaste\nAlt + P für rechte Maustaste\n\nHalte Shift, um eine Linie zu bilden."
-ERASER_HT,Eraser\n\nE for left mouse button\nAlt + E for right mouse button\n\nHold Shift to make a line,Γόμα\n\nE για το αριστερό κουμπί ποντικιού\nAlt + E για το δεξί κουμπί ποντικιού\n\nΚρατήστε Shift για να τραβήξετε μια γραμμή,Gomme\n\nE pour le bouton gauche de la souris\n\nAlt + E pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour dessiner une ligne,"Radiergummi\n\nE für die linke Maustaste\nAlt + E für die rechte Maustaste\n\nHalte Shift, um eine Linie zu bilden."
-BUCKET_HT,Bucket\n\nB for left mouse button\nAlt + B for right mouse button,Κουβάς\n\nB για το αριστερό κουμπί ποντικιού\nAlt + B για το δεξί κουμπί ποντικιού,Seau de remplissage\n\nB pour le bouton gauche de la souris\nAlt + B pour le bouton droit de la souris,Eimer\n\nB für linke Maustaste\nAlt + B für rechte Maustaste
-LD_HT,Lighten/Darken\n\nU for left mouse button\nAlt + U for right mouse button,Φώτισμα/Σκούρημα\n\nU για το αριστερό κουμπί ποντικιού\nAlt + U για το δεξί κουμπί ποντικιού,Éclaircir/Assombrir\n\nU pour le bouton gauche de la souris\nAlt + U pour le bouton droit de la souris,Erhellen/Verdunkeln\n\nU für linke Maustaste\nAlt + U für rechte Maustaste
-LEFTCOLOR_HT,Choose a color for the left tool,Επιλέξτε ένα χρώμα για το αριστερό εργαλείο,Choisissez une couleur pour l'outil gauche,Wähle eine Farbe für das linke Werkzeug
-RIGHTCOLOR_HT,Choose a color for the right tool,Επιλέξτε ένα χρώμα για το δεξί εργαλείο,Choisissez une couleur pour l'outil droit,Wähle eine Farbe für das rechte Werkzeug
-COLORSWITCH_HT,Switch left and right colors,Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος,Alterner les couleurs de gauche et de droite,Wechsle linke und rechte Farben
-COLORDEFAULTS_HT,"Reset the colors to their default state (black for left, white for right)","Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)","Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)","Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)."
-Raw Mode,Raw Mode,Ωμή Λειτουργία,Mode Raw,Raw-Mode
-Left tool options,Left tool options,Επιλογές αριστερού εργαλείου,Options de l'outil gauche,Linke Werkzeugoptionen
-Right tool options,Right tool options,Επιλογές δεξιού εργαλείου,Options de l'outil droit,Rechte Werkzeugoptionen
-Left pixel indicator,Left pixel indicator,Δείκτης αριστερού πιξελ,Indicateur de pixel gauche,Linke Pixelanzeige
-LEFT_INDIC_HT,Show left mouse pixel indicator or brush on the canvas when drawing,Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο αριστερό κουμπί του ποντικιού,Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous dessinez,Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird
-RIGHT_INDIC_HT,Show right mouse pixel indicator or brush on the canvas when drawing,Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού,Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez,Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird
-Right pixel indicator,Right pixel indicator,Δείκτης δεξιού πιξελ,Indicateur de pixel droit,Rechte Pixelanzeige
-Brush:,Brush:,Πινέλο:,Brosse :,Pinsel:
-BRUSH_HT,Select a brush,Επιλέξτε ένα πινέλο,Sélectionnez une brosse,Wähle einen Pinsel
-Brush: Pixel,Brush: Pixel,Πινέλο: Εικονοστοιχείο,Brosse : Pixel,Pinsel: Pixel
-Custom brush,Custom brush,Προσαρμοσμένο πινέλο,Brosse personnalisée,Benutzerdefinierter Pinsel
-Brush size:,Brush size:,Μέγεθος πινέλου:,Taille de la brosse :,Pinselgröße:
-Brush color from,Brush color from,Χρώμα πινέλου από,Couleur de la brosse depuis,Pinselfarbe von
-COLORFROM_HT,"0: Color from the brush itself, 1: the currently selected color","0: Χρώμα από το πινέλο, 1: επιλεγμένο χρώμα","0 : Couleur depuis la brosse elle-même, 1 : la couleur actuellement sélectionnée","0: Farbe von dem Pinsel selbst, 1: die aktuell ausgewählte Farbe"
-Fill area:,Fill area:,Περιοχή γεμίσματος:,Remplissage de zone :,Fülle Bereich
-Area of the same color,Area of the same color,Περιοχή ίδιου χρώματος,Zone de la même couleur,Bereich mit der selben Farbe
-All pixels of the same color,All pixels of the same color,Όλα τα πίξελ ίδιου χρώματος,Tous les pixels de la même couleur,Alle Pixel mit der selben Farbe
-Lighten,Lighten,Φώτισμα,Éclaircir,Erhellen
-Darken,Darken,Σκούρημα,Assombrir,Verdunkeln
-Amount:,Amount:,Ποσό:,Quantité :,Menge:
-LDAMOUNT_HT,Lighten/Darken amount,Ποσό φωτίσματος ή σκουρήματος,Quantité d'éclaircissement/assombrissement,Erhellen/Verdunkeln Menge
-Mirroring,Mirroring,Κατοπτρισμός,Miroir,Spiegeln
-Horizontal,Horizontal,Οριζόντια,Horizontal,Horizontal spiegeln
-HORIZMIRROR_HT,Enable horizontal mirrored drawing,Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό,Dessine avec un miroir horizontal,Aktiviere horizontal gespiegelte Zeichnung 
-VERTMIRROR_HT,Enable vertical mirrored drawing,Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό,Dessine avec un miroir vertical,Aktiviere vertikale gespiegelte Zeichnung
-Vertical,Vertical,Κάθετα,Vertical,Vertikal
-Current frame:,Current frame:,Τρέχον καρέ:,Trame actuelle :,Aktueller Frame
-Current frame: 1/1,Current frame: 1/1,Τρέχον καρέ: 1/1,Trame actuelle : 1/1,Aktueller Frame 1/1
-FIRSTFRAME_HT,Jump to the first frame\n(Ctrl+Home),Μετάβαση στο πρώτο καρέ\n(Ctrl+Home),Aller à la première trame\n(Ctrl + Orig.),Springe zu dem ersten Frame\n(Strg+Home)
-PREVIOUSFRAME_HT,Go to the previous frame\n(Ctrl+Left),Μετάβαση στο προηγούμενο καρέ\n(Ctrl+Αριστερά),Aller à la trame précédente\n(Ctrl + Gauche),Gehe zu dem letzten Frame\n(Strg+Pfeil nach Links)
-PLAYBACKWARDS_HT,Play the animation backwards (from end to beginning)\n(F4),Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n(F4),Jouer l'animation à l'envers (de la fin vers le début)\n(F4),Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)\n(F4)
-PLAYFORWARD_HT,Play the animation forward (from beginning to end)\n(F5),Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n(F5),Jouer l'animation (du début vers la fin)\n(F5),Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)\n(F5)
-NEXTFRAME_HT,Go to the next frame\n(Ctrl+Right),Μετάβαση στο επόμενο καρέ\n(Ctrl+Δεξιά),Aller à la prochaine trame\n(Ctrl + Droite),Gehe zum nächsten Frame\n(Strg+Pfeil nach Rechts)
-LASTFRAME_HT,Jump to the last frame\n(Ctrl+End),Μετάβαση στο τελευταίο καρέ\n(Ctrl+End),Aller à la dernière trame\n(Ctrl + Fin),Springe zum letzten Frame\n(Strg+Ende)
-FPS_HT,"How many frames per second should the animation preview be?\nThe more FPS, the faster the animation plays.","Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\nΌσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση.","Combien d'images par seconde pour l'aperçu de l'animation ?\nPlus cette valeur est élevée, plus l'animation sera jouée rapidement.","Wie viele Frames pro Sekunde sollte die Animationsvorschau haben?\n Je mehr FPS, desto schneller wird die Animation abgespielt."
-No loop,No loop,Όχι επανάληψη,Pas de bouclage,Keine Wiederholungsschleife
-Cycle loop,Cycle loop,Κυκλική επανάληψη,Bouclage en cycle,Zyklusschleife
-Ping-pong loop,Ping-pong loop,Επανάληψη πινγκ-πονγκ,Bouclage en ping-pong,Ping Pong Loop
-Onion Skinning:,Onion Skinning:,Γειτονικά καρέ:,Peau d'oignon :,Onion Skinning:
-Past Frames,Past Frames,Παρελθοντικά καρέ,Trames passées,Letzten Frames
-Future Frames,Future Frames,Μελλοντικά καρέ,Trames futures,Nächsten Frames
-Blue-Red Mode,Blue-Red Mode,Μπλε-Κόκκινη λειτουργία,Mode rouge-bleu,Blau-Roter Modus
-Add a new frame,Add a new frame,Προσθήκη νέου καρέ,Ajouter une trame,Füge einen neuen Frame hinzu
-Remove Frame,Remove Frame,Διαγραφή Καρέ,Supprimer la trame,Entferne Frame
-Clone Frame,Clone Frame,Κλωνοποίηση Καρέ,Cloner la trame,Kopiere Frame
-Move Left,Move Left,Μετακίνηση Αριστερά,Déplacer vers la gauche,Bewege nach Links
-Move Right,Move Right,Μετακίνηση Δεξιά,Déplacer vers la droite,Bewege nach Rechts
-Layers,Layers,Στρώσεις,Calques,Ebenen
-LAYERNEW_HT,Create a new layer,Δημιουργία νέας στρώσης,Créer un calque,Erstelle eine neue Ebene
-LAYERREMOVE_HT,Remove current layer,Διαγραφή της τρέχουσας στρώσης,Supprimer le calque,Entferne aktuelle Ebene
-LAYERUP_HT,Move up the current layer,Μετακίνηση της τρέχουσας στρώσης προς τα πάνω,Déplacer le calque vers le haut,Bewege aktuelle Ebene nach oben
-LAYERDOWN_HT,Move down the current layer,Μετακίνηση της τρέχουσας στρώσης προς τα κάτω,Déplacer le calque vers le cas,Bewege aktuelle Ebene nach unten
-LAYERCLONE_HT,Clone current layer,Κλωνοποίηση της τρέχουσας στρώσης,Cloner le calque,Kopiere aktuelle Ebene
-LAYERMERGE_HT,Merge current layer with the one below,Συγχώνευση της τρέχουσας στρώσης με την από κάτω,Fusionner le calque vers le bas,Führe Ebene mit der darunter zusammen
-LAYERVISIBILITY_HT,Toggle layer's visibility,Εναλλαγή της ορατότητας της στρώσης,Afficher/Masquer le calque,Ändere die Sichtbarkeit der Ebene
-SPLITSCREEN_HT,Split screen\n\nShow second canvas,Διπλή οθόνη\n\nΕμφάνιση δεύτερου καμβά,Écran partagé\n\nAfficher un second canevas,Geteilter Bildschirm\n\nZeige zweite Leinwand
-SPLITSCREEN_HIDE_HT,Split screen\n\nHide second canvas,Διπλή οθόνη\n\nΑπόκρυψη δεύτερου καμβάf,Écran partagé\n\nCacher le second canevas,Geteilter Bildschirm\n\nVerstecke zweite Leinwand
-Undo: Draw,Undo: Draw,Αναίρεση: Ζωγραφική,Annuler : Dessin,Rückgängig: Zeichen
-Redo: Draw,Redo: Draw,Ακύρωση αναίρεσης: Ζωγραφική,Refaire : Dessin,Wiederherstellen: Zeichnen
-Undo: Rectangle Select,Undo: Rectangle Select,Αναίρεση: Ορθογώνια επιλογή,Annuler : Sélection par rectangle,Rückgängig: Rechteck Auswahl
-Redo: Rectangle Select,Redo: Rectangle Select,Ακύρωση αναίρεσης: Ορθογώνια επιλογή,Refaire : Sélection par rectangle,Wiederherstellen: Rechteck Auswahl
-Undo: Scale,Undo: Scale,Αναίρεση: Κλιμάκωση,Annuler : Redimensionner l'image,Rückgängig: Skalieren
-Redo: Scale,Redo: Scale,Ακύρωση αναίρεσης: Κλιμάκωση,Refaire : Redimensionner l'image,Wiederherstellen: Skalieren
-Undo: Add Layer,Undo: Add Layer,Αναίρεση: Προσθήκη στρώσης,Annuler : Ajouter un calque,Rückgängig: Ebene hinzufügen
-Redo: Add Layer,Redo: Add Layer,Ακύρωση αναίρεσης: Προσθήκη στρώσης,Refaire : Ajouter un calque,Wiederherstellen: Ebene hinzufügen
-Undo: Remove Layer,Undo: Remove Layer,Αναίρεση: Διαγραφή στρώσης,Annuler : Supprimer le calque,Rückgängigg: Entferne Ebene
-Redo: Remove Layer,Redo: Remove Layer,Ακύρωση αναίρεσης: Διαγραφή στρώσης,Refaire : Supprimer le calque,Wiederherstellen: Entferne Ebene
-Undo: Merge Layer,Undo: Merge Layer,Αναίρεση: Συγχώνευση στρώσης,Annuler : Fusionner le calque,Rückgängig: Füge Ebene zusammen
-Redo: Merge Layer,Redo: Merge Layer,Ακύρωση αναίρεσης: Συγχώνευση στρώσης,Refaire : Fusionner le calque,Wiederherstellen: Füge Ebene zusammen
-Undo: Change Layer Order,Undo: Change Layer Order,Αναίρεση: Αλλαγή σειράς στρώσης,Annuler : Modifier l'ordre des calques,Rückgängig: Ändere Ebenenreihenfolge
-Redo: Change Layer Order,Redo: Change Layer Order,Ακύρωση αναίρεσης: Αλλαγή σειράς στρώσης,Refaire : Modifier l'ordre des calques,Wiederherstellen: Ändere Ebenenreihenfolge
-Undo: Add Frame,Undo: Add Frame,Αναίρεση: Προσθήκη καρέ,Annuler : Ajouter une trame,Rückgängig: Füge Frame hinzu
-Redo: Add Frame,Redo: Add Frame,Ακύρωση αναίρεσης: Προσθήκη καρέ,Refaire : Ajouter une trame,Wiederherstellen: Füge Frame hinzu
-Undo: Remove Frame,Undo: Remove Frame,Αναίρεση: Διαγραφή καρέ,Annuler : Supprimer une trame,Rückgängig: Entferne Frame
-Redo: Remove Frame,Redo: Remove Frame,Ακύρωση αναίρεσης: Διαγραφή καρέ,Refaire : Supprimer une trame,Wiederherstellen: Entferne Frame
-Undo: Change Frame Order,Undo: Change Frame Order,Αναίρεση: Αλλαγή σειράς καρέ,Annuler : Modifier l'ordre des trames,Rückgängig: Ändere Framereihenfolge
-Redo: Change Frame Order,Redo: Change Frame Order,Ακύρωση αναίρεσης: Αλλαγή σειράς καρέ,Refaire : Modifier l'ordre des trames,Wiederherstellen: Ändere Framereihenfolge
-Undo: Delete Custom Brush,Undo: Delete Custom Brush,Αναίρεση: Διαγραφή προσαρμοσμένου πινέλου,Annuler : Supprimer la brosse personnalisée,Rückgängig: Entferne benutzerdefinierten Pinsel
-Redo: Delete Custom Brush,Redo: Delete Custom Brush,Ακύρωση αναίρεσης: Διαγραφή προσαρμοσμένου πινέλου,Refaire : Supprimer la brosse personnalisée,Wiederherstellen: Entferne benutzerdefinierten Pinsel
-Move Guide,Move Guide,Μετακίνηση βοηθού,Déplacer le guide,Bewegungsanleitung
-File saved,File saved,Το αρχείο αποθηκεύτηκε,Fichier enregistré,Datei gespeichert
-File exported,File exported,Έγινε εξαγωγή αρχείου,Fichier exporté,Datei exportiert
+id,en,el,fr,de,pl
+OK,OK,Εντάξει,OK,OK,OK
+Cancel,Cancel,Άκυρο,Annuler,Abbrechen,Anuluj
+Open,Open,Άνοιγμα,Ouvrir,Öffnen,Otwórz
+Please Confirm...,Please Confirm...,Παρακαλώ επιβεβαιώστε...,Veuillez confirmer...,Bitte bestätigen...,Proszę potwierdzić...
+Image Size,Image Size,Μέγεθος εικόνας,Taille de l'image,Bildgröße,Rozmiar obrazu
+Width:,Width:,Πλάτος:,Largeur :,Weite,Szerokość:
+Height:,Height:,Ύψος:,Hauteur :,Höhe,Wysokość:
+File,File,Αρχείο,Fichier,Datei,Plik
+Edit,Edit,Επεξεργασία,Édition,Bearbeiten,Edycja
+View,View,Προβολή,Affichage,Ansicht,Widok
+Help,Help,Βοήθεια,Aide,Hilfe,Pomoc
+New...,New...,Νέο...,Nouveau...,Neu,Nowy...
+Open...,Open...,Άνοιγμα...,Ouvrir...,Öffnen...,Otwórz...
+Save...,Save...,Αποθήκευση...,Enregistrer...,Speichern...,Zapisz...
+Save as...,Save as...,Αποθήκευση ως...,Enregistrer sous...,Speichern als...,Zapisz jako...
+Import PNG...,Import PNG...,Εισαγωγή PNG...,Importer une image PNG...,Importiere PNG,Importuj PNG…
+Export PNG...,Export PNG...,Εξαγωγή PNG...,Exporter une image PNG...,Exportiere PNG,Eksportuj PNG…
+Export PNG as...,Export PNG as...,Εξαγωγή PNG ως...,Exporter une image PNG sous...,Exportiere PNG als...,Eksportuj PNG jako...
+Quit,Quit,Έξοδος,Quitter,Verlassen,Wyjdź
+Undo,Undo,Αναίρεση,Annuler,Rückgängig,Cofnij
+Redo,Redo,Ακύρωση αναίρεσης,Refaire,Wiederherstellen,Przywróć zmiany
+Scale Image,Scale Image,Κλιμάκωση εικόνας,Redimensionner l'image,Bild skalieren,Skalowanie obrazu
+Crop Image,Crop Image,Περικοπή,Rogner l'image,Bild zuschneiden,Kadrowanie obrazu
+Clear Selection,Clear Selection,Καθαρισμός επιλογής,Ne rien sélectionner,Ausgewählten Bereich löschen,Wyczyść zaznaczenie
+Flip Horizontal,Flip Horizontal,Οριζόντια αναστροφή,Miroir horizontal,Horizontal spiegeln,Odbij w poziomie
+Flip Vertical,Flip Vertical,Κάθετη αναστροφή,Miroir vertical,Vertikal spiegeln,Odbij w pionie
+Preferences,Preferences,Προτιμήσεις,Préférences,Einstellungen,Preferencje
+Tile Mode,Tile Mode,Λειτουργία μοτίβου,Mode tuile,Tile Mode,Tryb kafelkowy
+Show Grid,Show Grid,Εμφάνιση πλέγματος,Afficher la grille,Zeige Gitter,Pokaż siatkę
+Show Rulers,Show Rulers,Εμφάνιση χαράκων,Afficher les règles,Zeige Lineale,Pokaż linijki
+Show Guides,Show Guides,Εμφάνιση οδηγών,Afficher les guides,Zeige Anleitungen,Pokaż prowadnice
+Fill with color:,Fill with color:,Γέμισμα με χρώμα:,Remplir avec la couleur :,Fülle mit Farbe,Wypełnij kolorem:
+Open a File,Open a File,Άνοιγμα αρχείου,Ouvrir un fichier,Öffne eine Datei,Otwórz plik
+Open File(s),Open File(s),Άνοιγμα αρχείου/ων,Ouvrir des fichiers,Öffne Datei(en),Otwórz pliki
+IMPORT_FILE_LABEL,Import as new frame,Εισαγωγή ως νέο καρέ,Importer en tant que trame,Importier als neues Frame,Importuj jako nowa klatka
+Save Sprite as .pxo,Save Sprite as .pxo,Αποθήκευση εικόνας ως .pxo,Enregistrer la sprite au format .pxo,Speichere Sprite als .pxo,Zapisz Sprite do .pxo
+Export Sprite,Export Sprite,Εξαγωγή εικόνας,Exporter une sprite,Exportiere Sprite,Eksportuj Sprite
+EXPORT_ALLFRAMES_LABEL,Export all frames,Εξαγωγή όλων των καρέ,Exporter toutes les trames,Exportiere alle Frames,Eksportuj wszystkie klatki
+EXPORT_FRAMES_ASFILE_LABEL,Export frames as a single file,Εξαγωγή όλων των καρέ στο ίδιο αρχείο,Exporter les trames en un seul fichier,Exportiere Frames als eine einzige Datei,Eksportuj klatki jako jeden plik
+EXPORT_VERTICAL_SPRITESHEET_LABEL,Vertical spritesheet,Κάθετη ευθυγράμμιση,Spritesheet vertical,Vertikales Spritesheet,Pionowy arkusz
+Path:,Path:,Διαδρομή:,Chemin :,Pfad:,Ścieżka:
+Directories & Files:,Directories & Files:,Φάκελοι & Αρχεία:,Répertoires et fichiers :,Verzeichnisse & Dateien,Pliki oraz katalogi:
+File:,File:,Αρχείο:,Fichier :,Datei:,Plik:
+Interpolation:,Interpolation:,Παρεμβολή:,Interpolation :,Interpolation,Interpolacja:
+Nearest,Nearest,Χωρίς,Le plus proche,Nächstes,Najbliższy sąsiad
+Bilinear,Bilinear,Διγραμμική,Linéaire,Bilinear,Dwuliniowa
+Cubic,Cubic,Κυβική,Cubique,Kubisch,Sześcienna
+Trilinear,Trilinear,Τριγραμμική,Trilinéaire,Trilinear,Trójlinowa
+Grid options,Grid options,Επιλογές πλέγματος,Configuration de la grille,Gitter Optionen,Ustawienia siatki
+Color:,Color:,Χρώμα:,Couleur :,Farbe:,Kolor:
+Language:,Language:,Γλώσσα:,Langue :,Sprache:,Język:
+System Language,System Language,Γλώσσα Συστήματος,Langue système,System Sprache,Język systemowy
+English [en],English [en],Αγγλικά [en],Anglais [en],Englisch [en],Angielski [en]
+German [de],German [de],Γερμανικά [de],allemand [de],Deutsch [de],Niemiecki [de]
+Greek [el],Greek [el],Ελληνικά [el],Grec [el],Griechisch [el],Grecki [el]
+French [fr],French [fr],Γαλλικά [fr],Français [fr],Französisch [fr],Francuski [fr]
+About Pixelorama,About Pixelorama,Σχετικά με το Pixelorama,À propos de Pixelorama,Über Pixelorama,O Pixeloramie
+MADEBY_LABEL,Your Free and Open Source Sprite Editor!\nDeveloped by Orama Interactive\n,Το δωρεάν και ανοιχτού κώδικα πρόγραμμά σας!\nΦτιαγμένο από την Orama Interactive\n,Votre éditeur de sprites libre et open source\nDéveloppé par Orama Interactive\n,Ihr kostenloser und opensource Pixeleditor!\nEntwickelt von Orama Interactive\n,Twój darmowy edytor Sprite-ów na otwartej licencji!\nTworzony przez: Orama Interactive\n
+Website,Website,Ιστοσελίδα,Site Web,Website,Strona internetowa
+Donate,Donate,Κάντε μια δωρεά,Faire un don,Spenden,Wspomóż
+QUIT_LABEL,Are you sure you want to exit Pixelorama?,Σίγουρα θέλετε να βγείτε από το Pixelorama;,Voulez-vous vraiment quitter Pixelorama ?,
+Möchten sie Pixelorama wirklich verlassen?,Na pewno chcesz opuścić Pixeloramę?
+Utility Tools,Utility Tools,Βοηθητικά Εργαλεία,Outils utilitaires,Dienstwerkzeuge,Narzędzia
+RECTSELECT_HT,Rectangular Selection\n\nR for left mouse button\nAlt + R for right mouse button\n\nPress Shift to move the content,Ορθογώνια επιλογή\n\nR για το αριστερό κουμπί ποντικιού\nAlt + R για το δεξί κουμπί ποντικιού\n\nΠατήστε Shift για να μετακινηθεί το περιεχόμενο,Sélection rectangulaire\n\nR pour le bouton gauche de la souris\n\nAlt + R pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour déplacer le contenu,Rechteckige Auswahl\n\nR für die linke Maustaste\nAlt + R für die rechte Maustaste\n\nPresse Shift zum verschieben des Inhalts,Zaznaczenie prostokątne\n\nR dla lewego narzędzia\nAlt + R dla prawego narzędzia\n\nPrzytrzymaj Shift aby przenieść zawartość
+COLORPICKER_HT,Color Picker\nSelect a color from a pixel of the sprite\n\nO for left mouse button\nAlt + O for right mouse button,Επιλογέας χρωμάτων\nΕπιλέξτε ένα χρώμα από ένα εικονοστοιχείο της εικόνας\n\nΟ για το αριστερό κουμπί ποντικιού\nAlt + Ο για το δεξί κουμπί ποντικιού,Sélecteur de couleurs\nSélectionnez la couleur d'un pixel de la sprite\n\nO pour le bouton gauche de la souris\n\nAlt + O pour le bouton droit de la souris,Farbauswahl\Wähle einr Farbe von einem Pixel des Sprites\n\nO für die linke Maustaste\nAlt + O für die rechte Maustaste,Próbnik\nPobiera kolor wybranego piksela do wybranego narzędzia.\n\nO dla lewego narzędzia\nAlt + O dla prawego narzędzia
+Draw Tools,Draw Tools,Εργαλεία Ζωγραφικής,Outils de dessin,Zeichnenwerkzeuge,Rysowanie
+PENCIL_HT,Pencil\n\nP for left mouse button\nAlt + P for right mouse button\n\nHold Shift to make a line,Μολύβι\n\nP για το αριστερό κουμπί ποντικιού\nAlt + P για το δεξί κουμπί ποντικιού\n\nΚρατήστε Shift για να τραβήξετε μια γραμμή,Crayon\n\nP pour le bouton gauche de la souris\n\nAlt + P pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour dessiner une ligne,Bleistift\n\nP für linke Maustaste\nAlt + P für rechte Maustaste\n\nHalte Shift, um eine Linie zu bilden.,Ołówek\n\nP dla lewego narzędzia\nAlt + P dla prawego narzędzia\n\nPrzytrzymaj Shift aby narysować linię
+ERASER_HT,Eraser\n\nE for left mouse button\nAlt + E for right mouse button\n\nHold Shift to make a line,Γόμα\n\nE για το αριστερό κουμπί ποντικιού\nAlt + E για το δεξί κουμπί ποντικιού\n\nΚρατήστε Shift για να τραβήξετε μια γραμμή,Gomme\n\nE pour le bouton gauche de la souris\n\nAlt + E pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour dessiner une ligne,Radiergummi\n\nE für die linke Maustaste\nAlt + E für die rechte Maustaste\n\nHalte Shift, um eine Linie zu bilden.,Gumka\n\nE dla lewego narzędzia\nAlt + E dla prawego narzędzia\n\nPrzytrzymaj Shift aby użyć w linii prostej
+BUCKET_HT,Bucket\n\nB for left mouse button\nAlt + B for right mouse button,Κουβάς\n\nB για το αριστερό κουμπί ποντικιού\nAlt + B για το δεξί κουμπί ποντικιού,Seau de remplissage\n\nB pour le bouton gauche de la souris\nAlt + B pour le bouton droit de la souris,Eimer\n\nB für linke Maustaste\nAlt + B für rechte Maustaste,Wiaderko\n\nB dla lewego narzędzia\nAlt + B dla prawego narzędzia
+LD_HT,Lighten/Darken\n\nU for left mouse button\nAlt + U for right mouse button,Φώτισμα/Σκούρημα\n\nU για το αριστερό κουμπί ποντικιού\nAlt + U για το δεξί κουμπί ποντικιού,Éclaircir/Assombrir\n\nU pour le bouton gauche de la souris\nAlt + U pour le bouton droit de la souris,Erhellen/Verdunkeln\n\nU für linke Maustaste\nAlt + U für rechte Maustaste,Rozjaśnianie/Ściemnianie\n\nU dla lewego narzędzia\nAlt + U dla prawego narzędzia
+LEFTCOLOR_HT,Choose a color for the left tool,Επιλέξτε ένα χρώμα για το αριστερό εργαλείο,Choisissez une couleur pour l'outil gauche,Wähle eine Farbe für das linke Werkzeug,Wybiera kolor dla lewego narzędzia
+RIGHTCOLOR_HT,Choose a color for the right tool,Επιλέξτε ένα χρώμα για το δεξί εργαλείο,Choisissez une couleur pour l'outil droit,Wähle eine Farbe für das rechte Werkzeug,Wybiera kolor dla prawego narzędzia
+COLORSWITCH_HT,Switch left and right colors,Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος,Alterner les couleurs de gauche et de droite,Wechsle linke und rechte Farben,Podmienia lewy kolor z prawym kolorem
+COLORDEFAULTS_HT,Reset the colors to their default state (black for left, white for right),Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί),Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit),Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts).,Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)
+Raw Mode,Raw Mode,Ωμή Λειτουργία,Mode Raw,Raw-Mode,RGB w częściach setnych od 0.0 do 1.0
+Left tool options,Left tool options,Επιλογές αριστερού εργαλείου,Options de l'outil gauche,Linke Werkzeugoptionen,Opcje lewego narzędzia
+Right tool options,Right tool options,Επιλογές δεξιού εργαλείου,Options de l'outil droit,Rechte Werkzeugoptionen,Opcje prawego narzędzia
+Left pixel indicator,Left pixel indicator,Δείκτης αριστερού πιξελ,Indicateur de pixel gauche,Linke Pixelanzeige,Wskaźnik lewego pędzla
+LEFT_INDIC_HT,Show left mouse pixel indicator or brush on the canvas when drawing,Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο αριστερό κουμπί του ποντικιού,Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous dessinez,Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird,Wyświetl wskaźnik lewego narzędzia lub pędzla podczas rysowania
+RIGHT_INDIC_HT,Show right mouse pixel indicator or brush on the canvas when drawing,Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού,Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez,Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird,Wyświetl wskaźnik prawego narzędzia lub pędzla podczas rysowania
+Right pixel indicator,Right pixel indicator,Δείκτης δεξιού πιξελ,Indicateur de pixel droit,Rechte Pixelanzeige,Wskaźnik prawego pędzla
+Brush:,Brush:,Πινέλο:,Brosse :,Pinsel:,Pędzel:
+BRUSH_HT,Select a brush,Επιλέξτε ένα πινέλο,Sélectionnez une brosse,Wähle einen Pinsel,Wybierz pędzel
+Brush: Pixel,Brush: Pixel,Πινέλο: Εικονοστοιχείο,Brosse : Pixel,Pinsel: Pixel,Pędzel: Piksel
+Custom brush,Custom brush,Προσαρμοσμένο πινέλο,Brosse personnalisée,Benutzerdefinierter Pinsel,Niestandardowy pędzel
+Brush size:,Brush size:,Μέγεθος πινέλου:,Taille de la brosse :,Pinselgröße:,Rozmiar pędzla:
+Brush color from,Brush color from,Χρώμα πινέλου από,Couleur de la brosse depuis,Pinselfarbe von,Nadpisywanie koloru pędzla
+COLORFROM_HT,0: Color from the brush itself, 1: the currently selected color,0: Χρώμα από το πινέλο, 1: επιλεγμένο χρώμα,0 : Couleur depuis la brosse elle-même, 1 : la couleur actuellement sélectionnée,0: Farbe von dem Pinsel selbst, 1: die aktuell ausgewählte Farbe,0: Kolor pochodzący z samego pędzla, 1: Obecnie wybrany kolor rysowania
+Fill area:,Fill area:,Περιοχή γεμίσματος:,Remplissage de zone :,Fülle Bereich,Wypełnij przestrzeń:
+Area of the same color,Area of the same color,Περιοχή ίδιου χρώματος,Zone de la même couleur,Bereich mit der selben Farbe,Przestrzeń o takim samym kolorze
+All pixels of the same color,All pixels of the same color,Όλα τα πίξελ ίδιου χρώματος,Tous les pixels de la même couleur,Alle Pixel mit der selben Farbe,Wszystkie piksele tego samego koloru
+Lighten,Lighten,Φώτισμα,Éclaircir,Erhellen,Rozjaśnianie
+Darken,Darken,Σκούρημα,Assombrir,Verdunkeln,Przyciemnianie
+Amount:,Amount:,Ποσό:,Quantité :,Menge:,Siła:
+LDAMOUNT_HT,Lighten/Darken amount,Ποσό φωτίσματος ή σκουρήματος,Quantité d'éclaircissement/assombrissement,Erhellen/Verdunkeln Menge,Siła rozjaśnienia/przyciemnienia
+Mirroring,Mirroring,Κατοπτρισμός,Miroir,Spiegeln,Lustrzane odbicie
+Horizontal,Horizontal,Οριζόντια,Horizontal,Horizontal spiegeln,Poziome
+HORIZMIRROR_HT,Enable horizontal mirrored drawing,Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό,Dessine avec un miroir horizontal,Aktiviere horizontal gespiegelte Zeichnung ,Włącza lustrzane odbicie w poziomie podczas rysowania
+VERTMIRROR_HT,Enable vertical mirrored drawing,Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό,Dessine avec un miroir vertical,Aktiviere vertikale gespiegelte Zeichnung,Włącza lustrzane odbicie w pionie podczas rysowania
+Vertical,Vertical,Κάθετα,Vertical,Vertikal,Pionowe
+Current frame:,Current frame:,Τρέχον καρέ:,Trame actuelle :,Aktueller Frame,Obecna klatka:
+Current frame: 1/1,Current frame: 1/1,Τρέχον καρέ: 1/1,Trame actuelle : 1/1,Aktueller Frame 1/1,Obecna klatka: 1/1
+FIRSTFRAME_HT,Jump to the first frame\n(Ctrl+Home),Μετάβαση στο πρώτο καρέ\n(Ctrl+Home),Aller à la première trame\n(Ctrl + Orig.),Springe zu dem ersten Frame\n(Strg+Home),Skocz do pierwszej klatki\n(Ctrl+Home)
+PREVIOUSFRAME_HT,Go to the previous frame\n(Ctrl+Left),Μετάβαση στο προηγούμενο καρέ\n(Ctrl+Αριστερά),Aller à la trame précédente\n(Ctrl + Gauche),Gehe zu dem letzten Frame\n(Strg+Pfeil nach Links),Przejdź do poprzedniej klatki\n(Ctrl+Strzałka w lewo)
+PLAYBACKWARDS_HT,Play the animation backwards (from end to beginning)\n(F4),Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n(F4),Jouer l'animation à l'envers (de la fin vers le début)\n(F4),Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)\n(F4),Odtwórz animację od końca\n(F4)
+PLAYFORWARD_HT,Play the animation forward (from beginning to end)\n(F5),Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n(F5),Jouer l'animation (du début vers la fin)\n(F5),Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)\n(F5),Odtwórz animację od początku\n(F5)
+NEXTFRAME_HT,Go to the next frame\n(Ctrl+Right),Μετάβαση στο επόμενο καρέ\n(Ctrl+Δεξιά),Aller à la prochaine trame\n(Ctrl + Droite),Gehe zum nächsten Frame\n(Strg+Pfeil nach Rechts),Przejdź do następnej klatki\n(Ctrl+Strzałka w prawo)
+LASTFRAME_HT,Jump to the last frame\n(Ctrl+End),Μετάβαση στο τελευταίο καρέ\n(Ctrl+End),Aller à la dernière trame\n(Ctrl + Fin),Springe zum letzten Frame\n(Strg+Ende),Skocz do ostatniej klatki\n(Ctrl+End)
+FPS_HT,How many frames per second should the animation preview be?\nThe more FPS, the faster the animation plays.,Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\nΌσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση.,Combien d'images par seconde pour l'aperçu de l'animation ?\nPlus cette valeur est élevée, plus l'animation sera jouée rapidement.,Wie viele Frames pro Sekunde sollte die Animationsvorschau haben?\n Je mehr FPS, desto schneller wird die Animation abgespielt.,W ilu klatkach na sekundę odtwarzana ma być animacja?\nWiększa ilość klatek na sekundę powoduje szybsze odtwarzanie.
+No loop,No loop,Όχι επανάληψη,Pas de bouclage,Keine Wiederholungsschleife,Brak zapętlania
+Cycle loop,Cycle loop,Κυκλική επανάληψη,Bouclage en cycle,Zyklusschleife,Zapętl odtwarzanie
+Ping-pong loop,Ping-pong loop,Επανάληψη πινγκ-πονγκ,Bouclage en ping-pong,Ping Pong Loop,Zapętlanie typu ping-pong
+Onion Skinning:,Onion Skinning:,Γειτονικά καρέ:,Peau d'oignon :,Onion Skinning:,Kalkowanie klatek:
+Past Frames,Past Frames,Παρελθοντικά καρέ,Trames passées,Letzten Frames,Przeszłe klatki
+Future Frames,Future Frames,Μελλοντικά καρέ,Trames futures,Nächsten Frames,Przyszłe klatki
+Blue-Red Mode,Blue-Red Mode,Μπλε-Κόκκινη λειτουργία,Mode rouge-bleu,Blau-Roter Modus,Niebiesko-czerwone prześwity
+Add a new frame,Add a new frame,Προσθήκη νέου καρέ,Ajouter une trame,Füge einen neuen Frame hinzu,Dodaj nową klatkę
+Remove Frame,Remove Frame,Διαγραφή Καρέ,Supprimer la trame,Entferne Frame,Usuń klatkę
+Clone Frame,Clone Frame,Κλωνοποίηση Καρέ,Cloner la trame,Kopiere Frame,Klonuj klatkę
+Move Left,Move Left,Μετακίνηση Αριστερά,Déplacer vers la gauche,Bewege nach Links,Przesuń w lewo
+Move Right,Move Right,Μετακίνηση Δεξιά,Déplacer vers la droite,Bewege nach Rechts,Przesuń w prawo
+Layers,Layers,Στρώσεις,Calques,Ebenen,Warstwy
+LAYERNEW_HT,Create a new layer,Δημιουργία νέας στρώσης,Créer un calque,Erstelle eine neue Ebene,Stwórz nową warstwę
+LAYERREMOVE_HT,Remove current layer,Διαγραφή της τρέχουσας στρώσης,Supprimer le calque,Entferne aktuelle Ebene,Usuń obecną warstwę
+LAYERUP_HT,Move up the current layer,Μετακίνηση της τρέχουσας στρώσης προς τα πάνω,Déplacer le calque vers le haut,Bewege aktuelle Ebene nach oben,Przesuń obecną warstwę do góry
+LAYERDOWN_HT,Move down the current layer,Μετακίνηση της τρέχουσας στρώσης προς τα κάτω,Déplacer le calque vers le cas,Bewege aktuelle Ebene nach unten,Przesuń obecną warstwę w dół
+LAYERCLONE_HT,Clone current layer,Κλωνοποίηση της τρέχουσας στρώσης,Cloner le calque,Kopiere aktuelle Ebene,Duplikuj obecną warstwę
+LAYERMERGE_HT,Merge current layer with the one below,Συγχώνευση της τρέχουσας στρώσης με την από κάτω,Fusionner le calque vers le bas,Führe Ebene mit der darunter zusammen,Połącz obecną warstwę z warstwą powyżej
+LAYERVISIBILITY_HT,Toggle layer's visibility,Εναλλαγή της ορατότητας της στρώσης,Afficher/Masquer le calque,Ändere die Sichtbarkeit der Ebene,Ukrywanie warstwy
+SPLITSCREEN_HT,Split screen\n\nShow second canvas,Διπλή οθόνη\n\nΕμφάνιση δεύτερου καμβά,Écran partagé\n\nAfficher un second canevas,Geteilter Bildschirm\n\nZeige zweite Leinwand,Podzielenie ekranu\n\nWyświetla drugie płótno
+SPLITSCREEN_HIDE_HT,Split screen\n\nHide second canvas,Διπλή οθόνη\n\nΑπόκρυψη δεύτερου καμβάf,Écran partagé\n\nCacher le second canevas,Geteilter Bildschirm\n\nVerstecke zweite Leinwand,Podzielenie ekranu\n\nUkrywa drugie płótno
+Undo: Draw,Undo: Draw,Αναίρεση: Ζωγραφική,Annuler : Dessin,Rückgängig: Zeichen,Cofnij: Rysowanie
+Redo: Draw,Redo: Draw,Ακύρωση αναίρεσης: Ζωγραφική,Refaire : Dessin,Wiederherstellen: Zeichnen,Przywróć: Rysowanie
+Undo: Rectangle Select,Undo: Rectangle Select,Αναίρεση: Ορθογώνια επιλογή,Annuler : Sélection par rectangle,Rückgängig: Rechteck Auswahl,Cofnij: Zaznaczenie prostokątne
+Redo: Rectangle Select,Redo: Rectangle Select,Ακύρωση αναίρεσης: Ορθογώνια επιλογή,Refaire : Sélection par rectangle,Wiederherstellen: Rechteck Auswahl,Przywróć: Zaznaczenie prostokątne
+Undo: Scale,Undo: Scale,Αναίρεση: Κλιμάκωση,Annuler : Redimensionner l'image,Rückgängig: Skalieren,Cofnij: Skalowanie
+Redo: Scale,Redo: Scale,Ακύρωση αναίρεσης: Κλιμάκωση,Refaire : Redimensionner l'image,Wiederherstellen: Skalieren,Przywróć: Skalowanie
+Undo: Add Layer,Undo: Add Layer,Αναίρεση: Προσθήκη στρώσης,Annuler : Ajouter un calque,Rückgängig: Ebene hinzufügen,Cofnij: Dodawanie warstwy
+Redo: Add Layer,Redo: Add Layer,Ακύρωση αναίρεσης: Προσθήκη στρώσης,Refaire : Ajouter un calque,Wiederherstellen: Ebene hinzufügen,Przywróć: Dodawanie warstwy
+Undo: Remove Layer,Undo: Remove Layer,Αναίρεση: Διαγραφή στρώσης,Annuler : Supprimer le calque,Rückgängigg: Entferne Ebene,Cofnij: Usuwanie warstwy
+Redo: Remove Layer,Redo: Remove Layer,Ακύρωση αναίρεσης: Διαγραφή στρώσης,Refaire : Supprimer le calque,Wiederherstellen: Entferne Ebene,Przywróć: Usuwanie warstwy
+Undo: Merge Layer,Undo: Merge Layer,Αναίρεση: Συγχώνευση στρώσης,Annuler : Fusionner le calque,Rückgängig: Füge Ebene zusammen,Cofnij: Scalanie warstw
+Redo: Merge Layer,Redo: Merge Layer,Ακύρωση αναίρεσης: Συγχώνευση στρώσης,Refaire : Fusionner le calque,Wiederherstellen: Füge Ebene zusammen,Przywróć: Scalanie warstw
+Undo: Change Layer Order,Undo: Change Layer Order,Αναίρεση: Αλλαγή σειράς στρώσης,Annuler : Modifier l'ordre des calques,Rückgängig: Ändere Ebenenreihenfolge,Cofnij: Zmiana kolejności warstw
+Redo: Change Layer Order,Redo: Change Layer Order,Ακύρωση αναίρεσης: Αλλαγή σειράς στρώσης,Refaire : Modifier l'ordre des calques,Wiederherstellen: Ändere Ebenenreihenfolge,Przywróć: Zmiana kolejności warstw
+Undo: Add Frame,Undo: Add Frame,Αναίρεση: Προσθήκη καρέ,Annuler : Ajouter une trame,Rückgängig: Füge Frame hinzu,Cofnij: Dodawanie klatki
+Redo: Add Frame,Redo: Add Frame,Ακύρωση αναίρεσης: Προσθήκη καρέ,Refaire : Ajouter une trame,Wiederherstellen: Füge Frame hinzu,Przywróć: Dodawanie klatki
+Undo: Remove Frame,Undo: Remove Frame,Αναίρεση: Διαγραφή καρέ,Annuler : Supprimer une trame,Rückgängig: Entferne Frame,Cofnij: Usunięcie klatki
+Redo: Remove Frame,Redo: Remove Frame,Ακύρωση αναίρεσης: Διαγραφή καρέ,Refaire : Supprimer une trame,Wiederherstellen: Entferne Frame,Przywróć: Usunięcie klatki
+Undo: Change Frame Order,Undo: Change Frame Order,Αναίρεση: Αλλαγή σειράς καρέ,Annuler : Modifier l'ordre des trames,Rückgängig: Ändere Framereihenfolge,Cofnij: Zmiana kolejności klatek
+Redo: Change Frame Order,Redo: Change Frame Order,Ακύρωση αναίρεσης: Αλλαγή σειράς καρέ,Refaire : Modifier l'ordre des trames,Wiederherstellen: Ändere Framereihenfolge,Przywróć: Zmiana kolejności klatek
+Undo: Delete Custom Brush,Undo: Delete Custom Brush,Αναίρεση: Διαγραφή προσαρμοσμένου πινέλου,Annuler : Supprimer la brosse personnalisée,Rückgängig: Entferne benutzerdefinierten Pinsel,Cofnij: Usuwanie niestandardowego pędzla
+Redo: Delete Custom Brush,Redo: Delete Custom Brush,Ακύρωση αναίρεσης: Διαγραφή προσαρμοσμένου πινέλου,Refaire : Supprimer la brosse personnalisée,Wiederherstellen: Entferne benutzerdefinierten Pinsel,Przywróć: Usuwanie niestandardowego pędzla
+Move Guide,Move Guide,Μετακίνηση βοηθού,Déplacer le guide,Bewegungsanleitung,Przesuń prowadnice
+File saved,File saved,Το αρχείο αποθηκεύτηκε,Fichier enregistré,Datei gespeichert,Plik został zapisany
+File exported,File exported,Έγινε εξαγωγή αρχείου,Fichier exporté,Datei exportiert,Plik został wyeksportowany
