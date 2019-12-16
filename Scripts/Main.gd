@@ -734,9 +734,11 @@ func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
 
 func _on_LeftBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
+	Global.brush_type_window_position = "left"
 
 func _on_RightBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.right_brush_type_button.rect_global_position, Vector2(226, 72)))
+	Global.brush_type_window_position = "right"
 
 func _on_LeftBrushSizeEdit_value_changed(value) -> void:
 	var new_size = int(value)
