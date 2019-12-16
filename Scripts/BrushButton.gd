@@ -5,7 +5,7 @@ var custom_brush_index := -1
 
 func _on_BrushButton_pressed() -> void:
 	#Change left brush
-	if Global.brushes_popup.rect_global_position == Global.left_brush_type_button.rect_global_position:
+	if Global.brush_type_window_position == "left":
 		Global.current_left_brush_type = brush_type
 		Global.custom_left_brush_index = custom_brush_index
 		if custom_brush_index > -1: #Custom brush

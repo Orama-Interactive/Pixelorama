@@ -86,6 +86,8 @@ var right_brush_size := 1
 var current_left_brush_type = BRUSH_TYPES.PIXEL
 # warning-ignore:unused_class_variable
 var current_right_brush_type = BRUSH_TYPES.PIXEL
+# warning-ignore:unused_class_variable
+var brush_type_window_position := "left"
 
 var brushes_from_files := 0
 # warning-ignore:unused_class_variable
