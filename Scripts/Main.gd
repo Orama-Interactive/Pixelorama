@@ -132,6 +132,9 @@ func _ready() -> void:
 	for t in tools:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 
+	Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
+	Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
+
 	#Options for Import
 	import_as_new_frame = CheckBox.new()
 	import_as_new_frame.text = tr("IMPORT_FILE_LABEL")
