@@ -33,7 +33,6 @@ _global_script_class_icons={
 [application]
 
 config/name="Pixelorama"
-config/description="A free & open-source 2D sprite editor"
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://splash.png"
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
@@ -188,7 +187,7 @@ shift={
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation", "res://Translations/#Translations.fr.translation", "res://Translations/#Translations.de.translation", "res://Translations/#Translations.pl.translation" )
+translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation", "res://Translations/#Translations.fr.translation", "res://Translations/#Translations.de.translation" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]

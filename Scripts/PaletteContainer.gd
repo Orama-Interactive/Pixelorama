@@ -21,15 +21,22 @@ func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
 	if Global.palettes.has(palette_name): #Palette exists in memory
 		current_palette = palette_name
-		_display_palette(Global.palettes[palette_name])
+		var palette : Dictionary = Global.palettes[palette_name]
+		
+		Global.remove_palette_button.disabled = true # Cannot remove by default
+		if(palette.has("editable")):
+			if(palette.editable):
+				Global.remove_palette_button.disabled = false # Can remove if custom palette
+		
+		_display_palette(palette)
 	else: #Use default on fail
 		current_palette = "Default"
 		_display_palette(Global.palettes["Default"])
 
-func _display_palette(palette : Array) -> void:
+func _display_palette(palette : Dictionary) -> void:
 	var index := 0
 	
-	for color_data in palette:
+	for color_data in palette.colors:
 		var color = Color(color_data.data)
 		var new_button = palette_button.instance()
 		
@@ -41,7 +48,7 @@ func _display_palette(palette : Array) -> void:
 		index += 1
 
 func on_color_select(index : int) -> void:
-	var color = Color(Global.palettes[current_palette][index].data)
+	var color = Color(Global.palettes[current_palette].colors[index].data)
 	
 	if Input.is_action_just_released("left_mouse"):
 		Global.left_color_picker.color = color
@@ -104,22 +111,17 @@ func load_palette(path : String) -> String:
 		var data = result_json.result
 		if data.has("name"): #If data is 'valid' palette file
 			palette_name = data.name
-			Global.palettes[data.name] = data.colors
+			Global.palettes[data.name] = data
 
 	file.close()
 
 	return palette_name
 
-func _save_palette(palette : Array, name : String, path : String) -> void:
+func _save_palette(palette : Dictionary, name : String, path : String) -> void:
 	# Open file for writing
 	var file := File.new()
 	file.open(path, File.WRITE)
 
-	# Create palette data
-	var data := {}
-	data.name = name
-	data.colors = palette
-
 	# Write palette data to file
-	file.store_string(JSON.print(data))
+	file.store_string(JSON.print(palette))
 	file.close()
