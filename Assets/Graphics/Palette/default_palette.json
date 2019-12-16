@@ -1,6 +1,6 @@
 {
-  "name": "Default",
-  "colors" : [
+    "name": "Default",
+    "colors" : [
     { "data" : "#FF000000", "name" : "no name" },
     { "data" : "#FF222034", "name" : "no name" },
     { "data" : "#FF45283c", "name" : "no name" },
@@ -33,5 +33,7 @@
     { "data" : "#FFd77bba", "name" : "no name" },
     { "data" : "#FF8f974a", "name" : "no name" },
     { "data" : "#FF8a6f30", "name" : "no name" }
-    ]
+    ],
+   "comments": "Aseprite default palette",
+   "editable": false
 }
