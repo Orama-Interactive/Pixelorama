@@ -1582,7 +1582,7 @@ margin_left = 61.0
 margin_right = 142.0
 margin_bottom = 21.0
 text = "System Language"
-items = [ "System Language", null, false, 0, null, "German [de]", null, false, 1, null, "Greek [el]", null, false, 2, null, "English [en]", null, false, 3, null, "French [fr]", null, false, 4, null, "Polish [pl]", null, false, 5, null ]
+items = [ "System Language", null, false, 0, null, "Deutsch [de]", null, false, 1, null, "Ελληνικά [el]", null, false, 2, null, "English [en]", null, false, 3, null, "Français [fr]", null, false, 4, null, "Polski [pl]", null, false, 5, null ]
 selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
