@@ -788,7 +788,6 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -806,7 +805,7 @@ margin_right = 704.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
-mouse_default_cursor_shape = 15
+mouse_default_cursor_shape = 14
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 12 )
 custom_styles/focus = ExtResource( 12 )
@@ -827,7 +826,7 @@ margin_right = 16.0
 margin_bottom = 462.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
-mouse_default_cursor_shape = 14
+mouse_default_cursor_shape = 15
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 12 )
