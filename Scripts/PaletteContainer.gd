@@ -4,47 +4,12 @@ var palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
 var current_palette = "Default"
 
-var default_palette = [
-	Color("#FF000000"),
-	Color("#FF222034"),
-	Color("#FF45283c"),
-	Color("#FF663931"),
-	Color("#FF8f563b"),
-	Color("#FFdf7126"),
-	Color("#FFd9a066"),
-	Color("#FFeec39a"),
-	Color("#FFfbf236"),
-	Color("#FF99e550"),
-	Color("#FF6abe30"),
-	Color("#FF37946e"),
-	Color("#FF4b692f"),
-	Color("#FF524b24"),
-	Color("#FF323c39"),
-	Color("#FF3f3f74"),
-	Color("#FF306082"),
-	Color("#FF5b6ee1"),
-	Color("#FF639bff"),
-	Color("#FF5fcde4"),
-	Color("#FFcbdbfc"),
-	Color("#FFffffff"),
-	Color("#FF9badb7"),
-	Color("#FF847e87"),
-	Color("#FF696a6a"),
-	Color("#FF595652"),
-	Color("#FF76428a"),
-	Color("#FFac3232"),
-	Color("#FFd95763"),
-	Color("#FFd77bba"),
-	Color("#FF8f974a"),
-	Color("#FF8a6f30")
-]
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#Global.palettes["Default"] = default_palette
 
 	_load_palettes()
 
+	#Select default palette "Default"
 	on_palette_select(current_palette)
 	pass # Replace with function body.
 
@@ -57,26 +22,32 @@ func _clear_swatches() -> void:
 
 func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
-	if Global.palettes.has(palette_name):
+	if Global.palettes.has(palette_name): #Palette exists in memory
+		current_palette = palette_name
 		_display_palette(Global.palettes[palette_name])
-	else:
+	else: #Use default on fail
+		current_palette = "Default"
 		_display_palette(Global.palettes["Default"])
 	pass
 
 func _display_palette(palette : Array) -> void:
 	var index := 0
+	
 	for color_data in palette:
 		var color = Color(color_data.data)
 		var new_button = palette_button.instance()
+		
 		new_button.get_child(0).modulate = color
 		new_button.hint_tooltip = color_data.data.to_upper() + " " + color_data.name
 		new_button.connect("pressed", self, "on_color_select", [index])
+		
 		add_child(new_button)
 		index += 1
 	pass
 
 func on_color_select(index : int) -> void:
 	var color = Color(Global.palettes[current_palette][index].data)
+	
 	if Input.is_action_just_released("left_mouse"):
 		Global.left_color_picker.color = color
 		Global.update_left_custom_brush()
@@ -92,6 +63,7 @@ func _load_palettes() -> void:
 
 	if not dir.dir_exists("user://palettes"):
 		dir.make_dir("user://palettes");
+		dir.make_dir("user://palettes/custom");
 		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
 		dir.copy("res://Assets/Graphics/Palette/bubblegum16.json","user://palettes/bubblegum16.json");
 
@@ -121,6 +93,7 @@ func _load_palettes() -> void:
 	pass
 
 func load_palette(path : String) -> String:
+	# Open file for reading
 	var file := File.new()
 	file.open(path, File.READ)
 
@@ -128,7 +101,7 @@ func load_palette(path : String) -> String:
 	var result_json = JSON.parse(text)
 	var result = {}
 
-	var palette_name = null
+	var palette_name = null # Default error condition
 
 	if result_json.error != OK:  # If parse has errors
 		print("Error: ", result_json.error)
@@ -136,7 +109,7 @@ func load_palette(path : String) -> String:
 		print("Error String: ", result_json.error_string)
 	else:  # If parse OK
 		var data = result_json.result
-		if data.has("name"):
+		if data.has("name"): #If data is 'valid' palette file
 			palette_name = data.name
 			Global.palettes[data.name] = data.colors
 
@@ -145,13 +118,16 @@ func load_palette(path : String) -> String:
 	return palette_name
 
 func _save_palette(palette : Array, name : String, path : String):
+	# Open file for writing
 	var file := File.new()
 	file.open(path, File.WRITE)
 
+	# Create palette data
 	var data := {}
 	data.name = name
 	data.colors = palette
 
+	# Write palette data to file
 	file.store_string(JSON.print(data))
 	file.close()
 
