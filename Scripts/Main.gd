@@ -1047,3 +1047,16 @@ func _exit_tree() -> void:
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	Global.palette_container.on_palette_select(palette_name)
+
+func _on_EditPalette_pressed() -> void:
+	Global.palette_container.on_edit_palette()
+	pass
+	
+func _on_RemovePalette_pressed() -> void:
+	Global.palette_container.remove_current_palette()
+	pass
+
+func _on_NewPaletteDialog_confirmed() -> void:
+	Global.palette_container.on_new_palette_confirmed()
+	pass
+

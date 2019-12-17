@@ -3,6 +3,7 @@ extends GridContainer
 var palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
 var current_palette = "Default"
+var from_palette : = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,14 +25,70 @@ func on_palette_select(palette_name : String) -> void:
 		var palette : Dictionary = Global.palettes[palette_name]
 		
 		Global.remove_palette_button.disabled = true # Cannot remove by default
-		if(palette.has("editable")):
-			if(palette.editable):
+		if palette.has("editable"):
+			if palette.editable:
 				Global.remove_palette_button.disabled = false # Can remove if custom palette
 		
 		_display_palette(palette)
 	else: #Use default on fail
 		current_palette = "Default"
 		_display_palette(Global.palettes["Default"])
+
+func on_edit_palette() -> void:
+	var palette : Dictionary = Global.palettes[current_palette]
+	
+	var create_new_palette := true # Create new palette by default
+	if palette.has("editable"):
+		if palette.editable:
+			create_new_palette = false # Edit if already a custom palette
+
+	if create_new_palette:
+		from_palette = Global.palettes[current_palette]
+		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
+		Global.new_palette_dialog.popup_centered()
+	else:
+		from_palette = {}
+		Global.edit_palette_popup.open(current_palette)
+
+func on_new_palette_confirmed() -> void:
+	var new_palette_name : String = Global.new_palette_name_line_edit.text
+	var result : String = create_new_palette(new_palette_name, from_palette)
+	if not result.empty():
+		Global.error_dialog.set_text(result);
+		Global.error_dialog.popup_centered()
+
+func create_new_palette(name : String, from_palette : Dictionary = {}) -> String: # Returns empty string, else error string
+	var new_palette : Dictionary = {}
+	
+	# Check if new name is valid
+	if name.empty():
+		return "Error: Palette must have a valid name."
+	if Global.palettes.has(name):
+		return "Error: Palette '" + name + "' already exists!"
+	
+	new_palette.name = name
+	
+	# Check if source palette has data
+	if from_palette.has("name"):
+		new_palette = from_palette.duplicate()
+		new_palette.name = name
+		new_palette.editable = true
+	else:
+		new_palette.colors = []
+		new_palette.comments = ""
+		new_palette.editable = true
+	
+	# Add palette to Global and options
+	Global.palettes[name] = new_palette
+	Global.palette_option_button.add_item(name)
+	var index := Global.palette_option_button.get_item_count() - 1
+	Global.palette_option_button.set_item_metadata(index, name)
+	Global.palette_option_button.select(index)
+	
+	save_palette(name, name + ".json")
+	
+	on_palette_select(name)
+	return ""
 
 func _display_palette(palette : Dictionary) -> void:
 	var index := 0
@@ -58,29 +115,17 @@ func on_color_select(index : int) -> void:
 		Global.update_right_custom_brush()
 
 func _load_palettes() -> void:
-	var files := []
-
 	var dir := Directory.new()
 
 	if not dir.dir_exists("user://palettes"):
 		dir.make_dir("user://palettes");
-		dir.make_dir("user://palettes/custom");
+		dir.make_dir("user://custom/palettes")
 		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
 		dir.copy("res://Assets/Graphics/Palette/bubblegum16.json","user://palettes/bubblegum16.json");
 
-	dir.open("user://palettes")
-	dir.list_dir_begin()
+	var palette_files : Array = get_palette_files("user://palettes")
 
-	while true:
-		var file_name = dir.get_next()
-		if file_name == "":
-			break
-		elif not file_name.begins_with(".") && file_name.to_lower().ends_with("json"):
-			files.append(file_name)
-
-	dir.list_dir_end()
-
-	for file_name in files:
+	for file_name in palette_files:
 		var result : String = load_palette("user://palettes/" + file_name)
 		if result:
 			Global.palette_option_button.add_item(result)
@@ -88,9 +133,34 @@ func _load_palettes() -> void:
 			Global.palette_option_button.set_item_metadata(index, result)
 			if result == "Default":
 				Global.palette_option_button.select(index)
+	
+	dir.open("user://palettes/custom")
+	var custom_palette_files : Array = get_palette_files("user://palettes/custom")
+	
+	for file_name in custom_palette_files:
+		var result : String = load_palette("user://palettes/custom/" + file_name)
+		if result:
+			Global.palette_option_button.add_item(result)
+			var index := Global.palette_option_button.get_item_count() - 1
+			Global.palette_option_button.set_item_metadata(index, result)
 
-	for item in Global.palette_option_button.items:
-		print(item)
+func get_palette_files(path : String) -> Array:
+	var dir := Directory.new()
+	var results = []
+	
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file_name = dir.get_next()
+		if file_name == "":
+			break
+		elif not file_name.begins_with(".") && file_name.to_lower().ends_with("json"):
+			results.append(file_name)
+
+	dir.list_dir_end()
+	
+	return results
 
 func load_palette(path : String) -> String:
 	# Open file for reading
@@ -117,11 +187,28 @@ func load_palette(path : String) -> String:
 
 	return palette_name
 
-func _save_palette(palette : Dictionary, name : String, path : String) -> void:
+func remove_current_palette() -> void:
+	if Global.palettes[current_palette].has("editable"):
+		if Global.palettes[current_palette].editable:
+			_delete_palette_file(current_palette + ".json")
+			Global.palettes.erase(current_palette)
+			var selected_index := Global.palette_option_button.selected
+			Global.palette_option_button.remove_item(selected_index)
+			if(selected_index - 1 >= 0):
+				Global.palette_option_button.select(selected_index - 1)
+				on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))			
+	pass
+
+func _delete_palette_file(file_name : String) -> void:
+	var dir = Directory.new()
+	dir.remove("user://palettes/custom/" + file_name)
+
+func save_palette(palette_name : String, filename : String) -> void:
+	var palette_data = Global.palettes[palette_name]
 	# Open file for writing
 	var file := File.new()
-	file.open(path, File.WRITE)
+	file.open("user://palettes/custom/" + filename, File.WRITE)
 
 	# Write palette data to file
-	file.store_string(JSON.print(palette))
+	file.store_string(JSON.print(palette_data))
 	file.close()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Themes & Styles/Main Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=41]
 [ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=42]
 [ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=43]
+[ext_resource path="res://Scripts/EditPalettePopup.gd" type="Script" id=44]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
@@ -133,6 +134,7 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="MenuContainer" type="Panel" parent="MenuAndUI"]
+editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
@@ -208,7 +210,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
@@ -336,7 +337,6 @@ button_mask = 3
 texture_normal = ExtResource( 8 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -345,7 +345,6 @@ custom_constants/separation = 8
 alignment = 1
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-editor/display_folded = true
 margin_top = 35.0
 margin_right = 208.0
 margin_bottom = 67.0
@@ -366,7 +365,6 @@ size_flags_vertical = 0
 flat = true
 
 [node name="ColorButtonsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
-editor/display_folded = true
 margin_left = 68.0
 margin_right = 85.0
 margin_bottom = 32.0
@@ -772,6 +770,7 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -1285,7 +1284,9 @@ texture_disabled = ExtResource( 31 )
 margin_left = 72.0
 margin_right = 187.0
 margin_bottom = 32.0
+grow_horizontal = 0
 size_flags_horizontal = 3
+clip_text = true
 
 [node name="EditPalette" type="Button" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
 margin_left = 191.0
@@ -1381,7 +1382,7 @@ text = "Image Size"
 [node name="OptionsContainer" type="GridContainer" parent="CreateNewImage/VBoxContainer"]
 margin_top = 19.0
 margin_right = 184.0
-margin_bottom = 98.0
+margin_bottom = 90.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
@@ -1391,8 +1392,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 79.0
-margin_right = 143.0
+margin_left = 75.0
+margin_right = 139.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1400,32 +1401,32 @@ value = 64.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 75.0
-margin_bottom = 49.0
+margin_bottom = 45.0
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 79.0
-margin_top = 29.0
-margin_right = 143.0
-margin_bottom = 54.0
+margin_left = 75.0
+margin_top = 25.0
+margin_right = 139.0
+margin_bottom = 50.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="FillColorLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 61.0
+margin_top = 53.0
 margin_right = 75.0
-margin_bottom = 76.0
+margin_bottom = 68.0
 text = "Fill with color:"
 
 [node name="FillColor" type="ColorPickerButton" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 79.0
-margin_top = 58.0
-margin_right = 143.0
-margin_bottom = 79.0
+margin_left = 75.0
+margin_top = 50.0
+margin_right = 139.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0, 0, 0, 0 )
 
@@ -1503,7 +1504,7 @@ text = "Image Size"
 editor/display_folded = true
 margin_top = 19.0
 margin_right = 184.0
-margin_bottom = 98.0
+margin_bottom = 90.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
@@ -1513,8 +1514,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 76.0
-margin_right = 159.0
+margin_left = 72.0
+margin_right = 155.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1522,32 +1523,32 @@ value = 64.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 72.0
-margin_bottom = 49.0
+margin_bottom = 45.0
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 76.0
-margin_top = 29.0
-margin_right = 159.0
-margin_bottom = 54.0
+margin_left = 72.0
+margin_top = 25.0
+margin_right = 155.0
+margin_bottom = 50.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 61.0
+margin_top = 53.0
 margin_right = 72.0
-margin_bottom = 76.0
+margin_bottom = 68.0
 text = "Interpolation:"
 
 [node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 76.0
-margin_top = 58.0
-margin_right = 159.0
-margin_bottom = 79.0
+margin_left = 72.0
+margin_top = 50.0
+margin_right = 155.0
+margin_bottom = 71.0
 text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
@@ -1568,7 +1569,7 @@ margin_right = 92.0
 margin_bottom = 33.0
 
 [node name="OptionsContainer" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
-margin_right = 184.0
+margin_right = 195.0
 margin_bottom = 21.0
 columns = 2
 
@@ -1579,8 +1580,8 @@ margin_bottom = 18.0
 text = "Language:"
 
 [node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
-margin_left = 61.0
-margin_right = 142.0
+margin_left = 57.0
+margin_right = 195.0
 margin_bottom = 21.0
 text = "System Language"
 items = [ "System Language", null, false, 0, null, "German [de]", null, false, 1, null, "Greek [el]", null, false, 2, null, "English [en]", null, false, 3, null, "French [fr]", null, false, 4, null ]
@@ -1588,14 +1589,14 @@ selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 25.0
-margin_right = 184.0
+margin_right = 195.0
 margin_bottom = 40.0
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 44.0
-margin_right = 184.0
-margin_bottom = 123.0
+margin_right = 195.0
+margin_bottom = 115.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
@@ -1605,8 +1606,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 43.0
-margin_right = 107.0
+margin_left = 39.0
+margin_right = 103.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1614,32 +1615,32 @@ value = 1.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 39.0
-margin_bottom = 49.0
+margin_bottom = 45.0
 text = "Height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 43.0
-margin_top = 29.0
-margin_right = 107.0
-margin_bottom = 54.0
+margin_left = 39.0
+margin_top = 25.0
+margin_right = 103.0
+margin_bottom = 50.0
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
 suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 61.0
+margin_top = 53.0
 margin_right = 39.0
-margin_bottom = 76.0
+margin_bottom = 68.0
 text = "Color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 43.0
-margin_top = 58.0
-margin_right = 107.0
-margin_bottom = 79.0
+margin_left = 39.0
+margin_top = 50.0
+margin_right = 103.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 64, 20 )
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
@@ -1665,15 +1666,15 @@ align = 1
 [node name="MadeBy" type="Label" parent="AboutDialog/AboutUI"]
 margin_top = 37.0
 margin_right = 268.0
-margin_bottom = 70.0
+margin_bottom = 52.0
 text = "MADEBY_LABEL"
 align = 1
 
 [node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
 editor/display_folded = true
-margin_top = 74.0
+margin_top = 56.0
 margin_right = 268.0
-margin_bottom = 95.0
+margin_bottom = 77.0
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
 editor/display_folded = true
@@ -1699,9 +1700,9 @@ margin_bottom = 21.0
 text = "Donate"
 
 [node name="Copyright" type="Label" parent="AboutDialog/AboutUI"]
-margin_top = 99.0
+margin_top = 81.0
 margin_right = 268.0
-margin_bottom = 132.0
+margin_bottom = 114.0
 text = "
 Copyright 2019 - Orama Interactive"
 align = 1
@@ -1711,6 +1712,143 @@ margin_right = 200.0
 margin_bottom = 70.0
 resizable = true
 dialog_text = "QUIT_LABEL"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+margin_right = 76.0
+margin_bottom = 60.0
+window_title = "Error!"
+dialog_text = "This is an error message!"
+
+[node name="EditPalettePopup" type="WindowDialog" parent="."]
+visible = true
+margin_right = 600.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 600, 550 )
+window_title = "Edit Palette"
+script = ExtResource( 44 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditPalettePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditPalettePopup/VBoxContainer"]
+margin_right = 580.0
+margin_bottom = 476.0
+size_flags_vertical = 3
+
+[node name="EditPaletteColorPicker" type="ColorPicker" parent="EditPalettePopup/VBoxContainer/HBoxContainer"]
+margin_right = 290.0
+margin_bottom = 476.0
+
+[node name="Panel" type="Panel" parent="EditPalettePopup/VBoxContainer/HBoxContainer"]
+margin_left = 294.0
+margin_right = 540.0
+margin_bottom = 476.0
+size_flags_horizontal = 3
+
+[node name="EditPaletteGridContainer" type="GridContainer" parent="EditPalettePopup/VBoxContainer/HBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditPalettePopup/VBoxContainer/HBoxContainer"]
+margin_left = 544.0
+margin_right = 580.0
+margin_bottom = 476.0
+
+[node name="AddSwatchButton" type="TextureButton" parent="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+texture_normal = ExtResource( 28 )
+
+[node name="RemoveSwatchButton" type="TextureButton" parent="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 72.0
+texture_normal = ExtResource( 30 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EditPalettePopup/VBoxContainer"]
+margin_top = 480.0
+margin_right = 580.0
+margin_bottom = 505.0
+
+[node name="Label" type="Label" parent="EditPalettePopup/VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 68.0
+margin_bottom = 20.0
+text = "Color Name:"
+
+[node name="EditPaletteColorNameLineEdit" type="LineEdit" parent="EditPalettePopup/VBoxContainer/HBoxContainer3"]
+margin_left = 72.0
+margin_right = 580.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditPalettePopup/VBoxContainer"]
+margin_top = 509.0
+margin_right = 580.0
+margin_bottom = 530.0
+size_flags_horizontal = 3
+
+[node name="SpacerControl" type="Control" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_right = 159.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+
+[node name="EditPaletteSaveButton" type="Button" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 163.0
+margin_right = 201.0
+margin_bottom = 21.0
+text = "Save"
+
+[node name="SpacerControl2" type="Control" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 205.0
+margin_right = 364.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+
+[node name="EditPaletteCancelButton" type="Button" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 368.0
+margin_right = 417.0
+margin_bottom = 21.0
+text = "Cancel"
+
+[node name="SpacerControl3" type="Control" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 421.0
+margin_right = 580.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+
+[node name="NewPaletteDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "Create a new custom palette from existing default?"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NewPaletteDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 315.0
+margin_bottom = 33.0
+
+[node name="Label" type="Label" parent="NewPaletteDialog/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 77.0
+margin_bottom = 20.0
+text = "Palette Name:"
+
+[node name="NewPaletteNameLineEdit" type="LineEdit" parent="NewPaletteDialog/HBoxContainer2"]
+margin_left = 81.0
+margin_right = 192.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+expand_to_text_length = true
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -1770,7 +1908,9 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/RemovePalette" to="." method="_on_RemovePalette_pressed"]
 [connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
@@ -1795,4 +1935,11 @@ visible = false
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Donate" to="AboutDialog" method="_on_Donate_pressed"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
+[connection signal="color_changed" from="EditPalettePopup/VBoxContainer/HBoxContainer/EditPaletteColorPicker" to="EditPalettePopup" method="_on_EditPaletteColorPicker_color_changed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer/AddSwatchButton" to="EditPalettePopup" method="_on_AddSwatchButton_pressed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer/RemoveSwatchButton" to="EditPalettePopup" method="_on_RemoveSwatchButton_pressed"]
+[connection signal="text_changed" from="EditPalettePopup/VBoxContainer/HBoxContainer3/EditPaletteColorNameLineEdit" to="EditPalettePopup" method="_on_EditPaletteColorNameLineEdit_text_changed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer2/EditPaletteSaveButton" to="EditPalettePopup" method="_on_EditPaletteSaveButton_pressed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer2/EditPaletteCancelButton" to="EditPalettePopup" method="_on_EditPaletteCancelButton_pressed"]
+[connection signal="confirmed" from="NewPaletteDialog" to="." method="_on_NewPaletteDialog_confirmed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

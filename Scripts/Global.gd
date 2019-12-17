@@ -187,6 +187,11 @@ var remove_palette_button : TextureButton
 var palette_option_button : OptionButton
 var edit_palette_button : BaseButton
 var palette_container : GridContainer
+var edit_palette_popup : WindowDialog
+var new_palette_dialog : ConfirmationDialog
+var new_palette_name_line_edit : LineEdit
+
+var error_dialog : AcceptDialog
 
 func _ready() -> void:
 	undo_redo = UndoRedo.new()
@@ -275,6 +280,11 @@ func _ready() -> void:
 	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
 	edit_palette_button = find_node_by_name(root, "EditPalette")
 	palette_container = find_node_by_name(root, "PaletteContainer")
+	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
+	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")
+	new_palette_name_line_edit = find_node_by_name(new_palette_dialog, "NewPaletteNameLineEdit")
+
+	error_dialog = find_node_by_name(root, "ErrorDialog")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
