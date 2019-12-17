@@ -15,7 +15,7 @@ var redone := false
 var fps := 6.0
 var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
-var sub_key_mask := KEY_MASK_CMD if OS.has_feature("OSX") else sub_key_mask
+var sub_key_mask := KEY_MASK_CMD if OS.has_feature("OSX") else KEY_MASK_CTRL
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
