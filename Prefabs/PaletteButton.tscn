@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_hover.tres" type="StyleBox" id=1]
 [ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_pressedr.tres" type="StyleBox" id=2]
-[ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=4]
+[ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_focus.tres" type="StyleBox" id=3]
+[ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://Scripts/PaletteButton.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=6]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -14,9 +16,11 @@ rect_min_size = Vector2( 26, 26 )
 hint_tooltip = "Color Name"
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 2 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
 button_mask = 3
 icon = SubResource( 1 )
+script = ExtResource( 5 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_right = 1.0
@@ -27,7 +31,7 @@ margin_right = -1.0
 margin_bottom = -1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2

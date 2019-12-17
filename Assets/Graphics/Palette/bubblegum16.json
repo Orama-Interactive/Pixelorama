@@ -1,6 +1,6 @@
 {
-  "name": "BubbleGum16",
-  "colors" : [
+    "name": "BubbleGum16",
+    "colors" : [
     { "data" : "#FF000000", "name" : "no name" },
     { "data" : "#FF7f0622", "name" : "no name" },
     { "data" : "#FFd62411", "name" : "no name" },
@@ -18,5 +18,6 @@
     { "data" : "#FF007899", "name" : "no name" },
     { "data" : "#FF002859", "name" : "no name" },
     ],
-    "comments": "by PineTreePizza - https://twitter.com/PineTreePizza"
+    "comments": "by PineTreePizza - https://twitter.com/PineTreePizza",
+    "editable": false
 }
