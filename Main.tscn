@@ -202,6 +202,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -232,6 +233,7 @@ margin_bottom = 127.0
 custom_constants/separation = 17
 
 [node name="UtilityTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_right = 208.0
 margin_bottom = 55.0
 
@@ -337,6 +339,7 @@ button_mask = 3
 texture_normal = ExtResource( 8 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -365,6 +368,7 @@ size_flags_vertical = 0
 flat = true
 
 [node name="ColorButtonsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
+editor/display_folded = true
 margin_left = 68.0
 margin_right = 85.0
 margin_bottom = 32.0
@@ -480,26 +484,24 @@ suffix = "px"
 [node name="LeftColorInterpolation" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 112.0
+margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 137.0
+margin_bottom = 113.0
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_top = 5.0
+margin_top = 1.0
 margin_right = 90.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 hint_tooltip = "COLORFROM_HT"
 text = "Brush color from"
 
 [node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftColorInterpolation"]
 margin_left = 94.0
 margin_right = 208.0
-margin_bottom = 25.0
+margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 1.0
+value = 100.0
 
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
@@ -524,36 +526,34 @@ selected = 0
 [node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 110.0
-margin_right = 244.0
-margin_bottom = 158.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 140.0
 
 [node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_right = 244.0
-margin_bottom = 20.0
+margin_right = 208.0
+margin_bottom = 23.0
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="LeftLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_top = 24.0
-margin_right = 244.0
-margin_bottom = 48.0
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 44.0
 
 [node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
-margin_top = 5.0
-margin_right = 55.0
-margin_bottom = 19.0
+margin_top = 1.0
+margin_right = 47.0
+margin_bottom = 16.0
 text = "Amount:"
 
 [node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
-margin_left = 59.0
-margin_right = 133.0
-margin_bottom = 24.0
+margin_left = 51.0
+margin_right = 115.0
+margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
-max_value = 1.0
-step = 0.01
-value = 0.1
+value = 10.0
 
 [node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 margin_top = 112.0
@@ -663,26 +663,24 @@ suffix = "px"
 [node name="RightColorInterpolation" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 112.0
+margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 137.0
+margin_bottom = 113.0
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightColorInterpolation"]
-margin_top = 5.0
+margin_top = 1.0
 margin_right = 90.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 hint_tooltip = "COLORFROM_HT"
 text = "Brush color from"
 
 [node name="RightInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightColorInterpolation"]
 margin_left = 94.0
 margin_right = 208.0
-margin_bottom = 25.0
+margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 1.0
+value = 100.0
 
 [node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
@@ -707,36 +705,34 @@ selected = 0
 [node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 110.0
-margin_right = 244.0
-margin_bottom = 158.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 140.0
 
 [node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions"]
-margin_right = 244.0
-margin_bottom = 20.0
+margin_right = 208.0
+margin_bottom = 23.0
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="RightLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions"]
-margin_top = 24.0
-margin_right = 244.0
-margin_bottom = 48.0
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 44.0
 
 [node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
-margin_top = 5.0
-margin_right = 55.0
-margin_bottom = 19.0
+margin_top = 1.0
+margin_right = 47.0
+margin_bottom = 16.0
 text = "Amount:"
 
 [node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
-margin_left = 59.0
-margin_right = 133.0
-margin_bottom = 24.0
+margin_left = 51.0
+margin_right = 115.0
+margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
-max_value = 1.0
-step = 0.01
-value = 0.1
+value = 10.0
 
 [node name="RightMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
@@ -881,6 +877,7 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 16 )
 
 [node name="AnimationTimeline" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_top = 478.0
 margin_right = 704.0
 margin_bottom = 620.0
@@ -1106,6 +1103,7 @@ margin_right = 689.0
 margin_bottom = 139.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1155,6 +1153,7 @@ margin_right = 224.0
 margin_bottom = 199.0
 
 [node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
 margin_top = 203.0
 margin_right = 224.0
 margin_bottom = 384.0
@@ -1438,8 +1437,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "D:/GitHub/Pixelorama"
-current_path = "D:/GitHub/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1454,8 +1453,8 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "D:/GitHub/Pixelorama"
-current_path = "D:/GitHub/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1465,8 +1464,8 @@ resizable = true
 mode = 1
 access = 2
 filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
-current_dir = "D:/GitHub/Pixelorama"
-current_path = "D:/GitHub/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ExportSprites" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1481,8 +1480,8 @@ window_title = "Export Sprite"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "D:/GitHub/Pixelorama"
-current_path = "D:/GitHub/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
