@@ -1012,12 +1012,12 @@ func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
 func _on_LeftLightenDarken_item_selected(ID : int) -> void:
 	Global.left_ld = ID
 func _on_LeftLDAmountSpinbox_value_changed(value : float) -> void:
-	Global.left_ld_amount = value
+	Global.left_ld_amount = value / 100
 
 func _on_RightLightenDarken_item_selected(ID : int) -> void:
 	Global.right_ld = ID
 func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
-	Global.right_ld_amount = value
+	Global.right_ld_amount = value / 100
 
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed
@@ -1047,3 +1047,16 @@ func _exit_tree() -> void:
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	Global.palette_container.on_palette_select(palette_name)
+
+func _on_EditPalette_pressed() -> void:
+	Global.palette_container.on_edit_palette()
+	pass
+
+func _on_RemovePalette_pressed() -> void:
+	Global.palette_container.remove_current_palette()
+	pass
+
+func _on_NewPaletteDialog_confirmed() -> void:
+	Global.palette_container.on_new_palette_confirmed()
+	pass
+

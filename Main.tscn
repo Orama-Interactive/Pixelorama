@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Themes & Styles/Main Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -43,17 +43,12 @@
 [ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=41]
 [ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=42]
 [ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=43]
+[ext_resource path="res://Scripts/EditPalettePopup.gd" type="Script" id=44]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
 
-[sub_resource type="InputEventKey" id=18]
-scancode = 88
-
-[sub_resource type="ShortCut" id=19]
-shortcut = SubResource( 18 )
-
-[sub_resource type="Image" id=20]
+[sub_resource type="Image" id=18]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "RGBA8",
@@ -63,10 +58,10 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id=3]
-image = SubResource( 20 )
+image = SubResource( 18 )
 size = Vector2( 32, 32 )
 
-[sub_resource type="Image" id=21]
+[sub_resource type="Image" id=19]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "RGBA8",
@@ -76,7 +71,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id=5]
-image = SubResource( 21 )
+image = SubResource( 19 )
 size = Vector2( 32, 32 )
 
 [sub_resource type="InputEventKey" id=6]
@@ -146,14 +141,13 @@ rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/MenuContainer"]
-editor/display_folded = true
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 1010.0
 
 [node name="FileMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_right = 31.0
-margin_bottom = 21.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "File"
 switch_on_hover = true
@@ -161,7 +155,7 @@ switch_on_hover = true
 [node name="EditMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 35.0
 margin_right = 68.0
-margin_bottom = 21.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "Edit"
 switch_on_hover = true
@@ -169,7 +163,7 @@ switch_on_hover = true
 [node name="ViewMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 72.0
 margin_right = 110.0
-margin_bottom = 21.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
@@ -177,7 +171,7 @@ switch_on_hover = true
 [node name="HelpMenu" type="MenuButton" parent="MenuAndUI/MenuContainer/MenuItems"]
 margin_left = 114.0
 margin_right = 151.0
-margin_bottom = 21.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "Help"
 switch_on_hover = true
@@ -208,6 +202,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -216,7 +211,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
@@ -239,6 +233,7 @@ margin_bottom = 127.0
 custom_constants/separation = 17
 
 [node name="UtilityTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+editor/display_folded = true
 margin_right = 208.0
 margin_bottom = 55.0
 
@@ -353,9 +348,9 @@ custom_constants/separation = 8
 alignment = 1
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 35.0
+margin_top = 59.0
 margin_right = 208.0
-margin_bottom = 67.0
+margin_bottom = 91.0
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter"]
 margin_left = 27.0
@@ -373,6 +368,7 @@ size_flags_vertical = 0
 flat = true
 
 [node name="ColorButtonsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
+editor/display_folded = true
 margin_left = 68.0
 margin_right = 85.0
 margin_bottom = 32.0
@@ -387,8 +383,6 @@ margin_right = 17.0
 margin_bottom = 7.0
 hint_tooltip = "COLORSWITCH_HT"
 mouse_default_cursor_shape = 2
-shortcut_in_tooltip = false
-shortcut = SubResource( 19 )
 texture_normal = ExtResource( 9 )
 
 [node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical"]
@@ -412,13 +406,13 @@ flat = true
 color = Color( 1, 1, 1, 1 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 75.0
+margin_top = 99.0
 margin_right = 208.0
-margin_bottom = 79.0
+margin_bottom = 103.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
 editor/display_folded = true
-margin_top = 87.0
+margin_top = 111.0
 margin_right = 208.0
 margin_bottom = 242.0
 
@@ -431,7 +425,7 @@ align = 1
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 margin_top = 19.0
 margin_right = 208.0
-margin_bottom = 43.0
+margin_bottom = 35.0
 hint_tooltip = "LEFT_INDIC_HT"
 mouse_default_cursor_shape = 2
 pressed = true
@@ -439,9 +433,9 @@ text = "Left pixel indicator"
 
 [node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 47.0
+margin_top = 39.0
 margin_right = 208.0
-margin_bottom = 79.0
+margin_bottom = 71.0
 
 [node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushType"]
 margin_right = 36.0
@@ -468,20 +462,20 @@ text = "Brush: Pixel"
 
 [node name="LeftBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 83.0
+margin_top = 75.0
 margin_right = 208.0
-margin_bottom = 108.0
+margin_bottom = 92.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize"]
-margin_top = 5.0
+margin_top = 1.0
 margin_right = 58.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 text = "Brush size:"
 
 [node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize"]
 margin_left = 62.0
-margin_right = 124.0
-margin_bottom = 25.0
+margin_right = 126.0
+margin_bottom = 17.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
@@ -490,26 +484,24 @@ suffix = "px"
 [node name="LeftColorInterpolation" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 112.0
+margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 137.0
+margin_bottom = 113.0
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_top = 5.0
+margin_top = 1.0
 margin_right = 90.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 hint_tooltip = "COLORFROM_HT"
 text = "Brush color from"
 
 [node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftColorInterpolation"]
 margin_left = 94.0
 margin_right = 208.0
-margin_bottom = 25.0
+margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 1.0
+value = 100.0
 
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
@@ -534,41 +526,39 @@ selected = 0
 [node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 110.0
-margin_right = 244.0
-margin_bottom = 158.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 140.0
 
 [node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_right = 244.0
-margin_bottom = 20.0
+margin_right = 208.0
+margin_bottom = 23.0
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="LeftLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_top = 24.0
-margin_right = 244.0
-margin_bottom = 48.0
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 44.0
 
 [node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
-margin_top = 5.0
-margin_right = 55.0
-margin_bottom = 19.0
+margin_top = 1.0
+margin_right = 47.0
+margin_bottom = 16.0
 text = "Amount:"
 
 [node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
-margin_left = 59.0
-margin_right = 133.0
-margin_bottom = 24.0
+margin_left = 51.0
+margin_right = 115.0
+margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
-max_value = 1.0
-step = 0.01
-value = 0.1
+value = 10.0
 
 [node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
-margin_top = 112.0
+margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 155.0
+margin_bottom = 131.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftMirroring"]
 margin_right = 208.0
@@ -578,19 +568,19 @@ text = "Mirroring"
 [node name="LeftMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftMirroring"]
 margin_top = 19.0
 margin_right = 208.0
-margin_bottom = 43.0
+margin_bottom = 35.0
 
 [node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons"]
-margin_right = 85.0
-margin_bottom = 24.0
+margin_right = 77.0
+margin_bottom = 16.0
 hint_tooltip = "HORIZMIRROR_HT"
 mouse_default_cursor_shape = 2
 text = "Horizontal"
 
 [node name="LeftVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons"]
-margin_left = 89.0
-margin_right = 158.0
-margin_bottom = 24.0
+margin_left = 81.0
+margin_right = 142.0
+margin_bottom = 16.0
 hint_tooltip = "VERTMIRROR_HT"
 mouse_default_cursor_shape = 2
 text = "Vertical"
@@ -604,7 +594,7 @@ margin_bottom = 254.0
 editor/display_folded = true
 margin_top = 262.0
 margin_right = 208.0
-margin_bottom = 417.0
+margin_bottom = 393.0
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 margin_right = 208.0
@@ -615,16 +605,16 @@ align = 1
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 margin_top = 19.0
 margin_right = 208.0
-margin_bottom = 43.0
+margin_bottom = 35.0
 hint_tooltip = "RIGHT_INDIC_HT"
 mouse_default_cursor_shape = 2
 text = "Right pixel indicator"
 
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
-margin_top = 47.0
+margin_top = 39.0
 margin_right = 208.0
-margin_bottom = 79.0
+margin_bottom = 71.0
 
 [node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushType"]
 margin_right = 36.0
@@ -651,20 +641,20 @@ text = "Brush: Pixel"
 
 [node name="RightBrushSize" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
-margin_top = 83.0
+margin_top = 75.0
 margin_right = 208.0
-margin_bottom = 108.0
+margin_bottom = 92.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize"]
-margin_top = 5.0
+margin_top = 1.0
 margin_right = 58.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 text = "Brush size:"
 
 [node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize"]
 margin_left = 62.0
-margin_right = 124.0
-margin_bottom = 25.0
+margin_right = 126.0
+margin_bottom = 17.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
@@ -673,26 +663,24 @@ suffix = "px"
 [node name="RightColorInterpolation" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 112.0
+margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 137.0
+margin_bottom = 113.0
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightColorInterpolation"]
-margin_top = 5.0
+margin_top = 1.0
 margin_right = 90.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 hint_tooltip = "COLORFROM_HT"
 text = "Brush color from"
 
 [node name="RightInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightColorInterpolation"]
 margin_left = 94.0
 margin_right = 208.0
-margin_bottom = 25.0
+margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 1.0
+value = 100.0
 
 [node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
@@ -717,42 +705,40 @@ selected = 0
 [node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 110.0
-margin_right = 244.0
-margin_bottom = 158.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 140.0
 
 [node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions"]
-margin_right = 244.0
-margin_bottom = 20.0
+margin_right = 208.0
+margin_bottom = 23.0
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="RightLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions"]
-margin_top = 24.0
-margin_right = 244.0
-margin_bottom = 48.0
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 44.0
 
 [node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
-margin_top = 5.0
-margin_right = 55.0
-margin_bottom = 19.0
+margin_top = 1.0
+margin_right = 47.0
+margin_bottom = 16.0
 text = "Amount:"
 
 [node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
-margin_left = 59.0
-margin_right = 133.0
-margin_bottom = 24.0
+margin_left = 51.0
+margin_right = 115.0
+margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
-max_value = 1.0
-step = 0.01
-value = 0.1
+value = 10.0
 
 [node name="RightMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
-margin_top = 112.0
+margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 155.0
+margin_bottom = 131.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightMirroring"]
 margin_right = 208.0
@@ -762,19 +748,19 @@ text = "Mirroring"
 [node name="RightMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightMirroring"]
 margin_top = 19.0
 margin_right = 208.0
-margin_bottom = 43.0
+margin_bottom = 35.0
 
 [node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons"]
-margin_right = 85.0
-margin_bottom = 24.0
+margin_right = 77.0
+margin_bottom = 16.0
 hint_tooltip = "HORIZMIRROR_HT"
 mouse_default_cursor_shape = 2
 text = "Horizontal"
 
 [node name="RightVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons"]
-margin_left = 89.0
-margin_right = 158.0
-margin_bottom = 24.0
+margin_left = 81.0
+margin_right = 142.0
+margin_bottom = 16.0
 hint_tooltip = "VERTMIRROR_HT"
 mouse_default_cursor_shape = 2
 text = "Vertical"
@@ -788,7 +774,6 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -806,7 +791,6 @@ margin_right = 704.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
-mouse_default_cursor_shape = 15
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 12 )
 custom_styles/focus = ExtResource( 12 )
@@ -827,7 +811,6 @@ margin_right = 16.0
 margin_bottom = 462.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
-mouse_default_cursor_shape = 14
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 12 )
@@ -839,7 +822,6 @@ enabled_focus_mode = 0
 script = ExtResource( 14 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
-editor/display_folded = true
 margin_left = 16.0
 margin_right = 704.0
 margin_bottom = 462.0
@@ -875,7 +857,6 @@ margin_right = 319.0
 margin_bottom = 464.0
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-editor/display_folded = true
 visible = false
 margin_left = 345.0
 margin_right = 686.0
@@ -917,32 +898,32 @@ margin_left = 15.0
 margin_top = 4.0
 
 [node name="TimelineContainer" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_right = 562.0
-margin_bottom = 139.0
+margin_right = 570.0
+margin_bottom = 138.0
 size_flags_horizontal = 3
 
 [node name="AnimationButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_right = 562.0
-margin_bottom = 25.0
+margin_right = 570.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 
 [node name="CurrentFrame" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_top = 5.0
-margin_right = 234.0
-margin_bottom = 20.0
+margin_top = 4.0
+margin_right = 237.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Current frame: 1/1"
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
 editor/display_folded = true
-margin_left = 238.0
-margin_right = 378.0
-margin_bottom = 25.0
+margin_left = 241.0
+margin_right = 381.0
+margin_bottom = 24.0
 size_flags_horizontal = 2
 
 [node name="FirstFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_right = 20.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 hint_tooltip = "FIRSTFRAME_HT"
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
@@ -952,7 +933,7 @@ texture_normal = ExtResource( 19 )
 [node name="PreviousFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 24.0
 margin_right = 44.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 hint_tooltip = "PREVIOUSFRAME_HT"
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
@@ -962,7 +943,7 @@ texture_normal = ExtResource( 20 )
 [node name="PlayBackwards" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 48.0
 margin_right = 68.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 hint_tooltip = "PLAYBACKWARDS_HT"
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -974,7 +955,7 @@ texture_pressed = ExtResource( 22 )
 [node name="PlayForward" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 72.0
 margin_right = 92.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 hint_tooltip = "PLAYFORWARD_HT"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -987,7 +968,7 @@ texture_pressed = ExtResource( 22 )
 [node name="NextFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 96.0
 margin_right = 116.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 hint_tooltip = "NEXTFRAME_HT"
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
@@ -997,7 +978,7 @@ texture_normal = ExtResource( 24 )
 [node name="LastFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons"]
 margin_left = 120.0
 margin_right = 140.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 hint_tooltip = "LASTFRAME_HT"
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
@@ -1005,14 +986,14 @@ shortcut = SubResource( 17 )
 texture_normal = ExtResource( 25 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 476.0
-margin_right = 562.0
-margin_bottom = 25.0
+margin_left = 482.0
+margin_right = 570.0
+margin_bottom = 24.0
 size_flags_horizontal = 0
 
 [node name="FPSValue" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
-margin_right = 62.0
-margin_bottom = 25.0
+margin_right = 64.0
+margin_bottom = 24.0
 hint_tooltip = "FPS_HT"
 mouse_default_cursor_shape = 2
 min_value = 0.1
@@ -1021,35 +1002,35 @@ value = 6.0
 suffix = "FPS"
 
 [node name="LoopAnim" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
-margin_left = 66.0
-margin_right = 86.0
-margin_bottom = 25.0
+margin_left = 68.0
+margin_right = 88.0
+margin_bottom = 24.0
 hint_tooltip = "No loop"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 26 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_top = 29.0
-margin_right = 562.0
-margin_bottom = 33.0
+margin_top = 28.0
+margin_right = 570.0
+margin_bottom = 32.0
 
 [node name="TimelineSeconds" type="Control" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_top = 37.0
-margin_right = 562.0
-margin_bottom = 53.0
+margin_top = 36.0
+margin_right = 570.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 0, 16 )
 script = ExtResource( 27 )
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_top = 57.0
-margin_right = 562.0
-margin_bottom = 61.0
+margin_top = 56.0
+margin_right = 570.0
+margin_bottom = 60.0
 
 [node name="FrameAndButtonContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
 editor/display_folded = true
-margin_top = 65.0
-margin_right = 562.0
-margin_bottom = 101.0
+margin_top = 64.0
+margin_right = 570.0
+margin_bottom = 100.0
 
 [node name="AddFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer"]
 margin_right = 36.0
@@ -1061,7 +1042,7 @@ texture_normal = ExtResource( 28 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer"]
 margin_left = 40.0
-margin_right = 562.0
+margin_right = 570.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1070,58 +1051,59 @@ scroll_vertical_enabled = false
 [node name="FrameContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer/ScrollContainer"]
 
 [node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_left = 566.0
-margin_right = 570.0
-margin_bottom = 139.0
+margin_left = 574.0
+margin_right = 578.0
+margin_bottom = 138.0
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
 editor/display_folded = true
-margin_left = 574.0
+margin_left = 582.0
 margin_right = 681.0
-margin_bottom = 139.0
+margin_bottom = 138.0
 
 [node name="OnionSkinning" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_right = 107.0
+margin_right = 99.0
 margin_bottom = 15.0
 text = "Onion Skinning:"
 
 [node name="OnionSkinningPast" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
 margin_top = 19.0
-margin_right = 107.0
+margin_right = 99.0
 margin_bottom = 34.0
 text = "Past Frames"
 
 [node name="PastOnionSkinning" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
 margin_top = 38.0
-margin_right = 107.0
-margin_bottom = 63.0
+margin_right = 99.0
+margin_bottom = 55.0
 mouse_default_cursor_shape = 2
 
 [node name="OnionSkinningFuture" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 67.0
-margin_right = 107.0
-margin_bottom = 82.0
+margin_top = 59.0
+margin_right = 99.0
+margin_bottom = 74.0
 text = "Future Frames"
 
 [node name="FutureOnionSkinning" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 86.0
-margin_right = 107.0
-margin_bottom = 111.0
+margin_top = 78.0
+margin_right = 99.0
+margin_bottom = 95.0
 mouse_default_cursor_shape = 2
 
 [node name="BlueRedMode" type="CheckBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 115.0
-margin_right = 107.0
-margin_bottom = 139.0
+margin_top = 99.0
+margin_right = 99.0
+margin_bottom = 115.0
 mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
 
 [node name="VSeparator2" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
 margin_left = 685.0
 margin_right = 689.0
-margin_bottom = 139.0
+margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1295,12 +1277,15 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 30 )
+texture_disabled = ExtResource( 31 )
 
 [node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
 margin_left = 72.0
 margin_right = 187.0
 margin_bottom = 32.0
+grow_horizontal = 0
 size_flags_horizontal = 3
+clip_text = true
 
 [node name="EditPalette" type="Button" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
 margin_left = 191.0
@@ -1334,10 +1319,10 @@ drag_to_rearrange_enabled = true
 [node name="File" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 33.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 5.0
+margin_top = 39.0
+margin_right = -5.0
+margin_bottom = -5.0
 rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
@@ -1352,10 +1337,10 @@ hint_tooltip = "Pixel brush"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 33.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 5.0
+margin_top = 39.0
+margin_right = -5.0
+margin_bottom = -5.0
 rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
@@ -1386,7 +1371,7 @@ margin_bottom = 70.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 33.0
+margin_bottom = 31.0
 
 [node name="ImageSize" type="Label" parent="CreateNewImage/VBoxContainer"]
 margin_right = 184.0
@@ -1396,7 +1381,7 @@ text = "Image Size"
 [node name="OptionsContainer" type="GridContainer" parent="CreateNewImage/VBoxContainer"]
 margin_top = 19.0
 margin_right = 184.0
-margin_bottom = 98.0
+margin_bottom = 90.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
@@ -1406,8 +1391,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 79.0
-margin_right = 143.0
+margin_left = 75.0
+margin_right = 139.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1415,32 +1400,32 @@ value = 64.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 75.0
-margin_bottom = 49.0
+margin_bottom = 45.0
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 79.0
-margin_top = 29.0
-margin_right = 143.0
-margin_bottom = 54.0
+margin_left = 75.0
+margin_top = 25.0
+margin_right = 139.0
+margin_bottom = 50.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="FillColorLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 61.0
+margin_top = 53.0
 margin_right = 75.0
-margin_bottom = 76.0
+margin_bottom = 68.0
 text = "Fill with color:"
 
 [node name="FillColor" type="ColorPickerButton" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 79.0
-margin_top = 58.0
-margin_right = 143.0
-margin_bottom = 79.0
+margin_left = 75.0
+margin_top = 50.0
+margin_right = 139.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0, 0, 0, 0 )
 
@@ -1507,7 +1492,7 @@ margin_bottom = 114.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 77.0
+margin_bottom = 75.0
 
 [node name="ImageSize" type="Label" parent="ScaleImage/VBoxContainer"]
 margin_right = 184.0
@@ -1518,7 +1503,7 @@ text = "Image Size"
 editor/display_folded = true
 margin_top = 19.0
 margin_right = 184.0
-margin_bottom = 98.0
+margin_bottom = 90.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
@@ -1528,8 +1513,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 76.0
-margin_right = 159.0
+margin_left = 72.0
+margin_right = 155.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1537,32 +1522,32 @@ value = 64.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 72.0
-margin_bottom = 49.0
+margin_bottom = 45.0
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 76.0
-margin_top = 29.0
-margin_right = 159.0
-margin_bottom = 54.0
+margin_left = 72.0
+margin_top = 25.0
+margin_right = 155.0
+margin_bottom = 50.0
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 61.0
+margin_top = 53.0
 margin_right = 72.0
-margin_bottom = 76.0
+margin_bottom = 68.0
 text = "Interpolation:"
 
 [node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 76.0
-margin_top = 58.0
-margin_right = 159.0
-margin_bottom = 79.0
+margin_left = 72.0
+margin_top = 50.0
+margin_right = 155.0
+margin_bottom = 71.0
 text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
@@ -1580,10 +1565,10 @@ anchor_right = 0.5
 margin_left = -92.0
 margin_top = 8.0
 margin_right = 92.0
-margin_bottom = 33.0
+margin_bottom = 31.0
 
 [node name="OptionsContainer" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
-margin_right = 184.0
+margin_right = 195.0
 margin_bottom = 21.0
 columns = 2
 
@@ -1594,8 +1579,8 @@ margin_bottom = 18.0
 text = "Language:"
 
 [node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
-margin_left = 61.0
-margin_right = 142.0
+margin_left = 57.0
+margin_right = 195.0
 margin_bottom = 21.0
 text = "System Language"
 items = [ "System Language", null, false, 0, null, "Deutsch [de]", null, false, 1, null, "Ελληνικά [el]", null, false, 2, null, "English [en]", null, false, 3, null, "Français [fr]", null, false, 4, null, "Polski [pl]", null, false, 5, null ]
@@ -1603,14 +1588,14 @@ selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 25.0
-margin_right = 184.0
+margin_right = 195.0
 margin_bottom = 40.0
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
 margin_top = 44.0
-margin_right = 184.0
-margin_bottom = 123.0
+margin_right = 195.0
+margin_bottom = 115.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
@@ -1620,8 +1605,8 @@ margin_bottom = 20.0
 text = "Width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 43.0
-margin_right = 107.0
+margin_left = 39.0
+margin_right = 103.0
 margin_bottom = 25.0
 min_value = 1.0
 max_value = 16384.0
@@ -1629,32 +1614,32 @@ value = 1.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 39.0
-margin_bottom = 49.0
+margin_bottom = 45.0
 text = "Height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 43.0
-margin_top = 29.0
-margin_right = 107.0
-margin_bottom = 54.0
+margin_left = 39.0
+margin_top = 25.0
+margin_right = 103.0
+margin_bottom = 50.0
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
 suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 61.0
+margin_top = 53.0
 margin_right = 39.0
-margin_bottom = 76.0
+margin_bottom = 68.0
 text = "Color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 43.0
-margin_top = 58.0
-margin_right = 107.0
-margin_bottom = 79.0
+margin_left = 39.0
+margin_top = 50.0
+margin_right = 103.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 64, 20 )
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
@@ -1668,7 +1653,7 @@ script = ExtResource( 43 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 276.0
-margin_bottom = 149.0
+margin_bottom = 147.0
 
 [node name="Pixelorama" type="Label" parent="AboutDialog/AboutUI"]
 margin_right = 268.0
@@ -1680,21 +1665,21 @@ align = 1
 [node name="MadeBy" type="Label" parent="AboutDialog/AboutUI"]
 margin_top = 37.0
 margin_right = 268.0
-margin_bottom = 70.0
+margin_bottom = 52.0
 text = "MADEBY_LABEL"
 align = 1
 
 [node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
 editor/display_folded = true
-margin_top = 74.0
+margin_top = 56.0
 margin_right = 268.0
-margin_bottom = 95.0
+margin_bottom = 77.0
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
 editor/display_folded = true
 margin_left = 37.0
 margin_right = 231.0
-margin_bottom = 21.0
+margin_bottom = 23.0
 
 [node name="Website" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
 margin_right = 55.0
@@ -1714,9 +1699,9 @@ margin_bottom = 21.0
 text = "Donate"
 
 [node name="Copyright" type="Label" parent="AboutDialog/AboutUI"]
-margin_top = 99.0
+margin_top = 81.0
 margin_right = 268.0
-margin_bottom = 132.0
+margin_bottom = 114.0
 text = "
 Copyright 2019 - Orama Interactive"
 align = 1
@@ -1726,6 +1711,144 @@ margin_right = 200.0
 margin_bottom = 70.0
 resizable = true
 dialog_text = "QUIT_LABEL"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+margin_right = 76.0
+margin_bottom = 60.0
+window_title = "Error!"
+dialog_text = "This is an error message!"
+
+[node name="EditPalettePopup" type="WindowDialog" parent="."]
+margin_right = 600.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 600, 550 )
+window_title = "Edit Palette"
+script = ExtResource( 44 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditPalettePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditPalettePopup/VBoxContainer"]
+margin_right = 580.0
+margin_bottom = 482.0
+size_flags_vertical = 3
+
+[node name="EditPaletteColorPicker" type="ColorPicker" parent="EditPalettePopup/VBoxContainer/HBoxContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+
+[node name="Panel" type="Panel" parent="EditPalettePopup/VBoxContainer/HBoxContainer"]
+margin_left = 294.0
+margin_right = 540.0
+margin_bottom = 482.0
+size_flags_horizontal = 3
+
+[node name="EditPaletteGridContainer" type="GridContainer" parent="EditPalettePopup/VBoxContainer/HBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditPalettePopup/VBoxContainer/HBoxContainer"]
+margin_left = 544.0
+margin_right = 580.0
+margin_bottom = 482.0
+
+[node name="AddSwatchButton" type="TextureButton" parent="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+texture_normal = ExtResource( 28 )
+
+[node name="RemoveSwatchButton" type="TextureButton" parent="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 72.0
+texture_normal = ExtResource( 30 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EditPalettePopup/VBoxContainer"]
+margin_top = 486.0
+margin_right = 580.0
+margin_bottom = 503.0
+
+[node name="Label" type="Label" parent="EditPalettePopup/VBoxContainer/HBoxContainer3"]
+margin_top = 1.0
+margin_right = 68.0
+margin_bottom = 16.0
+text = "Color Name:"
+
+[node name="EditPaletteColorNameLineEdit" type="LineEdit" parent="EditPalettePopup/VBoxContainer/HBoxContainer3"]
+margin_left = 72.0
+margin_right = 580.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditPalettePopup/VBoxContainer"]
+margin_top = 507.0
+margin_right = 580.0
+margin_bottom = 530.0
+size_flags_horizontal = 3
+
+[node name="SpacerControl" type="Control" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_right = 159.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="EditPaletteSaveButton" type="Button" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 163.0
+margin_right = 201.0
+margin_bottom = 23.0
+text = "Save"
+
+[node name="SpacerControl2" type="Control" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 205.0
+margin_right = 364.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="EditPaletteCancelButton" type="Button" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 368.0
+margin_right = 417.0
+margin_bottom = 23.0
+text = "Cancel"
+
+[node name="SpacerControl3" type="Control" parent="EditPalettePopup/VBoxContainer/HBoxContainer2"]
+margin_left = 421.0
+margin_right = 580.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="NewPaletteDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "Create a new custom palette from existing default?"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NewPaletteDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 315.0
+margin_bottom = 31.0
+
+[node name="Label" type="Label" parent="NewPaletteDialog/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 77.0
+margin_bottom = 20.0
+text = "Palette Name:"
+
+[node name="NewPaletteNameLineEdit" type="LineEdit" parent="NewPaletteDialog/HBoxContainer2"]
+margin_left = 81.0
+margin_right = 192.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+expand_to_text_length = true
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -1785,7 +1908,9 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/RemovePalette" to="." method="_on_RemovePalette_pressed"]
 [connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
@@ -1810,4 +1935,11 @@ visible = false
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Donate" to="AboutDialog" method="_on_Donate_pressed"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
+[connection signal="color_changed" from="EditPalettePopup/VBoxContainer/HBoxContainer/EditPaletteColorPicker" to="EditPalettePopup" method="_on_EditPaletteColorPicker_color_changed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer/AddSwatchButton" to="EditPalettePopup" method="_on_AddSwatchButton_pressed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer/VBoxContainer/RemoveSwatchButton" to="EditPalettePopup" method="_on_RemoveSwatchButton_pressed"]
+[connection signal="text_changed" from="EditPalettePopup/VBoxContainer/HBoxContainer3/EditPaletteColorNameLineEdit" to="EditPalettePopup" method="_on_EditPaletteColorNameLineEdit_text_changed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer2/EditPaletteSaveButton" to="EditPalettePopup" method="_on_EditPaletteSaveButton_pressed"]
+[connection signal="pressed" from="EditPalettePopup/VBoxContainer/HBoxContainer2/EditPaletteCancelButton" to="EditPalettePopup" method="_on_EditPaletteCancelButton_pressed"]
+[connection signal="confirmed" from="NewPaletteDialog" to="." method="_on_NewPaletteDialog_confirmed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

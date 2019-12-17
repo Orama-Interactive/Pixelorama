@@ -187,6 +187,11 @@ var remove_palette_button : TextureButton
 var palette_option_button : OptionButton
 var edit_palette_button : BaseButton
 var palette_container : GridContainer
+var edit_palette_popup : WindowDialog
+var new_palette_dialog : ConfirmationDialog
+var new_palette_name_line_edit : LineEdit
+
+var error_dialog : AcceptDialog
 
 func _ready() -> void:
 	undo_redo = UndoRedo.new()
@@ -275,6 +280,11 @@ func _ready() -> void:
 	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
 	edit_palette_button = find_node_by_name(root, "EditPalette")
 	palette_container = find_node_by_name(root, "PaletteContainer")
+	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
+	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")
+	new_palette_name_line_edit = find_node_by_name(new_palette_dialog, "NewPaletteNameLineEdit")
+
+	error_dialog = find_node_by_name(root, "ErrorDialog")
 
 #Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -439,7 +449,7 @@ func update_left_custom_brush() -> void:
 		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
+		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value / 100)
 		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
 
 		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
@@ -455,7 +465,7 @@ func update_right_custom_brush() -> void:
 		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value)
+		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value / 100)
 		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
 
 		right_brush_type_button.get_child(0).texture = custom_right_brush_texture

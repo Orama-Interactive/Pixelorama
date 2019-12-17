@@ -81,7 +81,7 @@ Brush: Pixel,Brush: Pixel,Πινέλο: Εικονοστοιχείο,Brosse : Pi
 Custom brush,Custom brush,Προσαρμοσμένο πινέλο,Brosse personnalisée,Benutzerdefinierter Pinsel,Niestandardowy pędzel,Текущая кисть
 Brush size:,Brush size:,Μέγεθος πινέλου:,Taille de la brosse :,Pinselgröße:,Rozmiar pędzla:,Размер кисти:
 Brush color from,Brush color from,Χρώμα πινέλου από,Couleur de la brosse depuis,Pinselfarbe von,Nadpisywanie koloru pędzla,Цвет кисти
-COLORFROM_HT,"0: Color from the brush itself, 1: the currently selected color","0: Χρώμα από το πινέλο, 1: επιλεγμένο χρώμα","0 : Couleur depuis la brosse elle-même, 1 : la couleur actuellement sélectionnée","0: Farbe von dem Pinsel selbst, 1: die aktuell ausgewählte Farbe","0: Kolor pochodzący z samego pędzla, 1: Obecnie wybrany kolor rysowania","0: Собственный цвет кисти, 1: Выбранный цвет"
+COLORFROM_HT,"0: Color from the brush itself, 100: the currently selected color","0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώμα","0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement sélectionnée","0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe","0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowania","0: Собственный цвет кисти, 100: Выбранный цвет"
 Fill area:,Fill area:,Περιοχή γεμίσματος:,Remplissage de zone :,Fülle Bereich,Wypełnij przestrzeń:,Залить область:
 Area of the same color,Area of the same color,Περιοχή ίδιου χρώματος,Zone de la même couleur,Bereich mit der selben Farbe,Przestrzeń o takim samym kolorze,Область того же цвета
 All pixels of the same color,All pixels of the same color,Όλα τα πίξελ ίδιου χρώματος,Tous les pixels de la même couleur,Alle Pixel mit der selben Farbe,Wszystkie piksele tego samego koloru,Все точки такого же цвета
