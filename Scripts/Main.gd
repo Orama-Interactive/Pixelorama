@@ -30,7 +30,7 @@ func _ready() -> void:
 		loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		loaded_locales = ["de", "el", "en", "fr", "pl"]
+		loaded_locales = ["de", "el", "en", "fr", "pl", "ru"]
 
 	# Make sure locales are always sorted, in the same order
 	loaded_locales.sort()
