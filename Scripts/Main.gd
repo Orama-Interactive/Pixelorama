@@ -24,13 +24,13 @@ func _ready() -> void:
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
 
-	# `TranslationServer.get_loaded_locales()` was added in 3.2beta and isn't available in 3.1.2.
+	# `TranslationServer.get_loaded_locales()` was added in 3.2beta and in 3.1.2
 	# The `has_method()` check and the `else` branch can be removed once 3.2 is released.
 	if TranslationServer.has_method("get_loaded_locales"):
 		loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		loaded_locales = ["de", "el", "en", "fr"]
+		loaded_locales = ["de", "el", "en", "fr", "pl", "ru", "zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
 	loaded_locales.sort()
@@ -90,6 +90,12 @@ func _ready() -> void:
 		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
+
+	if TranslationServer.get_locale() == "zh_TW":
+		theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
+	else:
+		theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
+
 
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
@@ -634,6 +640,10 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
 		TranslationServer.set_locale(loaded_locales[ID - 1])
+		if loaded_locales[ID - 1] == "zh_TW":
+			theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
+		else:
+			theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
 
 	config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	config_cache.save("user://cache.ini")
@@ -1012,12 +1022,12 @@ func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
 func _on_LeftLightenDarken_item_selected(ID : int) -> void:
 	Global.left_ld = ID
 func _on_LeftLDAmountSpinbox_value_changed(value : float) -> void:
-	Global.left_ld_amount = value
+	Global.left_ld_amount = value / 100
 
 func _on_RightLightenDarken_item_selected(ID : int) -> void:
 	Global.right_ld = ID
 func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
-	Global.right_ld_amount = value
+	Global.right_ld_amount = value / 100
 
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed
@@ -1047,3 +1057,16 @@ func _exit_tree() -> void:
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	Global.palette_container.on_palette_select(palette_name)
+
+func _on_EditPalette_pressed() -> void:
+	Global.palette_container.on_edit_palette()
+	pass
+
+func _on_RemovePalette_pressed() -> void:
+	Global.palette_container.remove_current_palette()
+	pass
+
+func _on_NewPaletteDialog_confirmed() -> void:
+	Global.palette_container.on_new_palette_confirmed()
+	pass
+
