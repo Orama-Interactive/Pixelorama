@@ -15,7 +15,6 @@ var redone := false
 var fps := 6.0
 var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
-var sub_key_mask := KEY_MASK_CMD if OS.has_feature("OSX") else KEY_MASK_CTRL
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,18 +51,18 @@ func _ready() -> void:
 			OS.window_size = config_cache.get_value("window", "size")
 
 	var file_menu_items := {
-		"New..." : sub_key_mask + KEY_N,
-		"Open..." : sub_key_mask + KEY_O,
-		"Save..." : sub_key_mask + KEY_S,
-		"Save as..." : KEY_MASK_SHIFT + sub_key_mask + KEY_S,
-		"Import PNG..." : sub_key_mask + KEY_I,
-		"Export PNG..." : sub_key_mask + KEY_E,
-		"Export PNG as..." : KEY_MASK_SHIFT + sub_key_mask + KEY_E,
-		"Quit" : sub_key_mask + KEY_Q
+		"New..." : KEY_MASK_CMD + KEY_N,
+		"Open..." : KEY_MASK_CMD + KEY_O,
+		"Save..." : KEY_MASK_CMD + KEY_S,
+		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_S,
+		"Import PNG..." : KEY_MASK_CMD + KEY_I,
+		"Export PNG..." : KEY_MASK_CMD + KEY_E,
+		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_E,
+		"Quit" : KEY_MASK_CMD + KEY_Q
 		}
 	var edit_menu_items := {
-		"Undo" : sub_key_mask + KEY_Z,
-		"Redo" : KEY_MASK_SHIFT + sub_key_mask + KEY_Z,
+		"Undo" : KEY_MASK_CMD + KEY_Z,
+		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_Z,
 		"Scale Image" : 0,
 		"Crop Image" : 0,
 		"Clear Selection" : 0,
@@ -72,10 +71,10 @@ func _ready() -> void:
 		"Preferences" : 0
 		}
 	var view_menu_items := {
-		"Tile Mode" : sub_key_mask + KEY_T,
-		"Show Grid" : sub_key_mask + KEY_G,
-		"Show Rulers" : sub_key_mask + KEY_R,
-		"Show Guides" : sub_key_mask + KEY_Y
+		"Tile Mode" : KEY_MASK_CMD + KEY_T,
+		"Show Grid" : KEY_MASK_CMD + KEY_G,
+		"Show Rulers" : KEY_MASK_CMD + KEY_R,
+		"Show Guides" : KEY_MASK_CMD + KEY_Y
 		}
 	var help_menu_items := {
 		"About Pixelorama" : 0
@@ -1070,4 +1069,3 @@ func _on_RemovePalette_pressed() -> void:
 func _on_NewPaletteDialog_confirmed() -> void:
 	Global.palette_container.on_new_palette_confirmed()
 	pass
-
