@@ -15,6 +15,7 @@ var redone := false
 var fps := 6.0
 var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
+var sub_key_mask := KEY_MASK_CMD if OS.has_feature("OSX") else sub_key_mask
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,18 +52,18 @@ func _ready() -> void:
 			OS.window_size = config_cache.get_value("window", "size")
 
 	var file_menu_items := {
-		"New..." : KEY_MASK_CTRL + KEY_N,
-		"Open..." : KEY_MASK_CTRL + KEY_O,
-		"Save..." : KEY_MASK_CTRL + KEY_S,
-		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_S,
-		"Import PNG..." : KEY_MASK_CTRL + KEY_I,
-		"Export PNG..." : KEY_MASK_CTRL + KEY_E,
-		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_E,
-		"Quit" : KEY_MASK_CTRL + KEY_Q
+		"New..." : sub_key_mask + KEY_N,
+		"Open..." : sub_key_mask + KEY_O,
+		"Save..." : sub_key_mask + KEY_S,
+		"Save as..." : KEY_MASK_SHIFT + sub_key_mask + KEY_S,
+		"Import PNG..." : sub_key_mask + KEY_I,
+		"Export PNG..." : sub_key_mask + KEY_E,
+		"Export PNG as..." : KEY_MASK_SHIFT + sub_key_mask + KEY_E,
+		"Quit" : sub_key_mask + KEY_Q
 		}
 	var edit_menu_items := {
-		"Undo" : KEY_MASK_CTRL + KEY_Z,
-		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CTRL + KEY_Z,
+		"Undo" : sub_key_mask + KEY_Z,
+		"Redo" : KEY_MASK_SHIFT + sub_key_mask + KEY_Z,
 		"Scale Image" : 0,
 		"Crop Image" : 0,
 		"Clear Selection" : 0,
@@ -71,10 +72,10 @@ func _ready() -> void:
 		"Preferences" : 0
 		}
 	var view_menu_items := {
-		"Tile Mode" : KEY_MASK_CTRL + KEY_T,
-		"Show Grid" : KEY_MASK_CTRL + KEY_G,
-		"Show Rulers" : KEY_MASK_CTRL + KEY_R,
-		"Show Guides" : KEY_MASK_CTRL + KEY_Y
+		"Tile Mode" : sub_key_mask + KEY_T,
+		"Show Grid" : sub_key_mask + KEY_G,
+		"Show Rulers" : sub_key_mask + KEY_R,
+		"Show Guides" : sub_key_mask + KEY_Y
 		}
 	var help_menu_items := {
 		"About Pixelorama" : 0
