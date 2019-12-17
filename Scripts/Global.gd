@@ -439,7 +439,7 @@ func update_left_custom_brush() -> void:
 		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value)
+		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value / 100)
 		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
 
 		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
@@ -455,7 +455,7 @@ func update_right_custom_brush() -> void:
 		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value)
+		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value / 100)
 		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
 
 		right_brush_type_button.get_child(0).texture = custom_right_brush_texture
