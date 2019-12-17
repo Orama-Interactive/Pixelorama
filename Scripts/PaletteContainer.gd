@@ -115,12 +115,16 @@ func on_color_select(index : int) -> void:
 		Global.update_right_custom_brush()
 
 func _load_palettes() -> void:
+	var file := File.new()
 	var dir := Directory.new()
 
 	if not dir.dir_exists("user://palettes"):
 		dir.make_dir("user://palettes");
-		dir.make_dir("user://custom/palettes")
+	if not dir.dir_exists("user://palettes/custom"):
+		dir.make_dir("user://palettes/custom")
+	if not file.file_exists("user://palettes/default_palette.json"):
 		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
+	if not file.file_exists("user://palettes/bubblegum16.json"):
 		dir.copy("res://Assets/Graphics/Palette/bubblegum16.json","user://palettes/bubblegum16.json");
 
 	var palette_files : Array = get_palette_files("user://palettes")
