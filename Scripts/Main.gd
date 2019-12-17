@@ -30,7 +30,7 @@ func _ready() -> void:
 		loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		loaded_locales = ["de", "el", "en", "fr", "pl", "ru"]
+		loaded_locales = ["de", "el", "en", "fr", "pl", "ru", "zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
 	loaded_locales.sort()
@@ -90,6 +90,12 @@ func _ready() -> void:
 		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
+
+	if TranslationServer.get_locale() == "zh_TW":
+		theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
+	else:
+		theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
+
 
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
@@ -634,6 +640,10 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
 		TranslationServer.set_locale(loaded_locales[ID - 1])
+		if loaded_locales[ID - 1] == "zh_TW":
+			theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
+		else:
+			theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
 
 	config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	config_cache.save("user://cache.ini")
