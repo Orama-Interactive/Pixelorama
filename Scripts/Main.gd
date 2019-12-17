@@ -30,7 +30,7 @@ func _ready() -> void:
 		loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		loaded_locales = ["de", "el", "en", "fr"]
+		loaded_locales = ["de", "el", "en", "fr", "pl"]
 
 	# Make sure locales are always sorted, in the same order
 	loaded_locales.sort()
@@ -1051,7 +1051,7 @@ func _on_PaletteOptionButton_item_selected(ID) -> void:
 func _on_EditPalette_pressed() -> void:
 	Global.palette_container.on_edit_palette()
 	pass
-	
+
 func _on_RemovePalette_pressed() -> void:
 	Global.palette_container.remove_current_palette()
 	pass

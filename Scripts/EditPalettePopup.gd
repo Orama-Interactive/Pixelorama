@@ -1,9 +1,5 @@
 extends WindowDialog
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/EditPaletteGridContainer
 onready var color_name_edit = $VBoxContainer/HBoxContainer3/EditPaletteColorNameLineEdit
 onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
@@ -14,28 +10,25 @@ var current_palette : String
 var current_swatch := -1
 var working_palette : Dictionary
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 func open(palette : String) -> void:
 	current_palette = palette
 	if Global.palettes.has(palette):
 		working_palette = Global.palettes[palette].duplicate()
-		
+
 		_display_palette()
-		
+
 		self.popup_centered()
 	pass
 
 func _display_palette() -> void:
 	_clear_swatches()
 	var index := 0
-	
+
 	for color_data in working_palette.colors:
 		var color = Color(color_data.data)
 		var new_button = palette_button.instance()
-		
+
 		new_button.color = color
 		new_button.get_child(0).modulate = color
 		new_button.hint_tooltip = color_data.data.to_upper() + " " + color_data.name
@@ -43,7 +36,7 @@ func _display_palette() -> void:
 		new_button.index = index
 		new_button.connect("on_drop_data", self, "on_move_swatch")
 		new_button.connect("pressed", self, "on_swatch_select", [index])
-		
+
 		palette_grid.add_child(new_button)
 		index += 1
 
@@ -63,19 +56,15 @@ func on_move_swatch(from : int, to : int) -> void:
 	var color_to_move = working_palette.colors[from]
 	working_palette.colors.remove(from)
 	working_palette.colors.insert(to, color_to_move)
-	
+
 	palette_grid.move_child(palette_grid.get_child(from), to)
-	
+
 	# Re-index swatches with new order
 	var index := 0
 	for child in palette_grid.get_children():
 		child.index = index
 		index += 1
 	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func _on_AddSwatchButton_pressed() -> void:
 	var color = Color.white
@@ -84,7 +73,7 @@ func _on_AddSwatchButton_pressed() -> void:
 	color_data.name = "no name"
 	working_palette.colors.push_back(color_data)
 	var new_button = palette_button.instance()
-	
+
 	new_button.color = color
 	new_button.get_child(0).modulate = color
 	new_button.hint_tooltip = color_data.data.to_upper() + " " + color_data.name
@@ -93,7 +82,7 @@ func _on_AddSwatchButton_pressed() -> void:
 	new_button.index = index
 	new_button.connect("on_drop_data", self, "on_move_swatch")
 	new_button.connect("pressed", self, "on_swatch_select", [index])
-	
+
 	palette_grid.add_child(new_button)
 	pass # Replace with function body.
 

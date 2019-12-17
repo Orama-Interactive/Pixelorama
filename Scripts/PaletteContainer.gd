@@ -23,12 +23,12 @@ func on_palette_select(palette_name : String) -> void:
 	if Global.palettes.has(palette_name): #Palette exists in memory
 		current_palette = palette_name
 		var palette : Dictionary = Global.palettes[palette_name]
-		
+
 		Global.remove_palette_button.disabled = true # Cannot remove by default
 		if palette.has("editable"):
 			if palette.editable:
 				Global.remove_palette_button.disabled = false # Can remove if custom palette
-		
+
 		_display_palette(palette)
 	else: #Use default on fail
 		current_palette = "Default"
@@ -36,7 +36,7 @@ func on_palette_select(palette_name : String) -> void:
 
 func on_edit_palette() -> void:
 	var palette : Dictionary = Global.palettes[current_palette]
-	
+
 	var create_new_palette := true # Create new palette by default
 	if palette.has("editable"):
 		if palette.editable:
@@ -59,15 +59,15 @@ func on_new_palette_confirmed() -> void:
 
 func create_new_palette(name : String, from_palette : Dictionary = {}) -> String: # Returns empty string, else error string
 	var new_palette : Dictionary = {}
-	
+
 	# Check if new name is valid
 	if name.empty():
 		return "Error: Palette must have a valid name."
 	if Global.palettes.has(name):
 		return "Error: Palette '" + name + "' already exists!"
-	
+
 	new_palette.name = name
-	
+
 	# Check if source palette has data
 	if from_palette.has("name"):
 		new_palette = from_palette.duplicate()
@@ -77,36 +77,36 @@ func create_new_palette(name : String, from_palette : Dictionary = {}) -> String
 		new_palette.colors = []
 		new_palette.comments = ""
 		new_palette.editable = true
-	
+
 	# Add palette to Global and options
 	Global.palettes[name] = new_palette
 	Global.palette_option_button.add_item(name)
 	var index := Global.palette_option_button.get_item_count() - 1
 	Global.palette_option_button.set_item_metadata(index, name)
 	Global.palette_option_button.select(index)
-	
+
 	save_palette(name, name + ".json")
-	
+
 	on_palette_select(name)
 	return ""
 
 func _display_palette(palette : Dictionary) -> void:
 	var index := 0
-	
+
 	for color_data in palette.colors:
 		var color = Color(color_data.data)
 		var new_button = palette_button.instance()
-		
+
 		new_button.get_child(0).modulate = color
 		new_button.hint_tooltip = color_data.data.to_upper() + " " + color_data.name
 		new_button.connect("pressed", self, "on_color_select", [index])
-		
+
 		add_child(new_button)
 		index += 1
 
 func on_color_select(index : int) -> void:
 	var color = Color(Global.palettes[current_palette].colors[index].data)
-	
+
 	if Input.is_action_just_released("left_mouse"):
 		Global.left_color_picker.color = color
 		Global.update_left_custom_brush()
@@ -137,10 +137,10 @@ func _load_palettes() -> void:
 			Global.palette_option_button.set_item_metadata(index, result)
 			if result == "Default":
 				Global.palette_option_button.select(index)
-	
+
 	dir.open("user://palettes/custom")
 	var custom_palette_files : Array = get_palette_files("user://palettes/custom")
-	
+
 	for file_name in custom_palette_files:
 		var result : String = load_palette("user://palettes/custom/" + file_name)
 		if result:
@@ -151,7 +151,7 @@ func _load_palettes() -> void:
 func get_palette_files(path : String) -> Array:
 	var dir := Directory.new()
 	var results = []
-	
+
 	dir.open(path)
 	dir.list_dir_begin()
 
@@ -163,7 +163,7 @@ func get_palette_files(path : String) -> Array:
 			results.append(file_name)
 
 	dir.list_dir_end()
-	
+
 	return results
 
 func load_palette(path : String) -> String:
@@ -200,7 +200,7 @@ func remove_current_palette() -> void:
 			Global.palette_option_button.remove_item(selected_index)
 			if(selected_index - 1 >= 0):
 				Global.palette_option_button.select(selected_index - 1)
-				on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))			
+				on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))
 	pass
 
 func _delete_palette_file(file_name : String) -> void:
