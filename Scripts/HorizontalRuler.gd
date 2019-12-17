@@ -14,9 +14,9 @@ func _process(delta : float) -> void:
 	update()
 	var mouse_pos := get_local_mouse_position()
 	if mouse_pos.x < RULER_WIDTH: #For double guides
-		mouse_default_cursor_shape = Control.CURSOR_BDIAGSIZE
+		mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
 	else:
-		mouse_default_cursor_shape = Control.CURSOR_HSPLIT
+		mouse_default_cursor_shape = Control.CURSOR_VSPLIT
 
 #Code taken and modified from Godot's source code
 func _draw() -> void:
