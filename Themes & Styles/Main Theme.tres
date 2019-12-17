@@ -53,7 +53,7 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 8
 border_width_top = 1
@@ -66,7 +66,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 5
 border_width_top = 10
@@ -79,7 +79,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
 border_width_left = 10
 border_width_top = 6
@@ -87,7 +87,7 @@ border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.2, 0.2, 0.2, 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
 border_width_left = 10
 border_width_top = 6
@@ -95,7 +95,7 @@ border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.145098, 0.145098, 0.164706, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 10
 border_width_top = 6
@@ -146,7 +146,7 @@ LineEdit/constants/minimum_spaces = 12
 LineEdit/fonts/font = null
 LineEdit/icons/clear = null
 LineEdit/styles/focus = null
-LineEdit/styles/normal = SubResource( 12 )
+LineEdit/styles/normal = SubResource( 8 )
 LineEdit/styles/read_only = null
 TabContainer/colors/font_color_bg = Color( 0.690196, 0.690196, 0.690196, 1 )
 TabContainer/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
@@ -163,8 +163,8 @@ TabContainer/icons/increment = null
 TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = SubResource( 8 )
-TabContainer/styles/tab_bg = SubResource( 9 )
-TabContainer/styles/tab_disabled = SubResource( 10 )
-TabContainer/styles/tab_fg = SubResource( 11 )
+TabContainer/styles/panel = SubResource( 9 )
+TabContainer/styles/tab_bg = SubResource( 10 )
+TabContainer/styles/tab_disabled = SubResource( 11 )
+TabContainer/styles/tab_fg = SubResource( 12 )
 VBoxContainer/constants/separation = 4
