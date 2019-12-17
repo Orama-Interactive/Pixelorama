@@ -1,27 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/FrameButton.gd" type="Script" id=1]
+[ext_resource path="res://Themes & Styles/Dark Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/FrameButton.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.337255, 0.32549, 0.388235, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.211765, 0.2, 0.247059, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.270588, 0.258824, 0.305882, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [node name="Frame" type="VBoxContainer"]
 margin_right = 32.0
@@ -34,12 +15,10 @@ rect_min_size = Vector2( 36, 36 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
+theme = ExtResource( 1 )
 toggle_mode = true
 button_mask = 3
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="FrameTexture" type="TextureRect" parent="FrameButton"]
 margin_left = 2.0
