@@ -811,6 +811,7 @@ margin_right = 16.0
 margin_bottom = 462.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
+mouse_default_cursor_shape = 15
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 12 )

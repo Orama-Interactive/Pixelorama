@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Themes & Styles/Main Theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scripts/FrameButton.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/FrameButton.gd" type="Script" id=1]
 
 [node name="Frame" type="VBoxContainer"]
 margin_right = 32.0
@@ -14,10 +13,9 @@ rect_min_size = Vector2( 36, 36 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource( 1 )
 toggle_mode = true
 button_mask = 3
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="FrameTexture" type="TextureRect" parent="FrameButton"]
 margin_left = 2.0
