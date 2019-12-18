@@ -1,6 +1,6 @@
 extends GridContainer
 
-var palette_button = preload("res://Prefabs/PaletteButton.tscn");
+const palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
 var current_palette = "Default"
 var from_palette : = {}
@@ -34,6 +34,48 @@ func on_palette_select(palette_name : String) -> void:
 		current_palette = "Default"
 		_display_palette(Global.palettes["Default"])
 
+func on_new_empty_palette() -> void:
+	Global.new_palette_dialog.window_title = "Create a new empty palette?"
+	Global.new_palette_name_line_edit.text = "Custom_Palette"
+	from_palette = {}
+	Global.new_palette_dialog.popup_centered()
+	pass
+
+func on_import_palette() -> void:
+	Global.palette_import_file_dialog.popup_centered()
+	pass
+
+func on_palette_import_file_selected(path) -> void:
+	var file := File.new()
+	
+	file.open(path, File.READ)
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	var result = {}
+	var palette_name = null # Default error condition
+
+	if result_json.error != OK:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)
+	else:  # If parse OK
+		var data = result_json.result
+		if data.has("name"): #If data is 'valid' palette file
+			palette_name = data.name
+			if not Global.palettes.has(palette_name):
+				Global.palettes[palette_name] = data
+				Global.palette_option_button.add_item(palette_name)
+				var index := Global.palette_option_button.get_item_count() - 1
+				Global.palette_option_button.set_item_metadata(index, palette_name)
+				Global.palette_option_button.select(index)
+				on_palette_select(palette_name)
+				save_palette(palette_name, palette_name + ".json")
+			else:
+				Global.error_dialog.set_text("Palette named '" + palette_name + "' already exists");
+				Global.error_dialog.popup_centered()
+	file.close()
+	pass
+
 func on_edit_palette() -> void:
 	var palette : Dictionary = Global.palettes[current_palette]
 
@@ -44,6 +86,7 @@ func on_edit_palette() -> void:
 
 	if create_new_palette:
 		from_palette = Global.palettes[current_palette]
+		Global.new_palette_dialog.window_title = "Create a new custom palette from existing default?"
 		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
 		Global.new_palette_dialog.popup_centered()
 	else:

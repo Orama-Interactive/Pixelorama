@@ -182,7 +182,7 @@ var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
 
-var add_palette_button : TextureButton
+var add_palette_button : MenuButton
 var remove_palette_button : TextureButton
 var palette_option_button : OptionButton
 var edit_palette_button : BaseButton
@@ -190,6 +190,7 @@ var palette_container : GridContainer
 var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
+var palette_import_file_dialog : FileDialog
 
 var error_dialog : AcceptDialog
 
@@ -283,6 +284,7 @@ func _ready() -> void:
 	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
 	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")
 	new_palette_name_line_edit = find_node_by_name(new_palette_dialog, "NewPaletteNameLineEdit")
+	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 

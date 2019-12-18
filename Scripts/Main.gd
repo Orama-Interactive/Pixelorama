@@ -101,6 +101,7 @@ func _ready() -> void:
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	view_menu = Global.view_menu.get_popup()
 	var help_menu : PopupMenu = Global.help_menu.get_popup()
+	var add_palette_menu : PopupMenu = Global.add_palette_button.get_popup()
 
 	var i = 0
 	for item in file_menu_items.keys():
@@ -125,6 +126,7 @@ func _ready() -> void:
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
+	add_palette_menu.connect("id_pressed", self, "add_palette_menu_id_pressed")
 
 	var root = get_tree().get_root()
 	#Node, left mouse shortcut, right mouse shortcut
@@ -1066,6 +1068,18 @@ func _on_RemovePalette_pressed() -> void:
 	Global.palette_container.remove_current_palette()
 	pass
 
+func add_palette_menu_id_pressed(id) -> void:
+	match id:
+		0:	# New Empty Palette
+			Global.palette_container.on_new_empty_palette()
+		1:	# Import Palette
+			Global.palette_container.on_import_palette()
+	pass
+
 func _on_NewPaletteDialog_confirmed() -> void:
 	Global.palette_container.on_new_palette_confirmed()
+	pass
+
+func _on_PaletteImportFileDialog_file_selected(path) -> void:
+	Global.palette_container.on_palette_import_file_selected(path)
 	pass
