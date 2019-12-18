@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="PaletteImportFileDialog" type="FileDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 500, 300 )
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.json ; JavaScript Object Notation" )
+current_dir = "D:/GitHub/Pixelorama"
+current_path = "D:/GitHub/Pixelorama/"

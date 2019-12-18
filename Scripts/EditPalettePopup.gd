@@ -103,13 +103,13 @@ func _on_EditPaletteCancelButton_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_EditPaletteColorNameLineEdit_text_changed(new_text) -> void:
-	if current_swatch > 0 && current_swatch < working_palette.colors.size():
+	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		working_palette.colors[current_swatch].name = new_text
 		_refresh_hint_tooltip(current_swatch)
 	pass
 
 func _on_EditPaletteColorPicker_color_changed(color) -> void:
-	if current_swatch > 0 && current_swatch < working_palette.colors.size():
+	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		palette_grid.get_child(current_swatch).get_child(0).modulate = color
 		working_palette.colors[current_swatch].data = color.to_html(true)
 		_refresh_hint_tooltip(current_swatch)
