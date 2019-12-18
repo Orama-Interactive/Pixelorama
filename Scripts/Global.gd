@@ -395,8 +395,10 @@ func frame_changed(value : int) -> void:
 	#Make all frame buttons unpressed
 	for c in canvases:
 		c.frame_button.get_node("FrameButton").pressed = false
+		c.frame_button.get_node("FrameID").add_color_override("font_color", Color.white)
 	#Make only the current frame button pressed
 	canvas.frame_button.get_node("FrameButton").pressed = true
+	canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
 
 
 func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM, hint_tooltip := "") -> void:

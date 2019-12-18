@@ -49,6 +49,7 @@ func _ready() -> void:
 	frame_button.get_node("FrameButton").frame = frame
 	frame_button.get_node("FrameButton").pressed = true
 	frame_button.get_node("FrameID").text = str(frame + 1)
+	frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
 	Global.frame_container.add_child(frame_button)
 
 	frame_texture_rect = Global.find_node_by_name(frame_button, "FrameTexture")
