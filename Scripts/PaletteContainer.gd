@@ -47,7 +47,7 @@ func on_import_palette() -> void:
 
 func on_palette_import_file_selected(path) -> void:
 	var file := File.new()
-	
+
 	file.open(path, File.READ)
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)

@@ -1,5 +1,8 @@
 extends Node
 
+var config_cache := ConfigFile.new()
+# warning-ignore:unused_class_variable
+var loaded_locales : Array
 var undo_redo : UndoRedo
 var undos := 0 #The number of times we added undo properties
 
@@ -491,5 +494,11 @@ func blend_image_with_color(image : Image, color : Color, interpolate_factor : f
 	return blended_image
 
 func _exit_tree() -> void:
+	config_cache.set_value("window", "screen", OS.current_screen)
+	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
+	config_cache.set_value("window", "position", OS.window_position)
+	config_cache.set_value("window", "size", OS.window_size)
+	config_cache.save("user://cache.ini")
+
 	# Thanks to qarmin from GitHub for pointing this out
 	undo_redo.free()

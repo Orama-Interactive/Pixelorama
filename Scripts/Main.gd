@@ -1,7 +1,5 @@
 extends Control
 
-var config_cache := ConfigFile.new()
-var loaded_locales : Array
 var current_save_path := ""
 var current_export_path := ""
 var opensprite_file_selected := false
@@ -27,28 +25,28 @@ func _ready() -> void:
 	# `TranslationServer.get_loaded_locales()` was added in 3.2beta and in 3.1.2
 	# The `has_method()` check and the `else` branch can be removed once 3.2 is released.
 	if TranslationServer.has_method("get_loaded_locales"):
-		loaded_locales = TranslationServer.get_loaded_locales()
+		Global.loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		loaded_locales = ["de", "el", "en", "fr", "pl", "ru", "zh_TW"]
+		Global.loaded_locales = ["de", "el", "en", "fr", "pl", "ru", "zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
-	loaded_locales.sort()
+	Global.loaded_locales.sort()
 
 	# Load settings from the config file
-	config_cache.load("user://cache.ini")
+	Global.config_cache.load("user://cache.ini")
 
 	# Restore the window position/size if values are present in the configuration cache
-	if config_cache.has_section_key("window", "screen"):
-		OS.current_screen = config_cache.get_value("window", "screen")
-	if config_cache.has_section_key("window", "maximized"):
-		OS.window_maximized = config_cache.get_value("window", "maximized")
+	if Global.config_cache.has_section_key("window", "screen"):
+		OS.current_screen = Global.config_cache.get_value("window", "screen")
+	if Global.config_cache.has_section_key("window", "maximized"):
+		OS.window_maximized = Global.config_cache.get_value("window", "maximized")
 
 	if !OS.window_maximized:
-		if config_cache.has_section_key("window", "position"):
-			OS.window_position = config_cache.get_value("window", "position")
-		if config_cache.has_section_key("window", "size"):
-			OS.window_size = config_cache.get_value("window", "size")
+		if Global.config_cache.has_section_key("window", "position"):
+			OS.window_position = Global.config_cache.get_value("window", "position")
+		if Global.config_cache.has_section_key("window", "size"):
+			OS.window_size = Global.config_cache.get_value("window", "size")
 
 	var file_menu_items := {
 		"New..." : KEY_MASK_CMD + KEY_N,
@@ -81,12 +79,12 @@ func _ready() -> void:
 		}
 
 	# Load language
-	if config_cache.has_section_key("preferences", "locale"):
-		var saved_locale : String = config_cache.get_value("preferences", "locale")
+	if Global.config_cache.has_section_key("preferences", "locale"):
+		var saved_locale : String = Global.config_cache.get_value("preferences", "locale")
 		TranslationServer.set_locale(saved_locale)
 
 		# Set the language option menu's default selected option to the loaded locale
-		var locale_index := loaded_locales.find(saved_locale)
+		var locale_index := Global.loaded_locales.find(saved_locale)
 		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
@@ -637,28 +635,6 @@ func _on_ScaleImage_confirmed() -> void:
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
-func _on_LanguageOption_item_selected(ID : int) -> void:
-	if ID == 0:
-		TranslationServer.set_locale(OS.get_locale())
-	else:
-		TranslationServer.set_locale(loaded_locales[ID - 1])
-		if loaded_locales[ID - 1] == "zh_TW":
-			theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
-		else:
-			theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
-
-	config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
-	config_cache.save("user://cache.ini")
-
-func _on_GridWidthValue_value_changed(value : float) -> void:
-	Global.grid_width = value
-
-func _on_GridHeightValue_value_changed(value : float) -> void:
-	Global.grid_height = value
-
-func _on_GridColor_color_changed(color : Color) -> void:
-	Global.grid_color = color
-
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
 		Global.can_draw = true
@@ -1047,14 +1023,6 @@ func _on_QuitDialog_confirmed() -> void:
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
-
-func _exit_tree() -> void:
-	# Save the window position and size to remember it when restarting the application
-	config_cache.set_value("window", "screen", OS.current_screen)
-	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
-	config_cache.set_value("window", "position", OS.window_position)
-	config_cache.set_value("window", "size", OS.window_size)
-	config_cache.save("user://cache.ini")
 
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)

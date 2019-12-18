@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -55,13 +55,20 @@
 [ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=53]
 [ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=54]
 [ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=55]
-[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=56]
-[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=57]
-[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=58]
-[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=59]
+[ext_resource path="res://Prefabs/PreferencesDialog.tscn" type="PackedScene" id=56]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=57]
+[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=58]
+[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=59]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=60]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+
+[sub_resource type="InputEventKey" id=19]
+scancode = 88
+
+[sub_resource type="ShortCut" id=20]
+shortcut = SubResource( 19 )
 
 [sub_resource type="Image" id=21]
 data = {
@@ -133,7 +140,7 @@ scancode = 16777230
 [sub_resource type="ShortCut" id=17]
 shortcut = SubResource( 16 )
 
-[sub_resource type="StreamTexture" id=20]
+[sub_resource type="StreamTexture" id=18]
 load_path = "res://.import/new_layer.png-6f042042bc418daa72142f41f436a47c.stex"
 
 [node name="Control" type="Control"]
@@ -220,6 +227,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -234,6 +242,7 @@ rect_min_size = Vector2( 224, 0 )
 size_flags_vertical = 3
 
 [node name="Tools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -400,6 +409,8 @@ margin_right = 17.0
 margin_bottom = 7.0
 hint_tooltip = "COLORSWITCH_HT"
 mouse_default_cursor_shape = 2
+shortcut_in_tooltip = false
+shortcut = SubResource( 20 )
 texture_normal = ExtResource( 9 )
 
 [node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical"]
@@ -1128,6 +1139,7 @@ margin_right = 689.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1306,7 +1318,7 @@ items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Im
 [node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/AddPalette"]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 20 )
+texture = SubResource( 18 )
 
 [node name="RemovePalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
 margin_left = 36.0
@@ -1588,102 +1600,14 @@ text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
 
-[node name="PreferencesDialog" type="AcceptDialog" parent="."]
-editor/display_folded = true
-margin_right = 200.0
-margin_bottom = 70.0
-window_title = "Preferences"
-resizable = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PreferencesDialog"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -92.0
-margin_top = 8.0
-margin_right = 92.0
-margin_bottom = 31.0
-
-[node name="OptionsContainer" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
-margin_right = 184.0
-margin_bottom = 23.0
-columns = 2
-
-[node name="LanguageLabel" type="Label" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
-margin_top = 4.0
-margin_right = 57.0
-margin_bottom = 19.0
-text = "Language:"
-
-[node name="LanguageOption" type="OptionButton" parent="PreferencesDialog/VBoxContainer/OptionsContainer"]
-margin_left = 57.0
-margin_right = 176.0
-margin_bottom = 23.0
-text = "System Language"
-items = [ "System Language", null, false, 0, null, "Deutsch [de]", null, false, 1, null, "Ελληνικά [el]", null, false, 2, null, "English [en]", null, false, 3, null, "Français [fr]", null, false, 4, null, "Polski [pl]", null, false, 5, null, "Русский [ru]", null, false, 6, null, "繁體中文 [zh_TW]", null, false, 7, null ]
-selected = 0
-
-[node name="GridOptionsLabel" type="Label" parent="PreferencesDialog/VBoxContainer"]
-margin_top = 27.0
-margin_right = 184.0
-margin_bottom = 42.0
-text = "Grid options"
-
-[node name="GridOptions" type="GridContainer" parent="PreferencesDialog/VBoxContainer"]
-margin_top = 46.0
-margin_right = 184.0
-margin_bottom = 103.0
-columns = 2
-
-[node name="WidthLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 1.0
-margin_right = 39.0
-margin_bottom = 16.0
-text = "Width:"
-
-[node name="GridWidthValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_right = 103.0
-margin_bottom = 17.0
-min_value = 1.0
-max_value = 16384.0
-value = 1.0
-suffix = "px"
-
-[node name="Height" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 19.0
-margin_right = 39.0
-margin_bottom = 33.0
-text = "Height:"
-
-[node name="GridHeightValue" type="SpinBox" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 19.0
-margin_right = 103.0
-margin_bottom = 34.0
-min_value = 1.0
-max_value = 16384.0
-value = 1.0
-suffix = "px"
-
-[node name="GridColorLabel" type="Label" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_top = 42.0
-margin_right = 39.0
-margin_bottom = 53.0
-text = "Color:"
-
-[node name="GridColor" type="ColorPickerButton" parent="PreferencesDialog/VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 38.0
-margin_right = 103.0
-margin_bottom = 57.0
-rect_min_size = Vector2( 64, 20 )
+[node name="PreferencesDialog" parent="." instance=ExtResource( 56 )]
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
 editor/display_folded = true
 margin_right = 284.0
 margin_bottom = 186.0
 window_title = "About Pixelorama"
-script = ExtResource( 56 )
+script = ExtResource( 57 )
 
 [node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
 margin_left = 8.0
@@ -1754,14 +1678,14 @@ margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="EditPalettePopup" parent="." instance=ExtResource( 57 )]
+[node name="EditPalettePopup" parent="." instance=ExtResource( 58 )]
 visible = false
 
-[node name="NewPaletteDialog" parent="." instance=ExtResource( 58 )]
+[node name="NewPaletteDialog" parent="." instance=ExtResource( 59 )]
 
-[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 59 )]
-current_dir = "C:/Users/Overloaded/Documents/Godot Projects/Pixelorama-palette_updates"
-current_path = "C:/Users/Overloaded/Documents/Godot Projects/Pixelorama-palette_updates/"
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 60 )]
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -1836,11 +1760,6 @@ visible = false
 [connection signal="popup_hide" from="ExportSprites" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
-[connection signal="item_selected" from="PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption" to="." method="_on_LanguageOption_item_selected"]
-[connection signal="value_changed" from="PreferencesDialog/VBoxContainer/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
-[connection signal="value_changed" from="PreferencesDialog/VBoxContainer/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
-[connection signal="color_changed" from="PreferencesDialog/VBoxContainer/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]
