@@ -1,16 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Themes & Styles/Main Theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Graphics/Layers/layer_visible.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Layers/layer_visible.png" type="Texture" id=2]
 
 [node name="LayerContainer" type="Button"]
 margin_right = 160.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 160, 42 )
-theme = ExtResource( 1 )
 toggle_mode = true
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
@@ -24,7 +22,7 @@ hint_tooltip = "LAYERVISIBILITY_HT"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 0.5
@@ -47,8 +45,8 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 margin_left = 36.0
-margin_top = 8.0
-margin_right = 75.0
+margin_top = 9.0
+margin_right = 82.0
 margin_bottom = 23.0
 text = "Layer 0"
 align = 1
