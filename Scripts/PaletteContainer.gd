@@ -34,6 +34,16 @@ func on_palette_select(palette_name : String) -> void:
 		current_palette = "Default"
 		_display_palette(Global.palettes["Default"])
 
+func on_new_empty_palette() -> void:
+	Global.new_palette_dialog.window_title = "Create a new empty palette?"
+	Global.new_palette_name_line_edit.text = "Custom_Palette"
+	from_palette = {}
+	Global.new_palette_dialog.popup_centered()
+	pass
+
+func on_import_palette() -> void:
+	pass
+
 func on_edit_palette() -> void:
 	var palette : Dictionary = Global.palettes[current_palette]
 
@@ -44,6 +54,7 @@ func on_edit_palette() -> void:
 
 	if create_new_palette:
 		from_palette = Global.palettes[current_palette]
+		Global.new_palette_dialog.window_title = "Create a new custom palette from existing default?"
 		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
 		Global.new_palette_dialog.popup_centered()
 	else:
