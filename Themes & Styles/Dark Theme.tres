@@ -95,10 +95,10 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 5
 border_width_top = 10
@@ -111,7 +111,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
 border_width_left = 10
 border_width_top = 6
@@ -119,7 +119,7 @@ border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.2, 0.2, 0.2, 1 )
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
 border_width_left = 10
 border_width_top = 6
@@ -127,7 +127,7 @@ border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.145098, 0.145098, 0.164706, 1 )
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 10
 border_width_top = 6
@@ -135,7 +135,7 @@ border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -147,21 +147,8 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=18]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
-
 [sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0.517647, 0.517647, 0.517647, 1 )
+bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -174,7 +161,7 @@ corner_radius_bottom_left = 4
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=20]
-bg_color = Color( 0.2, 0.2, 0.2, 1 )
+bg_color = Color( 0.517647, 0.517647, 0.517647, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -187,6 +174,19 @@ corner_radius_bottom_left = 4
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 border_width_top = 20
 border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
@@ -307,7 +307,7 @@ PopupMenu/styles/labeled_separator_right = null
 PopupMenu/styles/panel = SubResource( 12 )
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = null
-PopupPanel/styles/panel = SubResource( 22 )
+PopupPanel/styles/panel = SubResource( 13 )
 SpinBox/icons/updown = null
 TabContainer/colors/font_color_bg = Color( 0.690196, 0.690196, 0.690196, 1 )
 TabContainer/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
@@ -324,10 +324,10 @@ TabContainer/icons/increment = null
 TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = SubResource( 13 )
-TabContainer/styles/tab_bg = SubResource( 14 )
-TabContainer/styles/tab_disabled = SubResource( 15 )
-TabContainer/styles/tab_fg = SubResource( 16 )
+TabContainer/styles/panel = SubResource( 14 )
+TabContainer/styles/tab_bg = SubResource( 15 )
+TabContainer/styles/tab_disabled = SubResource( 16 )
+TabContainer/styles/tab_fg = SubResource( 17 )
 TextEdit/colors/background_color = Color( 0, 0, 0, 0 )
 TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
 TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
@@ -387,7 +387,7 @@ Tree/icons/checked = null
 Tree/icons/select_arrow = null
 Tree/icons/unchecked = null
 Tree/icons/updown = null
-Tree/styles/bg = SubResource( 17 )
+Tree/styles/bg = SubResource( 18 )
 Tree/styles/bg_focus = null
 Tree/styles/button_pressed = null
 Tree/styles/cursor = null
@@ -405,9 +405,9 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 18 )
-VScrollBar/styles/grabber_highlight = SubResource( 19 )
-VScrollBar/styles/grabber_pressed = SubResource( 20 )
+VScrollBar/styles/grabber = SubResource( 19 )
+VScrollBar/styles/grabber_highlight = SubResource( 20 )
+VScrollBar/styles/grabber_pressed = SubResource( 21 )
 VScrollBar/styles/scroll = null
 VScrollBar/styles/scroll_focus = null
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
@@ -418,4 +418,4 @@ WindowDialog/constants/title_height = 20
 WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
-WindowDialog/styles/panel = SubResource( 21 )
+WindowDialog/styles/panel = SubResource( 22 )
