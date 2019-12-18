@@ -1079,3 +1079,7 @@ func add_palette_menu_id_pressed(id) -> void:
 func _on_NewPaletteDialog_confirmed() -> void:
 	Global.palette_container.on_new_palette_confirmed()
 	pass
+
+func _on_PaletteImportFileDialog_file_selected(path) -> void:
+	Global.palette_container.on_palette_import_file_selected(path)
+	pass

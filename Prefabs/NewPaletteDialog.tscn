@@ -12,14 +12,14 @@ margin_right = 365.0
 margin_bottom = 34.0
 
 [node name="Label" type="Label" parent="HBoxContainer2"]
-margin_top = 4.0
-margin_right = 77.0
-margin_bottom = 19.0
+margin_top = 6.0
+margin_right = 91.0
+margin_bottom = 20.0
 text = "Palette Name:"
 
 [node name="NewPaletteNameLineEdit" type="LineEdit" parent="HBoxContainer2"]
-margin_left = 81.0
-margin_right = 307.0
-margin_bottom = 23.0
+margin_left = 95.0
+margin_right = 357.0
+margin_bottom = 26.0
 size_flags_horizontal = 3
 expand_to_text_length = true

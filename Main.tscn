@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Themes & Styles/Main Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -45,6 +45,7 @@
 [ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=43]
 [ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=45]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=46]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.223529, 0.223529, 0.243137, 1 )
@@ -1723,8 +1724,11 @@ window_title = "Error!"
 dialog_text = "This is an error message!"
 
 [node name="EditPalettePopup" parent="." instance=ExtResource( 44 )]
+visible = false
 
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 45 )]
+
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 46 )]
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -1811,4 +1815,5 @@ visible = false
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="NewPaletteDialog" to="." method="_on_NewPaletteDialog_confirmed"]
+[connection signal="file_selected" from="PaletteImportFileDialog" to="." method="_on_PaletteImportFileDialog_file_selected"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

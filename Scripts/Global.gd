@@ -190,6 +190,7 @@ var palette_container : GridContainer
 var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
+var palette_import_file_dialog : FileDialog
 
 var error_dialog : AcceptDialog
 
@@ -283,6 +284,7 @@ func _ready() -> void:
 	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
 	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")
 	new_palette_name_line_edit = find_node_by_name(new_palette_dialog, "NewPaletteNameLineEdit")
+	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
