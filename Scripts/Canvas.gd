@@ -248,7 +248,7 @@ func _process(delta : float) -> void:
 					Global.right_color_picker.color = pixel_color
 					Global.update_right_custom_brush()
 
-	if Input.is_action_just_pressed("shift") and (["Pencil", "Eraser"].has(Global.current_left_tool)  or ["Pencil", "Eraser"].has(Global.current_right_tool)):
+	if Input.is_action_just_pressed("shift") and (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool)  or ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
 		line_2d = Line2D.new()
 		line_2d.width = 0.5
 		line_2d.default_color = Color.darkgray
@@ -262,6 +262,10 @@ func _process(delta : float) -> void:
 			line_2d.queue_free()
 	if is_making_line:
 		line_2d.set_point_position(1, mouse_pos)
+		var angle := stepify(rad2deg(line_2d.points[1].angle_to_point(line_2d.points[0])), 0.01)
+		if angle < 0:
+			angle = 360 + angle
+		Global.cursor_position_label.text += "    %s°" % str(angle)
 
 
 	if is_making_selection != "None": #If we're making a selection
