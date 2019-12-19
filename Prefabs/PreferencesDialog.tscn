@@ -18,80 +18,96 @@ margin_right = 92.0
 margin_bottom = 34.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_right = 184.0
-margin_bottom = 23.0
+margin_right = 218.0
+margin_bottom = 44.0
 columns = 2
 
 [node name="LanguageLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 4.0
-margin_right = 57.0
-margin_bottom = 19.0
+margin_top = 3.0
+margin_right = 63.0
+margin_bottom = 17.0
 text = "Language:"
 
 [node name="LanguageOption" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 57.0
-margin_right = 176.0
-margin_bottom = 23.0
+margin_left = 67.0
+margin_right = 218.0
+margin_bottom = 20.0
 text = "System Language"
 items = [ "System Language", null, false, 0, null, "Deutsch [de]", null, false, 1, null, "Ελληνικά [el]", null, false, 2, null, "English [en]", null, false, 3, null, "Français [fr]", null, false, 4, null, "Polski [pl]", null, false, 5, null, "Русский [ru]", null, false, 6, null, "繁體中文 [zh_TW]", null, false, 7, null ]
 selected = 0
 
-[node name="GridOptionsLabel" type="Label" parent="VBoxContainer"]
+[node name="ThemeLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 27.0
-margin_right = 184.0
-margin_bottom = 42.0
+margin_right = 63.0
+margin_bottom = 41.0
+text = "Theme:"
+
+[node name="ThemeOption" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+margin_left = 67.0
+margin_top = 24.0
+margin_right = 218.0
+margin_bottom = 44.0
+text = "Dark Theme"
+items = [ "Main Theme", null, false, 0, null, "Dark Theme", null, false, 1, null ]
+selected = 1
+
+[node name="GridOptionsLabel" type="Label" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 218.0
+margin_bottom = 62.0
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="VBoxContainer"]
-margin_top = 46.0
-margin_right = 184.0
-margin_bottom = 103.0
+margin_top = 66.0
+margin_right = 218.0
+margin_bottom = 142.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/GridOptions"]
-margin_top = 1.0
-margin_right = 39.0
-margin_bottom = 16.0
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
 text = "Width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_right = 103.0
-margin_bottom = 17.0
+margin_left = 50.0
+margin_right = 124.0
+margin_bottom = 24.0
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="VBoxContainer/GridOptions"]
-margin_top = 19.0
-margin_right = 39.0
-margin_bottom = 33.0
+margin_top = 33.0
+margin_right = 46.0
+margin_bottom = 47.0
 text = "Height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 19.0
-margin_right = 103.0
-margin_bottom = 34.0
+margin_left = 50.0
+margin_top = 28.0
+margin_right = 124.0
+margin_bottom = 52.0
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
 suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="VBoxContainer/GridOptions"]
-margin_top = 42.0
-margin_right = 39.0
-margin_bottom = 53.0
+margin_top = 59.0
+margin_right = 46.0
+margin_bottom = 73.0
 text = "Color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="VBoxContainer/GridOptions"]
-margin_left = 39.0
-margin_top = 38.0
-margin_right = 103.0
-margin_bottom = 57.0
+margin_left = 50.0
+margin_top = 56.0
+margin_right = 124.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
 [connection signal="item_selected" from="VBoxContainer/OptionsContainer/LanguageOption" to="." method="_on_LanguageOption_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/OptionsContainer/ThemeOption" to="." method="_on_ThemeOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]

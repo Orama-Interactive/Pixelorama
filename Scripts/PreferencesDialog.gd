@@ -13,6 +13,30 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
 
+func _on_ThemeOption_item_selected(ID : int) -> void:
+	var main_theme
+	var top_menu_style
+	var ruler_style
+	if ID == 0: #Main Theme
+		main_theme = preload("res://Themes & Styles/Main Theme/Main Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Main Theme/TopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Main Theme/RulerStyle.tres")
+	elif ID == 1: #Dark Theme
+		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+
+	Global.control.theme = main_theme
+	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
+	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
+	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
+	Global.horizontal_ruler.add_stylebox_override("hover", ruler_style)
+	Global.horizontal_ruler.add_stylebox_override("focus", ruler_style)
+	Global.vertical_ruler.add_stylebox_override("normal", ruler_style)
+	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
+	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
+	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
+
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value
 

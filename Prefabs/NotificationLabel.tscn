@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Themes & Styles/Main Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Themes & Styles/Main Theme/Main Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/NotificationLabel.gd" type="Script" id=2]
+
 
 [node name="NotificationLabel" type="Label"]
 margin_right = 116.0

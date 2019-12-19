@@ -21,7 +21,7 @@ func _draw() -> void:
 	var minor_subdivide := Transform2D()
 	var fps = Global.control.fps
 	var horizontal_scroll = get_parent().get_node("FrameAndButtonContainer").get_node("ScrollContainer").scroll_horizontal
-	var starting_pos := Vector2(26, 26)
+	var starting_pos := Vector2(10, 10)
 	transform.x = Vector2(fps, fps) / 2.52
 
 	transform.origin = starting_pos - Vector2(horizontal_scroll, horizontal_scroll)

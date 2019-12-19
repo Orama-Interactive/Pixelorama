@@ -114,6 +114,7 @@ var palettes := {}
 
 #Nodes
 var control : Node
+var top_menu_container : Panel
 var left_cursor : Sprite
 var right_cursor : Sprite
 var canvas : Canvas
@@ -203,6 +204,7 @@ func _ready() -> void:
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
+	top_menu_container = find_node_by_name(control, "TopMenuContainer")
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
