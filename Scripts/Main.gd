@@ -60,7 +60,7 @@ func _ready() -> void:
 		}
 	var edit_menu_items := {
 		"Undo" : KEY_MASK_CMD + KEY_Z,
-		"Redo" : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_Z,
+		"Redo" : KEY_MASK_CMD + KEY_Y,
 		"Scale Image" : 0,
 		"Crop Image" : 0,
 		"Clear Selection" : 0,
@@ -72,7 +72,7 @@ func _ready() -> void:
 		"Tile Mode" : KEY_MASK_CMD + KEY_T,
 		"Show Grid" : KEY_MASK_CMD + KEY_G,
 		"Show Rulers" : KEY_MASK_CMD + KEY_R,
-		"Show Guides" : KEY_MASK_CMD + KEY_Y
+		"Show Guides" : KEY_MASK_CMD + KEY_F
 		}
 	var help_menu_items := {
 		"About Pixelorama" : 0
