@@ -187,6 +187,11 @@ func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
+	if event.is_action_pressed("redo_secondary"): #Shift + Ctrl + Z
+		redone = true
+		Global.undo_redo.redo()
+		redone = false
+
 	if Global.has_focus:
 		for t in tools: #Handle tool shortcuts
 			if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
