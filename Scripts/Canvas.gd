@@ -262,11 +262,10 @@ func _process(delta : float) -> void:
 			line_2d.queue_free()
 	if is_making_line:
 		line_2d.set_point_position(1, mouse_pos)
-		var angle := stepify(rad2deg(line_2d.points[1].angle_to_point(line_2d.points[0])), 0.01)
+		var angle := stepify(rad2deg(mouse_pos.angle_to_point(line_2d.points[0])), 0.01)
 		if angle < 0:
 			angle = 360 + angle
 		Global.cursor_position_label.text += "    %s°" % str(angle)
-
 
 	if is_making_selection != "None": #If we're making a selection
 		if Input.is_action_just_released(is_making_selection): #Finish selection when button is released
@@ -477,6 +476,7 @@ func generate_layer_panels() -> void:
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if is_making_line:
 		fill_gaps(mouse_pos, previous_mouse_pos_for_lines, color, current_mouse_button, current_action)
+		draw_pixel(mouse_pos, color, current_mouse_button, current_action)
 	else:
 		if point_in_rectangle(mouse_pos, location, location + size):
 			mouse_inside_canvas = true
@@ -541,13 +541,13 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 						var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
 						#Don't draw the same pixel over and over and don't re-lighten/darken it
-						var current_pixel : Color = layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y)
-						if current_pixel != color && !(pos_floored in lighten_darken_pixels):
+						var current_pixel_color : Color = layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y)
+						if current_pixel_color != color && !(pos_floored in lighten_darken_pixels):
 							if current_action == "LightenDarken":
 								if ld == 0: #Lighten
-									color = current_pixel.lightened(ld_amount)
+									color = current_pixel_color.lightened(ld_amount)
 								else:
-									color = current_pixel.darkened(ld_amount)
+									color = current_pixel_color.darkened(ld_amount)
 								lighten_darken_pixels.append(pos_floored)
 
 							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
@@ -557,37 +557,37 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 							var mirror_x := east_limit + west_limit - cur_pos_x - 1
 							var mirror_y := south_limit + north_limit - cur_pos_y - 1
 							if horizontal_mirror:
-								current_pixel = layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y)
-								if current_pixel != color: #don't draw the same pixel over and over
+								current_pixel_color = layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y)
+								if current_pixel_color != color: #don't draw the same pixel over and over
 									if current_action == "LightenDarken":
 										if ld == 0: #Lighten
-											color = current_pixel.lightened(ld_amount)
+											color = current_pixel_color.lightened(ld_amount)
 										else:
-											color = current_pixel.darkened(ld_amount)
+											color = current_pixel_color.darkened(ld_amount)
 										lighten_darken_pixels.append(pos_floored)
 
 									layers[current_layer_index][0].set_pixel(mirror_x, cur_pos_y, color)
 									sprite_changed_this_frame = true
 							if vertical_mirror:
-								current_pixel = layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y)
-								if current_pixel != color: #don't draw the same pixel over and over
+								current_pixel_color = layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y)
+								if current_pixel_color != color: #don't draw the same pixel over and over
 									if current_action == "LightenDarken":
 										if ld == 0: #Lighten
-											color = current_pixel.lightened(ld_amount)
+											color = current_pixel_color.lightened(ld_amount)
 										else:
-											color = current_pixel.darkened(ld_amount)
+											color = current_pixel_color.darkened(ld_amount)
 										lighten_darken_pixels.append(pos_floored)
 
 									layers[current_layer_index][0].set_pixel(cur_pos_x, mirror_y, color)
 									sprite_changed_this_frame = true
 							if horizontal_mirror && vertical_mirror:
-								current_pixel = layers[current_layer_index][0].get_pixel(mirror_x, mirror_y)
-								if current_pixel != color: #don't draw the same pixel over and over
+								current_pixel_color = layers[current_layer_index][0].get_pixel(mirror_x, mirror_y)
+								if current_pixel_color != color: #don't draw the same pixel over and over
 									if current_action == "LightenDarken":
 										if ld == 0: #Lighten
-											color = current_pixel.lightened(ld_amount)
+											color = current_pixel_color.lightened(ld_amount)
 										else:
-											color = current_pixel.darkened(ld_amount)
+											color = current_pixel_color.darkened(ld_amount)
 										lighten_darken_pixels.append(pos_floored)
 
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
@@ -658,7 +658,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			layers[current_layer_index][0].lock()
 			sprite_changed_this_frame = true
 
-		previous_mouse_pos_for_lines = current_pixel
+		previous_mouse_pos_for_lines = pos.floor() + Vector2(0.5, 0.5)
 		previous_mouse_pos_for_lines.x = clamp(previous_mouse_pos_for_lines.x, location.x, location.x + size.x)
 		previous_mouse_pos_for_lines.y = clamp(previous_mouse_pos_for_lines.y, location.y, location.y + size.y)
 		if is_making_line:
