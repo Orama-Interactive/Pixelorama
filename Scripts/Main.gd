@@ -115,6 +115,7 @@ func _ready() -> void:
 		i += 1
 	view_menu.set_item_checked(2, true) #Show Rulers
 	view_menu.set_item_checked(3, true) #Show Guides
+	view_menu.hide_on_checkable_item_selection = false
 	i = 0
 	for item in help_menu_items.keys():
 		help_menu.add_item(item, i, help_menu_items[item])
