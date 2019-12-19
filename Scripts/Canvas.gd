@@ -20,6 +20,7 @@ var sprite_changed_this_frame := false #for optimization purposes
 var lighten_darken_pixels := [] #Cleared after mouse release
 
 var is_making_line := false
+var made_line := false
 var is_making_selection := "None"
 var line_2d : Line2D
 
@@ -130,7 +131,7 @@ func _process(delta : float) -> void:
 				Input.set_custom_mouse_cursor(null)
 
 	#Handle Undo/Redo
-	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus
+	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus && !made_line
 	var mouse_pressed : bool = (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse"))
 
 	#If we're already pressing a mouse button and we haven't handled undo yet,...
@@ -148,6 +149,7 @@ func _process(delta : float) -> void:
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
+		made_line = false
 		lighten_darken_pixels.clear()
 		if (can_handle || Global.undos == Global.undo_redo.get_version()) && Global.current_frame == frame:
 			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
@@ -248,7 +250,7 @@ func _process(delta : float) -> void:
 					Global.right_color_picker.color = pixel_color
 					Global.update_right_custom_brush()
 
-	if Input.is_action_just_pressed("shift") and (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool)  or ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
+	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool) || ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
 		line_2d = Line2D.new()
 		line_2d.width = 0.5
 		line_2d.default_color = Color.darkgray
@@ -260,9 +262,17 @@ func _process(delta : float) -> void:
 		is_making_line = false
 		if is_instance_valid(line_2d):
 			line_2d.queue_free()
+
 	if is_making_line:
-		line_2d.set_point_position(1, mouse_pos)
-		var angle := stepify(rad2deg(mouse_pos.angle_to_point(line_2d.points[0])), 0.01)
+		var point0 : Vector2 = line_2d.points[0]
+		var angle := stepify(rad2deg(mouse_pos.angle_to_point(point0)), 0.01)
+		if Input.is_action_pressed("ctrl"):
+			angle = round(angle / 15) * 15
+			var distance : float = point0.distance_to(mouse_pos)
+			line_2d.set_point_position(1, point0 + Vector2.RIGHT.rotated(deg2rad(angle)) * distance)
+		else:
+			line_2d.set_point_position(1, mouse_pos)
+
 		if angle < 0:
 			angle = 360 + angle
 		Global.cursor_position_label.text += "    %s°" % str(angle)
@@ -474,9 +484,12 @@ func generate_layer_panels() -> void:
 		Global.vbox_layer_container.add_child(layer_container)
 
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
+	if made_line:
+		return
 	if is_making_line:
-		fill_gaps(mouse_pos, previous_mouse_pos_for_lines, color, current_mouse_button, current_action)
-		draw_pixel(mouse_pos, color, current_mouse_button, current_action)
+		fill_gaps(line_2d.points[1], previous_mouse_pos_for_lines, color, current_mouse_button, current_action)
+		draw_pixel(line_2d.points[1], color, current_mouse_button, current_action)
+		made_line = true
 	else:
 		if point_in_rectangle(mouse_pos, location, location + size):
 			mouse_inside_canvas = true
