@@ -26,6 +26,7 @@ func _on_ThemeOption_item_selected(ID : int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 func change_theme(ID : int) -> void:
+	var font = Global.control.theme.default_font
 	var main_theme
 	var top_menu_style
 	var ruler_style
@@ -47,6 +48,7 @@ func change_theme(ID : int) -> void:
 		ruler_style = preload("res://Themes & Styles/Light Theme/LightRulerStyle.tres")
 
 	Global.control.theme = main_theme
+	Global.control.theme.default_font = font
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
