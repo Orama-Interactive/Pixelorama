@@ -23,26 +23,39 @@ _global_script_classes=[ {
 "class": "LayerContainer",
 "language": "GDScript",
 "path": "res://Scripts/LayerContainer.gd"
+}, {
+"base": "Reference",
+"class": "Palette",
+"language": "GDScript",
+"path": "res://Scripts/Palette/Palette.gd"
+}, {
+"base": "Reference",
+"class": "PaletteColor",
+"language": "GDScript",
+"path": "res://Scripts/Palette/PaletteColor.gd"
 } ]
 _global_script_class_icons={
 "Canvas": "",
 "Guide": "",
-"LayerContainer": ""
+"LayerContainer": "",
+"Palette": "",
+"PaletteColor": ""
 }
 
 [application]
 
 config/name="Pixelorama"
-config/description="A free & open-source 2D sprite editor"
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://splash.png"
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
 config/icon="res://icon.png"
+config/description="A free & open-source 2D sprite editor"
 config/Version="v0.5"
 
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+Import="*res://Scripts/Import.gd"
 
 [debug]
 

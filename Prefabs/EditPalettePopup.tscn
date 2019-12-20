@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/EditPalettePopup.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Palette/EditPalettePopup.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Palette/new_swatch_button.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Palette/new_swatch_button_hover.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/Palette/remove_swatch_button.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Graphics/Palette/remove_swatch_button_hover.png" type="Texture" id=5]
+
 
 [node name="EditPalettePopup" type="WindowDialog"]
 visible = true
