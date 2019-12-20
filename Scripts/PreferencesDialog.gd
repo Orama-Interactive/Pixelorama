@@ -42,10 +42,10 @@ func change_theme(ID : int) -> void:
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
-	elif ID == 3: #Light Theme
-		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Light Theme/LightTopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Light Theme/LightRulerStyle.tres")
+	elif ID == 3: #Gold Theme
+		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
