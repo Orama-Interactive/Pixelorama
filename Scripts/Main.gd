@@ -33,9 +33,6 @@ func _ready() -> void:
 	# Make sure locales are always sorted, in the same order
 	Global.loaded_locales.sort()
 
-	# Load settings from the config file
-	Global.config_cache.load("user://cache.ini")
-
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
 		OS.current_screen = Global.config_cache.get_value("window", "screen")

@@ -1,5 +1,11 @@
 extends AcceptDialog
 
+func _ready() -> void:
+	if Global.config_cache.has_section_key("preferences", "theme"):
+		var theme_id = Global.config_cache.get_value("preferences", "theme")
+		change_theme(theme_id)
+		$VBoxContainer/OptionsContainer/ThemeOption.selected = theme_id
+
 func _on_LanguageOption_item_selected(ID : int) -> void:
 	if ID == 0:
 		TranslationServer.set_locale(OS.get_locale())
@@ -14,6 +20,12 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 func _on_ThemeOption_item_selected(ID : int) -> void:
+	change_theme(ID)
+
+	Global.config_cache.set_value("preferences", "theme", ID)
+	Global.config_cache.save("user://cache.ini")
+
+func change_theme(ID : int) -> void:
 	var main_theme
 	var top_menu_style
 	var ruler_style
