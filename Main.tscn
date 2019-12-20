@@ -1478,8 +1478,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1494,8 +1494,8 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="ImportSprites" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1505,8 +1505,8 @@ resizable = true
 mode = 1
 access = 2
 filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="ExportSprites" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1521,8 +1521,8 @@ window_title = "Export Sprite"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -1677,8 +1677,8 @@ visible = false
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 60 )]
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 61 )]
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 

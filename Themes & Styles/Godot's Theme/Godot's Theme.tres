@@ -1,107 +1,6 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=2 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.517647, 0.517647, 0.517647, 1 )
-border_width_left = 6
-border_width_top = 4
-border_width_right = 6
-border_width_bottom = 4
-border_color = Color( 0.517647, 0.517647, 0.517647, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 6
-border_width_top = 4
-border_width_right = 6
-border_width_bottom = 4
-border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.2, 0.2, 0.2, 1 )
-border_width_left = 6
-border_width_top = 4
-border_width_right = 6
-border_width_bottom = 4
-border_color = Color( 0.2, 0.2, 0.2, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 8
-border_width_top = 1
-border_width_right = 4
-border_width_bottom = 1
-border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 5
-border_width_top = 10
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.2, 0.2, 0.2, 1 )
-border_width_left = 10
-border_width_top = 6
-border_width_right = 10
-border_width_bottom = 8
-border_color = Color( 0.2, 0.2, 0.2, 1 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
-border_width_left = 10
-border_width_top = 6
-border_width_right = 10
-border_width_bottom = 8
-border_color = Color( 0.145098, 0.145098, 0.164706, 1 )
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 10
-border_width_top = 6
-border_width_right = 10
-border_width_bottom = 8
-border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
 [resource]
 default_font = ExtResource( 1 )
@@ -113,9 +12,9 @@ Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource( 1 )
-Button/styles/normal = SubResource( 2 )
-Button/styles/pressed = SubResource( 3 )
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
 CheckBox/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 CheckBox/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -130,10 +29,10 @@ CheckBox/icons/radio_unchecked = null
 CheckBox/icons/unchecked = null
 CheckBox/styles/disabled = null
 CheckBox/styles/focus = null
-CheckBox/styles/hover = SubResource( 4 )
-CheckBox/styles/hover_pressed = SubResource( 5 )
-CheckBox/styles/normal = SubResource( 6 )
-CheckBox/styles/pressed = SubResource( 7 )
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
 GridContainer/constants/hseparation = 0
 GridContainer/constants/vseparation = 0
 LineEdit/colors/clear_button_color = Color( 0.878431, 0.878431, 0.878431, 1 )
@@ -146,7 +45,7 @@ LineEdit/constants/minimum_spaces = 12
 LineEdit/fonts/font = null
 LineEdit/icons/clear = null
 LineEdit/styles/focus = null
-LineEdit/styles/normal = SubResource( 8 )
+LineEdit/styles/normal = null
 LineEdit/styles/read_only = null
 MenuButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 MenuButton/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
@@ -174,8 +73,8 @@ TabContainer/icons/increment = null
 TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = SubResource( 9 )
-TabContainer/styles/tab_bg = SubResource( 10 )
-TabContainer/styles/tab_disabled = SubResource( 11 )
-TabContainer/styles/tab_fg = SubResource( 12 )
+TabContainer/styles/panel = null
+TabContainer/styles/tab_bg = null
+TabContainer/styles/tab_disabled = null
+TabContainer/styles/tab_fg = null
 VBoxContainer/constants/separation = 4
