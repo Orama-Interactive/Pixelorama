@@ -1,8 +1,8 @@
 [gd_scene load_steps=81 format=2]
 
-[ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Themes & Styles/Main Theme/Original Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
-[ext_resource path="res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://Themes & Styles/Main Theme/OriginalTopMenuStyle.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Graphics/Tools/RectSelect.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Graphics/Tools/ColorPicker.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Graphics/Tools/Pencil_l.png" type="Texture" id=6]
@@ -157,7 +157,6 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TopMenuContainer" type="Panel" parent="MenuAndUI"]
-editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
@@ -226,7 +225,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -235,7 +233,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
@@ -791,7 +788,6 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -805,7 +801,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -1139,7 +1134,6 @@ margin_right = 689.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1189,7 +1183,6 @@ margin_right = 224.0
 margin_bottom = 199.0
 
 [node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-editor/display_folded = true
 margin_top = 203.0
 margin_right = 224.0
 margin_bottom = 384.0
@@ -1485,8 +1478,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1501,8 +1494,8 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="ImportSprites" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1512,8 +1505,8 @@ resizable = true
 mode = 1
 access = 2
 filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="ExportSprites" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1528,8 +1521,8 @@ window_title = "Export Sprite"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -1684,8 +1677,8 @@ visible = false
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 60 )]
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 61 )]
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "C:/Users/User/Desktop/Github/Pixelorama"
+current_path = "C:/Users/User/Desktop/Github/Pixelorama/"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
