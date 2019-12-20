@@ -29,6 +29,10 @@ func _on_ThemeOption_item_selected(ID : int) -> void:
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
+	elif ID == 3: #Light Theme
+		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Light Theme/LightTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Light Theme/LightRulerStyle.tres")
 
 	Global.control.theme = main_theme
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
