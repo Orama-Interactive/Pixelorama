@@ -48,8 +48,8 @@ margin_top = 24.0
 margin_right = 218.0
 margin_bottom = 44.0
 text = "Dark Theme"
-items = [ "Main Theme", null, false, 0, null, "Dark Theme", null, false, 1, null ]
-selected = 1
+items = [ "Dark Theme", null, false, 0, null, "Gray Theme", null, false, 1, null, "Godot's Theme", null, false, 2, null ]
+selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="VBoxContainer"]
 margin_top = 48.0
