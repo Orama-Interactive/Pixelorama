@@ -157,6 +157,7 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TopMenuContainer" type="Panel" parent="MenuAndUI"]
+editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
@@ -233,6 +234,7 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
@@ -788,6 +790,7 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -801,6 +804,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
+editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -1183,6 +1187,7 @@ margin_right = 224.0
 margin_bottom = 199.0
 
 [node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
 margin_top = 203.0
 margin_right = 224.0
 margin_bottom = 384.0
@@ -1360,10 +1365,10 @@ drag_to_rearrange_enabled = true
 [node name="File" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 39.0
-margin_right = -5.0
-margin_bottom = -5.0
+margin_left = 10.0
+margin_top = 29.0
+margin_right = -10.0
+margin_bottom = -8.0
 rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
