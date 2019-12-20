@@ -17,14 +17,18 @@ func _on_ThemeOption_item_selected(ID : int) -> void:
 	var main_theme
 	var top_menu_style
 	var ruler_style
-	if ID == 0: #Main Theme
-		main_theme = preload("res://Themes & Styles/Main Theme/Main Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Main Theme/TopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Main Theme/RulerStyle.tres")
-	elif ID == 1: #Dark Theme
+	if ID == 0: #Dark Theme
 		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+	elif ID == 1: #Gray Theme
+		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+	elif ID == 2: #Godot's Theme
+		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
 
 	Global.control.theme = main_theme
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
