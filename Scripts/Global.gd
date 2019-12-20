@@ -199,6 +199,9 @@ var palette_import_file_dialog : FileDialog
 var error_dialog : AcceptDialog
 
 func _ready() -> void:
+	# Load settings from the config file
+	config_cache.load("user://cache.ini")
+
 	undo_redo = UndoRedo.new()
 	image_clipboard = Image.new()
 

@@ -1,5 +1,11 @@
 extends AcceptDialog
 
+func _ready() -> void:
+	if Global.config_cache.has_section_key("preferences", "theme"):
+		var theme_id = Global.config_cache.get_value("preferences", "theme")
+		change_theme(theme_id)
+		$VBoxContainer/OptionsContainer/ThemeOption.selected = theme_id
+
 func _on_LanguageOption_item_selected(ID : int) -> void:
 	if ID == 0:
 		TranslationServer.set_locale(OS.get_locale())
@@ -14,19 +20,35 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 func _on_ThemeOption_item_selected(ID : int) -> void:
+	change_theme(ID)
+
+	Global.config_cache.set_value("preferences", "theme", ID)
+	Global.config_cache.save("user://cache.ini")
+
+func change_theme(ID : int) -> void:
+	var font = Global.control.theme.default_font
 	var main_theme
 	var top_menu_style
 	var ruler_style
-	if ID == 0: #Main Theme
-		main_theme = preload("res://Themes & Styles/Main Theme/Main Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Main Theme/TopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Main Theme/RulerStyle.tres")
-	elif ID == 1: #Dark Theme
+	if ID == 0: #Dark Theme
 		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+	elif ID == 1: #Gray Theme
+		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+	elif ID == 2: #Godot's Theme
+		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
+	elif ID == 3: #Light Theme
+		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Light Theme/LightTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Light Theme/LightRulerStyle.tres")
 
 	Global.control.theme = main_theme
+	Global.control.theme.default_font = font
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
