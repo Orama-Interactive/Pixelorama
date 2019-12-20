@@ -33,7 +33,7 @@ margin_left = 67.0
 margin_right = 218.0
 margin_bottom = 20.0
 text = "System Language"
-items = [ "System Language", null, false, 0, null, "Deutsch [de]", null, false, 1, null, "Ελληνικά [el]", null, false, 2, null, "English [en]", null, false, 3, null, "Français [fr]", null, false, 4, null, "Polski [pl]", null, false, 5, null, "Русский [ru]", null, false, 6, null, "繁體中文 [zh_TW]", null, false, 7, null ]
+items = [ "System Language", null, false, 0, null, "Deutsch [de]", null, false, 1, null, "Ελληνικά [el]", null, false, 2, null, "English [en]", null, false, 3, null, "Français [fr]", null, false, 4, null, "Polski [pl]", null, false, 5, null, "Português Brasileiro [pt_BR]", null, false, 6, null, "Русский [ru]", null, false, 7, null, "繁體中文 [zh_TW]", null, false, 8, null ]
 selected = 0
 
 [node name="ThemeLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
@@ -47,8 +47,8 @@ margin_left = 67.0
 margin_top = 24.0
 margin_right = 218.0
 margin_bottom = 44.0
-text = "Dark Theme"
-items = [ "Dark Theme", null, false, 0, null, "Gray Theme", null, false, 1, null, "Godot's Theme", null, false, 2, null ]
+text = "Dark"
+items = [ "Dark", null, false, 0, null, "Gray", null, false, 1, null, "Godot", null, false, 2, null, "Gold", null, false, 3, null ]
 selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="VBoxContainer"]

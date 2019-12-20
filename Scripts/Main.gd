@@ -28,13 +28,10 @@ func _ready() -> void:
 		Global.loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		Global.loaded_locales = ["de", "el", "en", "fr", "pl", "ru", "zh_TW"]
+		Global.loaded_locales = ["de", "el", "en", "fr", "pl", "pt_BR", "ru", "zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
 	Global.loaded_locales.sort()
-
-	# Load settings from the config file
-	Global.config_cache.load("user://cache.ini")
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):

@@ -1,5 +1,11 @@
 extends AcceptDialog
 
+func _ready() -> void:
+	if Global.config_cache.has_section_key("preferences", "theme"):
+		var theme_id = Global.config_cache.get_value("preferences", "theme")
+		change_theme(theme_id)
+		$VBoxContainer/OptionsContainer/ThemeOption.selected = theme_id
+
 func _on_LanguageOption_item_selected(ID : int) -> void:
 	if ID == 0:
 		TranslationServer.set_locale(OS.get_locale())
@@ -14,6 +20,13 @@ func _on_LanguageOption_item_selected(ID : int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 func _on_ThemeOption_item_selected(ID : int) -> void:
+	change_theme(ID)
+
+	Global.config_cache.set_value("preferences", "theme", ID)
+	Global.config_cache.save("user://cache.ini")
+
+func change_theme(ID : int) -> void:
+	var font = Global.control.theme.default_font
 	var main_theme
 	var top_menu_style
 	var ruler_style
@@ -29,8 +42,13 @@ func _on_ThemeOption_item_selected(ID : int) -> void:
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
+	elif ID == 3: #Gold Theme
+		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
 
 	Global.control.theme = main_theme
+	Global.control.theme.default_font = font
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
