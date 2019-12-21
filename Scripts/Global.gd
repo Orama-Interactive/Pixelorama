@@ -207,7 +207,7 @@ func _ready() -> void:
 
 	undo_redo = UndoRedo.new()
 	transparent_background = ImageTexture.new()
-	transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Godot.png"), 0)
+	transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()

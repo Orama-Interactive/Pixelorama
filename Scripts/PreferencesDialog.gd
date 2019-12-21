@@ -39,7 +39,7 @@ func change_theme(ID : int) -> void:
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 1: #Gray Theme
 		Global.theme_type = "Dark"
-		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Godot.png"), 0)
+		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Gray.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
@@ -47,7 +47,7 @@ func change_theme(ID : int) -> void:
 	elif ID == 2: #Godot's Theme
 		Global.theme_type = "Dark"
 		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Godot.png"), 0)
-		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
+		VisualServer.set_default_clear_color(Color(0.27451, 0.278431, 0.305882))
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
