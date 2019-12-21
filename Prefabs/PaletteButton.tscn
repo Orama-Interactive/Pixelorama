@@ -4,8 +4,9 @@
 [ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_pressedr.tres" type="StyleBox" id=2]
 [ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_focus.tres" type="StyleBox" id=3]
 [ext_resource path="res://Themes & Styles/StyleBoxes/palette_stylebox_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://Scripts/PaletteButton.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Palette/PaletteButton.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=6]
+
 
 [sub_resource type="ImageTexture" id=1]
 
