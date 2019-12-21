@@ -31,18 +31,22 @@ func change_theme(ID : int) -> void:
 	var top_menu_style
 	var ruler_style
 	if ID == 0: #Dark Theme
+		Global.theme_type = "Dark"
 		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 1: #Gray Theme
+		Global.theme_type = "Dark"
 		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 2: #Godot's Theme
+		Global.theme_type = "Dark"
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
 	elif ID == 3: #Gold Theme
+		Global.theme_type = "Light"
 		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
@@ -58,6 +62,11 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
+	for button in get_tree().get_nodes_in_group("LayerButtons"):
+		button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/%s.png" % [Global.theme_type, button.name])
+		button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/%s_Hover.png" % [Global.theme_type, button.name])
+		if button.texture_disabled:
+			button.texture_disabled = load("res://Assets/Graphics/%s Themes/Layers/%s_Disabled.png" % [Global.theme_type, button.name])
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value

@@ -21,6 +21,8 @@ var right_cursor_tool_texture : ImageTexture
 var selected_pixels := []
 var image_clipboard : Image
 # warning-ignore:unused_class_variable
+var theme_type := "Dark"
+# warning-ignore:unused_class_variable
 var grid_width := 1
 # warning-ignore:unused_class_variable
 var grid_height := 1
@@ -278,11 +280,12 @@ func _ready() -> void:
 	play_backwards = find_node_by_name(root, "PlayBackwards")
 	frame_container = find_node_by_name(root, "FrameContainer")
 
+	var layer_buttons = find_node_by_name(root, "LayerButtons")
+	remove_layer_button = find_node_by_name(layer_buttons, "Delete_Layer")
+	move_up_layer_button = find_node_by_name(layer_buttons, "Move_Up")
+	move_down_layer_button = find_node_by_name(layer_buttons, "Move_Down")
+	merge_down_layer_button = find_node_by_name(layer_buttons, "Merge_Down")
 	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
-	remove_layer_button = find_node_by_name(root, "RemoveLayerButton")
-	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
-	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
-	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	remove_palette_button = find_node_by_name(root, "RemovePalette")
