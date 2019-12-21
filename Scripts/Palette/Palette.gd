@@ -31,10 +31,10 @@ func move_color(from : int, to : int) -> void:
 
 func get_color(index : int) -> Color:
 	var result := Color.black
-	
+
 	if index < colors.size():
 		result = colors[index].color
-	
+
 	return result
 
 func set_color(index : int, new_color : Color) -> void:
@@ -43,10 +43,10 @@ func set_color(index : int, new_color : Color) -> void:
 
 func get_color_data(index : int) -> String:
 	var result := ""
-	
+
 	if index < colors.size():
 		result = colors[index].data
-	
+
 	return result
 
 func set_color_data(index : int, new_color : String) -> void:
@@ -55,10 +55,10 @@ func set_color_data(index : int, new_color : String) -> void:
 
 func get_color_name(index : int) -> String:
 	var result = ""
-	
+
 	if index < colors.size():
 		result = colors[index].name
-	
+
 	return result
 
 func set_color_name(index : int, new_name : String) -> void:
@@ -90,14 +90,14 @@ func _serialize() -> String:
 	}
 	for color in colors:
 		serialize_data.colors.push_back(color.toDict())
-	
+
 	result = JSON.print(serialize_data)
-	
+
 	return result;
 
 func deserialize(input_string : String) -> Palette:
 	var result = get_script().new()
-	
+
 	var result_json = JSON.parse(input_string)
 #
 	if result_json.error != OK:  # If parse has errors
@@ -110,11 +110,13 @@ func deserialize(input_string : String) -> Palette:
 		if data.has("name"): #If data is 'valid' palette file
 			result = get_script().new()
 			result.name = data.name
-			result.comments = data.comments
-			result.editable = data.editable
+			if data.has("comments"):
+				result.comments = data.comments
+			if data.has("editable"):
+				result.editable = data.editable
 			for color_data in data.colors:
 				result.add_color(color_data.data, color_data.name)
-	
+
 	return result
 
 func load_from_file(path : String) -> Palette:

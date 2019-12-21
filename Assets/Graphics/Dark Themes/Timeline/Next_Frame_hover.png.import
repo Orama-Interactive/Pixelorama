@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Next_Frame_hover.png-29e3bdc3bfb09dbf24f0d4ef57cdadd0.stex"
+path="res://.import/Next_Frame_Hover.png-ba92cf8a5dbcda245610c78c96d6bf93.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/Next_Frame_hover.png"
-dest_files=[ "res://.import/Next_Frame_hover.png-29e3bdc3bfb09dbf24f0d4ef57cdadd0.stex" ]
+source_file="res://Assets/Graphics/Dark Themes/Timeline/Next_Frame_Hover.png"
+dest_files=[ "res://.import/Next_Frame_Hover.png-ba92cf8a5dbcda245610c78c96d6bf93.stex" ]
 
 [params]
 
