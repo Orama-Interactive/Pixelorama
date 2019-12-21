@@ -859,6 +859,7 @@ enabled_focus_mode = 0
 script = ExtResource( 15 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
+editor/display_folded = true
 margin_left = 16.0
 margin_right = 704.0
 margin_bottom = 462.0
