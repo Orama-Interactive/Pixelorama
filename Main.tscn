@@ -36,22 +36,22 @@
 [ext_resource path="res://Scripts/TimelineSeconds.gd" type="Script" id=34]
 [ext_resource path="res://Assets/Graphics/Timeline/New_Frame.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Graphics/Timeline/New_Frame_Hover.png" type="Texture" id=36]
-[ext_resource path="res://Assets/Graphics/Layers/new_layer.png" type="Texture" id=37]
-[ext_resource path="res://Assets/Graphics/Layers/new_layer_hover.png" type="Texture" id=38]
-[ext_resource path="res://Assets/Graphics/Layers/delete_layer.png" type="Texture" id=39]
-[ext_resource path="res://Assets/Graphics/Layers/delete_layer_hover.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Graphics/Layers/delete_layer_disabled.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Graphics/Layers/move_up.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Graphics/Layers/move_up_hover.png" type="Texture" id=43]
-[ext_resource path="res://Assets/Graphics/Layers/move_up_disabled.png" type="Texture" id=44]
-[ext_resource path="res://Assets/Graphics/Layers/move_down.png" type="Texture" id=45]
-[ext_resource path="res://Assets/Graphics/Layers/move_down_hover.png" type="Texture" id=46]
-[ext_resource path="res://Assets/Graphics/Layers/move_down_disabled.png" type="Texture" id=47]
-[ext_resource path="res://Assets/Graphics/Layers/clone_layer.png" type="Texture" id=48]
-[ext_resource path="res://Assets/Graphics/Layers/clone_layer_hover.png" type="Texture" id=49]
-[ext_resource path="res://Assets/Graphics/Layers/merge_down.png" type="Texture" id=50]
-[ext_resource path="res://Assets/Graphics/Layers/merge_down_hover.png" type="Texture" id=51]
-[ext_resource path="res://Assets/Graphics/Layers/merge_down_disabled.png" type="Texture" id=52]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/New_Layer.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/New_Layer_hover.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Delete_Layer.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Delete_Layer_Hover.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Delete_Layer_Disabled.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Move_Up.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Move_Up_Hover.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Move_Up_Disabled.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Move_Down.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Move_Down_Hover.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Move_Down_Disabled.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Clone_Layer.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Clone_Layer_Hover.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Merge_Down.png" type="Texture" id=50]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Merge_Down_Hover.png" type="Texture" id=51]
+[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Merge_Down_Disabled.png" type="Texture" id=52]
 [ext_resource path="res://Scripts/PaletteContainer.gd" type="Script" id=53]
 [ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=55]
@@ -225,7 +225,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -1319,6 +1318,7 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 39 )
+texture_hover = ExtResource( 40 )
 texture_disabled = ExtResource( 41 )
 
 [node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]

@@ -69,10 +69,12 @@ func changed_selection() -> void:
 func _on_VisibilityButton_pressed() -> void:
 	if Global.canvas.layers[i][3]:
 		Global.canvas.layers[i][3] = false
-		visibility_button.texture_normal = preload("res://Assets/Graphics/Layers/layer_invisible.png")
+		visibility_button.texture_normal = preload("res://Assets/Graphics/Layers/Dark Themes/Layer_Invisible.png")
+		visibility_button.texture_hover = preload("res://Assets/Graphics/Layers/Dark Themes/Layer_Invisible_Hover.png")
 	else:
 		Global.canvas.layers[i][3] = true
-		visibility_button.texture_normal = preload("res://Assets/Graphics/Layers/layer_visible.png")
+		visibility_button.texture_normal = preload("res://Assets/Graphics/Layers/Dark Themes/Layer_Visible.png")
+		visibility_button.texture_hover = preload("res://Assets/Graphics/Layers/Dark Themes/Layer_Visible_Hover.png")
 
 func _on_LineEdit_text_changed(new_text : String) -> void:
 	Global.canvas.layers[i][2] = new_text
