@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Layers/layer_visible.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible_Hover.png" type="Texture" id=3]
 
 [node name="LayerContainer" type="Button"]
 margin_right = 160.0
@@ -13,7 +14,9 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
 
-[node name="VisibilityButton" type="TextureButton" parent="."]
+[node name="VisibilityButton" type="TextureButton" parent="." groups=[
+"UIButtons",
+]]
 margin_left = 6.0
 margin_top = 5.0
 margin_right = 38.0
@@ -23,6 +26,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 0.5

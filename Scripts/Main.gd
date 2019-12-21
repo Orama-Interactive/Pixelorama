@@ -709,16 +709,16 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	for t in tools:
 		var tool_name : String = t[0].name
 		if tool_name == Global.current_left_tool && tool_name == Global.current_right_tool:
-			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_l_r.png" % tool_name)
+			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_l_r.png" % [Global.theme_type, tool_name])
 		elif tool_name == Global.current_left_tool:
-			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_l.png" % tool_name)
+			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_l.png" % [Global.theme_type, tool_name])
 		elif tool_name == Global.current_right_tool:
-			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s_r.png" % tool_name)
+			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_r.png" % [Global.theme_type, tool_name])
 		else:
-			t[0].texture_normal = load("res://Assets/Graphics/Tools/%s.png" % tool_name)
+			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s.png" % [Global.theme_type, tool_name])
 
-	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tools/%s_Cursor.png" % Global.current_left_tool))
-	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tools/%s_Cursor.png" % Global.current_right_tool))
+	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_left_tool))
+	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_right_tool))
 
 func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.left_square_indicator_visible = button_pressed
@@ -849,21 +849,21 @@ func add_frame() -> void:
 	Global.undo_redo.commit_action()
 
 func _on_LoopAnim_pressed() -> void:
-	match Global.loop_animation_button.texture_normal.resource_path:
-		"res://Assets/Graphics/Timeline/Loop_None.png":
+	match animation_loop:
+		0:
 			#Make it loop
 			animation_loop = 1
-			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop.png")
+			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Cycle loop"
-		"res://Assets/Graphics/Timeline/Loop.png":
+		1:
 			#Make it ping-pong
 			animation_loop = 2
-			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop_PingPong.png")
+			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
-		"res://Assets/Graphics/Timeline/Loop_PingPong.png":
+		2:
 			#Make it stop
 			animation_loop = 0
-			Global.loop_animation_button.texture_normal = preload("res://Assets/Graphics/Timeline/Loop_None.png")
+			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
 
 func _on_PlayForward_toggled(button_pressed) -> void:

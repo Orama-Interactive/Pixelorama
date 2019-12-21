@@ -17,9 +17,12 @@ var canvases := []
 var hidden_canvases := []
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
+var transparent_background : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
+# warning-ignore:unused_class_variable
+var theme_type := "Dark"
 # warning-ignore:unused_class_variable
 var grid_width := 1
 # warning-ignore:unused_class_variable
@@ -203,6 +206,8 @@ func _ready() -> void:
 	config_cache.load("user://cache.ini")
 
 	undo_redo = UndoRedo.new()
+	transparent_background = ImageTexture.new()
+	transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()
@@ -213,9 +218,9 @@ func _ready() -> void:
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
 	left_cursor_tool_texture = ImageTexture.new()
-	left_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tools/Pencil_Cursor.png"))
+	left_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tool Cursors/Pencil_Cursor.png"))
 	right_cursor_tool_texture = ImageTexture.new()
-	right_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tools/Eraser_Cursor.png"))
+	right_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tool Cursors/Eraser_Cursor.png"))
 	canvas_parent = canvas.get_parent()
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
@@ -278,11 +283,12 @@ func _ready() -> void:
 	play_backwards = find_node_by_name(root, "PlayBackwards")
 	frame_container = find_node_by_name(root, "FrameContainer")
 
+	var layer_buttons = find_node_by_name(root, "LayerButtons")
+	remove_layer_button = find_node_by_name(layer_buttons, "RemoveLayer")
+	move_up_layer_button = find_node_by_name(layer_buttons, "MoveUpLayer")
+	move_down_layer_button = find_node_by_name(layer_buttons, "MovwDownLayer")
+	merge_down_layer_button = find_node_by_name(layer_buttons, "MergeDownLayer")
 	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
-	remove_layer_button = find_node_by_name(root, "RemoveLayerButton")
-	move_up_layer_button = find_node_by_name(root, "MoveUpLayer")
-	move_down_layer_button = find_node_by_name(root, "MoveDownLayer")
-	merge_down_layer_button = find_node_by_name(root, "MergeDownLayer")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	remove_palette_button = find_node_by_name(root, "RemovePalette")

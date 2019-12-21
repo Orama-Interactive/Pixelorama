@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Eraser_Cursor.png-717a55017415d492bc9737e75afa0896.image"
+
+[deps]
+
+source_file="res://Assets/Graphics/Tool Cursors/Eraser_Cursor.png"
+dest_files=[ "res://.import/Eraser_Cursor.png-717a55017415d492bc9737e75afa0896.image" ]
+
+[params]
+

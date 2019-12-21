@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Bucket_Cursor.png-1dd69de9e5a420f21aff31c606463041.image"
+
+[deps]
+
+source_file="res://Assets/Graphics/Tool Cursors/Bucket_Cursor.png"
+dest_files=[ "res://.import/Bucket_Cursor.png-1dd69de9e5a420f21aff31c606463041.image" ]
+
+[params]
+
