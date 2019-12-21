@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Layer_Visible.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Layers/Dark Themes/Layer_Visible_Hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible_Hover.png" type="Texture" id=3]
 
 [node name="LayerContainer" type="Button"]
 margin_right = 160.0
@@ -14,7 +14,9 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
 
-[node name="VisibilityButton" type="TextureButton" parent="."]
+[node name="Layer_Visible" type="TextureButton" parent="." groups=[
+"LayerButtons",
+]]
 margin_left = 6.0
 margin_top = 5.0
 margin_right = 38.0
@@ -66,5 +68,5 @@ editable = false
 caret_blink = true
 caret_blink_speed = 0.5
 [connection signal="pressed" from="." to="." method="_on_LayerContainer_pressed"]
-[connection signal="pressed" from="VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
+[connection signal="pressed" from="Layer_Visible" to="." method="_on_VisibilityButton_pressed"]
 [connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
