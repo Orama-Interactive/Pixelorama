@@ -3,7 +3,6 @@ class_name Canvas
 
 var layers := []
 var current_layer_index := 0
-var trans_background : ImageTexture
 var location := Vector2.ZERO
 var size := Vector2(64, 64)
 var frame := 0 setget frame_changed
@@ -27,9 +26,6 @@ var line_2d : Line2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.can_draw = false
-	#Background
-	trans_background = ImageTexture.new()
-	trans_background.create_from_image(preload("res://Assets/Graphics/Transparent Background.png"), 0)
 
 	#The sprite itself
 	if layers.empty():
@@ -381,7 +377,7 @@ func get_layer_container(layer_index : int) -> LayerContainer:
 	return null
 
 func _draw() -> void:
-	draw_texture_rect(trans_background, Rect2(location, size), true) #Draw transparent background
+	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) #Draw transparent background
 	#Onion Skinning
 	#Past
 	if Global.onion_skinning_past_rate > 0:

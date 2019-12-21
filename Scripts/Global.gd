@@ -17,6 +17,7 @@ var canvases := []
 var hidden_canvases := []
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
+var transparent_background : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
@@ -205,6 +206,8 @@ func _ready() -> void:
 	config_cache.load("user://cache.ini")
 
 	undo_redo = UndoRedo.new()
+	transparent_background = ImageTexture.new()
+	transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Godot.png"), 0)
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()

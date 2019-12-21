@@ -32,24 +32,28 @@ func change_theme(ID : int) -> void:
 	var ruler_style
 	if ID == 0: #Dark Theme
 		Global.theme_type = "Dark"
-		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
+		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Dark.png"), 0)
+		VisualServer.set_default_clear_color(Color(0.247059, 0.25098, 0.247059))
 		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 1: #Gray Theme
 		Global.theme_type = "Dark"
+		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Godot.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 2: #Godot's Theme
 		Global.theme_type = "Dark"
+		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Godot.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
 	elif ID == 3: #Gold Theme
 		Global.theme_type = "Light"
+		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Gold.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))
 		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
