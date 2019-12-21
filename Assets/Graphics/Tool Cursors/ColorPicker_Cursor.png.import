@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/ColorPicker_Cursor.png-8077f7779b2b1b2187041fb8b8ac9640.image"
+
+[deps]
+
+source_file="res://Assets/Graphics/Tool Cursors/ColorPicker_Cursor.png"
+dest_files=[ "res://.import/ColorPicker_Cursor.png-8077f7779b2b1b2187041fb8b8ac9640.image" ]
+
+[params]
+
