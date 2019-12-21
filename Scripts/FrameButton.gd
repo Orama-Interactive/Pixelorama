@@ -6,7 +6,7 @@ onready var popup_menu := $PopupMenu
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.current_frame = frame
-	else:
+	elif Input.is_action_just_released("right_mouse"):
 		if Global.canvases.size() == 1:
 			popup_menu.set_item_disabled(0, true)
 			popup_menu.set_item_disabled(2, true)
@@ -19,40 +19,15 @@ func _on_FrameButton_pressed() -> void:
 				popup_menu.set_item_disabled(3, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
+	else: #Middle mouse click
+		pressed = !pressed
+		if Global.canvases.size() > 1:
+			remove_frame()
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
 		0: #Remove Frame
-			var canvas : Canvas = Global.canvases[frame]
-			var new_canvases := Global.canvases.duplicate()
-			new_canvases.erase(canvas)
-			var new_hidden_canvases := Global.hidden_canvases.duplicate()
-			new_hidden_canvases.append(canvas)
-			var current_frame := Global.current_frame
-			if current_frame > 0 && current_frame == new_canvases.size(): #If it's the last frame
-				current_frame -= 1
-
-			Global.undos += 1
-			Global.undo_redo.create_action("Remove Frame")
-
-			Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-			Global.undo_redo.add_do_property(Global, "hidden_canvases", new_hidden_canvases)
-			Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
-			Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
-
-			for i in range(frame, new_canvases.size()):
-				var c : Canvas = new_canvases[i]
-				Global.undo_redo.add_do_property(c, "frame", i)
-				Global.undo_redo.add_undo_property(c, "frame", c.frame)
-
-			Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-			Global.undo_redo.add_undo_property(Global, "hidden_canvases", Global.hidden_canvases)
-			Global.undo_redo.add_undo_property(Global, "canvas", canvas)
-			Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
-
-			Global.undo_redo.add_do_method(Global, "redo", [canvas])
-			Global.undo_redo.add_undo_method(Global, "undo", [canvas])
-			Global.undo_redo.commit_action()
+			remove_frame()
 
 		1: #Clone Layer
 			var canvas : Canvas = Global.canvases[frame]
@@ -100,6 +75,38 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			change_frame_order(-1)
 		3: #Move Right
 			change_frame_order(1)
+
+func remove_frame() -> void:
+	var canvas : Canvas = Global.canvases[frame]
+	var new_canvases := Global.canvases.duplicate()
+	new_canvases.erase(canvas)
+	var new_hidden_canvases := Global.hidden_canvases.duplicate()
+	new_hidden_canvases.append(canvas)
+	var current_frame := Global.current_frame
+	if current_frame > 0 && current_frame == new_canvases.size(): #If it's the last frame
+		current_frame -= 1
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Remove Frame")
+
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "hidden_canvases", new_hidden_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
+	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
+
+	for i in range(frame, new_canvases.size()):
+		var c : Canvas = new_canvases[i]
+		Global.undo_redo.add_do_property(c, "frame", i)
+		Global.undo_redo.add_undo_property(c, "frame", c.frame)
+
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "hidden_canvases", Global.hidden_canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+
+	Global.undo_redo.add_do_method(Global, "redo", [canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
+	Global.undo_redo.commit_action()
 
 func change_frame_order(rate : int) -> void:
 	var change = frame + rate
