@@ -62,14 +62,17 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
-	for button in get_tree().get_nodes_in_group("LayerButtons"):
+	for button in get_tree().get_nodes_in_group("UIButtons"):
+		var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
+		var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
 		var normal_file_name = button.texture_normal.resource_path.get_file()
-		button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/%s" % [Global.theme_type, normal_file_name])
-		var hover_file_name = button.texture_hover.resource_path.get_file()
-		button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/%s" % [Global.theme_type, hover_file_name])
+		button.texture_normal = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, normal_file_name])
+		if button.texture_hover:
+			var hover_file_name = button.texture_hover.resource_path.get_file()
+			button.texture_hover = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, hover_file_name])
 		if button.texture_disabled:
 			var disabled_file_name = button.texture_disabled.resource_path.get_file()
-			button.texture_disabled = load("res://Assets/Graphics/%s Themes/Layers/%s" % [Global.theme_type, disabled_file_name])
+			button.texture_disabled = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, disabled_file_name])
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value

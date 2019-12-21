@@ -15,7 +15,7 @@ __meta__ = {
 }
 
 [node name="VisibilityButton" type="TextureButton" parent="." groups=[
-"LayerButtons",
+"UIButtons",
 ]]
 margin_left = 6.0
 margin_top = 5.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/onion_skinning.png-d0842f2eb16b7f7b21f3177f2d045336.stex"
+path="res://.import/Play Backwards_Hover.png-a09d4ebe9901867db26b4f435a7e4260.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/onion_skinning.png"
-dest_files=[ "res://.import/onion_skinning.png-d0842f2eb16b7f7b21f3177f2d045336.stex" ]
+source_file="res://Assets/Graphics/Light Themes/Timeline/Play Backwards_Hover.png"
+dest_files=[ "res://.import/Play Backwards_Hover.png-a09d4ebe9901867db26b4f435a7e4260.stex" ]
 
 [params]
 
