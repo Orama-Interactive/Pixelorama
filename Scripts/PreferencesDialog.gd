@@ -32,21 +32,25 @@ func change_theme(ID : int) -> void:
 	var ruler_style
 	if ID == 0: #Dark Theme
 		Global.theme_type = "Dark"
+		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 1: #Gray Theme
 		Global.theme_type = "Dark"
+		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 2: #Godot's Theme
 		Global.theme_type = "Dark"
+		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
 	elif ID == 3: #Gold Theme
 		Global.theme_type = "Light"
+		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))
 		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
@@ -62,11 +66,15 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
+
 	for button in get_tree().get_nodes_in_group("UIButtons"):
 		var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
 		var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
 		var normal_file_name = button.texture_normal.resource_path.get_file()
 		button.texture_normal = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, normal_file_name])
+		if button.texture_pressed:
+			var pressed_file_name = button.texture_pressed.resource_path.get_file()
+			button.texture_pressed = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, pressed_file_name])
 		if button.texture_hover:
 			var hover_file_name = button.texture_hover.resource_path.get_file()
 			button.texture_hover = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, hover_file_name])
