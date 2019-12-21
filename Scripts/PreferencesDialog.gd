@@ -63,10 +63,13 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 	for button in get_tree().get_nodes_in_group("LayerButtons"):
-		button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/%s.png" % [Global.theme_type, button.name])
-		button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/%s_Hover.png" % [Global.theme_type, button.name])
+		var normal_file_name = button.texture_normal.resource_path.get_file()
+		button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/%s" % [Global.theme_type, normal_file_name])
+		var hover_file_name = button.texture_hover.resource_path.get_file()
+		button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/%s" % [Global.theme_type, hover_file_name])
 		if button.texture_disabled:
-			button.texture_disabled = load("res://Assets/Graphics/%s Themes/Layers/%s_Disabled.png" % [Global.theme_type, button.name])
+			var disabled_file_name = button.texture_disabled.resource_path.get_file()
+			button.texture_disabled = load("res://Assets/Graphics/%s Themes/Layers/%s" % [Global.theme_type, disabled_file_name])
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value

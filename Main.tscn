@@ -1198,7 +1198,7 @@ margin_left = 6.0
 margin_right = 218.0
 margin_bottom = 32.0
 
-[node name="New_Layer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="AddLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "LayerButtons",
 ]]
 margin_right = 32.0
@@ -1208,7 +1208,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 37 )
 texture_hover = ExtResource( 38 )
 
-[node name="Delete_Layer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="RemoveLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "LayerButtons",
 ]]
 margin_left = 36.0
@@ -1221,7 +1221,7 @@ texture_normal = ExtResource( 39 )
 texture_hover = ExtResource( 40 )
 texture_disabled = ExtResource( 41 )
 
-[node name="Move_Up" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "LayerButtons",
 ]]
 margin_left = 72.0
@@ -1234,7 +1234,7 @@ texture_normal = ExtResource( 42 )
 texture_hover = ExtResource( 43 )
 texture_disabled = ExtResource( 44 )
 
-[node name="Move_Down" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="MovwDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "LayerButtons",
 ]]
 margin_left = 108.0
@@ -1247,7 +1247,7 @@ texture_normal = ExtResource( 45 )
 texture_hover = ExtResource( 46 )
 texture_disabled = ExtResource( 47 )
 
-[node name="Clone_Layer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "LayerButtons",
 ]]
 margin_left = 144.0
@@ -1258,7 +1258,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 48 )
 texture_hover = ExtResource( 49 )
 
-[node name="Merge_Down" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "LayerButtons",
 ]]
 margin_left = 180.0
@@ -1744,12 +1744,12 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/New_Layer" to="." method="add_layer"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/Delete_Layer" to="." method="_on_RemoveLayerButton_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/Move_Up" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/Move_Down" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/Clone_Layer" to="." method="add_layer" binds= [ false ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/Merge_Down" to="." method="_on_MergeLayer_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/AddLayer" to="." method="add_layer"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayerButton_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MovwDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/RemovePalette" to="." method="_on_RemovePalette_pressed"]
 [connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
