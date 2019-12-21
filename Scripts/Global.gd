@@ -281,10 +281,10 @@ func _ready() -> void:
 	frame_container = find_node_by_name(root, "FrameContainer")
 
 	var layer_buttons = find_node_by_name(root, "LayerButtons")
-	remove_layer_button = find_node_by_name(layer_buttons, "Delete_Layer")
-	move_up_layer_button = find_node_by_name(layer_buttons, "Move_Up")
-	move_down_layer_button = find_node_by_name(layer_buttons, "Move_Down")
-	merge_down_layer_button = find_node_by_name(layer_buttons, "Merge_Down")
+	remove_layer_button = find_node_by_name(layer_buttons, "RemoveLayer")
+	move_up_layer_button = find_node_by_name(layer_buttons, "MoveUpLayer")
+	move_down_layer_button = find_node_by_name(layer_buttons, "MovwDownLayer")
+	merge_down_layer_button = find_node_by_name(layer_buttons, "MergeDownLayer")
 	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")

@@ -5,7 +5,7 @@ var i
 # warning-ignore:unused_class_variable
 var currently_selected := false
 
-onready var visibility_button := $Layer_Visible
+onready var visibility_button := $VisibilityButton
 onready var label := $HBoxContainer/Label
 onready var line_edit := $HBoxContainer/LineEdit
 
@@ -71,12 +71,10 @@ func changed_selection() -> void:
 func _on_VisibilityButton_pressed() -> void:
 	if Global.canvas.layers[i][3]:
 		Global.canvas.layers[i][3] = false
-		visibility_button.name = "Layer_Invisible"
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible_Hover.png" % Global.theme_type)
 	else:
 		Global.canvas.layers[i][3] = true
-		visibility_button.name = "Layer_Visible"
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
 
