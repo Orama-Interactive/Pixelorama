@@ -48,7 +48,7 @@ margin_top = 24.0
 margin_right = 218.0
 margin_bottom = 44.0
 text = "Dark"
-items = [ "Dark", null, false, 0, null, "Gray", null, false, 1, null, "Godot", null, false, 2, null, "Gold", null, false, 3, null ]
+items = [ "Dark", null, false, 0, null, "Gray", null, false, 1, null, "Godot", null, false, 2, null, "Gold", null, false, 3, null, "Light", null, false, 4, null ]
 selected = 0
 
 [node name="GridOptionsLabel" type="Label" parent="VBoxContainer"]
