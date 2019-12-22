@@ -51,7 +51,7 @@ func on_palette_import_file_selected(path) -> void:
 		palette = Palette.new().load_from_file(path)
 	elif path.to_lower().ends_with("gpl"):
 		palette = Import.import_gpl(path)
-	
+
 	if palette:
 		if not Global.palettes.has(palette.name):
 			Global.palettes[palette.name] = palette
@@ -216,5 +216,5 @@ func _delete_palette_file(file_name : String) -> void:
 
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
-	
+
 	palette.save_to_file("user://palettes/custom/" + filename)

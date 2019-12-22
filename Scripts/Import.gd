@@ -1,13 +1,5 @@
 extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 func import_gpl(path : String) -> Palette:
 	var result : Palette = null
 	var file = File.new()
@@ -28,7 +20,7 @@ func import_gpl(path : String) -> Palette:
 					var name_end = path.find_last('.')
 					if name_end > name_start:
 						result.name = path.substr(name_start, name_end - name_start)
-				
+
 			# Comments
 			if line.begins_with('#'):
 				comments += line.trim_prefix('#') + '\n'
@@ -41,13 +33,9 @@ func import_gpl(path : String) -> Palette:
 				var color = Color(red, green, blue)
 				result.add_color(color, name)
 			line_number += 1
-			
+
 		if result:
 			result.comments = comments
 		file.close()
-	
-	return result
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	return result
