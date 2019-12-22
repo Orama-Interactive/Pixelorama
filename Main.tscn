@@ -226,6 +226,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -374,6 +375,7 @@ button_mask = 3
 texture_normal = ExtResource( 9 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -382,10 +384,10 @@ custom_constants/separation = 8
 alignment = 1
 
 [node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 56.0
+margin_top = 50.0
 margin_right = 208.0
-margin_bottom = 94.0
-custom_constants/separation = -4
+margin_bottom = 101.0
+custom_constants/separation = 2
 
 [node name="ColorSwitchCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
 margin_right = 208.0
@@ -394,8 +396,8 @@ margin_bottom = 7.0
 [node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter" groups=[
 "UIButtons",
 ]]
-margin_left = 97.0
-margin_right = 110.0
+margin_left = 91.0
+margin_right = 116.0
 margin_bottom = 7.0
 hint_tooltip = "COLORSWITCH_HT"
 mouse_default_cursor_shape = 2
@@ -404,9 +406,9 @@ shortcut = SubResource( 2 )
 texture_normal = ExtResource( 10 )
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
-margin_top = 3.0
+margin_top = 9.0
 margin_right = 208.0
-margin_bottom = 35.0
+margin_bottom = 41.0
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter"]
 margin_left = 33.0
@@ -435,30 +437,30 @@ size_flags_vertical = 0
 color = Color( 1, 1, 1, 1 )
 
 [node name="ColorDefaultsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
-margin_top = 31.0
+margin_top = 43.0
 margin_right = 208.0
-margin_bottom = 38.0
+margin_bottom = 51.0
 size_flags_horizontal = 3
 
 [node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter" groups=[
 "UIButtons",
 ]]
-margin_left = 97.0
-margin_right = 110.0
-margin_bottom = 7.0
+margin_left = 91.0
+margin_right = 116.0
+margin_bottom = 8.0
 hint_tooltip = "COLORDEFAULTS_HT"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 102.0
+margin_top = 109.0
 margin_right = 208.0
-margin_bottom = 106.0
+margin_bottom = 113.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 114.0
+margin_top = 121.0
 margin_right = 208.0
-margin_bottom = 245.0
+margin_bottom = 252.0
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 margin_right = 208.0
@@ -630,14 +632,14 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 253.0
+margin_top = 260.0
 margin_right = 208.0
-margin_bottom = 257.0
+margin_bottom = 264.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 265.0
+margin_top = 272.0
 margin_right = 208.0
-margin_bottom = 396.0
+margin_bottom = 403.0
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 margin_right = 208.0
@@ -809,6 +811,7 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
