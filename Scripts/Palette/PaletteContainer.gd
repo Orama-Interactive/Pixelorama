@@ -3,7 +3,7 @@ extends GridContainer
 const palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
 var current_palette = "Default"
-var from_palette : = {}
+var from_palette : Palette
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,12 +22,11 @@ func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
 	if Global.palettes.has(palette_name): #Palette exists in memory
 		current_palette = palette_name
-		var palette : Dictionary = Global.palettes[palette_name]
+		var palette : Palette = Global.palettes[palette_name]
 
 		Global.remove_palette_button.disabled = true # Cannot remove by default
-		if palette.has("editable"):
-			if palette.editable:
-				Global.remove_palette_button.disabled = false # Can remove if custom palette
+		if palette.editable:
+			Global.remove_palette_button.disabled = false # Can remove if custom palette
 
 		_display_palette(palette)
 	else: #Use default on fail
@@ -37,7 +36,7 @@ func on_palette_select(palette_name : String) -> void:
 func on_new_empty_palette() -> void:
 	Global.new_palette_dialog.window_title = "Create a new empty palette?"
 	Global.new_palette_name_line_edit.text = "Custom_Palette"
-	from_palette = {}
+	from_palette = null
 	Global.new_palette_dialog.popup_centered()
 	pass
 
@@ -47,42 +46,35 @@ func on_import_palette() -> void:
 
 func on_palette_import_file_selected(path) -> void:
 	var file := File.new()
+	var palette : Palette = null
+	if path.to_lower().ends_with("json"):
+		palette = Palette.new().load_from_file(path)
+	elif path.to_lower().ends_with("gpl"):
+		palette = Import.import_gpl(path)
 
-	file.open(path, File.READ)
-	var text = file.get_as_text()
-	var result_json = JSON.parse(text)
-	var result = {}
-	var palette_name = null # Default error condition
-
-	if result_json.error != OK:  # If parse has errors
-		print("Error: ", result_json.error)
-		print("Error Line: ", result_json.error_line)
-		print("Error String: ", result_json.error_string)
-	else:  # If parse OK
-		var data = result_json.result
-		if data.has("name"): #If data is 'valid' palette file
-			palette_name = data.name
-			if not Global.palettes.has(palette_name):
-				Global.palettes[palette_name] = data
-				Global.palette_option_button.add_item(palette_name)
-				var index := Global.palette_option_button.get_item_count() - 1
-				Global.palette_option_button.set_item_metadata(index, palette_name)
-				Global.palette_option_button.select(index)
-				on_palette_select(palette_name)
-				save_palette(palette_name, palette_name + ".json")
-			else:
-				Global.error_dialog.set_text("Palette named '" + palette_name + "' already exists");
-				Global.error_dialog.popup_centered()
-	file.close()
+	if palette:
+		if not Global.palettes.has(palette.name):
+			Global.palettes[palette.name] = palette
+			Global.palette_option_button.add_item(palette.name)
+			var index := Global.palette_option_button.get_item_count() - 1
+			Global.palette_option_button.set_item_metadata(index, palette.name)
+			Global.palette_option_button.select(index)
+			on_palette_select(palette.name)
+			save_palette(palette.name, palette.name + ".json")
+		else:
+			Global.error_dialog.set_text("Palette named '" + palette.name + "' already exists");
+			Global.error_dialog.popup_centered()
+	else:
+		Global.error_dialog.set_text("Invalid Palette file!")
+		Global.error_dialog.popup_centered()
 	pass
 
 func on_edit_palette() -> void:
 	var palette : Dictionary = Global.palettes[current_palette]
 
 	var create_new_palette := true # Create new palette by default
-	if palette.has("editable"):
-		if palette.editable:
-			create_new_palette = false # Edit if already a custom palette
+	if palette.editable:
+		create_new_palette = false # Edit if already a custom palette
 
 	if create_new_palette:
 		from_palette = Global.palettes[current_palette]
@@ -90,7 +82,7 @@ func on_edit_palette() -> void:
 		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
 		Global.new_palette_dialog.popup_centered()
 	else:
-		from_palette = {}
+		from_palette = null
 		Global.edit_palette_popup.open(current_palette)
 
 func on_new_palette_confirmed() -> void:
@@ -100,8 +92,8 @@ func on_new_palette_confirmed() -> void:
 		Global.error_dialog.set_text(result);
 		Global.error_dialog.popup_centered()
 
-func create_new_palette(name : String, from_palette : Dictionary = {}) -> String: # Returns empty string, else error string
-	var new_palette : Dictionary = {}
+func create_new_palette(name : String, from_palette : Palette) -> String: # Returns empty string, else error string
+	var new_palette : Palette = Palette.new()
 
 	# Check if new name is valid
 	if name.empty():
@@ -112,13 +104,9 @@ func create_new_palette(name : String, from_palette : Dictionary = {}) -> String
 	new_palette.name = name
 
 	# Check if source palette has data
-	if from_palette.has("name"):
+	if from_palette:
 		new_palette = from_palette.duplicate()
 		new_palette.name = name
-		new_palette.editable = true
-	else:
-		new_palette.colors = []
-		new_palette.comments = ""
 		new_palette.editable = true
 
 	# Add palette to Global and options
@@ -133,22 +121,22 @@ func create_new_palette(name : String, from_palette : Dictionary = {}) -> String
 	on_palette_select(name)
 	return ""
 
-func _display_palette(palette : Dictionary) -> void:
+func _display_palette(palette : Palette) -> void:
 	var index := 0
 
 	for color_data in palette.colors:
-		var color = Color(color_data.data)
+		var color = color_data.color
 		var new_button = palette_button.instance()
 
 		new_button.get_child(0).modulate = color
-		new_button.hint_tooltip = color_data.data.to_upper() + " " + color_data.name
+		new_button.hint_tooltip = "#" + color_data.data.to_upper() + " " + color_data.name
 		new_button.connect("pressed", self, "on_color_select", [index])
 
 		add_child(new_button)
 		index += 1
 
 func on_color_select(index : int) -> void:
-	var color = Color(Global.palettes[current_palette].colors[index].data)
+	var color : Color = Global.palettes[current_palette].get_color(index)
 
 	if Input.is_action_just_released("left_mouse"):
 		Global.left_color_picker.color = color
@@ -173,23 +161,25 @@ func _load_palettes() -> void:
 	var palette_files : Array = get_palette_files("user://palettes")
 
 	for file_name in palette_files:
-		var result : String = load_palette("user://palettes/" + file_name)
-		if result:
-			Global.palette_option_button.add_item(result)
+		var palette : Palette = Palette.new().load_from_file("user://palettes/" + file_name)
+		if palette:
+			Global.palettes[palette.name] = palette
+			Global.palette_option_button.add_item(palette.name)
 			var index := Global.palette_option_button.get_item_count() - 1
-			Global.palette_option_button.set_item_metadata(index, result)
-			if result == "Default":
+			Global.palette_option_button.set_item_metadata(index, palette.name)
+			if palette.name == "Default":
 				Global.palette_option_button.select(index)
 
 	dir.open("user://palettes/custom")
 	var custom_palette_files : Array = get_palette_files("user://palettes/custom")
 
 	for file_name in custom_palette_files:
-		var result : String = load_palette("user://palettes/custom/" + file_name)
-		if result:
-			Global.palette_option_button.add_item(result)
+		var palette : Palette = Palette.new().load_from_file("user://palettes/custom/" + file_name)
+		if palette:
+			Global.palettes[palette.name] = palette
+			Global.palette_option_button.add_item(palette.name)
 			var index := Global.palette_option_button.get_item_count() - 1
-			Global.palette_option_button.set_item_metadata(index, result)
+			Global.palette_option_button.set_item_metadata(index, palette.name)
 
 func get_palette_files(path : String) -> Array:
 	var dir := Directory.new()
@@ -209,41 +199,15 @@ func get_palette_files(path : String) -> Array:
 
 	return results
 
-func load_palette(path : String) -> String:
-	# Open file for reading
-	var file := File.new()
-	file.open(path, File.READ)
-
-	var text = file.get_as_text()
-	var result_json = JSON.parse(text)
-	var result = {}
-
-	var palette_name = null # Default error condition
-
-	if result_json.error != OK:  # If parse has errors
-		print("Error: ", result_json.error)
-		print("Error Line: ", result_json.error_line)
-		print("Error String: ", result_json.error_string)
-	else:  # If parse OK
-		var data = result_json.result
-		if data.has("name"): #If data is 'valid' palette file
-			palette_name = data.name
-			Global.palettes[data.name] = data
-
-	file.close()
-
-	return palette_name
-
 func remove_current_palette() -> void:
-	if Global.palettes[current_palette].has("editable"):
-		if Global.palettes[current_palette].editable:
-			_delete_palette_file(current_palette + ".json")
-			Global.palettes.erase(current_palette)
-			var selected_index := Global.palette_option_button.selected
-			Global.palette_option_button.remove_item(selected_index)
-			if(selected_index - 1 >= 0):
-				Global.palette_option_button.select(selected_index - 1)
-				on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))
+	if Global.palettes[current_palette].editable:
+		_delete_palette_file(current_palette + ".json")
+		Global.palettes.erase(current_palette)
+		var selected_index := Global.palette_option_button.selected
+		Global.palette_option_button.remove_item(selected_index)
+		if(selected_index - 1 >= 0):
+			Global.palette_option_button.select(selected_index - 1)
+			on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))
 	pass
 
 func _delete_palette_file(file_name : String) -> void:
@@ -251,11 +215,6 @@ func _delete_palette_file(file_name : String) -> void:
 	dir.remove("user://palettes/custom/" + file_name)
 
 func save_palette(palette_name : String, filename : String) -> void:
-	var palette_data = Global.palettes[palette_name]
-	# Open file for writing
-	var file := File.new()
-	file.open("user://palettes/custom/" + filename, File.WRITE)
+	var palette = Global.palettes[palette_name]
 
-	# Write palette data to file
-	file.store_string(JSON.print(palette_data))
-	file.close()
+	palette.save_to_file("user://palettes/custom/" + filename)

@@ -23,11 +23,23 @@ _global_script_classes=[ {
 "class": "LayerContainer",
 "language": "GDScript",
 "path": "res://Scripts/LayerContainer.gd"
+}, {
+"base": "Reference",
+"class": "Palette",
+"language": "GDScript",
+"path": "res://Scripts/Palette/Palette.gd"
+}, {
+"base": "Reference",
+"class": "PaletteColor",
+"language": "GDScript",
+"path": "res://Scripts/Palette/PaletteColor.gd"
 } ]
 _global_script_class_icons={
 "Canvas": "",
 "Guide": "",
-"LayerContainer": ""
+"LayerContainer": "",
+"Palette": "",
+"PaletteColor": ""
 }
 
 [application]
@@ -43,6 +55,7 @@ config/Version="v0.5"
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+Import="*res://Scripts/Import.gd"
 
 [debug]
 
@@ -198,7 +211,7 @@ redo_secondary={
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation", "res://Translations/#Translations.fr.translation", "res://Translations/#Translations.de.translation", "res://Translations/#Translations.pl.translation", "res://Translations/#Translations.ru.translation", "res://Translations/#Translations.zh_TW.translation", "res://Translations/#Translations.pt_BR.translation" )
+translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation", "res://Translations/#Translations.fr.translation", "res://Translations/#Translations.de.translation", "res://Translations/#Translations.pl.translation", "res://Translations/#Translations.ru.translation", "res://Translations/#Translations.zh_TW.translation" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]

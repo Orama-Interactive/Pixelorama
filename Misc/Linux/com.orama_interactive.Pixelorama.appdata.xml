@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2019 OverloadedOrama -->
+<!-- Copyright (c) 2019 Orama Interactive -->
 <component type="desktop">
   <id>com.orama_interactive.Pixelorama.desktop</id>
   <name>Pixelorama</name>
@@ -12,18 +12,18 @@
   </description>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
-  <developer_name>OverloadedOrama</developer_name>
+  <developer_name>Orama Interactive</developer_name>
   <url type="homepage">https://www.orama-interactive.com/pixelorama</url>
-  <url type="bugtracker">https://github.com/OverloadedOrama/Pixelorama/issues</url>
+  <url type="bugtracker">https://github.com/Orama-Interactive/Pixelorama/issues</url>
   <screenshots>
-    <screenshot type="default" width="1918" height="1054">
-      <image type="source">https://functionoverload590613498.files.wordpress.com/2019/11/screenshot_268.png</image>
-      <caption>Editing an animated sprite</caption>
+    <screenshot type="default" width="1919" height="1079">
+      <image type="source">https://static.wixstatic.com/media/673cdd_b31327135c20489d8d632cfe9e642257~mv2.png</image>
+      <caption>Art by Erevos</caption>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
-    <release version="0.4" date="2019-11-13"/>
+    <release version="0.5" date="2019-12-12"/>
   </releases>
   <update_contact>hugo.locurcio@hugo.pro</update_contact>
 </component>

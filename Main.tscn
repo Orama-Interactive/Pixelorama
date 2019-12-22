@@ -9,8 +9,8 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Eraser_r.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Bucket.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/LightenDarken.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Graphics/Color switch.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Graphics/Color defaults.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Color switch.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Color defaults.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=12]
 [ext_resource path="res://Themes & Styles/Dark Theme/DarkRulerStyle.tres" type="StyleBox" id=13]
 [ext_resource path="res://Scripts/HorizontalRuler.gd" type="Script" id=14]
@@ -52,7 +52,7 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=50]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=51]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=52]
-[ext_resource path="res://Scripts/PaletteContainer.gd" type="Script" id=53]
+[ext_resource path="res://Scripts/Palette/PaletteContainer.gd" type="Script" id=53]
 [ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=55]
 [ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=56]
@@ -226,7 +226,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -375,7 +374,6 @@ button_mask = 3
 texture_normal = ExtResource( 9 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -383,39 +381,21 @@ size_flags_vertical = 3
 custom_constants/separation = 8
 alignment = 1
 
-[node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 59.0
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
+margin_top = 56.0
 margin_right = 208.0
-margin_bottom = 91.0
+margin_bottom = 94.0
+custom_constants/separation = -4
 
-[node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter"]
-margin_left = 27.0
-margin_right = 180.0
-margin_bottom = 32.0
+[node name="ColorSwitchCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
+margin_right = 208.0
+margin_bottom = 7.0
 
-[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
-margin_right = 64.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 64, 32 )
-hint_tooltip = "LEFTCOLOR_HT"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-flat = true
-
-[node name="ColorButtonsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
-editor/display_folded = true
-margin_left = 68.0
-margin_right = 85.0
-margin_bottom = 32.0
-
-[node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter"]
-margin_top = 7.0
-margin_right = 17.0
-margin_bottom = 24.0
-
-[node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical"]
-margin_right = 17.0
+[node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter" groups=[
+"UIButtons",
+]]
+margin_left = 97.0
+margin_right = 110.0
 margin_bottom = 7.0
 hint_tooltip = "COLORSWITCH_HT"
 mouse_default_cursor_shape = 2
@@ -423,35 +403,62 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
 texture_normal = ExtResource( 10 )
 
-[node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical"]
-margin_top = 11.0
-margin_right = 17.0
-margin_bottom = 17.0
-hint_tooltip = "COLORDEFAULTS_HT"
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 11 )
+[node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
+margin_top = 3.0
+margin_right = 208.0
+margin_bottom = 35.0
 
-[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal"]
-margin_left = 89.0
-margin_right = 153.0
+[node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter"]
+margin_left = 33.0
+margin_right = 174.0
+margin_bottom = 32.0
+custom_constants/separation = 13
+
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 32 )
+hint_tooltip = "LEFTCOLOR_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
+margin_left = 77.0
+margin_right = 141.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "RIGHTCOLOR_HT"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-flat = true
 color = Color( 1, 1, 1, 1 )
 
-[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 99.0
+[node name="ColorDefaultsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
+margin_top = 31.0
 margin_right = 208.0
-margin_bottom = 103.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+
+[node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter" groups=[
+"UIButtons",
+]]
+margin_left = 97.0
+margin_right = 110.0
+margin_bottom = 7.0
+hint_tooltip = "COLORDEFAULTS_HT"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 11 )
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
+margin_top = 102.0
+margin_right = 208.0
+margin_bottom = 106.0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 111.0
+margin_top = 114.0
 margin_right = 208.0
-margin_bottom = 242.0
+margin_bottom = 245.0
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
 margin_right = 208.0
@@ -623,14 +630,14 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 250.0
+margin_top = 253.0
 margin_right = 208.0
-margin_bottom = 254.0
+margin_bottom = 257.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
-margin_top = 262.0
+margin_top = 265.0
 margin_right = 208.0
-margin_bottom = 393.0
+margin_bottom = 396.0
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 margin_right = 208.0
@@ -802,7 +809,6 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -1724,6 +1730,7 @@ visible = false
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 60 )]
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 61 )]
+filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
@@ -1734,14 +1741,14 @@ visible = false
 
 [node name="RightCursor" type="Sprite" parent="."]
 visible = false
-[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/ColorButtonsCenter/ColorButtonsVertical/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
-[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
