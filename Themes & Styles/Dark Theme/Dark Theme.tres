@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=2]
+[gd_resource type="Theme" load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
@@ -52,6 +52,41 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.768627, 0.768627, 0.768627, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.686275, 0.686275, 0.686275, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=25]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.686275, 0.686275, 0.686275, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.686275, 0.686275, 0.686275, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
@@ -246,6 +281,18 @@ ColorPicker/icons/color_hue = null
 ColorPicker/icons/color_sample = null
 ColorPicker/icons/preset_bg = null
 ColorPicker/icons/screen_picker = null
+ColorPickerButton/colors/font_color = Color( 1, 1, 1, 1 )
+ColorPickerButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.3 )
+ColorPickerButton/colors/font_color_hover = Color( 1, 1, 1, 1 )
+ColorPickerButton/colors/font_color_pressed = Color( 0.8, 0.8, 0.8, 1 )
+ColorPickerButton/constants/hseparation = 2
+ColorPickerButton/fonts/font = null
+ColorPickerButton/icons/bg = null
+ColorPickerButton/styles/disabled = null
+ColorPickerButton/styles/focus = null
+ColorPickerButton/styles/hover = SubResource( 24 )
+ColorPickerButton/styles/normal = SubResource( 25 )
+ColorPickerButton/styles/pressed = SubResource( 26 )
 Dialogs/constants/button_margin = 32
 Dialogs/constants/margin = 8
 FileDialog/colors/files_disabled = Color( 0, 0, 0, 0.7 )
