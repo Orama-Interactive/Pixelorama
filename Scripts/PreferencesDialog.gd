@@ -58,6 +58,13 @@ func change_theme(ID : int) -> void:
 		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
+	elif ID == 4: #Light Theme
+		Global.theme_type = "Dark"
+		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Light.png"), 0)
+		VisualServer.set_default_clear_color(Color(0.705882, 0.705882, 0.705882))
+		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
+		top_menu_style = preload("res://Themes & Styles/Light Theme/LightTopMenuStyle.tres")
+		ruler_style = preload("res://Themes & Styles/Light Theme/LightRulerStyle.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
