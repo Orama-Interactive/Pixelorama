@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Color switch.png-f9e2eb085120719d1eee74a1bce856b6.stex"
+path="res://.import/Color switch.png-18403b22b815354775440e2a99f1f74f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Color switch.png"
-dest_files=[ "res://.import/Color switch.png-f9e2eb085120719d1eee74a1bce856b6.stex" ]
+source_file="res://Assets/Graphics/Light Themes/Misc/Color switch.png"
+dest_files=[ "res://.import/Color switch.png-18403b22b815354775440e2a99f1f74f.stex" ]
 
 [params]
 
