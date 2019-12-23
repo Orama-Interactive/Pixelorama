@@ -46,6 +46,7 @@ _global_script_class_icons={
 
 config/name="Pixelorama"
 run/main_scene="res://Main.tscn"
+run/low_processor_mode=true
 boot_splash/image="res://splash.png"
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
 config/icon="res://icon.png"
