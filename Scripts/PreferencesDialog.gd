@@ -52,14 +52,14 @@ func change_theme(ID : int) -> void:
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
 	elif ID == 3: #Gold Theme
-		Global.theme_type = "Light"
+		Global.theme_type = "Gold"
 		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Gold.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))
 		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
 	elif ID == 4: #Light Theme
-		Global.theme_type = "Dark"
+		Global.theme_type = "Light"
 		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Transparent Background Light.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.705882, 0.705882, 0.705882))
 		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
