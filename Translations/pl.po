@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: Tiritto\n"
+"Language-Team: none\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Open"
+msgstr "Otwórz"
+
+msgid "Please Confirm..."
+msgstr "Proszę potwierdzić..."
+
+msgid "Image Size"
+msgstr "Rozmiar obrazu"
+
+msgid "Width:"
+msgstr "Szerokość:"
+
+msgid "Height:"
+msgstr "Wysokość:"
+
+msgid "File"
+msgstr "Plik"
+
+msgid "Edit"
+msgstr "Edycja"
+
+msgid "View"
+msgstr "Widok"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "New..."
+msgstr "Nowy..."
+
+msgid "Open..."
+msgstr "Otwórz..."
+
+msgid "Save..."
+msgstr "Zapisz..."
+
+msgid "Save as..."
+msgstr "Zapisz jako..."
+
+msgid "Import PNG..."
+msgstr "Importuj PNG…"
+
+msgid "Export PNG..."
+msgstr "Eksportuj PNG…"
+
+msgid "Export PNG as..."
+msgstr "Eksportuj PNG jako..."
+
+msgid "Quit"
+msgstr "Wyjdź"
+
+msgid "Undo"
+msgstr "Cofnij"
+
+msgid "Redo"
+msgstr "Przywróć zmiany"
+
+msgid "Scale Image"
+msgstr "Skalowanie obrazu"
+
+msgid "Crop Image"
+msgstr "Kadrowanie obrazu"
+
+msgid "Clear Selection"
+msgstr "Wyczyść zaznaczenie"
+
+msgid "Flip Horizontal"
+msgstr "Odbij w poziomie"
+
+msgid "Flip Vertical"
+msgstr "Odbij w pionie"
+
+msgid "Preferences"
+msgstr "Preferencje"
+
+msgid "Tile Mode"
+msgstr "Tryb kafelkowy"
+
+msgid "Show Grid"
+msgstr "Pokaż siatkę"
+
+msgid "Show Rulers"
+msgstr "Pokaż linijki"
+
+msgid "Show Guides"
+msgstr "Pokaż prowadnice"
+
+msgid "Fill with color:"
+msgstr "Wypełnij kolorem:"
+
+msgid "Open a File"
+msgstr "Otwórz plik"
+
+msgid "Open File(s)"
+msgstr "Otwórz pliki"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Importuj jako nowa klatka"
+
+msgid "Save Sprite as .pxo"
+msgstr "Zapisz Sprite do .pxo"
+
+msgid "Export Sprite"
+msgstr "Eksportuj Sprite"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Eksportuj wszystkie klatki"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Eksportuj klatki jako jeden plik"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Pionowy arkusz"
+
+msgid "Path:"
+msgstr "Ścieżka:"
+
+msgid "Directories & Files:"
+msgstr "Pliki oraz katalogi:"
+
+msgid "File:"
+msgstr "Plik:"
+
+msgid "Interpolation:"
+msgstr "Interpolacja:"
+
+msgid "Nearest"
+msgstr "Najbliższy sąsiad"
+
+msgid "Bilinear"
+msgstr "Dwuliniowa"
+
+msgid "Cubic"
+msgstr "Sześcienna"
+
+msgid "Trilinear"
+msgstr "Trójlinowa"
+
+msgid "Grid options"
+msgstr "Ustawienia siatki"
+
+msgid "Color:"
+msgstr "Kolor:"
+
+msgid "Language:"
+msgstr "Język:"
+
+msgid "System Language"
+msgstr "Język systemowy"
+
+msgid "About Pixelorama"
+msgstr "O Pixeloramie"
+
+msgid "MADEBY_LABEL"
+msgstr "Twój darmowy edytor Sprite-ów na otwartej licencji!\nTworzony przez: Orama Interactive\n"
+
+msgid "Website"
+msgstr "Strona internetowa"
+
+msgid "Donate"
+msgstr "Wspomóż"
+
+msgid "QUIT_LABEL"
+msgstr "Na pewno chcesz opuścić Pixeloramę?"
+
+msgid "Utility Tools"
+msgstr "Narzędzia"
+
+msgid "RECTSELECT_HT"
+msgstr "Zaznaczenie prostokątne\n\nR dla lewego narzędzia\nAlt + R dla prawego narzędzia\n\nPrzytrzymaj Shift aby przenieść zawartość"
+
+msgid "COLORPICKER_HT"
+msgstr "Próbnik\nPobiera kolor wybranego piksela do wybranego narzędzia.\n\nO dla lewego narzędzia\nAlt + O dla prawego narzędzia"
+
+msgid "Draw Tools"
+msgstr "Rysowanie"
+
+msgid "PENCIL_HT"
+msgstr "Ołówek\n\nP dla lewego narzędzia\nAlt + P dla prawego narzędzia\n\nPrzytrzymaj Shift aby narysować linię"
+
+msgid "ERASER_HT"
+msgstr "Gumka\n\nE dla lewego narzędzia\nAlt + E dla prawego narzędzia\n\nPrzytrzymaj Shift aby użyć w linii prostej"
+
+msgid "BUCKET_HT"
+msgstr "Wiaderko\n\nB dla lewego narzędzia\nAlt + B dla prawego narzędzia"
+
+msgid "LD_HT"
+msgstr "Rozjaśnianie/Ściemnianie\n\nU dla lewego narzędzia\nAlt + U dla prawego narzędzia"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Wybiera kolor dla lewego narzędzia"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Wybiera kolor dla prawego narzędzia"
+
+msgid "COLORSWITCH_HT"
+msgstr "Podmienia lewy kolor z prawym kolorem\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)"
+
+msgid "Raw Mode"
+msgstr "RGB w częściach setnych od 0.0 do 1.0"
+
+msgid "Left tool options"
+msgstr "Opcje lewego narzędzia"
+
+msgid "Right tool options"
+msgstr "Opcje prawego narzędzia"
+
+msgid "Left pixel indicator"
+msgstr "Wskaźnik lewego pędzla"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Wyświetl wskaźnik lewego narzędzia lub pędzla podczas rysowania"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Wyświetl wskaźnik prawego narzędzia lub pędzla podczas rysowania"
+
+msgid "Right pixel indicator"
+msgstr "Wskaźnik prawego pędzla"
+
+msgid "Brush:"
+msgstr "Pędzel:"
+
+msgid "BRUSH_HT"
+msgstr "Wybierz pędzel"
+
+msgid "Brush: Pixel"
+msgstr "Pędzel: Piksel"
+
+msgid "Custom brush"
+msgstr "Niestandardowy pędzel"
+
+msgid "Brush size:"
+msgstr "Rozmiar pędzla:"
+
+msgid "Brush color from"
+msgstr "Nadpisywanie koloru pędzla"
+
+msgid "COLORFROM_HT"
+msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowania"
+
+msgid "Fill area:"
+msgstr "Wypełnij przestrzeń:"
+
+msgid "Area of the same color"
+msgstr "Przestrzeń o takim samym kolorze"
+
+msgid "All pixels of the same color"
+msgstr "Wszystkie piksele tego samego koloru"
+
+msgid "Lighten"
+msgstr "Rozjaśnianie"
+
+msgid "Darken"
+msgstr "Przyciemnianie"
+
+msgid "Amount:"
+msgstr "Siła:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Siła rozjaśnienia/przyciemnienia"
+
+msgid "Mirroring"
+msgstr "Lustrzane odbicie"
+
+msgid "Horizontal"
+msgstr "Poziome"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Włącza lustrzane odbicie w poziomie podczas rysowania"
+
+msgid "VERTMIRROR_HT"
+msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
+
+msgid "Vertical"
+msgstr "Pionowe"
+
+msgid "Current frame:"
+msgstr "Obecna klatka:"
+
+msgid "Current frame: 1/1"
+msgstr "Obecna klatka: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Skocz do pierwszej klatki\n(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "Przejdź do poprzedniej klatki\n(Ctrl+Strzałka w lewo)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Odtwórz animację od końca\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Odtwórz animację od początku\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "Przejdź do następnej klatki\n(Ctrl+Strzałka w prawo)"
+
+msgid "LASTFRAME_HT"
+msgstr "Skocz do ostatniej klatki\n(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr "W ilu klatkach na sekundę odtwarzana ma być animacja?\nWiększa ilość klatek na sekundę powoduje szybsze odtwarzanie."
+
+msgid "No loop"
+msgstr "Brak zapętlania"
+
+msgid "Cycle loop"
+msgstr "Zapętl odtwarzanie"
+
+msgid "Ping-pong loop"
+msgstr "Zapętlanie typu ping-pong"
+
+msgid "Onion Skinning:"
+msgstr "Kalkowanie klatek:"
+
+msgid "Past Frames"
+msgstr "Przeszłe klatki"
+
+msgid "Future Frames"
+msgstr "Przyszłe klatki"
+
+msgid "Blue-Red Mode"
+msgstr "Niebiesko-czerwone prześwity"
+
+msgid "Add a new frame"
+msgstr "Dodaj nową klatkę"
+
+msgid "Remove Frame"
+msgstr "Usuń klatkę"
+
+msgid "Clone Frame"
+msgstr "Klonuj klatkę"
+
+msgid "Move Left"
+msgstr "Przesuń w lewo"
+
+msgid "Move Right"
+msgstr "Przesuń w prawo"
+
+msgid "Layers"
+msgstr "Warstwy"
+
+msgid "LAYERNEW_HT"
+msgstr "Stwórz nową warstwę"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Usuń obecną warstwę"
+
+msgid "LAYERUP_HT"
+msgstr "Przesuń obecną warstwę do góry"
+
+msgid "LAYERDOWN_HT"
+msgstr "Przesuń obecną warstwę w dół"
+
+msgid "LAYERCLONE_HT"
+msgstr "Duplikuj obecną warstwę"
+
+msgid "LAYERMERGE_HT"
+msgstr "Połącz obecną warstwę z warstwą powyżej"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Ukrywanie warstwy"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Podzielenie ekranu\n\nWyświetla drugie płótno"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Podzielenie ekranu\n\nUkrywa drugie płótno"
+
+msgid "Undo: Draw"
+msgstr "Cofnij: Rysowanie"
+
+msgid "Redo: Draw"
+msgstr "Przywróć: Rysowanie"
+
+msgid "Undo: Rectangle Select"
+msgstr "Cofnij: Zaznaczenie prostokątne"
+
+msgid "Redo: Rectangle Select"
+msgstr "Przywróć: Zaznaczenie prostokątne"
+
+msgid "Undo: Scale"
+msgstr "Cofnij: Skalowanie"
+
+msgid "Redo: Scale"
+msgstr "Przywróć: Skalowanie"
+
+msgid "Undo: Add Layer"
+msgstr "Cofnij: Dodawanie warstwy"
+
+msgid "Redo: Add Layer"
+msgstr "Przywróć: Dodawanie warstwy"
+
+msgid "Undo: Remove Layer"
+msgstr "Cofnij: Usuwanie warstwy"
+
+msgid "Redo: Remove Layer"
+msgstr "Przywróć: Usuwanie warstwy"
+
+msgid "Undo: Merge Layer"
+msgstr "Cofnij: Scalanie warstw"
+
+msgid "Redo: Merge Layer"
+msgstr "Przywróć: Scalanie warstw"
+
+msgid "Undo: Change Layer Order"
+msgstr "Cofnij: Zmiana kolejności warstw"
+
+msgid "Redo: Change Layer Order"
+msgstr "Przywróć: Zmiana kolejności warstw"
+
+msgid "Undo: Add Frame"
+msgstr "Cofnij: Dodawanie klatki"
+
+msgid "Redo: Add Frame"
+msgstr "Przywróć: Dodawanie klatki"
+
+msgid "Undo: Remove Frame"
+msgstr "Cofnij: Usunięcie klatki"
+
+msgid "Redo: Remove Frame"
+msgstr "Przywróć: Usunięcie klatki"
+
+msgid "Undo: Change Frame Order"
+msgstr "Cofnij: Zmiana kolejności klatek"
+
+msgid "Redo: Change Frame Order"
+msgstr "Przywróć: Zmiana kolejności klatek"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Cofnij: Usuwanie niestandardowego pędzla"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Przywróć: Usuwanie niestandardowego pędzla"
+
+msgid "Move Guide"
+msgstr "Przesuń prowadnice"
+
+msgid "File saved"
+msgstr "Plik został zapisany"
+
+msgid "File exported"
+msgstr "Plik został wyeksportowany"
+

@@ -212,7 +212,7 @@ redo_secondary={
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/#Translations.en.translation", "res://Translations/#Translations.el.translation", "res://Translations/#Translations.fr.translation", "res://Translations/#Translations.de.translation", "res://Translations/#Translations.pl.translation", "res://Translations/#Translations.ru.translation", "res://Translations/#Translations.zh_TW.translation" )
+translations=PoolStringArray( "res://Translations/en.po", "res://Translations/el.po", "res://Translations/fr.po", "res://Translations/de.po", "res://Translations/pl.po", "res://Translations/ru.po", "res://Translations/zh_TW.po", "res://Translations/pt_BR.po" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]

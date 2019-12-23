@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: Hugo Locurcio\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Open"
+msgstr "Ouvrir"
+
+msgid "Please Confirm..."
+msgstr "Veuillez confirmer..."
+
+msgid "Image Size"
+msgstr "Taille de l'image"
+
+msgid "Width:"
+msgstr "Largeur :"
+
+msgid "Height:"
+msgstr "Hauteur :"
+
+msgid "File"
+msgstr "Fichier"
+
+msgid "Edit"
+msgstr "Édition"
+
+msgid "View"
+msgstr "Affichage"
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "New..."
+msgstr "Nouveau..."
+
+msgid "Open..."
+msgstr "Ouvrir..."
+
+msgid "Save..."
+msgstr "Enregistrer..."
+
+msgid "Save as..."
+msgstr "Enregistrer sous..."
+
+msgid "Import PNG..."
+msgstr "Importer une image PNG..."
+
+msgid "Export PNG..."
+msgstr "Exporter une image PNG..."
+
+msgid "Export PNG as..."
+msgstr "Exporter une image PNG sous..."
+
+msgid "Quit"
+msgstr "Quitter"
+
+msgid "Undo"
+msgstr "Annuler"
+
+msgid "Redo"
+msgstr "Refaire"
+
+msgid "Scale Image"
+msgstr "Redimensionner l'image"
+
+msgid "Crop Image"
+msgstr "Rogner l'image"
+
+msgid "Clear Selection"
+msgstr "Ne rien sélectionner"
+
+msgid "Flip Horizontal"
+msgstr "Miroir horizontal"
+
+msgid "Flip Vertical"
+msgstr "Miroir vertical"
+
+msgid "Preferences"
+msgstr "Préférences"
+
+msgid "Tile Mode"
+msgstr "Mode tuile"
+
+msgid "Show Grid"
+msgstr "Afficher la grille"
+
+msgid "Show Rulers"
+msgstr "Afficher les règles"
+
+msgid "Show Guides"
+msgstr "Afficher les guides"
+
+msgid "Fill with color:"
+msgstr "Remplir avec la couleur :"
+
+msgid "Open a File"
+msgstr "Ouvrir un fichier"
+
+msgid "Open File(s)"
+msgstr "Ouvrir des fichiers"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Importer en tant que trame"
+
+msgid "Save Sprite as .pxo"
+msgstr "Enregistrer la sprite au format .pxo"
+
+msgid "Export Sprite"
+msgstr "Exporter une sprite"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Exporter toutes les trames"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Exporter les trames en un seul fichier"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Spritesheet vertical"
+
+msgid "Path:"
+msgstr "Chemin :"
+
+msgid "Directories & Files:"
+msgstr "Répertoires et fichiers :"
+
+msgid "File:"
+msgstr "Fichier :"
+
+msgid "Interpolation:"
+msgstr "Interpolation :"
+
+msgid "Nearest"
+msgstr "Le plus proche"
+
+msgid "Bilinear"
+msgstr "Linéaire"
+
+msgid "Cubic"
+msgstr "Cubique"
+
+msgid "Trilinear"
+msgstr "Trilinéaire"
+
+msgid "Grid options"
+msgstr "Configuration de la grille"
+
+msgid "Color:"
+msgstr "Couleur :"
+
+msgid "Language:"
+msgstr "Langue :"
+
+msgid "System Language"
+msgstr "Langue système"
+
+msgid "About Pixelorama"
+msgstr "À propos de Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "Votre éditeur de sprites libre et open source\nDéveloppé par Orama Interactive\n"
+
+msgid "Website"
+msgstr "Site Web"
+
+msgid "Donate"
+msgstr "Faire un don"
+
+msgid "QUIT_LABEL"
+msgstr "Voulez-vous vraiment quitter Pixelorama ?"
+
+msgid "Utility Tools"
+msgstr "Outils utilitaires"
+
+msgid "RECTSELECT_HT"
+msgstr "Sélection rectangulaire\n\nR pour le bouton gauche de la souris\n\nAlt + R pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour déplacer le contenu"
+
+msgid "COLORPICKER_HT"
+msgstr "Sélecteur de couleurs\nSélectionnez la couleur d'un pixel de la sprite\n\nO pour le bouton gauche de la souris\n\nAlt + O pour le bouton droit de la souris"
+
+msgid "Draw Tools"
+msgstr "Outils de dessin"
+
+msgid "PENCIL_HT"
+msgstr "Crayon\n\nP pour le bouton gauche de la souris\n\nAlt + P pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour dessiner une ligne"
+
+msgid "ERASER_HT"
+msgstr "Gomme\n\nE pour le bouton gauche de la souris\n\nAlt + E pour le bouton droit de la souris\n\nMaintenez Maj. appuyée pour dessiner une ligne"
+
+msgid "BUCKET_HT"
+msgstr "Seau de remplissage\n\nB pour le bouton gauche de la souris\nAlt + B pour le bouton droit de la souris"
+
+msgid "LD_HT"
+msgstr "Éclaircir/Assombrir\n\nU pour le bouton gauche de la souris\nAlt + U pour le bouton droit de la souris"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Choisissez une couleur pour l'outil gauche"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Choisissez une couleur pour l'outil droit"
+
+msgid "COLORSWITCH_HT"
+msgstr "Alterner les couleurs de gauche et de droite\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
+
+msgid "Raw Mode"
+msgstr "Mode Raw"
+
+msgid "Left tool options"
+msgstr "Options de l'outil gauche"
+
+msgid "Right tool options"
+msgstr "Options de l'outil droit"
+
+msgid "Left pixel indicator"
+msgstr "Indicateur de pixel gauche"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous dessinez"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez"
+
+msgid "Right pixel indicator"
+msgstr "Indicateur de pixel droit"
+
+msgid "Brush:"
+msgstr "Brosse :"
+
+msgid "BRUSH_HT"
+msgstr "Sélectionnez une brosse"
+
+msgid "Brush: Pixel"
+msgstr "Brosse : Pixel"
+
+msgid "Custom brush"
+msgstr "Brosse personnalisée"
+
+msgid "Brush size:"
+msgstr "Taille de la brosse :"
+
+msgid "Brush color from"
+msgstr "Couleur de la brosse depuis"
+
+msgid "COLORFROM_HT"
+msgstr "0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement sélectionnée"
+
+msgid "Fill area:"
+msgstr "Remplissage de zone :"
+
+msgid "Area of the same color"
+msgstr "Zone de la même couleur"
+
+msgid "All pixels of the same color"
+msgstr "Tous les pixels de la même couleur"
+
+msgid "Lighten"
+msgstr "Éclaircir"
+
+msgid "Darken"
+msgstr "Assombrir"
+
+msgid "Amount:"
+msgstr "Quantité :"
+
+msgid "LDAMOUNT_HT"
+msgstr "Quantité d'éclaircissement/assombrissement"
+
+msgid "Mirroring"
+msgstr "Miroir"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Dessine avec un miroir horizontal"
+
+msgid "VERTMIRROR_HT"
+msgstr "Dessine avec un miroir vertical"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Current frame:"
+msgstr "Trame actuelle :"
+
+msgid "Current frame: 1/1"
+msgstr "Trame actuelle : 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Aller à la première trame\n(Ctrl + Orig.)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "Aller à la trame précédente\n(Ctrl + Gauche)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Jouer l'animation à l'envers (de la fin vers le début)\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Jouer l'animation (du début vers la fin)\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "Aller à la prochaine trame\n(Ctrl + Droite)"
+
+msgid "LASTFRAME_HT"
+msgstr "Aller à la dernière trame\n(Ctrl + Fin)"
+
+msgid "FPS_HT"
+msgstr "Combien d'images par seconde pour l'aperçu de l'animation ?\nPlus cette valeur est élevée, plus l'animation sera jouée rapidement."
+
+msgid "No loop"
+msgstr "Pas de bouclage"
+
+msgid "Cycle loop"
+msgstr "Bouclage en cycle"
+
+msgid "Ping-pong loop"
+msgstr "Bouclage en ping-pong"
+
+msgid "Onion Skinning:"
+msgstr "Peau d'oignon :"
+
+msgid "Past Frames"
+msgstr "Trames passées"
+
+msgid "Future Frames"
+msgstr "Trames futures"
+
+msgid "Blue-Red Mode"
+msgstr "Mode rouge-bleu"
+
+msgid "Add a new frame"
+msgstr "Ajouter une trame"
+
+msgid "Remove Frame"
+msgstr "Supprimer la trame"
+
+msgid "Clone Frame"
+msgstr "Cloner la trame"
+
+msgid "Move Left"
+msgstr "Déplacer vers la gauche"
+
+msgid "Move Right"
+msgstr "Déplacer vers la droite"
+
+msgid "Layers"
+msgstr "Calques"
+
+msgid "LAYERNEW_HT"
+msgstr "Créer un calque"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Supprimer le calque"
+
+msgid "LAYERUP_HT"
+msgstr "Déplacer le calque vers le haut"
+
+msgid "LAYERDOWN_HT"
+msgstr "Déplacer le calque vers le cas"
+
+msgid "LAYERCLONE_HT"
+msgstr "Cloner le calque"
+
+msgid "LAYERMERGE_HT"
+msgstr "Fusionner le calque vers le bas"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Afficher/Masquer le calque"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Écran partagé\n\nAfficher un second canevas"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Écran partagé\n\nCacher le second canevas"
+
+msgid "Undo: Draw"
+msgstr "Annuler : Dessin"
+
+msgid "Redo: Draw"
+msgstr "Refaire : Dessin"
+
+msgid "Undo: Rectangle Select"
+msgstr "Annuler : Sélection par rectangle"
+
+msgid "Redo: Rectangle Select"
+msgstr "Refaire : Sélection par rectangle"
+
+msgid "Undo: Scale"
+msgstr "Annuler : Redimensionner l'image"
+
+msgid "Redo: Scale"
+msgstr "Refaire : Redimensionner l'image"
+
+msgid "Undo: Add Layer"
+msgstr "Annuler : Ajouter un calque"
+
+msgid "Redo: Add Layer"
+msgstr "Refaire : Ajouter un calque"
+
+msgid "Undo: Remove Layer"
+msgstr "Annuler : Supprimer le calque"
+
+msgid "Redo: Remove Layer"
+msgstr "Refaire : Supprimer le calque"
+
+msgid "Undo: Merge Layer"
+msgstr "Annuler : Fusionner le calque"
+
+msgid "Redo: Merge Layer"
+msgstr "Refaire : Fusionner le calque"
+
+msgid "Undo: Change Layer Order"
+msgstr "Annuler : Modifier l'ordre des calques"
+
+msgid "Redo: Change Layer Order"
+msgstr "Refaire : Modifier l'ordre des calques"
+
+msgid "Undo: Add Frame"
+msgstr "Annuler : Ajouter une trame"
+
+msgid "Redo: Add Frame"
+msgstr "Refaire : Ajouter une trame"
+
+msgid "Undo: Remove Frame"
+msgstr "Annuler : Supprimer une trame"
+
+msgid "Redo: Remove Frame"
+msgstr "Refaire : Supprimer une trame"
+
+msgid "Undo: Change Frame Order"
+msgstr "Annuler : Modifier l'ordre des trames"
+
+msgid "Redo: Change Frame Order"
+msgstr "Refaire : Modifier l'ordre des trames"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Annuler : Supprimer la brosse personnalisée"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Refaire : Supprimer la brosse personnalisée"
+
+msgid "Move Guide"
+msgstr "Déplacer le guide"
+
+msgid "File saved"
+msgstr "Fichier enregistré"
+
+msgid "File exported"
+msgstr "Fichier exporté"
+

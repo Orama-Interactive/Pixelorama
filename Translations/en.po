@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: Overloaded\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Please Confirm..."
+msgstr "Please Confirm..."
+
+msgid "Image Size"
+msgstr "Image Size"
+
+msgid "Width:"
+msgstr "Width:"
+
+msgid "Height:"
+msgstr "Height:"
+
+msgid "File"
+msgstr "File"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "View"
+msgstr "View"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "New..."
+msgstr "New..."
+
+msgid "Open..."
+msgstr "Open..."
+
+msgid "Save..."
+msgstr "Save..."
+
+msgid "Save as..."
+msgstr "Save as..."
+
+msgid "Import PNG..."
+msgstr "Import PNG..."
+
+msgid "Export PNG..."
+msgstr "Export PNG..."
+
+msgid "Export PNG as..."
+msgstr "Export PNG as..."
+
+msgid "Quit"
+msgstr "Quit"
+
+msgid "Undo"
+msgstr "Undo"
+
+msgid "Redo"
+msgstr "Redo"
+
+msgid "Scale Image"
+msgstr "Scale Image"
+
+msgid "Crop Image"
+msgstr "Crop Image"
+
+msgid "Clear Selection"
+msgstr "Clear Selection"
+
+msgid "Flip Horizontal"
+msgstr "Flip Horizontal"
+
+msgid "Flip Vertical"
+msgstr "Flip Vertical"
+
+msgid "Preferences"
+msgstr "Preferences"
+
+msgid "Tile Mode"
+msgstr "Tile Mode"
+
+msgid "Show Grid"
+msgstr "Show Grid"
+
+msgid "Show Rulers"
+msgstr "Show Rulers"
+
+msgid "Show Guides"
+msgstr "Show Guides"
+
+msgid "Fill with color:"
+msgstr "Fill with color:"
+
+msgid "Open a File"
+msgstr "Open a File"
+
+msgid "Open File(s)"
+msgstr "Open File(s)"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Import as new frame"
+
+msgid "Save Sprite as .pxo"
+msgstr "Save Sprite as .pxo"
+
+msgid "Export Sprite"
+msgstr "Export Sprite"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Export all frames"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Export frames as a single file"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Vertical spritesheet"
+
+msgid "Path:"
+msgstr "Path:"
+
+msgid "Directories & Files:"
+msgstr "Directories & Files:"
+
+msgid "File:"
+msgstr "File:"
+
+msgid "Interpolation:"
+msgstr "Interpolation:"
+
+msgid "Nearest"
+msgstr "Nearest"
+
+msgid "Bilinear"
+msgstr "Bilinear"
+
+msgid "Cubic"
+msgstr "Cubic"
+
+msgid "Trilinear"
+msgstr "Trilinear"
+
+msgid "Grid options"
+msgstr "Grid options"
+
+msgid "Color:"
+msgstr "Color:"
+
+msgid "Language:"
+msgstr "Language:"
+
+msgid "System Language"
+msgstr "System Language"
+
+msgid "About Pixelorama"
+msgstr "About Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "Your Free and Open Source Sprite Editor!\nDeveloped by Orama Interactive\n"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Donate"
+msgstr "Donate"
+
+msgid "QUIT_LABEL"
+msgstr "Are you sure you want to exit Pixelorama?"
+
+msgid "Utility Tools"
+msgstr "Utility Tools"
+
+msgid "RECTSELECT_HT"
+msgstr "Rectangular Selection\n\nR for left mouse button\nAlt + R for right mouse button\n\nPress Shift to move the content"
+
+msgid "COLORPICKER_HT"
+msgstr "Color Picker\nSelect a color from a pixel of the sprite\n\nO for left mouse button\nAlt + O for right mouse button"
+
+msgid "Draw Tools"
+msgstr "Draw Tools"
+
+msgid "PENCIL_HT"
+msgstr "Pencil\n\nP for left mouse button\nAlt + P for right mouse button\n\nHold Shift to make a line"
+
+msgid "ERASER_HT"
+msgstr "Eraser\n\nE for left mouse button\nAlt + E for right mouse button\n\nHold Shift to make a line"
+
+msgid "BUCKET_HT"
+msgstr "Bucket\n\nB for left mouse button\nAlt + B for right mouse button"
+
+msgid "LD_HT"
+msgstr "Lighten/Darken\n\nU for left mouse button\nAlt + U for right mouse button"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Choose a color for the left tool"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Choose a color for the right tool"
+
+msgid "COLORSWITCH_HT"
+msgstr "Switch left and right colors\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Reset the colors to their default state (black for left, white for right)"
+
+msgid "Raw Mode"
+msgstr "Raw Mode"
+
+msgid "Left tool options"
+msgstr "Left tool options"
+
+msgid "Right tool options"
+msgstr "Right tool options"
+
+msgid "Left pixel indicator"
+msgstr "Left pixel indicator"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Show left mouse pixel indicator or brush on the canvas when drawing"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Show right mouse pixel indicator or brush on the canvas when drawing"
+
+msgid "Right pixel indicator"
+msgstr "Right pixel indicator"
+
+msgid "Brush:"
+msgstr "Brush:"
+
+msgid "BRUSH_HT"
+msgstr "Select a brush"
+
+msgid "Brush: Pixel"
+msgstr "Brush: Pixel"
+
+msgid "Custom brush"
+msgstr "Custom brush"
+
+msgid "Brush size:"
+msgstr "Brush size:"
+
+msgid "Brush color from"
+msgstr "Brush color from"
+
+msgid "COLORFROM_HT"
+msgstr "0: Color from the brush itself, 100: the currently selected color"
+
+msgid "Fill area:"
+msgstr "Fill area:"
+
+msgid "Area of the same color"
+msgstr "Area of the same color"
+
+msgid "All pixels of the same color"
+msgstr "All pixels of the same color"
+
+msgid "Lighten"
+msgstr "Lighten"
+
+msgid "Darken"
+msgstr "Darken"
+
+msgid "Amount:"
+msgstr "Amount:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Lighten/Darken amount"
+
+msgid "Mirroring"
+msgstr "Mirroring"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Enable horizontal mirrored drawing"
+
+msgid "VERTMIRROR_HT"
+msgstr "Enable vertical mirrored drawing"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Current frame:"
+msgstr "Current frame:"
+
+msgid "Current frame: 1/1"
+msgstr "Current frame: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Jump to the first frame\n(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "Go to the previous frame\n(Ctrl+Left)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Play the animation backwards (from end to beginning)\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Play the animation forward (from beginning to end)\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "Go to the next frame\n(Ctrl+Right)"
+
+msgid "LASTFRAME_HT"
+msgstr "Jump to the last frame\n(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr "How many frames per second should the animation preview be?\nThe more FPS, the faster the animation plays."
+
+msgid "No loop"
+msgstr "No loop"
+
+msgid "Cycle loop"
+msgstr "Cycle loop"
+
+msgid "Ping-pong loop"
+msgstr "Ping-pong loop"
+
+msgid "Onion Skinning:"
+msgstr "Onion Skinning:"
+
+msgid "Past Frames"
+msgstr "Past Frames"
+
+msgid "Future Frames"
+msgstr "Future Frames"
+
+msgid "Blue-Red Mode"
+msgstr "Blue-Red Mode"
+
+msgid "Add a new frame"
+msgstr "Add a new frame"
+
+msgid "Remove Frame"
+msgstr "Remove Frame"
+
+msgid "Clone Frame"
+msgstr "Clone Frame"
+
+msgid "Move Left"
+msgstr "Move Left"
+
+msgid "Move Right"
+msgstr "Move Right"
+
+msgid "Layers"
+msgstr "Layers"
+
+msgid "LAYERNEW_HT"
+msgstr "Create a new layer"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Remove current layer"
+
+msgid "LAYERUP_HT"
+msgstr "Move up the current layer"
+
+msgid "LAYERDOWN_HT"
+msgstr "Move down the current layer"
+
+msgid "LAYERCLONE_HT"
+msgstr "Clone current layer"
+
+msgid "LAYERMERGE_HT"
+msgstr "Merge current layer with the one below"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Toggle layer's visibility"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Split screen\n\nShow second canvas"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Split screen\n\nHide second canvas"
+
+msgid "Undo: Draw"
+msgstr "Undo: Draw"
+
+msgid "Redo: Draw"
+msgstr "Redo: Draw"
+
+msgid "Undo: Rectangle Select"
+msgstr "Undo: Rectangle Select"
+
+msgid "Redo: Rectangle Select"
+msgstr "Redo: Rectangle Select"
+
+msgid "Undo: Scale"
+msgstr "Undo: Scale"
+
+msgid "Redo: Scale"
+msgstr "Redo: Scale"
+
+msgid "Undo: Add Layer"
+msgstr "Undo: Add Layer"
+
+msgid "Redo: Add Layer"
+msgstr "Redo: Add Layer"
+
+msgid "Undo: Remove Layer"
+msgstr "Undo: Remove Layer"
+
+msgid "Redo: Remove Layer"
+msgstr "Redo: Remove Layer"
+
+msgid "Undo: Merge Layer"
+msgstr "Undo: Merge Layer"
+
+msgid "Redo: Merge Layer"
+msgstr "Redo: Merge Layer"
+
+msgid "Undo: Change Layer Order"
+msgstr "Undo: Change Layer Order"
+
+msgid "Redo: Change Layer Order"
+msgstr "Redo: Change Layer Order"
+
+msgid "Undo: Add Frame"
+msgstr "Undo: Add Frame"
+
+msgid "Redo: Add Frame"
+msgstr "Redo: Add Frame"
+
+msgid "Undo: Remove Frame"
+msgstr "Undo: Remove Frame"
+
+msgid "Redo: Remove Frame"
+msgstr "Redo: Remove Frame"
+
+msgid "Undo: Change Frame Order"
+msgstr "Undo: Change Frame Order"
+
+msgid "Redo: Change Frame Order"
+msgstr "Redo: Change Frame Order"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Undo: Delete Custom Brush"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Redo: Delete Custom Brush"
+
+msgid "Move Guide"
+msgstr "Move Guide"
+
+msgid "File saved"
+msgstr "File saved"
+
+msgid "File exported"
+msgstr "File exported"
+

@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: AndreevAndrei\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Open"
+msgstr "Открыть"
+
+msgid "Please Confirm..."
+msgstr "Пожалуйста подтвердите..."
+
+msgid "Image Size"
+msgstr "Размер изображения"
+
+msgid "Width:"
+msgstr "Ширина:"
+
+msgid "Height:"
+msgstr "Высота"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "View"
+msgstr "Просмотр"
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "New..."
+msgstr "Создать..."
+
+msgid "Open..."
+msgstr "Открыть..."
+
+msgid "Save..."
+msgstr "Сохранить..."
+
+msgid "Save as..."
+msgstr "Сохранить как..."
+
+msgid "Import PNG..."
+msgstr "Импорт PNG..."
+
+msgid "Export PNG..."
+msgstr "Экспорт PNG..."
+
+msgid "Export PNG as..."
+msgstr "Экспортировать PNG как..."
+
+msgid "Quit"
+msgstr "Выйти"
+
+msgid "Undo"
+msgstr "Отменить"
+
+msgid "Redo"
+msgstr "Повторить"
+
+msgid "Scale Image"
+msgstr "Увеличить изображение"
+
+msgid "Crop Image"
+msgstr "Обрезать выделенное"
+
+msgid "Clear Selection"
+msgstr "Снять выделение"
+
+msgid "Flip Horizontal"
+msgstr "Отразить по горизонтали"
+
+msgid "Flip Vertical"
+msgstr "Отразить по вертикале"
+
+msgid "Preferences"
+msgstr "Настройки"
+
+msgid "Tile Mode"
+msgstr "Замостить плиткой"
+
+msgid "Show Grid"
+msgstr "Показывать сетку"
+
+msgid "Show Rulers"
+msgstr "Показывать линейку"
+
+msgid "Show Guides"
+msgstr "Показывать направляющие"
+
+msgid "Fill with color:"
+msgstr "Заливка цветом:"
+
+msgid "Open a File"
+msgstr "Октрыть файл"
+
+msgid "Open File(s)"
+msgstr "Открыть файл(ы)"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Добавить как новый кадр"
+
+msgid "Save Sprite as .pxo"
+msgstr "Сохранить Sprite как .pxo"
+
+msgid "Export Sprite"
+msgstr "Экспортировать Sprite"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Экспортировать все кадры как"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Экспортировать кадры в один файл"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Экспорт Sprite-листа"
+
+msgid "Path:"
+msgstr "Путь:"
+
+msgid "Directories & Files:"
+msgstr "Словари и файлы:"
+
+msgid "File:"
+msgstr "Файл:"
+
+msgid "Interpolation:"
+msgstr "Интерполяция:"
+
+msgid "Nearest"
+msgstr "Ближайший"
+
+msgid "Bilinear"
+msgstr "Бинарный"
+
+msgid "Cubic"
+msgstr "Кубический"
+
+msgid "Trilinear"
+msgstr "Трехлинейный"
+
+msgid "Grid options"
+msgstr "Настройки сетки"
+
+msgid "Color:"
+msgstr "Цвет:"
+
+msgid "Language:"
+msgstr "Язык:"
+
+msgid "System Language"
+msgstr "Системный язык"
+
+msgid "About Pixelorama"
+msgstr "О Pixeloram'е"
+
+msgid "MADEBY_LABEL"
+msgstr "Ваш бесплатный и открытый Sprite редактор!\nРазработано Orama Interactive\n"
+
+msgid "Website"
+msgstr "Сайт"
+
+msgid "Donate"
+msgstr "Поддержать"
+
+msgid "QUIT_LABEL"
+msgstr "Вы действительно хотите выйти из Pixeloram'ы?"
+
+msgid "Utility Tools"
+msgstr "Сервисные инструменты"
+
+msgid "RECTSELECT_HT"
+msgstr "Прямоугольное выдиление\n\nR для ЛКМ\nAlt + R для ПКМ\n\nShift для перемещения контента"
+
+msgid "COLORPICKER_HT"
+msgstr "Выбор цвета\nВыбрать цвет из пикселя Sprit'а\n\nO для ЛКМ\nAlt + O для ПКМ"
+
+msgid "Draw Tools"
+msgstr "Инструменты рисования"
+
+msgid "PENCIL_HT"
+msgstr "Карандаш\n\nP для ЛКМ\nAlt + P для ПКМ\n\nЗажать Shift для создания прямой"
+
+msgid "ERASER_HT"
+msgstr "Ластик\n\nE для ЛКМ\nAlt + E для ПКМ\n\nЗажать Shift для очистки линией"
+
+msgid "BUCKET_HT"
+msgstr "Заливка\n\nB для ЛКМ\nAlt + B для ПКМ"
+
+msgid "LD_HT"
+msgstr "Высветление/Затемнение\n\nU для ЛКМ\nAlt + U ПКМ"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Выбор цвета для левого инструмента"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Выбор цвета для правого инструмента"
+
+msgid "COLORSWITCH_HT"
+msgstr "Поменять цвета местами\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Сбросить цвет по умолчанию (слева черный, справа белый)"
+
+msgid "Raw Mode"
+msgstr "RGB от 0.0 до 1.0 (Raw Mode)"
+
+msgid "Left tool options"
+msgstr "Настройки левого инструмента"
+
+msgid "Right tool options"
+msgstr "Настройки правого инструмента"
+
+msgid "Left pixel indicator"
+msgstr "Цвет для ЛКМ"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Отображать цвет кисти для ЛКМ во время рисования"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Отображать цвет кисти для ПКМ во время рисования"
+
+msgid "Right pixel indicator"
+msgstr "Цвет для ПКМ"
+
+msgid "Brush:"
+msgstr "Кисть:"
+
+msgid "BRUSH_HT"
+msgstr "Выбрать кисть"
+
+msgid "Brush: Pixel"
+msgstr "Кисть: Пиксель"
+
+msgid "Custom brush"
+msgstr "Текущая кисть"
+
+msgid "Brush size:"
+msgstr "Размер кисти:"
+
+msgid "Brush color from"
+msgstr "Цвет кисти"
+
+msgid "COLORFROM_HT"
+msgstr "0: Собственный цвет кисти, 100: Выбранный цвет"
+
+msgid "Fill area:"
+msgstr "Залить область:"
+
+msgid "Area of the same color"
+msgstr "Область того же цвета"
+
+msgid "All pixels of the same color"
+msgstr "Все точки такого же цвета"
+
+msgid "Lighten"
+msgstr "Высветлить"
+
+msgid "Darken"
+msgstr "Затемнить"
+
+msgid "Amount:"
+msgstr "Кол-во:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Интенсивность Высветления/Затемнения"
+
+msgid "Mirroring"
+msgstr "Отразить зеркально"
+
+msgid "Horizontal"
+msgstr "Горизонально"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Режим рисования горизонтального зеркалирования"
+
+msgid "VERTMIRROR_HT"
+msgstr "Режим рисования вертикального зеркалирования"
+
+msgid "Vertical"
+msgstr "Вертикально"
+
+msgid "Current frame:"
+msgstr "Текущий кадр:"
+
+msgid "Current frame: 1/1"
+msgstr "Текущий кадр: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Перейти к первому кадру\n(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "На предыдущий кадр\n(Ctrl+Left)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Проиграть анимацию задом наперед (с конца в начало)\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Проиграть анимацию по умолчанию (с начала в конец)\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "На следующий кадр\n(Ctrl+Right)"
+
+msgid "LASTFRAME_HT"
+msgstr "Перейти на последний кадр\n(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr "Число кадров в секунду для просмотра анимации?\nБольшее число кадров в секунду ускорит анмацию."
+
+msgid "No loop"
+msgstr "Не зацикливать"
+
+msgid "Cycle loop"
+msgstr "Зациклить"
+
+msgid "Ping-pong loop"
+msgstr "Пинг-Понг"
+
+msgid "Onion Skinning:"
+msgstr "Шлейф смежных кадров:"
+
+msgid "Past Frames"
+msgstr "Предыдущие кадры"
+
+msgid "Future Frames"
+msgstr "Последующие кадры"
+
+msgid "Blue-Red Mode"
+msgstr "Сине-красный режим"
+
+msgid "Add a new frame"
+msgstr "Добавить новый кадр"
+
+msgid "Remove Frame"
+msgstr "Удалить кадр"
+
+msgid "Clone Frame"
+msgstr "Клонировать кадр"
+
+msgid "Move Left"
+msgstr "Сместить влево"
+
+msgid "Move Right"
+msgstr "Сместить вправо"
+
+msgid "Layers"
+msgstr "Слои"
+
+msgid "LAYERNEW_HT"
+msgstr "Создать новый слой"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Удалить текущий слой"
+
+msgid "LAYERUP_HT"
+msgstr "Поднять текущий слой выше"
+
+msgid "LAYERDOWN_HT"
+msgstr "Опустить текущий слой ниже"
+
+msgid "LAYERCLONE_HT"
+msgstr "Клонировать текущий слой"
+
+msgid "LAYERMERGE_HT"
+msgstr "Объединить слой ниже с текущим "
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Переключить видимость слоев"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Разделить экран\n\nОтобразить второй холст"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Разделить экран\n\nСкрыть второй холст"
+
+msgid "Undo: Draw"
+msgstr "Отменить: Рисование"
+
+msgid "Redo: Draw"
+msgstr "Повторить: Рисование"
+
+msgid "Undo: Rectangle Select"
+msgstr "Отменить: Прямоугольное выделение"
+
+msgid "Redo: Rectangle Select"
+msgstr "Повторить: Прямоугольное выделение"
+
+msgid "Undo: Scale"
+msgstr "Отменить: Масштабирование"
+
+msgid "Redo: Scale"
+msgstr "Повторить: Масштабирование"
+
+msgid "Undo: Add Layer"
+msgstr "Отменить: Добавление слоя"
+
+msgid "Redo: Add Layer"
+msgstr "Повторить: Добавление слоя"
+
+msgid "Undo: Remove Layer"
+msgstr "Отменить: Удаление слоя"
+
+msgid "Redo: Remove Layer"
+msgstr "Повторить: Удаление слоя"
+
+msgid "Undo: Merge Layer"
+msgstr "Отменить: Объединение слоев"
+
+msgid "Redo: Merge Layer"
+msgstr "Повторить: Объединение слоев"
+
+msgid "Undo: Change Layer Order"
+msgstr "Отменить: Смена порядка слоев"
+
+msgid "Redo: Change Layer Order"
+msgstr "Повторить: Смена порядка слоев"
+
+msgid "Undo: Add Frame"
+msgstr "Отменить: Добавление кадра"
+
+msgid "Redo: Add Frame"
+msgstr "Повторить: Добавление кадра"
+
+msgid "Undo: Remove Frame"
+msgstr "Отменить: Удаление кадра"
+
+msgid "Redo: Remove Frame"
+msgstr "Повторить: Удаление кадра"
+
+msgid "Undo: Change Frame Order"
+msgstr "Отменить: Смена последовательности кадров"
+
+msgid "Redo: Change Frame Order"
+msgstr "Повторить: Смена последовательности кадров"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Отменить: Удаление текущей кисти"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Повторить: Удаление текущей кисти"
+
+msgid "Move Guide"
+msgstr "Сдвинуть направляющие"
+
+msgid "File saved"
+msgstr "Файл сохранен"
+
+msgid "File exported"
+msgstr "Файл экспортирован"
+

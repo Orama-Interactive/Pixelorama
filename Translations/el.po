@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: Overloaded\n"
+"Language-Team: none\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "Εντάξει"
+
+msgid "Cancel"
+msgstr "Άκυρο"
+
+msgid "Open"
+msgstr "Άνοιγμα"
+
+msgid "Please Confirm..."
+msgstr "Παρακαλώ επιβεβαιώστε..."
+
+msgid "Image Size"
+msgstr "Μέγεθος εικόνας"
+
+msgid "Width:"
+msgstr "Πλάτος:"
+
+msgid "Height:"
+msgstr "Ύψος:"
+
+msgid "File"
+msgstr "Αρχείο"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "View"
+msgstr "Προβολή"
+
+msgid "Help"
+msgstr "Βοήθεια"
+
+msgid "New..."
+msgstr "Νέο..."
+
+msgid "Open..."
+msgstr "Άνοιγμα..."
+
+msgid "Save..."
+msgstr "Αποθήκευση..."
+
+msgid "Save as..."
+msgstr "Αποθήκευση ως..."
+
+msgid "Import PNG..."
+msgstr "Εισαγωγή PNG..."
+
+msgid "Export PNG..."
+msgstr "Εξαγωγή PNG..."
+
+msgid "Export PNG as..."
+msgstr "Εξαγωγή PNG ως..."
+
+msgid "Quit"
+msgstr "Έξοδος"
+
+msgid "Undo"
+msgstr "Αναίρεση"
+
+msgid "Redo"
+msgstr "Ακύρωση αναίρεσης"
+
+msgid "Scale Image"
+msgstr "Κλιμάκωση εικόνας"
+
+msgid "Crop Image"
+msgstr "Περικοπή"
+
+msgid "Clear Selection"
+msgstr "Καθαρισμός επιλογής"
+
+msgid "Flip Horizontal"
+msgstr "Οριζόντια αναστροφή"
+
+msgid "Flip Vertical"
+msgstr "Κάθετη αναστροφή"
+
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
+msgid "Tile Mode"
+msgstr "Λειτουργία μοτίβου"
+
+msgid "Show Grid"
+msgstr "Εμφάνιση πλέγματος"
+
+msgid "Show Rulers"
+msgstr "Εμφάνιση χαράκων"
+
+msgid "Show Guides"
+msgstr "Εμφάνιση οδηγών"
+
+msgid "Fill with color:"
+msgstr "Γέμισμα με χρώμα:"
+
+msgid "Open a File"
+msgstr "Άνοιγμα αρχείου"
+
+msgid "Open File(s)"
+msgstr "Άνοιγμα αρχείου/ων"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Εισαγωγή ως νέο καρέ"
+
+msgid "Save Sprite as .pxo"
+msgstr "Αποθήκευση εικόνας ως .pxo"
+
+msgid "Export Sprite"
+msgstr "Εξαγωγή εικόνας"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Εξαγωγή όλων των καρέ"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Εξαγωγή όλων των καρέ στο ίδιο αρχείο"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Κάθετη ευθυγράμμιση"
+
+msgid "Path:"
+msgstr "Διαδρομή:"
+
+msgid "Directories & Files:"
+msgstr "Φάκελοι & Αρχεία:"
+
+msgid "File:"
+msgstr "Αρχείο:"
+
+msgid "Interpolation:"
+msgstr "Παρεμβολή:"
+
+msgid "Nearest"
+msgstr "Χωρίς"
+
+msgid "Bilinear"
+msgstr "Διγραμμική"
+
+msgid "Cubic"
+msgstr "Κυβική"
+
+msgid "Trilinear"
+msgstr "Τριγραμμική"
+
+msgid "Grid options"
+msgstr "Επιλογές πλέγματος"
+
+msgid "Color:"
+msgstr "Χρώμα:"
+
+msgid "Language:"
+msgstr "Γλώσσα:"
+
+msgid "System Language"
+msgstr "Γλώσσα Συστήματος"
+
+msgid "About Pixelorama"
+msgstr "Σχετικά με το Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "Το δωρεάν και ανοιχτού κώδικα πρόγραμμά σας!\nΦτιαγμένο από την Orama Interactive\n"
+
+msgid "Website"
+msgstr "Ιστοσελίδα"
+
+msgid "Donate"
+msgstr "Κάντε μια δωρεά"
+
+msgid "QUIT_LABEL"
+msgstr "Σίγουρα θέλετε να βγείτε από το Pixelorama;"
+
+msgid "Utility Tools"
+msgstr "Βοηθητικά Εργαλεία"
+
+msgid "RECTSELECT_HT"
+msgstr "Ορθογώνια επιλογή\n\nR για το αριστερό κουμπί ποντικιού\nAlt + R για το δεξί κουμπί ποντικιού\n\nΠατήστε Shift για να μετακινηθεί το περιεχόμενο"
+
+msgid "COLORPICKER_HT"
+msgstr "Επιλογέας χρωμάτων\nΕπιλέξτε ένα χρώμα από ένα εικονοστοιχείο της εικόνας\n\nΟ για το αριστερό κουμπί ποντικιού\nAlt + Ο για το δεξί κουμπί ποντικιού"
+
+msgid "Draw Tools"
+msgstr "Εργαλεία Ζωγραφικής"
+
+msgid "PENCIL_HT"
+msgstr "Μολύβι\n\nP για το αριστερό κουμπί ποντικιού\nAlt + P για το δεξί κουμπί ποντικιού\n\nΚρατήστε Shift για να τραβήξετε μια γραμμή"
+
+msgid "ERASER_HT"
+msgstr "Γόμα\n\nE για το αριστερό κουμπί ποντικιού\nAlt + E για το δεξί κουμπί ποντικιού\n\nΚρατήστε Shift για να τραβήξετε μια γραμμή"
+
+msgid "BUCKET_HT"
+msgstr "Κουβάς\n\nB για το αριστερό κουμπί ποντικιού\nAlt + B για το δεξί κουμπί ποντικιού"
+
+msgid "LD_HT"
+msgstr "Φώτισμα/Σκούρημα\n\nU για το αριστερό κουμπί ποντικιού\nAlt + U για το δεξί κουμπί ποντικιού"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Επιλέξτε ένα χρώμα για το αριστερό εργαλείο"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο"
+
+msgid "COLORSWITCH_HT"
+msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
+
+msgid "Raw Mode"
+msgstr "Ωμή Λειτουργία"
+
+msgid "Left tool options"
+msgstr "Επιλογές αριστερού εργαλείου"
+
+msgid "Right tool options"
+msgstr "Επιλογές δεξιού εργαλείου"
+
+msgid "Left pixel indicator"
+msgstr "Δείκτης αριστερού πιξελ"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο αριστερό κουμπί του ποντικιού"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού"
+
+msgid "Right pixel indicator"
+msgstr "Δείκτης δεξιού πιξελ"
+
+msgid "Brush:"
+msgstr "Πινέλο:"
+
+msgid "BRUSH_HT"
+msgstr "Επιλέξτε ένα πινέλο"
+
+msgid "Brush: Pixel"
+msgstr "Πινέλο: Εικονοστοιχείο"
+
+msgid "Custom brush"
+msgstr "Προσαρμοσμένο πινέλο"
+
+msgid "Brush size:"
+msgstr "Μέγεθος πινέλου:"
+
+msgid "Brush color from"
+msgstr "Χρώμα πινέλου από"
+
+msgid "COLORFROM_HT"
+msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώμα"
+
+msgid "Fill area:"
+msgstr "Περιοχή γεμίσματος:"
+
+msgid "Area of the same color"
+msgstr "Περιοχή ίδιου χρώματος"
+
+msgid "All pixels of the same color"
+msgstr "Όλα τα πίξελ ίδιου χρώματος"
+
+msgid "Lighten"
+msgstr "Φώτισμα"
+
+msgid "Darken"
+msgstr "Σκούρημα"
+
+msgid "Amount:"
+msgstr "Ποσό:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Ποσό φωτίσματος ή σκουρήματος"
+
+msgid "Mirroring"
+msgstr "Κατοπτρισμός"
+
+msgid "Horizontal"
+msgstr "Οριζόντια"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
+
+msgid "VERTMIRROR_HT"
+msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
+
+msgid "Vertical"
+msgstr "Κάθετα"
+
+msgid "Current frame:"
+msgstr "Τρέχον καρέ:"
+
+msgid "Current frame: 1/1"
+msgstr "Τρέχον καρέ: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Μετάβαση στο πρώτο καρέ\n(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "Μετάβαση στο προηγούμενο καρέ\n(Ctrl+Αριστερά)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "Μετάβαση στο επόμενο καρέ\n(Ctrl+Δεξιά)"
+
+msgid "LASTFRAME_HT"
+msgstr "Μετάβαση στο τελευταίο καρέ\n(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr "Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\nΌσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση."
+
+msgid "No loop"
+msgstr "Όχι επανάληψη"
+
+msgid "Cycle loop"
+msgstr "Κυκλική επανάληψη"
+
+msgid "Ping-pong loop"
+msgstr "Επανάληψη πινγκ-πονγκ"
+
+msgid "Onion Skinning:"
+msgstr "Γειτονικά καρέ:"
+
+msgid "Past Frames"
+msgstr "Παρελθοντικά καρέ"
+
+msgid "Future Frames"
+msgstr "Μελλοντικά καρέ"
+
+msgid "Blue-Red Mode"
+msgstr "Μπλε-Κόκκινη λειτουργία"
+
+msgid "Add a new frame"
+msgstr "Προσθήκη νέου καρέ"
+
+msgid "Remove Frame"
+msgstr "Διαγραφή Καρέ"
+
+msgid "Clone Frame"
+msgstr "Κλωνοποίηση Καρέ"
+
+msgid "Move Left"
+msgstr "Μετακίνηση Αριστερά"
+
+msgid "Move Right"
+msgstr "Μετακίνηση Δεξιά"
+
+msgid "Layers"
+msgstr "Στρώσεις"
+
+msgid "LAYERNEW_HT"
+msgstr "Δημιουργία νέας στρώσης"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Διαγραφή της τρέχουσας στρώσης"
+
+msgid "LAYERUP_HT"
+msgstr "Μετακίνηση της τρέχουσας στρώσης προς τα πάνω"
+
+msgid "LAYERDOWN_HT"
+msgstr "Μετακίνηση της τρέχουσας στρώσης προς τα κάτω"
+
+msgid "LAYERCLONE_HT"
+msgstr "Κλωνοποίηση της τρέχουσας στρώσης"
+
+msgid "LAYERMERGE_HT"
+msgstr "Συγχώνευση της τρέχουσας στρώσης με την από κάτω"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Εναλλαγή της ορατότητας της στρώσης"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Διπλή οθόνη\n\nΕμφάνιση δεύτερου καμβά"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Διπλή οθόνη\n\nΑπόκρυψη δεύτερου καμβάf"
+
+msgid "Undo: Draw"
+msgstr "Αναίρεση: Ζωγραφική"
+
+msgid "Redo: Draw"
+msgstr "Ακύρωση αναίρεσης: Ζωγραφική"
+
+msgid "Undo: Rectangle Select"
+msgstr "Αναίρεση: Ορθογώνια επιλογή"
+
+msgid "Redo: Rectangle Select"
+msgstr "Ακύρωση αναίρεσης: Ορθογώνια επιλογή"
+
+msgid "Undo: Scale"
+msgstr "Αναίρεση: Κλιμάκωση"
+
+msgid "Redo: Scale"
+msgstr "Ακύρωση αναίρεσης: Κλιμάκωση"
+
+msgid "Undo: Add Layer"
+msgstr "Αναίρεση: Προσθήκη στρώσης"
+
+msgid "Redo: Add Layer"
+msgstr "Ακύρωση αναίρεσης: Προσθήκη στρώσης"
+
+msgid "Undo: Remove Layer"
+msgstr "Αναίρεση: Διαγραφή στρώσης"
+
+msgid "Redo: Remove Layer"
+msgstr "Ακύρωση αναίρεσης: Διαγραφή στρώσης"
+
+msgid "Undo: Merge Layer"
+msgstr "Αναίρεση: Συγχώνευση στρώσης"
+
+msgid "Redo: Merge Layer"
+msgstr "Ακύρωση αναίρεσης: Συγχώνευση στρώσης"
+
+msgid "Undo: Change Layer Order"
+msgstr "Αναίρεση: Αλλαγή σειράς στρώσης"
+
+msgid "Redo: Change Layer Order"
+msgstr "Ακύρωση αναίρεσης: Αλλαγή σειράς στρώσης"
+
+msgid "Undo: Add Frame"
+msgstr "Αναίρεση: Προσθήκη καρέ"
+
+msgid "Redo: Add Frame"
+msgstr "Ακύρωση αναίρεσης: Προσθήκη καρέ"
+
+msgid "Undo: Remove Frame"
+msgstr "Αναίρεση: Διαγραφή καρέ"
+
+msgid "Redo: Remove Frame"
+msgstr "Ακύρωση αναίρεσης: Διαγραφή καρέ"
+
+msgid "Undo: Change Frame Order"
+msgstr "Αναίρεση: Αλλαγή σειράς καρέ"
+
+msgid "Redo: Change Frame Order"
+msgstr "Ακύρωση αναίρεσης: Αλλαγή σειράς καρέ"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Αναίρεση: Διαγραφή προσαρμοσμένου πινέλου"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Ακύρωση αναίρεσης: Διαγραφή προσαρμοσμένου πινέλου"
+
+msgid "Move Guide"
+msgstr "Μετακίνηση βοηθού"
+
+msgid "File saved"
+msgstr "Το αρχείο αποθηκεύτηκε"
+
+msgid "File exported"
+msgstr "Έγινε εξαγωγή αρχείου"
+

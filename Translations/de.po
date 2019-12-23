@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: Schweini07\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Open"
+msgstr "Öffnen"
+
+msgid "Please Confirm..."
+msgstr "Bitte bestätigen..."
+
+msgid "Image Size"
+msgstr "Bildgröße"
+
+msgid "Width:"
+msgstr "Weite"
+
+msgid "Height:"
+msgstr "Höhe"
+
+msgid "File"
+msgstr "Datei"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "View"
+msgstr "Ansicht"
+
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "New..."
+msgstr "Neu"
+
+msgid "Open..."
+msgstr "Öffnen..."
+
+msgid "Save..."
+msgstr "Speichern..."
+
+msgid "Save as..."
+msgstr "Speichern als..."
+
+msgid "Import PNG..."
+msgstr "Importiere PNG"
+
+msgid "Export PNG..."
+msgstr "Exportiere PNG"
+
+msgid "Export PNG as..."
+msgstr "Exportiere PNG als..."
+
+msgid "Quit"
+msgstr "Verlassen"
+
+msgid "Undo"
+msgstr "Rückgängig"
+
+msgid "Redo"
+msgstr "Wiederherstellen"
+
+msgid "Scale Image"
+msgstr "Bild skalieren"
+
+msgid "Crop Image"
+msgstr "Bild zuschneiden"
+
+msgid "Clear Selection"
+msgstr "Ausgewählten Bereich löschen"
+
+msgid "Flip Horizontal"
+msgstr "Horizontal spiegeln"
+
+msgid "Flip Vertical"
+msgstr "Vertikal spiegeln"
+
+msgid "Preferences"
+msgstr "Einstellungen"
+
+msgid "Tile Mode"
+msgstr "Tile Mode"
+
+msgid "Show Grid"
+msgstr "Zeige Gitter"
+
+msgid "Show Rulers"
+msgstr "Zeige Lineale"
+
+msgid "Show Guides"
+msgstr "Zeige Anleitungen"
+
+msgid "Fill with color:"
+msgstr "Fülle mit Farbe"
+
+msgid "Open a File"
+msgstr "Öffne eine Datei"
+
+msgid "Open File(s)"
+msgstr "Öffne Datei(en)"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Importier als neues Frame"
+
+msgid "Save Sprite as .pxo"
+msgstr "Speichere Sprite als .pxo"
+
+msgid "Export Sprite"
+msgstr "Exportiere Sprite"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Exportiere alle Frames"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Exportiere Frames als eine einzige Datei"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Vertikales Spritesheet"
+
+msgid "Path:"
+msgstr "Pfad:"
+
+msgid "Directories & Files:"
+msgstr "Verzeichnisse & Dateien"
+
+msgid "File:"
+msgstr "Datei:"
+
+msgid "Interpolation:"
+msgstr "Interpolation"
+
+msgid "Nearest"
+msgstr "Nächstes"
+
+msgid "Bilinear"
+msgstr "Bilinear"
+
+msgid "Cubic"
+msgstr "Kubisch"
+
+msgid "Trilinear"
+msgstr "Trilinear"
+
+msgid "Grid options"
+msgstr "Gitter Optionen"
+
+msgid "Color:"
+msgstr "Farbe:"
+
+msgid "Language:"
+msgstr "Sprache:"
+
+msgid "System Language"
+msgstr "System Sprache"
+
+msgid "About Pixelorama"
+msgstr "Über Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "Ihr kostenloser und opensource Pixeleditor!\nEntwickelt von Orama Interactive\n"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Donate"
+msgstr "Spenden"
+
+msgid "QUIT_LABEL"
+msgstr "Möchten sie Pixelorama wirklich verlassen?"
+
+msgid "Utility Tools"
+msgstr "Dienstwerkzeuge"
+
+msgid "RECTSELECT_HT"
+msgstr "Rechteckige Auswahl\n\nR für die linke Maustaste\nAlt + R für die rechte Maustaste\n\nPresse Shift zum verschieben des Inhalts"
+
+msgid "COLORPICKER_HT"
+msgstr "Farbauswahl\Wähle einr Farbe von einem Pixel des Sprites\n\nO für die linke Maustaste\nAlt + O für die rechte Maustaste"
+
+msgid "Draw Tools"
+msgstr "Zeichnenwerkzeuge"
+
+msgid "PENCIL_HT"
+msgstr "Bleistift\n\nP für linke Maustaste\nAlt + P für rechte Maustaste\n\nHalte Shift, um eine Linie zu bilden."
+
+msgid "ERASER_HT"
+msgstr "Radiergummi\n\nE für die linke Maustaste\nAlt + E für die rechte Maustaste\n\nHalte Shift, um eine Linie zu bilden."
+
+msgid "BUCKET_HT"
+msgstr "Eimer\n\nB für linke Maustaste\nAlt + B für rechte Maustaste"
+
+msgid "LD_HT"
+msgstr "Erhellen/Verdunkeln\n\nU für linke Maustaste\nAlt + U für rechte Maustaste"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Wähle eine Farbe für das linke Werkzeug"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Wähle eine Farbe für das rechte Werkzeug"
+
+msgid "COLORSWITCH_HT"
+msgstr "Wechsle linke und rechte Farben\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)."
+
+msgid "Raw Mode"
+msgstr "Raw-Mode"
+
+msgid "Left tool options"
+msgstr "Linke Werkzeugoptionen"
+
+msgid "Right tool options"
+msgstr "Rechte Werkzeugoptionen"
+
+msgid "Left pixel indicator"
+msgstr "Linke Pixelanzeige"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+
+msgid "Right pixel indicator"
+msgstr "Rechte Pixelanzeige"
+
+msgid "Brush:"
+msgstr "Pinsel:"
+
+msgid "BRUSH_HT"
+msgstr "Wähle einen Pinsel"
+
+msgid "Brush: Pixel"
+msgstr "Pinsel: Pixel"
+
+msgid "Custom brush"
+msgstr "Benutzerdefinierter Pinsel"
+
+msgid "Brush size:"
+msgstr "Pinselgröße:"
+
+msgid "Brush color from"
+msgstr "Pinselfarbe von"
+
+msgid "COLORFROM_HT"
+msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
+
+msgid "Fill area:"
+msgstr "Fülle Bereich"
+
+msgid "Area of the same color"
+msgstr "Bereich mit der selben Farbe"
+
+msgid "All pixels of the same color"
+msgstr "Alle Pixel mit der selben Farbe"
+
+msgid "Lighten"
+msgstr "Erhellen"
+
+msgid "Darken"
+msgstr "Verdunkeln"
+
+msgid "Amount:"
+msgstr "Menge:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Erhellen/Verdunkeln Menge"
+
+msgid "Mirroring"
+msgstr "Spiegeln"
+
+msgid "Horizontal"
+msgstr "Horizontal spiegeln"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Aktiviere horizontal gespiegelte Zeichnung "
+
+msgid "VERTMIRROR_HT"
+msgstr "Aktiviere vertikale gespiegelte Zeichnung"
+
+msgid "Vertical"
+msgstr "Vertikal"
+
+msgid "Current frame:"
+msgstr "Aktueller Frame"
+
+msgid "Current frame: 1/1"
+msgstr "Aktueller Frame 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Springe zu dem ersten Frame\n(Strg+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "Gehe zu dem letzten Frame\n(Strg+Pfeil nach Links)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "Gehe zum nächsten Frame\n(Strg+Pfeil nach Rechts)"
+
+msgid "LASTFRAME_HT"
+msgstr "Springe zum letzten Frame\n(Strg+Ende)"
+
+msgid "FPS_HT"
+msgstr "Wie viele Frames pro Sekunde sollte die Animationsvorschau haben?\n Je mehr FPS, desto schneller wird die Animation abgespielt."
+
+msgid "No loop"
+msgstr "Keine Wiederholungsschleife"
+
+msgid "Cycle loop"
+msgstr "Zyklusschleife"
+
+msgid "Ping-pong loop"
+msgstr "Ping Pong Loop"
+
+msgid "Onion Skinning:"
+msgstr "Onion Skinning:"
+
+msgid "Past Frames"
+msgstr "Letzten Frames"
+
+msgid "Future Frames"
+msgstr "Nächsten Frames"
+
+msgid "Blue-Red Mode"
+msgstr "Blau-Roter Modus"
+
+msgid "Add a new frame"
+msgstr "Füge einen neuen Frame hinzu"
+
+msgid "Remove Frame"
+msgstr "Entferne Frame"
+
+msgid "Clone Frame"
+msgstr "Kopiere Frame"
+
+msgid "Move Left"
+msgstr "Bewege nach Links"
+
+msgid "Move Right"
+msgstr "Bewege nach Rechts"
+
+msgid "Layers"
+msgstr "Ebenen"
+
+msgid "LAYERNEW_HT"
+msgstr "Erstelle eine neue Ebene"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Entferne aktuelle Ebene"
+
+msgid "LAYERUP_HT"
+msgstr "Bewege aktuelle Ebene nach oben"
+
+msgid "LAYERDOWN_HT"
+msgstr "Bewege aktuelle Ebene nach unten"
+
+msgid "LAYERCLONE_HT"
+msgstr "Kopiere aktuelle Ebene"
+
+msgid "LAYERMERGE_HT"
+msgstr "Führe Ebene mit der darunter zusammen"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Ändere die Sichtbarkeit der Ebene"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Geteilter Bildschirm\n\nZeige zweite Leinwand"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Geteilter Bildschirm\n\nVerstecke zweite Leinwand"
+
+msgid "Undo: Draw"
+msgstr "Rückgängig: Zeichen"
+
+msgid "Redo: Draw"
+msgstr "Wiederherstellen: Zeichnen"
+
+msgid "Undo: Rectangle Select"
+msgstr "Rückgängig: Rechteck Auswahl"
+
+msgid "Redo: Rectangle Select"
+msgstr "Wiederherstellen: Rechteck Auswahl"
+
+msgid "Undo: Scale"
+msgstr "Rückgängig: Skalieren"
+
+msgid "Redo: Scale"
+msgstr "Wiederherstellen: Skalieren"
+
+msgid "Undo: Add Layer"
+msgstr "Rückgängig: Ebene hinzufügen"
+
+msgid "Redo: Add Layer"
+msgstr "Wiederherstellen: Ebene hinzufügen"
+
+msgid "Undo: Remove Layer"
+msgstr "Rückgängigg: Entferne Ebene"
+
+msgid "Redo: Remove Layer"
+msgstr "Wiederherstellen: Entferne Ebene"
+
+msgid "Undo: Merge Layer"
+msgstr "Rückgängig: Füge Ebene zusammen"
+
+msgid "Redo: Merge Layer"
+msgstr "Wiederherstellen: Füge Ebene zusammen"
+
+msgid "Undo: Change Layer Order"
+msgstr "Rückgängig: Ändere Ebenenreihenfolge"
+
+msgid "Redo: Change Layer Order"
+msgstr "Wiederherstellen: Ändere Ebenenreihenfolge"
+
+msgid "Undo: Add Frame"
+msgstr "Rückgängig: Füge Frame hinzu"
+
+msgid "Redo: Add Frame"
+msgstr "Wiederherstellen: Füge Frame hinzu"
+
+msgid "Undo: Remove Frame"
+msgstr "Rückgängig: Entferne Frame"
+
+msgid "Redo: Remove Frame"
+msgstr "Wiederherstellen: Entferne Frame"
+
+msgid "Undo: Change Frame Order"
+msgstr "Rückgängig: Ändere Framereihenfolge"
+
+msgid "Redo: Change Frame Order"
+msgstr "Wiederherstellen: Ändere Framereihenfolge"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Rückgängig: Entferne benutzerdefinierten Pinsel"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Wiederherstellen: Entferne benutzerdefinierten Pinsel"
+
+msgid "Move Guide"
+msgstr "Bewegungsanleitung"
+
+msgid "File saved"
+msgstr "Datei gespeichert"
+
+msgid "File exported"
+msgstr "Datei exportiert"
+

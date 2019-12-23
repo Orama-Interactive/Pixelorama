@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: JunYouIntrovert\n"
+"Language-Team: none\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Open"
+msgstr "打開"
+
+msgid "Please Confirm..."
+msgstr "確認..."
+
+msgid "Image Size"
+msgstr "圖片尺寸"
+
+msgid "Width:"
+msgstr "寬:"
+
+msgid "Height:"
+msgstr "高:"
+
+msgid "File"
+msgstr "檔案"
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "View"
+msgstr "檢視"
+
+msgid "Help"
+msgstr "幫助"
+
+msgid "New..."
+msgstr "開新檔案"
+
+msgid "Open..."
+msgstr "打開舊檔"
+
+msgid "Save..."
+msgstr "儲存"
+
+msgid "Save as..."
+msgstr "儲存為"
+
+msgid "Import PNG..."
+msgstr "匯入PNG檔"
+
+msgid "Export PNG..."
+msgstr "輸出PNG檔"
+
+msgid "Export PNG as..."
+msgstr "輸出PNG為..."
+
+msgid "Quit"
+msgstr "離開"
+
+msgid "Undo"
+msgstr "取消"
+
+msgid "Redo"
+msgstr "復原"
+
+msgid "Scale Image"
+msgstr "調整尺寸"
+
+msgid "Crop Image"
+msgstr "擷取部分圖片"
+
+msgid "Clear Selection"
+msgstr "清除選取區塊"
+
+msgid "Flip Horizontal"
+msgstr "水平翻轉"
+
+msgid "Flip Vertical"
+msgstr "垂直翻轉"
+
+msgid "Preferences"
+msgstr "偏好設定"
+
+msgid "Tile Mode"
+msgstr "拼圖模式"
+
+msgid "Show Grid"
+msgstr "顯示格線"
+
+msgid "Show Rulers"
+msgstr "顯示尺規"
+
+msgid "Show Guides"
+msgstr "顯示輔助線"
+
+msgid "Fill with color:"
+msgstr "填滿"
+
+msgid "Open a File"
+msgstr "打開舊檔"
+
+msgid "Open File(s)"
+msgstr "打開舊檔"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "輸入為下一張"
+
+msgid "Save Sprite as .pxo"
+msgstr "存成 .pxo"
+
+msgid "Export Sprite"
+msgstr "輸出圖片"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "個別輸出"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "輸出成一張spritesheet"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "垂直spritesheet"
+
+msgid "Path:"
+msgstr "路徑:"
+
+msgid "Directories & Files:"
+msgstr "資料夾與檔案:"
+
+msgid "File:"
+msgstr "檔案:"
+
+msgid "Interpolation:"
+msgstr "插值:"
+
+msgid "Nearest"
+msgstr "最近"
+
+msgid "Bilinear"
+msgstr "雙線性"
+
+msgid "Cubic"
+msgstr "三次樣條"
+
+msgid "Trilinear"
+msgstr "三線性"
+
+msgid "Grid options"
+msgstr "格線設定"
+
+msgid "Color:"
+msgstr "顏色:"
+
+msgid "Language:"
+msgstr "語言:"
+
+msgid "System Language"
+msgstr "系統語言"
+
+msgid "About Pixelorama"
+msgstr "關於 Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "免費開源圖像編輯軟體!\n由Orama Interactive開發\n"
+
+msgid "Website"
+msgstr "官網"
+
+msgid "Donate"
+msgstr "捐款"
+
+msgid "QUIT_LABEL"
+msgstr "確定要離開Pixelorama嗎?"
+
+msgid "Utility Tools"
+msgstr "其他工具"
+
+msgid "RECTSELECT_HT"
+msgstr "長方形選取\n\nR換成左鍵\nAlt + R換成右鍵\n\n按住Shift移動內容"
+
+msgid "COLORPICKER_HT"
+msgstr "撿色器\n取得圖片中某個像素的顏色\n\nO換成左鍵\nAlt + O換成右鍵"
+
+msgid "Draw Tools"
+msgstr "繪製工具"
+
+msgid "PENCIL_HT"
+msgstr "鉛筆\n\nP換成左鍵\nAlt + P換成右鍵\n\n按住Shift畫直線"
+
+msgid "ERASER_HT"
+msgstr "橡皮擦\n\nE換成左鍵\nAlt + E換成右鍵\n\n按住Shift畫直線"
+
+msgid "BUCKET_HT"
+msgstr "油漆桶\n\nB換成左鍵\nAlt + B換成右鍵"
+
+msgid "LD_HT"
+msgstr "變亮/變暗\n\nU換成左鍵\nAlt + U換成右鍵"
+
+msgid "LEFTCOLOR_HT"
+msgstr "選擇左鍵工具顏色"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "選擇右鍵工具顏色"
+
+msgid "COLORSWITCH_HT"
+msgstr "左右工具顏色互換\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "顏色改回初始值(左黑色, 右白色)"
+
+msgid "Raw Mode"
+msgstr "Raw 模式"
+
+msgid "Left tool options"
+msgstr "左鍵工具選項"
+
+msgid "Right tool options"
+msgstr "右鍵工具選項"
+
+msgid "Left pixel indicator"
+msgstr "左鍵工具準心"
+
+msgid "LEFT_INDIC_HT"
+msgstr "在畫布上顯示左鍵工具"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "在畫布上顯示右鍵工具"
+
+msgid "Right pixel indicator"
+msgstr "右鍵工具準心"
+
+msgid "Brush:"
+msgstr "畫筆"
+
+msgid "BRUSH_HT"
+msgstr "選擇畫筆"
+
+msgid "Brush: Pixel"
+msgstr "畫筆: 像素"
+
+msgid "Custom brush"
+msgstr "自訂畫筆"
+
+msgid "Brush size:"
+msgstr "畫筆大小:"
+
+msgid "Brush color from"
+msgstr "畫筆顏色"
+
+msgid "COLORFROM_HT"
+msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
+
+msgid "Fill area:"
+msgstr "填滿:"
+
+msgid "Area of the same color"
+msgstr "同顏色的區塊"
+
+msgid "All pixels of the same color"
+msgstr "同顏色的像素"
+
+msgid "Lighten"
+msgstr "變亮"
+
+msgid "Darken"
+msgstr "變暗"
+
+msgid "Amount:"
+msgstr "程度:"
+
+msgid "LDAMOUNT_HT"
+msgstr "變亮或變暗的程度"
+
+msgid "Mirroring"
+msgstr "鏡像"
+
+msgid "Horizontal"
+msgstr "水平"
+
+msgid "HORIZMIRROR_HT"
+msgstr "開啟水平鏡像"
+
+msgid "VERTMIRROR_HT"
+msgstr "開啟垂直鏡像"
+
+msgid "Vertical"
+msgstr "垂直"
+
+msgid "Current frame:"
+msgstr "目前畫面:"
+
+msgid "Current frame: 1/1"
+msgstr "目前畫面: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "跳到第一張\n(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "到前一張\n(Ctrl+Left)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "倒著播動畫\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "播動畫\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "到後一張\n(Ctrl+Right)"
+
+msgid "LASTFRAME_HT"
+msgstr "跳到最後一張\n(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr "動畫預覽每秒要多少張?\nFPS越高, 動畫播得越快"
+
+msgid "No loop"
+msgstr "不重複"
+
+msgid "Cycle loop"
+msgstr "輪迴重複"
+
+msgid "Ping-pong loop"
+msgstr "乒乓重複"
+
+msgid "Onion Skinning:"
+msgstr "洋蔥皮:"
+
+msgid "Past Frames"
+msgstr "過去畫面"
+
+msgid "Future Frames"
+msgstr "未來畫面"
+
+msgid "Blue-Red Mode"
+msgstr "藍紅模式"
+
+msgid "Add a new frame"
+msgstr "新增畫面"
+
+msgid "Remove Frame"
+msgstr "刪除畫面"
+
+msgid "Clone Frame"
+msgstr "複製畫面"
+
+msgid "Move Left"
+msgstr "左移"
+
+msgid "Move Right"
+msgstr "右移"
+
+msgid "Layers"
+msgstr "圖層"
+
+msgid "LAYERNEW_HT"
+msgstr "新增圖層"
+
+msgid "LAYERREMOVE_HT"
+msgstr "刪除此圖層"
+
+msgid "LAYERUP_HT"
+msgstr "上移此圖層"
+
+msgid "LAYERDOWN_HT"
+msgstr "下移此圖層"
+
+msgid "LAYERCLONE_HT"
+msgstr "複製此圖層"
+
+msgid "LAYERMERGE_HT"
+msgstr "合併此圖層與下面的圖層"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "開關圖層可視"
+
+msgid "SPLITSCREEN_HT"
+msgstr "分裂畫面\n\n顯示兩張畫布"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "分裂畫面\n\n顯示一張畫布"
+
+msgid "Undo: Draw"
+msgstr "取消 上一筆"
+
+msgid "Redo: Draw"
+msgstr "復原 上一筆"
+
+msgid "Undo: Rectangle Select"
+msgstr "取消 長方形選取"
+
+msgid "Redo: Rectangle Select"
+msgstr "復原 長方形選取"
+
+msgid "Undo: Scale"
+msgstr "取消 尺寸調整"
+
+msgid "Redo: Scale"
+msgstr "復原 尺寸調整"
+
+msgid "Undo: Add Layer"
+msgstr "取消 新增圖層"
+
+msgid "Redo: Add Layer"
+msgstr "復原 新增圖層"
+
+msgid "Undo: Remove Layer"
+msgstr "取消 刪除圖層"
+
+msgid "Redo: Remove Layer"
+msgstr "復原 刪除圖層"
+
+msgid "Undo: Merge Layer"
+msgstr "取消 合併圖層"
+
+msgid "Redo: Merge Layer"
+msgstr "復原 合併圖層"
+
+msgid "Undo: Change Layer Order"
+msgstr "取消 改變圖層順序"
+
+msgid "Redo: Change Layer Order"
+msgstr "復原 改變圖層順序"
+
+msgid "Undo: Add Frame"
+msgstr "取消 新增畫面"
+
+msgid "Redo: Add Frame"
+msgstr "復原 新增畫面"
+
+msgid "Undo: Remove Frame"
+msgstr "取消 刪除畫面"
+
+msgid "Redo: Remove Frame"
+msgstr "復原 刪除畫面"
+
+msgid "Undo: Change Frame Order"
+msgstr "取消 改變畫面順序"
+
+msgid "Redo: Change Frame Order"
+msgstr "復原 改變畫面順序"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "取消 刪除自訂畫筆"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "復原 刪除自訂畫筆"
+
+msgid "Move Guide"
+msgstr "移動輔助線"
+
+msgid "File saved"
+msgstr "檔案已儲存"
+
+msgid "File exported"
+msgstr "檔案已輸出"
+

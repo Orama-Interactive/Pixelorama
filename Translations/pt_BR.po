@@ -1,0 +1,463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: YeldhamDev\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Please Confirm..."
+msgstr "Por Favor Confirme..."
+
+msgid "Image Size"
+msgstr "Tamanho da Imagem"
+
+msgid "Width:"
+msgstr "Largura:"
+
+msgid "Height:"
+msgstr "Altura:"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "View"
+msgstr "Ver"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "New..."
+msgstr "Novo..."
+
+msgid "Open..."
+msgstr "Abrir..."
+
+msgid "Save..."
+msgstr "Salvar..."
+
+msgid "Save as..."
+msgstr "Salvar como..."
+
+msgid "Import PNG..."
+msgstr "Importar PNG..."
+
+msgid "Export PNG..."
+msgstr "Exportar PNG..."
+
+msgid "Export PNG as..."
+msgstr "Exportar PNG como..."
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid "Undo"
+msgstr "Desfazer"
+
+msgid "Redo"
+msgstr "Refazer"
+
+msgid "Scale Image"
+msgstr "Redimensionar Imagem"
+
+msgid "Crop Image"
+msgstr "Cortar Imagem"
+
+msgid "Clear Selection"
+msgstr "Limpar Seleção"
+
+msgid "Flip Horizontal"
+msgstr "Virar Horizontalmente"
+
+msgid "Flip Vertical"
+msgstr "Virar Verticalmente"
+
+msgid "Preferences"
+msgstr "Preferências"
+
+msgid "Tile Mode"
+msgstr "Mode de Tile"
+
+msgid "Show Grid"
+msgstr "Mostrar Grade"
+
+msgid "Show Rulers"
+msgstr "Mostrar Réguas"
+
+msgid "Show Guides"
+msgstr "Mostrar Guias"
+
+msgid "Fill with color:"
+msgstr "Preencher com cor:"
+
+msgid "Open a File"
+msgstr "Abrir um Arquivo..."
+
+msgid "Open File(s)"
+msgstr "Abrir Arquivo(s)..."
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Importar como um novo quadro"
+
+msgid "Save Sprite as .pxo"
+msgstr "Salvar Sprite como .pxo"
+
+msgid "Export Sprite"
+msgstr "Exportar Sprite"
+
+msgid "EXPORT_ALLFRAMES_LABEL"
+msgstr "Exportar todos os quadros"
+
+msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgstr "Exportar quadros em um só arquivo"
+
+msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgstr "Folha de sprites vertical"
+
+msgid "Path:"
+msgstr "Caminho:"
+
+msgid "Directories & Files:"
+msgstr "Diretórios e Arquivos:"
+
+msgid "File:"
+msgstr "Arquivo:"
+
+msgid "Interpolation:"
+msgstr "Interpolação:"
+
+msgid "Nearest"
+msgstr "Próximo"
+
+msgid "Bilinear"
+msgstr "Bilinear"
+
+msgid "Cubic"
+msgstr "Cúbico"
+
+msgid "Trilinear"
+msgstr "Trilinear"
+
+msgid "Grid options"
+msgstr "Opções da grade"
+
+msgid "Color:"
+msgstr "Cor:"
+
+msgid "Language:"
+msgstr "Linguagem:"
+
+msgid "System Language"
+msgstr "Linguagem do Sistema"
+
+msgid "About Pixelorama"
+msgstr "Sobre Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "Seu Editor de Sprites Livre e de Código Aberto!\nDesenvolvido por Orama Interactive\n"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Donate"
+msgstr "Doar"
+
+msgid "QUIT_LABEL"
+msgstr "Tem certeza que quer sair do Pixelorama?"
+
+msgid "Utility Tools"
+msgstr "Ferramentas Utilitárias"
+
+msgid "RECTSELECT_HT"
+msgstr "Seleção Retangular\n\nR para o botão esquerdo do mouse\nAlt + R para o botão direito do mouse\n\nPressione Shift para mover o conteúdo"
+
+msgid "COLORPICKER_HT"
+msgstr "Seleção de Cores\nSelecione a cor de um pixel do sprite\n\nO para o botão esquerdo do mouse\nAlt + O para o botão direito do mouse"
+
+msgid "Draw Tools"
+msgstr "Ferramentas de Desenho"
+
+msgid "PENCIL_HT"
+msgstr "Lápis\n\nP para o botão esquerdo do mouse\n\nAlt + P para o botão direito do mouse\n\nSegure Shift para desenhar uma linha"
+
+msgid "ERASER_HT"
+msgstr "Borracha\n\nE para o botão esquerdo do mouse\n\nAlt + E para o botão direito do mouse\n\nSegure Shift para desenhar uma linha"
+
+msgid "BUCKET_HT"
+msgstr "Preenchimento\n\nB para o botão esquerdo do mouse\n\nAlt + B para o botão direito do mouse"
+
+msgid "LD_HT"
+msgstr "Iluminar/Escurecer\n\nU para o botão esquerdo do mouse\n\nAlt + U para o botão direito do mouse"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Escolha uma cor para a ferramenta esquerda"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Escolha uma cor para a ferramenta direita"
+
+msgid "COLORSWITCH_HT"
+msgstr "Mudar as cores esquerda e direita\n(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "Redefina as cores para o seu estado padrão (preto para a esquerda, branco para a direita)"
+
+msgid "Raw Mode"
+msgstr "Modo Bruto"
+
+msgid "Left tool options"
+msgstr "Opções da ferramenta esquerda"
+
+msgid "Right tool options"
+msgstr "Opções da ferramente direita"
+
+msgid "Left pixel indicator"
+msgstr "Pixel indicador esquerdo"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Mostrar o indicador pixel do mouse esquerdo ou o pincel na tela quando desenhando"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Mostrar o indicador pixel do mouse direito ou o pincel na tela quando desenhando"
+
+msgid "Right pixel indicator"
+msgstr "Pixel indicador direito"
+
+msgid "Brush:"
+msgstr "Pincel:"
+
+msgid "BRUSH_HT"
+msgstr "Selecione um pincel"
+
+msgid "Brush: Pixel"
+msgstr "Pincel: Pixel"
+
+msgid "Custom brush"
+msgstr "Pincel customizado"
+
+msgid "Brush size:"
+msgstr "Tamanho do pincel:"
+
+msgid "Brush color from"
+msgstr "Cor de pincel do"
+
+msgid "COLORFROM_HT"
+msgstr "0: Cor do próprio pincel, 100: A cor atualmente selecionada"
+
+msgid "Fill area:"
+msgstr "Área de preenchimento:"
+
+msgid "Area of the same color"
+msgstr "Área da mesma cor"
+
+msgid "All pixels of the same color"
+msgstr "Todos os pixels da mesma cor"
+
+msgid "Lighten"
+msgstr "Iluminar"
+
+msgid "Darken"
+msgstr "Escurecer"
+
+msgid "Amount:"
+msgstr "Quantidade:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Quantidade de iluminação/escurecimento:"
+
+msgid "Mirroring"
+msgstr "Espelhamento"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Ativar desenho com espelhamento horizontal"
+
+msgid "VERTMIRROR_HT"
+msgstr "Ativar desenho com espelhamento vertical"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Current frame:"
+msgstr "Quadro atual:"
+
+msgid "Current frame: 1/1"
+msgstr "Quadro atual: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "Pular para o primeiro quadro\n(Ctrl + Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "Ir para o quadro anterior\n(Ctrl + Left)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "Toque a animação de trás pra frente (do fim até o começo)\n(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "Toque a animação de frente pra trás (do começo até o fim)\n(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "Ir para o proxímo quadro\n(Ctrl + Right)"
+
+msgid "LASTFRAME_HT"
+msgstr "Pular para o último quadro\n(Ctrl + End)"
+
+msgid "FPS_HT"
+msgstr "Quantos quadros por segundo a animação deverá tocar? Quanto mais FPS (quadros por segundo), mais rápido a animação tocará"
+
+msgid "No loop"
+msgstr "Sem loop"
+
+msgid "Cycle loop"
+msgstr "Loop cíclico"
+
+msgid "Ping-pong loop"
+msgstr "Loop vai-e-vem"
+
+msgid "Onion Skinning:"
+msgstr "Papel Vegetal:"
+
+msgid "Past Frames"
+msgstr "Quadros Anteriores"
+
+msgid "Future Frames"
+msgstr "Quadro Sucessores"
+
+msgid "Blue-Red Mode"
+msgstr "Modo Azul-Vermelho"
+
+msgid "Add a new frame"
+msgstr "Adicionar um novo quadro"
+
+msgid "Remove Frame"
+msgstr "Remover quadro"
+
+msgid "Clone Frame"
+msgstr "Clonar quadro"
+
+msgid "Move Left"
+msgstr "Mover para a Esquerda"
+
+msgid "Move Right"
+msgstr "Mover para a Direita"
+
+msgid "Layers"
+msgstr "Camadas"
+
+msgid "LAYERNEW_HT"
+msgstr "Criar nova camada"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Remover camada atual"
+
+msgid "LAYERUP_HT"
+msgstr "Mover para a cima a camada atual"
+
+msgid "LAYERDOWN_HT"
+msgstr "Mover para baixo a camada atual"
+
+msgid "LAYERCLONE_HT"
+msgstr "Clonar camada atual"
+
+msgid "LAYERMERGE_HT"
+msgstr "Combinar camada atual com a de baixo"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Mudar visibilidade da camada"
+
+msgid "SPLITSCREEN_HT"
+msgstr "Tela dividida\n\nMostrar tela secundária"
+
+msgid "SPLITSCREEN_HIDE_HT"
+msgstr "Tela dividida\n\nEsconder tela secundária"
+
+msgid "Undo: Draw"
+msgstr "Desfazer: Desenhar"
+
+msgid "Redo: Draw"
+msgstr "Refazer: Desenhar"
+
+msgid "Undo: Rectangle Select"
+msgstr "Desfazer: Seleção Retangular"
+
+msgid "Redo: Rectangle Select"
+msgstr "Refazer: Seleção Retangular"
+
+msgid "Undo: Scale"
+msgstr "Desfazer: Redimensionar"
+
+msgid "Redo: Scale"
+msgstr "Refazer: Redimensionar"
+
+msgid "Undo: Add Layer"
+msgstr "Desfazer: Adicionar Camada"
+
+msgid "Redo: Add Layer"
+msgstr "Refazer: Adicionar Camada"
+
+msgid "Undo: Remove Layer"
+msgstr "Desfazer: Remover Camada"
+
+msgid "Redo: Remove Layer"
+msgstr "Refazer: Remover Camada"
+
+msgid "Undo: Merge Layer"
+msgstr "Desfazer: Combinar Camada"
+
+msgid "Redo: Merge Layer"
+msgstr "Refazer: Combinar Camada"
+
+msgid "Undo: Change Layer Order"
+msgstr "Desfazer: Mudar Ordem das Camadas"
+
+msgid "Redo: Change Layer Order"
+msgstr "Refazer: Mudar Ordem das Camadas"
+
+msgid "Undo: Add Frame"
+msgstr "Desfazer: Adicionar Quadro"
+
+msgid "Redo: Add Frame"
+msgstr "Refazer: Adicionar Quadro"
+
+msgid "Undo: Remove Frame"
+msgstr "Desfazer: Remover Quadro"
+
+msgid "Redo: Remove Frame"
+msgstr "Refazer: Remover Quadro"
+
+msgid "Undo: Change Frame Order"
+msgstr "Desfazer: Mudar Ordem dos Quadros"
+
+msgid "Redo: Change Frame Order"
+msgstr "Refazer: Mudar Ordem dos Quadros"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Desfazer: Deletar Pincel Customizado"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Refazer: Deletar Pincel Customizado"
+
+msgid "Move Guide"
+msgstr "Mover Guia"
+
+msgid "File saved"
+msgstr "Arquivo salvo"
+
+msgid "File exported"
+msgstr "Arquivo exportado"
+
