@@ -72,6 +72,7 @@ func _ready() -> void:
 		"Show Guides" : KEY_MASK_CMD + KEY_F
 		}
 	var image_menu_items := {
+		"Invert Colors" : 0,
 		"Outline" : 0
 		}
 	var help_menu_items := {
@@ -339,7 +340,17 @@ func view_menu_id_pressed(id : int) -> void:
 
 func image_menu_id_pressed(id : int) -> void:
 	match id:
-		0: # Outline
+		0: # Invert Colors
+			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			Global.canvas.handle_undo("Draw")
+			for xx in image.get_size().x:
+				for yy in image.get_size().y:
+					var px_color = image.get_pixel(xx, yy).inverted()
+					if px_color.a == 0:
+						continue
+					image.set_pixel(xx, yy, px_color)
+			Global.canvas.handle_redo("Draw")
+		1: # Outline
 			$OutlineDialog.popup_centered()
 
 func help_menu_id_pressed(id : int) -> void:
