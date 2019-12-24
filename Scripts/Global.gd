@@ -189,7 +189,7 @@ var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
 
-var add_palette_button : MenuButton
+var add_palette_button : TextureButton
 var remove_palette_button : TextureButton
 var palette_option_button : OptionButton
 var edit_palette_button : BaseButton

@@ -96,7 +96,7 @@ func _ready() -> void:
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	view_menu = Global.view_menu.get_popup()
 	var help_menu : PopupMenu = Global.help_menu.get_popup()
-	var add_palette_menu : PopupMenu = Global.add_palette_button.get_popup()
+	var add_palette_menu : PopupMenu = Global.add_palette_button.get_child(0)
 
 	var i = 0
 	for item in file_menu_items.keys():
@@ -1027,15 +1027,18 @@ func _on_QuitDialog_confirmed() -> void:
 
 	get_tree().quit()
 
+func _on_AddPalette_pressed():
+	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
+
+func _on_RemovePalette_pressed() -> void:
+	Global.palette_container.remove_current_palette()
+
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	Global.palette_container.on_palette_select(palette_name)
 
 func _on_EditPalette_pressed() -> void:
 	Global.palette_container.on_edit_palette()
-
-func _on_RemovePalette_pressed() -> void:
-	Global.palette_container.remove_current_palette()
 
 func add_palette_menu_id_pressed(id) -> void:
 	match id:
@@ -1049,3 +1052,4 @@ func _on_NewPaletteDialog_confirmed() -> void:
 
 func _on_PaletteImportFileDialog_file_selected(path) -> void:
 	Global.palette_container.on_palette_import_file_selected(path)
+

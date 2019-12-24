@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -36,34 +36,35 @@
 [ext_resource path="res://Scripts/TimelineSeconds.gd" type="Script" id=34]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame_Hover.png" type="Texture" id=36]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=37]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette_Hover.png" type="Texture" id=38]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=39]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Hover.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Disabled.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=43]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=44]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=45]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=46]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=47]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=48]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=49]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=50]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=51]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=52]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette.png" type="Texture" id=53]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette.png" type="Texture" id=54]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette_Hover.png" type="Texture" id=55]
-[ext_resource path="res://Scripts/Palette/PaletteContainer.gd" type="Script" id=56]
-[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=57]
-[ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=58]
-[ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=59]
-[ext_resource path="res://Prefabs/PreferencesDialog.tscn" type="PackedScene" id=60]
-[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=61]
-[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=62]
-[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=63]
-[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=64]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette_Hover.png" type="Texture" id=43]
+[ext_resource path="res://Scripts/Palette/PaletteContainer.gd" type="Script" id=44]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=50]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=51]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=52]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=53]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=54]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=55]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=56]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=57]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=58]
+[ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=59]
+[ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=60]
+[ext_resource path="res://Prefabs/PreferencesDialog.tscn" type="PackedScene" id=61]
+[ext_resource path="res://Scripts/AboutDialog.gd" type="Script" id=62]
+[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=63]
+[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=64]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=65]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -226,6 +227,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -1207,13 +1209,13 @@ margin_top = 168.0
 margin_right = 224.0
 margin_bottom = 172.0
 
-[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="PalettesLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_top = 176.0
 margin_right = 224.0
 margin_bottom = 191.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Layers"
+text = "Palettes"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
@@ -1221,15 +1223,112 @@ margin_top = 195.0
 margin_right = 224.0
 margin_bottom = 199.0
 
-[node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 editor/display_folded = true
 margin_top = 203.0
 margin_right = 224.0
 margin_bottom = 384.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer"]
+margin_left = 6.0
+margin_right = 217.0
+margin_bottom = 32.0
+
+[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture_normal = ExtResource( 37 )
+texture_hover = ExtResource( 38 )
+
+[node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
+margin_right = 12.0
+margin_bottom = 20.0
+items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
+
+[node name="RemovePalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 39 )
+texture_hover = ExtResource( 40 )
+texture_disabled = ExtResource( 41 )
+
+[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
+margin_left = 72.0
+margin_right = 175.0
+margin_bottom = 32.0
+grow_horizontal = 0
+rect_min_size = Vector2( 103, 0 )
+clip_text = true
+
+[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+"UIButtons",
+]]
+margin_left = 179.0
+margin_right = 211.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 42 )
+texture_hover = ExtResource( 43 )
+
+[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
+editor/display_folded = true
+margin_top = 36.0
+margin_right = 224.0
+margin_bottom = 181.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette"]
+margin_right = 224.0
+size_flags_horizontal = 3
+
+[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
+margin_left = 112.0
+margin_right = 112.0
+size_flags_horizontal = 3
+columns = 8
+script = ExtResource( 44 )
+
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 388.0
+margin_right = 224.0
+margin_bottom = 392.0
+
+[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 396.0
+margin_right = 224.0
+margin_bottom = 411.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Layers"
+align = 1
+
+[node name="HSeparator4" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 415.0
+margin_right = 224.0
+margin_bottom = 419.0
+
+[node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
+margin_top = 423.0
+margin_right = 224.0
+margin_bottom = 604.0
 size_flags_vertical = 3
 custom_constants/separation = 6
 
 [node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 32.0
 
@@ -1246,8 +1345,8 @@ margin_right = 32.0
 margin_bottom = 32.0
 hint_tooltip = "LAYERNEW_HT"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 37 )
-texture_hover = ExtResource( 38 )
+texture_normal = ExtResource( 45 )
+texture_hover = ExtResource( 46 )
 
 [node name="RemoveLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1271,9 +1370,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERUP_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 42 )
-texture_hover = ExtResource( 43 )
-texture_disabled = ExtResource( 44 )
+texture_normal = ExtResource( 47 )
+texture_hover = ExtResource( 48 )
+texture_disabled = ExtResource( 49 )
 
 [node name="MovwDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1284,9 +1383,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERDOWN_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 45 )
-texture_hover = ExtResource( 46 )
-texture_disabled = ExtResource( 47 )
+texture_normal = ExtResource( 50 )
+texture_hover = ExtResource( 51 )
+texture_disabled = ExtResource( 52 )
 
 [node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1296,8 +1395,8 @@ margin_right = 176.0
 margin_bottom = 32.0
 hint_tooltip = "LAYERCLONE_HT"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 48 )
-texture_hover = ExtResource( 49 )
+texture_normal = ExtResource( 53 )
+texture_hover = ExtResource( 54 )
 
 [node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1308,9 +1407,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERMERGE_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 50 )
-texture_hover = ExtResource( 51 )
-texture_disabled = ExtResource( 52 )
+texture_normal = ExtResource( 55 )
+texture_hover = ExtResource( 56 )
+texture_disabled = ExtResource( 57 )
 
 [node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
 editor/display_folded = true
@@ -1323,95 +1422,6 @@ size_flags_vertical = 3
 [node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/ScrollLayers"]
 margin_right = 224.0
 size_flags_horizontal = 3
-
-[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 388.0
-margin_right = 224.0
-margin_bottom = 392.0
-
-[node name="PaletteLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 396.0
-margin_right = 224.0
-margin_bottom = 411.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-text = "Palette"
-align = 1
-
-[node name="HSeparator4" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 415.0
-margin_right = 224.0
-margin_bottom = 419.0
-
-[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 423.0
-margin_right = 224.0
-margin_bottom = 604.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
-margin_right = 224.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
-
-[node name="AddPalette" type="MenuButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
-
-[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/AddPalette"]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 53 )
-
-[node name="RemovePalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons" groups=[
-"UIButtons",
-]]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 39 )
-texture_hover = ExtResource( 40 )
-texture_disabled = ExtResource( 41 )
-
-[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons"]
-margin_left = 72.0
-margin_right = 188.0
-margin_bottom = 32.0
-grow_horizontal = 0
-size_flags_horizontal = 3
-clip_text = true
-
-[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons" groups=[
-"UIButtons",
-]]
-margin_left = 192.0
-margin_right = 224.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 54 )
-texture_hover = ExtResource( 55 )
-
-[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
-editor/display_folded = true
-margin_left = 112.0
-margin_top = 36.0
-margin_right = 124.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette"]
-margin_right = 12.0
-size_flags_horizontal = 3
-
-[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
-margin_left = 6.0
-margin_right = 6.0
-size_flags_horizontal = 3
-columns = 8
-script = ExtResource( 56 )
 
 [node name="BrushesPopup" type="Popup" parent="."]
 editor/display_folded = true
@@ -1437,7 +1447,7 @@ scroll_horizontal_enabled = false
 [node name="FileBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/File"]
 columns = 5
 
-[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 57 )]
+[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 58 )]
 hint_tooltip = "Pixel brush"
 
 [node name="Project" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
@@ -1466,8 +1476,8 @@ hint_tooltip = "SPLITSCREEN_HT"
 mouse_default_cursor_shape = 2
 size_flags_vertical = 0
 toggle_mode = true
-texture_normal = ExtResource( 58 )
-texture_pressed = ExtResource( 59 )
+texture_normal = ExtResource( 59 )
+texture_pressed = ExtResource( 60 )
 
 [node name="CreateNewImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
@@ -1659,14 +1669,14 @@ text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
 selected = 0
 
-[node name="PreferencesDialog" parent="." instance=ExtResource( 60 )]
+[node name="PreferencesDialog" parent="." instance=ExtResource( 61 )]
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
 editor/display_folded = true
 margin_right = 284.0
 margin_bottom = 186.0
 window_title = "About Pixelorama"
-script = ExtResource( 61 )
+script = ExtResource( 62 )
 
 [node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
 margin_left = 8.0
@@ -1737,12 +1747,12 @@ margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="EditPalettePopup" parent="." instance=ExtResource( 62 )]
+[node name="EditPalettePopup" parent="." instance=ExtResource( 63 )]
 visible = false
 
-[node name="NewPaletteDialog" parent="." instance=ExtResource( 63 )]
+[node name="NewPaletteDialog" parent="." instance=ExtResource( 64 )]
 
-[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 64 )]
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 65 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
@@ -1798,15 +1808,16 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/RemovePalette" to="." method="_on_RemovePalette_pressed"]
+[connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/AddLayer" to="." method="add_layer"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayerButton_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MovwDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/RemovePalette" to="." method="_on_RemovePalette_pressed"]
-[connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/PaletteOptionButton" to="." method="_on_PaletteOptionButton_item_selected"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
