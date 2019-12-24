@@ -1183,6 +1183,7 @@ margin_right = 689.0
 margin_bottom = 138.0
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_left = 928.0
 margin_right = 1152.0
 margin_bottom = 620.0
@@ -1232,12 +1233,10 @@ margin_right = 224.0
 margin_bottom = 199.0
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-editor/display_folded = true
 margin_top = 203.0
 margin_right = 224.0
-margin_bottom = 384.0
+margin_bottom = 355.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
 margin_right = 224.0
@@ -1293,9 +1292,9 @@ texture_hover = ExtResource( 43 )
 editor/display_folded = true
 margin_top = 36.0
 margin_right = 224.0
-margin_bottom = 181.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 0, 116 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette"]
 margin_right = 224.0
@@ -1309,26 +1308,26 @@ columns = 8
 script = ExtResource( 44 )
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 388.0
+margin_top = 359.0
 margin_right = 224.0
-margin_bottom = 392.0
+margin_bottom = 363.0
 
 [node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 396.0
+margin_top = 367.0
 margin_right = 224.0
-margin_bottom = 411.0
+margin_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Layers"
 align = 1
 
 [node name="HSeparator4" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 415.0
+margin_top = 386.0
 margin_right = 224.0
-margin_bottom = 419.0
+margin_bottom = 390.0
 
 [node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 423.0
+margin_top = 394.0
 margin_right = 224.0
 margin_bottom = 604.0
 size_flags_vertical = 3
@@ -1456,7 +1455,7 @@ align = 1
 editor/display_folded = true
 margin_top = 61.0
 margin_right = 224.0
-margin_bottom = 181.0
+margin_bottom = 210.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

@@ -60,11 +60,7 @@ func _ready() -> void:
 	var edit_menu_items := {
 		"Undo" : KEY_MASK_CMD + KEY_Z,
 		"Redo" : KEY_MASK_CMD + KEY_Y,
-		"Scale Image" : 0,
-		"Crop Image" : 0,
 		"Clear Selection" : 0,
-		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
-		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
 		"Preferences" : 0
 		}
 	var view_menu_items := {
@@ -74,7 +70,12 @@ func _ready() -> void:
 		"Show Guides" : KEY_MASK_CMD + KEY_F
 		}
 	var image_menu_items := {
+		"Scale Image" : 0,
+		"Crop Image" : 0,
+		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
+		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
 		"Invert Colors" : 0,
+		"Black & White" : 0,
 		"Outline" : 0
 		}
 	var help_menu_items := {
@@ -257,10 +258,45 @@ func edit_menu_id_pressed(id : int) -> void:
 			redone = true
 			Global.undo_redo.redo()
 			redone = false
-		2: # Scale Image
+		2: # Clear selection
+			Global.canvas.handle_undo("Rectangle Select")
+			Global.selection_rectangle.polygon[0] = Vector2.ZERO
+			Global.selection_rectangle.polygon[1] = Vector2.ZERO
+			Global.selection_rectangle.polygon[2] = Vector2.ZERO
+			Global.selection_rectangle.polygon[3] = Vector2.ZERO
+			Global.selected_pixels.clear()
+			Global.canvas.handle_redo("Rectangle Select")
+		3: # Preferences
+			$PreferencesDialog.popup_centered()
+			Global.can_draw = false
+
+func view_menu_id_pressed(id : int) -> void:
+	match id:
+		0: # Tile mode
+			Global.tile_mode = !Global.tile_mode
+			view_menu.set_item_checked(0, Global.tile_mode)
+		1: # Show grid
+			Global.draw_grid = !Global.draw_grid
+			view_menu.set_item_checked(1, Global.draw_grid)
+		2: # Show rulers
+			Global.show_rulers = !Global.show_rulers
+			view_menu.set_item_checked(2, Global.show_rulers)
+			Global.horizontal_ruler.visible = Global.show_rulers
+			Global.vertical_ruler.visible = Global.show_rulers
+		3: # Show guides
+			Global.show_guides = !Global.show_guides
+			view_menu.set_item_checked(3, Global.show_guides)
+			for canvas in Global.canvases:
+				for guide in canvas.get_children():
+					if guide is Guide:
+						guide.visible = Global.show_guides
+
+func image_menu_id_pressed(id : int) -> void:
+	match id:
+		0: # Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
-		3: # Crop Image
+		1: # Crop Image
 			# Use first layer as a starting rectangle
 			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
 			# However, if first layer is empty, loop through all layers until we find one that isn't
@@ -293,56 +329,21 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 			Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 			Global.undo_redo.commit_action()
-		4: # Clear selection
-			Global.canvas.handle_undo("Rectangle Select")
-			Global.selection_rectangle.polygon[0] = Vector2.ZERO
-			Global.selection_rectangle.polygon[1] = Vector2.ZERO
-			Global.selection_rectangle.polygon[2] = Vector2.ZERO
-			Global.selection_rectangle.polygon[3] = Vector2.ZERO
-			Global.selected_pixels.clear()
-			Global.canvas.handle_redo("Rectangle Select")
-		5: # Flip Horizontal
+		2: # Flip Horizontal
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
 			canvas.layers[canvas.current_layer_index][0].unlock()
 			canvas.layers[canvas.current_layer_index][0].flip_x()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
-		6: # Flip Vertical
+		3: # Flip Vertical
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
 			canvas.layers[canvas.current_layer_index][0].unlock()
 			canvas.layers[canvas.current_layer_index][0].flip_y()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
-		7: # Preferences
-			$PreferencesDialog.popup_centered()
-			Global.can_draw = false
-
-func view_menu_id_pressed(id : int) -> void:
-	match id:
-		0: # Tile mode
-			Global.tile_mode = !Global.tile_mode
-			view_menu.set_item_checked(0, Global.tile_mode)
-		1: # Show grid
-			Global.draw_grid = !Global.draw_grid
-			view_menu.set_item_checked(1, Global.draw_grid)
-		2: # Show rulers
-			Global.show_rulers = !Global.show_rulers
-			view_menu.set_item_checked(2, Global.show_rulers)
-			Global.horizontal_ruler.visible = Global.show_rulers
-			Global.vertical_ruler.visible = Global.show_rulers
-		3: # Show guides
-			Global.show_guides = !Global.show_guides
-			view_menu.set_item_checked(3, Global.show_guides)
-			for canvas in Global.canvases:
-				for guide in canvas.get_children():
-					if guide is Guide:
-						guide.visible = Global.show_guides
-
-func image_menu_id_pressed(id : int) -> void:
-	match id:
-		0: # Invert Colors
+		4: # Invert Colors
 			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
@@ -352,7 +353,19 @@ func image_menu_id_pressed(id : int) -> void:
 						continue
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
-		1: # Outline
+		5: # Black & White
+			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			Global.canvas.handle_undo("Draw")
+			for xx in image.get_size().x:
+				for yy in image.get_size().y:
+					var px_color = image.get_pixel(xx, yy)
+					if px_color.a == 0:
+						continue
+					var gray = image.get_pixel(xx, yy).gray()
+					px_color = Color(gray, gray, gray, px_color.a)
+					image.set_pixel(xx, yy, px_color)
+			Global.canvas.handle_redo("Draw")
+		6: # Outline
 			$OutlineDialog.popup_centered()
 
 func help_menu_id_pressed(id : int) -> void:
