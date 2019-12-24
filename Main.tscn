@@ -158,14 +158,12 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TopMenuContainer" type="Panel" parent="MenuAndUI"]
-editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
-editor/display_folded = true
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 1010.0
@@ -193,9 +191,17 @@ mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
 
-[node name="HelpMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+[node name="ImageMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
 margin_left = 102.0
-margin_right = 135.0
+margin_right = 144.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "Image"
+switch_on_hover = true
+
+[node name="HelpMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+margin_left = 148.0
+margin_right = 181.0
 margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "Help"
@@ -1671,6 +1677,53 @@ selected = 0
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 61 )]
 
+[node name="OutlineDialog" type="ConfirmationDialog" parent="."]
+editor/display_folded = true
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="OptionsContainer" type="GridContainer" parent="OutlineDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -92.0
+margin_top = -36.0
+margin_right = 92.0
+margin_bottom = 5.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 2
+
+[node name="ThickLabel" type="Label" parent="OutlineDialog/OptionsContainer"]
+margin_top = 1.0
+margin_right = 75.0
+margin_bottom = 16.0
+text = "Thickness:"
+
+[node name="ThickValue" type="SpinBox" parent="OutlineDialog/OptionsContainer"]
+margin_left = 79.0
+margin_right = 143.0
+margin_bottom = 17.0
+min_value = 1.0
+max_value = 16384.0
+value = 1.0
+suffix = "px"
+
+[node name="OutlineColorLabel" type="Label" parent="OutlineDialog/OptionsContainer"]
+margin_top = 23.0
+margin_right = 75.0
+margin_bottom = 38.0
+text = "Fill with color:"
+
+[node name="OutlineColor" type="ColorPickerButton" parent="OutlineDialog/OptionsContainer"]
+margin_left = 79.0
+margin_top = 21.0
+margin_right = 143.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 64, 20 )
+color = Color( 1, 0, 0, 1 )
+
 [node name="AboutDialog" type="AcceptDialog" parent="."]
 editor/display_folded = true
 margin_right = 284.0
@@ -1832,6 +1885,8 @@ visible = false
 [connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="OutlineDialog" to="." method="_on_OutlineDialog_confirmed"]
+[connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]

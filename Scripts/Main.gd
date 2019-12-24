@@ -71,6 +71,9 @@ func _ready() -> void:
 		"Show Rulers" : KEY_MASK_CMD + KEY_R,
 		"Show Guides" : KEY_MASK_CMD + KEY_F
 		}
+	var image_menu_items := {
+		"Outline" : 0
+		}
 	var help_menu_items := {
 		"About Pixelorama" : 0
 		}
@@ -95,6 +98,7 @@ func _ready() -> void:
 	var file_menu : PopupMenu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	view_menu = Global.view_menu.get_popup()
+	var image_menu : PopupMenu = Global.image_menu.get_popup()
 	var help_menu : PopupMenu = Global.help_menu.get_popup()
 	var add_palette_menu : PopupMenu = Global.add_palette_button.get_child(0)
 
@@ -114,6 +118,10 @@ func _ready() -> void:
 	view_menu.set_item_checked(3, true) #Show Guides
 	view_menu.hide_on_checkable_item_selection = false
 	i = 0
+	for item in image_menu_items.keys():
+		image_menu.add_item(item, i, image_menu_items[item])
+		i += 1
+	i = 0
 	for item in help_menu_items.keys():
 		help_menu.add_item(item, i, help_menu_items[item])
 		i += 1
@@ -121,11 +129,12 @@ func _ready() -> void:
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 	add_palette_menu.connect("id_pressed", self, "add_palette_menu_id_pressed")
 
 	var root = get_tree().get_root()
-	#Node, left mouse shortcut, right mouse shortcut
+	# Node, left mouse shortcut, right mouse shortcut
 	tools.append([Global.find_node_by_name(root, "Pencil"), "left_pencil_tool", "right_pencil_tool"])
 	tools.append([Global.find_node_by_name(root, "Eraser"), "left_eraser_tool", "right_eraser_tool"])
 	tools.append([Global.find_node_by_name(root, "Bucket"), "left_fill_tool", "right_fill_tool"])
@@ -139,12 +148,12 @@ func _ready() -> void:
 	Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 	Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
-	#Options for Import
+	# Options for Import
 	import_as_new_frame = CheckBox.new()
 	import_as_new_frame.text = tr("IMPORT_FILE_LABEL")
 	$ImportSprites.get_vbox().add_child(import_as_new_frame)
 
-	#Options for Export
+	# Options for Export
 	var export_project_hbox := HBoxContainer.new()
 	export_all_frames = CheckBox.new()
 	export_all_frames.text = tr("EXPORT_ALLFRAMES_LABEL")
@@ -185,84 +194,84 @@ func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
-	if event.is_action_pressed("redo_secondary"): #Shift + Ctrl + Z
+	if event.is_action_pressed("redo_secondary"): # Shift + Ctrl + Z
 		redone = true
 		Global.undo_redo.redo()
 		redone = false
 
 	if Global.has_focus:
-		for t in tools: #Handle tool shortcuts
-			if event.is_action_pressed(t[2]): #Shortcut for right button (with Alt)
+		for t in tools: # Handle tool shortcuts
+			if event.is_action_pressed(t[2]): # Shortcut for right button (with Alt)
 				_on_Tool_pressed(t[0], false, false)
-			elif event.is_action_pressed(t[1]): #Shortcut for left button
+			elif event.is_action_pressed(t[1]): # Shortcut for left button
 				_on_Tool_pressed(t[0], false, true)
 
 func _notification(what : int) -> void:
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: #Handle exit
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 		$QuitDialog.call_deferred("popup_centered")
 		Global.can_draw = false
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:
-		0: #New
+		0: # New
 			$CreateNewImage.popup_centered()
 			Global.can_draw = false
-		1: #Open
+		1: # Open
 			$OpenSprite.popup_centered()
 			Global.can_draw = false
 			opensprite_file_selected = false
-		2: #Save
+		2: # Save
 			if current_save_path == "":
 				$SaveSprite.popup_centered()
 				Global.can_draw = false
 			else:
 				_on_SaveSprite_file_selected(current_save_path)
-		3: #Save as
+		3: # Save as
 			$SaveSprite.popup_centered()
 			Global.can_draw = false
-		4: #Import
+		4: # Import
 			$ImportSprites.popup_centered()
 			Global.can_draw = false
 			opensprite_file_selected = false
-		5: #Export
+		5: # Export
 			if current_export_path == "":
 				$ExportSprites.popup_centered()
 				Global.can_draw = false
 			else:
 				export_project()
-		6: #Export as
+		6: # Export as
 			$ExportSprites.popup_centered()
 			Global.can_draw = false
-		7: #Quit
+		7: # Quit
 			$QuitDialog.popup_centered()
 			Global.can_draw = false
 
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
-		0: #Undo
+		0: # Undo
 			Global.undo_redo.undo()
-		1: #Redo
+		1: # Redo
 			redone = true
 			Global.undo_redo.redo()
 			redone = false
-		2: #Scale Image
+		2: # Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
-		3: #Crop Image
-			#Use first layer as a starting rectangle
+		3: # Crop Image
+			# Use first layer as a starting rectangle
 			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
-			#However, if first layer is empty, loop through all layers until we find one that isn't
+			# However, if first layer is empty, loop through all layers until we find one that isn't
 			var i := 0
 			while(i < Global.canvas.layers.size() - 1 && Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
 				i += 1
 				used_rect = Global.canvas.layers[i][0].get_used_rect()
 
-			#Merge all layers with content
+			# Merge all layers with content
 			for j in range(Global.canvas.layers.size() - 1, i, -1):
 					if Global.canvas.layers[j][0].get_used_rect() != Rect2(0, 0, 0, 0):
 						used_rect = used_rect.merge(Global.canvas.layers[j][0].get_used_rect())
 
-			#If no layer has any content, just return
+			# If no layer has any content, just return
 			if used_rect == Rect2(0, 0, 0, 0):
 				return
 
@@ -271,7 +280,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.undos += 1
 			Global.undo_redo.create_action("Scale")
 			Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
-			#Loop through all the layers to crop them
+			# Loop through all the layers to crop them
 			for j in range(Global.canvas.layers.size() - 1, -1, -1):
 				var sprite : Image = Global.canvas.layers[j][0].get_rect(used_rect)
 				Global.undo_redo.add_do_property(Global.canvas.layers[j][0], "data", sprite.data)
@@ -281,7 +290,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 			Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 			Global.undo_redo.commit_action()
-		4: #Clear selection
+		4: # Clear selection
 			Global.canvas.handle_undo("Rectangle Select")
 			Global.selection_rectangle.polygon[0] = Vector2.ZERO
 			Global.selection_rectangle.polygon[1] = Vector2.ZERO
@@ -303,24 +312,24 @@ func edit_menu_id_pressed(id : int) -> void:
 			canvas.layers[canvas.current_layer_index][0].flip_y()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
-		7: #Preferences
+		7: # Preferences
 			$PreferencesDialog.popup_centered()
 			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
-		0: #Tile mode
+		0: # Tile mode
 			Global.tile_mode = !Global.tile_mode
 			view_menu.set_item_checked(0, Global.tile_mode)
-		1: #Show grid
+		1: # Show grid
 			Global.draw_grid = !Global.draw_grid
 			view_menu.set_item_checked(1, Global.draw_grid)
-		2: #Show rulers
+		2: # Show rulers
 			Global.show_rulers = !Global.show_rulers
 			view_menu.set_item_checked(2, Global.show_rulers)
 			Global.horizontal_ruler.visible = Global.show_rulers
 			Global.vertical_ruler.visible = Global.show_rulers
-		3: #Show guides
+		3: # Show guides
 			Global.show_guides = !Global.show_guides
 			view_menu.set_item_checked(3, Global.show_guides)
 			for canvas in Global.canvases:
@@ -328,9 +337,14 @@ func view_menu_id_pressed(id : int) -> void:
 					if guide is Guide:
 						guide.visible = Global.show_guides
 
+func image_menu_id_pressed(id : int) -> void:
+	match id:
+		0: # Outline
+			$OutlineDialog.popup_centered()
+
 func help_menu_id_pressed(id : int) -> void:
 	match id:
-		0: #About Pixelorama
+		0: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
 
@@ -637,6 +651,52 @@ func _on_ScaleImage_confirmed() -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
+
+func _on_OutlineDialog_confirmed() -> void:
+	var outline_color : Color = $OutlineDialog/OptionsContainer/OutlineColor.color
+	var thickness : int = $OutlineDialog/OptionsContainer/ThickValue.value
+	var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+	if image.is_invisible():
+		return
+	var new_image := Image.new()
+	new_image.copy_from(image)
+	new_image.lock()
+
+	Global.canvas.handle_undo("Draw")
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			var pos = Vector2(xx, yy)
+			var current_pixel := image.get_pixelv(pos)
+			if current_pixel.a == 0:
+				continue
+
+			for i in range(1, thickness + 1):
+				var new_pos : Vector2 = pos + Vector2.LEFT * i
+				if new_pos.x > 0:
+					var new_pixel = image.get_pixelv(new_pos)
+					if new_pixel.a == 0:
+						new_image.set_pixelv(new_pos, outline_color)
+
+				new_pos = pos + Vector2.RIGHT * i
+				if new_pos.x < Global.canvas.size.x - 1:
+					var new_pixel = image.get_pixelv(new_pos)
+					if new_pixel.a == 0:
+						new_image.set_pixelv(new_pos, outline_color)
+
+				new_pos = pos + Vector2.UP * i
+				if yy > 0:
+					var new_pixel = image.get_pixelv(new_pos)
+					if new_pixel.a == 0:
+						new_image.set_pixelv(new_pos, outline_color)
+
+				new_pos = pos + Vector2.DOWN * i
+				if yy < Global.canvas.size.y - 1:
+					var new_pixel = image.get_pixelv(new_pos)
+					if new_pixel.a == 0:
+						new_image.set_pixelv(new_pos, outline_color)
+
+	image.copy_from(new_image)
+	Global.canvas.handle_redo("Draw")
 
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
