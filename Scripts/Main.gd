@@ -1033,11 +1033,9 @@ func _on_PaletteOptionButton_item_selected(ID) -> void:
 
 func _on_EditPalette_pressed() -> void:
 	Global.palette_container.on_edit_palette()
-	pass
 
 func _on_RemovePalette_pressed() -> void:
 	Global.palette_container.remove_current_palette()
-	pass
 
 func add_palette_menu_id_pressed(id) -> void:
 	match id:
@@ -1045,12 +1043,9 @@ func add_palette_menu_id_pressed(id) -> void:
 			Global.palette_container.on_new_empty_palette()
 		1:	# Import Palette
 			Global.palette_container.on_import_palette()
-	pass
 
 func _on_NewPaletteDialog_confirmed() -> void:
 	Global.palette_container.on_new_palette_confirmed()
-	pass
 
 func _on_PaletteImportFileDialog_file_selected(path) -> void:
 	Global.palette_container.on_palette_import_file_selected(path)
-	pass
