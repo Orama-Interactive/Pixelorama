@@ -1,8 +1,10 @@
 extends Reference
-
 class_name PaletteColor
-func get_class(): return "PaletteColor"
-func is_class(name): return name == "PaletteColor" or .is_class(name)
+
+func get_class():
+	return "PaletteColor"
+func is_class(_name):
+	return _name == "PaletteColor" or .is_class(_name)
 
 var color : Color = Color.black setget _set_color
 var data : String = "" setget _set_data
@@ -29,10 +31,10 @@ func toDict() -> Dictionary:
 
 func fromDict(input_dict : Dictionary) -> PaletteColor:
 	var result = get_script().new()
-	
+
 	result.data = input_dict.data
 	result.name = input_dict.name
-	
+
 	return result
 
 func duplicate() -> PaletteColor:

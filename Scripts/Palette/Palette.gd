@@ -1,21 +1,23 @@
 extends Reference
-
 class_name Palette
-func get_class(): return "Palette"
-func is_class(name): return name == "Palette" or .is_class(name)
+
+func get_class():
+	return "Palette"
+func is_class(_name):
+	return _name == "Palette" or .is_class(_name)
 
 var name : String = "Custom_Palette"
 var colors : Array = []
 var comments : String = ""
 var editable : bool = true
 
-func insert_color(index : int, new_color : Color, name : String = "no name") -> void:
+func insert_color(index : int, new_color : Color, _name : String = "no name") -> void:
 	if index < colors.size():
-		var c := PaletteColor.new(new_color, name)
+		var c := PaletteColor.new(new_color, _name)
 		colors.insert(index, c)
 
-func add_color(new_color : Color, name : String = "no name") -> void:
-	var c := PaletteColor.new(new_color, name)
+func add_color(new_color : Color, _name : String = "no name") -> void:
+	var c := PaletteColor.new(new_color, _name)
 
 	colors.push_back(c)
 

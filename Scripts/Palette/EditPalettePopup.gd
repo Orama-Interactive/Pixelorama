@@ -18,7 +18,6 @@ func open(palette : String) -> void:
 		_display_palette()
 
 		self.popup_centered()
-	pass
 
 func _display_palette() -> void:
 	_clear_swatches()
@@ -49,7 +48,6 @@ func on_swatch_select(index : int) -> void:
 	current_swatch = index
 	color_name_edit.text = working_palette.get_color_name(index)
 	color_picker.color = working_palette.get_color(index)
-	pass
 
 func on_move_swatch(from : int, to : int) -> void:
 	working_palette.move_color(from, to)
@@ -61,13 +59,12 @@ func on_move_swatch(from : int, to : int) -> void:
 	for child in palette_grid.get_children():
 		child.index = index
 		index += 1
-	pass
 
 func _on_AddSwatchButton_pressed() -> void:
 	var color = Color.white
 	var new_index : int = working_palette.colors.size()
 	working_palette.add_color(color)
-	
+
 	var new_button = palette_button.instance()
 
 	new_button.color = color
@@ -80,37 +77,30 @@ func _on_AddSwatchButton_pressed() -> void:
 	new_button.connect("pressed", self, "on_swatch_select", [index])
 
 	palette_grid.add_child(new_button)
-	pass # Replace with function body.
 
 func _on_RemoveSwatchButton_pressed() -> void:
 	working_palette.remove_color(current_swatch)
 	palette_grid.remove_child(palette_grid.get_child(current_swatch))
-	pass # Replace with function body.
 
 func _on_EditPaletteSaveButton_pressed() -> void:
 	Global.palettes[current_palette] = working_palette
 	Global.palette_container.on_palette_select(current_palette)
 	Global.palette_container.save_palette(current_palette, working_palette.name + ".json")
 	self.hide()
-	pass # Replace with function body.
 
 func _on_EditPaletteCancelButton_pressed() -> void:
 	self.hide()
-	pass # Replace with function body.
 
 func _on_EditPaletteColorNameLineEdit_text_changed(new_text) -> void:
 	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		working_palette.set_color_name(current_swatch, new_text)
 		_refresh_hint_tooltip(current_swatch)
-	pass
 
 func _on_EditPaletteColorPicker_color_changed(color) -> void:
 	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		palette_grid.get_child(current_swatch).get_child(0).modulate = color
 		working_palette.set_color(current_swatch, color)
 		_refresh_hint_tooltip(current_swatch)
-	pass
 
 func _refresh_hint_tooltip(index : int):
 	palette_grid.get_child(current_swatch).hint_tooltip = "#" + working_palette.get_color_data(current_swatch).to_upper() + " " + working_palette.get_color_name(current_swatch)
-	pass

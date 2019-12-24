@@ -92,7 +92,7 @@ func on_new_palette_confirmed() -> void:
 		Global.error_dialog.set_text(result);
 		Global.error_dialog.popup_centered()
 
-func create_new_palette(name : String, from_palette : Palette) -> String: # Returns empty string, else error string
+func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
 	var new_palette : Palette = Palette.new()
 
 	# Check if new name is valid
@@ -104,8 +104,8 @@ func create_new_palette(name : String, from_palette : Palette) -> String: # Retu
 	new_palette.name = name
 
 	# Check if source palette has data
-	if from_palette:
-		new_palette = from_palette.duplicate()
+	if _from_palette:
+		new_palette = _from_palette.duplicate()
 		new_palette.name = name
 		new_palette.editable = true
 
