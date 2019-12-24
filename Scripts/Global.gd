@@ -189,6 +189,7 @@ var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
+var layer_opacity_slider : HSlider
 
 var add_palette_button : TextureButton
 var remove_palette_button : TextureButton
@@ -285,12 +286,15 @@ func _ready() -> void:
 	play_backwards = find_node_by_name(root, "PlayBackwards")
 	frame_container = find_node_by_name(root, "FrameContainer")
 
-	var layer_buttons = find_node_by_name(root, "LayerButtons")
+	var layer_stuff_container = find_node_by_name(root, "LayerVBoxContainer")
+	var layer_buttons = find_node_by_name(layer_stuff_container, "LayerButtons")
 	remove_layer_button = find_node_by_name(layer_buttons, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(layer_buttons, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(layer_buttons, "MovwDownLayer")
 	merge_down_layer_button = find_node_by_name(layer_buttons, "MergeDownLayer")
-	vbox_layer_container = find_node_by_name(root, "VBoxLayerContainer")
+
+	layer_opacity_slider = find_node_by_name(layer_stuff_container, "OpacitySlider")
+	vbox_layer_container = find_node_by_name(layer_stuff_container, "VBoxLayerContainer")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	remove_palette_button = find_node_by_name(root, "RemovePalette")

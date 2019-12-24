@@ -387,8 +387,10 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		return
 
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
+	var current_version_number = float(current_version.substr(1, 3)) # Example, "0.6"
 	var version := file.get_line()
-	if current_version != version:
+	var version_number = float(version.substr(1, 3)) # Example, "0.6"
+	if current_version_number < 0.5:
 		OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
 	var frame := 0
 	var frame_line := file.get_line()
@@ -403,12 +405,15 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		while layer_line == "-": #Load layers
 			var buffer := file.get_buffer(width * height * 4)
 			var layer_name := file.get_line()
+			var layer_transparency := 1.0
+			if version_number > 0.5:
+				layer_transparency = file.get_float()
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			image.lock()
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
-			canvas.layers.append([image, tex, layer_name, true])
+			canvas.layers.append([image, tex, layer_name, true, layer_transparency])
 			layer_line = file.get_line()
 
 		var guide_line := file.get_line() #"guideline" no pun intended
@@ -475,14 +480,15 @@ func _on_SaveSprite_file_selected(path) -> void:
 	var err := file.open(path, File.WRITE)
 	if err == 0:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
-		for canvas in Global.canvases: #Store frames
+		for canvas in Global.canvases: # Store frames
 			file.store_line("--")
 			file.store_16(canvas.size.x)
 			file.store_16(canvas.size.y)
-			for layer in canvas.layers: #Store layers
+			for layer in canvas.layers: # Store layers
 				file.store_line("-")
 				file.store_buffer(layer[0].get_data())
-				file.store_line(layer[2])
+				file.store_line(layer[2]) # Layer name
+				file.store_float(layer[4]) # Layer transparency
 			file.store_line("END_LAYERS")
 
 			for child in canvas.get_children(): #Store guides
@@ -544,8 +550,8 @@ func _on_ImportSprites_files_selected(paths) -> void:
 		image.lock()
 		var tex := ImageTexture.new()
 		tex.create_from_image(image, 0)
-		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
-		canvas.layers.append([image, tex, "Layer 0", true])
+		#Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
+		canvas.layers.append([image, tex, "Layer 0", true, 1])
 		canvas.frame = i
 		Global.canvases.append(canvas)
 		Global.canvas_parent.add_child(canvas)
@@ -606,7 +612,16 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 	whole_image.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
 	whole_image.lock()
 	for layer in canvas.layers:
-		canvas.blend_rect(whole_image, layer[0], Rect2(canvas.position, canvas.size), Vector2.ZERO)
+		var img : Image = layer[0]
+		img.lock()
+		if layer[4] < 1: # If we have layer transparency
+			for xx in img.get_size().x:
+				for yy in img.get_size().y:
+					var pixel_color := img.get_pixel(xx, yy)
+					var alpha : float = pixel_color.a * layer[4]
+					img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+
+		canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), Vector2.ZERO)
 		layer[0].lock()
 	var err = whole_image.save_png(path)
 	if err != OK:
@@ -635,8 +650,18 @@ func save_spritesheet() -> void:
 	var dst := Vector2.ZERO
 	for canvas in Global.canvases:
 		for layer in canvas.layers:
-			canvas.blend_rect(whole_image, layer[0], Rect2(canvas.position, canvas.size), dst)
+			var img : Image = layer[0]
+			img.lock()
+			if layer[4] < 1: # If we have layer transparency
+				for xx in img.get_size().x:
+					for yy in img.get_size().y:
+						var pixel_color := img.get_pixel(xx, yy)
+						var alpha : float = pixel_color.a * layer[4]
+						img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+
+			canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), dst)
 			layer[0].lock()
+
 		if export_vertical_spritesheet.pressed:
 			dst += Vector2(0, canvas.size.y)
 		else:
@@ -691,7 +716,7 @@ func _on_OutlineDialog_confirmed() -> void:
 						new_image.set_pixelv(new_pos, outline_color)
 
 				new_pos = pos + Vector2.RIGHT * i
-				if new_pos.x < Global.canvas.size.x - 1:
+				if new_pos.x < Global.canvas.size.x:
 					var new_pixel = image.get_pixelv(new_pos)
 					if new_pixel.a == 0:
 						new_image.set_pixelv(new_pos, outline_color)
@@ -703,7 +728,7 @@ func _on_OutlineDialog_confirmed() -> void:
 						new_image.set_pixelv(new_pos, outline_color)
 
 				new_pos = pos + Vector2.DOWN * i
-				if new_pos.y < Global.canvas.size.y - 1:
+				if new_pos.y < Global.canvas.size.y:
 					var new_pixel = image.get_pixelv(new_pos)
 					if new_pixel.a == 0:
 						new_image.set_pixelv(new_pos, outline_color)
@@ -828,7 +853,7 @@ func add_layer(is_new := true) -> void:
 	new_layer_tex.create_from_image(new_layer, 0)
 
 	var new_layers := Global.canvas.layers.duplicate()
-	new_layers.append([new_layer, new_layer_tex, null, true])
+	new_layers.append([new_layer, new_layer_tex, null, true, 1])
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
 	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
@@ -1103,6 +1128,9 @@ func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
 func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
 
+func _on_OpacitySlider_value_changed(value) -> void:
+	Global.canvas.layers[Global.canvas.current_layer_index][4] = value / 100
+
 func _on_QuitDialog_confirmed() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
@@ -1110,7 +1138,7 @@ func _on_QuitDialog_confirmed() -> void:
 
 	get_tree().quit()
 
-func _on_AddPalette_pressed():
+func _on_AddPalette_pressed() -> void:
 	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
 
 func _on_RemovePalette_pressed() -> void:

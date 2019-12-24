@@ -46,7 +46,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				sprite.lock()
 				var tex := ImageTexture.new()
 				tex.create_from_image(sprite, 0)
-				new_canvas.layers.append([sprite, tex, layer[2], layer[3]])
+				new_canvas.layers.append([sprite, tex, layer[2], layer[3], layer[4]])
 
 			Global.undos += 1
 			Global.undo_redo.create_action("Add Frame")

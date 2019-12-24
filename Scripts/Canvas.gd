@@ -36,8 +36,8 @@ func _ready() -> void:
 		var tex := ImageTexture.new()
 		tex.create_from_image(sprite, 0)
 
-		#Store [Image, ImageTexture, Layer Name, Visibity boolean]
-		layers.append([sprite, tex, "Layer 0", true])
+		#Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
+		layers.append([sprite, tex, "Layer 0", true, 1])
 
 	generate_layer_panels()
 
@@ -407,18 +407,19 @@ func _draw() -> void:
 
 	#Draw current frame layers
 	for texture in layers:
+		var modulate_color := Color(1, 1, 1, texture[4])
 		if texture[3]: #if it's visible
-			draw_texture(texture[1], location)
+			draw_texture(texture[1], location, modulate_color)
 
 			if Global.tile_mode:
-				draw_texture(texture[1], Vector2(location.x, location.y + size.y)) #Down
-				draw_texture(texture[1], Vector2(location.x - size.x, location.y + size.y)) #Down Left
-				draw_texture(texture[1], Vector2(location.x - size.x, location.y)) #Left
-				draw_texture(texture[1], location - size) #Up left
-				draw_texture(texture[1], Vector2(location.x, location.y - size.y)) #Up
-				draw_texture(texture[1], Vector2(location.x + size.x, location.y - size.y)) #Up right
-				draw_texture(texture[1], Vector2(location.x + size.x, location.y)) #Right
-				draw_texture(texture[1], location + size) #Down right
+				draw_texture(texture[1], Vector2(location.x, location.y + size.y), modulate_color) #Down
+				draw_texture(texture[1], Vector2(location.x - size.x, location.y + size.y), modulate_color) #Down Left
+				draw_texture(texture[1], Vector2(location.x - size.x, location.y), modulate_color) #Left
+				draw_texture(texture[1], location - size, modulate_color) #Up left
+				draw_texture(texture[1], Vector2(location.x, location.y - size.y), modulate_color) #Up
+				draw_texture(texture[1], Vector2(location.x + size.x, location.y - size.y), modulate_color) #Up right
+				draw_texture(texture[1], Vector2(location.x + size.x, location.y), modulate_color) #Right
+				draw_texture(texture[1], location + size, modulate_color) #Down right
 
 	#Idea taken from flurick (on GitHub)
 	if Global.draw_grid:
@@ -476,7 +477,7 @@ func generate_layer_panels() -> void:
 		layer_container.get_child(1).get_child(0).texture = layers[i][1]
 		layer_container.get_child(1).get_child(1).text = layers[i][2]
 		layer_container.get_child(1).get_child(2).text = layers[i][2]
-		layers[i][3] = true #set visible
+		layers[i][3] = true # Set visible
 		Global.vbox_layer_container.add_child(layer_container)
 
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:

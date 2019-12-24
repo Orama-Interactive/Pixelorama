@@ -43,9 +43,10 @@ func changed_selection() -> void:
 			child.label.visible = true
 			child.line_edit.visible = false
 			child.line_edit.editable = false
-			if Global.canvas.current_layer_index == child.i:
+			if Global.canvas.current_layer_index == child.i: # The selected layer
 				child.currently_selected = true
 				child.pressed = true
+				Global.layer_opacity_slider.value = Global.canvas.layers[child.i][4] * 100
 
 				if Global.canvas.current_layer_index < Global.canvas.layers.size() - 1:
 					Global.move_up_layer_button.disabled = false

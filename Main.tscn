@@ -158,12 +158,14 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TopMenuContainer" type="Panel" parent="MenuAndUI"]
+editor/display_folded = true
 margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
+editor/display_folded = true
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 1010.0
@@ -233,7 +235,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -1326,7 +1327,6 @@ margin_right = 224.0
 margin_bottom = 419.0
 
 [node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-editor/display_folded = true
 margin_top = 423.0
 margin_right = 224.0
 margin_bottom = 604.0
@@ -1417,9 +1417,16 @@ texture_normal = ExtResource( 55 )
 texture_hover = ExtResource( 56 )
 texture_disabled = ExtResource( 57 )
 
+[node name="OpacitySlider" type="HSlider" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+margin_top = 38.0
+margin_right = 224.0
+margin_bottom = 44.0
+value = 100.0
+ticks_on_borders = false
+
 [node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
 editor/display_folded = true
-margin_top = 38.0
+margin_top = 50.0
 margin_right = 224.0
 margin_bottom = 181.0
 size_flags_horizontal = 3
@@ -1688,9 +1695,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -92.0
-margin_top = -36.0
+margin_top = -27.0
 margin_right = 92.0
-margin_bottom = 5.0
+margin_bottom = -4.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
@@ -1871,6 +1878,7 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MovwDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
