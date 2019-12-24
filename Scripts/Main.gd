@@ -672,7 +672,7 @@ func _on_OutlineDialog_confirmed() -> void:
 
 			for i in range(1, thickness + 1):
 				var new_pos : Vector2 = pos + Vector2.LEFT * i
-				if new_pos.x > 0:
+				if new_pos.x >= 0:
 					var new_pixel = image.get_pixelv(new_pos)
 					if new_pixel.a == 0:
 						new_image.set_pixelv(new_pos, outline_color)
@@ -684,13 +684,13 @@ func _on_OutlineDialog_confirmed() -> void:
 						new_image.set_pixelv(new_pos, outline_color)
 
 				new_pos = pos + Vector2.UP * i
-				if yy > 0:
+				if new_pos.y >= 0:
 					var new_pixel = image.get_pixelv(new_pos)
 					if new_pixel.a == 0:
 						new_image.set_pixelv(new_pos, outline_color)
 
 				new_pos = pos + Vector2.DOWN * i
-				if yy < Global.canvas.size.y - 1:
+				if new_pos.y < Global.canvas.size.y - 1:
 					var new_pixel = image.get_pixelv(new_pos)
 					if new_pixel.a == 0:
 						new_image.set_pixelv(new_pos, outline_color)
