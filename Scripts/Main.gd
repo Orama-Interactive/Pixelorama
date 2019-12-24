@@ -13,6 +13,8 @@ var redone := false
 var fps := 6.0
 var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
+var previous_left_color := Color.black
+var previous_right_color := Color.white
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -1046,11 +1048,21 @@ func _on_ColorDefaults_pressed() -> void:
 
 # warning-ignore:unused_argument
 func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
+	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
+	if color.a == 0:
+		if previous_left_color.r != color.r || previous_left_color.g != color.g || previous_left_color.b != color.b:
+			Global.left_color_picker.color.a = 1
 	update_left_custom_brush()
+	previous_left_color = color
 
 # warning-ignore:unused_argument
 func _on_RightColorPickerButton_color_changed(color : Color) -> void:
+	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
+	if color.a == 0:
+		if previous_right_color.r != color.r || previous_right_color.g != color.g || previous_right_color.b != color.b:
+			Global.right_color_picker.color.a = 1
 	update_right_custom_brush()
+	previous_right_color = color
 
 # warning-ignore:unused_argument
 func _on_LeftInterpolateFactor_value_changed(value : float) -> void:
