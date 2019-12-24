@@ -199,7 +199,7 @@ func _input(event : InputEvent) -> void:
 
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: #Handle exit
-		$QuitDialog.popup_centered()
+		$QuitDialog.call_deferred("popup_centered")
 		Global.can_draw = false
 
 func file_menu_id_pressed(id : int) -> void:
