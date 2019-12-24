@@ -1130,6 +1130,8 @@ func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 
 func _on_OpacitySlider_value_changed(value) -> void:
 	Global.canvas.layers[Global.canvas.current_layer_index][4] = value / 100
+	Global.layer_opacity_slider.value = value
+	Global.layer_opacity_spinbox.value = value
 
 func _on_QuitDialog_confirmed() -> void:
 	# Darken the UI to denote that the application is currently exiting

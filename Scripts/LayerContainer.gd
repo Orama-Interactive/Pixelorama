@@ -47,6 +47,7 @@ func changed_selection() -> void:
 				child.currently_selected = true
 				child.pressed = true
 				Global.layer_opacity_slider.value = Global.canvas.layers[child.i][4] * 100
+				Global.layer_opacity_spinbox.value = Global.canvas.layers[child.i][4] * 100
 
 				if Global.canvas.current_layer_index < Global.canvas.layers.size() - 1:
 					Global.move_up_layer_button.disabled = false

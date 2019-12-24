@@ -190,6 +190,7 @@ var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
 var layer_opacity_slider : HSlider
+var layer_opacity_spinbox : SpinBox
 
 var add_palette_button : TextureButton
 var remove_palette_button : TextureButton
@@ -294,6 +295,7 @@ func _ready() -> void:
 	merge_down_layer_button = find_node_by_name(layer_buttons, "MergeDownLayer")
 
 	layer_opacity_slider = find_node_by_name(layer_stuff_container, "OpacitySlider")
+	layer_opacity_spinbox = find_node_by_name(layer_stuff_container, "OpacitySpinBox")
 	vbox_layer_container = find_node_by_name(layer_stuff_container, "VBoxLayerContainer")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
