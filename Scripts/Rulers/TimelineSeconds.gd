@@ -15,6 +15,9 @@ func _process(delta : float) -> void:
 
 #Code taken and modified from Godot's source code
 func _draw() -> void:
+	var color := Color.white
+	if Global.theme_type == "Gold" || Global.theme_type == "Light":
+		color = Color.black
 	var transform := Transform2D()
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
@@ -43,12 +46,12 @@ func _draw() -> void:
 	for i in range(ceil(first.x), last.x):
 		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0))
 		if i % (major_subdivision * minor_subdivision) == 0:
-			draw_line(Vector2(position.x + RULER_WIDTH, 0), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
+			draw_line(Vector2(position.x + RULER_WIDTH, 0), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), color)
 			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0)).x / 100
 			val = stepify(val, 0.01)
-			draw_string(font, Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 6), "%ss" % str(val))
+			draw_string(font, Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 6), "%ss" % str(val), color)
 		else:
 			if i % minor_subdivision == 0:
-				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
+				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), color)
 			else:
-				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
+				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), color)

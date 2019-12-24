@@ -410,8 +410,11 @@ func frame_changed(value : int) -> void:
 	canvas.generate_layer_panels()
 	#Make all frame buttons unpressed
 	for c in canvases:
+		var text_color := Color.white
+		if theme_type == "Gold" || theme_type == "Light":
+			text_color = Color.black
 		c.frame_button.get_node("FrameButton").pressed = false
-		c.frame_button.get_node("FrameID").add_color_override("font_color", Color.white)
+		c.frame_button.get_node("FrameID").add_color_override("font_color", text_color)
 	#Make only the current frame button pressed
 	canvas.frame_button.get_node("FrameButton").pressed = true
 	canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
