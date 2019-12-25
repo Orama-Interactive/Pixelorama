@@ -162,7 +162,9 @@ var project_brush_container : GridContainer
 var left_brush_size_container : Container
 var right_brush_size_container : Container
 var left_brush_size_edit : SpinBox
+var left_brush_size_slider : HSlider
 var right_brush_size_edit : SpinBox
+var right_brush_size_slider : HSlider
 
 var left_color_interpolation_container : Container
 var right_color_interpolation_container : Container
@@ -265,7 +267,9 @@ func _ready() -> void:
 	left_brush_size_container = find_node_by_name(left_tool_options_container, "LeftBrushSize")
 	right_brush_size_container = find_node_by_name(right_tool_options_container, "RightBrushSize")
 	left_brush_size_edit = find_node_by_name(left_brush_size_container, "LeftBrushSizeEdit")
+	left_brush_size_slider = find_node_by_name(left_brush_size_container, "LeftBrushSizeSlider")
 	right_brush_size_edit = find_node_by_name(right_brush_size_container, "RightBrushSizeEdit")
+	right_brush_size_slider = find_node_by_name(right_brush_size_container, "RightBrushSizeSlider")
 
 	left_color_interpolation_container = find_node_by_name(left_tool_options_container, "LeftColorInterpolation")
 	right_color_interpolation_container = find_node_by_name(right_tool_options_container, "RightColorInterpolation")

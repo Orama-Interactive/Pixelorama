@@ -250,7 +250,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -399,7 +398,6 @@ button_mask = 3
 texture_normal = ExtResource( 9 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -541,9 +539,19 @@ margin_right = 58.0
 margin_bottom = 16.0
 text = "Brush size:"
 
-[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize"]
+[node name="LeftBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize"]
 margin_left = 62.0
-margin_right = 116.0
+margin_right = 150.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize"]
+margin_left = 154.0
+margin_right = 208.0
 margin_bottom = 17.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -626,6 +634,7 @@ hint_tooltip = "LDAMOUNT_HT"
 value = 10.0
 
 [node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
+editor/display_folded = true
 margin_top = 96.0
 margin_right = 208.0
 margin_bottom = 131.0
@@ -719,9 +728,19 @@ margin_right = 58.0
 margin_bottom = 16.0
 text = "Brush size:"
 
-[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize"]
+[node name="RightBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize"]
 margin_left = 62.0
-margin_right = 116.0
+margin_right = 150.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize"]
+margin_left = 154.0
+margin_right = 208.0
 margin_bottom = 17.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -1891,6 +1910,7 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize/LeftBrushSizeSlider" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftColorInterpolation/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
@@ -1900,6 +1920,7 @@ visible = false
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize/RightBrushSizeSlider" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightBrushSize/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightColorInterpolation/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]

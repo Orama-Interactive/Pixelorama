@@ -450,9 +450,10 @@ func _draw() -> void:
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
 			elif Global.current_left_brush_type == Global.BRUSH_TYPES.CIRCLE:
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
-					draw_set_transform(mouse_pos, 0, Vector2.ONE)
+					draw_set_transform(mouse_pos, rotation, scale)
 					for rect in Global.left_circle_points:
 						draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
+					draw_set_transform(position, rotation, scale)
 			else:
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
 					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
@@ -467,9 +468,10 @@ func _draw() -> void:
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
 			elif Global.current_right_brush_type == Global.BRUSH_TYPES.CIRCLE:
 				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
-					draw_set_transform(mouse_pos, 0, Vector2.ONE)
+					draw_set_transform(mouse_pos, rotation, scale)
 					for rect in Global.right_circle_points:
 						draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
+					draw_set_transform(position, rotation, scale)
 			else:
 				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
 					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE

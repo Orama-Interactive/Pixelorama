@@ -875,11 +875,15 @@ func _on_RightBrushTypeButton_pressed() -> void:
 	Global.brush_type_window_position = "right"
 
 func _on_LeftBrushSizeEdit_value_changed(value) -> void:
+	Global.left_brush_size_edit.value = value
+	Global.left_brush_size_slider.value = value
 	var new_size = int(value)
 	Global.left_brush_size = new_size
 	update_left_custom_brush()
 
 func _on_RightBrushSizeEdit_value_changed(value) -> void:
+	Global.right_brush_size_edit.value = value
+	Global.right_brush_size_slider.value = value
 	var new_size = int(value)
 	Global.right_brush_size = new_size
 	update_right_custom_brush()
