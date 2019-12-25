@@ -164,8 +164,8 @@ var right_brush_size_edit : SpinBox
 
 var left_color_interpolation_container : Container
 var right_color_interpolation_container : Container
-var left_interpolate_slider : HSlider
-var right_interpolate_slider : HSlider
+var left_interpolate_slider : SpinBox
+var right_interpolate_slider : SpinBox
 
 var left_fill_area_container : Container
 var right_fill_area_container : Container
