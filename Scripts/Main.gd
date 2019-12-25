@@ -798,16 +798,16 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	if (mouse_press && Input.is_action_just_released("left_mouse")) || (!mouse_press && key_for_left):
 		Global.current_left_tool = current_action
 
-		#Start from 2, so the label and the cursor checkbox won't get invisible
+		# Start from 2, so the label and the cursor checkbox won't get invisible
 		for i in range(2, Global.left_tool_options_container.get_child_count()):
 			Global.left_tool_options_container.get_child(i).visible = false
 
-		#Tool options visible depending on the selected tool
+		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type != Global.BRUSH_TYPES.PIXEL:
+			if Global.current_left_brush_type == Global.BRUSH_TYPES.FILE || Global.current_left_brush_type == Global.BRUSH_TYPES.CUSTOM:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
@@ -823,16 +823,16 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 
 	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
 		Global.current_right_tool = current_action
-		#Start from 2, so the label and the cursor checkbox won't get invisible
+		# Start from 2, so the label and the cursor checkbox won't get invisible
 		for i in range(2, Global.right_tool_options_container.get_child_count()):
 			Global.right_tool_options_container.get_child(i).visible = false
 
-		#Tool options visible depending on the selected tool
+		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type != Global.BRUSH_TYPES.PIXEL:
+			if Global.current_right_brush_type == Global.BRUSH_TYPES.FILE || Global.current_right_brush_type == Global.BRUSH_TYPES.CUSTOM:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true
@@ -1137,10 +1137,14 @@ func _on_RightColorPickerButton_color_changed(color : Color) -> void:
 
 # warning-ignore:unused_argument
 func _on_LeftInterpolateFactor_value_changed(value : float) -> void:
+	Global.left_interpolate_spinbox.value = value
+	Global.left_interpolate_slider.value = value
 	update_left_custom_brush()
 
 # warning-ignore:unused_argument
 func _on_RightInterpolateFactor_value_changed(value : float) -> void:
+	Global.right_interpolate_spinbox.value = value
+	Global.right_interpolate_slider.value = value
 	update_right_custom_brush()
 
 func update_left_custom_brush() -> void:
@@ -1158,11 +1162,15 @@ func _on_LeftLightenDarken_item_selected(ID : int) -> void:
 	Global.left_ld = ID
 func _on_LeftLDAmountSpinbox_value_changed(value : float) -> void:
 	Global.left_ld_amount = value / 100
+	Global.left_ld_amount_slider.value = value
+	Global.left_ld_amount_spinbox.value = value
 
 func _on_RightLightenDarken_item_selected(ID : int) -> void:
 	Global.right_ld = ID
 func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
 	Global.right_ld_amount = value / 100
+	Global.right_ld_amount_slider.value = value
+	Global.right_ld_amount_spinbox.value = value
 
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed

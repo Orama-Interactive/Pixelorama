@@ -6,7 +6,7 @@ var loaded_locales : Array
 var undo_redo : UndoRedo
 var undos := 0 #The number of times we added undo properties
 
-#Canvas related stuff
+# Canvas related stuff
 var current_frame := 0 setget frame_changed
 # warning-ignore:unused_class_variable
 var can_draw := false
@@ -30,7 +30,7 @@ var grid_height := 1
 # warning-ignore:unused_class_variable
 var grid_color := Color.black
 
-#Tools & options
+# Tools & options
 # warning-ignore:unused_class_variable
 var current_left_tool := "Pencil"
 # warning-ignore:unused_class_variable
@@ -45,7 +45,7 @@ var left_fill_area := 0
 # warning-ignore:unused_class_variable
 var right_fill_area := 0
 
-#0 for lighten, 1 for darken
+# 0 for lighten, 1 for darken
 # warning-ignore:unused_class_variable
 var left_ld := 0
 # warning-ignore:unused_class_variable
@@ -64,7 +64,7 @@ var right_horizontal_mirror := false
 # warning-ignore:unused_class_variable
 var right_vertical_mirror := false
 
-#View menu options
+# View menu options
 # warning-ignore:unused_class_variable
 var tile_mode := false
 # warning-ignore:unused_class_variable
@@ -74,7 +74,7 @@ var show_rulers := true
 # warning-ignore:unused_class_variable
 var show_guides := true
 
-#Onion skinning options
+# Onion skinning options
 # warning-ignore:unused_class_variable
 var onion_skinning_past_rate := 0
 # warning-ignore:unused_class_variable
@@ -82,7 +82,7 @@ var onion_skinning_future_rate := 0
 # warning-ignore:unused_class_variable
 var onion_skinning_blue_red := false
 
-#Brushes
+# Brushes
 enum BRUSH_TYPES {PIXEL, CIRCLE, FILE, CUSTOM}
 # warning-ignore:unused_class_variable
 var left_brush_size := 1
@@ -113,11 +113,11 @@ var custom_left_brush_texture := ImageTexture.new()
 # warning-ignore:unused_class_variable
 var custom_right_brush_texture := ImageTexture.new()
 
-#Palettes
+# Palettes
 # warning-ignore:unused_class_variable
 var palettes := {}
 
-#Nodes
+# Nodes
 var control : Node
 var top_menu_container : Panel
 var left_cursor : Sprite
@@ -168,14 +168,20 @@ var right_brush_size_slider : HSlider
 
 var left_color_interpolation_container : Container
 var right_color_interpolation_container : Container
-var left_interpolate_slider : SpinBox
-var right_interpolate_slider : SpinBox
+var left_interpolate_spinbox : SpinBox
+var left_interpolate_slider : HSlider
+var right_interpolate_spinbox : SpinBox
+var right_interpolate_slider : HSlider
 
 var left_fill_area_container : Container
 var right_fill_area_container : Container
 
 var left_ld_container : Container
+var left_ld_amount_slider : HSlider
+var left_ld_amount_spinbox : SpinBox
 var right_ld_container : Container
+var right_ld_amount_slider : HSlider
+var right_ld_amount_spinbox : SpinBox
 
 var left_mirror_container : Container
 var right_mirror_container : Container
@@ -273,14 +279,20 @@ func _ready() -> void:
 
 	left_color_interpolation_container = find_node_by_name(left_tool_options_container, "LeftColorInterpolation")
 	right_color_interpolation_container = find_node_by_name(right_tool_options_container, "RightColorInterpolation")
-	left_interpolate_slider = find_node_by_name(left_color_interpolation_container, "LeftInterpolateFactor")
-	right_interpolate_slider = find_node_by_name(right_color_interpolation_container, "RightInterpolateFactor")
+	left_interpolate_spinbox = find_node_by_name(left_color_interpolation_container, "LeftInterpolateFactor")
+	left_interpolate_slider = find_node_by_name(left_color_interpolation_container, "LeftInterpolateSlider")
+	right_interpolate_spinbox = find_node_by_name(right_color_interpolation_container, "RightInterpolateFactor")
+	right_interpolate_slider = find_node_by_name(right_color_interpolation_container, "RightInterpolateSlider")
 
 	left_fill_area_container = find_node_by_name(left_tool_options_container, "LeftFillArea")
 	right_fill_area_container = find_node_by_name(right_tool_options_container, "RightFillArea")
 
 	left_ld_container = find_node_by_name(left_tool_options_container, "LeftLDOptions")
+	left_ld_amount_slider = find_node_by_name(left_ld_container, "LeftLDAmountSlider")
+	left_ld_amount_spinbox = find_node_by_name(left_ld_container, "LeftLDAmountSpinbox")
 	right_ld_container = find_node_by_name(right_tool_options_container, "RightLDOptions")
+	right_ld_amount_slider = find_node_by_name(right_ld_container, "RightLDAmountSlider")
+	right_ld_amount_spinbox = find_node_by_name(right_ld_container, "RightLDAmountSpinbox")
 
 	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
 	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")
@@ -490,7 +502,7 @@ func update_left_custom_brush() -> void:
 		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_slider.value / 100)
+		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_spinbox.value / 100)
 		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
 
 		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
@@ -512,7 +524,7 @@ func update_right_custom_brush() -> void:
 		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_slider.value / 100)
+		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_spinbox.value / 100)
 		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
 
 		right_brush_type_button.get_child(0).texture = custom_right_brush_texture
