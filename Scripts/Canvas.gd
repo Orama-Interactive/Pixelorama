@@ -163,7 +163,7 @@ func _process(delta : float) -> void:
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Bucket":
 			if can_handle && Global.current_frame == frame:
-				if fill_area == 0: #Paint the specific area of the same color
+				if fill_area == 0: # Paint the specific area of the same color
 					var current_color : Color
 					var horizontal_mirror := false
 					var vertical_mirror := false
@@ -189,7 +189,17 @@ func _process(delta : float) -> void:
 						var pos := Vector2(mirror_x, mirror_y)
 						flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
 
-				else: #Paint all pixels of the same color
+				else: # Paint all pixels of the same color
+					var west_limit := location.x
+					var east_limit := location.x + size.x
+					var north_limit := location.y
+					var south_limit := location.y + size.y
+					if Global.selected_pixels.size() != 0:
+						west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
+						east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
+						north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
+						south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
+
 					var current_color : Color
 					if current_mouse_button == "left_mouse":
 						current_color = Global.left_color_picker.color
@@ -197,8 +207,8 @@ func _process(delta : float) -> void:
 						current_color = Global.right_color_picker.color
 
 					var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
-					for xx in size.x:
-						for yy in size.y:
+					for xx in range(west_limit, east_limit):
+						for yy in range(north_limit, south_limit):
 							var c : Color = layers[current_layer_index][0].get_pixel(xx, yy)
 							if c == pixel_color:
 								layers[current_layer_index][0].set_pixel(xx, yy, current_color)
