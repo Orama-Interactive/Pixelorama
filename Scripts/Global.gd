@@ -83,7 +83,7 @@ var onion_skinning_future_rate := 0
 var onion_skinning_blue_red := false
 
 #Brushes
-enum BRUSH_TYPES {PIXEL, FILE, CUSTOM}
+enum BRUSH_TYPES {PIXEL, CIRCLE, FILE, CUSTOM}
 # warning-ignore:unused_class_variable
 var left_brush_size := 1
 # warning-ignore:unused_class_variable
@@ -94,6 +94,8 @@ var current_left_brush_type = BRUSH_TYPES.PIXEL
 var current_right_brush_type = BRUSH_TYPES.PIXEL
 # warning-ignore:unused_class_variable
 var brush_type_window_position := "left"
+var left_circle_points := []
+var right_circle_points := []
 
 var brushes_from_files := 0
 # warning-ignore:unused_class_variable
@@ -472,7 +474,13 @@ func update_left_custom_brush() -> void:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/pixel_image.png")
 		pixel = blend_image_with_color(pixel, left_color_picker.color, 1)
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel)
+		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+	elif current_left_brush_type == BRUSH_TYPES.CIRCLE:
+		var pixel := Image.new()
+		pixel = preload("res://Assets/Graphics/circle_9x9.png")
+		pixel = blend_image_with_color(pixel, left_color_picker.color, 1)
+		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		left_circle_points = plot_circle(left_brush_size)
 	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
@@ -488,7 +496,13 @@ func update_right_custom_brush() -> void:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/pixel_image.png")
 		pixel = blend_image_with_color(pixel, right_color_picker.color, 1)
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel)
+		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+	elif current_right_brush_type == BRUSH_TYPES.CIRCLE:
+		var pixel := Image.new()
+		pixel = preload("res://Assets/Graphics/circle_9x9.png")
+		pixel = blend_image_with_color(pixel, right_color_picker.color, 1)
+		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		right_circle_points = plot_circle(right_brush_size)
 	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
@@ -506,14 +520,38 @@ func blend_image_with_color(image : Image, color : Color, interpolate_factor : f
 	blended_image.lock()
 	for xx in size.x:
 		for yy in size.y:
-			if color.a > 0: #If it's the pencil
+			if color.a > 0: # If it's the pencil
 				var current_color := blended_image.get_pixel(xx, yy)
 				if current_color.a > 0:
 					var new_color := current_color.linear_interpolate(color, interpolate_factor)
 					blended_image.set_pixel(xx, yy, new_color)
-			else: #If color is transparent - if it's the eraser
+			else: # If color is transparent - if it's the eraser
 				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
 	return blended_image
+
+# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
+# This is not used for drawing, rather for finding the points required
+# for the mouse cursor/position indicator
+func plot_circle(r : int) -> Array:
+	var circle_points := []
+	var xm := 0
+	var ym := 0
+	var x := -r
+	var y := 0
+	var err := 2 - r * 2
+	while x < 0:
+		circle_points.append(Vector2(xm - x, ym + y))
+		circle_points.append(Vector2(xm - y, ym - x))
+		circle_points.append(Vector2(xm + x, ym - y))
+		circle_points.append(Vector2(xm + y, ym + x))
+		r = err
+		if r <= y:
+			y += 1
+			err += y * 2 + 1
+		if r > x || err > y:
+			x += 1
+			err += x * 2 + 1
+	return circle_points
 
 func _exit_tree() -> void:
 	config_cache.set_value("window", "screen", OS.current_screen)

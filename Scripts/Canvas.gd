@@ -31,8 +31,8 @@ func _ready() -> void:
 	if layers.empty():
 		var sprite := Image.new()
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-
 		sprite.lock()
+
 		var tex := ImageTexture.new()
 		tex.create_from_image(sprite, 0)
 
@@ -442,24 +442,34 @@ func _draw() -> void:
 	var mouse_pos := get_local_mouse_position() + location
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
-		if Global.left_square_indicator_visible and Global.can_draw:
-			if Global.current_left_brush_type == Global.BRUSH_TYPES.PIXEL:
+		if Global.left_square_indicator_visible && Global.can_draw:
+			if Global.current_left_brush_type == Global.BRUSH_TYPES.PIXEL || Global.current_left_tool == "LightenDarken":
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
 					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+			elif Global.current_left_brush_type == Global.BRUSH_TYPES.CIRCLE:
+				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+					draw_set_transform(mouse_pos, 0, Vector2.ONE)
+					for rect in Global.left_circle_points:
+						draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
 			else:
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
 					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
 					var dst := rectangle_center(mouse_pos, custom_brush_size)
 					draw_texture(Global.custom_left_brush_texture, dst)
 
-		if Global.right_square_indicator_visible and Global.can_draw:
-			if Global.current_right_brush_type == Global.BRUSH_TYPES.PIXEL:
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
+		if Global.right_square_indicator_visible && Global.can_draw:
+			if Global.current_right_brush_type == Global.BRUSH_TYPES.PIXEL || Global.current_right_tool == "LightenDarken":
+				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
 					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+			elif Global.current_right_brush_type == Global.BRUSH_TYPES.CIRCLE:
+				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+					draw_set_transform(mouse_pos, 0, Vector2.ONE)
+					for rect in Global.right_circle_points:
+						draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
 			else:
 				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
 					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
@@ -500,10 +510,10 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 	else:
 		if point_in_rectangle(mouse_pos, location, location + size):
 			mouse_inside_canvas = true
-			#Draw
+			# Draw
 			draw_pixel(mouse_pos, color, current_mouse_button, current_action)
 			fill_gaps(mouse_pos, previous_mouse_pos, color, current_mouse_button, current_action) #Fill the gaps
-		#If mouse is not inside bounds but it used to be, fill the gaps
+		# If mouse is not inside bounds but it used to be, fill the gaps
 		elif point_in_rectangle(previous_mouse_pos, location, location + size):
 			fill_gaps(mouse_pos, previous_mouse_pos, color, current_mouse_button, current_action)
 
@@ -540,7 +550,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 		var east_limit := location.x + size.x
 		var north_limit := location.y
 		var south_limit := location.y + size.y
-		if Global.selected_pixels.size() != 0: #If there is a selection and current pixel position is not in it
+		if Global.selected_pixels.size() != 0: # If there is a selection and current pixel position is not in it
 			west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
 			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
 			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
@@ -560,11 +570,11 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 				for cur_pos_y in range(start_pos_y, end_pos_y):
 					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 						var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
-						#Don't draw the same pixel over and over and don't re-lighten/darken it
+						# Don't draw the same pixel over and over and don't re-lighten/darken it
 						var current_pixel_color : Color = layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y)
 						if current_pixel_color != color && !(pos_floored in lighten_darken_pixels):
 							if current_action == "LightenDarken":
-								if ld == 0: #Lighten
+								if ld == 0: # Lighten
 									color = current_pixel_color.lightened(ld_amount)
 								else:
 									color = current_pixel_color.darkened(ld_amount)
@@ -573,14 +583,14 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
 							sprite_changed_this_frame = true
 
-							#Handle mirroring
+							# Handle mirroring
 							var mirror_x := east_limit + west_limit - cur_pos_x - 1
 							var mirror_y := south_limit + north_limit - cur_pos_y - 1
 							if horizontal_mirror:
 								current_pixel_color = layers[current_layer_index][0].get_pixel(mirror_x, cur_pos_y)
-								if current_pixel_color != color: #don't draw the same pixel over and over
+								if current_pixel_color != color: # don't draw the same pixel over and over
 									if current_action == "LightenDarken":
-										if ld == 0: #Lighten
+										if ld == 0: # Lighten
 											color = current_pixel_color.lightened(ld_amount)
 										else:
 											color = current_pixel_color.darkened(ld_amount)
@@ -590,9 +600,9 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 									sprite_changed_this_frame = true
 							if vertical_mirror:
 								current_pixel_color = layers[current_layer_index][0].get_pixel(cur_pos_x, mirror_y)
-								if current_pixel_color != color: #don't draw the same pixel over and over
+								if current_pixel_color != color: # don't draw the same pixel over and over
 									if current_action == "LightenDarken":
-										if ld == 0: #Lighten
+										if ld == 0: # Lighten
 											color = current_pixel_color.lightened(ld_amount)
 										else:
 											color = current_pixel_color.darkened(ld_amount)
@@ -602,9 +612,9 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 									sprite_changed_this_frame = true
 							if horizontal_mirror && vertical_mirror:
 								current_pixel_color = layers[current_layer_index][0].get_pixel(mirror_x, mirror_y)
-								if current_pixel_color != color: #don't draw the same pixel over and over
+								if current_pixel_color != color: # don't draw the same pixel over and over
 									if current_action == "LightenDarken":
-										if ld == 0: #Lighten
+										if ld == 0: # Lighten
 											color = current_pixel_color.lightened(ld_amount)
 										else:
 											color = current_pixel_color.darkened(ld_amount)
@@ -613,37 +623,52 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
 									sprite_changed_this_frame = true
 
+		elif brush_type == Global.BRUSH_TYPES.CIRCLE:
+			plot_circle(layers[current_layer_index][0], pos.x, pos.y, brush_size, color)
+
+			# Handle mirroring
+			var mirror_x := east_limit + west_limit - pos.x
+			var mirror_y := south_limit + north_limit - pos.y
+			if horizontal_mirror:
+				plot_circle(layers[current_layer_index][0], mirror_x, pos.y, brush_size, color)
+			if vertical_mirror:
+				plot_circle(layers[current_layer_index][0], pos.x, mirror_y, brush_size, color)
+			if horizontal_mirror && vertical_mirror:
+				plot_circle(layers[current_layer_index][0], mirror_x, mirror_y, brush_size, color)
+
+			sprite_changed_this_frame = true
+
 		else:
 			var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
 			pos = pos.floor()
 			var dst := rectangle_center(pos, custom_brush_size)
 			var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
-			#Rectangle with the same size as the brush, but at cursor's position
+			# Rectangle with the same size as the brush, but at cursor's position
 			var pos_rect := Rect2(dst, custom_brush_size + Vector2.ONE)
 
-			#The selection rectangle
-			#If there's no rectangle, the whole canvas is considered a selection
+			# The selection rectangle
+			# If there's no rectangle, the whole canvas is considered a selection
 			var selection_rect := Rect2()
 			selection_rect.position = Vector2(west_limit, north_limit)
 			selection_rect.end = Vector2(east_limit, south_limit)
-			#Intersection of the position rectangle and selection
+			# Intersection of the position rectangle and selection
 			var pos_rect_clipped := pos_rect.clip(selection_rect)
-			#If the size is 0, that means that the brush wasn't positioned inside the selection
+			# If the size is 0, that means that the brush wasn't positioned inside the selection
 			if pos_rect_clipped.size == Vector2.ZERO:
 				return
 
-			#Re-position src_rect and dst based on the clipped position
+			# Re-position src_rect and dst based on the clipped position
 			var pos_difference := (pos_rect.position - pos_rect_clipped.position).abs()
-			#Obviously, if pos_rect and pos_rect_clipped are the same, pos_difference is Vector2.ZERO
+			# Obviously, if pos_rect and pos_rect_clipped are the same, pos_difference is Vector2.ZERO
 			src_rect.position = pos_difference
 			dst += pos_difference
 			src_rect.end -= pos_rect.end - pos_rect_clipped.end
-			#If the selection rectangle is smaller than the brush, ...
-			#... make sure pixels aren't being drawn outside the selection by adjusting src_rect's size
+			# If the selection rectangle is smaller than the brush, ...
+			# ... make sure pixels aren't being drawn outside the selection by adjusting src_rect's size
 			src_rect.size.x = min(src_rect.size.x, selection_rect.size.x)
 			src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
 
-			#Handle mirroring
+			# Handle mirroring
 			var mirror_x := east_limit + west_limit - pos.x - (pos.x - dst.x)
 			var mirror_y := south_limit + north_limit - pos.y - (pos.y - dst.y)
 			if int(pos_rect_clipped.size.x) % 2 != 0:
@@ -651,7 +676,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			if int(pos_rect_clipped.size.y) % 2 != 0:
 				mirror_y -= 1
 			# Use custom blend function cause of godot's issue  #31124
-			if color.a > 0: #If it's the pencil
+			if color.a > 0: # If it's the pencil
 				blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, dst)
 				if horizontal_mirror:
 					blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
@@ -660,7 +685,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 				if horizontal_mirror && vertical_mirror:
 					blend_rect(layers[current_layer_index][0], custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
 
-			else: #if it's transparent - if it's the eraser
+			else: # if it's transparent - if it's the eraser
 				var custom_brush := Image.new()
 				custom_brush.copy_from(Global.custom_brushes[brush_index])
 				custom_brush_size = custom_brush.get_size()
@@ -684,8 +709,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 		if is_making_line:
 			line_2d.set_point_position(0, previous_mouse_pos_for_lines)
 
-#Bresenham's Algorithm
-#Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
+# Bresenham's Algorithm
+# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func fill_gaps(mouse_pos : Vector2, prev_mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	var previous_mouse_pos_floored = prev_mouse_pos.floor()
 	var mouse_pos_floored = mouse_pos.floor()
@@ -709,7 +734,7 @@ func fill_gaps(mouse_pos : Vector2, prev_mouse_pos : Vector2, color : Color, cur
 			err += dx
 			y += sy
 
-#Thanks to https://en.wikipedia.org/wiki/Flood_fill
+# Thanks to https://en.wikipedia.org/wiki/Flood_fill
 func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> void:
 	pos = pos.floor()
 	var pixel = layers[current_layer_index][0].get_pixelv(pos)
@@ -733,7 +758,7 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 
 		var q = [pos]
 		for n in q:
-			#If the difference in colors is very small, break the loop (thanks @azagaya on GitHub!)
+			# If the difference in colors is very small, break the loop (thanks @azagaya on GitHub!)
 			if target_color == replace_color:
 				break
 			var west : Vector2 = n
@@ -744,7 +769,7 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 				east += Vector2.RIGHT
 			for px in range(west.x + 1, east.x):
 				var p := Vector2(px, n.y)
-				#Draw
+				# Draw
 				layers[current_layer_index][0].set_pixelv(p, replace_color)
 				replace_color = layers[current_layer_index][0].get_pixelv(p)
 				var north := p + Vector2.UP
@@ -755,21 +780,54 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 					q.append(south)
 		sprite_changed_this_frame = true
 
-#I wish GDScript supported function overloading, I could add more versions of these scripts...
-#...but with a Rect2() parameter instead of 2 Vector2()s
+# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
+func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color) -> void:
+	var west_limit := location.x
+	var east_limit := location.x + size.x
+	var north_limit := location.y
+	var south_limit := location.y + size.y
+	if Global.selected_pixels.size() != 0:
+		west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
+		east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
+		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
+		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 
-#Checks if a point is inside a rectangle
+	var x := -r
+	var y := 0
+	var err := 2 - r * 2 # II. Quadrant
+	while x < 0:
+		var quadrant_1 := Vector2(xm - x, ym + y)
+		var quadrant_2 := Vector2(xm - y, ym - x)
+		var quadrant_3 := Vector2(xm + x, ym - y)
+		var quadrant_4 := Vector2(xm + y, ym + x)
+		if point_in_rectangle(quadrant_1, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+			sprite.set_pixelv(quadrant_1, color)
+		if point_in_rectangle(quadrant_2, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+			sprite.set_pixelv(quadrant_2, color)
+		if point_in_rectangle(quadrant_3, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+			sprite.set_pixelv(quadrant_3, color)
+		if point_in_rectangle(quadrant_4, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+			sprite.set_pixelv(quadrant_4, color)
+		r = err
+		if r <= y:
+			y += 1
+			err += y * 2 + 1
+		if r > x || err > y:
+			x += 1
+			err += x * 2 + 1
+
+# Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
 
-#Returns the position in the middle of a rectangle
+# Returns the position in the middle of a rectangle
 func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
 	return (rect_position - rect_size / 2).floor()
 
 func _on_Timer_timeout() -> void:
 	Global.can_draw = true
 
-#Custom blend rect function, needed because Godot's issue #31124
+# Custom blend rect function, needed because Godot's issue #31124
 func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:
 	var brush_size := brush.get_size()
 	var clipped_src_rect := Rect2(Vector2.ZERO, brush_size).clip(src_rect)
@@ -790,7 +848,7 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			var brush_color := brush.get_pixel(src_x, src_y)
 			var bg_color := bg.get_pixel(dst_x, dst_y)
 			out_color.a = brush_color.a + bg_color.a * (1 - brush_color.a)
-			#Blend the colors
+			# Blend the colors
 			if out_color.a != 0:
 				out_color.r = (brush_color.r * brush_color.a + bg_color.r * bg_color.a * (1 - brush_color.a)) / out_color.a
 				out_color.g = (brush_color.g * brush_color.a + bg_color.g * bg_color.a * (1 - brush_color.a)) / out_color.a

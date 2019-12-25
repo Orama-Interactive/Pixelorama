@@ -1,27 +1,30 @@
 extends BaseButton
 
-var brush_type = Global.BRUSH_TYPES.PIXEL
-var custom_brush_index := -1
+export var brush_type = Global.BRUSH_TYPES.PIXEL
+export var custom_brush_index := -2
 
 func _on_BrushButton_pressed() -> void:
-	#Change left brush
+	# Change left brush
 	if Global.brush_type_window_position == "left":
 		Global.current_left_brush_type = brush_type
 		Global.custom_left_brush_index = custom_brush_index
-		if custom_brush_index > -1: #Custom brush
+		if custom_brush_index > -1: # Custom brush
 			if Global.current_left_tool == "Pencil":
 				Global.left_color_interpolation_container.visible = true
 			if hint_tooltip == "":
 				Global.left_brush_type_label.text = tr("Custom brush")
 			else:
 				Global.left_brush_type_label.text = tr("Brush:") + " %s" % hint_tooltip
-		else: #Pixel brush
+		elif custom_brush_index == -2: # Pixel brush
 			Global.left_color_interpolation_container.visible = false
 			Global.left_brush_type_label.text = tr("Brush: Pixel")
+		elif custom_brush_index == -1: # Circle brush
+			Global.left_color_interpolation_container.visible = false
+			Global.left_brush_type_label.text = tr("Brush: Circle")
 
 		Global.update_left_custom_brush()
 
-	else: #Change right brush
+	else: # Change right brush
 		Global.current_right_brush_type = brush_type
 		Global.custom_right_brush_index = custom_brush_index
 		if custom_brush_index > -1:
@@ -31,21 +34,24 @@ func _on_BrushButton_pressed() -> void:
 				Global.right_brush_type_label.text = tr("Custom brush")
 			else:
 				Global.right_brush_type_label.text = tr("Brush:") + " %s" % hint_tooltip
-		else: #Pixel brush
+		elif custom_brush_index == -2: # Pixel brush
 			Global.right_color_interpolation_container.visible = false
 			Global.right_brush_type_label.text = tr("Brush: Pixel")
+		elif custom_brush_index == -1: # Circle brush
+			Global.right_color_interpolation_container.visible = false
+			Global.right_brush_type_label.text = tr("Brush: Circle")
 
 		Global.update_right_custom_brush()
 
 func _on_DeleteButton_pressed() -> void:
 	if brush_type == Global.BRUSH_TYPES.CUSTOM:
 		if Global.custom_left_brush_index == custom_brush_index:
-			Global.custom_left_brush_index = -1
+			Global.custom_left_brush_index = -2
 			Global.current_left_brush_type = Global.BRUSH_TYPES.PIXEL
 			Global.left_brush_type_label.text = "Brush: Pixel"
 			Global.update_left_custom_brush()
 		if Global.custom_right_brush_index == custom_brush_index:
-			Global.custom_right_brush_index = -1
+			Global.custom_right_brush_index = -2
 			Global.current_right_brush_type = Global.BRUSH_TYPES.PIXEL
 			Global.right_brush_type_label.text = "Brush: Pixel"
 			Global.update_right_custom_brush()
