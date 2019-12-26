@@ -14,18 +14,28 @@ func import_brushes(path : String) -> void:
 
 func find_brushes(brushes_dir : Directory, path : String) -> Array:
 	var subdirectories := []
+	var found_random_brush := 0
 	brushes_dir.open(path)
 	brushes_dir.list_dir_begin(true)
 	var file := brushes_dir.get_next()
 	while file != "":
-		print(file)
 		if file.get_extension().to_upper() == "PNG":
 			var image := Image.new()
 			var err := image.load(path.plus_file(file))
 			if err == OK:
-				image.convert(Image.FORMAT_RGBA8)
-				Global.custom_brushes.append(image)
-				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE, file.trim_suffix(".png"))
+				if "%" in file:
+					if found_random_brush == 0:
+						found_random_brush = Global.file_brush_container.get_child_count()
+						image.convert(Image.FORMAT_RGBA8)
+						Global.custom_brushes.append(image)
+						Global.create_brush_button(image, Global.BRUSH_TYPES.RANDOM_FILE, file.trim_suffix(".png"))
+					else:
+						var brush_button = Global.file_brush_container.get_child(found_random_brush)
+						brush_button.random_brushes.append(image)
+				else:
+					image.convert(Image.FORMAT_RGBA8)
+					Global.custom_brushes.append(image)
+					Global.create_brush_button(image, Global.BRUSH_TYPES.FILE, file.trim_suffix(".png"))
 		elif file.get_extension() == "": # Probably a directory
 			var subdir := "./%s" % [file]
 			if brushes_dir.dir_exists(subdir): # If it's an actual directory

@@ -83,7 +83,7 @@ var onion_skinning_future_rate := 0
 var onion_skinning_blue_red := false
 
 # Brushes
-enum BRUSH_TYPES {PIXEL, CIRCLE, FILE, CUSTOM}
+enum BRUSH_TYPES {PIXEL, CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 # warning-ignore:unused_class_variable
 var left_brush_size := 1
 # warning-ignore:unused_class_variable
@@ -215,6 +215,7 @@ var palette_import_file_dialog : FileDialog
 var error_dialog : AcceptDialog
 
 func _ready() -> void:
+	randomize()
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
 
@@ -434,14 +435,14 @@ func frame_changed(value : int) -> void:
 	canvas = canvases[current_frame]
 	canvas.visible = true
 	canvas.generate_layer_panels()
-	#Make all frame buttons unpressed
+	# Make all frame buttons unpressed
 	for c in canvases:
 		var text_color := Color.white
 		if theme_type == "Gold" || theme_type == "Light":
 			text_color = Color.black
 		c.frame_button.get_node("FrameButton").pressed = false
 		c.frame_button.get_node("FrameID").add_color_override("font_color", text_color)
-	#Make only the current frame button pressed
+	# Make only the current frame button pressed
 	canvas.frame_button.get_node("FrameButton").pressed = true
 	canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
 
@@ -451,7 +452,7 @@ func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM, hi
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
 	brush_button.custom_brush_index = custom_brushes.size() - 1
-	if brush_type == BRUSH_TYPES.FILE:
+	if brush_type == BRUSH_TYPES.FILE || brush_type == BRUSH_TYPES.RANDOM_FILE:
 		brush_container = file_brush_container
 	else:
 		brush_container = project_brush_container
@@ -459,6 +460,8 @@ func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM, hi
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
 	brush_button.hint_tooltip = hint_tooltip
+	if brush_type == BRUSH_TYPES.RANDOM_FILE:
+		brush_button.random_brushes.append(brush_img)
 	brush_container.add_child(brush_button)
 
 func remove_brush_buttons() -> void:

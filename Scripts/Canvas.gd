@@ -12,6 +12,7 @@ var frame_texture_rect : TextureRect
 var current_pixel := Vector2.ZERO #pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
 var previous_mouse_pos_for_lines := Vector2.ZERO
+var can_undo := true
 var cursor_inside_canvas := false
 var previous_action := "None"
 var mouse_inside_canvas := false #used for undo
@@ -80,9 +81,10 @@ func camera_zoom() -> void:
 	Global.camera_preview.offset = size / 2
 
 # warning-ignore:unused_argument
-func _process(delta : float) -> void:
+func _input(event) -> void:
 	sprite_changed_this_frame = false
-	update()
+	if Global.current_frame == frame:
+		update()
 	current_pixel = get_local_mouse_position() - location
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
@@ -90,8 +92,8 @@ func _process(delta : float) -> void:
 	var mouse_in_canvas := point_in_rectangle(mouse_pos, location, location + size)
 	var current_mouse_button := "None"
 	var current_action := "None"
-	var fill_area := 0 #For the bucket tool
-	#For the LightenDarken tool
+	var fill_area := 0 # For the bucket tool
+	# For the LightenDarken tool
 	var ld := 0
 	var ld_amount := 0.1
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
@@ -126,13 +128,13 @@ func _process(delta : float) -> void:
 				Global.right_cursor.visible = false
 				Input.set_custom_mouse_cursor(null)
 
-	#Handle Undo/Redo
+	# Handle Undo/Redo
 	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus && !made_line
 	var mouse_pressed : bool = (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse"))
 
-	#If we're already pressing a mouse button and we haven't handled undo yet,...
-	#... it means that the cursor was outside the canvas. Then, ...
-	#simulate "just pressed" logic the moment the cursor gets inside the canvas
+	# If we're already pressing a mouse button and we haven't handled undo yet,...
+	#. .. it means that the cursor was outside the canvas. Then, ...
+	# simulate "just pressed" logic the moment the cursor gets inside the canvas
 	if Input.is_action_pressed("left_mouse") || Input.is_action_pressed("right_mouse"):
 		if mouse_in_canvas && Global.undos < Global.undo_redo.get_version():
 			mouse_pressed = true
@@ -151,7 +153,7 @@ func _process(delta : float) -> void:
 			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
 				handle_redo("Draw")
 
-	match current_action: #Handle current tool
+	match current_action: # Handle current tool
 		"Pencil":
 			var current_color : Color
 			if current_mouse_button == "left_mouse":
@@ -316,18 +318,20 @@ func _process(delta : float) -> void:
 		update_texture(current_layer_index, (Input.is_action_just_released("left_mouse") || Input.is_action_just_released("right_mouse")))
 
 func handle_undo(action : String) -> void:
+	if !can_undo:
+		return
 	var canvases := []
 	var layer_index := -1
-	if Global.animation_timer.is_stopped(): #if we're not animating, store only the current canvas
+	if Global.animation_timer.is_stopped(): # if we're not animating, store only the current canvas
 		canvases = [self]
 		layer_index = current_layer_index
-	else: #If we're animating, store all canvases
+	else: # If we're animating, store all canvases
 		canvases = Global.canvases
 	Global.undos += 1
 	Global.undo_redo.create_action(action)
 	for c in canvases:
-		#I'm not sure why I have to unlock it, but...
-		#...if I don't, it doesn't work properly
+		# I'm not sure why I have to unlock it, but...
+		# ...if I don't, it doesn't work properly
 		c.layers[c.current_layer_index][0].unlock()
 		var data = c.layers[c.current_layer_index][0].data
 		c.layers[c.current_layer_index][0].lock()
@@ -337,6 +341,8 @@ func handle_undo(action : String) -> void:
 		Global.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_undo_property(Global, "selected_pixels", selected_pixels)
 	Global.undo_redo.add_undo_method(Global, "undo", canvases, layer_index)
+
+	can_undo = false
 
 func handle_redo(action : String) -> void:
 	if Global.undos < Global.undo_redo.get_version():
@@ -355,6 +361,8 @@ func handle_redo(action : String) -> void:
 		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
 	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
+
+	can_undo = true
 
 func update_texture(layer_index : int, update_frame_tex := true) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
@@ -533,7 +541,17 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			brush_size = Global.left_brush_size
 			brush_type = Global.current_left_brush_type
 			brush_index = Global.custom_left_brush_index
-			custom_brush_image = Global.custom_left_brush_image
+			if brush_type != Global.BRUSH_TYPES.RANDOM_FILE:
+				custom_brush_image = Global.custom_left_brush_image
+			else: # Handle random brush
+				var brush_button = Global.file_brush_container.get_child(brush_index + 2)
+				var random_index = randi() % brush_button.random_brushes.size()
+				custom_brush_image = brush_button.random_brushes[random_index]
+				var custom_brush_size = custom_brush_image.get_size()
+				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
+				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.left_interpolate_spinbox.value / 100)
+				custom_brush_image.lock()
+
 			horizontal_mirror = Global.left_horizontal_mirror
 			vertical_mirror = Global.left_vertical_mirror
 			ld = Global.left_ld
@@ -542,7 +560,17 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			brush_size = Global.right_brush_size
 			brush_type = Global.current_right_brush_type
 			brush_index = Global.custom_right_brush_index
-			custom_brush_image = Global.custom_right_brush_image
+			if brush_type != Global.BRUSH_TYPES.RANDOM_FILE:
+				custom_brush_image = Global.custom_right_brush_image
+			else: # Handle random brush
+				var brush_button = Global.file_brush_container.get_child(brush_index + 2)
+				var random_index = randi() % brush_button.random_brushes.size()
+				custom_brush_image = brush_button.random_brushes[random_index]
+				var custom_brush_size = custom_brush_image.get_size()
+				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
+				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.right_interpolate_spinbox.value / 100)
+				custom_brush_image.lock()
+
 			horizontal_mirror = Global.right_horizontal_mirror
 			vertical_mirror = Global.right_vertical_mirror
 			ld = Global.right_ld

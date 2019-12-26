@@ -2,6 +2,8 @@ extends BaseButton
 
 export var brush_type = Global.BRUSH_TYPES.PIXEL
 export var custom_brush_index := -2
+# warning-ignore:unused_class_variable
+var random_brushes := []
 
 func _on_BrushButton_pressed() -> void:
 	# Change left brush
