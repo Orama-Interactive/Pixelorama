@@ -7,7 +7,6 @@
 [ext_resource path="res://Scripts/Palette/PaletteButton.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=6]
 
-
 [sub_resource type="ImageTexture" id=1]
 
 [node name="PaletteButton" type="Button"]
@@ -19,6 +18,7 @@ custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
+action_mode = 0
 button_mask = 3
 icon = SubResource( 1 )
 script = ExtResource( 5 )

@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Graphics/Palette/remove_swatch_button.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Graphics/Palette/remove_swatch_button_hover.png" type="Texture" id=5]
 
-
 [node name="EditPalettePopup" type="WindowDialog"]
 visible = true
 margin_right = 600.0

@@ -12,13 +12,12 @@ var comments : String = ""
 var editable : bool = true
 
 func insert_color(index : int, new_color : Color, _name : String = "no name") -> void:
-	if index < colors.size():
+	if index <= colors.size():
 		var c := PaletteColor.new(new_color, _name)
 		colors.insert(index, c)
 
 func add_color(new_color : Color, _name : String = "no name") -> void:
 	var c := PaletteColor.new(new_color, _name)
-
 	colors.push_back(c)
 
 func remove_color(index : int) -> void:
@@ -101,7 +100,7 @@ func deserialize(input_string : String) -> Palette:
 	var result = get_script().new()
 
 	var result_json = JSON.parse(input_string)
-#
+
 	if result_json.error != OK:  # If parse has errors
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
@@ -109,7 +108,7 @@ func deserialize(input_string : String) -> Palette:
 		result = null
 	else:  # If parse OK
 		var data = result_json.result
-		if data.has("name"): #If data is 'valid' palette file
+		if data.has("name"): # If data is 'valid' palette file
 			result = get_script().new()
 			result.name = data.name
 			if data.has("comments"):

@@ -23,4 +23,3 @@ func can_drop_data(position, data):
 
 func drop_data(position, data):
 	emit_signal("on_drop_data", data.source_index, index);
-	pass;

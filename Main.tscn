@@ -250,6 +250,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -580,6 +581,7 @@ text = "Brush color from"
 margin_left = 94.0
 margin_right = 149.0
 margin_bottom = 17.0
+hint_tooltip = "COLORFROM_HT"
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 100.0

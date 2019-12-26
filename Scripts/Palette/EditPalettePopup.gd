@@ -33,10 +33,15 @@ func _display_palette() -> void:
 		new_button.draggable = true
 		new_button.index = index
 		new_button.connect("on_drop_data", self, "on_move_swatch")
-		new_button.connect("pressed", self, "on_swatch_select", [index])
+		new_button.connect("pressed", self, "on_swatch_select", [new_button])
 
 		palette_grid.add_child(new_button)
 		index += 1
+
+	if index > 0: # If there are colors, select the first
+		current_swatch = 0
+		color_name_edit.text = working_palette.get_color_name(0)
+		color_picker.color = working_palette.get_color(0)
 
 func _clear_swatches() -> void:
 	for child in palette_grid.get_children():
@@ -44,15 +49,16 @@ func _clear_swatches() -> void:
 			child.disconnect("on_drop_data", self, "on_move_swatch")
 			child.queue_free()
 
-func on_swatch_select(index : int) -> void:
+func on_swatch_select(new_button) -> void:
+	var index : int = new_button.index
 	current_swatch = index
 	color_name_edit.text = working_palette.get_color_name(index)
 	color_picker.color = working_palette.get_color(index)
 
 func on_move_swatch(from : int, to : int) -> void:
 	working_palette.move_color(from, to)
-
 	palette_grid.move_child(palette_grid.get_child(from), to)
+	current_swatch = to
 
 	# Re-index swatches with new order
 	var index := 0
@@ -61,7 +67,7 @@ func on_move_swatch(from : int, to : int) -> void:
 		index += 1
 
 func _on_AddSwatchButton_pressed() -> void:
-	var color = Color.white
+	var color : Color = color_picker.color
 	var new_index : int = working_palette.colors.size()
 	working_palette.add_color(color)
 
@@ -96,7 +102,7 @@ func _on_EditPaletteColorNameLineEdit_text_changed(new_text) -> void:
 		working_palette.set_color_name(current_swatch, new_text)
 		_refresh_hint_tooltip(current_swatch)
 
-func _on_EditPaletteColorPicker_color_changed(color) -> void:
+func _on_EditPaletteColorPicker_color_changed(color : Color) -> void:
 	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		palette_grid.get_child(current_swatch).get_child(0).modulate = color
 		working_palette.set_color(current_swatch, color)

@@ -38,11 +38,9 @@ func on_new_empty_palette() -> void:
 	Global.new_palette_name_line_edit.text = "Custom_Palette"
 	from_palette = null
 	Global.new_palette_dialog.popup_centered()
-	pass
 
 func on_import_palette() -> void:
 	Global.palette_import_file_dialog.popup_centered()
-	pass
 
 func on_palette_import_file_selected(path) -> void:
 	var file := File.new()
@@ -67,7 +65,6 @@ func on_palette_import_file_selected(path) -> void:
 	else:
 		Global.error_dialog.set_text("Invalid Palette file!")
 		Global.error_dialog.popup_centered()
-	pass
 
 func on_edit_palette() -> void:
 	var palette : Dictionary = Global.palettes[current_palette]
@@ -138,10 +135,10 @@ func _display_palette(palette : Palette) -> void:
 func on_color_select(index : int) -> void:
 	var color : Color = Global.palettes[current_palette].get_color(index)
 
-	if Input.is_action_just_released("left_mouse"):
+	if Input.is_action_just_pressed("left_mouse"):
 		Global.left_color_picker.color = color
 		Global.update_left_custom_brush()
-	elif Input.is_action_just_released("right_mouse"):
+	elif Input.is_action_just_pressed("right_mouse"):
 		Global.right_color_picker.color = color
 		Global.update_right_custom_brush()
 
@@ -208,7 +205,6 @@ func remove_current_palette() -> void:
 		if(selected_index - 1 >= 0):
 			Global.palette_option_button.select(selected_index - 1)
 			on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))
-	pass
 
 func _delete_palette_file(file_name : String) -> void:
 	var dir = Directory.new()

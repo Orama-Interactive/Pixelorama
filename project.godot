@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
-"path": "res://Scripts/Guides.gd"
+"path": "res://Scripts/Rulers/Guides.gd"
 }, {
 "base": "Button",
 "class": "LayerContainer",
