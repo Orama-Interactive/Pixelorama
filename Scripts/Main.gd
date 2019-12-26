@@ -172,25 +172,7 @@ func _ready() -> void:
 	export_project_hbox.add_child(export_as_single_file)
 	export_project_hbox.add_child(export_vertical_spritesheet)
 
-	var path := "Brushes"
-	var brushes_dir := Directory.new()
-	if !brushes_dir.dir_exists(path):
-		brushes_dir.make_dir(path)
-
-	brushes_dir.open(path)
-	brushes_dir.list_dir_begin(true, true)
-	var file := brushes_dir.get_next()
-	while file != "":
-		if file.get_extension().to_upper() == "PNG":
-			var image := Image.new()
-			var err := image.load(path.plus_file(file))
-			if err == OK:
-				image.convert(Image.FORMAT_RGBA8)
-				Global.custom_brushes.append(image)
-				Global.create_brush_button(image, Global.BRUSH_TYPES.FILE, file.trim_suffix(".png"))
-		file = brushes_dir.get_next()
-	brushes_dir.list_dir_end()
-	Global.brushes_from_files = Global.custom_brushes.size()
+	Import.import_brushes("Brushes")
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
