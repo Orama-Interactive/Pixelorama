@@ -543,6 +543,7 @@ func blend_image_with_color(image : Image, color : Color, interpolate_factor : f
 				var current_color := blended_image.get_pixel(xx, yy)
 				if current_color.a > 0:
 					var new_color := current_color.linear_interpolate(color, interpolate_factor)
+					new_color.a = current_color.a
 					blended_image.set_pixel(xx, yy, new_color)
 			else: # If color is transparent - if it's the eraser
 				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
