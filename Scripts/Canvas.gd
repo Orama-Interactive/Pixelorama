@@ -546,7 +546,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 2)
 				var random_index = randi() % brush_button.random_brushes.size()
-				custom_brush_image = brush_button.random_brushes[random_index]
+				custom_brush_image = Image.new()
+				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
 				var custom_brush_size = custom_brush_image.get_size()
 				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
 				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.left_interpolate_spinbox.value / 100)
@@ -565,7 +566,8 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 2)
 				var random_index = randi() % brush_button.random_brushes.size()
-				custom_brush_image = brush_button.random_brushes[random_index]
+				custom_brush_image = Image.new()
+				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
 				var custom_brush_size = custom_brush_image.get_size()
 				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
 				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.right_interpolate_spinbox.value / 100)
