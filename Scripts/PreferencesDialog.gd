@@ -1,20 +1,61 @@
 extends AcceptDialog
 
+onready var tree : Tree = $HSplitContainer/Tree
+onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
+onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
+onready var theme_option = $HSplitContainer/ScrollContainer/VBoxContainer/ThemeOption
+onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
+
 func _ready() -> void:
+	var root := tree.create_item()
+	var language_button := tree.create_item(root)
+	var theme_button := tree.create_item(root)
+	var grid_button := tree.create_item(root)
+	language_button.set_text(0, "  Language")
+	language_button.select(0)
+	theme_button.set_text(0, "  Themes")
+	grid_button.set_text(0, "  Guides & Grid")
+
+	for child in languages.get_children():
+		if child is Button:
+			child.connect("pressed", self, "_on_Language_pressed", [child])
+
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
-		$VBoxContainer/OptionsContainer/ThemeOption.selected = theme_id
+		theme_option.selected = theme_id
 
-func _on_LanguageOption_item_selected(ID : int) -> void:
-	if ID == 0:
+func _on_Tree_item_selected() -> void:
+	for child in right_side.get_children():
+		child.visible = false
+	var selected := tree.get_selected().get_text(0)
+	if "Language" in selected:
+		languages.visible = true
+	elif "Themes" in selected:
+		theme_option.visible = true
+	elif "Guides & Grid" in selected:
+		grid_guides.visible = true
+
+func _on_Language_pressed(button : Button) -> void:
+	var index := 0
+	var i := -1
+	for child in languages.get_children():
+		if child is Button:
+			if child == button:
+				button.pressed = true
+				index = i
+			else:
+				child.pressed = false
+			i += 1
+	if index == -1:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
-		TranslationServer.set_locale(Global.loaded_locales[ID - 1])
-		if Global.loaded_locales[ID - 1] == "zh_TW":
-			Global.control.theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
-		else:
-			Global.control.theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
+		TranslationServer.set_locale(Global.loaded_locales[index])
+
+	if TranslationServer.get_locale() == "zh_TW":
+		Global.control.theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
+	else:
+		Global.control.theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
 
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")

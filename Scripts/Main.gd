@@ -11,7 +11,7 @@ var export_as_single_file : CheckBox
 var export_vertical_spritesheet : CheckBox
 var redone := false
 var fps := 6.0
-var animation_loop := 0 #0 is no loop, 1 is cycle loop, 2 is ping-pong loop
+var animation_loop := 0 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var previous_left_color := Color.black
 var previous_right_color := Color.white
@@ -89,7 +89,8 @@ func _ready() -> void:
 
 		# Set the language option menu's default selected option to the loaded locale
 		var locale_index := Global.loaded_locales.find(saved_locale)
-		$PreferencesDialog/VBoxContainer/OptionsContainer/LanguageOption.selected = locale_index + 1
+		$PreferencesDialog.languages.get_child(1).pressed = false
+		$PreferencesDialog.languages.get_child(locale_index + 2).pressed = true
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
@@ -251,7 +252,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.selected_pixels.clear()
 			Global.canvas.handle_redo("Rectangle Select")
 		3: # Preferences
-			$PreferencesDialog.popup_centered()
+			$PreferencesDialog.popup_centered(Vector2(380, 300))
 			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:

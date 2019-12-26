@@ -552,6 +552,7 @@ size_flags_vertical = 1
 min_value = 1.0
 value = 1.0
 allow_greater = true
+ticks_on_borders = true
 
 [node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftBrushSize"]
 margin_left = 154.0
@@ -585,6 +586,7 @@ hint_tooltip = "COLORFROM_HT"
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 100.0
+ticks_on_borders = true
 
 [node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftColorInterpolation"]
 margin_left = 153.0
@@ -647,6 +649,7 @@ hint_tooltip = "LDAMOUNT_HT"
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 10.0
+ticks_on_borders = true
 
 [node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
 margin_left = 154.0
@@ -856,6 +859,7 @@ hint_tooltip = "LDAMOUNT_HT"
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 10.0
+ticks_on_borders = true
 
 [node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
 margin_left = 154.0
@@ -1541,11 +1545,13 @@ size_flags_horizontal = 3
 [node name="BrushesPopup" type="Popup" parent="."]
 editor/display_folded = true
 margin_right = 226.0
-margin_bottom = 72.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 144 )
 
 [node name="TabContainer" type="TabContainer" parent="BrushesPopup"]
-margin_right = 224.0
-margin_bottom = 72.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
 drag_to_rearrange_enabled = true
 
 [node name="File" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
@@ -1560,7 +1566,7 @@ size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
 [node name="FileBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/File"]
-columns = 5
+columns = 6
 
 [node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 58 )]
 hint_tooltip = "Pixel brush"
@@ -1795,6 +1801,7 @@ items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cu
 selected = 0
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 61 )]
+visible = false
 
 [node name="OutlineDialog" type="ConfirmationDialog" parent="."]
 editor/display_folded = true
