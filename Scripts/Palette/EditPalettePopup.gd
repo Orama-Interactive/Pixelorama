@@ -39,9 +39,7 @@ func _display_palette() -> void:
 		index += 1
 
 	if index > 0: # If there are colors, select the first
-		current_swatch = 0
-		color_name_edit.text = working_palette.get_color_name(0)
-		color_picker.color = working_palette.get_color(0)
+		on_swatch_select(palette_grid.get_child(0))
 
 func _clear_swatches() -> void:
 	for child in palette_grid.get_children():
@@ -60,11 +58,7 @@ func on_move_swatch(from : int, to : int) -> void:
 	palette_grid.move_child(palette_grid.get_child(from), to)
 	current_swatch = to
 
-	# Re-index swatches with new order
-	var index := 0
-	for child in palette_grid.get_children():
-		child.index = index
-		index += 1
+	re_index_swatches()
 
 func _on_AddSwatchButton_pressed() -> void:
 	var color : Color = color_picker.color
@@ -80,13 +74,26 @@ func _on_AddSwatchButton_pressed() -> void:
 	var index : int = palette_grid.get_child_count()
 	new_button.index = index
 	new_button.connect("on_drop_data", self, "on_move_swatch")
-	new_button.connect("pressed", self, "on_swatch_select", [index])
+	new_button.connect("pressed", self, "on_swatch_select", [new_button])
 
 	palette_grid.add_child(new_button)
 
 func _on_RemoveSwatchButton_pressed() -> void:
 	working_palette.remove_color(current_swatch)
 	palette_grid.remove_child(palette_grid.get_child(current_swatch))
+	re_index_swatches()
+
+	if working_palette.colors.size() > 0:
+		if current_swatch == working_palette.colors.size():
+			current_swatch -= 1
+		on_swatch_select(palette_grid.get_child(current_swatch))
+
+func re_index_swatches() -> void:
+	# Re-index swatches with new order
+	var index := 0
+	for child in palette_grid.get_children():
+		child.index = index
+		index += 1
 
 func _on_EditPaletteSaveButton_pressed() -> void:
 	Global.palettes[current_palette] = working_palette
