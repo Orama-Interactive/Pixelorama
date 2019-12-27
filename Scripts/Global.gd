@@ -29,6 +29,8 @@ var grid_width := 1
 var grid_height := 1
 # warning-ignore:unused_class_variable
 var grid_color := Color.black
+# warning-ignore:unused_class_variable
+var guide_color := Color.purple
 
 # Tools & options
 # warning-ignore:unused_class_variable

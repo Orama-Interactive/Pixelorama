@@ -67,7 +67,6 @@ func _on_HorizontalRuler_pressed() -> void:
 		Global.vertical_ruler._on_VerticalRuler_pressed()
 	var guide := Guide.new()
 	guide.type = guide.TYPE.HORIZONTAL
-	guide.default_color = Color.purple
 	guide.add_point(Vector2(-99999, Global.canvas.current_pixel.y))
 	guide.add_point(Vector2(99999, Global.canvas.current_pixel.y))
 	Global.canvas.add_child(guide)

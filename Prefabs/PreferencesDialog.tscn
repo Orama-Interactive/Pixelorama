@@ -37,10 +37,11 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 205.0
-margin_bottom = 282.0
+margin_bottom = 454.0
 size_flags_horizontal = 3
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+editor/display_folded = true
 margin_right = 205.0
 margin_bottom = 282.0
 
@@ -117,6 +118,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -162,6 +164,7 @@ mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+editor/display_folded = true
 visible = false
 margin_top = 24.0
 margin_right = 151.0
@@ -223,7 +226,22 @@ margin_top = 56.0
 margin_right = 124.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
+
+[node name="GuideColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
+margin_top = 59.0
+margin_right = 46.0
+margin_bottom = 73.0
+text = "Guide color:"
+
+[node name="GuideColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
+margin_left = 50.0
+margin_top = 56.0
+margin_right = 124.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 64, 20 )
+color = Color( 0.63, 0.13, 0.94, 1 )
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]
+[connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GuideColor" to="." method="_on_GuideColor_color_changed"]

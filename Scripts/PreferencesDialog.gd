@@ -161,3 +161,10 @@ func _on_GridHeightValue_value_changed(value : float) -> void:
 
 func _on_GridColor_color_changed(color : Color) -> void:
 	Global.grid_color = color
+
+func _on_GuideColor_color_changed(color : Color) -> void:
+	Global.guide_color = color
+	for canvas in Global.canvases:
+		for guide in canvas.get_children():
+			if guide is Guide:
+				guide.default_color = color

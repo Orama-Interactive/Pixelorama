@@ -11,6 +11,7 @@ var type = TYPE.HORIZONTAL
 
 func _ready() -> void:
 	width = 0.1
+	default_color = Global.guide_color
 
 # warning-ignore:unused_argument
 func _process(delta : float) -> void:
