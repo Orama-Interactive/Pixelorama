@@ -80,8 +80,12 @@ func camera_zoom() -> void:
 	Global.camera2.offset = size / 2
 	Global.camera_preview.offset = size / 2
 
-# warning-ignore:unused_argument
-func _input(event) -> void:
+func _input(event : InputEvent) -> void:
+	# Don't process anything below if the input isn't a mouse event.
+	# This decreases CPU/GPU usage slightly.
+	if not event is InputEventMouse:
+		return
+
 	sprite_changed_this_frame = false
 	if Global.current_frame == frame:
 		update()
