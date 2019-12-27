@@ -115,5 +115,5 @@ func _on_EditPaletteColorPicker_color_changed(color : Color) -> void:
 		working_palette.set_color(current_swatch, color)
 		_refresh_hint_tooltip(current_swatch)
 
-func _refresh_hint_tooltip(index : int):
+func _refresh_hint_tooltip(_index : int):
 	palette_grid.get_child(current_swatch).hint_tooltip = "#" + working_palette.get_color_data(current_swatch).to_upper() + " " + working_palette.get_color_name(current_swatch)

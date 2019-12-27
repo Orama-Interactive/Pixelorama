@@ -7,7 +7,7 @@ export var draggable := false
 
 var drag_preview_texture = preload("res://Assets/Graphics/Palette/swatch_drag_preview.png")
 
-func get_drag_data(position):
+func get_drag_data(_position):
 	var data = null;
 	if(draggable):
 		#print(String(get_instance_id()) + ": Drag Start");
@@ -18,8 +18,8 @@ func get_drag_data(position):
 		set_drag_preview(drag_icon);
 	return data;
 
-func can_drop_data(position, data):
+func can_drop_data(_position, _data):
 	return true;
 
-func drop_data(position, data):
+func drop_data(_position, data):
 	emit_signal("on_drop_data", data.source_index, index);
