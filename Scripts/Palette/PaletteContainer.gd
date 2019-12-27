@@ -43,7 +43,6 @@ func on_import_palette() -> void:
 	Global.palette_import_file_dialog.popup_centered()
 
 func on_palette_import_file_selected(path) -> void:
-	var file := File.new()
 	var palette : Palette = null
 	if path.to_lower().ends_with("json"):
 		palette = Palette.new().load_from_file(path)
