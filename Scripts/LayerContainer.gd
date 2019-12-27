@@ -10,11 +10,15 @@ onready var label := $HBoxContainer/Label
 onready var line_edit := $HBoxContainer/LineEdit
 
 func _ready() -> void:
-	visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
-	visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
 	changed_selection()
+	if Global.canvas.layers[i][3]:
+		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
+		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
+	else:
+		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible.png" % Global.theme_type)
+		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible_Hover.png" % Global.theme_type)
 
-func _input(event : InputEvent):
+func _input(event : InputEvent) -> void:
 	if event.is_action_released("ui_accept") && line_edit.visible && event.scancode != KEY_SPACE:
 		label.visible = true
 		line_edit.visible = false
@@ -79,6 +83,7 @@ func _on_VisibilityButton_pressed() -> void:
 		Global.canvas.layers[i][3] = true
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
+	Global.canvas.update()
 
 func _on_LineEdit_text_changed(new_text : String) -> void:
 	Global.canvas.layers[i][2] = new_text

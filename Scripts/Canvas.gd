@@ -517,7 +517,6 @@ func generate_layer_panels() -> void:
 		layer_container.get_child(1).get_child(0).texture = layers[i][1]
 		layer_container.get_child(1).get_child(1).text = layers[i][2]
 		layer_container.get_child(1).get_child(2).text = layers[i][2]
-		layers[i][3] = true # Set visible
 		Global.vbox_layer_container.add_child(layer_container)
 
 func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
