@@ -9,8 +9,7 @@ var minor_subdivision := 3
 var first : Vector2
 var last : Vector2
 
-
-#Code taken and modified from Godot's source code
+# Code taken and modified from Godot's source code
 func _draw() -> void:
 	var color := Color.white
 	if Global.theme_type == "Gold" || Global.theme_type == "Light":
@@ -52,3 +51,7 @@ func _draw() -> void:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), color)
 			else:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), color)
+
+# warning-ignore:unused_argument
+func _on_ScrollContainer_gui_input(event) -> void:
+	update()
