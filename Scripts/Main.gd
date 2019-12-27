@@ -75,7 +75,7 @@ func _ready() -> void:
 		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
 		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
 		"Invert Colors" : 0,
-		"Black & White" : 0,
+		"Desaturation" : 0,
 		"Outline" : 0
 		}
 	var help_menu_items := {
@@ -256,7 +256,6 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:
-	Global.canvas.update()
 	match id:
 		0: # Tile mode
 			Global.tile_mode = !Global.tile_mode
@@ -276,6 +275,8 @@ func view_menu_id_pressed(id : int) -> void:
 				for guide in canvas.get_children():
 					if guide is Guide:
 						guide.visible = Global.show_guides
+
+	Global.canvas.update()
 
 func image_menu_id_pressed(id : int) -> void:
 	match id:
@@ -339,7 +340,7 @@ func image_menu_id_pressed(id : int) -> void:
 						continue
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
-		5: # Black & White
+		5: # Desaturation
 			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:

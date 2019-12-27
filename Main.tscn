@@ -1558,6 +1558,7 @@ margin_right = 224.0
 size_flags_horizontal = 3
 
 [node name="BrushesPopup" type="Popup" parent="."]
+editor/display_folded = true
 margin_right = 226.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 0, 144 )

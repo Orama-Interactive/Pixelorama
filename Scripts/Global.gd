@@ -362,6 +362,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 
 			if action_name == "Scale":
 				c.camera_zoom()
+
 	if "Layer" in action_name:
 		var current_layer_index : int = _canvases[0].current_layer_index
 		_canvases[0].generate_layer_panels()
@@ -386,6 +387,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
+	canvas.update()
 	notification_label("Undo: %s" % action_name)
 
 
@@ -425,6 +427,7 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
+	canvas.update()
 	if control.redone:
 		notification_label("Redo: %s" % action_name)
 
