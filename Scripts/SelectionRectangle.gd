@@ -19,11 +19,11 @@ func _ready() -> void:
 
 # warning-ignore:unused_argument
 func _process(delta : float) -> void:
-	var mouse_pos := get_local_mouse_position() - Global.canvas.location
+	var mouse_pos: Vector2 = get_local_mouse_position() - Global.canvas.location
 	var mouse_pos_floored := mouse_pos.floor()
 	var start_pos := polygon[0]
 	var end_pos := polygon[2]
-	var current_layer_index := Global.canvas.current_layer_index
+	var current_layer_index: int = Global.canvas.current_layer_index
 	var layer : Image = Global.canvas.layers[current_layer_index][0]
 
 	if end_pos == start_pos:

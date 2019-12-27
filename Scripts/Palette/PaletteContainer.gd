@@ -53,7 +53,7 @@ func on_palette_import_file_selected(path) -> void:
 		if not Global.palettes.has(palette.name):
 			Global.palettes[palette.name] = palette
 			Global.palette_option_button.add_item(palette.name)
-			var index := Global.palette_option_button.get_item_count() - 1
+			var index: int = Global.palette_option_button.get_item_count() - 1
 			Global.palette_option_button.set_item_metadata(index, palette.name)
 			Global.palette_option_button.select(index)
 			on_palette_select(palette.name)
@@ -108,7 +108,7 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	# Add palette to Global and options
 	Global.palettes[name] = new_palette
 	Global.palette_option_button.add_item(name)
-	var index := Global.palette_option_button.get_item_count() - 1
+	var index: int = Global.palette_option_button.get_item_count() - 1
 	Global.palette_option_button.set_item_metadata(index, name)
 	Global.palette_option_button.select(index)
 
@@ -161,7 +161,7 @@ func _load_palettes() -> void:
 		if palette:
 			Global.palettes[palette.name] = palette
 			Global.palette_option_button.add_item(palette.name)
-			var index := Global.palette_option_button.get_item_count() - 1
+			var index: int = Global.palette_option_button.get_item_count() - 1
 			Global.palette_option_button.set_item_metadata(index, palette.name)
 			if palette.name == "Default":
 				Global.palette_option_button.select(index)
@@ -174,7 +174,7 @@ func _load_palettes() -> void:
 		if palette:
 			Global.palettes[palette.name] = palette
 			Global.palette_option_button.add_item(palette.name)
-			var index := Global.palette_option_button.get_item_count() - 1
+			var index: int = Global.palette_option_button.get_item_count() - 1
 			Global.palette_option_button.set_item_metadata(index, palette.name)
 
 func get_palette_files(path : String) -> Array:
@@ -199,7 +199,7 @@ func remove_current_palette() -> void:
 	if Global.palettes[current_palette].editable:
 		_delete_palette_file(current_palette + ".json")
 		Global.palettes.erase(current_palette)
-		var selected_index := Global.palette_option_button.selected
+		var selected_index: int = Global.palette_option_button.selected
 		Global.palette_option_button.remove_item(selected_index)
 		if(selected_index - 1 >= 0):
 			Global.palette_option_button.select(selected_index - 1)
