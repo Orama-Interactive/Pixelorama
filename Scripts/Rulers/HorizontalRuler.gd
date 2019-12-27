@@ -9,8 +9,8 @@ var minor_subdivision := 4
 var first : Vector2
 var last : Vector2
 
-onready var _prev_camera_offset := Global.camera.offset
-onready var _prev_camera_zoom := Global.camera.zoom
+onready var _prev_camera_offset: Vector2 = Global.camera.offset
+onready var _prev_camera_zoom: Vector2 = Global.camera.zoom
 
 func _ready() -> void:
 	Global.main_viewport.connect("item_rect_changed", self, "update")
@@ -35,7 +35,7 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var zoom := 1 / Global.camera.zoom.x
+	var zoom: float = 1 / Global.camera.zoom.x
 	transform.x = Vector2(zoom, zoom)
 
 	transform.origin = Global.main_viewport.rect_size / 2 + Global.camera.offset * -zoom

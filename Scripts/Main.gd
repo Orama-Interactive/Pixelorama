@@ -88,7 +88,7 @@ func _ready() -> void:
 		TranslationServer.set_locale(saved_locale)
 
 		# Set the language option menu's default selected option to the loaded locale
-		var locale_index := Global.loaded_locales.find(saved_locale)
+		var locale_index: int = Global.loaded_locales.find(saved_locale)
 		$PreferencesDialog.languages.get_child(1).pressed = false
 		$PreferencesDialog.languages.get_child(locale_index + 2).pressed = true
 	else: # If the user doesn't have a language preference, set it to their OS' locale
@@ -503,13 +503,13 @@ func _on_SaveSprite_file_selected(path) -> void:
 			file.store_line("END_GUIDES")
 		file.store_line("END_FRAMES")
 
-		#Save tool options
-		var left_color := Global.left_color_picker.color
-		var right_color := Global.right_color_picker.color
-		var left_brush_size := Global.left_brush_size
-		var right_brush_size := Global.right_brush_size
-		var left_palette := Global.left_color_picker.get_picker().get_presets()
-		var right_palette := Global.right_color_picker.get_picker().get_presets()
+		# Save tool options
+		var left_color: Color = Global.left_color_picker.color
+		var right_color: Color = Global.right_color_picker.color
+		var left_brush_size: int = Global.left_brush_size
+		var right_brush_size: int = Global.right_brush_size
+		var left_palette: PoolColorArray = Global.left_color_picker.get_picker().get_presets()
+		var right_palette: PoolColorArray = Global.right_color_picker.get_picker().get_presets()
 		file.store_var(left_color)
 		file.store_var(right_color)
 		file.store_8(left_brush_size)
@@ -534,7 +534,7 @@ func _on_ImportSprites_files_selected(paths) -> void:
 	#Find the biggest image and let it handle the camera zoom options
 	var max_size : Vector2
 	var biggest_canvas : Canvas
-	var i := Global.canvases.size()
+	var i: int = Global.canvases.size()
 	for path in paths:
 		var image := Image.new()
 		var err := image.load(path)
@@ -882,7 +882,7 @@ func add_layer(is_new := true) -> void:
 	var new_layer_tex := ImageTexture.new()
 	new_layer_tex.create_from_image(new_layer, 0)
 
-	var new_layers := Global.canvas.layers.duplicate()
+	var new_layers: Array = Global.canvas.layers.duplicate()
 	new_layers.append([new_layer, new_layer_tex, null, true, 1])
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
@@ -894,7 +894,7 @@ func add_layer(is_new := true) -> void:
 	Global.undo_redo.commit_action()
 
 func _on_RemoveLayerButton_pressed() -> void:
-	var new_layers := Global.canvas.layers.duplicate()
+	var new_layers: Array = Global.canvas.layers.duplicate()
 	new_layers.remove(Global.canvas.current_layer_index)
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Layer")
@@ -908,7 +908,7 @@ func _on_RemoveLayerButton_pressed() -> void:
 func change_layer_order(rate : int) -> void:
 	var change = Global.canvas.current_layer_index + rate
 
-	var new_layers := Global.canvas.layers.duplicate()
+	var new_layers: Array = Global.canvas.layers.duplicate()
 	var temp = new_layers[Global.canvas.current_layer_index]
 	new_layers[Global.canvas.current_layer_index] = new_layers[change]
 	new_layers[change] = temp
@@ -923,7 +923,7 @@ func change_layer_order(rate : int) -> void:
 	Global.undo_redo.commit_action()
 
 func _on_MergeLayer_pressed() -> void:
-	var new_layers := Global.canvas.layers.duplicate()
+	var new_layers: Array = Global.canvas.layers.duplicate()
 	new_layers.remove(Global.canvas.current_layer_index)
 	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
 
@@ -948,9 +948,9 @@ func add_frame() -> void:
 	new_canvas.size = Global.canvas.size
 	new_canvas.frame = Global.canvases.size()
 
-	var new_canvases := Global.canvases.duplicate()
+	var new_canvases: Array = Global.canvases.duplicate()
 	new_canvases.append(new_canvas)
-	var new_hidden_canvases := Global.hidden_canvases.duplicate()
+	var new_hidden_canvases: Array = Global.hidden_canvases.duplicate()
 	new_hidden_canvases.append(new_canvas)
 
 	Global.undos += 1
@@ -1089,7 +1089,7 @@ func _on_SplitScreenButton_toggled(button_pressed) -> void:
 		$SplitScreenButton.hint_tooltip = tr("SPLITSCREEN_HT")
 
 func _on_ColorSwitch_pressed() -> void:
-	var temp := Global.left_color_picker.color
+	var temp: Color = Global.left_color_picker.color
 	Global.left_color_picker.color = Global.right_color_picker.color
 	Global.right_color_picker.color = temp
 	update_left_custom_brush()

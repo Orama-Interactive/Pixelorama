@@ -1,6 +1,6 @@
 extends BaseButton
 
-export var brush_type = Global.BRUSH_TYPES.PIXEL
+export var brush_type = 0 # Global.BRUSH_TYPES.PIXEL
 export var custom_brush_index := -3
 # warning-ignore:unused_class_variable
 var random_brushes := []
@@ -77,7 +77,7 @@ func _on_DeleteButton_pressed() -> void:
 			Global.undo_redo.add_do_property(bb, "custom_brush_index", bb.custom_brush_index - 1)
 			Global.undo_redo.add_undo_property(bb, "custom_brush_index", bb.custom_brush_index)
 
-		var custom_brushes := Global.custom_brushes.duplicate()
+		var custom_brushes: Array = Global.custom_brushes.duplicate()
 		custom_brushes.remove(custom_brush_index)
 
 		Global.undo_redo.add_do_property(Global, "custom_brushes", custom_brushes)

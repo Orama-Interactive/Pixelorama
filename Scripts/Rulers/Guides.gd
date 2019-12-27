@@ -56,8 +56,8 @@ func _process(delta : float) -> void:
 
 func _draw() -> void:
 	if has_focus:
-		var viewport_size := Global.main_viewport.rect_size
-		var zoom := Global.camera.zoom
+		var viewport_size: Vector2 = Global.main_viewport.rect_size
+		var zoom: Vector2 = Global.camera.zoom
 		if type == TYPE.HORIZONTAL:
 			draw_set_transform(Vector2(Global.camera.offset.x - (viewport_size.x / 2) * zoom.x, points[0].y + font.get_height() * zoom.x * 2), rotation, zoom * 2)
 			draw_string(font, Vector2.ZERO, "%spx" % str(round(mouse_pos.y)))
