@@ -9,9 +9,6 @@ var minor_subdivision := 3
 var first : Vector2
 var last : Vector2
 
-# warning-ignore:unused_argument
-func _process(delta : float) -> void:
-	update()
 
 #Code taken and modified from Godot's source code
 func _draw() -> void:
