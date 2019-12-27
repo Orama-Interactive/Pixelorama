@@ -48,10 +48,9 @@ func _clear_swatches() -> void:
 			child.queue_free()
 
 func on_swatch_select(new_button) -> void:
-	var index : int = new_button.index
-	current_swatch = index
-	color_name_edit.text = working_palette.get_color_name(index)
-	color_picker.color = working_palette.get_color(index)
+	current_swatch = new_button.index
+	color_name_edit.text = working_palette.get_color_name(current_swatch)
+	color_picker.color = working_palette.get_color(current_swatch)
 
 func on_move_swatch(from : int, to : int) -> void:
 	working_palette.move_color(from, to)
@@ -77,16 +76,19 @@ func _on_AddSwatchButton_pressed() -> void:
 	new_button.connect("pressed", self, "on_swatch_select", [new_button])
 
 	palette_grid.add_child(new_button)
+	on_swatch_select(new_button)
 
 func _on_RemoveSwatchButton_pressed() -> void:
-	working_palette.remove_color(current_swatch)
-	palette_grid.remove_child(palette_grid.get_child(current_swatch))
-	re_index_swatches()
-
 	if working_palette.colors.size() > 0:
+		working_palette.remove_color(current_swatch)
+		palette_grid.remove_child(palette_grid.get_child(current_swatch))
+		re_index_swatches()
+
 		if current_swatch == working_palette.colors.size():
 			current_swatch -= 1
-		on_swatch_select(palette_grid.get_child(current_swatch))
+
+		if current_swatch >= 0:
+			on_swatch_select(palette_grid.get_child(current_swatch))
 
 func re_index_swatches() -> void:
 	# Re-index swatches with new order
