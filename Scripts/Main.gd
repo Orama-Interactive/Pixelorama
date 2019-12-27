@@ -252,7 +252,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.selected_pixels.clear()
 			Global.canvas.handle_redo("Rectangle Select")
 		3: # Preferences
-			$PreferencesDialog.popup_centered(Vector2(380, 300))
+			$PreferencesDialog.popup_centered(Vector2(300, 280))
 			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:

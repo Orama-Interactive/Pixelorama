@@ -3,7 +3,7 @@ extends AcceptDialog
 onready var tree : Tree = $HSplitContainer/Tree
 onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
 onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
-onready var theme_option = $HSplitContainer/ScrollContainer/VBoxContainer/ThemeOption
+onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
 
 func _ready() -> void:
@@ -20,10 +20,14 @@ func _ready() -> void:
 		if child is Button:
 			child.connect("pressed", self, "_on_Language_pressed", [child])
 
+	for child in themes.get_children():
+		if child is Button:
+			child.connect("pressed", self, "_on_Theme_pressed", [child])
+
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
-		theme_option.selected = theme_id
+		themes.get_child(theme_id + 1).pressed = true
 
 func _on_Tree_item_selected() -> void:
 	for child in right_side.get_children():
@@ -32,7 +36,7 @@ func _on_Tree_item_selected() -> void:
 	if "Language" in selected:
 		languages.visible = true
 	elif "Themes" in selected:
-		theme_option.visible = true
+		themes.visible = true
 	elif "Guides & Grid" in selected:
 		grid_guides.visible = true
 
@@ -60,11 +64,23 @@ func _on_Language_pressed(button : Button) -> void:
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
 
-func _on_ThemeOption_item_selected(ID : int) -> void:
-	change_theme(ID)
+func _on_Theme_pressed(button : Button) -> void:
+	var index := 0
+	var i := 0
+	for child in themes.get_children():
+		if child is Button:
+			if child == button:
+				button.pressed = true
+				index = i
+			else:
+				child.pressed = false
+			i += 1
 
-	Global.config_cache.set_value("preferences", "theme", ID)
+	change_theme(index)
+
+	Global.config_cache.set_value("preferences", "theme", index)
 	Global.config_cache.save("user://cache.ini")
+
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font

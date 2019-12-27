@@ -1369,7 +1369,6 @@ texture_normal = ExtResource( 42 )
 texture_hover = ExtResource( 43 )
 
 [node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
-editor/display_folded = true
 margin_top = 36.0
 margin_right = 224.0
 margin_bottom = 152.0
@@ -1384,7 +1383,7 @@ size_flags_horizontal = 3
 margin_left = 112.0
 margin_right = 112.0
 size_flags_horizontal = 3
-columns = 8
+columns = 5
 script = ExtResource( 44 )
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
@@ -1801,7 +1800,6 @@ items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cu
 selected = 0
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 61 )]
-visible = false
 
 [node name="OutlineDialog" type="ConfirmationDialog" parent="."]
 editor/display_folded = true

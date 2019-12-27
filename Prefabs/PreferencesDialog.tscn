@@ -19,6 +19,7 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -36.0
 size_flags_horizontal = 3
+custom_constants/autohide = 0
 
 [node name="Tree" type="Tree" parent="HSplitContainer"]
 margin_right = 88.0
@@ -43,16 +44,17 @@ size_flags_horizontal = 3
 margin_right = 205.0
 margin_bottom = 282.0
 
-[node name="LanguageOptions" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="Language Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_right = 205.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Language Options:"
 
-[node name="SystemLanguage" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 32.0
 margin_right = 205.0
 margin_bottom = 56.0
+mouse_default_cursor_shape = 2
 pressed = true
 text = "System Language"
 
@@ -60,12 +62,14 @@ text = "System Language"
 margin_top = 60.0
 margin_right = 205.0
 margin_bottom = 84.0
+mouse_default_cursor_shape = 2
 text = "Deutsch [de]"
 
 [node name="Greek" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 88.0
 margin_right = 205.0
 margin_bottom = 112.0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Ελληνικά [el]"
 
@@ -73,50 +77,91 @@ text = "Ελληνικά [el]"
 margin_top = 116.0
 margin_right = 205.0
 margin_bottom = 140.0
+mouse_default_cursor_shape = 2
 text = "English [en]"
 
 [node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 144.0
 margin_right = 205.0
 margin_bottom = 168.0
+mouse_default_cursor_shape = 2
 text = "Français [fr]"
 
 [node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 172.0
 margin_right = 205.0
 margin_bottom = 196.0
+mouse_default_cursor_shape = 2
 text = "Polski [pl]"
 
 [node name="Brazilian Portuguese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 200.0
 margin_right = 205.0
 margin_bottom = 224.0
+mouse_default_cursor_shape = 2
 text = "Português Brasileiro [pt_BR]"
 
 [node name="Russian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 228.0
 margin_right = 205.0
 margin_bottom = 252.0
+mouse_default_cursor_shape = 2
 text = "Русский [ru]"
 
 [node name="Traditional Chinese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 256.0
 margin_right = 205.0
 margin_bottom = 282.0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
 text = "繁體中文 [zh_TW]"
 
-[node name="ThemeOption" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-visible = false
-margin_top = 24.0
-margin_right = 151.0
-margin_bottom = 44.0
+[node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Theme Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_right = 205.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+text = "Theme Options:"
+
+[node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_top = 32.0
+margin_right = 205.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
 text = "Dark"
-items = [ "Dark", null, false, 0, null, "Gray", null, false, 1, null, "Godot", null, false, 2, null, "Gold", null, false, 3, null, "Light", null, false, 4, null ]
-selected = 0
+
+[node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_top = 32.0
+margin_right = 205.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+text = "Gray"
+
+[node name="Godot\'s Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_top = 32.0
+margin_right = 205.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+text = "Godot"
+
+[node name="Gold Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_top = 32.0
+margin_right = 205.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+text = "Gold"
+
+[node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_top = 32.0
+margin_right = 205.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
 visible = false
 margin_top = 24.0
 margin_right = 151.0
@@ -131,6 +176,8 @@ text = "Grid options"
 margin_top = 18.0
 margin_right = 151.0
 margin_bottom = 94.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
@@ -177,7 +224,6 @@ margin_right = 124.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
-[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/ThemeOption" to="." method="_on_ThemeOption_item_selected"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]
