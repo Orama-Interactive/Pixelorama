@@ -833,7 +833,7 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
 		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 
-	var target_color : Color = sprite.get_pixel(xm, ym) # Used for filling
+	var radius := r # Used later for filling
 	var x := -r
 	var y := 0
 	var err := 2 - r * 2 # II. Quadrant
@@ -859,7 +859,12 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 			err += x * 2 + 1
 
 	if fill:
-		flood_fill(Vector2(xm, ym), target_color, color)
+		for j in range (-radius, radius + 1):
+			for i in range (-radius, radius + 1):
+				if i * i + j * j <= radius * radius:
+					var draw_pos := Vector2(i + xm, j + ym)
+					if point_in_rectangle(draw_pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+						sprite.set_pixelv(draw_pos, color)
 
 # Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
