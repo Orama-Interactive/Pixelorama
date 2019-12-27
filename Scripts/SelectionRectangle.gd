@@ -35,7 +35,7 @@ func _process(delta : float) -> void:
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_pressed("right_mouse")):
-			#Begin dragging
+			# Begin dragging
 			is_dragging = true
 			if Input.is_key_pressed(KEY_SHIFT):
 				move_pixels = true
@@ -52,25 +52,25 @@ func _process(delta : float) -> void:
 				for i in range(Global.selected_pixels.size()):
 					var curr_px = Global.selected_pixels[i]
 					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
-						orig_colors.append(layer.get_pixelv(curr_px)) #Color of pixel
+						orig_colors.append(layer.get_pixelv(curr_px)) # Color of pixel
 						var px = curr_px - Global.selected_pixels[0]
 						img.set_pixelv(px, orig_colors[i])
 						layer.set_pixelv(curr_px, Color(0, 0, 0, 0))
-					else: #If part of selection is outside canvas
+					else: # If part of selection is outside canvas
 						orig_colors.append(Color(0, 0, 0, 0))
 				Global.canvas.update_texture(Global.canvas.current_layer_index)
 			tex.create_from_image(img, 0)
 			update()
 
 			# Makes line2d invisible
-			if is_instance_valid(Global.canvas.line_2d):	# Checks to see if line_2d object still exists
+			if is_instance_valid(Global.canvas.line_2d): # Checks to see if line_2d object still exists
 				Global.canvas.line_2d.default_color = Color(0, 0, 0, 0)
 	else:
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
 
 	if is_dragging:
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):
-			#Drag
+			# Drag
 			start_pos.x = orig_x + mouse_pos_floored.x
 			end_pos.x = diff_x + mouse_pos_floored.x
 
@@ -82,7 +82,7 @@ func _process(delta : float) -> void:
 			polygon[3] = Vector2(start_pos.x, end_pos.y)
 
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_released("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_released("right_mouse")):
-			#Release Drag
+			# Release Drag
 			is_dragging = false
 			if move_pixels:
 				for i in range(orig_colors.size()):
@@ -101,32 +101,42 @@ func _process(delta : float) -> void:
 				for yy in range(start_pos.y, end_pos.y):
 					Global.selected_pixels.append(Vector2(xx, yy))
 
-			Global.canvas.handle_redo("Rectangle Select") #Redo
+			Global.canvas.handle_redo("Rectangle Select") # Redo
 
 			# Makes line2d visible
-			if is_instance_valid(Global.canvas.line_2d):	# Checks to see if line_2d object still exists
+			if is_instance_valid(Global.canvas.line_2d): # Checks to see if line_2d object still exists
 				Global.canvas.line_2d.default_color = Color.darkgray
 
-	#Handle copy
-	if Input.is_action_just_pressed("copy") && Global.selected_pixels.size() > 0:
-		#Save as custom brush
-		var brush_img := Image.new()
-		brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
-		if brush_img.is_invisible():
-			return
-		brush_img = brush_img.get_rect(brush_img.get_used_rect()) #save only the visible pixels
-		Global.custom_brushes.append(brush_img)
-		Global.create_brush_button(brush_img)
+	if Global.selected_pixels.size() > 0:
+		# Handle copy
+		if Input.is_action_just_pressed("copy"):
+			# Save as custom brush
+			var brush_img := Image.new()
+			brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
+			if brush_img.is_invisible():
+				return
+			brush_img = brush_img.get_rect(brush_img.get_used_rect()) #save only the visible pixels
+			Global.custom_brushes.append(brush_img)
+			Global.create_brush_button(brush_img)
 
-		#Have it in the clipboard so it can be pasted later
-		Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
+			# Have it in the clipboard so it can be pasted later
+			Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
 
-	#Handle paste
-	if Input.is_action_just_pressed("paste") && Global.selected_pixels.size() > 0 && Global.image_clipboard.get_size() > Vector2.ZERO:
-		Global.canvas.handle_undo("Draw")
-		layer.blend_rect(Global.image_clipboard, Rect2(Vector2.ZERO, polygon[2]-polygon[0]), polygon[0])
-		layer.lock()
-		Global.canvas.handle_redo("Draw")
+		# Handle paste
+		if Input.is_action_just_pressed("paste") && Global.image_clipboard.get_size() > Vector2.ZERO:
+			Global.canvas.handle_undo("Draw")
+			layer.blend_rect(Global.image_clipboard, Rect2(Vector2.ZERO, polygon[2]-polygon[0]), polygon[0])
+			layer.lock()
+			Global.canvas.handle_redo("Draw")
+
+		if Input.is_action_just_pressed("delete"):
+			Global.canvas.handle_undo("Draw")
+			for xx in range(start_pos.x, end_pos.x):
+				for yy in range(start_pos.y, end_pos.y):
+					layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
+			Global.canvas.handle_redo("Draw")
+
+
 
 func _draw() -> void:
 	if img.get_size() == polygon[2] - polygon[0]:

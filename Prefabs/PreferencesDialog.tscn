@@ -119,8 +119,9 @@ text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 editor/display_folded = true
-margin_right = 40.0
-margin_bottom = 40.0
+margin_top = 286.0
+margin_right = 205.0
+margin_bottom = 454.0
 
 [node name="Theme Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_right = 205.0
@@ -136,62 +137,63 @@ mouse_default_cursor_shape = 2
 text = "Dark"
 
 [node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_top = 32.0
+margin_top = 60.0
 margin_right = 205.0
-margin_bottom = 56.0
+margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 text = "Gray"
 
 [node name="Godot\'s Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_top = 32.0
+margin_top = 88.0
 margin_right = 205.0
-margin_bottom = 56.0
+margin_bottom = 112.0
 mouse_default_cursor_shape = 2
 text = "Godot"
 
 [node name="Gold Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_top = 32.0
+margin_top = 116.0
 margin_right = 205.0
-margin_bottom = 56.0
+margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 text = "Gold"
 
 [node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_top = 32.0
+margin_top = 144.0
 margin_right = 205.0
-margin_bottom = 56.0
+margin_bottom = 168.0
 mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 editor/display_folded = true
 visible = false
-margin_top = 24.0
-margin_right = 151.0
-margin_bottom = 118.0
+margin_top = 458.0
+margin_right = 205.0
+margin_bottom = 576.0
 
 [node name="GridOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
-margin_right = 151.0
+margin_right = 205.0
 margin_bottom = 14.0
-text = "Grid options"
+rect_min_size = Vector2( 0, 28 )
+text = "Grid Οptions:"
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
 margin_top = 18.0
-margin_right = 151.0
-margin_bottom = 94.0
+margin_right = 205.0
+margin_bottom = 118.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
 margin_top = 5.0
-margin_right = 46.0
+margin_right = 78.0
 margin_bottom = 19.0
 text = "Width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
-margin_left = 50.0
-margin_right = 124.0
+margin_left = 82.0
+margin_right = 156.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 16384.0
@@ -200,14 +202,14 @@ suffix = "px"
 
 [node name="Height" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
 margin_top = 33.0
-margin_right = 46.0
+margin_right = 78.0
 margin_bottom = 47.0
 text = "Height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
-margin_left = 50.0
+margin_left = 82.0
 margin_top = 28.0
-margin_right = 124.0
+margin_right = 156.0
 margin_bottom = 52.0
 min_value = 1.0
 max_value = 16384.0
@@ -216,28 +218,28 @@ suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
 margin_top = 59.0
-margin_right = 46.0
+margin_right = 78.0
 margin_bottom = 73.0
 text = "Color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
-margin_left = 50.0
+margin_left = 82.0
 margin_top = 56.0
-margin_right = 124.0
+margin_right = 156.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
 
 [node name="GuideColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
-margin_top = 59.0
-margin_right = 46.0
-margin_bottom = 73.0
+margin_top = 83.0
+margin_right = 78.0
+margin_bottom = 97.0
 text = "Guide color:"
 
 [node name="GuideColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
-margin_left = 50.0
-margin_top = 56.0
-margin_right = 124.0
-margin_bottom = 76.0
+margin_left = 82.0
+margin_top = 80.0
+margin_right = 156.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0.63, 0.13, 0.94, 1 )
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
