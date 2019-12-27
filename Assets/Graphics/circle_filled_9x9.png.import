@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/circle_filled_9x9.png-e8b23839b7a2268668453f011aef5a21.image"
+
+[deps]
+
+source_file="res://Assets/Graphics/circle_filled_9x9.png"
+dest_files=[ "res://.import/circle_filled_9x9.png-e8b23839b7a2268668453f011aef5a21.image" ]
+
+[params]
+

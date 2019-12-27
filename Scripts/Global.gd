@@ -85,7 +85,7 @@ var onion_skinning_future_rate := 0
 var onion_skinning_blue_red := false
 
 # Brushes
-enum BRUSH_TYPES {PIXEL, CIRCLE, FILE, RANDOM_FILE, CUSTOM}
+enum BRUSH_TYPES {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 # warning-ignore:unused_class_variable
 var left_brush_size := 1
 # warning-ignore:unused_class_variable
@@ -494,12 +494,15 @@ func update_left_custom_brush() -> void:
 	if current_left_brush_type == BRUSH_TYPES.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/pixel_image.png")
-		pixel = blend_image_with_color(pixel, left_color_picker.color, 1)
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 	elif current_left_brush_type == BRUSH_TYPES.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/circle_9x9.png")
-		pixel = blend_image_with_color(pixel, left_color_picker.color, 1)
+		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		left_circle_points = plot_circle(left_brush_size)
+	elif current_left_brush_type == BRUSH_TYPES.FILLED_CIRCLE:
+		var pixel := Image.new()
+		pixel = preload("res://Assets/Graphics/circle_filled_9x9.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
 	else:
@@ -516,12 +519,15 @@ func update_right_custom_brush() -> void:
 	if current_right_brush_type == BRUSH_TYPES.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/pixel_image.png")
-		pixel = blend_image_with_color(pixel, right_color_picker.color, 1)
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 	elif current_right_brush_type == BRUSH_TYPES.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/circle_9x9.png")
-		pixel = blend_image_with_color(pixel, right_color_picker.color, 1)
+		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		right_circle_points = plot_circle(right_brush_size)
+	elif current_right_brush_type == BRUSH_TYPES.FILLED_CIRCLE:
+		var pixel := Image.new()
+		pixel = preload("res://Assets/Graphics/circle_filled_9x9.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		right_circle_points = plot_circle(right_brush_size)
 	else:

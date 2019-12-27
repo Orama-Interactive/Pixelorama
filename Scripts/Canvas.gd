@@ -466,7 +466,7 @@ func _draw() -> void:
 					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-			elif Global.current_left_brush_type == Global.BRUSH_TYPES.CIRCLE:
+			elif Global.current_left_brush_type == Global.BRUSH_TYPES.CIRCLE || Global.current_left_brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
 					draw_set_transform(mouse_pos, rotation, scale)
 					for rect in Global.left_circle_points:
@@ -484,7 +484,7 @@ func _draw() -> void:
 					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-			elif Global.current_right_brush_type == Global.BRUSH_TYPES.CIRCLE:
+			elif Global.current_right_brush_type == Global.BRUSH_TYPES.CIRCLE || Global.current_right_brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
 				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
 					draw_set_transform(mouse_pos, rotation, scale)
 					for rect in Global.right_circle_points:
@@ -553,7 +553,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			if brush_type != Global.BRUSH_TYPES.RANDOM_FILE:
 				custom_brush_image = Global.custom_left_brush_image
 			else: # Handle random brush
-				var brush_button = Global.file_brush_container.get_child(brush_index + 2)
+				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
 				var random_index = randi() % brush_button.random_brushes.size()
 				custom_brush_image = Image.new()
 				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
@@ -573,7 +573,7 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			if brush_type != Global.BRUSH_TYPES.RANDOM_FILE:
 				custom_brush_image = Global.custom_right_brush_image
 			else: # Handle random brush
-				var brush_button = Global.file_brush_container.get_child(brush_index + 2)
+				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
 				var random_index = randi() % brush_button.random_brushes.size()
 				custom_brush_image = Image.new()
 				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
@@ -664,18 +664,18 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, color)
 									sprite_changed_this_frame = true
 
-		elif brush_type == Global.BRUSH_TYPES.CIRCLE:
-			plot_circle(layers[current_layer_index][0], pos.x, pos.y, brush_size, color)
+		elif brush_type == Global.BRUSH_TYPES.CIRCLE || brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
+			plot_circle(layers[current_layer_index][0], pos.x, pos.y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
 
 			# Handle mirroring
 			var mirror_x := east_limit + west_limit - pos.x
 			var mirror_y := south_limit + north_limit - pos.y
 			if horizontal_mirror:
-				plot_circle(layers[current_layer_index][0], mirror_x, pos.y, brush_size, color)
+				plot_circle(layers[current_layer_index][0], mirror_x, pos.y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
 			if vertical_mirror:
-				plot_circle(layers[current_layer_index][0], pos.x, mirror_y, brush_size, color)
+				plot_circle(layers[current_layer_index][0], pos.x, mirror_y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
 			if horizontal_mirror && vertical_mirror:
-				plot_circle(layers[current_layer_index][0], mirror_x, mirror_y, brush_size, color)
+				plot_circle(layers[current_layer_index][0], mirror_x, mirror_y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
 
 			sprite_changed_this_frame = true
 
@@ -822,7 +822,7 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 		sprite_changed_this_frame = true
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color) -> void:
+func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fill := false) -> void:
 	var west_limit := location.x
 	var east_limit := location.x + size.x
 	var north_limit := location.y
@@ -833,6 +833,7 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color) -> 
 		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
 		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 
+	var target_color : Color = sprite.get_pixel(xm, ym) # Used for filling
 	var x := -r
 	var y := 0
 	var err := 2 - r * 2 # II. Quadrant
@@ -856,6 +857,9 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color) -> 
 		if r > x || err > y:
 			x += 1
 			err += x * 2 + 1
+
+	if fill:
+		flood_fill(Vector2(xm, ym), target_color, color)
 
 # Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
