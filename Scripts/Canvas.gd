@@ -81,14 +81,19 @@ func camera_zoom() -> void:
 	Global.camera_preview.offset = size / 2
 
 func _input(event : InputEvent) -> void:
-	# Don't process anything below if the input isn't a mouse event.
+	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
 	# This decreases CPU/GPU usage slightly.
 	if not event is InputEventMouse:
-		return
+		if event is InputEventKey:
+			if event.scancode != KEY_SHIFT && event.scancode != KEY_CONTROL:
+				return
+		else:
+			return
+
+	if Global.current_frame == frame && Global.has_focus:
+		update()
 
 	sprite_changed_this_frame = false
-	if Global.current_frame == frame:
-		update()
 	current_pixel = get_local_mouse_position() - location
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
@@ -100,6 +105,7 @@ func _input(event : InputEvent) -> void:
 	# For the LightenDarken tool
 	var ld := 0
 	var ld_amount := 0.1
+
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = "left_mouse"
 		current_action = Global.current_left_tool
@@ -223,15 +229,15 @@ func _input(event : InputEvent) -> void:
 			if can_handle && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				var color_changed : Color
-				if ld == 0: #Lighten
+				if ld == 0: # Lighten
 					color_changed = pixel_color.lightened(ld_amount)
-				else: #Darken
+				else: # Darken
 					color_changed = pixel_color.darkened(ld_amount)
 				pencil_and_eraser(mouse_pos, color_changed, current_mouse_button, current_action)
 		"RectSelect":
-			#Check SelectionRectangle.gd for more code on Rectangle Selection
+			# Check SelectionRectangle.gd for more code on Rectangle Selection
 			if Global.can_draw && Global.has_focus && Global.current_frame == frame:
-				#If we're creating a new selection
+				# If we're creating a new selection
 				if Global.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
 					if Input.is_action_just_pressed(current_mouse_button):
 						Global.selection_rectangle.polygon[0] = mouse_pos_floored
@@ -241,7 +247,7 @@ func _input(event : InputEvent) -> void:
 						is_making_selection = current_mouse_button
 						Global.selected_pixels.clear()
 					else:
-						if is_making_selection != "None": #If we're making a new selection...
+						if is_making_selection != "None": # If we're making a new selection...
 							var start_pos = Global.selection_rectangle.polygon[0]
 							if start_pos != mouse_pos_floored:
 								var end_pos := Vector2(mouse_pos_ceiled.x, mouse_pos_ceiled.y)
@@ -289,8 +295,8 @@ func _input(event : InputEvent) -> void:
 			angle = 360 + angle
 		Global.cursor_position_label.text += "    %s°" % str(angle)
 
-	if is_making_selection != "None": #If we're making a selection
-		if Input.is_action_just_released(is_making_selection): #Finish selection when button is released
+	if is_making_selection != "None": # If we're making a selection
+		if Input.is_action_just_released(is_making_selection): # Finish selection when button is released
 			var start_pos = Global.selection_rectangle.polygon[0]
 			var end_pos = Global.selection_rectangle.polygon[2]
 			if start_pos.x > end_pos.x:
@@ -375,8 +381,8 @@ func update_texture(layer_index : int, update_frame_tex := true) -> void:
 		layer_container.get_child(1).get_child(0).texture = layers[layer_index][1]
 
 	if update_frame_tex:
-		#This code is used to update the texture in the animation timeline frame button
-		#but blend_rect causes major performance issues on large images
+		# This code is used to update the texture in the animation timeline frame button
+		# but blend_rect causes major performance issues on large images
 		var whole_image := Image.new()
 		whole_image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		for layer in layers:
