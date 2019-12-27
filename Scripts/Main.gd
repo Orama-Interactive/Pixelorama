@@ -256,6 +256,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:
+	Global.canvas.update()
 	match id:
 		0: # Tile mode
 			Global.tile_mode = !Global.tile_mode
