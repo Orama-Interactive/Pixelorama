@@ -49,6 +49,9 @@ msgstr ""
 msgid "Import PNG..."
 msgstr ""
 
+msgid "Export"
+msgstr ""
+
 msgid "Export PNG..."
 msgstr ""
 

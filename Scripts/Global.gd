@@ -331,7 +331,7 @@ func _ready() -> void:
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
-#Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
+# Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
 	if root.get_name() == node_name:
 		return root
@@ -373,8 +373,8 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frame_container.remove_child(_canvases[0].frame_button)
-		#This actually means that canvases.size is one, but it hasn't been updated yet
-		if canvases.size() == 2: #Stop animating
+		# This actually means that canvases.size is one, but it hasn't been updated yet
+		if canvases.size() == 2: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
@@ -392,7 +392,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 
 
 func redo(_canvases : Array, layer_index : int = -1) -> void:
-	if undos < undo_redo.get_version(): #If we did undo and then redo
+	if undos < undo_redo.get_version(): # If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
@@ -419,7 +419,7 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frame_container.remove_child(_canvases[0].frame_button)
-		if canvases.size() == 1: #Stop animating
+		if canvases.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
@@ -485,7 +485,7 @@ func undo_custom_brush(_brush_button : BaseButton = null) -> void:
 	notification_label("Undo: %s" % action_name)
 
 func redo_custom_brush(_brush_button : BaseButton = null) -> void:
-	if undos < undo_redo.get_version(): #If we did undo and then redo
+	if undos < undo_redo.get_version(): # If we did undo and then redo
 		undos = undo_redo.get_version()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":

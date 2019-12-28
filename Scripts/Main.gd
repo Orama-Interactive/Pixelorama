@@ -3,6 +3,7 @@ extends Control
 var current_save_path := ""
 var current_export_path := ""
 var opensprite_file_selected := false
+var file_menu : PopupMenu
 var view_menu : PopupMenu
 var tools := []
 var import_as_new_frame : CheckBox
@@ -100,7 +101,7 @@ func _ready() -> void:
 		theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
 
 
-	var file_menu : PopupMenu = Global.file_menu.get_popup()
+	file_menu = Global.file_menu.get_popup()
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
 	view_menu = Global.view_menu.get_popup()
 	var image_menu : PopupMenu = Global.image_menu.get_popup()
@@ -586,9 +587,11 @@ func clear_canvases() -> void:
 	Global.canvases.clear()
 	current_save_path = ""
 	current_export_path = ""
+	file_menu.set_item_text(5, "Export PNG...")
 
 func _on_ExportSprites_file_selected(path : String) -> void:
 	current_export_path = path
+	file_menu.set_item_text(5, tr("Export") + " %s" % path.get_file())
 	export_project()
 
 func export_project() -> void:
