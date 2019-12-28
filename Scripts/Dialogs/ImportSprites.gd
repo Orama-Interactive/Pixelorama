@@ -5,7 +5,7 @@ var import_spritesheet := false
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
 
-func _ready():
+func _ready() -> void:
 	var children := []
 	for i in range(get_child_count()):
 		if i > 7:
@@ -44,7 +44,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 		for path in paths:
 			var image := Image.new()
 			var err := image.load(path)
-			if err != OK: #An error occured
+			if err != OK: # An error occured
 				OS.alert("Can't load file")
 				continue
 
@@ -74,7 +74,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	else:
 		var image := Image.new()
 		var err := image.load(first_path)
-		if err != OK: #An error occured
+		if err != OK: # An error occured
 			OS.alert("Can't load file")
 			return
 

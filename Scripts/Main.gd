@@ -1,14 +1,11 @@
 extends Control
 
 var current_save_path := ""
-var current_export_path := ""
 var opensprite_file_selected := false
 var file_menu : PopupMenu
 var view_menu : PopupMenu
 var tools := []
-var export_all_frames : CheckBox
-var export_as_single_file : CheckBox
-var export_vertical_spritesheet : CheckBox
+
 var redone := false
 var fps := 6.0
 var animation_loop := 0 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
@@ -155,20 +152,6 @@ func _ready() -> void:
 	Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 	Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
-	# Options for Export
-	var export_project_hbox := HBoxContainer.new()
-	export_all_frames = CheckBox.new()
-	export_all_frames.text = tr("EXPORT_ALLFRAMES_LABEL")
-	export_as_single_file = CheckBox.new()
-	export_as_single_file.text = tr("EXPORT_FRAMES_ASFILE_LABEL")
-	export_vertical_spritesheet = CheckBox.new()
-	export_vertical_spritesheet.text = tr("EXPORT_VERTICAL_SPRITESHEET_LABEL")
-
-	$ExportSprites.get_vbox().add_child(export_project_hbox)
-	export_project_hbox.add_child(export_all_frames)
-	export_project_hbox.add_child(export_as_single_file)
-	export_project_hbox.add_child(export_vertical_spritesheet)
-
 	Import.import_brushes("Brushes")
 
 func _input(event : InputEvent) -> void:
@@ -219,11 +202,11 @@ func file_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 			opensprite_file_selected = false
 		5: # Export
-			if current_export_path == "":
+			if $ExportSprites.current_export_path == "":
 				$ExportSprites.popup_centered()
 				Global.can_draw = false
 			else:
-				export_project()
+				$ExportSprites.export_project()
 		6: # Export as
 			$ExportSprites.popup_centered()
 			Global.can_draw = false
@@ -535,93 +518,9 @@ func clear_canvases() -> void:
 			child.queue_free()
 	Global.canvases.clear()
 	current_save_path = ""
-	current_export_path = ""
+	$ExportSprites.current_export_path = ""
 	file_menu.set_item_text(5, "Export PNG...")
 
-func _on_ExportSprites_file_selected(path : String) -> void:
-	current_export_path = path
-	file_menu.set_item_text(5, tr("Export") + " %s" % path.get_file())
-	export_project()
-
-func export_project() -> void:
-	if export_all_frames.pressed:
-		if !export_as_single_file.pressed:
-			var i := 1
-			for canvas in Global.canvases:
-				var path := "%s_%s" % [current_export_path, str(i)]
-				path = path.replace(".png", "")
-				path = "%s.png" % path
-				save_sprite(canvas, path)
-				i += 1
-		else:
-			save_spritesheet()
-	else:
-		save_sprite(Global.canvas, current_export_path)
-	Global.notification_label("File exported")
-
-func save_sprite(canvas : Canvas, path : String) -> void:
-	var whole_image := Image.new()
-	whole_image.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
-	whole_image.lock()
-	for layer in canvas.layers:
-		var img : Image = layer[0]
-		img.lock()
-		if layer[4] < 1: # If we have layer transparency
-			for xx in img.get_size().x:
-				for yy in img.get_size().y:
-					var pixel_color := img.get_pixel(xx, yy)
-					var alpha : float = pixel_color.a * layer[4]
-					img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-
-		canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), Vector2.ZERO)
-		layer[0].lock()
-	var err = whole_image.save_png(path)
-	if err != OK:
-		OS.alert("Can't save file")
-
-func save_spritesheet() -> void:
-	var width
-	var height
-	if export_vertical_spritesheet.pressed: #Vertical spritesheet
-		width = Global.canvas.size.x
-		height = 0
-		for canvas in Global.canvases:
-			height += canvas.size.y
-			if canvas.size.x > width:
-				width = canvas.size.x
-	else: #Horizontal spritesheet
-		width = 0
-		height = Global.canvas.size.y
-		for canvas in Global.canvases:
-			width += canvas.size.x
-			if canvas.size.y > height:
-				height = canvas.size.y
-	var whole_image := Image.new()
-	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
-	whole_image.lock()
-	var dst := Vector2.ZERO
-	for canvas in Global.canvases:
-		for layer in canvas.layers:
-			var img : Image = layer[0]
-			img.lock()
-			if layer[4] < 1: # If we have layer transparency
-				for xx in img.get_size().x:
-					for yy in img.get_size().y:
-						var pixel_color := img.get_pixel(xx, yy)
-						var alpha : float = pixel_color.a * layer[4]
-						img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-
-			canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), dst)
-			layer[0].lock()
-
-		if export_vertical_spritesheet.pressed:
-			dst += Vector2(0, canvas.size.y)
-		else:
-			dst += Vector2(canvas.size.x, 0)
-
-	var err = whole_image.save_png(current_export_path)
-	if err != OK:
-		OS.alert("Can't save file")
 
 func _on_ScaleImage_confirmed() -> void:
 	var width : int = $ScaleImage/VBoxContainer/OptionsContainer/WidthValue.value

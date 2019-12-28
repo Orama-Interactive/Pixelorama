@@ -2,8 +2,5 @@
 .import/
 export_presets.cfg
 
-# Imported translations
-# Godot imports them automatically when editing the project for the first time.
-*.translation
-
+Translations/Update Translations.bat
 Scripts/Old/

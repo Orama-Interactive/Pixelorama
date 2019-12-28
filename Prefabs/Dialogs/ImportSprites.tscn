@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Dialogs/ImportSprites.gd" type="Script" id=1]
 
 [node name="ImportSprites" type="FileDialog"]
-editor/display_folded = true
 margin_right = 515.0
 margin_bottom = 348.0
 window_title = "Open File(s)"
@@ -16,8 +15,10 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 script = ExtResource( 1 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 507.0
+margin_bottom = 312.0
 
 [node name="ImportAsNewFrame" type="CheckBox" parent="HBoxContainer2"]
 margin_right = 130.0
@@ -32,8 +33,10 @@ text = "Import as spritesheet"
 
 [node name="Spritesheet" type="HBoxContainer" parent="."]
 visible = false
-margin_right = 306.0
-margin_bottom = 17.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 507.0
+margin_bottom = 312.0
 
 [node name="Label" type="Label" parent="Spritesheet"]
 margin_top = 1.0
