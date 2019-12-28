@@ -9,16 +9,19 @@ var frame := 0 setget frame_changed
 var frame_button : VBoxContainer
 var frame_texture_rect : TextureRect
 
-var current_pixel := Vector2.ZERO #pretty much same as mouse_pos, but can be accessed externally
+var current_pixel := Vector2.ZERO # pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
 var previous_mouse_pos_for_lines := Vector2.ZERO
 var can_undo := true
 var cursor_inside_canvas := false
 var previous_action := "None"
-var mouse_inside_canvas := false #used for undo
-var sprite_changed_this_frame := false #for optimization purposes
-var lighten_darken_pixels := [] #Cleared after mouse release
-
+var west_limit := location.x
+var east_limit := location.x + size.x
+var north_limit := location.y
+var south_limit := location.y + size.y
+var mouse_inside_canvas := false # used for undo
+var sprite_changed_this_frame := false # for optimization purposes
+var lighten_darken_pixels := [] # Cleared after mouse release
 var is_making_line := false
 var made_line := false
 var is_making_selection := "None"
@@ -101,20 +104,29 @@ func _input(event : InputEvent) -> void:
 	var mouse_in_canvas := point_in_rectangle(mouse_pos, location, location + size)
 	var current_mouse_button := "None"
 	var current_action := "None"
+	var current_color : Color
 	var fill_area := 0 # For the bucket tool
 	# For the LightenDarken tool
 	var ld := 0
 	var ld_amount := 0.1
 
+	if Global.selected_pixels.size() != 0:
+		west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
+		east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
+		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
+		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
+
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = "left_mouse"
 		current_action = Global.current_left_tool
+		current_color = Global.left_color_picker.color
 		fill_area = Global.left_fill_area
 		ld = Global.left_ld
 		ld_amount = Global.left_ld_amount
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
+		current_color = Global.right_color_picker.color
 		fill_area = Global.right_fill_area
 		ld = Global.right_ld
 		ld_amount = Global.right_ld_amount
@@ -165,28 +177,20 @@ func _input(event : InputEvent) -> void:
 
 	match current_action: # Handle current tool
 		"Pencil":
-			var current_color : Color
-			if current_mouse_button == "left_mouse":
-				current_color = Global.left_color_picker.color
-			elif current_mouse_button == "right_mouse":
-				current_color = Global.right_color_picker.color
 			pencil_and_eraser(mouse_pos, current_color, current_mouse_button)
 		"Eraser":
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Bucket":
 			if can_handle && Global.current_frame == frame:
 				if fill_area == 0: # Paint the specific area of the same color
-					var current_color : Color
 					var horizontal_mirror := false
 					var vertical_mirror := false
-					var mirror_x := size.x - mouse_pos.x - 1
-					var mirror_y := size.y - mouse_pos.y - 1
+					var mirror_x := east_limit + west_limit - mouse_pos_floored.x - 1
+					var mirror_y := south_limit + north_limit - mouse_pos_floored.y - 1
 					if current_mouse_button == "left_mouse":
-						current_color = Global.left_color_picker.color
 						horizontal_mirror = Global.left_horizontal_mirror
 						vertical_mirror = Global.left_vertical_mirror
 					elif current_mouse_button == "right_mouse":
-						current_color = Global.right_color_picker.color
 						horizontal_mirror = Global.right_horizontal_mirror
 						vertical_mirror = Global.right_vertical_mirror
 
@@ -202,22 +206,6 @@ func _input(event : InputEvent) -> void:
 						flood_fill(pos, layers[current_layer_index][0].get_pixelv(pos), current_color)
 
 				else: # Paint all pixels of the same color
-					var west_limit := location.x
-					var east_limit := location.x + size.x
-					var north_limit := location.y
-					var south_limit := location.y + size.y
-					if Global.selected_pixels.size() != 0:
-						west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
-						east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
-						north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
-						south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
-
-					var current_color : Color
-					if current_mouse_button == "left_mouse":
-						current_color = Global.left_color_picker.color
-					elif current_mouse_button == "right_mouse":
-						current_color = Global.right_color_picker.color
-
 					var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 					for xx in range(west_limit, east_limit):
 						for yy in range(north_limit, south_limit):
@@ -587,16 +575,6 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 			ld = Global.right_ld
 			ld_amount = Global.right_ld_amount
 
-		var west_limit := location.x
-		var east_limit := location.x + size.x
-		var north_limit := location.y
-		var south_limit := location.y + size.y
-		if Global.selected_pixels.size() != 0: # If there is a selection and current pixel position is not in it
-			west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
-			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
-			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
-			south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
-
 		var start_pos_x
 		var start_pos_y
 		var end_pos_x
@@ -784,15 +762,6 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 	elif pixel != target_color:
 		return
 	else:
-		var west_limit := location.x
-		var east_limit := location.x + size.x
-		var north_limit := location.y
-		var south_limit := location.y + size.y
-		if Global.selected_pixels.size() != 0:
-			west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
-			east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
-			north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
-			south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 
 		if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 			return
@@ -823,16 +792,6 @@ func flood_fill(pos : Vector2, target_color : Color, replace_color : Color) -> v
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fill := false) -> void:
-	var west_limit := location.x
-	var east_limit := location.x + size.x
-	var north_limit := location.y
-	var south_limit := location.y + size.y
-	if Global.selected_pixels.size() != 0:
-		west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
-		east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
-		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
-		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
-
 	var radius := r # Used later for filling
 	var x := -r
 	var y := 0
