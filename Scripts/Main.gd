@@ -6,7 +6,6 @@ var opensprite_file_selected := false
 var file_menu : PopupMenu
 var view_menu : PopupMenu
 var tools := []
-var import_as_new_frame : CheckBox
 var export_all_frames : CheckBox
 var export_as_single_file : CheckBox
 var export_vertical_spritesheet : CheckBox
@@ -156,11 +155,6 @@ func _ready() -> void:
 	Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 	Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
-	# Options for Import
-	import_as_new_frame = CheckBox.new()
-	import_as_new_frame.text = tr("IMPORT_FILE_LABEL")
-	$ImportSprites.get_vbox().add_child(import_as_new_frame)
-
 	# Options for Export
 	var export_project_hbox := HBoxContainer.new()
 	export_all_frames = CheckBox.new()
@@ -169,6 +163,7 @@ func _ready() -> void:
 	export_as_single_file.text = tr("EXPORT_FRAMES_ASFILE_LABEL")
 	export_vertical_spritesheet = CheckBox.new()
 	export_vertical_spritesheet.text = tr("EXPORT_VERTICAL_SPRITESHEET_LABEL")
+
 	$ExportSprites.get_vbox().add_child(export_project_hbox)
 	export_project_hbox.add_child(export_all_frames)
 	export_project_hbox.add_child(export_as_single_file)
@@ -529,52 +524,6 @@ func _on_SaveSprite_file_selected(path) -> void:
 	file.close()
 	Global.notification_label("File saved")
 
-func _on_ImportSprites_files_selected(paths) -> void:
-	if !import_as_new_frame.pressed: #If we're not adding a new frame, delete the previous
-		clear_canvases()
-
-	#Find the biggest image and let it handle the camera zoom options
-	var max_size : Vector2
-	var biggest_canvas : Canvas
-	var i: int = Global.canvases.size()
-	for path in paths:
-		var image := Image.new()
-		var err := image.load(path)
-		if err != OK: #An error occured
-			OS.alert("Can't load file")
-			continue
-
-		opensprite_file_selected = true
-		var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
-		canvas.size = image.get_size()
-		image.convert(Image.FORMAT_RGBA8)
-		image.lock()
-		var tex := ImageTexture.new()
-		tex.create_from_image(image, 0)
-		#Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-		canvas.layers.append([image, tex, "Layer 0", true, 1])
-		canvas.frame = i
-		Global.canvases.append(canvas)
-		Global.canvas_parent.add_child(canvas)
-		canvas.visible = false
-		if path == paths[0]: #If it's the first file
-			max_size = canvas.size
-			biggest_canvas = canvas
-		else:
-			if canvas.size > max_size:
-				biggest_canvas = canvas
-
-		i += 1
-	Global.current_frame = i - 1
-	Global.canvas = Global.canvases[Global.canvases.size() - 1]
-	Global.canvas.visible = true
-	biggest_canvas.camera_zoom()
-
-	Global.undo_redo.clear_history(false)
-
-	var first_path : String = paths[0]
-	OS.set_window_title(first_path.get_file() + " (imported) - Pixelorama")
-
 func clear_canvases() -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
@@ -845,8 +794,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		else:
 			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s.png" % [Global.theme_type, tool_name])
 
-	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_left_tool))
-	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_right_tool))
+	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_left_tool), 0)
+	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_right_tool), 0)
 
 func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.left_square_indicator_visible = button_pressed
