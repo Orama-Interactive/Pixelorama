@@ -7,6 +7,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "OK"
 msgstr "OK"
@@ -24,10 +27,10 @@ msgid "Image Size"
 msgstr "Bildgröße"
 
 msgid "Width:"
-msgstr "Weite"
+msgstr "Breite:"
 
 msgid "Height:"
-msgstr "Höhe"
+msgstr "Höhe:"
 
 msgid "File"
 msgstr "Datei"
@@ -42,7 +45,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 msgid "New..."
-msgstr "Neu"
+msgstr "Neu:"
 
 msgid "Open..."
 msgstr "Öffnen..."
@@ -54,13 +57,13 @@ msgid "Save as..."
 msgstr "Speichern als..."
 
 msgid "Import PNG..."
-msgstr "Importiere PNG"
+msgstr "Importiere PNG..."
 
 msgid "Export"
 msgstr "Exportiere"
 
 msgid "Export PNG..."
-msgstr "Exportiere PNG"
+msgstr "Exportiere PNG..."
 
 msgid "Export PNG as..."
 msgstr "Exportiere PNG als..."
@@ -93,7 +96,7 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Tile Mode"
-msgstr "Tile Mode"
+msgstr "Tile Modus"
 
 msgid "Show Grid"
 msgstr "Zeige Gitter"
@@ -105,7 +108,7 @@ msgid "Show Guides"
 msgstr "Zeige Anleitungen"
 
 msgid "Fill with color:"
-msgstr "Fülle mit Farbe"
+msgstr "Fülle mit Farbe:"
 
 msgid "Open a File"
 msgstr "Öffne eine Datei"
@@ -135,13 +138,13 @@ msgid "Path:"
 msgstr "Pfad:"
 
 msgid "Directories & Files:"
-msgstr "Verzeichnisse & Dateien"
+msgstr "Verzeichnisse & Dateien:"
 
 msgid "File:"
 msgstr "Datei:"
 
 msgid "Interpolation:"
-msgstr "Interpolation"
+msgstr "Interpolation:"
 
 msgid "Nearest"
 msgstr "Nächstes"
@@ -165,7 +168,7 @@ msgid "Language:"
 msgstr "Sprache:"
 
 msgid "System Language"
-msgstr "System Sprache"
+msgstr "Systemsprache"
 
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
@@ -194,12 +197,12 @@ msgstr ""
 "R für die linke Maustaste\n"
 "Alt + R für die rechte Maustaste\n"
 "\n"
-"Presse Shift zum verschieben des Inhalts"
+"Halte Shift zum verschieben des Inhalts"
 
 msgid "COLORPICKER_HT"
 msgstr ""
 "Farbauswahl\n"
-"Wähle einr Farbe von einem Pixel des Sprites\n"
+"Wähle eine Farbe von einem Pixel des Sprites\n"
 "\n"
 "O für die linke Maustaste\n"
 "Alt + O für die rechte Maustaste"
@@ -227,7 +230,7 @@ msgstr ""
 
 msgid "BUCKET_HT"
 msgstr ""
-"Eimer\n"
+"Füllen\n"
 "\n"
 "B für linke Maustaste\n"
 "Alt + B für rechte Maustaste"
@@ -373,14 +376,14 @@ msgstr ""
 
 msgid "FPS_HT"
 msgstr ""
-"Wie viele Frames pro Sekunde sollte die Animationsvorschau haben?\n"
+"Wie viele Frames pro Sekunde soll die Animationsvorschau haben?\n"
 " Je mehr FPS, desto schneller wird die Animation abgespielt."
 
 msgid "No loop"
-msgstr "Keine Wiederholungsschleife"
+msgstr "Keine Wiederholung"
 
 msgid "Cycle loop"
-msgstr "Zyklusschleife"
+msgstr "Schleife"
 
 msgid "Ping-pong loop"
 msgstr "Ping Pong Loop"
@@ -389,13 +392,13 @@ msgid "Onion Skinning:"
 msgstr "Onion Skinning:"
 
 msgid "Past Frames"
-msgstr "Letzten Frames"
+msgstr "Vorgänger Frames"
 
 msgid "Future Frames"
-msgstr "Nächsten Frames"
+msgstr "Nachfolger Frames"
 
 msgid "Blue-Red Mode"
-msgstr "Blau-Roter Modus"
+msgstr "Blau-Rot Modus"
 
 msgid "Add a new frame"
 msgstr "Füge einen neuen Frame hinzu"
