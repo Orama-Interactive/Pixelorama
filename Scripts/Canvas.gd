@@ -110,6 +110,10 @@ func _input(event : InputEvent) -> void:
 	var ld := 0
 	var ld_amount := 0.1
 
+	west_limit = location.x
+	east_limit = location.x + size.x
+	north_limit = location.y
+	south_limit = location.y + size.y
 	if Global.selected_pixels.size() != 0:
 		west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
 		east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)

@@ -88,7 +88,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				var cropped_image := Image.new()
 				cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
 				canvas.size = cropped_image.get_size()
-				image.convert(Image.FORMAT_RGBA8)
+				cropped_image.convert(Image.FORMAT_RGBA8)
 				cropped_image.lock()
 				var tex := ImageTexture.new()
 				tex.create_from_image(cropped_image, 0)
