@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased] (v0.6)
 
 ### Added
-- Palettes. Yyou can choose default ones or make your own! (Thanks to greusser)
+- Palettes. You can choose default ones or make your own! (Thanks to greusser)
 - Multiple theme support (Dark, Gray, Light, Godot, Gold) to better match your style (Thanks to Erevoid)!
 - Image sub-menu with new features (Outlines, Color invert, desaturation) for more editing power.
 - Added layer opacity feature.
@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added sliders next to the spinboxes of brush size, brush color interpolation and LightenDarken's amount.
 - Color switch has X as its shortcut.
 - Frames can be removed with middle click.
-- Selection content can be deleted with "Delete".
+- Selection content can be deleted with the "Delete" button.
 
 ### Changed
 - Straight line improvements - it activates by pressing shift after last draw (Thanks to SbNanduri)
@@ -36,10 +36,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The "View" menu remains visible when toggling items (Thanks to YeldhamDev)
 - The UI darkens when exiting the application (Thanks to Calinou)
 - The bucket tool's "paint all pixels with the same color" now gets limited to the selection, if there is any.
+- If the alpha on the color picker is at 0 and any of the other RGB values change, alpha becomes 1. (Issue #54)
 
 
 ### Fixed
-- UndoRedo leak (issue #34) (Thanks to qarmin!)
+- UndoRedo leak (issue #34) (Thanks to qarmin)
 - Enabled low processor usage and reduced the amount of times "update()" gets called on Canvas and the rulers, to improve CPU usage. (Thanks to Calinou & Martin1991zab)
 - Fixed alpha in custom brushes, because their alpha was being blended along with its RGB values. (Issue #51)
+- Fixed "Parent node is busy setting up children, move_child() failed" when the Quit dialog popup was being called. (Issue #90, thanks to Sslaxx)
 - Fixed issues with bucket tool and mirroring.
