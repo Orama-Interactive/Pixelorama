@@ -1,0 +1,45 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+## [Unreleased] (v0.6)
+
+### Added
+- Palettes. Yyou can choose default ones or make your own! (Thanks to greusser)
+- Multiple theme support (Dark, Gray, Light, Godot, Gold) to better match your style (Thanks to Erevoid)!
+- Image sub-menu with new features (Outlines, Color invert, desaturation) for more editing power.
+- Added layer opacity feature.
+- Added better circle brush and new random brush feature .
+- Pixelorama goes worldwide with even more translations! (German, French, Polish, Portuguese, Russian, Traditional Chinese)
+- Straight lines now have constrained angles if you press Ctrl. With a step of 15 angles.
+- Straight line angles are now being shown on the top bar.
+- Guide color can now be changed in Preferences.
+- Added sliders next to the spinboxes of brush size, brush color interpolation and LightenDarken's amount.
+- Color switch has X as its shortcut.
+- Frames can be removed with middle click.
+- Selection content can be deleted with "Delete".
+
+### Changed
+- Straight line improvements - it activates by pressing shift after last draw (Thanks to SbNanduri)
+- Changed Preferences window's layout.
+- Importing spritesheets is now possible.
+- Changed export dialog's options to be more clean and easier to understand.
+- Switched from a single .csv to gettext for handling translations.
+- Changed default cursor shape for the rulers.
+- Made the layer and timeline buttons have hover textures. (Thanks to Erevoid)
+- Brush color interpolation and LightenDarknen's amount now range from 0-100, instead of 0-1.
+- Redo has both Ctrl-Y and Shift-Ctrl-Z as its shortcuts.
+- Changed positions of color switch & color default buttons.
+- Importing brushes from the Brushes older now looks inside its subfolders too, but not the subfolders of the subfolders.
+- Enabled switching between menus in menu bar on hover (Thanks to YeldhamDev)
+- The "View" menu remains visible when toggling items (Thanks to YeldhamDev)
+- The UI darkens when exiting the application (Thanks to Calinou)
+- The bucket tool's "paint all pixels with the same color" now gets limited to the selection, if there is any.
+
+
+### Fixed
+- UndoRedo leak (issue #34) (Thanks to qarmin!)
+- Enabled low processor usage and reduced the amount of times "update()" gets called on Canvas and the rulers, to improve CPU usage. (Thanks to Calinou & Martin1991zab)
+- Fixed alpha in custom brushes, because their alpha was being blended along with its RGB values. (Issue #51)
+- Fixed issues with bucket tool and mirroring.
