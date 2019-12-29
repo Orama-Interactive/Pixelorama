@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -60,13 +60,16 @@
 [ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=58]
 [ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=59]
 [ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=60]
-[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=61]
-[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=62]
-[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=63]
-[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=64]
-[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=65]
-[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=66]
-[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=67]
+[ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=61]
+[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=62]
+[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=63]
+[ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=64]
+[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=65]
+[ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=66]
+[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=67]
+[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=68]
+[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=69]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=70]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -1333,6 +1336,7 @@ margin_right = 224.0
 margin_bottom = 199.0
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+editor/display_folded = true
 margin_top = 203.0
 margin_right = 224.0
 margin_bottom = 355.0
@@ -1517,7 +1521,6 @@ texture_hover = ExtResource( 56 )
 texture_disabled = ExtResource( 57 )
 
 [node name="OpacityCenter" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
-editor/display_folded = true
 margin_top = 38.0
 margin_right = 224.0
 margin_bottom = 55.0
@@ -1640,72 +1643,7 @@ toggle_mode = true
 texture_normal = ExtResource( 59 )
 texture_pressed = ExtResource( 60 )
 
-[node name="CreateNewImage" type="ConfirmationDialog" parent="."]
-editor/display_folded = true
-margin_right = 200.0
-margin_bottom = 70.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CreateNewImage"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 192.0
-margin_bottom = 31.0
-
-[node name="ImageSize" type="Label" parent="CreateNewImage/VBoxContainer"]
-margin_right = 184.0
-margin_bottom = 15.0
-text = "Image Size"
-
-[node name="OptionsContainer" type="GridContainer" parent="CreateNewImage/VBoxContainer"]
-margin_top = 19.0
-margin_right = 184.0
-margin_bottom = 76.0
-columns = 2
-
-[node name="WidthLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 1.0
-margin_right = 75.0
-margin_bottom = 16.0
-text = "Width:"
-
-[node name="WidthValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 75.0
-margin_right = 139.0
-margin_bottom = 17.0
-min_value = 1.0
-max_value = 16384.0
-value = 64.0
-suffix = "px"
-
-[node name="Height" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 19.0
-margin_right = 75.0
-margin_bottom = 33.0
-text = "Height:"
-
-[node name="HeightValue" type="SpinBox" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 75.0
-margin_top = 19.0
-margin_right = 139.0
-margin_bottom = 34.0
-min_value = 1.0
-max_value = 16384.0
-value = 64.0
-suffix = "px"
-
-[node name="FillColorLabel" type="Label" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_top = 41.0
-margin_right = 75.0
-margin_bottom = 53.0
-text = "Fill with color:"
-
-[node name="FillColor" type="ColorPickerButton" parent="CreateNewImage/VBoxContainer/OptionsContainer"]
-margin_left = 75.0
-margin_top = 38.0
-margin_right = 139.0
-margin_bottom = 57.0
-rect_min_size = Vector2( 64, 20 )
-color = Color( 0, 0, 0, 0 )
+[node name="CreateNewImage" parent="." instance=ExtResource( 61 )]
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1734,136 +1672,17 @@ filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
-[node name="ImportSprites" parent="." instance=ExtResource( 61 )]
+[node name="ImportSprites" parent="." instance=ExtResource( 62 )]
 
-[node name="ExportSprites" parent="." instance=ExtResource( 62 )]
-visible = false
+[node name="ExportSprites" parent="." instance=ExtResource( 63 )]
 
-[node name="ScaleImage" type="ConfirmationDialog" parent="."]
-editor/display_folded = true
-margin_right = 200.0
-margin_bottom = 114.0
+[node name="ScaleImage" parent="." instance=ExtResource( 64 )]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleImage"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 192.0
-margin_bottom = 75.0
+[node name="PreferencesDialog" parent="." instance=ExtResource( 65 )]
 
-[node name="ImageSize" type="Label" parent="ScaleImage/VBoxContainer"]
-margin_right = 184.0
-margin_bottom = 15.0
-text = "Image Size"
+[node name="OutlineDialog" parent="." instance=ExtResource( 66 )]
 
-[node name="OptionsContainer" type="GridContainer" parent="ScaleImage/VBoxContainer"]
-editor/display_folded = true
-margin_top = 19.0
-margin_right = 184.0
-margin_bottom = 90.0
-columns = 2
-
-[node name="WidthLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 5.0
-margin_right = 72.0
-margin_bottom = 20.0
-text = "Width:"
-
-[node name="WidthValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 72.0
-margin_right = 155.0
-margin_bottom = 25.0
-min_value = 1.0
-max_value = 16384.0
-value = 64.0
-suffix = "px"
-
-[node name="Height" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 30.0
-margin_right = 72.0
-margin_bottom = 45.0
-text = "Height:"
-
-[node name="HeightValue" type="SpinBox" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 72.0
-margin_top = 25.0
-margin_right = 155.0
-margin_bottom = 50.0
-min_value = 1.0
-max_value = 16384.0
-value = 64.0
-suffix = "px"
-
-[node name="InterpolationLabel" type="Label" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_top = 53.0
-margin_right = 72.0
-margin_bottom = 68.0
-text = "Interpolation:"
-
-[node name="InterpolationType" type="OptionButton" parent="ScaleImage/VBoxContainer/OptionsContainer"]
-margin_left = 72.0
-margin_top = 50.0
-margin_right = 155.0
-margin_bottom = 71.0
-text = "Nearest"
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
-selected = 0
-
-[node name="PreferencesDialog" parent="." instance=ExtResource( 63 )]
-
-[node name="OutlineDialog" type="ConfirmationDialog" parent="."]
-editor/display_folded = true
-margin_right = 200.0
-margin_bottom = 70.0
-
-[node name="OptionsContainer" type="GridContainer" parent="OutlineDialog"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -92.0
-margin_top = -27.0
-margin_right = 92.0
-margin_bottom = -4.0
-custom_constants/vseparation = 4
-custom_constants/hseparation = 4
-columns = 2
-
-[node name="ThickLabel" type="Label" parent="OutlineDialog/OptionsContainer"]
-margin_top = 1.0
-margin_right = 115.0
-margin_bottom = 16.0
-text = "Thickness:"
-
-[node name="ThickValue" type="SpinBox" parent="OutlineDialog/OptionsContainer"]
-margin_left = 119.0
-margin_right = 183.0
-margin_bottom = 17.0
-min_value = 1.0
-max_value = 16384.0
-value = 1.0
-suffix = "px"
-
-[node name="OutlineColorLabel" type="Label" parent="OutlineDialog/OptionsContainer"]
-margin_top = 23.0
-margin_right = 115.0
-margin_bottom = 38.0
-text = "Fill with color:"
-
-[node name="OutlineColor" type="ColorPickerButton" parent="OutlineDialog/OptionsContainer"]
-margin_left = 119.0
-margin_top = 21.0
-margin_right = 183.0
-margin_bottom = 41.0
-rect_min_size = Vector2( 64, 20 )
-color = Color( 1, 0, 0, 1 )
-
-[node name="DiagonalCheckBox" type="CheckBox" parent="OutlineDialog/OptionsContainer"]
-margin_top = 45.0
-margin_right = 115.0
-margin_bottom = 61.0
-text = "Diagonal outlines"
-
-[node name="AboutDialog" parent="." instance=ExtResource( 64 )]
+[node name="AboutDialog" parent="." instance=ExtResource( 67 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
@@ -1877,12 +1696,12 @@ margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="EditPalettePopup" parent="." instance=ExtResource( 65 )]
+[node name="EditPalettePopup" parent="." instance=ExtResource( 68 )]
 visible = false
 
-[node name="NewPaletteDialog" parent="." instance=ExtResource( 66 )]
+[node name="NewPaletteDialog" parent="." instance=ExtResource( 69 )]
 
-[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 67 )]
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 70 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
@@ -1958,7 +1777,6 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityCenter/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityCenter/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
-[connection signal="confirmed" from="CreateNewImage" to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
 [connection signal="popup_hide" from="OpenSprite" to="." method="_on_ImportSprites_popup_hide"]
@@ -1966,10 +1784,8 @@ visible = false
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ImportSprites" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ExportSprites" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="ScaleImage" to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="OutlineDialog" to="." method="_on_OutlineDialog_confirmed"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]

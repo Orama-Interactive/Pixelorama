@@ -4,6 +4,7 @@ var current_export_path := ""
 var export_option := 0
 var resize := 100
 var interpolation = Image.INTERPOLATE_NEAREST
+var per_rows := false
 var spritesheet_rows = 1
 var spritesheet_columns = 1
 
@@ -31,12 +32,19 @@ func _on_ResizeValue_value_changed(value) -> void:
 func _on_Interpolation_item_selected(ID : int) -> void:
 	interpolation = ID
 
-func _on_VerticalFrames_value_changed(value) -> void:
-	value = min(value, Global.canvases.size())
-	spritesheet_columns = value
+func _on_ColumnsOrRows_item_selected(ID) -> void:
+	per_rows = bool(ID)
 
-	var vertical_frames : SpinBox = Global.find_node_by_name(self, "VerticalFrames")
-	vertical_frames.value = spritesheet_columns
+func _on_Frames_value_changed(value):
+	value = min(value, Global.canvases.size())
+	var frames_spinbox : SpinBox = Global.find_node_by_name(self, "Frames")
+
+	if per_rows:
+		spritesheet_rows = value
+		frames_spinbox.value = spritesheet_rows
+	else:
+		spritesheet_columns = value
+		frames_spinbox.value = spritesheet_columns
 
 func _on_ExportSprites_file_selected(path : String) -> void:
 	current_export_path = path
@@ -83,7 +91,10 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 		OS.alert("Can't save file")
 
 func save_spritesheet() -> void:
-	spritesheet_rows = ceil(Global.canvases.size() / spritesheet_columns)
+	if per_rows:
+		spritesheet_columns = ceil(Global.canvases.size() / spritesheet_rows)
+	else:
+		spritesheet_rows = ceil(Global.canvases.size() / spritesheet_columns)
 	var width = Global.canvas.size.x * spritesheet_rows
 	var height = Global.canvas.size.y * spritesheet_columns
 
@@ -94,14 +105,25 @@ func save_spritesheet() -> void:
 	var hh := 0
 	var vv := 0
 	for canvas in Global.canvases:
-		if hh < spritesheet_rows:
-			dst.x = canvas.size.x * hh
-			hh += 1
+		if per_rows:
+			if vv < spritesheet_columns:
+				dst.y = canvas.size.y * vv
+				vv += 1
+			else:
+				hh += 1
+				dst.y = 0
+				vv = 1
+				dst.x = canvas.size.x * hh
+
 		else:
-			vv += 1
-			dst.x = 0
-			hh = 1
-			dst.y = canvas.size.y * vv
+			if hh < spritesheet_rows:
+				dst.x = canvas.size.x * hh
+				hh += 1
+			else:
+				vv += 1
+				dst.x = 0
+				hh = 1
+				dst.y = canvas.size.y * vv
 
 		for layer in canvas.layers:
 			var img : Image = layer[0]
@@ -121,3 +143,4 @@ func save_spritesheet() -> void:
 	var err = whole_image.save_png(current_export_path)
 	if err != OK:
 		OS.alert("Can't save file")
+
