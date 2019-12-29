@@ -171,9 +171,7 @@ msgid "About Pixelorama"
 msgstr "À propos de Pixelorama"
 
 msgid "MADEBY_LABEL"
-msgstr ""
-"Votre éditeur de sprites libre et open source\n"
-"Développé par Orama Interactive\n"
+msgstr "Développé par Orama Interactive"
 
 msgid "Website"
 msgstr "Site Web"

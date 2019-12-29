@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
-
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_right = 200.0
 margin_bottom = 70.0
@@ -120,6 +119,7 @@ text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 editor/display_folded = true
+visible = false
 margin_top = 286.0
 margin_right = 205.0
 margin_bottom = 454.0

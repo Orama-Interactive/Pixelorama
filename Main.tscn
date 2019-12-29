@@ -63,7 +63,7 @@
 [ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=61]
 [ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=62]
 [ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=63]
-[ext_resource path="res://Scripts/Dialogs/AboutDialog.gd" type="Script" id=64]
+[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=64]
 [ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=65]
 [ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=66]
 [ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=67]
@@ -267,6 +267,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -1860,69 +1861,7 @@ margin_right = 115.0
 margin_bottom = 61.0
 text = "Diagonal outlines"
 
-[node name="AboutDialog" type="AcceptDialog" parent="."]
-editor/display_folded = true
-margin_right = 284.0
-margin_bottom = 186.0
-window_title = "About Pixelorama"
-script = ExtResource( 64 )
-
-[node name="AboutUI" type="VBoxContainer" parent="AboutDialog"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 276.0
-margin_bottom = 147.0
-
-[node name="Pixelorama" type="Label" parent="AboutDialog/AboutUI"]
-margin_right = 268.0
-margin_bottom = 33.0
-text = "Pixelorama v0.5
-"
-align = 1
-
-[node name="MadeBy" type="Label" parent="AboutDialog/AboutUI"]
-margin_top = 37.0
-margin_right = 268.0
-margin_bottom = 52.0
-text = "MADEBY_LABEL"
-align = 1
-
-[node name="Links" type="CenterContainer" parent="AboutDialog/AboutUI"]
-editor/display_folded = true
-margin_top = 56.0
-margin_right = 268.0
-margin_bottom = 77.0
-
-[node name="LinkButtons" type="HBoxContainer" parent="AboutDialog/AboutUI/Links"]
-editor/display_folded = true
-margin_left = 43.0
-margin_right = 225.0
-margin_bottom = 23.0
-
-[node name="Website" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
-margin_right = 55.0
-margin_bottom = 21.0
-text = "Website"
-
-[node name="GitHub" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
-margin_left = 59.0
-margin_right = 139.0
-margin_bottom = 21.0
-text = "GitHub Repo"
-
-[node name="Donate" type="Button" parent="AboutDialog/AboutUI/Links/LinkButtons"]
-margin_left = 143.0
-margin_right = 194.0
-margin_bottom = 21.0
-text = "Donate"
-
-[node name="Copyright" type="Label" parent="AboutDialog/AboutUI"]
-margin_top = 81.0
-margin_right = 268.0
-margin_bottom = 114.0
-text = "
-Copyright 2019 - Orama Interactive"
-align = 1
+[node name="AboutDialog" parent="." instance=ExtResource( 64 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
@@ -2031,9 +1970,6 @@ visible = false
 [connection signal="confirmed" from="OutlineDialog" to="." method="_on_OutlineDialog_confirmed"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
-[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Website" to="AboutDialog" method="_on_Website_pressed"]
-[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/GitHub" to="AboutDialog" method="_on_GitHub_pressed"]
-[connection signal="pressed" from="AboutDialog/AboutUI/Links/LinkButtons/Donate" to="AboutDialog" method="_on_Donate_pressed"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="NewPaletteDialog" to="." method="_on_NewPaletteDialog_confirmed"]

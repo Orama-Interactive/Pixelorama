@@ -11,13 +11,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Image sub-menu with new features (Outlines, Color invert, desaturation) for more editing power.
 - Added layer opacity feature.
 - Added better circle brush and new random brush feature .
-- Pixelorama goes worldwide with even more translations! (German, French, Polish, Portuguese, Russian, Traditional Chinese)
-- Straight lines now have constrained angles if you press Ctrl. With a step of 15 angles.
+- Pixelorama goes worldwide with even more translations! (German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese)
+- Straight lines now have constrained angles if you press `Ctrl`. With a step of 15 angles.
 - Straight line angles are now being shown on the top bar.
 - Guide color can now be changed in Preferences.
 - Added sliders next to the spinboxes of brush size, brush color interpolation and LightenDarken's amount.
-- Color switch has X as its shortcut.
-- Frames can be removed with middle click.
+- Color switch has `X` as its shortcut.
+- Frames can now be removed with middle click.
 - Selection content can be deleted with the "Delete" button.
 
 ### Changed
@@ -29,7 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Changed default cursor shape for the rulers.
 - Made the layer and timeline buttons have hover textures. (Thanks to Erevoid)
 - Brush color interpolation and LightenDarknen's amount now range from 0-100, instead of 0-1.
-- Redo has both Ctrl-Y and Shift-Ctrl-Z as its shortcuts.
+- Redo has both `Ctrl-Y` and `Shift-Ctrl-Z` as its shortcuts. (Thanks to Schweini07)
 - Changed positions of color switch & color default buttons.
 - Importing brushes from the Brushes older now looks inside its subfolders too, but not the subfolders of the subfolders.
 - Enabled switching between menus in menu bar on hover (Thanks to YeldhamDev)
@@ -38,10 +38,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The bucket tool's "paint all pixels with the same color" now gets limited to the selection, if there is any.
 - If the alpha on the color picker is at 0 and any of the other RGB values change, alpha becomes 1. (Issue #54)
 
-
 ### Fixed
 - UndoRedo leak (issue #34) (Thanks to qarmin)
 - Enabled low processor usage and reduced the amount of times "update()" gets called on Canvas and the rulers, to improve CPU usage. (Thanks to Calinou & Martin1991zab)
 - Fixed alpha in custom brushes, because their alpha was being blended along with its RGB values. (Issue #51)
 - Fixed "Parent node is busy setting up children, move_child() failed" when the Quit dialog popup was being called. (Issue #90, thanks to Sslaxx)
 - Fixed issues with bucket tool and mirroring.
+- Fixed issue with invisible layers becomes visible when a layer was added/removed/moved or changed frame.

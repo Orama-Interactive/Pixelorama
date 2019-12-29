@@ -174,9 +174,7 @@ msgid "About Pixelorama"
 msgstr "Über Pixelorama"
 
 msgid "MADEBY_LABEL"
-msgstr ""
-"Ihr kostenloser und opensource Pixeleditor!\n"
-"Entwickelt von Orama Interactive\n"
+msgstr "Entwickelt von Orama Interactive"
 
 msgid "Website"
 msgstr "Website"

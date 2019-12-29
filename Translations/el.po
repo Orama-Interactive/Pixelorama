@@ -171,9 +171,7 @@ msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
 
 msgid "MADEBY_LABEL"
-msgstr ""
-"Το δωρεάν και ανοιχτού κώδικα πρόγραμμά σας!\n"
-"Φτιαγμένο από την Orama Interactive\n"
+msgstr "Φτιαγμένο από την Orama Interactive"
 
 msgid "Website"
 msgstr "Ιστοσελίδα"

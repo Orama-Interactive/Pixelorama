@@ -171,9 +171,7 @@ msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
 
 msgid "MADEBY_LABEL"
-msgstr ""
-"免費開源圖像編輯軟體!\n"
-"由Orama Interactive開發\n"
+msgstr "由Orama Interactive開發"
 
 msgid "Website"
 msgstr "官網"
