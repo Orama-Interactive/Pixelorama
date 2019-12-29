@@ -21,14 +21,14 @@ margin_right = 507.0
 margin_bottom = 312.0
 
 [node name="ImportAsNewFrame" type="CheckBox" parent="HBoxContainer2"]
-margin_right = 130.0
-margin_bottom = 40.0
+margin_right = 156.0
+margin_bottom = 304.0
 text = "IMPORT_FILE_LABEL"
 
 [node name="ImportSpritesheet" type="CheckBox" parent="HBoxContainer2"]
-margin_left = 134.0
-margin_right = 268.0
-margin_bottom = 40.0
+margin_left = 160.0
+margin_right = 327.0
+margin_bottom = 304.0
 text = "Import as spritesheet"
 
 [node name="Spritesheet" type="HBoxContainer" parent="."]
@@ -48,6 +48,7 @@ text = "Horizontal frames:"
 margin_left = 105.0
 margin_right = 159.0
 margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 
@@ -62,6 +63,7 @@ text = "Vertical frames:"
 margin_left = 252.0
 margin_right = 306.0
 margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 [connection signal="files_selected" from="." to="." method="_on_ImportSprites_files_selected"]

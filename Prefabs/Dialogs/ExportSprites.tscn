@@ -19,10 +19,35 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 script = ExtResource( 1 )
 
 [node name="ExportOption" type="OptionButton" parent="."]
-margin_right = 41.0
-margin_bottom = 20.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 507.0
+margin_bottom = 312.0
 text = "Export current frame"
-items = [ "Export current frame", null, false, 0, null, "Export all frames as multiple files", null, false, 1, null, "Export all frames as a horizontal spritesheet (single file)", null, false, 2, null, "Export all frames as a vertical spritesheet (single file)", null, false, 3, null ]
+items = [ "Export current frame", null, false, 0, null, "Export all frames as multiple files", null, false, 1, null, "Export all frames as a spritesheet (single file)", null, false, 2, null ]
 selected = 0
+
+[node name="Spritesheet" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 507.0
+margin_bottom = 312.0
+
+[node name="Label" type="Label" parent="Spritesheet"]
+margin_left = 200.0
+margin_top = 145.0
+margin_right = 300.0
+margin_bottom = 159.0
+text = "Columns:"
+
+[node name="VerticalFrames" type="SpinBox" parent="Spritesheet"]
+margin_left = 304.0
+margin_right = 378.0
+margin_bottom = 304.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
 [connection signal="file_selected" from="." to="." method="_on_ExportSprites_file_selected"]
 [connection signal="item_selected" from="ExportOption" to="." method="_on_ExportOption_item_selected"]
+[connection signal="value_changed" from="Spritesheet/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]

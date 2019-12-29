@@ -1541,6 +1541,7 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 106, 0 )
 size_flags_vertical = 1
 value = 100.0
+ticks_on_borders = false
 
 [node name="OpacitySpinBox" type="SpinBox" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityCenter/OpacityContainer"]
 margin_left = 158.0
@@ -1736,6 +1737,7 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 [node name="ImportSprites" parent="." instance=ExtResource( 61 )]
 
 [node name="ExportSprites" parent="." instance=ExtResource( 62 )]
+visible = false
 
 [node name="ScaleImage" type="ConfirmationDialog" parent="."]
 editor/display_folded = true

@@ -2,6 +2,8 @@ extends FileDialog
 
 var current_export_path := ""
 var export_option := 0
+var spritesheet_rows = 1
+var spritesheet_columns = 1
 
 func _ready() -> void:
 	var children := []
@@ -15,6 +17,19 @@ func _ready() -> void:
 
 func _on_ExportOption_item_selected(ID : int) -> void:
 	export_option = ID
+	var spritesheet_container = Global.find_node_by_name(self, "Spritesheet")
+	if ID > 1:
+		spritesheet_container.visible = true
+	else:
+		spritesheet_container.visible = false
+
+func _on_VerticalFrames_value_changed(value) -> void:
+	value = min(value, Global.canvases.size())
+	spritesheet_rows = ceil(Global.canvases.size() / value)
+	spritesheet_columns = value
+
+	var vertical_frames : SpinBox = Global.find_node_by_name(self, "VerticalFrames")
+	vertical_frames.value = spritesheet_columns
 
 func _on_ExportSprites_file_selected(path : String) -> void:
 	current_export_path = path
@@ -32,8 +47,8 @@ func export_project() -> void:
 			path = "%s.png" % path
 			save_sprite(canvas, path)
 			i += 1
-	else: # Export all frames as a spritesheet (single file)
-		save_spritesheet(export_option == 2)
+	elif export_option == 2: # Export all frames as a spritesheet (single file)
+		save_spritesheet()
 
 	Global.notification_label("File exported")
 
@@ -57,29 +72,26 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 	if err != OK:
 		OS.alert("Can't save file")
 
-func save_spritesheet(horizontal : bool) -> void:
-	var width
-	var height
-	if horizontal: # Horizontal spritesheet
-		width = 0
-		height = Global.canvas.size.y
-		for canvas in Global.canvases:
-			width += canvas.size.x
-			if canvas.size.y > height:
-				height = canvas.size.y
-	else: # Vertical spritesheet
-		width = Global.canvas.size.x
-		height = 0
-		for canvas in Global.canvases:
-			height += canvas.size.y
-			if canvas.size.x > width:
-				width = canvas.size.x
+func save_spritesheet() -> void:
+	var width = Global.canvas.size.x * spritesheet_rows
+	var height = Global.canvas.size.y * spritesheet_columns
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
 	whole_image.lock()
 	var dst := Vector2.ZERO
+	var hh := 0
+	var vv := 0
 	for canvas in Global.canvases:
+		if hh < spritesheet_rows:
+			dst.x = canvas.size.x * hh
+			hh += 1
+		else:
+			vv += 1
+			dst.x = 0
+			hh = 1
+			dst.y = canvas.size.y * vv
+
 		for layer in canvas.layers:
 			var img : Image = layer[0]
 			img.lock()
@@ -93,10 +105,6 @@ func save_spritesheet(horizontal : bool) -> void:
 			canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), dst)
 			layer[0].lock()
 
-		if horizontal:
-			dst += Vector2(canvas.size.x, 0)
-		else:
-			dst += Vector2(0, canvas.size.y)
 
 	var err = whole_image.save_png(current_export_path)
 	if err != OK:
