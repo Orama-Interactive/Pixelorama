@@ -2,6 +2,8 @@ extends FileDialog
 
 var current_export_path := ""
 var export_option := 0
+var resize := 100
+var interpolation = Image.INTERPOLATE_NEAREST
 var spritesheet_rows = 1
 var spritesheet_columns = 1
 
@@ -23,9 +25,14 @@ func _on_ExportOption_item_selected(ID : int) -> void:
 	else:
 		spritesheet_container.visible = false
 
+func _on_ResizeValue_value_changed(value) -> void:
+	resize = value
+
+func _on_Interpolation_item_selected(ID : int) -> void:
+	interpolation = ID
+
 func _on_VerticalFrames_value_changed(value) -> void:
 	value = min(value, Global.canvases.size())
-	spritesheet_rows = ceil(Global.canvases.size() / value)
 	spritesheet_columns = value
 
 	var vertical_frames : SpinBox = Global.find_node_by_name(self, "VerticalFrames")
@@ -68,11 +75,15 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 
 		canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), Vector2.ZERO)
 		layer[0].lock()
+
+	if resize != 100:
+		whole_image.resize(whole_image.get_size().x * resize / 100, whole_image.get_size().y * resize / 100, interpolation)
 	var err = whole_image.save_png(path)
 	if err != OK:
 		OS.alert("Can't save file")
 
 func save_spritesheet() -> void:
+	spritesheet_rows = ceil(Global.canvases.size() / spritesheet_columns)
 	var width = Global.canvas.size.x * spritesheet_rows
 	var height = Global.canvas.size.y * spritesheet_columns
 
@@ -105,8 +116,8 @@ func save_spritesheet() -> void:
 			canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), dst)
 			layer[0].lock()
 
-
+	if resize != 100:
+		whole_image.resize(width * resize / 100, height * resize / 100, interpolation)
 	var err = whole_image.save_png(current_export_path)
 	if err != OK:
 		OS.alert("Can't save file")
-
