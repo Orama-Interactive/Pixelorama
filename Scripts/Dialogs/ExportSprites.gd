@@ -4,11 +4,13 @@ var current_export_path := ""
 var export_option := 0
 var resize := 100
 var interpolation = Image.INTERPOLATE_NEAREST
+var frames_spinbox : SpinBox
 var per_rows := false
 var spritesheet_rows = 1
 var spritesheet_columns = 1
 
 func _ready() -> void:
+	frames_spinbox = Global.find_node_by_name(self, "Frames")
 	var children := []
 	for i in range(get_child_count()):
 		if i > 7:
@@ -34,10 +36,11 @@ func _on_Interpolation_item_selected(ID : int) -> void:
 
 func _on_ColumnsOrRows_item_selected(ID) -> void:
 	per_rows = bool(ID)
+	# Update spritesheet_rows/columns variable
+	_on_Frames_value_changed(frames_spinbox.value)
 
 func _on_Frames_value_changed(value):
 	value = min(value, Global.canvases.size())
-	var frames_spinbox : SpinBox = Global.find_node_by_name(self, "Frames")
 
 	if per_rows:
 		spritesheet_rows = value

@@ -33,7 +33,6 @@ margin_bottom = 64.0
 texture = ExtResource( 2 )
 
 [node name="SloganAndLinks" type="CenterContainer" parent="AboutUI/IconsButtons"]
-editor/display_folded = true
 margin_left = 68.0
 margin_right = 420.0
 margin_bottom = 64.0
@@ -60,18 +59,21 @@ margin_bottom = 39.0
 [node name="Website" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
 margin_right = 65.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "Website"
 
 [node name="GitHub" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
 margin_left = 69.0
 margin_right = 162.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "GitHub Repo"
 
 [node name="Donate" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
 margin_left = 166.0
 margin_right = 224.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "Donate"
 
 [node name="OramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
@@ -86,7 +88,6 @@ margin_right = 488.0
 margin_bottom = 72.0
 
 [node name="Credits" type="HSplitContainer" parent="AboutUI"]
-editor/display_folded = true
 margin_top = 76.0
 margin_right = 488.0
 margin_bottom = 233.0
@@ -129,7 +130,7 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="AboutUI/Credits/Contributors"]
 margin_right = 242.0
 margin_bottom = 14.0
-text = "Contributors"
+text = "GitHub Contributors"
 
 [node name="ContributorTree" type="Tree" parent="AboutUI/Credits/Contributors"]
 margin_top = 18.0
