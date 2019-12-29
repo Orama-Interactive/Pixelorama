@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added layer opacity feature.
 - Added better circle brush and new random brush feature .
 - Pixelorama goes worldwide with even more translations! (German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese)
+- Importing spritesheets is now possible.
+- Exporting matrix spritesheets is now possible. You can choose how many rows OR columns your spritesheet will be.
 - Straight lines now have constrained angles if you press `Ctrl`. With a step of 15 angles.
 - Straight line angles are now being shown on the top bar.
 - Guide color can now be changed in Preferences.
@@ -23,9 +25,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Straight line improvements - it activates by pressing shift after last draw (Thanks to SbNanduri)
 - Changed Preferences window's layout.
-- Importing spritesheets is now possible.
 - Changed export dialog's options to be more clean and easier to understand.
 - Switched from a single .csv to gettext for handling translations.
+- The About dialog window got an overhaul. It now shows the names of the Development team, Contributors & Donors.
 - Changed default cursor shape for the rulers.
 - Made the layer and timeline buttons have hover textures. (Thanks to Erevoid)
 - Brush color interpolation and LightenDarknen's amount now range from 0-100, instead of 0-1.
