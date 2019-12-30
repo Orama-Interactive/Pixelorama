@@ -31,7 +31,7 @@ var line_2d : Line2D
 func _ready() -> void:
 	Global.can_draw = false
 
-	#The sprite itself
+	# The sprite itself
 	if layers.empty():
 		var sprite := Image.new()
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
@@ -40,7 +40,7 @@ func _ready() -> void:
 		var tex := ImageTexture.new()
 		tex.create_from_image(sprite, 0)
 
-		#Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
+		# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
 		layers.append([sprite, tex, "Layer 0", true, 1])
 
 	generate_layer_panels()
@@ -56,12 +56,12 @@ func _ready() -> void:
 	frame_texture_rect = Global.find_node_by_name(frame_button, "FrameTexture")
 	frame_texture_rect.texture = layers[0][1] #ImageTexture current_layer_index
 
-	#Only handle camera zoom settings & offset on the first frame
+	# Only handle camera zoom settings & offset on the first frame
 	if Global.canvases[0] == self:
 		camera_zoom()
 
 func camera_zoom() -> void:
-	#Set camera zoom based on the sprite size
+	# Set camera zoom based on the sprite size
 	var bigger = max(size.x, size.y)
 	var zoom_max := Vector2(bigger, bigger) * 0.01
 	if zoom_max > Vector2.ONE:
@@ -78,7 +78,7 @@ func camera_zoom() -> void:
 	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 
-	#Set camera offset to the center of canvas
+	# Set camera offset to the center of canvas
 	Global.camera.offset = size / 2
 	Global.camera2.offset = size / 2
 	Global.camera_preview.offset = size / 2
@@ -504,7 +504,7 @@ func generate_layer_panels() -> void:
 	for i in range(layers.size() -1, -1, -1):
 		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
 		if !layers[i][2]:
-			layers[i][2] = "Layer %s" % i
+			layers[i][2] = tr("Layer") + " %s" % i
 		layer_container.i = i
 		layer_container.get_child(1).get_child(0).texture = layers[i][1]
 		layer_container.get_child(1).get_child(1).text = layers[i][2]

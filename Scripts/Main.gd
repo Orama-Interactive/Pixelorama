@@ -616,16 +616,19 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 
 func add_layer(is_new := true) -> void:
 	var new_layer := Image.new()
+	var layer_name = null
 	if is_new:
 		new_layer.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
-	else: #clone layer
+	else: # clone layer
 		new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index][0])
+		layer_name = Global.canvas.layers[Global.canvas.current_layer_index][2] + " (" + tr("copy") + ")"
 	new_layer.lock()
 	var new_layer_tex := ImageTexture.new()
 	new_layer_tex.create_from_image(new_layer, 0)
 
 	var new_layers: Array = Global.canvas.layers.duplicate()
-	new_layers.append([new_layer, new_layer_tex, null, true, 1])
+	# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
+	new_layers.append([new_layer, new_layer_tex, layer_name, true, 1])
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
 	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
