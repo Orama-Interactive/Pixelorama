@@ -9,8 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Palettes. You can choose default ones or make your own! (Thanks to greusser)
 - Multiple theme support (Dark, Gray, Light, Godot, Gold) to better match your style (Thanks to Erevoid)!
 - Image sub-menu with new features (Outlines, Color invert, desaturation) for more editing power.
-- Added layer opacity feature.
-- Added better circle brush and new random brush feature .
+- Added a layer opacity slider, that lets you change the alpha values of layers.
+- Added a better circle and filled circle brushes. They use Bresenham's circle algorithm to scale.
+- Added random brushes! Every time you draw, expect to see something different! To create random brushes, place the images you want your brush to have in the same folder, and put the symbol "%" in front of their filename. Examples, "%icon1.png", "%grass_green.png"
 - Pixelorama goes worldwide with even more translations! (German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese)
 - Importing spritesheets is now possible.
 - Exporting matrix spritesheets is now possible. You can choose how many rows OR columns your spritesheet will be.
@@ -33,13 +34,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Brush color interpolation and LightenDarknen's amount now range from 0-100, instead of 0-1.
 - Redo has both `Ctrl-Y` and `Shift-Ctrl-Z` as its shortcuts. (Thanks to Schweini07)
 - Changed positions of color switch & color default buttons.
-- Importing brushes from the Brushes older now looks inside its subfolders too, but not the subfolders of the subfolders.
+- Importing brushes from the Brushes folder now looks inside its subfolders too, but not the subfolders of the subfolders.
+- The Brushes folder now gets created if it doesn't exist (tested on Windows)
 - Enabled switching between menus in menu bar on hover (Thanks to YeldhamDev)
 - The "View" menu remains visible when toggling items (Thanks to YeldhamDev)
 - The UI darkens when exiting the application (Thanks to Calinou)
 - The bucket tool's "paint all pixels with the same color" now gets limited to the selection, if there is any.
 - If the alpha on the color picker is at 0 and any of the other RGB values change, alpha becomes 1. (Issue #54)
-- The Brushes folder now gets created if it doesn't exist (tested on Windows)
 
 ### Fixed
 - UndoRedo leak (issue #34) (Thanks to qarmin)

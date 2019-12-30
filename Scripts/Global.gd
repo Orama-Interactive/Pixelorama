@@ -207,9 +207,8 @@ var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
 var add_palette_button : TextureButton
-var remove_palette_button : TextureButton
-var palette_option_button : OptionButton
 var edit_palette_button : BaseButton
+var palette_option_button : OptionButton
 var palette_container : GridContainer
 var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
@@ -324,9 +323,8 @@ func _ready() -> void:
 	vbox_layer_container = find_node_by_name(layer_stuff_container, "VBoxLayerContainer")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
-	remove_palette_button = find_node_by_name(root, "RemovePalette")
-	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
 	edit_palette_button = find_node_by_name(root, "EditPalette")
+	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
 	palette_container = find_node_by_name(root, "PaletteContainer")
 	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
 	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")

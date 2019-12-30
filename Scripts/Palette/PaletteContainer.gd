@@ -7,7 +7,6 @@ const custom_palettes_path := "Palettes/Custom"
 var current_palette = "Default"
 var from_palette : Palette
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_load_palettes()
 
@@ -22,14 +21,9 @@ func _clear_swatches() -> void:
 
 func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
-	if Global.palettes.has(palette_name): #Palette exists in memory
+	if Global.palettes.has(palette_name): # Palette exists in memory
 		current_palette = palette_name
 		var palette : Palette = Global.palettes[palette_name]
-
-		Global.remove_palette_button.disabled = true # Cannot remove by default
-		if palette.editable:
-			Global.remove_palette_button.disabled = false # Can remove if custom palette
-
 		_display_palette(palette)
 
 func on_new_empty_palette() -> void:
@@ -189,24 +183,8 @@ func get_palette_files(path : String) -> Array:
 			results.append(file_name)
 
 	dir.list_dir_end()
-
 	return results
-
-func remove_current_palette() -> void:
-	if Global.palettes[current_palette].editable:
-		_delete_palette_file(current_palette + ".json")
-		Global.palettes.erase(current_palette)
-		var selected_index: int = Global.palette_option_button.selected
-		Global.palette_option_button.remove_item(selected_index)
-		if(selected_index - 1 >= 0):
-			Global.palette_option_button.select(selected_index - 1)
-			on_palette_select(Global.palette_option_button.get_item_metadata(selected_index - 1))
-
-func _delete_palette_file(file_name : String) -> void:
-	var dir = Directory.new()
-	dir.remove(custom_palettes_path.plus_file(file_name))
 
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
-
 	palette.save_to_file(custom_palettes_path.plus_file(filename))

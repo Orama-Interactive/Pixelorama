@@ -924,15 +924,12 @@ func _on_QuitDialog_confirmed() -> void:
 func _on_AddPalette_pressed() -> void:
 	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
 
-func _on_RemovePalette_pressed() -> void:
-	Global.palette_container.remove_current_palette()
+func _on_EditPalette_pressed() -> void:
+	Global.palette_container.on_edit_palette()
 
 func _on_PaletteOptionButton_item_selected(ID) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	Global.palette_container.on_palette_select(palette_name)
-
-func _on_EditPalette_pressed() -> void:
-	Global.palette_container.on_edit_palette()
 
 func add_palette_menu_id_pressed(id) -> void:
 	match id:
