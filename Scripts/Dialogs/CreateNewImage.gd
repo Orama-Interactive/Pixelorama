@@ -15,4 +15,3 @@ func _on_CreateNewImage_confirmed() -> void:
 		Global.canvas.layers[0][0].fill(fill_color)
 		Global.canvas.layers[0][0].lock()
 		Global.canvas.update_texture(0)
-	Global.undo_redo.clear_history(false)

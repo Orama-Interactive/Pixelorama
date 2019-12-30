@@ -431,7 +431,6 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		brush_line = file.get_line()
 
 	file.close()
-	Global.undo_redo.clear_history(false)
 
 	OS.set_window_title(path.get_file() + " - Pixelorama")
 
@@ -503,6 +502,7 @@ func clear_canvases() -> void:
 	current_save_path = ""
 	$ExportSprites.current_export_path = ""
 	file_menu.set_item_text(5, "Export PNG...")
+	Global.undo_redo.clear_history(false)
 
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
@@ -721,17 +721,17 @@ func add_frame() -> void:
 func _on_LoopAnim_pressed() -> void:
 	match animation_loop:
 		0:
-			#Make it loop
+			# Make it loop
 			animation_loop = 1
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Cycle loop"
 		1:
-			#Make it ping-pong
+			# Make it ping-pong
 			animation_loop = 2
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
 		2:
-			#Make it stop
+			# Make it stop
 			animation_loop = 0
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"

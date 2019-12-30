@@ -1,6 +1,6 @@
 extends FileDialog
 
-var new_frame := false
+var new_frame := true
 var import_spritesheet := false
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
@@ -107,6 +107,5 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
 	Global.canvas.visible = true
 
-	Global.undo_redo.clear_history(false)
 	OS.set_window_title(first_path.get_file() + " (imported) - Pixelorama")
 
