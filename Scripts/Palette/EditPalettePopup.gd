@@ -1,8 +1,9 @@
 extends WindowDialog
 
-onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/EditPaletteGridContainer
-onready var color_name_edit = $VBoxContainer/HBoxContainer3/EditPaletteColorNameLineEdit
 onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
+onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/EditPaletteGridContainer
+onready var color_name_edit = $VBoxContainer/ColorNameContainer/EditPaletteColorNameLineEdit
+onready var palette_name_edit = $VBoxContainer/PaletteNameContainer/EditPaletteNameLineEdit
 
 var palette_button = preload("res://Prefabs/PaletteButton.tscn");
 
@@ -12,11 +13,10 @@ var working_palette : Palette
 
 func open(palette : String) -> void:
 	current_palette = palette
+	palette_name_edit.text = current_palette
 	if Global.palettes.has(palette):
 		working_palette = Global.palettes[palette].duplicate()
-
 		_display_palette()
-
 		self.popup_centered()
 
 func _display_palette() -> void:
@@ -98,6 +98,19 @@ func re_index_swatches() -> void:
 		index += 1
 
 func _on_EditPaletteSaveButton_pressed() -> void:
+	if palette_name_edit.text != current_palette:
+		Global.palettes.erase(current_palette)
+		var dir := Directory.new()
+		dir.open(".")
+		dir.rename("Palettes".plus_file(current_palette + ".json"), "Palettes".plus_file(palette_name_edit.text + ".json"))
+		current_palette = palette_name_edit.text
+		working_palette.name = current_palette
+
+		var optionbutton_index = Global.palette_option_button.selected
+		Global.palette_option_button.set_item_text(optionbutton_index, current_palette)
+		Global.palette_option_button.set_item_metadata(optionbutton_index, current_palette)
+		Global.palette_option_button.text = current_palette
+
 	Global.palettes[current_palette] = working_palette
 	Global.palette_container.on_palette_select(current_palette)
 	Global.palette_container.save_palette(current_palette, working_palette.name + ".json")
@@ -106,7 +119,7 @@ func _on_EditPaletteSaveButton_pressed() -> void:
 func _on_EditPaletteCancelButton_pressed() -> void:
 	self.hide()
 
-func _on_EditPaletteColorNameLineEdit_text_changed(new_text) -> void:
+func _on_EditPaletteColorNameLineEdit_text_changed(new_text : String) -> void:
 	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		working_palette.set_color_name(current_swatch, new_text)
 		_refresh_hint_tooltip(current_swatch)
@@ -117,5 +130,5 @@ func _on_EditPaletteColorPicker_color_changed(color : Color) -> void:
 		working_palette.set_color(current_swatch, color)
 		_refresh_hint_tooltip(current_swatch)
 
-func _refresh_hint_tooltip(_index : int):
+func _refresh_hint_tooltip(_index : int) -> void:
 	palette_grid.get_child(current_swatch).hint_tooltip = "#" + working_palette.get_color_data(current_swatch).to_upper() + " " + working_palette.get_color_name(current_swatch)

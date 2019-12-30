@@ -94,7 +94,7 @@ func _serialize() -> String:
 
 	result = JSON.print(serialize_data)
 
-	return result;
+	return result
 
 func deserialize(input_string : String) -> Palette:
 	var result = get_script().new()

@@ -2,7 +2,6 @@ extends GridContainer
 
 const palette_button = preload("res://Prefabs/PaletteButton.tscn");
 const palettes_path := "Palettes"
-const custom_palettes_path := "Palettes/Custom"
 
 var current_palette = "Default"
 var from_palette : Palette
@@ -91,7 +90,6 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 		return "Error: Palette '" + name + "' already exists!"
 
 	new_palette.name = name
-
 	# Check if source palette has data
 	if _from_palette:
 		new_palette = _from_palette.duplicate()
@@ -101,7 +99,7 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	# Add palette to Global and options
 	Global.palettes[name] = new_palette
 	Global.palette_option_button.add_item(name)
-	var index: int = Global.palette_option_button.get_item_count() - 1
+	var index : int = Global.palette_option_button.get_item_count() - 1
 	Global.palette_option_button.set_item_metadata(index, name)
 	Global.palette_option_button.select(index)
 
@@ -139,8 +137,6 @@ func _load_palettes() -> void:
 	dir.open(".")
 	if not dir.dir_exists(palettes_path):
 		dir.make_dir(palettes_path)
-	if not dir.dir_exists(custom_palettes_path):
-		dir.make_dir(custom_palettes_path)
 
 	var palette_files : Array = get_palette_files(palettes_path)
 
@@ -153,17 +149,6 @@ func _load_palettes() -> void:
 			Global.palette_option_button.set_item_metadata(index, palette.name)
 			if palette.name == "Default":
 				Global.palette_option_button.select(index)
-
-	dir.open(custom_palettes_path)
-	var custom_palette_files : Array = get_palette_files(custom_palettes_path)
-
-	for file_name in custom_palette_files:
-		var palette : Palette = Palette.new().load_from_file(custom_palettes_path.plus_file(file_name))
-		if palette:
-			Global.palettes[palette.name] = palette
-			Global.palette_option_button.add_item(palette.name)
-			var index: int = Global.palette_option_button.get_item_count() - 1
-			Global.palette_option_button.set_item_metadata(index, palette.name)
 
 	if not "Default" in Global.palettes && Global.palettes.size() > 0:
 		Global.control._on_PaletteOptionButton_item_selected(0)
@@ -187,4 +172,4 @@ func get_palette_files(path : String) -> Array:
 
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
-	palette.save_to_file(custom_palettes_path.plus_file(filename))
+	palette.save_to_file(palettes_path.plus_file(filename))
