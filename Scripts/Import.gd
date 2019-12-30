@@ -2,6 +2,7 @@ extends Node
 
 func import_brushes(path : String) -> void:
 	var brushes_dir := Directory.new()
+	brushes_dir.open(".")
 	if !brushes_dir.dir_exists(path):
 		brushes_dir.make_dir(path)
 

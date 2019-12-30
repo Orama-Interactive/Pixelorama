@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The UI darkens when exiting the application (Thanks to Calinou)
 - The bucket tool's "paint all pixels with the same color" now gets limited to the selection, if there is any.
 - If the alpha on the color picker is at 0 and any of the other RGB values change, alpha becomes 1. (Issue #54)
+- The Brushes folder now gets created if it doesn't exist (tested on Windows)
 
 ### Fixed
 - UndoRedo leak (issue #34) (Thanks to qarmin)

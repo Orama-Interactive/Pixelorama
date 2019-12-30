@@ -1,6 +1,8 @@
 extends GridContainer
 
 const palette_button = preload("res://Prefabs/PaletteButton.tscn");
+const palettes_path := "Palettes"
+const custom_palettes_path := "Palettes/Custom"
 
 var current_palette = "Default"
 var from_palette : Palette
@@ -9,7 +11,7 @@ var from_palette : Palette
 func _ready() -> void:
 	_load_palettes()
 
-	#Select default palette "Default"
+	# Select default palette "Default"
 	on_palette_select(current_palette)
 
 func _clear_swatches() -> void:
@@ -29,9 +31,6 @@ func on_palette_select(palette_name : String) -> void:
 			Global.remove_palette_button.disabled = false # Can remove if custom palette
 
 		_display_palette(palette)
-	else: #Use default on fail
-		current_palette = "Default"
-		_display_palette(Global.palettes["Default"])
 
 func on_new_empty_palette() -> void:
 	Global.new_palette_dialog.window_title = "Create a new empty palette?"
@@ -85,7 +84,7 @@ func on_new_palette_confirmed() -> void:
 	var new_palette_name : String = Global.new_palette_name_line_edit.text
 	var result : String = create_new_palette(new_palette_name, from_palette)
 	if not result.empty():
-		Global.error_dialog.set_text(result);
+		Global.error_dialog.set_text(result)
 		Global.error_dialog.popup_centered()
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
@@ -142,22 +141,17 @@ func on_color_select(index : int) -> void:
 		Global.update_right_custom_brush()
 
 func _load_palettes() -> void:
-	var file := File.new()
 	var dir := Directory.new()
+	dir.open(".")
+	if not dir.dir_exists(palettes_path):
+		dir.make_dir(palettes_path)
+	if not dir.dir_exists(custom_palettes_path):
+		dir.make_dir(custom_palettes_path)
 
-	if not dir.dir_exists("user://palettes"):
-		dir.make_dir("user://palettes");
-	if not dir.dir_exists("user://palettes/custom"):
-		dir.make_dir("user://palettes/custom")
-	if not file.file_exists("user://palettes/default_palette.json"):
-		dir.copy("res://Assets/Graphics/Palette/default_palette.json","user://palettes/default_palette.json");
-	if not file.file_exists("user://palettes/bubblegum16.json"):
-		dir.copy("res://Assets/Graphics/Palette/bubblegum16.json","user://palettes/bubblegum16.json");
-
-	var palette_files : Array = get_palette_files("user://palettes")
+	var palette_files : Array = get_palette_files(palettes_path)
 
 	for file_name in palette_files:
-		var palette : Palette = Palette.new().load_from_file("user://palettes/" + file_name)
+		var palette : Palette = Palette.new().load_from_file(palettes_path.plus_file(file_name))
 		if palette:
 			Global.palettes[palette.name] = palette
 			Global.palette_option_button.add_item(palette.name)
@@ -166,16 +160,19 @@ func _load_palettes() -> void:
 			if palette.name == "Default":
 				Global.palette_option_button.select(index)
 
-	dir.open("user://palettes/custom")
-	var custom_palette_files : Array = get_palette_files("user://palettes/custom")
+	dir.open(custom_palettes_path)
+	var custom_palette_files : Array = get_palette_files(custom_palettes_path)
 
 	for file_name in custom_palette_files:
-		var palette : Palette = Palette.new().load_from_file("user://palettes/custom/" + file_name)
+		var palette : Palette = Palette.new().load_from_file(custom_palettes_path.plus_file(file_name))
 		if palette:
 			Global.palettes[palette.name] = palette
 			Global.palette_option_button.add_item(palette.name)
 			var index: int = Global.palette_option_button.get_item_count() - 1
 			Global.palette_option_button.set_item_metadata(index, palette.name)
+
+	if not "Default" in Global.palettes && Global.palettes.size() > 0:
+		Global.control._on_PaletteOptionButton_item_selected(0)
 
 func get_palette_files(path : String) -> Array:
 	var dir := Directory.new()
@@ -207,9 +204,9 @@ func remove_current_palette() -> void:
 
 func _delete_palette_file(file_name : String) -> void:
 	var dir = Directory.new()
-	dir.remove("user://palettes/custom/" + file_name)
+	dir.remove(custom_palettes_path.plus_file(file_name))
 
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
 
-	palette.save_to_file("user://palettes/custom/" + filename)
+	palette.save_to_file(custom_palettes_path.plus_file(filename))
