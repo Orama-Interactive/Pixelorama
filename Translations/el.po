@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pixelorama\n"
-"Last-Translator: Overloaded\n"
+"Last-Translator: huskee\n"
 "Language-Team: none\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -122,16 +122,16 @@ msgstr "Άνοιγμα αρχείου/ων"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Εισαγωγή ως νέο καρέ"
 
-#, fuzzy
+
 msgid "IMPORT_SPRITESHEET"
-msgstr "Κάθετη ευθυγράμμιση"
+msgstr "Εισαγωγή φύλλου καρέ"
 
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
 
-#, fuzzy
+
 msgid "Export Sprite as .png"
-msgstr "Εξαγωγή εικόνας"
+msgstr "Εξαγωγή εικόνας ως .png"
 
 msgid "Export Sprite"
 msgstr "Εξαγωγή εικόνας"
@@ -142,17 +142,17 @@ msgstr "Το άρχειο υπάρχει, να γίνει αντικατάστα
 msgid "Resize:"
 msgstr "Αλλαγή μεγέθους:"
 
-#, fuzzy
+
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Εξαγωγή όλων των καρέ"
+msgstr "Εξαγωγή αυτού του καρέ"
 
-#, fuzzy
+
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Εξαγωγή όλων των καρέ στο ίδιο αρχείο"
+msgstr "Εξαγωγή καρέ σε ξεχωριστά αρχεία"
 
-#, fuzzy
+
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Κάθετη ευθυγράμμιση"
+msgstr "Εξαγωγή καρέ ως φύλλο καρέ"
 
 msgid "Columns"
 msgstr "Στήλες"
@@ -187,23 +187,22 @@ msgstr "Κυβική"
 msgid "Trilinear"
 msgstr "Τριγραμμική"
 
-#, fuzzy
+
 msgid "Language"
 msgstr "Γλώσσα:"
 
 msgid "Themes"
-msgstr ""
+msgstr "Θέματα:"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Οδηγοί και Πλέγμα:"
 
-#, fuzzy
+
 msgid "Language options"
-msgstr "Γλώσσα:"
+msgstr "Επιλογές Γλώσσας"
 
-#, fuzzy
 msgid "Theme options"
-msgstr "Επιλογές πλέγματος"
+msgstr "Επιλογές θέματος"
 
 msgid "Grid options"
 msgstr "Επιλογές πλέγματος"
@@ -212,7 +211,7 @@ msgid "Color:"
 msgstr "Χρώμα:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Χρώμα οδηγών:"
 
 msgid "Language:"
 msgstr "Γλώσσα:"
@@ -220,46 +219,47 @@ msgstr "Γλώσσα:"
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
 
-#, fuzzy
+
 msgid "Dark"
-msgstr "Σκούρημα"
+msgstr "Σκούρο"
 
 msgid "Grey"
-msgstr ""
+msgstr "Γκρι"
 
 msgid "Gold"
-msgstr ""
+msgstr "Χρυσό"
 
-#, fuzzy
+
 msgid "Light"
-msgstr "Φώτισμα"
+msgstr "Φωτεινό"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Αναστροφή χρωμάτων"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Αποκορεσμός"
 
 msgid "Outline"
-msgstr ""
+msgstr "Περίγραμμα"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Διαγώνιος"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Τοποθέτηση μέσα στην εικόνα"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Πάχος:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Εμφάνιση οθόνης εκκίνησης"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Καταγραφές προβλημάτων"
+
 
 msgid "Changelog"
-msgstr ""
+msgstr "Καταγραφές αλλαγών"
 
 msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
@@ -274,19 +274,19 @@ msgid "Donate"
 msgstr "Κάντε μια δωρεά"
 
 msgid "Developers"
-msgstr ""
+msgstr "Προγραμματιστές"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Συνεισφέροντες"
 
 msgid "Donors"
-msgstr ""
+msgstr "Δωρητές"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Ομάδα Ανάπτυξης"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Συνεισφέροντες στο GitHub"
 
 msgid "Art by"
 msgstr "Ζωγραφιά από"
@@ -408,13 +408,13 @@ msgstr "Επιλέξτε ένα πινέλο"
 msgid "Brush: Pixel"
 msgstr "Πινέλο: Εικονοστοιχείο"
 
-#, fuzzy
-msgid "Brush: Circle"
-msgstr "Πινέλο: Εικονοστοιχείο"
 
-#, fuzzy
+msgid "Brush: Circle"
+msgstr "Πινέλο: Κύκλος"
+
+
 msgid "Brush: Filled Circle"
-msgstr "Πινέλο: Εικονοστοιχείο"
+msgstr "Πινέλο: Κύκλος με Γέμισμα"
 
 msgid "Custom brush"
 msgstr "Προσαρμοσμένο πινέλο"
@@ -506,7 +506,7 @@ msgstr ""
 "Όσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση."
 
 msgid "No loop"
-msgstr "Όχι επανάληψη"
+msgstr "Καμία επανάληψη"
 
 msgid "Cycle loop"
 msgstr "Κυκλική επανάληψη"
@@ -578,13 +578,13 @@ msgid "Palettes"
 msgstr "Παλέττες"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Νέα παλέττα"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Επεξεργασία παλέττας"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Επιλογή παλέττας"
 
 msgid "Undo: Draw"
 msgstr "Αναίρεση: Ζωγραφική"
@@ -660,6 +660,8 @@ msgstr "Το αρχείο αποθηκεύτηκε"
 
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
+
+# split screen button translations (deprecated), left for future reference
 
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""
