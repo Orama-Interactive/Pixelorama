@@ -11,19 +11,6 @@ onready var contributors : Tree = $AboutUI/Credits/Contributors/ContributorTree
 onready var donors : Tree = $AboutUI/Credits/Donors/DonorTree
 
 func _ready() -> void:
-	var groups_root := groups.create_item()
-	var developers_button := groups.create_item(groups_root)
-	var contributors_button := groups.create_item(groups_root)
-	var donors_button := groups.create_item(groups_root)
-	developers_button.set_text(0,  "  " + tr("Developers"))
-	# We use metadata to avoid being affected by translations
-	developers_button.set_metadata(0, "Developers")
-	developers_button.select(0)
-	contributors_button.set_text(0,  "  " + tr("Contributors"))
-	contributors_button.set_metadata(0, "Contributors")
-	donors_button.set_text(0,  "  " + tr("Donors"))
-	donors_button.set_metadata(0, "Donors")
-
 	var dev_root := developers.create_item()
 	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer"))
 	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
@@ -40,6 +27,7 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
 	contributors.create_item(contributor_root).set_text(0, "  JunYouIntrovert")
+	contributors.create_item(contributor_root).set_text(0, "  huskee")
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms")
@@ -47,6 +35,22 @@ func _ready() -> void:
 func _on_AboutDialog_about_to_show() -> void:
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
 	window_title = tr("About Pixelorama") + " " + current_version
+
+	var groups_root := groups.create_item()
+	var developers_button := groups.create_item(groups_root)
+	var contributors_button := groups.create_item(groups_root)
+	var donors_button := groups.create_item(groups_root)
+	developers_button.set_text(0,  "  " + tr("Developers"))
+	# We use metadata to avoid being affected by translations
+	developers_button.set_metadata(0, "Developers")
+	developers_button.select(0)
+	contributors_button.set_text(0,  "  " + tr("Contributors"))
+	contributors_button.set_metadata(0, "Contributors")
+	donors_button.set_text(0,  "  " + tr("Donors"))
+	donors_button.set_metadata(0, "Donors")
+
+func _on_AboutDialog_popup_hide() -> void:
+	groups.clear()
 
 func _on_Groups_item_selected() -> void:
 	for child in credits.get_children():

@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Fonts/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-visible = true
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = "Preferences"
@@ -244,6 +243,8 @@ margin_right = 156.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0.63, 0.13, 0.94, 1 )
+[connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]

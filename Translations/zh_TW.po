@@ -225,7 +225,7 @@ msgstr "系統語言"
 msgid "Dark"
 msgstr "變暗"
 
-msgid "Grey"
+msgid "Gray"
 msgstr ""
 
 msgid "Gold"

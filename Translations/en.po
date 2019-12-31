@@ -215,8 +215,8 @@ msgstr "System Language"
 msgid "Dark"
 msgstr "Dark"
 
-msgid "Grey"
-msgstr "Grey"
+msgid "Gray"
+msgstr "Gray"
 
 msgid "Gold"
 msgstr "Gold"
@@ -643,6 +643,7 @@ msgstr "File saved"
 
 msgid "File exported"
 msgstr "File exported"
+
 
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""

@@ -180,6 +180,7 @@ custom_fonts/font = ExtResource( 5 )
 text = "Copyright 2019-2020 Orama Interactive"
 align = 1
 [connection signal="about_to_show" from="." to="." method="_on_AboutDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_AboutDialog_popup_hide"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Website" to="." method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/GitHub" to="." method="_on_GitHub_pressed"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Donate" to="." method="_on_Donate_pressed"]

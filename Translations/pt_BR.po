@@ -225,7 +225,7 @@ msgstr "Linguagem do Sistema"
 msgid "Dark"
 msgstr "Escurecer"
 
-msgid "Grey"
+msgid "Gray"
 msgstr ""
 
 msgid "Gold"

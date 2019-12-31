@@ -7,18 +7,6 @@ onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
 
 func _ready() -> void:
-	var root := tree.create_item()
-	var language_button := tree.create_item(root)
-	var theme_button := tree.create_item(root)
-	var grid_button := tree.create_item(root)
-	language_button.set_text(0, "  " + tr("Language"))
-	language_button.set_metadata(0, "Language")
-	language_button.select(0)
-	theme_button.set_text(0, "  " + tr("Themes"))
-	theme_button.set_metadata(0, "Themes")
-	grid_button.set_text(0, "  " + tr("Guides & Grid"))
-	grid_button.set_metadata(0, "Guides & Grid")
-
 	for child in languages.get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Language_pressed", [child])
@@ -31,6 +19,25 @@ func _ready() -> void:
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
 		themes.get_child(theme_id + 1).pressed = true
+
+func _on_PreferencesDialog_about_to_show() -> void:
+	var root := tree.create_item()
+	var language_button := tree.create_item(root)
+	var theme_button := tree.create_item(root)
+	var grid_button := tree.create_item(root)
+
+	language_button.set_text(0, "  " + tr("Language"))
+	# We use metadata to avoid being affected by translations
+	language_button.set_metadata(0, "Language")
+	language_button.select(0)
+	theme_button.set_text(0, "  " + tr("Themes"))
+	theme_button.set_metadata(0, "Themes")
+	grid_button.set_text(0, "  " + tr("Guides & Grid"))
+	grid_button.set_metadata(0, "Guides & Grid")
+
+
+func _on_PreferencesDialog_popup_hide() -> void:
+	tree.clear()
 
 func _on_Tree_item_selected() -> void:
 	for child in right_side.get_children():

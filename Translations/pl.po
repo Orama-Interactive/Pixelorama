@@ -225,7 +225,7 @@ msgstr "Język systemowy"
 msgid "Dark"
 msgstr "Przyciemnianie"
 
-msgid "Grey"
+msgid "Gray"
 msgstr ""
 
 msgid "Gold"

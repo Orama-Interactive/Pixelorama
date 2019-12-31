@@ -228,7 +228,7 @@ msgstr "Systemsprache"
 msgid "Dark"
 msgstr "Verdunkeln"
 
-msgid "Grey"
+msgid "Gray"
 msgstr ""
 
 msgid "Gold"

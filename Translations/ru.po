@@ -225,7 +225,7 @@ msgstr "Системный язык"
 msgid "Dark"
 msgstr "Затемнить"
 
-msgid "Grey"
+msgid "Gray"
 msgstr ""
 
 msgid "Gold"

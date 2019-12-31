@@ -122,13 +122,11 @@ msgstr "Άνοιγμα αρχείου/ων"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Εισαγωγή ως νέο καρέ"
 
-
 msgid "IMPORT_SPRITESHEET"
 msgstr "Εισαγωγή φύλλου καρέ"
 
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
-
 
 msgid "Export Sprite as .png"
 msgstr "Εξαγωγή εικόνας ως .png"
@@ -142,14 +140,11 @@ msgstr "Το άρχειο υπάρχει, να γίνει αντικατάστα
 msgid "Resize:"
 msgstr "Αλλαγή μεγέθους:"
 
-
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Εξαγωγή αυτού του καρέ"
 
-
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Εξαγωγή καρέ σε ξεχωριστά αρχεία"
-
 
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Εξαγωγή καρέ ως φύλλο καρέ"
@@ -187,7 +182,6 @@ msgstr "Κυβική"
 msgid "Trilinear"
 msgstr "Τριγραμμική"
 
-
 msgid "Language"
 msgstr "Γλώσσα:"
 
@@ -196,7 +190,6 @@ msgstr "Θέματα:"
 
 msgid "Guides & Grid"
 msgstr "Οδηγοί και Πλέγμα:"
-
 
 msgid "Language options"
 msgstr "Επιλογές Γλώσσας"
@@ -219,16 +212,14 @@ msgstr "Γλώσσα:"
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
 
-
 msgid "Dark"
 msgstr "Σκούρο"
 
-msgid "Grey"
+msgid "Gray"
 msgstr "Γκρι"
 
 msgid "Gold"
 msgstr "Χρυσό"
-
 
 msgid "Light"
 msgstr "Φωτεινό"
@@ -256,7 +247,6 @@ msgstr "Εμφάνιση οθόνης εκκίνησης"
 
 msgid "Issue Tracker"
 msgstr "Καταγραφές προβλημάτων"
-
 
 msgid "Changelog"
 msgstr "Καταγραφές αλλαγών"
@@ -408,10 +398,8 @@ msgstr "Επιλέξτε ένα πινέλο"
 msgid "Brush: Pixel"
 msgstr "Πινέλο: Εικονοστοιχείο"
 
-
 msgid "Brush: Circle"
 msgstr "Πινέλο: Κύκλος"
-
 
 msgid "Brush: Filled Circle"
 msgstr "Πινέλο: Κύκλος με Γέμισμα"
@@ -661,8 +649,8 @@ msgstr "Το αρχείο αποθηκεύτηκε"
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
 
-# split screen button translations (deprecated), left for future reference
 
+# split screen button translations (deprecated), left for future reference
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""
 #~ "Διπλή οθόνη\n"

@@ -208,7 +208,7 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
-msgid "Grey"
+msgid "Gray"
 msgstr ""
 
 msgid "Gold"
