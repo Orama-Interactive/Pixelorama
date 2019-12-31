@@ -12,6 +12,9 @@ func _ready() -> void:
 	# Select default palette "Default"
 	on_palette_select(current_palette)
 
+	var add_palette_menu : PopupMenu = Global.add_palette_button.get_child(0)
+	add_palette_menu.connect("id_pressed", self, "add_palette_menu_id_pressed")
+
 func _clear_swatches() -> void:
 	for child in get_children():
 		if child is BaseButton:
@@ -57,21 +60,8 @@ func on_palette_import_file_selected(path) -> void:
 		Global.error_dialog.set_text("Invalid Palette file!")
 		Global.error_dialog.popup_centered()
 
-func on_edit_palette() -> void:
-	var palette : Dictionary = Global.palettes[current_palette]
-
-	var create_new_palette := true # Create new palette by default
-	if palette.editable:
-		create_new_palette = false # Edit if already a custom palette
-
-	if create_new_palette:
-		from_palette = Global.palettes[current_palette]
-		Global.new_palette_dialog.window_title = "Create a new custom palette from existing default?"
-		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
-		Global.new_palette_dialog.popup_centered()
-	else:
-		from_palette = null
-		Global.edit_palette_popup.open(current_palette)
+func _on_AddPalette_pressed() -> void:
+	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
 
 func on_new_palette_confirmed() -> void:
 	var new_palette_name : String = Global.new_palette_name_line_edit.text
@@ -79,6 +69,13 @@ func on_new_palette_confirmed() -> void:
 	if not result.empty():
 		Global.error_dialog.set_text(result)
 		Global.error_dialog.popup_centered()
+
+func add_palette_menu_id_pressed(id) -> void:
+	match id:
+		0:	# New Empty Palette
+			Global.palette_container.on_new_empty_palette()
+		1:	# Import Palette
+			Global.palette_container.on_import_palette()
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
 	var new_palette : Palette = Palette.new()
@@ -107,6 +104,26 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 
 	on_palette_select(name)
 	return ""
+
+func on_edit_palette() -> void:
+	var palette : Dictionary = Global.palettes[current_palette]
+
+	var create_new_palette := true # Create new palette by default
+	if palette.editable:
+		create_new_palette = false # Edit if already a custom palette
+
+	if create_new_palette:
+		from_palette = Global.palettes[current_palette]
+		Global.new_palette_dialog.window_title = "Create a new custom palette from existing default?"
+		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
+		Global.new_palette_dialog.popup_centered()
+	else:
+		from_palette = null
+		Global.edit_palette_popup.open(current_palette)
+
+func _on_PaletteOptionButton_item_selected(ID : int) -> void:
+	var palette_name = Global.palette_option_button.get_item_metadata(ID)
+	on_palette_select(palette_name)
 
 func _display_palette(palette : Palette) -> void:
 	var index := 0
@@ -173,3 +190,4 @@ func get_palette_files(path : String) -> Array:
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
 	palette.save_to_file(palettes_path.plus_file(filename))
+
