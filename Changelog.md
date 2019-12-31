@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Color switch has `X` as its shortcut.
 - Frames can now be removed with middle click.
 - Selection content can be deleted with the "Delete" button.
+- Added a new splash screen window dialog  that appears when Pixelorama loads.
+- Added "View Splash Screen", "Issue Tracker" and "Changelog" as Help menu options
 
 ### Changed
 - Straight line improvements - it activates by pressing shift after last draw (Thanks to SbNanduri)
