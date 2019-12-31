@@ -10,7 +10,7 @@
 visible = true
 margin_right = 600.0
 margin_bottom = 550.0
-rect_min_size = Vector2( 600, 550 )
+rect_min_size = Vector2( 600, 570 )
 window_title = "Edit Palette"
 script = ExtResource( 1 )
 
@@ -22,6 +22,7 @@ margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
 size_flags_horizontal = 3
+custom_constants/separation = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 580.0
@@ -63,44 +64,41 @@ margin_bottom = 44.0
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 
-[node name="ColorNameContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 466.0
+[node name="PaletteOptions" type="GridContainer" parent="VBoxContainer"]
+margin_top = 470.0
 margin_right = 580.0
-margin_bottom = 490.0
+margin_bottom = 522.0
+columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ColorNameContainer"]
-margin_top = 5.0
-margin_right = 79.0
-margin_bottom = 19.0
-text = "Color Name:"
-
-[node name="EditPaletteColorNameLineEdit" type="LineEdit" parent="VBoxContainer/ColorNameContainer"]
-margin_left = 83.0
-margin_right = 580.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-
-[node name="PaletteNameContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 494.0
-margin_right = 580.0
-margin_bottom = 518.0
-
-[node name="Label" type="Label" parent="VBoxContainer/PaletteNameContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PaletteOptions"]
 margin_top = 5.0
 margin_right = 91.0
 margin_bottom = 19.0
-text = "Palette Name:"
+text = "Color Name:"
 
-[node name="EditPaletteNameLineEdit" type="LineEdit" parent="VBoxContainer/PaletteNameContainer"]
+[node name="EditPaletteColorNameLineEdit" type="LineEdit" parent="VBoxContainer/PaletteOptions"]
 margin_left = 95.0
 margin_right = 580.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="WindowOptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 522.0
+[node name="Label2" type="Label" parent="VBoxContainer/PaletteOptions"]
+margin_top = 33.0
+margin_right = 91.0
+margin_bottom = 47.0
+text = "Palette Name:"
+
+[node name="EditPaletteNameLineEdit" type="LineEdit" parent="VBoxContainer/PaletteOptions"]
+margin_left = 95.0
+margin_top = 28.0
 margin_right = 580.0
-margin_bottom = 542.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="WindowOptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 530.0
+margin_right = 580.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 
 [node name="SpacerControl" type="Control" parent="VBoxContainer/WindowOptionsContainer"]
@@ -134,6 +132,6 @@ size_flags_horizontal = 3
 [connection signal="color_changed" from="VBoxContainer/HBoxContainer/EditPaletteColorPicker" to="." method="_on_EditPaletteColorPicker_color_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ColorButtons/AddSwatchButton" to="." method="_on_AddSwatchButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ColorButtons/RemoveSwatchButton" to="." method="_on_RemoveSwatchButton_pressed"]
-[connection signal="text_changed" from="VBoxContainer/ColorNameContainer/EditPaletteColorNameLineEdit" to="." method="_on_EditPaletteColorNameLineEdit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit" to="." method="_on_EditPaletteColorNameLineEdit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/WindowOptionsContainer/EditPaletteSaveButton" to="." method="_on_EditPaletteSaveButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/WindowOptionsContainer/EditPaletteCancelButton" to="." method="_on_EditPaletteCancelButton_pressed"]

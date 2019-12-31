@@ -2,10 +2,10 @@ extends WindowDialog
 
 onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
 onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/EditPaletteGridContainer
-onready var color_name_edit = $VBoxContainer/ColorNameContainer/EditPaletteColorNameLineEdit
-onready var palette_name_edit = $VBoxContainer/PaletteNameContainer/EditPaletteNameLineEdit
+onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit
+onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
 
-var palette_button = preload("res://Prefabs/PaletteButton.tscn");
+var palette_button = preload("res://Prefabs/PaletteButton.tscn")
 
 var current_palette : String
 var current_swatch := -1

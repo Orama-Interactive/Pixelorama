@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Multiple theme support (Dark, Gray, Light, Godot, Gold) to better match your style (Thanks to Erevoid)!
 - Image sub-menu with new features (Outlines, Color invert, desaturation) for more editing power.
 - Added a layer opacity slider, that lets you change the alpha values of layers.
-- Added a better circle and filled circle brushes. They use Bresenham's circle algorithm to scale.
+- Added a better circle and filled circle brushes. They use Bresenham's circle algorithm for scaling.
 - Added random brushes! Every time you draw, expect to see something different! To create random brushes, place the images you want your brush to have in the same folder, and put the symbol "%" in front of their filename. Examples, "%icon1.png", "%grass_green.png"
 - Pixelorama goes worldwide with even more translations! (German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese)
 - Importing spritesheets is now possible.

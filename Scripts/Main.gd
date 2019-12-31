@@ -16,7 +16,7 @@ var previous_right_color := Color.white
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
-	OS.set_window_title("(untitled) - Pixelorama")
+	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
@@ -343,7 +343,7 @@ func help_menu_id_pressed(id : int) -> void:
 func _on_OpenSprite_file_selected(path : String) -> void:
 	var file := File.new()
 	var err := file.open(path, File.READ)
-	if err != OK: #An error occured
+	if err != OK: # An error occured
 		file.close()
 		OS.alert("Can't load file")
 		return
@@ -357,7 +357,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	var frame := 0
 	var frame_line := file.get_line()
 	clear_canvases()
-	while frame_line == "--": #Load frames
+	while frame_line == "--": # Load frames
 		var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 		Global.canvas = canvas
 		var width := file.get_16()
@@ -378,8 +378,8 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			canvas.layers.append([image, tex, layer_name, true, layer_transparency])
 			layer_line = file.get_line()
 
-		var guide_line := file.get_line() #"guideline" no pun intended
-		while guide_line == "|": #Load guides
+		var guide_line := file.get_line() # "guideline" no pun intended
+		while guide_line == "|": # Load guides
 			var guide := Guide.new()
 			guide.default_color = Color.purple
 			guide.type = file.get_8()
@@ -401,7 +401,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		frame += 1
 
 	Global.current_frame = frame - 1
-	#Load tool options
+	# Load tool options
 	Global.left_color_picker.color = file.get_var()
 	Global.right_color_picker.color = file.get_var()
 	Global.left_brush_size = file.get_8()
@@ -415,7 +415,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	for color in right_palette:
 		Global.right_color_picker.get_picker().add_preset(color)
 
-	#Load custom brushes
+	# Load custom brushes
 	Global.custom_brushes.resize(Global.brushes_from_files)
 	Global.remove_brush_buttons()
 
@@ -502,6 +502,7 @@ func clear_canvases() -> void:
 	current_save_path = ""
 	$ExportSprites.current_export_path = ""
 	file_menu.set_item_text(5, "Export PNG...")
+	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 	Global.undo_redo.clear_history(false)
 
 func _on_ImportSprites_popup_hide() -> void:
@@ -822,16 +823,6 @@ func _on_FutureOnionSkinning_value_changed(value) -> void:
 
 func _on_BlueRedMode_toggled(button_pressed) -> void:
 	Global.onion_skinning_blue_red = button_pressed
-
-func _on_SplitScreenButton_toggled(button_pressed) -> void:
-	if button_pressed:
-		Global.viewport_separator.visible = true
-		Global.second_viewport.visible = true
-		$SplitScreenButton.hint_tooltip = tr("SPLITSCREEN_HIDE_HT")
-	else:
-		Global.viewport_separator.visible = false
-		Global.second_viewport.visible = false
-		$SplitScreenButton.hint_tooltip = tr("SPLITSCREEN_HT")
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color

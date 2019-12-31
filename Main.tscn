@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -58,18 +58,16 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=56]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=57]
 [ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=58]
-[ext_resource path="res://Assets/Graphics/Canvas_split.png" type="Texture" id=59]
-[ext_resource path="res://Assets/Graphics/Canvas_unsplit.png" type="Texture" id=60]
-[ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=61]
-[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=62]
-[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=63]
-[ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=64]
-[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=65]
-[ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=66]
-[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=67]
-[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=68]
-[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=69]
-[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=70]
+[ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=59]
+[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=60]
+[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=61]
+[ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=62]
+[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=63]
+[ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=64]
+[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=65]
+[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=66]
+[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=67]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=68]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -929,7 +927,6 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -955,14 +952,22 @@ action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 14 )
 
-[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+editor/display_folded = true
+margin_right = 692.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
+[node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
 margin_bottom = 462.0
 rect_min_size = Vector2( 16, 0 )
@@ -978,28 +983,27 @@ action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 15 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler"]
-editor/display_folded = true
+[node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 704.0
+margin_right = 692.0
 margin_bottom = 462.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 688, 462 )
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
+size = Vector2( 676, 462 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 16 )]
+[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 16 )]
 
-[node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+[node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
 
-[node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+[node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 visible = false
 z_index = 1
 color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
@@ -1008,29 +1012,20 @@ invert_border = 0.5
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 18 )
 
-[node name="ViewportSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-visible = false
-margin_left = 315.0
-margin_right = 319.0
-margin_bottom = 464.0
-
-[node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-editor/display_folded = true
-visible = false
-margin_left = 345.0
-margin_right = 686.0
-margin_bottom = 478.0
-size_flags_horizontal = 3
+[node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+margin_left = 704.0
+margin_right = 704.0
+margin_bottom = 462.0
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2"]
-size = Vector2( 341, 478 )
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
+size = Vector2( 0, 462 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 script = ExtResource( 19 )
 
-[node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
@@ -1357,6 +1352,8 @@ margin_bottom = 32.0
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "NEWPALETTE_HT"
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 37 )
 texture_hover = ExtResource( 38 )
 
@@ -1371,6 +1368,8 @@ items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Im
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
+hint_tooltip = "EDITPALETTE_HT"
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 39 )
 texture_hover = ExtResource( 40 )
 
@@ -1380,6 +1379,8 @@ margin_right = 175.0
 margin_bottom = 32.0
 grow_horizontal = 0
 rect_min_size = Vector2( 103, 0 )
+hint_tooltip = "CHOOSEPALETTE_HT"
+mouse_default_cursor_shape = 2
 clip_text = true
 
 [node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
@@ -1427,12 +1428,10 @@ size_flags_vertical = 3
 custom_constants/separation = 6
 
 [node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 32.0
 
 [node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons"]
-editor/display_folded = true
 margin_left = 6.0
 margin_right = 218.0
 margin_bottom = 32.0
@@ -1532,6 +1531,7 @@ margin_left = 48.0
 margin_right = 154.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 106, 0 )
+mouse_default_cursor_shape = 2
 size_flags_vertical = 1
 value = 100.0
 
@@ -1539,6 +1539,7 @@ value = 100.0
 margin_left = 158.0
 margin_right = 212.0
 margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 value = 100.0
 align = 1
 
@@ -1618,21 +1619,7 @@ scroll_horizontal_enabled = false
 [node name="ProjectBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/Project"]
 columns = 5
 
-[node name="SplitScreenButton" type="TextureButton" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -236.921
-margin_top = 44.4745
-margin_right = -223.921
-margin_bottom = 57.4745
-hint_tooltip = "SPLITSCREEN_HT"
-mouse_default_cursor_shape = 2
-size_flags_vertical = 0
-toggle_mode = true
-texture_normal = ExtResource( 59 )
-texture_pressed = ExtResource( 60 )
-
-[node name="CreateNewImage" parent="." instance=ExtResource( 61 )]
+[node name="CreateNewImage" parent="." instance=ExtResource( 59 )]
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1661,17 +1648,17 @@ filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
-[node name="ImportSprites" parent="." instance=ExtResource( 62 )]
+[node name="ImportSprites" parent="." instance=ExtResource( 60 )]
 
-[node name="ExportSprites" parent="." instance=ExtResource( 63 )]
+[node name="ExportSprites" parent="." instance=ExtResource( 61 )]
 
-[node name="ScaleImage" parent="." instance=ExtResource( 64 )]
+[node name="ScaleImage" parent="." instance=ExtResource( 62 )]
 
-[node name="PreferencesDialog" parent="." instance=ExtResource( 65 )]
+[node name="PreferencesDialog" parent="." instance=ExtResource( 63 )]
 
-[node name="OutlineDialog" parent="." instance=ExtResource( 66 )]
+[node name="OutlineDialog" parent="." instance=ExtResource( 64 )]
 
-[node name="AboutDialog" parent="." instance=ExtResource( 67 )]
+[node name="AboutDialog" parent="." instance=ExtResource( 65 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
@@ -1685,12 +1672,12 @@ margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="EditPalettePopup" parent="." instance=ExtResource( 68 )]
+[node name="EditPalettePopup" parent="." instance=ExtResource( 66 )]
 visible = false
 
-[node name="NewPaletteDialog" parent="." instance=ExtResource( 69 )]
+[node name="NewPaletteDialog" parent="." instance=ExtResource( 67 )]
 
-[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 70 )]
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 68 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
@@ -1735,11 +1722,11 @@ visible = false
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
-[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
 [connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
@@ -1764,7 +1751,6 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityCenter/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityCenter/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="toggled" from="SplitScreenButton" to="." method="_on_SplitScreenButton_toggled"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
 [connection signal="popup_hide" from="OpenSprite" to="." method="_on_ImportSprites_popup_hide"]

@@ -128,8 +128,6 @@ var canvas : Canvas
 var canvas_parent : Node
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
-var viewport_separator : VSeparator
-var split_screen_button : BaseButton
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
@@ -241,8 +239,6 @@ func _ready() -> void:
 	canvas_parent = canvas.get_parent()
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
-	viewport_separator = find_node_by_name(root, "ViewportSeparator")
-	split_screen_button = find_node_by_name(root, "SplitScreenButton")
 	camera = find_node_by_name(canvas_parent, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	camera_preview = find_node_by_name(root, "CameraPreview")
