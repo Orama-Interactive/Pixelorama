@@ -153,6 +153,8 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
+	$SplashDialog.popup_centered() # Splash screen
+
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	Global.left_cursor.texture = Global.left_cursor_tool_texture

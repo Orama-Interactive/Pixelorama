@@ -177,7 +177,7 @@ margin_top = 263.0
 margin_right = 488.0
 margin_bottom = 276.0
 custom_fonts/font = ExtResource( 5 )
-text = "Copyright 2019 - Orama Interactive"
+text = "Copyright 2019-2020 Orama Interactive"
 align = 1
 [connection signal="about_to_show" from="." to="." method="_on_AboutDialog_about_to_show"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Website" to="." method="_on_Website_pressed"]

@@ -29,8 +29,6 @@ var line_2d : Line2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Global.can_draw = false
-
 	# The sprite itself
 	if layers.empty():
 		var sprite := Image.new()
@@ -836,9 +834,6 @@ func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool
 # Returns the position in the middle of a rectangle
 func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
 	return (rect_position - rect_size / 2).floor()
-
-func _on_Timer_timeout() -> void:
-	Global.can_draw = true
 
 # Custom blend rect function, needed because Godot's issue #31124
 func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:

@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Dialogs/SplashDialog.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Pixelorama Logo.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Splash Art.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=4]
+
+[node name="SplashDialog" type="WindowDialog"]
+visible = true
+margin_right = 400.0
+margin_bottom = 380.0
+rect_min_size = Vector2( 400, 380 )
+script = ExtResource( 1 )
+
+[node name="Contents" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PixeloramaLogo" type="TextureRect" parent="Contents"]
+margin_left = 50.0
+margin_right = 350.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+texture = ExtResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="Contents"]
+margin_top = 44.0
+margin_right = 400.0
+margin_bottom = 48.0
+
+[node name="SplashArt" type="TextureRect" parent="Contents"]
+margin_left = 12.0
+margin_top = 52.0
+margin_right = 387.0
+margin_bottom = 302.0
+rect_min_size = Vector2( 375, 250 )
+size_flags_horizontal = 4
+texture = ExtResource( 3 )
+expand = true
+
+[node name="ArtCredits" type="Button" parent="Contents"]
+margin_top = 306.0
+margin_right = 400.0
+margin_bottom = 326.0
+text = "Art by Erevoid"
+flat = true
+
+[node name="HSeparator2" type="HSeparator" parent="Contents"]
+margin_top = 330.0
+margin_right = 400.0
+margin_bottom = 334.0
+
+[node name="DevelopedBy" type="Label" parent="Contents"]
+margin_top = 338.0
+margin_right = 400.0
+margin_bottom = 351.0
+custom_fonts/font = ExtResource( 4 )
+text = "Pixelorama v0.6 - Developed by Orama Interactive"
+align = 1
+
+[node name="Copyright" type="Label" parent="Contents"]
+margin_top = 355.0
+margin_right = 400.0
+margin_bottom = 368.0
+custom_fonts/font = ExtResource( 4 )
+text = "Copyright 2019-2020 Orama Interactive"
+align = 1
+[connection signal="pressed" from="Contents/ArtCredits" to="." method="_on_ArtCredits_pressed"]
