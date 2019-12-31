@@ -15,14 +15,18 @@ func _ready() -> void:
 	var developers_button := groups.create_item(groups_root)
 	var contributors_button := groups.create_item(groups_root)
 	var donors_button := groups.create_item(groups_root)
-	developers_button.set_text(0, "  Developers")
+	developers_button.set_text(0,  "  " + tr("Developers"))
+	# We use metadata to avoid being affected by translations
+	developers_button.set_metadata(0, "Developers")
 	developers_button.select(0)
-	contributors_button.set_text(0, "  Contributors")
-	donors_button.set_text(0, "  Donors")
+	contributors_button.set_text(0,  "  " + tr("Contributors"))
+	contributors_button.set_metadata(0, "Contributors")
+	donors_button.set_text(0,  "  " + tr("Donors"))
+	donors_button.set_metadata(0, "Donors")
 
 	var dev_root := developers.create_item()
-	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - Lead Programmer")
-	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - UI Designer")
+	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer"))
+	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
 
 	var contributor_root := contributors.create_item()
 	contributors.create_item(contributor_root).set_text(0, "  Hugo Locurcio")
@@ -49,7 +53,7 @@ func _on_Groups_item_selected() -> void:
 		if child != groups:
 			child.visible = false
 
-	var selected := groups.get_selected().get_text(0)
+	var selected : String = groups.get_selected().get_metadata(0)
 	if "Developers" in selected:
 		developer_container.visible = true
 	elif "Contributors" in selected:

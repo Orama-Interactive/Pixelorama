@@ -11,10 +11,13 @@ func _ready() -> void:
 	var language_button := tree.create_item(root)
 	var theme_button := tree.create_item(root)
 	var grid_button := tree.create_item(root)
-	language_button.set_text(0, "  Language")
+	language_button.set_text(0, "  " + tr("Language"))
+	language_button.set_metadata(0, "Language")
 	language_button.select(0)
-	theme_button.set_text(0, "  Themes")
-	grid_button.set_text(0, "  Guides & Grid")
+	theme_button.set_text(0, "  " + tr("Themes"))
+	theme_button.set_metadata(0, "Themes")
+	grid_button.set_text(0, "  " + tr("Guides & Grid"))
+	grid_button.set_metadata(0, "Guides & Grid")
 
 	for child in languages.get_children():
 		if child is Button:
@@ -32,7 +35,7 @@ func _ready() -> void:
 func _on_Tree_item_selected() -> void:
 	for child in right_side.get_children():
 		child.visible = false
-	var selected := tree.get_selected().get_text(0)
+	var selected : String = tree.get_selected().get_metadata(0)
 	if "Language" in selected:
 		languages.visible = true
 	elif "Themes" in selected:

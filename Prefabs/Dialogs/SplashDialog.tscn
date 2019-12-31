@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=4]
 
 [node name="SplashDialog" type="WindowDialog"]
-visible = true
 margin_right = 400.0
 margin_bottom = 380.0
 rect_min_size = Vector2( 400, 380 )
@@ -42,6 +41,7 @@ expand = true
 margin_top = 306.0
 margin_right = 400.0
 margin_bottom = 326.0
+mouse_default_cursor_shape = 2
 text = "Art by Erevoid"
 flat = true
 
@@ -65,4 +65,5 @@ margin_bottom = 368.0
 custom_fonts/font = ExtResource( 4 )
 text = "Copyright 2019-2020 Orama Interactive"
 align = 1
+[connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
 [connection signal="pressed" from="Contents/ArtCredits" to="." method="_on_ArtCredits_pressed"]

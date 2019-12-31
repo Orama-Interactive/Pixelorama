@@ -1,4 +1,10 @@
 extends WindowDialog
 
+func _on_SplashDialog_about_to_show() -> void:
+	var current_version : String = ProjectSettings.get_setting("application/config/Version")
+	window_title = "Pixelorama" + " " + current_version
+	$Contents/DevelopedBy.text = "Pixelorama" + " " + current_version + " - " + tr("MADEBY_LABEL")
+
 func _on_ArtCredits_pressed() -> void:
 	OS.shell_open("https://www.instagram.com/erevos_art")
+
