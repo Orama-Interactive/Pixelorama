@@ -37,7 +37,7 @@ func on_new_empty_palette() -> void:
 func on_import_palette() -> void:
 	Global.palette_import_file_dialog.popup_centered()
 
-func on_palette_import_file_selected(path) -> void:
+func on_palette_import_file_selected(path : String) -> void:
 	var palette : Palette = null
 	if path.to_lower().ends_with("json"):
 		palette = Palette.new().load_from_file(path)
@@ -70,7 +70,7 @@ func on_new_palette_confirmed() -> void:
 		Global.error_dialog.set_text(result)
 		Global.error_dialog.popup_centered()
 
-func add_palette_menu_id_pressed(id) -> void:
+func add_palette_menu_id_pressed(id : int) -> void:
 	match id:
 		0:	# New Empty Palette
 			Global.palette_container.on_new_empty_palette()

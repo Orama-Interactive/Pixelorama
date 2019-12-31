@@ -76,6 +76,7 @@ func _ready() -> void:
 		"Outline" : 0
 		}
 	var help_menu_items := {
+		"Issue Tracker" : 0,
 		"About Pixelorama" : 0
 		}
 
@@ -334,7 +335,9 @@ func image_menu_id_pressed(id : int) -> void:
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:
-		0: # About Pixelorama
+		0: # Issue Tracker
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
+		1: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
 

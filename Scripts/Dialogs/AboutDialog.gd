@@ -62,7 +62,7 @@ func _on_Website_pressed() -> void:
 	OS.shell_open("https://www.orama-interactive.com/pixelorama")
 
 func _on_GitHub_pressed() -> void:
-	OS.shell_open("https://github.com/OverloadedOrama/Pixelorama")
+	OS.shell_open("https://github.com/Orama-Interactive/Pixelorama")
 
 func _on_Donate_pressed() -> void:
 	OS.shell_open("https://paypal.me/OverloadedOrama")
