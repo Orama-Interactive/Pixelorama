@@ -38,6 +38,13 @@ msgstr "Edycja"
 msgid "View"
 msgstr "Widok"
 
+#, fuzzy
+msgid "Image"
+msgstr "Rozmiar obrazu"
+
+msgid "Effects"
+msgstr ""
+
 msgid "Help"
 msgstr "Pomoc"
 
@@ -116,26 +123,52 @@ msgstr "Otwórz pliki"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importuj jako nowa klatka"
 
+#, fuzzy
+msgid "IMPORT_SPRITESHEET"
+msgstr "Pionowy arkusz"
+
 msgid "Save Sprite as .pxo"
 msgstr "Zapisz Sprite do .pxo"
+
+#, fuzzy
+msgid "Export Sprite as .png"
+msgstr "Eksportuj Sprite"
 
 msgid "Export Sprite"
 msgstr "Eksportuj Sprite"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
+msgstr ""
+
+msgid "Resize:"
+msgstr ""
+
+#, fuzzy
+msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Eksportuj wszystkie klatki"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Eksportuj klatki jako jeden plik"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Pionowy arkusz"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
 
 msgid "Path:"
 msgstr "Ścieżka:"
 
 msgid "Directories & Files:"
 msgstr "Pliki oraz katalogi:"
+
+msgid "Create Folder"
+msgstr ""
 
 msgid "File:"
 msgstr "Plik:"
@@ -155,17 +188,79 @@ msgstr "Sześcienna"
 msgid "Trilinear"
 msgstr "Trójlinowa"
 
+#, fuzzy
+msgid "Language"
+msgstr "Język:"
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+#, fuzzy
+msgid "Language options"
+msgstr "Język:"
+
+#, fuzzy
+msgid "Theme options"
+msgstr "Ustawienia siatki"
+
 msgid "Grid options"
 msgstr "Ustawienia siatki"
 
 msgid "Color:"
 msgstr "Kolor:"
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr "Język:"
 
 msgid "System Language"
 msgstr "Język systemowy"
+
+#, fuzzy
+msgid "Dark"
+msgstr "Przyciemnianie"
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+#, fuzzy
+msgid "Light"
+msgstr "Rozjaśnianie"
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
 
 msgid "About Pixelorama"
 msgstr "O Pixeloramie"
@@ -178,6 +273,34 @@ msgstr "Strona internetowa"
 
 msgid "Donate"
 msgstr "Wspomóż"
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr ""
+
+msgid "untitled"
+msgstr ""
+
+#, fuzzy
+msgid "imported"
+msgstr "Plik został wyeksportowany"
+
+msgid "copy"
+msgstr ""
 
 msgid "QUIT_LABEL"
 msgstr "Na pewno chcesz opuścić Pixeloramę?"
@@ -279,6 +402,14 @@ msgid "BRUSH_HT"
 msgstr "Wybierz pędzel"
 
 msgid "Brush: Pixel"
+msgstr "Pędzel: Piksel"
+
+#, fuzzy
+msgid "Brush: Circle"
+msgstr "Pędzel: Piksel"
+
+#, fuzzy
+msgid "Brush: Filled Circle"
 msgstr "Pędzel: Piksel"
 
 msgid "Custom brush"
@@ -407,6 +538,10 @@ msgstr "Przesuń w lewo"
 msgid "Move Right"
 msgstr "Przesuń w prawo"
 
+#, fuzzy
+msgid "Layer"
+msgstr "Warstwy"
+
 msgid "Layers"
 msgstr "Warstwy"
 
@@ -428,20 +563,26 @@ msgstr "Duplikuj obecną warstwę"
 msgid "LAYERMERGE_HT"
 msgstr "Połącz obecną warstwę z warstwą powyżej"
 
+msgid "Opacity:"
+msgstr ""
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "Ukrywanie warstwy"
 
-msgid "SPLITSCREEN_HT"
+msgid "Palette"
 msgstr ""
-"Podzielenie ekranu\n"
-"\n"
-"Wyświetla drugie płótno"
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
 msgstr ""
-"Podzielenie ekranu\n"
-"\n"
-"Ukrywa drugie płótno"
+
+msgid "NEWPALETTE_HT"
+msgstr ""
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Cofnij: Rysowanie"
@@ -517,3 +658,15 @@ msgstr "Plik został zapisany"
 
 msgid "File exported"
 msgstr "Plik został wyeksportowany"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Podzielenie ekranu\n"
+#~ "\n"
+#~ "Wyświetla drugie płótno"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Podzielenie ekranu\n"
+#~ "\n"
+#~ "Ukrywa drugie płótno"

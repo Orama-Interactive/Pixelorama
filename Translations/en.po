@@ -38,6 +38,12 @@ msgstr "Edit"
 msgid "View"
 msgstr "View"
 
+msgid "Image"
+msgstr "Image"
+
+msgid "Effects"
+msgstr "Effects"
+
 msgid "Help"
 msgstr "Help"
 
@@ -116,26 +122,47 @@ msgstr "Open File(s)"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Import as new frame"
 
+msgid "IMPORT_SPRITESHEET"
+msgstr "Import as a spritesheet"
+
 msgid "Save Sprite as .pxo"
 msgstr "Save Sprite as .pxo"
+
+msgid "Export Sprite as .png"
+msgstr "Export Sprite as .png"
 
 msgid "Export Sprite"
 msgstr "Export Sprite"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
-msgstr "Export all frames"
+msgid "File Exists, Overwrite?"
+msgstr "File Exists, Overwrite?"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
-msgstr "Export frames as a single file"
+msgid "Resize:"
+msgstr "Resize:"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
-msgstr "Vertical spritesheet"
+msgid "EXPORT_CURRENT_FRAME_LABEL"
+msgstr "Export current frame"
+
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
+msgstr "Export all frames as multiple files"
+
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
+msgstr "Export all frames as a spritesheet (single file)"
+
+msgid "Columns"
+msgstr "Columns"
+
+msgid "Rows"
+msgstr "Rows"
 
 msgid "Path:"
 msgstr "Path:"
 
 msgid "Directories & Files:"
 msgstr "Directories & Files:"
+
+msgid "Create Folder"
+msgstr "Create Folder"
 
 msgid "File:"
 msgstr "File:"
@@ -155,17 +182,74 @@ msgstr "Cubic"
 msgid "Trilinear"
 msgstr "Trilinear"
 
+msgid "Language"
+msgstr "Language"
+
+msgid "Themes"
+msgstr "Themes"
+
+msgid "Guides & Grid"
+msgstr "Guides & Grid"
+
+msgid "Language options"
+msgstr "Language options"
+
+msgid "Theme options"
+msgstr "Theme options"
+
 msgid "Grid options"
 msgstr "Grid options"
 
 msgid "Color:"
 msgstr "Color:"
 
+msgid "Guide color:"
+msgstr "Guide color:"
+
 msgid "Language:"
 msgstr "Language:"
 
 msgid "System Language"
 msgstr "System Language"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Grey"
+msgstr "Grey"
+
+msgid "Gold"
+msgstr "Gold"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Invert colors"
+msgstr "Invert colors"
+
+msgid "Desaturation"
+msgstr "Desaturation"
+
+msgid "Outline"
+msgstr "Outline"
+
+msgid "Diagonal"
+msgstr "Diagonal"
+
+msgid "Place inside image"
+msgstr "Place inside image"
+
+msgid "Thickness:"
+msgstr "Thickness:"
+
+msgid "View Splash Screen"
+msgstr "View Splash Screen"
+
+msgid "Issue Tracker"
+msgstr "Issue Tracker"
+
+msgid "Changelog"
+msgstr "Changelog"
 
 msgid "About Pixelorama"
 msgstr "About Pixelorama"
@@ -178,6 +262,33 @@ msgstr "Website"
 
 msgid "Donate"
 msgstr "Donate"
+
+msgid "Developers"
+msgstr "Developers"
+
+msgid "Contributors"
+msgstr "Contributors"
+
+msgid "Donors"
+msgstr "Donors"
+
+msgid "Development Team"
+msgstr "Development Team"
+
+msgid "GitHub Contributors"
+msgstr "GitHub Contributors"
+
+msgid "Art by"
+msgstr "Art by"
+
+msgid "untitled"
+msgstr "untitled"
+
+msgid "imported"
+msgstr "imported"
+
+msgid "copy"
+msgstr "copy"
 
 msgid "QUIT_LABEL"
 msgstr "Are you sure you want to exit Pixelorama?"
@@ -281,6 +392,12 @@ msgstr "Select a brush"
 
 msgid "Brush: Pixel"
 msgstr "Brush: Pixel"
+
+msgid "Brush: Circle"
+msgstr "Brush: Circle"
+
+msgid "Brush: Filled Circle"
+msgstr "Brush: Filled Circle"
 
 msgid "Custom brush"
 msgstr "Custom brush"
@@ -407,6 +524,9 @@ msgstr "Move Left"
 msgid "Move Right"
 msgstr "Move Right"
 
+msgid "Layer"
+msgstr "Layer"
+
 msgid "Layers"
 msgstr "Layers"
 
@@ -428,20 +548,26 @@ msgstr "Clone current layer"
 msgid "LAYERMERGE_HT"
 msgstr "Merge current layer with the one below"
 
+msgid "Opacity:"
+msgstr "Opacity:"
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "Toggle layer's visibility"
 
-msgid "SPLITSCREEN_HT"
-msgstr ""
-"Split screen\n"
-"\n"
-"Show second canvas"
+msgid "Palette"
+msgstr "Palette"
 
-msgid "SPLITSCREEN_HIDE_HT"
-msgstr ""
-"Split screen\n"
-"\n"
-"Hide second canvas"
+msgid "Palettes"
+msgstr "Palettes"
+
+msgid "NEWPALETTE_HT"
+msgstr "Add a new palette"
+
+msgid "EDITPALETTE_HT"
+msgstr "Edit currently selected palette"
+
+msgid "CHOOSEPALETTE_HT"
+msgstr "Choose a palette"
 
 msgid "Undo: Draw"
 msgstr "Undo: Draw"
@@ -517,3 +643,15 @@ msgstr "File saved"
 
 msgid "File exported"
 msgstr "File exported"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Split screen\n"
+#~ "\n"
+#~ "Show second canvas"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Split screen\n"
+#~ "\n"
+#~ "Hide second canvas"

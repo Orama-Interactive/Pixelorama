@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Fonts/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
+visible = true
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = "Preferences"
@@ -37,7 +38,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 205.0
-margin_bottom = 454.0
+margin_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -49,7 +50,7 @@ margin_bottom = 282.0
 margin_right = 205.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
-text = "Language Options:"
+text = "Language options"
 
 [node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 32.0
@@ -128,7 +129,7 @@ margin_bottom = 454.0
 margin_right = 205.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
-text = "Theme Options:"
+text = "Theme options"
 
 [node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 32.0
@@ -176,7 +177,7 @@ margin_bottom = 576.0
 margin_right = 205.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 0, 28 )
-text = "Grid Οptions:"
+text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
 margin_top = 18.0

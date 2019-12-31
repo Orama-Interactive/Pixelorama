@@ -32,7 +32,7 @@ margin_left = 160.0
 margin_right = 327.0
 margin_bottom = 304.0
 mouse_default_cursor_shape = 2
-text = "Import as spritesheet"
+text = "IMPORT_SPRITESHEET"
 
 [node name="Spritesheet" type="HBoxContainer" parent="."]
 visible = false

@@ -39,7 +39,7 @@ func _ready() -> void:
 		tex.create_from_image(sprite, 0)
 
 		# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-		layers.append([sprite, tex, "Layer 0", true, 1])
+		layers.append([sprite, tex, tr("Layer") + " 0", true, 1])
 
 	generate_layer_panels()
 

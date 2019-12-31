@@ -93,7 +93,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				var tex := ImageTexture.new()
 				tex.create_from_image(cropped_image, 0)
 				# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-				canvas.layers.append([cropped_image, tex, "Layer 0", true, 1])
+				canvas.layers.append([cropped_image, tex, tr("Layer") + " 0", true, 1])
 				canvas.frame = i
 				Global.canvases.append(canvas)
 				Global.canvas_parent.add_child(canvas)

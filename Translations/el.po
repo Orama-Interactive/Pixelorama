@@ -38,6 +38,12 @@ msgstr "Επεξεργασία"
 msgid "View"
 msgstr "Προβολή"
 
+msgid "Image"
+msgstr "Εικόνα"
+
+msgid "Effects"
+msgstr "Εφέ"
+
 msgid "Help"
 msgstr "Βοήθεια"
 
@@ -116,26 +122,52 @@ msgstr "Άνοιγμα αρχείου/ων"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Εισαγωγή ως νέο καρέ"
 
+#, fuzzy
+msgid "IMPORT_SPRITESHEET"
+msgstr "Κάθετη ευθυγράμμιση"
+
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
+
+#, fuzzy
+msgid "Export Sprite as .png"
+msgstr "Εξαγωγή εικόνας"
 
 msgid "Export Sprite"
 msgstr "Εξαγωγή εικόνας"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
+msgstr "Το άρχειο υπάρχει, να γίνει αντικατάσταση;"
+
+msgid "Resize:"
+msgstr "Αλλαγή μεγέθους:"
+
+#, fuzzy
+msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Εξαγωγή όλων των καρέ"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Εξαγωγή όλων των καρέ στο ίδιο αρχείο"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Κάθετη ευθυγράμμιση"
+
+msgid "Columns"
+msgstr "Στήλες"
+
+msgid "Rows"
+msgstr "Σειρές"
 
 msgid "Path:"
 msgstr "Διαδρομή:"
 
 msgid "Directories & Files:"
 msgstr "Φάκελοι & Αρχεία:"
+
+msgid "Create Folder"
+msgstr "Δημιουργία Φακέλου"
 
 msgid "File:"
 msgstr "Αρχείο:"
@@ -155,17 +187,79 @@ msgstr "Κυβική"
 msgid "Trilinear"
 msgstr "Τριγραμμική"
 
+#, fuzzy
+msgid "Language"
+msgstr "Γλώσσα:"
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+#, fuzzy
+msgid "Language options"
+msgstr "Γλώσσα:"
+
+#, fuzzy
+msgid "Theme options"
+msgstr "Επιλογές πλέγματος"
+
 msgid "Grid options"
 msgstr "Επιλογές πλέγματος"
 
 msgid "Color:"
 msgstr "Χρώμα:"
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr "Γλώσσα:"
 
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
+
+#, fuzzy
+msgid "Dark"
+msgstr "Σκούρημα"
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+#, fuzzy
+msgid "Light"
+msgstr "Φώτισμα"
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
 
 msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
@@ -178,6 +272,33 @@ msgstr "Ιστοσελίδα"
 
 msgid "Donate"
 msgstr "Κάντε μια δωρεά"
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr "Ζωγραφιά από"
+
+msgid "untitled"
+msgstr "άτιτλο"
+
+msgid "imported"
+msgstr "εισαγόμενο"
+
+msgid "copy"
+msgstr "αντίγραφο"
 
 msgid "QUIT_LABEL"
 msgstr "Σίγουρα θέλετε να βγείτε από το Pixelorama;"
@@ -285,6 +406,14 @@ msgid "BRUSH_HT"
 msgstr "Επιλέξτε ένα πινέλο"
 
 msgid "Brush: Pixel"
+msgstr "Πινέλο: Εικονοστοιχείο"
+
+#, fuzzy
+msgid "Brush: Circle"
+msgstr "Πινέλο: Εικονοστοιχείο"
+
+#, fuzzy
+msgid "Brush: Filled Circle"
 msgstr "Πινέλο: Εικονοστοιχείο"
 
 msgid "Custom brush"
@@ -412,6 +541,9 @@ msgstr "Μετακίνηση Αριστερά"
 msgid "Move Right"
 msgstr "Μετακίνηση Δεξιά"
 
+msgid "Layer"
+msgstr "Στρώση"
+
 msgid "Layers"
 msgstr "Στρώσεις"
 
@@ -433,20 +565,26 @@ msgstr "Κλωνοποίηση της τρέχουσας στρώσης"
 msgid "LAYERMERGE_HT"
 msgstr "Συγχώνευση της τρέχουσας στρώσης με την από κάτω"
 
+msgid "Opacity:"
+msgstr "Αδιαφάνεια:"
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "Εναλλαγή της ορατότητας της στρώσης"
 
-msgid "SPLITSCREEN_HT"
-msgstr ""
-"Διπλή οθόνη\n"
-"\n"
-"Εμφάνιση δεύτερου καμβά"
+msgid "Palette"
+msgstr "Παλέττα"
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
+msgstr "Παλέττες"
+
+msgid "NEWPALETTE_HT"
 msgstr ""
-"Διπλή οθόνη\n"
-"\n"
-"Απόκρυψη δεύτερου καμβάf"
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Αναίρεση: Ζωγραφική"
@@ -522,3 +660,15 @@ msgstr "Το αρχείο αποθηκεύτηκε"
 
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Διπλή οθόνη\n"
+#~ "\n"
+#~ "Εμφάνιση δεύτερου καμβά"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Διπλή οθόνη\n"
+#~ "\n"
+#~ "Απόκρυψη δεύτερου καμβάf"

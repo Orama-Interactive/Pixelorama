@@ -38,6 +38,13 @@ msgstr "編輯"
 msgid "View"
 msgstr "檢視"
 
+#, fuzzy
+msgid "Image"
+msgstr "圖片尺寸"
+
+msgid "Effects"
+msgstr ""
+
 msgid "Help"
 msgstr "幫助"
 
@@ -116,26 +123,52 @@ msgstr "打開舊檔"
 msgid "IMPORT_FILE_LABEL"
 msgstr "輸入為下一張"
 
+#, fuzzy
+msgid "IMPORT_SPRITESHEET"
+msgstr "垂直spritesheet"
+
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
+
+#, fuzzy
+msgid "Export Sprite as .png"
+msgstr "輸出圖片"
 
 msgid "Export Sprite"
 msgstr "輸出圖片"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
+msgstr ""
+
+msgid "Resize:"
+msgstr ""
+
+#, fuzzy
+msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "個別輸出"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "輸出成一張spritesheet"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "垂直spritesheet"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
 
 msgid "Path:"
 msgstr "路徑:"
 
 msgid "Directories & Files:"
 msgstr "資料夾與檔案:"
+
+msgid "Create Folder"
+msgstr ""
 
 msgid "File:"
 msgstr "檔案:"
@@ -155,17 +188,79 @@ msgstr "三次樣條"
 msgid "Trilinear"
 msgstr "三線性"
 
+#, fuzzy
+msgid "Language"
+msgstr "語言:"
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+#, fuzzy
+msgid "Language options"
+msgstr "語言:"
+
+#, fuzzy
+msgid "Theme options"
+msgstr "格線設定"
+
 msgid "Grid options"
 msgstr "格線設定"
 
 msgid "Color:"
 msgstr "顏色:"
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr "語言:"
 
 msgid "System Language"
 msgstr "系統語言"
+
+#, fuzzy
+msgid "Dark"
+msgstr "變暗"
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+#, fuzzy
+msgid "Light"
+msgstr "變亮"
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
 
 msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
@@ -178,6 +273,34 @@ msgstr "官網"
 
 msgid "Donate"
 msgstr "捐款"
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr ""
+
+msgid "untitled"
+msgstr ""
+
+#, fuzzy
+msgid "imported"
+msgstr "檔案已輸出"
+
+msgid "copy"
+msgstr ""
 
 msgid "QUIT_LABEL"
 msgstr "確定要離開Pixelorama嗎?"
@@ -279,6 +402,14 @@ msgid "BRUSH_HT"
 msgstr "選擇畫筆"
 
 msgid "Brush: Pixel"
+msgstr "畫筆: 像素"
+
+#, fuzzy
+msgid "Brush: Circle"
+msgstr "畫筆: 像素"
+
+#, fuzzy
+msgid "Brush: Filled Circle"
 msgstr "畫筆: 像素"
 
 msgid "Custom brush"
@@ -406,6 +537,10 @@ msgstr "左移"
 msgid "Move Right"
 msgstr "右移"
 
+#, fuzzy
+msgid "Layer"
+msgstr "圖層"
+
 msgid "Layers"
 msgstr "圖層"
 
@@ -427,20 +562,26 @@ msgstr "複製此圖層"
 msgid "LAYERMERGE_HT"
 msgstr "合併此圖層與下面的圖層"
 
+msgid "Opacity:"
+msgstr ""
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "開關圖層可視"
 
-msgid "SPLITSCREEN_HT"
+msgid "Palette"
 msgstr ""
-"分裂畫面\n"
-"\n"
-"顯示兩張畫布"
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
 msgstr ""
-"分裂畫面\n"
-"\n"
-"顯示一張畫布"
+
+msgid "NEWPALETTE_HT"
+msgstr ""
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "取消 上一筆"
@@ -516,3 +657,15 @@ msgstr "檔案已儲存"
 
 msgid "File exported"
 msgstr "檔案已輸出"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "分裂畫面\n"
+#~ "\n"
+#~ "顯示兩張畫布"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "分裂畫面\n"
+#~ "\n"
+#~ "顯示一張畫布"

@@ -16,7 +16,6 @@ var previous_right_color := Color.white
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
-	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1152, 648))
@@ -71,7 +70,7 @@ func _ready() -> void:
 		"Crop Image" : 0,
 		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
 		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
-		"Invert Colors" : 0,
+		"Invert colors" : 0,
 		"Desaturation" : 0,
 		"Outline" : 0
 		}
@@ -156,6 +155,7 @@ func _ready() -> void:
 	Import.import_brushes("Brushes")
 
 	$SplashDialog.popup_centered() # Splash screen
+	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)

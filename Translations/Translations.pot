@@ -31,6 +31,12 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+msgid "Image"
+msgstr ""
+
+msgid "Effects"
+msgstr ""
+
 msgid "Help"
 msgstr ""
 
@@ -109,25 +115,46 @@ msgstr ""
 msgid "IMPORT_FILE_LABEL"
 msgstr ""
 
+msgid "IMPORT_SPRITESHEET"
+msgstr ""
+
 msgid "Save Sprite as .pxo"
+msgstr ""
+
+msgid "Export Sprite as .png"
 msgstr ""
 
 msgid "Export Sprite"
 msgstr ""
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
 msgstr ""
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+msgid "Resize:"
 msgstr ""
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+msgid "EXPORT_CURRENT_FRAME_LABEL"
+msgstr ""
+
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
+msgstr ""
+
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
 msgstr ""
 
 msgid "Path:"
 msgstr ""
 
 msgid "Directories & Files:"
+msgstr ""
+
+msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
@@ -148,16 +175,73 @@ msgstr ""
 msgid "Trilinear"
 msgstr ""
 
+msgid "Language"
+msgstr ""
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+msgid "Language options"
+msgstr ""
+
+msgid "Theme options"
+msgstr ""
+
 msgid "Grid options"
 msgstr ""
 
 msgid "Color:"
 msgstr ""
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr ""
 
 msgid "System Language"
+msgstr ""
+
+msgid "Dark"
+msgstr ""
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+msgid "Light"
+msgstr ""
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
@@ -170,6 +254,33 @@ msgid "Website"
 msgstr ""
 
 msgid "Donate"
+msgstr ""
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr ""
+
+msgid "untitled"
+msgstr ""
+
+msgid "imported"
+msgstr ""
+
+msgid "copy"
 msgstr ""
 
 msgid "QUIT_LABEL"
@@ -239,6 +350,12 @@ msgid "BRUSH_HT"
 msgstr ""
 
 msgid "Brush: Pixel"
+msgstr ""
+
+msgid "Brush: Circle"
+msgstr ""
+
+msgid "Brush: Filled Circle"
 msgstr ""
 
 msgid "Custom brush"
@@ -352,6 +469,9 @@ msgstr ""
 msgid "Move Right"
 msgstr ""
 
+msgid "Layer"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
@@ -373,13 +493,25 @@ msgstr ""
 msgid "LAYERMERGE_HT"
 msgstr ""
 
+msgid "Opacity:"
+msgstr ""
+
 msgid "LAYERVISIBILITY_HT"
 msgstr ""
 
-msgid "SPLITSCREEN_HT"
+msgid "Palette"
 msgstr ""
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
+msgstr ""
+
+msgid "NEWPALETTE_HT"
+msgstr ""
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
 msgstr ""
 
 msgid "Undo: Draw"

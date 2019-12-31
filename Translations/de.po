@@ -1,14 +1,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pixelorama\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 "Last-Translator: Schweini07\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 "X-Generator: Poedit 2.2.4\n"
 
 msgid "OK"
@@ -40,6 +40,13 @@ msgstr "Bearbeiten"
 
 msgid "View"
 msgstr "Ansicht"
+
+#, fuzzy
+msgid "Image"
+msgstr "Bildgröße"
+
+msgid "Effects"
+msgstr ""
 
 msgid "Help"
 msgstr "Hilfe"
@@ -119,26 +126,52 @@ msgstr "Öffne Datei(en)"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importier als neues Frame"
 
+#, fuzzy
+msgid "IMPORT_SPRITESHEET"
+msgstr "Vertikales Spritesheet"
+
 msgid "Save Sprite as .pxo"
 msgstr "Speichere Sprite als .pxo"
+
+#, fuzzy
+msgid "Export Sprite as .png"
+msgstr "Exportiere Sprite"
 
 msgid "Export Sprite"
 msgstr "Exportiere Sprite"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
+msgstr ""
+
+msgid "Resize:"
+msgstr ""
+
+#, fuzzy
+msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exportiere alle Frames"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Exportiere Frames als eine einzige Datei"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Vertikales Spritesheet"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
 
 msgid "Path:"
 msgstr "Pfad:"
 
 msgid "Directories & Files:"
 msgstr "Verzeichnisse & Dateien:"
+
+msgid "Create Folder"
+msgstr ""
 
 msgid "File:"
 msgstr "Datei:"
@@ -158,17 +191,79 @@ msgstr "Kubisch"
 msgid "Trilinear"
 msgstr "Trilinear"
 
+#, fuzzy
+msgid "Language"
+msgstr "Sprache:"
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+#, fuzzy
+msgid "Language options"
+msgstr "Sprache:"
+
+#, fuzzy
+msgid "Theme options"
+msgstr "Gitter Optionen"
+
 msgid "Grid options"
 msgstr "Gitter Optionen"
 
 msgid "Color:"
 msgstr "Farbe:"
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr "Sprache:"
 
 msgid "System Language"
 msgstr "Systemsprache"
+
+#, fuzzy
+msgid "Dark"
+msgstr "Verdunkeln"
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+#, fuzzy
+msgid "Light"
+msgstr "Erhellen"
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
 
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
@@ -181,6 +276,34 @@ msgstr "Website"
 
 msgid "Donate"
 msgstr "Spenden"
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr ""
+
+msgid "untitled"
+msgstr ""
+
+#, fuzzy
+msgid "imported"
+msgstr "Datei exportiert"
+
+msgid "copy"
+msgstr ""
 
 msgid "QUIT_LABEL"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
@@ -286,6 +409,14 @@ msgid "BRUSH_HT"
 msgstr "Wähle einen Pinsel"
 
 msgid "Brush: Pixel"
+msgstr "Pinsel: Pixel"
+
+#, fuzzy
+msgid "Brush: Circle"
+msgstr "Pinsel: Pixel"
+
+#, fuzzy
+msgid "Brush: Filled Circle"
 msgstr "Pinsel: Pixel"
 
 msgid "Custom brush"
@@ -413,6 +544,10 @@ msgstr "Bewege nach Links"
 msgid "Move Right"
 msgstr "Bewege nach Rechts"
 
+#, fuzzy
+msgid "Layer"
+msgstr "Ebenen"
+
 msgid "Layers"
 msgstr "Ebenen"
 
@@ -434,20 +569,26 @@ msgstr "Kopiere aktuelle Ebene"
 msgid "LAYERMERGE_HT"
 msgstr "Führe Ebene mit der darunter zusammen"
 
+msgid "Opacity:"
+msgstr ""
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "Ändere die Sichtbarkeit der Ebene"
 
-msgid "SPLITSCREEN_HT"
+msgid "Palette"
 msgstr ""
-"Geteilter Bildschirm\n"
-"\n"
-"Zeige zweite Leinwand"
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
 msgstr ""
-"Geteilter Bildschirm\n"
-"\n"
-"Verstecke zweite Leinwand"
+
+msgid "NEWPALETTE_HT"
+msgstr ""
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Rückgängig: Zeichen"
@@ -523,3 +664,15 @@ msgstr "Datei gespeichert"
 
 msgid "File exported"
 msgstr "Datei exportiert"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Geteilter Bildschirm\n"
+#~ "\n"
+#~ "Zeige zweite Leinwand"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Geteilter Bildschirm\n"
+#~ "\n"
+#~ "Verstecke zweite Leinwand"

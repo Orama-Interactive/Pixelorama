@@ -566,6 +566,7 @@ text = "Brush size:"
 margin_left = 62.0
 margin_right = 150.0
 margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 min_value = 1.0
@@ -625,12 +626,14 @@ margin_bottom = 148.0
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftFillArea"]
 margin_right = 214.0
 margin_bottom = 14.0
+mouse_default_cursor_shape = 2
 text = "Fill area:"
 
 [node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftFillArea"]
 margin_top = 18.0
 margin_right = 214.0
 margin_bottom = 38.0
+mouse_default_cursor_shape = 2
 text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
 selected = 0
@@ -645,6 +648,7 @@ margin_bottom = 140.0
 [node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions/LeftLDOptions"]
 margin_right = 208.0
 margin_bottom = 23.0
+mouse_default_cursor_shape = 2
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
@@ -665,6 +669,7 @@ margin_left = 51.0
 margin_right = 150.0
 margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 10.0
@@ -675,6 +680,7 @@ margin_left = 154.0
 margin_right = 208.0
 margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
 value = 10.0
 
 [node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/LeftToolOptions"]
@@ -777,6 +783,7 @@ text = "Brush size:"
 margin_left = 62.0
 margin_right = 150.0
 margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 min_value = 1.0
@@ -813,6 +820,7 @@ margin_left = 94.0
 margin_right = 149.0
 margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 100.0
@@ -823,25 +831,27 @@ margin_left = 153.0
 margin_right = 208.0
 margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 value = 100.0
 
 [node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
 editor/display_folded = true
 visible = false
-margin_top = 110.0
-margin_right = 244.0
-margin_bottom = 148.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 138.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightFillArea"]
-margin_right = 244.0
-margin_bottom = 14.0
+margin_right = 208.0
+margin_bottom = 15.0
 text = "Fill area:"
 
 [node name="RightFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightFillArea"]
-margin_top = 18.0
-margin_right = 244.0
-margin_bottom = 38.0
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
 text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
 selected = 0
@@ -856,6 +866,7 @@ margin_bottom = 140.0
 [node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions/RightLDOptions"]
 margin_right = 208.0
 margin_bottom = 23.0
+mouse_default_cursor_shape = 2
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
@@ -876,6 +887,7 @@ margin_left = 51.0
 margin_right = 150.0
 margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 10.0
@@ -886,6 +898,7 @@ margin_left = 154.0
 margin_right = 208.0
 margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
 value = 10.0
 
 [node name="RightMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/RightToolOptions"]
@@ -1622,7 +1635,6 @@ scroll_horizontal_enabled = false
 columns = 5
 
 [node name="SplashDialog" parent="." instance=ExtResource( 59 )]
-visible = false
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 60 )]
 
@@ -1660,6 +1672,7 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 [node name="ScaleImage" parent="." instance=ExtResource( 63 )]
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 64 )]
+visible = false
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 65 )]
 

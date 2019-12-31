@@ -5,6 +5,7 @@ func _on_SplashDialog_about_to_show() -> void:
 	window_title = "Pixelorama" + " " + current_version
 	$Contents/DevelopedBy.text = "Pixelorama" + " " + current_version + " - " + tr("MADEBY_LABEL")
 
+	$Contents/ArtCredits.text = tr("Art by") + ": Erevos"
+
 func _on_ArtCredits_pressed() -> void:
 	OS.shell_open("https://www.instagram.com/erevos_art")
-

@@ -38,6 +38,13 @@ msgstr "Édition"
 msgid "View"
 msgstr "Affichage"
 
+#, fuzzy
+msgid "Image"
+msgstr "Taille de l'image"
+
+msgid "Effects"
+msgstr ""
+
 msgid "Help"
 msgstr "Aide"
 
@@ -116,26 +123,52 @@ msgstr "Ouvrir des fichiers"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importer en tant que trame"
 
+#, fuzzy
+msgid "IMPORT_SPRITESHEET"
+msgstr "Spritesheet vertical"
+
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
+
+#, fuzzy
+msgid "Export Sprite as .png"
+msgstr "Exporter une sprite"
 
 msgid "Export Sprite"
 msgstr "Exporter une sprite"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
+msgstr ""
+
+msgid "Resize:"
+msgstr ""
+
+#, fuzzy
+msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exporter toutes les trames"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Exporter les trames en un seul fichier"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Spritesheet vertical"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
 
 msgid "Path:"
 msgstr "Chemin :"
 
 msgid "Directories & Files:"
 msgstr "Répertoires et fichiers :"
+
+msgid "Create Folder"
+msgstr ""
 
 msgid "File:"
 msgstr "Fichier :"
@@ -155,17 +188,79 @@ msgstr "Cubique"
 msgid "Trilinear"
 msgstr "Trilinéaire"
 
+#, fuzzy
+msgid "Language"
+msgstr "Langue :"
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+#, fuzzy
+msgid "Language options"
+msgstr "Langue :"
+
+#, fuzzy
+msgid "Theme options"
+msgstr "Configuration de la grille"
+
 msgid "Grid options"
 msgstr "Configuration de la grille"
 
 msgid "Color:"
 msgstr "Couleur :"
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr "Langue :"
 
 msgid "System Language"
 msgstr "Langue système"
+
+#, fuzzy
+msgid "Dark"
+msgstr "Assombrir"
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+#, fuzzy
+msgid "Light"
+msgstr "Éclaircir"
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
 
 msgid "About Pixelorama"
 msgstr "À propos de Pixelorama"
@@ -178,6 +273,34 @@ msgstr "Site Web"
 
 msgid "Donate"
 msgstr "Faire un don"
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr ""
+
+msgid "untitled"
+msgstr ""
+
+#, fuzzy
+msgid "imported"
+msgstr "Fichier exporté"
+
+msgid "copy"
+msgstr ""
 
 msgid "QUIT_LABEL"
 msgstr "Voulez-vous vraiment quitter Pixelorama ?"
@@ -289,6 +412,14 @@ msgid "BRUSH_HT"
 msgstr "Sélectionnez une brosse"
 
 msgid "Brush: Pixel"
+msgstr "Brosse : Pixel"
+
+#, fuzzy
+msgid "Brush: Circle"
+msgstr "Brosse : Pixel"
+
+#, fuzzy
+msgid "Brush: Filled Circle"
 msgstr "Brosse : Pixel"
 
 msgid "Custom brush"
@@ -418,6 +549,10 @@ msgstr "Déplacer vers la gauche"
 msgid "Move Right"
 msgstr "Déplacer vers la droite"
 
+#, fuzzy
+msgid "Layer"
+msgstr "Calques"
+
 msgid "Layers"
 msgstr "Calques"
 
@@ -439,20 +574,26 @@ msgstr "Cloner le calque"
 msgid "LAYERMERGE_HT"
 msgstr "Fusionner le calque vers le bas"
 
+msgid "Opacity:"
+msgstr ""
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "Afficher/Masquer le calque"
 
-msgid "SPLITSCREEN_HT"
+msgid "Palette"
 msgstr ""
-"Écran partagé\n"
-"\n"
-"Afficher un second canevas"
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
 msgstr ""
-"Écran partagé\n"
-"\n"
-"Cacher le second canevas"
+
+msgid "NEWPALETTE_HT"
+msgstr ""
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Annuler : Dessin"
@@ -528,3 +669,15 @@ msgstr "Fichier enregistré"
 
 msgid "File exported"
 msgstr "Fichier exporté"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Écran partagé\n"
+#~ "\n"
+#~ "Afficher un second canevas"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Écran partagé\n"
+#~ "\n"
+#~ "Cacher le second canevas"

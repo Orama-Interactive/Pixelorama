@@ -38,6 +38,13 @@ msgstr "Editar"
 msgid "View"
 msgstr "Ver"
 
+#, fuzzy
+msgid "Image"
+msgstr "Tamanho da Imagem"
+
+msgid "Effects"
+msgstr ""
+
 msgid "Help"
 msgstr "Ajuda"
 
@@ -116,26 +123,52 @@ msgstr "Abrir Arquivo(s)..."
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importar como um novo quadro"
 
+#, fuzzy
+msgid "IMPORT_SPRITESHEET"
+msgstr "Folha de sprites vertical"
+
 msgid "Save Sprite as .pxo"
 msgstr "Salvar Sprite como .pxo"
+
+#, fuzzy
+msgid "Export Sprite as .png"
+msgstr "Exportar Sprite"
 
 msgid "Export Sprite"
 msgstr "Exportar Sprite"
 
-msgid "EXPORT_ALLFRAMES_LABEL"
+msgid "File Exists, Overwrite?"
+msgstr ""
+
+msgid "Resize:"
+msgstr ""
+
+#, fuzzy
+msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exportar todos os quadros"
 
-msgid "EXPORT_FRAMES_ASFILE_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Exportar quadros em um só arquivo"
 
-msgid "EXPORT_VERTICAL_SPRITESHEET_LABEL"
+#, fuzzy
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Folha de sprites vertical"
+
+msgid "Columns"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
 
 msgid "Path:"
 msgstr "Caminho:"
 
 msgid "Directories & Files:"
 msgstr "Diretórios e Arquivos:"
+
+msgid "Create Folder"
+msgstr ""
 
 msgid "File:"
 msgstr "Arquivo:"
@@ -155,17 +188,79 @@ msgstr "Cúbico"
 msgid "Trilinear"
 msgstr "Trilinear"
 
+#, fuzzy
+msgid "Language"
+msgstr "Linguagem:"
+
+msgid "Themes"
+msgstr ""
+
+msgid "Guides & Grid"
+msgstr ""
+
+#, fuzzy
+msgid "Language options"
+msgstr "Linguagem:"
+
+#, fuzzy
+msgid "Theme options"
+msgstr "Opções da grade"
+
 msgid "Grid options"
 msgstr "Opções da grade"
 
 msgid "Color:"
 msgstr "Cor:"
 
+msgid "Guide color:"
+msgstr ""
+
 msgid "Language:"
 msgstr "Linguagem:"
 
 msgid "System Language"
 msgstr "Linguagem do Sistema"
+
+#, fuzzy
+msgid "Dark"
+msgstr "Escurecer"
+
+msgid "Grey"
+msgstr ""
+
+msgid "Gold"
+msgstr ""
+
+#, fuzzy
+msgid "Light"
+msgstr "Iluminar"
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Desaturation"
+msgstr ""
+
+msgid "Outline"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr ""
+
+msgid "Thickness:"
+msgstr ""
+
+msgid "View Splash Screen"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
 
 msgid "About Pixelorama"
 msgstr "Sobre Pixelorama"
@@ -178,6 +273,34 @@ msgstr "Website"
 
 msgid "Donate"
 msgstr "Doar"
+
+msgid "Developers"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Donors"
+msgstr ""
+
+msgid "Development Team"
+msgstr ""
+
+msgid "GitHub Contributors"
+msgstr ""
+
+msgid "Art by"
+msgstr ""
+
+msgid "untitled"
+msgstr ""
+
+#, fuzzy
+msgid "imported"
+msgstr "Arquivo exportado"
+
+msgid "copy"
+msgstr ""
 
 msgid "QUIT_LABEL"
 msgstr "Tem certeza que quer sair do Pixelorama?"
@@ -289,6 +412,14 @@ msgid "BRUSH_HT"
 msgstr "Selecione um pincel"
 
 msgid "Brush: Pixel"
+msgstr "Pincel: Pixel"
+
+#, fuzzy
+msgid "Brush: Circle"
+msgstr "Pincel: Pixel"
+
+#, fuzzy
+msgid "Brush: Filled Circle"
 msgstr "Pincel: Pixel"
 
 msgid "Custom brush"
@@ -416,6 +547,10 @@ msgstr "Mover para a Esquerda"
 msgid "Move Right"
 msgstr "Mover para a Direita"
 
+#, fuzzy
+msgid "Layer"
+msgstr "Camadas"
+
 msgid "Layers"
 msgstr "Camadas"
 
@@ -437,20 +572,26 @@ msgstr "Clonar camada atual"
 msgid "LAYERMERGE_HT"
 msgstr "Combinar camada atual com a de baixo"
 
+msgid "Opacity:"
+msgstr ""
+
 msgid "LAYERVISIBILITY_HT"
 msgstr "Mudar visibilidade da camada"
 
-msgid "SPLITSCREEN_HT"
+msgid "Palette"
 msgstr ""
-"Tela dividida\n"
-"\n"
-"Mostrar tela secundária"
 
-msgid "SPLITSCREEN_HIDE_HT"
+msgid "Palettes"
 msgstr ""
-"Tela dividida\n"
-"\n"
-"Esconder tela secundária"
+
+msgid "NEWPALETTE_HT"
+msgstr ""
+
+msgid "EDITPALETTE_HT"
+msgstr ""
+
+msgid "CHOOSEPALETTE_HT"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Desfazer: Desenhar"
@@ -526,3 +667,15 @@ msgstr "Arquivo salvo"
 
 msgid "File exported"
 msgstr "Arquivo exportado"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Tela dividida\n"
+#~ "\n"
+#~ "Mostrar tela secundária"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Tela dividida\n"
+#~ "\n"
+#~ "Esconder tela secundária"

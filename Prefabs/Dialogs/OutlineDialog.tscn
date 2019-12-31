@@ -55,5 +55,5 @@ margin_top = 52.0
 margin_right = 139.0
 margin_bottom = 76.0
 mouse_default_cursor_shape = 2
-text = "Diagonal outlines"
+text = "Diagonal"
 [connection signal="confirmed" from="." to="." method="_on_OutlineDialog_confirmed"]
