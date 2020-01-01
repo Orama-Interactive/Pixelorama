@@ -17,6 +17,9 @@ msgstr "Cancel"
 msgid "Open"
 msgstr "Open"
 
+msgid "Save"
+msgstr "Save"
+
 msgid "Please Confirm..."
 msgstr "Please Confirm..."
 
@@ -205,9 +208,6 @@ msgstr "Color:"
 
 msgid "Guide color:"
 msgstr "Guide color:"
-
-msgid "Language:"
-msgstr "Language:"
 
 msgid "System Language"
 msgstr "System Language"
@@ -644,6 +644,26 @@ msgstr "File saved"
 msgid "File exported"
 msgstr "File exported"
 
+msgid "New Empty Palette"
+msgstr "New Empty Palette"
+
+msgid "Import Palette"
+msgstr "Import Palette"
+
+msgid "Palette Name:"
+msgstr "Palette Name:"
+
+msgid "Color Name:"
+msgstr "Color Name:"
+
+msgid "Create a new empty palette?"
+msgstr "Create a new empty palette?"
+
+msgid "Edit Palette"
+msgstr "Edit Palette"
+
+#~ msgid "Language:"
+#~ msgstr "Language:"
 
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""

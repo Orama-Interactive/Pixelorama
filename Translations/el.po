@@ -1,3 +1,6 @@
+# Translators
+# Overloaded @ Orama Interactive, 2019-2020.
+# huskee, 2019-2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Pixelorama\n"
@@ -16,6 +19,9 @@ msgstr "Άκυρο"
 
 msgid "Open"
 msgstr "Άνοιγμα"
+
+msgid "Save"
+msgstr "Αποθήκευση"
 
 msgid "Please Confirm..."
 msgstr "Παρακαλώ επιβεβαιώστε..."
@@ -183,13 +189,13 @@ msgid "Trilinear"
 msgstr "Τριγραμμική"
 
 msgid "Language"
-msgstr "Γλώσσα:"
+msgstr "Γλώσσα"
 
 msgid "Themes"
-msgstr "Θέματα:"
+msgstr "Θέματα"
 
 msgid "Guides & Grid"
-msgstr "Οδηγοί και Πλέγμα:"
+msgstr "Οδηγοί και Πλέγμα"
 
 msgid "Language options"
 msgstr "Επιλογές Γλώσσας"
@@ -205,9 +211,6 @@ msgstr "Χρώμα:"
 
 msgid "Guide color:"
 msgstr "Χρώμα οδηγών:"
-
-msgid "Language:"
-msgstr "Γλώσσα:"
 
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
@@ -649,6 +652,26 @@ msgstr "Το αρχείο αποθηκεύτηκε"
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
 
+msgid "New Empty Palette"
+msgstr "Νέα Κενή Παλέττα"
+
+msgid "Import Palette"
+msgstr "Εισαγωγή Παλέττας"
+
+msgid "Palette Name:"
+msgstr "Όνομα Παλέττας:"
+
+msgid "Color Name:"
+msgstr "Όνομα Χρώματος:"
+
+msgid "Create a new empty palette?"
+msgstr "Δημιουργία νέας κενής παλέττας;"
+
+msgid "Edit Palette"
+msgstr "Επεξεργασία Παλέττας"
+
+#~ msgid "Language:"
+#~ msgstr "Γλώσσα:"
 
 # split screen button translations (deprecated), left for future reference
 #~ msgid "SPLITSCREEN_HT"

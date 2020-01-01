@@ -17,6 +17,10 @@ msgstr "Отмена"
 msgid "Open"
 msgstr "Открыть"
 
+#, fuzzy
+msgid "Save"
+msgstr "Сохранить..."
+
 msgid "Please Confirm..."
 msgstr "Пожалуйста подтвердите..."
 
@@ -214,9 +218,6 @@ msgstr "Цвет:"
 
 msgid "Guide color:"
 msgstr ""
-
-msgid "Language:"
-msgstr "Язык:"
 
 msgid "System Language"
 msgstr "Системный язык"
@@ -657,6 +658,28 @@ msgstr "Файл сохранен"
 
 msgid "File exported"
 msgstr "Файл экспортирован"
+
+msgid "New Empty Palette"
+msgstr ""
+
+msgid "Import Palette"
+msgstr ""
+
+msgid "Palette Name:"
+msgstr ""
+
+#, fuzzy
+msgid "Color Name:"
+msgstr "Цвет:"
+
+msgid "Create a new empty palette?"
+msgstr ""
+
+msgid "Edit Palette"
+msgstr ""
+
+#~ msgid "Language:"
+#~ msgstr "Язык:"
 
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""

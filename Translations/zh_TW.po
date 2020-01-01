@@ -17,6 +17,10 @@ msgstr "取消"
 msgid "Open"
 msgstr "打開"
 
+#, fuzzy
+msgid "Save"
+msgstr "儲存"
+
 msgid "Please Confirm..."
 msgstr "確認..."
 
@@ -214,9 +218,6 @@ msgstr "顏色:"
 
 msgid "Guide color:"
 msgstr ""
-
-msgid "Language:"
-msgstr "語言:"
 
 msgid "System Language"
 msgstr "系統語言"
@@ -657,6 +658,28 @@ msgstr "檔案已儲存"
 
 msgid "File exported"
 msgstr "檔案已輸出"
+
+msgid "New Empty Palette"
+msgstr ""
+
+msgid "Import Palette"
+msgstr ""
+
+msgid "Palette Name:"
+msgstr ""
+
+#, fuzzy
+msgid "Color Name:"
+msgstr "顏色:"
+
+msgid "Create a new empty palette?"
+msgstr ""
+
+msgid "Edit Palette"
+msgstr ""
+
+#~ msgid "Language:"
+#~ msgstr "語言:"
 
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""

@@ -1,3 +1,6 @@
+# Translators
+# Schweini07, 2019-2020.
+# Martin Zabinski, 2019-2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Pixelorama\n"
@@ -19,6 +22,10 @@ msgstr "Abbrechen"
 
 msgid "Open"
 msgstr "Öffnen"
+
+#, fuzzy
+msgid "Save"
+msgstr "Speichern"
 
 msgid "Please Confirm..."
 msgstr "Bitte bestätigen..."
@@ -217,9 +224,6 @@ msgstr "Farbe:"
 
 msgid "Guide color:"
 msgstr ""
-
-msgid "Language:"
-msgstr "Sprache:"
 
 msgid "System Language"
 msgstr "Systemsprache"
@@ -664,6 +668,28 @@ msgstr "Datei gespeichert"
 
 msgid "File exported"
 msgstr "Datei exportiert"
+
+msgid "New Empty Palette"
+msgstr ""
+
+msgid "Import Palette"
+msgstr ""
+
+msgid "Palette Name:"
+msgstr ""
+
+#, fuzzy
+msgid "Color Name:"
+msgstr "Farbe:"
+
+msgid "Create a new empty palette?"
+msgstr ""
+
+msgid "Edit Palette"
+msgstr ""
+
+#~ msgid "Language:"
+#~ msgstr "Sprache:"
 
 #~ msgid "SPLITSCREEN_HT"
 #~ msgstr ""
