@@ -7,9 +7,12 @@
 
 [node name="SplashDialog" type="WindowDialog"]
 margin_right = 400.0
-margin_bottom = 380.0
+margin_bottom = 399.0
 rect_min_size = Vector2( 400, 380 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Contents" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -45,25 +48,32 @@ mouse_default_cursor_shape = 2
 text = "Art by Erevoid"
 flat = true
 
-[node name="HSeparator2" type="HSeparator" parent="Contents"]
+[node name="CheckBox" type="CheckBox" parent="Contents"]
 margin_top = 330.0
 margin_right = 400.0
-margin_bottom = 334.0
+margin_bottom = 354.0
+text = "Don't show on the next startup"
+
+[node name="HSeparator2" type="HSeparator" parent="Contents"]
+margin_top = 358.0
+margin_right = 400.0
+margin_bottom = 362.0
 
 [node name="DevelopedBy" type="Label" parent="Contents"]
-margin_top = 338.0
+margin_top = 366.0
 margin_right = 400.0
-margin_bottom = 351.0
+margin_bottom = 379.0
 custom_fonts/font = ExtResource( 4 )
 text = "Pixelorama v0.6 - Developed by Orama Interactive"
 align = 1
 
 [node name="Copyright" type="Label" parent="Contents"]
-margin_top = 355.0
+margin_top = 383.0
 margin_right = 400.0
-margin_bottom = 368.0
+margin_bottom = 396.0
 custom_fonts/font = ExtResource( 4 )
 text = "Copyright 2019-2020 Orama Interactive"
 align = 1
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
 [connection signal="pressed" from="Contents/ArtCredits" to="." method="_on_ArtCredits_pressed"]
+[connection signal="toggled" from="Contents/CheckBox" to="." method="_on_CheckBox_toggled"]
