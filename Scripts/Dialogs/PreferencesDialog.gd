@@ -74,6 +74,10 @@ func _on_Language_pressed(button : Button) -> void:
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
 
+	# Update Translations
+	_on_PreferencesDialog_popup_hide()
+	_on_PreferencesDialog_about_to_show()
+
 func _on_Theme_pressed(button : Button) -> void:
 	var index := 0
 	var i := 0

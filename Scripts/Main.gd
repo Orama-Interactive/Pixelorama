@@ -149,8 +149,10 @@ func _ready() -> void:
 	for t in tools:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 
-	Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
-	Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
+	# Checks to see if it's 3.1.x
+	if Engine.get_version_info().major == 3 && Engine.get_version_info().minor < 2:
+		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
+		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
 	Import.import_brushes("Brushes")
 
