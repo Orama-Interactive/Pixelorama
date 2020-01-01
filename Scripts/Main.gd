@@ -157,6 +157,9 @@ func _ready() -> void:
 	Import.import_brushes("Brushes")
 
 	$SplashDialog.popup_centered() # Splash screen
+	if not Global.config_cache.get_value("preferences", "startup"):
+		$SplashDialog.hide()
+		
 	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 
 func _input(event : InputEvent) -> void:

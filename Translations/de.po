@@ -50,10 +50,10 @@ msgstr "Ansicht"
 
 #, fuzzy
 msgid "Image"
-msgstr "Bildgröße"
+msgstr "Bild"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effekte"
 
 msgid "Help"
 msgstr "Hilfe"
@@ -148,10 +148,10 @@ msgid "Export Sprite"
 msgstr "Exportiere Sprite"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Datei existiert schon, überschreiben?"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Größe verändern"
 
 #, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
@@ -166,10 +166,10 @@ msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Vertikales Spritesheet"
 
 msgid "Columns"
-msgstr ""
+msgstr "Spalten"
 
 msgid "Rows"
-msgstr ""
+msgstr "Reihen"
 
 msgid "Path:"
 msgstr "Pfad:"
@@ -178,7 +178,7 @@ msgid "Directories & Files:"
 msgstr "Verzeichnisse & Dateien:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Erstelle Ordner"
 
 msgid "File:"
 msgstr "Datei:"
@@ -203,18 +203,18 @@ msgid "Language"
 msgstr "Sprache:"
 
 msgid "Themes"
-msgstr ""
+msgstr "Designs"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Guides & Gitter"
 
 #, fuzzy
 msgid "Language options"
-msgstr "Sprache:"
+msgstr "Sprachoptionen"
 
 #, fuzzy
 msgid "Theme options"
-msgstr "Gitter Optionen"
+msgstr "Design Optionen"
 
 msgid "Grid options"
 msgstr "Gitter Optionen"
@@ -223,7 +223,7 @@ msgid "Color:"
 msgstr "Farbe:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Guidefarbe"
 
 msgid "System Language"
 msgstr "Systemsprache"
@@ -243,31 +243,31 @@ msgid "Light"
 msgstr "Erhellen"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Kehre Farben um"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Entsättigung"
 
 msgid "Outline"
-msgstr ""
+msgstr "Umriss"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Platziere in Bild"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Dicke:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Zeige Splash Screen"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Issue Tracker"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Änderungsprotokoll"
 
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
@@ -282,32 +282,32 @@ msgid "Donate"
 msgstr "Spenden"
 
 msgid "Developers"
-msgstr ""
+msgstr "Entwickler"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Beitragende"
 
 msgid "Donors"
-msgstr ""
+msgstr "Spender"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Entwicklerteam"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Github Beitragende"
 
 msgid "Art by"
-msgstr ""
+msgstr "Kunst von"
 
 msgid "untitled"
-msgstr ""
+msgstr "unbenannt"
 
 #, fuzzy
 msgid "imported"
 msgstr "Datei exportiert"
 
 msgid "copy"
-msgstr ""
+msgstr "kopiere"
 
 msgid "QUIT_LABEL"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
@@ -574,25 +574,25 @@ msgid "LAYERMERGE_HT"
 msgstr "Führe Ebene mit der darunter zusammen"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Deckkraft"
 
 msgid "LAYERVISIBILITY_HT"
 msgstr "Ändere die Sichtbarkeit der Ebene"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palette"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletten"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Füge eine neue Palette hinzu"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Bearbeite ausgewählte Palette"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Wähle Palette"
 
 msgid "Undo: Draw"
 msgstr "Rückgängig: Zeichen"
@@ -670,23 +670,23 @@ msgid "File exported"
 msgstr "Datei exportiert"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Neue leere Palette"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importiere Palette"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Palettenname"
 
 #, fuzzy
 msgid "Color Name:"
 msgstr "Farbe:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Erstelle eine neue leere Palette"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Bearbeite Palette"
 
 #~ msgid "Language:"
 #~ msgstr "Sprache:"
