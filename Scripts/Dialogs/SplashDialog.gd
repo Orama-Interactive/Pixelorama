@@ -9,9 +9,3 @@ func _on_SplashDialog_about_to_show() -> void:
 
 func _on_ArtCredits_pressed() -> void:
 	OS.shell_open("https://www.instagram.com/erevos_art")
-
-func _on_CheckBox_toggled(pressed) -> void:
-	if pressed:
-		Global.config_cache.set_value("preferences", "startup", false)
-	else:
-		Global.config_cache.set_value("preferences", "startup", true)

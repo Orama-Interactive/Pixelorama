@@ -215,8 +215,6 @@ var palette_import_file_dialog : FileDialog
 
 var error_dialog : AcceptDialog
 
-var startup : bool
-
 func _ready() -> void:
 	randomize()
 	# Load settings from the config file

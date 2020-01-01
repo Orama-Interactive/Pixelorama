@@ -156,15 +156,11 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
-	if Global.config_cache.has_section_key("preferences", "startup"):
-		Global.startup = Global.config_cache.get_value("preferences", "startup")
-	else:
-		Global.startup = true
-		Global.config_cache.set_value("preferences", "startup", Global.startup)
-	
-	if Global.config_cache.get_value("preferences", "startup"):
-		$SplashDialog.popup_centered() # Splash screen
-		OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
+	$SplashDialog.popup_centered() # Splash screen
+	if not Global.config_cache.get_value("preferences", "startup"):
+		$SplashDialog.hide()
+		
+	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
