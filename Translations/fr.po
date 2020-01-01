@@ -690,6 +690,9 @@ msgstr ""
 msgid "Edit Palette"
 msgstr ""
 
+msgid "Don't show on the next startup"
+msgstr ""
+
 #~ msgid "Language:"
 #~ msgstr "Langue :"
 

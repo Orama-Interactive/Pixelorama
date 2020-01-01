@@ -662,6 +662,9 @@ msgstr "Create a new empty palette?"
 msgid "Edit Palette"
 msgstr "Edit Palette"
 
+msgid "Don't show on the next startup"
+msgstr "Don't show on the next startup"
+
 #~ msgid "Language:"
 #~ msgstr "Language:"
 
