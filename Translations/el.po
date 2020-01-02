@@ -670,6 +670,9 @@ msgstr "Δημιουργία νέας κενής παλέττας;"
 msgid "Edit Palette"
 msgstr "Επεξεργασία Παλέττας"
 
+msgid "Don't show on the next startup"
+msgstr "Να μην εμφανιστεί στην επόμενη εκκίνηση"
+
 #~ msgid "Language:"
 #~ msgstr "Γλώσσα:"
 

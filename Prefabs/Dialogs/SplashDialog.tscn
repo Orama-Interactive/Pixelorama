@@ -48,7 +48,7 @@ mouse_default_cursor_shape = 2
 text = "Art by Erevoid"
 flat = true
 
-[node name="CheckBox" type="CheckBox" parent="Contents"]
+[node name="ShowOnStartup" type="CheckBox" parent="Contents"]
 margin_top = 330.0
 margin_right = 400.0
 margin_bottom = 354.0
@@ -76,4 +76,4 @@ text = "Copyright 2019-2020 Orama Interactive"
 align = 1
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
 [connection signal="pressed" from="Contents/ArtCredits" to="." method="_on_ArtCredits_pressed"]
-[connection signal="toggled" from="Contents/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="toggled" from="Contents/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]

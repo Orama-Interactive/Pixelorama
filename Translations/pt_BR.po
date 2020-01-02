@@ -670,3 +670,6 @@ msgstr "Criar uma nova paleta vazia?"
 
 msgid "Edit Palette"
 msgstr "Editar Paleta"
+
+msgid "Don't show on the next startup"
+msgstr ""

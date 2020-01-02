@@ -1672,7 +1672,6 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 [node name="ScaleImage" parent="." instance=ExtResource( 63 )]
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 64 )]
-visible = false
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 65 )]
 
