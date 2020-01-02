@@ -23,7 +23,6 @@ msgstr "Abbrechen"
 msgid "Open"
 msgstr "Öffnen"
 
-#, fuzzy
 msgid "Save"
 msgstr "Speichern"
 
@@ -48,7 +47,6 @@ msgstr "Bearbeiten"
 msgid "View"
 msgstr "Ansicht"
 
-#, fuzzy
 msgid "Image"
 msgstr "Bild"
 
@@ -59,7 +57,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 msgid "New..."
-msgstr "Neu:"
+msgstr "Neu..."
 
 msgid "Open..."
 msgstr "Öffnen..."
@@ -133,16 +131,14 @@ msgstr "Öffne Datei(en)"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importier als neues Frame"
 
-#, fuzzy
 msgid "IMPORT_SPRITESHEET"
-msgstr "Vertikales Spritesheet"
+msgstr "Importiere als Spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Speichere Sprite als .pxo"
 
-#, fuzzy
 msgid "Export Sprite as .png"
-msgstr "Exportiere Sprite"
+msgstr "Exportiere Sprite als PNG"
 
 msgid "Export Sprite"
 msgstr "Exportiere Sprite"
@@ -153,17 +149,14 @@ msgstr "Datei existiert schon, überschreiben?"
 msgid "Resize:"
 msgstr "Größe verändern"
 
-#, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Exportiere alle Frames"
+msgstr "Exportiere aktuellen Frame"
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Exportiere Frames als eine einzige Datei"
+msgstr "Exportiere alle Frames als mehrere Dateien"
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Vertikales Spritesheet"
+msgstr "Exportiere alle Frames als Spritesheet (einzelne Datei)"
 
 msgid "Columns"
 msgstr "Spalten"
@@ -198,9 +191,8 @@ msgstr "Kubisch"
 msgid "Trilinear"
 msgstr "Trilinear"
 
-#, fuzzy
 msgid "Language"
-msgstr "Sprache:"
+msgstr "Sprache"
 
 msgid "Themes"
 msgstr "Designs"
@@ -208,11 +200,9 @@ msgstr "Designs"
 msgid "Guides & Grid"
 msgstr "Guides & Gitter"
 
-#, fuzzy
 msgid "Language options"
 msgstr "Sprachoptionen"
 
-#, fuzzy
 msgid "Theme options"
 msgstr "Design Optionen"
 
@@ -228,19 +218,17 @@ msgstr "Guidefarbe"
 msgid "System Language"
 msgstr "Systemsprache"
 
-#, fuzzy
 msgid "Dark"
-msgstr "Verdunkeln"
+msgstr "Dunkel"
 
 msgid "Gray"
-msgstr ""
+msgstr "Grau"
 
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
-#, fuzzy
 msgid "Light"
-msgstr "Erhellen"
+msgstr "Hell"
 
 msgid "Invert colors"
 msgstr "Kehre Farben um"
@@ -267,7 +255,7 @@ msgid "Issue Tracker"
 msgstr "Issue Tracker"
 
 msgid "Changelog"
-msgstr "Änderungsprotokoll"
+msgstr "Änderungen"
 
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
@@ -297,14 +285,13 @@ msgid "GitHub Contributors"
 msgstr "Github Beitragende"
 
 msgid "Art by"
-msgstr "Kunst von"
+msgstr "Zeichnung von"
 
 msgid "untitled"
 msgstr "unbenannt"
 
-#, fuzzy
 msgid "imported"
-msgstr "Datei exportiert"
+msgstr "importiert"
 
 msgid "copy"
 msgstr "kopiere"
@@ -415,13 +402,11 @@ msgstr "Wähle einen Pinsel"
 msgid "Brush: Pixel"
 msgstr "Pinsel: Pixel"
 
-#, fuzzy
 msgid "Brush: Circle"
-msgstr "Pinsel: Pixel"
+msgstr "Pinsel: Kreis"
 
-#, fuzzy
 msgid "Brush: Filled Circle"
-msgstr "Pinsel: Pixel"
+msgstr "Pinsel: Gefüllter Kreis"
 
 msgid "Custom brush"
 msgstr "Benutzerdefinierter Pinsel"
@@ -548,9 +533,8 @@ msgstr "Bewege nach Links"
 msgid "Move Right"
 msgstr "Bewege nach Rechts"
 
-#, fuzzy
 msgid "Layer"
-msgstr "Ebenen"
+msgstr "Ebene"
 
 msgid "Layers"
 msgstr "Ebenen"
@@ -678,9 +662,8 @@ msgstr "Importiere Palette"
 msgid "Palette Name:"
 msgstr "Palettenname"
 
-#, fuzzy
 msgid "Color Name:"
-msgstr "Farbe:"
+msgstr "Farbnamen:"
 
 msgid "Create a new empty palette?"
 msgstr "Erstelle eine neue leere Palette"
@@ -689,7 +672,7 @@ msgid "Edit Palette"
 msgstr "Bearbeite Palette"
 
 msgid "Don't show on the next startup"
-msgstr ""
+msgstr "Nicht beim nächsten Start"
 
 #~ msgid "Language:"
 #~ msgstr "Sprache:"
