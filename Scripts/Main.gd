@@ -93,7 +93,7 @@ func _ready() -> void:
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
-	if TranslationServer.get_locale() == "zh_TW":
+	if "zh" in TranslationServer.get_locale():
 		theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
 	else:
 		theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")

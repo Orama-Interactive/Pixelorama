@@ -66,7 +66,7 @@ func _on_Language_pressed(button : Button) -> void:
 	else:
 		TranslationServer.set_locale(Global.loaded_locales[index])
 
-	if TranslationServer.get_locale() == "zh_TW":
+	if "zh" in TranslationServer.get_locale():
 		Global.control.theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
 	else:
 		Global.control.theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
