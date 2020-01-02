@@ -17,7 +17,6 @@ msgstr "取消"
 msgid "Open"
 msgstr "打開"
 
-#, fuzzy
 msgid "Save"
 msgstr "儲存"
 
@@ -42,7 +41,6 @@ msgstr "編輯"
 msgid "View"
 msgstr "檢視"
 
-#, fuzzy
 msgid "Image"
 msgstr "圖片尺寸"
 
@@ -127,14 +125,12 @@ msgstr "打開舊檔"
 msgid "IMPORT_FILE_LABEL"
 msgstr "輸入為下一張"
 
-#, fuzzy
 msgid "IMPORT_SPRITESHEET"
 msgstr "垂直spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
 
-#, fuzzy
 msgid "Export Sprite as .png"
 msgstr "輸出圖片"
 
@@ -147,15 +143,12 @@ msgstr "有同名檔案，要覆蓋掉嗎"
 msgid "Resize:"
 msgstr "調整尺寸"
 
-#, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "個別輸出"
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "輸出成一張spritesheet"
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "垂直spritesheet"
 
@@ -192,7 +185,6 @@ msgstr "三次樣條"
 msgid "Trilinear"
 msgstr "三線性"
 
-#, fuzzy
 msgid "Language"
 msgstr "語言:"
 
@@ -202,11 +194,9 @@ msgstr "皮膚"
 msgid "Guides & Grid"
 msgstr "輔助線與格線"
 
-#, fuzzy
 msgid "Language options"
 msgstr "語言:"
 
-#, fuzzy
 msgid "Theme options"
 msgstr "格線設定"
 
@@ -222,7 +212,6 @@ msgstr "輔助線顏色"
 msgid "System Language"
 msgstr "系統語言"
 
-#, fuzzy
 msgid "Dark"
 msgstr "變暗"
 
@@ -232,7 +221,6 @@ msgstr "灰階"
 msgid "Gold"
 msgstr "金色"
 
-#, fuzzy
 msgid "Light"
 msgstr "變亮"
 
@@ -296,7 +284,6 @@ msgstr "作者:"
 msgid "untitled"
 msgstr "未命名"
 
-#, fuzzy
 msgid "imported"
 msgstr "檔案已輸出"
 
@@ -405,11 +392,9 @@ msgstr "選擇畫筆"
 msgid "Brush: Pixel"
 msgstr "畫筆: 像素"
 
-#, fuzzy
 msgid "Brush: Circle"
 msgstr "畫筆: 像素"
 
-#, fuzzy
 msgid "Brush: Filled Circle"
 msgstr "畫筆: 像素"
 
@@ -538,7 +523,6 @@ msgstr "左移"
 msgid "Move Right"
 msgstr "右移"
 
-#, fuzzy
 msgid "Layer"
 msgstr "圖層"
 
@@ -668,7 +652,6 @@ msgstr "輸入色盤"
 msgid "Palette Name:"
 msgstr "色盤名稱:"
 
-#, fuzzy
 msgid "Color Name:"
 msgstr "顏色:"
 
