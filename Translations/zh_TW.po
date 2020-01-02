@@ -17,7 +17,6 @@ msgstr "取消"
 msgid "Open"
 msgstr "打開"
 
-#, fuzzy
 msgid "Save"
 msgstr "儲存"
 
@@ -42,12 +41,11 @@ msgstr "編輯"
 msgid "View"
 msgstr "檢視"
 
-#, fuzzy
 msgid "Image"
 msgstr "圖片尺寸"
 
 msgid "Effects"
-msgstr ""
+msgstr "效果"
 
 msgid "Help"
 msgstr "幫助"
@@ -127,14 +125,12 @@ msgstr "打開舊檔"
 msgid "IMPORT_FILE_LABEL"
 msgstr "輸入為下一張"
 
-#, fuzzy
 msgid "IMPORT_SPRITESHEET"
 msgstr "垂直spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
 
-#, fuzzy
 msgid "Export Sprite as .png"
 msgstr "輸出圖片"
 
@@ -142,28 +138,25 @@ msgid "Export Sprite"
 msgstr "輸出圖片"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "有同名檔案，要覆蓋掉嗎"
 
 msgid "Resize:"
-msgstr ""
+msgstr "調整尺寸"
 
-#, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "個別輸出"
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "輸出成一張spritesheet"
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "垂直spritesheet"
 
 msgid "Columns"
-msgstr ""
+msgstr "行"
 
 msgid "Rows"
-msgstr ""
+msgstr "列"
 
 msgid "Path:"
 msgstr "路徑:"
@@ -172,7 +165,7 @@ msgid "Directories & Files:"
 msgstr "資料夾與檔案:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "新增資料夾"
 
 msgid "File:"
 msgstr "檔案:"
@@ -192,21 +185,18 @@ msgstr "三次樣條"
 msgid "Trilinear"
 msgstr "三線性"
 
-#, fuzzy
 msgid "Language"
 msgstr "語言:"
 
 msgid "Themes"
-msgstr ""
+msgstr "皮膚"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "輔助線與格線"
 
-#, fuzzy
 msgid "Language options"
 msgstr "語言:"
 
-#, fuzzy
 msgid "Theme options"
 msgstr "格線設定"
 
@@ -217,51 +207,49 @@ msgid "Color:"
 msgstr "顏色:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "輔助線顏色"
 
 msgid "System Language"
 msgstr "系統語言"
 
-#, fuzzy
 msgid "Dark"
 msgstr "變暗"
 
 msgid "Gray"
-msgstr ""
+msgstr "灰階"
 
 msgid "Gold"
-msgstr ""
+msgstr "金色"
 
-#, fuzzy
 msgid "Light"
 msgstr "變亮"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "互補"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "去飽和"
 
 msgid "Outline"
-msgstr ""
+msgstr "描邊"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "角落"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Place inside image"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "粗細:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "關於"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "回報問題"
 
 msgid "Changelog"
-msgstr ""
+msgstr "更新紀錄"
 
 msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
@@ -276,32 +264,31 @@ msgid "Donate"
 msgstr "捐款"
 
 msgid "Developers"
-msgstr ""
+msgstr "開發人員"
 
 msgid "Contributors"
-msgstr ""
+msgstr "貢獻者"
 
 msgid "Donors"
-msgstr ""
+msgstr "捐款人"
 
 msgid "Development Team"
-msgstr ""
+msgstr "開發團隊"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub 貢獻者"
 
 msgid "Art by"
-msgstr ""
+msgstr "作者:"
 
 msgid "untitled"
-msgstr ""
+msgstr "未命名"
 
-#, fuzzy
 msgid "imported"
 msgstr "檔案已輸出"
 
 msgid "copy"
-msgstr ""
+msgstr "複製"
 
 msgid "QUIT_LABEL"
 msgstr "確定要離開Pixelorama嗎?"
@@ -405,11 +392,9 @@ msgstr "選擇畫筆"
 msgid "Brush: Pixel"
 msgstr "畫筆: 像素"
 
-#, fuzzy
 msgid "Brush: Circle"
 msgstr "畫筆: 像素"
 
-#, fuzzy
 msgid "Brush: Filled Circle"
 msgstr "畫筆: 像素"
 
@@ -538,7 +523,6 @@ msgstr "左移"
 msgid "Move Right"
 msgstr "右移"
 
-#, fuzzy
 msgid "Layer"
 msgstr "圖層"
 
@@ -564,25 +548,25 @@ msgid "LAYERMERGE_HT"
 msgstr "合併此圖層與下面的圖層"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "能見度:"
 
 msgid "LAYERVISIBILITY_HT"
 msgstr "開關圖層可視"
 
 msgid "Palette"
-msgstr ""
+msgstr "色盤"
 
 msgid "Palettes"
-msgstr ""
+msgstr "色盤"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "色盤"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "新增色盤"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "選擇色盤"
 
 msgid "Undo: Draw"
 msgstr "取消 上一筆"
@@ -660,26 +644,25 @@ msgid "File exported"
 msgstr "檔案已輸出"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "空的色盤"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "輸入色盤"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "色盤名稱:"
 
-#, fuzzy
 msgid "Color Name:"
 msgstr "顏色:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "新增空的色盤?"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "編輯色盤"
 
 msgid "Don't show on the next startup"
-msgstr ""
+msgstr "不再顯示"
 
 #~ msgid "Language:"
 #~ msgstr "語言:"
