@@ -73,5 +73,4 @@ func _on_GitHub_pressed() -> void:
 	OS.shell_open("https://github.com/Orama-Interactive/Pixelorama")
 
 func _on_Donate_pressed() -> void:
-	OS.shell_open("https://paypal.me/OverloadedOrama")
-	OS.shell_open("https://ko-fi.com/overloadedorama")
+	OS.shell_open("https://www.patreon.com/OramaInteractive")

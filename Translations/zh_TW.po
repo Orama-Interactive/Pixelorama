@@ -279,7 +279,7 @@ msgid "GitHub Contributors"
 msgstr "GitHub 貢獻者"
 
 msgid "Art by"
-msgstr "作者:"
+msgstr "作者"
 
 msgid "untitled"
 msgstr "未命名"

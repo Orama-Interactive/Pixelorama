@@ -4,6 +4,7 @@ func _on_OutlineDialog_confirmed() -> void:
 	var outline_color : Color = $OptionsContainer/OutlineColor.color
 	var thickness : int = $OptionsContainer/ThickValue.value
 	var diagonal : bool = $OptionsContainer/DiagonalCheckBox.pressed
+	var inside_image : bool = $OptionsContainer/InsideImageCheckBox.pressed
 
 	var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
 	if image.is_invisible():
@@ -21,54 +22,121 @@ func _on_OutlineDialog_confirmed() -> void:
 				continue
 
 			for i in range(1, thickness + 1):
-				var new_pos : Vector2 = pos + Vector2.LEFT * i # Left
-				if new_pos.x >= 0:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
+				if inside_image:
+					var outline_pos : Vector2 = pos + Vector2.LEFT # Left
+					var outline_pixel = image.get_pixelv(outline_pos)
+					if outline_pixel.a == 0:
+						var new_pos : Vector2 = pos + Vector2.RIGHT * (i - 1)
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a > 0 && new_pos.x < Global.canvas.size.x:
+							new_image.set_pixelv(new_pos, outline_color)
 
-				new_pos = pos + Vector2.RIGHT * i # Right
-				if new_pos.x < Global.canvas.size.x:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
+					outline_pos = pos + Vector2.RIGHT # Right
+					outline_pixel = image.get_pixelv(outline_pos)
+					if outline_pixel.a == 0:
+						var new_pos : Vector2 = pos + Vector2.LEFT * (i - 1)
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a > 0 && new_pos.x >= 0:
+							new_image.set_pixelv(new_pos, outline_color)
 
-				new_pos = pos + Vector2.UP * i # Up
-				if new_pos.y >= 0:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
+					outline_pos = pos + Vector2.UP # Up
+					outline_pixel = image.get_pixelv(outline_pos)
+					if outline_pixel.a == 0:
+						var new_pos : Vector2 = pos + Vector2.DOWN * (i - 1)
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a > 0 && new_pos.y < Global.canvas.size.y:
+							new_image.set_pixelv(new_pos, outline_color)
 
-				new_pos = pos + Vector2.DOWN * i # Down
-				if new_pos.y < Global.canvas.size.y:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
+					outline_pos = pos + Vector2.DOWN # Down
+					outline_pixel = image.get_pixelv(outline_pos)
+					if outline_pixel.a == 0:
+						var new_pos : Vector2 = pos + Vector2.UP * (i - 1)
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a > 0 && new_pos.y >= 0:
+							new_image.set_pixelv(new_pos, outline_color)
 
-				if diagonal:
-					new_pos = pos + (Vector2.LEFT + Vector2.UP) * i # Top left
-					if new_pos.x >= 0 && new_pos.y >= 0:
+					if diagonal:
+						outline_pos = pos + (Vector2.LEFT + Vector2.UP) # Top left
+						outline_pixel = image.get_pixelv(outline_pos)
+						if outline_pixel.a == 0:
+							var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.DOWN) * (i - 1)
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0 && new_pos.x < Global.canvas.size.x && new_pos.y < Global.canvas.size.y:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.LEFT + Vector2.DOWN) # Bottom left
+						outline_pixel = image.get_pixelv(outline_pos)
+						if outline_pixel.a == 0:
+							var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.UP) * (i - 1)
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0 && new_pos.x < Global.canvas.size.x && new_pos.y >= 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.RIGHT + Vector2.UP) # Top right
+						outline_pixel = image.get_pixelv(outline_pos)
+						if outline_pixel.a == 0:
+							var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.DOWN) * (i - 1)
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0 && new_pos.x >= 0 && new_pos.y < Global.canvas.size.y:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.RIGHT + Vector2.DOWN) # Bottom right
+						outline_pixel = image.get_pixelv(outline_pos)
+						if outline_pixel.a == 0:
+							var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.UP) * (i - 1)
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0 && new_pos.x >= 0 && new_pos.y >= 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+				else:
+					var new_pos : Vector2 = pos + Vector2.LEFT * i # Left
+					if new_pos.x >= 0:
 						var new_pixel = image.get_pixelv(new_pos)
 						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
-					new_pos = pos + (Vector2.LEFT + Vector2.DOWN) * i # Bottom left
-					if new_pos.x >= 0 && new_pos.y < Global.canvas.size.y:
+					new_pos = pos + Vector2.RIGHT * i # Right
+					if new_pos.x < Global.canvas.size.x:
 						var new_pixel = image.get_pixelv(new_pos)
 						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
-					new_pos = pos + (Vector2.RIGHT + Vector2.UP) * i # Top right
-					if new_pos.x < Global.canvas.size.x && new_pos.y >= 0:
+					new_pos = pos + Vector2.UP * i # Up
+					if new_pos.y >= 0:
 						var new_pixel = image.get_pixelv(new_pos)
 						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
-					new_pos = pos + (Vector2.RIGHT + Vector2.DOWN) * i # Bottom right
-					if new_pos.x < Global.canvas.size.x && new_pos.y < Global.canvas.size.y:
+					new_pos = pos + Vector2.DOWN * i # Down
+					if new_pos.y < Global.canvas.size.y:
 						var new_pixel = image.get_pixelv(new_pos)
 						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
+
+					if diagonal:
+						new_pos = pos + (Vector2.LEFT + Vector2.UP) * i # Top left
+						if new_pos.x >= 0 && new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						new_pos = pos + (Vector2.LEFT + Vector2.DOWN) * i # Bottom left
+						if new_pos.x >= 0 && new_pos.y < Global.canvas.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						new_pos = pos + (Vector2.RIGHT + Vector2.UP) * i # Top right
+						if new_pos.x < Global.canvas.size.x && new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						new_pos = pos + (Vector2.RIGHT + Vector2.DOWN) * i # Bottom right
+						if new_pos.x < Global.canvas.size.x && new_pos.y < Global.canvas.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
 
 	image.copy_from(new_image)
 	Global.canvas.handle_redo("Draw")
