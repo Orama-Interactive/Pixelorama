@@ -689,10 +689,17 @@ func _on_MergeLayer_pressed() -> void:
 	var new_layers: Array = Global.canvas.layers.duplicate()
 	new_layers.remove(Global.canvas.current_layer_index)
 	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
+	if Global.canvas.layers[Global.canvas.current_layer_index][4] < 1: # If we have layer transparency
+		for xx in selected_layer.get_size().x:
+			for yy in selected_layer.get_size().y:
+				var pixel_color : Color = selected_layer.get_pixel(xx, yy)
+				var alpha : float = pixel_color.a * Global.canvas.layers[Global.canvas.current_layer_index][4]
+				selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
 	var new_layer := Image.new()
 	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
 	new_layer.lock()
+
 	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
 
 	Global.undos += 1
