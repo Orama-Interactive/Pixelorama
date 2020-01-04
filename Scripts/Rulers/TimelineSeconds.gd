@@ -39,7 +39,7 @@ func _draw() -> void:
 	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(starting_pos)
 	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(rect_size - starting_pos)
 
-	for i in range(ceil(first.x), last.x):
+	for i in range(ceil(first.x), last.x - 1):
 		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0))
 		if i % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(position.x + RULER_WIDTH, 0), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), color)

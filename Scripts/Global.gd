@@ -194,6 +194,7 @@ var current_frame_label : Label
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
 var play_backwards : BaseButton
+var timeline_seconds : Control
 var frame_container : HBoxContainer
 
 var vbox_layer_container : VBoxContainer
@@ -305,6 +306,7 @@ func _ready() -> void:
 	loop_animation_button = find_node_by_name(root, "LoopAnim")
 	play_forward = find_node_by_name(root, "PlayForward")
 	play_backwards = find_node_by_name(root, "PlayBackwards")
+	timeline_seconds = find_node_by_name(root, "TimelineSeconds")
 	frame_container = find_node_by_name(root, "FrameContainer")
 
 	var layer_stuff_container = find_node_by_name(root, "LayerVBoxContainer")
