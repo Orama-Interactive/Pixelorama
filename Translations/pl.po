@@ -287,6 +287,12 @@ msgstr ""
 msgid "Development Team"
 msgstr ""
 
+msgid "Lead Programmer"
+msgstr ""
+
+msgid "UI Designer"
+msgstr ""
+
 msgid "GitHub Contributors"
 msgstr ""
 

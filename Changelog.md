@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.6] - 06-01-2020
 
 ### Added
-- Palettes. You can choose default ones or make your own! (Thanks to greusser - issue #27)
+- Palettes. You can choose default ones or make your own! (Thanks to greusser/CheetoHead - issue #27)
 - Multiple theme support (Dark, Gray, Light, Godot, Gold) to better match your style (Thanks to Erevoid)!
 - Image menu with new features (Outlines, Color invert, desaturation) for more editing power.
 - Added a new splash screen window dialog  that appears when Pixelorama loads. Patrons with the rank of Visionaries and above can participate in splash screen artwork contests for every version! Click here for more info: https://www.patreon.com/OramaInteractive

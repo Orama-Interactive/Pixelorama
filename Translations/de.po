@@ -281,6 +281,12 @@ msgstr "Spender"
 msgid "Development Team"
 msgstr "Entwicklerteam"
 
+msgid "Lead Programmer"
+msgstr ""
+
+msgid "UI Designer"
+msgstr ""
+
 msgid "GitHub Contributors"
 msgstr "Github Beitragende"
 

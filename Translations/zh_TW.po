@@ -275,6 +275,12 @@ msgstr "捐款人"
 msgid "Development Team"
 msgstr "開發團隊"
 
+msgid "Lead Programmer"
+msgstr ""
+
+msgid "UI Designer"
+msgstr ""
+
 msgid "GitHub Contributors"
 msgstr "GitHub 貢獻者"
 

@@ -278,6 +278,12 @@ msgstr "Δωρητές"
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
 
+msgid "Lead Programmer"
+msgstr "Επικεφαλής Προγραμματιστής"
+
+msgid "UI Designer"
+msgstr "Σχεδιαστής UI"
+
 msgid "GitHub Contributors"
 msgstr "Συνεισφέροντες στο GitHub"
 

@@ -275,6 +275,12 @@ msgstr "Doadores"
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
 
+msgid "Lead Programmer"
+msgstr ""
+
+msgid "UI Designer"
+msgstr ""
+
 msgid "GitHub Contributors"
 msgstr "Contribuidores do GitHub"
 

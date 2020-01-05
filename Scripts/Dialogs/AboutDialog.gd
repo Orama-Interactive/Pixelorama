@@ -11,22 +11,18 @@ onready var contributors : Tree = $AboutUI/Credits/Contributors/ContributorTree
 onready var donors : Tree = $AboutUI/Credits/Donors/DonorTree
 
 func _ready() -> void:
-	var dev_root := developers.create_item()
-	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer"))
-	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
-
 	var contributor_root := contributors.create_item()
 	contributors.create_item(contributor_root).set_text(0, "  Hugo Locurcio")
 	contributors.create_item(contributor_root).set_text(0, "  CheetoHead")
+	contributors.create_item(contributor_root).set_text(0, "  Schweini07")
 	contributors.create_item(contributor_root).set_text(0, "  Dawid Niedźwiedzki")
 	contributors.create_item(contributor_root).set_text(0, "  Michael Alexsander")
 	contributors.create_item(contributor_root).set_text(0, "  Martin Zabinski")
 	contributors.create_item(contributor_root).set_text(0, "  azagaya")
-	contributors.create_item(contributor_root).set_text(0, "  Schweini07")
 	contributors.create_item(contributor_root).set_text(0, "  Andreev Andrei")
+	contributors.create_item(contributor_root).set_text(0, "  JunYouIntrovert")
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
-	contributors.create_item(contributor_root).set_text(0, "  JunYouIntrovert")
 	contributors.create_item(contributor_root).set_text(0, "  huskee")
 
 	var donors_root := donors.create_item()
@@ -49,8 +45,13 @@ func _on_AboutDialog_about_to_show() -> void:
 	donors_button.set_text(0,  "  " + tr("Donors"))
 	donors_button.set_metadata(0, "Donors")
 
+	var dev_root := developers.create_item()
+	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer"))
+	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
+
 func _on_AboutDialog_popup_hide() -> void:
 	groups.clear()
+	developers.clear()
 
 func _on_Groups_item_selected() -> void:
 	for child in credits.get_children():
