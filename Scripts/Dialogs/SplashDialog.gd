@@ -6,6 +6,8 @@ onready var show_on_startup_button : CheckBox = $Contents/BottomHboxContainer/Sh
 onready var developed_by_label : Label = $Contents/BottomHboxContainer/VBoxContainer/DevelopedBy
 
 func _on_SplashDialog_about_to_show() -> void:
+	if Global.config_cache.has_section_key("preferences", "startup"):
+		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
 	window_title = "Pixelorama" + " " + current_version
 	changes_label.text = current_version + " " + tr("Changes")
