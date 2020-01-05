@@ -164,6 +164,9 @@ func _ready() -> void:
 
 	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 
+	Global.canvas.layers[0][2] = tr("Layer") + " 0"
+	Global.canvas.generate_layer_panels()
+
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
