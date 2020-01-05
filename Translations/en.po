@@ -662,6 +662,12 @@ msgstr "Create a new empty palette?"
 msgid "Edit Palette"
 msgstr "Edit Palette"
 
+msgid "Patrons:"
+msgstr ""
+
+msgid "Changes"
+msgstr "Changes"
+
 msgid "Platinum Sponsor"
 msgstr "Platinum Sponsor"
 

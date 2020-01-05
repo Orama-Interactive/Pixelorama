@@ -670,6 +670,12 @@ msgstr "Δημιουργία νέας κενής παλέττας;"
 msgid "Edit Palette"
 msgstr "Επεξεργασία Παλέττας"
 
+msgid "Patrons:"
+msgstr ""
+
+msgid "Changes"
+msgstr "Αλλαγές"
+
 msgid "Platinum Sponsor"
 msgstr "Πλατινένιος Σπόνσορας"
 

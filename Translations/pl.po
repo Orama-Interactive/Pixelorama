@@ -679,6 +679,12 @@ msgstr ""
 msgid "Edit Palette"
 msgstr ""
 
+msgid "Patrons:"
+msgstr ""
+
+msgid "Changes"
+msgstr ""
+
 msgid "Platinum Sponsor"
 msgstr ""
 

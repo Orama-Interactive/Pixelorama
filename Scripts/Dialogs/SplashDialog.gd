@@ -1,5 +1,6 @@
 extends WindowDialog
 
+onready var changes_label : Label = $Contents/HBoxContainer/ChangesLabel
 onready var art_by_label : Label = $Contents/PatronsArtNews/ArtContainer/ArtCredits
 onready var show_on_startup_button : CheckBox = $Contents/BottomHboxContainer/ShowOnStartup
 onready var developed_by_label : Label = $Contents/BottomHboxContainer/VBoxContainer/DevelopedBy
@@ -7,6 +8,7 @@ onready var developed_by_label : Label = $Contents/BottomHboxContainer/VBoxConta
 func _on_SplashDialog_about_to_show() -> void:
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
 	window_title = "Pixelorama" + " " + current_version
+	changes_label.text = current_version + " " + tr("Changes")
 	developed_by_label.text = "Pixelorama" + " " + current_version + " - " + tr("MADEBY_LABEL")
 
 	art_by_label.text = tr("Art by") + ": Erevos"

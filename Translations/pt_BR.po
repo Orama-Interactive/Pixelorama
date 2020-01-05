@@ -671,6 +671,13 @@ msgstr "Criar uma nova paleta vazia?"
 msgid "Edit Palette"
 msgstr "Editar Paleta"
 
+msgid "Patrons:"
+msgstr ""
+
+#, fuzzy
+msgid "Changes"
+msgstr "Changelog"
+
 msgid "Platinum Sponsor"
 msgstr ""
 
