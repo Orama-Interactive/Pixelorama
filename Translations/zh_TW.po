@@ -661,8 +661,26 @@ msgstr "新增空的色盤?"
 msgid "Edit Palette"
 msgstr "編輯色盤"
 
-msgid "Don't show on the next startup"
+msgid "Platinum Sponsor"
+msgstr ""
+
+msgid "Gold Sponsors"
+msgstr ""
+
+msgid "Platinum Sponsor Placeholder"
+msgstr ""
+
+msgid "Gold Sponsors Placeholder"
+msgstr ""
+
+msgid "Don't show again"
 msgstr "不再顯示"
+
+msgid "Take this spot!"
+msgstr ""
+
+#~ msgid "Don't show on the next startup"
+#~ msgstr "不再顯示"
 
 #~ msgid "Language:"
 #~ msgstr "語言:"

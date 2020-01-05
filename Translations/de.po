@@ -671,8 +671,26 @@ msgstr "Erstelle eine neue leere Palette"
 msgid "Edit Palette"
 msgstr "Bearbeite Palette"
 
-msgid "Don't show on the next startup"
+msgid "Platinum Sponsor"
+msgstr ""
+
+msgid "Gold Sponsors"
+msgstr ""
+
+msgid "Platinum Sponsor Placeholder"
+msgstr ""
+
+msgid "Gold Sponsors Placeholder"
+msgstr ""
+
+msgid "Don't show again"
 msgstr "Nicht beim nächsten Start"
+
+msgid "Take this spot!"
+msgstr ""
+
+#~ msgid "Don't show on the next startup"
+#~ msgstr "Nicht beim nächsten Start"
 
 #~ msgid "Language:"
 #~ msgstr "Sprache:"

@@ -679,7 +679,22 @@ msgstr ""
 msgid "Edit Palette"
 msgstr ""
 
-msgid "Don't show on the next startup"
+msgid "Platinum Sponsor"
+msgstr ""
+
+msgid "Gold Sponsors"
+msgstr ""
+
+msgid "Platinum Sponsor Placeholder"
+msgstr ""
+
+msgid "Gold Sponsors Placeholder"
+msgstr ""
+
+msgid "Don't show again"
+msgstr ""
+
+msgid "Take this spot!"
 msgstr ""
 
 #~ msgid "Language:"

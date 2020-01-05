@@ -94,7 +94,7 @@ func _ready() -> void:
 		TranslationServer.set_locale(OS.get_locale())
 
 	if "zh" in TranslationServer.get_locale():
-		theme.default_font = preload("res://Assets/Fonts/NotoSansCJKtc-Regular.tres")
+		theme.default_font = preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres")
 	else:
 		theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
 

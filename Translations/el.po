@@ -670,8 +670,26 @@ msgstr "Δημιουργία νέας κενής παλέττας;"
 msgid "Edit Palette"
 msgstr "Επεξεργασία Παλέττας"
 
-msgid "Don't show on the next startup"
-msgstr "Να μην εμφανιστεί στην επόμενη εκκίνηση"
+msgid "Platinum Sponsor"
+msgstr "Πλατινένιος Σπόνσορας"
+
+msgid "Gold Sponsors"
+msgstr "Χρυσοί Σπόνσορες"
+
+msgid "Platinum Sponsor Placeholder"
+msgstr "Θέση για Πλατινένιο Σπόνσορα"
+
+msgid "Gold Sponsors Placeholder"
+msgstr "Θέση για Χρυσούς Σπόνσορες"
+
+msgid "Don't show again"
+msgstr "Να μην εμφανιστεί ξανά"
+
+msgid "Take this spot!"
+msgstr "Πάρτε αυτή τη θέση!"
+
+#~ msgid "Don't show on the next startup"
+#~ msgstr "Να μην εμφανιστεί στην επόμενη εκκίνηση"
 
 #~ msgid "Language:"
 #~ msgstr "Γλώσσα:"

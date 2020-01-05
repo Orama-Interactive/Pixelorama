@@ -941,6 +941,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -1083,6 +1084,7 @@ size_flags_horizontal = 3
 text = "Current frame: 1/1"
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
+editor/display_folded = true
 margin_left = 246.0
 margin_right = 386.0
 margin_bottom = 24.0
@@ -1216,6 +1218,7 @@ margin_right = 570.0
 margin_bottom = 60.0
 
 [node name="FrameAndButtonContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
+editor/display_folded = true
 margin_top = 64.0
 margin_right = 570.0
 margin_bottom = 84.0
@@ -1247,6 +1250,7 @@ margin_right = 578.0
 margin_bottom = 138.0
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
+editor/display_folded = true
 margin_left = 582.0
 margin_right = 681.0
 margin_bottom = 138.0
@@ -1674,6 +1678,7 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 [node name="PreferencesDialog" parent="." instance=ExtResource( 64 )]
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 65 )]
+visible = false
 
 [node name="AboutDialog" parent="." instance=ExtResource( 66 )]
 
