@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Color switch has `X` as its shortcut.
 - Frames can now be removed with middle click.
 - Selection content can be deleted with the "Delete" button.
-- Added a new splash screen window dialog  that appears when Pixelorama loads.
+- Added a new splash screen window dialog  that appears when Pixelorama loads. Patreons with the rank of Visionaries and above can participate in splash screen artwork contests for every version! Click here for more info: https://www.patreon.com/OramaInteractive
 - Added "View Splash Screen", "Issue Tracker" and "Changelog" as Help menu options
 
 ### Changed
@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Made the layer and timeline buttons have hover textures. (Thanks to Erevoid)
 - Brush color interpolation and LightenDarknen's amount now range from 0-100, instead of 0-1.
 - Redo has both `Ctrl-Y` and `Shift-Ctrl-Z` as its shortcuts. (Thanks to Schweini07)
+- Removed split screen button, you can now drag the second canvas from the right.
 - Changed positions of color switch & color default buttons.
 - Importing brushes from the Brushes folder now looks inside its subfolders too, but not the subfolders of the subfolders.
 - The Brushes folder now gets created if it doesn't exist (tested on Windows)
