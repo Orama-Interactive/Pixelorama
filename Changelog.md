@@ -3,16 +3,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased] (v0.6)
+## [v0.6] - 06-01-2020
 
 ### Added
-- Palettes. You can choose default ones or make your own! (Thanks to greusser)
+- Palettes. You can choose default ones or make your own! (Thanks to greusser - issue #27)
 - Multiple theme support (Dark, Gray, Light, Godot, Gold) to better match your style (Thanks to Erevoid)!
 - Image menu with new features (Outlines, Color invert, desaturation) for more editing power.
-- Added a layer opacity slider, that lets you change the alpha values of layers.
+- Added a new splash screen window dialog  that appears when Pixelorama loads. Patrons with the rank of Visionaries and above can participate in splash screen artwork contests for every version! Click here for more info: https://www.patreon.com/OramaInteractive
 - Added a better circle and filled circle brushes. They use Bresenham's circle algorithm for scaling.
 - Added random brushes! Every time you draw, expect to see something different! To create random brushes, place the images you want your brush to have in the same folder, and put the symbol "%" in front of their filename. Examples, "%icon1.png", "%grass_green.png"
 - Pixelorama goes worldwide with even more translations! (German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese)
+- Added a layer opacity slider, that lets you change the alpha values of layers.
 - Importing spritesheets is now possible.
 - Exporting matrix spritesheets is now possible. You can choose how many rows OR columns your spritesheet will be.
 - Straight lines now have constrained angles if you press `Ctrl`. With a step of 15 angles.
@@ -22,7 +23,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Color switch has `X` as its shortcut.
 - Frames can now be removed with middle click.
 - Selection content can be deleted with the "Delete" button.
-- Added a new splash screen window dialog  that appears when Pixelorama loads. Patreons with the rank of Visionaries and above can participate in splash screen artwork contests for every version! Click here for more info: https://www.patreon.com/OramaInteractive
 - Added "View Splash Screen", "Issue Tracker" and "Changelog" as Help menu options
 
 ### Changed
