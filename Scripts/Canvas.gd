@@ -259,6 +259,8 @@ func _input(event : InputEvent) -> void:
 					Global.update_right_custom_brush()
 
 	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool) || ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
+		if is_instance_valid(line_2d):
+			line_2d.queue_free()
 		line_2d = Line2D.new()
 		line_2d.width = 0.5
 		line_2d.default_color = Color.darkgray
