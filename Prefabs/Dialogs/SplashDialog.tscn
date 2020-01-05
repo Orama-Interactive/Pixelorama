@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Scripts/Dialogs/SplashDialog.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Pixelorama Logo.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Patron Button.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Patron Button Hover.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Become a patron.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Become a patron_Hover.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Graphics/Splash Art.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=7]
@@ -114,18 +114,18 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/PatronsArtNews/PatronsContainer/PatronsScroll"]
 margin_right = 142.0
-margin_bottom = 80.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="Contents/PatronsArtNews/PatronsContainer/PatronsScroll/VBoxContainer"]
 margin_right = 142.0
-margin_bottom = 80.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="PatronButton" type="TextureButton" parent="Contents/PatronsArtNews/PatronsContainer/PatronsScroll/VBoxContainer/CenterContainer"]
-margin_left = 31.0
-margin_right = 111.0
-margin_bottom = 80.0
+margin_left = 29.0
+margin_right = 113.0
+margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
@@ -166,16 +166,17 @@ rect_min_size = Vector2( 0, 260 )
 
 [node name="Label2" type="Label" parent="Contents/PatronsArtNews/ChangelogContainer/ChangelogScroll"]
 margin_right = 142.0
-margin_bottom = 592.0
+margin_bottom = 796.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Added
 - Palettes. You can choose default ones or make your own!
 - Multiple theme support to better match your style.
-- Image sub-menu with new features (Outlines, Color invert, desaturation) for more editing power.
-- Added a layer opacity slider, that lets you change the alpha values of layers.
+- Image menu with new features (Outlines, Color invert, desaturation) for more editing power.
+- Added a new splash screen window dialog that appears when Pixelorama loads. Patrons with the rank of Visionaries and above can participate in splash screen artwork contests for every version! 
 - Added a better circle, filled circle and random brushes!
 - Pixelorama goes worldwide with even more translations!
+- Added a layer opacity slider, that lets you change the alpha values of layers.
 - Importing and exporting matrix spritesheets is now possible.
 - Straight lines now have constrained angles if you press Ctrl. With a step of 15 angles."
 autowrap = true

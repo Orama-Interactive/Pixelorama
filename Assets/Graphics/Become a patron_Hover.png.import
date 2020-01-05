@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Patron Button Hover.png-8fc60b776206b9abfa94306023859853.stex"
+path="res://.import/Become a patron_Hover.png-8a75baaaa2b3ce60a939e5c77977d33b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Patron Button Hover.png"
-dest_files=[ "res://.import/Patron Button Hover.png-8fc60b776206b9abfa94306023859853.stex" ]
+source_file="res://Assets/Graphics/Become a patron_Hover.png"
+dest_files=[ "res://.import/Become a patron_Hover.png-8a75baaaa2b3ce60a939e5c77977d33b.stex" ]
 
 [params]
 
