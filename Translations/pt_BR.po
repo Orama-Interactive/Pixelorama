@@ -276,10 +276,10 @@ msgid "Development Team"
 msgstr "Time de Desenvolvimento"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Programador Principal"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Designer de UI"
 
 msgid "GitHub Contributors"
 msgstr "Contribuidores do GitHub"
@@ -678,26 +678,25 @@ msgid "Edit Palette"
 msgstr "Editar Paleta"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrões"
 
-#, fuzzy
 msgid "Changes"
-msgstr "Changelog"
+msgstr "Mudanças"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Patrocinador de Platina"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Patrocinadores de Ouro"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Espaço Reservado de Patrocinador de Platina"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Espaço Reservado de Patrocinadores de Ouro"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Não mostrar de novo"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Peque este lugar!"
