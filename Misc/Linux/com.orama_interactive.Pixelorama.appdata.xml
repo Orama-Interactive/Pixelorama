@@ -17,13 +17,17 @@
   <url type="bugtracker">https://github.com/Orama-Interactive/Pixelorama/issues</url>
   <screenshots>
     <screenshot type="default" width="1919" height="1079">
-      <image type="source">https://static.wixstatic.com/media/673cdd_b31327135c20489d8d632cfe9e642257~mv2.png</image>
+      <image type="source">https://static.wixstatic.com/media/cc6108_ccec89c37b3d425da4f03776160c859c~mv2.png</image>
+      <caption>Art by Erevos</caption>
+    </screenshot>
+	<screenshot type="default" width="1919" height="1079">
+      <image type="source">https://static.wixstatic.com/media/cc6108_854ca4dc022c481f96bbc2b4f03fb04d~mv2.png</image>
       <caption>Art by Erevos</caption>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
-    <release version="0.5" date="2019-12-12"/>
+    <release version="0.6" date="2020-01-06"/>
   </releases>
   <update_contact>hugo.locurcio@hugo.pro</update_contact>
 </component>

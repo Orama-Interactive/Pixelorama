@@ -31,7 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Changed export dialog's options to be more clean and easier to understand.
 - Switched from a single .csv to gettext for handling translations.
 - The About dialog window got an overhaul. It now shows the names of the Development team, Contributors & Donors.
-- Changed default cursor shape for the rulers.
+- Changed default cursor shape for the rulers so the users can see that they are interactive.
 - Made the layer and timeline buttons have hover textures. (Thanks to Erevoid)
 - Brush color interpolation and LightenDarknen's amount now range from 0-100, instead of 0-1.
 - Redo has both `Ctrl-Y` and `Shift-Ctrl-Z` as its shortcuts. (Thanks to Schweini07)
@@ -52,3 +52,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed "Parent node is busy setting up children, move_child() failed" when the Quit dialog popup was being called. (Issue #90, thanks to Sslaxx)
 - Fixed issues with bucket tool and mirroring.
 - Fixed issue with invisible layers becomes visible when a layer was added/removed/moved or changed frame.
+- Switched to '2D' framebuffer allocation, which results in slightly increased performance and decreased CPU/GPU usage. (Thanks to Calinou)

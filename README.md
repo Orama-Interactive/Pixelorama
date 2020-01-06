@@ -1,29 +1,32 @@
 # Pixelorama - your free and open-source sprite editor!
  Your free & open-source 2D sprite editor, made by Orama Interactive in the Godot Engine, using GDScript!
 
- [![Pixelorama's UI](https://img.itch.zone/aW1hZ2UvNDcwMzY3LzI3NzUxMDMucG5n/original/QrfONw.png)](https://www.youtube.com/watch?v=nBz0LgPx7G8&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=5&t=0s)
+ [![Pixelorama's UI](https://static.wixstatic.com/media/cc6108_ccec89c37b3d425da4f03776160c859c~mv2.png)](https://www.youtube.com/watch?v=DULv-jzueRw&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=7)
 
-Current features as of version v0.5:
+Current features as of version v0.6:
 
 - Choosing between 6 tools – pencil, eraser, fill bucket, lighten/darken, color picker and rectangle select – and mapping them to both of your left and right mouse buttons.
-- Different colors and brush sizes for each of the mouse buttons.
-- Support of two types of custom brushes: "From files" and "per project" brushes. Custom brushes from files get loaded from the "Brushes" folder that comes with Pixelorama, and per project brushes get saved with the rectangle select tool. 
-- Creating a new canvas with a size of your choosing.
-- Are you an animator? Then you've come to the right place! Pixelorama has its own Animation Timeline just for you!​
-- Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames.
-- Export your gorgeous art as PNG files.
-- Save and open your projects as Pixelorama's custom file format, .pxo
+- Are you an animator? Then you've come to the right place! Pixelorama has its own animation timeline with Onion Skinning just for you!
+- Different colors, brush sizes and brush types for each of the mouse buttons.
+- Custom brushes! Load your brushes from files or select them in your project with the selection tool, and they will get stored in `.pxo` files!
+- Random custom brushes! Every time you draw, expect to see a different random result!
+- Pixelorama has a multiple layer system! You can add, remove, move up and down, clone and merge as many layers as you like! You can also rename them, and change their opacity!
+- Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames. Importing spritesheets is also supported.
+- Export your gorgeous art as `PNG` files. Exporting your projects as spritesheets is also possible.
+- Save and open your projects as Pixelorama's custom file format, `.pxo`
 - Undo/Redo support!
+- Multiple theme support! Choose a theme from Dark, Gray, Godot, Gold and Light!
 - Horizontal & vertical mirrored drawing!
 - Tile Mode for pattern creation!
 - Split screen mode to see your masterpiece twice! And a mini canvas preview area to see it thrice!
-- Create straight lines for pencil and eraser by holding down Shift while you draw.
+- Create straight lines for pencil, eraser and the lighten/darken tool by pressing `Shift`. If you also press `Control`, you can constrain angles with a step of 15.
+- Generate outlines for your images!
 - The middle mouse wheel isn’t forgotten, you can use it to pan around the canvas and by scrolling up and down, you can zoom in and out!
-- Keyboard shortcuts! I’m pretty sure this is a lifesaver for most of you.
-- Just like onions, Pixelorama has a multiple layer system! You can add, remove, move up and down, clone and merge as many layers as you like! You can also rename them!
+- Keyboard shortcuts! We're pretty sure this is a lifesaver for most of you.
 - Rulers and guides!
-- Scale, crop and flip your images!
-- Greek localization support!
+- Creating a new canvas with a size of your choosing.
+- Scale, crop, flip, color invert and desaturate your images!
+- English, Greek, German, French, Polish, Brazilian Portuguese, Russian and Traditional Chinese localization support!
 
 Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
 Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
@@ -31,3 +34,4 @@ Join our Discord community server​ where we can discuss about Pixelorama and a
 Download it as a stand-alone on itch.io: https://orama-interactive.itch.io/pixelorama
 
 If you like, consider helping us by sponsoring this project! It would enable us to focus more on Pixelorama, and make more projects in the future!
+Patreon link: https://patreon.com/OramaInteractive
