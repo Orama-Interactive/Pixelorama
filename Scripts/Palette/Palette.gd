@@ -92,7 +92,7 @@ func _serialize() -> String:
 	for color in colors:
 		serialize_data.colors.push_back(color.toDict())
 
-	result = JSON.print(serialize_data)
+	result = JSON.print(serialize_data, " ")
 
 	return result
 
