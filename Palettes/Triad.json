@@ -1,5 +1,6 @@
 {
  "name": "Triad",
+ "comments": "By Erevos",
  "colors": [
   {
    "data": "ff852c32",
@@ -102,6 +103,5 @@
    "name": "no name"
   }
  ],
- "comments": "By Erevos",
  "editable": true
 }

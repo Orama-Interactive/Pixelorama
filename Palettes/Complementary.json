@@ -1,5 +1,6 @@
 {
  "name": "Complementary",
+ "comments": "By Erevos",
  "colors": [
   {
    "data": "ffb35102",
@@ -102,6 +103,5 @@
    "name": "no name"
   }
  ],
- "comments": "By Erevos",
  "editable": true
 }

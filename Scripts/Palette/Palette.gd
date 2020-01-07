@@ -85,8 +85,8 @@ func _serialize() -> String:
 	var result = ""
 	var serialize_data : Dictionary = {
 		"name" : name,
-		"colors" : [],
 		"comments" : comments,
+		"colors" : [],
 		"editable" : editable
 	}
 	for color in colors:

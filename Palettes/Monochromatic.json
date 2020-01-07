@@ -1,5 +1,6 @@
 {
  "name": "Monochromatic",
+ "comments": "By Erevos",
  "colors": [
   {
    "data": "ff323880",
@@ -162,6 +163,5 @@
    "name": "no name"
   }
  ],
- "comments": "By Erevos",
  "editable": true
 }

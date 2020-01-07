@@ -1,22 +1,71 @@
 {
-  "name": "BubbleGum16",
-  "colors" : [
-    { "data" : "#FF000000", "name" : "no name" },
-    { "data" : "#FF7f0622", "name" : "no name" },
-    { "data" : "#FFd62411", "name" : "no name" },
-    { "data" : "#FFff8426", "name" : "no name" },
-    { "data" : "#FFffd100", "name" : "no name" },
-    { "data" : "#FFfafdff", "name" : "no name" },
-    { "data" : "#FFff80a4", "name" : "no name" },
-    { "data" : "#FFff2674", "name" : "no name" },
-    { "data" : "#FF94216a", "name" : "no name" },
-    { "data" : "#FF430067", "name" : "no name" },
-    { "data" : "#FF234975", "name" : "no name" },
-    { "data" : "#FF68aed4", "name" : "no name" },
-    { "data" : "#FFbfff3c", "name" : "no name" },
-    { "data" : "#FF10d275", "name" : "no name" },
-    { "data" : "#FF007899", "name" : "no name" },
-    { "data" : "#FF002859", "name" : "no name" },
-    ],
-    "comments": "by PineTreePizza - https://twitter.com/PineTreePizza"
+ "name": "BubbleGum16",
+ "comments": "by PineTreePizza - https://twitter.com/PineTreePizza",
+ "colors": [
+  {
+   "data": "ff000000",
+   "name": "no name"
+  },
+  {
+   "data": "ff7f0622",
+   "name": "no name"
+  },
+  {
+   "data": "ffd62411",
+   "name": "no name"
+  },
+  {
+   "data": "ffff8426",
+   "name": "no name"
+  },
+  {
+   "data": "ffffd100",
+   "name": "no name"
+  },
+  {
+   "data": "fffafdff",
+   "name": "no name"
+  },
+  {
+   "data": "ffff80a4",
+   "name": "no name"
+  },
+  {
+   "data": "ffff2674",
+   "name": "no name"
+  },
+  {
+   "data": "ff94216a",
+   "name": "no name"
+  },
+  {
+   "data": "ff430067",
+   "name": "no name"
+  },
+  {
+   "data": "ff234975",
+   "name": "no name"
+  },
+  {
+   "data": "ff68aed4",
+   "name": "no name"
+  },
+  {
+   "data": "ffbfff3c",
+   "name": "no name"
+  },
+  {
+   "data": "ff10d275",
+   "name": "no name"
+  },
+  {
+   "data": "ff007899",
+   "name": "no name"
+  },
+  {
+   "data": "ff002859",
+   "name": "no name"
+  }
+ ],
+ "editable": true
 }

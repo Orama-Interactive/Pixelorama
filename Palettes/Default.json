@@ -1,5 +1,6 @@
 {
  "name": "Default",
+ "comments": "",
  "colors": [
   {
    "data": "ff000000",
@@ -130,6 +131,5 @@
    "name": "no name"
   }
  ],
- "comments": "",
  "editable": true
 }

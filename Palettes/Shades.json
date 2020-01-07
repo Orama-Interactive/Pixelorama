@@ -1,5 +1,6 @@
 {
  "name": "Shades",
+ "comments": "By Erevos",
  "colors": [
   {
    "data": "ffc25400",
@@ -142,6 +143,5 @@
    "name": "no name"
   }
  ],
- "comments": "By Erevos",
  "editable": true
 }
