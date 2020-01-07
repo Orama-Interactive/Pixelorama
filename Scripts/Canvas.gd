@@ -95,7 +95,7 @@ func _input(event : InputEvent) -> void:
 		update()
 
 	sprite_changed_this_frame = false
-	current_pixel = get_local_mouse_position() - location
+	current_pixel = get_local_mouse_position() + location
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
@@ -449,7 +449,7 @@ func _draw() -> void:
 			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
 
 	#Draw rectangle to indicate the pixel currently being hovered on
-	var mouse_pos := get_local_mouse_position() + location
+	var mouse_pos := current_pixel
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
 		if Global.left_square_indicator_visible && Global.can_draw:

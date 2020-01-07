@@ -133,7 +133,8 @@ func _process(delta : float) -> void:
 			Global.canvas.handle_undo("Draw")
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
+					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.canvas.size):
+						layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
 			Global.canvas.handle_redo("Draw")
 
 
