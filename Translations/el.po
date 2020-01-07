@@ -228,7 +228,7 @@ msgid "Light"
 msgstr "Φωτεινό"
 
 msgid "Invert colors"
-msgstr "Αναστροφή χρωμάτων"
+msgstr "Αντιστροφή χρωμάτων"
 
 msgid "Desaturation"
 msgstr "Αποκορεσμός"
