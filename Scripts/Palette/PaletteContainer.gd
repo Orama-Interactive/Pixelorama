@@ -54,7 +54,7 @@ func on_palette_import_file_selected(path : String) -> void:
 			on_palette_select(palette.name)
 			save_palette(palette.name, palette.name + ".json")
 		else:
-			Global.error_dialog.set_text("Palette named '" + palette.name + "' already exists");
+			Global.error_dialog.set_text("Palette named '" + palette.name + "' already exists")
 			Global.error_dialog.popup_centered()
 	else:
 		Global.error_dialog.set_text("Invalid Palette file!")
