@@ -19,6 +19,9 @@ func _ready() -> void:
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
 		themes.get_child(theme_id + 1).pressed = true
+	else:
+		change_theme(0)
+		themes.get_child(1).pressed = true
 
 func _on_PreferencesDialog_about_to_show() -> void:
 	var root := tree.create_item()
