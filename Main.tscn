@@ -941,7 +941,6 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -968,6 +967,7 @@ enabled_focus_mode = 0
 script = ExtResource( 14 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+editor/display_folded = true
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 478.0
@@ -1008,6 +1008,7 @@ stretch = true
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
 size = Vector2( 676, 462 )
 handle_input_locally = false
+usage = 0
 render_target_update_mode = 3
 
 [node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 16 )]
@@ -1328,7 +1329,7 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
 
-[node name="HSeparator3" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_top = 168.0
 margin_right = 224.0
 margin_bottom = 172.0
@@ -1342,28 +1343,34 @@ size_flags_vertical = 0
 text = "Palettes"
 align = 1
 
-[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_top = 195.0
 margin_right = 224.0
 margin_bottom = 199.0
 
-[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-editor/display_folded = true
+[node name="VSplitContainer" type="VSplitContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_top = 203.0
 margin_right = 224.0
-margin_bottom = 355.0
+margin_bottom = 604.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer"]
+editor/display_folded = true
+margin_right = 224.0
+margin_bottom = 136.0
 size_flags_horizontal = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer"]
 margin_right = 224.0
 margin_bottom = 32.0
 
-[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer"]
+[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer"]
 margin_left = 24.0
 margin_right = 199.0
 margin_bottom = 32.0
 
-[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
@@ -1374,12 +1381,12 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 37 )
 texture_hover = ExtResource( 38 )
 
-[node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
+[node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
 margin_right = 12.0
 margin_bottom = 20.0
 items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
 
-[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
@@ -1390,7 +1397,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 39 )
 texture_hover = ExtResource( 40 )
 
-[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
+[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
 margin_left = 72.0
 margin_right = 175.0
 margin_bottom = 32.0
@@ -1400,62 +1407,68 @@ hint_tooltip = "CHOOSEPALETTE_HT"
 mouse_default_cursor_shape = 2
 clip_text = true
 
-[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer"]
+[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer"]
 margin_top = 36.0
 margin_right = 224.0
-margin_bottom = 152.0
-rect_min_size = Vector2( 0, 116 )
+margin_bottom = 136.0
+rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette"]
+[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette"]
 margin_right = 224.0
 size_flags_horizontal = 3
 
-[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
+[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
 margin_left = 112.0
 margin_right = 112.0
 size_flags_horizontal = 3
 columns = 5
 script = ExtResource( 41 )
 
-[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 359.0
+[node name="VBoxLayerWithLabels" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer"]
+editor/display_folded = true
+margin_top = 148.0
 margin_right = 224.0
-margin_bottom = 363.0
+margin_bottom = 401.0
 
-[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 367.0
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
 margin_right = 224.0
-margin_bottom = 382.0
+margin_bottom = 4.0
+
+[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
+margin_top = 8.0
+margin_right = 224.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Layers"
 align = 1
 
-[node name="HSeparator4" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
-margin_top = 386.0
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
+margin_top = 27.0
 margin_right = 224.0
-margin_bottom = 390.0
+margin_bottom = 31.0
 
-[node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+[node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
 editor/display_folded = true
-margin_top = 394.0
+margin_top = 35.0
 margin_right = 224.0
-margin_bottom = 604.0
+margin_bottom = 253.0
 size_flags_vertical = 3
 custom_constants/separation = 6
 
-[node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+[node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
 margin_right = 224.0
 margin_bottom = 32.0
 
-[node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons"]
+[node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons"]
 editor/display_folded = true
 margin_left = 6.0
 margin_right = 218.0
 margin_bottom = 32.0
 
-[node name="AddLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="AddLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
@@ -1465,7 +1478,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 42 )
 texture_hover = ExtResource( 43 )
 
-[node name="RemoveLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="RemoveLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
@@ -1478,7 +1491,7 @@ texture_normal = ExtResource( 44 )
 texture_hover = ExtResource( 45 )
 texture_disabled = ExtResource( 46 )
 
-[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 72.0
@@ -1491,7 +1504,7 @@ texture_normal = ExtResource( 47 )
 texture_hover = ExtResource( 48 )
 texture_disabled = ExtResource( 49 )
 
-[node name="MovwDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="MovwDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 108.0
@@ -1504,7 +1517,7 @@ texture_normal = ExtResource( 50 )
 texture_hover = ExtResource( 51 )
 texture_disabled = ExtResource( 52 )
 
-[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 144.0
@@ -1515,7 +1528,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 53 )
 texture_hover = ExtResource( 54 )
 
-[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 180.0
@@ -1528,26 +1541,26 @@ texture_normal = ExtResource( 55 )
 texture_hover = ExtResource( 56 )
 texture_disabled = ExtResource( 57 )
 
-[node name="OpacityContainer" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+[node name="OpacityContainer" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
 margin_top = 38.0
 margin_right = 224.0
 margin_bottom = 55.0
 custom_constants/separation = 2
 alignment = 1
 
-[node name="SpacerControl" type="Control" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer"]
+[node name="SpacerControl" type="Control" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
 margin_right = 3.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 3, 0 )
 
-[node name="OpacityLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer"]
+[node name="OpacityLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
 margin_left = 5.0
 margin_right = 49.0
 margin_bottom = 17.0
 size_flags_vertical = 1
 text = "Opacity:"
 
-[node name="OpacitySlider" type="HSlider" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer"]
+[node name="OpacitySlider" type="HSlider" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
 margin_left = 51.0
 margin_right = 166.0
 margin_bottom = 17.0
@@ -1557,7 +1570,7 @@ size_flags_vertical = 1
 value = 100.0
 ticks_on_borders = true
 
-[node name="OpacitySpinBox" type="SpinBox" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer"]
+[node name="OpacitySpinBox" type="SpinBox" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
 margin_left = 168.0
 margin_right = 222.0
 margin_bottom = 17.0
@@ -1565,20 +1578,20 @@ mouse_default_cursor_shape = 2
 value = 100.0
 align = 1
 
-[node name="SpacerControl2" type="Control" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer"]
+[node name="SpacerControl2" type="Control" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
 margin_left = 224.0
 margin_right = 224.0
 margin_bottom = 17.0
 
-[node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer"]
+[node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
 editor/display_folded = true
 margin_top = 61.0
 margin_right = 224.0
-margin_bottom = 210.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/ScrollLayers"]
+[node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/ScrollLayers"]
 margin_right = 224.0
 size_flags_horizontal = 3
 
@@ -1770,17 +1783,17 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
-[connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/AddLayer" to="." method="add_layer"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayerButton_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MovwDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
-[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
-[connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/LayerVBoxContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
+[connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons/AddLayer" to="." method="add_layer"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayerButton_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MovwDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeLayer_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
@@ -1795,8 +1808,8 @@ visible = false
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
-[connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
+[connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
+[connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]
