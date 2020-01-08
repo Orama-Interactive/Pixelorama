@@ -26,7 +26,7 @@ func _ready() -> void:
 		Global.loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		Global.loaded_locales = ["de", "el", "en", "fr", "pl", "pt_BR", "ru", "zh_TW"]
+		Global.loaded_locales = ["de", "el", "en", "fr", "it", "pl", "pt_BR", "ru", "zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
 	Global.loaded_locales.sort()

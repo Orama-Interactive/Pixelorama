@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
-
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_right = 200.0
 margin_bottom = 70.0
@@ -42,7 +41,6 @@ margin_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 205.0
 margin_bottom = 282.0
 
@@ -89,6 +87,13 @@ margin_bottom = 168.0
 mouse_default_cursor_shape = 2
 text = "Français [fr]"
 
+[node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 144.0
+margin_right = 205.0
+margin_bottom = 168.0
+mouse_default_cursor_shape = 2
+text = "Italian [it]"
+
 [node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 172.0
 margin_right = 205.0
@@ -119,7 +124,6 @@ custom_fonts/font = ExtResource( 3 )
 text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
 visible = false
 margin_top = 286.0
 margin_right = 205.0
@@ -167,7 +171,6 @@ mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
 visible = false
 margin_top = 458.0
 margin_right = 205.0
