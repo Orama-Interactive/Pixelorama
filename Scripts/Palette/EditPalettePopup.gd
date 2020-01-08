@@ -1,7 +1,7 @@
 extends WindowDialog
 
 onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
-onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/EditPaletteGridContainer
+onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/ScrollContainer/EditPaletteGridContainer
 onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit
 onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
 

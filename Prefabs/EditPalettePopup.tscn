@@ -39,9 +39,15 @@ margin_right = 556.0
 margin_bottom = 462.0
 size_flags_horizontal = 3
 
-[node name="EditPaletteGridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditPaletteGridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/Panel/ScrollContainer"]
+margin_right = 262.0
+margin_bottom = 462.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 8
