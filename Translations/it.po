@@ -1,0 +1,711 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pixelorama\n"
+"Last-Translator: Gaarco\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Open"
+msgstr "Apri"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "Please Confirm..."
+msgstr "Per favore conferma..."
+
+msgid "Image Size"
+msgstr "Dimensione dell'immagine"
+
+msgid "Width:"
+msgstr "Larghezza:"
+
+msgid "Height:"
+msgstr "Altezza:"
+
+msgid "File"
+msgstr "File"
+
+msgid "Edit"
+msgstr "Modifica"
+
+msgid "View"
+msgstr "Vista"
+
+msgid "Image"
+msgstr "Immagine"
+
+msgid "Effects"
+msgstr "Effetti"
+
+msgid "Help"
+msgstr "Aiuto"
+
+msgid "New..."
+msgstr "Nuovo..."
+
+msgid "Open..."
+msgstr "Apri..."
+
+msgid "Save..."
+msgstr "Salva..."
+
+msgid "Save as..."
+msgstr "Salva come..."
+
+msgid "Import PNG..."
+msgstr "Importa PNG..."
+
+msgid "Export"
+msgstr "Esporta"
+
+msgid "Export PNG..."
+msgstr "Esporta PNG..."
+
+msgid "Export PNG as..."
+msgstr "Esporta PNG come..."
+
+msgid "Quit"
+msgstr "Esci"
+
+msgid "Undo"
+msgstr "Annulla"
+
+msgid "Redo"
+msgstr "Ripeti"
+
+msgid "Scale Image"
+msgstr "Scala l'immagine"
+
+msgid "Crop Image"
+msgstr "Ritaglia l'immagine"
+
+msgid "Clear Selection"
+msgstr "Nessuna selezione"
+
+msgid "Flip Horizontal"
+msgstr "Rifletti orizzontalmente"
+
+msgid "Flip Vertical"
+msgstr "Rifletti verticalmente"
+
+msgid "Preferences"
+msgstr "Preferenze"
+
+msgid "Tile Mode"
+msgstr "Modalità Tile"
+
+msgid "Show Grid"
+msgstr "Mostra la griglia"
+
+msgid "Show Rulers"
+msgstr "Mostra i righelli"
+
+msgid "Show Guides"
+msgstr "Mostra le guide"
+
+msgid "Fill with color:"
+msgstr "Riempi con il colore:"
+
+msgid "Open a File"
+msgstr "Apri un File"
+
+msgid "Open File(s)"
+msgstr "Apri il(i) File"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "Importa come un nuovo frame"
+
+msgid "IMPORT_SPRITESHEET"
+msgstr "Importa come uno spritesheet"
+
+msgid "Save Sprite as .pxo"
+msgstr "Salva lo Sprite come .pxo"
+
+msgid "Export Sprite as .png"
+msgstr "Esporta lo Sprite come .png"
+
+msgid "Export Sprite"
+msgstr "Esporta lo Sprite"
+
+msgid "File Exists, Overwrite?"
+msgstr "Il file esiste già, vuoi sovrascrivere?"
+
+msgid "Resize:"
+msgstr "Ridimensiona:"
+
+msgid "EXPORT_CURRENT_FRAME_LABEL"
+msgstr "Esporta il frame corrente"
+
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
+msgstr "Esporta tutti i frame come file multipli"
+
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
+msgstr "Esporta tutti i frame come uno spritesheet (singolo file)"
+
+msgid "Columns"
+msgstr "Colonne"
+
+msgid "Rows"
+msgstr "Righe"
+
+msgid "Path:"
+msgstr "Percorso:"
+
+msgid "Directories & Files:"
+msgstr "Cartelle & File:"
+
+msgid "Create Folder"
+msgstr "Crea Cartella"
+
+msgid "File:"
+msgstr "File:"
+
+msgid "Interpolation:"
+msgstr "Interpolazione:"
+
+msgid "Nearest"
+msgstr "Nearest"
+
+msgid "Bilinear"
+msgstr "Bilineare"
+
+msgid "Cubic"
+msgstr "Cubica"
+
+msgid "Trilinear"
+msgstr "Trilineare"
+
+msgid "Language"
+msgstr "Lingua"
+
+msgid "Themes"
+msgstr "Temi"
+
+msgid "Guides & Grid"
+msgstr "Guide & Griglia"
+
+msgid "Language options"
+msgstr "Opzioni di lingua"
+
+msgid "Theme options"
+msgstr "Opzioni del tema"
+
+msgid "Grid options"
+msgstr "Opzioni della griglia"
+
+msgid "Color:"
+msgstr "Colore:"
+
+msgid "Guide color:"
+msgstr "Colore della guida:"
+
+msgid "System Language"
+msgstr "Lingua di sistema"
+
+msgid "Dark"
+msgstr "Scuro"
+
+msgid "Gray"
+msgstr "Grigio"
+
+msgid "Gold"
+msgstr "Oro"
+
+msgid "Light"
+msgstr "Chiaro"
+
+msgid "Invert colors"
+msgstr "Inverti i colori"
+
+msgid "Desaturation"
+msgstr "Desaturazione"
+
+msgid "Outline"
+msgstr "Contorno"
+
+msgid "Diagonal"
+msgstr "Diagonale"
+
+msgid "Place inside image"
+msgstr "Posiziona all'interno dell'immagine"
+
+msgid "Thickness:"
+msgstr "Spessore:"
+
+msgid "View Splash Screen"
+msgstr "Visualizza lo splash screen"
+
+msgid "Issue Tracker"
+msgstr "Issue Tracker"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "About Pixelorama"
+msgstr "Informazioni su Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "Sviluppato da Orama Interactive"
+
+msgid "Website"
+msgstr "Sito web"
+
+msgid "Donate"
+msgstr "Dona"
+
+msgid "Developers"
+msgstr "Sviluppatori"
+
+msgid "Contributors"
+msgstr "Contributori"
+
+msgid "Donors"
+msgstr "Donatori"
+
+msgid "Development Team"
+msgstr "Team di sviluppo"
+
+msgid "Lead Programmer"
+msgstr "Lead Programmer"
+
+msgid "UI Designer"
+msgstr "UI Designer"
+
+msgid "GitHub Contributors"
+msgstr "Contributori su GitHub"
+
+msgid "Art by"
+msgstr "Arte di"
+
+msgid "untitled"
+msgstr "senza titolo"
+
+msgid "imported"
+msgstr "importato"
+
+msgid "copy"
+msgstr "copia"
+
+msgid "QUIT_LABEL"
+msgstr "Sei sicuro di voler uscire da Pixelorama?"
+
+msgid "Utility Tools"
+msgstr "Strumenti di utilità"
+
+msgid "RECTSELECT_HT"
+msgstr ""
+"Selezione Rettangolare\n"
+"\n"
+"R per il tasto sinistro del mouse\n"
+"Alt + R per il tasto destro del mouse\n"
+"\n"
+"Premi Shift per muovere il contenuto"
+
+msgid "COLORPICKER_HT"
+msgstr ""
+"Prelievo Colore\n"
+"Scegli un colore da un pixel dello sprite\n"
+"\n"
+"O per il tasto sinistro del mouse\n"
+"Alt + O per il tasto destro del mouse"
+
+msgid "Draw Tools"
+msgstr "Strumenti di disegno"
+
+msgid "PENCIL_HT"
+msgstr ""
+"Matita\n"
+"\n"
+"P per il tasto sinistro del mouse\n"
+"Alt + P per il tasto destro del mouse\n"
+"\n"
+"Tieni premuto Shift per fare una linea"
+
+msgid "ERASER_HT"
+msgstr ""
+"Gomma\n"
+"\n"
+"E per il tasto sinistro del mouse\n"
+"Alt + E per il tasto destro del mouse\n"
+"\n"
+"Tieni premuto Shift per fare una linea"
+
+msgid "BUCKET_HT"
+msgstr ""
+"Secchio\n"
+"\n"
+"B per il tasto sinistro del mouse\n"
+"Alt + B per il tasto destro del mouse"
+
+msgid "LD_HT"
+msgstr ""
+"Schiarisci/Scurisci\n"
+"\n"
+"U per il tasto sinistro del mouse\n"
+"Alt + U per il tasto destro del mouse"
+
+msgid "LEFTCOLOR_HT"
+msgstr "Scegli un colore per lo strumento sinistro"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "Scegli un colore per lo strumento destro"
+
+msgid "COLORSWITCH_HT"
+msgstr ""
+"Scambia i colori sinistro e destro\n"
+"(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr ""
+"Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
+
+msgid "Raw Mode"
+msgstr "Modalità Raw"
+
+msgid "Left tool options"
+msgstr "Opzioni dello strumento sinistro"
+
+msgid "Right tool options"
+msgstr "Opzioni dello strumento destro"
+
+msgid "Left pixel indicator"
+msgstr "Indicatore pixel strumento sinistro"
+
+msgid "LEFT_INDIC_HT"
+msgstr "Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando disegni"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
+
+msgid "Right pixel indicator"
+msgstr "Indicatore pixel strumento destro"
+
+msgid "Brush:"
+msgstr "Pennello:"
+
+msgid "BRUSH_HT"
+msgstr "Scegli un pennello"
+
+msgid "Brush: Pixel"
+msgstr "Pennello: Pixel"
+
+msgid "Brush: Circle"
+msgstr "Pennello: Cerchio"
+
+msgid "Brush: Filled Circle"
+msgstr "Pennello: Cerchio Pieno"
+
+msgid "Custom brush"
+msgstr "Pennello personalizzato"
+
+msgid "Brush size:"
+msgstr "Dimensione del pennello:"
+
+msgid "Brush color from"
+msgstr "Colore del pennello da"
+
+msgid "COLORFROM_HT"
+msgstr "0: Colore dal pennello stesso, 100: il colore selezionato"
+
+msgid "Fill area:"
+msgstr "Riempi l'area:"
+
+msgid "Area of the same color"
+msgstr "Area dello stesso colore"
+
+msgid "All pixels of the same color"
+msgstr "Tutti i pixel dello stesso colore"
+
+msgid "Lighten"
+msgstr "Schiarisci"
+
+msgid "Darken"
+msgstr "Scurisci"
+
+msgid "Amount:"
+msgstr "Quantità:"
+
+msgid "LDAMOUNT_HT"
+msgstr "Quantità di Schiarimento/Scurimento"
+
+msgid "Mirroring"
+msgstr "Speculare"
+
+msgid "Horizontal"
+msgstr "Orizzontale"
+
+msgid "HORIZMIRROR_HT"
+msgstr "Abilita disegno speculare orizzontale"
+
+msgid "VERTMIRROR_HT"
+msgstr "Abilita disegno speculare verticale"
+
+msgid "Vertical"
+msgstr "Verticale"
+
+msgid "Current frame:"
+msgstr "Frame corrente:"
+
+msgid "Current frame: 1/1"
+msgstr "Frame corrente: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr ""
+"Salta al primo frame\n"
+"(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr ""
+"Salta al frame precedente\n"
+"(Ctrl+Left)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr ""
+"Riproduci l'animazione al rovescio (dalla fine all'inizio)\n"
+"(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr ""
+"Riproduci l'animazione in avanti (dall'inizio alla fine)\n"
+"(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr ""
+"Vai al prossimo frame\n"
+"(Ctrl+Right)"
+
+msgid "LASTFRAME_HT"
+msgstr ""
+"Salta all'ultimo frame\n"
+"(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr ""
+"Quanti frame al secondo dovrebbe essere l'anteprima dell'animazione?\n"
+"Maggiori gli FPS, più veloce sarà l'animazione."
+
+msgid "No loop"
+msgstr "No loop"
+
+msgid "Cycle loop"
+msgstr "Loop ciclico"
+
+msgid "Ping-pong loop"
+msgstr "Ping-pong loop"
+
+msgid "Onion Skinning:"
+msgstr "Onion Skinning:"
+
+msgid "Past Frames"
+msgstr "Frame Passati"
+
+msgid "Future Frames"
+msgstr "Frame Futuri"
+
+msgid "Blue-Red Mode"
+msgstr "Modalità Blu-Rosso"
+
+msgid "Add a new frame"
+msgstr "Aggiungi un nuovo frame"
+
+msgid "Remove Frame"
+msgstr "Rimuovi Frame"
+
+msgid "Clone Frame"
+msgstr "Clona Frame"
+
+msgid "Move Left"
+msgstr "Muovi a sinistra"
+
+msgid "Move Right"
+msgstr "Muovi a destra"
+
+msgid "Layer"
+msgstr "Livello"
+
+msgid "Layers"
+msgstr "Livelli"
+
+msgid "LAYERNEW_HT"
+msgstr "Crea un nuovo livello"
+
+msgid "LAYERREMOVE_HT"
+msgstr "Rimuovi il livello corrente"
+
+msgid "LAYERUP_HT"
+msgstr "Sposta in su il livello corrente"
+
+msgid "LAYERDOWN_HT"
+msgstr "Sposta in giù il livello corrente"
+
+msgid "LAYERCLONE_HT"
+msgstr "Clona il livello corrente"
+
+msgid "LAYERMERGE_HT"
+msgstr "Unisci il livello corrente con quello sottostante"
+
+msgid "Opacity:"
+msgstr "Opacità:"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "Attiva"
+
+msgid "Palette"
+msgstr "Palette"
+
+msgid "Palettes"
+msgstr "Palette"
+
+msgid "NEWPALETTE_HT"
+msgstr "Aggiungi una nuova palette"
+
+msgid "EDITPALETTE_HT"
+msgstr "Modifica la palette selezionata"
+
+msgid "CHOOSEPALETTE_HT"
+msgstr "Scegli una palette"
+
+msgid "Undo: Draw"
+msgstr "Annulla: Disegno"
+
+msgid "Redo: Draw"
+msgstr "Ripeti: Disegno"
+
+msgid "Undo: Rectangle Select"
+msgstr "Annulla: Selezione rettangolare"
+
+msgid "Redo: Rectangle Select"
+msgstr "Ripeti: Selezione rettangolare"
+
+msgid "Undo: Scale"
+msgstr "Annulla: Scala"
+
+msgid "Redo: Scale"
+msgstr "Ripeti: Scala"
+
+msgid "Undo: Add Layer"
+msgstr "Annulla: Aggiungi livello"
+
+msgid "Redo: Add Layer"
+msgstr "Ripeti: Aggiungi livello"
+
+msgid "Undo: Remove Layer"
+msgstr "Annulla: Rimuovi livello"
+
+msgid "Redo: Remove Layer"
+msgstr "Ripeti: Rimuovi livello"
+
+msgid "Undo: Merge Layer"
+msgstr "Annulla: Unisci livello"
+
+msgid "Redo: Merge Layer"
+msgstr "Ripeti: Unisci livello"
+
+msgid "Undo: Change Layer Order"
+msgstr "Annulla: Cambia ordine livelli"
+
+msgid "Redo: Change Layer Order"
+msgstr "Ripeti: Cambia ordine livelli"
+
+msgid "Undo: Add Frame"
+msgstr "Annulla: Aggiungi Frame"
+
+msgid "Redo: Add Frame"
+msgstr "Ripeti: Aggiungi Frame"
+
+msgid "Undo: Remove Frame"
+msgstr "Annulla: Rimuovi Frame"
+
+msgid "Redo: Remove Frame"
+msgstr "Ripeti: Rimuovi Frame"
+
+msgid "Undo: Change Frame Order"
+msgstr "Annulla: Cambia ordine frame"
+
+msgid "Redo: Change Frame Order"
+msgstr "Ripeti: Cambia ordine frame"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Annulla: Elimina pennello personalizzato"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Ripeti: Elimina pennello personalizzato"
+
+msgid "Move Guide"
+msgstr "Muovi la guida"
+
+msgid "File saved"
+msgstr "File salvato"
+
+msgid "File exported"
+msgstr "File esportato"
+
+msgid "New Empty Palette"
+msgstr "Nuova palette vuota"
+
+msgid "Import Palette"
+msgstr "Importa Palette"
+
+msgid "Palette Name:"
+msgstr "Nome Palette:"
+
+msgid "Color Name:"
+msgstr "Nome Colore:"
+
+msgid "Create a new empty palette?"
+msgstr "Creare una nuova palette vuota?"
+
+msgid "Edit Palette"
+msgstr "Modifica Palette"
+
+msgid "Patrons:"
+msgstr ""
+
+msgid "Changes"
+msgstr "Cambiamenti"
+
+msgid "Platinum Sponsor"
+msgstr "Sponsor di Platino"
+
+msgid "Gold Sponsors"
+msgstr "Sponsor d'Oro"
+
+msgid "Platinum Sponsor Placeholder"
+msgstr "Platinum Sponsor Placeholder"
+
+msgid "Gold Sponsors Placeholder"
+msgstr "Gold Sponsors Placeholder"
+
+msgid "Don't show again"
+msgstr "Non mostrare di nuovo"
+
+msgid "Take this spot!"
+msgstr "Prendi questo posto!"
+
+#~ msgid "Don't show on the next startup"
+#~ msgstr "Non mostrare al prossimo avvio"
+
+#~ msgid "Language:"
+#~ msgstr "Lingua:"
+
+#~ msgid "SPLITSCREEN_HT"
+#~ msgstr ""
+#~ "Dividi lo schermo\n"
+#~ "\n"
+#~ "Mostra il secondo canvas"
+
+#~ msgid "SPLITSCREEN_HIDE_HT"
+#~ msgstr ""
+#~ "Dividi lo schermo\n"
+#~ "\n"
+#~ "Nascondi il secondo canvas"
