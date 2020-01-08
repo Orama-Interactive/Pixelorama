@@ -664,6 +664,15 @@ msgstr "顏色:"
 msgid "Create a new empty palette?"
 msgstr "新增空的色盤?"
 
+msgid "Error: Palette must have a valid name."
+msgstr ""
+
+msgid "Error: Palette named '%s' already exists!"
+msgstr ""
+
+msgid "Invalid Palette file!"
+msgstr ""
+
 msgid "Edit Palette"
 msgstr "編輯色盤"
 

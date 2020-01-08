@@ -674,6 +674,15 @@ msgstr "Farbnamen:"
 msgid "Create a new empty palette?"
 msgstr "Erstelle eine neue leere Palette"
 
+msgid "Error: Palette must have a valid name."
+msgstr ""
+
+msgid "Error: Palette named '%s' already exists!"
+msgstr ""
+
+msgid "Invalid Palette file!"
+msgstr ""
+
 msgid "Edit Palette"
 msgstr "Bearbeite Palette"
 

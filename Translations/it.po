@@ -367,7 +367,8 @@ msgstr ""
 
 msgid "COLORDEFAULTS_HT"
 msgstr ""
-"Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
+"Resetta i colori al loro stato originale (nero per sinistra, bianco per "
+"destra)"
 
 msgid "Raw Mode"
 msgstr "Modalità Raw"
@@ -382,10 +383,14 @@ msgid "Left pixel indicator"
 msgstr "Indicatore pixel strumento sinistro"
 
 msgid "LEFT_INDIC_HT"
-msgstr "Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando disegni"
+msgstr ""
+"Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando "
+"disegni"
 
 msgid "RIGHT_INDIC_HT"
-msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
+msgstr ""
+"Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando "
+"disegni"
 
 msgid "Right pixel indicator"
 msgstr "Indicatore pixel strumento destro"
@@ -664,6 +669,15 @@ msgstr "Nome Colore:"
 
 msgid "Create a new empty palette?"
 msgstr "Creare una nuova palette vuota?"
+
+msgid "Error: Palette must have a valid name."
+msgstr ""
+
+msgid "Error: Palette named '%s' already exists!"
+msgstr ""
+
+msgid "Invalid Palette file!"
+msgstr ""
 
 msgid "Edit Palette"
 msgstr "Modifica Palette"

@@ -569,19 +569,19 @@ msgid "LAYERVISIBILITY_HT"
 msgstr "Εναλλαγή της ορατότητας της στρώσης"
 
 msgid "Palette"
-msgstr "Παλέττα"
+msgstr "Παλέτα"
 
 msgid "Palettes"
-msgstr "Παλέττες"
+msgstr "Παλέτες"
 
 msgid "NEWPALETTE_HT"
-msgstr "Νέα παλέττα"
+msgstr "Νέα παλέτα"
 
 msgid "EDITPALETTE_HT"
-msgstr "Επεξεργασία παλέττας"
+msgstr "Επεξεργασία παλέτας"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr "Επιλογή παλέττας"
+msgstr "Επιλογή παλέτας"
 
 msgid "Undo: Draw"
 msgstr "Αναίρεση: Ζωγραφική"
@@ -659,22 +659,31 @@ msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
 
 msgid "New Empty Palette"
-msgstr "Νέα Κενή Παλέττα"
+msgstr "Νέα Κενή Παλέτα"
 
 msgid "Import Palette"
-msgstr "Εισαγωγή Παλέττας"
+msgstr "Εισαγωγή Παλέτας"
 
 msgid "Palette Name:"
-msgstr "Όνομα Παλέττας:"
+msgstr "Όνομα Παλέτας:"
 
 msgid "Color Name:"
 msgstr "Όνομα Χρώματος:"
 
 msgid "Create a new empty palette?"
-msgstr "Δημιουργία νέας κενής παλέττας;"
+msgstr "Δημιουργία νέας κενής παλέτας;"
+
+msgid "Error: Palette must have a valid name."
+msgstr "Σφάλμα: Η παλέτα πρέπει να έχει έγκυρο όνομα."
+
+msgid "Error: Palette named '%s' already exists!"
+msgstr "Σφάλμα: Η παλέτα με το όνομα '%s' υπάρχει ήδη!"
+
+msgid "Invalid Palette file!"
+msgstr "Μη έγκυρο αρχείο παλέτας!"
 
 msgid "Edit Palette"
-msgstr "Επεξεργασία Παλέττας"
+msgstr "Επεξεργασία Παλέτας"
 
 msgid "Patrons:"
 msgstr ""

@@ -54,7 +54,7 @@ func on_palette_import_file_selected(path : String) -> void:
 			on_palette_select(palette.name)
 			save_palette(palette.name, palette.name + ".json")
 		else:
-			Global.error_dialog.set_text("Palette named '" + palette.name + "' already exists")
+			Global.error_dialog.set_text(tr("Error: Palette named '%s' already exists!") % palette.name)
 			Global.error_dialog.popup_centered()
 	else:
 		Global.error_dialog.set_text("Invalid Palette file!")
@@ -82,9 +82,9 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 
 	# Check if new name is valid
 	if name.empty():
-		return "Error: Palette must have a valid name."
+		return tr("Error: Palette must have a valid name.")
 	if Global.palettes.has(name):
-		return "Error: Palette '" + name + "' already exists!"
+		return tr("Error: Palette named '%s' already exists!") % name
 
 	new_palette.name = name
 	# Check if source palette has data
