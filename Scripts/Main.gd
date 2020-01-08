@@ -767,10 +767,10 @@ func _on_LoopAnim_pressed() -> void:
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
 
-func _on_PlayForward_toggled(button_pressed) -> void:
+func _on_PlayForward_toggled(button_pressed : bool) -> void:
 	Global.play_backwards.pressed = false
 	if Global.canvases.size() == 1:
-		Global.play_forward.pressed = !button_pressed
+		Global.play_forward.pressed = false
 		return
 
 	if button_pressed:
@@ -780,10 +780,10 @@ func _on_PlayForward_toggled(button_pressed) -> void:
 	else:
 		Global.animation_timer.stop()
 
-func _on_PlayBackwards_toggled(button_pressed) -> void:
+func _on_PlayBackwards_toggled(button_pressed : bool) -> void:
 	Global.play_forward.pressed = false
 	if Global.canvases.size() == 1:
-		Global.play_backwards.pressed = !button_pressed
+		Global.play_backwards.pressed = false
 		return
 
 	if button_pressed:
