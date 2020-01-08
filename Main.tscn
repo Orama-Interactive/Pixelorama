@@ -1626,6 +1626,7 @@ columns = 5
 [node name="SplashDialog" parent="." instance=ExtResource( 59 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 60 )]
+window_title = "Please Confirm..."
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1663,17 +1664,20 @@ current_dir = "/home/marco/Pixelorama"
 current_path = "/home/marco/Pixelorama/"
 
 [node name="ScaleImage" parent="." instance=ExtResource( 63 )]
+window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 64 )]
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 65 )]
 visible = false
+window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 66 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+window_title = "Please Confirm..."
 resizable = true
 dialog_text = "QUIT_LABEL"
 

@@ -378,21 +378,17 @@ msgstr "Opzioni dello strumento sinistro"
 msgid "Right tool options"
 msgstr "Opzioni dello strumento destro"
 
-#, fuzzy
 msgid "Left pixel indicator"
-msgstr "Indicatore pixel sinistro"
+msgstr "Indicatore pixel strumento sinistro"
 
-#, fuzzy
 msgid "LEFT_INDIC_HT"
 msgstr "Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando disegni"
 
-#, fuzzy
 msgid "RIGHT_INDIC_HT"
 msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
 
-#, fuzzy
 msgid "Right pixel indicator"
-msgstr "Indicatore pixel destro"
+msgstr "Indicatore pixel strumento destro"
 
 msgid "Brush:"
 msgstr "Pennello:"
