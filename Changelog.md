@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [v0.6.1] - Unreleased
+
+### Added
+- Italian localization - thanks to Marco Galli!
+
+### Changed
+- More translatable strings, updates to Greek & Brazilian Portuguese (thanks to YeldhamDev) localizations.
+- The dark theme button is now pressed by default if the user hasn't saved a theme preference in the config file.
+- Added a VSplitContainer for Palettes and Layers.
+- Added a ScrollContainer for the palette buttons on the Edit Palette popup.
+- Made Palette .json files more readable, and made "comments" on top of the color data.
+- THe grid options are now being updated realtime when they're being changed from the preferences.
+
+### Fixed
+- Crash that occured when trying to delete contents of a selection, that were outside the canvas.
+- Fixed .gpl palettes not being imported correctly - Issue #112
+- Fixed crash that occured when pressing the play buttons on the timeline, on Godot 3.2 - Issue #111
+
 ## [v0.6] - 06-01-2020
 
 ### Added
