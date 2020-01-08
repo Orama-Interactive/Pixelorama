@@ -1,6 +1,8 @@
 # Pixelorama - your free and open-source sprite editor!
  Your free & open-source 2D sprite editor, made by Orama Interactive in the Godot Engine, using GDScript!
 
+[![Discord Server](https://discordapp.com/api/guilds/645793202393186339/embed.png)](https://discord.gg/GTMtr8s)
+ 
  [![Pixelorama's UI](https://static.wixstatic.com/media/cc6108_ccec89c37b3d425da4f03776160c859c~mv2.png)](https://www.youtube.com/watch?v=DULv-jzueRw&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=7)
 
 Current features as of version v0.6:

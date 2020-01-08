@@ -72,12 +72,13 @@ func import_gpl(path : String) -> Palette:
 				comments += line.trim_prefix('#') + '\n'
 				pass
 			elif line_number > 0 && line.length() >= 12:
-				var red : float = line.substr(0, 4).to_float() / 255.0
-				var green : float = line.substr(4, 4).to_float() / 255.0
-				var blue : float = line.substr(8, 4).to_float() / 255.0
-				var name : String = line.substr(12, line.length() - 12)
+				line = line.replace("\t", " ")
+				var color_data : PoolStringArray = line.split(" ", false, 4)
+				var red : float = color_data[0].to_float() / 255.0
+				var green : float = color_data[1].to_float() / 255.0
+				var blue : float = color_data[2].to_float() / 255.0
 				var color = Color(red, green, blue)
-				result.add_color(color, name)
+				result.add_color(color, color_data[3])
 			line_number += 1
 
 		if result:

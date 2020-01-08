@@ -172,12 +172,15 @@ func change_theme(ID : int) -> void:
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value
+	Global.canvas.update()
 
 func _on_GridHeightValue_value_changed(value : float) -> void:
 	Global.grid_height = value
+	Global.canvas.update()
 
 func _on_GridColor_color_changed(color : Color) -> void:
 	Global.grid_color = color
+	Global.canvas.update()
 
 func _on_GuideColor_color_changed(color : Color) -> void:
 	Global.guide_color = color

@@ -85,14 +85,14 @@ func _serialize() -> String:
 	var result = ""
 	var serialize_data : Dictionary = {
 		"name" : name,
-		"colors" : [],
 		"comments" : comments,
+		"colors" : [],
 		"editable" : editable
 	}
 	for color in colors:
 		serialize_data.colors.push_back(color.toDict())
 
-	result = JSON.print(serialize_data)
+	result = JSON.print(serialize_data, " ")
 
 	return result
 
