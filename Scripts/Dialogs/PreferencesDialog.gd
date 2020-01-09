@@ -6,6 +6,11 @@ onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
 onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
 
+onready var grid_width_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue"
+onready var grid_height_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue"
+onready var grid_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor"
+onready var guide_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GuideColor"
+
 func _ready() -> void:
 	for child in languages.get_children():
 		if child is Button:
@@ -22,6 +27,28 @@ func _ready() -> void:
 	else:
 		change_theme(0)
 		themes.get_child(1).pressed = true
+
+
+	# Set default values for Grid & Guide options
+	if Global.config_cache.has_section_key("preferences", "grid_size"):
+		var grid_size = Global.config_cache.get_value("preferences", "grid_size")
+		print(Global.grid_width)
+		Global.grid_width = int(grid_size.x)
+		Global.grid_height = int(grid_size.y)
+		grid_width_value.value = grid_size.x
+		grid_height_value.value = grid_size.y
+
+	if Global.config_cache.has_section_key("preferences", "grid_color"):
+		Global.grid_color = Global.config_cache.get_value("preferences", "grid_color")
+		grid_color.color = Global.grid_color
+
+	if Global.config_cache.has_section_key("preferences", "guide_color"):
+		Global.guide_color = Global.config_cache.get_value("preferences", "guide_color")
+		for canvas in Global.canvases:
+			for guide in canvas.get_children():
+				if guide is Guide:
+					guide.default_color = Global.guide_color
+		guide_color.color = Global.guide_color
 
 func _on_PreferencesDialog_about_to_show() -> void:
 	var root := tree.create_item()
@@ -173,14 +200,20 @@ func change_theme(ID : int) -> void:
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value
 	Global.canvas.update()
+	Global.config_cache.set_value("preferences", "grid_size", Vector2(value, grid_height_value.value))
+	Global.config_cache.save("user://cache.ini")
 
 func _on_GridHeightValue_value_changed(value : float) -> void:
 	Global.grid_height = value
 	Global.canvas.update()
+	Global.config_cache.set_value("preferences", "grid_size", Vector2(grid_width_value.value, value))
+	Global.config_cache.save("user://cache.ini")
 
 func _on_GridColor_color_changed(color : Color) -> void:
 	Global.grid_color = color
 	Global.canvas.update()
+	Global.config_cache.set_value("preferences", "grid_color", color)
+	Global.config_cache.save("user://cache.ini")
 
 func _on_GuideColor_color_changed(color : Color) -> void:
 	Global.guide_color = color
@@ -188,3 +221,5 @@ func _on_GuideColor_color_changed(color : Color) -> void:
 		for guide in canvas.get_children():
 			if guide is Guide:
 				guide.default_color = color
+	Global.config_cache.set_value("preferences", "guide_color", color)
+	Global.config_cache.save("user://cache.ini")
