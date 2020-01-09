@@ -24,6 +24,7 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
 	contributors.create_item(contributor_root).set_text(0, "  huskee")
+	contributors.create_item(contributor_root).set_text(0, "  Gaarco")
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms")

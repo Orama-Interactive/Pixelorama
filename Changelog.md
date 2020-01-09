@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Italian localization - thanks to Marco Galli!
+- In addition to the middle mouse button, you can now use `Space` to pan around the canvas.
 
 ### Changed
 - More translatable strings, updates to Greek & Brazilian Portuguese (thanks to YeldhamDev) localizations.
@@ -14,10 +15,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added a VSplitContainer for Palettes and Layers.
 - Added a ScrollContainer for the palette buttons on the Edit Palette popup.
 - Made Palette .json files more readable, and made "comments" on top of the color data.
-- THe grid options are now being updated realtime when they're being changed from the preferences.
+- The grid options are now being updated realtime when they're being changed from the preferences.
 
 ### Fixed
-- Crash that occured when trying to delete contents of a selection, that were outside the canvas.
+- Fixed crash that occured when trying to delete contents of a selection, that were outside the canvas.
 - Fixed .gpl palettes not being imported correctly - Issue #112
 - Fixed crash that occured when pressing the play buttons on the timeline, on Godot 3.2 - Issue #111
 
