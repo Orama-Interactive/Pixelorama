@@ -95,13 +95,6 @@ func _input(event : InputEvent) -> void:
 	if Global.current_frame == frame && Global.has_focus:
 		update()
 
-	# We don't want to draw when pressing space, because it's used for panning
-	if Input.is_action_pressed("space"):
-		previous_mouse_pos = current_pixel
-		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
-		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
-		return
-
 	sprite_changed_this_frame = false
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
