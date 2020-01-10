@@ -32,8 +32,10 @@ func _ready() -> void:
 	# The sprite itself
 	if layers.empty():
 		var sprite := Image.new()
-		if Global.config_cache.has_section_key("preferences", "default_width") && Global.config_cache.has_section_key("preferences", "default_height"):
-			size = Vector2(Global.config_cache.get_value("preferences", "default_width"), Global.config_cache.get_value("preferences", "default_height"))
+		if Global.is_default_image:
+			if Global.config_cache.has_section_key("preferences", "default_width") && Global.config_cache.has_section_key("preferences", "default_height"):
+				size = Vector2(Global.config_cache.get_value("preferences", "default_width"), Global.config_cache.get_value("preferences", "default_height"))
+				Global.is_default_image = !Global.is_default_image
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		sprite.lock()
 
