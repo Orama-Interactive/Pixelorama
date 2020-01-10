@@ -32,7 +32,6 @@ func _ready() -> void:
 	# Set default values for Grid & Guide options
 	if Global.config_cache.has_section_key("preferences", "grid_size"):
 		var grid_size = Global.config_cache.get_value("preferences", "grid_size")
-		print(Global.grid_width)
 		Global.grid_width = int(grid_size.x)
 		Global.grid_height = int(grid_size.y)
 		grid_width_value.value = grid_size.x

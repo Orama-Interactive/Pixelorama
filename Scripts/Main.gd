@@ -455,8 +455,12 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	OS.set_window_title(path.get_file() + " - Pixelorama")
 
 
-func _on_SaveSprite_file_selected(path) -> void:
+func _on_SaveSprite_file_selected(path : String) -> void:
 	current_save_path = path
+	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
+	$ExportSprites.current_path = $ExportSprites.current_export_path
+	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
+	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
 	if err == 0:
@@ -521,6 +525,7 @@ func clear_canvases() -> void:
 	Global.canvases.clear()
 	current_save_path = ""
 	$ExportSprites.current_export_path = ""
+	file_menu.set_item_text(2, "Save")
 	file_menu.set_item_text(5, "Export PNG...")
 	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 	Global.undo_redo.clear_history(false)
