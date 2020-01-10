@@ -711,13 +711,13 @@ msgid "Take this spot!"
 msgstr "Peque este lugar!"
 
 msgid "Image Options"
-msgstr "Image Options"
+msgstr ""
 
 msgid "Default Width:"
-msgstr "Default Width"
+msgstr ""
 
 msgid "Default Height:"
-msgstr "Default Height:"
+msgstr ""
 
 msgid "Default Fill Color:"
-msgstr "Default Fill Color:"
+msgstr ""
