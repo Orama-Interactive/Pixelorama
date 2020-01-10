@@ -743,3 +743,15 @@ msgstr ""
 #~ "Podzielenie ekranu\n"
 #~ "\n"
 #~ "Ukrywa drugie płótno"
+
+msgid "Image Options"
+msgstr ""
+
+msgid "Default Width:"
+msgstr ""
+
+msgid "Default Height:"
+msgstr ""
+
+msgid "Default Fill Color:"
+msgstr ""

@@ -727,3 +727,15 @@ msgstr "Take this spot!"
 #~ "Split screen\n"
 #~ "\n"
 #~ "Hide second canvas"
+
+msgid "Image Options"
+msgstr "Image Options"
+
+msgid "Default Width:"
+msgstr "Default Width:"
+
+msgid "Default Height:"
+msgstr "Default Height:"
+
+msgid "Default Fill Color:"
+msgstr "Default Fill Color:"

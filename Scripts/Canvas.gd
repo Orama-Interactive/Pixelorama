@@ -5,6 +5,7 @@ var layers := []
 var current_layer_index := 0
 var location := Vector2.ZERO
 var size := Vector2(64, 64)
+var fill_color := Color(0, 0, 0, 0)
 var frame := 0 setget frame_changed
 var frame_button : VBoxContainer
 var frame_texture_rect : TextureRect
@@ -32,7 +33,17 @@ func _ready() -> void:
 	# The sprite itself
 	if layers.empty():
 		var sprite := Image.new()
+		if Global.is_default_image:
+			if Global.config_cache.has_section_key("preferences", "default_width"):
+				size.x = Global.config_cache.get_value("preferences", "default_width")
+			if Global.config_cache.has_section_key("preferences", "default_height"):
+				size.y = Global.config_cache.get_value("preferences", "default_height")
+			if Global.config_cache.has_section_key("preferences", "default_fill_color"):
+				fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
+			Global.is_default_image = !Global.is_default_image
+			
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		sprite.fill(fill_color)
 		sprite.lock()
 
 		var tex := ImageTexture.new()

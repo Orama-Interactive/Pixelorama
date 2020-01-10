@@ -754,3 +754,15 @@ msgstr ""
 #~ "Écran partagé\n"
 #~ "\n"
 #~ "Cacher le second canevas"
+
+msgid "Image Options"
+msgstr ""
+
+msgid "Default Width:"
+msgstr ""
+
+msgid "Default Height:"
+msgstr ""
+
+msgid "Default Fill Color:"
+msgstr ""

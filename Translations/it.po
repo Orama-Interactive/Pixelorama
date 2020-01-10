@@ -734,3 +734,15 @@ msgstr "Prendi questo posto!"
 #~ "Dividi lo schermo\n"
 #~ "\n"
 #~ "Nascondi il secondo canvas"
+
+msgid "Image Options"
+msgstr "Opzioni dell'immagine:"
+
+msgid "Default Width:"
+msgstr "Larghezza default:"
+
+msgid "Default Height:"
+msgstr "Altezza default:"
+
+msgid "Default Fill Color:"
+msgstr "Riempimento default:"

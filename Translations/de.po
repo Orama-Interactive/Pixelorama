@@ -739,3 +739,15 @@ msgstr ""
 #~ "Geteilter Bildschirm\n"
 #~ "\n"
 #~ "Verstecke zweite Leinwand"
+
+msgid "Image Options"
+msgstr ""
+
+msgid "Default Width:"
+msgstr ""
+
+msgid "Default Height:"
+msgstr ""
+
+msgid "Default Fill Color:"
+msgstr ""

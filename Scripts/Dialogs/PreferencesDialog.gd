@@ -5,6 +5,11 @@ onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxCo
 onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
 onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
+onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
+
+onready var default_width_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth
+onready var default_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight
+onready var default_fill_color = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor
 
 onready var grid_width_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue"
 onready var grid_height_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue"
@@ -28,7 +33,6 @@ func _ready() -> void:
 		change_theme(0)
 		themes.get_child(1).pressed = true
 
-
 	# Set default values for Grid & Guide options
 	if Global.config_cache.has_section_key("preferences", "grid_size"):
 		var grid_size = Global.config_cache.get_value("preferences", "grid_size")
@@ -48,12 +52,29 @@ func _ready() -> void:
 				if guide is Guide:
 					guide.default_color = Global.guide_color
 		guide_color.color = Global.guide_color
+	
+	# Set default values for Image
+	if Global.config_cache.has_section_key("preferences", "default_width"):
+		var default_width = Global.config_cache.get_value("preferences", "default_width")
+		Global.default_image_width = int(default_width)
+		default_width_value.value = Global.default_image_width
+
+	if Global.config_cache.has_section_key("preferences", "default_height"):
+		var default_height = Global.config_cache.get_value("preferences", "default_height")
+		Global.default_image_height = int(default_height)
+		default_height_value.value = Global.default_image_height
+	
+	if Global.config_cache.has_section_key("preferences", "default_fill_color"):
+		var fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
+		Global.default_fill_color = fill_color
+		default_fill_color.color = Global.default_fill_color
 
 func _on_PreferencesDialog_about_to_show() -> void:
 	var root := tree.create_item()
 	var language_button := tree.create_item(root)
 	var theme_button := tree.create_item(root)
 	var grid_button := tree.create_item(root)
+	var image_button := tree.create_item(root)
 
 	language_button.set_text(0, "  " + tr("Language"))
 	# We use metadata to avoid being affected by translations
@@ -63,6 +84,8 @@ func _on_PreferencesDialog_about_to_show() -> void:
 	theme_button.set_metadata(0, "Themes")
 	grid_button.set_text(0, "  " + tr("Guides & Grid"))
 	grid_button.set_metadata(0, "Guides & Grid")
+	image_button.set_text(0, "  " + tr("Image"))
+	image_button.set_metadata(0, "Image")
 
 
 func _on_PreferencesDialog_popup_hide() -> void:
@@ -78,6 +101,8 @@ func _on_Tree_item_selected() -> void:
 		themes.visible = true
 	elif "Guides & Grid" in selected:
 		grid_guides.visible = true
+	elif "Image" in selected:
+		image.visible = true
 
 func _on_Language_pressed(button : Button) -> void:
 	var index := 0
@@ -222,3 +247,19 @@ func _on_GuideColor_color_changed(color : Color) -> void:
 				guide.default_color = color
 	Global.config_cache.set_value("preferences", "guide_color", color)
 	Global.config_cache.save("user://cache.ini")
+	
+func _on_ImageDefaultWidth_value_changed(value: float) -> void:
+	Global.default_image_width = value
+	Global.config_cache.set_value("preferences", "default_width", value)
+	Global.config_cache.save("user://cache.ini")
+
+func _on_ImageDefaultHeight_value_changed(value: float) -> void:
+	Global.default_image_height = value
+	Global.config_cache.set_value("preferences", "default_height", value)
+	Global.config_cache.save("user://cache.ini")
+	
+func _on_DefaultBackground_color_changed(color: Color) -> void:
+	Global.default_fill_color = color
+	Global.config_cache.set_value("preferences", "default_fill_color", color)
+	Global.config_cache.save("user://cache.ini")
+

@@ -654,3 +654,15 @@ msgstr ""
 
 msgid "Take this spot!"
 msgstr ""
+
+msgid "Image Options"
+msgstr ""
+
+msgid "Default Width:"
+msgstr ""
+
+msgid "Default Height:"
+msgstr ""
+
+msgid "Default Fill Color:"
+msgstr ""

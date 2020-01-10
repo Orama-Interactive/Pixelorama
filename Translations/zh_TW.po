@@ -729,3 +729,15 @@ msgstr ""
 #~ "分裂畫面\n"
 #~ "\n"
 #~ "顯示一張畫布"
+
+msgid "Image Options"
+msgstr ""
+
+msgid "Default Width:"
+msgstr ""
+
+msgid "Default Height:"
+msgstr ""
+
+msgid "Default Fill Color:"
+msgstr ""

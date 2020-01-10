@@ -736,3 +736,15 @@ msgstr "Πάρτε αυτή τη θέση!"
 #~ "Διπλή οθόνη\n"
 #~ "\n"
 #~ "Απόκρυψη δεύτερου καμβάf"
+
+msgid "Image Options"
+msgstr "Επιλογές εικόνας"
+
+msgid "Default Width:"
+msgstr "Προεπιλεγμένο πλάτος:"
+
+msgid "Default Height:"
+msgstr "Προεπιλεγμένο ύψος:"
+
+msgid "Default Fill Color:"
+msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
