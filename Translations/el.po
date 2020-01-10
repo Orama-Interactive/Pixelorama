@@ -729,13 +729,13 @@ msgstr "Πάρτε αυτή τη θέση!"
 #~ "Απόκρυψη δεύτερου καμβάf"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Επιλογές εικόνας"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Προεπιλεγμένο πλάτος:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Προεπιλεγμένο ύψος:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
