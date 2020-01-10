@@ -24,6 +24,12 @@ var image_clipboard : Image
 # warning-ignore:unused_class_variable
 var theme_type := "Dark"
 # warning-ignore:unused_class_variable
+var default_image_width := 32
+# warning-ignore:unused_class_variable
+var default_image_height := 32
+# warning-ignore:unused_class_variable
+var default_background := Color(0, 0, 0, 0)
+# warning-ignore:unused_class_variable
 var grid_width := 1
 # warning-ignore:unused_class_variable
 var grid_height := 1

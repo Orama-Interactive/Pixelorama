@@ -5,6 +5,7 @@ onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxCo
 onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
 onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
+onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
 
 func _ready() -> void:
 	for child in languages.get_children():
@@ -28,6 +29,7 @@ func _on_PreferencesDialog_about_to_show() -> void:
 	var language_button := tree.create_item(root)
 	var theme_button := tree.create_item(root)
 	var grid_button := tree.create_item(root)
+	var image_button := tree.create_item(root)
 
 	language_button.set_text(0, "  " + tr("Language"))
 	# We use metadata to avoid being affected by translations
@@ -37,6 +39,8 @@ func _on_PreferencesDialog_about_to_show() -> void:
 	theme_button.set_metadata(0, "Themes")
 	grid_button.set_text(0, "  " + tr("Guides & Grid"))
 	grid_button.set_metadata(0, "Guides & Grid")
+	image_button.set_text(0, "  " + tr("Image"))
+	image_button.set_metadata(0, "Image")
 
 
 func _on_PreferencesDialog_popup_hide() -> void:
@@ -52,6 +56,8 @@ func _on_Tree_item_selected() -> void:
 		themes.visible = true
 	elif "Guides & Grid" in selected:
 		grid_guides.visible = true
+	elif "Image" in selected:
+		image.visible = true
 
 func _on_Language_pressed(button : Button) -> void:
 	var index := 0
@@ -188,3 +194,12 @@ func _on_GuideColor_color_changed(color : Color) -> void:
 		for guide in canvas.get_children():
 			if guide is Guide:
 				guide.default_color = color
+
+func _on_ImageDefaultWidth_value_changed(value: float) -> void:
+	Global.default_image_width = value
+
+func _on_ImageDefaultHeight_value_changed(value: float) -> void:
+	Global.default_image_height = value
+
+func _on_DefaultBackground_color_changed(color: Color) -> void:
+	Global.default_background = color
