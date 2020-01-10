@@ -559,7 +559,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.BRUSH_TYPES.FILE || Global.current_left_brush_type == Global.BRUSH_TYPES.CUSTOM:
+			if Global.current_left_brush_type == Global.BRUSH_TYPES.FILE || Global.current_left_brush_type == Global.BRUSH_TYPES.CUSTOM || Global.current_left_brush_type == Global.BRUSH_TYPES.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
@@ -584,7 +584,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.BRUSH_TYPES.FILE || Global.current_right_brush_type == Global.BRUSH_TYPES.CUSTOM:
+			if Global.current_right_brush_type == Global.BRUSH_TYPES.FILE || Global.current_right_brush_type == Global.BRUSH_TYPES.CUSTOM || Global.current_right_brush_type == Global.BRUSH_TYPES.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true

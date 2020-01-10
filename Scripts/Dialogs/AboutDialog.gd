@@ -28,6 +28,7 @@ func _ready() -> void:
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms")
+	donors.create_item(donors_root).set_text(0, "  Mike King")
 
 func _on_AboutDialog_about_to_show() -> void:
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
