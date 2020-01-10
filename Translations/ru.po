@@ -731,3 +731,15 @@ msgstr ""
 #~ "Разделить экран\n"
 #~ "\n"
 #~ "Скрыть второй холст"
+
+msgid "Image Options"
+msgstr "Image Options"
+
+msgid "Default Width:"
+msgstr "Default Width"
+
+msgid "Default Height:"
+msgstr "Default Height:"
+
+msgid "Default Fill Color:"
+msgstr "Default Fill Color:"

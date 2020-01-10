@@ -32,6 +32,8 @@ func _ready() -> void:
 	# The sprite itself
 	if layers.empty():
 		var sprite := Image.new()
+		if Global.config_cache.has_section_key("preferences", "default_width") && Global.config_cache.has_section_key("preferences", "default_height"):
+			size = Vector2(Global.config_cache.get_value("preferences", "default_width"), Global.config_cache.get_value("preferences", "default_height"))
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		sprite.lock()
 
@@ -91,11 +93,11 @@ func _input(event : InputEvent) -> void:
 		else:
 			return
 
+	current_pixel = get_local_mouse_position() + location
 	if Global.current_frame == frame && Global.has_focus:
 		update()
 
 	sprite_changed_this_frame = false
-	current_pixel = get_local_mouse_position() + location
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()

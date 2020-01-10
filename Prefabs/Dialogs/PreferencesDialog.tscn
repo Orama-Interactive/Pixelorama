@@ -257,7 +257,7 @@ margin_bottom = 618.0
 margin_right = 205.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
-text = "Image options"
+text = "Image Options"
 
 [node name="ImageOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_top = 32.0
@@ -271,7 +271,7 @@ columns = 2
 margin_top = 5.0
 margin_right = 92.0
 margin_bottom = 19.0
-text = "Default width:"
+text = "Default Width:"
 
 [node name="ImageDefaultWidth" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
 margin_left = 82.0
@@ -286,7 +286,7 @@ suffix = "px"
 margin_top = 5.0
 margin_right = 96.0
 margin_bottom = 19.0
-text = "Default height:"
+text = "Default Height:"
 
 [node name="ImageDefaultHeight" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
 margin_left = 82.0
@@ -297,13 +297,13 @@ max_value = 16384.0
 value = 32.0
 suffix = "px"
 
-[node name="DefaultBackgroundLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
+[node name="DefaultFillColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
 margin_top = 5.0
 margin_right = 96.0
 margin_bottom = 19.0
-text = "Default background:"
+text = "Default Fill Color:"
 
-[node name="DefaultBackground" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
+[node name="DefaultFillColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
 margin_left = 82.0
 margin_top = 56.0
 margin_right = 156.0
@@ -319,4 +319,4 @@ color = Color( 0, 0, 0, 0 )
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GuideColor" to="." method="_on_GuideColor_color_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth" to="." method="_on_ImageDefaultWidth_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight" to="." method="_on_ImageDefaultHeight_value_changed"]
-[connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultBackground" to="." method="_on_DefaultBackground_color_changed"]
+[connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor" to="." method="_on_DefaultBackground_color_changed"]

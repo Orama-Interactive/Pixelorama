@@ -727,3 +727,15 @@ msgstr "Πάρτε αυτή τη θέση!"
 #~ "Διπλή οθόνη\n"
 #~ "\n"
 #~ "Απόκρυψη δεύτερου καμβάf"
+
+msgid "Image Options"
+msgstr ""
+
+msgid "Default Width:"
+msgstr ""
+
+msgid "Default Height:"
+msgstr ""
+
+msgid "Default Fill Color:"
+msgstr ""
