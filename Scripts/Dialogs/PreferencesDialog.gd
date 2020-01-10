@@ -54,12 +54,14 @@ func _ready() -> void:
 		guide_color.color = Global.guide_color
 	
 	# Set default values for Image
-	if Global.config_cache.has_section_key("preferences", "default_width") && Global.config_cache.has_section_key("preferences", "default_height"):
+	if Global.config_cache.has_section_key("preferences", "default_width"):
 		var default_width = Global.config_cache.get_value("preferences", "default_width")
-		var default_height = Global.config_cache.get_value("preferences", "default_height")
 		Global.default_image_width = int(default_width)
-		Global.default_image_height = int(default_height)
 		default_width_value.value = Global.default_image_width
+
+	if Global.config_cache.has_section_key("preferences", "default_height"):
+		var default_height = Global.config_cache.get_value("preferences", "default_height")
+		Global.default_image_height = int(default_height)
 		default_height_value.value = Global.default_image_height
 	
 	if Global.config_cache.has_section_key("preferences", "default_fill_color"):
