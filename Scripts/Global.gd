@@ -26,9 +26,9 @@ var theme_type := "Dark"
 # warning-ignore:unused_class_variable
 var is_default_image := true
 # warning-ignore:unused_class_variable
-var default_image_width := 32
+var default_image_width := 64
 # warning-ignore:unused_class_variable
-var default_image_height := 32
+var default_image_height := 64
 # warning-ignore:unused_class_variable
 var default_fill_color := Color(0, 0, 0, 0)
 # warning-ignore:unused_class_variable

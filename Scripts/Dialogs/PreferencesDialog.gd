@@ -52,7 +52,7 @@ func _ready() -> void:
 				if guide is Guide:
 					guide.default_color = Global.guide_color
 		guide_color.color = Global.guide_color
-	
+
 	# Set default values for Image
 	if Global.config_cache.has_section_key("preferences", "default_width"):
 		var default_width = Global.config_cache.get_value("preferences", "default_width")
@@ -63,7 +63,7 @@ func _ready() -> void:
 		var default_height = Global.config_cache.get_value("preferences", "default_height")
 		Global.default_image_height = int(default_height)
 		default_height_value.value = Global.default_image_height
-	
+
 	if Global.config_cache.has_section_key("preferences", "default_fill_color"):
 		var fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
 		Global.default_fill_color = fill_color
@@ -247,7 +247,7 @@ func _on_GuideColor_color_changed(color : Color) -> void:
 				guide.default_color = color
 	Global.config_cache.set_value("preferences", "guide_color", color)
 	Global.config_cache.save("user://cache.ini")
-	
+
 func _on_ImageDefaultWidth_value_changed(value: float) -> void:
 	Global.default_image_width = value
 	Global.config_cache.set_value("preferences", "default_width", value)
@@ -257,7 +257,7 @@ func _on_ImageDefaultHeight_value_changed(value: float) -> void:
 	Global.default_image_height = value
 	Global.config_cache.set_value("preferences", "default_height", value)
 	Global.config_cache.save("user://cache.ini")
-	
+
 func _on_DefaultBackground_color_changed(color: Color) -> void:
 	Global.default_fill_color = color
 	Global.config_cache.set_value("preferences", "default_fill_color", color)

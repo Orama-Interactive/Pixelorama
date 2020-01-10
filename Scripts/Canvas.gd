@@ -41,7 +41,7 @@ func _ready() -> void:
 			if Global.config_cache.has_section_key("preferences", "default_fill_color"):
 				fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
 			Global.is_default_image = !Global.is_default_image
-			
+
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		sprite.fill(fill_color)
 		sprite.lock()

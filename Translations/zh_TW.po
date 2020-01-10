@@ -186,7 +186,7 @@ msgid "Trilinear"
 msgstr "三線性"
 
 msgid "Language"
-msgstr "語言:"
+msgstr "語言"
 
 msgid "Themes"
 msgstr "皮膚"
@@ -195,7 +195,7 @@ msgid "Guides & Grid"
 msgstr "輔助線與格線"
 
 msgid "Language options"
-msgstr "語言:"
+msgstr "語言"
 
 msgid "Theme options"
 msgstr "格線設定"
@@ -207,7 +207,7 @@ msgid "Color:"
 msgstr "顏色:"
 
 msgid "Guide color:"
-msgstr "輔助線顏色"
+msgstr "輔助線顏色:"
 
 msgid "System Language"
 msgstr "系統語言"
