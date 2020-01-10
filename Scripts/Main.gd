@@ -455,8 +455,12 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	OS.set_window_title(path.get_file() + " - Pixelorama")
 
 
-func _on_SaveSprite_file_selected(path) -> void:
+func _on_SaveSprite_file_selected(path : String) -> void:
 	current_save_path = path
+	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
+	$ExportSprites.current_path = $ExportSprites.current_export_path
+	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
+	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
 	if err == 0:
@@ -521,6 +525,7 @@ func clear_canvases() -> void:
 	Global.canvases.clear()
 	current_save_path = ""
 	$ExportSprites.current_export_path = ""
+	file_menu.set_item_text(2, "Save")
 	file_menu.set_item_text(5, "Export PNG...")
 	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
 	Global.undo_redo.clear_history(false)
@@ -554,7 +559,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.BRUSH_TYPES.FILE || Global.current_left_brush_type == Global.BRUSH_TYPES.CUSTOM:
+			if Global.current_left_brush_type == Global.BRUSH_TYPES.FILE || Global.current_left_brush_type == Global.BRUSH_TYPES.CUSTOM || Global.current_left_brush_type == Global.BRUSH_TYPES.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
@@ -579,7 +584,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.BRUSH_TYPES.FILE || Global.current_right_brush_type == Global.BRUSH_TYPES.CUSTOM:
+			if Global.current_right_brush_type == Global.BRUSH_TYPES.FILE || Global.current_right_brush_type == Global.BRUSH_TYPES.CUSTOM || Global.current_right_brush_type == Global.BRUSH_TYPES.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true

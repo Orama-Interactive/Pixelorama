@@ -675,13 +675,13 @@ msgid "Create a new empty palette?"
 msgstr "Criar uma nova paleta vazia?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Erro: Paleta deve ter um nome válido."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Erro: Paleta com o nome '%s' já existe!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Arquivo de Paleta inválido!"
 
 msgid "Edit Palette"
 msgstr "Editar Paleta"
