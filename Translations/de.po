@@ -447,6 +447,17 @@ msgstr "Menge:"
 msgid "LDAMOUNT_HT"
 msgstr "Erhellen/Verdunkeln Menge"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "Farbe:"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "Rechte Werkzeugoptionen"
+
 msgid "Mirroring"
 msgstr "Spiegeln"
 

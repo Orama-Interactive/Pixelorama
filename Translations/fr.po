@@ -464,6 +464,17 @@ msgstr "Quantité :"
 msgid "LDAMOUNT_HT"
 msgstr "Quantité d'éclaircissement/assombrissement"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "Couleur :"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "Options de l'outil droit"
+
 msgid "Mirroring"
 msgstr "Miroir"
 

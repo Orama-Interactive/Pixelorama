@@ -437,6 +437,17 @@ msgstr "程度:"
 msgid "LDAMOUNT_HT"
 msgstr "變亮或變暗的程度"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "顏色:"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "右鍵工具選項"
+
 msgid "Mirroring"
 msgstr "鏡像"
 

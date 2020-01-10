@@ -446,6 +446,15 @@ msgstr "Ποσό:"
 msgid "LDAMOUNT_HT"
 msgstr "Ποσό φωτίσματος ή σκουρήματος"
 
+msgid "Pick for:"
+msgstr "Επιλογή για το:"
+
+msgid "Left Color"
+msgstr "Αριστερό Χρώμα"
+
+msgid "Right Color"
+msgstr "Δεξί Χρώμα"
+
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
 

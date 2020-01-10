@@ -443,6 +443,17 @@ msgstr "Quantità:"
 msgid "LDAMOUNT_HT"
 msgstr "Quantità di Schiarimento/Scurimento"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "Colore:"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "Opzioni dello strumento destro"
+
 msgid "Mirroring"
 msgstr "Speculare"
 

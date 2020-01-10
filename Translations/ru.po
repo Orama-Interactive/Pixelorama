@@ -452,6 +452,17 @@ msgstr "Кол-во:"
 msgid "LDAMOUNT_HT"
 msgstr "Интенсивность Высветления/Затемнения"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "Цвет:"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "Настройки правого инструмента"
+
 msgid "Mirroring"
 msgstr "Отразить зеркально"
 

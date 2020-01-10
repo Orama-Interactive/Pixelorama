@@ -572,6 +572,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_size_container.visible = true
 			Global.left_ld_container.visible = true
 			Global.left_mirror_container.visible = true
+		elif current_action == "ColorPicker":
+			Global.left_colorpicker_container.visible = true
 
 	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
 		Global.current_right_tool = current_action
@@ -597,6 +599,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_size_container.visible = true
 			Global.right_ld_container.visible = true
 			Global.right_mirror_container.visible = true
+		elif current_action == "ColorPicker":
+			Global.right_colorpicker_container.visible = true
 
 	for t in tools:
 		var tool_name : String = t[0].name
@@ -925,6 +929,12 @@ func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
 	Global.right_ld_amount_slider.value = value
 	Global.right_ld_amount_spinbox.value = value
 
+func _on_LeftForColorOptions_item_selected(ID : int) -> void:
+	Global.left_color_picker_for = ID
+
+func _on_RightForColorOptions_item_selected(ID : int) -> void:
+	Global.right_color_picker_for = ID
+
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed
 func _on_LeftVerticalMirroring_toggled(button_pressed) -> void:
@@ -947,3 +957,4 @@ func _on_QuitDialog_confirmed() -> void:
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
+

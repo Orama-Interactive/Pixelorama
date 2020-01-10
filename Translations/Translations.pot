@@ -397,6 +397,15 @@ msgstr ""
 msgid "LDAMOUNT_HT"
 msgstr ""
 
+msgid "Pick for:"
+msgstr ""
+
+msgid "Left Color"
+msgstr ""
+
+msgid "Right Color"
+msgstr ""
+
 msgid "Mirroring"
 msgstr ""
 

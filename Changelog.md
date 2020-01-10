@@ -6,16 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.6.1] - Unreleased
 
 ### Added
-- Italian localization - thanks to Marco Galli!
+- Italian translation - thanks to Marco Galli!
 - In addition to the middle mouse button, you can now use `Space` to pan around the canvas.
+- The ability to choose for which color the color picker does its job, the left or the right. (Issue #115)
 
 ### Changed
 - When saving a .pxo file, the file path (along with the file name) gets remembered by the Export PNG file dialog path. (Issue #114)
-- More translatable strings, updates to Greek & Brazilian Portuguese (thanks to YeldhamDev) localizations.
+- More translatable strings, updates to Greek & Brazilian Portuguese (thanks to YeldhamDev) translations.
 - The dark theme button is now pressed by default if the user hasn't saved a theme preference in the config file.
-- Added a VSplitContainer for Palettes and Layers.
+- Added a VSplitContainer for the tools and their options, and another one for Palettes and Layers.
+- Made minor changes to the UI of tool options, including a ScrollContainer for them.
 - Added a ScrollContainer for the palette buttons on the Edit Palette popup.
-- Made Palette .json files more readable, and made "comments" on top of the color data.
+- Made Palette .json files more readable, and placed "comments" on top of the color data.
 - The grid options are now being updated realtime when they're being changed from the preferences, and they are also being saved in the config cache file.
 
 ### Fixed

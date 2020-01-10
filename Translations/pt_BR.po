@@ -447,6 +447,17 @@ msgstr "Quantidade:"
 msgid "LDAMOUNT_HT"
 msgstr "Quantidade de iluminação/escurecimento:"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "Cor:"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "Opções da ferramente direita"
+
 msgid "Mirroring"
 msgstr "Espelhamento"
 

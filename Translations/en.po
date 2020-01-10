@@ -438,6 +438,15 @@ msgstr "Amount:"
 msgid "LDAMOUNT_HT"
 msgstr "Lighten/Darken amount"
 
+msgid "Pick for:"
+msgstr "Pick for:"
+
+msgid "Left Color"
+msgstr "Left Color"
+
+msgid "Right Color"
+msgstr "Right Color"
+
 msgid "Mirroring"
 msgstr "Mirroring"
 

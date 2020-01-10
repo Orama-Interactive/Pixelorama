@@ -57,6 +57,12 @@ var left_ld_amount := 0.1
 # warning-ignore:unused_class_variable
 var right_ld_amount := 0.1
 
+# 0 for the left, 1 for the right
+# warning-ignore:unused_class_variable
+var left_color_picker_for := 0
+# warning-ignore:unused_class_variable
+var right_color_picker_for := 1
+
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
 # warning-ignore:unused_class_variable
@@ -185,6 +191,9 @@ var right_ld_container : Container
 var right_ld_amount_slider : HSlider
 var right_ld_amount_spinbox : SpinBox
 
+var left_colorpicker_container : Container
+var right_colorpicker_container : Container
+
 var left_mirror_container : Container
 var right_mirror_container : Container
 
@@ -296,6 +305,9 @@ func _ready() -> void:
 	right_ld_container = find_node_by_name(right_tool_options_container, "RightLDOptions")
 	right_ld_amount_slider = find_node_by_name(right_ld_container, "RightLDAmountSlider")
 	right_ld_amount_spinbox = find_node_by_name(right_ld_container, "RightLDAmountSpinbox")
+
+	left_colorpicker_container = find_node_by_name(left_tool_options_container, "LeftColorPickerOptions")
+	right_colorpicker_container = find_node_by_name(right_tool_options_container, "RightColorPickerOptions")
 
 	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
 	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")

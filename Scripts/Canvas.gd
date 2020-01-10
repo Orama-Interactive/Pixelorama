@@ -107,6 +107,7 @@ func _input(event : InputEvent) -> void:
 	# For the LightenDarken tool
 	var ld := 0
 	var ld_amount := 0.1
+	var color_picker_for := 0
 
 	west_limit = location.x
 	east_limit = location.x + size.x
@@ -125,6 +126,7 @@ func _input(event : InputEvent) -> void:
 		fill_area = Global.left_fill_area
 		ld = Global.left_ld
 		ld_amount = Global.left_ld_amount
+		color_picker_for = Global.left_color_picker_for
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
@@ -132,6 +134,7 @@ func _input(event : InputEvent) -> void:
 		fill_area = Global.right_fill_area
 		ld = Global.right_ld
 		ld_amount = Global.right_ld_amount
+		color_picker_for = Global.right_color_picker_for
 
 	if Global.current_frame == frame:
 		if mouse_in_canvas && Global.has_focus:
@@ -251,10 +254,10 @@ func _input(event : InputEvent) -> void:
 		"ColorPicker":
 			if can_handle && Global.current_frame == frame:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
-				if current_mouse_button == "left_mouse":
+				if color_picker_for == 0: # Pick for the left color
 					Global.left_color_picker.color = pixel_color
 					Global.update_left_custom_brush()
-				elif current_mouse_button == "right_mouse":
+				elif color_picker_for == 1: # Pick for the left color
 					Global.right_color_picker.color = pixel_color
 					Global.update_right_custom_brush()
 

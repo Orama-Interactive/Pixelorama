@@ -453,6 +453,17 @@ msgstr "Siła:"
 msgid "LDAMOUNT_HT"
 msgstr "Siła rozjaśnienia/przyciemnienia"
 
+msgid "Pick for:"
+msgstr ""
+
+#, fuzzy
+msgid "Left Color"
+msgstr "Kolor:"
+
+#, fuzzy
+msgid "Right Color"
+msgstr "Opcje prawego narzędzia"
+
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
 
