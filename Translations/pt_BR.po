@@ -448,15 +448,13 @@ msgid "LDAMOUNT_HT"
 msgstr "Quantidade de iluminação/escurecimento:"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Selecionar para:"
 
-#, fuzzy
 msgid "Left Color"
-msgstr "Cor:"
+msgstr "Cor Esquerda"
 
-#, fuzzy
 msgid "Right Color"
-msgstr "Opções da ferramente direita"
+msgstr "Cor Direita"
 
 msgid "Mirroring"
 msgstr "Espelhamento"
@@ -722,13 +720,13 @@ msgid "Take this spot!"
 msgstr "Peque este lugar!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Opções de Imagem"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Largura Padrão:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Altura Padrão:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Cor de Preenchimento Padrão:"
