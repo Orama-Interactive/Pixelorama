@@ -191,6 +191,9 @@ func _input(event : InputEvent) -> void:
 			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
 				handle_redo("Draw")
 
+	if current_action == "Pencil" and Input.is_action_pressed("ctrl"):
+		current_action = "ColorPicker"
+
 	match current_action: # Handle current tool
 		"Pencil":
 			pencil_and_eraser(mouse_pos, current_color, current_mouse_button)
