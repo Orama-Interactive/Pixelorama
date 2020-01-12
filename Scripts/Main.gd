@@ -854,12 +854,15 @@ func _on_FPSValue_value_changed(value) -> void:
 
 func _on_PastOnionSkinning_value_changed(value) -> void:
 	Global.onion_skinning_past_rate = int(value)
+	Global.canvas.update()
 
 func _on_FutureOnionSkinning_value_changed(value) -> void:
 	Global.onion_skinning_future_rate = int(value)
+	Global.canvas.update()
 
 func _on_BlueRedMode_toggled(button_pressed) -> void:
 	Global.onion_skinning_blue_red = button_pressed
+	Global.canvas.update()
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color
