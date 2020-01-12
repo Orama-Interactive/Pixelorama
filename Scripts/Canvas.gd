@@ -287,7 +287,7 @@ func _input(event : InputEvent) -> void:
 		if is_instance_valid(line_2d):
 			line_2d.queue_free()
 
-	if is_making_line:
+	if is_making_line && is_instance_valid(line_2d):
 		var point0 : Vector2 = line_2d.points[0]
 		var angle := stepify(rad2deg(mouse_pos.angle_to_point(point0)), 0.01)
 		if Input.is_action_pressed("ctrl"):

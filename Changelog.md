@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed bug where, if you had a random brush selected and then selected the pencil tool, "brush color from" did not appear.
 - Fixed crash on Godot 3.2.beta6 when pressing the Edit Palette button.
 - The canvas updates automatically when onion skinning settings change.
+- Fixed a rare crash with straight lines. It was possible that the variable `is_making_line` could be true, even if the line itself has been freed from memory.
 
 ## [v0.6] - 06-01-2020
 
