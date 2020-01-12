@@ -173,12 +173,15 @@ func _input(event : InputEvent) -> void:
 	# If we're already pressing a mouse button and we haven't handled undo yet,...
 	#. .. it means that the cursor was outside the canvas. Then, ...
 	# simulate "just pressed" logic the moment the cursor gets inside the canvas
+
+	# Or, if we're making a line. This is used for handling undo/redo for lines...
+	# ...that go outside the canvas
 	if Input.is_action_pressed("left_mouse") || Input.is_action_pressed("right_mouse"):
-		if mouse_in_canvas && Global.undos < Global.undo_redo.get_version():
+		if (mouse_in_canvas && Global.undos < Global.undo_redo.get_version()) || is_making_line:
 			mouse_pressed = true
 
 	if mouse_pressed:
-		if can_handle && Global.current_frame == frame:
+		if (can_handle || is_making_line) && Global.current_frame == frame:
 			if current_action != "None" && current_action != "ColorPicker":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
