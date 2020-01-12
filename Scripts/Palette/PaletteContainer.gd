@@ -106,7 +106,7 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	return ""
 
 func on_edit_palette() -> void:
-	var palette : Dictionary = Global.palettes[current_palette]
+	var palette : Palette = Global.palettes[current_palette]
 
 	var create_new_palette := true # Create new palette by default
 	if palette.editable:
