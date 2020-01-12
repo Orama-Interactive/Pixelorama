@@ -611,10 +611,12 @@ func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, cur
 						var current_pixel_color : Color = layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y)
 						if current_pixel_color != color && !(pos_floored in lighten_darken_pixels):
 							if current_action == "LightenDarken":
-								if ld == 0: # Lighten
-									color = current_pixel_color.lightened(ld_amount)
-								else:
-									color = current_pixel_color.darkened(ld_amount)
+								color = current_pixel_color
+								if color.a > 0:
+									if ld == 0: # Lighten
+										color = current_pixel_color.lightened(ld_amount)
+									else: # Darken
+										color = current_pixel_color.darkened(ld_amount)
 								lighten_darken_pixels.append(pos_floored)
 
 							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, color)
