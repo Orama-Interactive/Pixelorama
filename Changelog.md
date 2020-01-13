@@ -3,13 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [v0.6.1] - Unreleased
+## [v0.6.1] - 13-01-2020
 
 ### Added
 - Italian translation - thanks to Gaarco!
 - In addition to the middle mouse button, you can now use `Space` to pan around the canvas.
 - The ability to choose for which color the color picker does its job, the left or the right. (Issue #115)
 - Default image settings are now in the Preferences - thanks to Gaarco!
+- Added option to hide tool icons next to the cursor - thanks to haonkrub (Issue #122)
 
 ### Changed
 - When saving a .pxo file, the file path (along with the file name) gets remembered by the Export PNG file dialog path. (Issue #114)

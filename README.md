@@ -5,7 +5,7 @@
  
  [![Pixelorama's UI](https://static.wixstatic.com/media/cc6108_ccec89c37b3d425da4f03776160c859c~mv2.png)](https://www.youtube.com/watch?v=DULv-jzueRw&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=7)
 
-Current features as of version v0.6:
+Current features as of version v0.6.1:
 
 - Choosing between 6 tools – pencil, eraser, fill bucket, lighten/darken, color picker and rectangle select – and mapping them to both of your left and right mouse buttons.
 - Are you an animator? Then you've come to the right place! Pixelorama has its own animation timeline with Onion Skinning just for you!
@@ -23,12 +23,12 @@ Current features as of version v0.6:
 - Split screen mode to see your masterpiece twice! And a mini canvas preview area to see it thrice!
 - Create straight lines for pencil, eraser and the lighten/darken tool by pressing `Shift`. If you also press `Control`, you can constrain angles with a step of 15.
 - Generate outlines for your images!
-- The middle mouse wheel isn’t forgotten, you can use it to pan around the canvas and by scrolling up and down, you can zoom in and out!
+- Υou can zoom in and out with the mouse scroll wheel, and pan by clicking it, or by pressing `Space`!
 - Keyboard shortcuts! We're pretty sure this is a lifesaver for most of you.
 - Rulers and guides!
 - Creating a new canvas with a size of your choosing.
 - Scale, crop, flip, color invert and desaturate your images!
-- English, Greek, German, French, Polish, Brazilian Portuguese, Russian and Traditional Chinese localization support!
+- English, Greek, German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese and Italian localization support!
 
 Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
 Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
