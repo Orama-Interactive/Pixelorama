@@ -153,8 +153,10 @@ func _input(event : InputEvent) -> void:
 			if !cursor_inside_canvas:
 				cursor_inside_canvas = true
 				Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Cursor.png"), 0, Vector2(15, 15))
-				Global.left_cursor.visible = true
-				Global.right_cursor.visible = true
+				if Global.show_left_tool_icon:
+					Global.left_cursor.visible = true
+				if Global.show_right_tool_icon:
+					Global.right_cursor.visible = true
 		else:
 			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				if mouse_inside_canvas:

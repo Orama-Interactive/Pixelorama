@@ -380,6 +380,9 @@ msgstr "右鍵工具選項"
 msgid "Left pixel indicator"
 msgstr "左鍵工具準心"
 
+msgid "Show tool icon"
+msgstr "顯示工具圖標"
+
 msgid "LEFT_INDIC_HT"
 msgstr "在畫布上顯示左鍵工具"
 

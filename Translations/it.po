@@ -382,6 +382,9 @@ msgstr "Opzioni dello strumento destro"
 msgid "Left pixel indicator"
 msgstr "Indicatore pixel strumento sinistro"
 
+msgid "Show tool icon"
+msgstr "Mostra icona strumento"
+
 msgid "LEFT_INDIC_HT"
 msgstr ""
 "Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando "

@@ -393,6 +393,9 @@ msgstr "Opcje prawego narzędzia"
 msgid "Left pixel indicator"
 msgstr "Wskaźnik lewego pędzla"
 
+msgid "Show tool icon"
+msgstr "Pokaż ikonę narzędzia"
+
 msgid "LEFT_INDIC_HT"
 msgstr "Wyświetl wskaźnik lewego narzędzia lub pędzla podczas rysowania"
 

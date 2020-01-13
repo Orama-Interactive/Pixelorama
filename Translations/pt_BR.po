@@ -386,6 +386,9 @@ msgstr "Opções da ferramente direita"
 msgid "Left pixel indicator"
 msgstr "Pixel indicador esquerdo"
 
+msgid "Show tool icon"
+msgstr "Mostrar ícone da ferramenta"
+
 msgid "LEFT_INDIC_HT"
 msgstr ""
 "Mostrar o indicador pixel do mouse esquerdo ou o pincel na tela quando "

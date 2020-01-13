@@ -393,6 +393,9 @@ msgstr "Настройки правого инструмента"
 msgid "Left pixel indicator"
 msgstr "Цвет для ЛКМ"
 
+msgid "Show tool icon"
+msgstr "Показать значок инструмента"
+
 msgid "LEFT_INDIC_HT"
 msgstr "Отображать цвет кисти для ЛКМ во время рисования"
 
