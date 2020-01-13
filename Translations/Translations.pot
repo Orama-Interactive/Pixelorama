@@ -346,6 +346,9 @@ msgstr ""
 msgid "RIGHT_INDIC_HT"
 msgstr ""
 
+msgid "Show tool icon"
+msgstr ""
+
 msgid "Right pixel indicator"
 msgstr ""
 

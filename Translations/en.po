@@ -381,6 +381,9 @@ msgstr "Right tool options"
 msgid "Left pixel indicator"
 msgstr "Left pixel indicator"
 
+msgid "Show tool icon"
+msgstr "Show tool icon"
+
 msgid "LEFT_INDIC_HT"
 msgstr "Show left mouse pixel indicator or brush on the canvas when drawing"
 

@@ -388,6 +388,9 @@ msgstr "Rechte Werkzeugoptionen"
 msgid "Left pixel indicator"
 msgstr "Linke Pixelanzeige"
 
+msgid "Show tool icon"
+msgstr "Werkzeugsymbol anzeigen"
+
 msgid "LEFT_INDIC_HT"
 msgstr ""
 "Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"

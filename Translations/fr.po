@@ -399,6 +399,9 @@ msgstr "Options de l'outil droit"
 msgid "Left pixel indicator"
 msgstr "Indicateur de pixel gauche"
 
+msgid "Show tool icon"
+msgstr "Afficher l'icône de l'outil"
+
 msgid "LEFT_INDIC_HT"
 msgstr ""
 "Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous "

@@ -622,6 +622,12 @@ func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
 func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
 	Global.right_square_indicator_visible = button_pressed
 
+func _on_LeftToolIconCheckbox_toggled(button_pressed) -> void:
+	Global.show_left_tool_icon = button_pressed
+
+func _on_RightToolIconCheckbox_toggled(button_pressed) -> void:
+	Global.show_right_tool_icon = button_pressed
+
 func _on_LeftBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
 	Global.brush_type_window_position = "left"

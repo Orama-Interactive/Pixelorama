@@ -385,6 +385,9 @@ msgstr "Επιλογές δεξιού εργαλείου"
 msgid "Left pixel indicator"
 msgstr "Δείκτης αριστερού πιξελ"
 
+msgid "Show tool icon"
+msgstr "Εμφάνιση εικονιδίου εργαλείου"
+
 msgid "LEFT_INDIC_HT"
 msgstr ""
 "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που "

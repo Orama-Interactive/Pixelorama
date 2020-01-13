@@ -269,7 +269,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -278,7 +277,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
@@ -420,7 +418,6 @@ button_mask = 3
 texture_normal = ExtResource( 9 )
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
-editor/display_folded = true
 margin_top = 159.0
 margin_right = 208.0
 margin_bottom = 612.0
@@ -510,13 +507,12 @@ size_flags_vertical = 3
 
 [node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer"]
 margin_right = 208.0
-margin_bottom = 312.0
+margin_bottom = 352.0
 size_flags_horizontal = 3
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
-editor/display_folded = true
 margin_right = 208.0
-margin_bottom = 150.0
+margin_bottom = 170.0
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_right = 208.0
@@ -533,11 +529,17 @@ mouse_default_cursor_shape = 2
 pressed = true
 text = "Left pixel indicator"
 
-[node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
-editor/display_folded = true
+[node name="LeftToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 39.0
 margin_right = 208.0
-margin_bottom = 71.0
+margin_bottom = 55.0
+text = "Show tool icon"
+
+[node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+editor/display_folded = true
+margin_top = 59.0
+margin_right = 208.0
+margin_bottom = 91.0
 
 [node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
 margin_right = 36.0
@@ -564,9 +566,9 @@ text = "Brush: Pixel"
 
 [node name="LeftBrushSize" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 75.0
+margin_top = 95.0
 margin_right = 208.0
-margin_bottom = 111.0
+margin_bottom = 131.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize"]
 margin_right = 208.0
@@ -725,9 +727,9 @@ selected = 0
 
 [node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 editor/display_folded = true
-margin_top = 115.0
+margin_top = 135.0
 margin_right = 208.0
-margin_bottom = 150.0
+margin_bottom = 170.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring"]
 margin_right = 208.0
@@ -755,15 +757,14 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
-margin_top = 154.0
+margin_top = 174.0
 margin_right = 208.0
-margin_bottom = 158.0
+margin_bottom = 178.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
-editor/display_folded = true
-margin_top = 162.0
+margin_top = 182.0
 margin_right = 208.0
-margin_bottom = 312.0
+margin_bottom = 352.0
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_right = 208.0
@@ -779,11 +780,17 @@ hint_tooltip = "RIGHT_INDIC_HT"
 mouse_default_cursor_shape = 2
 text = "Right pixel indicator"
 
-[node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
-editor/display_folded = true
+[node name="RightToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 39.0
 margin_right = 208.0
-margin_bottom = 71.0
+margin_bottom = 55.0
+text = "Show tool icon"
+
+[node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+editor/display_folded = true
+margin_top = 59.0
+margin_right = 208.0
+margin_bottom = 91.0
 
 [node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
 margin_right = 36.0
@@ -810,9 +817,9 @@ text = "Brush: Pixel"
 
 [node name="RightBrushSize" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 editor/display_folded = true
-margin_top = 75.0
+margin_top = 95.0
 margin_right = 208.0
-margin_bottom = 111.0
+margin_bottom = 131.0
 
 [node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize"]
 margin_right = 208.0
@@ -972,9 +979,9 @@ selected = 1
 
 [node name="RightMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 editor/display_folded = true
-margin_top = 115.0
+margin_top = 135.0
 margin_right = 208.0
-margin_bottom = 150.0
+margin_bottom = 170.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring"]
 margin_right = 208.0
@@ -1010,6 +1017,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
+editor/display_folded = true
 margin_right = 704.0
 margin_bottom = 478.0
 size_flags_horizontal = 3
@@ -1067,6 +1075,7 @@ enabled_focus_mode = 0
 script = ExtResource( 15 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+editor/display_folded = true
 margin_left = 16.0
 margin_right = 692.0
 margin_bottom = 462.0
@@ -1740,8 +1749,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
+current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1756,12 +1765,16 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
+current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 61 )]
+current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
+current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="ExportSprites" parent="." instance=ExtResource( 62 )]
+current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
+current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="ScaleImage" parent="." instance=ExtResource( 63 )]
 
@@ -1791,8 +1804,8 @@ visible = false
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 69 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
+current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -1810,6 +1823,7 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftToolIconCheckbox" to="." method="_on_LeftToolIconCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize/HBoxContainer/LeftBrushSizeSlider" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize/HBoxContainer/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
@@ -1823,6 +1837,7 @@ visible = false
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightToolIconCheckbox" to="." method="_on_RightToolIconCheckbox_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize/HBoxContainer/RightBrushSizeSlider" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize/HBoxContainer/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
