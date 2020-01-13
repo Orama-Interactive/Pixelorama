@@ -269,6 +269,7 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -277,6 +278,7 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+editor/display_folded = true
 margin_right = 224.0
 margin_bottom = 620.0
 rect_min_size = Vector2( 224, 0 )
@@ -499,6 +501,7 @@ margin_right = 208.0
 margin_bottom = 63.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
+editor/display_folded = true
 margin_top = 71.0
 margin_right = 208.0
 margin_bottom = 453.0
@@ -511,6 +514,7 @@ margin_bottom = 352.0
 size_flags_horizontal = 3
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+editor/display_folded = true
 margin_right = 208.0
 margin_bottom = 170.0
 
@@ -533,6 +537,7 @@ text = "Left pixel indicator"
 margin_top = 39.0
 margin_right = 208.0
 margin_bottom = 55.0
+pressed = true
 text = "Show tool icon"
 
 [node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
@@ -762,6 +767,7 @@ margin_right = 208.0
 margin_bottom = 178.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+editor/display_folded = true
 margin_top = 182.0
 margin_right = 208.0
 margin_bottom = 352.0
@@ -784,6 +790,7 @@ text = "Right pixel indicator"
 margin_top = 39.0
 margin_right = 208.0
 margin_bottom = 55.0
+pressed = true
 text = "Show tool icon"
 
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
@@ -1749,8 +1756,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
-current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1765,16 +1772,12 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
-current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 61 )]
-current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
-current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="ExportSprites" parent="." instance=ExtResource( 62 )]
-current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
-current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
 
 [node name="ScaleImage" parent="." instance=ExtResource( 63 )]
 
@@ -1804,8 +1807,8 @@ visible = false
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 69 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
-current_dir = "/home/henlo-birb/Documents/godot/Pixelorama"
-current_path = "/home/henlo-birb/Documents/godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 

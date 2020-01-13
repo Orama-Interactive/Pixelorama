@@ -46,9 +46,9 @@ var current_left_tool := "Pencil"
 # warning-ignore:unused_class_variable
 var current_right_tool := "Eraser"
 # warning-ignore:unused_class_variable
-var show_left_tool_icon := false
+var show_left_tool_icon := true
 # warning-ignore:unused_class_variable
-var show_right_tool_icon := false
+var show_right_tool_icon := true
 # warning-ignore:unused_class_variable
 var left_square_indicator_visible := true
 # warning-ignore:unused_class_variable
