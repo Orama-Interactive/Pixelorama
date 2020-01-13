@@ -550,8 +550,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	if (mouse_press && Input.is_action_just_released("left_mouse")) || (!mouse_press && key_for_left):
 		Global.current_left_tool = current_action
 
-		# Start from 2, so the label and the cursor checkbox won't get invisible
-		for i in range(2, Global.left_tool_options_container.get_child_count()):
+		# Start from 3, so the label and checkboxes won't get invisible
+		for i in range(3, Global.left_tool_options_container.get_child_count()):
 			Global.left_tool_options_container.get_child(i).visible = false
 
 		# Tool options visible depending on the selected tool
@@ -577,8 +577,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 
 	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
 		Global.current_right_tool = current_action
-		# Start from 2, so the label and the cursor checkbox won't get invisible
-		for i in range(2, Global.right_tool_options_container.get_child_count()):
+		# Start from 3, so the label and checkboxes won't get invisible
+		for i in range(3, Global.right_tool_options_container.get_child_count()):
 			Global.right_tool_options_container.get_child(i).visible = false
 
 		# Tool options visible depending on the selected tool
