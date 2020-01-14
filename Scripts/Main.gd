@@ -156,7 +156,6 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
-	$SplashDialog.popup_centered() # Splash screen
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 	if not Global.config_cache.get_value("preferences", "startup"):
@@ -166,6 +165,10 @@ func _ready() -> void:
 
 	Global.canvas.layers[0][2] = tr("Layer") + " 0"
 	Global.canvas.generate_layer_panels()
+
+	# Wait for the window to adjust itself, so the popup is correctly centered
+	yield(get_tree().create_timer(0.01), "timeout")
+	$SplashDialog.popup_centered() # Splash screen
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
