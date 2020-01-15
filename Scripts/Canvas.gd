@@ -100,6 +100,8 @@ func camera_zoom() -> void:
 	Global.camera_preview.offset = size / 2
 
 func _input(event : InputEvent) -> void:
+	if Global.current_frame != frame:
+		return
 	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
 	# This decreases CPU/GPU usage slightly.
 	if not event is InputEventMouse:
@@ -110,7 +112,7 @@ func _input(event : InputEvent) -> void:
 			return
 
 	current_pixel = get_local_mouse_position() + location
-	if Global.current_frame == frame && Global.has_focus:
+	if Global.has_focus:
 		update()
 
 	sprite_changed_this_frame = false
@@ -154,26 +156,25 @@ func _input(event : InputEvent) -> void:
 		ld_amount = Global.right_ld_amount
 		color_picker_for = Global.right_color_picker_for
 
-	if Global.current_frame == frame:
-		if mouse_in_canvas && Global.has_focus:
-			Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
-			if !cursor_inside_canvas:
-				cursor_inside_canvas = true
-				Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Cursor.png"), 0, Vector2(15, 15))
-				if Global.show_left_tool_icon:
-					Global.left_cursor.visible = true
-				if Global.show_right_tool_icon:
-					Global.right_cursor.visible = true
-		else:
-			if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
-				if mouse_inside_canvas:
-					mouse_inside_canvas = false
-			Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
-			if cursor_inside_canvas:
-				cursor_inside_canvas = false
-				Global.left_cursor.visible = false
-				Global.right_cursor.visible = false
-				Input.set_custom_mouse_cursor(null)
+	if mouse_in_canvas && Global.has_focus:
+		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
+		if !cursor_inside_canvas:
+			cursor_inside_canvas = true
+			Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Cursor.png"), 0, Vector2(15, 15))
+			if Global.show_left_tool_icon:
+				Global.left_cursor.visible = true
+			if Global.show_right_tool_icon:
+				Global.right_cursor.visible = true
+	else:
+		if !Input.is_mouse_button_pressed(BUTTON_LEFT) && !Input.is_mouse_button_pressed(BUTTON_RIGHT):
+			if mouse_inside_canvas:
+				mouse_inside_canvas = false
+		Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
+		if cursor_inside_canvas:
+			cursor_inside_canvas = false
+			Global.left_cursor.visible = false
+			Global.right_cursor.visible = false
+			Input.set_custom_mouse_cursor(null)
 
 	# Handle Undo/Redo
 	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus && !made_line
@@ -190,7 +191,7 @@ func _input(event : InputEvent) -> void:
 			mouse_pressed = true
 
 	if mouse_pressed:
-		if (can_handle || is_making_line) && Global.current_frame == frame:
+		if can_handle || is_making_line:
 			if current_action != "None" && current_action != "ColorPicker":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
@@ -199,7 +200,7 @@ func _input(event : InputEvent) -> void:
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		made_line = false
 		lighten_darken_pixels.clear()
-		if (can_handle || Global.undos == Global.undo_redo.get_version()) && Global.current_frame == frame:
+		if can_handle || Global.undos == Global.undo_redo.get_version():
 			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
 				handle_redo("Draw")
 
@@ -209,7 +210,7 @@ func _input(event : InputEvent) -> void:
 		"Eraser":
 			pencil_and_eraser(mouse_pos, Color(0, 0, 0, 0), current_mouse_button)
 		"Bucket":
-			if can_handle && Global.current_frame == frame:
+			if can_handle:
 				if fill_area == 0: # Paint the specific area of the same color
 					var horizontal_mirror := false
 					var vertical_mirror := false
@@ -242,7 +243,7 @@ func _input(event : InputEvent) -> void:
 								layers[current_layer_index][0].set_pixel(xx, yy, current_color)
 					sprite_changed_this_frame = true
 		"LightenDarken":
-			if can_handle && Global.current_frame == frame:
+			if can_handle:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				var color_changed : Color
 				if ld == 0: # Lighten
@@ -252,7 +253,7 @@ func _input(event : InputEvent) -> void:
 				pencil_and_eraser(mouse_pos, color_changed, current_mouse_button, current_action)
 		"RectSelect":
 			# Check SelectionRectangle.gd for more code on Rectangle Selection
-			if Global.can_draw && Global.has_focus && Global.current_frame == frame:
+			if Global.can_draw && Global.has_focus:
 				# If we're creating a new selection
 				if Global.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
 					if Input.is_action_just_pressed(current_mouse_button):
@@ -275,7 +276,7 @@ func _input(event : InputEvent) -> void:
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
 		"ColorPicker":
-			if can_handle && Global.current_frame == frame:
+			if can_handle:
 				var pixel_color : Color = layers[current_layer_index][0].get_pixelv(mouse_pos)
 				if color_picker_for == 0: # Pick for the left color
 					Global.left_color_picker.color = pixel_color
@@ -547,7 +548,7 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 			fill_gaps(mouse_pos, previous_mouse_pos, color, current_mouse_button, current_action)
 
 func draw_pixel(pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
-	if Global.can_draw && Global.has_focus && Global.current_frame == frame:
+	if Global.can_draw && Global.has_focus:
 		var brush_size := 1
 		var brush_type = Global.BRUSH_TYPES.PIXEL
 		var brush_index := -1

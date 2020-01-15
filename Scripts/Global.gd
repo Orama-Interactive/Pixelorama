@@ -463,6 +463,8 @@ func frame_changed(value : int) -> void:
 
 	for c in canvases:
 		c.visible = false
+		c.is_making_line = false
+		c.line_2d.set_point_position(1, c.line_2d.points[0])
 	canvas = canvases[current_frame]
 	canvas.visible = true
 	canvas.generate_layer_panels()
