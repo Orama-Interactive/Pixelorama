@@ -69,6 +69,13 @@ func _ready() -> void:
 	if Global.canvases[0] == self:
 		camera_zoom()
 
+	line_2d = Line2D.new()
+	line_2d.width = 0.5
+	line_2d.default_color = Color.darkgray
+	line_2d.add_point(previous_mouse_pos_for_lines)
+	line_2d.add_point(previous_mouse_pos_for_lines)
+	add_child(line_2d)
+
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
 	var bigger = max(size.x, size.y)
@@ -278,21 +285,13 @@ func _input(event : InputEvent) -> void:
 					Global.update_right_custom_brush()
 
 	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool) || ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
-		if is_instance_valid(line_2d):
-			line_2d.queue_free()
-		line_2d = Line2D.new()
-		line_2d.width = 0.5
-		line_2d.default_color = Color.darkgray
-		line_2d.add_point(previous_mouse_pos_for_lines)
-		line_2d.add_point(mouse_pos)
-		add_child(line_2d)
 		is_making_line = true
+		line_2d.set_point_position(0, previous_mouse_pos_for_lines)
 	elif Input.is_action_just_released("shift"):
 		is_making_line = false
-		if is_instance_valid(line_2d):
-			line_2d.queue_free()
+		line_2d.set_point_position(1, line_2d.points[0])
 
-	if is_making_line && is_instance_valid(line_2d):
+	if is_making_line:
 		var point0 : Vector2 = line_2d.points[0]
 		var angle := stepify(rad2deg(mouse_pos.angle_to_point(point0)), 0.01)
 		if Input.is_action_pressed("ctrl"):
