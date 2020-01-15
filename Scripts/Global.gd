@@ -209,8 +209,9 @@ var right_colorpicker_container : Container
 var left_mirror_container : Container
 var right_mirror_container : Container
 
-var animation_timer : Timer
+var animation_timeline : Panel
 
+var animation_timer : Timer
 var current_frame_label : Label
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
@@ -324,14 +325,15 @@ func _ready() -> void:
 	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
 	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")
 
-	animation_timer = find_node_by_name(root, "AnimationTimer")
+	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 
-	current_frame_label = find_node_by_name(root, "CurrentFrame")
-	loop_animation_button = find_node_by_name(root, "LoopAnim")
-	play_forward = find_node_by_name(root, "PlayForward")
-	play_backwards = find_node_by_name(root, "PlayBackwards")
-	timeline_seconds = find_node_by_name(root, "TimelineSeconds")
-	frame_container = find_node_by_name(root, "FrameContainer")
+	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
+	current_frame_label = find_node_by_name(animation_timeline, "CurrentFrame")
+	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
+	play_forward = find_node_by_name(animation_timeline, "PlayForward")
+	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
+	timeline_seconds = find_node_by_name(animation_timeline, "TimelineSeconds")
+	frame_container = find_node_by_name(animation_timeline, "FrameContainer")
 
 	var layer_stuff_container = find_node_by_name(root, "LayerVBoxContainer")
 	var layer_buttons = find_node_by_name(layer_stuff_container, "LayerButtons")

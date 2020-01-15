@@ -18,7 +18,7 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var fps = Global.control.fps
+	var fps = Global.animation_timeline.fps
 	var horizontal_scroll = get_parent().get_node("FrameAndButtonContainer").get_node("ScrollContainer").scroll_horizontal
 	var starting_pos := Vector2(10, 10)
 	transform.x = Vector2(fps, fps) / 2.52

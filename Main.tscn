@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -19,56 +19,40 @@
 [ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=17]
 [ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=18]
 [ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=19]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_First_Frame.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_First_Frame_Hover.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Previous_Frame.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Previous_Frame_Hover.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Play Backwards.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Pause.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Play Backwards_Hover.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Play.png" type="Texture" id=27]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Play_Hover.png" type="Texture" id=28]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Next_Frame.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Next_Frame_Hover.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_Last_Frame.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_Last_Frame_Hover.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop_None.png" type="Texture" id=33]
-[ext_resource path="res://Scripts/Rulers/TimelineSeconds.gd" type="Script" id=34]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame.png" type="Texture" id=35]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame_Hover.png" type="Texture" id=36]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette.png" type="Texture" id=37]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette_Hover.png" type="Texture" id=38]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette.png" type="Texture" id=39]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette_Hover.png" type="Texture" id=40]
-[ext_resource path="res://Scripts/Palette/PaletteContainer.gd" type="Script" id=41]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=43]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=44]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Hover.png" type="Texture" id=45]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Disabled.png" type="Texture" id=46]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=47]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=48]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=49]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=50]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=51]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=52]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=53]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=54]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=55]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=56]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=57]
-[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=58]
-[ext_resource path="res://Prefabs/Dialogs/SplashDialog.tscn" type="PackedScene" id=59]
-[ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=60]
-[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=61]
-[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=62]
-[ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=63]
-[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=64]
-[ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=65]
-[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=66]
-[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=67]
-[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=68]
-[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=69]
+[ext_resource path="res://Prefabs/AnimationTimeline.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette_Hover.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette_Hover.png" type="Texture" id=24]
+[ext_resource path="res://Scripts/Palette/PaletteContainer.gd" type="Script" id=25]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Hover.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Disabled.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=41]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Prefabs/Dialogs/SplashDialog.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=44]
+[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=45]
+[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=46]
+[ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=47]
+[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=48]
+[ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=49]
+[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=50]
+[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=51]
+[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=52]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=53]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -101,50 +85,6 @@ data = {
 [sub_resource type="ImageTexture" id=6]
 image = SubResource( 24 )
 size = Vector2( 32, 32 )
-
-[sub_resource type="InputEventKey" id=7]
-control = true
-command = true
-scancode = 16777229
-
-[sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
-
-[sub_resource type="InputEventKey" id=9]
-control = true
-command = true
-scancode = 16777231
-
-[sub_resource type="ShortCut" id=10]
-shortcut = SubResource( 9 )
-
-[sub_resource type="InputEventKey" id=11]
-scancode = 16777247
-
-[sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
-
-[sub_resource type="InputEventKey" id=13]
-scancode = 16777248
-
-[sub_resource type="ShortCut" id=14]
-shortcut = SubResource( 13 )
-
-[sub_resource type="InputEventKey" id=15]
-control = true
-command = true
-scancode = 16777233
-
-[sub_resource type="ShortCut" id=16]
-shortcut = SubResource( 15 )
-
-[sub_resource type="InputEventKey" id=17]
-control = true
-command = true
-scancode = 16777230
-
-[sub_resource type="ShortCut" id=18]
-shortcut = SubResource( 17 )
 
 [sub_resource type="Image" id=25]
 data = {
@@ -269,7 +209,6 @@ text = "[64×64]"
 align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 1152.0
 margin_bottom = 648.0
@@ -1016,7 +955,6 @@ mouse_default_cursor_shape = 2
 text = "Vertical"
 
 [node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
-editor/display_folded = true
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
@@ -1130,258 +1068,7 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
 
-[node name="AnimationTimeline" type="Panel" parent="MenuAndUI/UI/CanvasAndTimeline"]
-editor/display_folded = true
-margin_top = 478.0
-margin_right = 704.0
-margin_bottom = 620.0
-rect_min_size = Vector2( 0, 142 )
-size_flags_horizontal = 3
-
-[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -71.0
-margin_right = 4.0
-margin_bottom = 71.0
-
-[node name="AnimationContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 15.0
-margin_top = 4.0
-
-[node name="TimelineContainer" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_right = 570.0
-margin_bottom = 138.0
-size_flags_horizontal = 3
-
-[node name="AnimationButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_right = 570.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
-
-[node name="CurrentFrame" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_top = 4.0
-margin_right = 242.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-text = "Current frame: 1/1"
-
-[node name="PlaybackButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-editor/display_folded = true
-margin_left = 246.0
-margin_right = 386.0
-margin_bottom = 24.0
-size_flags_horizontal = 2
-
-[node name="FirstFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
-margin_right = 20.0
-margin_bottom = 24.0
-hint_tooltip = "FIRSTFRAME_HT"
-mouse_default_cursor_shape = 2
-shortcut_in_tooltip = false
-shortcut = SubResource( 8 )
-texture_normal = ExtResource( 20 )
-texture_hover = ExtResource( 21 )
-
-[node name="PreviousFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
-margin_left = 24.0
-margin_right = 44.0
-margin_bottom = 24.0
-hint_tooltip = "PREVIOUSFRAME_HT"
-mouse_default_cursor_shape = 2
-shortcut_in_tooltip = false
-shortcut = SubResource( 10 )
-texture_normal = ExtResource( 22 )
-texture_hover = ExtResource( 23 )
-
-[node name="PlayBackwards" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
-margin_left = 48.0
-margin_right = 68.0
-margin_bottom = 24.0
-hint_tooltip = "PLAYBACKWARDS_HT"
-mouse_default_cursor_shape = 2
-toggle_mode = true
-shortcut_in_tooltip = false
-shortcut = SubResource( 12 )
-texture_normal = ExtResource( 24 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 26 )
-
-[node name="PlayForward" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
-margin_left = 72.0
-margin_right = 92.0
-margin_bottom = 24.0
-hint_tooltip = "PLAYFORWARD_HT"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-toggle_mode = true
-shortcut_in_tooltip = false
-shortcut = SubResource( 14 )
-texture_normal = ExtResource( 27 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 28 )
-
-[node name="NextFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
-margin_left = 96.0
-margin_right = 116.0
-margin_bottom = 24.0
-hint_tooltip = "NEXTFRAME_HT"
-mouse_default_cursor_shape = 2
-shortcut_in_tooltip = false
-shortcut = SubResource( 16 )
-texture_normal = ExtResource( 29 )
-texture_hover = ExtResource( 30 )
-
-[node name="LastFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
-margin_left = 120.0
-margin_right = 140.0
-margin_bottom = 24.0
-hint_tooltip = "LASTFRAME_HT"
-mouse_default_cursor_shape = 2
-shortcut_in_tooltip = false
-shortcut = SubResource( 18 )
-texture_normal = ExtResource( 31 )
-texture_hover = ExtResource( 32 )
-
-[node name="LoopButtons" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons"]
-editor/display_folded = true
-margin_left = 492.0
-margin_right = 570.0
-margin_bottom = 24.0
-size_flags_horizontal = 0
-
-[node name="FPSValue" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
-margin_right = 54.0
-margin_bottom = 24.0
-hint_tooltip = "FPS_HT"
-mouse_default_cursor_shape = 2
-min_value = 0.1
-step = 0.1
-value = 6.0
-align = 1
-suffix = "FPS"
-
-[node name="LoopAnim" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
-margin_left = 58.0
-margin_right = 78.0
-margin_bottom = 24.0
-hint_tooltip = "No loop"
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 33 )
-
-[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_top = 28.0
-margin_right = 570.0
-margin_bottom = 32.0
-
-[node name="TimelineSeconds" type="Control" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_top = 36.0
-margin_right = 570.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 0, 16 )
-script = ExtResource( 34 )
-
-[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-margin_top = 56.0
-margin_right = 570.0
-margin_bottom = 60.0
-
-[node name="FrameAndButtonContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer"]
-editor/display_folded = true
-margin_top = 64.0
-margin_right = 570.0
-margin_bottom = 84.0
-
-[node name="AddFrame" type="TextureButton" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer" groups=[
-"UIButtons",
-]]
-margin_right = 20.0
-margin_bottom = 20.0
-hint_tooltip = "Add a new frame"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-texture_normal = ExtResource( 35 )
-texture_hover = ExtResource( 36 )
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer"]
-margin_left = 24.0
-margin_right = 570.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_vertical_enabled = false
-
-[node name="FrameContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer/ScrollContainer"]
-
-[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_left = 574.0
-margin_right = 578.0
-margin_bottom = 138.0
-
-[node name="OnionSkinningButtons" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-editor/display_folded = true
-margin_left = 582.0
-margin_right = 681.0
-margin_bottom = 138.0
-
-[node name="OnionSkinning" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_right = 99.0
-margin_bottom = 15.0
-text = "Onion Skinning:"
-
-[node name="OnionSkinningPast" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 19.0
-margin_right = 99.0
-margin_bottom = 34.0
-text = "Past Frames"
-
-[node name="PastOnionSkinning" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 38.0
-margin_right = 99.0
-margin_bottom = 55.0
-mouse_default_cursor_shape = 2
-align = 1
-
-[node name="OnionSkinningFuture" type="Label" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 59.0
-margin_right = 99.0
-margin_bottom = 74.0
-text = "Future Frames"
-
-[node name="FutureOnionSkinning" type="SpinBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 78.0
-margin_right = 99.0
-margin_bottom = 95.0
-mouse_default_cursor_shape = 2
-align = 1
-
-[node name="BlueRedMode" type="CheckBox" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons"]
-margin_top = 99.0
-margin_right = 99.0
-margin_bottom = 115.0
-mouse_default_cursor_shape = 2
-text = "Blue-Red Mode"
-
-[node name="VSeparator2" type="VSeparator" parent="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer"]
-margin_left = 685.0
-margin_right = 689.0
-margin_bottom = 138.0
+[node name="AnimationTimeline" parent="MenuAndUI/UI/CanvasAndTimeline" instance=ExtResource( 20 )]
 
 [node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
 editor/display_folded = true
@@ -1463,8 +1150,8 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "NEWPALETTE_HT"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 37 )
-texture_hover = ExtResource( 38 )
+texture_normal = ExtResource( 21 )
+texture_hover = ExtResource( 22 )
 
 [node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
 margin_right = 12.0
@@ -1479,8 +1166,8 @@ margin_right = 68.0
 margin_bottom = 32.0
 hint_tooltip = "EDITPALETTE_HT"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 39 )
-texture_hover = ExtResource( 40 )
+texture_normal = ExtResource( 23 )
+texture_hover = ExtResource( 24 )
 
 [node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
 margin_left = 72.0
@@ -1509,7 +1196,7 @@ margin_left = 112.0
 margin_right = 112.0
 size_flags_horizontal = 3
 columns = 5
-script = ExtResource( 41 )
+script = ExtResource( 25 )
 
 [node name="VBoxLayerWithLabels" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer"]
 editor/display_folded = true
@@ -1560,8 +1247,8 @@ margin_right = 32.0
 margin_bottom = 32.0
 hint_tooltip = "LAYERNEW_HT"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 42 )
-texture_hover = ExtResource( 43 )
+texture_normal = ExtResource( 26 )
+texture_hover = ExtResource( 27 )
 
 [node name="RemoveLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1572,9 +1259,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERREMOVE_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 44 )
-texture_hover = ExtResource( 45 )
-texture_disabled = ExtResource( 46 )
+texture_normal = ExtResource( 28 )
+texture_hover = ExtResource( 29 )
+texture_disabled = ExtResource( 30 )
 
 [node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1585,9 +1272,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERUP_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 47 )
-texture_hover = ExtResource( 48 )
-texture_disabled = ExtResource( 49 )
+texture_normal = ExtResource( 31 )
+texture_hover = ExtResource( 32 )
+texture_disabled = ExtResource( 33 )
 
 [node name="MovwDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1598,9 +1285,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERDOWN_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 50 )
-texture_hover = ExtResource( 51 )
-texture_disabled = ExtResource( 52 )
+texture_normal = ExtResource( 34 )
+texture_hover = ExtResource( 35 )
+texture_disabled = ExtResource( 36 )
 
 [node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1610,8 +1297,8 @@ margin_right = 176.0
 margin_bottom = 32.0
 hint_tooltip = "LAYERCLONE_HT"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 53 )
-texture_hover = ExtResource( 54 )
+texture_normal = ExtResource( 37 )
+texture_hover = ExtResource( 38 )
 
 [node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
 "UIButtons",
@@ -1622,9 +1309,9 @@ margin_bottom = 32.0
 hint_tooltip = "LAYERMERGE_HT"
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 55 )
-texture_hover = ExtResource( 56 )
-texture_disabled = ExtResource( 57 )
+texture_normal = ExtResource( 39 )
+texture_hover = ExtResource( 40 )
+texture_disabled = ExtResource( 41 )
 
 [node name="OpacityContainer" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
 margin_top = 38.0
@@ -1706,10 +1393,10 @@ scroll_horizontal_enabled = false
 [node name="FileBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/File"]
 columns = 6
 
-[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 58 )]
+[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 42 )]
 hint_tooltip = "Pixel brush"
 
-[node name="CircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 58 )]
+[node name="CircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 42 )]
 margin_left = 32.0
 margin_right = 64.0
 hint_tooltip = "Filled circle brush"
@@ -1719,7 +1406,7 @@ custom_brush_index = -2
 [node name="BrushTexture" parent="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton" index="0"]
 texture = SubResource( 20 )
 
-[node name="FilledCircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 58 )]
+[node name="FilledCircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 42 )]
 margin_left = 64.0
 margin_right = 96.0
 hint_tooltip = "Circle brush"
@@ -1744,9 +1431,9 @@ scroll_horizontal_enabled = false
 [node name="ProjectBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/Project"]
 columns = 5
 
-[node name="SplashDialog" parent="." instance=ExtResource( 59 )]
+[node name="SplashDialog" parent="." instance=ExtResource( 43 )]
 
-[node name="CreateNewImage" parent="." instance=ExtResource( 60 )]
+[node name="CreateNewImage" parent="." instance=ExtResource( 44 )]
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1775,18 +1462,18 @@ filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
-[node name="ImportSprites" parent="." instance=ExtResource( 61 )]
+[node name="ImportSprites" parent="." instance=ExtResource( 45 )]
 
-[node name="ExportSprites" parent="." instance=ExtResource( 62 )]
+[node name="ExportSprites" parent="." instance=ExtResource( 46 )]
 
-[node name="ScaleImage" parent="." instance=ExtResource( 63 )]
+[node name="ScaleImage" parent="." instance=ExtResource( 47 )]
 
-[node name="PreferencesDialog" parent="." instance=ExtResource( 64 )]
+[node name="PreferencesDialog" parent="." instance=ExtResource( 48 )]
 
-[node name="OutlineDialog" parent="." instance=ExtResource( 65 )]
+[node name="OutlineDialog" parent="." instance=ExtResource( 49 )]
 visible = false
 
-[node name="AboutDialog" parent="." instance=ExtResource( 66 )]
+[node name="AboutDialog" parent="." instance=ExtResource( 50 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
@@ -1800,17 +1487,15 @@ margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="EditPalettePopup" parent="." instance=ExtResource( 67 )]
+[node name="EditPalettePopup" parent="." instance=ExtResource( 51 )]
 visible = false
 
-[node name="NewPaletteDialog" parent="." instance=ExtResource( 68 )]
+[node name="NewPaletteDialog" parent="." instance=ExtResource( 52 )]
 
-[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 69 )]
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 53 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
-
-[node name="AnimationTimer" type="Timer" parent="."]
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
@@ -1859,19 +1544,6 @@ visible = false
 [connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
-[connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
-[connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
-[connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer/AddFrame" to="." method="add_frame"]
-[connection signal="gui_input" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/FrameAndButtonContainer/ScrollContainer" to="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/TimelineContainer/TimelineSeconds" method="_on_ScrollContainer_gui_input"]
-[connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
-[connection signal="toggled" from="MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline/AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
 [connection signal="item_selected" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
@@ -1899,7 +1571,6 @@ visible = false
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
-[connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]
 
