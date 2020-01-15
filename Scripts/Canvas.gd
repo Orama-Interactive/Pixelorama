@@ -100,8 +100,6 @@ func camera_zoom() -> void:
 	Global.camera_preview.offset = size / 2
 
 func _input(event : InputEvent) -> void:
-	if Global.current_frame != frame:
-		return
 	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
 	# This decreases CPU/GPU usage slightly.
 	if not event is InputEventMouse:
@@ -112,6 +110,12 @@ func _input(event : InputEvent) -> void:
 			return
 
 	current_pixel = get_local_mouse_position() + location
+	if Global.current_frame != frame:
+		previous_mouse_pos = current_pixel
+		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
+		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
+		return
+
 	if Global.has_focus:
 		update()
 
