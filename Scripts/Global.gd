@@ -465,7 +465,7 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		layers_container.move_child(layer_container, 1)
 
 		frames_container.add_child(layers[current_layer][1])
-		frames_container.move_child(layers[current_layer][1], 2)
+		frames_container.move_child(layers[current_layer][1], 1)
 		for i in range(canvases.size()):
 			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 			frame_button.frame = i
@@ -487,8 +487,8 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		label.align = Label.ALIGN_CENTER
 		label.text = str(canvases.size() + 1)
 		frame_ids.add_child(label)
-		if !frames_container.is_a_parent_of(_canvases[0].frame_button):
-			frames_container.add_child(_canvases[0].frame_button)
+		#if !frames_container.is_a_parent_of(_canvases[0].frame_button):
+		#	frames_container.add_child(_canvases[0].frame_button)
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frames_container.remove_child(_canvases[0].frame_button)
@@ -527,10 +527,10 @@ func frame_changed(value : int) -> void:
 		var text_color := Color.white
 		if theme_type == "Gold" || theme_type == "Light":
 			text_color = Color.black
-		c.frame_button.pressed = false
+		#c.frame_button.pressed = false
 		#c.frame_button.get_node("FrameID").add_color_override("font_color", text_color)
 	# Make only the current frame button pressed
-	canvas.frame_button.pressed = true
+	#canvas.frame_button.pressed = true
 	#canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
