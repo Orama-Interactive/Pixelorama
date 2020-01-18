@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Prefabs/FrameButton.tscn" type="PackedScene" id=1]
+
+[node name="FrameContainer" type="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 50.0
+
+[node name="FrameID" type="Label" parent="."]
+margin_right = 36.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 0, 17 )
+text = "0"
+align = 1
+
+[node name="FrameButton" parent="." instance=ExtResource( 1 )]
+margin_top = 21.0
+margin_bottom = 57.0

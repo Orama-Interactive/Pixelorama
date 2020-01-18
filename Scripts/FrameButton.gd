@@ -1,12 +1,15 @@
 extends Button
 
 var frame := 0
+var layer := 0
 
 onready var popup_menu := $PopupMenu
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.current_frame = frame
+		Global.current_layer = layer
+		print(str(frame), str(layer))
 	elif Input.is_action_just_released("right_mouse"):
 		if Global.canvases.size() == 1:
 			popup_menu.set_item_disabled(0, true)
@@ -30,7 +33,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 		0: #Remove Frame
 			remove_frame()
 
-		1: #Clone Layer
+		1: # Clone Layer
 			var canvas : Canvas = Global.canvases[frame]
 			var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 			new_canvas.size = Global.canvas.size
@@ -58,7 +61,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
 			Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 			Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
-			for child in Global.frame_container.get_children():
+			for child in Global.frame_containers.get_children():
 				var frame_button = child.get_node("FrameButton")
 				Global.undo_redo.add_do_property(frame_button, "pressed", false)
 				Global.undo_redo.add_undo_property(frame_button, "pressed", frame_button.pressed)

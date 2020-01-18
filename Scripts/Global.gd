@@ -13,7 +13,9 @@ var undos := 0 # The number of times we added undo properties
 var saved := true # Checks if the user has saved
 
 # Canvas related stuff
+var layers := []
 var current_frame := 0 setget frame_changed
+var current_layer := 0
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
@@ -223,14 +225,14 @@ var right_mirror_container : Container
 var animation_timeline : Panel
 
 var animation_timer : Timer
+var frame_ids : HBoxContainer
 var current_frame_label : Label
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
 var play_backwards : BaseButton
 var timeline_seconds : Control
-var frame_container : HBoxContainer
+var layer_and_frame_container : GridContainer
 
-var vbox_layer_container : VBoxContainer
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
@@ -340,24 +342,23 @@ func _ready() -> void:
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 
+	layer_and_frame_container = find_node_by_name(animation_timeline, "LayersAndFrames")
 	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
+	frame_ids = find_node_by_name(animation_timeline, "FrameIDs")
 	current_frame_label = find_node_by_name(animation_timeline, "CurrentFrame")
 	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
 	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
-	timeline_seconds = find_node_by_name(animation_timeline, "TimelineSeconds")
-	frame_container = find_node_by_name(animation_timeline, "FrameContainer")
 
-	var layer_stuff_container = find_node_by_name(root, "LayerVBoxContainer")
-	var layer_buttons = find_node_by_name(layer_stuff_container, "LayerButtons")
-	remove_layer_button = find_node_by_name(layer_buttons, "RemoveLayer")
-	move_up_layer_button = find_node_by_name(layer_buttons, "MoveUpLayer")
-	move_down_layer_button = find_node_by_name(layer_buttons, "MovwDownLayer")
-	merge_down_layer_button = find_node_by_name(layer_buttons, "MergeDownLayer")
+	#var layer_stuff_container = find_node_by_name(animation_timeline, "LayerVBoxContainer")
 
-	layer_opacity_slider = find_node_by_name(layer_stuff_container, "OpacitySlider")
-	layer_opacity_spinbox = find_node_by_name(layer_stuff_container, "OpacitySpinBox")
-	vbox_layer_container = find_node_by_name(layer_stuff_container, "VBoxLayerContainer")
+	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
+	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
+	move_down_layer_button = find_node_by_name(animation_timeline, "MovwDownLayer")
+	merge_down_layer_button = find_node_by_name(animation_timeline, "MergeDownLayer")
+
+	layer_opacity_slider = find_node_by_name(animation_timeline, "OpacitySlider")
+	layer_opacity_spinbox = find_node_by_name(animation_timeline, "OpacitySpinBox")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	edit_palette_button = find_node_by_name(root, "EditPalette")
@@ -369,6 +370,10 @@ func _ready() -> void:
 	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
+
+	# Store [layer name, frame container]
+	layers.append([tr("Layer") + " 0", HBoxContainer.new()])
+	layer_and_frame_container.add_child(layers[0][1])
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -412,7 +417,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
-		frame_container.remove_child(_canvases[0].frame_button)
+		layer_and_frame_container.remove_child(_canvases[0].frame_button)
 		# This actually means that canvases.size is one, but it hasn't been updated yet
 		if canvases.size() == 2: # Stop animating
 			play_forward.pressed = false
@@ -421,10 +426,10 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	elif action_name == "Remove Frame":
 		canvas_parent.add_child(_canvases[0])
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-		frame_container.add_child(_canvases[0].frame_button)
-		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		layer_and_frame_container.add_child(_canvases[0].frame_button)
+		layer_and_frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 	elif action_name == "Change Frame Order":
-		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		layer_and_frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
@@ -448,26 +453,49 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 			if action_name == "Scale":
 				c.camera_zoom()
-	if "Layer" in action_name:
-		var current_layer_index : int = _canvases[0].current_layer_index
-		_canvases[0].generate_layer_panels()
-		if action_name == "Change Layer Order":
-			_canvases[0].current_layer_index = current_layer_index
-			_canvases[0].get_layer_container(current_layer_index).changed_selection()
+	if action_name == "Add Layer":
+		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
+		_canvases[0].layers[current_layer][2] = tr("Layer") + " %s" % current_layer
+		layer_container.i = current_layer
+		layer_container.get_child(0).get_child(1).text = _canvases[0].layers[current_layer][2]
+		layer_container.get_child(0).get_child(2).text = _canvases[0].layers[current_layer][2]
+		layer_and_frame_container.add_child(layer_container)
+		layer_and_frame_container.move_child(layer_container, 0)
+
+		layer_and_frame_container.add_child(layers[current_layer][1])
+		layer_and_frame_container.move_child(layers[current_layer][1], 1)
+		for i in range(canvases.size()):
+			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
+			frame_button.frame = i
+			frame_button.layer = current_layer
+			frame_button.pressed = true
+
+			layers[current_layer][1].add_child(frame_button)
+
+
+#	if action_name == "Change Layer Order":
+#		var current_layer_index : int = _canvases[0].current_layer_index
+#		_canvases[0].current_layer_index = current_layer_index
+#		_canvases[0].get_layer_container(current_layer_index).changed_selection()
 
 	if action_name == "Add Frame":
 		canvas_parent.add_child(_canvases[0])
-		if !Global.frame_container.is_a_parent_of(_canvases[0].frame_button):
-			Global.frame_container.add_child(_canvases[0].frame_button)
+		var label := Label.new()
+		label.rect_min_size.x = 36
+		label.align = Label.ALIGN_CENTER
+		label.text = str(canvases.size() + 1)
+		frame_ids.add_child(label)
+		if !layer_and_frame_container.is_a_parent_of(_canvases[0].frame_button):
+			layer_and_frame_container.add_child(_canvases[0].frame_button)
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
-		frame_container.remove_child(_canvases[0].frame_button)
+		layer_and_frame_container.remove_child(_canvases[0].frame_button)
 		if canvases.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 	elif action_name == "Change Frame Order":
-		frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		layer_and_frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
@@ -491,18 +519,17 @@ func frame_changed(value : int) -> void:
 		c.line_2d.set_point_position(1, c.line_2d.points[0])
 	canvas = canvases[current_frame]
 	canvas.visible = true
-	canvas.generate_layer_panels()
+	#canvas.generate_layer_panels()
 	# Make all frame buttons unpressed
 	for c in canvases:
 		var text_color := Color.white
 		if theme_type == "Gold" || theme_type == "Light":
 			text_color = Color.black
-		c.frame_button.get_node("FrameButton").pressed = false
-		c.frame_button.get_node("FrameID").add_color_override("font_color", text_color)
+		c.frame_button.pressed = false
+		#c.frame_button.get_node("FrameID").add_color_override("font_color", text_color)
 	# Make only the current frame button pressed
-	canvas.frame_button.get_node("FrameButton").pressed = true
-	canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
-
+	canvas.frame_button.pressed = true
+	#canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container

@@ -23,10 +23,10 @@ func add_frame() -> void:
 	Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 	Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
-	for child in Global.frame_container.get_children():
-		var frame_button = child.get_node("FrameButton")
-		Global.undo_redo.add_do_property(frame_button, "pressed", false)
-		Global.undo_redo.add_undo_property(frame_button, "pressed", frame_button.pressed)
+	for i in range(Global.layers.size()):
+		for child in Global.layers[i][1].get_children():
+			Global.undo_redo.add_do_property(child, "pressed", false)
+			Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 	for c in Global.canvases:
 		Global.undo_redo.add_do_property(c, "visible", false)
 		Global.undo_redo.add_undo_property(c, "visible", c.visible)
@@ -39,18 +39,15 @@ func add_frame() -> void:
 
 func _on_LoopAnim_pressed() -> void:
 	match animation_loop:
-		0:
-			# Make it loop
+		0: # Make it loop
 			animation_loop = 1
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Cycle loop"
-		1:
-			# Make it ping-pong
+		1: # Make it ping-pong
 			animation_loop = 2
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
-		2:
-			# Make it stop
+		2: # Make it stop
 			animation_loop = 0
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
@@ -101,13 +98,13 @@ func _on_AnimationTimer_timeout() -> void:
 			Global.current_frame += 1
 		else:
 			match animation_loop:
-				0: #No loop
+				0: # No loop
 					Global.play_forward.pressed = false
 					Global.play_backwards.pressed = false
 					Global.animation_timer.stop()
-				1: #Cycle loop
+				1: # Cycle loop
 					Global.current_frame = 0
-				2: #Ping pong loop
+				2: # Ping pong loop
 					animation_forward = false
 					_on_AnimationTimer_timeout()
 
@@ -116,13 +113,13 @@ func _on_AnimationTimer_timeout() -> void:
 			Global.current_frame -= 1
 		else:
 			match animation_loop:
-				0: #No loop
+				0: # No loop
 					Global.play_backwards.pressed = false
 					Global.play_forward.pressed = false
 					Global.animation_timer.stop()
-				1: #Cycle loop
+				1: # Cycle loop
 					Global.current_frame = Global.canvases.size() - 1
-				2: #Ping pong loop
+				2: # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
 
@@ -141,4 +138,105 @@ func _on_FutureOnionSkinning_value_changed(value) -> void:
 
 func _on_BlueRedMode_toggled(button_pressed) -> void:
 	Global.onion_skinning_blue_red = button_pressed
+	Global.canvas.update()
+
+# Layer buttons
+
+func add_layer(is_new := true) -> void:
+	var new_layer := Image.new()
+	var layer_name = null
+	if is_new:
+		new_layer.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+	else: # clone layer
+		new_layer.copy_from(Global.canvas.layers[Global.current_layer][0])
+		layer_name = Global.canvas.layers[Global.current_layer][2] + " (" + tr("copy") + ")"
+	new_layer.lock()
+	var new_layer_tex := ImageTexture.new()
+	new_layer_tex.create_from_image(new_layer, 0)
+
+	var new_layers : Array = Global.layers.duplicate()
+
+	# Store [layer name, frame container]
+	new_layers.append([layer_name, HBoxContainer.new()])
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Add Layer")
+	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer + 1)
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
+
+	for c in Global.canvases:
+		var new_canvas_layers : Array = c.layers.duplicate()
+		# Store [Image, ImageTexture, Visibity boolean, Opacity]
+		new_canvas_layers.append([new_layer, new_layer_tex, true, 1])
+		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
+		Global.undo_redo.add_undo_property(c, "layers", c.layers)
+
+	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
+	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
+
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
+
+func _on_RemoveLayer_pressed() -> void:
+	var new_layers : Array = Global.canvas.layers.duplicate()
+	new_layers.remove(Global.canvas.current_layer_index)
+	Global.undos += 1
+	Global.undo_redo.create_action("Remove Layer")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
+
+func change_layer_order(rate : int) -> void:
+	var change = Global.canvas.current_layer_index + rate
+
+	var new_layers : Array = Global.canvas.layers.duplicate()
+	var temp = new_layers[Global.canvas.current_layer_index]
+	new_layers[Global.canvas.current_layer_index] = new_layers[change]
+	new_layers[change] = temp
+	Global.undo_redo.create_action("Change Layer Order")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_do_property(Global.canvas, "current_layer_index", change)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_property(Global.canvas, "current_layer_index", Global.canvas.current_layer_index)
+
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
+
+func _on_MergeDownLayer_pressed() -> void:
+	var new_layers : Array = Global.canvas.layers.duplicate()
+	new_layers.remove(Global.canvas.current_layer_index)
+	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
+	if Global.canvas.layers[Global.canvas.current_layer_index][4] < 1: # If we have layer transparency
+		for xx in selected_layer.get_size().x:
+			for yy in selected_layer.get_size().y:
+				var pixel_color : Color = selected_layer.get_pixel(xx, yy)
+				var alpha : float = pixel_color.a * Global.canvas.layers[Global.canvas.current_layer_index][4]
+				selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+
+	var new_layer := Image.new()
+	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
+	new_layer.lock()
+
+	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Merge Layer")
+	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
+	Global.undo_redo.add_do_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", new_layer.data)
+	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", Global.canvas.layers[Global.canvas.current_layer_index - 1][0].data)
+
+	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.commit_action()
+
+func _on_OpacitySlider_value_changed(value) -> void:
+	Global.canvas.layers[Global.current_layer][3] = value / 100
+	Global.layer_opacity_slider.value = value
+	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()

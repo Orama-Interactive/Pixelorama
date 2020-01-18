@@ -406,9 +406,10 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		Global.canvas = canvas
 		var width := file.get_16()
 		var height := file.get_16()
+		print(width, height)
 
 		var layer_line := file.get_line()
-		while layer_line == "-": #Load layers
+		while layer_line == "-": # Load layers
 			var buffer := file.get_buffer(width * height * 4)
 			var layer_name := file.get_line()
 			var layer_transparency := 1.0
@@ -507,7 +508,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 				file.store_float(layer[4]) # Layer transparency
 			file.store_line("END_LAYERS")
 
-			for child in canvas.get_children(): #Store guides
+			for child in canvas.get_children(): # Store guides
 				if child is Guide:
 					file.store_line("|")
 					file.store_8(child.type)
@@ -554,7 +555,7 @@ func clear_canvases() -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is PanelContainer:
 			child.queue_free()
-	for child in Global.frame_container.get_children():
+	for child in Global.frame_containers.get_children():
 		child.queue_free()
 	for child in Global.canvas_parent.get_children():
 		if child is Canvas:
@@ -687,86 +688,6 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size = new_size
 	update_right_custom_brush()
 
-func add_layer(is_new := true) -> void:
-	var new_layer := Image.new()
-	var layer_name = null
-	if is_new:
-		new_layer.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
-	else: # clone layer
-		new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index][0])
-		layer_name = Global.canvas.layers[Global.canvas.current_layer_index][2] + " (" + tr("copy") + ")"
-	new_layer.lock()
-	var new_layer_tex := ImageTexture.new()
-	new_layer_tex.create_from_image(new_layer, 0)
-
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-	new_layers.append([new_layer, new_layer_tex, layer_name, true, 1])
-	Global.undos += 1
-	Global.undo_redo.create_action("Add Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func _on_RemoveLayerButton_pressed() -> void:
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	new_layers.remove(Global.canvas.current_layer_index)
-	Global.undos += 1
-	Global.undo_redo.create_action("Remove Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func change_layer_order(rate : int) -> void:
-	var change = Global.canvas.current_layer_index + rate
-
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	var temp = new_layers[Global.canvas.current_layer_index]
-	new_layers[Global.canvas.current_layer_index] = new_layers[change]
-	new_layers[change] = temp
-	Global.undo_redo.create_action("Change Layer Order")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas, "current_layer_index", change)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "current_layer_index", Global.canvas.current_layer_index)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func _on_MergeLayer_pressed() -> void:
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	new_layers.remove(Global.canvas.current_layer_index)
-	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
-	if Global.canvas.layers[Global.canvas.current_layer_index][4] < 1: # If we have layer transparency
-		for xx in selected_layer.get_size().x:
-			for yy in selected_layer.get_size().y:
-				var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-				var alpha : float = pixel_color.a * Global.canvas.layers[Global.canvas.current_layer_index][4]
-				selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-
-	var new_layer := Image.new()
-	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
-	new_layer.lock()
-
-	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
-
-	Global.undos += 1
-	Global.undo_redo.create_action("Merge Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", new_layer.data)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", Global.canvas.layers[Global.canvas.current_layer_index - 1][0].data)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color
