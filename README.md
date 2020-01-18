@@ -1,7 +1,7 @@
 # Pixelorama - your free and open-source sprite editor!
  Your free & open-source 2D sprite editor, made by Orama Interactive in the Godot Engine, using GDScript!
 
-[![Repo size](https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg?style=flat-square)](https://github.com/Orama-Interactive/Pixelorama) [![Discord Server](https://discordapp.com/api/guilds/645793202393186339/embed.png)](https://discord.gg/GTMtr8s) [![Mentioned in Awesome Godot](https://awesome.re/mentioned-badge.svg)](https://github.com/Calinou/awesome-godot)
+[![Repo size](https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg)](https://github.com/Orama-Interactive/Pixelorama) [![Discord Server](https://discordapp.com/api/guilds/645793202393186339/embed.png)](https://discord.gg/GTMtr8s) [![Mentioned in Awesome Godot](https://awesome.re/mentioned-badge.svg)](https://github.com/Calinou/awesome-godot)
  
  [![Pixelorama's UI](https://static.wixstatic.com/media/cc6108_ccec89c37b3d425da4f03776160c859c~mv2.png)](https://www.youtube.com/watch?v=DULv-jzueRw&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=7)
 
