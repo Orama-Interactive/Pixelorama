@@ -231,7 +231,8 @@ var loop_animation_button : BaseButton
 var play_forward : BaseButton
 var play_backwards : BaseButton
 var timeline_seconds : Control
-var layer_and_frame_container : GridContainer
+var layers_container : VBoxContainer
+var frames_container : VBoxContainer
 
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
@@ -342,7 +343,8 @@ func _ready() -> void:
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 
-	layer_and_frame_container = find_node_by_name(animation_timeline, "LayersAndFrames")
+	layers_container = find_node_by_name(animation_timeline, "LayersContainer")
+	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
 	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
 	frame_ids = find_node_by_name(animation_timeline, "FrameIDs")
 	current_frame_label = find_node_by_name(animation_timeline, "CurrentFrame")
@@ -373,7 +375,7 @@ func _ready() -> void:
 
 	# Store [layer name, frame container]
 	layers.append([tr("Layer") + " 0", HBoxContainer.new()])
-	layer_and_frame_container.add_child(layers[0][1])
+	frames_container.add_child(layers[0][1])
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -417,7 +419,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
-		layer_and_frame_container.remove_child(_canvases[0].frame_button)
+		frames_container.remove_child(_canvases[0].frame_button)
 		# This actually means that canvases.size is one, but it hasn't been updated yet
 		if canvases.size() == 2: # Stop animating
 			play_forward.pressed = false
@@ -426,10 +428,10 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	elif action_name == "Remove Frame":
 		canvas_parent.add_child(_canvases[0])
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-		layer_and_frame_container.add_child(_canvases[0].frame_button)
-		layer_and_frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		frames_container.add_child(_canvases[0].frame_button)
+		frames_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 	elif action_name == "Change Frame Order":
-		layer_and_frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		frames_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
@@ -459,11 +461,11 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		layer_container.i = current_layer
 		layer_container.get_child(0).get_child(1).text = _canvases[0].layers[current_layer][2]
 		layer_container.get_child(0).get_child(2).text = _canvases[0].layers[current_layer][2]
-		layer_and_frame_container.add_child(layer_container)
-		layer_and_frame_container.move_child(layer_container, 0)
+		layers_container.add_child(layer_container)
+		layers_container.move_child(layer_container, 1)
 
-		layer_and_frame_container.add_child(layers[current_layer][1])
-		layer_and_frame_container.move_child(layers[current_layer][1], 1)
+		frames_container.add_child(layers[current_layer][1])
+		frames_container.move_child(layers[current_layer][1], 2)
 		for i in range(canvases.size()):
 			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 			frame_button.frame = i
@@ -485,17 +487,17 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		label.align = Label.ALIGN_CENTER
 		label.text = str(canvases.size() + 1)
 		frame_ids.add_child(label)
-		if !layer_and_frame_container.is_a_parent_of(_canvases[0].frame_button):
-			layer_and_frame_container.add_child(_canvases[0].frame_button)
+		if !frames_container.is_a_parent_of(_canvases[0].frame_button):
+			frames_container.add_child(_canvases[0].frame_button)
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
-		layer_and_frame_container.remove_child(_canvases[0].frame_button)
+		frames_container.remove_child(_canvases[0].frame_button)
 		if canvases.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 	elif action_name == "Change Frame Order":
-		layer_and_frame_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
+		frames_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
