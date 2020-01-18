@@ -1,7 +1,10 @@
-# Pixelorama - your free and open-source sprite editor!
-Your free & open-source 2D sprite editor, made by Orama Interactive in the Godot Engine, using GDScript!
-
-<p align="center" >
+<p align="center">
+    <h1 align = "center">Pixelorama - your free and open-source sprite editor!</h1>
+</p>
+<p align="center">
+    Made by Orama Interactive in the Godot Engine, using GDScript!
+</p>
+ <p align="center">  
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" />
     </a>
