@@ -11,7 +11,7 @@ onready var line_edit := $HBoxContainer/LineEdit
 
 func _ready() -> void:
 	#changed_selection()
-	if Global.canvas.layers[i][3]:
+	if Global.layers[i][1]:
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
 	else:
@@ -76,12 +76,12 @@ func changed_selection() -> void:
 				child.pressed = false
 
 func _on_VisibilityButton_pressed() -> void:
-	if Global.canvas.layers[i][3]:
-		Global.canvas.layers[i][3] = false
+	if Global.layers[i][1]:
+		Global.layers[i][1] = false
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible_Hover.png" % Global.theme_type)
 	else:
-		Global.canvas.layers[i][3] = true
+		Global.layers[i][1] = true
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
 	Global.canvas.update()

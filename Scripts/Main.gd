@@ -163,7 +163,9 @@ func _ready() -> void:
 
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 
-	Global.canvas.layers[0][2] = tr("Layer") + " 0"
+	Global.layers[0][0] = tr("Layer") + " 0"
+	Global.layers_container.get_child(1).label.text = Global.layers[0][0]
+	Global.layers_container.get_child(1).line_edit.text = Global.layers[0][0]
 	Global.canvas.generate_layer_panels()
 
 	Import.import_brushes("Brushes")

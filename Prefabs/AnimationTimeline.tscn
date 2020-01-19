@@ -188,6 +188,7 @@ margin_bottom = 32.0
 [node name="Line2D" type="Line2D" parent="AnimationContainer/TimelineContainer/LayerButtons/AnimationTags"]
 points = PoolVector2Array( 0, 32, 0, 0, 110, 0, 110, 32 )
 width = 1.0
+texture_mode = 1313163520
 
 [node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/LayerButtons/AnimationTags"]
 margin_right = 110.0

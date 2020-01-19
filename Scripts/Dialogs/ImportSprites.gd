@@ -55,8 +55,8 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			image.lock()
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
-			# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-			canvas.layers.append([image, tex, "Layer 0", true, 1])
+			# Store [Image, ImageTexture, Opacity]
+			canvas.layers.append([image, tex, 1])
 			canvas.frame = i
 			Global.canvases.append(canvas)
 			Global.canvas_parent.add_child(canvas)

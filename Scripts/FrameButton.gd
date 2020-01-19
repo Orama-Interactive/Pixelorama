@@ -44,13 +44,13 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			var new_hidden_canvases := Global.hidden_canvases.duplicate()
 			new_hidden_canvases.append(new_canvas)
 
-			for layer in canvas.layers: #Copy every layer
+			for layer in canvas.layers: # Copy every layer
 				var sprite := Image.new()
 				sprite.copy_from(layer[0])
 				sprite.lock()
 				var tex := ImageTexture.new()
 				tex.create_from_image(sprite, 0)
-				new_canvas.layers.append([sprite, tex, layer[2], layer[3], layer[4]])
+				new_canvas.layers.append([sprite, tex, layer[2]])
 
 			Global.undos += 1
 			Global.undo_redo.create_action("Add Frame")

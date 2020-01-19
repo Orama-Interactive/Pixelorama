@@ -373,9 +373,9 @@ func _ready() -> void:
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
-	# Store [layer name, frame container]
-	layers.append([tr("Layer") + " 0", HBoxContainer.new()])
-	frames_container.add_child(layers[0][1])
+	# Store [Layer name, Layer visibility boolean, Frame container]
+	layers.append([tr("Layer") + " 0", true, HBoxContainer.new()])
+	frames_container.add_child(layers[0][2])
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -457,22 +457,22 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 				c.camera_zoom()
 	if action_name == "Add Layer":
 		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-		_canvases[0].layers[current_layer][2] = tr("Layer") + " %s" % current_layer
+		layers[current_layer][0] = tr("Layer") + " %s" % current_layer
 		layer_container.i = current_layer
-		layer_container.get_child(0).get_child(1).text = _canvases[0].layers[current_layer][2]
-		layer_container.get_child(0).get_child(2).text = _canvases[0].layers[current_layer][2]
+		layer_container.get_child(0).get_child(1).text = layers[current_layer][0]
+		layer_container.get_child(0).get_child(2).text = layers[current_layer][0]
 		layers_container.add_child(layer_container)
 		layers_container.move_child(layer_container, 1)
 
-		frames_container.add_child(layers[current_layer][1])
-		frames_container.move_child(layers[current_layer][1], 1)
+		frames_container.add_child(layers[current_layer][2])
+		frames_container.move_child(layers[current_layer][2], 1)
 		for i in range(canvases.size()):
 			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 			frame_button.frame = i
 			frame_button.layer = current_layer
 			frame_button.pressed = true
 
-			layers[current_layer][1].add_child(frame_button)
+			layers[current_layer][2].add_child(frame_button)
 
 
 #	if action_name == "Change Layer Order":

@@ -24,7 +24,7 @@ func add_frame() -> void:
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 	Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
 	for i in range(Global.layers.size()):
-		for child in Global.layers[i][1].get_children():
+		for child in Global.layers[i][2].get_children():
 			Global.undo_redo.add_do_property(child, "pressed", false)
 			Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 	for c in Global.canvases:
@@ -149,15 +149,15 @@ func add_layer(is_new := true) -> void:
 		new_layer.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
 	else: # clone layer
 		new_layer.copy_from(Global.canvas.layers[Global.current_layer][0])
-		layer_name = Global.canvas.layers[Global.current_layer][2] + " (" + tr("copy") + ")"
+		layer_name = Global.layers[Global.current_layer][1] + " (" + tr("copy") + ")"
 	new_layer.lock()
 	var new_layer_tex := ImageTexture.new()
 	new_layer_tex.create_from_image(new_layer, 0)
 
 	var new_layers : Array = Global.layers.duplicate()
 
-	# Store [layer name, frame container]
-	new_layers.append([layer_name, HBoxContainer.new()])
+	# Store [Layer name, Layer visibility boolean, Frame container]
+	new_layers.append([layer_name, true, HBoxContainer.new()])
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
@@ -166,8 +166,8 @@ func add_layer(is_new := true) -> void:
 
 	for c in Global.canvases:
 		var new_canvas_layers : Array = c.layers.duplicate()
-		# Store [Image, ImageTexture, Visibity boolean, Opacity]
-		new_canvas_layers.append([new_layer, new_layer_tex, true, 1])
+		# Store [Image, ImageTexture, Opacity]
+		new_canvas_layers.append([new_layer, new_layer_tex, 1])
 		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
@@ -236,7 +236,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undo_redo.commit_action()
 
 func _on_OpacitySlider_value_changed(value) -> void:
-	Global.canvas.layers[Global.current_layer][3] = value / 100
+	Global.canvas.layers[Global.current_layer][2] = value / 100
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
