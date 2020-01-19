@@ -2,8 +2,10 @@
 Name=Pixelorama
 GenericName=2D sprite editor
 GenericName[fr]=Éditeur de sprites 2D
+GenericName[pt_BR]=Editor de sprites 2D
 Comment=Create and edit static or animated 2D sprites
 Comment[fr]=Créez et modifiez des sprites 2D statiques ou animées
+Comment[pt_BR]=Crie e edite sprites 2D estáticos ou animados
 Exec=pixelorama
 Icon=pixelorama
 Terminal=false
