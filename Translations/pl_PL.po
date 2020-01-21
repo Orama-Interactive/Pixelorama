@@ -1,15 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pixelorama\n"
-"Last-Translator: Tiritto\n"
-"Language-Team: none\n"
-"Language: pl\n"
-"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Language: pl\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Polish\n"
+"Language: pl_PL\n"
+"PO-Revision-Date: 2020-01-21 20:26\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -17,9 +19,8 @@ msgstr "Anuluj"
 msgid "Open"
 msgstr "Otwórz"
 
-#, fuzzy
 msgid "Save"
-msgstr "Zapisz..."
+msgstr ""
 
 msgid "Please Confirm..."
 msgstr "Proszę potwierdzić..."
@@ -42,9 +43,8 @@ msgstr "Edycja"
 msgid "View"
 msgstr "Widok"
 
-#, fuzzy
 msgid "Image"
-msgstr "Rozmiar obrazu"
+msgstr ""
 
 msgid "Effects"
 msgstr ""
@@ -127,16 +127,14 @@ msgstr "Otwórz pliki"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importuj jako nowa klatka"
 
-#, fuzzy
 msgid "IMPORT_SPRITESHEET"
-msgstr "Pionowy arkusz"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Zapisz Sprite do .pxo"
 
-#, fuzzy
 msgid "Export Sprite as .png"
-msgstr "Eksportuj Sprite"
+msgstr ""
 
 msgid "Export Sprite"
 msgstr "Eksportuj Sprite"
@@ -147,17 +145,14 @@ msgstr ""
 msgid "Resize:"
 msgstr ""
 
-#, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Eksportuj wszystkie klatki"
+msgstr ""
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Eksportuj klatki jako jeden plik"
+msgstr ""
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Pionowy arkusz"
+msgstr ""
 
 msgid "Columns"
 msgstr ""
@@ -192,9 +187,8 @@ msgstr "Sześcienna"
 msgid "Trilinear"
 msgstr "Trójlinowa"
 
-#, fuzzy
 msgid "Language"
-msgstr "Język:"
+msgstr ""
 
 msgid "Themes"
 msgstr ""
@@ -202,13 +196,11 @@ msgstr ""
 msgid "Guides & Grid"
 msgstr ""
 
-#, fuzzy
 msgid "Language options"
-msgstr "Język:"
+msgstr ""
 
-#, fuzzy
 msgid "Theme options"
-msgstr "Ustawienia siatki"
+msgstr ""
 
 msgid "Grid options"
 msgstr "Ustawienia siatki"
@@ -222,9 +214,8 @@ msgstr ""
 msgid "System Language"
 msgstr "Język systemowy"
 
-#, fuzzy
 msgid "Dark"
-msgstr "Przyciemnianie"
+msgstr ""
 
 msgid "Gray"
 msgstr ""
@@ -232,9 +223,8 @@ msgstr ""
 msgid "Gold"
 msgstr ""
 
-#, fuzzy
 msgid "Light"
-msgstr "Rozjaśnianie"
+msgstr ""
 
 msgid "Invert colors"
 msgstr ""
@@ -302,9 +292,8 @@ msgstr ""
 msgid "untitled"
 msgstr ""
 
-#, fuzzy
 msgid "imported"
-msgstr "Plik został wyeksportowany"
+msgstr ""
 
 msgid "copy"
 msgstr ""
@@ -316,19 +305,14 @@ msgid "Utility Tools"
 msgstr "Narzędzia"
 
 msgid "RECTSELECT_HT"
-msgstr ""
-"Zaznaczenie prostokątne\n"
-"\n"
+msgstr "Zaznaczenie prostokątne\n\n"
 "R dla lewego narzędzia\n"
-"Alt + R dla prawego narzędzia\n"
-"\n"
+"Alt + R dla prawego narzędzia\n\n"
 "Przytrzymaj Shift aby przenieść zawartość"
 
 msgid "COLORPICKER_HT"
-msgstr ""
-"Próbnik\n"
-"Pobiera kolor wybranego piksela do wybranego narzędzia.\n"
-"\n"
+msgstr "Próbnik\n"
+"Pobiera kolor wybranego piksela do wybranego narzędzia.\n\n"
 "O dla lewego narzędzia\n"
 "Alt + O dla prawego narzędzia"
 
@@ -336,34 +320,24 @@ msgid "Draw Tools"
 msgstr "Rysowanie"
 
 msgid "PENCIL_HT"
-msgstr ""
-"Ołówek\n"
-"\n"
+msgstr "Ołówek\n\n"
 "P dla lewego narzędzia\n"
-"Alt + P dla prawego narzędzia\n"
-"\n"
+"Alt + P dla prawego narzędzia\n\n"
 "Przytrzymaj Shift aby narysować linię"
 
 msgid "ERASER_HT"
-msgstr ""
-"Gumka\n"
-"\n"
+msgstr "Gumka\n\n"
 "E dla lewego narzędzia\n"
-"Alt + E dla prawego narzędzia\n"
-"\n"
+"Alt + E dla prawego narzędzia\n\n"
 "Przytrzymaj Shift aby użyć w linii prostej"
 
 msgid "BUCKET_HT"
-msgstr ""
-"Wiaderko\n"
-"\n"
+msgstr "Wiaderko\n\n"
 "B dla lewego narzędzia\n"
 "Alt + B dla prawego narzędzia"
 
 msgid "LD_HT"
-msgstr ""
-"Rozjaśnianie/Ściemnianie\n"
-"\n"
+msgstr "Rozjaśnianie/Ściemnianie\n\n"
 "U dla lewego narzędzia\n"
 "Alt + U dla prawego narzędzia"
 
@@ -374,8 +348,7 @@ msgid "RIGHTCOLOR_HT"
 msgstr "Wybiera kolor dla prawego narzędzia"
 
 msgid "COLORSWITCH_HT"
-msgstr ""
-"Podmienia lewy kolor z prawym kolorem\n"
+msgstr "Podmienia lewy kolor z prawym kolorem\n"
 "(X)"
 
 msgid "COLORDEFAULTS_HT"
@@ -393,14 +366,14 @@ msgstr "Opcje prawego narzędzia"
 msgid "Left pixel indicator"
 msgstr "Wskaźnik lewego pędzla"
 
-msgid "Show tool icon"
-msgstr "Pokaż ikonę narzędzia"
-
 msgid "LEFT_INDIC_HT"
 msgstr "Wyświetl wskaźnik lewego narzędzia lub pędzla podczas rysowania"
 
 msgid "RIGHT_INDIC_HT"
 msgstr "Wyświetl wskaźnik prawego narzędzia lub pędzla podczas rysowania"
+
+msgid "Show tool icon"
+msgstr "Pokaż ikonę narzędzia"
 
 msgid "Right pixel indicator"
 msgstr "Wskaźnik prawego pędzla"
@@ -414,13 +387,11 @@ msgstr "Wybierz pędzel"
 msgid "Brush: Pixel"
 msgstr "Pędzel: Piksel"
 
-#, fuzzy
 msgid "Brush: Circle"
-msgstr "Pędzel: Piksel"
+msgstr ""
 
-#, fuzzy
 msgid "Brush: Filled Circle"
-msgstr "Pędzel: Piksel"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Niestandardowy pędzel"
@@ -432,8 +403,7 @@ msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
 
 msgid "COLORFROM_HT"
-msgstr ""
-"0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowania"
+msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowania"
 
 msgid "Fill area:"
 msgstr "Wypełnij przestrzeń:"
@@ -459,13 +429,11 @@ msgstr "Siła rozjaśnienia/przyciemnienia"
 msgid "Pick for:"
 msgstr ""
 
-#, fuzzy
 msgid "Left Color"
-msgstr "Kolor:"
+msgstr ""
 
-#, fuzzy
 msgid "Right Color"
-msgstr "Opcje prawego narzędzia"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
@@ -489,38 +457,31 @@ msgid "Current frame: 1/1"
 msgstr "Obecna klatka: 1/1"
 
 msgid "FIRSTFRAME_HT"
-msgstr ""
-"Skocz do pierwszej klatki\n"
+msgstr "Skocz do pierwszej klatki\n"
 "(Ctrl+Home)"
 
 msgid "PREVIOUSFRAME_HT"
-msgstr ""
-"Przejdź do poprzedniej klatki\n"
+msgstr "Przejdź do poprzedniej klatki\n"
 "(Ctrl+Strzałka w lewo)"
 
 msgid "PLAYBACKWARDS_HT"
-msgstr ""
-"Odtwórz animację od końca\n"
+msgstr "Odtwórz animację od końca\n"
 "(F4)"
 
 msgid "PLAYFORWARD_HT"
-msgstr ""
-"Odtwórz animację od początku\n"
+msgstr "Odtwórz animację od początku\n"
 "(F5)"
 
 msgid "NEXTFRAME_HT"
-msgstr ""
-"Przejdź do następnej klatki\n"
+msgstr "Przejdź do następnej klatki\n"
 "(Ctrl+Strzałka w prawo)"
 
 msgid "LASTFRAME_HT"
-msgstr ""
-"Skocz do ostatniej klatki\n"
+msgstr "Skocz do ostatniej klatki\n"
 "(Ctrl+End)"
 
 msgid "FPS_HT"
-msgstr ""
-"W ilu klatkach na sekundę odtwarzana ma być animacja?\n"
+msgstr "W ilu klatkach na sekundę odtwarzana ma być animacja?\n"
 "Większa ilość klatek na sekundę powoduje szybsze odtwarzanie."
 
 msgid "No loop"
@@ -559,9 +520,8 @@ msgstr "Przesuń w lewo"
 msgid "Move Right"
 msgstr "Przesuń w prawo"
 
-#, fuzzy
 msgid "Layer"
-msgstr "Warstwy"
+msgstr ""
 
 msgid "Layers"
 msgstr "Warstwy"
@@ -689,9 +649,8 @@ msgstr ""
 msgid "Palette Name:"
 msgstr ""
 
-#, fuzzy
 msgid "Color Name:"
-msgstr "Kolor:"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr ""
@@ -732,21 +691,6 @@ msgstr ""
 msgid "Take this spot!"
 msgstr ""
 
-#~ msgid "Language:"
-#~ msgstr "Język:"
-
-#~ msgid "SPLITSCREEN_HT"
-#~ msgstr ""
-#~ "Podzielenie ekranu\n"
-#~ "\n"
-#~ "Wyświetla drugie płótno"
-
-#~ msgid "SPLITSCREEN_HIDE_HT"
-#~ msgstr ""
-#~ "Podzielenie ekranu\n"
-#~ "\n"
-#~ "Ukrywa drugie płótno"
-
 msgid "Image Options"
 msgstr ""
 
@@ -758,3 +702,4 @@ msgstr ""
 
 msgid "Default Fill Color:"
 msgstr ""
+

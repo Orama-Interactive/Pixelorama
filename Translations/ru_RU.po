@@ -1,15 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pixelorama\n"
-"Last-Translator: AndreevAndrei\n"
-"Language-Team: none\n"
-"Language: ru\n"
-"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Language: ru\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"PO-Revision-Date: 2020-01-21 20:26\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -17,9 +19,8 @@ msgstr "Отмена"
 msgid "Open"
 msgstr "Открыть"
 
-#, fuzzy
 msgid "Save"
-msgstr "Сохранить..."
+msgstr ""
 
 msgid "Please Confirm..."
 msgstr "Пожалуйста подтвердите..."
@@ -42,9 +43,8 @@ msgstr "Редактировать"
 msgid "View"
 msgstr "Просмотр"
 
-#, fuzzy
 msgid "Image"
-msgstr "Размер изображения"
+msgstr ""
 
 msgid "Effects"
 msgstr ""
@@ -127,16 +127,14 @@ msgstr "Открыть файл(ы)"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Добавить как новый кадр"
 
-#, fuzzy
 msgid "IMPORT_SPRITESHEET"
-msgstr "Экспорт Sprite-листа"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Сохранить Sprite как .pxo"
 
-#, fuzzy
 msgid "Export Sprite as .png"
-msgstr "Экспортировать Sprite"
+msgstr ""
 
 msgid "Export Sprite"
 msgstr "Экспортировать Sprite"
@@ -147,17 +145,14 @@ msgstr ""
 msgid "Resize:"
 msgstr ""
 
-#, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Экспортировать все кадры как"
+msgstr ""
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Экспортировать кадры в один файл"
+msgstr ""
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Экспорт Sprite-листа"
+msgstr ""
 
 msgid "Columns"
 msgstr ""
@@ -192,9 +187,8 @@ msgstr "Кубический"
 msgid "Trilinear"
 msgstr "Трехлинейный"
 
-#, fuzzy
 msgid "Language"
-msgstr "Язык:"
+msgstr ""
 
 msgid "Themes"
 msgstr ""
@@ -202,13 +196,11 @@ msgstr ""
 msgid "Guides & Grid"
 msgstr ""
 
-#, fuzzy
 msgid "Language options"
-msgstr "Язык:"
+msgstr ""
 
-#, fuzzy
 msgid "Theme options"
-msgstr "Настройки сетки"
+msgstr ""
 
 msgid "Grid options"
 msgstr "Настройки сетки"
@@ -222,9 +214,8 @@ msgstr ""
 msgid "System Language"
 msgstr "Системный язык"
 
-#, fuzzy
 msgid "Dark"
-msgstr "Затемнить"
+msgstr ""
 
 msgid "Gray"
 msgstr ""
@@ -232,9 +223,8 @@ msgstr ""
 msgid "Gold"
 msgstr ""
 
-#, fuzzy
 msgid "Light"
-msgstr "Высветлить"
+msgstr ""
 
 msgid "Invert colors"
 msgstr ""
@@ -302,9 +292,8 @@ msgstr ""
 msgid "untitled"
 msgstr ""
 
-#, fuzzy
 msgid "imported"
-msgstr "Файл экспортирован"
+msgstr ""
 
 msgid "copy"
 msgstr ""
@@ -316,19 +305,14 @@ msgid "Utility Tools"
 msgstr "Сервисные инструменты"
 
 msgid "RECTSELECT_HT"
-msgstr ""
-"Прямоугольное выдиление\n"
-"\n"
+msgstr "Прямоугольное выдиление\n\n"
 "R для ЛКМ\n"
-"Alt + R для ПКМ\n"
-"\n"
+"Alt + R для ПКМ\n\n"
 "Shift для перемещения контента"
 
 msgid "COLORPICKER_HT"
-msgstr ""
-"Выбор цвета\n"
-"Выбрать цвет из пикселя Sprit'а\n"
-"\n"
+msgstr "Выбор цвета\n"
+"Выбрать цвет из пикселя Sprit'а\n\n"
 "O для ЛКМ\n"
 "Alt + O для ПКМ"
 
@@ -336,34 +320,24 @@ msgid "Draw Tools"
 msgstr "Инструменты рисования"
 
 msgid "PENCIL_HT"
-msgstr ""
-"Карандаш\n"
-"\n"
+msgstr "Карандаш\n\n"
 "P для ЛКМ\n"
-"Alt + P для ПКМ\n"
-"\n"
+"Alt + P для ПКМ\n\n"
 "Зажать Shift для создания прямой"
 
 msgid "ERASER_HT"
-msgstr ""
-"Ластик\n"
-"\n"
+msgstr "Ластик\n\n"
 "E для ЛКМ\n"
-"Alt + E для ПКМ\n"
-"\n"
+"Alt + E для ПКМ\n\n"
 "Зажать Shift для очистки линией"
 
 msgid "BUCKET_HT"
-msgstr ""
-"Заливка\n"
-"\n"
+msgstr "Заливка\n\n"
 "B для ЛКМ\n"
 "Alt + B для ПКМ"
 
 msgid "LD_HT"
-msgstr ""
-"Высветление/Затемнение\n"
-"\n"
+msgstr "Высветление/Затемнение\n\n"
 "U для ЛКМ\n"
 "Alt + U ПКМ"
 
@@ -374,8 +348,7 @@ msgid "RIGHTCOLOR_HT"
 msgstr "Выбор цвета для правого инструмента"
 
 msgid "COLORSWITCH_HT"
-msgstr ""
-"Поменять цвета местами\n"
+msgstr "Поменять цвета местами\n"
 "(X)"
 
 msgid "COLORDEFAULTS_HT"
@@ -393,14 +366,14 @@ msgstr "Настройки правого инструмента"
 msgid "Left pixel indicator"
 msgstr "Цвет для ЛКМ"
 
-msgid "Show tool icon"
-msgstr "Показать значок инструмента"
-
 msgid "LEFT_INDIC_HT"
 msgstr "Отображать цвет кисти для ЛКМ во время рисования"
 
 msgid "RIGHT_INDIC_HT"
 msgstr "Отображать цвет кисти для ПКМ во время рисования"
+
+msgid "Show tool icon"
+msgstr "Показать значок инструмента"
 
 msgid "Right pixel indicator"
 msgstr "Цвет для ПКМ"
@@ -414,13 +387,11 @@ msgstr "Выбрать кисть"
 msgid "Brush: Pixel"
 msgstr "Кисть: Пиксель"
 
-#, fuzzy
 msgid "Brush: Circle"
-msgstr "Кисть: Пиксель"
+msgstr ""
 
-#, fuzzy
 msgid "Brush: Filled Circle"
-msgstr "Кисть: Пиксель"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Текущая кисть"
@@ -458,13 +429,11 @@ msgstr "Интенсивность Высветления/Затемнения"
 msgid "Pick for:"
 msgstr ""
 
-#, fuzzy
 msgid "Left Color"
-msgstr "Цвет:"
+msgstr ""
 
-#, fuzzy
 msgid "Right Color"
-msgstr "Настройки правого инструмента"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Отразить зеркально"
@@ -488,38 +457,31 @@ msgid "Current frame: 1/1"
 msgstr "Текущий кадр: 1/1"
 
 msgid "FIRSTFRAME_HT"
-msgstr ""
-"Перейти к первому кадру\n"
+msgstr "Перейти к первому кадру\n"
 "(Ctrl+Home)"
 
 msgid "PREVIOUSFRAME_HT"
-msgstr ""
-"На предыдущий кадр\n"
+msgstr "На предыдущий кадр\n"
 "(Ctrl+Left)"
 
 msgid "PLAYBACKWARDS_HT"
-msgstr ""
-"Проиграть анимацию задом наперед (с конца в начало)\n"
+msgstr "Проиграть анимацию задом наперед (с конца в начало)\n"
 "(F4)"
 
 msgid "PLAYFORWARD_HT"
-msgstr ""
-"Проиграть анимацию по умолчанию (с начала в конец)\n"
+msgstr "Проиграть анимацию по умолчанию (с начала в конец)\n"
 "(F5)"
 
 msgid "NEXTFRAME_HT"
-msgstr ""
-"На следующий кадр\n"
+msgstr "На следующий кадр\n"
 "(Ctrl+Right)"
 
 msgid "LASTFRAME_HT"
-msgstr ""
-"Перейти на последний кадр\n"
+msgstr "Перейти на последний кадр\n"
 "(Ctrl+End)"
 
 msgid "FPS_HT"
-msgstr ""
-"Число кадров в секунду для просмотра анимации?\n"
+msgstr "Число кадров в секунду для просмотра анимации?\n"
 "Большее число кадров в секунду ускорит анмацию."
 
 msgid "No loop"
@@ -558,9 +520,8 @@ msgstr "Сместить влево"
 msgid "Move Right"
 msgstr "Сместить вправо"
 
-#, fuzzy
 msgid "Layer"
-msgstr "Слои"
+msgstr ""
 
 msgid "Layers"
 msgstr "Слои"
@@ -688,9 +649,8 @@ msgstr ""
 msgid "Palette Name:"
 msgstr ""
 
-#, fuzzy
 msgid "Color Name:"
-msgstr "Цвет:"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr ""
@@ -731,21 +691,6 @@ msgstr ""
 msgid "Take this spot!"
 msgstr ""
 
-#~ msgid "Language:"
-#~ msgstr "Язык:"
-
-#~ msgid "SPLITSCREEN_HT"
-#~ msgstr ""
-#~ "Разделить экран\n"
-#~ "\n"
-#~ "Отобразить второй холст"
-
-#~ msgid "SPLITSCREEN_HIDE_HT"
-#~ msgstr ""
-#~ "Разделить экран\n"
-#~ "\n"
-#~ "Скрыть второй холст"
-
 msgid "Image Options"
 msgstr ""
 
@@ -757,3 +702,4 @@ msgstr ""
 
 msgid "Default Fill Color:"
 msgstr ""
+

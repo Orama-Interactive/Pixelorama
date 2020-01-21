@@ -1,21 +1,17 @@
-# Translators
-# Schweini07, 2019-2020.
-# Martin Zabinski, 2019-2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pixelorama\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Schweini07\n"
-"Language-Team: none\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"PO-Revision-Date: 2020-01-21 20:26\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -177,19 +173,19 @@ msgid "File:"
 msgstr "Datei:"
 
 msgid "Interpolation:"
-msgstr "Interpolation:"
+msgstr ""
 
 msgid "Nearest"
 msgstr "Nächstes"
 
 msgid "Bilinear"
-msgstr "Bilinear"
+msgstr ""
 
 msgid "Cubic"
 msgstr "Kubisch"
 
 msgid "Trilinear"
-msgstr "Trilinear"
+msgstr ""
 
 msgid "Language"
 msgstr "Sprache"
@@ -225,7 +221,7 @@ msgid "Gray"
 msgstr "Grau"
 
 msgid "Gold"
-msgstr "Gold"
+msgstr ""
 
 msgid "Light"
 msgstr "Hell"
@@ -240,7 +236,7 @@ msgid "Outline"
 msgstr "Umriss"
 
 msgid "Diagonal"
-msgstr "Diagonal"
+msgstr ""
 
 msgid "Place inside image"
 msgstr "Platziere in Bild"
@@ -252,7 +248,7 @@ msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
 
 msgid "Issue Tracker"
-msgstr "Issue Tracker"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Änderungen"
@@ -264,7 +260,7 @@ msgid "MADEBY_LABEL"
 msgstr "Entwickelt von Orama Interactive"
 
 msgid "Website"
-msgstr "Website"
+msgstr ""
 
 msgid "Donate"
 msgstr "Spenden"
@@ -309,19 +305,14 @@ msgid "Utility Tools"
 msgstr "Dienstwerkzeuge"
 
 msgid "RECTSELECT_HT"
-msgstr ""
-"Rechteckige Auswahl\n"
-"\n"
+msgstr "Rechteckige Auswahl\n\n"
 "R für die linke Maustaste\n"
-"Alt + R für die rechte Maustaste\n"
-"\n"
+"Alt + R für die rechte Maustaste\n\n"
 "Halte Shift zum verschieben des Inhalts"
 
 msgid "COLORPICKER_HT"
-msgstr ""
-"Farbauswahl\n"
-"Wähle eine Farbe von einem Pixel des Sprites\n"
-"\n"
+msgstr "Farbauswahl\n"
+"Wähle eine Farbe von einem Pixel des Sprites\n\n"
 "O für die linke Maustaste\n"
 "Alt + O für die rechte Maustaste"
 
@@ -329,34 +320,24 @@ msgid "Draw Tools"
 msgstr "Zeichnenwerkzeuge"
 
 msgid "PENCIL_HT"
-msgstr ""
-"Bleistift\n"
-"\n"
+msgstr "Bleistift\n\n"
 "P für linke Maustaste\n"
-"Alt + P für rechte Maustaste\n"
-"\n"
+"Alt + P für rechte Maustaste\n\n"
 "Halte Shift, um eine Linie zu bilden."
 
 msgid "ERASER_HT"
-msgstr ""
-"Radiergummi\n"
-"\n"
+msgstr "Radiergummi\n\n"
 "E für die linke Maustaste\n"
-"Alt + E für die rechte Maustaste\n"
-"\n"
+"Alt + E für die rechte Maustaste\n\n"
 "Halte Shift, um eine Linie zu bilden."
 
 msgid "BUCKET_HT"
-msgstr ""
-"Füllen\n"
-"\n"
+msgstr "Füllen\n\n"
 "B für linke Maustaste\n"
 "Alt + B für rechte Maustaste"
 
 msgid "LD_HT"
-msgstr ""
-"Erhellen/Verdunkeln\n"
-"\n"
+msgstr "Erhellen/Verdunkeln\n\n"
 "U für linke Maustaste\n"
 "Alt + U für rechte Maustaste"
 
@@ -367,14 +348,11 @@ msgid "RIGHTCOLOR_HT"
 msgstr "Wähle eine Farbe für das rechte Werkzeug"
 
 msgid "COLORSWITCH_HT"
-msgstr ""
-"Wechsle linke und rechte Farben\n"
+msgstr "Wechsle linke und rechte Farben\n"
 "(X)"
 
 msgid "COLORDEFAULTS_HT"
-msgstr ""
-"Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für "
-"rechts)."
+msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)."
 
 msgid "Raw Mode"
 msgstr "Raw-Mode"
@@ -388,16 +366,14 @@ msgstr "Rechte Werkzeugoptionen"
 msgid "Left pixel indicator"
 msgstr "Linke Pixelanzeige"
 
-msgid "Show tool icon"
-msgstr "Werkzeugsymbol anzeigen"
-
 msgid "LEFT_INDIC_HT"
-msgstr ""
-"Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+msgstr "Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
 
 msgid "RIGHT_INDIC_HT"
-msgstr ""
-"Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+msgstr "Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+
+msgid "Show tool icon"
+msgstr "Werkzeugsymbol anzeigen"
 
 msgid "Right pixel indicator"
 msgstr "Rechte Pixelanzeige"
@@ -453,13 +429,11 @@ msgstr "Erhellen/Verdunkeln Menge"
 msgid "Pick for:"
 msgstr ""
 
-#, fuzzy
 msgid "Left Color"
-msgstr "Farbe:"
+msgstr ""
 
-#, fuzzy
 msgid "Right Color"
-msgstr "Rechte Werkzeugoptionen"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -483,38 +457,31 @@ msgid "Current frame: 1/1"
 msgstr "Aktueller Frame 1/1"
 
 msgid "FIRSTFRAME_HT"
-msgstr ""
-"Springe zu dem ersten Frame\n"
+msgstr "Springe zu dem ersten Frame\n"
 "(Strg+Home)"
 
 msgid "PREVIOUSFRAME_HT"
-msgstr ""
-"Gehe zu dem letzten Frame\n"
+msgstr "Gehe zu dem letzten Frame\n"
 "(Strg+Pfeil nach Links)"
 
 msgid "PLAYBACKWARDS_HT"
-msgstr ""
-"Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)\n"
+msgstr "Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)\n"
 "(F4)"
 
 msgid "PLAYFORWARD_HT"
-msgstr ""
-"Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)\n"
+msgstr "Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)\n"
 "(F5)"
 
 msgid "NEXTFRAME_HT"
-msgstr ""
-"Gehe zum nächsten Frame\n"
+msgstr "Gehe zum nächsten Frame\n"
 "(Strg+Pfeil nach Rechts)"
 
 msgid "LASTFRAME_HT"
-msgstr ""
-"Springe zum letzten Frame\n"
+msgstr "Springe zum letzten Frame\n"
 "(Strg+Ende)"
 
 msgid "FPS_HT"
-msgstr ""
-"Wie viele Frames pro Sekunde soll die Animationsvorschau haben?\n"
+msgstr "Wie viele Frames pro Sekunde soll die Animationsvorschau haben?\n"
 " Je mehr FPS, desto schneller wird die Animation abgespielt."
 
 msgid "No loop"
@@ -527,7 +494,7 @@ msgid "Ping-pong loop"
 msgstr "Ping Pong Loop"
 
 msgid "Onion Skinning:"
-msgstr "Onion Skinning:"
+msgstr ""
 
 msgid "Past Frames"
 msgstr "Vorgänger Frames"
@@ -584,7 +551,7 @@ msgid "LAYERVISIBILITY_HT"
 msgstr "Ändere die Sichtbarkeit der Ebene"
 
 msgid "Palette"
-msgstr "Palette"
+msgstr ""
 
 msgid "Palettes"
 msgstr "Paletten"
@@ -703,9 +670,8 @@ msgstr "Bearbeite Palette"
 msgid "Patrons:"
 msgstr ""
 
-#, fuzzy
 msgid "Changes"
-msgstr "Änderungen"
+msgstr ""
 
 msgid "Platinum Sponsor"
 msgstr ""
@@ -725,24 +691,6 @@ msgstr "Nicht beim nächsten Start"
 msgid "Take this spot!"
 msgstr ""
 
-#~ msgid "Don't show on the next startup"
-#~ msgstr "Nicht beim nächsten Start"
-
-#~ msgid "Language:"
-#~ msgstr "Sprache:"
-
-#~ msgid "SPLITSCREEN_HT"
-#~ msgstr ""
-#~ "Geteilter Bildschirm\n"
-#~ "\n"
-#~ "Zeige zweite Leinwand"
-
-#~ msgid "SPLITSCREEN_HIDE_HT"
-#~ msgstr ""
-#~ "Geteilter Bildschirm\n"
-#~ "\n"
-#~ "Verstecke zweite Leinwand"
-
 msgid "Image Options"
 msgstr ""
 
@@ -754,3 +702,4 @@ msgstr ""
 
 msgid "Default Fill Color:"
 msgstr ""
+

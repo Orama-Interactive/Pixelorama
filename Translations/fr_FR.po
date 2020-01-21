@@ -1,15 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pixelorama\n"
-"Last-Translator: Hugo Locurcio\n"
-"Language-Team: none\n"
-"Language: fr\n"
-"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: French\n"
+"Language: fr_FR\n"
+"PO-Revision-Date: 2020-01-21 20:26\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -17,9 +19,8 @@ msgstr "Annuler"
 msgid "Open"
 msgstr "Ouvrir"
 
-#, fuzzy
 msgid "Save"
-msgstr "Enregistrer..."
+msgstr ""
 
 msgid "Please Confirm..."
 msgstr "Veuillez confirmer..."
@@ -42,9 +43,8 @@ msgstr "Édition"
 msgid "View"
 msgstr "Affichage"
 
-#, fuzzy
 msgid "Image"
-msgstr "Taille de l'image"
+msgstr ""
 
 msgid "Effects"
 msgstr ""
@@ -127,16 +127,14 @@ msgstr "Ouvrir des fichiers"
 msgid "IMPORT_FILE_LABEL"
 msgstr "Importer en tant que trame"
 
-#, fuzzy
 msgid "IMPORT_SPRITESHEET"
-msgstr "Spritesheet vertical"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
 
-#, fuzzy
 msgid "Export Sprite as .png"
-msgstr "Exporter une sprite"
+msgstr ""
 
 msgid "Export Sprite"
 msgstr "Exporter une sprite"
@@ -147,17 +145,14 @@ msgstr ""
 msgid "Resize:"
 msgstr ""
 
-#, fuzzy
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Exporter toutes les trames"
+msgstr ""
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Exporter les trames en un seul fichier"
+msgstr ""
 
-#, fuzzy
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Spritesheet vertical"
+msgstr ""
 
 msgid "Columns"
 msgstr ""
@@ -192,9 +187,8 @@ msgstr "Cubique"
 msgid "Trilinear"
 msgstr "Trilinéaire"
 
-#, fuzzy
 msgid "Language"
-msgstr "Langue :"
+msgstr ""
 
 msgid "Themes"
 msgstr ""
@@ -202,13 +196,11 @@ msgstr ""
 msgid "Guides & Grid"
 msgstr ""
 
-#, fuzzy
 msgid "Language options"
-msgstr "Langue :"
+msgstr ""
 
-#, fuzzy
 msgid "Theme options"
-msgstr "Configuration de la grille"
+msgstr ""
 
 msgid "Grid options"
 msgstr "Configuration de la grille"
@@ -222,9 +214,8 @@ msgstr ""
 msgid "System Language"
 msgstr "Langue système"
 
-#, fuzzy
 msgid "Dark"
-msgstr "Assombrir"
+msgstr ""
 
 msgid "Gray"
 msgstr ""
@@ -232,9 +223,8 @@ msgstr ""
 msgid "Gold"
 msgstr ""
 
-#, fuzzy
 msgid "Light"
-msgstr "Éclaircir"
+msgstr ""
 
 msgid "Invert colors"
 msgstr ""
@@ -302,9 +292,8 @@ msgstr ""
 msgid "untitled"
 msgstr ""
 
-#, fuzzy
 msgid "imported"
-msgstr "Fichier exporté"
+msgstr ""
 
 msgid "copy"
 msgstr ""
@@ -316,58 +305,39 @@ msgid "Utility Tools"
 msgstr "Outils utilitaires"
 
 msgid "RECTSELECT_HT"
-msgstr ""
-"Sélection rectangulaire\n"
-"\n"
-"R pour le bouton gauche de la souris\n"
-"\n"
-"Alt + R pour le bouton droit de la souris\n"
-"\n"
+msgstr "Sélection rectangulaire\n\n"
+"R pour le bouton gauche de la souris\n\n"
+"Alt + R pour le bouton droit de la souris\n\n"
 "Maintenez Maj. appuyée pour déplacer le contenu"
 
 msgid "COLORPICKER_HT"
-msgstr ""
-"Sélecteur de couleurs\n"
-"Sélectionnez la couleur d'un pixel de la sprite\n"
-"\n"
-"O pour le bouton gauche de la souris\n"
-"\n"
+msgstr "Sélecteur de couleurs\n"
+"Sélectionnez la couleur d'un pixel de la sprite\n\n"
+"O pour le bouton gauche de la souris\n\n"
 "Alt + O pour le bouton droit de la souris"
 
 msgid "Draw Tools"
 msgstr "Outils de dessin"
 
 msgid "PENCIL_HT"
-msgstr ""
-"Crayon\n"
-"\n"
-"P pour le bouton gauche de la souris\n"
-"\n"
-"Alt + P pour le bouton droit de la souris\n"
-"\n"
+msgstr "Crayon\n\n"
+"P pour le bouton gauche de la souris\n\n"
+"Alt + P pour le bouton droit de la souris\n\n"
 "Maintenez Maj. appuyée pour dessiner une ligne"
 
 msgid "ERASER_HT"
-msgstr ""
-"Gomme\n"
-"\n"
-"E pour le bouton gauche de la souris\n"
-"\n"
-"Alt + E pour le bouton droit de la souris\n"
-"\n"
+msgstr "Gomme\n\n"
+"E pour le bouton gauche de la souris\n\n"
+"Alt + E pour le bouton droit de la souris\n\n"
 "Maintenez Maj. appuyée pour dessiner une ligne"
 
 msgid "BUCKET_HT"
-msgstr ""
-"Seau de remplissage\n"
-"\n"
+msgstr "Seau de remplissage\n\n"
 "B pour le bouton gauche de la souris\n"
 "Alt + B pour le bouton droit de la souris"
 
 msgid "LD_HT"
-msgstr ""
-"Éclaircir/Assombrir\n"
-"\n"
+msgstr "Éclaircir/Assombrir\n\n"
 "U pour le bouton gauche de la souris\n"
 "Alt + U pour le bouton droit de la souris"
 
@@ -378,14 +348,11 @@ msgid "RIGHTCOLOR_HT"
 msgstr "Choisissez une couleur pour l'outil droit"
 
 msgid "COLORSWITCH_HT"
-msgstr ""
-"Alterner les couleurs de gauche et de droite\n"
+msgstr "Alterner les couleurs de gauche et de droite\n"
 "(X)"
 
 msgid "COLORDEFAULTS_HT"
-msgstr ""
-"Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, "
-"blanc pour l'outil droit)"
+msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
 
 msgid "Raw Mode"
 msgstr "Mode Raw"
@@ -399,18 +366,14 @@ msgstr "Options de l'outil droit"
 msgid "Left pixel indicator"
 msgstr "Indicateur de pixel gauche"
 
-msgid "Show tool icon"
-msgstr "Afficher l'icône de l'outil"
-
 msgid "LEFT_INDIC_HT"
-msgstr ""
-"Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous "
-"dessinez"
+msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous dessinez"
 
 msgid "RIGHT_INDIC_HT"
-msgstr ""
-"Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous "
-"dessinez"
+msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez"
+
+msgid "Show tool icon"
+msgstr "Afficher l'icône de l'outil"
 
 msgid "Right pixel indicator"
 msgstr "Indicateur de pixel droit"
@@ -424,13 +387,11 @@ msgstr "Sélectionnez une brosse"
 msgid "Brush: Pixel"
 msgstr "Brosse : Pixel"
 
-#, fuzzy
 msgid "Brush: Circle"
-msgstr "Brosse : Pixel"
+msgstr ""
 
-#, fuzzy
 msgid "Brush: Filled Circle"
-msgstr "Brosse : Pixel"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Brosse personnalisée"
@@ -442,9 +403,7 @@ msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
 
 msgid "COLORFROM_HT"
-msgstr ""
-"0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement "
-"sélectionnée"
+msgstr "0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement sélectionnée"
 
 msgid "Fill area:"
 msgstr "Remplissage de zone :"
@@ -470,19 +429,17 @@ msgstr "Quantité d'éclaircissement/assombrissement"
 msgid "Pick for:"
 msgstr ""
 
-#, fuzzy
 msgid "Left Color"
-msgstr "Couleur :"
+msgstr ""
 
-#, fuzzy
 msgid "Right Color"
-msgstr "Options de l'outil droit"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Miroir"
 
 msgid "Horizontal"
-msgstr "Horizontal"
+msgstr ""
 
 msgid "HORIZMIRROR_HT"
 msgstr "Dessine avec un miroir horizontal"
@@ -491,7 +448,7 @@ msgid "VERTMIRROR_HT"
 msgstr "Dessine avec un miroir vertical"
 
 msgid "Vertical"
-msgstr "Vertical"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Trame actuelle :"
@@ -500,38 +457,31 @@ msgid "Current frame: 1/1"
 msgstr "Trame actuelle : 1/1"
 
 msgid "FIRSTFRAME_HT"
-msgstr ""
-"Aller à la première trame\n"
+msgstr "Aller à la première trame\n"
 "(Ctrl + Orig.)"
 
 msgid "PREVIOUSFRAME_HT"
-msgstr ""
-"Aller à la trame précédente\n"
+msgstr "Aller à la trame précédente\n"
 "(Ctrl + Gauche)"
 
 msgid "PLAYBACKWARDS_HT"
-msgstr ""
-"Jouer l'animation à l'envers (de la fin vers le début)\n"
+msgstr "Jouer l'animation à l'envers (de la fin vers le début)\n"
 "(F4)"
 
 msgid "PLAYFORWARD_HT"
-msgstr ""
-"Jouer l'animation (du début vers la fin)\n"
+msgstr "Jouer l'animation (du début vers la fin)\n"
 "(F5)"
 
 msgid "NEXTFRAME_HT"
-msgstr ""
-"Aller à la prochaine trame\n"
+msgstr "Aller à la prochaine trame\n"
 "(Ctrl + Droite)"
 
 msgid "LASTFRAME_HT"
-msgstr ""
-"Aller à la dernière trame\n"
+msgstr "Aller à la dernière trame\n"
 "(Ctrl + Fin)"
 
 msgid "FPS_HT"
-msgstr ""
-"Combien d'images par seconde pour l'aperçu de l'animation ?\n"
+msgstr "Combien d'images par seconde pour l'aperçu de l'animation ?\n"
 "Plus cette valeur est élevée, plus l'animation sera jouée rapidement."
 
 msgid "No loop"
@@ -570,9 +520,8 @@ msgstr "Déplacer vers la gauche"
 msgid "Move Right"
 msgstr "Déplacer vers la droite"
 
-#, fuzzy
 msgid "Layer"
-msgstr "Calques"
+msgstr ""
 
 msgid "Layers"
 msgstr "Calques"
@@ -700,9 +649,8 @@ msgstr ""
 msgid "Palette Name:"
 msgstr ""
 
-#, fuzzy
 msgid "Color Name:"
-msgstr "Couleur :"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr ""
@@ -743,21 +691,6 @@ msgstr ""
 msgid "Take this spot!"
 msgstr ""
 
-#~ msgid "Language:"
-#~ msgstr "Langue :"
-
-#~ msgid "SPLITSCREEN_HT"
-#~ msgstr ""
-#~ "Écran partagé\n"
-#~ "\n"
-#~ "Afficher un second canevas"
-
-#~ msgid "SPLITSCREEN_HIDE_HT"
-#~ msgstr ""
-#~ "Écran partagé\n"
-#~ "\n"
-#~ "Cacher le second canevas"
-
 msgid "Image Options"
 msgstr ""
 
@@ -769,3 +702,4 @@ msgstr ""
 
 msgid "Default Fill Color:"
 msgstr ""
+
