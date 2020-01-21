@@ -222,7 +222,7 @@ space={
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/en.po", "res://Translations/el.po", "res://Translations/fr.po", "res://Translations/de.po", "res://Translations/pl.po", "res://Translations/ru.po", "res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/it.po" )
+translations=PoolStringArray( "res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/fr_FR.po", "res://Translations/it_IT.po", "res://Translations/pl_PL.po", "res://Translations/ru_RU.po" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]
