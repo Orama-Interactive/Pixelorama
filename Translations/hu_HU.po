@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-01-21 20:13\n"
+"PO-Revision-Date: 2020-01-22 17:41\n"
 
 msgid "OK"
 msgstr ""
@@ -272,6 +272,39 @@ msgid "Contributors"
 msgstr ""
 
 msgid "Donors"
+msgstr ""
+
+msgid "Translators"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "French"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Polish"
+msgstr ""
+
+msgid "Brazilian Portuguese"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
+msgid "Chinese Traditional"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Spanish"
 msgstr ""
 
 msgid "Development Team"
