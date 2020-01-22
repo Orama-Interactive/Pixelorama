@@ -8,10 +8,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-01-21 20:26\n"
+"PO-Revision-Date: 2020-01-22 17:42\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "Annulla"
@@ -35,7 +35,7 @@ msgid "Height:"
 msgstr "Altezza:"
 
 msgid "File"
-msgstr ""
+msgstr "File"
 
 msgid "Edit"
 msgstr "Modifica"
@@ -170,7 +170,7 @@ msgid "Create Folder"
 msgstr "Crea Cartella"
 
 msgid "File:"
-msgstr ""
+msgstr "File:"
 
 msgid "Interpolation:"
 msgstr "Interpolazione:"
@@ -273,6 +273,39 @@ msgstr "Contributori"
 
 msgid "Donors"
 msgstr "Donatori"
+
+msgid "Translators"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "French"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Polish"
+msgstr ""
+
+msgid "Brazilian Portuguese"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
+msgid "Chinese Traditional"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Spanish"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Team di sviluppo"
@@ -551,7 +584,7 @@ msgid "LAYERVISIBILITY_HT"
 msgstr "Attiva"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palette"
 
 msgid "Palettes"
 msgstr "Palette"
@@ -656,19 +689,19 @@ msgid "Create a new empty palette?"
 msgstr "Creare una nuova palette vuota?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Errore: La Palette deve avere un nome valido."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Errore: La Palette chiamata '%s' esiste già!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "File Palette non valido!"
 
 msgid "Edit Palette"
 msgstr "Modifica Palette"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Sostenitori:"
 
 msgid "Changes"
 msgstr "Cambiamenti"
