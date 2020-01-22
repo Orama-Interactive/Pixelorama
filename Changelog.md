@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.6.2] - Unreleased
 
+## Added
+- Crowdin integration for contributing translations!
+- Spanish translation - thanks to azagaya!
+- Translators can now be seen in the About window.
+
 ### Fixed
 - Delay the splash screen popup so it shows properly centered (thanks to YeldhamDev)
 - Possibly fixed crashes with motion drawing and undo/redoing.
