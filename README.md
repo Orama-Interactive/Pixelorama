@@ -14,6 +14,9 @@
     <a href="https://discord.gg/GTMtr8s">
         <img src="https://discordapp.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
     </a>
+    <a href="https://crowdin.com/project/pixelorama">
+        <img src="https://badges.crowdin.net/pixelorama/localized.svg" alt="Crowdin Localized %" />
+    </a>
     <a href="https://github.com/Calinou/awesome-godot">
         <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Godot" />
     </a>
