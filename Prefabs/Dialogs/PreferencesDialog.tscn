@@ -41,7 +41,6 @@ margin_bottom = 554.0
 size_flags_horizontal = 3
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 205.0
 margin_bottom = 310.0
 
@@ -80,6 +79,13 @@ margin_right = 205.0
 margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 text = "English [en]"
+
+[node name="Spanish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 116.0
+margin_right = 205.0
+margin_bottom = 140.0
+mouse_default_cursor_shape = 2
+text = "Spanish [es]"
 
 [node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 144.0
@@ -172,6 +178,7 @@ mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+editor/display_folded = true
 margin_top = 486.0
 margin_right = 205.0
 margin_bottom = 618.0
@@ -249,9 +256,10 @@ rect_min_size = Vector2( 64, 20 )
 color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 486.0
+editor/display_folded = true
+margin_top = 622.0
 margin_right = 205.0
-margin_bottom = 618.0
+margin_bottom = 730.0
 
 [node name="ImageOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_right = 205.0
@@ -262,20 +270,20 @@ text = "Image Options"
 [node name="ImageOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_top = 32.0
 margin_right = 205.0
-margin_bottom = 132.0
+margin_bottom = 108.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
 
 [node name="DefaultWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
 margin_top = 5.0
-margin_right = 92.0
+margin_right = 110.0
 margin_bottom = 19.0
 text = "Default Width:"
 
 [node name="ImageDefaultWidth" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
-margin_left = 82.0
-margin_right = 156.0
+margin_left = 114.0
+margin_right = 188.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 16384.0
@@ -283,30 +291,31 @@ value = 32.0
 suffix = "px"
 
 [node name="DefaultHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
-margin_top = 5.0
-margin_right = 96.0
-margin_bottom = 19.0
+margin_top = 33.0
+margin_right = 110.0
+margin_bottom = 47.0
 text = "Default Height:"
 
 [node name="ImageDefaultHeight" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
-margin_left = 82.0
-margin_right = 156.0
-margin_bottom = 24.0
+margin_left = 114.0
+margin_top = 28.0
+margin_right = 188.0
+margin_bottom = 52.0
 min_value = 1.0
 max_value = 16384.0
 value = 32.0
 suffix = "px"
 
 [node name="DefaultFillColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
-margin_top = 5.0
-margin_right = 96.0
-margin_bottom = 19.0
+margin_top = 59.0
+margin_right = 110.0
+margin_bottom = 73.0
 text = "Default Fill Color:"
 
 [node name="DefaultFillColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
-margin_left = 82.0
+margin_left = 114.0
 margin_top = 56.0
-margin_right = 156.0
+margin_right = 188.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0, 0, 0, 0 )
