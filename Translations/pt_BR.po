@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-01-22 17:42\n"
+"PO-Revision-Date: 2020-01-26 21:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -91,6 +91,9 @@ msgstr "Redimensionar Imagem"
 msgid "Crop Image"
 msgstr "Cortar Imagem"
 
+msgid "Rotate Image"
+msgstr ""
+
 msgid "Clear Selection"
 msgstr "Limpar Seleção"
 
@@ -141,6 +144,10 @@ msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "Arquivo Já Existe, Substituir?"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr ""
 
 msgid "Resize:"
 msgstr "Redimensionar:"

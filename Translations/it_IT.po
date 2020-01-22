@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-01-22 17:42\n"
+"PO-Revision-Date: 2020-01-26 21:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -91,6 +91,9 @@ msgstr "Scala l'immagine"
 msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
 
+msgid "Rotate Image"
+msgstr ""
+
 msgid "Clear Selection"
 msgstr "Nessuna selezione"
 
@@ -141,6 +144,10 @@ msgstr "Esporta lo Sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "Il file esiste già, vuoi sovrascrivere?"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr ""
 
 msgid "Resize:"
 msgstr "Ridimensiona:"

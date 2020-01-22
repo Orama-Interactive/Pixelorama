@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-01-22 17:42\n"
+"PO-Revision-Date: 2020-01-26 22:07\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -91,6 +91,9 @@ msgstr "Κλιμάκωση εικόνας"
 msgid "Crop Image"
 msgstr "Περικοπή"
 
+msgid "Rotate Image"
+msgstr "Περιστροφή Εικόνας"
+
 msgid "Clear Selection"
 msgstr "Καθαρισμός επιλογής"
 
@@ -141,6 +144,11 @@ msgstr "Εξαγωγή εικόνας"
 
 msgid "File Exists, Overwrite?"
 msgstr "Το άρχειο υπάρχει, να γίνει αντικατάσταση;"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '%s'.\n"
+"Κωδικός σφάλματος: %s"
 
 msgid "Resize:"
 msgstr "Αλλαγή μεγέθους:"
@@ -701,7 +709,7 @@ msgid "Edit Palette"
 msgstr "Επεξεργασία Παλέτας"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Changes"
 msgstr "Αλλαγές"

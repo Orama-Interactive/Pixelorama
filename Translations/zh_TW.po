@@ -8,10 +8,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-01-22 17:41\n"
+"PO-Revision-Date: 2020-01-26 21:58\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "取消"
@@ -91,6 +91,9 @@ msgstr "調整尺寸"
 msgid "Crop Image"
 msgstr "擷取部分圖片"
 
+msgid "Rotate Image"
+msgstr ""
+
 msgid "Clear Selection"
 msgstr "清除選取區塊"
 
@@ -141,6 +144,10 @@ msgstr "輸出圖片"
 
 msgid "File Exists, Overwrite?"
 msgstr "有同名檔案，要覆蓋掉嗎"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr ""
 
 msgid "Resize:"
 msgstr "調整尺寸"
@@ -239,7 +246,7 @@ msgid "Diagonal"
 msgstr "角落"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Place inside image"
 
 msgid "Thickness:"
 msgstr "粗細:"
@@ -275,46 +282,46 @@ msgid "Donors"
 msgstr "捐款人"
 
 msgid "Translators"
-msgstr ""
+msgstr "翻譯人員"
 
 msgid "English"
-msgstr ""
+msgstr "英文"
 
 msgid "Greek"
-msgstr ""
+msgstr "希臘文"
 
 msgid "French"
-msgstr ""
+msgstr "法文"
 
 msgid "German"
-msgstr ""
+msgstr "德文"
 
 msgid "Polish"
-msgstr ""
+msgstr "波蘭文"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "巴西葡萄牙文"
 
 msgid "Russian"
-msgstr ""
+msgstr "俄文"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "繁體中文"
 
 msgid "Italian"
-msgstr ""
+msgstr "義大利文"
 
 msgid "Spanish"
-msgstr ""
+msgstr "西班牙文"
 
 msgid "Development Team"
 msgstr "開發團隊"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "首席工程師"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI設計師"
 
 msgid "GitHub Contributors"
 msgstr "GitHub 貢獻者"
@@ -460,13 +467,13 @@ msgid "LDAMOUNT_HT"
 msgstr "變亮或變暗的程度"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "挑選:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "左鍵工具顏色"
 
 msgid "Right Color"
-msgstr ""
+msgstr "右鍵工具顏色"
 
 msgid "Mirroring"
 msgstr "鏡像"
@@ -689,50 +696,50 @@ msgid "Create a new empty palette?"
 msgstr "新增空的色盤?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "錯誤: 色盤名字無法使用"
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "已有檔案名為 ‘%s’"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "色盤檔無法使用"
 
 msgid "Edit Palette"
 msgstr "編輯色盤"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Changes"
-msgstr ""
+msgstr "更新紀錄"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "白金贊助人"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "黃金贊助人"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "白金贊助保持人"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "黃金贊助保持人"
 
 msgid "Don't show again"
 msgstr "不再顯示"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Take this spot!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "圖片選項"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "預設寬度:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "預設高度:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "預設填充顏色:"
 
