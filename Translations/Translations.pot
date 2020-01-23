@@ -82,6 +82,9 @@ msgstr ""
 msgid "Crop Image"
 msgstr ""
 
+msgid "Rotate Image"
+msgstr ""
+
 msgid "Clear Selection"
 msgstr ""
 
@@ -263,6 +266,39 @@ msgid "Contributors"
 msgstr ""
 
 msgid "Donors"
+msgstr ""
+
+msgid "Translators"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "French"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Polish"
+msgstr ""
+
+msgid "Brazilian Portuguese"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
+msgid "Chinese Traditional"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Spanish"
 msgstr ""
 
 msgid "Development Team"
