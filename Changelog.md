@@ -10,9 +10,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Spanish translation - thanks to azagaya!
 - Translators can now be seen in the About window.
 
+## Changed
+- Updates to the Greek, Russian and Traditional Chinese translations.
+- Replaced some OS alerts with a custom made error dialog.
+
 ### Fixed
 - Delay the splash screen popup so it shows properly centered (thanks to YeldhamDev)
 - Possibly fixed crashes with motion drawing and undo/redoing.
+- Fixed bug (which also caused crashes sometimes) when generating an outline inside the image and it was going outside the canvas' borders.
+- Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.
 
 ## [v0.6.1] - 13-01-2020
 

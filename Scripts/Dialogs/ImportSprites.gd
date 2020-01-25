@@ -35,8 +35,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 		Global.control.clear_canvases()
 
 	var first_path : String = paths[0]
-	var i: int = Global.canvases.size()
-
+	var i : int = Global.canvases.size()
 	if !import_spritesheet:
 		# Find the biggest image and let it handle the camera zoom options
 		var max_size : Vector2
@@ -45,7 +44,9 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			var image := Image.new()
 			var err := image.load(path)
 			if err != OK: # An error occured
-				OS.alert("Can't load file")
+				var file_name : String = path.get_file()
+				Global.error_dialog.set_text("Can't load file '%s'.\nError code: %s" % [file_name, str(err)])
+				Global.error_dialog.popup_centered()
 				continue
 
 			var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
@@ -69,13 +70,16 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 
 			i += 1
 
-		biggest_canvas.camera_zoom()
+		if biggest_canvas:
+			biggest_canvas.camera_zoom()
 
 	else:
 		var image := Image.new()
 		var err := image.load(first_path)
 		if err != OK: # An error occured
-			OS.alert("Can't load file")
+			var file_name : String = first_path.get_file()
+			Global.error_dialog.set_text("Can't load file '%s'.\nError code: %s" % [file_name, str(err)])
+			Global.error_dialog.popup_centered()
 			return
 
 		spritesheet_horizontal = min(spritesheet_horizontal, image.get_size().x)
