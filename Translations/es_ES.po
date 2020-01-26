@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-01-22 17:42\n"
+"PO-Revision-Date: 2020-01-26 21:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -91,6 +91,9 @@ msgstr "Escalar imagen"
 msgid "Crop Image"
 msgstr "Recortar la imagen"
 
+msgid "Rotate Image"
+msgstr "Rotar Imagen"
+
 msgid "Clear Selection"
 msgstr "Anular selección"
 
@@ -141,6 +144,10 @@ msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "Archivo existente, ¿Sobrescribir?"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr ""
 
 msgid "Resize:"
 msgstr "Redimensionar:"
@@ -275,37 +282,37 @@ msgid "Donors"
 msgstr "Donantes"
 
 msgid "Translators"
-msgstr ""
+msgstr "Traductores"
 
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 msgid "Greek"
-msgstr ""
+msgstr "Griego"
 
 msgid "French"
-msgstr ""
+msgstr "Francés"
 
 msgid "German"
-msgstr ""
+msgstr "Alemán"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polaco"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugués brasileño"
 
 msgid "Russian"
-msgstr ""
+msgstr "Ruso"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Chino tradicional"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
@@ -398,7 +405,7 @@ msgid "Brush:"
 msgstr "Pincel:"
 
 msgid "BRUSH_HT"
-msgstr ""
+msgstr "Seleccionar un pincel"
 
 msgid "Brush: Pixel"
 msgstr "Pincel: Pixel"
@@ -536,10 +543,10 @@ msgid "Layers"
 msgstr "Capas"
 
 msgid "LAYERNEW_HT"
-msgstr ""
+msgstr "Crear nueva capa"
 
 msgid "LAYERREMOVE_HT"
-msgstr ""
+msgstr "Eliminar capa actual"
 
 msgid "LAYERUP_HT"
 msgstr ""
@@ -548,7 +555,7 @@ msgid "LAYERDOWN_HT"
 msgstr ""
 
 msgid "LAYERCLONE_HT"
-msgstr ""
+msgstr "Clonar capa actual"
 
 msgid "LAYERMERGE_HT"
 msgstr ""

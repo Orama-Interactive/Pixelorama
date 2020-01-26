@@ -8,10 +8,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-01-22 17:42\n"
+"PO-Revision-Date: 2020-01-26 21:58\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -20,7 +20,7 @@ msgid "Open"
 msgstr "Otwórz"
 
 msgid "Save"
-msgstr ""
+msgstr "Zapisz"
 
 msgid "Please Confirm..."
 msgstr "Proszę potwierdzić..."
@@ -91,6 +91,9 @@ msgstr "Skalowanie obrazu"
 msgid "Crop Image"
 msgstr "Kadrowanie obrazu"
 
+msgid "Rotate Image"
+msgstr ""
+
 msgid "Clear Selection"
 msgstr "Wyczyść zaznaczenie"
 
@@ -140,6 +143,10 @@ msgid "Export Sprite"
 msgstr "Eksportuj Sprite"
 
 msgid "File Exists, Overwrite?"
+msgstr ""
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
 msgstr ""
 
 msgid "Resize:"
