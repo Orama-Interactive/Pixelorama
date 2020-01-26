@@ -136,6 +136,10 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr ""
 
+msgid "Can't load file '%s'."
+"Error code: %s"
+msgstr ""
+
 msgid "Resize:"
 msgstr ""
 
