@@ -69,7 +69,8 @@ func _ready() -> void:
 		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
 		"Invert colors" : 0,
 		"Desaturation" : 0,
-		"Outline" : 0
+		"Outline" : 0,
+		"Rotate Image" : 0
 		}
 	var help_menu_items := {
 		"View Splash Screen" : 0,
@@ -346,6 +347,10 @@ func image_menu_id_pressed(id : int) -> void:
 			Global.canvas.handle_redo("Draw")
 		6: # Outline
 			$OutlineDialog.popup_centered()
+		7: # Rotate
+			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			$RotateImage.set_sprite(image)
+			$RotateImage.popup_centered()
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:
