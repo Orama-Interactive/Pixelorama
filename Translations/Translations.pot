@@ -136,7 +136,7 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr ""
 
-msgid "Can't load file '%s'."
+msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""
 
