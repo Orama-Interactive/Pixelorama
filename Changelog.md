@@ -9,10 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Crowdin integration for contributing translations!
 - Spanish translation - thanks to azagaya!
 - Translators can now be seen in the About window.
+- It is now possible to remove custom brushes with the middle mouse button.
 
 ## Changed
 - Updates to the Greek, Russian and Traditional Chinese translations.
 - Replaced some OS alerts with a custom made error dialog.
+- Made the "X" button on the custom brushes a little smaller.
 
 ### Fixed
 - Delay the splash screen popup so it shows properly centered (thanks to YeldhamDev)

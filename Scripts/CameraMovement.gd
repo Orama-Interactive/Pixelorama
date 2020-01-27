@@ -11,9 +11,9 @@ func _ready() -> void:
 func _input(event : InputEvent) -> void:
 	var mouse_pos := viewport_container.get_local_mouse_position()
 	var viewport_size := viewport_container.rect_size
-	if event.is_action_pressed("camera_drag") || event.is_action_pressed("space"):
+	if event.is_action_pressed("middle_mouse") || event.is_action_pressed("space"):
 		drag = true
-	elif event.is_action_released("camera_drag") || event.is_action_released("space"):
+	elif event.is_action_released("middle_mouse") || event.is_action_released("space"):
 		drag = false
 
 	if Global.can_draw && Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):

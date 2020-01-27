@@ -6,6 +6,10 @@ export var custom_brush_index := -3
 var random_brushes := []
 
 func _on_BrushButton_pressed() -> void:
+	# Delete the brush on middle mouse press
+	if Input.is_action_just_released("middle_mouse"):
+		_on_DeleteButton_pressed()
+		return
 	# Change left brush
 	if Global.brush_type_window_position == "left":
 		Global.current_left_brush_type = brush_type

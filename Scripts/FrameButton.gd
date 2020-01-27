@@ -19,7 +19,7 @@ func _on_FrameButton_pressed() -> void:
 				popup_menu.set_item_disabled(3, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
-	else: #Middle mouse click
+	else: # Middle mouse click
 		pressed = !pressed
 		if Global.canvases.size() > 1:
 			remove_frame()
