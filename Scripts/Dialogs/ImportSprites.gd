@@ -45,7 +45,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			var err := image.load(path)
 			if err != OK: # An error occured
 				var file_name : String = path.get_file()
-				Global.error_dialog.set_text("Can't load file '%s'.\nError code: %s" % [file_name, str(err)])
+				Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
 				Global.error_dialog.popup_centered()
 				continue
 
@@ -78,7 +78,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 		var err := image.load(first_path)
 		if err != OK: # An error occured
 			var file_name : String = first_path.get_file()
-			Global.error_dialog.set_text("Can't load file '%s'.\nError code: %s" % [file_name, str(err)])
+			Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
 			Global.error_dialog.popup_centered()
 			return
 

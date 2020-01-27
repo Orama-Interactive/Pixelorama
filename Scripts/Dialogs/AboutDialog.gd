@@ -55,6 +55,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer"))
 	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
 
+	# Translators
 	var translators_root := translators.create_item()
 	translators.create_item(translators_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Greek"))
 	translators.create_item(translators_root).set_text(0, "  Xenofon Konitsas (huskee) - " + tr("Greek"))
@@ -62,11 +63,14 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  Schweini07 - " + tr("German"))
 	translators.create_item(translators_root).set_text(0, "  Martin Zabinski (Martin1991zab) - " + tr("German"))
 	translators.create_item(translators_root).set_text(0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish"))
+	translators.create_item(translators_root).set_text(0, "  Serhiy Dmytryshyn (dies) - " + tr("Polish"))
 	translators.create_item(translators_root).set_text(0, "  Michael Alexsander (YeldhamDev) - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
+	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  JunYouIntrovert - " + tr("Chinese Traditional"))
 	translators.create_item(translators_root).set_text(0, "  Marco Galli (Gaarco) - " + tr("Italian"))
 	translators.create_item(translators_root).set_text(0, "  azagaya - " + tr("Spanish"))
+	translators.create_item(translators_root).set_text(0, "  Lilly And (KatieAnd) - " + tr("Spanish"))
 
 func _on_AboutDialog_popup_hide() -> void:
 	groups.clear()
