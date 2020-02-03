@@ -9,7 +9,7 @@ func _ready():
 	texture.flags = 0
 	aux_img = Image.new()
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Rotxel")
-	pass
+	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Nearest neighbour")
 
 func set_sprite(sprite : Image):
 	aux_img.copy_from(sprite)
@@ -19,10 +19,7 @@ func set_sprite(sprite : Image):
 
 
 func _on_HSlider_value_changed(value):
-	var sprite : Image = Image.new()
-	sprite.copy_from(aux_img)
-	Global.rotxel(sprite,value*PI/180)
-	texture.create_from_image(sprite, 0)
+	rotate()
 	$VBoxContainer/HBoxContainer/SpinBox.value = $VBoxContainer/HBoxContainer/HSlider.value
 
 
@@ -35,3 +32,17 @@ func _on_RotateImage_confirmed():
 	Global.rotxel(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	Global.canvas.handle_redo("Draw")
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
+	
+func rotate():
+	var sprite : Image = Image.new()
+	sprite.copy_from(aux_img)
+	match $VBoxContainer/HBoxContainer2/OptionButton.text:
+		"Rotxel":
+			Global.rotxel(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+		"Nearest neighbour":
+			Global.nn_rotate(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+	texture.create_from_image(sprite, 0)
+
+
+func _on_OptionButton_item_selected(id):
+	rotate()

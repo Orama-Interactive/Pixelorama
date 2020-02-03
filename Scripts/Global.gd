@@ -670,6 +670,13 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	return scaled
 
 func rotxel(sprite : Image, angle : float):
+	
+	# If angle is simple, then nn rotation is the best
+	
+	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:
+		nn_rotate(sprite, angle)
+		return
+	
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
 	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
@@ -772,7 +779,26 @@ func rotxel(sprite : Image, angle : float):
 			sprite.set_pixel(x, y, p)
 	sprite.unlock()
 	aux.unlock()
-
+	
+func nn_rotate(sprite : Image, angle : float):
+	var aux : Image = Image.new()
+	aux.copy_from(sprite)
+	sprite.lock()
+	aux.lock()
+	var ox: int
+	var oy: int
+	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
+	for x in range(sprite.get_width()):
+		for y in range(sprite.get_height()):
+			ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
+			oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
+			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
+				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
+			else:
+				sprite.set_pixel(x, y, Color(0,0,0,0))
+	sprite.unlock()
+	aux.unlock()
+	
 func similarColors(c1 : Color, c2 : Color, tol : float = 100) -> bool:
 	var dist = colorDistance(c1, c2) 
 	return dist <= tol
