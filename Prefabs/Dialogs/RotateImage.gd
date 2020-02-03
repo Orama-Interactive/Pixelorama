@@ -46,3 +46,7 @@ func rotate():
 
 func _on_OptionButton_item_selected(id):
 	rotate()
+
+
+func _on_RotateImage_about_to_show():
+	$VBoxContainer/HBoxContainer/HSlider.value = 0
