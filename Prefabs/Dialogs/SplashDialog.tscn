@@ -42,6 +42,7 @@ margin_bottom = 400.0
 rect_min_size = Vector2( 600, 560 )
 theme = SubResource( 1 )
 custom_styles/panel = SubResource( 2 )
+resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -166,7 +167,7 @@ rect_min_size = Vector2( 0, 260 )
 
 [node name="Label2" type="Label" parent="Contents/PatronsArtNews/ChangelogContainer/ChangelogScroll"]
 margin_right = 142.0
-margin_bottom = 796.0
+margin_bottom = 711.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Added
