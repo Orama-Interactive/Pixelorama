@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.6.2] - Unreleased
 
 ## Added
+- Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
 - Crowdin integration for contributing translations!
 - Spanish translation - thanks to azagaya!
 - Translators can now be seen in the About window.
