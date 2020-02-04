@@ -686,7 +686,7 @@ func rotxel(sprite : Image, angle : float):
 	aux.lock()
 	sprite.lock()
 	for x in range(sprite.get_width()):
-		for y in range(sprite.get_width()):
+		for y in range(sprite.get_height()):
 			var dx = 3*(x - center.x)
 			var dy = 3*(y - center.y)
 			var found_pixel : bool = false

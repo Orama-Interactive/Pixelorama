@@ -29,7 +29,11 @@ func _on_SpinBox_value_changed(value):
 
 func _on_RotateImage_confirmed():
 	Global.canvas.handle_undo("Draw")
-	Global.rotxel(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+	match $VBoxContainer/HBoxContainer2/OptionButton.text:
+		"Rotxel":
+			Global.rotxel(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+		"Nearest neighbour":
+			Global.nn_rotate(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	Global.canvas.handle_redo("Draw")
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
 	
