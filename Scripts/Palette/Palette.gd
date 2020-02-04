@@ -72,8 +72,8 @@ func save_to_file(path : String) -> void:
 	file.store_string(_serialize())
 	file.close()
 
-func duplicate() -> Palette:
-	var copy : Palette = get_script().new()
+func duplicate(): # -> Palette
+	var copy = get_script().new() # : Palette
 	copy.name = name
 	copy.comments = comments
 	copy.editable = editable
@@ -96,7 +96,7 @@ func _serialize() -> String:
 
 	return result
 
-func deserialize(input_string : String) -> Palette:
+func deserialize(input_string : String): # -> Palette
 	var result = get_script().new()
 
 	var result_json = JSON.parse(input_string)
@@ -120,8 +120,8 @@ func deserialize(input_string : String) -> Palette:
 
 	return result
 
-func load_from_file(path : String) -> Palette:
-	var result : Palette = null
+func load_from_file(path : String): # -> Palette
+	var result = null # : Palette
 	var file = File.new()
 
 	if file.file_exists(path):

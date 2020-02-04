@@ -29,7 +29,7 @@ func toDict() -> Dictionary:
 		}
 	return result
 
-func fromDict(input_dict : Dictionary) -> PaletteColor:
+func fromDict(input_dict : Dictionary): # -> PaletteColor
 	var result = get_script().new()
 
 	result.data = input_dict.data
@@ -37,8 +37,8 @@ func fromDict(input_dict : Dictionary) -> PaletteColor:
 
 	return result
 
-func duplicate() -> PaletteColor:
-	var copy : PaletteColor = get_script().new()
+func duplicate(): # -> PaletteColor
+	var copy = get_script().new() # : PaletteColor
 	copy.data = data
 	copy.name = name
 	return copy
