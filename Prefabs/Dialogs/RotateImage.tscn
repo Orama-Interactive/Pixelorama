@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Prefabs/Dialogs/RotateImage.gd" type="Script" id=1]
+
+[node name="RotateImage" type="ConfirmationDialog"]
+margin_right = 245.0
+margin_bottom = 241.0
+window_title = "Confirmá, por favor..."
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+margin_right = 229.0
+margin_bottom = 145.0
+size_flags_vertical = 3
+expand = true
+stretch_mode = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 149.0
+margin_right = 229.0
+margin_bottom = 169.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 34.0
+margin_bottom = 17.0
+text = "Type:"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 38.0
+margin_right = 229.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 173.0
+margin_right = 229.0
+margin_bottom = 197.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 44.0
+margin_bottom = 19.0
+text = "Angle: "
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 151.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 359.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+margin_left = 155.0
+margin_right = 229.0
+margin_bottom = 24.0
+max_value = 359.0
+[connection signal="about_to_show" from="." to="." method="_on_RotateImage_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_RotateImage_confirmed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
