@@ -67,10 +67,10 @@ func _ready() -> void:
 		"Crop Image" : 0,
 		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
 		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
+		"Rotate Image" : 0,
 		"Invert colors" : 0,
 		"Desaturation" : 0,
-		"Outline" : 0,
-		"Rotate Image" : 0
+		"Outline" : 0
 		}
 	var help_menu_items := {
 		"View Splash Screen" : 0,
@@ -121,7 +121,7 @@ func _ready() -> void:
 	i = 0
 	for item in image_menu_items.keys():
 		image_menu.add_item(item, i, image_menu_items[item])
-		if i == 3:
+		if i == 4:
 			image_menu.add_separator()
 		i += 1
 	i = 0
@@ -323,7 +323,11 @@ func image_menu_id_pressed(id : int) -> void:
 			canvas.layers[canvas.current_layer_index][0].flip_y()
 			canvas.layers[canvas.current_layer_index][0].lock()
 			canvas.handle_redo("Draw")
-		4: # Invert Colors
+		4: # Rotate
+			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			$RotateImage.set_sprite(image)
+			$RotateImage.popup_centered()
+		5: # Invert Colors
 			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
@@ -333,7 +337,7 @@ func image_menu_id_pressed(id : int) -> void:
 						continue
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
-		5: # Desaturation
+		6: # Desaturation
 			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
@@ -345,12 +349,8 @@ func image_menu_id_pressed(id : int) -> void:
 					px_color = Color(gray, gray, gray, px_color.a)
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
-		6: # Outline
+		7: # Outline
 			$OutlineDialog.popup_centered()
-		7: # Rotate
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
-			$RotateImage.set_sprite(image)
-			$RotateImage.popup_centered()
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:

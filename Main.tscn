@@ -1402,18 +1402,17 @@ columns = 5
 [node name="SplashDialog" parent="." instance=ExtResource( 43 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 44 )]
-window_title = "Confirmá, por favor..."
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
 margin_bottom = 348.0
-window_title = "Abrir un Archivo"
+window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/azagaya/Documentos/VJ/Pixelorama"
-current_path = "/home/azagaya/Documentos/VJ/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1428,32 +1427,29 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/azagaya/Documentos/VJ/Pixelorama"
-current_path = "/home/azagaya/Documentos/VJ/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 45 )]
-window_title = "Abrir Archivo(s)"
-current_dir = "/home/azagaya/Documentos/VJ/Pixelorama"
-current_path = "/home/azagaya/Documentos/VJ/Pixelorama/"
 
 [node name="ExportSprites" parent="." instance=ExtResource( 46 )]
-current_dir = "/home/azagaya/Documentos/VJ/Pixelorama"
-current_path = "/home/azagaya/Documentos/VJ/Pixelorama/"
 
 [node name="ScaleImage" parent="." instance=ExtResource( 47 )]
+resizable = true
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 48 )]
 
+[node name="RotateImage" parent="." instance=ExtResource( 54 )]
+
 [node name="OutlineDialog" parent="." instance=ExtResource( 49 )]
 visible = false
-window_title = "Confirmá, por favor..."
+resizable = true
 
 [node name="AboutDialog" parent="." instance=ExtResource( 50 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
-window_title = "Confirmá, por favor..."
 resizable = true
 dialog_text = "QUIT_LABEL"
 
@@ -1469,18 +1465,14 @@ visible = false
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 52 )]
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 53 )]
-window_title = "Abrir un Archivo"
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
-current_dir = "/home/azagaya/Documentos/VJ/Pixelorama"
-current_path = "/home/azagaya/Documentos/VJ/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
 
 [node name="RightCursor" type="Sprite" parent="."]
-visible = false
-
-[node name="RotateImage" parent="." instance=ExtResource( 54 )]
 visible = false
 [connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
 [connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]

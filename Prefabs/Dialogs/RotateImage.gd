@@ -18,12 +18,12 @@ func set_sprite(sprite : Image):
 	$VBoxContainer/TextureRect.texture = texture
 
 
-func _on_HSlider_value_changed(value):
+func _on_HSlider_value_changed(_value):
 	rotate()
 	$VBoxContainer/HBoxContainer/SpinBox.value = $VBoxContainer/HBoxContainer/HSlider.value
 
 
-func _on_SpinBox_value_changed(value):
+func _on_SpinBox_value_changed(_value):
 	$VBoxContainer/HBoxContainer/HSlider.value = $VBoxContainer/HBoxContainer/SpinBox.value
 
 
@@ -36,7 +36,7 @@ func _on_RotateImage_confirmed():
 			Global.nn_rotate(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	Global.canvas.handle_redo("Draw")
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
-	
+
 func rotate():
 	var sprite : Image = Image.new()
 	sprite.copy_from(aux_img)
@@ -48,7 +48,7 @@ func rotate():
 	texture.create_from_image(sprite, 0)
 
 
-func _on_OptionButton_item_selected(id):
+func _on_OptionButton_item_selected(_id):
 	rotate()
 
 

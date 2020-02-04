@@ -5,7 +5,7 @@
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
 margin_bottom = 241.0
-window_title = "Confirmá, por favor..."
+resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,6 +44,7 @@ text = "Type:"
 margin_left = 38.0
 margin_right = 229.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -62,6 +63,7 @@ text = "Angle: "
 margin_left = 48.0
 margin_right = 151.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_value = 359.0
@@ -73,6 +75,7 @@ __meta__ = {
 margin_left = 155.0
 margin_right = 229.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 max_value = 359.0
 [connection signal="about_to_show" from="." to="." method="_on_RotateImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_RotateImage_confirmed"]

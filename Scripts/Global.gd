@@ -652,7 +652,7 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 			var ei : bool = similarColors(e, i, tol)
 
 			scaled.set_pixel(xs-1, ys-1, d if (db and !dh and !bf) else e )
-			scaled.set_pixel(xs, ys-1, b if (db and !dh and !bf and !ec) or 
+			scaled.set_pixel(xs, ys-1, b if (db and !dh and !bf and !ec) or
 			(bf and !db and !fh and !ea) else e)
 			scaled.set_pixel(xs+1, ys-1, f if (bf and !db and !fh) else e)
 			scaled.set_pixel(xs-1, ys, d if (dh and !fh and !db and !ea) or
@@ -670,13 +670,13 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	return scaled
 
 func rotxel(sprite : Image, angle : float):
-	
+
 	# If angle is simple, then nn rotation is the best
-	
+
 	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:
 		nn_rotate(sprite, angle)
 		return
-	
+
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
 	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
@@ -698,24 +698,24 @@ func rotxel(sprite : Image, angle : float):
 				dir -= angle
 				ox = round(center.x*3 + 1 + mag*cos(dir))
 				oy = round(center.y*3 + 1 + mag*sin(dir))
-				
+
 				if (sprite.get_width() % 2 != 0):
 					ox += 1
 					oy += 1
-					
+
 				if (ox >= 0 && ox < sprite.get_width()*3
 					&& oy >= 0 && oy < sprite.get_height()*3):
 						found_pixel = true
 						break
-						
+
 			if !found_pixel:
 				sprite.set_pixel(x, y, Color(0,0,0,0))
 				continue
-			
+
 			var fil : int = oy % 3
 			var col : int = ox % 3
 			var index : int = col + 3*fil
-			
+
 			ox = round((ox - 1)/3.0);
 			oy = round((oy - 1)/3.0);
 			var a : Color
@@ -727,7 +727,7 @@ func rotxel(sprite : Image, angle : float):
 			var g : Color
 			var h : Color
 			var i : Color
-			if (ox == 0 || ox == sprite.get_width() - 1 || 
+			if (ox == 0 || ox == sprite.get_width() - 1 ||
 				oy == 0 || oy == sprite.get_height() - 1):
 					p = aux.get_pixel(ox, oy)
 			else:
@@ -740,7 +740,7 @@ func rotxel(sprite : Image, angle : float):
 				g = aux.get_pixel(ox-1,oy+1);
 				h = aux.get_pixel(ox,oy+1);
 				i = aux.get_pixel(ox+1,oy+1);
-				
+
 				match(index):
 					0:
 						p = d if (similarColors(d,b) && !similarColors(d,h)
@@ -748,7 +748,7 @@ func rotxel(sprite : Image, angle : float):
 					1:
 						p = b if ((similarColors(d,b) && !similarColors(d,h) &&
 						 !similarColors(b,f) && !similarColors(e,c)) ||
-						 (similarColors(b,f) && !similarColors(d,b) && 
+						 (similarColors(b,f) && !similarColors(d,b) &&
 						 !similarColors(f,h) && !similarColors(e,a))) else e;
 					2:
 						p = f if (similarColors(b,f) && !similarColors(d,b) &&
@@ -756,17 +756,17 @@ func rotxel(sprite : Image, angle : float):
 					3:
 						p = d if ((similarColors(d,h) && !similarColors(f,h) &&
 						 !similarColors(d,b) && !similarColors(e,a)) ||
-						 (similarColors(d,b) && !similarColors(d,h) && 
+						 (similarColors(d,b) && !similarColors(d,h) &&
 						!similarColors(b,f) && !similarColors(e,g))) else e;
-					4: 
+					4:
 						p = e
 					5:
 						p =  f if((similarColors(b,f) && !similarColors(d,b) &&
 						 !similarColors(f,h) && !similarColors(e,i))
-						 || (similarColors(f,h) && !similarColors(b,f) && 
+						 || (similarColors(f,h) && !similarColors(b,f) &&
 						 !similarColors(d,h) && !similarColors(e,c))) else e;
 					6:
-						p = d if (similarColors(d,h) && !similarColors(f,h) && 
+						p = d if (similarColors(d,h) && !similarColors(f,h) &&
 						 !similarColors(d,b)) else e;
 					7:
 						p = h if ((similarColors(f,h) && !similarColors(f,b) &&
@@ -779,7 +779,7 @@ func rotxel(sprite : Image, angle : float):
 			sprite.set_pixel(x, y, p)
 	sprite.unlock()
 	aux.unlock()
-	
+
 func nn_rotate(sprite : Image, angle : float):
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
@@ -798,9 +798,9 @@ func nn_rotate(sprite : Image, angle : float):
 				sprite.set_pixel(x, y, Color(0,0,0,0))
 	sprite.unlock()
 	aux.unlock()
-	
+
 func similarColors(c1 : Color, c2 : Color, tol : float = 100) -> bool:
-	var dist = colorDistance(c1, c2) 
+	var dist = colorDistance(c1, c2)
 	return dist <= tol
 
 func colorDistance(c1 : Color, c2 : Color) -> float:
