@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.6.2] - Unreleased
 
-## Added
+### Added
 - Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
 - Crowdin integration for contributing translations!
 - Spanish translation - thanks to azagaya!
@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
 - Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
 
-## Changed
+### Changed
 - Updates to the Greek, Russian and Traditional Chinese translations.
 - Replaced some OS alerts with a custom made error dialog.
 - Made the "X" button on the custom brushes a little smaller.

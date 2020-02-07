@@ -2,6 +2,7 @@ extends AcceptDialog
 
 onready var tree : Tree = $HSplitContainer/Tree
 onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
+onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
 onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
 onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
@@ -72,21 +73,25 @@ func _ready() -> void:
 
 func _on_PreferencesDialog_about_to_show() -> void:
 	var root := tree.create_item()
+	var general_button := tree.create_item(root)
 	var language_button := tree.create_item(root)
 	var theme_button := tree.create_item(root)
 	var grid_button := tree.create_item(root)
 	var image_button := tree.create_item(root)
 
-	language_button.set_text(0, "  " + tr("Language"))
+	general_button.set_text(0, "  " + tr("General"))
 	# We use metadata to avoid being affected by translations
+	general_button.set_metadata(0, "General")
+	language_button.set_text(0, "  " + tr("Language"))
 	language_button.set_metadata(0, "Language")
-	language_button.select(0)
 	theme_button.set_text(0, "  " + tr("Themes"))
 	theme_button.set_metadata(0, "Themes")
 	grid_button.set_text(0, "  " + tr("Guides & Grid"))
 	grid_button.set_metadata(0, "Guides & Grid")
 	image_button.set_text(0, "  " + tr("Image"))
 	image_button.set_metadata(0, "Image")
+
+	general_button.select(0)
 
 
 func _on_PreferencesDialog_popup_hide() -> void:
@@ -96,7 +101,9 @@ func _on_Tree_item_selected() -> void:
 	for child in right_side.get_children():
 		child.visible = false
 	var selected : String = tree.get_selected().get_metadata(0)
-	if "Language" in selected:
+	if "General" in selected:
+		general.visible = true
+	elif "Language" in selected:
 		languages.visible = true
 	elif "Themes" in selected:
 		themes.visible = true
@@ -104,6 +111,9 @@ func _on_Tree_item_selected() -> void:
 		grid_guides.visible = true
 	elif "Image" in selected:
 		image.visible = true
+
+func _on_SmoothZoom_pressed() -> void:
+	Global.smooth_zoom = !Global.smooth_zoom
 
 func _on_Language_pressed(button : Button) -> void:
 	var index := 0
@@ -263,4 +273,3 @@ func _on_DefaultBackground_color_changed(color: Color) -> void:
 	Global.default_fill_color = color
 	Global.config_cache.set_value("preferences", "default_fill_color", color)
 	Global.config_cache.save("user://cache.ini")
-

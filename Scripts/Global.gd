@@ -15,6 +15,9 @@ var has_focus := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
+enum PRESSURE_SENSITIVITY {NONE, ALPHA, SIZE}
+var pressure_sensitivity_mode = PRESSURE_SENSITIVITY.NONE
+var smooth_zoom := true
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
 var transparent_background : ImageTexture

@@ -40,6 +40,17 @@ margin_right = 205.0
 margin_bottom = 758.0
 size_flags_horizontal = 3
 
+[node name="General" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
+margin_right = 24.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Smooth Zoom"
+
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_right = 205.0
 margin_bottom = 338.0
@@ -205,6 +216,7 @@ text = "Width:"
 margin_left = 82.0
 margin_right = 156.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
@@ -221,6 +233,7 @@ margin_left = 82.0
 margin_top = 28.0
 margin_right = 156.0
 margin_bottom = 52.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
@@ -238,6 +251,7 @@ margin_top = 56.0
 margin_right = 156.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
 
 [node name="GuideColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions"]
 margin_top = 83.0
@@ -251,6 +265,7 @@ margin_top = 80.0
 margin_right = 156.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
 color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -282,6 +297,7 @@ text = "Default Width:"
 margin_left = 114.0
 margin_right = 188.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 32.0
@@ -298,6 +314,7 @@ margin_left = 114.0
 margin_top = 28.0
 margin_right = 188.0
 margin_bottom = 52.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 32.0
@@ -315,10 +332,12 @@ margin_top = 56.0
 margin_right = 188.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0, 0 )
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
+[connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom" to="." method="_on_SmoothZoom_pressed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]
