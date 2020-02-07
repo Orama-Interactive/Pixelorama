@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-margin_right = 200.0
+margin_right = 216.0
 margin_bottom = 70.0
 window_title = "Preferences"
 resizable = true
@@ -36,34 +36,60 @@ rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
-margin_right = 205.0
-margin_bottom = 758.0
+margin_right = 334.0
+margin_bottom = 858.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 334.0
+margin_bottom = 66.0
+
+[node name="General Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
+margin_right = 334.0
+margin_bottom = 14.0
+text = "General Options"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
-margin_right = 24.0
-margin_bottom = 24.0
+margin_top = 18.0
+margin_right = 334.0
+margin_bottom = 42.0
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Smooth Zoom"
 
+[node name="PressureSentivity" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
+margin_top = 46.0
+margin_right = 334.0
+margin_bottom = 66.0
+
+[node name="PressureSensitivityLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity"]
+margin_top = 3.0
+margin_right = 173.0
+margin_bottom = 17.0
+text = "Tablet pressure sensitivity:"
+
+[node name="PressureSensitivityOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity"]
+margin_left = 177.0
+margin_right = 334.0
+margin_bottom = 20.0
+text = "Affect Brush's Alpha"
+items = [ "None", null, false, 0, null, "Affect Brush's Alpha", null, false, 1, null ]
+selected = 1
+
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_right = 205.0
-margin_bottom = 338.0
+margin_top = 70.0
+margin_right = 334.0
+margin_bottom = 438.0
 
 [node name="Language Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Language options"
 
 [node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 pressed = true
@@ -71,14 +97,14 @@ text = "System Language"
 
 [node name="German" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 60.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 text = "Deutsch [de]"
 
 [node name="Greek" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 88.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 112.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
@@ -86,121 +112,129 @@ text = "Ελληνικά [el]"
 
 [node name="English" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 116.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 text = "English [en]"
 
 [node name="Spanish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 144.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 168.0
 mouse_default_cursor_shape = 2
 text = "Español [es]"
 
 [node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 172.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 196.0
 mouse_default_cursor_shape = 2
 text = "Français [fr]"
 
 [node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 200.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 224.0
 mouse_default_cursor_shape = 2
 text = "Italian [it]"
 
 [node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 228.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 252.0
 mouse_default_cursor_shape = 2
 text = "Polski [pl]"
 
 [node name="Brazilian Portuguese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 256.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 280.0
 mouse_default_cursor_shape = 2
 text = "Português Brasileiro [pt_BR]"
 
 [node name="Russian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 284.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 308.0
 mouse_default_cursor_shape = 2
 text = "Русский [ru]"
 
-[node name="Chinese Traditional" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="Chinese Simplified" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 312.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 338.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = ExtResource( 3 )
+text = "简体中文 [zh_CN]"
+
+[node name="Chinese Traditional" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 342.0
+margin_right = 334.0
+margin_bottom = 368.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
 text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 342.0
-margin_right = 205.0
-margin_bottom = 510.0
+margin_top = 442.0
+margin_right = 334.0
+margin_bottom = 610.0
 
 [node name="Theme Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Theme options"
 
 [node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 text = "Dark"
 
 [node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 60.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 text = "Gray"
 
 [node name="Godot\'s Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 88.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 112.0
 mouse_default_cursor_shape = 2
 text = "Godot"
 
 [node name="Gold Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 116.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 text = "Gold"
 
 [node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 144.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 168.0
 mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 514.0
-margin_right = 205.0
-margin_bottom = 646.0
+margin_top = 614.0
+margin_right = 334.0
+margin_bottom = 746.0
 
 [node name="GridOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 132.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
@@ -269,19 +303,19 @@ mouse_default_cursor_shape = 2
 color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 650.0
-margin_right = 205.0
-margin_bottom = 758.0
+margin_top = 750.0
+margin_right = 334.0
+margin_bottom = 858.0
 
 [node name="ImageOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Image Options"
 
 [node name="ImageOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 334.0
 margin_bottom = 108.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
@@ -338,6 +372,7 @@ color = Color( 0, 0, 0, 0 )
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
 [connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom" to="." method="_on_SmoothZoom_pressed"]
+[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton" to="." method="_on_PressureSensitivityOptionButton_item_selected"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue" to="." method="_on_GridWidthValue_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue" to="." method="_on_GridHeightValue_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor" to="." method="_on_GridColor_color_changed"]

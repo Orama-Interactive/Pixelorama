@@ -23,7 +23,7 @@ func _ready() -> void:
 		Global.loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		Global.loaded_locales = ["de_DE", "el_GR", "en_US", "es_ES", "fr_FR", "it_IT", "pl_PL", "pt_BR", "ru_RU", "zh_TW"]
+		Global.loaded_locales = ["de_DE", "el_GR", "en_US", "es_ES", "fr_FR", "it_IT", "pl_PL", "pt_BR", "ru_RU", "zh_CN","zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
 	Global.loaded_locales.sort()
@@ -245,7 +245,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.selected_pixels.clear()
 			Global.canvas.handle_redo("Rectangle Select")
 		3: # Preferences
-			$PreferencesDialog.popup_centered(Vector2(300, 280))
+			$PreferencesDialog.popup_centered(Vector2(400, 280))
 			Global.can_draw = false
 
 func view_menu_id_pressed(id : int) -> void:

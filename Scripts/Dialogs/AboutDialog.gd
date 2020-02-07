@@ -68,6 +68,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  JunYouIntrovert - " + tr("Chinese Traditional"))
+	translators.create_item(translators_root).set_text(0, "  wcxu21 - " + tr("Chinese Simplified"))
 	translators.create_item(translators_root).set_text(0, "  Marco Galli (Gaarco) - " + tr("Italian"))
 	translators.create_item(translators_root).set_text(0, "  azagaya - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Lilly And (KatieAnd) - " + tr("Spanish"))
