@@ -24,7 +24,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 507.0
 margin_bottom = 312.0
-text = "Export current frame"
+text = "EXPORT_CURRENT_FRAME_LABEL"
 items = [ "EXPORT_CURRENT_FRAME_LABEL", null, false, 0, null, "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL", null, false, 1, null, "EXPORT_FRAMES_AS_SPRITESHEET_LABEL", null, false, 2, null ]
 selected = 0
 
@@ -60,10 +60,10 @@ text = "Interpolation:"
 
 [node name="Interpolation" type="OptionButton" parent="Resize"]
 margin_left = 219.0
-margin_right = 310.0
+margin_right = 298.0
 margin_bottom = 304.0
 text = "Nearest"
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, true, 4, null ]
+items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
 selected = 0
 
 [node name="Spritesheet" type="HBoxContainer" parent="."]

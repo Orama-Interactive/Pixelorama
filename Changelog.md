@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Translators can now be seen in the About window.
 - It is now possible to remove custom brushes with the middle mouse button.
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
+- Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
 
 ## Changed
 - Updates to the Greek, Russian and Traditional Chinese translations.
