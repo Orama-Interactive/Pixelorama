@@ -20,6 +20,7 @@ func _ready() -> void:
 	for child in languages.get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Language_pressed", [child])
+			child.hint_tooltip = child.name
 
 	for child in themes.get_children():
 		if child is Button:

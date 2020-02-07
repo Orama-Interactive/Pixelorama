@@ -37,12 +37,12 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 205.0
-margin_bottom = 554.0
+margin_bottom = 758.0
 size_flags_horizontal = 3
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_right = 205.0
-margin_bottom = 310.0
+margin_bottom = 338.0
 
 [node name="Language Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_right = 205.0
@@ -81,60 +81,59 @@ mouse_default_cursor_shape = 2
 text = "English [en]"
 
 [node name="Spanish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 116.0
-margin_right = 205.0
-margin_bottom = 140.0
-mouse_default_cursor_shape = 2
-text = "Spanish [es]"
-
-[node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 144.0
 margin_right = 205.0
 margin_bottom = 168.0
 mouse_default_cursor_shape = 2
-text = "Français [fr]"
+text = "Español [es]"
 
-[node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 172.0
 margin_right = 205.0
 margin_bottom = 196.0
 mouse_default_cursor_shape = 2
-text = "Italian [it]"
+text = "Français [fr]"
 
-[node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 200.0
 margin_right = 205.0
 margin_bottom = 224.0
 mouse_default_cursor_shape = 2
-text = "Polski [pl]"
+text = "Italian [it]"
 
-[node name="Brazilian Portuguese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 228.0
 margin_right = 205.0
 margin_bottom = 252.0
 mouse_default_cursor_shape = 2
-text = "Português Brasileiro [pt_BR]"
+text = "Polski [pl]"
 
-[node name="Russian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="Brazilian Portuguese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 256.0
 margin_right = 205.0
 margin_bottom = 280.0
 mouse_default_cursor_shape = 2
-text = "Русский [ru]"
+text = "Português Brasileiro [pt_BR]"
 
-[node name="Traditional Chinese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="Russian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 284.0
 margin_right = 205.0
-margin_bottom = 310.0
+margin_bottom = 308.0
+mouse_default_cursor_shape = 2
+text = "Русский [ru]"
+
+[node name="Chinese Traditional" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 312.0
+margin_right = 205.0
+margin_bottom = 338.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
 text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
-margin_top = 314.0
+margin_top = 342.0
 margin_right = 205.0
-margin_bottom = 482.0
+margin_bottom = 510.0
 
 [node name="Theme Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_right = 205.0
@@ -178,10 +177,9 @@ mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
-margin_top = 486.0
+margin_top = 514.0
 margin_right = 205.0
-margin_bottom = 618.0
+margin_bottom = 646.0
 
 [node name="GridOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
 margin_right = 205.0
@@ -256,10 +254,9 @@ rect_min_size = Vector2( 64, 20 )
 color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-editor/display_folded = true
-margin_top = 622.0
+margin_top = 650.0
 margin_right = 205.0
-margin_bottom = 730.0
+margin_bottom = 758.0
 
 [node name="ImageOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_right = 205.0
