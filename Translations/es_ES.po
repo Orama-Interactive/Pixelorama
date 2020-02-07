@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-01-26 21:59\n"
+"PO-Revision-Date: 2020-02-07 21:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -194,6 +194,9 @@ msgstr "Cúbico"
 msgid "Trilinear"
 msgstr "Trilineal"
 
+msgid "General"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
@@ -202,6 +205,21 @@ msgstr "Temas"
 
 msgid "Guides & Grid"
 msgstr "Guías y Cuadrícula"
+
+msgid "General Options"
+msgstr ""
+
+msgid "Smooth Zoom"
+msgstr ""
+
+msgid "Tablet pressure sensitivity:"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Affect Brush's Alpha"
+msgstr ""
 
 msgid "Language options"
 msgstr "Opciones de idioma"
@@ -304,6 +322,9 @@ msgstr "Portugués brasileño"
 
 msgid "Russian"
 msgstr "Ruso"
+
+msgid "Chinese Simplified"
+msgstr ""
 
 msgid "Chinese Traditional"
 msgstr "Chino tradicional"

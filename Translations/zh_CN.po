@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-02-07 12:47\n"
+"PO-Revision-Date: 2020-02-07 21:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -194,6 +194,9 @@ msgstr "立方体"
 msgid "Trilinear"
 msgstr "三线性"
 
+msgid "General"
+msgstr ""
+
 msgid "Language"
 msgstr "语言"
 
@@ -202,6 +205,21 @@ msgstr "主题"
 
 msgid "Guides & Grid"
 msgstr "辅助线和网格"
+
+msgid "General Options"
+msgstr ""
+
+msgid "Smooth Zoom"
+msgstr ""
+
+msgid "Tablet pressure sensitivity:"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Affect Brush's Alpha"
+msgstr ""
 
 msgid "Language options"
 msgstr "语言选项"
@@ -304,6 +322,9 @@ msgstr ""
 
 msgid "Russian"
 msgstr ""
+
+msgid "Chinese Simplified"
+msgstr "简体中文"
 
 msgid "Chinese Traditional"
 msgstr ""
