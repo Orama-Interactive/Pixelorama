@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-02-07 21:39\n"
+"PO-Revision-Date: 2020-02-07 21:49\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -196,7 +196,7 @@ msgid "Trilinear"
 msgstr "Τριγραμμική"
 
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 msgid "Language"
 msgstr "Γλώσσα"
@@ -208,22 +208,22 @@ msgid "Guides & Grid"
 msgstr "Οδηγοί και Πλέγμα"
 
 msgid "General Options"
-msgstr ""
+msgstr "Γενικές επιλογές"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Ομαλό Ζουμ"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Ευαισθησία πίεσης tablet:"
 
 msgid "None"
-msgstr ""
+msgstr "Καθόλου"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Language options"
-msgstr "Επιλογές Γλώσσας"
+msgstr "Επιλογές γλώσσας"
 
 msgid "Theme options"
 msgstr "Επιλογές θέματος"
@@ -325,7 +325,7 @@ msgid "Russian"
 msgstr "Ρωσικά"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Κινέζικα Απλοποιημένα"
 
 msgid "Chinese Traditional"
 msgstr "Κινεζικά Παραδοσιακά"
