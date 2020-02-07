@@ -198,19 +198,19 @@ msgid "Guides & Grid"
 msgstr ""
 
 msgid "General Options"
-msgstr
+msgstr ""
 
 msgid "Smooth Zoom"
-msgstr
+msgstr ""
 
 msgid "Tablet pressure sensitivity:"
-msgstr
+msgstr ""
 
 msgid "None"
-msgstr
+msgstr ""
 
 msgid "Affect Brush's Alpha"
-msgstr
+msgstr ""
 
 msgid "Language options"
 msgstr ""
