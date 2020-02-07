@@ -185,6 +185,9 @@ msgstr ""
 msgid "Trilinear"
 msgstr ""
 
+msgid "General"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -193,6 +196,21 @@ msgstr ""
 
 msgid "Guides & Grid"
 msgstr ""
+
+msgid "General Options"
+msgstr
+
+msgid "Smooth Zoom"
+msgstr
+
+msgid "Tablet pressure sensitivity:"
+msgstr
+
+msgid "None"
+msgstr
+
+msgid "Affect Brush's Alpha"
+msgstr
 
 msgid "Language options"
 msgstr ""
@@ -294,6 +312,9 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 msgid "Russian"
+msgstr ""
+
+msgid "Chinese Simplified"
 msgstr ""
 
 msgid "Chinese Traditional"

@@ -71,7 +71,7 @@ func _ready() -> void:
 		Global.default_fill_color = fill_color
 		default_fill_color.color = Global.default_fill_color
 
-func _on_PreferencesDialog_about_to_show() -> void:
+func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	var root := tree.create_item()
 	var general_button := tree.create_item(root)
 	var language_button := tree.create_item(root)
@@ -91,7 +91,10 @@ func _on_PreferencesDialog_about_to_show() -> void:
 	image_button.set_text(0, "  " + tr("Image"))
 	image_button.set_metadata(0, "Image")
 
-	general_button.select(0)
+	if changed_language:
+		language_button.select(0)
+	else:
+		general_button.select(0)
 
 
 func _on_PreferencesDialog_popup_hide() -> void:
@@ -111,6 +114,9 @@ func _on_Tree_item_selected() -> void:
 		grid_guides.visible = true
 	elif "Image" in selected:
 		image.visible = true
+
+func _on_PressureSensitivityOptionButton_item_selected(id : int) -> void:
+	Global.pressure_sensitivity_mode = id
 
 func _on_SmoothZoom_pressed() -> void:
 	Global.smooth_zoom = !Global.smooth_zoom
@@ -141,7 +147,7 @@ func _on_Language_pressed(button : Button) -> void:
 
 	# Update Translations
 	_on_PreferencesDialog_popup_hide()
-	_on_PreferencesDialog_about_to_show()
+	_on_PreferencesDialog_about_to_show(true)
 
 func _on_Theme_pressed(button : Button) -> void:
 	var index := 0
