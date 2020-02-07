@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-01-26 21:58\n"
+"PO-Revision-Date: 2020-02-07 21:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -194,6 +194,9 @@ msgstr "三次樣條"
 msgid "Trilinear"
 msgstr "三線性"
 
+msgid "General"
+msgstr ""
+
 msgid "Language"
 msgstr "語言"
 
@@ -202,6 +205,21 @@ msgstr "皮膚"
 
 msgid "Guides & Grid"
 msgstr "輔助線與格線"
+
+msgid "General Options"
+msgstr ""
+
+msgid "Smooth Zoom"
+msgstr ""
+
+msgid "Tablet pressure sensitivity:"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Affect Brush's Alpha"
+msgstr ""
 
 msgid "Language options"
 msgstr "語言"
@@ -304,6 +322,9 @@ msgstr "巴西葡萄牙文"
 
 msgid "Russian"
 msgstr "俄文"
+
+msgid "Chinese Simplified"
+msgstr ""
 
 msgid "Chinese Traditional"
 msgstr "繁體中文"
