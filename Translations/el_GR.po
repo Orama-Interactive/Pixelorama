@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-02-07 21:49\n"
+"PO-Revision-Date: 2020-02-07 21:58\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -220,7 +220,7 @@ msgid "None"
 msgstr "Καθόλου"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Επηρεάζει την αδιαφάνεια του πινέλου"
 
 msgid "Language options"
 msgstr "Επιλογές γλώσσας"
