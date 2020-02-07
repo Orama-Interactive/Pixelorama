@@ -1,0 +1,745 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"Project-Id-Version: pixelorama\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"PO-Revision-Date: 2020-02-07 12:47\n"
+
+msgid "OK"
+msgstr "确定"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Please Confirm..."
+msgstr "确认..."
+
+msgid "Image Size"
+msgstr "图像大小"
+
+msgid "Width:"
+msgstr "宽度:"
+
+msgid "Height:"
+msgstr "高度:"
+
+msgid "File"
+msgstr "文件"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "View"
+msgstr "视图"
+
+msgid "Image"
+msgstr "图像"
+
+msgid "Effects"
+msgstr "效果"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "New..."
+msgstr "新建..."
+
+msgid "Open..."
+msgstr "打开..."
+
+msgid "Save..."
+msgstr "保存..."
+
+msgid "Save as..."
+msgstr "另存为..."
+
+msgid "Import PNG..."
+msgstr "导入 PNG..."
+
+msgid "Export"
+msgstr "导出"
+
+msgid "Export PNG..."
+msgstr "导出 PNG..."
+
+msgid "Export PNG as..."
+msgstr "导出 PNG 为..."
+
+msgid "Quit"
+msgstr "退出"
+
+msgid "Undo"
+msgstr "撤消"
+
+msgid "Redo"
+msgstr "重做"
+
+msgid "Scale Image"
+msgstr "缩放图像"
+
+msgid "Crop Image"
+msgstr "裁剪图像"
+
+msgid "Rotate Image"
+msgstr ""
+
+msgid "Clear Selection"
+msgstr "清除选择"
+
+msgid "Flip Horizontal"
+msgstr "水平翻转"
+
+msgid "Flip Vertical"
+msgstr "垂直翻转"
+
+msgid "Preferences"
+msgstr "首选项"
+
+msgid "Tile Mode"
+msgstr "平铺模式"
+
+msgid "Show Grid"
+msgstr "显示网格"
+
+msgid "Show Rulers"
+msgstr "显示标尺"
+
+msgid "Show Guides"
+msgstr "显示指南"
+
+msgid "Fill with color:"
+msgstr "使用颜色填充:"
+
+msgid "Open a File"
+msgstr "打开一个文件"
+
+msgid "Open File(s)"
+msgstr "打开文件"
+
+msgid "IMPORT_FILE_LABEL"
+msgstr "导入为新建帧"
+
+msgid "IMPORT_SPRITESHEET"
+msgstr "导入为 Spritesheet"
+
+msgid "Save Sprite as .pxo"
+msgstr "保存 Sprite 为 .pxo"
+
+msgid "Export Sprite as .png"
+msgstr "导出 Sprite 为 .png"
+
+msgid "Export Sprite"
+msgstr "导出 Sprite"
+
+msgid "File Exists, Overwrite?"
+msgstr "文件已存在，覆盖吗?"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr ""
+
+msgid "Resize:"
+msgstr "调整大小:"
+
+msgid "EXPORT_CURRENT_FRAME_LABEL"
+msgstr "导出当前帧"
+
+msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
+msgstr "导出所有帧为多个文件"
+
+msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
+msgstr "导出所有帧为一个 spritesheet（单个文件）"
+
+msgid "Columns"
+msgstr "列"
+
+msgid "Rows"
+msgstr "行"
+
+msgid "Path:"
+msgstr "路径:"
+
+msgid "Directories & Files:"
+msgstr "目录和文件:"
+
+msgid "Create Folder"
+msgstr "创建文件夹"
+
+msgid "File:"
+msgstr "文件:"
+
+msgid "Interpolation:"
+msgstr "插补:"
+
+msgid "Nearest"
+msgstr "最近"
+
+msgid "Bilinear"
+msgstr "双线性"
+
+msgid "Cubic"
+msgstr "立方体"
+
+msgid "Trilinear"
+msgstr "三线性"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Themes"
+msgstr "主题"
+
+msgid "Guides & Grid"
+msgstr "辅助线和网格"
+
+msgid "Language options"
+msgstr "语言选项"
+
+msgid "Theme options"
+msgstr "主题选项"
+
+msgid "Grid options"
+msgstr "网格选项"
+
+msgid "Color:"
+msgstr "颜色:"
+
+msgid "Guide color:"
+msgstr "辅助线颜色:"
+
+msgid "System Language"
+msgstr "系统语言"
+
+msgid "Dark"
+msgstr "深色"
+
+msgid "Gray"
+msgstr "灰色"
+
+msgid "Gold"
+msgstr "金色"
+
+msgid "Light"
+msgstr "白色"
+
+msgid "Invert colors"
+msgstr "反相颜色"
+
+msgid "Desaturation"
+msgstr "去饱和"
+
+msgid "Outline"
+msgstr "轮廓"
+
+msgid "Diagonal"
+msgstr "对角线"
+
+msgid "Place inside image"
+msgstr "放置在图片中"
+
+msgid "Thickness:"
+msgstr "厚度:"
+
+msgid "View Splash Screen"
+msgstr "查看启动画面"
+
+msgid "Issue Tracker"
+msgstr "问题追踪器"
+
+msgid "Changelog"
+msgstr "更新日志"
+
+msgid "About Pixelorama"
+msgstr "关于 Pixelorama"
+
+msgid "MADEBY_LABEL"
+msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
+
+msgid "Website"
+msgstr "网站"
+
+msgid "Donate"
+msgstr "捐赠"
+
+msgid "Developers"
+msgstr "开发"
+
+msgid "Contributors"
+msgstr "贡献者"
+
+msgid "Donors"
+msgstr "捐赠者"
+
+msgid "Translators"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "French"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Polish"
+msgstr ""
+
+msgid "Brazilian Portuguese"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
+msgid "Chinese Traditional"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Spanish"
+msgstr ""
+
+msgid "Development Team"
+msgstr "开发团队"
+
+msgid "Lead Programmer"
+msgstr "首席程序员"
+
+msgid "UI Designer"
+msgstr "UI 设计师"
+
+msgid "GitHub Contributors"
+msgstr "GitHub 贡献者"
+
+msgid "Art by"
+msgstr "艺术作者"
+
+msgid "untitled"
+msgstr "未命名"
+
+msgid "imported"
+msgstr "已导入"
+
+msgid "copy"
+msgstr "复制"
+
+msgid "QUIT_LABEL"
+msgstr "您确定要退出 Pixelorama 吗?"
+
+msgid "Utility Tools"
+msgstr "实用工具"
+
+msgid "RECTSELECT_HT"
+msgstr "矩形选择\n\n"
+"R 表示鼠标左键\n"
+"ALT + R 为鼠标右键\n\n"
+"按 Shift 键移动内容"
+
+msgid "COLORPICKER_HT"
+msgstr "拾色器\n"
+"从子画面的像素选择颜色\n\n"
+"O 表示鼠标左键\n"
+"Alt + O 为鼠标右键"
+
+msgid "Draw Tools"
+msgstr "绘图工具"
+
+msgid "PENCIL_HT"
+msgstr "铅笔\n\n"
+"P 为鼠标左键\n"
+"Alt + P 为鼠标右键\n\n"
+"按住 Shift 绘制一条直线"
+
+msgid "ERASER_HT"
+msgstr "橡皮擦\n\n"
+"E 为鼠标左键\n"
+"Alt + E 为鼠标右键\n\n"
+"按住 Shift 绘制一条直线"
+
+msgid "BUCKET_HT"
+msgstr "油漆桶\n\n"
+"B 为鼠标左键\n"
+"Alt + B 为鼠标右键"
+
+msgid "LD_HT"
+msgstr "变淡/加深\n\n"
+"U 为鼠标左键\n"
+"Alt + U 为鼠标右键"
+
+msgid "LEFTCOLOR_HT"
+msgstr "选择左键工具的颜色"
+
+msgid "RIGHTCOLOR_HT"
+msgstr "选择右键工具的颜色"
+
+msgid "COLORSWITCH_HT"
+msgstr "左右切换颜色\n"
+"(X)"
+
+msgid "COLORDEFAULTS_HT"
+msgstr "重置颜色为默认状态（黑色为左，白色为右）"
+
+msgid "Raw Mode"
+msgstr "原始模式"
+
+msgid "Left tool options"
+msgstr "左键工具选项"
+
+msgid "Right tool options"
+msgstr "右键工具选项"
+
+msgid "Left pixel indicator"
+msgstr "左键工具指示"
+
+msgid "LEFT_INDIC_HT"
+msgstr "绘制时在画布上显示鼠标左键像素指示器或画笔"
+
+msgid "RIGHT_INDIC_HT"
+msgstr "绘制时在画布上显示鼠标右键像素指示器或画笔"
+
+msgid "Show tool icon"
+msgstr "显示工具图标"
+
+msgid "Right pixel indicator"
+msgstr "右键工具指示"
+
+msgid "Brush:"
+msgstr "画笔:"
+
+msgid "BRUSH_HT"
+msgstr "选择一个画笔"
+
+msgid "Brush: Pixel"
+msgstr "画笔: 像素"
+
+msgid "Brush: Circle"
+msgstr "画笔: 圆圈"
+
+msgid "Brush: Filled Circle"
+msgstr "画笔: 实心圆形"
+
+msgid "Custom brush"
+msgstr "自定义画笔"
+
+msgid "Brush size:"
+msgstr "画笔大小:"
+
+msgid "Brush color from"
+msgstr "画笔颜色从"
+
+msgid "COLORFROM_HT"
+msgstr "0：画笔本身的颜色，100：当前选择的颜色"
+
+msgid "Fill area:"
+msgstr "填充区域:"
+
+msgid "Area of the same color"
+msgstr "相同颜色区域"
+
+msgid "All pixels of the same color"
+msgstr "所有相同颜色的像素"
+
+msgid "Lighten"
+msgstr "减淡"
+
+msgid "Darken"
+msgstr "加深"
+
+msgid "Amount:"
+msgstr "数量:"
+
+msgid "LDAMOUNT_HT"
+msgstr "减淡/加深数量"
+
+msgid "Pick for:"
+msgstr "拾取:"
+
+msgid "Left Color"
+msgstr "左键颜色"
+
+msgid "Right Color"
+msgstr "右键颜色"
+
+msgid "Mirroring"
+msgstr "镜像"
+
+msgid "Horizontal"
+msgstr "水平"
+
+msgid "HORIZMIRROR_HT"
+msgstr "启用水平镜像绘图"
+
+msgid "VERTMIRROR_HT"
+msgstr "启用垂直镜像绘图"
+
+msgid "Vertical"
+msgstr "垂直"
+
+msgid "Current frame:"
+msgstr "当前帧:"
+
+msgid "Current frame: 1/1"
+msgstr "当前帧: 1/1"
+
+msgid "FIRSTFRAME_HT"
+msgstr "跳转到第一帧\n"
+"(Ctrl+Home)"
+
+msgid "PREVIOUSFRAME_HT"
+msgstr "转到上一帧\n"
+"(Ctrl+Left)"
+
+msgid "PLAYBACKWARDS_HT"
+msgstr "向后播放动画（从头到尾）\n"
+"(F4)"
+
+msgid "PLAYFORWARD_HT"
+msgstr "向前播放动画（从头到尾）\n"
+"(F5)"
+
+msgid "NEXTFRAME_HT"
+msgstr "转到下一帧\n"
+"(Ctrl+Right)"
+
+msgid "LASTFRAME_HT"
+msgstr "跳转到最后一帧\n"
+"(Ctrl+End)"
+
+msgid "FPS_HT"
+msgstr "动画预览应该每秒几帧?\n"
+"FPS 越高，动画播放越快。"
+
+msgid "No loop"
+msgstr "无循环"
+
+msgid "Cycle loop"
+msgstr "周期循环"
+
+msgid "Ping-pong loop"
+msgstr "乒乓循环"
+
+msgid "Onion Skinning:"
+msgstr "洋葱皮:"
+
+msgid "Past Frames"
+msgstr "过去帧"
+
+msgid "Future Frames"
+msgstr "未来帧"
+
+msgid "Blue-Red Mode"
+msgstr "蓝红模式"
+
+msgid "Add a new frame"
+msgstr "添加一个新的帧"
+
+msgid "Remove Frame"
+msgstr "移除帧"
+
+msgid "Clone Frame"
+msgstr "克隆帧"
+
+msgid "Move Left"
+msgstr "向左移动"
+
+msgid "Move Right"
+msgstr "向右移动"
+
+msgid "Layer"
+msgstr "图层"
+
+msgid "Layers"
+msgstr "图层"
+
+msgid "LAYERNEW_HT"
+msgstr "创建一个新的图层"
+
+msgid "LAYERREMOVE_HT"
+msgstr "移除当前图层"
+
+msgid "LAYERUP_HT"
+msgstr "向上移动当前图层"
+
+msgid "LAYERDOWN_HT"
+msgstr "向下移动当前图层"
+
+msgid "LAYERCLONE_HT"
+msgstr "克隆当前图层"
+
+msgid "LAYERMERGE_HT"
+msgstr "当前图层与下面图层合并"
+
+msgid "Opacity:"
+msgstr "不透明度:"
+
+msgid "LAYERVISIBILITY_HT"
+msgstr "切换图层可见性"
+
+msgid "Palette"
+msgstr "调色板"
+
+msgid "Palettes"
+msgstr "调色板"
+
+msgid "NEWPALETTE_HT"
+msgstr "添加一个新的调色板"
+
+msgid "EDITPALETTE_HT"
+msgstr "编辑当前所选调色板"
+
+msgid "CHOOSEPALETTE_HT"
+msgstr "选择一个调色板"
+
+msgid "Undo: Draw"
+msgstr "撤消: 绘图"
+
+msgid "Redo: Draw"
+msgstr "重做: 绘图"
+
+msgid "Undo: Rectangle Select"
+msgstr "撤消: 矩形选择"
+
+msgid "Redo: Rectangle Select"
+msgstr "重做: 矩形选择"
+
+msgid "Undo: Scale"
+msgstr "撤消: 缩放"
+
+msgid "Redo: Scale"
+msgstr "重做: 缩放"
+
+msgid "Undo: Add Layer"
+msgstr "撤消: 添加图层"
+
+msgid "Redo: Add Layer"
+msgstr "重做: 添加图层"
+
+msgid "Undo: Remove Layer"
+msgstr "撤消: 移除图层"
+
+msgid "Redo: Remove Layer"
+msgstr "重做: 移除图层"
+
+msgid "Undo: Merge Layer"
+msgstr "撤消: 合并图层"
+
+msgid "Redo: Merge Layer"
+msgstr "重做: 合并图层"
+
+msgid "Undo: Change Layer Order"
+msgstr "撤消: 更改图层顺序"
+
+msgid "Redo: Change Layer Order"
+msgstr "重做: 更改图层顺序"
+
+msgid "Undo: Add Frame"
+msgstr "撤消: 添加帧"
+
+msgid "Redo: Add Frame"
+msgstr "重做: 添加帧"
+
+msgid "Undo: Remove Frame"
+msgstr "撤消: 移除帧"
+
+msgid "Redo: Remove Frame"
+msgstr "重做: 移除帧"
+
+msgid "Undo: Change Frame Order"
+msgstr "撤消: 更改帧顺序"
+
+msgid "Redo: Change Frame Order"
+msgstr "重做: 更改帧顺序"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "撤消: 删除自定义画笔"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "重做: 删除自定义画笔"
+
+msgid "Move Guide"
+msgstr "移除辅助线"
+
+msgid "File saved"
+msgstr "文件已保存"
+
+msgid "File exported"
+msgstr "文件已导出"
+
+msgid "New Empty Palette"
+msgstr "新建空的调色板"
+
+msgid "Import Palette"
+msgstr "导入调色板"
+
+msgid "Palette Name:"
+msgstr "调色板名称:"
+
+msgid "Color Name:"
+msgstr "颜色名称:"
+
+msgid "Create a new empty palette?"
+msgstr "创建一个新的空调色板?"
+
+msgid "Error: Palette must have a valid name."
+msgstr "错误：调色板必须具有有效的名称。"
+
+msgid "Error: Palette named '%s' already exists!"
+msgstr "错误：名为 '%s' 的调色板已存在!"
+
+msgid "Invalid Palette file!"
+msgstr "无效的调色板文件!"
+
+msgid "Edit Palette"
+msgstr "编辑调色板"
+
+msgid "Patrons:"
+msgstr "赞助:"
+
+msgid "Changes"
+msgstr "更改"
+
+msgid "Platinum Sponsor"
+msgstr "白金赞助商"
+
+msgid "Gold Sponsors"
+msgstr "金牌赞助商"
+
+msgid "Platinum Sponsor Placeholder"
+msgstr "白金赞助商占位符"
+
+msgid "Gold Sponsors Placeholder"
+msgstr "金牌赞助商占位符"
+
+msgid "Don't show again"
+msgstr "不再显示"
+
+msgid "Take this spot!"
+msgstr "获取该位置!"
+
+msgid "Image Options"
+msgstr "图像选项"
+
+msgid "Default Width:"
+msgstr "默认宽度:"
+
+msgid "Default Height:"
+msgstr "默认高度:"
+
+msgid "Default Fill Color:"
+msgstr "默认填充颜色:"
+
