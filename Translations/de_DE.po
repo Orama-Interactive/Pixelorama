@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-08 10:31\n"
+"PO-Revision-Date: 2020-02-08 10:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -720,47 +720,47 @@ msgid "Error: Palette must have a valid name."
 msgstr "Fehler: Palette muss einen gültigen Namen haben."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Fehler: Palette namens '%s' existiert bereits!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Nicht gültige Palettendatei!"
 
 msgid "Edit Palette"
 msgstr "Bearbeite Palette"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Changes"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platin Sponsoren"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Gold Sponsoren"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Platin Sponsoren Platzhalter"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Gold Sponsoren Platzhalter"
 
 msgid "Don't show again"
 msgstr "Nicht beim nächsten Start"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Nimm diesen Platz ein!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Bild Optionen"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Standardweite:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Standardhöhe:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Standardfüllfarbe:"
 
