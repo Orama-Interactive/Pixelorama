@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
+- Tablet pen pressure sensitivity!
 - Crowdin integration for contributing translations!
 - Spanish translation - thanks to azagaya!
 - Chinese Simplified translation - thanks to wcxu21!
@@ -16,13 +17,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
 
 ### Changed
-- Updates to the Greek, Russian and Traditional Chinese translations.
+- Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
 - Replaced some OS alerts with a custom made error dialog.
 - Made the zooming smoother, is toggleable in Preferences whether to keep the new zooming or the old one.
 - Made the "X" button on the custom brushes a little smaller.
 - The color picker will now have a small white triangle on the top left of the color preview if at least one of its RGB values are above 1 in Raw mode. (Added automatically because of the Godot 3.2 update)
 - You can now toggle the visibility of hidden items on and off in the file dialogs. (Added automatically because of the Godot 3.2 update)
 - The language buttons in the preferences have their localized names in their hint tooltips. For example, if you hover over the "English" button while the language is Greek, the hint tooltip will be "Αγγλικά", which is the Greek word for English.
+- Translation updates.
 
 ### Fixed
 - Delay the splash screen popup so it shows properly centered (thanks to YeldhamDev)
