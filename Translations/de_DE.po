@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-08 10:21\n"
+"PO-Revision-Date: 2020-02-08 10:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -195,7 +195,7 @@ msgid "Trilinear"
 msgstr "Triliniar"
 
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgid "Language"
 msgstr "Sprache"
@@ -207,19 +207,19 @@ msgid "Guides & Grid"
 msgstr "Guides & Gitter"
 
 msgid "General Options"
-msgstr ""
+msgstr "Allgemeine Optionen"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Smoother Zoom"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Tabletdrucksensitivität:"
 
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Beeinflusst Pinsels Alpha"
 
 msgid "Language options"
 msgstr "Sprachoptionen"
@@ -246,7 +246,7 @@ msgid "Gray"
 msgstr "Grau"
 
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 msgid "Light"
 msgstr "Hell"
@@ -261,7 +261,7 @@ msgid "Outline"
 msgstr "Umriss"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
 msgstr "Platziere in Bild"
@@ -273,7 +273,7 @@ msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problemverfolger"
 
 msgid "Changelog"
 msgstr "Änderungen"
@@ -285,7 +285,7 @@ msgid "MADEBY_LABEL"
 msgstr "Entwickelt von Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 msgid "Donate"
 msgstr "Spenden"
@@ -300,49 +300,49 @@ msgid "Donors"
 msgstr "Spender"
 
 msgid "Translators"
-msgstr ""
+msgstr "Übersetzungen"
 
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 msgid "Greek"
-msgstr ""
+msgstr "Griechisch"
 
 msgid "French"
-msgstr ""
+msgstr "Fanzösisch"
 
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polnisch"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasilianisches Portugiesisch"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Simples Chinesisch"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Traditionelles Chinesisch"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italenisch"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spanisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Leitender Programmierer"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI Designer"
 
 msgid "GitHub Contributors"
 msgstr "Github Beitragende"
@@ -488,13 +488,13 @@ msgid "LDAMOUNT_HT"
 msgstr "Erhellen/Verdunkeln Menge"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Wähle für:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Linke Farbe"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Rechte Farbe"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -555,7 +555,7 @@ msgid "Ping-pong loop"
 msgstr "Ping Pong Loop"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Vorgänger Frames"
@@ -612,7 +612,7 @@ msgid "LAYERVISIBILITY_HT"
 msgstr "Ändere die Sichtbarkeit der Ebene"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palette"
 
 msgid "Palettes"
 msgstr "Paletten"
@@ -717,7 +717,7 @@ msgid "Create a new empty palette?"
 msgstr "Erstelle eine neue leere Palette"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Fehler: Palette muss einen gültigen Namen haben."
 
 msgid "Error: Palette named '%s' already exists!"
 msgstr ""
