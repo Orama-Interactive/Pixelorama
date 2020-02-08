@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-07 21:40\n"
+"PO-Revision-Date: 2020-02-08 19:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -195,7 +195,7 @@ msgid "Trilinear"
 msgstr "Трилинейный"
 
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 msgid "Language"
 msgstr "Язык"
@@ -207,19 +207,19 @@ msgid "Guides & Grid"
 msgstr "Направляющие и сетка"
 
 msgid "General Options"
-msgstr ""
+msgstr "Общие настройки"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Плавное масштабирование"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Чувствительность к нажатию на планшет:"
 
 msgid "None"
 msgstr ""
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Влияние на альфу кисти"
 
 msgid "Language options"
 msgstr "Настройки языка"
@@ -324,7 +324,7 @@ msgid "Russian"
 msgstr "Русский"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Китайский (упрощенный)"
 
 msgid "Chinese Traditional"
 msgstr "Китайский (Традиционный)"

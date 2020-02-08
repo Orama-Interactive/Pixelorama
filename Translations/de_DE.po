@@ -8,10 +8,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-07 21:39\n"
+"PO-Revision-Date: 2020-02-08 10:39\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "Bild zuschneiden"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Bild drehen"
 
 msgid "Clear Selection"
 msgstr "Ausgewählten Bereich löschen"
@@ -147,7 +147,7 @@ msgstr "Datei existiert schon, überschreiben?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Kann Datei nicht laden '%s'. Error code: %s"
 
 msgid "Resize:"
 msgstr "Größe verändern"
@@ -180,22 +180,22 @@ msgid "File:"
 msgstr "Datei:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolation:"
 
 msgid "Nearest"
 msgstr "Nächstes"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 msgid "Cubic"
 msgstr "Kubisch"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Triliniar"
 
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgid "Language"
 msgstr "Sprache"
@@ -207,19 +207,19 @@ msgid "Guides & Grid"
 msgstr "Guides & Gitter"
 
 msgid "General Options"
-msgstr ""
+msgstr "Allgemeine Optionen"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Smoother Zoom"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Tabletdrucksensitivität:"
 
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Beeinflusst Pinsels Alpha"
 
 msgid "Language options"
 msgstr "Sprachoptionen"
@@ -246,7 +246,7 @@ msgid "Gray"
 msgstr "Grau"
 
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 msgid "Light"
 msgstr "Hell"
@@ -261,7 +261,7 @@ msgid "Outline"
 msgstr "Umriss"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
 msgstr "Platziere in Bild"
@@ -273,7 +273,7 @@ msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problemverfolger"
 
 msgid "Changelog"
 msgstr "Änderungen"
@@ -285,7 +285,7 @@ msgid "MADEBY_LABEL"
 msgstr "Entwickelt von Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 msgid "Donate"
 msgstr "Spenden"
@@ -300,49 +300,49 @@ msgid "Donors"
 msgstr "Spender"
 
 msgid "Translators"
-msgstr ""
+msgstr "Übersetzungen"
 
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 msgid "Greek"
-msgstr ""
+msgstr "Griechisch"
 
 msgid "French"
-msgstr ""
+msgstr "Fanzösisch"
 
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polnisch"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasilianisches Portugiesisch"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Simples Chinesisch"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Traditionelles Chinesisch"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italenisch"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spanisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Leitender Programmierer"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI Designer"
 
 msgid "GitHub Contributors"
 msgstr "Github Beitragende"
@@ -488,13 +488,13 @@ msgid "LDAMOUNT_HT"
 msgstr "Erhellen/Verdunkeln Menge"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Wähle für:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Linke Farbe"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Rechte Farbe"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -555,7 +555,7 @@ msgid "Ping-pong loop"
 msgstr "Ping Pong Loop"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Vorgänger Frames"
@@ -612,7 +612,7 @@ msgid "LAYERVISIBILITY_HT"
 msgstr "Ändere die Sichtbarkeit der Ebene"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palette"
 
 msgid "Palettes"
 msgstr "Paletten"
@@ -717,50 +717,50 @@ msgid "Create a new empty palette?"
 msgstr "Erstelle eine neue leere Palette"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Fehler: Palette muss einen gültigen Namen haben."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Fehler: Palette namens '%s' existiert bereits!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Nicht gültige Palettendatei!"
 
 msgid "Edit Palette"
 msgstr "Bearbeite Palette"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Changes"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platin Sponsoren"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Gold Sponsoren"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Platin Sponsoren Platzhalter"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Gold Sponsoren Platzhalter"
 
 msgid "Don't show again"
 msgstr "Nicht beim nächsten Start"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Nimm diesen Platz ein!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Bild Optionen"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Standardweite:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Standardhöhe:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Standardfüllfarbe:"
 
