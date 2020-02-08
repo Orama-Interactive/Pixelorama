@@ -8,10 +8,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-07 21:39\n"
+"PO-Revision-Date: 2020-02-08 10:21\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "Bild zuschneiden"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Bild drehen"
 
 msgid "Clear Selection"
 msgstr "Ausgewählten Bereich löschen"
@@ -147,7 +147,7 @@ msgstr "Datei existiert schon, überschreiben?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Kann Datei nicht laden '%s'. Error code: %s"
 
 msgid "Resize:"
 msgstr "Größe verändern"
@@ -180,19 +180,19 @@ msgid "File:"
 msgstr "Datei:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolation:"
 
 msgid "Nearest"
 msgstr "Nächstes"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 msgid "Cubic"
 msgstr "Kubisch"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Triliniar"
 
 msgid "General"
 msgstr ""
