@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - It is now possible to remove custom brushes with the middle mouse button.
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
 - Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
+- You can now drag and drop (or right click and open with) image files in Pixelorama.
 
 ### Changed
 - Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
