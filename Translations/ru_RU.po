@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-08 19:24\n"
+"PO-Revision-Date: 2020-02-09 12:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "Обрезать изображение"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Повернуть изображение"
 
 msgid "Clear Selection"
 msgstr "Снять выделение"
@@ -147,7 +147,8 @@ msgstr "Файл существует, перезаписать?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Не удалось загрузить файл '%s'.\n"
+"Код ошибки: %s"
 
 msgid "Resize:"
 msgstr "Изменить размер:"
@@ -240,16 +241,16 @@ msgid "System Language"
 msgstr "Системный язык"
 
 msgid "Dark"
-msgstr ""
+msgstr "Тёмная"
 
 msgid "Gray"
-msgstr ""
+msgstr "Серая"
 
 msgid "Gold"
-msgstr ""
+msgstr "Золотая"
 
 msgid "Light"
-msgstr ""
+msgstr "Светлая"
 
 msgid "Invert colors"
 msgstr "Инвертировать цвета"
@@ -582,7 +583,7 @@ msgid "Move Right"
 msgstr "Сместить вправо"
 
 msgid "Layer"
-msgstr ""
+msgstr "Слой"
 
 msgid "Layers"
 msgstr "Слои"
@@ -753,7 +754,7 @@ msgid "Take this spot!"
 msgstr ""
 
 msgid "Image Options"
-msgstr ""
+msgstr "Параметры изображения"
 
 msgid "Default Width:"
 msgstr ""
