@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-09 16:57\n"
+"PO-Revision-Date: 2020-02-09 17:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -131,7 +131,7 @@ msgid "IMPORT_FILE_LABEL"
 msgstr "Импортировать как новый кадр"
 
 msgid "IMPORT_SPRITESHEET"
-msgstr ""
+msgstr "Импорт в виде спрайт-листов"
 
 msgid "Save Sprite as .pxo"
 msgstr "Сохранить спрайт как .pxo"
@@ -160,7 +160,7 @@ msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Экспортировать все кадры в отдельные файлы"
 
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr ""
+msgstr "Экспорт всех кадров в виде спрайт-листов (один файл)"
 
 msgid "Columns"
 msgstr "Столбцы"
@@ -355,10 +355,10 @@ msgid "untitled"
 msgstr "безымянный"
 
 msgid "imported"
-msgstr ""
+msgstr "импортировано"
 
 msgid "copy"
-msgstr ""
+msgstr "копия"
 
 msgid "QUIT_LABEL"
 msgstr "Вы действительно хотите выйти из Pixeloram'ы?"
@@ -453,7 +453,7 @@ msgid "Brush: Circle"
 msgstr "Кисть: Круг"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Кисть: Залитый круг"
 
 msgid "Custom brush"
 msgstr "Своя кисть"
@@ -607,7 +607,7 @@ msgid "LAYERMERGE_HT"
 msgstr "Объединить слой ниже с текущим "
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Непрозрачность:"
 
 msgid "LAYERVISIBILITY_HT"
 msgstr "Переключить видимость слоя"
@@ -622,10 +622,10 @@ msgid "NEWPALETTE_HT"
 msgstr ""
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Редактировать выбранную палитру"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Выберите палитру"
 
 msgid "Undo: Draw"
 msgstr "Отменить: Рисование"
@@ -715,16 +715,16 @@ msgid "Color Name:"
 msgstr "Название цвета:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Создать пустую палитру?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Ошибка: Палитра должна иметь корректное имя."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Ошибка: Палитра с именем '%s' уже существует!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Недопустимый файл палитры!"
 
 msgid "Edit Palette"
 msgstr "Изменить палитру"
