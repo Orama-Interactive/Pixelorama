@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
 - Replaced some OS alerts with a custom made error dialog.
 - Made the zooming smoother, is toggleable in Preferences whether to keep the new zooming or the old one.
+- The camera now zooms at the mouse's position.
 - Made the "X" button on the custom brushes a little smaller.
 - The color picker will now have a small white triangle on the top left of the color preview if at least one of its RGB values are above 1 in Raw mode. (Added automatically because of the Godot 3.2 update)
 - You can now toggle the visibility of hidden items on and off in the file dialogs. (Added automatically because of the Godot 3.2 update)
