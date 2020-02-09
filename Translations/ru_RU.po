@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-09 12:48\n"
+"PO-Revision-Date: 2020-02-09 12:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -349,7 +349,7 @@ msgid "GitHub Contributors"
 msgstr ""
 
 msgid "Art by"
-msgstr ""
+msgstr "Художник"
 
 msgid "untitled"
 msgstr ""
@@ -613,10 +613,10 @@ msgid "LAYERVISIBILITY_HT"
 msgstr "Переключить видимость слоя"
 
 msgid "Palette"
-msgstr ""
+msgstr "Палитра"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Палитры"
 
 msgid "NEWPALETTE_HT"
 msgstr ""
@@ -703,16 +703,16 @@ msgid "File exported"
 msgstr "Файл экспортирован"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Создать пустую палитру"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Импорт Палитры"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Название палитры:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Название цвета:"
 
 msgid "Create a new empty palette?"
 msgstr ""
