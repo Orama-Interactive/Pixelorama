@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-09 17:12\n"
+"PO-Revision-Date: 2020-02-09 17:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -619,7 +619,7 @@ msgid "Palettes"
 msgstr "Палитры"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Добавить новую палитру"
 
 msgid "EDITPALETTE_HT"
 msgstr "Редактировать выбранную палитру"
