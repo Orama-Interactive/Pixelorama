@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-09 12:57\n"
+"PO-Revision-Date: 2020-02-09 16:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -217,7 +217,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr "Чувствительность к нажатию на планшет:"
 
 msgid "None"
-msgstr ""
+msgstr "Ничего"
 
 msgid "Affect Brush's Alpha"
 msgstr "Влияние на альфу кисти"
@@ -262,10 +262,10 @@ msgid "Outline"
 msgstr "Обводка"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Диагональ"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Поместить внутри изображения"
 
 msgid "Thickness:"
 msgstr "Толщина:"
@@ -295,10 +295,10 @@ msgid "Developers"
 msgstr "Разработчики"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Разработчики"
 
 msgid "Donors"
-msgstr ""
+msgstr "Спонсоры"
 
 msgid "Translators"
 msgstr "Переводчики"
@@ -346,13 +346,13 @@ msgid "UI Designer"
 msgstr "Дизайнер интерфейса"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub участники"
 
 msgid "Art by"
 msgstr "Художник"
 
 msgid "untitled"
-msgstr ""
+msgstr "безымянный"
 
 msgid "imported"
 msgstr ""
@@ -450,7 +450,7 @@ msgid "Brush: Pixel"
 msgstr "Кисть: Пиксель"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Кисть: Круг"
 
 msgid "Brush: Filled Circle"
 msgstr ""
@@ -489,13 +489,13 @@ msgid "LDAMOUNT_HT"
 msgstr "Интенсивность осветления/затемнения"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Выбрать для:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Цвет слева"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Цвет справа"
 
 msgid "Mirroring"
 msgstr "Зеркало"
@@ -727,41 +727,41 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Изменить палитру"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Меценаты:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Изменения"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Платиновый спонсор"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Золотые спонсоры"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Заполнитель Платиновых Спонсоров"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Заполнитель Золотых Спонсоров"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Не показывать снова"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Возьмите это место!"
 
 msgid "Image Options"
 msgstr "Параметры изображения"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Ширина по умолчанию:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Высота по умолчанию:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Цвет заливки по умолчанию:"
 
