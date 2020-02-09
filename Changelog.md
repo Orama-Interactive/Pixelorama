@@ -9,13 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
 - Tablet pen pressure sensitivity!
 - Crowdin integration for contributing translations!
-- Spanish translation - thanks to azagaya!
+- Spanish translation - thanks to azagaya & Lilly And!
 - Chinese Simplified translation - thanks to wcxu21!
 - Translators can now be seen in the About window.
 - It is now possible to remove custom brushes with the middle mouse button.
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
 - Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
-- You can now drag and drop (or right click and open with) image files in Pixelorama.
+- You can now drag and drop (or right click and open with) image and .pxo files in Pixelorama.
 
 ### Changed
 - Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
@@ -29,7 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Translation updates.
 
 ### Fixed
-- Delay the splash screen popup so it shows properly centered (thanks to YeldhamDev)
+- Delay the splash screen popup so it shows properly centered - Thanks to YeldhamDev
 - Possibly fixed crashes with motion drawing and undo/redoing.
 - Fixed bug (which also caused crashes sometimes) when generating an outline inside the image and it was going outside the canvas' borders.
 - Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.

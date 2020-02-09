@@ -672,7 +672,7 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	sprite.unlock()
 	return scaled
 
-func rotxel(sprite : Image, angle : float):
+func rotxel(sprite : Image, angle : float) -> void:
 
 	# If angle is simple, then nn rotation is the best
 
@@ -783,7 +783,7 @@ func rotxel(sprite : Image, angle : float):
 	sprite.unlock()
 	aux.unlock()
 
-func nn_rotate(sprite : Image, angle : float):
+func nn_rotate(sprite : Image, angle : float) -> void:
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
 	sprite.lock()

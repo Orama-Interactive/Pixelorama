@@ -15,9 +15,6 @@ func _ready() -> void:
 		remove_child(child)
 		get_vbox().add_child(child)
 
-	if OS.get_cmdline_args():
-		_on_ImportSprites_files_selected(OS.get_cmdline_args())
-
 func _on_ImportAsNewFrame_pressed() -> void:
 	new_frame = !new_frame
 

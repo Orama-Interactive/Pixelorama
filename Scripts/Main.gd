@@ -152,17 +152,25 @@ func _ready() -> void:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
+	if OS.get_cmdline_args():
+		for arg in OS.get_cmdline_args():
+			print(arg)
+			if arg.get_extension().to_lower() == "pxo":
+				_on_OpenSprite_file_selected(arg)
+			else:
+				$ImportSprites._on_ImportSprites_files_selected([arg])
+
+	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
+
+	Global.canvas.layers[0][2] = tr("Layer") + " 0"
+	Global.canvas.generate_layer_panels()
+
 	Import.import_brushes("Brushes")
 
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 	if not Global.config_cache.get_value("preferences", "startup"):
 		$SplashDialog.hide()
-
-	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
-
-	Global.canvas.layers[0][2] = tr("Layer") + " 0"
-	Global.canvas.generate_layer_panels()
 
 	# Wait for the window to adjust itself, so the popup is correctly centered
 	yield(get_tree().create_timer(0.01), "timeout")
