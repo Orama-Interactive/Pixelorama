@@ -2,7 +2,7 @@ extends Node
 
 func import_brushes(path : String) -> void:
 	var brushes_dir := Directory.new()
-	brushes_dir.open(".")
+	brushes_dir.open(Global.root_directory)
 	if !brushes_dir.dir_exists(path):
 		brushes_dir.make_dir(path)
 
@@ -16,6 +16,7 @@ func import_brushes(path : String) -> void:
 func find_brushes(brushes_dir : Directory, path : String) -> Array:
 	var subdirectories := []
 	var found_random_brush := 0
+	path = Global.root_directory.plus_file(path)
 	brushes_dir.open(path)
 	brushes_dir.list_dir_begin(true)
 	var file := brushes_dir.get_next()

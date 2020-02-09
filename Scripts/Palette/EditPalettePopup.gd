@@ -101,7 +101,7 @@ func _on_EditPaletteSaveButton_pressed() -> void:
 	if palette_name_edit.text != current_palette:
 		Global.palettes.erase(current_palette)
 		var dir := Directory.new()
-		dir.open(".")
+		dir.open(Global.root_directory)
 		dir.rename("Palettes".plus_file(current_palette + ".json"), "Palettes".plus_file(palette_name_edit.text + ".json"))
 		current_palette = palette_name_edit.text
 		working_palette.name = current_palette

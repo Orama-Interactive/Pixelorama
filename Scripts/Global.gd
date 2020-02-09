@@ -1,5 +1,6 @@
 extends Node
 
+var root_directory := "."
 var config_cache := ConfigFile.new()
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
@@ -243,6 +244,8 @@ var error_dialog : AcceptDialog
 
 func _ready() -> void:
 	randomize()
+	if OS.has_feature("standalone"):
+		root_directory = OS.get_executable_path().get_base_dir()
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
 

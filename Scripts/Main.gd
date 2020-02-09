@@ -154,7 +154,6 @@ func _ready() -> void:
 
 	if OS.get_cmdline_args():
 		for arg in OS.get_cmdline_args():
-			print(arg)
 			if arg.get_extension().to_lower() == "pxo":
 				_on_OpenSprite_file_selected(arg)
 			else:
