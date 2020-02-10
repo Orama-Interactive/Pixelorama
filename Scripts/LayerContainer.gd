@@ -1,5 +1,5 @@
-extends Button
 class_name LayerContainer
+extends Button
 
 var i
 # warning-ignore:unused_class_variable

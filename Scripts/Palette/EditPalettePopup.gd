@@ -1,15 +1,15 @@
 extends WindowDialog
 
-onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
-onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/ScrollContainer/EditPaletteGridContainer
-onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit
-onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
-
 var palette_button = preload("res://Prefabs/PaletteButton.tscn")
 
 var current_palette : String
 var current_swatch := -1
 var working_palette : Palette
+
+onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
+onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/ScrollContainer/EditPaletteGridContainer
+onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit
+onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
 
 func open(palette : String) -> void:
 	current_palette = palette

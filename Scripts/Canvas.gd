@@ -1,5 +1,5 @@
-extends Node2D
 class_name Canvas
+extends Node2D
 
 var layers := []
 var current_layer_index := 0
@@ -77,28 +77,98 @@ func _ready() -> void:
 	line_2d.add_point(previous_mouse_pos_for_lines)
 	add_child(line_2d)
 
-func camera_zoom() -> void:
-	# Set camera zoom based on the sprite size
-	var bigger = max(size.x, size.y)
-	var zoom_max := Vector2(bigger, bigger) * 0.01
-	if zoom_max > Vector2.ONE:
-		Global.camera.zoom_max = zoom_max
-		Global.camera2.zoom_max = zoom_max
-		Global.camera_preview.zoom_max = zoom_max
-	else:
-		Global.camera.zoom_max = Vector2.ONE
-		Global.camera2.zoom_max = Vector2.ONE
-		Global.camera_preview.zoom_max = Vector2.ONE
+func _draw() -> void:
+	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) #Draw transparent background
+	#Onion Skinning
+	#Past
+	if Global.onion_skinning_past_rate > 0:
+		var color : Color
+		if Global.onion_skinning_blue_red:
+			color = Color.blue
+		else:
+			color = Color.white
+		for i in range(1, Global.onion_skinning_past_rate + 1):
+			if Global.current_frame >= i:
+				for texture in Global.canvases[Global.current_frame - i].layers:
+					color.a = 0.6/i
+					draw_texture(texture[1], location, color)
 
-	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
-	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
-	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+	#Future
+	if Global.onion_skinning_future_rate > 0:
+		var color : Color
+		if Global.onion_skinning_blue_red:
+			color = Color.red
+		else:
+			color = Color.white
+		for i in range(1, Global.onion_skinning_future_rate + 1):
+			if Global.current_frame < Global.canvases.size() - i:
+				for texture in Global.canvases[Global.current_frame + i].layers:
+					color.a = 0.6/i
+					draw_texture(texture[1], location, color)
 
-	# Set camera offset to the center of canvas
-	Global.camera.offset = size / 2
-	Global.camera2.offset = size / 2
-	Global.camera_preview.offset = size / 2
+	#Draw current frame layers
+	for texture in layers:
+		var modulate_color := Color(1, 1, 1, texture[4])
+		if texture[3]: #if it's visible
+			draw_texture(texture[1], location, modulate_color)
+
+			if Global.tile_mode:
+				draw_texture(texture[1], Vector2(location.x, location.y + size.y), modulate_color) #Down
+				draw_texture(texture[1], Vector2(location.x - size.x, location.y + size.y), modulate_color) #Down Left
+				draw_texture(texture[1], Vector2(location.x - size.x, location.y), modulate_color) #Left
+				draw_texture(texture[1], location - size, modulate_color) #Up left
+				draw_texture(texture[1], Vector2(location.x, location.y - size.y), modulate_color) #Up
+				draw_texture(texture[1], Vector2(location.x + size.x, location.y - size.y), modulate_color) #Up right
+				draw_texture(texture[1], Vector2(location.x + size.x, location.y), modulate_color) #Right
+				draw_texture(texture[1], location + size, modulate_color) #Down right
+
+	#Idea taken from flurick (on GitHub)
+	if Global.draw_grid:
+		for x in range(0, size.x, Global.grid_width):
+			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
+		for y in range(0, size.y, Global.grid_height):
+			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
+
+	#Draw rectangle to indicate the pixel currently being hovered on
+	var mouse_pos := current_pixel
+	if point_in_rectangle(mouse_pos, location, location + size):
+		mouse_pos = mouse_pos.floor()
+		if Global.left_square_indicator_visible && Global.can_draw:
+			if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == "LightenDarken":
+				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
+					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
+					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
+					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+			elif Global.current_left_brush_type == Global.Brush_Types.CIRCLE || Global.current_left_brush_type == Global.Brush_Types.FILLED_CIRCLE:
+				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+					draw_set_transform(mouse_pos, rotation, scale)
+					for rect in Global.left_circle_points:
+						draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
+					draw_set_transform(position, rotation, scale)
+			else:
+				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
+					var dst := rectangle_center(mouse_pos, custom_brush_size)
+					draw_texture(Global.custom_left_brush_texture, dst)
+
+		if Global.right_square_indicator_visible && Global.can_draw:
+			if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == "LightenDarken":
+				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
+					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
+					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
+					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+			elif Global.current_right_brush_type == Global.Brush_Types.CIRCLE || Global.current_right_brush_type == Global.Brush_Types.FILLED_CIRCLE:
+				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+					draw_set_transform(mouse_pos, rotation, scale)
+					for rect in Global.right_circle_points:
+						draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
+					draw_set_transform(position, rotation, scale)
+			else:
+				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
+					var dst := rectangle_center(mouse_pos, custom_brush_size)
+					draw_texture(Global.custom_right_brush_texture, dst)
+
 
 func _input(event : InputEvent) -> void:
 	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
@@ -350,6 +420,29 @@ func _input(event : InputEvent) -> void:
 	if sprite_changed_this_frame:
 		update_texture(current_layer_index, (Input.is_action_just_released("left_mouse") || Input.is_action_just_released("right_mouse")))
 
+func camera_zoom() -> void:
+	# Set camera zoom based on the sprite size
+	var bigger = max(size.x, size.y)
+	var zoom_max := Vector2(bigger, bigger) * 0.01
+	if zoom_max > Vector2.ONE:
+		Global.camera.zoom_max = zoom_max
+		Global.camera2.zoom_max = zoom_max
+		Global.camera_preview.zoom_max = zoom_max
+	else:
+		Global.camera.zoom_max = Vector2.ONE
+		Global.camera2.zoom_max = Vector2.ONE
+		Global.camera_preview.zoom_max = Vector2.ONE
+
+	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
+	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
+	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007
+	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+
+	# Set camera offset to the center of canvas
+	Global.camera.offset = size / 2
+	Global.camera2.offset = size / 2
+	Global.camera_preview.offset = size / 2
+
 func handle_undo(action : String) -> void:
 	if !can_undo:
 		return
@@ -427,98 +520,6 @@ func get_layer_container(layer_index : int) -> LayerContainer:
 			return container
 	return null
 
-func _draw() -> void:
-	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) #Draw transparent background
-	#Onion Skinning
-	#Past
-	if Global.onion_skinning_past_rate > 0:
-		var color : Color
-		if Global.onion_skinning_blue_red:
-			color = Color.blue
-		else:
-			color = Color.white
-		for i in range(1, Global.onion_skinning_past_rate + 1):
-			if Global.current_frame >= i:
-				for texture in Global.canvases[Global.current_frame - i].layers:
-					color.a = 0.6/i
-					draw_texture(texture[1], location, color)
-
-	#Future
-	if Global.onion_skinning_future_rate > 0:
-		var color : Color
-		if Global.onion_skinning_blue_red:
-			color = Color.red
-		else:
-			color = Color.white
-		for i in range(1, Global.onion_skinning_future_rate + 1):
-			if Global.current_frame < Global.canvases.size() - i:
-				for texture in Global.canvases[Global.current_frame + i].layers:
-					color.a = 0.6/i
-					draw_texture(texture[1], location, color)
-
-	#Draw current frame layers
-	for texture in layers:
-		var modulate_color := Color(1, 1, 1, texture[4])
-		if texture[3]: #if it's visible
-			draw_texture(texture[1], location, modulate_color)
-
-			if Global.tile_mode:
-				draw_texture(texture[1], Vector2(location.x, location.y + size.y), modulate_color) #Down
-				draw_texture(texture[1], Vector2(location.x - size.x, location.y + size.y), modulate_color) #Down Left
-				draw_texture(texture[1], Vector2(location.x - size.x, location.y), modulate_color) #Left
-				draw_texture(texture[1], location - size, modulate_color) #Up left
-				draw_texture(texture[1], Vector2(location.x, location.y - size.y), modulate_color) #Up
-				draw_texture(texture[1], Vector2(location.x + size.x, location.y - size.y), modulate_color) #Up right
-				draw_texture(texture[1], Vector2(location.x + size.x, location.y), modulate_color) #Right
-				draw_texture(texture[1], location + size, modulate_color) #Down right
-
-	#Idea taken from flurick (on GitHub)
-	if Global.draw_grid:
-		for x in range(0, size.x, Global.grid_width):
-			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
-		for y in range(0, size.y, Global.grid_height):
-			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
-
-	#Draw rectangle to indicate the pixel currently being hovered on
-	var mouse_pos := current_pixel
-	if point_in_rectangle(mouse_pos, location, location + size):
-		mouse_pos = mouse_pos.floor()
-		if Global.left_square_indicator_visible && Global.can_draw:
-			if Global.current_left_brush_type == Global.BRUSH_TYPES.PIXEL || Global.current_left_tool == "LightenDarken":
-				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
-					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
-					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
-					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-			elif Global.current_left_brush_type == Global.BRUSH_TYPES.CIRCLE || Global.current_left_brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
-				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
-					draw_set_transform(mouse_pos, rotation, scale)
-					for rect in Global.left_circle_points:
-						draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
-					draw_set_transform(position, rotation, scale)
-			else:
-				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
-					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
-					var dst := rectangle_center(mouse_pos, custom_brush_size)
-					draw_texture(Global.custom_left_brush_texture, dst)
-
-		if Global.right_square_indicator_visible && Global.can_draw:
-			if Global.current_right_brush_type == Global.BRUSH_TYPES.PIXEL || Global.current_right_tool == "LightenDarken":
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
-					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
-					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
-					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-			elif Global.current_right_brush_type == Global.BRUSH_TYPES.CIRCLE || Global.current_right_brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
-					draw_set_transform(mouse_pos, rotation, scale)
-					for rect in Global.right_circle_points:
-						draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
-					draw_set_transform(position, rotation, scale)
-			else:
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
-					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
-					var dst := rectangle_center(mouse_pos, custom_brush_size)
-					draw_texture(Global.custom_right_brush_texture, dst)
-
 func generate_layer_panels() -> void:
 	for child in Global.vbox_layer_container.get_children():
 		if child is LayerContainer:
@@ -562,14 +563,14 @@ func pencil_and_eraser(mouse_pos : Vector2, color : Color, current_mouse_button 
 func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if Global.can_draw && Global.has_focus:
 		var brush_size := 1
-		var brush_type = Global.BRUSH_TYPES.PIXEL
+		var brush_type = Global.Brush_Types.PIXEL
 		var brush_index := -1
 		var custom_brush_image : Image
 		var horizontal_mirror := false
 		var vertical_mirror := false
 		var ld := 0
 		var ld_amount := 0.1
-		if Global.pressure_sensitivity_mode == Global.PRESSURE_SENSITIVITY.ALPHA:
+		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
 			if current_action == "Pencil":
 				color.a *= pen_pressure
 			elif current_action == "Eraser":
@@ -578,7 +579,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 			brush_size = Global.left_brush_size
 			brush_type = Global.current_left_brush_type
 			brush_index = Global.custom_left_brush_index
-			if brush_type != Global.BRUSH_TYPES.RANDOM_FILE:
+			if brush_type != Global.Brush_Types.RANDOM_FILE:
 				custom_brush_image = Global.custom_left_brush_image
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
@@ -598,7 +599,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 			brush_size = Global.right_brush_size
 			brush_type = Global.current_right_brush_type
 			brush_index = Global.custom_right_brush_index
-			if brush_type != Global.BRUSH_TYPES.RANDOM_FILE:
+			if brush_type != Global.Brush_Types.RANDOM_FILE:
 				custom_brush_image = Global.custom_right_brush_image
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
@@ -620,7 +621,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 		var end_pos_x
 		var end_pos_y
 
-		if brush_type == Global.BRUSH_TYPES.PIXEL || current_action == "LightenDarken":
+		if brush_type == Global.Brush_Types.PIXEL || current_action == "LightenDarken":
 			start_pos_x = pos.x - (brush_size >> 1)
 			start_pos_y = pos.y - (brush_size >> 1)
 			end_pos_x = start_pos_x + brush_size
@@ -689,18 +690,18 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, _c)
 									sprite_changed_this_frame = true
 
-		elif brush_type == Global.BRUSH_TYPES.CIRCLE || brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
-			plot_circle(layers[current_layer_index][0], pos.x, pos.y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
+		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
+			plot_circle(layers[current_layer_index][0], pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			# Handle mirroring
 			var mirror_x := east_limit + west_limit - pos.x
 			var mirror_y := south_limit + north_limit - pos.y
 			if horizontal_mirror:
-				plot_circle(layers[current_layer_index][0], mirror_x, pos.y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
+				plot_circle(layers[current_layer_index][0], mirror_x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			if vertical_mirror:
-				plot_circle(layers[current_layer_index][0], pos.x, mirror_y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
+				plot_circle(layers[current_layer_index][0], pos.x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			if horizontal_mirror && vertical_mirror:
-				plot_circle(layers[current_layer_index][0], mirror_x, mirror_y, brush_size, color, brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE)
+				plot_circle(layers[current_layer_index][0], mirror_x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			sprite_changed_this_frame = true
 

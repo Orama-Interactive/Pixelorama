@@ -5,7 +5,6 @@ var opensprite_file_selected := false
 var file_menu : PopupMenu
 var view_menu : PopupMenu
 var tools := []
-
 var redone := false
 var previous_left_color := Color.black
 var previous_right_color := Color.white
@@ -415,7 +414,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			var guide := Guide.new()
 			guide.default_color = Color.purple
 			guide.type = file.get_8()
-			if guide.type == guide.TYPE.HORIZONTAL:
+			if guide.type == guide.Types.HORIZONTAL:
 				guide.add_point(Vector2(-99999, file.get_16()))
 				guide.add_point(Vector2(99999, file.get_16()))
 			else:
@@ -492,7 +491,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 				if child is Guide:
 					file.store_line("|")
 					file.store_8(child.type)
-					if child.type == child.TYPE.HORIZONTAL:
+					if child.type == child.Types.HORIZONTAL:
 						file.store_16(child.points[0].y)
 						file.store_16(child.points[1].y)
 					else:
@@ -571,7 +570,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.BRUSH_TYPES.FILE || Global.current_left_brush_type == Global.BRUSH_TYPES.CUSTOM || Global.current_left_brush_type == Global.BRUSH_TYPES.RANDOM_FILE:
+			if Global.current_left_brush_type == Global.Brush_Types.FILE || Global.current_left_brush_type == Global.Brush_Types.CUSTOM || Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
@@ -598,7 +597,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.BRUSH_TYPES.FILE || Global.current_right_brush_type == Global.BRUSH_TYPES.CUSTOM || Global.current_right_brush_type == Global.BRUSH_TYPES.RANDOM_FILE:
+			if Global.current_right_brush_type == Global.Brush_Types.FILE || Global.current_right_brush_type == Global.Brush_Types.CUSTOM || Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true

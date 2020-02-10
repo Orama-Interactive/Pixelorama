@@ -77,7 +77,7 @@ func _on_HorizontalRuler_pressed() -> void:
 	if mouse_pos.x < RULER_WIDTH: #For double guides
 		Global.vertical_ruler._on_VerticalRuler_pressed()
 	var guide := Guide.new()
-	guide.type = guide.TYPE.HORIZONTAL
+	guide.type = guide.Types.HORIZONTAL
 	guide.add_point(Vector2(-99999, Global.canvas.current_pixel.y))
 	guide.add_point(Vector2(99999, Global.canvas.current_pixel.y))
 	Global.canvas.add_child(guide)

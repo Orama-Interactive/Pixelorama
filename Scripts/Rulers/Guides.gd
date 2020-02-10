@@ -1,13 +1,13 @@
-extends Line2D
 class_name Guide
+extends Line2D
 
-enum TYPE {HORIZONTAL, VERTICAL}
+enum Types {HORIZONTAL, VERTICAL}
 
 var font := preload("res://Assets/Fonts/Roboto-Regular.tres")
 var has_focus := true
 var mouse_pos := Vector2.ZERO
 var previous_points := points
-var type = TYPE.HORIZONTAL
+var type = Types.HORIZONTAL
 
 func _ready() -> void:
 	width = 0.1
@@ -19,7 +19,7 @@ func _process(delta : float) -> void:
 	mouse_pos = get_local_mouse_position()
 	var point0 := points[0]
 	var point1 := points[1]
-	if type == TYPE.HORIZONTAL:
+	if type == Types.HORIZONTAL:
 		point0.y -= width * 3
 		point1.y += width * 3
 	else:
@@ -34,7 +34,7 @@ func _process(delta : float) -> void:
 		if Input.is_action_just_pressed("left_mouse"):
 			previous_points = points
 		if Input.is_action_pressed("left_mouse"):
-			if type == TYPE.HORIZONTAL:
+			if type == Types.HORIZONTAL:
 				points[0].y = round(mouse_pos.y)
 				points[1].y = round(mouse_pos.y)
 			else:
@@ -58,7 +58,7 @@ func _draw() -> void:
 	if has_focus:
 		var viewport_size: Vector2 = Global.main_viewport.rect_size
 		var zoom: Vector2 = Global.camera.zoom
-		if type == TYPE.HORIZONTAL:
+		if type == Types.HORIZONTAL:
 			draw_set_transform(Vector2(Global.camera.offset.x - (viewport_size.x / 2) * zoom.x, points[0].y + font.get_height() * zoom.x * 2), rotation, zoom * 2)
 			draw_string(font, Vector2.ZERO, "%spx" % str(round(mouse_pos.y)))
 		else:
@@ -73,7 +73,7 @@ func outside_canvas(undo := false) -> bool:
 		if Global.undos < Global.undo_redo.get_version(): #If we did undo and then redo
 			Global.undos = Global.undo_redo.get_version()
 			Global.notification_label("Move Guide")
-	if type == TYPE.HORIZONTAL:
+	if type == Types.HORIZONTAL:
 		if points[0].y < 0 || points[0].y > Global.canvas.size.y:
 			queue_free()
 			return true

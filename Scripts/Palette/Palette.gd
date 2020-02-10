@@ -1,5 +1,5 @@
-extends Reference
 class_name Palette
+extends Reference
 
 func get_class():
 	return "Palette"

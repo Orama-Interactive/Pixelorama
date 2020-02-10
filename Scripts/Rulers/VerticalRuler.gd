@@ -72,7 +72,7 @@ func _on_VerticalRuler_pressed() -> void:
 	if !Global.show_guides:
 		return
 	var guide := Guide.new()
-	guide.type = guide.TYPE.VERTICAL
+	guide.type = guide.Types.VERTICAL
 	guide.add_point(Vector2(Global.canvas.current_pixel.x, -99999))
 	guide.add_point(Vector2(Global.canvas.current_pixel.x, 99999))
 	Global.canvas.add_child(guide)

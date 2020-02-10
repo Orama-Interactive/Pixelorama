@@ -1,6 +1,6 @@
 extends BaseButton
 
-export var brush_type = 0 # Global.BRUSH_TYPES.PIXEL
+export var brush_type = 0 # Global.Brush_Types.PIXEL
 export var custom_brush_index := -3
 # warning-ignore:unused_class_variable
 var random_brushes := []
@@ -56,15 +56,15 @@ func _on_BrushButton_pressed() -> void:
 		Global.update_right_custom_brush()
 
 func _on_DeleteButton_pressed() -> void:
-	if brush_type == Global.BRUSH_TYPES.CUSTOM:
+	if brush_type == Global.Brush_Types.CUSTOM:
 		if Global.custom_left_brush_index == custom_brush_index:
 			Global.custom_left_brush_index = -3
-			Global.current_left_brush_type = Global.BRUSH_TYPES.PIXEL
+			Global.current_left_brush_type = Global.Brush_Types.PIXEL
 			Global.left_brush_type_label.text = "Brush: Pixel"
 			Global.update_left_custom_brush()
 		if Global.custom_right_brush_index == custom_brush_index:
 			Global.custom_right_brush_index = -3
-			Global.current_right_brush_type = Global.BRUSH_TYPES.PIXEL
+			Global.current_right_brush_type = Global.Brush_Types.PIXEL
 			Global.right_brush_type_label.text = "Brush: Pixel"
 			Global.update_right_custom_brush()
 
@@ -91,9 +91,9 @@ func _on_DeleteButton_pressed() -> void:
 		Global.undo_redo.commit_action()
 
 func _on_BrushButton_mouse_entered() -> void:
-	if brush_type == Global.BRUSH_TYPES.CUSTOM:
+	if brush_type == Global.Brush_Types.CUSTOM:
 		$DeleteButton.visible = true
 
 func _on_BrushButton_mouse_exited() -> void:
-	if brush_type == Global.BRUSH_TYPES.CUSTOM:
+	if brush_type == Global.Brush_Types.CUSTOM:
 		$DeleteButton.visible = false

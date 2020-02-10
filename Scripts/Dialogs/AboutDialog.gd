@@ -67,6 +67,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  Michael Alexsander (YeldhamDev) - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
+	translators.create_item(translators_root).set_text(0, "  Artem (blinovartem) - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  JunYouIntrovert - " + tr("Chinese Traditional"))
 	translators.create_item(translators_root).set_text(0, "  Chenxu Wang - " + tr("Chinese Simplified"))
 	translators.create_item(translators_root).set_text(0, "  Marco Galli (Gaarco) - " + tr("Italian"))

@@ -1,5 +1,8 @@
 extends Node
 
+enum Pressure_Sensitivity {NONE, ALPHA, SIZE}
+enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
+
 var root_directory := "."
 var config_cache := ConfigFile.new()
 # warning-ignore:unused_class_variable
@@ -16,8 +19,8 @@ var has_focus := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
-enum PRESSURE_SENSITIVITY {NONE, ALPHA, SIZE}
-var pressure_sensitivity_mode = PRESSURE_SENSITIVITY.ALPHA
+
+var pressure_sensitivity_mode = Pressure_Sensitivity.ALPHA
 var smooth_zoom := true
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
@@ -107,15 +110,14 @@ var onion_skinning_future_rate := 0
 var onion_skinning_blue_red := false
 
 # Brushes
-enum BRUSH_TYPES {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 # warning-ignore:unused_class_variable
 var left_brush_size := 1
 # warning-ignore:unused_class_variable
 var right_brush_size := 1
 # warning-ignore:unused_class_variable
-var current_left_brush_type = BRUSH_TYPES.PIXEL
+var current_left_brush_type = Brush_Types.PIXEL
 # warning-ignore:unused_class_variable
-var current_right_brush_type = BRUSH_TYPES.PIXEL
+var current_right_brush_type = Brush_Types.PIXEL
 # warning-ignore:unused_class_variable
 var brush_type_window_position := "left"
 var left_circle_points := []
@@ -486,12 +488,12 @@ func frame_changed(value : int) -> void:
 	canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
 
 
-func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM, hint_tooltip := "") -> void:
+func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container
 	var brush_button = load("res://Prefabs/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
 	brush_button.custom_brush_index = custom_brushes.size() - 1
-	if brush_type == BRUSH_TYPES.FILE || brush_type == BRUSH_TYPES.RANDOM_FILE:
+	if brush_type == Brush_Types.FILE || brush_type == Brush_Types.RANDOM_FILE:
 		brush_container = file_brush_container
 	else:
 		brush_container = project_brush_container
@@ -499,13 +501,13 @@ func create_brush_button(brush_img : Image, brush_type := BRUSH_TYPES.CUSTOM, hi
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
 	brush_button.hint_tooltip = hint_tooltip
-	if brush_type == BRUSH_TYPES.RANDOM_FILE:
+	if brush_type == Brush_Types.RANDOM_FILE:
 		brush_button.random_brushes.append(brush_img)
 	brush_container.add_child(brush_button)
 
 func remove_brush_buttons() -> void:
-	current_left_brush_type = BRUSH_TYPES.PIXEL
-	current_right_brush_type = BRUSH_TYPES.PIXEL
+	current_left_brush_type = Brush_Types.PIXEL
+	current_right_brush_type = Brush_Types.PIXEL
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
@@ -528,16 +530,16 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 		notification_label("Redo: %s" % action_name)
 
 func update_left_custom_brush() -> void:
-	if current_left_brush_type == BRUSH_TYPES.PIXEL:
+	if current_left_brush_type == Brush_Types.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/pixel_image.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-	elif current_left_brush_type == BRUSH_TYPES.CIRCLE:
+	elif current_left_brush_type == Brush_Types.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/circle_9x9.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
-	elif current_left_brush_type == BRUSH_TYPES.FILLED_CIRCLE:
+	elif current_left_brush_type == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/circle_filled_9x9.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
@@ -553,16 +555,16 @@ func update_left_custom_brush() -> void:
 		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
 
 func update_right_custom_brush() -> void:
-	if current_right_brush_type == BRUSH_TYPES.PIXEL:
+	if current_right_brush_type == Brush_Types.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/pixel_image.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-	elif current_right_brush_type == BRUSH_TYPES.CIRCLE:
+	elif current_right_brush_type == Brush_Types.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/circle_9x9.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		right_circle_points = plot_circle(right_brush_size)
-	elif current_right_brush_type == BRUSH_TYPES.FILLED_CIRCLE:
+	elif current_right_brush_type == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://Assets/Graphics/circle_filled_9x9.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
