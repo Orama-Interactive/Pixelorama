@@ -869,10 +869,11 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 					draw_pixel_blended(sprite, draw_pos, color)
 
 func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
-	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && !(pos in mouse_press_pixels):
 		if color.a > 0 && color.a < 1:
 			# Blend alpha
 			color.a = color.a + sprite.get_pixelv(pos).a * (1 - color.a)
+		mouse_press_pixels.append(pos)
 		sprite.set_pixelv(pos, color)
 
 # Checks if a point is inside a rectangle

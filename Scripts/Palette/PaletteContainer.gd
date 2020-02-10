@@ -191,4 +191,3 @@ func get_palette_files(path : String) -> Array:
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
 	palette.save_to_file(palettes_path.plus_file(filename))
-
