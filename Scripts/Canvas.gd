@@ -184,6 +184,7 @@ func _input(event : InputEvent) -> void:
 		made_line = false
 		mouse_press_pixels.clear()
 		mouse_press_pressure_values.clear()
+		can_undo = true
 
 	current_pixel = get_local_mouse_position() + location
 	if Global.current_frame != frame:
@@ -288,7 +289,6 @@ func _input(event : InputEvent) -> void:
 		if can_handle || Global.undos == Global.undo_redo.get_version():
 			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
 				handle_redo("Draw")
-				can_undo = true
 
 	match current_action: # Handle current tool
 		"Pencil":
@@ -475,6 +475,8 @@ func handle_undo(action : String) -> void:
 	can_undo = false
 
 func handle_redo(action : String) -> void:
+	can_undo = true
+
 	if Global.undos < Global.undo_redo.get_version():
 		return
 	var canvases := []
