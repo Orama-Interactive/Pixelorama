@@ -634,8 +634,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 						var current_pixel_color : Color = layers[current_layer_index][0].get_pixel(cur_pos_x, cur_pos_y)
 						var _c := color
 						if current_action == "Pencil" && color.a < 1:
-							# Blend alpha
-							_c.a = color.a + current_pixel_color.a * (1 - color.a)
+							_c = blend_colors(color, current_pixel_color)
 
 						if current_pixel_color != _c && !(pos_floored in mouse_press_pixels):
 							if current_action == "LightenDarken":
@@ -786,7 +785,7 @@ func fill_gaps(mouse_pos : Vector2, prev_mouse_pos : Vector2, color : Color, cur
 	var dx := int(abs(mouse_pos_floored.x - previous_mouse_pos_floored.x))
 	var dy := int(-abs(mouse_pos_floored.y - previous_mouse_pos_floored.y))
 	var err := dx + dy
-	var e2 := err << 1 #err * 2
+	var e2 := err << 1 # err * 2
 	var sx = 1 if previous_mouse_pos_floored.x < mouse_pos_floored.x else -1
 	var sy = 1 if previous_mouse_pos_floored.y < mouse_pos_floored.y else -1
 	var x = previous_mouse_pos_floored.x
@@ -873,9 +872,19 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
 	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && !(pos in mouse_press_pixels):
 		if color.a > 0 && color.a < 1:
 			# Blend alpha
-			color.a = color.a + sprite.get_pixelv(pos).a * (1 - color.a)
+			color = blend_colors(color, sprite.get_pixelv(pos))
 		mouse_press_pixels.append(pos)
 		sprite.set_pixelv(pos, color)
+
+func blend_colors(color_1 : Color, color_2 : Color) -> Color:
+	var color := Color()
+	color.a = color_1.a + color_2.a * (1 - color_1.a) # Blend alpha
+	if color.a != 0:
+		# Blend colors
+		color.r = (color_1.r * color_1.a + color_2.r * color_2.a * (1-color_1.a)) / color.a
+		color.g = (color_1.g * color_1.a + color_2.g * color_2.a * (1-color_1.a)) / color.a
+		color.b = (color_1.b * color_1.a + color_2.b * color_2.a * (1-color_1.a)) / color.a
+	return color
 
 # Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
@@ -902,13 +911,8 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			var dst_x := dest_rect.position.x + x;
 			var dst_y := dest_rect.position.y + y;
 
-			var out_color := Color()
 			var brush_color := brush.get_pixel(src_x, src_y)
 			var bg_color := bg.get_pixel(dst_x, dst_y)
-			out_color.a = brush_color.a + bg_color.a * (1 - brush_color.a)
-			# Blend the colors
+			var out_color := blend_colors(brush_color, bg_color)
 			if out_color.a != 0:
-				out_color.r = (brush_color.r * brush_color.a + bg_color.r * bg_color.a * (1 - brush_color.a)) / out_color.a
-				out_color.g = (brush_color.g * brush_color.a + bg_color.g * bg_color.a * (1 - brush_color.a)) / out_color.a
-				out_color.b = (brush_color.b * brush_color.a + bg_color.b * bg_color.a * (1 - brush_color.a)) / out_color.a
 				bg.set_pixel(dst_x, dst_y, out_color)
