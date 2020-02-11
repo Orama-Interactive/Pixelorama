@@ -8,76 +8,76 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-10 15:06\n"
+"PO-Revision-Date: 2020-02-11 07:10\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Labi"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Atcelt"
 
 msgid "Open"
-msgstr ""
+msgstr "Atvērt"
 
 msgid "Save"
-msgstr ""
+msgstr "Saglabāt"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Lūdzu, apstiprini..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Attēla izmērs"
 
 msgid "Width:"
-msgstr ""
+msgstr "Platums:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Augstums:"
 
 msgid "File"
-msgstr ""
+msgstr "Fails"
 
 msgid "Edit"
-msgstr ""
+msgstr "Rediģēt"
 
 msgid "View"
-msgstr ""
+msgstr "Skats"
 
 msgid "Image"
-msgstr ""
+msgstr "Attēls"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efekti"
 
 msgid "Help"
-msgstr ""
+msgstr "Palīdzība"
 
 msgid "New..."
-msgstr ""
+msgstr "Jauns..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Atvērt..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Saglabāt..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Saglabāt kā..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "Importēt PNG..."
 
 msgid "Export"
-msgstr ""
+msgstr "Eksportēt"
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Eksportēt PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Eksportēt PNG kā..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Iziet"
 
 msgid "Undo"
 msgstr ""
