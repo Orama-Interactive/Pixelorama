@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 07:48\n"
+"PO-Revision-Date: 2020-02-11 07:58\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -425,58 +425,58 @@ msgid "Right tool options"
 msgstr "Labā rīka uzstādījumi"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Kreisā pikseļa indikātors"
 
 msgid "LEFT_INDIC_HT"
-msgstr ""
+msgstr "Attēlot kreisās peles pogas krāsu zīmēšanas laikā"
 
 msgid "RIGHT_INDIC_HT"
-msgstr ""
+msgstr "Attēlot labās peles pogas krāsu zīmēšanas laikā"
 
 msgid "Show tool icon"
-msgstr ""
+msgstr "Rādīt rīka ikonu"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Labā pikseļa indikātors"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Ota:"
 
 msgid "BRUSH_HT"
-msgstr ""
+msgstr "Izvēlēties otu"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Ota: Pikselis"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Ota: Aplis"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Ota: Pildīts aplis"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Pielāgota ota"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Otas izmērs:"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Otas krāsa no"
 
 msgid "COLORFROM_HT"
-msgstr ""
+msgstr "0: Krāsa no pašas otas, 100: no atzīmētās krāsas"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Aizpildīt laukumu:"
 
 msgid "Area of the same color"
-msgstr ""
+msgstr "Vienādas krāsas laukums"
 
 msgid "All pixels of the same color"
-msgstr ""
+msgstr "Visus pikseļus vienādā krāsā"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Izgaismot"
 
 msgid "Darken"
 msgstr ""
