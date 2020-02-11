@@ -248,7 +248,7 @@ func _input(event : InputEvent) -> void:
 		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 		if !cursor_inside_canvas:
 			cursor_inside_canvas = true
-			Input.set_custom_mouse_cursor(load("res://Assets/Graphics/Cursor.png"), 0, Vector2(15, 15))
+			Input.set_custom_mouse_cursor(Global.cursor_image, 0, Vector2(15, 15))
 			if Global.show_left_tool_icon:
 				Global.left_cursor.visible = true
 			if Global.show_right_tool_icon:

@@ -19,15 +19,16 @@ var has_focus := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
-
 var pressure_sensitivity_mode = Pressure_Sensitivity.ALPHA
 var smooth_zoom := true
+var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
 var transparent_background : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
+
 # warning-ignore:unused_class_variable
 var theme_type := "Dark"
 # warning-ignore:unused_class_variable
