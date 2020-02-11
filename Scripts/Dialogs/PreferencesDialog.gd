@@ -8,6 +8,9 @@ onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
 onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
 
+onready var smooth_zoom_button = $"HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom"
+onready var sensitivity_option = $"HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton"
+
 onready var default_width_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth
 onready var default_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight
 onready var default_fill_color = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor
@@ -34,6 +37,14 @@ func _ready() -> void:
 	else:
 		change_theme(0)
 		themes.get_child(1).pressed = true
+
+	# Set default values for General options
+	if Global.config_cache.has_section_key("preferences", "smooth_zoom"):
+		Global.smooth_zoom = Global.config_cache.get_value("preferences", "smooth_zoom")
+		smooth_zoom_button.pressed = Global.smooth_zoom
+	if Global.config_cache.has_section_key("preferences", "pressure_sensitivity"):
+		Global.pressure_sensitivity_mode = Global.config_cache.get_value("preferences", "pressure_sensitivity")
+		sensitivity_option.selected = Global.pressure_sensitivity_mode
 
 	# Set default values for Grid & Guide options
 	if Global.config_cache.has_section_key("preferences", "grid_size"):
@@ -117,9 +128,13 @@ func _on_Tree_item_selected() -> void:
 
 func _on_PressureSensitivityOptionButton_item_selected(id : int) -> void:
 	Global.pressure_sensitivity_mode = id
+	Global.config_cache.set_value("preferences", "pressure_sensitivity", id)
+	Global.config_cache.save("user://cache.ini")
 
 func _on_SmoothZoom_pressed() -> void:
 	Global.smooth_zoom = !Global.smooth_zoom
+	Global.config_cache.set_value("preferences", "smooth_zoom", Global.smooth_zoom)
+	Global.config_cache.save("user://cache.ini")
 
 func _on_Language_pressed(button : Button) -> void:
 	var index := 0
