@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 09:00\n"
+"PO-Revision-Date: 2020-02-11 09:11\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -283,34 +283,34 @@ msgid "About Pixelorama"
 msgstr "Par Pixelorama"
 
 msgid "MADEBY_LABEL"
-msgstr ""
+msgstr "Izstrādātājs Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Mājas lapa"
 
 msgid "Donate"
-msgstr ""
+msgstr "Ziedot"
 
 msgid "Developers"
-msgstr ""
+msgstr "Izstrādātāji"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Līdzdalībnieki"
 
 msgid "Donors"
-msgstr ""
+msgstr "Ziedotāji"
 
 msgid "Translators"
-msgstr ""
+msgstr "Tūlkotāji"
 
 msgid "English"
-msgstr ""
+msgstr "Angļu"
 
 msgid "Greek"
-msgstr ""
+msgstr "Grieķu"
 
 msgid "French"
-msgstr ""
+msgstr "Franču"
 
 msgid "German"
 msgstr "Vācu"
@@ -479,67 +479,74 @@ msgid "Lighten"
 msgstr "Izgaismot"
 
 msgid "Darken"
-msgstr ""
+msgstr "Aptumšot"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Daudzums:"
 
 msgid "LDAMOUNT_HT"
-msgstr ""
+msgstr "Apgaismojuma/ Aptumšojuma daudzmums"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Izvēlēties priekš:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Kreisā krāsa"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Labā krāsa"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Spoguļskats"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontāli"
 
 msgid "HORIZMIRROR_HT"
-msgstr ""
+msgstr "IIeslēgt horizontālo spoguļskata zīmēšanu"
 
 msgid "VERTMIRROR_HT"
-msgstr ""
+msgstr "Ieslēgt vertikālo spoguļskata zīmēšanu"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikāls"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Patreizējais kadrs:"
 
 msgid "Current frame: 1/1"
-msgstr ""
+msgstr "Patreizējais kadrs: 1/1"
 
 msgid "FIRSTFRAME_HT"
-msgstr ""
+msgstr "Pirmais kadrs\n"
+"(Ctrl+Home)"
 
 msgid "PREVIOUSFRAME_HT"
-msgstr ""
+msgstr "Iepriekšējais kadrs\n"
+"(Ctrl+Left)"
 
 msgid "PLAYBACKWARDS_HT"
-msgstr ""
+msgstr "Atskaņot animāciju atpakaļgaitā (no beigām uz sākumu)\n"
+"(F4)"
 
 msgid "PLAYFORWARD_HT"
-msgstr ""
+msgstr "Atskaņot animāciju uz priekšu (no sākuma uz beigām)\n"
+"(F5)"
 
 msgid "NEXTFRAME_HT"
-msgstr ""
+msgstr "Nākošais kadrs\n"
+"(Ctrl+Right)"
 
 msgid "LASTFRAME_HT"
-msgstr ""
+msgstr "Pēdējais kadrs\n"
+"(Ctrl+End)"
 
 msgid "FPS_HT"
-msgstr ""
+msgstr "Cik kadrus sekundē animāciju atskaņot?\n"
+"Lielāks kadru skaits atskaņos animāciju ātrāk."
 
 msgid "No loop"
-msgstr ""
+msgstr "Bez cilpošanas"
 
 msgid "Cycle loop"
 msgstr ""
