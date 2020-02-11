@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 08:10\n"
+"PO-Revision-Date: 2020-02-11 08:33\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -163,64 +163,64 @@ msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr "Eksportēt visus kadrus (vienā failā)"
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolonna"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rinda"
 
 msgid "Path:"
-msgstr ""
+msgstr "Ceļš:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Direktorija un Faili:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Izveidot mapi"
 
 msgid "File:"
-msgstr ""
+msgstr "Fails:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolācija:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Tuvākais"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineāra"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kubisks"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineāra"
 
 msgid "General"
-msgstr ""
+msgstr "Vispārējā"
 
 msgid "Language"
-msgstr ""
+msgstr "Valoda"
 
 msgid "Themes"
-msgstr ""
+msgstr "Tēmas"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Vadlīnijas un režģis"
 
 msgid "General Options"
-msgstr ""
+msgstr "Vispārējie iestatījumi"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Gluds tuvinājums"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Planšetes spiediena jutīgums:"
 
 msgid "None"
-msgstr ""
+msgstr "Nekas"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Ietekmēt otas alfa kanālu"
 
 msgid "Language options"
 msgstr ""
@@ -713,47 +713,47 @@ msgid "Error: Palette must have a valid name."
 msgstr "Kļūda: Paletei nepieciešams derīgs nosaukums."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Kļūda: Paletes nosaukums '%s' jau eksistē!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Nederīgs paletes fails!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Rediģēt paleti"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Labvēļi:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Izmaiņas"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platīna sponsors"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Zelta sponsors"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Platīna sponsora aizvietotājs"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Zelta sponsora aizvietotājs"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Vairāk nerādīt"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Ieņemt šo vietu!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Bildes uzstādījumi"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Noklusējuma platums:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Noklusējuma augstums:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Noklusējuma aizpildes krāsa:"
 
