@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 09:11\n"
+"PO-Revision-Date: 2020-02-11 09:24\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -549,91 +549,91 @@ msgid "No loop"
 msgstr "Bez cilpošanas"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Riņķa cilpa"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping-pong cilpa"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Sīpola mizu skats:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Pagājušie kadri"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Nākošie kadri"
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Zili-Sarkanais režīms"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Pievienot jaunu kadru"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Noņemt kadru"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Klonēt kadru"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Pārvietot pa kreisi"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Pārvietoties pa labi"
 
 msgid "Layer"
-msgstr ""
+msgstr "Slānis"
 
 msgid "Layers"
-msgstr ""
+msgstr "Slāņi"
 
 msgid "LAYERNEW_HT"
-msgstr ""
+msgstr "Izveidot jaunu slāni"
 
 msgid "LAYERREMOVE_HT"
-msgstr ""
+msgstr "Noņemt aktuālo slāni"
 
 msgid "LAYERUP_HT"
-msgstr ""
+msgstr "Pārvietot aktuālo slāni uz augšu"
 
 msgid "LAYERDOWN_HT"
-msgstr ""
+msgstr "Pārvietot aktuālo slāni uz leju"
 
 msgid "LAYERCLONE_HT"
-msgstr ""
+msgstr "Klonēt aktuālo slāni"
 
 msgid "LAYERMERGE_HT"
-msgstr ""
+msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Necaurspīdīgums:"
 
 msgid "LAYERVISIBILITY_HT"
-msgstr ""
+msgstr "SLāņa redzamības slēdzis"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palete"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletes"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Pievienot jaunu paleti"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Rediģēt iezīmēto paleti"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Izvēlētis paleti"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Atcelt: Zīmēt"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Atkārtot: Zīmēt"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Atcelt: Taisnstūra iezīmēšanu"
 
 msgid "Redo: Rectangle Select"
 msgstr "Atkārtot: Taisnstūra atzīmēšanu"
