@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 07:58\n"
+"PO-Revision-Date: 2020-02-11 08:10\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -629,88 +629,88 @@ msgid "Undo: Rectangle Select"
 msgstr ""
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Atkārtot: Taisnstūra atzīmēšanu"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Atcelt: Izmera maiņu"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Atkārtot: Izmēra maiņu"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Atcelt: Slāņa pievienošanu"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Atkārtot: Slāņa pievienošanu"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Atcelt: Slāņa noņemšanu"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Atkārtot: Slāņa noņemšanu"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Atcelt: Slāņu apvienošanu"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Atkārtot: Slāņu apvienošanu"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Atcelt: Slāņu secības maiņu"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Atkārtot: Slāņu secības maiņu"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Atcelt: Kadra pievienošanu"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Atkārtot: Kadra pievienošanu"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Atcelt: Kadra noņemšanu"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Atkārtot: Kadra noņemšanu"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Atcelt: Kadra secības maiņu"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Atkārtot: Kadra secības maiņu"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Atcelt: Pielāgotās otas dzēšanu"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Atkārtot: Pielāgotās otas dzēšanu"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Pārvietot vadlīniju"
 
 msgid "File saved"
-msgstr ""
+msgstr "Fails saglabāts"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fails eksportēts"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Jauna tukša palete"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importēt paleti"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Paletes nosaukums:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Krāsas nosaukums:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Izveidot jaunu tukšu paleti?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Kļūda: Paletei nepieciešams derīgs nosaukums."
 
 msgid "Error: Palette named '%s' already exists!"
 msgstr ""
