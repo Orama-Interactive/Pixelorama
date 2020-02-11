@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-08 10:39\n"
+"PO-Revision-Date: 2020-02-11 14:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -331,6 +331,9 @@ msgstr "Traditionelles Chinesisch"
 
 msgid "Italian"
 msgstr "Italenisch"
+
+msgid "Latvian"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Spanisch"
