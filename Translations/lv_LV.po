@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 08:33\n"
+"PO-Revision-Date: 2020-02-11 09:00\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -223,64 +223,64 @@ msgid "Affect Brush's Alpha"
 msgstr "Ietekmēt otas alfa kanālu"
 
 msgid "Language options"
-msgstr ""
+msgstr "Valodas iestatījumi"
 
 msgid "Theme options"
-msgstr ""
+msgstr "Tēmas iestatījumi"
 
 msgid "Grid options"
-msgstr ""
+msgstr "Režģa iestatījumi"
 
 msgid "Color:"
-msgstr ""
+msgstr "Krāsa:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Vadlīnijas krāsa:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Systēmas valoda"
 
 msgid "Dark"
-msgstr ""
+msgstr "Tumš"
 
 msgid "Gray"
-msgstr ""
+msgstr "Pelēks"
 
 msgid "Gold"
-msgstr ""
+msgstr "Zelta"
 
 msgid "Light"
-msgstr ""
+msgstr "Gaišs"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Pretējās krāsas"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Atsātināt"
 
 msgid "Outline"
-msgstr ""
+msgstr "Ārlīnija"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonāle"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Ievieto attēlā"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Biezums:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Rādīt uzplaiksnījuma ekrānu"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problēmu izsekotājs"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Izmaiņu saraksts"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Par Pixelorama"
 
 msgid "MADEBY_LABEL"
 msgstr ""
