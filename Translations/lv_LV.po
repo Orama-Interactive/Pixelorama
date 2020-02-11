@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 07:38\n"
+"PO-Revision-Date: 2020-02-11 07:48\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -388,34 +388,41 @@ msgstr "Zīmulis\n\n"
 "Turi Shift lai novilktu līniju"
 
 msgid "ERASER_HT"
-msgstr ""
+msgstr "Dzēšgumija\n\n"
+"E priekš kreisās peles pogas\n"
+"Alt + E priekš labās peles pogas\n\n"
+"Turi Shift lai novilktu līniju"
 
 msgid "BUCKET_HT"
-msgstr ""
+msgstr "Spainis\n\n"
+"B priekš kreisās peles pogas\n"
+"Alt + B priekš labās peles pogas"
 
 msgid "LD_HT"
-msgstr ""
+msgstr "Izgaismot/ aptumšot\n\n"
+"U priekš kreisās peles pogas\n"
+"Alt + U priekš labās peles pogas"
 
 msgid "LEFTCOLOR_HT"
-msgstr ""
+msgstr "Izvēlies krāsu priekš kreisā rīka"
 
 msgid "RIGHTCOLOR_HT"
-msgstr ""
+msgstr "Izvēlies krāsu priekš labā rīka"
 
 msgid "COLORSWITCH_HT"
-msgstr ""
+msgstr "Samainīt vietām kreiso un labo krāsu"
 
 msgid "COLORDEFAULTS_HT"
-msgstr ""
+msgstr "Atjaunot noklusējuma krāsas (melns priekš kreisās, balts priekšlabās)"
 
 msgid "Raw Mode"
-msgstr ""
+msgstr "Neapstrādātais režīms"
 
 msgid "Left tool options"
-msgstr ""
+msgstr "Kreisā rīka uzstādījumi"
 
 msgid "Right tool options"
-msgstr ""
+msgstr "Labā rīka uzstādījumi"
 
 msgid "Left pixel indicator"
 msgstr ""
