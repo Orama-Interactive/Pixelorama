@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-08 19:24\n"
+"PO-Revision-Date: 2020-02-09 17:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "Обрезать изображение"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Повернуть изображение"
 
 msgid "Clear Selection"
 msgstr "Снять выделение"
@@ -131,7 +131,7 @@ msgid "IMPORT_FILE_LABEL"
 msgstr "Импортировать как новый кадр"
 
 msgid "IMPORT_SPRITESHEET"
-msgstr ""
+msgstr "Импорт в виде спрайт-листов"
 
 msgid "Save Sprite as .pxo"
 msgstr "Сохранить спрайт как .pxo"
@@ -147,7 +147,8 @@ msgstr "Файл существует, перезаписать?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Не удалось загрузить файл '%s'.\n"
+"Код ошибки: %s"
 
 msgid "Resize:"
 msgstr "Изменить размер:"
@@ -159,7 +160,7 @@ msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
 msgstr "Экспортировать все кадры в отдельные файлы"
 
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr ""
+msgstr "Экспорт всех кадров в виде спрайт-листов (один файл)"
 
 msgid "Columns"
 msgstr "Столбцы"
@@ -216,7 +217,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr "Чувствительность к нажатию на планшет:"
 
 msgid "None"
-msgstr ""
+msgstr "Ничего"
 
 msgid "Affect Brush's Alpha"
 msgstr "Влияние на альфу кисти"
@@ -240,16 +241,16 @@ msgid "System Language"
 msgstr "Системный язык"
 
 msgid "Dark"
-msgstr ""
+msgstr "Тёмная"
 
 msgid "Gray"
-msgstr ""
+msgstr "Серая"
 
 msgid "Gold"
-msgstr ""
+msgstr "Золотая"
 
 msgid "Light"
-msgstr ""
+msgstr "Светлая"
 
 msgid "Invert colors"
 msgstr "Инвертировать цвета"
@@ -261,10 +262,10 @@ msgid "Outline"
 msgstr "Обводка"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Диагональ"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Поместить внутри изображения"
 
 msgid "Thickness:"
 msgstr "Толщина:"
@@ -294,10 +295,10 @@ msgid "Developers"
 msgstr "Разработчики"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Разработчики"
 
 msgid "Donors"
-msgstr ""
+msgstr "Спонсоры"
 
 msgid "Translators"
 msgstr "Переводчики"
@@ -345,19 +346,19 @@ msgid "UI Designer"
 msgstr "Дизайнер интерфейса"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub участники"
 
 msgid "Art by"
-msgstr ""
+msgstr "Художник"
 
 msgid "untitled"
-msgstr ""
+msgstr "безымянный"
 
 msgid "imported"
-msgstr ""
+msgstr "импортировано"
 
 msgid "copy"
-msgstr ""
+msgstr "копия"
 
 msgid "QUIT_LABEL"
 msgstr "Вы действительно хотите выйти из Pixeloram'ы?"
@@ -449,10 +450,10 @@ msgid "Brush: Pixel"
 msgstr "Кисть: Пиксель"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Кисть: Круг"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Кисть: Залитый круг"
 
 msgid "Custom brush"
 msgstr "Своя кисть"
@@ -488,13 +489,13 @@ msgid "LDAMOUNT_HT"
 msgstr "Интенсивность осветления/затемнения"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Выбрать для:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Цвет слева"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Цвет справа"
 
 msgid "Mirroring"
 msgstr "Зеркало"
@@ -582,7 +583,7 @@ msgid "Move Right"
 msgstr "Сместить вправо"
 
 msgid "Layer"
-msgstr ""
+msgstr "Слой"
 
 msgid "Layers"
 msgstr "Слои"
@@ -606,25 +607,25 @@ msgid "LAYERMERGE_HT"
 msgstr "Объединить слой ниже с текущим "
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Непрозрачность:"
 
 msgid "LAYERVISIBILITY_HT"
 msgstr "Переключить видимость слоя"
 
 msgid "Palette"
-msgstr ""
+msgstr "Палитра"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Палитры"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Добавить новую палитру"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Редактировать выбранную палитру"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Выберите палитру"
 
 msgid "Undo: Draw"
 msgstr "Отменить: Рисование"
@@ -702,65 +703,65 @@ msgid "File exported"
 msgstr "Файл экспортирован"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Создать пустую палитру"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Импорт Палитры"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Название палитры:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Название цвета:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Создать пустую палитру?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Ошибка: Палитра должна иметь корректное имя."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Ошибка: Палитра с именем '%s' уже существует!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Недопустимый файл палитры!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Изменить палитру"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Меценаты:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Изменения"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Платиновый спонсор"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Золотые спонсоры"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Заполнитель Платиновых Спонсоров"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Заполнитель Золотых Спонсоров"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Не показывать снова"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Возьмите это место!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Параметры изображения"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Ширина по умолчанию:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Высота по умолчанию:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Цвет заливки по умолчанию:"
 
