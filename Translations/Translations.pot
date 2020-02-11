@@ -323,6 +323,9 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
+msgid "Latvian"
+msgstr ""
+
 msgid "Spanish"
 msgstr ""
 

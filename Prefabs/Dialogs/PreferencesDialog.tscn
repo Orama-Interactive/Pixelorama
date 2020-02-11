@@ -138,6 +138,13 @@ margin_bottom = 224.0
 mouse_default_cursor_shape = 2
 text = "Italian [it]"
 
+[node name="Latvian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 200.0
+margin_right = 334.0
+margin_bottom = 224.0
+mouse_default_cursor_shape = 2
+text = "Latvian [lv_LV]"
+
 [node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 228.0
 margin_right = 334.0

@@ -10,7 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Tablet pen pressure sensitivity!
 - Crowdin integration for contributing translations!
 - Spanish translation - thanks to azagaya & Lilly And!
-- Chinese Simplified translation - thanks to wcxu21!
+- Chinese Simplified translation - thanks to Chenxu Wang!
+- Latvian translation - thanks to nezvers!
 - Translators can now be seen in the About window.
 - It is now possible to remove custom brushes with the middle mouse button.
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
