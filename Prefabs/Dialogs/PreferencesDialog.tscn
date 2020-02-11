@@ -10,6 +10,10 @@ margin_bottom = 70.0
 window_title = "Preferences"
 resizable = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 anchor_right = 1.0
@@ -37,7 +41,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 334.0
-margin_bottom = 858.0
+margin_bottom = 886.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -143,7 +147,7 @@ margin_top = 200.0
 margin_right = 334.0
 margin_bottom = 224.0
 mouse_default_cursor_shape = 2
-text = "Latvian [lv_LV]"
+text = "Latvian [lv]"
 
 [node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 228.0

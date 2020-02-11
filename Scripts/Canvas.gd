@@ -9,7 +9,6 @@ var fill_color := Color(0, 0, 0, 0)
 var frame := 0 setget frame_changed
 var frame_button : VBoxContainer
 var frame_texture_rect : TextureRect
-
 var current_pixel := Vector2.ZERO # pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
 var previous_mouse_pos_for_lines := Vector2.ZERO
@@ -23,6 +22,7 @@ var south_limit := location.y + size.y
 var mouse_inside_canvas := false # used for undo
 var sprite_changed_this_frame := false # for optimization purposes
 var mouse_press_pixels := [] # Cleared after mouse release
+var mouse_press_pressure_values := [] # Cleared after mouse release
 var is_making_line := false
 var made_line := false
 var is_making_selection := "None"
@@ -180,6 +180,11 @@ func _input(event : InputEvent) -> void:
 		else:
 			return
 
+	if (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
+		made_line = false
+		mouse_press_pixels.clear()
+		mouse_press_pressure_values.clear()
+
 	current_pixel = get_local_mouse_position() + location
 	if Global.current_frame != frame:
 		previous_mouse_pos = current_pixel
@@ -280,11 +285,10 @@ func _input(event : InputEvent) -> void:
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
-		made_line = false
-		mouse_press_pixels.clear()
 		if can_handle || Global.undos == Global.undo_redo.get_version():
 			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
 				handle_redo("Draw")
+				can_undo = true
 
 	match current_action: # Handle current tool
 		"Pencil":
@@ -488,8 +492,6 @@ func handle_redo(action : String) -> void:
 	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
 
-	can_undo = true
-
 func update_texture(layer_index : int, update_frame_tex := true) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 	var layer_container := get_layer_container(layer_index)
@@ -636,7 +638,8 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 						if current_action == "Pencil" && color.a < 1:
 							_c = blend_colors(color, current_pixel_color)
 
-						if current_pixel_color != _c && !(pos_floored in mouse_press_pixels):
+						var saved_pixel_index := mouse_press_pixels.find(pos_floored)
+						if current_pixel_color != _c && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
 							if current_action == "LightenDarken":
 								_c = current_pixel_color
 								if _c.a > 0:
@@ -646,6 +649,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 										_c = current_pixel_color.darkened(ld_amount)
 
 							mouse_press_pixels.append(pos_floored)
+							mouse_press_pressure_values.append(pen_pressure)
 							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, _c)
 							sprite_changed_this_frame = true
 
@@ -662,6 +666,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 											_c = current_pixel_color.darkened(ld_amount)
 
 									mouse_press_pixels.append(pos_floored)
+									mouse_press_pressure_values.append(pen_pressure)
 									layers[current_layer_index][0].set_pixel(mirror_x, cur_pos_y, _c)
 									sprite_changed_this_frame = true
 							if vertical_mirror:
@@ -674,6 +679,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 											_c = current_pixel_color.darkened(ld_amount)
 
 									mouse_press_pixels.append(pos_floored)
+									mouse_press_pressure_values.append(pen_pressure)
 									layers[current_layer_index][0].set_pixel(cur_pos_x, mirror_y, _c)
 									sprite_changed_this_frame = true
 							if horizontal_mirror && vertical_mirror:
@@ -686,6 +692,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 											_c = current_pixel_color.darkened(ld_amount)
 
 									mouse_press_pixels.append(pos_floored)
+									mouse_press_pressure_values.append(pen_pressure)
 									layers[current_layer_index][0].set_pixel(mirror_x, mirror_y, _c)
 									sprite_changed_this_frame = true
 
@@ -869,11 +876,13 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 					draw_pixel_blended(sprite, draw_pos, color)
 
 func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
-	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && !(pos in mouse_press_pixels):
+	var saved_pixel_index := mouse_press_pixels.find(pos)
+	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
 		if color.a > 0 && color.a < 1:
-			# Blend alpha
 			color = blend_colors(color, sprite.get_pixelv(pos))
+
 		mouse_press_pixels.append(pos)
+		mouse_press_pressure_values.append(pen_pressure)
 		sprite.set_pixelv(pos, color)
 
 func blend_colors(color_1 : Color, color_2 : Color) -> Color:
