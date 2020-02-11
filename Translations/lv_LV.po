@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 09:24\n"
+"PO-Revision-Date: 2020-02-11 14:05\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -332,6 +332,9 @@ msgstr "Ķīniešu tradicionālā"
 
 msgid "Italian"
 msgstr "Itāļu"
+
+msgid "Latvian"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Spāņu"
