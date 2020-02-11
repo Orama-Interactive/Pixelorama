@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 07:10\n"
+"PO-Revision-Date: 2020-02-11 07:18\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -80,67 +80,67 @@ msgid "Quit"
 msgstr "Iziet"
 
 msgid "Undo"
-msgstr ""
+msgstr "Atsaukt"
 
 msgid "Redo"
-msgstr ""
+msgstr "Pārstrādāt"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Mainīt attēla izmēru"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Apgriest attēlu"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotēt attēlu"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Notīrīt atlasi"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Apmest horizontāli"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Apmest vertikāli"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Iestatījumi"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Flīžu režīms"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Rādīt režģi"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Rādīt mērjoslu"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Rādīt vadlīnijas"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Aizpildīt ar krāsu:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Atvērt failu"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Atvērt failu(s)"
 
 msgid "IMPORT_FILE_LABEL"
-msgstr ""
+msgstr "Importēt kā jaunu kadru"
 
 msgid "IMPORT_SPRITESHEET"
-msgstr ""
+msgstr "Importēt kā animācijas lapu"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Saglabāt animāciju kā .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksportēt animāciju kā .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksportēt animāciju"
 
 msgid "File Exists, Overwrite?"
 msgstr ""
