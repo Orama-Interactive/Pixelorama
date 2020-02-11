@@ -8,735 +8,759 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-10 15:06\n"
+"PO-Revision-Date: 2020-02-11 09:24\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Labi"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Atcelt"
 
 msgid "Open"
-msgstr ""
+msgstr "Atvērt"
 
 msgid "Save"
-msgstr ""
+msgstr "Saglabāt"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Lūdzu, apstiprini..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Attēla izmērs"
 
 msgid "Width:"
-msgstr ""
+msgstr "Platums:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Augstums:"
 
 msgid "File"
-msgstr ""
+msgstr "Fails"
 
 msgid "Edit"
-msgstr ""
+msgstr "Rediģēt"
 
 msgid "View"
-msgstr ""
+msgstr "Skats"
 
 msgid "Image"
-msgstr ""
+msgstr "Attēls"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efekti"
 
 msgid "Help"
-msgstr ""
+msgstr "Palīdzība"
 
 msgid "New..."
-msgstr ""
+msgstr "Jauns..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Atvērt..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Saglabāt..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Saglabāt kā..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "Importēt PNG..."
 
 msgid "Export"
-msgstr ""
+msgstr "Eksportēt"
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Eksportēt PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Eksportēt PNG kā..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Iziet"
 
 msgid "Undo"
-msgstr ""
+msgstr "Atsaukt"
 
 msgid "Redo"
-msgstr ""
+msgstr "Pārstrādāt"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Mainīt attēla izmēru"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Apgriest attēlu"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotēt attēlu"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Notīrīt atlasi"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Apmest horizontāli"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Apmest vertikāli"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Iestatījumi"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Flīžu režīms"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Rādīt režģi"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Rādīt mērjoslu"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Rādīt vadlīnijas"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Aizpildīt ar krāsu:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Atvērt failu"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Atvērt failu(s)"
 
 msgid "IMPORT_FILE_LABEL"
-msgstr ""
+msgstr "Importēt kā jaunu kadru"
 
 msgid "IMPORT_SPRITESHEET"
-msgstr ""
+msgstr "Importēt kā animācijas lapu"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Saglabāt animāciju kā .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksportēt animāciju kā .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksportēt animāciju"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fails eksistē, pārrakstīt?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nevar ielādēd failu '%s'.\n"
+"Kļūdas kods: %s"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Mainīt izmēru:"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr ""
+msgstr "Eksportēt aktuālo kadru"
 
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr ""
+msgstr "Eksportēt visus kadrus atsevišķos failos"
 
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr ""
+msgstr "Eksportēt visus kadrus (vienā failā)"
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolonna"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rinda"
 
 msgid "Path:"
-msgstr ""
+msgstr "Ceļš:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Direktorija un Faili:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Izveidot mapi"
 
 msgid "File:"
-msgstr ""
+msgstr "Fails:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolācija:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Tuvākais"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineāra"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kubisks"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineāra"
 
 msgid "General"
-msgstr ""
+msgstr "Vispārējā"
 
 msgid "Language"
-msgstr ""
+msgstr "Valoda"
 
 msgid "Themes"
-msgstr ""
+msgstr "Tēmas"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Vadlīnijas un režģis"
 
 msgid "General Options"
-msgstr ""
+msgstr "Vispārējie iestatījumi"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Gluds tuvinājums"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Planšetes spiediena jutīgums:"
 
 msgid "None"
-msgstr ""
+msgstr "Nekas"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Ietekmēt otas alfa kanālu"
 
 msgid "Language options"
-msgstr ""
+msgstr "Valodas iestatījumi"
 
 msgid "Theme options"
-msgstr ""
+msgstr "Tēmas iestatījumi"
 
 msgid "Grid options"
-msgstr ""
+msgstr "Režģa iestatījumi"
 
 msgid "Color:"
-msgstr ""
+msgstr "Krāsa:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Vadlīnijas krāsa:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Systēmas valoda"
 
 msgid "Dark"
-msgstr ""
+msgstr "Tumš"
 
 msgid "Gray"
-msgstr ""
+msgstr "Pelēks"
 
 msgid "Gold"
-msgstr ""
+msgstr "Zelta"
 
 msgid "Light"
-msgstr ""
+msgstr "Gaišs"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Pretējās krāsas"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Atsātināt"
 
 msgid "Outline"
-msgstr ""
+msgstr "Ārlīnija"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonāle"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Ievieto attēlā"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Biezums:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Rādīt uzplaiksnījuma ekrānu"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problēmu izsekotājs"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Izmaiņu saraksts"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Par Pixelorama"
 
 msgid "MADEBY_LABEL"
-msgstr ""
+msgstr "Izstrādātājs Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Mājas lapa"
 
 msgid "Donate"
-msgstr ""
+msgstr "Ziedot"
 
 msgid "Developers"
-msgstr ""
+msgstr "Izstrādātāji"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Līdzdalībnieki"
 
 msgid "Donors"
-msgstr ""
+msgstr "Ziedotāji"
 
 msgid "Translators"
-msgstr ""
+msgstr "Tūlkotāji"
 
 msgid "English"
-msgstr ""
+msgstr "Angļu"
 
 msgid "Greek"
-msgstr ""
+msgstr "Grieķu"
 
 msgid "French"
-msgstr ""
+msgstr "Franču"
 
 msgid "German"
-msgstr ""
+msgstr "Vācu"
 
 msgid "Polish"
-msgstr ""
+msgstr "Poļu"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazīļu portugāļu"
 
 msgid "Russian"
-msgstr ""
+msgstr "Krievu"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Ķīniešu vienkāršotā"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Ķīniešu tradicionālā"
 
 msgid "Italian"
-msgstr ""
+msgstr "Itāļu"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spāņu"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Izstrādes komanda"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Vadošais programmētājs"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI dizaineris"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub līdzdalībnieks"
 
 msgid "Art by"
-msgstr ""
+msgstr "Mākslas darbu autors"
 
 msgid "untitled"
-msgstr ""
+msgstr "bez nosaukuma"
 
 msgid "imported"
-msgstr ""
+msgstr "importēts"
 
 msgid "copy"
-msgstr ""
+msgstr "kopēt"
 
 msgid "QUIT_LABEL"
-msgstr ""
+msgstr "Tiešām vēlies pārtraukt darbu ar Pixelorama?"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Lietderības rīki"
 
 msgid "RECTSELECT_HT"
-msgstr ""
+msgstr "Taisnstūra iezīmēšana\n\n"
+"R priekš kreisās peles pogas\n"
+"Alt + R priekš peles labās pogas\n\n"
+"Nospied Shift, lai pārvietotu saturu"
 
 msgid "COLORPICKER_HT"
-msgstr ""
+msgstr "Krāsu izvēlne\n"
+"Atzīmē krāsu no attēla pikseļa\n\n"
+"O priekš kreisās peles pogas\n"
+"Alt + O priekšlabās peles pogas"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Zīmēšanas rīki"
 
 msgid "PENCIL_HT"
-msgstr ""
+msgstr "Zīmulis\n\n"
+"P priekškreisās peles pogas\n"
+"Alt + P priekš labās peles pogas\n\n"
+"Turi Shift lai novilktu līniju"
 
 msgid "ERASER_HT"
-msgstr ""
+msgstr "Dzēšgumija\n\n"
+"E priekš kreisās peles pogas\n"
+"Alt + E priekš labās peles pogas\n\n"
+"Turi Shift lai novilktu līniju"
 
 msgid "BUCKET_HT"
-msgstr ""
+msgstr "Spainis\n\n"
+"B priekš kreisās peles pogas\n"
+"Alt + B priekš labās peles pogas"
 
 msgid "LD_HT"
-msgstr ""
+msgstr "Izgaismot/ aptumšot\n\n"
+"U priekš kreisās peles pogas\n"
+"Alt + U priekš labās peles pogas"
 
 msgid "LEFTCOLOR_HT"
-msgstr ""
+msgstr "Izvēlies krāsu priekš kreisā rīka"
 
 msgid "RIGHTCOLOR_HT"
-msgstr ""
+msgstr "Izvēlies krāsu priekš labā rīka"
 
 msgid "COLORSWITCH_HT"
-msgstr ""
+msgstr "Samainīt vietām kreiso un labo krāsu"
 
 msgid "COLORDEFAULTS_HT"
-msgstr ""
+msgstr "Atjaunot noklusējuma krāsas (melns priekš kreisās, balts priekšlabās)"
 
 msgid "Raw Mode"
-msgstr ""
+msgstr "Neapstrādātais režīms"
 
 msgid "Left tool options"
-msgstr ""
+msgstr "Kreisā rīka uzstādījumi"
 
 msgid "Right tool options"
-msgstr ""
+msgstr "Labā rīka uzstādījumi"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Kreisā pikseļa indikātors"
 
 msgid "LEFT_INDIC_HT"
-msgstr ""
+msgstr "Attēlot kreisās peles pogas krāsu zīmēšanas laikā"
 
 msgid "RIGHT_INDIC_HT"
-msgstr ""
+msgstr "Attēlot labās peles pogas krāsu zīmēšanas laikā"
 
 msgid "Show tool icon"
-msgstr ""
+msgstr "Rādīt rīka ikonu"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Labā pikseļa indikātors"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Ota:"
 
 msgid "BRUSH_HT"
-msgstr ""
+msgstr "Izvēlēties otu"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Ota: Pikselis"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Ota: Aplis"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Ota: Pildīts aplis"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Pielāgota ota"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Otas izmērs:"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Otas krāsa no"
 
 msgid "COLORFROM_HT"
-msgstr ""
+msgstr "0: Krāsa no pašas otas, 100: no atzīmētās krāsas"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Aizpildīt laukumu:"
 
 msgid "Area of the same color"
-msgstr ""
+msgstr "Vienādas krāsas laukums"
 
 msgid "All pixels of the same color"
-msgstr ""
+msgstr "Visus pikseļus vienādā krāsā"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Izgaismot"
 
 msgid "Darken"
-msgstr ""
+msgstr "Aptumšot"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Daudzums:"
 
 msgid "LDAMOUNT_HT"
-msgstr ""
+msgstr "Apgaismojuma/ Aptumšojuma daudzmums"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Izvēlēties priekš:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Kreisā krāsa"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Labā krāsa"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Spoguļskats"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontāli"
 
 msgid "HORIZMIRROR_HT"
-msgstr ""
+msgstr "IIeslēgt horizontālo spoguļskata zīmēšanu"
 
 msgid "VERTMIRROR_HT"
-msgstr ""
+msgstr "Ieslēgt vertikālo spoguļskata zīmēšanu"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikāls"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Patreizējais kadrs:"
 
 msgid "Current frame: 1/1"
-msgstr ""
+msgstr "Patreizējais kadrs: 1/1"
 
 msgid "FIRSTFRAME_HT"
-msgstr ""
+msgstr "Pirmais kadrs\n"
+"(Ctrl+Home)"
 
 msgid "PREVIOUSFRAME_HT"
-msgstr ""
+msgstr "Iepriekšējais kadrs\n"
+"(Ctrl+Left)"
 
 msgid "PLAYBACKWARDS_HT"
-msgstr ""
+msgstr "Atskaņot animāciju atpakaļgaitā (no beigām uz sākumu)\n"
+"(F4)"
 
 msgid "PLAYFORWARD_HT"
-msgstr ""
+msgstr "Atskaņot animāciju uz priekšu (no sākuma uz beigām)\n"
+"(F5)"
 
 msgid "NEXTFRAME_HT"
-msgstr ""
+msgstr "Nākošais kadrs\n"
+"(Ctrl+Right)"
 
 msgid "LASTFRAME_HT"
-msgstr ""
+msgstr "Pēdējais kadrs\n"
+"(Ctrl+End)"
 
 msgid "FPS_HT"
-msgstr ""
+msgstr "Cik kadrus sekundē animāciju atskaņot?\n"
+"Lielāks kadru skaits atskaņos animāciju ātrāk."
 
 msgid "No loop"
-msgstr ""
+msgstr "Bez cilpošanas"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Riņķa cilpa"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping-pong cilpa"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Sīpola mizu skats:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Pagājušie kadri"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Nākošie kadri"
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Zili-Sarkanais režīms"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Pievienot jaunu kadru"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Noņemt kadru"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Klonēt kadru"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Pārvietot pa kreisi"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Pārvietoties pa labi"
 
 msgid "Layer"
-msgstr ""
+msgstr "Slānis"
 
 msgid "Layers"
-msgstr ""
+msgstr "Slāņi"
 
 msgid "LAYERNEW_HT"
-msgstr ""
+msgstr "Izveidot jaunu slāni"
 
 msgid "LAYERREMOVE_HT"
-msgstr ""
+msgstr "Noņemt aktuālo slāni"
 
 msgid "LAYERUP_HT"
-msgstr ""
+msgstr "Pārvietot aktuālo slāni uz augšu"
 
 msgid "LAYERDOWN_HT"
-msgstr ""
+msgstr "Pārvietot aktuālo slāni uz leju"
 
 msgid "LAYERCLONE_HT"
-msgstr ""
+msgstr "Klonēt aktuālo slāni"
 
 msgid "LAYERMERGE_HT"
-msgstr ""
+msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Necaurspīdīgums:"
 
 msgid "LAYERVISIBILITY_HT"
-msgstr ""
+msgstr "SLāņa redzamības slēdzis"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palete"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletes"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Pievienot jaunu paleti"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Rediģēt iezīmēto paleti"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Izvēlētis paleti"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Atcelt: Zīmēt"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Atkārtot: Zīmēt"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Atcelt: Taisnstūra iezīmēšanu"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Atkārtot: Taisnstūra atzīmēšanu"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Atcelt: Izmera maiņu"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Atkārtot: Izmēra maiņu"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Atcelt: Slāņa pievienošanu"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Atkārtot: Slāņa pievienošanu"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Atcelt: Slāņa noņemšanu"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Atkārtot: Slāņa noņemšanu"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Atcelt: Slāņu apvienošanu"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Atkārtot: Slāņu apvienošanu"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Atcelt: Slāņu secības maiņu"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Atkārtot: Slāņu secības maiņu"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Atcelt: Kadra pievienošanu"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Atkārtot: Kadra pievienošanu"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Atcelt: Kadra noņemšanu"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Atkārtot: Kadra noņemšanu"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Atcelt: Kadra secības maiņu"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Atkārtot: Kadra secības maiņu"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Atcelt: Pielāgotās otas dzēšanu"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Atkārtot: Pielāgotās otas dzēšanu"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Pārvietot vadlīniju"
 
 msgid "File saved"
-msgstr ""
+msgstr "Fails saglabāts"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fails eksportēts"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Jauna tukša palete"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importēt paleti"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Paletes nosaukums:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Krāsas nosaukums:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Izveidot jaunu tukšu paleti?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Kļūda: Paletei nepieciešams derīgs nosaukums."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Kļūda: Paletes nosaukums '%s' jau eksistē!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Nederīgs paletes fails!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Rediģēt paleti"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Labvēļi:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Izmaiņas"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platīna sponsors"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Zelta sponsors"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Platīna sponsora aizvietotājs"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Zelta sponsora aizvietotājs"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Vairāk nerādīt"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Ieņemt šo vietu!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Bildes uzstādījumi"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Noklusējuma platums:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Noklusējuma augstums:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Noklusējuma aizpildes krāsa:"
 
