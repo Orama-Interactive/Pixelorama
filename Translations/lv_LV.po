@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 07:18\n"
+"PO-Revision-Date: 2020-02-11 07:29\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -143,23 +143,24 @@ msgid "Export Sprite"
 msgstr "Eksportēt animāciju"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fails eksistē, pārrakstīt?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nevar ielādēd failu '%s'.\n"
+"Kļūdas kods: %s"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Mainīt izmēru:"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr ""
+msgstr "Eksportēt aktuālo kadru"
 
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr ""
+msgstr "Eksportēt visus kadrus atsevišķos failos"
 
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr ""
+msgstr "Eksportēt visus kadrus (vienā failā)"
 
 msgid "Columns"
 msgstr ""
@@ -312,37 +313,37 @@ msgid "French"
 msgstr ""
 
 msgid "German"
-msgstr ""
+msgstr "Vācu"
 
 msgid "Polish"
-msgstr ""
+msgstr "Poļu"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazīļu portugāļu"
 
 msgid "Russian"
-msgstr ""
+msgstr "Krievu"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Ķīniešu vienkāršotā"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Ķīniešu tradicionālā"
 
 msgid "Italian"
-msgstr ""
+msgstr "Itāļu"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spāņu"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Izstrādes komanda"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Vadošais programmētājs"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI dizaineris"
 
 msgid "GitHub Contributors"
 msgstr ""
