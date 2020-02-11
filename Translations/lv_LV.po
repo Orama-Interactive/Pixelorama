@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-02-11 07:29\n"
+"PO-Revision-Date: 2020-02-11 07:38\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -346,37 +346,46 @@ msgid "UI Designer"
 msgstr "UI dizaineris"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub līdzdalībnieks"
 
 msgid "Art by"
-msgstr ""
+msgstr "Mākslas darbu autors"
 
 msgid "untitled"
-msgstr ""
+msgstr "bez nosaukuma"
 
 msgid "imported"
-msgstr ""
+msgstr "importēts"
 
 msgid "copy"
-msgstr ""
+msgstr "kopēt"
 
 msgid "QUIT_LABEL"
-msgstr ""
+msgstr "Tiešām vēlies pārtraukt darbu ar Pixelorama?"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Lietderības rīki"
 
 msgid "RECTSELECT_HT"
-msgstr ""
+msgstr "Taisnstūra iezīmēšana\n\n"
+"R priekš kreisās peles pogas\n"
+"Alt + R priekš peles labās pogas\n\n"
+"Nospied Shift, lai pārvietotu saturu"
 
 msgid "COLORPICKER_HT"
-msgstr ""
+msgstr "Krāsu izvēlne\n"
+"Atzīmē krāsu no attēla pikseļa\n\n"
+"O priekš kreisās peles pogas\n"
+"Alt + O priekšlabās peles pogas"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Zīmēšanas rīki"
 
 msgid "PENCIL_HT"
-msgstr ""
+msgstr "Zīmulis\n\n"
+"P priekškreisās peles pogas\n"
+"Alt + P priekš labās peles pogas\n\n"
+"Turi Shift lai novilktu līniju"
 
 msgid "ERASER_HT"
 msgstr ""
