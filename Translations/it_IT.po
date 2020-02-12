@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-02-11 14:05\n"
+"PO-Revision-Date: 2020-02-12 00:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Ruota Immagine"
 
 msgid "Clear Selection"
 msgstr "Nessuna selezione"
@@ -147,7 +147,8 @@ msgstr "Il file esiste già, vuoi sovrascrivere?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Impossibile caricare il file '%s'.\n"
+"Codice di errore: %s"
 
 msgid "Resize:"
 msgstr "Ridimensiona:"
@@ -183,7 +184,7 @@ msgid "Interpolation:"
 msgstr "Interpolazione:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Più vicino"
 
 msgid "Bilinear"
 msgstr "Bilineare"
@@ -195,7 +196,7 @@ msgid "Trilinear"
 msgstr "Trilineare"
 
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 msgid "Language"
 msgstr "Lingua"
@@ -207,19 +208,19 @@ msgid "Guides & Grid"
 msgstr "Guide & Griglia"
 
 msgid "General Options"
-msgstr ""
+msgstr "Opzioni generali"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Zoom smussato"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sensibilità della pressione del tablet:"
 
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Influenza l'Alfa del Pennello"
 
 msgid "Language options"
 msgstr "Opzioni di lingua"
@@ -273,10 +274,10 @@ msgid "View Splash Screen"
 msgstr "Visualizza lo splash screen"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Tracciatore problemi"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Novità"
 
 msgid "About Pixelorama"
 msgstr "Informazioni su Pixelorama"
@@ -300,52 +301,52 @@ msgid "Donors"
 msgstr "Donatori"
 
 msgid "Translators"
-msgstr ""
+msgstr "Traduttori"
 
 msgid "English"
-msgstr ""
+msgstr "Inglese"
 
 msgid "Greek"
-msgstr ""
+msgstr "Greco"
 
 msgid "French"
-msgstr ""
+msgstr "Francese"
 
 msgid "German"
-msgstr ""
+msgstr "Tedesco"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polacco"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portoghese brasiliano"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russo"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Cinese semplificato"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Cinese Tradizionale"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lettone"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spagnolo"
 
 msgid "Development Team"
 msgstr "Team di sviluppo"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Programmatore capo"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Progettista UI"
 
 msgid "GitHub Contributors"
 msgstr "Contributori su GitHub"
@@ -491,13 +492,13 @@ msgid "LDAMOUNT_HT"
 msgstr "Quantità di Schiarimento/Scurimento"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Seleziona per:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Colore sinistro"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Colore destro"
 
 msgid "Mirroring"
 msgstr "Speculare"
@@ -549,16 +550,16 @@ msgstr "Quanti frame al secondo dovrebbe essere l'anteprima dell'animazione?\n"
 "Maggiori gli FPS, più veloce sarà l'animazione."
 
 msgid "No loop"
-msgstr ""
+msgstr "Nessun ciclo"
 
 msgid "Cycle loop"
 msgstr "Loop ciclico"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping-pong loop"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Buccia di Cipolla:"
 
 msgid "Past Frames"
 msgstr "Frame Passati"
@@ -744,10 +745,10 @@ msgid "Gold Sponsors"
 msgstr "Sponsor d'Oro"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Placeholder Sponsor Platinum"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Placeholder Sponsor Oro"
 
 msgid "Don't show again"
 msgstr "Non mostrare di nuovo"
