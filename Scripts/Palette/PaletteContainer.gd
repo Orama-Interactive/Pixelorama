@@ -150,7 +150,7 @@ func on_color_select(index : int) -> void:
 		Global.update_right_custom_brush()
 
 func _load_palettes() -> void:
-	palettes_path = Global.root_directory.plus_file(palettes_path)
+	palettes_path = Global.root_directory.plus_file("Palettes")
 	var dir := Directory.new()
 	dir.open(Global.root_directory)
 	if not dir.dir_exists(palettes_path):
