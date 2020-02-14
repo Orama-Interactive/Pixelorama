@@ -7,11 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
-- Tablet pen pressure sensitivity!
 - Crowdin integration for contributing translations!
 - Spanish translation - thanks to azagaya & Lilly And!
 - Chinese Simplified translation - thanks to Chenxu Wang!
-- Latvian translation - thanks to nezvers!
+- Latvian translation - thanks to Agnis Aldiņš (NeZvers)!
 - Translators can now be seen in the About window.
 - It is now possible to remove custom brushes with the middle mouse button.
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
@@ -34,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Possibly fixed crashes with motion drawing and undo/redoing.
 - Fixed bug (which also caused crashes sometimes) when generating an outline inside the image and it was going outside the canvas' borders.
 - Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.
+- Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
 
 ## [v0.6.1] - 13-01-2020
 

@@ -51,6 +51,7 @@ margin_bottom = 66.0
 [node name="General Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
 margin_right = 334.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 0, 28 )
 text = "General Options"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
@@ -62,6 +63,7 @@ pressed = true
 text = "Smooth Zoom"
 
 [node name="PressureSentivity" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
+visible = false
 margin_top = 46.0
 margin_right = 334.0
 margin_bottom = 66.0

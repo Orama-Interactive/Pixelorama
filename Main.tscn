@@ -457,17 +457,19 @@ align = 1
 
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 19.0
-margin_right = 208.0
+margin_right = 119.0
 margin_bottom = 35.0
 hint_tooltip = "LEFT_INDIC_HT"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
 pressed = true
 text = "Left pixel indicator"
 
 [node name="LeftToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 39.0
-margin_right = 208.0
+margin_right = 100.0
 margin_bottom = 55.0
+size_flags_horizontal = 0
 pressed = true
 text = "Show tool icon"
 
@@ -703,16 +705,18 @@ align = 1
 
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 19.0
-margin_right = 208.0
+margin_right = 127.0
 margin_bottom = 35.0
 hint_tooltip = "RIGHT_INDIC_HT"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
 text = "Right pixel indicator"
 
 [node name="RightToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 39.0
-margin_right = 208.0
+margin_right = 100.0
 margin_bottom = 55.0
+size_flags_horizontal = 0
 pressed = true
 text = "Show tool icon"
 

@@ -1,6 +1,6 @@
 extends Node
 
-enum Pressure_Sensitivity {NONE, ALPHA, SIZE}
+enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 
 var root_directory := "."
@@ -19,7 +19,7 @@ var has_focus := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
-var pressure_sensitivity_mode = Pressure_Sensitivity.ALPHA
+var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture
