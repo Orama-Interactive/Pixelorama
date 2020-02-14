@@ -200,8 +200,8 @@ func _input(event : InputEvent) -> void:
 	if Engine.get_version_info().major == 3 && Engine.get_version_info().minor >= 2:
 		if event is InputEventMouseMotion:
 			pen_pressure = event.pressure
-			if pen_pressure == 0: # Aka drawing with mouse
-				pen_pressure = 1
+			if event.pressure == 0.0: # Drawing with mouse
+				pen_pressure = 1 # This causes problems with tablets though
 
 	sprite_changed_this_frame = false
 	var mouse_pos := current_pixel
@@ -577,7 +577,7 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
 			if current_action == "Pencil":
 				color.a *= pen_pressure
-			elif current_action == "Eraser":
+			elif current_action == "Eraser": # This is not working
 				color.a *= (1.0 - pen_pressure)
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
@@ -650,8 +650,11 @@ func draw_brush(pos : Vector2, color : Color, current_mouse_button : String, cur
 									else: # Darken
 										_c = current_pixel_color.darkened(ld_amount)
 
-							mouse_press_pixels.append(pos_floored)
-							mouse_press_pressure_values.append(pen_pressure)
+							if saved_pixel_index == -1:
+								mouse_press_pixels.append(pos_floored)
+								mouse_press_pressure_values.append(pen_pressure)
+							else:
+								mouse_press_pressure_values[saved_pixel_index] = pen_pressure
 							layers[current_layer_index][0].set_pixel(cur_pos_x, cur_pos_y, _c)
 							sprite_changed_this_frame = true
 
@@ -883,8 +886,11 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
 		if color.a > 0 && color.a < 1:
 			color = blend_colors(color, sprite.get_pixelv(pos))
 
-		mouse_press_pixels.append(pos)
-		mouse_press_pressure_values.append(pen_pressure)
+		if saved_pixel_index == -1:
+			mouse_press_pixels.append(pos)
+			mouse_press_pressure_values.append(pen_pressure)
+		else:
+			mouse_press_pressure_values[saved_pixel_index] = pen_pressure
 		sprite.set_pixelv(pos, color)
 
 func blend_colors(color_1 : Color, color_2 : Color) -> Color:
