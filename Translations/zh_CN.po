@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-02-11 14:05\n"
+"PO-Revision-Date: 2020-02-15 13:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -117,6 +117,9 @@ msgstr "显示标尺"
 
 msgid "Show Guides"
 msgstr "显示指南"
+
+msgid "Show Animation Timeline"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "使用颜色填充:"
