@@ -101,6 +101,8 @@ var draw_grid := false
 var show_rulers := true
 # warning-ignore:unused_class_variable
 var show_guides := true
+# warning-ignore:unused_class_variable
+var show_animation_timeline := true
 
 # Onion skinning options
 # warning-ignore:unused_class_variable
