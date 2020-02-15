@@ -165,6 +165,9 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
+	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton.get_picker().presets_visible = false
+	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton.get_picker().presets_visible = false
+
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 	if not Global.config_cache.get_value("preferences", "startup"):

@@ -11,6 +11,9 @@ onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/ScrollContainer/Ed
 onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit
 onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
 
+func _ready() -> void:
+	$VBoxContainer/HBoxContainer/EditPaletteColorPicker.presets_visible = false
+
 func open(palette : String) -> void:
 	current_palette = palette
 	palette_name_edit.text = current_palette
