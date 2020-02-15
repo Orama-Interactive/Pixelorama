@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
 - Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
 - You can now drag and drop (or right click and open with) image and .pxo files in Pixelorama.
+- You can now hide the animation timeline - Thanks to YeldhamDev!
 
 ### Changed
 - Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
@@ -27,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - You can now toggle the visibility of hidden items on and off in the file dialogs. (Added automatically because of the Godot 3.2 update)
 - The language buttons in the preferences have their localized names in their hint tooltips. For example, if you hover over the "English" button while the language is Greek, the hint tooltip will be "Αγγλικά", which is the Greek word for English.
 - Translation updates.
+- The presets in the ColorPickers are now hidden - Thanks to YeldhamDev!
 
 ### Fixed
 - Delay the splash screen popup so it shows properly centered - Thanks to YeldhamDev

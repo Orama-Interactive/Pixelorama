@@ -109,6 +109,9 @@ msgstr ""
 msgid "Show Guides"
 msgstr ""
 
+msgid "Show Animation Timeline"
+msgstr ""
+
 msgid "Fill with color:"
 msgstr ""
 
