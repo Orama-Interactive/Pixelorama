@@ -547,6 +547,7 @@ margin_bottom = 151.0
 margin_right = 208.0
 margin_bottom = 15.0
 hint_tooltip = "COLORFROM_HT"
+mouse_filter = 1
 text = "Brush color from"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
@@ -794,6 +795,7 @@ margin_bottom = 151.0
 margin_right = 208.0
 margin_bottom = 15.0
 hint_tooltip = "COLORFROM_HT"
+mouse_filter = 1
 text = "Brush color from"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
