@@ -59,7 +59,8 @@ func _ready() -> void:
 		"Tile Mode" : KEY_MASK_CMD + KEY_T,
 		"Show Grid" : KEY_MASK_CMD + KEY_G,
 		"Show Rulers" : KEY_MASK_CMD + KEY_R,
-		"Show Guides" : KEY_MASK_CMD + KEY_F
+		"Show Guides" : KEY_MASK_CMD + KEY_F,
+		"Show Animation Timeline" : 0
 		}
 	var image_menu_items := {
 		"Scale Image" : 0,
@@ -116,6 +117,7 @@ func _ready() -> void:
 		i += 1
 	view_menu.set_item_checked(2, true) #Show Rulers
 	view_menu.set_item_checked(3, true) #Show Guides
+	view_menu.set_item_checked(4, true) #Show Animation Timeline
 	view_menu.hide_on_checkable_item_selection = false
 	i = 0
 	for item in image_menu_items.keys():
@@ -274,6 +276,10 @@ func view_menu_id_pressed(id : int) -> void:
 				for guide in canvas.get_children():
 					if guide is Guide:
 						guide.visible = Global.show_guides
+		4: # Show animation timeline
+			Global.show_animation_timeline = !Global.show_animation_timeline
+			view_menu.set_item_checked(4, Global.show_animation_timeline)
+			$MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline.visible = Global.show_animation_timeline
 
 	Global.canvas.update()
 
