@@ -1,5 +1,8 @@
 extends ConfirmationDialog
 
+func _ready() -> void:
+	$OptionsContainer/OutlineColor.get_picker().presets_visible = false
+
 func _on_OutlineDialog_confirmed() -> void:
 	var outline_color : Color = $OptionsContainer/OutlineColor.color
 	var thickness : int = $OptionsContainer/ThickValue.value

@@ -82,6 +82,10 @@ func _ready() -> void:
 		Global.default_fill_color = fill_color
 		default_fill_color.color = Global.default_fill_color
 
+	$"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor".get_picker().presets_visible = false
+	$"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor".get_picker().presets_visible = false
+	$HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor.get_picker().presets_visible = false
+
 func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	var root := tree.create_item()
 	var general_button := tree.create_item(root)
