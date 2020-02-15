@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-02-12 00:59\n"
+"PO-Revision-Date: 2020-02-15 13:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -117,6 +117,9 @@ msgstr "Mostra i righelli"
 
 msgid "Show Guides"
 msgstr "Mostra le guide"
+
+msgid "Show Animation Timeline"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Riempi con il colore:"
