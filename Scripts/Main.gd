@@ -115,9 +115,9 @@ func _ready() -> void:
 	for item in view_menu_items.keys():
 		view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
-	view_menu.set_item_checked(2, true) #Show Rulers
-	view_menu.set_item_checked(3, true) #Show Guides
-	view_menu.set_item_checked(4, true) #Show Animation Timeline
+	view_menu.set_item_checked(2, true) # Show Rulers
+	view_menu.set_item_checked(3, true) # Show Guides
+	view_menu.set_item_checked(4, true) # Show Animation Timeline
 	view_menu.hide_on_checkable_item_selection = false
 	i = 0
 	for item in image_menu_items.keys():
@@ -282,7 +282,7 @@ func view_menu_id_pressed(id : int) -> void:
 		4: # Show animation timeline
 			Global.show_animation_timeline = !Global.show_animation_timeline
 			view_menu.set_item_checked(4, Global.show_animation_timeline)
-			$MenuAndUI/UI/CanvasAndTimeline/AnimationTimeline.visible = Global.show_animation_timeline
+			Global.animation_timeline.visible = Global.show_animation_timeline
 
 	Global.canvas.update()
 
