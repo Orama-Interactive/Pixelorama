@@ -472,6 +472,12 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 	file.close()
 
+	current_save_path = path
+	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
+	$ExportSprites.current_path = $ExportSprites.current_export_path
+	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
+	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
+
 	OS.set_window_title(path.get_file() + " - Pixelorama")
 
 
@@ -483,7 +489,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
-	if err == 0:
+	if err == OK:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
 		for canvas in Global.canvases: # Store frames
 			file.store_line("--")
