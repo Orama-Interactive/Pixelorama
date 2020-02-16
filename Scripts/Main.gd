@@ -473,6 +473,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	file.close()
 
 	current_save_path = path
+	$SaveSprite.current_path = path
 	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
 	$ExportSprites.current_path = $ExportSprites.current_export_path
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
