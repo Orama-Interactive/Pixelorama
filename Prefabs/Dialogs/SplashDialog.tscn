@@ -165,21 +165,48 @@ margin_right = 142.0
 margin_bottom = 260.0
 rect_min_size = Vector2( 0, 260 )
 
-[node name="Label2" type="Label" parent="Contents/PatronsArtNews/ChangelogContainer/ChangelogScroll"]
+[node name="Label" type="Label" parent="Contents/PatronsArtNews/ChangelogContainer/ChangelogScroll"]
 margin_right = 142.0
 margin_bottom = 711.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Added
-- Palettes. You can choose default ones or make your own!
-- Multiple theme support to better match your style.
-- Image menu with new features (Outlines, Color invert, desaturation) for more editing power.
-- Added a new splash screen window dialog that appears when Pixelorama loads. Patrons with the rank of Visionaries and above can participate in splash screen artwork contests for every version! 
-- Added a better circle, filled circle and random brushes!
-- Pixelorama goes worldwide with even more translations!
-- Added a layer opacity slider, that lets you change the alpha values of layers.
-- Importing and exporting matrix spritesheets is now possible.
-- Straight lines now have constrained angles if you press Ctrl. With a step of 15 angles."
+
+- Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
+- Crowdin integration for contributing translations!
+- Spanish translation - thanks to azagaya & Lilly And!
+- Chinese Simplified translation - thanks to Chenxu Wang!
+- Latvian translation - thanks to Agnis Aldiņš (NeZvers)!
+- Translators can now be seen in the About window.
+- It is now possible to remove custom brushes with the middle mouse button.
+- Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
+- Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
+- You can now drag and drop (or right click and open with) image and .pxo files in Pixelorama.
+- You can now hide the animation timeline - Thanks to YeldhamDev!
+
+Changed
+
+- Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
+- Replaced some OS alerts with a custom made error dialog.
+- Made the zooming smoother, is toggleable in Preferences whether to keep the new zooming or the old one.
+- The camera now zooms at the mouse's position.
+- Made the \"X\" button on the custom brushes a little smaller.
+- The color picker will now have a small white triangle on the top left of the color preview if at least one of its RGB values are above 1 in Raw mode. (Added automatically because of the Godot 3.2 update)
+- You can now toggle the visibility of hidden items on and off in the file dialogs. (Added automatically because of the Godot 3.2 update)
+- The language buttons in the preferences have their localized names in their hint tooltips. For example, if you hover over the \"English\" button while the language is Greek, the hint tooltip will be \"Αγγλικά\", which is the Greek word for English.
+- Translation updates.
+- The presets in the ColorPickers are now hidden - Thanks to YeldhamDev!
+- When opening a project (.pxo file), the save path is being set to the opened project's path - Thanks to YeldhamDev!
+
+Fixed
+
+- Delay the splash screen popup so it shows properly centered - Thanks to YeldhamDev!
+- Possibly fixed crashes with motion drawing and undo/redoing.
+- Fixed bug (which also caused crashes sometimes) when generating an outline inside the image and it was going outside the canvas' borders.
+- Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.
+- Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
+- Fixed ruler markings cutting off before they should - Thanks to YeldhamDev!
+- Fixed bug where resizing the image on export was not working on Godot 3.2 - Issue #161"
 autowrap = true
 
 [node name="SpacerControl2" type="Control" parent="Contents/PatronsArtNews"]
