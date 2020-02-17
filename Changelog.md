@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [v0.6.2] - Unreleased
+## [v0.6.2] - 17-02-2020
 
 ### Added
 - Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
@@ -29,13 +29,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The language buttons in the preferences have their localized names in their hint tooltips. For example, if you hover over the "English" button while the language is Greek, the hint tooltip will be "Αγγλικά", which is the Greek word for English.
 - Translation updates.
 - The presets in the ColorPickers are now hidden - Thanks to YeldhamDev!
+- When opening a project (.pxo file), the save path is being set to the opened project's path - Thanks to YeldhamDev!
 
 ### Fixed
-- Delay the splash screen popup so it shows properly centered - Thanks to YeldhamDev
+- Delay the splash screen popup so it shows properly centered - Thanks to YeldhamDev!
 - Possibly fixed crashes with motion drawing and undo/redoing.
 - Fixed bug (which also caused crashes sometimes) when generating an outline inside the image and it was going outside the canvas' borders.
 - Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.
 - Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
+- Fixed ruler markings cutting off before they should - Thanks to YeldhamDev!
+- Fixed bug where resizing the image on export was not working on Godot 3.2 - Issue #161
 
 ## [v0.6.1] - 13-01-2020
 
