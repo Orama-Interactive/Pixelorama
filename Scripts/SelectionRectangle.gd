@@ -47,6 +47,7 @@ func _process(delta : float) -> void:
 			orig_x = start_pos.x - mouse_pos_floored.x
 			orig_y = start_pos.y - mouse_pos_floored.y
 			if move_pixels:
+				img.unlock()
 				img.resize(polygon[2].x - polygon[0].x, polygon[2].y - polygon[0].y, 0)
 				img.lock()
 				for i in range(Global.selected_pixels.size()):

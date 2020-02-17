@@ -38,7 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.
 - Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
 - Fixed ruler markings cutting off before they should - Thanks to YeldhamDev!
-- Fixed bug where resizing the image on export was not working on Godot 3.2 - Issue #161
+- Fixed bug where resizing the image on export and moving selection content were not working on Godot 3.2 - Issues #161 and #162
 
 ## [v0.6.1] - 13-01-2020
 
