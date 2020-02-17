@@ -88,6 +88,7 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 		layer[0].lock()
 
 	if resize != 100:
+		whole_image.unlock()
 		whole_image.resize(whole_image.get_size().x * resize / 100, whole_image.get_size().y * resize / 100, interpolation)
 	var err = whole_image.save_png(path)
 	if err != OK:
