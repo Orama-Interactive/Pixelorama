@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-02-11 14:05\n"
+"PO-Revision-Date: 2020-02-16 15:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "擷取部分圖片"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "旋轉圖片"
 
 msgid "Clear Selection"
 msgstr "清除選取區塊"
@@ -117,6 +117,9 @@ msgstr "顯示尺規"
 
 msgid "Show Guides"
 msgstr "顯示輔助線"
+
+msgid "Show Animation Timeline"
+msgstr "顯示動畫時間線"
 
 msgid "Fill with color:"
 msgstr "填滿"
@@ -147,7 +150,7 @@ msgstr "有同名檔案，要覆蓋掉嗎"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "無法加載 '%s'. Error code: %s"
 
 msgid "Resize:"
 msgstr "調整尺寸"
@@ -195,7 +198,7 @@ msgid "Trilinear"
 msgstr "三線性"
 
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 msgid "Language"
 msgstr "語言"
@@ -207,19 +210,19 @@ msgid "Guides & Grid"
 msgstr "輔助線與格線"
 
 msgid "General Options"
-msgstr ""
+msgstr "一般選項"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "平滑縮放"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "繪圖板壓力:"
 
 msgid "None"
-msgstr ""
+msgstr "無"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "影響畫筆Alpha"
 
 msgid "Language options"
 msgstr "語言"
@@ -324,7 +327,7 @@ msgid "Russian"
 msgstr "俄文"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "簡體中文"
 
 msgid "Chinese Traditional"
 msgstr "繁體中文"
@@ -333,7 +336,7 @@ msgid "Italian"
 msgstr "義大利文"
 
 msgid "Latvian"
-msgstr ""
+msgstr "拉脫維亞文"
 
 msgid "Spanish"
 msgstr "西班牙文"
