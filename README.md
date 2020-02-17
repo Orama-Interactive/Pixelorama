@@ -30,7 +30,7 @@
 ## Dependencies
 Pixelorama uses Godot 3.2. As of right now, all of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
-## Current features as of version v0.6.1:
+## Current features as of version v0.6.2:
 
 - Choosing between 6 tools – pencil, eraser, fill bucket, lighten/darken, color picker and rectangle select – and mapping them to both of your left and right mouse buttons.
 - Are you an animator? Then you've come to the right place! Pixelorama has its own animation timeline with Onion Skinning just for you!
@@ -52,8 +52,8 @@ Pixelorama uses Godot 3.2. As of right now, all of the code is written using GDS
 - Keyboard shortcuts! We're pretty sure this is a lifesaver for most of you.
 - Rulers and guides!
 - Creating a new canvas with a size of your choosing.
-- Scale, crop, flip, color invert and desaturate your images!
-- English, Greek, German, French, Polish, Brazilian Portuguese, Russian, Traditional Chinese and Italian localization support!
+- Scale, crop, rotate, flip, color invert and desaturate your images!
+- English, Greek, German, French, Polish, Brazilian Portuguese, Russian, Traditional and Simplified Chinese, Italian, Spanish and Latvian localization support!
 
 Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
 Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
