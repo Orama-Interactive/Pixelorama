@@ -143,6 +143,7 @@ func save_spritesheet() -> void:
 			layer[0].lock()
 
 	if resize != 100:
+		whole_image.unlock()
 		whole_image.resize(width * resize / 100, height * resize / 100, interpolation)
 	var err = whole_image.save_png(current_export_path)
 	if err != OK:
