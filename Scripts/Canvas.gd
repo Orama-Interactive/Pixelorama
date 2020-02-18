@@ -130,12 +130,12 @@ func _draw() -> void:
 	if point_in_rectangle(mouse_pos, location, location + size):
 		mouse_pos = mouse_pos.floor()
 		if Global.left_square_indicator_visible && Global.can_draw:
-			if Global.current_left_brush_type == Global.BRUSH_TYPES.PIXEL || Global.current_left_tool == "LightenDarken":
+			if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == "LightenDarken":
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
 					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-			elif Global.current_left_brush_type == Global.BRUSH_TYPES.CIRCLE || Global.current_left_brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
+			elif Global.current_left_brush_type == Global.Brush_Types.CIRCLE || Global.current_left_brush_type == Global.Brush_Types.FILLED_CIRCLE:
 				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
 					draw_set_transform(mouse_pos, rotation, scale)
 					for rect in Global.left_circle_points:
@@ -148,12 +148,12 @@ func _draw() -> void:
 					draw_texture(Global.custom_left_brush_texture, dst)
 
 		if Global.right_square_indicator_visible && Global.can_draw:
-			if Global.current_right_brush_type == Global.BRUSH_TYPES.PIXEL || Global.current_right_tool == "LightenDarken":
+			if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == "LightenDarken":
 				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
 					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
 					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-			elif Global.current_right_brush_type == Global.BRUSH_TYPES.CIRCLE || Global.current_right_brush_type == Global.BRUSH_TYPES.FILLED_CIRCLE:
+			elif Global.current_right_brush_type == Global.Brush_Types.CIRCLE || Global.current_right_brush_type == Global.Brush_Types.FILLED_CIRCLE:
 				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
 					draw_set_transform(mouse_pos, rotation, scale)
 					for rect in Global.right_circle_points:
@@ -634,7 +634,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 						var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
 						# Don't draw the same pixel over and over and don't re-lighten/darken it
-						var current_pixel_color : Color = layers[Global.current_layer][0].get_pixel(cur_pos_x, cur_pos_y)
+						var current_pixel_color : Color = sprite.get_pixel(cur_pos_x, cur_pos_y)
 						var _c := color
 						if current_action == "Pencil" && color.a < 1:
 							_c = blend_colors(color, current_pixel_color)
@@ -654,14 +654,14 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 								mouse_press_pressure_values.append(pen_pressure)
 							else:
 								mouse_press_pressure_values[saved_pixel_index] = pen_pressure
-							layers[Global.current_layer][0].set_pixel(cur_pos_x, cur_pos_y, _c)
+							sprite.set_pixel(cur_pos_x, cur_pos_y, _c)
 							sprite_changed_this_frame = true
 
 							# Handle mirroring
 							var mirror_x := east_limit + west_limit - cur_pos_x - 1
 							var mirror_y := south_limit + north_limit - cur_pos_y - 1
 							if horizontal_mirror:
-								current_pixel_color = layers[Global.current_layer][0].get_pixel(mirror_x, cur_pos_y)
+								current_pixel_color = sprite.get_pixel(mirror_x, cur_pos_y)
 								if current_pixel_color != _c: # don't draw the same pixel over and over
 									if current_action == "LightenDarken":
 										if ld == 0: # Lighten
@@ -671,11 +671,11 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 									mouse_press_pixels.append(pos_floored)
 									mouse_press_pressure_values.append(pen_pressure)
-									layers[Global.current_layer][0].set_pixel(mirror_x, cur_pos_y, _c)
+									sprite.set_pixel(mirror_x, cur_pos_y, _c)
 									sprite_changed_this_frame = true
-							
-              if vertical_mirror:
-								current_pixel_color = layers[Global.current_layer][0].get_pixel(cur_pos_x, mirror_y)
+
+							if vertical_mirror:
+								current_pixel_color = sprite.get_pixel(cur_pos_x, mirror_y)
 								if current_pixel_color != _c: # don't draw the same pixel over and over
 									if current_action == "LightenDarken":
 										if ld == 0: # Lighten
@@ -684,11 +684,11 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 											_c = current_pixel_color.darkened(ld_amount)
 									mouse_press_pixels.append(pos_floored)
 									mouse_press_pressure_values.append(pen_pressure)
-									layers[Global.current_layer][0].set_pixel(cur_pos_x, mirror_y, _c)
+									sprite.set_pixel(cur_pos_x, mirror_y, _c)
 									sprite_changed_this_frame = true
-							
-              if horizontal_mirror && vertical_mirror:
-								current_pixel_color = layers[Global.current_layer][0].get_pixel(mirror_x, mirror_y)
+
+							if horizontal_mirror && vertical_mirror:
+								current_pixel_color = sprite.get_pixel(mirror_x, mirror_y)
 								if current_pixel_color != _c: # don't draw the same pixel over and over
 									if current_action == "LightenDarken":
 										if ld == 0: # Lighten
@@ -701,7 +701,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 									sprite.set_pixel(mirror_x, mirror_y, _c)
 									sprite_changed_this_frame = true
 
-		elif brush_type == Global.BRUSH_TYPES.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
+		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
 			plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			# Handle mirroring
