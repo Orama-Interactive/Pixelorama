@@ -85,9 +85,12 @@ func _draw() -> void:
 			color = Color.white
 		for i in range(1, Global.onion_skinning_past_rate + 1):
 			if Global.current_frame >= i:
+				var layer_i := 0
 				for layer in Global.canvases[Global.current_frame - i].layers:
-					color.a = 0.6/i
-					draw_texture(layer[1], location, color)
+					if Global.layers[layer_i][1]: # If it's visible
+						color.a = 0.6 / i
+						draw_texture(layer[1], location, color)
+					layer_i += 1
 
 	# Future
 	if Global.onion_skinning_future_rate > 0:
@@ -98,9 +101,12 @@ func _draw() -> void:
 			color = Color.white
 		for i in range(1, Global.onion_skinning_future_rate + 1):
 			if Global.current_frame < Global.canvases.size() - i:
+				var layer_i := 0
 				for layer in Global.canvases[Global.current_frame + i].layers:
-					color.a = 0.6/i
-					draw_texture(layer[1], location, color)
+					if Global.layers[layer_i][1]: # If it's visible
+						color.a = 0.6 / i
+						draw_texture(layer[1], location, color)
+					layer_i += 1
 
 	# Draw current frame layers
 	for i in range(layers.size()):
