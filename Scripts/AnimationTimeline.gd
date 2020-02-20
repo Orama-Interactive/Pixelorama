@@ -143,16 +143,9 @@ func _on_BlueRedMode_toggled(button_pressed) -> void:
 # Layer buttons
 
 func add_layer(is_new := true) -> void:
-	var new_layer := Image.new()
 	var layer_name = null
-	if is_new:
-		new_layer.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
-	else: # clone layer
-		new_layer.copy_from(Global.canvas.layers[Global.current_layer][0])
+	if !is_new: # clone layer
 		layer_name = Global.layers[Global.current_layer][1] + " (" + tr("copy") + ")"
-	new_layer.lock()
-	var new_layer_tex := ImageTexture.new()
-	new_layer_tex.create_from_image(new_layer, 0)
 
 	var new_layers : Array = Global.layers.duplicate()
 
@@ -165,6 +158,16 @@ func add_layer(is_new := true) -> void:
 	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 
 	for c in Global.canvases:
+		var new_layer := Image.new()
+		if is_new:
+			new_layer.create(c.size.x, c.size.y, false, Image.FORMAT_RGBA8)
+		else: # clone layer
+			new_layer.copy_from(c.layers[Global.current_layer][0])
+
+		new_layer.lock()
+		var new_layer_tex := ImageTexture.new()
+		new_layer_tex.create_from_image(new_layer, 0)
+
 		var new_canvas_layers : Array = c.layers.duplicate()
 		# Store [Image, ImageTexture, Opacity]
 		new_canvas_layers.append([new_layer, new_layer_tex, 1])
