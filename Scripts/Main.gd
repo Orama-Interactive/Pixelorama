@@ -8,6 +8,7 @@ var tools := []
 var redone := false
 var previous_left_color := Color.black
 var previous_right_color := Color.white
+var SaveButton : Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -59,8 +60,7 @@ func _ready() -> void:
 		"Tile Mode" : KEY_MASK_CMD + KEY_T,
 		"Show Grid" : KEY_MASK_CMD + KEY_G,
 		"Show Rulers" : KEY_MASK_CMD + KEY_R,
-		"Show Guides" : KEY_MASK_CMD + KEY_F,
-		"Show Animation Timeline" : 0
+		"Show Guides" : KEY_MASK_CMD + KEY_F
 		}
 	var image_menu_items := {
 		"Scale Image" : 0,
@@ -115,9 +115,8 @@ func _ready() -> void:
 	for item in view_menu_items.keys():
 		view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
-	view_menu.set_item_checked(2, true) # Show Rulers
-	view_menu.set_item_checked(3, true) # Show Guides
-	view_menu.set_item_checked(4, true) # Show Animation Timeline
+	view_menu.set_item_checked(2, true) #Show Rulers
+	view_menu.set_item_checked(3, true) #Show Guides
 	view_menu.hide_on_checkable_item_selection = false
 	i = 0
 	for item in image_menu_items.keys():
@@ -167,9 +166,6 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
-	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton.get_picker().presets_visible = false
-	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton.get_picker().presets_visible = false
-
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 	if not Global.config_cache.get_value("preferences", "startup"):
@@ -201,6 +197,8 @@ func _input(event : InputEvent) -> void:
 
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
+		if !Global.saved && !$QuitDialog.visible:
+			SaveButton = $QuitDialog.add_button("Save", false, "Save")
 		$QuitDialog.call_deferred("popup_centered")
 		Global.can_draw = false
 
@@ -236,6 +234,8 @@ func file_menu_id_pressed(id : int) -> void:
 			$ExportSprites.popup_centered()
 			Global.can_draw = false
 		7: # Quit
+			if !Global.saved && !$QuitDialog.visible:
+				SaveButton = $QuitDialog.add_button("Save", false, "Save")
 			$QuitDialog.popup_centered()
 			Global.can_draw = false
 
@@ -279,10 +279,6 @@ func view_menu_id_pressed(id : int) -> void:
 				for guide in canvas.get_children():
 					if guide is Guide:
 						guide.visible = Global.show_guides
-		4: # Show animation timeline
-			Global.show_animation_timeline = !Global.show_animation_timeline
-			view_menu.set_item_checked(4, Global.show_animation_timeline)
-			Global.animation_timeline.visible = Global.show_animation_timeline
 
 	Global.canvas.update()
 
@@ -375,7 +371,7 @@ func help_menu_id_pressed(id : int) -> void:
 		1: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		2: # Changelog
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v062---17-02-2020")
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v061---13-01-2020")
 		3: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
@@ -472,13 +468,6 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 	file.close()
 
-	current_save_path = path
-	$SaveSprite.current_path = path
-	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
-	$ExportSprites.current_path = $ExportSprites.current_export_path
-	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
-
 	OS.set_window_title(path.get_file() + " - Pixelorama")
 
 
@@ -490,7 +479,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
-	if err == OK:
+	if err == 0:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
 		for canvas in Global.canvases: # Store frames
 			file.store_line("--")
@@ -538,6 +527,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 			file.store_buffer(brush.get_data())
 		file.store_line("END_BRUSHES")
 	file.close()
+	Global.saved = true
 	Global.notification_label("File saved")
 
 func clear_canvases() -> void:
@@ -855,3 +845,11 @@ func _on_QuitDialog_confirmed() -> void:
 
 	get_tree().quit()
 
+func _on_QuitDialog_custom_action(action):
+	if action == "Save":
+		$SaveSprite.popup_centered()
+		Global.can_draw = false
+
+func _on_QuitDialog_popup_hide():
+	if !Global.saved:
+		SaveButton.queue_free()
