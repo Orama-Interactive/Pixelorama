@@ -9,6 +9,7 @@ var config_cache := ConfigFile.new()
 var loaded_locales : Array
 var undo_redo : UndoRedo
 var undos := 0 #The number of times we added undo properties
+var saved := false #Checks if the user has saved
 
 # Canvas related stuff
 var current_frame := 0 setget frame_changed
