@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-02-15 15:08\n"
+"PO-Revision-Date: 2020-02-22 22:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -366,8 +366,20 @@ msgstr "importato"
 msgid "copy"
 msgstr "copia"
 
-msgid "QUIT_LABEL"
-msgstr "Sei sicuro di voler uscire da Pixelorama?"
+msgid "Are you sure you want to exit Pixelorama?"
+msgstr ""
+
+msgid "Save before exiting?"
+msgstr ""
+
+msgid "You have unsaved progress. How do you wish to proceed?"
+msgstr ""
+
+msgid "Save & Exit"
+msgstr ""
+
+msgid "Exit without saving"
+msgstr ""
 
 msgid "Utility Tools"
 msgstr "Strumenti di utilità"
