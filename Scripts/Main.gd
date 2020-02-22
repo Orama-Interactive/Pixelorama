@@ -543,7 +543,10 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 			file.store_buffer(brush.get_data())
 		file.store_line("END_BRUSHES")
 	file.close()
-	Global.saved = true
+	if !Global.saved:
+		Global.saved = true
+		Global.window_title = Global.window_title.rstrip("(*)")
+
 	Global.notification_label("File saved")
 
 func clear_canvases() -> void:

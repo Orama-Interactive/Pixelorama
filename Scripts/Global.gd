@@ -427,7 +427,9 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
-	saved = false
+	if saved:
+		saved = false
+		self.window_title = window_title + "(*)"
 	notification_label("Undo: %s" % action_name)
 
 
@@ -468,7 +470,9 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
-	saved = false
+	if saved:
+		saved = false
+		self.window_title = window_title + "(*)"
 	if control.redone:
 		notification_label("Redo: %s" % action_name)
 
