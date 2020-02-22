@@ -6,6 +6,7 @@ var file_menu : PopupMenu
 var view_menu : PopupMenu
 var tools := []
 var redone := false
+var is_quitting_on_save := false
 var previous_left_color := Color.black
 var previous_right_color := Color.white
 var SaveButton : Button
@@ -202,8 +203,16 @@ func _input(event : InputEvent) -> void:
 
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
-		if !Global.saved && !$QuitDialog.visible:
-			SaveButton = $QuitDialog.add_button("Save", false, "Save")
+		if !$QuitDialog.visible:
+			if Global.saved:
+				$QuitDialog.window_title = "Please Confirm..."
+				$QuitDialog.dialog_text = "Are you sure you want to exit Pixelorama?"
+				$QuitDialog.get_ok().text = "OK"
+			else:
+				$QuitDialog.window_title = "Save before exiting?"
+				$QuitDialog.dialog_text = "You have unsaved progress. How do you wish to proceed?"
+				SaveButton = $QuitDialog.add_button("Save & Exit", false, "Save")
+				$QuitDialog.get_ok().text = "Exit without saving"
 		$QuitDialog.call_deferred("popup_centered")
 		Global.can_draw = false
 
@@ -217,12 +226,14 @@ func file_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 			opensprite_file_selected = false
 		2: # Save
+			is_quitting_on_save = false
 			if current_save_path == "":
 				$SaveSprite.popup_centered()
 				Global.can_draw = false
 			else:
 				_on_SaveSprite_file_selected(current_save_path)
 		3: # Save as
+			is_quitting_on_save = false
 			$SaveSprite.popup_centered()
 			Global.can_draw = false
 		4: # Import
@@ -548,6 +559,8 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 		Global.window_title = Global.window_title.rstrip("(*)")
 
 	Global.notification_label("File saved")
+	if is_quitting_on_save:
+		_on_QuitDialog_confirmed()
 
 func clear_canvases() -> void:
 	for child in Global.vbox_layer_container.get_children():
@@ -857,15 +870,9 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
 
-func _on_QuitDialog_confirmed() -> void:
-	# Darken the UI to denote that the application is currently exiting
-	# (it won't respond to user input in this state).
-	modulate = Color(0.5, 0.5, 0.5)
-
-	get_tree().quit()
-
 func _on_QuitDialog_custom_action(action : String) -> void:
 	if action == "Save":
+		is_quitting_on_save = true
 		$SaveSprite.popup_centered()
 		$QuitDialog.hide()
 		Global.can_draw = false
@@ -873,3 +880,10 @@ func _on_QuitDialog_custom_action(action : String) -> void:
 func _on_QuitDialog_popup_hide() -> void:
 	if !Global.saved:
 		SaveButton.queue_free()
+
+func _on_QuitDialog_confirmed() -> void:
+	# Darken the UI to denote that the application is currently exiting
+	# (it won't respond to user input in this state).
+	modulate = Color(0.5, 0.5, 0.5)
+
+	get_tree().quit()

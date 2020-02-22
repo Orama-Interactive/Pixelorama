@@ -356,7 +356,19 @@ msgstr ""
 msgid "copy"
 msgstr ""
 
-msgid "QUIT_LABEL"
+msgid "Are you sure you want to exit Pixelorama?"
+msgstr ""
+
+msgid "Save before exiting?"
+msgstr ""
+
+msgid "You have unsaved progress. How do you wish to proceed?"
+msgstr ""
+
+msgid "Save & Exit"
+msgstr ""
+
+msgid "Exit without saving"
 msgstr ""
 
 msgid "Utility Tools"

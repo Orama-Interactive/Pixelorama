@@ -1457,7 +1457,7 @@ resizable = true
 margin_right = 200.0
 margin_bottom = 70.0
 resizable = true
-dialog_text = "QUIT_LABEL"
+dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 margin_right = 76.0
