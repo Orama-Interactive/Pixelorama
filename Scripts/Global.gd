@@ -1,6 +1,6 @@
 extends Node
 
-enum Pressure_Sensitivity {NONE, ALPHA, SIZE}
+enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 
 var root_directory := "."
@@ -9,7 +9,6 @@ var config_cache := ConfigFile.new()
 var loaded_locales : Array
 var undo_redo : UndoRedo
 var undos := 0 #The number of times we added undo properties
-
 var saved := false #Checks if the user has saved
 
 # Canvas related stuff
@@ -21,7 +20,7 @@ var has_focus := false
 var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
-var pressure_sensitivity_mode = Pressure_Sensitivity.ALPHA
+var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture
@@ -103,6 +102,8 @@ var draw_grid := false
 var show_rulers := true
 # warning-ignore:unused_class_variable
 var show_guides := true
+# warning-ignore:unused_class_variable
+var show_animation_timeline := true
 
 # Onion skinning options
 # warning-ignore:unused_class_variable
