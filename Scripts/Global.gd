@@ -8,8 +8,8 @@ var config_cache := ConfigFile.new()
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
 var undo_redo : UndoRedo
-var undos := 0 #The number of times we added undo properties
-var saved := false #Checks if the user has saved
+var undos := 0 # The number of times we added undo properties
+var saved := true # Checks if the user has saved
 
 # Canvas related stuff
 var current_frame := 0 setget frame_changed
@@ -426,6 +426,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
+	saved = false
 	notification_label("Undo: %s" % action_name)
 
 
@@ -466,6 +467,7 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
+	saved = false
 	if control.redone:
 		notification_label("Redo: %s" % action_name)
 

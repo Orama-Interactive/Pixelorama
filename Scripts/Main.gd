@@ -167,10 +167,10 @@ func _ready() -> void:
 	Global.canvas.generate_layer_panels()
 
 	Import.import_brushes("Brushes")
-	
+
 	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton.get_picker().presets_visible = false
 	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton.get_picker().presets_visible = false
-	
+
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 	if Global.config_cache.get_value("preferences", "startup"):
@@ -476,14 +476,14 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		brush_line = file.get_line()
 
 	file.close()
-	
+
 	current_save_path = path
 	$SaveSprite.current_path = path
 	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
 	$ExportSprites.current_path = $ExportSprites.current_export_path
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
 	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
-	
+
 	OS.set_window_title(path.get_file() + " - Pixelorama")
 
 
@@ -861,11 +861,12 @@ func _on_QuitDialog_confirmed() -> void:
 
 	get_tree().quit()
 
-func _on_QuitDialog_custom_action(action):
+func _on_QuitDialog_custom_action(action : String) -> void:
 	if action == "Save":
 		$SaveSprite.popup_centered()
+		$QuitDialog.hide()
 		Global.can_draw = false
 
-func _on_QuitDialog_popup_hide():
+func _on_QuitDialog_popup_hide() -> void:
 	if !Global.saved:
 		SaveButton.queue_free()
