@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-02-22 22:53\n"
+"PO-Revision-Date: 2020-02-22 23:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -367,7 +367,7 @@ msgid "copy"
 msgstr "copia"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Sei sicuro di voler uscire da Pixelorama?"
 
 msgid "Save before exiting?"
 msgstr ""
