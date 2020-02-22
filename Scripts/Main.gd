@@ -380,7 +380,7 @@ func help_menu_id_pressed(id : int) -> void:
 		1: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		2: # Changelog
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v061---13-01-2020")
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v062---17-02-2020")
 		3: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
@@ -495,7 +495,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
-	if err == 0:
+	if err == OK:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
 		for canvas in Global.canvases: # Store frames
 			file.store_line("--")
