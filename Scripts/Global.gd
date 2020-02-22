@@ -474,6 +474,16 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 			layers[current_layer][2].add_child(frame_button)
 
+		remove_layer_button.disabled = false
+		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+	if action_name == "Remove Layer":
+		var layer_container_child_index = (layers_container.get_child_count() - 1) - layer_index
+		layers_container.remove_child(layers_container.get_child(layer_container_child_index))
+		frames_container.remove_child(layers[layer_index][2])
+		if layers.size() == 2: # Actually 1, but it hasn't been updated yet
+			remove_layer_button.disabled = true
+			remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 #	if action_name == "Change Layer Order":
 #		var current_layer_index : int = _canvases[0].current_layer_index

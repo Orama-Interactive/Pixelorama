@@ -182,15 +182,23 @@ func add_layer(is_new := true) -> void:
 	Global.undo_redo.commit_action()
 
 func _on_RemoveLayer_pressed() -> void:
-	var new_layers : Array = Global.canvas.layers.duplicate()
-	new_layers.remove(Global.canvas.current_layer_index)
+	var new_layers : Array = Global.layers.duplicate()
+	new_layers.remove(Global.current_layer)
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas], Global.current_layer)
+	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 
+	for c in Global.canvases:
+		var new_canvas_layers : Array = c.layers.duplicate()
+		new_canvas_layers.remove(Global.current_layer)
+		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
+		Global.undo_redo.add_undo_property(c, "layers", c.layers)
+
+	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
+	Global.undo_redo.add_undo_property(Global, "layers", Global.canvas.layers)
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
 func change_layer_order(rate : int) -> void:

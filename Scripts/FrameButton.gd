@@ -30,7 +30,7 @@ func _on_FrameButton_pressed() -> void:
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
-		0: #Remove Frame
+		0: # Remove Frame
 			remove_frame()
 
 		1: # Clone Layer
