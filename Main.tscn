@@ -1502,6 +1502,1509 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions/LeftForColorOptions" to="." method="_on_LeftForColorOptions_item_selected"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
+[gd_scene load_steps=65 format=2]
+
+[ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/RectSelect.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/ColorPicker.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Pencil_l.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Eraser_r.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Bucket.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/LightenDarken.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Color switch.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Color defaults.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=12]
+[ext_resource path="res://Themes & Styles/Dark Theme/DarkRulerStyle.tres" type="StyleBox" id=13]
+[ext_resource path="res://Scripts/Rulers/HorizontalRuler.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Rulers/VerticalRuler.gd" type="Script" id=15]
+[ext_resource path="res://Prefabs/Canvas.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/CameraMovement.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/SelectionRectangle.gd" type="Script" id=18]
+[ext_resource path="res://Scripts/SecondViewport.gd" type="Script" id=19]
+[ext_resource path="res://Prefabs/AnimationTimeline.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette_Hover.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette_Hover.png" type="Texture" id=24]
+[ext_resource path="res://Scripts/Palette/PaletteContainer.gd" type="Script" id=25]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Hover.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Disabled.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=41]
+[ext_resource path="res://Prefabs/BrushButton.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Prefabs/Dialogs/SplashDialog.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=44]
+[ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=45]
+[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=46]
+[ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=47]
+[ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=48]
+[ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=49]
+[ext_resource path="res://Prefabs/Dialogs/AboutDialog.tscn" type="PackedScene" id=50]
+[ext_resource path="res://Prefabs/EditPalettePopup.tscn" type="PackedScene" id=51]
+[ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=52]
+[ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=53]
+[ext_resource path="res://Prefabs/Dialogs/RotateImage.tscn" type="PackedScene" id=54]
+
+[sub_resource type="InputEventKey" id=1]
+scancode = 88
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="Image" id=11]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "RGBA8",
+"height": 32,
+"mipmaps": false,
+"width": 32
+}
+
+[sub_resource type="ImageTexture" id=4]
+image = SubResource( 11 )
+size = Vector2( 32, 32 )
+
+[sub_resource type="Image" id=12]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "RGBA8",
+"height": 32,
+"mipmaps": false,
+"width": 32
+}
+
+[sub_resource type="ImageTexture" id=6]
+image = SubResource( 12 )
+size = Vector2( 32, 32 )
+
+[sub_resource type="Image" id=13]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "RGBA8",
+"height": 9,
+"mipmaps": false,
+"width": 9
+}
+
+[sub_resource type="ImageTexture" id=8]
+flags = 3
+flags = 3
+image = SubResource( 13 )
+size = Vector2( 9, 9 )
+
+[sub_resource type="Image" id=14]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "RGBA8",
+"height": 9,
+"mipmaps": false,
+"width": 9
+}
+
+[sub_resource type="ImageTexture" id=10]
+flags = 3
+flags = 3
+image = SubResource( 14 )
+size = Vector2( 9, 9 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="MenuAndUI" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="TopMenuContainer" type="Panel" parent="MenuAndUI"]
+margin_right = 1152.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+custom_styles/panel = ExtResource( 3 )
+
+[node name="MenuItems" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
+margin_left = 2.0
+margin_top = 4.0
+margin_right = 1010.0
+
+[node name="FileMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+margin_right = 27.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "File"
+switch_on_hover = true
+
+[node name="EditMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+margin_left = 31.0
+margin_right = 60.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "Edit"
+switch_on_hover = true
+
+[node name="ViewMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+margin_left = 64.0
+margin_right = 98.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "View"
+switch_on_hover = true
+
+[node name="ImageMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+margin_left = 102.0
+margin_right = 144.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "Image"
+switch_on_hover = true
+
+[node name="HelpMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
+margin_left = 148.0
+margin_right = 181.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "Help"
+switch_on_hover = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_right = 65.5
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZoomLevel" type="Label" parent="MenuAndUI/TopMenuContainer/HBoxContainer"]
+margin_top = 6.0
+margin_right = 60.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 60, 0 )
+text = "781 %"
+align = 2
+
+[node name="CursorPosition" type="Label" parent="MenuAndUI/TopMenuContainer/HBoxContainer"]
+margin_left = 80.0
+margin_top = 6.0
+margin_right = 120.0
+margin_bottom = 21.0
+text = "[64×64]"
+align = 2
+
+[node name="UI" type="HBoxContainer" parent="MenuAndUI"]
+margin_top = 28.0
+margin_right = 1152.0
+margin_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
+margin_right = 224.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 224, 0 )
+size_flags_vertical = 3
+
+[node name="Tools" type="VSplitContainer" parent="MenuAndUI/UI/ToolPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/autohide = 0
+custom_constants/separation = 32
+
+[node name="MenusAndTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_right = 208.0
+margin_bottom = 127.0
+custom_constants/separation = 17
+
+[node name="UtilityTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+margin_right = 208.0
+margin_bottom = 55.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools"]
+margin_right = 208.0
+margin_bottom = 19.0
+custom_constants/separation = 0
+
+[node name="UtilityTools" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/VBoxContainer"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Utility Tools"
+
+[node name="HSeparator6" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/VBoxContainer"]
+margin_top = 15.0
+margin_right = 208.0
+margin_bottom = 19.0
+
+[node name="SelectionToolsContainer2" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools"]
+margin_top = 23.0
+margin_right = 208.0
+margin_bottom = 55.0
+
+[node name="RectSelect" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/SelectionToolsContainer2" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+hint_tooltip = "RECTSELECT_HT"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 4 )
+
+[node name="ColorPicker" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/UtilityTools/SelectionToolsContainer2" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+hint_tooltip = "COLORPICKER_HT"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 5 )
+
+[node name="DrawTools" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools"]
+margin_top = 72.0
+margin_right = 208.0
+margin_bottom = 127.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
+margin_right = 208.0
+margin_bottom = 19.0
+custom_constants/separation = 0
+
+[node name="DrawTools" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/VBoxContainer"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Draw Tools"
+
+[node name="HSeparator5" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/VBoxContainer"]
+margin_top = 15.0
+margin_right = 208.0
+margin_bottom = 19.0
+
+[node name="PaintToolsContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools"]
+margin_top = 23.0
+margin_right = 208.0
+margin_bottom = 55.0
+
+[node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+hint_tooltip = "PENCIL_HT"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 6 )
+
+[node name="Eraser" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+hint_tooltip = "ERASER_HT"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 7 )
+
+[node name="Bucket" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer" groups=[
+"UIButtons",
+]]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+hint_tooltip = "BUCKET_HT"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 8 )
+
+[node name="LightenDarken" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/MenusAndTools/DrawTools/PaintToolsContainer" groups=[
+"UIButtons",
+]]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+hint_tooltip = "LD_HT"
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 9 )
+
+[node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools"]
+margin_top = 159.0
+margin_right = 208.0
+margin_bottom = 612.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
+margin_right = 208.0
+margin_bottom = 51.0
+custom_constants/separation = 2
+
+[node name="ColorSwitchCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
+margin_right = 208.0
+margin_bottom = 7.0
+
+[node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter" groups=[
+"UIButtons",
+]]
+margin_left = 91.0
+margin_right = 116.0
+margin_bottom = 7.0
+hint_tooltip = "COLORSWITCH_HT"
+mouse_default_cursor_shape = 2
+shortcut_in_tooltip = false
+shortcut = SubResource( 2 )
+texture_normal = ExtResource( 10 )
+
+[node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
+margin_top = 9.0
+margin_right = 208.0
+margin_bottom = 41.0
+
+[node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter"]
+margin_left = 33.0
+margin_right = 174.0
+margin_bottom = 32.0
+custom_constants/separation = 13
+
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 32 )
+hint_tooltip = "LEFTCOLOR_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
+margin_left = 77.0
+margin_right = 141.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 32 )
+hint_tooltip = "RIGHTCOLOR_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color( 1, 1, 1, 1 )
+
+[node name="ColorDefaultsCenter" type="CenterContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical"]
+margin_top = 43.0
+margin_right = 208.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+
+[node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter" groups=[
+"UIButtons",
+]]
+margin_left = 91.0
+margin_right = 116.0
+margin_bottom = 8.0
+hint_tooltip = "COLORDEFAULTS_HT"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 11 )
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
+margin_top = 59.0
+margin_right = 208.0
+margin_bottom = 63.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions"]
+margin_top = 71.0
+margin_right = 208.0
+margin_bottom = 453.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer"]
+margin_right = 208.0
+margin_bottom = 352.0
+size_flags_horizontal = 3
+
+[node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+margin_right = 208.0
+margin_bottom = 170.0
+
+[node name="LeftLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Left tool options"
+align = 1
+
+[node name="LeftIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_top = 19.0
+margin_right = 119.0
+margin_bottom = 35.0
+hint_tooltip = "LEFT_INDIC_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+pressed = true
+text = "Left pixel indicator"
+
+[node name="LeftToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_top = 39.0
+margin_right = 100.0
+margin_bottom = 55.0
+size_flags_horizontal = 0
+pressed = true
+text = "Show tool icon"
+
+[node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_top = 59.0
+margin_right = 208.0
+margin_bottom = 91.0
+
+[node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
+margin_right = 36.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 36, 32 )
+hint_tooltip = "BRUSH_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource( 12 )
+
+[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="LeftBrushTypeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
+margin_left = 40.0
+margin_top = 8.0
+margin_right = 103.0
+margin_bottom = 23.0
+text = "Brush: Pixel"
+
+[node name="LeftBrushSize" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_top = 95.0
+margin_right = 208.0
+margin_bottom = 131.0
+
+[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Brush size:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 36.0
+
+[node name="LeftBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize/HBoxContainer"]
+margin_right = 150.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
+allow_greater = true
+ticks_on_borders = true
+
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize/HBoxContainer"]
+margin_left = 154.0
+margin_right = 208.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+align = 1
+suffix = "px"
+
+[node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+visible = false
+margin_top = 115.0
+margin_right = 208.0
+margin_bottom = 151.0
+
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
+margin_right = 208.0
+margin_bottom = 15.0
+hint_tooltip = "COLORFROM_HT"
+mouse_filter = 1
+text = "Brush color from"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 36.0
+
+[node name="LeftInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer"]
+margin_right = 150.0
+margin_bottom = 17.0
+hint_tooltip = "COLORFROM_HT"
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+ticks_on_borders = true
+
+[node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer"]
+margin_left = 154.0
+margin_right = 208.0
+margin_bottom = 17.0
+hint_tooltip = "COLORFROM_HT"
+value = 100.0
+align = 1
+
+[node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+visible = false
+margin_top = 155.0
+margin_right = 208.0
+margin_bottom = 197.0
+
+[node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+margin_right = 208.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "Fill area:"
+
+[node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+text = "Area of the same color"
+items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
+selected = 0
+
+[node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+visible = false
+margin_top = 115.0
+margin_right = 208.0
+margin_bottom = 178.0
+
+[node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
+margin_right = 208.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "Lighten"
+items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
+selected = 0
+
+[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 42.0
+text = "Amount:"
+
+[node name="LeftLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
+margin_top = 46.0
+margin_right = 208.0
+margin_bottom = 63.0
+
+[node name="LeftLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
+margin_right = 150.0
+margin_bottom = 17.0
+hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 10.0
+ticks_on_borders = true
+
+[node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
+margin_left = 154.0
+margin_right = 208.0
+margin_bottom = 17.0
+hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
+value = 10.0
+align = 1
+
+[node name="LeftColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+visible = false
+margin_top = 115.0
+margin_right = 208.0
+margin_bottom = 157.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
+margin_right = 208.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "Pick for:"
+
+[node name="LeftForColorOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+text = "Left Color"
+items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
+selected = 0
+
+[node name="LeftMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_top = 135.0
+margin_right = 208.0
+margin_bottom = 170.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Mirroring"
+
+[node name="LeftMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 35.0
+
+[node name="LeftHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons"]
+margin_right = 77.0
+margin_bottom = 16.0
+hint_tooltip = "HORIZMIRROR_HT"
+mouse_default_cursor_shape = 2
+text = "Horizontal"
+
+[node name="LeftVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons"]
+margin_left = 81.0
+margin_right = 142.0
+margin_bottom = 16.0
+hint_tooltip = "VERTMIRROR_HT"
+mouse_default_cursor_shape = 2
+text = "Vertical"
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+margin_top = 174.0
+margin_right = 208.0
+margin_bottom = 178.0
+
+[node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+margin_top = 182.0
+margin_right = 208.0
+margin_bottom = 352.0
+
+[node name="RightLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Right tool options"
+align = 1
+
+[node name="RightIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_top = 19.0
+margin_right = 127.0
+margin_bottom = 35.0
+hint_tooltip = "RIGHT_INDIC_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+text = "Right pixel indicator"
+
+[node name="RightToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_top = 39.0
+margin_right = 100.0
+margin_bottom = 55.0
+size_flags_horizontal = 0
+pressed = true
+text = "Show tool icon"
+
+[node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_top = 59.0
+margin_right = 208.0
+margin_bottom = 91.0
+
+[node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
+margin_right = 36.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 36, 32 )
+hint_tooltip = "BRUSH_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource( 12 )
+
+[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="RightBrushTypeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
+margin_left = 40.0
+margin_top = 8.0
+margin_right = 103.0
+margin_bottom = 23.0
+text = "Brush: Pixel"
+
+[node name="RightBrushSize" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_top = 95.0
+margin_right = 208.0
+margin_bottom = 131.0
+
+[node name="BrushSizeLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Brush size:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 36.0
+
+[node name="RightBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize/HBoxContainer"]
+margin_right = 150.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
+allow_greater = true
+ticks_on_borders = true
+
+[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSize/HBoxContainer"]
+margin_left = 154.0
+margin_right = 208.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+align = 1
+suffix = "px"
+
+[node name="RightColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+visible = false
+margin_top = 115.0
+margin_right = 208.0
+margin_bottom = 151.0
+
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
+margin_right = 208.0
+margin_bottom = 15.0
+hint_tooltip = "COLORFROM_HT"
+mouse_filter = 1
+text = "Brush color from"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 36.0
+
+[node name="RightInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer"]
+margin_right = 102.0
+margin_bottom = 17.0
+hint_tooltip = "COLORFROM_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+ticks_on_borders = true
+
+[node name="RightInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer"]
+margin_left = 106.0
+margin_right = 208.0
+margin_bottom = 17.0
+hint_tooltip = "COLORFROM_HT"
+mouse_default_cursor_shape = 2
+value = 100.0
+align = 1
+
+[node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+visible = false
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 138.0
+
+[node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Fill area:"
+
+[node name="RightFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+text = "Area of the same color"
+items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
+selected = 0
+
+[node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+visible = false
+margin_top = 115.0
+margin_right = 208.0
+margin_bottom = 178.0
+
+[node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
+margin_right = 208.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+text = "Lighten"
+items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
+selected = 0
+
+[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
+margin_top = 27.0
+margin_right = 208.0
+margin_bottom = 42.0
+text = "Amount:"
+
+[node name="RightLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
+margin_top = 46.0
+margin_right = 208.0
+margin_bottom = 63.0
+
+[node name="RightLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
+margin_right = 150.0
+margin_bottom = 17.0
+hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 10.0
+ticks_on_borders = true
+
+[node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
+margin_left = 154.0
+margin_right = 208.0
+margin_bottom = 17.0
+hint_tooltip = "LDAMOUNT_HT"
+mouse_default_cursor_shape = 2
+value = 10.0
+align = 1
+
+[node name="RightColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+visible = false
+margin_top = 115.0
+margin_right = 208.0
+margin_bottom = 157.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions"]
+margin_right = 208.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "Pick for:"
+
+[node name="RightForColorOptions" type="OptionButton" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+text = "Right Color"
+items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
+selected = 1
+
+[node name="RightMirroring" type="VBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_top = 135.0
+margin_right = 208.0
+margin_bottom = 170.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring"]
+margin_right = 208.0
+margin_bottom = 15.0
+text = "Mirroring"
+
+[node name="RightMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring"]
+margin_top = 19.0
+margin_right = 208.0
+margin_bottom = 35.0
+
+[node name="RightHorizontalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons"]
+margin_right = 77.0
+margin_bottom = 16.0
+hint_tooltip = "HORIZMIRROR_HT"
+mouse_default_cursor_shape = 2
+text = "Horizontal"
+
+[node name="RightVerticalMirroring" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons"]
+margin_left = 81.0
+margin_right = 142.0
+margin_bottom = 16.0
+hint_tooltip = "VERTMIRROR_HT"
+mouse_default_cursor_shape = 2
+text = "Vertical"
+
+[node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+margin_left = 224.0
+margin_right = 928.0
+margin_bottom = 620.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
+margin_right = 704.0
+margin_bottom = 478.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
+margin_right = 704.0
+margin_bottom = 478.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="HorizontalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+margin_right = 704.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+focus_mode = 0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+action_mode = 0
+enabled_focus_mode = 0
+script = ExtResource( 14 )
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+margin_top = 16.0
+margin_right = 704.0
+margin_bottom = 478.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+margin_right = 692.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+margin_right = 16.0
+margin_bottom = 462.0
+rect_min_size = Vector2( 16, 0 )
+focus_mode = 0
+mouse_default_cursor_shape = 15
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+action_mode = 0
+enabled_focus_mode = 0
+script = ExtResource( 15 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+margin_left = 16.0
+margin_right = 692.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
+size = Vector2( 676, 462 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 16 )]
+
+[node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 17 )
+
+[node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+visible = false
+z_index = 1
+color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+invert_enable = true
+invert_border = 0.5
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+script = ExtResource( 18 )
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+margin_left = 704.0
+margin_right = 704.0
+margin_bottom = 462.0
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
+size = Vector2( 0, 462 )
+handle_input_locally = false
+render_target_update_mode = 3
+script = ExtResource( 19 )
+
+[node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 17 )
+
+[node name="AnimationTimeline" parent="MenuAndUI/UI/CanvasAndTimeline" instance=ExtResource( 20 )]
+
+[node name="LayerPanel" type="Panel" parent="MenuAndUI/UI"]
+margin_left = 928.0
+margin_right = 1152.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 224, 0 )
+
+[node name="LayersAndMisc" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+
+[node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_right = 224.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 164 )
+
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CanvasPreview"]
+size = Vector2( 224, 164 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+script = ExtResource( 19 )
+
+[node name="CameraPreview" type="Camera2D" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/CanvasPreview/Viewport"]
+offset = Vector2( 32, 32 )
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 17 )
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 168.0
+margin_right = 224.0
+margin_bottom = 172.0
+
+[node name="PalettesLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 176.0
+margin_right = 224.0
+margin_bottom = 191.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Palettes"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 195.0
+margin_right = 224.0
+margin_bottom = 199.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
+margin_top = 203.0
+margin_right = 224.0
+margin_bottom = 604.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer"]
+margin_right = 224.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer"]
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer"]
+margin_left = 24.0
+margin_right = 199.0
+margin_bottom = 32.0
+
+[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "NEWPALETTE_HT"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 21 )
+texture_hover = ExtResource( 22 )
+
+[node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
+margin_right = 12.0
+margin_bottom = 20.0
+items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
+
+[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+hint_tooltip = "EDITPALETTE_HT"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 23 )
+texture_hover = ExtResource( 24 )
+
+[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
+margin_left = 72.0
+margin_right = 175.0
+margin_bottom = 32.0
+grow_horizontal = 0
+rect_min_size = Vector2( 103, 0 )
+hint_tooltip = "CHOOSEPALETTE_HT"
+mouse_default_cursor_shape = 2
+clip_text = true
+
+[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer"]
+margin_top = 36.0
+margin_right = 224.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette"]
+margin_right = 224.0
+size_flags_horizontal = 3
+
+[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
+margin_left = 112.0
+margin_right = 112.0
+size_flags_horizontal = 3
+columns = 5
+script = ExtResource( 25 )
+
+[node name="VBoxLayerWithLabels" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer"]
+margin_top = 148.0
+margin_right = 224.0
+margin_bottom = 401.0
+
+[node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
+margin_right = 224.0
+margin_bottom = 4.0
+
+[node name="LayerLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
+margin_top = 8.0
+margin_right = 224.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Layers"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
+margin_top = 27.0
+margin_right = 224.0
+margin_bottom = 31.0
+
+[node name="LayerVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels"]
+margin_top = 35.0
+margin_right = 224.0
+margin_bottom = 253.0
+size_flags_vertical = 3
+custom_constants/separation = 6
+
+[node name="CenterLayerButtons" type="CenterContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="LayerButtons" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons"]
+margin_left = 6.0
+margin_right = 218.0
+margin_bottom = 32.0
+
+[node name="AddLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+hint_tooltip = "LAYERNEW_HT"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 26 )
+texture_hover = ExtResource( 27 )
+
+[node name="RemoveLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+hint_tooltip = "LAYERREMOVE_HT"
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 28 )
+texture_hover = ExtResource( 29 )
+texture_disabled = ExtResource( 30 )
+
+[node name="MoveUpLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+hint_tooltip = "LAYERUP_HT"
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 31 )
+texture_hover = ExtResource( 32 )
+texture_disabled = ExtResource( 33 )
+
+[node name="MovwDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+hint_tooltip = "LAYERDOWN_HT"
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 34 )
+texture_hover = ExtResource( 35 )
+texture_disabled = ExtResource( 36 )
+
+[node name="CloneLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+hint_tooltip = "LAYERCLONE_HT"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 37 )
+texture_hover = ExtResource( 38 )
+
+[node name="MergeDownLayer" type="TextureButton" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/CenterLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+hint_tooltip = "LAYERMERGE_HT"
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 39 )
+texture_hover = ExtResource( 40 )
+texture_disabled = ExtResource( 41 )
+
+[node name="OpacityContainer" type="HBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
+margin_top = 38.0
+margin_right = 224.0
+margin_bottom = 55.0
+custom_constants/separation = 2
+alignment = 1
+
+[node name="SpacerControl" type="Control" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
+margin_right = 3.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 3, 0 )
+
+[node name="OpacityLabel" type="Label" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
+margin_left = 5.0
+margin_right = 49.0
+margin_bottom = 17.0
+size_flags_vertical = 1
+text = "Opacity:"
+
+[node name="OpacitySlider" type="HSlider" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
+margin_left = 51.0
+margin_right = 166.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+ticks_on_borders = true
+
+[node name="OpacitySpinBox" type="SpinBox" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
+margin_left = 168.0
+margin_right = 222.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+value = 100.0
+align = 1
+
+[node name="SpacerControl2" type="Control" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer"]
+margin_left = 224.0
+margin_right = 224.0
+margin_bottom = 17.0
+
+[node name="ScrollLayers" type="ScrollContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer"]
+margin_top = 61.0
+margin_right = 224.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxLayerContainer" type="VBoxContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/ScrollLayers"]
+margin_right = 224.0
+size_flags_horizontal = 3
+
+[node name="BrushesPopup" type="Popup" parent="."]
+margin_right = 226.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 144 )
+
+[node name="TabContainer" type="TabContainer" parent="BrushesPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+drag_to_rearrange_enabled = true
+
+[node name="File" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 39.0
+margin_right = -5.0
+margin_bottom = -5.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="FileBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/File"]
+margin_right = 96.0
+margin_bottom = 32.0
+columns = 6
+
+[node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 42 )]
+hint_tooltip = "Pixel brush"
+
+[node name="CircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 42 )]
+margin_left = 32.0
+margin_right = 64.0
+hint_tooltip = "Filled circle brush"
+brush_type = 1
+custom_brush_index = -2
+
+[node name="BrushTexture" parent="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton" index="0"]
+texture = SubResource( 8 )
+
+[node name="FilledCircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 42 )]
+margin_left = 64.0
+margin_right = 96.0
+hint_tooltip = "Circle brush"
+brush_type = 2
+custom_brush_index = -1
+
+[node name="BrushTexture" parent="BrushesPopup/TabContainer/File/FileBrushContainer/FilledCircleBrushButton" index="0"]
+texture = SubResource( 10 )
+
+[node name="Project" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 39.0
+margin_right = -5.0
+margin_bottom = -5.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="ProjectBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/Project"]
+columns = 5
+
+[node name="SplashDialog" parent="." instance=ExtResource( 43 )]
+
+[node name="CreateNewImage" parent="." instance=ExtResource( 44 )]
+
+[node name="OpenSprite" type="FileDialog" parent="."]
+margin_right = 515.0
+margin_bottom = 348.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="SaveSprite" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 3.0
+margin_bottom = 48.0
+window_title = "Save Sprite as .pxo"
+resizable = true
+access = 2
+filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="ImportSprites" parent="." instance=ExtResource( 45 )]
+
+[node name="ExportSprites" parent="." instance=ExtResource( 46 )]
+
+[node name="ScaleImage" parent="." instance=ExtResource( 47 )]
+resizable = true
+
+[node name="PreferencesDialog" parent="." instance=ExtResource( 48 )]
+
+[node name="RotateImage" parent="." instance=ExtResource( 54 )]
+
+[node name="OutlineDialog" parent="." instance=ExtResource( 49 )]
+visible = false
+resizable = true
+
+[node name="AboutDialog" parent="." instance=ExtResource( 50 )]
+
+[node name="QuitDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+resizable = true
+dialog_text = "QUIT_LABEL"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+margin_right = 76.0
+margin_bottom = 60.0
+window_title = "Error!"
+dialog_text = "This is an error message!"
+
+[node name="EditPalettePopup" parent="." instance=ExtResource( 51 )]
+visible = false
+
+[node name="NewPaletteDialog" parent="." instance=ExtResource( 52 )]
+
+[node name="PaletteImportFileDialog" parent="." instance=ExtResource( 53 )]
+filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+
+[node name="LeftCursor" type="Sprite" parent="."]
+visible = false
+
+[node name="RightCursor" type="Sprite" parent="."]
+visible = false
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="color_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftIndicatorCheckbox" to="." method="_on_LeftIndicatorCheckbox_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftToolIconCheckbox" to="." method="_on_LeftToolIconCheckbox_toggled"]
+[connection signal="pressed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize/HBoxContainer/LeftBrushSizeSlider" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSize/HBoxContainer/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer/LeftInterpolateSlider" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLightenDarken" to="." method="_on_LeftLightenDarken_item_selected"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSlider" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
+[connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions/LeftForColorOptions" to="." method="_on_LeftForColorOptions_item_selected"]
+[connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirroring/LeftMirrorButtons/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightIndicatorCheckbox" to="." method="_on_RightIndicatorCheckbox_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightToolIconCheckbox" to="." method="_on_RightToolIconCheckbox_toggled"]
@@ -1536,6 +3039,8 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
+[connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="popup_hide" from="OpenSprite" to="." method="_on_ImportSprites_popup_hide"]
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ImportSprites" to="." method="_can_draw_true"]
