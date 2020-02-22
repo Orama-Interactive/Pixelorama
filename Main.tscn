@@ -457,19 +457,17 @@ align = 1
 
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 19.0
-margin_right = 119.0
+margin_right = 208.0
 margin_bottom = 35.0
 hint_tooltip = "LEFT_INDIC_HT"
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
 pressed = true
 text = "Left pixel indicator"
 
 [node name="LeftToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 39.0
-margin_right = 100.0
+margin_right = 208.0
 margin_bottom = 55.0
-size_flags_horizontal = 0
 pressed = true
 text = "Show tool icon"
 
@@ -547,7 +545,6 @@ margin_bottom = 151.0
 margin_right = 208.0
 margin_bottom = 15.0
 hint_tooltip = "COLORFROM_HT"
-mouse_filter = 1
 text = "Brush color from"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
@@ -706,18 +703,16 @@ align = 1
 
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 19.0
-margin_right = 127.0
+margin_right = 208.0
 margin_bottom = 35.0
 hint_tooltip = "RIGHT_INDIC_HT"
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
 text = "Right pixel indicator"
 
 [node name="RightToolIconCheckbox" type="CheckBox" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 39.0
-margin_right = 100.0
+margin_right = 208.0
 margin_bottom = 55.0
-size_flags_horizontal = 0
 pressed = true
 text = "Show tool icon"
 
@@ -795,7 +790,6 @@ margin_bottom = 151.0
 margin_right = 208.0
 margin_bottom = 15.0
 hint_tooltip = "COLORFROM_HT"
-mouse_filter = 1
 text = "Brush color from"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
@@ -1060,6 +1054,9 @@ rect_min_size = Vector2( 224, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/LayerPanel/LayersAndMisc"]
 margin_right = 224.0
@@ -1406,19 +1403,9 @@ scroll_horizontal_enabled = false
 columns = 5
 
 [node name="SplashDialog" parent="." instance=ExtResource( 43 )]
+visible = false
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 44 )]
-
-[node name="OpenSprite" type="FileDialog" parent="."]
-margin_right = 515.0
-margin_bottom = 348.0
-window_title = "Open a File"
-resizable = true
-mode = 0
-access = 2
-filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1433,12 +1420,20 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
+current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ImportSprites" parent="." instance=ExtResource( 45 )]
+window_title = "Datei(en) öffnen"
+current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
+current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
 
 [node name="ExportSprites" parent="." instance=ExtResource( 46 )]
+current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
+current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
 
 [node name="ScaleImage" parent="." instance=ExtResource( 47 )]
 resizable = true
@@ -1454,10 +1449,15 @@ resizable = true
 [node name="AboutDialog" parent="." instance=ExtResource( 50 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
-margin_right = 200.0
-margin_bottom = 70.0
+margin_left = 77.0
+margin_top = 45.0
+margin_right = 286.0
+margin_bottom = 115.0
 resizable = true
 dialog_text = "QUIT_LABEL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 margin_right = 76.0
@@ -1471,9 +1471,10 @@ visible = false
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 52 )]
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 53 )]
+window_title = "Datei öffnen"
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
+current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
@@ -1535,8 +1536,6 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/VBoxLayerWithLabels/LayerVBoxContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
-[connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
-[connection signal="popup_hide" from="OpenSprite" to="." method="_on_ImportSprites_popup_hide"]
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ImportSprites" to="." method="_can_draw_true"]
@@ -1546,7 +1545,9 @@ visible = false
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
+[connection signal="custom_action" from="QuitDialog" to="." method="_on_QuitDialog_custom_action"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="QuitDialog" to="." method="_on_QuitDialog_popup_hide"]
 [connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 
