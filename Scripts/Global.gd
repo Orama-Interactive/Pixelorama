@@ -4,6 +4,7 @@ enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 
 var root_directory := "."
+var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
@@ -470,6 +471,10 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 	saved = false
 	if control.redone:
 		notification_label("Redo: %s" % action_name)
+
+func title_changed(value : String) -> void:
+	window_title = value
+	OS.set_window_title(value)
 
 func frame_changed(value : int) -> void:
 	current_frame = value

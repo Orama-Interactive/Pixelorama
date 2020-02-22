@@ -161,7 +161,7 @@ func _ready() -> void:
 			else:
 				$ImportSprites._on_ImportSprites_files_selected([arg])
 
-	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
+	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 
 	Global.canvas.layers[0][2] = tr("Layer") + " 0"
 	Global.canvas.generate_layer_panels()
@@ -484,7 +484,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
 	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 
-	OS.set_window_title(path.get_file() + " - Pixelorama")
+	Global.window_title = path.get_file() + " - Pixelorama"
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
@@ -560,7 +560,7 @@ func clear_canvases() -> void:
 	$ExportSprites.current_export_path = ""
 	file_menu.set_item_text(2, "Save")
 	file_menu.set_item_text(5, "Export PNG...")
-	OS.set_window_title("(" + tr("untitled") + ") - Pixelorama")
+	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 	Global.undo_redo.clear_history(false)
 
 func _on_ImportSprites_popup_hide() -> void:
