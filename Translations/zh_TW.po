@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-02-22 22:53\n"
+"PO-Revision-Date: 2020-02-22 23:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -366,7 +366,7 @@ msgid "copy"
 msgstr "複製"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "確定要離開Pixelorama嗎?"
 
 msgid "Save before exiting?"
 msgstr ""
