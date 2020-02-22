@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-02-15 13:28\n"
+"PO-Revision-Date: 2020-02-22 22:53\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -366,8 +366,20 @@ msgstr "εισαγόμενο"
 msgid "copy"
 msgstr "αντίγραφο"
 
-msgid "QUIT_LABEL"
-msgstr "Σίγουρα θέλετε να βγείτε από το Pixelorama;"
+msgid "Are you sure you want to exit Pixelorama?"
+msgstr ""
+
+msgid "Save before exiting?"
+msgstr ""
+
+msgid "You have unsaved progress. How do you wish to proceed?"
+msgstr ""
+
+msgid "Save & Exit"
+msgstr ""
+
+msgid "Exit without saving"
+msgstr ""
 
 msgid "Utility Tools"
 msgstr "Βοηθητικά Εργαλεία"
