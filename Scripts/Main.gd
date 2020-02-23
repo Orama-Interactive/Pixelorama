@@ -9,7 +9,6 @@ var redone := false
 var is_quitting_on_save := false
 var previous_left_color := Color.black
 var previous_right_color := Color.white
-var SaveButton : Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -171,6 +170,9 @@ func _ready() -> void:
 
 	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton.get_picker().presets_visible = false
 	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton.get_picker().presets_visible = false
+	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
+	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
+
 
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
@@ -203,18 +205,7 @@ func _input(event : InputEvent) -> void:
 
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
-		if !$QuitDialog.visible:
-			if Global.saved:
-				$QuitDialog.window_title = "Please Confirm..."
-				$QuitDialog.dialog_text = "Are you sure you want to exit Pixelorama?"
-				$QuitDialog.get_ok().text = "OK"
-			else:
-				$QuitDialog.window_title = "Save before exiting?"
-				$QuitDialog.dialog_text = "You have unsaved progress. How do you wish to proceed?"
-				SaveButton = $QuitDialog.add_button("Save & Exit", false, "Save")
-				$QuitDialog.get_ok().text = "Exit without saving"
-		$QuitDialog.call_deferred("popup_centered")
-		Global.can_draw = false
+		show_quit_dialog()
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:
@@ -250,10 +241,7 @@ func file_menu_id_pressed(id : int) -> void:
 			$ExportSprites.popup_centered()
 			Global.can_draw = false
 		7: # Quit
-			if !Global.saved && !$QuitDialog.visible:
-				SaveButton = $QuitDialog.add_button("Save", false, "Save")
-			$QuitDialog.popup_centered()
-			Global.can_draw = false
+			show_quit_dialog()
 
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
@@ -870,16 +858,20 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
 
-func _on_QuitDialog_custom_action(action : String) -> void:
+func show_quit_dialog() -> void:
+	if !$QuitDialog.visible:
+		if Global.saved:
+			$QuitDialog.call_deferred("popup_centered")
+		else:
+			$QuitAndSaveDialog.call_deferred("popup_centered")
+	Global.can_draw = false
+
+func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 	if action == "Save":
 		is_quitting_on_save = true
 		$SaveSprite.popup_centered()
 		$QuitDialog.hide()
 		Global.can_draw = false
-
-func _on_QuitDialog_popup_hide() -> void:
-	if !Global.saved:
-		SaveButton.queue_free()
 
 func _on_QuitDialog_confirmed() -> void:
 	# Darken the UI to denote that the application is currently exiting
