@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-02-22 23:08\n"
+"PO-Revision-Date: 2020-02-25 02:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -375,10 +375,10 @@ msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "儲存並離開"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "離開但不儲存"
 
 msgid "Utility Tools"
 msgstr "其他工具"
