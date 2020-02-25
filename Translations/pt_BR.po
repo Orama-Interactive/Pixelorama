@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-02-22 23:08\n"
+"PO-Revision-Date: 2020-02-25 12:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -92,7 +92,7 @@ msgid "Crop Image"
 msgstr "Cortar Imagem"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Girar imagem"
 
 msgid "Clear Selection"
 msgstr "Limpar Seleção"
@@ -119,7 +119,7 @@ msgid "Show Guides"
 msgstr "Mostrar Guias"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Mostrar linha do tempo de animação"
 
 msgid "Fill with color:"
 msgstr "Preencher com cor:"
@@ -150,7 +150,8 @@ msgstr "Arquivo Já Existe, Substituir?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Impossível carregar o arquivo '%s'.\n"
+"Código de erro: %s"
 
 msgid "Resize:"
 msgstr "Redimensionar:"
@@ -198,7 +199,7 @@ msgid "Trilinear"
 msgstr "Trilinear"
 
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 msgid "Language"
 msgstr "Linguagem"
@@ -210,10 +211,10 @@ msgid "Guides & Grid"
 msgstr "Guias e Grade"
 
 msgid "General Options"
-msgstr ""
+msgstr "Opções Gerais"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Ampliar Suave"
 
 msgid "Tablet pressure sensitivity:"
 msgstr ""
