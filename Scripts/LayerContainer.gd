@@ -23,6 +23,9 @@ func _input(event : InputEvent) -> void:
 		label.visible = true
 		line_edit.visible = false
 		line_edit.editable = false
+		var new_text : String = line_edit.text
+		label.text = new_text
+		Global.layers[i][0] = new_text
 
 func _on_LayerContainer_pressed() -> void:
 	var initially_pressed := pressed
@@ -85,7 +88,3 @@ func _on_VisibilityButton_pressed() -> void:
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
 	Global.canvas.update()
-
-func _on_LineEdit_text_changed(new_text : String) -> void:
-	Global.layers[i][0] = new_text
-	label.text = new_text

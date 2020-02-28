@@ -537,8 +537,10 @@ func layers_changed(value : Array) -> void:
 
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-		layers[i][0] = tr("Layer") + " %s" % i
 		layer_container.i = i
+		if !layers[i][0]:
+			layers[i][0] = tr("Layer") + " %s" % i
+
 		layer_container.get_child(0).get_child(1).text = layers[i][0]
 		layer_container.get_child(0).get_child(2).text = layers[i][0]
 		layers_container.add_child(layer_container)
