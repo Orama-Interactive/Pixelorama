@@ -145,7 +145,7 @@ func _on_BlueRedMode_toggled(button_pressed) -> void:
 func add_layer(is_new := true) -> void:
 	var layer_name = null
 	if !is_new: # clone layer
-		layer_name = Global.layers[Global.current_layer][1] + " (" + tr("copy") + ")"
+		layer_name = Global.layers[Global.current_layer][0] + " (" + tr("copy") + ")"
 
 	var new_layers : Array = Global.layers.duplicate()
 
