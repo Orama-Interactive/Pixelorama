@@ -186,7 +186,6 @@ func _on_RemoveLayer_pressed() -> void:
 	new_layers.remove(Global.current_layer)
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Layer")
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas], Global.current_layer)
 	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
 	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 
@@ -197,7 +196,8 @@ func _on_RemoveLayer_pressed() -> void:
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
 	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
-	Global.undo_redo.add_undo_property(Global, "layers", Global.canvas.layers)
+	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
+	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.commit_action()
 

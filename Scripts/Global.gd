@@ -13,7 +13,7 @@ var undos := 0 # The number of times we added undo properties
 var saved := true # Checks if the user has saved
 
 # Canvas related stuff
-var layers := []
+var layers := [] setget layers_changed
 var current_frame := 0 setget frame_changed
 var current_layer := 0
 # warning-ignore:unused_class_variable
@@ -410,12 +410,12 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 			if action_name == "Scale":
 				c.camera_zoom()
 
-	if "Layer" in action_name:
-		var current_layer_index : int = _canvases[0].current_layer_index
-		_canvases[0].generate_layer_panels()
-		if action_name == "Change Layer Order":
-			_canvases[0].current_layer_index = current_layer_index
-			_canvases[0].get_layer_container(current_layer_index).changed_selection()
+#	if "Layer" in action_name:
+#		var current_layer_index : int = _canvases[0].current_layer_index
+#		_canvases[0].generate_layer_panels()
+#		if action_name == "Change Layer Order":
+#			_canvases[0].current_layer_index = current_layer_index
+#			_canvases[0].get_layer_container(current_layer_index).changed_selection()
 
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
@@ -455,35 +455,36 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 			if action_name == "Scale":
 				c.camera_zoom()
-	if action_name == "Add Layer":
-		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-		layers[current_layer][0] = tr("Layer") + " %s" % current_layer
-		layer_container.i = current_layer
-		layer_container.get_child(0).get_child(1).text = layers[current_layer][0]
-		layer_container.get_child(0).get_child(2).text = layers[current_layer][0]
-		layers_container.add_child(layer_container)
-		layers_container.move_child(layer_container, 1)
-
-		frames_container.add_child(layers[current_layer][2])
-		frames_container.move_child(layers[current_layer][2], 1)
-		for i in range(canvases.size()):
-			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
-			frame_button.frame = i
-			frame_button.layer = current_layer
-			frame_button.pressed = true
-
-			layers[current_layer][2].add_child(frame_button)
-
-		remove_layer_button.disabled = false
-		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-
-	if action_name == "Remove Layer":
-		var layer_container_child_index = (layers_container.get_child_count() - 1) - layer_index
-		layers_container.remove_child(layers_container.get_child(layer_container_child_index))
-		frames_container.remove_child(layers[layer_index][2])
-		if layers.size() == 2: # Actually 1, but it hasn't been updated yet
-			remove_layer_button.disabled = true
-			remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+#	if action_name == "Add Layer":
+#		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
+#		layers[current_layer][0] = tr("Layer") + " %s" % current_layer
+#		layer_container.i = current_layer
+#		layer_container.get_child(0).get_child(1).text = layers[current_layer][0]
+#		layer_container.get_child(0).get_child(2).text = layers[current_layer][0]
+#		layers_container.add_child(layer_container)
+#		layers_container.move_child(layer_container, 0)
+#
+#		frames_container.add_child(layers[current_layer][2])
+#		frames_container.move_child(layers[current_layer][2], 0)
+#		for i in range(canvases.size()):
+#			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
+#			frame_button.frame = i
+#			frame_button.layer = current_layer
+#			frame_button.pressed = true
+#
+#			layers[current_layer][2].add_child(frame_button)
+#
+#		remove_layer_button.disabled = false
+#		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+#
+#	if action_name == "Remove Layer":
+#		var layer_container_child_index = (layers_container.get_child_count() - 1) - layer_index
+#		layers_container.remove_child(layers_container.get_child(layer_container_child_index))
+#		print(layer_index, layers[layer_index][2])
+#		frames_container.remove_child(layers[layer_index][2])
+#		if layers.size() == 2: # Actually 1, but it hasn't been updated yet
+#			remove_layer_button.disabled = true
+#			remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 #	if action_name == "Change Layer Order":
 #		var current_layer_index : int = _canvases[0].current_layer_index
@@ -520,6 +521,43 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 func title_changed(value : String) -> void:
 	window_title = value
 	OS.set_window_title(value)
+
+func layers_changed(value : Array) -> void:
+	layers = value
+	print(layers)
+	print(str(layers_container.get_child_count()) + " " + str(frames_container.get_child_count()))
+
+	for container in layers_container.get_children():
+		container.queue_free()
+
+	for container in frames_container.get_children():
+		for button in container.get_children():
+			button.queue_free()
+		frames_container.remove_child(container)
+
+	for i in range(layers.size() - 1, -1, -1):
+		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
+		layers[i][0] = tr("Layer") + " %s" % i
+		layer_container.i = i
+		layer_container.get_child(0).get_child(1).text = layers[i][0]
+		layer_container.get_child(0).get_child(2).text = layers[i][0]
+		layers_container.add_child(layer_container)
+
+		frames_container.add_child(layers[i][2])
+		for j in range(canvases.size()):
+			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
+			frame_button.frame = j
+			frame_button.layer = i
+			frame_button.pressed = true
+
+			layers[i][2].add_child(frame_button)
+
+	if layers.size() == 1:
+		remove_layer_button.disabled = true
+		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	else:
+		remove_layer_button.disabled = false
+		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 func frame_changed(value : int) -> void:
 	current_frame = value

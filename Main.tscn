@@ -1360,8 +1360,6 @@ visible = false
 [connection signal="confirmed" from="QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="custom_action" from="QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="QuitAndSaveDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
-[connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/LayerPanel/LayersAndMisc/VSplitContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 [connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 

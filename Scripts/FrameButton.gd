@@ -5,11 +5,15 @@ var layer := 0
 
 onready var popup_menu := $PopupMenu
 
+func _ready() -> void:
+	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
+
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.current_frame = frame
 		Global.current_layer = layer
 		print(str(frame), str(layer))
+		print("Current layer: %s" % Global.current_layer)
 	elif Input.is_action_just_released("right_mouse"):
 		if Global.canvases.size() == 1:
 			popup_menu.set_item_disabled(0, true)

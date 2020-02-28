@@ -201,7 +201,6 @@ align = 1
 valign = 1
 
 [node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
-editor/display_folded = true
 margin_top = 36.0
 margin_right = 543.0
 margin_bottom = 60.0
@@ -245,11 +244,11 @@ margin_right = 252.0
 margin_bottom = 96.0
 size_flags_vertical = 3
 
-[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
 margin_right = 212.0
 margin_bottom = 96.0
 
-[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayersContainer"]
+[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
 margin_right = 212.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
@@ -257,26 +256,34 @@ text = "Layers"
 align = 1
 valign = 1
 
-[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayersContainer" instance=ExtResource( 18 )]
+[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
 margin_top = 20.0
 margin_right = 212.0
 margin_bottom = 56.0
 
-[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer/LayersContainer" instance=ExtResource( 18 )]
+margin_right = 212.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 216.0
 margin_right = 252.0
 margin_bottom = 96.0
 
-[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FramesContainer"]
+[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
 margin_right = 36.0
 margin_bottom = 14.0
 
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FramesContainer/FrameIDs"]
+[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2/FrameIDs"]
 margin_right = 36.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 36, 0 )
 text = "1"
 align = 1
+
+[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 36.0
+margin_bottom = 18.0
 
 [node name="HSeparator" type="HSeparator" parent="AnimationContainer/TimelineContainer"]
 margin_top = 164.0
@@ -309,7 +316,6 @@ texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-editor/display_folded = true
 margin_left = 223.0
 margin_right = 363.0
 margin_bottom = 24.0
