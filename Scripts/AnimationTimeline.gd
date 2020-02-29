@@ -227,28 +227,36 @@ func change_layer_order(rate : int) -> void:
 	Global.undo_redo.commit_action()
 
 func _on_MergeDownLayer_pressed() -> void:
-	var new_layers : Array = Global.canvas.layers.duplicate()
+	var new_layers : Array = Global.layers.duplicate()
 	new_layers.remove(Global.current_layer)
-	var selected_layer = Global.canvas.layers[Global.current_layer][0]
-	if Global.canvas.layers[Global.current_layer][2] < 1: # If we have layer transparency
-		for xx in selected_layer.get_size().x:
-			for yy in selected_layer.get_size().y:
-				var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-				var alpha : float = pixel_color.a * Global.canvas.layers[Global.current_layer][4]
-				selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-
-	var new_layer := Image.new()
-	new_layer.copy_from(Global.canvas.layers[Global.current_layer - 1][0])
-	new_layer.lock()
-
-	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Merge Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas.layers[Global.current_layer - 1][0], "data", new_layer.data)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.current_layer - 1][0], "data", Global.canvas.layers[Global.current_layer - 1][0].data)
+	for c in Global.canvases:
+		var new_layers_canvas : Array = c.layers.duplicate()
+		new_layers_canvas.remove(Global.current_layer)
+		var selected_layer = c.layers[Global.current_layer][0]
+		if c.layers[Global.current_layer][2] < 1: # If we have layer transparency
+			for xx in selected_layer.get_size().x:
+				for yy in selected_layer.get_size().y:
+					var pixel_color : Color = selected_layer.get_pixel(xx, yy)
+					var alpha : float = pixel_color.a * c.layers[Global.current_layer][4]
+					selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+
+		var new_layer := Image.new()
+		new_layer.copy_from(c.layers[Global.current_layer - 1][0])
+		new_layer.lock()
+		c.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
+
+		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
+		Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1][0], "data", new_layer.data)
+		Global.undo_redo.add_undo_property(c, "layers", c.layers)
+		Global.undo_redo.add_undo_property(c.layers[Global.current_layer - 1][0], "data", c.layers[Global.current_layer - 1][0].data)
+
+	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
+	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
+	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
 
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
