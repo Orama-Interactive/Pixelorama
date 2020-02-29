@@ -332,23 +332,23 @@ func image_menu_id_pressed(id : int) -> void:
 		2: # Flip Horizontal
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
-			canvas.layers[canvas.current_layer_index][0].unlock()
-			canvas.layers[canvas.current_layer_index][0].flip_x()
-			canvas.layers[canvas.current_layer_index][0].lock()
+			canvas.layers[Global.current_layer][0].unlock()
+			canvas.layers[Global.current_layer][0].flip_x()
+			canvas.layers[Global.current_layer][0].lock()
 			canvas.handle_redo("Draw")
 		3: # Flip Vertical
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
-			canvas.layers[canvas.current_layer_index][0].unlock()
-			canvas.layers[canvas.current_layer_index][0].flip_y()
-			canvas.layers[canvas.current_layer_index][0].lock()
+			canvas.layers[Global.current_layer][0].unlock()
+			canvas.layers[Global.current_layer][0].flip_y()
+			canvas.layers[Global.current_layer][0].lock()
 			canvas.handle_redo("Draw")
 		4: # Rotate
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			$RotateImage.set_sprite(image)
 			$RotateImage.popup_centered()
 		5: # Invert Colors
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
 				for yy in image.get_size().y:
@@ -358,7 +358,7 @@ func image_menu_id_pressed(id : int) -> void:
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
 		6: # Desaturation
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
 				for yy in image.get_size().y:
@@ -775,7 +775,7 @@ func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
 
 func _on_OpacitySlider_value_changed(value) -> void:
-	Global.canvas.layers[Global.canvas.current_layer_index][4] = value / 100
+	Global.canvas.layers[Global.current_layer][4] = value / 100
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()

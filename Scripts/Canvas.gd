@@ -465,10 +465,10 @@ func handle_undo(action : String) -> void:
 	for c in canvases:
 		# I'm not sure why I have to unlock it, but...
 		# ...if I don't, it doesn't work properly
-		c.layers[c.current_layer_index][0].unlock()
-		var data = c.layers[c.current_layer_index][0].data
-		c.layers[c.current_layer_index][0].lock()
-		Global.undo_redo.add_undo_property(c.layers[c.current_layer_index][0], "data", data)
+		c.layers[Global.current_layer][0].unlock()
+		var data = c.layers[Global.current_layer][0].data
+		c.layers[Global.current_layer][0].lock()
+		Global.undo_redo.add_undo_property(c.layers[Global.current_layer][0], "data", data)
 	if action == "Rectangle Select":
 		var selected_pixels = Global.selected_pixels.duplicate()
 		Global.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
@@ -486,11 +486,11 @@ func handle_redo(action : String) -> void:
 	var layer_index := -1
 	if Global.animation_timer.is_stopped():
 		canvases = [self]
-		layer_index = current_layer_index
+		layer_index = Global.current_layer
 	else:
 		canvases = Global.canvases
 	for c in canvases:
-		Global.undo_redo.add_do_property(c.layers[c.current_layer_index][0], "data", c.layers[c.current_layer_index][0].data)
+		Global.undo_redo.add_do_property(c.layers[Global.current_layer][0], "data", c.layers[Global.current_layer][0].data)
 	if action == "Rectangle Select":
 		Global.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
