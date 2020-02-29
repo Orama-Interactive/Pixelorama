@@ -51,7 +51,7 @@ func _ready() -> void:
 			var tex := ImageTexture.new()
 			tex.create_from_image(sprite, 0)
 
-			# Store [Image, ImageTexture, Layer Name, Opacity]
+			# Store [Image, ImageTexture, Opacity]
 			layers.append([sprite, tex, 1])
 
 		var frame_button = load("res://Prefabs/FrameButton.tscn").instance()

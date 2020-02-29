@@ -154,8 +154,6 @@ func add_layer(is_new := true) -> void:
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
-	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer + 1)
-	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 
 	for c in Global.canvases:
 		var new_layer := Image.new()
@@ -174,6 +172,8 @@ func add_layer(is_new := true) -> void:
 		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
+	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer + 1)
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
 	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
 
@@ -187,7 +187,6 @@ func _on_RemoveLayer_pressed() -> void:
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Layer")
 	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
-	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 
 	for c in Global.canvases:
 		var new_canvas_layers : Array = c.layers.duplicate()
@@ -195,6 +194,7 @@ func _on_RemoveLayer_pressed() -> void:
 		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
 	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
@@ -202,17 +202,25 @@ func _on_RemoveLayer_pressed() -> void:
 	Global.undo_redo.commit_action()
 
 func change_layer_order(rate : int) -> void:
-	var change = Global.canvas.current_layer_index + rate
+	var change = Global.current_layer + rate
 
-	var new_layers : Array = Global.canvas.layers.duplicate()
-	var temp = new_layers[Global.canvas.current_layer_index]
-	new_layers[Global.canvas.current_layer_index] = new_layers[change]
+	var new_layers : Array = Global.layers.duplicate()
+	var temp = new_layers[Global.current_layer]
+	new_layers[Global.current_layer] = new_layers[change]
 	new_layers[change] = temp
 	Global.undo_redo.create_action("Change Layer Order")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas, "current_layer_index", change)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "current_layer_index", Global.canvas.current_layer_index)
+	for c in Global.canvases:
+		var new_layers_canvas : Array = c.layers.duplicate()
+		var temp_canvas = new_layers_canvas[Global.current_layer]
+		new_layers_canvas[Global.current_layer] = new_layers_canvas[change]
+		new_layers_canvas[change] = temp_canvas
+		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
+		Global.undo_redo.add_undo_property(c, "layers", c.layers)
+
+	Global.undo_redo.add_do_property(Global, "current_layer", change)
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
+	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
+	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
 
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
@@ -220,17 +228,17 @@ func change_layer_order(rate : int) -> void:
 
 func _on_MergeDownLayer_pressed() -> void:
 	var new_layers : Array = Global.canvas.layers.duplicate()
-	new_layers.remove(Global.canvas.current_layer_index)
-	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
-	if Global.canvas.layers[Global.canvas.current_layer_index][4] < 1: # If we have layer transparency
+	new_layers.remove(Global.current_layer)
+	var selected_layer = Global.canvas.layers[Global.current_layer][0]
+	if Global.canvas.layers[Global.current_layer][2] < 1: # If we have layer transparency
 		for xx in selected_layer.get_size().x:
 			for yy in selected_layer.get_size().y:
 				var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-				var alpha : float = pixel_color.a * Global.canvas.layers[Global.canvas.current_layer_index][4]
+				var alpha : float = pixel_color.a * Global.canvas.layers[Global.current_layer][4]
 				selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
 	var new_layer := Image.new()
-	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
+	new_layer.copy_from(Global.canvas.layers[Global.current_layer - 1][0])
 	new_layer.lock()
 
 	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
@@ -238,9 +246,9 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undos += 1
 	Global.undo_redo.create_action("Merge Layer")
 	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", new_layer.data)
+	Global.undo_redo.add_do_property(Global.canvas.layers[Global.current_layer - 1][0], "data", new_layer.data)
 	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", Global.canvas.layers[Global.canvas.current_layer_index - 1][0].data)
+	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.current_layer - 1][0], "data", Global.canvas.layers[Global.current_layer - 1][0].data)
 
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])

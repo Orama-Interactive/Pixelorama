@@ -47,7 +47,6 @@ func changed_selection() -> void:
 	var parent := get_parent()
 	for child in parent.get_children():
 		if child is Button:
-			#print(child.name)
 			child.label.visible = true
 			child.line_edit.visible = false
 			child.line_edit.editable = false

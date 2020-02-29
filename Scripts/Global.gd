@@ -15,7 +15,7 @@ var saved := true # Checks if the user has saved
 # Canvas related stuff
 var layers := [] setget layers_changed
 var current_frame := 0 setget frame_changed
-var current_layer := 0
+var current_layer := 0 setget layer_changed
 # warning-ignore:unused_class_variable
 var can_draw := false
 # warning-ignore:unused_class_variable
@@ -410,13 +410,6 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 			if action_name == "Scale":
 				c.camera_zoom()
 
-#	if "Layer" in action_name:
-#		var current_layer_index : int = _canvases[0].current_layer_index
-#		_canvases[0].generate_layer_panels()
-#		if action_name == "Change Layer Order":
-#			_canvases[0].current_layer_index = current_layer_index
-#			_canvases[0].get_layer_container(current_layer_index).changed_selection()
-
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
 		frames_container.remove_child(_canvases[0].frame_button)
@@ -455,41 +448,6 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 			if action_name == "Scale":
 				c.camera_zoom()
-#	if action_name == "Add Layer":
-#		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-#		layers[current_layer][0] = tr("Layer") + " %s" % current_layer
-#		layer_container.i = current_layer
-#		layer_container.get_child(0).get_child(1).text = layers[current_layer][0]
-#		layer_container.get_child(0).get_child(2).text = layers[current_layer][0]
-#		layers_container.add_child(layer_container)
-#		layers_container.move_child(layer_container, 0)
-#
-#		frames_container.add_child(layers[current_layer][2])
-#		frames_container.move_child(layers[current_layer][2], 0)
-#		for i in range(canvases.size()):
-#			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
-#			frame_button.frame = i
-#			frame_button.layer = current_layer
-#			frame_button.pressed = true
-#
-#			layers[current_layer][2].add_child(frame_button)
-#
-#		remove_layer_button.disabled = false
-#		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-#
-#	if action_name == "Remove Layer":
-#		var layer_container_child_index = (layers_container.get_child_count() - 1) - layer_index
-#		layers_container.remove_child(layers_container.get_child(layer_container_child_index))
-#		print(layer_index, layers[layer_index][2])
-#		frames_container.remove_child(layers[layer_index][2])
-#		if layers.size() == 2: # Actually 1, but it hasn't been updated yet
-#			remove_layer_button.disabled = true
-#			remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-
-#	if action_name == "Change Layer Order":
-#		var current_layer_index : int = _canvases[0].current_layer_index
-#		_canvases[0].current_layer_index = current_layer_index
-#		_canvases[0].get_layer_container(current_layer_index).changed_selection()
 
 	if action_name == "Add Frame":
 		canvas_parent.add_child(_canvases[0])
@@ -551,6 +509,7 @@ func layers_changed(value : Array) -> void:
 			frame_button.frame = j
 			frame_button.layer = i
 			frame_button.pressed = true
+			frame_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
 			layers[i][2].add_child(frame_button)
 
@@ -582,6 +541,27 @@ func frame_changed(value : int) -> void:
 	# Make only the current frame button pressed
 	#canvas.frame_button.pressed = true
 	#canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
+
+func layer_changed(value : int) -> void:
+	current_layer = value
+	layer_opacity_slider.value = canvas.layers[current_layer][2] * 100
+	layer_opacity_spinbox.value = canvas.layers[current_layer][2] * 100
+	if current_layer < layers.size() - 1:
+		move_up_layer_button.disabled = false
+		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	else:
+		move_up_layer_button.disabled = true
+		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+
+	if current_layer > 0:
+		move_down_layer_button.disabled = false
+		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		merge_down_layer_button.disabled = false
+		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	else:
+		move_down_layer_button.disabled = true
+		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		merge_down_layer_button.disabled = true
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container
