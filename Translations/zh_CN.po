@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-02-29 12:52\n"
+"PO-Revision-Date: 2020-02-29 12:57\n"
 
 msgid "OK"
 msgstr "确定"
@@ -331,16 +331,16 @@ msgid "Chinese Simplified"
 msgstr "简体中文"
 
 msgid "Chinese Traditional"
-msgstr "繁体中文"
+msgstr "中文（繁体）"
 
 msgid "Italian"
-msgstr ""
+msgstr "意大利语"
 
 msgid "Latvian"
-msgstr ""
+msgstr "拉美语"
 
 msgid "Spanish"
-msgstr ""
+msgstr "西班牙语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -370,16 +370,16 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "您确定要退出 Pixelorama 吗?"
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "退出前保存吗？"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "您有未保存的进度。您想继续吗？"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "保存并退出"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "退出且不保存"
 
 msgid "Utility Tools"
 msgstr "实用工具"
