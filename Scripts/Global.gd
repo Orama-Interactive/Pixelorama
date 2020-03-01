@@ -386,6 +386,7 @@ func notification_label(text : String) -> void:
 	var notification : Label = load("res://Prefabs/NotificationLabel.tscn").instance()
 	notification.text = tr(text)
 	notification.rect_position = Vector2(240, OS.window_size.y - 150)
+	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
 func undo(_canvases : Array, layer_index : int = -1) -> void:

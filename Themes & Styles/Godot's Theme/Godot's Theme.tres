@@ -1,15 +1,6 @@
-[gd_resource type="Theme" load_steps=3 format=2]
-
-[ext_resource path="res://Assets/Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
-
-[sub_resource type="DynamicFont" id=1]
-size = 12
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
+[gd_resource type="Theme" format=2]
 
 [resource]
-default_font = SubResource( 1 )
 Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )

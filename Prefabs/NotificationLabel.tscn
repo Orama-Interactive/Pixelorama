@@ -1,20 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Themes & Styles/Godot's Theme/Godot's Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/NotificationLabel.gd" type="Script" id=2]
-
-
-
-
-
 
 [node name="NotificationLabel" type="Label"]
 margin_right = 116.0
 margin_bottom = 14.0
-theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Undo: Notification"
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
 
