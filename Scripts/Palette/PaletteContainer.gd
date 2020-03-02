@@ -43,6 +43,8 @@ func on_palette_import_file_selected(path : String) -> void:
 		palette = Palette.new().load_from_file(path)
 	elif path.to_lower().ends_with("gpl"):
 		palette = Import.import_gpl(path)
+	elif path.to_lower().ends_with("png"):
+		palette = Import.import_png_palette(path)
 
 	if palette:
 		if not Global.palettes.has(palette.name):

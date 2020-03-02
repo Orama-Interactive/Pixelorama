@@ -87,3 +87,33 @@ func import_gpl(path : String) -> Palette:
 		file.close()
 
 	return result
+
+func import_png_palette(path: String) -> Palette:
+	var result: Palette = null
+
+	var image := Image.new()
+	var err := image.load(path)
+	if err != OK: # An error occured
+		return null
+
+	var height: int = image.get_height()
+	var width: int = image.get_width()
+
+	result = Palette.new()
+
+	# Iterate all pixels and store unique colors to palete
+	image.lock()
+	for y in range(0, height):
+		for x in range(0, width):
+			var color: Color = image.get_pixel(x, y)
+			if not result.has_color(color):
+				result.add_color(color, "#" + color.to_html())
+	image.unlock()
+
+	var name_start = path.find_last('/') + 1
+	var name_end = path.find_last('.')
+	if name_end > name_start:
+		result.name = path.substr(name_start, name_end - name_start)
+
+	return result
+	pass
