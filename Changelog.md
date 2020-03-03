@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [v0.7] - Unreleased
+
+### Added
+- Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
+- A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
+
+### Changed
+- An asterisk is added to the window title if there are unsaved changes.
+- Notification text is now black on the gold and light themes.
+
+### Fixed
+- Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)
+
 ## [v0.6.2] - 17-02-2020
 
 ### Added
