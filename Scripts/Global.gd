@@ -13,6 +13,7 @@ var undos := 0 # The number of times we added undo properties
 var saved := true # Checks if the user has saved
 
 # Canvas related stuff
+var canvases := [] setget canvases_changed
 var layers := [] setget layers_changed
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
@@ -20,7 +21,6 @@ var current_layer := 0 setget layer_changed
 var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := false
-var canvases := []
 # warning-ignore:unused_class_variable
 var hidden_canvases := []
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
@@ -412,7 +412,6 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 
 	if action_name == "Add Frame":
 		canvas_parent.remove_child(_canvases[0])
-		frames_container.remove_child(_canvases[0].frame_button)
 		# This actually means that canvases.size is one, but it hasn't been updated yet
 		if canvases.size() == 2: # Stop animating
 			play_forward.pressed = false
@@ -421,10 +420,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	elif action_name == "Remove Frame":
 		canvas_parent.add_child(_canvases[0])
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-		frames_container.add_child(_canvases[0].frame_button)
-		frames_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 	elif action_name == "Change Frame Order":
-		frames_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
@@ -451,22 +447,15 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 	if action_name == "Add Frame":
 		canvas_parent.add_child(_canvases[0])
-		var label := Label.new()
-		label.rect_min_size.x = 36
-		label.align = Label.ALIGN_CENTER
-		label.text = str(canvases.size() + 1)
-		frame_ids.add_child(label)
 		#if !frames_container.is_a_parent_of(_canvases[0].frame_button):
 		#	frames_container.add_child(_canvases[0].frame_button)
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
-		frames_container.remove_child(_canvases[0].frame_button)
 		if canvases.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 	elif action_name == "Change Frame Order":
-		frames_container.move_child(_canvases[0].frame_button, _canvases[0].frame)
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
@@ -480,10 +469,37 @@ func title_changed(value : String) -> void:
 	window_title = value
 	OS.set_window_title(value)
 
+func canvases_changed(value : Array) -> void:
+	canvases = value
+	for container in frames_container.get_children():
+		for button in container.get_children():
+			button.queue_free()
+		frames_container.remove_child(container)
+
+	for frame_id in frame_ids.get_children():
+		frame_id.queue_free()
+
+	for i in range(layers.size() - 1, -1, -1):
+		frames_container.add_child(layers[i][2])
+
+	for j in range(canvases.size()):
+		var label := Label.new()
+		label.rect_min_size.x = 36
+		label.align = Label.ALIGN_CENTER
+		label.text = str(j + 1)
+		frame_ids.add_child(label)
+
+		for i in range(layers.size() - 1, -1, -1):
+			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
+			frame_button.frame = j
+			frame_button.layer = i
+			frame_button.pressed = true
+			frame_button.get_child(0).texture = Global.canvases[j].layers[i][1]
+
+			layers[i][2].add_child(frame_button)
+
 func layers_changed(value : Array) -> void:
 	layers = value
-	print(layers)
-	print(str(layers_container.get_child_count()) + " " + str(frames_container.get_child_count()))
 
 	for container in layers_container.get_children():
 		container.queue_free()

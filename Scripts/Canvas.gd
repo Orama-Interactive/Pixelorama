@@ -31,7 +31,6 @@ var pen_pressure := 1.0 # For tablet pressure sensitivity
 func _ready() -> void:
 	var fill_layers := layers.empty()
 	for i in range(Global.layers.size()):
-		print(i)
 		if fill_layers:
 			# The sprite itself
 			var sprite := Image.new()
@@ -53,14 +52,6 @@ func _ready() -> void:
 
 			# Store [Image, ImageTexture, Opacity]
 			layers.append([sprite, tex, 1])
-
-		var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
-		frame_button.frame = frame
-		frame_button.layer = i
-		frame_button.pressed = true
-		#frame_button.get_node("FrameID").text = str(frame + 1)
-		#frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
-		Global.layers[i][2].add_child(frame_button)
 
 	# Only handle camera zoom settings & offset on the first frame
 	if Global.canvases[0] == self:
