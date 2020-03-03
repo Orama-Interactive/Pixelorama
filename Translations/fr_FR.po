@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-03 18:27\n"
+"PO-Revision-Date: 2020-03-03 19:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -376,10 +376,10 @@ msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr "Vous avez des progrès non enregistrés. Comment voulez-vous procéder?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Enregistrer et quitter"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Quitter sans enregistrer"
 
 msgid "Utility Tools"
 msgstr "Outils utilitaires"
@@ -468,10 +468,10 @@ msgid "Brush: Pixel"
 msgstr "Brosse : Pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Pinceau: Cercle"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Pinceau: Cercle rempli"
 
 msgid "Custom brush"
 msgstr "Brosse personnalisée"
@@ -507,19 +507,19 @@ msgid "LDAMOUNT_HT"
 msgstr "Quantité d'éclaircissement/assombrissement"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Choisir pour:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Couleur à gauche"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Couleur à droite"
 
 msgid "Mirroring"
 msgstr "Miroir"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 msgid "HORIZMIRROR_HT"
 msgstr "Dessine avec un miroir horizontal"
@@ -528,7 +528,7 @@ msgid "VERTMIRROR_HT"
 msgstr "Dessine avec un miroir vertical"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Trame actuelle :"
@@ -601,7 +601,7 @@ msgid "Move Right"
 msgstr "Déplacer vers la droite"
 
 msgid "Layer"
-msgstr ""
+msgstr "Couche"
 
 msgid "Layers"
 msgstr "Calques"
@@ -625,25 +625,25 @@ msgid "LAYERMERGE_HT"
 msgstr "Fusionner le calque vers le bas"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacité:"
 
 msgid "LAYERVISIBILITY_HT"
 msgstr "Afficher/Masquer le calque"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palette"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Palettes"
 
 msgid "NEWPALETTE_HT"
-msgstr ""
+msgstr "Ajouter une nouvelle palette"
 
 msgid "EDITPALETTE_HT"
-msgstr ""
+msgstr "Modifier la palette sélectionnée"
 
 msgid "CHOOSEPALETTE_HT"
-msgstr ""
+msgstr "Choisir une palette"
 
 msgid "Undo: Draw"
 msgstr "Annuler : Dessin"
@@ -721,52 +721,52 @@ msgid "File exported"
 msgstr "Fichier exporté"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Nouvelle palette vide"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importer une palette"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Nom de la palette:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Nom de la couleur:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Créer une nouvelle palette vide?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Erreur: La palette doit avoir un nom valide."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Erreur: La palette nommée '%s' existe déjà!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Fichier Palette invalide!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Modifier la palette"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Modifications"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Sponsor en Platine"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Sponsors en Or"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Espace réservé au Sponsor en Platine"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Espace réservé aux Sponsors en Or"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Ne plus afficher"
 
 msgid "Take this spot!"
 msgstr "Prenez cet endroit!"
