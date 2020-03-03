@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-03 17:46\n"
+"PO-Revision-Date: 2020-03-03 18:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,7 +134,7 @@ msgid "IMPORT_FILE_LABEL"
 msgstr "Importer en tant que trame"
 
 msgid "IMPORT_SPRITESHEET"
-msgstr ""
+msgstr "Importer comme étant une spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
@@ -157,13 +157,13 @@ msgid "Resize:"
 msgstr "Redimensionner:"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr ""
+msgstr "Exporter cette frame"
 
 msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr ""
+msgstr "Exporter toutes les frames en fichiers multiples"
 
 msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr ""
+msgstr "Exporter toutes les frames en une seule spritesheet"
 
 msgid "Columns"
 msgstr "Colonnes"
@@ -217,19 +217,19 @@ msgid "Smooth Zoom"
 msgstr "Zoom fluide"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sensibilité à la pression de la tablette:"
 
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Affecter l'Alpha du pinceau"
 
 msgid "Language options"
-msgstr ""
+msgstr "Options de la langue"
 
 msgid "Theme options"
-msgstr ""
+msgstr "Options du thème"
 
 msgid "Grid options"
 msgstr "Configuration de la grille"
@@ -238,46 +238,46 @@ msgid "Color:"
 msgstr "Couleur :"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Couleur du guide:"
 
 msgid "System Language"
 msgstr "Langue système"
 
 msgid "Dark"
-msgstr ""
+msgstr "Sombre"
 
 msgid "Gray"
-msgstr ""
+msgstr "Gris"
 
 msgid "Gold"
-msgstr ""
+msgstr "Doré"
 
 msgid "Light"
-msgstr ""
+msgstr "Clair"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Inverser les couleurs"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Désaturation"
 
 msgid "Outline"
-msgstr ""
+msgstr "Contour"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonale"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Placer à l'intérieur de l'image"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Épaisseur:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Voir l'écran d'accueil"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Suivi des problèmes"
 
 msgid "Changelog"
 msgstr ""
