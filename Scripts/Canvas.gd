@@ -30,7 +30,7 @@ var pen_pressure := 1.0 # For tablet pressure sensitivity
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var fill_layers := layers.empty()
-	for i in range(Global.layers.size()):
+	for l in Global.layers:
 		if fill_layers:
 			# The sprite itself
 			var sprite := Image.new()

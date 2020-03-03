@@ -37,7 +37,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 		0: # Remove Frame
 			remove_frame()
 
-		1: # Clone Layer
+		1: # Clone Frame
 			var canvas : Canvas = Global.canvases[frame]
 			var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 			new_canvas.size = Global.canvas.size
@@ -65,10 +65,10 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
 			Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 			Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
-			for child in Global.frame_containers.get_children():
-				var frame_button = child.get_node("FrameButton")
-				Global.undo_redo.add_do_property(frame_button, "pressed", false)
-				Global.undo_redo.add_undo_property(frame_button, "pressed", frame_button.pressed)
+			for i in range(Global.layers.size()):
+				for child in Global.layers[i][2].get_children():
+					Global.undo_redo.add_do_property(child, "pressed", false)
+					Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 			for c in Global.canvases:
 				Global.undo_redo.add_do_property(c, "visible", false)
 				Global.undo_redo.add_undo_property(c, "visible", c.visible)
@@ -79,9 +79,9 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 			Global.undo_redo.commit_action()
 
-		2: #Move Left
+		2: # Move Left
 			change_frame_order(-1)
-		3: #Move Right
+		3: # Move Right
 			change_frame_order(1)
 
 func remove_frame() -> void:
