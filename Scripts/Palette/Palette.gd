@@ -50,6 +50,12 @@ func get_color_data(index : int) -> String:
 
 	return result
 
+func has_color(color: Color) -> bool:
+	for palette_color in colors:
+		if palette_color.color == color:
+			return true
+	return false
+
 func set_color_data(index : int, new_color : String) -> void:
 	if index < colors.size():
 		colors[index].data = new_color
