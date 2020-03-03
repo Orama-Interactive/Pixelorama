@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-03 17:38\n"
+"PO-Revision-Date: 2020-03-03 17:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,10 +166,10 @@ msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr ""
 
 msgid "Columns"
-msgstr ""
+msgstr "Colonnes"
 
 msgid "Rows"
-msgstr ""
+msgstr "Lignes"
 
 msgid "Path:"
 msgstr "Chemin :"
@@ -178,7 +178,7 @@ msgid "Directories & Files:"
 msgstr "Répertoires et fichiers :"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Créer un Dossier"
 
 msgid "File:"
 msgstr "Fichier :"
@@ -199,22 +199,22 @@ msgid "Trilinear"
 msgstr "Trilinéaire"
 
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 msgid "Themes"
-msgstr ""
+msgstr "Thèmes"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Guides et Grilles"
 
 msgid "General Options"
-msgstr ""
+msgstr "Options Générales"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Zoom fluide"
 
 msgid "Tablet pressure sensitivity:"
 msgstr ""
