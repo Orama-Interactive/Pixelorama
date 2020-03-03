@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-03 18:21\n"
+"PO-Revision-Date: 2020-03-03 18:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,61 +319,61 @@ msgid "German"
 msgstr "Allemand"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polonais"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugais du Brésil"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russe"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Chinois simplifié"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Chinois traditionnel"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italien"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letton"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Espagnol"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Équipe de développement"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Programmeur principal"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Designer de l'interface"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Contributeurs de GitHub"
 
 msgid "Art by"
-msgstr ""
+msgstr "Art par"
 
 msgid "untitled"
-msgstr ""
+msgstr "sans titre"
 
 msgid "imported"
-msgstr ""
+msgstr "importé"
 
 msgid "copy"
-msgstr ""
+msgstr "copier"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Voulez-vous vraiment quitter Pixelorama ?"
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Enregistrer avant de quitter?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Vous avez des progrès non enregistrés. Comment voulez-vous procéder?"
 
 msgid "Save & Exit"
 msgstr ""
