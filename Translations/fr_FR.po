@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-03 18:03\n"
+"PO-Revision-Date: 2020-03-03 18:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -80,7 +80,7 @@ msgid "Quit"
 msgstr "Quitter"
 
 msgid "Undo"
-msgstr "Annuler"
+msgstr "Défaire"
 
 msgid "Redo"
 msgstr "Refaire"
@@ -143,7 +143,7 @@ msgid "Export Sprite as .png"
 msgstr "Exporter le Sprite en .png"
 
 msgid "Export Sprite"
-msgstr "Exporter une sprite"
+msgstr "Exporter le sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "Le fichier existe déjà, voulez-vous le remplacer ?"
@@ -190,7 +190,7 @@ msgid "Nearest"
 msgstr "Le plus proche"
 
 msgid "Bilinear"
-msgstr "Linéaire"
+msgstr "Bilinéaire"
 
 msgid "Cubic"
 msgstr "Cubique"
@@ -280,7 +280,7 @@ msgid "Issue Tracker"
 msgstr "Suivi des problèmes"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Journal des modifications"
 
 msgid "About Pixelorama"
 msgstr "À propos de Pixelorama"
@@ -295,28 +295,28 @@ msgid "Donate"
 msgstr "Faire un don"
 
 msgid "Developers"
-msgstr ""
+msgstr "Développeurs"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Contributeurs"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donateurs"
 
 msgid "Translators"
-msgstr ""
+msgstr "Traducteurs"
 
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 msgid "Greek"
-msgstr ""
+msgstr "Grec"
 
 msgid "French"
-msgstr ""
+msgstr "Français"
 
 msgid "German"
-msgstr ""
+msgstr "Allemand"
 
 msgid "Polish"
 msgstr ""
@@ -769,17 +769,17 @@ msgid "Don't show again"
 msgstr ""
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Prenez cet endroit!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Options d'image"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Largeur par défaut:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Hauteur par défaut:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Couleur de remplissage par défaut:"
 
