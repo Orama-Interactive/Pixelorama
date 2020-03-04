@@ -529,6 +529,9 @@ func layers_changed(value : Array) -> void:
 
 			layers[i][2].add_child(frame_button)
 
+	var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
+	layer_button.pressed = true
+
 	if layers.size() == 1:
 		remove_layer_button.disabled = true
 		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
@@ -568,6 +571,14 @@ func layer_changed(value : int) -> void:
 	current_layer = value
 	layer_opacity_slider.value = canvas.layers[current_layer][2] * 100
 	layer_opacity_spinbox.value = canvas.layers[current_layer][2] * 100
+
+	for container in layers_container.get_children():
+		container.pressed = false
+
+	if current_layer < layers_container.get_child_count():
+		var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
+		layer_button.pressed = true
+
 	if current_layer < layers.size() - 1:
 		move_up_layer_button.disabled = false
 		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
