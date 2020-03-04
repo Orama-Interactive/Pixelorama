@@ -417,7 +417,7 @@ func _input(event : InputEvent) -> void:
 	previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
 	previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
 	if sprite_changed_this_frame:
-		update_texture(Global.current_layer, (Input.is_action_just_released("left_mouse") || Input.is_action_just_released("right_mouse")))
+		update_texture(Global.current_layer)
 
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
@@ -489,25 +489,12 @@ func handle_redo(action : String) -> void:
 	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
 
-func update_texture(layer_index : int, update_frame_tex := true) -> void:
+func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
-#	var layer_container := get_layer_container(layer_index)
-#	if layer_container:
-#		layer_container.get_child(1).get_child(0).texture = layers[layer_index][1]
+
 	var frame_texture_rect : TextureRect
 	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index][2].get_child(frame),"FrameTexture")
 	frame_texture_rect.texture = layers[layer_index][1]
-#	if update_frame_tex:
-#		# This code is used to update the texture in the animation timeline frame button
-#		# but blend_rect causes major performance issues on large images
-#		var whole_image := Image.new()
-#		whole_image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-#		for layer in layers:
-#			whole_image.blend_rect(layer[0], Rect2(position, size), Vector2.ZERO)
-#			layer[0].lock()
-#		var whole_image_texture := ImageTexture.new()
-#		whole_image_texture.create_from_image(whole_image, 0)
-#		frame_texture_rect.texture = whole_image_texture
 
 func frame_changed(value : int) -> void:
 	frame = value
@@ -520,29 +507,6 @@ func get_layer_container(layer_index : int) -> LayerContainer:
 		if container is LayerContainer && container.i == layer_index:
 			return container
 	return null
-
-func generate_layer_panels() -> void:
-	return
-	for child in Global.layers_container.get_children():
-		if child is LayerContainer:
-			child.queue_free()
-
-	current_layer_index = layers.size() - 1
-	if layers.size() == 1:
-		Global.remove_layer_button.disabled = true
-		Global.remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-	else:
-		Global.remove_layer_button.disabled = false
-		Global.remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-
-	for i in range(layers.size() -1, -1, -1):
-		var layer_container = load("res://Prefabs/LayerContainer.tscn").instance()
-#		if !layers[i][2]:
-#			layers[i][2] = tr("Layer") + " %s" % i
-		layer_container.i = i
-		layer_container.get_child(0).get_child(1).text = layers[i][2]
-		layer_container.get_child(0).get_child(2).text = layers[i][2]
-		Global.layer_and_frame_container.add_child(layer_container)
 
 func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if made_line:

@@ -473,10 +473,12 @@ func canvases_changed(value : Array) -> void:
 	canvases = value
 	for container in frames_container.get_children():
 		for button in container.get_children():
+			container.remove_child(button)
 			button.queue_free()
 		frames_container.remove_child(container)
 
 	for frame_id in frame_ids.get_children():
+		frame_ids.remove_child(frame_id)
 		frame_id.queue_free()
 
 	for i in range(layers.size() - 1, -1, -1):
@@ -506,6 +508,7 @@ func layers_changed(value : Array) -> void:
 
 	for container in frames_container.get_children():
 		for button in container.get_children():
+			container.remove_child(button)
 			button.queue_free()
 		frames_container.remove_child(container)
 
@@ -524,13 +527,13 @@ func layers_changed(value : Array) -> void:
 			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 			frame_button.frame = j
 			frame_button.layer = i
-			frame_button.pressed = true
 			frame_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
 			layers[i][2].add_child(frame_button)
 
 	var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
 	layer_button.pressed = true
+	self.current_frame = current_frame # Call frame_changed to update UI
 
 	if layers.size() == 1:
 		remove_layer_button.disabled = true
@@ -549,23 +552,26 @@ func frame_changed(value : int) -> void:
 	current_frame = value
 	current_frame_label.text = tr("Current frame:") + " %s/%s" % [str(current_frame + 1), canvases.size()]
 
-	for c in canvases:
+	var i := 0
+	for c in canvases: # De-select all the other canvases/frames
 		c.visible = false
 		c.is_making_line = false
 		c.line_2d.set_point_position(1, c.line_2d.points[0])
-	canvas = canvases[current_frame]
-	canvas.visible = true
-	#canvas.generate_layer_panels()
-	# Make all frame buttons unpressed
-	for c in canvases:
 		var text_color := Color.white
 		if theme_type == "Gold" || theme_type == "Light":
 			text_color = Color.black
-		#c.frame_button.pressed = false
-		#c.frame_button.get_node("FrameID").add_color_override("font_color", text_color)
-	# Make only the current frame button pressed
-	#canvas.frame_button.pressed = true
-	#canvas.frame_button.get_node("FrameID").add_color_override("font_color", Color("#3c5d75"))
+		frame_ids.get_child(i).add_color_override("font_color", text_color)
+		for layer in layers:
+			if i < layer[2].get_child_count():
+				layer[2].get_child(i).pressed = false
+		i += 1
+
+	# Select the new canvas/frame
+	canvas = canvases[current_frame]
+	canvas.visible = true
+	frame_ids.get_child(current_frame).add_color_override("font_color", Color("#3c5d75"))
+	if current_frame < layers[current_layer][2].get_child_count():
+		layers[current_layer][2].get_child(current_frame).pressed = true
 
 func layer_changed(value : int) -> void:
 	current_layer = value
@@ -596,6 +602,9 @@ func layer_changed(value : int) -> void:
 		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		merge_down_layer_button.disabled = true
 		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+
+	yield(get_tree().create_timer(0.01), "timeout")
+	self.current_frame = current_frame # Call frame_changed to update UI
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container
