@@ -27,6 +27,22 @@
  
 [![Pixelorama's UI](https://static.wixstatic.com/media/cc6108_ccec89c37b3d425da4f03776160c859c~mv2.png)](https://www.youtube.com/watch?v=DULv-jzueRw&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=7)
 
+Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
+Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
+
+If you like, consider helping us by sponsoring this project! It would enable us to focus more on Pixelorama, and make more projects in the future!
+
+You can also support the development on patreon: [![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
+
+## Download
+- [Itch.io (Windows, Linux & Mac)](https://orama-interactive.itch.io/pixelorama)
+- [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
+- [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
+- [Snap Store (Linux)](https://snapcraft.io/pixelorama)
+
+## Documentation
+Coming soon!
+
 ## Dependencies
 Pixelorama uses Godot 3.2. As of right now, all of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
@@ -55,10 +71,3 @@ Pixelorama uses Godot 3.2. As of right now, all of the code is written using GDS
 - Scale, crop, rotate, flip, color invert and desaturate your images!
 - English, Greek, German, French, Polish, Brazilian Portuguese, Russian, Traditional and Simplified Chinese, Italian, Spanish and Latvian localization support!
 
-Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
-Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
-
-Download it as a stand-alone on itch.io: https://orama-interactive.itch.io/pixelorama
-
-If you like, consider helping us by sponsoring this project! It would enable us to focus more on Pixelorama, and make more projects in the future!
-Patreon link: https://patreon.com/OramaInteractive
