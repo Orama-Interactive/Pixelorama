@@ -86,6 +86,9 @@ margin_bottom = 620.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_horizontal = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VSeparator" type="VSeparator" parent="."]
 anchor_bottom = 1.0
@@ -181,6 +184,7 @@ texture_hover = ExtResource( 16 )
 texture_disabled = ExtResource( 17 )
 
 [node name="AnimationTags" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/LayerButtons"]
+visible = false
 margin_left = 216.0
 margin_right = 326.0
 margin_bottom = 32.0

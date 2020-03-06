@@ -77,7 +77,7 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 	for layer in canvas.layers:
 		var img : Image = layer[0]
 		img.lock()
-		if layer[4] < 1: # If we have layer transparency
+		if layer[2] < 1: # If we have layer transparency
 			for xx in img.get_size().x:
 				for yy in img.get_size().y:
 					var pixel_color := img.get_pixel(xx, yy)
@@ -132,7 +132,7 @@ func save_spritesheet() -> void:
 		for layer in canvas.layers:
 			var img : Image = layer[0]
 			img.lock()
-			if layer[4] < 1: # If we have layer transparency
+			if layer[2] < 1: # If we have layer transparency
 				for xx in img.get_size().x:
 					for yy in img.get_size().y:
 						var pixel_color := img.get_pixel(xx, yy)
