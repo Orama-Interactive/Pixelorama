@@ -553,11 +553,6 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 		_on_QuitDialog_confirmed()
 
 func clear_canvases() -> void:
-	for child in Global.vbox_layer_container.get_children():
-		if child is PanelContainer:
-			child.queue_free()
-	for child in Global.frame_containers.get_children():
-		child.queue_free()
 	for child in Global.canvas_parent.get_children():
 		if child is Canvas:
 			child.queue_free()
