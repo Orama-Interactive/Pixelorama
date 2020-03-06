@@ -495,7 +495,6 @@ func canvases_changed(value : Array) -> void:
 			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 			frame_button.frame = j
 			frame_button.layer = i
-			frame_button.pressed = true
 			frame_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
 			layers[i][2].add_child(frame_button)

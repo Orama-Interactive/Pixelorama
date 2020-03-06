@@ -126,6 +126,10 @@ func change_frame_order(rate : int) -> void:
 	Global.undo_redo.add_do_property(Global.canvases[frame], "frame", change)
 	Global.undo_redo.add_do_property(Global.canvases[change], "frame", frame)
 
+	if Global.current_frame == frame:
+		Global.undo_redo.add_do_property(Global, "current_frame", change)
+		Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global.canvases[frame], "frame", frame)
 	Global.undo_redo.add_undo_property(Global.canvases[change], "frame", change)
