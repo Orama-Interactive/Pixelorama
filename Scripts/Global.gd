@@ -375,7 +375,6 @@ func _ready() -> void:
 
 	# Store [Layer name, Layer visibility boolean, Frame container]
 	layers.append([tr("Layer") + " 0", true, HBoxContainer.new()])
-	frames_container.add_child(layers[0][2])
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:

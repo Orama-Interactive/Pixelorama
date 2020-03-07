@@ -399,7 +399,18 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	var version_number = float(version.substr(1, 3)) # Example, "0.6"
 	if current_version_number < 0.5:
 		OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
+
 	var frame := 0
+	Global.layers.clear()
+	if (version_number - 0.01) > 0.6:
+		var global_layer_line := file.get_line()
+		while global_layer_line == ".":
+			var layer_name := file.get_line()
+			var layer_visibility := file.get_8()
+			# Store [Layer name, Layer visibility boolean, Frame container]
+			Global.layers.append([layer_name, layer_visibility, HBoxContainer.new()])
+			global_layer_line = file.get_line()
+
 	var frame_line := file.get_line()
 	clear_canvases()
 	while frame_line == "--": # Load frames
@@ -407,12 +418,14 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		Global.canvas = canvas
 		var width := file.get_16()
 		var height := file.get_16()
-		print(width, height)
 
 		var layer_line := file.get_line()
 		while layer_line == "-": # Load layers
 			var buffer := file.get_buffer(width * height * 4)
-			var layer_name := file.get_line()
+			if version_number < (0.7 - 0.01):
+				var layer_name_old_version = file.get_line()
+				if frame == 0:
+					Global.layers.append([layer_name_old_version, true, HBoxContainer.new()])
 			var layer_transparency := 1.0
 			if version_number > 0.5:
 				layer_transparency = file.get_float()
@@ -421,7 +434,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			image.lock()
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
-			canvas.layers.append([image, tex, layer_name, true, layer_transparency])
+			canvas.layers.append([image, tex, layer_transparency])
 			layer_line = file.get_line()
 
 		var guide_line := file.get_line() # "guideline" no pun intended
@@ -446,7 +459,9 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		frame_line = file.get_line()
 		frame += 1
 
+	Global.canvases = Global.canvases # Just to call Global.canvases_changed
 	Global.current_frame = frame - 1
+	Global.layers = Global.layers # Just to call Global.layers_changed
 	# Load tool options
 	Global.left_color_picker.color = file.get_var()
 	Global.right_color_picker.color = file.get_var()
@@ -454,12 +469,13 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	Global.left_brush_size_edit.value = Global.left_brush_size
 	Global.right_brush_size = file.get_8()
 	Global.right_brush_size_edit.value = Global.right_brush_size
-	var left_palette = file.get_var()
-	var right_palette = file.get_var()
-	for color in left_palette:
-		Global.left_color_picker.get_picker().add_preset(color)
-	for color in right_palette:
-		Global.right_color_picker.get_picker().add_preset(color)
+	if version_number < (0.7 - 0.01):
+		var left_palette = file.get_var()
+		var right_palette = file.get_var()
+		for color in left_palette:
+			Global.left_color_picker.get_picker().add_preset(color)
+		for color in right_palette:
+			Global.right_color_picker.get_picker().add_preset(color)
 
 	# Load custom brushes
 	Global.custom_brushes.resize(Global.brushes_from_files)
@@ -498,15 +514,21 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 	var err := file.open(path, File.WRITE)
 	if err == OK:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
+
+		for layer in Global.layers: # Store Global layers
+			file.store_line(".")
+			file.store_line(layer[0]) # Layer name
+			file.store_8(layer[1]) # Layer visibility
+		file.store_line("END_GLOBAL_LAYERS")
+
 		for canvas in Global.canvases: # Store frames
 			file.store_line("--")
 			file.store_16(canvas.size.x)
 			file.store_16(canvas.size.y)
-			for layer in canvas.layers: # Store layers
+			for layer in canvas.layers: # Store canvas layers
 				file.store_line("-")
 				file.store_buffer(layer[0].get_data())
-				file.store_line(layer[2]) # Layer name
-				file.store_float(layer[4]) # Layer transparency
+				file.store_float(layer[2]) # Layer transparency
 			file.store_line("END_LAYERS")
 
 			for child in canvas.get_children(): # Store guides
@@ -523,19 +545,15 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 		file.store_line("END_FRAMES")
 
 		# Save tool options
-		var left_color: Color = Global.left_color_picker.color
-		var right_color: Color = Global.right_color_picker.color
-		var left_brush_size: int = Global.left_brush_size
-		var right_brush_size: int = Global.right_brush_size
-		var left_palette: PoolColorArray = Global.left_color_picker.get_picker().get_presets()
-		var right_palette: PoolColorArray = Global.right_color_picker.get_picker().get_presets()
+		var left_color : Color = Global.left_color_picker.color
+		var right_color : Color = Global.right_color_picker.color
+		var left_brush_size : int = Global.left_brush_size
+		var right_brush_size : int = Global.right_brush_size
 		file.store_var(left_color)
 		file.store_var(right_color)
 		file.store_8(left_brush_size)
 		file.store_8(right_brush_size)
-		file.store_var(left_palette)
-		file.store_var(right_palette)
-		#Save custom brushes
+		# Save custom brushes
 		for i in range(Global.brushes_from_files, Global.custom_brushes.size()):
 			var brush = Global.custom_brushes[i]
 			file.store_line("/")
