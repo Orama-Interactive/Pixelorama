@@ -10,11 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
 
 ### Changed
+- The timeline has been revamped!
 - An asterisk is added to the window title if there are unsaved changes.
+- A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)
+- Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
 
 ## [v0.6.2] - 17-02-2020
 

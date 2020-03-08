@@ -919,22 +919,22 @@ hint_tooltip = "VERTMIRROR_HT"
 mouse_default_cursor_shape = 2
 text = "Vertical"
 
-[node name="CanvasAndTimeline" type="VBoxContainer" parent="MenuAndUI/UI"]
+[node name="CanvasAndTimeline" type="VSplitContainer" parent="MenuAndUI/UI"]
 margin_left = 224.0
 margin_right = 928.0
 margin_bottom = 620.0
 size_flags_horizontal = 3
-custom_constants/separation = 0
+custom_constants/autohide = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
 margin_right = 704.0
-margin_bottom = 420.0
+margin_bottom = 408.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
 margin_right = 704.0
-margin_bottom = 420.0
+margin_bottom = 408.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -955,20 +955,20 @@ script = ExtResource( 14 )
 [node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 margin_top = 16.0
 margin_right = 704.0
-margin_bottom = 420.0
+margin_bottom = 408.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
 margin_right = 692.0
-margin_bottom = 404.0
+margin_bottom = 392.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 404.0
+margin_bottom = 392.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -985,13 +985,13 @@ script = ExtResource( 15 )
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
 margin_right = 692.0
-margin_bottom = 404.0
+margin_bottom = 392.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 676, 404 )
+size = Vector2( 676, 392 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -1015,12 +1015,12 @@ script = ExtResource( 18 )
 [node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
 margin_left = 704.0
 margin_right = 704.0
-margin_bottom = 404.0
+margin_bottom = 392.0
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 404 )
+size = Vector2( 0, 392 )
 handle_input_locally = false
 render_target_update_mode = 3
 script = ExtResource( 19 )
@@ -1276,6 +1276,9 @@ margin_bottom = 70.0
 window_title = "Save before exiting?"
 resizable = true
 dialog_text = "You have unsaved progress. How do you wish to proceed?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 margin_right = 76.0
