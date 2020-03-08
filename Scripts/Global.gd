@@ -446,8 +446,6 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 
 	if action_name == "Add Frame":
 		canvas_parent.add_child(_canvases[0])
-		#if !frames_container.is_a_parent_of(_canvases[0].frame_button):
-		#	frames_container.add_child(_canvases[0].frame_button)
 	elif action_name == "Remove Frame":
 		canvas_parent.remove_child(_canvases[0])
 		if canvases.size() == 1: # Stop animating
