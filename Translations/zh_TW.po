@@ -8,10 +8,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-02-16 15:09\n"
+"PO-Revision-Date: 2020-02-29 12:57\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr "確定"
 
 msgid "Cancel"
 msgstr "取消"
@@ -365,8 +365,20 @@ msgstr "檔案已輸出"
 msgid "copy"
 msgstr "複製"
 
-msgid "QUIT_LABEL"
+msgid "Are you sure you want to exit Pixelorama?"
 msgstr "確定要離開Pixelorama嗎?"
+
+msgid "Save before exiting?"
+msgstr "要先儲存再離開嗎?"
+
+msgid "You have unsaved progress. How do you wish to proceed?"
+msgstr "你有未儲存的進度"
+
+msgid "Save & Exit"
+msgstr "儲存並離開"
+
+msgid "Exit without saving"
+msgstr "離開但不儲存"
 
 msgid "Utility Tools"
 msgstr "其他工具"
