@@ -2,8 +2,6 @@ class_name LayerContainer
 extends Button
 
 var i := 0
-# warning-ignore:unused_class_variable
-var currently_selected := false
 var visibility_button : BaseButton
 var label : Label
 var line_edit : LineEdit
