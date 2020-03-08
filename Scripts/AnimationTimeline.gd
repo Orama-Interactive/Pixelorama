@@ -183,7 +183,10 @@ func _on_RemoveLayer_pressed() -> void:
 	new_layers.remove(Global.current_layer)
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Layer")
-	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
+	if Global.current_layer > 0:
+		Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
+	else:
+		Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer)
 
 	for c in Global.canvases:
 		var new_canvas_layers : Array = c.layers.duplicate()
