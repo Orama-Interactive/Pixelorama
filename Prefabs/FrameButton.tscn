@@ -13,6 +13,9 @@ size_flags_vertical = 0
 toggle_mode = true
 button_mask = 7
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FrameTexture" type="TextureRect" parent="."]
 margin_left = 2.0
