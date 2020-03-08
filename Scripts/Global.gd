@@ -516,9 +516,9 @@ func layers_changed(value : Array) -> void:
 		if !layers[i][0]:
 			layers[i][0] = tr("Layer") + " %s" % i
 
-		layer_container.get_child(0).get_child(1).text = layers[i][0]
-		layer_container.get_child(0).get_child(2).text = layers[i][0]
 		layers_container.add_child(layer_container)
+		layer_container.label.text = layers[i][0]
+		layer_container.line_edit.text = layers[i][0]
 
 		frames_container.add_child(layers[i][2])
 		for j in range(canvases.size()):

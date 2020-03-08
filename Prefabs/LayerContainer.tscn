@@ -8,27 +8,32 @@
 margin_right = 210.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 212, 36 )
+size_flags_horizontal = 0
 toggle_mode = true
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [  ]
+"_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -16.0
-margin_bottom = 16.0
-mouse_default_cursor_shape = 2
-alignment = 1
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VisibilityButton" type="TextureButton" parent="HBoxContainer" groups=[
+[node name="LayerButtons" type="HBoxContainer" parent="HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 36.0
+
+[node name="VisibilityButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 65.0
-margin_right = 97.0
-margin_bottom = 32.0
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 34.0
 hint_tooltip = "LAYERVISIBILITY_HT"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -36,15 +41,28 @@ size_flags_vertical = 4
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="HBoxContainer"]
-margin_left = 101.0
-margin_top = 9.0
-margin_right = 147.0
-margin_bottom = 23.0
+[node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 36.0
+margin_right = 212.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 176, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/LayerName"]
+margin_top = 11.0
+margin_right = 176.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
 text = "Layer 0"
 align = 1
+clip_text = true
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/LayerName"]
 visible = false
 margin_left = 86.0
 margin_top = 5.0
@@ -57,4 +75,4 @@ editable = false
 caret_blink = true
 caret_blink_speed = 0.5
 [connection signal="pressed" from="." to="." method="_on_LayerContainer_pressed"]
-[connection signal="pressed" from="HBoxContainer/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
