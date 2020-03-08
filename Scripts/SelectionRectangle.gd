@@ -23,7 +23,7 @@ func _process(delta : float) -> void:
 	var mouse_pos_floored := mouse_pos.floor()
 	var start_pos := polygon[0]
 	var end_pos := polygon[2]
-	var current_layer_index: int = Global.canvas.current_layer_index
+	var current_layer_index : int = Global.current_layer
 	var layer : Image = Global.canvas.layers[current_layer_index][0]
 
 	if end_pos == start_pos:
@@ -59,7 +59,7 @@ func _process(delta : float) -> void:
 						layer.set_pixelv(curr_px, Color(0, 0, 0, 0))
 					else: # If part of selection is outside canvas
 						orig_colors.append(Color(0, 0, 0, 0))
-				Global.canvas.update_texture(Global.canvas.current_layer_index)
+				Global.canvas.update_texture(current_layer_index)
 			tex.create_from_image(img, 0)
 			update()
 
@@ -90,7 +90,7 @@ func _process(delta : float) -> void:
 						var px = polygon[0] + Global.selected_pixels[i] - Global.selected_pixels[0]
 						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
 							layer.set_pixelv(px, orig_colors[i])
-				Global.canvas.update_texture(Global.canvas.current_layer_index)
+				Global.canvas.update_texture(current_layer_index)
 				img.fill(Color(0, 0, 0, 0))
 				tex.create_from_image(img, 0)
 				update()
@@ -135,8 +135,6 @@ func _process(delta : float) -> void:
 					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.canvas.size):
 						layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
 			Global.canvas.handle_redo("Draw")
-
-
 
 func _draw() -> void:
 	if img.get_size() == polygon[2] - polygon[0]:

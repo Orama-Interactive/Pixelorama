@@ -163,8 +163,9 @@ func _ready() -> void:
 
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 
-	Global.canvas.layers[0][2] = tr("Layer") + " 0"
-	Global.canvas.generate_layer_panels()
+	Global.layers[0][0] = tr("Layer") + " 0"
+	Global.layers_container.get_child(0).label.text = Global.layers[0][0]
+	Global.layers_container.get_child(0).line_edit.text = Global.layers[0][0]
 
 	Import.import_brushes("Brushes")
 
@@ -331,23 +332,23 @@ func image_menu_id_pressed(id : int) -> void:
 		2: # Flip Horizontal
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
-			canvas.layers[canvas.current_layer_index][0].unlock()
-			canvas.layers[canvas.current_layer_index][0].flip_x()
-			canvas.layers[canvas.current_layer_index][0].lock()
+			canvas.layers[Global.current_layer][0].unlock()
+			canvas.layers[Global.current_layer][0].flip_x()
+			canvas.layers[Global.current_layer][0].lock()
 			canvas.handle_redo("Draw")
 		3: # Flip Vertical
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
-			canvas.layers[canvas.current_layer_index][0].unlock()
-			canvas.layers[canvas.current_layer_index][0].flip_y()
-			canvas.layers[canvas.current_layer_index][0].lock()
+			canvas.layers[Global.current_layer][0].unlock()
+			canvas.layers[Global.current_layer][0].flip_y()
+			canvas.layers[Global.current_layer][0].lock()
 			canvas.handle_redo("Draw")
 		4: # Rotate
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			$RotateImage.set_sprite(image)
 			$RotateImage.popup_centered()
 		5: # Invert Colors
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
 				for yy in image.get_size().y:
@@ -357,7 +358,7 @@ func image_menu_id_pressed(id : int) -> void:
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
 		6: # Desaturation
-			var image : Image = Global.canvas.layers[Global.canvas.current_layer_index][0]
+			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
 			for xx in image.get_size().x:
 				for yy in image.get_size().y:
@@ -398,7 +399,18 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	var version_number = float(version.substr(1, 3)) # Example, "0.6"
 	if current_version_number < 0.5:
 		OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
+
 	var frame := 0
+	Global.layers.clear()
+	if (version_number - 0.01) > 0.6:
+		var global_layer_line := file.get_line()
+		while global_layer_line == ".":
+			var layer_name := file.get_line()
+			var layer_visibility := file.get_8()
+			# Store [Layer name, Layer visibility boolean, Frame container]
+			Global.layers.append([layer_name, layer_visibility, HBoxContainer.new()])
+			global_layer_line = file.get_line()
+
 	var frame_line := file.get_line()
 	clear_canvases()
 	while frame_line == "--": # Load frames
@@ -408,9 +420,12 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		var height := file.get_16()
 
 		var layer_line := file.get_line()
-		while layer_line == "-": #Load layers
+		while layer_line == "-": # Load layers
 			var buffer := file.get_buffer(width * height * 4)
-			var layer_name := file.get_line()
+			if version_number < (0.7 - 0.01):
+				var layer_name_old_version = file.get_line()
+				if frame == 0:
+					Global.layers.append([layer_name_old_version, true, HBoxContainer.new()])
 			var layer_transparency := 1.0
 			if version_number > 0.5:
 				layer_transparency = file.get_float()
@@ -419,7 +434,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			image.lock()
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
-			canvas.layers.append([image, tex, layer_name, true, layer_transparency])
+			canvas.layers.append([image, tex, layer_transparency])
 			layer_line = file.get_line()
 
 		var guide_line := file.get_line() # "guideline" no pun intended
@@ -444,7 +459,9 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		frame_line = file.get_line()
 		frame += 1
 
+	Global.canvases = Global.canvases # Just to call Global.canvases_changed
 	Global.current_frame = frame - 1
+	Global.layers = Global.layers # Just to call Global.layers_changed
 	# Load tool options
 	Global.left_color_picker.color = file.get_var()
 	Global.right_color_picker.color = file.get_var()
@@ -452,12 +469,13 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	Global.left_brush_size_edit.value = Global.left_brush_size
 	Global.right_brush_size = file.get_8()
 	Global.right_brush_size_edit.value = Global.right_brush_size
-	var left_palette = file.get_var()
-	var right_palette = file.get_var()
-	for color in left_palette:
-		Global.left_color_picker.get_picker().add_preset(color)
-	for color in right_palette:
-		Global.right_color_picker.get_picker().add_preset(color)
+	if version_number < (0.7 - 0.01):
+		var left_palette = file.get_var()
+		var right_palette = file.get_var()
+		for color in left_palette:
+			Global.left_color_picker.get_picker().add_preset(color)
+		for color in right_palette:
+			Global.right_color_picker.get_picker().add_preset(color)
 
 	# Load custom brushes
 	Global.custom_brushes.resize(Global.brushes_from_files)
@@ -496,18 +514,24 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 	var err := file.open(path, File.WRITE)
 	if err == OK:
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
+
+		for layer in Global.layers: # Store Global layers
+			file.store_line(".")
+			file.store_line(layer[0]) # Layer name
+			file.store_8(layer[1]) # Layer visibility
+		file.store_line("END_GLOBAL_LAYERS")
+
 		for canvas in Global.canvases: # Store frames
 			file.store_line("--")
 			file.store_16(canvas.size.x)
 			file.store_16(canvas.size.y)
-			for layer in canvas.layers: # Store layers
+			for layer in canvas.layers: # Store canvas layers
 				file.store_line("-")
 				file.store_buffer(layer[0].get_data())
-				file.store_line(layer[2]) # Layer name
-				file.store_float(layer[4]) # Layer transparency
+				file.store_float(layer[2]) # Layer transparency
 			file.store_line("END_LAYERS")
 
-			for child in canvas.get_children(): #Store guides
+			for child in canvas.get_children(): # Store guides
 				if child is Guide:
 					file.store_line("|")
 					file.store_8(child.type)
@@ -521,19 +545,15 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 		file.store_line("END_FRAMES")
 
 		# Save tool options
-		var left_color: Color = Global.left_color_picker.color
-		var right_color: Color = Global.right_color_picker.color
-		var left_brush_size: int = Global.left_brush_size
-		var right_brush_size: int = Global.right_brush_size
-		var left_palette: PoolColorArray = Global.left_color_picker.get_picker().get_presets()
-		var right_palette: PoolColorArray = Global.right_color_picker.get_picker().get_presets()
+		var left_color : Color = Global.left_color_picker.color
+		var right_color : Color = Global.right_color_picker.color
+		var left_brush_size : int = Global.left_brush_size
+		var right_brush_size : int = Global.right_brush_size
 		file.store_var(left_color)
 		file.store_var(right_color)
 		file.store_8(left_brush_size)
 		file.store_8(right_brush_size)
-		file.store_var(left_palette)
-		file.store_var(right_palette)
-		#Save custom brushes
+		# Save custom brushes
 		for i in range(Global.brushes_from_files, Global.custom_brushes.size()):
 			var brush = Global.custom_brushes[i]
 			file.store_line("/")
@@ -551,11 +571,6 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 		_on_QuitDialog_confirmed()
 
 func clear_canvases() -> void:
-	for child in Global.vbox_layer_container.get_children():
-		if child is PanelContainer:
-			child.queue_free()
-	for child in Global.frame_container.get_children():
-		child.queue_free()
 	for child in Global.canvas_parent.get_children():
 		if child is Canvas:
 			child.queue_free()
@@ -687,86 +702,6 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size = new_size
 	update_right_custom_brush()
 
-func add_layer(is_new := true) -> void:
-	var new_layer := Image.new()
-	var layer_name = null
-	if is_new:
-		new_layer.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
-	else: # clone layer
-		new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index][0])
-		layer_name = Global.canvas.layers[Global.canvas.current_layer_index][2] + " (" + tr("copy") + ")"
-	new_layer.lock()
-	var new_layer_tex := ImageTexture.new()
-	new_layer_tex.create_from_image(new_layer, 0)
-
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-	new_layers.append([new_layer, new_layer_tex, layer_name, true, 1])
-	Global.undos += 1
-	Global.undo_redo.create_action("Add Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func _on_RemoveLayerButton_pressed() -> void:
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	new_layers.remove(Global.canvas.current_layer_index)
-	Global.undos += 1
-	Global.undo_redo.create_action("Remove Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func change_layer_order(rate : int) -> void:
-	var change = Global.canvas.current_layer_index + rate
-
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	var temp = new_layers[Global.canvas.current_layer_index]
-	new_layers[Global.canvas.current_layer_index] = new_layers[change]
-	new_layers[change] = temp
-	Global.undo_redo.create_action("Change Layer Order")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas, "current_layer_index", change)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas, "current_layer_index", Global.canvas.current_layer_index)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
-
-func _on_MergeLayer_pressed() -> void:
-	var new_layers: Array = Global.canvas.layers.duplicate()
-	new_layers.remove(Global.canvas.current_layer_index)
-	var selected_layer = Global.canvas.layers[Global.canvas.current_layer_index][0]
-	if Global.canvas.layers[Global.canvas.current_layer_index][4] < 1: # If we have layer transparency
-		for xx in selected_layer.get_size().x:
-			for yy in selected_layer.get_size().y:
-				var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-				var alpha : float = pixel_color.a * Global.canvas.layers[Global.canvas.current_layer_index][4]
-				selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-
-	var new_layer := Image.new()
-	new_layer.copy_from(Global.canvas.layers[Global.canvas.current_layer_index - 1][0])
-	new_layer.lock()
-
-	Global.canvas.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.position, Global.canvas.size), Vector2.ZERO)
-
-	Global.undos += 1
-	Global.undo_redo.create_action("Merge Layer")
-	Global.undo_redo.add_do_property(Global.canvas, "layers", new_layers)
-	Global.undo_redo.add_do_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", new_layer.data)
-	Global.undo_redo.add_undo_property(Global.canvas, "layers", Global.canvas.layers)
-	Global.undo_redo.add_undo_property(Global.canvas.layers[Global.canvas.current_layer_index - 1][0], "data", Global.canvas.layers[Global.canvas.current_layer_index - 1][0].data)
-
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
-	Global.undo_redo.commit_action()
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color
@@ -853,7 +788,7 @@ func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
 
 func _on_OpacitySlider_value_changed(value) -> void:
-	Global.canvas.layers[Global.canvas.current_layer_index][4] = value / 100
+	Global.canvas.layers[Global.current_layer][4] = value / 100
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()

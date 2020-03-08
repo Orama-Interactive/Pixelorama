@@ -1,12 +1,17 @@
 extends Button
 
 var frame := 0
+var layer := 0
 
 onready var popup_menu := $PopupMenu
+
+func _ready() -> void:
+	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.current_frame = frame
+		Global.current_layer = layer
 	elif Input.is_action_just_released("right_mouse"):
 		if Global.canvases.size() == 1:
 			popup_menu.set_item_disabled(0, true)
@@ -27,10 +32,10 @@ func _on_FrameButton_pressed() -> void:
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
-		0: #Remove Frame
+		0: # Remove Frame
 			remove_frame()
 
-		1: #Clone Layer
+		1: # Clone Frame
 			var canvas : Canvas = Global.canvases[frame]
 			var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 			new_canvas.size = Global.canvas.size
@@ -41,13 +46,13 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			var new_hidden_canvases := Global.hidden_canvases.duplicate()
 			new_hidden_canvases.append(new_canvas)
 
-			for layer in canvas.layers: #Copy every layer
+			for layer in canvas.layers: # Copy every layer
 				var sprite := Image.new()
 				sprite.copy_from(layer[0])
 				sprite.lock()
 				var tex := ImageTexture.new()
 				tex.create_from_image(sprite, 0)
-				new_canvas.layers.append([sprite, tex, layer[2], layer[3], layer[4]])
+				new_canvas.layers.append([sprite, tex, layer[2]])
 
 			Global.undos += 1
 			Global.undo_redo.create_action("Add Frame")
@@ -58,10 +63,10 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
 			Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 			Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
-			for child in Global.frame_container.get_children():
-				var frame_button = child.get_node("FrameButton")
-				Global.undo_redo.add_do_property(frame_button, "pressed", false)
-				Global.undo_redo.add_undo_property(frame_button, "pressed", frame_button.pressed)
+			for i in range(Global.layers.size()):
+				for child in Global.layers[i][2].get_children():
+					Global.undo_redo.add_do_property(child, "pressed", false)
+					Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 			for c in Global.canvases:
 				Global.undo_redo.add_do_property(c, "visible", false)
 				Global.undo_redo.add_undo_property(c, "visible", c.visible)
@@ -72,9 +77,9 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 			Global.undo_redo.commit_action()
 
-		2: #Move Left
+		2: # Move Left
 			change_frame_order(-1)
-		3: #Move Right
+		3: # Move Right
 			change_frame_order(1)
 
 func remove_frame() -> void:
@@ -120,6 +125,10 @@ func change_frame_order(rate : int) -> void:
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
 	Global.undo_redo.add_do_property(Global.canvases[frame], "frame", change)
 	Global.undo_redo.add_do_property(Global.canvases[change], "frame", frame)
+
+	if Global.current_frame == frame:
+		Global.undo_redo.add_do_property(Global, "current_frame", change)
+		Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global.canvases[frame], "frame", frame)

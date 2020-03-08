@@ -254,8 +254,8 @@ func change_theme(ID : int) -> void:
 			var disabled_file_name = button.texture_disabled.resource_path.get_file()
 			button.texture_disabled = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, disabled_file_name])
 
-		# Make sure the frame text gets updated
-		Global.current_frame = Global.current_frame
+	# Make sure the frame text gets updated
+	Global.current_frame = Global.current_frame
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value

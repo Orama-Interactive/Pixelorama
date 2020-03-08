@@ -55,8 +55,21 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			image.lock()
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
-			# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-			canvas.layers.append([image, tex, "Layer 0", true, 1])
+			# Store [Image, ImageTexture, Opacity]
+			canvas.layers.append([image, tex, 1])
+
+			for _i in range(1, Global.layers.size()):
+				var empty_sprite := Image.new()
+				empty_sprite.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
+				empty_sprite.fill(Color(0, 0, 0, 0))
+				empty_sprite.lock()
+
+				var empty_tex := ImageTexture.new()
+				empty_tex.create_from_image(empty_sprite, 0)
+
+				# Store [Image, ImageTexture, Opacity]
+				canvas.layers.append([empty_sprite, empty_tex, 1])
+
 			canvas.frame = i
 			Global.canvases.append(canvas)
 			Global.canvas_parent.add_child(canvas)
@@ -96,8 +109,20 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				cropped_image.lock()
 				var tex := ImageTexture.new()
 				tex.create_from_image(cropped_image, 0)
-				# Store [Image, ImageTexture, Layer Name, Visibity boolean, Opacity]
-				canvas.layers.append([cropped_image, tex, tr("Layer") + " 0", true, 1])
+				# Store [Image, ImageTexture, Opacity]
+				canvas.layers.append([cropped_image, tex, 1])
+				for _i in range(1, Global.layers.size()):
+					var empty_sprite := Image.new()
+					empty_sprite.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
+					empty_sprite.fill(Color(0, 0, 0, 0))
+					empty_sprite.lock()
+
+					var empty_tex := ImageTexture.new()
+					empty_tex.create_from_image(empty_sprite, 0)
+
+					# Store [Image, ImageTexture, Opacity]
+					canvas.layers.append([empty_sprite, empty_tex, 1])
+
 				canvas.frame = i
 				Global.canvases.append(canvas)
 				Global.canvas_parent.add_child(canvas)
@@ -107,6 +132,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 
 		Global.canvases[Global.canvases.size() - 1].camera_zoom()
 
+	Global.canvases = Global.canvases # Just to call Global.canvases_changed
 	Global.current_frame = i - 1
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
 	Global.canvas.visible = true
