@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/LayerContainer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible_Hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock_Hover.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock.png" type="Texture" id=5]
 
 [node name="LayerContainer" type="Button"]
 margin_right = 210.0
@@ -25,7 +27,7 @@ __meta__ = {
 }
 
 [node name="LayerButtons" type="HBoxContainer" parent="HBoxContainer"]
-margin_right = 32.0
+margin_right = 68.0
 margin_bottom = 36.0
 
 [node name="VisibilityButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
@@ -41,11 +43,25 @@ size_flags_vertical = 4
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
-[node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
+[node name="LockButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
+"UIButtons",
+]]
 margin_left = 36.0
+margin_top = 2.0
+margin_right = 68.0
+margin_bottom = 34.0
+hint_tooltip = "Lock/unlock layer."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+
+[node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 72.0
 margin_right = 212.0
 margin_bottom = 36.0
-rect_min_size = Vector2( 176, 0 )
+rect_min_size = Vector2( 140, 0 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 alignment = 1
@@ -55,7 +71,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="HBoxContainer/LayerName"]
 margin_top = 11.0
-margin_right = 176.0
+margin_right = 140.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 text = "Layer 0"
@@ -76,3 +92,4 @@ caret_blink = true
 caret_blink_speed = 0.5
 [connection signal="pressed" from="." to="." method="_on_LayerContainer_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]

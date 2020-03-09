@@ -146,8 +146,8 @@ func add_layer(is_new := true) -> void:
 
 	var new_layers : Array = Global.layers.duplicate()
 
-	# Store [Layer name, Layer visibility boolean, Frame container]
-	new_layers.append([layer_name, true, HBoxContainer.new()])
+	# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
+	new_layers.append([layer_name, true, false, HBoxContainer.new()])
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
@@ -156,7 +156,7 @@ func add_layer(is_new := true) -> void:
 		var new_layer := Image.new()
 		if is_new:
 			new_layer.create(c.size.x, c.size.y, false, Image.FORMAT_RGBA8)
-		else: # clone layer
+		else: # Clone layer
 			new_layer.copy_from(c.layers[Global.current_layer][0])
 
 		new_layer.lock()

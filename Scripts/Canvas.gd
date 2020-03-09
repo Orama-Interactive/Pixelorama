@@ -180,7 +180,7 @@ func _input(event : InputEvent) -> void:
 		can_undo = true
 
 	current_pixel = get_local_mouse_position() + location
-	if Global.current_frame != frame:
+	if Global.current_frame != frame || Global.layers[Global.current_layer][2]:
 		previous_mouse_pos = current_pixel
 		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
 		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
@@ -493,7 +493,7 @@ func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 
 	var frame_texture_rect : TextureRect
-	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index][2].get_child(frame),"FrameTexture")
+	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index][3].get_child(frame),"FrameTexture")
 	frame_texture_rect.texture = layers[layer_index][1]
 
 func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:

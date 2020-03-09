@@ -3,11 +3,13 @@ extends Button
 
 var i := 0
 var visibility_button : BaseButton
+var lock_button : BaseButton
 var label : Label
 var line_edit : LineEdit
 
 func _ready() -> void:
 	visibility_button = Global.find_node_by_name(self, "VisibilityButton")
+	lock_button = Global.find_node_by_name(self, "LockButton")
 	label = Global.find_node_by_name(self, "Label")
 	line_edit = Global.find_node_by_name(self, "LineEdit")
 
@@ -17,6 +19,13 @@ func _ready() -> void:
 	else:
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Invisible_Hover.png" % Global.theme_type)
+
+	if Global.layers[i][2]:
+		lock_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Lock.png" % Global.theme_type)
+		lock_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Lock_Hover.png" % Global.theme_type)
+	else:
+		lock_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Unlock.png" % Global.theme_type)
+		lock_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Unlock_Hover.png" % Global.theme_type)
 
 func _input(event : InputEvent) -> void:
 	if event.is_action_released("ui_accept") && line_edit.visible && event.scancode != KEY_SPACE:
@@ -51,3 +60,13 @@ func _on_VisibilityButton_pressed() -> void:
 		visibility_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible.png" % Global.theme_type)
 		visibility_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Layer_Visible_Hover.png" % Global.theme_type)
 	Global.canvas.update()
+
+func _on_LockButton_pressed() -> void:
+	if Global.layers[i][2]:
+		Global.layers[i][2] = false
+		lock_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Unlock.png" % Global.theme_type)
+		lock_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Unlock_Hover.png" % Global.theme_type)
+	else:
+		Global.layers[i][2] = true
+		lock_button.texture_normal = load("res://Assets/Graphics/%s Themes/Layers/Lock.png" % Global.theme_type)
+		lock_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Lock_Hover.png" % Global.theme_type)

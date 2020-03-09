@@ -407,8 +407,9 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		while global_layer_line == ".":
 			var layer_name := file.get_line()
 			var layer_visibility := file.get_8()
-			# Store [Layer name, Layer visibility boolean, Frame container]
-			Global.layers.append([layer_name, layer_visibility, HBoxContainer.new()])
+			var layer_lock := file.get_8()
+			# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
+			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new()])
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -519,6 +520,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 			file.store_line(".")
 			file.store_line(layer[0]) # Layer name
 			file.store_8(layer[1]) # Layer visibility
+			file.store_8(layer[2]) # Layer lock
 		file.store_line("END_GLOBAL_LAYERS")
 
 		for canvas in Global.canvases: # Store frames

@@ -371,8 +371,8 @@ func _ready() -> void:
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
-	# Store [Layer name, Layer visibility boolean, Frame container]
-	layers.append([tr("Layer") + " 0", true, HBoxContainer.new()])
+	# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
+	layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new()])
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -477,7 +477,7 @@ func canvases_changed(value : Array) -> void:
 		frame_id.queue_free()
 
 	for i in range(layers.size() - 1, -1, -1):
-		frames_container.add_child(layers[i][2])
+		frames_container.add_child(layers[i][3])
 
 	for j in range(canvases.size()):
 		var label := Label.new()
@@ -492,7 +492,7 @@ func canvases_changed(value : Array) -> void:
 			frame_button.layer = i
 			frame_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
-			layers[i][2].add_child(frame_button)
+			layers[i][3].add_child(frame_button)
 
 func layers_changed(value : Array) -> void:
 	layers = value
@@ -516,14 +516,14 @@ func layers_changed(value : Array) -> void:
 		layer_container.label.text = layers[i][0]
 		layer_container.line_edit.text = layers[i][0]
 
-		frames_container.add_child(layers[i][2])
+		frames_container.add_child(layers[i][3])
 		for j in range(canvases.size()):
 			var frame_button = load("res://Prefabs/FrameButton.tscn").instance()
 			frame_button.frame = j
 			frame_button.layer = i
 			frame_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
-			layers[i][2].add_child(frame_button)
+			layers[i][3].add_child(frame_button)
 
 	var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
 	layer_button.pressed = true
@@ -556,16 +556,16 @@ func frame_changed(value : int) -> void:
 			text_color = Color.black
 		frame_ids.get_child(i).add_color_override("font_color", text_color)
 		for layer in layers:
-			if i < layer[2].get_child_count():
-				layer[2].get_child(i).pressed = false
+			if i < layer[3].get_child_count():
+				layer[3].get_child(i).pressed = false
 		i += 1
 
 	# Select the new canvas/frame
 	canvas = canvases[current_frame]
 	canvas.visible = true
 	frame_ids.get_child(current_frame).add_color_override("font_color", Color("#3c5d75"))
-	if current_frame < layers[current_layer][2].get_child_count():
-		layers[current_layer][2].get_child(current_frame).pressed = true
+	if current_frame < layers[current_layer][3].get_child_count():
+		layers[current_layer][3].get_child(current_frame).pressed = true
 
 func layer_changed(value : int) -> void:
 	current_layer = value
