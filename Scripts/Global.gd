@@ -389,7 +389,7 @@ func find_node_by_name(root, node_name) -> Node:
 func notification_label(text : String) -> void:
 	var notification : Label = load("res://Prefabs/NotificationLabel.tscn").instance()
 	notification.text = tr(text)
-	notification.rect_position = Vector2(240, OS.window_size.y - 150)
+	notification.rect_position = Vector2(240, OS.window_size.y - animation_timeline.rect_size.y - 20)
 	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
