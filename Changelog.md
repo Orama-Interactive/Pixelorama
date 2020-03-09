@@ -8,12 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
+- Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 
 ### Changed
 - The timeline has been revamped!
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
+- Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)

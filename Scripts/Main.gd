@@ -426,7 +426,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			if version_number < (0.7 - 0.01):
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					Global.layers.append([layer_name_old_version, true, HBoxContainer.new()])
+					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new()])
 			var layer_transparency := 1.0
 			if version_number > 0.5:
 				layer_transparency = file.get_float()
