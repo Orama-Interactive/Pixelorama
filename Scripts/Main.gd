@@ -292,6 +292,8 @@ func view_menu_id_pressed(id : int) -> void:
 	Global.canvas.update()
 
 func image_menu_id_pressed(id : int) -> void:
+	if Global.layers[Global.current_layer][2]: # No changes if the layer is locked
+		return
 	match id:
 		0: # Scale Image
 			$ScaleImage.popup_centered()

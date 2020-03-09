@@ -529,16 +529,18 @@ func layers_changed(value : Array) -> void:
 	layer_button.pressed = true
 	self.current_frame = current_frame # Call frame_changed to update UI
 
-	if layers.size() == 1:
+	if layers[current_layer][2]:
 		remove_layer_button.disabled = true
 		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+
+	if layers.size() == 1:
 		move_up_layer_button.disabled = true
 		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		move_down_layer_button.disabled = true
 		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		merge_down_layer_button.disabled = true
 		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-	else:
+	elif !layers[current_layer][2]:
 		remove_layer_button.disabled = false
 		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
@@ -596,6 +598,15 @@ func layer_changed(value : int) -> void:
 		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		merge_down_layer_button.disabled = true
 		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+
+	if current_layer < layers.size():
+		if layers[current_layer][2]:
+			remove_layer_button.disabled = true
+			remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		else:
+			if layers.size() > 1:
+				remove_layer_button.disabled = false
+				remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 	yield(get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame # Call frame_changed to update UI
