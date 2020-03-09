@@ -496,13 +496,6 @@ func update_texture(layer_index : int) -> void:
 	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index][2].get_child(frame),"FrameTexture")
 	frame_texture_rect.texture = layers[layer_index][1]
 
-
-func get_layer_container(layer_index : int) -> LayerContainer:
-	for container in Global.vbox_layer_container.get_children():
-		if container is LayerContainer && container.i == layer_index:
-			return container
-	return null
-
 func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if made_line:
 		return
