@@ -12,6 +12,7 @@ margin_bottom = 36.0
 rect_min_size = Vector2( 212, 36 )
 size_flags_horizontal = 0
 toggle_mode = true
+action_mode = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
@@ -93,3 +94,4 @@ caret_blink_speed = 0.5
 [connection signal="pressed" from="." to="." method="_on_LayerContainer_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]
+[connection signal="focus_exited" from="HBoxContainer/LayerName/LineEdit" to="." method="_on_LineEdit_focus_exited"]

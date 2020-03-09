@@ -28,27 +28,25 @@ func _ready() -> void:
 		lock_button.texture_hover = load("res://Assets/Graphics/%s Themes/Layers/Unlock_Hover.png" % Global.theme_type)
 
 func _input(event : InputEvent) -> void:
-	if event.is_action_released("ui_accept") && line_edit.visible && event.scancode != KEY_SPACE:
-		label.visible = true
-		line_edit.visible = false
-		line_edit.editable = false
-		var new_text : String = line_edit.text
-		label.text = new_text
-		Global.layers[i][0] = new_text
+	if (event.is_action_released("ui_accept") or event.is_action_released("ui_cancel")) and line_edit.visible and event.scancode != KEY_SPACE:
+		save_layer_name(line_edit.text)
 
 func _on_LayerContainer_pressed() -> void:
 	pressed = !pressed
-	var label_initially_visible : bool = label.visible
+	label.visible = false
+	line_edit.visible = true
+	line_edit.editable = true
+	line_edit.grab_focus()
 
-	if label_initially_visible:
-		label.visible = false
-		line_edit.visible = true
-		line_edit.editable = true
-		line_edit.grab_focus()
-	else:
-		label.visible = true
-		line_edit.visible = false
-		line_edit.editable = false
+func _on_LineEdit_focus_exited() -> void:
+	save_layer_name(line_edit.text)
+
+func save_layer_name(new_name : String) -> void:
+	label.visible = true
+	line_edit.visible = false
+	line_edit.editable = false
+	label.text = new_name
+	Global.layers[i][0] = new_name
 
 func _on_VisibilityButton_pressed() -> void:
 	if Global.layers[i][1]:
