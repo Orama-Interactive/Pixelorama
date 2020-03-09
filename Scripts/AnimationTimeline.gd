@@ -123,7 +123,6 @@ func _on_AnimationTimer_timeout() -> void:
 func _on_FPSValue_value_changed(value) -> void:
 	fps = float(value)
 	Global.animation_timer.wait_time = 1 / fps
-	Global.timeline_seconds.update()
 
 func _on_PastOnionSkinning_value_changed(value) -> void:
 	Global.onion_skinning_past_rate = int(value)
