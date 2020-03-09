@@ -375,7 +375,7 @@ func image_menu_id_pressed(id : int) -> void:
 func help_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Splash Screen
-			$SplashDialog.popup_centered() # Splash screen
+			$SplashDialog.popup_centered()
 			Global.can_draw = false
 		1: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")

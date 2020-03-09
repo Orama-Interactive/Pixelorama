@@ -65,7 +65,7 @@ func _ready() -> void:
 	add_child(line_2d)
 
 func _draw() -> void:
-	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) #Draw transparent background
+	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) # Draw transparent background
 	# Onion Skinning
 	# Past
 	if Global.onion_skinning_past_rate > 0:
@@ -106,14 +106,14 @@ func _draw() -> void:
 			draw_texture(layers[i][1], location, modulate_color)
 
 			if Global.tile_mode:
-				draw_texture(layers[i][1], Vector2(location.x, location.y + size.y), modulate_color) #Down
-				draw_texture(layers[i][1], Vector2(location.x - size.x, location.y + size.y), modulate_color) #Down Left
-				draw_texture(layers[i][1], Vector2(location.x - size.x, location.y), modulate_color) #Left
-				draw_texture(layers[i][1], location - size, modulate_color) #Up left
-				draw_texture(layers[i][1], Vector2(location.x, location.y - size.y), modulate_color) #Up
-				draw_texture(layers[i][1], Vector2(location.x + size.x, location.y - size.y), modulate_color) #Up right
-				draw_texture(layers[i][1], Vector2(location.x + size.x, location.y), modulate_color) #Right
-				draw_texture(layers[i][1], location + size, modulate_color) #Down right
+				draw_texture(layers[i][1], Vector2(location.x, location.y + size.y), modulate_color) # Down
+				draw_texture(layers[i][1], Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
+				draw_texture(layers[i][1], Vector2(location.x - size.x, location.y), modulate_color) # Left
+				draw_texture(layers[i][1], location - size, modulate_color) # Up left
+				draw_texture(layers[i][1], Vector2(location.x, location.y - size.y), modulate_color) # Up
+				draw_texture(layers[i][1], Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
+				draw_texture(layers[i][1], Vector2(location.x + size.x, location.y), modulate_color) # Right
+				draw_texture(layers[i][1], location + size, modulate_color) # Down right
 
 	# Idea taken from flurick (on GitHub)
 	if Global.draw_grid:

@@ -352,8 +352,6 @@ func _ready() -> void:
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
 	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
 
-	#var layer_stuff_container = find_node_by_name(animation_timeline, "LayerVBoxContainer")
-
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
 	move_down_layer_button = find_node_by_name(animation_timeline, "MovwDownLayer")

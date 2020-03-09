@@ -74,7 +74,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			Global.canvases.append(canvas)
 			Global.canvas_parent.add_child(canvas)
 			canvas.visible = false
-			if path == paths[0]: #If it's the first file
+			if path == paths[0]: # If it's the first file
 				max_size = canvas.size
 				biggest_canvas = canvas
 			else:

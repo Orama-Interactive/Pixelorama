@@ -89,7 +89,7 @@ func remove_frame() -> void:
 	var new_hidden_canvases := Global.hidden_canvases.duplicate()
 	new_hidden_canvases.append(canvas)
 	var current_frame := Global.current_frame
-	if current_frame > 0 && current_frame == new_canvases.size(): #If it's the last frame
+	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
 		current_frame -= 1
 
 	Global.undos += 1

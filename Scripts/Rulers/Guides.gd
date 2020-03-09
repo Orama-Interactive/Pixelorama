@@ -70,7 +70,7 @@ func outside_canvas(undo := false) -> bool:
 		Global.undos -= 1
 		Global.notification_label("Move Guide")
 	if Global.control.redone:
-		if Global.undos < Global.undo_redo.get_version(): #If we did undo and then redo
+		if Global.undos < Global.undo_redo.get_version(): # If we did undo and then redo
 			Global.undos = Global.undo_redo.get_version()
 			Global.notification_label("Move Guide")
 	if type == Types.HORIZONTAL:

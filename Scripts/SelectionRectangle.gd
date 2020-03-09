@@ -114,7 +114,7 @@ func _process(delta : float) -> void:
 			brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
 			if brush_img.is_invisible():
 				return
-			brush_img = brush_img.get_rect(brush_img.get_used_rect()) #save only the visible pixels
+			brush_img = brush_img.get_rect(brush_img.get_used_rect()) # Save only the visible pixels
 			Global.custom_brushes.append(brush_img)
 			Global.create_brush_button(brush_img)
 
