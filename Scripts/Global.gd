@@ -534,6 +534,8 @@ func layers_changed(value : Array) -> void:
 		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 	if layers.size() == 1:
+		remove_layer_button.disabled = true
+		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		move_up_layer_button.disabled = true
 		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		move_down_layer_button.disabled = true
