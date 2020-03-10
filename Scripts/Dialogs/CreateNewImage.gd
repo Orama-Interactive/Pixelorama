@@ -9,12 +9,18 @@ func _on_CreateNewImage_confirmed() -> void:
 	var height : int = height_value.value
 	var fill_color : Color = fill_color_node.color
 	Global.control.clear_canvases()
+	Global.layers.clear()
+	# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
+	Global.layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new()])
+	Global.current_layer = 0
 	Global.canvas = load("res://Prefabs/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
 
 	Global.canvases.append(Global.canvas)
 	Global.canvas_parent.add_child(Global.canvas)
+	Global.canvases = Global.canvases # To trigger Global.canvases_changed()
 	Global.current_frame = 0
+	Global.layers = Global.layers # To trigger Global.layers_changed()
 	if fill_color.a > 0:
 		Global.canvas.layers[0][0].fill(fill_color)
 		Global.canvas.layers[0][0].lock()
