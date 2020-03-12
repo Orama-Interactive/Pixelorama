@@ -1,5 +1,6 @@
 extends Node
 
+enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 
@@ -43,6 +44,7 @@ var default_image_width := 64
 var default_image_height := 64
 # warning-ignore:unused_class_variable
 var default_fill_color := Color(0, 0, 0, 0)
+var grid_type = Grid_Types.CARTESIAN
 # warning-ignore:unused_class_variable
 var grid_width := 1
 # warning-ignore:unused_class_variable

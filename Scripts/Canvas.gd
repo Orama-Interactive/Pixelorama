@@ -117,10 +117,45 @@ func _draw() -> void:
 
 	# Idea taken from flurick (on GitHub)
 	if Global.draw_grid:
-		for x in range(0, size.x, Global.grid_width):
-			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
-		for y in range(0, size.y, Global.grid_height):
-			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
+		if Global.grid_type == Global.Grid_Types.CARTESIAN || Global.grid_type == Global.Grid_Types.ALL:
+			for x in range(Global.grid_width, size.x, Global.grid_width):
+				draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
+
+			for y in range(Global.grid_height, size.y, Global.grid_height):
+				draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
+
+		if Global.grid_type == Global.Grid_Types.ISOMETRIC || Global.grid_type == Global.Grid_Types.ALL:
+			var prev_x := 0
+			var prev_y := 0
+			for y in range(0, size.y + 1, Global.grid_width):
+				var yy1 = y + size.y * tan(deg2rad(26.565)) # 30 degrees
+				if yy1 <= (size.y + 0.01):
+					draw_line(Vector2(location.x, y), Vector2(size.x, yy1),Global.grid_color)
+				else:
+					var xx1 = (size.x - y) * tan(deg2rad(90 - 26.565)) # 60 degrees
+					draw_line(Vector2(location.x, y), Vector2(xx1, size.y), Global.grid_color)
+			for y in range(0, size.y + 1, Global.grid_height):
+				var xx2 = y * tan(deg2rad(90 - 26.565)) # 60 degrees
+				if xx2 <= (size.x + 0.01):
+					draw_line(Vector2(location.x, y), Vector2(xx2, location.y), Global.grid_color)
+					prev_y = location.y
+				else:
+					var distance = (xx2 - prev_x) / 2
+					#var yy2 = (size.y - y) * tan(deg2rad(26.565)) # 30 degrees
+					var yy2 = prev_y + distance
+					draw_line(Vector2(location.x, y), Vector2(size.x, yy2), Global.grid_color)
+					prev_y = yy2
+
+				prev_x = xx2
+
+			for x in range(0, size.x, Global.grid_width * 2):
+				if x == 0:
+					continue
+				var yy1 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
+				draw_line(Vector2(x, location.y), Vector2(size.x, yy1), Global.grid_color)
+			for x in range(0, size.x, Global.grid_height * 2):
+				var yy2 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
+				draw_line(Vector2(x, size.y), Vector2(size.x, size.y - yy2), Global.grid_color)
 
 	# Draw rectangle to indicate the pixel currently being hovered on
 	var mouse_pos := current_pixel
