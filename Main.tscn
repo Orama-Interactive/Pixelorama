@@ -108,6 +108,7 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [  ]
 }
 
@@ -1287,7 +1288,6 @@ window_title = "Error!"
 dialog_text = "This is an error message!"
 
 [node name="EditPalettePopup" parent="." instance=ExtResource( 35 )]
-visible = false
 
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 36 )]
 

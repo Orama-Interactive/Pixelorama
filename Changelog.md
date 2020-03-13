@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
+- Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors
 
 ### Changed
 - The timeline has been revamped!

@@ -7,9 +7,11 @@ var current_swatch := -1
 var working_palette : Palette
 
 onready var color_picker = $VBoxContainer/HBoxContainer/EditPaletteColorPicker
-onready var palette_grid = $VBoxContainer/HBoxContainer/Panel/ScrollContainer/EditPaletteGridContainer
+onready var palette_grid = $VBoxContainer/HBoxContainer/VBoxContainer/Panel/ScrollContainer/EditPaletteGridContainer
 onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorNameLineEdit
 onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
+onready var left_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/LeftColor/NinePatchRect
+onready var right_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/RightColor/NinePatchRect
 
 func _ready() -> void:
 	$VBoxContainer/HBoxContainer/EditPaletteColorPicker.presets_visible = false
@@ -21,6 +23,9 @@ func open(palette : String) -> void:
 		working_palette = Global.palettes[palette].duplicate()
 		_display_palette()
 		self.popup_centered()
+
+	left_color_button.modulate = Global.left_color_picker.color
+	right_color_button.modulate = Global.right_color_picker.color
 
 func _display_palette() -> void:
 	_clear_swatches()
@@ -135,3 +140,11 @@ func _on_EditPaletteColorPicker_color_changed(color : Color) -> void:
 
 func _refresh_hint_tooltip(_index : int) -> void:
 	palette_grid.get_child(current_swatch).hint_tooltip = "#" + working_palette.get_color_data(current_swatch).to_upper() + " " + working_palette.get_color_name(current_swatch)
+
+func _on_LeftColor_pressed() -> void:
+	color_picker.color = Global.left_color_picker.color
+	_on_EditPaletteColorPicker_color_changed(color_picker.color)
+
+func _on_RightColor_pressed() -> void:
+	color_picker.color = Global.right_color_picker.color
+	_on_EditPaletteColorPicker_color_changed(color_picker.color)
