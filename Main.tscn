@@ -990,7 +990,7 @@ script = ExtResource( 15 )
 margin_left = 16.0
 margin_right = 692.0
 margin_bottom = 392.0
-focus_mode = 1
+focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -1048,6 +1048,9 @@ rect_min_size = Vector2( 224, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
 margin_right = 224.0

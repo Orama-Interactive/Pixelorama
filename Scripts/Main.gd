@@ -189,6 +189,11 @@ func _input(event : InputEvent) -> void:
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 	Global.right_cursor.texture = Global.right_cursor_tool_texture
+	
+	if event is InputEventKey && (event.scancode == KEY_ENTER || event.scancode == KEY_KP_ENTER):
+		if get_focus_owner() is LineEdit:
+			get_focus_owner().release_focus()
+	
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
