@@ -145,8 +145,9 @@ func add_layer(is_new := true) -> void:
 
 	var new_layers : Array = Global.layers.duplicate()
 
-	# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
-	new_layers.append([layer_name, true, false, HBoxContainer.new()])
+	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+	# will new frames be linked boolean (4), Array of linked frames (5)]
+	new_layers.append([layer_name, true, false, HBoxContainer.new(), false, []])
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")

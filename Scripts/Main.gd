@@ -189,11 +189,11 @@ func _input(event : InputEvent) -> void:
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 	Global.right_cursor.texture = Global.right_cursor_tool_texture
-	
+
 	if event is InputEventKey && (event.scancode == KEY_ENTER || event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
-	
+
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
@@ -415,8 +415,12 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			var layer_name := file.get_line()
 			var layer_visibility := file.get_8()
 			var layer_lock := file.get_8()
-			# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
-			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new()])
+			var layer_new_frames_linked := file.get_8()
+			var linked_frames = file.get_var()
+
+			# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+			# will new frames be linked boolean (4), Array of linked frames (5)]
+			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_frames_linked, linked_frames])
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -433,7 +437,9 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			if version_number < (0.7 - 0.01):
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new()])
+					# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+					# will new frames be linked boolean (4), Array of linked frames (5)]
+					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new(), false, []])
 			var layer_transparency := 1.0
 			if version_number > 0.5:
 				layer_transparency = file.get_float()
@@ -528,6 +534,8 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 			file.store_line(layer[0]) # Layer name
 			file.store_8(layer[1]) # Layer visibility
 			file.store_8(layer[2]) # Layer lock
+			file.store_8(layer[4]) # Future frames linked
+			file.store_var(layer[5]) # Linked frames
 		file.store_line("END_GLOBAL_LAYERS")
 
 		for canvas in Global.canvases: # Store frames

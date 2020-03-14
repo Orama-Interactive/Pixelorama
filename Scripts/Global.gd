@@ -373,8 +373,9 @@ func _ready() -> void:
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
-	# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
-	layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new()])
+	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+	# will new frames be linked boolean (4), Array of linked frames (5)]
+	layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:

@@ -1229,7 +1229,6 @@ columns = 5
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
-window_title = "Please Confirm..."
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1239,8 +1238,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/marco/Pixelorama"
-current_path = "/home/marco/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1255,35 +1254,27 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/marco/Pixelorama"
-current_path = "/home/marco/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-current_dir = "/home/marco/Pixelorama"
-current_path = "/home/marco/Pixelorama/"
 
 [node name="ExportSprites" parent="." instance=ExtResource( 30 )]
-current_dir = "/home/marco/Pixelorama"
-current_path = "/home/marco/Pixelorama/"
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
-window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
-window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
-window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
-window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
@@ -1309,8 +1300,8 @@ dialog_text = "This is an error message!"
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "/home/marco/Pixelorama"
-current_path = "/home/marco/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
