@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 12:18\n"
+"PO-Revision-Date: 2020-03-18 12:47\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -137,13 +137,13 @@ msgid "IMPORT_SPRITESHEET"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Konservi spriton kiel .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Elporti spriton kiel .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Elporti spriton"
 
 msgid "File Exists, Overwrite?"
 msgstr "Dosiero ekzistas, ĉu rekonservi?"
@@ -166,52 +166,52 @@ msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr ""
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolumnoj"
 
 msgid "Rows"
-msgstr ""
+msgstr "Vicoj"
 
 msgid "Path:"
-msgstr ""
+msgstr "Vojo:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Dosieroj kaj -ujoj:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Krei dosierujon"
 
 msgid "File:"
-msgstr ""
+msgstr "Dosiero:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolado:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Plej proksima"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Dulinia"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kuba"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilinia"
 
 msgid "General"
-msgstr ""
+msgstr "Ĝeneralaj"
 
 msgid "Language"
-msgstr ""
+msgstr "Lingvo"
 
 msgid "Themes"
-msgstr ""
+msgstr "Temoj"
 
 msgid "Guides & Grid"
 msgstr ""
 
 msgid "General Options"
-msgstr ""
+msgstr "Ĝeneralaj agordoj"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -226,34 +226,34 @@ msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Language options"
-msgstr ""
+msgstr "Lingvaj agordoj"
 
 msgid "Theme options"
-msgstr ""
+msgstr "Temaj agordoj"
 
 msgid "Grid options"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Koloro:"
 
 msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "Sistema lingvo"
 
 msgid "Dark"
-msgstr ""
+msgstr "Malhela"
 
 msgid "Gray"
-msgstr ""
+msgstr "Griza"
 
 msgid "Gold"
-msgstr ""
+msgstr "Ora"
 
 msgid "Light"
-msgstr ""
+msgstr "Hela"
 
 msgid "Invert colors"
 msgstr ""
@@ -280,10 +280,10 @@ msgid "Issue Tracker"
 msgstr ""
 
 msgid "Changelog"
-msgstr ""
+msgstr "Ŝanĝprotokolo"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Pri Pixelorama"
 
 msgid "MADEBY_LABEL"
 msgstr ""
