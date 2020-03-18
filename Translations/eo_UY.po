@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 11:15\n"
+"PO-Revision-Date: 2020-03-18 11:35\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -98,19 +98,19 @@ msgid "Clear Selection"
 msgstr "Purigi emfazon"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Speguli horizontale"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Speguli vertikale"
 
 msgid "Preferences"
 msgstr "Agordoj"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Kahela reĝimo"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Montri kradreton"
 
 msgid "Show Rulers"
 msgstr ""
