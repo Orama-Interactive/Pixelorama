@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 11:35\n"
+"PO-Revision-Date: 2020-03-18 11:58\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -113,16 +113,16 @@ msgid "Show Grid"
 msgstr "Montri kradreton"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Montri liniilojn"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Montri direktliniojn"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Montri animacian kronologion"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Plenigi per koloro:"
 
 msgid "Open a File"
 msgstr "Malfermi dosieron"
@@ -289,70 +289,70 @@ msgid "MADEBY_LABEL"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "Retejo"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donaci"
 
 msgid "Developers"
-msgstr ""
+msgstr "Ellaborantoj"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Kontribuantoj"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donintoj"
 
 msgid "Translators"
-msgstr ""
+msgstr "Tradukistoj"
 
 msgid "English"
-msgstr ""
+msgstr "Angla"
 
 msgid "Greek"
-msgstr ""
+msgstr "Greka"
 
 msgid "French"
-msgstr ""
+msgstr "Franca"
 
 msgid "German"
-msgstr ""
+msgstr "Germana"
 
 msgid "Polish"
-msgstr ""
+msgstr "Pola"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazila portugala"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rusa"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Ĉina (simpligita)"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Ĉina (tradicia)"
 
 msgid "Italian"
-msgstr ""
+msgstr "Itala"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Latva"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Hispana"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Teamo de ellaboro"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Ĉefa programisto"
 
 msgid "UI Designer"
 msgstr ""
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Kontribuantoj de GitHub"
 
 msgid "Art by"
 msgstr ""
@@ -376,10 +376,10 @@ msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Konservi kaj eliri"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Eliri sen konservado"
 
 msgid "Utility Tools"
 msgstr ""
