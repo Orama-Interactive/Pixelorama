@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 19:25\n"
+"PO-Revision-Date: 2020-03-18 19:54\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -421,13 +421,13 @@ msgid "Raw Mode"
 msgstr "Kruda reĝimo"
 
 msgid "Left tool options"
-msgstr ""
+msgstr "Agordoj de maldekstra ilo"
 
 msgid "Right tool options"
 msgstr "Agordoj de dekstra ilo"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Indikatoro de maldekstra rastrumero"
 
 msgid "LEFT_INDIC_HT"
 msgstr ""
@@ -439,7 +439,7 @@ msgid "Show tool icon"
 msgstr ""
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indikatoro de dekstra rastrumero"
 
 msgid "Brush:"
 msgstr "Peniko:"
@@ -571,16 +571,16 @@ msgid "Clone Frame"
 msgstr ""
 
 msgid "Move Left"
-msgstr ""
+msgstr "Movi maldekstren"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Movi dekstren"
 
 msgid "Layer"
-msgstr ""
+msgstr "Tavolo"
 
 msgid "Layers"
-msgstr ""
+msgstr "Tavoloj"
 
 msgid "LAYERNEW_HT"
 msgstr ""
@@ -601,7 +601,7 @@ msgid "LAYERMERGE_HT"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opakeco:"
 
 msgid "LAYERVISIBILITY_HT"
 msgstr ""
