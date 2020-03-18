@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 17:32\n"
+"PO-Revision-Date: 2020-03-18 18:19\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -715,10 +715,10 @@ msgid "Error: Palette must have a valid name."
 msgstr "Eraro: Paletro devas havi veran nomon."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Eraro: Paletro, nomigita '%s' jam ekzistas!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Malvera dosiero de paletro!"
 
 msgid "Edit Palette"
 msgstr "Redakti paletron"
