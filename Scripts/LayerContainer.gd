@@ -66,3 +66,5 @@ func _on_LockButton_pressed() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.layers[i][4] = !Global.layers[i][4]
+	if !Global.layers[i][5]:
+		Global.layers[i][5].append(Global.current_frame)

@@ -7,6 +7,8 @@ onready var popup_menu := $PopupMenu
 
 func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
+	if frame in Global.layers[layer][5]:
+		get_node("LinkedIndicator").visible = true
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
