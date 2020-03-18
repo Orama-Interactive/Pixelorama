@@ -7,8 +7,12 @@ onready var popup_menu := $PopupMenu
 
 func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
-	if frame in Global.layers[layer][5]:
+	if Global.canvases[frame] in Global.layers[layer][5]:
 		get_node("LinkedIndicator").visible = true
+		popup_menu.set_item_disabled(4, false) # Unlink cell
+	else:
+		get_node("LinkedIndicator").visible = false
+		popup_menu.set_item_disabled(4, true) # Unlink cell
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
@@ -83,6 +87,10 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			change_frame_order(-1)
 		3: # Move Right
 			change_frame_order(1)
+		4: # Unlink Cell
+			var cell_index : int = Global.layers[layer][5].find(Global.canvases[frame])
+			Global.layers[layer][5].remove(cell_index)
+			_ready()
 
 func remove_frame() -> void:
 	var canvas : Canvas = Global.canvases[frame]
