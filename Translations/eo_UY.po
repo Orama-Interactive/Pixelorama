@@ -8,94 +8,94 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 10:43\n"
+"PO-Revision-Date: 2020-03-18 11:15\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Bone"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Nuligi"
 
 msgid "Open"
-msgstr ""
+msgstr "Malfermi"
 
 msgid "Save"
-msgstr ""
+msgstr "Konservi"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Bonvolu konfirmu..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Mezuro de bildo"
 
 msgid "Width:"
-msgstr ""
+msgstr "Larĝo:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Alto:"
 
 msgid "File"
-msgstr ""
+msgstr "Dosiero"
 
 msgid "Edit"
-msgstr ""
+msgstr "Redakti"
 
 msgid "View"
-msgstr ""
+msgstr "Montri"
 
 msgid "Image"
-msgstr ""
+msgstr "Bildo"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efektoj"
 
 msgid "Help"
-msgstr ""
+msgstr "Helpo"
 
 msgid "New..."
-msgstr ""
+msgstr "Nova..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Malfermi..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Konservi..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Konservi kiel..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "Enporti PNGn..."
 
 msgid "Export"
-msgstr ""
+msgstr "Elporti"
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Elporti PNGn..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Elporti PNGn kiel..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Eliri"
 
 msgid "Undo"
-msgstr ""
+msgstr "Malfari"
 
 msgid "Redo"
-msgstr ""
+msgstr "Refari"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Skali bildon"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Tondi bildon"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Turni bildon"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Purigi emfazon"
 
 msgid "Flip Horizontal"
 msgstr ""
@@ -104,7 +104,7 @@ msgid "Flip Vertical"
 msgstr ""
 
 msgid "Preferences"
-msgstr ""
+msgstr "Agordoj"
 
 msgid "Tile Mode"
 msgstr ""
@@ -125,10 +125,10 @@ msgid "Fill with color:"
 msgstr ""
 
 msgid "Open a File"
-msgstr ""
+msgstr "Malfermi dosieron"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Malfermi dosiero(j)n"
 
 msgid "IMPORT_FILE_LABEL"
 msgstr ""
@@ -146,11 +146,12 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Dosiero ekazistas, rekonservi?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
+"Kodo de eraro: %s"
 
 msgid "Resize:"
 msgstr ""
