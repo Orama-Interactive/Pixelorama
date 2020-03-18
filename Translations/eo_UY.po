@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 13:17\n"
+"PO-Revision-Date: 2020-03-18 16:58\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -607,10 +607,10 @@ msgid "LAYERVISIBILITY_HT"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Paletro"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletroj"
 
 msgid "NEWPALETTE_HT"
 msgstr ""
@@ -628,10 +628,10 @@ msgid "Redo: Draw"
 msgstr "Refaritas: Pentri"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Malfaritas: Elekto de ortangulo"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Refaritas: Elekto de ortangulo"
 
 msgid "Undo: Scale"
 msgstr "Malfaritas: Skali"
@@ -682,10 +682,10 @@ msgid "Redo: Change Frame Order"
 msgstr "Refaritas: Ŝanĝi ordon de kadroj"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Malfaritas: Forigi propran penikon"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Refaritas: Forigi propran penikon"
 
 msgid "Move Guide"
 msgstr ""
@@ -697,19 +697,19 @@ msgid "File exported"
 msgstr "Dosiero elportitas"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Nova malplena paletro"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Enporti paletron"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Nomo de paletro:"
 
 msgid "Color Name:"
 msgstr "Nomo de koloro:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Ĉu krei novan malplenan paletron?"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -721,7 +721,7 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Redakti paletron"
 
 msgid "Patrons:"
 msgstr ""
