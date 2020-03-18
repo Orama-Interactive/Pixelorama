@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 11:58\n"
+"PO-Revision-Date: 2020-03-18 12:06\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -146,7 +146,7 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr "Dosiero ekazistas, rekonservi?"
+msgstr "Dosiero ekzistas, ĉu rekonservi?"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -358,7 +358,7 @@ msgid "Art by"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "sennoma"
 
 msgid "imported"
 msgstr ""
@@ -370,7 +370,7 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Ĉu konservi antaŭ elirado?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
