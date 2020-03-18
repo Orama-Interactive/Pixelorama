@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 12:47\n"
+"PO-Revision-Date: 2020-03-18 13:17\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -262,7 +262,7 @@ msgid "Desaturation"
 msgstr ""
 
 msgid "Outline"
-msgstr ""
+msgstr "Konturoj"
 
 msgid "Diagonal"
 msgstr ""
@@ -418,7 +418,7 @@ msgid "COLORDEFAULTS_HT"
 msgstr ""
 
 msgid "Raw Mode"
-msgstr ""
+msgstr "Kruda reĝimo"
 
 msgid "Left tool options"
 msgstr ""
@@ -622,10 +622,10 @@ msgid "CHOOSEPALETTE_HT"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Malfaritas: Pentri"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Refaritas: Pentri"
 
 msgid "Undo: Rectangle Select"
 msgstr ""
@@ -634,52 +634,52 @@ msgid "Redo: Rectangle Select"
 msgstr ""
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Malfaritas: Skali"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Refaritas: Skali"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Malfaritas: Aldoni tavolon"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Refaritas: Aldoni tavolon"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Malfaritas: Forigi tavolon"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Refaritas: Forigi tavolon"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Malfaritas: Kunfandi tavolon"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Refaritas: Kunfandi tavolon"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Malfaritas: Ŝanĝi ordon de tavoloj"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Refaritas: Ŝanĝi ordon de tavoloj"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Malfaritas: Aldoni kadron"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Refaritas: Aldoni kadron"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Malfaritas: Forigi kadron"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Refaritas: Forigi kadron"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Malfaritas: Ŝanĝi ordon de kadroj"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Refaritas: Ŝanĝi ordon de kadroj"
 
 msgid "Undo: Delete Custom Brush"
 msgstr ""
@@ -691,10 +691,10 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Dosiero konservitas"
 
 msgid "File exported"
-msgstr ""
+msgstr "Dosiero elportitas"
 
 msgid "New Empty Palette"
 msgstr ""
@@ -706,7 +706,7 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Nomo de koloro:"
 
 msgid "Create a new empty palette?"
 msgstr ""
@@ -727,13 +727,13 @@ msgid "Patrons:"
 msgstr ""
 
 msgid "Changes"
-msgstr ""
+msgstr "Ŝanĝoj"
 
 msgid "Platinum Sponsor"
 msgstr ""
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Oraj sponsoroj"
 
 msgid "Platinum Sponsor Placeholder"
 msgstr ""
@@ -742,20 +742,20 @@ msgid "Gold Sponsors Placeholder"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Ne montri denove"
 
 msgid "Take this spot!"
 msgstr ""
 
 msgid "Image Options"
-msgstr ""
+msgstr "Bildagordoj"
 
 msgid "Default Width:"
-msgstr ""
+msgstr "Defaŭlta larĝo:"
 
 msgid "Default Height:"
-msgstr ""
+msgstr "Defaŭlta alto:"
 
 msgid "Default Fill Color:"
-msgstr ""
+msgstr "Defaŭlta plenigkoloro:"
 
