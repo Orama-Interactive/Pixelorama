@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 19:18\n"
+"PO-Revision-Date: 2020-03-18 19:25\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -382,7 +382,7 @@ msgid "Exit without saving"
 msgstr "Eliri sen konservado"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Utililoj"
 
 msgid "RECTSELECT_HT"
 msgstr ""
@@ -391,7 +391,7 @@ msgid "COLORPICKER_HT"
 msgstr ""
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Pentriloj"
 
 msgid "PENCIL_HT"
 msgstr ""
@@ -424,7 +424,7 @@ msgid "Left tool options"
 msgstr ""
 
 msgid "Right tool options"
-msgstr ""
+msgstr "Agordoj de dekstra ilo"
 
 msgid "Left pixel indicator"
 msgstr ""
