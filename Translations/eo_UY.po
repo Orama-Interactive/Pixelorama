@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 18:51\n"
+"PO-Revision-Date: 2020-03-18 18:59\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -208,7 +208,7 @@ msgid "Themes"
 msgstr "Temoj"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Direktlinioj kaj kradreto"
 
 msgid "General Options"
 msgstr "Ĝeneralaj agordoj"
@@ -232,13 +232,13 @@ msgid "Theme options"
 msgstr "Temaj agordoj"
 
 msgid "Grid options"
-msgstr ""
+msgstr "Agordoj de kradreto"
 
 msgid "Color:"
 msgstr "Koloro:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Koloro de direktlinioj:"
 
 msgid "System Language"
 msgstr "Sistema lingvo"
@@ -355,25 +355,25 @@ msgid "GitHub Contributors"
 msgstr "Kontribuantoj de GitHub"
 
 msgid "Art by"
-msgstr ""
+msgstr "Bildverko de"
 
 msgid "untitled"
 msgstr "sennoma"
 
 msgid "imported"
-msgstr ""
+msgstr "enportita"
 
 msgid "copy"
-msgstr ""
+msgstr "kopii"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Ĉu vi vere volas eliri Pixeloraman?"
 
 msgid "Save before exiting?"
 msgstr "Ĉu konservi antaŭ elirado?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Vi havas nekonservitan progreson. Kiel vi deziras procedi?"
 
 msgid "Save & Exit"
 msgstr "Konservi kaj eliri"
@@ -442,7 +442,7 @@ msgid "Right pixel indicator"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Peniko:"
 
 msgid "BRUSH_HT"
 msgstr ""
@@ -688,7 +688,7 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Refaritas: Forigi propran penikon"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Movi direktlinion"
 
 msgid "File saved"
 msgstr "Dosiero konservitas"
