@@ -28,6 +28,12 @@ func add_frame() -> void:
 		Global.undo_redo.add_do_property(c, "visible", false)
 		Global.undo_redo.add_undo_property(c, "visible", c.visible)
 
+	for l_i in range(Global.layers.size()):
+		if Global.layers[l_i][4]: # If the link button is pressed
+#			var new_layers : Array = Global.layers.duplicate()
+#			new_layers[l_i][5].append(new_canvas)
+			Global.layers[l_i][5].append(new_canvas)
+
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
