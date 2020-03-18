@@ -70,7 +70,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 			Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
 			for i in range(Global.layers.size()):
-				for child in Global.layers[i][2].get_children():
+				for child in Global.layers[i][3].get_children():
 					Global.undo_redo.add_do_property(child, "pressed", false)
 					Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 			for c in Global.canvases:
