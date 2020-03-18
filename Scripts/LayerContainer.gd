@@ -68,3 +68,4 @@ func _on_LinkButton_pressed() -> void:
 	Global.layers[i][4] = !Global.layers[i][4]
 	if !Global.layers[i][5]:
 		Global.layers[i][5].append(Global.canvas)
+		Global.layers[i][3].get_child(Global.current_frame)._ready()
