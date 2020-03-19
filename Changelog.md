@@ -17,10 +17,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
+- LineEdits lose focus when the user presses Enter - thanks to Gaarco!
+- Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
+- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else - Thanks to Gaarco! (Issue #167)
 
 ## [v0.6.2] - 17-02-2020
 

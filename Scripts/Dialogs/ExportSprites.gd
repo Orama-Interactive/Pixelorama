@@ -74,18 +74,22 @@ func save_sprite(canvas : Canvas, path : String) -> void:
 	var whole_image := Image.new()
 	whole_image.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
 	whole_image.lock()
+	var layer_i := 0
 	for layer in canvas.layers:
-		var img : Image = layer[0]
-		img.lock()
-		if layer[2] < 1: # If we have layer transparency
-			for xx in img.get_size().x:
-				for yy in img.get_size().y:
-					var pixel_color := img.get_pixel(xx, yy)
-					var alpha : float = pixel_color.a * layer[4]
-					img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+		if Global.layers[layer_i][1]: # If layer is visible
+			var img : Image = layer[0]
+			img.lock()
+			if layer[2] < 1: # If we have layer transparency
+				for xx in img.get_size().x:
+					for yy in img.get_size().y:
+						var pixel_color := img.get_pixel(xx, yy)
+						var alpha : float = pixel_color.a * layer[4]
+						img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
-		canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), Vector2.ZERO)
-		layer[0].lock()
+			canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), Vector2.ZERO)
+			layer[0].lock()
+
+		layer_i += 1
 
 	if resize != 100:
 		whole_image.unlock()
@@ -129,18 +133,22 @@ func save_spritesheet() -> void:
 				hh = 1
 				dst.y = canvas.size.y * vv
 
+		var layer_i := 0
 		for layer in canvas.layers:
-			var img : Image = layer[0]
-			img.lock()
-			if layer[2] < 1: # If we have layer transparency
-				for xx in img.get_size().x:
-					for yy in img.get_size().y:
-						var pixel_color := img.get_pixel(xx, yy)
-						var alpha : float = pixel_color.a * layer[4]
-						img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+			if Global.layers[layer_i][1]: # If layer is visible
+				var img : Image = layer[0]
+				img.lock()
+				if layer[2] < 1: # If we have layer transparency
+					for xx in img.get_size().x:
+						for yy in img.get_size().y:
+							var pixel_color := img.get_pixel(xx, yy)
+							var alpha : float = pixel_color.a * layer[4]
+							img.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
-			canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), dst)
-			layer[0].lock()
+				canvas.blend_rect(whole_image, img, Rect2(canvas.position, canvas.size), dst)
+				layer[0].lock()
+
+			layer_i += 1
 
 	if resize != 100:
 		whole_image.unlock()
