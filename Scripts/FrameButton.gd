@@ -99,6 +99,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			var tex := ImageTexture.new()
 			tex.create_from_image(sprite, 0)
 			Global.canvases[frame].layers[layer][1] = tex
+			Global.canvases[frame].update()
 
 func remove_frame() -> void:
 	var canvas : Canvas = Global.canvases[frame]
