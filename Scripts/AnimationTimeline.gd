@@ -264,9 +264,8 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
 	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
 
-	for c in Global.canvases:
-		Global.undo_redo.add_undo_method(Global, "undo", [c])
-		Global.undo_redo.add_do_method(Global, "redo", [c])
+	Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
+	Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
 	Global.undo_redo.commit_action()
 
 func _on_OpacitySlider_value_changed(value) -> void:
