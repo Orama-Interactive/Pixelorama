@@ -1,0 +1,309 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Dialogs/ExportDialog.gd" type="Script" id=1]
+
+[node name="ExportDialog" type="AcceptDialog"]
+margin_right = 456.0
+margin_bottom = 530.0
+rect_min_size = Vector2( 456, 530 )
+window_title = "Export..."
+resizable = true
+dialog_hide_on_ok = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 448.0
+margin_bottom = 494.0
+rect_min_size = Vector2( 330, 0 )
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tabs" type="Tabs" parent="VBoxContainer"]
+margin_right = 440.0
+margin_bottom = 24.0
+size_flags_vertical = 0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 440.0
+margin_bottom = 32.0
+
+[node name="PreviewLabel" type="Label" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 440.0
+margin_bottom = 50.0
+text = "Preview:"
+
+[node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 440.0
+margin_bottom = 358.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Previews" type="GridContainer" parent="VBoxContainer/PreviewScroll"]
+margin_right = 440.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="FrameOptions" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 334.0
+margin_right = 440.0
+margin_bottom = 358.0
+
+[node name="FrameNumber" type="HBoxContainer" parent="VBoxContainer/FrameOptions"]
+margin_right = 440.0
+margin_bottom = 24.0
+
+[node name="FrameNumberLabel" type="Label" parent="VBoxContainer/FrameOptions/FrameNumber"]
+margin_top = 5.0
+margin_right = 44.0
+margin_bottom = 19.0
+text = "Frame:"
+
+[node name="FrameNumber" type="SpinBox" parent="VBoxContainer/FrameOptions/FrameNumber"]
+margin_left = 48.0
+margin_right = 440.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+min_value = 1.0
+page = 1.0
+value = 1.0
+rounded = true
+align = 2
+
+[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 362.0
+margin_right = 440.0
+margin_bottom = 386.0
+
+[node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
+margin_right = 440.0
+margin_bottom = 24.0
+alignment = 1
+
+[node name="OrientationLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
+margin_top = 5.0
+margin_right = 77.0
+margin_bottom = 19.0
+text = "Orientation:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Orientation" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Orientation"]
+margin_left = 81.0
+margin_right = 226.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Rows"
+items = [ "Rows", null, false, 0, null, "Columns", null, false, 1, null ]
+selected = 0
+
+[node name="LinesCountLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
+margin_left = 230.0
+margin_top = 5.0
+margin_right = 290.0
+margin_bottom = 19.0
+text = "Columns:"
+
+[node name="LinesCount" type="SpinBox" parent="VBoxContainer/SpritesheetOptions/Orientation"]
+margin_left = 294.0
+margin_right = 440.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+align = 2
+
+[node name="AnimationOptions" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 366.0
+margin_right = 440.0
+margin_bottom = 386.0
+
+[node name="AnimationType" type="OptionButton" parent="VBoxContainer/AnimationOptions"]
+margin_right = 440.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "All frames as multiple files"
+items = [ "All frames as multiple files", null, false, 0, null ]
+selected = 0
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 390.0
+margin_right = 440.0
+margin_bottom = 394.0
+
+[node name="Options" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 398.0
+margin_right = 440.0
+margin_bottom = 422.0
+
+[node name="ResizeLabel" type="Label" parent="VBoxContainer/Options"]
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 0 )
+text = "Resize:"
+align = 2
+
+[node name="Resize" type="SpinBox" parent="VBoxContainer/Options"]
+margin_left = 50.0
+margin_right = 197.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 1000.0
+step = 100.0
+value = 100.0
+align = 2
+suffix = "%"
+
+[node name="InterpolationLabel" type="Label" parent="VBoxContainer/Options"]
+margin_left = 201.0
+margin_top = 5.0
+margin_right = 288.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 0 )
+text = "Interpolation:"
+align = 2
+
+[node name="Interpolation" type="OptionButton" parent="VBoxContainer/Options"]
+margin_left = 292.0
+margin_right = 440.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Nearest"
+align = 2
+items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
+selected = 0
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+margin_top = 426.0
+margin_right = 440.0
+margin_bottom = 430.0
+
+[node name="Path" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 434.0
+margin_right = 440.0
+margin_bottom = 458.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Path"]
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 0 )
+text = "Path:"
+
+[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/Path"]
+margin_left = 36.0
+margin_right = 377.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 2
+
+[node name="PathButton" type="Button" parent="VBoxContainer/Path"]
+margin_left = 381.0
+margin_right = 440.0
+margin_bottom = 24.0
+text = "Browse"
+
+[node name="File" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 462.0
+margin_right = 440.0
+margin_bottom = 486.0
+
+[node name="Label" type="Label" parent="VBoxContainer/File"]
+margin_top = 5.0
+margin_right = 30.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 0 )
+text = "File:"
+
+[node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/File"]
+margin_left = 34.0
+margin_right = 296.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 2
+
+[node name="FileFormat" type="OptionButton" parent="VBoxContainer/File"]
+margin_left = 300.0
+margin_right = 440.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 130, 0 )
+disabled = true
+text = ".png ; PNG Image"
+items = [ ".png ; PNG Image", null, false, 0, null, ".gif ; GIF Image", null, true, 1, null ]
+selected = 0
+
+[node name="Popups" type="Node" parent="."]
+
+[node name="PathDialog" type="FileDialog" parent="Popups"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 448.0
+margin_bottom = 494.0
+rect_min_size = Vector2( 440, 300 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+window_title = "Open a Directory"
+resizable = true
+mode = 2
+access = 2
+current_dir = "/home/novhack/Pixelorama"
+current_path = "/home/novhack/Pixelorama/"
+
+[node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
+margin_left = 8.0
+margin_top = 180.0
+margin_right = 448.0
+margin_bottom = 280.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+dialog_text = "Directory path or file name is not valid!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileExistsAlert" type="AcceptDialog" parent="Popups"]
+margin_left = 8.0
+margin_top = 180.0
+margin_right = 448.0
+margin_bottom = 280.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+dialog_text = "File %s already exists. Overwrite?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
+[connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]
+[connection signal="tab_clicked" from="VBoxContainer/Tabs" to="." method="_on_Tabs_tab_clicked"]
+[connection signal="value_changed" from="VBoxContainer/FrameOptions/FrameNumber/FrameNumber" to="." method="_on_Frame_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Orientation/Orientation" to="." method="_on_Orientation_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Options/Resize" to="." method="_on_Resize_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/Options/Interpolation" to="." method="_on_Interpolation_item_selected"]
+[connection signal="text_changed" from="VBoxContainer/Path/PathLineEdit" to="." method="_on_PathLineEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/Path/PathButton" to="." method="_on_PathButton_pressed"]
+[connection signal="text_changed" from="VBoxContainer/File/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/File/FileFormat" to="." method="_on_FileFormat_item_selected"]
+[connection signal="dir_selected" from="Popups/PathDialog" to="." method="_on_FileDialog_dir_selected"]
+[connection signal="confirmed" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
+[connection signal="custom_action" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]
