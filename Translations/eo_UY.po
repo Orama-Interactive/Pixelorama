@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-18 19:54\n"
+"PO-Revision-Date: 2020-03-23 07:53\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -469,7 +469,7 @@ msgid "COLORFROM_HT"
 msgstr ""
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Plenumi areon:"
 
 msgid "Area of the same color"
 msgstr ""
@@ -493,13 +493,13 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "Maldekstra koloro"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Dekstra koloro"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Spegulado"
 
 msgid "Horizontal"
 msgstr ""
