@@ -29,7 +29,6 @@
 [ext_resource path="res://Prefabs/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Prefabs/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Prefabs/Dialogs/ImportSprites.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Prefabs/Dialogs/ExportSprites.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Prefabs/Dialogs/ScaleImage.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Prefabs/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Prefabs/Dialogs/OutlineDialog.tscn" type="PackedScene" id=33]
@@ -38,6 +37,7 @@
 [ext_resource path="res://Prefabs/NewPaletteDialog.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Prefabs/PaletteImportFileDialog.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Prefabs/Dialogs/RotateImage.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Prefabs/Dialogs/ExportDialog.tscn" type="PackedScene" id=39]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -1259,7 +1259,7 @@ current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρι�
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
 
-[node name="ExportSprites" parent="." instance=ExtResource( 30 )]
+[node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
 
@@ -1360,7 +1360,7 @@ visible = false
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ImportSprites" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="ExportSprites" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="ExportDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]

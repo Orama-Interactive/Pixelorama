@@ -45,9 +45,9 @@ func _ready() -> void:
 		"Open..." : KEY_MASK_CMD + KEY_O,
 		"Save..." : KEY_MASK_CMD + KEY_S,
 		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_S,
-		"Import PNG..." : KEY_MASK_CMD + KEY_I,
-		"Export PNG..." : KEY_MASK_CMD + KEY_E,
-		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_E,
+		"Import..." : KEY_MASK_CMD + KEY_I,
+		"Export..." : KEY_MASK_CMD + KEY_E,
+		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_E,
 		"Quit" : KEY_MASK_CMD + KEY_Q
 		}
 	var edit_menu_items := {
@@ -238,13 +238,13 @@ func file_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 			opensprite_file_selected = false
 		5: # Export
-			if $ExportSprites.current_export_path == "":
-				$ExportSprites.popup_centered()
+			if $ExportDialog.was_exported == false:
+				$ExportDialog.popup_centered()
 				Global.can_draw = false
 			else:
-				$ExportSprites.export_project()
+				$ExportDialog.external_export()
 		6: # Export as
-			$ExportSprites.popup_centered()
+			$ExportDialog.popup_centered()
 			Global.can_draw = false
 		7: # Quit
 			show_quit_dialog()
@@ -510,20 +510,21 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 	current_save_path = path
 	$SaveSprite.current_path = path
-	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
-	$ExportSprites.current_path = $ExportSprites.current_export_path
+	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
+	$ExportDialog.directory_path = path.get_base_dir()
+	$ExportDialog.was_exported = false
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
+	file_menu.set_item_text(5, tr("Export"))
 
 	Global.window_title = path.get_file() + " - Pixelorama"
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
 	current_save_path = path
-	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
-	$ExportSprites.current_path = $ExportSprites.current_export_path
+	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
+	$ExportDialog.directory_path = path.get_base_dir()
+	$ExportDialog.was_exported = false
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
 	if err == OK:
@@ -593,9 +594,8 @@ func clear_canvases() -> void:
 			child.queue_free()
 	Global.canvases.clear()
 	current_save_path = ""
-	$ExportSprites.current_export_path = ""
 	file_menu.set_item_text(2, "Save")
-	file_menu.set_item_text(5, "Export PNG...")
+	file_menu.set_item_text(5, "Export...")
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 	Global.undo_redo.clear_history(false)
 
