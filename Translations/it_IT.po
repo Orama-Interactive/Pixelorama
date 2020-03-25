@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-03-25 02:50\n"
+"PO-Revision-Date: 2020-03-25 16:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Salva come..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importa..."
 
 msgid "Import PNG..."
 msgstr "Importa PNG..."
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Esporta"
 
 msgid "Export..."
-msgstr ""
+msgstr "Esporta..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Esporta come..."
 
 msgid "Export PNG..."
 msgstr "Esporta PNG..."
@@ -158,10 +158,10 @@ msgid "File Exists, Overwrite?"
 msgstr "Il file esiste già, vuoi sovrascrivere?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Il file \"%s\" è già esistente. Sovrascrivere?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Il percorso o il nome della cartella non sono validi!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -169,10 +169,10 @@ msgstr "Impossibile caricare il file '%s'.\n"
 "Codice di errore: %s"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Anteprima:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Fotogrammi:"
 
 msgid "Browse"
 msgstr ""
@@ -388,7 +388,7 @@ msgid "Spanish"
 msgstr "Spagnolo"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr "Team di sviluppo"
