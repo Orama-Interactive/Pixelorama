@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-23 18:26\n"
+"PO-Revision-Date: 2020-03-25 02:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,11 +64,20 @@ msgstr "Сохранить..."
 msgid "Save as..."
 msgstr "Сохранить как..."
 
+msgid "Import"
+msgstr ""
+
 msgid "Import PNG..."
 msgstr "Импорт PNG..."
 
 msgid "Export"
 msgstr "Экспорт"
+
+msgid "Export..."
+msgstr ""
+
+msgid "Export as..."
+msgstr ""
 
 msgid "Export PNG..."
 msgstr "Экспорт PNG..."
@@ -148,13 +157,43 @@ msgstr "Экспортировать спрайт"
 msgid "File Exists, Overwrite?"
 msgstr "Файл существует, перезаписать?"
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Не удалось загрузить файл '%s'.\n"
 "Код ошибки: %s"
 
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
 msgstr "Изменить размер:"
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Экспортировать текущий кадр"
@@ -168,8 +207,14 @@ msgstr "Экспорт всех кадров в виде спрайт-листо
 msgid "Columns"
 msgstr "Столбцы"
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
 msgstr "Строки"
+
+msgid "Rows:"
+msgstr ""
 
 msgid "Path:"
 msgstr "Путь:"
