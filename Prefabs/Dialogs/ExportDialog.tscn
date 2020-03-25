@@ -275,6 +275,7 @@ margin_right = 448.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+resizable = true
 dialog_text = "Directory path or file name is not valid!"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -287,6 +288,7 @@ margin_right = 448.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+resizable = true
 dialog_text = "File %s already exists. Overwrite?"
 __meta__ = {
 "_edit_use_anchors_": false

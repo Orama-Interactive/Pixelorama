@@ -51,8 +51,12 @@ func _ready() -> void:
 	$VBoxContainer/Tabs.add_tab("Frame")
 	$VBoxContainer/Tabs.add_tab("Spritesheet")
 	$VBoxContainer/Tabs.add_tab("Animation")
-	add_button("Cancel", false, "cancel")
-	$Popups/FileExistsAlert.add_button("Cancel Export", false, "cancel")
+	if OS.get_name() == "Windows":
+		add_button("Cancel", true, "cancel")
+		$Popups/FileExistsAlert.add_button("Cancel Export", true, "cancel")
+	else:
+		add_button("Cancel", false, "cancel")
+		$Popups/FileExistsAlert.add_button("Cancel Export", false, "cancel")
 
 func show_tab() -> void:
 	$VBoxContainer/FrameOptions.hide()
@@ -322,6 +326,7 @@ func _on_ExportDialog_about_to_show() -> void:
 		child.theme = Global.control.theme
 
 	file_exists_alert = tr("File %s already exists. Overwrite?") # Update translation
+	#$VBoxContainer/Tabs.set_tab_title(0, "Frame")
 
 func _on_Tabs_tab_clicked(tab : int) -> void:
 	current_tab = tab

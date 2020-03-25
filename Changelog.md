@@ -16,12 +16,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - The timeline has been revamped!
+- The export dialog has also been revamped - thanks to thanks to Martin Novák (novhack)!
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
 - LineEdits lose focus when the user presses Enter - thanks to Gaarco!
 - Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
+- Visual change, added border outlines to all window dialogs.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)

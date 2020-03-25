@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=28 format=2]
+[gd_resource type="Theme" load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
@@ -211,6 +211,23 @@ border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
 [sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+border_width_left = 10
+border_width_top = 6
+border_width_right = 10
+border_width_bottom = 8
+border_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -222,7 +239,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=25]
+[sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -234,9 +251,12 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=26]
-bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
 border_width_top = 20
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
 expand_margin_top = 20.0
 
@@ -397,6 +417,25 @@ TabContainer/styles/panel = SubResource( 20 )
 TabContainer/styles/tab_bg = SubResource( 21 )
 TabContainer/styles/tab_disabled = SubResource( 22 )
 TabContainer/styles/tab_fg = SubResource( 23 )
+Tabs/colors/font_color_bg = Color( 0.69, 0.69, 0.69, 1 )
+Tabs/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Tabs/colors/font_color_fg = Color( 0.94, 0.94, 0.94, 1 )
+Tabs/constants/hseparation = 4
+Tabs/constants/label_valign_bg = 2
+Tabs/constants/label_valign_fg = 0
+Tabs/constants/top_margin = 24
+Tabs/fonts/font = null
+Tabs/icons/close = null
+Tabs/icons/decrement = null
+Tabs/icons/decrement_highlight = null
+Tabs/icons/increment = null
+Tabs/icons/increment_highlight = null
+Tabs/styles/button = null
+Tabs/styles/button_pressed = null
+Tabs/styles/panel = SubResource( 24 )
+Tabs/styles/tab_bg = SubResource( 25 )
+Tabs/styles/tab_disabled = SubResource( 22 )
+Tabs/styles/tab_fg = SubResource( 23 )
 TextEdit/colors/background_color = Color( 0, 0, 0, 0 )
 TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
 TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
@@ -428,7 +467,7 @@ TextEdit/fonts/font = null
 TextEdit/icons/tab = null
 TextEdit/styles/completion = null
 TextEdit/styles/focus = null
-TextEdit/styles/normal = SubResource( 24 )
+TextEdit/styles/normal = SubResource( 28 )
 TextEdit/styles/read_only = null
 Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
 Tree/colors/custom_button_font_highlight = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -456,7 +495,7 @@ Tree/icons/checked = null
 Tree/icons/select_arrow = null
 Tree/icons/unchecked = null
 Tree/icons/updown = null
-Tree/styles/bg = SubResource( 25 )
+Tree/styles/bg = SubResource( 29 )
 Tree/styles/bg_focus = null
 Tree/styles/button_pressed = null
 Tree/styles/cursor = null
@@ -487,4 +526,4 @@ WindowDialog/constants/title_height = 20
 WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
-WindowDialog/styles/panel = SubResource( 26 )
+WindowDialog/styles/panel = SubResource( 30 )
