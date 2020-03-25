@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-25 02:50\n"
+"PO-Revision-Date: 2020-03-25 09:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Speichern als..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importieren..."
 
 msgid "Import PNG..."
 msgstr "Importiere PNG..."
@@ -387,7 +387,7 @@ msgid "Spanish"
 msgstr "Spanisch"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
