@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-02-29 13:10\n"
+"PO-Revision-Date: 2020-03-25 02:34\n"
 
 msgid "OK"
 msgstr "确定"
@@ -64,11 +64,20 @@ msgstr "保存..."
 msgid "Save as..."
 msgstr "另存为..."
 
+msgid "Import"
+msgstr ""
+
 msgid "Import PNG..."
 msgstr "导入 PNG..."
 
 msgid "Export"
 msgstr "导出"
+
+msgid "Export..."
+msgstr ""
+
+msgid "Export as..."
+msgstr ""
 
 msgid "Export PNG..."
 msgstr "导出 PNG..."
@@ -148,13 +157,43 @@ msgstr "导出 Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "文件已存在，覆盖吗?"
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "无法加载文件 '%s'。\n"
 "错误代码： %s"
 
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
 msgstr "调整大小:"
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "导出当前帧"
@@ -168,8 +207,14 @@ msgstr "导出所有帧为一个 spritesheet（单个文件）"
 msgid "Columns"
 msgstr "列"
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
 msgstr "行"
+
+msgid "Rows:"
+msgstr ""
 
 msgid "Path:"
 msgstr "路径:"
