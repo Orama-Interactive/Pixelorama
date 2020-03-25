@@ -47,15 +47,14 @@ var exported_file_format : String
 signal resume_export_function()
 var stop_export = false
 
-func _ready():
+func _ready() -> void:
 	$VBoxContainer/Tabs.add_tab("Frame")
 	$VBoxContainer/Tabs.add_tab("Spritesheet")
 	$VBoxContainer/Tabs.add_tab("Animation")
 	add_button("Cancel", false, "cancel")
 	$Popups/FileExistsAlert.add_button("Cancel Export", false, "cancel")
 
-
-func show_tab():
+func show_tab() -> void:
 	$VBoxContainer/FrameOptions.hide()
 	$VBoxContainer/SpritesheetOptions.hide()
 	$VBoxContainer/AnimationOptions.hide()
@@ -165,7 +164,7 @@ func set_preview() -> void:
 			add_preview(processed_images[i], i + 1)
 
 
-func add_preview(image: Image, canvas_number: int = -1):
+func add_preview(image: Image, canvas_number: int = -1) -> void:
 	var container = VBoxContainer.new()
 	container.size_flags_horizontal = SIZE_EXPAND_FILL
 	container.size_flags_vertical = SIZE_EXPAND_FILL
@@ -190,12 +189,12 @@ func add_preview(image: Image, canvas_number: int = -1):
 	$VBoxContainer/PreviewScroll/Previews.add_child(container)
 
 
-func remove_previews():
+func remove_previews() -> void:
 	for child in $VBoxContainer/PreviewScroll/Previews.get_children():
 		child.queue_free()
 
 
-func export_processed_images(ignore_overwrites: bool) -> void:
+func export_processed_images(ignore_overwrites : bool) -> void:
 	# Stop export if directory path or file name are not valid
 	var dir = Directory.new()
 	if not dir.dir_exists(directory_path) or not file_name.is_valid_filename():
@@ -239,7 +238,7 @@ func export_processed_images(ignore_overwrites: bool) -> void:
 
 
 # Blends canvas layers into passed image starting from the origin position
-func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0)):
+func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0)) -> void:
 	image.lock()
 	var layer_i := 0
 	for layer in canvas.layers:
@@ -250,14 +249,14 @@ func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0))
 				for xx in layer_image.get_size().x:
 					for yy in layer_image.get_size().y:
 						var pixel_color := layer_image.get_pixel(xx, yy)
-						var alpha : float = pixel_color.a * layer[4]
+						var alpha : float = pixel_color.a * layer[2]
 						layer_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 			canvas.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
 		layer_i += 1
 	image.unlock()
 
 
-func scale_processed_images():
+func scale_processed_images() -> void:
 	for processed_image in processed_images:
 		if resize != 100:
 			processed_image.unlock()
@@ -277,7 +276,7 @@ func frames_divided_by_spritesheet_lines() -> int:
 	return int(ceil(Global.canvases.size() / float(lines_count)))
 
 
-func store_export_settings():
+func store_export_settings() -> void:
 	exported_tab = current_tab
 	exported_frame_number = frame_number
 	exported_orientation = orientation
@@ -290,7 +289,7 @@ func store_export_settings():
 	exported_file_format = file_format
 
 # Fill the dialog with previous export settings
-func restore_previous_export_settings():
+func restore_previous_export_settings() -> void:
 	current_tab = exported_tab
 	frame_number = exported_frame_number if exported_frame_number <= Global.canvases.size() else Global.canvases.size()
 	orientation = exported_orientation
@@ -303,7 +302,7 @@ func restore_previous_export_settings():
 	file_format = exported_file_format
 
 
-func _on_ExportDialog_about_to_show():
+func _on_ExportDialog_about_to_show() -> void:
 	# If export already occured - fill the dialog with previous export settings
 	if was_exported:
 		restore_previous_export_settings()
@@ -319,19 +318,22 @@ func _on_ExportDialog_about_to_show():
 	$VBoxContainer/File/FileFormat.text = file_format
 	show_tab()
 
+	for child in $Popups.get_children(): # Set the theme for the popups
+		child.theme = Global.control.theme
 
-func _on_Tabs_tab_clicked(tab):
+
+func _on_Tabs_tab_clicked(tab : int) -> void:
 	current_tab = tab
 	show_tab()
 
 
-func _on_Frame_value_changed(value: float):
+func _on_Frame_value_changed(value: float) -> void:
 	frame_number = value
 	process_frame()
 	set_preview()
 
 
-func _on_Orientation_item_selected(id):
+func _on_Orientation_item_selected(id : int) -> void:
 	orientation = id
 	if orientation == Orientation.Rows:
 		$VBoxContainer/SpritesheetOptions/Orientation/LinesCountLabel.text = "Columns:"
@@ -342,13 +344,13 @@ func _on_Orientation_item_selected(id):
 	set_preview()
 
 
-func _on_LinesCount_value_changed(value):
+func _on_LinesCount_value_changed(value : float) -> void:
 	lines_count = value
 	process_spritesheet()
 	set_preview()
 
 
-func _on_Resize_value_changed(value: float) -> void:
+func _on_Resize_value_changed(value : float) -> void:
 	resize = value
 
 
@@ -356,48 +358,48 @@ func _on_Interpolation_item_selected(id: int) -> void:
 	interpolation = id
 
 
-func _on_ExportDialog_confirmed():
+func _on_ExportDialog_confirmed() -> void:
 	export_processed_images(false)
 
 
-func _on_ExportDialog_custom_action(action):
+func _on_ExportDialog_custom_action(action : String) -> void:
 	if action == "cancel":
 		hide()
 
 
-func _on_PathButton_pressed():
+func _on_PathButton_pressed() -> void:
 	$Popups/PathDialog.popup_centered()
 
 
-func _on_PathLineEdit_text_changed(new_text):
+func _on_PathLineEdit_text_changed(new_text : String) -> void:
 	directory_path = new_text
 
 
-func _on_FileLineEdit_text_changed(new_text):
+func _on_FileLineEdit_text_changed(new_text : String) -> void:
 	file_name = new_text
 
 
-func _on_FileDialog_dir_selected(dir: String):
+func _on_FileDialog_dir_selected(dir : String) -> void:
 	$VBoxContainer/Path/PathLineEdit.text = dir
 	directory_path = dir
 
 
-func _on_FileFormat_item_selected(id):
+func _on_FileFormat_item_selected(id : int) -> void:
 	match id:
 		0: # PNG
-			file_format = '.png';
+			file_format = '.png'
 		1: # GIF
-			file_format = '.gif';
+			file_format = '.gif'
 
 
-func _on_FileExistsAlert_confirmed():
+func _on_FileExistsAlert_confirmed() -> void:
 	# Overwrite existing file
 	$Popups/FileExistsAlert.dialog_text = file_exists_alert
 	stop_export = false
 	emit_signal("resume_export_function")
 
 
-func _on_FileExistsAlert_custom_action(action):
+func _on_FileExistsAlert_custom_action(action : String) -> void:
 	if action == "cancel":
 		# Cancel export
 		$Popups/FileExistsAlert.dialog_text = file_exists_alert
