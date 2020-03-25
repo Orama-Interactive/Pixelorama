@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-03-25 16:37\n"
+"PO-Revision-Date: 2020-03-25 16:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -175,25 +175,25 @@ msgid "Frame:"
 msgstr "Fotogrammi:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Esplora"
 
 msgid "Resize:"
 msgstr "Ridimensiona:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Annulla esportazione"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Avviso!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Seleziona la cartella corrente"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Apri una cartella"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Tutti i fotogrammi come file multipli"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Esporta il frame corrente"
@@ -208,13 +208,13 @@ msgid "Columns"
 msgstr "Colonne"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Colonne:"
 
 msgid "Rows"
 msgstr "Righe"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Righe:"
 
 msgid "Path:"
 msgstr "Percorso:"
