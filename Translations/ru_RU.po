@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-25 02:50\n"
+"PO-Revision-Date: 2020-03-25 16:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Сохранить как..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Импортировать..."
 
 msgid "Import PNG..."
 msgstr "Импорт PNG..."
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Экспорт"
 
 msgid "Export..."
-msgstr ""
+msgstr "Экспортировать..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Экспортировать как..."
 
 msgid "Export PNG..."
 msgstr "Экспорт PNG..."
@@ -158,10 +158,10 @@ msgid "File Exists, Overwrite?"
 msgstr "Файл существует, перезаписать?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Файл %s уже существует. Перезаписать?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Недопустимый путь к папке или имя файла!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -169,31 +169,31 @@ msgstr "Не удалось загрузить файл '%s'.\n"
 "Код ошибки: %s"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Предпросмотр:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Кадр:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Обзор"
 
 msgid "Resize:"
 msgstr "Изменить размер:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Отменить экспорт"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Внимание!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Выбрать текущую папку"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Открыть папку"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Все кадры как несколько файлов"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Экспортировать текущий кадр"
@@ -208,13 +208,13 @@ msgid "Columns"
 msgstr "Столбцы"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Столбцы:"
 
 msgid "Rows"
 msgstr "Строки"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Строки:"
 
 msgid "Path:"
 msgstr "Путь:"
@@ -388,7 +388,7 @@ msgid "Spanish"
 msgstr "Испанский"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
