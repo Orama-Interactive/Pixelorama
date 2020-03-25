@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-03-25 02:46\n"
+"PO-Revision-Date: 2020-03-25 02:50\n"
 
 msgid "OK"
 msgstr ""
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
-msgid "Import"
+msgid "Import..."
 msgstr ""
 
 msgid "Import PNG..."
