@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-25 02:34\n"
+"PO-Revision-Date: 2020-03-25 02:46\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -386,6 +386,9 @@ msgstr "Latva"
 
 msgid "Spanish"
 msgstr "Hispana"
+
+msgid "Esperanto"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Teamo de ellaboro"
