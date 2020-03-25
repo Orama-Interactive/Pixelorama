@@ -55,7 +55,7 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
-msgid "Import"
+msgid "Import..."
 msgstr ""
 
 msgid "Import PNG..."
