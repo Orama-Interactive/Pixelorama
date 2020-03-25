@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-02-23 00:17\n"
+"PO-Revision-Date: 2020-03-25 02:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,11 +64,20 @@ msgstr "Salva..."
 msgid "Save as..."
 msgstr "Salva come..."
 
+msgid "Import"
+msgstr ""
+
 msgid "Import PNG..."
 msgstr "Importa PNG..."
 
 msgid "Export"
 msgstr "Esporta"
+
+msgid "Export..."
+msgstr ""
+
+msgid "Export as..."
+msgstr ""
 
 msgid "Export PNG..."
 msgstr "Esporta PNG..."
@@ -148,13 +157,43 @@ msgstr "Esporta lo Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "Il file esiste già, vuoi sovrascrivere?"
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Impossibile caricare il file '%s'.\n"
 "Codice di errore: %s"
 
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
 msgstr "Ridimensiona:"
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Esporta il frame corrente"
@@ -168,8 +207,14 @@ msgstr "Esporta tutti i frame come uno spritesheet (singolo file)"
 msgid "Columns"
 msgstr "Colonne"
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
 msgstr "Righe"
+
+msgid "Rows:"
+msgstr ""
 
 msgid "Path:"
 msgstr "Percorso:"
