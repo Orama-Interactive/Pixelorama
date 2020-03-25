@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-03-25 02:35\n"
+"PO-Revision-Date: 2020-03-25 02:46\n"
 
 msgid "OK"
 msgstr ""
@@ -384,6 +384,9 @@ msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
+msgstr ""
+
+msgid "Esperanto"
 msgstr ""
 
 msgid "Development Team"
