@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-03-25 02:35\n"
+"PO-Revision-Date: 2020-03-25 02:46\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -386,6 +386,9 @@ msgstr "Λετονικά"
 
 msgid "Spanish"
 msgstr "Ισπανικά"
+
+msgid "Esperanto"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
