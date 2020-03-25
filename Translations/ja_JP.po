@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-02-22 22:54\n"
+"PO-Revision-Date: 2020-03-25 02:35\n"
 
 msgid "OK"
 msgstr ""
@@ -64,10 +64,19 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
+msgid "Import"
+msgstr ""
+
 msgid "Import PNG..."
 msgstr ""
 
 msgid "Export"
+msgstr ""
+
+msgid "Export..."
+msgstr ""
+
+msgid "Export as..."
 msgstr ""
 
 msgid "Export PNG..."
@@ -148,11 +157,41 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr ""
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""
 
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
+msgstr ""
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
 msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
@@ -167,7 +206,13 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
+msgstr ""
+
+msgid "Rows:"
 msgstr ""
 
 msgid "Path:"
