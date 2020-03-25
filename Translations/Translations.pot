@@ -377,6 +377,9 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+msgid "Esperanto"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 
