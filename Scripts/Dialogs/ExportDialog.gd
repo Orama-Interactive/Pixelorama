@@ -321,6 +321,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	for child in $Popups.get_children(): # Set the theme for the popups
 		child.theme = Global.control.theme
 
+	file_exists_alert = tr("File %s already exists. Overwrite?") # Update translation
 
 func _on_Tabs_tab_clicked(tab : int) -> void:
 	current_tab = tab
