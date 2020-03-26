@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-26 09:22\n"
+"PO-Revision-Date: 2020-03-26 09:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -678,7 +678,7 @@ msgid "Clone current layer"
 msgstr "Kopiere aktuelle Ebene"
 
 msgid "Merge current layer with the one below"
-msgstr "Führe Ebene mit der darunter zusammen"
+msgstr "Führe aktuelle Ebene mit der darunter zusammen"
 
 msgid "Opacity:"
 msgstr "Deckkraft"
@@ -691,7 +691,8 @@ msgstr "Ebene sperren/entsperren"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Aktiviere/Deaktiviere Zellverlinkungen\n\n"
+"Verlinkte Zellen werden über mehrere Frames geteilt"
 
 msgid "Palette"
 msgstr "Palette"
@@ -706,7 +707,7 @@ msgid "Edit currently selected palette"
 msgstr "Bearbeite ausgewählte Palette"
 
 msgid "Choose a palette"
-msgstr "Wähle Palette"
+msgstr "Wähle eine Palette"
 
 msgid "Undo: Draw"
 msgstr "Rückgängig: Zeichen"
