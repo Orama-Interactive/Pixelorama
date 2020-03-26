@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-26 01:13\n"
+"PO-Revision-Date: 2020-03-26 01:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -662,9 +662,6 @@ msgstr "Couche"
 
 msgid "Layers"
 msgstr "Calques"
-
-msgid "LAYERNEW_HT"
-msgstr "Créer un calque"
 
 msgid "Create a new layer"
 msgstr "Créer un calque"
