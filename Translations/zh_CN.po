@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 00:59\n"
 
 msgid "OK"
 msgstr "确定"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "另存为..."
 
 msgid "Import..."
-msgstr ""
+msgstr "导入..."
 
 msgid "Import PNG..."
 msgstr "导入 PNG..."
@@ -74,7 +74,7 @@ msgid "Export"
 msgstr "导出"
 
 msgid "Export..."
-msgstr ""
+msgstr "导出..."
 
 msgid "Export as..."
 msgstr ""
@@ -667,28 +667,28 @@ msgid "LAYERNEW_HT"
 msgstr "创建一个新的图层"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "创建一个新的图层"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "移除当前图层"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "向上移动当前图层"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "向下移动当前图层"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "克隆当前图层"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "当前图层与下面图层合并"
 
 msgid "Opacity:"
 msgstr "不透明度:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "切换图层可见性"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -704,13 +704,13 @@ msgid "Palettes"
 msgstr "调色板"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "添加一个新的调色板"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "编辑当前所选调色板"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "选择一个调色板"
 
 msgid "Undo: Draw"
 msgstr "撤消: 绘图"
