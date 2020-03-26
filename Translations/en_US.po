@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -661,9 +661,6 @@ msgstr ""
 
 msgid "Layers"
 msgstr ""
-
-msgid "LAYERNEW_HT"
-msgstr "Create a new layer"
 
 msgid "Create a new layer"
 msgstr ""
