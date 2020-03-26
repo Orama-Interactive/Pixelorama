@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-03-26 01:13\n"
+"PO-Revision-Date: 2020-03-26 01:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -637,9 +637,6 @@ msgstr "Capa"
 
 msgid "Layers"
 msgstr "Capas"
-
-msgid "LAYERNEW_HT"
-msgstr "Crear nueva capa"
 
 msgid "Create a new layer"
 msgstr "Crear nueva capa"
