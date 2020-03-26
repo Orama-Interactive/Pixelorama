@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-03-26 01:24\n"
+"PO-Revision-Date: 2020-03-26 13:32\n"
 
 msgid "OK"
 msgstr "确定"
@@ -77,7 +77,7 @@ msgid "Export..."
 msgstr "导出..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "导出为..."
 
 msgid "Export PNG..."
 msgstr "导出 PNG..."
@@ -158,10 +158,10 @@ msgid "File Exists, Overwrite?"
 msgstr "文件已存在，覆盖吗?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "文件 %s 已经存在。覆盖吗?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "目录路径或文件名无效！"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -169,40 +169,40 @@ msgstr "无法加载文件 '%s'。\n"
 "错误代码： %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "帧"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "精灵表"
 
 msgid "Animation"
-msgstr ""
+msgstr "动画"
 
 msgid "Preview:"
-msgstr ""
+msgstr "预览："
 
 msgid "Frame:"
-msgstr ""
+msgstr "帧:"
 
 msgid "Browse"
-msgstr ""
+msgstr "浏览"
 
 msgid "Resize:"
 msgstr "调整大小:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "取消导出"
 
 msgid "Alert!"
-msgstr ""
+msgstr "提醒"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "选择当前文件夹"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "打开目录"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "所有帧作为多个文件"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "导出当前帧"
@@ -217,13 +217,13 @@ msgid "Columns"
 msgstr "列"
 
 msgid "Columns:"
-msgstr ""
+msgstr "列:"
 
 msgid "Rows"
 msgstr "行"
 
 msgid "Rows:"
-msgstr ""
+msgstr "行:"
 
 msgid "Path:"
 msgstr "路径:"
@@ -397,7 +397,7 @@ msgid "Spanish"
 msgstr "西班牙语"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "世界语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -688,11 +688,12 @@ msgid "Toggle layer's visibility"
 msgstr "切换图层可见性"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "锁定/解锁图层"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "启用/禁用链接\n\n"
+"链接的单元格正在多个帧之间共享"
 
 msgid "Palette"
 msgstr "调色板"
@@ -707,7 +708,7 @@ msgid "Edit currently selected palette"
 msgstr "编辑当前所选调色板"
 
 msgid "Choose a palette"
-msgstr "选择一个调色板"
+msgstr "编辑当前所选调色板"
 
 msgid "Undo: Draw"
 msgstr "撤消: 绘图"
