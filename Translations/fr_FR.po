@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -667,28 +667,28 @@ msgid "LAYERNEW_HT"
 msgstr "Créer un calque"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Créer un calque"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Supprimer le calque"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Déplacer le calque vers le haut"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Déplacer le calque vers le cas"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Cloner le calque"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Fusionner le calque vers le bas"
 
 msgid "Opacity:"
 msgstr "Opacité:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Afficher/Masquer le calque"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -704,13 +704,13 @@ msgid "Palettes"
 msgstr "Palettes"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Ajouter une nouvelle palette"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Modifier la palette sélectionnée"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Choisir une palette"
 
 msgid "Undo: Draw"
 msgstr "Annuler : Dessin"
