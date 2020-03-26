@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-03-25 02:50\n"
+"PO-Revision-Date: 2020-03-26 00:43\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -167,6 +167,15 @@ msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Nevar ielādēd failu '%s'.\n"
 "Kļūdas kods: %s"
+
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
 
 msgid "Preview:"
 msgstr ""
@@ -656,26 +665,36 @@ msgstr "Slāņi"
 msgid "LAYERNEW_HT"
 msgstr "Izveidot jaunu slāni"
 
-msgid "LAYERREMOVE_HT"
-msgstr "Noņemt aktuālo slāni"
+msgid "Create a new layer"
+msgstr ""
 
-msgid "LAYERUP_HT"
-msgstr "Pārvietot aktuālo slāni uz augšu"
+msgid "Remove current layer"
+msgstr ""
 
-msgid "LAYERDOWN_HT"
-msgstr "Pārvietot aktuālo slāni uz leju"
+msgid "Move up the current layer"
+msgstr ""
 
-msgid "LAYERCLONE_HT"
-msgstr "Klonēt aktuālo slāni"
+msgid "Move down the current layer"
+msgstr ""
 
-msgid "LAYERMERGE_HT"
-msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
+msgid "Clone current layer"
+msgstr ""
+
+msgid "Merge current layer with the one below"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "Necaurspīdīgums:"
 
-msgid "LAYERVISIBILITY_HT"
-msgstr "SLāņa redzamības slēdzis"
+msgid "Toggle layer's visibility"
+msgstr ""
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palete"
@@ -683,14 +702,14 @@ msgstr "Palete"
 msgid "Palettes"
 msgstr "Paletes"
 
-msgid "NEWPALETTE_HT"
-msgstr "Pievienot jaunu paleti"
+msgid "Add a new palette"
+msgstr ""
 
-msgid "EDITPALETTE_HT"
-msgstr "Rediģēt iezīmēto paleti"
+msgid "Edit currently selected palette"
+msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
-msgstr "Izvēlētis paleti"
+msgid "Choose a palette"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Atcelt: Zīmēt"
