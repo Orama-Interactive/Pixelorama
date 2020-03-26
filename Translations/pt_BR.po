@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-03-25 02:50\n"
+"PO-Revision-Date: 2020-03-26 00:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -167,6 +167,15 @@ msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Impossível carregar o arquivo '%s'.\n"
 "Código de erro: %s"
+
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
 
 msgid "Preview:"
 msgstr ""
@@ -656,26 +665,36 @@ msgstr "Camadas"
 msgid "LAYERNEW_HT"
 msgstr "Criar nova camada"
 
-msgid "LAYERREMOVE_HT"
-msgstr "Remover camada atual"
+msgid "Create a new layer"
+msgstr ""
 
-msgid "LAYERUP_HT"
-msgstr "Mover para a cima a camada atual"
+msgid "Remove current layer"
+msgstr ""
 
-msgid "LAYERDOWN_HT"
-msgstr "Mover para baixo a camada atual"
+msgid "Move up the current layer"
+msgstr ""
 
-msgid "LAYERCLONE_HT"
-msgstr "Clonar camada atual"
+msgid "Move down the current layer"
+msgstr ""
 
-msgid "LAYERMERGE_HT"
-msgstr "Combinar camada atual com a de baixo"
+msgid "Clone current layer"
+msgstr ""
+
+msgid "Merge current layer with the one below"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "Opacidade:"
 
-msgid "LAYERVISIBILITY_HT"
-msgstr "Mudar visibilidade da camada"
+msgid "Toggle layer's visibility"
+msgstr ""
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
@@ -683,14 +702,14 @@ msgstr "Paleta"
 msgid "Palettes"
 msgstr "Paletas"
 
-msgid "NEWPALETTE_HT"
-msgstr "Adicionar uma nova paleta"
+msgid "Add a new palette"
+msgstr ""
 
-msgid "EDITPALETTE_HT"
-msgstr "Editar paleta selecionada"
+msgid "Edit currently selected palette"
+msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
-msgstr "Escolher uma paleta"
+msgid "Choose a palette"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Desfazer: Desenhar"
