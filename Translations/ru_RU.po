@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-25 16:51\n"
+"PO-Revision-Date: 2020-03-26 00:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -167,6 +167,15 @@ msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Не удалось загрузить файл '%s'.\n"
 "Код ошибки: %s"
+
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
 
 msgid "Preview:"
 msgstr "Предпросмотр:"
@@ -657,26 +666,36 @@ msgstr "Слои"
 msgid "LAYERNEW_HT"
 msgstr "Создать новый слой"
 
-msgid "LAYERREMOVE_HT"
-msgstr "Удалить текущий слой"
+msgid "Create a new layer"
+msgstr ""
 
-msgid "LAYERUP_HT"
-msgstr "Поднять текущий слой выше"
+msgid "Remove current layer"
+msgstr ""
 
-msgid "LAYERDOWN_HT"
-msgstr "Опустить текущий слой ниже"
+msgid "Move up the current layer"
+msgstr ""
 
-msgid "LAYERCLONE_HT"
-msgstr "Клонировать текущий слой"
+msgid "Move down the current layer"
+msgstr ""
 
-msgid "LAYERMERGE_HT"
-msgstr "Объединить слой ниже с текущим "
+msgid "Clone current layer"
+msgstr ""
+
+msgid "Merge current layer with the one below"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "Непрозрачность:"
 
-msgid "LAYERVISIBILITY_HT"
-msgstr "Переключить видимость слоя"
+msgid "Toggle layer's visibility"
+msgstr ""
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Палитра"
@@ -684,14 +703,14 @@ msgstr "Палитра"
 msgid "Palettes"
 msgstr "Палитры"
 
-msgid "NEWPALETTE_HT"
-msgstr "Добавить новую палитру"
+msgid "Add a new palette"
+msgstr ""
 
-msgid "EDITPALETTE_HT"
-msgstr "Редактировать выбранную палитру"
+msgid "Edit currently selected palette"
+msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
-msgstr "Выберите палитру"
+msgid "Choose a palette"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Отменить: Рисование"
