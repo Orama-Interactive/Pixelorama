@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 00:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -667,28 +667,28 @@ msgid "LAYERNEW_HT"
 msgstr "Создать новый слой"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Создать новый слой"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Удалить текущий слой"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Поднять текущий слой выше"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Опустить текущий слой ниже"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Клонировать текущий слой"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Объединить слой ниже с текущим"
 
 msgid "Opacity:"
 msgstr "Непрозрачность:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Переключить видимость слоя"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -704,13 +704,13 @@ msgid "Palettes"
 msgstr "Палитры"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Добавить новую палитру"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Редактировать выбранную палитру"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Выберите палитру"
 
 msgid "Undo: Draw"
 msgstr "Отменить: Рисование"
