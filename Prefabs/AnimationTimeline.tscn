@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -34,6 +34,8 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_Last_Frame.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_Last_Frame_Hover.png" type="Texture" id=33]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop_None.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning_Hover.png" type="Texture" id=36]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -90,27 +92,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VSeparator" type="VSeparator" parent="."]
-anchor_bottom = 1.0
-margin_right = 4.0
-size_flags_vertical = 3
-
 [node name="AnimationContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 15.0
-margin_top = 4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TimelineContainer" type="VBoxContainer" parent="AnimationContainer"]
-margin_right = 543.0
-margin_bottom = 196.0
-size_flags_horizontal = 3
+[node name="ForLayerButtons" type="VBoxContainer" parent="AnimationContainer"]
+margin_right = 68.0
+margin_bottom = 200.0
 
-[node name="LayerButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
-margin_right = 543.0
-margin_bottom = 32.0
+[node name="SpacerControl" type="Control" parent="AnimationContainer/ForLayerButtons"]
+margin_right = 68.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
 
-[node name="AddLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="LayerButtons" type="GridContainer" parent="AnimationContainer/ForLayerButtons"]
+margin_top = 34.0
+margin_right = 68.0
+margin_bottom = 138.0
+size_flags_vertical = 0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 2
+
+[node name="AddLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
@@ -120,7 +127,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
-[node name="RemoveLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="RemoveLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
@@ -133,12 +140,12 @@ texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 texture_disabled = ExtResource( 6 )
 
-[node name="MoveUpLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="MoveUpLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 32.0
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
 hint_tooltip = "Move up the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
@@ -146,12 +153,13 @@ texture_normal = ExtResource( 7 )
 texture_hover = ExtResource( 8 )
 texture_disabled = ExtResource( 9 )
 
-[node name="MoveDownLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="MoveDownLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 108.0
-margin_right = 140.0
-margin_bottom = 32.0
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
 hint_tooltip = "Move down the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
@@ -159,23 +167,24 @@ texture_normal = ExtResource( 10 )
 texture_hover = ExtResource( 11 )
 texture_disabled = ExtResource( 12 )
 
-[node name="CloneLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="CloneLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 144.0
-margin_right = 176.0
-margin_bottom = 32.0
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
 hint_tooltip = "Clone current layer"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 13 )
 texture_hover = ExtResource( 14 )
 
-[node name="MergeDownLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="MergeDownLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 180.0
-margin_right = 212.0
-margin_bottom = 32.0
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
 hint_tooltip = "Merge current layer with the one below"
 mouse_default_cursor_shape = 8
 disabled = true
@@ -183,18 +192,32 @@ texture_normal = ExtResource( 15 )
 texture_hover = ExtResource( 16 )
 texture_disabled = ExtResource( 17 )
 
-[node name="AnimationTags" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/LayerButtons"]
+[node name="SpacerControl" type="Control" parent="AnimationContainer"]
+margin_left = 72.0
+margin_right = 88.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="TimelineContainer" type="VBoxContainer" parent="AnimationContainer"]
+margin_left = 92.0
+margin_right = 696.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+
+[node name="SpacerControl" type="Control" parent="AnimationContainer/TimelineContainer"]
+margin_right = 604.0
+
+[node name="AnimationTags" type="VBoxContainer" parent="AnimationContainer/TimelineContainer"]
 visible = false
-margin_left = 216.0
-margin_right = 326.0
+margin_right = 471.0
 margin_bottom = 32.0
 
-[node name="Line2D" type="Line2D" parent="AnimationContainer/TimelineContainer/LayerButtons/AnimationTags"]
+[node name="Line2D" type="Line2D" parent="AnimationContainer/TimelineContainer/AnimationTags"]
 points = PoolVector2Array( 0, 32, 0, 0, 110, 0, 110, 32 )
 width = 1.0
 texture_mode = 1313163520
 
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/LayerButtons/AnimationTags"]
+[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/AnimationTags"]
 margin_right = 110.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 110, 32 )
@@ -204,100 +227,10 @@ text = "Animation Tags"
 align = 1
 valign = 1
 
-[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
-margin_top = 36.0
-margin_right = 543.0
-margin_bottom = 60.0
-custom_constants/separation = 2
-
-[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
-margin_right = 53.0
-margin_bottom = 24.0
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "Opacity:"
-valign = 1
-
-[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
-margin_left = 55.0
-margin_right = 167.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 112, 0 )
-mouse_default_cursor_shape = 2
-size_flags_vertical = 1
-value = 100.0
-ticks_on_borders = true
-
-[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
-margin_left = 169.0
-margin_right = 243.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_vertical = 4
-value = 100.0
-align = 1
-
-[node name="TimelineScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer"]
-margin_top = 64.0
-margin_right = 543.0
-margin_bottom = 160.0
-size_flags_vertical = 3
-
-[node name="LayersAndFrames" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll"]
-margin_right = 252.0
-margin_bottom = 96.0
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
-margin_right = 212.0
-margin_bottom = 96.0
-
-[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
-margin_right = 212.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 0, 16 )
-text = "Layers"
-align = 1
-valign = 1
-
-[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
-margin_top = 20.0
-margin_right = 212.0
-margin_bottom = 56.0
-
-[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer/LayersContainer" instance=ExtResource( 18 )]
-margin_right = 212.0
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
-margin_left = 216.0
-margin_right = 252.0
-margin_bottom = 96.0
-
-[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
-margin_right = 36.0
-margin_bottom = 14.0
-
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2/FrameIDs"]
-margin_right = 36.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 36, 0 )
-text = "1"
-align = 1
-
-[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
-margin_top = 18.0
-margin_right = 36.0
-margin_bottom = 18.0
-
-[node name="HSeparator" type="HSeparator" parent="AnimationContainer/TimelineContainer"]
-margin_top = 164.0
-margin_right = 543.0
-margin_bottom = 168.0
-
 [node name="AnimationButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
-margin_top = 172.0
-margin_right = 543.0
-margin_bottom = 196.0
+margin_top = 4.0
+margin_right = 604.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 0, 24 )
 
 [node name="CurrentFrame" type="Label" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
@@ -320,8 +253,8 @@ texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 223.0
-margin_right = 363.0
+margin_left = 241.0
+margin_right = 381.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -408,13 +341,34 @@ texture_normal = ExtResource( 32 )
 texture_hover = ExtResource( 33 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 445.0
-margin_right = 543.0
+margin_left = 482.0
+margin_right = 604.0
 margin_bottom = 24.0
 size_flags_horizontal = 0
 
+[node name="OnionSkinning" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
+"UIButtons",
+]]
+margin_right = 20.0
+margin_bottom = 24.0
+hint_tooltip = "No loop"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 35 )
+texture_hover = ExtResource( 36 )
+
+[node name="LoopAnim" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
+"UIButtons",
+]]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 24.0
+hint_tooltip = "No loop"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 34 )
+
 [node name="FPSValue" type="SpinBox" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
-margin_right = 74.0
+margin_left = 48.0
+margin_right = 122.0
 margin_bottom = 24.0
 hint_tooltip = "FPS_HT"
 mouse_default_cursor_shape = 2
@@ -424,25 +378,107 @@ value = 6.0
 align = 1
 suffix = "FPS"
 
-[node name="LoopAnim" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
-margin_left = 78.0
-margin_right = 98.0
+[node name="HSeparator" type="HSeparator" parent="AnimationContainer/TimelineContainer"]
+margin_top = 32.0
+margin_right = 604.0
+margin_bottom = 36.0
+
+[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
+margin_top = 40.0
+margin_right = 604.0
+margin_bottom = 64.0
+custom_constants/separation = 2
+
+[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
+margin_right = 53.0
 margin_bottom = 24.0
-hint_tooltip = "No loop"
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Opacity:"
+valign = 1
+
+[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
+margin_left = 55.0
+margin_right = 167.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 112, 0 )
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 34 )
+size_flags_vertical = 1
+value = 100.0
+ticks_on_borders = true
+
+[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
+margin_left = 169.0
+margin_right = 243.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 4
+value = 100.0
+align = 1
+
+[node name="TimelineScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer"]
+margin_top = 68.0
+margin_right = 604.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="LayersAndFrames" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll"]
+margin_right = 252.0
+margin_bottom = 132.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+margin_right = 212.0
+margin_bottom = 132.0
+
+[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
+margin_right = 212.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+text = "Layers"
+align = 1
+valign = 1
+
+[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
+margin_top = 20.0
+margin_right = 212.0
+margin_bottom = 56.0
+
+[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer/LayersContainer" instance=ExtResource( 18 )]
+margin_right = 212.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+margin_left = 216.0
+margin_right = 252.0
+margin_bottom = 132.0
+
+[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
+margin_right = 36.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2/FrameIDs"]
+margin_right = 36.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 36, 0 )
+text = "1"
+align = 1
+
+[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 36.0
+margin_bottom = 18.0
 
 [node name="VSeparator" type="VSeparator" parent="AnimationContainer"]
-margin_left = 547.0
-margin_right = 551.0
-margin_bottom = 196.0
+visible = false
+margin_left = 692.0
+margin_right = 696.0
+margin_bottom = 200.0
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="AnimationContainer"]
-margin_left = 555.0
-margin_right = 681.0
-margin_bottom = 196.0
+visible = false
+margin_left = 570.0
+margin_right = 696.0
+margin_bottom = 200.0
 
 [node name="OnionSkinning" type="Label" parent="AnimationContainer/OnionSkinningButtons"]
 margin_right = 126.0
@@ -483,19 +519,17 @@ mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
 
 [node name="VSeparator2" type="VSeparator" parent="AnimationContainer"]
-margin_left = 685.0
-margin_right = 689.0
-margin_bottom = 196.0
+margin_left = 700.0
+margin_right = 704.0
+margin_bottom = 200.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
@@ -503,8 +537,11 @@ margin_bottom = 196.0
 [connection signal="toggled" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="value_changed" from="AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]

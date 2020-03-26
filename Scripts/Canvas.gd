@@ -72,37 +72,38 @@ func _ready() -> void:
 func _draw() -> void:
 	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) # Draw transparent background
 	# Onion Skinning
-	# Past
-	if Global.onion_skinning_past_rate > 0:
-		var color : Color
-		if Global.onion_skinning_blue_red:
-			color = Color.blue
-		else:
-			color = Color.white
-		for i in range(1, Global.onion_skinning_past_rate + 1):
-			if Global.current_frame >= i:
-				var layer_i := 0
-				for layer in Global.canvases[Global.current_frame - i].layers:
-					if Global.layers[layer_i][1]: # If it's visible
-						color.a = 0.6 / i
-						draw_texture(layer[1], location, color)
-					layer_i += 1
+	if Global.onion_skinning:
+		# Past
+		if Global.onion_skinning_past_rate > 0:
+			var color : Color
+			if Global.onion_skinning_blue_red:
+				color = Color.blue
+			else:
+				color = Color.white
+			for i in range(1, Global.onion_skinning_past_rate + 1):
+				if Global.current_frame >= i:
+					var layer_i := 0
+					for layer in Global.canvases[Global.current_frame - i].layers:
+						if Global.layers[layer_i][1]: # If it's visible
+							color.a = 0.6 / i
+							draw_texture(layer[1], location, color)
+						layer_i += 1
 
-	# Future
-	if Global.onion_skinning_future_rate > 0:
-		var color : Color
-		if Global.onion_skinning_blue_red:
-			color = Color.red
-		else:
-			color = Color.white
-		for i in range(1, Global.onion_skinning_future_rate + 1):
-			if Global.current_frame < Global.canvases.size() - i:
-				var layer_i := 0
-				for layer in Global.canvases[Global.current_frame + i].layers:
-					if Global.layers[layer_i][1]: # If it's visible
-						color.a = 0.6 / i
-						draw_texture(layer[1], location, color)
-					layer_i += 1
+		# Future
+		if Global.onion_skinning_future_rate > 0:
+			var color : Color
+			if Global.onion_skinning_blue_red:
+				color = Color.red
+			else:
+				color = Color.white
+			for i in range(1, Global.onion_skinning_future_rate + 1):
+				if Global.current_frame < Global.canvases.size() - i:
+					var layer_i := 0
+					for layer in Global.canvases[Global.current_frame + i].layers:
+						if Global.layers[layer_i][1]: # If it's visible
+							color.a = 0.6 / i
+							draw_texture(layer[1], location, color)
+						layer_i += 1
 
 	# Draw current frame layers
 	for i in range(layers.size()):

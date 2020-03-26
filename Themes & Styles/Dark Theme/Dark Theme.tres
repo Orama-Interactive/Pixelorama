@@ -226,7 +226,7 @@ border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.2, 0.2, 0.2, 1 )
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=26]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -239,7 +239,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=27]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -251,7 +251,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=30]
+[sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
 border_width_top = 20
@@ -467,7 +467,7 @@ TextEdit/fonts/font = null
 TextEdit/icons/tab = null
 TextEdit/styles/completion = null
 TextEdit/styles/focus = null
-TextEdit/styles/normal = SubResource( 28 )
+TextEdit/styles/normal = SubResource( 26 )
 TextEdit/styles/read_only = null
 Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
 Tree/colors/custom_button_font_highlight = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -495,7 +495,7 @@ Tree/icons/checked = null
 Tree/icons/select_arrow = null
 Tree/icons/unchecked = null
 Tree/icons/updown = null
-Tree/styles/bg = SubResource( 29 )
+Tree/styles/bg = SubResource( 27 )
 Tree/styles/bg_focus = null
 Tree/styles/button_pressed = null
 Tree/styles/cursor = null
@@ -526,4 +526,4 @@ WindowDialog/constants/title_height = 20
 WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
-WindowDialog/styles/panel = SubResource( 30 )
+WindowDialog/styles/panel = SubResource( 28 )

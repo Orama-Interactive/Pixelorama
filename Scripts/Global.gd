@@ -111,10 +111,11 @@ var show_guides := true
 var show_animation_timeline := true
 
 # Onion skinning options
+var onion_skinning := false
 # warning-ignore:unused_class_variable
-var onion_skinning_past_rate := 0
+var onion_skinning_past_rate := 1
 # warning-ignore:unused_class_variable
-var onion_skinning_future_rate := 0
+var onion_skinning_future_rate := 1
 # warning-ignore:unused_class_variable
 var onion_skinning_blue_red := false
 

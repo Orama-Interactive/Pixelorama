@@ -40,6 +40,12 @@ func add_frame() -> void:
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 	Global.undo_redo.commit_action()
 
+
+func _on_OnionSkinning_pressed() -> void:
+	Global.onion_skinning = !Global.onion_skinning
+	Global.canvas.update()
+
+
 func _on_LoopAnim_pressed() -> void:
 	match animation_loop:
 		0: # Make it loop
