@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-26 01:24\n"
+"PO-Revision-Date: 2020-03-26 09:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -168,13 +168,13 @@ msgid "Can't load file '%s'.\n"
 msgstr "Kann Datei nicht laden '%s'. Error code: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Frame"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animation"
 
 msgid "Preview:"
 msgstr ""
@@ -687,7 +687,7 @@ msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Ebene sperren/entsperren"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
