@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-02-23 18:26\n"
+"PO-Revision-Date: 2020-03-26 00:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,11 +64,20 @@ msgstr "Сохранить..."
 msgid "Save as..."
 msgstr "Сохранить как..."
 
+msgid "Import..."
+msgstr "Импортировать..."
+
 msgid "Import PNG..."
 msgstr "Импорт PNG..."
 
 msgid "Export"
 msgstr "Экспорт"
+
+msgid "Export..."
+msgstr "Экспортировать..."
+
+msgid "Export as..."
+msgstr "Экспортировать как..."
 
 msgid "Export PNG..."
 msgstr "Экспорт PNG..."
@@ -148,13 +157,52 @@ msgstr "Экспортировать спрайт"
 msgid "File Exists, Overwrite?"
 msgstr "Файл существует, перезаписать?"
 
+msgid "File %s already exists. Overwrite?"
+msgstr "Файл %s уже существует. Перезаписать?"
+
+msgid "Directory path or file name is not valid!"
+msgstr "Недопустимый путь к папке или имя файла!"
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Не удалось загрузить файл '%s'.\n"
 "Код ошибки: %s"
 
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
+
+msgid "Preview:"
+msgstr "Предпросмотр:"
+
+msgid "Frame:"
+msgstr "Кадр:"
+
+msgid "Browse"
+msgstr "Обзор"
+
 msgid "Resize:"
 msgstr "Изменить размер:"
+
+msgid "Cancel Export"
+msgstr "Отменить экспорт"
+
+msgid "Alert!"
+msgstr "Внимание!"
+
+msgid "Select Current Folder"
+msgstr "Выбрать текущую папку"
+
+msgid "Open a Directory"
+msgstr "Открыть папку"
+
+msgid "All frames as multiple files"
+msgstr "Все кадры как несколько файлов"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Экспортировать текущий кадр"
@@ -168,8 +216,14 @@ msgstr "Экспорт всех кадров в виде спрайт-листо
 msgid "Columns"
 msgstr "Столбцы"
 
+msgid "Columns:"
+msgstr "Столбцы:"
+
 msgid "Rows"
 msgstr "Строки"
+
+msgid "Rows:"
+msgstr "Строки:"
 
 msgid "Path:"
 msgstr "Путь:"
@@ -341,6 +395,9 @@ msgstr "Латышский"
 
 msgid "Spanish"
 msgstr "Испанский"
+
+msgid "Esperanto"
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
@@ -609,26 +666,36 @@ msgstr "Слои"
 msgid "LAYERNEW_HT"
 msgstr "Создать новый слой"
 
-msgid "LAYERREMOVE_HT"
+msgid "Create a new layer"
+msgstr "Создать новый слой"
+
+msgid "Remove current layer"
 msgstr "Удалить текущий слой"
 
-msgid "LAYERUP_HT"
+msgid "Move up the current layer"
 msgstr "Поднять текущий слой выше"
 
-msgid "LAYERDOWN_HT"
+msgid "Move down the current layer"
 msgstr "Опустить текущий слой ниже"
 
-msgid "LAYERCLONE_HT"
+msgid "Clone current layer"
 msgstr "Клонировать текущий слой"
 
-msgid "LAYERMERGE_HT"
-msgstr "Объединить слой ниже с текущим "
+msgid "Merge current layer with the one below"
+msgstr "Объединить слой ниже с текущим"
 
 msgid "Opacity:"
 msgstr "Непрозрачность:"
 
-msgid "LAYERVISIBILITY_HT"
+msgid "Toggle layer's visibility"
 msgstr "Переключить видимость слоя"
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Палитра"
@@ -636,13 +703,13 @@ msgstr "Палитра"
 msgid "Palettes"
 msgstr "Палитры"
 
-msgid "NEWPALETTE_HT"
+msgid "Add a new palette"
 msgstr "Добавить новую палитру"
 
-msgid "EDITPALETTE_HT"
+msgid "Edit currently selected palette"
 msgstr "Редактировать выбранную палитру"
 
-msgid "CHOOSEPALETTE_HT"
+msgid "Choose a palette"
 msgstr "Выберите палитру"
 
 msgid "Undo: Draw"

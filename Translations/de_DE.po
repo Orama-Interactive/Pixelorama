@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-28 15:03\n"
+"PO-Revision-Date: 2020-03-26 00:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,11 +64,20 @@ msgstr "Speichern..."
 msgid "Save as..."
 msgstr "Speichern als..."
 
+msgid "Import..."
+msgstr "Importieren..."
+
 msgid "Import PNG..."
 msgstr "Importiere PNG..."
 
 msgid "Export"
 msgstr "Exportiere"
+
+msgid "Export..."
+msgstr "Exportiere..."
+
+msgid "Export as..."
+msgstr "Exportieren als..."
 
 msgid "Export PNG..."
 msgstr "Exportiere PNG..."
@@ -148,12 +157,51 @@ msgstr "Exportiere Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "Datei existiert schon, überschreiben?"
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Kann Datei nicht laden '%s'. Error code: %s"
 
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
+
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
 msgstr "Größe verändern"
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exportiere aktuellen Frame"
@@ -167,8 +215,14 @@ msgstr "Exportiere alle Frames als Spritesheet (einzelne Datei)"
 msgid "Columns"
 msgstr "Spalten"
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
 msgstr "Reihen"
+
+msgid "Rows:"
+msgstr ""
 
 msgid "Path:"
 msgstr "Pfad:"
@@ -340,6 +394,9 @@ msgstr "Lettisch"
 
 msgid "Spanish"
 msgstr "Spanisch"
+
+msgid "Esperanto"
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
@@ -608,26 +665,36 @@ msgstr "Ebenen"
 msgid "LAYERNEW_HT"
 msgstr "Erstelle eine neue Ebene"
 
-msgid "LAYERREMOVE_HT"
+msgid "Create a new layer"
+msgstr "Erstelle eine neue Ebene"
+
+msgid "Remove current layer"
 msgstr "Entferne aktuelle Ebene"
 
-msgid "LAYERUP_HT"
+msgid "Move up the current layer"
 msgstr "Bewege aktuelle Ebene nach oben"
 
-msgid "LAYERDOWN_HT"
+msgid "Move down the current layer"
 msgstr "Bewege aktuelle Ebene nach unten"
 
-msgid "LAYERCLONE_HT"
+msgid "Clone current layer"
 msgstr "Kopiere aktuelle Ebene"
 
-msgid "LAYERMERGE_HT"
+msgid "Merge current layer with the one below"
 msgstr "Führe Ebene mit der darunter zusammen"
 
 msgid "Opacity:"
 msgstr "Deckkraft"
 
-msgid "LAYERVISIBILITY_HT"
+msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palette"
@@ -635,13 +702,13 @@ msgstr "Palette"
 msgid "Palettes"
 msgstr "Paletten"
 
-msgid "NEWPALETTE_HT"
+msgid "Add a new palette"
 msgstr "Füge eine neue Palette hinzu"
 
-msgid "EDITPALETTE_HT"
+msgid "Edit currently selected palette"
 msgstr "Bearbeite ausgewählte Palette"
 
-msgid "CHOOSEPALETTE_HT"
+msgid "Choose a palette"
 msgstr "Wähle Palette"
 
 msgid "Undo: Draw"
