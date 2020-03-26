@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Salvar como..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importar..."
 
 msgid "Import PNG..."
 msgstr "Importar PNG..."
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Exportar"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportar..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportar como..."
 
 msgid "Export PNG..."
 msgstr "Exportar PNG..."
@@ -666,28 +666,28 @@ msgid "LAYERNEW_HT"
 msgstr "Criar nova camada"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Criar nova camada"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Remover camada atual"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Mover para a cima a camada atual"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Mover para baixo a camada atual"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Clonar camada atual"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Combinar camada atual com a de baixo"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Mudar visibilidade da camada"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -703,13 +703,13 @@ msgid "Palettes"
 msgstr "Paletas"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Adicionar uma nova paleta"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Editar paleta selecionada"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Escolher uma paleta"
 
 msgid "Undo: Draw"
 msgstr "Desfazer: Desenhar"
