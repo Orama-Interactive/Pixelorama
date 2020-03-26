@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-03-26 01:13\n"
+"PO-Revision-Date: 2020-03-26 01:24\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -661,9 +661,6 @@ msgstr "Slānis"
 
 msgid "Layers"
 msgstr "Slāņi"
-
-msgid "LAYERNEW_HT"
-msgstr "Izveidot jaunu slāni"
 
 msgid "Create a new layer"
 msgstr "Izveidot jaunu slāni"
