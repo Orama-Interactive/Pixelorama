@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Zapisz jako..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importuj..."
 
 msgid "Import PNG..."
 msgstr "Importuj PNG…"
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Eksportuj"
 
 msgid "Export..."
-msgstr ""
+msgstr "Eksportuj..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Eksportuj jako..."
 
 msgid "Export PNG..."
 msgstr "Eksportuj PNG…"
@@ -666,28 +666,28 @@ msgid "LAYERNEW_HT"
 msgstr "Stwórz nową warstwę"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Stwórz nową warstwę"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Usuń obecną warstwę"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Przesuń obecną warstwę do góry"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Przesuń obecną warstwę w dół"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Duplikuj obecną warstwę"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Połącz obecną warstwę z warstwą powyżej"
 
 msgid "Opacity:"
 msgstr ""
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Ukrywanie warstwy"
 
 msgid "Lock/unlock layer"
 msgstr ""
