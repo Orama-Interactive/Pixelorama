@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-03-26 01:13\n"
+"PO-Revision-Date: 2020-03-26 01:24\n"
 
 msgid "OK"
 msgstr "確定"
@@ -661,9 +661,6 @@ msgstr "圖層"
 
 msgid "Layers"
 msgstr "圖層"
-
-msgid "LAYERNEW_HT"
-msgstr "新增圖層"
 
 msgid "Create a new layer"
 msgstr "新增圖層"
