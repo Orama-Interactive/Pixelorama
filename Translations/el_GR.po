@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 00:53\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -169,13 +169,13 @@ msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '
 "Κωδικός σφάλματος: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Καρέ"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Φύλλο καρέ"
 
 msgid "Animation"
-msgstr ""
+msgstr "Κίνηση"
 
 msgid "Preview:"
 msgstr "Προεπισκόπηση:"
@@ -667,31 +667,31 @@ msgid "LAYERNEW_HT"
 msgstr "Δημιουργία νέας στρώσης"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Δημιουργία νέας στρώσης"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Διαγραφή της τρέχουσας στρώσης"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Μετακίνηση της τρέχουσας στρώσης προς τα πάνω"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Μετακίνηση της τρέχουσας στρώσης προς τα κάτω"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Κλωνοποίηση της τρέχουσας στρώσης"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Συγχώνευση της τρέχουσας στρώσης με την από κάτω"
 
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Εναλλαγή της ορατότητας της στρώσης"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Κλείδωμα/ξεκλείδωμα της στρώσης"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -704,13 +704,13 @@ msgid "Palettes"
 msgstr "Παλέτες"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Νέα παλέτα"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Επεξεργασία παλέτας"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Επιλογή παλέτας"
 
 msgid "Undo: Draw"
 msgstr "Αναίρεση: Ζωγραφική"
