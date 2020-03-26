@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-03-26 01:13\n"
+"PO-Revision-Date: 2020-03-26 01:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -661,9 +661,6 @@ msgstr "Camada"
 
 msgid "Layers"
 msgstr "Camadas"
-
-msgid "LAYERNEW_HT"
-msgstr "Criar nova camada"
 
 msgid "Create a new layer"
 msgstr "Criar nova camada"
