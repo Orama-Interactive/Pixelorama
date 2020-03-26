@@ -356,7 +356,7 @@ func _ready() -> void:
 
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
-	move_down_layer_button = find_node_by_name(animation_timeline, "MovwDownLayer")
+	move_down_layer_button = find_node_by_name(animation_timeline, "MoveDownLayer")
 	merge_down_layer_button = find_node_by_name(animation_timeline, "MergeDownLayer")
 
 	layer_opacity_slider = find_node_by_name(animation_timeline, "OpacitySlider")

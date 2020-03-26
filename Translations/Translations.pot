@@ -629,9 +629,6 @@ msgstr ""
 msgid "Layers"
 msgstr ""
 
-msgid "LAYERNEW_HT"
-msgstr ""
-
 msgid "Create a new layer"
 msgstr ""
 

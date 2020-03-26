@@ -115,7 +115,7 @@ margin_bottom = 32.0
 ]]
 margin_right = 32.0
 margin_bottom = 32.0
-hint_tooltip = "LAYERNEW_HT"
+hint_tooltip = "Create a new layer"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
@@ -126,7 +126,7 @@ texture_hover = ExtResource( 3 )
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
-hint_tooltip = "LAYERREMOVE_HT"
+hint_tooltip = "Remove current layer"
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 4 )
@@ -139,20 +139,20 @@ texture_disabled = ExtResource( 6 )
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
-hint_tooltip = "LAYERUP_HT"
+hint_tooltip = "Move up the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 7 )
 texture_hover = ExtResource( 8 )
 texture_disabled = ExtResource( 9 )
 
-[node name="MovwDownLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
+[node name="MoveDownLayer" type="TextureButton" parent="AnimationContainer/TimelineContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
-hint_tooltip = "LAYERDOWN_HT"
+hint_tooltip = "Move down the current layer"
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 10 )
@@ -165,7 +165,7 @@ texture_disabled = ExtResource( 12 )
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
-hint_tooltip = "LAYERCLONE_HT"
+hint_tooltip = "Clone current layer"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 13 )
 texture_hover = ExtResource( 14 )
@@ -176,7 +176,7 @@ texture_hover = ExtResource( 14 )
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 32.0
-hint_tooltip = "LAYERMERGE_HT"
+hint_tooltip = "Merge current layer with the one below"
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 15 )
@@ -491,7 +491,7 @@ margin_bottom = 196.0
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MovwDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
