@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Saglabāt kā..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importēt..."
 
 msgid "Import PNG..."
 msgstr "Importēt PNG..."
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Eksportēt"
 
 msgid "Export..."
-msgstr ""
+msgstr "Eksportēt..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Eksportēt kā..."
 
 msgid "Export PNG..."
 msgstr "Eksportēt PNG..."
@@ -666,28 +666,28 @@ msgid "LAYERNEW_HT"
 msgstr "Izveidot jaunu slāni"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Izveidot jaunu slāni"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Noņemt aktuālo slāni"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Pārvietot aktuālo slāni uz augšu"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Pārvietot aktuālo slāni uz leju"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Klonēt aktuālo slāni"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
 
 msgid "Opacity:"
 msgstr "Necaurspīdīgums:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Slāņa redzamības slēdzis"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -703,13 +703,13 @@ msgid "Palettes"
 msgstr "Paletes"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Pievienot jaunu paleti"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Rediģēt iezīmēto paleti"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Izvēlētis paleti"
 
 msgid "Undo: Draw"
 msgstr "Atcelt: Zīmēt"
