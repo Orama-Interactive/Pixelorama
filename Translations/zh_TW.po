@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "確定"
@@ -666,28 +666,28 @@ msgid "LAYERNEW_HT"
 msgstr "新增圖層"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "新增圖層"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "刪除此圖層"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "上移此圖層"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "下移此圖層"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "複製此圖層"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "合併此圖層與下面的圖層"
 
 msgid "Opacity:"
 msgstr "能見度:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "開關圖層可視"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -703,13 +703,13 @@ msgid "Palettes"
 msgstr "色盤"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "色盤"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "新增色盤"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "選擇色盤"
 
 msgid "Undo: Draw"
 msgstr "取消 上一筆"
