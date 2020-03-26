@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Guardar como..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importar..."
 
 msgid "Import PNG..."
 msgstr "Importar PNG..."
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Exportar"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportar..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportar como..."
 
 msgid "Export PNG..."
 msgstr "Exportar PNG..."
@@ -642,10 +642,10 @@ msgid "LAYERNEW_HT"
 msgstr "Crear nueva capa"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Crear nueva capa"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Eliminar capa actual"
 
 msgid "Move up the current layer"
 msgstr ""
@@ -654,7 +654,7 @@ msgid "Move down the current layer"
 msgstr ""
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Clonar capa actual"
 
 msgid "Merge current layer with the one below"
 msgstr ""
