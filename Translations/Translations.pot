@@ -158,6 +158,15 @@ msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""
 
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
+
 msgid "Preview:"
 msgstr ""
 
@@ -623,25 +632,35 @@ msgstr ""
 msgid "LAYERNEW_HT"
 msgstr ""
 
-msgid "LAYERREMOVE_HT"
+msgid "Create a new layer"
 msgstr ""
 
-msgid "LAYERUP_HT"
+msgid "Remove current layer"
 msgstr ""
 
-msgid "LAYERDOWN_HT"
+msgid "Move up the current layer"
 msgstr ""
 
-msgid "LAYERCLONE_HT"
+msgid "Move down the current layer"
 msgstr ""
 
-msgid "LAYERMERGE_HT"
+msgid "Clone current layer"
+msgstr ""
+
+msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
 msgstr ""
 
-msgid "LAYERVISIBILITY_HT"
+msgid "Toggle layer's visibility"
+msgstr ""
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
 msgstr ""
 
 msgid "Palette"
@@ -650,13 +669,13 @@ msgstr ""
 msgid "Palettes"
 msgstr ""
 
-msgid "NEWPALETTE_HT"
+msgid "Add a new palette"
 msgstr ""
 
-msgid "EDITPALETTE_HT"
+msgid "Edit currently selected palette"
 msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
+msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
