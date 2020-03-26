@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-03-26 01:24\n"
+"PO-Revision-Date: 2020-03-26 01:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,13 +169,13 @@ msgstr "Impossibile caricare il file '%s'.\n"
 "Codice di errore: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Fotogrammi"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animazione"
 
 msgid "Preview:"
 msgstr "Anteprima:"
@@ -685,14 +685,15 @@ msgid "Opacity:"
 msgstr "Opacità:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Attiva/disattiva visibilità del livello"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Blocca/sblocca livello"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Abilita/disabilita il collegamento di cel\n\n"
+"I cels collegati sono condivisi su più fotogrammi"
 
 msgid "Palette"
 msgstr "Palette"
