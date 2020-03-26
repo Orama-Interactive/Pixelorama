@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 00:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "Exportiere"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportiere..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportieren als..."
 
 msgid "Export PNG..."
 msgstr "Exportiere PNG..."
@@ -666,28 +666,28 @@ msgid "LAYERNEW_HT"
 msgstr "Erstelle eine neue Ebene"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Erstelle eine neue Ebene"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Entferne aktuelle Ebene"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Bewege aktuelle Ebene nach oben"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Bewege aktuelle Ebene nach unten"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Kopiere aktuelle Ebene"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Führe Ebene mit der darunter zusammen"
 
 msgid "Opacity:"
 msgstr "Deckkraft"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Ändere die Sichtbarkeit der Ebene"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -703,13 +703,13 @@ msgid "Palettes"
 msgstr "Paletten"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Füge eine neue Palette hinzu"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Bearbeite ausgewählte Palette"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Wähle Palette"
 
 msgid "Undo: Draw"
 msgstr "Rückgängig: Zeichen"
