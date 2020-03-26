@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 00:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -667,22 +667,22 @@ msgid "LAYERNEW_HT"
 msgstr "Crea un nuovo livello"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Crea un nuovo livello"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Rimuovi il livello corrente"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Sposta in su il livello corrente"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Sposta in giù il livello corrente"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Clona il livello corrente"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Unisci il livello corrente con quello sottostante"
 
 msgid "Opacity:"
 msgstr "Opacità:"
@@ -704,13 +704,13 @@ msgid "Palettes"
 msgstr "Palette"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Aggiungi una nuova palette"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Modifica la palette selezionata"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Scegli una palette"
 
 msgid "Undo: Draw"
 msgstr "Annulla: Disegno"
