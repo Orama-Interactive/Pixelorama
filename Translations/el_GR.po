@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-03-25 03:01\n"
+"PO-Revision-Date: 2020-03-26 00:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -167,6 +167,15 @@ msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '%s'.\n"
 "Κωδικός σφάλματος: %s"
+
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
 
 msgid "Preview:"
 msgstr "Προεπισκόπηση:"
@@ -657,26 +666,36 @@ msgstr "Στρώσεις"
 msgid "LAYERNEW_HT"
 msgstr "Δημιουργία νέας στρώσης"
 
-msgid "LAYERREMOVE_HT"
-msgstr "Διαγραφή της τρέχουσας στρώσης"
+msgid "Create a new layer"
+msgstr ""
 
-msgid "LAYERUP_HT"
-msgstr "Μετακίνηση της τρέχουσας στρώσης προς τα πάνω"
+msgid "Remove current layer"
+msgstr ""
 
-msgid "LAYERDOWN_HT"
-msgstr "Μετακίνηση της τρέχουσας στρώσης προς τα κάτω"
+msgid "Move up the current layer"
+msgstr ""
 
-msgid "LAYERCLONE_HT"
-msgstr "Κλωνοποίηση της τρέχουσας στρώσης"
+msgid "Move down the current layer"
+msgstr ""
 
-msgid "LAYERMERGE_HT"
-msgstr "Συγχώνευση της τρέχουσας στρώσης με την από κάτω"
+msgid "Clone current layer"
+msgstr ""
+
+msgid "Merge current layer with the one below"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
-msgid "LAYERVISIBILITY_HT"
-msgstr "Εναλλαγή της ορατότητας της στρώσης"
+msgid "Toggle layer's visibility"
+msgstr ""
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Παλέτα"
@@ -684,14 +703,14 @@ msgstr "Παλέτα"
 msgid "Palettes"
 msgstr "Παλέτες"
 
-msgid "NEWPALETTE_HT"
-msgstr "Νέα παλέτα"
+msgid "Add a new palette"
+msgstr ""
 
-msgid "EDITPALETTE_HT"
-msgstr "Επεξεργασία παλέτας"
+msgid "Edit currently selected palette"
+msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
-msgstr "Επιλογή παλέτας"
+msgid "Choose a palette"
+msgstr ""
 
 msgid "Undo: Draw"
 msgstr "Αναίρεση: Ζωγραφική"
