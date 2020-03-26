@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-26 00:43\n"
+"PO-Revision-Date: 2020-03-26 01:24\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -638,9 +638,6 @@ msgstr "Tavolo"
 
 msgid "Layers"
 msgstr "Tavoloj"
-
-msgid "LAYERNEW_HT"
-msgstr ""
 
 msgid "Create a new layer"
 msgstr ""
