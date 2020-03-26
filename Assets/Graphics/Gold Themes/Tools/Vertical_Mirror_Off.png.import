@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Onion_Skinning_Hover.png-7c62f9b026c50d69761ff25d88453c18.stex"
+path="res://.import/Vertical_Mirror_Off.png-80525e055d0c81de5b80480c233fbe9d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Light Themes/Onion_Skinning_Hover.png"
-dest_files=[ "res://.import/Onion_Skinning_Hover.png-7c62f9b026c50d69761ff25d88453c18.stex" ]
+source_file="res://Assets/Graphics/Gold Themes/Tools/Vertical_Mirror_Off.png"
+dest_files=[ "res://.import/Vertical_Mirror_Off.png-80525e055d0c81de5b80480c233fbe9d.stex" ]
 
 [params]
 
