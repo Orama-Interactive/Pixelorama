@@ -17,19 +17,19 @@ func _on_BrushButton_pressed() -> void:
 		if custom_brush_index > -1: # Custom brush
 			if Global.current_left_tool == "Pencil":
 				Global.left_color_interpolation_container.visible = true
-			if hint_tooltip == "":
-				Global.left_brush_type_label.text = tr("Custom brush")
-			else:
-				Global.left_brush_type_label.text = tr("Brush:") + " %s" % hint_tooltip
+#			if hint_tooltip == "":
+#				Global.left_brush_type_label.text = tr("Custom brush")
+#			else:
+#				Global.left_brush_type_label.text = tr("Brush:") + " %s" % hint_tooltip
 		elif custom_brush_index == -3: # Pixel brush
 			Global.left_color_interpolation_container.visible = false
-			Global.left_brush_type_label.text = tr("Brush: Pixel")
+#			Global.left_brush_type_label.text = tr("Brush: Pixel")
 		elif custom_brush_index == -2: # Circle brush
 			Global.left_color_interpolation_container.visible = false
-			Global.left_brush_type_label.text = tr("Brush: Circle")
+#			Global.left_brush_type_label.text = tr("Brush: Circle")
 		elif custom_brush_index == -1: # Filled Circle brush
 			Global.left_color_interpolation_container.visible = false
-			Global.left_brush_type_label.text = tr("Brush: Filled Circle")
+#			Global.left_brush_type_label.text = tr("Brush: Filled Circle")
 
 		Global.update_left_custom_brush()
 
@@ -39,19 +39,19 @@ func _on_BrushButton_pressed() -> void:
 		if custom_brush_index > -1:
 			if Global.current_right_tool == "Pencil":
 				Global.right_color_interpolation_container.visible = true
-			if hint_tooltip == "":
-				Global.right_brush_type_label.text = tr("Custom brush")
-			else:
-				Global.right_brush_type_label.text = tr("Brush:") + " %s" % hint_tooltip
+#			if hint_tooltip == "":
+#				Global.right_brush_type_label.text = tr("Custom brush")
+#			else:
+#				Global.right_brush_type_label.text = tr("Brush:") + " %s" % hint_tooltip
 		elif custom_brush_index == -3: # Pixel brush
 			Global.right_color_interpolation_container.visible = false
-			Global.right_brush_type_label.text = tr("Brush: Pixel")
+#			Global.right_brush_type_label.text = tr("Brush: Pixel")
 		elif custom_brush_index == -2: # Circle brush
 			Global.right_color_interpolation_container.visible = false
-			Global.right_brush_type_label.text = tr("Brush: Circle")
+#			Global.right_brush_type_label.text = tr("Brush: Circle")
 		elif custom_brush_index == -1: # Filled Circle brush
 			Global.right_color_interpolation_container.visible = false
-			Global.right_brush_type_label.text = tr("Brush: Filled Circle")
+#			Global.right_brush_type_label.text = tr("Brush: Filled Circle")
 
 		Global.update_right_custom_brush()
 
@@ -60,12 +60,12 @@ func _on_DeleteButton_pressed() -> void:
 		if Global.custom_left_brush_index == custom_brush_index:
 			Global.custom_left_brush_index = -3
 			Global.current_left_brush_type = Global.Brush_Types.PIXEL
-			Global.left_brush_type_label.text = "Brush: Pixel"
+#			Global.left_brush_type_label.text = "Brush: Pixel"
 			Global.update_left_custom_brush()
 		if Global.custom_right_brush_index == custom_brush_index:
 			Global.custom_right_brush_index = -3
 			Global.current_right_brush_type = Global.Brush_Types.PIXEL
-			Global.right_brush_type_label.text = "Brush: Pixel"
+#			Global.right_brush_type_label.text = "Brush: Pixel"
 			Global.update_right_custom_brush()
 
 		var project_brush_index = custom_brush_index - Global.brushes_from_files

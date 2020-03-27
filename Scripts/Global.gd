@@ -189,14 +189,10 @@ var left_brush_type_container : Container
 var right_brush_type_container : Container
 var left_brush_type_button : BaseButton
 var right_brush_type_button : BaseButton
-var left_brush_type_label : Label
-var right_brush_type_label : Label
 var brushes_popup : Popup
 var file_brush_container : GridContainer
 var project_brush_container : GridContainer
 
-var left_brush_size_container : Container
-var right_brush_size_container : Container
 var left_brush_size_edit : SpinBox
 var left_brush_size_slider : HSlider
 var right_brush_size_edit : SpinBox
@@ -308,41 +304,37 @@ func _ready() -> void:
 	right_brush_type_container = find_node_by_name(right_tool_options_container, "RightBrushType")
 	left_brush_type_button = find_node_by_name(left_brush_type_container, "LeftBrushTypeButton")
 	right_brush_type_button = find_node_by_name(right_brush_type_container, "RightBrushTypeButton")
-	left_brush_type_label = find_node_by_name(left_brush_type_container, "LeftBrushTypeLabel")
-	right_brush_type_label = find_node_by_name(right_brush_type_container, "RightBrushTypeLabel")
 	brushes_popup = find_node_by_name(root, "BrushesPopup")
 	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
 	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 
-	left_brush_size_container = find_node_by_name(left_tool_options_container, "LeftBrushSize")
-	right_brush_size_container = find_node_by_name(right_tool_options_container, "RightBrushSize")
-	left_brush_size_edit = find_node_by_name(left_brush_size_container, "LeftBrushSizeEdit")
-	left_brush_size_slider = find_node_by_name(left_brush_size_container, "LeftBrushSizeSlider")
-	right_brush_size_edit = find_node_by_name(right_brush_size_container, "RightBrushSizeEdit")
-	right_brush_size_slider = find_node_by_name(right_brush_size_container, "RightBrushSizeSlider")
+	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
+	left_brush_size_slider = find_node_by_name(root, "LeftBrushSizeSlider")
+	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
+	right_brush_size_slider = find_node_by_name(root, "RightBrushSizeSlider")
 
-	left_color_interpolation_container = find_node_by_name(left_tool_options_container, "LeftColorInterpolation")
-	right_color_interpolation_container = find_node_by_name(right_tool_options_container, "RightColorInterpolation")
-	left_interpolate_spinbox = find_node_by_name(left_color_interpolation_container, "LeftInterpolateFactor")
-	left_interpolate_slider = find_node_by_name(left_color_interpolation_container, "LeftInterpolateSlider")
-	right_interpolate_spinbox = find_node_by_name(right_color_interpolation_container, "RightInterpolateFactor")
-	right_interpolate_slider = find_node_by_name(right_color_interpolation_container, "RightInterpolateSlider")
+	left_color_interpolation_container = find_node_by_name(root, "LeftColorInterpolation")
+	right_color_interpolation_container = find_node_by_name(root, "RightColorInterpolation")
+	left_interpolate_spinbox = find_node_by_name(root, "LeftInterpolateFactor")
+	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateSlider")
+	right_interpolate_spinbox = find_node_by_name(root, "RightInterpolateFactor")
+	right_interpolate_slider = find_node_by_name(root, "RightInterpolateSlider")
 
-	left_fill_area_container = find_node_by_name(left_tool_options_container, "LeftFillArea")
-	right_fill_area_container = find_node_by_name(right_tool_options_container, "RightFillArea")
+	left_fill_area_container = find_node_by_name(root, "LeftFillArea")
+	right_fill_area_container = find_node_by_name(root, "RightFillArea")
 
-	left_ld_container = find_node_by_name(left_tool_options_container, "LeftLDOptions")
-	left_ld_amount_slider = find_node_by_name(left_ld_container, "LeftLDAmountSlider")
-	left_ld_amount_spinbox = find_node_by_name(left_ld_container, "LeftLDAmountSpinbox")
-	right_ld_container = find_node_by_name(right_tool_options_container, "RightLDOptions")
-	right_ld_amount_slider = find_node_by_name(right_ld_container, "RightLDAmountSlider")
-	right_ld_amount_spinbox = find_node_by_name(right_ld_container, "RightLDAmountSpinbox")
+	left_ld_container = find_node_by_name(root, "LeftLDOptions")
+	left_ld_amount_slider = find_node_by_name(root, "LeftLDAmountSlider")
+	left_ld_amount_spinbox = find_node_by_name(root, "LeftLDAmountSpinbox")
+	right_ld_container = find_node_by_name(root, "RightLDOptions")
+	right_ld_amount_slider = find_node_by_name(root, "RightLDAmountSlider")
+	right_ld_amount_spinbox = find_node_by_name(root, "RightLDAmountSpinbox")
 
-	left_colorpicker_container = find_node_by_name(left_tool_options_container, "LeftColorPickerOptions")
-	right_colorpicker_container = find_node_by_name(right_tool_options_container, "RightColorPickerOptions")
+	left_colorpicker_container = find_node_by_name(root, "LeftColorPickerOptions")
+	right_colorpicker_container = find_node_by_name(root, "RightColorPickerOptions")
 
-	left_mirror_container = find_node_by_name(left_tool_options_container, "LeftMirroring")
-	right_mirror_container = find_node_by_name(right_tool_options_container, "RightMirroring")
+	left_mirror_container = find_node_by_name(root, "LeftMirrorButtons")
+	right_mirror_container = find_node_by_name(root, "RightMirrorButtons")
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 

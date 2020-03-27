@@ -169,8 +169,8 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
-	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton.get_picker().presets_visible = false
-	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton.get_picker().presets_visible = false
+	Global.left_color_picker.get_picker().presets_visible = false
+	Global.right_color_picker.get_picker().presets_visible = false
 	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
 	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
 
@@ -626,19 +626,19 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_container.visible = true
+#			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
 			if Global.current_left_brush_type == Global.Brush_Types.FILE || Global.current_left_brush_type == Global.Brush_Types.CUSTOM || Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_container.visible = true
+#			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "Bucket":
 			Global.left_fill_area_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "LightenDarken":
-			Global.left_brush_size_container.visible = true
+#			Global.left_brush_size_container.visible = true
 			Global.left_ld_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "ColorPicker":
@@ -653,19 +653,19 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_container.visible = true
+#			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
 			if Global.current_right_brush_type == Global.Brush_Types.FILE || Global.current_right_brush_type == Global.Brush_Types.CUSTOM || Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_container.visible = true
+#			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "Bucket":
 			Global.right_fill_area_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "LightenDarken":
-			Global.right_brush_size_container.visible = true
+#			Global.right_brush_size_container.visible = true
 			Global.right_ld_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "ColorPicker":
@@ -685,17 +685,6 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_left_tool), 0)
 	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_right_tool), 0)
 
-func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
-	Global.left_square_indicator_visible = button_pressed
-
-func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
-	Global.right_square_indicator_visible = button_pressed
-
-func _on_LeftToolIconCheckbox_toggled(button_pressed) -> void:
-	Global.show_left_tool_icon = button_pressed
-
-func _on_RightToolIconCheckbox_toggled(button_pressed) -> void:
-	Global.show_right_tool_icon = button_pressed
 
 func _on_LeftBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
