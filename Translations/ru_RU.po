@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-26 01:25\n"
+"PO-Revision-Date: 2020-03-27 19:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,13 +169,13 @@ msgstr "Не удалось загрузить файл '%s'.\n"
 "Код ошибки: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Кадр"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Анимация"
 
 msgid "Preview:"
 msgstr "Предпросмотр:"
@@ -688,7 +688,7 @@ msgid "Toggle layer's visibility"
 msgstr "Переключить видимость слоя"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Блокировать/разблокировать слой"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
