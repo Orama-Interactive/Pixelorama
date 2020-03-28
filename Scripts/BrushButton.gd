@@ -10,12 +10,13 @@ func _on_BrushButton_pressed() -> void:
 	if Input.is_action_just_released("middle_mouse"):
 		_on_DeleteButton_pressed()
 		return
+
 	# Change left brush
 	if Global.brush_type_window_position == "left":
 		Global.current_left_brush_type = brush_type
 		Global.custom_left_brush_index = custom_brush_index
 		if custom_brush_index > -1: # Custom brush
-			if Global.current_left_tool == "Pencil":
+			if Global.current_left_tool == "Pencil" or Global.current_left_tool == "Bucket":
 				Global.left_color_interpolation_container.visible = true
 #			if hint_tooltip == "":
 #				Global.left_brush_type_label.text = tr("Custom brush")
@@ -37,7 +38,7 @@ func _on_BrushButton_pressed() -> void:
 		Global.current_right_brush_type = brush_type
 		Global.custom_right_brush_index = custom_brush_index
 		if custom_brush_index > -1:
-			if Global.current_right_tool == "Pencil":
+			if Global.current_right_tool == "Pencil" or Global.current_right_tool == "Bucket":
 				Global.right_color_interpolation_container.visible = true
 #			if hint_tooltip == "":
 #				Global.right_brush_type_label.text = tr("Custom brush")

@@ -333,6 +333,20 @@ func _input(event : InputEvent) -> void:
 			pencil_and_eraser(sprite, mouse_pos, Color(0, 0, 0, 0), current_mouse_button, current_action)
 		"Bucket":
 			if can_handle:
+				var brush_type = Global.Brush_Types.PIXEL
+				var custom_brush_image : Image
+				var is_custom_brush := false
+				if current_mouse_button == "left_mouse":
+					brush_type = Global.current_left_brush_type
+					is_custom_brush = brush_type == Global.Brush_Types.FILE or brush_type == Global.Brush_Types.CUSTOM or brush_type == Global.Brush_Types.RANDOM_FILE
+					if is_custom_brush:
+						custom_brush_image = Global.custom_left_brush_image
+				elif current_mouse_button == "right_mouse":
+					brush_type = Global.current_right_brush_type
+					is_custom_brush = brush_type == Global.Brush_Types.FILE or brush_type == Global.Brush_Types.CUSTOM or brush_type == Global.Brush_Types.RANDOM_FILE
+					if is_custom_brush:
+						custom_brush_image = Global.custom_right_brush_image
+
 				if fill_area == 0: # Paint the specific area of the same color
 					var horizontal_mirror := false
 					var vertical_mirror := false
@@ -345,16 +359,28 @@ func _input(event : InputEvent) -> void:
 						horizontal_mirror = Global.right_horizontal_mirror
 						vertical_mirror = Global.right_vertical_mirror
 
-					flood_fill(sprite, mouse_pos, sprite.get_pixelv(mouse_pos), current_color)
-					if horizontal_mirror:
-						var pos := Vector2(mirror_x, mouse_pos.y)
-						flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
-					if vertical_mirror:
-						var pos := Vector2(mouse_pos.x, mirror_y)
-						flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
-					if horizontal_mirror && vertical_mirror:
-						var pos := Vector2(mirror_x, mirror_y)
-						flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
+					if is_custom_brush: # Pattern fill
+						pattern_fill(sprite, mouse_pos, custom_brush_image, sprite.get_pixelv(mouse_pos))
+						if horizontal_mirror:
+							var pos := Vector2(mirror_x, mouse_pos.y)
+							pattern_fill(sprite, pos, custom_brush_image, sprite.get_pixelv(mouse_pos))
+						if vertical_mirror:
+							var pos := Vector2(mouse_pos.x, mirror_y)
+							pattern_fill(sprite, pos, custom_brush_image, sprite.get_pixelv(mouse_pos))
+						if horizontal_mirror && vertical_mirror:
+							var pos := Vector2(mirror_x, mirror_y)
+							pattern_fill(sprite, pos, custom_brush_image, sprite.get_pixelv(mouse_pos))
+					else: # Flood fill
+						flood_fill(sprite, mouse_pos, sprite.get_pixelv(mouse_pos), current_color)
+						if horizontal_mirror:
+							var pos := Vector2(mirror_x, mouse_pos.y)
+							flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
+						if vertical_mirror:
+							var pos := Vector2(mouse_pos.x, mirror_y)
+							flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
+						if horizontal_mirror && vertical_mirror:
+							var pos := Vector2(mirror_x, mirror_y)
+							flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
 
 				else: # Paint all pixels of the same color
 					var pixel_color : Color = sprite.get_pixelv(mouse_pos)
@@ -362,7 +388,16 @@ func _input(event : InputEvent) -> void:
 						for yy in range(north_limit, south_limit):
 							var c : Color = sprite.get_pixel(xx, yy)
 							if c == pixel_color:
-								sprite.set_pixel(xx, yy, current_color)
+								if is_custom_brush: # Pattern fill
+									custom_brush_image.lock()
+									var pattern_size := custom_brush_image.get_size()
+									var xxx : int = int(xx) % int(pattern_size.x)
+									var yyy : int = int(yy) % int(pattern_size.y)
+									var pattern_color : Color = custom_brush_image.get_pixel(xxx, yyy)
+									sprite.set_pixel(xx, yy, pattern_color)
+									custom_brush_image.unlock()
+								else:
+									sprite.set_pixel(xx, yy, current_color)
 					sprite_changed_this_frame = true
 		"LightenDarken":
 			if can_handle:
@@ -589,6 +624,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			vertical_mirror = Global.left_vertical_mirror
 			ld = Global.left_ld
 			ld_amount = Global.left_ld_amount
+
 		elif current_mouse_button == "right_mouse":
 			brush_size = Global.right_brush_size
 			brush_type = Global.current_right_brush_type
@@ -839,6 +875,44 @@ func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_col
 				if south.y < south_limit && sprite.get_pixelv(south) == target_color:
 					q.append(south)
 		sprite_changed_this_frame = true
+
+
+func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color : Color) -> void:
+	pos = pos.floor()
+	if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+		return
+
+	pattern.lock()
+	var pattern_size := pattern.get_size()
+	var q = [pos]
+
+	for n in q:
+		var west : Vector2 = n
+		var east : Vector2 = n
+		while west.x >= west_limit && sprite.get_pixelv(west) == target_color:
+			west += Vector2.LEFT
+		while east.x < east_limit && sprite.get_pixelv(east) == target_color:
+			east += Vector2.RIGHT
+
+		for px in range(west.x + 1, east.x):
+			var p := Vector2(px, n.y)
+			var xx : int = int(px) % int(pattern_size.x)
+			var yy : int = int(n.y) % int(pattern_size.y)
+			var pattern_color : Color = pattern.get_pixel(xx, yy)
+			if pattern_color == target_color:
+				continue
+			sprite.set_pixelv(p, pattern_color)
+
+			var north := p + Vector2.UP
+			var south := p + Vector2.DOWN
+			if north.y >= north_limit && sprite.get_pixelv(north) == target_color:
+				q.append(north)
+			if south.y < south_limit && sprite.get_pixelv(south) == target_color:
+				q.append(south)
+
+	pattern.unlock()
+
+
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fill := false) -> void:

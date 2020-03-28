@@ -150,7 +150,7 @@ func _ready() -> void:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 
 	# Checks to see if it's 3.1.x
-	if Engine.get_version_info().major == 3 && Engine.get_version_info().minor < 2:
+	if Engine.get_version_info().major == 3 and Engine.get_version_info().minor < 2:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
@@ -190,7 +190,7 @@ func _input(event : InputEvent) -> void:
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 	Global.right_cursor.texture = Global.right_cursor_tool_texture
 
-	if event is InputEventKey && (event.scancode == KEY_ENTER || event.scancode == KEY_KP_ENTER):
+	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
@@ -308,7 +308,7 @@ func image_menu_id_pressed(id : int) -> void:
 			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
 			# However, if first layer is empty, loop through all layers until we find one that isn't
 			var i := 0
-			while(i < Global.canvas.layers.size() - 1 && Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
+			while(i < Global.canvas.layers.size() - 1 and Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
 				i += 1
 				used_rect = Global.canvas.layers[i][0].get_used_rect()
 
@@ -616,7 +616,7 @@ func _can_draw_false() -> void:
 
 func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_left := true) -> void:
 	var current_action := tool_pressed.name
-	if (mouse_press && Input.is_action_just_released("left_mouse")) || (!mouse_press && key_for_left):
+	if (mouse_press and Input.is_action_just_released("left_mouse")) or (!mouse_press and key_for_left):
 		Global.current_left_tool = current_action
 
 		# Start from 3, so the label and checkboxes won't get invisible
@@ -628,7 +628,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_type_container.visible = true
 #			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.Brush_Types.FILE || Global.current_left_brush_type == Global.Brush_Types.CUSTOM || Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
+			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
@@ -637,6 +637,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		elif current_action == "Bucket":
 			Global.left_fill_area_container.visible = true
 			Global.left_mirror_container.visible = true
+			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
+				Global.left_color_interpolation_container.visible = true
 		elif current_action == "LightenDarken":
 #			Global.left_brush_size_container.visible = true
 			Global.left_ld_container.visible = true
@@ -644,7 +646,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		elif current_action == "ColorPicker":
 			Global.left_colorpicker_container.visible = true
 
-	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
+	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
 		Global.current_right_tool = current_action
 		# Start from 3, so the label and checkboxes won't get invisible
 		for i in range(3, Global.right_tool_options_container.get_child_count()):
@@ -655,7 +657,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_type_container.visible = true
 #			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.Brush_Types.FILE || Global.current_right_brush_type == Global.Brush_Types.CUSTOM || Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
+			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true
@@ -664,6 +666,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		elif current_action == "Bucket":
 			Global.right_fill_area_container.visible = true
 			Global.right_mirror_container.visible = true
+			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
+				Global.right_color_interpolation_container.visible = true
 		elif current_action == "LightenDarken":
 #			Global.right_brush_size_container.visible = true
 			Global.right_ld_container.visible = true
@@ -673,7 +677,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 
 	for t in tools:
 		var tool_name : String = t[0].name
-		if tool_name == Global.current_left_tool && tool_name == Global.current_right_tool:
+		if tool_name == Global.current_left_tool and tool_name == Global.current_right_tool:
 			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_l_r.png" % [Global.theme_type, tool_name])
 		elif tool_name == Global.current_left_tool:
 			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_l.png" % [Global.theme_type, tool_name])
@@ -726,7 +730,7 @@ func _on_ColorDefaults_pressed() -> void:
 func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
 	if color.a == 0:
-		if previous_left_color.r != color.r || previous_left_color.g != color.g || previous_left_color.b != color.b:
+		if previous_left_color.r != color.r or previous_left_color.g != color.g or previous_left_color.b != color.b:
 			Global.left_color_picker.color.a = 1
 	update_left_custom_brush()
 	previous_left_color = color
@@ -735,7 +739,7 @@ func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 func _on_RightColorPickerButton_color_changed(color : Color) -> void:
 	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
 	if color.a == 0:
-		if previous_right_color.r != color.r || previous_right_color.g != color.g || previous_right_color.b != color.b:
+		if previous_right_color.r != color.r or previous_right_color.g != color.g or previous_right_color.b != color.b:
 			Global.right_color_picker.color.a = 1
 	update_right_custom_brush()
 	previous_right_color = color
