@@ -246,19 +246,22 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undo_redo.create_action("Merge Layer")
 	for c in Global.canvases:
 		var new_layers_canvas : Array = c.layers.duplicate()
-		new_layers_canvas.remove(Global.current_layer)
-		var selected_layer = c.layers[Global.current_layer][0]
+		var selected_layer := Image.new()
+		selected_layer.copy_from(new_layers_canvas[Global.current_layer][0])
+		selected_layer.lock()
+
 		if c.layers[Global.current_layer][2] < 1: # If we have layer transparency
 			for xx in selected_layer.get_size().x:
 				for yy in selected_layer.get_size().y:
 					var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-					var alpha : float = pixel_color.a * c.layers[Global.current_layer][4]
+					var alpha : float = pixel_color.a * c.layers[Global.current_layer][2]
 					selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
 		var new_layer := Image.new()
 		new_layer.copy_from(c.layers[Global.current_layer - 1][0])
 		new_layer.lock()
 		c.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
+		new_layers_canvas.remove(Global.current_layer)
 
 		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
 		Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1][0], "data", new_layer.data)
