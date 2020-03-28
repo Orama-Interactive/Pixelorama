@@ -420,11 +420,11 @@ __meta__ = {
 
 [node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
 margin_right = 300.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 0, 164 )
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreview"]
-size = Vector2( 300, 164 )
+size = Vector2( 300, 150 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
@@ -437,27 +437,33 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_top = 168.0
+margin_top = 154.0
 margin_right = 300.0
-margin_bottom = 172.0
+margin_bottom = 158.0
 
-[node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_top = 176.0
+[node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
+margin_top = 162.0
 margin_right = 300.0
-margin_bottom = 370.0
+margin_bottom = 604.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
+margin_right = 300.0
+margin_bottom = 215.0
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions"]
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions"]
 margin_right = 300.0
 margin_bottom = 51.0
 custom_constants/separation = 2
 
-[node name="ColorSwitchCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical"]
+[node name="ColorSwitchCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical"]
 margin_right = 300.0
 margin_bottom = 7.0
 
-[node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter" groups=[
+[node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter" groups=[
 "UIButtons",
 ]]
 margin_left = 137.0
@@ -469,18 +475,18 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
 texture_normal = ExtResource( 10 )
 
-[node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical"]
+[node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical"]
 margin_top = 9.0
 margin_right = 300.0
 margin_bottom = 41.0
 
-[node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter"]
+[node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter"]
 margin_left = 79.0
 margin_right = 220.0
 margin_bottom = 32.0
 custom_constants/separation = 13
 
-[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
 margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
@@ -489,7 +495,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal"]
 margin_left = 77.0
 margin_right = 141.0
 margin_bottom = 32.0
@@ -500,13 +506,13 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 color = Color( 1, 1, 1, 1 )
 
-[node name="ColorDefaultsCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical"]
+[node name="ColorDefaultsCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical"]
 margin_top = 43.0
 margin_right = 300.0
 margin_bottom = 51.0
 size_flags_horizontal = 3
 
-[node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter" groups=[
+[node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter" groups=[
 "UIButtons",
 ]]
 margin_left = 137.0
@@ -516,36 +522,36 @@ hint_tooltip = "COLORDEFAULTS_HT"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions"]
 margin_top = 59.0
 margin_right = 300.0
-margin_bottom = 194.0
+margin_bottom = 215.0
 size_flags_vertical = 3
 
-[node name="ToolOptions" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer"]
+[node name="ToolOptions" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer"]
 margin_right = 300.0
-margin_bottom = 135.0
+margin_bottom = 156.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+[node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_right = 144.0
-margin_bottom = 135.0
+margin_bottom = 156.0
 size_flags_horizontal = 3
 
-[node name="LeftLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_right = 144.0
 margin_bottom = 15.0
 text = "Left tool options"
 align = 1
 
-[node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 19.0
 margin_right = 144.0
 margin_bottom = 51.0
 alignment = 1
 
-[node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
+[node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
 margin_left = 25.0
 margin_right = 61.0
 margin_bottom = 32.0
@@ -555,14 +561,14 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 texture_normal = ExtResource( 12 )
 
-[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton"]
+[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = SubResource( 4 )
 expand = true
 stretch_mode = 6
 
-[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
+[node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
 margin_left = 65.0
 margin_right = 119.0
 margin_bottom = 32.0
@@ -572,10 +578,10 @@ value = 1.0
 align = 1
 suffix = "px"
 
-[node name="LeftBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
-margin_left = 25.0
+[node name="LeftBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_left = 26.0
 margin_top = 55.0
-margin_right = 117.0
+margin_right = 118.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
@@ -586,25 +592,25 @@ value = 1.0
 allow_greater = true
 ticks_on_borders = true
 
-[node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 115.0
 margin_right = 208.0
 margin_bottom = 151.0
 
-[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
 margin_right = 208.0
 margin_bottom = 15.0
 hint_tooltip = "COLORFROM_HT"
 mouse_filter = 1
 text = "Brush color from"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 36.0
 
-[node name="LeftInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer"]
+[node name="LeftInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer"]
 margin_right = 150.0
 margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
@@ -613,7 +619,7 @@ size_flags_vertical = 1
 value = 100.0
 ticks_on_borders = true
 
-[node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer"]
+[node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer"]
 margin_left = 154.0
 margin_right = 208.0
 margin_bottom = 17.0
@@ -621,19 +627,19 @@ hint_tooltip = "COLORFROM_HT"
 value = 100.0
 align = 1
 
-[node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 155.0
 margin_right = 208.0
 margin_bottom = 197.0
 
-[node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+[node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
 margin_right = 208.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 text = "Fill area:"
 
-[node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+[node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 42.0
@@ -642,13 +648,13 @@ text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
 selected = 0
 
-[node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 115.0
 margin_right = 208.0
 margin_bottom = 178.0
 
-[node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
+[node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
 margin_right = 208.0
 margin_bottom = 23.0
 mouse_default_cursor_shape = 2
@@ -656,18 +662,18 @@ text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
-[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
+[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
 margin_top = 27.0
 margin_right = 208.0
 margin_bottom = 42.0
 text = "Amount:"
 
-[node name="LeftLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
+[node name="LeftLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
 margin_top = 46.0
 margin_right = 208.0
 margin_bottom = 63.0
 
-[node name="LeftLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
+[node name="LeftLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
 margin_right = 150.0
 margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
@@ -677,7 +683,7 @@ size_flags_vertical = 1
 value = 10.0
 ticks_on_borders = true
 
-[node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
+[node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount"]
 margin_left = 154.0
 margin_right = 208.0
 margin_bottom = 17.0
@@ -686,19 +692,19 @@ mouse_default_cursor_shape = 2
 value = 10.0
 align = 1
 
-[node name="LeftColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 115.0
 margin_right = 208.0
 margin_bottom = 157.0
 
-[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
+[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
 margin_right = 208.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 text = "Pick for:"
 
-[node name="LeftForColorOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
+[node name="LeftForColorOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 42.0
@@ -707,14 +713,14 @@ text = "Left Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 0
 
-[node name="LeftMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+[node name="LeftMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 75.0
 margin_right = 144.0
 margin_bottom = 92.0
 custom_constants/separation = 44
 alignment = 1
 
-[node name="LeftHorizontalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
+[node name="LeftHorizontalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 34.0
@@ -726,7 +732,7 @@ toggle_mode = true
 texture_normal = ExtResource( 30 )
 texture_pressed = ExtResource( 40 )
 
-[node name="LeftVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
+[node name="LeftVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 93.0
@@ -738,30 +744,30 @@ toggle_mode = true
 texture_normal = ExtResource( 42 )
 texture_pressed = ExtResource( 41 )
 
-[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+[node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_left = 148.0
 margin_right = 152.0
-margin_bottom = 135.0
+margin_bottom = 156.0
 
-[node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions"]
+[node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_left = 156.0
 margin_right = 300.0
-margin_bottom = 135.0
+margin_bottom = 156.0
 size_flags_horizontal = 3
 
-[node name="RightLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_right = 144.0
 margin_bottom = 15.0
 text = "Right tool options"
 align = 1
 
-[node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 19.0
 margin_right = 144.0
 margin_bottom = 51.0
 alignment = 1
 
-[node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
+[node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
 margin_left = 25.0
 margin_right = 61.0
 margin_bottom = 32.0
@@ -771,14 +777,14 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 texture_normal = ExtResource( 12 )
 
-[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton"]
+[node name="BrushTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = SubResource( 6 )
 expand = true
 stretch_mode = 6
 
-[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
+[node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
 margin_left = 65.0
 margin_right = 119.0
 margin_bottom = 32.0
@@ -788,10 +794,10 @@ value = 1.0
 align = 1
 suffix = "px"
 
-[node name="RightBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
-margin_left = 25.0
+[node name="RightBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_left = 26.0
 margin_top = 55.0
-margin_right = 117.0
+margin_right = 118.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
@@ -802,25 +808,25 @@ value = 1.0
 allow_greater = true
 ticks_on_borders = true
 
-[node name="RightColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
 margin_top = 115.0
 margin_right = 208.0
 margin_bottom = 151.0
 
-[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
+[node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
 margin_right = 208.0
 margin_bottom = 15.0
 hint_tooltip = "COLORFROM_HT"
 mouse_filter = 1
 text = "Brush color from"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation"]
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 36.0
 
-[node name="RightInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer"]
+[node name="RightInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer"]
 margin_right = 102.0
 margin_bottom = 17.0
 hint_tooltip = "COLORFROM_HT"
@@ -830,7 +836,7 @@ size_flags_vertical = 1
 value = 100.0
 ticks_on_borders = true
 
-[node name="RightInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer"]
+[node name="RightInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer"]
 margin_left = 106.0
 margin_right = 208.0
 margin_bottom = 17.0
@@ -839,18 +845,18 @@ mouse_default_cursor_shape = 2
 value = 100.0
 align = 1
 
-[node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
 margin_top = 96.0
 margin_right = 208.0
 margin_bottom = 138.0
 
-[node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+[node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
 margin_right = 208.0
 margin_bottom = 15.0
 text = "Fill area:"
 
-[node name="RightFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+[node name="RightFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 42.0
@@ -859,13 +865,13 @@ text = "Area of the same color"
 items = [ "Area of the same color", null, false, 0, null, "All pixels of the same color", null, false, 1, null ]
 selected = 0
 
-[node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
 margin_top = 115.0
 margin_right = 208.0
 margin_bottom = 178.0
 
-[node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
+[node name="RightLightenDarken" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
 margin_right = 208.0
 margin_bottom = 23.0
 mouse_default_cursor_shape = 2
@@ -873,18 +879,18 @@ text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
-[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
+[node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
 margin_top = 27.0
 margin_right = 208.0
 margin_bottom = 42.0
 text = "Amount:"
 
-[node name="RightLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
+[node name="RightLDAmount" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions"]
 margin_top = 46.0
 margin_right = 208.0
 margin_bottom = 63.0
 
-[node name="RightLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
+[node name="RightLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
 margin_right = 150.0
 margin_bottom = 17.0
 hint_tooltip = "LDAMOUNT_HT"
@@ -894,7 +900,7 @@ size_flags_vertical = 1
 value = 10.0
 ticks_on_borders = true
 
-[node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
+[node name="RightLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount"]
 margin_left = 154.0
 margin_right = 208.0
 margin_bottom = 17.0
@@ -903,19 +909,19 @@ mouse_default_cursor_shape = 2
 value = 10.0
 align = 1
 
-[node name="RightColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
 margin_top = 115.0
 margin_right = 208.0
 margin_bottom = 157.0
 
-[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions"]
+[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions"]
 margin_right = 208.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 text = "Pick for:"
 
-[node name="RightForColorOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions"]
+[node name="RightForColorOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions"]
 margin_top = 19.0
 margin_right = 208.0
 margin_bottom = 42.0
@@ -924,14 +930,14 @@ text = "Right Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 1
 
-[node name="RightMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+[node name="RightMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 75.0
 margin_right = 144.0
 margin_bottom = 92.0
 custom_constants/separation = 44
 alignment = 1
 
-[node name="RightHorizontalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
+[node name="RightHorizontalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 34.0
@@ -943,7 +949,7 @@ toggle_mode = true
 texture_normal = ExtResource( 30 )
 texture_pressed = ExtResource( 40 )
 
-[node name="RightVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
+[node name="RightVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 93.0
@@ -955,42 +961,42 @@ toggle_mode = true
 texture_normal = ExtResource( 42 )
 texture_pressed = ExtResource( 41 )
 
-[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_top = 374.0
+[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
+margin_top = 227.0
 margin_right = 300.0
-margin_bottom = 378.0
+margin_bottom = 442.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="PalettesLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_top = 382.0
+[node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
 margin_right = 300.0
-margin_bottom = 397.0
+margin_bottom = 4.0
+
+[node name="PalettesLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
+margin_top = 8.0
+margin_right = 300.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Palettes"
 align = 1
 
-[node name="HSeparator3" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_top = 401.0
+[node name="HSeparator3" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
+margin_top = 27.0
 margin_right = 300.0
-margin_bottom = 405.0
+margin_bottom = 31.0
 
-[node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_top = 409.0
+[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
+margin_top = 35.0
 margin_right = 300.0
-margin_bottom = 604.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_bottom = 67.0
 
-[node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer"]
-margin_right = 300.0
-margin_bottom = 32.0
-
-[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer"]
+[node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer"]
 margin_left = 62.0
 margin_right = 237.0
 margin_bottom = 32.0
 
-[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
@@ -1001,12 +1007,12 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 21 )
 texture_hover = ExtResource( 22 )
 
-[node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
+[node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
 margin_right = 12.0
 margin_bottom = 20.0
 items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
 
-[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
@@ -1017,7 +1023,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 23 )
 texture_hover = ExtResource( 24 )
 
-[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
+[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
 margin_left = 72.0
 margin_right = 175.0
 margin_bottom = 32.0
@@ -1027,19 +1033,19 @@ hint_tooltip = "Choose a palette"
 mouse_default_cursor_shape = 2
 clip_text = true
 
-[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer"]
-margin_top = 36.0
+[node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
+margin_top = 71.0
 margin_right = 300.0
-margin_bottom = 195.0
+margin_bottom = 215.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette"]
+[node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette"]
 margin_right = 300.0
 size_flags_horizontal = 3
 
-[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
+[node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
 margin_left = 150.0
 margin_right = 150.0
 size_flags_horizontal = 3
@@ -1199,41 +1205,41 @@ visible = false
 [connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
-[connection signal="color_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="color_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSizeSlider" to="." method="_on_LeftBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer/LeftInterpolateSlider" to="." method="_on_LeftInterpolateFactor_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLightenDarken" to="." method="_on_LeftLightenDarken_item_selected"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSlider" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions/LeftForColorOptions" to="." method="_on_LeftForColorOptions_item_selected"]
-[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
-[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSizeSlider" to="." method="_on_RightBrushSizeEdit_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer/RightInterpolateSlider" to="." method="_on_RightInterpolateFactor_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLightenDarken" to="." method="_on_RightLightenDarken_item_selected"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount/RightLDAmountSlider" to="." method="_on_RightLDAmountSpinbox_value_changed"]
-[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount/RightLDAmountSpinbox" to="." method="_on_RightLDAmountSpinbox_value_changed"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions/RightForColorOptions" to="." method="_on_RightForColorOptions_item_selected"]
-[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
-[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
-[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
+[connection signal="color_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_LeftColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="color_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_RightColorPickerButton_color_changed"]
+[connection signal="popup_closed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_true"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton" to="." method="_can_draw_false"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSizeSlider" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer/LeftInterpolateSlider" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/HBoxContainer/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLightenDarken" to="." method="_on_LeftLightenDarken_item_selected"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSlider" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmount/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions/LeftForColorOptions" to="." method="_on_LeftForColorOptions_item_selected"]
+[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSizeSlider" to="." method="_on_RightBrushSizeEdit_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer/RightInterpolateSlider" to="." method="_on_RightInterpolateFactor_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/HBoxContainer/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLightenDarken" to="." method="_on_RightLightenDarken_item_selected"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount/RightLDAmountSlider" to="." method="_on_RightLDAmountSpinbox_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmount/RightLDAmountSpinbox" to="." method="_on_RightLDAmountSpinbox_value_changed"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions/RightForColorOptions" to="." method="_on_RightForColorOptions_item_selected"]
+[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
+[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
 [connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
@@ -1251,8 +1257,8 @@ visible = false
 [connection signal="confirmed" from="QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="custom_action" from="QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="QuitAndSaveDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
-[connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
+[connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
+[connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]
 
