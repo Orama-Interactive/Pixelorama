@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-03-28 00:21\n"
+"PO-Revision-Date: 2020-03-28 00:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -98,7 +98,7 @@ msgid "Scale Image"
 msgstr "Redimensionar Imagem"
 
 msgid "Crop Image"
-msgstr "Cortar Imagem"
+msgstr "Cortar imagem"
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
@@ -217,13 +217,13 @@ msgid "Columns"
 msgstr "Colunas"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Colunas:"
 
 msgid "Rows"
 msgstr "Linhas"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Linhas:"
 
 msgid "Path:"
 msgstr "Caminho:"
@@ -397,7 +397,7 @@ msgid "Spanish"
 msgstr "Espanhol"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -687,7 +687,7 @@ msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Bloquear/desbloquear camada"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
