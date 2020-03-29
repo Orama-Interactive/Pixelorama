@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
 - Esperanto translation - thanks to Teashrock!
+- You can now zoom in with the `+` key, and zoom out with `-`.
 
 ### Changed
 - The UI - and especially the timeline - has been revamped!
