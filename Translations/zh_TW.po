@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-03-26 01:24\n"
+"PO-Revision-Date: 2020-03-29 15:53\n"
 
 msgid "OK"
 msgstr "確定"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "儲存為"
 
 msgid "Import..."
-msgstr ""
+msgstr "匯入..."
 
 msgid "Import PNG..."
 msgstr "匯入PNG檔"
@@ -74,10 +74,10 @@ msgid "Export"
 msgstr "輸出PNG檔"
 
 msgid "Export..."
-msgstr ""
+msgstr "輸出..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "輸出為..."
 
 msgid "Export PNG..."
 msgstr "輸出PNG檔"
@@ -158,47 +158,47 @@ msgid "File Exists, Overwrite?"
 msgstr "有同名檔案，要覆蓋掉嗎"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "%s 已經存在。要覆蓋嗎?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "檔案位址或檔案名稱無效"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "無法加載 '%s'. Error code: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "影格"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "動畫"
 
 msgid "Preview:"
-msgstr ""
+msgstr "預覽："
 
 msgid "Frame:"
-msgstr ""
+msgstr "影格:"
 
 msgid "Browse"
-msgstr ""
+msgstr "瀏覽"
 
 msgid "Resize:"
 msgstr "調整尺寸"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "取消輸出"
 
 msgid "Alert!"
-msgstr ""
+msgstr "警告"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "選擇當前資料夾"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "打開資料夾"
 
 msgid "All frames as multiple files"
 msgstr ""
