@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-03-29 15:53\n"
+"PO-Revision-Date: 2020-03-29 16:00\n"
 
 msgid "OK"
 msgstr "確定"
@@ -201,7 +201,7 @@ msgid "Open a Directory"
 msgstr "打開資料夾"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "影格各自為獨立檔案"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "個別輸出"
@@ -216,13 +216,13 @@ msgid "Columns"
 msgstr "行"
 
 msgid "Columns:"
-msgstr ""
+msgstr "行:"
 
 msgid "Rows"
 msgstr "列"
 
 msgid "Rows:"
-msgstr ""
+msgstr "列:"
 
 msgid "Path:"
 msgstr "路徑:"
@@ -396,7 +396,7 @@ msgid "Spanish"
 msgstr "西班牙文"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "世界語"
 
 msgid "Development Team"
 msgstr "開發團隊"
@@ -687,7 +687,7 @@ msgid "Toggle layer's visibility"
 msgstr "開關圖層可視"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "鎖住\\解鎖圖層"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
