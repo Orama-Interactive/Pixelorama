@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-31 01:14\n"
+"PO-Revision-Date: 2020-03-31 01:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,10 +140,10 @@ msgid "Open File(s)"
 msgstr "Öffne Datei(en)"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importier als neues Frame"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Importiere als Spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Speichere Sprite als .pxo"
@@ -216,13 +216,13 @@ msgid "Columns"
 msgstr "Spalten"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Spalten:"
 
 msgid "Rows"
 msgstr "Reihen"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Reihen:"
 
 msgid "Path:"
 msgstr "Pfad:"
@@ -339,7 +339,7 @@ msgid "About Pixelorama"
 msgstr "Über Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Entwickelt von Orama Interactive"
 
 msgid "Website"
 msgstr "Website"
@@ -478,10 +478,10 @@ msgstr "Erhellen/Verdunkeln\n\n"
 "Alt + U für rechte Maustaste"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Wähle eine Farbe für das linke Werkzeug"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Wähle eine Farbe für das rechte Werkzeug"
 
 msgid "COLORSWITCH_HT"
 msgstr "Wechsle linke und rechte Farben\n"
@@ -503,10 +503,10 @@ msgid "Left pixel indicator"
 msgstr "Linke Pixelanzeige"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
 
 msgid "Show tool icon"
 msgstr "Werkzeugsymbol anzeigen"
@@ -518,7 +518,7 @@ msgid "Brush:"
 msgstr "Pinsel:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Wähle einen Pinsel"
 
 msgid "Brush: Pixel"
 msgstr "Pinsel: Pixel"
@@ -539,7 +539,7 @@ msgid "Brush color from"
 msgstr "Pinselfarbe von"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
 
 msgid "Fill area:"
 msgstr "Fülle Bereich"
@@ -560,7 +560,7 @@ msgid "Amount:"
 msgstr "Menge:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Erhellen/Verdunkeln Menge"
 
 msgid "Pick for:"
 msgstr "Wähle für:"
@@ -581,7 +581,7 @@ msgid "Enable horizontal mirrored drawing"
 msgstr "Aktiviere horizontal gespiegelte Zeichnung"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Aktiviere vertikale gespiegelte Zeichnung"
 
 msgid "Vertical"
 msgstr "Vertikal"
