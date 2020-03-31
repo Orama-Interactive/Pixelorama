@@ -584,6 +584,12 @@ msgstr ""
 msgid "LASTFRAME_HT"
 msgstr ""
 
+msgid "Onion Skinning settings"
+msgstr ""
+
+msgid "Enable/disable Onion Skinning"
+msgstr ""
+
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
 msgstr ""

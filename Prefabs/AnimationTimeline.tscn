@@ -354,7 +354,7 @@ size_flags_horizontal = 0
 ]]
 margin_right = 10.0
 margin_bottom = 24.0
-hint_tooltip = "No loop"
+hint_tooltip = "Onion Skinning settings"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 38 )
 texture_hover = ExtResource( 39 )
@@ -365,7 +365,7 @@ texture_hover = ExtResource( 39 )
 margin_left = 14.0
 margin_right = 34.0
 margin_bottom = 24.0
-hint_tooltip = "No loop"
+hint_tooltip = "Enable/disable Onion Skinning"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 35 )
 texture_hover = ExtResource( 36 )
