@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-03-26 01:24\n"
+"PO-Revision-Date: 2020-03-31 00:47\n"
 
 msgid "OK"
 msgstr ""
@@ -139,10 +139,10 @@ msgstr ""
 msgid "Open File(s)"
 msgstr ""
 
-msgid "IMPORT_FILE_LABEL"
+msgid "Import as new frame"
 msgstr ""
 
-msgid "IMPORT_SPRITESHEET"
+msgid "Import as a spritesheet"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
@@ -338,7 +338,7 @@ msgstr ""
 msgid "About Pixelorama"
 msgstr ""
 
-msgid "MADEBY_LABEL"
+msgid "Developed by Orama Interactive"
 msgstr ""
 
 msgid "Website"
@@ -461,16 +461,16 @@ msgstr ""
 msgid "LD_HT"
 msgstr ""
 
-msgid "LEFTCOLOR_HT"
+msgid "Choose a color for the left tool"
 msgstr ""
 
-msgid "RIGHTCOLOR_HT"
+msgid "Choose a color for the right tool"
 msgstr ""
 
 msgid "COLORSWITCH_HT"
 msgstr ""
 
-msgid "COLORDEFAULTS_HT"
+msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
 
 msgid "Raw Mode"
@@ -485,10 +485,10 @@ msgstr ""
 msgid "Left pixel indicator"
 msgstr ""
 
-msgid "LEFT_INDIC_HT"
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
-msgid "RIGHT_INDIC_HT"
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show tool icon"
@@ -500,7 +500,7 @@ msgstr ""
 msgid "Brush:"
 msgstr ""
 
-msgid "BRUSH_HT"
+msgid "Select a brush"
 msgstr ""
 
 msgid "Brush: Pixel"
@@ -521,7 +521,7 @@ msgstr ""
 msgid "Brush color from"
 msgstr ""
 
-msgid "COLORFROM_HT"
+msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
 msgid "Fill area:"
@@ -542,7 +542,7 @@ msgstr ""
 msgid "Amount:"
 msgstr ""
 
-msgid "LDAMOUNT_HT"
+msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
@@ -560,10 +560,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr ""
 
-msgid "HORIZMIRROR_HT"
+msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
-msgid "VERTMIRROR_HT"
+msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
@@ -593,7 +593,8 @@ msgstr ""
 msgid "LASTFRAME_HT"
 msgstr ""
 
-msgid "FPS_HT"
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
 msgstr ""
 
 msgid "No loop"
