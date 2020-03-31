@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:14\n"
 
 msgid "OK"
 msgstr "確定"
@@ -140,10 +140,10 @@ msgid "Open File(s)"
 msgstr "打開舊檔"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "輸入為下一張"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "垂直spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
@@ -339,7 +339,7 @@ msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "由Orama Interactive開發"
 
 msgid "Website"
 msgstr "官網"
@@ -478,17 +478,17 @@ msgstr "變亮/變暗\n\n"
 "Alt + U換成右鍵"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "選擇左鍵工具顏色"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "選擇右鍵工具顏色"
 
 msgid "COLORSWITCH_HT"
 msgstr "左右工具顏色互換\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "顏色改回初始值(左黑色, 右白色)"
 
 msgid "Raw Mode"
 msgstr "Raw 模式"
@@ -503,10 +503,10 @@ msgid "Left pixel indicator"
 msgstr "左鍵工具準心"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "在畫布上顯示左鍵工具"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "在畫布上顯示右鍵工具"
 
 msgid "Show tool icon"
 msgstr "顯示工具圖標"
@@ -518,7 +518,7 @@ msgid "Brush:"
 msgstr "畫筆"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "選擇畫筆"
 
 msgid "Brush: Pixel"
 msgstr "畫筆: 像素"
@@ -539,7 +539,7 @@ msgid "Brush color from"
 msgstr "畫筆顏色"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 
 msgid "Fill area:"
 msgstr "填滿:"
@@ -560,7 +560,7 @@ msgid "Amount:"
 msgstr "程度:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "變亮或變暗的程度"
 
 msgid "Pick for:"
 msgstr "挑選:"
@@ -578,10 +578,10 @@ msgid "Horizontal"
 msgstr "水平"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "開啟水平鏡像"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "開啟垂直鏡像"
 
 msgid "Vertical"
 msgstr "垂直"
@@ -618,7 +618,8 @@ msgstr "跳到最後一張\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "動畫預覽每秒要多少張?\n"
+"FPS越高, 動畫播得越快"
 
 msgid "No loop"
 msgstr "不重複"
