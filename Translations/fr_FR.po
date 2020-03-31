@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,7 +65,7 @@ msgid "Save as..."
 msgstr "Enregistrer sous..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Importer..."
 
 msgid "Import PNG..."
 msgstr "Importer une image PNG..."
@@ -140,10 +140,10 @@ msgid "Open File(s)"
 msgstr "Ouvrir des fichiers"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importer en tant que trame"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Importer comme étant une spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
@@ -217,13 +217,13 @@ msgid "Columns"
 msgstr "Colonnes"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Colonnes:"
 
 msgid "Rows"
 msgstr "Lignes"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Lignes:"
 
 msgid "Path:"
 msgstr "Chemin :"
@@ -340,7 +340,7 @@ msgid "About Pixelorama"
 msgstr "À propos de Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Développé par Orama Interactive"
 
 msgid "Website"
 msgstr "Site Web"
@@ -479,17 +479,17 @@ msgstr "Éclaircir/Assombrir\n\n"
 "Alt + U pour le bouton droit de la souris"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Choisissez une couleur pour l'outil gauche"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Choisissez une couleur pour l'outil droit"
 
 msgid "COLORSWITCH_HT"
 msgstr "Alterner les couleurs de gauche et de droite\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
 
 msgid "Raw Mode"
 msgstr "Mode Raw"
@@ -504,10 +504,10 @@ msgid "Left pixel indicator"
 msgstr "Indicateur de pixel gauche"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil gauche lorsque vous dessinez"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez"
 
 msgid "Show tool icon"
 msgstr "Afficher l'icône de l'outil"
@@ -519,7 +519,7 @@ msgid "Brush:"
 msgstr "Brosse :"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Sélectionnez une brosse"
 
 msgid "Brush: Pixel"
 msgstr "Brosse : Pixel"
@@ -540,7 +540,7 @@ msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement sélectionnée"
 
 msgid "Fill area:"
 msgstr "Remplissage de zone :"
@@ -561,7 +561,7 @@ msgid "Amount:"
 msgstr "Quantité :"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Quantité d'éclaircissement/assombrissement"
 
 msgid "Pick for:"
 msgstr "Choisir pour:"
@@ -579,10 +579,10 @@ msgid "Horizontal"
 msgstr "Horizontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Dessine avec un miroir horizontal"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Dessine avec un miroir vertical"
 
 msgid "Vertical"
 msgstr "Vertical"
@@ -619,7 +619,8 @@ msgstr "Aller à la dernière trame\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Combien d'images par seconde pour l'aperçu de l'animation ?\n"
+"Plus cette valeur est élevée, plus l'animation sera jouée rapidement."
 
 msgid "No loop"
 msgstr "Pas de bouclage"
