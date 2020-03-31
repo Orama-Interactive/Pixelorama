@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,10 +140,10 @@ msgid "Open File(s)"
 msgstr "Apri il(i) File"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importa come un nuovo frame"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Importa come uno spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Salva lo Sprite come .pxo"
@@ -340,7 +340,7 @@ msgid "About Pixelorama"
 msgstr "Informazioni su Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Sviluppato da Orama Interactive"
 
 msgid "Website"
 msgstr "Sito web"
@@ -479,17 +479,17 @@ msgstr "Schiarisci/Scurisci\n\n"
 "Alt + U per il tasto destro del mouse"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Scegli un colore per lo strumento sinistro"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Scegli un colore per lo strumento destro"
 
 msgid "COLORSWITCH_HT"
 msgstr "Scambia i colori sinistro e destro\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
 
 msgid "Raw Mode"
 msgstr "Modalità Raw"
@@ -504,10 +504,10 @@ msgid "Left pixel indicator"
 msgstr "Indicatore pixel strumento sinistro"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando disegni"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
 
 msgid "Show tool icon"
 msgstr "Mostra icona strumento"
@@ -519,7 +519,7 @@ msgid "Brush:"
 msgstr "Pennello:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Scegli un pennello"
 
 msgid "Brush: Pixel"
 msgstr "Pennello: Pixel"
@@ -540,7 +540,7 @@ msgid "Brush color from"
 msgstr "Colore del pennello da"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Colore dal pennello stesso, 100: il colore selezionato"
 
 msgid "Fill area:"
 msgstr "Riempi l'area:"
@@ -561,7 +561,7 @@ msgid "Amount:"
 msgstr "Quantità:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Quantità di Schiarimento/Scurimento"
 
 msgid "Pick for:"
 msgstr "Seleziona per:"
@@ -579,10 +579,10 @@ msgid "Horizontal"
 msgstr "Orizzontale"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Abilita disegno speculare orizzontale"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Abilita disegno speculare verticale"
 
 msgid "Vertical"
 msgstr "Verticale"
@@ -619,7 +619,8 @@ msgstr "Salta all'ultimo frame\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Quanti frame al secondo dovrebbe essere l'anteprima dell'animazione?\n"
+"Maggiori gli FPS, più veloce sarà l'animazione."
 
 msgid "No loop"
 msgstr "Nessun ciclo"
