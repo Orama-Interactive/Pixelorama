@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-31 01:34\n"
+"PO-Revision-Date: 2020-03-31 18:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -616,6 +616,12 @@ msgstr "На следующий кадр\n"
 msgid "LASTFRAME_HT"
 msgstr "Перейти на последний кадр\n"
 "(Ctrl+End)"
+
+msgid "Onion Skinning settings"
+msgstr ""
+
+msgid "Enable/disable Onion Skinning"
+msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
