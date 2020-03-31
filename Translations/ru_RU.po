@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,10 +140,10 @@ msgid "Open File(s)"
 msgstr "Открыть файл(ы)"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Импортировать как новый кадр"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Импорт в виде спрайт-листов"
 
 msgid "Save Sprite as .pxo"
 msgstr "Сохранить спрайт как .pxo"
@@ -340,7 +340,7 @@ msgid "About Pixelorama"
 msgstr "О Pixeloram'е"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Разработано Orama Interactive"
 
 msgid "Website"
 msgstr "Сайт"
@@ -479,17 +479,17 @@ msgstr "Осветление/Затемнение\n\n"
 "Alt + U для правой кнопки мыши"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Выбор цвета для левого инструмента"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Выбор цвета для правого инструмента"
 
 msgid "COLORSWITCH_HT"
 msgstr "Поменять левый и правый цвета местами\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
 
 msgid "Raw Mode"
 msgstr "RGB от 0.0 до 1.0 (Raw Mode)"
@@ -504,10 +504,10 @@ msgid "Left pixel indicator"
 msgstr "Цвет для ЛКМ"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Отображать цвет кисти для ЛКМ во время рисования"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Отображать цвет кисти для ПКМ во время рисования"
 
 msgid "Show tool icon"
 msgstr "Показывать значок инструмента"
@@ -619,7 +619,8 @@ msgstr "Перейти на последний кадр\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Сколько кадров в секунду для просмотра анимации?\n"
+"Большее число кадров в секунду ускорит анимацию."
 
 msgid "No loop"
 msgstr "Не зацикливать"
