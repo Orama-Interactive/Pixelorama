@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-03-31 01:20\n"
+"PO-Revision-Date: 2020-03-31 01:27\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -518,7 +518,7 @@ msgid "Brush:"
 msgstr "Ota:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Izvēlēties otu"
 
 msgid "Brush: Pixel"
 msgstr "Ota: Pikselis"
@@ -539,7 +539,7 @@ msgid "Brush color from"
 msgstr "Otas krāsa no"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Krāsa no pašas otas, 100: no atzīmētās krāsas"
 
 msgid "Fill area:"
 msgstr "Aizpildīt laukumu:"
@@ -560,7 +560,7 @@ msgid "Amount:"
 msgstr "Daudzums:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Apgaismojuma/Aptumšojuma daudzmums"
 
 msgid "Pick for:"
 msgstr "Izvēlēties priekš:"
@@ -578,10 +578,10 @@ msgid "Horizontal"
 msgstr "Horizontāli"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "IIeslēgt horizontālo spoguļskata zīmēšanu"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Ieslēgt vertikālo spoguļskata zīmēšanu"
 
 msgid "Vertical"
 msgstr "Vertikāls"
