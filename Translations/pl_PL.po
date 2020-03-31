@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,7 +140,7 @@ msgid "Open File(s)"
 msgstr "Otwórz pliki"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importuj jako nowa klatka"
 
 msgid "Import as a spritesheet"
 msgstr ""
@@ -339,7 +339,7 @@ msgid "About Pixelorama"
 msgstr "O Pixeloramie"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Tworzony przez: Orama Interactive"
 
 msgid "Website"
 msgstr "Strona internetowa"
@@ -478,17 +478,17 @@ msgstr "Rozjaśnianie/Ściemnianie\n\n"
 "Alt + U dla prawego narzędzia"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Wybiera kolor dla lewego narzędzia"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Wybiera kolor dla prawego narzędzia"
 
 msgid "COLORSWITCH_HT"
 msgstr "Podmienia lewy kolor z prawym kolorem\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)"
 
 msgid "Raw Mode"
 msgstr "RGB w częściach setnych od 0.0 do 1.0"
@@ -503,10 +503,10 @@ msgid "Left pixel indicator"
 msgstr "Wskaźnik lewego pędzla"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Wyświetl wskaźnik lewego narzędzia lub pędzla podczas rysowania"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Wyświetl wskaźnik prawego narzędzia lub pędzla podczas rysowania"
 
 msgid "Show tool icon"
 msgstr "Pokaż ikonę narzędzia"
@@ -518,7 +518,7 @@ msgid "Brush:"
 msgstr "Pędzel:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Wybierz pędzel"
 
 msgid "Brush: Pixel"
 msgstr "Pędzel: Piksel"
@@ -539,7 +539,7 @@ msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowania"
 
 msgid "Fill area:"
 msgstr "Wypełnij przestrzeń:"
@@ -560,7 +560,7 @@ msgid "Amount:"
 msgstr "Siła:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Siła rozjaśnienia/przyciemnienia"
 
 msgid "Pick for:"
 msgstr ""
@@ -578,10 +578,10 @@ msgid "Horizontal"
 msgstr "Poziome"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Włącza lustrzane odbicie w poziomie podczas rysowania"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
 
 msgid "Vertical"
 msgstr "Pionowe"
@@ -618,7 +618,8 @@ msgstr "Skocz do ostatniej klatki\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "W ilu klatkach na sekundę odtwarzana ma być animacja?\n"
+"Większa ilość klatek na sekundę powoduje szybsze odtwarzanie."
 
 msgid "No loop"
 msgstr "Brak zapętlania"
