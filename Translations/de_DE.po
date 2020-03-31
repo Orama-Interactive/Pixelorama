@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -488,7 +488,7 @@ msgstr "Wechsle linke und rechte Farben\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)"
 
 msgid "Raw Mode"
 msgstr "Raw-Mode"
@@ -578,7 +578,7 @@ msgid "Horizontal"
 msgstr "Horizontal spiegeln"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Aktiviere horizontal gespiegelte Zeichnung"
 
 msgid "Enable vertical mirrored drawing"
 msgstr ""
@@ -618,7 +618,8 @@ msgstr "Springe zum letzten Frame\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Wie viele Frames pro Sekunde soll die Animationsvorschau haben?\n"
+" Je mehr FPS, desto schneller wird die Animation abgespielt."
 
 msgid "No loop"
 msgstr "Keine Wiederholung"
