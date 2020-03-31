@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-03-31 01:27\n"
+"PO-Revision-Date: 2020-03-31 18:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -616,6 +616,12 @@ msgstr "Ir para o proxímo quadro\n"
 msgid "LASTFRAME_HT"
 msgstr "Pular para o último quadro\n"
 "(Ctrl + End)"
+
+msgid "Onion Skinning settings"
+msgstr ""
+
+msgid "Enable/disable Onion Skinning"
+msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
