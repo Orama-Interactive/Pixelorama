@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -37,6 +37,8 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning_Hover.png" type="Texture" id=36]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Expandable.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Expandable_Hover.png" type="Texture" id=39]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -254,8 +256,8 @@ texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 241.0
-margin_right = 381.0
+margin_left = 234.0
+margin_right = 374.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -342,15 +344,26 @@ texture_normal = ExtResource( 32 )
 texture_hover = ExtResource( 33 )
 
 [node name="LoopButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 482.0
+margin_left = 468.0
 margin_right = 604.0
 margin_bottom = 24.0
 size_flags_horizontal = 0
 
+[node name="OnionSkinningSettings" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
+"UIButtons",
+]]
+margin_right = 10.0
+margin_bottom = 24.0
+hint_tooltip = "No loop"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 38 )
+texture_hover = ExtResource( 39 )
+
 [node name="OnionSkinning" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
 "UIButtons",
 ]]
-margin_right = 20.0
+margin_left = 14.0
+margin_right = 34.0
 margin_bottom = 24.0
 hint_tooltip = "No loop"
 mouse_default_cursor_shape = 2
@@ -360,8 +373,8 @@ texture_hover = ExtResource( 36 )
 [node name="LoopAnim" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 24.0
-margin_right = 44.0
+margin_left = 38.0
+margin_right = 58.0
 margin_bottom = 24.0
 hint_tooltip = "Cycle loop"
 mouse_default_cursor_shape = 2
@@ -369,8 +382,8 @@ texture_normal = ExtResource( 37 )
 texture_hover = ExtResource( 34 )
 
 [node name="FPSValue" type="SpinBox" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
-margin_left = 48.0
-margin_right = 122.0
+margin_left = 62.0
+margin_right = 136.0
 margin_bottom = 24.0
 hint_tooltip = "FPS_HT"
 mouse_default_cursor_shape = 2
@@ -471,61 +484,66 @@ margin_right = 36.0
 margin_bottom = 18.0
 
 [node name="VSeparator" type="VSeparator" parent="AnimationContainer"]
-visible = false
-margin_left = 692.0
-margin_right = 696.0
-margin_bottom = 200.0
-
-[node name="OnionSkinningButtons" type="VBoxContainer" parent="AnimationContainer"]
-visible = false
-margin_left = 570.0
-margin_right = 696.0
-margin_bottom = 200.0
-
-[node name="OnionSkinning" type="Label" parent="AnimationContainer/OnionSkinningButtons"]
-margin_right = 126.0
-margin_bottom = 14.0
-text = "Onion Skinning:"
-
-[node name="OnionSkinningPast" type="Label" parent="AnimationContainer/OnionSkinningButtons"]
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 32.0
-text = "Past Frames"
-
-[node name="PastOnionSkinning" type="SpinBox" parent="AnimationContainer/OnionSkinningButtons"]
-margin_top = 36.0
-margin_right = 126.0
-margin_bottom = 60.0
-mouse_default_cursor_shape = 2
-align = 1
-
-[node name="OnionSkinningFuture" type="Label" parent="AnimationContainer/OnionSkinningButtons"]
-margin_top = 64.0
-margin_right = 126.0
-margin_bottom = 78.0
-text = "Future Frames"
-
-[node name="FutureOnionSkinning" type="SpinBox" parent="AnimationContainer/OnionSkinningButtons"]
-margin_top = 82.0
-margin_right = 126.0
-margin_bottom = 106.0
-mouse_default_cursor_shape = 2
-align = 1
-
-[node name="BlueRedMode" type="CheckBox" parent="AnimationContainer/OnionSkinningButtons"]
-margin_top = 110.0
-margin_right = 126.0
-margin_bottom = 134.0
-mouse_default_cursor_shape = 2
-text = "Blue-Red Mode"
-
-[node name="VSeparator2" type="VSeparator" parent="AnimationContainer"]
 margin_left = 700.0
 margin_right = 704.0
 margin_bottom = 200.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
+
+[node name="OnionSkinningSettings" type="AcceptDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = "Onion Skinning:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnionSkinningButtons" type="VBoxContainer" parent="OnionSkinningSettings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_right = 132.0
+margin_bottom = 14.0
+text = "Past Frames"
+
+[node name="PastOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 18.0
+margin_right = 132.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+align = 1
+
+[node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 46.0
+margin_right = 132.0
+margin_bottom = 60.0
+text = "Future Frames"
+
+[node name="FutureOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 64.0
+margin_right = 132.0
+margin_bottom = 88.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+align = 1
+
+[node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 92.0
+margin_right = 132.0
+margin_bottom = 116.0
+mouse_default_cursor_shape = 2
+text = "Blue-Red Mode"
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
@@ -539,12 +557,13 @@ margin_bottom = 200.0
 [connection signal="toggled" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
-[connection signal="toggled" from="AnimationContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
+[connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
+[connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
+[connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]

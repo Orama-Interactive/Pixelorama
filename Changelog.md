@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - LineEdits lose focus when the user presses Enter - thanks to Gaarco!
 - Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
 - Visual change, added border outlines to all window dialogs.
+- Animation now loops by default.
+- Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that enables it, and one that opens the settings window.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)

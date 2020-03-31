@@ -4,6 +4,7 @@ var fps := 6.0
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 
+
 func add_frame() -> void:
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 	new_canvas.size = Global.canvas.size
@@ -44,6 +45,10 @@ func add_frame() -> void:
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.update()
+
+
+func _on_OnionSkinningSettings_pressed() -> void:
+	$OnionSkinningSettings.popup_centered()
 
 
 func _on_LoopAnim_pressed() -> void:
@@ -285,3 +290,4 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
+
