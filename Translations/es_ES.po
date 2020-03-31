@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -216,13 +216,13 @@ msgid "Columns"
 msgstr "Columnas"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Columnas:"
 
 msgid "Rows"
 msgstr "Filas"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Filas:"
 
 msgid "Path:"
 msgstr "Ruta:"
