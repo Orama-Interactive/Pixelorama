@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-03-31 01:20\n"
+"PO-Revision-Date: 2020-03-31 08:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,7 +140,7 @@ msgid "Open File(s)"
 msgstr "Öffne Datei(en)"
 
 msgid "Import as new frame"
-msgstr "Importier als neues Frame"
+msgstr "Importiere als neuen Frame"
 
 msgid "Import as a spritesheet"
 msgstr "Importiere als Spritesheet"
@@ -158,10 +158,10 @@ msgid "File Exists, Overwrite?"
 msgstr "Datei existiert schon, überschreiben?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Datei %s existiert bereits, überschreiben?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Verzeichnispfad oder Dateiname ist ungültig!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -177,31 +177,31 @@ msgid "Animation"
 msgstr "Animation"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Vorschau:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Frame:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Durchsuchen"
 
 msgid "Resize:"
 msgstr "Größe verändern"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Export abbrechen"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Warnung!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Wähle aktuellen Ordner"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Öffne ein Verzeichnis"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Alle Frames als mehrere Dateien"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exportiere aktuellen Frame"
@@ -503,10 +503,10 @@ msgid "Left pixel indicator"
 msgstr "Linke Pixelanzeige"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Zeige linkes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+msgstr "Zeige linke Mausanzeige oder Pinsel auf der Leinwand wenn gezeichnet wird"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Zeige rechtes Mausicon oder Pinsel auf der Leinwand wenn gezeichnet wird"
+msgstr "Zeige rechtes Mausanzeige oder Pinsel auf der Leinwand wenn gezeichnet wird"
 
 msgid "Show tool icon"
 msgstr "Werkzeugsymbol anzeigen"
@@ -581,7 +581,7 @@ msgid "Enable horizontal mirrored drawing"
 msgstr "Aktiviere horizontal gespiegelte Zeichnung"
 
 msgid "Enable vertical mirrored drawing"
-msgstr "Aktiviere vertikale gespiegelte Zeichnung"
+msgstr "Aktiviere vertikal gespiegelte Zeichnung"
 
 msgid "Vertical"
 msgstr "Vertikal"
