@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 01:14\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -140,10 +140,10 @@ msgid "Open File(s)"
 msgstr "Άνοιγμα αρχείου/ων"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Εισαγωγή ως νέο καρέ"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Εισαγωγή φύλλου καρέ (spritesheet)"
 
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
@@ -340,7 +340,7 @@ msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Φτιαγμένο από την Orama Interactive"
 
 msgid "Website"
 msgstr "Ιστοσελίδα"
@@ -479,17 +479,17 @@ msgstr "Φώτισμα/Σκούρημα\n\n"
 "Alt + U για το δεξί κουμπί ποντικιού"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Επιλέξτε ένα χρώμα για το αριστερό εργαλείο"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο"
 
 msgid "COLORSWITCH_HT"
 msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος\n"
 "(X)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
 
 msgid "Raw Mode"
 msgstr "Ωμή Λειτουργία"
@@ -504,10 +504,10 @@ msgid "Left pixel indicator"
 msgstr "Δείκτης αριστερού πιξελ"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο αριστερό κουμπί του ποντικιού"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού"
 
 msgid "Show tool icon"
 msgstr "Εμφάνιση εικονιδίου εργαλείου"
@@ -519,7 +519,7 @@ msgid "Brush:"
 msgstr "Πινέλο:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Επιλέξτε ένα πινέλο"
 
 msgid "Brush: Pixel"
 msgstr "Πινέλο: Εικονοστοιχείο"
@@ -540,7 +540,7 @@ msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώμα"
 
 msgid "Fill area:"
 msgstr "Περιοχή γεμίσματος:"
@@ -561,7 +561,7 @@ msgid "Amount:"
 msgstr "Ποσό:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Ποσό φωτίσματος ή σκουρήματος"
 
 msgid "Pick for:"
 msgstr "Επιλογή για το:"
@@ -579,10 +579,10 @@ msgid "Horizontal"
 msgstr "Οριζόντια"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
 
 msgid "Vertical"
 msgstr "Κάθετα"
@@ -619,7 +619,8 @@ msgstr "Μετάβαση στο τελευταίο καρέ\n"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\n"
+"Όσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση."
 
 msgid "No loop"
 msgstr "Καμία επανάληψη"
