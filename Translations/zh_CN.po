@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-03-31 01:14\n"
+"PO-Revision-Date: 2020-03-31 02:35\n"
 
 msgid "OK"
 msgstr "确定"
@@ -479,10 +479,10 @@ msgstr "变淡/加深\n\n"
 "Alt + U 为鼠标右键"
 
 msgid "Choose a color for the left tool"
-msgstr "选择左键工具的颜色"
+msgstr "选择左键工具颜色"
 
 msgid "Choose a color for the right tool"
-msgstr "选择右键工具的颜色"
+msgstr "选择右键工具颜色"
 
 msgid "COLORSWITCH_HT"
 msgstr "左右切换颜色\n"
