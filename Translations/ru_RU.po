@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-03-31 01:27\n"
+"PO-Revision-Date: 2020-03-31 01:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -519,7 +519,7 @@ msgid "Brush:"
 msgstr "Кисть:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Выбрать кисть"
 
 msgid "Brush: Pixel"
 msgstr "Кисть: Пиксель"
@@ -540,7 +540,7 @@ msgid "Brush color from"
 msgstr "Цвет кисти из"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Собственный цвет кисти, 100: Выбранный цвет"
 
 msgid "Fill area:"
 msgstr "Залить область:"
@@ -561,7 +561,7 @@ msgid "Amount:"
 msgstr "Кол-во:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Интенсивность осветления/затемнения"
 
 msgid "Pick for:"
 msgstr "Выбрать для:"
@@ -579,10 +579,10 @@ msgid "Horizontal"
 msgstr "Горизонально"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Режим рисования с горизонтальным зеркалированием"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Режим рисования с вертикальным зеркалированием"
 
 msgid "Vertical"
 msgstr "Вертикально"
