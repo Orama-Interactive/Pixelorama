@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -33,9 +33,10 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Next_Frame_Hover.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_Last_Frame.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Go_To_Last_Frame_Hover.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop_None.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop_Hover.png" type="Texture" id=34]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning_Hover.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop.png" type="Texture" id=37]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -362,9 +363,10 @@ texture_hover = ExtResource( 36 )
 margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 24.0
-hint_tooltip = "No loop"
+hint_tooltip = "Cycle loop"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 34 )
+texture_normal = ExtResource( 37 )
+texture_hover = ExtResource( 34 )
 
 [node name="FPSValue" type="SpinBox" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
 margin_left = 48.0

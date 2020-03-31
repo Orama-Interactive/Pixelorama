@@ -1,7 +1,7 @@
 extends Panel
 
 var fps := 6.0
-var animation_loop := 0 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
+var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 
 func add_frame() -> void:
@@ -51,14 +51,17 @@ func _on_LoopAnim_pressed() -> void:
 		0: # Make it loop
 			animation_loop = 1
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop.png" % Global.theme_type)
+			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Cycle loop"
 		1: # Make it ping-pong
 			animation_loop = 2
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong.png" % Global.theme_type)
+			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
 		2: # Make it stop
 			animation_loop = 0
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
+			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
 
 func _on_PlayForward_toggled(button_pressed : bool) -> void:
