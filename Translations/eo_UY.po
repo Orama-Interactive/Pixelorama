@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-03-31 00:47\n"
+"PO-Revision-Date: 2020-03-31 18:51\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -592,6 +592,12 @@ msgid "NEXTFRAME_HT"
 msgstr ""
 
 msgid "LASTFRAME_HT"
+msgstr ""
+
+msgid "Onion Skinning settings"
+msgstr ""
+
+msgid "Enable/disable Onion Skinning"
 msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
