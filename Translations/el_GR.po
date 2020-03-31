@@ -631,7 +631,7 @@ msgid "Ping-pong loop"
 msgstr "Επανάληψη πινγκ-πονγκ"
 
 msgid "Onion Skinning:"
-msgstr "Γειτονικά καρέ:"
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Παρελθοντικά καρέ"
