@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Dialogs/SplashDialog.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Pixelorama Logo.png" type="Texture" id=2]
@@ -8,40 +8,11 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=7]
 
-[sub_resource type="Theme" id=1]
-Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = null
-Button/styles/disabled = null
-Button/styles/focus = null
-Button/styles/hover = null
-Button/styles/normal = null
-Button/styles/pressed = null
-Label/colors/font_color = Color( 1, 1, 1, 1 )
-Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
-Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-Label/constants/line_spacing = 3
-Label/constants/shadow_as_outline = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/fonts/font = null
-Label/styles/normal = null
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.219608, 0.188235, 0.270588, 1 )
-border_width_top = 18
-border_color = Color( 0.4, 0.403922, 0.4, 1 )
-expand_margin_top = 18.0
-
 [node name="SplashDialog" type="WindowDialog"]
+visible = true
 margin_right = 600.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 600, 560 )
-theme = SubResource( 1 )
-custom_styles/panel = SubResource( 2 )
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {
@@ -166,8 +137,8 @@ margin_bottom = 260.0
 rect_min_size = Vector2( 0, 260 )
 
 [node name="Label" type="Label" parent="Contents/PatronsArtNews/ChangelogContainer/ChangelogScroll"]
-margin_right = 142.0
-margin_bottom = 711.0
+margin_right = 130.0
+margin_bottom = 2921.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Added

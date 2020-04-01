@@ -28,9 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that enables it, and one that opens the settings window.
+- The splash screen is no longer purple, it now gets affected by the chosen theme.
 
 ### Fixed
-- Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)
+- Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
 - Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else - Thanks to Gaarco! (Issue #167)
 
