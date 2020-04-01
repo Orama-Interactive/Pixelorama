@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-03-31 18:51\n"
+"PO-Revision-Date: 2020-04-01 01:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -618,10 +618,10 @@ msgstr "跳转到最后一帧\n"
 "(Ctrl+End)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "洋葱皮设置"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "启用/禁用洋葱皮"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
