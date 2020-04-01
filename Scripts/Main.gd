@@ -23,7 +23,7 @@ func _ready() -> void:
 		Global.loaded_locales = TranslationServer.get_loaded_locales()
 	else:
 		# Hardcoded list of locales
-		Global.loaded_locales = ["de_DE", "el_GR", "en_US", "es_ES", "fr_FR", "it_IT", "lv_LV", "pl_PL", "pt_BR", "ru_RU", "zh_CN","zh_TW"]
+		Global.loaded_locales = ["de_DE", "el_GR", "en_US", "eo_UY", "es_ES", "fr_FR", "it_IT", "lv_LV", "pl_PL", "pt_BR", "ru_RU", "zh_CN","zh_TW"]
 
 	# Make sure locales are always sorted, in the same order
 	Global.loaded_locales.sort()
@@ -45,9 +45,9 @@ func _ready() -> void:
 		"Open..." : KEY_MASK_CMD + KEY_O,
 		"Save..." : KEY_MASK_CMD + KEY_S,
 		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_S,
-		"Import PNG..." : KEY_MASK_CMD + KEY_I,
-		"Export PNG..." : KEY_MASK_CMD + KEY_E,
-		"Export PNG as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_E,
+		"Import..." : KEY_MASK_CMD + KEY_I,
+		"Export..." : KEY_MASK_CMD + KEY_E,
+		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_E,
 		"Quit" : KEY_MASK_CMD + KEY_Q
 		}
 	var edit_menu_items := {
@@ -150,7 +150,7 @@ func _ready() -> void:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 
 	# Checks to see if it's 3.1.x
-	if Engine.get_version_info().major == 3 && Engine.get_version_info().minor < 2:
+	if Engine.get_version_info().major == 3 and Engine.get_version_info().minor < 2:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
@@ -169,8 +169,8 @@ func _ready() -> void:
 
 	Import.import_brushes("Brushes")
 
-	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton.get_picker().presets_visible = false
-	$MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton.get_picker().presets_visible = false
+	Global.left_color_picker.get_picker().presets_visible = false
+	Global.right_color_picker.get_picker().presets_visible = false
 	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
 	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
 
@@ -189,11 +189,11 @@ func _input(event : InputEvent) -> void:
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 	Global.right_cursor.texture = Global.right_cursor_tool_texture
-	
-	if event is InputEventKey && (event.scancode == KEY_ENTER || event.scancode == KEY_KP_ENTER):
+
+	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
-	
+
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
@@ -238,13 +238,13 @@ func file_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 			opensprite_file_selected = false
 		5: # Export
-			if $ExportSprites.current_export_path == "":
-				$ExportSprites.popup_centered()
+			if $ExportDialog.was_exported == false:
+				$ExportDialog.popup_centered()
 				Global.can_draw = false
 			else:
-				$ExportSprites.export_project()
+				$ExportDialog.external_export()
 		6: # Export as
-			$ExportSprites.popup_centered()
+			$ExportDialog.popup_centered()
 			Global.can_draw = false
 		7: # Quit
 			show_quit_dialog()
@@ -308,7 +308,7 @@ func image_menu_id_pressed(id : int) -> void:
 			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
 			# However, if first layer is empty, loop through all layers until we find one that isn't
 			var i := 0
-			while(i < Global.canvas.layers.size() - 1 && Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
+			while(i < Global.canvas.layers.size() - 1 and Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
 				i += 1
 				used_rect = Global.canvas.layers[i][0].get_used_rect()
 
@@ -415,8 +415,12 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			var layer_name := file.get_line()
 			var layer_visibility := file.get_8()
 			var layer_lock := file.get_8()
-			# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
-			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new()])
+			var layer_new_frames_linked := file.get_8()
+			var linked_frames = file.get_var()
+
+			# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+			# will new frames be linked boolean (4), Array of linked frames (5)]
+			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_frames_linked, linked_frames])
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -433,7 +437,9 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 			if version_number < (0.7 - 0.01):
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new()])
+					# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+					# will new frames be linked boolean (4), Array of linked frames (5)]
+					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new(), false, []])
 			var layer_transparency := 1.0
 			if version_number > 0.5:
 				layer_transparency = file.get_float()
@@ -504,20 +510,21 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 	current_save_path = path
 	$SaveSprite.current_path = path
-	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
-	$ExportSprites.current_path = $ExportSprites.current_export_path
+	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
+	$ExportDialog.directory_path = path.get_base_dir()
+	$ExportDialog.was_exported = false
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
+	file_menu.set_item_text(5, tr("Export"))
 
 	Global.window_title = path.get_file() + " - Pixelorama"
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
 	current_save_path = path
-	$ExportSprites.current_export_path = path.trim_suffix(".pxo") + ".png"
-	$ExportSprites.current_path = $ExportSprites.current_export_path
+	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
+	$ExportDialog.directory_path = path.get_base_dir()
+	$ExportDialog.was_exported = false
 	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(5, tr("Export") + " %s" % $ExportSprites.current_path.get_file())
 	var file := File.new()
 	var err := file.open(path, File.WRITE)
 	if err == OK:
@@ -528,6 +535,8 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 			file.store_line(layer[0]) # Layer name
 			file.store_8(layer[1]) # Layer visibility
 			file.store_8(layer[2]) # Layer lock
+			file.store_8(layer[4]) # Future frames linked
+			file.store_var(layer[5]) # Linked frames
 		file.store_line("END_GLOBAL_LAYERS")
 
 		for canvas in Global.canvases: # Store frames
@@ -585,9 +594,8 @@ func clear_canvases() -> void:
 			child.queue_free()
 	Global.canvases.clear()
 	current_save_path = ""
-	$ExportSprites.current_export_path = ""
 	file_menu.set_item_text(2, "Save")
-	file_menu.set_item_text(5, "Export PNG...")
+	file_menu.set_item_text(5, "Export...")
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 	Global.undo_redo.clear_history(false)
 
@@ -608,7 +616,7 @@ func _can_draw_false() -> void:
 
 func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_left := true) -> void:
 	var current_action := tool_pressed.name
-	if (mouse_press && Input.is_action_just_released("left_mouse")) || (!mouse_press && key_for_left):
+	if (mouse_press and Input.is_action_just_released("left_mouse")) or (!mouse_press and key_for_left):
 		Global.current_left_tool = current_action
 
 		# Start from 3, so the label and checkboxes won't get invisible
@@ -618,25 +626,27 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_container.visible = true
+#			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.Brush_Types.FILE || Global.current_left_brush_type == Global.Brush_Types.CUSTOM || Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
+			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_container.visible = true
+#			Global.left_brush_size_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "Bucket":
 			Global.left_fill_area_container.visible = true
 			Global.left_mirror_container.visible = true
+			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
+				Global.left_color_interpolation_container.visible = true
 		elif current_action == "LightenDarken":
-			Global.left_brush_size_container.visible = true
+#			Global.left_brush_size_container.visible = true
 			Global.left_ld_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "ColorPicker":
 			Global.left_colorpicker_container.visible = true
 
-	elif (mouse_press && Input.is_action_just_released("right_mouse")) || (!mouse_press && !key_for_left):
+	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
 		Global.current_right_tool = current_action
 		# Start from 3, so the label and checkboxes won't get invisible
 		for i in range(3, Global.right_tool_options_container.get_child_count()):
@@ -645,19 +655,21 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_container.visible = true
+#			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.Brush_Types.FILE || Global.current_right_brush_type == Global.Brush_Types.CUSTOM || Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
+			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_container.visible = true
+#			Global.right_brush_size_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "Bucket":
 			Global.right_fill_area_container.visible = true
 			Global.right_mirror_container.visible = true
+			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
+				Global.right_color_interpolation_container.visible = true
 		elif current_action == "LightenDarken":
-			Global.right_brush_size_container.visible = true
+#			Global.right_brush_size_container.visible = true
 			Global.right_ld_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "ColorPicker":
@@ -665,7 +677,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 
 	for t in tools:
 		var tool_name : String = t[0].name
-		if tool_name == Global.current_left_tool && tool_name == Global.current_right_tool:
+		if tool_name == Global.current_left_tool and tool_name == Global.current_right_tool:
 			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_l_r.png" % [Global.theme_type, tool_name])
 		elif tool_name == Global.current_left_tool:
 			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s_l.png" % [Global.theme_type, tool_name])
@@ -677,17 +689,6 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_left_tool), 0)
 	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_right_tool), 0)
 
-func _on_LeftIndicatorCheckbox_toggled(button_pressed) -> void:
-	Global.left_square_indicator_visible = button_pressed
-
-func _on_RightIndicatorCheckbox_toggled(button_pressed) -> void:
-	Global.right_square_indicator_visible = button_pressed
-
-func _on_LeftToolIconCheckbox_toggled(button_pressed) -> void:
-	Global.show_left_tool_icon = button_pressed
-
-func _on_RightToolIconCheckbox_toggled(button_pressed) -> void:
-	Global.show_right_tool_icon = button_pressed
 
 func _on_LeftBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
@@ -729,7 +730,7 @@ func _on_ColorDefaults_pressed() -> void:
 func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
 	if color.a == 0:
-		if previous_left_color.r != color.r || previous_left_color.g != color.g || previous_left_color.b != color.b:
+		if previous_left_color.r != color.r or previous_left_color.g != color.g or previous_left_color.b != color.b:
 			Global.left_color_picker.color.a = 1
 	update_left_custom_brush()
 	previous_left_color = color
@@ -738,7 +739,7 @@ func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 func _on_RightColorPickerButton_color_changed(color : Color) -> void:
 	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
 	if color.a == 0:
-		if previous_right_color.r != color.r || previous_right_color.g != color.g || previous_right_color.b != color.b:
+		if previous_right_color.r != color.r or previous_right_color.g != color.g or previous_right_color.b != color.b:
 			Global.right_color_picker.color.a = 1
 	update_right_custom_brush()
 	previous_right_color = color

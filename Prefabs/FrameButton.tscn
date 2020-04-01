@@ -27,11 +27,21 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 expand = true
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false ]
+items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false, "Unlink Cel", null, 0, false, true, 4, 0, null, "", false ]
+
+[node name="LinkedIndicator" type="Polygon2D" parent="."]
+visible = false
+color = Color( 0.0627451, 0.741176, 0.215686, 1 )
+invert_enable = true
+invert_border = 1.0
+polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
 [connection signal="pressed" from="." to="." method="_on_FrameButton_pressed"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]

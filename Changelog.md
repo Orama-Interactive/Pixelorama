@@ -6,21 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.7] - Unreleased
 
 ### Added
+- Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
+- Cel linking is now possible. This way, layers can be "shared" in multiple frames.
+- Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
 - Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
-- Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors
+- Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
+- Esperanto translation - thanks to Teashrock!
+- You can now zoom in with the `+` key, and zoom out with `-`.
 
 ### Changed
-- The timeline has been revamped!
+- The UI - and especially the timeline - has been revamped!
+- The export dialog has also been revamped - thanks to thanks to Martin Novák (novhack)!
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
+- LineEdits lose focus when the user presses Enter - thanks to Gaarco!
+- Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
+- Visual change, added border outlines to all window dialogs.
+- Animation now loops by default.
+- Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that enables it, and one that opens the settings window.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing)
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
+- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else - Thanks to Gaarco! (Issue #167)
 
 ## [v0.6.2] - 17-02-2020
 

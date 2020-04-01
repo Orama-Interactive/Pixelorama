@@ -78,6 +78,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  azagaya - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Lilly And (KatieAnd) - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian"))
+	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
 
 func _on_AboutDialog_popup_hide() -> void:
 	groups.clear()

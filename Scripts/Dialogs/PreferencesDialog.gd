@@ -294,7 +294,24 @@ func _on_ImageDefaultHeight_value_changed(value: float) -> void:
 	Global.config_cache.set_value("preferences", "default_height", value)
 	Global.config_cache.save("user://cache.ini")
 
+
 func _on_DefaultBackground_color_changed(color: Color) -> void:
 	Global.default_fill_color = color
 	Global.config_cache.set_value("preferences", "default_fill_color", color)
 	Global.config_cache.save("user://cache.ini")
+
+
+func _on_LeftIndicatorCheckbox_toggled(button_pressed : bool) -> void:
+	Global.left_square_indicator_visible = button_pressed
+
+
+func _on_RightIndicatorCheckbox_toggled(button_pressed : bool) -> void:
+	Global.right_square_indicator_visible = button_pressed
+
+
+func _on_LeftToolIconCheckbox_toggled(button_pressed : bool) -> void:
+	Global.show_left_tool_icon = button_pressed
+
+
+func _on_RightToolIconCheckbox_toggled(button_pressed : bool) -> void:
+	Global.show_right_tool_icon = button_pressed

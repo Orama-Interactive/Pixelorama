@@ -1,8 +1,9 @@
 extends Panel
 
 var fps := 6.0
-var animation_loop := 0 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
+var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
+
 
 func add_frame() -> void:
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
@@ -28,25 +29,44 @@ func add_frame() -> void:
 		Global.undo_redo.add_do_property(c, "visible", false)
 		Global.undo_redo.add_undo_property(c, "visible", c.visible)
 
+	for l_i in range(Global.layers.size()):
+		if Global.layers[l_i][4]: # If the link button is pressed
+#			var new_layers : Array = Global.layers.duplicate()
+#			new_layers[l_i][5].append(new_canvas)
+			Global.layers[l_i][5].append(new_canvas)
+
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 	Global.undo_redo.commit_action()
 
+
+func _on_OnionSkinning_pressed() -> void:
+	Global.onion_skinning = !Global.onion_skinning
+	Global.canvas.update()
+
+
+func _on_OnionSkinningSettings_pressed() -> void:
+	$OnionSkinningSettings.popup_centered()
+
+
 func _on_LoopAnim_pressed() -> void:
 	match animation_loop:
 		0: # Make it loop
 			animation_loop = 1
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop.png" % Global.theme_type)
+			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Cycle loop"
 		1: # Make it ping-pong
 			animation_loop = 2
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong.png" % Global.theme_type)
+			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
 		2: # Make it stop
 			animation_loop = 0
 			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
+			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
 
 func _on_PlayForward_toggled(button_pressed : bool) -> void:
@@ -145,8 +165,9 @@ func add_layer(is_new := true) -> void:
 
 	var new_layers : Array = Global.layers.duplicate()
 
-	# Store [Layer name, Layer visibility boolean, Layer lock boolean, Frame container]
-	new_layers.append([layer_name, true, false, HBoxContainer.new()])
+	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+	# will new frames be linked boolean (4), Array of linked frames (5)]
+	new_layers.append([layer_name, true, false, HBoxContainer.new(), false, []])
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
@@ -233,19 +254,22 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undo_redo.create_action("Merge Layer")
 	for c in Global.canvases:
 		var new_layers_canvas : Array = c.layers.duplicate()
-		new_layers_canvas.remove(Global.current_layer)
-		var selected_layer = c.layers[Global.current_layer][0]
+		var selected_layer := Image.new()
+		selected_layer.copy_from(new_layers_canvas[Global.current_layer][0])
+		selected_layer.lock()
+
 		if c.layers[Global.current_layer][2] < 1: # If we have layer transparency
 			for xx in selected_layer.get_size().x:
 				for yy in selected_layer.get_size().y:
 					var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-					var alpha : float = pixel_color.a * c.layers[Global.current_layer][4]
+					var alpha : float = pixel_color.a * c.layers[Global.current_layer][2]
 					selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
 		var new_layer := Image.new()
 		new_layer.copy_from(c.layers[Global.current_layer - 1][0])
 		new_layer.lock()
 		c.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
+		new_layers_canvas.remove(Global.current_layer)
 
 		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
 		Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1][0], "data", new_layer.data)
@@ -257,8 +281,8 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
 	Global.undo_redo.add_undo_property(Global, "current_layer", Global.current_layer)
 
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
+	Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
 	Global.undo_redo.commit_action()
 
 func _on_OpacitySlider_value_changed(value) -> void:
@@ -266,3 +290,4 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
+

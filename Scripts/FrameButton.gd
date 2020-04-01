@@ -7,6 +7,12 @@ onready var popup_menu := $PopupMenu
 
 func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
+	if Global.canvases[frame] in Global.layers[layer][5]:
+		get_node("LinkedIndicator").visible = true
+		popup_menu.set_item_disabled(4, false) # Unlink cel
+	else:
+		get_node("LinkedIndicator").visible = false
+		popup_menu.set_item_disabled(4, true) # Unlink cel
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
@@ -64,7 +70,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 			Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
 			for i in range(Global.layers.size()):
-				for child in Global.layers[i][2].get_children():
+				for child in Global.layers[i][3].get_children():
 					Global.undo_redo.add_do_property(child, "pressed", false)
 					Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 			for c in Global.canvases:
@@ -81,6 +87,19 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			change_frame_order(-1)
 		3: # Move Right
 			change_frame_order(1)
+		4: # Unlink Cel
+			var cel_index : int = Global.layers[layer][5].find(Global.canvases[frame])
+			Global.layers[layer][5].remove(cel_index)
+			_ready()
+
+			var sprite := Image.new()
+			sprite.copy_from(Global.canvases[frame].layers[layer][0])
+			sprite.lock()
+			Global.canvases[frame].layers[layer][0] = sprite
+			var tex := ImageTexture.new()
+			tex.create_from_image(sprite, 0)
+			Global.canvases[frame].layers[layer][1] = tex
+			Global.canvases[frame].update()
 
 func remove_frame() -> void:
 	var canvas : Canvas = Global.canvases[frame]

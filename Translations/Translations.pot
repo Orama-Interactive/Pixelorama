@@ -55,10 +55,19 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
+msgid "Import..."
+msgstr ""
+
 msgid "Import PNG..."
 msgstr ""
 
 msgid "Export"
+msgstr ""
+
+msgid "Export..."
+msgstr ""
+
+msgid "Export as..."
 msgstr ""
 
 msgid "Export PNG..."
@@ -121,10 +130,10 @@ msgstr ""
 msgid "Open File(s)"
 msgstr ""
 
-msgid "IMPORT_FILE_LABEL"
+msgid "Import as new frame"
 msgstr ""
 
-msgid "IMPORT_SPRITESHEET"
+msgid "Import as a spritesheet"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
@@ -139,11 +148,50 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr ""
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""
 
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
+
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
+msgstr ""
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
 msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
@@ -158,7 +206,13 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
+msgstr ""
+
+msgid "Rows:"
 msgstr ""
 
 msgid "Path:"
@@ -275,7 +329,7 @@ msgstr ""
 msgid "About Pixelorama"
 msgstr ""
 
-msgid "MADEBY_LABEL"
+msgid "Developed by Orama Interactive"
 msgstr ""
 
 msgid "Website"
@@ -330,6 +384,9 @@ msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
+msgstr ""
+
+msgid "Esperanto"
 msgstr ""
 
 msgid "Development Team"
@@ -395,16 +452,16 @@ msgstr ""
 msgid "LD_HT"
 msgstr ""
 
-msgid "LEFTCOLOR_HT"
+msgid "Choose a color for the left tool"
 msgstr ""
 
-msgid "RIGHTCOLOR_HT"
+msgid "Choose a color for the right tool"
 msgstr ""
 
 msgid "COLORSWITCH_HT"
 msgstr ""
 
-msgid "COLORDEFAULTS_HT"
+msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
 
 msgid "Raw Mode"
@@ -419,10 +476,10 @@ msgstr ""
 msgid "Left pixel indicator"
 msgstr ""
 
-msgid "LEFT_INDIC_HT"
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
-msgid "RIGHT_INDIC_HT"
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show tool icon"
@@ -434,7 +491,7 @@ msgstr ""
 msgid "Brush:"
 msgstr ""
 
-msgid "BRUSH_HT"
+msgid "Select a brush"
 msgstr ""
 
 msgid "Brush: Pixel"
@@ -455,7 +512,7 @@ msgstr ""
 msgid "Brush color from"
 msgstr ""
 
-msgid "COLORFROM_HT"
+msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
 msgid "Fill area:"
@@ -476,7 +533,7 @@ msgstr ""
 msgid "Amount:"
 msgstr ""
 
-msgid "LDAMOUNT_HT"
+msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
@@ -494,10 +551,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr ""
 
-msgid "HORIZMIRROR_HT"
+msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
-msgid "VERTMIRROR_HT"
+msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
@@ -527,7 +584,14 @@ msgstr ""
 msgid "LASTFRAME_HT"
 msgstr ""
 
-msgid "FPS_HT"
+msgid "Onion Skinning settings"
+msgstr ""
+
+msgid "Enable/disable Onion Skinning"
+msgstr ""
+
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
 msgstr ""
 
 msgid "No loop"
@@ -572,28 +636,35 @@ msgstr ""
 msgid "Layers"
 msgstr ""
 
-msgid "LAYERNEW_HT"
+msgid "Create a new layer"
 msgstr ""
 
-msgid "LAYERREMOVE_HT"
+msgid "Remove current layer"
 msgstr ""
 
-msgid "LAYERUP_HT"
+msgid "Move up the current layer"
 msgstr ""
 
-msgid "LAYERDOWN_HT"
+msgid "Move down the current layer"
 msgstr ""
 
-msgid "LAYERCLONE_HT"
+msgid "Clone current layer"
 msgstr ""
 
-msgid "LAYERMERGE_HT"
+msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
 msgstr ""
 
-msgid "LAYERVISIBILITY_HT"
+msgid "Toggle layer's visibility"
+msgstr ""
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
 msgstr ""
 
 msgid "Palette"
@@ -602,13 +673,13 @@ msgstr ""
 msgid "Palettes"
 msgstr ""
 
-msgid "NEWPALETTE_HT"
+msgid "Add a new palette"
 msgstr ""
 
-msgid "EDITPALETTE_HT"
+msgid "Edit currently selected palette"
 msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
+msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"

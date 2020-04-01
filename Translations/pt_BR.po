@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-02-25 12:42\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,11 +64,20 @@ msgstr "Salvar..."
 msgid "Save as..."
 msgstr "Salvar como..."
 
+msgid "Import..."
+msgstr "Importar..."
+
 msgid "Import PNG..."
 msgstr "Importar PNG..."
 
 msgid "Export"
 msgstr "Exportar"
+
+msgid "Export..."
+msgstr "Exportar..."
+
+msgid "Export as..."
+msgstr "Exportar como..."
 
 msgid "Export PNG..."
 msgstr "Exportar PNG..."
@@ -148,13 +157,52 @@ msgstr "Exportar Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "Arquivo Já Existe, Substituir?"
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Impossível carregar o arquivo '%s'.\n"
 "Código de erro: %s"
 
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
+
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
 msgstr "Redimensionar:"
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exportar quadro atual"
@@ -168,8 +216,14 @@ msgstr "Exportar todos os quadros como uma folha de sprites (arquivo único)"
 msgid "Columns"
 msgstr "Colunas"
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
 msgstr "Linhas"
+
+msgid "Rows:"
+msgstr ""
 
 msgid "Path:"
 msgstr "Caminho:"
@@ -341,6 +395,9 @@ msgstr "Letão"
 
 msgid "Spanish"
 msgstr "Espanhol"
+
+msgid "Esperanto"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -608,26 +665,36 @@ msgstr "Camadas"
 msgid "LAYERNEW_HT"
 msgstr "Criar nova camada"
 
-msgid "LAYERREMOVE_HT"
+msgid "Create a new layer"
+msgstr "Criar nova camada"
+
+msgid "Remove current layer"
 msgstr "Remover camada atual"
 
-msgid "LAYERUP_HT"
+msgid "Move up the current layer"
 msgstr "Mover para a cima a camada atual"
 
-msgid "LAYERDOWN_HT"
+msgid "Move down the current layer"
 msgstr "Mover para baixo a camada atual"
 
-msgid "LAYERCLONE_HT"
+msgid "Clone current layer"
 msgstr "Clonar camada atual"
 
-msgid "LAYERMERGE_HT"
+msgid "Merge current layer with the one below"
 msgstr "Combinar camada atual com a de baixo"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
 
-msgid "LAYERVISIBILITY_HT"
+msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
@@ -635,13 +702,13 @@ msgstr "Paleta"
 msgid "Palettes"
 msgstr "Paletas"
 
-msgid "NEWPALETTE_HT"
+msgid "Add a new palette"
 msgstr "Adicionar uma nova paleta"
 
-msgid "EDITPALETTE_HT"
+msgid "Edit currently selected palette"
 msgstr "Editar paleta selecionada"
 
-msgid "CHOOSEPALETTE_HT"
+msgid "Choose a palette"
 msgstr "Escolher uma paleta"
 
 msgid "Undo: Draw"

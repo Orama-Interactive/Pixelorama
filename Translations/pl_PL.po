@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-02-22 23:08\n"
+"PO-Revision-Date: 2020-03-26 01:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,11 +64,20 @@ msgstr "Zapisz..."
 msgid "Save as..."
 msgstr "Zapisz jako..."
 
+msgid "Import..."
+msgstr "Importuj..."
+
 msgid "Import PNG..."
 msgstr "Importuj PNG…"
 
 msgid "Export"
 msgstr "Eksportuj"
+
+msgid "Export..."
+msgstr "Eksportuj..."
+
+msgid "Export as..."
+msgstr "Eksportuj jako..."
 
 msgid "Export PNG..."
 msgstr "Eksportuj PNG…"
@@ -148,11 +157,50 @@ msgstr "Eksportuj Sprite"
 msgid "File Exists, Overwrite?"
 msgstr ""
 
+msgid "File %s already exists. Overwrite?"
+msgstr ""
+
+msgid "Directory path or file name is not valid!"
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""
 
+msgid "Frame"
+msgstr ""
+
+msgid "Spritesheet"
+msgstr ""
+
+msgid "Animation"
+msgstr ""
+
+msgid "Preview:"
+msgstr ""
+
+msgid "Frame:"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
 msgid "Resize:"
+msgstr ""
+
+msgid "Cancel Export"
+msgstr ""
+
+msgid "Alert!"
+msgstr ""
+
+msgid "Select Current Folder"
+msgstr ""
+
+msgid "Open a Directory"
+msgstr ""
+
+msgid "All frames as multiple files"
 msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
@@ -167,7 +215,13 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
+msgid "Columns:"
+msgstr ""
+
 msgid "Rows"
+msgstr ""
+
+msgid "Rows:"
 msgstr ""
 
 msgid "Path:"
@@ -339,6 +393,9 @@ msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
+msgstr ""
+
+msgid "Esperanto"
 msgstr ""
 
 msgid "Development Team"
@@ -608,26 +665,36 @@ msgstr "Warstwy"
 msgid "LAYERNEW_HT"
 msgstr "Stwórz nową warstwę"
 
-msgid "LAYERREMOVE_HT"
+msgid "Create a new layer"
+msgstr "Stwórz nową warstwę"
+
+msgid "Remove current layer"
 msgstr "Usuń obecną warstwę"
 
-msgid "LAYERUP_HT"
+msgid "Move up the current layer"
 msgstr "Przesuń obecną warstwę do góry"
 
-msgid "LAYERDOWN_HT"
+msgid "Move down the current layer"
 msgstr "Przesuń obecną warstwę w dół"
 
-msgid "LAYERCLONE_HT"
+msgid "Clone current layer"
 msgstr "Duplikuj obecną warstwę"
 
-msgid "LAYERMERGE_HT"
+msgid "Merge current layer with the one below"
 msgstr "Połącz obecną warstwę z warstwą powyżej"
 
 msgid "Opacity:"
 msgstr ""
 
-msgid "LAYERVISIBILITY_HT"
+msgid "Toggle layer's visibility"
 msgstr "Ukrywanie warstwy"
+
+msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
 msgstr ""
@@ -635,13 +702,13 @@ msgstr ""
 msgid "Palettes"
 msgstr ""
 
-msgid "NEWPALETTE_HT"
+msgid "Add a new palette"
 msgstr ""
 
-msgid "EDITPALETTE_HT"
+msgid "Edit currently selected palette"
 msgstr ""
 
-msgid "CHOOSEPALETTE_HT"
+msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
