@@ -395,6 +395,11 @@ func help_menu_id_pressed(id : int) -> void:
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
 
+
+func _on_UnsavedCanvasDialog_confirmed() -> void:
+	$CreateNewImage.popup_centered()
+
+
 func _on_OpenSprite_file_selected(path : String) -> void:
 	var file := File.new()
 	var err := file.open(path, File.READ)
@@ -828,5 +833,3 @@ func _on_QuitDialog_confirmed() -> void:
 
 	get_tree().quit()
 
-func _on_UnsavedCanvasDialog_confirmed() -> void :
-	$CreateNewImage.popup_centered()
