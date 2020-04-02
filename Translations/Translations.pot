@@ -825,3 +825,6 @@ msgstr ""
 
 msgid "Default Fill Color:"
 msgstr ""
+
+msgid "Lock aspect ratio:"
+msgstr ""

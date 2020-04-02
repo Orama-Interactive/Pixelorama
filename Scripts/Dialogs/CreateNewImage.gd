@@ -2,8 +2,12 @@ extends ConfirmationDialog
 
 onready var width_value = $VBoxContainer/OptionsContainer/WidthValue
 onready var height_value = $VBoxContainer/OptionsContainer/HeightValue
+onready var ratio_box = $VBoxContainer/OptionsContainer/RatioCheckBox
 onready var fill_color_node = $VBoxContainer/OptionsContainer/FillColor
 
+func _ready() -> void:
+	ratio_box.connect("pressed", self, "_on_RatioCheckBox_toggled", [ratio_box.pressed])
+	
 func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
 	var height : int = height_value.value
@@ -32,3 +36,23 @@ func _on_CreateNewImage_about_to_show() -> void:
 	width_value.value = Global.default_image_width
 	height_value.value = Global.default_image_height
 	fill_color_node.color = Global.default_fill_color
+	ratio_box.pressed = false	
+	for spin_box in [width_value, height_value]:
+		if spin_box.is_connected("value_changed", self, "_on_SizeValue_value_changed"):
+			spin_box.disconnect("value_changed", self, "_on_SizeValue_value_changed")
+
+var aspect_ratio: float
+
+func _on_RatioCheckBox_toggled(button_pressed: bool) -> void:
+	aspect_ratio = width_value.value / height_value.value
+	for spin_box in [width_value, height_value]:
+		if spin_box.is_connected("value_changed", self, "_on_SizeValue_value_changed"):
+			spin_box.disconnect("value_changed", self, "_on_SizeValue_value_changed")
+		else:
+			spin_box.connect("value_changed", self, "_on_SizeValue_value_changed")
+
+func _on_SizeValue_value_changed(value: float) -> void:
+	if width_value.value == value:
+		height_value.value = width_value.value / aspect_ratio
+	if height_value.value == value:
+		width_value.value = height_value.value * aspect_ratio
