@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-01 01:10\n"
+"PO-Revision-Date: 2020-04-02 00:49\n"
 
 msgid "OK"
 msgstr "确定"
@@ -663,6 +663,12 @@ msgstr "向左移动"
 
 msgid "Move Right"
 msgstr "向右移动"
+
+msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Unlink Cel"
+msgstr ""
 
 msgid "Layer"
 msgstr "图层"
