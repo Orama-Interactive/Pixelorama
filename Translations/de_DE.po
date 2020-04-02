@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-02 00:49\n"
+"PO-Revision-Date: 2020-04-02 07:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -664,10 +664,10 @@ msgid "Move Right"
 msgstr "Bewege nach Rechts"
 
 msgid "Add Frame Tag"
-msgstr ""
+msgstr "Frame Tag hinzufügen"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Kette entkoppeln"
 
 msgid "Layer"
 msgstr "Ebene"
@@ -704,8 +704,8 @@ msgstr "Ebene sperren/entsperren"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Aktiviere/Deaktiviere Zellverlinkungen\n\n"
-"Verlinkte Zellen werden über mehrere Frames geteilt"
+msgstr "Aktiviere/Deaktiviere Kettenverlinkungen\n\n"
+"Verlinkte Ketten werden über mehrere Frames geteilt"
 
 msgid "Palette"
 msgstr "Palette"
