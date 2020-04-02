@@ -850,6 +850,8 @@ msgstr "Altezza default:"
 msgid "Default Fill Color:"
 msgstr "Riempimento default:"
 
-msgid "Lock size ratio:"
+msgid "Lock aspect ratio:"
 msgstr "Blocca rapporto d'aspetto:"
 
+msgid "Templates:"
+msgstr "Modelli:"

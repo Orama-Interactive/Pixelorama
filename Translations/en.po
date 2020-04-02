@@ -745,3 +745,6 @@ msgstr "Default Fill Color:"
 
 msgid "Lock aspect ratio:"
 msgstr "Lock aspect ratio:"
+
+msgid "Templates:"
+msgstr "Templates:"
