@@ -630,6 +630,12 @@ msgstr ""
 msgid "Move Right"
 msgstr ""
 
+msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Unlink Cel"
+msgstr ""
+
 msgid "Layer"
 msgstr ""
 

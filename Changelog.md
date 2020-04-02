@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
 - Cel linking is now possible. This way, layers can be "shared" in multiple frames.
+- You can now group multiple frames with tags.
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
 - Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
@@ -27,7 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
-- Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that enables it, and one that opens the settings window.
+- Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
 - The splash screen is no longer purple, it now gets affected by the chosen theme.
 
 ### Fixed

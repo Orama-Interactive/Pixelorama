@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=7]
 
 [node name="SplashDialog" type="WindowDialog"]
-visible = true
 margin_right = 600.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 600, 560 )
@@ -137,7 +136,7 @@ margin_bottom = 260.0
 rect_min_size = Vector2( 0, 260 )
 
 [node name="Label" type="Label" parent="Contents/PatronsArtNews/ChangelogContainer/ChangelogScroll"]
-margin_right = 130.0
+margin_right = 142.0
 margin_bottom = 2921.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
