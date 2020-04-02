@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-03-31 18:51\n"
+"PO-Revision-Date: 2020-04-02 00:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -663,6 +663,12 @@ msgstr "Déplacer vers la gauche"
 
 msgid "Move Right"
 msgstr "Déplacer vers la droite"
+
+msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Unlink Cel"
+msgstr ""
 
 msgid "Layer"
 msgstr "Couche"
