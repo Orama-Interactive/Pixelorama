@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-02 00:49\n"
+"PO-Revision-Date: 2020-04-02 16:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -665,10 +665,10 @@ msgid "Move Right"
 msgstr "Muovi a destra"
 
 msgid "Add Frame Tag"
-msgstr ""
+msgstr "Aggiungi tag Frame"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Scollega Cel"
 
 msgid "Layer"
 msgstr "Livello"
