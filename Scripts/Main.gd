@@ -216,7 +216,10 @@ func _notification(what : int) -> void:
 func file_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # New
-			$CreateNewImage.popup_centered()
+			if(!Global.saved):
+				$UnsavedCanvasDialog.popup_centered()
+			else:
+				$CreateNewImage.popup_centered()
 			Global.can_draw = false
 		1: # Open
 			$OpenSprite.popup_centered()
@@ -824,3 +827,6 @@ func _on_QuitDialog_confirmed() -> void:
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
+
+func _on_UnsavedCanvasDialog_confirmed() -> void :
+	$CreateNewImage.popup_centered()
