@@ -1,0 +1,24 @@
+[gd_scene format=2]
+
+[node name="AnimationTag" type="VBoxContainer"]
+margin_right = 39.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 39, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 32, 0, 0, 39, 0, 39, 32 )
+width = 1.0
+texture_mode = 1313163520
+
+[node name="Label" type="Label" parent="."]
+margin_left = 7.0
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Idle"
+align = 1
+valign = 1

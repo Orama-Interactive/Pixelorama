@@ -4,6 +4,18 @@ var fps := 6.0
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 
+onready var timeline_scroll : ScrollContainer = $AnimationContainer/TimelineContainer/TimelineScroll
+onready var tag_scroll_container : ScrollContainer = $AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll
+
+func _ready() -> void:
+	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
+
+
+func _h_scroll_changed(value : float) -> void:
+	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
+	tag_scroll_container.get_child(0).rect_min_size.x = timeline_scroll.get_child(0).rect_size.x - 212
+	tag_scroll_container.scroll_horizontal = value
+
 
 func add_frame() -> void:
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
@@ -291,3 +303,19 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
 
+
+func _on_TagDialog_confirmed() -> void:
+	var tag_name : String = Global.tag_dialog.get_node("GridContainer/NameLineEdit").text
+	var tag_color : Color = Global.tag_dialog.get_node("GridContainer/ColorPickerButton").color
+	var tag_from : int = Global.tag_dialog.get_node("GridContainer/FromSpinBox").value
+	var tag_to : int = Global.tag_dialog.get_node("GridContainer/ToSpinBox").value
+	Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
+	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+
+
+func _on_OnionSkinningSettings_popup_hide() -> void:
+	Global.can_draw = true
+
+
+func _on_TagDialog_popup_hide() -> void:
+	Global.can_draw = true

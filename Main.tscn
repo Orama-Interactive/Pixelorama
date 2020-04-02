@@ -1163,6 +1163,12 @@ visible = false
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
+[node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "Unsaved Image"
+dialog_text = "Are you sure want to proceed?"
+
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
@@ -1252,6 +1258,8 @@ visible = false
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="UnsavedCanvasDialog" to="." method="_on_UnsavedCanvasDialog_confirmed"]
+[connection signal="popup_hide" from="UnsavedCanvasDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]

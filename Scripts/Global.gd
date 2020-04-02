@@ -33,6 +33,7 @@ var transparent_background : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
+var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
 
 # warning-ignore:unused_class_variable
 var theme_type := "Dark"
@@ -232,6 +233,8 @@ var play_backwards : BaseButton
 var timeline_seconds : Control
 var layers_container : VBoxContainer
 var frames_container : VBoxContainer
+var tag_container : Control
+var tag_dialog : ConfirmationDialog
 
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
@@ -346,6 +349,8 @@ func _ready() -> void:
 	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
 	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
+	tag_container = find_node_by_name(animation_timeline, "TagContainer")
+	tag_dialog = find_node_by_name(animation_timeline, "TagDialog")
 
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
@@ -369,6 +374,7 @@ func _ready() -> void:
 	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
 	# will new frames be linked boolean (4), Array of linked frames (5)]
 	layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
+
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root, node_name) -> Node:
@@ -608,6 +614,25 @@ func layer_changed(value : int) -> void:
 
 	yield(get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame # Call frame_changed to update UI
+
+
+func animation_tags_changed(value : Array) -> void:
+	animation_tags = value
+	var tag : Container = load("res://Prefabs/AnimationTag.tscn").instance()
+	tag_container.add_child(tag)
+	var tag_position := tag_container.get_child_count() - 1
+	tag_container.move_child(tag, tag_position)
+	tag.get_node("Label").text = animation_tags[tag_position][0]
+	tag.get_node("Label").modulate = animation_tags[tag_position][1]
+	tag.get_node("Line2D").default_color = animation_tags[tag_position][1]
+
+	tag.rect_position.x = (animation_tags[tag_position][2] - 1) * 39 + animation_tags[tag_position][2]
+
+	var size : int = animation_tags[tag_position][3] - animation_tags[tag_position][2]
+	tag.rect_min_size.x = (size + 1) * 39
+	tag.get_node("Line2D").points[2] = Vector2(tag.rect_min_size.x, 0)
+	tag.get_node("Line2D").points[3] = Vector2(tag.rect_min_size.x, 32)
+
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container

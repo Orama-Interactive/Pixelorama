@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -83,6 +83,27 @@ scancode = 16777230
 
 [sub_resource type="ShortCut" id=12]
 shortcut = SubResource( 11 )
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="Theme" id=18]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = SubResource( 13 )
+HScrollBar/styles/grabber_highlight = SubResource( 14 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 16 )
+HScrollBar/styles/scroll_focus = SubResource( 17 )
 
 [node name="AnimationTimeline" type="Panel"]
 margin_top = 438.0
@@ -210,26 +231,6 @@ size_flags_horizontal = 3
 [node name="SpacerControl" type="Control" parent="AnimationContainer/TimelineContainer"]
 margin_right = 604.0
 
-[node name="AnimationTags" type="VBoxContainer" parent="AnimationContainer/TimelineContainer"]
-visible = false
-margin_right = 471.0
-margin_bottom = 32.0
-
-[node name="Line2D" type="Line2D" parent="AnimationContainer/TimelineContainer/AnimationTags"]
-points = PoolVector2Array( 0, 32, 0, 0, 110, 0, 110, 32 )
-width = 1.0
-texture_mode = 1313163520
-
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/AnimationTags"]
-margin_right = 110.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 110, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Animation Tags"
-align = 1
-valign = 1
-
 [node name="AnimationButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
 margin_top = 4.0
 margin_right = 604.0
@@ -238,15 +239,16 @@ rect_min_size = Vector2( 0, 24 )
 
 [node name="CurrentFrame" type="Label" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
 margin_top = 5.0
-margin_right = 117.0
+margin_right = 150.0
 margin_bottom = 19.0
+rect_min_size = Vector2( 150, 0 )
 text = "Current frame: 1/1"
 
 [node name="AddFrame" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 121.0
-margin_right = 141.0
+margin_left = 154.0
+margin_right = 174.0
 margin_bottom = 20.0
 hint_tooltip = "Add a new frame"
 mouse_default_cursor_shape = 2
@@ -256,8 +258,8 @@ texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 234.0
-margin_right = 374.0
+margin_left = 251.0
+margin_right = 391.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -398,55 +400,72 @@ margin_top = 32.0
 margin_right = 604.0
 margin_bottom = 36.0
 
-[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
+[node name="OpacityAndTagContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
 margin_top = 40.0
 margin_right = 604.0
-margin_bottom = 64.0
+margin_bottom = 72.0
 custom_constants/separation = 2
 
-[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
+[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_right = 214.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 214, 0 )
+
+[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_right = 53.0
-margin_bottom = 24.0
+margin_bottom = 32.0
 size_flags_horizontal = 0
 size_flags_vertical = 1
 text = "Opacity:"
 valign = 1
 
-[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
-margin_left = 55.0
-margin_right = 167.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 112, 0 )
+[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_left = 57.0
+margin_right = 136.0
+margin_bottom = 32.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 100.0
 ticks_on_borders = true
 
-[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityContainer"]
-margin_left = 169.0
-margin_right = 243.0
-margin_bottom = 24.0
+[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_left = 140.0
+margin_top = 4.0
+margin_right = 214.0
+margin_bottom = 28.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 value = 100.0
 align = 1
 
+[node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_left = 216.0
+margin_right = 604.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+theme = SubResource( 18 )
+scroll_vertical_enabled = false
+
+[node name="TagContainer" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
+
 [node name="TimelineScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer"]
-margin_top = 68.0
+margin_top = 76.0
 margin_right = 604.0
 margin_bottom = 200.0
 size_flags_vertical = 3
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll"]
 margin_right = 252.0
-margin_bottom = 132.0
+margin_bottom = 124.0
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+[node name="LayerVBoxCont" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
 margin_right = 212.0
-margin_bottom = 132.0
+margin_bottom = 124.0
 
-[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
+[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_right = 212.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
@@ -454,31 +473,31 @@ text = "Layers"
 align = 1
 valign = 1
 
-[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer"]
+[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_top = 20.0
 margin_right = 212.0
 margin_bottom = 56.0
 
-[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer/LayersContainer" instance=ExtResource( 18 )]
+[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont/LayersContainer" instance=ExtResource( 18 )]
 margin_right = 212.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+[node name="FrameButtonsAndIds" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 216.0
 margin_right = 252.0
-margin_bottom = 132.0
+margin_bottom = 124.0
 
-[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
+[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
 margin_bottom = 14.0
 
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2/FrameIDs"]
+[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs"]
 margin_right = 36.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 36, 0 )
 text = "1"
 align = 1
 
-[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/VBoxContainer2"]
+[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_top = 18.0
 margin_right = 36.0
 margin_bottom = 18.0
@@ -544,6 +563,78 @@ margin_right = 132.0
 margin_bottom = 116.0
 mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
+
+[node name="TagDialog" type="ConfirmationDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = "Frame Tag Properties"
+resizable = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="TagDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 124.0
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 19.0
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_right = 124.0
+margin_bottom = 24.0
+
+[node name="ColorLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 35.0
+margin_right = 42.0
+margin_bottom = 49.0
+text = "Color:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_top = 32.0
+margin_right = 124.0
+margin_bottom = 52.0
+
+[node name="FromLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 65.0
+margin_right = 42.0
+margin_bottom = 79.0
+text = "From:"
+
+[node name="FromSpinBox" type="SpinBox" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_top = 60.0
+margin_right = 124.0
+margin_bottom = 84.0
+min_value = 1.0
+value = 1.0
+
+[node name="ToLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 97.0
+margin_right = 42.0
+margin_bottom = 111.0
+text = "To:"
+
+[node name="ToSpinBox" type="SpinBox" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_top = 92.0
+margin_right = 124.0
+margin_bottom = 116.0
+min_value = 1.0
+value = 1.0
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
@@ -561,9 +652,12 @@ text = "Blue-Red Mode"
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
+[connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="confirmed" from="TagDialog" to="." method="_on_TagDialog_confirmed"]
+[connection signal="popup_hide" from="TagDialog" to="." method="_on_TagDialog_popup_hide"]

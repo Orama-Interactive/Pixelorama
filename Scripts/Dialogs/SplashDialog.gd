@@ -4,6 +4,8 @@ onready var changes_label : Label = $Contents/HBoxContainer/ChangesLabel
 onready var art_by_label : Label = $Contents/PatronsArtNews/ArtContainer/ArtCredits
 onready var show_on_startup_button : CheckBox = $Contents/BottomHboxContainer/ShowOnStartup
 onready var developed_by_label : Label = $Contents/BottomHboxContainer/VBoxContainer/DevelopedBy
+onready var platinum_placeholder_label : Label = $Contents/Sponsors/PlatinumContainer/PlaceholderLabel
+onready var gold_placeholder_label : Label = $Contents/Sponsors/GoldContainer/PlaceholderLabel
 
 func _on_SplashDialog_about_to_show() -> void:
 	if Global.config_cache.has_section_key("preferences", "startup"):
@@ -17,12 +19,16 @@ func _on_SplashDialog_about_to_show() -> void:
 	if "zh" in TranslationServer.get_locale():
 		show_on_startup_button.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Small.tres"))
 		developed_by_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Small.tres"))
+		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Bold.tres"))
+		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Bold.tres"))
 	else:
 		show_on_startup_button.add_font_override("font", preload("res://Assets/Fonts/Roboto-Small.tres"))
 		developed_by_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Small.tres"))
+		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Bold.tres"))
+		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Bold.tres"))
 
 func _on_ArtCredits_pressed() -> void:
-	OS.shell_open("https://www.instagram.com/erevos_art")
+	OS.shell_open("https://www.instagram.com/erevoid")
 
 func _on_ShowOnStartup_toggled(pressed : bool) -> void:
 	if pressed:
