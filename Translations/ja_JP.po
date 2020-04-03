@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-04-02 00:49\n"
+"PO-Revision-Date: 2020-04-03 00:50\n"
 
 msgid "OK"
 msgstr ""
@@ -833,5 +833,11 @@ msgid "Default Height:"
 msgstr ""
 
 msgid "Default Fill Color:"
+msgstr ""
+
+msgid "Lock aspect ratio:"
+msgstr ""
+
+msgid "Templates:"
 msgstr ""
 
