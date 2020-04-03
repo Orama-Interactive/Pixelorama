@@ -934,6 +934,11 @@ func rotxel(sprite : Image, angle : float) -> void:
 	sprite.unlock()
 	aux.unlock()
 
+func fake_rotsprite(sprite : Image, angle : float) -> void:
+	sprite.copy_from(scale3X(sprite))
+	nn_rotate(sprite,angle)
+	sprite.resize(sprite.get_width()/3,sprite.get_height()/3,0)
+
 func nn_rotate(sprite : Image, angle : float) -> void:
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
