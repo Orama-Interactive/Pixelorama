@@ -57,6 +57,12 @@ func add_frame() -> void:
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.update()
+	if Global.onion_skinning:
+		Global.onion_skinning_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning.png" % Global.theme_type)
+		Global.onion_skinning_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning_Hover.png" % Global.theme_type)
+	else:
+		Global.onion_skinning_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning_Off.png" % Global.theme_type)
+		Global.onion_skinning_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning_Off_Hover.png" % Global.theme_type)
 
 
 func _on_OnionSkinningSettings_pressed() -> void:

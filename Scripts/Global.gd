@@ -227,6 +227,7 @@ var animation_timeline : Panel
 var animation_timer : Timer
 var frame_ids : HBoxContainer
 var current_frame_label : Label
+var onion_skinning_button : BaseButton
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
 var play_backwards : BaseButton
@@ -346,6 +347,7 @@ func _ready() -> void:
 	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
 	frame_ids = find_node_by_name(animation_timeline, "FrameIDs")
 	current_frame_label = find_node_by_name(animation_timeline, "CurrentFrame")
+	onion_skinning_button = find_node_by_name(animation_timeline, "OnionSkinning")
 	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
 	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
