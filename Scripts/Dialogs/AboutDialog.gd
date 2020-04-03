@@ -21,11 +21,12 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Martin Zabinski")
 	contributors.create_item(contributor_root).set_text(0, "  azagaya")
 	contributors.create_item(contributor_root).set_text(0, "  Andreev Andrei")
+	contributors.create_item(contributor_root).set_text(0, "  Martin Novák (novhack)")
 	contributors.create_item(contributor_root).set_text(0, "  Marco Galli (Gaarco)")
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri (SbNanduri)")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
 	contributors.create_item(contributor_root).set_text(0, "  Noah Burck (haonkrub)")
-	contributors.create_item(contributor_root).set_text(0, "  Martin Novák (novhack)")
+	contributors.create_item(contributor_root).set_text(0, "  luiq54")
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms")

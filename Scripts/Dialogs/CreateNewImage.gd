@@ -25,7 +25,7 @@ enum TValues {
 func _ready() -> void:
 	ratio_box.connect("pressed", self, "_on_RatioCheckBox_toggled", [ratio_box.pressed])
 	templates_options.connect("item_selected", self, "_on_TemplatesOptions_item_selected")
-	
+
 func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
 	var height : int = height_value.value
@@ -55,7 +55,7 @@ func _on_CreateNewImage_about_to_show() -> void:
 	height_value.value = Global.default_image_height
 	fill_color_node.color = Global.default_fill_color
 	templates_options.selected = Templates.TDefault
-	ratio_box.pressed = false	
+	ratio_box.pressed = false
 	for spin_box in [width_value, height_value]:
 		if spin_box.is_connected("value_changed", self, "_on_SizeValue_value_changed"):
 			spin_box.disconnect("value_changed", self, "_on_SizeValue_value_changed")
