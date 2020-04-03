@@ -509,33 +509,31 @@ margin_bottom = 200.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
-[node name="OnionSkinningSettings" type="AcceptDialog" parent="."]
+[node name="OnionSkinningSettings" type="WindowDialog" parent="."]
 margin_right = 83.0
 margin_bottom = 58.0
-window_title = "Onion Skinning:"
+rect_min_size = Vector2( 136, 126 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="OnionSkinningSettings"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
+margin_right = 134.0
+margin_bottom = 124.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
-margin_right = 132.0
+margin_right = 126.0
 margin_bottom = 14.0
 text = "Past Frames"
 
 [node name="PastOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 18.0
-margin_right = 132.0
+margin_right = 126.0
 margin_bottom = 42.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -544,13 +542,13 @@ align = 1
 
 [node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 46.0
-margin_right = 132.0
+margin_right = 126.0
 margin_bottom = 60.0
 text = "Future Frames"
 
 [node name="FutureOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 64.0
-margin_right = 132.0
+margin_right = 126.0
 margin_bottom = 88.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -559,7 +557,7 @@ align = 1
 
 [node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 92.0
-margin_right = 132.0
+margin_right = 126.0
 margin_bottom = 116.0
 mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
