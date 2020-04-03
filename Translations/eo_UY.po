@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-02 00:49\n"
+"PO-Revision-Date: 2020-04-03 00:50\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -835,4 +835,10 @@ msgstr "Defaŭlta alto:"
 
 msgid "Default Fill Color:"
 msgstr "Defaŭlta plenigkoloro:"
+
+msgid "Lock aspect ratio:"
+msgstr ""
+
+msgid "Templates:"
+msgstr ""
 
