@@ -9,6 +9,7 @@ func _ready() -> void:
 	texture.flags = 0
 	aux_img = Image.new()
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Rotxel")
+	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Upscale, Rotate and Downscale")
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Nearest neighbour")
 
 func set_sprite(sprite : Image) -> void:
@@ -34,6 +35,8 @@ func _on_RotateImage_confirmed() -> void:
 			Global.rotxel(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 		"Nearest neighbour":
 			Global.nn_rotate(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+		"Upscale, Rotate and Downscale":
+			Global.fake_rotsprite(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	Global.canvas.handle_redo("Draw")
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
 
@@ -45,6 +48,8 @@ func rotate() -> void:
 			Global.rotxel(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 		"Nearest neighbour":
 			Global.nn_rotate(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+		"Upscale, Rotate and Downscale":
+			Global.fake_rotsprite(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	texture.create_from_image(sprite, 0)
 
 
