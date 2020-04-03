@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-02 00:49\n"
+"PO-Revision-Date: 2020-04-03 00:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -860,4 +860,10 @@ msgstr "Προεπιλεγμένο ύψος:"
 
 msgid "Default Fill Color:"
 msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
+
+msgid "Lock aspect ratio:"
+msgstr ""
+
+msgid "Templates:"
+msgstr ""
 
