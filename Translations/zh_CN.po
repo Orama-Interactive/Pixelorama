@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-02 03:36\n"
+"PO-Revision-Date: 2020-04-03 00:50\n"
 
 msgid "OK"
 msgstr "确定"
@@ -860,4 +860,10 @@ msgstr "默认高度:"
 
 msgid "Default Fill Color:"
 msgstr "默认填充颜色:"
+
+msgid "Lock aspect ratio:"
+msgstr ""
+
+msgid "Templates:"
+msgstr ""
 
