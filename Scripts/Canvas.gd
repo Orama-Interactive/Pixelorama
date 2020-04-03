@@ -993,8 +993,10 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			var dst_x := dest_rect.position.x + x;
 			var dst_y := dest_rect.position.y + y;
 
+			brush.lock()
 			var brush_color := brush.get_pixel(src_x, src_y)
 			var bg_color := bg.get_pixel(dst_x, dst_y)
 			var out_color := blend_colors(brush_color, bg_color)
 			if out_color.a != 0:
 				bg.set_pixel(dst_x, dst_y, out_color)
+			brush.unlock()
