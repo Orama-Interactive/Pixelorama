@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-03 00:50\n"
+"PO-Revision-Date: 2020-04-03 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -862,8 +862,8 @@ msgid "Default Fill Color:"
 msgstr "Riempimento default:"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Blocca rapporto d'aspetto:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Modelli:"
 
