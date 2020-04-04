@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
+- The default window size is now 1280x720, and the minimum window size is 1024x576.
 - The splash screen is no longer purple, it now gets affected by the chosen theme.
 
 ### Fixed
