@@ -9,17 +9,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
 - Cel linking is now possible. This way, layers can be "shared" in multiple frames.
 - You can now group multiple frames with tags.
+- A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite. Thanks to luiq54!
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
 - Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
 - Esperanto translation - thanks to Teashrock!
+- When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation - thanks to luiq54!
 - You can now zoom in with the `+` key, and zoom out with `-`.
 
 ### Changed
 - The UI - and especially the timeline - has been revamped!
 - The export dialog has also been revamped - thanks to thanks to Martin Novák (novhack)!
+- Templates and a lock aspect ratio option have been added to the "Create new image" dialog - thanks to Gaarco!
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
