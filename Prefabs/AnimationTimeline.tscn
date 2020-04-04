@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -39,6 +39,8 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop.png" type="Texture" id=37]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Expandable.png" type="Texture" id=38]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Expandable_Hover.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Tag_Hover.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Tag.png" type="Texture" id=41]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -257,9 +259,22 @@ size_flags_vertical = 0
 texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
+[node name="FrameTagButton" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 178.0
+margin_right = 198.0
+margin_bottom = 20.0
+hint_tooltip = "Manage frame tags"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 41 )
+texture_hover = ExtResource( 40 )
+
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 251.0
-margin_right = 391.0
+margin_left = 263.0
+margin_right = 403.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -640,6 +655,7 @@ value = 1.0
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame" to="." method="add_frame"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
 [connection signal="toggled" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]

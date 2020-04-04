@@ -54,6 +54,10 @@ func add_frame() -> void:
 	Global.undo_redo.commit_action()
 
 
+func _on_FrameTagButton_pressed() -> void:
+	Global.tag_dialog.popup_centered()
+
+
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.update()
@@ -325,3 +329,4 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 func _on_TagDialog_popup_hide() -> void:
 	Global.can_draw = true
+
