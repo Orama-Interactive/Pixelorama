@@ -1,0 +1,127 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Dialogs/FrameTagDialog.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame_Hover.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame.png" type="Texture" id=3]
+
+[node name="FrameTagDialog" type="ConfirmationDialog"]
+margin_right = 83.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 400, 200 )
+window_title = "Frame Tag Properties"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 400.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 4.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddTag" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"UIButtons",
+]]
+margin_top = 8.0
+margin_right = 20.0
+margin_bottom = 28.0
+hint_tooltip = "Add a new frame tag"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TagOptions" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="GridContainer" type="GridContainer" parent="TagOptions"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 259.0
+margin_bottom = 64.0
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="TagOptions/GridContainer"]
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 19.0
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="TagOptions/GridContainer"]
+margin_left = 50.0
+margin_right = 124.0
+margin_bottom = 24.0
+
+[node name="ColorLabel" type="Label" parent="TagOptions/GridContainer"]
+margin_left = 132.0
+margin_top = 5.0
+margin_right = 169.0
+margin_bottom = 19.0
+text = "Color:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="TagOptions/GridContainer"]
+margin_left = 177.0
+margin_right = 251.0
+margin_bottom = 24.0
+color = Color( 1, 0, 0, 1 )
+
+[node name="FromLabel" type="Label" parent="TagOptions/GridContainer"]
+margin_top = 37.0
+margin_right = 42.0
+margin_bottom = 51.0
+text = "From:"
+
+[node name="FromSpinBox" type="SpinBox" parent="TagOptions/GridContainer"]
+margin_left = 50.0
+margin_top = 32.0
+margin_right = 124.0
+margin_bottom = 56.0
+min_value = 1.0
+value = 1.0
+
+[node name="ToLabel" type="Label" parent="TagOptions/GridContainer"]
+margin_left = 132.0
+margin_top = 37.0
+margin_right = 169.0
+margin_bottom = 51.0
+text = "To:"
+
+[node name="ToSpinBox" type="SpinBox" parent="TagOptions/GridContainer"]
+margin_left = 177.0
+margin_top = 32.0
+margin_right = 251.0
+margin_bottom = 56.0
+min_value = 1.0
+value = 1.0
+[connection signal="about_to_show" from="." to="." method="_on_FrameTagDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_FrameTagDialog_popup_hide"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/AddTag" to="." method="_on_AddTag_pressed"]
+[connection signal="confirmed" from="TagOptions" to="." method="_on_TagOptions_confirmed"]

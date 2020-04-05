@@ -352,7 +352,7 @@ func _ready() -> void:
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
 	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
 	tag_container = find_node_by_name(animation_timeline, "TagContainer")
-	tag_dialog = find_node_by_name(animation_timeline, "TagDialog")
+	tag_dialog = find_node_by_name(animation_timeline, "FrameTagDialog")
 
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
@@ -620,20 +620,24 @@ func layer_changed(value : int) -> void:
 
 func animation_tags_changed(value : Array) -> void:
 	animation_tags = value
-	var tag : Container = load("res://Prefabs/AnimationTag.tscn").instance()
-	tag_container.add_child(tag)
-	var tag_position := tag_container.get_child_count() - 1
-	tag_container.move_child(tag, tag_position)
-	tag.get_node("Label").text = animation_tags[tag_position][0]
-	tag.get_node("Label").modulate = animation_tags[tag_position][1]
-	tag.get_node("Line2D").default_color = animation_tags[tag_position][1]
+	for child in tag_container.get_children():
+		child.queue_free()
 
-	tag.rect_position.x = (animation_tags[tag_position][2] - 1) * 39 + animation_tags[tag_position][2]
+	for tag in animation_tags:
+		var tag_c : Container = load("res://Prefabs/AnimationTag.tscn").instance()
+		tag_container.add_child(tag_c)
+		var tag_position := tag_container.get_child_count() - 1
+		tag_container.move_child(tag_c, tag_position)
+		tag_c.get_node("Label").text = tag[0]
+		tag_c.get_node("Label").modulate = tag[1]
+		tag_c.get_node("Line2D").default_color = tag[1]
 
-	var size : int = animation_tags[tag_position][3] - animation_tags[tag_position][2]
-	tag.rect_min_size.x = (size + 1) * 39
-	tag.get_node("Line2D").points[2] = Vector2(tag.rect_min_size.x, 0)
-	tag.get_node("Line2D").points[3] = Vector2(tag.rect_min_size.x, 32)
+		tag_c.rect_position.x = (tag[2] - 1) * 39 + tag[2]
+
+		var size : int = tag[3] - tag[2]
+		tag_c.rect_min_size.x = (size + 1) * 39
+		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
+		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:

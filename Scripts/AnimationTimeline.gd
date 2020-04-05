@@ -314,19 +314,5 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.canvas.update()
 
 
-func _on_TagDialog_confirmed() -> void:
-	var tag_name : String = Global.tag_dialog.get_node("GridContainer/NameLineEdit").text
-	var tag_color : Color = Global.tag_dialog.get_node("GridContainer/ColorPickerButton").color
-	var tag_from : int = Global.tag_dialog.get_node("GridContainer/FromSpinBox").value
-	var tag_to : int = Global.tag_dialog.get_node("GridContainer/ToSpinBox").value
-	Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
-	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
-
-
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
-
-
-func _on_TagDialog_popup_hide() -> void:
-	Global.can_draw = true
-
