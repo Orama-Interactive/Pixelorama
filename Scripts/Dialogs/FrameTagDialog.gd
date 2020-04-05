@@ -1,8 +1,9 @@
-extends ConfirmationDialog
+extends AcceptDialog
 
 
 var current_tag_id := 0
 var tag_vboxes := []
+var delete_tag_button : Button
 
 onready var main_vbox_cont : VBoxContainer = $ScrollContainer/VBoxContainer
 onready var add_tag_button : TextureButton = $ScrollContainer/VBoxContainer/AddTag
@@ -18,7 +19,6 @@ func _on_FrameTagDialog_about_to_show() -> void:
 	var i := 0
 	for tag in Global.animation_tags:
 		var vbox_cont := VBoxContainer.new()
-
 		var hbox_cont := HBoxContainer.new()
 		var tag_label := Label.new()
 		if tag[2] == tag[3]:
@@ -67,6 +67,10 @@ func _on_EditButton_pressed(_tag_id : int) -> void:
 	options_dialog.get_node("GridContainer/ColorPickerButton").color = Global.animation_tags[_tag_id][1]
 	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.animation_tags[_tag_id][2]
 	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.animation_tags[_tag_id][3]
+	if !delete_tag_button:
+		delete_tag_button = options_dialog.add_button("Delete Tag", true, "delete_tag")
+	else:
+		delete_tag_button.visible = true
 
 
 func _on_TagOptions_confirmed() -> void:
@@ -76,11 +80,23 @@ func _on_TagOptions_confirmed() -> void:
 	var tag_to : int = options_dialog.get_node("GridContainer/ToSpinBox").value
 	if current_tag_id == Global.animation_tags.size():
 		Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
+		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
 	else:
 		Global.animation_tags[current_tag_id][0] = tag_name
 		Global.animation_tags[current_tag_id][1] = tag_color
 		Global.animation_tags[current_tag_id][2] = tag_from
 		Global.animation_tags[current_tag_id][3] = tag_to
-
-	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
 	_on_FrameTagDialog_about_to_show()
+
+
+func _on_TagOptions_custom_action(action : String) -> void:
+	if action == "delete_tag":
+		Global.animation_tags.remove(current_tag_id)
+		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+		options_dialog.hide()
+		_on_FrameTagDialog_about_to_show()
+
+
+func _on_TagOptions_popup_hide() -> void:
+	if delete_tag_button:
+		delete_tag_button.visible = false

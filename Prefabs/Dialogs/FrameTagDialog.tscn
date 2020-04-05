@@ -4,16 +4,13 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame_Hover.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame.png" type="Texture" id=3]
 
-[node name="FrameTagDialog" type="ConfirmationDialog"]
+[node name="FrameTagDialog" type="AcceptDialog"]
 margin_right = 83.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 400, 200 )
 window_title = "Frame Tag Properties"
 resizable = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
@@ -79,6 +76,8 @@ text = "Name:"
 margin_left = 50.0
 margin_right = 124.0
 margin_bottom = 24.0
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="ColorLabel" type="Label" parent="TagOptions/GridContainer"]
 margin_left = 132.0
@@ -125,3 +124,5 @@ value = 1.0
 [connection signal="popup_hide" from="." to="." method="_on_FrameTagDialog_popup_hide"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/AddTag" to="." method="_on_AddTag_pressed"]
 [connection signal="confirmed" from="TagOptions" to="." method="_on_TagOptions_confirmed"]
+[connection signal="custom_action" from="TagOptions" to="." method="_on_TagOptions_custom_action"]
+[connection signal="popup_hide" from="TagOptions" to="." method="_on_TagOptions_popup_hide"]

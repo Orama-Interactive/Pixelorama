@@ -235,7 +235,7 @@ var timeline_seconds : Control
 var layers_container : VBoxContainer
 var frames_container : VBoxContainer
 var tag_container : Control
-var tag_dialog : ConfirmationDialog
+var tag_dialog : AcceptDialog
 
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
