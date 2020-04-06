@@ -67,6 +67,10 @@ func _ready() -> void:
 		add_button("Cancel", false, "cancel")
 		$Popups/FileExistsAlert.add_button("Cancel Export", false, "cancel")
 
+	# Disable GIF export for unsupported platforms
+	if not $GifExporter.is_platform_supported():
+		$VBoxContainer/AnimationOptions/AnimationType.selected = AnimationType.MultipleFiles
+		$VBoxContainer/AnimationOptions/AnimationType.disabled = true
 
 func show_tab() -> void:
 	$VBoxContainer/FrameOptions.hide()
