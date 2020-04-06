@@ -16,8 +16,11 @@ var orientation : int = Orientation.Rows
 var lines_count := 1
 
 # Animation options
-enum AnimationType { MultipleFiles = 0 }
+enum AnimationType { MultipleFiles = 0, Animated = 1 }
 var animation_type : int = AnimationType.MultipleFiles
+var background_color : Color = Color.white
+enum AnimationDirection { Forward = 0, Backwards = 1, PingPong = 2 }
+var direction : int = AnimationDirection.Forward
 
 # Options
 var resize := 100
@@ -26,7 +29,8 @@ var interpolation := 0 # Image.Interpolation
 # Export directory path and export file name
 var directory_path := ""
 var file_name := ""
-var file_format := ".png"
+var file_format : int = FileFormat.PNG
+enum FileFormat { PNG = 0, GIF = 1}
 
 var file_exists_alert = "File %s already exists. Overwrite?"
 
@@ -37,15 +41,20 @@ var exported_frame_number : int
 var exported_orientation : int
 var exported_lines_count : int
 var exported_animation_type : int
+var exported_background_color : Color
+var exported_direction : int
 var exported_resize : int
 var exported_interpolation : int
 var exported_directory_path : String
 var exported_file_name : String
-var exported_file_format : String
+var exported_file_format : int
 
 # Export coroutine signal
 signal resume_export_function()
 var stop_export = false
+
+var animated_preview_current_frame := 0
+var animated_preview_frames = []
 
 func _ready() -> void:
 	$VBoxContainer/Tabs.add_tab("Frame")
@@ -58,6 +67,7 @@ func _ready() -> void:
 		add_button("Cancel", false, "cancel")
 		$Popups/FileExistsAlert.add_button("Cancel Export", false, "cancel")
 
+
 func show_tab() -> void:
 	$VBoxContainer/FrameOptions.hide()
 	$VBoxContainer/SpritesheetOptions.hide()
@@ -65,6 +75,9 @@ func show_tab() -> void:
 
 	match current_tab:
 		ExportTab.Frame:
+			file_format = FileFormat.PNG
+			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
+			$FrameTimer.stop()
 			if not was_exported:
 				frame_number = Global.current_frame + 1
 			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.max_value = Global.canvases.size() + 1
@@ -72,6 +85,9 @@ func show_tab() -> void:
 			process_frame()
 			$VBoxContainer/FrameOptions.show()
 		ExportTab.Spritesheet:
+			file_format = FileFormat.PNG
+			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
+			$FrameTimer.stop()
 			if not was_exported:
 				orientation = Orientation.Rows
 				lines_count = int(ceil(sqrt(Global.canvases.size())))
@@ -82,7 +98,11 @@ func show_tab() -> void:
 			process_spritesheet()
 			$VBoxContainer/SpritesheetOptions.show()
 		ExportTab.Animation:
+			set_file_format_selector()
 			process_animation()
+			$VBoxContainer/AnimationOptions/AnimationType.selected = animation_type
+			$VBoxContainer/AnimationOptions/AnimatedOptions/BackgroundColor.color = background_color
+			$VBoxContainer/AnimationOptions/AnimatedOptions/Direction.selected = direction
 			$VBoxContainer/AnimationOptions.show()
 	set_preview()
 	$VBoxContainer/Tabs.current_tab = current_tab
@@ -161,27 +181,23 @@ func set_preview() -> void:
 	remove_previews()
 	if processed_images.size() == 1 and current_tab != ExportTab.Animation:
 		$VBoxContainer/PreviewScroll/Previews.columns = 1
-		add_preview(processed_images[0])
+		add_image_preview(processed_images[0])
 	else:
-		$VBoxContainer/PreviewScroll/Previews.columns = ceil(sqrt(processed_images.size()))
-		for i in range(processed_images.size()):
-			add_preview(processed_images[i], i + 1)
+		match animation_type:
+			AnimationType.MultipleFiles:
+				$VBoxContainer/PreviewScroll/Previews.columns = ceil(sqrt(processed_images.size()))
+				for i in range(processed_images.size()):
+					add_image_preview(processed_images[i], i + 1)
+			AnimationType.Animated:
+				$VBoxContainer/PreviewScroll/Previews.columns = 1
+				add_animated_preview()
 
 
-func add_preview(image: Image, canvas_number: int = -1) -> void:
-	var container = VBoxContainer.new()
-	container.size_flags_horizontal = SIZE_EXPAND_FILL
-	container.size_flags_vertical = SIZE_EXPAND_FILL
-	container.rect_min_size = Vector2(0, 128)
-
-	var preview = TextureRect.new()
-	preview.expand = true
-	preview.size_flags_horizontal = SIZE_EXPAND_FILL
-	preview.size_flags_vertical = SIZE_EXPAND_FILL
-	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+func add_image_preview(image: Image, canvas_number: int = -1) -> void:
+	var container = create_preview_container()
+	var preview = create_preview_rect()
 	preview.texture = ImageTexture.new()
 	preview.texture.create_from_image(image, 0)
-
 	container.add_child(preview)
 
 	if canvas_number != -1:
@@ -193,9 +209,46 @@ func add_preview(image: Image, canvas_number: int = -1) -> void:
 	$VBoxContainer/PreviewScroll/Previews.add_child(container)
 
 
+func add_animated_preview() -> void:
+	animated_preview_current_frame = processed_images.size() - 1 if direction == AnimationDirection.Backwards else 0
+	animated_preview_frames = []
+
+	for processed_image in processed_images:
+		var texture = ImageTexture.new()
+		texture.create_from_image(processed_image, 0)
+		animated_preview_frames.push_back(texture)
+
+	var container = create_preview_container()
+	container.name = "PreviewContainer"
+	var preview = create_preview_rect()
+	preview.name = "Preview"
+	preview.texture = animated_preview_frames[animated_preview_current_frame]
+	container.add_child(preview)
+
+	$VBoxContainer/PreviewScroll/Previews.add_child(container)
+	$FrameTimer.start()
+
+
+func create_preview_container() -> VBoxContainer:
+	var container = VBoxContainer.new()
+	container.size_flags_horizontal = SIZE_EXPAND_FILL
+	container.size_flags_vertical = SIZE_EXPAND_FILL
+	container.rect_min_size = Vector2(0, 128)
+	return container
+
+
+func create_preview_rect() -> TextureRect:
+	var preview = TextureRect.new()
+	preview.expand = true
+	preview.size_flags_horizontal = SIZE_EXPAND_FILL
+	preview.size_flags_vertical = SIZE_EXPAND_FILL
+	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	return preview
+
+
 func remove_previews() -> void:
 	for child in $VBoxContainer/PreviewScroll/Previews.get_children():
-		child.queue_free()
+		child.free()
 
 
 func export_processed_images(ignore_overwrites : bool) -> void:
@@ -209,7 +262,7 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 	var export_paths = []
 	for i in range(processed_images.size()):
 		stop_export = false
-		var export_path = create_export_path(true if current_tab == ExportTab.Animation else false, i + 1)
+		var export_path = create_export_path(true if (current_tab == ExportTab.Animation && animation_type == AnimationType.MultipleFiles) else false, i + 1)
 		# Check if the file already exists
 		var fileCheck = File.new()
 		if fileCheck.file_exists(export_path):
@@ -224,19 +277,40 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 					# User decided to stop export
 					return
 		export_paths.append(export_path)
+		# Only get one export path if single file animated image is exported
+		if current_tab == ExportTab.Animation && animation_type == AnimationType.Animated:
+			break
 
 	# Scale images that are to export
 	scale_processed_images()
 
-	for i in range(processed_images.size()):
-		var err = processed_images[i].save_png(export_paths[i])
-		if err != OK:
-			OS.alert("Can't save file")
+	if current_tab == ExportTab.Animation && animation_type == AnimationType.Animated:
+		var frame_delay_in_ms = Global.animation_timer.wait_time * 100
+
+		$GifExporter.begin_export(export_paths[0], processed_images[0].get_width(), processed_images[0].get_height(), frame_delay_in_ms, 0)
+		match direction:
+			AnimationDirection.Forward:
+				for i in range(processed_images.size()):
+					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
+			AnimationDirection.Backwards:
+				for i in range(processed_images.size() - 1, -1, -1):
+					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
+			AnimationDirection.PingPong:
+				for i in range(0, processed_images.size()):
+					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
+				for i in range(processed_images.size() - 2, 0, -1):
+					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
+		$GifExporter.end_export()
+	else:
+		for i in range(processed_images.size()):
+			var err = processed_images[i].save_png(export_paths[i])
+			if err != OK:
+				OS.alert("Can't save file")
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	store_export_settings()
-	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format))
+	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 	Global.notification_label("File(s) exported")
 	hide()
 
@@ -273,12 +347,35 @@ func create_export_path(multifile: bool, frame: int = 0) -> String:
 	if multifile:
 		path += "_" + String(frame)
 
-	return directory_path.plus_file(path + file_format)
+	return directory_path.plus_file(path + file_format_string(file_format))
 
 
 func frames_divided_by_spritesheet_lines() -> int:
 	return int(ceil(Global.canvases.size() / float(lines_count)))
 
+
+func file_format_string(format_enum : int) -> String:
+	match format_enum:
+		0: # PNG
+			return '.png'
+		1: # GIF
+			return '.gif'
+		_:
+			return ''
+
+
+func set_file_format_selector() -> void:
+	match animation_type:
+		AnimationType.MultipleFiles:
+			file_format = FileFormat.PNG
+			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
+			$FrameTimer.stop()
+			$VBoxContainer/AnimationOptions/AnimatedOptions.hide()
+		AnimationType.Animated:
+			file_format = FileFormat.GIF
+			$VBoxContainer/File/FileFormat.selected = FileFormat.GIF
+			$FrameTimer.wait_time = Global.animation_timer.wait_time
+			$VBoxContainer/AnimationOptions/AnimatedOptions.show()
 
 func store_export_settings() -> void:
 	exported_tab = current_tab
@@ -286,6 +383,8 @@ func store_export_settings() -> void:
 	exported_orientation = orientation
 	exported_lines_count = lines_count
 	exported_animation_type = animation_type
+	exported_background_color = background_color
+	exported_direction = direction
 	exported_resize = resize
 	exported_interpolation = interpolation
 	exported_directory_path = directory_path
@@ -299,6 +398,8 @@ func restore_previous_export_settings() -> void:
 	orientation = exported_orientation
 	lines_count = exported_lines_count
 	animation_type = exported_animation_type
+	background_color = exported_background_color
+	direction = exported_direction
 	resize = exported_resize
 	interpolation = exported_interpolation
 	directory_path = exported_directory_path
@@ -319,7 +420,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	$VBoxContainer/Options/Interpolation.selected = interpolation
 	$VBoxContainer/Path/PathLineEdit.text = directory_path
 	$VBoxContainer/File/FileLineEdit.text = file_name
-	$VBoxContainer/File/FileFormat.text = file_format
+	$VBoxContainer/File/FileFormat.selected = file_format
 	show_tab()
 
 	for child in $Popups.get_children(): # Set the theme for the popups
@@ -354,6 +455,28 @@ func _on_LinesCount_value_changed(value : float) -> void:
 	lines_count = value
 	process_spritesheet()
 	set_preview()
+
+
+func _on_AnimationType_item_selected(id : int) -> void:
+	animation_type = id
+	set_file_format_selector()
+	set_preview()
+
+
+func _on_BackgroundColor_color_changed(color : Color) -> void:
+	background_color = color
+
+
+func _on_Direction_item_selected(id : int) -> void:
+	direction = id
+	match id:
+		AnimationDirection.Forward:
+			animated_preview_current_frame = 0
+		AnimationDirection.Backwards:
+			animated_preview_current_frame = processed_images.size() - 1
+		AnimationDirection.PingPong:
+			animated_preview_current_frame = 0
+			pingpong_direction = AnimationDirection.Forward
 
 
 func _on_Resize_value_changed(value : float) -> void:
@@ -391,11 +514,7 @@ func _on_FileDialog_dir_selected(dir : String) -> void:
 
 
 func _on_FileFormat_item_selected(id : int) -> void:
-	match id:
-		0: # PNG
-			file_format = '.png'
-		1: # GIF
-			file_format = '.gif'
+	file_format = id
 
 
 func _on_FileExistsAlert_confirmed() -> void:
@@ -412,3 +531,44 @@ func _on_FileExistsAlert_custom_action(action : String) -> void:
 		stop_export = true
 		emit_signal("resume_export_function")
 		$Popups/FileExistsAlert.hide()
+
+
+var pingpong_direction = AnimationDirection.Forward
+func _on_FrameTimer_timeout() -> void:
+	$VBoxContainer/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
+
+	match direction:
+		AnimationDirection.Forward:
+			if animated_preview_current_frame == animated_preview_frames.size() - 1:
+				animated_preview_current_frame = 0
+			else:
+				animated_preview_current_frame += 1
+
+		AnimationDirection.Backwards:
+			if animated_preview_current_frame == 0:
+				animated_preview_current_frame = processed_images.size() - 1
+			else:
+				animated_preview_current_frame -= 1
+
+		AnimationDirection.PingPong:
+			match pingpong_direction:
+				AnimationDirection.Forward:
+					if animated_preview_current_frame == animated_preview_frames.size() - 1:
+						pingpong_direction = AnimationDirection.Backwards
+						animated_preview_current_frame -= 1
+						if animated_preview_current_frame <= 0:
+							animated_preview_current_frame = 0
+					else:
+						animated_preview_current_frame += 1
+				AnimationDirection.Backwards:
+					if animated_preview_current_frame == 0:
+						animated_preview_current_frame += 1
+						if animated_preview_current_frame >= animated_preview_frames.size() - 1:
+							animated_preview_current_frame = 0
+						pingpong_direction = AnimationDirection.Forward
+					else:
+						animated_preview_current_frame -= 1
+
+
+func _on_ExportDialog_popup_hide() -> void:
+	$FrameTimer.stop()

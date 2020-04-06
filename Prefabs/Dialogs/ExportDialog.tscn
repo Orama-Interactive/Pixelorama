@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Dialogs/ExportDialog.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-gifexporter/src/GifExporter.gd" type="Script" id=2]
 
 [node name="ExportDialog" type="AcceptDialog"]
-margin_right = 456.0
+margin_right = 532.0
 margin_bottom = 530.0
 rect_min_size = Vector2( 456, 530 )
 window_title = "Export..."
@@ -17,7 +18,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 448.0
+margin_right = 524.0
 margin_bottom = 494.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_vertical = 3
@@ -26,43 +27,42 @@ __meta__ = {
 }
 
 [node name="Tabs" type="Tabs" parent="VBoxContainer"]
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 24.0
 size_flags_vertical = 0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 margin_top = 28.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 32.0
 
 [node name="PreviewLabel" type="Label" parent="VBoxContainer"]
 margin_top = 36.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 50.0
 text = "Preview:"
 
 [node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 54.0
-margin_right = 440.0
-margin_bottom = 358.0
+margin_right = 516.0
+margin_bottom = 274.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Previews" type="GridContainer" parent="VBoxContainer/PreviewScroll"]
-margin_right = 440.0
-margin_bottom = 304.0
+margin_right = 516.0
+margin_bottom = 220.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
 [node name="FrameOptions" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 334.0
-margin_right = 440.0
-margin_bottom = 358.0
+margin_top = 278.0
+margin_right = 516.0
+margin_bottom = 302.0
 
 [node name="FrameNumber" type="HBoxContainer" parent="VBoxContainer/FrameOptions"]
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 24.0
 
 [node name="FrameNumberLabel" type="Label" parent="VBoxContainer/FrameOptions/FrameNumber"]
@@ -73,7 +73,7 @@ text = "Frame:"
 
 [node name="FrameNumber" type="SpinBox" parent="VBoxContainer/FrameOptions/FrameNumber"]
 margin_left = 48.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
@@ -84,12 +84,12 @@ rounded = true
 align = 2
 
 [node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 362.0
-margin_right = 440.0
-margin_bottom = 386.0
+margin_top = 306.0
+margin_right = 516.0
+margin_bottom = 330.0
 
 [node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 24.0
 alignment = 1
 
@@ -104,7 +104,7 @@ __meta__ = {
 
 [node name="Orientation" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Orientation"]
 margin_left = 81.0
-margin_right = 226.0
+margin_right = 264.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "Rows"
@@ -112,15 +112,15 @@ items = [ "Rows", null, false, 0, null, "Columns", null, false, 1, null ]
 selected = 0
 
 [node name="LinesCountLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
-margin_left = 230.0
+margin_left = 268.0
 margin_top = 5.0
-margin_right = 290.0
+margin_right = 328.0
 margin_bottom = 19.0
 text = "Columns:"
 
 [node name="LinesCount" type="SpinBox" parent="VBoxContainer/SpritesheetOptions/Orientation"]
-margin_left = 294.0
-margin_right = 440.0
+margin_left = 332.0
+margin_right = 516.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 min_value = 1.0
@@ -129,28 +129,68 @@ value = 1.0
 align = 2
 
 [node name="AnimationOptions" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 366.0
-margin_right = 440.0
+margin_top = 334.0
+margin_right = 516.0
 margin_bottom = 386.0
 
 [node name="AnimationType" type="OptionButton" parent="VBoxContainer/AnimationOptions"]
-margin_right = 440.0
-margin_bottom = 20.0
+margin_right = 516.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
-disabled = true
 text = "All frames as multiple files"
-items = [ "All frames as multiple files", null, false, 0, null ]
+items = [ "All frames as multiple files", null, false, 0, null, "All frames as a single file animation", null, false, 1, null ]
 selected = 0
+
+[node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer/AnimationOptions"]
+margin_top = 28.0
+margin_right = 516.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 24 )
+
+[node name="BackgroundColorLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
+margin_top = 5.0
+margin_right = 82.0
+margin_bottom = 19.0
+text = "Background: "
+valign = 1
+
+[node name="BackgroundColor" type="ColorPickerButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
+margin_left = 86.0
+margin_right = 265.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+color = Color( 1, 1, 1, 1 )
+edit_alpha = false
+
+[node name="DirectionLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
+margin_left = 269.0
+margin_top = 5.0
+margin_right = 332.0
+margin_bottom = 19.0
+text = "Direction:"
+
+[node name="Direction" type="OptionButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
+margin_left = 336.0
+margin_right = 516.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+text = "Forward"
+items = [ "Forward", null, false, 0, null, "Backwards", null, false, 1, null, "Ping-Pong", null, false, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 margin_top = 390.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 394.0
 
 [node name="Options" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 398.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 422.0
 
 [node name="ResizeLabel" type="Label" parent="VBoxContainer/Options"]
@@ -163,7 +203,7 @@ align = 2
 
 [node name="Resize" type="SpinBox" parent="VBoxContainer/Options"]
 margin_left = 50.0
-margin_right = 197.0
+margin_right = 235.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 min_value = 10.0
@@ -174,17 +214,17 @@ align = 2
 suffix = "%"
 
 [node name="InterpolationLabel" type="Label" parent="VBoxContainer/Options"]
-margin_left = 201.0
+margin_left = 239.0
 margin_top = 5.0
-margin_right = 288.0
+margin_right = 326.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 0 )
 text = "Interpolation:"
 align = 2
 
 [node name="Interpolation" type="OptionButton" parent="VBoxContainer/Options"]
-margin_left = 292.0
-margin_right = 440.0
+margin_left = 330.0
+margin_right = 516.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "Nearest"
@@ -194,12 +234,12 @@ selected = 0
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 margin_top = 426.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 430.0
 
 [node name="Path" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 434.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 458.0
 
 [node name="Label" type="Label" parent="VBoxContainer/Path"]
@@ -211,20 +251,20 @@ text = "Path:"
 
 [node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/Path"]
 margin_left = 36.0
-margin_right = 377.0
+margin_right = 453.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 2
 
 [node name="PathButton" type="Button" parent="VBoxContainer/Path"]
-margin_left = 381.0
-margin_right = 440.0
+margin_left = 457.0
+margin_right = 516.0
 margin_bottom = 24.0
 text = "Browse"
 
 [node name="File" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 462.0
-margin_right = 440.0
+margin_right = 516.0
 margin_bottom = 486.0
 
 [node name="Label" type="Label" parent="VBoxContainer/File"]
@@ -236,19 +276,19 @@ text = "File:"
 
 [node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/File"]
 margin_left = 34.0
-margin_right = 296.0
+margin_right = 376.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 2
 
 [node name="FileFormat" type="OptionButton" parent="VBoxContainer/File"]
-margin_left = 300.0
-margin_right = 440.0
+margin_left = 380.0
+margin_right = 516.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 130, 0 )
 disabled = true
-text = ".png ; PNG Image"
-items = [ ".png ; PNG Image", null, false, 0, null, ".gif ; GIF Image", null, true, 1, null ]
+text = ".png; PNG Image"
+items = [ ".png; PNG Image", null, false, 0, null, ".gif; GIF Image", null, false, 1, null ]
 selected = 0
 
 [node name="Popups" type="Node" parent="."]
@@ -265,8 +305,8 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/novhack/Pixelorama"
+current_path = "/home/novhack/Pixelorama/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -293,13 +333,28 @@ dialog_text = "File %s already exists. Overwrite?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FrameTimer" type="Timer" parent="."]
+__meta__ = {
+"_editor_description_": "Timer to advance animation frames in animation preview."
+}
+
+[node name="GifExporter" type="Node" parent="."]
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
 [connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]
+[connection signal="popup_hide" from="." to="." method="_on_ExportDialog_popup_hide"]
 [connection signal="tab_clicked" from="VBoxContainer/Tabs" to="." method="_on_Tabs_tab_clicked"]
 [connection signal="value_changed" from="VBoxContainer/FrameOptions/FrameNumber/FrameNumber" to="." method="_on_Frame_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Orientation/Orientation" to="." method="_on_Orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimationType" to="." method="_on_AnimationType_item_selected"]
+[connection signal="color_changed" from="VBoxContainer/AnimationOptions/AnimatedOptions/BackgroundColor" to="." method="_on_BackgroundColor_color_changed"]
+[connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimatedOptions/Direction" to="." method="_on_Direction_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/Options/Resize" to="." method="_on_Resize_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/Options/Interpolation" to="." method="_on_Interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/Path/PathLineEdit" to="." method="_on_PathLineEdit_text_changed"]
@@ -309,3 +364,4 @@ __meta__ = {
 [connection signal="dir_selected" from="Popups/PathDialog" to="." method="_on_FileDialog_dir_selected"]
 [connection signal="confirmed" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
 [connection signal="custom_action" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]
+[connection signal="timeout" from="FrameTimer" to="." method="_on_FrameTimer_timeout"]
