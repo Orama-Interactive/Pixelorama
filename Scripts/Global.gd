@@ -16,6 +16,7 @@ var saved := true # Checks if the user has saved
 # Canvas related stuff
 var canvases := [] setget canvases_changed
 var layers := [] setget layers_changed
+var layers_changed_skip := false
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
 # warning-ignore:unused_class_variable
@@ -500,6 +501,9 @@ func canvases_changed(value : Array) -> void:
 
 func layers_changed(value : Array) -> void:
 	layers = value
+	if layers_changed_skip:
+		layers_changed_skip = false
+		return
 
 	for container in layers_container.get_children():
 		container.queue_free()

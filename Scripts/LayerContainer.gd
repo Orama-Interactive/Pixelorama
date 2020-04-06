@@ -55,6 +55,7 @@ func save_layer_name(new_name : String) -> void:
 	line_edit.visible = false
 	line_edit.editable = false
 	label.text = new_name
+	Global.layers_changed_skip = true
 	Global.layers[i][0] = new_name
 
 func _on_VisibilityButton_pressed() -> void:
