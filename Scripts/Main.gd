@@ -514,6 +514,17 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 		Global.create_brush_button(image)
 		brush_line = file.get_line()
 
+	if (version_number - 0.01) > 0.6:
+		var tag_line := file.get_line()
+		while tag_line == ".T/":
+			var tag_name := file.get_line()
+			var tag_color : Color = file.get_var()
+			var tag_from := file.get_8()
+			var tag_to := file.get_8()
+			Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
+			Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+			tag_line = file.get_line()
+
 	file.close()
 
 	current_save_path = path
@@ -587,7 +598,18 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 			file.store_16(brush.get_size().y)
 			file.store_buffer(brush.get_data())
 		file.store_line("END_BRUSHES")
+
+	for tag in Global.animation_tags: # Store Global layers
+		file.store_line(".T/")
+		file.store_line(tag[0]) # Tag name
+		file.store_var(tag[1]) # Tag color
+		file.store_8(tag[2]) # Tag "from", the first frame
+		file.store_8(tag[3]) # Tag "to", the last frame
+
+	file.store_line("END_FRAME_TAGS")
+
 	file.close()
+
 	if !Global.saved:
 		Global.saved = true
 		Global.window_title = Global.window_title.rstrip("(*)")
@@ -601,6 +623,9 @@ func clear_canvases() -> void:
 		if child is Canvas:
 			child.queue_free()
 	Global.canvases.clear()
+	Global.animation_tags.clear()
+	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+
 	current_save_path = ""
 	file_menu.set_item_text(2, "Save")
 	file_menu.set_item_text(5, "Export...")
