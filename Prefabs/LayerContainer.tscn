@@ -92,6 +92,7 @@ __meta__ = {
 margin_top = 11.0
 margin_right = 104.0
 margin_bottom = 25.0
+mouse_filter = 1
 size_flags_horizontal = 3
 text = "Layer 0"
 align = 1
@@ -99,11 +100,13 @@ clip_text = true
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/LayerName"]
 visible = false
-margin_left = 86.0
-margin_top = 5.0
-margin_right = 166.0
-margin_bottom = 37.0
+margin_left = 24.0
+margin_top = 2.0
+margin_right = 104.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 80, 32 )
+focus_mode = 1
+mouse_filter = 1
 size_flags_vertical = 4
 text = "Layer 0"
 editable = false
@@ -114,3 +117,4 @@ caret_blink_speed = 0.5
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LinkButton" to="." method="_on_LinkButton_pressed"]
 [connection signal="focus_exited" from="HBoxContainer/LayerName/LineEdit" to="." method="_on_LineEdit_focus_exited"]
+[connection signal="text_entered" from="HBoxContainer/LayerName/LineEdit" to="." method="_on_LineEdit_text_entered"]

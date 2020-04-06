@@ -47,15 +47,17 @@ func _on_LayerContainer_pressed() -> void:
 	line_edit.editable = true
 	line_edit.grab_focus()
 
+func _on_LineEdit_text_entered(new_text: String) -> void:
+	Global.layers[i][0] = new_text
+
 func _on_LineEdit_focus_exited() -> void:
 	save_layer_name(line_edit.text)
 
 func save_layer_name(new_name : String) -> void:
+	label.text = new_name
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false
-	label.text = new_name
-	Global.layers[i][0] = new_name
 
 func _on_VisibilityButton_pressed() -> void:
 	Global.layers[i][1] = !Global.layers[i][1]

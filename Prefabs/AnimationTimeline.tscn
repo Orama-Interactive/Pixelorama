@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -39,9 +39,6 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Loop.png" type="Texture" id=37]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Expandable.png" type="Texture" id=38]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Expandable_Hover.png" type="Texture" id=39]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Tag_Hover.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Tag.png" type="Texture" id=41]
-[ext_resource path="res://Prefabs/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -260,22 +257,9 @@ size_flags_vertical = 0
 texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
-[node name="FrameTagButton" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
-"UIButtons",
-]]
-margin_left = 178.0
-margin_right = 198.0
-margin_bottom = 20.0
-hint_tooltip = "Manage frame tags"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture_normal = ExtResource( 41 )
-texture_hover = ExtResource( 40 )
-
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 263.0
-margin_right = 403.0
+margin_left = 251.0
+margin_right = 391.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -578,7 +562,77 @@ margin_bottom = 116.0
 mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
 
-[node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
+[node name="TagDialog" type="ConfirmationDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = "Frame Tag Properties"
+resizable = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="TagDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 124.0
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 19.0
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_right = 124.0
+margin_bottom = 24.0
+
+[node name="ColorLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 35.0
+margin_right = 42.0
+margin_bottom = 49.0
+text = "Color:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_top = 32.0
+margin_right = 124.0
+margin_bottom = 52.0
+
+[node name="FromLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 65.0
+margin_right = 42.0
+margin_bottom = 79.0
+text = "From:"
+
+[node name="FromSpinBox" type="SpinBox" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_top = 60.0
+margin_right = 124.0
+margin_bottom = 84.0
+min_value = 1.0
+value = 1.0
+
+[node name="ToLabel" type="Label" parent="TagDialog/GridContainer"]
+margin_top = 97.0
+margin_right = 42.0
+margin_bottom = 111.0
+text = "To:"
+
+[node name="ToSpinBox" type="SpinBox" parent="TagDialog/GridContainer"]
+margin_left = 50.0
+margin_top = 92.0
+margin_right = 124.0
+margin_bottom = 116.0
+min_value = 1.0
+value = 1.0
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
@@ -586,7 +640,6 @@ text = "Blue-Red Mode"
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame" to="." method="add_frame"]
-[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
 [connection signal="toggled" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
@@ -604,3 +657,5 @@ text = "Blue-Red Mode"
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="confirmed" from="TagDialog" to="." method="_on_TagDialog_confirmed"]
+[connection signal="popup_hide" from="TagDialog" to="." method="_on_TagDialog_popup_hide"]

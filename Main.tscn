@@ -125,7 +125,7 @@ __meta__ = {
 }
 
 [node name="TopMenuContainer" type="Panel" parent="MenuAndUI"]
-margin_right = 1280.0
+margin_right = 1152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/panel = ExtResource( 3 )
@@ -200,15 +200,15 @@ align = 2
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
 margin_top = 28.0
-margin_right = 1280.0
-margin_bottom = 720.0
+margin_right = 1152.0
+margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="ToolPanel" type="Panel" parent="MenuAndUI/UI"]
 margin_right = 48.0
-margin_bottom = 692.0
+margin_bottom = 620.0
 rect_min_size = Vector2( 48, 0 )
 size_flags_vertical = 3
 
@@ -290,26 +290,26 @@ texture_normal = ExtResource( 9 )
 
 [node name="CanvasAndTimeline" type="VSplitContainer" parent="MenuAndUI/UI"]
 margin_left = 48.0
-margin_right = 980.0
-margin_bottom = 692.0
+margin_right = 852.0
+margin_bottom = 620.0
 size_flags_horizontal = 3
 custom_constants/autohide = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-margin_right = 932.0
-margin_bottom = 480.0
+margin_right = 804.0
+margin_bottom = 408.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-margin_right = 932.0
-margin_bottom = 480.0
+margin_right = 804.0
+margin_bottom = 408.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="HorizontalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-margin_right = 932.0
+margin_right = 804.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
@@ -323,21 +323,21 @@ script = ExtResource( 14 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 margin_top = 16.0
-margin_right = 932.0
-margin_bottom = 480.0
+margin_right = 804.0
+margin_bottom = 408.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
-margin_right = 920.0
-margin_bottom = 464.0
+margin_right = 792.0
+margin_bottom = 392.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 464.0
+margin_bottom = 392.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -353,15 +353,15 @@ script = ExtResource( 15 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 920.0
-margin_bottom = 464.0
+margin_right = 792.0
+margin_bottom = 392.0
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 904, 464 )
+size = Vector2( 776, 392 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -383,14 +383,14 @@ polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 18 )
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
-margin_left = 932.0
-margin_right = 932.0
-margin_bottom = 464.0
+margin_left = 804.0
+margin_right = 804.0
+margin_bottom = 392.0
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 464 )
+size = Vector2( 0, 392 )
 handle_input_locally = false
 render_target_update_mode = 3
 script = ExtResource( 19 )
@@ -401,14 +401,13 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
 
 [node name="AnimationTimeline" parent="MenuAndUI/UI/CanvasAndTimeline" instance=ExtResource( 20 )]
-margin_top = 492.0
-margin_right = 932.0
-margin_bottom = 692.0
+margin_top = 420.0
+margin_right = 804.0
 
 [node name="RightPanel" type="Panel" parent="MenuAndUI/UI"]
-margin_left = 980.0
-margin_right = 1280.0
-margin_bottom = 692.0
+margin_left = 852.0
+margin_right = 1152.0
+margin_bottom = 620.0
 rect_min_size = Vector2( 300, 0 )
 
 [node name="PreviewAndPalettes" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel"]
@@ -445,13 +444,13 @@ margin_bottom = 158.0
 [node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
 margin_top = 162.0
 margin_right = 300.0
-margin_bottom = 676.0
+margin_bottom = 604.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
 margin_right = 300.0
-margin_bottom = 251.0
+margin_bottom = 215.0
 size_flags_vertical = 3
 custom_constants/separation = 8
 
@@ -526,18 +525,18 @@ texture_normal = ExtResource( 11 )
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions"]
 margin_top = 59.0
 margin_right = 300.0
-margin_bottom = 251.0
+margin_bottom = 215.0
 size_flags_vertical = 3
 
 [node name="ToolOptions" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer"]
 margin_right = 300.0
-margin_bottom = 192.0
+margin_bottom = 156.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_right = 144.0
-margin_bottom = 192.0
+margin_bottom = 156.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
@@ -568,9 +567,6 @@ margin_bottom = 32.0
 texture = SubResource( 4 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
 margin_left = 65.0
@@ -751,12 +747,12 @@ texture_pressed = ExtResource( 41 )
 [node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_left = 148.0
 margin_right = 152.0
-margin_bottom = 192.0
+margin_bottom = 156.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_left = 156.0
 margin_right = 300.0
-margin_bottom = 192.0
+margin_bottom = 156.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
@@ -966,9 +962,9 @@ texture_normal = ExtResource( 42 )
 texture_pressed = ExtResource( 41 )
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
-margin_top = 263.0
+margin_top = 227.0
 margin_right = 300.0
-margin_bottom = 514.0
+margin_bottom = 442.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1040,7 +1036,7 @@ clip_text = true
 [node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
 margin_top = 71.0
 margin_right = 300.0
-margin_bottom = 251.0
+margin_bottom = 215.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1133,8 +1129,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/marco/GodotEngine/Projects/Pixelorama"
+current_path = "/home/marco/GodotEngine/Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1149,21 +1145,26 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/marco/GodotEngine/Projects/Pixelorama"
+current_path = "/home/marco/GodotEngine/Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
+current_dir = "/home/marco/GodotEngine/Projects/Pixelorama"
+current_path = "/home/marco/GodotEngine/Projects/Pixelorama/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
+window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
+window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
+window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
@@ -1176,6 +1177,7 @@ dialog_text = "Are you sure want to proceed?"
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
@@ -1201,8 +1203,8 @@ dialog_text = "This is an error message!"
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/marco/GodotEngine/Projects/Pixelorama"
+current_path = "/home/marco/GodotEngine/Projects/Pixelorama/"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
