@@ -325,7 +325,8 @@ func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0))
 	var layer_i := 0
 	for layer in canvas.layers:
 		if Global.layers[layer_i][1]:
-			var layer_image : Image = layer[0]
+			var layer_image := Image.new()
+			layer_image.copy_from(layer[0])
 			layer_image.lock()
 			if layer[2] < 1: # If we have layer transparency
 				for xx in layer_image.get_size().x:

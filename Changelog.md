@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
 - Cel linking is now possible. This way, layers can be "shared" in multiple frames.
 - You can now group multiple frames with tags.
+- You can now export your projects to .gif files - Thanks to Martin Novák (novhack)!
 - A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite. Thanks to luiq54!
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
 - Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
