@@ -357,6 +357,7 @@ func image_menu_id_pressed(id : int) -> void:
 			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			$RotateImage.set_sprite(image)
 			$RotateImage.popup_centered()
+			Global.can_draw = false
 		5: # Invert Colors
 			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
@@ -381,6 +382,7 @@ func image_menu_id_pressed(id : int) -> void:
 			Global.canvas.handle_redo("Draw")
 		7: # Outline
 			$OutlineDialog.popup_centered()
+			Global.can_draw = false
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:

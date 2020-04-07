@@ -22,6 +22,7 @@ func open(palette : String) -> void:
 	if Global.palettes.has(palette):
 		working_palette = Global.palettes[palette].duplicate()
 		_display_palette()
+		Global.can_draw = false
 		self.popup_centered()
 
 	left_color_button.modulate = Global.left_color_picker.color
@@ -148,3 +149,7 @@ func _on_LeftColor_pressed() -> void:
 func _on_RightColor_pressed() -> void:
 	color_picker.color = Global.right_color_picker.color
 	_on_EditPaletteColorPicker_color_changed(color_picker.color)
+
+
+func _on_EditPalettePopup_popup_hide() -> void:
+	Global.can_draw = true

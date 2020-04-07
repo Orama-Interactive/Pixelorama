@@ -1260,6 +1260,7 @@ visible = false
 [connection signal="popup_hide" from="ExportDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="RotateImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="UnsavedCanvasDialog" to="." method="_on_UnsavedCanvasDialog_confirmed"]
@@ -1270,6 +1271,7 @@ visible = false
 [connection signal="custom_action" from="QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
+[connection signal="popup_hide" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]

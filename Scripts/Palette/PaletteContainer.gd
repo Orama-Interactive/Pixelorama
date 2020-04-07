@@ -63,6 +63,7 @@ func on_palette_import_file_selected(path : String) -> void:
 		Global.error_dialog.popup_centered()
 
 func _on_AddPalette_pressed() -> void:
+	Global.can_draw = false
 	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
 
 func on_new_palette_confirmed() -> void:
@@ -119,6 +120,7 @@ func on_edit_palette() -> void:
 		Global.new_palette_dialog.window_title = "Create a new custom palette from existing default?"
 		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
 		Global.new_palette_dialog.popup_centered()
+		Global.can_draw = false
 	else:
 		from_palette = null
 		Global.edit_palette_popup.open(current_palette)
@@ -193,3 +195,7 @@ func get_palette_files(path : String) -> Array:
 func save_palette(palette_name : String, filename : String) -> void:
 	var palette = Global.palettes[palette_name]
 	palette.save_to_file(palettes_path.plus_file(filename))
+
+
+func _on_NewPaletteDialog_popup_hide() -> void:
+	Global.can_draw = true

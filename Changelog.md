@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
 - Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else - Thanks to Gaarco! (Issue #167)
+- When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
 
 ## [v0.6.2] - 17-02-2020
 
