@@ -272,6 +272,9 @@ msgstr ""
 msgid "Guides & Grid"
 msgstr ""
 
+msgid "Shortcuts"
+msgstr ""
+
 msgid "General Options"
 msgstr ""
 
@@ -848,4 +851,40 @@ msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
+msgstr ""
+
+msgid "Preset"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "Rectangular Selection"
+msgstr ""
+
+msgid "Color Picker"
+msgstr ""
+
+msgid "Pencil"
+msgstr ""
+
+msgid "Eraser"
+msgstr ""
+
+msgid "Bucket"
+msgstr ""
+
+msgid "Lighten/Darken"
+msgstr ""
+
+msgid "Set the shortcut"
+msgstr ""
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr ""
+
+msgid "Already assigned"
 msgstr ""

@@ -7,6 +7,7 @@ onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
 onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
 onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
 onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
+onready var shortcuts = $HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts
 
 onready var smooth_zoom_button = $"HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom"
 onready var sensitivity_option = $"HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton"
@@ -20,7 +21,19 @@ onready var grid_height_value = $"HSplitContainer/ScrollContainer/VBoxContainer/
 onready var grid_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor"
 onready var guide_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GuideColor"
 
+# Shortcuts
+onready var theme_font_color : Color = $Popups/ShortcutSelector/EnteredShortcut.get_color("font_color")
+var default_shortcuts_preset := {}
+var custom_shortcuts_preset := {}
+var action_being_edited := ""
+var shortcut_already_assigned = false
+var old_input_event : InputEventKey
+var new_input_event : InputEventKey
+
 func _ready() -> void:
+	# Disable input until the shortcut selector is displayed
+	set_process_input(false)
+
 	for child in languages.get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Language_pressed", [child])
@@ -86,6 +99,55 @@ func _ready() -> void:
 	$"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor".get_picker().presets_visible = false
 	$HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor.get_picker().presets_visible = false
 
+	# Get default preset for shortcuts from project input map
+	# Buttons in shortcuts selector should be called the same as actions
+	for shortcut_grid_item in shortcuts.get_node("Shortcuts").get_children():
+		if shortcut_grid_item is Button:
+			var input_events = InputMap.get_action_list(shortcut_grid_item.name)
+			if input_events.size() > 1:
+				printerr("Every shortcut action should have just one input event assigned in input map")
+			shortcut_grid_item.text = (input_events[0] as InputEventKey).as_text()
+			shortcut_grid_item.connect("pressed", self, "_on_Shortcut_button_pressed", [shortcut_grid_item])
+			default_shortcuts_preset[shortcut_grid_item.name] = input_events[0]
+
+	# Load custom shortcuts from the config file
+	custom_shortcuts_preset = default_shortcuts_preset.duplicate()
+	for action in default_shortcuts_preset:
+		var saved_input_event = Global.config_cache.get_value("shortcuts", action, 0)
+		if saved_input_event is InputEventKey:
+			custom_shortcuts_preset[action] = saved_input_event
+
+	var shortcuts_preset = Global.config_cache.get_value("shortcuts", "shortcuts_preset", 0)
+	shortcuts.get_node("HBoxContainer/OptionButton").select(shortcuts_preset)
+	_on_OptionButton_item_selected(shortcuts_preset)
+
+
+func _input(event : InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed:
+			if event.scancode == KEY_ESCAPE:
+				$Popups/ShortcutSelector.hide()
+			else:
+				# Check if shortcut was already used
+				for action in InputMap.get_actions():
+					for input_event in InputMap.get_action_list(action):
+						if input_event is InputEventKey:
+							if OS.get_scancode_string(input_event.get_scancode_with_modifiers()) == OS.get_scancode_string(event.get_scancode_with_modifiers()):
+								$Popups/ShortcutSelector/EnteredShortcut.text = tr("Already assigned")
+								$Popups/ShortcutSelector/EnteredShortcut.add_color_override("font_color", Color.crimson)
+								get_tree().set_input_as_handled()
+								shortcut_already_assigned = true
+								return
+
+				# Store new shortcut
+				shortcut_already_assigned = false
+				old_input_event = InputMap.get_action_list(action_being_edited)[0]
+				new_input_event = event
+				$Popups/ShortcutSelector/EnteredShortcut.text = OS.get_scancode_string(event.get_scancode_with_modifiers())
+				$Popups/ShortcutSelector/EnteredShortcut.add_color_override("font_color", theme_font_color)
+			get_tree().set_input_as_handled()
+
+
 func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	var root := tree.create_item()
 	var general_button := tree.create_item(root)
@@ -93,6 +155,7 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	var theme_button := tree.create_item(root)
 	var grid_button := tree.create_item(root)
 	var image_button := tree.create_item(root)
+	var shortcuts_button := tree.create_item(root)
 
 	general_button.set_text(0, "  " + tr("General"))
 	# We use metadata to avoid being affected by translations
@@ -105,6 +168,8 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	grid_button.set_metadata(0, "Guides & Grid")
 	image_button.set_text(0, "  " + tr("Image"))
 	image_button.set_metadata(0, "Image")
+	shortcuts_button.set_text(0, "  " + tr("Shortcuts"))
+	shortcuts_button.set_metadata(0, "Shortcuts")
 
 	if changed_language:
 		language_button.select(0)
@@ -114,6 +179,7 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 
 func _on_PreferencesDialog_popup_hide() -> void:
 	tree.clear()
+
 
 func _on_Tree_item_selected() -> void:
 	for child in right_side.get_children():
@@ -129,16 +195,21 @@ func _on_Tree_item_selected() -> void:
 		grid_guides.visible = true
 	elif "Image" in selected:
 		image.visible = true
+	elif "Shortcuts" in selected:
+		shortcuts.visible = true
+
 
 func _on_PressureSensitivityOptionButton_item_selected(id : int) -> void:
 	Global.pressure_sensitivity_mode = id
 	Global.config_cache.set_value("preferences", "pressure_sensitivity", id)
 	Global.config_cache.save("user://cache.ini")
 
+
 func _on_SmoothZoom_pressed() -> void:
 	Global.smooth_zoom = !Global.smooth_zoom
 	Global.config_cache.set_value("preferences", "smooth_zoom", Global.smooth_zoom)
 	Global.config_cache.save("user://cache.ini")
+
 
 func _on_Language_pressed(button : Button) -> void:
 	var index := 0
@@ -167,6 +238,7 @@ func _on_Language_pressed(button : Button) -> void:
 	# Update Translations
 	_on_PreferencesDialog_popup_hide()
 	_on_PreferencesDialog_about_to_show(true)
+
 
 func _on_Theme_pressed(button : Button) -> void:
 	var index := 0
@@ -257,11 +329,31 @@ func change_theme(ID : int) -> void:
 	# Make sure the frame text gets updated
 	Global.current_frame = Global.current_frame
 
+
+func apply_shortcuts_preset(preset) -> void:
+	for action in preset:
+		var old_input_event : InputEventKey = InputMap.get_action_list(action)[0]
+		set_action_shortcut(action, old_input_event, preset[action])
+		shortcuts.get_node("Shortcuts/" + action).text = OS.get_scancode_string(preset[action].get_scancode_with_modifiers())
+
+
+func toggle_shortcut_buttons(enabled : bool) -> void:
+	for shortcut_grid_item in shortcuts.get_node("Shortcuts").get_children():
+		if shortcut_grid_item is Button:
+			shortcut_grid_item.disabled = not enabled
+
+
+func set_action_shortcut(action : String, old_input : InputEventKey, new_input : InputEventKey) -> void:
+	InputMap.action_erase_event(action, old_input)
+	InputMap.action_add_event(action, new_input)
+
+
 func _on_GridWidthValue_value_changed(value : float) -> void:
 	Global.grid_width = value
 	Global.canvas.update()
 	Global.config_cache.set_value("preferences", "grid_size", Vector2(value, grid_height_value.value))
 	Global.config_cache.save("user://cache.ini")
+
 
 func _on_GridHeightValue_value_changed(value : float) -> void:
 	Global.grid_height = value
@@ -269,11 +361,13 @@ func _on_GridHeightValue_value_changed(value : float) -> void:
 	Global.config_cache.set_value("preferences", "grid_size", Vector2(grid_width_value.value, value))
 	Global.config_cache.save("user://cache.ini")
 
+
 func _on_GridColor_color_changed(color : Color) -> void:
 	Global.grid_color = color
 	Global.canvas.update()
 	Global.config_cache.set_value("preferences", "grid_color", color)
 	Global.config_cache.save("user://cache.ini")
+
 
 func _on_GuideColor_color_changed(color : Color) -> void:
 	Global.guide_color = color
@@ -284,10 +378,12 @@ func _on_GuideColor_color_changed(color : Color) -> void:
 	Global.config_cache.set_value("preferences", "guide_color", color)
 	Global.config_cache.save("user://cache.ini")
 
+
 func _on_ImageDefaultWidth_value_changed(value: float) -> void:
 	Global.default_image_width = value
 	Global.config_cache.set_value("preferences", "default_width", value)
 	Global.config_cache.save("user://cache.ini")
+
 
 func _on_ImageDefaultHeight_value_changed(value: float) -> void:
 	Global.default_image_height = value
@@ -315,3 +411,38 @@ func _on_LeftToolIconCheckbox_toggled(button_pressed : bool) -> void:
 
 func _on_RightToolIconCheckbox_toggled(button_pressed : bool) -> void:
 	Global.show_right_tool_icon = button_pressed
+
+
+func _on_Shortcut_button_pressed(button : Button) -> void:
+	set_process_input(true)
+	action_being_edited = button.name
+	new_input_event = InputMap.get_action_list(button.name)[0]
+	shortcut_already_assigned = true
+	$Popups/ShortcutSelector.popup_centered()
+
+
+func _on_ShortcutSelector_popup_hide() -> void:
+	set_process_input(false)
+	$Popups/ShortcutSelector/EnteredShortcut.text = ""
+
+
+func _on_OptionButton_item_selected(id : int) -> void:
+	# Only custom preset which is modifiable
+	toggle_shortcut_buttons(true if id == 1 else false)
+	match id:
+		0:
+			apply_shortcuts_preset(default_shortcuts_preset)
+		1:
+			apply_shortcuts_preset(custom_shortcuts_preset)
+	Global.config_cache.set_value("shortcuts", "shortcuts_preset", id)
+	Global.config_cache.save("user://cache.ini")
+
+
+func _on_ShortcutSelector_confirmed() -> void:
+	if not shortcut_already_assigned:
+		set_action_shortcut(action_being_edited, old_input_event, new_input_event)
+		custom_shortcuts_preset[action_being_edited] = new_input_event
+		Global.config_cache.set_value("shortcuts", action_being_edited, new_input_event)
+		Global.config_cache.save("user://cache.ini")
+		shortcuts.get_node("Shortcuts/" + action_being_edited).text = OS.get_scancode_string(new_input_event.get_scancode_with_modifiers())
+		$Popups/ShortcutSelector.hide()

@@ -5,13 +5,16 @@
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-margin_right = 216.0
-margin_bottom = 70.0
+visible = true
+margin_right = 430.0
+margin_bottom = 1347.0
+rect_min_size = Vector2( 430, 0 )
 window_title = "Preferences"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [  ]
 }
 
@@ -24,39 +27,42 @@ margin_right = -8.0
 margin_bottom = -36.0
 size_flags_horizontal = 3
 custom_constants/autohide = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tree" type="Tree" parent="HSplitContainer"]
 margin_right = 88.0
-margin_bottom = 26.0
+margin_bottom = 1303.0
 rect_min_size = Vector2( 88, 0 )
 custom_constants/item_margin = -2
 hide_root = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer"]
 margin_left = 100.0
-margin_right = 200.0
-margin_bottom = 26.0
+margin_right = 414.0
+margin_bottom = 1303.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
-margin_right = 306.0
-margin_bottom = 960.0
+margin_right = 314.0
+margin_bottom = 1162.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_right = 205.0
-margin_bottom = 84.0
+margin_right = 314.0
+margin_bottom = 112.0
 
 [node name="General Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "General Options"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 pressed = true
@@ -64,8 +70,8 @@ text = "Smooth Zoom"
 
 [node name="GridContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
 margin_top = 60.0
-margin_right = 205.0
-margin_bottom = 84.0
+margin_right = 314.0
+margin_bottom = 112.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
@@ -79,22 +85,26 @@ pressed = true
 text = "Left pixel indicator"
 
 [node name="RightIndicatorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer"]
-margin_right = 147.0
+margin_left = 151.0
+margin_right = 306.0
 margin_bottom = 24.0
 hint_tooltip = "Show right mouse pixel indicator or brush on the canvas when drawing"
 mouse_default_cursor_shape = 2
 text = "Right pixel indicator"
 
 [node name="LeftToolIconCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer"]
+margin_top = 28.0
 margin_right = 147.0
-margin_bottom = 24.0
+margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Show left tool icon"
 
 [node name="RightToolIconCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer"]
-margin_right = 147.0
-margin_bottom = 24.0
+margin_left = 151.0
+margin_top = 28.0
+margin_right = 306.0
+margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Show right tool icon"
@@ -120,19 +130,19 @@ items = [ "None", null, false, 0, null, "Affect Brush's Alpha", null, false, 1, 
 selected = 1
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 88.0
-margin_right = 205.0
-margin_bottom = 512.0
+margin_top = 116.0
+margin_right = 314.0
+margin_bottom = 540.0
 
 [node name="Language Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Language options"
 
 [node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 pressed = true
@@ -140,14 +150,14 @@ text = "System Language"
 
 [node name="German" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 60.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 text = "Deutsch [de]"
 
 [node name="Greek" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 88.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 112.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
@@ -155,70 +165,70 @@ text = "Ελληνικά [el]"
 
 [node name="English" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 116.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 text = "English [en]"
 
 [node name="Esperanto" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 144.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 168.0
 mouse_default_cursor_shape = 2
 text = "Esperanto [eo]"
 
 [node name="Spanish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 172.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 196.0
 mouse_default_cursor_shape = 2
 text = "Español [es]"
 
 [node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 200.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 224.0
 mouse_default_cursor_shape = 2
 text = "Français [fr]"
 
 [node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 228.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 252.0
 mouse_default_cursor_shape = 2
 text = "Italiano [it]"
 
 [node name="Latvian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 256.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 280.0
 mouse_default_cursor_shape = 2
 text = "Latvian [lv]"
 
 [node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 284.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 308.0
 mouse_default_cursor_shape = 2
 text = "Polski [pl]"
 
 [node name="Brazilian Portuguese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 312.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 336.0
 mouse_default_cursor_shape = 2
 text = "Português Brasileiro [pt_BR]"
 
 [node name="Russian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 340.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 364.0
 mouse_default_cursor_shape = 2
 text = "Русский [ru]"
 
 [node name="Chinese Simplified" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 368.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 394.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
@@ -226,72 +236,72 @@ text = "简体中文 [zh_CN]"
 
 [node name="Chinese Traditional" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 398.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 424.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
 text = "繁體中文 [zh_TW]"
 
 [node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 516.0
-margin_right = 205.0
-margin_bottom = 684.0
+margin_top = 544.0
+margin_right = 314.0
+margin_bottom = 712.0
 
 [node name="Theme Options" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Theme options"
 
 [node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 text = "Dark"
 
 [node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 60.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 text = "Gray"
 
 [node name="Godot\'s Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 88.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 112.0
 mouse_default_cursor_shape = 2
 text = "Godot"
 
 [node name="Gold Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 116.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 text = "Gold"
 
 [node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 144.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 168.0
 mouse_default_cursor_shape = 2
 text = "Light"
 
 [node name="Grid&Guides" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 688.0
-margin_right = 205.0
-margin_bottom = 820.0
+margin_top = 716.0
+margin_right = 314.0
+margin_bottom = 848.0
 
 [node name="GridOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Grid options"
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 132.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
@@ -360,19 +370,19 @@ mouse_default_cursor_shape = 2
 color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_top = 824.0
-margin_right = 205.0
-margin_bottom = 932.0
+margin_top = 852.0
+margin_right = 314.0
+margin_bottom = 960.0
 
 [node name="ImageOptionsLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 text = "Image Options"
 
 [node name="ImageOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_top = 32.0
-margin_right = 205.0
+margin_right = 314.0
 margin_bottom = 108.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
@@ -425,6 +435,211 @@ margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0, 0 )
+
+[node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+margin_top = 964.0
+margin_right = 314.0
+margin_bottom = 1162.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
+margin_right = 314.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
+margin_top = 3.0
+margin_right = 49.0
+margin_bottom = 17.0
+text = "Preset: "
+
+[node name="OptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
+margin_left = 53.0
+margin_right = 314.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Default"
+items = [ "Default", null, false, 0, null, "Custom", null, false, 1, null ]
+selected = 0
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
+margin_top = 24.0
+margin_right = 314.0
+margin_bottom = 28.0
+
+[node name="Shortcuts" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
+margin_top = 32.0
+margin_right = 314.0
+margin_bottom = 198.0
+custom_constants/hseparation = 5
+columns = 3
+
+[node name="Empty" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_right = 137.0
+margin_bottom = 14.0
+
+[node name="LeftToolLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_right = 225.0
+margin_bottom = 14.0
+text = "Left Tool:"
+align = 1
+
+[node name="RightToolLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_right = 313.0
+margin_bottom = 14.0
+text = "Right Tool:"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 18.0
+margin_right = 137.0
+margin_bottom = 22.0
+
+[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 18.0
+margin_right = 225.0
+margin_bottom = 22.0
+
+[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 18.0
+margin_right = 313.0
+margin_bottom = 22.0
+
+[node name="RectSelectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 29.0
+margin_right = 137.0
+margin_bottom = 43.0
+text = "Rectangular Selection"
+
+[node name="left_rectangle_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 26.0
+margin_right = 225.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+
+[node name="right_rectangle_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 26.0
+margin_right = 313.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+
+[node name="ColorPickerLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 53.0
+margin_right = 137.0
+margin_bottom = 67.0
+text = "Color Picker"
+
+[node name="left_colorpicker_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 50.0
+margin_right = 225.0
+margin_bottom = 70.0
+
+[node name="right_colorpicker_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 50.0
+margin_right = 313.0
+margin_bottom = 70.0
+
+[node name="PencilLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 77.0
+margin_right = 137.0
+margin_bottom = 91.0
+text = "Pencil"
+
+[node name="left_pencil_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 74.0
+margin_right = 225.0
+margin_bottom = 94.0
+
+[node name="right_pencil_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 74.0
+margin_right = 313.0
+margin_bottom = 94.0
+
+[node name="EraserLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 101.0
+margin_right = 137.0
+margin_bottom = 115.0
+text = "Eraser"
+
+[node name="left_eraser_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 98.0
+margin_right = 225.0
+margin_bottom = 118.0
+
+[node name="right_eraser_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 98.0
+margin_right = 313.0
+margin_bottom = 118.0
+
+[node name="BucketLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 125.0
+margin_right = 137.0
+margin_bottom = 139.0
+text = "Bucket"
+
+[node name="left_fill_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 122.0
+margin_right = 225.0
+margin_bottom = 142.0
+
+[node name="right_fill_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 122.0
+margin_right = 313.0
+margin_bottom = 142.0
+
+[node name="LightenDarkenLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 149.0
+margin_right = 137.0
+margin_bottom = 163.0
+text = "Lighten/Darken"
+
+[node name="left_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 146.0
+margin_right = 225.0
+margin_bottom = 166.0
+
+[node name="right_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 146.0
+margin_right = 313.0
+margin_bottom = 166.0
+
+[node name="Popups" type="Node" parent="."]
+
+[node name="ShortcutSelector" type="ConfirmationDialog" parent="Popups"]
+margin_right = 250.0
+margin_bottom = 87.5
+rect_min_size = Vector2( 250, 87.5 )
+window_title = "Set the shortcut"
+dialog_text = "Press a key or a key combination to set the shortcut"
+dialog_hide_on_ok = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnteredShortcut" type="Label" parent="Popups/ShortcutSelector"]
+margin_left = 8.0
+margin_top = 22.0
+margin_right = 341.0
+margin_bottom = 51.5
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/Tree" to="." method="_on_Tree_item_selected"]
@@ -441,3 +656,6 @@ color = Color( 0, 0, 0, 0 )
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth" to="." method="_on_ImageDefaultWidth_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight" to="." method="_on_ImageDefaultHeight_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor" to="." method="_on_DefaultBackground_color_changed"]
+[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="confirmed" from="Popups/ShortcutSelector" to="." method="_on_ShortcutSelector_confirmed"]
+[connection signal="popup_hide" from="Popups/ShortcutSelector" to="." method="_on_ShortcutSelector_popup_hide"]

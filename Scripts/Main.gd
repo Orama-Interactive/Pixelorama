@@ -41,33 +41,33 @@ func _ready() -> void:
 			OS.window_size = Global.config_cache.get_value("window", "size")
 
 	var file_menu_items := {
-		"New..." : KEY_MASK_CMD + KEY_N,
-		"Open..." : KEY_MASK_CMD + KEY_O,
-		"Save..." : KEY_MASK_CMD + KEY_S,
-		"Save as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_S,
-		"Import..." : KEY_MASK_CMD + KEY_I,
-		"Export..." : KEY_MASK_CMD + KEY_E,
-		"Export as..." : KEY_MASK_SHIFT + KEY_MASK_CMD + KEY_E,
-		"Quit" : KEY_MASK_CMD + KEY_Q
+		"New..." : InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
+		"Open..." : InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
+		"Save..." : InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
+		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
+		"Import..." : InputMap.get_action_list("import_file")[0].get_scancode_with_modifiers(),
+		"Export..." : InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
+		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
+		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
 		}
 	var edit_menu_items := {
-		"Undo" : KEY_MASK_CMD + KEY_Z,
-		"Redo" : KEY_MASK_CMD + KEY_Y,
+		"Undo" : InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
+		"Redo" : InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
 		"Clear Selection" : 0,
 		"Preferences" : 0
 		}
 	var view_menu_items := {
-		"Tile Mode" : KEY_MASK_CMD + KEY_T,
-		"Show Grid" : KEY_MASK_CMD + KEY_G,
-		"Show Rulers" : KEY_MASK_CMD + KEY_R,
-		"Show Guides" : KEY_MASK_CMD + KEY_F,
+		"Tile Mode" : InputMap.get_action_list("tile_mode")[0].get_scancode_with_modifiers(),
+		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
+		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
+		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
 		"Show Animation Timeline" : 0
 		}
 	var image_menu_items := {
 		"Scale Image" : 0,
 		"Crop Image" : 0,
-		"Flip Horizontal" : KEY_MASK_SHIFT + KEY_H,
-		"Flip Vertical" : KEY_MASK_SHIFT + KEY_V,
+		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
+		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
 		"Rotate Image" : 0,
 		"Invert colors" : 0,
 		"Desaturation" : 0,
