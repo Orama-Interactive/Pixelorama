@@ -9,10 +9,10 @@ func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
 	if Global.canvases[frame] in Global.layers[layer][5]:
 		get_node("LinkedIndicator").visible = true
-		popup_menu.set_item_disabled(5, false) # Unlink cel
+		popup_menu.set_item_disabled(4, false) # Unlink cel
 	else:
 		get_node("LinkedIndicator").visible = false
-		popup_menu.set_item_disabled(5, true) # Unlink cel
+		popup_menu.set_item_disabled(4, true) # Unlink cel
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
@@ -87,11 +87,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			change_frame_order(-1)
 		3: # Move Right
 			change_frame_order(1)
-		4: # Add Frame Tag
-			Global.tag_dialog.popup_centered()
-			Global.tag_dialog.get_node("GridContainer/FromSpinBox").value = frame + 1
-			Global.tag_dialog.get_node("GridContainer/ToSpinBox").value = frame + 1
-		5: # Unlink Cel
+		4: # Unlink Cel
 			var cel_index : int = Global.layers[layer][5].find(Global.canvases[frame])
 			Global.layers[layer][5].remove(cel_index)
 			_ready()
