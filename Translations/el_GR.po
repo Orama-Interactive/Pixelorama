@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-03 00:50\n"
+"PO-Revision-Date: 2020-04-07 16:17\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -203,6 +203,24 @@ msgstr "Άνοιγμα Φακέλου"
 
 msgid "All frames as multiple files"
 msgstr "Όλα τα καρέ ως ξεχωριστά αρχεία"
+
+msgid "All frames as a single file animation"
+msgstr ""
+
+msgid "Background:"
+msgstr ""
+
+msgid "Direction:"
+msgstr ""
+
+msgid "Forward"
+msgstr ""
+
+msgid "Backwards"
+msgstr ""
+
+msgid "Ping-Pong"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Εξαγωγή αυτού του καρέ"
