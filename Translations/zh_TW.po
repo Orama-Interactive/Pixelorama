@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-03 00:50\n"
+"PO-Revision-Date: 2020-04-07 16:17\n"
 
 msgid "OK"
 msgstr "確定"
@@ -202,6 +202,24 @@ msgstr "打開資料夾"
 
 msgid "All frames as multiple files"
 msgstr "影格各自為獨立檔案"
+
+msgid "All frames as a single file animation"
+msgstr ""
+
+msgid "Background:"
+msgstr ""
+
+msgid "Direction:"
+msgstr ""
+
+msgid "Forward"
+msgstr ""
+
+msgid "Backwards"
+msgstr ""
+
+msgid "Ping-Pong"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "個別輸出"
