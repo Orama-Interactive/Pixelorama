@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-03 01:51\n"
+"PO-Revision-Date: 2020-04-07 16:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -203,6 +203,24 @@ msgstr "Apri una cartella"
 
 msgid "All frames as multiple files"
 msgstr "Tutti i fotogrammi come file multipli"
+
+msgid "All frames as a single file animation"
+msgstr ""
+
+msgid "Background:"
+msgstr ""
+
+msgid "Direction:"
+msgstr ""
+
+msgid "Forward"
+msgstr ""
+
+msgid "Backwards"
+msgstr ""
+
+msgid "Ping-Pong"
+msgstr ""
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Esporta il frame corrente"
