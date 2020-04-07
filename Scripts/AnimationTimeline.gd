@@ -9,7 +9,7 @@ onready var tag_scroll_container : ScrollContainer = $AnimationContainer/Timelin
 
 func _ready() -> void:
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
-
+	Global.animation_timer.wait_time = 1 / fps
 
 func _h_scroll_changed(value : float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
