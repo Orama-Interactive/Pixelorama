@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-08 17:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -283,7 +283,7 @@ msgid "Guides & Grid"
 msgstr "Guide & Griglia"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Collegamenti"
 
 msgid "General Options"
 msgstr "Opzioni generali"
@@ -889,38 +889,38 @@ msgid "Templates:"
 msgstr "Modelli:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Preset"
 
 msgid "Default"
-msgstr ""
+msgstr "Predefinito"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personalizzato"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Selezione rettangolare"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Selettore colore"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Matita"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Gomma da cancellare"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Secchio"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Lucido/Scuro"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Imposta il collegamento"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Premi un tasto o una combinazione di tasti per impostare il collegamento"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Già assegnato"
 
