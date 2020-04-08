@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-07 19:52\n"
+"PO-Revision-Date: 2020-04-08 15:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -281,6 +281,9 @@ msgstr "Темы оформления"
 
 msgid "Guides & Grid"
 msgstr "Направляющие и сетка"
+
+msgid "Shortcuts"
+msgstr ""
 
 msgid "General Options"
 msgstr "Общие настройки"
@@ -883,4 +886,40 @@ msgstr "Фиксированные пропорции:"
 
 msgid "Templates:"
 msgstr "Шаблоны:"
+
+msgid "Preset"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "Rectangular Selection"
+msgstr ""
+
+msgid "Color Picker"
+msgstr ""
+
+msgid "Pencil"
+msgstr ""
+
+msgid "Eraser"
+msgstr ""
+
+msgid "Bucket"
+msgstr ""
+
+msgid "Lighten/Darken"
+msgstr ""
+
+msgid "Set the shortcut"
+msgstr ""
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr ""
+
+msgid "Already assigned"
+msgstr ""
 
