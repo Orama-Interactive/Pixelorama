@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-07 19:43\n"
+"PO-Revision-Date: 2020-04-08 15:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -281,6 +281,9 @@ msgstr "Temi"
 
 msgid "Guides & Grid"
 msgstr "Guide & Griglia"
+
+msgid "Shortcuts"
+msgstr ""
 
 msgid "General Options"
 msgstr "Opzioni generali"
@@ -884,4 +887,40 @@ msgstr "Blocca rapporto d'aspetto:"
 
 msgid "Templates:"
 msgstr "Modelli:"
+
+msgid "Preset"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "Rectangular Selection"
+msgstr ""
+
+msgid "Color Picker"
+msgstr ""
+
+msgid "Pencil"
+msgstr ""
+
+msgid "Eraser"
+msgstr ""
+
+msgid "Bucket"
+msgstr ""
+
+msgid "Lighten/Darken"
+msgstr ""
+
+msgid "Set the shortcut"
+msgstr ""
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr ""
+
+msgid "Already assigned"
+msgstr ""
 
