@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-08 18:43\n"
+"PO-Revision-Date: 2020-04-08 19:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -900,26 +900,26 @@ msgid "Rectangular Selection"
 msgstr "Прямоугольное выделение"
 
 msgid "Color Picker"
-msgstr "Выбор цвета"
+msgstr "Выбор цвета (пипетка)"
 
 msgid "Pencil"
 msgstr "Карандаш"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Ластик"
 
 msgid "Bucket"
 msgstr ""
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Осветлить/затемнить"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Выставить горячую(ие) клавишу(и)"
 
 msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Уже назначено"
 
