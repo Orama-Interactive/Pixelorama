@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-08 09:40\n"
+"PO-Revision-Date: 2020-04-08 09:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -213,13 +213,13 @@ msgid "Direction:"
 msgstr "Richtung:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Vorwärts"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Rückwärts"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "Exportiere aktuellen Frame"
