@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-07 16:17\n"
+"PO-Revision-Date: 2020-04-08 00:36\n"
 
 msgid "OK"
 msgstr "确定"
@@ -205,22 +205,22 @@ msgid "All frames as multiple files"
 msgstr "所有帧作为多个文件"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "所有帧作为单个文件动画"
 
 msgid "Background:"
-msgstr ""
+msgstr "背景："
 
 msgid "Direction:"
-msgstr ""
+msgstr "方向："
 
 msgid "Forward"
-msgstr ""
+msgstr "向前"
 
 msgid "Backwards"
-msgstr ""
+msgstr "向后"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "乒乓"
 
 msgid "EXPORT_CURRENT_FRAME_LABEL"
 msgstr "导出当前帧"
@@ -880,8 +880,8 @@ msgid "Default Fill Color:"
 msgstr "默认填充颜色:"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "锁定长宽比："
 
 msgid "Templates:"
-msgstr ""
+msgstr "模板："
 
