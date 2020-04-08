@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-07 16:17\n"
+"PO-Revision-Date: 2020-04-08 09:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -204,13 +204,13 @@ msgid "All frames as multiple files"
 msgstr "Alle Frames als mehrere Dateien"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Alle Frames als Animation für eine einzelne Datei"
 
 msgid "Background:"
-msgstr ""
+msgstr "Hintergrund:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Richtung:"
 
 msgid "Forward"
 msgstr ""
