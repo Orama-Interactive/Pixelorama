@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-08 17:05\n"
 
 msgid "OK"
 msgstr "确定"
@@ -283,7 +283,7 @@ msgid "Guides & Grid"
 msgstr "辅助线和网格"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "快捷键"
 
 msgid "General Options"
 msgstr "常规选项"
@@ -889,38 +889,38 @@ msgid "Templates:"
 msgstr "模板："
 
 msgid "Preset"
-msgstr ""
+msgstr "预设"
 
 msgid "Default"
-msgstr ""
+msgstr "默认"
 
 msgid "Custom"
-msgstr ""
+msgstr "自定义"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "矩形选区"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "拾色器"
 
 msgid "Pencil"
-msgstr ""
+msgstr "铅笔"
 
 msgid "Eraser"
-msgstr ""
+msgstr "橡皮擦"
 
 msgid "Bucket"
-msgstr ""
+msgstr "存储桶"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "亮色/暗色"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "设置快捷键"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "按一个键或组合键设置快捷方式"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "已分配"
 
