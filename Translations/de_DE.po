@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-08 19:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -282,7 +282,7 @@ msgid "Guides & Grid"
 msgstr "Guides & Gitter"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Tastenkürzel"
 
 msgid "General Options"
 msgstr "Allgemeine Optionen"
@@ -888,38 +888,38 @@ msgid "Templates:"
 msgstr "Vorlagen:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Voreinstellung"
 
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 msgid "Custom"
-msgstr ""
+msgstr "Benutzerdefiniert"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Rechteckige Auswahl"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Farbauswahl"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Stift"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Radierer"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Eimer"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Erhellen/Verdunkeln"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Tastenkürzel einrichten"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Drücken Sie eine Taste oder eine Tastenkombination, um die Verknüpfung zu setzen"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Bereits zugewiesen"
 
