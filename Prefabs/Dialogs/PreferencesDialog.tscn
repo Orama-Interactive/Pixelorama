@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-visible = true
 margin_right = 430.0
 margin_bottom = 1347.0
 rect_min_size = Vector2( 430, 0 )

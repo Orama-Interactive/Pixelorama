@@ -329,6 +329,8 @@ func change_theme(ID : int) -> void:
 	# Make sure the frame text gets updated
 	Global.current_frame = Global.current_frame
 
+	$Popups/ShortcutSelector.theme = main_theme
+
 
 func apply_shortcuts_preset(preset) -> void:
 	for action in preset:
