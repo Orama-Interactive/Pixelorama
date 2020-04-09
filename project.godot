@@ -59,6 +59,7 @@ config/Version="v0.7"
 
 Global="*res://Scripts/Global.gd"
 Import="*res://Scripts/Import.gd"
+OpenSave="*res://Scripts/OpenSave.gd"
 
 [debug]
 
