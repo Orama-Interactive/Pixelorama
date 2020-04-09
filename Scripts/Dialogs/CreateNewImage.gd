@@ -30,7 +30,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
 	var height : int = height_value.value
 	var fill_color : Color = fill_color_node.color
-	Global.control.clear_canvases()
+	Global.clear_canvases()
 	Global.layers.clear()
 	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
 	# will new frames be linked boolean (4), Array of linked frames (5)]

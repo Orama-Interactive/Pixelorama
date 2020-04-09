@@ -4,8 +4,11 @@ var current_save_path := ""
 
 func open_pxo_file(path : String) -> void:
 	var file := File.new()
-	var err := file.open(path, File.READ)
-	if err != OK: # An error occured
+	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+	if err == ERR_FILE_UNRECOGNIZED:
+		err =  file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
+
+	if err != OK:
 		file.close()
 		OS.alert("Can't load file")
 		return
@@ -15,7 +18,7 @@ func open_pxo_file(path : String) -> void:
 	var file_minor_version = int(file_version.substr(3, 1))
 
 	if file_major_version == 0 and file_minor_version < 5:
-		OS.alert("File is from an older version of Pixelorama, as such it might not work properly")
+		Global.notification_label("File is from an older version of Pixelorama, as such it might not work properly")
 
 	var frame := 0
 	Global.layers.clear()
@@ -34,7 +37,7 @@ func open_pxo_file(path : String) -> void:
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
-	clear_canvases()
+	Global.clear_canvases()
 	while frame_line == "--": # Load frames
 		var canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 		Global.canvas = canvas
@@ -137,7 +140,7 @@ func save_pxo_file(path : String) -> void:
 	current_save_path = path
 
 	var file := File.new()
-	var err := file.open(path, File.WRITE)
+	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
 	if err == OK:
 		# Store Pixelorama version
 		file.store_line(ProjectSettings.get_setting("application/config/Version"))
@@ -212,15 +215,3 @@ func save_pxo_file(path : String) -> void:
 
 	Global.window_title = current_save_path.get_file() + " - Pixelorama"
 	Global.notification_label("File saved")
-
-
-func clear_canvases() -> void:
-	for child in Global.canvas_parent.get_children():
-		if child is Canvas:
-			child.queue_free()
-	Global.canvases.clear()
-	Global.animation_tags.clear()
-	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
-
-	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
-	Global.undo_redo.clear_history(false)

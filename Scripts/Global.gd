@@ -499,6 +499,17 @@ func canvases_changed(value : Array) -> void:
 
 			layers[i][3].add_child(frame_button)
 
+func clear_canvases() -> void:
+	for child in Global.canvas_parent.get_children():
+		if child is Canvas:
+			child.queue_free()
+	Global.canvases.clear()
+	Global.animation_tags.clear()
+	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+
+	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
+	Global.undo_redo.clear_history(false)
+
 func layers_changed(value : Array) -> void:
 	layers = value
 	if layers_changed_skip:
