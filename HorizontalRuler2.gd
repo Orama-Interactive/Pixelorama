@@ -9,11 +9,11 @@ var minor_subdivision := 4
 var first : Vector2
 var last : Vector2
 
-onready var _prev_camera_offset: Vector2 = Global.camera.offset
-onready var _prev_camera_zoom: Vector2 = Global.camera.zoom
+onready var _prev_camera_offset: Vector2 = Global.camera2.offset
+onready var _prev_camera_zoom: Vector2 = Global.camera2.zoom
 
 func _ready() -> void:
-	Global.main_viewport.connect("item_rect_changed", self, "update")
+	Global.second_viewport.connect("item_rect_changed", self, "update")
 
 # warning-ignore:unused_argument
 func _process(delta : float) -> void:
@@ -22,11 +22,11 @@ func _process(delta : float) -> void:
 		mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
 	else:
 		mouse_default_cursor_shape = Control.CURSOR_VSPLIT
-	if Global.camera.offset != _prev_camera_offset:
-		_prev_camera_offset = Global.camera.offset
+	if Global.camera2.offset != _prev_camera_offset:
+		_prev_camera_offset = Global.camera2.offset
 		update()
-	if Global.camera.zoom != _prev_camera_zoom:
-		_prev_camera_zoom = Global.camera.zoom
+	if Global.camera2.zoom != _prev_camera_zoom:
+		_prev_camera_zoom = Global.camera2.zoom
 		update()
 
 #Code taken and modified from Godot's source code
@@ -35,10 +35,10 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var zoom: float = 1 / Global.camera.zoom.x
+	var zoom: float = 1 / Global.camera2.zoom.x
 	transform.x = Vector2(zoom, zoom)
 
-	transform.origin = Global.main_viewport.rect_size / 2 + Global.camera.offset * -zoom
+	transform.origin = Global.second_viewport.rect_size / 2 + Global.camera2.offset * -zoom
 
 	var basic_rule := 100.0
 	var i := 0
@@ -56,7 +56,7 @@ func _draw() -> void:
 	minor_subdivide = minor_subdivide.scaled(Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision))
 
 	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Vector2.ZERO)
-	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Global.main_viewport.rect_size)
+	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Global.second_viewport.rect_size)
 
 	for i in range(ceil(first.x), ceil(last.x)):
 		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0))

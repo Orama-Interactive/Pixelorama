@@ -130,6 +130,9 @@ custom_styles/panel = ExtResource( 3 )
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 1010.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FileMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
 margin_right = 27.0
@@ -943,11 +946,58 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="HorizontalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 margin_right = 704.0
+margin_bottom = 408.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="PanelContainer" type="MarginContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+margin_right = 692.0
+margin_bottom = 408.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer"]
+margin_right = 692.0
+margin_bottom = 408.0
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/ViewportContainer"]
+size = Vector2( 692, 408 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/ViewportContainer/Viewport" instance=ExtResource( 16 )]
+
+[node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/ViewportContainer/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 17 )
+
+[node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/ViewportContainer/Viewport"]
+visible = false
+z_index = 1
+color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+invert_enable = true
+invert_border = 0.5
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+script = ExtResource( 18 )
+
+[node name="HorizontalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer"]
+margin_right = 692.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/focus = ExtResource( 13 )
@@ -955,24 +1005,13 @@ custom_styles/normal = ExtResource( 13 )
 action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-margin_top = 16.0
-margin_right = 704.0
-margin_bottom = 408.0
-size_flags_vertical = 3
-custom_constants/autohide = 0
-
-[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
-margin_right = 692.0
-margin_bottom = 392.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 0
-
-[node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+[node name="VerticalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer"]
 margin_right = 16.0
-margin_bottom = 392.0
+margin_bottom = 408.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -986,54 +1025,63 @@ action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 15 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
-margin_left = 16.0
-margin_right = 692.0
-margin_bottom = 392.0
-focus_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 676, 392 )
-handle_input_locally = false
-usage = 0
-render_target_update_mode = 3
-
-[node name="Canvas" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 16 )]
-
-[node name="Camera2D" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
-current = true
-zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 17 )
-
-[node name="SelectionRectangle" type="Polygon2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
-visible = false
-z_index = 1
-color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
-invert_enable = true
-invert_border = 0.5
-polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
-script = ExtResource( 18 )
-
-[node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+[node name="PanelContainer2" type="MarginContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
 margin_left = 704.0
 margin_right = 704.0
-margin_bottom = 392.0
+margin_bottom = 408.0
+rect_clip_content = true
+custom_constants/margin_right = -16
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2"]
+margin_right = 16.0
+margin_bottom = 408.0
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 392 )
+[node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/ViewportContainer2"]
+size = Vector2( 16, 408 )
 handle_input_locally = false
 render_target_update_mode = 3
 script = ExtResource( 19 )
 
-[node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 17 )
+
+[node name="HorizontalRuler2" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+action_mode = 0
+enabled_focus_mode = 0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VerticalRuler2" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2"]
+margin_right = 16.0
+margin_bottom = 408.0
+rect_min_size = Vector2( 16, 0 )
+focus_mode = 0
+mouse_default_cursor_shape = 15
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+action_mode = 0
+enabled_focus_mode = 0
+script = ExtResource( 15 )
 
 [node name="AnimationTimeline" parent="MenuAndUI/UI/CanvasAndTimeline" instance=ExtResource( 20 )]
 margin_top = 420.0
@@ -1229,17 +1277,21 @@ columns = 5
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Please Confirm..."
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
 margin_bottom = 348.0
+rect_min_size = Vector2( 150, 52.5 )
 window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+show_hidden_files = true
+current_dir = "F:/Documents/Godot/3.2/Pixelorama"
+current_path = "F:/Documents/Godot/3.2/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1250,37 +1302,52 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 3.0
 margin_bottom = 48.0
+rect_min_size = Vector2( 150, 52.5 )
 window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+show_hidden_files = true
+current_dir = "F:/Documents/Godot/3.2/Pixelorama"
+current_path = "F:/Documents/Godot/3.2/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
+rect_min_size = Vector2( 150, 52.5 )
+show_hidden_files = true
+current_dir = "F:/Documents/Godot/3.2/Pixelorama"
+current_path = "F:/Documents/Godot/3.2/Pixelorama/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+rect_min_size = Vector2( 150, 52.5 )
 window_title = "Save before exiting?"
 resizable = true
 dialog_text = "You have unsaved progress. How do you wish to proceed?"
@@ -1297,11 +1364,13 @@ dialog_text = "This is an error message!"
 [node name="EditPalettePopup" parent="." instance=ExtResource( 35 )]
 
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 36 )]
+rect_min_size = Vector2( 150, 52.5 )
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+show_hidden_files = true
+current_dir = "F:/Documents/Godot/3.2/Pixelorama"
+current_path = "F:/Documents/Godot/3.2/Pixelorama/"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
@@ -1344,12 +1413,14 @@ visible = false
 [connection signal="item_selected" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions/RightForColorOptions" to="." method="_on_RightForColorOptions_item_selected"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/ToolPanel/Tools/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirroring/RightMirrorButtons/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
-[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
-[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer/VerticalRuler" method="_on_VerticalRuler_pressed"]
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/HorizontalRuler2" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/HorizontalRuler2" method="_on_HorizontalRuler_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/VerticalRuler2" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/PanelContainer2/VerticalRuler2" method="_on_VerticalRuler_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
