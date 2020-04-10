@@ -32,7 +32,7 @@ func _on_VerticalFrames_value_changed(value) -> void:
 func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.control.opensprite_file_selected = true
 	if !new_frame: # If we're not adding a new frame, delete the previous
-		Global.control.clear_canvases()
+		Global.clear_canvases()
 
 	var first_path : String = paths[0]
 	var i : int = Global.canvases.size()
