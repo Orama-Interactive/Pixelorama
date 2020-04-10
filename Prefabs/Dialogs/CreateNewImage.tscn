@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/Dialogs/CreateNewImage.gd" type="Script" id=1]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
+visible = true
 margin_right = 205.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 250, 200 )
@@ -47,10 +48,11 @@ text = "Templates:"
 
 [node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
 margin_left = 114.0
-margin_right = 188.0
+margin_right = 189.0
 margin_bottom = 20.0
 toggle_mode = false
-items = [ "Default", null, false, 0, null, "16x16", null, false, 1, null, "32x32", null, false, 2, null, "64x64", null, false, 3, null, "128x128", null, false, 4, null ]
+text = "Default"
+items = [ "Default", null, false, 0, null ]
 selected = 0
 
 [node name="RatioLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
@@ -62,7 +64,7 @@ text = "Lock aspect ratio:"
 [node name="RatioCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
 margin_left = 114.0
 margin_top = 24.0
-margin_right = 188.0
+margin_right = 189.0
 margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -77,7 +79,7 @@ text = "Width:"
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
 margin_left = 114.0
 margin_top = 52.0
-margin_right = 188.0
+margin_right = 189.0
 margin_bottom = 76.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -94,7 +96,7 @@ text = "Height:"
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
 margin_left = 114.0
 margin_top = 80.0
-margin_right = 188.0
+margin_right = 189.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -111,7 +113,7 @@ text = "Fill with color:"
 [node name="FillColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
 margin_left = 114.0
 margin_top = 108.0
-margin_right = 188.0
+margin_right = 189.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 64, 20 )
 color = Color( 0, 0, 0, 0 )
