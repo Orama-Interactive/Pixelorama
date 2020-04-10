@@ -7,6 +7,7 @@ enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 var root_directory := "."
 var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
+
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
 var undo_redo : UndoRedo
