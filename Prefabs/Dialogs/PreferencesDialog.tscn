@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
+visible = true
 margin_right = 430.0
 margin_bottom = 1347.0
 rect_min_size = Vector2( 430, 0 )
@@ -110,9 +111,9 @@ text = "Show right tool icon"
 
 [node name="PressureSentivity" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
 visible = false
-margin_top = 46.0
+margin_top = 116.0
 margin_right = 334.0
-margin_bottom = 66.0
+margin_bottom = 136.0
 
 [node name="PressureSensitivityLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity"]
 margin_top = 3.0
