@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-11 15:48\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -553,6 +553,12 @@ msgid "Area of the same color"
 msgstr ""
 
 msgid "All pixels of the same color"
+msgstr ""
+
+msgid "Same color area"
+msgstr ""
+
+msgid "Same color pixels"
 msgstr ""
 
 msgid "Lighten"
