@@ -245,6 +245,7 @@ func _on_Language_pressed(button : Button) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 	# Update Translations
+	Global.update_hint_tooltips()
 	_on_PreferencesDialog_popup_hide()
 	_on_PreferencesDialog_about_to_show(true)
 
@@ -357,6 +358,7 @@ func toggle_shortcut_buttons(enabled : bool) -> void:
 func set_action_shortcut(action : String, old_input : InputEventKey, new_input : InputEventKey) -> void:
 	InputMap.action_erase_event(action, old_input)
 	InputMap.action_add_event(action, new_input)
+	Global.update_hint_tooltips()
 
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
