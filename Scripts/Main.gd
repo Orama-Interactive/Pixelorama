@@ -448,6 +448,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		for i in range(1, Global.left_tool_options_container.get_child_count()):
 			Global.left_tool_options_container.get_child(i).visible = false
 
+		Global.left_tool_options_container.get_node("EmptySpacer").visible = true
+
 		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":
 			Global.left_brush_type_container.visible = true
@@ -479,6 +481,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		# Start from 1, so the label won't get invisible
 		for i in range(1, Global.right_tool_options_container.get_child_count()):
 			Global.right_tool_options_container.get_child(i).visible = false
+
+		Global.right_tool_options_container.get_node("EmptySpacer").visible = true
 
 		# Tool options visible depending on the selected tool
 		if current_action == "Pencil":

@@ -3,11 +3,9 @@
 [ext_resource path="res://Scripts/Dialogs/CreateNewImage.gd" type="Script" id=1]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
-visible = true
 margin_right = 205.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 250, 200 )
-window_title = "Please Confirm..."
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
