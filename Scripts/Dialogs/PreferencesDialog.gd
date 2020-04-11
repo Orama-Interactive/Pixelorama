@@ -60,7 +60,7 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "pressure_sensitivity"):
 		Global.pressure_sensitivity_mode = Global.config_cache.get_value("preferences", "pressure_sensitivity")
 		sensitivity_option.selected = Global.pressure_sensitivity_mode
-		
+
 	if Global.config_cache.has_section_key("preferences", "show_left_tool_icon"):
 		Global.show_left_tool_icon = Global.config_cache.get_value("preferences", "show_left_tool_icon")
 		left_tool_icon.pressed = Global.show_left_tool_icon
@@ -409,7 +409,7 @@ func _on_DefaultBackground_color_changed(color: Color) -> void:
 
 
 func _on_LeftIndicatorCheckbox_toggled(button_pressed : bool) -> void:
-	Global.left_square_indicator_visible = button_pressed	
+	Global.left_square_indicator_visible = button_pressed
 
 
 func _on_RightIndicatorCheckbox_toggled(button_pressed : bool) -> void:
