@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-11 15:48\n"
+"PO-Revision-Date: 2020-04-11 18:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -573,10 +573,10 @@ msgid "All pixels of the same color"
 msgstr "Все пиксели такого же цвета"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Область того же цвета"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Пиксели того же цвета"
 
 msgid "Lighten"
 msgstr "Осветлить"
