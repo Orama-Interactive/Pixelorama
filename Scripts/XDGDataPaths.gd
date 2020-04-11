@@ -1,7 +1,12 @@
 extends Node
 
+# These are *with* the config subdirectory name
 var xdg_data_home : String
 var xdg_data_dirs : Array
+
+# These are *without* the config subdirectory name
+var raw_xdg_data_home : String
+var raw_xdg_data_dirs : Array
 
 # Default location for xdg_data_home relative to $HOME
 const default_xdg_data_home_rel := ".local/share"
@@ -17,19 +22,30 @@ const brushes_data_subdirectory := "Brushes"
 # var b = "text"
 
 
+# Get if we should use XDG standard or not nyaaaa
+func use_xdg_standard() -> bool:
+	# see: https://docs.godotengine.org/en/latest/getting_started/workflow/export/feature_tags.html
+	return OS.has_feature("Linux") or OS.has_feature("BSD")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if OS.has_feature("X11"):
+	pass
+
+func _init():
+	if use_xdg_standard():
+		print("Detected system where we should use XDG basedir standard (currently Linux or BSD)")
 		var home := OS.get_environment("HOME")
-		xdg_data_home = home.plus_file(
+		raw_xdg_data_home = home.plus_file(
 			default_xdg_data_home_rel
-		).plus_file(
+		)
+		xdg_data_home = raw_xdg_data_home.plus_file(
 			config_subdir_name
 		)
 		
 		# Create defaults
 		xdg_data_dirs = []
-		for default_loc in default_xdg_data_dirs:
+		raw_xdg_data_dirs = default_xdg_data_dirs
+		for default_loc in raw_xdg_data_dirs:
 			xdg_data_dirs.append(
 				default_loc.plus_file(config_subdir_name)
 			)
@@ -39,18 +55,22 @@ func _ready():
 		# See: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 		# Checks the xdg data home var
 		if OS.has_environment("XDG_DATA_HOME"):
-			xdg_data_home = OS.get_environment("XDG_DATA_HOME").plus_file(config_subdir_name)
+			raw_xdg_data_home = OS.get_environment("XDG_DATA_HOME")
+			xdg_data_home = raw_xdg_data_home.plus_file(config_subdir_name)
 		# Checks the list of files var, and processes them.
 		if OS.has_environment("XDG_DATA_DIRS"):
 			var raw_env_var := OS.get_environment("XDG_DATA_DIRS")
 			# includes empties.
 			var unappended_subdirs := raw_env_var.split(":", true)
+			raw_xdg_data_dirs = unappended_subdirs
 			xdg_data_dirs = []
-			for unapp_subdir in unappended_subdirs:
+			for unapp_subdir in raw_xdg_data_dirs:
 				xdg_data_dirs.append(unapp_subdir.plus_file(config_subdir_name))
 			
 	else:
-		xdg_data_home = Global.root_directory
+		raw_xdg_data_home = Global.root_directory
+		xdg_data_home = raw_xdg_data_home.plus_file(config_subdir_name)
+		raw_xdg_data_dirs = []
 		xdg_data_dirs = []
 	 
 
@@ -85,7 +105,26 @@ func get_palette_write_path() -> String:
 func get_brushes_write_path() -> String:
 	return xdg_data_home.plus_file(brushes_data_subdirectory)
 
-
+# Ensure the user xdg directories exist:
+func ensure_xdg_user_dirs_exist() -> void:
+	var base_dir := Directory.new()
+	base_dir.open(raw_xdg_data_home)
+	# Ensure the main config directory exists.
+	if not base_dir.dir_exists(xdg_data_home):
+		base_dir.make_dir(xdg_data_home)
+		
+	var actual_data_dir := Directory.new()
+	actual_data_dir.open(xdg_data_home)
+	var palette_writing_dir := get_palette_write_path()
+	var brushes_writing_dir := get_brushes_write_path()
+	# Create the palette and brush dirs
+	if not actual_data_dir.dir_exists(palette_writing_dir):
+		actual_data_dir.make_dir(palette_writing_dir)
+	if not actual_data_dir.dir_exists(brushes_writing_dir):
+		actual_data_dir.make_dir(brushes_writing_dir)
+	
+		
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
