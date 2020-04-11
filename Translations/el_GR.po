@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-11 21:34\n"
+"PO-Revision-Date: 2020-04-11 22:02\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -205,7 +205,7 @@ msgid "All frames as multiple files"
 msgstr "Όλα τα καρέ ως ξεχωριστά αρχεία"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Όλα τα καρέ ως ένα αρχείο κίνησης"
 
 msgid "Background:"
 msgstr "Υπόβαθρο:"
@@ -580,10 +580,10 @@ msgid "All pixels of the same color"
 msgstr "Όλα τα πίξελ ίδιου χρώματος"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Περιοχή ίδιου χρώματος"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Πίξελς ίδιου χρώματος"
 
 msgid "Lighten"
 msgstr "Φώτισμα"
@@ -652,10 +652,10 @@ msgstr "Μετάβαση στο τελευταίο καρέ\n"
 "(Ctrl+End)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Ρυθμίσεις Onion Skinning"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Ενεργοποίηση/απενεργοποίηση Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -699,10 +699,10 @@ msgid "Move Right"
 msgstr "Μετακίνηση Δεξιά"
 
 msgid "Add Frame Tag"
-msgstr ""
+msgstr "Προσθήκη Ετικέτας Καρέ"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Αποσύνδεση Cel"
 
 msgid "Layer"
 msgstr "Στρώση"
@@ -739,8 +739,8 @@ msgstr "Κλείδωμα/ξεκλείδωμα της στρώσης"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Ενεργοποίηση/Απενεργοποίηση σύνδεσης διαφανειών\n\n"
-"Οι συνδεδεμένες διαφάνειες μοιράζονται ανάμεσα σε πολλά καρέ"
+msgstr "Ενεργοποίηση/Απενεργοποίηση σύνδεσης cel\n\n"
+"Τα συνδεδεμένα cels μοιράζονται ανάμεσα σε πολλά καρέ"
 
 msgid "Palette"
 msgstr "Παλέτα"
@@ -896,19 +896,19 @@ msgid "Default Fill Color:"
 msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Κλείδωμα αναλογίας διαστάσεων:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Πρότυπα:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Προεπιλογές"
 
 msgid "Default"
-msgstr ""
+msgstr "Προεπιλογή"
 
 msgid "Custom"
-msgstr ""
+msgstr "Προσαρμοσμένο"
 
 msgid "Rectangular Selection"
 msgstr "Ορθογώνια επιλογή"
@@ -929,11 +929,11 @@ msgid "Lighten/Darken"
 msgstr "Φώτισμα/Σκούρημα"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Επιλέξτε μια συντόμευση"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Πατήστε ένα πλήκτρο ή συνδυασμό πλήκτρων για να ορίσετε τη συντόμευση"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Έχει ήδη εκχωρηθεί"
 
