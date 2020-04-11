@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-11 15:48\n"
+"PO-Revision-Date: 2020-04-11 21:09\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -220,15 +220,6 @@ msgid "Backwards"
 msgstr ""
 
 msgid "Ping-Pong"
-msgstr ""
-
-msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr ""
-
-msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr ""
-
-msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
 msgstr ""
 
 msgid "Columns"
@@ -462,25 +453,41 @@ msgstr "Eliri sen konservado"
 msgid "Utility Tools"
 msgstr "Utililoj"
 
-msgid "RECTSELECT_HT"
+msgid "Rectangular Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Press %s to move the content"
 msgstr ""
 
-msgid "COLORPICKER_HT"
+msgid "Color Picker\n"
+"Select a color from a pixel of the sprite\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Draw Tools"
 msgstr "Pentriloj"
 
-msgid "PENCIL_HT"
+msgid "Pencil\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr ""
 
-msgid "ERASER_HT"
+msgid "Eraser\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr ""
 
-msgid "BUCKET_HT"
+msgid "Bucket\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr ""
 
-msgid "LD_HT"
+msgid "Lighten/Darken\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Choose a color for the left tool"
