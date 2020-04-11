@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-11 15:48\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -570,6 +570,12 @@ msgstr "Vienādas krāsas laukums"
 
 msgid "All pixels of the same color"
 msgstr "Visus pikseļus vienādā krāsā"
+
+msgid "Same color area"
+msgstr ""
+
+msgid "Same color pixels"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Izgaismot"
