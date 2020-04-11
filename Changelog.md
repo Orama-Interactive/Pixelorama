@@ -4,43 +4,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.7] - Unreleased
+This update has been brought to you by the contributions of:
+Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Teashrock
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
 - Cel linking is now possible. This way, layers can be "shared" in multiple frames.
 - You can now group multiple frames with tags.
-- You can now export your projects to .gif files - Thanks to Martin Novák (novhack)!
-- A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite. Thanks to luiq54!
+- You can now export your projects to .gif files
+- A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
-- Users can change keyboard shortcut binding for tools - thanks to Martin Novák (novhack)!
-- Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
-- A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
-- Templates and a lock aspect ratio option have been added to the "Create new image" dialog - thanks to Gaarco!
+- Users can change keyboard shortcut binding for tools.
+- Importing .pngs as palettes is now possible.
+- A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
+- Templates and a lock aspect ratio option have been added to the "Create new image" dialog.
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
-- Esperanto translation - thanks to Teashrock!
-- When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation - thanks to luiq54!
+- Esperanto translation.
+- When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
 - You can now zoom in with the `+` key, and zoom out with `-`.
+- The left and right tool icon options (found in Preferences) are now saved and restored on startup.
 
 ### Changed
 - The UI - and especially the timeline - has been revamped!
-- The export dialog has also been revamped - thanks to thanks to Martin Novák (novhack)!
+- The export dialog has also been revamped.
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
-- LineEdits lose focus when the user presses Enter - thanks to Gaarco!
+- LineEdits lose focus when the user presses Enter.
 - Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
+- The Godot theme has changed.
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
 - The default window size is now 1280x720, and the minimum window size is 1024x576.
+- .pxo files now use ZSTD compression to result in smaller file sizes.
 - The splash screen is no longer purple, it now gets affected by the chosen theme.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
-- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else - Thanks to Gaarco! (Issue #167)
+- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else.! (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
 
 ## [v0.6.2] - 17-02-2020
