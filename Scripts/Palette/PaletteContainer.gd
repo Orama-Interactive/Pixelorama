@@ -177,7 +177,7 @@ func _load_palettes() -> void:
 					Global.palette_option_button.select(index)
 
 	if not "Default" in Global.palettes && Global.palettes.size() > 0:
-		Global.control._on_PaletteOptionButton_item_selected(0)
+		Global.palette_container._on_PaletteOptionButton_item_selected(0)
 
 # Get the palette files in a single directory.
 # if it does not exist, return []
