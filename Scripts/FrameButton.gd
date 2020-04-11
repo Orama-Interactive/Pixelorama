@@ -6,7 +6,7 @@ var layer := 0
 onready var popup_menu := $PopupMenu
 
 func _ready() -> void:
-	hint_tooltip = "Frame: %s, Layer: %s" % [frame, layer]
+	hint_tooltip = "Frame: %s, Layer: %s" % [frame + 1, layer]
 	if Global.canvases[frame] in Global.layers[layer][5]:
 		get_node("LinkedIndicator").visible = true
 		popup_menu.set_item_disabled(4, false) # Unlink cel

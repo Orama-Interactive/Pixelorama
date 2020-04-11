@@ -132,8 +132,16 @@ func _on_FirstFrame_pressed() -> void:
 	Global.current_frame = 0
 
 func _on_AnimationTimer_timeout() -> void:
+	var first_frame := 0
+	var last_frame := Global.canvases.size() - 1
+	if Global.play_only_tags:
+		for tag in Global.animation_tags:
+			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
+				first_frame = tag[2] - 1
+				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
+
 	if animation_forward:
-		if Global.current_frame < Global.canvases.size() - 1:
+		if Global.current_frame < last_frame:
 			Global.current_frame += 1
 		else:
 			match animation_loop:
@@ -142,13 +150,13 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_backwards.pressed = false
 					Global.animation_timer.stop()
 				1: # Cycle loop
-					Global.current_frame = 0
+					Global.current_frame = first_frame
 				2: # Ping pong loop
 					animation_forward = false
 					_on_AnimationTimer_timeout()
 
 	else:
-		if Global.current_frame > 0:
+		if Global.current_frame > first_frame:
 			Global.current_frame -= 1
 		else:
 			match animation_loop:
@@ -157,7 +165,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_forward.pressed = false
 					Global.animation_timer.stop()
 				1: # Cycle loop
-					Global.current_frame = Global.canvases.size() - 1
+					Global.current_frame = last_frame
 				2: # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()

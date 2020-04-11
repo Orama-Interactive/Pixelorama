@@ -35,6 +35,7 @@ var transparent_background : ImageTexture
 var selected_pixels := []
 var image_clipboard : Image
 var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
+var play_only_tags := true
 
 # warning-ignore:unused_class_variable
 var theme_type := "Dark"
