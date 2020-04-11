@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-11 15:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -570,6 +570,12 @@ msgstr "Przestrzeń o takim samym kolorze"
 
 msgid "All pixels of the same color"
 msgstr "Wszystkie piksele tego samego koloru"
+
+msgid "Same color area"
+msgstr ""
+
+msgid "Same color pixels"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Rozjaśnianie"
