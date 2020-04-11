@@ -25,7 +25,9 @@ const brushes_data_subdirectory := "Brushes"
 # Get if we should use XDG standard or not nyaaaa
 func use_xdg_standard() -> bool:
 	# see: https://docs.godotengine.org/en/latest/getting_started/workflow/export/feature_tags.html
-	return OS.has_feature("Linux") or OS.has_feature("BSD")
+	# return OS.has_feature("Linux") or OS.has_feature("BSD")
+	# Previous was unreliable and buggy >.< nyaa
+	return OS.get_name() == "X11"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -119,8 +121,10 @@ func ensure_xdg_user_dirs_exist() -> void:
 	var brushes_writing_dir := get_brushes_write_path()
 	# Create the palette and brush dirs
 	if not actual_data_dir.dir_exists(palette_writing_dir):
+		print("Making directory %s" % [palette_writing_dir])
 		actual_data_dir.make_dir(palette_writing_dir)
 	if not actual_data_dir.dir_exists(brushes_writing_dir):
+		print("Making directory %s" % [brushes_writing_dir])
 		actual_data_dir.make_dir(brushes_writing_dir)
 	
 		
