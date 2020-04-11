@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-08 15:58\n"
+"PO-Revision-Date: 2020-04-11 15:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -571,6 +571,12 @@ msgstr "Περιοχή ίδιου χρώματος"
 
 msgid "All pixels of the same color"
 msgstr "Όλα τα πίξελ ίδιου χρώματος"
+
+msgid "Same color area"
+msgstr ""
+
+msgid "Same color pixels"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Φώτισμα"
