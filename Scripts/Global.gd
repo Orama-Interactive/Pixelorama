@@ -38,6 +38,7 @@ var transparent_background : ImageTexture
 var selected_pixels := []
 var image_clipboard : Image
 var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
+var play_only_tags := true
 
 # warning-ignore:unused_class_variable
 var theme_type := "Dark"
@@ -507,15 +508,15 @@ func canvases_changed(value : Array) -> void:
 			layers[i][3].add_child(frame_button)
 
 func clear_canvases() -> void:
-	for child in Global.canvas_parent.get_children():
+	for child in canvas_parent.get_children():
 		if child is Canvas:
 			child.queue_free()
-	Global.canvases.clear()
-	Global.animation_tags.clear()
-	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+	canvases.clear()
+	animation_tags.clear()
+	self.animation_tags = animation_tags # To execute animation_tags_changed()
 
-	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
-	Global.undo_redo.clear_history(false)
+	window_title = "(" + tr("untitled") + ") - Pixelorama"
+	undo_redo.clear_history(false)
 
 func layers_changed(value : Array) -> void:
 	layers = value
@@ -660,6 +661,53 @@ func animation_tags_changed(value : Array) -> void:
 		tag_c.rect_min_size.x = (size + 1) * 39
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
+
+
+func update_hint_tooltips() -> void:
+	var root = get_tree().get_root()
+
+	var rect_select : BaseButton = find_node_by_name(root, "RectSelect")
+	rect_select.hint_tooltip = tr("""Rectangular Selection
+
+%s for left mouse button
+%s for right mouse button
+
+Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
+
+	var color_picker : BaseButton = find_node_by_name(root, "ColorPicker")
+	color_picker.hint_tooltip = tr("""Color Picker
+Select a color from a pixel of the sprite
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_colorpicker_tool")[0].as_text(), InputMap.get_action_list("right_colorpicker_tool")[0].as_text()]
+
+	var pencil : BaseButton = find_node_by_name(root, "Pencil")
+	pencil.hint_tooltip = tr("""Pencil
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to make a line""") % [InputMap.get_action_list("left_pencil_tool")[0].as_text(), InputMap.get_action_list("right_pencil_tool")[0].as_text(), "Shift"]
+
+	var eraser : BaseButton = find_node_by_name(root, "Eraser")
+	eraser.hint_tooltip = tr("""Eraser
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as_text(), InputMap.get_action_list("right_eraser_tool")[0].as_text(), "Shift"]
+
+	var bucket : BaseButton = find_node_by_name(root, "Bucket")
+	bucket.hint_tooltip = tr("""Bucket
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_fill_tool")[0].as_text(), InputMap.get_action_list("right_fill_tool")[0].as_text()]
+
+	var ld : BaseButton = find_node_by_name(root, "LightenDarken")
+	ld.hint_tooltip = tr("""Lighten/Darken
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_lightdark_tool")[0].as_text(), InputMap.get_action_list("right_lightdark_tool")[0].as_text()]
 
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:

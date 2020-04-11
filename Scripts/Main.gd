@@ -148,6 +148,8 @@ func _ready() -> void:
 	for t in tools:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 
+	Global.update_hint_tooltips()
+
 	# Checks to see if it's 3.1.x
 	if Engine.get_version_info().major == 3 and Engine.get_version_info().minor < 2:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
