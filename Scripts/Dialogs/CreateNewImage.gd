@@ -8,7 +8,7 @@ onready var fill_color_node = $VBoxContainer/OptionsContainer/FillColor
 
 onready var size_value = Vector2()
 
-#Template Id identifier
+# Template Id identifier
 enum Templates {
 	TDefault = 0,
 	T16 = 1,
@@ -22,13 +22,13 @@ enum Templates {
 	SNES_NTSC = 9,
 	SNES_PAL = 10
 }
-#Template actual value, without Default because we get it from Global
+# Template actual value, without Default because we get it from Global
 var TResolutions = {
 	Templates.T16: Vector2(16,16),
 	Templates.T32: Vector2(32,32),
 	Templates.T64: Vector2(64,64),
 	Templates.T128: Vector2(128,128),
-	
+
 	Templates.GB: Vector2(160,144),
 	Templates.GBA: Vector2(240,160),
 	Templates.NES_NTSC: Vector2(256,224),
@@ -42,7 +42,7 @@ var TStrings ={
 	Templates.T32: "",
 	Templates.T64: "",
 	Templates.T128: "",
-	
+
 	Templates.GB: "GB",
 	Templates.GBA: "GBA",
 	Templates.NES_NTSC: "NES (NTSC)",
@@ -54,7 +54,7 @@ var TStrings ={
 func _ready() -> void:
 	ratio_box.connect("pressed", self, "_on_RatioCheckBox_toggled", [ratio_box.pressed])
 	templates_options.connect("item_selected", self, "_on_TemplatesOptions_item_selected")
-	
+
 	_CreateOptionList()
 
 func _CreateOptionList():
@@ -74,12 +74,12 @@ func _on_CreateNewImage_confirmed() -> void:
 	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
 	# will new frames be linked boolean (4), Array of linked frames (5)]
 	Global.layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
-	Global.current_layer = 0
 	Global.canvas = load("res://Prefabs/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
 
 	Global.canvases.append(Global.canvas)
 	Global.canvas_parent.add_child(Global.canvas)
+	Global.current_layer = 0
 	Global.canvases = Global.canvases # To trigger Global.canvases_changed()
 	Global.current_frame = 0
 	Global.layers = Global.layers # To trigger Global.layers_changed()
@@ -122,6 +122,6 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 	else:
 		width_value.value = Global.default_image_width
 		height_value.value = Global.default_image_height
-		
+
 	width_value.value = size_value.x
 	height_value.value = size_value.y

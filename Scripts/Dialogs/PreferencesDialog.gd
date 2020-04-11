@@ -11,6 +11,8 @@ onready var shortcuts = $HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts
 
 onready var smooth_zoom_button = $"HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom"
 onready var sensitivity_option = $"HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton"
+onready var left_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/LeftToolIconCheckbox
+onready var right_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/RightToolIconCheckbox
 
 onready var default_width_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth
 onready var default_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight
@@ -58,6 +60,13 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "pressure_sensitivity"):
 		Global.pressure_sensitivity_mode = Global.config_cache.get_value("preferences", "pressure_sensitivity")
 		sensitivity_option.selected = Global.pressure_sensitivity_mode
+
+	if Global.config_cache.has_section_key("preferences", "show_left_tool_icon"):
+		Global.show_left_tool_icon = Global.config_cache.get_value("preferences", "show_left_tool_icon")
+		left_tool_icon.pressed = Global.show_left_tool_icon
+	if Global.config_cache.has_section_key("preferences", "show_right_tool_icon"):
+		Global.show_right_tool_icon = Global.config_cache.get_value("preferences", "show_right_tool_icon")
+		right_tool_icon.pressed = Global.show_right_tool_icon
 
 	# Set default values for Grid & Guide options
 	if Global.config_cache.has_section_key("preferences", "grid_size"):
@@ -409,10 +418,14 @@ func _on_RightIndicatorCheckbox_toggled(button_pressed : bool) -> void:
 
 func _on_LeftToolIconCheckbox_toggled(button_pressed : bool) -> void:
 	Global.show_left_tool_icon = button_pressed
+	Global.config_cache.set_value("preferences", "show_left_tool_icon", Global.show_left_tool_icon)
+	Global.config_cache.save("user://cache.ini")
 
 
 func _on_RightToolIconCheckbox_toggled(button_pressed : bool) -> void:
 	Global.show_right_tool_icon = button_pressed
+	Global.config_cache.set_value("preferences", "show_right_tool_icon", Global.show_right_tool_icon)
+	Global.config_cache.save("user://cache.ini")
 
 
 func _on_Shortcut_button_pressed(button : Button) -> void:

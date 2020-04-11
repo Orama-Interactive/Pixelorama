@@ -628,12 +628,6 @@ func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
 func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
 
-func _on_OpacitySlider_value_changed(value) -> void:
-	Global.canvas.layers[Global.current_layer][4] = value / 100
-	Global.layer_opacity_slider.value = value
-	Global.layer_opacity_spinbox.value = value
-	Global.canvas.update()
-
 func show_quit_dialog() -> void:
 	if !$QuitDialog.visible:
 		if Global.saved:

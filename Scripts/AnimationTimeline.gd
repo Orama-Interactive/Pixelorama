@@ -307,6 +307,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
 	Global.undo_redo.commit_action()
 
+
 func _on_OpacitySlider_value_changed(value) -> void:
 	Global.canvas.layers[Global.current_layer][2] = value / 100
 	Global.layer_opacity_slider.value = value
