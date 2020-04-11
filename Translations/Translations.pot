@@ -545,6 +545,12 @@ msgstr ""
 msgid "All pixels of the same color"
 msgstr ""
 
+msgid "Same color area"
+msgstr ""
+
+msgid "Same color pixels"
+msgstr ""
+
 msgid "Lighten"
 msgstr ""
 
