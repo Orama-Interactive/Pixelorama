@@ -1133,8 +1133,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/matti/repos/Pixelorama"
-current_path = "/home/matti/repos/Pixelorama/"
+current_dir = ""
+current_path = ""
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1149,12 +1149,12 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/matti/repos/Pixelorama"
-current_path = "/home/matti/repos/Pixelorama/"
-
+current_dir = ""
+current_path = ""
+ 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-current_dir = "/home/matti/repos/Pixelorama"
-current_path = "/home/matti/repos/Pixelorama/"
+current_dir = ""
+current_path = ""
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -1203,8 +1203,8 @@ dialog_text = "This is an error message!"
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "/home/matti/repos/Pixelorama"
-current_path = "/home/matti/repos/Pixelorama/"
+current_dir = ""
+current_path = ""
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
