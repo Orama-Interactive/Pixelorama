@@ -7,6 +7,7 @@ enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 var root_directory := "."
 var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
+var directory_module := preload("res://Scripts/XDGDataPaths.gd")
 
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
@@ -268,7 +269,7 @@ func _ready() -> void:
 	transparent_background = ImageTexture.new()
 	transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
-
+	
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
 	top_menu_container = find_node_by_name(control, "TopMenuContainer")
