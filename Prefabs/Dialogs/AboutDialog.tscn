@@ -189,7 +189,7 @@ margin_bottom = 241.0
 margin_top = 245.0
 margin_right = 488.0
 margin_bottom = 259.0
-text = "MADEBY_LABEL"
+text = "Developed by Orama Interactive"
 align = 1
 
 [node name="Copyright" type="Label" parent="AboutUI"]

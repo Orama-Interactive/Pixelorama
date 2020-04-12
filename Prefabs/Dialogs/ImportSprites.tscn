@@ -21,18 +21,18 @@ margin_right = 507.0
 margin_bottom = 312.0
 
 [node name="ImportAsNewFrame" type="CheckBox" parent="HBoxContainer2"]
-margin_right = 156.0
+margin_right = 161.0
 margin_bottom = 304.0
 mouse_default_cursor_shape = 2
 pressed = true
-text = "IMPORT_FILE_LABEL"
+text = "Import as new frame"
 
 [node name="ImportSpritesheet" type="CheckBox" parent="HBoxContainer2"]
-margin_left = 160.0
-margin_right = 327.0
+margin_left = 165.0
+margin_right = 343.0
 margin_bottom = 304.0
 mouse_default_cursor_shape = 2
-text = "IMPORT_SPRITESHEET"
+text = "Import as a spritesheet"
 
 [node name="Spritesheet" type="HBoxContainer" parent="."]
 visible = false
