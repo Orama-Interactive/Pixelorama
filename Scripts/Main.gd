@@ -168,7 +168,7 @@ func _ready() -> void:
 	Global.layers_container.get_child(0).label.text = Global.layers[0][0]
 	Global.layers_container.get_child(0).line_edit.text = Global.layers[0][0]
 
-	Import.import_brushes("Brushes")
+	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 
 	Global.left_color_picker.get_picker().presets_visible = false
 	Global.right_color_picker.get_picker().presets_visible = false

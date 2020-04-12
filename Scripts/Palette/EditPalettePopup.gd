@@ -106,12 +106,31 @@ func re_index_swatches() -> void:
 		child.index = index
 		index += 1
 
+# Rename a palette, copying to user directory if necessary.
+func rename_palette_file_with_priority_dirs(old_fname: String, new_fname: String) -> void:
+	var user_write_directory: String = Global.directory_module.get_palette_write_path()
+	var usrwrite_dir := Directory.new()
+	usrwrite_dir.open(user_write_directory)
+	if usrwrite_dir.file_exists(old_fname):
+		usrwrite_dir.rename(old_fname, new_fname)
+	else:
+		# Scan through the main system directories
+		var priority_dirs : Array = Global.directory_module.get_palette_search_path_in_order()
+		var best_clone_location = Global.palette_container.get_best_palette_file_location(
+			priority_dirs,
+			old_fname
+		)
+		if best_clone_location != null:
+			usrwrite_dir.copy(best_clone_location, new_fname)
+	
+
 func _on_EditPaletteSaveButton_pressed() -> void:
 	if palette_name_edit.text != current_palette:
 		Global.palettes.erase(current_palette)
-		var dir := Directory.new()
-		dir.open(Global.root_directory)
-		dir.rename("Palettes".plus_file(current_palette + ".json"), "Palettes".plus_file(palette_name_edit.text + ".json"))
+		rename_palette_file_with_priority_dirs(
+			current_palette + ".json", 
+			palette_name_edit.text + ".json"
+		)
 		current_palette = palette_name_edit.text
 		working_palette.name = current_palette
 

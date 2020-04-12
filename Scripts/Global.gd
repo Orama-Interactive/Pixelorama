@@ -7,6 +7,9 @@ enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 var root_directory := "."
 var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
+var XDGDataPaths = preload("res://Scripts/XDGDataPaths.gd")
+var directory_module : Node
+
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
 var undo_redo : UndoRedo
@@ -263,12 +266,16 @@ func _ready() -> void:
 		root_directory = OS.get_executable_path().get_base_dir()
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
+	
+	# The fact that root_dir is set earlier than this is important
+	# XDGDataDirs depends on it nyaa
+	directory_module = XDGDataPaths.new()
 
 	undo_redo = UndoRedo.new()
 	transparent_background = ImageTexture.new()
 	transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
-
+	
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
 	top_menu_container = find_node_by_name(control, "TopMenuContainer")

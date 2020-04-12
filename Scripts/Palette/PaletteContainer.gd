@@ -2,6 +2,7 @@ extends GridContainer
 
 const palette_button = preload("res://Prefabs/PaletteButton.tscn")
 
+
 var palettes_path := "Palettes"
 var current_palette = "Default"
 var from_palette : Palette
@@ -154,30 +155,38 @@ func on_color_select(index : int) -> void:
 		Global.update_right_custom_brush()
 
 func _load_palettes() -> void:
-	palettes_path = Global.root_directory.plus_file("Palettes")
-	var dir := Directory.new()
-	dir.open(Global.root_directory)
-	if not dir.dir_exists(palettes_path):
-		dir.make_dir(palettes_path)
-
-	var palette_files : Array = get_palette_files(palettes_path)
-
-	for file_name in palette_files:
-		var palette : Palette = Palette.new().load_from_file(palettes_path.plus_file(file_name))
-		if palette:
-			Global.palettes[palette.name] = palette
-			Global.palette_option_button.add_item(palette.name)
-			var index: int = Global.palette_option_button.get_item_count() - 1
-			Global.palette_option_button.set_item_metadata(index, palette.name)
-			if palette.name == "Default":
-				Global.palette_option_button.select(index)
+	Global.directory_module.ensure_xdg_user_dirs_exist()
+	var search_locations = Global.directory_module.get_palette_search_path_in_order()
+	var priority_ordered_files := get_palette_priority_file_map(search_locations)
+	
+	# Iterate backwards, so any palettes defined in default files
+	# get overwritten by those of the same name in user files
+	search_locations.invert()
+	priority_ordered_files.invert()
+	for i in range(len(search_locations)):
+		var base_directory : String = search_locations[i]
+		var palette_files : Array = priority_ordered_files[i]
+		for file_name in palette_files:
+			var palette : Palette = Palette.new().load_from_file(base_directory.plus_file(file_name))
+			if palette:
+				Global.palettes[palette.name] = palette
+				Global.palette_option_button.add_item(palette.name)
+				var index: int = Global.palette_option_button.get_item_count() - 1
+				Global.palette_option_button.set_item_metadata(index, palette.name)
+				if palette.name == "Default":
+					Global.palette_option_button.select(index)
 
 	if not "Default" in Global.palettes && Global.palettes.size() > 0:
-		Global.control._on_PaletteOptionButton_item_selected(0)
+		Global.palette_container._on_PaletteOptionButton_item_selected(0)
 
-func get_palette_files(path : String) -> Array:
+# Get the palette files in a single directory.
+# if it does not exist, return []
+func get_palette_files(path : String ) -> Array:
 	var dir := Directory.new()
 	var results = []
+	
+	if not dir.dir_exists(path):
+		return []
 
 	dir.open(path)
 	dir.list_dir_begin()
@@ -186,15 +195,59 @@ func get_palette_files(path : String) -> Array:
 		var file_name = dir.get_next()
 		if file_name == "":
 			break
-		elif not file_name.begins_with(".") && file_name.to_lower().ends_with("json"):
+		elif (not file_name.begins_with(".")) && file_name.to_lower().ends_with("json") && not dir.current_is_dir():
 			results.append(file_name)
 
 	dir.list_dir_end()
 	return results
 
+# This returns an array of arrays, with priorities.
+# In particular, it takes an array of paths to look for
+# arrays in, in order of file and palette override priority
+# such that the files in the first directory override the
+# second, third, etc. ^.^
+# It returns an array of arrays, where each output array
+# corresponds to the given input array at the same index, and
+# contains the (relative to the given directory) palette files
+# to load, excluding all ones already existing in higher-priority
+# directories. nya
+# in particular, this also means you can run backwards on the result 
+# so that palettes with the given palette name in the higher priority
+# directories override those set in lower priority directories :)
+func get_palette_priority_file_map(looking_paths: Array) -> Array:
+	var final_list := []
+	# Holds pattern files already found
+	var working_file_set : Dictionary = {}
+	for search_directory in looking_paths:
+		var to_add_files := []
+		var files = get_palette_files(search_directory)
+		# files to check
+		for maybe_to_add in files:
+			if not maybe_to_add in working_file_set:
+				to_add_files.append(maybe_to_add)
+				working_file_set[maybe_to_add] = true
+				
+		final_list.append(to_add_files)
+	return final_list
+	
+# Locate the highest priority palette by the given relative filename
+# If none is found in the directories, then do nothing and return 
+# null
+func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> String:
+	var priority_fmap : Array = get_palette_priority_file_map(looking_paths)
+	for i in range(len(looking_paths)):
+		var base_path : String = looking_paths[i]
+		var the_files : Array = priority_fmap[i]
+		if the_files.has(fname):
+			return base_path.plus_file(fname)
+		
+	return null
+
 func save_palette(palette_name : String, filename : String) -> void:
+	Global.directory_module.ensure_xdg_user_dirs_exist()
 	var palette = Global.palettes[palette_name]
-	palette.save_to_file(palettes_path.plus_file(filename))
+	var palettes_write_path: String = Global.directory_module.get_palette_write_path()
+	palette.save_to_file(palettes_write_path.plus_file(filename))
 
 
 func _on_NewPaletteDialog_popup_hide() -> void:
