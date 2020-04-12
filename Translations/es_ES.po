@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-04-11 21:10\n"
+"PO-Revision-Date: 2020-04-12 16:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -495,7 +495,8 @@ msgstr ""
 msgid "Choose a color for the right tool"
 msgstr ""
 
-msgid "COLORSWITCH_HT"
+msgid "Switch left and right colors\n"
+"(%s)"
 msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
@@ -609,22 +610,28 @@ msgstr "Fotograma actual:"
 msgid "Current frame: 1/1"
 msgstr "Fotograma actual: 1/1"
 
-msgid "FIRSTFRAME_HT"
+msgid "Jump to the first frame\n"
+"(%s)"
 msgstr ""
 
-msgid "PREVIOUSFRAME_HT"
+msgid "Go to the previous frame\n"
+"(%s)"
 msgstr ""
 
-msgid "PLAYBACKWARDS_HT"
+msgid "Play the animation backwards (from end to beginning)\n"
+"(%s)"
 msgstr ""
 
-msgid "PLAYFORWARD_HT"
+msgid "Play the animation forward (from beginning to end)\n"
+"(%s)"
 msgstr ""
 
-msgid "NEXTFRAME_HT"
+msgid "Go to the next frame\n"
+"(%s)"
 msgstr ""
 
-msgid "LASTFRAME_HT"
+msgid "Jump to the last frame\n"
+"(%s)"
 msgstr ""
 
 msgid "Onion Skinning settings"
@@ -654,6 +661,9 @@ msgstr "Fotogramas pasados"
 
 msgid "Future Frames"
 msgstr "Fotogramas futuros"
+
+msgid "Manage frame tags"
+msgstr ""
 
 msgid "Blue-Red Mode"
 msgstr "Modo Rojo-Azul"
@@ -876,6 +886,9 @@ msgid "Templates:"
 msgstr ""
 
 msgid "Preset"
+msgstr ""
+
+msgid "Preset:"
 msgstr ""
 
 msgid "Default"
