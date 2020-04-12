@@ -17,10 +17,6 @@ const config_subdir_name := "pixelorama"
 const palettes_data_subdirectory := "Palettes"
 const brushes_data_subdirectory := "Brushes"
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 
 # Get if we should use XDG standard or not nyaaaa
 func use_xdg_standard() -> bool:
@@ -29,9 +25,6 @@ func use_xdg_standard() -> bool:
 	# Previous was unreliable and buggy >.< nyaa
 	return OS.get_name() == "X11"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
 
 func _init():
 	if use_xdg_standard():
@@ -43,7 +36,7 @@ func _init():
 		xdg_data_home = raw_xdg_data_home.plus_file(
 			config_subdir_name
 		)
-		
+
 		# Create defaults
 		xdg_data_dirs = []
 		raw_xdg_data_dirs = default_xdg_data_dirs
@@ -51,7 +44,7 @@ func _init():
 			xdg_data_dirs.append(
 				default_loc.plus_file(config_subdir_name)
 			)
-			
+
 		# Now check the XDG environment variables and if
 		# present, replace the defaults with them!
 		# See: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -68,13 +61,13 @@ func _init():
 			xdg_data_dirs = []
 			for unapp_subdir in raw_xdg_data_dirs:
 				xdg_data_dirs.append(unapp_subdir.plus_file(config_subdir_name))
-			
+
 	else:
 		raw_xdg_data_home = Global.root_directory
 		xdg_data_home = raw_xdg_data_home.plus_file(config_subdir_name)
 		raw_xdg_data_dirs = []
 		xdg_data_dirs = []
-	 
+
 
 
 func append_file_to_all(basepaths: Array, subpath: String) -> Array:
@@ -87,7 +80,7 @@ func append_file_to_all(basepaths: Array, subpath: String) -> Array:
 # Get search paths in order of priority
 func get_search_paths_in_order() -> Array:
 	return [xdg_data_home] + xdg_data_dirs
-	
+
 # Gets the paths, in order of search priority, for palettes.
 func get_palette_search_path_in_order() -> Array:
 	var base_paths := get_search_paths_in_order()
@@ -97,12 +90,12 @@ func get_palette_search_path_in_order() -> Array:
 func get_brushes_search_path_in_order() -> Array:
 	var base_paths := get_search_paths_in_order()
 	return append_file_to_all(base_paths, brushes_data_subdirectory)
-	
+
 
 # Get the path that we are ok to be writing palettes to:
 func get_palette_write_path() -> String:
 	return xdg_data_home.plus_file(palettes_data_subdirectory)
-	
+
 # Get the path that we are ok to be writing brushes to:
 func get_brushes_write_path() -> String:
 	return xdg_data_home.plus_file(brushes_data_subdirectory)
@@ -114,7 +107,7 @@ func ensure_xdg_user_dirs_exist() -> void:
 	# Ensure the main config directory exists.
 	if not base_dir.dir_exists(xdg_data_home):
 		base_dir.make_dir(xdg_data_home)
-		
+
 	var actual_data_dir := Directory.new()
 	actual_data_dir.open(xdg_data_home)
 	var palette_writing_dir := get_palette_write_path()
@@ -126,10 +119,3 @@ func ensure_xdg_user_dirs_exist() -> void:
 	if not actual_data_dir.dir_exists(brushes_writing_dir):
 		print("Making directory %s" % [brushes_writing_dir])
 		actual_data_dir.make_dir(brushes_writing_dir)
-	
-		
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

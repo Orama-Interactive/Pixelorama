@@ -122,13 +122,13 @@ func rename_palette_file_with_priority_dirs(old_fname: String, new_fname: String
 		)
 		if best_clone_location != null:
 			usrwrite_dir.copy(best_clone_location, new_fname)
-	
+
 
 func _on_EditPaletteSaveButton_pressed() -> void:
 	if palette_name_edit.text != current_palette:
 		Global.palettes.erase(current_palette)
 		rename_palette_file_with_priority_dirs(
-			current_palette + ".json", 
+			current_palette + ".json",
 			palette_name_edit.text + ".json"
 		)
 		current_palette = palette_name_edit.text

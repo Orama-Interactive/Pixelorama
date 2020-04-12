@@ -266,7 +266,7 @@ func _ready() -> void:
 		root_directory = OS.get_executable_path().get_base_dir()
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
-	
+
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
@@ -275,7 +275,7 @@ func _ready() -> void:
 	transparent_background = ImageTexture.new()
 	transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
-	
+
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
 	top_menu_container = find_node_by_name(control, "TopMenuContainer")

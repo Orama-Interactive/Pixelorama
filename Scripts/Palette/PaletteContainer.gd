@@ -158,7 +158,7 @@ func _load_palettes() -> void:
 	Global.directory_module.ensure_xdg_user_dirs_exist()
 	var search_locations = Global.directory_module.get_palette_search_path_in_order()
 	var priority_ordered_files := get_palette_priority_file_map(search_locations)
-	
+
 	# Iterate backwards, so any palettes defined in default files
 	# get overwritten by those of the same name in user files
 	search_locations.invert()
@@ -184,7 +184,7 @@ func _load_palettes() -> void:
 func get_palette_files(path : String ) -> Array:
 	var dir := Directory.new()
 	var results = []
-	
+
 	if not dir.dir_exists(path):
 		return []
 
@@ -211,7 +211,7 @@ func get_palette_files(path : String ) -> Array:
 # contains the (relative to the given directory) palette files
 # to load, excluding all ones already existing in higher-priority
 # directories. nya
-# in particular, this also means you can run backwards on the result 
+# in particular, this also means you can run backwards on the result
 # so that palettes with the given palette name in the higher priority
 # directories override those set in lower priority directories :)
 func get_palette_priority_file_map(looking_paths: Array) -> Array:
@@ -226,12 +226,12 @@ func get_palette_priority_file_map(looking_paths: Array) -> Array:
 			if not maybe_to_add in working_file_set:
 				to_add_files.append(maybe_to_add)
 				working_file_set[maybe_to_add] = true
-				
+
 		final_list.append(to_add_files)
 	return final_list
-	
+
 # Locate the highest priority palette by the given relative filename
-# If none is found in the directories, then do nothing and return 
+# If none is found in the directories, then do nothing and return
 # null
 func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> String:
 	var priority_fmap : Array = get_palette_priority_file_map(looking_paths)
@@ -240,7 +240,7 @@ func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> 
 		var the_files : Array = priority_fmap[i]
 		if the_files.has(fname):
 			return base_path.plus_file(fname)
-		
+
 	return null
 
 func save_palette(palette_name : String, filename : String) -> void:
