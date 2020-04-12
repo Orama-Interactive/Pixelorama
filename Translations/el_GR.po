@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-12 16:50\n"
+"PO-Revision-Date: 2020-04-12 17:07\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -514,7 +514,8 @@ msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
@@ -629,27 +630,33 @@ msgstr "Τρέχον καρέ: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Μετάβαση στο πρώτο καρέ\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Μετάβαση στο προηγούμενο καρέ\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Μετάβαση στο επόμενο καρέ\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Μετάβαση στο τελευταίο καρέ\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "Ρυθμίσεις Onion Skinning"
@@ -681,7 +688,7 @@ msgid "Future Frames"
 msgstr "Μελλοντικά καρέ"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Διαχείριση ετικετών καρέ"
 
 msgid "Blue-Red Mode"
 msgstr "Μπλε-Κόκκινη λειτουργία"
@@ -905,10 +912,10 @@ msgid "Templates:"
 msgstr "Πρότυπα:"
 
 msgid "Preset"
-msgstr "Προεπιλογές"
+msgstr "Προεπιλογή"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Προεπιλογή:"
 
 msgid "Default"
 msgstr "Προεπιλογή"
