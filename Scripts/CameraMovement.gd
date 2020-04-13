@@ -22,8 +22,12 @@ func dir_move_zoom_multiplier(press_time : float) -> float:
 		return Global.high_speed_move_rate
 	elif Input.is_key_pressed(KEY_SHIFT):
 		return Global.medium_speed_move_rate
-	else:
+	elif !Input.is_key_pressed(KEY_CONTROL):
+		# control + right/left is used to move frames so
+		# we do this check to ensure that there is no conflict
 		return Global.low_speed_move_rate
+	else:
+		return 0.0
 			
 func reset_dir_move_time(direction) -> void:
 	Global.key_move_press_time[direction] = 0.0
