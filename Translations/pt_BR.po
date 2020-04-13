@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-04-13 02:15\n"
+"PO-Revision-Date: 2020-04-13 03:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -214,10 +214,10 @@ msgid "Direction:"
 msgstr ""
 
 msgid "Forward"
-msgstr ""
+msgstr "Avançar"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Voltar"
 
 msgid "Ping-Pong"
 msgstr ""
@@ -274,7 +274,7 @@ msgid "Guides & Grid"
 msgstr "Guias e Grade"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Atalhos"
 
 msgid "General Options"
 msgstr "Opções Gerais"
@@ -610,7 +610,7 @@ msgid "Right Color"
 msgstr "Cor Direita"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Modo:"
 
 msgid "Zoom in"
 msgstr ""
@@ -619,7 +619,7 @@ msgid "Zoom out"
 msgstr ""
 
 msgid "Options:"
-msgstr ""
+msgstr "Opções:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -937,16 +937,16 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Padrão"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 msgid "Rectangular Selection"
 msgstr "Seleção Retangular"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Color Picker"
 msgstr "Seleção de Cores"
