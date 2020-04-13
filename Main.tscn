@@ -779,6 +779,7 @@ margin_top = 65.0
 margin_right = 114.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fit to frame"
 
@@ -788,6 +789,7 @@ margin_top = 92.0
 margin_right = 114.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
 
@@ -1074,6 +1076,7 @@ margin_top = 65.0
 margin_right = 114.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fit to frame"
 
@@ -1083,6 +1086,7 @@ margin_top = 92.0
 margin_right = 114.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
 

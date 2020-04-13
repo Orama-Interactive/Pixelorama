@@ -450,10 +450,11 @@ margin_right = 49.0
 margin_bottom = 17.0
 text = "Preset: "
 
-[node name="OptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
+[node name="PresetOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
 margin_left = 53.0
 margin_right = 314.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Default"
 items = [ "Default", null, false, 0, null, "Custom", null, false, 1, null ]
@@ -675,6 +676,6 @@ __meta__ = {
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth" to="." method="_on_ImageDefaultWidth_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight" to="." method="_on_ImageDefaultHeight_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor" to="." method="_on_DefaultBackground_color_changed"]
-[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/PresetOptionButton" to="." method="_on_PresetOptionButton_item_selected"]
 [connection signal="confirmed" from="Popups/ShortcutSelector" to="." method="_on_ShortcutSelector_confirmed"]
 [connection signal="popup_hide" from="Popups/ShortcutSelector" to="." method="_on_ShortcutSelector_popup_hide"]

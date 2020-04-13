@@ -48,6 +48,7 @@ text = "Templates:"
 margin_left = 114.0
 margin_right = 189.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 toggle_mode = false
 text = "Default"
 items = [ "Default", null, false, 0, null ]
@@ -64,6 +65,7 @@ margin_left = 114.0
 margin_top = 24.0
 margin_right = 189.0
 margin_bottom = 48.0
+mouse_default_cursor_shape = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -127,8 +127,8 @@ func _ready() -> void:
 			custom_shortcuts_preset[action] = saved_input_event
 
 	var shortcuts_preset = Global.config_cache.get_value("shortcuts", "shortcuts_preset", 0)
-	shortcuts.get_node("HBoxContainer/OptionButton").select(shortcuts_preset)
-	_on_OptionButton_item_selected(shortcuts_preset)
+	shortcuts.get_node("HBoxContainer/PresetOptionButton").select(shortcuts_preset)
+	_on_PresetOptionButton_item_selected(shortcuts_preset)
 
 
 func _input(event : InputEvent) -> void:
@@ -353,6 +353,10 @@ func toggle_shortcut_buttons(enabled : bool) -> void:
 	for shortcut_grid_item in shortcuts.get_node("Shortcuts").get_children():
 		if shortcut_grid_item is Button:
 			shortcut_grid_item.disabled = not enabled
+			if shortcut_grid_item.disabled:
+				shortcut_grid_item.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+			else:
+				shortcut_grid_item.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 func set_action_shortcut(action : String, old_input : InputEventKey, new_input : InputEventKey) -> void:
@@ -443,7 +447,7 @@ func _on_ShortcutSelector_popup_hide() -> void:
 	$Popups/ShortcutSelector/EnteredShortcut.text = ""
 
 
-func _on_OptionButton_item_selected(id : int) -> void:
+func _on_PresetOptionButton_item_selected(id : int) -> void:
 	# Only custom preset which is modifiable
 	toggle_shortcut_buttons(true if id == 1 else false)
 	match id:
@@ -463,3 +467,4 @@ func _on_ShortcutSelector_confirmed() -> void:
 		Global.config_cache.save("user://cache.ini")
 		shortcuts.get_node("Shortcuts/" + action_being_edited).text = OS.get_scancode_string(new_input_event.get_scancode_with_modifiers())
 		$Popups/ShortcutSelector.hide()
+
