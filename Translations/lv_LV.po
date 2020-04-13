@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-04-12 17:16\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -462,6 +462,11 @@ msgstr "Taisnstūra iezīmēšana\n\n"
 "%s priekš peles labās pogas\n\n"
 "Nospied %s, lai pārvietotu saturu"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -519,9 +524,6 @@ msgstr "Samainīt vietām kreiso un labo krāsu\n"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Atjaunot noklusējuma krāsas (melns priekš kreisās, balts priekšlabās)"
-
-msgid "Raw Mode"
-msgstr "Neapstrādātais režīms"
 
 msgid "Left tool options"
 msgstr "Kreisā rīka uzstādījumi"
@@ -606,6 +608,24 @@ msgstr "Kreisā krāsa"
 
 msgid "Right Color"
 msgstr "Labā krāsa"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Spoguļskats"
@@ -924,6 +944,9 @@ msgstr ""
 
 msgid "Rectangular Selection"
 msgstr "Taisnstūra iezīmēšana"
+
+msgid "Zoom"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Krāsu izvēlne"
