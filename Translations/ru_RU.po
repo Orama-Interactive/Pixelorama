@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-13 02:15\n"
+"PO-Revision-Date: 2020-04-13 12:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,22 +610,22 @@ msgid "Right Color"
 msgstr "Цвет справа"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Режим:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Увеличить"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Уменьшить"
 
 msgid "Options:"
-msgstr ""
+msgstr "Опции:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "По размеру кадра"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% масштаб"
 
 msgid "Mirroring"
 msgstr "Зеркало"
@@ -946,7 +946,7 @@ msgid "Rectangular Selection"
 msgstr "Прямоугольное выделение"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Масштаб"
 
 msgid "Color Picker"
 msgstr "Выбор цвета (пипетка)"
