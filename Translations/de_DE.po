@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-13 02:15\n"
+"PO-Revision-Date: 2020-04-13 09:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -464,7 +464,9 @@ msgstr "Rechteckige Auswahl\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s für linke Maustaste\n"
+"%s für rechte Maustaste"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -609,22 +611,22 @@ msgid "Right Color"
 msgstr "Rechte Farbe"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Modus:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Vergrößern"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Verkleinern"
 
 msgid "Options:"
-msgstr ""
+msgstr "Optionen:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "An Frame anpassen"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Zoom"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -707,7 +709,7 @@ msgid "Future Frames"
 msgstr "Nachfolger Frames"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Frame Tags verwalten"
 
 msgid "Blue-Red Mode"
 msgstr "Blau-Rot Modus"
