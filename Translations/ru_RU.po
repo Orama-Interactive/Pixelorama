@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-12 17:16\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -462,6 +462,11 @@ msgstr "Прямоугольное выделение\n\n"
 "%s для правой кнопки мыши\n\n"
 "%s для перемещения содержимого"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -519,9 +524,6 @@ msgstr "Поменять левый и правый цвета местами\n"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
-
-msgid "Raw Mode"
-msgstr "RGB от 0.0 до 1.0 (Raw Mode)"
 
 msgid "Left tool options"
 msgstr "Настройки левого инструмента"
@@ -606,6 +608,24 @@ msgstr "Цвет слева"
 
 msgid "Right Color"
 msgstr "Цвет справа"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Зеркало"
@@ -924,6 +944,9 @@ msgstr ""
 
 msgid "Rectangular Selection"
 msgstr "Прямоугольное выделение"
+
+msgid "Zoom"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Выбор цвета (пипетка)"
