@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-04-12 17:16\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -462,6 +462,11 @@ msgstr "Seleção Retangular\n\n"
 "%s para o botão direito do mouse\n\n"
 "Pressione %s para mover o conteúdo"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -519,9 +524,6 @@ msgstr "Mudar as cores esquerda e direita\n"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Redefina as cores para o seu estado padrão (preto para a esquerda, branco para a direita)"
-
-msgid "Raw Mode"
-msgstr "Modo Bruto"
 
 msgid "Left tool options"
 msgstr "Opções da ferramenta esquerda"
@@ -606,6 +608,24 @@ msgstr "Cor Esquerda"
 
 msgid "Right Color"
 msgstr "Cor Direita"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Espelhamento"
@@ -924,6 +944,9 @@ msgstr ""
 
 msgid "Rectangular Selection"
 msgstr "Seleção Retangular"
+
+msgid "Zoom"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Seleção de Cores"
