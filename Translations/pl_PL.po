@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-12 17:16\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -461,6 +461,11 @@ msgstr "Zaznaczenie prostokątne\n\n"
 "%s dla prawego narzędzia\n\n"
 "Przytrzymaj %s aby przenieść zawartość"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -518,9 +523,6 @@ msgstr "Podmienia lewy kolor z prawym kolorem\n"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)"
-
-msgid "Raw Mode"
-msgstr "RGB w częściach setnych od 0.0 do 1.0"
 
 msgid "Left tool options"
 msgstr "Opcje lewego narzędzia"
@@ -604,6 +606,24 @@ msgid "Left Color"
 msgstr ""
 
 msgid "Right Color"
+msgstr ""
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
 msgstr ""
 
 msgid "Mirroring"
@@ -923,6 +943,9 @@ msgstr ""
 
 msgid "Rectangular Selection"
 msgstr "Zaznaczenie prostokątne"
+
+msgid "Zoom"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Próbnik"
