@@ -28,10 +28,10 @@ func dir_move_zoom_multiplier(press_time : float) -> float:
 		return Global.low_speed_move_rate
 	else:
 		return 0.0
-			
+
 func reset_dir_move_time(direction) -> void:
 	Global.key_move_press_time[direction] = 0.0
-	
+
 
 const key_move_action_names := ["ui_up", "ui_down", "ui_left", "ui_right"]
 
@@ -41,7 +41,7 @@ func is_action_direction_pressed(event : InputEvent, allow_echo: bool = true) ->
 		if event.is_action_pressed(action, allow_echo):
 			return true
 	return false
-	
+
 # Check if an event is a ui_up/down/left/right event release nya
 func is_action_direction_released(event: InputEvent) -> bool:
 	for action in key_move_action_names:
@@ -51,7 +51,7 @@ func is_action_direction_released(event: InputEvent) -> bool:
 
 # get the Direction associated with the event.
 # if not a direction event return null
-func get_action_direction(event: InputEvent):  # -> Optional[Direction] 
+func get_action_direction(event: InputEvent):  # -> Optional[Direction]
 	if event.is_action("ui_up"):
 		return Global.Direction.UP
 	elif event.is_action("ui_down"):
@@ -72,7 +72,7 @@ const directional_sign_multipliers := [
 	Vector2(1.0, 0.0)
 ]
 
-# Process an action event for a pressed direction 
+# Process an action event for a pressed direction
 # action
 func process_direction_action_pressed(event: InputEvent) -> void:
 	var dir = get_action_direction(event)
@@ -96,7 +96,7 @@ func _input(event : InputEvent) -> void:
 	mouse_pos = viewport_container.get_local_mouse_position()
 	var viewport_size := viewport_container.rect_size
 	if event.is_action_pressed("middle_mouse") || event.is_action_pressed("space"):
-		drag = true                
+		drag = true
 	elif event.is_action_released("middle_mouse") || event.is_action_released("space"):
 		drag = false
 
@@ -111,7 +111,7 @@ func _input(event : InputEvent) -> void:
 			process_direction_action_pressed(event)
 		elif is_action_direction_released(event):
 			process_direction_action_released(event)
-		
+
 
 # Zoom Camera
 func zoom_camera(dir : int) -> void:

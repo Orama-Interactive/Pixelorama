@@ -23,7 +23,7 @@ enum Direction {
 }
 
 # Indices are as in the Direction enum
-# This is the total time the key for 
+# This is the total time the key for
 # that direction has been pressed.
 var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
