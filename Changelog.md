@@ -24,6 +24,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Esperanto translation.
 - When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
 - A new zoom tool has been added, and you can also zoom in with the `+` key, and zoom out with `-`.
+- You can now move the canvas with the `Arrow keys`. `Shift + Arrows` make it move with medium speed, and `Ctrl + Shuft + Arrows` makes it move with high speed.
 - The left and right tool icon options (found in Preferences) are now saved and restored on startup.
 
 ### Changed
