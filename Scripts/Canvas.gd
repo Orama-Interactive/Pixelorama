@@ -1010,3 +1010,81 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			if out_color.a != 0:
 				bg.set_pixel(dst_x, dst_y, out_color)
 			brush.unlock()
+
+func adjust_hsv(id,delta)->void:
+	var selection_only:bool = !Global.selected_pixels.empty()
+	var layer:Image = layers[Global.current_layer][0]
+	layer.lock()
+	match id:
+		#Hue
+		0:
+			for i in range(layer.get_width()):
+				for j in range(layer.get_height()):
+					if(selection_only and Global.selected_pixels.has(Vector2(i,j))):
+						var c: Color = layer.get_pixel(i,j)
+						var hue = range_lerp(c.h,0,1,0,360)
+						hue = hue + delta
+						
+						while(hue >= 360):
+							hue -= 360
+						while(hue < 0):
+							hue += 360
+						c.h = range_lerp(hue,0,360,0,1)
+						layer.set_pixel(i,j,c)
+					elif(!selection_only):
+						var c: Color = layer.get_pixel(i,j)
+						var hue = range_lerp(c.h,0,1,0,360)
+						hue = hue + delta
+						
+						while(hue >= 360):
+							hue -= 360
+						while(hue < 0):
+							hue += 360
+						c.h = range_lerp(hue,0,360,0,1)
+						layer.set_pixel(i,j,c)
+			
+		#Saturation
+		1:
+			for i in range(layer.get_width()):
+				for j in range(layer.get_height()):
+					if(selection_only and Global.selected_pixels.has(Vector2(i,j))):
+						var c: Color = layer.get_pixel(i,j)
+						var sat = range_lerp(c.s,0,1,0,100)
+						sat = sat + delta
+						
+						sat = clamp(sat,0,100)
+						c.s = range_lerp(sat,0,100,0,1)
+						layer.set_pixel(i,j,c)
+					elif(!selection_only):
+						var c: Color = layer.get_pixel(i,j)
+						var sat = range_lerp(c.s,0,1,0,100)
+						sat = sat + delta
+						
+						sat = clamp(sat,0,100)
+						c.s = range_lerp(sat,0,100,0,1)
+						layer.set_pixel(i,j,c)
+		
+		#value
+		2:
+			for i in range(layer.get_width()):
+				for j in range(layer.get_height()):
+					if(selection_only and Global.selected_pixels.has(Vector2(i,j))):
+						var c: Color = layer.get_pixel(i,j)
+						var val = range_lerp(c.v,0,1,0,100)
+						val = val + delta
+						
+						val = clamp(val,0,100)
+						c.v = range_lerp(val,0,100,0,1)
+						layer.set_pixel(i,j,c)
+					elif(!selection_only):
+						var c: Color = layer.get_pixel(i,j)
+						var val = range_lerp(c.v,0,1,0,100)
+						val = val + delta
+						
+						val = clamp(val,0,100)
+						c.v = range_lerp(val,0,100,0,1)
+						layer.set_pixel(i,j,c)
+	
+	layer.unlock()
+	update_texture(Global.current_layer)
+	pass
