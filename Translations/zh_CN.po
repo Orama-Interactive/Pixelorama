@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-13 02:15\n"
+"PO-Revision-Date: 2020-04-13 06:49\n"
 
 msgid "OK"
 msgstr "确定"
@@ -465,7 +465,9 @@ msgstr "矩形选择\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "油漆桶\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -610,22 +612,22 @@ msgid "Right Color"
 msgstr "右键颜色"
 
 msgid "Mode:"
-msgstr ""
+msgstr "模式："
 
 msgid "Zoom in"
-msgstr ""
+msgstr "放大"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "缩小"
 
 msgid "Options:"
-msgstr ""
+msgstr "选项:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "适合帧率"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% 缩放"
 
 msgid "Mirroring"
 msgstr "镜像"
@@ -708,7 +710,7 @@ msgid "Future Frames"
 msgstr "未来帧"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "管理帧标签"
 
 msgid "Blue-Red Mode"
 msgstr "蓝红模式"
@@ -947,7 +949,7 @@ msgid "Rectangular Selection"
 msgstr "矩形选区"
 
 msgid "Zoom"
-msgstr ""
+msgstr "缩放"
 
 msgid "Color Picker"
 msgstr "拾色器"
