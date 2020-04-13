@@ -449,6 +449,11 @@ msgid "Rectangular Selection\n\n"
 "Press %s to move the content"
 msgstr ""
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -491,9 +496,6 @@ msgid "Switch left and right colors\n"
 msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
-
-msgid "Raw Mode"
 msgstr ""
 
 msgid "Left tool options"
@@ -578,6 +580,24 @@ msgid "Left Color"
 msgstr ""
 
 msgid "Right Color"
+msgstr ""
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
 msgstr ""
 
 msgid "Mirroring"
@@ -889,6 +909,9 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
+msgstr ""
+
+msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"

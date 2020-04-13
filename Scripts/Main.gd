@@ -144,6 +144,7 @@ func _ready() -> void:
 	tools.append([Global.find_node_by_name(root, "LightenDarken"), "left_lightdark_tool", "right_lightdark_tool"])
 	tools.append([Global.find_node_by_name(root, "RectSelect"), "left_rectangle_select_tool", "right_rectangle_select_tool"])
 	tools.append([Global.find_node_by_name(root, "ColorPicker"), "left_colorpicker_tool", "right_colorpicker_tool"])
+	tools.append([Global.find_node_by_name(root, "Zoom"), "left_zoom_tool", "right_zoom_tool"])
 
 	for t in tools:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
@@ -477,6 +478,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_mirror_container.visible = true
 		elif current_action == "ColorPicker":
 			Global.left_colorpicker_container.visible = true
+		elif current_action == "Zoom":
+			Global.left_zoom_container.visible = true
 
 	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
 		Global.current_right_tool = current_action
@@ -511,6 +514,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_mirror_container.visible = true
 		elif current_action == "ColorPicker":
 			Global.right_colorpicker_container.visible = true
+		elif current_action == "Zoom":
+			Global.right_zoom_container.visible = true
 
 	for t in tools:
 		var tool_name : String = t[0].name
@@ -557,13 +562,14 @@ func _on_ColorSwitch_pressed() -> void:
 	update_left_custom_brush()
 	update_right_custom_brush()
 
+
 func _on_ColorDefaults_pressed() -> void:
 	Global.left_color_picker.color = Color.black
 	Global.right_color_picker.color = Color.white
 	update_left_custom_brush()
 	update_right_custom_brush()
 
-# warning-ignore:unused_argument
+
 func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
 	if color.a == 0:
@@ -572,7 +578,7 @@ func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
 	update_left_custom_brush()
 	previous_left_color = color
 
-# warning-ignore:unused_argument
+
 func _on_RightColorPickerButton_color_changed(color : Color) -> void:
 	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
 	if color.a == 0:
@@ -581,58 +587,99 @@ func _on_RightColorPickerButton_color_changed(color : Color) -> void:
 	update_right_custom_brush()
 	previous_right_color = color
 
-# warning-ignore:unused_argument
+
 func _on_LeftInterpolateFactor_value_changed(value : float) -> void:
 	Global.left_interpolate_spinbox.value = value
 	Global.left_interpolate_slider.value = value
 	update_left_custom_brush()
 
-# warning-ignore:unused_argument
+
 func _on_RightInterpolateFactor_value_changed(value : float) -> void:
 	Global.right_interpolate_spinbox.value = value
 	Global.right_interpolate_slider.value = value
 	update_right_custom_brush()
 
+
 func update_left_custom_brush() -> void:
 	Global.update_left_custom_brush()
+
+
 func update_right_custom_brush() -> void:
 	Global.update_right_custom_brush()
+
 
 func _on_LeftFillAreaOptions_item_selected(ID : int) -> void:
 	Global.left_fill_area = ID
 
+
 func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
 	Global.right_fill_area = ID
 
+
 func _on_LeftLightenDarken_item_selected(ID : int) -> void:
 	Global.left_ld = ID
+
+
 func _on_LeftLDAmountSpinbox_value_changed(value : float) -> void:
 	Global.left_ld_amount = value / 100
 	Global.left_ld_amount_slider.value = value
 	Global.left_ld_amount_spinbox.value = value
 
+
 func _on_RightLightenDarken_item_selected(ID : int) -> void:
 	Global.right_ld = ID
+
+
 func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
 	Global.right_ld_amount = value / 100
 	Global.right_ld_amount_slider.value = value
 	Global.right_ld_amount_spinbox.value = value
 
+
 func _on_LeftForColorOptions_item_selected(ID : int) -> void:
 	Global.left_color_picker_for = ID
+
 
 func _on_RightForColorOptions_item_selected(ID : int) -> void:
 	Global.right_color_picker_for = ID
 
+
+func _on_LeftZoomModeOptions_item_selected(ID : int) -> void:
+	Global.left_zoom_mode = ID
+
+
+func _on_RightZoomModeOptions_item_selected(ID : int) -> void:
+	Global.right_zoom_mode = ID
+
+
+func _on_FitToFrameButton_pressed() -> void:
+	var bigger = max(Global.canvas.size.x, Global.canvas.size.y)
+	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
+	Global.camera.offset = Global.canvas.size / 2
+	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+
+
+func _on_100ZoomButton_pressed() -> void:
+	Global.camera.zoom = Vector2.ONE
+	Global.camera.offset = Global.canvas.size / 2
+	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+
+
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.left_horizontal_mirror = button_pressed
+
+
 func _on_LeftVerticalMirroring_toggled(button_pressed) -> void:
 	Global.left_vertical_mirror = button_pressed
 
+
 func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
 	Global.right_horizontal_mirror = button_pressed
+
+
 func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 	Global.right_vertical_mirror = button_pressed
+
 
 func show_quit_dialog() -> void:
 	if !$QuitDialog.visible:
@@ -640,7 +687,9 @@ func show_quit_dialog() -> void:
 			$QuitDialog.call_deferred("popup_centered")
 		else:
 			$QuitAndSaveDialog.call_deferred("popup_centered")
+
 	Global.can_draw = false
+
 
 func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 	if action == "Save":
@@ -649,10 +698,10 @@ func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 		$QuitDialog.hide()
 		Global.can_draw = false
 
+
 func _on_QuitDialog_confirmed() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
-

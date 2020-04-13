@@ -46,7 +46,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 314.0
-margin_bottom = 1162.0
+margin_bottom = 1186.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -438,7 +438,7 @@ color = Color( 0, 0, 0, 0 )
 [node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_top = 964.0
 margin_right = 314.0
-margin_bottom = 1162.0
+margin_bottom = 1186.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_right = 314.0
@@ -467,7 +467,7 @@ margin_bottom = 28.0
 [node name="Shortcuts" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_top = 32.0
 margin_right = 314.0
-margin_bottom = 198.0
+margin_bottom = 222.0
 custom_constants/hseparation = 5
 columns = 3
 
@@ -526,95 +526,115 @@ margin_right = 313.0
 margin_bottom = 46.0
 size_flags_horizontal = 3
 
-[node name="ColorPickerLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 53.0
 margin_right = 137.0
 margin_bottom = 67.0
+text = "Zoom"
+
+[node name="left_zoom_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 50.0
+margin_right = 225.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+
+[node name="right_zoom_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 230.0
+margin_top = 50.0
+margin_right = 313.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+
+[node name="ColorPickerLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 77.0
+margin_right = 137.0
+margin_bottom = 91.0
 text = "Color Picker"
 
 [node name="left_colorpicker_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
-margin_top = 50.0
+margin_top = 74.0
 margin_right = 225.0
-margin_bottom = 70.0
+margin_bottom = 94.0
 
 [node name="right_colorpicker_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 230.0
-margin_top = 50.0
+margin_top = 74.0
 margin_right = 313.0
-margin_bottom = 70.0
+margin_bottom = 94.0
 
 [node name="PencilLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 77.0
+margin_top = 101.0
 margin_right = 137.0
-margin_bottom = 91.0
+margin_bottom = 115.0
 text = "Pencil"
 
 [node name="left_pencil_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
-margin_top = 74.0
+margin_top = 98.0
 margin_right = 225.0
-margin_bottom = 94.0
+margin_bottom = 118.0
 
 [node name="right_pencil_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 230.0
-margin_top = 74.0
+margin_top = 98.0
 margin_right = 313.0
-margin_bottom = 94.0
+margin_bottom = 118.0
 
 [node name="EraserLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 101.0
+margin_top = 125.0
 margin_right = 137.0
-margin_bottom = 115.0
+margin_bottom = 139.0
 text = "Eraser"
 
 [node name="left_eraser_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
-margin_top = 98.0
+margin_top = 122.0
 margin_right = 225.0
-margin_bottom = 118.0
+margin_bottom = 142.0
 
 [node name="right_eraser_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 230.0
-margin_top = 98.0
+margin_top = 122.0
 margin_right = 313.0
-margin_bottom = 118.0
+margin_bottom = 142.0
 
 [node name="BucketLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 125.0
+margin_top = 149.0
 margin_right = 137.0
-margin_bottom = 139.0
+margin_bottom = 163.0
 text = "Bucket"
 
 [node name="left_fill_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
-margin_top = 122.0
+margin_top = 146.0
 margin_right = 225.0
-margin_bottom = 142.0
+margin_bottom = 166.0
 
 [node name="right_fill_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 230.0
-margin_top = 122.0
+margin_top = 146.0
 margin_right = 313.0
-margin_bottom = 142.0
+margin_bottom = 166.0
 
 [node name="LightenDarkenLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 149.0
+margin_top = 173.0
 margin_right = 137.0
-margin_bottom = 163.0
+margin_bottom = 187.0
 text = "Lighten/Darken"
 
 [node name="left_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
-margin_top = 146.0
+margin_top = 170.0
 margin_right = 225.0
-margin_bottom = 166.0
+margin_bottom = 190.0
 
 [node name="right_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 230.0
-margin_top = 146.0
+margin_top = 170.0
 margin_right = 313.0
-margin_bottom = 166.0
+margin_bottom = 190.0
 
 [node name="Popups" type="Node" parent="."]
 

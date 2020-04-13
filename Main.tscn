@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Horizontal_Mirror_On.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Vertical_Mirror_On.png" type="Texture" id=41]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Vertical_Mirror_Off.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Zoom.png" type="Texture" id=43]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -232,7 +233,7 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 texture_normal = ExtResource( 4 )
 
-[node name="ColorPicker" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="Zoom" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 36.0
@@ -240,9 +241,9 @@ margin_right = 32.0
 margin_bottom = 68.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 43 )
 
-[node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="ColorPicker" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 72.0
@@ -250,9 +251,9 @@ margin_right = 32.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 6 )
+texture_normal = ExtResource( 5 )
 
-[node name="Eraser" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 108.0
@@ -260,9 +261,9 @@ margin_right = 32.0
 margin_bottom = 140.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 6 )
 
-[node name="Bucket" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="Eraser" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 144.0
@@ -270,14 +271,24 @@ margin_right = 32.0
 margin_bottom = 176.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 7 )
 
-[node name="LightenDarken" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="Bucket" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 180.0
 margin_right = 32.0
 margin_bottom = 212.0
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource( 8 )
+
+[node name="LightenDarken" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 216.0
+margin_right = 32.0
+margin_bottom = 248.0
 mouse_default_cursor_shape = 2
 button_mask = 3
 texture_normal = ExtResource( 9 )
@@ -704,9 +715,9 @@ ticks_on_borders = true
 
 [node name="LeftColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
-margin_top = 142.0
+margin_top = 75.0
 margin_right = 138.0
-margin_bottom = 184.0
+margin_bottom = 117.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
 margin_left = 47.0
@@ -726,6 +737,59 @@ size_flags_horizontal = 4
 text = "Left Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 0
+
+[node name="LeftZoomOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+visible = false
+margin_top = 75.0
+margin_right = 138.0
+margin_bottom = 190.0
+
+[node name="ModeLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
+margin_left = 52.0
+margin_right = 85.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Mode:"
+
+[node name="LeftZoomModeOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
+margin_left = 22.0
+margin_top = 19.0
+margin_right = 114.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Zoom in"
+items = [ "Zoom in", null, false, 0, null, "Zoom out", null, false, 1, null ]
+selected = 0
+
+[node name="OptionsLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
+margin_left = 46.0
+margin_top = 46.0
+margin_right = 91.0
+margin_bottom = 61.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Options:"
+
+[node name="FitToFrameButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
+margin_left = 22.0
+margin_top = 65.0
+margin_right = 114.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 92, 0 )
+size_flags_horizontal = 4
+text = "Fit to frame"
+
+[node name="100%ZoomButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
+margin_left = 22.0
+margin_top = 92.0
+margin_right = 114.0
+margin_bottom = 115.0
+rect_min_size = Vector2( 92, 0 )
+size_flags_horizontal = 4
+text = "100% Zoom"
 
 [node name="EmptySpacer" type="Control" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 75.0
@@ -969,6 +1033,59 @@ text = "Right Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 1
 
+[node name="RightZoomOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+visible = false
+margin_top = 75.0
+margin_right = 138.0
+margin_bottom = 190.0
+
+[node name="ModeLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions"]
+margin_left = 52.0
+margin_right = 85.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Mode:"
+
+[node name="RightZoomModeOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions"]
+margin_left = 22.0
+margin_top = 19.0
+margin_right = 114.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Zoom in"
+items = [ "Zoom in", null, false, 0, null, "Zoom out", null, false, 1, null ]
+selected = 0
+
+[node name="OptionsLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions"]
+margin_left = 46.0
+margin_top = 46.0
+margin_right = 91.0
+margin_bottom = 61.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Options:"
+
+[node name="FitToFrameButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions"]
+margin_left = 22.0
+margin_top = 65.0
+margin_right = 114.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 92, 0 )
+size_flags_horizontal = 4
+text = "Fit to frame"
+
+[node name="100%ZoomButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions"]
+margin_left = 22.0
+margin_top = 92.0
+margin_right = 114.0
+margin_bottom = 115.0
+rect_min_size = Vector2( 92, 0 )
+size_flags_horizontal = 4
+text = "100% Zoom"
+
 [node name="EmptySpacer" type="Control" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 75.0
 margin_right = 144.0
@@ -1174,8 +1291,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = ""
-current_path = ""
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1190,12 +1307,10 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = ""
-current_path = ""
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-current_dir = ""
-current_path = ""
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -1244,8 +1359,8 @@ dialog_text = "This is an error message!"
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = ""
-current_path = ""
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
@@ -1276,6 +1391,9 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmountSlider" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions/LeftForColorOptions" to="." method="_on_LeftForColorOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions/LeftZoomModeOptions" to="." method="_on_LeftZoomModeOptions_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions/FitToFrameButton" to="." method="_on_FitToFrameButton_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions/100%ZoomButton" to="." method="_on_100ZoomButton_pressed"]
 [connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons/LeftHorizontalMirroring" to="." method="_on_LeftHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons/LeftVerticalMirroring" to="." method="_on_LeftVerticalMirroring_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
@@ -1288,6 +1406,9 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmountSpinbox" to="." method="_on_RightLDAmountSpinbox_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmountSlider" to="." method="_on_RightLDAmountSpinbox_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorPickerOptions/RightForColorOptions" to="." method="_on_RightForColorOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions/RightZoomModeOptions" to="." method="_on_RightZoomModeOptions_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions/FitToFrameButton" to="." method="_on_FitToFrameButton_pressed"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightZoomOptions/100%ZoomButton" to="." method="_on_100ZoomButton_pressed"]
 [connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons/RightHorizontalMirroring" to="." method="_on_RightHorizontalMirroring_toggled"]
 [connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons/RightVerticalMirroring" to="." method="_on_RightVerticalMirroring_toggled"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]

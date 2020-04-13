@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.7] - Unreleased
 This update has been brought to you by the contributions of:
-Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Teashrock
+Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese), sapient-cogbag
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
@@ -22,7 +22,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Teashrock
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
 - Esperanto translation.
 - When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
-- You can now zoom in with the `+` key, and zoom out with `-`.
+- A new zoom tool has been added, and you can also zoom in with the `+` key, and zoom out with `-`.
 - The left and right tool icon options (found in Preferences) are now saved and restored on startup.
 
 ### Changed
@@ -40,6 +40,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Teashrock
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
 - The default window size is now 1280x720, and the minimum window size is 1024x576.
 - .pxo files now use ZSTD compression to result in smaller file sizes.
+- Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard linux/bsd packaging methods and for better per-user usability.
 - The splash screen is no longer purple, it now gets affected by the chosen theme.
 
 ### Fixed
@@ -47,6 +48,9 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Teashrock
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
 - Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else.! (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
+
+### Removed
+- It's no longer possible for frames to have different amounts of layers. All frames have the same amount.
 
 ## [v0.6.2] - 17-02-2020
 

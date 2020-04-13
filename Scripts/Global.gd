@@ -95,6 +95,10 @@ var left_color_picker_for := 0
 # warning-ignore:unused_class_variable
 var right_color_picker_for := 1
 
+# 0 for zoom in, 1 for zoom out
+var left_zoom_mode := 0
+var right_zoom_mode := 0
+
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
 # warning-ignore:unused_class_variable
@@ -224,6 +228,9 @@ var right_ld_amount_spinbox : SpinBox
 var left_colorpicker_container : Container
 var right_colorpicker_container : Container
 
+var left_zoom_container : Container
+var right_zoom_container : Container
+
 var left_mirror_container : Container
 var right_mirror_container : Container
 
@@ -345,6 +352,9 @@ func _ready() -> void:
 
 	left_colorpicker_container = find_node_by_name(root, "LeftColorPickerOptions")
 	right_colorpicker_container = find_node_by_name(root, "RightColorPickerOptions")
+
+	left_zoom_container = find_node_by_name(root, "LeftZoomOptions")
+	right_zoom_container = find_node_by_name(root, "RightZoomOptions")
 
 	left_mirror_container = find_node_by_name(root, "LeftMirrorButtons")
 	right_mirror_container = find_node_by_name(root, "RightMirrorButtons")
@@ -673,6 +683,13 @@ func update_hint_tooltips() -> void:
 %s for right mouse button
 
 Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
+
+	var zoom_tool : BaseButton = find_node_by_name(root, "Zoom")
+	zoom_tool.hint_tooltip = tr("""Zoom
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_zoom_tool")[0].as_text(), InputMap.get_action_list("right_zoom_tool")[0].as_text()]
+
 
 	var color_picker : BaseButton = find_node_by_name(root, "ColorPicker")
 	color_picker.hint_tooltip = tr("""Color Picker

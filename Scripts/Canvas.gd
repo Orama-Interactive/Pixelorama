@@ -251,6 +251,7 @@ func _input(event : InputEvent) -> void:
 	var ld := 0
 	var ld_amount := 0.1
 	var color_picker_for := 0
+	var zoom_mode := 0
 
 	west_limit = location.x
 	east_limit = location.x + size.x
@@ -270,6 +271,8 @@ func _input(event : InputEvent) -> void:
 		ld = Global.left_ld
 		ld_amount = Global.left_ld_amount
 		color_picker_for = Global.left_color_picker_for
+		zoom_mode = Global.left_zoom_mode
+
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
@@ -278,6 +281,7 @@ func _input(event : InputEvent) -> void:
 		ld = Global.right_ld
 		ld_amount = Global.right_ld_amount
 		color_picker_for = Global.right_color_picker_for
+		zoom_mode = Global.right_zoom_mode
 
 	if mouse_in_canvas && Global.has_focus:
 		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
@@ -441,6 +445,12 @@ func _input(event : InputEvent) -> void:
 				elif color_picker_for == 1: # Pick for the left color
 					Global.right_color_picker.color = pixel_color
 					Global.update_right_custom_brush()
+		"Zoom":
+			if can_handle:
+				if zoom_mode == 0:
+					Global.camera.zoom_camera(-1)
+				else:
+					Global.camera.zoom_camera(1)
 
 	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool) || ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
 		is_making_line = true
