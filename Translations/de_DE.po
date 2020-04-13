@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-12 17:07\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -461,6 +461,11 @@ msgstr "Rechteckige Auswahl\n\n"
 "%s für die rechte Maustaste\n\n"
 "Halte %s zum verschieben des Inhalts"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -518,9 +523,6 @@ msgstr "Wechsle linke und rechte Farben\n"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)"
-
-msgid "Raw Mode"
-msgstr "Raw-Mode"
 
 msgid "Left tool options"
 msgstr "Linke Werkzeugoptionen"
@@ -605,6 +607,24 @@ msgstr "Linke Farbe"
 
 msgid "Right Color"
 msgstr "Rechte Farbe"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -924,6 +944,9 @@ msgstr "Benutzerdefiniert"
 
 msgid "Rectangular Selection"
 msgstr "Rechteckige Auswahl"
+
+msgid "Zoom"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Farbauswahl"
