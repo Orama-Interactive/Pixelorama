@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-13 02:36\n"
+"PO-Revision-Date: 2020-04-13 02:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -627,7 +627,7 @@ msgid "Fit to frame"
 msgstr "Adatta al riquadro"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Ingrandimento 100%"
 
 msgid "Mirroring"
 msgstr "Speculare"
@@ -949,7 +949,7 @@ msgid "Rectangular Selection"
 msgstr "Selezione rettangolare"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Color Picker"
 msgstr "Selettore colore"
