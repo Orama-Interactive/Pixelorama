@@ -4,7 +4,7 @@
 
 * [Reporting bugs or proposing features](#reporting-bugs-or-proposing-features)
 * [Contributing pull requests](#contributing-pull-requests)
-* [Contributing with translations](#contributing-with-translation)
+* [Contributing translations](#contributing-translations)
 * [Communicating with developers](#communicating-with-developers)
 
 **Please read the first section before reporting a bug!**
@@ -23,7 +23,7 @@ If you want to add new features or fix bugs, please make sure that:
   [Static typing](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/static_typing.html) is used in the code, so please make sure the code in your PRs also use it.
 - Avoid including unneeded files in your commits. This is true mostly for Main.tscn and other scenes, as Godot likes to change them by itself. If you haven't made changes to scenes, please **do NOT** include them in your commits.
 - Please have **Trim Trailing Whitespace On Save** enabled. This makes for cleaner VCS diffs. It's usually considered good practice to avoid trailing whitespace in files, and to make sure all files end with a single blank line.
-  You can enable **Text Editor > Files > Trim Trailing Whitespace On Save** in the Editor Settings to do this automatically in the script editor
+  You can enable **Text Editor > Files > Trim Trailing Whitespace On Save** in the Editor Settings to do this automatically in the script editor.
 - Make sure your branch is up to date with the master branch. If it's not, please rebase it, if it's possible.
 - If your PR is closing an issue, make sure to let us know.
 - If you are adding new UI elements with text, please include the new strings in the `Translations.pot` file. Do not include them in the other `*.po` files.
@@ -38,7 +38,7 @@ This [Git style guide](https://github.com/agis-/git-style-guide) has some good p
 Keep in mind, however, that not all PRs will be merged. Some may need discussion, or others may be downright closed.
 
 
-## Contributing with translations
+## Contributing translations
 Pixelorama uses [Crowdin](https://crowdin.com/project/pixelorama) to host the translations. In order to contribute, you need to login with your Crowdin account, select the language(s) you'd like to provide translations for, select `Translations.pot` and start translating!
 If you need help with the context of some strings, or want to translate in a language that is not available, feel free to contact me (Overloaded). All languages are welcome to be translated!
 
@@ -46,7 +46,7 @@ If you need help with the context of some strings, or want to translate in a lan
 ## Communicating with developers
 To communicate with developers (e.g. to discuss a feature you want to implement or a bug you want to fix), the following channels can be used:
 
-- [GitHub issues](https://github.com/Orama-Interactive/Pixelorama/issues): If there is an
+- [GitHub Issues](https://github.com/Orama-Interactive/Pixelorama/issues): If there is an
   existing issue about a topic you want to discuss, just add a comment to it -
   all developers watch the repository and will get an email notification. You
   can also create a new issue - please keep in mind to create issues only to
