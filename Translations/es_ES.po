@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-04-12 16:51\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -458,6 +458,11 @@ msgid "Rectangular Selection\n\n"
 "Press %s to move the content"
 msgstr ""
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -501,9 +506,6 @@ msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
-
-msgid "Raw Mode"
-msgstr "Modo Crudo"
 
 msgid "Left tool options"
 msgstr "Opciones de herramienta izquierda"
@@ -588,6 +590,24 @@ msgstr "Color izquierdo"
 
 msgid "Right Color"
 msgstr "Color derecho"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Espejar"
@@ -898,6 +918,9 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
+msgstr ""
+
+msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"
