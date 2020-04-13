@@ -10,6 +10,24 @@ var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://Scripts/XDGDataPaths.gd")
 var directory_module : Node
 
+# Stuff for arrowkey-based canvas movements nyaa ^.^
+const low_speed_move_rate := 150.0
+const medium_speed_move_rate := 750.0
+const high_speed_move_rate := 3750.0
+
+enum Direction {
+	UP = 0,
+	DOWN = 1,
+	LEFT = 2,
+	RIGHT = 3
+}
+
+# Indices are as in the Direction enum
+# This is the total time the key for 
+# that direction has been pressed.
+var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
+
+
 # warning-ignore:unused_class_variable
 var loaded_locales : Array
 var undo_redo : UndoRedo

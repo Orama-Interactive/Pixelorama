@@ -12,11 +12,87 @@ func _ready() -> void:
 	tween = Tween.new()
 	add_child(tween)
 
+
+# Get the speed multiplier for when you've pressed
+# a movement key for the given amount of time
+func dir_move_zoom_multiplier(press_time : float) -> float:
+	if press_time < 0:
+		return 0.0
+	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_CONTROL) :
+		return Global.high_speed_move_rate
+	elif Input.is_key_pressed(KEY_SHIFT):
+		return Global.medium_speed_move_rate
+	else:
+		return Global.low_speed_move_rate
+			
+func reset_dir_move_time(direction) -> void:
+	Global.key_move_press_time[direction] = 0.0
+	
+
+const key_move_action_names := ["ui_up", "ui_down", "ui_left", "ui_right"]
+
+# Check if an event is a ui_up/down/left/right event-press :)
+func is_action_direction_pressed(event : InputEvent, allow_echo: bool = true) -> bool:
+	for action in key_move_action_names:
+		if event.is_action_pressed(action, allow_echo):
+			return true
+	return false
+	
+# Check if an event is a ui_up/down/left/right event release nya
+func is_action_direction_released(event: InputEvent) -> bool:
+	for action in key_move_action_names:
+		if event.is_action_released(action):
+			return true
+	return false
+
+# get the Direction associated with the event.
+# if not a direction event return null
+func get_action_direction(event: InputEvent):  # -> Optional[Direction] 
+	if event.is_action("ui_up"):
+		return Global.Direction.UP
+	elif event.is_action("ui_down"):
+		return Global.Direction.DOWN
+	elif event.is_action("ui_left"):
+		return Global.Direction.LEFT
+	elif event.is_action("ui_right"):
+		return Global.Direction.RIGHT
+	return null
+
+# Holds sign multipliers for the given directions nyaa
+# (per the indices in Global.gd defined by Direction)
+# UP, DOWN, LEFT, RIGHT in that order
+const directional_sign_multipliers := [
+	Vector2(0.0, -1.0),
+	Vector2(0.0, 1.0),
+	Vector2(-1.0, 0.0),
+	Vector2(1.0, 0.0)
+]
+
+# Process an action event for a pressed direction 
+# action
+func process_direction_action_pressed(event: InputEvent) -> void:
+	var dir = get_action_direction(event)
+	if dir == null:
+		return
+	var increment := get_process_delta_time()
+	# Count the total time we've been doing this ^.^
+	Global.key_move_press_time[dir] += increment
+	var this_direction_press_time : float = Global.key_move_press_time[dir]
+	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
+	offset = offset + move_speed * increment * directional_sign_multipliers[dir] * zoom
+
+# Process an action for a release direction action
+func process_direction_action_released(event: InputEvent) -> void:
+	var dir = get_action_direction(event)
+	if dir == null:
+		return
+	reset_dir_move_time(dir)
+
 func _input(event : InputEvent) -> void:
 	mouse_pos = viewport_container.get_local_mouse_position()
 	var viewport_size := viewport_container.rect_size
 	if event.is_action_pressed("middle_mouse") || event.is_action_pressed("space"):
-		drag = true
+		drag = true                
 	elif event.is_action_released("middle_mouse") || event.is_action_released("space"):
 		drag = false
 
@@ -27,6 +103,11 @@ func _input(event : InputEvent) -> void:
 			zoom_camera(1)
 		elif event is InputEventMouseMotion && drag:
 			offset = offset - event.relative * zoom
+		elif is_action_direction_pressed(event):
+			process_direction_action_pressed(event)
+		elif is_action_direction_released(event):
+			process_direction_action_released(event)
+		
 
 # Zoom Camera
 func zoom_camera(dir : int) -> void:
