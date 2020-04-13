@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-12 17:06\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "確定"
@@ -461,6 +461,11 @@ msgstr "長方形選取\n\n"
 "%s換成右鍵\n\n"
 "按住%s移動內容"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -518,9 +523,6 @@ msgstr "左右工具顏色互換\n"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "顏色改回初始值(左黑色, 右白色)"
-
-msgid "Raw Mode"
-msgstr "Raw 模式"
 
 msgid "Left tool options"
 msgstr "左鍵工具選項"
@@ -605,6 +607,24 @@ msgstr "左鍵工具顏色"
 
 msgid "Right Color"
 msgstr "右鍵工具顏色"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "鏡像"
@@ -923,6 +943,9 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
+msgstr ""
+
+msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"
