@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-12 17:07\n"
+"PO-Revision-Date: 2020-04-13 02:15\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -462,6 +462,11 @@ msgstr "Ορθογώνια επιλογή\n\n"
 "%s για το δεξί κουμπί ποντικιού\n\n"
 "Πατήστε %s για να μετακινηθεί το περιεχόμενο"
 
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -519,9 +524,6 @@ msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χ�
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
-
-msgid "Raw Mode"
-msgstr "Ωμή Λειτουργία"
 
 msgid "Left tool options"
 msgstr "Επιλογές αριστερού εργαλείου"
@@ -606,6 +608,24 @@ msgstr "Αριστερό Χρώμα"
 
 msgid "Right Color"
 msgstr "Δεξί Χρώμα"
+
+msgid "Mode:"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "Fit to frame"
+msgstr ""
+
+msgid "100% Zoom"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
@@ -925,6 +945,9 @@ msgstr "Προσαρμοσμένο"
 
 msgid "Rectangular Selection"
 msgstr "Ορθογώνια επιλογή"
+
+msgid "Zoom"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Επιλογέας χρωμάτων"
