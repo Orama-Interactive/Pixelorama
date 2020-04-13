@@ -320,14 +320,14 @@ func _input(event : InputEvent) -> void:
 
 	if mouse_pressed:
 		if can_handle || is_making_line:
-			if current_action != "None" && current_action != "ColorPicker":
+			if current_action != "None" && current_action != "ColorPicker" && current_action != "Zoom":
 				if current_action == "RectSelect":
 					handle_undo("Rectangle Select")
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		if can_handle || Global.undos == Global.undo_redo.get_version():
-			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker":
+			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker" && current_action != "Zoom":
 				handle_redo("Draw")
 
 	match current_action: # Handle current tool
