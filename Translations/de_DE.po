@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-13 09:48\n"
+"PO-Revision-Date: 2020-04-13 10:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -948,7 +948,7 @@ msgid "Rectangular Selection"
 msgstr "Rechteckige Auswahl"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Color Picker"
 msgstr "Farbauswahl"
