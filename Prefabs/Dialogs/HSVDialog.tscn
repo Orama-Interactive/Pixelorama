@@ -3,135 +3,160 @@
 [ext_resource path="res://Scripts/Dialogs/HSVDialog.gd" type="Script" id=1]
 
 [node name="HSVDialog" type="WindowDialog"]
+visible = true
 margin_left = 1.0
 margin_top = -1.0
 margin_right = 464.0
-margin_bottom = 151.0
+margin_bottom = 318.0
 window_title = "Adjust HSV"
 script = ExtResource( 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 17.0
-margin_right = -8.0
-margin_bottom = -44.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 458.0
+margin_bottom = 314.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+margin_right = 453.0
+margin_bottom = 197.0
+size_flags_vertical = 3
+expand = true
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 201.0
+margin_right = 453.0
+margin_bottom = 285.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Names" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 83.0
-margin_bottom = 91.0
+[node name="Names" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 82.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.9
 custom_constants/separation = 8
 
-[node name="Hue" type="Label" parent="HBoxContainer/Names"]
-margin_right = 83.0
+[node name="Hue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Names"]
+margin_right = 82.0
 margin_bottom = 14.0
 text = "Hue"
 align = 2
 
-[node name="Saturation" type="Label" parent="HBoxContainer/Names"]
+[node name="Saturation" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Names"]
 margin_top = 22.0
-margin_right = 83.0
+margin_right = 82.0
 margin_bottom = 36.0
 text = "Saturation"
 align = 2
 
-[node name="Value" type="Label" parent="HBoxContainer/Names"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Names"]
 margin_top = 44.0
-margin_right = 83.0
+margin_right = 82.0
 margin_bottom = 58.0
 text = "Value"
 align = 2
 
-[node name="Sliders" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 93.0
-margin_right = 370.0
-margin_bottom = 91.0
+[node name="Sliders" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 92.0
+margin_right = 368.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 custom_constants/separation = 7
 
-[node name="Hue" type="HSlider" parent="HBoxContainer/Sliders"]
-margin_right = 277.0
+[node name="Hue" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
+margin_right = 276.0
 margin_bottom = 16.0
-max_value = 359.0
-value = 180.0
+min_value = -180.0
+max_value = 180.0
 
-[node name="Saturation" type="HSlider" parent="HBoxContainer/Sliders"]
+[node name="Saturation" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 23.0
-margin_right = 277.0
+margin_right = 276.0
 margin_bottom = 39.0
-max_value = 99.0
-value = 50.0
+min_value = -100.0
+max_value = 100.0
 
-[node name="Value" type="HSlider" parent="HBoxContainer/Sliders"]
+[node name="Value" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 46.0
-margin_right = 277.0
+margin_right = 276.0
 margin_bottom = 62.0
-max_value = 99.0
-value = 50.0
+min_value = -100.0
+max_value = 100.0
 
-[node name="TextBoxes" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 380.0
-margin_right = 454.0
-margin_bottom = 91.0
+[node name="TextBoxes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 378.0
+margin_right = 452.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 custom_constants/separation = 6
 
-[node name="Hue" type="SpinBox" parent="HBoxContainer/TextBoxes"]
+[node name="Hue" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
 margin_right = 74.0
 margin_bottom = 24.0
-max_value = 359.0
-value = 180.0
+min_value = -180.0
+max_value = 180.0
 
-[node name="Saturation" type="SpinBox" parent="HBoxContainer/TextBoxes"]
+[node name="Saturation" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
 margin_top = 30.0
 margin_right = 74.0
 margin_bottom = 54.0
-max_value = 359.0
-value = 50.0
+min_value = -100.0
+max_value = 100.0
 
-[node name="Value" type="SpinBox" parent="HBoxContainer/TextBoxes"]
+[node name="Value" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
 margin_top = 60.0
 margin_right = 74.0
 margin_bottom = 84.0
-max_value = 359.0
-value = 50.0
+min_value = -100.0
+max_value = 100.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-margin_left = 117.0
-margin_top = 97.9999
-margin_right = 359.0
-margin_bottom = 138.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 289.0
+margin_right = 453.0
+margin_bottom = 309.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Apply" type="Button" parent="HBoxContainer2"]
-margin_right = 113.0
-margin_bottom = 40.0
+[node name="Apply" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 218.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Apply"
 
-[node name="Cancel" type="Button" parent="HBoxContainer2"]
-margin_left = 129.0
-margin_right = 242.0
-margin_bottom = 40.0
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 234.0
+margin_right = 453.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Cancel"
 [connection signal="about_to_show" from="." to="." method="_on_HSVDialog_about_to_show"]
-[connection signal="value_changed" from="HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
-[connection signal="value_changed" from="HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
-[connection signal="value_changed" from="HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
-[connection signal="value_changed" from="HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
-[connection signal="value_changed" from="HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
-[connection signal="value_changed" from="HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]
-[connection signal="pressed" from="HBoxContainer2/Apply" to="." method="_on_Apply_pressed"]
-[connection signal="pressed" from="HBoxContainer2/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Apply" to="." method="_on_Apply_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Cancel" to="." method="_on_Cancel_pressed"]
