@@ -505,19 +505,21 @@ margin_bottom = 124.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
-margin_bottom = 14.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
 
 [node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs"]
+margin_top = 1.0
 margin_right = 36.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 rect_min_size = Vector2( 36, 0 )
 text = "1"
 align = 1
 
 [node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
-margin_top = 18.0
+margin_top = 20.0
 margin_right = 36.0
-margin_bottom = 18.0
+margin_bottom = 20.0
 
 [node name="VSeparator" type="VSeparator" parent="AnimationContainer"]
 margin_left = 700.0
