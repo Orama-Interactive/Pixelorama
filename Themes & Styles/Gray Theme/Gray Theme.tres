@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=28 format=2]
+[gd_resource type="Theme" load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
@@ -127,6 +127,11 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id=27]
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+
 [sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 corner_radius_top_left = 4
@@ -234,6 +239,12 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+border_width_left = 2
+border_width_right = 2
+border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+
 [sub_resource type="StyleBoxFlat" id=26]
 bg_color = Color( 0.176471, 0.176471, 0.176471, 1 )
 border_width_left = 2
@@ -313,6 +324,8 @@ HScrollBar/styles/grabber_highlight = SubResource( 12 )
 HScrollBar/styles/grabber_pressed = SubResource( 13 )
 HScrollBar/styles/scroll = null
 HScrollBar/styles/scroll_focus = null
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = SubResource( 27 )
 HSlider/icons/grabber = null
 HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = null
@@ -501,6 +514,8 @@ VScrollBar/styles/grabber_highlight = SubResource( 12 )
 VScrollBar/styles/grabber_pressed = SubResource( 13 )
 VScrollBar/styles/scroll = null
 VScrollBar/styles/scroll_focus = null
+VSeparator/constants/separation = 4
+VSeparator/styles/separator = SubResource( 28 )
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 18
 WindowDialog/constants/close_v_ofs = 18
