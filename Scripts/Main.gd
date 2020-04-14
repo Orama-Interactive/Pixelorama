@@ -205,6 +205,8 @@ func _input(event : InputEvent) -> void:
 		redone = false
 
 	if Global.has_focus:
+		if event.is_action_pressed("undo") or event.is_action_pressed("redo") or event.is_action_pressed("redo_secondary"):
+			return
 		for t in tools: # Handle tool shortcuts
 			if event.is_action_pressed(t[2]): # Shortcut for right button (with Alt)
 				_on_Tool_pressed(t[0], false, false)
