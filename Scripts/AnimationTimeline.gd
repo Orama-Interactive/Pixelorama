@@ -18,6 +18,7 @@ func _h_scroll_changed(value : float) -> void:
 
 
 func add_frame() -> void:
+	print("yay")
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 	new_canvas.size = Global.canvas.size
 	new_canvas.frame = Global.canvases.size()
@@ -51,6 +52,41 @@ func add_frame() -> void:
 	Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+	Global.undo_redo.commit_action()
+
+func _on_DeleteFrame_pressed():
+	print(Global.canvases.size())
+	if Global.canvases.size() == 1:
+		return
+	var canvas : Canvas = Global.canvases[Global.current_frame]
+	var new_canvases := Global.canvases.duplicate()
+	new_canvases.erase(canvas)
+	var new_hidden_canvases := Global.hidden_canvases.duplicate()
+	new_hidden_canvases.append(canvas)
+	var current_frame := Global.current_frame
+	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
+		current_frame -= 1
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Remove Frame")
+
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "hidden_canvases", new_hidden_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
+	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
+
+	for i in range(Global.current_frame, new_canvases.size()):
+		var c : Canvas = new_canvases[i]
+		Global.undo_redo.add_do_property(c, "frame", i)
+		Global.undo_redo.add_undo_property(c, "frame", c.frame)
+
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "hidden_canvases", Global.hidden_canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+
+	Global.undo_redo.add_do_method(Global, "redo", [canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
 	Global.undo_redo.commit_action()
 
 
@@ -318,6 +354,7 @@ func _on_MergeDownLayer_pressed() -> void:
 
 func _on_OpacitySlider_value_changed(value) -> void:
 	Global.canvas.layers[Global.current_layer][2] = value / 100
+	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()

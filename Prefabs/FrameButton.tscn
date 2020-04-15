@@ -19,9 +19,9 @@ __meta__ = {
 
 [node name="FrameTexture" type="TextureRect" parent="."]
 margin_left = 2.0
-margin_top = 2.0
+margin_top = 1.78536
 margin_right = 34.0
-margin_bottom = 34.0
+margin_bottom = 33.7854
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
