@@ -70,7 +70,8 @@ func _ready() -> void:
 		"Rotate Image" : 0,
 		"Invert colors" : 0,
 		"Desaturation" : 0,
-		"Outline" : 0
+		"Outline" : 0,
+		"Adjust Hue/Saturation/Value":0
 		}
 	var help_menu_items := {
 		"View Splash Screen" : 0,
@@ -386,6 +387,9 @@ func image_menu_id_pressed(id : int) -> void:
 			Global.canvas.handle_redo("Draw")
 		7: # Outline
 			$OutlineDialog.popup_centered()
+			Global.can_draw = false
+		8: # HSV
+			$HSVDialog.popup_centered()
 			Global.can_draw = false
 
 func help_menu_id_pressed(id : int) -> void:

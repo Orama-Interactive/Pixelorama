@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Vertical_Mirror_On.png" type="Texture" id=41]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Vertical_Mirror_Off.png" type="Texture" id=42]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Zoom.png" type="Texture" id=43]
+[ext_resource path="res://Prefabs/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 88
@@ -1299,8 +1300,9 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
-current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
+
+current_dir = "D:/libDev/git/Pixelorama-git"
+current_path = "D:/libDev/git/Pixelorama-git/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1315,12 +1317,12 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
-current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
+current_dir = "D:/libDev/git/Pixelorama-git"
+current_path = "D:/libDev/git/Pixelorama-git/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
-current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
+current_dir = "D:/libDev/git/Pixelorama-git"
+current_path = "D:/libDev/git/Pixelorama-git/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -1373,8 +1375,12 @@ dialog_text = "This is an error message!"
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "/home/laurenz/Dokumente/Godot/Pixelorama"
-current_path = "/home/laurenz/Dokumente/Godot/Pixelorama/"
+
+current_dir = "D:/libDev/git/Pixelorama-git"
+current_path = "D:/libDev/git/Pixelorama-git/"
+
+[node name="HSVDialog" parent="." instance=ExtResource( 44 )]
+visible = false
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
@@ -1451,6 +1457,7 @@ visible = false
 [connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
 [connection signal="popup_hide" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
+[connection signal="popup_hide" from="HSVDialog" to="." method="_can_draw_true"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]
 
