@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Dialogs/HSVDialog.gd" type="Script" id=1]
 
 [node name="HSVDialog" type="WindowDialog"]
-visible = true
 margin_left = 1.0
 margin_top = -1.0
 margin_right = 464.0
@@ -85,6 +84,7 @@ custom_constants/separation = 7
 [node name="Hue" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
 margin_right = 276.0
 margin_bottom = 16.0
+mouse_default_cursor_shape = 2
 min_value = -180.0
 max_value = 180.0
 
@@ -92,15 +92,15 @@ max_value = 180.0
 margin_top = 23.0
 margin_right = 276.0
 margin_bottom = 39.0
+mouse_default_cursor_shape = 2
 min_value = -100.0
-max_value = 100.0
 
 [node name="Value" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 46.0
 margin_right = 276.0
 margin_bottom = 62.0
+mouse_default_cursor_shape = 2
 min_value = -100.0
-max_value = 100.0
 
 [node name="TextBoxes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 378.0
@@ -113,6 +113,7 @@ custom_constants/separation = 6
 [node name="Hue" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
 margin_right = 74.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 1
 min_value = -180.0
 max_value = 180.0
 
@@ -120,15 +121,15 @@ max_value = 180.0
 margin_top = 30.0
 margin_right = 74.0
 margin_bottom = 54.0
+mouse_default_cursor_shape = 1
 min_value = -100.0
-max_value = 100.0
 
 [node name="Value" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
 margin_top = 60.0
 margin_right = 74.0
 margin_bottom = 84.0
+mouse_default_cursor_shape = 1
 min_value = -100.0
-max_value = 100.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 289.0
@@ -142,6 +143,7 @@ __meta__ = {
 [node name="Apply" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 218.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Apply"
 
@@ -149,6 +151,7 @@ text = "Apply"
 margin_left = 234.0
 margin_right = 453.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Cancel"
 [connection signal="about_to_show" from="." to="." method="_on_HSVDialog_about_to_show"]

@@ -320,6 +320,9 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
+msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
 msgid "Diagonal"
 msgstr ""
 

@@ -39,7 +39,7 @@ func _on_Apply_pressed():
 	reset()
 	visible = false
 
-func reset():
+func reset() -> void:
 	disconnect_signals()
 	hue_slider.value = 0
 	sat_slider.value = 0
@@ -49,7 +49,7 @@ func reset():
 	val_spinbox.value = 0
 	reconnect_signals()
 
-func update_preview():
+func update_preview() -> void:
 	preview_image.copy_from(current_layer)
 	Global.canvas.adjust_hsv(preview_image,0,hue_slider.value)
 	Global.canvas.adjust_hsv(preview_image,1,sat_slider.value)
@@ -57,7 +57,7 @@ func update_preview():
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
 
-func disconnect_signals():
+func disconnect_signals() -> void:
 	hue_slider.disconnect("value_changed",self,"_on_Hue_value_changed")
 	sat_slider.disconnect("value_changed",self,"_on_Saturation_value_changed")
 	val_slider.disconnect("value_changed",self,"_on_Value_value_changed")
@@ -65,7 +65,7 @@ func disconnect_signals():
 	sat_spinbox.disconnect("value_changed",self,"_on_Saturation_value_changed")
 	val_spinbox.disconnect("value_changed",self,"_on_Value_value_changed")
 
-func reconnect_signals():
+func reconnect_signals() -> void:
 	hue_slider.connect("value_changed",self,"_on_Hue_value_changed")
 	sat_slider.connect("value_changed",self,"_on_Saturation_value_changed")
 	val_slider.connect("value_changed",self,"_on_Value_value_changed")
