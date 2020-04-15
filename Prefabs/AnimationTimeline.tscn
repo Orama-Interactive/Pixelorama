@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -44,6 +44,8 @@
 [ext_resource path="res://Prefabs/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Delete_Frame.png" type="Texture" id=43]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Delete_Frame_Hover.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Copy_Frame_Hover.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Copy_Frame.png" type="Texture" id=46]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -268,18 +270,31 @@ texture_hover = ExtResource( 20 )
 margin_left = 178.0
 margin_right = 198.0
 margin_bottom = 20.0
-hint_tooltip = "Add a new frame"
+hint_tooltip = "Remove Frame"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture_normal = ExtResource( 43 )
 texture_hover = ExtResource( 44 )
 
-[node name="FrameTagButton" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+[node name="CopyFrame" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 202.0
 margin_right = 222.0
+margin_bottom = 20.0
+hint_tooltip = "Clone Frame"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 46 )
+texture_hover = ExtResource( 45 )
+
+[node name="FrameTagButton" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 226.0
+margin_right = 246.0
 margin_bottom = 20.0
 hint_tooltip = "Manage frame tags"
 mouse_default_cursor_shape = 2
@@ -289,8 +304,8 @@ texture_normal = ExtResource( 41 )
 texture_hover = ExtResource( 40 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 275.0
-margin_right = 415.0
+margin_left = 287.0
+margin_right = 427.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -605,6 +620,7 @@ text = "Blue-Red Mode"
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
