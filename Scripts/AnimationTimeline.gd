@@ -18,7 +18,6 @@ func _h_scroll_changed(value : float) -> void:
 
 
 func add_frame() -> void:
-	print("yay")
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 	new_canvas.size = Global.canvas.size
 	new_canvas.frame = Global.canvases.size()
@@ -55,7 +54,6 @@ func add_frame() -> void:
 	Global.undo_redo.commit_action()
 
 func _on_DeleteFrame_pressed():
-	print(Global.canvases.size())
 	if Global.canvases.size() == 1:
 		return
 	var canvas : Canvas = Global.canvases[Global.current_frame]
