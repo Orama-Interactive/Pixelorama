@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-15 13:10\n"
+"PO-Revision-Date: 2020-04-15 13:33\n"
 
 msgid "OK"
 msgstr "确定"
@@ -714,6 +714,13 @@ msgstr "未来帧"
 
 msgid "Manage frame tags"
 msgstr "管理帧标签"
+
+msgid "Animation plays only on frames of the same tag"
+msgstr ""
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
+msgstr ""
 
 msgid "Blue-Red Mode"
 msgstr "蓝红模式"
