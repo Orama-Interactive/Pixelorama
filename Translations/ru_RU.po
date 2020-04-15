@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-15 13:33\n"
+"PO-Revision-Date: 2020-04-15 13:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -331,7 +331,7 @@ msgid "Outline"
 msgstr "Обводка"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
 msgid "Diagonal"
 msgstr "Диагональ"
