@@ -25,7 +25,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Esperanto translation.
 - When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
 - A new zoom tool has been added, and you can also zoom in with the `+` key, and zoom out with `-`.
-- You can now move the canvas with the `Arrow keys`. `Shift + Arrows` make it move with medium speed, and `Ctrl + Shuft + Arrows` makes it move with high speed.
+- You can now move the canvas with the `Arrow keys`. `Shift + Arrows` make it move with medium speed, and `Ctrl + Shift + Arrows` makes it move with high speed.
 - The left and right tool icon options (found in Preferences) are now saved and restored on startup.
 
 ### Changed
@@ -51,8 +51,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
 - Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else.! (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
-- Fixed bug where the user could drag the selection when it had no focus.
-
+- Fixed bug where the user could drag the selection and the guides when the canvas had no focus.
 
 ### Removed
 - It's no longer possible for frames to have different amounts of layers. All frames have the same amount.

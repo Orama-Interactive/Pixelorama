@@ -53,5 +53,5 @@ To communicate with developers (e.g. to discuss a feature you want to implement 
   discuss quite specific points about the development, and not general user
   feedback or support requests.
 - [Our Discord Server](https://discord.gg/GTMtr8s): All developers and most contributors are there, so it's the best way for direct chat
-  about Pixelorama. You can use the channel #pixelorama-dev to stay up to date with Pixelorama's developments real-time,
-  or talk about the developments and request new features. If you seek support, please use the #pixelorama-help channel instead.
+  about Pixelorama. You can use the channel `#pixelorama-dev` to stay up to date with Pixelorama's developments real-time,
+  or talk about the developments and request new features. If you seek support, please use the `#pixelorama-help` channel instead.

@@ -71,7 +71,7 @@ func _ready() -> void:
 		"Invert colors" : 0,
 		"Desaturation" : 0,
 		"Outline" : 0,
-		"Adjust Hue/Saturation/Value":0
+		"Adjust Hue/Saturation/Value" : 0
 		}
 	var help_menu_items := {
 		"View Splash Screen" : 0,
