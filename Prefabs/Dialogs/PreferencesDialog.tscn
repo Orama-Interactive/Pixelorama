@@ -6,10 +6,10 @@
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
-margin_top = 2.0
+margin_top = 9.0
 margin_right = 419.0
-margin_bottom = 1092.0
-rect_min_size = Vector2( 422, 0 )
+margin_bottom = 1163.0
+rect_min_size = Vector2( 422, 340 )
 window_title = "Preferences"
 resizable = true
 script = ExtResource( 1 )
@@ -35,7 +35,7 @@ __meta__ = {
 
 [node name="Tree" type="Tree" parent="HSplitContainer"]
 margin_right = 86.0
-margin_bottom = 1046.0
+margin_bottom = 1110.0
 rect_min_size = Vector2( 85, 0 )
 custom_constants/item_margin = -2
 hide_root = true
@@ -43,13 +43,13 @@ hide_root = true
 [node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer"]
 margin_left = 98.0
 margin_right = 406.0
-margin_bottom = 1046.0
+margin_bottom = 1110.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 308.0
-margin_bottom = 1042.0
+margin_bottom = 1074.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -461,7 +461,7 @@ color = Color( 0, 0, 0, 0 )
 [node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_top = 820.0
 margin_right = 308.0
-margin_bottom = 1042.0
+margin_bottom = 1074.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_right = 308.0
@@ -492,7 +492,7 @@ margin_bottom = 28.0
 [node name="Shortcuts" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_top = 32.0
 margin_right = 308.0
-margin_bottom = 222.0
+margin_bottom = 254.0
 custom_constants/hseparation = 5
 columns = 3
 
@@ -670,6 +670,35 @@ margin_left = 227.0
 margin_top = 170.0
 margin_right = 307.0
 margin_bottom = 190.0
+
+[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 194.0
+margin_right = 137.0
+margin_bottom = 198.0
+
+[node name="HSeparator5" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 194.0
+margin_right = 222.0
+margin_bottom = 198.0
+
+[node name="HSeparator6" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 227.0
+margin_top = 194.0
+margin_right = 307.0
+margin_bottom = 198.0
+
+[node name="Switch Colors" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 205.0
+margin_right = 137.0
+margin_bottom = 219.0
+text = "Switch Colors"
+
+[node name="switch_colors" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 202.0
+margin_right = 222.0
+margin_bottom = 222.0
 
 [node name="Popups" type="Node" parent="."]
 

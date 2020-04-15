@@ -972,6 +972,9 @@ msgstr ""
 msgid "Lighten/Darken"
 msgstr ""
 
+msgid "Switch Colors"
+msgstr ""
+
 msgid "Set the shortcut"
 msgstr ""
 
