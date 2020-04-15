@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-15 13:33\n"
+"PO-Revision-Date: 2020-04-15 15:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -331,7 +331,7 @@ msgid "Outline"
 msgstr "轮廓"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "调整色相/饱和度/值"
 
 msgid "Diagonal"
 msgstr "对角线"
@@ -716,11 +716,12 @@ msgid "Manage frame tags"
 msgstr "管理帧标签"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "动画仅在同一个标签的帧上播放"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "如果选中，动画仅在具有相同标签的帧上播放。\n"
+"如果没有，动画将播放所有帧，忽略标签。"
 
 msgid "Blue-Red Mode"
 msgstr "蓝红模式"
