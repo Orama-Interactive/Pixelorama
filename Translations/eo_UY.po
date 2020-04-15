@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-13 02:15\n"
+"PO-Revision-Date: 2020-04-15 13:10\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -329,6 +329,9 @@ msgstr ""
 
 msgid "Outline"
 msgstr "Konturoj"
+
+msgid "Adjust Hue/Saturation/Value"
+msgstr ""
 
 msgid "Diagonal"
 msgstr ""
