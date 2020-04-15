@@ -5,8 +5,8 @@ var current_tag_id := 0
 var tag_vboxes := []
 var delete_tag_button : Button
 
-onready var main_vbox_cont : VBoxContainer = $ScrollContainer/VBoxContainer
-onready var add_tag_button : TextureButton = $ScrollContainer/VBoxContainer/AddTag
+onready var main_vbox_cont : VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
+onready var add_tag_button : TextureButton = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
 onready var options_dialog = $TagOptions
 
 
@@ -29,6 +29,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 
 		var edit_button := Button.new()
 		edit_button.text = "Edit"
+		edit_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		edit_button.connect("pressed", self, "_on_EditButton_pressed", [i])
 		hbox_cont.add_child(edit_button)
 		vbox_cont.add_child(hbox_cont)
@@ -100,3 +101,7 @@ func _on_TagOptions_custom_action(action : String) -> void:
 func _on_TagOptions_popup_hide() -> void:
 	if delete_tag_button:
 		delete_tag_button.visible = false
+
+
+func _on_PlayOnlyTags_toggled(button_pressed : bool) -> void:
+	Global.play_only_tags = button_pressed

@@ -12,8 +12,9 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
 - Cel linking is now possible. This way, layers can be "shared" in multiple frames.
 - You can now group multiple frames with tags.
-- You can now export your projects to .gif files
+- You can now export your projects to .gif files.
 - A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
+- A HSV Adjust dialog has been added in the Images menu.
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
 - Users can change keyboard shortcut binding for tools.
 - Importing .pngs as palettes is now possible.
@@ -33,7 +34,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
 - Notification text is now black on the gold and light themes.
-- Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
+- Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter).
 - LineEdits lose focus when the user presses Enter.
 - Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
 - The Godot theme has changed.
@@ -50,6 +51,8 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
 - Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else.! (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
+- Fixed bug where the user could drag the selection when it had no focus.
+
 
 ### Removed
 - It's no longer possible for frames to have different amounts of layers. All frames have the same amount.
