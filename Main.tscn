@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -1178,6 +1178,9 @@ texture_hover = ExtResource( 22 )
 margin_right = 12.0
 margin_bottom = 20.0
 items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
@@ -1287,6 +1290,7 @@ columns = 5
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
+window_title = "Please Confirm..."
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1322,13 +1326,16 @@ current_path = "D:/libDev/git/Pixelorama-git/"
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
+window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
+window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
+window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
@@ -1341,6 +1348,7 @@ dialog_text = "Are you sure want to proceed?"
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
