@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-04-15 13:10\n"
+"PO-Revision-Date: 2020-04-15 13:33\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -711,6 +711,13 @@ msgid "Future Frames"
 msgstr "Nākošie kadri"
 
 msgid "Manage frame tags"
+msgstr ""
+
+msgid "Animation plays only on frames of the same tag"
+msgstr ""
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
 msgstr ""
 
 msgid "Blue-Red Mode"
