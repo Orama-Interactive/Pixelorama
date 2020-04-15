@@ -26,7 +26,8 @@ If you want to add new features or fix bugs, please make sure that:
   You can enable **Text Editor > Files > Trim Trailing Whitespace On Save** in the Editor Settings to do this automatically in the script editor.
 - Make sure your branch is up to date with the master branch. If it's not, please rebase it, if it's possible.
 - If your PR is closing an issue, make sure to let us know.
-- If you are adding new UI elements with text, please include the new strings in the `Translations.pot` file. Do not include them in the other `*.po` files.
+- If you're making visual changes, it's a good idea to include screenshots in your PR. It's an easy way to let others know of the changes you made.
+- If you are adding new UI elements with text, please include the new strings in the `Translations.pot` file. Do not include them in the other `*.po` files. Please make sure to group similar elements together (like element names and their tooltips) by placing them close to each other.
 - If you are making changes to popup (and as an extension, dialog) nodes as different scenes, please don't forget to turn off their visibility.
 - When you're creating a new script, Godot will place some comments and methods for you. If you're not using them, please remove them. They're taking unnecessary space.
 - Avoid using the "pass" keyword. It has no actual usage, besides being used as a placeholder for temporarily empty methods and empty cases. Make sure you don't include empty methods and cases in the code of your PR.
