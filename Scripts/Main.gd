@@ -87,8 +87,8 @@ func _ready() -> void:
 
 		# Set the language option menu's default selected option to the loaded locale
 		var locale_index: int = Global.loaded_locales.find(saved_locale)
-		$PreferencesDialog.languages.get_child(1).pressed = false
-		$PreferencesDialog.languages.get_child(locale_index + 2).pressed = true
+		$PreferencesDialog.languages.get_child(0).pressed = false # Unset System Language option in preferences
+		$PreferencesDialog.languages.get_child(locale_index + 1).pressed = true
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 

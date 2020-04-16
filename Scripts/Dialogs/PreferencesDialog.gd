@@ -21,7 +21,7 @@ onready var default_fill_color = $HSplitContainer/ScrollContainer/VBoxContainer/
 onready var grid_width_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue"
 onready var grid_height_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue"
 onready var grid_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor"
-onready var guide_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GuideColor"
+onready var guide_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GuideOptions/GuideColor"
 
 # Shortcuts
 onready var theme_font_color : Color = $Popups/ShortcutSelector/EnteredShortcut.get_color("font_color")
@@ -48,10 +48,10 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
-		themes.get_child(theme_id + 1).pressed = true
+		themes.get_child(theme_id).pressed = true
 	else:
 		change_theme(0)
-		themes.get_child(1).pressed = true
+		themes.get_child(0).pressed = true
 
 	# Set default values for General options
 	if Global.config_cache.has_section_key("preferences", "smooth_zoom"):
