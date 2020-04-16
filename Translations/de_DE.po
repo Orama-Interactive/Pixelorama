@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-16 15:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -119,13 +119,13 @@ msgid "Tile Mode"
 msgstr "Tile Modus"
 
 msgid "Show Grid"
-msgstr "Zeige Gitter"
+msgstr "Zeige Raster"
 
 msgid "Show Rulers"
 msgstr "Zeige Lineale"
 
 msgid "Show Guides"
-msgstr "Zeige Anleitungen"
+msgstr "Zeige Guides"
 
 msgid "Show Animation Timeline"
 msgstr "Zeige Animations-Zeitleiste"
@@ -279,7 +279,7 @@ msgid "Smooth Zoom"
 msgstr "Smoother Zoom"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Fügt einen glatteren Übergang beim Zoomen hinzu"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Tabletdrucksensitivität:"
@@ -539,43 +539,43 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Zeige rechtes Mausanzeige oder Pinsel auf der Leinwand wenn gezeichnet wird"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Linkes Werkzeugsymbol anzeigen"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Zeigt ein Symbol des ausgewählten linken Werkzeugs neben dem Cursor auf dem Canvas an"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Rechtes Werkzeugsymbol anzeigen"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Guidefarbe:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Eine Farbe der Linealguides, die auf dem Canvas angezeigt werden"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Rasterbreite:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Legt fest, wie weit die vertikalen Linien des Rasters voneinander entfernt sind"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Rasterhöhe:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Legt fest, wie weit die horizontalen Linien des Rasters voneinander entfernt sind"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Rasterfarbe:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Eine Farbe des Gitters"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
 
 msgid "Brush:"
 msgstr "Pinsel:"
@@ -956,7 +956,7 @@ msgid "Image Options"
 msgstr "Bild Optionen"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Standardweite:"
 
 msgid "A default width of a new image"
 msgstr ""
@@ -1013,7 +1013,7 @@ msgid "Lighten/Darken"
 msgstr "Erhellen/Verdunkeln"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Wechsle Farben"
 
 msgid "Set the shortcut"
 msgstr "Tastenkürzel einrichten"
