@@ -115,7 +115,7 @@ var right_color_picker_for := 1
 
 # 0 for zoom in, 1 for zoom out
 var left_zoom_mode := 0
-var right_zoom_mode := 0
+var right_zoom_mode := 1
 
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false

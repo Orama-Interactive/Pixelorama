@@ -507,8 +507,8 @@ func _input(event : InputEvent) -> void:
 
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
-	var bigger = max(size.x, size.y)
-	var zoom_max := Vector2(bigger, bigger) * 0.01
+	var bigger_canvas_axis = max(size.x, size.y)
+	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
 	if zoom_max > Vector2.ONE:
 		Global.camera.zoom_max = zoom_max
 		Global.camera2.zoom_max = zoom_max
@@ -518,9 +518,10 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 		Global.camera_preview.zoom_max = Vector2.ONE
 
-	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
-	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
-	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007
+	var smaller_viewport_axis = min(Global.main_viewport.rect_size.x, Global.main_viewport.rect_size.y)
+	Global.camera.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) / smaller_viewport_axis
+	Global.camera2.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.002
+	Global.camera_preview.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.007
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 
 	# Set camera offset to the center of canvas
