@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-04-16 15:16\n"
+"PO-Revision-Date: 2020-04-16 15:30\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1008,6 +1008,9 @@ msgstr "Spainis"
 
 msgid "Lighten/Darken"
 msgstr "Izgaismot/ aptumšot"
+
+msgid "Switch Colors"
+msgstr ""
 
 msgid "Set the shortcut"
 msgstr ""
