@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-16 15:16\n"
+"PO-Revision-Date: 2020-04-16 15:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1008,6 +1008,9 @@ msgstr "Заливка"
 
 msgid "Lighten/Darken"
 msgstr "Осветлить/затемнить"
+
+msgid "Switch Colors"
+msgstr ""
 
 msgid "Set the shortcut"
 msgstr "Выставить горячую(ие) клавишу(и)"
