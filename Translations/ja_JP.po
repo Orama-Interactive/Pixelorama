@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-04-16 15:16\n"
+"PO-Revision-Date: 2020-04-16 15:30\n"
 
 msgid "OK"
 msgstr ""
@@ -982,6 +982,9 @@ msgid "Bucket"
 msgstr ""
 
 msgid "Lighten/Darken"
+msgstr ""
+
+msgid "Switch Colors"
 msgstr ""
 
 msgid "Set the shortcut"
