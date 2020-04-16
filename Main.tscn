@@ -45,11 +45,7 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Zoom.png" type="Texture" id=43]
 [ext_resource path="res://Prefabs/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 
-[sub_resource type="InputEventKey" id=1]
-scancode = 88
-
 [sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
 
 [sub_resource type="Image" id=11]
 data = {
@@ -1329,6 +1325,7 @@ current_path = "D:/libDev/git/Pixelorama-git/"
 window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
+visible = false
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
 window_title = "Please Confirm..."

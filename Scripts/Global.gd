@@ -210,6 +210,8 @@ var import_sprites_dialog : FileDialog
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
 
+var color_switch_button : TextureButton
+
 var left_tool_options_container : Container
 var right_tool_options_container : Container
 
@@ -337,6 +339,7 @@ func _ready() -> void:
 
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	color_switch_button = find_node_by_name(root, "ColorSwitch")
 
 	left_brush_type_container = find_node_by_name(left_tool_options_container, "LeftBrushType")
 	right_brush_type_container = find_node_by_name(right_tool_options_container, "RightBrushType")
@@ -746,7 +749,7 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
-(%s)""") % "X"
+(%s)""") % InputMap.get_action_list("switch_colors")[0].as_text()
 
 	var first_frame : BaseButton = find_node_by_name(root, "FirstFrame")
 	first_frame.hint_tooltip = tr("""Jump to the first frame

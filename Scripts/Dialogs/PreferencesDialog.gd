@@ -363,6 +363,9 @@ func set_action_shortcut(action : String, old_input : InputEventKey, new_input :
 	InputMap.action_erase_event(action, old_input)
 	InputMap.action_add_event(action, new_input)
 	Global.update_hint_tooltips()
+	# Set shortcut to switch colors button
+	if action == "switch_colors":
+		Global.color_switch_button.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
 
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
