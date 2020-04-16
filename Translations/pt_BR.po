@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-04-16 15:16\n"
+"PO-Revision-Date: 2020-04-16 15:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1008,6 +1008,9 @@ msgstr "Preenchimento"
 
 msgid "Lighten/Darken"
 msgstr "Iluminar/Escurece"
+
+msgid "Switch Colors"
+msgstr ""
 
 msgid "Set the shortcut"
 msgstr ""
