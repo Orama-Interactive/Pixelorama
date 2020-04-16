@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-16 16:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -280,7 +280,7 @@ msgid "Smooth Zoom"
 msgstr "Zoom smussato"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Aggiunge una transizione più fluida quando si zooma in entrata o fuori"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilità della pressione del tablet:"
@@ -540,25 +540,25 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Mostra icona strumento a sinistra"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Visualizza un'icona dello strumento sinistro selezionato accanto al cursore sulla tela"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Mostra l'icona dello strumento destra"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Visualizza un'icona dello strumento destro selezionato accanto al cursore sulla tela"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Colore delle guide:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Un colore di guide per righello visualizzate sulla tela"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Larghezza griglia:"
 
 msgid "Sets how far apart are vertical lines of the grid"
 msgstr ""
@@ -1013,7 +1013,7 @@ msgid "Lighten/Darken"
 msgstr "Lucido/Scuro"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Cambia Colori"
 
 msgid "Set the shortcut"
 msgstr "Imposta il collegamento"
