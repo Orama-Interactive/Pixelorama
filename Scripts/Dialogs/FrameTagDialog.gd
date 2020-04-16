@@ -59,6 +59,8 @@ func _on_FrameTagDialog_popup_hide() -> void:
 func _on_AddTag_pressed() -> void:
 	options_dialog.popup_centered()
 	current_tag_id = Global.animation_tags.size()
+	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.current_frame + 1
+	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.current_frame + 1
 
 
 func _on_EditButton_pressed(_tag_id : int) -> void:
@@ -79,6 +81,13 @@ func _on_TagOptions_confirmed() -> void:
 	var tag_color : Color = options_dialog.get_node("GridContainer/ColorPickerButton").color
 	var tag_from : int = options_dialog.get_node("GridContainer/FromSpinBox").value
 	var tag_to : int = options_dialog.get_node("GridContainer/ToSpinBox").value
+
+	if tag_to > Global.canvases.size():
+		tag_to = Global.canvases.size()
+
+	if tag_from > tag_to:
+		tag_from = tag_to
+
 	if current_tag_id == Global.animation_tags.size():
 		Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
 		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()

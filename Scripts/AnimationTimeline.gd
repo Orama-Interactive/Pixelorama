@@ -92,12 +92,12 @@ func _on_CopyFrame_pressed():
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 	new_canvas.size = Global.canvas.size
 	new_canvas.frame = Global.canvases.size()
-	
+
 	var new_canvases := Global.canvases.duplicate()
 	new_canvases.append(new_canvas)
 	var new_hidden_canvases := Global.hidden_canvases.duplicate()
 	new_hidden_canvases.append(new_canvas)
-	
+
 	for layer in canvas.layers: # Copy every layer
 		var sprite := Image.new()
 		sprite.copy_from(layer[0])
@@ -122,7 +122,7 @@ func _on_CopyFrame_pressed():
 		for c in Global.canvases:
 			Global.undo_redo.add_do_property(c, "visible", false)
 			Global.undo_redo.add_undo_property(c, "visible", c.visible)
-	
+
 		Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 		Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
 		Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
