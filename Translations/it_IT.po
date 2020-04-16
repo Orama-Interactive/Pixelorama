@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-16 16:26\n"
+"PO-Revision-Date: 2020-04-16 22:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -561,22 +561,22 @@ msgid "Grid width:"
 msgstr "Larghezza griglia:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Imposta quanto distante sono le linee verticali della griglia"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Altezza della griglia:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Imposta quanto distano le linee orizzontali della griglia"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Colore della griglia:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Un colore della griglia"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Solo il preset personalizzato può essere modificato"
 
 msgid "Brush:"
 msgstr "Pennello:"
@@ -956,22 +956,22 @@ msgid "Image Options"
 msgstr "Opzioni dell'immagine:"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Larghezza default:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Una larghezza predefinita di una nuova immagine"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Altezza default:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Un'altezza predefinita di una nuova immagini"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Colore di riempimento predefinito:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Un colore di sfondo predefinito di una nuova immagine"
 
 msgid "Lock aspect ratio:"
 msgstr "Blocca rapporto d'aspetto:"
@@ -1025,14 +1025,14 @@ msgid "Already assigned"
 msgstr "Già assegnato"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Strumento sinistra:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Uno strumento assegnato al pulsante sinistro del mouse"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Strumento destra:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Uno strumento assegnato al pulsante destro del mouse"
 
