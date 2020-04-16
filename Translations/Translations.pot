@@ -537,6 +537,9 @@ msgstr ""
 msgid "Grid height:"
 msgstr ""
 
+msgid "Sets how far apart are horizontal lines of the grid"
+msgstr ""
+
 msgid "Grid color:"
 msgstr ""
 
