@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-16 15:16\n"
+"PO-Revision-Date: 2020-04-16 15:30\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1011,6 +1011,9 @@ msgstr "Κουβάς"
 
 msgid "Lighten/Darken"
 msgstr "Φώτισμα/Σκούρημα"
+
+msgid "Switch Colors"
+msgstr ""
 
 msgid "Set the shortcut"
 msgstr "Επιλέξτε μια συντόμευση"
