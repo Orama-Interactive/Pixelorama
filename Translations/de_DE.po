@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-16 06:29\n"
+"PO-Revision-Date: 2020-04-16 06:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -330,7 +330,7 @@ msgid "Outline"
 msgstr "Umriss"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Farbton/Sättigung/Wert anpassen"
 
 msgid "Diagonal"
 msgstr "Diagonal"
