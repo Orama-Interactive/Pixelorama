@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-04-15 13:33\n"
+"PO-Revision-Date: 2020-04-16 15:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -276,11 +276,11 @@ msgstr "Guias e Grade"
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-msgid "General Options"
-msgstr "Opções Gerais"
-
 msgid "Smooth Zoom"
 msgstr "Ampliar Suave"
+
+msgid "Adds a smoother transition when zooming in or out"
+msgstr ""
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilidade de pressão do Tablet:"
@@ -290,15 +290,6 @@ msgstr "Nenhum"
 
 msgid "Affect Brush's Alpha"
 msgstr "Afetar o alfa do pincel"
-
-msgid "Language options"
-msgstr "Opções de linguagem"
-
-msgid "Theme options"
-msgstr "Opções de tema"
-
-msgid "Grid options"
-msgstr "Opções de grade"
 
 msgid "Color:"
 msgstr "Cor:"
@@ -540,14 +531,50 @@ msgstr "Pixel indicador esquerdo"
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Mostrar o indicador pixel do mouse esquerdo ou o pincel na tela quando desenhando"
 
+msgid "Right pixel indicator"
+msgstr "Pixel indicador direito"
+
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Mostrar o indicador pixel do mouse direito ou o pincel na tela quando desenhando"
 
-msgid "Show tool icon"
-msgstr "Mostrar ícone da ferramenta"
+msgid "Show left tool icon"
+msgstr ""
 
-msgid "Right pixel indicator"
-msgstr "Pixel indicador direito"
+msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
+msgstr ""
+
+msgid "Show right tool icon"
+msgstr ""
+
+msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr ""
+
+msgid "Guides color:"
+msgstr ""
+
+msgid "A color of ruler guides displayed on the canvas"
+msgstr ""
+
+msgid "Grid width:"
+msgstr ""
+
+msgid "Sets how far apart are vertical lines of the grid"
+msgstr ""
+
+msgid "Grid height:"
+msgstr ""
+
+msgid "Sets how far apart are horizontal lines of the grid"
+msgstr ""
+
+msgid "Grid color:"
+msgstr ""
+
+msgid "A color of the grid"
+msgstr ""
+
+msgid "Only custom preset can be modified"
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -925,14 +952,23 @@ msgstr "Peque este lugar!"
 msgid "Image Options"
 msgstr "Opções de Imagem"
 
-msgid "Default Width:"
-msgstr "Largura Padrão:"
+msgid "Default width:"
+msgstr ""
 
-msgid "Default Height:"
-msgstr "Altura Padrão:"
+msgid "A default width of a new image"
+msgstr ""
 
-msgid "Default Fill Color:"
-msgstr "Cor de Preenchimento Padrão:"
+msgid "Default height:"
+msgstr ""
+
+msgid "A default height of a new image"
+msgstr ""
+
+msgid "Default fill color:"
+msgstr ""
+
+msgid "A default background color of a new image"
+msgstr ""
 
 msgid "Lock aspect ratio:"
 msgstr ""
@@ -980,5 +1016,17 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
 
 msgid "Already assigned"
+msgstr ""
+
+msgid "Left Tool:"
+msgstr ""
+
+msgid "A tool assigned to the left mouse button"
+msgstr ""
+
+msgid "Right Tool:"
+msgstr ""
+
+msgid "A tool assigned to the right mouse button"
 msgstr ""
 
