@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-04-16 15:16\n"
+"PO-Revision-Date: 2020-04-16 15:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1008,6 +1008,9 @@ msgstr "Seau de remplissage"
 
 msgid "Lighten/Darken"
 msgstr "Éclaircir/Assombrir"
+
+msgid "Switch Colors"
+msgstr ""
 
 msgid "Set the shortcut"
 msgstr ""
