@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-17 23:39\n"
+"PO-Revision-Date: 2020-04-17 23:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -441,7 +441,7 @@ msgid "Save & Exit"
 msgstr "Zapisz i wyjdź"
 
 msgid "Exit without saving"
-msgstr "Wyjście bez zapisywania"
+msgstr "Wyjdź bez zapisywania"
 
 msgid "Utility Tools"
 msgstr "Narzędzia"
@@ -617,7 +617,7 @@ msgid "Same color area"
 msgstr "Ten sam obszar koloru"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Piksele tego samego koloru"
 
 msgid "Lighten"
 msgstr "Rozjaśnianie"
@@ -710,10 +710,10 @@ msgstr "Skocz do ostatniej klatki\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Ustawienia Onion Skinning"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Włącz/wyłącz Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -742,11 +742,12 @@ msgid "Manage frame tags"
 msgstr "Zarządzaj znacznikami klatek"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animacja odtwarza się tylko na klatkach z tym samym tagiem"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Jeśli jest zaznaczone, animacja odtwarza się tylko na klatkach z tym samym tagiem.\n"
+"W przeciwnym wypadku, animacja odtworzy się na wszystkich klatkach, ignorując tagi."
 
 msgid "Blue-Red Mode"
 msgstr "Niebiesko-czerwone prześwity"
