@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-17 07:54\n"
 
 msgid "OK"
 msgstr "确定"
@@ -280,7 +280,7 @@ msgid "Smooth Zoom"
 msgstr "平滑缩放"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "放大或缩小时添加一个更平滑的过渡"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "绘图板压力灵敏度："
@@ -540,7 +540,7 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "绘制时在画布上显示鼠标右键像素指示器或画笔"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "显示左侧工具图标"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
@@ -1014,7 +1014,7 @@ msgid "Lighten/Darken"
 msgstr "亮色/暗色"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "切换颜色"
 
 msgid "Set the shortcut"
 msgstr "设置快捷键"
