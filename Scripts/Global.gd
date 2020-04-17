@@ -44,8 +44,6 @@ var current_layer := 0 setget layer_changed
 var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := false
-# warning-ignore:unused_class_variable
-var hidden_canvases := []
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")

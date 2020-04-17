@@ -11,6 +11,7 @@ func _ready() -> void:
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / fps
 
+
 func _h_scroll_changed(value : float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = timeline_scroll.get_child(0).rect_size.x - 212
@@ -24,8 +25,6 @@ func add_frame() -> void:
 
 	var new_canvases: Array = Global.canvases.duplicate()
 	new_canvases.append(new_canvas)
-	var new_hidden_canvases: Array = Global.hidden_canvases.duplicate()
-	new_hidden_canvases.append(new_canvas)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Frame")
@@ -33,7 +32,6 @@ func add_frame() -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", [new_canvas])
 
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 	Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
 
@@ -48,19 +46,17 @@ func add_frame() -> void:
 			Global.layers[l_i][5].append(new_canvas)
 
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 	Global.undo_redo.commit_action()
 
-func _on_DeleteFrame_pressed():
+
+func _on_DeleteFrame_pressed() -> void:
 	if Global.canvases.size() == 1:
 		return
 	var canvas : Canvas = Global.canvases[Global.current_frame]
 	var new_canvases := Global.canvases.duplicate()
 	new_canvases.erase(canvas)
-	var new_hidden_canvases := Global.hidden_canvases.duplicate()
-	new_hidden_canvases.append(canvas)
 	var current_frame := Global.current_frame
 	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
 		current_frame -= 1
@@ -69,7 +65,6 @@ func _on_DeleteFrame_pressed():
 	Global.undo_redo.create_action("Remove Frame")
 
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global, "hidden_canvases", new_hidden_canvases)
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
 	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
 
@@ -79,7 +74,6 @@ func _on_DeleteFrame_pressed():
 		Global.undo_redo.add_undo_property(c, "frame", c.frame)
 
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global, "hidden_canvases", Global.hidden_canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 
@@ -87,16 +81,18 @@ func _on_DeleteFrame_pressed():
 	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
 	Global.undo_redo.commit_action()
 
-func _on_CopyFrame_pressed():
-	var canvas : Canvas = Global.canvases[Global.current_frame]
+
+func _on_CopyFrame_pressed(frame := -1) -> void:
+	if frame == -1:
+		frame = Global.current_frame
+
+	var canvas : Canvas = Global.canvases[frame]
 	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
 	new_canvas.size = Global.canvas.size
 	new_canvas.frame = Global.canvases.size()
 
 	var new_canvases := Global.canvases.duplicate()
-	new_canvases.append(new_canvas)
-	var new_hidden_canvases := Global.hidden_canvases.duplicate()
-	new_hidden_canvases.append(new_canvas)
+	new_canvases.insert(frame + 1, new_canvas)
 
 	for layer in canvas.layers: # Copy every layer
 		var sprite := Image.new()
@@ -106,28 +102,32 @@ func _on_CopyFrame_pressed():
 		tex.create_from_image(sprite, 0)
 		new_canvas.layers.append([sprite, tex, layer[2]])
 
-		Global.undos += 1
-		Global.undo_redo.create_action("Add Frame")
-		Global.undo_redo.add_do_method(Global, "redo", [new_canvas])
-		Global.undo_redo.add_undo_method(Global, "undo", [new_canvas])
+	Global.undos += 1
+	Global.undo_redo.create_action("Add Frame")
+	Global.undo_redo.add_do_method(Global, "redo", [new_canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [new_canvas])
 
-		Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-		Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
-		Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
-		Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
-		for i in range(Global.layers.size()):
-			for child in Global.layers[i][3].get_children():
-				Global.undo_redo.add_do_property(child, "pressed", false)
-				Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
-		for c in Global.canvases:
-			Global.undo_redo.add_do_property(c, "visible", false)
-			Global.undo_redo.add_undo_property(c, "visible", c.visible)
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
+	Global.undo_redo.add_do_property(Global, "current_frame", frame + 1)
+	for i in range(Global.layers.size()):
+		for child in Global.layers[i][3].get_children():
+			Global.undo_redo.add_do_property(child, "pressed", false)
+			Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
+	for c in Global.canvases:
+		Global.undo_redo.add_do_property(c, "visible", false)
+		Global.undo_redo.add_undo_property(c, "visible", c.visible)
 
-		Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-		Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
-		Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
-		Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
-		Global.undo_redo.commit_action()
+	for i in range(frame, new_canvases.size()):
+		var c : Canvas = new_canvases[i]
+		Global.undo_redo.add_do_property(c, "frame", i)
+		Global.undo_redo.add_undo_property(c, "frame", c.frame)
+
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", frame)
+	Global.undo_redo.commit_action()
+
 
 func _on_FrameTagButton_pressed() -> void:
 	Global.tag_dialog.popup_centered()
