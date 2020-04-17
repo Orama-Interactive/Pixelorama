@@ -217,6 +217,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 						# Mark this as a processed relpath
 						processed_subdir_paths[nonrandomised_subdir][relative_path] = true
 
+	Global.brushes_from_files = Global.custom_brushes.size()
 
 
 
