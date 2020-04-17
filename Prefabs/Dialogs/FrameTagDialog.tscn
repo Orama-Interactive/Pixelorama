@@ -15,14 +15,17 @@ script = ExtResource( 1 )
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -32.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_right = 400.0
-margin_bottom = 140.0
+margin_right = 384.0
+margin_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -30,7 +33,7 @@ __meta__ = {
 }
 
 [node name="VBoxTagContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 400.0
+margin_right = 384.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -38,7 +41,7 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxTagContainer"]
-margin_right = 400.0
+margin_right = 384.0
 margin_bottom = 4.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -61,9 +64,9 @@ __meta__ = {
 }
 
 [node name="PlayOnlyTags" type="CheckBox" parent="VBoxContainer"]
-margin_top = 144.0
-margin_right = 326.0
-margin_bottom = 168.0
+margin_top = 132.0
+margin_right = 333.0
+margin_bottom = 156.0
 hint_tooltip = "If it's selected, the animation plays only on the frames that have the same tag.
 If it's not, the animation will play for all frames, ignoring tags."
 mouse_default_cursor_shape = 2
@@ -113,6 +116,7 @@ text = "Color:"
 margin_left = 177.0
 margin_right = 251.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 color = Color( 1, 0, 0, 1 )
 
 [node name="FromLabel" type="Label" parent="TagOptions/GridContainer"]
@@ -126,6 +130,7 @@ margin_left = 50.0
 margin_top = 32.0
 margin_right = 124.0
 margin_bottom = 56.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 
@@ -141,6 +146,7 @@ margin_left = 177.0
 margin_top = 32.0
 margin_right = 251.0
 margin_bottom = 56.0
+mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 [connection signal="about_to_show" from="." to="." method="_on_FrameTagDialog_about_to_show"]
