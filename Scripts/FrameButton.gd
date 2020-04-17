@@ -40,10 +40,8 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
 		0: # Remove Frame
 			remove_frame()
-
 		1: # Clone Frame
 			Global.animation_timeline._on_CopyFrame_pressed(frame)
-
 		2: # Move Left
 			change_frame_order(-1)
 		3: # Move Right

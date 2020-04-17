@@ -1012,84 +1012,48 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 				bg.set_pixel(dst_x, dst_y, out_color)
 			brush.unlock()
 
-func adjust_hsv(img: Image, id : int, delta : float)->void:
-	var selection_only:bool = !Global.selected_pixels.empty()
-	var layer:Image = img
+func adjust_hsv(img: Image, id : int, delta : float) -> void:
+	var selection_only : bool = !Global.selected_pixels.empty()
+	var layer : Image = img
 	layer.lock()
 	match id:
-		#Hue
-		0:
-			for i in range(layer.get_width()):
-				for j in range(layer.get_height()):
-					if(selection_only and Global.selected_pixels.has(Vector2(i,j))):
-						var c: Color = layer.get_pixel(i,j)
-						var hue = range_lerp(c.h,0,1,-180,180)
-						hue = hue + delta
+		0: # Hue
+			for i in range(west_limit, east_limit):
+				for j in range(north_limit, south_limit):
+					var c: Color = layer.get_pixel(i,j)
+					var hue = range_lerp(c.h,0,1,-180,180)
+					hue = hue + delta
 
-						while(hue >= 180):
-							hue -= 360
-						while(hue < -180):
-							hue += 360
-						c.h = range_lerp(hue,-180,180,0,1)
-						layer.set_pixel(i,j,c)
-					elif(!selection_only):
-						var c: Color = layer.get_pixel(i,j)
-						var hue = range_lerp(c.h,0,1,-180,180)
-						hue = hue + delta
+					while(hue >= 180):
+						hue -= 360
+					while(hue < -180):
+						hue += 360
+					c.h = range_lerp(hue,-180,180,0,1)
+					layer.set_pixel(i,j,c)
 
-						while(hue >= 180):
-							hue -= 360
-						while(hue < -180):
-							hue += 360
-						c.h = range_lerp(hue,-180,180,0,1)
-						layer.set_pixel(i,j,c)
+		1: # Saturation
+			for i in range(west_limit, east_limit):
+				for j in range(north_limit, south_limit):
+					var c: Color = layer.get_pixel(i,j)
+					var sat = c.s
+					if delta > 0:
+						sat = range_lerp(delta,0,100,c.s,1)
+					elif delta < 0:
+						sat = range_lerp(delta,-100,0,0,c.s)
+					c.s = sat
+					layer.set_pixel(i,j,c)
 
-		#Saturation
-		1:
-			for i in range(layer.get_width()):
-				for j in range(layer.get_height()):
-					if(selection_only and Global.selected_pixels.has(Vector2(i,j))):
-						var c: Color = layer.get_pixel(i,j)
-						var sat = c.s
-						if delta > 0:
-							sat = range_lerp(delta,0,100,c.s,1)
-						elif delta < 0:
-							sat = range_lerp(delta,-100,0,0,c.s)
-						c.s = sat
-						layer.set_pixel(i,j,c)
-					elif(!selection_only):
-						var c: Color = layer.get_pixel(i,j)
-						var sat = c.s
-						if delta > 0:
-							sat = range_lerp(delta,0,100,c.s,1)
-						elif delta < 0:
-							sat = range_lerp(delta,-100,0,0,c.s)
-						c.s = sat
-						layer.set_pixel(i,j,c)
+		2: # Value
+			for i in range(west_limit, east_limit):
+				for j in range(north_limit, south_limit):
+					var c: Color = layer.get_pixel(i,j)
+					var val = c.v
+					if delta > 0:
+						val = range_lerp(delta,0,100,c.v,1)
+					elif delta < 0:
+						val = range_lerp(delta,-100,0,0,c.v)
 
-		#value
-		2:
-			for i in range(layer.get_width()):
-				for j in range(layer.get_height()):
-					if(selection_only and Global.selected_pixels.has(Vector2(i,j))):
-						var c: Color = layer.get_pixel(i,j)
-						var val = c.v
-						if delta > 0:
-							val = range_lerp(delta,0,100,c.v,1)
-						elif delta < 0:
-							val = range_lerp(delta,-100,0,0,c.v)
+					c.v = val
+					layer.set_pixel(i,j,c)
 
-						c.v = val
-						layer.set_pixel(i,j,c)
-					elif(!selection_only):
-						var c: Color = layer.get_pixel(i,j)
-						var val = c.v
-						if delta > 0:
-							val = range_lerp(delta,0,100,c.v,1)
-						elif delta < 0:
-							val = range_lerp(delta,-100,0,0,c.v)
-
-						c.v = val
-						layer.set_pixel(i,j,c)
 	layer.unlock()
-	pass
