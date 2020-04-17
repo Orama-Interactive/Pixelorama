@@ -785,6 +785,7 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
 	brush_button.hint_tooltip = hint_tooltip
+	brush_button.connect("brush_selected",control,"_on_Brush_Selected")
 	if brush_type == Brush_Types.RANDOM_FILE:
 		brush_button.random_brushes.append(brush_img)
 	brush_container.add_child(brush_button)

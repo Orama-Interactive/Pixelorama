@@ -560,6 +560,8 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size = new_size
 	update_right_custom_brush()
 
+func _on_Brush_Selected() -> void:
+	$BrushesPopup.hide()
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color
