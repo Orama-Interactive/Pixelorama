@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-17 23:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -44,10 +44,10 @@ msgid "View"
 msgstr "Widok"
 
 msgid "Image"
-msgstr ""
+msgstr "Obraz"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efekty"
 
 msgid "Help"
 msgstr "Pomoc"
@@ -101,7 +101,7 @@ msgid "Crop Image"
 msgstr "Kadrowanie obrazu"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Obróć obraz"
 
 msgid "Clear Selection"
 msgstr "Wyczyść zaznaczenie"
@@ -128,7 +128,7 @@ msgid "Show Guides"
 msgstr "Pokaż prowadnice"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Pokaż linię czasu animacji"
 
 msgid "Fill with color:"
 msgstr "Wypełnij kolorem:"
@@ -143,95 +143,95 @@ msgid "Import as new frame"
 msgstr "Importuj jako nowa klatka"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Importuj jako spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Zapisz Sprite do .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksportuj obraz jako .png"
 
 msgid "Export Sprite"
 msgstr "Eksportuj Sprite"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Plik istnieje! Nadpisać?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Plik %s już istnieje. Nadpisać?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Ścieżka do katalogu lub nazwa pliku nie jest prawidłowa!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nie można załadować pliku '%s'. Kod błędu: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Ramka"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animacja"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Podgląd:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Ramka:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Przeglądaj"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Zmień rozmiar:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Anuluj eksportowanie"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Uwaga!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Wybierz obecny folder"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Otwórz katalog"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Wszystkie ramki w animacji jako osobne pliki"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Wszystkie ramki w animacji jako jeden plik"
 
 msgid "Background:"
-msgstr ""
+msgstr "Tło:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Kierunek:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Dalej"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Wstecz"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolumny"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolumny:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rzędy"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Rzędy:"
 
 msgid "Path:"
 msgstr "Ścieżka:"
@@ -240,7 +240,7 @@ msgid "Directories & Files:"
 msgstr "Pliki oraz katalogi:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Utwórz folder"
 
 msgid "File:"
 msgstr "Plik:"
@@ -261,22 +261,22 @@ msgid "Trilinear"
 msgstr "Trójlinowa"
 
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 msgid "Language"
-msgstr ""
+msgstr "Język"
 
 msgid "Themes"
-msgstr ""
+msgstr "Motywy"
 
 msgid "Guides & Grid"
-msgstr ""
+msgstr "Prowadnice i Siatka"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Płynne przybliżanie"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
