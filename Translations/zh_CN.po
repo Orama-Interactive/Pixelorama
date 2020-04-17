@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-17 07:54\n"
+"PO-Revision-Date: 2020-04-17 08:21\n"
 
 msgid "OK"
 msgstr "确定"
@@ -543,40 +543,40 @@ msgid "Show left tool icon"
 msgstr "显示左侧工具图标"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "在画布上的光标旁边显示所选左侧工具的图标"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "显示右侧工具图标"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "在画布上的光标旁边显示所选右侧工具的图标"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "参考线颜色："
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "显示在画布上标尺参考线的颜色"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "网格宽度："
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "设置网格垂直线之间的距离"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "网格高度："
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "设置网格水平线之间的距离"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "网格颜色："
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "网格颜色"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "仅修改自定义预设"
 
 msgid "Brush:"
 msgstr "画笔:"
@@ -957,22 +957,22 @@ msgid "Image Options"
 msgstr "图像选项"
 
 msgid "Default width:"
-msgstr ""
+msgstr "默认宽度："
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "新建图像的默认宽度"
 
 msgid "Default height:"
-msgstr ""
+msgstr "默认高度："
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "新建图像的默认宽度"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "默认填充颜色："
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "设置新建图像的背景颜色"
 
 msgid "Lock aspect ratio:"
 msgstr "锁定长宽比："
@@ -1026,14 +1026,14 @@ msgid "Already assigned"
 msgstr "已分配"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "左键工具："
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "分配给鼠标左键的工具"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "右键工具："
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "分配给鼠标右键的工具"
 
