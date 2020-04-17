@@ -102,6 +102,12 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 		tex.create_from_image(sprite, 0)
 		new_canvas.layers.append([sprite, tex, layer[2]])
 
+	# Loop through the tags to see if the frame is in one
+	for tag in Global.animation_tags:
+		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
+			tag[3] += 1
+	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Frame")
 	Global.undo_redo.add_do_method(Global, "redo", [new_canvas])

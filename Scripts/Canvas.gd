@@ -1013,14 +1013,13 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			brush.unlock()
 
 func adjust_hsv(img: Image, id : int, delta : float) -> void:
-	var selection_only : bool = !Global.selected_pixels.empty()
 	var layer : Image = img
 	layer.lock()
 	match id:
 		0: # Hue
 			for i in range(west_limit, east_limit):
 				for j in range(north_limit, south_limit):
-					var c: Color = layer.get_pixel(i,j)
+					var c : Color = layer.get_pixel(i,j)
 					var hue = range_lerp(c.h,0,1,-180,180)
 					hue = hue + delta
 
@@ -1034,7 +1033,7 @@ func adjust_hsv(img: Image, id : int, delta : float) -> void:
 		1: # Saturation
 			for i in range(west_limit, east_limit):
 				for j in range(north_limit, south_limit):
-					var c: Color = layer.get_pixel(i,j)
+					var c : Color = layer.get_pixel(i,j)
 					var sat = c.s
 					if delta > 0:
 						sat = range_lerp(delta,0,100,c.s,1)
@@ -1046,7 +1045,7 @@ func adjust_hsv(img: Image, id : int, delta : float) -> void:
 		2: # Value
 			for i in range(west_limit, east_limit):
 				for j in range(north_limit, south_limit):
-					var c: Color = layer.get_pixel(i,j)
+					var c : Color = layer.get_pixel(i,j)
 					var val = c.v
 					if delta > 0:
 						val = range_lerp(delta,0,100,c.v,1)
