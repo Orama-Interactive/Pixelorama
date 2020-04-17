@@ -5,6 +5,7 @@ var layer := 0
 
 onready var popup_menu := $PopupMenu
 
+
 func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame + 1, layer]
 	if Global.canvases[frame] in Global.layers[layer][5]:
@@ -13,6 +14,7 @@ func _ready() -> void:
 	else:
 		get_node("LinkedIndicator").visible = false
 		popup_menu.set_item_disabled(4, true) # Unlink cel
+
 
 func _on_FrameButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
@@ -33,13 +35,13 @@ func _on_FrameButton_pressed() -> void:
 		pressed = !pressed
 	else: # Middle mouse click
 		pressed = !pressed
-		if Global.canvases.size() > 1:
-			remove_frame()
+		Global.animation_timeline._on_DeleteFrame_pressed(frame)
+
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
 		0: # Remove Frame
-			remove_frame()
+			Global.animation_timeline._on_DeleteFrame_pressed(frame)
 		1: # Clone Frame
 			Global.animation_timeline._on_CopyFrame_pressed(frame)
 		2: # Move Left
@@ -60,33 +62,6 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			Global.canvases[frame].layers[layer][1] = tex
 			Global.canvases[frame].update()
 
-func remove_frame() -> void:
-	var canvas : Canvas = Global.canvases[frame]
-	var new_canvases := Global.canvases.duplicate()
-	new_canvases.erase(canvas)
-	var current_frame := Global.current_frame
-	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
-		current_frame -= 1
-
-	Global.undos += 1
-	Global.undo_redo.create_action("Remove Frame")
-
-	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
-	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
-
-	for i in range(frame, new_canvases.size()):
-		var c : Canvas = new_canvases[i]
-		Global.undo_redo.add_do_property(c, "frame", i)
-		Global.undo_redo.add_undo_property(c, "frame", c.frame)
-
-	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
-	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
-
-	Global.undo_redo.add_do_method(Global, "redo", [canvas])
-	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
-	Global.undo_redo.commit_action()
 
 func change_frame_order(rate : int) -> void:
 	var change = frame + rate

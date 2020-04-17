@@ -51,10 +51,13 @@ func add_frame() -> void:
 	Global.undo_redo.commit_action()
 
 
-func _on_DeleteFrame_pressed() -> void:
+func _on_DeleteFrame_pressed(frame := -1) -> void:
 	if Global.canvases.size() == 1:
 		return
-	var canvas : Canvas = Global.canvases[Global.current_frame]
+	if frame == -1:
+		frame = Global.current_frame
+
+	var canvas : Canvas = Global.canvases[frame]
 	var new_canvases := Global.canvases.duplicate()
 	new_canvases.erase(canvas)
 	var current_frame := Global.current_frame
@@ -68,7 +71,7 @@ func _on_DeleteFrame_pressed() -> void:
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
 	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
 
-	for i in range(Global.current_frame, new_canvases.size()):
+	for i in range(frame, new_canvases.size()):
 		var c : Canvas = new_canvases[i]
 		Global.undo_redo.add_do_property(c, "frame", i)
 		Global.undo_redo.add_undo_property(c, "frame", c.frame)
