@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-17 23:44\n"
+"PO-Revision-Date: 2020-04-17 23:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -771,10 +771,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Odłącz łańcuch"
 
 msgid "Layer"
-msgstr ""
+msgstr "Warstwa"
 
 msgid "Layers"
 msgstr "Warstwy"
@@ -798,32 +798,33 @@ msgid "Merge current layer with the one below"
 msgstr "Połącz obecną warstwę z warstwą powyżej"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Przezroczystość:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ukrywanie warstwy"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Zablokuj/odblokuj warstwę"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Włącz/wyłącz łączenie w łańcuchy\n\n"
+"Złączone łańcuchy są współdzielone przez wiele klatek"
 
 msgid "Palette"
-msgstr ""
+msgstr "Paleta kolorów"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Palety kolorów"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Dodaj nową paletę kolorów"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Edytuj aktualnie wybraną paletę kolorów"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Wybierz paletę kolorów"
 
 msgid "Undo: Draw"
 msgstr "Cofnij: Rysowanie"
@@ -901,52 +902,52 @@ msgid "File exported"
 msgstr "Plik został wyeksportowany"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Nowa pusta paleta kolorów"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importuj paletę kolorów"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Nazwa palety kolorów:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Nazwa koloru:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Utworzyć nową pustą paletę kolorów?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Błąd: Paleta kolorów musi mieć poprawną nazwę."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Błąd: Paleta kolorów o nazwie '%s' już istnieje!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Niepoprawny plik palety kolorów!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Edytuj paletę kolorów"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patroni:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Zmiany"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platynowi sponsorzy"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Złoci sponsorzy"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Zapełniacz platynowych sponsorów"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Zapełniacz złotych sponsorów"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Nie pokazuj ponownie"
 
 msgid "Take this spot!"
 msgstr ""
