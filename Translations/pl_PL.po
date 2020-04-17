@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-17 23:12\n"
+"PO-Revision-Date: 2020-04-17 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -168,7 +168,7 @@ msgid "Can't load file '%s'.\n"
 msgstr "Nie można załadować pliku '%s'. Kod błędu: %s"
 
 msgid "Frame"
-msgstr "Ramka"
+msgstr "Klatka"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -180,7 +180,7 @@ msgid "Preview:"
 msgstr "Podgląd:"
 
 msgid "Frame:"
-msgstr "Ramka:"
+msgstr "Klatka:"
 
 msgid "Browse"
 msgstr "Przeglądaj"
@@ -201,10 +201,10 @@ msgid "Open a Directory"
 msgstr "Otwórz katalog"
 
 msgid "All frames as multiple files"
-msgstr "Wszystkie ramki w animacji jako osobne pliki"
+msgstr "Wszystkie klatki w animacji jako osobne pliki"
 
 msgid "All frames as a single file animation"
-msgstr "Wszystkie ramki w animacji jako jeden plik"
+msgstr "Wszystkie klatki w animacji jako jeden plik"
 
 msgid "Background:"
 msgstr "Tło:"
@@ -279,67 +279,67 @@ msgid "Smooth Zoom"
 msgstr "Płynne przybliżanie"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Dodaje płynniejsze przejścia, kiedy się przybliża lub oddala"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Czułość nacisku na tablecie:"
 
 msgid "None"
-msgstr ""
+msgstr "Brak"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Wpływa na przezroczystość pędzla"
 
 msgid "Color:"
 msgstr "Kolor:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Kolor prowadnicy:"
 
 msgid "System Language"
 msgstr "Język systemowy"
 
 msgid "Dark"
-msgstr ""
+msgstr "Ciemny"
 
 msgid "Gray"
-msgstr ""
+msgstr "Szary"
 
 msgid "Gold"
-msgstr ""
+msgstr "Złoty"
 
 msgid "Light"
-msgstr ""
+msgstr "Jasny"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Odwróć kolory"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturacja (zmniejsz nasycenie)"
 
 msgid "Outline"
-msgstr ""
+msgstr "Krawędź"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Dostosuj Odcień/Nasycenie/Wartość"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Przekątna"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Umieść wewnątrz obrazu"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Grubość:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Pokaż ekran powitalny"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Zgłaszanie problemów"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Lista zmian"
 
 msgid "About Pixelorama"
 msgstr "O Pixeloramie"
@@ -354,76 +354,76 @@ msgid "Donate"
 msgstr "Wspomóż"
 
 msgid "Developers"
-msgstr ""
+msgstr "Autorzy"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Wnieśli wkład"
 
 msgid "Donors"
-msgstr ""
+msgstr "Darczyńcy"
 
 msgid "Translators"
-msgstr ""
+msgstr "Tłumacze"
 
 msgid "English"
-msgstr ""
+msgstr "Angielski"
 
 msgid "Greek"
-msgstr ""
+msgstr "Grecki"
 
 msgid "French"
-msgstr ""
+msgstr "Francuski"
 
 msgid "German"
-msgstr ""
+msgstr "Niemiecki"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polski"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugalski - Brazylijski"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rosyjski"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Chiński (uproszczony)"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Chiński (tradycyjny)"
 
 msgid "Italian"
-msgstr ""
+msgstr "Włoski"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Łotewski"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Hiszpański"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Zespół developerski"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Główny programista"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Projektant interfejsu użytkownika"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Wnieśli wkład (GitHub)"
 
 msgid "Art by"
-msgstr ""
+msgstr "Grafika wykonana przez"
 
 msgid "untitled"
-msgstr ""
+msgstr "bez nazwy"
 
 msgid "imported"
-msgstr ""
+msgstr "zaimportowane"
 
 msgid "copy"
 msgstr ""
@@ -573,7 +573,7 @@ msgid "A color of the grid"
 msgstr ""
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
 
 msgid "Brush:"
 msgstr "Pędzel:"
@@ -585,10 +585,10 @@ msgid "Brush: Pixel"
 msgstr "Pędzel: Piksel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Pędzel: Okrąg"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Pędzel: Wypełniony okrąg"
 
 msgid "Custom brush"
 msgstr "Niestandardowy pędzel"
@@ -612,7 +612,7 @@ msgid "All pixels of the same color"
 msgstr "Wszystkie piksele tego samego koloru"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Ten sam obszar koloru"
 
 msgid "Same color pixels"
 msgstr ""
@@ -630,31 +630,31 @@ msgid "Lighten/Darken amount"
 msgstr "Siła rozjaśnienia/przyciemnienia"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Wybierz dla:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Lewy kolor"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Prawy kolor"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Tryb:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Przybliż"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Oddal"
 
 msgid "Options:"
-msgstr ""
+msgstr "Opcje:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Dopasuj do ramki"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Przybliżenie 100%"
 
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
@@ -737,7 +737,7 @@ msgid "Future Frames"
 msgstr "Przyszłe klatki"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Zarządzaj znacznikami klatek"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
