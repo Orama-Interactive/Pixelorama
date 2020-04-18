@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-04-18 16:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -271,7 +271,7 @@ msgid "Themes"
 msgstr "Temi"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Tela"
 
 msgid "Shortcuts"
 msgstr "Collegamenti"
@@ -576,22 +576,22 @@ msgid "A color of the grid"
 msgstr "Un colore della griglia"
 
 msgid "Checker size"
-msgstr ""
+msgstr "Dimensione checker"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Dimensioni dello sfondo trasparente del checker"
 
 msgid "Checker color 1"
-msgstr ""
+msgstr "Colore checker 1"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Primo colore dello sfondo trasparente del checker"
 
 msgid "Checker color 2"
-msgstr ""
+msgstr "Colore checker 2"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Secondo colore dello sfondo trasparente del checker"
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
@@ -761,11 +761,12 @@ msgid "Manage frame tags"
 msgstr "Gestisci tag dei frame"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animazione riprodotta solo sui fotogrammi dello stesso tag"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Se è selezionato, l'animazione viene eseguita solo sui fotogrammi che hanno lo stesso tag.\n"
+"Se non lo è, l'animazione verrà riprodotta per tutti i fotogrammi, ignorando i tag."
 
 msgid "Blue-Red Mode"
 msgstr "Modalità Blu-Rosso"
