@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-04-18 23:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -181,6 +181,9 @@ msgstr "預覽："
 
 msgid "Frame:"
 msgstr "影格:"
+
+msgid "Orientation:"
+msgstr ""
 
 msgid "Browse"
 msgstr "瀏覽"
@@ -431,6 +434,12 @@ msgstr "複製"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "確定要離開Pixelorama嗎?"
 
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgstr ""
+
 msgid "Save before exiting?"
 msgstr "要先儲存再離開嗎?"
 
@@ -572,19 +581,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
