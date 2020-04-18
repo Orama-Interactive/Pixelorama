@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -270,8 +270,8 @@ msgstr "Γλώσσα"
 msgid "Themes"
 msgstr "Θέματα"
 
-msgid "Guides & Grid"
-msgstr "Οδηγοί και Πλέγμα"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
@@ -573,6 +573,24 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Only custom preset can be modified"
