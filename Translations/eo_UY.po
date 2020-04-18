@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-04-18 23:28\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -181,6 +181,9 @@ msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
+msgstr ""
+
+msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
@@ -432,6 +435,12 @@ msgstr "kopii"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Ĉu vi vere volas eliri Pixeloraman?"
 
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgstr ""
+
 msgid "Save before exiting?"
 msgstr "Ĉu konservi antaŭ elirado?"
 
@@ -556,19 +565,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
