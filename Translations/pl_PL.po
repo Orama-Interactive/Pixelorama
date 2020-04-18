@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-18 00:18\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -269,8 +269,8 @@ msgstr "Język"
 msgid "Themes"
 msgstr "Motywy"
 
-msgid "Guides & Grid"
-msgstr "Prowadnice i Siatka"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
@@ -573,6 +573,24 @@ msgstr "Kolor siatki:"
 
 msgid "A color of the grid"
 msgstr "Kolor siatki"
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
