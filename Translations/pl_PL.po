@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-17 23:54\n"
+"PO-Revision-Date: 2020-04-18 00:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,10 +95,10 @@ msgid "Redo"
 msgstr "Przywróć zmiany"
 
 msgid "Scale Image"
-msgstr "Skalowanie obrazu"
+msgstr "Skaluj obraz"
 
 msgid "Crop Image"
-msgstr "Kadrowanie obrazu"
+msgstr "Przytnij obraz"
 
 msgid "Rotate Image"
 msgstr "Obróć obraz"
@@ -113,7 +113,7 @@ msgid "Flip Vertical"
 msgstr "Odbij w pionie"
 
 msgid "Preferences"
-msgstr "Preferencje"
+msgstr "Ustawienia"
 
 msgid "Tile Mode"
 msgstr "Tryb kafelkowy"
@@ -137,22 +137,22 @@ msgid "Open a File"
 msgstr "Otwórz plik"
 
 msgid "Open File(s)"
-msgstr "Otwórz pliki"
+msgstr "Otwórz plik(i)"
 
 msgid "Import as new frame"
-msgstr "Importuj jako nowa klatka"
+msgstr "Importuj jako nową klatkę"
 
 msgid "Import as a spritesheet"
 msgstr "Importuj jako spritesheet"
 
 msgid "Save Sprite as .pxo"
-msgstr "Zapisz Sprite do .pxo"
+msgstr "Zapisz obraz jako .pxo"
 
 msgid "Export Sprite as .png"
 msgstr "Eksportuj obraz jako .png"
 
 msgid "Export Sprite"
-msgstr "Eksportuj Sprite"
+msgstr "Eksportuj obraz"
 
 msgid "File Exists, Overwrite?"
 msgstr "Plik istnieje! Nadpisać?"
@@ -451,8 +451,8 @@ msgid "Rectangular Selection\n\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
 msgstr "Zaznaczenie prostokątne\n\n"
-"%s dla lewego narzędzia\n"
-"%s dla prawego narzędzia\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n\n"
 "Przytrzymaj %s aby przenieść zawartość"
 
 msgid "Zoom\n\n"
@@ -468,19 +468,19 @@ msgid "Color Picker\n"
 "%s for right mouse button"
 msgstr "Próbnik\n"
 "Pobiera kolor wybranego piksela do wybranego narzędzia.\n\n"
-"%s dla lewego narzędzia\n"
-"%s dla prawego narzędzia"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy"
 
 msgid "Draw Tools"
-msgstr "Rysowanie"
+msgstr "Narzędzia rysowania"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Ołówek\n\n"
-"%s dla lewego narzędzia\n"
-"%s dla prawego narzędzia\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n\n"
 "Przytrzymaj %s aby narysować linię"
 
 msgid "Eraser\n\n"
@@ -488,23 +488,23 @@ msgid "Eraser\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Gumka\n\n"
-"%s dla lewego narzędzia\n"
-"%s dla prawego narzędzia\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n\n"
 "Przytrzymaj %s aby użyć w linii prostej"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Wiaderko\n\n"
-"%s dla lewego narzędzia\n"
-"%s dla prawego narzędzia"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Rozjaśnianie/Ściemnianie\n\n"
-"%s dla lewego narzędzia\n"
-"%s dla prawego narzędzia"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy"
 
 msgid "Choose a color for the left tool"
 msgstr "Wybiera kolor dla lewego narzędzia"
@@ -514,7 +514,7 @@ msgstr "Wybiera kolor dla prawego narzędzia"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr "Podmienia lewy kolor z prawym kolorem\n"
+msgstr "Podmień lewy kolor z prawym kolorem\n"
 "(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
@@ -950,52 +950,52 @@ msgid "Don't show again"
 msgstr "Nie pokazuj ponownie"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Zdobądź to miejsce!"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Opcje obrazu"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Domyślna szerokość:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Domyślna szerokość nowego obrazu"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Domyślna długość:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Domyślna długość nowego obrazu"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Domyślny kolor wypełnienia:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Domyślny kolor tła dla nowego obrazu"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Zablokuj proporcje:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Szablony:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Domyślnie"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Domyślnie:"
 
 msgid "Default"
-msgstr ""
+msgstr "Podstawowy"
 
 msgid "Custom"
-msgstr ""
+msgstr "Niestandardowe"
 
 msgid "Rectangular Selection"
 msgstr "Zaznaczenie prostokątne"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Przybliżenie"
 
 msgid "Color Picker"
 msgstr "Próbnik"
@@ -1013,16 +1013,16 @@ msgid "Lighten/Darken"
 msgstr "Rozjaśnianie/Ściemnianie"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Zmień kolory"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Ustaw skrót klawiszowy"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Naciśnij klawisz lub kombinację klawiszy, aby ustawić skrót klawiszowy"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Już przypisano"
 
 msgid "Left Tool:"
 msgstr "Lewe narzędzie:"
