@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-18 22:21\n"
+"PO-Revision-Date: 2020-04-18 22:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -749,7 +749,7 @@ msgid "Ping-pong loop"
 msgstr "Επανάληψη πινγκ-πονγκ"
 
 msgid "Onion Skinning:"
-msgstr "Γειτονικά καρέ:"
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Παρελθοντικά καρέ"
