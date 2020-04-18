@@ -75,6 +75,12 @@ var grid_height := 1
 var grid_color := Color.black
 # warning-ignore:unused_class_variable
 var guide_color := Color.purple
+# warning-ignore:unused_class_variable
+var checker_size := 10
+# warning-ignore:unused_class_variable
+var checker_color_1 := Color.gray
+# warning-ignore:unused_class_variable
+var checker_color_2 := Color.white
 
 # Tools & options
 # warning-ignore:unused_class_variable

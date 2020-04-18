@@ -70,7 +70,6 @@ func _ready() -> void:
 	add_child(line_2d)
 
 func _draw() -> void:
-	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) # Draw transparent background
 	# Onion Skinning
 	if Global.onion_skinning:
 		# Past
