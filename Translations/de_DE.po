@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-04-18 23:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -181,6 +181,9 @@ msgstr "Vorschau:"
 
 msgid "Frame:"
 msgstr "Frame:"
+
+msgid "Orientation:"
+msgstr ""
 
 msgid "Browse"
 msgstr "Durchsuchen"
@@ -431,6 +434,12 @@ msgstr "kopiere"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
 
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgstr ""
+
 msgid "Save before exiting?"
 msgstr "Speichere vor dem Verlassen?"
 
@@ -574,19 +583,19 @@ msgstr "Rasterfarbe:"
 msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
