@@ -34,9 +34,11 @@ func on_new_empty_palette() -> void:
 	Global.new_palette_name_line_edit.text = "Custom_Palette"
 	from_palette = null
 	Global.new_palette_dialog.popup_centered()
+	Global.can_draw = false
 
 func on_import_palette() -> void:
 	Global.palette_import_file_dialog.popup_centered()
+	Global.can_draw = false
 
 func on_palette_import_file_selected(path : String) -> void:
 	var palette : Palette = null
@@ -64,7 +66,6 @@ func on_palette_import_file_selected(path : String) -> void:
 		Global.error_dialog.popup_centered()
 
 func _on_AddPalette_pressed() -> void:
-	Global.can_draw = false
 	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
 
 func on_new_palette_confirmed() -> void:

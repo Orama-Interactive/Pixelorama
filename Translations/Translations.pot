@@ -173,6 +173,9 @@ msgstr ""
 msgid "Frame:"
 msgstr ""
 
+msgid "Orientation:"
+msgstr ""
+
 msgid "Browse"
 msgstr ""
 
@@ -422,6 +425,12 @@ msgstr ""
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
 
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgstr ""
+
 msgid "Save before exiting?"
 msgstr ""
 
@@ -546,19 +555,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"

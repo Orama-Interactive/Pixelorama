@@ -14,7 +14,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - You can now group multiple frames with tags.
 - You can now export your projects to .gif files.
 - A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
-- A HSV Adjust dialog has been added in the Images menu.
+- An HSV Adjust dialog has been added in the Images menu.
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
 - Users can now change keyboard shortcut bindings for tools, in the Preferences.
 - Importing .pngs as palettes is now possible.
