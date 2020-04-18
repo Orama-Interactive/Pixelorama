@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "確定"
@@ -269,8 +269,8 @@ msgstr "語言"
 msgid "Themes"
 msgstr "皮膚"
 
-msgid "Guides & Grid"
-msgstr "輔助線與格線"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr ""
@@ -570,6 +570,24 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Only custom preset can be modified"
