@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-16 15:30\n"
+"PO-Revision-Date: 2020-04-18 15:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -270,8 +270,8 @@ msgstr "Язык"
 msgid "Themes"
 msgstr "Темы оформления"
 
-msgid "Guides & Grid"
-msgstr "Направляющие и сетка"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Горячие клавишы"
@@ -571,6 +571,24 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Only custom preset can be modified"
