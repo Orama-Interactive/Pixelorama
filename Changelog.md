@@ -55,6 +55,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else.! (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
 - Fixed bug where the user could drag the selection and the guides when the canvas had no focus.
+- The zoom label on the top bar now shows the correct zoom value when smooth zoom is enabled.
 
 ### Removed
 - It's no longer possible for frames to have different amounts of layers. All frames have the same amount.

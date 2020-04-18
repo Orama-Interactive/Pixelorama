@@ -42,12 +42,14 @@ func is_action_direction_pressed(event : InputEvent, allow_echo: bool = true) ->
 			return true
 	return false
 
+
 # Check if an event is a ui_up/down/left/right event release nya
 func is_action_direction_released(event: InputEvent) -> bool:
 	for action in key_move_action_names:
 		if event.is_action_released(action):
 			return true
 	return false
+
 
 # get the Direction associated with the event.
 # if not a direction event return null
@@ -61,6 +63,7 @@ func get_action_direction(event: InputEvent):  # -> Optional[Direction]
 	elif event.is_action("ui_right"):
 		return Global.Direction.RIGHT
 	return null
+
 
 # Holds sign multipliers for the given directions nyaa
 # (per the indices in Global.gd defined by Direction)
@@ -85,12 +88,14 @@ func process_direction_action_pressed(event: InputEvent) -> void:
 	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
 	offset = offset + move_speed * increment * directional_sign_multipliers[dir] * zoom
 
+
 # Process an action for a release direction action
 func process_direction_action_released(event: InputEvent) -> void:
 	var dir = get_action_direction(event)
 	if dir == null:
 		return
 	reset_dir_move_time(dir)
+
 
 func _input(event : InputEvent) -> void:
 	mouse_pos = viewport_container.get_local_mouse_position()
@@ -125,6 +130,9 @@ func zoom_camera(dir : int) -> void:
 			tween.interpolate_property(self, "offset", offset, new_offset, 0.05, Tween.TRANS_LINEAR, Tween.EASE_IN)
 			tween.start()
 
+			if name == "Camera2D":
+				Global.zoom_level_label.text = str(round(100 / new_zoom.x)) + " %"
+
 	else:
 		var prev_zoom := zoom
 		var zoom_margin = zoom * dir / 10
@@ -135,6 +143,5 @@ func zoom_camera(dir : int) -> void:
 			zoom = zoom_max
 
 		offset = offset + (-0.5 * viewport_size + mouse_pos) * (prev_zoom - zoom)
-
-	if name == "Camera2D":
-		Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+		if name == "Camera2D":
+			Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
