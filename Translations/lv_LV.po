@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-04-18 23:28\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -181,6 +181,9 @@ msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
+msgstr ""
+
+msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
@@ -432,6 +435,12 @@ msgstr "kopēt"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Tiešām vēlies pārtraukt darbu ar Pixelorama?"
 
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgstr ""
+
 msgid "Save before exiting?"
 msgstr ""
 
@@ -573,19 +582,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
