@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-04-18 21:56\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -271,7 +271,7 @@ msgid "Themes"
 msgstr "Θέματα"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Καμβάς"
 
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
@@ -280,7 +280,7 @@ msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Η μετάβαση στο ζουμ είναι πιο ομαλή"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Ευαισθησία πίεσης tablet:"
@@ -322,7 +322,7 @@ msgid "Outline"
 msgstr "Περίγραμμα"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
 msgid "Diagonal"
 msgstr "Διαγώνιος"
@@ -540,7 +540,7 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Εμφάνιση αριστερού εικονιδίου εργαλείου"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
