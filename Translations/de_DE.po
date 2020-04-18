@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-16 16:26\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -269,8 +269,8 @@ msgstr "Sprache"
 msgid "Themes"
 msgstr "Designs"
 
-msgid "Guides & Grid"
-msgstr "Guides & Raster"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Tastenkürzel"
@@ -573,6 +573,24 @@ msgstr "Rasterfarbe:"
 
 msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
