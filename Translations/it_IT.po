@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-16 22:24\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -270,8 +270,8 @@ msgstr "Lingua"
 msgid "Themes"
 msgstr "Temi"
 
-msgid "Guides & Grid"
-msgstr "Guide & Griglia"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Collegamenti"
@@ -574,6 +574,24 @@ msgstr "Colore della griglia:"
 
 msgid "A color of the grid"
 msgstr "Un colore della griglia"
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
