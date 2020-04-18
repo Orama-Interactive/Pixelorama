@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-17 08:21\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -270,8 +270,8 @@ msgstr "语言"
 msgid "Themes"
 msgstr "主题"
 
-msgid "Guides & Grid"
-msgstr "辅助线和网格"
+msgid "Canvas"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "快捷键"
@@ -574,6 +574,24 @@ msgstr "网格颜色："
 
 msgid "A color of the grid"
 msgstr "网格颜色"
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
