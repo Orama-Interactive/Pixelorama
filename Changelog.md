@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.7] - Unreleased
 This update has been brought to you by the contributions of:
 
-Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese), sapient-cogbag
+Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese), sapient-cogbag, Kinwailo
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
@@ -16,7 +16,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
 - A HSV Adjust dialog has been added in the Images menu.
 - Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
-- Users can change keyboard shortcut binding for tools.
+- Users can now change keyboard shortcut bindings for tools, in the Preferences.
 - Importing .pngs as palettes is now possible.
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
 - Templates and a lock aspect ratio option have been added to the "Create new image" dialog.
@@ -33,9 +33,11 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - The export dialog has also been revamped.
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
+- The texture of the transparent checker background is now no longer affected by the zoom value. The users can now also change the texture's colors and the size.
 - Notification text is now black on the gold and light themes.
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter).
 - LineEdits lose focus when the user presses Enter.
+- When cloning a frame, the clone will appear next to the original.
 - Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
 - The Godot theme has changed.
 - Visual change, added border outlines to all window dialogs.
@@ -45,6 +47,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - .pxo files now use ZSTD compression to result in smaller file sizes.
 - Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard linux/bsd packaging methods and for better per-user usability.
 - The splash screen is no longer purple, it now gets affected by the chosen theme.
+- The brush selection popup now closes when a brush is selected.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels

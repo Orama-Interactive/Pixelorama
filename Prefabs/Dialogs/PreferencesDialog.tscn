@@ -403,7 +403,7 @@ margin_top = 5.0
 margin_right = 110.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
-hint_tooltip = "Sets how far apart are vertical lines of the grid"
+hint_tooltip = "Size of the transparent checker background"
 mouse_filter = 0
 text = "Checker size:"
 
@@ -411,6 +411,7 @@ text = "Checker size:"
 margin_left = 114.0
 margin_right = 188.0
 margin_bottom = 24.0
+hint_tooltip = "Size of the transparent checker background"
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
@@ -422,7 +423,7 @@ suffix = "px"
 margin_top = 31.0
 margin_right = 110.0
 margin_bottom = 45.0
-hint_tooltip = "A color of the grid"
+hint_tooltip = "First color of the transparent checker background"
 mouse_filter = 0
 text = "Checker color 1:"
 
@@ -432,7 +433,7 @@ margin_top = 28.0
 margin_right = 188.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
-hint_tooltip = "First color of the transparent checker"
+hint_tooltip = "First color of the transparent checker background"
 mouse_default_cursor_shape = 2
 color = Color( 0.7, 0.7, 0.7, 1 )
 
@@ -440,7 +441,7 @@ color = Color( 0.7, 0.7, 0.7, 1 )
 margin_top = 55.0
 margin_right = 110.0
 margin_bottom = 69.0
-hint_tooltip = "A color of the grid"
+hint_tooltip = "Second color of the transparent checker background"
 mouse_filter = 0
 text = "Checker color 2:"
 
@@ -450,7 +451,7 @@ margin_top = 52.0
 margin_right = 188.0
 margin_bottom = 72.0
 rect_min_size = Vector2( 64, 20 )
-hint_tooltip = "Second color of the transparent checker"
+hint_tooltip = "Second color of the transparent checker background"
 mouse_default_cursor_shape = 2
 color = Color( 1, 1, 1, 1 )
 

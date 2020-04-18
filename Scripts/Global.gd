@@ -49,7 +49,6 @@ var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
-var transparent_background : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
@@ -303,8 +302,6 @@ func _ready() -> void:
 	directory_module = XDGDataPaths.new()
 
 	undo_redo = UndoRedo.new()
-	transparent_background = ImageTexture.new()
-	transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()

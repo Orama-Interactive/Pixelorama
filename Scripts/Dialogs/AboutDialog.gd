@@ -26,9 +26,10 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri (SbNanduri)")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
 	contributors.create_item(contributor_root).set_text(0, "  Noah Burck (haonkrub)")
-	contributors.create_item(contributor_root).set_text(0, "  luiq54")
+	contributors.create_item(contributor_root).set_text(0, "  Darshan Phaldesai (luiq54)")
 	contributors.create_item(contributor_root).set_text(0, "  Matheus Pesegoginski (MatheusPese)")
 	contributors.create_item(contributor_root).set_text(0, "  sapient_cogbag")
+	contributors.create_item(contributor_root).set_text(0, "  Kinwailo")
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms")

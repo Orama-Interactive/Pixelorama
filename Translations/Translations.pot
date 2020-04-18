@@ -260,7 +260,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-msgid "Guides & Grid"
+msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
@@ -544,6 +544,24 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Only custom preset can be modified"
