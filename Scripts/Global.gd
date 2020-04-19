@@ -539,6 +539,17 @@ func canvases_changed(value : Array) -> void:
 
 			layers[i][3].add_child(frame_button)
 
+	# This is useful in case tagged frames get deleted DURING the animation is playing
+	# otherwise, this code is useless in this context, since these values are being set
+	# when the play buttons get pressed, anyway
+	animation_timeline.first_frame = 0
+	animation_timeline.last_frame = canvases.size() - 1
+	if play_only_tags:
+		for tag in animation_tags:
+			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
+				animation_timeline.first_frame = tag[2] - 1
+				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
+
 func clear_canvases() -> void:
 	for child in canvas_parent.get_children():
 		if child is Canvas:
@@ -693,6 +704,17 @@ func animation_tags_changed(value : Array) -> void:
 		tag_c.rect_min_size.x = (size + 1) * 39
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
+
+	# This is useful in case tags get modified DURING the animation is playing
+	# otherwise, this code is useless in this context, since these values are being set
+	# when the play buttons get pressed, anyway
+	animation_timeline.first_frame = 0
+	animation_timeline.last_frame = canvases.size() - 1
+	if play_only_tags:
+		for tag in animation_tags:
+			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
+				animation_timeline.first_frame = tag[2] - 1
+				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
 
 
 func update_hint_tooltips() -> void:
