@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-19 10:25\n"
+"PO-Revision-Date: 2020-04-19 11:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -273,7 +273,7 @@ msgid "Themes"
 msgstr "Designs"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Canvas"
 
 msgid "Shortcuts"
 msgstr "Tastenkürzel"
@@ -438,7 +438,7 @@ msgid "Unsaved Image"
 msgstr "Ungespeichertes Bild"
 
 msgid "Changes has not been saved. Are you sure you want to create a new image?"
-msgstr ""
+msgstr "Änderungen wurden nicht gespeichert. Sind Sie sicher, dass Sie ein neues Bild erstellen möchten?"
 
 msgid "Save before exiting?"
 msgstr "Speichere vor dem Verlassen?"
@@ -584,22 +584,22 @@ msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Checkergröße:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Größe des transparenten Checkerhintergrunds"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Checkerfarbe 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Erste Farbe des transparenten Checkerhintergrunds"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Checkerfarbe 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Zweite Farbe des transparenten Checkerhintergrunds"
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
