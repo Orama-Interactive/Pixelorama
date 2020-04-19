@@ -1,44 +1,48 @@
-[gd_resource type="Theme" load_steps=32 format=2]
+[gd_resource type="Theme" load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Grabber.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Grabber_Hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Hsplit.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Vsplit.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 bg_color = Color( 0.517647, 0.517647, 0.517647, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
 border_color = Color( 0.517647, 0.517647, 0.517647, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
 border_color = Color( 0.2, 0.2, 0.2, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -141,10 +145,15 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_top = 3
-border_width_bottom = 3
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0, 0, 1 )
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.109804, 0.0862745, 0.0862745, 0 )
@@ -160,6 +169,10 @@ corner_radius_bottom_left = 4
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=18]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 
 [sub_resource type="StyleBoxFlat" id=19]
@@ -262,6 +275,9 @@ border_width_left = 2
 border_width_right = 2
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+
 [sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -330,8 +346,9 @@ FileDialog/colors/files_disabled = Color( 0, 0, 0, 0.7 )
 FileDialog/icons/folder = null
 FileDialog/icons/parent_folder = null
 FileDialog/icons/reload = null
-GridContainer/constants/hseparation = 0
-GridContainer/constants/vseparation = 0
+GridContainer/constants/hseparation = 3
+GridContainer/constants/vseparation = 3
+HBoxContainer/constants/separation = 3
 HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
@@ -343,15 +360,19 @@ HScrollBar/styles/scroll = null
 HScrollBar/styles/scroll_focus = null
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = SubResource( 14 )
-HSlider/icons/grabber = null
+HSlider/icons/grabber = ExtResource( 2 )
 HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = null
+HSlider/icons/grabber_highlight = ExtResource( 3 )
 HSlider/icons/tick = null
 HSlider/styles/focus = null
 HSlider/styles/grabber_area = SubResource( 15 )
 HSlider/styles/grabber_disabled = null
 HSlider/styles/grabber_highlight = null
 HSlider/styles/slider = SubResource( 16 )
+HSplitContainer/constants/autohide = 1
+HSplitContainer/constants/separation = 6
+HSplitContainer/icons/grabber = ExtResource( 4 )
+HSplitContainer/styles/bg = SubResource( 31 )
 LineEdit/colors/clear_button_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
 LineEdit/colors/cursor_color = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -533,6 +554,10 @@ VScrollBar/styles/scroll = null
 VScrollBar/styles/scroll_focus = null
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource( 29 )
+VSplitContainer/constants/autohide = 1
+VSplitContainer/constants/separation = 6
+VSplitContainer/icons/grabber = ExtResource( 5 )
+VSplitContainer/styles/bg = SubResource( 32 )
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 18
 WindowDialog/constants/close_v_ofs = 18
