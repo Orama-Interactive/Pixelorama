@@ -66,6 +66,19 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
 		current_frame -= 1
 
+	# Loop through the tags to see if the frame is in one
+	for tag in Global.animation_tags:
+		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
+			if tag[3] == tag[2]: # If we're deleting the only frame in the tag
+				Global.animation_tags.erase(tag)
+			else:
+				tag[3] -= 1
+		elif frame + 1 < tag[2]:
+			tag[2] -= 1
+			tag[3] -= 1
+
+	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Frame")
 
@@ -187,14 +200,6 @@ func _on_PlayBackwards_toggled(button_pressed : bool) -> void:
 
 
 func _on_AnimationTimer_timeout() -> void:
-#	var first_frame := 0
-#	var last_frame := Global.canvases.size() - 1
-#	if Global.play_only_tags:
-#		for tag in Global.animation_tags:
-#			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
-#				first_frame = tag[2] - 1
-#				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
-
 	if animation_forward:
 		if Global.current_frame < last_frame:
 			Global.current_frame += 1
