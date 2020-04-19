@@ -431,6 +431,7 @@ func find_node_by_name(root, node_name) -> Node:
 			return found
 	return null
 
+
 func notification_label(text : String) -> void:
 	var notification : Label = load("res://Prefabs/NotificationLabel.tscn").instance()
 	notification.text = tr(text)

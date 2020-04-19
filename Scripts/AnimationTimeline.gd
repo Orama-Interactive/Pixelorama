@@ -66,18 +66,18 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
 		current_frame -= 1
 
+	var new_animation_tags := Global.animation_tags.duplicate(true)
 	# Loop through the tags to see if the frame is in one
-	for tag in Global.animation_tags:
+	for tag in new_animation_tags:
 		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
 			if tag[3] == tag[2]: # If we're deleting the only frame in the tag
-				Global.animation_tags.erase(tag)
+				new_animation_tags.erase(tag)
 			else:
 				tag[3] -= 1
 		elif frame + 1 < tag[2]:
 			tag[2] -= 1
 			tag[3] -= 1
 
-	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Frame")
@@ -85,15 +85,18 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
 	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
+	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
 
 	for i in range(frame, new_canvases.size()):
 		var c : Canvas = new_canvases[i]
 		Global.undo_redo.add_do_property(c, "frame", i)
 		Global.undo_redo.add_undo_property(c, "frame", c.frame)
 
+
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
 
 	Global.undo_redo.add_do_method(Global, "redo", [canvas])
 	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
@@ -120,11 +123,11 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 		tex.create_from_image(sprite, 0)
 		new_canvas.layers.append([sprite, tex, layer[2]])
 
+	var new_animation_tags := Global.animation_tags.duplicate(true)
 	# Loop through the tags to see if the frame is in one
-	for tag in Global.animation_tags:
+	for tag in new_animation_tags:
 		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
 			tag[3] += 1
-	Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Frame")
@@ -134,6 +137,7 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 	Global.undo_redo.add_do_property(Global, "current_frame", frame + 1)
+	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
 	for i in range(Global.layers.size()):
 		for child in Global.layers[i][3].get_children():
 			Global.undo_redo.add_do_property(child, "pressed", false)
@@ -150,6 +154,7 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", frame)
+	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
 	Global.undo_redo.commit_action()
 
 

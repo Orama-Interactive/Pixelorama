@@ -88,21 +88,39 @@ func _on_TagOptions_confirmed() -> void:
 	if tag_from > tag_to:
 		tag_from = tag_to
 
+	var new_animation_tags := Global.animation_tags.duplicate(true)
 	if current_tag_id == Global.animation_tags.size():
-		Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
-		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+		new_animation_tags.append([tag_name, tag_color, tag_from, tag_to])
 	else:
-		Global.animation_tags[current_tag_id][0] = tag_name
-		Global.animation_tags[current_tag_id][1] = tag_color
-		Global.animation_tags[current_tag_id][2] = tag_from
-		Global.animation_tags[current_tag_id][3] = tag_to
+		new_animation_tags[current_tag_id][0] = tag_name
+		new_animation_tags[current_tag_id][1] = tag_color
+		new_animation_tags[current_tag_id][2] = tag_from
+		new_animation_tags[current_tag_id][3] = tag_to
+
+	# Handle Undo/Redo
+	Global.undos += 1
+	Global.undo_redo.create_action("Modify Frame Tag")
+	Global.undo_redo.add_do_method(Global, "general_redo")
+	Global.undo_redo.add_undo_method(Global, "general_undo")
+	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
+	Global.undo_redo.commit_action()
 	_on_FrameTagDialog_about_to_show()
 
 
 func _on_TagOptions_custom_action(action : String) -> void:
 	if action == "delete_tag":
-		Global.animation_tags.remove(current_tag_id)
-		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+		var new_animation_tags := Global.animation_tags.duplicate(true)
+		new_animation_tags.remove(current_tag_id)
+		# Handle Undo/Redo
+		Global.undos += 1
+		Global.undo_redo.create_action("Delete Frame Tag")
+		Global.undo_redo.add_do_method(Global, "general_redo")
+		Global.undo_redo.add_undo_method(Global, "general_undo")
+		Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+		Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
+		Global.undo_redo.commit_action()
+
 		options_dialog.hide()
 		_on_FrameTagDialog_about_to_show()
 
