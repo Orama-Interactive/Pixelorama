@@ -438,8 +438,23 @@ func notification_label(text : String) -> void:
 	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
-func undo(_canvases : Array, layer_index : int = -1) -> void:
+
+func general_undo() -> void:
 	undos -= 1
+	var action_name := undo_redo.get_current_action_name()
+	notification_label("Undo: %s" % action_name)
+
+
+func general_redo() -> void:
+	if undos < undo_redo.get_version(): # If we did undo and then redo
+		undos = undo_redo.get_version()
+	if control.redone:
+		var action_name := undo_redo.get_current_action_name()
+		notification_label("Redo: %s" % action_name)
+
+
+func undo(_canvases : Array, layer_index : int = -1) -> void:
+	general_undo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in _canvases:
@@ -469,12 +484,10 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	if saved:
 		saved = false
 		self.window_title = window_title + "(*)"
-	notification_label("Undo: %s" % action_name)
 
 
 func redo(_canvases : Array, layer_index : int = -1) -> void:
-	if undos < undo_redo.get_version(): # If we did undo and then redo
-		undos = undo_redo.get_version()
+	general_redo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in _canvases:
@@ -502,12 +515,12 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 	if saved:
 		saved = false
 		self.window_title = window_title + "(*)"
-	if control.redone:
-		notification_label("Redo: %s" % action_name)
+
 
 func title_changed(value : String) -> void:
 	window_title = value
 	OS.set_window_title(value)
+
 
 func canvases_changed(value : Array) -> void:
 	canvases = value
@@ -550,6 +563,7 @@ func canvases_changed(value : Array) -> void:
 				animation_timeline.first_frame = tag[2] - 1
 				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
 
+
 func clear_canvases() -> void:
 	for child in canvas_parent.get_children():
 		if child is Canvas:
@@ -560,6 +574,7 @@ func clear_canvases() -> void:
 
 	window_title = "(" + tr("untitled") + ") - Pixelorama"
 	undo_redo.clear_history(false)
+
 
 func layers_changed(value : Array) -> void:
 	layers = value
@@ -616,6 +631,7 @@ func layers_changed(value : Array) -> void:
 		remove_layer_button.disabled = false
 		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
+
 func frame_changed(value : int) -> void:
 	current_frame = value
 	current_frame_label.text = tr("Current frame:") + " %s/%s" % [str(current_frame + 1), canvases.size()]
@@ -640,6 +656,7 @@ func frame_changed(value : int) -> void:
 	frame_ids.get_child(current_frame).add_color_override("font_color", Color("#3c5d75"))
 	if current_frame < layers[current_layer][3].get_child_count():
 		layers[current_layer][3].get_child(current_frame).pressed = true
+
 
 func layer_changed(value : int) -> void:
 	current_layer = value
@@ -821,23 +838,22 @@ func remove_brush_buttons() -> void:
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
+
 func undo_custom_brush(_brush_button : BaseButton = null) -> void:
-	undos -= 1
+	general_undo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.add_child(_brush_button)
 		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
 		_brush_button.get_node("DeleteButton").visible = false
-	notification_label("Undo: %s" % action_name)
+
 
 func redo_custom_brush(_brush_button : BaseButton = null) -> void:
-	if undos < undo_redo.get_version(): # If we did undo and then redo
-		undos = undo_redo.get_version()
+	general_redo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.remove_child(_brush_button)
-	if control.redone:
-		notification_label("Redo: %s" % action_name)
+
 
 func update_left_custom_brush() -> void:
 	if current_left_brush_type == Brush_Types.PIXEL:
