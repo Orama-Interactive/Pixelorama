@@ -40,6 +40,7 @@ margin_top = 2.0
 margin_right = 32.0
 margin_bottom = 34.0
 hint_tooltip = "Toggle layer's visibility"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -54,6 +55,7 @@ margin_top = 2.0
 margin_right = 68.0
 margin_bottom = 34.0
 hint_tooltip = "Lock/unlock layer"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -70,6 +72,7 @@ margin_bottom = 34.0
 hint_tooltip = "Enable/disable cel linking
 
 Linked cels are being shared across multiple frames"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4

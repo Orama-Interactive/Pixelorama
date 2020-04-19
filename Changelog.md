@@ -52,10 +52,11 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
-- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else.! (Issue #167)
+- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else. (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
 - Fixed bug where the user could drag the selection and the guides when the canvas had no focus.
 - The zoom label on the top bar now shows the correct zoom value when smooth zoom is enabled.
+- Fixed issue with Space triggering the event of the last pressed button. This caused unwanted behavior when using Space to move the canvas around. Resolved by changing the focus mode of the buttons to None.
 
 ### Removed
 - It's no longer possible for frames to have different amounts of layers. All frames have the same amount.

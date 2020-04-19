@@ -503,6 +503,7 @@ margin_bottom = 7.0
 margin_left = 152.0
 margin_right = 177.0
 margin_bottom = 7.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
@@ -524,6 +525,7 @@ margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "Choose a color for the left tool"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -534,6 +536,7 @@ margin_right = 141.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "Choose a color for the right tool"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -552,6 +555,7 @@ margin_left = 152.0
 margin_right = 177.0
 margin_bottom = 8.0
 hint_tooltip = "Reset the colors to their default state (black for left, white for right)"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
@@ -620,6 +624,7 @@ margin_top = 55.0
 margin_right = 125.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -631,13 +636,13 @@ ticks_on_borders = true
 [node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 131.0
 alignment = 1
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_left = 27.0
-margin_right = 117.0
+margin_left = 34.0
+margin_right = 124.0
 margin_bottom = 15.0
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
 mouse_filter = 1
@@ -645,9 +650,9 @@ size_flags_horizontal = 4
 text = "Brush color from"
 
 [node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_left = 45.0
+margin_left = 52.0
 margin_top = 19.0
-margin_right = 99.0
+margin_right = 106.0
 margin_bottom = 36.0
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
 size_flags_horizontal = 4
@@ -655,12 +660,13 @@ value = 100.0
 align = 1
 
 [node name="LeftInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_left = 25.0
+margin_left = 33.0
 margin_top = 40.0
-margin_right = 117.0
+margin_right = 125.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
+focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 1
 value = 100.0
@@ -669,22 +675,23 @@ ticks_on_borders = true
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 117.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 49.0
-margin_right = 95.0
+margin_left = 56.0
+margin_right = 102.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill area:"
 
 [node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 17.0
+margin_left = 24.0
 margin_top = 19.0
-margin_right = 127.0
+margin_right = 134.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
@@ -694,15 +701,16 @@ selected = 0
 [node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 153.0
 margin_bottom = 158.0
 alignment = 1
 
 [node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 25.0
-margin_right = 117.0
+margin_left = 30.0
+margin_right = 122.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Lighten"
@@ -710,17 +718,17 @@ items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 48.0
+margin_left = 53.0
 margin_top = 27.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 42.0
 size_flags_horizontal = 4
 text = "Amount:"
 
 [node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 45.0
+margin_left = 49.0
 margin_top = 46.0
-margin_right = 99.0
+margin_right = 103.0
 margin_bottom = 63.0
 hint_tooltip = "Lighten/Darken amount"
 mouse_default_cursor_shape = 2
@@ -729,12 +737,13 @@ value = 10.0
 align = 1
 
 [node name="LeftLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 25.0
+margin_left = 30.0
 margin_top = 67.0
-margin_right = 117.0
+margin_right = 122.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -744,22 +753,23 @@ ticks_on_borders = true
 [node name="LeftColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 138.0
+margin_right = 159.0
 margin_bottom = 117.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
-margin_left = 47.0
-margin_right = 91.0
+margin_left = 57.0
+margin_right = 101.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Pick for:"
 
 [node name="LeftForColorOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
-margin_left = 32.0
+margin_left = 42.0
 margin_top = 19.0
-margin_right = 106.0
+margin_right = 116.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Left Color"
@@ -769,23 +779,24 @@ selected = 0
 [node name="LeftZoomOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 138.0
+margin_right = 153.0
 margin_bottom = 190.0
 
 [node name="ModeLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 52.0
-margin_right = 85.0
+margin_left = 60.0
+margin_right = 93.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Mode:"
 
 [node name="LeftZoomModeOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 22.0
+margin_left = 30.0
 margin_top = 19.0
-margin_right = 114.0
+margin_right = 122.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Zoom in"
@@ -793,30 +804,32 @@ items = [ "Zoom in", null, false, 0, null, "Zoom out", null, false, 1, null ]
 selected = 0
 
 [node name="OptionsLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 46.0
+margin_left = 54.0
 margin_top = 46.0
-margin_right = 91.0
+margin_right = 99.0
 margin_bottom = 61.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Options:"
 
 [node name="FitToFrameButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 22.0
+margin_left = 30.0
 margin_top = 65.0
-margin_right = 114.0
+margin_right = 122.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fit to frame"
 
 [node name="100%ZoomButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 22.0
+margin_left = 30.0
 margin_top = 92.0
-margin_right = 114.0
+margin_right = 122.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
@@ -841,6 +854,7 @@ margin_left = 41.0
 margin_right = 56.0
 margin_bottom = 17.0
 hint_tooltip = "Enable horizontal mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 30 )
@@ -853,6 +867,7 @@ margin_left = 100.0
 margin_right = 117.0
 margin_bottom = 17.0
 hint_tooltip = "Enable vertical mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 42 )
@@ -917,6 +932,7 @@ margin_top = 55.0
 margin_right = 125.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -959,6 +975,7 @@ margin_right = 117.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -983,6 +1000,7 @@ margin_left = 17.0
 margin_top = 19.0
 margin_right = 127.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
@@ -1000,6 +1018,7 @@ margin_left = 22.0
 margin_right = 114.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Lighten"
@@ -1032,6 +1051,7 @@ margin_right = 114.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -1057,6 +1077,7 @@ margin_left = 31.0
 margin_top = 19.0
 margin_right = 113.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Right Color"
@@ -1083,6 +1104,7 @@ margin_top = 19.0
 margin_right = 114.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Zoom out"
@@ -1104,6 +1126,7 @@ margin_top = 65.0
 margin_right = 114.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fit to frame"
@@ -1114,6 +1137,7 @@ margin_top = 92.0
 margin_right = 114.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
@@ -1138,6 +1162,7 @@ margin_left = 41.0
 margin_right = 56.0
 margin_bottom = 17.0
 hint_tooltip = "Enable horizontal mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 30 )
@@ -1150,6 +1175,7 @@ margin_left = 100.0
 margin_right = 117.0
 margin_bottom = 17.0
 hint_tooltip = "Enable vertical mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 42 )
@@ -1197,6 +1223,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Add a new palette"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 21 )
 texture_hover = ExtResource( 22 )
@@ -1216,6 +1243,7 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 hint_tooltip = "Edit currently selected palette"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 23 )
 texture_hover = ExtResource( 24 )
@@ -1227,6 +1255,7 @@ margin_bottom = 32.0
 grow_horizontal = 0
 rect_min_size = Vector2( 103, 0 )
 hint_tooltip = "Choose a palette"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 clip_text = true
 
