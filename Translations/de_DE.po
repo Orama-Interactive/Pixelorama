@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-18 23:28\n"
+"PO-Revision-Date: 2020-04-19 10:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -183,7 +183,7 @@ msgid "Frame:"
 msgstr "Frame:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientierung:"
 
 msgid "Browse"
 msgstr "Durchsuchen"
@@ -435,7 +435,7 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Ungespeichertes Bild"
 
 msgid "Changes has not been saved. Are you sure you want to create a new image?"
 msgstr ""
