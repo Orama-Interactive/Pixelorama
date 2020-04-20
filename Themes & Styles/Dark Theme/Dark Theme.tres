@@ -7,10 +7,10 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Vsplit.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
 bg_color = Color( 0.517647, 0.517647, 0.517647, 1 )
 border_color = Color( 0.517647, 0.517647, 0.517647, 1 )
 corner_radius_top_left = 2
@@ -20,10 +20,10 @@ corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=2]
-content_margin_left = 4.0
-content_margin_right = 2.0
-content_margin_top = 4.0
-content_margin_bottom = 4.0
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 corner_radius_top_left = 2
@@ -33,10 +33,10 @@ corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=3]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
 border_color = Color( 0.2, 0.2, 0.2, 1 )
 corner_radius_top_left = 2
