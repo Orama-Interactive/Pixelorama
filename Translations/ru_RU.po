@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-20 00:00\n"
+"PO-Revision-Date: 2020-04-20 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -915,6 +915,18 @@ msgstr "Отменить: Удаление своей кисти"
 
 msgid "Redo: Delete Custom Brush"
 msgstr "Повторить: Удаление своей кисти"
+
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Сдвинуть направляющие"
