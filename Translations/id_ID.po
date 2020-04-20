@@ -8,157 +8,157 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-20 06:49\n"
+"PO-Revision-Date: 2020-04-20 09:39\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Oke"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 msgid "Save"
-msgstr ""
+msgstr "Simpan"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Konfirmasi..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Ukuran Gambar"
 
 msgid "Width:"
-msgstr ""
+msgstr "Panjang:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Lebar:"
 
 msgid "File"
-msgstr ""
+msgstr "Berkas/File"
 
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 msgid "View"
-msgstr ""
+msgstr "Tampilan"
 
 msgid "Image"
-msgstr ""
+msgstr "Gambar"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efek"
 
 msgid "Help"
-msgstr ""
+msgstr "Bantuan"
 
 msgid "New..."
-msgstr ""
+msgstr "Baru..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Buka..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Simpan..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Simpan sebagai..."
 
 msgid "Import..."
-msgstr ""
+msgstr "Impor..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "Impor PNG..."
 
 msgid "Export"
-msgstr ""
+msgstr "Ekspor"
 
 msgid "Export..."
-msgstr ""
+msgstr "Ekspor..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Ekspor sebagai..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Ekspor PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Ekspor PNG sebagai..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Keluar"
 
 msgid "Undo"
-msgstr ""
+msgstr "Undo"
 
 msgid "Redo"
-msgstr ""
+msgstr "Redo"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Perbesar/perkecil gambar"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Potong Gambar"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Putar Gambar"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Hapus Pilihan"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Balikkan Horizontal"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Balikkan Vertikal"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Preferensi"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Mode Gambar Berulang"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Tampilkan garis"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Pakai Penggaris"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Tampilkan Petunjuk"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Tampilkan Frame Animasi"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Isi dengan warna:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Buka file"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Buka file (lebih dari satu)"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Import sebagai frame animasi baru"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Impor sebagai Spritesheet"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Simpan \"sprite\" dengan .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Ekspor \"sprite\" sebagai .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Ekspor \"sprite\""
 
 msgid "File Exists, Overwrite?"
 msgstr ""
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Folder %s sudah ada. Lanjutkan?"
 
 msgid "Directory path or file name is not valid!"
 msgstr ""
@@ -309,103 +309,103 @@ msgid "Gray"
 msgstr ""
 
 msgid "Gold"
-msgstr ""
+msgstr "Emas"
 
 msgid "Light"
-msgstr ""
+msgstr "Terang"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Balikkan warna"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturasi"
 
 msgid "Outline"
-msgstr ""
+msgstr "Garis luar"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ganti Hue/Saturation/Value"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Letakkan di dalam gambar"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Ketebalan:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Tampilkan \"Splash Screen\""
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Issue Tracker"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Perubahan"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Tentang Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Dibuat oleh Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Situs web"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donasi"
 
 msgid "Developers"
-msgstr ""
+msgstr "Developer"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Kontributor"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donatur"
 
 msgid "Translators"
-msgstr ""
+msgstr "Penerjemah"
 
 msgid "English"
-msgstr ""
+msgstr "Inggris"
 
 msgid "Greek"
-msgstr ""
+msgstr "Yunani"
 
 msgid "French"
-msgstr ""
+msgstr "Prancis"
 
 msgid "German"
-msgstr ""
+msgstr "Jerman"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polski"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugis (Brasil)"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rusia"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "China (Simpel)"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "China (Tradisional)"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italia"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Latvi"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spanyol"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
 msgstr ""
