@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-20 20:08\n"
+"PO-Revision-Date: 2020-04-20 20:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -183,7 +183,7 @@ msgid "Frame:"
 msgstr "Klatka:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientacja:"
 
 msgid "Browse"
 msgstr "Przeglądaj"
@@ -435,10 +435,10 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Na pewno chcesz opuścić Pixeloramę?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Niezapisany obraz"
 
 msgid "Changes has not been saved. Are you sure you want to create a new image?"
-msgstr ""
+msgstr "Zmiany nie zostały zapisane. Czy na pewno chcesz utworzyć nowy obraz?"
 
 msgid "Save before exiting?"
 msgstr "Zapisać przed wyjściem?"
@@ -584,22 +584,22 @@ msgid "A color of the grid"
 msgstr "Kolor siatki"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Rozmiar komórek:"
 
 msgid "Size of the transparent checker background"
-msgstr "Rozmiar przezroczystego obszaru roboczego"
+msgstr "Rozmiar komórek do rysowania - szachownicy"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Kolor komórek 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Podstawowy kolor przezroczystego obszaru roboczego"
+msgstr "Pierwszy kolor komórek do rysowania - szachownicy"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Kolor komórek 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Dodatkowy kolor przezroczystego obszaru roboczego"
+msgstr "Drugi kolor komórek do rysowania - szachownicy"
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
