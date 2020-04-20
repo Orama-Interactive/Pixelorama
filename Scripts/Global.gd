@@ -199,6 +199,7 @@ var camera_preview : Camera2D
 var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
+var transparent_checker : ColorRect
 
 var file_menu : MenuButton
 var edit_menu : MenuButton
@@ -324,6 +325,7 @@ func _ready() -> void:
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
+	transparent_checker = find_node_by_name(root, "TransparentChecker")
 
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")

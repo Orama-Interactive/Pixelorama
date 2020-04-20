@@ -531,6 +531,8 @@ func camera_zoom() -> void:
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
 
+	Global.transparent_checker._ready() # To update the rect size
+
 func handle_undo(action : String) -> void:
 	if !can_undo:
 		return
