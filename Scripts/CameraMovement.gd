@@ -1,5 +1,6 @@
 extends Camera2D
 
+
 var tween : Tween
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
@@ -7,10 +8,12 @@ var viewport_container : ViewportContainer
 var mouse_pos := Vector2.ZERO
 var drag := false
 
+
 func _ready() -> void:
 	viewport_container = get_parent().get_parent()
 	tween = Tween.new()
 	add_child(tween)
+	tween.connect("tween_step", self, "_on_tween_step")
 
 
 # Get the speed multiplier for when you've pressed
@@ -117,6 +120,9 @@ func _input(event : InputEvent) -> void:
 		elif is_action_direction_released(event):
 			process_direction_action_released(event)
 
+		Global.horizontal_ruler.update()
+		Global.vertical_ruler.update()
+
 
 # Zoom Camera
 func zoom_camera(dir : int) -> void:
@@ -145,3 +151,9 @@ func zoom_camera(dir : int) -> void:
 		offset = offset + (-0.5 * viewport_size + mouse_pos) * (prev_zoom - zoom)
 		if name == "Camera2D":
 			Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+
+
+
+func _on_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()

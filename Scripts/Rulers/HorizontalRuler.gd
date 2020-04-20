@@ -9,27 +9,12 @@ var minor_subdivision := 4
 var first : Vector2
 var last : Vector2
 
-onready var _prev_camera_offset: Vector2 = Global.camera.offset
-onready var _prev_camera_zoom: Vector2 = Global.camera.zoom
 
 func _ready() -> void:
 	Global.main_viewport.connect("item_rect_changed", self, "update")
 
-# warning-ignore:unused_argument
-func _process(delta : float) -> void:
-	var mouse_pos := get_local_mouse_position()
-	if mouse_pos.x < RULER_WIDTH: #For double guides
-		mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
-	else:
-		mouse_default_cursor_shape = Control.CURSOR_VSPLIT
-	if Global.camera.offset != _prev_camera_offset:
-		_prev_camera_offset = Global.camera.offset
-		update()
-	if Global.camera.zoom != _prev_camera_zoom:
-		_prev_camera_zoom = Global.camera.zoom
-		update()
 
-#Code taken and modified from Godot's source code
+# Code taken and modified from Godot's source code
 func _draw() -> void:
 	var transform := Transform2D()
 	var ruler_transform := Transform2D()
@@ -70,11 +55,12 @@ func _draw() -> void:
 			else:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
 
+
 func _on_HorizontalRuler_pressed() -> void:
 	if !Global.show_guides:
 		return
 	var mouse_pos := get_local_mouse_position()
-	if mouse_pos.x < RULER_WIDTH: #For double guides
+	if mouse_pos.x < RULER_WIDTH: # For double guides
 		Global.vertical_ruler._on_VerticalRuler_pressed()
 	var guide := Guide.new()
 	guide.type = guide.Types.HORIZONTAL
@@ -83,3 +69,11 @@ func _on_HorizontalRuler_pressed() -> void:
 	Global.canvas.add_child(guide)
 	Global.has_focus = false
 	update()
+
+
+func _on_HorizontalRuler_mouse_entered() -> void:
+	var mouse_pos := get_local_mouse_position()
+	if mouse_pos.x < RULER_WIDTH: # For double guides
+		mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
+	else:
+		mouse_default_cursor_shape = Control.CURSOR_VSPLIT

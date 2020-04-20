@@ -13,8 +13,8 @@ func _ready() -> void:
 	width = 0.1
 	default_color = Global.guide_color
 
-# warning-ignore:unused_argument
-func _process(delta : float) -> void:
+
+func _input(_event : InputEvent):
 	width = Global.camera.zoom.x * 2
 	mouse_pos = get_local_mouse_position()
 	var point0 := points[0]
