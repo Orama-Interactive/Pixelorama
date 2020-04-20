@@ -882,6 +882,18 @@ msgstr ""
 msgid "Redo: Delete Custom Brush"
 msgstr ""
 
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
+
 msgid "Move Guide"
 msgstr ""
 
