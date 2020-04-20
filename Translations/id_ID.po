@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-20 10:58\n"
+"PO-Revision-Date: 2020-04-20 11:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -155,158 +155,159 @@ msgid "Export Sprite"
 msgstr "Ekspor \"sprite\""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Folder ini mengandung nama yang sama, Lanjutkan?"
 
 msgid "File %s already exists. Overwrite?"
 msgstr "Folder %s sudah ada. Lanjutkan?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Folder tidak valid"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Error saat membaca file '%s'.\n"
+"Kode Error: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Frame"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animasi"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Preview:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Frame:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientasi:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Telusuri"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Ubah ukuran:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Batalkan Mengekspor"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Peringatan!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Pindah dalam folder saat ini"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Buka direktori"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Semua frame sebagai banyak file"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Semua frames sebagai satu animasi"
 
 msgid "Background:"
-msgstr ""
+msgstr "Latar belakang:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Arah:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Maju"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Mundur"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "\"Ping-Pong\""
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolom"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolom:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Baris"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Baris:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Path:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Direktori & File:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Buat Folder"
 
 msgid "File:"
-msgstr ""
+msgstr "Berkas/File:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolasi:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "\"Nearest\""
 
 msgid "Bilinear"
-msgstr ""
+msgstr "\"Bilinear\""
 
 msgid "Cubic"
-msgstr ""
+msgstr "\"Cubic\""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "\"Trilinear\""
 
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 msgid "Themes"
-msgstr ""
+msgstr "Tema"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Kanvas"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pintasan"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Zoom Halus"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Memperhalus gerakan saat memperbesar atau memperkecil"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Tablet pressure sensitifitas:"
 
 msgid "None"
-msgstr ""
+msgstr "Tak satupun"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Memberi efek pada brush alpha"
 
 msgid "Color:"
-msgstr ""
+msgstr "Warna:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Warna Panduan:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Bahasa Sistem"
 
 msgid "Dark"
-msgstr ""
+msgstr "Gelap"
 
 msgid "Gray"
-msgstr ""
+msgstr "Abu-abu"
 
 msgid "Gold"
 msgstr "Emas"
@@ -803,16 +804,16 @@ msgid "Clone current layer"
 msgstr "Duplikat lapisan/layer ini"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Satukan lapisan/layer ini dengan yang dibawah"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Kegelapan:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Sembunyikan/Perlihatkan lapisan/layer"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Kunci lapisan/layer"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
