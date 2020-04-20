@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-20 21:07\n"
+"PO-Revision-Date: 2020-04-20 22:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -766,7 +766,7 @@ msgid "Future Frames"
 msgstr "Przyszłe klatki"
 
 msgid "Manage frame tags"
-msgstr "Zarządzaj znacznikami klatek"
+msgstr "Zarządzaj tagami klatek"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animacja odtwarza się tylko na klatkach z tym samym tagiem"
@@ -920,16 +920,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Przywróć: Usuwanie niestandardowego pędzla"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Cofnij: Modyfikuj tag klatki"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Przywróć: Modyfikuj tag klatki"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Cofnij: Usuń tag klatki"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Przywróć: Usuń tag klatki"
 
 msgid "Move Guide"
 msgstr "Przesuń prowadnice"
