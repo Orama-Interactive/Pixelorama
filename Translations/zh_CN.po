@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-19 05:45\n"
+"PO-Revision-Date: 2020-04-20 21:07\n"
 
 msgid "OK"
 msgstr "确定"
@@ -919,6 +919,18 @@ msgstr "撤消: 删除自定义画笔"
 
 msgid "Redo: Delete Custom Brush"
 msgstr "重做: 删除自定义画笔"
+
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "移除辅助线"
