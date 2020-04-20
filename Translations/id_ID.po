@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-20 09:49\n"
+"PO-Revision-Date: 2020-04-20 10:14\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -664,61 +664,64 @@ msgid "Options:"
 msgstr "Opsi:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Paskan dengan frame"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Perbesar 100%"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Mirroring"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Aktifkan \"mirror\" horizontal saat menggambar"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Aktifkan \"mirror\" vertikal saat menggambar"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikal"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Frame saat ini:"
 
 msgid "Current frame: 1/1"
-msgstr ""
+msgstr "Frame saat ini: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Lompat ke frame pertama (%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Mundur ke frame sebelumnya (%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Mainkan animasi secara mundur (dari akhir sampai awal) \n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Mainkan animasi secara normal (dari awal sampai akhir)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Maju ke frame berikutnya\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Lompat ke frame pertama (%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Settingan \"Onion Skinning\""
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Aktifkan/Matikan \"Onion Skinning\""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
