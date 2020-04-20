@@ -1,6 +1,10 @@
-[gd_resource type="Theme" load_steps=31 format=2]
+[gd_resource type="Theme" load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Hsplit.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Vsplit.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Grabber.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Grabber_Hover.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.219608, 0.211765, 0.168627, 1 )
@@ -123,17 +127,19 @@ border_width_bottom = 2
 border_color = Color( 0.372549, 0.360784, 0.301961, 1 )
 
 [sub_resource type="StyleBoxFlat" id=15]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+bg_color = Color( 0.72549, 0.478431, 0, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_top = 3
-border_width_bottom = 3
+bg_color = Color( 0.866667, 0.827451, 0.615686, 1 )
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.109804, 0.0862745, 0.0862745, 0 )
@@ -313,8 +319,8 @@ FileDialog/colors/files_disabled = Color( 0, 0, 0, 0.7 )
 FileDialog/icons/folder = null
 FileDialog/icons/parent_folder = null
 FileDialog/icons/reload = null
-GridContainer/constants/hseparation = 0
-GridContainer/constants/vseparation = 0
+GridContainer/constants/hseparation = 3
+GridContainer/constants/vseparation = 3
 HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
@@ -326,15 +332,19 @@ HScrollBar/styles/scroll = SubResource( 13 )
 HScrollBar/styles/scroll_focus = null
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = SubResource( 14 )
-HSlider/icons/grabber = null
+HSlider/icons/grabber = ExtResource( 4 )
 HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = null
+HSlider/icons/grabber_highlight = ExtResource( 5 )
 HSlider/icons/tick = null
 HSlider/styles/focus = null
 HSlider/styles/grabber_area = SubResource( 15 )
 HSlider/styles/grabber_disabled = null
 HSlider/styles/grabber_highlight = null
 HSlider/styles/slider = SubResource( 16 )
+HSplitContainer/constants/autohide = 1
+HSplitContainer/constants/separation = 6
+HSplitContainer/icons/grabber = ExtResource( 2 )
+HSplitContainer/styles/bg = null
 Label/colors/font_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
@@ -525,6 +535,10 @@ VScrollBar/styles/scroll = SubResource( 27 )
 VScrollBar/styles/scroll_focus = null
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource( 28 )
+VSplitContainer/constants/autohide = 1
+VSplitContainer/constants/separation = 6
+VSplitContainer/icons/grabber = ExtResource( 3 )
+VSplitContainer/styles/bg = null
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 18
 WindowDialog/constants/close_v_ofs = 18
