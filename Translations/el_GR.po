@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-19 03:37\n"
+"PO-Revision-Date: 2020-04-20 21:07\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -919,6 +919,18 @@ msgstr "Αναίρεση: Διαγραφή προσαρμοσμένου πινέ
 
 msgid "Redo: Delete Custom Brush"
 msgstr "Ακύρωση αναίρεσης: Διαγραφή προσαρμοσμένου πινέλου"
+
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Μετακίνηση βοηθού"
