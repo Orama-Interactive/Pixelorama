@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-20 10:23\n"
+"PO-Revision-Date: 2020-04-20 10:58\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -800,7 +800,7 @@ msgid "Move down the current layer"
 msgstr "Geser ke bawah lapisan/layer ini"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Duplikat lapisan/layer ini"
 
 msgid "Merge current layer with the one below"
 msgstr ""
