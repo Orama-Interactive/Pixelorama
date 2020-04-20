@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-19 11:39\n"
+"PO-Revision-Date: 2020-04-20 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -918,6 +918,18 @@ msgstr "Rückgängig: Entferne benutzerdefinierten Pinsel"
 
 msgid "Redo: Delete Custom Brush"
 msgstr "Wiederherstellen: Entferne benutzerdefinierten Pinsel"
+
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Bewegungsanleitung"
