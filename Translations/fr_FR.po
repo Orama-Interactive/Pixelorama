@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-04-18 23:28\n"
+"PO-Revision-Date: 2020-04-20 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -915,6 +915,18 @@ msgstr "Annuler : Supprimer la brosse personnalisée"
 
 msgid "Redo: Delete Custom Brush"
 msgstr "Refaire : Supprimer la brosse personnalisée"
+
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Déplacer le guide"
