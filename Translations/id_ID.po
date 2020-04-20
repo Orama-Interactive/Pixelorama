@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-20 09:39\n"
+"PO-Revision-Date: 2020-04-20 09:49\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -408,58 +408,61 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Tim Developer"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Pemimpin Pemograman"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Desainer UI"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Kontribusi Github"
 
 msgid "Art by"
-msgstr ""
+msgstr "Oleh"
 
 msgid "untitled"
-msgstr ""
+msgstr "tanpa nama"
 
 msgid "imported"
-msgstr ""
+msgstr "telah diimpor"
 
 msgid "copy"
-msgstr ""
+msgstr "salin"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Yakin ingin keluar?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Gambar belum disimpan"
 
 msgid "Changes has not been saved. Are you sure you want to create a new image?"
-msgstr ""
+msgstr "Perubahan belum disimpan. Yakin ingin membuat gambar baru?"
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Simpan sebelum keluar?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Perubahan belum tersimpan. Lanjutkan?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Simpan & Keluar"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Keluar tanpa menyimpan"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "\"Utility Tools\""
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Seleksi Kotak\n\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan\n\n"
+"Tekan %s untuk menggerakkan gambar"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -634,31 +637,31 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Jumlah:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Jumlah Penerang/Penggelap"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Ambil untuk:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Warna Kiri"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Warna Kanan"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mode:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Perbesar"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Perkecil"
 
 msgid "Options:"
-msgstr ""
+msgstr "Opsi:"
 
 msgid "Fit to frame"
 msgstr ""
