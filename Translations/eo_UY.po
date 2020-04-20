@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-18 23:28\n"
+"PO-Revision-Date: 2020-04-20 21:07\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -891,6 +891,18 @@ msgstr "Malfaritas: Forigi propran penikon"
 
 msgid "Redo: Delete Custom Brush"
 msgstr "Refaritas: Forigi propran penikon"
+
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Movi direktlinion"
