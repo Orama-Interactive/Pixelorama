@@ -154,14 +154,14 @@ rect_min_size = Vector2( 0, 24 )
 
 [node name="BackgroundColorLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
 margin_top = 5.0
-margin_right = 82.0
+margin_right = 78.0
 margin_bottom = 19.0
-text = "Background: "
+text = "Background:"
 valign = 1
 
 [node name="BackgroundColor" type="ColorPickerButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 86.0
-margin_right = 265.0
+margin_left = 82.0
+margin_right = 263.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 7
@@ -169,14 +169,14 @@ color = Color( 1, 1, 1, 1 )
 edit_alpha = false
 
 [node name="DirectionLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 269.0
+margin_left = 267.0
 margin_top = 5.0
-margin_right = 332.0
+margin_right = 330.0
 margin_bottom = 19.0
 text = "Direction:"
 
 [node name="Direction" type="OptionButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 336.0
+margin_left = 334.0
 margin_right = 516.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 100, 0 )

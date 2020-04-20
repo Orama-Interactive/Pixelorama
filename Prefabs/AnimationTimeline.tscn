@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Scripts/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
@@ -42,6 +42,10 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Tag_Hover.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Tag.png" type="Texture" id=41]
 [ext_resource path="res://Prefabs/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Delete_Frame.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Delete_Frame_Hover.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Copy_Frame_Hover.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/Copy_Frame.png" type="Texture" id=46]
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -150,6 +154,7 @@ columns = 2
 margin_right = 32.0
 margin_bottom = 32.0
 hint_tooltip = "Create a new layer"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
@@ -161,6 +166,7 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 hint_tooltip = "Remove current layer"
+focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 4 )
@@ -174,6 +180,7 @@ margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 hint_tooltip = "Move up the current layer"
+focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 7 )
@@ -188,6 +195,7 @@ margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 68.0
 hint_tooltip = "Move down the current layer"
+focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 10 )
@@ -201,6 +209,7 @@ margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
 hint_tooltip = "Clone current layer"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 13 )
 texture_hover = ExtResource( 14 )
@@ -213,6 +222,7 @@ margin_top = 72.0
 margin_right = 68.0
 margin_bottom = 104.0
 hint_tooltip = "Merge current layer with the one below"
+focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 texture_normal = ExtResource( 15 )
@@ -254,19 +264,49 @@ margin_left = 154.0
 margin_right = 174.0
 margin_bottom = 20.0
 hint_tooltip = "Add a new frame"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture_normal = ExtResource( 19 )
 texture_hover = ExtResource( 20 )
 
-[node name="FrameTagButton" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+[node name="DeleteFrame" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 178.0
 margin_right = 198.0
 margin_bottom = 20.0
+hint_tooltip = "Remove Frame"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 43 )
+texture_hover = ExtResource( 44 )
+
+[node name="CopyFrame" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 202.0
+margin_right = 222.0
+margin_bottom = 20.0
+hint_tooltip = "Clone Frame"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 46 )
+texture_hover = ExtResource( 45 )
+
+[node name="FrameTagButton" type="TextureButton" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 226.0
+margin_right = 246.0
+margin_bottom = 20.0
 hint_tooltip = "Manage frame tags"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -274,8 +314,8 @@ texture_normal = ExtResource( 41 )
 texture_hover = ExtResource( 40 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
-margin_left = 263.0
-margin_right = 403.0
+margin_left = 287.0
+margin_right = 427.0
 margin_bottom = 24.0
 size_flags_horizontal = 6
 
@@ -285,6 +325,7 @@ size_flags_horizontal = 6
 margin_right = 20.0
 margin_bottom = 24.0
 hint_tooltip = "FIRSTFRAME_HT"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
@@ -298,6 +339,7 @@ margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 24.0
 hint_tooltip = "PREVIOUSFRAME_HT"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 shortcut = SubResource( 4 )
@@ -311,6 +353,7 @@ margin_left = 48.0
 margin_right = 68.0
 margin_bottom = 24.0
 hint_tooltip = "PLAYBACKWARDS_HT"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut_in_tooltip = false
@@ -326,6 +369,7 @@ margin_left = 72.0
 margin_right = 92.0
 margin_bottom = 24.0
 hint_tooltip = "PLAYFORWARD_HT"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 toggle_mode = true
@@ -342,6 +386,7 @@ margin_left = 96.0
 margin_right = 116.0
 margin_bottom = 24.0
 hint_tooltip = "NEXTFRAME_HT"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
@@ -355,6 +400,7 @@ margin_left = 120.0
 margin_right = 140.0
 margin_bottom = 24.0
 hint_tooltip = "LASTFRAME_HT"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 shortcut = SubResource( 12 )
@@ -373,6 +419,7 @@ size_flags_horizontal = 0
 margin_right = 10.0
 margin_bottom = 24.0
 hint_tooltip = "Onion Skinning settings"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 38 )
 texture_hover = ExtResource( 39 )
@@ -384,6 +431,7 @@ margin_left = 14.0
 margin_right = 34.0
 margin_bottom = 24.0
 hint_tooltip = "Enable/disable Onion Skinning"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 35 )
 texture_hover = ExtResource( 36 )
@@ -395,6 +443,7 @@ margin_left = 38.0
 margin_right = 58.0
 margin_bottom = 24.0
 hint_tooltip = "Cycle loop"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 37 )
 texture_hover = ExtResource( 34 )
@@ -440,6 +489,7 @@ valign = 1
 margin_left = 57.0
 margin_right = 136.0
 margin_bottom = 32.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -505,19 +555,21 @@ margin_bottom = 124.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
-margin_bottom = 14.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
 
 [node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs"]
+margin_top = 1.0
 margin_right = 36.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 rect_min_size = Vector2( 36, 0 )
 text = "1"
 align = 1
 
 [node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
-margin_top = 18.0
+margin_top = 20.0
 margin_right = 36.0
-margin_bottom = 18.0
+margin_bottom = 20.0
 
 [node name="VSeparator" type="VSeparator" parent="AnimationContainer"]
 margin_left = 700.0
@@ -587,6 +639,8 @@ text = "Blue-Red Mode"
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
 [connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame" to="." method="add_frame"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]

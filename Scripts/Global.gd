@@ -44,14 +44,11 @@ var current_layer := 0 setget layer_changed
 var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := false
-# warning-ignore:unused_class_variable
-var hidden_canvases := []
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
-var transparent_background : ImageTexture
 # warning-ignore:unused_class_variable
 var selected_pixels := []
 var image_clipboard : Image
@@ -77,6 +74,12 @@ var grid_height := 1
 var grid_color := Color.black
 # warning-ignore:unused_class_variable
 var guide_color := Color.purple
+# warning-ignore:unused_class_variable
+var checker_size := 10
+# warning-ignore:unused_class_variable
+var checker_color_1 := Color.gray
+# warning-ignore:unused_class_variable
+var checker_color_2 := Color.white
 
 # Tools & options
 # warning-ignore:unused_class_variable
@@ -115,7 +118,7 @@ var right_color_picker_for := 1
 
 # 0 for zoom in, 1 for zoom out
 var left_zoom_mode := 0
-var right_zoom_mode := 0
+var right_zoom_mode := 1
 
 # warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
@@ -196,6 +199,7 @@ var camera_preview : Camera2D
 var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
+var transparent_checker : ColorRect
 
 var file_menu : MenuButton
 var edit_menu : MenuButton
@@ -209,6 +213,8 @@ var import_sprites_dialog : FileDialog
 
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
+
+var color_switch_button : TextureButton
 
 var left_tool_options_container : Container
 var right_tool_options_container : Container
@@ -297,8 +303,6 @@ func _ready() -> void:
 	directory_module = XDGDataPaths.new()
 
 	undo_redo = UndoRedo.new()
-	transparent_background = ImageTexture.new()
-	transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Dark.png"), 0)
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()
@@ -321,6 +325,7 @@ func _ready() -> void:
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
+	transparent_checker = find_node_by_name(root, "TransparentChecker")
 
 	file_menu = find_node_by_name(root, "FileMenu")
 	edit_menu = find_node_by_name(root, "EditMenu")
@@ -337,6 +342,7 @@ func _ready() -> void:
 
 	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
 	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	color_switch_button = find_node_by_name(root, "ColorSwitch")
 
 	left_brush_type_container = find_node_by_name(left_tool_options_container, "LeftBrushType")
 	right_brush_type_container = find_node_by_name(right_tool_options_container, "RightBrushType")
@@ -427,6 +433,7 @@ func find_node_by_name(root, node_name) -> Node:
 			return found
 	return null
 
+
 func notification_label(text : String) -> void:
 	var notification : Label = load("res://Prefabs/NotificationLabel.tscn").instance()
 	notification.text = tr(text)
@@ -434,8 +441,23 @@ func notification_label(text : String) -> void:
 	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
-func undo(_canvases : Array, layer_index : int = -1) -> void:
+
+func general_undo() -> void:
 	undos -= 1
+	var action_name := undo_redo.get_current_action_name()
+	notification_label("Undo: %s" % action_name)
+
+
+func general_redo() -> void:
+	if undos < undo_redo.get_version(): # If we did undo and then redo
+		undos = undo_redo.get_version()
+	if control.redone:
+		var action_name := undo_redo.get_current_action_name()
+		notification_label("Redo: %s" % action_name)
+
+
+func undo(_canvases : Array, layer_index : int = -1) -> void:
+	general_undo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in _canvases:
@@ -465,12 +487,10 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 	if saved:
 		saved = false
 		self.window_title = window_title + "(*)"
-	notification_label("Undo: %s" % action_name)
 
 
 func redo(_canvases : Array, layer_index : int = -1) -> void:
-	if undos < undo_redo.get_version(): # If we did undo and then redo
-		undos = undo_redo.get_version()
+	general_redo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
 		for c in _canvases:
@@ -498,12 +518,12 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 	if saved:
 		saved = false
 		self.window_title = window_title + "(*)"
-	if control.redone:
-		notification_label("Redo: %s" % action_name)
+
 
 func title_changed(value : String) -> void:
 	window_title = value
 	OS.set_window_title(value)
+
 
 func canvases_changed(value : Array) -> void:
 	canvases = value
@@ -535,6 +555,18 @@ func canvases_changed(value : Array) -> void:
 
 			layers[i][3].add_child(frame_button)
 
+	# This is useful in case tagged frames get deleted DURING the animation is playing
+	# otherwise, this code is useless in this context, since these values are being set
+	# when the play buttons get pressed, anyway
+	animation_timeline.first_frame = 0
+	animation_timeline.last_frame = canvases.size() - 1
+	if play_only_tags:
+		for tag in animation_tags:
+			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
+				animation_timeline.first_frame = tag[2] - 1
+				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
+
+
 func clear_canvases() -> void:
 	for child in canvas_parent.get_children():
 		if child is Canvas:
@@ -545,6 +577,7 @@ func clear_canvases() -> void:
 
 	window_title = "(" + tr("untitled") + ") - Pixelorama"
 	undo_redo.clear_history(false)
+
 
 func layers_changed(value : Array) -> void:
 	layers = value
@@ -601,6 +634,7 @@ func layers_changed(value : Array) -> void:
 		remove_layer_button.disabled = false
 		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
+
 func frame_changed(value : int) -> void:
 	current_frame = value
 	current_frame_label.text = tr("Current frame:") + " %s/%s" % [str(current_frame + 1), canvases.size()]
@@ -625,6 +659,7 @@ func frame_changed(value : int) -> void:
 	frame_ids.get_child(current_frame).add_color_override("font_color", Color("#3c5d75"))
 	if current_frame < layers[current_layer][3].get_child_count():
 		layers[current_layer][3].get_child(current_frame).pressed = true
+
 
 func layer_changed(value : int) -> void:
 	current_layer = value
@@ -690,6 +725,17 @@ func animation_tags_changed(value : Array) -> void:
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
+	# This is useful in case tags get modified DURING the animation is playing
+	# otherwise, this code is useless in this context, since these values are being set
+	# when the play buttons get pressed, anyway
+	animation_timeline.first_frame = 0
+	animation_timeline.last_frame = canvases.size() - 1
+	if play_only_tags:
+		for tag in animation_tags:
+			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
+				animation_timeline.first_frame = tag[2] - 1
+				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
+
 
 func update_hint_tooltips() -> void:
 	var root = get_tree().get_root()
@@ -746,7 +792,7 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
-(%s)""") % "X"
+(%s)""") % InputMap.get_action_list("switch_colors")[0].as_text()
 
 	var first_frame : BaseButton = find_node_by_name(root, "FirstFrame")
 	first_frame.hint_tooltip = tr("""Jump to the first frame
@@ -784,6 +830,7 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
 	brush_button.hint_tooltip = hint_tooltip
+	brush_button.connect("brush_selected",control,"_on_Brush_Selected")
 	if brush_type == Brush_Types.RANDOM_FILE:
 		brush_button.random_brushes.append(brush_img)
 	brush_container.add_child(brush_button)
@@ -794,23 +841,22 @@ func remove_brush_buttons() -> void:
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
+
 func undo_custom_brush(_brush_button : BaseButton = null) -> void:
-	undos -= 1
+	general_undo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.add_child(_brush_button)
 		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
 		_brush_button.get_node("DeleteButton").visible = false
-	notification_label("Undo: %s" % action_name)
+
 
 func redo_custom_brush(_brush_button : BaseButton = null) -> void:
-	if undos < undo_redo.get_version(): # If we did undo and then redo
-		undos = undo_redo.get_version()
+	general_redo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.remove_child(_brush_button)
-	if control.redone:
-		notification_label("Redo: %s" % action_name)
+
 
 func update_left_custom_brush() -> void:
 	if current_left_brush_type == Brush_Types.PIXEL:

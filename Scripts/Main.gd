@@ -70,7 +70,8 @@ func _ready() -> void:
 		"Rotate Image" : 0,
 		"Invert colors" : 0,
 		"Desaturation" : 0,
-		"Outline" : 0
+		"Outline" : 0,
+		"Adjust Hue/Saturation/Value" : 0
 		}
 	var help_menu_items := {
 		"View Splash Screen" : 0,
@@ -86,8 +87,8 @@ func _ready() -> void:
 
 		# Set the language option menu's default selected option to the loaded locale
 		var locale_index: int = Global.loaded_locales.find(saved_locale)
-		$PreferencesDialog.languages.get_child(1).pressed = false
-		$PreferencesDialog.languages.get_child(locale_index + 2).pressed = true
+		$PreferencesDialog.languages.get_child(0).pressed = false # Unset System Language option in preferences
+		$PreferencesDialog.languages.get_child(locale_index + 1).pressed = true
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
@@ -205,6 +206,8 @@ func _input(event : InputEvent) -> void:
 		redone = false
 
 	if Global.has_focus:
+		if event.is_action_pressed("undo") or event.is_action_pressed("redo") or event.is_action_pressed("redo_secondary"):
+			return
 		for t in tools: # Handle tool shortcuts
 			if event.is_action_pressed(t[2]): # Shortcut for right button (with Alt)
 				_on_Tool_pressed(t[0], false, false)
@@ -385,6 +388,9 @@ func image_menu_id_pressed(id : int) -> void:
 		7: # Outline
 			$OutlineDialog.popup_centered()
 			Global.can_draw = false
+		8: # HSV
+			$HSVDialog.popup_centered()
+			Global.can_draw = false
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:
@@ -554,6 +560,8 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size = new_size
 	update_right_custom_brush()
 
+func _on_Brush_Selected() -> void:
+	$BrushesPopup.hide()
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color
@@ -653,16 +661,21 @@ func _on_RightZoomModeOptions_item_selected(ID : int) -> void:
 
 
 func _on_FitToFrameButton_pressed() -> void:
-	var bigger = max(Global.canvas.size.x, Global.canvas.size.y)
-	Global.camera.zoom = (Vector2(bigger, bigger) * 0.004) / (Global.main_viewport.rect_size.x * 0.002)
+	var bigger_canvas_axis = max(Global.canvas.size.x, Global.canvas.size.y)
+	var smaller_viewport_axis = min(Global.main_viewport.rect_size.x, Global.main_viewport.rect_size.y)
+	Global.camera.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) / smaller_viewport_axis
 	Global.camera.offset = Global.canvas.size / 2
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
 
 
 func _on_100ZoomButton_pressed() -> void:
 	Global.camera.zoom = Vector2.ONE
 	Global.camera.offset = Global.canvas.size / 2
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
 
 
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:

@@ -13,8 +13,8 @@ func _ready() -> void:
 	width = 0.1
 	default_color = Global.guide_color
 
-# warning-ignore:unused_argument
-func _process(delta : float) -> void:
+
+func _input(_event : InputEvent):
 	width = Global.camera.zoom.x * 2
 	mouse_pos = get_local_mouse_position()
 	var point0 := points[0]
@@ -25,7 +25,7 @@ func _process(delta : float) -> void:
 	else:
 		point0.x -= width * 3
 		point1.x += width * 3
-	if point_in_rectangle(mouse_pos, point0, point1) && Input.is_action_just_pressed("left_mouse"):
+	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, point0, point1) and Input.is_action_just_pressed("left_mouse"):
 		if !point_in_rectangle(Global.canvas.current_pixel, Global.canvas.location, Global.canvas.location + Global.canvas.size):
 			has_focus = true
 			Global.has_focus = false

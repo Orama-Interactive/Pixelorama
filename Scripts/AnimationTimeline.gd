@@ -3,6 +3,8 @@ extends Panel
 var fps := 6.0
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
+var first_frame := 0
+var last_frame := Global.canvases.size() - 1
 
 onready var timeline_scroll : ScrollContainer = $AnimationContainer/TimelineContainer/TimelineScroll
 onready var tag_scroll_container : ScrollContainer = $AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll
@@ -10,6 +12,7 @@ onready var tag_scroll_container : ScrollContainer = $AnimationContainer/Timelin
 func _ready() -> void:
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / fps
+
 
 func _h_scroll_changed(value : float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
@@ -24,8 +27,6 @@ func add_frame() -> void:
 
 	var new_canvases: Array = Global.canvases.duplicate()
 	new_canvases.append(new_canvas)
-	var new_hidden_canvases: Array = Global.hidden_canvases.duplicate()
-	new_hidden_canvases.append(new_canvas)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Frame")
@@ -33,7 +34,6 @@ func add_frame() -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", [new_canvas])
 
 	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global, "hidden_canvases", Global.hidden_canvases)
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
 	Global.undo_redo.add_do_property(Global, "current_frame", new_canvases.size() - 1)
 
@@ -48,9 +48,113 @@ func add_frame() -> void:
 			Global.layers[l_i][5].append(new_canvas)
 
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global, "hidden_canvases", new_hidden_canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+	Global.undo_redo.commit_action()
+
+
+func _on_DeleteFrame_pressed(frame := -1) -> void:
+	if Global.canvases.size() == 1:
+		return
+	if frame == -1:
+		frame = Global.current_frame
+
+	var canvas : Canvas = Global.canvases[frame]
+	var new_canvases := Global.canvases.duplicate()
+	new_canvases.erase(canvas)
+	var current_frame := Global.current_frame
+	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
+		current_frame -= 1
+
+	var new_animation_tags := Global.animation_tags.duplicate(true)
+	# Loop through the tags to see if the frame is in one
+	for tag in new_animation_tags:
+		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
+			if tag[3] == tag[2]: # If we're deleting the only frame in the tag
+				new_animation_tags.erase(tag)
+			else:
+				tag[3] -= 1
+		elif frame + 1 < tag[2]:
+			tag[2] -= 1
+			tag[3] -= 1
+
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Remove Frame")
+
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
+	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
+	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+
+	for i in range(frame, new_canvases.size()):
+		var c : Canvas = new_canvases[i]
+		Global.undo_redo.add_do_property(c, "frame", i)
+		Global.undo_redo.add_undo_property(c, "frame", c.frame)
+
+
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
+
+	Global.undo_redo.add_do_method(Global, "redo", [canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
+	Global.undo_redo.commit_action()
+
+
+func _on_CopyFrame_pressed(frame := -1) -> void:
+	if frame == -1:
+		frame = Global.current_frame
+
+	var canvas : Canvas = Global.canvases[frame]
+	var new_canvas : Canvas = load("res://Prefabs/Canvas.tscn").instance()
+	new_canvas.size = Global.canvas.size
+	new_canvas.frame = Global.canvases.size()
+
+	var new_canvases := Global.canvases.duplicate()
+	new_canvases.insert(frame + 1, new_canvas)
+
+	for layer in canvas.layers: # Copy every layer
+		var sprite := Image.new()
+		sprite.copy_from(layer[0])
+		sprite.lock()
+		var tex := ImageTexture.new()
+		tex.create_from_image(sprite, 0)
+		new_canvas.layers.append([sprite, tex, layer[2]])
+
+	var new_animation_tags := Global.animation_tags.duplicate(true)
+	# Loop through the tags to see if the frame is in one
+	for tag in new_animation_tags:
+		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
+			tag[3] += 1
+
+	Global.undos += 1
+	Global.undo_redo.create_action("Add Frame")
+	Global.undo_redo.add_do_method(Global, "redo", [new_canvas])
+	Global.undo_redo.add_undo_method(Global, "undo", [new_canvas])
+
+	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
+	Global.undo_redo.add_do_property(Global, "canvas", new_canvas)
+	Global.undo_redo.add_do_property(Global, "current_frame", frame + 1)
+	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+	for i in range(Global.layers.size()):
+		for child in Global.layers[i][3].get_children():
+			Global.undo_redo.add_do_property(child, "pressed", false)
+			Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
+	for c in Global.canvases:
+		Global.undo_redo.add_do_property(c, "visible", false)
+		Global.undo_redo.add_undo_property(c, "visible", c.visible)
+
+	for i in range(frame, new_canvases.size()):
+		var c : Canvas = new_canvases[i]
+		Global.undo_redo.add_do_property(c, "frame", i)
+		Global.undo_redo.add_undo_property(c, "frame", c.frame)
+
+	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
+	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
+	Global.undo_redo.add_undo_property(Global, "current_frame", frame)
+	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
 	Global.undo_redo.commit_action()
 
 
@@ -91,55 +195,16 @@ func _on_LoopAnim_pressed() -> void:
 			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None_Hover.png" % Global.theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
 
-func _on_PlayForward_toggled(button_pressed : bool) -> void:
-	Global.play_backwards.pressed = false
-	if Global.canvases.size() == 1:
-		Global.play_forward.pressed = false
-		return
 
-	if button_pressed:
-		Global.animation_timer.wait_time = 1 / fps
-		Global.animation_timer.start()
-		animation_forward = true
-	else:
-		Global.animation_timer.stop()
+func _on_PlayForward_toggled(button_pressed : bool) -> void:
+	play_animation(button_pressed, true)
+
 
 func _on_PlayBackwards_toggled(button_pressed : bool) -> void:
-	Global.play_forward.pressed = false
-	if Global.canvases.size() == 1:
-		Global.play_backwards.pressed = false
-		return
+	play_animation(button_pressed, false)
 
-	if button_pressed:
-		Global.animation_timer.wait_time = 1 / fps
-		Global.animation_timer.start()
-		animation_forward = false
-	else:
-		Global.animation_timer.stop()
-
-func _on_NextFrame_pressed() -> void:
-	if Global.current_frame < Global.canvases.size() - 1:
-		Global.current_frame += 1
-
-func _on_PreviousFrame_pressed() -> void:
-	if Global.current_frame > 0:
-		Global.current_frame -= 1
-
-func _on_LastFrame_pressed() -> void:
-	Global.current_frame = Global.canvases.size() - 1
-
-func _on_FirstFrame_pressed() -> void:
-	Global.current_frame = 0
 
 func _on_AnimationTimer_timeout() -> void:
-	var first_frame := 0
-	var last_frame := Global.canvases.size() - 1
-	if Global.play_only_tags:
-		for tag in Global.animation_tags:
-			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
-				first_frame = tag[2] - 1
-				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
-
 	if animation_forward:
 		if Global.current_frame < last_frame:
 			Global.current_frame += 1
@@ -169,6 +234,53 @@ func _on_AnimationTimer_timeout() -> void:
 				2: # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
+
+
+func play_animation(play : bool, forward_dir : bool) -> void:
+	if forward_dir:
+		Global.play_backwards.pressed = false
+	else:
+		Global.play_forward.pressed = false
+	if Global.canvases.size() == 1:
+		if forward_dir:
+			Global.play_forward.pressed = false
+		else:
+			Global.play_backwards.pressed = false
+		return
+
+	first_frame = 0
+	last_frame = Global.canvases.size() - 1
+	if Global.play_only_tags:
+		for tag in Global.animation_tags:
+			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
+				first_frame = tag[2] - 1
+				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
+
+	if play:
+		Global.animation_timer.wait_time = 1 / fps
+		Global.animation_timer.start()
+		animation_forward = forward_dir
+	else:
+		Global.animation_timer.stop()
+
+
+func _on_NextFrame_pressed() -> void:
+	if Global.current_frame < Global.canvases.size() - 1:
+		Global.current_frame += 1
+
+
+func _on_PreviousFrame_pressed() -> void:
+	if Global.current_frame > 0:
+		Global.current_frame -= 1
+
+
+func _on_LastFrame_pressed() -> void:
+	Global.current_frame = Global.canvases.size() - 1
+
+
+func _on_FirstFrame_pressed() -> void:
+	Global.current_frame = 0
+
 
 func _on_FPSValue_value_changed(value) -> void:
 	fps = float(value)
@@ -318,6 +430,7 @@ func _on_MergeDownLayer_pressed() -> void:
 
 func _on_OpacitySlider_value_changed(value) -> void:
 	Global.canvas.layers[Global.current_layer][2] = value / 100
+	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()

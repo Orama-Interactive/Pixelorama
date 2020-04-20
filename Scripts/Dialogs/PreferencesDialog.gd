@@ -5,12 +5,12 @@ onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxCo
 onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
 onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
 onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
-onready var grid_guides = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides"
+onready var canvas = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas
 onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
 onready var shortcuts = $HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts
 
-onready var smooth_zoom_button = $"HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom"
-onready var sensitivity_option = $"HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton"
+onready var smooth_zoom_button = $HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom
+onready var sensitivity_option = $HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton
 onready var left_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/LeftToolIconCheckbox
 onready var right_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/RightToolIconCheckbox
 
@@ -18,10 +18,14 @@ onready var default_width_value = $HSplitContainer/ScrollContainer/VBoxContainer
 onready var default_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight
 onready var default_fill_color = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor
 
-onready var grid_width_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridWidthValue"
-onready var grid_height_value = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridHeightValue"
-onready var grid_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor"
-onready var guide_color = $"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GuideColor"
+onready var grid_width_value = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions/GridWidthValue
+onready var grid_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions/GridHeightValue
+onready var grid_color = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions/GridColor
+onready var guide_color = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GuideOptions/GuideColor
+
+onready var checker_size_value = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions/CheckerSizeValue
+onready var checker_color_1 = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions/CheckerColor1
+onready var checker_color_2 = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions/CheckerColor2
 
 # Shortcuts
 onready var theme_font_color : Color = $Popups/ShortcutSelector/EnteredShortcut.get_color("font_color")
@@ -48,10 +52,10 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
-		themes.get_child(theme_id + 1).pressed = true
+		themes.get_child(theme_id).pressed = true
 	else:
 		change_theme(0)
-		themes.get_child(1).pressed = true
+		themes.get_child(0).pressed = true
 
 	# Set default values for General options
 	if Global.config_cache.has_section_key("preferences", "smooth_zoom"):
@@ -68,7 +72,7 @@ func _ready() -> void:
 		Global.show_right_tool_icon = Global.config_cache.get_value("preferences", "show_right_tool_icon")
 		right_tool_icon.pressed = Global.show_right_tool_icon
 
-	# Set default values for Grid & Guide options
+	# Set default values for Canvas options
 	if Global.config_cache.has_section_key("preferences", "grid_size"):
 		var grid_size = Global.config_cache.get_value("preferences", "grid_size")
 		Global.grid_width = int(grid_size.x)
@@ -79,6 +83,21 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "grid_color"):
 		Global.grid_color = Global.config_cache.get_value("preferences", "grid_color")
 		grid_color.color = Global.grid_color
+
+	if Global.config_cache.has_section_key("preferences", "checker_size"):
+		var checker_size = Global.config_cache.get_value("preferences", "checker_size")
+		Global.checker_size = int(checker_size)
+		checker_size_value.value = checker_size
+
+	if Global.config_cache.has_section_key("preferences", "checker_color_1"):
+		Global.checker_color_1 = Global.config_cache.get_value("preferences", "checker_color_1")
+		checker_color_1.color = Global.checker_color_1
+
+	if Global.config_cache.has_section_key("preferences", "checker_color_2"):
+		Global.checker_color_2 = Global.config_cache.get_value("preferences", "checker_color_2")
+		checker_color_2.color = Global.checker_color_2
+
+	Global.transparent_checker._ready()
 
 	if Global.config_cache.has_section_key("preferences", "guide_color"):
 		Global.guide_color = Global.config_cache.get_value("preferences", "guide_color")
@@ -104,9 +123,11 @@ func _ready() -> void:
 		Global.default_fill_color = fill_color
 		default_fill_color.color = Global.default_fill_color
 
-	$"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor".get_picker().presets_visible = false
-	$"HSplitContainer/ScrollContainer/VBoxContainer/Grid&Guides/GridOptions/GridColor".get_picker().presets_visible = false
-	$HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor.get_picker().presets_visible = false
+	guide_color.get_picker().presets_visible = false
+	grid_color.get_picker().presets_visible = false
+	checker_color_1.get_picker().presets_visible = false
+	checker_color_2.get_picker().presets_visible = false
+	default_fill_color.get_picker().presets_visible = false
 
 	# Get default preset for shortcuts from project input map
 	# Buttons in shortcuts selector should be called the same as actions
@@ -162,7 +183,7 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	var general_button := tree.create_item(root)
 	var language_button := tree.create_item(root)
 	var theme_button := tree.create_item(root)
-	var grid_button := tree.create_item(root)
+	var canvas_button := tree.create_item(root)
 	var image_button := tree.create_item(root)
 	var shortcuts_button := tree.create_item(root)
 
@@ -173,8 +194,8 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	language_button.set_metadata(0, "Language")
 	theme_button.set_text(0, "  " + tr("Themes"))
 	theme_button.set_metadata(0, "Themes")
-	grid_button.set_text(0, "  " + tr("Guides & Grid"))
-	grid_button.set_metadata(0, "Guides & Grid")
+	canvas_button.set_text(0, "  " + tr("Canvas"))
+	canvas_button.set_metadata(0, "Canvas")
 	image_button.set_text(0, "  " + tr("Image"))
 	image_button.set_metadata(0, "Image")
 	shortcuts_button.set_text(0, "  " + tr("Shortcuts"))
@@ -200,8 +221,8 @@ func _on_Tree_item_selected() -> void:
 		languages.visible = true
 	elif "Themes" in selected:
 		themes.visible = true
-	elif "Guides & Grid" in selected:
-		grid_guides.visible = true
+	elif "Canvas" in selected:
+		canvas.visible = true
 	elif "Image" in selected:
 		image.visible = true
 	elif "Shortcuts" in selected:
@@ -275,35 +296,30 @@ func change_theme(ID : int) -> void:
 	var ruler_style
 	if ID == 0: # Dark Theme
 		Global.theme_type = "Dark"
-		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Dark.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.247059, 0.25098, 0.247059))
 		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 1: # Gray Theme
 		Global.theme_type = "Dark"
-		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Gray.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
 		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = "Dark"
-		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Godot.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.27451, 0.278431, 0.305882))
 		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
 	elif ID == 3: # Gold Theme
 		Global.theme_type = "Gold"
-		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Gold.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))
 		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
 		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = "Light"
-		Global.transparent_background.create_from_image(preload("res://Assets/Graphics/Canvas Backgrounds/Transparent Background Light.png"), 0)
 		VisualServer.set_default_clear_color(Color(0.705882, 0.705882, 0.705882))
 		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
 		top_menu_style = preload("res://Themes & Styles/Light Theme/LightTopMenuStyle.tres")
@@ -363,6 +379,9 @@ func set_action_shortcut(action : String, old_input : InputEventKey, new_input :
 	InputMap.action_erase_event(action, old_input)
 	InputMap.action_add_event(action, new_input)
 	Global.update_hint_tooltips()
+	# Set shortcut to switch colors button
+	if action == "switch_colors":
+		Global.color_switch_button.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
 
 
 func _on_GridWidthValue_value_changed(value : float) -> void:
@@ -383,6 +402,27 @@ func _on_GridColor_color_changed(color : Color) -> void:
 	Global.grid_color = color
 	Global.canvas.update()
 	Global.config_cache.set_value("preferences", "grid_color", color)
+	Global.config_cache.save("user://cache.ini")
+
+
+func _on_CheckerSize_value_changed(value : float) -> void:
+	Global.checker_size = value
+	Global.transparent_checker._ready()
+	Global.config_cache.set_value("preferences", "checker_size", value)
+	Global.config_cache.save("user://cache.ini")
+
+
+func _on_CheckerColor1_color_changed(color : Color) -> void:
+	Global.checker_color_1 = color
+	Global.transparent_checker._ready()
+	Global.config_cache.set_value("preferences", "checker_color_1", color)
+	Global.config_cache.save("user://cache.ini")
+
+
+func _on_CheckerColor2_color_changed(color : Color) -> void:
+	Global.checker_color_2 = color
+	Global.transparent_checker._ready()
+	Global.config_cache.set_value("preferences", "checker_color_2", color)
 	Global.config_cache.save("user://cache.ini")
 
 

@@ -33,7 +33,7 @@ func _process(delta : float) -> void:
 	else:
 		visible = true
 
-	if point_in_rectangle(mouse_pos, polygon[0], polygon[2]) && Global.selected_pixels.size() > 0 && (Global.current_left_tool == "RectSelect" || Global.current_right_tool == "RectSelect"):
+	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, polygon[0], polygon[2]) and Global.selected_pixels.size() > 0 and (Global.current_left_tool == "RectSelect" or Global.current_right_tool == "RectSelect"):
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_pressed("right_mouse")):

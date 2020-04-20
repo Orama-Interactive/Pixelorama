@@ -70,7 +70,6 @@ func _ready() -> void:
 	add_child(line_2d)
 
 func _draw() -> void:
-	draw_texture_rect(Global.transparent_background, Rect2(location, size), true) # Draw transparent background
 	# Onion Skinning
 	if Global.onion_skinning:
 		# Past
@@ -507,8 +506,8 @@ func _input(event : InputEvent) -> void:
 
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
-	var bigger = max(size.x, size.y)
-	var zoom_max := Vector2(bigger, bigger) * 0.01
+	var bigger_canvas_axis = max(size.x, size.y)
+	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
 	if zoom_max > Vector2.ONE:
 		Global.camera.zoom_max = zoom_max
 		Global.camera2.zoom_max = zoom_max
@@ -518,15 +517,21 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 		Global.camera_preview.zoom_max = Vector2.ONE
 
-	Global.camera.zoom = Vector2(bigger, bigger) * 0.002
-	Global.camera2.zoom = Vector2(bigger, bigger) * 0.002
-	Global.camera_preview.zoom = Vector2(bigger, bigger) * 0.007
+	var smaller_viewport_axis = min(Global.main_viewport.rect_size.x, Global.main_viewport.rect_size.y)
+	Global.camera.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) / smaller_viewport_axis
+	Global.camera2.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.002
+	Global.camera_preview.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.007
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 
 	# Set camera offset to the center of canvas
 	Global.camera.offset = size / 2
 	Global.camera2.offset = size / 2
 	Global.camera_preview.offset = size / 2
+
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
+
+	Global.transparent_checker._ready() # To update the rect size
 
 func handle_undo(action : String) -> void:
 	if !can_undo:
@@ -1010,3 +1015,48 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			if out_color.a != 0:
 				bg.set_pixel(dst_x, dst_y, out_color)
 			brush.unlock()
+
+func adjust_hsv(img: Image, id : int, delta : float) -> void:
+	var layer : Image = img
+	layer.lock()
+	match id:
+		0: # Hue
+			for i in range(west_limit, east_limit):
+				for j in range(north_limit, south_limit):
+					var c : Color = layer.get_pixel(i,j)
+					var hue = range_lerp(c.h,0,1,-180,180)
+					hue = hue + delta
+
+					while(hue >= 180):
+						hue -= 360
+					while(hue < -180):
+						hue += 360
+					c.h = range_lerp(hue,-180,180,0,1)
+					layer.set_pixel(i,j,c)
+
+		1: # Saturation
+			for i in range(west_limit, east_limit):
+				for j in range(north_limit, south_limit):
+					var c : Color = layer.get_pixel(i,j)
+					var sat = c.s
+					if delta > 0:
+						sat = range_lerp(delta,0,100,c.s,1)
+					elif delta < 0:
+						sat = range_lerp(delta,-100,0,0,c.s)
+					c.s = sat
+					layer.set_pixel(i,j,c)
+
+		2: # Value
+			for i in range(west_limit, east_limit):
+				for j in range(north_limit, south_limit):
+					var c : Color = layer.get_pixel(i,j)
+					var val = c.v
+					if delta > 0:
+						val = range_lerp(delta,0,100,c.v,1)
+					elif delta < 0:
+						val = range_lerp(delta,-100,0,0,c.v)
+
+					c.v = val
+					layer.set_pixel(i,j,c)
+
+	layer.unlock()

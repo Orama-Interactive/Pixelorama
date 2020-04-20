@@ -5,8 +5,8 @@ var current_tag_id := 0
 var tag_vboxes := []
 var delete_tag_button : Button
 
-onready var main_vbox_cont : VBoxContainer = $ScrollContainer/VBoxContainer
-onready var add_tag_button : TextureButton = $ScrollContainer/VBoxContainer/AddTag
+onready var main_vbox_cont : VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
+onready var add_tag_button : TextureButton = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
 onready var options_dialog = $TagOptions
 
 
@@ -29,6 +29,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 
 		var edit_button := Button.new()
 		edit_button.text = "Edit"
+		edit_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		edit_button.connect("pressed", self, "_on_EditButton_pressed", [i])
 		hbox_cont.add_child(edit_button)
 		vbox_cont.add_child(hbox_cont)
@@ -58,6 +59,8 @@ func _on_FrameTagDialog_popup_hide() -> void:
 func _on_AddTag_pressed() -> void:
 	options_dialog.popup_centered()
 	current_tag_id = Global.animation_tags.size()
+	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.current_frame + 1
+	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.current_frame + 1
 
 
 func _on_EditButton_pressed(_tag_id : int) -> void:
@@ -78,21 +81,46 @@ func _on_TagOptions_confirmed() -> void:
 	var tag_color : Color = options_dialog.get_node("GridContainer/ColorPickerButton").color
 	var tag_from : int = options_dialog.get_node("GridContainer/FromSpinBox").value
 	var tag_to : int = options_dialog.get_node("GridContainer/ToSpinBox").value
+
+	if tag_to > Global.canvases.size():
+		tag_to = Global.canvases.size()
+
+	if tag_from > tag_to:
+		tag_from = tag_to
+
+	var new_animation_tags := Global.animation_tags.duplicate(true)
 	if current_tag_id == Global.animation_tags.size():
-		Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
-		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+		new_animation_tags.append([tag_name, tag_color, tag_from, tag_to])
 	else:
-		Global.animation_tags[current_tag_id][0] = tag_name
-		Global.animation_tags[current_tag_id][1] = tag_color
-		Global.animation_tags[current_tag_id][2] = tag_from
-		Global.animation_tags[current_tag_id][3] = tag_to
+		new_animation_tags[current_tag_id][0] = tag_name
+		new_animation_tags[current_tag_id][1] = tag_color
+		new_animation_tags[current_tag_id][2] = tag_from
+		new_animation_tags[current_tag_id][3] = tag_to
+
+	# Handle Undo/Redo
+	Global.undos += 1
+	Global.undo_redo.create_action("Modify Frame Tag")
+	Global.undo_redo.add_do_method(Global, "general_redo")
+	Global.undo_redo.add_undo_method(Global, "general_undo")
+	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
+	Global.undo_redo.commit_action()
 	_on_FrameTagDialog_about_to_show()
 
 
 func _on_TagOptions_custom_action(action : String) -> void:
 	if action == "delete_tag":
-		Global.animation_tags.remove(current_tag_id)
-		Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+		var new_animation_tags := Global.animation_tags.duplicate(true)
+		new_animation_tags.remove(current_tag_id)
+		# Handle Undo/Redo
+		Global.undos += 1
+		Global.undo_redo.create_action("Delete Frame Tag")
+		Global.undo_redo.add_do_method(Global, "general_redo")
+		Global.undo_redo.add_undo_method(Global, "general_undo")
+		Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+		Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
+		Global.undo_redo.commit_action()
+
 		options_dialog.hide()
 		_on_FrameTagDialog_about_to_show()
 
@@ -100,3 +128,7 @@ func _on_TagOptions_custom_action(action : String) -> void:
 func _on_TagOptions_popup_hide() -> void:
 	if delete_tag_button:
 		delete_tag_button.visible = false
+
+
+func _on_PlayOnlyTags_toggled(button_pressed : bool) -> void:
+	Global.play_only_tags = button_pressed
