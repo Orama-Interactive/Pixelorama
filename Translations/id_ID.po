@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-20 10:14\n"
+"PO-Revision-Date: 2020-04-20 10:23\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -725,77 +725,79 @@ msgstr "Aktifkan/Matikan \"Onion Skinning\""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Seberapa banyak frame setiap detik saat animasinya dimainkan?\n"
+"Semakin banyak FPS-nya, semakin cepat animasinya."
 
 msgid "No loop"
-msgstr ""
+msgstr "Tidak ada perulangan"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Perulangan \"Cycle\""
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Perulangan \"Ping Pong\""
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "\"Onion Skinning\":"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Frame sebelum"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Frame setelah"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Ganti tanda frame (frame tags)"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animasi dimainkan hanya jika frame memiliki tanda yang sama"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Jika diseleksi, Animasi hanya main jika frame memiliki tanda/tag yang sama\n"
+"Jika tidak, maka animasi akan main untuk semua frame."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Mode Biru-Merah"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Tambah frame baru"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Hapus frame"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Duplikasikan Frame"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Geser ke kiri"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Geser ke kanan"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Putuskan/Unlink Cel"
 
 msgid "Layer"
-msgstr ""
+msgstr "Lapisan/Layer"
 
 msgid "Layers"
-msgstr ""
+msgstr "Lapisan/Layers"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Tambah lapisan/layer baru"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Hapus lapisan/layer"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Geser ke atas lapisan/layer ini"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Geser ke bawah lapisan/layer ini"
 
 msgid "Clone current layer"
 msgstr ""
