@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-21 21:53\n"
+"PO-Revision-Date: 2020-04-21 22:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -798,7 +798,7 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Unlink Cel"
-msgstr "Odłącz łańcuch"
+msgstr "Odłącz łańcuch klatek"
 
 msgid "Layer"
 msgstr "Warstwa"
