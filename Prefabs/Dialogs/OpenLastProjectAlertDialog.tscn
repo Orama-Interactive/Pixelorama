@@ -4,4 +4,4 @@
 margin_right = 209.0
 margin_bottom = 58.0
 window_title = "Alarm!"
-dialog_text = "Cannot to find last project file."
+dialog_text = "Cannot find last project file."
