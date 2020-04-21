@@ -54,6 +54,8 @@ func _ready() -> void:
 			layers.append([sprite, tex, 1])
 
 		if self in l[5]:
+			# If the linked button is pressed, set as the Image & ImageTexture
+			# to be the same as the first linked cel
 			var current_layer := layers.size() - 1
 			layers[current_layer][0] = l[5][0].layers[current_layer][0]
 			layers[current_layer][1] = l[5][0].layers[current_layer][1]

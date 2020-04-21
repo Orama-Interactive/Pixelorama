@@ -460,7 +460,7 @@ func general_redo() -> void:
 func undo(_canvases : Array, layer_index : int = -1) -> void:
 	general_undo()
 	var action_name := undo_redo.get_current_action_name()
-	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
+	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Unlink Cel":
 		for c in _canvases:
 			if layer_index > -1:
 				c.update_texture(layer_index)
@@ -493,7 +493,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 func redo(_canvases : Array, layer_index : int = -1) -> void:
 	general_redo()
 	var action_name := undo_redo.get_current_action_name()
-	if action_name == "Draw" || action_name == "Rectangle Select" || action_name == "Scale" || action_name == "Merge Layer":
+	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Unlink Cel":
 		for c in _canvases:
 			if layer_index > -1:
 				c.update_texture(layer_index)

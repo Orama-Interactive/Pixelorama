@@ -52,17 +52,28 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			change_frame_order(1)
 		4: # Unlink Cel
 			var cel_index : int = Global.layers[layer][5].find(Global.canvases[frame])
-			Global.layers[layer][5].remove(cel_index)
-			_ready()
+			var c = Global.canvases[frame]
+			var new_layers := Global.layers.duplicate(true)
+			var new_canvas_layers : Array = c.layers.duplicate(true)
 
+			new_layers[layer][5].remove(cel_index)
 			var sprite := Image.new()
 			sprite.copy_from(Global.canvases[frame].layers[layer][0])
 			sprite.lock()
-			Global.canvases[frame].layers[layer][0] = sprite
 			var tex := ImageTexture.new()
 			tex.create_from_image(sprite, 0)
-			Global.canvases[frame].layers[layer][1] = tex
-			Global.canvases[frame].update()
+			new_canvas_layers[layer][0] = sprite
+			new_canvas_layers[layer][1] = tex
+
+			Global.undo_redo.create_action("Unlink Cel")
+			Global.undo_redo.add_do_property(Global, "layers", new_layers)
+			Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
+			Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
+			Global.undo_redo.add_undo_property(c, "layers", c.layers)
+
+			Global.undo_redo.add_undo_method(Global, "undo", [Global.canvases[frame]], layer)
+			Global.undo_redo.add_do_method(Global, "redo", [Global.canvases[frame]], layer)
+			Global.undo_redo.commit_action()
 
 
 func change_frame_order(rate : int) -> void:
