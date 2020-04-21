@@ -1046,3 +1046,11 @@ msgstr ""
 
 msgid "Open last project..."
 msgstr ""
+
+msgid "Open last project on startup"
+msgstr ""
+
+msgid "Opens last opened project on startup"
+msgstr ""
+
+
