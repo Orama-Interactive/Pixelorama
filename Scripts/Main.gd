@@ -42,6 +42,7 @@ func _ready() -> void:
 	var file_menu_items := {
 		"New..." : InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
 		"Open..." : InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
+		'Open last project...' : 0,
 		"Save..." : InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
 		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
 		"Import..." : InputMap.get_action_list("import_file")[0].get_scancode_with_modifiers(),
@@ -187,6 +188,12 @@ func _ready() -> void:
 	else:
 		Global.can_draw = true
 
+	if not Global.config_cache.has_section_key("preferences", "open_last_project"):
+		Global.config_cache.set_value("preferences", "open_last_project", true)
+	if Global.config_cache.get_value("preferences", "open_last_project"):
+		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
+		load_last_project()
+
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
@@ -230,31 +237,37 @@ func file_menu_id_pressed(id : int) -> void:
 			$OpenSprite.popup_centered()
 			Global.can_draw = false
 			opensprite_file_selected = false
-		2: # Save
+		2: # Open last project
+			# Check if last project path is set and if yes then open
+			if Global.config_cache.has_section_key("preferences", "last_project_path"):
+				load_last_project()
+			else: # if not then warn user that he didn't edit any project yet
+				$NoProjectEditedOrCreatedAlertDialog.popup_centered()
+		3: # Save
 			is_quitting_on_save = false
 			if OpenSave.current_save_path == "":
 				$SaveSprite.popup_centered()
 				Global.can_draw = false
 			else:
 				_on_SaveSprite_file_selected(OpenSave.current_save_path)
-		3: # Save as
+		4: # Save as
 			is_quitting_on_save = false
 			$SaveSprite.popup_centered()
 			Global.can_draw = false
-		4: # Import
+		5: # Import
 			$ImportSprites.popup_centered()
 			Global.can_draw = false
 			opensprite_file_selected = false
-		5: # Export
+		6: # Export
 			if $ExportDialog.was_exported == false:
 				$ExportDialog.popup_centered()
 				Global.can_draw = false
 			else:
 				$ExportDialog.external_export()
-		6: # Export as
+		7: # Export as
 			$ExportDialog.popup_centered()
 			Global.can_draw = false
-		7: # Quit
+		8: # Quit
 			show_quit_dialog()
 
 func edit_menu_id_pressed(id : int) -> void:
@@ -405,6 +418,18 @@ func help_menu_id_pressed(id : int) -> void:
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
 
+func load_last_project():
+	# Check if any project was saved or opened last time
+	if Global.config_cache.has_section_key("preferences", "last_project_path"):
+		# Check if file still exists on disk
+		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
+		var file_check := File.new()
+		if file_check.file_exists(file_path): # If yes then load the file
+			_on_OpenSprite_file_selected(file_path)
+		else:
+			# If file doesn't exist on disk then warn user about this
+			$OpenLastProjectAlertDialog.popup_centered()
+
 
 func _on_UnsavedCanvasDialog_confirmed() -> void:
 	$CreateNewImage.popup_centered()
@@ -414,20 +439,26 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 	OpenSave.open_pxo_file(path)
 
 	$SaveSprite.current_path = path
+	# Set last opened project path and save
+	Global.config_cache.set_value("preferences", "last_project_path", path)
+	Global.config_cache.save("user://cache.ini")
 	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
 	$ExportDialog.directory_path = path.get_base_dir()
 	$ExportDialog.was_exported = false
-	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(5, tr("Export"))
+	file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
+	file_menu.set_item_text(6, tr("Export"))
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
 	OpenSave.save_pxo_file(path)
 
+	# Set last opened project path and save
+	Global.config_cache.set_value("preferences", "last_project_path", path)
+	Global.config_cache.save("user://cache.ini")
 	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
 	$ExportDialog.directory_path = path.get_base_dir()
 	$ExportDialog.was_exported = false
-	file_menu.set_item_text(2, tr("Save") + " %s" % path.get_file())
+	file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 	if is_quitting_on_save:
 		_on_QuitDialog_confirmed()

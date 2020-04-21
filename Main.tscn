@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Themes & Styles/Dark Theme/Dark Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -45,6 +45,8 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Zoom.png" type="Texture" id=43]
 [ext_resource path="res://Prefabs/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scripts/TransparentChecker.gd" type="Script" id=45]
+[ext_resource path="res://Prefabs/Dialogs/OpenLastProjectAlertDialog.tscn" type="PackedScene" id=46]
+[ext_resource path="res://Prefabs/Dialogs/NoProjectEditedOrCreatedAlertDialog.tscn" type="PackedScene" id=47]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -1322,13 +1324,13 @@ window_title = "Please Confirm..."
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
 margin_bottom = 348.0
-window_title = "Open a File"
+window_title = "Otwórz plik"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "D:/Project/Pixelorama"
-current_path = "D:/Project/Pixelorama/"
+current_dir = "E:/Projekty/Godot/Pixelorama"
+current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1343,12 +1345,13 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "D:/Project/Pixelorama"
-current_path = "D:/Project/Pixelorama/"
+current_dir = "E:/Projekty/Godot/Pixelorama"
+current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-current_dir = "D:/Project/Pixelorama"
-current_path = "D:/Project/Pixelorama/"
+window_title = "Otwórz plik(i)"
+current_dir = "E:/Projekty/Godot/Pixelorama"
+current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -1400,11 +1403,20 @@ dialog_text = "This is an error message!"
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 36 )]
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
+window_title = "Otwórz plik"
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "D:/Project/Pixelorama"
-current_path = "D:/Project/Pixelorama/"
+current_dir = "E:/Projekty/Godot/Pixelorama"
+current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="HSVDialog" parent="." instance=ExtResource( 44 )]
+
+[node name="OpenLastProjectAlertDialog" parent="." instance=ExtResource( 46 )]
+margin_right = 179.0
+margin_bottom = 62.0
+
+[node name="NoProjectEditedOrCreatedAlertDialog" parent="." instance=ExtResource( 47 )]
+margin_bottom = 62.0
+window_title = "Alarm!"
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false

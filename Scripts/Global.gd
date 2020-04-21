@@ -45,6 +45,7 @@ var can_draw := false
 # warning-ignore:unused_class_variable
 var has_focus := false
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
+var open_last_project := true
 var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture

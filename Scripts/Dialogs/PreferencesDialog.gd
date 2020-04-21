@@ -9,6 +9,7 @@ onready var canvas = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas
 onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
 onready var shortcuts = $HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts
 
+onready var open_last_project_button = $HSplitContainer/ScrollContainer/VBoxContainer/General/OpenLastProject
 onready var smooth_zoom_button = $HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom
 onready var sensitivity_option = $HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton
 onready var left_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/LeftToolIconCheckbox
@@ -58,6 +59,9 @@ func _ready() -> void:
 		themes.get_child(0).pressed = true
 
 	# Set default values for General options
+	if Global.config_cache.has_section_key("preferences", "open_last_project"):
+		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
+		open_last_project_button.pressed = Global.open_last_project
 	if Global.config_cache.has_section_key("preferences", "smooth_zoom"):
 		Global.smooth_zoom = Global.config_cache.get_value("preferences", "smooth_zoom")
 		smooth_zoom_button.pressed = Global.smooth_zoom
@@ -503,3 +507,8 @@ func _on_ShortcutSelector_confirmed() -> void:
 		shortcuts.get_node("Shortcuts/" + action_being_edited).text = OS.get_scancode_string(new_input_event.get_scancode_with_modifiers())
 		$Popups/ShortcutSelector.hide()
 
+
+func _on_OpenLastProject_pressed():
+	Global.open_last_project = !Global.open_last_project
+	Global.config_cache.set_value("preferences", "open_last_project", Global.open_last_project)
+	Global.config_cache.save("user://cache.ini")

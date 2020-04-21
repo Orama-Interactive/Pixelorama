@@ -1016,3 +1016,12 @@ msgstr ""
 
 msgid "A tool assigned to the right mouse button"
 msgstr ""
+
+msgid "Cannot to find last project file."
+msgstr ""
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open last project..."
+msgstr ""
