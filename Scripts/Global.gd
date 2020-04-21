@@ -575,6 +575,11 @@ func clear_canvases() -> void:
 	animation_tags.clear()
 	self.animation_tags = animation_tags # To execute animation_tags_changed()
 
+	# Stop playing the animation
+	play_backwards.pressed = false
+	play_forward.pressed = false
+	animation_timer.stop()
+
 	window_title = "(" + tr("untitled") + ") - Pixelorama"
 	undo_redo.clear_history(false)
 
