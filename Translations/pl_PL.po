@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-21 18:22\n"
+"PO-Revision-Date: 2020-04-21 21:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1076,11 +1076,17 @@ msgid "A tool assigned to the right mouse button"
 msgstr "Narzędzie przypisane do prawego przycisku myszy"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Nie można znaleźć pliku ostatniego projektu."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Nie zapisałeś lub nie otworzyłeś jeszcze żadnego projektu w Pixeloramie!"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Otwórz ostatni projekt..."
+
+msgid "Open last project on startup"
+msgstr "Po uruchomieniu załaduj ostatni projekt"
+
+msgid "Opens last opened project on startup"
+msgstr "Po uruchomieniu, załaduje ostatni projekt"
 
