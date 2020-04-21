@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.7] - Unreleased
 This update has been brought to you by the contributions of:
 
-Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese), sapient-cogbag, Kinwailo
+Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese), sapient-cogbag, Kinwailo, Igor Santarek (jegor377)
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
@@ -19,6 +19,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 - Users can now change keyboard shortcut bindings for tools, in the Preferences.
 - Importing .pngs as palettes is now possible.
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
+- The last edited project gets loaded at startup (toggleable in the Preferences), along with a new option in the File menu that also does this.
 - Templates and a lock aspect ratio option have been added to the "Create new image" dialog.
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
@@ -60,6 +61,7 @@ Martin Novák (novhack), luiq54, Schweini07, Marco Galli (Gaarco), Matheus Peseg
 
 ### Removed
 - It's no longer possible for frames to have different amounts of layers. All frames have the same amount.
+- The guides no longer work with undo/redo.
 
 ## [v0.6.2] - 17-02-2020
 

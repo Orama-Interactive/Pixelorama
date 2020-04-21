@@ -44,13 +44,6 @@ func _input(_event : InputEvent):
 			Global.has_focus = true
 			has_focus = false
 			if !outside_canvas():
-				Global.undos += 1
-				Global.undo_redo.create_action("Move Guide")
-				Global.undo_redo.add_do_method(self, "outside_canvas")
-				Global.undo_redo.add_do_property(self, "points", points)
-				Global.undo_redo.add_undo_property(self, "points", previous_points)
-				Global.undo_redo.add_undo_method(self, "outside_canvas", true)
-				Global.undo_redo.commit_action()
 				update()
 
 
@@ -65,14 +58,8 @@ func _draw() -> void:
 			draw_set_transform(Vector2(points[0].x + font.get_height() * zoom.y, Global.camera.offset.y - (viewport_size.y / 2.25) * zoom.y), rotation, zoom * 2)
 			draw_string(font, Vector2.ZERO, "%spx" % str(round(mouse_pos.x)))
 
-func outside_canvas(undo := false) -> bool:
-	if undo:
-		Global.undos -= 1
-		Global.notification_label("Move Guide")
-	if Global.control.redone:
-		if Global.undos < Global.undo_redo.get_version(): # If we did undo and then redo
-			Global.undos = Global.undo_redo.get_version()
-			Global.notification_label("Move Guide")
+
+func outside_canvas() -> bool:
 	if type == Types.HORIZONTAL:
 		if points[0].y < 0 || points[0].y > Global.canvas.size.y:
 			queue_free()
@@ -82,6 +69,7 @@ func outside_canvas(undo := false) -> bool:
 			queue_free()
 			return true
 	return false
+
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
