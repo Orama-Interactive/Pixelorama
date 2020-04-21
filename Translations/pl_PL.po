@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-21 22:26\n"
+"PO-Revision-Date: 2020-04-21 22:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -798,7 +798,7 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Unlink Cel"
-msgstr "Odłącz łańcuch klatek"
+msgstr "Odłącz kalkę"
 
 msgid "Layer"
 msgstr "Warstwa"
@@ -835,8 +835,8 @@ msgstr "Zablokuj/odblokuj warstwę"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Włącz/wyłącz łączenie w łańcuchy\n\n"
-"Złączone łańcuchy są współdzielone przez wiele klatek"
+msgstr "Włącz/wyłącz łączenie kalek\n\n"
+"Złączone kalki są współdzielone przez wiele klatek"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
