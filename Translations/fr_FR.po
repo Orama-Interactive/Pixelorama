@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-04-20 21:07\n"
+"PO-Revision-Date: 2020-04-21 18:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1070,5 +1070,14 @@ msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
+msgstr ""
+
+msgid "Cannot find last project file."
+msgstr ""
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open last project..."
 msgstr ""
 
