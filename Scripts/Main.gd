@@ -697,12 +697,16 @@ func _on_FitToFrameButton_pressed() -> void:
 	Global.camera.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) / smaller_viewport_axis
 	Global.camera.offset = Global.canvas.size / 2
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
 
 
 func _on_100ZoomButton_pressed() -> void:
 	Global.camera.zoom = Vector2.ONE
 	Global.camera.offset = Global.canvas.size / 2
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
 
 
 func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:

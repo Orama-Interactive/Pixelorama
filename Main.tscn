@@ -318,26 +318,26 @@ texture_normal = ExtResource( 9 )
 
 [node name="CanvasAndTimeline" type="VSplitContainer" parent="MenuAndUI/UI"]
 margin_left = 48.0
-margin_right = 980.0
+margin_right = 950.0
 margin_bottom = 692.0
 size_flags_horizontal = 3
 custom_constants/autohide = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline"]
-margin_right = 932.0
+margin_right = 902.0
 margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer"]
-margin_right = 932.0
+margin_right = 902.0
 margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="HorizontalRuler" type="Button" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
-margin_right = 932.0
+margin_right = 902.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
@@ -351,13 +351,13 @@ script = ExtResource( 14 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 margin_top = 16.0
-margin_right = 932.0
+margin_right = 902.0
 margin_bottom = 480.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
-margin_right = 920.0
+margin_right = 890.0
 margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -381,7 +381,7 @@ script = ExtResource( 15 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 920.0
+margin_right = 890.0
 margin_bottom = 464.0
 focus_mode = 2
 size_flags_horizontal = 3
@@ -389,7 +389,7 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 904, 464 )
+size = Vector2( 874, 464 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -418,8 +418,8 @@ polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 18 )
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
-margin_left = 932.0
-margin_right = 932.0
+margin_left = 902.0
+margin_right = 902.0
 margin_bottom = 464.0
 size_flags_vertical = 3
 stretch = true
@@ -437,14 +437,14 @@ script = ExtResource( 17 )
 
 [node name="AnimationTimeline" parent="MenuAndUI/UI/CanvasAndTimeline" instance=ExtResource( 20 )]
 margin_top = 492.0
-margin_right = 932.0
+margin_right = 902.0
 margin_bottom = 692.0
 
 [node name="RightPanel" type="Panel" parent="MenuAndUI/UI"]
-margin_left = 980.0
+margin_left = 950.0
 margin_right = 1280.0
 margin_bottom = 692.0
-rect_min_size = Vector2( 300, 0 )
+rect_min_size = Vector2( 330, 0 )
 
 [node name="PreviewAndPalettes" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel"]
 anchor_right = 1.0
@@ -455,12 +455,12 @@ __meta__ = {
 }
 
 [node name="CanvasPreview" type="ViewportContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 
 [node name="Viewport" type="Viewport" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreview"]
-size = Vector2( 300, 150 )
+size = Vector2( 330, 150 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
@@ -474,37 +474,38 @@ script = ExtResource( 17 )
 
 [node name="HSeparator" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
 margin_top = 154.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 158.0
 
 [node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes"]
 margin_top = 162.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 676.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ColorAndToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 251.0
 size_flags_vertical = 3
 custom_constants/separation = 8
 
 [node name="ColorButtonsVertical" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions"]
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 51.0
 custom_constants/separation = 2
 
 [node name="ColorSwitchCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical"]
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 7.0
 
 [node name="ColorSwitch" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorSwitchCenter" groups=[
 "UIButtons",
 ]]
-margin_left = 137.0
-margin_right = 162.0
+margin_left = 152.0
+margin_right = 177.0
 margin_bottom = 7.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
@@ -512,12 +513,12 @@ texture_normal = ExtResource( 10 )
 
 [node name="ColorPickersCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical"]
 margin_top = 9.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 41.0
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorPickersCenter"]
-margin_left = 79.0
-margin_right = 220.0
+margin_left = 94.0
+margin_right = 235.0
 margin_bottom = 32.0
 custom_constants/separation = 13
 
@@ -526,6 +527,7 @@ margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "Choose a color for the left tool"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -536,6 +538,7 @@ margin_right = 141.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "Choose a color for the right tool"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -543,52 +546,53 @@ color = Color( 1, 1, 1, 1 )
 
 [node name="ColorDefaultsCenter" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical"]
 margin_top = 43.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 51.0
 size_flags_horizontal = 3
 
 [node name="ColorDefaults" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ColorButtonsVertical/ColorDefaultsCenter" groups=[
 "UIButtons",
 ]]
-margin_left = 137.0
-margin_right = 162.0
+margin_left = 152.0
+margin_right = 177.0
 margin_bottom = 8.0
 hint_tooltip = "Reset the colors to their default state (black for left, white for right)"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions"]
 margin_top = 59.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 251.0
 size_flags_vertical = 3
 
 [node name="ToolOptions" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer"]
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 192.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 192.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 15.0
 text = "Left tool options"
 align = 1
 
 [node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 19.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 51.0
 alignment = 1
 
 [node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
-margin_left = 25.0
-margin_right = 61.0
+margin_left = 32.0
+margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 hint_tooltip = "Select a brush"
@@ -607,8 +611,8 @@ __meta__ = {
 }
 
 [node name="LeftBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType"]
-margin_left = 65.0
-margin_right = 119.0
+margin_left = 72.0
+margin_right = 126.0
 margin_bottom = 32.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -617,11 +621,12 @@ align = 1
 suffix = "px"
 
 [node name="LeftBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
-margin_left = 26.0
+margin_left = 33.0
 margin_top = 55.0
-margin_right = 118.0
+margin_right = 125.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -633,13 +638,13 @@ ticks_on_borders = true
 [node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 131.0
 alignment = 1
 
 [node name="ColorComesFrom" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_left = 27.0
-margin_right = 117.0
+margin_left = 34.0
+margin_right = 124.0
 margin_bottom = 15.0
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
 mouse_filter = 1
@@ -647,9 +652,9 @@ size_flags_horizontal = 4
 text = "Brush color from"
 
 [node name="LeftInterpolateFactor" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_left = 45.0
+margin_left = 52.0
 margin_top = 19.0
-margin_right = 99.0
+margin_right = 106.0
 margin_bottom = 36.0
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
 size_flags_horizontal = 4
@@ -657,12 +662,13 @@ value = 100.0
 align = 1
 
 [node name="LeftInterpolateSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation"]
-margin_left = 25.0
+margin_left = 33.0
 margin_top = 40.0
-margin_right = 117.0
+margin_right = 125.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
+focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 1
 value = 100.0
@@ -671,22 +677,23 @@ ticks_on_borders = true
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 117.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 49.0
-margin_right = 95.0
+margin_left = 56.0
+margin_right = 102.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill area:"
 
 [node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 17.0
+margin_left = 24.0
 margin_top = 19.0
-margin_right = 127.0
+margin_right = 134.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
@@ -696,15 +703,16 @@ selected = 0
 [node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 153.0
 margin_bottom = 158.0
 alignment = 1
 
 [node name="LeftLightenDarken" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 25.0
-margin_right = 117.0
+margin_left = 30.0
+margin_right = 122.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Lighten"
@@ -712,17 +720,17 @@ items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="LDAmountLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 48.0
+margin_left = 53.0
 margin_top = 27.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 42.0
 size_flags_horizontal = 4
 text = "Amount:"
 
 [node name="LeftLDAmountSpinbox" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 45.0
+margin_left = 49.0
 margin_top = 46.0
-margin_right = 99.0
+margin_right = 103.0
 margin_bottom = 63.0
 hint_tooltip = "Lighten/Darken amount"
 mouse_default_cursor_shape = 2
@@ -731,12 +739,13 @@ value = 10.0
 align = 1
 
 [node name="LeftLDAmountSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions"]
-margin_left = 25.0
+margin_left = 30.0
 margin_top = 67.0
-margin_right = 117.0
+margin_right = 122.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -746,22 +755,23 @@ ticks_on_borders = true
 [node name="LeftColorPickerOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 138.0
+margin_right = 159.0
 margin_bottom = 117.0
 
 [node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
-margin_left = 47.0
-margin_right = 91.0
+margin_left = 57.0
+margin_right = 101.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Pick for:"
 
 [node name="LeftForColorOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorPickerOptions"]
-margin_left = 32.0
+margin_left = 42.0
 margin_top = 19.0
-margin_right = 106.0
+margin_right = 116.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Left Color"
@@ -771,23 +781,24 @@ selected = 0
 [node name="LeftZoomOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
-margin_right = 138.0
+margin_right = 153.0
 margin_bottom = 190.0
 
 [node name="ModeLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 52.0
-margin_right = 85.0
+margin_left = 60.0
+margin_right = 93.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Mode:"
 
 [node name="LeftZoomModeOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 22.0
+margin_left = 30.0
 margin_top = 19.0
-margin_right = 114.0
+margin_right = 122.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Zoom in"
@@ -795,43 +806,45 @@ items = [ "Zoom in", null, false, 0, null, "Zoom out", null, false, 1, null ]
 selected = 0
 
 [node name="OptionsLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 46.0
+margin_left = 54.0
 margin_top = 46.0
-margin_right = 91.0
+margin_right = 99.0
 margin_bottom = 61.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Options:"
 
 [node name="FitToFrameButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 22.0
+margin_left = 30.0
 margin_top = 65.0
-margin_right = 114.0
+margin_right = 122.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fit to frame"
 
 [node name="100%ZoomButton" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftZoomOptions"]
-margin_left = 22.0
+margin_left = 30.0
 margin_top = 92.0
-margin_right = 114.0
+margin_right = 122.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
 
 [node name="EmptySpacer" type="Control" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 87.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="LeftMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 91.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 108.0
 custom_constants/separation = 44
 alignment = 1
@@ -839,10 +852,11 @@ alignment = 1
 [node name="LeftHorizontalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 34.0
-margin_right = 49.0
+margin_left = 41.0
+margin_right = 56.0
 margin_bottom = 17.0
 hint_tooltip = "Enable horizontal mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 30 )
@@ -851,41 +865,42 @@ texture_pressed = ExtResource( 40 )
 [node name="LeftVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 93.0
-margin_right = 110.0
+margin_left = 100.0
+margin_right = 117.0
 margin_bottom = 17.0
 hint_tooltip = "Enable vertical mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 42 )
 texture_pressed = ExtResource( 41 )
 
 [node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
-margin_left = 148.0
-margin_right = 152.0
+margin_left = 163.0
+margin_right = 167.0
 margin_bottom = 192.0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
-margin_left = 156.0
-margin_right = 300.0
+margin_left = 171.0
+margin_right = 330.0
 margin_bottom = 192.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 15.0
 text = "Right tool options"
 align = 1
 
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 19.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 51.0
 alignment = 1
 
 [node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
-margin_left = 25.0
-margin_right = 61.0
+margin_left = 32.0
+margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 hint_tooltip = "Select a brush"
@@ -904,8 +919,8 @@ __meta__ = {
 }
 
 [node name="RightBrushSizeEdit" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType"]
-margin_left = 65.0
-margin_right = 119.0
+margin_left = 72.0
+margin_right = 126.0
 margin_bottom = 32.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -914,11 +929,12 @@ align = 1
 suffix = "px"
 
 [node name="RightBrushSizeSlider" type="HSlider" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
-margin_left = 26.0
+margin_left = 33.0
 margin_top = 55.0
-margin_right = 118.0
+margin_right = 125.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -961,6 +977,7 @@ margin_right = 117.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "0: Color from the brush itself, 100: the currently selected color"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -985,6 +1002,7 @@ margin_left = 17.0
 margin_top = 19.0
 margin_right = 127.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
@@ -1002,6 +1020,7 @@ margin_left = 22.0
 margin_right = 114.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Lighten"
@@ -1034,6 +1053,7 @@ margin_right = 114.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -1059,6 +1079,7 @@ margin_left = 31.0
 margin_top = 19.0
 margin_right = 113.0
 margin_bottom = 42.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Right Color"
@@ -1085,6 +1106,7 @@ margin_top = 19.0
 margin_right = 114.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Zoom out"
@@ -1106,6 +1128,7 @@ margin_top = 65.0
 margin_right = 114.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fit to frame"
@@ -1116,19 +1139,20 @@ margin_top = 92.0
 margin_right = 114.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 92, 0 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
 
 [node name="EmptySpacer" type="Control" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 75.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 87.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="RightMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 91.0
-margin_right = 144.0
+margin_right = 159.0
 margin_bottom = 108.0
 custom_constants/separation = 44
 alignment = 1
@@ -1136,10 +1160,11 @@ alignment = 1
 [node name="RightHorizontalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 34.0
-margin_right = 49.0
+margin_left = 41.0
+margin_right = 56.0
 margin_bottom = 17.0
 hint_tooltip = "Enable horizontal mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 30 )
@@ -1148,10 +1173,11 @@ texture_pressed = ExtResource( 40 )
 [node name="RightVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 93.0
-margin_right = 110.0
+margin_left = 100.0
+margin_right = 117.0
 margin_bottom = 17.0
 hint_tooltip = "Enable vertical mirrored drawing"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 42 )
@@ -1159,18 +1185,18 @@ texture_pressed = ExtResource( 41 )
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
 margin_top = 263.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 514.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HSeparator2" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 4.0
 
 [node name="PalettesLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
 margin_top = 8.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -1179,17 +1205,17 @@ align = 1
 
 [node name="HSeparator3" type="HSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
 margin_top = 27.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 31.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
 margin_top = 35.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 67.0
 
 [node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer"]
-margin_left = 62.0
-margin_right = 237.0
+margin_left = 77.0
+margin_right = 252.0
 margin_bottom = 32.0
 
 [node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
@@ -1199,6 +1225,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Add a new palette"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 21 )
 texture_hover = ExtResource( 22 )
@@ -1218,6 +1245,7 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 hint_tooltip = "Edit currently selected palette"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 23 )
 texture_hover = ExtResource( 24 )
@@ -1229,26 +1257,27 @@ margin_bottom = 32.0
 grow_horizontal = 0
 rect_min_size = Vector2( 103, 0 )
 hint_tooltip = "Choose a palette"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 clip_text = true
 
 [node name="ScrollPalette" type="ScrollContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer"]
 margin_top = 71.0
-margin_right = 300.0
+margin_right = 330.0
 margin_bottom = 251.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterPalette" type="CenterContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette"]
-margin_right = 300.0
+margin_right = 330.0
 size_flags_horizontal = 3
 
 [node name="PaletteContainer" type="GridContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette"]
-margin_left = 150.0
-margin_right = 150.0
+margin_left = 165.0
+margin_right = 165.0
 size_flags_horizontal = 3
-columns = 7
+columns = 10
 script = ExtResource( 25 )
 
 [node name="BrushesPopup" type="Popup" parent="."]
@@ -1319,7 +1348,6 @@ columns = 5
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
-window_title = "Please Confirm..."
 
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
@@ -1329,8 +1357,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1345,27 +1373,21 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-window_title = "Otwórz plik(i)"
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
-window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
-window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
-window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
@@ -1373,12 +1395,11 @@ window_title = "Please Confirm..."
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = "Unsaved Image"
-dialog_text = "Are you sure want to proceed?"
+dialog_text = "Changes has not been saved. Are you sure you want to create a new image?"
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
-window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
@@ -1405,8 +1426,8 @@ dialog_text = "This is an error message!"
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 window_title = "Otwórz plik"
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
 
 [node name="HSVDialog" parent="." instance=ExtResource( 44 )]
 
@@ -1496,6 +1517,7 @@ visible = false
 [connection signal="confirmed" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_new_palette_confirmed"]
 [connection signal="popup_hide" from="NewPaletteDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
+[connection signal="popup_hide" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="popup_hide" from="HSVDialog" to="." method="_can_draw_true"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]

@@ -33,9 +33,11 @@ func _on_FrameButton_pressed() -> void:
 				popup_menu.set_item_disabled(3, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
-	else: # Middle mouse click
+	elif Input.is_action_just_released("middle_mouse"): # Middle mouse click
 		pressed = !pressed
 		Global.animation_timeline._on_DeleteFrame_pressed(frame)
+	else: # An example of this would be Space
+		pressed = !pressed
 
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:

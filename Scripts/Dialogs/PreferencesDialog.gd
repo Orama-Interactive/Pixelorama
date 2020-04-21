@@ -101,6 +101,8 @@ func _ready() -> void:
 		Global.checker_color_2 = Global.config_cache.get_value("preferences", "checker_color_2")
 		checker_color_2.color = Global.checker_color_2
 
+	Global.transparent_checker._ready()
+
 	if Global.config_cache.has_section_key("preferences", "guide_color"):
 		Global.guide_color = Global.config_cache.get_value("preferences", "guide_color")
 		for canvas in Global.canvases:
@@ -409,18 +411,21 @@ func _on_GridColor_color_changed(color : Color) -> void:
 
 func _on_CheckerSize_value_changed(value : float) -> void:
 	Global.checker_size = value
+	Global.transparent_checker._ready()
 	Global.config_cache.set_value("preferences", "checker_size", value)
 	Global.config_cache.save("user://cache.ini")
 
 
 func _on_CheckerColor1_color_changed(color : Color) -> void:
 	Global.checker_color_1 = color
+	Global.transparent_checker._ready()
 	Global.config_cache.set_value("preferences", "checker_color_1", color)
 	Global.config_cache.save("user://cache.ini")
 
 
 func _on_CheckerColor2_color_changed(color : Color) -> void:
 	Global.checker_color_2 = color
+	Global.transparent_checker._ready()
 	Global.config_cache.set_value("preferences", "checker_color_2", color)
 	Global.config_cache.save("user://cache.ini")
 

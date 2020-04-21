@@ -528,6 +528,11 @@ func camera_zoom() -> void:
 	Global.camera2.offset = size / 2
 	Global.camera_preview.offset = size / 2
 
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
+
+	Global.transparent_checker._ready() # To update the rect size
+
 func handle_undo(action : String) -> void:
 	if !can_undo:
 		return
