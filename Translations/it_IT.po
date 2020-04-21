@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-20 21:07\n"
+"PO-Revision-Date: 2020-04-21 02:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -921,16 +921,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Ripeti: Elimina pennello personalizzato"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Annulla: Modifica tag Frame"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Ripristina: Modifica Tag Frame"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Annulla: Elimina tag Frame"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Ripristina: Elimina tag Frame"
 
 msgid "Move Guide"
 msgstr "Muovi la guida"
