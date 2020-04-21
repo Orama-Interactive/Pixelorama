@@ -660,6 +660,8 @@ func frame_changed(value : int) -> void:
 	if current_frame < layers[current_layer][3].get_child_count():
 		layers[current_layer][3].get_child(current_frame).pressed = true
 
+	Global.transparent_checker._ready() # To update the rect size
+
 
 func layer_changed(value : int) -> void:
 	current_layer = value

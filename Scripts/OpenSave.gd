@@ -2,6 +2,7 @@ extends Node
 
 var current_save_path := ""
 
+
 func open_pxo_file(path : String) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
