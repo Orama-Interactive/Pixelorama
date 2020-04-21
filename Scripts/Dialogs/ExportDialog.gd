@@ -314,7 +314,7 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	store_export_settings()
-	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
+	Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 	Global.notification_label("File(s) exported")
 	hide()
 
