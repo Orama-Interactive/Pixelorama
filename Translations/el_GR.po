@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-21 21:53\n"
+"PO-Revision-Date: 2020-04-22 16:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -797,6 +797,9 @@ msgstr "Μετακίνηση Δεξιά"
 
 msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
+
+msgid "Link Cel"
+msgstr ""
 
 msgid "Unlink Cel"
 msgstr "Αποσύνδεση Cel"
