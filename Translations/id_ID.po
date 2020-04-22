@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-22 00:12\n"
+"PO-Revision-Date: 2020-04-22 00:39\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -510,125 +510,128 @@ msgstr "Ember\n"
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Percerah/Gelapkan\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Pilih warna untuk alat yang berada di kiri"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Pilih warna untuk alat yang berada di kanan"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Tukar warna kiri dan kanan\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Balikkan ke warna default (hitam untuk kiri, putih untuk kanan)"
 
 msgid "Left tool options"
-msgstr ""
+msgstr "Opsi alat kiri"
 
 msgid "Right tool options"
-msgstr ""
+msgstr "Opsi alat kanan"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Indikator pixel kiri"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Perlihatkan indikator pixel mouse kiri atau brush di kanvas saat menggambar"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indikator pixel kanan"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Perlihatkan indikator pixel mouse kanan atau brush di kanvas saat menggambar"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Perlihatkan ikon alat kiri "
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Perlihatkan ikon alat kanan"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Warna Panduan:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Lebar Kisi:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Seberapa jauh garis vertikal dari kisi"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Tinggi Kisi:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Seberapa jauh garis horizontal dari kisi"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Warna Kisi:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Warna dari kisi"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Besar pola catur:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Besar dari pola catur yang ada di latar"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Warna pola catur 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Warna pertama dari pola catur yang ada di latar"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Warna pola catur 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Warna kedua dari pola catur yang ada di latar"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Hanya preset kustom yang bisa di edit"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Kuas:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Pilih satu kuas"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Kuas: Pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Kuas: Bulat"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Kuas: Bulat Penuh"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Kuas kostum"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Ukuran kuas:"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Warna dari"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Warna dari kuas sendiri, 100: warna dari yang dipilih saat ini"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Area \"fill\":"
 
 msgid "Area of the same color"
 msgstr ""
@@ -637,16 +640,16 @@ msgid "All pixels of the same color"
 msgstr ""
 
 msgid "Same color area"
-msgstr ""
+msgstr "Area dengan warna yang sama"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Pixel dengan warna yang sama"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Terangkan"
 
 msgid "Darken"
-msgstr ""
+msgstr "Gelapkan"
 
 msgid "Amount:"
 msgstr "Jumlah:"
@@ -828,145 +831,146 @@ msgstr "Kunci lapisan/layer"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Aktifkan cel linking\n"
+"Cel yang terhubung/linked di bagikan untuk beberapa frame"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palet"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Palet"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Tambahkan palet yang baru"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Edit palet yang sedang di pilih"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Pilih satu palet"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Undo: gambar"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Redo: gambar"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Undo: Pilihan kotak"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Redo: Pilihan kotak"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Undo: Besar"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Redo: Besar"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Undo: tambahkan lapisan/layer"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Redo: tambahkan lapisan/layer"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Undo: Hapus lapisan/layer"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Redo: Hapus lapisan/layer"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Undo: satukan lapisan/layer"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Redo: satukan lapisan/layer"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Undo: Perubahan pada urutan lapisan/layer"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Redo: Perubahan pada urutan lapisan/layer"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Undo: tambahkan lapisan/layer"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Redo: tambahkan lapisan/layer"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Undo: Hapus lapisan/layer"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Redo: Hapus lapisan/layer"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Undo: Perubahan pada urutan lapisan/layer"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Redo: Perubahan pada urutan lapisan/layer"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Undo: Hapus kuas kostum"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Redo: Hapus kuas kostum"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Undo: Tanda pada frame"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Redo: Tanda pada frame"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Undo: Hapus tanda dari frame"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Redo: Hapus tanda dari frame"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Gerakkan panduan"
 
 msgid "File saved"
-msgstr ""
+msgstr "File Tersimpan"
 
 msgid "File exported"
-msgstr ""
+msgstr "File sudah terekspor"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Palet kosong baru"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Impor palet"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Nama palet:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Nama warna:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Buat palet kosong baru?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Error: nama palet tidak valid."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Error: Palet bernama %s sudah ada"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "File palet tidak valid"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Edit Palet"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Perubahan"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Sponsor Platinum"
 
 msgid "Gold Sponsors"
 msgstr ""
