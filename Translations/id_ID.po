@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-22 00:48\n"
+"PO-Revision-Date: 2020-04-22 00:54\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1076,14 +1076,14 @@ msgid "Cannot find last project file."
 msgstr "Tidak bisa menemukan proyek terakhir"
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Kamu belum menyimpan atau membuka suatu proyek di Pixelorama!"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Buka proyek terakhir..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Buka proyek terakhir saat mulai"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
 
