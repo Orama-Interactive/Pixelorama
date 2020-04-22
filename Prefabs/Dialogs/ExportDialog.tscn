@@ -146,6 +146,14 @@ text = "All frames as multiple files"
 items = [ "All frames as multiple files", null, false, 0, null, "All frames as a single file animation", null, false, 1, null ]
 selected = 0
 
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/AnimationOptions"]
+visible = false
+margin_top = 28.0
+margin_right = 516.0
+margin_bottom = 52.0
+hint_tooltip = "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+text = "Create new directory for each frame tag"
+
 [node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer/AnimationOptions"]
 margin_top = 28.0
 margin_right = 516.0
@@ -311,12 +319,12 @@ margin_bottom = 494.0
 rect_min_size = Vector2( 440, 300 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-window_title = "Open a Directory"
+window_title = "Otwórz katalog"
 resizable = true
 mode = 2
 access = 2
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "E:/Projekty/Godot/Pixelorama"
+current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -325,6 +333,7 @@ margin_right = 448.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+window_title = "Alarm!"
 resizable = true
 dialog_text = "Directory path or file name is not valid!"
 __meta__ = {
@@ -338,6 +347,7 @@ margin_right = 448.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+window_title = "Alarm!"
 resizable = true
 dialog_text = "File %s already exists. Overwrite?"
 __meta__ = {
@@ -363,6 +373,7 @@ __meta__ = {
 [connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Orientation/Orientation" to="." method="_on_Orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimationType" to="." method="_on_AnimationType_item_selected"]
+[connection signal="toggled" from="VBoxContainer/AnimationOptions/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
 [connection signal="color_changed" from="VBoxContainer/AnimationOptions/AnimatedOptions/BackgroundColor" to="." method="_on_BackgroundColor_color_changed"]
 [connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimatedOptions/Direction" to="." method="_on_Direction_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/Options/Resize" to="." method="_on_Resize_value_changed"]

@@ -1056,4 +1056,8 @@ msgstr ""
 msgid "Opens last opened project on startup"
 msgstr ""
 
+msgid "Create new directory for each frame tag"
+msgstr ""
 
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""

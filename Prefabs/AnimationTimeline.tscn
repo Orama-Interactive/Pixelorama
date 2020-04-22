@@ -579,8 +579,6 @@ margin_bottom = 200.0
 [node name="AnimationTimer" type="Timer" parent="."]
 
 [node name="OnionSkinningSettings" type="WindowDialog" parent="."]
-margin_right = 83.0
-margin_bottom = 58.0
 rect_min_size = Vector2( 136, 126 )
 __meta__ = {
 "_edit_use_anchors_": false
