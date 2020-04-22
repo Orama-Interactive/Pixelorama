@@ -16,7 +16,7 @@ var orientation : int = Orientation.Rows
 var lines_count := 1
 
 # Animation options
-enum AnimationType { MultipleFiles = 0, Animated = 1, MultipleFilesInMulpipleDirectories = 2 }
+enum AnimationType { MultipleFiles = 0, Animated = 1 }
 var animation_type : int = AnimationType.MultipleFiles
 var background_color : Color = Color.white
 enum AnimationDirection { Forward = 0, Backwards = 1, PingPong = 2 }
@@ -25,6 +25,7 @@ var direction : int = AnimationDirection.Forward
 # Options
 var resize := 100
 var interpolation := 0 # Image.Interpolation
+var new_dir_for_each_frame_tag : bool = true # you don't need to store this after export
 
 # Export directory path and export file name
 var directory_path := ""
@@ -281,11 +282,10 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 	var export_paths = []
 	for i in range(processed_images.size()):
 		stop_export = false
-		var multiple_files := true if (current_tab == ExportTab.Animation && (animation_type == AnimationType.MultipleFiles or animation_type == AnimationType.MultipleFilesInMulpipleDirectories)) else false
-		var multiple_dirs := true if animation_type == AnimationType.MultipleFilesInMulpipleDirectories else false
-		var export_path = create_export_path(multiple_files, multiple_dirs, i + 1)
+		var multiple_files := true if (current_tab == ExportTab.Animation && animation_type == AnimationType.MultipleFiles) else false
+		var export_path = create_export_path(multiple_files, i + 1)
 		# If user want to create new directory for each animation tag then check if directories exist and create them if not
-		if multiple_files and multiple_dirs:
+		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := Directory.new()
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
 				frame_tag_directory.open(directory_path)
@@ -369,7 +369,7 @@ func scale_processed_images() -> void:
 			processed_image.resize(processed_image.get_size().x * resize / 100, processed_image.get_size().y * resize / 100, interpolation)
 
 
-func create_export_path(multifile: bool, multidirs: bool, frame: int = 0) -> String:
+func create_export_path(multifile: bool, frame: int = 0) -> String:
 	var path = file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
@@ -382,7 +382,7 @@ func create_export_path(multifile: bool, multidirs: bool, frame: int = 0) -> Str
 			var regex := RegEx.new()
 			regex.compile("[^a-zA-Z0-9_]+")
 			var frame_tag_dir = regex.sub(frame_tag, "", true)
-			if multidirs:
+			if new_dir_for_each_frame_tag:
 				# Add frame tag if frame has one
 				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory
 				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
@@ -412,22 +412,20 @@ func file_format_string(format_enum : int) -> String:
 
 
 func set_file_format_selector() -> void:
+	$VBoxContainer/AnimationOptions/MultipleAnimationsDirectories.visible = false
 	match animation_type:
 		AnimationType.MultipleFiles:
 			file_format = FileFormat.PNG
 			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
 			$FrameTimer.stop()
 			$VBoxContainer/AnimationOptions/AnimatedOptions.hide()
+			$VBoxContainer/AnimationOptions/MultipleAnimationsDirectories.pressed = new_dir_for_each_frame_tag
+			$VBoxContainer/AnimationOptions/MultipleAnimationsDirectories.visible = true
 		AnimationType.Animated:
 			file_format = FileFormat.GIF
 			$VBoxContainer/File/FileFormat.selected = FileFormat.GIF
 			$FrameTimer.wait_time = Global.animation_timer.wait_time
 			$VBoxContainer/AnimationOptions/AnimatedOptions.show()
-		AnimationType.MultipleFilesInMulpipleDirectories:
-			file_format = FileFormat.PNG
-			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
-			$FrameTimer.stop()
-			$VBoxContainer/AnimationOptions/AnimatedOptions.hide()
 
 func store_export_settings() -> void:
 	exported_tab = current_tab
@@ -624,3 +622,7 @@ func _on_FrameTimer_timeout() -> void:
 
 func _on_ExportDialog_popup_hide() -> void:
 	$FrameTimer.stop()
+
+
+func _on_MultipleAnimationsDirectories_toggled(button_pressed):
+	new_dir_for_each_frame_tag = button_pressed

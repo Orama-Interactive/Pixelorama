@@ -1047,5 +1047,8 @@ msgstr ""
 msgid "Open last project..."
 msgstr ""
 
-msgid "All frames as multiple files in multiple directories"
+msgid "Create new directory for each frame tag"
+msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
