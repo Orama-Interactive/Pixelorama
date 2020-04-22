@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-21 21:53\n"
+"PO-Revision-Date: 2020-04-22 06:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1085,8 +1085,8 @@ msgid "Open last project..."
 msgstr ""
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Beim Starten letztes Projekt laden"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Öffnet das zuletzt geöffnete Projekt beim Start"
 
