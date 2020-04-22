@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-22 23:05\n"
+"PO-Revision-Date: 2020-04-22 23:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -586,19 +586,19 @@ msgid "Checker size:"
 msgstr "Размер клеток:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Размер клеток прозрачного фона"
 
 msgid "Checker color 1:"
 msgstr "Цвет клеток 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Первый цвет клеток прозрачного фона"
 
 msgid "Checker color 2:"
 msgstr "Цвет клеток 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Второй цвет клеток прозрачного фона"
 
 msgid "Only custom preset can be modified"
 msgstr ""
