@@ -196,10 +196,6 @@ func set_preview() -> void:
 			AnimationType.Animated:
 				$VBoxContainer/PreviewScroll/Previews.columns = 1
 				add_animated_preview()
-			AnimationType.MultipleFilesInMulpipleDirectories:
-				$VBoxContainer/PreviewScroll/Previews.columns = ceil(sqrt(processed_images.size()))
-				for i in range(processed_images.size()):
-					add_image_preview(processed_images[i], i + 1)
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
@@ -260,7 +256,7 @@ func remove_previews() -> void:
 		child.free()
 
 
-func get_proccessed_image_animation_tag_and_start_id(processed_image_id):
+func get_proccessed_image_animation_tag_and_start_id(processed_image_id : int) -> Array:
 	var result_animation_tag_and_start_id = null
 	for animation_tag in Global.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
@@ -624,5 +620,5 @@ func _on_ExportDialog_popup_hide() -> void:
 	$FrameTimer.stop()
 
 
-func _on_MultipleAnimationsDirectories_toggled(button_pressed):
+func _on_MultipleAnimationsDirectories_toggled(button_pressed : bool) -> void:
 	new_dir_for_each_frame_tag = button_pressed
