@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-21 23:47\n"
+"PO-Revision-Date: 2020-04-22 16:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -794,6 +794,9 @@ msgstr "Сместить вправо"
 
 msgid "Add Frame Tag"
 msgstr "Добавить тег кадра"
+
+msgid "Link Cel"
+msgstr ""
 
 msgid "Unlink Cel"
 msgstr ""
