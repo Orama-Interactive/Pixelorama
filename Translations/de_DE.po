@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-22 16:06\n"
+"PO-Revision-Date: 2020-04-22 19:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1092,4 +1092,10 @@ msgstr "Beim Starten letztes Projekt laden"
 
 msgid "Opens last opened project on startup"
 msgstr "Öffnet das zuletzt geöffnete Projekt beim Start"
+
+msgid "Create new directory for each frame tag"
+msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
 
