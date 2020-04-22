@@ -363,6 +363,7 @@ func _on_RemoveLayer_pressed() -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
+
 func change_layer_order(rate : int) -> void:
 	var change = Global.current_layer + rate
 
@@ -388,14 +389,14 @@ func change_layer_order(rate : int) -> void:
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
 
+
 func _on_MergeDownLayer_pressed() -> void:
-	var new_layers : Array = Global.layers.duplicate()
-	new_layers.remove(Global.current_layer)
+	var new_layers : Array = Global.layers.duplicate(true)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Merge Layer")
 	for c in Global.canvases:
-		var new_layers_canvas : Array = c.layers.duplicate()
+		var new_layers_canvas : Array = c.layers.duplicate(true)
 		var selected_layer := Image.new()
 		selected_layer.copy_from(new_layers_canvas[Global.current_layer][0])
 		selected_layer.lock()
@@ -412,12 +413,20 @@ func _on_MergeDownLayer_pressed() -> void:
 		new_layer.lock()
 		c.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
 		new_layers_canvas.remove(Global.current_layer)
+		if !selected_layer.is_invisible() and Global.layers[Global.current_layer - 1][5].size() > 1 and (c in Global.layers[Global.current_layer - 1][5]):
+			new_layers[Global.current_layer - 1][5].erase(c)
+			var tex := ImageTexture.new()
+			tex.create_from_image(new_layer, 0)
+			new_layers_canvas[Global.current_layer - 1][0] = new_layer
+			new_layers_canvas[Global.current_layer - 1][1] = tex
+		else:
+			Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1][0], "data", new_layer.data)
+			Global.undo_redo.add_undo_property(c.layers[Global.current_layer - 1][0], "data", c.layers[Global.current_layer - 1][0].data)
 
 		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
-		Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1][0], "data", new_layer.data)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
-		Global.undo_redo.add_undo_property(c.layers[Global.current_layer - 1][0], "data", c.layers[Global.current_layer - 1][0].data)
 
+	new_layers.remove(Global.current_layer)
 	Global.undo_redo.add_do_property(Global, "current_layer", Global.current_layer - 1)
 	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
