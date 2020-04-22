@@ -43,8 +43,6 @@ func add_frame() -> void:
 
 	for l_i in range(Global.layers.size()):
 		if Global.layers[l_i][4]: # If the link button is pressed
-#			var new_layers : Array = Global.layers.duplicate()
-#			new_layers[l_i][5].append(new_canvas)
 			Global.layers[l_i][5].append(new_canvas)
 
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
@@ -78,6 +76,14 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 			tag[2] -= 1
 			tag[3] -= 1
 
+	# Check if one of the cels of the frame is linked
+	# if they are, unlink them too
+	# this prevents removed cels being kept in linked memory
+	var new_layers := Global.layers.duplicate(true)
+	for layer in new_layers:
+		for linked in layer[5]:
+			if linked == Global.canvases[frame]:
+				layer[5].erase(linked)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Frame")
@@ -86,7 +92,10 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	Global.undo_redo.add_do_property(Global, "canvas", new_canvases[current_frame])
 	Global.undo_redo.add_do_property(Global, "current_frame", current_frame)
 	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
+	Global.undo_redo.add_do_property(Global, "layers", new_layers)
 
+	# Change the frame value of the canvaseso on the right
+	# for example, if frame "3" was deleted, then "4" would have to become "3"
 	for i in range(frame, new_canvases.size()):
 		var c : Canvas = new_canvases[i]
 		Global.undo_redo.add_do_property(c, "frame", i)
@@ -97,6 +106,7 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	Global.undo_redo.add_undo_property(Global, "canvas", canvas)
 	Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
 	Global.undo_redo.add_undo_property(Global, "animation_tags", Global.animation_tags)
+	Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
 
 	Global.undo_redo.add_do_method(Global, "redo", [canvas])
 	Global.undo_redo.add_undo_method(Global, "undo", [canvas])
