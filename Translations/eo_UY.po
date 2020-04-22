@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-22 16:06\n"
+"PO-Revision-Date: 2020-04-22 19:48\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1064,5 +1064,11 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Create new directory for each frame tag"
+msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
 
