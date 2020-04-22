@@ -35,7 +35,7 @@ __meta__ = {
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false, "Unlink Cel", null, 0, false, true, -1, 0, null, "", false ]
+items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false, "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
 
 [node name="LinkedIndicator" type="Polygon2D" parent="."]
 visible = false

@@ -341,6 +341,7 @@ margin_right = 902.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
+mouse_default_cursor_shape = 14
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/focus = ExtResource( 13 )
@@ -1352,7 +1353,7 @@ columns = 5
 [node name="OpenSprite" type="FileDialog" parent="."]
 margin_right = 515.0
 margin_bottom = 348.0
-window_title = "Otwórz plik"
+window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
@@ -1429,9 +1430,9 @@ dialog_text = "This is an error message!"
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 window_title = "Otwórz plik"
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "E:/Projekty/Godot/Pixelorama"
 current_file = "Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/Pixelorama"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/"
 
 [node name="HSVDialog" parent="." instance=ExtResource( 44 )]
 
@@ -1448,6 +1449,7 @@ visible = false
 
 [node name="RightCursor" type="Sprite" parent="."]
 visible = false
+[connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
 [connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]

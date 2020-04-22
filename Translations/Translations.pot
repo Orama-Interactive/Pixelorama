@@ -761,6 +761,9 @@ msgstr ""
 msgid "Add Frame Tag"
 msgstr ""
 
+msgid "Link Cel"
+msgstr ""
+
 msgid "Unlink Cel"
 msgstr ""
 
@@ -1045,6 +1048,12 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
 msgid "Open last project..."
+msgstr ""
+
+msgid "Open last project on startup"
+msgstr ""
+
+msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Create new directory for each frame tag"
