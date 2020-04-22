@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-22 23:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -274,7 +274,7 @@ msgid "Themes"
 msgstr "Темы оформления"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Холст"
 
 msgid "Shortcuts"
 msgstr "Горячие клавишы"
@@ -1076,13 +1076,13 @@ msgid "A tool assigned to the right mouse button"
 msgstr ""
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Не могу найти файл последнего проекта."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Вы еще не сохранили и не открыли ни одного проекта в Pixelorama!"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Открыть последний проект..."
 
 msgid "Open last project on startup"
 msgstr "Открывать последний проект при запуске"
