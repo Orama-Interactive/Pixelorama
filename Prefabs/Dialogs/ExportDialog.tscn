@@ -143,7 +143,7 @@ rect_min_size = Vector2( 0, 24 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "All frames as multiple files"
-items = [ "All frames as multiple files", null, false, 0, null, "All frames as a single file animation", null, false, 1, null ]
+items = [ "All frames as multiple files", null, false, 0, null, "All frames as a single file animation", null, false, 1, null, "All frames as multiple files in multiple directories", null, false, 2, null ]
 selected = 0
 
 [node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer/AnimationOptions"]
@@ -311,12 +311,12 @@ margin_bottom = 494.0
 rect_min_size = Vector2( 440, 300 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-window_title = "Open a Directory"
+window_title = "Otwórz katalog"
 resizable = true
 mode = 2
 access = 2
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "E:/Projekty/Godot/Pixelorama"
+current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -325,6 +325,7 @@ margin_right = 448.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+window_title = "Alarm!"
 resizable = true
 dialog_text = "Directory path or file name is not valid!"
 __meta__ = {
@@ -338,6 +339,7 @@ margin_right = 448.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+window_title = "Alarm!"
 resizable = true
 dialog_text = "File %s already exists. Overwrite?"
 __meta__ = {

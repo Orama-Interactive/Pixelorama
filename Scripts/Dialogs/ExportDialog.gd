@@ -16,7 +16,7 @@ var orientation : int = Orientation.Rows
 var lines_count := 1
 
 # Animation options
-enum AnimationType { MultipleFiles = 0, Animated = 1 }
+enum AnimationType { MultipleFiles = 0, Animated = 1, MultipleFilesInMulpipleDirectories = 2 }
 var animation_type : int = AnimationType.MultipleFiles
 var background_color : Color = Color.white
 enum AnimationDirection { Forward = 0, Backwards = 1, PingPong = 2 }
@@ -195,6 +195,10 @@ func set_preview() -> void:
 			AnimationType.Animated:
 				$VBoxContainer/PreviewScroll/Previews.columns = 1
 				add_animated_preview()
+			AnimationType.MultipleFilesInMulpipleDirectories:
+				$VBoxContainer/PreviewScroll/Previews.columns = ceil(sqrt(processed_images.size()))
+				for i in range(processed_images.size()):
+					add_image_preview(processed_images[i], i + 1)
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
@@ -255,6 +259,17 @@ func remove_previews() -> void:
 		child.free()
 
 
+func get_proccessed_image_animation_tag_and_start_id(processed_image_id):
+	var result_animation_tag_and_start_id = null
+	for animation_tag in Global.animation_tags:
+		# Check if processed image is in frame tag and assign frame tag and start id if yes
+		# Then stop
+		if (processed_image_id + 1) >= animation_tag[2] and (processed_image_id + 1) <= animation_tag[3]:
+			result_animation_tag_and_start_id = [animation_tag[0], animation_tag[2]]
+			break
+	return result_animation_tag_and_start_id
+
+
 func export_processed_images(ignore_overwrites : bool) -> void:
 	# Stop export if directory path or file name are not valid
 	var dir = Directory.new()
@@ -266,7 +281,15 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 	var export_paths = []
 	for i in range(processed_images.size()):
 		stop_export = false
-		var export_path = create_export_path(true if (current_tab == ExportTab.Animation && animation_type == AnimationType.MultipleFiles) else false, i + 1)
+		var multiple_files := true if (current_tab == ExportTab.Animation && (animation_type == AnimationType.MultipleFiles or animation_type == AnimationType.MultipleFilesInMulpipleDirectories)) else false
+		var multiple_dirs := true if animation_type == AnimationType.MultipleFilesInMulpipleDirectories else false
+		var export_path = create_export_path(multiple_files, multiple_dirs, i + 1)
+		# If user want to create new directory for each animation tag then check if directories exist and create them if not
+		if multiple_files and multiple_dirs:
+			var frame_tag_directory := Directory.new()
+			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
+				frame_tag_directory.open(directory_path)
+				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 		# Check if the file already exists
 		var fileCheck = File.new()
 		if fileCheck.file_exists(export_path):
@@ -346,11 +369,30 @@ func scale_processed_images() -> void:
 			processed_image.resize(processed_image.get_size().x * resize / 100, processed_image.get_size().y * resize / 100, interpolation)
 
 
-func create_export_path(multifile: bool, frame: int = 0) -> String:
+func create_export_path(multifile: bool, multidirs: bool, frame: int = 0) -> String:
 	var path = file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
-		path += "_" + String(frame)
+		var frame_tag_and_start_id = get_proccessed_image_animation_tag_and_start_id(frame - 1)
+		# Check if exported frame is in frame tag
+		if frame_tag_and_start_id != null:
+			var frame_tag = frame_tag_and_start_id[0]
+			var start_id = frame_tag_and_start_id[1]
+			# Remove unallowed characters in frame tag directory
+			var regex := RegEx.new()
+			regex.compile("[^a-zA-Z0-9_]+")
+			var frame_tag_dir = regex.sub(frame_tag, "", true)
+			if multidirs:
+				# Add frame tag if frame has one
+				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory
+				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
+				return directory_path.plus_file(frame_tag_dir).plus_file(path + file_format_string(file_format))
+			else:
+				# Add frame tag if frame has one
+				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag
+				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
+		else:
+			path += "_" + String(frame)
 
 	return directory_path.plus_file(path + file_format_string(file_format))
 
@@ -381,6 +423,11 @@ func set_file_format_selector() -> void:
 			$VBoxContainer/File/FileFormat.selected = FileFormat.GIF
 			$FrameTimer.wait_time = Global.animation_timer.wait_time
 			$VBoxContainer/AnimationOptions/AnimatedOptions.show()
+		AnimationType.MultipleFilesInMulpipleDirectories:
+			file_format = FileFormat.PNG
+			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
+			$FrameTimer.stop()
+			$VBoxContainer/AnimationOptions/AnimatedOptions.hide()
 
 func store_export_settings() -> void:
 	exported_tab = current_tab

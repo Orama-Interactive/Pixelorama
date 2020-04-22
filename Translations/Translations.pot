@@ -1046,3 +1046,6 @@ msgstr ""
 
 msgid "Open last project..."
 msgstr ""
+
+msgid "All frames as multiple files in multiple directories"
+msgstr ""
