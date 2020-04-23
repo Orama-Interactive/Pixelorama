@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-23 20:25\n"
 
 msgid "OK"
 msgstr "确定"
@@ -799,7 +799,7 @@ msgid "Add Frame Tag"
 msgstr "添加帧标签"
 
 msgid "Link Cel"
-msgstr ""
+msgstr "取消链接单元"
 
 msgid "Unlink Cel"
 msgstr "取消链接单元"
@@ -924,16 +924,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "重做: 删除自定义画笔"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "撤销：修改帧标签"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "重做：修改帧标签"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "撤销：删除帧标签"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "重做：删除帧标签"
 
 msgid "Move Guide"
 msgstr "移除辅助线"
@@ -1080,23 +1080,23 @@ msgid "A tool assigned to the right mouse button"
 msgstr "分配给鼠标右键的工具"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "无法找到最后一个项目文件。"
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "您尚未在 Pixelorama 中保存或打开任何项目！"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "打开最后一个项目..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "在启动时打开最后一个项目"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "在启动时打开最后打开的项目"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "为每个帧标签创建新的目录"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同目录"
 
