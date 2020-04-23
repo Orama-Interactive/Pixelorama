@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-23 20:25\n"
+"PO-Revision-Date: 2020-04-23 21:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -570,19 +570,19 @@ msgid "Grid width:"
 msgstr "Ширина сетки:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Устанавливает расстояние между вертикальными линиями сетки"
 
 msgid "Grid height:"
 msgstr "Высота сетки:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
 
 msgid "Grid color:"
 msgstr "Цвет сетки:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Цвет сетки"
 
 msgid "Checker size:"
 msgstr "Размер клеток:"
@@ -603,7 +603,7 @@ msgid "Second color of the transparent checker background"
 msgstr "Второй цвет клеток прозрачного фона"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Только пользовательские предустановки могут быть изменены"
 
 msgid "Brush:"
 msgstr "Кисть:"
