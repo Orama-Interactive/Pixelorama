@@ -184,7 +184,7 @@ func _on_OnionSkinning_pressed() -> void:
 
 
 func _on_OnionSkinningSettings_pressed() -> void:
-	$OnionSkinningSettings.popup(Rect2(Global.onion_skinning_button.rect_global_position.x - 152, Global.onion_skinning_button.rect_global_position.y - 106, 136, 126))
+	$OnionSkinningSettings.popup(Rect2(Global.onion_skinning_button.rect_global_position.x - $OnionSkinningSettings.rect_size.x - 16, Global.onion_skinning_button.rect_global_position.y - 106, 136, 126))
 
 
 func _on_LoopAnim_pressed() -> void:
