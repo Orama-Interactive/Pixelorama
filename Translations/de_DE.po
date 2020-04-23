@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-23 20:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -798,7 +798,7 @@ msgid "Add Frame Tag"
 msgstr "Frame Tag hinzufügen"
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Kette verlinken"
 
 msgid "Unlink Cel"
 msgstr "Kette entkoppeln"
@@ -1094,8 +1094,8 @@ msgid "Opens last opened project on startup"
 msgstr "Öffnet das zuletzt geöffnete Projekt beim Start"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Neues Verzeichnis für jeden Frame Tag erstellen"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Erstellt mehrere Dateien, aber jede Datei wird in einem anderen Verzeichnis gespeichert, das ihrem Frame Tag entspricht"
 
