@@ -248,9 +248,13 @@ func _on_AnimationTimer_timeout() -> void:
 
 func play_animation(play : bool, forward_dir : bool) -> void:
 	if forward_dir:
+		Global.play_backwards.disconnect("toggled", self, "_on_PlayBackwards_toggled")
 		Global.play_backwards.pressed = false
+		Global.play_backwards.connect("toggled", self, "_on_PlayBackwards_toggled")
 	else:
+		Global.play_forward.disconnect("toggled", self, "_on_PlayForward_toggled")
 		Global.play_forward.pressed = false
+		Global.play_forward.connect("toggled", self, "_on_PlayForward_toggled")
 	if Global.canvases.size() == 1:
 		if forward_dir:
 			Global.play_forward.pressed = false
