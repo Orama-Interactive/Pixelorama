@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "確定"
@@ -632,16 +632,22 @@ msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 msgid "Fill area:"
 msgstr "填滿:"
 
-msgid "Area of the same color"
-msgstr "同顏色的區塊"
-
-msgid "All pixels of the same color"
-msgstr "同顏色的像素"
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
