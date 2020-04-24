@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -635,17 +635,23 @@ msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώ
 msgid "Fill area:"
 msgstr "Περιοχή γεμίσματος:"
 
-msgid "Area of the same color"
-msgstr "Περιοχή ίδιου χρώματος"
-
-msgid "All pixels of the same color"
-msgstr "Όλα τα πίξελ ίδιου χρώματος"
-
 msgid "Same color area"
 msgstr "Περιοχή ίδιου χρώματος"
 
 msgid "Same color pixels"
 msgstr "Πίξελς ίδιου χρώματος"
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Φώτισμα"
