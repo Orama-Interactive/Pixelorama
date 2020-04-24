@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-23 21:18\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -635,17 +635,23 @@ msgstr "0: Собственный цвет кисти, 100: Выбранный �
 msgid "Fill area:"
 msgstr "Залить область:"
 
-msgid "Area of the same color"
-msgstr "Область того же цвета"
-
-msgid "All pixels of the same color"
-msgstr "Все пиксели такого же цвета"
-
 msgid "Same color area"
 msgstr "Область того же цвета"
 
 msgid "Same color pixels"
 msgstr "Пиксели того же цвета"
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Осветлить"
