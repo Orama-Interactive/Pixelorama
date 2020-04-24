@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-22 22:55\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -634,17 +634,23 @@ msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowa
 msgid "Fill area:"
 msgstr "Wypełnij przestrzeń:"
 
-msgid "Area of the same color"
-msgstr "Przestrzeń o takim samym kolorze"
-
-msgid "All pixels of the same color"
-msgstr "Wszystkie piksele tego samego koloru"
-
 msgid "Same color area"
 msgstr "Ten sam obszar koloru"
 
 msgid "Same color pixels"
 msgstr "Piksele tego samego koloru"
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Rozjaśnianie"
