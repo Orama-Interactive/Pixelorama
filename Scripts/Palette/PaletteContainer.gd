@@ -2,10 +2,9 @@ extends GridContainer
 
 const palette_button = preload("res://Prefabs/PaletteButton.tscn")
 
-
-var palettes_path := "Palettes"
 var current_palette = "Default"
 var from_palette : Palette
+
 
 func _ready() -> void:
 	_load_palettes()

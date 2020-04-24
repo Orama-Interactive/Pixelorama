@@ -15,7 +15,7 @@ Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Ga
 - You can now export your projects to .gif files.
 - A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
 - An HSV Adjust dialog has been added in the Images menu.
-- Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
+- Pattern filling is now possible. The bucket tool can now use Patterns to fill areas, instead of a single color.
 - Users can now change keyboard shortcut bindings for tools, in the Preferences.
 - Importing .pngs as palettes is now possible.
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.

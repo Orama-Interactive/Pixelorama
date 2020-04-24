@@ -32,7 +32,6 @@ func get_brush_files_from_directory(directory: String): # -> Array
 	if err != OK:
 		return null
 
-
 	# Build first the list of base png files and all subdirectories to
 	# scan later (skip navigational . and ..)
 	main_directory.list_dir_begin(true)
@@ -40,9 +39,8 @@ func get_brush_files_from_directory(directory: String): # -> Array
 	while fname != "":
 		if main_directory.current_is_dir():
 			subdirectories.append(fname)
-		else:  # Filter for pngs
+		else: # Filter for pngs
 			if fname.get_extension().to_lower() == "png":
-				print_debug("Found brush at '%s'" % [fname])
 				base_png_files.append(fname)
 
 		# go to next
@@ -86,8 +84,7 @@ func get_brush_files_from_directory(directory: String): # -> Array
 	return [base_png_files, randomised_subdir_files_map, nonrandomised_subdir_files_map]
 
 
-# Add a randomised brush from the given list of files as a
-# source.
+# Add a randomised brush from the given list of files as a source.
 # The tooltip name is what shows up on the tooltip
 # and is probably in this case the name of the containing
 # randomised directory.
@@ -100,7 +97,6 @@ func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
 		if err == OK:
 			image.convert(Image.FORMAT_RGBA8)
 			loaded_images.append(image)
-			print_debug("Loaded image from '%s'" % [filen])
 
 	# If any images were successfully loaded, then
 	# we create the randomised brush button, copied
@@ -220,40 +216,45 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 	Global.brushes_from_files = Global.custom_brushes.size()
 
 
+func import_patterns(priority_ordered_search_path: Array) -> void:
+	for path in priority_ordered_search_path:
+		var pattern_list := []
+		var dir := Directory.new()
+		dir.open(path)
+		dir.list_dir_begin()
+		var curr_file := dir.get_next()
+		while curr_file != "":
+			if curr_file.get_extension().to_lower() == "png":
+				pattern_list.append(curr_file)
+			curr_file = dir.get_next()
+		dir.list_dir_end()
 
-func find_brushes(brushes_dir : Directory, path : String) -> Array:
-	var subdirectories := []
-	var found_random_brush := 0
-	path = Global.root_directory.plus_file(path)
-	brushes_dir.open(path)
-	brushes_dir.list_dir_begin(true)
-	var file := brushes_dir.get_next()
-	while file != "":
-		if file.get_extension().to_upper() == "PNG":
+		for pattern in pattern_list:
 			var image := Image.new()
-			var err := image.load(path.plus_file(file))
+			var err := image.load(path.plus_file(pattern))
 			if err == OK:
-				if "%" in file:
-					if found_random_brush == 0:
-						found_random_brush = Global.file_brush_container.get_child_count()
-						image.convert(Image.FORMAT_RGBA8)
-						Global.custom_brushes.append(image)
-						Global.create_brush_button(image, Global.Brush_Types.RANDOM_FILE, file.trim_suffix(".png"))
-					else:
-						var brush_button = Global.file_brush_container.get_child(found_random_brush)
-						brush_button.random_brushes.append(image)
-				else:
-					image.convert(Image.FORMAT_RGBA8)
-					Global.custom_brushes.append(image)
-					Global.create_brush_button(image, Global.Brush_Types.FILE, file.trim_suffix(".png"))
-		elif file.get_extension() == "": # Probably a directory
-			var subdir := "./%s" % [file]
-			if brushes_dir.dir_exists(subdir): # If it's an actual directory
-				subdirectories.append(subdir)
+				image.convert(Image.FORMAT_RGBA8)
+				Global.patterns.append(image)
 
-		file = brushes_dir.get_next()
-	brushes_dir.list_dir_end()
-	return subdirectories
+				var pattern_button : BaseButton = load("res://Prefabs/PatternButton.tscn").instance()
+				pattern_button.image = image
+				var pattern_tex := ImageTexture.new()
+				pattern_tex.create_from_image(image, 0)
+				pattern_button.get_child(0).texture = pattern_tex
+				pattern_button.hint_tooltip = pattern
+				pattern_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				Global.patterns_popup.get_node("ScrollContainer/PatternContainer").add_child(pattern_button)
+
+			Global.pattern_left_image = Global.patterns[0]
+			var pattern_left_tex := ImageTexture.new()
+			pattern_left_tex.create_from_image(Global.pattern_left_image, 0)
+			Global.left_fill_pattern_container.get_child(0).get_child(0).texture = pattern_left_tex
+
+			Global.pattern_right_image = Global.patterns[0]
+			var pattern_right_tex := ImageTexture.new()
+			pattern_right_tex.create_from_image(Global.pattern_right_image, 0)
+			Global.right_fill_pattern_container.get_child(0).get_child(0).texture = pattern_right_tex
+
 
 func import_gpl(path : String) -> Palette:
 	var result : Palette = null

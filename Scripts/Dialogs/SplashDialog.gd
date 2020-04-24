@@ -13,7 +13,7 @@ func _on_SplashDialog_about_to_show() -> void:
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
 	window_title = "Pixelorama" + " " + current_version
 	changes_label.text = current_version + " " + tr("Changes")
-	developed_by_label.text = "Pixelorama" + " " + current_version + " - " + tr("MADEBY_LABEL")
+	developed_by_label.text = "Pixelorama" + " " + current_version + " - " + tr("Developed by Orama Interactive")
 
 	art_by_label.text = tr("Art by") + ": Erevos"
 	if "zh" in TranslationServer.get_locale():

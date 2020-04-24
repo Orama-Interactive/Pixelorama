@@ -677,13 +677,13 @@ ticks_on_borders = true
 
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
-margin_top = 75.0
-margin_right = 159.0
-margin_bottom = 117.0
+margin_top = 71.0
+margin_right = 160.0
+margin_bottom = 155.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 56.0
-margin_right = 102.0
+margin_left = 57.0
+margin_right = 103.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
@@ -692,14 +692,58 @@ text = "Fill area:"
 [node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
 margin_left = 24.0
 margin_top = 19.0
-margin_right = 134.0
-margin_bottom = 42.0
+margin_right = 136.0
+margin_bottom = 40.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
 items = [ "Same color area", null, false, 0, null, "Same color pixels", null, false, 1, null ]
 selected = 0
+
+[node name="FillWithLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+margin_left = 57.0
+margin_top = 44.0
+margin_right = 102.0
+margin_bottom = 59.0
+size_flags_horizontal = 4
+text = "Fill with:"
+
+[node name="LeftFillWithOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+margin_left = 42.0
+margin_top = 63.0
+margin_right = 118.0
+margin_bottom = 84.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Selected Color"
+items = [ "Selected Color", null, false, 0, null, "Pattern", null, false, 1, null ]
+selected = 0
+
+[node name="LeftFillPattern" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
+visible = false
+margin_left = 59.0
+margin_top = 88.0
+margin_right = 95.0
+margin_bottom = 120.0
+size_flags_horizontal = 4
+
+[node name="LeftPatternTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern"]
+margin_right = 36.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 36, 32 )
+hint_tooltip = "Select a brush"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 12 )
+
+[node name="PatternTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/LeftPatternTypeButton"]
+margin_right = 32.0
+margin_bottom = 32.0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
@@ -987,28 +1031,72 @@ ticks_on_borders = true
 
 [node name="RightFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
-margin_top = 75.0
-margin_right = 144.0
-margin_bottom = 117.0
+margin_top = 71.0
+margin_right = 160.0
+margin_bottom = 155.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
-margin_left = 49.0
-margin_right = 95.0
+margin_left = 57.0
+margin_right = 103.0
 margin_bottom = 15.0
 size_flags_horizontal = 4
 text = "Fill area:"
 
 [node name="RightFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
-margin_left = 17.0
+margin_left = 24.0
 margin_top = 19.0
-margin_right = 127.0
-margin_bottom = 42.0
+margin_right = 136.0
+margin_bottom = 40.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
 items = [ "Same color area", null, false, 0, null, "Same color pixels", null, false, 1, null ]
 selected = 0
+
+[node name="FillWithLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+margin_left = 57.0
+margin_top = 44.0
+margin_right = 102.0
+margin_bottom = 59.0
+size_flags_horizontal = 4
+text = "Fill with:"
+
+[node name="RightFillWithOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+margin_left = 38.0
+margin_top = 63.0
+margin_right = 122.0
+margin_bottom = 84.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Selected Color"
+items = [ "Selected Color", null, false, 0, null, "Pattern", null, false, 1, null ]
+selected = 0
+
+[node name="RightFillPattern" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea"]
+visible = false
+margin_left = 59.0
+margin_top = 88.0
+margin_right = 95.0
+margin_bottom = 120.0
+size_flags_horizontal = 4
+
+[node name="RightPatternTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern"]
+margin_right = 36.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 36, 32 )
+hint_tooltip = "Select a brush"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 12 )
+
+[node name="PatternTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/RightPatternTypeButton"]
+margin_right = 32.0
+margin_bottom = 32.0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
@@ -1310,11 +1398,13 @@ columns = 6
 
 [node name="PixelBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 26 )]
 hint_tooltip = "Pixel brush"
+mouse_default_cursor_shape = 2
 
 [node name="CircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 26 )]
-margin_left = 32.0
-margin_right = 64.0
+margin_left = 35.0
+margin_right = 67.0
 hint_tooltip = "Filled circle brush"
+mouse_default_cursor_shape = 2
 brush_type = 1
 custom_brush_index = -2
 
@@ -1322,9 +1412,10 @@ custom_brush_index = -2
 texture = SubResource( 9 )
 
 [node name="FilledCircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 26 )]
-margin_left = 64.0
-margin_right = 96.0
+margin_left = 70.0
+margin_right = 102.0
 hint_tooltip = "Circle brush"
+mouse_default_cursor_shape = 2
 brush_type = 2
 custom_brush_index = -1
 
@@ -1346,6 +1437,23 @@ scroll_horizontal_enabled = false
 [node name="ProjectBrushContainer" type="GridContainer" parent="BrushesPopup/TabContainer/Project"]
 columns = 5
 
+[node name="PatternsPopup" type="PopupPanel" parent="."]
+margin_right = 226.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PatternsPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="PatternContainer" type="GridContainer" parent="PatternsPopup/ScrollContainer"]
+columns = 6
+
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
@@ -1358,8 +1466,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1374,13 +1482,11 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
 window_title = "Otwórz plik(i)"
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -1430,7 +1536,6 @@ dialog_text = "This is an error message!"
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 window_title = "Otwórz plik"
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_file = "Pixelorama"
 current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects"
 current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/"
 
@@ -1470,6 +1575,8 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/LeftInterpolateSlider" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillWithOptions" to="." method="_on_LeftFillWithOptions_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/LeftPatternTypeButton" to="." method="_on_LeftPatternTypeButton_pressed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLightenDarken" to="." method="_on_LeftLightenDarken_item_selected"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmountSlider" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
@@ -1485,6 +1592,8 @@ visible = false
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/RightInterpolateSlider" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]
+[connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillWithOptions" to="." method="_on_RightFillWithOptions_item_selected"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/RightPatternTypeButton" to="." method="_on_RightPatternTypeButton_pressed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLightenDarken" to="." method="_on_RightLightenDarken_item_selected"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmountSpinbox" to="." method="_on_RightLDAmountSpinbox_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmountSlider" to="." method="_on_RightLDAmountSpinbox_value_changed"]

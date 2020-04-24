@@ -172,6 +172,7 @@ func _ready() -> void:
 	Global.layers_container.get_child(0).line_edit.text = Global.layers[0][0]
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
+	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
 	Global.left_color_picker.get_picker().presets_visible = false
 	Global.right_color_picker.get_picker().presets_visible = false
@@ -502,12 +503,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.left_brush_size_slider.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "Bucket":
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
 			Global.left_fill_area_container.visible = true
 			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
-				Global.left_color_interpolation_container.visible = true
 		elif current_action == "LightenDarken":
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
@@ -538,12 +535,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.right_brush_size_slider.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "Bucket":
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
 			Global.right_fill_area_container.visible = true
 			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
-				Global.right_color_interpolation_container.visible = true
 		elif current_action == "LightenDarken":
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
@@ -651,8 +644,34 @@ func _on_LeftFillAreaOptions_item_selected(ID : int) -> void:
 	Global.left_fill_area = ID
 
 
+func _on_LeftFillWithOptions_item_selected(ID : int) -> void:
+	Global.left_fill_with = ID
+	if ID == 1:
+		Global.left_fill_pattern_container.visible = true
+	else:
+		Global.left_fill_pattern_container.visible = false
+
+
+func _on_LeftPatternTypeButton_pressed() -> void:
+	Global.pattern_window_position = "left"
+	Global.patterns_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
+
+
 func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
 	Global.right_fill_area = ID
+
+
+func _on_RightFillWithOptions_item_selected(ID : int) -> void:
+	Global.right_fill_with = ID
+	if ID == 1:
+		Global.right_fill_pattern_container.visible = true
+	else:
+		Global.right_fill_pattern_container.visible = false
+
+
+func _on_RightPatternTypeButton_pressed() -> void:
+	Global.pattern_window_position = "right"
+	Global.patterns_popup.popup(Rect2(Global.right_brush_type_button.rect_global_position, Vector2(226, 72)))
 
 
 func _on_LeftLightenDarken_item_selected(ID : int) -> void:

@@ -16,6 +16,7 @@ const config_subdir_name := "pixelorama"
 
 const palettes_data_subdirectory := "Palettes"
 const brushes_data_subdirectory := "Brushes"
+const patterns_data_subdirectory := "Patterns"
 
 
 # Get if we should use XDG standard or not nyaaaa
@@ -69,7 +70,6 @@ func _init():
 		xdg_data_dirs = []
 
 
-
 func append_file_to_all(basepaths: Array, subpath: String) -> Array:
 	var res := []
 	for _path in basepaths:
@@ -81,10 +81,12 @@ func append_file_to_all(basepaths: Array, subpath: String) -> Array:
 func get_search_paths_in_order() -> Array:
 	return [xdg_data_home] + xdg_data_dirs
 
+
 # Gets the paths, in order of search priority, for palettes.
 func get_palette_search_path_in_order() -> Array:
 	var base_paths := get_search_paths_in_order()
 	return append_file_to_all(base_paths, palettes_data_subdirectory)
+
 
 # Gets the paths, in order of search priority, for brushes.
 func get_brushes_search_path_in_order() -> Array:
@@ -92,16 +94,31 @@ func get_brushes_search_path_in_order() -> Array:
 	return append_file_to_all(base_paths, brushes_data_subdirectory)
 
 
+# Gets the paths, in order of search priority, for patterns.
+func get_patterns_search_path_in_order() -> Array:
+	var base_paths := get_search_paths_in_order()
+	return append_file_to_all(base_paths, patterns_data_subdirectory)
+
+
 # Get the path that we are ok to be writing palettes to:
 func get_palette_write_path() -> String:
 	return xdg_data_home.plus_file(palettes_data_subdirectory)
+
 
 # Get the path that we are ok to be writing brushes to:
 func get_brushes_write_path() -> String:
 	return xdg_data_home.plus_file(brushes_data_subdirectory)
 
+# Get the path that we are ok to be writing patterns to:
+func get_patterns_write_path() -> String:
+	return xdg_data_home.plus_file(patterns_data_subdirectory)
+
+
 # Ensure the user xdg directories exist:
 func ensure_xdg_user_dirs_exist() -> void:
+	if !OS.has_feature("standalone"): # Don't execute if we're in the editor
+		return
+
 	var base_dir := Directory.new()
 	base_dir.open(raw_xdg_data_home)
 	# Ensure the main config directory exists.
@@ -112,6 +129,7 @@ func ensure_xdg_user_dirs_exist() -> void:
 	actual_data_dir.open(xdg_data_home)
 	var palette_writing_dir := get_palette_write_path()
 	var brushes_writing_dir := get_brushes_write_path()
+	var pattern_writing_dir := get_patterns_write_path()
 	# Create the palette and brush dirs
 	if not actual_data_dir.dir_exists(palette_writing_dir):
 		print("Making directory %s" % [palette_writing_dir])
@@ -119,3 +137,6 @@ func ensure_xdg_user_dirs_exist() -> void:
 	if not actual_data_dir.dir_exists(brushes_writing_dir):
 		print("Making directory %s" % [brushes_writing_dir])
 		actual_data_dir.make_dir(brushes_writing_dir)
+	if not actual_data_dir.dir_exists(pattern_writing_dir):
+		print("Making directory %s" % [pattern_writing_dir])
+		actual_data_dir.make_dir(pattern_writing_dir)

@@ -27,8 +27,6 @@ enum Direction {
 # that direction has been pressed.
 var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
-
-# warning-ignore:unused_class_variable
 var loaded_locales : Array
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
@@ -40,9 +38,9 @@ var layers := [] setget layers_changed
 var layers_changed_skip := false
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
-# warning-ignore:unused_class_variable
+
 var can_draw := false
-# warning-ignore:unused_class_variable
+
 var has_focus := false
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var open_last_project := true
@@ -50,139 +48,99 @@ var smooth_zoom := true
 var cursor_image = preload("res://Assets/Graphics/Cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
-# warning-ignore:unused_class_variable
+
 var selected_pixels := []
 var image_clipboard : Image
 var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
 var play_only_tags := true
 
-# warning-ignore:unused_class_variable
 var theme_type := "Dark"
-# warning-ignore:unused_class_variable
 var is_default_image := true
-# warning-ignore:unused_class_variable
 var default_image_width := 64
-# warning-ignore:unused_class_variable
 var default_image_height := 64
-# warning-ignore:unused_class_variable
 var default_fill_color := Color(0, 0, 0, 0)
 var grid_type = Grid_Types.CARTESIAN
-# warning-ignore:unused_class_variable
 var grid_width := 1
-# warning-ignore:unused_class_variable
 var grid_height := 1
-# warning-ignore:unused_class_variable
 var grid_color := Color.black
-# warning-ignore:unused_class_variable
 var guide_color := Color.purple
-# warning-ignore:unused_class_variable
 var checker_size := 10
-# warning-ignore:unused_class_variable
 var checker_color_1 := Color.gray
-# warning-ignore:unused_class_variable
 var checker_color_2 := Color.white
 
 # Tools & options
-# warning-ignore:unused_class_variable
 var current_left_tool := "Pencil"
-# warning-ignore:unused_class_variable
 var current_right_tool := "Eraser"
-# warning-ignore:unused_class_variable
 var show_left_tool_icon := true
-# warning-ignore:unused_class_variable
 var show_right_tool_icon := true
-# warning-ignore:unused_class_variable
 var left_square_indicator_visible := true
-# warning-ignore:unused_class_variable
 var right_square_indicator_visible := false
-#0 for area of same color, 1 for all pixels of the same color
-# warning-ignore:unused_class_variable
+
+# 0 for area of same color, 1 for all pixels of the same color
 var left_fill_area := 0
-# warning-ignore:unused_class_variable
 var right_fill_area := 0
 
+var left_fill_with := 0
+var right_fill_with := 0
+
 # 0 for lighten, 1 for darken
-# warning-ignore:unused_class_variable
 var left_ld := 0
-# warning-ignore:unused_class_variable
 var right_ld := 0
-# warning-ignore:unused_class_variable
 var left_ld_amount := 0.1
-# warning-ignore:unused_class_variable
 var right_ld_amount := 0.1
 
 # 0 for the left, 1 for the right
-# warning-ignore:unused_class_variable
 var left_color_picker_for := 0
-# warning-ignore:unused_class_variable
 var right_color_picker_for := 1
 
 # 0 for zoom in, 1 for zoom out
 var left_zoom_mode := 0
 var right_zoom_mode := 1
 
-# warning-ignore:unused_class_variable
 var left_horizontal_mirror := false
-# warning-ignore:unused_class_variable
 var left_vertical_mirror := false
-# warning-ignore:unused_class_variable
 var right_horizontal_mirror := false
-# warning-ignore:unused_class_variable
 var right_vertical_mirror := false
 
 # View menu options
-# warning-ignore:unused_class_variable
 var tile_mode := false
-# warning-ignore:unused_class_variable
 var draw_grid := false
-# warning-ignore:unused_class_variable
 var show_rulers := true
-# warning-ignore:unused_class_variable
 var show_guides := true
-# warning-ignore:unused_class_variable
 var show_animation_timeline := true
 
 # Onion skinning options
 var onion_skinning := false
-# warning-ignore:unused_class_variable
 var onion_skinning_past_rate := 1
-# warning-ignore:unused_class_variable
 var onion_skinning_future_rate := 1
-# warning-ignore:unused_class_variable
 var onion_skinning_blue_red := false
 
 # Brushes
-# warning-ignore:unused_class_variable
 var left_brush_size := 1
-# warning-ignore:unused_class_variable
 var right_brush_size := 1
-# warning-ignore:unused_class_variable
 var current_left_brush_type = Brush_Types.PIXEL
-# warning-ignore:unused_class_variable
 var current_right_brush_type = Brush_Types.PIXEL
-# warning-ignore:unused_class_variable
+
 var brush_type_window_position := "left"
 var left_circle_points := []
 var right_circle_points := []
 
 var brushes_from_files := 0
-# warning-ignore:unused_class_variable
 var custom_brushes := []
-# warning-ignore:unused_class_variable
 var custom_left_brush_index := -1
-# warning-ignore:unused_class_variable
 var custom_right_brush_index := -1
-# warning-ignore:unused_class_variable
 var custom_left_brush_image : Image
-# warning-ignore:unused_class_variable
 var custom_right_brush_image : Image
-# warning-ignore:unused_class_variable
 var custom_left_brush_texture := ImageTexture.new()
-# warning-ignore:unused_class_variable
 var custom_right_brush_texture := ImageTexture.new()
 
+# Patterns
+var patterns := []
+var pattern_window_position := "left"
+var pattern_left_image : Image
+var pattern_right_image : Image
+
 # Palettes
-# warning-ignore:unused_class_variable
 var palettes := {}
 
 # Nodes
@@ -227,6 +185,7 @@ var right_brush_type_button : BaseButton
 var brushes_popup : Popup
 var file_brush_container : GridContainer
 var project_brush_container : GridContainer
+var patterns_popup : Popup
 
 var left_brush_size_edit : SpinBox
 var left_brush_size_slider : HSlider
@@ -241,7 +200,9 @@ var right_interpolate_spinbox : SpinBox
 var right_interpolate_slider : HSlider
 
 var left_fill_area_container : Container
+var left_fill_pattern_container : Container
 var right_fill_area_container : Container
+var right_fill_pattern_container : Container
 
 var left_ld_container : Container
 var left_ld_amount_slider : HSlider
@@ -291,6 +252,7 @@ var new_palette_name_line_edit : LineEdit
 var palette_import_file_dialog : FileDialog
 
 var error_dialog : AcceptDialog
+
 
 func _ready() -> void:
 	randomize()
@@ -352,6 +314,7 @@ func _ready() -> void:
 	brushes_popup = find_node_by_name(root, "BrushesPopup")
 	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
 	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
+	patterns_popup = find_node_by_name(root, "PatternsPopup")
 
 	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
 	left_brush_size_slider = find_node_by_name(root, "LeftBrushSizeSlider")
@@ -366,7 +329,9 @@ func _ready() -> void:
 	right_interpolate_slider = find_node_by_name(root, "RightInterpolateSlider")
 
 	left_fill_area_container = find_node_by_name(root, "LeftFillArea")
+	left_fill_pattern_container = find_node_by_name(root, "LeftFillPattern")
 	right_fill_area_container = find_node_by_name(root, "RightFillArea")
+	right_fill_pattern_container = find_node_by_name(root, "RightFillPattern")
 
 	left_ld_container = find_node_by_name(root, "LeftLDOptions")
 	left_ld_amount_slider = find_node_by_name(root, "LeftLDAmountSlider")
@@ -838,10 +803,12 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	brush_tex.create_from_image(brush_img, 0)
 	brush_button.get_child(0).texture = brush_tex
 	brush_button.hint_tooltip = hint_tooltip
+	brush_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	brush_button.connect("brush_selected",control,"_on_Brush_Selected")
 	if brush_type == Brush_Types.RANDOM_FILE:
 		brush_button.random_brushes.append(brush_img)
 	brush_container.add_child(brush_button)
+
 
 func remove_brush_buttons() -> void:
 	current_left_brush_type = Brush_Types.PIXEL
