@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -633,16 +633,22 @@ msgstr "0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement s
 msgid "Fill area:"
 msgstr "Remplissage de zone :"
 
-msgid "Area of the same color"
-msgstr "Zone de la même couleur"
-
-msgid "All pixels of the same color"
-msgstr "Tous les pixels de la même couleur"
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
