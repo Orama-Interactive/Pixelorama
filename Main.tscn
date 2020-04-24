@@ -678,21 +678,21 @@ ticks_on_borders = true
 [node name="LeftFillArea" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 71.0
-margin_right = 160.0
-margin_bottom = 155.0
+margin_right = 154.0
+margin_bottom = 252.0
 
 [node name="FillAreaLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 57.0
-margin_right = 103.0
+margin_left = 54.0
+margin_right = 100.0
 margin_bottom = 15.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill area:"
 
 [node name="LeftFillAreaOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 24.0
+margin_left = 21.0
 margin_top = 19.0
-margin_right = 136.0
+margin_right = 133.0
 margin_bottom = 40.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -702,17 +702,17 @@ items = [ "Same color area", null, false, 0, null, "Same color pixels", null, fa
 selected = 0
 
 [node name="FillWithLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 57.0
+margin_left = 54.0
 margin_top = 44.0
-margin_right = 102.0
+margin_right = 99.0
 margin_bottom = 59.0
 size_flags_horizontal = 4
 text = "Fill with:"
 
 [node name="LeftFillWithOptions" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
-margin_left = 42.0
+margin_left = 26.0
 margin_top = 63.0
-margin_right = 118.0
+margin_right = 127.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
@@ -722,18 +722,19 @@ selected = 0
 
 [node name="LeftFillPattern" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea"]
 visible = false
-margin_left = 59.0
+margin_left = 44.0
 margin_top = 88.0
-margin_right = 95.0
-margin_bottom = 120.0
+margin_right = 109.0
+margin_bottom = 181.0
 size_flags_horizontal = 4
 
 [node name="LeftPatternTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern"]
-margin_right = 36.0
+margin_left = 16.0
+margin_right = 48.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 36, 32 )
 hint_tooltip = "Select a brush"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
 texture_normal = ExtResource( 12 )
 
 [node name="PatternTexture" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/LeftPatternTypeButton"]
@@ -744,6 +745,46 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Offset" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern"]
+margin_top = 36.0
+margin_right = 65.0
+margin_bottom = 51.0
+text = "Offset"
+
+[node name="XOffset" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern"]
+margin_top = 55.0
+margin_right = 65.0
+margin_bottom = 72.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/XOffset"]
+margin_top = 1.0
+margin_right = 8.0
+margin_bottom = 16.0
+text = "X"
+
+[node name="LeftPatternOffsetX" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/XOffset"]
+margin_left = 11.0
+margin_right = 65.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+
+[node name="YOffset" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern"]
+margin_top = 76.0
+margin_right = 65.0
+margin_bottom = 93.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/YOffset"]
+margin_top = 1.0
+margin_right = 7.0
+margin_bottom = 16.0
+text = "Y"
+
+[node name="LeftPatternOffsetY" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/YOffset"]
+margin_left = 10.0
+margin_right = 64.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 
 [node name="LeftLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
@@ -1097,6 +1138,49 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Offset" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern"]
+margin_left = -185.0
+margin_top = 36.0
+margin_right = -120.0
+margin_bottom = 51.0
+text = "Offset"
+
+[node name="XOffset" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern"]
+margin_left = -185.0
+margin_top = 55.0
+margin_right = -120.0
+margin_bottom = 72.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/XOffset"]
+margin_top = 1.0
+margin_right = 8.0
+margin_bottom = 16.0
+text = "X"
+
+[node name="RightPatternOffsetX" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/XOffset"]
+margin_left = 11.0
+margin_right = 65.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+
+[node name="YOffset" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern"]
+margin_left = -185.0
+margin_top = 76.0
+margin_right = -120.0
+margin_bottom = 93.0
+
+[node name="Label" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/YOffset"]
+margin_top = 1.0
+margin_right = 7.0
+margin_bottom = 16.0
+text = "Y"
+
+[node name="RightPatternOffsetY" type="SpinBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/YOffset"]
+margin_left = 10.0
+margin_right = 64.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
 
 [node name="RightLDOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
@@ -1577,6 +1661,8 @@ visible = false
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillWithOptions" to="." method="_on_LeftFillWithOptions_item_selected"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/LeftPatternTypeButton" to="." method="_on_LeftPatternTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/XOffset/LeftPatternOffsetX" to="." method="_on_LeftPatternOffsetX_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillPattern/YOffset/LeftPatternOffsetY" to="." method="_on_LeftPatternOffsetY_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLightenDarken" to="." method="_on_LeftLightenDarken_item_selected"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmountSpinbox" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftLDOptions/LeftLDAmountSlider" to="." method="_on_LeftLDAmountSpinbox_value_changed"]
@@ -1594,6 +1680,8 @@ visible = false
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillWithOptions" to="." method="_on_RightFillWithOptions_item_selected"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/RightPatternTypeButton" to="." method="_on_RightPatternTypeButton_pressed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/XOffset/RightPatternOffsetX" to="." method="_on_RightPatternOffsetX_value_changed"]
+[connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillPattern/YOffset/RightPatternOffsetY" to="." method="_on_RightPatternOffsetY_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLightenDarken" to="." method="_on_RightLightenDarken_item_selected"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmountSpinbox" to="." method="_on_RightLDAmountSpinbox_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightLDOptions/RightLDAmountSlider" to="." method="_on_RightLDAmountSpinbox_value_changed"]

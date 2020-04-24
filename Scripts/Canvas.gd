@@ -340,12 +340,15 @@ func _input(event : InputEvent) -> void:
 			if can_handle:
 				var fill_with := 0
 				var pattern_image : Image
+				var pattern_offset : Vector2
 				if current_mouse_button == "left_mouse":
 					fill_with = Global.left_fill_with
 					pattern_image = Global.pattern_left_image
+					pattern_offset = Global.left_fill_pattern_offset
 				elif current_mouse_button == "right_mouse":
 					fill_with = Global.right_fill_with
 					pattern_image = Global.pattern_right_image
+					pattern_offset = Global.right_fill_pattern_offset
 
 				if fill_area == 0: # Paint the specific area of the same color
 					var horizontal_mirror := false
@@ -360,16 +363,16 @@ func _input(event : InputEvent) -> void:
 						vertical_mirror = Global.right_vertical_mirror
 
 					if fill_with == 1: # Pattern fill
-						pattern_fill(sprite, mouse_pos, pattern_image, sprite.get_pixelv(mouse_pos))
+						pattern_fill(sprite, mouse_pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if horizontal_mirror:
 							var pos := Vector2(mirror_x, mouse_pos.y)
-							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos))
+							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if vertical_mirror:
 							var pos := Vector2(mouse_pos.x, mirror_y)
-							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos))
+							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if horizontal_mirror && vertical_mirror:
 							var pos := Vector2(mirror_x, mirror_y)
-							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos))
+							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 					else: # Flood fill
 						flood_fill(sprite, mouse_pos, sprite.get_pixelv(mouse_pos), current_color)
 						if horizontal_mirror:
@@ -391,8 +394,8 @@ func _input(event : InputEvent) -> void:
 								if fill_with == 1: # Pattern fill
 									pattern_image.lock()
 									var pattern_size := pattern_image.get_size()
-									var xxx : int = int(xx) % int(pattern_size.x)
-									var yyy : int = int(yy) % int(pattern_size.y)
+									var xxx : int = int(xx + pattern_offset.x) % int(pattern_size.x)
+									var yyy : int = int(yy + pattern_offset.y) % int(pattern_size.y)
 									var pattern_color : Color = pattern_image.get_pixel(xxx, yyy)
 									sprite.set_pixel(xx, yy, pattern_color)
 									pattern_image.unlock()
@@ -889,7 +892,7 @@ func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_col
 		sprite_changed_this_frame = true
 
 
-func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color : Color) -> void:
+func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color : Color, var offset : Vector2) -> void:
 	pos = pos.floor()
 	if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
 		return
@@ -908,8 +911,8 @@ func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color :
 
 		for px in range(west.x + 1, east.x):
 			var p := Vector2(px, n.y)
-			var xx : int = int(px) % int(pattern_size.x)
-			var yy : int = int(n.y) % int(pattern_size.y)
+			var xx : int = int(px + offset.x) % int(pattern_size.x)
+			var yy : int = int(n.y + offset.y) % int(pattern_size.y)
 			var pattern_color : Color = pattern.get_pixel(xx, yy)
 			if pattern_color == target_color:
 				continue

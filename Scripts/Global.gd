@@ -83,6 +83,9 @@ var right_fill_area := 0
 var left_fill_with := 0
 var right_fill_with := 0
 
+var left_fill_pattern_offset := Vector2.ZERO
+var right_fill_pattern_offset := Vector2.ZERO
+
 # 0 for lighten, 1 for darken
 var left_ld := 0
 var right_ld := 0

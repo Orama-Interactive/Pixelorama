@@ -606,16 +606,22 @@ msgstr ""
 msgid "Fill area:"
 msgstr ""
 
-msgid "Area of the same color"
-msgstr ""
-
-msgid "All pixels of the same color"
-msgstr ""
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"

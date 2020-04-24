@@ -657,6 +657,22 @@ func _on_LeftPatternTypeButton_pressed() -> void:
 	Global.patterns_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
 
 
+func _on_LeftPatternOffsetX_value_changed(value : float) -> void:
+	Global.left_fill_pattern_offset.x = value
+
+
+func _on_LeftPatternOffsetY_value_changed(value : float) -> void:
+	Global.left_fill_pattern_offset.y = value
+
+
+func _on_RightPatternOffsetX_value_changed(value : float) -> void:
+	Global.right_fill_pattern_offset.x = value
+
+
+func _on_RightPatternOffsetY_value_changed(value : float) -> void:
+	Global.right_fill_pattern_offset.y = value
+
+
 func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
 	Global.right_fill_area = ID
 
