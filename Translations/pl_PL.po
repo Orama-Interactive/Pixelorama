@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-24 23:16\n"
+"PO-Revision-Date: 2020-04-24 23:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -641,16 +641,16 @@ msgid "Same color pixels"
 msgstr "Piksele tego samego koloru"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Wypełnij za pomocą:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Wybrany kolor"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Wzorzec"
 
 msgid "Offset"
-msgstr ""
+msgstr "Przesunięcie"
 
 msgid "Lighten"
 msgstr "Rozjaśnianie"
