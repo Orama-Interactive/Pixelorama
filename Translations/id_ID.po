@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-04-22 19:48\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -633,17 +633,23 @@ msgstr "0: Warna dari kuas sendiri, 100: warna dari yang dipilih saat ini"
 msgid "Fill area:"
 msgstr "Area \"fill\":"
 
-msgid "Area of the same color"
-msgstr ""
-
-msgid "All pixels of the same color"
-msgstr ""
-
 msgid "Same color area"
 msgstr "Area dengan warna yang sama"
 
 msgid "Same color pixels"
 msgstr "Pixel dengan warna yang sama"
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Terangkan"
