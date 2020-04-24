@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-23 20:25\n"
+"PO-Revision-Date: 2020-04-24 23:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -634,17 +634,23 @@ msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
 msgid "Fill area:"
 msgstr "Fülle Bereich"
 
-msgid "Area of the same color"
-msgstr "Bereich mit der selben Farbe"
-
-msgid "All pixels of the same color"
-msgstr "Alle Pixel mit der selben Farbe"
-
 msgid "Same color area"
 msgstr "Gleiche Farbfläche"
 
 msgid "Same color pixels"
 msgstr "Gleiche Farbpixel"
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
 
 msgid "Lighten"
 msgstr "Erhellen"
