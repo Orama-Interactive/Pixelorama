@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-25 19:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -530,10 +530,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Linkes Werkzeug"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Rechtes Werkzeug"
 
 msgid "Left pixel indicator"
 msgstr "Linke Pixelanzeige"
@@ -641,16 +641,16 @@ msgid "Same color pixels"
 msgstr "Gleiche Farbpixel"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Füllen mit:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Ausgewählte Farbe"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Muster"
 
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 msgid "Lighten"
 msgstr "Erhellen"
@@ -995,7 +995,7 @@ msgid "Gold Sponsors Placeholder"
 msgstr "Gold Sponsoren Platzhalter"
 
 msgid "Don't show again"
-msgstr "Nicht beim nächsten Start"
+msgstr "Nicht beim nächsten Start anzeigen"
 
 msgid "Take this spot!"
 msgstr "Nimm diesen Platz ein!"
