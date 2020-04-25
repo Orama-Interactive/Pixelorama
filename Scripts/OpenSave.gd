@@ -1,9 +1,23 @@
 extends Node
 
 var current_save_path := ""
+# Stores a filename of a backup file in user:// until user saves manually
+var backup_save_path = ""
+
+onready var autosave_timer : Timer
+var default_autosave_interval := 5 # Minutes
+
+func _ready():
+	autosave_timer = Timer.new()
+	autosave_timer.one_shot = false
+	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE
+	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
+	add_child(autosave_timer)
+	set_autosave_interval(default_autosave_interval)
+	toggle_autosave(false) # Gets started from preferences dialog
 
 
-func open_pxo_file(path : String) -> void:
+func open_pxo_file(path : String, backup : bool = false) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
 	if err == ERR_FILE_UNRECOGNIZED:
@@ -11,8 +25,8 @@ func open_pxo_file(path : String) -> void:
 
 	if err != OK:
 		file.close()
-		OS.alert("Can't load file")
 		return
+
 
 	var file_version := file.get_line() # Example, "v0.6"
 	var file_major_version = int(file_version.substr(1, 1))
@@ -133,12 +147,17 @@ func open_pxo_file(path : String) -> void:
 
 	file.close()
 
-	current_save_path = path
-	Global.window_title = path.get_file() + " - Pixelorama"
+	if not backup:
+		current_save_path = path
+		Global.window_title = path.get_file() + " - Pixelorama"
 
 
-func save_pxo_file(path : String) -> void:
-	current_save_path = path
+func save_pxo_file(path : String, autosave : bool) -> void:
+	# Manual save
+	if not autosave:
+		if current_save_path == "":
+			remove_backup_path()
+		current_save_path = path
 
 	var file := File.new()
 	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
@@ -211,8 +230,58 @@ func save_pxo_file(path : String) -> void:
 
 	file.close()
 
-	if !Global.saved:
+	if !Global.saved and not autosave:
 		Global.saved = true
 
-	Global.window_title = current_save_path.get_file() + " - Pixelorama"
-	Global.notification_label("File saved")
+	if autosave:
+		Global.notification_label("File autosaved")
+	else:
+		Global.notification_label("File saved")
+
+	if backup_save_path == "":
+		Global.window_title = path.get_file() + " - Pixelorama"
+
+
+func toggle_autosave(enable : bool):
+	if enable:
+		autosave_timer.start()
+	else:
+		autosave_timer.stop()
+
+
+func set_autosave_interval(interval : float):
+	autosave_timer.wait_time = interval * 60 # Interval parameter is in minutes, wait_time is seconds
+	autosave_timer.start()
+
+
+func _on_Autosave_timeout():
+	var autosave_path = ""
+	if current_save_path == "":
+		# File was not saved by user - autosave to user:// backup
+		if backup_save_path == "":
+			backup_save_path = "user://backup.pxo"
+			store_backup_path()
+		autosave_path = backup_save_path
+	else:
+		autosave_path = current_save_path
+
+	save_pxo_file(autosave_path, true)
+
+
+func store_backup_path():
+	Global.config_cache.set_value("preferences", "backup_save_path", backup_save_path)
+	Global.config_cache.save("user://cache.ini")
+
+
+func remove_backup_path():
+	backup_save_path = ""
+	Global.config_cache.erase_section_key("preferences", "backup_save_path")
+	Global.config_cache.save("user://cache.ini")
+
+
+func reopen_backup_file():
+	print(Global.config_cache)
+	if Global.config_cache.has_section_key("preferences", "backup_save_path"):
+		backup_save_path = Global.config_cache.get_value("preferences", "backup_save_path")
+		print("open pxo", backup_save_path)
+		open_pxo_file(backup_save_path, true)

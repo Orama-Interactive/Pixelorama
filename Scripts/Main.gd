@@ -189,10 +189,19 @@ func _ready() -> void:
 	else:
 		Global.can_draw = true
 
-	if not Global.config_cache.has_section_key("preferences", "open_last_project"):
-		Global.config_cache.set_value("preferences", "open_last_project", true)
-	if Global.config_cache.get_value("preferences", "open_last_project"):
-		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
+	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
+	$BackupConfirmation.get_cancel().text = tr("Delete")
+	$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete")
+	if Global.config_cache.has_section_key("preferences", "backup_save_path"):
+		# Temporatily stop autosave until user confirms backup
+		OpenSave.autosave_timer.stop()
+		$BackupConfirmation.dialog_text = $BackupConfirmation.dialog_text % OS.get_user_data_dir()
+		$BackupConfirmation.popup_centered()
+	else:
+		if not Global.config_cache.has_section_key("preferences", "open_last_project"):
+			Global.config_cache.set_value("preferences", "open_last_project", true)
+		if Global.config_cache.get_value("preferences", "open_last_project"):
+			Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
 		load_last_project()
 
 func _input(event : InputEvent) -> void:
@@ -451,7 +460,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
-	OpenSave.save_pxo_file(path)
+	OpenSave.save_pxo_file(path, false)
 
 	# Set last opened project path and save
 	Global.config_cache.set_value("preferences", "last_project_path", path)
@@ -784,3 +793,17 @@ func _on_QuitDialog_confirmed() -> void:
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
+
+
+func _on_BackupConfirmation_confirmed():
+	OpenSave.reopen_backup_file()
+	OpenSave.autosave_timer.start()
+
+
+func _on_BackupConfirmation_delete():
+	OpenSave.remove_backup_path()
+	OpenSave.autosave_timer.start()
+	# Reopen last project if delete backup
+	if Global.config_cache.get_value("preferences", "open_last_project"):
+		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
+		load_last_project()

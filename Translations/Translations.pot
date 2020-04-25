@@ -1067,3 +1067,13 @@ msgstr ""
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup found in %s.\n"
+"Do you want to reopen it?"
+msgstr ""
