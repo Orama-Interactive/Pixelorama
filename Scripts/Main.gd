@@ -202,7 +202,7 @@ func _ready() -> void:
 			Global.config_cache.set_value("preferences", "open_last_project", true)
 		if Global.config_cache.get_value("preferences", "open_last_project"):
 			Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
-		load_last_project()
+			load_last_project()
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
