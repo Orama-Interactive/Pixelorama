@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-24 23:16\n"
+"PO-Revision-Date: 2020-04-25 12:06\n"
 
 msgid "OK"
 msgstr "确定"
@@ -642,16 +642,16 @@ msgid "Same color pixels"
 msgstr "相同颜色像素"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "填充使用："
 
 msgid "Selected Color"
-msgstr ""
+msgstr "选择颜色"
 
 msgid "Pattern"
-msgstr ""
+msgstr "模式"
 
 msgid "Offset"
-msgstr ""
+msgstr "偏移"
 
 msgid "Lighten"
 msgstr "减淡"
