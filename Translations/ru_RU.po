@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-25 19:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -531,10 +531,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Левый инструмент"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Правый инструмент"
 
 msgid "Left pixel indicator"
 msgstr "Цвет для ЛКМ"
