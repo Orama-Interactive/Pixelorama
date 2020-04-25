@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-24 23:16\n"
+"PO-Revision-Date: 2020-04-25 12:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -530,11 +530,11 @@ msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χ�
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
 
-msgid "Left tool options"
-msgstr "Επιλογές αριστερού εργαλείου"
+msgid "Left tool"
+msgstr ""
 
-msgid "Right tool options"
-msgstr "Επιλογές δεξιού εργαλείου"
+msgid "Right tool"
+msgstr ""
 
 msgid "Left pixel indicator"
 msgstr "Δείκτης αριστερού πιξελ"
