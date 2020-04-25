@@ -176,7 +176,7 @@ var import_sprites_dialog : FileDialog
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
 
-var color_switch_button : TextureButton
+var color_switch_button : BaseButton
 
 var left_tool_options_container : Container
 var right_tool_options_container : Container
@@ -245,7 +245,7 @@ var merge_down_layer_button : BaseButton
 var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
-var add_palette_button : TextureButton
+var add_palette_button : BaseButton
 var edit_palette_button : BaseButton
 var palette_option_button : OptionButton
 var palette_container : GridContainer
@@ -549,7 +549,11 @@ func clear_canvases() -> void:
 	play_forward.pressed = false
 	animation_timer.stop()
 
-	window_title = "(" + tr("untitled") + ") - Pixelorama"
+	self.window_title = "(" + tr("untitled") + ") - Pixelorama"
+	OpenSave.current_save_path = ""
+	control.get_node("ExportDialog").was_exported = false
+	control.file_menu.set_item_text(3, tr("Save..."))
+	control.file_menu.set_item_text(6, tr("Export..."))
 	undo_redo.clear_history(false)
 
 
