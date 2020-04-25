@@ -362,7 +362,7 @@ func _input(event : InputEvent) -> void:
 						horizontal_mirror = Global.right_horizontal_mirror
 						vertical_mirror = Global.right_vertical_mirror
 
-					if fill_with == 1: # Pattern fill
+					if fill_with == 1 && pattern_image: # Pattern fill
 						pattern_fill(sprite, mouse_pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if horizontal_mirror:
 							var pos := Vector2(mirror_x, mouse_pos.y)
@@ -391,7 +391,7 @@ func _input(event : InputEvent) -> void:
 						for yy in range(north_limit, south_limit):
 							var c : Color = sprite.get_pixel(xx, yy)
 							if c == pixel_color:
-								if fill_with == 1: # Pattern fill
+								if fill_with == 1 && pattern_image: # Pattern fill
 									pattern_image.lock()
 									var pattern_size := pattern_image.get_size()
 									var xxx : int = int(xx + pattern_offset.x) % int(pattern_size.x)
