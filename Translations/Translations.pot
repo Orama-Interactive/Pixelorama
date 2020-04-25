@@ -501,10 +501,10 @@ msgstr ""
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
 
-msgid "Left tool options"
+msgid "Left tool"
 msgstr ""
 
-msgid "Right tool options"
+msgid "Right tool"
 msgstr ""
 
 msgid "Left pixel indicator"

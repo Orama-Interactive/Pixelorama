@@ -549,12 +549,12 @@ hint_tooltip = "Only custom preset can be modified"
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
 margin_top = 3.0
-margin_right = 49.0
+margin_right = 45.0
 margin_bottom = 17.0
-text = "Preset: "
+text = "Preset:"
 
 [node name="PresetOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
-margin_left = 53.0
+margin_left = 49.0
 margin_right = 306.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2

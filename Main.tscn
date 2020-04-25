@@ -582,8 +582,9 @@ size_flags_horizontal = 3
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_right = 160.0
 margin_bottom = 15.0
-text = "Left tool options"
+text = "Left tool"
 align = 1
+autowrap = true
 
 [node name="LeftBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 margin_top = 19.0
@@ -975,8 +976,9 @@ size_flags_horizontal = 3
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_right = 160.0
 margin_bottom = 15.0
-text = "Right tool options"
+text = "Right tool"
 align = 1
+autowrap = true
 
 [node name="RightBrushType" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 margin_top = 19.0
