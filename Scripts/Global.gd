@@ -198,6 +198,9 @@ var left_brush_size_slider : HSlider
 var right_brush_size_edit : SpinBox
 var right_brush_size_slider : HSlider
 
+var left_pixel_perfect_container : VBoxContainer
+var right_pixel_perfect_container : VBoxContainer
+
 var left_color_interpolation_container : Container
 var right_color_interpolation_container : Container
 var left_interpolate_spinbox : SpinBox
@@ -326,6 +329,9 @@ func _ready() -> void:
 	left_brush_size_slider = find_node_by_name(root, "LeftBrushSizeSlider")
 	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
 	right_brush_size_slider = find_node_by_name(root, "RightBrushSizeSlider")
+
+	left_pixel_perfect_container = find_node_by_name(root, "LeftBrushPixelPerfectMode")
+	right_pixel_perfect_container = find_node_by_name(root, "RightBrushPixelPerfectMode")
 
 	left_color_interpolation_container = find_node_by_name(root, "LeftColorInterpolation")
 	right_color_interpolation_container = find_node_by_name(root, "RightColorInterpolation")
