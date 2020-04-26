@@ -27,6 +27,17 @@ var is_making_selection := "None"
 var line_2d : Line2D
 var pen_pressure := 1.0 # For tablet pressure sensitivity
 
+const Drawer = preload("Drawers.gd").Drawer
+const SimpleDrawer = preload("Drawers.gd").SimpleDrawer
+const PixelPerfectDrawer = preload("Drawers.gd").PixelPerfectDrawer
+
+var pixel_perfect_drawer := PixelPerfectDrawer.new()
+var pixel_perfect_drawer_h_mirror := PixelPerfectDrawer.new()
+var pixel_perfect_drawer_v_mirror := PixelPerfectDrawer.new()
+var pixel_perfect_drawer_hv_mirror := PixelPerfectDrawer.new()
+var simple_drawer := SimpleDrawer.new()
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var fill_layers := layers.empty()
@@ -219,6 +230,10 @@ func _input(event : InputEvent) -> void:
 		made_line = false
 		mouse_press_pixels.clear()
 		mouse_press_pressure_values.clear()
+		pixel_perfect_drawer.reset()
+		pixel_perfect_drawer_h_mirror.reset()
+		pixel_perfect_drawer_v_mirror.reset()
+		pixel_perfect_drawer_hv_mirror.reset()
 		can_undo = true
 
 	current_pixel = get_local_mouse_position() + location
@@ -610,8 +625,11 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		var brush_type = Global.Brush_Types.PIXEL
 		var brush_index := -1
 		var custom_brush_image : Image
+
 		var horizontal_mirror := false
 		var vertical_mirror := false
+		var pixel_perfect := false
+
 		var ld := 0
 		var ld_amount := 0.1
 		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
@@ -637,6 +655,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 			horizontal_mirror = Global.left_horizontal_mirror
 			vertical_mirror = Global.left_vertical_mirror
+			pixel_perfect = Global.left_pixel_perfect
 			ld = Global.left_ld
 			ld_amount = Global.left_ld_amount
 
@@ -658,6 +677,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 			horizontal_mirror = Global.right_horizontal_mirror
 			vertical_mirror = Global.right_vertical_mirror
+			pixel_perfect = Global.right_pixel_perfect
 			ld = Global.right_ld
 			ld_amount = Global.right_ld_amount
 
@@ -667,6 +687,11 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		var end_pos_y
 
 		if brush_type == Global.Brush_Types.PIXEL || current_action == "LightenDarken":
+			var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
+			var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
+			var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
+			var drawer_hv_mirror = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
+
 			start_pos_x = pos.x - (brush_size >> 1)
 			start_pos_y = pos.y - (brush_size >> 1)
 			end_pos_x = start_pos_x + brush_size
@@ -696,7 +721,8 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 								mouse_press_pressure_values.append(pen_pressure)
 							else:
 								mouse_press_pressure_values[saved_pixel_index] = pen_pressure
-							sprite.set_pixel(cur_pos_x, cur_pos_y, _c)
+							drawer.set_pixel(sprite, Vector2(cur_pos_x, cur_pos_y), _c)
+
 							sprite_changed_this_frame = true
 
 							# Handle mirroring
@@ -713,7 +739,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 									mouse_press_pixels.append(pos_floored)
 									mouse_press_pressure_values.append(pen_pressure)
-									sprite.set_pixel(mirror_x, cur_pos_y, _c)
+									drawer_h_mirror.set_pixel(sprite, Vector2(mirror_x, cur_pos_y), _c)
 									sprite_changed_this_frame = true
 
 							if vertical_mirror:
@@ -726,7 +752,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 											_c = current_pixel_color.darkened(ld_amount)
 									mouse_press_pixels.append(pos_floored)
 									mouse_press_pressure_values.append(pen_pressure)
-									sprite.set_pixel(cur_pos_x, mirror_y, _c)
+									drawer_v_mirror.set_pixel(sprite, Vector2(cur_pos_x, mirror_y), _c)
 									sprite_changed_this_frame = true
 
 							if horizontal_mirror && vertical_mirror:
@@ -740,7 +766,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 									mouse_press_pixels.append(pos_floored)
 									mouse_press_pressure_values.append(pen_pressure)
-									sprite.set_pixel(mirror_x, mirror_y, _c)
+									drawer_hv_mirror.set_pixel(sprite, Vector2(mirror_x, mirror_y), _c)
 									sprite_changed_this_frame = true
 
 		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:

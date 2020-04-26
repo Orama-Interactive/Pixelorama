@@ -105,6 +105,9 @@ var left_vertical_mirror := false
 var right_horizontal_mirror := false
 var right_vertical_mirror := false
 
+var left_pixel_perfect := true
+var right_pixel_perfect := true
+
 # View menu options
 var tile_mode := false
 var draw_grid := false

@@ -784,3 +784,11 @@ func _on_QuitDialog_confirmed() -> void:
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
+
+
+func _on_LeftPixelPerfectMode_toggled(button_pressed) -> void:
+	Global.left_pixel_perfect = button_pressed
+
+
+func _on_RightPixelPerfectMode_toggled(button_pressed) -> void:
+	Global.right_pixel_perfect = button_pressed
