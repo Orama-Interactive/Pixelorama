@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-26 10:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -530,10 +530,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Lewe narzędzie"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Prawe narzędzie"
 
 msgid "Left pixel indicator"
 msgstr "Wskaźnik lewego pędzla"
