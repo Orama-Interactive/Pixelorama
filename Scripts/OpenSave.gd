@@ -209,10 +209,10 @@ func save_pxo_file(path : String) -> void:
 			file.store_8(tag[3]) # Tag "to", the last frame
 		file.store_line("END_FRAME_TAGS")
 
+		if !Global.saved:
+			Global.saved = true
+
+		Global.window_title = current_save_path.get_file() + " - Pixelorama"
+		Global.notification_label("File saved")
 	file.close()
 
-	if !Global.saved:
-		Global.saved = true
-
-	Global.window_title = current_save_path.get_file() + " - Pixelorama"
-	Global.notification_label("File saved")
