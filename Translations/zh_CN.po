@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-27 15:40\n"
 
 msgid "OK"
 msgstr "确定"
@@ -531,10 +531,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "重置颜色为默认状态（黑色为左，白色为右）"
 
 msgid "Left tool"
-msgstr ""
+msgstr "左键工具"
 
 msgid "Right tool"
-msgstr ""
+msgstr "右键工具"
 
 msgid "Left pixel indicator"
 msgstr "左键工具指示"
