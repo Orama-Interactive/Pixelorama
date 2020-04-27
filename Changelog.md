@@ -17,6 +17,7 @@ Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Ga
 - An HSV Adjust dialog has been added in the Images menu.
 - Pattern filling is now possible. The bucket tool can now use Patterns to fill areas, instead of a single color.
 - Users can now change keyboard shortcut bindings for tools, in the Preferences.
+- Pixel Perfect mode has been added for pencil, eraser and lighten/darken tools.
 - Importing .pngs as palettes is now possible.
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
 - The last edited project gets loaded at startup (toggleable in the Preferences), along with a new option in the File menu that also does this.
