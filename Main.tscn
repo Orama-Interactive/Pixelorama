@@ -637,6 +637,23 @@ value = 1.0
 allow_greater = true
 ticks_on_borders = true
 
+[node name="LeftBrushPixelPerfectMode" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
+margin_top = 71.0
+margin_right = 160.0
+margin_bottom = 87.0
+alignment = 1
+
+[node name="LeftPixelPerfectMode" type="CheckBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushPixelPerfectMode"]
+margin_left = 36.0
+margin_right = 123.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+pressed = true
+text = "Pixel Perfect"
+align = 1
+
 [node name="LeftColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
 visible = false
 margin_top = 75.0
@@ -1030,6 +1047,23 @@ min_value = 1.0
 value = 1.0
 allow_greater = true
 ticks_on_borders = true
+
+[node name="RightBrushPixelPerfectMode" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
+margin_top = 71.0
+margin_right = 160.0
+margin_bottom = 87.0
+alignment = 1
+
+[node name="RightPixelPerfectMode" type="CheckBox" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushPixelPerfectMode"]
+margin_left = 36.0
+margin_right = 123.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+pressed = true
+text = "Pixel Perfect"
+align = 1
 
 [node name="RightColorInterpolation" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
 visible = false
@@ -1658,6 +1692,7 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushTypeButton" to="." method="_on_LeftBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushType/LeftBrushSizeEdit" to="." method="_on_LeftBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushSizeSlider" to="." method="_on_LeftBrushSizeEdit_value_changed"]
+[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftBrushPixelPerfectMode/LeftPixelPerfectMode" to="." method="_on_LeftPixelPerfectMode_toggled"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/LeftInterpolateFactor" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftColorInterpolation/LeftInterpolateSlider" to="." method="_on_LeftInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftFillArea/LeftFillAreaOptions" to="." method="_on_LeftFillAreaOptions_item_selected"]
@@ -1677,6 +1712,7 @@ visible = false
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushTypeButton" to="." method="_on_RightBrushTypeButton_pressed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushType/RightBrushSizeEdit" to="." method="_on_RightBrushSizeEdit_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushSizeSlider" to="." method="_on_RightBrushSizeEdit_value_changed"]
+[connection signal="toggled" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightBrushPixelPerfectMode/RightPixelPerfectMode" to="." method="_on_RightPixelPerfectMode_toggled"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/RightInterpolateFactor" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="value_changed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightColorInterpolation/RightInterpolateSlider" to="." method="_on_RightInterpolateFactor_value_changed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightFillArea/RightFillAreaOptions" to="." method="_on_RightFillAreaOptions_item_selected"]

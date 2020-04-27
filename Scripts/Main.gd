@@ -495,12 +495,14 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		if current_action == "Pencil":
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
+			Global.left_pixel_perfect_container.visible = true
 			Global.left_mirror_container.visible = true
 			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
+			Global.left_pixel_perfect_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "Bucket":
 			Global.left_fill_area_container.visible = true
@@ -508,6 +510,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		elif current_action == "LightenDarken":
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
+			Global.left_pixel_perfect_container.visible = true
 			Global.left_ld_container.visible = true
 			Global.left_mirror_container.visible = true
 		elif current_action == "ColorPicker":
@@ -527,12 +530,14 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		if current_action == "Pencil":
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
+			Global.right_pixel_perfect_container.visible = true
 			Global.right_mirror_container.visible = true
 			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
 		elif current_action == "Eraser":
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
+			Global.right_pixel_perfect_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "Bucket":
 			Global.right_fill_area_container.visible = true
@@ -540,6 +545,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		elif current_action == "LightenDarken":
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
+			Global.right_pixel_perfect_container.visible = true
 			Global.right_ld_container.visible = true
 			Global.right_mirror_container.visible = true
 		elif current_action == "ColorPicker":
@@ -784,3 +790,11 @@ func _on_QuitDialog_confirmed() -> void:
 	modulate = Color(0.5, 0.5, 0.5)
 
 	get_tree().quit()
+
+
+func _on_LeftPixelPerfectMode_toggled(button_pressed) -> void:
+	Global.left_pixel_perfect = button_pressed
+
+
+func _on_RightPixelPerfectMode_toggled(button_pressed) -> void:
+	Global.right_pixel_perfect = button_pressed
