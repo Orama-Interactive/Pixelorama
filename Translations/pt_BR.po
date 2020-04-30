@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-30 11:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -184,7 +184,7 @@ msgid "Frame:"
 msgstr "Quadro:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientação:"
 
 msgid "Browse"
 msgstr "Localizar"
@@ -214,7 +214,7 @@ msgid "Background:"
 msgstr "Plano de fundo:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direção:"
 
 msgid "Forward"
 msgstr "Avançar"
@@ -642,13 +642,13 @@ msgid "Same color pixels"
 msgstr "Pixels de mesma cor"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Preencher com:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Cor selecionada"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Padrão"
 
 msgid "Offset"
 msgstr ""
