@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-30 17:36\n"
+"PO-Revision-Date: 2020-04-30 17:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -531,10 +531,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Αριστερό εργαλείο"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Δεξί εργαλείο"
 
 msgid "Left pixel indicator"
 msgstr "Δείκτης αριστερού πιξελ"
@@ -642,16 +642,16 @@ msgid "Same color pixels"
 msgstr "Πίξελς ίδιου χρώματος"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Γέμισμα με:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Επιλεγμένο χρώμα"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Μοτίβο"
 
 msgid "Offset"
-msgstr ""
+msgstr "Μετατόπιση"
 
 msgid "Lighten"
 msgstr "Φώτισμα"
@@ -805,7 +805,7 @@ msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Σύνδεση Cel"
 
 msgid "Unlink Cel"
 msgstr "Αποσύνδεση Cel"
