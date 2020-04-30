@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/loop_pingpong.png-8d4f7f2b74a8666090f627aa85a5a720.stex"
+path="res://.import/Loop_PingPong.png-58cd0432f6a37e7bc7d6279748a66b8c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/loop_pingpong.png"
-dest_files=[ "res://.import/loop_pingpong.png-8d4f7f2b74a8666090f627aa85a5a720.stex" ]
+source_file="res://Assets/Graphics/Dark Themes/Timeline/Loop_PingPong.png"
+dest_files=[ "res://.import/Loop_PingPong.png-58cd0432f6a37e7bc7d6279748a66b8c.stex" ]
 
 [params]
 

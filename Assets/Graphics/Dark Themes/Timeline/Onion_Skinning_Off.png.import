@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/onion_skinning_off.png-365583ce204e4c110b8e16e511cb7c7e.stex"
+path="res://.import/Onion_Skinning_Off.png-44f6d168808bd3a953b10c86bdbe33fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/onion_skinning_off.png"
-dest_files=[ "res://.import/onion_skinning_off.png-365583ce204e4c110b8e16e511cb7c7e.stex" ]
+source_file="res://Assets/Graphics/Dark Themes/Timeline/Onion_Skinning_Off.png"
+dest_files=[ "res://.import/Onion_Skinning_Off.png-44f6d168808bd3a953b10c86bdbe33fb.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/previous_frame.png-d2c4038594311722dea38292cc4006f3.stex"
+path="res://.import/Previous_Frame.png-c8179b1bfea52864ca7b33d314df9a8d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Light Themes/Timeline/previous_frame.png"
-dest_files=[ "res://.import/previous_frame.png-d2c4038594311722dea38292cc4006f3.stex" ]
+source_file="res://Assets/Graphics/Light Themes/Timeline/Previous_Frame.png"
+dest_files=[ "res://.import/Previous_Frame.png-c8179b1bfea52864ca7b33d314df9a8d.stex" ]
 
 [params]
 

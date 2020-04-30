@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Dialogs/FrameTagDialog.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/new_frame.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame_Hover.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/New_Frame.png" type="Texture" id=3]
 
 [node name="FrameTagDialog" type="AcceptDialog"]
 margin_right = 83.0
@@ -47,28 +48,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddTag" type="Button" parent="VBoxContainer/ScrollContainer/VBoxTagContainer" groups=[
+[node name="AddTag" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxTagContainer" groups=[
 "UIButtons",
 ]]
 margin_top = 8.0
 margin_right = 20.0
 margin_bottom = 28.0
-rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Add a new frame tag"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -6.0
-margin_top = -6.0
-margin_right = 6.0
-margin_bottom = 6.0
-texture = ExtResource( 2 )
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

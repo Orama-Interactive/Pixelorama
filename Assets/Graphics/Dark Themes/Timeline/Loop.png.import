@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/loop.png-411d33b6dd4b1874858fe9241712e45f.stex"
+path="res://.import/Loop.png-2f58d7f6e3b796f3e2310f73194e6674.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/loop.png"
-dest_files=[ "res://.import/loop.png-411d33b6dd4b1874858fe9241712e45f.stex" ]
+source_file="res://Assets/Graphics/Dark Themes/Timeline/Loop.png"
+dest_files=[ "res://.import/Loop.png-2f58d7f6e3b796f3e2310f73194e6674.stex" ]
 
 [params]
 

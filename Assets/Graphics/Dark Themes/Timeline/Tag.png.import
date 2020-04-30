@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tag.png-6e123b1adbdbf7509cc4aafb3fcb6324.stex"
+path="res://.import/Tag.png-855015abac1d10cd3efd9c78dea7d2c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/tag.png"
-dest_files=[ "res://.import/tag.png-6e123b1adbdbf7509cc4aafb3fcb6324.stex" ]
+source_file="res://Assets/Graphics/Dark Themes/Timeline/Tag.png"
+dest_files=[ "res://.import/Tag.png-855015abac1d10cd3efd9c78dea7d2c5.stex" ]
 
 [params]
 

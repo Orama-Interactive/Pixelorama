@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/new_frame.png-ac503cf2991ac9c63563a6e7642c7a88.stex"
+path="res://.import/New_Frame.png-a2fa19e28662f4ecc56fbd9393cb9105.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Timeline/new_frame.png"
-dest_files=[ "res://.import/new_frame.png-ac503cf2991ac9c63563a6e7642c7a88.stex" ]
+source_file="res://Assets/Graphics/Dark Themes/Timeline/New_Frame.png"
+dest_files=[ "res://.import/New_Frame.png-a2fa19e28662f4ecc56fbd9393cb9105.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/expandable.png-4f21e3c837ebeea9b0e77b9b23080505.stex"
+path="res://.import/Expandable.png-064b49cba427018bac4f9e2da342487a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Light Themes/Timeline/expandable.png"
-dest_files=[ "res://.import/expandable.png-4f21e3c837ebeea9b0e77b9b23080505.stex" ]
+source_file="res://Assets/Graphics/Light Themes/Timeline/Expandable.png"
+dest_files=[ "res://.import/Expandable.png-064b49cba427018bac4f9e2da342487a.stex" ]
 
 [params]
 

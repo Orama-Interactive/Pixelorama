@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Palette/EditPalettePopup.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/new_frame.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/remove_frame.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Palette/new_swatch_button.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Palette/new_swatch_button_hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Palette/remove_swatch_button.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Palette/remove_swatch_button_hover.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=6]
 
 [node name="EditPalettePopup" type="WindowDialog"]
@@ -28,8 +30,10 @@ margin_bottom = 462.0
 size_flags_vertical = 3
 
 [node name="EditPaletteColorPicker" type="ColorPicker" parent="VBoxContainer/HBoxContainer"]
-margin_right = 308.0
-margin_bottom = 462.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 312.0
@@ -83,7 +87,6 @@ margin_bottom = 32.0
 margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
-mouse_default_cursor_shape = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/LeftColor"]
 modulate = Color( 0, 0, 0, 1 )
@@ -101,7 +104,6 @@ margin_left = 68.0
 margin_right = 132.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
-mouse_default_cursor_shape = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/RightColor"]
 margin_left = 2.0
@@ -118,49 +120,18 @@ margin_left = 560.0
 margin_right = 580.0
 margin_bottom = 462.0
 
-[node name="AddSwatchButton" type="Button" parent="VBoxContainer/HBoxContainer/ColorButtons" groups=[
-"UIButtons",
-]]
+[node name="AddSwatchButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ColorButtons"]
 margin_right = 20.0
 margin_bottom = 20.0
-mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ColorButtons/AddSwatchButton"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -6.0
-margin_top = -6.0
-margin_right = 6.0
-margin_bottom = 6.0
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RemoveSwatchButton" type="Button" parent="VBoxContainer/HBoxContainer/ColorButtons" groups=[
-"UIButtons",
-]]
+[node name="RemoveSwatchButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ColorButtons"]
 margin_top = 24.0
 margin_right = 20.0
 margin_bottom = 44.0
-rect_min_size = Vector2( 20, 0 )
-mouse_default_cursor_shape = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ColorButtons/RemoveSwatchButton"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -6.0
-margin_top = -1.0
-margin_right = 6.0
-margin_bottom = 1.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
 
 [node name="PaletteOptions" type="GridContainer" parent="VBoxContainer"]
 margin_top = 470.0
