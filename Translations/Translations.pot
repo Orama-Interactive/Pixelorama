@@ -1074,6 +1074,6 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Autosaved backup found in %s.\n"
-"Do you want to reopen it?"
+msgid "Autosaved backup for %s was found."
+"Do you want to reload it?"
 msgstr ""
