@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-30 17:36\n"
 
 msgid "OK"
 msgstr "確定"
@@ -943,6 +943,15 @@ msgstr "移動輔助線"
 msgid "File saved"
 msgstr "檔案已儲存"
 
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
+
 msgid "File exported"
 msgstr "檔案已輸出"
 
@@ -1100,5 +1109,17 @@ msgid "Create new directory for each frame tag"
 msgstr ""
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
 msgstr ""
 
