@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.7] - Unreleased
 This update has been brought to you by the contributions of:
 
-Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese), sapient-cogbag, Kinwailo, Igor Santarek (jegor377)
+Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese),
+sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonfi)
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
@@ -17,6 +18,7 @@ Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Ga
 - An HSV Adjust dialog has been added in the Images menu.
 - Pattern filling is now possible. The bucket tool can now use Patterns to fill areas, instead of a single color.
 - Users can now change keyboard shortcut bindings for tools, in the Preferences.
+- Pixel Perfect mode has been added for pencil, eraser and lighten/darken tools.
 - Importing .pngs as palettes is now possible.
 - A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
 - The last edited project gets loaded at startup (toggleable in the Preferences), along with a new option in the File menu that also does this.

@@ -308,3 +308,4 @@ func reload_backup_file(project_path : String, backup_path : String) -> void:
 		Global.saved = false
 
 	Global.notification_label("Backup reloaded")
+
