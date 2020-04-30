@@ -909,6 +909,15 @@ msgstr ""
 msgid "File saved"
 msgstr ""
 
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
+
 msgid "File exported"
 msgstr ""
 
@@ -1076,4 +1085,7 @@ msgstr ""
 
 msgid "Autosaved backup for %s was found."
 "Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
 msgstr ""
