@@ -17,6 +17,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
 - An HSV Adjust dialog has been added in the Images menu.
 - Pattern filling is now possible. The bucket tool can now use Patterns to fill areas, instead of a single color.
+- An autosave feature that keeps backups of unsaved projects have been added. In the case of a software crash, the users can restore their work with this system.
 - Users can now change keyboard shortcut bindings for tools, in the Preferences.
 - Pixel Perfect mode has been added for pencil, eraser and lighten/darken tools.
 - Importing .pngs as palettes is now possible.
@@ -25,7 +26,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - Templates and a lock aspect ratio option have been added to the "Create new image" dialog.
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
-- Esperanto translation.
+- Esperanto & Indonesian translation.
 - When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
 - A new zoom tool has been added, and you can also zoom in with the `+` key, and zoom out with `-`.
 - You can now move the canvas with the `Arrow keys`. `Shift + Arrows` make it move with medium speed, and `Ctrl + Shift + Arrows` makes it move with high speed.
@@ -49,7 +50,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - The default window size is now 1280x720, and the minimum window size is 1024x576.
 - .pxo files now use ZSTD compression to result in smaller file sizes.
 - Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard linux/bsd packaging methods and for better per-user usability.
-- The splash screen is no longer purple, it now gets affected by the chosen theme.
+- The splash screen has been revamped and is no longer purple, it now gets affected by the chosen theme.
 - The brush selection popup now closes when a brush is selected.
 
 ### Fixed

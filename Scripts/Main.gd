@@ -210,9 +210,11 @@ func _ready() -> void:
 			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths[0], backup_path])
 			$BackupConfirmation.popup_centered()
 		else:
-			load_last_project()
+			if Global.open_last_project:
+				load_last_project()
 	else:
-		load_last_project()
+		if Global.open_last_project:
+			load_last_project()
 
 
 func _input(event : InputEvent) -> void:
@@ -439,18 +441,17 @@ func help_menu_id_pressed(id : int) -> void:
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
 
-func load_last_project():
-	if Global.open_last_project:
-		# Check if any project was saved or opened last time
-		if Global.config_cache.has_section_key("preferences", "last_project_path"):
-			# Check if file still exists on disk
-			var file_path = Global.config_cache.get_value("preferences", "last_project_path")
-			var file_check := File.new()
-			if file_check.file_exists(file_path): # If yes then load the file
-				_on_OpenSprite_file_selected(file_path)
-			else:
-				# If file doesn't exist on disk then warn user about this
-				$OpenLastProjectAlertDialog.popup_centered()
+func load_last_project() -> void:
+	# Check if any project was saved or opened last time
+	if Global.config_cache.has_section_key("preferences", "last_project_path"):
+		# Check if file still exists on disk
+		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
+		var file_check := File.new()
+		if file_check.file_exists(file_path): # If yes then load the file
+			_on_OpenSprite_file_selected(file_path)
+		else:
+			# If file doesn't exist on disk then warn user about this
+			$OpenLastProjectAlertDialog.popup_centered()
 
 
 func _on_UnsavedCanvasDialog_confirmed() -> void:
@@ -828,12 +829,13 @@ func _on_BackupConfirmation_delete(project_path : String, backup_path : String) 
 	OpenSave.remove_backup_by_path(project_path, backup_path)
 	OpenSave.autosave_timer.start()
 	# Reopen last project
-	load_last_project()
+	if Global.open_last_project:
+		load_last_project()
 
 
-func _on_LeftPixelPerfectMode_toggled(button_pressed) -> void:
+func _on_LeftPixelPerfectMode_toggled(button_pressed : bool) -> void:
 	Global.left_pixel_perfect = button_pressed
 
 
-func _on_RightPixelPerfectMode_toggled(button_pressed) -> void:
+func _on_RightPixelPerfectMode_toggled(button_pressed : bool) -> void:
 	Global.right_pixel_perfect = button_pressed

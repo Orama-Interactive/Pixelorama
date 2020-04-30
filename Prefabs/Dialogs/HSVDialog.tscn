@@ -8,6 +8,7 @@ margin_top = -1.0
 margin_right = 464.0
 margin_bottom = 318.0
 window_title = "Adjust HSV"
+resizable = true
 script = ExtResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
