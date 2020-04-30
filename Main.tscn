@@ -941,15 +941,15 @@ size_flags_horizontal = 4
 text = "100% Zoom"
 
 [node name="EmptySpacer" type="Control" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
-margin_top = 71.0
+margin_top = 91.0
 margin_right = 160.0
-margin_bottom = 83.0
+margin_bottom = 103.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="LeftMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions"]
-margin_top = 87.0
+margin_top = 107.0
 margin_right = 160.0
-margin_bottom = 104.0
+margin_bottom = 124.0
 custom_constants/separation = 44
 alignment = 1
 
@@ -1354,15 +1354,15 @@ size_flags_horizontal = 4
 text = "100% Zoom"
 
 [node name="EmptySpacer" type="Control" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
-margin_top = 71.0
+margin_top = 91.0
 margin_right = 160.0
-margin_bottom = 83.0
+margin_bottom = 103.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="RightMirrorButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions"]
-margin_top = 87.0
+margin_top = 107.0
 margin_right = 160.0
-margin_bottom = 104.0
+margin_bottom = 124.0
 custom_constants/separation = 44
 alignment = 1
 
