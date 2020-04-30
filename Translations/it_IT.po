@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-25 19:26\n"
+"PO-Revision-Date: 2020-04-30 17:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -947,6 +947,15 @@ msgstr "Muovi la guida"
 msgid "File saved"
 msgstr "File salvato"
 
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
+
 msgid "File exported"
 msgstr "File esportato"
 
@@ -1105,4 +1114,16 @@ msgstr "Crea nuova cartella per ogni tag frame"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr "Crea più file ma ogni file è memorizzato in una cartella diversa che corrisponde al tag frame"
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
+msgstr ""
 
