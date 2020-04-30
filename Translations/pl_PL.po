@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-30 17:36\n"
+"PO-Revision-Date: 2020-04-30 17:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -947,13 +947,13 @@ msgid "File saved"
 msgstr "Plik został zapisany"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Automatycznie zapisano plik"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Nie udało się otworzyć pliku"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Nie udało się zapisać pliku"
 
 msgid "File exported"
 msgstr "Plik został wyeksportowany"
@@ -1115,14 +1115,14 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr "Tworzy wiele plików, ale każdy plik jest przechowywany w innym katalogu, który odpowiada tagowi ramki"
 
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 msgid "Autosaved backup for %s was found.Do you want to reload it?"
-msgstr ""
+msgstr "Znaleziono automatyczną kopię zapasową dla %s. Czy chcesz ją wczytać?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Wczytano ponownię kopię zapasową"
 
