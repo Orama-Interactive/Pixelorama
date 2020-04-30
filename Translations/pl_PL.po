@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-26 10:35\n"
+"PO-Revision-Date: 2020-04-30 17:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -946,6 +946,15 @@ msgstr "Przesuń prowadnice"
 msgid "File saved"
 msgstr "Plik został zapisany"
 
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
+
 msgid "File exported"
 msgstr "Plik został wyeksportowany"
 
@@ -1104,4 +1113,16 @@ msgstr "Utwórz nowy katalog dla każdego tagu klatek"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr "Tworzy wiele plików, ale każdy plik jest przechowywany w innym katalogu, który odpowiada tagowi ramki"
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
+msgstr ""
 
