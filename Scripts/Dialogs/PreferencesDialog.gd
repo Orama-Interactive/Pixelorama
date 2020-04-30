@@ -342,19 +342,29 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
 	for button in get_tree().get_nodes_in_group("UIButtons"):
-		var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
-		var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
-		var normal_file_name = button.texture_normal.resource_path.get_file()
-		button.texture_normal = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, normal_file_name])
-		if button.texture_pressed:
-			var pressed_file_name = button.texture_pressed.resource_path.get_file()
-			button.texture_pressed = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, pressed_file_name])
-		if button.texture_hover:
-			var hover_file_name = button.texture_hover.resource_path.get_file()
-			button.texture_hover = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, hover_file_name])
-		if button.texture_disabled:
-			var disabled_file_name = button.texture_disabled.resource_path.get_file()
-			button.texture_disabled = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, disabled_file_name])
+		if button is TextureButton:
+			var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
+			var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
+			var normal_file_name = button.texture_normal.resource_path.get_file()
+			button.texture_normal = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, normal_file_name])
+			if button.texture_pressed:
+				var pressed_file_name = button.texture_pressed.resource_path.get_file()
+				button.texture_pressed = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, pressed_file_name])
+			if button.texture_hover:
+				var hover_file_name = button.texture_hover.resource_path.get_file()
+				button.texture_hover = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, hover_file_name])
+			if button.texture_disabled:
+				var disabled_file_name = button.texture_disabled.resource_path.get_file()
+				button.texture_disabled = load("res://Assets/Graphics/%s Themes/%s/%s" % [Global.theme_type, button_category, disabled_file_name])
+		elif button is Button:
+			var theme_type := Global.theme_type
+			if theme_type == "Gold":
+				theme_type = "Light"
+			var texture : TextureRect = button.get_child(0)
+			var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
+			var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
+			var normal_file_name = texture.texture.resource_path.get_file()
+			texture.texture = load("res://Assets/Graphics/%s Themes/%s/%s" % [theme_type, button_category, normal_file_name])
 
 	# Make sure the frame text gets updated
 	Global.current_frame = Global.current_frame

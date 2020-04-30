@@ -175,12 +175,11 @@ func _on_FrameTagButton_pressed() -> void:
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.update()
+	var texture_button : TextureRect = Global.onion_skinning_button.get_child(0)
 	if Global.onion_skinning:
-		Global.onion_skinning_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning.png" % Global.theme_type)
-		Global.onion_skinning_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning_Hover.png" % Global.theme_type)
+		texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/onion_skinning.png" % Global.theme_type)
 	else:
-		Global.onion_skinning_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning_Off.png" % Global.theme_type)
-		Global.onion_skinning_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Onion_Skinning_Off_Hover.png" % Global.theme_type)
+		texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/onion_skinning_off.png" % Global.theme_type)
 
 
 func _on_OnionSkinningSettings_pressed() -> void:
@@ -188,29 +187,46 @@ func _on_OnionSkinningSettings_pressed() -> void:
 
 
 func _on_LoopAnim_pressed() -> void:
+	var texture_button : TextureRect = Global.loop_animation_button.get_child(0)
+	var theme_type := Global.theme_type
+	if theme_type == "Gold":
+		theme_type = "Light"
 	match animation_loop:
 		0: # Make it loop
 			animation_loop = 1
-			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop.png" % Global.theme_type)
-			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_Hover.png" % Global.theme_type)
+			texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/loop.png" % theme_type)
 			Global.loop_animation_button.hint_tooltip = "Cycle loop"
 		1: # Make it ping-pong
 			animation_loop = 2
-			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong.png" % Global.theme_type)
-			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_PingPong_Hover.png" % Global.theme_type)
+			texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/loop_pingpong.png" % theme_type)
 			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
 		2: # Make it stop
 			animation_loop = 0
-			Global.loop_animation_button.texture_normal = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None.png" % Global.theme_type)
-			Global.loop_animation_button.texture_hover = load("res://Assets/Graphics/%s Themes/Timeline/Loop_None_Hover.png" % Global.theme_type)
+			texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/loop_none.png" % theme_type)
 			Global.loop_animation_button.hint_tooltip = "No loop"
 
 
 func _on_PlayForward_toggled(button_pressed : bool) -> void:
+	var theme_type := Global.theme_type
+	if theme_type == "Gold":
+		theme_type = "Light"
+	if button_pressed:
+		Global.play_forward.get_child(0).texture = load("res://Assets/Graphics/%s Themes/Timeline/pause.png" % theme_type)
+	else:
+		Global.play_forward.get_child(0).texture = load("res://Assets/Graphics/%s Themes/Timeline/play.png" % theme_type)
+
 	play_animation(button_pressed, true)
 
 
 func _on_PlayBackwards_toggled(button_pressed : bool) -> void:
+	var theme_type := Global.theme_type
+	if theme_type == "Gold":
+		theme_type = "Light"
+	if button_pressed:
+		Global.play_backwards.get_child(0).texture = load("res://Assets/Graphics/%s Themes/Timeline/pause.png" % theme_type)
+	else:
+		Global.play_backwards.get_child(0).texture = load("res://Assets/Graphics/%s Themes/Timeline/play_backwards.png" % theme_type)
+
 	play_animation(button_pressed, false)
 
 
@@ -247,13 +263,19 @@ func _on_AnimationTimer_timeout() -> void:
 
 
 func play_animation(play : bool, forward_dir : bool) -> void:
+	var theme_type := Global.theme_type
+	if theme_type == "Gold":
+		theme_type = "Light"
+
 	if forward_dir:
 		Global.play_backwards.disconnect("toggled", self, "_on_PlayBackwards_toggled")
 		Global.play_backwards.pressed = false
+		Global.play_backwards.get_child(0).texture = load("res://Assets/Graphics/%s Themes/Timeline/play_backwards.png" % theme_type)
 		Global.play_backwards.connect("toggled", self, "_on_PlayBackwards_toggled")
 	else:
 		Global.play_forward.disconnect("toggled", self, "_on_PlayForward_toggled")
 		Global.play_forward.pressed = false
+		Global.play_forward.get_child(0).texture = load("res://Assets/Graphics/%s Themes/Timeline/play.png" % theme_type)
 		Global.play_forward.connect("toggled", self, "_on_PlayForward_toggled")
 	if Global.canvases.size() == 1:
 		if forward_dir:
