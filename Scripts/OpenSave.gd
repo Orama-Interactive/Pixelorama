@@ -1,17 +1,31 @@
 extends Node
 
 var current_save_path := ""
+# Stores a filename of a backup file in user:// until user saves manually
+var backup_save_path = ""
+
+onready var autosave_timer : Timer
+var default_autosave_interval := 5 # Minutes
+
+func _ready():
+	autosave_timer = Timer.new()
+	autosave_timer.one_shot = false
+	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE
+	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
+	add_child(autosave_timer)
+	set_autosave_interval(default_autosave_interval)
+	toggle_autosave(false) # Gets started from preferences dialog
 
 
-func open_pxo_file(path : String) -> void:
+func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
 	if err == ERR_FILE_UNRECOGNIZED:
 		err =  file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
+		Global.notification_label("File failed to open")
 		file.close()
-		OS.alert("Can't load file")
 		return
 
 	var file_version := file.get_line() # Example, "v0.6"
@@ -133,13 +147,13 @@ func open_pxo_file(path : String) -> void:
 
 	file.close()
 
-	current_save_path = path
-	Global.window_title = path.get_file() + " - Pixelorama"
+	if not untitled_backup:
+		# Untitled backup should not change window title and save path
+		current_save_path = path
+		Global.window_title = path.get_file() + " - Pixelorama"
 
 
-func save_pxo_file(path : String) -> void:
-	current_save_path = path
-
+func save_pxo_file(path : String, autosave : bool) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
 	if err == OK:
@@ -209,10 +223,89 @@ func save_pxo_file(path : String) -> void:
 			file.store_8(tag[3]) # Tag "to", the last frame
 		file.store_line("END_FRAME_TAGS")
 
-		if !Global.saved:
+		file.close()
+
+		if !Global.saved and not autosave:
 			Global.saved = true
 
-		Global.window_title = current_save_path.get_file() + " - Pixelorama"
-		Global.notification_label("File saved")
-	file.close()
+		if autosave:
+			Global.notification_label("File autosaved")
+		else:
+			# First remove backup then set current save path
+			remove_backup()
+			current_save_path = path
+			Global.notification_label("File saved")
+
+		if backup_save_path == "":
+			Global.window_title = path.get_file() + " - Pixelorama"
+
+	else:
+		Global.notification_label("File failed to save")
+
+
+func toggle_autosave(enable : bool) -> void:
+	if enable:
+		autosave_timer.start()
+	else:
+		autosave_timer.stop()
+
+
+func set_autosave_interval(interval : float) -> void:
+	autosave_timer.wait_time = interval * 60 # Interval parameter is in minutes, wait_time is seconds
+	autosave_timer.start()
+
+
+func _on_Autosave_timeout() -> void:
+	if backup_save_path == "":
+		# Create a new backup file if it doesn't exist yet
+		backup_save_path = "user://backup-" + String(OS.get_unix_time())
+
+	store_backup_path()
+	save_pxo_file(backup_save_path, true)
+
+
+# Backup paths are stored in two ways:
+# 1) User already manually saved and defined a save path -> {current_save_path, backup_save_path}
+# 2) User didn't manually saved, "untitled" backup is stored -> {backup_save_path, backup_save_path}
+func store_backup_path() -> void:
+	if current_save_path != "":
+		# Remove "untitled" backup if it existed on this project instance
+		if Global.config_cache.has_section_key("backups", backup_save_path):
+			Global.config_cache.erase_section_key("backups", backup_save_path)
+
+		Global.config_cache.set_value("backups", current_save_path, backup_save_path)
+	else:
+		Global.config_cache.set_value("backups", backup_save_path, backup_save_path)
+
+	Global.config_cache.save("user://cache.ini")
+
+
+func remove_backup() -> void:
+	# Remove backup file
+	if backup_save_path != "":
+		if current_save_path != "":
+			remove_backup_by_path(current_save_path, backup_save_path)
+		else:
+			# If manual save was not yet done - remove "untitled" backup
+			remove_backup_by_path(backup_save_path, backup_save_path)
+		backup_save_path = ""
+
+
+func remove_backup_by_path(project_path : String, backup_path : String) -> void:
+	Directory.new().remove(backup_path)
+	Global.config_cache.erase_section_key("backups", project_path)
+	Global.config_cache.save("user://cache.ini")
+
+
+func reload_backup_file(project_path : String, backup_path : String) -> void:
+	# If project path is the same as backup save path -> the backup was untitled
+	open_pxo_file(backup_path, project_path == backup_path)
+	backup_save_path = backup_path
+
+	if project_path != backup_path:
+		current_save_path = project_path
+		Global.window_title = project_path.get_file() + " - Pixelorama(*)"
+		Global.saved = false
+
+	Global.notification_label("Backup reloaded")
 

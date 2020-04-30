@@ -41,6 +41,9 @@ func _ready() -> void:
 	# Disable input until the shortcut selector is displayed
 	set_process_input(false)
 
+	# Replace OK with Close since preference changes are being applied immediately, not after OK confirmation
+	get_ok().text = tr("Close")
+
 	for child in languages.get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Language_pressed", [child])
@@ -75,6 +78,16 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "show_right_tool_icon"):
 		Global.show_right_tool_icon = Global.config_cache.get_value("preferences", "show_right_tool_icon")
 		right_tool_icon.pressed = Global.show_right_tool_icon
+
+	# Get autosave settings
+	if Global.config_cache.has_section_key("preferences", "autosave_interval"):
+		var autosave_interval = Global.config_cache.get_value("preferences", "autosave_interval")
+		OpenSave.set_autosave_interval(autosave_interval)
+		general.get_node("AutosaveInterval/AutosaveInterval").value = autosave_interval
+	if Global.config_cache.has_section_key("preferences", "enable_autosave"):
+		var enable_autosave = Global.config_cache.get_value("preferences", "enable_autosave")
+		OpenSave.toggle_autosave(enable_autosave)
+		general.get_node("EnableAutosave").pressed = enable_autosave
 
 	# Set default values for Canvas options
 	if Global.config_cache.has_section_key("preferences", "grid_size"):
@@ -526,4 +539,16 @@ func _on_ShortcutSelector_confirmed() -> void:
 func _on_OpenLastProject_pressed():
 	Global.open_last_project = !Global.open_last_project
 	Global.config_cache.set_value("preferences", "open_last_project", Global.open_last_project)
+	Global.config_cache.save("user://cache.ini")
+
+
+func _on_EnableAutosave_toggled(button_pressed : bool) -> void:
+	OpenSave.toggle_autosave(button_pressed)
+	Global.config_cache.set_value("preferences", "enable_autosave", button_pressed)
+	Global.config_cache.save("user://cache.ini")
+
+
+func _on_AutosaveInterval_value_changed(value : float) -> void:
+	OpenSave.set_autosave_interval(value)
+	Global.config_cache.set_value("preferences", "autosave_interval", value)
 	Global.config_cache.save("user://cache.ini")

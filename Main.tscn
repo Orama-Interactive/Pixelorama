@@ -1676,6 +1676,14 @@ visible = false
 
 [node name="RightCursor" type="Sprite" parent="."]
 visible = false
+
+[node name="BackupConfirmation" type="ConfirmationDialog" parent="."]
+margin_right = 349.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 250, 87.5 )
+popup_exclusive = true
+dialog_text = "Autosaved backup for %s was found.
+Do you want to reload it?"
 [connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
@@ -1762,6 +1770,7 @@ visible = false
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 [connection signal="popup_hide" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="popup_hide" from="HSVDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="BackupConfirmation" to="." method="_can_draw_true"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]
 

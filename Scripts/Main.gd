@@ -193,7 +193,27 @@ func _ready() -> void:
 		Global.config_cache.set_value("preferences", "open_last_project", true)
 	if Global.config_cache.get_value("preferences", "open_last_project"):
 		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
+
+	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
+	$BackupConfirmation.get_cancel().text = tr("Delete")
+	if Global.config_cache.has_section("backups"):
+		var project_paths = Global.config_cache.get_section_keys("backups")
+		if project_paths.size() > 0:
+			# Get backup path
+			var backup_path = Global.config_cache.get_value("backups", project_paths[0])
+			# Temporatily stop autosave until user confirms backup
+			OpenSave.autosave_timer.stop()
+			Global.can_draw = false
+			# For it's only possible to reload the first found backup
+			$BackupConfirmation.dialog_text = $BackupConfirmation.dialog_text % project_paths[0]
+			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths[0], backup_path])
+			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths[0], backup_path])
+			$BackupConfirmation.popup_centered()
+		else:
+			load_last_project()
+	else:
 		load_last_project()
+
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
@@ -420,16 +440,17 @@ func help_menu_id_pressed(id : int) -> void:
 			Global.can_draw = false
 
 func load_last_project():
-	# Check if any project was saved or opened last time
-	if Global.config_cache.has_section_key("preferences", "last_project_path"):
-		# Check if file still exists on disk
-		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
-		var file_check := File.new()
-		if file_check.file_exists(file_path): # If yes then load the file
-			_on_OpenSprite_file_selected(file_path)
-		else:
-			# If file doesn't exist on disk then warn user about this
-			$OpenLastProjectAlertDialog.popup_centered()
+	if Global.open_last_project:
+		# Check if any project was saved or opened last time
+		if Global.config_cache.has_section_key("preferences", "last_project_path"):
+			# Check if file still exists on disk
+			var file_path = Global.config_cache.get_value("preferences", "last_project_path")
+			var file_check := File.new()
+			if file_check.file_exists(file_path): # If yes then load the file
+				_on_OpenSprite_file_selected(file_path)
+			else:
+				# If file doesn't exist on disk then warn user about this
+				$OpenLastProjectAlertDialog.popup_centered()
 
 
 func _on_UnsavedCanvasDialog_confirmed() -> void:
@@ -451,7 +472,7 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
-	OpenSave.save_pxo_file(path)
+	OpenSave.save_pxo_file(path, false)
 
 	# Set last opened project path and save
 	Global.config_cache.set_value("preferences", "last_project_path", path)
@@ -782,14 +803,32 @@ func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 		$SaveSprite.popup_centered()
 		$QuitDialog.hide()
 		Global.can_draw = false
+		OpenSave.remove_backup()
 
 
 func _on_QuitDialog_confirmed() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
-
+	OpenSave.remove_backup()
 	get_tree().quit()
+
+
+func _on_BackupConfirmation_confirmed(project_path : String, backup_path : String) -> void:
+	OpenSave.reload_backup_file(project_path, backup_path)
+	OpenSave.autosave_timer.start()
+	$ExportDialog.file_name = OpenSave.current_save_path.get_file().trim_suffix(".pxo")
+	$ExportDialog.directory_path = OpenSave.current_save_path.get_base_dir()
+	$ExportDialog.was_exported = false
+	file_menu.set_item_text(3, tr("Save") + " %s" % OpenSave.current_save_path.get_file())
+	file_menu.set_item_text(6, tr("Export"))
+
+
+func _on_BackupConfirmation_delete(project_path : String, backup_path : String) -> void:
+	OpenSave.remove_backup_by_path(project_path, backup_path)
+	OpenSave.autosave_timer.start()
+	# Reopen last project
+	load_last_project()
 
 
 func _on_LeftPixelPerfectMode_toggled(button_pressed) -> void:
