@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-30 17:36\n"
+"PO-Revision-Date: 2020-04-30 23:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -946,13 +946,13 @@ msgid "File saved"
 msgstr "Файл сохранен"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Выполнено автосохранение"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Не удалось открыть файл"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Не удалось сохранить файл"
 
 msgid "File exported"
 msgstr "Файл экспортирован"
@@ -1114,14 +1114,14 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr "Создает несколько файлов, но каждый файл хранится в разных каталогах, соответствующих метке кадра"
 
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 msgid "Autosaved backup for %s was found.Do you want to reload it?"
-msgstr ""
+msgstr "Найдена автосохраненная резервная копия для %s . Хотите загрузить ее?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Резервная копия восстановлена"
 
