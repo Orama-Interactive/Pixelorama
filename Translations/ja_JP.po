@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-04-25 12:48\n"
+"PO-Revision-Date: 2020-04-30 17:36\n"
 
 msgid "OK"
 msgstr ""
@@ -918,6 +918,15 @@ msgstr ""
 msgid "File saved"
 msgstr ""
 
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
+
 msgid "File exported"
 msgstr ""
 
@@ -1075,5 +1084,17 @@ msgid "Create new directory for each frame tag"
 msgstr ""
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
 msgstr ""
 
