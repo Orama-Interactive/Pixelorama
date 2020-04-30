@@ -256,8 +256,6 @@ func set_autosave_interval(interval : float) -> void:
 
 
 func _on_Autosave_timeout() -> void:
-	var autosave_path = ""
-
 	if backup_save_path == "":
 		# Create a new backup file if it doesn't exist yet
 		backup_save_path = "user://backup-" + String(OS.get_unix_time())
