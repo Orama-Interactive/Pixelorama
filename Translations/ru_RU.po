@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-01 15:47\n"
+"PO-Revision-Date: 2020-05-01 16:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1121,7 +1121,8 @@ msgstr "Удалить"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Найдена автосохраненная резервная копия для %s.\n"
+"Хотите загрузить ее?"
 
 msgid "Backup reloaded"
 msgstr "Резервная копия восстановлена"
