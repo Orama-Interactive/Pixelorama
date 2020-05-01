@@ -315,33 +315,33 @@ func change_theme(ID : int) -> void:
 	if ID == 0: # Dark Theme
 		Global.theme_type = "Dark"
 		VisualServer.set_default_clear_color(Color(0.247059, 0.25098, 0.247059))
-		main_theme = preload("res://Themes & Styles/Dark Theme/Dark Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Dark Theme/DarkTopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+		main_theme = preload("res://Assets/themes/dark/theme.tres")
+		top_menu_style = preload("res://Assets/themes/dark/top_menu_style.tres")
+		ruler_style = preload("res://Assets/themes/dark/ruler_style.tres")
 	elif ID == 1: # Gray Theme
 		Global.theme_type = "Dark"
 		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
-		main_theme = preload("res://Themes & Styles/Gray Theme/Gray Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Gray Theme/GrayTopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Dark Theme/DarkRulerStyle.tres")
+		main_theme = preload("res://Assets/themes/gray/theme.tres")
+		top_menu_style = preload("res://Assets/themes/gray/top_menu_style.tres")
+		ruler_style = preload("res://Assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = "Dark"
 		VisualServer.set_default_clear_color(Color(0.27451, 0.278431, 0.305882))
-		main_theme = preload("res://Themes & Styles/Godot\'s Theme/Godot\'s Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Godot\'s Theme/TopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Godot\'s Theme/RulerStyle.tres")
+		main_theme = preload("res://Assets/themes/godot/theme.tres")
+		top_menu_style = preload("res://Assets/themes/godot/top_menu_style.tres")
+		ruler_style = preload("res://Assets/themes/godot/ruler_style.tres")
 	elif ID == 3: # Gold Theme
 		Global.theme_type = "Gold"
 		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))
-		main_theme = preload("res://Themes & Styles/Gold Theme/Gold Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Gold Theme/GoldTopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Gold Theme/GoldRulerStyle.tres")
+		main_theme = preload("res://Assets/themes/gold/theme.tres")
+		top_menu_style = preload("res://Assets/themes/gold/top_menu_style.tres")
+		ruler_style = preload("res://Assets/themes/gold/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = "Light"
 		VisualServer.set_default_clear_color(Color(0.705882, 0.705882, 0.705882))
-		main_theme = preload("res://Themes & Styles/Light Theme/Light Theme.tres")
-		top_menu_style = preload("res://Themes & Styles/Light Theme/LightTopMenuStyle.tres")
-		ruler_style = preload("res://Themes & Styles/Light Theme/LightRulerStyle.tres")
+		main_theme = preload("res://Assets/themes/light/theme.tres")
+		top_menu_style = preload("res://Assets/themes/light/top_menu_style.tres")
+		ruler_style = preload("res://Assets/themes/light/ruler_style.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font

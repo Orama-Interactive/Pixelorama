@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Vsplit.png-86bf5cec762c35447b09575072c6a799.stex"
+path="res://.import/vsplit.png-e9d4a9d3ba3096e1627a4854187f6824.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Misc/Vsplit.png"
-dest_files=[ "res://.import/Vsplit.png-86bf5cec762c35447b09575072c6a799.stex" ]
+source_file="res://Assets/themes/dark/icons/vsplit.png"
+dest_files=[ "res://.import/vsplit.png-e9d4a9d3ba3096e1627a4854187f6824.stex" ]
 
 [params]
 

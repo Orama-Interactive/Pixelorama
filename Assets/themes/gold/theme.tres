@@ -1,10 +1,15 @@
 [gd_resource type="Theme" load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Hsplit.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Vsplit.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Grabber.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/Light Themes/Misc/Grabber_Hover.png" type="Texture" id=5]
+[ext_resource path="res://Assets/themes/light/icons/grabber.png" type="Texture" id=2]
+[ext_resource path="res://Assets/themes/light/icons/grabber_hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/themes/light/icons/hsplit.png" type="Texture" id=4]
+[ext_resource path="res://Assets/themes/light/icons/vsplit.png" type="Texture" id=5]
+
+
+
+
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.219608, 0.211765, 0.168627, 1 )
@@ -332,9 +337,9 @@ HScrollBar/styles/scroll = SubResource( 13 )
 HScrollBar/styles/scroll_focus = null
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = SubResource( 14 )
-HSlider/icons/grabber = ExtResource( 4 )
+HSlider/icons/grabber = ExtResource( 2 )
 HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = ExtResource( 5 )
+HSlider/icons/grabber_highlight = ExtResource( 3 )
 HSlider/icons/tick = null
 HSlider/styles/focus = null
 HSlider/styles/grabber_area = SubResource( 15 )
@@ -343,7 +348,7 @@ HSlider/styles/grabber_highlight = null
 HSlider/styles/slider = SubResource( 16 )
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 6
-HSplitContainer/icons/grabber = ExtResource( 2 )
+HSplitContainer/icons/grabber = ExtResource( 4 )
 HSplitContainer/styles/bg = null
 Label/colors/font_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
@@ -537,7 +542,7 @@ VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource( 28 )
 VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 6
-VSplitContainer/icons/grabber = ExtResource( 3 )
+VSplitContainer/icons/grabber = ExtResource( 5 )
 VSplitContainer/styles/bg = null
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 18

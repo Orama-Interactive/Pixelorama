@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grabber_Hover.png-97ea72e96ad7a2a6a6c366d2dbe967ec.stex"
+path="res://.import/vsplit.png-64235ec722881c6c57ea2ec4d8fdf027.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Dark Themes/Misc/Grabber_Hover.png"
-dest_files=[ "res://.import/Grabber_Hover.png-97ea72e96ad7a2a6a6c366d2dbe967ec.stex" ]
+source_file="res://Assets/themes/light/icons/vsplit.png"
+dest_files=[ "res://.import/vsplit.png-64235ec722881c6c57ea2ec4d8fdf027.stex" ]
 
 [params]
 
