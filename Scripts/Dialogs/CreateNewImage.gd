@@ -83,7 +83,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.canvases = Global.canvases # To trigger Global.canvases_changed()
 	Global.current_frame = 0
 	Global.layers = Global.layers # To trigger Global.layers_changed()
-	Global.saved = true
+	Global.project_has_changed = false
 	if fill_color.a > 0:
 		Global.canvas.layers[0][0].fill(fill_color)
 		Global.canvas.layers[0][0].lock()

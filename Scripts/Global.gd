@@ -30,7 +30,7 @@ var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 var loaded_locales : Array
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
-var saved := true # Checks if the user has saved
+var project_has_changed := false # Checks if the user has made changes to the project
 
 # Canvas related stuff
 var canvases := [] setget canvases_changed
@@ -462,8 +462,8 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
-	if saved:
-		saved = false
+	if !project_has_changed:
+		project_has_changed = true
 		self.window_title = window_title + "(*)"
 
 
@@ -493,8 +493,8 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
-	if saved:
-		saved = false
+	if !project_has_changed:
+		project_has_changed = true
 		self.window_title = window_title + "(*)"
 
 

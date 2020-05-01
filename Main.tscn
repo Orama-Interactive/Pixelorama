@@ -1624,7 +1624,7 @@ visible = false
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = "Unsaved Image"
-dialog_text = "Changes has not been saved. Are you sure you want to create a new image?"
+dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0

@@ -428,7 +428,7 @@ msgstr ""
 msgid "Unsaved Image"
 msgstr ""
 
-msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
 
 msgid "Save before exiting?"

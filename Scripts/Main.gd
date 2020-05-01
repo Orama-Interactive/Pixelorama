@@ -5,6 +5,7 @@ var file_menu : PopupMenu
 var view_menu : PopupMenu
 var tools := []
 var redone := false
+var unsaved_canvas_state := 0
 var is_quitting_on_save := false
 var previous_left_color := Color.black
 var previous_right_color := Color.white
@@ -251,7 +252,8 @@ func _notification(what : int) -> void:
 func file_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # New
-			if(!Global.saved):
+			if Global.project_has_changed:
+				unsaved_canvas_state = id
 				$UnsavedCanvasDialog.popup_centered()
 			else:
 				$CreateNewImage.popup_centered()
@@ -263,7 +265,11 @@ func file_menu_id_pressed(id : int) -> void:
 		2: # Open last project
 			# Check if last project path is set and if yes then open
 			if Global.config_cache.has_section_key("preferences", "last_project_path"):
-				load_last_project()
+				if Global.project_has_changed:
+					unsaved_canvas_state = id
+					$UnsavedCanvasDialog.popup_centered()
+				else:
+					load_last_project()
 			else: # if not then warn user that he didn't edit any project yet
 				$NoProjectEditedOrCreatedAlertDialog.popup_centered()
 		3: # Save
@@ -455,7 +461,10 @@ func load_last_project() -> void:
 
 
 func _on_UnsavedCanvasDialog_confirmed() -> void:
-	$CreateNewImage.popup_centered()
+	if unsaved_canvas_state == 0: # New image
+		$CreateNewImage.popup_centered()
+	elif unsaved_canvas_state == 2: # Open last project
+		load_last_project()
 
 
 func _on_OpenSprite_file_selected(path : String) -> void:
@@ -790,7 +799,7 @@ func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
 
 func show_quit_dialog() -> void:
 	if !$QuitDialog.visible:
-		if Global.saved:
+		if !Global.project_has_changed:
 			$QuitDialog.call_deferred("popup_centered")
 		else:
 			$QuitAndSaveDialog.call_deferred("popup_centered")

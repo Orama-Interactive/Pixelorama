@@ -152,6 +152,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		# Untitled backup should not change window title and save path
 		current_save_path = path
 		Global.window_title = path.get_file() + " - Pixelorama"
+		Global.project_has_changed = false
 
 
 func save_pxo_file(path : String, autosave : bool) -> void:
@@ -226,8 +227,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 
 		file.close()
 
-		if !Global.saved and not autosave:
-			Global.saved = true
+		if Global.project_has_changed and not autosave:
+			Global.project_has_changed = false
 
 		if autosave:
 			Global.notification_label("File autosaved")
@@ -306,7 +307,7 @@ func reload_backup_file(project_path : String, backup_path : String) -> void:
 	if project_path != backup_path:
 		current_save_path = project_path
 		Global.window_title = project_path.get_file() + " - Pixelorama(*)"
-		Global.saved = false
+		Global.project_has_changed = true
 
 	Global.notification_label("Backup reloaded")
 
