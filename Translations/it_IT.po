@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-05-01 15:47\n"
+"PO-Revision-Date: 2020-05-01 16:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1123,7 +1123,8 @@ msgstr "Elimina"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "È stato trovato il backup automatico per %s\n"
+"Vuoi ricaricarlo?"
 
 msgid "Backup reloaded"
 msgstr "Backup ricaricato"
