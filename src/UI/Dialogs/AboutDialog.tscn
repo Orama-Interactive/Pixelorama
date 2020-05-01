@@ -1,12 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/AboutDialog.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/icon_64x64.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/icons/icon_64x64.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/Roboto-Italic.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/Graphics/orama_64x64.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/splash_screen/orama_64x64.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=5]
-
-
 
 [node name="AboutDialog" type="WindowDialog"]
 margin_right = 512.0

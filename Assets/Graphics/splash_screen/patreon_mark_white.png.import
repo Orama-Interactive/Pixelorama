@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Patreon_Mark_White.png-ab0f61140995a66f96bc191c3acdc68a.stex"
+path="res://.import/patreon_mark_white.png-1f666f6c4a712e167a24645d46909d1c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Patreon_Mark_White.png"
-dest_files=[ "res://.import/Patreon_Mark_White.png-ab0f61140995a66f96bc191c3acdc68a.stex" ]
+source_file="res://Assets/Graphics/splash_screen/patreon_mark_white.png"
+dest_files=[ "res://.import/patreon_mark_white.png-1f666f6c4a712e167a24645d46909d1c.stex" ]
 
 [params]
 

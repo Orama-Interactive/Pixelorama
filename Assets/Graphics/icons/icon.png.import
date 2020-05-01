@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Become a patron_Hover.png-8a75baaaa2b3ce60a939e5c77977d33b.stex"
+path="res://.import/icon.png-5b2982e74cba0a76c8e9d9124444bba4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Become a patron_Hover.png"
-dest_files=[ "res://.import/Become a patron_Hover.png-8a75baaaa2b3ce60a939e5c77977d33b.stex" ]
+source_file="res://Assets/Graphics/icons/icon.png"
+dest_files=[ "res://.import/icon.png-5b2982e74cba0a76c8e9d9124444bba4.stex" ]
 
 [params]
 

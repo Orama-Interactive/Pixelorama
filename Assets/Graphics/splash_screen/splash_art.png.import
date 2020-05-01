@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/orama_64x64.png-0eb68a6482a96c9a132a6540c744e045.stex"
+path="res://.import/splash_art.png-c61866df7bf8d77b1c503aabf7e1b6a0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/orama_64x64.png"
-dest_files=[ "res://.import/orama_64x64.png-0eb68a6482a96c9a132a6540c744e045.stex" ]
+source_file="res://Assets/Graphics/splash_screen/splash_art.png"
+dest_files=[ "res://.import/splash_art.png-c61866df7bf8d77b1c503aabf7e1b6a0.stex" ]
 
 [params]
 

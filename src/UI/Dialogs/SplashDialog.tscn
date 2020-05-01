@@ -1,18 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Pixelorama Logo.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Become a patron.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Become a patron_Hover.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/Splash Art.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/splash_screen/pixelorama_logo.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/splash_screen/become_a_patron.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/splash_screen/become_a_patron_hover.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/splash_screen/splash_art.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Assets/Graphics/orama_64x64.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Graphics/discord.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Graphics/GitHub-32px.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Graphics/Patreon_Mark_White.png" type="Texture" id=11]
-
-
+[ext_resource path="res://Assets/Graphics/splash_screen/orama_64x64.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/splash_screen/discord.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/splash_screen/github_32px.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
 
 [node name="SplashDialog" type="WindowDialog"]
 margin_right = 614.0
@@ -169,7 +167,7 @@ rect_min_size = Vector2( 0, 260 )
 
 [node name="Label" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer/ChangelogScroll"]
 margin_right = 243.0
-margin_bottom = 1680.0
+margin_bottom = 1663.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Added

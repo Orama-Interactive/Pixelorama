@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Become a patron.png-45ae52076f8b13824fd1a3aaf4b2101a.stex"
+path="res://.import/orama_64x64.png-b9fd5429bee2d8eeb0cf325f6c20b245.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Become a patron.png"
-dest_files=[ "res://.import/Become a patron.png-45ae52076f8b13824fd1a3aaf4b2101a.stex" ]
+source_file="res://Assets/Graphics/splash_screen/orama_64x64.png"
+dest_files=[ "res://.import/orama_64x64.png-b9fd5429bee2d8eeb0cf325f6c20b245.stex" ]
 
 [params]
 

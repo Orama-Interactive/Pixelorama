@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pixelorama Logo.png-f3146b235a1a694312071ac48f3cbb1a.stex"
+path="res://.import/become_a_patron_hover.png-1c4299161fc058c44ab750b62229b303.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Pixelorama Logo.png"
-dest_files=[ "res://.import/Pixelorama Logo.png-f3146b235a1a694312071ac48f3cbb1a.stex" ]
+source_file="res://Assets/Graphics/splash_screen/become_a_patron_hover.png"
+dest_files=[ "res://.import/become_a_patron_hover.png-1c4299161fc058c44ab750b62229b303.stex" ]
 
 [params]
 
