@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-04-30 23:57\n"
+"PO-Revision-Date: 2020-05-01 00:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -107,89 +107,90 @@ msgid "Clear Selection"
 msgstr "Smazat výběr"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Překlopit vodorovně"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Překlopit svisle"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Nastavení"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Režim dlaždic"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Zobrazit mřížku"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Zobrazit pravítka"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Zobrazit vodítka"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Zobrazit časovou osu animace"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Vyplnit barvou:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Otevřít soubor"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Otevřít soubor(y)"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importovat jako nový snímek"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Importovat jako spritesheet"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Uložit obrázek jako .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Exportovat obrázek jako .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Exportovat obrázek"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Soubor existuje, přepsat?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Soubor %s již existuje. Přepsat?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Cesta složky nebo název souboru je neplatný!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nelze načíst soubor '%s'.\n"
+"Kód chyby: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Snímek"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animace"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Náhled:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Snímek:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientace:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Procházet"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Změnit velikost:"
 
 msgid "Cancel Export"
 msgstr ""
@@ -342,94 +343,94 @@ msgid "Issue Tracker"
 msgstr ""
 
 msgid "Changelog"
-msgstr ""
+msgstr "Seznam změn"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "O Pixeloramě"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Vyvinuto Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Webové stránky"
 
 msgid "Donate"
-msgstr ""
+msgstr "Podpořit"
 
 msgid "Developers"
-msgstr ""
+msgstr "Vývojáři"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Přispěvatelé"
 
 msgid "Donors"
-msgstr ""
+msgstr "Dárci"
 
 msgid "Translators"
-msgstr ""
+msgstr "Překladatelé"
 
 msgid "English"
-msgstr ""
+msgstr "Angličtina"
 
 msgid "Greek"
-msgstr ""
+msgstr "Řečtina"
 
 msgid "French"
-msgstr ""
+msgstr "Francouzština"
 
 msgid "German"
-msgstr ""
+msgstr "Němčina"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polština"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazilská portugalština"
 
 msgid "Russian"
-msgstr ""
+msgstr "Ruština"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Čínština (zjednodušená)"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Čínština (tradiční)"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italština"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lotyština"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Španělština"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Vývojářský tým"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Vedoucí programátor"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Návrhář UI"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Github přispěvatelé"
 
 msgid "Art by"
-msgstr ""
+msgstr "Dílo od"
 
 msgid "untitled"
-msgstr ""
+msgstr "bez názvu"
 
 msgid "imported"
-msgstr ""
+msgstr "importováno"
 
 msgid "copy"
-msgstr ""
+msgstr "kopie"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
