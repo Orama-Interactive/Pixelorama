@@ -154,6 +154,7 @@ text = "Open last project on startup"
 margin_top = 128.0
 margin_right = 306.0
 margin_bottom = 152.0
+mouse_default_cursor_shape = 2
 text = "Enable autosave"
 __meta__ = {
 "_edit_use_anchors_": false

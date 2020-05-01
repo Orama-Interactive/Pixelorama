@@ -3,11 +3,12 @@ extends Node
 var current_save_path := ""
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_path = ""
-
-onready var autosave_timer : Timer
 var default_autosave_interval := 5 # Minutes
 
-func _ready():
+onready var autosave_timer : Timer
+
+
+func _ready() -> void:
 	autosave_timer = Timer.new()
 	autosave_timer.one_shot = false
 	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE

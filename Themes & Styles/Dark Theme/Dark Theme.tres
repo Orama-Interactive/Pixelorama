@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=38 format=2]
+[gd_resource type="Theme" load_steps=39 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Grabber.png" type="Texture" id=2]
@@ -56,6 +56,9 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.2, 0.2, 0.2, 0 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.768627, 0.768627, 0.768627, 1 )
@@ -318,6 +321,24 @@ CheckBox/styles/hover = SubResource( 4 )
 CheckBox/styles/hover_pressed = SubResource( 5 )
 CheckBox/styles/normal = SubResource( 6 )
 CheckBox/styles/pressed = SubResource( 7 )
+CheckButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/fonts/font = null
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = SubResource( 33 )
+CheckButton/styles/focus = SubResource( 33 )
+CheckButton/styles/hover = SubResource( 33 )
+CheckButton/styles/hover_pressed = SubResource( 33 )
+CheckButton/styles/normal = SubResource( 33 )
+CheckButton/styles/pressed = SubResource( 33 )
 ColorPicker/constants/h_width = 30
 ColorPicker/constants/label_width = 10
 ColorPicker/constants/margin = 4

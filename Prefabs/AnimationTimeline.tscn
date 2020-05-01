@@ -318,9 +318,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -5.0
-margin_top = -6.0
+margin_top = -7.0
 margin_right = 5.0
-margin_bottom = 6.0
+margin_bottom = 7.0
 texture = ExtResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
