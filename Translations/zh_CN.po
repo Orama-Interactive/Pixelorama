@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-01 15:47\n"
+"PO-Revision-Date: 2020-05-01 16:03\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1123,7 +1123,7 @@ msgstr "删除"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "找到了 %s 的自动备份。你想要重新加载吗？"
 
 msgid "Backup reloaded"
 msgstr "重新加载备份"
