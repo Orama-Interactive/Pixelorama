@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-30 17:36\n"
+"PO-Revision-Date: 2020-05-01 15:47\n"
 
 msgid "OK"
 msgstr "确定"
@@ -948,13 +948,13 @@ msgid "File saved"
 msgstr "文件已保存"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "文件已自动保存"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "文件打开失败"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "文件保存失败"
 
 msgid "File exported"
 msgstr "文件已导出"
@@ -1116,14 +1116,15 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同目录"
 
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
-msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
 msgstr ""
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "重新加载备份"
 
