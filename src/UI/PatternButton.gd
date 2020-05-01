@@ -6,7 +6,7 @@ var image_size : Vector2
 var texture : ImageTexture
 
 
-func _ready():
+func _ready() -> void:
 	if image:
 		image_size = image.get_size()
 		texture = ImageTexture.new()

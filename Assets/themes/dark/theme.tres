@@ -6,11 +6,6 @@
 [ext_resource path="res://Assets/themes/dark/icons/hsplit.png" type="Texture" id=4]
 [ext_resource path="res://Assets/themes/dark/icons/vsplit.png" type="Texture" id=5]
 
-
-
-
-
-
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
 content_margin_right = 5.0

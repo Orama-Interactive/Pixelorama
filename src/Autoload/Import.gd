@@ -237,7 +237,7 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 				image.convert(Image.FORMAT_RGBA8)
 				Global.patterns.append(image)
 
-				var pattern_button : BaseButton = load("res://src/PatternButton.tscn").instance()
+				var pattern_button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
 				pattern_button.image = image
 				var pattern_tex := ImageTexture.new()
 				pattern_tex.create_from_image(image, 0)

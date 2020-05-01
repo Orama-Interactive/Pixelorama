@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Dialogs/PreferencesDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
+
 
 
 [node name="PreferencesDialog" type="AcceptDialog"]

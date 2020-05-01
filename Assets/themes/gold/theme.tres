@@ -6,11 +6,6 @@
 [ext_resource path="res://Assets/themes/light/icons/hsplit.png" type="Texture" id=4]
 [ext_resource path="res://Assets/themes/light/icons/vsplit.png" type="Texture" id=5]
 
-
-
-
-
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.219608, 0.211765, 0.168627, 1 )
 

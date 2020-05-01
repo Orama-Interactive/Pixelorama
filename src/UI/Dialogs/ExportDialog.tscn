@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/Dialogs/ExportDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-gifexporter/src/GifExporter.gd" type="Script" id=2]
+
 
 
 [node name="ExportDialog" type="AcceptDialog"]

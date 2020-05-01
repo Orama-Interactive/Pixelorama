@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=1]
-[ext_resource path="res://src/PatternButton.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/PatternButton.gd" type="Script" id=2]
+
 
 
 [node name="PatternButton" type="TextureButton"]

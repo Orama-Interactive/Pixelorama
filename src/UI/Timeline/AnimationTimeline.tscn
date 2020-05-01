@@ -1,6 +1,6 @@
 [gd_scene load_steps=51 format=2]
 
-[ext_resource path="res://src/AnimationTimeline.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=4]
@@ -17,7 +17,7 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=17]
-[ext_resource path="res://src/LayerButton.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/remove_frame.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/go_to_first_frame.png" type="Texture" id=21]
@@ -31,7 +31,11 @@
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/onion_skinning_off.png" type="Texture" id=29]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/expandable.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/loop.png" type="Texture" id=31]
-[ext_resource path="res://src/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
+[ext_resource path="res://src/UI/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
+
+
+
+
 
 
 

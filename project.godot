@@ -17,12 +17,12 @@ _global_script_classes=[ {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
-"path": "res://src/Rulers/Guides.gd"
+"path": "res://src/UI/Rulers/Guides.gd"
 }, {
-"base": "Button",
+"base": "Reference",
 "class": "LayerButton",
 "language": "GDScript",
-"path": "res://src/LayerButton.gd"
+"path": "res://src/UI/Timeline/LayerButton.gd"
 }, {
 "base": "Reference",
 "class": "Palette",

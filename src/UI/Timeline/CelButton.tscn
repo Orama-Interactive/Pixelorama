@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/CelButton.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=1]
+
+
 
 [node name="CelButton" type="Button"]
 margin_top = 18.0

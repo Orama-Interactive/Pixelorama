@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/NotificationLabel.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/NotificationLabel.gd" type="Script" id=2]
+
 
 
 [node name="NotificationLabel" type="Label"]

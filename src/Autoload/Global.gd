@@ -412,7 +412,7 @@ func find_node_by_name(root, node_name) -> Node:
 
 
 func notification_label(text : String) -> void:
-	var notification : Label = load("res://src/NotificationLabel.tscn").instance()
+	var notification : Label = load("res://src/UI/NotificationLabel.tscn").instance()
 	notification.text = tr(text)
 	notification.rect_position = Vector2(240, OS.window_size.y - animation_timeline.rect_size.y - 20)
 	notification.theme = control.theme
@@ -525,7 +525,7 @@ func canvases_changed(value : Array) -> void:
 		frame_ids.add_child(label)
 
 		for i in range(layers.size() - 1, -1, -1):
-			var cel_button = load("res://src/CelButton.tscn").instance()
+			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
@@ -581,7 +581,7 @@ func layers_changed(value : Array) -> void:
 		frames_container.remove_child(container)
 
 	for i in range(layers.size() - 1, -1, -1):
-		var layer_container = load("res://src/LayerButton.tscn").instance()
+		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.i = i
 		if !layers[i][0]:
 			layers[i][0] = tr("Layer") + " %s" % i
@@ -592,7 +592,7 @@ func layers_changed(value : Array) -> void:
 
 		frames_container.add_child(layers[i][3])
 		for j in range(canvases.size()):
-			var cel_button = load("res://src/CelButton.tscn").instance()
+			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
@@ -698,7 +698,7 @@ func animation_tags_changed(value : Array) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_c : Container = load("res://src/AnimationTag.tscn").instance()
+		var tag_c : Container = load("res://src/UI/Timeline/AnimationTag.tscn").instance()
 		tag_container.add_child(tag_c)
 		var tag_position := tag_container.get_child_count() - 1
 		tag_container.move_child(tag_c, tag_position)
@@ -807,7 +807,7 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container
-	var brush_button = load("res://src/BrushButton.tscn").instance()
+	var brush_button = load("res://src/UI/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
 	brush_button.custom_brush_index = custom_brushes.size() - 1
 	if brush_type == Brush_Types.FILE || brush_type == Brush_Types.RANDOM_FILE:

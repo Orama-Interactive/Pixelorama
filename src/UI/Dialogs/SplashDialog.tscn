@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://src/Dialogs/SplashDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Pixelorama Logo.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Become a patron.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/Become a patron_Hover.png" type="Texture" id=4]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Graphics/discord.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Graphics/GitHub-32px.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Graphics/Patreon_Mark_White.png" type="Texture" id=11]
+
 
 
 [node name="SplashDialog" type="WindowDialog"]

@@ -1,12 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlinked_Layer.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock_Hover.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/Timeline/LayerButton.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible_Hover.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlinked_Layer_Hover.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlinked_Layer.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible_Hover.png" type="Texture" id=6]
-[ext_resource path="res://src/LayerButton.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock_Hover.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlinked_Layer_Hover.png" type="Texture" id=7]
+
 
 [node name="LayerContainer" type="Button"]
 margin_right = 210.0
@@ -15,7 +16,7 @@ rect_min_size = Vector2( 212, 36 )
 size_flags_horizontal = 0
 toggle_mode = true
 action_mode = 0
-script = ExtResource( 7 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
 "_edit_use_anchors_": false
@@ -45,7 +46,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 6 )
+texture_hover = ExtResource( 2 )
 
 [node name="LockButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
 "UIButtons",
@@ -60,7 +61,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 2 )
+texture_hover = ExtResource( 6 )
 
 [node name="LinkButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
 "UIButtons",
@@ -76,8 +77,8 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture_normal = ExtResource( 1 )
-texture_hover = ExtResource( 4 )
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 7 )
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 108.0
