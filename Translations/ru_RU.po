@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-01 16:03\n"
+"PO-Revision-Date: 2020-05-01 16:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -438,8 +438,8 @@ msgstr "Вы действительно хотите выйти из Pixeloram'�
 msgid "Unsaved Image"
 msgstr "Несохраненное изображение"
 
-msgid "Changes has not been saved. Are you sure you want to create a new image?"
-msgstr "Изменения не сохранены. Вы точно хотите создать новое изображение?"
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr ""
 
 msgid "Save before exiting?"
 msgstr "Сохранить перед выходом?"
