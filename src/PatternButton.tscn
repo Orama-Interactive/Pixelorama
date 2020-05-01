@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=1]
+[ext_resource path="res://src/PatternButton.gd" type="Script" id=2]
+
+
+[node name="PatternButton" type="TextureButton"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 3, 0 )
+button_mask = 7
+texture_normal = ExtResource( 1 )
+stretch_mode = 5
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PatternTexture" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="." to="." method="_on_PatternButton_pressed"]

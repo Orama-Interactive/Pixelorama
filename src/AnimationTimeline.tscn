@@ -1,0 +1,834 @@
+[gd_scene load_steps=51 format=2]
+
+[ext_resource path="res://src/AnimationTimeline.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Hover.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Disabled.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=17]
+[ext_resource path="res://src/LayerButton.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/new_frame.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/remove_frame.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/go_to_first_frame.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/play.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/previous_frame.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/play_backwards.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/go_to_last_frame.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/next_frame.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/copy_frame.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/tag.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/onion_skinning_off.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/expandable.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/loop.png" type="Texture" id=31]
+[ext_resource path="res://src/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
+
+
+
+
+
+[sub_resource type="InputEventKey" id=1]
+control = true
+command = true
+scancode = 16777229
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventKey" id=3]
+control = true
+command = true
+scancode = 16777231
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="InputEventKey" id=5]
+scancode = 16777247
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
+
+[sub_resource type="InputEventKey" id=7]
+scancode = 16777248
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
+
+[sub_resource type="InputEventKey" id=9]
+control = true
+command = true
+scancode = 16777233
+
+[sub_resource type="ShortCut" id=10]
+shortcut = SubResource( 9 )
+
+[sub_resource type="InputEventKey" id=11]
+control = true
+command = true
+scancode = 16777230
+
+[sub_resource type="ShortCut" id=12]
+shortcut = SubResource( 11 )
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="Theme" id=18]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = SubResource( 13 )
+HScrollBar/styles/grabber_highlight = SubResource( 14 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 16 )
+HScrollBar/styles/scroll_focus = SubResource( 17 )
+
+[node name="AnimationTimeline" type="Panel"]
+margin_top = 438.0
+margin_right = 704.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForLayerButtons" type="VBoxContainer" parent="AnimationContainer"]
+margin_right = 68.0
+margin_bottom = 200.0
+
+[node name="SpacerControl" type="Control" parent="AnimationContainer/ForLayerButtons"]
+margin_right = 68.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="LayerButtons" type="GridContainer" parent="AnimationContainer/ForLayerButtons"]
+margin_top = 34.0
+margin_right = 68.0
+margin_bottom = 138.0
+size_flags_vertical = 0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 2
+
+[node name="AddLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+hint_tooltip = "Create a new layer"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="RemoveLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+hint_tooltip = "Remove current layer"
+focus_mode = 0
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 6 )
+
+[node name="MoveUpLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+hint_tooltip = "Move up the current layer"
+focus_mode = 0
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 9 )
+
+[node name="MoveDownLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+hint_tooltip = "Move down the current layer"
+focus_mode = 0
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 10 )
+texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 12 )
+
+[node name="CloneLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+hint_tooltip = "Clone current layer"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 13 )
+texture_hover = ExtResource( 14 )
+
+[node name="MergeDownLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+"UIButtons",
+]]
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
+hint_tooltip = "Merge current layer with the one below"
+focus_mode = 0
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource( 15 )
+texture_hover = ExtResource( 16 )
+texture_disabled = ExtResource( 17 )
+
+[node name="SpacerControl" type="Control" parent="AnimationContainer"]
+margin_left = 72.0
+margin_right = 88.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="TimelineContainer" type="VBoxContainer" parent="AnimationContainer"]
+margin_left = 92.0
+margin_right = 696.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+
+[node name="SpacerControl" type="Control" parent="AnimationContainer/TimelineContainer"]
+margin_right = 604.0
+
+[node name="AnimationButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
+margin_top = 4.0
+margin_right = 604.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 24 )
+
+[node name="CurrentFrame" type="Label" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
+margin_top = 5.0
+margin_right = 150.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 150, 0 )
+text = "Current frame: 1/1"
+
+[node name="AddFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 154.0
+margin_right = 174.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Add a new frame"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeleteFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 178.0
+margin_right = 198.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Remove Frame"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/DeleteFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -1.0
+margin_right = 6.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CopyFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 202.0
+margin_right = 222.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Clone Frame"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/CopyFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.0
+margin_top = -7.0
+margin_right = 5.0
+margin_bottom = 7.0
+texture = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FrameTagButton" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons" groups=[
+"UIButtons",
+]]
+margin_left = 226.0
+margin_right = 246.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Manage frame tags"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/FrameTagButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
+texture = ExtResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
+margin_left = 286.0
+margin_right = 426.0
+margin_bottom = 24.0
+size_flags_horizontal = 6
+
+[node name="FirstFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
+"UIButtons",
+]]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "FIRSTFRAME_HT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+shortcut = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.5
+margin_top = -6.0
+margin_right = 5.5
+margin_bottom = 6.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviousFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
+"UIButtons",
+]]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "PREVIOUSFRAME_HT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+shortcut = SubResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.5
+margin_top = -6.0
+margin_right = 5.5
+margin_bottom = 6.0
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayBackwards" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
+"UIButtons",
+]]
+margin_left = 48.0
+margin_right = 68.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "PLAYBACKWARDS_HT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+toggle_mode = true
+shortcut_in_tooltip = false
+shortcut = SubResource( 6 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -6.0
+margin_right = 3.0
+margin_bottom = 6.0
+texture = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayForward" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
+"UIButtons",
+]]
+margin_left = 72.0
+margin_right = 92.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "PLAYFORWARD_HT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+shortcut_in_tooltip = false
+shortcut = SubResource( 8 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayForward"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.5
+margin_top = -6.0
+margin_right = 3.5
+margin_bottom = 6.0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
+"UIButtons",
+]]
+margin_left = 96.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "NEXTFRAME_HT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+shortcut = SubResource( 10 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/NextFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.5
+margin_top = -6.0
+margin_right = 5.5
+margin_bottom = 6.0
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LastFrame" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons" groups=[
+"UIButtons",
+]]
+margin_left = 120.0
+margin_right = 140.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "LASTFRAME_HT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+shortcut = SubResource( 12 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/LastFrame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.5
+margin_top = -6.0
+margin_right = 5.5
+margin_bottom = 6.0
+texture = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoopButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/AnimationButtons"]
+margin_left = 466.0
+margin_right = 604.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+
+[node name="OnionSkinningSettings" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
+"UIButtons",
+]]
+margin_right = 12.0
+margin_bottom = 20.0
+hint_tooltip = "Onion Skinning settings"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinningSettings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.0
+margin_top = -6.0
+margin_right = 3.0
+margin_bottom = 6.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnionSkinning" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
+"UIButtons",
+]]
+margin_left = 16.0
+margin_right = 36.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Enable/disable Onion Skinning"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinning"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoopAnim" type="Button" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons" groups=[
+"UIButtons",
+]]
+margin_left = 40.0
+margin_right = 60.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Cycle loop"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
+texture = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPSValue" type="SpinBox" parent="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons"]
+margin_left = 64.0
+margin_right = 138.0
+margin_bottom = 24.0
+hint_tooltip = "How many frames per second should the animation preview be?
+The more FPS, the faster the animation plays."
+mouse_default_cursor_shape = 2
+min_value = 0.1
+step = 0.1
+value = 6.0
+align = 1
+suffix = "FPS"
+
+[node name="HSeparator" type="HSeparator" parent="AnimationContainer/TimelineContainer"]
+margin_top = 32.0
+margin_right = 604.0
+margin_bottom = 36.0
+
+[node name="OpacityAndTagContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
+margin_top = 40.0
+margin_right = 604.0
+margin_bottom = 72.0
+custom_constants/separation = 2
+
+[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_right = 214.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 214, 0 )
+
+[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_right = 53.0
+margin_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Opacity:"
+valign = 1
+
+[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_left = 57.0
+margin_right = 136.0
+margin_bottom = 32.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+ticks_on_borders = true
+
+[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_left = 140.0
+margin_top = 4.0
+margin_right = 214.0
+margin_bottom = 28.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 4
+value = 100.0
+align = 1
+
+[node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_left = 216.0
+margin_right = 604.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+theme = SubResource( 18 )
+scroll_vertical_enabled = false
+
+[node name="TagContainer" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
+
+[node name="TimelineScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer"]
+margin_top = 76.0
+margin_right = 604.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="LayersAndFrames" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll"]
+margin_right = 252.0
+margin_bottom = 124.0
+size_flags_vertical = 3
+
+[node name="LayerVBoxCont" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+margin_right = 212.0
+margin_bottom = 124.0
+
+[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
+margin_right = 212.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+text = "Layers"
+align = 1
+valign = 1
+
+[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
+margin_top = 20.0
+margin_right = 212.0
+margin_bottom = 56.0
+
+[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont/LayersContainer" instance=ExtResource( 18 )]
+margin_right = 212.0
+
+[node name="FrameButtonsAndIds" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames"]
+margin_left = 216.0
+margin_right = 252.0
+margin_bottom = 124.0
+
+[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
+margin_right = 36.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs"]
+margin_top = 1.0
+margin_right = 36.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 36, 0 )
+text = "1"
+align = 1
+
+[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
+margin_top = 20.0
+margin_right = 36.0
+margin_bottom = 20.0
+
+[node name="VSeparator" type="VSeparator" parent="AnimationContainer"]
+margin_left = 700.0
+margin_right = 704.0
+margin_bottom = 200.0
+
+[node name="AnimationTimer" type="Timer" parent="."]
+
+[node name="OnionSkinningSettings" type="WindowDialog" parent="."]
+rect_min_size = Vector2( 220, 126 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnionSkinningButtons" type="VBoxContainer" parent="OnionSkinningSettings"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -58.0
+margin_right = -4.0
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_right = 212.0
+margin_bottom = 14.0
+text = "Past Frames"
+
+[node name="PastOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 18.0
+margin_right = 212.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+align = 1
+
+[node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 46.0
+margin_right = 212.0
+margin_bottom = 60.0
+text = "Future Frames"
+
+[node name="FutureOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 64.0
+margin_right = 212.0
+margin_bottom = 88.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+align = 1
+
+[node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 92.0
+margin_right = 212.0
+margin_bottom = 116.0
+mouse_default_cursor_shape = 2
+text = "Blue-Red Mode"
+
+[node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/AddFrame" to="." method="add_frame"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
+[connection signal="toggled" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
+[connection signal="toggled" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
+[connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
+[connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
+[connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
+[connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]

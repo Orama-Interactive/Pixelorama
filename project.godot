@@ -12,32 +12,32 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Canvas",
 "language": "GDScript",
-"path": "res://Scripts/Canvas.gd"
+"path": "res://src/Canvas.gd"
 }, {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
-"path": "res://Scripts/Rulers/Guides.gd"
+"path": "res://src/Rulers/Guides.gd"
 }, {
 "base": "Button",
-"class": "LayerContainer",
+"class": "LayerButton",
 "language": "GDScript",
-"path": "res://Scripts/LayerContainer.gd"
+"path": "res://src/LayerButton.gd"
 }, {
 "base": "Reference",
 "class": "Palette",
 "language": "GDScript",
-"path": "res://Scripts/Palette/Palette.gd"
+"path": "res://src/Palette/Palette.gd"
 }, {
 "base": "Reference",
 "class": "PaletteColor",
 "language": "GDScript",
-"path": "res://Scripts/Palette/PaletteColor.gd"
+"path": "res://src/Palette/PaletteColor.gd"
 } ]
 _global_script_class_icons={
 "Canvas": "",
 "Guide": "",
-"LayerContainer": "",
+"LayerButton": "",
 "Palette": "",
 "PaletteColor": ""
 }
@@ -46,7 +46,7 @@ _global_script_class_icons={
 
 config/name="Pixelorama"
 config/description="A free & open-source 2D sprite editor"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://src/Main.tscn"
 run/low_processor_mode=true
 boot_splash/image="res://splash.png"
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
@@ -57,9 +57,9 @@ config/Version="v0.7"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
-Import="*res://Scripts/Import.gd"
-OpenSave="*res://Scripts/OpenSave.gd"
+Global="*res://src/Autoload/Global.gd"
+Import="*res://src/Autoload/Import.gd"
+OpenSave="*res://src/Autoload/OpenSave.gd"
 
 [debug]
 
