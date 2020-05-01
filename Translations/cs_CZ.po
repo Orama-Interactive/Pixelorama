@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-01 00:42\n"
+"PO-Revision-Date: 2020-05-01 00:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -340,7 +340,7 @@ msgid "View Splash Screen"
 msgstr "Zobrazit uvítací obrazovku"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Nahlášení potíží"
 
 msgid "Changelog"
 msgstr "Seznam změn"
@@ -439,19 +439,19 @@ msgid "Unsaved Image"
 msgstr "Neuložený obrázek"
 
 msgid "Changes has not been saved. Are you sure you want to create a new image?"
-msgstr ""
+msgstr "Změny nebyly uloženy. Jste si jisti, že chcete vytvořit nový obrázek?"
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Uložit před ukončením?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Máte neuložené změny. Jak si přejete pokračovat?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Uložit a ukončit"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Ukončit bez uložení"
 
 msgid "Utility Tools"
 msgstr ""
@@ -460,7 +460,10 @@ msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Obdélníkový výběr\n\n"
+"%s pro levé tlačítka myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Stiskněte %s pro přesunutí výběru"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -498,17 +501,20 @@ msgstr ""
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zesvětlení/Ztmavení\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myší"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Vyberte barvu pro levý nástroj"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Vyberte barvu pro pravý nástroj"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Prohodit levou a pravou barvu\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
@@ -568,25 +574,25 @@ msgid "A color of the grid"
 msgstr "Barva mřížky"
 
 msgid "Checker size:"
-msgstr "Velikost šachovnice:"
+msgstr "Rozměry šachovnice:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Rozměry průhledného šachovnicového pozadí"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Barva šachovnice 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "První barva průhledného šachovnicového pozadí"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Barva šachovnice 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Druhá barva průhledného šachovnicového pozadí"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Lze upravit pouze vlastní předvolbu"
 
 msgid "Brush:"
 msgstr "Štětec:"
@@ -610,7 +616,7 @@ msgid "Brush size:"
 msgstr "Velikost štětce:"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Barva štětce z"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
@@ -619,34 +625,34 @@ msgid "Fill area:"
 msgstr ""
 
 msgid "Same color area"
-msgstr ""
+msgstr "Oblast stejné barvy"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Pixely stejné barvy"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Vyplnit pomocí:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Vybraná barva"
 
 msgid "Pattern"
 msgstr "Šablona"
 
 msgid "Offset"
-msgstr ""
+msgstr "Odsazení"
 
 msgid "Lighten"
-msgstr "Zesvětlit"
+msgstr "Zesvětlení"
 
 msgid "Darken"
-msgstr "Ztmavit"
+msgstr "Ztmavení"
 
 msgid "Amount:"
 msgstr "Množství:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Intenzita zesvětlení/ztmavení"
 
 msgid "Pick for:"
 msgstr "Vybrat pro:"
@@ -698,37 +704,44 @@ msgstr "Aktuální snímek: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Přeskočit na první snímek\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Přejít na předchozí snímek\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Přehrát animaci pozpátku (od konce do začátku)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Přehrát animaci dopředu (od začátku do konce)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Přejít na další snímek\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Přeskočit na poslední snímek\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Nastavení onion skinningu"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Povolit/zakázat onion skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Kolik snímků za sekundu by měl mít náhled animace?\n"
+"Čím více FPS, tím rychleji je animace přehrávána."
 
 msgid "No loop"
 msgstr "Bez smyčky"
@@ -749,10 +762,10 @@ msgid "Future Frames"
 msgstr "Budoucí snímky"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Spravovat štítky snímků"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animace hraje pouze na snímcích pod stejným štítkem"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -762,10 +775,10 @@ msgid "Blue-Red Mode"
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Přidat nový snímek"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Odebrat snímek"
 
 msgid "Clone Frame"
 msgstr "Klonovat snímek"
@@ -833,10 +846,10 @@ msgid "Add a new palette"
 msgstr "Přidat novou paletu"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Upravit aktuálně vybranou paletu"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Vyberte paletu"
 
 msgid "Undo: Draw"
 msgstr "Zpět: Nakreslit"
@@ -857,64 +870,64 @@ msgid "Redo: Scale"
 msgstr "Znovu: Škálování"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Zpět: Přidat vrstvu"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Znovu: Přidat vrstvu"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Zpět: Odebrat vrstvu"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Znovu: Odebrat vrstvu"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Zpět: Sloučit vrstvu"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Znovu: Sloučit vrstvu"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Zpět: Změnit pořadí vrstev"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Znovu: Změnit pořadí vrstev"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Zpět: Přidat snímek"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Znovu: Přidat snímek"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Zpět: Odebrat snímek"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Znovu: Odebrat snímek"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Zpět: Změnit pořadí snímků"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Znovu: Změnit pořadí snímků"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Zpět: Smazat vlastní štětec"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Znovu: Smazat vlastní štětec"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Zpět: Upravit štítek snímků"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Znovu: Upravit štítek snímků"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Zpět: Odstranit štítek snímků"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Vpřed: Odstranit štítek snímků"
 
 msgid "Move Guide"
 msgstr "Přesunout vodítko"
@@ -1085,10 +1098,10 @@ msgid "Opens last opened project on startup"
 msgstr "Otevřít naposledy otevřený projekt při spuštění"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Vytvořit novou složku pro každý štítek snímků"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Vytvoří více souborů, ale každý soubor je uložen v jiném adresáři, který odpovídá jeho štítku snímků"
 
 msgid "Close"
 msgstr "Zavřít"
