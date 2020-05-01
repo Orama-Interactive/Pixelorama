@@ -30,7 +30,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Contents"]
-margin_right = 617.0
+margin_right = 614.0
 margin_bottom = 436.0
 custom_constants/separation = 0
 
@@ -90,7 +90,7 @@ margin_bottom = 436.0
 
 [node name="Buttons_Changelog" type="MarginContainer" parent="Contents/HBoxContainer"]
 margin_left = 354.0
-margin_right = 617.0
+margin_right = 614.0
 margin_bottom = 436.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 10
@@ -101,54 +101,58 @@ custom_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 253.0
+margin_right = 250.0
 margin_bottom = 426.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="Buttons" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 110.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="NewBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "New"
 
 [node name="OpenBtn " type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
 margin_top = 30.0
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 50.0
+mouse_default_cursor_shape = 2
 text = "Open"
 
 [node name="OpenLastBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
 margin_top = 60.0
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 80.0
+mouse_default_cursor_shape = 2
 text = "Open Last Project"
 
 [node name="ImportBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
 margin_top = 90.0
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 110.0
+mouse_default_cursor_shape = 2
 text = "Import"
 
 [node name="HSeparator" type="HSeparator" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
 margin_top = 120.0
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 124.0
 
 [node name="Changlog" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
 margin_top = 134.0
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 416.0
 size_flags_vertical = 3
 custom_constants/separation = 8
 
 [node name="ChangesLabel" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog"]
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -156,18 +160,18 @@ text = "v0.6 Changes"
 
 [node name="ChangelogContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog"]
 margin_top = 22.0
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="ChangelogScroll" type="ScrollContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer"]
-margin_right = 243.0
+margin_right = 240.0
 margin_bottom = 260.0
 rect_min_size = Vector2( 0, 260 )
 
 [node name="Label" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer/ChangelogScroll"]
-margin_right = 243.0
-margin_bottom = 1663.0
+margin_right = 240.0
+margin_bottom = 1714.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Added
@@ -211,12 +215,12 @@ autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="Contents"]
 margin_top = 436.0
-margin_right = 617.0
+margin_right = 614.0
 margin_bottom = 440.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Contents"]
 margin_top = 440.0
-margin_right = 617.0
+margin_right = 614.0
 margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -228,7 +232,7 @@ custom_constants/margin_bottom = 10
 [node name="Info" type="HBoxContainer" parent="Contents/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 607.0
+margin_right = 604.0
 margin_bottom = 143.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -344,7 +348,7 @@ stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info"]
 margin_left = 365.0
-margin_right = 597.0
+margin_right = 594.0
 margin_bottom = 133.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -352,15 +356,15 @@ custom_constants/separation = 5
 alignment = 2
 
 [node name="Branding" type="HBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer"]
-margin_right = 232.0
+margin_right = 229.0
 margin_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer/Branding"]
-margin_left = 99.0
-margin_right = 196.0
+margin_left = 96.0
+margin_right = 193.0
 margin_bottom = 104.0
 size_flags_vertical = 3
 alignment = 1
@@ -389,36 +393,39 @@ text = "Copyright 2019-2020"
 align = 1
 
 [node name="Links" type="VBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer/Branding"]
-margin_left = 200.0
-margin_right = 232.0
+margin_left = 197.0
+margin_right = 229.0
 margin_bottom = 104.0
 
-[node name="TextureButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+[node name="GithubButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
 margin_right = 32.0
 margin_bottom = 32.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 10 )
 
-[node name="TextureButton2" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+[node name="DiscordButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 9 )
 
-[node name="TextureButton3" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+[node name="PatreonButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
 margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer"]
 margin_top = 109.0
-margin_right = 232.0
+margin_right = 229.0
 margin_bottom = 133.0
 alignment = 2
 
 [node name="ShowOnStartup" type="CheckBox" parent="Contents/MarginContainer/Info/VBoxContainer/HBoxContainer"]
-margin_left = 127.0
-margin_right = 232.0
+margin_left = 124.0
+margin_right = 229.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 7 )
@@ -433,7 +440,7 @@ text = "Don't show again"
 [connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/PlatinumContainer/TakeThisSpot" to="." method="_on_TakeThisSpot_pressed"]
 [connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/GoldContainer/TakeThisSpot" to="." method="_on_TakeThisSpot_pressed"]
 [connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/PatronContainer/PatronButton" to="." method="_on_PatronButton_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/TextureButton" to="." method="_on_GithubButton_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/TextureButton2" to="." method="_on_DiscordButton_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/TextureButton3" to="." method="_on_PatronButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
 [connection signal="toggled" from="Contents/MarginContainer/Info/VBoxContainer/HBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]

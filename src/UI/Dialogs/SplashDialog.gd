@@ -39,7 +39,7 @@ func _on_ShowOnStartup_toggled(pressed : bool) -> void:
 		Global.config_cache.set_value("preferences", "startup", true)
 
 
-func _on_PatronButton_pressed() -> void:
+func _on_PatreonButton_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
 
 
