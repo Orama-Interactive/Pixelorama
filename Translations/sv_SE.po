@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2020-05-01 15:47\n"
+"PO-Revision-Date: 2020-05-01 16:46\n"
 
 msgid "OK"
 msgstr ""
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Unsaved Image"
 msgstr ""
 
-msgid "Changes has not been saved. Are you sure you want to create a new image?"
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
 
 msgid "Save before exiting?"
