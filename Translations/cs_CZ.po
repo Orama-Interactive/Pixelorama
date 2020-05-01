@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-01 00:07\n"
+"PO-Revision-Date: 2020-05-01 00:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -193,151 +193,151 @@ msgid "Resize:"
 msgstr "Změnit velikost:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Zrušit export"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Upozornění!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Vybrat aktuální složku"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Otevřít složku"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Všechny snímky jako více souborů"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Všechny snímky jako jeden soubor animace"
 
 msgid "Background:"
-msgstr ""
+msgstr "Pozadí:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Směr:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Vpřed"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Pozpátku"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Sloupce"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Sloupce:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Řádky"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Řádky:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Cesta:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Složky a soubory:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Vytvořit složku"
 
 msgid "File:"
-msgstr ""
+msgstr "Soubor:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolace:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Nejbližší"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineární"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kubické"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineární"
 
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 msgid "Language"
-msgstr ""
+msgstr "Jazyk"
 
 msgid "Themes"
-msgstr ""
+msgstr "Motivy"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Plátno"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Zkratky"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Hladší přiblížení"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Přidá hladší přechod při přiblížení nebo přiblížení"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Citlivost tlaku na tabletu:"
 
 msgid "None"
-msgstr ""
+msgstr "Žádný"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Ovlivnit alfa vrstvu štětce"
 
 msgid "Color:"
-msgstr ""
+msgstr "Barva:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Barva vodítka:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Systémový jazyk"
 
 msgid "Dark"
-msgstr ""
+msgstr "Tmavý"
 
 msgid "Gray"
-msgstr ""
+msgstr "Šedý"
 
 msgid "Gold"
-msgstr ""
+msgstr "Zlatý"
 
 msgid "Light"
-msgstr ""
+msgstr "Světlý"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Převrátit barvy"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Odbarvit"
 
 msgid "Outline"
-msgstr ""
+msgstr "Obrys"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Úprava Odstínu/Nasycení/Hodnoty"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Úhlopříčka"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Umístit uvnitř obrázku"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Tloušťka:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Zobrazit uvítací obrazovku"
 
 msgid "Issue Tracker"
 msgstr ""
@@ -433,10 +433,10 @@ msgid "copy"
 msgstr "kopie"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Opravdu chcete ukončit Pixeloramu?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Neuložený obrázek"
 
 msgid "Changes has not been saved. Are you sure you want to create a new image?"
 msgstr ""
@@ -917,58 +917,58 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Soubor uložen"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Soubor automaticky uložen"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Otevření souboru selhalo"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Uložení souboru selhalo"
 
 msgid "File exported"
-msgstr ""
+msgstr "Soubor exportován"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Nová prázdná paleta"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importovat paletu"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Název palety:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Název barvy:"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Vytvořit novou prázdnou paletu?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Chyba: Paleta musí mít platný název."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Chyba: Paleta s názvem '%s' již existuje!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Neplatný soubor palety!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Upravit paletu"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patroni:"
 
 msgid "Changes"
-msgstr ""
+msgstr "Změny"
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platinový sponzor"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Zlatý sponzor"
 
 msgid "Platinum Sponsor Placeholder"
 msgstr ""
@@ -977,7 +977,7 @@ msgid "Gold Sponsors Placeholder"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Příště již nezobrazovat"
 
 msgid "Take this spot!"
 msgstr ""
