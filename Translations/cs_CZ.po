@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-01 00:27\n"
+"PO-Revision-Date: 2020-05-01 00:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -476,7 +476,7 @@ msgid "Color Picker\n"
 msgstr ""
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Kreslící nástroje"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -514,61 +514,61 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 msgid "Left tool"
-msgstr ""
+msgstr "Levý nástroj"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Pravý nástroj"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Indikátor levého pixelu"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indikátor pravého pixelu"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Zobrazit ikonu levého nástroje"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Zobrazit ikonu pravého nástroje"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Barva vodítek:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Barva vodítek zobrazených na plátně"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Šířka mřížky:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Nastaví, jak daleko jsou od sebe svislé čáry mřížky"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Výška mřížky:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Nastaví, jak daleko jsou od sebe vodorovné čáry mřížky"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Barva mřížky:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Barva mřížky"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Velikost šachovnice:"
 
 msgid "Size of the transparent checker background"
 msgstr ""
@@ -589,25 +589,25 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Štětec:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Vybrat štětec"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Štětec: Pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Štětec: Kruh"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Štětec: Vyplněný kruh"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Vlastní štětec"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Velikost štětce:"
 
 msgid "Brush color from"
 msgstr ""
@@ -631,31 +631,31 @@ msgid "Selected Color"
 msgstr ""
 
 msgid "Pattern"
-msgstr ""
+msgstr "Šablona"
 
 msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "Zesvětlit"
 
 msgid "Darken"
-msgstr ""
+msgstr "Ztmavit"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Množství:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Vybrat pro:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Levá barva"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Pravá barva"
 
 msgid "Mode:"
 msgstr "Režim:"
@@ -667,19 +667,19 @@ msgid "Zoom out"
 msgstr "Oddálit"
 
 msgid "Options:"
-msgstr ""
+msgstr "Možnosti:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Přizpůsobit snímku"
 
 msgid "100% Zoom"
 msgstr "100% přiblížení"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Zrcadlení"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Vodorovně"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -688,13 +688,13 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Svisle"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Aktuální snímek:"
 
 msgid "Current frame: 1/1"
-msgstr ""
+msgstr "Aktuální snímek: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -731,22 +731,22 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr ""
+msgstr "Bez smyčky"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Cyklická smyčka"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping pong smyčka"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Onion skinning:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Předchozí snímky"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Budoucí snímky"
 
 msgid "Manage frame tags"
 msgstr ""
@@ -768,68 +768,69 @@ msgid "Remove Frame"
 msgstr ""
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Klonovat snímek"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Přesunout doleva"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Přesunout doprava"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Připojit buňku"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Odpojit buňku"
 
 msgid "Layer"
-msgstr ""
+msgstr "Vrstva"
 
 msgid "Layers"
-msgstr ""
+msgstr "Vrstvy"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Vytvořit novou vrstvu"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Odstranit aktuální vrstvu"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Přesunout aktuální vrstvu nahoru"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Přesunout aktuální vrstvu dolů"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Naklonovat aktuální vrstvu"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Sloučit aktuální vrstvu s vrstvou níže"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Průhlednost:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Přepnout viditelnost vrstvy"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Zamknout/odemknout vrstvu"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Povolit/zakázat propojení buněk\n\n"
+"Propojené buňky jsou sdíleny přes vícero snímků"
 
 msgid "Palette"
-msgstr ""
+msgstr "Paleta"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Palety"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Přidat novou paletu"
 
 msgid "Edit currently selected palette"
 msgstr ""
@@ -838,22 +839,22 @@ msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Zpět: Nakreslit"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Znovu: Nakreslit"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Zpět: Obdélníkový výběr"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Znovu: Obdélníkový výběr"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Zpět: Škálování"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Znovu: Škálování"
 
 msgid "Undo: Add Layer"
 msgstr ""
@@ -916,7 +917,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr ""
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Přesunout vodítko"
 
 msgid "File saved"
 msgstr "Soubor uložen"
@@ -1030,10 +1031,10 @@ msgid "Zoom"
 msgstr "Přiblížení/oddálení"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Kapátko"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Tužka"
 
 msgid "Eraser"
 msgstr "Guma"
@@ -1090,14 +1091,14 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 msgid "Autosaved backup for %s was found.Do you want to reload it?"
-msgstr ""
+msgstr "Automaticky uložená záloha pro %s byla nalezena. Chcete ji znovu načíst?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Záloha znovu načtena"
 
