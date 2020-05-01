@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-04-30 23:57\n"
+"PO-Revision-Date: 2020-05-01 15:47\n"
 
 msgid "OK"
 msgstr ""
@@ -1092,7 +1092,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
 msgstr ""
 
 msgid "Backup reloaded"
