@@ -9,6 +9,7 @@ var last_frame := Global.canvases.size() - 1
 onready var timeline_scroll : ScrollContainer = $AnimationContainer/TimelineContainer/TimelineScroll
 onready var tag_scroll_container : ScrollContainer = $AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll
 
+
 func _ready() -> void:
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / fps
@@ -175,11 +176,14 @@ func _on_FrameTagButton_pressed() -> void:
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.update()
+	var theme_type := Global.theme_type
+	if theme_type == "Gold":
+		theme_type = "Light"
 	var texture_button : TextureRect = Global.onion_skinning_button.get_child(0)
 	if Global.onion_skinning:
-		texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/onion_skinning.png" % Global.theme_type)
+		texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/onion_skinning.png" % theme_type)
 	else:
-		texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/onion_skinning_off.png" % Global.theme_type)
+		texture_button.texture = load("res://Assets/Graphics/%s Themes/Timeline/onion_skinning_off.png" % theme_type)
 
 
 func _on_OnionSkinningSettings_pressed() -> void:
@@ -318,21 +322,25 @@ func _on_FirstFrame_pressed() -> void:
 	Global.current_frame = 0
 
 
-func _on_FPSValue_value_changed(value) -> void:
+func _on_FPSValue_value_changed(value : float) -> void:
 	fps = float(value)
 	Global.animation_timer.wait_time = 1 / fps
 
-func _on_PastOnionSkinning_value_changed(value) -> void:
+
+func _on_PastOnionSkinning_value_changed(value : float) -> void:
 	Global.onion_skinning_past_rate = int(value)
 	Global.canvas.update()
 
-func _on_FutureOnionSkinning_value_changed(value) -> void:
+
+func _on_FutureOnionSkinning_value_changed(value : float) -> void:
 	Global.onion_skinning_future_rate = int(value)
 	Global.canvas.update()
 
-func _on_BlueRedMode_toggled(button_pressed) -> void:
+
+func _on_BlueRedMode_toggled(button_pressed : bool) -> void:
 	Global.onion_skinning_blue_red = button_pressed
 	Global.canvas.update()
+
 
 # Layer buttons
 
@@ -375,6 +383,7 @@ func add_layer(is_new := true) -> void:
 	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
 	Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
 	Global.undo_redo.commit_action()
+
 
 func _on_RemoveLayer_pressed() -> void:
 	var new_layers : Array = Global.layers.duplicate()

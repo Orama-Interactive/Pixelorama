@@ -7,6 +7,7 @@ onready var developed_by_label : Label = $"Contents/MarginContainer/Info/VBoxCon
 onready var platinum_placeholder_label : Label = $"Contents/MarginContainer/Info/Sponsors/PlatinumContainer/PlaceholderLabel"
 onready var gold_placeholder_label : Label = $"Contents/MarginContainer/Info/Sponsors/GoldContainer/PlaceholderLabel"
 
+
 func _on_SplashDialog_about_to_show() -> void:
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
@@ -26,8 +27,10 @@ func _on_SplashDialog_about_to_show() -> void:
 		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Bold.tres"))
 		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Bold.tres"))
 
+
 func _on_ArtCredits_pressed() -> void:
 	OS.shell_open("https://www.instagram.com/erevoid")
+
 
 func _on_ShowOnStartup_toggled(pressed : bool) -> void:
 	if pressed:
@@ -35,31 +38,38 @@ func _on_ShowOnStartup_toggled(pressed : bool) -> void:
 	else:
 		Global.config_cache.set_value("preferences", "startup", true)
 
+
 func _on_PatronButton_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
+
 
 func _on_TakeThisSpot_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
 
-func _on_GithubButton_pressed():
+
+func _on_GithubButton_pressed() -> void:
 	OS.shell_open("https://github.com/Orama-Interactive/Pixelorama")
 
-func _on_DiscordButton_pressed():
+
+func _on_DiscordButton_pressed() -> void:
 	OS.shell_open("https://discord.gg/GTMtr8s")
 
 
-func _on_NewBtn_pressed():
+func _on_NewBtn_pressed() -> void:
 	Global.control.file_menu_id_pressed(0)
 	visible = false
 
-func _on_OpenBtn__pressed():
+
+func _on_OpenBtn__pressed() -> void:
 	Global.control.file_menu_id_pressed(1)
 	visible = false
 
-func _on_OpenLastBtn_pressed():
+
+func _on_OpenLastBtn_pressed() -> void:
 	Global.control.file_menu_id_pressed(2)
 	visible = false
 
-func _on_ImportBtn_pressed():
+
+func _on_ImportBtn_pressed() -> void:
 	Global.control.file_menu_id_pressed(5)
 	visible = false

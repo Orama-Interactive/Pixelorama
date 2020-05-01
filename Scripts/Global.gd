@@ -117,8 +117,8 @@ var show_animation_timeline := true
 
 # Onion skinning options
 var onion_skinning := false
-var onion_skinning_past_rate := 1
-var onion_skinning_future_rate := 1
+var onion_skinning_past_rate := 1.0
+var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
 
 # Brushes
@@ -238,7 +238,6 @@ var onion_skinning_button : BaseButton
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
 var play_backwards : BaseButton
-var timeline_seconds : Control
 var layers_container : VBoxContainer
 var frames_container : VBoxContainer
 var tag_container : Control
@@ -874,6 +873,7 @@ func update_left_custom_brush() -> void:
 
 		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
 
+
 func update_right_custom_brush() -> void:
 	if current_right_brush_type == Brush_Types.PIXEL:
 		var pixel := Image.new()
@@ -899,6 +899,7 @@ func update_right_custom_brush() -> void:
 
 		right_brush_type_button.get_child(0).texture = custom_right_brush_texture
 
+
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
 	var blended_image := Image.new()
 	blended_image.copy_from(image)
@@ -915,6 +916,7 @@ func blend_image_with_color(image : Image, color : Color, interpolate_factor : f
 			else: # If color is transparent - if it's the eraser
 				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
 	return blended_image
+
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 # This is not used for drawing, rather for finding the points required
@@ -939,6 +941,7 @@ func plot_circle(r : int) -> Array:
 			x += 1
 			err += x * 2 + 1
 	return circle_points
+
 
 func scale3X(sprite : Image, tol : float = 50) -> Image:
 	var scaled = Image.new()
@@ -996,6 +999,7 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	scaled.unlock()
 	sprite.unlock()
 	return scaled
+
 
 func rotxel(sprite : Image, angle : float) -> void:
 
@@ -1108,10 +1112,12 @@ func rotxel(sprite : Image, angle : float) -> void:
 	sprite.unlock()
 	aux.unlock()
 
+
 func fake_rotsprite(sprite : Image, angle : float) -> void:
 	sprite.copy_from(scale3X(sprite))
 	nn_rotate(sprite,angle)
 	sprite.resize(sprite.get_width()/3,sprite.get_height()/3,0)
+
 
 func nn_rotate(sprite : Image, angle : float) -> void:
 	var aux : Image = Image.new()
@@ -1132,13 +1138,16 @@ func nn_rotate(sprite : Image, angle : float) -> void:
 	sprite.unlock()
 	aux.unlock()
 
+
 func similarColors(c1 : Color, c2 : Color, tol : float = 100) -> bool:
 	var dist = colorDistance(c1, c2)
 	return dist <= tol
 
+
 func colorDistance(c1 : Color, c2 : Color) -> float:
 		return sqrt(pow((c1.r - c2.r)*255, 2) + pow((c1.g - c2.g)*255, 2)
 		+ pow((c1.b - c2.b)*255, 2) + pow((c1.a - c2.a)*255, 2))
+
 
 func _exit_tree() -> void:
 	config_cache.set_value("window", "screen", OS.current_screen)

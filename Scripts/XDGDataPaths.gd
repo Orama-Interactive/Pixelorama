@@ -109,6 +109,7 @@ func get_palette_write_path() -> String:
 func get_brushes_write_path() -> String:
 	return xdg_data_home.plus_file(brushes_data_subdirectory)
 
+
 # Get the path that we are ok to be writing patterns to:
 func get_patterns_write_path() -> String:
 	return xdg_data_home.plus_file(patterns_data_subdirectory)

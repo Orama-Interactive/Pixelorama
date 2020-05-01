@@ -12,6 +12,7 @@ onready var contributors : Tree = $AboutUI/Credits/Contributors/ContributorTree
 onready var donors : Tree = $AboutUI/Credits/Donors/DonorTree
 onready var translators : Tree = $AboutUI/Credits/Translators/TranslatorTree
 
+
 func _ready() -> void:
 	var contributor_root := contributors.create_item()
 	contributors.create_item(contributor_root).set_text(0, "  Hugo Locurcio (Calinou)")
@@ -36,6 +37,7 @@ func _ready() -> void:
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms")
 	donors.create_item(donors_root).set_text(0, "  Mike King")
+
 
 func _on_AboutDialog_about_to_show() -> void:
 	var current_version : String = ProjectSettings.get_setting("application/config/Version")
@@ -86,9 +88,11 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian"))
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
 
+
 func _on_AboutDialog_popup_hide() -> void:
 	groups.clear()
 	developers.clear()
+
 
 func _on_Groups_item_selected() -> void:
 	for child in credits.get_children():
@@ -109,8 +113,10 @@ func _on_Groups_item_selected() -> void:
 func _on_Website_pressed() -> void:
 	OS.shell_open("https://www.orama-interactive.com/pixelorama")
 
+
 func _on_GitHub_pressed() -> void:
 	OS.shell_open("https://github.com/Orama-Interactive/Pixelorama")
+
 
 func _on_Donate_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")

@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+<br><br>
 
 ## [v0.7] - Unreleased
 This update has been brought to you by the contributions of:
@@ -65,7 +66,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 ### Removed
 - It's no longer possible for frames to have different amounts of layers. All frames have the same amount.
 - The guides no longer work with undo/redo.
-
+<br><br>
 
 ## [v0.6.2] - 17-02-2020
 
@@ -103,7 +104,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
 - Fixed ruler markings cutting off before they should - Thanks to YeldhamDev!
 - Fixed bug where resizing the image on export and moving selection content were not working on Godot 3.2 - Issues #161 and #162
-
+<br><br>
 
 ## [v0.6.1] - 13-01-2020
 
@@ -134,7 +135,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - The canvas updates automatically when onion skinning settings change.
 - Fixed a rare crash with straight lines. It was possible that the variable `is_making_line` could be true, even if the line itself has been freed from memory.
 - Fixed issue where undo/redo was not working properly for straight lines that went outside the canvas.
-
+<br><br>
 
 ## [v0.6] - 06-01-2020
 

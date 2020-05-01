@@ -10,6 +10,7 @@ var is_quitting_on_save := false
 var previous_left_color := Color.black
 var previous_right_color := Color.white
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
@@ -245,9 +246,11 @@ func _input(event : InputEvent) -> void:
 			elif event.is_action_pressed(t[1]): # Shortcut for left button
 				_on_Tool_pressed(t[0], false, true)
 
+
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 		show_quit_dialog()
+
 
 func file_menu_id_pressed(id : int) -> void:
 	match id:
@@ -299,6 +302,7 @@ func file_menu_id_pressed(id : int) -> void:
 		8: # Quit
 			show_quit_dialog()
 
+
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Undo
@@ -318,6 +322,7 @@ func edit_menu_id_pressed(id : int) -> void:
 		3: # Preferences
 			$PreferencesDialog.popup_centered(Vector2(400, 280))
 			Global.can_draw = false
+
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
@@ -345,6 +350,7 @@ func view_menu_id_pressed(id : int) -> void:
 			Global.animation_timeline.visible = Global.show_animation_timeline
 
 	Global.canvas.update()
+
 
 func image_menu_id_pressed(id : int) -> void:
 	if Global.layers[Global.current_layer][2]: # No changes if the layer is locked
@@ -434,6 +440,7 @@ func image_menu_id_pressed(id : int) -> void:
 			$HSVDialog.popup_centered()
 			Global.can_draw = false
 
+
 func help_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Splash Screen
@@ -446,6 +453,7 @@ func help_menu_id_pressed(id : int) -> void:
 		3: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
+
 
 func load_last_project() -> void:
 	# Check if any project was saved or opened last time
@@ -500,16 +508,22 @@ func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
 		Global.can_draw = true
 
+
 func _on_ViewportContainer_mouse_entered() -> void:
 	Global.has_focus = true
+
 
 func _on_ViewportContainer_mouse_exited() -> void:
 	Global.has_focus = false
 
+
 func _can_draw_true() -> void:
 	Global.can_draw = true
+
+
 func _can_draw_false() -> void:
 	Global.can_draw = false
+
 
 func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_left := true) -> void:
 	var current_action := tool_pressed.name
@@ -603,9 +617,11 @@ func _on_LeftBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
 	Global.brush_type_window_position = "left"
 
+
 func _on_RightBrushTypeButton_pressed() -> void:
 	Global.brushes_popup.popup(Rect2(Global.right_brush_type_button.rect_global_position, Vector2(226, 72)))
 	Global.brush_type_window_position = "right"
+
 
 func _on_LeftBrushSizeEdit_value_changed(value) -> void:
 	Global.left_brush_size_edit.value = value
@@ -614,6 +630,7 @@ func _on_LeftBrushSizeEdit_value_changed(value) -> void:
 	Global.left_brush_size = new_size
 	update_left_custom_brush()
 
+
 func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size_edit.value = value
 	Global.right_brush_size_slider.value = value
@@ -621,8 +638,10 @@ func _on_RightBrushSizeEdit_value_changed(value) -> void:
 	Global.right_brush_size = new_size
 	update_right_custom_brush()
 
+
 func _on_Brush_Selected() -> void:
 	$BrushesPopup.hide()
+
 
 func _on_ColorSwitch_pressed() -> void:
 	var temp: Color = Global.left_color_picker.color

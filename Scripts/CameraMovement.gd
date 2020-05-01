@@ -32,6 +32,7 @@ func dir_move_zoom_multiplier(press_time : float) -> float:
 	else:
 		return 0.0
 
+
 func reset_dir_move_time(direction) -> void:
 	Global.key_move_press_time[direction] = 0.0
 
@@ -77,6 +78,7 @@ const directional_sign_multipliers := [
 	Vector2(-1.0, 0.0),
 	Vector2(1.0, 0.0)
 ]
+
 
 # Process an action event for a pressed direction
 # action

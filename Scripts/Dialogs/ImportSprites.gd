@@ -15,19 +15,24 @@ func _ready() -> void:
 		remove_child(child)
 		get_vbox().add_child(child)
 
+
 func _on_ImportAsNewFrame_pressed() -> void:
 	new_frame = !new_frame
+
 
 func _on_ImportSpritesheet_pressed() -> void:
 	import_spritesheet = !import_spritesheet
 	var spritesheet_container = Global.find_node_by_name(self, "Spritesheet")
 	spritesheet_container.visible = import_spritesheet
 
+
 func _on_HorizontalFrames_value_changed(value) -> void:
 	spritesheet_horizontal = value
 
+
 func _on_VerticalFrames_value_changed(value) -> void:
 	spritesheet_vertical = value
+
 
 func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.control.opensprite_file_selected = true

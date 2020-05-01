@@ -10,6 +10,7 @@ var orig_x := 0.0
 var orig_y := 0.0
 var orig_colors := []
 
+
 func _ready() -> void:
 	img = Image.new()
 	img.create(1, 1, false, Image.FORMAT_RGBA8)
@@ -17,8 +18,8 @@ func _ready() -> void:
 	tex = ImageTexture.new()
 	tex.create_from_image(img, 0)
 
-# warning-ignore:unused_argument
-func _process(delta : float) -> void:
+
+func _process(_delta : float) -> void:
 	if Global.layers[Global.current_layer][2]:
 		return
 	var mouse_pos: Vector2 = get_local_mouse_position() - Global.canvas.location
@@ -138,9 +139,11 @@ func _process(delta : float) -> void:
 						layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
 			Global.canvas.handle_redo("Draw")
 
+
 func _draw() -> void:
 	if img.get_size() == polygon[2] - polygon[0]:
 		draw_texture(tex, polygon[0], Color(1, 1, 1, 0.5))
+
 
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y

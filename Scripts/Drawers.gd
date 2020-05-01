@@ -10,6 +10,7 @@ class SimpleDrawer extends Drawer:
 	func reset() -> void:
 		pass
 
+
 	func set_pixel(_sprite: Image, _pos: Vector2, _new_color: Color) -> void:
 		_sprite.set_pixel(_pos.x, _pos.y, _new_color)
 
@@ -19,8 +20,10 @@ class PixelPerfectDrawer extends Drawer:
 	const corners = [Vector2(1, 1), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1)]
 	var last_pixels = [null, null]
 
+
 	func reset():
 		last_pixels = [null, null]
+
 
 	func set_pixel(_sprite: Image, _pos: Vector2, _new_color: Color) -> void:
 		last_pixels.push_back([_pos, _sprite.get_pixel(_pos.x, _pos.y)])

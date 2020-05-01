@@ -9,6 +9,7 @@ var mouse_pos := Vector2.ZERO
 var previous_points := points
 var type = Types.HORIZONTAL
 
+
 func _ready() -> void:
 	width = 0.1
 	default_color = Global.guide_color

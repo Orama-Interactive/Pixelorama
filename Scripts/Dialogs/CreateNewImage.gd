@@ -51,19 +51,22 @@ var TStrings ={
 	Templates.SNES_PAL: "SNES (PAL)"
 	}
 
+
 func _ready() -> void:
 	ratio_box.connect("pressed", self, "_on_RatioCheckBox_toggled", [ratio_box.pressed])
 	templates_options.connect("item_selected", self, "_on_TemplatesOptions_item_selected")
 
 	_CreateOptionList()
 
-func _CreateOptionList():
+
+func _CreateOptionList() -> void:
 	for i in Templates.values():
 		if i > 0:
 			if TStrings[i] != "":
 				templates_options.add_item("{width}x{height} - {name}".format({"width":TResolutions[i].x, "height":TResolutions[i].y, "name":TStrings[i]}), i)
 			else:
 				templates_options.add_item("{width}x{height}".format({"width":TResolutions[i].x, "height":TResolutions[i].y}), i)
+
 
 func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
@@ -89,6 +92,7 @@ func _on_CreateNewImage_confirmed() -> void:
 		Global.canvas.layers[0][0].lock()
 		Global.canvas.update_texture(0)
 
+
 func _on_CreateNewImage_about_to_show() -> void:
 	width_value.value = Global.default_image_width
 	height_value.value = Global.default_image_height
@@ -99,10 +103,10 @@ func _on_CreateNewImage_about_to_show() -> void:
 		if spin_box.is_connected("value_changed", self, "_on_SizeValue_value_changed"):
 			spin_box.disconnect("value_changed", self, "_on_SizeValue_value_changed")
 
+
 var aspect_ratio: float
 
-# warning-ignore:unused_argument
-func _on_RatioCheckBox_toggled(button_pressed: bool) -> void:
+func _on_RatioCheckBox_toggled(_button_pressed: bool) -> void:
 	aspect_ratio = width_value.value / height_value.value
 	for spin_box in [width_value, height_value]:
 		if spin_box.is_connected("value_changed", self, "_on_SizeValue_value_changed"):
@@ -110,11 +114,13 @@ func _on_RatioCheckBox_toggled(button_pressed: bool) -> void:
 		else:
 			spin_box.connect("value_changed", self, "_on_SizeValue_value_changed")
 
+
 func _on_SizeValue_value_changed(value: float) -> void:
 	if width_value.value == value:
 		height_value.value = width_value.value / aspect_ratio
 	if height_value.value == value:
 		width_value.value = height_value.value * aspect_ratio
+
 
 func _on_TemplatesOptions_item_selected(id: int) -> void:
 	if id != Templates.TDefault:

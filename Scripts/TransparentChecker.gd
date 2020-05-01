@@ -1,7 +1,7 @@
 extends ColorRect
 
 
-func _ready():
+func _ready() -> void:
 	rect_size = Global.canvas.size
 	material.set_shader_param("size", Global.checker_size)
 	material.set_shader_param("color1", Global.checker_color_1)

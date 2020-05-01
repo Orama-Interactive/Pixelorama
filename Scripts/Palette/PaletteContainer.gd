@@ -15,11 +15,13 @@ func _ready() -> void:
 	var add_palette_menu : PopupMenu = Global.add_palette_button.get_child(0)
 	add_palette_menu.connect("id_pressed", self, "add_palette_menu_id_pressed")
 
+
 func _clear_swatches() -> void:
 	for child in get_children():
 		if child is BaseButton:
 			child.disconnect("pressed", self, "on_color_select")
 			child.queue_free()
+
 
 func on_palette_select(palette_name : String) -> void:
 	_clear_swatches()
@@ -28,6 +30,7 @@ func on_palette_select(palette_name : String) -> void:
 		var palette : Palette = Global.palettes[palette_name]
 		_display_palette(palette)
 
+
 func on_new_empty_palette() -> void:
 	Global.new_palette_dialog.window_title = "Create a new empty palette?"
 	Global.new_palette_name_line_edit.text = "Custom_Palette"
@@ -35,9 +38,11 @@ func on_new_empty_palette() -> void:
 	Global.new_palette_dialog.popup_centered()
 	Global.can_draw = false
 
+
 func on_import_palette() -> void:
 	Global.palette_import_file_dialog.popup_centered()
 	Global.can_draw = false
+
 
 func on_palette_import_file_selected(path : String) -> void:
 	var palette : Palette = null
@@ -64,8 +69,10 @@ func on_palette_import_file_selected(path : String) -> void:
 		Global.error_dialog.set_text("Invalid Palette file!")
 		Global.error_dialog.popup_centered()
 
+
 func _on_AddPalette_pressed() -> void:
 	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
+
 
 func on_new_palette_confirmed() -> void:
 	var new_palette_name : String = Global.new_palette_name_line_edit.text
@@ -74,12 +81,14 @@ func on_new_palette_confirmed() -> void:
 		Global.error_dialog.set_text(result)
 		Global.error_dialog.popup_centered()
 
+
 func add_palette_menu_id_pressed(id : int) -> void:
 	match id:
 		0:	# New Empty Palette
 			Global.palette_container.on_new_empty_palette()
 		1:	# Import Palette
 			Global.palette_container.on_import_palette()
+
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
 	var new_palette : Palette = Palette.new()
@@ -109,6 +118,7 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	on_palette_select(name)
 	return ""
 
+
 func on_edit_palette() -> void:
 	var palette : Palette = Global.palettes[current_palette]
 
@@ -126,9 +136,11 @@ func on_edit_palette() -> void:
 		from_palette = null
 		Global.edit_palette_popup.open(current_palette)
 
+
 func _on_PaletteOptionButton_item_selected(ID : int) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
 	on_palette_select(palette_name)
+
 
 func _display_palette(palette : Palette) -> void:
 	var index := 0
@@ -144,6 +156,7 @@ func _display_palette(palette : Palette) -> void:
 		add_child(new_button)
 		index += 1
 
+
 func on_color_select(index : int) -> void:
 	var color : Color = Global.palettes[current_palette].get_color(index)
 
@@ -153,6 +166,7 @@ func on_color_select(index : int) -> void:
 	elif Input.is_action_just_pressed("right_mouse"):
 		Global.right_color_picker.color = color
 		Global.update_right_custom_brush()
+
 
 func _load_palettes() -> void:
 	Global.directory_module.ensure_xdg_user_dirs_exist()
@@ -179,6 +193,7 @@ func _load_palettes() -> void:
 	if not "Default" in Global.palettes && Global.palettes.size() > 0:
 		Global.palette_container._on_PaletteOptionButton_item_selected(0)
 
+
 # Get the palette files in a single directory.
 # if it does not exist, return []
 func get_palette_files(path : String ) -> Array:
@@ -200,6 +215,7 @@ func get_palette_files(path : String ) -> Array:
 
 	dir.list_dir_end()
 	return results
+
 
 # This returns an array of arrays, with priorities.
 # In particular, it takes an array of paths to look for
@@ -230,6 +246,7 @@ func get_palette_priority_file_map(looking_paths: Array) -> Array:
 		final_list.append(to_add_files)
 	return final_list
 
+
 # Locate the highest priority palette by the given relative filename
 # If none is found in the directories, then do nothing and return
 # null
@@ -242,6 +259,7 @@ func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> 
 			return base_path.plus_file(fname)
 
 	return null
+
 
 func save_palette(palette_name : String, filename : String) -> void:
 	Global.directory_module.ensure_xdg_user_dirs_exist()

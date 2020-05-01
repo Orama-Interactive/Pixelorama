@@ -37,6 +37,7 @@ var shortcut_already_assigned = false
 var old_input_event : InputEventKey
 var new_input_event : InputEventKey
 
+
 func _ready() -> void:
 	# Disable input until the shortcut selector is displayed
 	set_process_input(false)
@@ -536,7 +537,7 @@ func _on_ShortcutSelector_confirmed() -> void:
 		$Popups/ShortcutSelector.hide()
 
 
-func _on_OpenLastProject_pressed():
+func _on_OpenLastProject_pressed() -> void:
 	Global.open_last_project = !Global.open_last_project
 	Global.config_cache.set_value("preferences", "open_last_project", Global.open_last_project)
 	Global.config_cache.save("user://cache.ini")

@@ -8,6 +8,7 @@
 * [Communicating with developers](#communicating-with-developers)
 
 **Please read the first section before reporting a bug!**
+<br><br>
 
 ## Reporting bugs or proposing features
 Please, open just one issue for each bug you'd like to report, or a feature you'd like to request. Don't open many issues for the same bug or feature request, and don't use the same issue to report more than one bugs, or to request more than one feature. It's best to open different issues for each bug/feature request.
@@ -15,7 +16,7 @@ Please, open just one issue for each bug you'd like to report, or a feature you'
 Also, make sure to search the [issue tracker](https://github.com/Orama-Interactive/Pixelorama/issues) before opening a new issue, in case an issue like that exists. If you're unsure, feel free to open an issue. If it's a duplicate, we'll handle it.
 
 When reporting a bug, make sure to provide enough details, such as information about your Operating System (OS), Pixelorama version, Godot version (if you're using the source project) and clear steps to reproduce the issue. Feel free to include screenshots that might help, too.
-
+<br><br>
 
 ## Contributing pull requests
 If you want to add new features or fix bugs, please make sure that:
@@ -37,12 +38,12 @@ Please create different pull requests for each feature you'd like to implement, 
 This [Git style guide](https://github.com/agis-/git-style-guide) has some good practices to have in mind.
 
 Keep in mind, however, that not all PRs will be merged. Some may need discussion, or others may be downright closed.
-
+<br><br>
 
 ## Contributing translations
 Pixelorama uses [Crowdin](https://crowdin.com/project/pixelorama) to host the translations. In order to contribute, you need to login with your Crowdin account, select the language(s) you'd like to provide translations for, select `Translations.pot` and start translating!
 If you need help with the context of some strings, or want to translate in a language that is not available, feel free to contact me (Overloaded). All languages are welcome to be translated!
-
+<br><br>
 
 ## Communicating with developers
 To communicate with developers (e.g. to discuss a feature you want to implement or a bug you want to fix), the following channels can be used:

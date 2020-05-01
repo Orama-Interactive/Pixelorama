@@ -13,8 +13,10 @@ onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLin
 onready var left_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/LeftColor/NinePatchRect
 onready var right_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/RightColor/NinePatchRect
 
+
 func _ready() -> void:
 	$VBoxContainer/HBoxContainer/EditPaletteColorPicker.presets_visible = false
+
 
 func open(palette : String) -> void:
 	current_palette = palette
@@ -27,6 +29,7 @@ func open(palette : String) -> void:
 
 	left_color_button.modulate = Global.left_color_picker.color
 	right_color_button.modulate = Global.right_color_picker.color
+
 
 func _display_palette() -> void:
 	_clear_swatches()
@@ -50,16 +53,19 @@ func _display_palette() -> void:
 	if index > 0: # If there are colors, select the first
 		on_swatch_select(palette_grid.get_child(0))
 
+
 func _clear_swatches() -> void:
 	for child in palette_grid.get_children():
 		if child is BaseButton:
 			child.disconnect("on_drop_data", self, "on_move_swatch")
 			child.queue_free()
 
+
 func on_swatch_select(new_button) -> void:
 	current_swatch = new_button.index
 	color_name_edit.text = working_palette.get_color_name(current_swatch)
 	color_picker.color = working_palette.get_color(current_swatch)
+
 
 func on_move_swatch(from : int, to : int) -> void:
 	working_palette.move_color(from, to)
@@ -67,6 +73,7 @@ func on_move_swatch(from : int, to : int) -> void:
 	current_swatch = to
 
 	re_index_swatches()
+
 
 func _on_AddSwatchButton_pressed() -> void:
 	var color : Color = color_picker.color
@@ -87,6 +94,7 @@ func _on_AddSwatchButton_pressed() -> void:
 	palette_grid.add_child(new_button)
 	on_swatch_select(new_button)
 
+
 func _on_RemoveSwatchButton_pressed() -> void:
 	if working_palette.colors.size() > 0:
 		working_palette.remove_color(current_swatch)
@@ -99,12 +107,14 @@ func _on_RemoveSwatchButton_pressed() -> void:
 		if current_swatch >= 0:
 			on_swatch_select(palette_grid.get_child(current_swatch))
 
+
 func re_index_swatches() -> void:
 	# Re-index swatches with new order
 	var index := 0
 	for child in palette_grid.get_children():
 		child.index = index
 		index += 1
+
 
 # Rename a palette, copying to user directory if necessary.
 func rename_palette_file_with_priority_dirs(old_fname: String, new_fname: String) -> void:
@@ -144,13 +154,16 @@ func _on_EditPaletteSaveButton_pressed() -> void:
 	Global.palette_container.save_palette(current_palette, working_palette.name + ".json")
 	self.hide()
 
+
 func _on_EditPaletteCancelButton_pressed() -> void:
 	self.hide()
+
 
 func _on_EditPaletteColorNameLineEdit_text_changed(new_text : String) -> void:
 	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
 		working_palette.set_color_name(current_swatch, new_text)
 		_refresh_hint_tooltip(current_swatch)
+
 
 func _on_EditPaletteColorPicker_color_changed(color : Color) -> void:
 	if current_swatch >= 0 && current_swatch < working_palette.colors.size():
@@ -158,12 +171,15 @@ func _on_EditPaletteColorPicker_color_changed(color : Color) -> void:
 		working_palette.set_color(current_swatch, color)
 		_refresh_hint_tooltip(current_swatch)
 
+
 func _refresh_hint_tooltip(_index : int) -> void:
 	palette_grid.get_child(current_swatch).hint_tooltip = "#" + working_palette.get_color_data(current_swatch).to_upper() + " " + working_palette.get_color_name(current_swatch)
+
 
 func _on_LeftColor_pressed() -> void:
 	color_picker.color = Global.left_color_picker.color
 	_on_EditPaletteColorPicker_color_changed(color_picker.color)
+
 
 func _on_RightColor_pressed() -> void:
 	color_picker.color = Global.right_color_picker.color

@@ -1,10 +1,12 @@
 extends BaseButton
 
+
+signal brush_selected
+
 export var brush_type = 0 # Global.Brush_Types.PIXEL
 export var custom_brush_index := -3
-# warning-ignore:unused_class_variable
 var random_brushes := []
-signal brush_selected
+
 
 func _on_BrushButton_pressed() -> void:
 	# Delete the brush on middle mouse press
@@ -59,6 +61,7 @@ func _on_BrushButton_pressed() -> void:
 		Global.update_right_custom_brush()
 		emit_signal("brush_selected")
 
+
 func _on_DeleteButton_pressed() -> void:
 	if brush_type == Global.Brush_Types.CUSTOM:
 		if Global.custom_left_brush_index == custom_brush_index:
@@ -94,9 +97,11 @@ func _on_DeleteButton_pressed() -> void:
 		Global.undo_redo.add_undo_method(Global, "undo_custom_brush", self)
 		Global.undo_redo.commit_action()
 
+
 func _on_BrushButton_mouse_entered() -> void:
 	if brush_type == Global.Brush_Types.CUSTOM:
 		$DeleteButton.visible = true
+
 
 func _on_BrushButton_mouse_exited() -> void:
 	if brush_type == Global.Brush_Types.CUSTOM:

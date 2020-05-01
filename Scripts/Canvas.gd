@@ -1,6 +1,11 @@
 class_name Canvas
 extends Node2D
 
+
+const Drawer = preload("Drawers.gd").Drawer
+const SimpleDrawer = preload("Drawers.gd").SimpleDrawer
+const PixelPerfectDrawer = preload("Drawers.gd").PixelPerfectDrawer
+
 var layers := []
 var current_layer_index := 0
 var location := Vector2.ZERO
@@ -26,10 +31,6 @@ var made_line := false
 var is_making_selection := "None"
 var line_2d : Line2D
 var pen_pressure := 1.0 # For tablet pressure sensitivity
-
-const Drawer = preload("Drawers.gd").Drawer
-const SimpleDrawer = preload("Drawers.gd").SimpleDrawer
-const PixelPerfectDrawer = preload("Drawers.gd").PixelPerfectDrawer
 
 var pixel_perfect_drawer := PixelPerfectDrawer.new()
 var pixel_perfect_drawer_h_mirror := PixelPerfectDrawer.new()
@@ -81,6 +82,7 @@ func _ready() -> void:
 	line_2d.add_point(previous_mouse_pos_for_lines)
 	line_2d.add_point(previous_mouse_pos_for_lines)
 	add_child(line_2d)
+
 
 func _draw() -> void:
 	# Onion Skinning
@@ -519,6 +521,7 @@ func _input(event : InputEvent) -> void:
 	if sprite_changed_this_frame:
 		update_texture(Global.current_layer)
 
+
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
 	var bigger_canvas_axis = max(size.x, size.y)
@@ -548,6 +551,7 @@ func camera_zoom() -> void:
 
 	Global.transparent_checker._ready() # To update the rect size
 
+
 func handle_undo(action : String) -> void:
 	if !can_undo:
 		return
@@ -575,6 +579,7 @@ func handle_undo(action : String) -> void:
 
 	can_undo = false
 
+
 func handle_redo(action : String) -> void:
 	can_undo = true
 
@@ -595,12 +600,14 @@ func handle_redo(action : String) -> void:
 	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
 	Global.undo_redo.commit_action()
 
+
 func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 
 	var frame_texture_rect : TextureRect
 	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index][3].get_child(frame),"FrameTexture")
 	frame_texture_rect.texture = layers[layer_index][1]
+
 
 func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if made_line:
@@ -618,6 +625,7 @@ func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, curre
 		# If mouse is not inside bounds but it used to be, fill the gaps
 		elif point_in_rectangle(previous_mouse_pos, location, location + size):
 			fill_gaps(sprite, mouse_pos, previous_mouse_pos, color, current_mouse_button, current_action)
+
 
 func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
 	if Global.can_draw && Global.has_focus:
@@ -855,6 +863,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		if is_making_line:
 			line_2d.set_point_position(0, previous_mouse_pos_for_lines)
 
+
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func fill_gaps(sprite : Image, mouse_pos : Vector2, prev_mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
@@ -879,6 +888,7 @@ func fill_gaps(sprite : Image, mouse_pos : Vector2, prev_mouse_pos : Vector2, co
 		if e2 <= dx:
 			err += dx
 			y += sy
+
 
 # Thanks to https://en.wikipedia.org/wiki/Flood_fill
 func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_color : Color) -> void:
@@ -986,6 +996,7 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 					var draw_pos := Vector2(i + xm, j + ym)
 					draw_pixel_blended(sprite, draw_pos, color)
 
+
 func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
 	var saved_pixel_index := mouse_press_pixels.find(pos)
 	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
@@ -999,6 +1010,7 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
 			mouse_press_pressure_values[saved_pixel_index] = pen_pressure
 		sprite.set_pixelv(pos, color)
 
+
 func blend_colors(color_1 : Color, color_2 : Color) -> Color:
 	var color := Color()
 	color.a = color_1.a + color_2.a * (1 - color_1.a) # Blend alpha
@@ -1009,13 +1021,16 @@ func blend_colors(color_1 : Color, color_2 : Color) -> Color:
 		color.b = (color_1.b * color_1.a + color_2.b * color_2.a * (1-color_1.a)) / color.a
 	return color
 
+
 # Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
 
+
 # Returns the position in the middle of a rectangle
 func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
 	return (rect_position - rect_size / 2).floor()
+
 
 # Custom blend rect function, needed because Godot's issue #31124
 func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:
@@ -1041,6 +1056,7 @@ func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> v
 			if out_color.a != 0:
 				bg.set_pixel(dst_x, dst_y, out_color)
 			brush.unlock()
+
 
 func adjust_hsv(img: Image, id : int, delta : float) -> void:
 	var layer : Image = img

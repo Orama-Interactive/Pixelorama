@@ -1,5 +1,6 @@
 extends Node
 
+
 # Get hold of the brushes, including random brushes (subdirectories and % files
 # in them, non % files get loaded independently.) nyaaa
 # Returns a list of [
@@ -304,6 +305,7 @@ func import_gpl(path : String) -> Palette:
 
 	return result
 
+
 func import_png_palette(path: String) -> Palette:
 	var result: Palette = null
 
@@ -332,4 +334,3 @@ func import_png_palette(path: String) -> Palette:
 		result.name = path.substr(name_start, name_end - name_start)
 
 	return result
-	pass
