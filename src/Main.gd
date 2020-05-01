@@ -609,8 +609,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		else:
 			t[0].texture_normal = load("res://Assets/Graphics/%s Themes/Tools/%s.png" % [Global.theme_type, tool_name])
 
-	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_left_tool), 0)
-	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/Tool Cursors/%s_Cursor.png" % Global.current_right_tool), 0)
+	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/cursor_icons/%s_cursor.png" % Global.current_left_tool.to_lower()), 0)
+	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
 
 
 func _on_LeftBrushTypeButton_pressed() -> void:

@@ -45,7 +45,7 @@ var has_focus := false
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var open_last_project := true
 var smooth_zoom := true
-var cursor_image = preload("res://Assets/Graphics/Cursor.png")
+var cursor_image = preload("res://Assets/Graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
 
@@ -284,9 +284,9 @@ func _ready() -> void:
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
 	left_cursor_tool_texture = ImageTexture.new()
-	left_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tool Cursors/Pencil_Cursor.png"))
+	left_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/cursor_icons/pencil_cursor.png"))
 	right_cursor_tool_texture = ImageTexture.new()
-	right_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/Tool Cursors/Eraser_Cursor.png"))
+	right_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/cursor_icons/eraser_cursor.png"))
 	canvas_parent = canvas.get_parent()
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
