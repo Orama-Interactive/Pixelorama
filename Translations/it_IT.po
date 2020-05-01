@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-30 17:36\n"
+"PO-Revision-Date: 2020-05-01 15:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -948,13 +948,13 @@ msgid "File saved"
 msgstr "File salvato"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "File salvato automaticamente"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Impossibile aprire il file"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Impossibile salvare il file"
 
 msgid "File exported"
 msgstr "File esportato"
@@ -1116,14 +1116,15 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr "Crea più file ma ogni file è memorizzato in una cartella diversa che corrisponde al tag frame"
 
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 msgid "Delete"
-msgstr ""
+msgstr "Elimina"
 
-msgid "Autosaved backup for %s was found.Do you want to reload it?"
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
 msgstr ""
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Backup ricaricato"
 
