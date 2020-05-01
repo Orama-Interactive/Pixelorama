@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-01 00:58\n"
+"PO-Revision-Date: 2020-05-01 01:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -454,7 +454,7 @@ msgid "Exit without saving"
 msgstr "Ukončit bez uložení"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Údržbové nástroje"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
@@ -476,7 +476,10 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Výběr barvy\n"
+"Vyberte barvu z pixelu obrázku\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Draw Tools"
 msgstr "Kreslící nástroje"
@@ -485,18 +488,26 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Tužka\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Podrž %s pro vytvoření čáry"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Guma\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Podrž %s pro vytvoření čáry"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Kbelík\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
@@ -517,7 +528,7 @@ msgstr "Prohodit levou a pravou barvu\n"
 "(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Obnovit výchozí barvy (černá vlevo, bílá vpravo)"
 
 msgid "Left tool"
 msgstr "Levý nástroj"
@@ -529,25 +540,25 @@ msgid "Left pixel indicator"
 msgstr "Indikátor levého pixelu"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Zobrazit ukazatel pixelu nebo štětce pro levé tlačítko myši při kreslení"
 
 msgid "Right pixel indicator"
 msgstr "Indikátor pravého pixelu"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Zobrazit ukazatel pixelu nebo štětce pro pravé tlačítko myši při kreslení"
 
 msgid "Show left tool icon"
 msgstr "Zobrazit ikonu levého nástroje"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Zobrazí ikonu vybraného levého nástroje vedle kurzoru na plátně"
 
 msgid "Show right tool icon"
 msgstr "Zobrazit ikonu pravého nástroje"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Zobrazí ikonu vybraného pravého nástroje vedle kurzoru na plátně"
 
 msgid "Guides color:"
 msgstr "Barva vodítek:"
@@ -619,10 +630,10 @@ msgid "Brush color from"
 msgstr "Barva štětce z"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Barva ze štětce, 100: aktuálně vybraná barva"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Vyplnit oblast:"
 
 msgid "Same color area"
 msgstr "Oblast stejné barvy"
@@ -688,10 +699,10 @@ msgid "Horizontal"
 msgstr "Vodorovně"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Povolit kreslení ve vodorovném zrcadlení"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Povolit kreslení ve svislém zrcadlení"
 
 msgid "Vertical"
 msgstr "Svisle"
@@ -765,14 +776,15 @@ msgid "Manage frame tags"
 msgstr "Spravovat štítky snímků"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "Animace hraje pouze na snímcích pod stejným štítkem"
+msgstr "Animace hraje pouze na snímcích majících stejný štítek"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Pokud je vybráno, animace hraje pouze na snímcích, které mají stejný štítek.\n"
+"Pokud ne, animace bude hrát pro všechny snímky a ignoruje štítky."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Modro-červený režim"
 
 msgid "Add a new frame"
 msgstr "Přidat nový snímek"
@@ -987,16 +999,16 @@ msgid "Gold Sponsors"
 msgstr "Zlatý sponzor"
 
 msgid "Platinum Sponsor Placeholder"
-msgstr ""
+msgstr "Zástupce platinového sponzora"
 
 msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgstr "Zástupce zlatého sponzora"
 
 msgid "Don't show again"
 msgstr "Příště již nezobrazovat"
 
 msgid "Take this spot!"
-msgstr ""
+msgstr "Zaberte toto místo!"
 
 msgid "Image Options"
 msgstr "Možnosti obrázku"
