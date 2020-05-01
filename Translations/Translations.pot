@@ -1083,7 +1083,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Autosaved backup for %s was found."
+msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
 msgstr ""
 
