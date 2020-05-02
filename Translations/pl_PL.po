@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-01 22:17\n"
+"PO-Revision-Date: 2020-05-02 20:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Efekty"
 msgid "Help"
 msgstr "Pomoc"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "Nowy..."
 
@@ -63,6 +66,9 @@ msgstr "Zapisz..."
 
 msgid "Save as..."
 msgstr "Zapisz jako..."
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr "Importuj..."
@@ -1098,6 +1104,9 @@ msgstr "Nie można znaleźć pliku ostatniego projektu."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Nie zapisałeś lub nie otworzyłeś jeszcze żadnego projektu w Pixeloramie!"
+
+msgid "Open Last Project"
+msgstr ""
 
 msgid "Open last project..."
 msgstr "Otwórz ostatni projekt..."
