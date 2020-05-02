@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-01 16:46\n"
+"PO-Revision-Date: 2020-05-02 20:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Effets"
 msgid "Help"
 msgstr "Aide"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "Nouveau..."
 
@@ -63,6 +66,9 @@ msgstr "Enregistrer..."
 
 msgid "Save as..."
 msgstr "Enregistrer sous..."
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr "Importer..."
@@ -1094,6 +1100,9 @@ msgid "Cannot find last project file."
 msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open Last Project"
 msgstr ""
 
 msgid "Open last project..."
