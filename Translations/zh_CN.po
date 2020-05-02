@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-01 16:47\n"
+"PO-Revision-Date: 2020-05-02 13:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -439,7 +439,7 @@ msgid "Unsaved Image"
 msgstr "未保存的图像"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "您有未保存的更改。如果您继续，您的进度将会丢失。"
 
 msgid "Save before exiting?"
 msgstr "退出前保存吗？"
