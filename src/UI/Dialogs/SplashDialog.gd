@@ -19,8 +19,8 @@ func _on_SplashDialog_about_to_show() -> void:
 	if "zh" in TranslationServer.get_locale():
 		show_on_startup_button.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Small.tres"))
 		developed_by_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Small.tres"))
-		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Bold.tres"))
-		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Bold.tres"))
+		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres"))
+		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres"))
 	else:
 		show_on_startup_button.add_font_override("font", preload("res://Assets/Fonts/Roboto-Small.tres"))
 		developed_by_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Small.tres"))

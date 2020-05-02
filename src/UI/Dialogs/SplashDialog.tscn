@@ -16,6 +16,7 @@
 margin_right = 614.0
 margin_bottom = 590.0
 rect_min_size = Vector2( 600, 560 )
+resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -259,14 +260,13 @@ text = "Platinum Sponsor"
 align = 1
 
 [node name="PlaceholderLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
-margin_top = 47.0
+margin_top = 56.0
 margin_right = 125.0
-margin_bottom = 80.0
+margin_bottom = 71.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color = Color( 0.678431, 0.611765, 0.807843, 1 )
-text = "Platinum 
-Sponsor"
+text = "Platinum Sponsor"
 align = 1
 
 [node name="TakeThisSpot" type="Button" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
@@ -296,14 +296,13 @@ text = "Gold Sponsors"
 align = 1
 
 [node name="PlaceholderLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
-margin_top = 47.0
+margin_top = 56.0
 margin_right = 125.0
-margin_bottom = 80.0
+margin_bottom = 71.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color = Color( 0.678431, 0.611765, 0.807843, 1 )
-text = "Gold 
-Sponsors"
+text = "Gold Sponsors"
 align = 1
 
 [node name="TakeThisSpot" type="Button" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
