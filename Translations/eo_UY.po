@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-01 16:46\n"
+"PO-Revision-Date: 2020-05-02 20:26\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -52,6 +52,9 @@ msgstr "Efektoj"
 msgid "Help"
 msgstr "Helpo"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "Nova..."
 
@@ -63,6 +66,9 @@ msgstr "Konservi..."
 
 msgid "Save as..."
 msgstr "Konservi kiel..."
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr ""
@@ -1070,6 +1076,9 @@ msgid "Cannot find last project file."
 msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open Last Project"
 msgstr ""
 
 msgid "Open last project..."
