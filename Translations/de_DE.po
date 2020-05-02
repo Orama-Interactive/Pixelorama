@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-05-01 16:47\n"
+"PO-Revision-Date: 2020-05-02 13:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -438,7 +438,7 @@ msgid "Unsaved Image"
 msgstr "Ungespeichertes Bild"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Sie haben ungespeicherte Änderungen. Wenn Sie fortfahren, geht Ihr Fortschritt verloren."
 
 msgid "Save before exiting?"
 msgstr "Speichere vor dem Verlassen?"
