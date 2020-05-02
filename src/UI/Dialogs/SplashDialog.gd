@@ -37,6 +37,7 @@ func _on_ShowOnStartup_toggled(pressed : bool) -> void:
 		Global.config_cache.set_value("preferences", "startup", false)
 	else:
 		Global.config_cache.set_value("preferences", "startup", true)
+	Global.config_cache.save("user://cache.ini")
 
 
 func _on_PatreonButton_pressed() -> void:

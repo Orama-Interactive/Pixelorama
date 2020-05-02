@@ -184,9 +184,10 @@ func _ready() -> void:
 
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
+
+	# Wait for the window to adjust itself, so the popup is correctly centered
+	yield(get_tree().create_timer(0.01), "timeout")
 	if Global.config_cache.get_value("preferences", "startup"):
-		# Wait for the window to adjust itself, so the popup is correctly centered
-		yield(get_tree().create_timer(0.01), "timeout")
 		$SplashDialog.popup_centered() # Splash screen
 	else:
 		Global.can_draw = true
