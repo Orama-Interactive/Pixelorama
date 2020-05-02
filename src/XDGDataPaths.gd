@@ -27,7 +27,7 @@ func use_xdg_standard() -> bool:
 	return OS.get_name() == "X11"
 
 
-func _init():
+func _init() -> void:
 	if use_xdg_standard():
 		print("Detected system where we should use XDG basedir standard (currently Linux or BSD)")
 		var home := OS.get_environment("HOME")
@@ -62,6 +62,7 @@ func _init():
 			xdg_data_dirs = []
 			for unapp_subdir in raw_xdg_data_dirs:
 				xdg_data_dirs.append(unapp_subdir.plus_file(config_subdir_name))
+		xdg_data_dirs.append(Global.root_directory.plus_file(config_subdir_name))
 
 	else:
 		raw_xdg_data_home = Global.root_directory
