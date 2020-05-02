@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-01 19:47\n"
+"PO-Revision-Date: 2020-05-02 20:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -52,6 +52,9 @@ msgstr "Εφέ"
 msgid "Help"
 msgstr "Βοήθεια"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "Νέο..."
 
@@ -63,6 +66,9 @@ msgstr "Αποθήκευση..."
 
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr "Εισαγωγή..."
@@ -1099,6 +1105,9 @@ msgstr "Δεν είναι δυνατή η εύρεση του τελευταίο
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Δεν έχετε αποθηκεύσει ούτε ανοίξει κανένα έργο στο Pixelorama ακόμη!"
+
+msgid "Open Last Project"
+msgstr ""
 
 msgid "Open last project..."
 msgstr "Άνοιγμα τελευταίου έργου..."
