@@ -43,16 +43,17 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter).
 - LineEdits lose focus when the user presses Enter.
 - When cloning a frame, the clone will appear next to the original.
-- Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
+- Layer visibility is taken into account when exporting the drawing as a `.png` file. This means that invisible layers will not be included in the final `.png` file.
 - The Godot theme has changed.
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
 - The default window size is now 1280x720, and the minimum window size is 1024x576.
 - `.pxo` files now use ZSTD compression to result in smaller file sizes.
-- Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard linux/bsd packaging methods and for better per-user usability.
+- Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard Linux/BSD packaging methods and for better per-user usability.
 - The splash screen has been revamped and is no longer purple, it now gets affected by the chosen theme.
 - The brush selection popup now closes when a brush is selected.
+- Pixelorama's version number now appears on the window title.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels

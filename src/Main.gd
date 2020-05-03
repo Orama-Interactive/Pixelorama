@@ -160,7 +160,7 @@ func _ready() -> void:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
-	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
+	Global.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
 
 	Global.layers[0][0] = tr("Layer") + " 0"
 	Global.layers_container.get_child(0).label.text = Global.layers[0][0]

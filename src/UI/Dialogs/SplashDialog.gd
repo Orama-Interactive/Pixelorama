@@ -11,9 +11,8 @@ onready var gold_placeholder_label : Label = $"Contents/MarginContainer/Info/Spo
 func _on_SplashDialog_about_to_show() -> void:
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
-	var current_version : String = ProjectSettings.get_setting("application/config/Version")
-	window_title = "Pixelorama" + " " + current_version
-	changes_label.text = current_version + " " + tr("Changes")
+	window_title = "Pixelorama" + " " + Global.current_version
+	changes_label.text = Global.current_version + " " + tr("Changes")
 
 	art_by_label.text = tr("Art by") + ": Erevos"
 	if "zh" in TranslationServer.get_locale():

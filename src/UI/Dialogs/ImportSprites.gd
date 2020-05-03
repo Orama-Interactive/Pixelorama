@@ -142,7 +142,9 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
 	Global.canvas.visible = true
 
-	Global.window_title = first_path.get_file() + " (" + tr("imported") + ") - Pixelorama"
+	Global.window_title = first_path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
+	if Global.project_has_changed:
+		Global.window_title = Global.window_title + "(*)"
 	var file_name := first_path.get_basename().get_file()
 	var directory_path := first_path.get_basename().replace(file_name, "")
 	Global.export_dialog.directory_path = directory_path

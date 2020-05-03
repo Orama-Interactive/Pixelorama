@@ -264,6 +264,8 @@ var palette_import_file_dialog : FileDialog
 
 var error_dialog : AcceptDialog
 
+onready var current_version : String = ProjectSettings.get_setting("application/config/Version")
+
 
 func _ready() -> void:
 	randomize()
@@ -563,7 +565,7 @@ func clear_canvases() -> void:
 	play_forward.pressed = false
 	animation_timer.stop()
 
-	self.window_title = "(" + tr("untitled") + ") - Pixelorama"
+	self.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
 	OpenSave.current_save_path = ""
 	control.get_node("ExportDialog").was_exported = false
 	control.file_menu.set_item_text(3, tr("Save..."))
