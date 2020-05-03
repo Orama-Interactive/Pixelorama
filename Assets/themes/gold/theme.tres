@@ -165,7 +165,7 @@ corner_radius_bottom_left = 4
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=18]
-bg_color = Color( 0.854902, 0.678431, 0.14902, 1 )
+bg_color = Color( 0.854902, 0.74902, 0.494118, 1 )
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.588235, 0.568627, 0.470588, 1 )
