@@ -469,6 +469,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	$VBoxContainer/Options/Resize.value = resize
 	$VBoxContainer/Options/Interpolation.selected = interpolation
 	$VBoxContainer/Path/PathLineEdit.text = directory_path
+	$Popups/PathDialog.current_path = directory_path
 	$VBoxContainer/File/FileLineEdit.text = file_name
 	$VBoxContainer/File/FileFormat.selected = file_format
 	show_tab()

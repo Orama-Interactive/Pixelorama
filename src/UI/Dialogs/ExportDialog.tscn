@@ -3,8 +3,6 @@
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-gifexporter/src/GifExporter.gd" type="Script" id=2]
 
-
-
 [node name="ExportDialog" type="AcceptDialog"]
 margin_right = 532.0
 margin_bottom = 530.0
@@ -321,12 +319,12 @@ margin_bottom = 494.0
 rect_min_size = Vector2( 440, 300 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-window_title = "Otwórz katalog"
+window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "E:/Projekty/Godot/Pixelorama"
-current_path = "E:/Projekty/Godot/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0

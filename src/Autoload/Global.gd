@@ -175,6 +175,7 @@ var cursor_position_label : Label
 var zoom_level_label : Label
 
 var import_sprites_dialog : FileDialog
+var export_dialog : AcceptDialog
 
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
@@ -309,6 +310,7 @@ func _ready() -> void:
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
 	import_sprites_dialog = find_node_by_name(root, "ImportSprites")
+	export_dialog = find_node_by_name(root, "ExportDialog")
 
 	left_tool_options_container = find_node_by_name(root, "LeftToolOptions")
 	right_tool_options_container = find_node_by_name(root, "RightToolOptions")
