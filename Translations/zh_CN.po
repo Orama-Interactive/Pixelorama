@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-03 15:26\n"
 
 msgid "OK"
 msgstr "确定"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "帮助"
 
 msgid "New"
-msgstr ""
+msgstr "新建"
 
 msgid "New..."
 msgstr "新建..."
@@ -68,7 +68,7 @@ msgid "Save as..."
 msgstr "另存为..."
 
 msgid "Import"
-msgstr ""
+msgstr "导入"
 
 msgid "Import..."
 msgstr "导入..."
@@ -1107,7 +1107,7 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "您尚未在 Pixelorama 中保存或打开任何项目！"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "打开最后项目"
 
 msgid "Open last project..."
 msgstr "打开最后一个项目..."
