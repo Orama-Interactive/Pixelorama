@@ -41,30 +41,14 @@
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.tscn" type="PackedScene" id=39]
 [ext_resource path="res://Assets/Graphics/dark_themes/tools/vertical_mirror_off.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Graphics/dark_themes/tools/vertical_mirror_on.png" type="Texture" id=41]
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=42]
 [ext_resource path="res://src/UI/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 [ext_resource path="res://src/UI/TransparentChecker.gd" type="Script" id=45]
 [ext_resource path="res://src/UI/Dialogs/OpenLastProjectAlertDialog.tscn" type="PackedScene" id=46]
 [ext_resource path="res://src/UI/Dialogs/NoProjectEditedOrCreatedAlertDialog.tscn" type="PackedScene" id=47]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform float size = 10.0;
-uniform vec4 color1 : hint_color = vec4(0.7, 0.7, 0.7, 1.0);
-uniform vec4 color2 : hint_color = vec4(1.0);
-
-void fragment() {
-	vec2 pos = mod(FRAGCOORD.xy, size * 2.0);
-	bool c1 = any(lessThan(pos, vec2(size)));
-	bool c2 = any(greaterThanEqual(pos, vec2(size)));
-	float c = c1 && c2 ? 1.0: 0.0;
-	COLOR = mix(color1, color2, c);
-	COLOR.a = 1.0;
-}"
-
 [sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+shader = ExtResource( 42 )
 shader_param/size = 10.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
