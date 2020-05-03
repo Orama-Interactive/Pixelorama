@@ -1,45 +1,27 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/New_Layer_Hover.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Hover.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Delete_Layer_Disabled.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Hover.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Up_Disabled.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Hover.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Move_Down_Disabled.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Clone_Layer_Hover.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Hover.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Merge_Down_Disabled.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/new_layer.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/delete_layer_disabled.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/move_up_disabled.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/move_down_disabled.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/merge_down_disabled.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/clone_layer.png" type="Texture" id=7]
 [ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/new_frame.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/remove_frame.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/go_to_first_frame.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/play.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/previous_frame.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/play_backwards.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/go_to_last_frame.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/next_frame.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/copy_frame.png" type="Texture" id=27]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/tag.png" type="Texture" id=28]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/onion_skinning_off.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/expandable.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Timeline/loop.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/new_frame.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/go_to_first_frame.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/play.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/previous_frame.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/play_backwards.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/go_to_last_frame.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/next_frame.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/copy_frame.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/tag.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/onion_skinning_off.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/expandable.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/dark_themes/timeline/loop.png" type="Texture" id=31]
 [ext_resource path="res://src/UI/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
-
-
-
-
-
-
-
-
 
 [sub_resource type="InputEventKey" id=1]
 control = true
@@ -142,86 +124,172 @@ custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
 
-[node name="AddLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+[node name="AddLayer" type="Button" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 2 )
-texture_hover = ExtResource( 3 )
 
-[node name="RemoveLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/ForLayerButtons/LayerButtons/AddLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -9.0
+margin_top = -12.0
+margin_right = 9.0
+margin_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemoveLayer" type="Button" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Remove current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 4 )
-texture_hover = ExtResource( 5 )
-texture_disabled = ExtResource( 6 )
 
-[node name="MoveUpLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/ForLayerButtons/LayerButtons/RemoveLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveUpLayer" type="Button" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Move up the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 7 )
-texture_hover = ExtResource( 8 )
-texture_disabled = ExtResource( 9 )
 
-[node name="MoveDownLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/ForLayerButtons/LayerButtons/MoveUpLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -8.0
+margin_right = 7.0
+margin_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveDownLayer" type="Button" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
 margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Move down the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 10 )
-texture_hover = ExtResource( 11 )
-texture_disabled = ExtResource( 12 )
 
-[node name="CloneLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/ForLayerButtons/LayerButtons/MoveDownLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -8.0
+margin_right = 7.0
+margin_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloneLayer" type="Button" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Clone current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 13 )
-texture_hover = ExtResource( 14 )
 
-[node name="MergeDownLayer" type="TextureButton" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/ForLayerButtons/LayerButtons/CloneLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.5
+margin_top = -10.0
+margin_right = 8.5
+margin_bottom = 10.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MergeDownLayer" type="Button" parent="AnimationContainer/ForLayerButtons/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
 margin_top = 72.0
 margin_right = 68.0
 margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Merge current layer with the one below"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource( 15 )
-texture_hover = ExtResource( 16 )
-texture_disabled = ExtResource( 17 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/ForLayerButtons/LayerButtons/MergeDownLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -12.0
+margin_right = 6.0
+margin_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SpacerControl" type="Control" parent="AnimationContainer"]
 margin_left = 72.0

@@ -12,7 +12,7 @@ func _ready() -> void:
 	# Select default palette "Default"
 	on_palette_select(current_palette)
 
-	var add_palette_menu : PopupMenu = Global.add_palette_button.get_child(0)
+	var add_palette_menu : PopupMenu = Global.add_palette_button.get_node("PopupMenu")
 	add_palette_menu.connect("id_pressed", self, "add_palette_menu_id_pressed")
 
 
@@ -71,7 +71,7 @@ func on_palette_import_file_selected(path : String) -> void:
 
 
 func _on_AddPalette_pressed() -> void:
-	Global.add_palette_button.get_child(0).popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
+	Global.add_palette_button.get_node("PopupMenu").popup(Rect2(Global.add_palette_button.rect_global_position, Vector2.ONE))
 
 
 func on_new_palette_confirmed() -> void:

@@ -1,16 +1,16 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
 [ext_resource path="res://Assets/themes/dark/top_menu_style.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/RectSelect.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/ColorPicker.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Pencil_l.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Eraser_r.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Bucket.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/LightenDarken.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Color switch.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Misc/Color defaults.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/rectselect.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/eraser_r.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/pencil_l.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/lightendarken.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/colorpicker.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/bucket.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/dark_themes/misc/color_switch.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/dark_themes/misc/color_defaults.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Graphics/Brush_button.png" type="Texture" id=12]
 [ext_resource path="res://Assets/themes/dark/ruler_style.tres" type="StyleBox" id=13]
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=14]
@@ -20,16 +20,16 @@
 [ext_resource path="res://src/SelectionRectangle.gd" type="Script" id=18]
 [ext_resource path="res://src/UI/SecondViewport.gd" type="Script" id=19]
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Add_Palette_Hover.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Palette/Edit_Palette_Hover.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Graphics/dark_themes/palette/edit_palette.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Graphics/dark_themes/palette/add_palette.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/zoom.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/horizontal_mirror_on.png" type="Texture" id=24]
 [ext_resource path="res://src/Palette/PaletteContainer.gd" type="Script" id=25]
 [ext_resource path="res://src/UI/BrushButton.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/UI/Dialogs/ImportSprites.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Horizontal_Mirror_Off.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/horizontal_mirror_off.png" type="Texture" id=30]
 [ext_resource path="res://src/UI/Dialogs/ScaleImage.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/UI/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=32]
 [ext_resource path="res://src/UI/Dialogs/OutlineDialog.tscn" type="PackedScene" id=33]
@@ -39,10 +39,8 @@
 [ext_resource path="res://src/Palette/PaletteImportFileDialog.tscn" type="PackedScene" id=37]
 [ext_resource path="res://src/UI/Dialogs/RotateImage.tscn" type="PackedScene" id=38]
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.tscn" type="PackedScene" id=39]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Horizontal_Mirror_On.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Vertical_Mirror_On.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Vertical_Mirror_Off.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Tools/Zoom.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/vertical_mirror_off.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Graphics/dark_themes/tools/vertical_mirror_on.png" type="Texture" id=41]
 [ext_resource path="res://src/UI/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 [ext_resource path="res://src/UI/TransparentChecker.gd" type="Script" id=45]
 [ext_resource path="res://src/UI/Dialogs/OpenLastProjectAlertDialog.tscn" type="PackedScene" id=46]
@@ -264,7 +262,7 @@ margin_right = 32.0
 margin_bottom = 68.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 43 )
+texture_normal = ExtResource( 23 )
 
 [node name="ColorPicker" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
@@ -274,7 +272,7 @@ margin_right = 32.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 8 )
 
 [node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
@@ -294,7 +292,7 @@ margin_right = 32.0
 margin_bottom = 176.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 5 )
 
 [node name="Bucket" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
@@ -304,7 +302,7 @@ margin_right = 32.0
 margin_bottom = 212.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 9 )
 
 [node name="LightenDarken" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
@@ -314,7 +312,7 @@ margin_right = 32.0
 margin_bottom = 248.0
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 7 )
 
 [node name="CanvasAndTimeline" type="VSplitContainer" parent="MenuAndUI/UI"]
 margin_left = 48.0
@@ -964,7 +962,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 30 )
-texture_pressed = ExtResource( 40 )
+texture_pressed = ExtResource( 24 )
 
 [node name="LeftVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftToolOptions/LeftMirrorButtons" groups=[
 "UIButtons",
@@ -976,7 +974,7 @@ hint_tooltip = "Enable vertical mirrored drawing"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource( 42 )
+texture_normal = ExtResource( 40 )
 texture_pressed = ExtResource( 41 )
 
 [node name="VSeparator" type="VSeparator" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
@@ -1377,7 +1375,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 30 )
-texture_pressed = ExtResource( 40 )
+texture_pressed = ExtResource( 24 )
 
 [node name="RightVerticalMirroring" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightToolOptions/RightMirrorButtons" groups=[
 "UIButtons",
@@ -1389,7 +1387,7 @@ hint_tooltip = "Enable vertical mirrored drawing"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource( 42 )
+texture_normal = ExtResource( 40 )
 texture_pressed = ExtResource( 41 )
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit"]
@@ -1427,7 +1425,7 @@ margin_left = 78.0
 margin_right = 251.0
 margin_bottom = 32.0
 
-[node name="AddPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+[node name="AddPalette" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
@@ -1436,28 +1434,57 @@ rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Add a new palette"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 21 )
-texture_hover = ExtResource( 22 )
 
 [node name="PopupMenu" type="PopupMenu" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
-margin_right = 12.0
-margin_bottom = 20.0
+margin_right = 115.0
+margin_bottom = 54.0
 items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EditPalette" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 12.0
+margin_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EditPalette" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 35.0
 margin_right = 67.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Edit currently selected palette"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 23 )
-texture_hover = ExtResource( 24 )
+
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 12.0
+margin_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
 margin_left = 70.0

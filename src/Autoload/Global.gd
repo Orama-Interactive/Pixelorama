@@ -604,21 +604,15 @@ func layers_changed(value : Array) -> void:
 	self.current_frame = current_frame # Call frame_changed to update UI
 
 	if layers[current_layer][2]:
-		remove_layer_button.disabled = true
-		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		disable_button(remove_layer_button, true)
 
 	if layers.size() == 1:
-		remove_layer_button.disabled = true
-		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-		move_up_layer_button.disabled = true
-		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-		move_down_layer_button.disabled = true
-		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-		merge_down_layer_button.disabled = true
-		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		disable_button(remove_layer_button, true)
+		disable_button(move_up_layer_button, true)
+		disable_button(move_down_layer_button, true)
+		disable_button(merge_down_layer_button, true)
 	elif !layers[current_layer][2]:
-		remove_layer_button.disabled = false
-		remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		disable_button(remove_layer_button, false)
 
 
 func frame_changed(value : int) -> void:
@@ -662,34 +656,49 @@ func layer_changed(value : int) -> void:
 		layer_button.pressed = true
 
 	if current_layer < layers.size() - 1:
-		move_up_layer_button.disabled = false
-		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		disable_button(move_up_layer_button, false)
 	else:
-		move_up_layer_button.disabled = true
-		move_up_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		disable_button(move_up_layer_button, true)
 
 	if current_layer > 0:
-		move_down_layer_button.disabled = false
-		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		merge_down_layer_button.disabled = false
-		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		disable_button(move_down_layer_button, false)
+		disable_button(merge_down_layer_button, false)
 	else:
-		move_down_layer_button.disabled = true
-		move_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-		merge_down_layer_button.disabled = true
-		merge_down_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		disable_button(move_down_layer_button, true)
+		disable_button(merge_down_layer_button, true)
 
 	if current_layer < layers.size():
 		if layers[current_layer][2]:
-			remove_layer_button.disabled = true
-			remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+			disable_button(remove_layer_button, true)
 		else:
 			if layers.size() > 1:
-				remove_layer_button.disabled = false
-				remove_layer_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				disable_button(remove_layer_button, false)
 
 	yield(get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame # Call frame_changed to update UI
+
+
+func disable_button(button : BaseButton, disable : bool) -> void:
+	button.disabled = disable
+	if disable:
+		button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	else:
+		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+	if button is Button:
+		var theme := theme_type
+		if theme == "Gold":
+			theme = "Light"
+		for c in button.get_children():
+			if c is TextureRect:
+				var last_backslash = c.texture.resource_path.get_base_dir().find_last("/")
+				var button_category = c.texture.resource_path.get_base_dir().right(last_backslash + 1)
+				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
+				if disable:
+					c.texture = load("res://Assets/Graphics/%s_themes/%s/%s_disabled.png" % [theme.to_lower(), button_category, normal_file_name])
+				else:
+					c.texture = load("res://Assets/Graphics/%s_themes/%s/%s.png" % [theme.to_lower(), button_category, normal_file_name])
+				break
 
 
 func animation_tags_changed(value : Array) -> void:

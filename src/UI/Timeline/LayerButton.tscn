@@ -1,13 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Timeline/LayerButton.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible_Hover.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlinked_Layer.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Layer_Visible.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlock_Hover.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Graphics/Dark Themes/Layers/Unlinked_Layer_Hover.png" type="Texture" id=7]
-
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/layer_visible.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/unlock.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/dark_themes/layers/unlinked_layer.png" type="Texture" id=4]
 
 [node name="LayerContainer" type="Button"]
 margin_right = 210.0
@@ -34,42 +30,73 @@ __meta__ = {
 margin_right = 104.0
 margin_bottom = 36.0
 
-[node name="VisibilityButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
+[node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 2.0
 margin_right = 32.0
 margin_bottom = 34.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Toggle layer's visibility"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 2 )
 
-[node name="LockButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/VisibilityButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -7.0
+margin_right = 12.0
+margin_bottom = 7.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LockButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 36.0
 margin_top = 2.0
 margin_right = 68.0
 margin_bottom = 34.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Lock/unlock layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 6 )
 
-[node name="LinkButton" type="TextureButton" parent="HBoxContainer/LayerButtons" groups=[
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/LockButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -12.0
+margin_right = 10.0
+margin_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LinkButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 104.0
 margin_bottom = 34.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Enable/disable cel linking
 
 Linked cels are being shared across multiple frames"
@@ -77,8 +104,22 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture_normal = ExtResource( 4 )
-texture_hover = ExtResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/LinkButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -4.0
+margin_right = 12.0
+margin_bottom = 4.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 108.0

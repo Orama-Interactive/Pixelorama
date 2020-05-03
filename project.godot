@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Rulers/Guides.gd"
 }, {
-"base": "Reference",
+"base": "Button",
 "class": "LayerButton",
 "language": "GDScript",
 "path": "res://src/UI/Timeline/LayerButton.gd"
