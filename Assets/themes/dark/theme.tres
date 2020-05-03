@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=39 format=2]
+[gd_resource type="Theme" load_steps=40 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/themes/dark/icons/grabber.png" type="Texture" id=2]
@@ -6,12 +6,25 @@
 [ext_resource path="res://Assets/themes/dark/icons/hsplit.png" type="Texture" id=4]
 [ext_resource path="res://Assets/themes/dark/icons/vsplit.png" type="Texture" id=5]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=34]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_top = 3.0
 content_margin_bottom = 3.0
-bg_color = Color( 0.517647, 0.517647, 0.517647, 1 )
+bg_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+border_color = Color( 0.517647, 0.517647, 0.517647, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=35]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.4, 0.4, 0.4, 1 )
 border_color = Color( 0.517647, 0.517647, 0.517647, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
@@ -298,9 +311,9 @@ Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = null
+Button/styles/disabled = SubResource( 34 )
 Button/styles/focus = null
-Button/styles/hover = SubResource( 1 )
+Button/styles/hover = SubResource( 35 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 3 )
 CheckBox/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
