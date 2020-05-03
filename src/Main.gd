@@ -160,13 +160,6 @@ func _ready() -> void:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
 		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
-	if OS.get_cmdline_args():
-		for arg in OS.get_cmdline_args():
-			if arg.get_extension().to_lower() == "pxo":
-				_on_OpenSprite_file_selected(arg)
-			else:
-				$ImportSprites._on_ImportSprites_files_selected([arg])
-
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama"
 
 	Global.layers[0][0] = tr("Layer") + " 0"
@@ -218,6 +211,16 @@ func _ready() -> void:
 	else:
 		if Global.open_last_project:
 			load_last_project()
+
+	if OS.get_cmdline_args():
+		for arg in OS.get_cmdline_args():
+			if arg.get_extension().to_lower() == "pxo":
+				_on_OpenSprite_file_selected(arg)
+			else:
+				if arg == OS.get_cmdline_args()[0]:
+					$ImportSprites.new_frame = false
+				$ImportSprites._on_ImportSprites_files_selected([arg])
+				$ImportSprites.new_frame = true
 
 
 func _input(event : InputEvent) -> void:
