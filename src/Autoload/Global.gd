@@ -701,7 +701,7 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 	if button is Button:
 		var theme := theme_type
 		if theme == "Gold":
-			theme = "Light"
+			theme = "Dark"
 		for c in button.get_children():
 			if c is TextureRect:
 				var last_backslash = c.texture.resource_path.get_base_dir().find_last("/")

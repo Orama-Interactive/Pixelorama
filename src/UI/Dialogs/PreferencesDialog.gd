@@ -373,7 +373,7 @@ func change_theme(ID : int) -> void:
 		elif button is Button:
 			var theme_type := Global.theme_type
 			if theme_type == "Gold":
-				theme_type = "Light"
+				theme_type = "Dark"
 
 			var texture : TextureRect
 			for child in button.get_children():

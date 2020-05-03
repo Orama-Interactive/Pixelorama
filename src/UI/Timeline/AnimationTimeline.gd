@@ -178,7 +178,7 @@ func _on_OnionSkinning_pressed() -> void:
 	Global.canvas.update()
 	var theme_type := Global.theme_type
 	if theme_type == "Gold":
-		theme_type = "Light"
+		theme_type = "Dark"
 	var texture_button : TextureRect = Global.onion_skinning_button.get_child(0)
 	if Global.onion_skinning:
 		texture_button.texture = load("res://Assets/Graphics/%s_themes/timeline/onion_skinning.png" % theme_type.to_lower())
@@ -194,7 +194,7 @@ func _on_LoopAnim_pressed() -> void:
 	var texture_button : TextureRect = Global.loop_animation_button.get_child(0)
 	var theme_type := Global.theme_type
 	if theme_type == "Gold":
-		theme_type = "Light"
+		theme_type = "Dark"
 	match animation_loop:
 		0: # Make it loop
 			animation_loop = 1
@@ -213,7 +213,7 @@ func _on_LoopAnim_pressed() -> void:
 func _on_PlayForward_toggled(button_pressed : bool) -> void:
 	var theme_type := Global.theme_type
 	if theme_type == "Gold":
-		theme_type = "Light"
+		theme_type = "Dark"
 	if button_pressed:
 		Global.play_forward.get_child(0).texture = load("res://Assets/Graphics/%s_themes/timeline/pause.png" % theme_type.to_lower())
 	else:
@@ -225,7 +225,7 @@ func _on_PlayForward_toggled(button_pressed : bool) -> void:
 func _on_PlayBackwards_toggled(button_pressed : bool) -> void:
 	var theme_type := Global.theme_type
 	if theme_type == "Gold":
-		theme_type = "Light"
+		theme_type = "Dark"
 	if button_pressed:
 		Global.play_backwards.get_child(0).texture = load("res://Assets/Graphics/%s_themes/timeline/pause.png" % theme_type.to_lower())
 	else:
@@ -269,7 +269,7 @@ func _on_AnimationTimer_timeout() -> void:
 func play_animation(play : bool, forward_dir : bool) -> void:
 	var theme_type := Global.theme_type
 	if theme_type == "Gold":
-		theme_type = "Light"
+		theme_type = "Dark"
 
 	if forward_dir:
 		Global.play_backwards.disconnect("toggled", self, "_on_PlayBackwards_toggled")

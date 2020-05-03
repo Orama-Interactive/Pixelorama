@@ -17,7 +17,7 @@ func _ready() -> void:
 	line_edit = Global.find_node_by_name(self, "LineEdit")
 	var theme_type := Global.theme_type
 	if theme_type == "Gold":
-		theme_type = "Light"
+		theme_type = "Dark"
 
 	if Global.layers[i][1]:
 		visibility_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/layer_visible.png" % theme_type.to_lower())
