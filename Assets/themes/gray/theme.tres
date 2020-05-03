@@ -11,7 +11,7 @@ content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_top = 3.0
 content_margin_bottom = 3.0
-bg_color = Color( 0.235294, 0.235294, 0.235294, 1 )
+bg_color = Color( 0.215686, 0.215686, 0.215686, 1 )
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -46,11 +46,11 @@ corner_radius_bottom_left = 4
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.2, 0.2, 0.2, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_color = Color( 0.2, 0.2, 0.2, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
