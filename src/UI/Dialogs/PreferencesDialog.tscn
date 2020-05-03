@@ -4,8 +4,6 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
-
-
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
 margin_top = 9.0
@@ -489,7 +487,7 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "First color of the transparent checker background"
 mouse_default_cursor_shape = 2
-color = Color( 0.7, 0.7, 0.7, 1 )
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="CheckerColor2Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 55.0
@@ -507,7 +505,7 @@ margin_bottom = 72.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "Second color of the transparent checker background"
 mouse_default_cursor_shape = 2
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.341176, 0.34902, 0.341176, 1 )
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_top = 916.0

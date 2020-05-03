@@ -65,8 +65,8 @@ var grid_height := 1
 var grid_color := Color.black
 var guide_color := Color.purple
 var checker_size := 10
-var checker_color_1 := Color.gray
-var checker_color_2 := Color.white
+var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
+var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 
 # Tools & options
 var current_left_tool := "Pencil"
