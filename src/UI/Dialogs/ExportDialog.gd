@@ -88,8 +88,10 @@ func show_tab() -> void:
 			if not was_exported:
 				frame_number = Global.current_frame + 1
 			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.max_value = Global.canvases.size() + 1
+			var prev_frame_number = $VBoxContainer/FrameOptions/FrameNumber/FrameNumber.value
 			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.value = frame_number
-			process_frame()
+			if prev_frame_number == frame_number:
+				process_frame()
 			$VBoxContainer/FrameOptions.show()
 		ExportTab.SPRITESHEET:
 			file_format = FileFormat.PNG
@@ -469,7 +471,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	$VBoxContainer/Options/Resize.value = resize
 	$VBoxContainer/Options/Interpolation.selected = interpolation
 	$VBoxContainer/Path/PathLineEdit.text = directory_path
-	$Popups/PathDialog.current_path = directory_path
+	$Popups/PathDialog.current_dir = directory_path
 	$VBoxContainer/File/FileLineEdit.text = file_name
 	$VBoxContainer/File/FileFormat.selected = file_format
 	show_tab()
