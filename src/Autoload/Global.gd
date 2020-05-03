@@ -243,6 +243,8 @@ var frames_container : VBoxContainer
 var tag_container : Control
 var tag_dialog : AcceptDialog
 
+var remove_frame_button : BaseButton
+
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
@@ -373,6 +375,8 @@ func _ready() -> void:
 	play_backwards = find_node_by_name(animation_timeline, "PlayBackwards")
 	tag_container = find_node_by_name(animation_timeline, "TagContainer")
 	tag_dialog = find_node_by_name(animation_timeline, "FrameTagDialog")
+
+	remove_frame_button = find_node_by_name(animation_timeline, "DeleteFrame")
 
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
@@ -639,6 +643,11 @@ func frame_changed(value : int) -> void:
 	frame_ids.get_child(current_frame).add_color_override("font_color", Color("#3c5d75"))
 	if current_frame < layers[current_layer][3].get_child_count():
 		layers[current_layer][3].get_child(current_frame).pressed = true
+
+	if canvases.size() == 1:
+		disable_button(remove_frame_button, true)
+	elif !layers[current_layer][2]:
+		disable_button(remove_frame_button, false)
 
 	Global.transparent_checker._ready() # To update the rect size
 
