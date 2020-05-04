@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/ImportSprites.gd" type="Script" id=1]
+
+
+
+[node name="ImportSprites" type="FileDialog"]
+margin_right = 515.0
+margin_bottom = 348.0
+window_title = "Open File(s)"
+resizable = true
+mode = 1
+access = 2
+filters = PoolStringArray( "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.png ; PNG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+script = ExtResource( 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 507.0
+margin_bottom = 312.0
+
+[node name="ImportAsNewFrame" type="CheckBox" parent="HBoxContainer2"]
+margin_right = 161.0
+margin_bottom = 304.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Import as new frame"
+
+[node name="ImportSpritesheet" type="CheckBox" parent="HBoxContainer2"]
+margin_left = 165.0
+margin_right = 343.0
+margin_bottom = 304.0
+mouse_default_cursor_shape = 2
+text = "Import as a spritesheet"
+
+[node name="Spritesheet" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 507.0
+margin_bottom = 312.0
+
+[node name="Label" type="Label" parent="Spritesheet"]
+margin_top = 1.0
+margin_right = 101.0
+margin_bottom = 16.0
+text = "Horizontal frames:"
+
+[node name="HorizontalFrames" type="SpinBox" parent="Spritesheet"]
+margin_left = 105.0
+margin_right = 159.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="Label2" type="Label" parent="Spritesheet"]
+margin_left = 163.0
+margin_top = 1.0
+margin_right = 248.0
+margin_bottom = 16.0
+text = "Vertical frames:"
+
+[node name="VerticalFrames" type="SpinBox" parent="Spritesheet"]
+margin_left = 252.0
+margin_right = 306.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+[connection signal="files_selected" from="." to="." method="_on_ImportSprites_files_selected"]
+[connection signal="pressed" from="HBoxContainer2/ImportAsNewFrame" to="." method="_on_ImportAsNewFrame_pressed"]
+[connection signal="pressed" from="HBoxContainer2/ImportSpritesheet" to="." method="_on_ImportSpritesheet_pressed"]
+[connection signal="value_changed" from="Spritesheet/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
+[connection signal="value_changed" from="Spritesheet/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]

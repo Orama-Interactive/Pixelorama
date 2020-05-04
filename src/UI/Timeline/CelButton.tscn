@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=1]
+
+
+
+[node name="CelButton" type="Button"]
+margin_top = 18.0
+margin_right = 36.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 36, 36 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+button_mask = 7
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CelTexture" type="TextureRect" parent="."]
+margin_left = 2.0
+margin_top = 1.78536
+margin_right = 34.0
+margin_bottom = 33.7854
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false, "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
+
+[node name="LinkedIndicator" type="Polygon2D" parent="."]
+visible = false
+color = Color( 0.0627451, 0.741176, 0.215686, 1 )
+invert_enable = true
+invert_border = 1.0
+polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
+[connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]

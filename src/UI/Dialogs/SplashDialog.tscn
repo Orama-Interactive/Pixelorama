@@ -1,0 +1,445 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/splash_screen/pixelorama_logo.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/splash_screen/become_a_patron.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/splash_screen/become_a_patron_hover.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/splash_screen/splash_art.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Assets/Graphics/splash_screen/orama_64x64.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/splash_screen/discord.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/splash_screen/github_32px.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
+
+[node name="SplashDialog" type="WindowDialog"]
+margin_right = 614.0
+margin_bottom = 590.0
+rect_min_size = Vector2( 600, 560 )
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Contents" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Contents"]
+margin_right = 614.0
+margin_bottom = 436.0
+custom_constants/separation = 0
+
+[node name="Logo_ArtWork" type="VBoxContainer" parent="Contents/HBoxContainer"]
+margin_right = 350.0
+margin_bottom = 436.0
+rect_min_size = Vector2( 350, 0 )
+custom_constants/separation = 15
+
+[node name="PixeloramaLogo" type="TextureRect" parent="Contents/HBoxContainer/Logo_ArtWork"]
+margin_right = 350.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="CenterContainer" type="MarginContainer" parent="Contents/HBoxContainer/Logo_ArtWork"]
+margin_top = 139.0
+margin_right = 350.0
+margin_bottom = 436.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="ArtContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Logo_ArtWork/CenterContainer"]
+margin_right = 350.0
+margin_bottom = 297.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 17
+
+[node name="SplashArt" type="TextureButton" parent="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer"]
+margin_left = 45.0
+margin_right = 305.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 260, 260 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="ArtCredits" type="Button" parent="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer"]
+margin_top = 277.0
+margin_right = 350.0
+margin_bottom = 297.0
+mouse_default_cursor_shape = 2
+custom_constants/hseparation = 0
+text = "Art by Erevoid"
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="Contents/HBoxContainer"]
+margin_left = 350.0
+margin_right = 354.0
+margin_bottom = 436.0
+
+[node name="Buttons_Changelog" type="MarginContainer" parent="Contents/HBoxContainer"]
+margin_left = 354.0
+margin_right = 614.0
+margin_bottom = 436.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 250.0
+margin_bottom = 426.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="Buttons" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
+margin_right = 240.0
+margin_bottom = 110.0
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="NewBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+margin_right = 240.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "New"
+
+[node name="OpenBtn " type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+margin_top = 30.0
+margin_right = 240.0
+margin_bottom = 50.0
+mouse_default_cursor_shape = 2
+text = "Open"
+
+[node name="OpenLastBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+margin_top = 60.0
+margin_right = 240.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+text = "Open Last Project"
+
+[node name="ImportBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+margin_top = 90.0
+margin_right = 240.0
+margin_bottom = 110.0
+mouse_default_cursor_shape = 2
+text = "Import"
+
+[node name="HSeparator" type="HSeparator" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
+margin_top = 120.0
+margin_right = 240.0
+margin_bottom = 124.0
+
+[node name="Changlog" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
+margin_top = 134.0
+margin_right = 240.0
+margin_bottom = 416.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="ChangesLabel" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog"]
+margin_right = 240.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "v0.6 Changes"
+
+[node name="ChangelogContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog"]
+margin_top = 22.0
+margin_right = 240.0
+margin_bottom = 282.0
+size_flags_horizontal = 3
+
+[node name="ChangelogScroll" type="ScrollContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer"]
+margin_right = 240.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 260 )
+
+[node name="Label" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer/ChangelogScroll"]
+margin_right = 240.0
+margin_bottom = 1714.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Added
+
+- Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
+- Crowdin integration for contributing translations!
+- Spanish translation - thanks to azagaya & Lilly And!
+- Chinese Simplified translation - thanks to Chenxu Wang!
+- Latvian translation - thanks to Agnis Aldiņš (NeZvers)!
+- Translators can now be seen in the About window.
+- It is now possible to remove custom brushes with the middle mouse button.
+- Added HSV mode to the color picker. (Added automatically because of the Godot 3.2 update)
+- Lanczos scaling interpolation. (Added because of the Godot 3.2 update)
+- You can now drag and drop (or right click and open with) image and .pxo files in Pixelorama.
+- You can now hide the animation timeline - Thanks to YeldhamDev!
+
+Changed
+
+- Major changes to alpha blending behavior. The alpha values now get added/blended together instead of just replacing the pixel with the new value.
+- Replaced some OS alerts with a custom made error dialog.
+- Made the zooming smoother, is toggleable in Preferences whether to keep the new zooming or the old one.
+- The camera now zooms at the mouse's position.
+- Made the \"X\" button on the custom brushes a little smaller.
+- The color picker will now have a small white triangle on the top left of the color preview if at least one of its RGB values are above 1 in Raw mode. (Added automatically because of the Godot 3.2 update)
+- You can now toggle the visibility of hidden items on and off in the file dialogs. (Added automatically because of the Godot 3.2 update)
+- The language buttons in the preferences have their localized names in their hint tooltips. For example, if you hover over the \"English\" button while the language is Greek, the hint tooltip will be \"Αγγλικά\", which is the Greek word for English.
+- Translation updates.
+- The presets in the ColorPickers are now hidden - Thanks to YeldhamDev!
+- When opening a project (.pxo file), the save path is being set to the opened project's path - Thanks to YeldhamDev!
+
+Fixed
+
+- Delay the splash screen popup so it shows properly centered - Thanks to YeldhamDev!
+- Possibly fixed crashes with motion drawing and undo/redoing.
+- Fixed bug (which also caused crashes sometimes) when generating an outline inside the image and it was going outside the canvas' borders.
+- Fixed crash when importing images that were failing to load. They still fail to load, but Pixelorama does not crash.
+- Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
+- Fixed ruler markings cutting off before they should - Thanks to YeldhamDev!
+- Fixed bug where resizing the image on export was not working on Godot 3.2 - Issue #161"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Contents"]
+margin_top = 436.0
+margin_right = 614.0
+margin_bottom = 440.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Contents"]
+margin_top = 440.0
+margin_right = 614.0
+margin_bottom = 593.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Info" type="HBoxContainer" parent="Contents/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 604.0
+margin_bottom = 143.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sponsors" type="HBoxContainer" parent="Contents/MarginContainer/Info"]
+margin_right = 362.0
+margin_bottom = 133.0
+size_flags_vertical = 3
+custom_constants/separation = 5
+
+[node name="PlatinumContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/Sponsors"]
+margin_right = 125.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 125, 0 )
+
+[node name="Label" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
+margin_right = 125.0
+margin_bottom = 14.0
+text = "Platinum Sponsor"
+align = 1
+
+[node name="PlaceholderLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
+margin_top = 56.0
+margin_right = 125.0
+margin_bottom = 71.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.678431, 0.611765, 0.807843, 1 )
+text = "Platinum Sponsor"
+align = 1
+
+[node name="TakeThisSpot" type="Button" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
+margin_top = 113.0
+margin_right = 125.0
+margin_bottom = 133.0
+mouse_default_cursor_shape = 2
+text = "Take this spot!"
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="Contents/MarginContainer/Info/Sponsors"]
+margin_left = 130.0
+margin_right = 134.0
+margin_bottom = 133.0
+
+[node name="GoldContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/Sponsors"]
+margin_left = 139.0
+margin_right = 264.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 125, 0 )
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
+margin_right = 125.0
+margin_bottom = 14.0
+text = "Gold Sponsors"
+align = 1
+
+[node name="PlaceholderLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
+margin_top = 56.0
+margin_right = 125.0
+margin_bottom = 71.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.678431, 0.611765, 0.807843, 1 )
+text = "Gold Sponsors"
+align = 1
+
+[node name="TakeThisSpot" type="Button" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
+margin_top = 113.0
+margin_right = 125.0
+margin_bottom = 133.0
+mouse_default_cursor_shape = 2
+text = "Take this spot!"
+flat = true
+
+[node name="VSeparator2" type="VSeparator" parent="Contents/MarginContainer/Info/Sponsors"]
+margin_left = 269.0
+margin_right = 273.0
+margin_bottom = 133.0
+
+[node name="PatronContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/Sponsors"]
+margin_left = 278.0
+margin_right = 362.0
+margin_bottom = 133.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+alignment = 1
+
+[node name="PatronsLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PatronContainer"]
+margin_right = 84.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Patrons:"
+align = 1
+
+[node name="PatronButton" type="TextureButton" parent="Contents/MarginContainer/Info/Sponsors/PatronContainer"]
+margin_top = 24.0
+margin_right = 84.0
+margin_bottom = 133.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info"]
+margin_left = 365.0
+margin_right = 594.0
+margin_bottom = 133.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+alignment = 2
+
+[node name="Branding" type="HBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer"]
+margin_right = 229.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer/Branding"]
+margin_left = 96.0
+margin_right = 193.0
+margin_bottom = 104.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Logo" type="TextureRect" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer"]
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 67.0
+texture = ExtResource( 8 )
+stretch_mode = 4
+
+[node name="DevelopedBy" type="Label" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer"]
+margin_top = 71.0
+margin_right = 97.0
+margin_bottom = 84.0
+custom_fonts/font = ExtResource( 7 )
+text = "Orama Interactive"
+align = 1
+
+[node name="Copyright" type="Label" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer"]
+margin_top = 88.0
+margin_right = 97.0
+margin_bottom = 101.0
+custom_fonts/font = ExtResource( 7 )
+text = "Copyright 2019-2020"
+align = 1
+
+[node name="Links" type="VBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer/Branding"]
+margin_left = 197.0
+margin_right = 229.0
+margin_bottom = 104.0
+
+[node name="GithubButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 10 )
+
+[node name="DiscordButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 9 )
+
+[node name="PatreonButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 11 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer"]
+margin_top = 109.0
+margin_right = 229.0
+margin_bottom = 133.0
+alignment = 2
+
+[node name="ShowOnStartup" type="CheckBox" parent="Contents/MarginContainer/Info/VBoxContainer/HBoxContainer"]
+margin_left = 124.0
+margin_right = 229.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = ExtResource( 7 )
+text = "Don't show again"
+[connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
+[connection signal="pressed" from="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer/SplashArt" to="." method="_on_ArtCredits_pressed"]
+[connection signal="pressed" from="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer/ArtCredits" to="." method="_on_ArtCredits_pressed"]
+[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
+[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/OpenBtn " to="." method="_on_OpenBtn__pressed"]
+[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
+[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/ImportBtn" to="." method="_on_ImportBtn_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/PlatinumContainer/TakeThisSpot" to="." method="_on_TakeThisSpot_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/GoldContainer/TakeThisSpot" to="." method="_on_TakeThisSpot_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/PatronContainer/PatronButton" to="." method="_on_PatronButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
+[connection signal="toggled" from="Contents/MarginContainer/Info/VBoxContainer/HBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]

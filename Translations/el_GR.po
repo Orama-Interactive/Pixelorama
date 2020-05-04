@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-03-26 00:59\n"
+"PO-Revision-Date: 2020-04-18 22:21\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -139,11 +139,11 @@ msgstr "Άνοιγμα αρχείου"
 msgid "Open File(s)"
 msgstr "Άνοιγμα αρχείου/ων"
 
-msgid "IMPORT_FILE_LABEL"
+msgid "Import as new frame"
 msgstr "Εισαγωγή ως νέο καρέ"
 
-msgid "IMPORT_SPRITESHEET"
-msgstr "Εισαγωγή φύλλου καρέ"
+msgid "Import as a spritesheet"
+msgstr "Εισαγωγή φύλλου καρέ (spritesheet)"
 
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
@@ -204,14 +204,23 @@ msgstr "Άνοιγμα Φακέλου"
 msgid "All frames as multiple files"
 msgstr "Όλα τα καρέ ως ξεχωριστά αρχεία"
 
-msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Εξαγωγή αυτού του καρέ"
+msgid "All frames as a single file animation"
+msgstr "Όλα τα καρέ ως ένα αρχείο κίνησης"
 
-msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Εξαγωγή καρέ σε ξεχωριστά αρχεία"
+msgid "Background:"
+msgstr "Υπόβαθρο:"
 
-msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Εξαγωγή καρέ ως φύλλο καρέ"
+msgid "Direction:"
+msgstr "Κατεύθυνση:"
+
+msgid "Forward"
+msgstr "Μπροστά"
+
+msgid "Backwards"
+msgstr "Ανάποδα"
+
+msgid "Ping-Pong"
+msgstr "Πινγκ-Πονγκ"
 
 msgid "Columns"
 msgstr "Στήλες"
@@ -261,14 +270,17 @@ msgstr "Γλώσσα"
 msgid "Themes"
 msgstr "Θέματα"
 
-msgid "Guides & Grid"
-msgstr "Οδηγοί και Πλέγμα"
+msgid "Canvas"
+msgstr "Καμβάς"
 
-msgid "General Options"
-msgstr "Γενικές επιλογές"
+msgid "Shortcuts"
+msgstr "Συντομεύσεις"
 
 msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
+
+msgid "Adds a smoother transition when zooming in or out"
+msgstr "Η μετάβαση στο ζουμ είναι πιο ομαλή"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Ευαισθησία πίεσης tablet:"
@@ -278,15 +290,6 @@ msgstr "Καθόλου"
 
 msgid "Affect Brush's Alpha"
 msgstr "Επηρεάζει την αδιαφάνεια του πινέλου"
-
-msgid "Language options"
-msgstr "Επιλογές γλώσσας"
-
-msgid "Theme options"
-msgstr "Επιλογές θέματος"
-
-msgid "Grid options"
-msgstr "Επιλογές πλέγματος"
 
 msgid "Color:"
 msgstr "Χρώμα:"
@@ -318,6 +321,9 @@ msgstr "Αποκορεσμός"
 msgid "Outline"
 msgstr "Περίγραμμα"
 
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
+
 msgid "Diagonal"
 msgstr "Διαγώνιος"
 
@@ -339,7 +345,7 @@ msgstr "Καταγραφές αλλαγών"
 msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
 
-msgid "MADEBY_LABEL"
+msgid "Developed by Orama Interactive"
 msgstr "Φτιαγμένο από την Orama Interactive"
 
 msgid "Website"
@@ -441,58 +447,79 @@ msgstr "Έξοδος χωρίς αποθήκευση"
 msgid "Utility Tools"
 msgstr "Βοηθητικά Εργαλεία"
 
-msgid "RECTSELECT_HT"
+msgid "Rectangular Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Press %s to move the content"
 msgstr "Ορθογώνια επιλογή\n\n"
-"R για το αριστερό κουμπί ποντικιού\n"
-"Alt + R για το δεξί κουμπί ποντικιού\n\n"
-"Πατήστε Shift για να μετακινηθεί το περιεχόμενο"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού\n\n"
+"Πατήστε %s για να μετακινηθεί το περιεχόμενο"
 
-msgid "COLORPICKER_HT"
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Ζουμ (Μεγέθυνση)\n\n"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού"
+
+msgid "Color Picker\n"
+"Select a color from a pixel of the sprite\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Επιλογέας χρωμάτων\n"
 "Επιλέξτε ένα χρώμα από ένα εικονοστοιχείο της εικόνας\n\n"
-"Ο για το αριστερό κουμπί ποντικιού\n"
-"Alt + Ο για το δεξί κουμπί ποντικιού"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού"
 
 msgid "Draw Tools"
 msgstr "Εργαλεία Ζωγραφικής"
 
-msgid "PENCIL_HT"
+msgid "Pencil\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr "Μολύβι\n\n"
-"P για το αριστερό κουμπί ποντικιού\n"
-"Alt + P για το δεξί κουμπί ποντικιού\n\n"
-"Κρατήστε Shift για να τραβήξετε μια γραμμή"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού\n\n"
+"Κρατήστε %s για να τραβήξετε μια γραμμή"
 
-msgid "ERASER_HT"
+msgid "Eraser\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr "Γόμα\n\n"
-"E για το αριστερό κουμπί ποντικιού\n"
-"Alt + E για το δεξί κουμπί ποντικιού\n\n"
-"Κρατήστε Shift για να τραβήξετε μια γραμμή"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού\n\n"
+"Κρατήστε %s για να τραβήξετε μια γραμμή"
 
-msgid "BUCKET_HT"
+msgid "Bucket\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Κουβάς\n\n"
-"B για το αριστερό κουμπί ποντικιού\n"
-"Alt + B για το δεξί κουμπί ποντικιού"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού"
 
-msgid "LD_HT"
+msgid "Lighten/Darken\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Φώτισμα/Σκούρημα\n\n"
-"U για το αριστερό κουμπί ποντικιού\n"
-"Alt + U για το δεξί κουμπί ποντικιού"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού"
 
-msgid "LEFTCOLOR_HT"
+msgid "Choose a color for the left tool"
 msgstr "Επιλέξτε ένα χρώμα για το αριστερό εργαλείο"
 
-msgid "RIGHTCOLOR_HT"
+msgid "Choose a color for the right tool"
 msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο"
 
-msgid "COLORSWITCH_HT"
+msgid "Switch left and right colors\n"
+"(%s)"
 msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος\n"
-"(X)"
+"(%s)"
 
-msgid "COLORDEFAULTS_HT"
+msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
-
-msgid "Raw Mode"
-msgstr "Ωμή Λειτουργία"
 
 msgid "Left tool options"
 msgstr "Επιλογές αριστερού εργαλείου"
@@ -503,22 +530,76 @@ msgstr "Επιλογές δεξιού εργαλείου"
 msgid "Left pixel indicator"
 msgstr "Δείκτης αριστερού πιξελ"
 
-msgid "LEFT_INDIC_HT"
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο αριστερό κουμπί του ποντικιού"
-
-msgid "RIGHT_INDIC_HT"
-msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού"
-
-msgid "Show tool icon"
-msgstr "Εμφάνιση εικονιδίου εργαλείου"
 
 msgid "Right pixel indicator"
 msgstr "Δείκτης δεξιού πιξελ"
 
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
+msgstr "Εμφάνιση δείκτη για το εικονοστοιχείο ή το πινέλο πάνω στον καμβά που αντιστοιχεί στο δεξί κουμπί του ποντικιού"
+
+msgid "Show left tool icon"
+msgstr "Εμφάνιση αριστερού εικονιδίου εργαλείου"
+
+msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
+msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου αριστερού εργαλείου δίπλα στο κέρσορα στον καμβά"
+
+msgid "Show right tool icon"
+msgstr "Εμφάνιση δεξιού εικονιδίου εργαλείου"
+
+msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου δεξιού εργαλείου δίπλα στο κέρσορα στον καμβά"
+
+msgid "Guides color:"
+msgstr "Χρώμα οδηγών:"
+
+msgid "A color of ruler guides displayed on the canvas"
+msgstr "Το χρώμα των οδηγών που φαίνεται στο καμβά"
+
+msgid "Grid width:"
+msgstr "Πλάτος πλέγματος:"
+
+msgid "Sets how far apart are vertical lines of the grid"
+msgstr "Ορίζει το πόσο μακριά είναι οι κάθετες γραμμές του πλέγματος"
+
+msgid "Grid height:"
+msgstr "Ύψος πλέγματος:"
+
+msgid "Sets how far apart are horizontal lines of the grid"
+msgstr "Ορίζει το πόσο μακριά είναι οι οριζόντιες γραμμές του πλέγματος"
+
+msgid "Grid color:"
+msgstr "Χρώμα πλέγματος:"
+
+msgid "A color of the grid"
+msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
+
+msgid "Checker size"
+msgstr "Μέγεθος σκακιέρας"
+
+msgid "Size of the transparent checker background"
+msgstr "Μέγεθος του διάφανου υποβάθρου - σκακιέρα"
+
+msgid "Checker color 1"
+msgstr "Χρώμα σκακιέρας 1"
+
+msgid "First color of the transparent checker background"
+msgstr "Πρώτο χρώμα του διάφανου υποβάθρου - σκακιέρα"
+
+msgid "Checker color 2"
+msgstr "Χρώμα σκακιέρας 2"
+
+msgid "Second color of the transparent checker background"
+msgstr "Δεύτερο χρώμα του διάφανου υποβάθρου - σκακιέρα"
+
+msgid "Only custom preset can be modified"
+msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
+
 msgid "Brush:"
 msgstr "Πινέλο:"
 
-msgid "BRUSH_HT"
+msgid "Select a brush"
 msgstr "Επιλέξτε ένα πινέλο"
 
 msgid "Brush: Pixel"
@@ -539,7 +620,7 @@ msgstr "Μέγεθος πινέλου:"
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
 
-msgid "COLORFROM_HT"
+msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώμα"
 
 msgid "Fill area:"
@@ -551,6 +632,12 @@ msgstr "Περιοχή ίδιου χρώματος"
 msgid "All pixels of the same color"
 msgstr "Όλα τα πίξελ ίδιου χρώματος"
 
+msgid "Same color area"
+msgstr "Περιοχή ίδιου χρώματος"
+
+msgid "Same color pixels"
+msgstr "Πίξελς ίδιου χρώματος"
+
 msgid "Lighten"
 msgstr "Φώτισμα"
 
@@ -560,7 +647,7 @@ msgstr "Σκούρημα"
 msgid "Amount:"
 msgstr "Ποσό:"
 
-msgid "LDAMOUNT_HT"
+msgid "Lighten/Darken amount"
 msgstr "Ποσό φωτίσματος ή σκουρήματος"
 
 msgid "Pick for:"
@@ -572,16 +659,34 @@ msgstr "Αριστερό Χρώμα"
 msgid "Right Color"
 msgstr "Δεξί Χρώμα"
 
+msgid "Mode:"
+msgstr "Λειτουργία:"
+
+msgid "Zoom in"
+msgstr "Μεγέθυνση"
+
+msgid "Zoom out"
+msgstr "Σμίκρυνση"
+
+msgid "Options:"
+msgstr "Επιλογές:"
+
+msgid "Fit to frame"
+msgstr "Προσαρμογή στην οθόνη"
+
+msgid "100% Zoom"
+msgstr "100% Ζουμ"
+
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
 
 msgid "Horizontal"
 msgstr "Οριζόντια"
 
-msgid "HORIZMIRROR_HT"
+msgid "Enable horizontal mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
 
-msgid "VERTMIRROR_HT"
+msgid "Enable vertical mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
 
 msgid "Vertical"
@@ -593,31 +698,44 @@ msgstr "Τρέχον καρέ:"
 msgid "Current frame: 1/1"
 msgstr "Τρέχον καρέ: 1/1"
 
-msgid "FIRSTFRAME_HT"
+msgid "Jump to the first frame\n"
+"(%s)"
 msgstr "Μετάβαση στο πρώτο καρέ\n"
-"(Ctrl+Home)"
+"(%s)"
 
-msgid "PREVIOUSFRAME_HT"
+msgid "Go to the previous frame\n"
+"(%s)"
 msgstr "Μετάβαση στο προηγούμενο καρέ\n"
-"(Ctrl+Αριστερά)"
+"(%s)"
 
-msgid "PLAYBACKWARDS_HT"
+msgid "Play the animation backwards (from end to beginning)\n"
+"(%s)"
 msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n"
-"(F4)"
+"(%s)"
 
-msgid "PLAYFORWARD_HT"
+msgid "Play the animation forward (from beginning to end)\n"
+"(%s)"
 msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n"
-"(F5)"
+"(%s)"
 
-msgid "NEXTFRAME_HT"
+msgid "Go to the next frame\n"
+"(%s)"
 msgstr "Μετάβαση στο επόμενο καρέ\n"
-"(Ctrl+Δεξιά)"
+"(%s)"
 
-msgid "LASTFRAME_HT"
+msgid "Jump to the last frame\n"
+"(%s)"
 msgstr "Μετάβαση στο τελευταίο καρέ\n"
-"(Ctrl+End)"
+"(%s)"
 
-msgid "FPS_HT"
+msgid "Onion Skinning settings"
+msgstr "Ρυθμίσεις Onion Skinning"
+
+msgid "Enable/disable Onion Skinning"
+msgstr "Ενεργοποίηση/απενεργοποίηση Onion Skinning"
+
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
 msgstr "Πόσα καρέ ανά δευτερόλεπτο (FPS) να είναι η προεπισκόπηση της κίνησης;\n"
 "Όσο περισσότερα FPS, τόσο πιο γρήγορα παίζει η κίνηση."
 
@@ -639,6 +757,17 @@ msgstr "Παρελθοντικά καρέ"
 msgid "Future Frames"
 msgstr "Μελλοντικά καρέ"
 
+msgid "Manage frame tags"
+msgstr "Διαχείριση ετικετών καρέ"
+
+msgid "Animation plays only on frames of the same tag"
+msgstr "Η κίνηση παίζει μόνο σε καρέ της ίδιας καρτέλας"
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
+msgstr "Αν είναι επιλεγμένο, η κίνηση παίζει μόνο σε καρέ που έχουν την ίδια καρτέλα.\n"
+"Αλλιώς, η κίνηση θα παίζει σε όλα τα καρέ, αγνοώντας τις καρτέλες."
+
 msgid "Blue-Red Mode"
 msgstr "Μπλε-Κόκκινη λειτουργία"
 
@@ -657,14 +786,17 @@ msgstr "Μετακίνηση Αριστερά"
 msgid "Move Right"
 msgstr "Μετακίνηση Δεξιά"
 
+msgid "Add Frame Tag"
+msgstr "Προσθήκη Ετικέτας Καρέ"
+
+msgid "Unlink Cel"
+msgstr "Αποσύνδεση Cel"
+
 msgid "Layer"
 msgstr "Στρώση"
 
 msgid "Layers"
 msgstr "Στρώσεις"
-
-msgid "LAYERNEW_HT"
-msgstr "Δημιουργία νέας στρώσης"
 
 msgid "Create a new layer"
 msgstr "Δημιουργία νέας στρώσης"
@@ -695,8 +827,8 @@ msgstr "Κλείδωμα/ξεκλείδωμα της στρώσης"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Ενεργοποίηση/Απενεργοποίηση σύνδεσης κελιών\n\n"
-"Τα συνδεδεμένα κελιά μοιράζονται ανάμεσα σε πολλά καρέ"
+msgstr "Ενεργοποίηση/Απενεργοποίηση σύνδεσης cel\n\n"
+"Τα συνδεδεμένα cels μοιράζονται ανάμεσα σε πολλά καρέ"
 
 msgid "Palette"
 msgstr "Παλέτα"
@@ -842,12 +974,84 @@ msgstr "Πάρτε αυτή τη θέση!"
 msgid "Image Options"
 msgstr "Επιλογές εικόνας"
 
-msgid "Default Width:"
+msgid "Default width:"
 msgstr "Προεπιλεγμένο πλάτος:"
 
-msgid "Default Height:"
+msgid "A default width of a new image"
+msgstr "Το προεπιλεγμένο πλάτος των καινούριων εικόνων"
+
+msgid "Default height:"
 msgstr "Προεπιλεγμένο ύψος:"
 
-msgid "Default Fill Color:"
+msgid "A default height of a new image"
+msgstr "Το προεπιλεγμένο ύψος των καινούριων εικόνων"
+
+msgid "Default fill color:"
 msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
+
+msgid "A default background color of a new image"
+msgstr "Το προεπιλεγμένο χρώμα των καινούριων εικόνων"
+
+msgid "Lock aspect ratio:"
+msgstr "Κλείδωμα αναλογίας διαστάσεων:"
+
+msgid "Templates:"
+msgstr "Πρότυπα:"
+
+msgid "Preset"
+msgstr "Προεπιλογή"
+
+msgid "Preset:"
+msgstr "Προεπιλογή:"
+
+msgid "Default"
+msgstr "Προεπιλογή"
+
+msgid "Custom"
+msgstr "Προσαρμοσμένο"
+
+msgid "Rectangular Selection"
+msgstr "Ορθογώνια επιλογή"
+
+msgid "Zoom"
+msgstr "Ζουμ"
+
+msgid "Color Picker"
+msgstr "Επιλογέας χρωμάτων"
+
+msgid "Pencil"
+msgstr "Μολύβι"
+
+msgid "Eraser"
+msgstr "Γόμα"
+
+msgid "Bucket"
+msgstr "Κουβάς"
+
+msgid "Lighten/Darken"
+msgstr "Φώτισμα/Σκούρημα"
+
+msgid "Switch Colors"
+msgstr "Εναλλαγή χρωμάτων"
+
+msgid "Set the shortcut"
+msgstr "Επιλέξτε μια συντόμευση"
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr "Πατήστε ένα πλήκτρο ή συνδυασμό πλήκτρων για να ορίσετε τη συντόμευση"
+
+msgid "Already assigned"
+msgstr "Έχει ήδη εκχωρηθεί"
+
+msgid "Left Tool:"
+msgstr "Αριστερό εργαλείο:"
+
+msgid "A tool assigned to the left mouse button"
+msgstr "Το εργαλείο που έχει εκχωρηθεί στο αριστερό κουμπί του ποντικιού"
+
+msgid "Right Tool:"
+msgstr "Δεξί εργαλείο:"
+
+msgid "A tool assigned to the right mouse button"
+msgstr "Το εργαλείο που έχει εκχωρηθεί στο δεξί κουμπί του ποντικιού"
 

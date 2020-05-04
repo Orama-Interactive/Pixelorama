@@ -2,46 +2,72 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+<br><br>
 
 ## [v0.7] - Unreleased
+This update has been brought to you by the contributions of:
+
+Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese),
+sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonfi)
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
 - Cel linking is now possible. This way, layers can be "shared" in multiple frames.
 - You can now group multiple frames with tags.
-- You can now export your projects to .gif files - Thanks to Martin Novák (novhack)!
-- A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite. Thanks to luiq54!
-- Pattern filling is now possible. If the user chooses a brush that is not the pixel or a circle brush and uses the bucket tool, the brush image is used as a pattern that fills the area.
-- Users can change keyboard shortcut binding for tools - thanks to Martin Novák (novhack)!
-- Importing .pngs as palettes is now possible - thanks to Martin Novák (novhack)!
-- A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes - thanks to Schweini07!
-- Templates and a lock aspect ratio option have been added to the "Create new image" dialog - thanks to Gaarco!
+- You can now export your projects to `.gif` files.
+- A new rotation method has been added, "Upscale, Rotate and Downscale". It's similar to Rotsprite.
+- An HSV Adjust dialog has been added in the Images menu.
+- Pattern filling is now possible. The bucket tool can now use Patterns to fill areas, instead of a single color.
+- An autosave feature that keeps backups of unsaved projects have been added. In the case of a software crash, the users can restore their work with this system.
+- Users can now change keyboard shortcut bindings for tools, in the Preferences.
+- Pixel Perfect mode has been added for pencil, eraser and lighten/darken tools.
+- Importing `.pngs` as palettes is now possible.
+- A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
+- The last edited project gets loaded at startup (toggleable in the Preferences), along with a new option in the File menu that also does this.
+- Templates and a lock aspect ratio option have been added to the "Create new image" dialog.
 - Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
 - Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
-- Esperanto translation - thanks to Teashrock!
-- When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation - thanks to luiq54!
-- You can now zoom in with the `+` key, and zoom out with `-`.
+- Esperanto, Indonesian & Czech translation.
+- When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
+- A new zoom tool has been added, and you can also zoom in with the `+` key, and zoom out with `-`.
+- You can now move the canvas with the `Arrow keys`. `Shift + Arrows` make it move with medium speed, and `Ctrl + Shift + Arrows` makes it move with high speed.
+- The left and right tool icon options (found in Preferences) are now saved and restored on startup.
 
 ### Changed
 - The UI - and especially the timeline - has been revamped!
-- The export dialog has also been revamped - thanks to thanks to Martin Novák (novhack)!
+- The export dialog has also been revamped.
 - An asterisk is added to the window title if there are unsaved changes.
 - A VSplitContainer has been added between the canvas and the timeline.
+- The texture of the transparent checker background is now no longer affected by the zoom value. The users can now also change the texture's colors and the size.
 - Notification text is now black on the gold and light themes.
-- Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter)
-- LineEdits lose focus when the user presses Enter - thanks to Gaarco!
-- Layer visibility is taken into account when exporting the drawing as a .png file. This means that invisible layers will not be included in the final .png file.
+- Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter).
+- LineEdits lose focus when the user presses Enter.
+- When cloning a frame, the clone will appear next to the original.
+- Layer visibility is taken into account when exporting the drawing as a `.png` file. This means that invisible layers will not be included in the final `.png` file.
+- The Godot theme has changed.
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
 - The default window size is now 1280x720, and the minimum window size is 1024x576.
-- The splash screen is no longer purple, it now gets affected by the chosen theme.
+- `.pxo` files now use ZSTD compression to result in smaller file sizes.
+- Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard Linux/BSD packaging methods and for better per-user usability.
+- The splash screen has been revamped and is no longer purple, it now gets affected by the chosen theme.
+- The brush selection popup now closes when a brush is selected.
+- Pixelorama's version number now appears on the window title.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
 - Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
-- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else - Thanks to Gaarco! (Issue #167)
+- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else. (Issue #167)
 - When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
+- Fixed bug where the user could drag the selection and the guides when the canvas had no focus.
+- The zoom label on the top bar now shows the correct zoom value when smooth zoom is enabled.
+- Fixed issue with Space triggering the event of the last pressed button. This caused unwanted behavior when using Space to move the canvas around. Resolved by changing the focus mode of the buttons to None.
+
+### Removed
+- It's no longer possible for frames to have different amounts of layers. All frames have the same amount.
+- The guides no longer work with undo/redo.
+<br><br>
 
 ## [v0.6.2] - 17-02-2020
 
@@ -79,6 +105,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Possibly fixed a rare crash where the cursor image was failing to load. It is now being loaded only once.
 - Fixed ruler markings cutting off before they should - Thanks to YeldhamDev!
 - Fixed bug where resizing the image on export and moving selection content were not working on Godot 3.2 - Issues #161 and #162
+<br><br>
 
 ## [v0.6.1] - 13-01-2020
 
@@ -109,6 +136,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The canvas updates automatically when onion skinning settings change.
 - Fixed a rare crash with straight lines. It was possible that the variable `is_making_line` could be true, even if the line itself has been freed from memory.
 - Fixed issue where undo/redo was not working properly for straight lines that went outside the canvas.
+<br><br>
 
 ## [v0.6] - 06-01-2020
 

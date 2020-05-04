@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-03-26 00:53\n"
+"PO-Revision-Date: 2020-04-18 16:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -139,10 +139,10 @@ msgstr "Apri un File"
 msgid "Open File(s)"
 msgstr "Apri il(i) File"
 
-msgid "IMPORT_FILE_LABEL"
+msgid "Import as new frame"
 msgstr "Importa come un nuovo frame"
 
-msgid "IMPORT_SPRITESHEET"
+msgid "Import as a spritesheet"
 msgstr "Importa come uno spritesheet"
 
 msgid "Save Sprite as .pxo"
@@ -169,13 +169,13 @@ msgstr "Impossibile caricare il file '%s'.\n"
 "Codice di errore: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Fotogrammi"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animazione"
 
 msgid "Preview:"
 msgstr "Anteprima:"
@@ -204,14 +204,23 @@ msgstr "Apri una cartella"
 msgid "All frames as multiple files"
 msgstr "Tutti i fotogrammi come file multipli"
 
-msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "Esporta il frame corrente"
+msgid "All frames as a single file animation"
+msgstr "Tutti i fotogrammi sotto forma di animazione di singolo file"
 
-msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "Esporta tutti i frame come file multipli"
+msgid "Background:"
+msgstr "Sfondo:"
 
-msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "Esporta tutti i frame come uno spritesheet (singolo file)"
+msgid "Direction:"
+msgstr "Direzione:"
+
+msgid "Forward"
+msgstr "Inoltra"
+
+msgid "Backwards"
+msgstr "Indietro"
+
+msgid "Ping-Pong"
+msgstr "Ping-Pong"
 
 msgid "Columns"
 msgstr "Colonne"
@@ -261,14 +270,17 @@ msgstr "Lingua"
 msgid "Themes"
 msgstr "Temi"
 
-msgid "Guides & Grid"
-msgstr "Guide & Griglia"
+msgid "Canvas"
+msgstr "Tela"
 
-msgid "General Options"
-msgstr "Opzioni generali"
+msgid "Shortcuts"
+msgstr "Collegamenti"
 
 msgid "Smooth Zoom"
 msgstr "Zoom smussato"
+
+msgid "Adds a smoother transition when zooming in or out"
+msgstr "Aggiunge una transizione più fluida quando si zooma in entrata o fuori"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilità della pressione del tablet:"
@@ -278,15 +290,6 @@ msgstr "Nessuno"
 
 msgid "Affect Brush's Alpha"
 msgstr "Influenza l'Alfa del Pennello"
-
-msgid "Language options"
-msgstr "Opzioni di lingua"
-
-msgid "Theme options"
-msgstr "Opzioni del tema"
-
-msgid "Grid options"
-msgstr "Opzioni della griglia"
 
 msgid "Color:"
 msgstr "Colore:"
@@ -318,6 +321,9 @@ msgstr "Desaturazione"
 msgid "Outline"
 msgstr "Contorno"
 
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Regola Tonalità/Saturazione/Valore"
+
 msgid "Diagonal"
 msgstr "Diagonale"
 
@@ -339,7 +345,7 @@ msgstr "Novità"
 msgid "About Pixelorama"
 msgstr "Informazioni su Pixelorama"
 
-msgid "MADEBY_LABEL"
+msgid "Developed by Orama Interactive"
 msgstr "Sviluppato da Orama Interactive"
 
 msgid "Website"
@@ -441,58 +447,79 @@ msgstr "Esci senza salvare"
 msgid "Utility Tools"
 msgstr "Strumenti di utilità"
 
-msgid "RECTSELECT_HT"
+msgid "Rectangular Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Press %s to move the content"
 msgstr "Selezione Rettangolare\n\n"
-"R per il tasto sinistro del mouse\n"
-"Alt + R per il tasto destro del mouse\n\n"
-"Premi Shift per muovere il contenuto"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse\n\n"
+"Premi %s per muovere il contenuto"
 
-msgid "COLORPICKER_HT"
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Zoom\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse"
+
+msgid "Color Picker\n"
+"Select a color from a pixel of the sprite\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Prelievo Colore\n"
 "Scegli un colore da un pixel dello sprite\n\n"
-"O per il tasto sinistro del mouse\n"
-"Alt + O per il tasto destro del mouse"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse"
 
 msgid "Draw Tools"
 msgstr "Strumenti di disegno"
 
-msgid "PENCIL_HT"
+msgid "Pencil\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr "Matita\n\n"
-"P per il tasto sinistro del mouse\n"
-"Alt + P per il tasto destro del mouse\n\n"
-"Tieni premuto Shift per fare una linea"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse\n\n"
+"Tieni premuto %s per fare una linea"
 
-msgid "ERASER_HT"
+msgid "Eraser\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr "Gomma\n\n"
-"E per il tasto sinistro del mouse\n"
-"Alt + E per il tasto destro del mouse\n\n"
-"Tieni premuto Shift per fare una linea"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse\n\n"
+"Tieni premuto %s per fare una linea"
 
-msgid "BUCKET_HT"
+msgid "Bucket\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Secchio\n\n"
-"B per il tasto sinistro del mouse\n"
-"Alt + B per il tasto destro del mouse"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse"
 
-msgid "LD_HT"
+msgid "Lighten/Darken\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Schiarisci/Scurisci\n\n"
-"U per il tasto sinistro del mouse\n"
-"Alt + U per il tasto destro del mouse"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse"
 
-msgid "LEFTCOLOR_HT"
+msgid "Choose a color for the left tool"
 msgstr "Scegli un colore per lo strumento sinistro"
 
-msgid "RIGHTCOLOR_HT"
+msgid "Choose a color for the right tool"
 msgstr "Scegli un colore per lo strumento destro"
 
-msgid "COLORSWITCH_HT"
+msgid "Switch left and right colors\n"
+"(%s)"
 msgstr "Scambia i colori sinistro e destro\n"
-"(X)"
+"(%s)"
 
-msgid "COLORDEFAULTS_HT"
+msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
-
-msgid "Raw Mode"
-msgstr "Modalità Raw"
 
 msgid "Left tool options"
 msgstr "Opzioni dello strumento sinistro"
@@ -503,22 +530,76 @@ msgstr "Opzioni dello strumento destro"
 msgid "Left pixel indicator"
 msgstr "Indicatore pixel strumento sinistro"
 
-msgid "LEFT_INDIC_HT"
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Mostra l'indicatore pixel del mouse sinistro o il pennello sul canvas quando disegni"
-
-msgid "RIGHT_INDIC_HT"
-msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
-
-msgid "Show tool icon"
-msgstr "Mostra icona strumento"
 
 msgid "Right pixel indicator"
 msgstr "Indicatore pixel strumento destro"
 
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
+msgstr "Mostra l'indicatore pixel del mouse destro o il pennello sul canvas quando disegni"
+
+msgid "Show left tool icon"
+msgstr "Mostra icona strumento a sinistra"
+
+msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
+msgstr "Visualizza un'icona dello strumento sinistro selezionato accanto al cursore sulla tela"
+
+msgid "Show right tool icon"
+msgstr "Mostra l'icona dello strumento destra"
+
+msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr "Visualizza un'icona dello strumento destro selezionato accanto al cursore sulla tela"
+
+msgid "Guides color:"
+msgstr "Colore delle guide:"
+
+msgid "A color of ruler guides displayed on the canvas"
+msgstr "Un colore di guide per righello visualizzate sulla tela"
+
+msgid "Grid width:"
+msgstr "Larghezza griglia:"
+
+msgid "Sets how far apart are vertical lines of the grid"
+msgstr "Imposta quanto distante sono le linee verticali della griglia"
+
+msgid "Grid height:"
+msgstr "Altezza della griglia:"
+
+msgid "Sets how far apart are horizontal lines of the grid"
+msgstr "Imposta quanto distano le linee orizzontali della griglia"
+
+msgid "Grid color:"
+msgstr "Colore della griglia:"
+
+msgid "A color of the grid"
+msgstr "Un colore della griglia"
+
+msgid "Checker size"
+msgstr "Dimensione checker"
+
+msgid "Size of the transparent checker background"
+msgstr "Dimensioni dello sfondo trasparente del checker"
+
+msgid "Checker color 1"
+msgstr "Colore checker 1"
+
+msgid "First color of the transparent checker background"
+msgstr "Primo colore dello sfondo trasparente del checker"
+
+msgid "Checker color 2"
+msgstr "Colore checker 2"
+
+msgid "Second color of the transparent checker background"
+msgstr "Secondo colore dello sfondo trasparente del checker"
+
+msgid "Only custom preset can be modified"
+msgstr "Solo il preset personalizzato può essere modificato"
+
 msgid "Brush:"
 msgstr "Pennello:"
 
-msgid "BRUSH_HT"
+msgid "Select a brush"
 msgstr "Scegli un pennello"
 
 msgid "Brush: Pixel"
@@ -539,7 +620,7 @@ msgstr "Dimensione del pennello:"
 msgid "Brush color from"
 msgstr "Colore del pennello da"
 
-msgid "COLORFROM_HT"
+msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Colore dal pennello stesso, 100: il colore selezionato"
 
 msgid "Fill area:"
@@ -551,6 +632,12 @@ msgstr "Area dello stesso colore"
 msgid "All pixels of the same color"
 msgstr "Tutti i pixel dello stesso colore"
 
+msgid "Same color area"
+msgstr "Stessa area di colore"
+
+msgid "Same color pixels"
+msgstr "Stessi pixel di colore"
+
 msgid "Lighten"
 msgstr "Schiarisci"
 
@@ -560,7 +647,7 @@ msgstr "Scurisci"
 msgid "Amount:"
 msgstr "Quantità:"
 
-msgid "LDAMOUNT_HT"
+msgid "Lighten/Darken amount"
 msgstr "Quantità di Schiarimento/Scurimento"
 
 msgid "Pick for:"
@@ -572,16 +659,34 @@ msgstr "Colore sinistro"
 msgid "Right Color"
 msgstr "Colore destro"
 
+msgid "Mode:"
+msgstr "Modalità:"
+
+msgid "Zoom in"
+msgstr "Aumenta zoom"
+
+msgid "Zoom out"
+msgstr "Riduci zoom"
+
+msgid "Options:"
+msgstr "Opzioni:"
+
+msgid "Fit to frame"
+msgstr "Adatta al riquadro"
+
+msgid "100% Zoom"
+msgstr "Ingrandimento 100%"
+
 msgid "Mirroring"
 msgstr "Speculare"
 
 msgid "Horizontal"
 msgstr "Orizzontale"
 
-msgid "HORIZMIRROR_HT"
+msgid "Enable horizontal mirrored drawing"
 msgstr "Abilita disegno speculare orizzontale"
 
-msgid "VERTMIRROR_HT"
+msgid "Enable vertical mirrored drawing"
 msgstr "Abilita disegno speculare verticale"
 
 msgid "Vertical"
@@ -593,31 +698,44 @@ msgstr "Frame corrente:"
 msgid "Current frame: 1/1"
 msgstr "Frame corrente: 1/1"
 
-msgid "FIRSTFRAME_HT"
+msgid "Jump to the first frame\n"
+"(%s)"
 msgstr "Salta al primo frame\n"
-"(Ctrl+Home)"
+"(%s)"
 
-msgid "PREVIOUSFRAME_HT"
+msgid "Go to the previous frame\n"
+"(%s)"
 msgstr "Salta al frame precedente\n"
-"(Ctrl+Left)"
+"(%s)"
 
-msgid "PLAYBACKWARDS_HT"
+msgid "Play the animation backwards (from end to beginning)\n"
+"(%s)"
 msgstr "Riproduci l'animazione al rovescio (dalla fine all'inizio)\n"
-"(F4)"
+"(%s)"
 
-msgid "PLAYFORWARD_HT"
+msgid "Play the animation forward (from beginning to end)\n"
+"(%s)"
 msgstr "Riproduci l'animazione in avanti (dall'inizio alla fine)\n"
-"(F5)"
+"(%s)"
 
-msgid "NEXTFRAME_HT"
+msgid "Go to the next frame\n"
+"(%s)"
 msgstr "Vai al prossimo frame\n"
-"(Ctrl+Right)"
+"(%s)"
 
-msgid "LASTFRAME_HT"
+msgid "Jump to the last frame\n"
+"(%s)"
 msgstr "Salta all'ultimo frame\n"
-"(Ctrl+End)"
+"(%s)"
 
-msgid "FPS_HT"
+msgid "Onion Skinning settings"
+msgstr "Impostazioni Onion Skinning"
+
+msgid "Enable/disable Onion Skinning"
+msgstr "Abilita/disabilita Onion Skinning"
+
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
 msgstr "Quanti frame al secondo dovrebbe essere l'anteprima dell'animazione?\n"
 "Maggiori gli FPS, più veloce sarà l'animazione."
 
@@ -639,6 +757,17 @@ msgstr "Frame Passati"
 msgid "Future Frames"
 msgstr "Frame Futuri"
 
+msgid "Manage frame tags"
+msgstr "Gestisci tag dei frame"
+
+msgid "Animation plays only on frames of the same tag"
+msgstr "Animazione riprodotta solo sui fotogrammi dello stesso tag"
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
+msgstr "Se è selezionato, l'animazione viene eseguita solo sui fotogrammi che hanno lo stesso tag.\n"
+"Se non lo è, l'animazione verrà riprodotta per tutti i fotogrammi, ignorando i tag."
+
 msgid "Blue-Red Mode"
 msgstr "Modalità Blu-Rosso"
 
@@ -657,14 +786,17 @@ msgstr "Muovi a sinistra"
 msgid "Move Right"
 msgstr "Muovi a destra"
 
+msgid "Add Frame Tag"
+msgstr "Aggiungi tag Frame"
+
+msgid "Unlink Cel"
+msgstr "Scollega Cel"
+
 msgid "Layer"
 msgstr "Livello"
 
 msgid "Layers"
 msgstr "Livelli"
-
-msgid "LAYERNEW_HT"
-msgstr "Crea un nuovo livello"
 
 msgid "Create a new layer"
 msgstr "Crea un nuovo livello"
@@ -688,14 +820,15 @@ msgid "Opacity:"
 msgstr "Opacità:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Attiva/disattiva visibilità del livello"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Blocca/sblocca livello"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Abilita/disabilita il collegamento di cel\n\n"
+"I cels collegati sono condivisi su più fotogrammi"
 
 msgid "Palette"
 msgstr "Palette"
@@ -841,14 +974,86 @@ msgstr "Prendi questo posto!"
 msgid "Image Options"
 msgstr "Opzioni dell'immagine:"
 
-msgid "Default Width:"
+msgid "Default width:"
 msgstr "Larghezza default:"
 
-msgid "Default Height:"
+msgid "A default width of a new image"
+msgstr "Una larghezza predefinita di una nuova immagine"
+
+msgid "Default height:"
 msgstr "Altezza default:"
 
-msgid "Default Fill Color:"
-msgstr "Riempimento default:"
+msgid "A default height of a new image"
+msgstr "Un'altezza predefinita di una nuova immagini"
+
+msgid "Default fill color:"
+msgstr "Colore di riempimento predefinito:"
+
+msgid "A default background color of a new image"
+msgstr "Un colore di sfondo predefinito di una nuova immagine"
+
+msgid "Lock aspect ratio:"
+msgstr "Blocca rapporto d'aspetto:"
+
+msgid "Templates:"
+msgstr "Modelli:"
+
+msgid "Preset"
+msgstr "Preset"
+
+msgid "Preset:"
+msgstr "Preset:"
+
+msgid "Default"
+msgstr "Predefinito"
+
+msgid "Custom"
+msgstr "Personalizzato"
+
+msgid "Rectangular Selection"
+msgstr "Selezione rettangolare"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Color Picker"
+msgstr "Selettore colore"
+
+msgid "Pencil"
+msgstr "Matita"
+
+msgid "Eraser"
+msgstr "Gomma da cancellare"
+
+msgid "Bucket"
+msgstr "Secchio"
+
+msgid "Lighten/Darken"
+msgstr "Lucido/Scuro"
+
+msgid "Switch Colors"
+msgstr "Cambia Colori"
+
+msgid "Set the shortcut"
+msgstr "Imposta il collegamento"
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr "Premi un tasto o una combinazione di tasti per impostare il collegamento"
+
+msgid "Already assigned"
+msgstr "Già assegnato"
+
+msgid "Left Tool:"
+msgstr "Strumento sinistra:"
+
+msgid "A tool assigned to the left mouse button"
+msgstr "Uno strumento assegnato al pulsante sinistro del mouse"
+
+msgid "Right Tool:"
+msgstr "Strumento destra:"
+
+msgid "A tool assigned to the right mouse button"
+msgstr "Uno strumento assegnato al pulsante destro del mouse"
 
 msgid "Lock aspect ratio:"
 msgstr "Blocca rapporto d'aspetto:"

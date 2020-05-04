@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-03-26 00:59\n"
+"PO-Revision-Date: 2020-04-18 15:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -77,7 +77,7 @@ msgid "Export..."
 msgstr "导出..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "导出为..."
 
 msgid "Export PNG..."
 msgstr "导出 PNG..."
@@ -139,10 +139,10 @@ msgstr "打开一个文件"
 msgid "Open File(s)"
 msgstr "打开文件"
 
-msgid "IMPORT_FILE_LABEL"
+msgid "Import as new frame"
 msgstr "导入为新建帧"
 
-msgid "IMPORT_SPRITESHEET"
+msgid "Import as a spritesheet"
 msgstr "导入为 Spritesheet"
 
 msgid "Save Sprite as .pxo"
@@ -158,10 +158,10 @@ msgid "File Exists, Overwrite?"
 msgstr "文件已存在，覆盖吗?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "文件 %s 已经存在。覆盖吗?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "目录路径或文件名无效！"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -169,61 +169,70 @@ msgstr "无法加载文件 '%s'。\n"
 "错误代码： %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "帧"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "精灵表"
 
 msgid "Animation"
-msgstr ""
+msgstr "动画"
 
 msgid "Preview:"
-msgstr ""
+msgstr "预览："
 
 msgid "Frame:"
-msgstr ""
+msgstr "帧:"
 
 msgid "Browse"
-msgstr ""
+msgstr "浏览"
 
 msgid "Resize:"
 msgstr "调整大小:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "取消导出"
 
 msgid "Alert!"
-msgstr ""
+msgstr "提醒"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "选择当前文件夹"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "打开目录"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "所有帧作为多个文件"
 
-msgid "EXPORT_CURRENT_FRAME_LABEL"
-msgstr "导出当前帧"
+msgid "All frames as a single file animation"
+msgstr "所有帧作为单个文件动画"
 
-msgid "EXPORT_FRAMES_AS_MULTIPLE_FILES_LABEL"
-msgstr "导出所有帧为多个文件"
+msgid "Background:"
+msgstr "背景："
 
-msgid "EXPORT_FRAMES_AS_SPRITESHEET_LABEL"
-msgstr "导出所有帧为一个 spritesheet（单个文件）"
+msgid "Direction:"
+msgstr "方向："
+
+msgid "Forward"
+msgstr "向前"
+
+msgid "Backwards"
+msgstr "向后"
+
+msgid "Ping-Pong"
+msgstr "乒乓"
 
 msgid "Columns"
 msgstr "列"
 
 msgid "Columns:"
-msgstr ""
+msgstr "列:"
 
 msgid "Rows"
 msgstr "行"
 
 msgid "Rows:"
-msgstr ""
+msgstr "行:"
 
 msgid "Path:"
 msgstr "路径:"
@@ -261,14 +270,17 @@ msgstr "语言"
 msgid "Themes"
 msgstr "主题"
 
-msgid "Guides & Grid"
-msgstr "辅助线和网格"
+msgid "Canvas"
+msgstr ""
 
-msgid "General Options"
-msgstr "常规选项"
+msgid "Shortcuts"
+msgstr "快捷键"
 
 msgid "Smooth Zoom"
 msgstr "平滑缩放"
+
+msgid "Adds a smoother transition when zooming in or out"
+msgstr "放大或缩小时添加一个更平滑的过渡"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "绘图板压力灵敏度："
@@ -278,15 +290,6 @@ msgstr "无"
 
 msgid "Affect Brush's Alpha"
 msgstr "效果笔刷 Alpha"
-
-msgid "Language options"
-msgstr "语言选项"
-
-msgid "Theme options"
-msgstr "主题选项"
-
-msgid "Grid options"
-msgstr "网格选项"
 
 msgid "Color:"
 msgstr "颜色:"
@@ -318,6 +321,9 @@ msgstr "去饱和"
 msgid "Outline"
 msgstr "轮廓"
 
+msgid "Adjust Hue/Saturation/Value"
+msgstr "调整色相/饱和度/值"
+
 msgid "Diagonal"
 msgstr "对角线"
 
@@ -339,7 +345,7 @@ msgstr "更新日志"
 msgid "About Pixelorama"
 msgstr "关于 Pixelorama"
 
-msgid "MADEBY_LABEL"
+msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "Website"
@@ -397,7 +403,7 @@ msgid "Spanish"
 msgstr "西班牙语"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "世界语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -441,58 +447,79 @@ msgstr "退出且不保存"
 msgid "Utility Tools"
 msgstr "实用工具"
 
-msgid "RECTSELECT_HT"
+msgid "Rectangular Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Press %s to move the content"
 msgstr "矩形选择\n\n"
-"R 表示鼠标左键\n"
-"ALT + R 为鼠标右键\n\n"
-"按 Shift 键移动内容"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"按 %s 键移动内容"
 
-msgid "COLORPICKER_HT"
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "油漆桶\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键"
+
+msgid "Color Picker\n"
+"Select a color from a pixel of the sprite\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "拾色器\n"
-"从子画面的像素选择颜色\n\n"
-"O 表示鼠标左键\n"
-"Alt + O 为鼠标右键"
+"从子画面像素选择颜色\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键"
 
 msgid "Draw Tools"
 msgstr "绘图工具"
 
-msgid "PENCIL_HT"
+msgid "Pencil\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr "铅笔\n\n"
-"P 为鼠标左键\n"
-"Alt + P 为鼠标右键\n\n"
-"按住 Shift 绘制一条直线"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"按住 %s 绘制一条直线"
 
-msgid "ERASER_HT"
+msgid "Eraser\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
 msgstr "橡皮擦\n\n"
-"E 为鼠标左键\n"
-"Alt + E 为鼠标右键\n\n"
-"按住 Shift 绘制一条直线"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"按住 %s 绘制一条直线"
 
-msgid "BUCKET_HT"
+msgid "Bucket\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "油漆桶\n\n"
-"B 为鼠标左键\n"
-"Alt + B 为鼠标右键"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键"
 
-msgid "LD_HT"
+msgid "Lighten/Darken\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "变淡/加深\n\n"
-"U 为鼠标左键\n"
-"Alt + U 为鼠标右键"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键"
 
-msgid "LEFTCOLOR_HT"
-msgstr "选择左键工具的颜色"
+msgid "Choose a color for the left tool"
+msgstr "选择左键工具颜色"
 
-msgid "RIGHTCOLOR_HT"
-msgstr "选择右键工具的颜色"
+msgid "Choose a color for the right tool"
+msgstr "选择右键工具颜色"
 
-msgid "COLORSWITCH_HT"
+msgid "Switch left and right colors\n"
+"(%s)"
 msgstr "左右切换颜色\n"
-"(X)"
+"(%s)"
 
-msgid "COLORDEFAULTS_HT"
+msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "重置颜色为默认状态（黑色为左，白色为右）"
-
-msgid "Raw Mode"
-msgstr "原始模式"
 
 msgid "Left tool options"
 msgstr "左键工具选项"
@@ -503,22 +530,76 @@ msgstr "右键工具选项"
 msgid "Left pixel indicator"
 msgstr "左键工具指示"
 
-msgid "LEFT_INDIC_HT"
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr "绘制时在画布上显示鼠标左键像素指示器或画笔"
-
-msgid "RIGHT_INDIC_HT"
-msgstr "绘制时在画布上显示鼠标右键像素指示器或画笔"
-
-msgid "Show tool icon"
-msgstr "显示工具图标"
 
 msgid "Right pixel indicator"
 msgstr "右键工具指示"
 
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
+msgstr "绘制时在画布上显示鼠标右键像素指示器或画笔"
+
+msgid "Show left tool icon"
+msgstr "显示左侧工具图标"
+
+msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
+msgstr "在画布上的光标旁边显示所选左侧工具的图标"
+
+msgid "Show right tool icon"
+msgstr "显示右侧工具图标"
+
+msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr "在画布上的光标旁边显示所选右侧工具的图标"
+
+msgid "Guides color:"
+msgstr "参考线颜色："
+
+msgid "A color of ruler guides displayed on the canvas"
+msgstr "显示在画布上标尺参考线的颜色"
+
+msgid "Grid width:"
+msgstr "网格宽度："
+
+msgid "Sets how far apart are vertical lines of the grid"
+msgstr "设置网格垂直线之间的距离"
+
+msgid "Grid height:"
+msgstr "网格高度："
+
+msgid "Sets how far apart are horizontal lines of the grid"
+msgstr "设置网格水平线之间的距离"
+
+msgid "Grid color:"
+msgstr "网格颜色："
+
+msgid "A color of the grid"
+msgstr "网格颜色"
+
+msgid "Checker size"
+msgstr ""
+
+msgid "Size of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 1"
+msgstr ""
+
+msgid "First color of the transparent checker background"
+msgstr ""
+
+msgid "Checker color 2"
+msgstr ""
+
+msgid "Second color of the transparent checker background"
+msgstr ""
+
+msgid "Only custom preset can be modified"
+msgstr "仅修改自定义预设"
+
 msgid "Brush:"
 msgstr "画笔:"
 
-msgid "BRUSH_HT"
+msgid "Select a brush"
 msgstr "选择一个画笔"
 
 msgid "Brush: Pixel"
@@ -539,7 +620,7 @@ msgstr "画笔大小:"
 msgid "Brush color from"
 msgstr "画笔颜色从"
 
-msgid "COLORFROM_HT"
+msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0：画笔本身的颜色，100：当前选择的颜色"
 
 msgid "Fill area:"
@@ -551,6 +632,12 @@ msgstr "相同颜色区域"
 msgid "All pixels of the same color"
 msgstr "所有相同颜色的像素"
 
+msgid "Same color area"
+msgstr "相同颜色区域"
+
+msgid "Same color pixels"
+msgstr "相同颜色像素"
+
 msgid "Lighten"
 msgstr "减淡"
 
@@ -560,7 +647,7 @@ msgstr "加深"
 msgid "Amount:"
 msgstr "数量:"
 
-msgid "LDAMOUNT_HT"
+msgid "Lighten/Darken amount"
 msgstr "减淡/加深数量"
 
 msgid "Pick for:"
@@ -572,16 +659,34 @@ msgstr "左键颜色"
 msgid "Right Color"
 msgstr "右键颜色"
 
+msgid "Mode:"
+msgstr "模式："
+
+msgid "Zoom in"
+msgstr "放大"
+
+msgid "Zoom out"
+msgstr "缩小"
+
+msgid "Options:"
+msgstr "选项:"
+
+msgid "Fit to frame"
+msgstr "适合帧率"
+
+msgid "100% Zoom"
+msgstr "100% 缩放"
+
 msgid "Mirroring"
 msgstr "镜像"
 
 msgid "Horizontal"
 msgstr "水平"
 
-msgid "HORIZMIRROR_HT"
+msgid "Enable horizontal mirrored drawing"
 msgstr "启用水平镜像绘图"
 
-msgid "VERTMIRROR_HT"
+msgid "Enable vertical mirrored drawing"
 msgstr "启用垂直镜像绘图"
 
 msgid "Vertical"
@@ -593,31 +698,44 @@ msgstr "当前帧:"
 msgid "Current frame: 1/1"
 msgstr "当前帧: 1/1"
 
-msgid "FIRSTFRAME_HT"
+msgid "Jump to the first frame\n"
+"(%s)"
 msgstr "跳转到第一帧\n"
-"(Ctrl+Home)"
+"(%s)"
 
-msgid "PREVIOUSFRAME_HT"
+msgid "Go to the previous frame\n"
+"(%s)"
 msgstr "转到上一帧\n"
-"(Ctrl+Left)"
+"(%s)"
 
-msgid "PLAYBACKWARDS_HT"
+msgid "Play the animation backwards (from end to beginning)\n"
+"(%s)"
 msgstr "向后播放动画（从头到尾）\n"
-"(F4)"
+"(%s)"
 
-msgid "PLAYFORWARD_HT"
+msgid "Play the animation forward (from beginning to end)\n"
+"(%s)"
 msgstr "向前播放动画（从头到尾）\n"
-"(F5)"
+"(%s)"
 
-msgid "NEXTFRAME_HT"
+msgid "Go to the next frame\n"
+"(%s)"
 msgstr "转到下一帧\n"
-"(Ctrl+Right)"
+"(%s)"
 
-msgid "LASTFRAME_HT"
+msgid "Jump to the last frame\n"
+"(%s)"
 msgstr "跳转到最后一帧\n"
-"(Ctrl+End)"
+"(%s)"
 
-msgid "FPS_HT"
+msgid "Onion Skinning settings"
+msgstr "洋葱皮设置"
+
+msgid "Enable/disable Onion Skinning"
+msgstr "启用/禁用洋葱皮"
+
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
 msgstr "动画预览应该每秒几帧?\n"
 "FPS 越高，动画播放越快。"
 
@@ -639,6 +757,17 @@ msgstr "过去帧"
 msgid "Future Frames"
 msgstr "未来帧"
 
+msgid "Manage frame tags"
+msgstr "管理帧标签"
+
+msgid "Animation plays only on frames of the same tag"
+msgstr "动画仅在同一个标签的帧上播放"
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
+msgstr "如果选中，动画仅在具有相同标签的帧上播放。\n"
+"如果没有，动画将播放所有帧，忽略标签。"
+
 msgid "Blue-Red Mode"
 msgstr "蓝红模式"
 
@@ -657,14 +786,17 @@ msgstr "向左移动"
 msgid "Move Right"
 msgstr "向右移动"
 
+msgid "Add Frame Tag"
+msgstr "添加帧标签"
+
+msgid "Unlink Cel"
+msgstr "取消链接单元"
+
 msgid "Layer"
 msgstr "图层"
 
 msgid "Layers"
 msgstr "图层"
-
-msgid "LAYERNEW_HT"
-msgstr "创建一个新的图层"
 
 msgid "Create a new layer"
 msgstr "创建一个新的图层"
@@ -691,11 +823,12 @@ msgid "Toggle layer's visibility"
 msgstr "切换图层可见性"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "锁定/解锁图层"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "启用/禁用链接\n\n"
+"链接的单元格正在多个帧之间共享"
 
 msgid "Palette"
 msgstr "调色板"
@@ -710,7 +843,7 @@ msgid "Edit currently selected palette"
 msgstr "编辑当前所选调色板"
 
 msgid "Choose a palette"
-msgstr "选择一个调色板"
+msgstr "编辑当前所选调色板"
 
 msgid "Undo: Draw"
 msgstr "撤消: 绘图"
@@ -841,12 +974,84 @@ msgstr "获取该位置!"
 msgid "Image Options"
 msgstr "图像选项"
 
-msgid "Default Width:"
-msgstr "默认宽度:"
+msgid "Default width:"
+msgstr "默认宽度："
 
-msgid "Default Height:"
-msgstr "默认高度:"
+msgid "A default width of a new image"
+msgstr "新建图像的默认宽度"
 
-msgid "Default Fill Color:"
-msgstr "默认填充颜色:"
+msgid "Default height:"
+msgstr "默认高度："
+
+msgid "A default height of a new image"
+msgstr "新建图像的默认宽度"
+
+msgid "Default fill color:"
+msgstr "默认填充颜色："
+
+msgid "A default background color of a new image"
+msgstr "设置新建图像的背景颜色"
+
+msgid "Lock aspect ratio:"
+msgstr "锁定长宽比："
+
+msgid "Templates:"
+msgstr "模板："
+
+msgid "Preset"
+msgstr "预设"
+
+msgid "Preset:"
+msgstr "预设:"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Custom"
+msgstr "自定义"
+
+msgid "Rectangular Selection"
+msgstr "矩形选区"
+
+msgid "Zoom"
+msgstr "缩放"
+
+msgid "Color Picker"
+msgstr "拾色器"
+
+msgid "Pencil"
+msgstr "铅笔"
+
+msgid "Eraser"
+msgstr "橡皮擦"
+
+msgid "Bucket"
+msgstr "存储桶"
+
+msgid "Lighten/Darken"
+msgstr "亮色/暗色"
+
+msgid "Switch Colors"
+msgstr "切换颜色"
+
+msgid "Set the shortcut"
+msgstr "设置快捷键"
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr "按一个键或组合键设置快捷方式"
+
+msgid "Already assigned"
+msgstr "已分配"
+
+msgid "Left Tool:"
+msgstr "左键工具："
+
+msgid "A tool assigned to the left mouse button"
+msgstr "分配给鼠标左键的工具"
+
+msgid "Right Tool:"
+msgstr "右键工具："
+
+msgid "A tool assigned to the right mouse button"
+msgstr "分配给鼠标右键的工具"
 
