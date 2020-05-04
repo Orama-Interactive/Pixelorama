@@ -229,74 +229,130 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RectSelect" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="RectSelect" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 4 )
 
-[node name="Zoom" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/RectSelect"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zoom" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 23 )
 
-[node name="ColorPicker" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/Zoom"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 8 )
 
-[node name="Pencil" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/ColorPicker"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pencil" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 108.0
 margin_right = 32.0
 margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 6 )
 
-[node name="Eraser" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/Pencil"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Eraser" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 144.0
 margin_right = 32.0
 margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 5 )
 
-[node name="Bucket" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/Eraser"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bucket" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 180.0
 margin_right = 32.0
 margin_bottom = 212.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 9 )
 
-[node name="LightenDarken" type="TextureButton" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/Bucket"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LightenDarken" type="Button" parent="MenuAndUI/UI/ToolPanel/Tools" groups=[
 "UIButtons",
 ]]
 margin_top = 216.0
 margin_right = 32.0
 margin_bottom = 248.0
+rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
-texture_normal = ExtResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/ToolPanel/Tools/LightenDarken"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CanvasAndTimeline" type="VSplitContainer" parent="MenuAndUI/UI"]
 margin_left = 48.0

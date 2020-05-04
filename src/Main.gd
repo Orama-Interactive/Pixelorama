@@ -604,14 +604,18 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 
 	for t in tools:
 		var tool_name : String = t[0].name
+		var theme_type := Global.theme_type
+		if theme_type == "Gold":
+			theme_type = "Dark"
+
 		if tool_name == Global.current_left_tool and tool_name == Global.current_right_tool:
-			t[0].texture_normal = load("res://Assets/Graphics/%s_themes/tools/%s_l_r.png" % [Global.theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s_l_r.png" % [theme_type.to_lower(), tool_name.to_lower()])
 		elif tool_name == Global.current_left_tool:
-			t[0].texture_normal = load("res://Assets/Graphics/%s_themes/tools/%s_l.png" % [Global.theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s_l.png" % [theme_type.to_lower(), tool_name.to_lower()])
 		elif tool_name == Global.current_right_tool:
-			t[0].texture_normal = load("res://Assets/Graphics/%s_themes/tools/%s_r.png" % [Global.theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s_r.png" % [theme_type.to_lower(), tool_name.to_lower()])
 		else:
-			t[0].texture_normal = load("res://Assets/Graphics/%s_themes/tools/%s.png" % [Global.theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s.png" % [theme_type.to_lower(), tool_name.to_lower()])
 
 	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/cursor_icons/%s_cursor.png" % Global.current_left_tool.to_lower()), 0)
 	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
