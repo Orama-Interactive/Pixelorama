@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-05 10:38\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "Bantuan"
 
 msgid "New"
-msgstr ""
+msgstr "Baru"
 
 msgid "New..."
 msgstr "Baru..."
@@ -68,7 +68,7 @@ msgid "Save as..."
 msgstr "Simpan sebagai..."
 
 msgid "Import"
-msgstr ""
+msgstr "Impor"
 
 msgid "Import..."
 msgstr "Impor..."
@@ -1103,7 +1103,7 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Kamu belum menyimpan atau membuka suatu proyek di Pixelorama!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Buka proyek terakhir"
 
 msgid "Open last project..."
 msgstr "Buka proyek terakhir..."
