@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-05 12:00\n"
+"PO-Revision-Date: 2020-05-05 13:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1123,6 +1123,15 @@ msgstr "在启动时打开最后一个项目"
 
 msgid "Opens last opened project on startup"
 msgstr "在启动时打开最后打开的项目"
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
 
 msgid "Create new directory for each frame tag"
 msgstr "为每个帧标签创建新的目录"
