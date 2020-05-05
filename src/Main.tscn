@@ -656,15 +656,16 @@ size_flags_vertical = 3
 [node name="LeftPanelContainer" type="PanelContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_left = 16.0
 margin_right = 146.0
-margin_bottom = 196.0
+margin_bottom = 130.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 6
+size_flags_vertical = 0
 
 [node name="LeftToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftPanelContainer"]
 margin_left = 4.5
 margin_top = 3.0
 margin_right = 125.5
-margin_bottom = 193.0
+margin_bottom = 127.0
 size_flags_horizontal = 3
 
 [node name="LeftLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftPanelContainer/LeftToolOptions"]
@@ -1070,15 +1071,16 @@ texture_pressed = ExtResource( 41 )
 [node name="RightPanelContainer" type="PanelContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions"]
 margin_left = 183.0
 margin_right = 313.0
-margin_bottom = 196.0
+margin_bottom = 130.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 6
+size_flags_vertical = 0
 
 [node name="RightToolOptions" type="VBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightPanelContainer"]
 margin_left = 4.5
 margin_top = 3.0
 margin_right = 125.5
-margin_bottom = 193.0
+margin_bottom = 127.0
 size_flags_horizontal = 3
 
 [node name="RightLabel" type="Label" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightPanelContainer/RightToolOptions"]

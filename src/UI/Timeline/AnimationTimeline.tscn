@@ -745,8 +745,14 @@ margin_right = 902.0
 margin_bottom = 82.0
 custom_constants/separation = 2
 
+[node name="SpacerControl" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_right = 4.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 4, 0 )
+
 [node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_right = 214.0
+margin_left = 6.0
+margin_right = 220.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 214, 0 )
 
@@ -780,7 +786,7 @@ value = 100.0
 align = 1
 
 [node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_left = 216.0
+margin_left = 222.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -915,7 +921,7 @@ text = "Blue-Red Mode"
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="FakeVSplitContainerGrabber" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -24.0

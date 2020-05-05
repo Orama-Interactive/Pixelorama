@@ -361,6 +361,13 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
+	var fake_vsplit_grabber : TextureRect = Global.find_node_by_name(Global.animation_timeline, "FakeVSplitContainerGrabber")
+#	fake_vsplit_grabber.texture = main_theme.get_icon("Grabber", "VSplitContainer")
+	if Global.theme_type == "Dark":
+		fake_vsplit_grabber.texture = preload("res://assets/themes/dark/icons/vsplit.png")
+	else:
+		fake_vsplit_grabber.texture = preload("res://assets/themes/light/icons/vsplit.png")
+
 	for button in get_tree().get_nodes_in_group("UIButtons"):
 		if button is TextureButton:
 			var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
