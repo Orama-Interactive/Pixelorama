@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-05 13:10\n"
+"PO-Revision-Date: 2020-05-05 18:56\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1125,13 +1125,13 @@ msgid "Opens last opened project on startup"
 msgstr "Ανοίγει το τελευταίο έργο κατά την εκκίνηση"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Ενεργοποίηση αυτόματης αποθήκευσης"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Χρονικό διάστημα αυτόματης αποθήκευσης:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "λεπτό(ά)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Δημιουργήστε νέο φάκελο για κάθε ετικέτα καρέ"
