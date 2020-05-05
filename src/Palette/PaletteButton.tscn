@@ -1,11 +1,14 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/themes/palette_styleboxes/palette_stylebox_pressedr.tres" type="StyleBox" id=1]
-[ext_resource path="res://Assets/themes/palette_styleboxes/palette_stylebox_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/themes/palette_styleboxes/palette_stylebox_pressedr.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/themes/palette_styleboxes/palette_stylebox_hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://src/Palette/PaletteButton.gd" type="Script" id=3]
-[ext_resource path="res://Assets/themes/palette_styleboxes/palette_stylebox_focus.tres" type="StyleBox" id=4]
-[ext_resource path="res://Assets/themes/palette_styleboxes/palette_stylebox_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=6]
+[ext_resource path="res://assets/themes/palette_styleboxes/palette_stylebox_focus.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/themes/palette_styleboxes/palette_stylebox_normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/graphics/palette/palette_button_fill.png" type="Texture" id=6]
+
+
+
 
 [sub_resource type="ImageTexture" id=1]
 

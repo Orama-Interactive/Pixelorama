@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Timeline/LayerButton.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/dark_themes/layers/layer_visible.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/dark_themes/layers/unlock.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/dark_themes/layers/unlinked_layer.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/dark_themes/layers/layer_visible.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/dark_themes/layers/unlock.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/dark_themes/layers/unlinked_layer.png" type="Texture" id=4]
+
+
 
 [node name="LayerContainer" type="Button"]
 margin_right = 210.0

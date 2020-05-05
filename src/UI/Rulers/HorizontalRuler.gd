@@ -2,7 +2,7 @@ extends Button
 
 const RULER_WIDTH := 16
 
-var font := preload("res://Assets/Fonts/Roboto-Small.tres")
+var font := preload("res://assets/fonts/Roboto-Small.tres")
 var major_subdivision := 2
 var minor_subdivision := 4
 

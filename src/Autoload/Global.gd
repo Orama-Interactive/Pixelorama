@@ -45,7 +45,7 @@ var has_focus := false
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var open_last_project := true
 var smooth_zoom := true
-var cursor_image = preload("res://Assets/Graphics/cursor_icons/cursor.png")
+var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
 
@@ -289,9 +289,9 @@ func _ready() -> void:
 	canvas = find_node_by_name(root, "Canvas")
 	canvases.append(canvas)
 	left_cursor_tool_texture = ImageTexture.new()
-	left_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/cursor_icons/pencil_cursor.png"))
+	left_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/pencil_cursor.png"))
 	right_cursor_tool_texture = ImageTexture.new()
-	right_cursor_tool_texture.create_from_image(preload("res://Assets/Graphics/cursor_icons/eraser_cursor.png"))
+	right_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/eraser_cursor.png"))
 	canvas_parent = canvas.get_parent()
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
@@ -708,9 +708,9 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 				var button_category = c.texture.resource_path.get_base_dir().right(last_backslash + 1)
 				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
 				if disable:
-					c.texture = load("res://Assets/Graphics/%s_themes/%s/%s_disabled.png" % [theme.to_lower(), button_category, normal_file_name])
+					c.texture = load("res://assets/graphics/%s_themes/%s/%s_disabled.png" % [theme.to_lower(), button_category, normal_file_name])
 				else:
-					c.texture = load("res://Assets/Graphics/%s_themes/%s/%s.png" % [theme.to_lower(), button_category, normal_file_name])
+					c.texture = load("res://assets/graphics/%s_themes/%s/%s.png" % [theme.to_lower(), button_category, normal_file_name])
 				break
 
 
@@ -873,16 +873,16 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 func update_left_custom_brush() -> void:
 	if current_left_brush_type == Brush_Types.PIXEL:
 		var pixel := Image.new()
-		pixel = preload("res://Assets/Graphics/pixel_image.png")
+		pixel = preload("res://assets/graphics/pixel_image.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 	elif current_left_brush_type == Brush_Types.CIRCLE:
 		var pixel := Image.new()
-		pixel = preload("res://Assets/Graphics/circle_9x9.png")
+		pixel = preload("res://assets/graphics/circle_9x9.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
 	elif current_left_brush_type == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
-		pixel = preload("res://Assets/Graphics/circle_filled_9x9.png")
+		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
 		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
 	else:
@@ -899,16 +899,16 @@ func update_left_custom_brush() -> void:
 func update_right_custom_brush() -> void:
 	if current_right_brush_type == Brush_Types.PIXEL:
 		var pixel := Image.new()
-		pixel = preload("res://Assets/Graphics/pixel_image.png")
+		pixel = preload("res://assets/graphics/pixel_image.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 	elif current_right_brush_type == Brush_Types.CIRCLE:
 		var pixel := Image.new()
-		pixel = preload("res://Assets/Graphics/circle_9x9.png")
+		pixel = preload("res://assets/graphics/circle_9x9.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		right_circle_points = plot_circle(right_brush_size)
 	elif current_right_brush_type == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
-		pixel = preload("res://Assets/Graphics/circle_filled_9x9.png")
+		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
 		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
 		right_circle_points = plot_circle(right_brush_size)
 	else:

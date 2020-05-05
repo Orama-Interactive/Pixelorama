@@ -1,16 +1,19 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/splash_screen/pixelorama_logo.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/splash_screen/become_a_patron.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/splash_screen/become_a_patron_hover.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/splash_screen/splash_art.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
-[ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Assets/Graphics/splash_screen/orama_64x64.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Graphics/splash_screen/discord.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Graphics/splash_screen/github_32px.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
+[ext_resource path="res://assets/graphics/splash_screen/pixelorama_logo.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/splash_screen/become_a_patron.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/splash_screen/become_a_patron_hover.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/splash_screen/splash_art.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture" id=8]
+[ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
+[ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
+[ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
+
+
+
 
 [node name="SplashDialog" type="WindowDialog"]
 margin_right = 614.0

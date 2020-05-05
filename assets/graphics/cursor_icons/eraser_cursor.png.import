@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/eraser_cursor.png-64324de4478bbaf2ffb2fd7139988f1a.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/eraser_cursor.png"
+dest_files=[ "res://.import/eraser_cursor.png-64324de4478bbaf2ffb2fd7139988f1a.image" ]
+
+[params]
+

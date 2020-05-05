@@ -20,23 +20,23 @@ func _ready() -> void:
 		theme_type = "Dark"
 
 	if Global.layers[i][1]:
-		visibility_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/layer_visible.png" % theme_type.to_lower())
+		visibility_button.get_child(0).texture = load("res://assets/graphics/%s_themes/layers/layer_visible.png" % theme_type.to_lower())
 		visibility_button.get_child(0).rect_size = Vector2(24, 14)
 		visibility_button.get_child(0).rect_position = Vector2(4, 9)
 	else:
-		visibility_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/layer_invisible.png" % theme_type.to_lower())
+		visibility_button.get_child(0).texture = load("res://assets/graphics/%s_themes/layers/layer_invisible.png" % theme_type.to_lower())
 		visibility_button.get_child(0).rect_size = Vector2(24, 8)
 		visibility_button.get_child(0).rect_position = Vector2(4, 12)
 
 	if Global.layers[i][2]:
-		lock_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/lock.png" % theme_type.to_lower())
+		lock_button.get_child(0).texture = load("res://assets/graphics/%s_themes/layers/lock.png" % theme_type.to_lower())
 	else:
-		lock_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/unlock.png" % theme_type.to_lower())
+		lock_button.get_child(0).texture = load("res://assets/graphics/%s_themes/layers/unlock.png" % theme_type.to_lower())
 
 	if Global.layers[i][4]: # If new layers will be linked
-		linked_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/linked_layer.png" % theme_type.to_lower())
+		linked_button.get_child(0).texture = load("res://assets/graphics/%s_themes/layers/linked_layer.png" % theme_type.to_lower())
 	else:
-		linked_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/unlinked_layer.png" % theme_type.to_lower())
+		linked_button.get_child(0).texture = load("res://assets/graphics/%s_themes/layers/unlinked_layer.png" % theme_type.to_lower())
 
 
 func _input(event : InputEvent) -> void:

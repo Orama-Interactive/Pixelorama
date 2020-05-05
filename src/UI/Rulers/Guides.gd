@@ -3,7 +3,7 @@ extends Line2D
 
 enum Types {HORIZONTAL, VERTICAL}
 
-var font := preload("res://Assets/Fonts/Roboto-Regular.tres")
+var font := preload("res://assets/fonts/Roboto-Regular.tres")
 var has_focus := true
 var mouse_pos := Vector2.ZERO
 var previous_points := points

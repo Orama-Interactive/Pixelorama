@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/bucket_cursor.png-51202d25d14f421234b0d8a2cf72d4ab.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/bucket_cursor.png"
+dest_files=[ "res://.import/bucket_cursor.png-51202d25d14f421234b0d8a2cf72d4ab.image" ]
+
+[params]
+
