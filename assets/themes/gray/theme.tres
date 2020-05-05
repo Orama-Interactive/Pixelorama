@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=35 format=2]
+[gd_resource type="Theme" load_steps=36 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
@@ -184,6 +184,17 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=34]
+content_margin_left = 4.5
+content_margin_right = 4.5
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.247059, 0.247059, 0.247059, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
@@ -405,6 +416,7 @@ OptionButton/styles/pressed = null
 Panel/styles/panel = SubResource( 22 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
+PanelContainer/styles/panel = SubResource( 34 )
 PopupMenu/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
 PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )

@@ -311,24 +311,24 @@ func _on_Theme_pressed(button : Button) -> void:
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
-	var main_theme
+	var main_theme : Theme
 	var top_menu_style
 	var ruler_style
 	if ID == 0: # Dark Theme
 		Global.theme_type = "Dark"
-		VisualServer.set_default_clear_color(Color(0.247059, 0.25098, 0.247059))
+		VisualServer.set_default_clear_color(Color("2b2b2b"))
 		main_theme = preload("res://assets/themes/dark/theme.tres")
 		top_menu_style = preload("res://assets/themes/dark/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 1: # Gray Theme
 		Global.theme_type = "Dark"
-		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
+		VisualServer.set_default_clear_color(Color("3f3f3f"))
 		main_theme = preload("res://assets/themes/gray/theme.tres")
 		top_menu_style = preload("res://assets/themes/gray/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = "Dark"
-		VisualServer.set_default_clear_color(Color("3c465d"))
+		VisualServer.set_default_clear_color(Color("3b445c"))
 		main_theme = preload("res://assets/themes/godot/theme.tres")
 		top_menu_style = preload("res://assets/themes/godot/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/godot/ruler_style.tres")
@@ -340,13 +340,17 @@ func change_theme(ID : int) -> void:
 		ruler_style = preload("res://assets/themes/gold/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = "Light"
-		VisualServer.set_default_clear_color(Color(0.705882, 0.705882, 0.705882))
+		VisualServer.set_default_clear_color(Color("e7e7e7"))
 		main_theme = preload("res://assets/themes/light/theme.tres")
 		top_menu_style = preload("res://assets/themes/light/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/light/ruler_style.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
+	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
+	var layer_button_panel_container : PanelContainer = Global.find_node_by_name(Global.animation_timeline, "LayerButtonPanelContainer")
+	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
+
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)

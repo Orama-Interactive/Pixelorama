@@ -6,11 +6,13 @@ var animation_forward := true
 var first_frame := 0
 var last_frame := Global.canvases.size() - 1
 
-onready var timeline_scroll : ScrollContainer = $AnimationContainer/TimelineContainer/TimelineScroll
-onready var tag_scroll_container : ScrollContainer = $AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll
+var timeline_scroll : ScrollContainer
+var tag_scroll_container : ScrollContainer
 
 
 func _ready() -> void:
+	timeline_scroll = Global.find_node_by_name(self, "TimelineScroll")
+	tag_scroll_container = Global.find_node_by_name(self, "TagScroll")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / fps
 

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=36 format=2]
+[gd_resource type="Theme" load_steps=37 format=2]
 
 [ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=1]
 [ext_resource path="res://assets/themes/light/icons/grabber.png" type="Texture" id=2]
@@ -176,6 +176,17 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+content_margin_left = 4.5
+content_margin_right = 4.5
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0.627451, 0.627451, 0.627451, 1 )
@@ -413,6 +424,7 @@ OptionButton/styles/pressed = null
 Panel/styles/panel = SubResource( 19 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
+PanelContainer/styles/panel = SubResource( 31 )
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_accel = Color( 0.164706, 0.164706, 0.164706, 0.8 )
 PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
