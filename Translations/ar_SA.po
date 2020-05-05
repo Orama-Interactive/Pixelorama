@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-05 11:59\n"
 
 msgid "OK"
 msgstr ""
@@ -411,6 +411,12 @@ msgid "Spanish"
 msgstr ""
 
 msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
 msgstr ""
 
 msgid "Development Team"
