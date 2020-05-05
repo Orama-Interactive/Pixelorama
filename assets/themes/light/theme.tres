@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=37 format=2]
+[gd_resource type="Theme" load_steps=36 format=2]
 
 [ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=1]
 [ext_resource path="res://assets/themes/light/icons/grabber.png" type="Texture" id=2]
 [ext_resource path="res://assets/themes/light/icons/grabber_hover.png" type="Texture" id=3]
 [ext_resource path="res://assets/themes/light/icons/vsplit.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -279,17 +280,8 @@ border_width_bottom = 2
 border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
 expand_margin_top = 20.0
 
-[sub_resource type="DynamicFontData" id=31]
-font_path = "res://Assets/Fonts/Roboto-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=32]
-size = 12
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 31 )
-
 [resource]
-default_font = SubResource( 32 )
+default_font = ExtResource( 5 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
