@@ -224,6 +224,8 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	else:
 		general_button.select(0)
 
+	general.get_node("AutosaveInterval/AutosaveInterval").suffix = tr("minute(s)")
+
 
 func _on_PreferencesDialog_popup_hide() -> void:
 	tree.clear()

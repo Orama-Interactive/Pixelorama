@@ -1086,6 +1086,15 @@ msgstr ""
 msgid "Opens last opened project on startup"
 msgstr ""
 
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
+
 msgid "Create new directory for each frame tag"
 msgstr ""
 
