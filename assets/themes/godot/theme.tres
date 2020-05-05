@@ -10418,6 +10418,7 @@ ItemList/styles/cursor = SubResource( 1408 )
 ItemList/styles/cursor_unfocused = SubResource( 1408 )
 ItemList/styles/selected = SubResource( 1409 )
 ItemList/styles/selected_focus = SubResource( 1410 )
+"Label/colors/Selected Color" = Color( 0.545098, 0.619608, 0.788235, 1 )
 Label/colors/font_color = Color( 0.8, 0.8075, 0.8275, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/constants/line_spacing = 2

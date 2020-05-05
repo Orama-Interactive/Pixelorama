@@ -644,7 +644,7 @@ func frame_changed(value : int) -> void:
 	# Select the new canvas/frame
 	canvas = canvases[current_frame]
 	canvas.visible = true
-	frame_ids.get_child(current_frame).add_color_override("font_color", Color("#3c5d75"))
+	frame_ids.get_child(current_frame).add_color_override("font_color", control.theme.get_color("Selected Color", "Label"))
 	if current_frame < layers[current_layer][3].get_child_count():
 		layers[current_layer][3].get_child(current_frame).pressed = true
 

@@ -376,6 +376,7 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 6
 HSplitContainer/icons/grabber = ExtResource( 1 )
 HSplitContainer/styles/bg = null
+"Label/colors/Selected Color" = Color( 0.545098, 0.619608, 0.788235, 1 )
 Label/colors/font_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
