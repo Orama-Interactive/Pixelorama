@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-05-03 18:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Efekty"
 msgid "Help"
 msgstr "Pomoc"
 
+msgid "New"
+msgstr "Nowy"
+
 msgid "New..."
 msgstr "Nowy..."
 
@@ -63,6 +66,9 @@ msgstr "Zapisz..."
 
 msgid "Save as..."
 msgstr "Zapisz jako..."
+
+msgid "Import"
+msgstr "Importowanie"
 
 msgid "Import..."
 msgstr "Importuj..."
@@ -182,6 +188,9 @@ msgstr "Podgląd:"
 msgid "Frame:"
 msgstr "Klatka:"
 
+msgid "Orientation:"
+msgstr "Orientacja:"
+
 msgid "Browse"
 msgstr "Przeglądaj"
 
@@ -270,7 +279,7 @@ msgid "Themes"
 msgstr "Motywy"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Płótno"
 
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
@@ -431,6 +440,12 @@ msgstr "kopia"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Na pewno chcesz opuścić Pixeloramę?"
 
+msgid "Unsaved Image"
+msgstr "Niezapisany obraz"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Masz niezapisane zmiany. Jeśli kontynuujesz, postęp, który zrobiłeś/aś zostanie utracony."
+
 msgid "Save before exiting?"
 msgstr "Zapisać przed wyjściem?"
 
@@ -520,11 +535,11 @@ msgstr "Podmień lewy kolor z prawym kolorem\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)"
 
-msgid "Left tool options"
-msgstr "Opcje lewego narzędzia"
+msgid "Left tool"
+msgstr "Lewe narzędzie"
 
-msgid "Right tool options"
-msgstr "Opcje prawego narzędzia"
+msgid "Right tool"
+msgstr "Prawe narzędzie"
 
 msgid "Left pixel indicator"
 msgstr "Wskaźnik lewego pędzla"
@@ -574,23 +589,23 @@ msgstr "Kolor siatki:"
 msgid "A color of the grid"
 msgstr "Kolor siatki"
 
-msgid "Checker size"
-msgstr ""
+msgid "Checker size:"
+msgstr "Rozmiar komórek:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Rozmiar komórek do rysowania - szachownicy"
 
-msgid "Checker color 1"
-msgstr ""
+msgid "Checker color 1:"
+msgstr "Kolor komórek 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Pierwszy kolor komórek do rysowania - szachownicy"
 
-msgid "Checker color 2"
-msgstr ""
+msgid "Checker color 2:"
+msgstr "Kolor komórek 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Drugi kolor komórek do rysowania - szachownicy"
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
@@ -625,17 +640,23 @@ msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowa
 msgid "Fill area:"
 msgstr "Wypełnij przestrzeń:"
 
-msgid "Area of the same color"
-msgstr "Przestrzeń o takim samym kolorze"
-
-msgid "All pixels of the same color"
-msgstr "Wszystkie piksele tego samego koloru"
-
 msgid "Same color area"
 msgstr "Ten sam obszar koloru"
 
 msgid "Same color pixels"
 msgstr "Piksele tego samego koloru"
+
+msgid "Fill with:"
+msgstr "Wypełnij za pomocą:"
+
+msgid "Selected Color"
+msgstr "Wybrany kolor"
+
+msgid "Pattern"
+msgstr "Wzorzec"
+
+msgid "Offset"
+msgstr "Przesunięcie"
 
 msgid "Lighten"
 msgstr "Rozjaśnianie"
@@ -757,7 +778,7 @@ msgid "Future Frames"
 msgstr "Przyszłe klatki"
 
 msgid "Manage frame tags"
-msgstr "Zarządzaj znacznikami klatek"
+msgstr "Zarządzaj tagami klatek"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animacja odtwarza się tylko na klatkach z tym samym tagiem"
@@ -788,8 +809,11 @@ msgstr "Przesuń w prawo"
 msgid "Add Frame Tag"
 msgstr ""
 
+msgid "Link Cel"
+msgstr "Połącz kalkę"
+
 msgid "Unlink Cel"
-msgstr "Odłącz łańcuch"
+msgstr "Odłącz kalkę"
 
 msgid "Layer"
 msgstr "Warstwa"
@@ -826,8 +850,8 @@ msgstr "Zablokuj/odblokuj warstwę"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Włącz/wyłącz łączenie w łańcuchy\n\n"
-"Złączone łańcuchy są współdzielone przez wiele klatek"
+msgstr "Włącz/wyłącz łączenie kalek\n\n"
+"Złączone kalki są współdzielone przez wiele klatek"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
@@ -910,11 +934,32 @@ msgstr "Cofnij: Usuwanie niestandardowego pędzla"
 msgid "Redo: Delete Custom Brush"
 msgstr "Przywróć: Usuwanie niestandardowego pędzla"
 
+msgid "Undo: Modify Frame Tag"
+msgstr "Cofnij: Modyfikuj tag klatki"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Przywróć: Modyfikuj tag klatki"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Cofnij: Usuń tag klatki"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Przywróć: Usuń tag klatki"
+
 msgid "Move Guide"
 msgstr "Przesuń prowadnice"
 
 msgid "File saved"
 msgstr "Plik został zapisany"
+
+msgid "File autosaved"
+msgstr "Automatycznie zapisano plik"
+
+msgid "File failed to open"
+msgstr "Nie udało się otworzyć pliku"
+
+msgid "File failed to save"
+msgstr "Nie udało się zapisać pliku"
 
 msgid "File exported"
 msgstr "Plik został wyeksportowany"
@@ -1053,4 +1098,42 @@ msgstr "Prawe narzędzie:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Narzędzie przypisane do prawego przycisku myszy"
+
+msgid "Cannot find last project file."
+msgstr "Nie można znaleźć pliku ostatniego projektu."
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Nie zapisałeś lub nie otworzyłeś jeszcze żadnego projektu w Pixeloramie!"
+
+msgid "Open Last Project"
+msgstr "Otwórz ostatni projekt"
+
+msgid "Open last project..."
+msgstr "Otwórz ostatni projekt..."
+
+msgid "Open last project on startup"
+msgstr "Po uruchomieniu załaduj ostatni projekt"
+
+msgid "Opens last opened project on startup"
+msgstr "Po uruchomieniu, załaduje ostatni projekt"
+
+msgid "Create new directory for each frame tag"
+msgstr "Utwórz nowy katalog dla każdego tagu klatek"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Tworzy wiele plików, ale każdy plik jest przechowywany w innym katalogu, który odpowiada tagowi ramki"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "Znaleziono automatyczną kopię zapasową dla %s.\n"
+"Czy chcesz ją wczytać?"
+
+msgid "Backup reloaded"
+msgstr "Wczytano ponownię kopię zapasową"
 

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-04-18 15:39\n"
+"PO-Revision-Date: 2020-05-03 00:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Эффекты"
 msgid "Help"
 msgstr "Помощь"
 
+msgid "New"
+msgstr "Новый"
+
 msgid "New..."
 msgstr "Создать..."
 
@@ -63,6 +66,9 @@ msgstr "Сохранить..."
 
 msgid "Save as..."
 msgstr "Сохранить как..."
+
+msgid "Import"
+msgstr "Импортировать"
 
 msgid "Import..."
 msgstr "Импортировать..."
@@ -183,6 +189,9 @@ msgstr "Предпросмотр:"
 msgid "Frame:"
 msgstr "Кадр:"
 
+msgid "Orientation:"
+msgstr "Ориентация:"
+
 msgid "Browse"
 msgstr "Обзор"
 
@@ -271,7 +280,7 @@ msgid "Themes"
 msgstr "Темы оформления"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Холст"
 
 msgid "Shortcuts"
 msgstr "Горячие клавишы"
@@ -280,7 +289,7 @@ msgid "Smooth Zoom"
 msgstr "Плавное масштабирование"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Добавляет более плавный переход при увеличении или уменьшении масштаба изображения"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Чувствительность к нажатию на планшет:"
@@ -432,6 +441,12 @@ msgstr "копия"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Вы действительно хотите выйти из Pixeloram'ы?"
 
+msgid "Unsaved Image"
+msgstr "Несохраненное изображение"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "У вас есть несохраненные изменения. Если вы продолжите, прогресс будет утерян."
+
 msgid "Save before exiting?"
 msgstr "Сохранить перед выходом?"
 
@@ -459,7 +474,9 @@ msgstr "Прямоугольное выделение\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Масштаб\n\n"
+"%s левой кнопкой мыши\n"
+"%s для правой кнопки мыши"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -519,11 +536,11 @@ msgstr "Поменять левый и правый цвета местами\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
 
-msgid "Left tool options"
-msgstr "Настройки левого инструмента"
+msgid "Left tool"
+msgstr "Левый инструмент"
 
-msgid "Right tool options"
-msgstr "Настройки правого инструмента"
+msgid "Right tool"
+msgstr "Правый инструмент"
 
 msgid "Left pixel indicator"
 msgstr "Цвет для ЛКМ"
@@ -538,61 +555,61 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Отображать цвет кисти для ПКМ во время рисования"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Показать левый значок инструмента"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Отображает иконку выбранного левого инструмента рядом с курсором на холсте"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Показать правый значок инструмента"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Отображает значок выбранного правого инструмента рядом с курсором на холсте"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Цвет направляющих:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Цвет направляющих линейки, отображаемых на холсте"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Ширина сетки:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Устанавливает расстояние между вертикальными линиями сетки"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Высота сетки:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Цвет сетки:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Цвет сетки"
 
-msgid "Checker size"
-msgstr ""
+msgid "Checker size:"
+msgstr "Размер клеток:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Размер клеток прозрачного фона"
 
-msgid "Checker color 1"
-msgstr ""
+msgid "Checker color 1:"
+msgstr "Цвет клеток 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Первый цвет клеток прозрачного фона"
 
-msgid "Checker color 2"
-msgstr ""
+msgid "Checker color 2:"
+msgstr "Цвет клеток 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Второй цвет клеток прозрачного фона"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Только пользовательские предустановки могут быть изменены"
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -624,17 +641,23 @@ msgstr "0: Собственный цвет кисти, 100: Выбранный �
 msgid "Fill area:"
 msgstr "Залить область:"
 
-msgid "Area of the same color"
-msgstr "Область того же цвета"
-
-msgid "All pixels of the same color"
-msgstr "Все пиксели такого же цвета"
-
 msgid "Same color area"
 msgstr "Область того же цвета"
 
 msgid "Same color pixels"
 msgstr "Пиксели того же цвета"
+
+msgid "Fill with:"
+msgstr "Заполнить:"
+
+msgid "Selected Color"
+msgstr "Выбранным цветом"
+
+msgid "Pattern"
+msgstr "Узором"
+
+msgid "Offset"
+msgstr "Смещение"
 
 msgid "Lighten"
 msgstr "Осветлить"
@@ -786,6 +809,9 @@ msgstr "Сместить вправо"
 msgid "Add Frame Tag"
 msgstr "Добавить тег кадра"
 
+msgid "Link Cel"
+msgstr ""
+
 msgid "Unlink Cel"
 msgstr ""
 
@@ -907,11 +933,32 @@ msgstr "Отменить: Удаление своей кисти"
 msgid "Redo: Delete Custom Brush"
 msgstr "Повторить: Удаление своей кисти"
 
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Повтор: Изменить метку кадра"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Отменить: Удалить метку кадра"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Повторить: Удалить метку кадра"
+
 msgid "Move Guide"
 msgstr "Сдвинуть направляющие"
 
 msgid "File saved"
 msgstr "Файл сохранен"
+
+msgid "File autosaved"
+msgstr "Выполнено автосохранение"
+
+msgid "File failed to open"
+msgstr "Не удалось открыть файл"
+
+msgid "File failed to save"
+msgstr "Не удалось сохранить файл"
 
 msgid "File exported"
 msgstr "Файл экспортирован"
@@ -971,22 +1018,22 @@ msgid "Image Options"
 msgstr "Параметры изображения"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Ширина по умолчанию:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Ширина нового изображения по умолчанию"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Высота по умолчанию:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Высота нового изображения по умолчанию"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Цвет заливки по умолчанию:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Цвет фона по умолчанию для нового изображения"
 
 msgid "Lock aspect ratio:"
 msgstr "Фиксированные пропорции:"
@@ -1004,7 +1051,7 @@ msgid "Default"
 msgstr "По умолчанию"
 
 msgid "Custom"
-msgstr ""
+msgstr "Другой"
 
 msgid "Rectangular Selection"
 msgstr "Прямоугольное выделение"
@@ -1028,26 +1075,64 @@ msgid "Lighten/Darken"
 msgstr "Осветлить/затемнить"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Сменить цвета"
 
 msgid "Set the shortcut"
 msgstr "Выставить горячую(ие) клавишу(и)"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Нажмите клавишу или комбинацию клавиш"
 
 msgid "Already assigned"
 msgstr "Уже назначено"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Левый инструмент:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Инструмент, присвоенный левой кнопке мыши"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Правый инструмент:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Инструмент, присвоенный правой кнопкой мыши"
+
+msgid "Cannot find last project file."
+msgstr "Не могу найти файл последнего проекта."
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Вы еще не сохранили и не открыли ни одного проекта в Pixelorama!"
+
+msgid "Open Last Project"
+msgstr "Открыть последний проект"
+
+msgid "Open last project..."
+msgstr "Открыть последний проект..."
+
+msgid "Open last project on startup"
+msgstr "Открывать последний проект при запуске"
+
+msgid "Opens last opened project on startup"
+msgstr "Открывает последний открытый проект при запуске"
+
+msgid "Create new directory for each frame tag"
+msgstr "Создать новый каталог для каждой метки кадра"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Создает несколько файлов, но каждый файл хранится в разных каталогах, соответствующих метке кадра"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "Найдена автосохраненная резервная копия для %s.\n"
+"Хотите загрузить ее?"
+
+msgid "Backup reloaded"
+msgstr "Резервная копия восстановлена"
 

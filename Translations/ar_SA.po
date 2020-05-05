@@ -1,216 +1,216 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Crowdin-Project: pixelorama\n"
-"X-Crowdin-Language: zh-TW\n"
+"X-Crowdin-Language: ar\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language-Team: Chinese Traditional\n"
-"Language: zh_TW\n"
+"Language-Team: Arabic\n"
+"Language: ar_SA\n"
 "PO-Revision-Date: 2020-05-02 20:26\n"
 
 msgid "OK"
-msgstr "確定"
+msgstr ""
 
 msgid "Cancel"
-msgstr "取消"
+msgstr ""
 
 msgid "Open"
-msgstr "打開"
+msgstr ""
 
 msgid "Save"
-msgstr "儲存"
+msgstr ""
 
 msgid "Please Confirm..."
-msgstr "確認..."
+msgstr ""
 
 msgid "Image Size"
-msgstr "圖片尺寸"
+msgstr ""
 
 msgid "Width:"
-msgstr "寬:"
+msgstr ""
 
 msgid "Height:"
-msgstr "高:"
+msgstr ""
 
 msgid "File"
-msgstr "檔案"
+msgstr ""
 
 msgid "Edit"
-msgstr "編輯"
+msgstr ""
 
 msgid "View"
-msgstr "檢視"
+msgstr ""
 
 msgid "Image"
-msgstr "圖片尺寸"
+msgstr ""
 
 msgid "Effects"
-msgstr "效果"
+msgstr ""
 
 msgid "Help"
-msgstr "幫助"
+msgstr ""
 
 msgid "New"
 msgstr ""
 
 msgid "New..."
-msgstr "開新檔案"
+msgstr ""
 
 msgid "Open..."
-msgstr "打開舊檔"
+msgstr ""
 
 msgid "Save..."
-msgstr "儲存"
+msgstr ""
 
 msgid "Save as..."
-msgstr "儲存為"
+msgstr ""
 
 msgid "Import"
 msgstr ""
 
 msgid "Import..."
-msgstr "匯入..."
+msgstr ""
 
 msgid "Import PNG..."
-msgstr "匯入PNG檔"
+msgstr ""
 
 msgid "Export"
-msgstr "輸出PNG檔"
+msgstr ""
 
 msgid "Export..."
-msgstr "輸出..."
+msgstr ""
 
 msgid "Export as..."
-msgstr "輸出為..."
+msgstr ""
 
 msgid "Export PNG..."
-msgstr "輸出PNG檔"
+msgstr ""
 
 msgid "Export PNG as..."
-msgstr "輸出PNG為..."
+msgstr ""
 
 msgid "Quit"
-msgstr "離開"
+msgstr ""
 
 msgid "Undo"
-msgstr "取消"
+msgstr ""
 
 msgid "Redo"
-msgstr "復原"
+msgstr ""
 
 msgid "Scale Image"
-msgstr "調整尺寸"
+msgstr ""
 
 msgid "Crop Image"
-msgstr "擷取部分圖片"
+msgstr ""
 
 msgid "Rotate Image"
-msgstr "旋轉圖片"
+msgstr ""
 
 msgid "Clear Selection"
-msgstr "清除選取區塊"
+msgstr ""
 
 msgid "Flip Horizontal"
-msgstr "水平翻轉"
+msgstr ""
 
 msgid "Flip Vertical"
-msgstr "垂直翻轉"
+msgstr ""
 
 msgid "Preferences"
-msgstr "偏好設定"
+msgstr ""
 
 msgid "Tile Mode"
-msgstr "拼圖模式"
+msgstr ""
 
 msgid "Show Grid"
-msgstr "顯示格線"
+msgstr ""
 
 msgid "Show Rulers"
-msgstr "顯示尺規"
+msgstr ""
 
 msgid "Show Guides"
-msgstr "顯示輔助線"
+msgstr ""
 
 msgid "Show Animation Timeline"
-msgstr "顯示動畫時間線"
+msgstr ""
 
 msgid "Fill with color:"
-msgstr "填滿"
+msgstr ""
 
 msgid "Open a File"
-msgstr "打開舊檔"
+msgstr ""
 
 msgid "Open File(s)"
-msgstr "打開舊檔"
+msgstr ""
 
 msgid "Import as new frame"
-msgstr "輸入為下一張"
+msgstr ""
 
 msgid "Import as a spritesheet"
-msgstr "垂直spritesheet"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
-msgstr "存成 .pxo"
+msgstr ""
 
 msgid "Export Sprite as .png"
-msgstr "輸出圖片"
+msgstr ""
 
 msgid "Export Sprite"
-msgstr "輸出圖片"
+msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr "有同名檔案，要覆蓋掉嗎"
+msgstr ""
 
 msgid "File %s already exists. Overwrite?"
-msgstr "%s 已經存在。要覆蓋嗎?"
+msgstr ""
 
 msgid "Directory path or file name is not valid!"
-msgstr "檔案位址或檔案名稱無效"
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr "無法加載 '%s'. Error code: %s"
+msgstr ""
 
 msgid "Frame"
-msgstr "影格"
+msgstr ""
 
 msgid "Spritesheet"
-msgstr "Spritesheet"
+msgstr ""
 
 msgid "Animation"
-msgstr "動畫"
+msgstr ""
 
 msgid "Preview:"
-msgstr "預覽："
+msgstr ""
 
 msgid "Frame:"
-msgstr "影格:"
+msgstr ""
 
 msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr "瀏覽"
+msgstr ""
 
 msgid "Resize:"
-msgstr "調整尺寸"
+msgstr ""
 
 msgid "Cancel Export"
-msgstr "取消輸出"
+msgstr ""
 
 msgid "Alert!"
-msgstr "警告"
+msgstr ""
 
 msgid "Select Current Folder"
-msgstr "選擇當前資料夾"
+msgstr ""
 
 msgid "Open a Directory"
-msgstr "打開資料夾"
+msgstr ""
 
 msgid "All frames as multiple files"
-msgstr "影格各自為獨立檔案"
+msgstr ""
 
 msgid "All frames as a single file animation"
 msgstr ""
@@ -231,52 +231,52 @@ msgid "Ping-Pong"
 msgstr ""
 
 msgid "Columns"
-msgstr "行"
+msgstr ""
 
 msgid "Columns:"
-msgstr "行:"
+msgstr ""
 
 msgid "Rows"
-msgstr "列"
+msgstr ""
 
 msgid "Rows:"
-msgstr "列:"
+msgstr ""
 
 msgid "Path:"
-msgstr "路徑:"
+msgstr ""
 
 msgid "Directories & Files:"
-msgstr "資料夾與檔案:"
+msgstr ""
 
 msgid "Create Folder"
-msgstr "新增資料夾"
+msgstr ""
 
 msgid "File:"
-msgstr "檔案:"
+msgstr ""
 
 msgid "Interpolation:"
-msgstr "插值:"
+msgstr ""
 
 msgid "Nearest"
-msgstr "最近"
+msgstr ""
 
 msgid "Bilinear"
-msgstr "雙線性"
+msgstr ""
 
 msgid "Cubic"
-msgstr "三次樣條"
+msgstr ""
 
 msgid "Trilinear"
-msgstr "三線性"
+msgstr ""
 
 msgid "General"
-msgstr "一般"
+msgstr ""
 
 msgid "Language"
-msgstr "語言"
+msgstr ""
 
 msgid "Themes"
-msgstr "皮膚"
+msgstr ""
 
 msgid "Canvas"
 msgstr ""
@@ -285,160 +285,160 @@ msgid "Shortcuts"
 msgstr ""
 
 msgid "Smooth Zoom"
-msgstr "平滑縮放"
+msgstr ""
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
 
 msgid "Tablet pressure sensitivity:"
-msgstr "繪圖板壓力:"
+msgstr ""
 
 msgid "None"
-msgstr "無"
+msgstr ""
 
 msgid "Affect Brush's Alpha"
-msgstr "影響畫筆Alpha"
+msgstr ""
 
 msgid "Color:"
-msgstr "顏色:"
+msgstr ""
 
 msgid "Guide color:"
-msgstr "輔助線顏色:"
+msgstr ""
 
 msgid "System Language"
-msgstr "系統語言"
+msgstr ""
 
 msgid "Dark"
-msgstr "變暗"
+msgstr ""
 
 msgid "Gray"
-msgstr "灰階"
+msgstr ""
 
 msgid "Gold"
-msgstr "金色"
+msgstr ""
 
 msgid "Light"
-msgstr "變亮"
+msgstr ""
 
 msgid "Invert colors"
-msgstr "互補"
+msgstr ""
 
 msgid "Desaturation"
-msgstr "去飽和"
+msgstr ""
 
 msgid "Outline"
-msgstr "描邊"
+msgstr ""
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Diagonal"
-msgstr "角落"
+msgstr ""
 
 msgid "Place inside image"
-msgstr "Place inside image"
+msgstr ""
 
 msgid "Thickness:"
-msgstr "粗細:"
+msgstr ""
 
 msgid "View Splash Screen"
-msgstr "關於"
+msgstr ""
 
 msgid "Issue Tracker"
-msgstr "回報問題"
+msgstr ""
 
 msgid "Changelog"
-msgstr "更新紀錄"
+msgstr ""
 
 msgid "About Pixelorama"
-msgstr "關於 Pixelorama"
+msgstr ""
 
 msgid "Developed by Orama Interactive"
-msgstr "由Orama Interactive開發"
+msgstr ""
 
 msgid "Website"
-msgstr "官網"
+msgstr ""
 
 msgid "Donate"
-msgstr "捐款"
+msgstr ""
 
 msgid "Developers"
-msgstr "開發人員"
+msgstr ""
 
 msgid "Contributors"
-msgstr "貢獻者"
+msgstr ""
 
 msgid "Donors"
-msgstr "捐款人"
+msgstr ""
 
 msgid "Translators"
-msgstr "翻譯人員"
+msgstr ""
 
 msgid "English"
-msgstr "英文"
+msgstr ""
 
 msgid "Greek"
-msgstr "希臘文"
+msgstr ""
 
 msgid "French"
-msgstr "法文"
+msgstr ""
 
 msgid "German"
-msgstr "德文"
+msgstr ""
 
 msgid "Polish"
-msgstr "波蘭文"
+msgstr ""
 
 msgid "Brazilian Portuguese"
-msgstr "巴西葡萄牙文"
+msgstr ""
 
 msgid "Russian"
-msgstr "俄文"
+msgstr ""
 
 msgid "Chinese Simplified"
-msgstr "簡體中文"
+msgstr ""
 
 msgid "Chinese Traditional"
-msgstr "繁體中文"
+msgstr ""
 
 msgid "Italian"
-msgstr "義大利文"
+msgstr ""
 
 msgid "Latvian"
-msgstr "拉脫維亞文"
+msgstr ""
 
 msgid "Spanish"
-msgstr "西班牙文"
+msgstr ""
 
 msgid "Esperanto"
-msgstr "世界語"
+msgstr ""
 
 msgid "Development Team"
-msgstr "開發團隊"
+msgstr ""
 
 msgid "Lead Programmer"
-msgstr "首席工程師"
+msgstr ""
 
 msgid "UI Designer"
-msgstr "UI設計師"
+msgstr ""
 
 msgid "GitHub Contributors"
-msgstr "GitHub 貢獻者"
+msgstr ""
 
 msgid "Art by"
-msgstr "作者"
+msgstr ""
 
 msgid "untitled"
-msgstr "未命名"
+msgstr ""
 
 msgid "imported"
-msgstr "檔案已輸出"
+msgstr ""
 
 msgid "copy"
-msgstr "複製"
+msgstr ""
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "確定要離開Pixelorama嗎?"
+msgstr ""
 
 msgid "Unsaved Image"
 msgstr ""
@@ -447,28 +447,25 @@ msgid "You have unsaved changes. If you proceed, the progress you have made will
 msgstr ""
 
 msgid "Save before exiting?"
-msgstr "要先儲存再離開嗎?"
+msgstr ""
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "你有未儲存的進度"
+msgstr ""
 
 msgid "Save & Exit"
-msgstr "儲存並離開"
+msgstr ""
 
 msgid "Exit without saving"
-msgstr "離開但不儲存"
+msgstr ""
 
 msgid "Utility Tools"
-msgstr "其他工具"
+msgstr ""
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr "長方形選取\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵\n\n"
-"按住%s移動內容"
+msgstr ""
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -479,59 +476,45 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "撿色器\n"
-"取得圖片中某個像素的顏色\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵"
+msgstr ""
 
 msgid "Draw Tools"
-msgstr "繪製工具"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr "鉛筆\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵\n\n"
-"按住%s畫直線"
+msgstr ""
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr "橡皮擦\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵\n\n"
-"按住%s畫直線"
+msgstr ""
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "油漆桶\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵"
+msgstr ""
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "變亮/變暗\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵"
+msgstr ""
 
 msgid "Choose a color for the left tool"
-msgstr "選擇左鍵工具顏色"
+msgstr ""
 
 msgid "Choose a color for the right tool"
-msgstr "選擇右鍵工具顏色"
+msgstr ""
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr "左右工具顏色互換\n"
-"(%s)"
+msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr "顏色改回初始值(左黑色, 右白色)"
+msgstr ""
 
 msgid "Left tool"
 msgstr ""
@@ -540,16 +523,16 @@ msgid "Right tool"
 msgstr ""
 
 msgid "Left pixel indicator"
-msgstr "左鍵工具準心"
+msgstr ""
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr "在畫布上顯示左鍵工具"
+msgstr ""
 
 msgid "Right pixel indicator"
-msgstr "右鍵工具準心"
+msgstr ""
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr "在畫布上顯示右鍵工具"
+msgstr ""
 
 msgid "Show left tool icon"
 msgstr ""
@@ -609,34 +592,34 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr "畫筆"
+msgstr ""
 
 msgid "Select a brush"
-msgstr "選擇畫筆"
+msgstr ""
 
 msgid "Brush: Pixel"
-msgstr "畫筆: 像素"
+msgstr ""
 
 msgid "Brush: Circle"
-msgstr "畫筆: 像素"
+msgstr ""
 
 msgid "Brush: Filled Circle"
-msgstr "畫筆: 像素"
+msgstr ""
 
 msgid "Custom brush"
-msgstr "自訂畫筆"
+msgstr ""
 
 msgid "Brush size:"
-msgstr "畫筆大小:"
+msgstr ""
 
 msgid "Brush color from"
-msgstr "畫筆顏色"
+msgstr ""
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
+msgstr ""
 
 msgid "Fill area:"
-msgstr "填滿:"
+msgstr ""
 
 msgid "Same color area"
 msgstr ""
@@ -657,25 +640,25 @@ msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
-msgstr "變亮"
+msgstr ""
 
 msgid "Darken"
-msgstr "變暗"
+msgstr ""
 
 msgid "Amount:"
-msgstr "程度:"
+msgstr ""
 
 msgid "Lighten/Darken amount"
-msgstr "變亮或變暗的程度"
+msgstr ""
 
 msgid "Pick for:"
-msgstr "挑選:"
+msgstr ""
 
 msgid "Left Color"
-msgstr "左鍵工具顏色"
+msgstr ""
 
 msgid "Right Color"
-msgstr "右鍵工具顏色"
+msgstr ""
 
 msgid "Mode:"
 msgstr ""
@@ -696,55 +679,49 @@ msgid "100% Zoom"
 msgstr ""
 
 msgid "Mirroring"
-msgstr "鏡像"
+msgstr ""
 
 msgid "Horizontal"
-msgstr "水平"
+msgstr ""
 
 msgid "Enable horizontal mirrored drawing"
-msgstr "開啟水平鏡像"
+msgstr ""
 
 msgid "Enable vertical mirrored drawing"
-msgstr "開啟垂直鏡像"
+msgstr ""
 
 msgid "Vertical"
-msgstr "垂直"
+msgstr ""
 
 msgid "Current frame:"
-msgstr "目前畫面:"
+msgstr ""
 
 msgid "Current frame: 1/1"
-msgstr "目前畫面: 1/1"
+msgstr ""
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr "跳到第一張\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "到前一張\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr "倒著播動畫\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr "播動畫\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "到後一張\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr "跳到最後一張\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -754,26 +731,25 @@ msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "動畫預覽每秒要多少張?\n"
-"FPS越高, 動畫播得越快"
+msgstr ""
 
 msgid "No loop"
-msgstr "不重複"
+msgstr ""
 
 msgid "Cycle loop"
-msgstr "輪迴重複"
+msgstr ""
 
 msgid "Ping-pong loop"
-msgstr "乒乓重複"
+msgstr ""
 
 msgid "Onion Skinning:"
-msgstr "洋蔥皮:"
+msgstr ""
 
 msgid "Past Frames"
-msgstr "過去畫面"
+msgstr ""
 
 msgid "Future Frames"
-msgstr "未來畫面"
+msgstr ""
 
 msgid "Manage frame tags"
 msgstr ""
@@ -786,22 +762,22 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr "藍紅模式"
+msgstr ""
 
 msgid "Add a new frame"
-msgstr "新增畫面"
+msgstr ""
 
 msgid "Remove Frame"
-msgstr "刪除畫面"
+msgstr ""
 
 msgid "Clone Frame"
-msgstr "複製畫面"
+msgstr ""
 
 msgid "Move Left"
-msgstr "左移"
+msgstr ""
 
 msgid "Move Right"
-msgstr "右移"
+msgstr ""
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -813,123 +789,122 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr "圖層"
+msgstr ""
 
 msgid "Layers"
-msgstr "圖層"
+msgstr ""
 
 msgid "Create a new layer"
-msgstr "新增圖層"
+msgstr ""
 
 msgid "Remove current layer"
-msgstr "刪除此圖層"
+msgstr ""
 
 msgid "Move up the current layer"
-msgstr "上移此圖層"
+msgstr ""
 
 msgid "Move down the current layer"
-msgstr "下移此圖層"
+msgstr ""
 
 msgid "Clone current layer"
-msgstr "複製此圖層"
+msgstr ""
 
 msgid "Merge current layer with the one below"
-msgstr "合併此圖層與下面的圖層"
+msgstr ""
 
 msgid "Opacity:"
-msgstr "能見度:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
-msgstr "開關圖層可視"
+msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr "鎖住\\解鎖圖層"
+msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
+msgstr ""
 
 msgid "Palette"
-msgstr "色盤"
+msgstr ""
 
 msgid "Palettes"
-msgstr "色盤"
+msgstr ""
 
 msgid "Add a new palette"
-msgstr "色盤"
+msgstr ""
 
 msgid "Edit currently selected palette"
-msgstr "新增色盤"
+msgstr ""
 
 msgid "Choose a palette"
-msgstr "選擇色盤"
+msgstr ""
 
 msgid "Undo: Draw"
-msgstr "取消 上一筆"
+msgstr ""
 
 msgid "Redo: Draw"
-msgstr "復原 上一筆"
+msgstr ""
 
 msgid "Undo: Rectangle Select"
-msgstr "取消 長方形選取"
+msgstr ""
 
 msgid "Redo: Rectangle Select"
-msgstr "復原 長方形選取"
+msgstr ""
 
 msgid "Undo: Scale"
-msgstr "取消 尺寸調整"
+msgstr ""
 
 msgid "Redo: Scale"
-msgstr "復原 尺寸調整"
+msgstr ""
 
 msgid "Undo: Add Layer"
-msgstr "取消 新增圖層"
+msgstr ""
 
 msgid "Redo: Add Layer"
-msgstr "復原 新增圖層"
+msgstr ""
 
 msgid "Undo: Remove Layer"
-msgstr "取消 刪除圖層"
+msgstr ""
 
 msgid "Redo: Remove Layer"
-msgstr "復原 刪除圖層"
+msgstr ""
 
 msgid "Undo: Merge Layer"
-msgstr "取消 合併圖層"
+msgstr ""
 
 msgid "Redo: Merge Layer"
-msgstr "復原 合併圖層"
+msgstr ""
 
 msgid "Undo: Change Layer Order"
-msgstr "取消 改變圖層順序"
+msgstr ""
 
 msgid "Redo: Change Layer Order"
-msgstr "復原 改變圖層順序"
+msgstr ""
 
 msgid "Undo: Add Frame"
-msgstr "取消 新增畫面"
+msgstr ""
 
 msgid "Redo: Add Frame"
-msgstr "復原 新增畫面"
+msgstr ""
 
 msgid "Undo: Remove Frame"
-msgstr "取消 刪除畫面"
+msgstr ""
 
 msgid "Redo: Remove Frame"
-msgstr "復原 刪除畫面"
+msgstr ""
 
 msgid "Undo: Change Frame Order"
-msgstr "取消 改變畫面順序"
+msgstr ""
 
 msgid "Redo: Change Frame Order"
-msgstr "復原 改變畫面順序"
+msgstr ""
 
 msgid "Undo: Delete Custom Brush"
-msgstr "取消 刪除自訂畫筆"
+msgstr ""
 
 msgid "Redo: Delete Custom Brush"
-msgstr "復原 刪除自訂畫筆"
+msgstr ""
 
 msgid "Undo: Modify Frame Tag"
 msgstr ""
@@ -944,10 +919,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr ""
 
 msgid "Move Guide"
-msgstr "移動輔助線"
+msgstr ""
 
 msgid "File saved"
-msgstr "檔案已儲存"
+msgstr ""
 
 msgid "File autosaved"
 msgstr ""
@@ -959,61 +934,61 @@ msgid "File failed to save"
 msgstr ""
 
 msgid "File exported"
-msgstr "檔案已輸出"
+msgstr ""
 
 msgid "New Empty Palette"
-msgstr "空的色盤"
+msgstr ""
 
 msgid "Import Palette"
-msgstr "輸入色盤"
+msgstr ""
 
 msgid "Palette Name:"
-msgstr "色盤名稱:"
+msgstr ""
 
 msgid "Color Name:"
-msgstr "顏色:"
+msgstr ""
 
 msgid "Create a new empty palette?"
-msgstr "新增空的色盤?"
+msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr "錯誤: 色盤名字無法使用"
+msgstr ""
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr "已有檔案名為 ‘%s’"
+msgstr ""
 
 msgid "Invalid Palette file!"
-msgstr "色盤檔無法使用"
+msgstr ""
 
 msgid "Edit Palette"
-msgstr "編輯色盤"
+msgstr ""
 
 msgid "Patrons:"
-msgstr "Patrons:"
+msgstr ""
 
 msgid "Changes"
-msgstr "更新紀錄"
+msgstr ""
 
 msgid "Platinum Sponsor"
-msgstr "白金贊助人"
+msgstr ""
 
 msgid "Gold Sponsors"
-msgstr "黃金贊助人"
+msgstr ""
 
 msgid "Platinum Sponsor Placeholder"
-msgstr "白金贊助保持人"
+msgstr ""
 
 msgid "Gold Sponsors Placeholder"
-msgstr "黃金贊助保持人"
+msgstr ""
 
 msgid "Don't show again"
-msgstr "不再顯示"
+msgstr ""
 
 msgid "Take this spot!"
-msgstr "Take this spot!"
+msgstr ""
 
 msgid "Image Options"
-msgstr "圖片選項"
+msgstr ""
 
 msgid "Default width:"
 msgstr ""

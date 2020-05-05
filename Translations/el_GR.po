@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-04-18 22:21\n"
+"PO-Revision-Date: 2020-05-03 00:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -52,6 +52,9 @@ msgstr "Εφέ"
 msgid "Help"
 msgstr "Βοήθεια"
 
+msgid "New"
+msgstr "Νέο"
+
 msgid "New..."
 msgstr "Νέο..."
 
@@ -63,6 +66,9 @@ msgstr "Αποθήκευση..."
 
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
+
+msgid "Import"
+msgstr "Εισαγωγή"
 
 msgid "Import..."
 msgstr "Εισαγωγή..."
@@ -182,6 +188,9 @@ msgstr "Προεπισκόπηση:"
 
 msgid "Frame:"
 msgstr "Καρέ:"
+
+msgid "Orientation:"
+msgstr "Προσανατολισμός:"
 
 msgid "Browse"
 msgstr "Περιήγηση"
@@ -432,6 +441,12 @@ msgstr "αντίγραφο"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Σίγουρα θέλετε να βγείτε από το Pixelorama;"
 
+msgid "Unsaved Image"
+msgstr "Μη αποθηκευμένη εικόνα"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Έχετε μη αποθηκευμένες αλλαγές. Εάν προχωρήσετε, η πρόοδος που έχετε πραγματοποιήσει θα χαθεί."
+
 msgid "Save before exiting?"
 msgstr "Αποθήκευση πριν την έξοδο;"
 
@@ -521,11 +536,11 @@ msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χ�
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
 
-msgid "Left tool options"
-msgstr "Επιλογές αριστερού εργαλείου"
+msgid "Left tool"
+msgstr "Αριστερό εργαλείο"
 
-msgid "Right tool options"
-msgstr "Επιλογές δεξιού εργαλείου"
+msgid "Right tool"
+msgstr "Δεξί εργαλείο"
 
 msgid "Left pixel indicator"
 msgstr "Δείκτης αριστερού πιξελ"
@@ -575,20 +590,20 @@ msgstr "Χρώμα πλέγματος:"
 msgid "A color of the grid"
 msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
 
-msgid "Checker size"
-msgstr "Μέγεθος σκακιέρας"
+msgid "Checker size:"
+msgstr "Μέγεθος σκακιέρας:"
 
 msgid "Size of the transparent checker background"
 msgstr "Μέγεθος του διάφανου υποβάθρου - σκακιέρα"
 
-msgid "Checker color 1"
-msgstr "Χρώμα σκακιέρας 1"
+msgid "Checker color 1:"
+msgstr "Χρώμα σκακιέρας 1:"
 
 msgid "First color of the transparent checker background"
 msgstr "Πρώτο χρώμα του διάφανου υποβάθρου - σκακιέρα"
 
-msgid "Checker color 2"
-msgstr "Χρώμα σκακιέρας 2"
+msgid "Checker color 2:"
+msgstr "Χρώμα σκακιέρας 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Δεύτερο χρώμα του διάφανου υποβάθρου - σκακιέρα"
@@ -626,17 +641,23 @@ msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώ
 msgid "Fill area:"
 msgstr "Περιοχή γεμίσματος:"
 
-msgid "Area of the same color"
-msgstr "Περιοχή ίδιου χρώματος"
-
-msgid "All pixels of the same color"
-msgstr "Όλα τα πίξελ ίδιου χρώματος"
-
 msgid "Same color area"
 msgstr "Περιοχή ίδιου χρώματος"
 
 msgid "Same color pixels"
 msgstr "Πίξελς ίδιου χρώματος"
+
+msgid "Fill with:"
+msgstr "Γέμισμα με:"
+
+msgid "Selected Color"
+msgstr "Επιλεγμένο χρώμα"
+
+msgid "Pattern"
+msgstr "Μοτίβο"
+
+msgid "Offset"
+msgstr "Μετατόπιση"
 
 msgid "Lighten"
 msgstr "Φώτισμα"
@@ -789,6 +810,9 @@ msgstr "Μετακίνηση Δεξιά"
 msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
 
+msgid "Link Cel"
+msgstr "Σύνδεση Cel"
+
 msgid "Unlink Cel"
 msgstr "Αποσύνδεση Cel"
 
@@ -911,11 +935,32 @@ msgstr "Αναίρεση: Διαγραφή προσαρμοσμένου πινέ
 msgid "Redo: Delete Custom Brush"
 msgstr "Ακύρωση αναίρεσης: Διαγραφή προσαρμοσμένου πινέλου"
 
+msgid "Undo: Modify Frame Tag"
+msgstr "Αναίρεση: Τροποποίηση ετικέτας καρέ"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Ακύρωση αναίρεσης: Τροποποίηση ετικέτας καρέ"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Αναίρεση: Διαγραφή ετικέτας καρέ"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Ακύρωση αναίρεσης: Διαγραφή ετικέτας καρέ"
+
 msgid "Move Guide"
 msgstr "Μετακίνηση βοηθού"
 
 msgid "File saved"
 msgstr "Το αρχείο αποθηκεύτηκε"
+
+msgid "File autosaved"
+msgstr "Το αρχείο αποθηκεύτηκε αυτόματα"
+
+msgid "File failed to open"
+msgstr "Απέτυχε το άνοιγμα του αρχείου"
+
+msgid "File failed to save"
+msgstr "Απέτυχε η αποθήκευση του αρχείου"
 
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
@@ -1054,4 +1099,42 @@ msgstr "Δεξί εργαλείο:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Το εργαλείο που έχει εκχωρηθεί στο δεξί κουμπί του ποντικιού"
+
+msgid "Cannot find last project file."
+msgstr "Δεν είναι δυνατή η εύρεση του τελευταίου αρχείου έργου."
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Δεν έχετε αποθηκεύσει ούτε ανοίξει κανένα έργο στο Pixelorama ακόμη!"
+
+msgid "Open Last Project"
+msgstr "Άνοιγμα τελευταίου έργου"
+
+msgid "Open last project..."
+msgstr "Άνοιγμα τελευταίου έργου..."
+
+msgid "Open last project on startup"
+msgstr "Άνοιγμα τελευταίου έργου κατά την εκκίνηση"
+
+msgid "Opens last opened project on startup"
+msgstr "Ανοίγει το τελευταίο έργο κατά την εκκίνηση"
+
+msgid "Create new directory for each frame tag"
+msgstr "Δημιουργήστε νέο φάκελο για κάθε ετικέτα καρέ"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Δημιουργεί πολλά αρχεία, αλλά κάθε αρχείο αποθηκεύεται σε διαφορετικό φάκελο που αντιστοιχεί σε κάθε ετικέτα καρέ"
+
+msgid "Close"
+msgstr "Κλείσιμο"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "Βρέθηκε αυτόματο αποθηκευμένο αντίγραφο ασφαλείας για %s.\n"
+"Θέλετε να το φορτώσετε ξανά;"
+
+msgid "Backup reloaded"
+msgstr "Το αντίγραφο ασφαλείας επαναφορτώθηκε"
 

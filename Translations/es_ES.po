@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-04-18 15:39\n"
+"PO-Revision-Date: 2020-05-02 20:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Efectos"
 msgid "Help"
 msgstr "Ayuda"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "Nuevo..."
 
@@ -63,6 +66,9 @@ msgstr "Guardar..."
 
 msgid "Save as..."
 msgstr "Guardar como..."
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr "Importar..."
@@ -180,6 +186,9 @@ msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
+msgstr ""
+
+msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
@@ -431,6 +440,12 @@ msgstr "copiar"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
 
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr ""
+
 msgid "Save before exiting?"
 msgstr ""
 
@@ -501,11 +516,11 @@ msgstr ""
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
 
-msgid "Left tool options"
-msgstr "Opciones de herramienta izquierda"
+msgid "Left tool"
+msgstr ""
 
-msgid "Right tool options"
-msgstr "Opciones de herramienta derecha"
+msgid "Right tool"
+msgstr ""
 
 msgid "Left pixel indicator"
 msgstr "Indicador de píxel izquierdo"
@@ -555,19 +570,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
@@ -606,16 +621,22 @@ msgstr ""
 msgid "Fill area:"
 msgstr "Rellenar área:"
 
-msgid "Area of the same color"
-msgstr "Área del mismo color"
-
-msgid "All pixels of the same color"
-msgstr "Todos los píxeles del mismo color"
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
@@ -761,6 +782,9 @@ msgstr "Mover a la derecha"
 msgid "Add Frame Tag"
 msgstr ""
 
+msgid "Link Cel"
+msgstr ""
+
 msgid "Unlink Cel"
 msgstr ""
 
@@ -882,11 +906,32 @@ msgstr "Deshacer: Eliminar Pincel Personalizado"
 msgid "Redo: Delete Custom Brush"
 msgstr "Rehacer: Eliminar Pincel Personalizado"
 
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Mover Guía"
 
 msgid "File saved"
 msgstr "Archivo guardado"
+
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
 
 msgid "File exported"
 msgstr "Archivo exportado"
@@ -1024,5 +1069,42 @@ msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
+msgstr ""
+
+msgid "Cannot find last project file."
+msgstr ""
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open Last Project"
+msgstr ""
+
+msgid "Open last project..."
+msgstr ""
+
+msgid "Open last project on startup"
+msgstr ""
+
+msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Create new directory for each frame tag"
+msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
 msgstr ""
 

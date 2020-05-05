@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-05-05 00:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Effekte"
 msgid "Help"
 msgstr "Hilfe"
 
+msgid "New"
+msgstr "Neu"
+
 msgid "New..."
 msgstr "Neu..."
 
@@ -63,6 +66,9 @@ msgstr "Speichern..."
 
 msgid "Save as..."
 msgstr "Speichern als..."
+
+msgid "Import"
+msgstr "Importieren"
 
 msgid "Import..."
 msgstr "Importieren..."
@@ -182,6 +188,9 @@ msgstr "Vorschau:"
 msgid "Frame:"
 msgstr "Frame:"
 
+msgid "Orientation:"
+msgstr "Orientierung:"
+
 msgid "Browse"
 msgstr "Durchsuchen"
 
@@ -270,7 +279,7 @@ msgid "Themes"
 msgstr "Designs"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Canvas"
 
 msgid "Shortcuts"
 msgstr "Tastenkürzel"
@@ -431,6 +440,12 @@ msgstr "kopiere"
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
 
+msgid "Unsaved Image"
+msgstr "Ungespeichertes Bild"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Sie haben ungespeicherte Änderungen. Wenn Sie fortfahren, geht Ihr Fortschritt verloren."
+
 msgid "Save before exiting?"
 msgstr "Speichere vor dem Verlassen?"
 
@@ -520,11 +535,11 @@ msgstr "Wechsle linke und rechte Farben\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)"
 
-msgid "Left tool options"
-msgstr "Linke Werkzeugoptionen"
+msgid "Left tool"
+msgstr "Linkes Werkzeug"
 
-msgid "Right tool options"
-msgstr "Rechte Werkzeugoptionen"
+msgid "Right tool"
+msgstr "Rechtes Werkzeug"
 
 msgid "Left pixel indicator"
 msgstr "Linke Pixelanzeige"
@@ -574,23 +589,23 @@ msgstr "Rasterfarbe:"
 msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
 
-msgid "Checker size"
-msgstr ""
+msgid "Checker size:"
+msgstr "Checkergröße:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Größe des transparenten Checkerhintergrunds"
 
-msgid "Checker color 1"
-msgstr ""
+msgid "Checker color 1:"
+msgstr "Checkerfarbe 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Erste Farbe des transparenten Checkerhintergrunds"
 
-msgid "Checker color 2"
-msgstr ""
+msgid "Checker color 2:"
+msgstr "Checkerfarbe 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Zweite Farbe des transparenten Checkerhintergrunds"
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
@@ -625,17 +640,23 @@ msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
 msgid "Fill area:"
 msgstr "Fülle Bereich"
 
-msgid "Area of the same color"
-msgstr "Bereich mit der selben Farbe"
-
-msgid "All pixels of the same color"
-msgstr "Alle Pixel mit der selben Farbe"
-
 msgid "Same color area"
 msgstr "Gleiche Farbfläche"
 
 msgid "Same color pixels"
 msgstr "Gleiche Farbpixel"
+
+msgid "Fill with:"
+msgstr "Füllen mit:"
+
+msgid "Selected Color"
+msgstr "Ausgewählte Farbe"
+
+msgid "Pattern"
+msgstr "Muster"
+
+msgid "Offset"
+msgstr "Offset"
 
 msgid "Lighten"
 msgstr "Erhellen"
@@ -788,6 +809,9 @@ msgstr "Bewege nach Rechts"
 msgid "Add Frame Tag"
 msgstr "Frame Tag hinzufügen"
 
+msgid "Link Cel"
+msgstr "Kette verlinken"
+
 msgid "Unlink Cel"
 msgstr "Kette entkoppeln"
 
@@ -910,11 +934,32 @@ msgstr "Rückgängig: Entferne benutzerdefinierten Pinsel"
 msgid "Redo: Delete Custom Brush"
 msgstr "Wiederherstellen: Entferne benutzerdefinierten Pinsel"
 
+msgid "Undo: Modify Frame Tag"
+msgstr "Rückgängig: Frame Tag ändern"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Wiederholen: Frame Tag ändern"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Rückgängig: Lösche Frame Tag"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Wiederholen: Lösche Frame Tag"
+
 msgid "Move Guide"
 msgstr "Bewegungsanleitung"
 
 msgid "File saved"
 msgstr "Datei gespeichert"
+
+msgid "File autosaved"
+msgstr "Datei automatisch gespeichert"
+
+msgid "File failed to open"
+msgstr "Datei konnte nicht geöffnet werden"
+
+msgid "File failed to save"
+msgstr "Datei konnte nicht gespeichert werden"
 
 msgid "File exported"
 msgstr "Datei exportiert"
@@ -965,7 +1010,7 @@ msgid "Gold Sponsors Placeholder"
 msgstr "Gold Sponsoren Platzhalter"
 
 msgid "Don't show again"
-msgstr "Nicht beim nächsten Start"
+msgstr "Nicht beim nächsten Start anzeigen"
 
 msgid "Take this spot!"
 msgstr "Nimm diesen Platz ein!"
@@ -1053,4 +1098,42 @@ msgstr "Rechtes Werkzeug:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Ein Werkzeug, das der rechten Maustaste zugewiesen ist"
+
+msgid "Cannot find last project file."
+msgstr "Letzte Projektdatei konnte nicht gefunden werden."
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Sie haben noch kein Projekt in Pixelorama gespeichert oder geöffnet!"
+
+msgid "Open Last Project"
+msgstr "Letztes Projekt öffnen"
+
+msgid "Open last project..."
+msgstr "Letztes Projekt öffnen..."
+
+msgid "Open last project on startup"
+msgstr "Beim Starten letztes Projekt laden"
+
+msgid "Opens last opened project on startup"
+msgstr "Öffnet das zuletzt geöffnete Projekt beim Start"
+
+msgid "Create new directory for each frame tag"
+msgstr "Neues Verzeichnis für jeden Frame Tag erstellen"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Erstellt mehrere Dateien, aber jede Datei wird in einem anderen Verzeichnis gespeichert, das ihrem Frame Tag entspricht"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "Automatisches Backup für %s wurde gefunden.\n"
+"Möchten Sie es neu laden?"
+
+msgid "Backup reloaded"
+msgstr "Backup neu geladen"
 
