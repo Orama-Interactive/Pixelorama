@@ -276,9 +276,9 @@ func _on_Language_pressed(button : Button) -> void:
 		TranslationServer.set_locale(Global.loaded_locales[index])
 
 	if "zh" in TranslationServer.get_locale():
-		Global.control.theme.default_font = preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres")
+		Global.control.theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
 	else:
-		Global.control.theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
+		Global.control.theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
 
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
@@ -315,33 +315,33 @@ func change_theme(ID : int) -> void:
 	if ID == 0: # Dark Theme
 		Global.theme_type = "Dark"
 		VisualServer.set_default_clear_color(Color(0.247059, 0.25098, 0.247059))
-		main_theme = preload("res://Assets/themes/dark/theme.tres")
-		top_menu_style = preload("res://Assets/themes/dark/top_menu_style.tres")
-		ruler_style = preload("res://Assets/themes/dark/ruler_style.tres")
+		main_theme = preload("res://assets/themes/dark/theme.tres")
+		top_menu_style = preload("res://assets/themes/dark/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 1: # Gray Theme
 		Global.theme_type = "Dark"
 		VisualServer.set_default_clear_color(Color(0.301961, 0.301961, 0.301961))
-		main_theme = preload("res://Assets/themes/gray/theme.tres")
-		top_menu_style = preload("res://Assets/themes/gray/top_menu_style.tres")
-		ruler_style = preload("res://Assets/themes/dark/ruler_style.tres")
+		main_theme = preload("res://assets/themes/gray/theme.tres")
+		top_menu_style = preload("res://assets/themes/gray/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = "Dark"
 		VisualServer.set_default_clear_color(Color("3c465d"))
-		main_theme = preload("res://Assets/themes/godot/theme.tres")
-		top_menu_style = preload("res://Assets/themes/godot/top_menu_style.tres")
-		ruler_style = preload("res://Assets/themes/godot/ruler_style.tres")
+		main_theme = preload("res://assets/themes/godot/theme.tres")
+		top_menu_style = preload("res://assets/themes/godot/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/godot/ruler_style.tres")
 	elif ID == 3: # Gold Theme
 		Global.theme_type = "Gold"
 		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))
-		main_theme = preload("res://Assets/themes/gold/theme.tres")
-		top_menu_style = preload("res://Assets/themes/gold/top_menu_style.tres")
-		ruler_style = preload("res://Assets/themes/gold/ruler_style.tres")
+		main_theme = preload("res://assets/themes/gold/theme.tres")
+		top_menu_style = preload("res://assets/themes/gold/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/gold/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = "Light"
 		VisualServer.set_default_clear_color(Color(0.705882, 0.705882, 0.705882))
-		main_theme = preload("res://Assets/themes/light/theme.tres")
-		top_menu_style = preload("res://Assets/themes/light/top_menu_style.tres")
-		ruler_style = preload("res://Assets/themes/light/ruler_style.tres")
+		main_theme = preload("res://assets/themes/light/theme.tres")
+		top_menu_style = preload("res://assets/themes/light/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/light/ruler_style.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
@@ -360,16 +360,16 @@ func change_theme(ID : int) -> void:
 			var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
 			var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
 			var normal_file_name = button.texture_normal.resource_path.get_file()
-			button.texture_normal = load("res://Assets/Graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, normal_file_name])
+			button.texture_normal = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, normal_file_name])
 			if button.texture_pressed:
 				var pressed_file_name = button.texture_pressed.resource_path.get_file()
-				button.texture_pressed = load("res://Assets/Graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, pressed_file_name])
+				button.texture_pressed = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, pressed_file_name])
 			if button.texture_hover:
 				var hover_file_name = button.texture_hover.resource_path.get_file()
-				button.texture_hover = load("res://Assets/Graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, hover_file_name])
+				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, hover_file_name])
 			if button.texture_disabled:
 				var disabled_file_name = button.texture_disabled.resource_path.get_file()
-				button.texture_disabled = load("res://Assets/Graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, disabled_file_name])
+				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, disabled_file_name])
 		elif button is Button:
 			var theme_type := Global.theme_type
 			if theme_type == "Gold":
@@ -385,7 +385,7 @@ func change_theme(ID : int) -> void:
 				var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
 				var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 				var normal_file_name = texture.texture.resource_path.get_file()
-				texture.texture = load("res://Assets/Graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, normal_file_name])
+				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, normal_file_name])
 
 	# Make sure the frame text gets updated
 	Global.current_frame = Global.current_frame

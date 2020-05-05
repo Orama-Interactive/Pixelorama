@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/lightendarken_cursor.png-493fce3e226bc2d98934ba7cd89f4589.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/lightendarken_cursor.png"
+dest_files=[ "res://.import/lightendarken_cursor.png-493fce3e226bc2d98934ba7cd89f4589.image" ]
+
+[params]
+

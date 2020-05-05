@@ -1,9 +1,12 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Palette/EditPalettePopup.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/dark_themes/timeline/new_frame.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Palette/palette_button_fill.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/dark_themes/timeline/new_frame.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/palette/palette_button_fill.png" type="Texture" id=6]
+
+
+
 
 [node name="EditPalettePopup" type="WindowDialog"]
 margin_right = 600.0

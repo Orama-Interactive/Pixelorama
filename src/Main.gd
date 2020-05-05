@@ -96,9 +96,9 @@ func _ready() -> void:
 		TranslationServer.set_locale(OS.get_locale())
 
 	if "zh" in TranslationServer.get_locale():
-		theme.default_font = preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres")
+		theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
 	else:
-		theme.default_font = preload("res://Assets/Fonts/Roboto-Regular.tres")
+		theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
 
 
 	file_menu = Global.file_menu.get_popup()
@@ -609,16 +609,16 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			theme_type = "Dark"
 
 		if tool_name == Global.current_left_tool and tool_name == Global.current_right_tool:
-			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s_l_r.png" % [theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://assets/graphics/%s_themes/tools/%s_l_r.png" % [theme_type.to_lower(), tool_name.to_lower()])
 		elif tool_name == Global.current_left_tool:
-			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s_l.png" % [theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://assets/graphics/%s_themes/tools/%s_l.png" % [theme_type.to_lower(), tool_name.to_lower()])
 		elif tool_name == Global.current_right_tool:
-			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s_r.png" % [theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://assets/graphics/%s_themes/tools/%s_r.png" % [theme_type.to_lower(), tool_name.to_lower()])
 		else:
-			t[0].get_child(0).texture = load("res://Assets/Graphics/%s_themes/tools/%s.png" % [theme_type.to_lower(), tool_name.to_lower()])
+			t[0].get_child(0).texture = load("res://assets/graphics/%s_themes/tools/%s.png" % [theme_type.to_lower(), tool_name.to_lower()])
 
-	Global.left_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/cursor_icons/%s_cursor.png" % Global.current_left_tool.to_lower()), 0)
-	Global.right_cursor_tool_texture.create_from_image(load("res://Assets/Graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
+	Global.left_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_left_tool.to_lower()), 0)
+	Global.right_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
 
 
 func _on_LeftBrushTypeButton_pressed() -> void:
