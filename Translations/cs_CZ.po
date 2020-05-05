@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-05 10:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "Nápověda"
 
 msgid "New"
-msgstr ""
+msgstr "Nový"
 
 msgid "New..."
 msgstr "Nový..."
@@ -68,7 +68,7 @@ msgid "Save as..."
 msgstr "Uložit jako..."
 
 msgid "Import"
-msgstr ""
+msgstr "Importovat"
 
 msgid "Import..."
 msgstr "Importovat..."
@@ -1107,7 +1107,7 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Zatím jste neuložili ani neotevřeli žádný projekt v Pixeloramě!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Otevřít poslední projekt"
 
 msgid "Open last project..."
 msgstr "Otevřít poslední projekt..."
