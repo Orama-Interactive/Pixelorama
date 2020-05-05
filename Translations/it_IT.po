@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-05-05 12:00\n"
+"PO-Revision-Date: 2020-05-05 13:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1123,6 +1123,15 @@ msgstr "Apri l'ultimo progetto all'avvio"
 
 msgid "Opens last opened project on startup"
 msgstr "Apri l'ultimo progetto aperto all'avvio"
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
 
 msgid "Create new directory for each frame tag"
 msgstr "Crea nuova cartella per ogni tag frame"
