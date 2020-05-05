@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-03 18:45\n"
+"PO-Revision-Date: 2020-05-05 12:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -412,6 +412,12 @@ msgstr "Hiszpański"
 
 msgid "Esperanto"
 msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Zespół developerski"
