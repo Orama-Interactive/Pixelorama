@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-05 12:00\n"
+"PO-Revision-Date: 2020-05-05 13:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1122,6 +1122,15 @@ msgstr "Po uruchomieniu załaduj ostatni projekt"
 
 msgid "Opens last opened project on startup"
 msgstr "Po uruchomieniu, załaduje ostatni projekt"
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
 
 msgid "Create new directory for each frame tag"
 msgstr "Utwórz nowy katalog dla każdego tagu klatek"
