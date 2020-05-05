@@ -151,6 +151,7 @@ margin_top = 3.0
 margin_right = 216.5
 margin_bottom = 35.0
 size_flags_vertical = 0
+custom_constants/separation = 4
 
 [node name="AddLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
