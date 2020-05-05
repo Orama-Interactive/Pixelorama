@@ -372,7 +372,7 @@ func _ready() -> void:
 	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
 	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
 	frame_ids = find_node_by_name(animation_timeline, "FrameIDs")
-	current_frame_label = find_node_by_name(animation_timeline, "CurrentFrame")
+	current_frame_label = find_node_by_name(control, "CurrentFrame")
 	onion_skinning_button = find_node_by_name(animation_timeline, "OnionSkinning")
 	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")

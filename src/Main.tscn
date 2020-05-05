@@ -180,15 +180,18 @@ mouse_default_cursor_shape = 2
 text = "Help"
 switch_on_hover = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
+[node name="TopLabels" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -65.5
 margin_right = 65.5
 custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ZoomLevel" type="Label" parent="MenuAndUI/TopMenuContainer/HBoxContainer"]
+[node name="ZoomLevel" type="Label" parent="MenuAndUI/TopMenuContainer/TopLabels"]
 margin_top = 6.0
 margin_right = 60.0
 margin_bottom = 21.0
@@ -196,13 +199,39 @@ rect_min_size = Vector2( 60, 0 )
 text = "781 %"
 align = 2
 
-[node name="CursorPosition" type="Label" parent="MenuAndUI/TopMenuContainer/HBoxContainer"]
+[node name="CursorPosition" type="Label" parent="MenuAndUI/TopMenuContainer/TopLabels"]
 margin_left = 80.0
 margin_top = 6.0
 margin_right = 120.0
 margin_bottom = 21.0
 text = "[64×64]"
 align = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAndUI/TopMenuContainer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -330.0
+margin_top = -14.0
+margin_bottom = 14.0
+grow_horizontal = 2
+size_flags_vertical = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentFrame" type="Label" parent="MenuAndUI/TopMenuContainer/HBoxContainer"]
+margin_left = 113.0
+margin_top = 6.0
+margin_right = 216.0
+margin_bottom = 21.0
+text = "Current Frame: 1/1"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UI" type="HBoxContainer" parent="MenuAndUI"]
 margin_top = 28.0
@@ -476,7 +505,6 @@ script = ExtResource( 17 )
 
 [node name="AnimationTimeline" parent="MenuAndUI/UI/CanvasAndTimeline" instance=ExtResource( 20 )]
 margin_top = 492.0
-margin_right = 902.0
 margin_bottom = 692.0
 
 [node name="RightPanel" type="Panel" parent="MenuAndUI/UI"]
@@ -1653,8 +1681,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/overloaded/Documents/Pixelorama"
-current_path = "/home/overloaded/Documents/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="SaveSprite" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -1669,12 +1697,10 @@ window_title = "Save Sprite as .pxo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/home/overloaded/Documents/Pixelorama"
-current_path = "/home/overloaded/Documents/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
-current_dir = "/home/overloaded/Documents/Pixelorama"
-current_path = "/home/overloaded/Documents/Pixelorama/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -1723,8 +1749,8 @@ dialog_text = "This is an error message!"
 
 [node name="PaletteImportFileDialog" parent="." instance=ExtResource( 37 )]
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "/home/overloaded/Documents/Pixelorama"
-current_path = "/home/overloaded/Documents/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="HSVDialog" parent="." instance=ExtResource( 44 )]
 
