@@ -17,14 +17,7 @@ func _ready() -> void:
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1024, 576))
-
-	# `TranslationServer.get_loaded_locales()` was added in 3.2beta and in 3.1.2
-	# The `has_method()` check and the `else` branch can be removed once 3.2 is released.
-	if TranslationServer.has_method("get_loaded_locales"):
-		Global.loaded_locales = TranslationServer.get_loaded_locales()
-	else:
-		# Hardcoded list of locales
-		Global.loaded_locales = ["de_DE", "el_GR", "en_US", "eo_UY", "es_ES", "fr_FR", "it_IT", "lv_LV", "pl_PL", "pt_BR", "ru_RU", "zh_CN","zh_TW"]
+	Global.loaded_locales = TranslationServer.get_loaded_locales()
 
 	# Make sure locales are always sorted, in the same order
 	Global.loaded_locales.sort()
@@ -201,7 +194,7 @@ func _ready() -> void:
 			OpenSave.autosave_timer.stop()
 			Global.can_draw = false
 			# For it's only possible to reload the first found backup
-			$BackupConfirmation.dialog_text = $BackupConfirmation.dialog_text % project_paths[0]
+			$BackupConfirmation.dialog_text = tr($BackupConfirmation.dialog_text) % project_paths[0]
 			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths[0], backup_path])
 			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths[0], backup_path])
 			$BackupConfirmation.popup_centered()

@@ -4,8 +4,6 @@
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 
-
-
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
 margin_top = 9.0
@@ -202,6 +200,13 @@ mouse_default_cursor_shape = 2
 pressed = true
 text = "System Language"
 
+[node name="Czech" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 28.0
+margin_right = 306.0
+margin_bottom = 52.0
+mouse_default_cursor_shape = 2
+text = "Czech [cs]"
+
 [node name="German" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 28.0
 margin_right = 306.0
@@ -244,6 +249,13 @@ margin_right = 306.0
 margin_bottom = 192.0
 mouse_default_cursor_shape = 2
 text = "Français [fr]"
+
+[node name="Indonesian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+margin_top = 168.0
+margin_right = 306.0
+margin_bottom = 192.0
+mouse_default_cursor_shape = 2
+text = "Indonesian [id]"
 
 [node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_top = 196.0

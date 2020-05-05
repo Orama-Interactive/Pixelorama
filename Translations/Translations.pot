@@ -404,6 +404,12 @@ msgstr ""
 msgid "Esperanto"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 
