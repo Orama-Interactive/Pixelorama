@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-05 11:59\n"
+"PO-Revision-Date: 2020-05-05 13:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1123,6 +1123,15 @@ msgstr "Otevřít poslední projekt při spuštění"
 
 msgid "Opens last opened project on startup"
 msgstr "Otevřít naposledy otevřený projekt při spuštění"
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
 
 msgid "Create new directory for each frame tag"
 msgstr "Vytvořit novou složku pro každý štítek snímků"
