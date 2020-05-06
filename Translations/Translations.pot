@@ -305,6 +305,9 @@ msgstr ""
 msgid "Gray"
 msgstr ""
 
+msgid "Blue"
+msgstr ""
+
 msgid "Gold"
 msgstr ""
 

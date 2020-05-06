@@ -329,9 +329,9 @@ func change_theme(ID : int) -> void:
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = "Blue"
 		VisualServer.set_default_clear_color(Color("3b445c"))
-		main_theme = preload("res://assets/themes/godot/theme.tres")
-		top_menu_style = preload("res://assets/themes/godot/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/godot/ruler_style.tres")
+		main_theme = preload("res://assets/themes/blue/theme.tres")
+		top_menu_style = preload("res://assets/themes/blue/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/blue/ruler_style.tres")
 	elif ID == 3: # Gold Theme
 		Global.theme_type = "Gold"
 		VisualServer.set_default_clear_color(Color(0.694118, 0.619608, 0.458824))

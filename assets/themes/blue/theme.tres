@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=1440 format=2]
+[gd_resource type="Theme" load_steps=1442 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/themes/dark/icons/vsplit.png" type="Texture" id=2]
+[ext_resource path="res://assets/themes/dark/icons/hsplit.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 4.5
@@ -9300,8 +9302,8 @@ bg_color = Color( 1, 1, 1, 0.2 )
 border_color = Color( 0.2, 0.23, 0.31, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1411]
-content_margin_left = 4.5
-content_margin_right = 4.5
+content_margin_left = 5.0
+content_margin_right = 5.0
 content_margin_top = 3.0
 content_margin_bottom = 3.0
 bg_color = Color( 0.15, 0.1725, 0.2325, 1 )
@@ -10403,7 +10405,7 @@ HSlider/icons/grabber_highlight = SubResource( 579 )
 HSlider/styles/grabber_area = SubResource( 1404 )
 HSlider/styles/slider = SubResource( 1405 )
 HSplitContainer/constants/separation = 6
-HSplitContainer/icons/grabber = SubResource( 551 )
+HSplitContainer/icons/grabber = ExtResource( 3 )
 HSplitContainer/styles/bg = SubResource( 1406 )
 ItemList/colors/font_color = Color( 0.8, 0.8075, 0.8275, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
@@ -10612,7 +10614,7 @@ VSlider/icons/grabber_highlight = SubResource( 579 )
 VSlider/styles/grabber_area = SubResource( 1435 )
 VSlider/styles/slider = SubResource( 1436 )
 VSplitContainer/constants/separation = 6
-VSplitContainer/icons/grabber = SubResource( 615 )
+VSplitContainer/icons/grabber = ExtResource( 2 )
 VSplitContainer/styles/bg = SubResource( 1437 )
 WindowDialog/colors/title_color = Color( 0.8, 0.8075, 0.8275, 1 )
 WindowDialog/constants/close_h_ofs = 16
