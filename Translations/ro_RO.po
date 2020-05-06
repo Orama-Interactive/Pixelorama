@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-05-06 13:38\n"
+"PO-Revision-Date: 2020-05-06 19:07\n"
 
 msgid "OK"
 msgstr ""
@@ -317,7 +317,7 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-msgid "Gold"
+msgid "Caramel"
 msgstr ""
 
 msgid "Light"
