@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-05-05 13:09\n"
+"PO-Revision-Date: 2020-05-06 13:38\n"
 
 msgid "OK"
 msgstr ""
@@ -312,6 +312,9 @@ msgid "Dark"
 msgstr ""
 
 msgid "Gray"
+msgstr ""
+
+msgid "Blue"
 msgstr ""
 
 msgid "Gold"
