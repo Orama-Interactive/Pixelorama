@@ -9554,7 +9554,7 @@ shadow_size = 3
 
 [resource]
 default_font = ExtResource( 1 )
-BoxContainer/constants/separation = 3
+BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.8, 0.8075, 0.8275, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
 Button/colors/font_color_hover = Color( 0.88, 0.8845, 0.8965, 1 )
@@ -10393,7 +10393,7 @@ GraphNode/styles/state_machine_frame = SubResource( 1395 )
 GraphNode/styles/state_machine_selectedframe = SubResource( 1396 )
 GridContainer/constants/hseparation = 3
 GridContainer/constants/vseparation = 3
-HBoxContainer/constants/separation = 3
+HBoxContainer/constants/separation = 4
 HScrollBar/icons/decrement = SubResource( 1397 )
 HScrollBar/icons/decrement_highlight = SubResource( 1397 )
 HScrollBar/icons/increment = SubResource( 1397 )
@@ -10602,7 +10602,7 @@ Tree/styles/selected_focus = SubResource( 1410 )
 Tree/styles/title_button_hover = SubResource( 1428 )
 Tree/styles/title_button_normal = SubResource( 1428 )
 Tree/styles/title_button_pressed = SubResource( 1428 )
-VBoxContainer/constants/separation = 3
+VBoxContainer/constants/separation = 4
 VScrollBar/icons/decrement = SubResource( 1397 )
 VScrollBar/icons/decrement_highlight = SubResource( 1397 )
 VScrollBar/icons/increment = SubResource( 1397 )
