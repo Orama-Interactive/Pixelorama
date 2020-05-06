@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-05 13:09\n"
+"PO-Revision-Date: 2020-05-06 13:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -314,6 +314,9 @@ msgstr "Sombre"
 
 msgid "Gray"
 msgstr "Gris"
+
+msgid "Blue"
+msgstr ""
 
 msgid "Gold"
 msgstr "Doré"
