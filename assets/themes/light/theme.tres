@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=37 format=2]
+[gd_resource type="Theme" load_steps=38 format=2]
 
 [ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=1]
 [ext_resource path="res://assets/themes/light/icons/grabber.png" type="Texture" id=2]
@@ -38,6 +38,19 @@ content_margin_right = 5.0
 content_margin_top = 3.0
 content_margin_bottom = 3.0
 bg_color = Color( 0.796078, 0.796078, 0.796078, 1 )
+border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=32]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.705882, 0.705882, 0.705882, 1 )
 border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -175,7 +188,7 @@ corner_radius_bottom_left = 4
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 0.772549, 0.772549, 0.772549, 1 )
 
 [sub_resource type="StyleBoxFlat" id=20]
 content_margin_left = 4.5
@@ -303,7 +316,7 @@ Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = null
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 3 )
-Button/styles/pressed = SubResource( 3 )
+Button/styles/pressed = SubResource( 32 )
 CheckBox/colors/font_color = Color( 0, 0, 0, 1 )
 CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 CheckBox/colors/font_color_hover = Color( 0, 0, 0, 1 )

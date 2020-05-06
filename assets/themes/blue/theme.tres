@@ -61,8 +61,12 @@ content_margin_left = 4.5
 content_margin_right = 4.5
 content_margin_top = 3.0
 content_margin_bottom = 3.0
-bg_color = Color( 0.180392, 0.203922, 0.266667, 1 )
+bg_color = Color( 0.313726, 0.356863, 0.470588, 1 )
 border_color = Color( 0.41, 0.61, 0.91, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="Image" id=1439]
 data = {
