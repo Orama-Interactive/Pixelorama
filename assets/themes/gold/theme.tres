@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=36 format=2]
+[gd_resource type="Theme" load_steps=37 format=2]
 
 [ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=1]
 [ext_resource path="res://assets/themes/light/icons/grabber.png" type="Texture" id=2]
 [ext_resource path="res://assets/themes/light/icons/grabber_hover.png" type="Texture" id=3]
 [ext_resource path="res://assets/themes/light/icons/vsplit.png" type="Texture" id=4]
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/themes/light/icons/spinbox.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -435,7 +436,7 @@ PopupMenu/styles/panel = SubResource( 20 )
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = null
 PopupPanel/styles/panel = SubResource( 21 )
-SpinBox/icons/updown = null
+SpinBox/icons/updown = ExtResource( 6 )
 TabContainer/colors/font_color_bg = Color( 0, 0, 0, 1 )
 TabContainer/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 TabContainer/colors/font_color_fg = Color( 0, 0, 0, 1 )
