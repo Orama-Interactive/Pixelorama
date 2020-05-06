@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-05-05 13:10\n"
+"PO-Revision-Date: 2020-05-06 13:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -314,6 +314,9 @@ msgstr "Escuro"
 
 msgid "Gray"
 msgstr "Cinza"
+
+msgid "Blue"
+msgstr ""
 
 msgid "Gold"
 msgstr "Ouro"
