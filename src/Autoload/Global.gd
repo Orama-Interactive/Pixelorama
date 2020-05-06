@@ -704,13 +704,11 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 			theme = "Dark"
 		for c in button.get_children():
 			if c is TextureRect:
-				var last_backslash = c.texture.resource_path.get_base_dir().find_last("/")
-				var button_category = c.texture.resource_path.get_base_dir().right(last_backslash + 1)
 				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
 				if disable:
-					c.texture = load("res://assets/graphics/%s_themes/%s/%s_disabled.png" % [theme.to_lower(), button_category, normal_file_name])
+					change_button_texturerect(c, "%s_disabled.png" % normal_file_name)
 				else:
-					c.texture = load("res://assets/graphics/%s_themes/%s/%s.png" % [theme.to_lower(), button_category, normal_file_name])
+					change_button_texturerect(c, "%s.png" % normal_file_name)
 				break
 
 

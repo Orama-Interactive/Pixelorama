@@ -327,7 +327,7 @@ func change_theme(ID : int) -> void:
 		top_menu_style = preload("res://assets/themes/gray/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
-		Global.theme_type = "Dark"
+		Global.theme_type = "Blue"
 		VisualServer.set_default_clear_color(Color("3b445c"))
 		main_theme = preload("res://assets/themes/godot/theme.tres")
 		top_menu_style = preload("res://assets/themes/godot/top_menu_style.tres")
@@ -362,8 +362,8 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
 	var fake_vsplit_grabber : TextureRect = Global.find_node_by_name(Global.animation_timeline, "FakeVSplitContainerGrabber")
-#	fake_vsplit_grabber.texture = main_theme.get_icon("Grabber", "VSplitContainer")
-	if Global.theme_type == "Dark":
+
+	if Global.theme_type == "Dark" or Global.theme_type == "Blue":
 		fake_vsplit_grabber.texture = preload("res://assets/themes/dark/icons/vsplit.png")
 	else:
 		fake_vsplit_grabber.texture = preload("res://assets/themes/light/icons/vsplit.png")
@@ -373,21 +373,20 @@ func change_theme(ID : int) -> void:
 			var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
 			var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
 			var normal_file_name = button.texture_normal.resource_path.get_file()
-			button.texture_normal = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, normal_file_name])
+			var theme_type := Global.theme_type
+			if theme_type == "Blue":
+				theme_type = "Dark"
+			button.texture_normal = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, normal_file_name])
 			if button.texture_pressed:
 				var pressed_file_name = button.texture_pressed.resource_path.get_file()
-				button.texture_pressed = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, pressed_file_name])
+				button.texture_pressed = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, pressed_file_name])
 			if button.texture_hover:
 				var hover_file_name = button.texture_hover.resource_path.get_file()
-				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, hover_file_name])
+				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, hover_file_name])
 			if button.texture_disabled:
 				var disabled_file_name = button.texture_disabled.resource_path.get_file()
-				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [Global.theme_type.to_lower(), button_category, disabled_file_name])
+				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, disabled_file_name])
 		elif button is Button:
-			var theme_type := Global.theme_type
-			if theme_type == "Gold":
-				theme_type = "Dark"
-
 			var texture : TextureRect
 			for child in button.get_children():
 				if child is TextureRect:
@@ -398,6 +397,10 @@ func change_theme(ID : int) -> void:
 				var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
 				var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 				var normal_file_name = texture.texture.resource_path.get_file()
+				var theme_type := Global.theme_type
+				if theme_type == "Gold" or (theme_type == "Blue" and button_category != "tools"):
+					theme_type = "Dark"
+
 				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, normal_file_name])
 
 	# Make sure the frame text gets updated
