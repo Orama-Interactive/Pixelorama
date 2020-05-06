@@ -2,8 +2,6 @@
 
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.gd" type="Script" id=1]
 
-
-
 [node name="CreateNewImage" type="ConfirmationDialog"]
 margin_right = 300.0
 margin_bottom = 200.0
@@ -119,6 +117,7 @@ margin_top = 108.0
 margin_right = 189.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0, 0 )
 [connection signal="about_to_show" from="." to="." method="_on_CreateNewImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]

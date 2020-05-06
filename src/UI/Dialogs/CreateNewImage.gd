@@ -53,6 +53,7 @@ var TStrings ={
 
 
 func _ready() -> void:
+	fill_color_node.get_picker().presets_visible = false
 	ratio_box.connect("pressed", self, "_on_RatioCheckBox_toggled", [ratio_box.pressed])
 	templates_options.connect("item_selected", self, "_on_TemplatesOptions_item_selected")
 

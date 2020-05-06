@@ -10,6 +10,10 @@ onready var add_tag_button : TextureButton = $VBoxContainer/ScrollContainer/VBox
 onready var options_dialog = $TagOptions
 
 
+func _ready() -> void:
+	$"TagOptions/GridContainer/ColorPickerButton".get_picker().presets_visible = false
+
+
 func _on_FrameTagDialog_about_to_show() -> void:
 	Global.can_draw = false
 	for vbox in tag_vboxes:

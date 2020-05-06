@@ -3,8 +3,6 @@
 [ext_resource path="res://src/UI/Dialogs/FrameTagDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/new_frame.png" type="Texture" id=2]
 
-
-
 [node name="FrameTagDialog" type="AcceptDialog"]
 margin_right = 83.0
 margin_bottom = 58.0
