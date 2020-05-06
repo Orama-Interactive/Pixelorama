@@ -308,7 +308,7 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-msgid "Gold"
+msgid "Caramel"
 msgstr ""
 
 msgid "Light"

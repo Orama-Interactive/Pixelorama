@@ -633,7 +633,7 @@ func frame_changed(value : int) -> void:
 		c.is_making_line = false
 		c.line_2d.set_point_position(1, c.line_2d.points[0])
 		var text_color := Color.white
-		if theme_type == "Gold" || theme_type == "Light":
+		if theme_type == "Caramel" || theme_type == "Light":
 			text_color = Color.black
 		frame_ids.get_child(i).add_color_override("font_color", text_color)
 		for layer in layers:
@@ -700,7 +700,7 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 
 	if button is Button:
 		var theme := theme_type
-		if theme == "Gold":
+		if theme == "Caramel":
 			theme = "Dark"
 		for c in button.get_children():
 			if c is TextureRect:

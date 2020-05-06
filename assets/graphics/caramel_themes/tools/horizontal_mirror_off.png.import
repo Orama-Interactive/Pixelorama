@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/color_switch.png-28fa6814e2d05784b4f658935e0e6f5c.stex"
+path="res://.import/horizontal_mirror_off.png-e92d466fd155f6c283c9a036d22c782c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/gold_themes/misc/color_switch.png"
-dest_files=[ "res://.import/color_switch.png-28fa6814e2d05784b4f658935e0e6f5c.stex" ]
+source_file="res://assets/graphics/caramel_themes/tools/horizontal_mirror_off.png"
+dest_files=[ "res://.import/horizontal_mirror_off.png-e92d466fd155f6c283c9a036d22c782c.stex" ]
 
 [params]
 

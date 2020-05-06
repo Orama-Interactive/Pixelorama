@@ -333,12 +333,12 @@ margin_bottom = 80.0
 mouse_default_cursor_shape = 2
 text = "Blue"
 
-[node name="Gold Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+[node name="Caramel Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 84.0
 margin_right = 494.0
 margin_bottom = 108.0
 mouse_default_cursor_shape = 2
-text = "Gold"
+text = "Caramel"
 
 [node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_top = 112.0

@@ -329,11 +329,11 @@ func change_theme(ID : int) -> void:
 		main_theme = preload("res://assets/themes/blue/theme.tres")
 		top_menu_style = preload("res://assets/themes/blue/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/blue/ruler_style.tres")
-	elif ID == 3: # Gold Theme
-		Global.theme_type = "Gold"
-		main_theme = preload("res://assets/themes/gold/theme.tres")
-		top_menu_style = preload("res://assets/themes/gold/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/gold/ruler_style.tres")
+	elif ID == 3: # Caramel Theme
+		Global.theme_type = "Caramel"
+		main_theme = preload("res://assets/themes/caramel/theme.tres")
+		top_menu_style = preload("res://assets/themes/caramel/top_menu_style.tres")
+		ruler_style = preload("res://assets/themes/caramel/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = "Light"
 		main_theme = preload("res://assets/themes/light/theme.tres")
@@ -395,7 +395,7 @@ func change_theme(ID : int) -> void:
 				var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 				var normal_file_name = texture.texture.resource_path.get_file()
 				var theme_type := Global.theme_type
-				if theme_type == "Gold" or (theme_type == "Blue" and button_category != "tools"):
+				if theme_type == "Caramel" or (theme_type == "Blue" and button_category != "tools"):
 					theme_type = "Dark"
 
 				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type.to_lower(), button_category, normal_file_name])

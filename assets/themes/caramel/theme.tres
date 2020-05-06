@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=37 format=2]
 
-[ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/themes/light/icons/grabber.png" type="Texture" id=2]
 [ext_resource path="res://assets/themes/light/icons/grabber_hover.png" type="Texture" id=3]
-[ext_resource path="res://assets/themes/light/icons/vsplit.png" type="Texture" id=4]
-[ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=4]
+[ext_resource path="res://assets/themes/light/icons/vsplit.png" type="Texture" id=5]
 [ext_resource path="res://assets/themes/light/icons/spinbox.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -283,7 +283,7 @@ border_color = Color( 0.372549, 0.360784, 0.301961, 1 )
 expand_margin_top = 20.0
 
 [resource]
-default_font = ExtResource( 5 )
+default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -365,7 +365,7 @@ HSlider/styles/grabber_highlight = null
 HSlider/styles/slider = SubResource( 16 )
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 6
-HSplitContainer/icons/grabber = ExtResource( 1 )
+HSplitContainer/icons/grabber = ExtResource( 4 )
 HSplitContainer/styles/bg = null
 "Label/colors/Selected Color" = Color( 0.235294, 0.364706, 0.458824, 1 )
 Label/colors/font_color = Color( 0, 0, 0, 1 )
@@ -561,7 +561,7 @@ VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource( 29 )
 VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 6
-VSplitContainer/icons/grabber = ExtResource( 4 )
+VSplitContainer/icons/grabber = ExtResource( 5 )
 VSplitContainer/styles/bg = null
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 18
