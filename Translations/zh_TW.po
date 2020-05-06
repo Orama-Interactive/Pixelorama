@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-05-05 13:10\n"
+"PO-Revision-Date: 2020-05-06 13:38\n"
 
 msgid "OK"
 msgstr "確定"
@@ -313,6 +313,9 @@ msgstr "變暗"
 
 msgid "Gray"
 msgstr "灰階"
+
+msgid "Blue"
+msgstr ""
 
 msgid "Gold"
 msgstr "金色"
