@@ -446,7 +446,7 @@ func help_menu_id_pressed(id : int) -> void:
 		1: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		2: # Changelog
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v062---17-02-2020")
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v07---unreleased")
 		3: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
