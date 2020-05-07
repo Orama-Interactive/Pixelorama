@@ -33,7 +33,7 @@ If you want to add new features or fix bugs, please make sure that:
 - When you're creating a new script, Godot will place some comments and methods for you. If you're not using them, please remove them. They're taking unnecessary space.
 - Avoid using the "pass" keyword. It has no actual usage, besides being used as a placeholder for temporarily empty methods and empty cases. Make sure you don't include empty methods and cases in the code of your PR.
 - If you are adding new interactive UI elements such as buttons, don't forget to change their mouse default cursor shape to pointing arrow. Hint tooltips that explain the element's usage to the user are welcome too, just make sure to also include them in `Translations.pot`.
-- If you are adding new scripts and/or scenes, please put them somewhere inside ths `src/` directory, and make sure to use PascalCase for your file and folder names.
+- If you are adding new scripts and/or scenes, please put them somewhere inside the `src/` directory, and make sure to use PascalCase for your file and folder names. [Read this guide for more information](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
 - If you are adding images or any type of asset, please put them somewhere inside the `assets/` directory, and make sure to use snake_case for your file and folder names.
 - Do **NOT** use the `l10n_master` branch for development. Do not base your work from it, and do not open Pull Requests targeted at it. It's used specifically by Crowdin for translation handling.
 
