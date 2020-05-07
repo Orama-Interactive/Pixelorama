@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-06 19:07\n"
+"PO-Revision-Date: 2020-05-07 00:59\n"
 
 msgid "OK"
 msgstr "确定"
@@ -316,7 +316,7 @@ msgid "Gray"
 msgstr "灰色"
 
 msgid "Blue"
-msgstr ""
+msgstr "蓝色"
 
 msgid "Caramel"
 msgstr ""
@@ -418,10 +418,10 @@ msgid "Esperanto"
 msgstr "世界语"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "印度尼西亚语"
 
 msgid "Czech"
-msgstr ""
+msgstr "捷克语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -1128,13 +1128,13 @@ msgid "Opens last opened project on startup"
 msgstr "在启动时打开最后打开的项目"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "启用自动保存"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "自动保存间隔："
 
 msgid "minute(s)"
-msgstr ""
+msgstr "分钟"
 
 msgid "Create new directory for each frame tag"
 msgstr "为每个帧标签创建新的目录"
