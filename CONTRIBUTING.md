@@ -20,7 +20,7 @@ When reporting a bug, make sure to provide enough details, such as information a
 
 ## Contributing pull requests
 If you want to add new features or fix bugs, please make sure that:
-- The code you are submitting follows the recommended [GDScript style guide](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/gdscript_styleguide.html)
+- The code you are submitting follows the recommended [GDScript style guide.](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/gdscript_styleguide.html)
   [Static typing](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/static_typing.html) is used in the code, so please make sure the code in your PRs also use it.
 - Avoid including unneeded files in your commits. This is true mostly for Main.tscn and other scenes, as Godot likes to change them by itself. If you haven't made changes to scenes, please **do NOT** include them in your commits.
 - Please have **Trim Trailing Whitespace On Save** enabled. This makes for cleaner VCS diffs. It's usually considered good practice to avoid trailing whitespace in files, and to make sure all files end with a single blank line.
