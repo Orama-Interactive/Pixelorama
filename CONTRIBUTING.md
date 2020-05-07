@@ -20,7 +20,7 @@ When reporting a bug, make sure to provide enough details, such as information a
 
 ## Contributing pull requests
 If you want to add new features or fix bugs, please make sure that:
-- The code you are submitting follows the recommended [GDScript style guide](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/gdscript_styleguide.html) (note that not all of the code is following this format, and it will be fixed in the future).
+- The code you are submitting follows the recommended [GDScript style guide](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/gdscript_styleguide.html)
   [Static typing](https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/static_typing.html) is used in the code, so please make sure the code in your PRs also use it.
 - Avoid including unneeded files in your commits. This is true mostly for Main.tscn and other scenes, as Godot likes to change them by itself. If you haven't made changes to scenes, please **do NOT** include them in your commits.
 - Please have **Trim Trailing Whitespace On Save** enabled. This makes for cleaner VCS diffs. It's usually considered good practice to avoid trailing whitespace in files, and to make sure all files end with a single blank line.
@@ -33,6 +33,9 @@ If you want to add new features or fix bugs, please make sure that:
 - When you're creating a new script, Godot will place some comments and methods for you. If you're not using them, please remove them. They're taking unnecessary space.
 - Avoid using the "pass" keyword. It has no actual usage, besides being used as a placeholder for temporarily empty methods and empty cases. Make sure you don't include empty methods and cases in the code of your PR.
 - If you are adding new interactive UI elements such as buttons, don't forget to change their mouse default cursor shape to pointing arrow. Hint tooltips that explain the element's usage to the user are welcome too, just make sure to also include them in `Translations.pot`.
+- If you are adding new scripts and/or scenes, please put them somewhere inside ths `src/` directory, and make sure to use PascalCase for your file and folder names.
+- If you are adding images or any type of asset, please put them somewhere inside the `assets/` directory, and make sure to use snake_case for your file and folder names.
+- Do **NOT** use the `l10n_master` branch for development. Do not base your work from it, and do not open Pull Requests targeted at it. It's used specifically by Crowdin for translation handling.
 
 Please create different pull requests for each feature you'd like to implement, or each bug you'd like to fix. Make sure your pull request only handles one specific topic, and not multiple. If you want to make multiple changes, make a pull request for each of them. For this reason, it's recommended you create new branches in your forked repository, instead of using your fork's master branch.
 This [Git style guide](https://github.com/agis-/git-style-guide) has some good practices to have in mind.
