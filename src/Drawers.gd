@@ -21,7 +21,7 @@ class PixelPerfectDrawer extends Drawer:
 	var last_pixels = [null, null]
 
 
-	func reset():
+	func reset() -> void:
 		last_pixels = [null, null]
 
 

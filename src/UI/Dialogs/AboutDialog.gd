@@ -35,8 +35,9 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Dávid Gábor BODOR (dragonfi)")
 
 	var donors_root := donors.create_item()
-	donors.create_item(donors_root).set_text(0, "  pcmxms")
+	donors.create_item(donors_root).set_text(0, "  pcmxms - https://www.nonamefornowsoft.com.br/")
 	donors.create_item(donors_root).set_text(0, "  Mike King")
+	donors.create_item(donors_root).set_text(0, "  Sam Marcus")
 
 
 func _on_AboutDialog_about_to_show() -> void:
