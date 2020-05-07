@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-06 19:07\n"
+"PO-Revision-Date: 2020-05-07 14:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -315,7 +315,7 @@ msgid "Gray"
 msgstr "Szary"
 
 msgid "Blue"
-msgstr ""
+msgstr "Niebieski"
 
 msgid "Caramel"
 msgstr ""
@@ -417,10 +417,10 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonezyjski"
 
 msgid "Czech"
-msgstr ""
+msgstr "Czeski"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -1127,13 +1127,13 @@ msgid "Opens last opened project on startup"
 msgstr "Po uruchomieniu, załaduje ostatni projekt"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Włącz automatyczne zapisywanie"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Częstotliwość automatycznego zapisu:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minuta(y)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Utwórz nowy katalog dla każdego tagu klatek"
