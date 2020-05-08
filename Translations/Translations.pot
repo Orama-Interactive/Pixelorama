@@ -167,6 +167,12 @@ msgstr ""
 msgid "Frame"
 msgstr ""
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
