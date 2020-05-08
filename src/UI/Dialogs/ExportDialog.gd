@@ -11,7 +11,7 @@ var frame_number := 0
 
 # Spritesheet options
 var frame_current_tag := 0 # Export only current frame tag
-var canvas_size := 0
+var canvas_size := 1
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 var orientation : int = Orientation.ROWS
 # How many rows/columns before new line is added
@@ -99,17 +99,17 @@ func show_tab() -> void:
 		ExportTab.SPRITESHEET:
 			create_frame_tag_list()
 			file_format = FileFormat.PNG
+			if not was_exported:
+				orientation = Orientation.ROWS
+				lines_count = int(ceil(sqrt(canvas_size)))
+			process_spritesheet()
 			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
 			$VBoxContainer/SpritesheetOptions/Frames/Frames.select(frame_current_tag)
 			$FrameTimer.stop()
-			if not was_exported:
-				orientation = Orientation.ROWS
-				lines_count = int(ceil(sqrt(Global.canvases.size())))
 			$VBoxContainer/SpritesheetOptions/Orientation/Orientation.selected = orientation
-			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = Global.canvases.size()
+			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = canvas_size
 			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.value = lines_count
 			$VBoxContainer/SpritesheetOptions/Orientation/LinesCountLabel.text = "Columns:"
-			process_spritesheet()
 			$VBoxContainer/SpritesheetOptions.show()
 		ExportTab.ANIMATION:
 			set_file_format_selector()
@@ -667,3 +667,5 @@ func _on_Frames_item_selected(id : int) -> void:
 	frame_current_tag = id
 	process_spritesheet()
 	set_preview()
+	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = canvas_size
+	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.value = lines_count
