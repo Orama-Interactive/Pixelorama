@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-06 19:07\n"
+"PO-Revision-Date: 2020-05-08 23:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -176,6 +176,12 @@ msgstr "Не удалось загрузить файл '%s'.\n"
 
 msgid "Frame"
 msgstr "Кадр"
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
 
 msgid "Spritesheet"
 msgstr ""
