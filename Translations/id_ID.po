@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-06 19:07\n"
+"PO-Revision-Date: 2020-05-08 23:57\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -176,6 +176,12 @@ msgstr "Error saat membaca file '%s'.\n"
 
 msgid "Frame"
 msgstr "Frame"
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
