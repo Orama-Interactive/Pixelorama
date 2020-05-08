@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-07 00:59\n"
+"PO-Revision-Date: 2020-05-08 23:57\n"
 
 msgid "OK"
 msgstr "确定"
@@ -176,6 +176,12 @@ msgstr "无法加载文件 '%s'。\n"
 
 msgid "Frame"
 msgstr "帧"
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
 
 msgid "Spritesheet"
 msgstr "精灵表"
