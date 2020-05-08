@@ -691,6 +691,17 @@ func layer_changed(value : int) -> void:
 	self.current_frame = current_frame # Call frame_changed to update UI
 
 
+func dialog_open(open : bool) -> void:
+	if open:
+		can_draw = false
+		control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color(0.5, 0.5, 0.5), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	else:
+		can_draw = true
+		control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color.white, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+
+	control.get_node("ModulateTween").start()
+
+
 func disable_button(button : BaseButton, disable : bool) -> void:
 	button.disabled = disable
 	if disable:

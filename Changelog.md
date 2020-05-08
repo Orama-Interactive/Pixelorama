@@ -44,7 +44,8 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - LineEdits lose focus when the user presses Enter.
 - When cloning a frame, the clone will appear next to the original.
 - Layer visibility is taken into account when exporting the drawing as a `.png` file. This means that invisible layers will not be included in the final `.png` file.
-- The Godot theme has changed.
+- The Godot theme has changed and been renamed to Blue. The Gold theme has also been renamed to Caramel.
+- When a dialog is opened, the UI in the background gets darker.
 - Visual change, added border outlines to all window dialogs.
 - Animation now loops by default.
 - Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.

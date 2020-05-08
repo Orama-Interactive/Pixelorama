@@ -52,8 +52,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				var file_name : String = path.get_file()
 				Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
 				Global.error_dialog.popup_centered()
-				Global.can_draw = false
-				Global.control.modulate = Color(0.5, 0.5, 0.5)
+				Global.dialog_open(true)
 				continue
 
 			var canvas : Canvas = load("res://src/Canvas.tscn").instance()
@@ -100,8 +99,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			var file_name : String = first_path.get_file()
 			Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
 			Global.error_dialog.popup_centered()
-			Global.can_draw = false
-			Global.control.modulate = Color(0.5, 0.5, 0.5)
+			Global.dialog_open(true)
 			return
 
 		spritesheet_horizontal = min(spritesheet_horizontal, image.get_size().x)

@@ -36,14 +36,12 @@ func on_new_empty_palette() -> void:
 	Global.new_palette_name_line_edit.text = "Custom_Palette"
 	from_palette = null
 	Global.new_palette_dialog.popup_centered()
-	Global.can_draw = false
-	Global.control.modulate = Color(0.5, 0.5, 0.5)
+	Global.dialog_open(true)
 
 
 func on_import_palette() -> void:
 	Global.palette_import_file_dialog.popup_centered()
-	Global.can_draw = false
-	Global.control.modulate = Color(0.5, 0.5, 0.5)
+	Global.dialog_open(true)
 
 
 func on_palette_import_file_selected(path : String) -> void:
@@ -67,13 +65,11 @@ func on_palette_import_file_selected(path : String) -> void:
 		else:
 			Global.error_dialog.set_text(tr("Error: Palette named '%s' already exists!") % palette.name)
 			Global.error_dialog.popup_centered()
-			Global.can_draw = false
-			Global.control.modulate = Color(0.5, 0.5, 0.5)
+			Global.dialog_open(true)
 	else:
 		Global.error_dialog.set_text("Invalid Palette file!")
 		Global.error_dialog.popup_centered()
-		Global.can_draw = false
-		Global.control.modulate = Color(0.5, 0.5, 0.5)
+		Global.dialog_open(true)
 
 
 func _on_AddPalette_pressed() -> void:
@@ -86,8 +82,7 @@ func on_new_palette_confirmed() -> void:
 	if not result.empty():
 		Global.error_dialog.set_text(result)
 		Global.error_dialog.popup_centered()
-		Global.can_draw = false
-		Global.control.modulate = Color(0.5, 0.5, 0.5)
+		Global.dialog_open(true)
 
 
 func add_palette_menu_id_pressed(id : int) -> void:
@@ -139,8 +134,7 @@ func on_edit_palette() -> void:
 		Global.new_palette_dialog.window_title = "Create a new custom palette from existing default?"
 		Global.new_palette_name_line_edit.text = "Custom_" + current_palette
 		Global.new_palette_dialog.popup_centered()
-		Global.can_draw = false
-		Global.control.modulate = Color(0.5, 0.5, 0.5)
+		Global.dialog_open(true)
 	else:
 		from_palette = null
 		Global.edit_palette_popup.open(current_palette)
@@ -278,5 +272,4 @@ func save_palette(palette_name : String, filename : String) -> void:
 
 
 func _on_NewPaletteDialog_popup_hide() -> void:
-	Global.can_draw = true
-	Global.control.modulate = Color.white
+	Global.dialog_open(false)
