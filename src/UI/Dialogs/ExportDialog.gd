@@ -10,6 +10,8 @@ var processed_images = [] # Image[]
 var frame_number := 0
 
 # Spritesheet options
+var frame_current_tag := 0 # Export only current frame tag
+var canvas_size := 1
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 var orientation : int = Orientation.ROWS
 # How many rows/columns before new line is added
@@ -39,6 +41,7 @@ var file_exists_alert = "File %s already exists. Overwrite?"
 var was_exported : bool = false
 var exported_tab : int
 var exported_frame_number : int
+var exported_frame_current_tag : int
 var exported_orientation : int
 var exported_lines_count : int
 var exported_animation_type : int
@@ -94,17 +97,19 @@ func show_tab() -> void:
 				process_frame()
 			$VBoxContainer/FrameOptions.show()
 		ExportTab.SPRITESHEET:
+			create_frame_tag_list()
 			file_format = FileFormat.PNG
-			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
-			$FrameTimer.stop()
 			if not was_exported:
 				orientation = Orientation.ROWS
-				lines_count = int(ceil(sqrt(Global.canvases.size())))
+				lines_count = int(ceil(sqrt(canvas_size)))
+			process_spritesheet()
+			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
+			$VBoxContainer/SpritesheetOptions/Frames/Frames.select(frame_current_tag)
+			$FrameTimer.stop()
 			$VBoxContainer/SpritesheetOptions/Orientation/Orientation.selected = orientation
-			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = Global.canvases.size()
+			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = canvas_size
 			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.value = lines_count
 			$VBoxContainer/SpritesheetOptions/Orientation/LinesCountLabel.text = "Columns:"
-			process_spritesheet()
 			$VBoxContainer/SpritesheetOptions.show()
 		ExportTab.ANIMATION:
 			set_file_format_selector()
@@ -139,6 +144,18 @@ func process_frame() -> void:
 
 
 func process_spritesheet() -> void:
+	# Range of frames determined by tags
+	var frames := []
+	if frame_current_tag > 0:
+		var frame_start = Global.animation_tags[frame_current_tag - 1][2]
+		var frame_end = Global.animation_tags[frame_current_tag - 1][3]
+		frames = Global.canvases.slice(frame_start-1, frame_end-1, 1, true)
+	else:
+		frames = Global.canvases
+
+	# Then store the size of frames for other functions
+	canvas_size = frames.size()
+
 	# If rows mode selected calculate columns count and vice versa
 	var spritesheet_columns = lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
 	var spritesheet_rows = lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
@@ -152,7 +169,8 @@ func process_spritesheet() -> void:
 	var origin := Vector2.ZERO
 	var hh := 0
 	var vv := 0
-	for canvas in Global.canvases:
+
+	for canvas in frames:
 		if orientation == Orientation.ROWS:
 			if vv < spritesheet_columns:
 				origin.x = canvas.size.x * vv
@@ -398,7 +416,7 @@ func create_export_path(multifile: bool, frame: int = 0) -> String:
 
 
 func frames_divided_by_spritesheet_lines() -> int:
-	return int(ceil(Global.canvases.size() / float(lines_count)))
+	return int(ceil(canvas_size / float(lines_count)))
 
 
 func file_format_string(format_enum : int) -> String:
@@ -428,9 +446,21 @@ func set_file_format_selector() -> void:
 			$VBoxContainer/AnimationOptions/AnimatedOptions.show()
 
 
+func create_frame_tag_list() -> void:
+	var frame_container := $VBoxContainer/SpritesheetOptions/Frames/Frames
+	# Clear existing tag list from entry if it exists
+	frame_container.clear()
+	frame_container.add_item("All Frames", 0) # Re-add removed 'All Frames' item
+
+	# Repopulate list with current tag list
+	for item in Global.animation_tags:
+		frame_container.add_item(item[0])
+
+
 func store_export_settings() -> void:
 	exported_tab = current_tab
 	exported_frame_number = frame_number
+	exported_frame_current_tag = frame_current_tag
 	exported_orientation = orientation
 	exported_lines_count = lines_count
 	exported_animation_type = animation_type
@@ -447,6 +477,7 @@ func store_export_settings() -> void:
 func restore_previous_export_settings() -> void:
 	current_tab = exported_tab
 	frame_number = exported_frame_number if exported_frame_number <= Global.canvases.size() else Global.canvases.size()
+	frame_current_tag = exported_frame_current_tag if exported_frame_current_tag <= Global.animation_tags.size() else 0
 	orientation = exported_orientation
 	lines_count = exported_lines_count
 	animation_type = exported_animation_type
@@ -630,3 +661,11 @@ func _on_ExportDialog_popup_hide() -> void:
 
 func _on_MultipleAnimationsDirectories_toggled(button_pressed : bool) -> void:
 	new_dir_for_each_frame_tag = button_pressed
+
+
+func _on_Frames_item_selected(id : int) -> void:
+	frame_current_tag = id
+	process_spritesheet()
+	set_preview()
+	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = canvas_size
+	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.value = lines_count

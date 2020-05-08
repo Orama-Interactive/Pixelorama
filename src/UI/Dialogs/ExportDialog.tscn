@@ -4,6 +4,7 @@
 [ext_resource path="res://addons/godot-gifexporter/src/GifExporter.gd" type="Script" id=2]
 
 [node name="ExportDialog" type="AcceptDialog"]
+visible = true
 margin_right = 532.0
 margin_bottom = 530.0
 rect_min_size = Vector2( 456, 530 )
@@ -45,18 +46,19 @@ text = "Preview:"
 [node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 54.0
 margin_right = 516.0
-margin_bottom = 274.0
+margin_bottom = 278.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Previews" type="GridContainer" parent="VBoxContainer/PreviewScroll"]
 margin_right = 516.0
-margin_bottom = 220.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
 [node name="FrameOptions" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
 margin_top = 278.0
 margin_right = 516.0
 margin_bottom = 302.0
@@ -85,13 +87,35 @@ rounded = true
 align = 2
 
 [node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 306.0
+margin_top = 282.0
 margin_right = 516.0
 margin_bottom = 330.0
 
-[node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
+[node name="Frames" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
 margin_right = 516.0
-margin_bottom = 24.0
+margin_bottom = 20.0
+
+[node name="FramesLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Frames"]
+margin_top = 3.0
+margin_right = 51.0
+margin_bottom = 17.0
+text = "Frames:"
+
+[node name="Frames" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Frames"]
+anchor_left = 0.00193798
+anchor_right = 0.00193798
+margin_left = 55.0
+margin_right = 516.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "All Frames"
+items = [ "All Frames", null, false, 0, null ]
+selected = 0
+
+[node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
+margin_top = 24.0
+margin_right = 516.0
+margin_bottom = 48.0
 alignment = 1
 
 [node name="OrientationLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
@@ -323,8 +347,8 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/home/wishdream/Pixelorama"
+current_path = "/home/wishdream/Pixelorama/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -370,6 +394,7 @@ __meta__ = {
 [connection signal="popup_hide" from="." to="." method="_on_ExportDialog_popup_hide"]
 [connection signal="tab_clicked" from="VBoxContainer/Tabs" to="." method="_on_Tabs_tab_clicked"]
 [connection signal="value_changed" from="VBoxContainer/FrameOptions/FrameNumber/FrameNumber" to="." method="_on_Frame_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Frames/Frames" to="." method="_on_Frames_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Orientation/Orientation" to="." method="_on_Orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimationType" to="." method="_on_AnimationType_item_selected"]
