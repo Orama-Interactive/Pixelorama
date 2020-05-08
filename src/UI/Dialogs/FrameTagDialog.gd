@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func _on_FrameTagDialog_about_to_show() -> void:
 	Global.can_draw = false
+	Global.control.modulate = Color(0.5, 0.5, 0.5)
 	for vbox in tag_vboxes:
 		vbox.queue_free()
 	tag_vboxes.clear()
@@ -58,6 +59,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 
 func _on_FrameTagDialog_popup_hide() -> void:
 	Global.can_draw = true
+	Global.control.modulate = Color.white
 
 
 func _on_AddTag_pressed() -> void:

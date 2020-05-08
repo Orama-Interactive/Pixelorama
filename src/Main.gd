@@ -175,6 +175,7 @@ func _ready() -> void:
 	yield(get_tree().create_timer(0.01), "timeout")
 	if Global.config_cache.get_value("preferences", "startup"):
 		$SplashDialog.popup_centered() # Splash screen
+		modulate = Color(0.5, 0.5, 0.5)
 	else:
 		Global.can_draw = true
 
@@ -198,6 +199,8 @@ func _ready() -> void:
 			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths[0], backup_path])
 			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths[0], backup_path])
 			$BackupConfirmation.popup_centered()
+			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		else:
 			if Global.open_last_project:
 				load_last_project()
@@ -258,9 +261,11 @@ func file_menu_id_pressed(id : int) -> void:
 			else:
 				$CreateNewImage.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		1: # Open
 			$OpenSprite.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 			opensprite_file_selected = false
 		2: # Open last project
 			# Check if last project path is set and if yes then open
@@ -268,34 +273,43 @@ func file_menu_id_pressed(id : int) -> void:
 				if Global.project_has_changed:
 					unsaved_canvas_state = id
 					$UnsavedCanvasDialog.popup_centered()
+					Global.can_draw = false
+					modulate = Color(0.5, 0.5, 0.5)
 				else:
 					load_last_project()
 			else: # if not then warn user that he didn't edit any project yet
 				$NoProjectEditedOrCreatedAlertDialog.popup_centered()
+				Global.can_draw = false
+				modulate = Color(0.5, 0.5, 0.5)
 		3: # Save
 			is_quitting_on_save = false
 			if OpenSave.current_save_path == "":
 				$SaveSprite.popup_centered()
 				Global.can_draw = false
+				modulate = Color(0.5, 0.5, 0.5)
 			else:
 				_on_SaveSprite_file_selected(OpenSave.current_save_path)
 		4: # Save as
 			is_quitting_on_save = false
 			$SaveSprite.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		5: # Import
 			$ImportSprites.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 			opensprite_file_selected = false
 		6: # Export
 			if $ExportDialog.was_exported == false:
 				$ExportDialog.popup_centered()
 				Global.can_draw = false
+				modulate = Color(0.5, 0.5, 0.5)
 			else:
 				$ExportDialog.external_export()
 		7: # Export as
 			$ExportDialog.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		8: # Quit
 			show_quit_dialog()
 
@@ -319,6 +333,7 @@ func edit_menu_id_pressed(id : int) -> void:
 		3: # Preferences
 			$PreferencesDialog.popup_centered(Vector2(400, 280))
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 
 
 func view_menu_id_pressed(id : int) -> void:
@@ -356,6 +371,7 @@ func image_menu_id_pressed(id : int) -> void:
 		0: # Scale Image
 			$ScaleImage.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		1: # Crop Image
 			# Use first layer as a starting rectangle
 			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
@@ -408,6 +424,7 @@ func image_menu_id_pressed(id : int) -> void:
 			$RotateImage.set_sprite(image)
 			$RotateImage.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		5: # Invert Colors
 			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
@@ -433,9 +450,11 @@ func image_menu_id_pressed(id : int) -> void:
 		7: # Outline
 			$OutlineDialog.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		8: # HSV
 			$HSVDialog.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 
 
 func help_menu_id_pressed(id : int) -> void:
@@ -443,6 +462,7 @@ func help_menu_id_pressed(id : int) -> void:
 		0: # Splash Screen
 			$SplashDialog.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 		1: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		2: # Changelog
@@ -450,6 +470,7 @@ func help_menu_id_pressed(id : int) -> void:
 		3: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 
 
 func load_last_project() -> void:
@@ -463,11 +484,15 @@ func load_last_project() -> void:
 		else:
 			# If file doesn't exist on disk then warn user about this
 			$OpenLastProjectAlertDialog.popup_centered()
+			Global.can_draw = false
+			modulate = Color(0.5, 0.5, 0.5)
 
 
 func _on_UnsavedCanvasDialog_confirmed() -> void:
 	if unsaved_canvas_state == 0: # New image
 		$CreateNewImage.popup_centered()
+		Global.can_draw = false
+		modulate = Color(0.5, 0.5, 0.5)
 	elif unsaved_canvas_state == 2: # Open last project
 		load_last_project()
 
@@ -504,6 +529,7 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 func _on_ImportSprites_popup_hide() -> void:
 	if !opensprite_file_selected:
 		Global.can_draw = true
+		modulate = Color.white
 
 
 func _on_ViewportContainer_mouse_entered() -> void:
@@ -516,6 +542,7 @@ func _on_ViewportContainer_mouse_exited() -> void:
 
 func _can_draw_true() -> void:
 	Global.can_draw = true
+	modulate = Color.white
 
 
 func _can_draw_false() -> void:
@@ -823,6 +850,7 @@ func show_quit_dialog() -> void:
 			$QuitAndSaveDialog.call_deferred("popup_centered")
 
 	Global.can_draw = false
+	modulate = Color(0.5, 0.5, 0.5)
 
 
 func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
@@ -831,6 +859,7 @@ func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 		$SaveSprite.popup_centered()
 		$QuitDialog.hide()
 		Global.can_draw = false
+		modulate = Color(0.5, 0.5, 0.5)
 		OpenSave.remove_backup()
 
 

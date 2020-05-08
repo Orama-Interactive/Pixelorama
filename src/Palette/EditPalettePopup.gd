@@ -26,6 +26,7 @@ func open(palette : String) -> void:
 		_display_palette()
 		Global.can_draw = false
 		self.popup_centered()
+		Global.control.modulate = Color(0.5, 0.5, 0.5)
 
 	left_color_button.modulate = Global.left_color_picker.color
 	right_color_button.modulate = Global.right_color_picker.color
@@ -188,3 +189,4 @@ func _on_RightColor_pressed() -> void:
 
 func _on_EditPalettePopup_popup_hide() -> void:
 	Global.can_draw = true
+	Global.control.modulate = Color.white
