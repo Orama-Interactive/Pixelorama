@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-06 19:07\n"
+"PO-Revision-Date: 2020-05-08 23:57\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -176,6 +176,12 @@ msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '
 
 msgid "Frame"
 msgstr "Καρέ"
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
 
 msgid "Spritesheet"
 msgstr "Φύλλο καρέ"
