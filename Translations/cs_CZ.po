@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-06 19:06\n"
+"PO-Revision-Date: 2020-05-08 23:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -176,6 +176,12 @@ msgstr "Nelze načíst soubor '%s'.\n"
 
 msgid "Frame"
 msgstr "Snímek"
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
