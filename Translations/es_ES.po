@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 12:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -352,6 +352,9 @@ msgstr "Grosor:"
 
 msgid "View Splash Screen"
 msgstr "Mostrar Pantalla de bienvenida"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Gestor de Problemas"
