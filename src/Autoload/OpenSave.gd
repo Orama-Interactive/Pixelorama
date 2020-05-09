@@ -38,18 +38,19 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 
 	var frame := 0
 	Global.layers.clear()
+	var linked_cels := []
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
 			var layer_name := file.get_line()
 			var layer_visibility := file.get_8()
 			var layer_lock := file.get_8()
-			var layer_new_frames_linked := file.get_8()
-			var linked_frames = file.get_var()
+			var layer_new_cels_linked := file.get_8()
+			linked_cels.append(file.get_var())
 
 			# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-			# will new frames be linked boolean (4), Array of linked frames (5)]
-			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_frames_linked, linked_frames])
+			# will new cels be linked boolean (4), Array of linked cels (5)]
+			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, []])
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -60,6 +61,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		var width := file.get_16()
 		var height := file.get_16()
 
+		var layer_i := 0
 		var layer_line := file.get_line()
 		while layer_line == "-": # Load layers
 			var buffer := file.get_buffer(width * height * 4)
@@ -78,6 +80,10 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
 			canvas.layers.append([image, tex, layer_transparency])
+			if frame in linked_cels[layer_i]:
+				Global.layers[layer_i][5].append(canvas)
+
+			layer_i += 1
 			layer_line = file.get_line()
 
 		var guide_line := file.get_line() # "guideline" no pun intended
@@ -168,8 +174,12 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 			file.store_line(layer[0]) # Layer name
 			file.store_8(layer[1]) # Layer visibility
 			file.store_8(layer[2]) # Layer lock
-			file.store_8(layer[4]) # Future frames linked
-			file.store_var(layer[5]) # Linked frames
+			file.store_8(layer[4]) # Future cels linked
+			var linked_cels := []
+			for canvas in layer[5]:
+				linked_cels.append(canvas.frame)
+			file.store_var(linked_cels) # Linked cels as cel numbers
+
 		file.store_line("END_GLOBAL_LAYERS")
 
 		 # Store frames

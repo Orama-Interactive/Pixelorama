@@ -42,6 +42,7 @@ var simple_drawer := SimpleDrawer.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var fill_layers := layers.empty()
+	var layer_i := 0
 	for l in Global.layers:
 		if fill_layers:
 			# The sprite itself
@@ -68,9 +69,10 @@ func _ready() -> void:
 		if self in l[5]:
 			# If the linked button is pressed, set as the Image & ImageTexture
 			# to be the same as the first linked cel
-			var current_layer := layers.size() - 1
-			layers[current_layer][0] = l[5][0].layers[current_layer][0]
-			layers[current_layer][1] = l[5][0].layers[current_layer][1]
+			layers[layer_i][0] = l[5][0].layers[layer_i][0]
+			layers[layer_i][1] = l[5][0].layers[layer_i][1]
+
+		layer_i += 1
 
 	# Only handle camera zoom settings & offset on the first frame
 	if Global.canvases[0] == self:

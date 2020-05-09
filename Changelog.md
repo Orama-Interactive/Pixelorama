@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 
 Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese),
-sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonfi)
+sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonfi), John Jerome Romero (Wishdream)
 
 ### Added
 - Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
