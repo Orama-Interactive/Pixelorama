@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 01:55\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -178,10 +178,10 @@ msgid "Frame"
 msgstr "Frame"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Frame:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Semua Frame"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -322,10 +322,10 @@ msgid "Gray"
 msgstr "Abu-abu"
 
 msgid "Blue"
-msgstr ""
+msgstr "Biru"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamel"
 
 msgid "Light"
 msgstr "Terang"
@@ -424,10 +424,10 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesia"
 
 msgid "Czech"
-msgstr ""
+msgstr "Ceko"
 
 msgid "Development Team"
 msgstr "Tim Developer"
@@ -460,7 +460,7 @@ msgid "Unsaved Image"
 msgstr "Gambar belum disimpan"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Perubahan belum tersimpan, perubahan akan hilang jika kamu melanjutkan."
 
 msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
@@ -489,7 +489,9 @@ msgstr "Seleksi Kotak\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan "
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -550,10 +552,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Balikkan ke warna default (hitam untuk kiri, putih untuk kanan)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Alat Kiri"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Alat Kanan"
 
 msgid "Left pixel indicator"
 msgstr "Indikator pixel kiri"
@@ -661,16 +663,16 @@ msgid "Same color pixels"
 msgstr "Pixel dengan warna yang sama"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Isi dengan:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Warna yang dipilih"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Pola"
 
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 msgid "Lighten"
 msgstr "Terangkan"
@@ -821,7 +823,7 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Sambungkan/Link Cel"
 
 msgid "Unlink Cel"
 msgstr "Putuskan/Unlink Cel"
