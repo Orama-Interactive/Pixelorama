@@ -29,9 +29,22 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		file.close()
 		return
 
-	var file_version := file.get_line() # Example, "v0.6"
-	var file_major_version = int(file_version.substr(1, 1))
-	var file_minor_version = int(file_version.substr(3, 1))
+	var file_version := file.get_line() # Example, "v0.7.10-beta"
+	var file_ver_splitted := file_version.split("-")
+	var file_ver_splitted_numbers := file_ver_splitted[0].split(".")
+
+	# In the above example, the major version would return "0",
+	# the minor version would return "7", the patch "10"
+	# and the status would return "beta"
+	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
+	var file_minor_version = int(file_ver_splitted_numbers[1])
+	var _file_patch_version := 0
+	var _file_status_version : String
+
+	if file_ver_splitted_numbers.size() > 2:
+		_file_patch_version = int(file_ver_splitted_numbers[2])
+	if file_ver_splitted.size() > 1:
+		_file_status_version = file_ver_splitted[1]
 
 	if file_major_version == 0 and file_minor_version < 5:
 		Global.notification_label("File is from an older version of Pixelorama, as such it might not work properly")
@@ -80,8 +93,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var tex := ImageTexture.new()
 			tex.create_from_image(image, 0)
 			canvas.layers.append([image, tex, layer_transparency])
-			if frame in linked_cels[layer_i]:
-				Global.layers[layer_i][5].append(canvas)
+			if file_major_version >= 0 and file_minor_version >= 7:
+				if frame in linked_cels[layer_i]:
+					Global.layers[layer_i][5].append(canvas)
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -166,7 +180,7 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
 	if err == OK:
 		# Store Pixelorama version
-		file.store_line(ProjectSettings.get_setting("application/config/Version"))
+		file.store_line(Global.current_version)
 
 		# Store Global layers
 		for layer in Global.layers:
