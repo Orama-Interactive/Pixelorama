@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-09 10:57\n"
+"PO-Revision-Date: 2020-05-09 12:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -353,6 +353,9 @@ msgstr "Tloušťka:"
 
 msgid "View Splash Screen"
 msgstr "Zobrazit uvítací obrazovku"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Nahlášení potíží"
