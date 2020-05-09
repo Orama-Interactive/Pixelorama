@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "確定"
@@ -352,6 +352,9 @@ msgstr "粗細:"
 
 msgid "View Splash Screen"
 msgstr "關於"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "回報問題"
