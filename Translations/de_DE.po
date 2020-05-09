@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 12:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,10 +177,10 @@ msgid "Frame"
 msgstr "Frame"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Frames:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Alle Frames"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -321,10 +321,10 @@ msgid "Gray"
 msgstr "Grau"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamell"
 
 msgid "Light"
 msgstr "Hell"
