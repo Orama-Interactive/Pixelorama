@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 01:15\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -178,10 +178,10 @@ msgid "Frame"
 msgstr "Καρέ"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Καρέ:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Όλα τα καρέ"
 
 msgid "Spritesheet"
 msgstr "Φύλλο καρέ"
