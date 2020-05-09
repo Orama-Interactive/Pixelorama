@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-09 01:55\n"
+"PO-Revision-Date: 2020-05-09 02:05\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -966,13 +966,13 @@ msgid "File saved"
 msgstr "File Tersimpan"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "File tersimpan"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "File gagal dibuka"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "File gagal disimpan"
 
 msgid "File exported"
 msgstr "File sudah terekspor"
