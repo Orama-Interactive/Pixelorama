@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-09 03:25\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -353,6 +353,9 @@ msgstr "Ketebalan:"
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Issue Tracker"
