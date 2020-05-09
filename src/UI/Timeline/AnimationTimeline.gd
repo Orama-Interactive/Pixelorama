@@ -225,6 +225,10 @@ func _on_PlayBackwards_toggled(button_pressed : bool) -> void:
 
 
 func _on_AnimationTimer_timeout() -> void:
+	if first_frame == last_frame:
+		$AnimationTimer.stop()
+		return
+
 	if animation_forward:
 		if Global.current_frame < last_frame:
 			Global.current_frame += 1
@@ -257,6 +261,21 @@ func _on_AnimationTimer_timeout() -> void:
 
 
 func play_animation(play : bool, forward_dir : bool) -> void:
+	first_frame = 0
+	last_frame = Global.canvases.size() - 1
+	if Global.play_only_tags:
+		for tag in Global.animation_tags:
+			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
+				first_frame = tag[2] - 1
+				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
+
+	if first_frame == last_frame:
+		if forward_dir:
+			Global.play_forward.pressed = false
+		else:
+			Global.play_backwards.pressed = false
+		return
+
 	if forward_dir:
 		Global.play_backwards.disconnect("toggled", self, "_on_PlayBackwards_toggled")
 		Global.play_backwards.pressed = false
@@ -267,20 +286,6 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 		Global.play_forward.pressed = false
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
 		Global.play_forward.connect("toggled", self, "_on_PlayForward_toggled")
-	if Global.canvases.size() == 1:
-		if forward_dir:
-			Global.play_forward.pressed = false
-		else:
-			Global.play_backwards.pressed = false
-		return
-
-	first_frame = 0
-	last_frame = Global.canvases.size() - 1
-	if Global.play_only_tags:
-		for tag in Global.animation_tags:
-			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
-				first_frame = tag[2] - 1
-				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
 
 	if play:
 		Global.animation_timer.wait_time = 1 / fps
