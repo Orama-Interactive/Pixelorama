@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-09 02:56\n"
+"PO-Revision-Date: 2020-05-09 03:25\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1135,27 +1135,28 @@ msgid "Enable autosave"
 msgstr "Aktifkan autosave (simpan otomatis)"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Selang waktu menyimpan otomatis:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "menit"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Buat direktori baru untuk setiap frame tag"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Buat banyak file tetapi setiap file disimpan di direktori berbeda yang sesuai dengan tag frame-nya"
 
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Backup yang tersimpan otomatis untuk %s ditemukan\n"
+"Apakah kamu ingin muat ulang?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Backup dimuat ulang"
 
