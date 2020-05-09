@@ -71,6 +71,7 @@ func _ready() -> void:
 		}
 	var help_menu_items := {
 		"View Splash Screen" : 0,
+		"Online Docs" : 0,
 		"Issue Tracker" : 0,
 		"Changelog" : 0,
 		"About Pixelorama" : 0
@@ -447,11 +448,13 @@ func help_menu_id_pressed(id : int) -> void:
 		0: # Splash Screen
 			$SplashDialog.popup_centered()
 			Global.dialog_open(true)
-		1: # Issue Tracker
+		1: # Online Docs
+			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
+		2: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
-		2: # Changelog
+		3: # Changelog
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/Changelog.md#v07---unreleased")
-		3: # About Pixelorama
+		4: # About Pixelorama
 			$AboutDialog.popup_centered()
 			Global.dialog_open(true)
 
