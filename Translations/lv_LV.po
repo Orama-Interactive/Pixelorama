@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -353,6 +353,9 @@ msgstr "Biezums:"
 
 msgid "View Splash Screen"
 msgstr "Rādīt uzplaiksnījuma ekrānu"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Problēmu izsekotājs"
