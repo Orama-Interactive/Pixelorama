@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -352,6 +352,9 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "View Splash Screen"
+msgstr ""
+
+msgid "Online Docs"
 msgstr ""
 
 msgid "Issue Tracker"
