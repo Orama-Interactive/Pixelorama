@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-09 02:05\n"
+"PO-Revision-Date: 2020-05-09 02:56\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1132,7 +1132,7 @@ msgid "Opens last opened project on startup"
 msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Aktifkan autosave (simpan otomatis)"
 
 msgid "Autosave interval:"
 msgstr ""
