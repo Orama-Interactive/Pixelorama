@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-08 23:57\n"
+"PO-Revision-Date: 2020-05-09 01:15\n"
 
 msgid "OK"
 msgstr "确定"
@@ -178,10 +178,10 @@ msgid "Frame"
 msgstr "帧"
 
 msgid "Frames:"
-msgstr ""
+msgstr "帧:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "所有帧"
 
 msgid "Spritesheet"
 msgstr "精灵表"
@@ -325,7 +325,7 @@ msgid "Blue"
 msgstr "蓝色"
 
 msgid "Caramel"
-msgstr ""
+msgstr "浅褐色"
 
 msgid "Light"
 msgstr "白色"
