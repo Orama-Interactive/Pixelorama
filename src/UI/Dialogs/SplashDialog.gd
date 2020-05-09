@@ -56,20 +56,20 @@ func _on_DiscordButton_pressed() -> void:
 
 
 func _on_NewBtn_pressed() -> void:
-	Global.control.file_menu_id_pressed(0)
 	visible = false
+	Global.control.file_menu_id_pressed(0)
 
 
 func _on_OpenBtn__pressed() -> void:
-	Global.control.file_menu_id_pressed(1)
 	visible = false
+	Global.control.file_menu_id_pressed(1)
 
 
 func _on_OpenLastBtn_pressed() -> void:
-	Global.control.file_menu_id_pressed(2)
 	visible = false
+	Global.control.file_menu_id_pressed(2)
 
 
 func _on_ImportBtn_pressed() -> void:
-	Global.control.file_menu_id_pressed(5)
 	visible = false
+	Global.control.file_menu_id_pressed(5)

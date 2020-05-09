@@ -344,6 +344,9 @@ msgstr ""
 msgid "View Splash Screen"
 msgstr ""
 
+msgid "Online Docs"
+msgstr ""
+
 msgid "Issue Tracker"
 msgstr ""
 

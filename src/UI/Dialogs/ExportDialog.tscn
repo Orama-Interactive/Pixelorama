@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/godot-gifexporter/src/GifExporter.gd" type="Script" id=2]
 
 [node name="ExportDialog" type="AcceptDialog"]
-visible = true
 margin_right = 532.0
 margin_bottom = 530.0
 rect_min_size = Vector2( 456, 530 )
@@ -347,8 +346,8 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "/home/wishdream/Pixelorama"
-current_path = "/home/wishdream/Pixelorama/"
+current_dir = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "C:/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
