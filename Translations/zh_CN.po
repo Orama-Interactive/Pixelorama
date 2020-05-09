@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-09 01:15\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "确定"
@@ -353,6 +353,9 @@ msgstr "厚度:"
 
 msgid "View Splash Screen"
 msgstr "查看启动画面"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "问题追踪器"
