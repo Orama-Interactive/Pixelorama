@@ -8,85 +8,85 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-05-09 12:59\n"
+"PO-Revision-Date: 2020-05-10 14:47\n"
 
 msgid "OK"
-msgstr ""
+msgstr "حسنا"
 
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 msgid "Open"
-msgstr ""
+msgstr "فتح"
 
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "الرجاء التأكيد..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "حجم الصورة"
 
 msgid "Width:"
-msgstr ""
+msgstr "العرض:"
 
 msgid "Height:"
-msgstr ""
+msgstr "الطول:"
 
 msgid "File"
-msgstr ""
+msgstr "الملف"
 
 msgid "Edit"
-msgstr ""
+msgstr "تعديل"
 
 msgid "View"
-msgstr ""
+msgstr "عرض"
 
 msgid "Image"
-msgstr ""
+msgstr "الصورة"
 
 msgid "Effects"
-msgstr ""
+msgstr "التأثيرات"
 
 msgid "Help"
-msgstr ""
+msgstr "مساعدة"
 
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 msgid "New..."
-msgstr ""
+msgstr "جديد..."
 
 msgid "Open..."
-msgstr ""
+msgstr "فتخ..."
 
 msgid "Save..."
-msgstr ""
+msgstr "حفظ..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "حفظ باسم..."
 
 msgid "Import"
-msgstr ""
+msgstr "استيراد"
 
 msgid "Import..."
-msgstr ""
+msgstr "استيراد..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "استيراد PNG..."
 
 msgid "Export"
-msgstr ""
+msgstr "تصدير"
 
 msgid "Export..."
-msgstr ""
+msgstr "تصدير..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "تصدير باسم..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "تصدير PNG..."
 
 msgid "Export PNG as..."
 msgstr ""
