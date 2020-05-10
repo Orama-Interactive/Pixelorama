@@ -159,3 +159,29 @@ func zoom_camera(dir : int) -> void:
 func _on_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
+
+
+func fit_to_frame() -> void:
+	viewport_container = get_parent().get_parent()
+	var h_ratio := viewport_container.rect_size.x / Global.canvas.size.x
+	var v_ratio := viewport_container.rect_size.y / Global.canvas.size.y
+	var ratio := min(h_ratio, v_ratio)
+	if ratio == 0:
+		ratio = 0.1 # Set it to a non-zero value just in case
+		# If the ratio is 0, it means that the viewport container is hidden
+		# in that case, use the other viewport to get the ratio
+		if name == "Camera2D":
+			h_ratio = Global.second_viewport.rect_size.x / Global.canvas.size.x
+			v_ratio = Global.second_viewport.rect_size.y / Global.canvas.size.y
+			ratio = min(h_ratio, v_ratio)
+		elif name == "Camera2D2":
+			h_ratio = Global.main_viewport.rect_size.x / Global.canvas.size.x
+			v_ratio = Global.main_viewport.rect_size.y / Global.canvas.size.y
+			ratio = min(h_ratio, v_ratio)
+
+	zoom = Vector2(1 / ratio, 1 / ratio)
+	offset = Global.canvas.size / 2
+	if name == "Camera2D":
+		Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
+		Global.horizontal_ruler.update()
+		Global.vertical_ruler.update()

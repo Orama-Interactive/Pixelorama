@@ -539,19 +539,9 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 		Global.camera_preview.zoom_max = Vector2.ONE
 
-	var smaller_viewport_axis = min(Global.main_viewport.rect_size.x, Global.main_viewport.rect_size.y)
-	Global.camera.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) / smaller_viewport_axis
-	Global.camera2.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.002
-	Global.camera_preview.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.007
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-
-	# Set camera offset to the center of canvas
-	Global.camera.offset = size / 2
-	Global.camera2.offset = size / 2
-	Global.camera_preview.offset = size / 2
-
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
+	Global.camera.fit_to_frame()
+	Global.camera2.fit_to_frame()
+	Global.camera_preview.fit_to_frame()
 
 	Global.transparent_checker._ready() # To update the rect size
 

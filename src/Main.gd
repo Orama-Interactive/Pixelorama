@@ -791,13 +791,7 @@ func _on_RightZoomModeOptions_item_selected(ID : int) -> void:
 
 
 func _on_FitToFrameButton_pressed() -> void:
-	var bigger_canvas_axis = max(Global.canvas.size.x, Global.canvas.size.y)
-	var smaller_viewport_axis = min(Global.main_viewport.rect_size.x, Global.main_viewport.rect_size.y)
-	Global.camera.zoom = Vector2(bigger_canvas_axis, bigger_canvas_axis) / smaller_viewport_axis
-	Global.camera.offset = Global.canvas.size / 2
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
+	Global.camera.fit_to_frame()
 
 
 func _on_100ZoomButton_pressed() -> void:
