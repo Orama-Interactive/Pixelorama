@@ -38,6 +38,11 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.control.opensprite_file_selected = true
 	if !new_frame: # If we're not adding a new frame, delete the previous
 		Global.clear_canvases()
+		Global.layers.clear()
+		# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
+		# will new frames be linked boolean (4), Array of linked frames (5)]
+		Global.layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
+		Global.current_layer = 0
 
 	var first_path : String = paths[0]
 	var i : int = Global.canvases.size()
@@ -142,6 +147,8 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.canvases = Global.canvases # Just to call Global.canvases_changed
 	Global.current_frame = i - 1
 	Global.canvas = Global.canvases[Global.canvases.size() - 1]
+	if !new_frame:
+		Global.layers = Global.layers # Just to call Global.layers_changed
 	Global.canvas.visible = true
 
 	Global.window_title = first_path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
