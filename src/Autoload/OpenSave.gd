@@ -51,6 +51,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 
 	var frame := 0
 	Global.layers.clear()
+
 	var linked_cels := []
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
@@ -123,6 +124,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		frame += 1
 
 	Global.canvases = Global.canvases # Just to call Global.canvases_changed
+	Global.current_layer = Global.layers.size() - 1
 	Global.current_frame = frame - 1
 	Global.layers = Global.layers # Just to call Global.layers_changed
 	# Load tool options
