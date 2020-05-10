@@ -458,7 +458,10 @@ func _input(event : InputEvent) -> void:
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
 		"ColorPicker":
 			if can_handle:
-				var pixel_color : Color = sprite.get_pixelv(mouse_pos)
+				var image_data := Image.new()
+				image_data.copy_from(sprite)
+				image_data.lock()
+				var pixel_color : Color = image_data.get_pixelv(mouse_pos)
 				if color_picker_for == 0: # Pick for the left color
 					Global.left_color_picker.color = pixel_color
 					Global.update_left_custom_brush()
