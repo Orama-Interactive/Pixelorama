@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-05-10 14:58\n"
+"PO-Revision-Date: 2020-05-10 15:13\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -122,7 +122,7 @@ msgid "Preferences"
 msgstr "خيارات"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "وضع البلاط"
 
 msgid "Show Grid"
 msgstr ""
@@ -137,16 +137,16 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "الملئ باللون:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "فتح ملف"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "فتح ملفات"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "استيراد كإطار جديد"
 
 msgid "Import as a spritesheet"
 msgstr ""
@@ -288,7 +288,7 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "اختصارات"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -306,28 +306,28 @@ msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "اللون:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "دليل الألوان:"
 
 msgid "System Language"
-msgstr ""
+msgstr "لغة النظام"
 
 msgid "Dark"
-msgstr ""
+msgstr "غامق"
 
 msgid "Gray"
-msgstr ""
+msgstr "رمادي"
 
 msgid "Blue"
-msgstr ""
+msgstr "أزرق"
 
 msgid "Caramel"
 msgstr ""
 
 msgid "Light"
-msgstr ""
+msgstr "فاتح"
 
 msgid "Invert colors"
 msgstr ""
@@ -363,70 +363,70 @@ msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "حول Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "تم تطويره بواسطة Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "الموقع"
 
 msgid "Donate"
-msgstr ""
+msgstr "تبرّع"
 
 msgid "Developers"
-msgstr ""
+msgstr "المبرمجون"
 
 msgid "Contributors"
-msgstr ""
+msgstr "المُساهمون"
 
 msgid "Donors"
-msgstr ""
+msgstr "المتبرعون"
 
 msgid "Translators"
-msgstr ""
+msgstr "المترجمون"
 
 msgid "English"
-msgstr ""
+msgstr "الإنجليزية"
 
 msgid "Greek"
-msgstr ""
+msgstr "اليونانية"
 
 msgid "French"
-msgstr ""
+msgstr "الفرنسية"
 
 msgid "German"
-msgstr ""
+msgstr "الألمانية"
 
 msgid "Polish"
-msgstr ""
+msgstr "اليولندية"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "البرتغالية البرازلية"
 
 msgid "Russian"
-msgstr ""
+msgstr "الروسية"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "الصينية المبسّطة"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "الصينية التقليدية"
 
 msgid "Italian"
-msgstr ""
+msgstr "الإيطالية"
 
 msgid "Latvian"
-msgstr ""
+msgstr "اللاتفية"
 
 msgid "Spanish"
-msgstr ""
+msgstr "الإسبانية"
 
 msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr ""
+msgstr "الإندونيسية"
 
 msgid "Czech"
 msgstr ""
