@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-09 23:15\n"
+"PO-Revision-Date: 2020-05-11 17:09\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -341,6 +341,27 @@ msgstr "Περίγραμμα"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
+
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
 
 msgid "Diagonal"
 msgstr "Διαγώνιος"
@@ -994,6 +1015,9 @@ msgstr "Όνομα Παλέτας:"
 
 msgid "Color Name:"
 msgstr "Όνομα Χρώματος:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Δημιουργία νέας κενής παλέτας;"
