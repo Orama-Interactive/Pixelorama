@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-11 11:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,10 +177,10 @@ msgid "Frame"
 msgstr "Klatka"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Klatki:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Wszystkie klatki"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -354,7 +354,7 @@ msgid "View Splash Screen"
 msgstr "Pokaż ekran powitalny"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Dokumentacja Online"
 
 msgid "Issue Tracker"
 msgstr "Zgłaszanie problemów"
