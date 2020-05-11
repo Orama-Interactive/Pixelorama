@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-11 17:09\n"
 
 msgid "OK"
 msgstr ""
@@ -339,6 +339,27 @@ msgid "Outline"
 msgstr ""
 
 msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Diagonal"
@@ -964,6 +985,9 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
+msgstr ""
+
+msgid "Use current left & right colors"
 msgstr ""
 
 msgid "Create a new empty palette?"
