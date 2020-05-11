@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-11 17:08\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -340,6 +340,27 @@ msgid "Outline"
 msgstr "Konturoj"
 
 msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Diagonal"
@@ -966,6 +987,9 @@ msgstr "Nomo de paletro:"
 
 msgid "Color Name:"
 msgstr "Nomo de koloro:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Ĉu krei novan malplenan paletron?"
