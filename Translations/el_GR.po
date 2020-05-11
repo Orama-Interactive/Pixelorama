@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-11 17:36\n"
+"PO-Revision-Date: 2020-05-11 19:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -295,7 +295,7 @@ msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "Η μετάβαση στο ζουμ είναι πιο ομαλή"
+msgstr "Κάνει την μετάβαση στην μεγέθυνση ή σμίκρυνση πιο ομαλή"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Ευαισθησία πίεσης tablet:"
@@ -343,25 +343,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ρύθμιση HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Είδος:"
 
 msgid "Angle:"
 msgstr "Γωνία:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Απόχρωση"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Κορεσμός"
 
 msgid "Value"
-msgstr ""
+msgstr "Τιμή"
 
 msgid "Apply"
-msgstr ""
+msgstr "Εφαρμογή"
 
 msgid "Diagonal"
 msgstr "Διαγώνιος"
@@ -1017,7 +1017,7 @@ msgid "Color Name:"
 msgstr "Όνομα Χρώματος:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Χρήση των επιλεγμένων χρωμάτων (αριστερού & δεξιού)"
 
 msgid "Create a new empty palette?"
 msgstr "Δημιουργία νέας κενής παλέτας;"
