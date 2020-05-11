@@ -332,6 +332,27 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr ""
 
@@ -955,6 +976,9 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
+msgstr ""
+
+msgid "Use current left & right colors"
 msgstr ""
 
 msgid "Create a new empty palette?"

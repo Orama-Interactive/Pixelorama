@@ -2,8 +2,6 @@
 
 [ext_resource path="res://src/UI/Dialogs/RotateImage.gd" type="Script" id=1]
 
-
-
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
 margin_bottom = 241.0
@@ -79,6 +77,7 @@ margin_right = 229.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 359.0
+suffix = "°"
 [connection signal="about_to_show" from="." to="." method="_on_RotateImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_RotateImage_confirmed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_OptionButton_item_selected"]

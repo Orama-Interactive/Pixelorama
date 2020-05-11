@@ -149,32 +149,32 @@ text = "File"
 switch_on_hover = true
 
 [node name="EditMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
-margin_left = 32.0
-margin_right = 63.0
+margin_left = 33.0
+margin_right = 64.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "Edit"
 switch_on_hover = true
 
 [node name="ViewMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
-margin_left = 66.0
-margin_right = 102.0
+margin_left = 68.0
+margin_right = 104.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
 
 [node name="ImageMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
-margin_left = 105.0
-margin_right = 149.0
+margin_left = 108.0
+margin_right = 152.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "Image"
 switch_on_hover = true
 
 [node name="HelpMenu" type="MenuButton" parent="MenuAndUI/TopMenuContainer/MenuItems"]
-margin_left = 152.0
-margin_right = 187.0
+margin_left = 156.0
+margin_right = 191.0
 margin_bottom = 21.0
 mouse_default_cursor_shape = 2
 text = "Help"
@@ -682,8 +682,8 @@ margin_bottom = 51.0
 alignment = 1
 
 [node name="LeftBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/LeftPanelContainer/LeftToolOptions/LeftBrushType"]
-margin_left = 15.0
-margin_right = 51.0
+margin_left = 14.0
+margin_right = 50.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 hint_tooltip = "Select a brush"
@@ -1097,8 +1097,8 @@ margin_bottom = 51.0
 alignment = 1
 
 [node name="RightBrushTypeButton" type="TextureButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer/ToolOptions/RightPanelContainer/RightToolOptions/RightBrushType"]
-margin_left = 15.0
-margin_right = 51.0
+margin_left = 14.0
+margin_right = 50.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 36, 32 )
 hint_tooltip = "Select a brush"
@@ -1516,8 +1516,8 @@ margin_right = 291.0
 margin_bottom = 51.0
 
 [node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer"]
-margin_left = 59.0
-margin_right = 232.0
+margin_left = 58.0
+margin_right = 233.0
 margin_bottom = 32.0
 
 [node name="AddPalette" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
@@ -1557,8 +1557,8 @@ __meta__ = {
 [node name="EditPalette" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 35.0
-margin_right = 67.0
+margin_left = 36.0
+margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Edit currently selected palette"
@@ -1582,8 +1582,8 @@ __meta__ = {
 }
 
 [node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
-margin_left = 70.0
-margin_right = 173.0
+margin_left = 72.0
+margin_right = 175.0
 margin_bottom = 32.0
 grow_horizontal = 0
 rect_min_size = Vector2( 103, 0 )

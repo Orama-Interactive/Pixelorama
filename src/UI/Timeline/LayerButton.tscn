@@ -5,8 +5,6 @@
 [ext_resource path="res://assets/graphics/dark_themes/layers/unlock.png" type="Texture" id=3]
 [ext_resource path="res://assets/graphics/dark_themes/layers/unlinked_layer.png" type="Texture" id=4]
 
-
-
 [node name="LayerContainer" type="Button"]
 margin_right = 210.0
 margin_bottom = 36.0

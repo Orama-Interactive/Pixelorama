@@ -101,11 +101,10 @@ margin_bottom = 17.0
 text = "Frames:"
 
 [node name="Frames" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Frames"]
-anchor_left = 0.00193798
-anchor_right = 0.00193798
 margin_left = 55.0
 margin_right = 516.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "All Frames"
 items = [ "All Frames", null, false, 0, null ]
@@ -175,6 +174,7 @@ margin_top = 28.0
 margin_right = 516.0
 margin_bottom = 52.0
 hint_tooltip = "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+mouse_default_cursor_shape = 2
 text = "Create new directory for each frame tag"
 
 [node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer/AnimationOptions"]
