@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-11 17:09\n"
 
 msgid "OK"
 msgstr "確定"
@@ -339,6 +339,27 @@ msgid "Outline"
 msgstr "描邊"
 
 msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Diagonal"
@@ -990,6 +1011,9 @@ msgstr "色盤名稱:"
 
 msgid "Color Name:"
 msgstr "顏色:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "新增空的色盤?"
