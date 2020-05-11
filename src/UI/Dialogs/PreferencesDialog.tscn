@@ -147,7 +147,6 @@ margin_right = 494.0
 margin_bottom = 124.0
 hint_tooltip = "Opens last opened project on startup"
 mouse_default_cursor_shape = 2
-pressed = true
 text = "Open last project on startup"
 
 [node name="EnableAutosave" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/General"]
@@ -155,6 +154,7 @@ margin_top = 128.0
 margin_right = 494.0
 margin_bottom = 152.0
 mouse_default_cursor_shape = 2
+pressed = true
 text = "Enable autosave"
 __meta__ = {
 "_edit_use_anchors_": false

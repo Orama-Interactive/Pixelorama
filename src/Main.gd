@@ -168,7 +168,6 @@ func _ready() -> void:
 	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
 	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
 
-
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 
@@ -179,11 +178,6 @@ func _ready() -> void:
 		modulate = Color(0.5, 0.5, 0.5)
 	else:
 		Global.can_draw = true
-
-	if not Global.config_cache.has_section_key("preferences", "open_last_project"):
-		Global.config_cache.set_value("preferences", "open_last_project", true)
-	if Global.config_cache.get_value("preferences", "open_last_project"):
-		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
 
 	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
 	$BackupConfirmation.get_cancel().text = tr("Delete")

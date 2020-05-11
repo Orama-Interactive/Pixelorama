@@ -15,7 +15,7 @@ func _ready() -> void:
 	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
 	add_child(autosave_timer)
 	set_autosave_interval(default_autosave_interval)
-	toggle_autosave(false) # Gets started from preferences dialog
+	toggle_autosave(true) # Gets started from preferences dialog
 
 
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
