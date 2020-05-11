@@ -542,9 +542,9 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 		Global.camera_preview.zoom_max = Vector2.ONE
 
-	Global.camera.fit_to_frame()
-	Global.camera2.fit_to_frame()
-	Global.camera_preview.fit_to_frame()
+	Global.camera.fit_to_frame(size)
+	Global.camera2.fit_to_frame(size)
+	Global.camera_preview.fit_to_frame(size)
 
 	Global.transparent_checker._ready() # To update the rect size
 

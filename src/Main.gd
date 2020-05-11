@@ -785,7 +785,7 @@ func _on_RightZoomModeOptions_item_selected(ID : int) -> void:
 
 
 func _on_FitToFrameButton_pressed() -> void:
-	Global.camera.fit_to_frame()
+	Global.camera.fit_to_frame(Global.canvas.size)
 
 
 func _on_100ZoomButton_pressed() -> void:
