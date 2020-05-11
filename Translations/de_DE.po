@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-05-05 00:55\n"
+"PO-Revision-Date: 2020-05-11 08:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -176,6 +176,12 @@ msgstr "Kann Datei nicht laden '%s'. Error code: %s"
 msgid "Frame"
 msgstr "Frame"
 
+msgid "Frames:"
+msgstr "Frames:"
+
+msgid "All Frames"
+msgstr "Alle Frames"
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -314,8 +320,11 @@ msgstr "Dunkel"
 msgid "Gray"
 msgstr "Grau"
 
-msgid "Gold"
-msgstr "Gold"
+msgid "Blue"
+msgstr "Blau"
+
+msgid "Caramel"
+msgstr "Karamell"
 
 msgid "Light"
 msgstr "Hell"
@@ -343,6 +352,9 @@ msgstr "Dicke:"
 
 msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
+
+msgid "Online Docs"
+msgstr "Online Docs"
 
 msgid "Issue Tracker"
 msgstr "Problemverfolger"
@@ -412,6 +424,12 @@ msgstr "Spanisch"
 
 msgid "Esperanto"
 msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr "Indonesisch"
+
+msgid "Czech"
+msgstr "Tschechisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
@@ -1116,6 +1134,15 @@ msgstr "Beim Starten letztes Projekt laden"
 
 msgid "Opens last opened project on startup"
 msgstr "Öffnet das zuletzt geöffnete Projekt beim Start"
+
+msgid "Enable autosave"
+msgstr "Autospeichern aktivieren"
+
+msgid "Autosave interval:"
+msgstr "Autospeicherintervall:"
+
+msgid "minute(s)"
+msgstr "Minute(n)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Neues Verzeichnis für jeden Frame Tag erstellen"

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-05 10:38\n"
+"PO-Revision-Date: 2020-05-09 12:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,6 +177,12 @@ msgstr "Nelze načíst soubor '%s'.\n"
 msgid "Frame"
 msgstr "Snímek"
 
+msgid "Frames:"
+msgstr "Snímky:"
+
+msgid "All Frames"
+msgstr "Všechny snímky"
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -315,8 +321,11 @@ msgstr "Tmavý"
 msgid "Gray"
 msgstr "Šedý"
 
-msgid "Gold"
-msgstr "Zlatý"
+msgid "Blue"
+msgstr "Modrá"
+
+msgid "Caramel"
+msgstr "Karamel"
 
 msgid "Light"
 msgstr "Světlý"
@@ -344,6 +353,9 @@ msgstr "Tloušťka:"
 
 msgid "View Splash Screen"
 msgstr "Zobrazit uvítací obrazovku"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Nahlášení potíží"
@@ -414,6 +426,12 @@ msgstr "Španělština"
 msgid "Esperanto"
 msgstr "Esperanto"
 
+msgid "Indonesian"
+msgstr "Indonéština"
+
+msgid "Czech"
+msgstr "Čeština"
+
 msgid "Development Team"
 msgstr "Vývojářský tým"
 
@@ -445,7 +463,7 @@ msgid "Unsaved Image"
 msgstr "Neuložený obrázek"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Máte neuložené změny. Pokud budete pokračovat, pokrok, kterého jste dosáhli, bude ztracen."
 
 msgid "Save before exiting?"
 msgstr "Uložit před ukončením?"
@@ -1117,6 +1135,15 @@ msgstr "Otevřít poslední projekt při spuštění"
 
 msgid "Opens last opened project on startup"
 msgstr "Otevřít naposledy otevřený projekt při spuštění"
+
+msgid "Enable autosave"
+msgstr "Povolit automatické ukládání"
+
+msgid "Autosave interval:"
+msgstr "Interval automatického ukládání:"
+
+msgid "minute(s)"
+msgstr "minuta(y)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Vytvořit novou složku pro každý štítek snímků"

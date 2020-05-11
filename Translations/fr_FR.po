@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-02 20:25\n"
+"PO-Revision-Date: 2020-05-09 12:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,6 +177,12 @@ msgstr "Impossible de charger le fichier '%s'.\n"
 msgid "Frame"
 msgstr ""
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -315,8 +321,11 @@ msgstr "Sombre"
 msgid "Gray"
 msgstr "Gris"
 
-msgid "Gold"
-msgstr "Doré"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "Clair"
@@ -344,6 +353,9 @@ msgstr "Épaisseur:"
 
 msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Suivi des problèmes"
@@ -412,6 +424,12 @@ msgid "Spanish"
 msgstr "Espagnol"
 
 msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
 msgstr ""
 
 msgid "Development Team"
@@ -1112,6 +1130,15 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
 msgstr ""
 
 msgid "Create new directory for each frame tag"

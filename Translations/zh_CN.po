@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-03 15:26\n"
+"PO-Revision-Date: 2020-05-10 10:36\n"
 
 msgid "OK"
 msgstr "确定"
@@ -177,6 +177,12 @@ msgstr "无法加载文件 '%s'。\n"
 msgid "Frame"
 msgstr "帧"
 
+msgid "Frames:"
+msgstr "帧:"
+
+msgid "All Frames"
+msgstr "所有帧"
+
 msgid "Spritesheet"
 msgstr "精灵表"
 
@@ -315,8 +321,11 @@ msgstr "深色"
 msgid "Gray"
 msgstr "灰色"
 
-msgid "Gold"
-msgstr "金色"
+msgid "Blue"
+msgstr "蓝色"
+
+msgid "Caramel"
+msgstr "浅褐色"
 
 msgid "Light"
 msgstr "白色"
@@ -344,6 +353,9 @@ msgstr "厚度:"
 
 msgid "View Splash Screen"
 msgstr "查看启动画面"
+
+msgid "Online Docs"
+msgstr "在线文档"
 
 msgid "Issue Tracker"
 msgstr "问题追踪器"
@@ -413,6 +425,12 @@ msgstr "西班牙语"
 
 msgid "Esperanto"
 msgstr "世界语"
+
+msgid "Indonesian"
+msgstr "印度尼西亚语"
+
+msgid "Czech"
+msgstr "捷克语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -1117,6 +1135,15 @@ msgstr "在启动时打开最后一个项目"
 
 msgid "Opens last opened project on startup"
 msgstr "在启动时打开最后打开的项目"
+
+msgid "Enable autosave"
+msgstr "启用自动保存"
+
+msgid "Autosave interval:"
+msgstr "自动保存间隔："
+
+msgid "minute(s)"
+msgstr "分钟"
 
 msgid "Create new directory for each frame tag"
 msgstr "为每个帧标签创建新的目录"

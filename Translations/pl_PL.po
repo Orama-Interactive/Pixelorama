@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-03 18:45\n"
+"PO-Revision-Date: 2020-05-11 11:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -176,6 +176,12 @@ msgstr "Nie można załadować pliku '%s'. Kod błędu: %s"
 msgid "Frame"
 msgstr "Klatka"
 
+msgid "Frames:"
+msgstr "Klatki:"
+
+msgid "All Frames"
+msgstr "Wszystkie klatki"
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -314,8 +320,11 @@ msgstr "Ciemny"
 msgid "Gray"
 msgstr "Szary"
 
-msgid "Gold"
-msgstr "Złoty"
+msgid "Blue"
+msgstr "Niebieski"
+
+msgid "Caramel"
+msgstr "Karmelowy"
 
 msgid "Light"
 msgstr "Jasny"
@@ -343,6 +352,9 @@ msgstr "Grubość:"
 
 msgid "View Splash Screen"
 msgstr "Pokaż ekran powitalny"
+
+msgid "Online Docs"
+msgstr "Dokumentacja Online"
 
 msgid "Issue Tracker"
 msgstr "Zgłaszanie problemów"
@@ -412,6 +424,12 @@ msgstr "Hiszpański"
 
 msgid "Esperanto"
 msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr "Indonezyjski"
+
+msgid "Czech"
+msgstr "Czeski"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -1116,6 +1134,15 @@ msgstr "Po uruchomieniu załaduj ostatni projekt"
 
 msgid "Opens last opened project on startup"
 msgstr "Po uruchomieniu, załaduje ostatni projekt"
+
+msgid "Enable autosave"
+msgstr "Włącz automatyczne zapisywanie"
+
+msgid "Autosave interval:"
+msgstr "Częstotliwość automatycznego zapisu:"
+
+msgid "minute(s)"
+msgstr "minuta(y)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Utwórz nowy katalog dla każdego tagu klatek"

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-05-02 20:25\n"
+"PO-Revision-Date: 2020-05-09 12:59\n"
 
 msgid "OK"
 msgstr ""
@@ -176,6 +176,12 @@ msgstr ""
 msgid "Frame"
 msgstr ""
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -314,7 +320,10 @@ msgstr ""
 msgid "Gray"
 msgstr ""
 
-msgid "Gold"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
 msgstr ""
 
 msgid "Light"
@@ -342,6 +351,9 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "View Splash Screen"
+msgstr ""
+
+msgid "Online Docs"
 msgstr ""
 
 msgid "Issue Tracker"
@@ -411,6 +423,12 @@ msgid "Spanish"
 msgstr ""
 
 msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
 msgstr ""
 
 msgid "Development Team"
@@ -1087,6 +1105,15 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
 msgstr ""
 
 msgid "Create new directory for each frame tag"

@@ -8,121 +8,121 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-10 15:30\n"
 
 msgid "OK"
-msgstr ""
+msgstr "حسنا"
 
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 msgid "Open"
-msgstr ""
+msgstr "فتح"
 
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "الرجاء التأكيد..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "حجم الصورة"
 
 msgid "Width:"
-msgstr ""
+msgstr "العرض:"
 
 msgid "Height:"
-msgstr ""
+msgstr "الطول:"
 
 msgid "File"
-msgstr ""
+msgstr "الملف"
 
 msgid "Edit"
-msgstr ""
+msgstr "تعديل"
 
 msgid "View"
-msgstr ""
+msgstr "عرض"
 
 msgid "Image"
-msgstr ""
+msgstr "الصورة"
 
 msgid "Effects"
-msgstr ""
+msgstr "التأثيرات"
 
 msgid "Help"
-msgstr ""
+msgstr "مساعدة"
 
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 msgid "New..."
-msgstr ""
+msgstr "جديد..."
 
 msgid "Open..."
-msgstr ""
+msgstr "فتخ..."
 
 msgid "Save..."
-msgstr ""
+msgstr "حفظ..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "حفظ باسم..."
 
 msgid "Import"
-msgstr ""
+msgstr "استيراد"
 
 msgid "Import..."
-msgstr ""
+msgstr "استيراد..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "استيراد PNG..."
 
 msgid "Export"
-msgstr ""
+msgstr "تصدير"
 
 msgid "Export..."
-msgstr ""
+msgstr "تصدير..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "تصدير باسم..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "تصدير PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "تصدير PNG باسم..."
 
 msgid "Quit"
-msgstr ""
+msgstr "خروج"
 
 msgid "Undo"
-msgstr ""
+msgstr "التراجع"
 
 msgid "Redo"
-msgstr ""
+msgstr "إعادة"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "تغيير مقياس الصورة"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "تقطيع الصورة"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "تدوير الصورة"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "إزالة التحديد"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "التدوير بشكل أفقي"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "التدوير بشكل عمودي"
 
 msgid "Preferences"
-msgstr ""
+msgstr "خيارات"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "وضع البلاط"
 
 msgid "Show Grid"
 msgstr ""
@@ -137,16 +137,16 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "الملئ باللون:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "فتح ملف"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "فتح ملفات"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "استيراد كإطار جديد"
 
 msgid "Import as a spritesheet"
 msgstr ""
@@ -174,6 +174,12 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
+msgstr ""
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
 msgstr ""
 
 msgid "Spritesheet"
@@ -216,10 +222,10 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "الخلفيّة:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "الاتجاه:"
 
 msgid "Forward"
 msgstr ""
@@ -273,7 +279,7 @@ msgid "General"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "اللغة"
 
 msgid "Themes"
 msgstr ""
@@ -282,7 +288,7 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "اختصارات"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -300,25 +306,28 @@ msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "اللون:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "دليل الألوان:"
 
 msgid "System Language"
-msgstr ""
+msgstr "لغة النظام"
 
 msgid "Dark"
-msgstr ""
+msgstr "غامق"
 
 msgid "Gray"
-msgstr ""
+msgstr "رمادي"
 
-msgid "Gold"
+msgid "Blue"
+msgstr "أزرق"
+
+msgid "Caramel"
 msgstr ""
 
 msgid "Light"
-msgstr ""
+msgstr "فاتح"
 
 msgid "Invert colors"
 msgstr ""
@@ -344,6 +353,9 @@ msgstr ""
 msgid "View Splash Screen"
 msgstr ""
 
+msgid "Online Docs"
+msgstr ""
+
 msgid "Issue Tracker"
 msgstr ""
 
@@ -351,70 +363,76 @@ msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "حول Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "تم تطويره بواسطة Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "الموقع"
 
 msgid "Donate"
-msgstr ""
+msgstr "تبرّع"
 
 msgid "Developers"
-msgstr ""
+msgstr "المبرمجون"
 
 msgid "Contributors"
-msgstr ""
+msgstr "المُساهمون"
 
 msgid "Donors"
-msgstr ""
+msgstr "المتبرعون"
 
 msgid "Translators"
-msgstr ""
+msgstr "المترجمون"
 
 msgid "English"
-msgstr ""
+msgstr "الإنجليزية"
 
 msgid "Greek"
-msgstr ""
+msgstr "اليونانية"
 
 msgid "French"
-msgstr ""
+msgstr "الفرنسية"
 
 msgid "German"
-msgstr ""
+msgstr "الألمانية"
 
 msgid "Polish"
-msgstr ""
+msgstr "اليولندية"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "البرتغالية البرازلية"
 
 msgid "Russian"
-msgstr ""
+msgstr "الروسية"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "الصينية المبسّطة"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "الصينية التقليدية"
 
 msgid "Italian"
-msgstr ""
+msgstr "الإيطالية"
 
 msgid "Latvian"
-msgstr ""
+msgstr "اللاتفية"
 
 msgid "Spanish"
-msgstr ""
+msgstr "الإسبانية"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "إسبرانتو"
+
+msgid "Indonesian"
+msgstr "الإندونيسية"
+
+msgid "Czech"
+msgstr "التشيكوسلوفاكية"
 
 msgid "Development Team"
-msgstr ""
+msgstr "فريق التطوير"
 
 msgid "Lead Programmer"
 msgstr ""
@@ -1087,6 +1105,15 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
 msgstr ""
 
 msgid "Create new directory for each frame tag"

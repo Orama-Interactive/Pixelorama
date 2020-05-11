@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "確定"
@@ -176,6 +176,12 @@ msgstr "無法加載 '%s'. Error code: %s"
 msgid "Frame"
 msgstr "影格"
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -314,8 +320,11 @@ msgstr "變暗"
 msgid "Gray"
 msgstr "灰階"
 
-msgid "Gold"
-msgstr "金色"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "變亮"
@@ -343,6 +352,9 @@ msgstr "粗細:"
 
 msgid "View Splash Screen"
 msgstr "關於"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "回報問題"
@@ -412,6 +424,12 @@ msgstr "西班牙文"
 
 msgid "Esperanto"
 msgstr "世界語"
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
 
 msgid "Development Team"
 msgstr "開發團隊"
@@ -1112,6 +1130,15 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
 msgstr ""
 
 msgid "Create new directory for each frame tag"

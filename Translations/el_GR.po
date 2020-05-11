@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-03 00:37\n"
+"PO-Revision-Date: 2020-05-09 23:15\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -177,6 +177,12 @@ msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '
 msgid "Frame"
 msgstr "Καρέ"
 
+msgid "Frames:"
+msgstr "Καρέ:"
+
+msgid "All Frames"
+msgstr "Όλα τα καρέ"
+
 msgid "Spritesheet"
 msgstr "Φύλλο καρέ"
 
@@ -315,8 +321,11 @@ msgstr "Σκούρο"
 msgid "Gray"
 msgstr "Γκρι"
 
-msgid "Gold"
-msgstr "Χρυσό"
+msgid "Blue"
+msgstr "Μπλε"
+
+msgid "Caramel"
+msgstr "Καραμέλα"
 
 msgid "Light"
 msgstr "Φωτεινό"
@@ -344,6 +353,9 @@ msgstr "Πάχος:"
 
 msgid "View Splash Screen"
 msgstr "Εμφάνιση οθόνης εκκίνησης"
+
+msgid "Online Docs"
+msgstr "Ηλεκτρονική τεκμηρίωση"
 
 msgid "Issue Tracker"
 msgstr "Καταγραφές προβλημάτων"
@@ -413,6 +425,12 @@ msgstr "Ισπανικά"
 
 msgid "Esperanto"
 msgstr "Εσπεράντο"
+
+msgid "Indonesian"
+msgstr "Ινδονησιακά"
+
+msgid "Czech"
+msgstr "Τσεχικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
@@ -1117,6 +1135,15 @@ msgstr "Άνοιγμα τελευταίου έργου κατά την εκκί�
 
 msgid "Opens last opened project on startup"
 msgstr "Ανοίγει το τελευταίο έργο κατά την εκκίνηση"
+
+msgid "Enable autosave"
+msgstr "Ενεργοποίηση αυτόματης αποθήκευσης"
+
+msgid "Autosave interval:"
+msgstr "Χρονικό διάστημα αυτόματης αποθήκευσης:"
+
+msgid "minute(s)"
+msgstr "λεπτό(ά)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Δημιουργήστε νέο φάκελο για κάθε ετικέτα καρέ"

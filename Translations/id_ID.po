@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-05 10:38\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -177,6 +177,12 @@ msgstr "Error saat membaca file '%s'.\n"
 msgid "Frame"
 msgstr "Frame"
 
+msgid "Frames:"
+msgstr "Frame:"
+
+msgid "All Frames"
+msgstr "Semua Frame"
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -315,8 +321,11 @@ msgstr "Gelap"
 msgid "Gray"
 msgstr "Abu-abu"
 
-msgid "Gold"
-msgstr "Emas"
+msgid "Blue"
+msgstr "Biru"
+
+msgid "Caramel"
+msgstr "Karamel"
 
 msgid "Light"
 msgstr "Terang"
@@ -344,6 +353,9 @@ msgstr "Ketebalan:"
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Issue Tracker"
@@ -414,6 +426,12 @@ msgstr "Spanyol"
 msgid "Esperanto"
 msgstr "Esperanto"
 
+msgid "Indonesian"
+msgstr "Indonesia"
+
+msgid "Czech"
+msgstr "Ceko"
+
 msgid "Development Team"
 msgstr "Tim Developer"
 
@@ -445,7 +463,7 @@ msgid "Unsaved Image"
 msgstr "Gambar belum disimpan"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Perubahan belum tersimpan, perubahan akan hilang jika kamu melanjutkan."
 
 msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
@@ -474,7 +492,9 @@ msgstr "Seleksi Kotak\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan "
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -535,10 +555,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Balikkan ke warna default (hitam untuk kiri, putih untuk kanan)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Alat Kiri"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Alat Kanan"
 
 msgid "Left pixel indicator"
 msgstr "Indikator pixel kiri"
@@ -646,16 +666,16 @@ msgid "Same color pixels"
 msgstr "Pixel dengan warna yang sama"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Isi dengan:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Warna yang dipilih"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Pola"
 
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 msgid "Lighten"
 msgstr "Terangkan"
@@ -806,7 +826,7 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Sambungkan/Link Cel"
 
 msgid "Unlink Cel"
 msgstr "Putuskan/Unlink Cel"
@@ -949,13 +969,13 @@ msgid "File saved"
 msgstr "File Tersimpan"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "File tersimpan"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "File gagal dibuka"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "File gagal disimpan"
 
 msgid "File exported"
 msgstr "File sudah terekspor"
@@ -1114,22 +1134,32 @@ msgstr "Buka proyek terakhir saat mulai"
 msgid "Opens last opened project on startup"
 msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
 
+msgid "Enable autosave"
+msgstr "Aktifkan autosave (simpan otomatis)"
+
+msgid "Autosave interval:"
+msgstr "Selang waktu menyimpan otomatis:"
+
+msgid "minute(s)"
+msgstr "menit"
+
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Buat direktori baru untuk setiap frame tag"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Buat banyak file tetapi setiap file disimpan di direktori berbeda yang sesuai dengan tag frame-nya"
 
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Backup yang tersimpan otomatis untuk %s ditemukan\n"
+"Apakah kamu ingin muat ulang?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Backup dimuat ulang"
 

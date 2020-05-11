@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-05-03 00:37\n"
+"PO-Revision-Date: 2020-05-09 14:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,6 +177,12 @@ msgstr "Impossibile caricare il file '%s'.\n"
 msgid "Frame"
 msgstr "Fotogrammi"
 
+msgid "Frames:"
+msgstr "Fotogrammi:"
+
+msgid "All Frames"
+msgstr "Tutti i fotogrammi"
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -315,8 +321,11 @@ msgstr "Scuro"
 msgid "Gray"
 msgstr "Grigio"
 
-msgid "Gold"
-msgstr "Oro"
+msgid "Blue"
+msgstr "Blu"
+
+msgid "Caramel"
+msgstr "Caramello"
 
 msgid "Light"
 msgstr "Chiaro"
@@ -344,6 +353,9 @@ msgstr "Spessore:"
 
 msgid "View Splash Screen"
 msgstr "Visualizza lo splash screen"
+
+msgid "Online Docs"
+msgstr "Online Docs"
 
 msgid "Issue Tracker"
 msgstr "Tracciatore problemi"
@@ -413,6 +425,12 @@ msgstr "Spagnolo"
 
 msgid "Esperanto"
 msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr "Indonesiano"
+
+msgid "Czech"
+msgstr "Ceco"
 
 msgid "Development Team"
 msgstr "Team di sviluppo"
@@ -1117,6 +1135,15 @@ msgstr "Apri l'ultimo progetto all'avvio"
 
 msgid "Opens last opened project on startup"
 msgstr "Apri l'ultimo progetto aperto all'avvio"
+
+msgid "Enable autosave"
+msgstr "Abilita salvataggio automatico"
+
+msgid "Autosave interval:"
+msgstr "Intervallo di salvataggio automatico:"
+
+msgid "minute(s)"
+msgstr "minuto(i)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Crea nuova cartella per ogni tag frame"

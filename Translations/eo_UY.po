@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -177,6 +177,12 @@ msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
 msgid "Frame"
 msgstr ""
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -315,8 +321,11 @@ msgstr "Malhela"
 msgid "Gray"
 msgstr "Griza"
 
-msgid "Gold"
-msgstr "Ora"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "Hela"
@@ -343,6 +352,9 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "View Splash Screen"
+msgstr ""
+
+msgid "Online Docs"
 msgstr ""
 
 msgid "Issue Tracker"
@@ -412,6 +424,12 @@ msgid "Spanish"
 msgstr "Hispana"
 
 msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
 msgstr ""
 
 msgid "Development Team"
@@ -1088,6 +1106,15 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
 msgstr ""
 
 msgid "Create new directory for each frame tag"

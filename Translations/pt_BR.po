@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-05-05 10:38\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,6 +177,12 @@ msgstr "Impossível carregar o arquivo '%s'.\n"
 msgid "Frame"
 msgstr "Quadro"
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -315,8 +321,11 @@ msgstr "Escuro"
 msgid "Gray"
 msgstr "Cinza"
 
-msgid "Gold"
-msgstr "Ouro"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "Claro"
@@ -344,6 +353,9 @@ msgstr "Espessura:"
 
 msgid "View Splash Screen"
 msgstr "Ver Tela de Abertura"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Rastreador de problemas"
@@ -413,6 +425,12 @@ msgstr "Espanhol"
 
 msgid "Esperanto"
 msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -1117,6 +1135,15 @@ msgstr "Abrir último projeto ao iniciar"
 
 msgid "Opens last opened project on startup"
 msgstr "Abrir último projeto aberto ao iniciar"
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
 
 msgid "Create new directory for each frame tag"
 msgstr "Criar novo diretório para cada tag de quadro"

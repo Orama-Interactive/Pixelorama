@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-05-02 20:26\n"
+"PO-Revision-Date: 2020-05-09 13:00\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -177,6 +177,12 @@ msgstr "Nevar ielādēd failu '%s'.\n"
 msgid "Frame"
 msgstr ""
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -315,8 +321,11 @@ msgstr "Tumš"
 msgid "Gray"
 msgstr "Pelēks"
 
-msgid "Gold"
-msgstr "Zelta"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "Gaišs"
@@ -344,6 +353,9 @@ msgstr "Biezums:"
 
 msgid "View Splash Screen"
 msgstr "Rādīt uzplaiksnījuma ekrānu"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Problēmu izsekotājs"
@@ -412,6 +424,12 @@ msgid "Spanish"
 msgstr "Spāņu"
 
 msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
 msgstr ""
 
 msgid "Development Team"
@@ -1112,6 +1130,15 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
 msgstr ""
 
 msgid "Create new directory for each frame tag"

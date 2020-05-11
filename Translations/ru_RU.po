@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-03 00:27\n"
+"PO-Revision-Date: 2020-05-09 13:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,6 +177,12 @@ msgstr "Не удалось загрузить файл '%s'.\n"
 msgid "Frame"
 msgstr "Кадр"
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr "Все кадры"
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -315,8 +321,11 @@ msgstr "Тёмная"
 msgid "Gray"
 msgstr "Серая"
 
-msgid "Gold"
-msgstr "Золотая"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "Светлая"
@@ -344,6 +353,9 @@ msgstr "Толщина:"
 
 msgid "View Splash Screen"
 msgstr "Экран приветствия"
+
+msgid "Online Docs"
+msgstr "Онлайн-документация"
 
 msgid "Issue Tracker"
 msgstr "Баг-трекер"
@@ -413,6 +425,12 @@ msgstr "Испанский"
 
 msgid "Esperanto"
 msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr "Индонезийский"
+
+msgid "Czech"
+msgstr "Чешский"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
@@ -1115,6 +1133,15 @@ msgstr "Открывать последний проект при запуске
 
 msgid "Opens last opened project on startup"
 msgstr "Открывает последний открытый проект при запуске"
+
+msgid "Enable autosave"
+msgstr "Включить автосохранение"
+
+msgid "Autosave interval:"
+msgstr "Интервал автосохранения:"
+
+msgid "minute(s)"
+msgstr "мин."
 
 msgid "Create new directory for each frame tag"
 msgstr "Создать новый каталог для каждой метки кадра"
