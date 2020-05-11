@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-05-11 08:28\n"
+"PO-Revision-Date: 2020-05-11 17:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -340,6 +340,27 @@ msgstr "Umriss"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Farbton/Sättigung/Wert anpassen"
+
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -993,6 +1014,9 @@ msgstr "Palettenname"
 
 msgid "Color Name:"
 msgstr "Farbnamen:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Erstelle eine neue leere Palette"
