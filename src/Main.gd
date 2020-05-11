@@ -355,19 +355,24 @@ func image_menu_id_pressed(id : int) -> void:
 		0: # Scale Image
 			$ScaleImage.popup_centered()
 			Global.dialog_open(true)
-		1: # Crop Image
-			# Use first layer as a starting rectangle
-			var used_rect : Rect2 = Global.canvas.layers[0][0].get_used_rect()
-			# However, if first layer is empty, loop through all layers until we find one that isn't
-			var i := 0
-			while(i < Global.canvas.layers.size() - 1 and Global.canvas.layers[i][0].get_used_rect() == Rect2(0, 0, 0, 0)):
-				i += 1
-				used_rect = Global.canvas.layers[i][0].get_used_rect()
 
-			# Merge all layers with content
-			for j in range(Global.canvas.layers.size() - 1, i, -1):
-					if Global.canvas.layers[j][0].get_used_rect() != Rect2(0, 0, 0, 0):
-						used_rect = used_rect.merge(Global.canvas.layers[j][0].get_used_rect())
+		1: # Crop Image
+			# Use first cel as a starting rectangle
+			var used_rect : Rect2 = Global.canvases[0].layers[0][0].get_used_rect()
+
+			for c in Global.canvases:
+				# However, if first cel is empty, loop through all cels until we find one that isn't
+				for layer in c.layers:
+					if used_rect != Rect2(0, 0, 0, 0):
+						break
+					else:
+						if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
+							used_rect = layer[0].get_used_rect()
+
+				# Merge all layers with content
+				for layer in c.layers:
+						if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
+							used_rect = used_rect.merge(layer[0].get_used_rect())
 
 			# If no layer has any content, just return
 			if used_rect == Rect2(0, 0, 0, 0):
@@ -377,17 +382,19 @@ func image_menu_id_pressed(id : int) -> void:
 			var height := used_rect.size.y
 			Global.undos += 1
 			Global.undo_redo.create_action("Scale")
-			Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
-			# Loop through all the layers to crop them
-			for j in range(Global.canvas.layers.size() - 1, -1, -1):
-				var sprite : Image = Global.canvas.layers[j][0].get_rect(used_rect)
-				Global.undo_redo.add_do_property(Global.canvas.layers[j][0], "data", sprite.data)
-				Global.undo_redo.add_undo_property(Global.canvas.layers[j][0], "data", Global.canvas.layers[j][0].data)
+			for c in Global.canvases:
+				Global.undo_redo.add_do_property(c, "size", Vector2(width, height).floor())
+				# Loop through all the layers to crop them
+				for j in range(Global.canvas.layers.size() - 1, -1, -1):
+					var sprite : Image = c.layers[j][0].get_rect(used_rect)
+					Global.undo_redo.add_do_property(c.layers[j][0], "data", sprite.data)
+					Global.undo_redo.add_undo_property(c.layers[j][0], "data", c.layers[j][0].data)
 
-			Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
-			Global.undo_redo.add_undo_method(Global, "undo", [Global.canvas])
-			Global.undo_redo.add_do_method(Global, "redo", [Global.canvas])
+				Global.undo_redo.add_undo_property(c, "size", c.size)
+			Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
+			Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
 			Global.undo_redo.commit_action()
+
 		2: # Flip Horizontal
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
@@ -395,6 +402,7 @@ func image_menu_id_pressed(id : int) -> void:
 			canvas.layers[Global.current_layer][0].flip_x()
 			canvas.layers[Global.current_layer][0].lock()
 			canvas.handle_redo("Draw")
+
 		3: # Flip Vertical
 			var canvas : Canvas = Global.canvas
 			canvas.handle_undo("Draw")
@@ -402,11 +410,13 @@ func image_menu_id_pressed(id : int) -> void:
 			canvas.layers[Global.current_layer][0].flip_y()
 			canvas.layers[Global.current_layer][0].lock()
 			canvas.handle_redo("Draw")
+
 		4: # Rotate
 			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			$RotateImage.set_sprite(image)
 			$RotateImage.popup_centered()
 			Global.dialog_open(true)
+
 		5: # Invert Colors
 			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
@@ -417,6 +427,7 @@ func image_menu_id_pressed(id : int) -> void:
 						continue
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
+
 		6: # Desaturation
 			var image : Image = Global.canvas.layers[Global.current_layer][0]
 			Global.canvas.handle_undo("Draw")
@@ -429,9 +440,11 @@ func image_menu_id_pressed(id : int) -> void:
 					px_color = Color(gray, gray, gray, px_color.a)
 					image.set_pixel(xx, yy, px_color)
 			Global.canvas.handle_redo("Draw")
+
 		7: # Outline
 			$OutlineDialog.popup_centered()
 			Global.dialog_open(true)
+
 		8: # HSV
 			$HSVDialog.popup_centered()
 			Global.dialog_open(true)

@@ -43,6 +43,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter).
 - LineEdits lose focus when the user presses Enter.
 - When cloning a frame, the clone will appear next to the original.
+- Scale image and crop image now affect all frames.
 - Layer visibility is taken into account when exporting the drawing as a `.png` file. This means that invisible layers will not be included in the final `.png` file.
 - The Godot theme has changed and been renamed to Blue. The Gold theme has also been renamed to Caramel.
 - When a dialog is opened, the UI in the background gets darker.
@@ -55,6 +56,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - The splash screen has been revamped and is no longer purple, it now gets affected by the chosen theme.
 - The brush selection popup now closes when a brush is selected.
 - Pixelorama's version number now appears on the window title.
+- Images now get zoomed properly (fit to canvas frame) when they are first created or loaded.
 
 ### Fixed
 - Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
