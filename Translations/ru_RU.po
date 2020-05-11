@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-11 17:09\n"
+"PO-Revision-Date: 2020-05-11 21:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -343,25 +343,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Настройка цвета"
 
 msgid "Type:"
-msgstr ""
+msgstr "Тип:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Угол:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Оттенок"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Насыщенность"
 
 msgid "Value"
-msgstr ""
+msgstr "Яркость"
 
 msgid "Apply"
-msgstr ""
+msgstr "Применить"
 
 msgid "Diagonal"
 msgstr "Диагональ"
@@ -1015,7 +1015,7 @@ msgid "Color Name:"
 msgstr "Название цвета:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Использовать текущие левый и правый цвета"
 
 msgid "Create a new empty palette?"
 msgstr "Создать пустую палитру?"
