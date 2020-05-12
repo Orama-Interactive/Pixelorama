@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-11 17:09\n"
+"PO-Revision-Date: 2020-05-12 09:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -342,25 +342,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Dostosuj HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Kąt:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Odcień"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Nasycenie"
 
 msgid "Value"
-msgstr ""
+msgstr "Wartość"
 
 msgid "Apply"
-msgstr ""
+msgstr "Zastosuj"
 
 msgid "Diagonal"
 msgstr "Przekątna"
@@ -1016,7 +1016,7 @@ msgid "Color Name:"
 msgstr "Nazwa koloru:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Użyj aktualnych kolorów lewego i prawego"
 
 msgid "Create a new empty palette?"
 msgstr "Utworzyć nową pustą paletę kolorów?"
