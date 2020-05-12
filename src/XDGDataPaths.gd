@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 
 # These are *with* the config subdirectory name
 var xdg_data_home : String

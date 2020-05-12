@@ -8,7 +8,7 @@ var root_directory := "."
 var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
-var directory_module : Node
+var directory_module : Reference
 
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
