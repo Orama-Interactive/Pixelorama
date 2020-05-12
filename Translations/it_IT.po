@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-05-11 17:09\n"
+"PO-Revision-Date: 2020-05-12 20:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -343,25 +343,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Regola Tonalità/Saturazione/Valore"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Regola HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipologia:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Angolo:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Tinta"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturazione"
 
 msgid "Value"
-msgstr ""
+msgstr "Valore"
 
 msgid "Apply"
-msgstr ""
+msgstr "Applica"
 
 msgid "Diagonal"
 msgstr "Diagonale"
@@ -1017,7 +1017,7 @@ msgid "Color Name:"
 msgstr "Nome Colore:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Usa i colori sinistro e destro attuali"
 
 msgid "Create a new empty palette?"
 msgstr "Creare una nuova palette vuota?"
