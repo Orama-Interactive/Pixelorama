@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-11 17:09\n"
+"PO-Revision-Date: 2020-05-12 00:41\n"
 
 msgid "OK"
 msgstr "确定"
@@ -343,25 +343,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "调整色相/饱和度/值"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "调整 HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "类型："
 
 msgid "Angle:"
-msgstr ""
+msgstr "角度："
 
 msgid "Hue"
-msgstr ""
+msgstr "色相"
 
 msgid "Saturation"
-msgstr ""
+msgstr "饱和度"
 
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 msgid "Apply"
-msgstr ""
+msgstr "应用"
 
 msgid "Diagonal"
 msgstr "对角线"
@@ -1017,7 +1017,7 @@ msgid "Color Name:"
 msgstr "颜色名称:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "使用当前左侧和右侧颜色"
 
 msgid "Create a new empty palette?"
 msgstr "创建一个新的空调色板?"
