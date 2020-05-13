@@ -272,6 +272,7 @@ __meta__ = {
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
@@ -290,6 +291,7 @@ margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
@@ -308,6 +310,7 @@ margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
@@ -326,6 +329,7 @@ margin_top = 108.0
 margin_right = 32.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
@@ -344,6 +348,7 @@ margin_top = 144.0
 margin_right = 32.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
@@ -362,6 +367,7 @@ margin_top = 180.0
 margin_right = 32.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
@@ -380,6 +386,7 @@ margin_top = 216.0
 margin_right = 32.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 button_mask = 3
 
