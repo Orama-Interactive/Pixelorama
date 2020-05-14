@@ -8,31 +8,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-14 20:37\n"
+"PO-Revision-Date: 2020-05-14 20:58\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Evet"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Hayır"
 
 msgid "Open"
-msgstr ""
+msgstr "Aç"
 
 msgid "Save"
 msgstr "Kaydet"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Lütfen Onaylayın..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Resim Boyutu"
 
 msgid "Width:"
-msgstr ""
+msgstr "Genişlik:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Yükseklik:"
 
 msgid "File"
 msgstr "Dosya"
@@ -44,10 +44,10 @@ msgid "View"
 msgstr ""
 
 msgid "Image"
-msgstr ""
+msgstr "Resim"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efektler"
 
 msgid "Help"
 msgstr "Yardım"
@@ -59,13 +59,13 @@ msgid "New..."
 msgstr "Yeni..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Aç..."
 
 msgid "Save..."
 msgstr "Kaydet..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Farklı Kaydet..."
 
 msgid "Import"
 msgstr ""
@@ -92,7 +92,7 @@ msgid "Export PNG as..."
 msgstr ""
 
 msgid "Quit"
-msgstr ""
+msgstr "Çıkış"
 
 msgid "Undo"
 msgstr ""
@@ -140,7 +140,7 @@ msgid "Fill with color:"
 msgstr ""
 
 msgid "Open a File"
-msgstr ""
+msgstr "Dosya Aç"
 
 msgid "Open File(s)"
 msgstr ""
