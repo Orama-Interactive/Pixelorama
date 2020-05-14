@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-14 20:58\n"
+"PO-Revision-Date: 2020-05-14 21:08\n"
 
 msgid "OK"
 msgstr "Evet"
@@ -186,7 +186,7 @@ msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animasyon"
 
 msgid "Preview:"
 msgstr ""
@@ -384,7 +384,7 @@ msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Pixelorama Hakkında"
 
 msgid "Developed by Orama Interactive"
 msgstr ""
@@ -865,7 +865,7 @@ msgid "Enable/disable cel linking\n\n"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Palet"
 
 msgid "Palettes"
 msgstr ""
