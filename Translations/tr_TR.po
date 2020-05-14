@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-14 21:20\n"
+"PO-Revision-Date: 2020-05-14 21:38\n"
 
 msgid "OK"
 msgstr "Evet"
@@ -104,10 +104,10 @@ msgid "Scale Image"
 msgstr ""
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Resmi Kes"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Resmi Döndür"
 
 msgid "Clear Selection"
 msgstr ""
@@ -119,7 +119,7 @@ msgid "Flip Vertical"
 msgstr ""
 
 msgid "Preferences"
-msgstr ""
+msgstr "Tercihler"
 
 msgid "Tile Mode"
 msgstr ""
