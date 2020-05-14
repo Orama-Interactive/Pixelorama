@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-14 22:07\n"
+"PO-Revision-Date: 2020-05-14 22:27\n"
 
 msgid "OK"
 msgstr "Evet"
@@ -41,7 +41,7 @@ msgid "Edit"
 msgstr "Düzenle"
 
 msgid "View"
-msgstr ""
+msgstr "Görüntü"
 
 msgid "Image"
 msgstr "Resim"
@@ -68,13 +68,13 @@ msgid "Save as..."
 msgstr "Farklı Kaydet..."
 
 msgid "Import"
-msgstr ""
+msgstr "İçe aktar"
 
 msgid "Import..."
-msgstr ""
+msgstr "İçe aktar..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "İçe Aktar(PNG)..."
 
 msgid "Export"
 msgstr ""
@@ -113,7 +113,7 @@ msgid "Clear Selection"
 msgstr "Seçimi Temizle"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Yatay Döndür"
 
 msgid "Flip Vertical"
 msgstr ""
