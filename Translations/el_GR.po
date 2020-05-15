@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-15 14:22\n"
+"PO-Revision-Date: 2020-05-15 14:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1038,16 +1038,16 @@ msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Θέλετε το όνομά σας ή της εταιρείας σας να φαίνεται στην οθόνη εκκίνησης;"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Γίνετε Πλατινένιος Χορηγός"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Γίνετε Χρυσός Χορηγός"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Γίνετε Χορηγός"
 
 msgid "Don't show again"
 msgstr "Να μην εμφανιστεί ξανά"
