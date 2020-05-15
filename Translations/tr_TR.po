@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-15 02:57\n"
+"PO-Revision-Date: 2020-05-15 03:10\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -164,7 +164,7 @@ msgid "File Exists, Overwrite?"
 msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "%s dosyası zaten var. Üzerine yazılsın mı?"
 
 msgid "Directory path or file name is not valid!"
 msgstr ""
@@ -174,13 +174,13 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Kare"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Kareler:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Tüm Kareler"
 
 msgid "Spritesheet"
 msgstr ""
@@ -189,10 +189,10 @@ msgid "Animation"
 msgstr "Animasyon"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Önizleme:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Kare:"
 
 msgid "Orientation:"
 msgstr ""
@@ -228,7 +228,7 @@ msgid "Direction:"
 msgstr ""
 
 msgid "Forward"
-msgstr ""
+msgstr "İleri"
 
 msgid "Backwards"
 msgstr ""
@@ -264,7 +264,7 @@ msgid "Interpolation:"
 msgstr ""
 
 msgid "Nearest"
-msgstr ""
+msgstr "En Yakın"
 
 msgid "Bilinear"
 msgstr ""
@@ -276,13 +276,13 @@ msgid "Trilinear"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 msgid "Language"
 msgstr "Dil"
 
 msgid "Themes"
-msgstr ""
+msgstr "Temalar"
 
 msgid "Canvas"
 msgstr ""
@@ -312,7 +312,7 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "Sistem Dili"
 
 msgid "Dark"
 msgstr "Koyu"
@@ -357,10 +357,10 @@ msgid "Saturation"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Değer"
 
 msgid "Apply"
-msgstr ""
+msgstr "Uygula"
 
 msgid "Diagonal"
 msgstr ""
@@ -369,91 +369,91 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Kalınlık:"
 
 msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Çevrimiçi Dökümanlar"
 
 msgid "Issue Tracker"
 msgstr ""
 
 msgid "Changelog"
-msgstr ""
+msgstr "Değişiklikler"
 
 msgid "About Pixelorama"
 msgstr "Pixelorama Hakkında"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
 msgid "Website"
-msgstr ""
+msgstr "İnternet sitesi"
 
 msgid "Donate"
-msgstr ""
+msgstr "Bağış"
 
 msgid "Developers"
-msgstr ""
+msgstr "Geliştiriciler"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Katkıda Bulunanlar"
 
 msgid "Donors"
-msgstr ""
+msgstr "Bağışçılar"
 
 msgid "Translators"
-msgstr ""
+msgstr "Çevirmenler"
 
 msgid "English"
-msgstr ""
+msgstr "İngilizce"
 
 msgid "Greek"
-msgstr ""
+msgstr "Yunanca"
 
 msgid "French"
-msgstr ""
+msgstr "Fransızca"
 
 msgid "German"
-msgstr ""
+msgstr "Almanca"
 
 msgid "Polish"
-msgstr ""
+msgstr "Lehçe"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brezilya Portekizcesi"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rusça"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Basitleştirilmiş Çince"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Geleneksel Çince"
 
 msgid "Italian"
-msgstr ""
+msgstr "İtalyanca"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letonca"
 
 msgid "Spanish"
-msgstr ""
+msgstr "İspanyolca"
 
 msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Endonezce"
 
 msgid "Czech"
-msgstr ""
+msgstr "Çekçe"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Geliştirici Takımı"
 
 msgid "Lead Programmer"
 msgstr ""
@@ -480,7 +480,7 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Kaydedilmemiş Resim"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
@@ -489,13 +489,13 @@ msgid "Save before exiting?"
 msgstr ""
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Kaydedilmemiş işlemin var. Ne yapılmasını istersin?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Kaydet & Çık"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Kaydetmeden çık"
 
 msgid "Utility Tools"
 msgstr ""
@@ -518,7 +518,7 @@ msgid "Color Picker\n"
 msgstr ""
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Çizim Aletleri"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -631,25 +631,25 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Fırça:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Bir fırça seç"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Fırça: Piksel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Fırça: Daire"
 
 msgid "Brush: Filled Circle"
 msgstr ""
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Özel fırça"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Fırça boyutu:"
 
 msgid "Brush color from"
 msgstr ""
@@ -685,7 +685,7 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Miktar:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
@@ -709,7 +709,7 @@ msgid "Zoom out"
 msgstr ""
 
 msgid "Options:"
-msgstr ""
+msgstr "Ayarlar:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -730,7 +730,7 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Dikey"
 
 msgid "Current frame:"
 msgstr ""
