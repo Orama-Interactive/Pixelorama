@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-05-15 20:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -454,10 +454,10 @@ msgid "Czech"
 msgstr "Ceco"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabo"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 msgid "Development Team"
 msgstr "Team di sviluppo"
@@ -1044,16 +1044,16 @@ msgid "Patrons:"
 msgstr "Sostenitori:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Vuoi che il tuo nome o la tua azienda siano mostrati nella schermata iniziale?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Diventa uno Sponsor Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Diventa uno Sponsor Gold"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Diventa un sostenitore"
 
 msgid "Don't show again"
 msgstr "Non mostrare di nuovo"
