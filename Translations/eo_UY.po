@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-05-15 20:08\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "Helpo"
 
 msgid "New"
-msgstr ""
+msgstr "Nova"
 
 msgid "New..."
 msgstr "Nova..."
@@ -68,10 +68,10 @@ msgid "Save as..."
 msgstr "Konservi kiel..."
 
 msgid "Import"
-msgstr ""
+msgstr "Enporti"
 
 msgid "Import..."
-msgstr ""
+msgstr "Enporti..."
 
 msgid "Import PNG..."
 msgstr "Enporti PNGn..."
@@ -80,10 +80,10 @@ msgid "Export"
 msgstr "Elporti"
 
 msgid "Export..."
-msgstr ""
+msgstr "Elporti..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Elporti kiel..."
 
 msgid "Export PNG..."
 msgstr "Elporti PNGn..."
