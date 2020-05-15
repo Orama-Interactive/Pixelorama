@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-05-11 17:09\n"
+"PO-Revision-Date: 2020-05-15 14:22\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1033,26 +1033,20 @@ msgstr "Rediģēt paleti"
 msgid "Patrons:"
 msgstr "Labvēļi:"
 
-msgid "Changes"
-msgstr "Izmaiņas"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Platīna sponsors"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Zelta sponsors"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Platīna sponsora aizvietotājs"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Zelta sponsora aizvietotājs"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Vairāk nerādīt"
-
-msgid "Take this spot!"
-msgstr "Ieņemt šo vietu!"
 
 msgid "Image Options"
 msgstr "Bildes uzstādījumi"
