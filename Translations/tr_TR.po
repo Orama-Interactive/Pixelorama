@@ -8,13 +8,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-14 22:27\n"
+"PO-Revision-Date: 2020-05-15 02:57\n"
 
 msgid "OK"
-msgstr "Evet"
+msgstr "Onayla"
 
 msgid "Cancel"
-msgstr "Hayır"
+msgstr "İptal Et"
 
 msgid "Open"
 msgstr "Aç"
@@ -74,16 +74,16 @@ msgid "Import..."
 msgstr "İçe aktar..."
 
 msgid "Import PNG..."
-msgstr "İçe Aktar(PNG)..."
+msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "Dışa aktar"
 
 msgid "Export..."
-msgstr ""
+msgstr "Dışa aktar..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Dışa farklı aktar..."
 
 msgid "Export PNG..."
 msgstr ""
@@ -95,13 +95,13 @@ msgid "Quit"
 msgstr "Çıkış"
 
 msgid "Undo"
-msgstr ""
+msgstr "Geri al"
 
 msgid "Redo"
-msgstr ""
+msgstr "İleri Al"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Resmi Ölçüle"
 
 msgid "Crop Image"
 msgstr "Resmi Kes"
@@ -116,7 +116,7 @@ msgid "Flip Horizontal"
 msgstr "Yatay Döndür"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Dikey Döndür"
 
 msgid "Preferences"
 msgstr "Tercihler"
@@ -128,10 +128,10 @@ msgid "Show Grid"
 msgstr ""
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Cetveli Göster"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Rehber"
 
 msgid "Show Animation Timeline"
 msgstr "Animasyon Çizelgesini Göster"
@@ -270,7 +270,7 @@ msgid "Bilinear"
 msgstr ""
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kübik"
 
 msgid "Trilinear"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "General"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 msgid "Themes"
 msgstr ""
@@ -315,22 +315,22 @@ msgid "System Language"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "Koyu"
 
 msgid "Gray"
-msgstr ""
+msgstr "Gri"
 
 msgid "Blue"
-msgstr ""
+msgstr "Mavi"
 
 msgid "Caramel"
 msgstr ""
 
 msgid "Light"
-msgstr ""
+msgstr "Açık"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Renkleri Tersle"
 
 msgid "Desaturation"
 msgstr ""
