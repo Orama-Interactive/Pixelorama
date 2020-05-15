@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-11 17:08\n"
+"PO-Revision-Date: 2020-05-15 14:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1037,26 +1037,20 @@ msgstr "Upravit paletu"
 msgid "Patrons:"
 msgstr "Patroni:"
 
-msgid "Changes"
-msgstr "Změny"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Platinový sponzor"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Zlatý sponzor"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Zástupce platinového sponzora"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Zástupce zlatého sponzora"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Příště již nezobrazovat"
-
-msgid "Take this spot!"
-msgstr "Zaberte toto místo!"
 
 msgid "Image Options"
 msgstr "Možnosti obrázku"
