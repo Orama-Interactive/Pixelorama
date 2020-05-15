@@ -4,6 +4,8 @@
 [ext_resource path="res://assets/themes/dark/icons/grabber.png" type="Texture" id=2]
 [ext_resource path="res://assets/themes/dark/icons/grabber_hover.png" type="Texture" id=3]
 [ext_resource path="res://assets/themes/dark/icons/spinbox.png" type="Texture" id=4]
+[ext_resource path="res://assets/themes/dark/icons/vsplit.png" type="Texture" id=5]
+[ext_resource path="res://assets/themes/dark/icons/hsplit.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -163,9 +165,6 @@ border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StreamTexture" id=18]
-load_path = "res://.import/hsplit.png-982787a0fbb16ed868512e0fe24fb6d7.stex"
-
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.109804, 0.0862745, 0.0862745, 0 )
 border_width_left = 1
@@ -277,9 +276,6 @@ border_width_left = 2
 border_width_right = 2
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
-[sub_resource type="StreamTexture" id=31]
-load_path = "res://.import/vsplit.png-e9d4a9d3ba3096e1627a4854187f6824.stex"
-
 [sub_resource type="StyleBoxFlat" id=32]
 bg_color = Color( 0.176471, 0.176471, 0.176471, 1 )
 border_width_left = 2
@@ -372,7 +368,7 @@ HSlider/styles/grabber_highlight = null
 HSlider/styles/slider = SubResource( 17 )
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 6
-HSplitContainer/icons/grabber = SubResource( 18 )
+HSplitContainer/icons/grabber = ExtResource( 6 )
 HSplitContainer/styles/bg = null
 "Label/colors/Selected Color" = Color( 0.235294, 0.364706, 0.458824, 1 )
 Label/colors/font_color = Color( 1, 1, 1, 1 )
@@ -568,7 +564,7 @@ VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource( 30 )
 VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 6
-VSplitContainer/icons/grabber = SubResource( 31 )
+VSplitContainer/icons/grabber = ExtResource( 5 )
 VSplitContainer/styles/bg = null
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 18
