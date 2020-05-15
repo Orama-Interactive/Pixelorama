@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-12 00:41\n"
+"PO-Revision-Date: 2020-05-15 14:22\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1037,26 +1037,20 @@ msgstr "编辑调色板"
 msgid "Patrons:"
 msgstr "赞助:"
 
-msgid "Changes"
-msgstr "更改"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "白金赞助商"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "金牌赞助商"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "白金赞助商占位符"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "金牌赞助商占位符"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "不再显示"
-
-msgid "Take this spot!"
-msgstr "获取该位置!"
 
 msgid "Image Options"
 msgstr "图像选项"
