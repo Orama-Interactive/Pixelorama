@@ -443,6 +443,12 @@ msgstr ""
 msgid "Czech"
 msgstr ""
 
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 

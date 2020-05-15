@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/AboutDialog.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/icons/icon_64x64.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/icons/icon.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Roboto-Italic.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture" id=4]
 [ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=5]
@@ -30,7 +30,9 @@ margin_bottom = 64.0
 [node name="PixeloramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
 margin_right = 64.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 2 )
+expand = true
 
 [node name="SloganAndLinks" type="CenterContainer" parent="AboutUI/IconsButtons"]
 margin_left = 68.0
