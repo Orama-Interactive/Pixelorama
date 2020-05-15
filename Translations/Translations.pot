@@ -999,25 +999,19 @@ msgstr ""
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Platinum Sponsor"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors"
+msgid "Become a Gold Sponsor"
 msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr ""
-
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
-
-msgid "Take this spot!"
 msgstr ""
 
 msgid "Image Options"
