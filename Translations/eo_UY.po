@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-11 17:08\n"
+"PO-Revision-Date: 2020-05-15 14:22\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1009,26 +1009,20 @@ msgstr "Redakti paletron"
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
-msgstr "Ŝanĝoj"
-
-msgid "Platinum Sponsor"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Oraj sponsoroj"
-
-msgid "Platinum Sponsor Placeholder"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Gold Sponsor"
+msgstr ""
+
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
 msgstr "Ne montri denove"
-
-msgid "Take this spot!"
-msgstr ""
 
 msgid "Image Options"
 msgstr "Bildagordoj"
