@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-15 18:27\n"
+"PO-Revision-Date: 2020-05-15 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1036,13 +1036,13 @@ msgid "Patrons:"
 msgstr "Меценаты:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Хотите, чтобы ваше имя или компания были показаны на заставке?"
 
 msgid "Become a Platinum Sponsor"
 msgstr "Стать Платиновым Спонсором"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Стать Золотым Спонсором"
 
 msgid "Become a Patron"
 msgstr ""
