@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-11 19:37\n"
+"PO-Revision-Date: 2020-05-15 14:22\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1037,26 +1037,20 @@ msgstr "Επεξεργασία Παλέτας"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "Αλλαγές"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Πλατινένιος Σπόνσορας"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Χρυσοί Σπόνσορες"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Θέση για Πλατινένιο Σπόνσορα"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Θέση για Χρυσούς Σπόνσορες"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Να μην εμφανιστεί ξανά"
-
-msgid "Take this spot!"
-msgstr "Πάρτε αυτή τη θέση!"
 
 msgid "Image Options"
 msgstr "Επιλογές εικόνας"
