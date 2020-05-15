@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-15 03:17\n"
+"PO-Revision-Date: 2020-05-15 03:26\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -718,10 +718,10 @@ msgid "100% Zoom"
 msgstr ""
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Yansıtma"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Yatay"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -733,10 +733,10 @@ msgid "Vertical"
 msgstr "Dikey"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Geçerli kare:"
 
 msgid "Current frame: 1/1"
-msgstr ""
+msgstr "Geçerli kare: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -785,7 +785,7 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Önceki Kareler"
 
 msgid "Future Frames"
 msgstr ""
@@ -840,13 +840,13 @@ msgid "Remove current layer"
 msgstr "Şu anki katmanı sil"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Katmanı üste taşı"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Katmanı aşağı taşı"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Katmanı kopyala"
 
 msgid "Merge current layer with the one below"
 msgstr ""
@@ -858,7 +858,7 @@ msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Katmanı kilitle/aç"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -883,7 +883,7 @@ msgid "Undo: Draw"
 msgstr ""
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "İleri: Çizim"
 
 msgid "Undo: Rectangle Select"
 msgstr ""
@@ -961,31 +961,31 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Dosya kaydedildi"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Dosya kaydedildi"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Dosya açılamadı"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Dosya kaydedilemedi"
 
 msgid "File exported"
 msgstr ""
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Yeni Palet"
 
 msgid "Import Palette"
 msgstr ""
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Palet İsmi:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Renk İsmi:"
 
 msgid "Use current left & right colors"
 msgstr ""
@@ -994,7 +994,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Hata: Paletin herhangi bir ismi olmalıdır."
 
 msgid "Error: Palette named '%s' already exists!"
 msgstr ""
@@ -1003,13 +1003,13 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Paleti Düzenle"
 
 msgid "Patrons:"
 msgstr ""
 
 msgid "Changes"
-msgstr ""
+msgstr "Değişiklikler"
 
 msgid "Platinum Sponsor"
 msgstr "Platin Sponsor"
@@ -1117,10 +1117,10 @@ msgid "Cannot find last project file."
 msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Son Projeyi Aç"
 
 msgid "Open last project..."
 msgstr ""
@@ -1132,13 +1132,13 @@ msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Otomatik kaydetmeyi etkinleştir"
 
 msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
-msgstr ""
+msgstr "dakika(lar)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1147,10 +1147,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
