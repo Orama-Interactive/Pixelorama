@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-11 21:55\n"
+"PO-Revision-Date: 2020-05-15 14:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1035,26 +1035,20 @@ msgstr "Изменить палитру"
 msgid "Patrons:"
 msgstr "Меценаты:"
 
-msgid "Changes"
-msgstr "Изменения"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Платиновый спонсор"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Золотые спонсоры"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Заполнитель Платиновых Спонсоров"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Заполнитель Золотых Спонсоров"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Не показывать снова"
-
-msgid "Take this spot!"
-msgstr "Возьмите это место!"
 
 msgid "Image Options"
 msgstr "Параметры изображения"
