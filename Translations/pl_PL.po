@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-15 14:22\n"
+"PO-Revision-Date: 2020-05-15 17:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1037,16 +1037,16 @@ msgid "Patrons:"
 msgstr "Patroni:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Chcesz wyświetlać swoje imię lub nazwę swojej firmy na ekranie powitalnym?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Zostań Platynowym Sponsorem"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Zostań Złotym Sponsorem"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Zostań patronem"
 
 msgid "Don't show again"
 msgstr "Nie pokazuj ponownie"
