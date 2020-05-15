@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-15 03:37\n"
+"PO-Revision-Date: 2020-05-15 04:06\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -477,7 +477,7 @@ msgid "copy"
 msgstr ""
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Pixelorama'dan çıkmak istediğine emin misin?"
 
 msgid "Unsaved Image"
 msgstr "Kaydedilmemiş Resim"
