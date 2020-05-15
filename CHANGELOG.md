@@ -1,10 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.7] - Unreleased
+## [v0.7] - 2020-05-16
 This update has been brought to you by the contributions of:
 
 Martin Novák (novhack), Darshan Phaldesai (luiq54), Schweini07, Marco Galli (Gaarco), Matheus Pesegoginski (MatheusPese),
@@ -72,7 +72,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - The guides no longer work with undo/redo.
 <br><br>
 
-## [v0.6.2] - 17-02-2020
+## [v0.6.2] - 2020-02-17
 
 ### Added
 - Image layer rotation! Choose between 2 rotation algorithms, Rotxel and Nearest Neighbour - Thanks to azagaya!
@@ -110,7 +110,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - Fixed bug where resizing the image on export and moving selection content were not working on Godot 3.2 - Issues #161 and #162
 <br><br>
 
-## [v0.6.1] - 13-01-2020
+## [v0.6.1] - 2020-01-13
 
 ### Added
 - Italian translation - thanks to Gaarco!
@@ -141,7 +141,7 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - Fixed issue where undo/redo was not working properly for straight lines that went outside the canvas.
 <br><br>
 
-## [v0.6] - 06-01-2020
+## [v0.6] - 2020-01-06
 
 ### Added
 - Palettes. You can choose default ones or make your own! (Thanks to greusser/CheetoHead - issue #27)
