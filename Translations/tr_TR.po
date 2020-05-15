@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-15 04:16\n"
+"PO-Revision-Date: 2020-05-15 14:21\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1010,26 +1010,20 @@ msgstr "Paleti Düzenle"
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
-msgstr "Değişiklikler"
-
-msgid "Platinum Sponsor"
-msgstr "Platin Sponsor"
-
-msgid "Gold Sponsors"
-msgstr "Altın Sponsolar"
-
-msgid "Platinum Sponsor Placeholder"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Platinum Sponsor"
+msgstr ""
+
+msgid "Become a Gold Sponsor"
+msgstr ""
+
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
 msgstr "Bir daha gösterme"
-
-msgid "Take this spot!"
-msgstr ""
 
 msgid "Image Options"
 msgstr "Resim Ayarları"
