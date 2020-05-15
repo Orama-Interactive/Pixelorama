@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pixelorama_logo.png-115ab1b7d602d070d95d91bfeca0d21c.stex"
+path="res://.import/splash_screen_image_v0.7.png-642d50de4be082a7004e97e4fa36146a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screen/pixelorama_logo.png"
-dest_files=[ "res://.import/pixelorama_logo.png-115ab1b7d602d070d95d91bfeca0d21c.stex" ]
+source_file="res://assets/graphics/splash_screen/splash_screen_image_v0.7.png"
+dest_files=[ "res://.import/splash_screen_image_v0.7.png-642d50de4be082a7004e97e4fa36146a.stex" ]
 
 [params]
 

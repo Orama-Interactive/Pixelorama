@@ -1,22 +1,24 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/splash_screen/pixelorama_logo.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/splash_screen/become_a_patron.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/splash_screen/become_a_patron_hover.png" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/splash_screen/splash_art.png" type="Texture" id=5]
-[ext_resource path="res://assets/fonts/Roboto-Bold.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/graphics/splash_screen/splash_screen_image_v0.7.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture" id=8]
 [ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
 [ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_top = 20
+border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
+expand_margin_top = 20.0
+
 [node name="SplashDialog" type="WindowDialog"]
-margin_right = 48.0
-margin_bottom = 1.0
-rect_min_size = Vector2( 630, 630 )
-resizable = true
+margin_right = 640.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 640, 550 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,236 +27,102 @@ __meta__ = {
 [node name="Contents" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Contents"]
-margin_right = 630.0
-margin_bottom = 436.0
-custom_constants/separation = 0
-
-[node name="Logo_ArtWork" type="VBoxContainer" parent="Contents/HBoxContainer"]
-margin_right = 350.0
-margin_bottom = 436.0
-rect_min_size = Vector2( 350, 0 )
-custom_constants/separation = 15
-
-[node name="PixeloramaLogo" type="TextureRect" parent="Contents/HBoxContainer/Logo_ArtWork"]
-margin_right = 350.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 0, 80 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="SplashArt" type="TextureRect" parent="Contents"]
+margin_right = 647.0
+margin_bottom = 406.0
+rect_min_size = Vector2( 640, 406 )
 texture = ExtResource( 2 )
-stretch_mode = 6
-
-[node name="CenterContainer" type="MarginContainer" parent="Contents/HBoxContainer/Logo_ArtWork"]
-margin_top = 129.0
-margin_right = 350.0
-margin_bottom = 436.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-
-[node name="ArtContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Logo_ArtWork/CenterContainer"]
-margin_right = 350.0
-margin_bottom = 307.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 17
-
-[node name="SplashArt" type="TextureButton" parent="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer"]
-margin_left = 40.0
-margin_right = 310.0
-margin_bottom = 270.0
-rect_min_size = Vector2( 270, 270 )
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 6
-texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 
-[node name="ArtCredits" type="Button" parent="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer"]
-margin_top = 287.0
-margin_right = 350.0
-margin_bottom = 307.0
+[node name="ArtBy" type="HBoxContainer" parent="Contents/SplashArt"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -117.0
+margin_top = 50.0
+margin_right = -10.0
+margin_bottom = 71.0
+grow_horizontal = 0
+custom_constants/separation = -3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtByLabel" type="Label" parent="Contents/SplashArt/ArtBy"]
+margin_top = 3.0
+margin_right = 42.0
+margin_bottom = 17.0
 mouse_default_cursor_shape = 2
-custom_constants/hseparation = 0
-text = "Art by Erevoid"
+size_flags_horizontal = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Art by:"
+
+[node name="ArtistName" type="Button" parent="Contents/SplashArt/ArtBy"]
+margin_left = 39.0
+margin_right = 124.0
+margin_bottom = 21.0
+hint_tooltip = "https://twitter.com/WishdreamStar"
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.764706, 0.764706, 0.764706, 1 )
+custom_colors/font_color_pressed = Color( 0.521569, 0.521569, 0.521569, 1 )
+text = "Wishdream"
 flat = true
 
-[node name="VSeparator" type="VSeparator" parent="Contents/HBoxContainer"]
-margin_left = 350.0
-margin_right = 354.0
-margin_bottom = 436.0
+[node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents"]
+margin_top = 414.0
+margin_right = 647.0
+margin_bottom = 547.0
 
-[node name="Buttons_Changelog" type="MarginContainer" parent="Contents/HBoxContainer"]
-margin_left = 354.0
-margin_right = 630.0
-margin_bottom = 436.0
-size_flags_horizontal = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+[node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos"]
+margin_right = 4.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 4, 0 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 266.0
-margin_bottom = 426.0
-size_flags_horizontal = 3
-custom_constants/separation = 10
-
-[node name="Buttons" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
-margin_right = 256.0
+[node name="Buttons" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos"]
+margin_left = 8.0
+margin_right = 298.0
 margin_bottom = 110.0
-size_flags_vertical = 3
+rect_min_size = Vector2( 290, 0 )
+size_flags_vertical = 0
 custom_constants/separation = 10
 
-[node name="NewBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
-margin_right = 256.0
+[node name="NewBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
+margin_right = 290.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "New"
 
-[node name="OpenBtn " type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+[node name="OpenBtn " type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
 margin_top = 30.0
-margin_right = 256.0
+margin_right = 290.0
 margin_bottom = 50.0
 mouse_default_cursor_shape = 2
 text = "Open"
 
-[node name="OpenLastBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+[node name="OpenLastBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
 margin_top = 60.0
-margin_right = 256.0
+margin_right = 290.0
 margin_bottom = 80.0
 mouse_default_cursor_shape = 2
 text = "Open Last Project"
 
-[node name="ImportBtn" type="Button" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons"]
+[node name="ImportBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
 margin_top = 90.0
-margin_right = 256.0
+margin_right = 290.0
 margin_bottom = 110.0
 mouse_default_cursor_shape = 2
 text = "Import"
 
-[node name="HSeparator" type="HSeparator" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
-margin_top = 120.0
-margin_right = 256.0
-margin_bottom = 124.0
-
-[node name="Changlog" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer"]
-margin_top = 134.0
-margin_right = 256.0
-margin_bottom = 416.0
-size_flags_vertical = 3
-custom_constants/separation = 8
-
-[node name="ChangesLabel" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog"]
-margin_right = 256.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "v0.6 Changes"
-
-[node name="ChangelogContainer" type="VBoxContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog"]
-margin_top = 22.0
-margin_right = 256.0
-margin_bottom = 282.0
-size_flags_horizontal = 3
-
-[node name="ChangelogScroll" type="ScrollContainer" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer"]
-margin_right = 256.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 0, 260 )
-
-[node name="Label" type="Label" parent="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangelogContainer/ChangelogScroll"]
-margin_right = 256.0
-margin_bottom = 2717.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Added
-- Cels are now in the timeline. Each cel refers to a specific layer AND a frame. Frames are a collection of cels for every layer.
-- Cel linking is now possible. This way, layers can be \"shared\" in multiple frames.
-- You can now group multiple frames with tags.
-- You can now export your projects to `.gif` files.
-- A new rotation method has been added, \"Upscale, Rotate and Downscale\". It's similar to Rotsprite.
-- An HSV Adjust dialog has been added in the Images menu.
-- Pattern filling is now possible. The bucket tool can now use Patterns to fill areas, instead of a single color.
-- An autosave feature that keeps backups of unsaved projects have been added. In the case of a software crash, the users can restore their work with this system.
-- Users can now change keyboard shortcut bindings for tools, in the Preferences.
-- Pixel Perfect mode has been added for pencil, eraser and lighten/darken tools.
-- Importing `.pngs` as palettes is now possible.
-- A confirmation message now appears when the user quits Pixelorama, if there are unsaved changes.
-- The last edited project gets loaded at startup (toggleable in the Preferences), along with a new option in the File menu that also does this.
-- Templates and a lock aspect ratio option have been added to the \"Create new image\" dialog.
-- Locking layers is now possible. When a layer is locked, no changes can be made to it. Layers are unlocked by default.
-- Ability to get color for palette buttons, when editing a palette, from the currently selected left and right colors.
-- Esperanto, Indonesian & Czech translation.
-- When the image is unsaved and the user tries to make a new one, a new warning dialog will appear to ask for confirmation.
-- A new zoom tool has been added, and you can also zoom in with the `+` key, and zoom out with `-`.
-- You can now move the canvas with the `Arrow keys`. `Shift + Arrows` make it move with medium speed, and `Ctrl + Shift + Arrows` makes it move with high speed.
-- The left and right tool icon options (found in Preferences) are now saved and restored on startup.
-
-Changed
-- The UI - and especially the timeline - has been revamped!
-- The export dialog has also been revamped.
-- An asterisk is added to the window title if there are unsaved changes.
-- A VSplitContainer has been added between the canvas and the timeline.
-- The texture of the transparent checker background is now no longer affected by the zoom value. The users can now also change the texture's colors and the size.
-- Notification text is now black on the gold and light themes.
-- Layer's LineEdit now saves the changes when it loses focus, or when the user presses ESC (or Enter).
-- LineEdits lose focus when the user presses Enter.
-- When cloning a frame, the clone will appear next to the original.
-- Layer visibility is taken into account when exporting the drawing as a `.png` file. This means that invisible layers will not be included in the final `.png` file.
-- The Godot theme has changed.
-- Visual change, added border outlines to all window dialogs.
-- Animation now loops by default.
-- Onion skinning settings have been moved to a popup window, and 2 new buttons were added. One that toggles onion skinning, and one that opens the settings window.
-- The default window size is now 1280x720, and the minimum window size is 1024x576.
-- `.pxo` files now use ZSTD compression to result in smaller file sizes.
-- Palettes/Brushes get loaded/saved in appropriate locations as specified by the XDG basedir standard, for easier usage of standard Linux/BSD packaging methods and for better per-user usability.
-- The splash screen has been revamped and is no longer purple, it now gets affected by the chosen theme.
-- The brush selection popup now closes when a brush is selected.
-- Pixelorama's version number now appears on the window title.
-
-Fixed
-- Chinese characters not being rendered in notifications (the labels that appear when undoing/redoing) and at the splash screen for Platinum & Gold Sponsor Placeholder labels
-- Fixed issue when moving frames, the current frame was being shown but the frame next to it was actually the one being drawn on.
-- Fixed issue with LineEdits not letting go of focus when the user clicked somewhere else. (Issue #167)
-- When the palette, outline and rotate image dialogs are open, the user can't zoom in the canvas anymore.
-- Fixed bug where the user could drag the selection and the guides when the canvas had no focus.
-- The zoom label on the top bar now shows the correct zoom value when smooth zoom is enabled.
-- Fixed issue with Space triggering the event of the last pressed button. This caused unwanted behavior when using Space to move the canvas around. Resolved by changing the focus mode of the buttons to None.
-
-Removed
-- It's no longer possible for frames to have different amounts of layers. All frames have the same amount.
-- The guides no longer work with undo/redo."
-autowrap = true
-
-[node name="HSeparator" type="HSeparator" parent="Contents"]
-margin_top = 436.0
-margin_right = 630.0
-margin_bottom = 440.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Contents"]
-margin_top = 440.0
-margin_right = 630.0
-margin_bottom = 630.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="Info" type="HBoxContainer" parent="Contents/MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 620.0
-margin_bottom = 180.0
+[node name="Info" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos"]
+margin_left = 302.0
+margin_right = 639.0
+margin_bottom = 133.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 3
@@ -262,204 +130,166 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sponsors" type="HBoxContainer" parent="Contents/MarginContainer/Info"]
-margin_right = 362.0
-margin_bottom = 170.0
+[node name="Sponsors" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
+margin_right = 201.0
+margin_bottom = 133.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
-[node name="PlatinumContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/Sponsors"]
-margin_right = 125.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 125, 0 )
-
-[node name="Label" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
-margin_right = 125.0
-margin_bottom = 14.0
-text = "Platinum Sponsor"
-align = 1
-
-[node name="PlaceholderLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
-margin_top = 74.0
-margin_right = 125.0
-margin_bottom = 89.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
-custom_colors/font_color = Color( 0.678431, 0.611765, 0.807843, 1 )
-text = "Platinum Sponsor"
-align = 1
-
-[node name="TakeThisSpot" type="Button" parent="Contents/MarginContainer/Info/Sponsors/PlatinumContainer"]
-margin_top = 150.0
-margin_right = 125.0
-margin_bottom = 170.0
-mouse_default_cursor_shape = 2
-text = "Take this spot!"
-flat = true
-
-[node name="VSeparator" type="VSeparator" parent="Contents/MarginContainer/Info/Sponsors"]
-margin_left = 130.0
-margin_right = 134.0
-margin_bottom = 170.0
-
-[node name="GoldContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/Sponsors"]
-margin_left = 139.0
-margin_right = 264.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 125, 0 )
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
-margin_right = 125.0
-margin_bottom = 14.0
-text = "Gold Sponsors"
-align = 1
-
-[node name="PlaceholderLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
-margin_top = 74.0
-margin_right = 125.0
-margin_bottom = 89.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
-custom_colors/font_color = Color( 0.678431, 0.611765, 0.807843, 1 )
-text = "Gold Sponsors"
-align = 1
-
-[node name="TakeThisSpot" type="Button" parent="Contents/MarginContainer/Info/Sponsors/GoldContainer"]
-margin_top = 150.0
-margin_right = 125.0
-margin_bottom = 170.0
-mouse_default_cursor_shape = 2
-text = "Take this spot!"
-flat = true
-
-[node name="VSeparator2" type="VSeparator" parent="Contents/MarginContainer/Info/Sponsors"]
-margin_left = 269.0
-margin_right = 273.0
-margin_bottom = 170.0
-
-[node name="PatronContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/Sponsors"]
-margin_left = 278.0
-margin_right = 362.0
-margin_bottom = 170.0
+[node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors"]
+margin_right = 201.0
+margin_bottom = 133.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
-alignment = 1
 
-[node name="PatronsLabel" type="Label" parent="Contents/MarginContainer/Info/Sponsors/PatronContainer"]
-margin_right = 84.0
-margin_bottom = 14.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer"]
+margin_right = 201.0
+margin_bottom = 48.0
+custom_constants/separation = 0
+
+[node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/HBoxContainer"]
+margin_right = 6.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 6, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/HBoxContainer"]
+margin_left = 6.0
+margin_right = 201.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
-text = "Patrons:"
-align = 1
+text = "Want your name or your company to be shown on the splash screen?"
+autowrap = true
 
-[node name="PatronButton" type="TextureButton" parent="Contents/MarginContainer/Info/Sponsors/PatronContainer"]
-margin_top = 24.0
-margin_right = 84.0
-margin_bottom = 170.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer"]
+margin_top = 58.0
+margin_right = 201.0
+margin_bottom = 114.0
+custom_constants/separation = -2
+
+[node name="BecomePlatinum" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
+margin_right = 201.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-stretch_mode = 5
+text = "- Become a Platinum Sponsor"
+flat = true
+align = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info"]
-margin_left = 365.0
-margin_right = 610.0
-margin_bottom = 170.0
-size_flags_horizontal = 3
+[node name="BecomeGold" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 201.0
+margin_bottom = 38.0
+mouse_default_cursor_shape = 2
+text = "- Become a Gold Sponsor"
+flat = true
+align = 0
+
+[node name="BecomePatron" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 201.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+text = "- Become a Patron"
+flat = true
+align = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
+margin_left = 204.0
+margin_right = 337.0
+margin_bottom = 133.0
 size_flags_vertical = 3
 custom_constants/separation = 5
 alignment = 2
 
-[node name="Branding" type="HBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer"]
-margin_right = 245.0
-margin_bottom = 141.0
-size_flags_horizontal = 3
+[node name="Branding" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer"]
+margin_right = 133.0
+margin_bottom = 104.0
 size_flags_vertical = 3
 alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer/Branding"]
-margin_left = 112.0
-margin_right = 209.0
-margin_bottom = 141.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
+margin_right = 97.0
+margin_bottom = 104.0
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Logo" type="TextureRect" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer"]
-margin_top = 21.0
+[node name="Logo" type="TextureRect" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/VBoxContainer"]
+margin_top = 3.0
 margin_right = 97.0
-margin_bottom = 85.0
+margin_bottom = 67.0
 texture = ExtResource( 8 )
 stretch_mode = 4
 
-[node name="DevelopedBy" type="Label" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer"]
-margin_top = 89.0
+[node name="DevelopedBy" type="Label" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/VBoxContainer"]
+margin_top = 71.0
 margin_right = 97.0
-margin_bottom = 102.0
+margin_bottom = 84.0
 custom_fonts/font = ExtResource( 7 )
 text = "Orama Interactive"
 align = 1
 
-[node name="Copyright" type="Label" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer"]
-margin_top = 106.0
+[node name="Copyright" type="Label" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/VBoxContainer"]
+margin_top = 88.0
 margin_right = 97.0
-margin_bottom = 119.0
+margin_bottom = 101.0
 custom_fonts/font = ExtResource( 7 )
 text = "Copyright 2019-2020"
 align = 1
 
-[node name="Links" type="VBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer/Branding"]
-margin_left = 213.0
-margin_right = 245.0
-margin_bottom = 141.0
+[node name="Links" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
+margin_left = 101.0
+margin_right = 133.0
+margin_bottom = 104.0
 
-[node name="GithubButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+[node name="GithubButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
 margin_right = 32.0
 margin_bottom = 32.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 10 )
 
-[node name="DiscordButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+[node name="DiscordButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 9 )
 
-[node name="PatreonButton" type="TextureButton" parent="Contents/MarginContainer/Info/VBoxContainer/Branding/Links"]
+[node name="PatreonButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
 margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Contents/MarginContainer/Info/VBoxContainer"]
-margin_top = 146.0
-margin_right = 245.0
-margin_bottom = 170.0
-alignment = 2
-
-[node name="ShowOnStartup" type="CheckBox" parent="Contents/MarginContainer/Info/VBoxContainer/HBoxContainer"]
-margin_left = 140.0
-margin_right = 245.0
-margin_bottom = 24.0
+[node name="ShowOnStartup" type="CheckBox" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer"]
+margin_left = 28.0
+margin_top = 109.0
+margin_right = 133.0
+margin_bottom = 133.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 8
 custom_fonts/font = ExtResource( 7 )
 text = "Don't show again"
+
+[node name="SpacerControl2" type="Control" parent="Contents/ButtonsPatronsLogos"]
+margin_left = 643.0
+margin_right = 647.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 4, 0 )
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
-[connection signal="pressed" from="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer/SplashArt" to="." method="_on_ArtCredits_pressed"]
-[connection signal="pressed" from="Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer/ArtCredits" to="." method="_on_ArtCredits_pressed"]
-[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
-[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/OpenBtn " to="." method="_on_OpenBtn__pressed"]
-[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
-[connection signal="pressed" from="Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Buttons/ImportBtn" to="." method="_on_ImportBtn_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/PlatinumContainer/TakeThisSpot" to="." method="_on_TakeThisSpot_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/GoldContainer/TakeThisSpot" to="." method="_on_TakeThisSpot_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/Sponsors/PatronContainer/PatronButton" to="." method="_on_PatronButton_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
-[connection signal="toggled" from="Contents/MarginContainer/Info/VBoxContainer/HBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]
+[connection signal="pressed" from="Contents/SplashArt/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn " to="." method="_on_OpenBtn__pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/ImportBtn" to="." method="_on_ImportBtn_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePlatinum" to="." method="_on_TakeThisSpot_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomeGold" to="." method="_on_TakeThisSpot_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePatron" to="." method="_on_TakeThisSpot_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
+[connection signal="toggled" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]
