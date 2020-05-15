@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-11 17:09\n"
+"PO-Revision-Date: 2020-05-15 14:22\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1034,26 +1034,20 @@ msgstr "Edit Palet"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "Perubahan"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Sponsor Platinum"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Sponsor emas"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Belum ada"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Belum ada"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Jangan perlihatkan lagi"
-
-msgid "Take this spot!"
-msgstr "Ambil tempat ini!"
 
 msgid "Image Options"
 msgstr "Opsi Menggambar"
