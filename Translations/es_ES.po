@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-05-11 17:08\n"
+"PO-Revision-Date: 2020-05-15 14:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1008,26 +1008,20 @@ msgstr "Editar Paleta"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "Cambios"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Patrocinador Platino"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Patrocinador Oro"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Marcador de posición del Patrocinador Platino"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Marcador de posición del Patrocinador Oro"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "No mostrar de nuevo"
-
-msgid "Take this spot!"
-msgstr "¡Toma este sitio!"
 
 msgid "Image Options"
 msgstr "Opciones de imagen"
