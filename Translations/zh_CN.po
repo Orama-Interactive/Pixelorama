@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-15 14:22\n"
+"PO-Revision-Date: 2020-05-15 15:09\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1038,16 +1038,16 @@ msgid "Patrons:"
 msgstr "赞助:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "想要在启动屏幕上显示您的名字或公司吗？"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "成为白金赞助商"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "成为赞助商"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "成为赞助者"
 
 msgid "Don't show again"
 msgstr "不再显示"
