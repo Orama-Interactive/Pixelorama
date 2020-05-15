@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-15 03:26\n"
+"PO-Revision-Date: 2020-05-15 03:37\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -207,7 +207,7 @@ msgid "Cancel Export"
 msgstr ""
 
 msgid "Alert!"
-msgstr ""
+msgstr "Uyarı!"
 
 msgid "Select Current Folder"
 msgstr ""
@@ -222,7 +222,7 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Arka plan:"
 
 msgid "Direction:"
 msgstr ""
@@ -258,7 +258,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr ""
+msgstr "Dosya:"
 
 msgid "Interpolation:"
 msgstr ""
@@ -288,7 +288,7 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Kısayollar"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -456,10 +456,10 @@ msgid "Development Team"
 msgstr "Geliştirici Takımı"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Baş Programcı"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "KA Tasarımcısı"
 
 msgid "GitHub Contributors"
 msgstr ""
@@ -643,7 +643,7 @@ msgid "Brush: Circle"
 msgstr "Fırça: Daire"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Fırça: Dolu Daire"
 
 msgid "Custom brush"
 msgstr "Özel fırça"
@@ -688,7 +688,7 @@ msgid "Amount:"
 msgstr "Miktar:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Açıklık/Karanlık miktarı"
 
 msgid "Pick for:"
 msgstr ""
@@ -703,10 +703,10 @@ msgid "Mode:"
 msgstr ""
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Yakınlaştır"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Uzaklaştır"
 
 msgid "Options:"
 msgstr "Ayarlar:"
@@ -773,10 +773,10 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr ""
+msgstr "Döngü kapalı"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Döngüyü açık"
 
 msgid "Ping-pong loop"
 msgstr ""
@@ -1000,7 +1000,7 @@ msgid "Error: Palette named '%s' already exists!"
 msgstr ""
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Geçersiz palet dosyası!"
 
 msgid "Edit Palette"
 msgstr "Paleti Düzenle"
@@ -1030,7 +1030,7 @@ msgid "Take this spot!"
 msgstr ""
 
 msgid "Image Options"
-msgstr ""
+msgstr "Resim Ayarları"
 
 msgid "Default width:"
 msgstr ""
