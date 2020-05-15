@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-15 03:10\n"
+"PO-Revision-Date: 2020-05-15 03:17\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -444,7 +444,7 @@ msgid "Spanish"
 msgstr "İspanyolca"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
 msgstr "Endonezce"
@@ -670,10 +670,10 @@ msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Seçilen renk"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Şablon"
 
 msgid "Offset"
 msgstr ""
@@ -804,13 +804,13 @@ msgid "Blue-Red Mode"
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Yeni bir kare ekle"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Kareyi Sil"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Kareyi Klonla"
 
 msgid "Move Left"
 msgstr ""
@@ -828,16 +828,16 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Katman"
 
 msgid "Layers"
-msgstr ""
+msgstr "Katmanlar"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Yeni katman oluştur"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Şu anki katmanı sil"
 
 msgid "Move up the current layer"
 msgstr ""
@@ -852,7 +852,7 @@ msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Saydamlık:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -868,16 +868,16 @@ msgid "Palette"
 msgstr "Palet"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletler"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Yeni bir palet ekle"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Şu anki paleti düzenle"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Bir palet seç"
 
 msgid "Undo: Draw"
 msgstr ""
@@ -1012,10 +1012,10 @@ msgid "Changes"
 msgstr ""
 
 msgid "Platinum Sponsor"
-msgstr ""
+msgstr "Platin Sponsor"
 
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Altın Sponsolar"
 
 msgid "Platinum Sponsor Placeholder"
 msgstr ""
@@ -1024,7 +1024,7 @@ msgid "Gold Sponsors Placeholder"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Bir daha gösterme"
 
 msgid "Take this spot!"
 msgstr ""
@@ -1054,7 +1054,7 @@ msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "Şablonlar:"
 
 msgid "Preset"
 msgstr ""
@@ -1075,16 +1075,16 @@ msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Renk Seçici"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Kalem"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Silgi"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Kova"
 
 msgid "Lighten/Darken"
 msgstr ""
