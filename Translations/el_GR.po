@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-09 23:15\n"
+"PO-Revision-Date: 2020-05-15 19:39\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -295,7 +295,7 @@ msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "Η μετάβαση στο ζουμ είναι πιο ομαλή"
+msgstr "Κάνει την μετάβαση στην μεγέθυνση ή σμίκρυνση πιο ομαλή"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Ευαισθησία πίεσης tablet:"
@@ -341,6 +341,27 @@ msgstr "Περίγραμμα"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
+
+msgid "Adjust HSV"
+msgstr "Ρύθμιση HSV"
+
+msgid "Type:"
+msgstr "Είδος:"
+
+msgid "Angle:"
+msgstr "Γωνία:"
+
+msgid "Hue"
+msgstr "Απόχρωση"
+
+msgid "Saturation"
+msgstr "Κορεσμός"
+
+msgid "Value"
+msgstr "Τιμή"
+
+msgid "Apply"
+msgstr "Εφαρμογή"
 
 msgid "Diagonal"
 msgstr "Διαγώνιος"
@@ -431,6 +452,12 @@ msgstr "Ινδονησιακά"
 
 msgid "Czech"
 msgstr "Τσεχικά"
+
+msgid "Arabic"
+msgstr "Αραβικά"
+
+msgid "Turkish"
+msgstr "Τουρκικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
@@ -995,6 +1022,9 @@ msgstr "Όνομα Παλέτας:"
 msgid "Color Name:"
 msgstr "Όνομα Χρώματος:"
 
+msgid "Use current left & right colors"
+msgstr "Χρήση των επιλεγμένων χρωμάτων (αριστερού & δεξιού)"
+
 msgid "Create a new empty palette?"
 msgstr "Δημιουργία νέας κενής παλέτας;"
 
@@ -1013,26 +1043,20 @@ msgstr "Επεξεργασία Παλέτας"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "Αλλαγές"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "Θέλετε το όνομά σας ή της εταιρείας σας να φαίνεται στην οθόνη εκκίνησης;"
 
-msgid "Platinum Sponsor"
-msgstr "Πλατινένιος Σπόνσορας"
+msgid "Become a Platinum Sponsor"
+msgstr "Γίνετε Πλατινένιος Χορηγός"
 
-msgid "Gold Sponsors"
-msgstr "Χρυσοί Σπόνσορες"
+msgid "Become a Gold Sponsor"
+msgstr "Γίνετε Χρυσός Χορηγός"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Θέση για Πλατινένιο Σπόνσορα"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Θέση για Χρυσούς Σπόνσορες"
+msgid "Become a Patron"
+msgstr "Γίνετε Χορηγός"
 
 msgid "Don't show again"
 msgstr "Να μην εμφανιστεί ξανά"
-
-msgid "Take this spot!"
-msgstr "Πάρτε αυτή τη θέση!"
 
 msgid "Image Options"
 msgstr "Επιλογές εικόνας"

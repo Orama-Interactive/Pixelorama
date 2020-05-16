@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-09 12:59\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -342,6 +342,27 @@ msgstr "Obrys"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Úprava Odstínu/Nasycení/Hodnoty"
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "Úhlopříčka"
 
@@ -431,6 +452,12 @@ msgstr "Indonéština"
 
 msgid "Czech"
 msgstr "Čeština"
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
@@ -995,6 +1022,9 @@ msgstr "Název palety:"
 msgid "Color Name:"
 msgstr "Název barvy:"
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr "Vytvořit novou prázdnou paletu?"
 
@@ -1013,26 +1043,20 @@ msgstr "Upravit paletu"
 msgid "Patrons:"
 msgstr "Patroni:"
 
-msgid "Changes"
-msgstr "Změny"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Platinový sponzor"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Zlatý sponzor"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Zástupce platinového sponzora"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Zástupce zlatého sponzora"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Příště již nezobrazovat"
-
-msgid "Take this spot!"
-msgstr "Zaberte toto místo!"
 
 msgid "Image Options"
 msgstr "Možnosti obrázku"

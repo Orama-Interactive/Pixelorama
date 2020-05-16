@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr "確定"
@@ -341,6 +341,27 @@ msgstr "描邊"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "角落"
 
@@ -429,6 +450,12 @@ msgid "Indonesian"
 msgstr ""
 
 msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
@@ -991,6 +1018,9 @@ msgstr "色盤名稱:"
 msgid "Color Name:"
 msgstr "顏色:"
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr "新增空的色盤?"
 
@@ -1009,26 +1039,20 @@ msgstr "編輯色盤"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "更新紀錄"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "白金贊助人"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "黃金贊助人"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "白金贊助保持人"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "黃金贊助保持人"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "不再顯示"
-
-msgid "Take this spot!"
-msgstr "Take this spot!"
 
 msgid "Image Options"
 msgstr "圖片選項"

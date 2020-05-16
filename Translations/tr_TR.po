@@ -8,82 +8,82 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-09 12:59\n"
+"PO-Revision-Date: 2020-05-15 19:08\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Onayla"
 
 msgid "Cancel"
-msgstr ""
+msgstr "İptal Et"
 
 msgid "Open"
-msgstr ""
+msgstr "Aç"
 
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Lütfen Onaylayın..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Resim Boyutu"
 
 msgid "Width:"
-msgstr ""
+msgstr "Genişlik:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Yükseklik:"
 
 msgid "File"
-msgstr ""
+msgstr "Dosya"
 
 msgid "Edit"
-msgstr ""
+msgstr "Düzenle"
 
 msgid "View"
-msgstr ""
+msgstr "Görüntü"
 
 msgid "Image"
-msgstr ""
+msgstr "Resim"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efektler"
 
 msgid "Help"
-msgstr ""
+msgstr "Yardım"
 
 msgid "New"
-msgstr ""
+msgstr "Yeni"
 
 msgid "New..."
-msgstr ""
+msgstr "Yeni..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Aç..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Kaydet..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Farklı Kaydet..."
 
 msgid "Import"
-msgstr ""
+msgstr "İçe aktar"
 
 msgid "Import..."
-msgstr ""
+msgstr "İçe aktar..."
 
 msgid "Import PNG..."
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "Dışa aktar"
 
 msgid "Export..."
-msgstr ""
+msgstr "Dışa aktar..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Dışa farklı aktar..."
 
 msgid "Export PNG..."
 msgstr ""
@@ -92,34 +92,34 @@ msgid "Export PNG as..."
 msgstr ""
 
 msgid "Quit"
-msgstr ""
+msgstr "Çıkış"
 
 msgid "Undo"
-msgstr ""
+msgstr "Geri al"
 
 msgid "Redo"
-msgstr ""
+msgstr "İleri Al"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Resmi Ölçüle"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Resmi Kes"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Resmi Döndür"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Seçimi Temizle"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Yatay Döndür"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Dikey Döndür"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Tercihler"
 
 msgid "Tile Mode"
 msgstr ""
@@ -128,19 +128,19 @@ msgid "Show Grid"
 msgstr ""
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Cetveli Göster"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Rehber"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Animasyon Çizelgesini Göster"
 
 msgid "Fill with color:"
 msgstr ""
 
 msgid "Open a File"
-msgstr ""
+msgstr "Dosya Aç"
 
 msgid "Open File(s)"
 msgstr ""
@@ -161,10 +161,10 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "%s dosyası zaten var. Üzerine yazılsın mı?"
 
 msgid "Directory path or file name is not valid!"
 msgstr ""
@@ -174,25 +174,25 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Kare"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Kareler:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Tüm Kareler"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animasyon"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Önizleme:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Kare:"
 
 msgid "Orientation:"
 msgstr ""
@@ -207,7 +207,7 @@ msgid "Cancel Export"
 msgstr ""
 
 msgid "Alert!"
-msgstr ""
+msgstr "Uyarı!"
 
 msgid "Select Current Folder"
 msgstr ""
@@ -222,13 +222,13 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Arka plan:"
 
 msgid "Direction:"
 msgstr ""
 
 msgid "Forward"
-msgstr ""
+msgstr "İleri"
 
 msgid "Backwards"
 msgstr ""
@@ -258,37 +258,37 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr ""
+msgstr "Dosya:"
 
 msgid "Interpolation:"
 msgstr ""
 
 msgid "Nearest"
-msgstr ""
+msgstr "En Yakın"
 
 msgid "Bilinear"
 msgstr ""
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kübik"
 
 msgid "Trilinear"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 msgid "Themes"
-msgstr ""
+msgstr "Temalar"
 
 msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Kısayollar"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -312,25 +312,25 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "Sistem Dili"
 
 msgid "Dark"
-msgstr ""
+msgstr "Koyu"
 
 msgid "Gray"
-msgstr ""
+msgstr "Gri"
 
 msgid "Blue"
-msgstr ""
+msgstr "Mavi"
 
 msgid "Caramel"
 msgstr ""
 
 msgid "Light"
-msgstr ""
+msgstr "Açık"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Renkleri Tersle"
 
 msgid "Desaturation"
 msgstr ""
@@ -341,6 +341,27 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr "Değer"
+
+msgid "Apply"
+msgstr "Uygula"
+
 msgid "Diagonal"
 msgstr ""
 
@@ -348,97 +369,103 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Kalınlık:"
 
 msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Çevrimiçi Dökümanlar"
 
 msgid "Issue Tracker"
 msgstr ""
 
 msgid "Changelog"
-msgstr ""
+msgstr "Değişiklikler"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Pixelorama Hakkında"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
 msgid "Website"
-msgstr ""
+msgstr "İnternet sitesi"
 
 msgid "Donate"
-msgstr ""
+msgstr "Bağış"
 
 msgid "Developers"
-msgstr ""
+msgstr "Geliştiriciler"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Katkıda Bulunanlar"
 
 msgid "Donors"
-msgstr ""
+msgstr "Bağışçılar"
 
 msgid "Translators"
-msgstr ""
+msgstr "Çevirmenler"
 
 msgid "English"
-msgstr ""
+msgstr "İngilizce"
 
 msgid "Greek"
-msgstr ""
+msgstr "Yunanca"
 
 msgid "French"
-msgstr ""
+msgstr "Fransızca"
 
 msgid "German"
-msgstr ""
+msgstr "Almanca"
 
 msgid "Polish"
-msgstr ""
+msgstr "Lehçe"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brezilya Portekizcesi"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rusça"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Basitleştirilmiş Çince"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Geleneksel Çince"
 
 msgid "Italian"
-msgstr ""
+msgstr "İtalyanca"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letonca"
 
 msgid "Spanish"
-msgstr ""
+msgstr "İspanyolca"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Endonezce"
 
 msgid "Czech"
+msgstr "Çekçe"
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
-msgstr ""
+msgstr "Geliştirici Takımı"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Baş Programcı"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "KA Tasarımcısı"
 
 msgid "GitHub Contributors"
 msgstr ""
@@ -456,10 +483,10 @@ msgid "copy"
 msgstr ""
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Pixelorama'dan çıkmak istediğine emin misin?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Kaydedilmemiş Resim"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
@@ -468,13 +495,13 @@ msgid "Save before exiting?"
 msgstr ""
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Kaydedilmemiş işlemin var. Ne yapılmasını istersin?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Kaydet & Çık"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Kaydetmeden çık"
 
 msgid "Utility Tools"
 msgstr ""
@@ -497,7 +524,7 @@ msgid "Color Picker\n"
 msgstr ""
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Çizim Aletleri"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -514,7 +541,9 @@ msgstr ""
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Kova\n\n"
+"sol fare butonu için %s\n"
+"sağ fare butonu için %s"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
@@ -610,25 +639,25 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Fırça:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Bir fırça seç"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Fırça: Piksel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Fırça: Daire"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Fırça: Dolu Daire"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Özel fırça"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Fırça boyutu:"
 
 msgid "Brush color from"
 msgstr ""
@@ -649,10 +678,10 @@ msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Seçilen renk"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Şablon"
 
 msgid "Offset"
 msgstr ""
@@ -664,10 +693,10 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Miktar:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Açıklık/Karanlık miktarı"
 
 msgid "Pick for:"
 msgstr ""
@@ -682,13 +711,13 @@ msgid "Mode:"
 msgstr ""
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Yakınlaştır"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Uzaklaştır"
 
 msgid "Options:"
-msgstr ""
+msgstr "Ayarlar:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -697,10 +726,10 @@ msgid "100% Zoom"
 msgstr ""
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Yansıtma"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Yatay"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -709,13 +738,13 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Dikey"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Geçerli kare:"
 
 msgid "Current frame: 1/1"
-msgstr ""
+msgstr "Geçerli kare: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -752,10 +781,10 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr ""
+msgstr "Döngü kapalı"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Döngüyü açık"
 
 msgid "Ping-pong loop"
 msgstr ""
@@ -764,7 +793,7 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Önceki Kareler"
 
 msgid "Future Frames"
 msgstr ""
@@ -783,13 +812,13 @@ msgid "Blue-Red Mode"
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Yeni bir kare ekle"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Kareyi Sil"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Kareyi Klonla"
 
 msgid "Move Left"
 msgstr ""
@@ -807,62 +836,62 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Katman"
 
 msgid "Layers"
-msgstr ""
+msgstr "Katmanlar"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Yeni katman oluştur"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Şu anki katmanı sil"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Katmanı üste taşı"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Katmanı aşağı taşı"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Katmanı kopyala"
 
 msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Saydamlık:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Katmanı kilitle/aç"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Palet"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletler"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Yeni bir palet ekle"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Şu anki paleti düzenle"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Bir palet seç"
 
 msgid "Undo: Draw"
 msgstr ""
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "İleri: Çizim"
 
 msgid "Undo: Rectangle Select"
 msgstr ""
@@ -940,73 +969,70 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Dosya kaydedildi"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Dosya kaydedildi"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Dosya açılamadı"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Dosya kaydedilemedi"
 
 msgid "File exported"
 msgstr ""
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Yeni Palet"
 
 msgid "Import Palette"
 msgstr ""
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Palet İsmi:"
 
 msgid "Color Name:"
+msgstr "Renk İsmi:"
+
+msgid "Use current left & right colors"
 msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Hata: Paletin herhangi bir ismi olmalıdır."
 
 msgid "Error: Palette named '%s' already exists!"
 msgstr ""
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Geçersiz palet dosyası!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Paleti Düzenle"
 
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Platinum Sponsor"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors"
+msgid "Become a Gold Sponsor"
 msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr ""
-
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
-
-msgid "Take this spot!"
-msgstr ""
+msgstr "Bir daha gösterme"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Resim Ayarları"
 
 msgid "Default width:"
 msgstr ""
@@ -1030,7 +1056,7 @@ msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "Şablonlar:"
 
 msgid "Preset"
 msgstr ""
@@ -1051,16 +1077,16 @@ msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Renk Seçici"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Kalem"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Silgi"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Kova"
 
 msgid "Lighten/Darken"
 msgstr ""
@@ -1093,10 +1119,10 @@ msgid "Cannot find last project file."
 msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Son Projeyi Aç"
 
 msgid "Open last project..."
 msgstr ""
@@ -1108,13 +1134,13 @@ msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Otomatik kaydetmeyi etkinleştir"
 
 msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
-msgstr ""
+msgstr "dakika(lar)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1123,10 +1149,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"

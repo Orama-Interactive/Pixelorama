@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -342,6 +342,27 @@ msgstr "Ārlīnija"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "Diagonāle"
 
@@ -430,6 +451,12 @@ msgid "Indonesian"
 msgstr ""
 
 msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
@@ -991,6 +1018,9 @@ msgstr "Paletes nosaukums:"
 msgid "Color Name:"
 msgstr "Krāsas nosaukums:"
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr "Izveidot jaunu tukšu paleti?"
 
@@ -1009,26 +1039,20 @@ msgstr "Rediģēt paleti"
 msgid "Patrons:"
 msgstr "Labvēļi:"
 
-msgid "Changes"
-msgstr "Izmaiņas"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Platīna sponsors"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Zelta sponsors"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Platīna sponsora aizvietotājs"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Zelta sponsora aizvietotājs"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Vairāk nerādīt"
-
-msgid "Take this spot!"
-msgstr "Ieņemt šo vietu!"
 
 msgid "Image Options"
 msgstr "Bildes uzstādījumi"

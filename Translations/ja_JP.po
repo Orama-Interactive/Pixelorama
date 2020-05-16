@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr ""
@@ -341,6 +341,27 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr ""
 
@@ -429,6 +450,12 @@ msgid "Indonesian"
 msgstr ""
 
 msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
@@ -966,6 +993,9 @@ msgstr ""
 msgid "Color Name:"
 msgstr ""
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr ""
 
@@ -984,25 +1014,19 @@ msgstr ""
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Platinum Sponsor"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors"
+msgid "Become a Gold Sponsor"
 msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr ""
-
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
-
-msgid "Take this spot!"
 msgstr ""
 
 msgid "Image Options"

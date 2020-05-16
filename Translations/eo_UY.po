@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-15 20:08\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "Helpo"
 
 msgid "New"
-msgstr ""
+msgstr "Nova"
 
 msgid "New..."
 msgstr "Nova..."
@@ -68,10 +68,10 @@ msgid "Save as..."
 msgstr "Konservi kiel..."
 
 msgid "Import"
-msgstr ""
+msgstr "Enporti"
 
 msgid "Import..."
-msgstr ""
+msgstr "Enporti..."
 
 msgid "Import PNG..."
 msgstr "Enporti PNGn..."
@@ -80,10 +80,10 @@ msgid "Export"
 msgstr "Elporti"
 
 msgid "Export..."
-msgstr ""
+msgstr "Elporti..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Elporti kiel..."
 
 msgid "Export PNG..."
 msgstr "Elporti PNGn..."
@@ -342,6 +342,27 @@ msgstr "Konturoj"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr ""
 
@@ -430,6 +451,12 @@ msgid "Indonesian"
 msgstr ""
 
 msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
@@ -967,6 +994,9 @@ msgstr "Nomo de paletro:"
 msgid "Color Name:"
 msgstr "Nomo de koloro:"
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr "Ĉu krei novan malplenan paletron?"
 
@@ -985,26 +1015,20 @@ msgstr "Redakti paletron"
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
-msgstr "Ŝanĝoj"
-
-msgid "Platinum Sponsor"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Oraj sponsoroj"
-
-msgid "Platinum Sponsor Placeholder"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Gold Sponsor"
+msgstr ""
+
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
 msgstr "Ne montri denove"
-
-msgid "Take this spot!"
-msgstr ""
 
 msgid "Image Options"
 msgstr "Bildagordoj"

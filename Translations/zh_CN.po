@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-10 10:36\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr "确定"
@@ -342,6 +342,27 @@ msgstr "轮廓"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "调整色相/饱和度/值"
 
+msgid "Adjust HSV"
+msgstr "调整 HSV"
+
+msgid "Type:"
+msgstr "类型："
+
+msgid "Angle:"
+msgstr "角度："
+
+msgid "Hue"
+msgstr "色相"
+
+msgid "Saturation"
+msgstr "饱和度"
+
+msgid "Value"
+msgstr "值"
+
+msgid "Apply"
+msgstr "应用"
+
 msgid "Diagonal"
 msgstr "对角线"
 
@@ -431,6 +452,12 @@ msgstr "印度尼西亚语"
 
 msgid "Czech"
 msgstr "捷克语"
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -995,6 +1022,9 @@ msgstr "调色板名称:"
 msgid "Color Name:"
 msgstr "颜色名称:"
 
+msgid "Use current left & right colors"
+msgstr "使用当前左侧和右侧颜色"
+
 msgid "Create a new empty palette?"
 msgstr "创建一个新的空调色板?"
 
@@ -1013,26 +1043,20 @@ msgstr "编辑调色板"
 msgid "Patrons:"
 msgstr "赞助:"
 
-msgid "Changes"
-msgstr "更改"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "想要在启动屏幕上显示您的名字或公司吗？"
 
-msgid "Platinum Sponsor"
-msgstr "白金赞助商"
+msgid "Become a Platinum Sponsor"
+msgstr "成为白金赞助商"
 
-msgid "Gold Sponsors"
-msgstr "金牌赞助商"
+msgid "Become a Gold Sponsor"
+msgstr "成为赞助商"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "白金赞助商占位符"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "金牌赞助商占位符"
+msgid "Become a Patron"
+msgstr "成为赞助者"
 
 msgid "Don't show again"
 msgstr "不再显示"
-
-msgid "Take this spot!"
-msgstr "获取该位置!"
 
 msgid "Image Options"
 msgstr "图像选项"

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-05-09 13:00\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -342,6 +342,27 @@ msgstr "Garis luar"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ganti Hue/Saturation/Value"
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "Diagonal"
 
@@ -431,6 +452,12 @@ msgstr "Indonesia"
 
 msgid "Czech"
 msgstr "Ceko"
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Tim Developer"
@@ -992,6 +1019,9 @@ msgstr "Nama palet:"
 msgid "Color Name:"
 msgstr "Nama warna:"
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr "Buat palet kosong baru?"
 
@@ -1010,26 +1040,20 @@ msgstr "Edit Palet"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "Perubahan"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Sponsor Platinum"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Sponsor emas"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Belum ada"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Belum ada"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Jangan perlihatkan lagi"
-
-msgid "Take this spot!"
-msgstr "Ambil tempat ini!"
 
 msgid "Image Options"
 msgstr "Opsi Menggambar"

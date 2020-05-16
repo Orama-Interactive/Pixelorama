@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-11 11:41\n"
+"PO-Revision-Date: 2020-05-15 19:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -341,6 +341,27 @@ msgstr "Krawędź"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
 
+msgid "Adjust HSV"
+msgstr "Dostosuj HSV"
+
+msgid "Type:"
+msgstr "Typ:"
+
+msgid "Angle:"
+msgstr "Kąt:"
+
+msgid "Hue"
+msgstr "Odcień"
+
+msgid "Saturation"
+msgstr "Nasycenie"
+
+msgid "Value"
+msgstr "Wartość"
+
+msgid "Apply"
+msgstr "Zastosuj"
+
 msgid "Diagonal"
 msgstr "Przekątna"
 
@@ -430,6 +451,12 @@ msgstr "Indonezyjski"
 
 msgid "Czech"
 msgstr "Czeski"
+
+msgid "Arabic"
+msgstr "Arabski"
+
+msgid "Turkish"
+msgstr "Turecki"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -994,6 +1021,9 @@ msgstr "Nazwa palety kolorów:"
 msgid "Color Name:"
 msgstr "Nazwa koloru:"
 
+msgid "Use current left & right colors"
+msgstr "Użyj aktualnych kolorów lewego i prawego"
+
 msgid "Create a new empty palette?"
 msgstr "Utworzyć nową pustą paletę kolorów?"
 
@@ -1012,26 +1042,20 @@ msgstr "Edytuj paletę kolorów"
 msgid "Patrons:"
 msgstr "Patroni:"
 
-msgid "Changes"
-msgstr "Zmiany"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "Chcesz wyświetlać swoje imię lub nazwę swojej firmy na ekranie powitalnym?"
 
-msgid "Platinum Sponsor"
-msgstr "Platynowi sponsorzy"
+msgid "Become a Platinum Sponsor"
+msgstr "Zostań Platynowym Sponsorem"
 
-msgid "Gold Sponsors"
-msgstr "Złoci sponsorzy"
+msgid "Become a Gold Sponsor"
+msgstr "Zostań Złotym Sponsorem"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Zapełniacz platynowych sponsorów"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Zapełniacz złotych sponsorów"
+msgid "Become a Patron"
+msgstr "Zostań patronem"
 
 msgid "Don't show again"
 msgstr "Nie pokazuj ponownie"
-
-msgid "Take this spot!"
-msgstr "Zdobądź to miejsce!"
 
 msgid "Image Options"
 msgstr "Opcje obrazu"

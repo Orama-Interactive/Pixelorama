@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-09 13:28\n"
+"PO-Revision-Date: 2020-05-15 22:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -342,6 +342,27 @@ msgstr "Обводка"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
+msgid "Adjust HSV"
+msgstr "Настройка цвета"
+
+msgid "Type:"
+msgstr "Тип:"
+
+msgid "Angle:"
+msgstr "Угол:"
+
+msgid "Hue"
+msgstr "Оттенок"
+
+msgid "Saturation"
+msgstr "Насыщенность"
+
+msgid "Value"
+msgstr "Яркость"
+
+msgid "Apply"
+msgstr "Применить"
+
 msgid "Diagonal"
 msgstr "Диагональ"
 
@@ -431,6 +452,12 @@ msgstr "Индонезийский"
 
 msgid "Czech"
 msgstr "Чешский"
+
+msgid "Arabic"
+msgstr "Арабский"
+
+msgid "Turkish"
+msgstr "Турецкий"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
@@ -993,6 +1020,9 @@ msgstr "Название палитры:"
 msgid "Color Name:"
 msgstr "Название цвета:"
 
+msgid "Use current left & right colors"
+msgstr "Использовать текущие левый и правый цвета"
+
 msgid "Create a new empty palette?"
 msgstr "Создать пустую палитру?"
 
@@ -1011,26 +1041,20 @@ msgstr "Изменить палитру"
 msgid "Patrons:"
 msgstr "Меценаты:"
 
-msgid "Changes"
-msgstr "Изменения"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "Хотите, чтобы ваше имя или компания были показаны на заставке?"
 
-msgid "Platinum Sponsor"
-msgstr "Платиновый спонсор"
+msgid "Become a Platinum Sponsor"
+msgstr "Стать Платиновым Спонсором"
 
-msgid "Gold Sponsors"
-msgstr "Золотые спонсоры"
+msgid "Become a Gold Sponsor"
+msgstr "Стать Золотым Спонсором"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Заполнитель Платиновых Спонсоров"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Заполнитель Золотых Спонсоров"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Не показывать снова"
-
-msgid "Take this spot!"
-msgstr "Возьмите это место!"
 
 msgid "Image Options"
 msgstr "Параметры изображения"

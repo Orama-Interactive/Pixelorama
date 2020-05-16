@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-05-09 12:59\n"
+"PO-Revision-Date: 2020-05-15 19:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -341,6 +341,27 @@ msgstr "Silueta"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "Diagonal"
 
@@ -429,6 +450,12 @@ msgid "Indonesian"
 msgstr ""
 
 msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
@@ -966,6 +993,9 @@ msgstr "Nombre de la Paleta:"
 msgid "Color Name:"
 msgstr "Nombre del Color:"
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr "¿Crear una nueva paleta vacía?"
 
@@ -984,26 +1014,20 @@ msgstr "Editar Paleta"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "Cambios"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Patrocinador Platino"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Patrocinador Oro"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Marcador de posición del Patrocinador Platino"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Marcador de posición del Patrocinador Oro"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "No mostrar de nuevo"
-
-msgid "Take this spot!"
-msgstr "¡Toma este sitio!"
 
 msgid "Image Options"
 msgstr "Opciones de imagen"
