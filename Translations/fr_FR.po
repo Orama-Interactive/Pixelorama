@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-15 19:08\n"
+"PO-Revision-Date: 2020-05-16 15:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "Aide"
 
 msgid "New"
-msgstr ""
+msgstr "Nouveau"
 
 msgid "New..."
 msgstr "Nouveau..."
@@ -68,7 +68,7 @@ msgid "Save as..."
 msgstr "Enregistrer sous..."
 
 msgid "Import"
-msgstr ""
+msgstr "Importer"
 
 msgid "Import..."
 msgstr "Importer..."
@@ -80,10 +80,10 @@ msgid "Export"
 msgstr "Exporter une image"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exporter..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exporter en tant que..."
 
 msgid "Export PNG..."
 msgstr "Exporter une image PNG..."
@@ -164,10 +164,10 @@ msgid "File Exists, Overwrite?"
 msgstr "Le fichier existe déjà, voulez-vous le remplacer ?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Le fichier \"%s\" existe déjà. Écraser ?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Le chemin du répertoire ou le nom du fichier n'est pas valide !"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -175,67 +175,67 @@ msgstr "Impossible de charger le fichier '%s'.\n"
 "Code d'erreur: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Frame"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Images:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Toutes les images"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Feuille de calque"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animation"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Aperçu :"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Image :"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientation :"
 
 msgid "Browse"
-msgstr ""
+msgstr "Parcourir"
 
 msgid "Resize:"
 msgstr "Redimensionner:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Annuler l'exportation"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Attention !"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Sélectionner le dossier actuel"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Ouvrir un répertoire"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Toutes les images sous forme de fichiers multiples"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Toutes les images sous forme d'animation de fichier unique"
 
 msgid "Background:"
-msgstr ""
+msgstr "Arrière-plan :"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direction :"
 
 msgid "Forward"
-msgstr ""
+msgstr "Avancer"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Reculer"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping Pong"
 
 msgid "Columns"
 msgstr "Colonnes"
@@ -286,16 +286,16 @@ msgid "Themes"
 msgstr "Thèmes"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Toile"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Raccourcis"
 
 msgid "Smooth Zoom"
 msgstr "Zoom fluide"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Ajoute une transition plus douce lors d'un zoom avant ou arrière"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilité à la pression de la tablette:"
@@ -322,10 +322,10 @@ msgid "Gray"
 msgstr "Gris"
 
 msgid "Blue"
-msgstr ""
+msgstr "Bleu"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramel"
 
 msgid "Light"
 msgstr "Clair"
@@ -340,28 +340,28 @@ msgid "Outline"
 msgstr "Contour"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ajuster la Teinte/Saturation/Valeur"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajuster HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Angle :"
 
 msgid "Hue"
-msgstr ""
+msgstr "Teinte"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturation"
 
 msgid "Value"
-msgstr ""
+msgstr "Valeur"
 
 msgid "Apply"
-msgstr ""
+msgstr "Appliquer"
 
 msgid "Diagonal"
 msgstr "Diagonale"
@@ -376,7 +376,7 @@ msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentation en ligne"
 
 msgid "Issue Tracker"
 msgstr "Suivi des problèmes"
@@ -445,19 +445,19 @@ msgid "Spanish"
 msgstr "Espagnol"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonésien"
 
 msgid "Czech"
-msgstr ""
+msgstr "Tchèque"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabe"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turc"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
