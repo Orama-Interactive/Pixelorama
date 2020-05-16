@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-16 23:36\n"
+"PO-Revision-Date: 2020-05-16 23:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -346,22 +346,22 @@ msgid "Adjust HSV"
 msgstr "Upravit HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Úhel:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Odstín"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Sytost"
 
 msgid "Value"
-msgstr ""
+msgstr "Hodnota"
 
 msgid "Apply"
-msgstr ""
+msgstr "Použít"
 
 msgid "Diagonal"
 msgstr "Úhlopříčka"
@@ -376,7 +376,7 @@ msgid "View Splash Screen"
 msgstr "Zobrazit uvítací obrazovku"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Online dokumentace"
 
 msgid "Issue Tracker"
 msgstr "Nahlášení potíží"
@@ -454,10 +454,10 @@ msgid "Czech"
 msgstr "Čeština"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabština"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turečtina"
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
@@ -1023,7 +1023,7 @@ msgid "Color Name:"
 msgstr "Název barvy:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Použít aktuální barvy vlevo a vpravo"
 
 msgid "Create a new empty palette?"
 msgstr "Vytvořit novou prázdnou paletu?"
@@ -1044,16 +1044,16 @@ msgid "Patrons:"
 msgstr "Patroni:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Chcete, aby vaše jméno nebo firma, byly zobrazeny na úvodní obrazovce?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Staňte se platinovým sponzorem"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Staňte se zlatým sponzorem"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Staňte se patronem"
 
 msgid "Don't show again"
 msgstr "Příště již nezobrazovat"
