@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-16 20:07\n"
+"PO-Revision-Date: 2020-05-16 20:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -603,40 +603,40 @@ msgid "Show left tool icon"
 msgstr "Afficher l'icône de l'outil de gauche"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Affiche une icône de l'outil de gauche sélectionné à côté du curseur sur le canevas"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Afficher l'icône de l'outil de droite"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Affiche une icône de l'outil de droite sélectionné à côté du curseur sur le canevas"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Couleur des guides:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Largeur de la grille:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Définit la distance entre les lignes verticales de la grille"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Hauteur de la grille:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Définit la distance entre les lignes horizontales de la grille"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Couleur de la grille:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Une couleur de la grille"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Taille du damier:"
 
 msgid "Size of the transparent checker background"
 msgstr ""
