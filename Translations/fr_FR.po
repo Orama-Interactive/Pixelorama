@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-16 20:38\n"
+"PO-Revision-Date: 2020-05-16 20:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -738,7 +738,7 @@ msgid "Options:"
 msgstr "Options :"
 
 msgid "Fit to frame"
-msgstr "Ajuster à la fenêtre"
+msgstr "Ajuster au cadre"
 
 msgid "100% Zoom"
 msgstr "Zoom 100%"
@@ -858,7 +858,7 @@ msgid "Link Cel"
 msgstr "Lier la cellule"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Délier la cellule"
 
 msgid "Layer"
 msgstr "Couche"
@@ -891,11 +891,12 @@ msgid "Toggle layer's visibility"
 msgstr "Afficher/Masquer le calque"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Verrouiller/déverrouiller le calque"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Activer/désactiver la liaison des cellules\n\n"
+"Les cellules liées sont partagées sur plusieurs cadres"
 
 msgid "Palette"
 msgstr "Palette"
@@ -979,16 +980,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Refaire : Supprimer la brosse personnalisée"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Annuler: Modifier la balise du cadre"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Refaire: Modifier la balise du cadre"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Annuler : Supprimer la balise du cadre"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Refaire: Supprimer la balise du cadre"
 
 msgid "Move Guide"
 msgstr "Déplacer le guide"
@@ -997,10 +998,10 @@ msgid "File saved"
 msgstr "Fichier enregistré"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fichier sauvegardé automatiquement"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Échec de l'ouverture du fichier"
 
 msgid "File failed to save"
 msgstr ""
