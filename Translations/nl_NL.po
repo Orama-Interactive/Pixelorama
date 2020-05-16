@@ -8,103 +8,103 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-05-16 17:07\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Oké"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 msgid "Open"
-msgstr ""
+msgstr "Openen"
 
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Bevestig..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Afbeeldingsgrootte"
 
 msgid "Width:"
-msgstr ""
+msgstr "Breedte:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Hoogte:"
 
 msgid "File"
-msgstr ""
+msgstr "Bestand"
 
 msgid "Edit"
-msgstr ""
+msgstr "Wijzigen"
 
 msgid "View"
-msgstr ""
+msgstr "Tonen"
 
 msgid "Image"
-msgstr ""
+msgstr "Afbeelding"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effecten"
 
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "New..."
-msgstr ""
+msgstr "Nieuw..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Openen..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Opslaan..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Opslaan als..."
 
 msgid "Import"
-msgstr ""
+msgstr "Importeren"
 
 msgid "Import..."
-msgstr ""
+msgstr "Importeren..."
 
 msgid "Import PNG..."
-msgstr ""
+msgstr "Importeer PNG..."
 
 msgid "Export"
-msgstr ""
+msgstr "Exporteren"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exporteren..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exporteren als..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exporteer PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Exporteer PNG als..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Afsluiten"
 
 msgid "Undo"
-msgstr ""
+msgstr "Ongedaan maken"
 
 msgid "Redo"
-msgstr ""
+msgstr "Opnieuw uitvoeren"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Afbeelding schalen"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Afbeelding bijsnijden"
 
 msgid "Rotate Image"
 msgstr ""
