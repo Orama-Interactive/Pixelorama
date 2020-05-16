@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-05-16 23:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -343,7 +343,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Úprava Odstínu/Nasycení/Hodnoty"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Upravit HSV"
 
 msgid "Type:"
 msgstr ""
