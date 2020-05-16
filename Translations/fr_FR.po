@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-16 15:37\n"
+"PO-Revision-Date: 2020-05-16 20:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -600,7 +600,7 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Affiche un indicateur de pixel ou de brosse pour l'outil droit lorsque vous dessinez"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Afficher l'icône de l'outil de gauche"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
