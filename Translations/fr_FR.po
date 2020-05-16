@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-16 20:46\n"
+"PO-Revision-Date: 2020-05-16 20:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -615,7 +615,7 @@ msgid "Guides color:"
 msgstr "Couleur des guides:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Une couleur des guides de règle affichée sur le canevas"
 
 msgid "Grid width:"
 msgstr "Largeur de la grille:"
@@ -795,10 +795,10 @@ msgstr "Aller à la dernière trame\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Paramètres de la peau d'oignon"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Activer/désactiver la peau d'oignon"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -824,14 +824,15 @@ msgid "Future Frames"
 msgstr "Trames futures"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Gérer les balises du cadre"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "L'animation ne joue que sur les cadres de même balise"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Si coché, l'animation ne joue que sur les images qui ont la même balise.\n"
+"Si ce n'est pas le cas, l'animation sera jouée sur toutes les images, ignorant les balises."
 
 msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
@@ -1004,7 +1005,7 @@ msgid "File failed to open"
 msgstr "Échec de l'ouverture du fichier"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Échec de l'enregistrement du fichier"
 
 msgid "File exported"
 msgstr "Fichier exporté"
@@ -1022,7 +1023,7 @@ msgid "Color Name:"
 msgstr "Nom de la couleur:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Utiliser les couleurs actuelles de gauche et de droite"
 
 msgid "Create a new empty palette?"
 msgstr "Créer une nouvelle palette vide?"
@@ -1043,10 +1044,10 @@ msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Vous voulez que votre nom ou votre entreprise soit affiché sur l'écran de démarrage?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Devenez sponsor de Platine"
 
 msgid "Become a Gold Sponsor"
 msgstr "Devenez un Gold Sponsor"
