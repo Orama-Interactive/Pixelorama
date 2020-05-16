@@ -57,7 +57,7 @@ margin_bottom = 197.0
 margin_top = 5.0
 margin_right = 44.0
 margin_bottom = 19.0
-text = "Angle: "
+text = "Angle:"
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
 margin_left = 48.0

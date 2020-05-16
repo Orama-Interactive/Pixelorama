@@ -34,6 +34,7 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Igor Santarek (jegor377)")
 	contributors.create_item(contributor_root).set_text(0, "  Dávid Gábor BODOR (dragonfi)")
 	contributors.create_item(contributor_root).set_text(0, "  John Jerome Romero (Wishdream)")
+	contributors.create_item(contributor_root).set_text(0, "  Aaron Franke (aaronfranke)")
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms - https://www.nonamefornowsoft.com.br/")
