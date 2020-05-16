@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-05-16 15:27\n"
+"PO-Revision-Date: 2020-05-16 15:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -487,10 +487,10 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Voulez-vous vraiment quitter Pixelorama ?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Image non sauvegardée"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Vous avez des modifications non enregistrées. Si vous continuez, les changements que vous avez réalisés seront perdus."
 
 msgid "Save before exiting?"
 msgstr "Enregistrer avant de quitter?"
@@ -519,7 +519,9 @@ msgstr "Sélection rectangulaire\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s pour le bouton de souris gauche\n"
+"%s pour le bouton de souris droit"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -580,10 +582,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Outil gauche"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Outil de droite"
 
 msgid "Left pixel indicator"
 msgstr "Indicateur de pixel gauche"
@@ -1046,10 +1048,10 @@ msgid "Become a Platinum Sponsor"
 msgstr ""
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Devenez un Gold Sponsor"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Devenez un Patreon"
 
 msgid "Don't show again"
 msgstr "Ne plus afficher"
@@ -1058,46 +1060,46 @@ msgid "Image Options"
 msgstr "Options d'image"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Largeur par défaut:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "La largeur par défaut d'une nouvelle image"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Hauteur par défaut:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "La largeur par défaut d'une nouvelle image"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Couleur de remplissage par défaut:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Une couleur de fond par défaut d'une nouvelle image"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Corriger le ratio d'aspect:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Modèles:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Préréglage"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Préréglage:"
 
 msgid "Default"
-msgstr ""
+msgstr "Par défaut"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 msgid "Rectangular Selection"
 msgstr "Sélection rectangulaire"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Color Picker"
 msgstr "Sélecteur de couleurs"
@@ -1115,72 +1117,73 @@ msgid "Lighten/Darken"
 msgstr "Éclaircir/Assombrir"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Changer les couleurs"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Définir le raccourci"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Appuyez sur une touche ou une combinaison de touches pour définir le raccourci"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Déjà attribué"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Outil gauche:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Un outil assigné au bouton gauche de la souris"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Outil de droite:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Un outil assigné au bouton droit de la souris"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Impossible de trouver le dernier fichier du projet."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Vous n'avez pas encore enregistré ou ouvert de projet dans Pixelorama !"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Ouvrir le dernier projet"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Ouvrir le dernier projet..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Charger le dernier projet au démarrage"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Charger le dernier projet au démarrage"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Activer la sauvegarde automatique"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Intervalle de l'enregistrement automatique :"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minute(s)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Créer un nouveau répertoire pour chaque image"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Crée plusieurs fichiers, mais chaque fichier est stocké dans différents répertoires qui correspondent à son image"
 
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "La sauvegarde automatique pour %s a été trouvée.\n"
+"Voulez-vous la recharger ?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Sauvegarde rechargée"
 
