@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-05-19 11:43\n"
+"PO-Revision-Date: 2020-05-19 12:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1044,16 +1044,16 @@ msgid "Patrons:"
 msgstr "Patrões"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Quer que seu nome ou sua empresa seja mostrado na tela de abertura?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Seja um Patrocinador Platina"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Seja um Patrocinador Ouro"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Seja um Patrono"
 
 msgid "Don't show again"
 msgstr "Não mostrar de novo"
@@ -1161,13 +1161,13 @@ msgid "Opens last opened project on startup"
 msgstr "Abrir último projeto aberto ao iniciar"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Habilitar salvamento automático"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Intervalo do salvamento automático:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minuto(s)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Criar novo diretório para cada tag de quadro"
@@ -1176,10 +1176,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr "Cria vários arquivos, mas cada arquivo é armazenado em um diretório diferente que corresponde à sua tag de quadro"
 
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Deletar"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
