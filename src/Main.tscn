@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -10,8 +10,6 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/colorpicker.png" type="Texture" id=8]
 [ext_resource path="res://assets/graphics/dark_themes/tools/bucket.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/UI/Dialogs/PaletteRemoveErrorDialog.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/UI/Dialogs/PaletteDoesntExistDialog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/themes/dark/ruler_style.tres" type="StyleBox" id=13]
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/Rulers/VerticalRuler.gd" type="Script" id=15]
@@ -23,7 +21,6 @@
 [ext_resource path="res://assets/graphics/dark_themes/palette/edit_palette.png" type="Texture" id=21]
 [ext_resource path="res://assets/graphics/dark_themes/palette/add_palette.png" type="Texture" id=22]
 [ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=23]
-[ext_resource path="res://src/UI/Dialogs/CantRemoveMorePalettesDialog.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/Palette/PaletteContainer.gd" type="Script" id=25]
 [ext_resource path="res://src/UI/BrushButton.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
@@ -870,12 +867,6 @@ margin_bottom = 62.0
 [node name="NoProjectEditedOrCreatedAlertDialog" parent="." instance=ExtResource( 47 )]
 margin_bottom = 62.0
 window_title = "Alarm!"
-
-[node name="CantRemoveMorePalettesDialog" parent="." instance=ExtResource( 24 )]
-
-[node name="PaletteDoesntExistDialog" parent="." instance=ExtResource( 12 )]
-
-[node name="PaletteRemoveErrorDialog" parent="." instance=ExtResource( 11 )]
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false

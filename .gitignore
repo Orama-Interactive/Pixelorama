@@ -15,5 +15,4 @@ mono_crash.*.json
 .directory
 *~
 Translations/Update Translations.bat
-Scripts/Old/
 

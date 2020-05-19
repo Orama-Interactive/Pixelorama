@@ -273,19 +273,24 @@ func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> 
 func remove_palette(palette_name : String) -> void:
 	# Don't allow user to remove palette if there is no one left
 	if Global.palettes.size() < 2:
-		get_node('/root/Control/CantRemoveMorePalettesDialog').popup_centered()
+		Global.error_dialog.set_text("You can't remove more palettes!")
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		return
 	# Don't allow user to try to remove not existing palettes
 	if not palette_name in Global.palettes:
-		get_node('/root/Control/PaletteDoesntExistDialog').popup_centered()
+		Global.error_dialog.set_text("Cannot remove the palette, because it doesn't exist!")
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		return
 	Global.directory_module.ensure_xdg_user_dirs_exist()
 	var palette = Global.palettes[palette_name]
 	var result = palette.remove_file()
 	# Inform user if pallete hasn't been removed from disk because of an error
 	if result != OK:
-		get_node('/root/Control/PaletteRemoveErrorDialog').dialog_text %= str(result)
-		get_node('/root/Control/PaletteRemoveErrorDialog').popup_centered()
+		Global.error_dialog.set_text(tr("An error occured while removing the palette! Error code: %s") % str(result))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 	# Remove palette in the program anyway, because if you don't do it
 	# then Pixelorama will crash
 	Global.palettes.erase(palette_name)
