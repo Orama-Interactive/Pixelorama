@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/colorpicker.png" type="Texture" id=8]
 [ext_resource path="res://assets/graphics/dark_themes/tools/bucket.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/Dialogs/PaletteRemoveErrorDialog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/Dialogs/PaletteDoesntExistDialog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/themes/dark/ruler_style.tres" type="StyleBox" id=13]
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/Rulers/VerticalRuler.gd" type="Script" id=15]
@@ -21,11 +23,13 @@
 [ext_resource path="res://assets/graphics/dark_themes/palette/edit_palette.png" type="Texture" id=21]
 [ext_resource path="res://assets/graphics/dark_themes/palette/add_palette.png" type="Texture" id=22]
 [ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=23]
+[ext_resource path="res://src/UI/Dialogs/CantRemoveMorePalettesDialog.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/Palette/PaletteContainer.gd" type="Script" id=25]
 [ext_resource path="res://src/UI/BrushButton.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/UI/Dialogs/ImportSprites.tscn" type="PackedScene" id=29]
+[ext_resource path="res://assets/graphics/dark_themes/palette/remove_palette.png" type="Texture" id=30]
 [ext_resource path="res://src/UI/Dialogs/ScaleImage.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/UI/Dialogs/PreferencesDialog.tscn" type="PackedScene" id=32]
 [ext_resource path="res://src/UI/Dialogs/OutlineDialog.tscn" type="PackedScene" id=33]
@@ -47,7 +51,7 @@ shader_param/size = 10.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
 
-[sub_resource type="Image" id=11]
+[sub_resource type="Image" id=6]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "RGBA8",
@@ -56,13 +60,13 @@ data = {
 "width": 9
 }
 
-[sub_resource type="ImageTexture" id=8]
+[sub_resource type="ImageTexture" id=3]
 flags = 3
 flags = 3
-image = SubResource( 11 )
+image = SubResource( 6 )
 size = Vector2( 9, 9 )
 
-[sub_resource type="Image" id=12]
+[sub_resource type="Image" id=7]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "RGBA8",
@@ -71,10 +75,10 @@ data = {
 "width": 9
 }
 
-[sub_resource type="ImageTexture" id=10]
+[sub_resource type="ImageTexture" id=5]
 flags = 3
 flags = 3
-image = SubResource( 12 )
+image = SubResource( 7 )
 size = Vector2( 9, 9 )
 
 [node name="Control" type="Control"]
@@ -570,8 +574,8 @@ margin_right = 291.0
 margin_bottom = 51.0
 
 [node name="PaletteButtons" type="HBoxContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer"]
-margin_left = 58.0
-margin_right = 233.0
+margin_left = 40.0
+margin_right = 251.0
 margin_bottom = 32.0
 
 [node name="AddPalette" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
@@ -635,9 +639,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
+[node name="RemovePalette" type="Button" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
+"UIButtons",
+]]
 margin_left = 72.0
-margin_right = 175.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Remove currently selected palette"
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/RemovePalette"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 12.0
+margin_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PaletteOptionButton" type="OptionButton" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons"]
+margin_left = 108.0
+margin_right = 211.0
 margin_bottom = 32.0
 grow_horizontal = 0
 rect_min_size = Vector2( 103, 0 )
@@ -705,7 +735,7 @@ brush_type = 1
 custom_brush_index = -2
 
 [node name="BrushTexture" parent="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton" index="0"]
-texture = SubResource( 8 )
+texture = SubResource( 3 )
 
 [node name="FilledCircleBrushButton" parent="BrushesPopup/TabContainer/File/FileBrushContainer" instance=ExtResource( 26 )]
 margin_left = 70.0
@@ -716,7 +746,7 @@ brush_type = 2
 custom_brush_index = -1
 
 [node name="BrushTexture" parent="BrushesPopup/TabContainer/File/FileBrushContainer/FilledCircleBrushButton" index="0"]
-texture = SubResource( 10 )
+texture = SubResource( 5 )
 
 [node name="Project" type="ScrollContainer" parent="BrushesPopup/TabContainer"]
 visible = false
@@ -841,6 +871,12 @@ margin_bottom = 62.0
 margin_bottom = 62.0
 window_title = "Alarm!"
 
+[node name="CantRemoveMorePalettesDialog" parent="." instance=ExtResource( 24 )]
+
+[node name="PaletteDoesntExistDialog" parent="." instance=ExtResource( 12 )]
+
+[node name="PaletteRemoveErrorDialog" parent="." instance=ExtResource( 11 )]
+
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
 
@@ -865,6 +901,7 @@ Do you want to reload it?"
 [connection signal="mouse_exited" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="." method="_on_ViewportContainer_mouse_exited"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
 [connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
+[connection signal="pressed" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/RemovePalette" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_RemovePalette_pressed"]
 [connection signal="item_selected" from="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/CenterContainer/PaletteButtons/PaletteOptionButton" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteOptionButton_item_selected"]
 [connection signal="brush_selected" from="BrushesPopup/TabContainer/File/FileBrushContainer/PixelBrushButton" to="." method="_on_Brush_Selected"]
 [connection signal="brush_selected" from="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton" to="." method="_on_Brush_Selected"]

@@ -305,5 +305,5 @@ func _on_NewPaletteDialog_popup_hide() -> void:
 	Global.dialog_open(false)
 
 
-func _on_RemovePalette_pressed():
+func _on_RemovePalette_pressed() -> void:
 	remove_palette(current_palette)
