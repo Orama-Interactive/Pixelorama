@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-15 22:01\n"
+"PO-Revision-Date: 2020-05-19 21:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1186,4 +1186,16 @@ msgstr "Найдена автосохраненная резервная коп�
 
 msgid "Backup reloaded"
 msgstr "Резервная копия восстановлена"
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr ""
 
