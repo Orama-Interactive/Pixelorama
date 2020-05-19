@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-05-19 11:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -322,10 +322,10 @@ msgid "Gray"
 msgstr "Cinza"
 
 msgid "Blue"
-msgstr ""
+msgstr "Azul"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramelo"
 
 msgid "Light"
 msgstr "Claro"
@@ -343,25 +343,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Matiz/Saturação/Valor"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajustar MSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Ângulo:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Matriz"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturação"
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplique"
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -376,7 +376,7 @@ msgid "View Splash Screen"
 msgstr "Ver Tela de Abertura"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentação Online"
 
 msgid "Issue Tracker"
 msgstr "Rastreador de problemas"
