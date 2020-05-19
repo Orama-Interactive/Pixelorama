@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="OpenSprite" type="FileDialog"]
+margin_right = 515.0
+margin_bottom = 348.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
+current_dir = "C:/Users"
+current_path = "C:/Users/"

@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="SaveSprite" type="FileDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 3.0
+margin_bottom = 48.0
+resizable = true
+access = 2
+filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
+current_dir = "C:/Users"
+current_path = "C:/Users/"

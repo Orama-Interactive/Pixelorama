@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/colorpicker.png" type="Texture" id=8]
 [ext_resource path="res://assets/graphics/dark_themes/tools/bucket.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/themes/dark/ruler_style.tres" type="StyleBox" id=13]
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/Rulers/VerticalRuler.gd" type="Script" id=15]
@@ -779,32 +781,9 @@ columns = 6
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
 
-[node name="OpenSprite" type="FileDialog" parent="."]
-margin_right = 515.0
-margin_bottom = 348.0
-window_title = "Open a File"
-resizable = true
-mode = 0
-access = 2
-filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users"
-current_path = "C:/Users/"
+[node name="OpenSprite" parent="." instance=ExtResource( 12 )]
 
-[node name="SaveSprite" type="FileDialog" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -300.0
-margin_right = 3.0
-margin_bottom = 48.0
-window_title = "Save Sprite as .pxo"
-resizable = true
-access = 2
-filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "C:/Users"
-current_path = "C:/Users/"
+[node name="SaveSprite" parent="." instance=ExtResource( 11 )]
 
 [node name="ImportSprites" parent="." instance=ExtResource( 29 )]
 
@@ -858,12 +837,6 @@ filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp 
 
 [node name="HSVDialog" parent="." instance=ExtResource( 44 )]
 
-[node name="LeftCursor" type="Sprite" parent="."]
-visible = false
-
-[node name="RightCursor" type="Sprite" parent="."]
-visible = false
-
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="."]
 margin_right = 349.0
 margin_bottom = 88.0
@@ -871,6 +844,12 @@ rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
+
+[node name="LeftCursor" type="Sprite" parent="."]
+visible = false
+
+[node name="RightCursor" type="Sprite" parent="."]
+visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]
 [connection signal="mouse_entered" from="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="MenuAndUI/UI/CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
