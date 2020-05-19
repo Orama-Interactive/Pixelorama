@@ -1,7 +1,6 @@
 [gd_scene format=2]
 
 [node name="NoProjectEditedOrCreatedAlertDialog" type="AcceptDialog"]
-window_title = "Alarm!"
 dialog_text = "You haven't saved or opened any project in Pixelorama yet!"
 __meta__ = {
 "_edit_use_anchors_": false
