@@ -1,0 +1,5 @@
+[gd_scene format=2]
+
+[node name="CantRemoveMorePalettesDialog" type="AcceptDialog"]
+window_title = "Alarm!"
+dialog_text = "You can't remove more palettes!"

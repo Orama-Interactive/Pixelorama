@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="PaletteRemoveErrorDialog" type="AcceptDialog"]
+margin_right = 90.0
+margin_bottom = 58.0
+window_title = "Alarm!"
+dialog_text = "An error occured while removing the palette! Error code: %s"
