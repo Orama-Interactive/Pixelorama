@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-05-19 21:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1187,4 +1187,16 @@ msgstr "找到了 %s 的自动备份。你想要重新加载吗？"
 
 msgid "Backup reloaded"
 msgstr "重新加载备份"
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr ""
 
