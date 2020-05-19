@@ -1,0 +1,5 @@
+[gd_scene format=2]
+
+[node name="PaletteDoesntExistDialog" type="AcceptDialog"]
+window_title = "Alarm!"
+dialog_text = "Cannot remove the palette, because it doesn't exist!"

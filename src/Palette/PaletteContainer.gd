@@ -142,7 +142,8 @@ func on_edit_palette() -> void:
 
 func _on_PaletteOptionButton_item_selected(ID : int) -> void:
 	var palette_name = Global.palette_option_button.get_item_metadata(ID)
-	on_palette_select(palette_name)
+	if palette_name != null:
+		on_palette_select(palette_name)
 
 
 func _display_palette(palette : Palette) -> void:
@@ -191,6 +192,11 @@ func _load_palettes() -> void:
 				var index: int = Global.palette_option_button.get_item_count() - 1
 				Global.palette_option_button.set_item_metadata(index, palette.name)
 				if palette.name == "Default":
+					# You need these two lines because when you remove a palette
+					# Then this just won't work and _on_PaletteOptionButton_item_selected
+					# method won't fire.
+					Global.palette_option_button.selected
+					on_palette_select("Default")
 					Global.palette_option_button.select(index)
 
 	if not "Default" in Global.palettes && Global.palettes.size() > 0:
@@ -264,6 +270,30 @@ func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> 
 	return null
 
 
+func remove_palette(palette_name : String) -> void:
+	# Don't allow user to remove palette if there is no one left
+	if Global.palettes.size() < 2:
+		get_node('/root/Control/CantRemoveMorePalettesDialog').popup_centered()
+		return
+	# Don't allow user to try to remove not existing palettes
+	if not palette_name in Global.palettes:
+		get_node('/root/Control/PaletteDoesntExistDialog').popup_centered()
+		return
+	Global.directory_module.ensure_xdg_user_dirs_exist()
+	var palette = Global.palettes[palette_name]
+	var result = palette.remove_file()
+	# Inform user if pallete hasn't been removed from disk because of an error
+	if result != OK:
+		get_node('/root/Control/PaletteRemoveErrorDialog').dialog_text %= str(result)
+		get_node('/root/Control/PaletteRemoveErrorDialog').popup_centered()
+	# Remove palette in the program anyway, because if you don't do it
+	# then Pixelorama will crash
+	Global.palettes.erase(palette_name)
+	Global.palette_option_button.clear()
+	current_palette = "Default"
+	_load_palettes()
+
+
 func save_palette(palette_name : String, filename : String) -> void:
 	Global.directory_module.ensure_xdg_user_dirs_exist()
 	var palette = Global.palettes[palette_name]
@@ -273,3 +303,7 @@ func save_palette(palette_name : String, filename : String) -> void:
 
 func _on_NewPaletteDialog_popup_hide() -> void:
 	Global.dialog_open(false)
+
+
+func _on_RemovePalette_pressed():
+	remove_palette(current_palette)
