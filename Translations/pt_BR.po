@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-05-19 11:38\n"
+"PO-Revision-Date: 2020-05-19 11:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -448,16 +448,16 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonésio"
 
 msgid "Czech"
-msgstr ""
+msgstr "Tcheco"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Árabe"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -490,7 +490,7 @@ msgid "Unsaved Image"
 msgstr "Imagem não salva"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Você tem alterações não salvas. Se você prosseguir, o progresso que você fez será perdido."
 
 msgid "Save before exiting?"
 msgstr "Salvar antes de sair?"
@@ -582,10 +582,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Redefina as cores para o seu estado padrão (preto para a esquerda, branco para a direita)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Ferramenta da esquerda"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Ferramenta da direita"
 
 msgid "Left pixel indicator"
 msgstr "Pixel indicador esquerdo"
@@ -999,13 +999,13 @@ msgid "File saved"
 msgstr "Arquivo salvo"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Arquivo salvo automaticamente"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Arquivo falhou ao abrir"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Arquivo falhou ao salvar"
 
 msgid "File exported"
 msgstr "Arquivo exportado"
@@ -1023,7 +1023,7 @@ msgid "Color Name:"
 msgstr "Nome da Cor:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Use as cores esquerda e direita atuais"
 
 msgid "Create a new empty palette?"
 msgstr "Criar uma nova paleta vazia?"
