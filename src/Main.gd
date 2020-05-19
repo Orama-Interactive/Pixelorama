@@ -267,7 +267,8 @@ func file_menu_id_pressed(id : int) -> void:
 				else:
 					load_last_project()
 			else: # if not then warn user that he didn't edit any project yet
-				$NoProjectEditedOrCreatedAlertDialog.popup_centered()
+				Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
+				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 		3: # Save
 			is_quitting_on_save = false
@@ -474,7 +475,8 @@ func load_last_project() -> void:
 			_on_OpenSprite_file_selected(file_path)
 		else:
 			# If file doesn't exist on disk then warn user about this
-			$OpenLastProjectAlertDialog.popup_centered()
+			Global.error_dialog.set_text("Cannot find last project file.")
+			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
 
 

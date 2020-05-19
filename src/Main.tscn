@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -39,8 +39,6 @@
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=42]
 [ext_resource path="res://src/UI/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 [ext_resource path="res://src/UI/TransparentChecker.gd" type="Script" id=45]
-[ext_resource path="res://src/UI/Dialogs/OpenLastProjectAlertDialog.tscn" type="PackedScene" id=46]
-[ext_resource path="res://src/UI/Dialogs/NoProjectEditedOrCreatedAlertDialog.tscn" type="PackedScene" id=47]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 42 )
@@ -860,14 +858,6 @@ filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp 
 
 [node name="HSVDialog" parent="." instance=ExtResource( 44 )]
 
-[node name="OpenLastProjectAlertDialog" parent="." instance=ExtResource( 46 )]
-margin_right = 179.0
-margin_bottom = 62.0
-
-[node name="NoProjectEditedOrCreatedAlertDialog" parent="." instance=ExtResource( 47 )]
-margin_bottom = 62.0
-window_title = "Alarm!"
-
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
 
@@ -923,7 +913,6 @@ Do you want to reload it?"
 [connection signal="file_selected" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 [connection signal="popup_hide" from="PaletteImportFileDialog" to="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/PanelContainer/PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="popup_hide" from="HSVDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="NoProjectEditedOrCreatedAlertDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="BackupConfirmation" to="." method="_can_draw_true"]
 
 [editable path="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton"]
