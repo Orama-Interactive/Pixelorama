@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-05-19 21:37\n"
+"PO-Revision-Date: 2020-05-20 05:47\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -1160,14 +1160,14 @@ msgid "Backup reloaded"
 msgstr ""
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Verwijder geselecteerde palet"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Je kunt geen paletten meer verwijderen!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Kan pallet niet verwijderen, omdat het niet bestaat!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Er is een fout opgetreden bij het verwijderen van het palet. Foutcode: %s"
 
