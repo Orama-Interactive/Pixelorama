@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-05-20 02:17\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1189,7 +1189,7 @@ msgid "Backup reloaded"
 msgstr "重新加载备份"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "删除当前所选调色板"
 
 msgid "You can't remove more palettes!"
 msgstr ""
