@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/BrushButton.tscn" type="PackedScene" id=2]
+
+[node name="BrushesPopup" type="Popup"]
+margin_right = 226.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 144 )
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+drag_to_rearrange_enabled = true
+
+[node name="File" type="ScrollContainer" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="FileBrushContainer" type="GridContainer" parent="TabContainer/File"]
+margin_right = 104.0
+margin_bottom = 32.0
+columns = 6
+
+[node name="PixelBrushButton" parent="TabContainer/File/FileBrushContainer" instance=ExtResource( 2 )]
+hint_tooltip = "Pixel brush"
+mouse_default_cursor_shape = 2
+
+[node name="CircleBrushButton" parent="TabContainer/File/FileBrushContainer" instance=ExtResource( 2 )]
+margin_left = 35.0
+margin_right = 67.0
+hint_tooltip = "Filled circle brush"
+mouse_default_cursor_shape = 2
+brush_type = 1
+custom_brush_index = -2
+
+[node name="FilledCircleBrushButton" parent="TabContainer/File/FileBrushContainer" instance=ExtResource( 2 )]
+margin_left = 70.0
+margin_right = 102.0
+hint_tooltip = "Circle brush"
+mouse_default_cursor_shape = 2
+brush_type = 2
+custom_brush_index = -1
+
+[node name="Project" type="ScrollContainer" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="ProjectBrushContainer" type="GridContainer" parent="TabContainer/Project"]
+columns = 5

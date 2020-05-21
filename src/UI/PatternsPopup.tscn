@@ -1,0 +1,22 @@
+[gd_scene format=2]
+
+[node name="PatternsPopup" type="PopupPanel"]
+margin_right = 226.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="PatternContainer" type="GridContainer" parent="ScrollContainer"]
+columns = 6
