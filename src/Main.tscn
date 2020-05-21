@@ -224,9 +224,6 @@ visible = false
 visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]
-[connection signal="brush_selected" from="BrushesPopup/TabContainer/File/FileBrushContainer/PixelBrushButton" to="." method="_on_Brush_Selected"]
-[connection signal="brush_selected" from="BrushesPopup/TabContainer/File/FileBrushContainer/CircleBrushButton" to="." method="_on_Brush_Selected"]
-[connection signal="brush_selected" from="BrushesPopup/TabContainer/File/FileBrushContainer/FilledCircleBrushButton" to="." method="_on_Brush_Selected"]
 [connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]

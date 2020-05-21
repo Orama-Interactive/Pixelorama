@@ -1,10 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://src/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/SecondViewport.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/Rulers/VerticalRuler.gd" type="Script" id=4]
-[ext_resource path="res://src/UI/ColorAndToolOptions.gd" type="Script" id=5]
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=6]
 [ext_resource path="res://src/CameraMovement.gd" type="Script" id=7]
 [ext_resource path="res://src/SelectionRectangle.gd" type="Script" id=8]
@@ -41,6 +38,9 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ToolPanel" type="Panel" parent="."]
 margin_right = 48.0
@@ -59,10 +59,10 @@ __meta__ = {
 }
 
 [node name="Tools" type="VBoxContainer" parent="ToolPanel/PanelContainer"]
-margin_left = 4.5
-margin_top = 3.0
-margin_right = 36.5
-margin_bottom = 251.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 39.0
+margin_bottom = 255.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -201,13 +201,13 @@ custom_constants/autohide = 0
 
 [node name="HViewportContainer" type="HBoxContainer" parent="CanvasAndTimeline"]
 margin_right = 902.0
-margin_bottom = 486.0
+margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="CanvasAndTimeline/HViewportContainer"]
 margin_right = 902.0
-margin_bottom = 486.0
+margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -229,20 +229,20 @@ script = ExtResource( 6 )
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
 margin_top = 16.0
 margin_right = 902.0
-margin_bottom = 486.0
+margin_bottom = 480.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
-margin_right = 896.0
-margin_bottom = 470.0
+margin_right = 890.0
+margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 470.0
+margin_bottom = 464.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -258,8 +258,8 @@ script = ExtResource( 4 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 896.0
-margin_bottom = 470.0
+margin_right = 890.0
+margin_bottom = 464.0
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -267,7 +267,7 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 880, 470 )
+size = Vector2( 874, 464 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -279,8 +279,7 @@ margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 22 )
 
-[node name="Canvas" type="Node2D" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
-script = ExtResource( 1 )
+[node name="Canvas" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
 
 [node name="Camera2D" type="Camera2D" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true
@@ -299,13 +298,13 @@ script = ExtResource( 8 )
 [node name="ViewportContainer2" type="ViewportContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
 margin_left = 902.0
 margin_right = 902.0
-margin_bottom = 470.0
+margin_bottom = 464.0
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 470 )
+size = Vector2( 0, 464 )
 handle_input_locally = false
 render_target_update_mode = 3
 script = ExtResource( 2 )
@@ -315,17 +314,10 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="AnimationTimeline" type="Panel" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
+[node name="AnimationTimeline" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
 margin_top = 492.0
-margin_right = 902.0
 margin_bottom = 692.0
-rect_min_size = Vector2( 0, 200 )
-size_flags_horizontal = 3
 custom_styles/panel = SubResource( 2 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RightPanel" type="Panel" parent="."]
 margin_left = 950.0
@@ -344,16 +336,16 @@ __meta__ = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="RightPanel/PreviewAndPalettes"]
-margin_left = 10.0
-margin_right = 319.0
-margin_bottom = 156.0
+margin_left = 8.0
+margin_right = 322.0
+margin_bottom = 164.0
 size_flags_horizontal = 4
 
 [node name="CanvasPreview" type="ViewportContainer" parent="RightPanel/PreviewAndPalettes/PanelContainer"]
-margin_left = 4.5
-margin_top = 3.0
-margin_right = 304.5
-margin_bottom = 153.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 307.0
+margin_bottom = 157.0
 rect_min_size = Vector2( 0, 150 )
 
 [node name="Viewport" type="Viewport" parent="RightPanel/PreviewAndPalettes/PanelContainer/CanvasPreview"]
@@ -370,33 +362,18 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
 [node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="RightPanel/PreviewAndPalettes"]
-margin_top = 160.0
+margin_top = 168.0
 margin_right = 330.0
 margin_bottom = 676.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
-[node name="ColorAndToolOptions" type="VBoxContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
-margin_right = 330.0
-margin_bottom = 255.0
-size_flags_vertical = 3
-custom_constants/separation = 8
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
+margin_bottom = 248.0
 
-[node name="PalettePanelContainer" type="PanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
-margin_left = 15.0
-margin_top = 261.0
-margin_right = 315.0
-margin_bottom = 516.0
-rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 4
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
+margin_top = 260.0
+margin_bottom = 508.0
 [connection signal="mouse_entered" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]

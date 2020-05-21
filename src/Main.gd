@@ -616,10 +616,6 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	Global.right_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
 
 
-func _on_Brush_Selected() -> void:
-	$BrushesPopup.hide()
-
-
 func show_quit_dialog() -> void:
 	if !$QuitDialog.visible:
 		if !Global.project_has_changed:
