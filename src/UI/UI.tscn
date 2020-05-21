@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
+[ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/SecondViewport.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/Rulers/VerticalRuler.gd" type="Script" id=4]
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=6]
@@ -63,6 +64,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
 margin_bottom = 255.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
