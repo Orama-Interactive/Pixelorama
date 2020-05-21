@@ -522,14 +522,6 @@ func _on_ImportSprites_popup_hide() -> void:
 		_can_draw_true()
 
 
-func _on_ViewportContainer_mouse_entered() -> void:
-	Global.has_focus = true
-
-
-func _on_ViewportContainer_mouse_exited() -> void:
-	Global.has_focus = false
-
-
 func _can_draw_true() -> void:
 	Global.dialog_open(false)
 
