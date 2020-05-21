@@ -3,12 +3,9 @@ extends Control
 var opensprite_file_selected := false
 var file_menu : PopupMenu
 var view_menu : PopupMenu
-var tools := []
 var redone := false
 var unsaved_canvas_state := 0
 var is_quitting_on_save := false
-var previous_left_color := Color.black
-var previous_right_color := Color.white
 
 
 # Called when the node enters the scene tree for the first time.
@@ -134,21 +131,6 @@ func _ready() -> void:
 	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 
-	var root = get_tree().get_root()
-	# Node, left mouse shortcut, right mouse shortcut
-	tools.append([Global.find_node_by_name(root, "Pencil"), "left_pencil_tool", "right_pencil_tool"])
-	tools.append([Global.find_node_by_name(root, "Eraser"), "left_eraser_tool", "right_eraser_tool"])
-	tools.append([Global.find_node_by_name(root, "Bucket"), "left_fill_tool", "right_fill_tool"])
-	tools.append([Global.find_node_by_name(root, "LightenDarken"), "left_lightdark_tool", "right_lightdark_tool"])
-	tools.append([Global.find_node_by_name(root, "RectSelect"), "left_rectangle_select_tool", "right_rectangle_select_tool"])
-	tools.append([Global.find_node_by_name(root, "ColorPicker"), "left_colorpicker_tool", "right_colorpicker_tool"])
-	tools.append([Global.find_node_by_name(root, "Zoom"), "left_zoom_tool", "right_zoom_tool"])
-
-	for t in tools:
-		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
-
-	Global.update_hint_tooltips()
-
 	# Checks to see if it's 3.1.x
 	if Engine.get_version_info().major == 3 and Engine.get_version_info().minor < 2:
 		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
@@ -231,15 +213,6 @@ func _input(event : InputEvent) -> void:
 		Global.undo_redo.redo()
 		redone = false
 
-	if Global.has_focus:
-		if event.is_action_pressed("undo") or event.is_action_pressed("redo") or event.is_action_pressed("redo_secondary"):
-			return
-		for t in tools: # Handle tool shortcuts
-			if event.is_action_pressed(t[2]): # Shortcut for right button (with Alt)
-				_on_Tool_pressed(t[0], false, false)
-			elif event.is_action_pressed(t[1]): # Shortcut for left button
-				_on_Tool_pressed(t[0], false, true)
-
 
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
@@ -269,7 +242,8 @@ func file_menu_id_pressed(id : int) -> void:
 				else:
 					load_last_project()
 			else: # if not then warn user that he didn't edit any project yet
-				$NoProjectEditedOrCreatedAlertDialog.popup_centered()
+				Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
+				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 		3: # Save
 			is_quitting_on_save = false
@@ -476,7 +450,8 @@ func load_last_project() -> void:
 			_on_OpenSprite_file_selected(file_path)
 		else:
 			# If file doesn't exist on disk then warn user about this
-			$OpenLastProjectAlertDialog.popup_centered()
+			Global.error_dialog.set_text("Cannot find last project file.")
+			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
 
 
@@ -522,307 +497,8 @@ func _on_ImportSprites_popup_hide() -> void:
 		_can_draw_true()
 
 
-func _on_ViewportContainer_mouse_entered() -> void:
-	Global.has_focus = true
-
-
-func _on_ViewportContainer_mouse_exited() -> void:
-	Global.has_focus = false
-
-
 func _can_draw_true() -> void:
 	Global.dialog_open(false)
-
-
-func _can_draw_false() -> void:
-	Global.can_draw = false
-
-
-func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_left := true) -> void:
-	var current_action := tool_pressed.name
-	if (mouse_press and Input.is_action_just_released("left_mouse")) or (!mouse_press and key_for_left):
-		Global.current_left_tool = current_action
-
-		# Start from 1, so the label won't get invisible
-		for i in range(1, Global.left_tool_options_container.get_child_count()):
-			Global.left_tool_options_container.get_child(i).visible = false
-
-		Global.left_tool_options_container.get_node("EmptySpacer").visible = true
-
-		# Tool options visible depending on the selected tool
-		if current_action == "Pencil":
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
-			Global.left_pixel_perfect_container.visible = true
-			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
-				Global.left_color_interpolation_container.visible = true
-		elif current_action == "Eraser":
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
-			Global.left_pixel_perfect_container.visible = true
-			Global.left_mirror_container.visible = true
-		elif current_action == "Bucket":
-			Global.left_fill_area_container.visible = true
-			Global.left_mirror_container.visible = true
-		elif current_action == "LightenDarken":
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
-			Global.left_pixel_perfect_container.visible = true
-			Global.left_ld_container.visible = true
-			Global.left_mirror_container.visible = true
-		elif current_action == "ColorPicker":
-			Global.left_colorpicker_container.visible = true
-		elif current_action == "Zoom":
-			Global.left_zoom_container.visible = true
-
-	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
-		Global.current_right_tool = current_action
-		# Start from 1, so the label won't get invisible
-		for i in range(1, Global.right_tool_options_container.get_child_count()):
-			Global.right_tool_options_container.get_child(i).visible = false
-
-		Global.right_tool_options_container.get_node("EmptySpacer").visible = true
-
-		# Tool options visible depending on the selected tool
-		if current_action == "Pencil":
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
-			Global.right_pixel_perfect_container.visible = true
-			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
-				Global.right_color_interpolation_container.visible = true
-		elif current_action == "Eraser":
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
-			Global.right_pixel_perfect_container.visible = true
-			Global.right_mirror_container.visible = true
-		elif current_action == "Bucket":
-			Global.right_fill_area_container.visible = true
-			Global.right_mirror_container.visible = true
-		elif current_action == "LightenDarken":
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
-			Global.right_pixel_perfect_container.visible = true
-			Global.right_ld_container.visible = true
-			Global.right_mirror_container.visible = true
-		elif current_action == "ColorPicker":
-			Global.right_colorpicker_container.visible = true
-		elif current_action == "Zoom":
-			Global.right_zoom_container.visible = true
-
-	for t in tools:
-		var tool_name : String = t[0].name
-		var texture_button : TextureRect = t[0].get_child(0)
-
-		if tool_name == Global.current_left_tool and tool_name == Global.current_right_tool:
-			Global.change_button_texturerect(texture_button, "%s_l_r.png" % tool_name.to_lower())
-		elif tool_name == Global.current_left_tool:
-			Global.change_button_texturerect(texture_button, "%s_l.png" % tool_name.to_lower())
-		elif tool_name == Global.current_right_tool:
-			Global.change_button_texturerect(texture_button, "%s_r.png" % tool_name.to_lower())
-		else:
-			Global.change_button_texturerect(texture_button, "%s.png" % tool_name.to_lower())
-
-	Global.left_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_left_tool.to_lower()), 0)
-	Global.right_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
-
-
-func _on_LeftBrushTypeButton_pressed() -> void:
-	Global.brushes_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
-	Global.brush_type_window_position = "left"
-
-
-func _on_RightBrushTypeButton_pressed() -> void:
-	Global.brushes_popup.popup(Rect2(Global.right_brush_type_button.rect_global_position, Vector2(226, 72)))
-	Global.brush_type_window_position = "right"
-
-
-func _on_LeftBrushSizeEdit_value_changed(value) -> void:
-	Global.left_brush_size_edit.value = value
-	Global.left_brush_size_slider.value = value
-	var new_size = int(value)
-	Global.left_brush_size = new_size
-	update_left_custom_brush()
-
-
-func _on_RightBrushSizeEdit_value_changed(value) -> void:
-	Global.right_brush_size_edit.value = value
-	Global.right_brush_size_slider.value = value
-	var new_size = int(value)
-	Global.right_brush_size = new_size
-	update_right_custom_brush()
-
-
-func _on_Brush_Selected() -> void:
-	$BrushesPopup.hide()
-
-
-func _on_ColorSwitch_pressed() -> void:
-	var temp: Color = Global.left_color_picker.color
-	Global.left_color_picker.color = Global.right_color_picker.color
-	Global.right_color_picker.color = temp
-	update_left_custom_brush()
-	update_right_custom_brush()
-
-
-func _on_ColorDefaults_pressed() -> void:
-	Global.left_color_picker.color = Color.black
-	Global.right_color_picker.color = Color.white
-	update_left_custom_brush()
-	update_right_custom_brush()
-
-
-func _on_LeftColorPickerButton_color_changed(color : Color) -> void:
-	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
-	if color.a == 0:
-		if previous_left_color.r != color.r or previous_left_color.g != color.g or previous_left_color.b != color.b:
-			Global.left_color_picker.color.a = 1
-	update_left_custom_brush()
-	previous_left_color = color
-
-
-func _on_RightColorPickerButton_color_changed(color : Color) -> void:
-	# If the color changed while it's on full transparency, make it opaque (GH issue #54)
-	if color.a == 0:
-		if previous_right_color.r != color.r or previous_right_color.g != color.g or previous_right_color.b != color.b:
-			Global.right_color_picker.color.a = 1
-	update_right_custom_brush()
-	previous_right_color = color
-
-
-func _on_LeftInterpolateFactor_value_changed(value : float) -> void:
-	Global.left_interpolate_spinbox.value = value
-	Global.left_interpolate_slider.value = value
-	update_left_custom_brush()
-
-
-func _on_RightInterpolateFactor_value_changed(value : float) -> void:
-	Global.right_interpolate_spinbox.value = value
-	Global.right_interpolate_slider.value = value
-	update_right_custom_brush()
-
-
-func update_left_custom_brush() -> void:
-	Global.update_left_custom_brush()
-
-
-func update_right_custom_brush() -> void:
-	Global.update_right_custom_brush()
-
-
-func _on_LeftFillAreaOptions_item_selected(ID : int) -> void:
-	Global.left_fill_area = ID
-
-
-func _on_LeftFillWithOptions_item_selected(ID : int) -> void:
-	Global.left_fill_with = ID
-	if ID == 1:
-		Global.left_fill_pattern_container.visible = true
-	else:
-		Global.left_fill_pattern_container.visible = false
-
-
-func _on_LeftPatternTypeButton_pressed() -> void:
-	Global.pattern_window_position = "left"
-	Global.patterns_popup.popup(Rect2(Global.left_brush_type_button.rect_global_position, Vector2(226, 72)))
-
-
-func _on_LeftPatternOffsetX_value_changed(value : float) -> void:
-	Global.left_fill_pattern_offset.x = value
-
-
-func _on_LeftPatternOffsetY_value_changed(value : float) -> void:
-	Global.left_fill_pattern_offset.y = value
-
-
-func _on_RightPatternOffsetX_value_changed(value : float) -> void:
-	Global.right_fill_pattern_offset.x = value
-
-
-func _on_RightPatternOffsetY_value_changed(value : float) -> void:
-	Global.right_fill_pattern_offset.y = value
-
-
-func _on_RightFillAreaOptions_item_selected(ID : int) -> void:
-	Global.right_fill_area = ID
-
-
-func _on_RightFillWithOptions_item_selected(ID : int) -> void:
-	Global.right_fill_with = ID
-	if ID == 1:
-		Global.right_fill_pattern_container.visible = true
-	else:
-		Global.right_fill_pattern_container.visible = false
-
-
-func _on_RightPatternTypeButton_pressed() -> void:
-	Global.pattern_window_position = "right"
-	Global.patterns_popup.popup(Rect2(Global.right_brush_type_button.rect_global_position, Vector2(226, 72)))
-
-
-func _on_LeftLightenDarken_item_selected(ID : int) -> void:
-	Global.left_ld = ID
-
-
-func _on_LeftLDAmountSpinbox_value_changed(value : float) -> void:
-	Global.left_ld_amount = value / 100
-	Global.left_ld_amount_slider.value = value
-	Global.left_ld_amount_spinbox.value = value
-
-
-func _on_RightLightenDarken_item_selected(ID : int) -> void:
-	Global.right_ld = ID
-
-
-func _on_RightLDAmountSpinbox_value_changed(value : float) -> void:
-	Global.right_ld_amount = value / 100
-	Global.right_ld_amount_slider.value = value
-	Global.right_ld_amount_spinbox.value = value
-
-
-func _on_LeftForColorOptions_item_selected(ID : int) -> void:
-	Global.left_color_picker_for = ID
-
-
-func _on_RightForColorOptions_item_selected(ID : int) -> void:
-	Global.right_color_picker_for = ID
-
-
-func _on_LeftZoomModeOptions_item_selected(ID : int) -> void:
-	Global.left_zoom_mode = ID
-
-
-func _on_RightZoomModeOptions_item_selected(ID : int) -> void:
-	Global.right_zoom_mode = ID
-
-
-func _on_FitToFrameButton_pressed() -> void:
-	Global.camera.fit_to_frame(Global.canvas.size)
-
-
-func _on_100ZoomButton_pressed() -> void:
-	Global.camera.zoom = Vector2.ONE
-	Global.camera.offset = Global.canvas.size / 2
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
-
-
-func _on_LeftHorizontalMirroring_toggled(button_pressed) -> void:
-	Global.left_horizontal_mirror = button_pressed
-
-
-func _on_LeftVerticalMirroring_toggled(button_pressed) -> void:
-	Global.left_vertical_mirror = button_pressed
-
-
-func _on_RightHorizontalMirroring_toggled(button_pressed) -> void:
-	Global.right_horizontal_mirror = button_pressed
-
-
-func _on_RightVerticalMirroring_toggled(button_pressed) -> void:
-	Global.right_vertical_mirror = button_pressed
 
 
 func show_quit_dialog() -> void:
@@ -868,11 +544,3 @@ func _on_BackupConfirmation_delete(project_path : String, backup_path : String) 
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
-
-
-func _on_LeftPixelPerfectMode_toggled(button_pressed : bool) -> void:
-	Global.left_pixel_perfect = button_pressed
-
-
-func _on_RightPixelPerfectMode_toggled(button_pressed : bool) -> void:
-	Global.right_pixel_perfect = button_pressed

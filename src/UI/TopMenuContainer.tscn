@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/themes/dark/top_menu_style.tres" type="StyleBox" id=1]
+
+[node name="TopMenuContainer" type="Panel"]
+margin_right = 1280.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+custom_styles/panel = ExtResource( 1 )
+
+[node name="MenuItems" type="HBoxContainer" parent="."]
+margin_left = 2.0
+margin_top = 4.0
+margin_right = 1010.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileMenu" type="MenuButton" parent="MenuItems"]
+margin_right = 29.0
+margin_bottom = 21.0
+mouse_default_cursor_shape = 2
+text = "File"
+switch_on_hover = true
+
+[node name="EditMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 33.0
+margin_right = 64.0
+margin_bottom = 21.0
+mouse_default_cursor_shape = 2
+text = "Edit"
+switch_on_hover = true
+
+[node name="ViewMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 68.0
+margin_right = 104.0
+margin_bottom = 21.0
+mouse_default_cursor_shape = 2
+text = "View"
+switch_on_hover = true
+
+[node name="ImageMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 108.0
+margin_right = 152.0
+margin_bottom = 21.0
+mouse_default_cursor_shape = 2
+text = "Image"
+switch_on_hover = true
+
+[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 156.0
+margin_right = 191.0
+margin_bottom = 21.0
+mouse_default_cursor_shape = 2
+text = "Help"
+switch_on_hover = true
+
+[node name="TopLabels" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_right = 65.5
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZoomLevel" type="Label" parent="TopLabels"]
+margin_top = 6.0
+margin_right = 60.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 60, 0 )
+text = "781 %"
+align = 2
+
+[node name="CursorPosition" type="Label" parent="TopLabels"]
+margin_left = 80.0
+margin_top = 6.0
+margin_right = 120.0
+margin_bottom = 21.0
+text = "[64×64]"
+align = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -330.0
+margin_top = -14.0
+margin_bottom = 14.0
+grow_horizontal = 2
+size_flags_vertical = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentFrame" type="Label" parent="HBoxContainer"]
+margin_left = 113.0
+margin_top = 6.0
+margin_right = 216.0
+margin_bottom = 21.0
+text = "Current Frame: 1/1"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

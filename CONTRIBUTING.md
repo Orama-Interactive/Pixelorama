@@ -29,6 +29,7 @@ If you want to add new features or fix bugs, please make sure that:
 - If your PR is closing an issue, make sure to let us know.
 - If you're making visual changes, it's a good idea to include screenshots in your PR. It's an easy way to let others know of the changes you made.
 - If you are adding new UI elements with text, please include the new strings in the `Translations.pot` file. Do not include them in the other `*.po` files. Please make sure to group similar elements together (like element names and their tooltips) by placing them close to each other.
+- If you want to make changes to UI elements that are PackedScenes, please edit them in their own scene files (open their scenes in the editor) instead of Main.tscn, or their parent scene in general.
 - If you are making changes to popup (and as an extension, dialog) nodes as different scenes, please don't forget to turn off their visibility.
 - When you're creating a new script, Godot will place some comments and methods for you. If you're not using them, please remove them. They're taking unnecessary space.
 - Avoid using the "pass" keyword. It has no actual usage, besides being used as a placeholder for temporarily empty methods and empty cases. Make sure you don't include empty methods and cases in the code of your PR.
@@ -36,6 +37,7 @@ If you want to add new features or fix bugs, please make sure that:
 - If you are adding new scripts and/or scenes, please put them somewhere inside the `src/` directory, and make sure to use PascalCase for your file and folder names. [Read this guide for more information.](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
 - If you are adding images or any type of asset, please put them somewhere inside the `assets/` directory, and make sure to use snake_case for your file and folder names.
 - Do **NOT** use the `l10n_master` branch for development. Do not base your work from it, and do not open Pull Requests targeted at it. It's used specifically by Crowdin for translation handling.
+- If you want to add an error dialog, use the existing ErrorDialog, change its text and pop it up, instead of making a new one.
 
 Please create different pull requests for each feature you'd like to implement, or each bug you'd like to fix. Make sure your pull request only handles one specific topic, and not multiple. If you want to make multiple changes, make a pull request for each of them. For this reason, it's recommended you create new branches in your forked repository, instead of using your fork's master branch.
 This [Git style guide](https://github.com/agis-/git-style-guide) has some good practices to have in mind.

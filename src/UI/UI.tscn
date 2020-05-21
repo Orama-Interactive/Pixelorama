@@ -1,0 +1,385 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/SecondViewport.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Rulers/VerticalRuler.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=6]
+[ext_resource path="res://src/CameraMovement.gd" type="Script" id=7]
+[ext_resource path="res://src/SelectionRectangle.gd" type="Script" id=8]
+[ext_resource path="res://assets/themes/dark/ruler_style.tres" type="StyleBox" id=9]
+[ext_resource path="res://assets/graphics/dark_themes/tools/bucket.png" type="Texture" id=10]
+[ext_resource path="res://assets/graphics/dark_themes/tools/colorpicker.png" type="Texture" id=11]
+[ext_resource path="res://assets/graphics/dark_themes/tools/rectselect.png" type="Texture" id=12]
+[ext_resource path="res://assets/graphics/dark_themes/tools/eraser_r.png" type="Texture" id=13]
+[ext_resource path="res://assets/graphics/dark_themes/tools/pencil_l.png" type="Texture" id=14]
+[ext_resource path="res://assets/graphics/dark_themes/tools/lightendarken.png" type="Texture" id=15]
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=16]
+[ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Canvas.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/Palette/PalettePanelContainer.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=21]
+[ext_resource path="res://src/UI/TransparentChecker.gd" type="Script" id=22]
+[ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 16 )
+shader_param/size = 10.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+expand_margin_top = 6.0
+
+[node name="UI" type="HBoxContainer"]
+margin_top = 28.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolPanel" type="Panel" parent="."]
+margin_right = 48.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 48, 0 )
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="ToolPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.5
+margin_right = 20.5
+margin_bottom = 254.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tools" type="VBoxContainer" parent="ToolPanel/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 39.0
+margin_bottom = 255.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RectSelect" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/RectSelect"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zoom" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Zoom"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/ColorPicker"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pencil" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 108.0
+margin_right = 32.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Pencil"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Eraser" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 144.0
+margin_right = 32.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Eraser"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bucket" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 180.0
+margin_right = 32.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Bucket"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LightenDarken" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+"UIButtons",
+]]
+margin_top = 216.0
+margin_right = 32.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/LightenDarken"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasAndTimeline" type="VSplitContainer" parent="."]
+margin_left = 48.0
+margin_right = 950.0
+margin_bottom = 692.0
+size_flags_horizontal = 3
+custom_constants/autohide = 0
+
+[node name="HViewportContainer" type="HBoxContainer" parent="CanvasAndTimeline"]
+margin_right = 902.0
+margin_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportAndRulers" type="VBoxContainer" parent="CanvasAndTimeline/HViewportContainer"]
+margin_right = 902.0
+margin_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="HorizontalRuler" type="Button" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+margin_right = 902.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+focus_mode = 0
+mouse_default_cursor_shape = 14
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 9 )
+action_mode = 0
+enabled_focus_mode = 0
+script = ExtResource( 6 )
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers"]
+margin_top = 16.0
+margin_right = 902.0
+margin_bottom = 480.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+margin_right = 890.0
+margin_bottom = 464.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="VerticalRuler" type="Button" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+margin_right = 16.0
+margin_bottom = 464.0
+rect_min_size = Vector2( 16, 0 )
+focus_mode = 0
+mouse_default_cursor_shape = 15
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 9 )
+action_mode = 0
+enabled_focus_mode = 0
+script = ExtResource( 4 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+margin_left = 16.0
+margin_right = 890.0
+margin_bottom = 464.0
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 23 )
+
+[node name="Viewport" type="Viewport" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
+size = Vector2( 874, 464 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="TransparentChecker" type="ColorRect" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+material = SubResource( 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 22 )
+
+[node name="Canvas" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
+
+[node name="Camera2D" type="Camera2D" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 7 )
+
+[node name="SelectionRectangle" type="Polygon2D" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+visible = false
+z_index = 1
+color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+invert_enable = true
+invert_border = 0.5
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+script = ExtResource( 8 )
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer"]
+margin_left = 902.0
+margin_right = 902.0
+margin_bottom = 464.0
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 23 )
+
+[node name="Viewport" type="Viewport" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
+size = Vector2( 0, 464 )
+handle_input_locally = false
+render_target_update_mode = 3
+script = ExtResource( 2 )
+
+[node name="Camera2D2" type="Camera2D" parent="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport"]
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 7 )
+
+[node name="AnimationTimeline" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
+margin_top = 492.0
+margin_bottom = 692.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="RightPanel" type="Panel" parent="."]
+margin_left = 950.0
+margin_right = 1280.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 330, 0 )
+
+[node name="PreviewAndPalettes" type="VBoxContainer" parent="RightPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+margin_right = 3.05176e-05
+margin_bottom = 6.10352e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="RightPanel/PreviewAndPalettes"]
+margin_left = 8.0
+margin_right = 322.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+
+[node name="CanvasPreview" type="ViewportContainer" parent="RightPanel/PreviewAndPalettes/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 307.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 0, 150 )
+
+[node name="Viewport" type="Viewport" parent="RightPanel/PreviewAndPalettes/PanelContainer/CanvasPreview"]
+size = Vector2( 300, 150 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+script = ExtResource( 2 )
+
+[node name="CameraPreview" type="Camera2D" parent="RightPanel/PreviewAndPalettes/PanelContainer/CanvasPreview/Viewport"]
+offset = Vector2( 32, 32 )
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 7 )
+
+[node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="RightPanel/PreviewAndPalettes"]
+margin_top = 168.0
+margin_right = 330.0
+margin_bottom = 676.0
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
+margin_bottom = 248.0
+
+[node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
+margin_top = 260.0
+margin_bottom = 508.0
+[connection signal="mouse_entered" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
+[connection signal="pressed" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
+[connection signal="pressed" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
+[connection signal="mouse_entered" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="CanvasAndTimeline/HViewportContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_exited"]

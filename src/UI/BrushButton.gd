@@ -1,8 +1,6 @@
 extends BaseButton
 
 
-signal brush_selected
-
 export var brush_type = 0 # Global.Brush_Types.PIXEL
 export var custom_brush_index := -3
 var random_brushes := []
@@ -36,7 +34,7 @@ func _on_BrushButton_pressed() -> void:
 #			Global.left_brush_type_label.text = tr("Brush: Filled Circle")
 
 		Global.update_left_custom_brush()
-		emit_signal("brush_selected")
+		Global.brushes_popup.hide()
 
 	else: # Change right brush
 		Global.current_right_brush_type = brush_type
@@ -59,7 +57,7 @@ func _on_BrushButton_pressed() -> void:
 #			Global.right_brush_type_label.text = tr("Brush: Filled Circle")
 
 		Global.update_right_custom_brush()
-		emit_signal("brush_selected")
+		Global.brushes_popup.hide()
 
 
 func _on_DeleteButton_pressed() -> void:

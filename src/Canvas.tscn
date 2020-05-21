@@ -2,6 +2,5 @@
 
 [ext_resource path="res://src/Canvas.gd" type="Script" id=1]
 
-
 [node name="Canvas" type="Node2D"]
 script = ExtResource( 1 )
