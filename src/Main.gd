@@ -322,106 +322,142 @@ func view_menu_id_pressed(id : int) -> void:
 	Global.canvas.update()
 
 
+func show_scale_image_popup() -> void:
+	$ScaleImage.popup_centered()
+	Global.dialog_open(true)
+
+
+func crop_image() -> void:
+	# Use first cel as a starting rectangle
+	var used_rect : Rect2 = Global.canvases[0].layers[0][0].get_used_rect()
+
+	for c in Global.canvases:
+		# However, if first cel is empty, loop through all cels until we find one that isn't
+		for layer in c.layers:
+			if used_rect != Rect2(0, 0, 0, 0):
+				break
+			else:
+				if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = layer[0].get_used_rect()
+
+		# Merge all layers with content
+		for layer in c.layers:
+				if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = used_rect.merge(layer[0].get_used_rect())
+
+	# If no layer has any content, just return
+	if used_rect == Rect2(0, 0, 0, 0):
+		return
+
+	var width := used_rect.size.x
+	var height := used_rect.size.y
+	Global.undos += 1
+	Global.undo_redo.create_action("Scale")
+	for c in Global.canvases:
+		Global.undo_redo.add_do_property(c, "size", Vector2(width, height).floor())
+		# Loop through all the layers to crop them
+		for j in range(Global.canvas.layers.size() - 1, -1, -1):
+			var sprite : Image = c.layers[j][0].get_rect(used_rect)
+			Global.undo_redo.add_do_property(c.layers[j][0], "data", sprite.data)
+			Global.undo_redo.add_undo_property(c.layers[j][0], "data", c.layers[j][0].data)
+
+		Global.undo_redo.add_undo_property(c, "size", c.size)
+	Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
+	Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
+	Global.undo_redo.commit_action()
+
+
+func flip_image_horizontal() -> void:
+	var canvas : Canvas = Global.canvas
+	canvas.handle_undo("Draw")
+	canvas.layers[Global.current_layer][0].unlock()
+	canvas.layers[Global.current_layer][0].flip_x()
+	canvas.layers[Global.current_layer][0].lock()
+	canvas.handle_redo("Draw")
+
+
+func flip_image_vertical() -> void:
+	var canvas : Canvas = Global.canvas
+	canvas.handle_undo("Draw")
+	canvas.layers[Global.current_layer][0].unlock()
+	canvas.layers[Global.current_layer][0].flip_y()
+	canvas.layers[Global.current_layer][0].lock()
+	canvas.handle_redo("Draw")
+
+
+func show_rotate_image_popup() -> void:
+	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	$RotateImage.set_sprite(image)
+	$RotateImage.popup_centered()
+	Global.dialog_open(true)
+
+
+func invert_image_colors() -> void:
+	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	Global.canvas.handle_undo("Draw")
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			var px_color = image.get_pixel(xx, yy).inverted()
+			if px_color.a == 0:
+				continue
+			image.set_pixel(xx, yy, px_color)
+	Global.canvas.handle_redo("Draw")
+
+
+func desaturate_image() -> void:
+	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	Global.canvas.handle_undo("Draw")
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			var px_color = image.get_pixel(xx, yy)
+			if px_color.a == 0:
+				continue
+			var gray = image.get_pixel(xx, yy).v
+			px_color = Color(gray, gray, gray, px_color.a)
+			image.set_pixel(xx, yy, px_color)
+	Global.canvas.handle_redo("Draw")
+
+
+func show_add_outline_popup() -> void:
+	$OutlineDialog.popup_centered()
+	Global.dialog_open(true)
+
+
+func show_hsv_configuration_popup() -> void:
+	$HSVDialog.popup_centered()
+	Global.dialog_open(true)
+
+
 func image_menu_id_pressed(id : int) -> void:
 	if Global.layers[Global.current_layer][2]: # No changes if the layer is locked
 		return
 	match id:
 		0: # Scale Image
-			$ScaleImage.popup_centered()
-			Global.dialog_open(true)
+			show_scale_image_popup()
 
 		1: # Crop Image
-			# Use first cel as a starting rectangle
-			var used_rect : Rect2 = Global.canvases[0].layers[0][0].get_used_rect()
-
-			for c in Global.canvases:
-				# However, if first cel is empty, loop through all cels until we find one that isn't
-				for layer in c.layers:
-					if used_rect != Rect2(0, 0, 0, 0):
-						break
-					else:
-						if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
-							used_rect = layer[0].get_used_rect()
-
-				# Merge all layers with content
-				for layer in c.layers:
-						if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
-							used_rect = used_rect.merge(layer[0].get_used_rect())
-
-			# If no layer has any content, just return
-			if used_rect == Rect2(0, 0, 0, 0):
-				return
-
-			var width := used_rect.size.x
-			var height := used_rect.size.y
-			Global.undos += 1
-			Global.undo_redo.create_action("Scale")
-			for c in Global.canvases:
-				Global.undo_redo.add_do_property(c, "size", Vector2(width, height).floor())
-				# Loop through all the layers to crop them
-				for j in range(Global.canvas.layers.size() - 1, -1, -1):
-					var sprite : Image = c.layers[j][0].get_rect(used_rect)
-					Global.undo_redo.add_do_property(c.layers[j][0], "data", sprite.data)
-					Global.undo_redo.add_undo_property(c.layers[j][0], "data", c.layers[j][0].data)
-
-				Global.undo_redo.add_undo_property(c, "size", c.size)
-			Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
-			Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
-			Global.undo_redo.commit_action()
+			crop_image()
 
 		2: # Flip Horizontal
-			var canvas : Canvas = Global.canvas
-			canvas.handle_undo("Draw")
-			canvas.layers[Global.current_layer][0].unlock()
-			canvas.layers[Global.current_layer][0].flip_x()
-			canvas.layers[Global.current_layer][0].lock()
-			canvas.handle_redo("Draw")
+			flip_image_horizontal()
 
 		3: # Flip Vertical
-			var canvas : Canvas = Global.canvas
-			canvas.handle_undo("Draw")
-			canvas.layers[Global.current_layer][0].unlock()
-			canvas.layers[Global.current_layer][0].flip_y()
-			canvas.layers[Global.current_layer][0].lock()
-			canvas.handle_redo("Draw")
+			flip_image_vertical()
 
 		4: # Rotate
-			var image : Image = Global.canvas.layers[Global.current_layer][0]
-			$RotateImage.set_sprite(image)
-			$RotateImage.popup_centered()
-			Global.dialog_open(true)
+			show_rotate_image_popup()
 
 		5: # Invert Colors
-			var image : Image = Global.canvas.layers[Global.current_layer][0]
-			Global.canvas.handle_undo("Draw")
-			for xx in image.get_size().x:
-				for yy in image.get_size().y:
-					var px_color = image.get_pixel(xx, yy).inverted()
-					if px_color.a == 0:
-						continue
-					image.set_pixel(xx, yy, px_color)
-			Global.canvas.handle_redo("Draw")
+			invert_image_colors()
 
 		6: # Desaturation
-			var image : Image = Global.canvas.layers[Global.current_layer][0]
-			Global.canvas.handle_undo("Draw")
-			for xx in image.get_size().x:
-				for yy in image.get_size().y:
-					var px_color = image.get_pixel(xx, yy)
-					if px_color.a == 0:
-						continue
-					var gray = image.get_pixel(xx, yy).v
-					px_color = Color(gray, gray, gray, px_color.a)
-					image.set_pixel(xx, yy, px_color)
-			Global.canvas.handle_redo("Draw")
+			desaturate_image()
 
 		7: # Outline
-			$OutlineDialog.popup_centered()
-			Global.dialog_open(true)
+			show_add_outline_popup()
 
 		8: # HSV
-			$HSVDialog.popup_centered()
-			Global.dialog_open(true)
+			show_hsv_configuration_popup()
 
 
 func help_menu_id_pressed(id : int) -> void:
