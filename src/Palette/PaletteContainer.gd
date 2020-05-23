@@ -195,7 +195,7 @@ func _load_palettes() -> void:
 					# You need these two lines because when you remove a palette
 					# Then this just won't work and _on_PaletteOptionButton_item_selected
 					# method won't fire.
-					Global.palette_option_button.selected
+					Global.palette_option_button.selected = index
 					on_palette_select("Default")
 					Global.palette_option_button.select(index)
 

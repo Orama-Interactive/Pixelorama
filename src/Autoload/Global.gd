@@ -234,7 +234,7 @@ var animation_timeline : Panel
 
 var animation_timer : Timer
 var frame_ids : HBoxContainer
-var current_frame_label : Label
+var current_frame_mark_label : Label
 var onion_skinning_button : BaseButton
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
@@ -372,7 +372,7 @@ func _ready() -> void:
 	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
 	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
 	frame_ids = find_node_by_name(animation_timeline, "FrameIDs")
-	current_frame_label = find_node_by_name(control, "CurrentFrame")
+	current_frame_mark_label = find_node_by_name(control, "CurrentFrameMark")
 	onion_skinning_button = find_node_by_name(animation_timeline, "OnionSkinning")
 	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
@@ -625,7 +625,7 @@ func layers_changed(value : Array) -> void:
 
 func frame_changed(value : int) -> void:
 	current_frame = value
-	current_frame_label.text = tr("Current frame:") + " %s/%s" % [str(current_frame + 1), canvases.size()]
+	current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), canvases.size()]
 
 	var i := 0
 	for c in canvases: # De-select all the other canvases/frames

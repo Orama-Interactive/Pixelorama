@@ -11,13 +11,63 @@ var is_quitting_on_save := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
+	setup_application_window_size()
+
+	setup_translation_settings()
+
+	setup_file_menu()
+	setup_edit_menu()
+	setup_view_menu()
+	setup_image_menu()
+	setup_help_menu()
+
+	Global.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
+
+	Global.layers[0][0] = tr("Layer") + " 0"
+	Global.layers_container.get_child(0).label.text = Global.layers[0][0]
+	Global.layers_container.get_child(0).line_edit.text = Global.layers[0][0]
+
+	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
+	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
+
+	Global.left_color_picker.get_picker().presets_visible = false
+	Global.right_color_picker.get_picker().presets_visible = false
+
+	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
+	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
+
+	if not Global.config_cache.has_section_key("preferences", "startup"):
+		Global.config_cache.set_value("preferences", "startup", true)
+	show_splash_screen()
+
+	handle_backup()
+
+	handle_running_pixelorama_with_arguments()
+
+
+func _input(event : InputEvent) -> void:
+	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
+	Global.left_cursor.texture = Global.left_cursor_tool_texture
+	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
+	Global.right_cursor.texture = Global.right_cursor_tool_texture
+
+	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
+		if get_focus_owner() is LineEdit:
+			get_focus_owner().release_focus()
+
+	if event.is_action_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+
+	if event.is_action_pressed("redo_secondary"): # Shift + Ctrl + Z
+		redone = true
+		Global.undo_redo.redo()
+		redone = false
+
+
+func setup_application_window_size() -> void:
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
 	OS.set("min_window_size", Vector2(1024, 576))
-	Global.loaded_locales = TranslationServer.get_loaded_locales()
-
-	# Make sure locales are always sorted, in the same order
-	Global.loaded_locales.sort()
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
@@ -31,48 +81,12 @@ func _ready() -> void:
 		if Global.config_cache.has_section_key("window", "size"):
 			OS.window_size = Global.config_cache.get_value("window", "size")
 
-	var file_menu_items := {
-		"New..." : InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
-		"Open..." : InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
-		'Open last project...' : 0,
-		"Save..." : InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
-		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
-		"Import..." : InputMap.get_action_list("import_file")[0].get_scancode_with_modifiers(),
-		"Export..." : InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
-		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
-		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
-		}
-	var edit_menu_items := {
-		"Undo" : InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
-		"Redo" : InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
-		"Clear Selection" : 0,
-		"Preferences" : 0
-		}
-	var view_menu_items := {
-		"Tile Mode" : InputMap.get_action_list("tile_mode")[0].get_scancode_with_modifiers(),
-		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
-		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
-		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-		"Show Animation Timeline" : 0
-		}
-	var image_menu_items := {
-		"Scale Image" : 0,
-		"Crop Image" : 0,
-		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
-		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
-		"Rotate Image" : 0,
-		"Invert colors" : 0,
-		"Desaturation" : 0,
-		"Outline" : 0,
-		"Adjust Hue/Saturation/Value" : 0
-		}
-	var help_menu_items := {
-		"View Splash Screen" : 0,
-		"Online Docs" : 0,
-		"Issue Tracker" : 0,
-		"Changelog" : 0,
-		"About Pixelorama" : 0
-		}
+
+func setup_translation_settings() -> void:
+	Global.loaded_locales = TranslationServer.get_loaded_locales()
+
+	# Make sure locales are always sorted, in the same order
+	Global.loaded_locales.sort()
 
 	# Load language
 	if Global.config_cache.has_section_key("preferences", "locale"):
@@ -92,67 +106,110 @@ func _ready() -> void:
 		theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
 
 
+func setup_file_menu() -> void:
+	var file_menu_items := {
+		"New..." : InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
+		"Open..." : InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
+		'Open last project...' : 0,
+		"Save..." : InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
+		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
+		"Import..." : InputMap.get_action_list("import_file")[0].get_scancode_with_modifiers(),
+		"Export..." : InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
+		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
+		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
+		}
 	file_menu = Global.file_menu.get_popup()
-	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
-	view_menu = Global.view_menu.get_popup()
-	var image_menu : PopupMenu = Global.image_menu.get_popup()
-	var help_menu : PopupMenu = Global.help_menu.get_popup()
+	var i := 0
 
-	var i = 0
 	for item in file_menu_items.keys():
 		file_menu.add_item(item, i, file_menu_items[item])
 		i += 1
-	i = 0
+
+	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
+
+
+func setup_edit_menu() -> void:
+	var edit_menu_items := {
+		"Undo" : InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
+		"Redo" : InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
+		"Clear Selection" : 0,
+		"Preferences" : 0
+		}
+	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
+	var i := 0
+
 	for item in edit_menu_items.keys():
 		edit_menu.add_item(item, i, edit_menu_items[item])
 		i += 1
-	i = 0
+
+	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
+
+
+func setup_view_menu() -> void:
+	var view_menu_items := {
+		"Tile Mode" : InputMap.get_action_list("tile_mode")[0].get_scancode_with_modifiers(),
+		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
+		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
+		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
+		"Show Animation Timeline" : 0
+		}
+	view_menu = Global.view_menu.get_popup()
+
+	var i := 0
 	for item in view_menu_items.keys():
 		view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
+
 	view_menu.set_item_checked(2, true) # Show Rulers
 	view_menu.set_item_checked(3, true) # Show Guides
 	view_menu.set_item_checked(4, true) # Show Animation Timeline
 	view_menu.hide_on_checkable_item_selection = false
-	i = 0
+	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+
+
+func setup_image_menu() -> void:
+	var image_menu_items := {
+		"Scale Image" : 0,
+		"Crop Image" : 0,
+		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
+		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
+		"Rotate Image" : 0,
+		"Invert colors" : 0,
+		"Desaturation" : 0,
+		"Outline" : 0,
+		"Adjust Hue/Saturation/Value" : 0
+		}
+	var image_menu : PopupMenu = Global.image_menu.get_popup()
+
+	var i := 0
 	for item in image_menu_items.keys():
 		image_menu.add_item(item, i, image_menu_items[item])
 		if i == 4:
 			image_menu.add_separator()
 		i += 1
-	i = 0
+
+	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
+
+
+func setup_help_menu() -> void:
+	var help_menu_items := {
+		"View Splash Screen" : 0,
+		"Online Docs" : 0,
+		"Issue Tracker" : 0,
+		"Changelog" : 0,
+		"About Pixelorama" : 0
+		}
+	var help_menu : PopupMenu = Global.help_menu.get_popup()
+
+	var i := 0
 	for item in help_menu_items.keys():
 		help_menu.add_item(item, i, help_menu_items[item])
 		i += 1
 
-	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
-	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
-	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
-	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 
-	# Checks to see if it's 3.1.x
-	if Engine.get_version_info().major == 3 and Engine.get_version_info().minor < 2:
-		Global.left_color_picker.get_picker().move_child(Global.left_color_picker.get_picker().get_child(0), 1)
-		Global.right_color_picker.get_picker().move_child(Global.right_color_picker.get_picker().get_child(0), 1)
 
-	Global.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
-
-	Global.layers[0][0] = tr("Layer") + " 0"
-	Global.layers_container.get_child(0).label.text = Global.layers[0][0]
-	Global.layers_container.get_child(0).line_edit.text = Global.layers[0][0]
-
-	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
-	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
-
-	Global.left_color_picker.get_picker().presets_visible = false
-	Global.right_color_picker.get_picker().presets_visible = false
-	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
-	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
-
-	if not Global.config_cache.has_section_key("preferences", "startup"):
-		Global.config_cache.set_value("preferences", "startup", true)
-
+func show_splash_screen() -> void:
 	# Wait for the window to adjust itself, so the popup is correctly centered
 	yield(get_tree().create_timer(0.01), "timeout")
 	if Global.config_cache.get_value("preferences", "startup"):
@@ -161,6 +218,8 @@ func _ready() -> void:
 	else:
 		Global.can_draw = true
 
+
+func handle_backup() -> void:
 	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
 	$BackupConfirmation.get_cancel().text = tr("Delete")
 	if Global.config_cache.has_section("backups"):
@@ -184,6 +243,9 @@ func _ready() -> void:
 		if Global.open_last_project:
 			load_last_project()
 
+
+func handle_running_pixelorama_with_arguments() -> void:
+	# If user want to run Pixelorama with arguments in terminal mode then handle that
 	if OS.get_cmdline_args():
 		for arg in OS.get_cmdline_args():
 			if arg.get_extension().to_lower() == "pxo":
@@ -195,77 +257,86 @@ func _ready() -> void:
 				$ImportSprites.new_frame = true
 
 
-func _input(event : InputEvent) -> void:
-	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
-	Global.left_cursor.texture = Global.left_cursor_tool_texture
-	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
-	Global.right_cursor.texture = Global.right_cursor_tool_texture
-
-	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
-		if get_focus_owner() is LineEdit:
-			get_focus_owner().release_focus()
-
-	if event.is_action_pressed("toggle_fullscreen"):
-		OS.window_fullscreen = !OS.window_fullscreen
-
-	if event.is_action_pressed("redo_secondary"): # Shift + Ctrl + Z
-		redone = true
-		Global.undo_redo.redo()
-		redone = false
-
-
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 		show_quit_dialog()
 
 
+func on_new_project_file_menu_option_pressed(id : int) -> void:
+	if Global.project_has_changed:
+		unsaved_canvas_state = id
+		$UnsavedCanvasDialog.popup_centered()
+	else:
+		$CreateNewImage.popup_centered()
+	Global.dialog_open(true)
+
+
+func open_project_file() -> void:
+	$OpenSprite.popup_centered()
+	Global.dialog_open(true)
+	opensprite_file_selected = false
+
+
+func on_open_last_project_file_menu_option_pressed(id : int) -> void:
+	# Check if last project path is set and if yes then open
+	if Global.config_cache.has_section_key("preferences", "last_project_path"):
+		if Global.project_has_changed:
+			unsaved_canvas_state = id
+			$UnsavedCanvasDialog.popup_centered()
+			Global.dialog_open(true)
+		else:
+			load_last_project()
+	else: # if not then warn user that he didn't edit any project yet
+		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+
+
+func save_project_file() -> void:
+	is_quitting_on_save = false
+	if OpenSave.current_save_path == "":
+		$SaveSprite.popup_centered()
+		Global.dialog_open(true)
+	else:
+		_on_SaveSprite_file_selected(OpenSave.current_save_path)
+
+
+func save_project_file_as() -> void:
+	is_quitting_on_save = false
+	$SaveSprite.popup_centered()
+	Global.dialog_open(true)
+
+
+func import_file() -> void:
+	$ImportSprites.popup_centered()
+	Global.dialog_open(true)
+	opensprite_file_selected = false
+
+
+func export_file() -> void:
+	if $ExportDialog.was_exported == false:
+		$ExportDialog.popup_centered()
+		Global.dialog_open(true)
+	else:
+		$ExportDialog.external_export()
+
+
 func file_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # New
-			if Global.project_has_changed:
-				unsaved_canvas_state = id
-				$UnsavedCanvasDialog.popup_centered()
-			else:
-				$CreateNewImage.popup_centered()
-			Global.dialog_open(true)
+			on_new_project_file_menu_option_pressed(id)
 		1: # Open
-			$OpenSprite.popup_centered()
-			Global.dialog_open(true)
-			opensprite_file_selected = false
+			open_project_file()
 		2: # Open last project
-			# Check if last project path is set and if yes then open
-			if Global.config_cache.has_section_key("preferences", "last_project_path"):
-				if Global.project_has_changed:
-					unsaved_canvas_state = id
-					$UnsavedCanvasDialog.popup_centered()
-					Global.dialog_open(true)
-				else:
-					load_last_project()
-			else: # if not then warn user that he didn't edit any project yet
-				Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
-				Global.error_dialog.popup_centered()
-				Global.dialog_open(true)
+			on_open_last_project_file_menu_option_pressed(id)
 		3: # Save
-			is_quitting_on_save = false
-			if OpenSave.current_save_path == "":
-				$SaveSprite.popup_centered()
-				Global.dialog_open(true)
-			else:
-				_on_SaveSprite_file_selected(OpenSave.current_save_path)
+			save_project_file()
 		4: # Save as
-			is_quitting_on_save = false
-			$SaveSprite.popup_centered()
-			Global.dialog_open(true)
+			save_project_file_as()
 		5: # Import
-			$ImportSprites.popup_centered()
-			Global.dialog_open(true)
-			opensprite_file_selected = false
+			import_file()
 		6: # Export
-			if $ExportDialog.was_exported == false:
-				$ExportDialog.popup_centered()
-				Global.dialog_open(true)
-			else:
-				$ExportDialog.external_export()
+			export_file()
 		7: # Export as
 			$ExportDialog.popup_centered()
 			Global.dialog_open(true)
@@ -294,30 +365,50 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.dialog_open(true)
 
 
+func toggle_tile_mode() -> void:
+	Global.tile_mode = !Global.tile_mode
+	view_menu.set_item_checked(0, Global.tile_mode)
+
+
+func toggle_show_grid() -> void:
+	Global.draw_grid = !Global.draw_grid
+	view_menu.set_item_checked(1, Global.draw_grid)
+
+
+func toggle_show_rulers() -> void:
+	Global.show_rulers = !Global.show_rulers
+	view_menu.set_item_checked(2, Global.show_rulers)
+	Global.horizontal_ruler.visible = Global.show_rulers
+	Global.vertical_ruler.visible = Global.show_rulers
+
+
+func toggle_show_guides() -> void:
+	Global.show_guides = !Global.show_guides
+	view_menu.set_item_checked(3, Global.show_guides)
+	for canvas in Global.canvases:
+		for guide in canvas.get_children():
+			if guide is Guide:
+				guide.visible = Global.show_guides
+
+
+func toggle_show_anim_timeline() -> void:
+	Global.show_animation_timeline = !Global.show_animation_timeline
+	view_menu.set_item_checked(4, Global.show_animation_timeline)
+	Global.animation_timeline.visible = Global.show_animation_timeline
+
+
 func view_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Tile mode
-			Global.tile_mode = !Global.tile_mode
-			view_menu.set_item_checked(0, Global.tile_mode)
+			toggle_tile_mode()
 		1: # Show grid
-			Global.draw_grid = !Global.draw_grid
-			view_menu.set_item_checked(1, Global.draw_grid)
+			toggle_show_grid()
 		2: # Show rulers
-			Global.show_rulers = !Global.show_rulers
-			view_menu.set_item_checked(2, Global.show_rulers)
-			Global.horizontal_ruler.visible = Global.show_rulers
-			Global.vertical_ruler.visible = Global.show_rulers
+			toggle_show_rulers()
 		3: # Show guides
-			Global.show_guides = !Global.show_guides
-			view_menu.set_item_checked(3, Global.show_guides)
-			for canvas in Global.canvases:
-				for guide in canvas.get_children():
-					if guide is Guide:
-						guide.visible = Global.show_guides
+			toggle_show_guides()
 		4: # Show animation timeline
-			Global.show_animation_timeline = !Global.show_animation_timeline
-			view_menu.set_item_checked(4, Global.show_animation_timeline)
-			Global.animation_timeline.visible = Global.show_animation_timeline
+			toggle_show_anim_timeline()
 
 	Global.canvas.update()
 
