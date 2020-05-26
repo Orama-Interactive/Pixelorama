@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-05-26 15:57\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -164,10 +164,10 @@ msgid "File Exists, Overwrite?"
 msgstr "Dosiero ekzistas, ĉu rekonservi?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Dosiero %s jam ekzistas. Ĉu rekonservi?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Dosieruja vojo aŭ dosiera nomo estas malĝusta!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -175,25 +175,25 @@ msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
 "Kodo de eraro: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Kadro"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Kadroj:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Ĉiuj kadroj"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animacio"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Antaŭvido:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Kadro:"
 
 msgid "Orientation:"
 msgstr ""
@@ -214,7 +214,7 @@ msgid "Select Current Folder"
 msgstr ""
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Malfermi dosierujon"
 
 msgid "All frames as multiple files"
 msgstr ""
@@ -241,13 +241,13 @@ msgid "Columns"
 msgstr "Kolumnoj"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolumnoj:"
 
 msgid "Rows"
 msgstr "Vicoj"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Vicoj:"
 
 msgid "Path:"
 msgstr "Vojo:"
@@ -322,7 +322,7 @@ msgid "Gray"
 msgstr "Griza"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blua"
 
 msgid "Caramel"
 msgstr ""
@@ -331,7 +331,7 @@ msgid "Light"
 msgstr "Hela"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Inverti kolorojn"
 
 msgid "Desaturation"
 msgstr ""
@@ -346,7 +346,7 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 msgid "Angle:"
 msgstr ""
@@ -358,13 +358,13 @@ msgid "Saturation"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Valoro"
 
 msgid "Apply"
-msgstr ""
+msgstr "Apliki"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonala"
 
 msgid "Place inside image"
 msgstr ""
