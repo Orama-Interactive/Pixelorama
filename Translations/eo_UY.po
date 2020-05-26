@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-26 16:09\n"
+"PO-Revision-Date: 2020-05-26 16:32\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1088,7 +1088,7 @@ msgid "Bucket"
 msgstr ""
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Lumigi/Mallumigi"
 
 msgid "Switch Colors"
 msgstr ""
@@ -1100,46 +1100,46 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Jam asignitas"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Maldekstra ilo:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Ilo, asignita al la musa maldekstra butono"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Dekstra ilo:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Ilo, asignita al la musa dekstra butono"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Ne povas trovi dosieron de la lasta projekto."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Vi ankoraŭ ne konservis aŭ malfermis iun ajn projekton en Pixelorama!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Malfermi lastan projekton"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Malfermi lastan projekton..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Malfermi lastan projekton dum startigo"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Malfermas lastan apertigitan projekton dum startigo"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Ŝalti aŭtokonservadon"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Aŭtokonserva intervalo:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minuto(j)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1164,11 +1164,11 @@ msgid "Remove currently selected palette"
 msgstr ""
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Vi ne povas forigi pli da paletroj!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Ne povas forigi la paletron, ĉar ĝi ne ekzistas!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Eraro okazis dum la paletra forigado! Kodo de eraro: %s"
 
