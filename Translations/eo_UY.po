@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-26 16:02\n"
+"PO-Revision-Date: 2020-05-26 16:09\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -811,10 +811,10 @@ msgid "Blue-Red Mode"
 msgstr "Blua-ruĝa modo"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Aldoni novan kadron"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Forigi kadron"
 
 msgid "Clone Frame"
 msgstr ""
@@ -974,10 +974,10 @@ msgid "File autosaved"
 msgstr ""
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Dosiero ne sukcesis malfermiĝi"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Dosiero ne sukcesis konservi"
 
 msgid "File exported"
 msgstr "Dosiero elportitas"
@@ -1034,19 +1034,19 @@ msgid "Image Options"
 msgstr "Bildagordoj"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Defaŭlta larĝo:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Defaŭlta larĝo de nova bildo"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Defaŭlta alto:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Defaŭlta alto de nova bildo"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Defaŭlta plenigkoloro:"
 
 msgid "A default background color of a new image"
 msgstr ""
@@ -1079,10 +1079,10 @@ msgid "Color Picker"
 msgstr ""
 
 msgid "Pencil"
-msgstr ""
+msgstr "Krajono"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Skrapileto"
 
 msgid "Bucket"
 msgstr ""
@@ -1148,10 +1148,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Fermi"
 
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
