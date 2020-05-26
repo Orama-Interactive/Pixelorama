@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-26 16:49\n"
+"PO-Revision-Date: 2020-05-26 17:00\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -229,7 +229,7 @@ msgid "Direction:"
 msgstr "Direkto:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Antaŭen"
 
 msgid "Backwards"
 msgstr ""
@@ -286,7 +286,7 @@ msgid "Themes"
 msgstr "Temoj"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Kanvaso"
 
 msgid "Shortcuts"
 msgstr ""
@@ -792,10 +792,10 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Estintaj kadroj"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Estontaj kadroj"
 
 msgid "Manage frame tags"
 msgstr ""
@@ -817,7 +817,7 @@ msgid "Remove Frame"
 msgstr "Forigi kadron"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Kloni kadron"
 
 msgid "Move Left"
 msgstr "Movi maldekstren"
@@ -841,7 +841,7 @@ msgid "Layers"
 msgstr "Tavoloj"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Krei novan tavolon"
 
 msgid "Remove current layer"
 msgstr ""
@@ -865,7 +865,7 @@ msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Fiksi/malfiksi tavolon"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -878,13 +878,13 @@ msgid "Palettes"
 msgstr "Paletroj"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Aldoni novan paletron"
 
 msgid "Edit currently selected palette"
 msgstr ""
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Elekti paletron"
 
 msgid "Undo: Draw"
 msgstr "Malfaritas: Pentri"
@@ -1049,7 +1049,7 @@ msgid "Default fill color:"
 msgstr "Defaŭlta plenigkoloro:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Defaŭlta fona koloro de nova bildo"
 
 msgid "Lock aspect ratio:"
 msgstr ""
@@ -1076,7 +1076,7 @@ msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Kolora elektilo"
 
 msgid "Pencil"
 msgstr "Krajono"
