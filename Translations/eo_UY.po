@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-26 15:57\n"
+"PO-Revision-Date: 2020-05-26 16:02\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -370,7 +370,7 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Dikeco:"
 
 msgid "View Splash Screen"
 msgstr ""
@@ -563,10 +563,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 msgid "Left tool"
-msgstr ""
+msgstr "Maldekstra ilo"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Dekstra ilo"
 
 msgid "Left pixel indicator"
 msgstr "Indikatoro de maldekstra rastrumero"
@@ -680,7 +680,7 @@ msgid "Selected Color"
 msgstr ""
 
 msgid "Pattern"
-msgstr ""
+msgstr "Ŝablono"
 
 msgid "Offset"
 msgstr ""
@@ -692,7 +692,7 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Sumo:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
@@ -716,7 +716,7 @@ msgid "Zoom out"
 msgstr ""
 
 msgid "Options:"
-msgstr ""
+msgstr "Agordoj:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -737,7 +737,7 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikala"
 
 msgid "Current frame:"
 msgstr ""
@@ -808,7 +808,7 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Blua-ruĝa modo"
 
 msgid "Add a new frame"
 msgstr ""
