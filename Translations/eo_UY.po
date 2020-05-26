@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-26 17:00\n"
+"PO-Revision-Date: 2020-05-26 17:34\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -217,13 +217,13 @@ msgid "Open a Directory"
 msgstr "Malfermi dosierujon"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Ĉiuj kadroj kiel multaj dosieroj"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Ĉiuj kadroj kiel animacio de unu dosiero"
 
 msgid "Background:"
-msgstr ""
+msgstr "Fono:"
 
 msgid "Direction:"
 msgstr "Direkto:"
@@ -349,10 +349,10 @@ msgid "Type:"
 msgstr "Tipo:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Angulo:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Nuanco"
 
 msgid "Saturation"
 msgstr "Satureco"
@@ -388,7 +388,7 @@ msgid "About Pixelorama"
 msgstr "Pri Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Ellaborita de Orama Interactive"
 
 msgid "Website"
 msgstr "Retejo"
