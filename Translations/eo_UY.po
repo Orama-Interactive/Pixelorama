@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-05-26 16:32\n"
+"PO-Revision-Date: 2020-05-26 16:49\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -196,7 +196,7 @@ msgid "Frame:"
 msgstr "Kadro:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientiĝo:"
 
 msgid "Browse"
 msgstr ""
@@ -226,7 +226,7 @@ msgid "Background:"
 msgstr ""
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direkto:"
 
 msgid "Forward"
 msgstr ""
@@ -325,7 +325,7 @@ msgid "Blue"
 msgstr "Blua"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamela"
 
 msgid "Light"
 msgstr "Hela"
@@ -355,7 +355,7 @@ msgid "Hue"
 msgstr ""
 
 msgid "Saturation"
-msgstr ""
+msgstr "Satureco"
 
 msgid "Value"
 msgstr "Valoro"
@@ -487,10 +487,10 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Ĉu vi vere volas eliri Pixeloraman?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Nekonservita bildo"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Vi havas nekonservitajn ŝanĝojn. Se vi daŭrigos, la progreso de vi farita perdiĝos."
 
 msgid "Save before exiting?"
 msgstr "Ĉu konservi antaŭ elirado?"
@@ -1013,7 +1013,7 @@ msgid "Edit Palette"
 msgstr "Redakti paletron"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patronoj:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -1025,7 +1025,7 @@ msgid "Become a Gold Sponsor"
 msgstr ""
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Iĝi Patrono"
 
 msgid "Don't show again"
 msgstr "Ne montri denove"
@@ -1055,7 +1055,7 @@ msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "Ŝablonoj:"
 
 msgid "Preset"
 msgstr ""
@@ -1064,7 +1064,7 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Defaŭta"
 
 msgid "Custom"
 msgstr ""
@@ -1091,13 +1091,13 @@ msgid "Lighten/Darken"
 msgstr "Lumigi/Mallumigi"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Interŝanĝi kolorojn"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Meti la ligilon"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Premu klavon aŭ kombinaĵon de klavoj por meti la ligilon"
 
 msgid "Already assigned"
 msgstr "Jam asignitas"
