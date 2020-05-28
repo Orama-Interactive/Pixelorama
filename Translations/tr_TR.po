@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-05-19 21:37\n"
+"PO-Revision-Date: 2020-05-28 08:20\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -198,7 +198,7 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "Gözat"
 
 msgid "Resize:"
 msgstr ""
@@ -453,10 +453,10 @@ msgid "Czech"
 msgstr "Çekçe"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arapça"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Türkçe"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -1165,7 +1165,7 @@ msgid "Remove currently selected palette"
 msgstr ""
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Daha fazla palet silemezsin!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
