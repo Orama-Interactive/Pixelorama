@@ -176,6 +176,7 @@ var zoom_level_label : Label
 
 var import_sprites_dialog : FileDialog
 var export_dialog : AcceptDialog
+var preferences_dialog : AcceptDialog
 
 var left_color_picker : ColorPickerButton
 var right_color_picker : ColorPickerButton
@@ -313,6 +314,7 @@ func _ready() -> void:
 
 	import_sprites_dialog = find_node_by_name(root, "ImportSprites")
 	export_dialog = find_node_by_name(root, "ExportDialog")
+	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
 
 	left_tool_options_container = find_node_by_name(root, "LeftToolOptions")
 	right_tool_options_container = find_node_by_name(root, "RightToolOptions")

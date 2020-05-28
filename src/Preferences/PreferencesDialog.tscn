@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/PreferencesDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
@@ -194,6 +195,7 @@ __meta__ = {
 margin_top = 184.0
 margin_right = 494.0
 margin_bottom = 632.0
+script = ExtResource( 4 )
 
 [node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
 margin_right = 494.0

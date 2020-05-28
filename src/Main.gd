@@ -13,8 +13,6 @@ func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
 
-	setup_translation_settings()
-
 	setup_file_menu()
 	setup_edit_menu()
 	setup_view_menu()
@@ -80,30 +78,6 @@ func setup_application_window_size() -> void:
 			OS.window_position = Global.config_cache.get_value("window", "position")
 		if Global.config_cache.has_section_key("window", "size"):
 			OS.window_size = Global.config_cache.get_value("window", "size")
-
-
-func setup_translation_settings() -> void:
-	Global.loaded_locales = TranslationServer.get_loaded_locales()
-
-	# Make sure locales are always sorted, in the same order
-	Global.loaded_locales.sort()
-
-	# Load language
-	if Global.config_cache.has_section_key("preferences", "locale"):
-		var saved_locale : String = Global.config_cache.get_value("preferences", "locale")
-		TranslationServer.set_locale(saved_locale)
-
-		# Set the language option menu's default selected option to the loaded locale
-		var locale_index: int = Global.loaded_locales.find(saved_locale)
-		$PreferencesDialog.languages.get_child(0).pressed = false # Unset System Language option in preferences
-		$PreferencesDialog.languages.get_child(locale_index + 1).pressed = true
-	else: # If the user doesn't have a language preference, set it to their OS' locale
-		TranslationServer.set_locale(OS.get_locale())
-
-	if "zh" in TranslationServer.get_locale():
-		theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
-	else:
-		theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
 
 
 func setup_file_menu() -> void:

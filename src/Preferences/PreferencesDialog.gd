@@ -45,11 +45,6 @@ func _ready() -> void:
 	# Replace OK with Close since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = tr("Close")
 
-	for child in languages.get_children():
-		if child is Button:
-			child.connect("pressed", self, "_on_Language_pressed", [child])
-			child.hint_tooltip = child.name
-
 	for child in themes.get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Theme_pressed", [child])
@@ -259,36 +254,6 @@ func _on_SmoothZoom_pressed() -> void:
 	Global.smooth_zoom = !Global.smooth_zoom
 	Global.config_cache.set_value("preferences", "smooth_zoom", Global.smooth_zoom)
 	Global.config_cache.save("user://cache.ini")
-
-
-func _on_Language_pressed(button : Button) -> void:
-	var index := 0
-	var i := -1
-	for child in languages.get_children():
-		if child is Button:
-			if child == button:
-				button.pressed = true
-				index = i
-			else:
-				child.pressed = false
-			i += 1
-	if index == -1:
-		TranslationServer.set_locale(OS.get_locale())
-	else:
-		TranslationServer.set_locale(Global.loaded_locales[index])
-
-	if "zh" in TranslationServer.get_locale():
-		Global.control.theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
-	else:
-		Global.control.theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
-
-	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
-	Global.config_cache.save("user://cache.ini")
-
-	# Update Translations
-	Global.update_hint_tooltips()
-	_on_PreferencesDialog_popup_hide()
-	_on_PreferencesDialog_about_to_show(true)
 
 
 func _on_Theme_pressed(button : Button) -> void:
