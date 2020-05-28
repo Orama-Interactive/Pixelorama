@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
 [ext_resource path="res://src/Preferences/HandleThemes.gd" type="Script" id=5]
+[ext_resource path="res://src/Preferences/HandleShortcuts.gd" type="Script" id=6]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
@@ -604,6 +605,7 @@ color = Color( 0, 0, 0, 0 )
 margin_top = 1052.0
 margin_right = 494.0
 margin_bottom = 1286.0
+script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_right = 494.0
@@ -889,6 +891,6 @@ __meta__ = {
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth" to="." method="_on_ImageDefaultWidth_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight" to="." method="_on_ImageDefaultHeight_value_changed"]
 [connection signal="color_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor" to="." method="_on_DefaultBackground_color_changed"]
-[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/PresetOptionButton" to="." method="_on_PresetOptionButton_item_selected"]
-[connection signal="confirmed" from="Popups/ShortcutSelector" to="." method="_on_ShortcutSelector_confirmed"]
-[connection signal="popup_hide" from="Popups/ShortcutSelector" to="." method="_on_ShortcutSelector_popup_hide"]
+[connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/PresetOptionButton" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_PresetOptionButton_item_selected"]
+[connection signal="confirmed" from="Popups/ShortcutSelector" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_ShortcutSelector_confirmed"]
+[connection signal="popup_hide" from="Popups/ShortcutSelector" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_ShortcutSelector_popup_hide"]
