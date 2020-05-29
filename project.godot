@@ -60,6 +60,7 @@ config/Version="v0.7"
 Global="*res://src/Autoload/Global.gd"
 Import="*res://src/Autoload/Import.gd"
 OpenSave="*res://src/Autoload/OpenSave.gd"
+DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
 
 [debug]
 

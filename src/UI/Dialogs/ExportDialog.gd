@@ -375,7 +375,7 @@ func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0))
 						var pixel_color := layer_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * layer[2]
 						layer_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			canvas.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
+			DrawingAlgos.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
 		layer_i += 1
 	image.unlock()
 

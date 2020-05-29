@@ -24,8 +24,6 @@ var north_limit := location.y
 var south_limit := location.y + size.y
 var mouse_inside_canvas := false # used for undo
 var sprite_changed_this_frame := false # for optimization purposes
-var mouse_press_pixels := [] # Cleared after mouse release
-var mouse_press_pressure_values := [] # Cleared after mouse release
 var is_making_line := false
 var made_line := false
 var is_making_selection := "None"
@@ -232,8 +230,8 @@ func _input(event : InputEvent) -> void:
 
 	if (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		made_line = false
-		mouse_press_pixels.clear()
-		mouse_press_pressure_values.clear()
+		DrawingAlgos.mouse_press_pixels.clear()
+		DrawingAlgos.mouse_press_pressure_values.clear()
 		pixel_perfect_drawer.reset()
 		pixel_perfect_drawer_h_mirror.reset()
 		pixel_perfect_drawer_v_mirror.reset()
@@ -384,27 +382,27 @@ func _input(event : InputEvent) -> void:
 						vertical_mirror = Global.right_vertical_mirror
 
 					if fill_with == 1 && pattern_image: # Pattern fill
-						pattern_fill(sprite, mouse_pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
+						DrawingAlgos.pattern_fill(sprite, mouse_pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if horizontal_mirror:
 							var pos := Vector2(mirror_x, mouse_pos.y)
-							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
+							DrawingAlgos.pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if vertical_mirror:
 							var pos := Vector2(mouse_pos.x, mirror_y)
-							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
+							DrawingAlgos.pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 						if horizontal_mirror && vertical_mirror:
 							var pos := Vector2(mirror_x, mirror_y)
-							pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
+							DrawingAlgos.pattern_fill(sprite, pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
 					else: # Flood fill
-						flood_fill(sprite, mouse_pos, sprite.get_pixelv(mouse_pos), current_color)
+						DrawingAlgos.flood_fill(sprite, mouse_pos, sprite.get_pixelv(mouse_pos), current_color)
 						if horizontal_mirror:
 							var pos := Vector2(mirror_x, mouse_pos.y)
-							flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
+							DrawingAlgos.flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
 						if vertical_mirror:
 							var pos := Vector2(mouse_pos.x, mirror_y)
-							flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
+							DrawingAlgos.flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
 						if horizontal_mirror && vertical_mirror:
 							var pos := Vector2(mirror_x, mirror_y)
-							flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
+							DrawingAlgos.flood_fill(sprite, pos, sprite.get_pixelv(pos), current_color)
 
 				else: # Paint all pixels of the same color
 					var pixel_color : Color = sprite.get_pixelv(mouse_pos)
@@ -709,10 +707,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 						var current_pixel_color : Color = sprite.get_pixel(cur_pos_x, cur_pos_y)
 						var _c := color
 						if current_action == "Pencil" && color.a < 1:
-							_c = blend_colors(color, current_pixel_color)
+							_c = DrawingAlgos.blend_colors(color, current_pixel_color)
 
-						var saved_pixel_index := mouse_press_pixels.find(pos_floored)
-						if current_pixel_color != _c && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
+						var saved_pixel_index = DrawingAlgos.mouse_press_pixels.find(pos_floored)
+						if current_pixel_color != _c && (saved_pixel_index == -1 || pen_pressure > DrawingAlgos.mouse_press_pressure_values[saved_pixel_index]):
 							if current_action == "LightenDarken":
 								_c = current_pixel_color
 								if _c.a > 0:
@@ -722,10 +720,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 										_c = current_pixel_color.darkened(ld_amount)
 
 							if saved_pixel_index == -1:
-								mouse_press_pixels.append(pos_floored)
-								mouse_press_pressure_values.append(pen_pressure)
+								DrawingAlgos.mouse_press_pixels.append(pos_floored)
+								DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
 							else:
-								mouse_press_pressure_values[saved_pixel_index] = pen_pressure
+								DrawingAlgos.mouse_press_pressure_values[saved_pixel_index] = pen_pressure
 							drawer.set_pixel(sprite, Vector2(cur_pos_x, cur_pos_y), _c)
 
 							sprite_changed_this_frame = true
@@ -742,8 +740,8 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 										else:
 											_c = current_pixel_color.darkened(ld_amount)
 
-									mouse_press_pixels.append(pos_floored)
-									mouse_press_pressure_values.append(pen_pressure)
+									DrawingAlgos.mouse_press_pixels.append(pos_floored)
+									DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
 									drawer_h_mirror.set_pixel(sprite, Vector2(mirror_x, cur_pos_y), _c)
 									sprite_changed_this_frame = true
 
@@ -755,8 +753,8 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 											_c = current_pixel_color.lightened(ld_amount)
 										else:
 											_c = current_pixel_color.darkened(ld_amount)
-									mouse_press_pixels.append(pos_floored)
-									mouse_press_pressure_values.append(pen_pressure)
+									DrawingAlgos.mouse_press_pixels.append(pos_floored)
+									DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
 									drawer_v_mirror.set_pixel(sprite, Vector2(cur_pos_x, mirror_y), _c)
 									sprite_changed_this_frame = true
 
@@ -769,23 +767,23 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 										else:
 											_c = current_pixel_color.darkened(ld_amount)
 
-									mouse_press_pixels.append(pos_floored)
-									mouse_press_pressure_values.append(pen_pressure)
+									DrawingAlgos.mouse_press_pixels.append(pos_floored)
+									DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
 									drawer_hv_mirror.set_pixel(sprite, Vector2(mirror_x, mirror_y), _c)
 									sprite_changed_this_frame = true
 
 		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
-			plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+			DrawingAlgos.plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			# Handle mirroring
 			var mirror_x := east_limit + west_limit - pos.x
 			var mirror_y := south_limit + north_limit - pos.y
 			if horizontal_mirror:
-				plot_circle(sprite, mirror_x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+				DrawingAlgos.plot_circle(sprite, mirror_x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			if vertical_mirror:
-				plot_circle(sprite, pos.x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+				DrawingAlgos.plot_circle(sprite, pos.x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			if horizontal_mirror && vertical_mirror:
-				plot_circle(sprite, mirror_x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+				DrawingAlgos.plot_circle(sprite, mirror_x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			sprite_changed_this_frame = true
 
@@ -828,13 +826,13 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				mirror_y -= 1
 			# Use custom blend function cause of godot's issue  #31124
 			if color.a > 0: # If it's the pencil
-				blend_rect(sprite, custom_brush_image, src_rect, dst)
+				DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, dst)
 				if horizontal_mirror:
-					blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
+					DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
 				if vertical_mirror:
-					blend_rect(sprite, custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
+					DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
 				if horizontal_mirror && vertical_mirror:
-					blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
+					DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
 
 			else: # if it's transparent - if it's the eraser
 				var custom_brush := Image.new()
@@ -887,138 +885,6 @@ func fill_gaps(sprite : Image, mouse_pos : Vector2, prev_mouse_pos : Vector2, co
 			y += sy
 
 
-# Thanks to https://en.wikipedia.org/wiki/Flood_fill
-func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_color : Color) -> void:
-	pos = pos.floor()
-	var pixel = sprite.get_pixelv(pos)
-	if target_color == replace_color:
-		return
-	elif pixel != target_color:
-		return
-	else:
-
-		if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
-			return
-
-		var q = [pos]
-		for n in q:
-			# If the difference in colors is very small, break the loop (thanks @azagaya on GitHub!)
-			if target_color == replace_color:
-				break
-			var west : Vector2 = n
-			var east : Vector2 = n
-			while west.x >= west_limit && sprite.get_pixelv(west) == target_color:
-				west += Vector2.LEFT
-			while east.x < east_limit && sprite.get_pixelv(east) == target_color:
-				east += Vector2.RIGHT
-			for px in range(west.x + 1, east.x):
-				var p := Vector2(px, n.y)
-				# Draw
-				sprite.set_pixelv(p, replace_color)
-				replace_color = sprite.get_pixelv(p)
-				var north := p + Vector2.UP
-				var south := p + Vector2.DOWN
-				if north.y >= north_limit && sprite.get_pixelv(north) == target_color:
-					q.append(north)
-				if south.y < south_limit && sprite.get_pixelv(south) == target_color:
-					q.append(south)
-		sprite_changed_this_frame = true
-
-
-func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color : Color, var offset : Vector2) -> void:
-	pos = pos.floor()
-	if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
-		return
-
-	pattern.lock()
-	var pattern_size := pattern.get_size()
-	var q = [pos]
-
-	for n in q:
-		var west : Vector2 = n
-		var east : Vector2 = n
-		while west.x >= west_limit && sprite.get_pixelv(west) == target_color:
-			west += Vector2.LEFT
-		while east.x < east_limit && sprite.get_pixelv(east) == target_color:
-			east += Vector2.RIGHT
-
-		for px in range(west.x + 1, east.x):
-			var p := Vector2(px, n.y)
-			var xx : int = int(px + offset.x) % int(pattern_size.x)
-			var yy : int = int(n.y + offset.y) % int(pattern_size.y)
-			var pattern_color : Color = pattern.get_pixel(xx, yy)
-			if pattern_color == target_color:
-				continue
-			sprite.set_pixelv(p, pattern_color)
-
-			var north := p + Vector2.UP
-			var south := p + Vector2.DOWN
-			if north.y >= north_limit && sprite.get_pixelv(north) == target_color:
-				q.append(north)
-			if south.y < south_limit && sprite.get_pixelv(south) == target_color:
-				q.append(south)
-
-	pattern.unlock()
-
-
-
-# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fill := false) -> void:
-	var radius := r # Used later for filling
-	var x := -r
-	var y := 0
-	var err := 2 - r * 2 # II. Quadrant
-	while x < 0:
-		var quadrant_1 := Vector2(xm - x, ym + y)
-		var quadrant_2 := Vector2(xm - y, ym - x)
-		var quadrant_3 := Vector2(xm + x, ym - y)
-		var quadrant_4 := Vector2(xm + y, ym + x)
-		draw_pixel_blended(sprite, quadrant_1, color)
-		draw_pixel_blended(sprite, quadrant_2, color)
-		draw_pixel_blended(sprite, quadrant_3, color)
-		draw_pixel_blended(sprite, quadrant_4, color)
-
-		r = err
-		if r <= y:
-			y += 1
-			err += y * 2 + 1
-		if r > x || err > y:
-			x += 1
-			err += x * 2 + 1
-
-	if fill:
-		for j in range (-radius, radius + 1):
-			for i in range (-radius, radius + 1):
-				if i * i + j * j <= radius * radius:
-					var draw_pos := Vector2(i + xm, j + ym)
-					draw_pixel_blended(sprite, draw_pos, color)
-
-
-func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
-	var saved_pixel_index := mouse_press_pixels.find(pos)
-	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
-		if color.a > 0 && color.a < 1:
-			color = blend_colors(color, sprite.get_pixelv(pos))
-
-		if saved_pixel_index == -1:
-			mouse_press_pixels.append(pos)
-			mouse_press_pressure_values.append(pen_pressure)
-		else:
-			mouse_press_pressure_values[saved_pixel_index] = pen_pressure
-		sprite.set_pixelv(pos, color)
-
-
-func blend_colors(color_1 : Color, color_2 : Color) -> Color:
-	var color := Color()
-	color.a = color_1.a + color_2.a * (1 - color_1.a) # Blend alpha
-	if color.a != 0:
-		# Blend colors
-		color.r = (color_1.r * color_1.a + color_2.r * color_2.a * (1-color_1.a)) / color.a
-		color.g = (color_1.g * color_1.a + color_2.g * color_2.a * (1-color_1.a)) / color.a
-		color.b = (color_1.b * color_1.a + color_2.b * color_2.a * (1-color_1.a)) / color.a
-	return color
-
-
 # Checks if a point is inside a rectangle
 func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
@@ -1027,75 +893,3 @@ func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool
 # Returns the position in the middle of a rectangle
 func rectangle_center(rect_position : Vector2, rect_size : Vector2) -> Vector2:
 	return (rect_position - rect_size / 2).floor()
-
-
-# Custom blend rect function, needed because Godot's issue #31124
-func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:
-	var brush_size := brush.get_size()
-	var clipped_src_rect := Rect2(Vector2.ZERO, brush_size).clip(src_rect)
-	if clipped_src_rect.size.x <= 0 || clipped_src_rect.size.y <= 0:
-		return
-	var src_underscan := Vector2(min(0, src_rect.position.x), min(0, src_rect.position.y))
-	var dest_rect := Rect2(0, 0, bg.get_width(), bg.get_height()).clip(Rect2(dst - src_underscan, clipped_src_rect.size))
-
-	for x in range(0, dest_rect.size.x):
-		for y in range(0, dest_rect.size.y):
-			var src_x := clipped_src_rect.position.x + x;
-			var src_y := clipped_src_rect.position.y + y;
-
-			var dst_x := dest_rect.position.x + x;
-			var dst_y := dest_rect.position.y + y;
-
-			brush.lock()
-			var brush_color := brush.get_pixel(src_x, src_y)
-			var bg_color := bg.get_pixel(dst_x, dst_y)
-			var out_color := blend_colors(brush_color, bg_color)
-			if out_color.a != 0:
-				bg.set_pixel(dst_x, dst_y, out_color)
-			brush.unlock()
-
-
-func adjust_hsv(img: Image, id : int, delta : float) -> void:
-	var layer : Image = img
-	layer.lock()
-	match id:
-		0: # Hue
-			for i in range(west_limit, east_limit):
-				for j in range(north_limit, south_limit):
-					var c : Color = layer.get_pixel(i,j)
-					var hue = range_lerp(c.h,0,1,-180,180)
-					hue = hue + delta
-
-					while(hue >= 180):
-						hue -= 360
-					while(hue < -180):
-						hue += 360
-					c.h = range_lerp(hue,-180,180,0,1)
-					layer.set_pixel(i,j,c)
-
-		1: # Saturation
-			for i in range(west_limit, east_limit):
-				for j in range(north_limit, south_limit):
-					var c : Color = layer.get_pixel(i,j)
-					var sat = c.s
-					if delta > 0:
-						sat = range_lerp(delta,0,100,c.s,1)
-					elif delta < 0:
-						sat = range_lerp(delta,-100,0,0,c.s)
-					c.s = sat
-					layer.set_pixel(i,j,c)
-
-		2: # Value
-			for i in range(west_limit, east_limit):
-				for j in range(north_limit, south_limit):
-					var c : Color = layer.get_pixel(i,j)
-					var val = c.v
-					if delta > 0:
-						val = range_lerp(delta,0,100,c.v,1)
-					elif delta < 0:
-						val = range_lerp(delta,-100,0,0,c.v)
-
-					c.v = val
-					layer.set_pixel(i,j,c)
-
-	layer.unlock()
