@@ -41,6 +41,7 @@ func _ready() -> void:
 	handle_backup()
 
 	handle_running_pixelorama_with_arguments()
+	get_tree().connect("files_dropped", self, "_on_files_dropped")
 
 
 func _input(event : InputEvent) -> void:
@@ -234,6 +235,17 @@ func handle_running_pixelorama_with_arguments() -> void:
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 		show_quit_dialog()
+
+
+func _on_files_dropped(files : PoolStringArray, screen : int) -> void:
+	for file in files:
+		if file.get_extension().to_lower() == "pxo":
+				_on_OpenSprite_file_selected(file)
+		else:
+			if file == files[0]:
+				$ImportSprites.new_frame = false
+			$ImportSprites._on_ImportSprites_files_selected([file])
+			$ImportSprites.new_frame = true
 
 
 func on_new_project_file_menu_option_pressed(id : int) -> void:
