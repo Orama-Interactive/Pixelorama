@@ -40,7 +40,10 @@ func _ready() -> void:
 
 	handle_backup()
 
-	handle_running_pixelorama_with_arguments()
+	# If the user wants to run Pixelorama with arguments in terminal mode
+	# or open files with Pixelorama directly, then handle that
+	if OS.get_cmdline_args():
+		handle_loading_files(OS.get_cmdline_args())
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
 
 
@@ -219,25 +222,7 @@ func handle_backup() -> void:
 			load_last_project()
 
 
-func handle_running_pixelorama_with_arguments() -> void:
-	# If user want to run Pixelorama with arguments in terminal mode then handle that
-	if OS.get_cmdline_args():
-		for arg in OS.get_cmdline_args():
-			if arg.get_extension().to_lower() == "pxo":
-				_on_OpenSprite_file_selected(arg)
-			else:
-				if arg == OS.get_cmdline_args()[0]:
-					$ImportSprites.new_frame = false
-				$ImportSprites._on_ImportSprites_files_selected([arg])
-				$ImportSprites.new_frame = true
-
-
-func _notification(what : int) -> void:
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
-		show_quit_dialog()
-
-
-func _on_files_dropped(files : PoolStringArray, screen : int) -> void:
+func handle_loading_files(files : PoolStringArray) -> void:
 	for file in files:
 		if file.get_extension().to_lower() == "pxo":
 				_on_OpenSprite_file_selected(file)
@@ -246,6 +231,15 @@ func _on_files_dropped(files : PoolStringArray, screen : int) -> void:
 				$ImportSprites.new_frame = false
 			$ImportSprites._on_ImportSprites_files_selected([file])
 			$ImportSprites.new_frame = true
+
+
+func _notification(what : int) -> void:
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
+		show_quit_dialog()
+
+
+func _on_files_dropped(files : PoolStringArray, _screen : int) -> void:
+	handle_loading_files(files)
 
 
 func on_new_project_file_menu_option_pressed(id : int) -> void:

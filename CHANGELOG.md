@@ -11,6 +11,7 @@ Igor Santarek (jegor377)
 
 ### Added
 - Ability to remove the current palette
+- You can now drag & drop files into the program while it's running to open them.
 <br><br>
 
 ## [v0.7] - 2020-05-16
