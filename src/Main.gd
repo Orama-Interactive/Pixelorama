@@ -12,8 +12,7 @@ var is_quitting_on_save := false
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
-	OS.set("min_window_size", Vector2(1024, 576))
+	OS.min_window_size = Vector2(1024, 576)
 	Global.loaded_locales = TranslationServer.get_loaded_locales()
 
 	# Make sure locales are always sorted, in the same order
