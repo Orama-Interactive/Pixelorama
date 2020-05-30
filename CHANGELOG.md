@@ -14,6 +14,9 @@ Igor Santarek (jegor377)
 - You can now drag & drop files into the program while it's running to open them.
 <br><br>
 
+### Changed
+- Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
+
 ## [v0.7] - 2020-05-16
 This update has been brought to you by the contributions of:
 

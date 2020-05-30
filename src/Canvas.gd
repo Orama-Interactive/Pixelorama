@@ -169,43 +169,42 @@ func _draw() -> void:
 
 	# Draw rectangle to indicate the pixel currently being hovered on
 	var mouse_pos := current_pixel
-	if point_in_rectangle(mouse_pos, location, location + size):
-		mouse_pos = mouse_pos.floor()
-		if Global.left_square_indicator_visible && Global.can_draw:
-			if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == "LightenDarken":
-				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
-					var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
-					var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
-					draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-			elif Global.current_left_brush_type == Global.Brush_Types.CIRCLE || Global.current_left_brush_type == Global.Brush_Types.FILLED_CIRCLE:
-				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
-					draw_set_transform(mouse_pos, rotation, scale)
-					for rect in Global.left_circle_points:
-						draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
-					draw_set_transform(position, rotation, scale)
-			else:
-				if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
-					var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
-					var dst := rectangle_center(mouse_pos, custom_brush_size)
-					draw_texture(Global.custom_left_brush_texture, dst)
+	mouse_pos = mouse_pos.floor()
+	if Global.left_square_indicator_visible && Global.can_draw:
+		if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == "LightenDarken":
+			if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
+				var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
+				var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
+				draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+		elif Global.current_left_brush_type == Global.Brush_Types.CIRCLE || Global.current_left_brush_type == Global.Brush_Types.FILLED_CIRCLE:
+			if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+				draw_set_transform(mouse_pos, rotation, scale)
+				for rect in Global.left_circle_points:
+					draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
+				draw_set_transform(position, rotation, scale)
+		else:
+			if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+				var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
+				var dst := rectangle_center(mouse_pos, custom_brush_size)
+				draw_texture(Global.custom_left_brush_texture, dst)
 
-		if Global.right_square_indicator_visible && Global.can_draw:
-			if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == "LightenDarken":
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
-					var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
-					var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
-					draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-			elif Global.current_right_brush_type == Global.Brush_Types.CIRCLE || Global.current_right_brush_type == Global.Brush_Types.FILLED_CIRCLE:
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
-					draw_set_transform(mouse_pos, rotation, scale)
-					for rect in Global.right_circle_points:
-						draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
-					draw_set_transform(position, rotation, scale)
-			else:
-				if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
-					var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
-					var dst := rectangle_center(mouse_pos, custom_brush_size)
-					draw_texture(Global.custom_right_brush_texture, dst)
+	if Global.right_square_indicator_visible && Global.can_draw:
+		if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == "LightenDarken":
+			if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
+				var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
+				var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
+				draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+		elif Global.current_right_brush_type == Global.Brush_Types.CIRCLE || Global.current_right_brush_type == Global.Brush_Types.FILLED_CIRCLE:
+			if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+				draw_set_transform(mouse_pos, rotation, scale)
+				for rect in Global.right_circle_points:
+					draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
+				draw_set_transform(position, rotation, scale)
+		else:
+			if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+				var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
+				var dst := rectangle_center(mouse_pos, custom_brush_size)
+				draw_texture(Global.custom_right_brush_texture, dst)
 
 
 func _input(event : InputEvent) -> void:
@@ -252,7 +251,6 @@ func _input(event : InputEvent) -> void:
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
-	var mouse_in_canvas := point_in_rectangle(mouse_pos, location, location + size)
 	var current_mouse_button := "None"
 	var current_action := "None"
 	var current_color : Color
@@ -293,7 +291,7 @@ func _input(event : InputEvent) -> void:
 		color_picker_for = Global.right_color_picker_for
 		zoom_mode = Global.right_zoom_mode
 
-	if mouse_in_canvas && Global.has_focus:
+	if Global.has_focus:
 		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 		if !cursor_inside_canvas:
 			cursor_inside_canvas = true
@@ -315,18 +313,8 @@ func _input(event : InputEvent) -> void:
 			Input.set_custom_mouse_cursor(null)
 
 	# Handle Undo/Redo
-	var can_handle : bool = mouse_in_canvas && Global.can_draw && Global.has_focus && !made_line
+	var can_handle : bool = Global.can_draw && Global.has_focus && !made_line
 	var mouse_pressed : bool = (Input.is_action_just_pressed("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_pressed("right_mouse") && !Input.is_action_pressed("left_mouse"))
-
-	# If we're already pressing a mouse button and we haven't handled undo yet,...
-	#. .. it means that the cursor was outside the canvas. Then, ...
-	# simulate "just pressed" logic the moment the cursor gets inside the canvas
-
-	# Or, if we're making a line. This is used for handling undo/redo for lines...
-	# ...that go outside the canvas
-	if Input.is_action_pressed("left_mouse") || Input.is_action_pressed("right_mouse"):
-		if (mouse_in_canvas && Global.undos < Global.undo_redo.get_version()) || is_making_line:
-			mouse_pressed = true
 
 	if mouse_pressed:
 		if can_handle || is_making_line:
@@ -511,8 +499,6 @@ func _input(event : InputEvent) -> void:
 
 	previous_action = current_action
 	previous_mouse_pos = current_pixel
-	previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
-	previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
 	if sprite_changed_this_frame:
 		update_texture(Global.current_layer)
 
@@ -602,14 +588,9 @@ func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, curre
 		DrawingAlgos.draw_brush(sprite, line_2d.points[1], color, current_mouse_button, pen_pressure, current_action)
 		made_line = true
 	else:
-		if point_in_rectangle(mouse_pos, location, location + size):
-			mouse_inside_canvas = true
-			# Draw
-			DrawingAlgos.draw_brush(sprite, mouse_pos, color, current_mouse_button, pen_pressure, current_action)
-			DrawingAlgos.fill_gaps(sprite, mouse_pos, previous_mouse_pos, color, current_mouse_button, pen_pressure, current_action) # Fill the gaps
-		# If mouse is not inside bounds but it used to be, fill the gaps
-		elif point_in_rectangle(previous_mouse_pos, location, location + size):
-			DrawingAlgos.fill_gaps(sprite, mouse_pos, previous_mouse_pos, color, current_mouse_button, pen_pressure, current_action)
+		# Draw
+		DrawingAlgos.draw_brush(sprite, mouse_pos, color, current_mouse_button, pen_pressure, current_action)
+		DrawingAlgos.fill_gaps(sprite, mouse_pos, previous_mouse_pos, color, current_mouse_button, pen_pressure, current_action) # Fill the gaps
 
 
 # Checks if a point is inside a rectangle
