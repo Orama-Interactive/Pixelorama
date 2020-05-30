@@ -238,8 +238,8 @@ func _notification(what : int) -> void:
 		show_quit_dialog()
 
 
-func _on_files_dropped(files : PoolStringArray, _screen : int) -> void:
-	handle_loading_files(files)
+func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
+	handle_loading_files(_files)
 
 
 func on_new_project_file_menu_option_pressed(id : int) -> void:

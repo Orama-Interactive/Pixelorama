@@ -258,8 +258,6 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 func fill_gaps(sprite : Image, end_pos : Vector2, start_pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := "None") -> void:
 	var previous_mouse_pos_floored = start_pos.floor()
 	var mouse_pos_floored = end_pos.floor()
-	mouse_pos_floored.x = clamp(mouse_pos_floored.x, Global.canvas.location.x - 1, Global.canvas.location.x + Global.canvas.size.x)
-	mouse_pos_floored.y = clamp(mouse_pos_floored.y, Global.canvas.location.y - 1, Global.canvas.location.y + Global.canvas.size.y)
 	var dx := int(abs(mouse_pos_floored.x - previous_mouse_pos_floored.x))
 	var dy := int(-abs(mouse_pos_floored.y - previous_mouse_pos_floored.y))
 	var err := dx + dy
