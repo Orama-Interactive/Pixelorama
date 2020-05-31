@@ -14,15 +14,21 @@ var mouse_press_pixels := [] # Cleared after mouse release
 var mouse_press_pressure_values := [] # Cleared after mouse release
 
 
-func draw_pixel(sprite : Image, pos : Vector2, color : Color, current_mouse_button : int, current_action : int, drawer : Drawer, pen_pressure : float) -> void:
+func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressure : float, current_mouse_button := -1, current_action := -1, drawer : Drawer = simple_drawer) -> void:
+	var west_limit = Global.canvas.west_limit
+	var east_limit = Global.canvas.east_limit
+	var north_limit = Global.canvas.north_limit
+	var south_limit = Global.canvas.south_limit
+	if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+		return
+
 	var pos_floored := pos.floor()
 	var current_pixel_color = sprite.get_pixelv(pos)
+	var saved_pixel_index := mouse_press_pixels.find(pos_floored)
 	if current_action == Global.Tools.PENCIL && color.a < 1:
 		color = blend_colors(color, current_pixel_color)
 
-	var saved_pixel_index = mouse_press_pixels.find(pos_floored)
-	# Don't draw the same pixel over and over and don't re-lighten/darken it
-	if current_pixel_color != color && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]): # Don't draw the same pixel over and over
+	if current_pixel_color != color && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
 		if current_action == Global.Tools.LIGHTENDARKEN:
 			var ld : int = Global.ld_modes[current_mouse_button]
 			var ld_amount : float = Global.ld_amounts[current_mouse_button]
@@ -68,24 +74,23 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 			for cur_pos_x in range(start_pos_x, end_pos_x):
 				for cur_pos_y in range(start_pos_y, end_pos_y):
-					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
-						var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
-						draw_pixel(sprite, Vector2(cur_pos_x, cur_pos_y), color, current_mouse_button, current_action, drawer, pen_pressure)
+					var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
+					draw_pixel_blended(sprite, Vector2(cur_pos_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action, drawer)
 
-						# Handle mirroring
-						var mirror_x = east_limit + west_limit - cur_pos_x - 1
-						var mirror_y = south_limit + north_limit - cur_pos_y - 1
-						if horizontal_mirror:
-							var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
-							draw_pixel(sprite, Vector2(mirror_x, cur_pos_y), color, current_mouse_button, current_action, drawer_h_mirror, pen_pressure)
-						if vertical_mirror:
-							var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
-							draw_pixel(sprite, Vector2(cur_pos_x, mirror_y), color, current_mouse_button, current_action, drawer_v_mirror, pen_pressure)
-						if horizontal_mirror && vertical_mirror:
-							var drawer_hv_mirror = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
-							draw_pixel(sprite, Vector2(mirror_x, mirror_y), color, current_mouse_button, current_action, drawer_hv_mirror, pen_pressure)
+					# Handle mirroring
+					var mirror_x = east_limit + west_limit - cur_pos_x - 1
+					var mirror_y = south_limit + north_limit - cur_pos_y - 1
+					if horizontal_mirror:
+						var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
+						draw_pixel_blended(sprite, Vector2(mirror_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action, drawer_h_mirror)
+					if vertical_mirror:
+						var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
+						draw_pixel_blended(sprite, Vector2(cur_pos_x, mirror_y), color, pen_pressure, current_mouse_button, current_action, drawer_v_mirror)
+					if horizontal_mirror && vertical_mirror:
+						var drawer_hv_mirror = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
+						draw_pixel_blended(sprite, Vector2(mirror_x, mirror_y), color, pen_pressure, current_mouse_button, current_action, drawer_hv_mirror)
 
-						Global.canvas.sprite_changed_this_frame = true
+					Global.canvas.sprite_changed_this_frame = true
 
 		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
 			plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
@@ -222,10 +227,10 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 		var quadrant_2 := Vector2(xm - y, ym - x)
 		var quadrant_3 := Vector2(xm + x, ym - y)
 		var quadrant_4 := Vector2(xm + y, ym + x)
-		draw_pixel_blended(sprite, quadrant_1, color)
-		draw_pixel_blended(sprite, quadrant_2, color)
-		draw_pixel_blended(sprite, quadrant_3, color)
-		draw_pixel_blended(sprite, quadrant_4, color)
+		draw_pixel_blended(sprite, quadrant_1, color, Global.canvas.pen_pressure)
+		draw_pixel_blended(sprite, quadrant_2, color, Global.canvas.pen_pressure)
+		draw_pixel_blended(sprite, quadrant_3, color, Global.canvas.pen_pressure)
+		draw_pixel_blended(sprite, quadrant_4, color, Global.canvas.pen_pressure)
 
 		r = err
 		if r <= y:
@@ -240,27 +245,7 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 			for i in range (-radius, radius + 1):
 				if i * i + j * j <= radius * radius:
 					var draw_pos := Vector2(i + xm, j + ym)
-					draw_pixel_blended(sprite, draw_pos, color)
-
-
-func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color) -> void:
-	var saved_pixel_index := mouse_press_pixels.find(pos)
-	var west_limit = Global.canvas.west_limit
-	var east_limit = Global.canvas.east_limit
-	var north_limit = Global.canvas.north_limit
-	var south_limit = Global.canvas.south_limit
-	var pen_pressure = Global.canvas.pen_pressure
-
-	if point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)) && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]):
-		if color.a > 0 && color.a < 1:
-			color = blend_colors(color, sprite.get_pixelv(pos))
-
-		if saved_pixel_index == -1:
-			mouse_press_pixels.append(pos)
-			mouse_press_pressure_values.append(pen_pressure)
-		else:
-			mouse_press_pressure_values[saved_pixel_index] = pen_pressure
-		sprite.set_pixelv(pos, color)
+					draw_pixel_blended(sprite, draw_pos, color, Global.canvas.pen_pressure)
 
 
 # Thanks to https://en.wikipedia.org/wiki/Flood_fill
