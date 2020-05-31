@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.7.1] - Unreleased
 This update has been brought to you by the contributions of:
 
-Igor Santarek (jegor377)
+Igor Santarek (jegor377), rob-a-bolton
 
 ### Added
 - Ability to remove the current palette
@@ -16,6 +16,9 @@ Igor Santarek (jegor377)
 
 ### Changed
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
+
+### Fixed
+- Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
 
 ## [v0.7] - 2020-05-16
 This update has been brought to you by the contributions of:

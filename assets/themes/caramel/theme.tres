@@ -152,6 +152,18 @@ border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.588235, 0.568627, 0.470588, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.588235, 0.568627, 0.470588, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.109804, 0.0862745, 0.0862745, 0 )
 border_width_left = 1
@@ -244,18 +256,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=27]
-bg_color = Color( 0.588235, 0.568627, 0.470588, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.588235, 0.568627, 0.470588, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.445313, 0.432846, 0.370514, 1 )
@@ -367,6 +367,20 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 6
 HSplitContainer/icons/grabber = ExtResource( 4 )
 HSplitContainer/styles/bg = null
+ItemList/colors/font_color = Color( 0, 0, 0, 1 )
+ItemList/colors/font_color_selected = Color( 0.278431, 0.278431, 0.278431, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 4
+ItemList/fonts/font = null
+ItemList/styles/bg = SubResource( 27 )
+ItemList/styles/bg_focus = null
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
 "Label/colors/Selected Color" = Color( 0.235294, 0.364706, 0.458824, 1 )
 Label/colors/font_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
@@ -512,7 +526,7 @@ Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
 Tree/colors/custom_button_font_highlight = Color( 0.941176, 0.941176, 0.941176, 1 )
 Tree/colors/drop_position_color = Color( 1, 0.3, 0.2, 1 )
 Tree/colors/font_color = Color( 0, 0, 0, 1 )
-Tree/colors/font_color_selected = Color( 0, 0, 0, 1 )
+Tree/colors/font_color_selected = Color( 0.443137, 0.443137, 0.443137, 1 )
 Tree/colors/guide_color = Color( 0, 0, 0, 0.1 )
 Tree/colors/relationship_line_color = Color( 0.27451, 0.27451, 0.27451, 1 )
 Tree/colors/selection_color = Color( 0.1, 0.1, 1, 0.8 )

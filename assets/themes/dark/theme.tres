@@ -172,6 +172,18 @@ border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0.109804, 0.0862745, 0.0862745, 0 )
 border_width_left = 1
@@ -285,18 +297,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=32]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=33]
 border_width_left = 2
@@ -419,6 +419,20 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 6
 HSplitContainer/icons/grabber = ExtResource( 4 )
 HSplitContainer/styles/bg = SubResource( 19 )
+ItemList/colors/font_color = Color( 0.690196, 0.690196, 0.690196, 1 )
+ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 4
+ItemList/fonts/font = null
+ItemList/styles/bg = SubResource( 32 )
+ItemList/styles/bg_focus = null
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
 "Label/colors/Selected Color" = Color( 0.235294, 0.364706, 0.458824, 1 )
 Label/colors/font_color = Color( 1, 1, 1, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
