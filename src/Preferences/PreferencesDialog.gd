@@ -1,292 +1,124 @@
 extends AcceptDialog
 
-onready var tree : Tree = $HSplitContainer/Tree
+onready var list : ItemList = $HSplitContainer/List
 onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
 onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
-onready var languages = $HSplitContainer/ScrollContainer/VBoxContainer/Languages
-onready var themes = $HSplitContainer/ScrollContainer/VBoxContainer/Themes
-onready var canvas = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas
-onready var image = $HSplitContainer/ScrollContainer/VBoxContainer/Image
-onready var shortcuts = $HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts
 
-onready var open_last_project_button = $HSplitContainer/ScrollContainer/VBoxContainer/General/OpenLastProject
-onready var smooth_zoom_button = $HSplitContainer/ScrollContainer/VBoxContainer/General/SmoothZoom
-onready var sensitivity_option = $HSplitContainer/ScrollContainer/VBoxContainer/General/PressureSentivity/PressureSensitivityOptionButton
-onready var left_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/LeftToolIconCheckbox
-onready var right_tool_icon = $HSplitContainer/ScrollContainer/VBoxContainer/General/GridContainer/RightToolIconCheckbox
-
-onready var default_width_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultWidth
-onready var default_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/ImageDefaultHeight
-onready var default_fill_color = $HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions/DefaultFillColor
-
-onready var grid_width_value = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions/GridWidthValue
-onready var grid_height_value = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions/GridHeightValue
-onready var grid_color = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions/GridColor
-onready var guide_color = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GuideOptions/GuideColor
-
-onready var checker_size_value = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions/CheckerSizeValue
-onready var checker_color_1 = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions/CheckerColor1
-onready var checker_color_2 = $HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions/CheckerColor2
-
+# Preferences table: [Prop name in Global, relative node path, value type]
+var preferences = [
+	["open_last_project", "General/OpenLastProject", "pressed"],
+	["smooth_zoom", "General/SmoothZoom", "pressed"],
+	["pressure_sensitivity_mode", "General/PressureSentivity/PressureSensitivityOptionButton", "selected"],
+	["show_left_tool_icon", "General/GridContainer/LeftToolIconCheckbox", "pressed"],
+	["show_right_tool_icon", "General/GridContainer/RightToolIconCheckbox", "pressed"],
+	["left_square_indicator_visible", "General/GridContainer/LeftIndicatorCheckbox", "pressed"],
+	["right_square_indicator_visible", "General/GridContainer/RightIndicatorCheckbox", "pressed"],
+	["autosave_interval", "General/AutosaveInterval/AutosaveInterval", "value"],
+	["enable_autosave", "General/EnableAutosave", "pressed"],
+	
+	["default_image_width", "Image/ImageOptions/ImageDefaultWidth", "value"],
+	["default_image_height", "Image/ImageOptions/ImageDefaultHeight", "value"],
+	["default_fill_color", "Image/ImageOptions/DefaultFillColor", "color"],
+	
+	["grid_width", "Canvas/GridOptions/GridWidthValue", "value"],
+	["grid_height", "Canvas/GridOptions/GridHeightValue", "value"],
+	["grid_color", "Canvas/GridOptions/GridColor", "color"],
+	["guide_color", "Canvas/GuideOptions/GuideColor", "color"],
+	["checker_size", "Canvas/CheckerOptions/CheckerSizeValue", "value"],
+	["checker_color_1", "Canvas/CheckerOptions/CheckerColor1", "color"],
+	["checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color"],
+]
 
 func _ready() -> void:
 	# Replace OK with Close since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = tr("Close")
-
-	# Set default values for General options
-	if Global.config_cache.has_section_key("preferences", "open_last_project"):
-		Global.open_last_project = Global.config_cache.get_value("preferences", "open_last_project")
-		open_last_project_button.pressed = Global.open_last_project
-	if Global.config_cache.has_section_key("preferences", "smooth_zoom"):
-		Global.smooth_zoom = Global.config_cache.get_value("preferences", "smooth_zoom")
-		smooth_zoom_button.pressed = Global.smooth_zoom
-	if Global.config_cache.has_section_key("preferences", "pressure_sensitivity"):
-		Global.pressure_sensitivity_mode = Global.config_cache.get_value("preferences", "pressure_sensitivity")
-		sensitivity_option.selected = Global.pressure_sensitivity_mode
-
-	if Global.config_cache.has_section_key("preferences", "show_left_tool_icon"):
-		Global.show_left_tool_icon = Global.config_cache.get_value("preferences", "show_left_tool_icon")
-		left_tool_icon.pressed = Global.show_left_tool_icon
-	if Global.config_cache.has_section_key("preferences", "show_right_tool_icon"):
-		Global.show_right_tool_icon = Global.config_cache.get_value("preferences", "show_right_tool_icon")
-		right_tool_icon.pressed = Global.show_right_tool_icon
-
-	# Get autosave settings
-	if Global.config_cache.has_section_key("preferences", "autosave_interval"):
-		var autosave_interval = Global.config_cache.get_value("preferences", "autosave_interval")
-		OpenSave.set_autosave_interval(autosave_interval)
-		general.get_node("AutosaveInterval/AutosaveInterval").value = autosave_interval
-	if Global.config_cache.has_section_key("preferences", "enable_autosave"):
-		var enable_autosave = Global.config_cache.get_value("preferences", "enable_autosave")
-		OpenSave.toggle_autosave(enable_autosave)
-		general.get_node("EnableAutosave").pressed = enable_autosave
-
-	# Set default values for Canvas options
-	if Global.config_cache.has_section_key("preferences", "grid_size"):
-		var grid_size = Global.config_cache.get_value("preferences", "grid_size")
-		Global.grid_width = int(grid_size.x)
-		Global.grid_height = int(grid_size.y)
-		grid_width_value.value = grid_size.x
-		grid_height_value.value = grid_size.y
-
-	if Global.config_cache.has_section_key("preferences", "grid_color"):
-		Global.grid_color = Global.config_cache.get_value("preferences", "grid_color")
-		grid_color.color = Global.grid_color
-
-	if Global.config_cache.has_section_key("preferences", "checker_size"):
-		var checker_size = Global.config_cache.get_value("preferences", "checker_size")
-		Global.checker_size = int(checker_size)
-		checker_size_value.value = checker_size
-
-	if Global.config_cache.has_section_key("preferences", "checker_color_1"):
-		Global.checker_color_1 = Global.config_cache.get_value("preferences", "checker_color_1")
-		checker_color_1.color = Global.checker_color_1
-
-	if Global.config_cache.has_section_key("preferences", "checker_color_2"):
-		Global.checker_color_2 = Global.config_cache.get_value("preferences", "checker_color_2")
-		checker_color_2.color = Global.checker_color_2
+	
+	for pref in preferences:
+		var node = right_side.get_node(pref[1])
+		
+		if Global.config_cache.has_section_key("preferences", pref[0]):
+			var value = Global.config_cache.get_value("preferences", pref[0])
+			Global.set(pref[0], value)
+			node.set(pref[2], value)
+			
+		match pref[2]:
+			"pressed":
+				node.connect("toggled", self, "_on_Preference_toggled", [pref[0]])
+			"value":
+				node.connect("value_changed", self, "_on_Preference_value_changed", [pref[0]])
+			"color":
+				node.get_picker().presets_visible = false
+				node.connect("color_changed", self, "_on_Preference_color_changed", [pref[0]])
+			"selected":
+				node.connect("item_selected", self, "_on_Preference_item_selected", [pref[0]])
 
 	Global.transparent_checker._ready()
 
-	if Global.config_cache.has_section_key("preferences", "guide_color"):
-		Global.guide_color = Global.config_cache.get_value("preferences", "guide_color")
+	for canvas in Global.canvases:
+		for guide in canvas.get_children():
+			if guide is Guide:
+				guide.default_color = Global.guide_color
+
+
+func _on_Preference_toggled(button_pressed : bool, prop : String) -> void:
+	Global.set(prop, button_pressed)
+	Global.config_cache.set_value("preferences", prop, button_pressed)
+	preference_update(prop)
+
+
+func _on_Preference_value_changed(value : float, prop : String) -> void:
+	Global.set(prop, value)
+	Global.config_cache.set_value("preferences", prop, value)
+	preference_update(prop)
+
+
+func _on_Preference_color_changed(color : Color, prop : String) -> void:
+	Global.set(prop, color)
+	Global.config_cache.set_value("preferences", prop, color)
+	preference_update(prop)
+
+
+func _on_Preference_item_selected(id : int, prop : String) -> void:
+	Global.set(prop, id)
+	Global.config_cache.set_value("preferences", prop, id)
+	preference_update(prop)
+
+
+func preference_update(prop : String) -> void:
+	if prop in ["autosave_interval", "enable_autosave"]:
+		OpenSave.update_autosave()
+	
+	if prop in ["grid_width", "grid_height", "grid_color"]:
+		Global.canvas.update()
+	
+	if prop in ["checker_size", "checker_color_1", "checker_color_2"]:
+		Global.transparent_checker._ready()
+	
+	if prop in ["guide_color"]:
 		for canvas in Global.canvases:
 			for guide in canvas.get_children():
 				if guide is Guide:
 					guide.default_color = Global.guide_color
-		guide_color.color = Global.guide_color
-
-	# Set default values for Image
-	if Global.config_cache.has_section_key("preferences", "default_width"):
-		var default_width = Global.config_cache.get_value("preferences", "default_width")
-		Global.default_image_width = int(default_width)
-		default_width_value.value = Global.default_image_width
-
-	if Global.config_cache.has_section_key("preferences", "default_height"):
-		var default_height = Global.config_cache.get_value("preferences", "default_height")
-		Global.default_image_height = int(default_height)
-		default_height_value.value = Global.default_image_height
-
-	if Global.config_cache.has_section_key("preferences", "default_fill_color"):
-		var fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
-		Global.default_fill_color = fill_color
-		default_fill_color.color = Global.default_fill_color
-
-	guide_color.get_picker().presets_visible = false
-	grid_color.get_picker().presets_visible = false
-	checker_color_1.get_picker().presets_visible = false
-	checker_color_2.get_picker().presets_visible = false
-	default_fill_color.get_picker().presets_visible = false
+				
+	Global.config_cache.save("user://cache.ini")
 
 
 func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
-	var root := tree.create_item()
-	var general_button := tree.create_item(root)
-	var language_button := tree.create_item(root)
-	var theme_button := tree.create_item(root)
-	var canvas_button := tree.create_item(root)
-	var image_button := tree.create_item(root)
-	var shortcuts_button := tree.create_item(root)
-
-	general_button.set_text(0, "  " + tr("General"))
-	# We use metadata to avoid being affected by translations
-	general_button.set_metadata(0, "General")
-	language_button.set_text(0, "  " + tr("Language"))
-	language_button.set_metadata(0, "Language")
-	theme_button.set_text(0, "  " + tr("Themes"))
-	theme_button.set_metadata(0, "Themes")
-	canvas_button.set_text(0, "  " + tr("Canvas"))
-	canvas_button.set_metadata(0, "Canvas")
-	image_button.set_text(0, "  " + tr("Image"))
-	image_button.set_metadata(0, "Image")
-	shortcuts_button.set_text(0, "  " + tr("Shortcuts"))
-	shortcuts_button.set_metadata(0, "Shortcuts")
-
-	if changed_language:
-		language_button.select(0)
-	else:
-		general_button.select(0)
-
+	list.add_item("  " + tr("General"))
+	list.add_item("  " + tr("Language"))
+	list.add_item("  " + tr("Themes"))
+	list.add_item("  " + tr("Canvas"))
+	list.add_item("  " + tr("Image"))
+	list.add_item("  " + tr("Shortcuts"))
+	
+	list.select(1 if changed_language else 0)
 	general.get_node("AutosaveInterval/AutosaveInterval").suffix = tr("minute(s)")
 
 
 func _on_PreferencesDialog_popup_hide() -> void:
-	tree.clear()
+	list.clear()
 
 
-func _on_Tree_item_selected() -> void:
+func _on_List_item_selected(index):
 	for child in right_side.get_children():
-		child.visible = false
-	var selected : String = tree.get_selected().get_metadata(0)
-	if "General" in selected:
-		general.visible = true
-	elif "Language" in selected:
-		languages.visible = true
-	elif "Themes" in selected:
-		themes.visible = true
-	elif "Canvas" in selected:
-		canvas.visible = true
-	elif "Image" in selected:
-		image.visible = true
-	elif "Shortcuts" in selected:
-		shortcuts.visible = true
-
-
-func _on_PressureSensitivityOptionButton_item_selected(id : int) -> void:
-	Global.pressure_sensitivity_mode = id
-	Global.config_cache.set_value("preferences", "pressure_sensitivity", id)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_SmoothZoom_pressed() -> void:
-	Global.smooth_zoom = !Global.smooth_zoom
-	Global.config_cache.set_value("preferences", "smooth_zoom", Global.smooth_zoom)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_GridWidthValue_value_changed(value : float) -> void:
-	Global.grid_width = value
-	Global.canvas.update()
-	Global.config_cache.set_value("preferences", "grid_size", Vector2(value, grid_height_value.value))
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_GridHeightValue_value_changed(value : float) -> void:
-	Global.grid_height = value
-	Global.canvas.update()
-	Global.config_cache.set_value("preferences", "grid_size", Vector2(grid_width_value.value, value))
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_GridColor_color_changed(color : Color) -> void:
-	Global.grid_color = color
-	Global.canvas.update()
-	Global.config_cache.set_value("preferences", "grid_color", color)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_CheckerSize_value_changed(value : float) -> void:
-	Global.checker_size = value
-	Global.transparent_checker._ready()
-	Global.config_cache.set_value("preferences", "checker_size", value)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_CheckerColor1_color_changed(color : Color) -> void:
-	Global.checker_color_1 = color
-	Global.transparent_checker._ready()
-	Global.config_cache.set_value("preferences", "checker_color_1", color)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_CheckerColor2_color_changed(color : Color) -> void:
-	Global.checker_color_2 = color
-	Global.transparent_checker._ready()
-	Global.config_cache.set_value("preferences", "checker_color_2", color)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_GuideColor_color_changed(color : Color) -> void:
-	Global.guide_color = color
-	for canvas in Global.canvases:
-		for guide in canvas.get_children():
-			if guide is Guide:
-				guide.default_color = color
-	Global.config_cache.set_value("preferences", "guide_color", color)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_ImageDefaultWidth_value_changed(value: float) -> void:
-	Global.default_image_width = value
-	Global.config_cache.set_value("preferences", "default_width", value)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_ImageDefaultHeight_value_changed(value: float) -> void:
-	Global.default_image_height = value
-	Global.config_cache.set_value("preferences", "default_height", value)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_DefaultBackground_color_changed(color: Color) -> void:
-	Global.default_fill_color = color
-	Global.config_cache.set_value("preferences", "default_fill_color", color)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_LeftIndicatorCheckbox_toggled(button_pressed : bool) -> void:
-	Global.left_square_indicator_visible = button_pressed
-
-
-func _on_RightIndicatorCheckbox_toggled(button_pressed : bool) -> void:
-	Global.right_square_indicator_visible = button_pressed
-
-
-func _on_LeftToolIconCheckbox_toggled(button_pressed : bool) -> void:
-	Global.show_left_tool_icon = button_pressed
-	Global.config_cache.set_value("preferences", "show_left_tool_icon", Global.show_left_tool_icon)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_RightToolIconCheckbox_toggled(button_pressed : bool) -> void:
-	Global.show_right_tool_icon = button_pressed
-	Global.config_cache.set_value("preferences", "show_right_tool_icon", Global.show_right_tool_icon)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_OpenLastProject_pressed() -> void:
-	Global.open_last_project = !Global.open_last_project
-	Global.config_cache.set_value("preferences", "open_last_project", Global.open_last_project)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_EnableAutosave_toggled(button_pressed : bool) -> void:
-	OpenSave.toggle_autosave(button_pressed)
-	Global.config_cache.set_value("preferences", "enable_autosave", button_pressed)
-	Global.config_cache.save("user://cache.ini")
-
-
-func _on_AutosaveInterval_value_changed(value : float) -> void:
-	OpenSave.set_autosave_interval(value)
-	Global.config_cache.set_value("preferences", "autosave_interval", value)
-	Global.config_cache.save("user://cache.ini")
+		child.visible = child.name == ["General", "Languages", "Themes", "Canvas", "Image", "Shortcuts"][index]
