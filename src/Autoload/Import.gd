@@ -249,16 +249,16 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 			if Global.patterns.size() > 0:
 				var image_size = Global.patterns[0].get_size()
 
-				Global.pattern_left_image = Global.patterns[0]
+				Global.pattern_images[0] = Global.patterns[0]
 				var pattern_left_tex := ImageTexture.new()
-				pattern_left_tex.create_from_image(Global.pattern_left_image, 0)
+				pattern_left_tex.create_from_image(Global.pattern_images[0], 0)
 				Global.fill_pattern_containers[0].get_child(0).get_child(0).texture = pattern_left_tex
 				Global.fill_pattern_containers[0].get_child(2).get_child(1).max_value = image_size.x - 1
 				Global.fill_pattern_containers[0].get_child(3).get_child(1).max_value = image_size.y - 1
 
-				Global.pattern_right_image = Global.patterns[0]
+				Global.pattern_images[1] = Global.patterns[0]
 				var pattern_right_tex := ImageTexture.new()
-				pattern_right_tex.create_from_image(Global.pattern_right_image, 0)
+				pattern_right_tex.create_from_image(Global.pattern_images[1], 0)
 				Global.fill_pattern_containers[1].get_child(0).get_child(0).texture = pattern_right_tex
 				Global.fill_pattern_containers[1].get_child(2).get_child(1).max_value = image_size.x - 1
 				Global.fill_pattern_containers[1].get_child(3).get_child(1).max_value = image_size.y - 1

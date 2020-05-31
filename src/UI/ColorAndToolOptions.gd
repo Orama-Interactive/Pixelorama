@@ -6,11 +6,11 @@ var previous_right_color := Color.white
 
 
 func _on_ColorSwitch_pressed() -> void:
-	var temp: Color = Global.color_pickers[0].color
+	var temp : Color = Global.color_pickers[0].color
 	Global.color_pickers[0].color = Global.color_pickers[1].color
 	Global.color_pickers[1].color = temp
-	Global.update_left_custom_brush()
-	Global.update_right_custom_brush()
+	Global.update_custom_brush(0)
+	Global.update_custom_brush(1)
 
 
 func _on_ColorPickerButton_color_changed(color : Color, right : bool):
@@ -19,13 +19,13 @@ func _on_ColorPickerButton_color_changed(color : Color, right : bool):
 		if color.a == 0:
 			if previous_right_color.r != color.r or previous_right_color.g != color.g or previous_right_color.b != color.b:
 				Global.color_pickers[1].color.a = 1
-		Global.update_right_custom_brush()
+		Global.update_custom_brush(1)
 		previous_right_color = color
 	else:
 		if color.a == 0:
 			if previous_left_color.r != color.r or previous_left_color.g != color.g or previous_left_color.b != color.b:
 				Global.color_pickers[0].color.a = 1
-		Global.update_left_custom_brush()
+		Global.update_custom_brush(0)
 		previous_left_color = color
 
 
@@ -40,8 +40,8 @@ func _on_ColorPickerButton_popup_closed() -> void:
 func _on_ColorDefaults_pressed() -> void:
 	Global.color_pickers[0].color = Color.black
 	Global.color_pickers[1].color = Color.white
-	Global.update_left_custom_brush()
-	Global.update_right_custom_brush()
+	Global.update_custom_brush(0)
+	Global.update_custom_brush(1)
 
 
 func _on_FitToFrameButton_pressed() -> void:
@@ -59,10 +59,10 @@ func _on_100ZoomButton_pressed() -> void:
 func _on_BrushTypeButton_pressed(right : bool) -> void:
 	if right:
 		Global.brushes_popup.popup(Rect2(Global.brush_type_buttons[1].rect_global_position, Vector2(226, 72)))
-		Global.brush_type_window_position = "right"
+		Global.brush_type_window_position = Global.Mouse_Button.RIGHT
 	else:
 		Global.brushes_popup.popup(Rect2(Global.brush_type_buttons[0].rect_global_position, Vector2(226, 72)))
-		Global.brush_type_window_position = "left"
+		Global.brush_type_window_position = Global.Mouse_Button.LEFT
 
 
 func _on_BrushSizeEdit_value_changed(value : float, right : bool) -> void:
@@ -71,12 +71,12 @@ func _on_BrushSizeEdit_value_changed(value : float, right : bool) -> void:
 		Global.brush_size_edits[1].value = value
 		Global.brush_size_sliders[1].value = value
 		Global.right_brush_size = new_size
-		Global.update_right_custom_brush()
+		Global.update_custom_brush(1)
 	else:
 		Global.brush_size_edits[0].value = value
 		Global.brush_size_sliders[0].value = value
 		Global.left_brush_size = new_size
-		Global.update_left_custom_brush()
+		Global.update_custom_brush(0)
 
 
 func _on_PixelPerfectMode_toggled(button_pressed : bool, right : bool) -> void:
@@ -90,11 +90,11 @@ func _on_InterpolateFactor_value_changed(value : float, right : bool) -> void:
 	if right:
 		Global.interpolate_spinboxes[1].value = value
 		Global.interpolate_sliders[1].value = value
-		Global.update_right_custom_brush()
+		Global.update_custom_brush(1)
 	else:
 		Global.interpolate_spinboxes[0].value = value
 		Global.interpolate_sliders[0].value = value
-		Global.update_left_custom_brush()
+		Global.update_custom_brush(0)
 
 
 func _on_FillAreaOptions_item_selected(ID : int, right : bool) -> void:
@@ -121,11 +121,11 @@ func _on_FillWithOptions_item_selected(ID : int, right : bool) -> void:
 
 func _on_PatternTypeButton_pressed(right : bool) -> void:
 	if right:
-		Global.pattern_window_position = "right"
-		Global.patterns_popup.popup(Rect2(Global.brush_type_buttons[1].rect_global_position, Vector2(226, 72)))
+		Global.pattern_window_position = Global.Mouse_Button.RIGHT
 	else:
-		Global.pattern_window_position = "left"
-		Global.patterns_popup.popup(Rect2(Global.brush_type_buttons[0].rect_global_position, Vector2(226, 72)))
+		Global.pattern_window_position = Global.Mouse_Button.LEFT
+
+	Global.patterns_popup.popup(Rect2(Global.brush_type_buttons[Global.pattern_window_position].rect_global_position, Vector2(226, 72)))
 
 
 func _on_PatternOffsetX_value_changed(value : float, right : bool) -> void:

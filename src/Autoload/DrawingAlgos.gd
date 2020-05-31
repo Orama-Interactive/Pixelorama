@@ -39,10 +39,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				color.a *= (1.0 - pen_pressure)
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
-			brush_type = Global.current_brush_type[0]
-			brush_index = Global.custom_left_brush_index
+			brush_type = Global.current_brush_types[0]
+			brush_index = Global.custom_brush_indexes[0]
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
-				custom_brush_image = Global.custom_left_brush_image
+				custom_brush_image = Global.custom_brush_images[0]
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
 				var random_index = randi() % brush_button.random_brushes.size()
@@ -61,10 +61,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 		elif current_mouse_button == "right_mouse":
 			brush_size = Global.right_brush_size
-			brush_type = Global.current_brush_type[1]
-			brush_index = Global.custom_right_brush_index
+			brush_type = Global.current_brush_types[1]
+			brush_index = Global.custom_brush_indexes[1]
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
-				custom_brush_image = Global.custom_right_brush_image
+				custom_brush_image = Global.custom_brush_images[1]
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
 				var random_index = randi() % brush_button.random_brushes.size()

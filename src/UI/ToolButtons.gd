@@ -61,7 +61,7 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 			Global.brush_size_sliders[current_mouse_button].visible = true
 			Global.pixel_perfect_containers[current_mouse_button].visible = true
 			Global.mirror_containers[current_mouse_button].visible = true
-			if Global.current_brush_type[current_mouse_button] == Global.Brush_Types.FILE or Global.current_brush_type[current_mouse_button] == Global.Brush_Types.CUSTOM or Global.current_brush_type[current_mouse_button] == Global.Brush_Types.RANDOM_FILE:
+			if Global.current_brush_types[current_mouse_button] == Global.Brush_Types.FILE or Global.current_brush_types[current_mouse_button] == Global.Brush_Types.CUSTOM or Global.current_brush_types[current_mouse_button] == Global.Brush_Types.RANDOM_FILE:
 				Global.color_interpolation_containers[current_mouse_button].visible = true
 		elif current_tool == Global.Tools.ERASER:
 			Global.brush_type_containers[current_mouse_button].visible = true

@@ -120,26 +120,22 @@ var onion_skinning_blue_red := false
 # Brushes
 var left_brush_size := 1
 var right_brush_size := 1
-var current_brush_type := []
+var current_brush_types := []
 
-var brush_type_window_position := "left"
+var brush_type_window_position : int = Mouse_Button.LEFT
 var left_circle_points := []
 var right_circle_points := []
 
 var brushes_from_files := 0
 var custom_brushes := []
-var custom_left_brush_index := -1
-var custom_right_brush_index := -1
-var custom_left_brush_image : Image
-var custom_right_brush_image : Image
-var custom_left_brush_texture := ImageTexture.new()
-var custom_right_brush_texture := ImageTexture.new()
+var custom_brush_indexes := []
+var custom_brush_images := []
+var custom_brush_textures := []
 
 # Patterns
 var patterns := []
-var pattern_window_position := "left"
-var pattern_left_image : Image
-var pattern_right_image : Image
+var pattern_window_position : int = Mouse_Button.LEFT
+var pattern_images := []
 
 # Palettes
 var palettes := {}
@@ -258,8 +254,16 @@ func _ready() -> void:
 
 	undo_redo = UndoRedo.new()
 	image_clipboard = Image.new()
-	current_brush_type.append(Brush_Types.PIXEL)
-	current_brush_type.append(Brush_Types.PIXEL)
+	current_brush_types.append(Brush_Types.PIXEL)
+	current_brush_types.append(Brush_Types.PIXEL)
+	custom_brush_indexes.append(-1)
+	custom_brush_indexes.append(-1)
+	custom_brush_images.append(Image.new())
+	custom_brush_images.append(Image.new())
+	custom_brush_textures.append(ImageTexture.new())
+	custom_brush_textures.append(ImageTexture.new())
+	pattern_images.append(Image.new())
+	pattern_images.append(Image.new())
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
@@ -843,8 +847,8 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 
 
 func remove_brush_buttons() -> void:
-	current_brush_type[0] = Brush_Types.PIXEL
-	current_brush_type[1] = Brush_Types.PIXEL
+	current_brush_types[0] = Brush_Types.PIXEL
+	current_brush_types[1] = Brush_Types.PIXEL
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
@@ -865,56 +869,30 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 		project_brush_container.remove_child(_brush_button)
 
 
-func update_left_custom_brush() -> void:
-	if current_brush_type[0] == Brush_Types.PIXEL:
+func update_custom_brush(mouse_button : int) -> void:
+	if current_brush_types[mouse_button] == Brush_Types.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/pixel_image.png")
-		brush_type_buttons[0].get_child(0).texture.create_from_image(pixel, 0)
-	elif current_brush_type[0] == Brush_Types.CIRCLE:
+		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+	elif current_brush_types[mouse_button] == Brush_Types.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_9x9.png")
-		brush_type_buttons[0].get_child(0).texture.create_from_image(pixel, 0)
+		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
-	elif current_brush_type[0] == Brush_Types.FILLED_CIRCLE:
+	elif current_brush_types[mouse_button] == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		brush_type_buttons[0].get_child(0).texture.create_from_image(pixel, 0)
+		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
 	else:
 		var custom_brush := Image.new()
-		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
+		custom_brush.copy_from(custom_brushes[custom_brush_indexes[mouse_button]])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_left_brush_image = blend_image_with_color(custom_brush, color_pickers[0].color, interpolate_spinboxes[0].value / 100)
-		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
+		custom_brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
+		custom_brush_textures[mouse_button].create_from_image(custom_brush_images[mouse_button], 0)
 
-		brush_type_buttons[0].get_child(0).texture = custom_left_brush_texture
-
-
-func update_right_custom_brush() -> void:
-	if current_brush_type[1] == Brush_Types.PIXEL:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/pixel_image.png")
-		brush_type_buttons[1].get_child(0).texture.create_from_image(pixel, 0)
-	elif current_brush_type[1] == Brush_Types.CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_9x9.png")
-		brush_type_buttons[1].get_child(0).texture.create_from_image(pixel, 0)
-		right_circle_points = plot_circle(right_brush_size)
-	elif current_brush_type[1] == Brush_Types.FILLED_CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		brush_type_buttons[1].get_child(0).texture.create_from_image(pixel, 0)
-		right_circle_points = plot_circle(right_brush_size)
-	else:
-		var custom_brush := Image.new()
-		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
-		var custom_brush_size = custom_brush.get_size()
-		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_right_brush_image = blend_image_with_color(custom_brush, color_pickers[1].color, interpolate_spinboxes[1].value / 100)
-		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
-
-		brush_type_buttons[1].get_child(0).texture = custom_right_brush_texture
+		brush_type_buttons[mouse_button].get_child(0).texture = custom_brush_textures[mouse_button]
 
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:

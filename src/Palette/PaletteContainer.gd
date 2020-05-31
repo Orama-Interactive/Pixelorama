@@ -166,10 +166,10 @@ func on_color_select(index : int) -> void:
 
 	if Input.is_action_just_pressed("left_mouse"):
 		Global.color_pickers[0].color = color
-		Global.update_left_custom_brush()
+		Global.update_custom_brush(0)
 	elif Input.is_action_just_pressed("right_mouse"):
 		Global.color_pickers[1].color = color
-		Global.update_right_custom_brush()
+		Global.update_custom_brush(1)
 
 
 func _load_palettes() -> void:
