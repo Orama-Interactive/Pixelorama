@@ -4,7 +4,7 @@ extends Node
 func _ready() -> void:
 	for child in get_children():
 		if child is Button:
-			child.connect("pressed", self, "_on_Theme_pressed", [child])
+			child.connect("pressed", self, "_on_Theme_pressed", [child.get_index()])
 
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
@@ -15,18 +15,10 @@ func _ready() -> void:
 		get_child(0).pressed = true
 
 
-func _on_Theme_pressed(button : Button) -> void:
-	var index := 0
-	var i := 0
+func _on_Theme_pressed(index : int) -> void:
 	for child in get_children():
 		if child is Button:
-			if child == button:
-				button.pressed = true
-				index = i
-			else:
-				child.pressed = false
-			i += 1
-
+			child.pressed = child.get_index() == index
 	change_theme(index)
 
 	Global.config_cache.set_value("preferences", "theme", index)

@@ -3,7 +3,6 @@ extends Node
 var current_save_path := ""
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_path = ""
-var default_autosave_interval := 5 # Minutes
 
 onready var autosave_timer : Timer
 
@@ -14,8 +13,7 @@ func _ready() -> void:
 	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE
 	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
 	add_child(autosave_timer)
-	set_autosave_interval(default_autosave_interval)
-	toggle_autosave(true) # Gets started from preferences dialog
+	update_autosave()
 
 
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
@@ -271,16 +269,11 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		Global.notification_label("File failed to save")
 
 
-func toggle_autosave(enable : bool) -> void:
-	if enable:
+func update_autosave() -> void:
+	autosave_timer.stop()
+	autosave_timer.wait_time = Global.autosave_interval * 60 # Interval parameter is in minutes, wait_time is seconds
+	if Global.enable_autosave:
 		autosave_timer.start()
-	else:
-		autosave_timer.stop()
-
-
-func set_autosave_interval(interval : float) -> void:
-	autosave_timer.wait_time = interval * 60 # Interval parameter is in minutes, wait_time is seconds
-	autosave_timer.start()
 
 
 func _on_Autosave_timeout() -> void:

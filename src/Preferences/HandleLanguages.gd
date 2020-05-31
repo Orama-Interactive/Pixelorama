@@ -25,25 +25,18 @@ func _ready() -> void:
 
 	for child in get_children():
 		if child is Button:
-			child.connect("pressed", self, "_on_Language_pressed", [child])
+			child.connect("pressed", self, "_on_Language_pressed", [child.get_index()])
 			child.hint_tooltip = child.name
 
 
-func _on_Language_pressed(button : Button) -> void:
-	var index := 0
-	var i := -1
+func _on_Language_pressed(index : int) -> void:
 	for child in get_children():
 		if child is Button:
-			if child == button:
-				button.pressed = true
-				index = i
-			else:
-				child.pressed = false
-			i += 1
-	if index == -1:
+			child.pressed = child.get_index() == index
+	if index == 0:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
-		TranslationServer.set_locale(Global.loaded_locales[index])
+		TranslationServer.set_locale(Global.loaded_locales[index - 1])
 
 	if "zh" in TranslationServer.get_locale():
 		Global.control.theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
