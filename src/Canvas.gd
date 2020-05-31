@@ -22,7 +22,7 @@ var mouse_inside_canvas := false # used for undo
 var sprite_changed_this_frame := false # for optimization purposes
 var is_making_line := false
 var made_line := false
-var is_making_selection := "None"
+var is_making_selection := -1
 var line_2d : Line2D
 var pen_pressure := 1.0 # For tablet pressure sensitivity
 
@@ -251,7 +251,7 @@ func _input(event : InputEvent) -> void:
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
-	var current_mouse_button := "None"
+	var current_mouse_button := -1
 	var current_action := -1
 	var current_color : Color
 	var fill_area := 0 # For the bucket tool
@@ -272,7 +272,7 @@ func _input(event : InputEvent) -> void:
 		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		current_mouse_button = "left_mouse"
+		current_mouse_button = Global.Mouse_Button.LEFT
 		current_action = Global.current_left_tool
 		current_color = Global.color_pickers[0].color
 		fill_area = Global.left_fill_area
@@ -282,7 +282,7 @@ func _input(event : InputEvent) -> void:
 		zoom_mode = Global.left_zoom_mode
 
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-		current_mouse_button = "right_mouse"
+		current_mouse_button = Global.Mouse_Button.RIGHT
 		current_action = Global.current_right_tool
 		current_color = Global.color_pickers[1].color
 		fill_area = Global.right_fill_area
@@ -338,11 +338,11 @@ func _input(event : InputEvent) -> void:
 				var fill_with := 0
 				var pattern_image : Image
 				var pattern_offset : Vector2
-				if current_mouse_button == "left_mouse":
+				if current_mouse_button == Global.Mouse_Button.LEFT:
 					fill_with = Global.left_fill_with
 					pattern_image = Global.pattern_images[0]
 					pattern_offset = Global.left_fill_pattern_offset
-				elif current_mouse_button == "right_mouse":
+				elif current_mouse_button == Global.Mouse_Button.RIGHT:
 					fill_with = Global.right_fill_with
 					pattern_image = Global.pattern_images[1]
 					pattern_offset = Global.right_fill_pattern_offset
@@ -352,10 +352,10 @@ func _input(event : InputEvent) -> void:
 					var vertical_mirror := false
 					var mirror_x := east_limit + west_limit - mouse_pos_floored.x - 1
 					var mirror_y := south_limit + north_limit - mouse_pos_floored.y - 1
-					if current_mouse_button == "left_mouse":
+					if current_mouse_button == Global.Mouse_Button.LEFT:
 						horizontal_mirror = Global.left_horizontal_mirror
 						vertical_mirror = Global.left_vertical_mirror
-					elif current_mouse_button == "right_mouse":
+					elif current_mouse_button == Global.Mouse_Button.RIGHT:
 						horizontal_mirror = Global.right_horizontal_mirror
 						vertical_mirror = Global.right_vertical_mirror
 
@@ -413,7 +413,10 @@ func _input(event : InputEvent) -> void:
 			if Global.can_draw && Global.has_focus:
 				# If we're creating a new selection
 				if Global.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
-					if Input.is_action_just_pressed(current_mouse_button):
+					var mouse_button_string := "left_mouse"
+					if current_mouse_button == Global.Mouse_Button.RIGHT:
+						mouse_button_string = "right_mouse"
+					if Input.is_action_just_pressed(mouse_button_string):
 						Global.selection_rectangle.polygon[0] = mouse_pos_floored
 						Global.selection_rectangle.polygon[1] = mouse_pos_floored
 						Global.selection_rectangle.polygon[2] = mouse_pos_floored
@@ -421,7 +424,7 @@ func _input(event : InputEvent) -> void:
 						is_making_selection = current_mouse_button
 						Global.selected_pixels.clear()
 					else:
-						if is_making_selection != "None": # If we're making a new selection...
+						if is_making_selection != -1: # If we're making a new selection...
 							var start_pos = Global.selection_rectangle.polygon[0]
 							if start_pos != mouse_pos_floored:
 								var end_pos := Vector2(mouse_pos_ceiled.x, mouse_pos_ceiled.y)
@@ -469,8 +472,11 @@ func _input(event : InputEvent) -> void:
 			angle = 360 + angle
 		Global.cursor_position_label.text += "    %s°" % str(angle)
 
-	if is_making_selection != "None": # If we're making a selection
-		if Input.is_action_just_released(is_making_selection): # Finish selection when button is released
+	if is_making_selection != -1: # If we're making a selection
+		var mouse_button_string := "left_mouse"
+		if is_making_selection == Global.Mouse_Button.RIGHT:
+			mouse_button_string = "right_mouse"
+		if Input.is_action_just_released(mouse_button_string): # Finish selection when button is released
 			var start_pos = Global.selection_rectangle.polygon[0]
 			var end_pos = Global.selection_rectangle.polygon[2]
 			if start_pos.x > end_pos.x:
@@ -491,7 +497,7 @@ func _input(event : InputEvent) -> void:
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
 					Global.selected_pixels.append(Vector2(xx, yy))
-			is_making_selection = "None"
+			is_making_selection = -1
 			handle_redo("Rectangle Select")
 
 	previous_action = current_action
@@ -577,7 +583,7 @@ func update_texture(layer_index : int) -> void:
 	frame_texture_rect.texture = layers[layer_index][1]
 
 
-func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := -1) -> void:
+func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : int, current_action := -1) -> void:
 	if made_line:
 		return
 	if is_making_line:

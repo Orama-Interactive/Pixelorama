@@ -14,7 +14,7 @@ var mouse_press_pixels := [] # Cleared after mouse release
 var mouse_press_pressure_values := [] # Cleared after mouse release
 
 
-func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := -1) -> void:
+func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : int, pen_pressure : float, current_action := -1) -> void:
 	if Global.can_draw && Global.has_focus:
 		var west_limit = Global.canvas.west_limit
 		var east_limit = Global.canvas.east_limit
@@ -37,7 +37,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				color.a *= pen_pressure
 			elif current_action == Global.Tools.ERASER: # This is not working
 				color.a *= (1.0 - pen_pressure)
-		if current_mouse_button == "left_mouse":
+		if current_mouse_button == Global.Mouse_Button.LEFT:
 			brush_size = Global.left_brush_size
 			brush_type = Global.current_brush_types[0]
 			brush_index = Global.custom_brush_indexes[0]
@@ -59,7 +59,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			ld = Global.left_ld
 			ld_amount = Global.left_ld_amount
 
-		elif current_mouse_button == "right_mouse":
+		elif current_mouse_button == Global.Mouse_Button.RIGHT:
 			brush_size = Global.right_brush_size
 			brush_type = Global.current_brush_types[1]
 			brush_index = Global.custom_brush_indexes[1]
@@ -255,7 +255,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func fill_gaps(sprite : Image, end_pos : Vector2, start_pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := -1) -> void:
+func fill_gaps(sprite : Image, end_pos : Vector2, start_pos : Vector2, color : Color, current_mouse_button : int, pen_pressure : float, current_action := -1) -> void:
 	var previous_mouse_pos_floored = start_pos.floor()
 	var mouse_pos_floored = end_pos.floor()
 	var dx := int(abs(mouse_pos_floored.x - previous_mouse_pos_floored.x))
