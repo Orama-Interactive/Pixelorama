@@ -433,7 +433,8 @@ func _input(event : InputEvent) -> void:
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
 		Global.Tools.COLORPICKER:
-			if can_handle:
+			var canvas_rect := Rect2(location, size)
+			if can_handle && canvas_rect.has_point(mouse_pos):
 				var image_data := Image.new()
 				image_data.copy_from(sprite)
 				image_data.lock()
@@ -451,7 +452,7 @@ func _input(event : InputEvent) -> void:
 				else:
 					Global.camera.zoom_camera(1)
 
-	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && (["Pencil", "Eraser", "LightenDarken"].has(Global.current_left_tool) || ["Pencil", "Eraser", "LightenDarken"].has(Global.current_right_tool)):
+	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && ([Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_left_tool) || [Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_right_tool)):
 		is_making_line = true
 		line_2d.set_point_position(0, previous_mouse_pos_for_lines)
 	elif Input.is_action_just_released("shift"):

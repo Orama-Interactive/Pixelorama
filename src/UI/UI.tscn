@@ -59,7 +59,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tools" type="VBoxContainer" parent="ToolPanel/PanelContainer"]
+[node name="ToolButtons" type="VBoxContainer" parent="ToolPanel/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
@@ -69,7 +69,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RectSelect" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="RectSelect" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_right = 32.0
@@ -78,7 +78,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/RectSelect"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/RectSelect"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 12 )
@@ -86,7 +86,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Zoom" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="Zoom" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 36.0
@@ -96,7 +96,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Zoom"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/Zoom"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 21 )
@@ -104,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorPicker" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="ColorPicker" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 72.0
@@ -114,7 +114,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/ColorPicker"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/ColorPicker"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 11 )
@@ -122,7 +122,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pencil" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="Pencil" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 108.0
@@ -132,7 +132,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Pencil"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/Pencil"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 14 )
@@ -140,7 +140,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Eraser" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="Eraser" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 144.0
@@ -150,7 +150,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Eraser"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/Eraser"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 13 )
@@ -158,7 +158,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bucket" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="Bucket" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 180.0
@@ -168,7 +168,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/Bucket"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/Bucket"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 10 )
@@ -176,7 +176,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LightenDarken" type="Button" parent="ToolPanel/PanelContainer/Tools" groups=[
+[node name="LightenDarken" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 216.0
@@ -186,7 +186,7 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/Tools/LightenDarken"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/LightenDarken"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 15 )
