@@ -39,7 +39,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				color.a *= (1.0 - pen_pressure)
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
-			brush_type = Global.current_left_brush_type
+			brush_type = Global.current_brush_type[0]
 			brush_index = Global.custom_left_brush_index
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
 				custom_brush_image = Global.custom_left_brush_image
@@ -50,7 +50,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
 				var custom_brush_size = custom_brush_image.get_size()
 				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
-				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.left_interpolate_spinbox.value / 100)
+				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[0].value / 100)
 				custom_brush_image.lock()
 
 			horizontal_mirror = Global.left_horizontal_mirror
@@ -61,7 +61,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 		elif current_mouse_button == "right_mouse":
 			brush_size = Global.right_brush_size
-			brush_type = Global.current_right_brush_type
+			brush_type = Global.current_brush_type[1]
 			brush_index = Global.custom_right_brush_index
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
 				custom_brush_image = Global.custom_right_brush_image
@@ -72,7 +72,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
 				var custom_brush_size = custom_brush_image.get_size()
 				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
-				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.right_interpolate_spinbox.value / 100)
+				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[1].value / 100)
 				custom_brush_image.lock()
 
 			horizontal_mirror = Global.right_horizontal_mirror

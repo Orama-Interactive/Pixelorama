@@ -1,9 +1,11 @@
 extends Node
 
+
 enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 enum Direction {UP, DOWN, LEFT, RIGHT}
+enum Mouse_Button {LEFT, RIGHT}
 enum Tools {PENCIL, ERASER, BUCKET, LIGHTENDARKEN, RECTSELECT, COLORPICKER, ZOOM}
 
 # Stuff for arrowkey-based canvas movements nyaa ^.^
@@ -87,9 +89,8 @@ var right_ld := 0
 var left_ld_amount := 0.1
 var right_ld_amount := 0.1
 
-# 0 for the left, 1 for the right
-var left_color_picker_for := 0
-var right_color_picker_for := 1
+var left_color_picker_for : int = Mouse_Button.LEFT
+var right_color_picker_for : int = Mouse_Button.RIGHT
 
 # 0 for zoom in, 1 for zoom out
 var left_zoom_mode := 0
@@ -119,8 +120,7 @@ var onion_skinning_blue_red := false
 # Brushes
 var left_brush_size := 1
 var right_brush_size := 1
-var current_left_brush_type = Brush_Types.PIXEL
-var current_right_brush_type = Brush_Types.PIXEL
+var current_brush_type := []
 
 var brush_type_window_position := "left"
 var left_circle_points := []
@@ -173,58 +173,40 @@ var import_sprites_dialog : FileDialog
 var export_dialog : AcceptDialog
 var preferences_dialog : AcceptDialog
 
-var left_color_picker : ColorPickerButton
-var right_color_picker : ColorPickerButton
+var color_pickers := []
 
 var color_switch_button : BaseButton
 
-var left_tool_options_container : Container
-var right_tool_options_container : Container
+var tool_options_containers := []
 
-var left_brush_type_container : Container
-var right_brush_type_container : Container
-var left_brush_type_button : BaseButton
-var right_brush_type_button : BaseButton
+var brush_type_containers := []
+var brush_type_buttons := []
 var brushes_popup : Popup
 var file_brush_container : GridContainer
 var project_brush_container : GridContainer
 var patterns_popup : Popup
 
-var left_brush_size_edit : SpinBox
-var left_brush_size_slider : HSlider
-var right_brush_size_edit : SpinBox
-var right_brush_size_slider : HSlider
+var brush_size_edits := []
+var brush_size_sliders := []
 
-var left_pixel_perfect_container : VBoxContainer
-var right_pixel_perfect_container : VBoxContainer
+var pixel_perfect_containers := []
 
-var left_color_interpolation_container : Container
-var right_color_interpolation_container : Container
-var left_interpolate_spinbox : SpinBox
-var left_interpolate_slider : HSlider
-var right_interpolate_spinbox : SpinBox
-var right_interpolate_slider : HSlider
+var color_interpolation_containers := []
+var interpolate_spinboxes := []
+var interpolate_sliders := []
 
-var left_fill_area_container : Container
-var left_fill_pattern_container : Container
-var right_fill_area_container : Container
-var right_fill_pattern_container : Container
+var fill_area_containers := []
+var fill_pattern_containers := []
 
-var left_ld_container : Container
-var left_ld_amount_slider : HSlider
-var left_ld_amount_spinbox : SpinBox
-var right_ld_container : Container
-var right_ld_amount_slider : HSlider
-var right_ld_amount_spinbox : SpinBox
+var ld_containers := []
+var ld_amount_sliders := []
+var ld_amount_spinboxes := []
 
-var left_colorpicker_container : Container
-var right_colorpicker_container : Container
+var colorpicker_containers := []
 
-var left_zoom_container : Container
-var right_zoom_container : Container
+var zoom_containers := []
 
-var left_mirror_container : Container
-var right_mirror_container : Container
+var mirror_containers := []
 
 var animation_timeline : Panel
 
@@ -276,6 +258,8 @@ func _ready() -> void:
 
 	undo_redo = UndoRedo.new()
 	image_clipboard = Image.new()
+	current_brush_type.append(Brush_Types.PIXEL)
+	current_brush_type.append(Brush_Types.PIXEL)
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
@@ -311,57 +295,57 @@ func _ready() -> void:
 	export_dialog = find_node_by_name(root, "ExportDialog")
 	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
 
-	left_tool_options_container = find_node_by_name(root, "LeftToolOptions")
-	right_tool_options_container = find_node_by_name(root, "RightToolOptions")
+	tool_options_containers.append(find_node_by_name(root, "LeftToolOptions"))
+	tool_options_containers.append(find_node_by_name(root, "RightToolOptions"))
 
-	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
-	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	color_pickers.append(find_node_by_name(root, "LeftColorPickerButton"))
+	color_pickers.append(find_node_by_name(root, "RightColorPickerButton"))
 	color_switch_button = find_node_by_name(root, "ColorSwitch")
 
-	left_brush_type_container = find_node_by_name(left_tool_options_container, "LeftBrushType")
-	right_brush_type_container = find_node_by_name(right_tool_options_container, "RightBrushType")
-	left_brush_type_button = find_node_by_name(left_brush_type_container, "LeftBrushTypeButton")
-	right_brush_type_button = find_node_by_name(right_brush_type_container, "RightBrushTypeButton")
+	brush_type_containers.append(find_node_by_name(tool_options_containers[0], "LeftBrushType"))
+	brush_type_containers.append(find_node_by_name(tool_options_containers[1], "RightBrushType"))
+	brush_type_buttons.append(find_node_by_name(brush_type_containers[0], "LeftBrushTypeButton"))
+	brush_type_buttons.append(find_node_by_name(brush_type_containers[1], "RightBrushTypeButton"))
 	brushes_popup = find_node_by_name(root, "BrushesPopup")
 	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
 	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 	patterns_popup = find_node_by_name(root, "PatternsPopup")
 
-	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
-	left_brush_size_slider = find_node_by_name(root, "LeftBrushSizeSlider")
-	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
-	right_brush_size_slider = find_node_by_name(root, "RightBrushSizeSlider")
+	brush_size_edits.append(find_node_by_name(root, "LeftBrushSizeEdit"))
+	brush_size_sliders.append(find_node_by_name(root, "LeftBrushSizeSlider"))
+	brush_size_edits.append(find_node_by_name(root, "RightBrushSizeEdit"))
+	brush_size_sliders.append(find_node_by_name(root, "RightBrushSizeSlider"))
 
-	left_pixel_perfect_container = find_node_by_name(root, "LeftBrushPixelPerfectMode")
-	right_pixel_perfect_container = find_node_by_name(root, "RightBrushPixelPerfectMode")
+	pixel_perfect_containers.append(find_node_by_name(root, "LeftBrushPixelPerfectMode"))
+	pixel_perfect_containers.append(find_node_by_name(root, "RightBrushPixelPerfectMode"))
 
-	left_color_interpolation_container = find_node_by_name(root, "LeftColorInterpolation")
-	right_color_interpolation_container = find_node_by_name(root, "RightColorInterpolation")
-	left_interpolate_spinbox = find_node_by_name(root, "LeftInterpolateFactor")
-	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateSlider")
-	right_interpolate_spinbox = find_node_by_name(root, "RightInterpolateFactor")
-	right_interpolate_slider = find_node_by_name(root, "RightInterpolateSlider")
+	color_interpolation_containers.append(find_node_by_name(root, "LeftColorInterpolation"))
+	color_interpolation_containers.append(find_node_by_name(root, "RightColorInterpolation"))
+	interpolate_spinboxes.append(find_node_by_name(root, "LeftInterpolateFactor"))
+	interpolate_sliders.append(find_node_by_name(root, "LeftInterpolateSlider"))
+	interpolate_spinboxes.append(find_node_by_name(root, "RightInterpolateFactor"))
+	interpolate_sliders.append(find_node_by_name(root, "RightInterpolateSlider"))
 
-	left_fill_area_container = find_node_by_name(root, "LeftFillArea")
-	left_fill_pattern_container = find_node_by_name(root, "LeftFillPattern")
-	right_fill_area_container = find_node_by_name(root, "RightFillArea")
-	right_fill_pattern_container = find_node_by_name(root, "RightFillPattern")
+	fill_area_containers.append(find_node_by_name(root, "LeftFillArea"))
+	fill_pattern_containers.append(find_node_by_name(root, "LeftFillPattern"))
+	fill_area_containers.append(find_node_by_name(root, "RightFillArea"))
+	fill_pattern_containers.append(find_node_by_name(root, "RightFillPattern"))
 
-	left_ld_container = find_node_by_name(root, "LeftLDOptions")
-	left_ld_amount_slider = find_node_by_name(root, "LeftLDAmountSlider")
-	left_ld_amount_spinbox = find_node_by_name(root, "LeftLDAmountSpinbox")
-	right_ld_container = find_node_by_name(root, "RightLDOptions")
-	right_ld_amount_slider = find_node_by_name(root, "RightLDAmountSlider")
-	right_ld_amount_spinbox = find_node_by_name(root, "RightLDAmountSpinbox")
+	ld_containers.append(find_node_by_name(root, "LeftLDOptions"))
+	ld_amount_sliders.append(find_node_by_name(root, "LeftLDAmountSlider"))
+	ld_amount_spinboxes.append(find_node_by_name(root, "LeftLDAmountSpinbox"))
+	ld_containers.append(find_node_by_name(root, "RightLDOptions"))
+	ld_amount_sliders.append(find_node_by_name(root, "RightLDAmountSlider"))
+	ld_amount_spinboxes.append(find_node_by_name(root, "RightLDAmountSpinbox"))
 
-	left_colorpicker_container = find_node_by_name(root, "LeftColorPickerOptions")
-	right_colorpicker_container = find_node_by_name(root, "RightColorPickerOptions")
+	colorpicker_containers.append(find_node_by_name(root, "LeftColorPickerOptions"))
+	colorpicker_containers.append(find_node_by_name(root, "RightColorPickerOptions"))
 
-	left_zoom_container = find_node_by_name(root, "LeftZoomOptions")
-	right_zoom_container = find_node_by_name(root, "RightZoomOptions")
+	zoom_containers.append(find_node_by_name(root, "LeftZoomOptions"))
+	zoom_containers.append(find_node_by_name(root, "RightZoomOptions"))
 
-	left_mirror_container = find_node_by_name(root, "LeftMirrorButtons")
-	right_mirror_container = find_node_by_name(root, "RightMirrorButtons")
+	mirror_containers.append(find_node_by_name(root, "LeftMirrorButtons"))
+	mirror_containers.append(find_node_by_name(root, "RightMirrorButtons"))
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 
@@ -859,8 +843,8 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 
 
 func remove_brush_buttons() -> void:
-	current_left_brush_type = Brush_Types.PIXEL
-	current_right_brush_type = Brush_Types.PIXEL
+	current_brush_type[0] = Brush_Types.PIXEL
+	current_brush_type[1] = Brush_Types.PIXEL
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
@@ -882,55 +866,55 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 
 
 func update_left_custom_brush() -> void:
-	if current_left_brush_type == Brush_Types.PIXEL:
+	if current_brush_type[0] == Brush_Types.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/pixel_image.png")
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-	elif current_left_brush_type == Brush_Types.CIRCLE:
+		brush_type_buttons[0].get_child(0).texture.create_from_image(pixel, 0)
+	elif current_brush_type[0] == Brush_Types.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_9x9.png")
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		brush_type_buttons[0].get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
-	elif current_left_brush_type == Brush_Types.FILLED_CIRCLE:
+	elif current_brush_type[0] == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		brush_type_buttons[0].get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(left_brush_size)
 	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_spinbox.value / 100)
+		custom_left_brush_image = blend_image_with_color(custom_brush, color_pickers[0].color, interpolate_spinboxes[0].value / 100)
 		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
 
-		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
+		brush_type_buttons[0].get_child(0).texture = custom_left_brush_texture
 
 
 func update_right_custom_brush() -> void:
-	if current_right_brush_type == Brush_Types.PIXEL:
+	if current_brush_type[1] == Brush_Types.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/pixel_image.png")
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-	elif current_right_brush_type == Brush_Types.CIRCLE:
+		brush_type_buttons[1].get_child(0).texture.create_from_image(pixel, 0)
+	elif current_brush_type[1] == Brush_Types.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_9x9.png")
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		brush_type_buttons[1].get_child(0).texture.create_from_image(pixel, 0)
 		right_circle_points = plot_circle(right_brush_size)
-	elif current_right_brush_type == Brush_Types.FILLED_CIRCLE:
+	elif current_brush_type[1] == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
+		brush_type_buttons[1].get_child(0).texture.create_from_image(pixel, 0)
 		right_circle_points = plot_circle(right_brush_size)
 	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_spinbox.value / 100)
+		custom_right_brush_image = blend_image_with_color(custom_brush, color_pickers[1].color, interpolate_spinboxes[1].value / 100)
 		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
 
-		right_brush_type_button.get_child(0).texture = custom_right_brush_texture
+		brush_type_buttons[1].get_child(0).texture = custom_right_brush_texture
 
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:

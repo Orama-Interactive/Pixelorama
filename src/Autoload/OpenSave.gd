@@ -128,19 +128,19 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	Global.current_frame = frame - 1
 	Global.layers = Global.layers # Just to call Global.layers_changed
 	# Load tool options
-	Global.left_color_picker.color = file.get_var()
-	Global.right_color_picker.color = file.get_var()
+	Global.color_pickers[0].color = file.get_var()
+	Global.color_pickers[1].color = file.get_var()
 	Global.left_brush_size = file.get_8()
-	Global.left_brush_size_edit.value = Global.left_brush_size
+	Global.brush_size_edits[0].value = Global.left_brush_size
 	Global.right_brush_size = file.get_8()
-	Global.right_brush_size_edit.value = Global.right_brush_size
+	Global.brush_size_edits[1].value = Global.right_brush_size
 	if file_major_version == 0 and file_minor_version < 7:
 		var left_palette = file.get_var()
 		var right_palette = file.get_var()
 		for color in left_palette:
-			Global.left_color_picker.get_picker().add_preset(color)
+			Global.color_pickers[0].get_picker().add_preset(color)
 		for color in right_palette:
-			Global.right_color_picker.get_picker().add_preset(color)
+			Global.color_pickers[1].get_picker().add_preset(color)
 
 	# Load custom brushes
 	Global.custom_brushes.resize(Global.brushes_from_files)
@@ -224,8 +224,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		file.store_line("END_FRAMES")
 
 		# Save tool options
-		var left_color : Color = Global.left_color_picker.color
-		var right_color : Color = Global.right_color_picker.color
+		var left_color : Color = Global.color_pickers[0].color
+		var right_color : Color = Global.color_pickers[1].color
 		var left_brush_size : int = Global.left_brush_size
 		var right_brush_size : int = Global.right_brush_size
 		file.store_var(left_color)

@@ -36,78 +36,51 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 	var current_tool : int = Global.Tools.keys().find(current_action.to_upper())
 	var left_tool_name := str(Global.Tools.keys()[Global.current_left_tool]).to_lower()
 	var right_tool_name := str(Global.Tools.keys()[Global.current_right_tool]).to_lower()
+	var current_mouse_button := -1
+
 	if (mouse_press and Input.is_action_just_released("left_mouse")) or (!mouse_press and key_for_left):
 		Global.current_left_tool = current_tool
 		left_tool_name = current_action.to_lower()
-
-		# Start from 1, so the label won't get invisible
-		for i in range(1, Global.left_tool_options_container.get_child_count()):
-			Global.left_tool_options_container.get_child(i).visible = false
-
-		Global.left_tool_options_container.get_node("EmptySpacer").visible = true
-
-		# Tool options visible depending on the selected tool
-		if current_tool == Global.Tools.PENCIL:
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
-			Global.left_pixel_perfect_container.visible = true
-			Global.left_mirror_container.visible = true
-			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
-				Global.left_color_interpolation_container.visible = true
-		elif current_tool == Global.Tools.ERASER:
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
-			Global.left_pixel_perfect_container.visible = true
-			Global.left_mirror_container.visible = true
-		elif current_tool == Global.Tools.BUCKET:
-			Global.left_fill_area_container.visible = true
-			Global.left_mirror_container.visible = true
-		elif current_tool == Global.Tools.LIGHTENDARKEN:
-			Global.left_brush_type_container.visible = true
-			Global.left_brush_size_slider.visible = true
-			Global.left_pixel_perfect_container.visible = true
-			Global.left_ld_container.visible = true
-			Global.left_mirror_container.visible = true
-		elif current_tool == Global.Tools.COLORPICKER:
-			Global.left_colorpicker_container.visible = true
-		elif current_tool == Global.Tools.ZOOM:
-			Global.left_zoom_container.visible = true
+		current_mouse_button = Global.Mouse_Button.LEFT
 
 	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
 		Global.current_right_tool = current_tool
 		right_tool_name = current_action.to_lower()
-		# Start from 1, so the label won't get invisible
-		for i in range(1, Global.right_tool_options_container.get_child_count()):
-			Global.right_tool_options_container.get_child(i).visible = false
+		current_mouse_button = Global.Mouse_Button.RIGHT
 
-		Global.right_tool_options_container.get_node("EmptySpacer").visible = true
+	if current_mouse_button != -1:
+		# Start from 1, so the label won't get invisible
+		for i in range(1, Global.tool_options_containers[current_mouse_button].get_child_count()):
+			Global.tool_options_containers[current_mouse_button].get_child(i).visible = false
+
+		Global.tool_options_containers[current_mouse_button].get_node("EmptySpacer").visible = true
 
 		# Tool options visible depending on the selected tool
 		if current_tool == Global.Tools.PENCIL:
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
-			Global.right_pixel_perfect_container.visible = true
-			Global.right_mirror_container.visible = true
-			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
-				Global.right_color_interpolation_container.visible = true
+			Global.brush_type_containers[current_mouse_button].visible = true
+			Global.brush_size_sliders[current_mouse_button].visible = true
+			Global.pixel_perfect_containers[current_mouse_button].visible = true
+			Global.mirror_containers[current_mouse_button].visible = true
+			if Global.current_brush_type[current_mouse_button] == Global.Brush_Types.FILE or Global.current_brush_type[current_mouse_button] == Global.Brush_Types.CUSTOM or Global.current_brush_type[current_mouse_button] == Global.Brush_Types.RANDOM_FILE:
+				Global.color_interpolation_containers[current_mouse_button].visible = true
 		elif current_tool == Global.Tools.ERASER:
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
-			Global.right_pixel_perfect_container.visible = true
-			Global.right_mirror_container.visible = true
+			Global.brush_type_containers[current_mouse_button].visible = true
+			Global.brush_size_sliders[current_mouse_button].visible = true
+			Global.pixel_perfect_containers[current_mouse_button].visible = true
+			Global.mirror_containers[current_mouse_button].visible = true
 		elif current_tool == Global.Tools.BUCKET:
-			Global.right_fill_area_container.visible = true
-			Global.right_mirror_container.visible = true
+			Global.fill_area_containers[current_mouse_button].visible = true
+			Global.mirror_containers[current_mouse_button].visible = true
 		elif current_tool == Global.Tools.LIGHTENDARKEN:
-			Global.right_brush_type_container.visible = true
-			Global.right_brush_size_slider.visible = true
-			Global.right_pixel_perfect_container.visible = true
-			Global.right_ld_container.visible = true
-			Global.right_mirror_container.visible = true
+			Global.brush_type_containers[current_mouse_button].visible = true
+			Global.brush_size_sliders[current_mouse_button].visible = true
+			Global.pixel_perfect_containers[current_mouse_button].visible = true
+			Global.ld_containers[current_mouse_button].visible = true
+			Global.mirror_containers[current_mouse_button].visible = true
 		elif current_tool == Global.Tools.COLORPICKER:
-			Global.right_colorpicker_container.visible = true
+			Global.colorpicker_containers[current_mouse_button].visible = true
 		elif current_tool == Global.Tools.ZOOM:
-			Global.right_zoom_container.visible = true
+			Global.zoom_containers[current_mouse_button].visible = true
 
 	for t in tools:
 		var tool_name : String = t[0].name.to_lower()

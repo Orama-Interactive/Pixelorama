@@ -171,12 +171,12 @@ func _draw() -> void:
 	var mouse_pos := current_pixel
 	mouse_pos = mouse_pos.floor()
 	if Global.left_square_indicator_visible && Global.can_draw:
-		if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
+		if Global.current_brush_type[0] == Global.Brush_Types.PIXEL || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
 			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
 				var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
 				var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 				draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
-		elif Global.current_left_brush_type == Global.Brush_Types.CIRCLE || Global.current_left_brush_type == Global.Brush_Types.FILLED_CIRCLE:
+		elif Global.current_brush_type[0] == Global.Brush_Types.CIRCLE || Global.current_brush_type[0] == Global.Brush_Types.FILLED_CIRCLE:
 			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER:
 				draw_set_transform(mouse_pos, rotation, scale)
 				for rect in Global.left_circle_points:
@@ -189,12 +189,12 @@ func _draw() -> void:
 				draw_texture(Global.custom_left_brush_texture, dst)
 
 	if Global.right_square_indicator_visible && Global.can_draw:
-		if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
+		if Global.current_brush_type[1] == Global.Brush_Types.PIXEL || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
 			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
 				var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
 				var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 				draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
-		elif Global.current_right_brush_type == Global.Brush_Types.CIRCLE || Global.current_right_brush_type == Global.Brush_Types.FILLED_CIRCLE:
+		elif Global.current_brush_type[1] == Global.Brush_Types.CIRCLE || Global.current_brush_type[1] == Global.Brush_Types.FILLED_CIRCLE:
 			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER:
 				draw_set_transform(mouse_pos, rotation, scale)
 				for rect in Global.right_circle_points:
@@ -274,7 +274,7 @@ func _input(event : InputEvent) -> void:
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = "left_mouse"
 		current_action = Global.current_left_tool
-		current_color = Global.left_color_picker.color
+		current_color = Global.color_pickers[0].color
 		fill_area = Global.left_fill_area
 		ld = Global.left_ld
 		ld_amount = Global.left_ld_amount
@@ -284,7 +284,7 @@ func _input(event : InputEvent) -> void:
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = "right_mouse"
 		current_action = Global.current_right_tool
-		current_color = Global.right_color_picker.color
+		current_color = Global.color_pickers[1].color
 		fill_area = Global.right_fill_area
 		ld = Global.right_ld
 		ld_amount = Global.right_ld_amount
@@ -440,10 +440,10 @@ func _input(event : InputEvent) -> void:
 				image_data.lock()
 				var pixel_color : Color = image_data.get_pixelv(mouse_pos)
 				if color_picker_for == 0: # Pick for the left color
-					Global.left_color_picker.color = pixel_color
+					Global.color_pickers[0].color = pixel_color
 					Global.update_left_custom_brush()
 				elif color_picker_for == 1: # Pick for the left color
-					Global.right_color_picker.color = pixel_color
+					Global.color_pickers[1].color = pixel_color
 					Global.update_right_custom_brush()
 		Global.Tools.ZOOM:
 			if can_handle:
