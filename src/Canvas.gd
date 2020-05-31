@@ -13,7 +13,7 @@ var previous_mouse_pos := Vector2.ZERO
 var previous_mouse_pos_for_lines := Vector2.ZERO
 var can_undo := true
 var cursor_inside_canvas := false
-var previous_action := "None"
+var previous_action := -1
 var west_limit := location.x
 var east_limit := location.x + size.x
 var north_limit := location.y
@@ -171,37 +171,37 @@ func _draw() -> void:
 	var mouse_pos := current_pixel
 	mouse_pos = mouse_pos.floor()
 	if Global.left_square_indicator_visible && Global.can_draw:
-		if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == "LightenDarken":
-			if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser" || Global.current_left_tool == "LightenDarken":
+		if Global.current_left_brush_type == Global.Brush_Types.PIXEL || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
+			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
 				var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
 				var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
 				draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
 		elif Global.current_left_brush_type == Global.Brush_Types.CIRCLE || Global.current_left_brush_type == Global.Brush_Types.FILLED_CIRCLE:
-			if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER:
 				draw_set_transform(mouse_pos, rotation, scale)
 				for rect in Global.left_circle_points:
 					draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
 				draw_set_transform(position, rotation, scale)
 		else:
-			if Global.current_left_tool == "Pencil" || Global.current_left_tool == "Eraser":
+			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER:
 				var custom_brush_size = Global.custom_left_brush_image.get_size()  - Vector2.ONE
 				var dst := rectangle_center(mouse_pos, custom_brush_size)
 				draw_texture(Global.custom_left_brush_texture, dst)
 
 	if Global.right_square_indicator_visible && Global.can_draw:
-		if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == "LightenDarken":
-			if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser" || Global.current_right_tool == "LightenDarken":
+		if Global.current_right_brush_type == Global.Brush_Types.PIXEL || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
+			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
 				var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
 				var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
 				draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
 		elif Global.current_right_brush_type == Global.Brush_Types.CIRCLE || Global.current_right_brush_type == Global.Brush_Types.FILLED_CIRCLE:
-			if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER:
 				draw_set_transform(mouse_pos, rotation, scale)
 				for rect in Global.right_circle_points:
 					draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
 				draw_set_transform(position, rotation, scale)
 		else:
-			if Global.current_right_tool == "Pencil" || Global.current_right_tool == "Eraser":
+			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER:
 				var custom_brush_size = Global.custom_right_brush_image.get_size()  - Vector2.ONE
 				var dst := rectangle_center(mouse_pos, custom_brush_size)
 				draw_texture(Global.custom_right_brush_texture, dst)
@@ -252,7 +252,7 @@ func _input(event : InputEvent) -> void:
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
 	var current_mouse_button := "None"
-	var current_action := "None"
+	var current_action := -1
 	var current_color : Color
 	var fill_area := 0 # For the bucket tool
 	# For the LightenDarken tool
@@ -318,22 +318,22 @@ func _input(event : InputEvent) -> void:
 
 	if mouse_pressed:
 		if can_handle || is_making_line:
-			if current_action != "None" && current_action != "ColorPicker" && current_action != "Zoom":
-				if current_action == "RectSelect":
+			if current_action != -1 && current_action != Global.Tools.COLORPICKER && current_action != Global.Tools.ZOOM:
+				if current_action == Global.Tools.RECTSELECT:
 					handle_undo("Rectangle Select")
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		if can_handle || Global.undos == Global.undo_redo.get_version():
-			if previous_action != "None" && previous_action != "RectSelect" && current_action != "ColorPicker" && current_action != "Zoom":
+			if previous_action != -1 && previous_action != Global.Tools.RECTSELECT && current_action != Global.Tools.COLORPICKER && current_action != Global.Tools.ZOOM:
 				handle_redo("Draw")
 
 	match current_action: # Handle current tool
-		"Pencil":
+		Global.Tools.PENCIL:
 			pencil_and_eraser(sprite, mouse_pos, current_color, current_mouse_button, current_action)
-		"Eraser":
+		Global.Tools.ERASER:
 			pencil_and_eraser(sprite, mouse_pos, Color(0, 0, 0, 0), current_mouse_button, current_action)
-		"Bucket":
+		Global.Tools.BUCKET:
 			if can_handle:
 				var fill_with := 0
 				var pattern_image : Image
@@ -399,7 +399,7 @@ func _input(event : InputEvent) -> void:
 								else:
 									sprite.set_pixel(xx, yy, current_color)
 					sprite_changed_this_frame = true
-		"LightenDarken":
+		Global.Tools.LIGHTENDARKEN:
 			if can_handle:
 				var pixel_color : Color = sprite.get_pixelv(mouse_pos)
 				var color_changed : Color
@@ -408,7 +408,7 @@ func _input(event : InputEvent) -> void:
 				else: # Darken
 					color_changed = pixel_color.darkened(ld_amount)
 				pencil_and_eraser(sprite, mouse_pos, color_changed, current_mouse_button, current_action)
-		"RectSelect":
+		Global.Tools.RECTSELECT:
 			# Check SelectionRectangle.gd for more code on Rectangle Selection
 			if Global.can_draw && Global.has_focus:
 				# If we're creating a new selection
@@ -432,7 +432,7 @@ func _input(event : InputEvent) -> void:
 								Global.selection_rectangle.polygon[1] = Vector2(end_pos.x, start_pos.y)
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
-		"ColorPicker":
+		Global.Tools.COLORPICKER:
 			if can_handle:
 				var image_data := Image.new()
 				image_data.copy_from(sprite)
@@ -444,7 +444,7 @@ func _input(event : InputEvent) -> void:
 				elif color_picker_for == 1: # Pick for the left color
 					Global.right_color_picker.color = pixel_color
 					Global.update_right_custom_brush()
-		"Zoom":
+		Global.Tools.ZOOM:
 			if can_handle:
 				if zoom_mode == 0:
 					Global.camera.zoom_camera(-1)
@@ -580,7 +580,7 @@ func update_texture(layer_index : int) -> void:
 	frame_texture_rect.texture = layers[layer_index][1]
 
 
-func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := "None") -> void:
+func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, current_mouse_button : String, current_action := -1) -> void:
 	if made_line:
 		return
 	if is_making_line:

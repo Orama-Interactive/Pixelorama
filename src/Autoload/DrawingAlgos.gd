@@ -14,7 +14,7 @@ var mouse_press_pixels := [] # Cleared after mouse release
 var mouse_press_pressure_values := [] # Cleared after mouse release
 
 
-func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := "None") -> void:
+func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := -1) -> void:
 	if Global.can_draw && Global.has_focus:
 		var west_limit = Global.canvas.west_limit
 		var east_limit = Global.canvas.east_limit
@@ -33,9 +33,9 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		var ld := 0
 		var ld_amount := 0.1
 		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
-			if current_action == "Pencil":
+			if current_action == Global.Tools.PENCIL:
 				color.a *= pen_pressure
-			elif current_action == "Eraser": # This is not working
+			elif current_action == Global.Tools.ERASER: # This is not working
 				color.a *= (1.0 - pen_pressure)
 		if current_mouse_button == "left_mouse":
 			brush_size = Global.left_brush_size
@@ -86,7 +86,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		var end_pos_x
 		var end_pos_y
 
-		if brush_type == Global.Brush_Types.PIXEL || current_action == "LightenDarken":
+		if brush_type == Global.Brush_Types.PIXEL || current_action == Global.Tools.LIGHTENDARKEN:
 			var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
 			var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
 			var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
@@ -103,12 +103,12 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 						# Don't draw the same pixel over and over and don't re-lighten/darken it
 						var current_pixel_color : Color = sprite.get_pixel(cur_pos_x, cur_pos_y)
 						var _c := color
-						if current_action == "Pencil" && color.a < 1:
+						if current_action == Global.Tools.PENCIL && color.a < 1:
 							_c = DrawingAlgos.blend_colors(color, current_pixel_color)
 
 						var saved_pixel_index = DrawingAlgos.mouse_press_pixels.find(pos_floored)
 						if current_pixel_color != _c && (saved_pixel_index == -1 || pen_pressure > DrawingAlgos.mouse_press_pressure_values[saved_pixel_index]):
-							if current_action == "LightenDarken":
+							if current_action == Global.Tools.LIGHTENDARKEN:
 								_c = current_pixel_color
 								if _c.a > 0:
 									if ld == 0: # Lighten
@@ -129,7 +129,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 							if horizontal_mirror:
 								current_pixel_color = sprite.get_pixel(mirror_x, cur_pos_y)
 								if current_pixel_color != _c: # don't draw the same pixel over and over
-									if current_action == "LightenDarken":
+									if current_action == Global.Tools.LIGHTENDARKEN:
 										if ld == 0: # Lighten
 											_c = current_pixel_color.lightened(ld_amount)
 										else:
@@ -142,7 +142,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 							if vertical_mirror:
 								current_pixel_color = sprite.get_pixel(cur_pos_x, mirror_y)
 								if current_pixel_color != _c: # don't draw the same pixel over and over
-									if current_action == "LightenDarken":
+									if current_action == Global.Tools.LIGHTENDARKEN:
 										if ld == 0: # Lighten
 											_c = current_pixel_color.lightened(ld_amount)
 										else:
@@ -154,7 +154,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 							if horizontal_mirror && vertical_mirror:
 								current_pixel_color = sprite.get_pixel(mirror_x, mirror_y)
 								if current_pixel_color != _c: # don't draw the same pixel over and over
-									if current_action == "LightenDarken":
+									if current_action == Global.Tools.LIGHTENDARKEN:
 										if ld == 0: # Lighten
 											_c = current_pixel_color.lightened(ld_amount)
 										else:
@@ -255,7 +255,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func fill_gaps(sprite : Image, end_pos : Vector2, start_pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := "None") -> void:
+func fill_gaps(sprite : Image, end_pos : Vector2, start_pos : Vector2, color : Color, current_mouse_button : String, pen_pressure : float, current_action := -1) -> void:
 	var previous_mouse_pos_floored = start_pos.floor()
 	var mouse_pos_floored = end_pos.floor()
 	var dx := int(abs(mouse_pos_floored.x - previous_mouse_pos_floored.x))
@@ -509,7 +509,6 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 
 
 func rotxel(sprite : Image, angle : float) -> void:
-
 	# If angle is simple, then nn rotation is the best
 
 	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:

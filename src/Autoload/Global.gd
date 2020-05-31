@@ -3,24 +3,19 @@ extends Node
 enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
-
-var root_directory := "."
-var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
-var config_cache := ConfigFile.new()
-var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
-var directory_module : Reference
+enum Direction {UP, DOWN, LEFT, RIGHT}
+enum Tools {PENCIL, ERASER, BUCKET, LIGHTENDARKEN, RECTSELECT, COLORPICKER, ZOOM}
 
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
 const high_speed_move_rate := 3750.0
 
-enum Direction {
-	UP = 0,
-	DOWN = 1,
-	LEFT = 2,
-	RIGHT = 3
-}
+var root_directory := "."
+var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
+var config_cache := ConfigFile.new()
+var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
+var directory_module : Reference
 
 # Indices are as in the Direction enum
 # This is the total time the key for
@@ -69,8 +64,8 @@ var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 
 # Tools & options
-var current_left_tool := "Pencil"
-var current_right_tool := "Eraser"
+var current_left_tool : int = Tools.PENCIL
+var current_right_tool :int = Tools.ERASER
 var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true

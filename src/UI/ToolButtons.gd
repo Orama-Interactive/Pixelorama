@@ -33,8 +33,12 @@ func _input(event : InputEvent) -> void:
 
 func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_left := true) -> void:
 	var current_action := tool_pressed.name
+	var current_tool : int = Global.Tools.keys().find(current_action.to_upper())
+	var left_tool_name := str(Global.Tools.keys()[Global.current_left_tool]).to_lower()
+	var right_tool_name := str(Global.Tools.keys()[Global.current_right_tool]).to_lower()
 	if (mouse_press and Input.is_action_just_released("left_mouse")) or (!mouse_press and key_for_left):
-		Global.current_left_tool = current_action
+		Global.current_left_tool = current_tool
+		left_tool_name = current_action.to_lower()
 
 		# Start from 1, so the label won't get invisible
 		for i in range(1, Global.left_tool_options_container.get_child_count()):
@@ -43,34 +47,35 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		Global.left_tool_options_container.get_node("EmptySpacer").visible = true
 
 		# Tool options visible depending on the selected tool
-		if current_action == "Pencil":
+		if current_tool == Global.Tools.PENCIL:
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
 			Global.left_pixel_perfect_container.visible = true
 			Global.left_mirror_container.visible = true
 			if Global.current_left_brush_type == Global.Brush_Types.FILE or Global.current_left_brush_type == Global.Brush_Types.CUSTOM or Global.current_left_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.left_color_interpolation_container.visible = true
-		elif current_action == "Eraser":
+		elif current_tool == Global.Tools.ERASER:
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
 			Global.left_pixel_perfect_container.visible = true
 			Global.left_mirror_container.visible = true
-		elif current_action == "Bucket":
+		elif current_tool == Global.Tools.BUCKET:
 			Global.left_fill_area_container.visible = true
 			Global.left_mirror_container.visible = true
-		elif current_action == "LightenDarken":
+		elif current_tool == Global.Tools.LIGHTENDARKEN:
 			Global.left_brush_type_container.visible = true
 			Global.left_brush_size_slider.visible = true
 			Global.left_pixel_perfect_container.visible = true
 			Global.left_ld_container.visible = true
 			Global.left_mirror_container.visible = true
-		elif current_action == "ColorPicker":
+		elif current_tool == Global.Tools.COLORPICKER:
 			Global.left_colorpicker_container.visible = true
-		elif current_action == "Zoom":
+		elif current_tool == Global.Tools.ZOOM:
 			Global.left_zoom_container.visible = true
 
 	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
-		Global.current_right_tool = current_action
+		Global.current_right_tool = current_tool
+		right_tool_name = current_action.to_lower()
 		# Start from 1, so the label won't get invisible
 		for i in range(1, Global.right_tool_options_container.get_child_count()):
 			Global.right_tool_options_container.get_child(i).visible = false
@@ -78,44 +83,44 @@ func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_le
 		Global.right_tool_options_container.get_node("EmptySpacer").visible = true
 
 		# Tool options visible depending on the selected tool
-		if current_action == "Pencil":
+		if current_tool == Global.Tools.PENCIL:
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
 			Global.right_pixel_perfect_container.visible = true
 			Global.right_mirror_container.visible = true
 			if Global.current_right_brush_type == Global.Brush_Types.FILE or Global.current_right_brush_type == Global.Brush_Types.CUSTOM or Global.current_right_brush_type == Global.Brush_Types.RANDOM_FILE:
 				Global.right_color_interpolation_container.visible = true
-		elif current_action == "Eraser":
+		elif current_tool == Global.Tools.ERASER:
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
 			Global.right_pixel_perfect_container.visible = true
 			Global.right_mirror_container.visible = true
-		elif current_action == "Bucket":
+		elif current_tool == Global.Tools.BUCKET:
 			Global.right_fill_area_container.visible = true
 			Global.right_mirror_container.visible = true
-		elif current_action == "LightenDarken":
+		elif current_tool == Global.Tools.LIGHTENDARKEN:
 			Global.right_brush_type_container.visible = true
 			Global.right_brush_size_slider.visible = true
 			Global.right_pixel_perfect_container.visible = true
 			Global.right_ld_container.visible = true
 			Global.right_mirror_container.visible = true
-		elif current_action == "ColorPicker":
+		elif current_tool == Global.Tools.COLORPICKER:
 			Global.right_colorpicker_container.visible = true
-		elif current_action == "Zoom":
+		elif current_tool == Global.Tools.ZOOM:
 			Global.right_zoom_container.visible = true
 
 	for t in tools:
-		var tool_name : String = t[0].name
+		var tool_name : String = t[0].name.to_lower()
 		var texture_button : TextureRect = t[0].get_child(0)
 
-		if tool_name == Global.current_left_tool and tool_name == Global.current_right_tool:
+		if tool_name == left_tool_name and tool_name == right_tool_name:
 			Global.change_button_texturerect(texture_button, "%s_l_r.png" % tool_name.to_lower())
-		elif tool_name == Global.current_left_tool:
+		elif tool_name == left_tool_name:
 			Global.change_button_texturerect(texture_button, "%s_l.png" % tool_name.to_lower())
-		elif tool_name == Global.current_right_tool:
+		elif tool_name == right_tool_name:
 			Global.change_button_texturerect(texture_button, "%s_r.png" % tool_name.to_lower())
 		else:
 			Global.change_button_texturerect(texture_button, "%s.png" % tool_name.to_lower())
 
-	Global.left_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_left_tool.to_lower()), 0)
-	Global.right_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % Global.current_right_tool.to_lower()), 0)
+	Global.left_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % left_tool_name), 0)
+	Global.right_cursor_tool_texture.create_from_image(load("res://assets/graphics/cursor_icons/%s_cursor.png" % right_tool_name), 0)
