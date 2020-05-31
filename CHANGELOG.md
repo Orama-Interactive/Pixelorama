@@ -20,6 +20,7 @@ Igor Santarek (jegor377), rob-a-bolton
 
 ### Fixed
 - Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files. ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
+- Fixed alpha blending and lighting/darkening issues when drawing pixels with mirroring.
 <br><br>
 
 ## [v0.7] - 2020-05-16

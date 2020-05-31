@@ -14,6 +14,31 @@ var mouse_press_pixels := [] # Cleared after mouse release
 var mouse_press_pressure_values := [] # Cleared after mouse release
 
 
+func draw_pixel(sprite : Image, pos : Vector2, color : Color, current_mouse_button : int, current_action : int, drawer : Drawer, pen_pressure : float) -> void:
+	var pos_floored := pos.floor()
+	var current_pixel_color = sprite.get_pixelv(pos)
+	if current_action == Global.Tools.PENCIL && color.a < 1:
+		color = blend_colors(color, current_pixel_color)
+
+	var saved_pixel_index = mouse_press_pixels.find(pos_floored)
+	# Don't draw the same pixel over and over and don't re-lighten/darken it
+	if current_pixel_color != color && (saved_pixel_index == -1 || pen_pressure > mouse_press_pressure_values[saved_pixel_index]): # Don't draw the same pixel over and over
+		if current_action == Global.Tools.LIGHTENDARKEN:
+			var ld : int = Global.ld_modes[current_mouse_button]
+			var ld_amount : float = Global.ld_amounts[current_mouse_button]
+			if ld == Global.Lighten_Darken_Mode.LIGHTEN:
+				color = current_pixel_color.lightened(ld_amount)
+			else:
+				color = current_pixel_color.darkened(ld_amount)
+
+		if saved_pixel_index == -1:
+			mouse_press_pixels.append(pos_floored)
+			mouse_press_pressure_values.append(pen_pressure)
+		else:
+			mouse_press_pressure_values[saved_pixel_index] = pen_pressure
+		drawer.set_pixel(sprite, pos, color)
+
+
 func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : int, pen_pressure : float, current_action := -1) -> void:
 	if Global.can_draw && Global.has_focus:
 		var west_limit = Global.canvas.west_limit
@@ -21,167 +46,76 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		var north_limit = Global.canvas.north_limit
 		var south_limit = Global.canvas.south_limit
 
-		var brush_size := 1
-		var brush_type = Global.Brush_Types.PIXEL
-		var brush_index := -1
-		var custom_brush_image : Image
-
-		var horizontal_mirror := false
-		var vertical_mirror := false
-		var pixel_perfect := false
-
-		var ld := 0
-		var ld_amount := 0.1
 		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
 			if current_action == Global.Tools.PENCIL:
 				color.a *= pen_pressure
 			elif current_action == Global.Tools.ERASER: # This is not working
 				color.a *= (1.0 - pen_pressure)
-		if current_mouse_button == Global.Mouse_Button.LEFT:
-			brush_size = Global.brush_sizes[0]
-			brush_type = Global.current_brush_types[0]
-			brush_index = Global.custom_brush_indexes[0]
-			if brush_type != Global.Brush_Types.RANDOM_FILE:
-				custom_brush_image = Global.custom_brush_images[0]
-			else: # Handle random brush
-				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
-				var random_index = randi() % brush_button.random_brushes.size()
-				custom_brush_image = Image.new()
-				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
-				var custom_brush_size = custom_brush_image.get_size()
-				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
-				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[0].value / 100)
-				custom_brush_image.lock()
 
-			horizontal_mirror = Global.horizontal_mirror[0]
-			vertical_mirror = Global.vertical_mirror[0]
-			pixel_perfect = Global.pixel_perfect[0]
-			ld = Global.ld_modes[0]
-			ld_amount = Global.ld_amounts[0]
+		var brush_size : int = Global.brush_sizes[current_mouse_button]
+		var brush_type : int = Global.current_brush_types[current_mouse_button]
+		var brush_index : int = Global.custom_brush_indexes[current_mouse_button]
 
-		elif current_mouse_button == Global.Mouse_Button.RIGHT:
-			brush_size = Global.brush_sizes[1]
-			brush_type = Global.current_brush_types[1]
-			brush_index = Global.custom_brush_indexes[1]
-			if brush_type != Global.Brush_Types.RANDOM_FILE:
-				custom_brush_image = Global.custom_brush_images[1]
-			else: # Handle random brush
-				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
-				var random_index = randi() % brush_button.random_brushes.size()
-				custom_brush_image = Image.new()
-				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
-				var custom_brush_size = custom_brush_image.get_size()
-				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
-				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[1].value / 100)
-				custom_brush_image.lock()
-
-			horizontal_mirror = Global.horizontal_mirror[1]
-			vertical_mirror = Global.vertical_mirror[1]
-			pixel_perfect = Global.pixel_perfect[1]
-			ld = Global.ld_modes[1]
-			ld_amount = Global.ld_amounts[1]
-
-		var start_pos_x
-		var start_pos_y
-		var end_pos_x
-		var end_pos_y
+		var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
+		var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
+		var pixel_perfect : bool = Global.pixel_perfect[current_mouse_button]
 
 		if brush_type == Global.Brush_Types.PIXEL || current_action == Global.Tools.LIGHTENDARKEN:
-			var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
-			var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
-			var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
-			var drawer_hv_mirror = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
+			var start_pos_x = pos.x - (brush_size >> 1)
+			var start_pos_y = pos.y - (brush_size >> 1)
+			var end_pos_x = start_pos_x + brush_size
+			var end_pos_y = start_pos_y + brush_size
 
-			start_pos_x = pos.x - (brush_size >> 1)
-			start_pos_y = pos.y - (brush_size >> 1)
-			end_pos_x = start_pos_x + brush_size
-			end_pos_y = start_pos_y + brush_size
 			for cur_pos_x in range(start_pos_x, end_pos_x):
 				for cur_pos_y in range(start_pos_y, end_pos_y):
 					if point_in_rectangle(Vector2(cur_pos_x, cur_pos_y), Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
-						var pos_floored := Vector2(cur_pos_x, cur_pos_y).floor()
-						# Don't draw the same pixel over and over and don't re-lighten/darken it
-						var current_pixel_color : Color = sprite.get_pixel(cur_pos_x, cur_pos_y)
-						var _c := color
-						if current_action == Global.Tools.PENCIL && color.a < 1:
-							_c = DrawingAlgos.blend_colors(color, current_pixel_color)
+						var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
+						draw_pixel(sprite, Vector2(cur_pos_x, cur_pos_y), color, current_mouse_button, current_action, drawer, pen_pressure)
 
-						var saved_pixel_index = DrawingAlgos.mouse_press_pixels.find(pos_floored)
-						if current_pixel_color != _c && (saved_pixel_index == -1 || pen_pressure > DrawingAlgos.mouse_press_pressure_values[saved_pixel_index]):
-							if current_action == Global.Tools.LIGHTENDARKEN:
-								_c = current_pixel_color
-								if _c.a > 0:
-									if ld == 0: # Lighten
-										_c = current_pixel_color.lightened(ld_amount)
-									else: # Darken
-										_c = current_pixel_color.darkened(ld_amount)
+						# Handle mirroring
+						var mirror_x = east_limit + west_limit - cur_pos_x - 1
+						var mirror_y = south_limit + north_limit - cur_pos_y - 1
+						if horizontal_mirror:
+							var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
+							draw_pixel(sprite, Vector2(mirror_x, cur_pos_y), color, current_mouse_button, current_action, drawer_h_mirror, pen_pressure)
+						if vertical_mirror:
+							var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
+							draw_pixel(sprite, Vector2(cur_pos_x, mirror_y), color, current_mouse_button, current_action, drawer_v_mirror, pen_pressure)
+						if horizontal_mirror && vertical_mirror:
+							var drawer_hv_mirror = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
+							draw_pixel(sprite, Vector2(mirror_x, mirror_y), color, current_mouse_button, current_action, drawer_hv_mirror, pen_pressure)
 
-							if saved_pixel_index == -1:
-								DrawingAlgos.mouse_press_pixels.append(pos_floored)
-								DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
-							else:
-								DrawingAlgos.mouse_press_pressure_values[saved_pixel_index] = pen_pressure
-							drawer.set_pixel(sprite, Vector2(cur_pos_x, cur_pos_y), _c)
-
-							# Handle mirroring
-							var mirror_x = east_limit + west_limit - cur_pos_x - 1
-							var mirror_y = south_limit + north_limit - cur_pos_y - 1
-							if horizontal_mirror:
-								current_pixel_color = sprite.get_pixel(mirror_x, cur_pos_y)
-								if current_pixel_color != _c: # don't draw the same pixel over and over
-									if current_action == Global.Tools.LIGHTENDARKEN:
-										if ld == 0: # Lighten
-											_c = current_pixel_color.lightened(ld_amount)
-										else:
-											_c = current_pixel_color.darkened(ld_amount)
-
-									DrawingAlgos.mouse_press_pixels.append(pos_floored)
-									DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
-									drawer_h_mirror.set_pixel(sprite, Vector2(mirror_x, cur_pos_y), _c)
-
-							if vertical_mirror:
-								current_pixel_color = sprite.get_pixel(cur_pos_x, mirror_y)
-								if current_pixel_color != _c: # don't draw the same pixel over and over
-									if current_action == Global.Tools.LIGHTENDARKEN:
-										if ld == 0: # Lighten
-											_c = current_pixel_color.lightened(ld_amount)
-										else:
-											_c = current_pixel_color.darkened(ld_amount)
-									DrawingAlgos.mouse_press_pixels.append(pos_floored)
-									DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
-									drawer_v_mirror.set_pixel(sprite, Vector2(cur_pos_x, mirror_y), _c)
-
-							if horizontal_mirror && vertical_mirror:
-								current_pixel_color = sprite.get_pixel(mirror_x, mirror_y)
-								if current_pixel_color != _c: # don't draw the same pixel over and over
-									if current_action == Global.Tools.LIGHTENDARKEN:
-										if ld == 0: # Lighten
-											_c = current_pixel_color.lightened(ld_amount)
-										else:
-											_c = current_pixel_color.darkened(ld_amount)
-
-									DrawingAlgos.mouse_press_pixels.append(pos_floored)
-									DrawingAlgos.mouse_press_pressure_values.append(pen_pressure)
-									drawer_hv_mirror.set_pixel(sprite, Vector2(mirror_x, mirror_y), _c)
-
-							Global.canvas.sprite_changed_this_frame = true
+						Global.canvas.sprite_changed_this_frame = true
 
 		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
-			DrawingAlgos.plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+			plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			# Handle mirroring
 			var mirror_x = east_limit + west_limit - pos.x
 			var mirror_y = south_limit + north_limit - pos.y
 			if horizontal_mirror:
-				DrawingAlgos.plot_circle(sprite, mirror_x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+				plot_circle(sprite, mirror_x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			if vertical_mirror:
-				DrawingAlgos.plot_circle(sprite, pos.x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+				plot_circle(sprite, pos.x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			if horizontal_mirror && vertical_mirror:
-				DrawingAlgos.plot_circle(sprite, mirror_x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+				plot_circle(sprite, mirror_x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 
 			Global.canvas.sprite_changed_this_frame = true
 
 		else:
+			var custom_brush_image : Image
+			if brush_type != Global.Brush_Types.RANDOM_FILE:
+				custom_brush_image = Global.custom_brush_images[current_mouse_button]
+			else: # Handle random brush
+				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
+				var random_index = randi() % brush_button.random_brushes.size()
+				custom_brush_image = Image.new()
+				custom_brush_image.copy_from(brush_button.random_brushes[random_index])
+				var custom_brush_size = custom_brush_image.get_size()
+				custom_brush_image.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
+				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[current_mouse_button].value / 100)
+				custom_brush_image.lock()
+
 			var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
 			pos = pos.floor()
 			var dst := rectangle_center(pos, custom_brush_size)
@@ -220,13 +154,13 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				mirror_y -= 1
 			# Use custom blend function cause of godot's issue  #31124
 			if color.a > 0: # If it's the pencil
-				DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, dst)
+				blend_rect(sprite, custom_brush_image, src_rect, dst)
 				if horizontal_mirror:
-					DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
+					blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
 				if vertical_mirror:
-					DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
+					blend_rect(sprite, custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
 				if horizontal_mirror && vertical_mirror:
-					DrawingAlgos.blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
+					blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
 
 			else: # if it's transparent - if it's the eraser
 				var custom_brush := Image.new()

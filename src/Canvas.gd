@@ -118,7 +118,7 @@ func _draw() -> void:
 				else:
 					if Global.current_tools[i] == Global.Tools.PENCIL || Global.current_tools[i] == Global.Tools.ERASER:
 						var custom_brush_size = Global.custom_brush_images[i].get_size()  - Vector2.ONE
-						var dst := DrawingAlgos.rectangle_center(mouse_pos, custom_brush_size)
+						var dst : Vector2 = DrawingAlgos.rectangle_center(mouse_pos, custom_brush_size)
 						draw_texture(Global.custom_brush_textures[i], dst)
 
 
