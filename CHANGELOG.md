@@ -10,15 +10,17 @@ This update has been brought to you by the contributions of:
 Igor Santarek (jegor377), rob-a-bolton
 
 ### Added
-- Ability to remove the current palette
+- Ability to remove the current palette.
 - You can now drag & drop files into the program while it's running to open them.
-<br><br>
 
 ### Changed
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
+- Language and theme checkboxes are now radio buttons.
+- The Blue theme has more similar margins and seperations with the rest of the themes.
 
 ### Fixed
-- Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
+- Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files. ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
+<br><br>
 
 ## [v0.7] - 2020-05-16
 This update has been brought to you by the contributions of:

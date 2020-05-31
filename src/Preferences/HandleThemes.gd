@@ -16,9 +16,7 @@ func _ready() -> void:
 
 
 func _on_Theme_pressed(index : int) -> void:
-	for child in get_children():
-		if child is Button:
-			child.pressed = child.get_index() == index
+	get_child(index).pressed = true
 	change_theme(index)
 
 	Global.config_cache.set_value("preferences", "theme", index)

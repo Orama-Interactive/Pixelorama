@@ -30,9 +30,7 @@ func _ready() -> void:
 
 
 func _on_Language_pressed(index : int) -> void:
-	for child in get_children():
-		if child is Button:
-			child.pressed = child.get_index() == index
+	get_child(index).pressed = true
 	if index == 0:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
