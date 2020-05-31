@@ -128,10 +128,10 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	# Load tool options
 	Global.color_pickers[0].color = file.get_var()
 	Global.color_pickers[1].color = file.get_var()
-	Global.left_brush_size = file.get_8()
-	Global.brush_size_edits[0].value = Global.left_brush_size
-	Global.right_brush_size = file.get_8()
-	Global.brush_size_edits[1].value = Global.right_brush_size
+	Global.brush_sizes[0] = file.get_8()
+	Global.brush_size_edits[0].value = Global.brush_sizes[0]
+	Global.brush_sizes[1] = file.get_8()
+	Global.brush_size_edits[1].value = Global.brush_sizes[1]
 	if file_major_version == 0 and file_minor_version < 7:
 		var left_palette = file.get_var()
 		var right_palette = file.get_var()
@@ -224,8 +224,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		# Save tool options
 		var left_color : Color = Global.color_pickers[0].color
 		var right_color : Color = Global.color_pickers[1].color
-		var left_brush_size : int = Global.left_brush_size
-		var right_brush_size : int = Global.right_brush_size
+		var left_brush_size : int = Global.brush_sizes[0]
+		var right_brush_size : int = Global.brush_sizes[1]
 		file.store_var(left_color)
 		file.store_var(right_color)
 		file.store_8(left_brush_size)

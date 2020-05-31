@@ -38,7 +38,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			elif current_action == Global.Tools.ERASER: # This is not working
 				color.a *= (1.0 - pen_pressure)
 		if current_mouse_button == Global.Mouse_Button.LEFT:
-			brush_size = Global.left_brush_size
+			brush_size = Global.brush_sizes[0]
 			brush_type = Global.current_brush_types[0]
 			brush_index = Global.custom_brush_indexes[0]
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
@@ -53,14 +53,14 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[0].value / 100)
 				custom_brush_image.lock()
 
-			horizontal_mirror = Global.left_horizontal_mirror
-			vertical_mirror = Global.left_vertical_mirror
-			pixel_perfect = Global.left_pixel_perfect
-			ld = Global.left_ld
-			ld_amount = Global.left_ld_amount
+			horizontal_mirror = Global.horizontal_mirror[0]
+			vertical_mirror = Global.vertical_mirror[0]
+			pixel_perfect = Global.pixel_perfect[0]
+			ld = Global.ld_modes[0]
+			ld_amount = Global.ld_amounts[0]
 
 		elif current_mouse_button == Global.Mouse_Button.RIGHT:
-			brush_size = Global.right_brush_size
+			brush_size = Global.brush_sizes[1]
 			brush_type = Global.current_brush_types[1]
 			brush_index = Global.custom_brush_indexes[1]
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
@@ -75,11 +75,11 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				custom_brush_image = Global.blend_image_with_color(custom_brush_image, color, Global.interpolate_spinboxes[1].value / 100)
 				custom_brush_image.lock()
 
-			horizontal_mirror = Global.right_horizontal_mirror
-			vertical_mirror = Global.right_vertical_mirror
-			pixel_perfect = Global.right_pixel_perfect
-			ld = Global.right_ld
-			ld_amount = Global.right_ld_amount
+			horizontal_mirror = Global.horizontal_mirror[1]
+			vertical_mirror = Global.vertical_mirror[1]
+			pixel_perfect = Global.pixel_perfect[1]
+			ld = Global.ld_modes[1]
+			ld_amount = Global.ld_amounts[1]
 
 		var start_pos_x
 		var start_pos_y

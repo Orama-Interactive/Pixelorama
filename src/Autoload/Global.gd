@@ -7,6 +7,10 @@ enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum Mouse_Button {LEFT, RIGHT}
 enum Tools {PENCIL, ERASER, BUCKET, LIGHTENDARKEN, RECTSELECT, COLORPICKER, ZOOM}
+enum Fill_Area {SAME_COLOR_AREA, SAME_COLOR_PIXELS}
+enum Fill_With {COLOR, PATTERN}
+enum Lighten_Darken_Mode {LIGHTEN, DARKEN}
+enum Zoom_Mode {ZOOM_IN, ZOOM_OUT}
 
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
@@ -69,43 +73,26 @@ var autosave_interval := 5.0
 var enable_autosave := true
 
 # Tools & options
-var current_left_tool : int = Tools.PENCIL
-var current_right_tool :int = Tools.ERASER
+var current_tools := [Tools.PENCIL, Tools.ERASER]
 var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 
-# 0 for area of same color, 1 for all pixels of the same color
-var left_fill_area := 0
-var right_fill_area := 0
+var fill_areas := [Fill_Area.SAME_COLOR_AREA, Fill_Area.SAME_COLOR_AREA]
+var fill_with := [Fill_With.COLOR, Fill_With.COLOR]
+var fill_pattern_offsets := [Vector2.ZERO, Vector2.ZERO]
 
-var left_fill_with := 0
-var right_fill_with := 0
+var ld_modes := [Lighten_Darken_Mode.LIGHTEN, Lighten_Darken_Mode.LIGHTEN]
+var ld_amounts := [0.1, 0.1]
 
-var left_fill_pattern_offset := Vector2.ZERO
-var right_fill_pattern_offset := Vector2.ZERO
+var color_picker_for := [Mouse_Button.LEFT, Mouse_Button.RIGHT]
 
-# 0 for lighten, 1 for darken
-var left_ld := 0
-var right_ld := 0
-var left_ld_amount := 0.1
-var right_ld_amount := 0.1
+var zoom_modes := [Zoom_Mode.ZOOM_IN, Zoom_Mode.ZOOM_OUT]
 
-var left_color_picker_for : int = Mouse_Button.LEFT
-var right_color_picker_for : int = Mouse_Button.RIGHT
-
-# 0 for zoom in, 1 for zoom out
-var left_zoom_mode := 0
-var right_zoom_mode := 1
-
-var left_horizontal_mirror := false
-var left_vertical_mirror := false
-var right_horizontal_mirror := false
-var right_vertical_mirror := false
-
-var left_pixel_perfect := false
-var right_pixel_perfect := false
+var horizontal_mirror := [false, false]
+var vertical_mirror := [false, false]
+var pixel_perfect := [false, false]
 
 # View menu options
 var tile_mode := false
@@ -121,9 +108,8 @@ var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
 
 # Brushes
-var left_brush_size := 1
-var right_brush_size := 1
-var current_brush_types := []
+var brush_sizes := [1, 1]
+var current_brush_types := [Brush_Types.PIXEL, Brush_Types.PIXEL]
 
 var brush_type_window_position : int = Mouse_Button.LEFT
 var left_circle_points := []
@@ -131,14 +117,14 @@ var right_circle_points := []
 
 var brushes_from_files := 0
 var custom_brushes := []
-var custom_brush_indexes := []
-var custom_brush_images := []
-var custom_brush_textures := []
+var custom_brush_indexes := [-1, -1]
+var custom_brush_images := [Image.new(), Image.new()]
+var custom_brush_textures := [ImageTexture.new(), ImageTexture.new()]
 
 # Patterns
 var patterns := []
 var pattern_window_position : int = Mouse_Button.LEFT
-var pattern_images := []
+var pattern_images := [Image.new(), Image.new()]
 
 # Palettes
 var palettes := {}
@@ -257,16 +243,6 @@ func _ready() -> void:
 
 	undo_redo = UndoRedo.new()
 	image_clipboard = Image.new()
-	current_brush_types.append(Brush_Types.PIXEL)
-	current_brush_types.append(Brush_Types.PIXEL)
-	custom_brush_indexes.append(-1)
-	custom_brush_indexes.append(-1)
-	custom_brush_images.append(Image.new())
-	custom_brush_images.append(Image.new())
-	custom_brush_textures.append(ImageTexture.new())
-	custom_brush_textures.append(ImageTexture.new())
-	pattern_images.append(Image.new())
-	pattern_images.append(Image.new())
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
@@ -881,17 +857,19 @@ func update_custom_brush(mouse_button : int) -> void:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_9x9.png")
 		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-		left_circle_points = plot_circle(left_brush_size)
+		left_circle_points = plot_circle(brush_sizes[0])
+		right_circle_points = plot_circle(brush_sizes[1])
 	elif current_brush_types[mouse_button] == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
 		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-		left_circle_points = plot_circle(left_brush_size)
+		left_circle_points = plot_circle(brush_sizes[0])
+		right_circle_points = plot_circle(brush_sizes[1])
 	else:
 		var custom_brush := Image.new()
 		custom_brush.copy_from(custom_brushes[custom_brush_indexes[mouse_button]])
 		var custom_brush_size = custom_brush.get_size()
-		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
+		custom_brush.resize(custom_brush_size.x * brush_sizes[mouse_button], custom_brush_size.y * brush_sizes[mouse_button], Image.INTERPOLATE_NEAREST)
 		custom_brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
 		custom_brush_textures[mouse_button].create_from_image(custom_brush_images[mouse_button], 0)
 

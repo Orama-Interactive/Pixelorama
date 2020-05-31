@@ -16,7 +16,7 @@ func _on_BrushButton_pressed() -> void:
 	Global.current_brush_types[Global.brush_type_window_position] = brush_type
 	Global.custom_brush_indexes[Global.brush_type_window_position] = custom_brush_index
 	if custom_brush_index > -1: # Custom brush
-		if Global.current_left_tool == Global.Tools.PENCIL:
+		if Global.current_tools[Global.brush_type_window_position] == Global.Tools.PENCIL:
 			Global.color_interpolation_containers[Global.brush_type_window_position].visible = true
 #			if hint_tooltip == "":
 #				Global.left_brush_type_label.text = tr("Custom brush")

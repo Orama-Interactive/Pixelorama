@@ -1,9 +1,5 @@
 extends AcceptDialog
 
-onready var list : ItemList = $HSplitContainer/List
-onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
-onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
-
 # Preferences table: [Prop name in Global, relative node path, value type]
 var preferences = [
 	["open_last_project", "General/OpenLastProject", "pressed"],
@@ -28,6 +24,11 @@ var preferences = [
 	["checker_color_1", "Canvas/CheckerOptions/CheckerColor1", "color"],
 	["checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color"],
 ]
+
+onready var list : ItemList = $HSplitContainer/List
+onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
+onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
+
 
 func _ready() -> void:
 	# Replace OK with Close since preference changes are being applied immediately, not after OK confirmation

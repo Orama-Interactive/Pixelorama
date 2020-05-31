@@ -34,21 +34,20 @@ func _input(event : InputEvent) -> void:
 func _on_Tool_pressed(tool_pressed : BaseButton, mouse_press := true, key_for_left := true) -> void:
 	var current_action := tool_pressed.name
 	var current_tool : int = Global.Tools.keys().find(current_action.to_upper())
-	var left_tool_name := str(Global.Tools.keys()[Global.current_left_tool]).to_lower()
-	var right_tool_name := str(Global.Tools.keys()[Global.current_right_tool]).to_lower()
+	var left_tool_name := str(Global.Tools.keys()[Global.current_tools[0]]).to_lower()
+	var right_tool_name := str(Global.Tools.keys()[Global.current_tools[1]]).to_lower()
 	var current_mouse_button := -1
 
 	if (mouse_press and Input.is_action_just_released("left_mouse")) or (!mouse_press and key_for_left):
-		Global.current_left_tool = current_tool
 		left_tool_name = current_action.to_lower()
 		current_mouse_button = Global.Mouse_Button.LEFT
 
 	elif (mouse_press and Input.is_action_just_released("right_mouse")) or (!mouse_press and !key_for_left):
-		Global.current_right_tool = current_tool
 		right_tool_name = current_action.to_lower()
 		current_mouse_button = Global.Mouse_Button.RIGHT
 
 	if current_mouse_button != -1:
+		Global.current_tools[current_mouse_button] = current_tool
 		# Start from 1, so the label won't get invisible
 		for i in range(1, Global.tool_options_containers[current_mouse_button].get_child_count()):
 			Global.tool_options_containers[current_mouse_button].get_child(i).visible = false

@@ -171,37 +171,37 @@ func _draw() -> void:
 	var mouse_pos := current_pixel
 	mouse_pos = mouse_pos.floor()
 	if Global.left_square_indicator_visible && Global.can_draw:
-		if Global.current_brush_types[0] == Global.Brush_Types.PIXEL || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
-			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER || Global.current_left_tool == Global.Tools.LIGHTENDARKEN:
-				var start_pos_x = mouse_pos.x - (Global.left_brush_size >> 1)
-				var start_pos_y = mouse_pos.y - (Global.left_brush_size >> 1)
-				draw_rect(Rect2(start_pos_x, start_pos_y, Global.left_brush_size, Global.left_brush_size), Color.blue, false)
+		if Global.current_brush_types[0] == Global.Brush_Types.PIXEL || Global.current_tools[0] == Global.Tools.LIGHTENDARKEN:
+			if Global.current_tools[0] == Global.Tools.PENCIL || Global.current_tools[0] == Global.Tools.ERASER || Global.current_tools[0] == Global.Tools.LIGHTENDARKEN:
+				var start_pos_x = mouse_pos.x - (Global.brush_sizes[0] >> 1)
+				var start_pos_y = mouse_pos.y - (Global.brush_sizes[0] >> 1)
+				draw_rect(Rect2(start_pos_x, start_pos_y, Global.brush_sizes[0], Global.brush_sizes[0]), Color.blue, false)
 		elif Global.current_brush_types[0] == Global.Brush_Types.CIRCLE || Global.current_brush_types[0] == Global.Brush_Types.FILLED_CIRCLE:
-			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER:
+			if Global.current_tools[0] == Global.Tools.PENCIL || Global.current_tools[0] == Global.Tools.ERASER:
 				draw_set_transform(mouse_pos, rotation, scale)
 				for rect in Global.left_circle_points:
 					draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
 				draw_set_transform(position, rotation, scale)
 		else:
-			if Global.current_left_tool == Global.Tools.PENCIL || Global.current_left_tool == Global.Tools.ERASER:
+			if Global.current_tools[0] == Global.Tools.PENCIL || Global.current_tools[0] == Global.Tools.ERASER:
 				var custom_brush_size = Global.custom_brush_images[0].get_size()  - Vector2.ONE
 				var dst := rectangle_center(mouse_pos, custom_brush_size)
 				draw_texture(Global.custom_brush_textures[0], dst)
 
 	if Global.right_square_indicator_visible && Global.can_draw:
-		if Global.current_brush_types[1] == Global.Brush_Types.PIXEL || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
-			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER || Global.current_right_tool == Global.Tools.LIGHTENDARKEN:
-				var start_pos_x = mouse_pos.x - (Global.right_brush_size >> 1)
-				var start_pos_y = mouse_pos.y - (Global.right_brush_size >> 1)
-				draw_rect(Rect2(start_pos_x, start_pos_y, Global.right_brush_size, Global.right_brush_size), Color.red, false)
+		if Global.current_brush_types[1] == Global.Brush_Types.PIXEL || Global.current_tools[1] == Global.Tools.LIGHTENDARKEN:
+			if Global.current_tools[1] == Global.Tools.PENCIL || Global.current_tools[1] == Global.Tools.ERASER || Global.current_tools[1] == Global.Tools.LIGHTENDARKEN:
+				var start_pos_x = mouse_pos.x - (Global.brush_sizes[1] >> 1)
+				var start_pos_y = mouse_pos.y - (Global.brush_sizes[1] >> 1)
+				draw_rect(Rect2(start_pos_x, start_pos_y, Global.brush_sizes[1], Global.brush_sizes[1]), Color.red, false)
 		elif Global.current_brush_types[1] == Global.Brush_Types.CIRCLE || Global.current_brush_types[1] == Global.Brush_Types.FILLED_CIRCLE:
-			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER:
+			if Global.current_tools[1] == Global.Tools.PENCIL || Global.current_tools[1] == Global.Tools.ERASER:
 				draw_set_transform(mouse_pos, rotation, scale)
 				for rect in Global.right_circle_points:
 					draw_rect(Rect2(rect, Vector2.ONE), Color.red, false)
 				draw_set_transform(position, rotation, scale)
 		else:
-			if Global.current_right_tool == Global.Tools.PENCIL || Global.current_right_tool == Global.Tools.ERASER:
+			if Global.current_tools[1] == Global.Tools.PENCIL || Global.current_tools[1] == Global.Tools.ERASER:
 				var custom_brush_size = Global.custom_brush_images[1].get_size()  - Vector2.ONE
 				var dst := rectangle_center(mouse_pos, custom_brush_size)
 				draw_texture(Global.custom_brush_textures[1], dst)
@@ -273,23 +273,23 @@ func _input(event : InputEvent) -> void:
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = Global.Mouse_Button.LEFT
-		current_action = Global.current_left_tool
+		current_action = Global.current_tools[0]
 		current_color = Global.color_pickers[0].color
-		fill_area = Global.left_fill_area
-		ld = Global.left_ld
-		ld_amount = Global.left_ld_amount
-		color_picker_for = Global.left_color_picker_for
-		zoom_mode = Global.left_zoom_mode
+		fill_area = Global.fill_areas[0]
+		ld = Global.ld_modes[0]
+		ld_amount = Global.ld_amounts[0]
+		color_picker_for = Global.color_picker_for[0]
+		zoom_mode = Global.zoom_modes[0]
 
 	elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		current_mouse_button = Global.Mouse_Button.RIGHT
-		current_action = Global.current_right_tool
+		current_action = Global.current_tools[1]
 		current_color = Global.color_pickers[1].color
-		fill_area = Global.right_fill_area
-		ld = Global.right_ld
-		ld_amount = Global.right_ld_amount
-		color_picker_for = Global.right_color_picker_for
-		zoom_mode = Global.right_zoom_mode
+		fill_area = Global.fill_areas[1]
+		ld = Global.ld_modes[1]
+		ld_amount = Global.ld_amounts[1]
+		color_picker_for = Global.color_picker_for[1]
+		zoom_mode = Global.zoom_modes[1]
 
 	if Global.has_focus:
 		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
@@ -339,13 +339,13 @@ func _input(event : InputEvent) -> void:
 				var pattern_image : Image
 				var pattern_offset : Vector2
 				if current_mouse_button == Global.Mouse_Button.LEFT:
-					fill_with = Global.left_fill_with
+					fill_with = Global.fill_with[0]
 					pattern_image = Global.pattern_images[0]
-					pattern_offset = Global.left_fill_pattern_offset
+					pattern_offset = Global.fill_pattern_offsets[0]
 				elif current_mouse_button == Global.Mouse_Button.RIGHT:
-					fill_with = Global.right_fill_with
+					fill_with = Global.fill_with[1]
 					pattern_image = Global.pattern_images[1]
-					pattern_offset = Global.right_fill_pattern_offset
+					pattern_offset = Global.fill_pattern_offsets[1]
 
 				if fill_area == 0: # Paint the specific area of the same color
 					var horizontal_mirror := false
@@ -353,11 +353,11 @@ func _input(event : InputEvent) -> void:
 					var mirror_x := east_limit + west_limit - mouse_pos_floored.x - 1
 					var mirror_y := south_limit + north_limit - mouse_pos_floored.y - 1
 					if current_mouse_button == Global.Mouse_Button.LEFT:
-						horizontal_mirror = Global.left_horizontal_mirror
-						vertical_mirror = Global.left_vertical_mirror
+						horizontal_mirror = Global.horizontal_mirror[0]
+						vertical_mirror = Global.vertical_mirror[0]
 					elif current_mouse_button == Global.Mouse_Button.RIGHT:
-						horizontal_mirror = Global.right_horizontal_mirror
-						vertical_mirror = Global.right_vertical_mirror
+						horizontal_mirror = Global.horizontal_mirror[1]
+						vertical_mirror = Global.vertical_mirror[1]
 
 					if fill_with == 1 && pattern_image: # Pattern fill
 						DrawingAlgos.pattern_fill(sprite, mouse_pos, pattern_image, sprite.get_pixelv(mouse_pos), pattern_offset)
@@ -451,7 +451,7 @@ func _input(event : InputEvent) -> void:
 				else:
 					Global.camera.zoom_camera(1)
 
-	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && ([Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_left_tool) || [Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_right_tool)):
+	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && ([Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_tools[0]) || [Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_tools[1])):
 		is_making_line = true
 		line_2d.set_point_position(0, previous_mouse_pos_for_lines)
 	elif Input.is_action_just_released("shift"):
