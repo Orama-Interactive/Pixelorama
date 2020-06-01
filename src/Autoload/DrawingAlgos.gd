@@ -4,6 +4,7 @@ extends Node
 const Drawer = preload("res://src/Drawers.gd").Drawer
 const SimpleDrawer = preload("res://src/Drawers.gd").SimpleDrawer
 const PixelPerfectDrawer = preload("res://src/Drawers.gd").PixelPerfectDrawer
+
 var pixel_perfect_drawer := PixelPerfectDrawer.new()
 var pixel_perfect_drawer_h_mirror := PixelPerfectDrawer.new()
 var pixel_perfect_drawer_v_mirror := PixelPerfectDrawer.new()
@@ -60,11 +61,9 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 		var brush_size : int = Global.brush_sizes[current_mouse_button]
 		var brush_type : int = Global.current_brush_types[current_mouse_button]
-		var brush_index : int = Global.custom_brush_indexes[current_mouse_button]
 
 		var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
 		var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
-		var pixel_perfect : bool = Global.pixel_perfect[current_mouse_button]
 
 		if brush_type == Global.Brush_Types.PIXEL || current_action == Global.Tools.LIGHTENDARKEN:
 			var start_pos_x = pos.x - (brush_size >> 1)
@@ -74,20 +73,25 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 			for cur_pos_x in range(start_pos_x, end_pos_x):
 				for cur_pos_y in range(start_pos_y, end_pos_y):
-					var drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
+					var pixel_perfect : bool = Global.pixel_perfect[current_mouse_button]
+# warning-ignore:incompatible_ternary
+					var drawer : Drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
 					draw_pixel_blended(sprite, Vector2(cur_pos_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action, drawer)
 
 					# Handle mirroring
 					var mirror_x = east_limit + west_limit - cur_pos_x - 1
 					var mirror_y = south_limit + north_limit - cur_pos_y - 1
 					if horizontal_mirror:
-						var drawer_h_mirror = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
+# warning-ignore:incompatible_ternary
+						var drawer_h_mirror : Drawer = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
 						draw_pixel_blended(sprite, Vector2(mirror_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action, drawer_h_mirror)
 					if vertical_mirror:
-						var drawer_v_mirror = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
+# warning-ignore:incompatible_ternary
+						var drawer_v_mirror : Drawer = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
 						draw_pixel_blended(sprite, Vector2(cur_pos_x, mirror_y), color, pen_pressure, current_mouse_button, current_action, drawer_v_mirror)
 					if horizontal_mirror && vertical_mirror:
-						var drawer_hv_mirror = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
+# warning-ignore:incompatible_ternary
+						var drawer_hv_mirror : Drawer = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
 						draw_pixel_blended(sprite, Vector2(mirror_x, mirror_y), color, pen_pressure, current_mouse_button, current_action, drawer_hv_mirror)
 
 					Global.canvas.sprite_changed_this_frame = true
@@ -108,6 +112,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			Global.canvas.sprite_changed_this_frame = true
 
 		else:
+			var brush_index : int = Global.custom_brush_indexes[current_mouse_button]
 			var custom_brush_image : Image
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
 				custom_brush_image = Global.custom_brush_images[current_mouse_button]
@@ -436,7 +441,9 @@ func rotxel(sprite : Image, angle : float) -> void:
 
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
-	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
+# warning-ignore:integer_division
+# warning-ignore:integer_division
+	var center : Vector2 = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
 	var ox : int
 	var oy : int
 	var p : Color
@@ -449,6 +456,7 @@ func rotxel(sprite : Image, angle : float) -> void:
 			var found_pixel : bool = false
 			for k in range(9):
 				var i = -1 + k % 3
+# warning-ignore:integer_division
 				var j = -1 + int(k / 3)
 				var dir = atan2(dy + j, dx + i)
 				var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
@@ -541,7 +549,9 @@ func rotxel(sprite : Image, angle : float) -> void:
 func fake_rotsprite(sprite : Image, angle : float) -> void:
 	sprite.copy_from(scale3X(sprite))
 	nn_rotate(sprite,angle)
-	sprite.resize(sprite.get_width()/3,sprite.get_height()/3,0)
+# warning-ignore:integer_division
+# warning-ignore:integer_division
+	sprite.resize(sprite.get_width() / 3, sprite.get_height() / 3, 0)
 
 
 func nn_rotate(sprite : Image, angle : float) -> void:
@@ -551,7 +561,9 @@ func nn_rotate(sprite : Image, angle : float) -> void:
 	aux.lock()
 	var ox: int
 	var oy: int
-	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
+# warning-ignore:integer_division
+# warning-ignore:integer_division
+	var center : Vector2 = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
 	for x in range(sprite.get_width()):
 		for y in range(sprite.get_height()):
 			ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
