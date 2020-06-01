@@ -7,6 +7,7 @@ enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum Mouse_Button {LEFT, RIGHT}
 enum Tools {PENCIL, ERASER, BUCKET, LIGHTENDARKEN, RECTSELECT, COLORPICKER, ZOOM}
+enum Theme_Types {DARK, BLUE, CARAMEL, LIGHT}
 enum Fill_Area {SAME_COLOR_AREA, SAME_COLOR_PIXELS}
 enum Fill_With {COLOR, PATTERN}
 enum Lighten_Darken_Mode {LIGHTEN, DARKEN}
@@ -55,7 +56,7 @@ var image_clipboard : Image
 var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
 var play_only_tags := true
 
-var theme_type := "Dark"
+var theme_type : int = Theme_Types.DARK
 var is_default_image := true
 var default_image_width := 64
 var default_image_height := 64
@@ -597,7 +598,7 @@ func frame_changed(value : int) -> void:
 		c.is_making_line = false
 		c.line_2d.set_point_position(1, c.line_2d.points[0])
 		var text_color := Color.white
-		if theme_type == "Caramel" || theme_type == "Light":
+		if theme_type == Theme_Types.CARAMEL || theme_type == Theme_Types.LIGHT:
 			text_color = Color.black
 		frame_ids.get_child(i).add_color_override("font_color", text_color)
 		for layer in layers:
@@ -675,8 +676,8 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 
 	if button is Button:
 		var theme := theme_type
-		if theme == "Caramel":
-			theme = "Dark"
+		if theme == Theme_Types.CARAMEL:
+			theme = Theme_Types.DARK
 		for c in button.get_children():
 			if c is TextureRect:
 				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
