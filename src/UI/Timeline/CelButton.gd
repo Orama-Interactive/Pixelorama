@@ -8,7 +8,7 @@ onready var popup_menu : PopupMenu = $PopupMenu
 
 func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame + 1, layer]
-	if Global.canvases[frame] in Global.layers[layer][5]:
+	if Global.canvases[frame] in Global.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
 		popup_menu.set_item_text(4, "Unlink Cel")
 		popup_menu.set_item_metadata(4, "Unlink Cel")
@@ -53,13 +53,13 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 		3: # Move Right
 			change_frame_order(1)
 		4: # Unlink Cel
-			var cel_index : int = Global.layers[layer][5].find(Global.canvases[frame])
+			var cel_index : int = Global.layers[layer].linked_cels.find(Global.canvases[frame])
 			var c = Global.canvases[frame]
-			var new_layers := Global.layers.duplicate(true)
+			var new_layers : Array = Global.layers.duplicate(true)
 			var new_canvas_layers : Array = c.layers.duplicate(true)
 
 			if popup_menu.get_item_metadata(4) == "Unlink Cel":
-				new_layers[layer][5].remove(cel_index)
+				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
 				sprite.copy_from(Global.canvases[frame].layers[layer][0])
 				sprite.lock()
@@ -78,14 +78,14 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.undo_redo.add_do_method(Global, "redo", [Global.canvases[frame]], layer)
 				Global.undo_redo.commit_action()
 			elif popup_menu.get_item_metadata(4) == "Link Cel":
-				new_layers[layer][5].append(Global.canvases[frame])
+				new_layers[layer].linked_cels.append(Global.canvases[frame])
 				Global.undo_redo.create_action("Link Cel")
 				Global.undo_redo.add_do_property(Global, "layers", new_layers)
-				if new_layers[layer][5].size() > 1:
+				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
-					new_canvas_layers[layer][0] = new_layers[layer][5][0].layers[layer][0]
-					new_canvas_layers[layer][1] = new_layers[layer][5][0].layers[layer][1]
+					new_canvas_layers[layer][0] = new_layers[layer].linked_cels[0].layers[layer][0]
+					new_canvas_layers[layer][1] = new_layers[layer].linked_cels[0].layers[layer][1]
 					Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 					Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
@@ -97,7 +97,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 
 func change_frame_order(rate : int) -> void:
 	var change = frame + rate
-	var new_canvases := Global.canvases.duplicate()
+	var new_canvases : Array = Global.canvases.duplicate()
 	var temp = new_canvases[frame]
 	new_canvases[frame] = new_canvases[change]
 	new_canvases[change] = temp

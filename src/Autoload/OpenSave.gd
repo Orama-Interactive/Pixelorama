@@ -60,9 +60,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var layer_new_cels_linked := file.get_8()
 			linked_cels.append(file.get_var())
 
-			# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-			# will new cels be linked boolean (4), Array of linked cels (5)]
-			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, []])
+			var l := Layer.new(layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, [])
+			Global.layers.append(l)
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -80,9 +79,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			if file_major_version == 0 and file_minor_version < 7:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-					# will new frames be linked boolean (4), Array of linked frames (5)]
-					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new(), false, []])
+					var l := Layer.new(layer_name_old_version)
+					Global.layers.append(l)
 			var layer_transparency := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
 				layer_transparency = file.get_float()
@@ -94,7 +92,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			canvas.layers.append([image, tex, layer_transparency])
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					Global.layers[layer_i][5].append(canvas)
+					Global.layers[layer_i].linked_cels.append(canvas)
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -185,12 +183,12 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		# Store Global layers
 		for layer in Global.layers:
 			file.store_line(".")
-			file.store_line(layer[0]) # Layer name
-			file.store_8(layer[1]) # Layer visibility
-			file.store_8(layer[2]) # Layer lock
-			file.store_8(layer[4]) # Future cels linked
+			file.store_line(layer.name)
+			file.store_8(layer.visible)
+			file.store_8(layer.locked)
+			file.store_8(layer.new_cels_linked)
 			var linked_cels := []
-			for canvas in layer[5]:
+			for canvas in layer.linked_cels:
 				linked_cels.append(canvas.frame)
 			file.store_var(linked_cels) # Linked cels as cel numbers
 

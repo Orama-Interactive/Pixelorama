@@ -366,13 +366,11 @@ func _ready() -> void:
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
-	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-	# will new cels be linked boolean (4), Array of linked cels (5)]
-	layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
+	layers.append(Layer.new())
 
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
-func find_node_by_name(root, node_name) -> Node:
+func find_node_by_name(root : Node, node_name : String) -> Node:
 	if root.get_name() == node_name:
 		return root
 	for child in root.get_children():
@@ -488,7 +486,7 @@ func canvases_changed(value : Array) -> void:
 		frame_id.queue_free()
 
 	for i in range(layers.size() - 1, -1, -1):
-		frames_container.add_child(layers[i][3])
+		frames_container.add_child(layers[i].frame_container)
 
 	for j in range(canvases.size()):
 		var label := Label.new()
@@ -503,7 +501,7 @@ func canvases_changed(value : Array) -> void:
 			cel_button.layer = i
 			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
-			layers[i][3].add_child(cel_button)
+			layers[i].frame_container.add_child(cel_button)
 
 	# This is useful in case tagged frames get deleted DURING the animation is playing
 	# otherwise, this code is useless in this context, since these values are being set
@@ -556,27 +554,27 @@ func layers_changed(value : Array) -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.i = i
-		if !layers[i][0]:
-			layers[i][0] = tr("Layer") + " %s" % i
+		if !layers[i].name:
+			layers[i].name = tr("Layer") + " %s" % i
 
 		layers_container.add_child(layer_container)
-		layer_container.label.text = layers[i][0]
-		layer_container.line_edit.text = layers[i][0]
+		layer_container.label.text = layers[i].name
+		layer_container.line_edit.text = layers[i].name
 
-		frames_container.add_child(layers[i][3])
+		frames_container.add_child(layers[i].frame_container)
 		for j in range(canvases.size()):
 			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
 
-			layers[i][3].add_child(cel_button)
+			layers[i].frame_container.add_child(cel_button)
 
 	var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
 	layer_button.pressed = true
 	self.current_frame = current_frame # Call frame_changed to update UI
 
-	if layers[current_layer][2]:
+	if layers[current_layer].locked:
 		disable_button(remove_layer_button, true)
 
 	if layers.size() == 1:
@@ -584,7 +582,7 @@ func layers_changed(value : Array) -> void:
 		disable_button(move_up_layer_button, true)
 		disable_button(move_down_layer_button, true)
 		disable_button(merge_down_layer_button, true)
-	elif !layers[current_layer][2]:
+	elif !layers[current_layer].locked:
 		disable_button(remove_layer_button, false)
 
 
@@ -602,20 +600,20 @@ func frame_changed(value : int) -> void:
 			text_color = Color.black
 		frame_ids.get_child(i).add_color_override("font_color", text_color)
 		for layer in layers:
-			if i < layer[3].get_child_count():
-				layer[3].get_child(i).pressed = false
+			if i < layer.frame_container.get_child_count():
+				layer.frame_container.get_child(i).pressed = false
 		i += 1
 
 	# Select the new canvas/frame
 	canvas = canvases[current_frame]
 	canvas.visible = true
 	frame_ids.get_child(current_frame).add_color_override("font_color", control.theme.get_color("Selected Color", "Label"))
-	if current_frame < layers[current_layer][3].get_child_count():
-		layers[current_layer][3].get_child(current_frame).pressed = true
+	if current_frame < layers[current_layer].frame_container.get_child_count():
+		layers[current_layer].frame_container.get_child(current_frame).pressed = true
 
 	if canvases.size() == 1:
 		disable_button(remove_frame_button, true)
-	elif !layers[current_layer][2]:
+	elif !layers[current_layer].locked:
 		disable_button(remove_frame_button, false)
 
 	Global.transparent_checker._ready() # To update the rect size
@@ -646,7 +644,7 @@ func layer_changed(value : int) -> void:
 		disable_button(merge_down_layer_button, true)
 
 	if current_layer < layers.size():
-		if layers[current_layer][2]:
+		if layers[current_layer].locked:
 			disable_button(remove_layer_button, true)
 		else:
 			if layers.size() > 1:

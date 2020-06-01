@@ -53,7 +53,7 @@ func _ready() -> void:
 			# Store [Image, ImageTexture, Opacity]
 			layers.append([sprite, tex, 1])
 
-		if self in l[5]:
+		if self in l.linked_cels:
 			# If the linked button is pressed, set as the Image & ImageTexture
 			# to be the same as the first linked cel
 			layers[layer_i][0] = l[5][0].layers[layer_i][0]
@@ -80,7 +80,7 @@ func _draw() -> void:
 	# Draw current frame layers
 	for i in range(layers.size()):
 		var modulate_color := Color(1, 1, 1, layers[i][2])
-		if Global.layers[i][1]: # if it's visible
+		if Global.layers[i].visible: # if it's visible
 			draw_texture(layers[i][1], location, modulate_color)
 
 			if Global.tile_mode:
@@ -143,7 +143,7 @@ func _input(event : InputEvent) -> void:
 		can_undo = true
 
 	current_pixel = get_local_mouse_position() + location
-	if Global.current_frame != frame || Global.layers[Global.current_layer][2]:
+	if Global.current_frame != frame || Global.layers[Global.current_layer].locked:
 		previous_mouse_pos = current_pixel
 		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
 		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
@@ -482,7 +482,7 @@ func update_texture(layer_index : int) -> void:
 	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
 
 	var frame_texture_rect : TextureRect
-	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index][3].get_child(frame), "CelTexture")
+	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index].frame_container.get_child(frame), "CelTexture")
 	frame_texture_rect.texture = layers[layer_index][1]
 
 
@@ -498,7 +498,7 @@ func onion_skinning() -> void:
 			if Global.current_frame >= i:
 				var layer_i := 0
 				for layer in Global.canvases[Global.current_frame - i].layers:
-					if Global.layers[layer_i][1]: # If it's visible
+					if Global.layers[layer_i].visible:
 						color.a = 0.6 / i
 						draw_texture(layer[1], location, color)
 					layer_i += 1
@@ -514,7 +514,7 @@ func onion_skinning() -> void:
 			if Global.current_frame < Global.canvases.size() - i:
 				var layer_i := 0
 				for layer in Global.canvases[Global.current_frame + i].layers:
-					if Global.layers[layer_i][1]: # If it's visible
+					if Global.layers[layer_i].visible:
 						color.a = 0.6 / i
 						draw_texture(layer[1], location, color)
 					layer_i += 1

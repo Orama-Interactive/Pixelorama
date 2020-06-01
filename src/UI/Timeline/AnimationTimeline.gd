@@ -4,7 +4,7 @@ var fps := 6.0
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
-var last_frame := Global.canvases.size() - 1
+var last_frame : int = Global.canvases.size() - 1
 
 var timeline_scroll : ScrollContainer
 var tag_scroll_container : ScrollContainer
@@ -28,7 +28,7 @@ func add_frame() -> void:
 	new_canvas.size = Global.canvas.size
 	new_canvas.frame = Global.canvases.size()
 
-	var new_canvases: Array = Global.canvases.duplicate()
+	var new_canvases : Array = Global.canvases.duplicate()
 	new_canvases.append(new_canvas)
 
 	Global.undos += 1
@@ -45,8 +45,8 @@ func add_frame() -> void:
 		Global.undo_redo.add_undo_property(c, "visible", c.visible)
 
 	for l_i in range(Global.layers.size()):
-		if Global.layers[l_i][4]: # If the link button is pressed
-			Global.layers[l_i][5].append(new_canvas)
+		if Global.layers[l_i].new_cels_linked: # If the link button is pressed
+			Global.layers[l_i].linked_cels.append(new_canvas)
 
 	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
 	Global.undo_redo.add_undo_property(Global, "canvas", Global.canvas)
@@ -61,7 +61,7 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 		frame = Global.current_frame
 
 	var canvas : Canvas = Global.canvases[frame]
-	var new_canvases := Global.canvases.duplicate()
+	var new_canvases : Array = Global.canvases.duplicate()
 	new_canvases.erase(canvas)
 	var current_frame := Global.current_frame
 	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
@@ -82,11 +82,11 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	# Check if one of the cels of the frame is linked
 	# if they are, unlink them too
 	# this prevents removed cels being kept in linked memory
-	var new_layers := Global.layers.duplicate(true)
+	var new_layers : Array = Global.layers.duplicate(true)
 	for layer in new_layers:
-		for linked in layer[5]:
+		for linked in layer.linked_cels:
 			if linked == Global.canvases[frame]:
-				layer[5].erase(linked)
+				layer.linked_cels.erase(linked)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Remove Frame")
@@ -152,7 +152,7 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	Global.undo_redo.add_do_property(Global, "current_frame", frame + 1)
 	Global.undo_redo.add_do_property(Global, "animation_tags", new_animation_tags)
 	for i in range(Global.layers.size()):
-		for child in Global.layers[i][3].get_children():
+		for child in Global.layers[i].frame_container.get_children():
 			Global.undo_redo.add_do_property(child, "pressed", false)
 			Global.undo_redo.add_undo_property(child, "pressed", child.pressed)
 	for c in Global.canvases:
@@ -336,15 +336,11 @@ func _on_BlueRedMode_toggled(button_pressed : bool) -> void:
 # Layer buttons
 
 func add_layer(is_new := true) -> void:
-	var layer_name = null
-	if !is_new: # Clone layer
-		layer_name = Global.layers[Global.current_layer][0] + " (" + tr("copy") + ")"
-
 	var new_layers : Array = Global.layers.duplicate()
-
-	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-	# will new frames be linked boolean (4), Array of linked frames (5)]
-	new_layers.append([layer_name, true, false, HBoxContainer.new(), false, []])
+	var l := Layer.new()
+	if !is_new: # Clone layer
+		l.name = Global.layers[Global.current_layer].name + " (" + tr("copy") + ")"
+	new_layers.append(l)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Layer")
@@ -449,8 +445,8 @@ func _on_MergeDownLayer_pressed() -> void:
 		new_layer.lock()
 		DrawingAlgos.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
 		new_layers_canvas.remove(Global.current_layer)
-		if !selected_layer.is_invisible() and Global.layers[Global.current_layer - 1][5].size() > 1 and (c in Global.layers[Global.current_layer - 1][5]):
-			new_layers[Global.current_layer - 1][5].erase(c)
+		if !selected_layer.is_invisible() and Global.layers[Global.current_layer - 1].linked_cels.size() > 1 and (c in Global.layers[Global.current_layer - 1].linked_cels):
+			new_layers[Global.current_layer - 1].linked_cels.erase(c)
 			var tex := ImageTexture.new()
 			tex.create_from_image(new_layer, 0)
 			new_layers_canvas[Global.current_layer - 1][0] = new_layer

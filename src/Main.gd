@@ -21,9 +21,9 @@ func _ready() -> void:
 
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
 
-	Global.layers[0][0] = tr("Layer") + " 0"
-	Global.layers_container.get_child(0).label.text = Global.layers[0][0]
-	Global.layers_container.get_child(0).line_edit.text = Global.layers[0][0]
+	Global.layers[0].name = tr("Layer") + " 0"
+	Global.layers_container.get_child(0).label.text = Global.layers[0].name
+	Global.layers_container.get_child(0).line_edit.text = Global.layers[0].name
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
@@ -500,7 +500,7 @@ func show_hsv_configuration_popup() -> void:
 
 
 func image_menu_id_pressed(id : int) -> void:
-	if Global.layers[Global.current_layer][2]: # No changes if the layer is locked
+	if Global.layers[Global.current_layer].locked: # No changes if the layer is locked
 		return
 	match id:
 		0: # Scale Image

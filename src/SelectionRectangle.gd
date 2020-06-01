@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _process(_delta : float) -> void:
-	if Global.layers[Global.current_layer][2]:
+	if Global.layers[Global.current_layer].locked:
 		return
 	var mouse_pos: Vector2 = get_local_mouse_position() - Global.canvas.location
 	var mouse_pos_floored := mouse_pos.floor()
