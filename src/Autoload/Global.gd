@@ -430,6 +430,7 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 	elif action_name == "Change Frame Order":
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
+		canvas_parent.move_child(canvas_parent.get_node("TransparentChecker"), 0)
 
 	canvas.update()
 	if !project_has_changed:
@@ -461,6 +462,7 @@ func redo(_canvases : Array, layer_index : int = -1) -> void:
 			animation_timer.stop()
 	elif action_name == "Change Frame Order":
 		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
+		canvas_parent.move_child(canvas_parent.get_node("TransparentChecker"), 0)
 
 	canvas.update()
 	if !project_has_changed:
