@@ -499,7 +499,7 @@ func canvases_changed(value : Array) -> void:
 			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
-			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
+			cel_button.get_child(0).texture = Global.canvases[j].layers[i].image_texture
 
 			layers[i].frame_container.add_child(cel_button)
 
@@ -566,7 +566,7 @@ func layers_changed(value : Array) -> void:
 			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
-			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
+			cel_button.get_child(0).texture = Global.canvases[j].layers[i].image_texture
 
 			layers[i].frame_container.add_child(cel_button)
 
@@ -621,8 +621,8 @@ func frame_changed(value : int) -> void:
 
 func layer_changed(value : int) -> void:
 	current_layer = value
-	layer_opacity_slider.value = canvas.layers[current_layer][2] * 100
-	layer_opacity_spinbox.value = canvas.layers[current_layer][2] * 100
+	layer_opacity_slider.value = canvas.layers[current_layer].opacity * 100
+	layer_opacity_spinbox.value = canvas.layers[current_layer].opacity * 100
 
 	for container in layers_container.get_children():
 		container.pressed = false

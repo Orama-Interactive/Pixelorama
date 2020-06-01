@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _on_HSVDialog_about_to_show() -> void:
-	current_layer = Global.canvas.layers[Global.current_layer][0]
+	current_layer = Global.canvas.layers[Global.current_layer].image
 	preview_image.copy_from(current_layer)
 	update_preview()
 

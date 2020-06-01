@@ -367,13 +367,13 @@ func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0))
 	for layer in canvas.layers:
 		if Global.layers[layer_i].visible:
 			var layer_image := Image.new()
-			layer_image.copy_from(layer[0])
+			layer_image.copy_from(layer.image)
 			layer_image.lock()
-			if layer[2] < 1: # If we have layer transparency
+			if layer.opacity < 1: # If we have layer transparency
 				for xx in layer_image.get_size().x:
 					for yy in layer_image.get_size().y:
 						var pixel_color := layer_image.get_pixel(xx, yy)
-						var alpha : float = pixel_color.a * layer[2]
+						var alpha : float = pixel_color.a * layer.opacity
 						layer_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 			DrawingAlgos.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
 		layer_i += 1

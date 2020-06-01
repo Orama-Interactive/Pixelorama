@@ -27,7 +27,7 @@ func _process(_delta : float) -> void:
 	var start_pos := polygon[0]
 	var end_pos := polygon[2]
 	var current_layer_index : int = Global.current_layer
-	var layer : Image = Global.canvas.layers[current_layer_index][0]
+	var layer : Image = Global.canvas.layers[current_layer_index].image
 
 	if end_pos == start_pos:
 		visible = false

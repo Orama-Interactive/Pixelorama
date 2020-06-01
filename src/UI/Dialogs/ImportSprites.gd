@@ -64,22 +64,14 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			canvas.size = image.get_size()
 			image.convert(Image.FORMAT_RGBA8)
 			image.lock()
-			var tex := ImageTexture.new()
-			tex.create_from_image(image, 0)
-			# Store [Image, ImageTexture, Opacity]
-			canvas.layers.append([image, tex, 1])
+			canvas.layers.append(Cel.new(image, 1))
 
 			for _i in range(1, Global.layers.size()):
 				var empty_sprite := Image.new()
 				empty_sprite.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
 				empty_sprite.fill(Color(0, 0, 0, 0))
 				empty_sprite.lock()
-
-				var empty_tex := ImageTexture.new()
-				empty_tex.create_from_image(empty_sprite, 0)
-
-				# Store [Image, ImageTexture, Opacity]
-				canvas.layers.append([empty_sprite, empty_tex, 1])
+				canvas.layers.append(Cel.new(empty_sprite, 1))
 
 			canvas.frame = i
 			Global.canvases.append(canvas)
@@ -119,21 +111,14 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				canvas.size = cropped_image.get_size()
 				cropped_image.convert(Image.FORMAT_RGBA8)
 				cropped_image.lock()
-				var tex := ImageTexture.new()
-				tex.create_from_image(cropped_image, 0)
-				# Store [Image, ImageTexture, Opacity]
-				canvas.layers.append([cropped_image, tex, 1])
+				canvas.layers.append(Cel.new(cropped_image, 1))
+
 				for _i in range(1, Global.layers.size()):
 					var empty_sprite := Image.new()
 					empty_sprite.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
 					empty_sprite.fill(Color(0, 0, 0, 0))
 					empty_sprite.lock()
-
-					var empty_tex := ImageTexture.new()
-					empty_tex.create_from_image(empty_sprite, 0)
-
-					# Store [Image, ImageTexture, Opacity]
-					canvas.layers.append([empty_sprite, empty_tex, 1])
+					canvas.layers.append(Cel.new(empty_sprite, 1))
 
 				canvas.frame = i
 				Global.canvases.append(canvas)

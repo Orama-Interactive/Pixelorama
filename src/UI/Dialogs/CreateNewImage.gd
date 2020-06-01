@@ -87,8 +87,8 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.layers = Global.layers # To trigger Global.layers_changed()
 	Global.project_has_changed = false
 	if fill_color.a > 0:
-		Global.canvas.layers[0][0].fill(fill_color)
-		Global.canvas.layers[0][0].lock()
+		Global.canvas.layers[0].image.fill(fill_color)
+		Global.canvas.layers[0].image.lock()
 		Global.canvas.update_texture(0)
 
 

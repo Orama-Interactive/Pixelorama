@@ -130,11 +130,9 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 	for layer in canvas.layers: # Copy every layer
 		var sprite := Image.new()
-		sprite.copy_from(layer[0])
+		sprite.copy_from(layer.image)
 		sprite.lock()
-		var tex := ImageTexture.new()
-		tex.create_from_image(sprite, 0)
-		new_canvas.layers.append([sprite, tex, layer[2]])
+		new_canvas.layers.append(Cel.new(sprite, layer.opacity))
 
 	var new_animation_tags := Global.animation_tags.duplicate(true)
 	# Loop through the tags to see if the frame is in one
@@ -350,15 +348,12 @@ func add_layer(is_new := true) -> void:
 		if is_new:
 			new_layer.create(c.size.x, c.size.y, false, Image.FORMAT_RGBA8)
 		else: # Clone layer
-			new_layer.copy_from(c.layers[Global.current_layer][0])
+			new_layer.copy_from(c.layers[Global.current_layer].image)
 
 		new_layer.lock()
-		var new_layer_tex := ImageTexture.new()
-		new_layer_tex.create_from_image(new_layer, 0)
 
 		var new_canvas_layers : Array = c.layers.duplicate()
-		# Store [Image, ImageTexture, Opacity]
-		new_canvas_layers.append([new_layer, new_layer_tex, 1])
+		new_canvas_layers.append(Cel.new(new_layer, 1))
 		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
@@ -430,30 +425,27 @@ func _on_MergeDownLayer_pressed() -> void:
 	for c in Global.canvases:
 		var new_layers_canvas : Array = c.layers.duplicate(true)
 		var selected_layer := Image.new()
-		selected_layer.copy_from(new_layers_canvas[Global.current_layer][0])
+		selected_layer.copy_from(new_layers_canvas[Global.current_layer].image)
 		selected_layer.lock()
 
-		if c.layers[Global.current_layer][2] < 1: # If we have layer transparency
+		if c.layers[Global.current_layer].opacity < 1: # If we have layer transparency
 			for xx in selected_layer.get_size().x:
 				for yy in selected_layer.get_size().y:
 					var pixel_color : Color = selected_layer.get_pixel(xx, yy)
-					var alpha : float = pixel_color.a * c.layers[Global.current_layer][2]
+					var alpha : float = pixel_color.a * c.layers[Global.current_layer].opacity
 					selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 
 		var new_layer := Image.new()
-		new_layer.copy_from(c.layers[Global.current_layer - 1][0])
+		new_layer.copy_from(c.layers[Global.current_layer - 1].image)
 		new_layer.lock()
 		DrawingAlgos.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
 		new_layers_canvas.remove(Global.current_layer)
 		if !selected_layer.is_invisible() and Global.layers[Global.current_layer - 1].linked_cels.size() > 1 and (c in Global.layers[Global.current_layer - 1].linked_cels):
 			new_layers[Global.current_layer - 1].linked_cels.erase(c)
-			var tex := ImageTexture.new()
-			tex.create_from_image(new_layer, 0)
-			new_layers_canvas[Global.current_layer - 1][0] = new_layer
-			new_layers_canvas[Global.current_layer - 1][1] = tex
+			new_layers_canvas[Global.current_layer - 1].image = new_layer
 		else:
-			Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1][0], "data", new_layer.data)
-			Global.undo_redo.add_undo_property(c.layers[Global.current_layer - 1][0], "data", c.layers[Global.current_layer - 1][0].data)
+			Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1].image, "data", new_layer.data)
+			Global.undo_redo.add_undo_property(c.layers[Global.current_layer - 1].image, "data", c.layers[Global.current_layer - 1].image.data)
 
 		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
@@ -470,7 +462,7 @@ func _on_MergeDownLayer_pressed() -> void:
 
 
 func _on_OpacitySlider_value_changed(value) -> void:
-	Global.canvas.layers[Global.current_layer][2] = value / 100
+	Global.canvas.layers[Global.current_layer].opacity = value / 100
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value

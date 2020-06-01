@@ -400,7 +400,7 @@ func show_scale_image_popup() -> void:
 
 func crop_image() -> void:
 	# Use first cel as a starting rectangle
-	var used_rect : Rect2 = Global.canvases[0].layers[0][0].get_used_rect()
+	var used_rect : Rect2 = Global.canvases[0].layers[0].image.get_used_rect()
 
 	for c in Global.canvases:
 		# However, if first cel is empty, loop through all cels until we find one that isn't
@@ -409,12 +409,12 @@ func crop_image() -> void:
 				break
 			else:
 				if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
-					used_rect = layer[0].get_used_rect()
+					used_rect = layer.image.get_used_rect()
 
 		# Merge all layers with content
 		for layer in c.layers:
-				if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
-					used_rect = used_rect.merge(layer[0].get_used_rect())
+				if layer.image.get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = used_rect.merge(layer.image.get_used_rect())
 
 	# If no layer has any content, just return
 	if used_rect == Rect2(0, 0, 0, 0):
@@ -428,9 +428,9 @@ func crop_image() -> void:
 		Global.undo_redo.add_do_property(c, "size", Vector2(width, height).floor())
 		# Loop through all the layers to crop them
 		for j in range(Global.canvas.layers.size() - 1, -1, -1):
-			var sprite : Image = c.layers[j][0].get_rect(used_rect)
-			Global.undo_redo.add_do_property(c.layers[j][0], "data", sprite.data)
-			Global.undo_redo.add_undo_property(c.layers[j][0], "data", c.layers[j][0].data)
+			var sprite : Image = c.layers[j].image.get_rect(used_rect)
+			Global.undo_redo.add_do_property(c.layers[j].image, "data", sprite.data)
+			Global.undo_redo.add_undo_property(c.layers[j].image, "data", c.layers[j].image.data)
 
 		Global.undo_redo.add_undo_property(c, "size", c.size)
 	Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
@@ -441,30 +441,30 @@ func crop_image() -> void:
 func flip_image_horizontal() -> void:
 	var canvas : Canvas = Global.canvas
 	canvas.handle_undo("Draw")
-	canvas.layers[Global.current_layer][0].unlock()
-	canvas.layers[Global.current_layer][0].flip_x()
-	canvas.layers[Global.current_layer][0].lock()
+	canvas.layers[Global.current_layer].image.unlock()
+	canvas.layers[Global.current_layer].image.flip_x()
+	canvas.layers[Global.current_layer].image.lock()
 	canvas.handle_redo("Draw")
 
 
 func flip_image_vertical() -> void:
 	var canvas : Canvas = Global.canvas
 	canvas.handle_undo("Draw")
-	canvas.layers[Global.current_layer][0].unlock()
-	canvas.layers[Global.current_layer][0].flip_y()
-	canvas.layers[Global.current_layer][0].lock()
+	canvas.layers[Global.current_layer].image.unlock()
+	canvas.layers[Global.current_layer].image.flip_y()
+	canvas.layers[Global.current_layer].image.lock()
 	canvas.handle_redo("Draw")
 
 
 func show_rotate_image_popup() -> void:
-	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	var image : Image = Global.canvas.layers[Global.current_layer].image
 	$RotateImage.set_sprite(image)
 	$RotateImage.popup_centered()
 	Global.dialog_open(true)
 
 
 func invert_image_colors() -> void:
-	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	var image : Image = Global.canvas.layers[Global.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
@@ -476,7 +476,7 @@ func invert_image_colors() -> void:
 
 
 func desaturate_image() -> void:
-	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	var image : Image = Global.canvas.layers[Global.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:

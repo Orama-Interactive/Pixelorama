@@ -47,17 +47,13 @@ func _ready() -> void:
 			sprite.fill(fill_color)
 			sprite.lock()
 
-			var tex := ImageTexture.new()
-			tex.create_from_image(sprite, 0)
-
-			# Store [Image, ImageTexture, Opacity]
-			layers.append([sprite, tex, 1])
+			layers.append(Cel.new(sprite, 1.0))
 
 		if self in l.linked_cels:
 			# If the linked button is pressed, set as the Image & ImageTexture
 			# to be the same as the first linked cel
-			layers[layer_i][0] = l.linked_cels[0].layers[layer_i][0]
-			layers[layer_i][1] = l.linked_cels[0].layers[layer_i][1]
+			layers[layer_i].image = l.linked_cels[0].layers[layer_i].image
+			layers[layer_i].image_texture = l.linked_cels[0].layers[layer_i].image_texture
 
 		layer_i += 1
 
@@ -79,19 +75,19 @@ func _draw() -> void:
 
 	# Draw current frame layers
 	for i in range(layers.size()):
-		var modulate_color := Color(1, 1, 1, layers[i][2])
+		var modulate_color := Color(1, 1, 1, layers[i].opacity)
 		if Global.layers[i].visible: # if it's visible
-			draw_texture(layers[i][1], location, modulate_color)
+			draw_texture(layers[i].image_texture, location, modulate_color)
 
 			if Global.tile_mode:
-				draw_texture(layers[i][1], Vector2(location.x, location.y + size.y), modulate_color) # Down
-				draw_texture(layers[i][1], Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
-				draw_texture(layers[i][1], Vector2(location.x - size.x, location.y), modulate_color) # Left
-				draw_texture(layers[i][1], location - size, modulate_color) # Up left
-				draw_texture(layers[i][1], Vector2(location.x, location.y - size.y), modulate_color) # Up
-				draw_texture(layers[i][1], Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
-				draw_texture(layers[i][1], Vector2(location.x + size.x, location.y), modulate_color) # Right
-				draw_texture(layers[i][1], location + size, modulate_color) # Down right
+				draw_texture(layers[i].image_texture, Vector2(location.x, location.y + size.y), modulate_color) # Down
+				draw_texture(layers[i].image_texture, Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
+				draw_texture(layers[i].image_texture, Vector2(location.x - size.x, location.y), modulate_color) # Left
+				draw_texture(layers[i].image_texture, location - size, modulate_color) # Up left
+				draw_texture(layers[i].image_texture, Vector2(location.x, location.y - size.y), modulate_color) # Up
+				draw_texture(layers[i].image_texture, Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
+				draw_texture(layers[i].image_texture, Vector2(location.x + size.x, location.y), modulate_color) # Right
+				draw_texture(layers[i].image_texture, location + size, modulate_color) # Down right
 
 	if Global.draw_grid:
 		draw_grid(Global.grid_type)
@@ -295,7 +291,7 @@ func camera_zoom() -> void:
 
 
 func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : Vector2, can_handle : bool) -> void:
-	var sprite : Image = layers[Global.current_layer][0]
+	var sprite : Image = layers[Global.current_layer].image
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
 
@@ -444,10 +440,10 @@ func handle_undo(action : String) -> void:
 	for c in canvases:
 		# I'm not sure why I have to unlock it, but...
 		# ...if I don't, it doesn't work properly
-		c.layers[Global.current_layer][0].unlock()
-		var data = c.layers[Global.current_layer][0].data
-		c.layers[Global.current_layer][0].lock()
-		Global.undo_redo.add_undo_property(c.layers[Global.current_layer][0], "data", data)
+		c.layers[Global.current_layer].image.unlock()
+		var data = c.layers[Global.current_layer].image.data
+		c.layers[Global.current_layer].image.lock()
+		Global.undo_redo.add_undo_property(c.layers[Global.current_layer].image, "data", data)
 	if action == "Rectangle Select":
 		var selected_pixels = Global.selected_pixels.duplicate()
 		Global.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
@@ -470,7 +466,7 @@ func handle_redo(action : String) -> void:
 	else:
 		canvases = Global.canvases
 	for c in canvases:
-		Global.undo_redo.add_do_property(c.layers[Global.current_layer][0], "data", c.layers[Global.current_layer][0].data)
+		Global.undo_redo.add_do_property(c.layers[Global.current_layer].image, "data", c.layers[Global.current_layer].image.data)
 	if action == "Rectangle Select":
 		Global.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
@@ -479,11 +475,11 @@ func handle_redo(action : String) -> void:
 
 
 func update_texture(layer_index : int) -> void:
-	layers[layer_index][1].create_from_image(layers[layer_index][0], 0)
+	layers[layer_index].image_texture.create_from_image(layers[layer_index].image, 0)
 
 	var frame_texture_rect : TextureRect
 	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index].frame_container.get_child(frame), "CelTexture")
-	frame_texture_rect.texture = layers[layer_index][1]
+	frame_texture_rect.texture = layers[layer_index].image_texture
 
 
 func onion_skinning() -> void:
@@ -500,7 +496,7 @@ func onion_skinning() -> void:
 				for layer in Global.canvases[Global.current_frame - i].layers:
 					if Global.layers[layer_i].visible:
 						color.a = 0.6 / i
-						draw_texture(layer[1], location, color)
+						draw_texture(layer.image_texture, location, color)
 					layer_i += 1
 
 	# Future
@@ -516,7 +512,7 @@ func onion_skinning() -> void:
 				for layer in Global.canvases[Global.current_frame + i].layers:
 					if Global.layers[layer_i].visible:
 						color.a = 0.6 / i
-						draw_texture(layer[1], location, color)
+						draw_texture(layer.image_texture, location, color)
 					layer_i += 1
 
 

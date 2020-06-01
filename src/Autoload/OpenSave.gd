@@ -87,9 +87,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			image.lock()
-			var tex := ImageTexture.new()
-			tex.create_from_image(image, 0)
-			canvas.layers.append([image, tex, layer_transparency])
+			canvas.layers.append(Cel.new(image, layer_transparency))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
 					Global.layers[layer_i].linked_cels.append(canvas)
@@ -201,8 +199,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 			file.store_16(canvas.size.y)
 			for layer in canvas.layers: # Store canvas layers
 				file.store_line("-")
-				file.store_buffer(layer[0].get_data())
-				file.store_float(layer[2]) # Layer transparency
+				file.store_buffer(layer.image.get_data())
+				file.store_float(layer.opacity)
 			file.store_line("END_LAYERS")
 
 			 # Store guides
