@@ -56,8 +56,8 @@ func _ready() -> void:
 		if self in l.linked_cels:
 			# If the linked button is pressed, set as the Image & ImageTexture
 			# to be the same as the first linked cel
-			layers[layer_i][0] = l[5][0].layers[layer_i][0]
-			layers[layer_i][1] = l[5][0].layers[layer_i][1]
+			layers[layer_i][0] = l.linked_cels[0].layers[layer_i][0]
+			layers[layer_i][1] = l.linked_cels[0].layers[layer_i][1]
 
 		layer_i += 1
 

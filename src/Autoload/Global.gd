@@ -554,7 +554,7 @@ func layers_changed(value : Array) -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.i = i
-		if !layers[i].name:
+		if layers[i].name == tr("Layer") + " 0":
 			layers[i].name = tr("Layer") + " %s" % i
 
 		layers_container.add_child(layer_container)
