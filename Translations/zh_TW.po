@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "確定"
@@ -757,9 +757,6 @@ msgstr "垂直"
 
 msgid "Current frame:"
 msgstr "目前畫面:"
-
-msgid "Current frame: 1/1"
-msgstr "目前畫面: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
