@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -758,9 +758,6 @@ msgstr "Vertikāls"
 
 msgid "Current frame:"
 msgstr "Patreizējais kadrs:"
-
-msgid "Current frame: 1/1"
-msgstr "Patreizējais kadrs: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
