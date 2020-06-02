@@ -67,22 +67,33 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	if current_frame > 0 && current_frame == new_canvases.size(): # If it's the last frame
 		current_frame -= 1
 
-	var new_animation_tags := Global.animation_tags.duplicate(true)
+	var new_animation_tags := Global.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(new_animation_tags[i].name, new_animation_tags[i].color, new_animation_tags[i].from, new_animation_tags[i].to)
+
 	# Loop through the tags to see if the frame is in one
 	for tag in new_animation_tags:
-		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
-			if tag[3] == tag[2]: # If we're deleting the only frame in the tag
+		if frame + 1 >= tag.from && frame + 1 <= tag.to:
+			if tag.from == tag.to: # If we're deleting the only frame in the tag
 				new_animation_tags.erase(tag)
 			else:
-				tag[3] -= 1
-		elif frame + 1 < tag[2]:
-			tag[2] -= 1
-			tag[3] -= 1
+				tag.to -= 1
+		elif frame + 1 < tag.from:
+			tag.from -= 1
+			tag.to -= 1
 
 	# Check if one of the cels of the frame is linked
 	# if they are, unlink them too
 	# this prevents removed cels being kept in linked memory
-	var new_layers : Array = Global.layers.duplicate(true)
+	var new_layers : Array = Global.layers.duplicate()
+	# Loop through the array to create new classes for each element, so that they
+	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+	for i in new_layers.size():
+		var new_linked_cels = new_layers[i].linked_cels.duplicate()
+		new_layers[i] = Layer.new(new_layers[i].name, new_layers[i].visible, new_layers[i].locked, new_layers[i].frame_container, new_layers[i].new_cels_linked, new_linked_cels)
+
 	for layer in new_layers:
 		for linked in layer.linked_cels:
 			if linked == Global.canvases[frame]:
@@ -134,11 +145,16 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 		sprite.lock()
 		new_canvas.layers.append(Cel.new(sprite, layer.opacity))
 
-	var new_animation_tags := Global.animation_tags.duplicate(true)
+	var new_animation_tags := Global.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(new_animation_tags[i].name, new_animation_tags[i].color, new_animation_tags[i].from, new_animation_tags[i].to)
+
 	# Loop through the tags to see if the frame is in one
 	for tag in new_animation_tags:
-		if frame + 1 >= tag[2] && frame + 1 <= tag[3]:
-			tag[3] += 1
+		if frame + 1 >= tag.from && frame + 1 <= tag.to:
+			tag.to += 1
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Add Frame")
@@ -263,9 +279,9 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 	last_frame = Global.canvases.size() - 1
 	if Global.play_only_tags:
 		for tag in Global.animation_tags:
-			if Global.current_frame + 1 >= tag[2] && Global.current_frame + 1 <= tag[3]:
-				first_frame = tag[2] - 1
-				last_frame = min(Global.canvases.size() - 1, tag[3] - 1)
+			if Global.current_frame + 1 >= tag.from && Global.current_frame + 1 <= tag.to:
+				first_frame = tag.from - 1
+				last_frame = min(Global.canvases.size() - 1, tag.to - 1)
 
 	if first_frame == last_frame:
 		if forward_dir:
@@ -400,11 +416,11 @@ func change_layer_order(rate : int) -> void:
 	new_layers[change] = temp
 	Global.undo_redo.create_action("Change Layer Order")
 	for c in Global.canvases:
-		var new_layers_canvas : Array = c.layers.duplicate()
-		var temp_canvas = new_layers_canvas[Global.current_layer]
-		new_layers_canvas[Global.current_layer] = new_layers_canvas[change]
-		new_layers_canvas[change] = temp_canvas
-		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
+		var new_canvas_layers : Array = c.layers.duplicate()
+		var temp_canvas = new_canvas_layers[Global.current_layer]
+		new_canvas_layers[Global.current_layer] = new_canvas_layers[change]
+		new_canvas_layers[change] = temp_canvas
+		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
 	Global.undo_redo.add_do_property(Global, "current_layer", change)
@@ -418,14 +434,21 @@ func change_layer_order(rate : int) -> void:
 
 
 func _on_MergeDownLayer_pressed() -> void:
-	var new_layers : Array = Global.layers.duplicate(true)
+	var new_layers : Array = Global.layers.duplicate()
+	# Loop through the array to create new classes for each element, so that they
+	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+	for i in new_layers.size():
+		var new_linked_cels = new_layers[i].linked_cels.duplicate()
+		new_layers[i] = Layer.new(new_layers[i].name, new_layers[i].visible, new_layers[i].locked, new_layers[i].frame_container, new_layers[i].new_cels_linked, new_linked_cels)
 
 	Global.undos += 1
 	Global.undo_redo.create_action("Merge Layer")
 	for c in Global.canvases:
-		var new_layers_canvas : Array = c.layers.duplicate(true)
+		var new_canvas_layers : Array = c.layers.duplicate()
+		for i in new_canvas_layers.size():
+			new_canvas_layers[i] = Cel.new(new_canvas_layers[i].image, new_canvas_layers[i].opacity)
 		var selected_layer := Image.new()
-		selected_layer.copy_from(new_layers_canvas[Global.current_layer].image)
+		selected_layer.copy_from(new_canvas_layers[Global.current_layer].image)
 		selected_layer.lock()
 
 		if c.layers[Global.current_layer].opacity < 1: # If we have layer transparency
@@ -439,15 +462,15 @@ func _on_MergeDownLayer_pressed() -> void:
 		new_layer.copy_from(c.layers[Global.current_layer - 1].image)
 		new_layer.lock()
 		DrawingAlgos.blend_rect(new_layer, selected_layer, Rect2(c.position, c.size), Vector2.ZERO)
-		new_layers_canvas.remove(Global.current_layer)
+		new_canvas_layers.remove(Global.current_layer)
 		if !selected_layer.is_invisible() and Global.layers[Global.current_layer - 1].linked_cels.size() > 1 and (c in Global.layers[Global.current_layer - 1].linked_cels):
 			new_layers[Global.current_layer - 1].linked_cels.erase(c)
-			new_layers_canvas[Global.current_layer - 1].image = new_layer
+			new_canvas_layers[Global.current_layer - 1].image = new_layer
 		else:
 			Global.undo_redo.add_do_property(c.layers[Global.current_layer - 1].image, "data", new_layer.data)
 			Global.undo_redo.add_undo_property(c.layers[Global.current_layer - 1].image, "data", c.layers[Global.current_layer - 1].image.data)
 
-		Global.undo_redo.add_do_property(c, "layers", new_layers_canvas)
+		Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 		Global.undo_redo.add_undo_property(c, "layers", c.layers)
 
 	new_layers.remove(Global.current_layer)

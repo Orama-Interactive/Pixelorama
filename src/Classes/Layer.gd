@@ -1,5 +1,4 @@
-class_name Layer
-extends Reference
+class_name Layer extends Reference
 # A class for layer properties
 
 

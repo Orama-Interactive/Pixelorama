@@ -25,10 +25,10 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		var vbox_cont := VBoxContainer.new()
 		var hbox_cont := HBoxContainer.new()
 		var tag_label := Label.new()
-		if tag[2] == tag[3]:
-			tag_label.text = "Tag %s (Frame %s)" % [i + 1, tag[2]]
+		if tag.from == tag.to:
+			tag_label.text = "Tag %s (Frame %s)" % [i + 1, tag.from]
 		else:
-			tag_label.text = "Tag %s (Frames %s-%s)" % [i + 1, tag[2], tag[3]]
+			tag_label.text = "Tag %s (Frames %s-%s)" % [i + 1, tag.from, tag.to]
 		hbox_cont.add_child(tag_label)
 
 		var edit_button := Button.new()
@@ -39,8 +39,8 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		vbox_cont.add_child(hbox_cont)
 
 		var name_label := Label.new()
-		name_label.text = tag[0]
-		name_label.modulate = tag[1]
+		name_label.text = tag.name
+		name_label.modulate = tag.color
 		vbox_cont.add_child(name_label)
 
 		var hsep := HSeparator.new()
@@ -70,10 +70,10 @@ func _on_AddTag_pressed() -> void:
 func _on_EditButton_pressed(_tag_id : int) -> void:
 	options_dialog.popup_centered()
 	current_tag_id = _tag_id
-	options_dialog.get_node("GridContainer/NameLineEdit").text = Global.animation_tags[_tag_id][0]
-	options_dialog.get_node("GridContainer/ColorPickerButton").color = Global.animation_tags[_tag_id][1]
-	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.animation_tags[_tag_id][2]
-	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.animation_tags[_tag_id][3]
+	options_dialog.get_node("GridContainer/NameLineEdit").text = Global.animation_tags[_tag_id].name
+	options_dialog.get_node("GridContainer/ColorPickerButton").color = Global.animation_tags[_tag_id].color
+	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.animation_tags[_tag_id].from
+	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.animation_tags[_tag_id].to
 	if !delete_tag_button:
 		delete_tag_button = options_dialog.add_button("Delete Tag", true, "delete_tag")
 	else:
@@ -92,14 +92,19 @@ func _on_TagOptions_confirmed() -> void:
 	if tag_from > tag_to:
 		tag_from = tag_to
 
-	var new_animation_tags := Global.animation_tags.duplicate(true)
+	var new_animation_tags := Global.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(new_animation_tags[i].name, new_animation_tags[i].color, new_animation_tags[i].from, new_animation_tags[i].to)
+
 	if current_tag_id == Global.animation_tags.size():
-		new_animation_tags.append([tag_name, tag_color, tag_from, tag_to])
+		new_animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
 	else:
-		new_animation_tags[current_tag_id][0] = tag_name
-		new_animation_tags[current_tag_id][1] = tag_color
-		new_animation_tags[current_tag_id][2] = tag_from
-		new_animation_tags[current_tag_id][3] = tag_to
+		new_animation_tags[current_tag_id].name = tag_name
+		new_animation_tags[current_tag_id].color = tag_color
+		new_animation_tags[current_tag_id].from = tag_from
+		new_animation_tags[current_tag_id].to = tag_to
 
 	# Handle Undo/Redo
 	Global.undos += 1
@@ -114,7 +119,7 @@ func _on_TagOptions_confirmed() -> void:
 
 func _on_TagOptions_custom_action(action : String) -> void:
 	if action == "delete_tag":
-		var new_animation_tags := Global.animation_tags.duplicate(true)
+		var new_animation_tags := Global.animation_tags.duplicate()
 		new_animation_tags.remove(current_tag_id)
 		# Handle Undo/Redo
 		Global.undos += 1

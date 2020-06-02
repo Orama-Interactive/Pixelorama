@@ -158,7 +158,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var tag_color : Color = file.get_var()
 			var tag_from := file.get_8()
 			var tag_to := file.get_8()
-			Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
+			Global.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
 			Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
 			tag_line = file.get_line()
 
@@ -239,10 +239,10 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		# Store animation tags
 		for tag in Global.animation_tags:
 			file.store_line(".T/")
-			file.store_line(tag[0]) # Tag name
-			file.store_var(tag[1]) # Tag color
-			file.store_8(tag[2]) # Tag "from", the first frame
-			file.store_8(tag[3]) # Tag "to", the last frame
+			file.store_line(tag.name)
+			file.store_var(tag.color)
+			file.store_8(tag.from)
+			file.store_8(tag.to)
 		file.store_line("END_FRAME_TAGS")
 
 		file.close()

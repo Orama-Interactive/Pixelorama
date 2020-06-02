@@ -1,9 +1,9 @@
 extends Node
 
 
-const Drawer = preload("res://src/Drawers.gd").Drawer
-const SimpleDrawer = preload("res://src/Drawers.gd").SimpleDrawer
-const PixelPerfectDrawer = preload("res://src/Drawers.gd").PixelPerfectDrawer
+const Drawer = preload("res://src/Classes/Drawers.gd").Drawer
+const SimpleDrawer = preload("res://src/Classes/Drawers.gd").SimpleDrawer
+const PixelPerfectDrawer = preload("res://src/Classes/Drawers.gd").PixelPerfectDrawer
 
 var pixel_perfect_drawer := PixelPerfectDrawer.new()
 var pixel_perfect_drawer_h_mirror := PixelPerfectDrawer.new()

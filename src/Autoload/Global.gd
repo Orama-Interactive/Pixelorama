@@ -53,7 +53,7 @@ var right_cursor_tool_texture : ImageTexture
 
 var selected_pixels := []
 var image_clipboard : Image
-var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
+var animation_tags := [] setget animation_tags_changed
 var play_only_tags := true
 
 var theme_type : int = Theme_Types.DARK
@@ -512,9 +512,9 @@ func canvases_changed(value : Array) -> void:
 	animation_timeline.last_frame = canvases.size() - 1
 	if play_only_tags:
 		for tag in animation_tags:
-			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
-				animation_timeline.first_frame = tag[2] - 1
-				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
+			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
+				animation_timeline.first_frame = tag.from - 1
+				animation_timeline.last_frame = min(canvases.size() - 1, tag.to - 1)
 
 
 func clear_canvases() -> void:
@@ -704,13 +704,13 @@ func animation_tags_changed(value : Array) -> void:
 		tag_container.add_child(tag_c)
 		var tag_position := tag_container.get_child_count() - 1
 		tag_container.move_child(tag_c, tag_position)
-		tag_c.get_node("Label").text = tag[0]
-		tag_c.get_node("Label").modulate = tag[1]
-		tag_c.get_node("Line2D").default_color = tag[1]
+		tag_c.get_node("Label").text = tag.name
+		tag_c.get_node("Label").modulate = tag.color
+		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag[2] - 1) * 39 + tag[2]
+		tag_c.rect_position.x = (tag.from - 1) * 39 + tag.from
 
-		var size : int = tag[3] - tag[2]
+		var size : int = tag.to - tag.from
 		tag_c.rect_min_size.x = (size + 1) * 39
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
@@ -722,9 +722,9 @@ func animation_tags_changed(value : Array) -> void:
 	animation_timeline.last_frame = canvases.size() - 1
 	if play_only_tags:
 		for tag in animation_tags:
-			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
-				animation_timeline.first_frame = tag[2] - 1
-				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
+			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
+				animation_timeline.first_frame = tag.from - 1
+				animation_timeline.last_frame = min(canvases.size() - 1, tag.to - 1)
 
 
 func update_hint_tooltips() -> void:

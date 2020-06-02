@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "AnimationTag",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationTag.gd"
+}, {
 "base": "Node2D",
 "class": "Canvas",
 "language": "GDScript",
@@ -17,7 +22,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Cel",
 "language": "GDScript",
-"path": "res://src/Cel.gd"
+"path": "res://src/Classes/Cel.gd"
 }, {
 "base": "Line2D",
 "class": "Guide",
@@ -27,7 +32,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Layer",
 "language": "GDScript",
-"path": "res://src/Layer.gd"
+"path": "res://src/Classes/Layer.gd"
 }, {
 "base": "Button",
 "class": "LayerButton",
@@ -45,6 +50,7 @@ _global_script_classes=[ {
 "path": "res://src/Palette/PaletteColor.gd"
 } ]
 _global_script_class_icons={
+"AnimationTag": "",
 "Canvas": "",
 "Cel": "",
 "Guide": "",

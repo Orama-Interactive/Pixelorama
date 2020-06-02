@@ -55,18 +55,22 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 		4: # Unlink Cel
 			var cel_index : int = Global.layers[layer].linked_cels.find(Global.canvases[frame])
 			var c = Global.canvases[frame]
-			var new_layers : Array = Global.layers.duplicate(true)
-			var new_canvas_layers : Array = c.layers.duplicate(true)
+			var new_layers : Array = Global.layers.duplicate()
+			# Loop through the array to create new classes for each element, so that they
+			# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+			for i in new_layers.size():
+				var new_linked_cels = new_layers[i].linked_cels.duplicate()
+				new_layers[i] = Layer.new(new_layers[i].name, new_layers[i].visible, new_layers[i].locked, new_layers[i].frame_container, new_layers[i].new_cels_linked, new_linked_cels)
+			var new_canvas_layers : Array = c.layers.duplicate()
+			for i in new_canvas_layers.size():
+				new_canvas_layers[i] = Cel.new(new_canvas_layers[i].image, new_canvas_layers[i].opacity)
 
 			if popup_menu.get_item_metadata(4) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
-				sprite.copy_from(Global.canvases[frame].layers[layer][0])
+				sprite.copy_from(Global.canvases[frame].layers[layer].image)
 				sprite.lock()
-				var tex := ImageTexture.new()
-				tex.create_from_image(sprite, 0)
-				new_canvas_layers[layer][0] = sprite
-				new_canvas_layers[layer][1] = tex
+				new_canvas_layers[layer].image = sprite
 
 				Global.undo_redo.create_action("Unlink Cel")
 				Global.undo_redo.add_do_property(Global, "layers", new_layers)
@@ -84,8 +88,8 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
-					new_canvas_layers[layer][0] = new_layers[layer].linked_cels[0].layers[layer][0]
-					new_canvas_layers[layer][1] = new_layers[layer].linked_cels[0].layers[layer][1]
+					new_canvas_layers[layer].image = new_layers[layer].linked_cels[0].layers[layer].image
+					new_canvas_layers[layer].image_texture = new_layers[layer].linked_cels[0].layers[layer].image_texture
 					Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
 					Global.undo_redo.add_undo_property(c, "layers", c.layers)
 

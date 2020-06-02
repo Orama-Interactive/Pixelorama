@@ -1,5 +1,4 @@
-class_name Cel
-extends Reference
+class_name Cel extends Reference
 # A class for cel properties
 
 

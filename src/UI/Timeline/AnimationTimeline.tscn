@@ -22,7 +22,7 @@
 [ext_resource path="res://assets/graphics/dark_themes/timeline/onion_skinning_off.png" type="Texture" id=29]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/expandable.png" type="Texture" id=30]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/loop.png" type="Texture" id=31]
-[ext_resource path="res://src/UI/Dialogs/FrameTagDialog.tscn" type="PackedScene" id=42]
+[ext_resource path="res://src/UI/Timeline/FrameTagDialog.tscn" type="PackedScene" id=42]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
