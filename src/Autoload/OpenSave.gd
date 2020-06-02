@@ -36,16 +36,21 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	# and the status would return "beta"
 	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
 	var file_minor_version = int(file_ver_splitted_numbers[1])
-	var _file_patch_version := 0
+	var file_patch_version := 0
 	var _file_status_version : String
 
 	if file_ver_splitted_numbers.size() > 2:
-		_file_patch_version = int(file_ver_splitted_numbers[2])
+		file_patch_version = int(file_ver_splitted_numbers[2])
 	if file_ver_splitted.size() > 1:
 		_file_status_version = file_ver_splitted[1]
 
 	if file_major_version == 0 and file_minor_version < 5:
 		Global.notification_label("File is from an older version of Pixelorama, as such it might not work properly")
+
+	var new_guides := true
+	if file_major_version == 0:
+		if file_minor_version < 7 or (file_minor_version == 7 and file_patch_version == 0):
+			new_guides = false
 
 	var frame := 0
 	Global.layers.clear()
@@ -65,10 +70,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
-	Global.clear_canvases()
+	Global.clear_frames()
 	while frame_line == "--": # Load frames
-		var canvas : Canvas = load("res://src/Canvas.tscn").instance()
-		Global.canvas = canvas
+		var frame_class := Frame.new()
 		var width := file.get_16()
 		var height := file.get_16()
 
@@ -81,24 +85,49 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				if frame == 0:
 					var l := Layer.new(layer_name_old_version)
 					Global.layers.append(l)
-			var layer_transparency := 1.0
+			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
-				layer_transparency = file.get_float()
+				cel_opacity = file.get_float()
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			image.lock()
-			canvas.layers.append(Cel.new(image, layer_transparency))
+			frame_class.cels.append(Cel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					Global.layers[layer_i].linked_cels.append(canvas)
+					Global.layers[layer_i].linked_cels.append(frame_class)
 
 			layer_i += 1
 			layer_line = file.get_line()
 
+		if !new_guides:
+			var guide_line := file.get_line() # "guideline" no pun intended
+			while guide_line == "|": # Load guides
+				var guide := Guide.new()
+				guide.type = file.get_8()
+				if guide.type == guide.Types.HORIZONTAL:
+					guide.add_point(Vector2(-99999, file.get_16()))
+					guide.add_point(Vector2(99999, file.get_16()))
+				else:
+					guide.add_point(Vector2(file.get_16(), -99999))
+					guide.add_point(Vector2(file.get_16(), 99999))
+				guide.has_focus = false
+				Global.canvas.add_child(guide)
+				guide_line = file.get_line()
+
+		Global.canvas.size = Vector2(width, height)
+		Global.frames.append(frame_class)
+		frame_line = file.get_line()
+		frame += 1
+
+	Global.frames = Global.frames # Just to call Global.frames_changed
+	Global.current_layer = Global.layers.size() - 1
+	Global.current_frame = frame - 1
+	Global.layers = Global.layers # Just to call Global.layers_changed
+
+	if new_guides:
 		var guide_line := file.get_line() # "guideline" no pun intended
 		while guide_line == "|": # Load guides
 			var guide := Guide.new()
-			guide.default_color = Color.purple
 			guide.type = file.get_8()
 			if guide.type == guide.Types.HORIZONTAL:
 				guide.add_point(Vector2(-99999, file.get_16()))
@@ -107,20 +136,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				guide.add_point(Vector2(file.get_16(), -99999))
 				guide.add_point(Vector2(file.get_16(), 99999))
 			guide.has_focus = false
-			canvas.add_child(guide)
+			Global.canvas.add_child(guide)
 			guide_line = file.get_line()
 
-		canvas.size = Vector2(width, height)
-		Global.canvases.append(canvas)
-		canvas.frame = frame
-		Global.canvas_parent.add_child(canvas)
-		frame_line = file.get_line()
-		frame += 1
-
-	Global.canvases = Global.canvases # Just to call Global.canvases_changed
-	Global.current_layer = Global.layers.size() - 1
-	Global.current_frame = frame - 1
-	Global.layers = Global.layers # Just to call Global.layers_changed
 	# Load tool options
 	Global.color_pickers[0].color = file.get_var()
 	Global.color_pickers[1].color = file.get_var()
@@ -163,6 +181,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			tag_line = file.get_line()
 
 	file.close()
+	Global.canvas.camera_zoom()
 
 	if not untitled_backup:
 		# Untitled backup should not change window title and save path
@@ -186,36 +205,37 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 			file.store_8(layer.locked)
 			file.store_8(layer.new_cels_linked)
 			var linked_cels := []
-			for canvas in layer.linked_cels:
-				linked_cels.append(canvas.frame)
+			for frame in layer.linked_cels:
+				linked_cels.append(Global.frames.find(frame))
 			file.store_var(linked_cels) # Linked cels as cel numbers
 
 		file.store_line("END_GLOBAL_LAYERS")
 
 		 # Store frames
-		for canvas in Global.canvases:
+		for frame in Global.frames:
 			file.store_line("--")
-			file.store_16(canvas.size.x)
-			file.store_16(canvas.size.y)
-			for layer in canvas.layers: # Store canvas layers
+			file.store_16(Global.canvas.size.x)
+			file.store_16(Global.canvas.size.y)
+			for cel in frame.cels: # Store canvas layers
 				file.store_line("-")
-				file.store_buffer(layer.image.get_data())
-				file.store_float(layer.opacity)
+				file.store_buffer(cel.image.get_data())
+				file.store_float(cel.opacity)
 			file.store_line("END_LAYERS")
 
-			 # Store guides
-			for child in canvas.get_children():
-				if child is Guide:
-					file.store_line("|")
-					file.store_8(child.type)
-					if child.type == child.Types.HORIZONTAL:
-						file.store_16(child.points[0].y)
-						file.store_16(child.points[1].y)
-					else:
-						file.store_16(child.points[1].x)
-						file.store_16(child.points[0].x)
-			file.store_line("END_GUIDES")
 		file.store_line("END_FRAMES")
+
+		# Store guides
+		for child in Global.canvas.get_children():
+			if child is Guide:
+				file.store_line("|")
+				file.store_8(child.type)
+				if child.type == child.Types.HORIZONTAL:
+					file.store_16(child.points[0].y)
+					file.store_16(child.points[1].y)
+				else:
+					file.store_16(child.points[1].x)
+					file.store_16(child.points[0].x)
+		file.store_line("END_GUIDES")
 
 		# Save tool options
 		var left_color : Color = Global.color_pickers[0].color

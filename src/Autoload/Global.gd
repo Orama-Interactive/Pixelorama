@@ -35,7 +35,7 @@ var undos := 0 # The number of times we added undo properties
 var project_has_changed := false # Checks if the user has made changes to the project
 
 # Canvas related stuff
-var canvases := [] setget canvases_changed
+var frames := [] setget frames_changed
 var layers := [] setget layers_changed
 var layers_changed_skip := false
 var current_frame := 0 setget frame_changed
@@ -57,7 +57,6 @@ var animation_tags := [] setget animation_tags_changed
 var play_only_tags := true
 
 var theme_type : int = Theme_Types.DARK
-var is_default_image := true
 var default_image_width := 64
 var default_image_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
@@ -136,7 +135,6 @@ var top_menu_container : Panel
 var left_cursor : Sprite
 var right_cursor : Sprite
 var canvas : Canvas
-var canvas_parent : Node
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var camera : Camera2D
@@ -225,7 +223,6 @@ var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
 var palette_import_file_dialog : FileDialog
-
 var error_dialog : AcceptDialog
 
 onready var current_version : String = ProjectSettings.get_setting("application/config/Version")
@@ -251,15 +248,13 @@ func _ready() -> void:
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
-	canvases.append(canvas)
 	left_cursor_tool_texture = ImageTexture.new()
 	left_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/pencil_cursor.png"))
 	right_cursor_tool_texture = ImageTexture.new()
 	right_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/eraser_cursor.png"))
-	canvas_parent = canvas.get_parent()
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
-	camera = find_node_by_name(canvas_parent, "Camera2D")
+	camera = find_node_by_name(main_viewport, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	camera_preview = find_node_by_name(root, "CameraPreview")
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
@@ -404,33 +399,26 @@ func general_redo() -> void:
 		notification_label("Redo: %s" % action_name)
 
 
-func undo(_canvases : Array, layer_index : int = -1) -> void:
+func undo(_frame_index := -1, _layer_index := -1) -> void:
 	general_undo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
-		for c in _canvases:
-			if layer_index > -1:
-				c.update_texture(layer_index)
-			else:
-				for i in c.layers.size():
-					c.update_texture(i)
+		if _layer_index > -1 and _frame_index > -1:
+			canvas.update_texture(_layer_index, _frame_index)
+		else:
+			for i in frames.size():
+				for j in layers.size():
+					canvas.update_texture(j, i)
 
-			if action_name == "Scale":
-				c.camera_zoom()
+		if action_name == "Scale":
+			canvas.camera_zoom()
 
-	if action_name == "Add Frame":
-		canvas_parent.remove_child(_canvases[0])
-		# This actually means that canvases.size is one, but it hasn't been updated yet
-		if canvases.size() == 2: # Stop animating
+	elif "Frame" in action_name:
+		# This actually means that frames.size is one, but it hasn't been updated yet
+		if frames.size() == 2: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
-	elif action_name == "Remove Frame":
-		canvas_parent.add_child(_canvases[0])
-		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-	elif action_name == "Change Frame Order":
-		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-		canvas_parent.move_child(canvas_parent.get_node("TransparentChecker"), 0)
 
 	canvas.update()
 	if !project_has_changed:
@@ -438,31 +426,25 @@ func undo(_canvases : Array, layer_index : int = -1) -> void:
 		self.window_title = window_title + "(*)"
 
 
-func redo(_canvases : Array, layer_index : int = -1) -> void:
+func redo(_frame_index := -1, _layer_index := -1) -> void:
 	general_redo()
 	var action_name := undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
-		for c in _canvases:
-			if layer_index > -1:
-				c.update_texture(layer_index)
-			else:
-				for i in c.layers.size():
-					c.update_texture(i)
+		if _layer_index > -1 and _frame_index > -1:
+			canvas.update_texture(_layer_index, _frame_index)
+		else:
+			for i in frames.size():
+				for j in layers.size():
+					canvas.update_texture(j, i)
 
-			if action_name == "Scale":
-				c.camera_zoom()
+		if action_name == "Scale":
+			canvas.camera_zoom()
 
-	if action_name == "Add Frame":
-		canvas_parent.add_child(_canvases[0])
-	elif action_name == "Remove Frame":
-		canvas_parent.remove_child(_canvases[0])
-		if canvases.size() == 1: # Stop animating
+	elif "Frame" in action_name:
+		if frames.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
-	elif action_name == "Change Frame Order":
-		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-		canvas_parent.move_child(canvas_parent.get_node("TransparentChecker"), 0)
 
 	canvas.update()
 	if !project_has_changed:
@@ -475,8 +457,8 @@ func title_changed(value : String) -> void:
 	OS.set_window_title(value)
 
 
-func canvases_changed(value : Array) -> void:
-	canvases = value
+func frames_changed(value : Array) -> void:
+	frames = value
 	for container in frames_container.get_children():
 		for button in container.get_children():
 			container.remove_child(button)
@@ -490,7 +472,7 @@ func canvases_changed(value : Array) -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		frames_container.add_child(layers[i].frame_container)
 
-	for j in range(canvases.size()):
+	for j in range(frames.size()):
 		var label := Label.new()
 		label.rect_min_size.x = 36
 		label.align = Label.ALIGN_CENTER
@@ -501,7 +483,7 @@ func canvases_changed(value : Array) -> void:
 			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
-			cel_button.get_child(0).texture = Global.canvases[j].layers[i].image_texture
+			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
 
 			layers[i].frame_container.add_child(cel_button)
 
@@ -509,19 +491,16 @@ func canvases_changed(value : Array) -> void:
 	# otherwise, this code is useless in this context, since these values are being set
 	# when the play buttons get pressed, anyway
 	animation_timeline.first_frame = 0
-	animation_timeline.last_frame = canvases.size() - 1
+	animation_timeline.last_frame = frames.size() - 1
 	if play_only_tags:
 		for tag in animation_tags:
 			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
 				animation_timeline.first_frame = tag.from - 1
-				animation_timeline.last_frame = min(canvases.size() - 1, tag.to - 1)
+				animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
 
-func clear_canvases() -> void:
-	for child in canvas_parent.get_children():
-		if child is Canvas:
-			child.queue_free()
-	canvases.clear()
+func clear_frames() -> void:
+	frames.clear()
 	animation_tags.clear()
 	self.animation_tags = animation_tags # To execute animation_tags_changed()
 
@@ -564,11 +543,11 @@ func layers_changed(value : Array) -> void:
 		layer_container.line_edit.text = layers[i].name
 
 		frames_container.add_child(layers[i].frame_container)
-		for j in range(canvases.size()):
+		for j in range(frames.size()):
 			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
 			cel_button.frame = j
 			cel_button.layer = i
-			cel_button.get_child(0).texture = Global.canvases[j].layers[i].image_texture
+			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
 
 			layers[i].frame_container.add_child(cel_button)
 
@@ -590,13 +569,9 @@ func layers_changed(value : Array) -> void:
 
 func frame_changed(value : int) -> void:
 	current_frame = value
-	current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), canvases.size()]
+	current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
-	var i := 0
-	for c in canvases: # De-select all the other canvases/frames
-		c.visible = false
-		c.is_making_line = false
-		c.line_2d.set_point_position(1, c.line_2d.points[0])
+	for i in frames.size(): # De-select all the other frames
 		var text_color := Color.white
 		if theme_type == Theme_Types.CARAMEL || theme_type == Theme_Types.LIGHT:
 			text_color = Color.black
@@ -604,27 +579,26 @@ func frame_changed(value : int) -> void:
 		for layer in layers:
 			if i < layer.frame_container.get_child_count():
 				layer.frame_container.get_child(i).pressed = false
-		i += 1
 
-	# Select the new canvas/frame
-	canvas = canvases[current_frame]
-	canvas.visible = true
+	# Select the new frame
 	frame_ids.get_child(current_frame).add_color_override("font_color", control.theme.get_color("Selected Color", "Label"))
 	if current_frame < layers[current_layer].frame_container.get_child_count():
 		layers[current_layer].frame_container.get_child(current_frame).pressed = true
 
-	if canvases.size() == 1:
+	if frames.size() == 1:
 		disable_button(remove_frame_button, true)
 	elif !layers[current_layer].locked:
 		disable_button(remove_frame_button, false)
 
+	Global.canvas.update()
 	Global.transparent_checker._ready() # To update the rect size
 
 
 func layer_changed(value : int) -> void:
 	current_layer = value
-	layer_opacity_slider.value = canvas.layers[current_layer].opacity * 100
-	layer_opacity_spinbox.value = canvas.layers[current_layer].opacity * 100
+	if current_frame < frames.size():
+		layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
+		layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
 
 	for container in layers_container.get_children():
 		container.pressed = false
@@ -719,12 +693,12 @@ func animation_tags_changed(value : Array) -> void:
 	# otherwise, this code is useless in this context, since these values are being set
 	# when the play buttons get pressed, anyway
 	animation_timeline.first_frame = 0
-	animation_timeline.last_frame = canvases.size() - 1
+	animation_timeline.last_frame = frames.size() - 1
 	if play_only_tags:
 		for tag in animation_tags:
 			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
 				animation_timeline.first_frame = tag.from - 1
-				animation_timeline.last_frame = min(canvases.size() - 1, tag.to - 1)
+				animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
 
 func update_hint_tooltips() -> void:

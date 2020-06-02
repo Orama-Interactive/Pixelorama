@@ -73,22 +73,23 @@ func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
 	var height : int = height_value.value
 	var fill_color : Color = fill_color_node.color
-	Global.clear_canvases()
+	Global.clear_frames()
 	Global.layers.clear()
 	Global.layers.append(Layer.new())
-	Global.canvas = load("res://src/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
+	Global.canvas.fill_color = fill_color
+	var frame : Frame = Global.canvas.new_empty_frame()
+	Global.canvas.camera_zoom()
+	Global.frames.append(frame)
 
-	Global.canvases.append(Global.canvas)
-	Global.canvas_parent.add_child(Global.canvas)
 	Global.current_layer = 0
-	Global.canvases = Global.canvases # To trigger Global.canvases_changed()
+	Global.frames = Global.frames # To trigger Global.frames_changed()
 	Global.current_frame = 0
 	Global.layers = Global.layers # To trigger Global.layers_changed()
 	Global.project_has_changed = false
 	if fill_color.a > 0:
-		Global.canvas.layers[0].image.fill(fill_color)
-		Global.canvas.layers[0].image.lock()
+		Global.frames[0].cels[0].image.fill(fill_color)
+		Global.frames[0].cels[0].image.lock()
 		Global.canvas.update_texture(0)
 
 

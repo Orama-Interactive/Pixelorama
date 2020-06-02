@@ -74,5 +74,6 @@ func _on_LockButton_pressed() -> void:
 func _on_LinkButton_pressed() -> void:
 	Global.layers[i].new_cels_linked = !Global.layers[i].new_cels_linked
 	if Global.layers[i].new_cels_linked && !Global.layers[i].linked_cels:
-		Global.layers[i].linked_cels.append(Global.canvas)
+		# If button is pressed and there are no linked cels in the layer
+		Global.layers[i].linked_cels.append(Global.frames[Global.current_frame])
 		Global.layers[i].frame_container.get_child(Global.current_frame)._ready()

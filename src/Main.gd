@@ -364,10 +364,9 @@ func toggle_show_rulers() -> void:
 func toggle_show_guides() -> void:
 	Global.show_guides = !Global.show_guides
 	view_menu.set_item_checked(3, Global.show_guides)
-	for canvas in Global.canvases:
-		for guide in canvas.get_children():
-			if guide is Guide:
-				guide.visible = Global.show_guides
+	for guide in Global.canvas.get_children():
+		if guide is Guide:
+			guide.visible = Global.show_guides
 
 
 func toggle_show_anim_timeline() -> void:
@@ -399,21 +398,21 @@ func show_scale_image_popup() -> void:
 
 func crop_image() -> void:
 	# Use first cel as a starting rectangle
-	var used_rect : Rect2 = Global.canvases[0].layers[0].image.get_used_rect()
+	var used_rect : Rect2 = Global.frames[0].cels[0].image.get_used_rect()
 
-	for c in Global.canvases:
+	for f in Global.frames:
 		# However, if first cel is empty, loop through all cels until we find one that isn't
-		for layer in c.layers:
+		for cel in f.cels:
 			if used_rect != Rect2(0, 0, 0, 0):
 				break
 			else:
-				if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
-					used_rect = layer.image.get_used_rect()
+				if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = cel.image.get_used_rect()
 
 		# Merge all layers with content
-		for layer in c.layers:
-				if layer.image.get_used_rect() != Rect2(0, 0, 0, 0):
-					used_rect = used_rect.merge(layer.image.get_used_rect())
+		for cel in f.cels:
+				if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = used_rect.merge(cel.image.get_used_rect())
 
 	# If no layer has any content, just return
 	if used_rect == Rect2(0, 0, 0, 0):
@@ -423,17 +422,17 @@ func crop_image() -> void:
 	var height := used_rect.size.y
 	Global.undos += 1
 	Global.undo_redo.create_action("Scale")
-	for c in Global.canvases:
-		Global.undo_redo.add_do_property(c, "size", Vector2(width, height).floor())
+	Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
+	for f in Global.frames:
 		# Loop through all the layers to crop them
-		for j in range(Global.canvas.layers.size() - 1, -1, -1):
-			var sprite : Image = c.layers[j].image.get_rect(used_rect)
-			Global.undo_redo.add_do_property(c.layers[j].image, "data", sprite.data)
-			Global.undo_redo.add_undo_property(c.layers[j].image, "data", c.layers[j].image.data)
+		for j in range(Global.layers.size() - 1, -1, -1):
+			var sprite : Image = f.cels[j].image.get_rect(used_rect)
+			Global.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
+			Global.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
 
-		Global.undo_redo.add_undo_property(c, "size", c.size)
-	Global.undo_redo.add_undo_method(Global, "undo", Global.canvases)
-	Global.undo_redo.add_do_method(Global, "redo", Global.canvases)
+	Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
+	Global.undo_redo.add_undo_method(Global, "undo")
+	Global.undo_redo.add_do_method(Global, "redo")
 	Global.undo_redo.commit_action()
 
 

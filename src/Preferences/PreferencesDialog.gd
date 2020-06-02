@@ -55,10 +55,9 @@ func _ready() -> void:
 
 	Global.transparent_checker._ready()
 
-	for canvas in Global.canvases:
-		for guide in canvas.get_children():
-			if guide is Guide:
-				guide.default_color = Global.guide_color
+	for guide in Global.canvas.get_children():
+		if guide is Guide:
+			guide.default_color = Global.guide_color
 
 
 func _on_Preference_toggled(button_pressed : bool, prop : String) -> void:
@@ -96,10 +95,9 @@ func preference_update(prop : String) -> void:
 		Global.transparent_checker._ready()
 
 	if prop in ["guide_color"]:
-		for canvas in Global.canvases:
-			for guide in canvas.get_children():
-				if guide is Guide:
-					guide.default_color = Global.guide_color
+		for guide in Global.canvas.get_children():
+			if guide is Guide:
+				guide.default_color = Global.guide_color
 
 	Global.config_cache.save("user://cache.ini")
 

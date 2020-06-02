@@ -86,8 +86,8 @@ func _on_TagOptions_confirmed() -> void:
 	var tag_from : int = options_dialog.get_node("GridContainer/FromSpinBox").value
 	var tag_to : int = options_dialog.get_node("GridContainer/ToSpinBox").value
 
-	if tag_to > Global.canvases.size():
-		tag_to = Global.canvases.size()
+	if tag_to > Global.frames.size():
+		tag_to = Global.frames.size()
 
 	if tag_from > tag_to:
 		tag_from = tag_to
