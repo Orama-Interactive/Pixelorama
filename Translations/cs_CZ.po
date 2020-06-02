@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-06-02 17:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -760,9 +760,6 @@ msgstr "Svisle"
 
 msgid "Current frame:"
 msgstr "Aktuální snímek:"
-
-msgid "Current frame: 1/1"
-msgstr "Aktuální snímek: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
