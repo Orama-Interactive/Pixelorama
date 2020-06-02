@@ -407,7 +407,7 @@ func crop_image() -> void:
 			if used_rect != Rect2(0, 0, 0, 0):
 				break
 			else:
-				if layer[0].get_used_rect() != Rect2(0, 0, 0, 0):
+				if layer.image.get_used_rect() != Rect2(0, 0, 0, 0):
 					used_rect = layer.image.get_used_rect()
 
 		# Merge all layers with content
