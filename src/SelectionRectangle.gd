@@ -20,24 +20,24 @@ func _ready() -> void:
 
 
 func _process(_delta : float) -> void:
-	if Global.layers[Global.current_layer][2]:
+	if Global.layers[Global.current_layer].locked:
 		return
 	var mouse_pos: Vector2 = get_local_mouse_position() - Global.canvas.location
 	var mouse_pos_floored := mouse_pos.floor()
 	var start_pos := polygon[0]
 	var end_pos := polygon[2]
 	var current_layer_index : int = Global.current_layer
-	var layer : Image = Global.canvas.layers[current_layer_index][0]
+	var layer : Image = Global.canvas.layers[current_layer_index].image
 
 	if end_pos == start_pos:
 		visible = false
 	else:
 		visible = true
 
-	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, polygon[0], polygon[2]) and Global.selected_pixels.size() > 0 and (Global.current_left_tool == "RectSelect" or Global.current_right_tool == "RectSelect"):
+	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, polygon[0], polygon[2]) and Global.selected_pixels.size() > 0 and (Global.current_tools[0] == Global.Tools.RECTSELECT or Global.current_tools[1] == Global.Tools.RECTSELECT):
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_pressed("right_mouse")):
+		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_just_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_just_pressed("right_mouse")):
 			# Begin dragging
 			is_dragging = true
 			if Input.is_key_pressed(KEY_SHIFT):
@@ -72,7 +72,7 @@ func _process(_delta : float) -> void:
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
 
 	if is_dragging:
-		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):
+		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_pressed("right_mouse")):
 			# Drag
 			start_pos.x = orig_x + mouse_pos_floored.x
 			end_pos.x = diff_x + mouse_pos_floored.x
@@ -84,7 +84,7 @@ func _process(_delta : float) -> void:
 			polygon[2] = end_pos
 			polygon[3] = Vector2(start_pos.x, end_pos.y)
 
-		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_released("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_released("right_mouse")):
+		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_just_released("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_just_released("right_mouse")):
 			# Release Drag
 			is_dragging = false
 			if move_pixels:

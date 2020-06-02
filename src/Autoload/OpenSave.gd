@@ -3,7 +3,6 @@ extends Node
 var current_save_path := ""
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_path = ""
-var default_autosave_interval := 5 # Minutes
 
 onready var autosave_timer : Timer
 
@@ -14,8 +13,7 @@ func _ready() -> void:
 	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE
 	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
 	add_child(autosave_timer)
-	set_autosave_interval(default_autosave_interval)
-	toggle_autosave(true) # Gets started from preferences dialog
+	update_autosave()
 
 
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
@@ -62,9 +60,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var layer_new_cels_linked := file.get_8()
 			linked_cels.append(file.get_var())
 
-			# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-			# will new cels be linked boolean (4), Array of linked cels (5)]
-			Global.layers.append([layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, []])
+			var l := Layer.new(layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, [])
+			Global.layers.append(l)
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -82,21 +79,18 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			if file_major_version == 0 and file_minor_version < 7:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-					# will new frames be linked boolean (4), Array of linked frames (5)]
-					Global.layers.append([layer_name_old_version, true, false, HBoxContainer.new(), false, []])
+					var l := Layer.new(layer_name_old_version)
+					Global.layers.append(l)
 			var layer_transparency := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
 				layer_transparency = file.get_float()
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			image.lock()
-			var tex := ImageTexture.new()
-			tex.create_from_image(image, 0)
-			canvas.layers.append([image, tex, layer_transparency])
+			canvas.layers.append(Cel.new(image, layer_transparency))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					Global.layers[layer_i][5].append(canvas)
+					Global.layers[layer_i].linked_cels.append(canvas)
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -128,19 +122,19 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	Global.current_frame = frame - 1
 	Global.layers = Global.layers # Just to call Global.layers_changed
 	# Load tool options
-	Global.left_color_picker.color = file.get_var()
-	Global.right_color_picker.color = file.get_var()
-	Global.left_brush_size = file.get_8()
-	Global.left_brush_size_edit.value = Global.left_brush_size
-	Global.right_brush_size = file.get_8()
-	Global.right_brush_size_edit.value = Global.right_brush_size
+	Global.color_pickers[0].color = file.get_var()
+	Global.color_pickers[1].color = file.get_var()
+	Global.brush_sizes[0] = file.get_8()
+	Global.brush_size_edits[0].value = Global.brush_sizes[0]
+	Global.brush_sizes[1] = file.get_8()
+	Global.brush_size_edits[1].value = Global.brush_sizes[1]
 	if file_major_version == 0 and file_minor_version < 7:
 		var left_palette = file.get_var()
 		var right_palette = file.get_var()
 		for color in left_palette:
-			Global.left_color_picker.get_picker().add_preset(color)
+			Global.color_pickers[0].get_picker().add_preset(color)
 		for color in right_palette:
-			Global.right_color_picker.get_picker().add_preset(color)
+			Global.color_pickers[1].get_picker().add_preset(color)
 
 	# Load custom brushes
 	Global.custom_brushes.resize(Global.brushes_from_files)
@@ -164,7 +158,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var tag_color : Color = file.get_var()
 			var tag_from := file.get_8()
 			var tag_to := file.get_8()
-			Global.animation_tags.append([tag_name, tag_color, tag_from, tag_to])
+			Global.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
 			Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
 			tag_line = file.get_line()
 
@@ -187,12 +181,12 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		# Store Global layers
 		for layer in Global.layers:
 			file.store_line(".")
-			file.store_line(layer[0]) # Layer name
-			file.store_8(layer[1]) # Layer visibility
-			file.store_8(layer[2]) # Layer lock
-			file.store_8(layer[4]) # Future cels linked
+			file.store_line(layer.name)
+			file.store_8(layer.visible)
+			file.store_8(layer.locked)
+			file.store_8(layer.new_cels_linked)
 			var linked_cels := []
-			for canvas in layer[5]:
+			for canvas in layer.linked_cels:
 				linked_cels.append(canvas.frame)
 			file.store_var(linked_cels) # Linked cels as cel numbers
 
@@ -205,8 +199,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 			file.store_16(canvas.size.y)
 			for layer in canvas.layers: # Store canvas layers
 				file.store_line("-")
-				file.store_buffer(layer[0].get_data())
-				file.store_float(layer[2]) # Layer transparency
+				file.store_buffer(layer.image.get_data())
+				file.store_float(layer.opacity)
 			file.store_line("END_LAYERS")
 
 			 # Store guides
@@ -224,10 +218,10 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		file.store_line("END_FRAMES")
 
 		# Save tool options
-		var left_color : Color = Global.left_color_picker.color
-		var right_color : Color = Global.right_color_picker.color
-		var left_brush_size : int = Global.left_brush_size
-		var right_brush_size : int = Global.right_brush_size
+		var left_color : Color = Global.color_pickers[0].color
+		var right_color : Color = Global.color_pickers[1].color
+		var left_brush_size : int = Global.brush_sizes[0]
+		var right_brush_size : int = Global.brush_sizes[1]
 		file.store_var(left_color)
 		file.store_var(right_color)
 		file.store_8(left_brush_size)
@@ -245,10 +239,10 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		# Store animation tags
 		for tag in Global.animation_tags:
 			file.store_line(".T/")
-			file.store_line(tag[0]) # Tag name
-			file.store_var(tag[1]) # Tag color
-			file.store_8(tag[2]) # Tag "from", the first frame
-			file.store_8(tag[3]) # Tag "to", the last frame
+			file.store_line(tag.name)
+			file.store_var(tag.color)
+			file.store_8(tag.from)
+			file.store_8(tag.to)
 		file.store_line("END_FRAME_TAGS")
 
 		file.close()
@@ -271,16 +265,11 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		Global.notification_label("File failed to save")
 
 
-func toggle_autosave(enable : bool) -> void:
-	if enable:
+func update_autosave() -> void:
+	autosave_timer.stop()
+	autosave_timer.wait_time = Global.autosave_interval * 60 # Interval parameter is in minutes, wait_time is seconds
+	if Global.enable_autosave:
 		autosave_timer.start()
-	else:
-		autosave_timer.stop()
-
-
-func set_autosave_interval(interval : float) -> void:
-	autosave_timer.wait_time = interval * 60 # Interval parameter is in minutes, wait_time is seconds
-	autosave_timer.start()
 
 
 func _on_Autosave_timeout() -> void:

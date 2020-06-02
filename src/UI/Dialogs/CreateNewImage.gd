@@ -75,9 +75,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	var fill_color : Color = fill_color_node.color
 	Global.clear_canvases()
 	Global.layers.clear()
-	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-	# will new frames be linked boolean (4), Array of linked frames (5)]
-	Global.layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
+	Global.layers.append(Layer.new())
 	Global.canvas = load("res://src/Canvas.tscn").instance()
 	Global.canvas.size = Vector2(width, height).floor()
 
@@ -89,8 +87,8 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.layers = Global.layers # To trigger Global.layers_changed()
 	Global.project_has_changed = false
 	if fill_color.a > 0:
-		Global.canvas.layers[0][0].fill(fill_color)
-		Global.canvas.layers[0][0].lock()
+		Global.canvas.layers[0].image.fill(fill_color)
+		Global.canvas.layers[0].image.lock()
 		Global.canvas.update_texture(0)
 
 

@@ -165,11 +165,11 @@ func on_color_select(index : int) -> void:
 	var color : Color = Global.palettes[current_palette].get_color(index)
 
 	if Input.is_action_just_pressed("left_mouse"):
-		Global.left_color_picker.color = color
-		Global.update_left_custom_brush()
+		Global.color_pickers[0].color = color
+		Global.update_custom_brush(0)
 	elif Input.is_action_just_pressed("right_mouse"):
-		Global.right_color_picker.color = color
-		Global.update_right_custom_brush()
+		Global.color_pickers[1].color = color
+		Global.update_custom_brush(1)
 
 
 func _load_palettes() -> void:
@@ -195,7 +195,7 @@ func _load_palettes() -> void:
 					# You need these two lines because when you remove a palette
 					# Then this just won't work and _on_PaletteOptionButton_item_selected
 					# method won't fire.
-					Global.palette_option_button.selected
+					Global.palette_option_button.selected = index
 					on_palette_select("Default")
 					Global.palette_option_button.select(index)
 

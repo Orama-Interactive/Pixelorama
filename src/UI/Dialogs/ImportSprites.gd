@@ -41,7 +41,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 		Global.layers.clear()
 		# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
 		# will new frames be linked boolean (4), Array of linked frames (5)]
-		Global.layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
+		Global.layers.append(Layer.new())
 		Global.current_layer = 0
 
 	var first_path : String = paths[0]
@@ -64,22 +64,14 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			canvas.size = image.get_size()
 			image.convert(Image.FORMAT_RGBA8)
 			image.lock()
-			var tex := ImageTexture.new()
-			tex.create_from_image(image, 0)
-			# Store [Image, ImageTexture, Opacity]
-			canvas.layers.append([image, tex, 1])
+			canvas.layers.append(Cel.new(image, 1))
 
 			for _i in range(1, Global.layers.size()):
 				var empty_sprite := Image.new()
 				empty_sprite.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
 				empty_sprite.fill(Color(0, 0, 0, 0))
 				empty_sprite.lock()
-
-				var empty_tex := ImageTexture.new()
-				empty_tex.create_from_image(empty_sprite, 0)
-
-				# Store [Image, ImageTexture, Opacity]
-				canvas.layers.append([empty_sprite, empty_tex, 1])
+				canvas.layers.append(Cel.new(empty_sprite, 1))
 
 			canvas.frame = i
 			Global.canvases.append(canvas)
@@ -119,21 +111,14 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				canvas.size = cropped_image.get_size()
 				cropped_image.convert(Image.FORMAT_RGBA8)
 				cropped_image.lock()
-				var tex := ImageTexture.new()
-				tex.create_from_image(cropped_image, 0)
-				# Store [Image, ImageTexture, Opacity]
-				canvas.layers.append([cropped_image, tex, 1])
+				canvas.layers.append(Cel.new(cropped_image, 1))
+
 				for _i in range(1, Global.layers.size()):
 					var empty_sprite := Image.new()
 					empty_sprite.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
 					empty_sprite.fill(Color(0, 0, 0, 0))
 					empty_sprite.lock()
-
-					var empty_tex := ImageTexture.new()
-					empty_tex.create_from_image(empty_sprite, 0)
-
-					# Store [Image, ImageTexture, Opacity]
-					canvas.layers.append([empty_sprite, empty_tex, 1])
+					canvas.layers.append(Cel.new(empty_sprite, 1))
 
 				canvas.frame = i
 				Global.canvases.append(canvas)

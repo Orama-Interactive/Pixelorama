@@ -10,7 +10,7 @@ func _on_OutlineDialog_confirmed() -> void:
 	var diagonal : bool = $OptionsContainer/DiagonalCheckBox.pressed
 	var inside_image : bool = $OptionsContainer/InsideImageCheckBox.pressed
 
-	var image : Image = Global.canvas.layers[Global.current_layer][0]
+	var image : Image = Global.canvas.layers[Global.current_layer].image
 	if image.is_invisible():
 		return
 	var new_image := Image.new()

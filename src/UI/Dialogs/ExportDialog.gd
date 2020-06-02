@@ -147,8 +147,8 @@ func process_spritesheet() -> void:
 	# Range of frames determined by tags
 	var frames := []
 	if frame_current_tag > 0:
-		var frame_start = Global.animation_tags[frame_current_tag - 1][2]
-		var frame_end = Global.animation_tags[frame_current_tag - 1][3]
+		var frame_start = Global.animation_tags[frame_current_tag - 1].from
+		var frame_end = Global.animation_tags[frame_current_tag - 1].to
 		frames = Global.canvases.slice(frame_start-1, frame_end-1, 1, true)
 	else:
 		frames = Global.canvases
@@ -283,8 +283,8 @@ func get_proccessed_image_animation_tag_and_start_id(processed_image_id : int) -
 	for animation_tag in Global.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
 		# Then stop
-		if (processed_image_id + 1) >= animation_tag[2] and (processed_image_id + 1) <= animation_tag[3]:
-			result_animation_tag_and_start_id = [animation_tag[0], animation_tag[2]]
+		if (processed_image_id + 1) >= animation_tag.from and (processed_image_id + 1) <= animation_tag.to:
+			result_animation_tag_and_start_id = [animation_tag.name, animation_tag.from]
 			break
 	return result_animation_tag_and_start_id
 
@@ -365,17 +365,17 @@ func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0))
 	image.lock()
 	var layer_i := 0
 	for layer in canvas.layers:
-		if Global.layers[layer_i][1]:
+		if Global.layers[layer_i].visible:
 			var layer_image := Image.new()
-			layer_image.copy_from(layer[0])
+			layer_image.copy_from(layer.image)
 			layer_image.lock()
-			if layer[2] < 1: # If we have layer transparency
+			if layer.opacity < 1: # If we have layer transparency
 				for xx in layer_image.get_size().x:
 					for yy in layer_image.get_size().y:
 						var pixel_color := layer_image.get_pixel(xx, yy)
-						var alpha : float = pixel_color.a * layer[2]
+						var alpha : float = pixel_color.a * layer.opacity
 						layer_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			canvas.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
+			DrawingAlgos.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
 		layer_i += 1
 	image.unlock()
 
@@ -454,7 +454,7 @@ func create_frame_tag_list() -> void:
 
 	# Repopulate list with current tag list
 	for item in Global.animation_tags:
-		frame_container.add_item(item[0])
+		frame_container.add_item(item.name)
 
 
 func store_export_settings() -> void:
