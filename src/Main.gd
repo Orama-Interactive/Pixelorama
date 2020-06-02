@@ -68,8 +68,7 @@ func _input(event : InputEvent) -> void:
 
 func setup_application_window_size() -> void:
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	# This property is only available in 3.2alpha or later, so use `set()` to fail gracefully if it doesn't exist.
-	OS.set("min_window_size", Vector2(1024, 576))
+	OS.min_window_size = Vector2(1024, 576)
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):

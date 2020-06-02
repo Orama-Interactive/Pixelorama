@@ -50,7 +50,7 @@ It's still work in progress so there are some pages missing. If you want to cont
 Pixelorama uses Godot 3.2, so you will need to have it in order to run the project.
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
-Pixelorama uses a GDNative addon for gif exporting, since it's not possible to do it natively with Godot. In order to ensure that your clone works properly, you will need to use the command `git submodule update --init` right after you clone.
+Pixelorama uses a [GDNative addon for gif exporting](https://github.com/novhack/godot-gifexporter), since it's not possible to do it natively with Godot. In order to ensure that your clone works properly, you will need to use the command `git submodule update --init` right after you clone.
 
 Note that the addon only works in Windows and Linux platforms, for the time being. Pixelorama should run without it fine on other platforms. 
 
