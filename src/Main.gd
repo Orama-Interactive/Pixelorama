@@ -436,33 +436,27 @@ func crop_image() -> void:
 	Global.undo_redo.commit_action()
 
 
-func flip_image_horizontal() -> void:
-	var canvas : Canvas = Global.canvas
-	canvas.handle_undo("Draw")
-	canvas.layers[Global.current_layer].image.unlock()
-	canvas.layers[Global.current_layer].image.flip_x()
-	canvas.layers[Global.current_layer].image.lock()
-	canvas.handle_redo("Draw")
-
-
-func flip_image_vertical() -> void:
-	var canvas : Canvas = Global.canvas
-	canvas.handle_undo("Draw")
-	canvas.layers[Global.current_layer].image.unlock()
-	canvas.layers[Global.current_layer].image.flip_y()
-	canvas.layers[Global.current_layer].image.lock()
-	canvas.handle_redo("Draw")
+func flip_image(horizontal : bool) -> void:
+	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	Global.canvas.handle_undo("Draw")
+	image.unlock()
+	if horizontal:
+		image.flip_x()
+	else:
+		image.flip_y()
+	image.lock()
+	Global.canvas.handle_redo("Draw")
 
 
 func show_rotate_image_popup() -> void:
-	var image : Image = Global.canvas.layers[Global.current_layer].image
+	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
 	$RotateImage.set_sprite(image)
 	$RotateImage.popup_centered()
 	Global.dialog_open(true)
 
 
 func invert_image_colors() -> void:
-	var image : Image = Global.canvas.layers[Global.current_layer].image
+	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
@@ -474,7 +468,7 @@ func invert_image_colors() -> void:
 
 
 func desaturate_image() -> void:
-	var image : Image = Global.canvas.layers[Global.current_layer].image
+	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
@@ -508,10 +502,10 @@ func image_menu_id_pressed(id : int) -> void:
 			crop_image()
 
 		2: # Flip Horizontal
-			flip_image_horizontal()
+			flip_image(true)
 
 		3: # Flip Vertical
-			flip_image_vertical()
+			flip_image(false)
 
 		4: # Rotate
 			show_rotate_image_popup()
