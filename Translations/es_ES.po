@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-06-02 17:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -740,9 +740,6 @@ msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Fotograma actual:"
-
-msgid "Current frame: 1/1"
-msgstr "Fotograma actual: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
