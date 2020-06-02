@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-05-19 21:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr ""
@@ -739,9 +739,6 @@ msgid "Vertical"
 msgstr ""
 
 msgid "Current frame:"
-msgstr ""
-
-msgid "Current frame: 1/1"
 msgstr ""
 
 msgid "Jump to the first frame\n"
