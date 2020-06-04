@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.7.1] - Unreleased
 This update has been brought to you by the contributions of:
 
-Igor Santarek (jegor377), rob-a-bolton
+Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 
 ### Added
 - Ability to remove the current palette.
@@ -18,6 +18,7 @@ Igor Santarek (jegor377), rob-a-bolton
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
 - The guides are now the same for all frames.
+- Pixel perfect is no longer enabled when the brush size is bigger than 1px.
 
 ### Fixed
 - Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files. ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
