@@ -37,11 +37,6 @@ func _ready() -> void:
 	for pref in preferences:
 		var node = right_side.get_node(pref[1])
 
-		if Global.config_cache.has_section_key("preferences", pref[0]):
-			var value = Global.config_cache.get_value("preferences", pref[0])
-			Global.set(pref[0], value)
-			node.set(pref[2], value)
-
 		match pref[2]:
 			"pressed":
 				node.connect("toggled", self, "_on_Preference_toggled", [pref[0]])
@@ -53,11 +48,10 @@ func _ready() -> void:
 			"selected":
 				node.connect("item_selected", self, "_on_Preference_item_selected", [pref[0]])
 
-	Global.transparent_checker._ready()
-
-	for guide in Global.canvas.get_children():
-		if guide is Guide:
-			guide.default_color = Global.guide_color
+		if Global.config_cache.has_section_key("preferences", pref[0]):
+			var value = Global.config_cache.get_value("preferences", pref[0])
+			Global.set(pref[0], value)
+			node.set(pref[2], value)
 
 
 func _on_Preference_toggled(button_pressed : bool, prop : String) -> void:
