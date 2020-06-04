@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _on_HSVDialog_about_to_show() -> void:
-	current_cel = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	preview_image.copy_from(current_cel)
 	update_preview()
 
@@ -38,7 +38,7 @@ func _on_Apply_pressed() -> void:
 	DrawingAlgos.adjust_hsv(current_cel,0,hue_slider.value)
 	DrawingAlgos.adjust_hsv(current_cel,1,sat_slider.value)
 	DrawingAlgos.adjust_hsv(current_cel,2,val_slider.value)
-	Global.canvas.update_texture(Global.current_layer)
+	Global.canvas.update_texture(Global.current_project.current_layer)
 	Global.canvas.handle_redo("Draw")
 	reset()
 	visible = false

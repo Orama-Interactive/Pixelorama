@@ -26,7 +26,7 @@ var pen_pressure := 1.0 # For tablet pressure sensitivity
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var frame : Frame = new_empty_frame(true)
-	Global.frames.append(frame)
+	Global.current_project.frames.append(frame)
 	camera_zoom()
 
 	line_2d = Line2D.new()
@@ -38,14 +38,14 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	var current_cels : Array = Global.frames[Global.current_frame].cels
+	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
 	if Global.onion_skinning:
 		onion_skinning()
 
 	# Draw current frame layers
-	for i in range(Global.layers.size()):
+	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if Global.layers[i].visible: # if it's visible
+		if Global.current_project.layers[i].visible: # if it's visible
 			draw_texture(current_cels[i].image_texture, location, modulate_color)
 
 			if Global.tile_mode:
@@ -82,9 +82,9 @@ func _draw() -> void:
 						draw_set_transform(position, rotation, scale)
 				else:
 					if Global.current_tools[i] == Global.Tools.PENCIL || Global.current_tools[i] == Global.Tools.ERASER:
-						var custom_brush_size = Global.custom_brush_images[i].get_size()  - Vector2.ONE
+						var custom_brush_size = Global.current_project.brush_images[i].get_size()  - Vector2.ONE
 						var dst : Vector2 = DrawingAlgos.rectangle_center(mouse_pos, custom_brush_size)
-						draw_texture(Global.custom_brush_textures[i], dst)
+						draw_texture(Global.current_project.brush_textures[i], dst)
 
 
 func _input(event : InputEvent) -> void:
@@ -125,7 +125,7 @@ func _input(event : InputEvent) -> void:
 	x_max = location.x + size.x
 	y_min = location.y
 	y_max = location.y + size.y
-	if Global.selected_pixels.size() != 0:
+	if Global.current_project.selected_pixels.size() != 0:
 		x_min = max(x_min, Global.selection_rectangle.polygon[0].x)
 		x_max = min(x_max, Global.selection_rectangle.polygon[2].x)
 		y_min = max(y_min, Global.selection_rectangle.polygon[0].y)
@@ -169,7 +169,7 @@ func _input(event : InputEvent) -> void:
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
-		if can_handle || Global.undos == Global.undo_redo.get_version():
+		if can_handle || Global.current_project.undos == Global.current_project.undo_redo.get_version():
 			if previous_action != -1 && previous_action != Global.Tools.RECTSELECT && current_action != Global.Tools.COLORPICKER && current_action != Global.Tools.ZOOM:
 				handle_redo("Draw")
 
@@ -219,14 +219,14 @@ func _input(event : InputEvent) -> void:
 
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					Global.selected_pixels.append(Vector2(xx, yy))
+					Global.current_project.selected_pixels.append(Vector2(xx, yy))
 			is_making_selection = -1
 			handle_redo("Rectangle Select")
 
 	previous_action = current_action
 	previous_mouse_pos = current_pixel
 	if sprite_changed_this_frame:
-		update_texture(Global.current_layer)
+		update_texture(Global.current_project.current_layer)
 
 
 func camera_zoom() -> void:
@@ -251,7 +251,7 @@ func camera_zoom() -> void:
 
 func new_empty_frame(first_time := false) -> Frame:
 	var frame := Frame.new()
-	for l in Global.layers:
+	for l in Global.current_project.layers:
 		# The sprite itself
 		var sprite := Image.new()
 		if first_time:
@@ -271,7 +271,7 @@ func new_empty_frame(first_time := false) -> Frame:
 
 
 func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : Vector2, can_handle : bool) -> void:
-	var current_cel : Cel = Global.frames[Global.current_frame].cels[Global.current_layer]
+	var current_cel : Cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer]
 	var sprite : Image = current_cel.image
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
@@ -354,7 +354,7 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 			# Check SelectionRectangle.gd for more code on Rectangle Selection
 			if Global.can_draw && Global.has_focus:
 				# If we're creating a new selection
-				if Global.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
+				if Global.current_project.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
 					var mouse_button_string := "left_mouse" if current_mouse_button == Global.Mouse_Button.LEFT else "right_mouse"
 
 					if Input.is_action_just_pressed(mouse_button_string):
@@ -363,7 +363,7 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 						Global.selection_rectangle.polygon[2] = mouse_pos_floored
 						Global.selection_rectangle.polygon[3] = mouse_pos_floored
 						is_making_selection = current_mouse_button
-						Global.selected_pixels.clear()
+						Global.current_project.selected_pixels.clear()
 					else:
 						if is_making_selection != -1: # If we're making a new selection...
 							var start_pos = Global.selection_rectangle.polygon[0]
@@ -413,25 +413,25 @@ func handle_undo(action : String) -> void:
 	var frame_index := -1
 	var layer_index := -1
 	if Global.animation_timer.is_stopped(): # if we're not animating, store only the current canvas
-		frames.append(Global.frames[Global.current_frame])
-		frame_index = Global.current_frame
-		layer_index = Global.current_layer
+		frames.append(Global.current_project.frames[Global.current_project.current_frame])
+		frame_index = Global.current_project.current_frame
+		layer_index = Global.current_project.current_layer
 	else: # If we're animating, store all frames
-		frames = Global.frames
-	Global.undos += 1
-	Global.undo_redo.create_action(action)
+		frames = Global.current_project.frames
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action(action)
 	for f in frames:
 		# I'm not sure why I have to unlock it, but...
 		# ...if I don't, it doesn't work properly
-		f.cels[Global.current_layer].image.unlock()
-		var data = f.cels[Global.current_layer].image.data
-		f.cels[Global.current_layer].image.lock()
-		Global.undo_redo.add_undo_property(f.cels[Global.current_layer].image, "data", data)
+		f.cels[Global.current_project.current_layer].image.unlock()
+		var data = f.cels[Global.current_project.current_layer].image.data
+		f.cels[Global.current_project.current_layer].image.lock()
+		Global.current_project.undo_redo.add_undo_property(f.cels[Global.current_project.current_layer].image, "data", data)
 	if action == "Rectangle Select":
-		var selected_pixels = Global.selected_pixels.duplicate()
-		Global.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
-		Global.undo_redo.add_undo_property(Global, "selected_pixels", selected_pixels)
-	Global.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index)
+		var selected_pixels = Global.current_project.selected_pixels.duplicate()
+		Global.current_project.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
+		Global.current_project.undo_redo.add_undo_property(Global.current_project, "selected_pixels", selected_pixels)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index)
 
 	can_undo = false
 
@@ -439,34 +439,34 @@ func handle_undo(action : String) -> void:
 func handle_redo(action : String) -> void:
 	can_undo = true
 
-	if Global.undos < Global.undo_redo.get_version():
+	if Global.current_project.undos < Global.current_project.undo_redo.get_version():
 		return
 	var frames := []
 	var frame_index := -1
 	var layer_index := -1
 	if Global.animation_timer.is_stopped():
-		frames.append(Global.frames[Global.current_frame])
-		frame_index = Global.current_frame
-		layer_index = Global.current_layer
+		frames.append(Global.current_project.frames[Global.current_project.current_frame])
+		frame_index = Global.current_project.current_frame
+		layer_index = Global.current_project.current_layer
 	else:
-		frames = Global.frames
+		frames = Global.current_project.frames
 	for f in frames:
-		Global.undo_redo.add_do_property(f.cels[Global.current_layer].image, "data", f.cels[Global.current_layer].image.data)
+		Global.current_project.undo_redo.add_do_property(f.cels[Global.current_project.current_layer].image, "data", f.cels[Global.current_project.current_layer].image.data)
 	if action == "Rectangle Select":
-		Global.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
-		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
-	Global.undo_redo.add_do_method(Global, "redo", frame_index, layer_index)
-	Global.undo_redo.commit_action()
+		Global.current_project.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "selected_pixels", Global.current_project.selected_pixels)
+	Global.current_project.undo_redo.add_do_method(Global, "redo", frame_index, layer_index)
+	Global.current_project.undo_redo.commit_action()
 
 
 func update_texture(layer_index : int, frame_index := -1) -> void:
 	if frame_index == -1:
-		frame_index = Global.current_frame
-	var current_cel : Cel = Global.frames[frame_index].cels[layer_index]
+		frame_index = Global.current_project.current_frame
+	var current_cel : Cel = Global.current_project.frames[frame_index].cels[layer_index]
 	current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 	var frame_texture_rect : TextureRect
-	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+	frame_texture_rect = Global.find_node_by_name(Global.current_project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
 	frame_texture_rect.texture = current_cel.image_texture
 
 
@@ -479,10 +479,10 @@ func onion_skinning() -> void:
 		else:
 			color = Color.white
 		for i in range(1, Global.onion_skinning_past_rate + 1):
-			if Global.current_frame >= i:
+			if Global.current_project.current_frame >= i:
 				var layer_i := 0
-				for layer in Global.frames[Global.current_frame - i].cels:
-					if Global.layers[layer_i].visible:
+				for layer in Global.current_project.frames[Global.current_project.current_frame - i].cels:
+					if Global.current_project.layers[layer_i].visible:
 						color.a = 0.6 / i
 						draw_texture(layer.image_texture, location, color)
 					layer_i += 1
@@ -495,10 +495,10 @@ func onion_skinning() -> void:
 		else:
 			color = Color.white
 		for i in range(1, Global.onion_skinning_future_rate + 1):
-			if Global.current_frame < Global.frames.size() - i:
+			if Global.current_project.current_frame < Global.current_project.frames.size() - i:
 				var layer_i := 0
-				for layer in Global.frames[Global.current_frame + i].cels:
-					if Global.layers[layer_i].visible:
+				for layer in Global.current_project.frames[Global.current_project.current_frame + i].cels:
+					if Global.current_project.layers[layer_i].visible:
 						color.a = 0.6 / i
 						draw_texture(layer.image_texture, location, color)
 					layer_i += 1

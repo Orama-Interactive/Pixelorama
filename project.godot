@@ -58,6 +58,11 @@ _global_script_classes=[ {
 "class": "PaletteColor",
 "language": "GDScript",
 "path": "res://src/Palette/PaletteColor.gd"
+}, {
+"base": "Reference",
+"class": "Project",
+"language": "GDScript",
+"path": "res://src/Classes/Project.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
@@ -69,7 +74,8 @@ _global_script_class_icons={
 "Layer": "",
 "LayerButton": "",
 "Palette": "",
-"PaletteColor": ""
+"PaletteColor": "",
+"Project": ""
 }
 
 [application]

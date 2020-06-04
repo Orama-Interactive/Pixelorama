@@ -53,7 +53,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			new_guides = false
 
 	var frame := 0
-	Global.layers.clear()
+	Global.current_project.layers.clear()
 
 	var linked_cels := []
 	if file_major_version >= 0 and file_minor_version > 6:
@@ -66,7 +66,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			linked_cels.append(file.get_var())
 
 			var l := Layer.new(layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, [])
-			Global.layers.append(l)
+			Global.current_project.layers.append(l)
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
@@ -84,7 +84,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
 					var l := Layer.new(layer_name_old_version)
-					Global.layers.append(l)
+					Global.current_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
 				cel_opacity = file.get_float()
@@ -94,7 +94,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			frame_class.cels.append(Cel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					Global.layers[layer_i].linked_cels.append(frame_class)
+					Global.current_project.layers[layer_i].linked_cels.append(frame_class)
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -115,14 +115,14 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				guide_line = file.get_line()
 
 		Global.canvas.size = Vector2(width, height)
-		Global.frames.append(frame_class)
+		Global.current_project.frames.append(frame_class)
 		frame_line = file.get_line()
 		frame += 1
 
-	Global.frames = Global.frames # Just to call Global.frames_changed
-	Global.current_layer = Global.layers.size() - 1
-	Global.current_frame = frame - 1
-	Global.layers = Global.layers # Just to call Global.layers_changed
+	Global.current_project.frames = Global.current_project.frames # Just to call Global.frames_changed
+	Global.current_project.current_layer = Global.current_project.layers.size() - 1
+	Global.current_project.current_frame = frame - 1
+	Global.current_project.layers = Global.current_project.layers # Just to call Global.layers_changed
 
 	if new_guides:
 		var guide_line := file.get_line() # "guideline" no pun intended
@@ -155,7 +155,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			Global.color_pickers[1].get_picker().add_preset(color)
 
 	# Load custom brushes
-	Global.custom_brushes.resize(Global.brushes_from_files)
+	Global.current_project.brushes.resize(Global.brushes_from_files)
 	Global.remove_brush_buttons()
 
 	var brush_line := file.get_line()
@@ -165,7 +165,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		var buffer := file.get_buffer(b_width * b_height * 4)
 		var image := Image.new()
 		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
-		Global.custom_brushes.append(image)
+		Global.current_project.brushes.append(image)
 		Global.create_brush_button(image)
 		brush_line = file.get_line()
 
@@ -176,8 +176,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var tag_color : Color = file.get_var()
 			var tag_from := file.get_8()
 			var tag_to := file.get_8()
-			Global.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
-			Global.animation_tags = Global.animation_tags # To execute animation_tags_changed()
+			Global.current_project.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
+			Global.current_project.animation_tags = Global.current_project.animation_tags # To execute animation_tags_changed()
 			tag_line = file.get_line()
 
 	file.close()
@@ -187,7 +187,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		# Untitled backup should not change window title and save path
 		current_save_path = path
 		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
-		Global.project_has_changed = false
+		Global.current_project.has_changed = false
 
 
 func save_pxo_file(path : String, autosave : bool) -> void:
@@ -198,7 +198,7 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		file.store_line(Global.current_version)
 
 		# Store Global layers
-		for layer in Global.layers:
+		for layer in Global.current_project.layers:
 			file.store_line(".")
 			file.store_line(layer.name)
 			file.store_8(layer.visible)
@@ -206,13 +206,13 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 			file.store_8(layer.new_cels_linked)
 			var linked_cels := []
 			for frame in layer.linked_cels:
-				linked_cels.append(Global.frames.find(frame))
+				linked_cels.append(Global.current_project.frames.find(frame))
 			file.store_var(linked_cels) # Linked cels as cel numbers
 
 		file.store_line("END_GLOBAL_LAYERS")
 
 		 # Store frames
-		for frame in Global.frames:
+		for frame in Global.current_project.frames:
 			file.store_line("--")
 			file.store_16(Global.canvas.size.x)
 			file.store_16(Global.canvas.size.y)
@@ -248,8 +248,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		file.store_8(right_brush_size)
 
 		# Save custom brushes
-		for i in range(Global.brushes_from_files, Global.custom_brushes.size()):
-			var brush = Global.custom_brushes[i]
+		for i in range(Global.brushes_from_files, Global.current_project.brushes.size()):
+			var brush = Global.current_project.brushes[i]
 			file.store_line("/")
 			file.store_16(brush.get_size().x)
 			file.store_16(brush.get_size().y)
@@ -257,7 +257,7 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		file.store_line("END_BRUSHES")
 
 		# Store animation tags
-		for tag in Global.animation_tags:
+		for tag in Global.current_project.animation_tags:
 			file.store_line(".T/")
 			file.store_line(tag.name)
 			file.store_var(tag.color)
@@ -267,8 +267,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 
 		file.close()
 
-		if Global.project_has_changed and not autosave:
-			Global.project_has_changed = false
+		if Global.current_project.has_changed and not autosave:
+			Global.current_project.has_changed = false
 
 		if autosave:
 			Global.notification_label("File autosaved")
@@ -342,7 +342,7 @@ func reload_backup_file(project_path : String, backup_path : String) -> void:
 	if project_path != backup_path:
 		current_save_path = project_path
 		Global.window_title = project_path.get_file() + " - Pixelorama(*) " + Global.current_version
-		Global.project_has_changed = true
+		Global.current_project.has_changed = true
 
 	Global.notification_label("Backup reloaded")
 

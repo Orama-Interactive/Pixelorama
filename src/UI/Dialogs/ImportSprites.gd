@@ -38,12 +38,12 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 	Global.control.opensprite_file_selected = true
 	if !new_frame: # If we're not adding a new frame, delete the previous
 		Global.clear_frames()
-		Global.layers.clear()
-		Global.layers.append(Layer.new())
-		Global.current_layer = 0
+		Global.current_project.layers.clear()
+		Global.current_project.layers.append(Layer.new())
+		Global.current_project.current_layer = 0
 
 	var first_path : String = paths[0]
-	var i : int = Global.frames.size()
+	var i : int = Global.current_project.frames.size()
 	if !import_spritesheet:
 		for path in paths:
 			var image := Image.new()
@@ -61,14 +61,14 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 			image.lock()
 			frame.cels.append(Cel.new(image, 1))
 
-			for _i in range(1, Global.layers.size()):
+			for _i in range(1, Global.current_project.layers.size()):
 				var empty_sprite := Image.new()
 				empty_sprite.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
 				empty_sprite.fill(Color(0, 0, 0, 0))
 				empty_sprite.lock()
 				frame.cels.append(Cel.new(empty_sprite, 1))
 
-			Global.frames.append(frame)
+			Global.current_project.frames.append(frame)
 
 			i += 1
 
@@ -96,26 +96,26 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				cropped_image.lock()
 				frame.cels.append(Cel.new(cropped_image, 1))
 
-				for _i in range(1, Global.layers.size()):
+				for _i in range(1, Global.current_project.layers.size()):
 					var empty_sprite := Image.new()
 					empty_sprite.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
 					empty_sprite.fill(Color(0, 0, 0, 0))
 					empty_sprite.lock()
 					frame.cels.append(Cel.new(empty_sprite, 1))
 
-				Global.frames.append(frame)
+				Global.current_project.frames.append(frame)
 
 				i += 1
 
 	Global.canvas.camera_zoom()
 
-	Global.frames = Global.frames # Just to call Global.frames_changed
-	Global.current_frame = i - 1
+	Global.current_project.frames = Global.current_project.frames # Just to call Global.frames_changed
+	Global.current_project.current_frame = i - 1
 	if !new_frame:
-		Global.layers = Global.layers # Just to call Global.layers_changed
+		Global.current_project.layers = Global.current_project.layers # Just to call Global.layers_changed
 
 	Global.window_title = first_path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
-	if Global.project_has_changed:
+	if Global.current_project.has_changed:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := first_path.get_basename().get_file()
 	var directory_path := first_path.get_basename().replace(file_name, "")

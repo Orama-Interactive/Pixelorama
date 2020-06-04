@@ -50,8 +50,8 @@ func _on_DeleteButton_pressed() -> void:
 			Global.update_custom_brush(1)
 
 		var project_brush_index = custom_brush_index - Global.brushes_from_files
-		Global.undos += 1
-		Global.undo_redo.create_action("Delete Custom Brush")
+		Global.current_project.undos += 1
+		Global.current_project.undo_redo.create_action("Delete Custom Brush")
 		for i in range(project_brush_index, Global.project_brush_container.get_child_count()):
 			var bb = Global.project_brush_container.get_child(i)
 			if Global.custom_brush_indexes[0] == bb.custom_brush_index:
@@ -59,17 +59,17 @@ func _on_DeleteButton_pressed() -> void:
 			if Global.custom_brush_indexes[1] == bb.custom_brush_index:
 				Global.custom_brush_indexes[1] -= 1
 
-			Global.undo_redo.add_do_property(bb, "custom_brush_index", bb.custom_brush_index - 1)
-			Global.undo_redo.add_undo_property(bb, "custom_brush_index", bb.custom_brush_index)
+			Global.current_project.undo_redo.add_do_property(bb, "custom_brush_index", bb.custom_brush_index - 1)
+			Global.current_project.undo_redo.add_undo_property(bb, "custom_brush_index", bb.custom_brush_index)
 
-		var custom_brushes: Array = Global.custom_brushes.duplicate()
+		var custom_brushes: Array = Global.current_project.brushes.duplicate()
 		custom_brushes.remove(custom_brush_index)
 
-		Global.undo_redo.add_do_property(Global, "custom_brushes", custom_brushes)
-		Global.undo_redo.add_undo_property(Global, "custom_brushes", Global.custom_brushes)
-		Global.undo_redo.add_do_method(Global, "redo_custom_brush", self)
-		Global.undo_redo.add_undo_method(Global, "undo_custom_brush", self)
-		Global.undo_redo.commit_action()
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "brushes", custom_brushes)
+		Global.current_project.undo_redo.add_undo_property(Global.current_project, "brushes", Global.current_project.brushes)
+		Global.current_project.undo_redo.add_do_method(Global, "redo_custom_brush", self)
+		Global.current_project.undo_redo.add_undo_method(Global, "undo_custom_brush", self)
+		Global.current_project.undo_redo.commit_action()
 
 
 func _on_BrushButton_mouse_entered() -> void:
