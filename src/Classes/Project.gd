@@ -3,7 +3,7 @@ class_name Project extends Reference
 
 
 var name := ""
-#var size : Vector2
+var size : Vector2
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
 var has_changed := false
@@ -21,10 +21,11 @@ var brush_textures := [ImageTexture.new(), ImageTexture.new()]
 var selected_pixels := []
 
 
-func _init() -> void:
-	undo_redo = UndoRedo.new()
-	name = tr("untitled")
+func _init(_name := tr("untitled"), _size := Vector2(64, 64)) -> void:
+	name = _name
+	size = _size
 	layers.append(Layer.new())
+	undo_redo = UndoRedo.new()
 
 
 func frames_changed(value : Array) -> void:

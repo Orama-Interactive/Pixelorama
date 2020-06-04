@@ -50,6 +50,7 @@ var right_cursor_tool_texture : ImageTexture
 var image_clipboard : Image
 var play_only_tags := true
 
+# Preferences
 var theme_type : int = Theme_Types.DARK
 var default_image_width := 64
 var default_image_height := 64

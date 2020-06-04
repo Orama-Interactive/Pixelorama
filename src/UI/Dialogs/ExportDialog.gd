@@ -137,7 +137,7 @@ func external_export() -> void:
 func process_frame() -> void:
 	var frame = Global.current_project.frames[frame_number - 1]
 	var image := Image.new()
-	image.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	blend_layers(image, frame)
 	processed_images.clear()
 	processed_images.append(image)
@@ -160,8 +160,8 @@ func process_spritesheet() -> void:
 	var spritesheet_columns = lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
 	var spritesheet_rows = lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
 
-	var width = Global.canvas.size.x * spritesheet_columns
-	var height = Global.canvas.size.y * spritesheet_rows
+	var width = Global.current_project.size.x * spritesheet_columns
+	var height = Global.current_project.size.y * spritesheet_rows
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -173,22 +173,22 @@ func process_spritesheet() -> void:
 	for frame in frames:
 		if orientation == Orientation.ROWS:
 			if vv < spritesheet_columns:
-				origin.x = Global.canvas.size.x * vv
+				origin.x = Global.current_project.size.x * vv
 				vv += 1
 			else:
 				hh += 1
 				origin.x = 0
 				vv = 1
-				origin.y = Global.canvas.size.y * hh
+				origin.y = Global.current_project.size.y * hh
 		else:
 			if hh < spritesheet_rows:
-				origin.y = Global.canvas.size.y * hh
+				origin.y = Global.current_project.size.y * hh
 				hh += 1
 			else:
 				vv += 1
 				origin.y = 0
 				hh = 1
-				origin.x = Global.canvas.size.x * vv
+				origin.x = Global.current_project.size.x * vv
 		blend_layers(whole_image, frame, origin)
 
 	processed_images.clear()
@@ -199,7 +199,7 @@ func process_animation() -> void:
 	processed_images.clear()
 	for frame in Global.current_project.frames:
 		var image := Image.new()
-		image.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+		image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 		blend_layers(image, frame)
 		processed_images.append(image)
 
@@ -375,7 +375,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var pixel_color := cel_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			DrawingAlgos.blend_rect(image, cel_image, Rect2(Global.canvas.location, Global.canvas.size), origin)
+			DrawingAlgos.blend_rect(image, cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
 		layer_i += 1
 	image.unlock()
 

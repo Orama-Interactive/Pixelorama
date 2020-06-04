@@ -422,7 +422,7 @@ func crop_image() -> void:
 	var height := used_rect.size.y
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Scale")
-	Global.current_project.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
 	for f in Global.current_project.frames:
 		# Loop through all the layers to crop them
 		for j in range(Global.current_project.layers.size() - 1, -1, -1):
@@ -430,7 +430,7 @@ func crop_image() -> void:
 			Global.current_project.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
 
-	Global.current_project.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.commit_action()

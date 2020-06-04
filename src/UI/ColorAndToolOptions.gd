@@ -38,12 +38,12 @@ func _on_ColorDefaults_pressed() -> void:
 
 
 func _on_FitToFrameButton_pressed() -> void:
-	Global.camera.fit_to_frame(Global.canvas.size)
+	Global.camera.fit_to_frame(Global.current_project.size)
 
 
 func _on_100ZoomButton_pressed() -> void:
 	Global.camera.zoom = Vector2.ONE
-	Global.camera.offset = Global.canvas.size / 2
+	Global.camera.offset = Global.current_project.size / 2
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()

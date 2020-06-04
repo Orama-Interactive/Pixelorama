@@ -55,7 +55,7 @@ func _process(_delta : float) -> void:
 				img.lock()
 				for i in range(Global.current_project.selected_pixels.size()):
 					var curr_px = Global.current_project.selected_pixels[i]
-					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
+					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.current_project.size):
 						orig_colors.append(layer.get_pixelv(curr_px)) # Color of pixel
 						var px = curr_px - Global.current_project.selected_pixels[0]
 						img.set_pixelv(px, orig_colors[i])
@@ -91,7 +91,7 @@ func _process(_delta : float) -> void:
 				for i in range(orig_colors.size()):
 					if orig_colors[i].a > 0:
 						var px = polygon[0] + Global.current_project.selected_pixels[i] - Global.current_project.selected_pixels[0]
-						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
+						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.current_project.size):
 							layer.set_pixelv(px, orig_colors[i])
 				Global.canvas.update_texture(current_layer_index)
 				img.fill(Color(0, 0, 0, 0))
@@ -135,7 +135,7 @@ func _process(_delta : float) -> void:
 			Global.canvas.handle_undo("Draw")
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.canvas.size):
+					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.current_project.size):
 						layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
 			Global.canvas.handle_redo("Draw")
 

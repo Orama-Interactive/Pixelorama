@@ -3,7 +3,6 @@ extends Node2D
 
 
 var location := Vector2.ZERO
-var size := Vector2(64, 64)
 var fill_color := Color(0, 0, 0, 0)
 var current_pixel := Vector2.ZERO # pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
@@ -11,10 +10,10 @@ var previous_mouse_pos_for_lines := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var previous_action := -1
-var x_min := location.x
-var x_max := location.x + size.x
-var y_min := location.y
-var y_max := location.y + size.y
+var x_min := 0
+var x_max := 64
+var y_min := 0
+var y_max := 64
 var sprite_changed_this_frame := false # for optimization purposes
 var is_making_line := false
 var made_line := false
@@ -25,6 +24,10 @@ var pen_pressure := 1.0 # For tablet pressure sensitivity
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	x_min = location.x
+	x_max = location.x + Global.current_project.size.x
+	y_min = location.y
+	y_max = location.y + Global.current_project.size.y
 	var frame : Frame = new_empty_frame(true)
 	Global.current_project.frames.append(frame)
 	camera_zoom()
@@ -39,6 +42,7 @@ func _ready() -> void:
 
 func _draw() -> void:
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
+	var size : Vector2 = Global.current_project.size
 	if Global.onion_skinning:
 		onion_skinning()
 
@@ -122,9 +126,9 @@ func _input(event : InputEvent) -> void:
 	var current_mouse_button := -1
 
 	x_min = location.x
-	x_max = location.x + size.x
+	x_max = location.x + Global.current_project.size.x
 	y_min = location.y
-	y_max = location.y + size.y
+	y_max = location.y + Global.current_project.size.y
 	if Global.current_project.selected_pixels.size() != 0:
 		x_min = max(x_min, Global.selection_rectangle.polygon[0].x)
 		x_max = min(x_max, Global.selection_rectangle.polygon[2].x)
@@ -140,7 +144,7 @@ func _input(event : InputEvent) -> void:
 	var current_action : int = Global.current_tools[current_mouse_button] if current_mouse_button != -1 else -1
 
 	if Global.has_focus:
-		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [size.x, size.y, mouse_pos_floored.x, mouse_pos_floored.y]
+		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [Global.current_project.size.x, Global.current_project.size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 		if !cursor_image_has_changed:
 			cursor_image_has_changed = true
 			if Global.cursor_image.get_data().get_size() != Vector2.ZERO:
@@ -150,7 +154,7 @@ func _input(event : InputEvent) -> void:
 			if Global.show_right_tool_icon:
 				Global.right_cursor.visible = true
 	else:
-		Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
+		Global.cursor_position_label.text = "[%s×%s]" % [Global.current_project.size.x, Global.current_project.size.y]
 		if cursor_image_has_changed:
 			cursor_image_has_changed = false
 			Global.left_cursor.visible = false
@@ -231,7 +235,7 @@ func _input(event : InputEvent) -> void:
 
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
-	var bigger_canvas_axis = max(size.x, size.y)
+	var bigger_canvas_axis = max(Global.current_project.size.x, Global.current_project.size.y)
 	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
 	if zoom_max > Vector2.ONE:
 		Global.camera.zoom_max = zoom_max
@@ -242,9 +246,9 @@ func camera_zoom() -> void:
 		Global.camera2.zoom_max = Vector2.ONE
 		Global.camera_preview.zoom_max = Vector2.ONE
 
-	Global.camera.fit_to_frame(size)
-	Global.camera2.fit_to_frame(size)
-	Global.camera_preview.fit_to_frame(size)
+	Global.camera.fit_to_frame(Global.current_project.size)
+	Global.camera2.fit_to_frame(Global.current_project.size)
+	Global.camera_preview.fit_to_frame(Global.current_project.size)
 
 	Global.transparent_checker._ready() # To update the rect size
 
@@ -255,14 +259,13 @@ func new_empty_frame(first_time := false) -> Frame:
 		# The sprite itself
 		var sprite := Image.new()
 		if first_time:
-			if Global.config_cache.has_section_key("preferences", "default_width"):
-				size.x = Global.config_cache.get_value("preferences", "default_width")
-			if Global.config_cache.has_section_key("preferences", "default_height"):
-				size.y = Global.config_cache.get_value("preferences", "default_height")
+			if Global.config_cache.has_section_key("preferences", "default_image_width"):
+				Global.current_project.size.x = Global.config_cache.get_value("preferences", "default_image_width")
+			if Global.config_cache.has_section_key("preferences", "default_image_height"):
+				Global.current_project.size.y = Global.config_cache.get_value("preferences", "default_image_height")
 			if Global.config_cache.has_section_key("preferences", "default_fill_color"):
 				fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
-
-		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		sprite.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 		sprite.fill(fill_color)
 		sprite.lock()
 		frame.cels.append(Cel.new(sprite, 1))
@@ -377,7 +380,7 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
 		Global.Tools.COLORPICKER:
-			var canvas_rect := Rect2(location, size)
+			var canvas_rect := Rect2(location, Global.current_project.size)
 			if can_handle && canvas_rect.has_point(mouse_pos):
 				var image_data := Image.new()
 				image_data.copy_from(sprite)
@@ -505,6 +508,7 @@ func onion_skinning() -> void:
 
 
 func draw_grid(grid_type : int) -> void:
+	var size : Vector2 = Global.current_project.size
 	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
 		for x in range(Global.grid_width, size.x, Global.grid_width):
 			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)

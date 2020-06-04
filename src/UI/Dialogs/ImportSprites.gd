@@ -55,7 +55,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				Global.dialog_open(true)
 				continue
 
-			Global.canvas.size = image.get_size()
+			Global.current_project.size = image.get_size()
 			var frame := Frame.new()
 			image.convert(Image.FORMAT_RGBA8)
 			image.lock()
@@ -63,7 +63,7 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 
 			for _i in range(1, Global.current_project.layers.size()):
 				var empty_sprite := Image.new()
-				empty_sprite.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+				empty_sprite.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 				empty_sprite.fill(Color(0, 0, 0, 0))
 				empty_sprite.lock()
 				frame.cels.append(Cel.new(empty_sprite, 1))
@@ -91,14 +91,14 @@ func _on_ImportSprites_files_selected(paths : PoolStringArray) ->  void:
 				var frame := Frame.new()
 				var cropped_image := Image.new()
 				cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
-				Global.canvas.size = cropped_image.get_size()
+				Global.current_project.size = cropped_image.get_size()
 				cropped_image.convert(Image.FORMAT_RGBA8)
 				cropped_image.lock()
 				frame.cels.append(Cel.new(cropped_image, 1))
 
 				for _i in range(1, Global.current_project.layers.size()):
 					var empty_sprite := Image.new()
-					empty_sprite.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+					empty_sprite.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 					empty_sprite.fill(Color(0, 0, 0, 0))
 					empty_sprite.lock()
 					frame.cels.append(Cel.new(empty_sprite, 1))

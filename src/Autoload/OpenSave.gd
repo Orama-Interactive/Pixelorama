@@ -114,7 +114,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				Global.canvas.add_child(guide)
 				guide_line = file.get_line()
 
-		Global.canvas.size = Vector2(width, height)
+		Global.current_project.size = Vector2(width, height)
 		Global.current_project.frames.append(frame_class)
 		frame_line = file.get_line()
 		frame += 1
@@ -214,8 +214,8 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		 # Store frames
 		for frame in Global.current_project.frames:
 			file.store_line("--")
-			file.store_16(Global.canvas.size.x)
-			file.store_16(Global.canvas.size.y)
+			file.store_16(Global.current_project.size.x)
+			file.store_16(Global.current_project.size.y)
 			for cel in frame.cels: # Store canvas layers
 				file.store_line("-")
 				file.store_buffer(cel.image.get_data())

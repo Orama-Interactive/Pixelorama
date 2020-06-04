@@ -76,7 +76,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.clear_frames()
 	Global.current_project.layers.clear()
 	Global.current_project.layers.append(Layer.new())
-	Global.canvas.size = Vector2(width, height).floor()
+	Global.current_project.size = Vector2(width, height).floor()
 	Global.canvas.fill_color = fill_color
 	var frame : Frame = Global.canvas.new_empty_frame()
 	Global.canvas.camera_zoom()
