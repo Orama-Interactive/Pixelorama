@@ -127,6 +127,7 @@ var top_menu_container : Panel
 var left_cursor : Sprite
 var right_cursor : Sprite
 var canvas : Canvas
+var tabs : Tabs
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var camera : Camera2D
@@ -230,8 +231,6 @@ func _ready() -> void:
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
-	projects.append(Project.new())
-	current_project = projects[0]
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()
@@ -244,6 +243,7 @@ func _ready() -> void:
 	left_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/pencil_cursor.png"))
 	right_cursor_tool_texture = ImageTexture.new()
 	right_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/eraser_cursor.png"))
+	tabs = find_node_by_name(root, "Tabs")
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
 	camera = find_node_by_name(main_viewport, "Camera2D")
@@ -352,6 +352,9 @@ func _ready() -> void:
 	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
+
+	projects.append(Project.new())
+	current_project = projects[0]
 
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name

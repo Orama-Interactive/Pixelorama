@@ -27,6 +27,8 @@ func _init(_name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	layers.append(Layer.new())
 	undo_redo = UndoRedo.new()
 
+	Global.tabs.add_tab(name)
+
 
 func frames_changed(value : Array) -> void:
 	frames = value
