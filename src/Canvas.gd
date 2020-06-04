@@ -39,7 +39,6 @@ func _ready() -> void:
 
 func _draw() -> void:
 	var current_cels : Array = Global.frames[Global.current_frame].cels
-
 	if Global.onion_skinning:
 		onion_skinning()
 
