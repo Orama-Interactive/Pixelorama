@@ -6,8 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.7.1] - Unreleased
 This update has been brought to you by the contributions of:
-
-Igor Santarek (jegor377), rob-a-bolton
+Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 
 ### Added
 - Ability to remove the current palette.
@@ -17,11 +16,14 @@ Igor Santarek (jegor377), rob-a-bolton
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
+- The guides are now the same for all frames.
+- Pixel perfect is no longer enabled when the brush size is bigger than 1px.
 
 ### Fixed
 - Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files. ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
 - Fixed alpha blending and lighting/darkening issues when drawing pixels with mirroring.
 - Fixed issue where if you moved a frame to the start (move left), it was invisible.
+- Fixed a rare issue with Undo/Redo not working while motion drawing and making lines.
 <br><br>
 
 ## [v0.7] - 2020-05-16

@@ -1,6 +1,6 @@
 extends WindowDialog
 
-var current_layer : Image
+var current_cel : Image
 var preview_image : Image
 var preview_texture : ImageTexture
 
@@ -16,15 +16,15 @@ onready var preview = $MarginContainer/VBoxContainer/TextureRect
 
 
 func _ready() -> void:
-	current_layer = Image.new()
+	current_cel = Image.new()
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
 	preview_texture.flags = 0
 
 
 func _on_HSVDialog_about_to_show() -> void:
-	current_layer = Global.canvas.layers[Global.current_layer].image
-	preview_image.copy_from(current_layer)
+	current_cel = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	preview_image.copy_from(current_cel)
 	update_preview()
 
 
@@ -35,9 +35,9 @@ func _on_Cancel_pressed() -> void:
 
 func _on_Apply_pressed() -> void:
 	Global.canvas.handle_undo("Draw")
-	DrawingAlgos.adjust_hsv(current_layer,0,hue_slider.value)
-	DrawingAlgos.adjust_hsv(current_layer,1,sat_slider.value)
-	DrawingAlgos.adjust_hsv(current_layer,2,val_slider.value)
+	DrawingAlgos.adjust_hsv(current_cel,0,hue_slider.value)
+	DrawingAlgos.adjust_hsv(current_cel,1,sat_slider.value)
+	DrawingAlgos.adjust_hsv(current_cel,2,val_slider.value)
 	Global.canvas.update_texture(Global.current_layer)
 	Global.canvas.handle_redo("Draw")
 	reset()
@@ -56,7 +56,7 @@ func reset() -> void:
 
 
 func update_preview() -> void:
-	preview_image.copy_from(current_layer)
+	preview_image.copy_from(current_cel)
 	DrawingAlgos.adjust_hsv(preview_image,0,hue_slider.value)
 	DrawingAlgos.adjust_hsv(preview_image,1,sat_slider.value)
 	DrawingAlgos.adjust_hsv(preview_image,2,val_slider.value)

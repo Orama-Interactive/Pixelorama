@@ -2,22 +2,19 @@ class_name Canvas
 extends Node2D
 
 
-var layers := []
-var current_layer_index := 0
 var location := Vector2.ZERO
 var size := Vector2(64, 64)
 var fill_color := Color(0, 0, 0, 0)
-var frame := 0
 var current_pixel := Vector2.ZERO # pretty much same as mouse_pos, but can be accessed externally
 var previous_mouse_pos := Vector2.ZERO
 var previous_mouse_pos_for_lines := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var previous_action := -1
-var west_limit := location.x
-var east_limit := location.x + size.x
-var north_limit := location.y
-var south_limit := location.y + size.y
+var x_min := location.x
+var x_max := location.x + size.x
+var y_min := location.y
+var y_max := location.y + size.y
 var sprite_changed_this_frame := false # for optimization purposes
 var is_making_line := false
 var made_line := false
@@ -28,38 +25,9 @@ var pen_pressure := 1.0 # For tablet pressure sensitivity
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var fill_layers := layers.empty()
-	var layer_i := 0
-	for l in Global.layers:
-		if fill_layers:
-			# The sprite itself
-			var sprite := Image.new()
-			if Global.is_default_image:
-				if Global.config_cache.has_section_key("preferences", "default_width"):
-					size.x = Global.config_cache.get_value("preferences", "default_width")
-				if Global.config_cache.has_section_key("preferences", "default_height"):
-					size.y = Global.config_cache.get_value("preferences", "default_height")
-				if Global.config_cache.has_section_key("preferences", "default_fill_color"):
-					fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
-				Global.is_default_image = !Global.is_default_image
-
-			sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-			sprite.fill(fill_color)
-			sprite.lock()
-
-			layers.append(Cel.new(sprite, 1.0))
-
-		if self in l.linked_cels:
-			# If the linked button is pressed, set as the Image & ImageTexture
-			# to be the same as the first linked cel
-			layers[layer_i].image = l.linked_cels[0].layers[layer_i].image
-			layers[layer_i].image_texture = l.linked_cels[0].layers[layer_i].image_texture
-
-		layer_i += 1
-
-	# Only handle camera zoom settings & offset on the first frame
-	if Global.canvases[0] == self:
-		camera_zoom()
+	var frame : Frame = new_empty_frame(true)
+	Global.frames.append(frame)
+	camera_zoom()
 
 	line_2d = Line2D.new()
 	line_2d.width = 0.5
@@ -70,24 +38,25 @@ func _ready() -> void:
 
 
 func _draw() -> void:
+	var current_cels : Array = Global.frames[Global.current_frame].cels
 	if Global.onion_skinning:
 		onion_skinning()
 
 	# Draw current frame layers
-	for i in range(layers.size()):
-		var modulate_color := Color(1, 1, 1, layers[i].opacity)
+	for i in range(Global.layers.size()):
+		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.layers[i].visible: # if it's visible
-			draw_texture(layers[i].image_texture, location, modulate_color)
+			draw_texture(current_cels[i].image_texture, location, modulate_color)
 
 			if Global.tile_mode:
-				draw_texture(layers[i].image_texture, Vector2(location.x, location.y + size.y), modulate_color) # Down
-				draw_texture(layers[i].image_texture, Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
-				draw_texture(layers[i].image_texture, Vector2(location.x - size.x, location.y), modulate_color) # Left
-				draw_texture(layers[i].image_texture, location - size, modulate_color) # Up left
-				draw_texture(layers[i].image_texture, Vector2(location.x, location.y - size.y), modulate_color) # Up
-				draw_texture(layers[i].image_texture, Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
-				draw_texture(layers[i].image_texture, Vector2(location.x + size.x, location.y), modulate_color) # Right
-				draw_texture(layers[i].image_texture, location + size, modulate_color) # Down right
+				draw_texture(current_cels[i].image_texture, Vector2(location.x, location.y + size.y), modulate_color) # Down
+				draw_texture(current_cels[i].image_texture, Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
+				draw_texture(current_cels[i].image_texture, Vector2(location.x - size.x, location.y), modulate_color) # Left
+				draw_texture(current_cels[i].image_texture, location - size, modulate_color) # Up left
+				draw_texture(current_cels[i].image_texture, Vector2(location.x, location.y - size.y), modulate_color) # Up
+				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
+				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y), modulate_color) # Right
+				draw_texture(current_cels[i].image_texture, location + size, modulate_color) # Down right
 
 	if Global.draw_grid:
 		draw_grid(Global.grid_type)
@@ -130,20 +99,10 @@ func _input(event : InputEvent) -> void:
 
 	if (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		made_line = false
-		DrawingAlgos.mouse_press_pixels.clear()
-		DrawingAlgos.mouse_press_pressure_values.clear()
-		DrawingAlgos.pixel_perfect_drawer.reset()
-		DrawingAlgos.pixel_perfect_drawer_h_mirror.reset()
-		DrawingAlgos.pixel_perfect_drawer_v_mirror.reset()
-		DrawingAlgos.pixel_perfect_drawer_hv_mirror.reset()
+		DrawingAlgos.reset()
 		can_undo = true
 
 	current_pixel = get_local_mouse_position() + location
-	if Global.current_frame != frame || Global.layers[Global.current_layer].locked:
-		previous_mouse_pos = current_pixel
-		previous_mouse_pos.x = clamp(previous_mouse_pos.x, location.x, location.x + size.x)
-		previous_mouse_pos.y = clamp(previous_mouse_pos.y, location.y, location.y + size.y)
-		return
 
 	if Global.has_focus:
 		update()
@@ -162,15 +121,15 @@ func _input(event : InputEvent) -> void:
 	var mouse_pos_floored := mouse_pos.floor()
 	var current_mouse_button := -1
 
-	west_limit = location.x
-	east_limit = location.x + size.x
-	north_limit = location.y
-	south_limit = location.y + size.y
+	x_min = location.x
+	x_max = location.x + size.x
+	y_min = location.y
+	y_max = location.y + size.y
 	if Global.selected_pixels.size() != 0:
-		west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
-		east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
-		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
-		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
+		x_min = max(x_min, Global.selection_rectangle.polygon[0].x)
+		x_max = min(x_max, Global.selection_rectangle.polygon[2].x)
+		y_min = max(y_min, Global.selection_rectangle.polygon[0].y)
+		y_max = min(y_max, Global.selection_rectangle.polygon[2].y)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = Global.Mouse_Button.LEFT
@@ -290,8 +249,30 @@ func camera_zoom() -> void:
 	Global.transparent_checker._ready() # To update the rect size
 
 
+func new_empty_frame(first_time := false) -> Frame:
+	var frame := Frame.new()
+	for l in Global.layers:
+		# The sprite itself
+		var sprite := Image.new()
+		if first_time:
+			if Global.config_cache.has_section_key("preferences", "default_width"):
+				size.x = Global.config_cache.get_value("preferences", "default_width")
+			if Global.config_cache.has_section_key("preferences", "default_height"):
+				size.y = Global.config_cache.get_value("preferences", "default_height")
+			if Global.config_cache.has_section_key("preferences", "default_fill_color"):
+				fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
+
+		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		sprite.fill(fill_color)
+		sprite.lock()
+		frame.cels.append(Cel.new(sprite, 1))
+
+	return frame
+
+
 func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : Vector2, can_handle : bool) -> void:
-	var sprite : Image = layers[Global.current_layer].image
+	var current_cel : Cel = Global.frames[Global.current_frame].cels[Global.current_layer]
+	var sprite : Image = current_cel.image
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
 
@@ -314,8 +295,8 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 				var pattern_offset : Vector2 = Global.fill_pattern_offsets[current_mouse_button]
 
 				if fill_area == Global.Fill_Area.SAME_COLOR_AREA: # Paint the specific area of the same color
-					var mirror_x := east_limit + west_limit - mouse_pos_floored.x - 1
-					var mirror_y := south_limit + north_limit - mouse_pos_floored.y - 1
+					var mirror_x := x_max + x_min - mouse_pos_floored.x - 1
+					var mirror_y := y_max + y_min - mouse_pos_floored.y - 1
 					var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
 					var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
 
@@ -345,8 +326,8 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 
 				else: # Paint all pixels of the same color
 					var pixel_color : Color = sprite.get_pixelv(mouse_pos)
-					for xx in range(west_limit, east_limit):
-						for yy in range(north_limit, south_limit):
+					for xx in range(x_min, x_max):
+						for yy in range(y_min, y_max):
 							var c : Color = sprite.get_pixel(xx, yy)
 							if c == pixel_color:
 								if fill_with == Global.Fill_With.PATTERN && pattern_image: # Pattern fill
@@ -428,27 +409,29 @@ func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, curre
 func handle_undo(action : String) -> void:
 	if !can_undo:
 		return
-	var canvases := []
+	var frames := []
+	var frame_index := -1
 	var layer_index := -1
 	if Global.animation_timer.is_stopped(): # if we're not animating, store only the current canvas
-		canvases = [self]
+		frames.append(Global.frames[Global.current_frame])
+		frame_index = Global.current_frame
 		layer_index = Global.current_layer
-	else: # If we're animating, store all canvases
-		canvases = Global.canvases
+	else: # If we're animating, store all frames
+		frames = Global.frames
 	Global.undos += 1
 	Global.undo_redo.create_action(action)
-	for c in canvases:
+	for f in frames:
 		# I'm not sure why I have to unlock it, but...
 		# ...if I don't, it doesn't work properly
-		c.layers[Global.current_layer].image.unlock()
-		var data = c.layers[Global.current_layer].image.data
-		c.layers[Global.current_layer].image.lock()
-		Global.undo_redo.add_undo_property(c.layers[Global.current_layer].image, "data", data)
+		f.cels[Global.current_layer].image.unlock()
+		var data = f.cels[Global.current_layer].image.data
+		f.cels[Global.current_layer].image.lock()
+		Global.undo_redo.add_undo_property(f.cels[Global.current_layer].image, "data", data)
 	if action == "Rectangle Select":
 		var selected_pixels = Global.selected_pixels.duplicate()
 		Global.undo_redo.add_undo_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_undo_property(Global, "selected_pixels", selected_pixels)
-	Global.undo_redo.add_undo_method(Global, "undo", canvases, layer_index)
+	Global.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index)
 
 	can_undo = false
 
@@ -458,28 +441,33 @@ func handle_redo(action : String) -> void:
 
 	if Global.undos < Global.undo_redo.get_version():
 		return
-	var canvases := []
+	var frames := []
+	var frame_index := -1
 	var layer_index := -1
 	if Global.animation_timer.is_stopped():
-		canvases = [self]
+		frames.append(Global.frames[Global.current_frame])
+		frame_index = Global.current_frame
 		layer_index = Global.current_layer
 	else:
-		canvases = Global.canvases
-	for c in canvases:
-		Global.undo_redo.add_do_property(c.layers[Global.current_layer].image, "data", c.layers[Global.current_layer].image.data)
+		frames = Global.frames
+	for f in frames:
+		Global.undo_redo.add_do_property(f.cels[Global.current_layer].image, "data", f.cels[Global.current_layer].image.data)
 	if action == "Rectangle Select":
 		Global.undo_redo.add_do_property(Global.selection_rectangle, "polygon", Global.selection_rectangle.polygon)
 		Global.undo_redo.add_do_property(Global, "selected_pixels", Global.selected_pixels)
-	Global.undo_redo.add_do_method(Global, "redo", canvases, layer_index)
+	Global.undo_redo.add_do_method(Global, "redo", frame_index, layer_index)
 	Global.undo_redo.commit_action()
 
 
-func update_texture(layer_index : int) -> void:
-	layers[layer_index].image_texture.create_from_image(layers[layer_index].image, 0)
+func update_texture(layer_index : int, frame_index := -1) -> void:
+	if frame_index == -1:
+		frame_index = Global.current_frame
+	var current_cel : Cel = Global.frames[frame_index].cels[layer_index]
+	current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 	var frame_texture_rect : TextureRect
-	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index].frame_container.get_child(frame), "CelTexture")
-	frame_texture_rect.texture = layers[layer_index].image_texture
+	frame_texture_rect = Global.find_node_by_name(Global.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+	frame_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:
@@ -493,7 +481,7 @@ func onion_skinning() -> void:
 		for i in range(1, Global.onion_skinning_past_rate + 1):
 			if Global.current_frame >= i:
 				var layer_i := 0
-				for layer in Global.canvases[Global.current_frame - i].layers:
+				for layer in Global.frames[Global.current_frame - i].cels:
 					if Global.layers[layer_i].visible:
 						color.a = 0.6 / i
 						draw_texture(layer.image_texture, location, color)
@@ -507,9 +495,9 @@ func onion_skinning() -> void:
 		else:
 			color = Color.white
 		for i in range(1, Global.onion_skinning_future_rate + 1):
-			if Global.current_frame < Global.canvases.size() - i:
+			if Global.current_frame < Global.frames.size() - i:
 				var layer_i := 0
-				for layer in Global.canvases[Global.current_frame + i].layers:
+				for layer in Global.frames[Global.current_frame + i].cels:
 					if Global.layers[layer_i].visible:
 						color.a = 0.6 / i
 						draw_texture(layer.image_texture, location, color)
