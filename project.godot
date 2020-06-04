@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://src/Classes/Cel.gd"
 }, {
 "base": "Reference",
+"class": "Drawer",
+"language": "GDScript",
+"path": "res://src/Classes/Drawers.gd"
+}, {
+"base": "Reference",
 "class": "Frame",
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
@@ -58,6 +63,7 @@ _global_script_class_icons={
 "AnimationTag": "",
 "Canvas": "",
 "Cel": "",
+"Drawer": "",
 "Frame": "",
 "Guide": "",
 "Layer": "",
