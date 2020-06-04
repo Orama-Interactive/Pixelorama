@@ -13,11 +13,11 @@ func reset() -> void:
 
 
 func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressure : float, current_mouse_button := -1, current_action := -1) -> void:
-	var west_limit = Global.canvas.west_limit
-	var east_limit = Global.canvas.east_limit
-	var north_limit = Global.canvas.north_limit
-	var south_limit = Global.canvas.south_limit
-	if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+	var x_min = Global.canvas.x_min
+	var x_max = Global.canvas.x_max
+	var y_min = Global.canvas.y_min
+	var y_max = Global.canvas.y_max
+	if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 		return
 
 	var pos_floored := pos.floor()
@@ -45,10 +45,10 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressu
 
 func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : int, pen_pressure : float, current_action := -1) -> void:
 	if Global.can_draw && Global.has_focus:
-		var west_limit = Global.canvas.west_limit
-		var east_limit = Global.canvas.east_limit
-		var north_limit = Global.canvas.north_limit
-		var south_limit = Global.canvas.south_limit
+		var x_min = Global.canvas.x_min
+		var x_max = Global.canvas.x_max
+		var y_min = Global.canvas.y_min
+		var y_max = Global.canvas.y_max
 
 		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
 			if current_action == Global.Tools.PENCIL:
@@ -62,11 +62,11 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
 		var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
 		var pixel_perfect : bool = Global.pixel_perfect[current_mouse_button]
-		
+
 		drawer.pixel_perfect = pixel_perfect if brush_size == 1 else false
 		drawer.h_mirror = horizontal_mirror
 		drawer.v_mirror = vertical_mirror
-		
+
 		if brush_type == Global.Brush_Types.PIXEL || current_action == Global.Tools.LIGHTENDARKEN:
 			var start_pos_x = pos.x - (brush_size >> 1)
 			var start_pos_y = pos.y - (brush_size >> 1)
@@ -74,7 +74,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			var end_pos_y = start_pos_y + brush_size
 
 			for cur_pos_x in range(start_pos_x, end_pos_x):
-				for cur_pos_y in range(start_pos_y, end_pos_y):					
+				for cur_pos_y in range(start_pos_y, end_pos_y):
 					draw_pixel_blended(sprite, Vector2(cur_pos_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action)
 					Global.canvas.sprite_changed_this_frame = true
 
@@ -107,8 +107,8 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			# The selection rectangle
 			# If there's no rectangle, the whole canvas is considered a selection
 			var selection_rect := Rect2()
-			selection_rect.position = Vector2(west_limit, north_limit)
-			selection_rect.end = Vector2(east_limit, south_limit)
+			selection_rect.position = Vector2(x_min, y_min)
+			selection_rect.end = Vector2(x_max, y_max)
 			# Intersection of the position rectangle and selection
 			var pos_rect_clipped := pos_rect.clip(selection_rect)
 			# If the size is 0, that means that the brush wasn't positioned inside the selection
@@ -127,8 +127,8 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			src_rect.size.y = min(src_rect.size.y, selection_rect.size.y)
 
 			# Handle mirroring
-			var mirror_x = east_limit + west_limit - pos.x - (pos.x - dst.x)
-			var mirror_y = south_limit + north_limit - pos.y - (pos.y - dst.y)
+			var mirror_x = x_max + x_min - pos.x - (pos.x - dst.x)
+			var mirror_y = y_max + y_min - pos.y - (pos.y - dst.y)
 			if int(pos_rect_clipped.size.x) % 2 != 0:
 				mirror_x -= 1
 			if int(pos_rect_clipped.size.y) % 2 != 0:
@@ -226,10 +226,10 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 
 # Thanks to https://en.wikipedia.org/wiki/Flood_fill
 func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_color : Color) -> void:
-	var west_limit = Global.canvas.west_limit
-	var east_limit = Global.canvas.east_limit
-	var north_limit = Global.canvas.north_limit
-	var south_limit = Global.canvas.south_limit
+	var x_min = Global.canvas.x_min
+	var x_max = Global.canvas.x_max
+	var y_min = Global.canvas.y_min
+	var y_max = Global.canvas.y_max
 	pos = pos.floor()
 	var pixel = sprite.get_pixelv(pos)
 	if target_color == replace_color:
@@ -238,7 +238,7 @@ func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_col
 		return
 	else:
 
-		if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+		if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 			return
 
 		var q = [pos]
@@ -248,9 +248,9 @@ func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_col
 				break
 			var west : Vector2 = n
 			var east : Vector2 = n
-			while west.x >= west_limit && sprite.get_pixelv(west) == target_color:
+			while west.x >= x_min && sprite.get_pixelv(west) == target_color:
 				west += Vector2.LEFT
-			while east.x < east_limit && sprite.get_pixelv(east) == target_color:
+			while east.x < x_max && sprite.get_pixelv(east) == target_color:
 				east += Vector2.RIGHT
 			for px in range(west.x + 1, east.x):
 				var p := Vector2(px, n.y)
@@ -259,21 +259,21 @@ func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_col
 				replace_color = sprite.get_pixelv(p)
 				var north := p + Vector2.UP
 				var south := p + Vector2.DOWN
-				if north.y >= north_limit && sprite.get_pixelv(north) == target_color:
+				if north.y >= y_min && sprite.get_pixelv(north) == target_color:
 					q.append(north)
-				if south.y < south_limit && sprite.get_pixelv(south) == target_color:
+				if south.y < y_max && sprite.get_pixelv(south) == target_color:
 					q.append(south)
 
 		Global.canvas.sprite_changed_this_frame = true
 
 
 func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color : Color, var offset : Vector2) -> void:
-	var west_limit = Global.canvas.west_limit
-	var east_limit = Global.canvas.east_limit
-	var north_limit = Global.canvas.north_limit
-	var south_limit = Global.canvas.south_limit
+	var x_min = Global.canvas.x_min
+	var x_max = Global.canvas.x_max
+	var y_min = Global.canvas.y_min
+	var y_max = Global.canvas.y_max
 	pos = pos.floor()
-	if !point_in_rectangle(pos, Vector2(west_limit - 1, north_limit - 1), Vector2(east_limit, south_limit)):
+	if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 		return
 
 	pattern.lock()
@@ -283,9 +283,9 @@ func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color :
 	for n in q:
 		var west : Vector2 = n
 		var east : Vector2 = n
-		while west.x >= west_limit && sprite.get_pixelv(west) == target_color:
+		while west.x >= x_min && sprite.get_pixelv(west) == target_color:
 			west += Vector2.LEFT
-		while east.x < east_limit && sprite.get_pixelv(east) == target_color:
+		while east.x < x_max && sprite.get_pixelv(east) == target_color:
 			east += Vector2.RIGHT
 
 		for px in range(west.x + 1, east.x):
@@ -299,9 +299,9 @@ func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color :
 
 			var north := p + Vector2.UP
 			var south := p + Vector2.DOWN
-			if north.y >= north_limit && sprite.get_pixelv(north) == target_color:
+			if north.y >= y_min && sprite.get_pixelv(north) == target_color:
 				q.append(north)
-			if south.y < south_limit && sprite.get_pixelv(south) == target_color:
+			if south.y < y_max && sprite.get_pixelv(south) == target_color:
 				q.append(south)
 
 	pattern.unlock()
@@ -558,16 +558,16 @@ func colorDistance(c1 : Color, c2 : Color) -> float:
 
 
 func adjust_hsv(img: Image, id : int, delta : float) -> void:
-	var west_limit = Global.canvas.west_limit
-	var east_limit = Global.canvas.east_limit
-	var north_limit = Global.canvas.north_limit
-	var south_limit = Global.canvas.south_limit
+	var x_min = Global.canvas.x_min
+	var x_max = Global.canvas.x_max
+	var y_min = Global.canvas.y_min
+	var y_max = Global.canvas.y_max
 	img.lock()
 
 	match id:
 		0: # Hue
-			for i in range(west_limit, east_limit):
-				for j in range(north_limit, south_limit):
+			for i in range(x_min, x_max):
+				for j in range(y_min, y_max):
 					var c : Color = img.get_pixel(i,j)
 					var hue = range_lerp(c.h,0,1,-180,180)
 					hue = hue + delta
@@ -580,8 +580,8 @@ func adjust_hsv(img: Image, id : int, delta : float) -> void:
 					img.set_pixel(i,j,c)
 
 		1: # Saturation
-			for i in range(west_limit, east_limit):
-				for j in range(north_limit, south_limit):
+			for i in range(x_min, x_max):
+				for j in range(y_min, y_max):
 					var c : Color = img.get_pixel(i,j)
 					var sat = c.s
 					if delta > 0:
@@ -592,8 +592,8 @@ func adjust_hsv(img: Image, id : int, delta : float) -> void:
 					img.set_pixel(i,j,c)
 
 		2: # Value
-			for i in range(west_limit, east_limit):
-				for j in range(north_limit, south_limit):
+			for i in range(x_min, x_max):
+				for j in range(y_min, y_max):
 					var c : Color = img.get_pixel(i,j)
 					var val = c.v
 					if delta > 0:

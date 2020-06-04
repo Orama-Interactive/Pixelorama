@@ -11,10 +11,10 @@ var previous_mouse_pos_for_lines := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var previous_action := -1
-var west_limit := location.x
-var east_limit := location.x + size.x
-var north_limit := location.y
-var south_limit := location.y + size.y
+var x_min := location.x
+var x_max := location.x + size.x
+var y_min := location.y
+var y_max := location.y + size.y
 var sprite_changed_this_frame := false # for optimization purposes
 var is_making_line := false
 var made_line := false
@@ -121,15 +121,15 @@ func _input(event : InputEvent) -> void:
 	var mouse_pos_floored := mouse_pos.floor()
 	var current_mouse_button := -1
 
-	west_limit = location.x
-	east_limit = location.x + size.x
-	north_limit = location.y
-	south_limit = location.y + size.y
+	x_min = location.x
+	x_max = location.x + size.x
+	y_min = location.y
+	y_max = location.y + size.y
 	if Global.selected_pixels.size() != 0:
-		west_limit = max(west_limit, Global.selection_rectangle.polygon[0].x)
-		east_limit = min(east_limit, Global.selection_rectangle.polygon[2].x)
-		north_limit = max(north_limit, Global.selection_rectangle.polygon[0].y)
-		south_limit = min(south_limit, Global.selection_rectangle.polygon[2].y)
+		x_min = max(x_min, Global.selection_rectangle.polygon[0].x)
+		x_max = min(x_max, Global.selection_rectangle.polygon[2].x)
+		y_min = max(y_min, Global.selection_rectangle.polygon[0].y)
+		y_max = min(y_max, Global.selection_rectangle.polygon[2].y)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = Global.Mouse_Button.LEFT
@@ -295,8 +295,8 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 				var pattern_offset : Vector2 = Global.fill_pattern_offsets[current_mouse_button]
 
 				if fill_area == Global.Fill_Area.SAME_COLOR_AREA: # Paint the specific area of the same color
-					var mirror_x := east_limit + west_limit - mouse_pos_floored.x - 1
-					var mirror_y := south_limit + north_limit - mouse_pos_floored.y - 1
+					var mirror_x := x_max + x_min - mouse_pos_floored.x - 1
+					var mirror_y := y_max + y_min - mouse_pos_floored.y - 1
 					var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
 					var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
 
@@ -326,8 +326,8 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 
 				else: # Paint all pixels of the same color
 					var pixel_color : Color = sprite.get_pixelv(mouse_pos)
-					for xx in range(west_limit, east_limit):
-						for yy in range(north_limit, south_limit):
+					for xx in range(x_min, x_max):
+						for yy in range(y_min, y_max):
 							var c : Color = sprite.get_pixel(xx, yy)
 							if c == pixel_color:
 								if fill_with == Global.Fill_With.PATTERN && pattern_image: # Pattern fill
