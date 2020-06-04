@@ -1,21 +1,18 @@
 extends Node
 
 
-const Drawer = preload("res://src/Classes/Drawers.gd").Drawer
-const SimpleDrawer = preload("res://src/Classes/Drawers.gd").SimpleDrawer
-const PixelPerfectDrawer = preload("res://src/Classes/Drawers.gd").PixelPerfectDrawer
-
-var pixel_perfect_drawer := PixelPerfectDrawer.new()
-var pixel_perfect_drawer_h_mirror := PixelPerfectDrawer.new()
-var pixel_perfect_drawer_v_mirror := PixelPerfectDrawer.new()
-var pixel_perfect_drawer_hv_mirror := PixelPerfectDrawer.new()
-var simple_drawer := SimpleDrawer.new()
-
+var drawer := Drawer.new()
 var mouse_press_pixels := [] # Cleared after mouse release
 var mouse_press_pressure_values := [] # Cleared after mouse release
 
 
-func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressure : float, current_mouse_button := -1, current_action := -1, drawer : Drawer = simple_drawer) -> void:
+func reset() -> void:
+	drawer.reset()
+	mouse_press_pixels.clear()
+	mouse_press_pressure_values.clear()
+
+
+func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressure : float, current_mouse_button := -1, current_action := -1) -> void:
 	var west_limit = Global.canvas.west_limit
 	var east_limit = Global.canvas.east_limit
 	var north_limit = Global.canvas.north_limit
@@ -64,7 +61,12 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 		var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
 		var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
-
+		var pixel_perfect : bool = Global.pixel_perfect[current_mouse_button]
+		
+		drawer.pixel_perfect = pixel_perfect if brush_size == 1 else false
+		drawer.h_mirror = horizontal_mirror
+		drawer.v_mirror = vertical_mirror
+		
 		if brush_type == Global.Brush_Types.PIXEL || current_action == Global.Tools.LIGHTENDARKEN:
 			var start_pos_x = pos.x - (brush_size >> 1)
 			var start_pos_y = pos.y - (brush_size >> 1)
@@ -72,43 +74,12 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			var end_pos_y = start_pos_y + brush_size
 
 			for cur_pos_x in range(start_pos_x, end_pos_x):
-				for cur_pos_y in range(start_pos_y, end_pos_y):
-					var pixel_perfect : bool = Global.pixel_perfect[current_mouse_button]
-# warning-ignore:incompatible_ternary
-					var drawer : Drawer = pixel_perfect_drawer if pixel_perfect else simple_drawer
-					draw_pixel_blended(sprite, Vector2(cur_pos_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action, drawer)
-
-					# Handle mirroring
-					var mirror_x = east_limit + west_limit - cur_pos_x - 1
-					var mirror_y = south_limit + north_limit - cur_pos_y - 1
-					if horizontal_mirror:
-# warning-ignore:incompatible_ternary
-						var drawer_h_mirror : Drawer = pixel_perfect_drawer_h_mirror if pixel_perfect else simple_drawer
-						draw_pixel_blended(sprite, Vector2(mirror_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action, drawer_h_mirror)
-					if vertical_mirror:
-# warning-ignore:incompatible_ternary
-						var drawer_v_mirror : Drawer = pixel_perfect_drawer_v_mirror if pixel_perfect else simple_drawer
-						draw_pixel_blended(sprite, Vector2(cur_pos_x, mirror_y), color, pen_pressure, current_mouse_button, current_action, drawer_v_mirror)
-					if horizontal_mirror && vertical_mirror:
-# warning-ignore:incompatible_ternary
-						var drawer_hv_mirror : Drawer = pixel_perfect_drawer_hv_mirror if pixel_perfect else simple_drawer
-						draw_pixel_blended(sprite, Vector2(mirror_x, mirror_y), color, pen_pressure, current_mouse_button, current_action, drawer_hv_mirror)
-
+				for cur_pos_y in range(start_pos_y, end_pos_y):					
+					draw_pixel_blended(sprite, Vector2(cur_pos_x, cur_pos_y), color, pen_pressure, current_mouse_button, current_action)
 					Global.canvas.sprite_changed_this_frame = true
 
 		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
 			plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
-
-			# Handle mirroring
-			var mirror_x = east_limit + west_limit - pos.x
-			var mirror_y = south_limit + north_limit - pos.y
-			if horizontal_mirror:
-				plot_circle(sprite, mirror_x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
-			if vertical_mirror:
-				plot_circle(sprite, pos.x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
-			if horizontal_mirror && vertical_mirror:
-				plot_circle(sprite, mirror_x, mirror_y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
-
 			Global.canvas.sprite_changed_this_frame = true
 
 		else:

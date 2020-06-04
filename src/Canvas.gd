@@ -99,12 +99,7 @@ func _input(event : InputEvent) -> void:
 
 	if (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
 		made_line = false
-		DrawingAlgos.mouse_press_pixels.clear()
-		DrawingAlgos.mouse_press_pressure_values.clear()
-		DrawingAlgos.pixel_perfect_drawer.reset()
-		DrawingAlgos.pixel_perfect_drawer_h_mirror.reset()
-		DrawingAlgos.pixel_perfect_drawer_v_mirror.reset()
-		DrawingAlgos.pixel_perfect_drawer_hv_mirror.reset()
+		DrawingAlgos.reset()
 		can_undo = true
 
 	current_pixel = get_local_mouse_position() + location
