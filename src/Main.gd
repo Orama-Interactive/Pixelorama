@@ -21,9 +21,9 @@ func _ready() -> void:
 
 	Global.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
 
-	Global.layers[0].name = tr("Layer") + " 0"
-	Global.layers_container.get_child(0).label.text = Global.layers[0].name
-	Global.layers_container.get_child(0).line_edit.text = Global.layers[0].name
+	Global.current_project.layers[0].name = tr("Layer") + " 0"
+	Global.layers_container.get_child(0).label.text = Global.current_project.layers[0].name
+	Global.layers_container.get_child(0).line_edit.text = Global.current_project.layers[0].name
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
@@ -62,7 +62,7 @@ func _input(event : InputEvent) -> void:
 
 	if event.is_action_pressed("redo_secondary"): # Shift + Ctrl + Z
 		redone = true
-		Global.undo_redo.redo()
+		Global.current_project.undo_redo.redo()
 		redone = false
 
 
@@ -242,7 +242,7 @@ func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
 
 
 func on_new_project_file_menu_option_pressed(id : int) -> void:
-	if Global.project_has_changed:
+	if Global.current_project.has_changed:
 		unsaved_canvas_state = id
 		$UnsavedCanvasDialog.popup_centered()
 	else:
@@ -259,7 +259,7 @@ func open_project_file() -> void:
 func on_open_last_project_file_menu_option_pressed(id : int) -> void:
 	# Check if last project path is set and if yes then open
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
-		if Global.project_has_changed:
+		if Global.current_project.has_changed:
 			unsaved_canvas_state = id
 			$UnsavedCanvasDialog.popup_centered()
 			Global.dialog_open(true)
@@ -326,10 +326,10 @@ func file_menu_id_pressed(id : int) -> void:
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Undo
-			Global.undo_redo.undo()
+			Global.current_project.undo_redo.undo()
 		1: # Redo
 			redone = true
-			Global.undo_redo.redo()
+			Global.current_project.undo_redo.redo()
 			redone = false
 		2: # Clear selection
 			Global.canvas.handle_undo("Rectangle Select")
@@ -337,7 +337,7 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.selection_rectangle.polygon[1] = Vector2.ZERO
 			Global.selection_rectangle.polygon[2] = Vector2.ZERO
 			Global.selection_rectangle.polygon[3] = Vector2.ZERO
-			Global.selected_pixels.clear()
+			Global.current_project.selected_pixels.clear()
 			Global.canvas.handle_redo("Rectangle Select")
 		3: # Preferences
 			$PreferencesDialog.popup_centered(Vector2(400, 280))
@@ -398,9 +398,9 @@ func show_scale_image_popup() -> void:
 
 func crop_image() -> void:
 	# Use first cel as a starting rectangle
-	var used_rect : Rect2 = Global.frames[0].cels[0].image.get_used_rect()
+	var used_rect : Rect2 = Global.current_project.frames[0].cels[0].image.get_used_rect()
 
-	for f in Global.frames:
+	for f in Global.current_project.frames:
 		# However, if first cel is empty, loop through all cels until we find one that isn't
 		for cel in f.cels:
 			if used_rect != Rect2(0, 0, 0, 0):
@@ -420,24 +420,24 @@ func crop_image() -> void:
 
 	var width := used_rect.size.x
 	var height := used_rect.size.y
-	Global.undos += 1
-	Global.undo_redo.create_action("Scale")
-	Global.undo_redo.add_do_property(Global.canvas, "size", Vector2(width, height).floor())
-	for f in Global.frames:
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Scale")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	for f in Global.current_project.frames:
 		# Loop through all the layers to crop them
-		for j in range(Global.layers.size() - 1, -1, -1):
+		for j in range(Global.current_project.layers.size() - 1, -1, -1):
 			var sprite : Image = f.cels[j].image.get_rect(used_rect)
-			Global.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
-			Global.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
+			Global.current_project.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
+			Global.current_project.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
 
-	Global.undo_redo.add_undo_property(Global.canvas, "size", Global.canvas.size)
-	Global.undo_redo.add_undo_method(Global, "undo")
-	Global.undo_redo.add_do_method(Global, "redo")
-	Global.undo_redo.commit_action()
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()
 
 
 func flip_image(horizontal : bool) -> void:
-	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	image.unlock()
 	if horizontal:
@@ -449,14 +449,14 @@ func flip_image(horizontal : bool) -> void:
 
 
 func show_rotate_image_popup() -> void:
-	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	$RotateImage.set_sprite(image)
 	$RotateImage.popup_centered()
 	Global.dialog_open(true)
 
 
 func invert_image_colors() -> void:
-	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
@@ -468,7 +468,7 @@ func invert_image_colors() -> void:
 
 
 func desaturate_image() -> void:
-	var image : Image = Global.frames[Global.current_frame].cels[Global.current_layer].image
+	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
@@ -492,7 +492,7 @@ func show_hsv_configuration_popup() -> void:
 
 
 func image_menu_id_pressed(id : int) -> void:
-	if Global.layers[Global.current_layer].locked: # No changes if the layer is locked
+	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked
 		return
 	match id:
 		0: # Scale Image
@@ -602,7 +602,7 @@ func _can_draw_true() -> void:
 
 func show_quit_dialog() -> void:
 	if !$QuitDialog.visible:
-		if !Global.project_has_changed:
+		if !Global.current_project.has_changed:
 			$QuitDialog.call_deferred("popup_centered")
 		else:
 			$QuitAndSaveDialog.call_deferred("popup_centered")

@@ -111,7 +111,7 @@ func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
 		# The index which this random brush will be at
 		var next_random_brush_index := Global.file_brush_container.get_child_count()
 
-		Global.custom_brushes.append(first_image)
+		Global.current_project.brushes.append(first_image)
 		Global.create_brush_button(first_image, Global.Brush_Types.RANDOM_FILE, tooltip_name)
 	#	# Process the rest
 		for remaining_image in loaded_images:
@@ -127,7 +127,7 @@ func add_plain_brush(path: String, tooltip_name: String) -> void:
 		return
 	# do the standard conversion thing...
 	image.convert(Image.FORMAT_RGBA8)
-	Global.custom_brushes.append(image)
+	Global.current_project.brushes.append(image)
 	Global.create_brush_button(image, Global.Brush_Types.FILE, tooltip_name)
 
 
@@ -214,7 +214,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 						# Mark this as a processed relpath
 						processed_subdir_paths[nonrandomised_subdir][relative_path] = true
 
-	Global.brushes_from_files = Global.custom_brushes.size()
+	Global.brushes_from_files = Global.current_project.brushes.size()
 
 
 func import_patterns(priority_ordered_search_path: Array) -> void:

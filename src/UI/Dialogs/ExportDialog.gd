@@ -89,8 +89,8 @@ func show_tab() -> void:
 			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
 			$FrameTimer.stop()
 			if not was_exported:
-				frame_number = Global.current_frame + 1
-			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.max_value = Global.frames.size() + 1
+				frame_number = Global.current_project.current_frame + 1
+			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.max_value = Global.current_project.frames.size() + 1
 			var prev_frame_number = $VBoxContainer/FrameOptions/FrameNumber/FrameNumber.value
 			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.value = frame_number
 			if prev_frame_number == frame_number:
@@ -135,9 +135,9 @@ func external_export() -> void:
 
 
 func process_frame() -> void:
-	var frame = Global.frames[frame_number - 1]
+	var frame = Global.current_project.frames[frame_number - 1]
 	var image := Image.new()
-	image.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	blend_layers(image, frame)
 	processed_images.clear()
 	processed_images.append(image)
@@ -147,11 +147,11 @@ func process_spritesheet() -> void:
 	# Range of frames determined by tags
 	var frames := []
 	if frame_current_tag > 0:
-		var frame_start = Global.animation_tags[frame_current_tag - 1].from
-		var frame_end = Global.animation_tags[frame_current_tag - 1].to
-		frames = Global.frames.slice(frame_start-1, frame_end-1, 1, true)
+		var frame_start = Global.current_project.animation_tags[frame_current_tag - 1].from
+		var frame_end = Global.current_project.animation_tags[frame_current_tag - 1].to
+		frames = Global.current_project.frames.slice(frame_start-1, frame_end-1, 1, true)
 	else:
-		frames = Global.frames
+		frames = Global.current_project.frames
 
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
@@ -160,8 +160,8 @@ func process_spritesheet() -> void:
 	var spritesheet_columns = lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
 	var spritesheet_rows = lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
 
-	var width = Global.canvas.size.x * spritesheet_columns
-	var height = Global.canvas.size.y * spritesheet_rows
+	var width = Global.current_project.size.x * spritesheet_columns
+	var height = Global.current_project.size.y * spritesheet_rows
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -173,22 +173,22 @@ func process_spritesheet() -> void:
 	for frame in frames:
 		if orientation == Orientation.ROWS:
 			if vv < spritesheet_columns:
-				origin.x = Global.canvas.size.x * vv
+				origin.x = Global.current_project.size.x * vv
 				vv += 1
 			else:
 				hh += 1
 				origin.x = 0
 				vv = 1
-				origin.y = Global.canvas.size.y * hh
+				origin.y = Global.current_project.size.y * hh
 		else:
 			if hh < spritesheet_rows:
-				origin.y = Global.canvas.size.y * hh
+				origin.y = Global.current_project.size.y * hh
 				hh += 1
 			else:
 				vv += 1
 				origin.y = 0
 				hh = 1
-				origin.x = Global.canvas.size.x * vv
+				origin.x = Global.current_project.size.x * vv
 		blend_layers(whole_image, frame, origin)
 
 	processed_images.clear()
@@ -197,9 +197,9 @@ func process_spritesheet() -> void:
 
 func process_animation() -> void:
 	processed_images.clear()
-	for frame in Global.frames:
+	for frame in Global.current_project.frames:
 		var image := Image.new()
-		image.create(Global.canvas.size.x, Global.canvas.size.y, false, Image.FORMAT_RGBA8)
+		image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 		blend_layers(image, frame)
 		processed_images.append(image)
 
@@ -280,7 +280,7 @@ func remove_previews() -> void:
 
 func get_proccessed_image_animation_tag_and_start_id(processed_image_id : int) -> Array:
 	var result_animation_tag_and_start_id = null
-	for animation_tag in Global.animation_tags:
+	for animation_tag in Global.current_project.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
 		# Then stop
 		if (processed_image_id + 1) >= animation_tag.from and (processed_image_id + 1) <= animation_tag.to:
@@ -365,7 +365,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 	image.lock()
 	var layer_i := 0
 	for cel in frame.cels:
-		if Global.layers[layer_i].visible:
+		if Global.current_project.layers[layer_i].visible:
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
 			cel_image.lock()
@@ -375,7 +375,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var pixel_color := cel_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			DrawingAlgos.blend_rect(image, cel_image, Rect2(Global.canvas.location, Global.canvas.size), origin)
+			DrawingAlgos.blend_rect(image, cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
 		layer_i += 1
 	image.unlock()
 
@@ -453,7 +453,7 @@ func create_frame_tag_list() -> void:
 	frame_container.add_item("All Frames", 0) # Re-add removed 'All Frames' item
 
 	# Repopulate list with current tag list
-	for item in Global.animation_tags:
+	for item in Global.current_project.animation_tags:
 		frame_container.add_item(item.name)
 
 
@@ -476,8 +476,8 @@ func store_export_settings() -> void:
 # Fill the dialog with previous export settings
 func restore_previous_export_settings() -> void:
 	current_tab = exported_tab
-	frame_number = exported_frame_number if exported_frame_number <= Global.frames.size() else Global.frames.size()
-	frame_current_tag = exported_frame_current_tag if exported_frame_current_tag <= Global.animation_tags.size() else 0
+	frame_number = exported_frame_number if exported_frame_number <= Global.current_project.frames.size() else Global.current_project.frames.size()
+	frame_current_tag = exported_frame_current_tag if exported_frame_current_tag <= Global.current_project.animation_tags.size() else 0
 	orientation = exported_orientation
 	lines_count = exported_lines_count
 	animation_type = exported_animation_type

@@ -118,6 +118,6 @@ func change_theme(ID : int) -> void:
 				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
 
 	# Make sure the frame text gets updated
-	Global.current_frame = Global.current_frame
+	Global.current_project.current_frame = Global.current_project.current_frame
 
 	Global.preferences_dialog.get_node("Popups/ShortcutSelector").theme = main_theme

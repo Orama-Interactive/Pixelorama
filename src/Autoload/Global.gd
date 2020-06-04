@@ -24,22 +24,18 @@ var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
 var directory_module : Reference
 
+var projects := [] # Array of Projects
+var current_project : Project
+var current_project_index := 0 setget project_changed
+
 # Indices are as in the Direction enum
 # This is the total time the key for
 # that direction has been pressed.
 var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
 var loaded_locales : Array
-var undo_redo : UndoRedo
-var undos := 0 # The number of times we added undo properties
-var project_has_changed := false # Checks if the user has made changes to the project
-
 # Canvas related stuff
-var frames := [] setget frames_changed
-var layers := [] setget layers_changed
 var layers_changed_skip := false
-var current_frame := 0 setget frame_changed
-var current_layer := 0 setget layer_changed
 
 var can_draw := false
 
@@ -51,11 +47,10 @@ var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
 
-var selected_pixels := []
 var image_clipboard : Image
-var animation_tags := [] setget animation_tags_changed
 var play_only_tags := true
 
+# Preferences
 var theme_type : int = Theme_Types.DARK
 var default_image_width := 64
 var default_image_height := 64
@@ -116,10 +111,7 @@ var left_circle_points := []
 var right_circle_points := []
 
 var brushes_from_files := 0
-var custom_brushes := []
 var custom_brush_indexes := [-1, -1]
-var custom_brush_images := [Image.new(), Image.new()]
-var custom_brush_textures := [ImageTexture.new(), ImageTexture.new()]
 
 # Patterns
 var patterns := []
@@ -238,8 +230,8 @@ func _ready() -> void:
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
-
-	undo_redo = UndoRedo.new()
+	projects.append(Project.new())
+	current_project = projects[0]
 	image_clipboard = Image.new()
 
 	var root = get_tree().get_root()
@@ -361,8 +353,6 @@ func _ready() -> void:
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
-	layers.append(Layer.new())
-
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
 func find_node_by_name(root : Node, node_name : String) -> Node:
@@ -386,28 +376,28 @@ func notification_label(text : String) -> void:
 
 
 func general_undo() -> void:
-	undos -= 1
-	var action_name := undo_redo.get_current_action_name()
+	current_project.undos -= 1
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
 func general_redo() -> void:
-	if undos < undo_redo.get_version(): # If we did undo and then redo
-		undos = undo_redo.get_version()
+	if current_project.undos < current_project.undo_redo.get_version(): # If we did undo and then redo
+		current_project.undos = current_project.undo_redo.get_version()
 	if control.redone:
-		var action_name := undo_redo.get_current_action_name()
+		var action_name : String = current_project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)
 
 
 func undo(_frame_index := -1, _layer_index := -1) -> void:
 	general_undo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index)
 		else:
-			for i in frames.size():
-				for j in layers.size():
+			for i in current_project.frames.size():
+				for j in current_project.layers.size():
 					canvas.update_texture(j, i)
 
 		if action_name == "Scale":
@@ -415,40 +405,40 @@ func undo(_frame_index := -1, _layer_index := -1) -> void:
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
-		if frames.size() == 2: # Stop animating
+		if current_project.frames.size() == 2: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 
 	canvas.update()
-	if !project_has_changed:
-		project_has_changed = true
+	if !current_project.has_changed:
+		current_project.has_changed = true
 		self.window_title = window_title + "(*)"
 
 
 func redo(_frame_index := -1, _layer_index := -1) -> void:
 	general_redo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index)
 		else:
-			for i in frames.size():
-				for j in layers.size():
+			for i in current_project.frames.size():
+				for j in current_project.layers.size():
 					canvas.update_texture(j, i)
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
 
 	elif "Frame" in action_name:
-		if frames.size() == 1: # Stop animating
+		if current_project.frames.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 
 	canvas.update()
-	if !project_has_changed:
-		project_has_changed = true
+	if !current_project.has_changed:
+		current_project.has_changed = true
 		self.window_title = window_title + "(*)"
 
 
@@ -457,52 +447,15 @@ func title_changed(value : String) -> void:
 	OS.set_window_title(value)
 
 
-func frames_changed(value : Array) -> void:
-	frames = value
-	for container in frames_container.get_children():
-		for button in container.get_children():
-			container.remove_child(button)
-			button.queue_free()
-		frames_container.remove_child(container)
-
-	for frame_id in frame_ids.get_children():
-		frame_ids.remove_child(frame_id)
-		frame_id.queue_free()
-
-	for i in range(layers.size() - 1, -1, -1):
-		frames_container.add_child(layers[i].frame_container)
-
-	for j in range(frames.size()):
-		var label := Label.new()
-		label.rect_min_size.x = 36
-		label.align = Label.ALIGN_CENTER
-		label.text = str(j + 1)
-		frame_ids.add_child(label)
-
-		for i in range(layers.size() - 1, -1, -1):
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-
-			layers[i].frame_container.add_child(cel_button)
-
-	# This is useful in case tagged frames get deleted DURING the animation is playing
-	# otherwise, this code is useless in this context, since these values are being set
-	# when the play buttons get pressed, anyway
-	animation_timeline.first_frame = 0
-	animation_timeline.last_frame = frames.size() - 1
-	if play_only_tags:
-		for tag in animation_tags:
-			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
-				animation_timeline.first_frame = tag.from - 1
-				animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
+func project_changed(value : int) -> void:
+	current_project_index = value
+	current_project = projects[value]
 
 
 func clear_frames() -> void:
-	frames.clear()
-	animation_tags.clear()
-	self.animation_tags = animation_tags # To execute animation_tags_changed()
+	current_project.frames.clear()
+	current_project.animation_tags.clear()
+	current_project.animation_tags = current_project.animation_tags # To execute animation_tags_changed()
 
 	# Stop playing the animation
 	play_backwards.pressed = false
@@ -514,120 +467,7 @@ func clear_frames() -> void:
 	control.get_node("ExportDialog").was_exported = false
 	control.file_menu.set_item_text(3, tr("Save..."))
 	control.file_menu.set_item_text(6, tr("Export..."))
-	undo_redo.clear_history(false)
-
-
-func layers_changed(value : Array) -> void:
-	layers = value
-	if layers_changed_skip:
-		layers_changed_skip = false
-		return
-
-	for container in layers_container.get_children():
-		container.queue_free()
-
-	for container in frames_container.get_children():
-		for button in container.get_children():
-			container.remove_child(button)
-			button.queue_free()
-		frames_container.remove_child(container)
-
-	for i in range(layers.size() - 1, -1, -1):
-		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
-		layer_container.i = i
-		if layers[i].name == tr("Layer") + " 0":
-			layers[i].name = tr("Layer") + " %s" % i
-
-		layers_container.add_child(layer_container)
-		layer_container.label.text = layers[i].name
-		layer_container.line_edit.text = layers[i].name
-
-		frames_container.add_child(layers[i].frame_container)
-		for j in range(frames.size()):
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-
-			layers[i].frame_container.add_child(cel_button)
-
-	var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
-	layer_button.pressed = true
-	self.current_frame = current_frame # Call frame_changed to update UI
-
-	if layers[current_layer].locked:
-		disable_button(remove_layer_button, true)
-
-	if layers.size() == 1:
-		disable_button(remove_layer_button, true)
-		disable_button(move_up_layer_button, true)
-		disable_button(move_down_layer_button, true)
-		disable_button(merge_down_layer_button, true)
-	elif !layers[current_layer].locked:
-		disable_button(remove_layer_button, false)
-
-
-func frame_changed(value : int) -> void:
-	current_frame = value
-	current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-
-	for i in frames.size(): # De-select all the other frames
-		var text_color := Color.white
-		if theme_type == Theme_Types.CARAMEL || theme_type == Theme_Types.LIGHT:
-			text_color = Color.black
-		frame_ids.get_child(i).add_color_override("font_color", text_color)
-		for layer in layers:
-			if i < layer.frame_container.get_child_count():
-				layer.frame_container.get_child(i).pressed = false
-
-	# Select the new frame
-	frame_ids.get_child(current_frame).add_color_override("font_color", control.theme.get_color("Selected Color", "Label"))
-	if current_frame < layers[current_layer].frame_container.get_child_count():
-		layers[current_layer].frame_container.get_child(current_frame).pressed = true
-
-	if frames.size() == 1:
-		disable_button(remove_frame_button, true)
-	elif !layers[current_layer].locked:
-		disable_button(remove_frame_button, false)
-
-	Global.canvas.update()
-	Global.transparent_checker._ready() # To update the rect size
-
-
-func layer_changed(value : int) -> void:
-	current_layer = value
-	if current_frame < frames.size():
-		layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
-		layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
-
-	for container in layers_container.get_children():
-		container.pressed = false
-
-	if current_layer < layers_container.get_child_count():
-		var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
-		layer_button.pressed = true
-
-	if current_layer < layers.size() - 1:
-		disable_button(move_up_layer_button, false)
-	else:
-		disable_button(move_up_layer_button, true)
-
-	if current_layer > 0:
-		disable_button(move_down_layer_button, false)
-		disable_button(merge_down_layer_button, false)
-	else:
-		disable_button(move_down_layer_button, true)
-		disable_button(merge_down_layer_button, true)
-
-	if current_layer < layers.size():
-		if layers[current_layer].locked:
-			disable_button(remove_layer_button, true)
-		else:
-			if layers.size() > 1:
-				disable_button(remove_layer_button, false)
-
-	yield(get_tree().create_timer(0.01), "timeout")
-	self.current_frame = current_frame # Call frame_changed to update UI
+	current_project.undo_redo.clear_history(false)
 
 
 func dialog_open(open : bool) -> void:
@@ -666,39 +506,6 @@ func change_button_texturerect(texture_button : TextureRect, new_file_name : Str
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
 	texture_button.texture = load(directory_path.plus_file(new_file_name))
-
-
-func animation_tags_changed(value : Array) -> void:
-	animation_tags = value
-	for child in tag_container.get_children():
-		child.queue_free()
-
-	for tag in animation_tags:
-		var tag_c : Container = load("res://src/UI/Timeline/AnimationTag.tscn").instance()
-		tag_container.add_child(tag_c)
-		var tag_position := tag_container.get_child_count() - 1
-		tag_container.move_child(tag_c, tag_position)
-		tag_c.get_node("Label").text = tag.name
-		tag_c.get_node("Label").modulate = tag.color
-		tag_c.get_node("Line2D").default_color = tag.color
-
-		tag_c.rect_position.x = (tag.from - 1) * 39 + tag.from
-
-		var size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (size + 1) * 39
-		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
-		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
-
-	# This is useful in case tags get modified DURING the animation is playing
-	# otherwise, this code is useless in this context, since these values are being set
-	# when the play buttons get pressed, anyway
-	animation_timeline.first_frame = 0
-	animation_timeline.last_frame = frames.size() - 1
-	if play_only_tags:
-		for tag in animation_tags:
-			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
-				animation_timeline.first_frame = tag.from - 1
-				animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
 
 func update_hint_tooltips() -> void:
@@ -785,7 +592,7 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	var brush_container
 	var brush_button = load("res://src/UI/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
-	brush_button.custom_brush_index = custom_brushes.size() - 1
+	brush_button.custom_brush_index = current_project.brushes.size() - 1
 	if brush_type == Brush_Types.FILE || brush_type == Brush_Types.RANDOM_FILE:
 		brush_container = file_brush_container
 	else:
@@ -809,7 +616,7 @@ func remove_brush_buttons() -> void:
 
 func undo_custom_brush(_brush_button : BaseButton = null) -> void:
 	general_undo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.add_child(_brush_button)
 		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
@@ -818,7 +625,7 @@ func undo_custom_brush(_brush_button : BaseButton = null) -> void:
 
 func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 	general_redo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.remove_child(_brush_button)
 
@@ -842,13 +649,13 @@ func update_custom_brush(mouse_button : int) -> void:
 		right_circle_points = plot_circle(brush_sizes[1])
 	else:
 		var custom_brush := Image.new()
-		custom_brush.copy_from(custom_brushes[custom_brush_indexes[mouse_button]])
+		custom_brush.copy_from(current_project.brushes[custom_brush_indexes[mouse_button]])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * brush_sizes[mouse_button], custom_brush_size.y * brush_sizes[mouse_button], Image.INTERPOLATE_NEAREST)
-		custom_brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
-		custom_brush_textures[mouse_button].create_from_image(custom_brush_images[mouse_button], 0)
+		current_project.brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
+		current_project.brush_textures[mouse_button].create_from_image(current_project.brush_images[mouse_button], 0)
 
-		brush_type_buttons[mouse_button].get_child(0).texture = custom_brush_textures[mouse_button]
+		brush_type_buttons[mouse_button].get_child(0).texture = current_project.brush_textures[mouse_button]
 
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
@@ -902,4 +709,5 @@ func _exit_tree() -> void:
 	config_cache.save("user://cache.ini")
 
 	# Thanks to qarmin from GitHub for pointing this out
-	undo_redo.free()
+	for project in projects:
+		project.undo_redo.free()
