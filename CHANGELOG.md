@@ -24,6 +24,7 @@ Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Fixed alpha blending and lighting/darkening issues when drawing pixels with mirroring.
 - Fixed issue where if you moved a frame to the start (move left), it was invisible.
 - Fixed a rare issue with Undo/Redo not working while motion drawing and making lines.
+- Importing a non-palette json file no longer crashes the app.
 <br><br>
 
 ## [v0.7] - 2020-05-16
