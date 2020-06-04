@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-04 22:18\n"
+"PO-Revision-Date: 2020-06-04 22:19\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1193,8 +1193,8 @@ msgid "You can't remove more palettes!"
 msgstr "Δεν μπορείτε να διαγράψετε άλλες παλέτες!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Δεν γίνεται να διαγραφεί η παλέτα, επειδή δεν υπάρχει!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Παρουσιάστηκε σφάλμα κατά την αφαίρεση της παλέτας. Κωδικός σφάλματος: %s"
 
