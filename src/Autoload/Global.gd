@@ -700,7 +700,6 @@ func animation_tags_changed(value : Array) -> void:
 				animation_timeline.first_frame = tag.from - 1
 				animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
-
 func update_hint_tooltips() -> void:
 	var root = get_tree().get_root()
 
