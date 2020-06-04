@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-06-04 22:18\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1187,10 +1187,10 @@ msgid "Backup reloaded"
 msgstr "Το αντίγραφο ασφαλείας επαναφορτώθηκε"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Διαγραφή παλέτας"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Δεν μπορείτε να διαγράψετε άλλες παλέτες!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
