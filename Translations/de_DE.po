@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -453,10 +453,10 @@ msgid "Czech"
 msgstr "Tschechisch"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabisch"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Türkisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
@@ -760,9 +760,6 @@ msgstr "Vertikal"
 msgid "Current frame:"
 msgstr "Aktueller Frame"
 
-msgid "Current frame: 1/1"
-msgstr "Aktueller Frame 1/1"
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Springe zu dem ersten Frame\n"
@@ -1043,16 +1040,16 @@ msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Möchten Sie Ihren Namen oder Ihr Unternehmen auf dem Startbildschirm anzeigen?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Werde ein Platin-Sponsor"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Werde ein Gold-Sponsor"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Werde ein Patron"
 
 msgid "Don't show again"
 msgstr "Nicht beim nächsten Start anzeigen"
@@ -1187,4 +1184,16 @@ msgstr "Automatisches Backup für %s wurde gefunden.\n"
 
 msgid "Backup reloaded"
 msgstr "Backup neu geladen"
+
+msgid "Remove currently selected palette"
+msgstr "Aktuell ausgewählte Palette entfernen"
+
+msgid "You can't remove more palettes!"
+msgstr "Sie können nicht mehr Paletten entfernen!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Die Palette kann nicht entfernt werden, da sie nicht existiert!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Beim Entfernen der Palette ist ein Fehler aufgetreten! Fehlercode: %s"
 

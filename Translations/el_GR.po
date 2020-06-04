@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-05-15 19:39\n"
+"PO-Revision-Date: 2020-06-04 22:19\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -761,9 +761,6 @@ msgstr "Κάθετα"
 msgid "Current frame:"
 msgstr "Τρέχον καρέ:"
 
-msgid "Current frame: 1/1"
-msgstr "Τρέχον καρέ: 1/1"
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Μετάβαση στο πρώτο καρέ\n"
@@ -1188,4 +1185,16 @@ msgstr "Βρέθηκε αυτόματο αποθηκευμένο αντίγρα�
 
 msgid "Backup reloaded"
 msgstr "Το αντίγραφο ασφαλείας επαναφορτώθηκε"
+
+msgid "Remove currently selected palette"
+msgstr "Διαγραφή παλέτας"
+
+msgid "You can't remove more palettes!"
+msgstr "Δεν μπορείτε να διαγράψετε άλλες παλέτες!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Δεν γίνεται να διαγραφεί η παλέτα, επειδή δεν υπάρχει!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Παρουσιάστηκε σφάλμα κατά την αφαίρεση της παλέτας. Κωδικός σφάλματος: %s"
 

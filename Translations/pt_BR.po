@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -322,10 +322,10 @@ msgid "Gray"
 msgstr "Cinza"
 
 msgid "Blue"
-msgstr ""
+msgstr "Azul"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramelo"
 
 msgid "Light"
 msgstr "Claro"
@@ -343,25 +343,25 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Matiz/Saturação/Valor"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajustar MSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Ângulo:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Matriz"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturação"
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplique"
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -376,7 +376,7 @@ msgid "View Splash Screen"
 msgstr "Ver Tela de Abertura"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentação Online"
 
 msgid "Issue Tracker"
 msgstr "Rastreador de problemas"
@@ -448,16 +448,16 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonésio"
 
 msgid "Czech"
-msgstr ""
+msgstr "Tcheco"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Árabe"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -490,7 +490,7 @@ msgid "Unsaved Image"
 msgstr "Imagem não salva"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Você tem alterações não salvas. Se você prosseguir, o progresso que você fez será perdido."
 
 msgid "Save before exiting?"
 msgstr "Salvar antes de sair?"
@@ -582,10 +582,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Redefina as cores para o seu estado padrão (preto para a esquerda, branco para a direita)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Ferramenta da esquerda"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Ferramenta da direita"
 
 msgid "Left pixel indicator"
 msgstr "Pixel indicador esquerdo"
@@ -760,9 +760,6 @@ msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Quadro atual:"
-
-msgid "Current frame: 1/1"
-msgstr "Quadro atual: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -999,13 +996,13 @@ msgid "File saved"
 msgstr "Arquivo salvo"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Arquivo salvo automaticamente"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Arquivo falhou ao abrir"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Arquivo falhou ao salvar"
 
 msgid "File exported"
 msgstr "Arquivo exportado"
@@ -1023,7 +1020,7 @@ msgid "Color Name:"
 msgstr "Nome da Cor:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Use as cores esquerda e direita atuais"
 
 msgid "Create a new empty palette?"
 msgstr "Criar uma nova paleta vazia?"
@@ -1044,16 +1041,16 @@ msgid "Patrons:"
 msgstr "Patrões"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Quer que seu nome ou sua empresa seja mostrado na tela de abertura?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Seja um Patrocinador Platina"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Seja um Patrocinador Ouro"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Seja um Patrono"
 
 msgid "Don't show again"
 msgstr "Não mostrar de novo"
@@ -1161,13 +1158,13 @@ msgid "Opens last opened project on startup"
 msgstr "Abrir último projeto aberto ao iniciar"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Habilitar salvamento automático"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Intervalo do salvamento automático:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minuto(s)"
 
 msgid "Create new directory for each frame tag"
 msgstr "Criar novo diretório para cada tag de quadro"
@@ -1176,15 +1173,27 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr "Cria vários arquivos, mas cada arquivo é armazenado em um diretório diferente que corresponde à sua tag de quadro"
 
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Deletar"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
 msgstr ""
 
 msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
