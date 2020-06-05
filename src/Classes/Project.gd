@@ -12,7 +12,7 @@ var layers := [] setget layers_changed # Array of Layers
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
 var animation_tags := [] setget animation_tags_changed # Array of AnimationTags
-#var guides := [] # Array of Guides
+var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
 var brush_images := [Image.new(), Image.new()]
@@ -91,6 +91,7 @@ func change_project() -> void:
 
 	self.animation_tags = animation_tags
 
+	# Change the selection rectangle
 	if selected_pixels.size() != 0:
 		Global.selection_rectangle.polygon[0] = Vector2(x_min, y_min)
 		Global.selection_rectangle.polygon[1] = Vector2(x_max, y_min)
@@ -101,6 +102,13 @@ func change_project() -> void:
 		Global.selection_rectangle.polygon[1] = Vector2.ZERO
 		Global.selection_rectangle.polygon[2] = Vector2.ZERO
 		Global.selection_rectangle.polygon[3] = Vector2.ZERO
+
+	for guide in Global.canvas.get_children():
+		if guide is Guide:
+			if guide in guides:
+				guide.visible = true
+			else:
+				guide.visible = false
 
 
 func frames_changed(value : Array) -> void:

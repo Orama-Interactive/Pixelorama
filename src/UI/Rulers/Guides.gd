@@ -13,6 +13,7 @@ var type = Types.HORIZONTAL
 func _ready() -> void:
 	width = 0.1
 	default_color = Global.guide_color
+	Global.current_project.guides.append(self)
 
 
 func _input(_event : InputEvent):
@@ -31,7 +32,7 @@ func _input(_event : InputEvent):
 			has_focus = true
 			Global.has_focus = false
 			update()
-	if has_focus:
+	if has_focus and visible:
 		if Input.is_action_just_pressed("left_mouse"):
 			previous_points = points
 		if Input.is_action_pressed("left_mouse"):
