@@ -3,7 +3,7 @@ class_name Project extends Reference
 
 
 var name := "" setget name_changed
-var size : Vector2
+var size := Vector2(64, 64)
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
@@ -27,15 +27,16 @@ var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.1
 var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
 
 
-func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
+func _init(_frames := [], _name := tr("untitled")) -> void:
 	frames = _frames
 	name = _name
-	size = _size
 	x_max = size.x
 	y_max = size.y
 	undo_redo = UndoRedo.new()
 
 	Global.tabs.add_tab(name)
+	OpenSave.current_save_paths.append("")
+	OpenSave.backup_save_paths.append("")
 
 
 func change_project() -> void:
@@ -128,6 +129,8 @@ func change_project() -> void:
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
 	Global.transparent_checker._ready()
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.window_title = Global.window_title + "(*)"

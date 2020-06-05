@@ -201,14 +201,16 @@ func handle_backup() -> void:
 	if Global.config_cache.has_section("backups"):
 		var project_paths = Global.config_cache.get_section_keys("backups")
 		if project_paths.size() > 0:
-			# Get backup path
-			var backup_path = Global.config_cache.get_value("backups", project_paths[0])
+			# Get backup paths
+			var backup_paths := []
+			for p_path in project_paths:
+				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
 			# For it's only possible to reload the first found backup
-			$BackupConfirmation.dialog_text = tr($BackupConfirmation.dialog_text) % project_paths[0]
-			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths[0], backup_path])
-			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths[0], backup_path])
+			$BackupConfirmation.dialog_text = tr($BackupConfirmation.dialog_text) % project_paths
+			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
+			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
 			$BackupConfirmation.popup_centered()
 			Global.can_draw = false
 			modulate = Color(0.5, 0.5, 0.5)
@@ -595,29 +597,29 @@ func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 		$SaveSprite.popup_centered()
 		$QuitDialog.hide()
 		Global.dialog_open(true)
-		OpenSave.remove_backup()
 
 
 func _on_QuitDialog_confirmed() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
-	OpenSave.remove_backup()
 	get_tree().quit()
 
 
-func _on_BackupConfirmation_confirmed(project_path : String, backup_path : String) -> void:
-	OpenSave.reload_backup_file(project_path, backup_path)
+func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Array) -> void:
+	OpenSave.reload_backup_file(project_paths, backup_paths)
+#	Global.tabs.delete_tab(0)
 	OpenSave.autosave_timer.start()
-	$ExportDialog.file_name = OpenSave.current_save_path.get_file().trim_suffix(".pxo")
-	$ExportDialog.directory_path = OpenSave.current_save_path.get_base_dir()
+	$ExportDialog.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
+	$ExportDialog.directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	$ExportDialog.was_exported = false
-	file_menu.set_item_text(3, tr("Save") + " %s" % OpenSave.current_save_path.get_file())
+	file_menu.set_item_text(3, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
 	file_menu.set_item_text(6, tr("Export"))
 
 
-func _on_BackupConfirmation_delete(project_path : String, backup_path : String) -> void:
-	OpenSave.remove_backup_by_path(project_path, backup_path)
+func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) -> void:
+	for i in range(project_paths.size()):
+		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
 	OpenSave.autosave_timer.start()
 	# Reopen last project
 	if Global.open_last_project:

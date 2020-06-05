@@ -723,6 +723,8 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
 
-	# Thanks to qarmin from GitHub for pointing this out
+	var i := 0
 	for project in projects:
 		project.undo_redo.free()
+		OpenSave.remove_backup(i)
+		i += 1

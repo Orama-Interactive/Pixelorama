@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.8] - Unreleased
+
+### Added
+- Project tabs! You can now have multiple projects open at the same time, and access each one with tabs.
+<br><br>
+
 ## [v0.7.1] - Unreleased
 This update has been brought to you by the contributions of:
 Igor Santarek (jegor377), rob-a-bolton, Kinwailo

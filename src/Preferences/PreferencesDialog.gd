@@ -112,6 +112,6 @@ func _on_PreferencesDialog_popup_hide() -> void:
 	list.clear()
 
 
-func _on_List_item_selected(index):
+func _on_List_item_selected(index) -> void:
 	for child in right_side.get_children():
 		child.visible = child.name == ["General", "Languages", "Themes", "Canvas", "Image", "Shortcuts"][index]

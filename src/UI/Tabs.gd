@@ -27,6 +27,9 @@ func _on_Tabs_reposition_active_tab_request(idx_to : int) -> void:
 func delete_tab(tab : int) -> void:
 	remove_tab(tab)
 	Global.projects[tab].undo_redo.free()
+	OpenSave.remove_backup(tab)
+	OpenSave.current_save_paths.remove(tab)
+	OpenSave.backup_save_paths.remove(tab)
 	Global.projects.remove(tab)
 	if tab > 0:
 		Global.current_project_index -= 1
