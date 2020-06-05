@@ -103,8 +103,11 @@ var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
 
 # Brushes
+var file_brushes := []
 var brush_sizes := [1, 1]
 var current_brush_types := [Brush_Types.PIXEL, Brush_Types.PIXEL]
+var brush_images := [Image.new(), Image.new()]
+var brush_textures := [ImageTexture.new(), ImageTexture.new()]
 
 var brush_type_window_position : int = Mouse_Button.LEFT
 var left_circle_points := []
@@ -596,10 +599,11 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	var brush_container
 	var brush_button = load("res://src/UI/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
-	brush_button.custom_brush_index = current_project.brushes.size() - 1
 	if brush_type == Brush_Types.FILE || brush_type == Brush_Types.RANDOM_FILE:
+		brush_button.custom_brush_index = file_brushes.size() - 1
 		brush_container = file_brush_container
 	else:
+		brush_button.custom_brush_index = current_project.brushes.size() - 1
 		brush_container = project_brush_container
 	var brush_tex := ImageTexture.new()
 	brush_tex.create_from_image(brush_img, 0)
@@ -623,7 +627,7 @@ func undo_custom_brush(_brush_button : BaseButton = null) -> void:
 	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.add_child(_brush_button)
-		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
+		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index)
 		_brush_button.get_node("DeleteButton").visible = false
 
 
@@ -635,17 +639,18 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 
 
 func update_custom_brush(mouse_button : int) -> void:
-	if current_brush_types[mouse_button] == Brush_Types.PIXEL:
+	var brush_type : int = current_brush_types[mouse_button]
+	if brush_type == Brush_Types.PIXEL:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/pixel_image.png")
 		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-	elif current_brush_types[mouse_button] == Brush_Types.CIRCLE:
+	elif brush_type == Brush_Types.CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_9x9.png")
 		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
 		left_circle_points = plot_circle(brush_sizes[0])
 		right_circle_points = plot_circle(brush_sizes[1])
-	elif current_brush_types[mouse_button] == Brush_Types.FILLED_CIRCLE:
+	elif brush_type == Brush_Types.FILLED_CIRCLE:
 		var pixel := Image.new()
 		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
 		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
@@ -653,13 +658,16 @@ func update_custom_brush(mouse_button : int) -> void:
 		right_circle_points = plot_circle(brush_sizes[1])
 	else:
 		var custom_brush := Image.new()
-		custom_brush.copy_from(current_project.brushes[custom_brush_indexes[mouse_button]])
+		if brush_type == Brush_Types.FILE or brush_type == Brush_Types.RANDOM_FILE:
+			custom_brush.copy_from(file_brushes[custom_brush_indexes[mouse_button]])
+		else:
+			custom_brush.copy_from(current_project.brushes[custom_brush_indexes[mouse_button]])
 		var custom_brush_size = custom_brush.get_size()
 		custom_brush.resize(custom_brush_size.x * brush_sizes[mouse_button], custom_brush_size.y * brush_sizes[mouse_button], Image.INTERPOLATE_NEAREST)
-		current_project.brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
-		current_project.brush_textures[mouse_button].create_from_image(current_project.brush_images[mouse_button], 0)
+		brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
+		brush_textures[mouse_button].create_from_image(brush_images[mouse_button], 0)
 
-		brush_type_buttons[mouse_button].get_child(0).texture = current_project.brush_textures[mouse_button]
+		brush_type_buttons[mouse_button].get_child(0).texture = brush_textures[mouse_button]
 
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:

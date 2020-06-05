@@ -155,7 +155,6 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			Global.color_pickers[1].get_picker().add_preset(color)
 
 	# Load custom brushes
-	Global.current_project.brushes.resize(Global.brushes_from_files)
 	Global.remove_brush_buttons()
 
 	var brush_line := file.get_line()
@@ -248,7 +247,7 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 		file.store_8(right_brush_size)
 
 		# Save custom brushes
-		for i in range(Global.brushes_from_files, Global.current_project.brushes.size()):
+		for i in range(Global.current_project.brushes.size()):
 			var brush = Global.current_project.brushes[i]
 			file.store_line("/")
 			file.store_16(brush.get_size().x)

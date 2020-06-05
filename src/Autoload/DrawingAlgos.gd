@@ -86,7 +86,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			var brush_index : int = Global.custom_brush_indexes[current_mouse_button]
 			var custom_brush_image : Image
 			if brush_type != Global.Brush_Types.RANDOM_FILE:
-				custom_brush_image = Global.current_project.brush_images[current_mouse_button]
+				custom_brush_image = Global.brush_images[current_mouse_button]
 			else: # Handle random brush
 				var brush_button = Global.file_brush_container.get_child(brush_index + 3)
 				var random_index = randi() % brush_button.random_brushes.size()
@@ -145,7 +145,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 			else: # if it's transparent - if it's the eraser
 				var custom_brush := Image.new()
-				custom_brush.copy_from(Global.current_project.brushes[brush_index])
+				if brush_type == Global.Brush_Types.CUSTOM:
+					custom_brush.copy_from(Global.current_project.brushes[brush_index])
+				else:
+					custom_brush.copy_from(Global.file_brushes[brush_index])
 				custom_brush_size = custom_brush.get_size()
 				custom_brush.resize(custom_brush_size.x * brush_size, custom_brush_size.y * brush_size, Image.INTERPOLATE_NEAREST)
 				var custom_brush_blended = Global.blend_image_with_color(custom_brush, color, 1)

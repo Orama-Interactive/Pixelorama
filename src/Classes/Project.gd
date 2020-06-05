@@ -15,8 +15,6 @@ var animation_tags := [] setget animation_tags_changed # Array of AnimationTags
 var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
-var brush_images := [Image.new(), Image.new()]
-var brush_textures := [ImageTexture.new(), ImageTexture.new()]
 
 var selected_pixels := []
 var x_min := 0
@@ -103,12 +101,20 @@ func change_project() -> void:
 		Global.selection_rectangle.polygon[2] = Vector2.ZERO
 		Global.selection_rectangle.polygon[3] = Vector2.ZERO
 
+	# Change the guides
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
 			if guide in guides:
 				guide.visible = true
 			else:
 				guide.visible = false
+
+	# Change the project brushes
+	for child in Global.project_brush_container.get_children():
+		child.queue_free()
+
+	for brush in brushes:
+		Global.create_brush_button(brush)
 
 
 func frames_changed(value : Array) -> void:
