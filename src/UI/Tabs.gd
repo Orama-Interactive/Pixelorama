@@ -6,7 +6,7 @@ func _on_Tabs_tab_changed(tab : int) -> void:
 
 
 func _on_Tabs_tab_close(tab : int) -> void:
-	if Global.projects.size() == 1:
+	if Global.projects.size() == 1 or Global.current_project_index != tab:
 		return
 
 	if Global.current_project.has_changed:
@@ -26,7 +26,7 @@ func _on_Tabs_reposition_active_tab_request(idx_to : int) -> void:
 
 func delete_tab(tab : int) -> void:
 	remove_tab(tab)
-	Global.current_project.undo_redo.free()
+	Global.projects[tab].undo_redo.free()
 	Global.projects.remove(tab)
 	if tab > 0:
 		Global.current_project_index -= 1

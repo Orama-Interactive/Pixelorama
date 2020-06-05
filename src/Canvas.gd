@@ -230,18 +230,15 @@ func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
 	var bigger_canvas_axis = max(Global.current_project.size.x, Global.current_project.size.y)
 	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
-	if zoom_max > Vector2.ONE:
-		Global.camera.zoom_max = zoom_max
-		Global.camera2.zoom_max = zoom_max
-		Global.camera_preview.zoom_max = zoom_max
-	else:
-		Global.camera.zoom_max = Vector2.ONE
-		Global.camera2.zoom_max = Vector2.ONE
-		Global.camera_preview.zoom_max = Vector2.ONE
+	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
+	for camera in cameras:
+		if zoom_max > Vector2.ONE:
+			camera.zoom_max = zoom_max
+		else:
+			camera.zoom_max = Vector2.ONE
 
-	Global.camera.fit_to_frame(Global.current_project.size)
-	Global.camera2.fit_to_frame(Global.current_project.size)
-	Global.camera_preview.fit_to_frame(Global.current_project.size)
+		camera.fit_to_frame(Global.current_project.size)
+		camera.save_values_to_project()
 
 	Global.transparent_checker._ready() # To update the rect size
 

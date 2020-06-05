@@ -22,6 +22,10 @@ var x_max := 64
 var y_min := 0
 var y_max := 64
 
+# For every camera (currently there are 3)
+var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
+var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
+
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
@@ -115,6 +119,13 @@ func change_project() -> void:
 	for brush in brushes:
 		Global.create_brush_button(brush)
 
+	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
+	var i := 0
+	for camera in cameras:
+		camera.zoom = cameras_zoom[i]
+		camera.offset = cameras_offset[i]
+		i += 1
+	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
 	Global.transparent_checker._ready()
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
