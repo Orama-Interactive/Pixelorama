@@ -363,6 +363,8 @@ func add_layer(is_new := true) -> void:
 
 
 func _on_RemoveLayer_pressed() -> void:
+	if Global.current_project.layers.size() == 1:
+		return
 	var new_layers : Array = Global.current_project.layers.duplicate()
 	new_layers.remove(Global.current_project.current_layer)
 	Global.current_project.undos += 1

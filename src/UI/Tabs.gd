@@ -3,6 +3,7 @@ extends Tabs
 
 func _on_Tabs_tab_changed(tab : int):
 	Global.current_project_index = tab
+	Global.canvas.update()
 
 
 func _on_Tabs_tab_close(tab : int):
