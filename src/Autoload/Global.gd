@@ -462,24 +462,6 @@ func project_changed(value : int) -> void:
 	current_project.change_project()
 
 
-func clear_frames() -> void:
-	current_project.frames.clear()
-	current_project.animation_tags.clear()
-	current_project.animation_tags = current_project.animation_tags # To execute animation_tags_changed()
-
-	# Stop playing the animation
-	play_backwards.pressed = false
-	play_forward.pressed = false
-	animation_timer.stop()
-
-	self.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
-	OpenSave.current_save_path = ""
-	control.get_node("ExportDialog").was_exported = false
-	control.file_menu.set_item_text(3, tr("Save..."))
-	control.file_menu.set_item_text(6, tr("Export..."))
-	current_project.undo_redo.clear_history(false)
-
-
 func dialog_open(open : bool) -> void:
 	if open:
 		can_draw = false

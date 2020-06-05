@@ -336,10 +336,13 @@ func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
 	for i in range(project_paths.size()):
 		# If project path is the same as backup save path -> the backup was untitled
 		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
-		backup_save_paths[i] = backup_paths[i]
+		# We need "i + 1" because the paths must be stored in
+		# the new array slots, created from the Project class which was
+		# created in the above open_pxo_file() method
+		backup_save_paths[i + 1] = backup_paths[i]
 
-		if project_paths[i] != backup_paths[i]:
-			current_save_paths[i] = project_paths[i]
+		if project_paths[i] != backup_paths[i]: # If the user has saved
+			current_save_paths[i + 1] = project_paths[i]
 			Global.window_title = project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
 			Global.current_project.has_changed = true
 

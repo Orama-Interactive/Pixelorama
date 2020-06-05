@@ -207,7 +207,6 @@ func handle_backup() -> void:
 				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
-			# For it's only possible to reload the first found backup
 			$BackupConfirmation.dialog_text = tr($BackupConfirmation.dialog_text) % project_paths
 			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
 			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
@@ -262,11 +261,11 @@ func on_open_last_project_file_menu_option_pressed() -> void:
 
 func save_project_file() -> void:
 	is_quitting_on_save = false
-	if OpenSave.current_save_path == "":
+	if OpenSave.current_save_paths[Global.current_project_index] == "":
 		$SaveSprite.popup_centered()
 		Global.dialog_open(true)
 	else:
-		_on_SaveSprite_file_selected(OpenSave.current_save_path)
+		_on_SaveSprite_file_selected(OpenSave.current_save_paths[Global.current_project_index])
 
 
 func save_project_file_as() -> void:
