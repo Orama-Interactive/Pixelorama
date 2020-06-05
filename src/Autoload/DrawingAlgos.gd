@@ -13,10 +13,10 @@ func reset() -> void:
 
 
 func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressure : float, current_mouse_button := -1, current_action := -1) -> void:
-	var x_min = Global.canvas.x_min
-	var x_max = Global.canvas.x_max
-	var y_min = Global.canvas.y_min
-	var y_max = Global.canvas.y_max
+	var x_min = Global.current_project.x_min
+	var x_max = Global.current_project.x_max
+	var y_min = Global.current_project.y_min
+	var y_max = Global.current_project.y_max
 	if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 		return
 
@@ -45,10 +45,10 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressu
 
 func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_button : int, pen_pressure : float, current_action := -1) -> void:
 	if Global.can_draw && Global.has_focus:
-		var x_min = Global.canvas.x_min
-		var x_max = Global.canvas.x_max
-		var y_min = Global.canvas.y_min
-		var y_max = Global.canvas.y_max
+		var x_min = Global.current_project.x_min
+		var x_max = Global.current_project.x_max
+		var y_min = Global.current_project.y_min
+		var y_max = Global.current_project.y_max
 
 		if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
 			if current_action == Global.Tools.PENCIL:
@@ -226,10 +226,10 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 
 # Thanks to https://en.wikipedia.org/wiki/Flood_fill
 func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_color : Color) -> void:
-	var x_min = Global.canvas.x_min
-	var x_max = Global.canvas.x_max
-	var y_min = Global.canvas.y_min
-	var y_max = Global.canvas.y_max
+	var x_min = Global.current_project.x_min
+	var x_max = Global.current_project.x_max
+	var y_min = Global.current_project.y_min
+	var y_max = Global.current_project.y_max
 	pos = pos.floor()
 	var pixel = sprite.get_pixelv(pos)
 	if target_color == replace_color:
@@ -268,10 +268,10 @@ func flood_fill(sprite : Image, pos : Vector2, target_color : Color, replace_col
 
 
 func pattern_fill(sprite : Image, pos : Vector2, pattern : Image, target_color : Color, var offset : Vector2) -> void:
-	var x_min = Global.canvas.x_min
-	var x_max = Global.canvas.x_max
-	var y_min = Global.canvas.y_min
-	var y_max = Global.canvas.y_max
+	var x_min = Global.current_project.x_min
+	var x_max = Global.current_project.x_max
+	var y_min = Global.current_project.y_min
+	var y_max = Global.current_project.y_max
 	pos = pos.floor()
 	if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 		return
@@ -558,10 +558,10 @@ func colorDistance(c1 : Color, c2 : Color) -> float:
 
 
 func adjust_hsv(img: Image, id : int, delta : float) -> void:
-	var x_min = Global.canvas.x_min
-	var x_max = Global.canvas.x_max
-	var y_min = Global.canvas.y_min
-	var y_max = Global.canvas.y_max
+	var x_min = Global.current_project.x_min
+	var x_max = Global.current_project.x_max
+	var y_min = Global.current_project.y_min
+	var y_max = Global.current_project.y_max
 	img.lock()
 
 	match id:

@@ -53,8 +53,8 @@ func set_pixel_perfect(value: bool) -> void:
 
 
 func set_pixel(_sprite: Image, _pos: Vector2, _new_color: Color) -> void:
-	var mirror_x = Global.canvas.x_max + Global.canvas.x_min - _pos.x - 1
-	var mirror_y = Global.canvas.y_max + Global.canvas.y_min - _pos.y - 1
+	var mirror_x = Global.current_project.x_max + Global.current_project.x_min - _pos.x - 1
+	var mirror_y = Global.current_project.y_max + Global.current_project.y_min - _pos.y - 1
 
 	drawers[0].set_pixel(_sprite, _pos, _new_color)
 	if h_mirror:

@@ -10,10 +10,6 @@ var previous_mouse_pos_for_lines := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var previous_action := -1
-var x_min := 0
-var x_max := 64
-var y_min := 0
-var y_max := 64
 var sprite_changed_this_frame := false # for optimization purposes
 var is_making_line := false
 var made_line := false
@@ -24,10 +20,6 @@ var pen_pressure := 1.0 # For tablet pressure sensitivity
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	x_min = location.x
-	x_max = location.x + Global.current_project.size.x
-	y_min = location.y
-	y_max = location.y + Global.current_project.size.y
 	var frame : Frame = new_empty_frame(true)
 	Global.current_project.frames.append(frame)
 	camera_zoom()
@@ -124,16 +116,17 @@ func _input(event : InputEvent) -> void:
 	var mouse_pos := current_pixel
 	var mouse_pos_floored := mouse_pos.floor()
 	var current_mouse_button := -1
+	var current_project : Project = Global.current_project
 
-	x_min = location.x
-	x_max = location.x + Global.current_project.size.x
-	y_min = location.y
-	y_max = location.y + Global.current_project.size.y
-	if Global.current_project.selected_pixels.size() != 0:
-		x_min = max(x_min, Global.selection_rectangle.polygon[0].x)
-		x_max = min(x_max, Global.selection_rectangle.polygon[2].x)
-		y_min = max(y_min, Global.selection_rectangle.polygon[0].y)
-		y_max = min(y_max, Global.selection_rectangle.polygon[2].y)
+	current_project.x_min = location.x
+	current_project.x_max = location.x + current_project.size.x
+	current_project.y_min = location.y
+	current_project.y_max = location.y + current_project.size.y
+	if current_project.selected_pixels.size() != 0:
+		current_project.x_min = max(current_project.x_min, Global.selection_rectangle.polygon[0].x)
+		current_project.x_max = min(current_project.x_max, Global.selection_rectangle.polygon[2].x)
+		current_project.y_min = max(current_project.y_min, Global.selection_rectangle.polygon[0].y)
+		current_project.y_max = min(current_project.y_max, Global.selection_rectangle.polygon[2].y)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		current_mouse_button = Global.Mouse_Button.LEFT
@@ -144,7 +137,7 @@ func _input(event : InputEvent) -> void:
 	var current_action : int = Global.current_tools[current_mouse_button] if current_mouse_button != -1 else -1
 
 	if Global.has_focus:
-		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [Global.current_project.size.x, Global.current_project.size.y, mouse_pos_floored.x, mouse_pos_floored.y]
+		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [current_project.size.x, current_project.size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 		if !cursor_image_has_changed:
 			cursor_image_has_changed = true
 			if Global.cursor_image.get_data().get_size() != Vector2.ZERO:
@@ -154,7 +147,7 @@ func _input(event : InputEvent) -> void:
 			if Global.show_right_tool_icon:
 				Global.right_cursor.visible = true
 	else:
-		Global.cursor_position_label.text = "[%s×%s]" % [Global.current_project.size.x, Global.current_project.size.y]
+		Global.cursor_position_label.text = "[%s×%s]" % [current_project.size.x, current_project.size.y]
 		if cursor_image_has_changed:
 			cursor_image_has_changed = false
 			Global.left_cursor.visible = false
@@ -173,7 +166,7 @@ func _input(event : InputEvent) -> void:
 				else:
 					handle_undo("Draw")
 	elif (Input.is_action_just_released("left_mouse") && !Input.is_action_pressed("right_mouse")) || (Input.is_action_just_released("right_mouse") && !Input.is_action_pressed("left_mouse")):
-		if can_handle || Global.current_project.undos == Global.current_project.undo_redo.get_version():
+		if can_handle || current_project.undos == current_project.undo_redo.get_version():
 			if previous_action != -1 && previous_action != Global.Tools.RECTSELECT && current_action != Global.Tools.COLORPICKER && current_action != Global.Tools.ZOOM:
 				handle_redo("Draw")
 
@@ -223,14 +216,14 @@ func _input(event : InputEvent) -> void:
 
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					Global.current_project.selected_pixels.append(Vector2(xx, yy))
+					current_project.selected_pixels.append(Vector2(xx, yy))
 			is_making_selection = -1
 			handle_redo("Rectangle Select")
 
 	previous_action = current_action
 	previous_mouse_pos = current_pixel
 	if sprite_changed_this_frame:
-		update_texture(Global.current_project.current_layer)
+		update_texture(current_project.current_layer)
 
 
 func camera_zoom() -> void:
@@ -274,7 +267,8 @@ func new_empty_frame(first_time := false) -> Frame:
 
 
 func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : Vector2, can_handle : bool) -> void:
-	var current_cel : Cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer]
+	var current_project : Project = Global.current_project
+	var current_cel : Cel = current_project.frames[current_project.current_frame].cels[current_project.current_layer]
 	var sprite : Image = current_cel.image
 	var mouse_pos_floored := mouse_pos.floor()
 	var mouse_pos_ceiled := mouse_pos.ceil()
@@ -298,8 +292,8 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 				var pattern_offset : Vector2 = Global.fill_pattern_offsets[current_mouse_button]
 
 				if fill_area == Global.Fill_Area.SAME_COLOR_AREA: # Paint the specific area of the same color
-					var mirror_x := x_max + x_min - mouse_pos_floored.x - 1
-					var mirror_y := y_max + y_min - mouse_pos_floored.y - 1
+					var mirror_x := current_project.x_max + current_project.x_min - mouse_pos_floored.x - 1
+					var mirror_y := current_project.y_max + current_project.y_min - mouse_pos_floored.y - 1
 					var horizontal_mirror : bool = Global.horizontal_mirror[current_mouse_button]
 					var vertical_mirror : bool = Global.vertical_mirror[current_mouse_button]
 
@@ -329,8 +323,8 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 
 				else: # Paint all pixels of the same color
 					var pixel_color : Color = sprite.get_pixelv(mouse_pos)
-					for xx in range(x_min, x_max):
-						for yy in range(y_min, y_max):
+					for xx in range(current_project.x_min, current_project.x_max):
+						for yy in range(current_project.y_min, current_project.y_max):
 							var c : Color = sprite.get_pixel(xx, yy)
 							if c == pixel_color:
 								if fill_with == Global.Fill_With.PATTERN && pattern_image: # Pattern fill
@@ -357,7 +351,7 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 			# Check SelectionRectangle.gd for more code on Rectangle Selection
 			if Global.can_draw && Global.has_focus:
 				# If we're creating a new selection
-				if Global.current_project.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
+				if current_project.selected_pixels.size() == 0 || !point_in_rectangle(mouse_pos_floored, Global.selection_rectangle.polygon[0] - Vector2.ONE, Global.selection_rectangle.polygon[2]):
 					var mouse_button_string := "left_mouse" if current_mouse_button == Global.Mouse_Button.LEFT else "right_mouse"
 
 					if Input.is_action_just_pressed(mouse_button_string):
@@ -366,7 +360,7 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 						Global.selection_rectangle.polygon[2] = mouse_pos_floored
 						Global.selection_rectangle.polygon[3] = mouse_pos_floored
 						is_making_selection = current_mouse_button
-						Global.current_project.selected_pixels.clear()
+						current_project.selected_pixels.clear()
 					else:
 						if is_making_selection != -1: # If we're making a new selection...
 							var start_pos = Global.selection_rectangle.polygon[0]
@@ -380,7 +374,7 @@ func handle_tools(current_mouse_button : int, current_action : int, mouse_pos : 
 								Global.selection_rectangle.polygon[2] = end_pos
 								Global.selection_rectangle.polygon[3] = Vector2(start_pos.x, end_pos.y)
 		Global.Tools.COLORPICKER:
-			var canvas_rect := Rect2(location, Global.current_project.size)
+			var canvas_rect := Rect2(location, current_project.size)
 			if can_handle && canvas_rect.has_point(mouse_pos):
 				var image_data := Image.new()
 				image_data.copy_from(sprite)

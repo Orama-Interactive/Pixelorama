@@ -209,11 +209,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="TabContainer" type="PanelContainer" parent="CanvasAndTimeline/ViewportAndRulers"]
+[node name="TabsContainer" type="PanelContainer" parent="CanvasAndTimeline/ViewportAndRulers"]
 margin_right = 902.0
 margin_bottom = 38.0
 
-[node name="Tabs" type="Tabs" parent="CanvasAndTimeline/ViewportAndRulers/TabContainer"]
+[node name="Tabs" type="Tabs" parent="CanvasAndTimeline/ViewportAndRulers/TabsContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 895.0
@@ -386,9 +386,9 @@ margin_bottom = 248.0
 [node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
 margin_top = 260.0
 margin_bottom = 508.0
-[connection signal="reposition_active_tab_request" from="CanvasAndTimeline/ViewportAndRulers/TabContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
-[connection signal="tab_changed" from="CanvasAndTimeline/ViewportAndRulers/TabContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabContainer/Tabs" method="_on_Tabs_tab_changed"]
-[connection signal="tab_close" from="CanvasAndTimeline/ViewportAndRulers/TabContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabContainer/Tabs" method="_on_Tabs_tab_close"]
+[connection signal="reposition_active_tab_request" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
+[connection signal="tab_changed" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
+[connection signal="tab_close" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
 [connection signal="mouse_entered" from="CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" to="CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" to="CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]

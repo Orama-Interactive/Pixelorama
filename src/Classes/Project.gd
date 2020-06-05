@@ -19,12 +19,18 @@ var brush_images := [Image.new(), Image.new()]
 var brush_textures := [ImageTexture.new(), ImageTexture.new()]
 
 var selected_pixels := []
+var x_min := 0
+var x_max := 64
+var y_min := 0
+var y_max := 64
 
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
 	name = _name
 	size = _size
+	x_max = size.x
+	y_max = size.y
 	layers.append(Layer.new())
 	undo_redo = UndoRedo.new()
 
@@ -112,7 +118,7 @@ func frames_changed(value : Array) -> void:
 
 			layers[i].frame_container.add_child(cel_button)
 
-	set_first_and_last_frames()
+	set_timeline_first_and_last_frames()
 
 
 func layers_changed(value : Array) -> void:
@@ -257,10 +263,10 @@ func animation_tags_changed(value : Array) -> void:
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
-	set_first_and_last_frames()
+	set_timeline_first_and_last_frames()
 
 
-func set_first_and_last_frames() -> void:
+func set_timeline_first_and_last_frames() -> void:
 	# This is useful in case tags get modified DURING the animation is playing
 	# otherwise, this code is useless in this context, since these values are being set
 	# when the play buttons get pressed anyway
