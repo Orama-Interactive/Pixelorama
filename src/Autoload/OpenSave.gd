@@ -277,6 +277,7 @@ func save_pxo_file(path : String, autosave : bool) -> void:
 			Global.notification_label("File saved")
 
 		if backup_save_path == "":
+			Global.current_project.name = path.get_file()
 			Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
 
 	else:

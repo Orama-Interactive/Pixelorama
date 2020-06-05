@@ -472,7 +472,7 @@ func clear_frames() -> void:
 	play_forward.pressed = false
 	animation_timer.stop()
 
-	self.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
+	self.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 	OpenSave.current_save_path = ""
 	control.get_node("ExportDialog").was_exported = false
 	control.file_menu.set_item_text(3, tr("Save..."))

@@ -2,11 +2,11 @@ class_name Project extends Reference
 # A class for project properties.
 
 
-var name := ""
+var name := "" setget name_changed
 var size : Vector2
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
-var has_changed := false
+var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
 var layers := [] setget layers_changed # Array of Layers
 var current_frame := 0 setget frame_changed
@@ -117,6 +117,14 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.transparent_checker._ready()
+	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
+	if has_changed:
+		Global.window_title = Global.window_title + "(*)"
+
+
+func name_changed(value : String) -> void:
+	name = value
+	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 
 
 func frames_changed(value : Array) -> void:
@@ -305,3 +313,11 @@ func set_timeline_first_and_last_frames() -> void:
 			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
 				Global.animation_timeline.first_frame = tag.from - 1
 				Global.animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
+
+
+func has_changed_changed(value : bool) -> void:
+	has_changed = value
+	if value:
+		Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
+	else:
+		Global.tabs.set_tab_title(Global.tabs.current_tab, name)

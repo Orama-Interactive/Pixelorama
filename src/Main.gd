@@ -18,7 +18,7 @@ func _ready() -> void:
 	setup_image_menu()
 	setup_help_menu()
 
-	Global.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
+	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
 	Global.layers_container.get_child(0).label.text = Global.current_project.layers[0].name
@@ -225,9 +225,7 @@ func handle_loading_files(files : PoolStringArray) -> void:
 		if file.get_extension().to_lower() == "pxo":
 				_on_OpenSprite_file_selected(file)
 		else:
-			$ImportSprites.new_frame = false
 			$ImportSprites._on_ImportSprites_files_selected([file])
-			$ImportSprites.new_frame = true
 
 
 func _notification(what : int) -> void:
