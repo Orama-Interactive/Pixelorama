@@ -127,7 +127,6 @@ visible = false
 [connection signal="popup_hide" from="RotateImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="UnsavedCanvasDialog" to="." method="_on_UnsavedCanvasDialog_confirmed"]
 [connection signal="popup_hide" from="UnsavedCanvasDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]

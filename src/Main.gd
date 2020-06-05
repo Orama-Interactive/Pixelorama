@@ -254,11 +254,7 @@ func open_project_file() -> void:
 func on_open_last_project_file_menu_option_pressed() -> void:
 	# Check if last project path is set and if yes then open
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
-		if Global.current_project.has_changed:
-			$UnsavedCanvasDialog.popup_centered()
-			Global.dialog_open(true)
-		else:
-			load_last_project()
+		load_last_project()
 	else: # if not then warn user that he didn't edit any project yet
 		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
 		Global.error_dialog.popup_centered()
@@ -546,10 +542,6 @@ func load_last_project() -> void:
 			Global.error_dialog.set_text("Cannot find last project file.")
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
-
-
-func _on_UnsavedCanvasDialog_confirmed() -> void:
-	load_last_project()
 
 
 func _on_OpenSprite_file_selected(path : String) -> void:

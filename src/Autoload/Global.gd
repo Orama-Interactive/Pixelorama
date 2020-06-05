@@ -152,6 +152,7 @@ var zoom_level_label : Label
 var import_sprites_dialog : FileDialog
 var export_dialog : AcceptDialog
 var preferences_dialog : AcceptDialog
+var unsaved_changes_dialog : ConfirmationDialog
 
 var color_pickers := []
 
@@ -268,6 +269,7 @@ func _ready() -> void:
 	import_sprites_dialog = find_node_by_name(root, "ImportSprites")
 	export_dialog = find_node_by_name(root, "ExportDialog")
 	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
+	unsaved_changes_dialog = find_node_by_name(root, "UnsavedCanvasDialog")
 
 	tool_options_containers.append(find_node_by_name(root, "LeftToolOptions"))
 	tool_options_containers.append(find_node_by_name(root, "RightToolOptions"))

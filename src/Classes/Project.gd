@@ -116,6 +116,8 @@ func change_project() -> void:
 	for brush in brushes:
 		Global.create_brush_button(brush)
 
+	Global.canvas.update()
+
 
 func frames_changed(value : Array) -> void:
 	frames = value
