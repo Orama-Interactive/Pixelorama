@@ -27,6 +27,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		file.close()
 		return
 
+	var new_project := Project.new()
+
 	var file_version := file.get_line() # Example, "v0.7.10-beta"
 	var file_ver_splitted := file_version.split("-")
 	var file_ver_splitted_numbers := file_ver_splitted[0].split(".")
@@ -53,7 +55,6 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			new_guides = false
 
 	var frame := 0
-	Global.current_project.layers.clear()
 
 	var linked_cels := []
 	if file_major_version >= 0 and file_minor_version > 6:
@@ -66,11 +67,10 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			linked_cels.append(file.get_var())
 
 			var l := Layer.new(layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, [])
-			Global.current_project.layers.append(l)
+			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
-	Global.clear_frames()
 	while frame_line == "--": # Load frames
 		var frame_class := Frame.new()
 		var width := file.get_16()
@@ -84,7 +84,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
 					var l := Layer.new(layer_name_old_version)
-					Global.current_project.layers.append(l)
+					new_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
 				cel_opacity = file.get_float()
@@ -94,7 +94,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			frame_class.cels.append(Cel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					Global.current_project.layers[layer_i].linked_cels.append(frame_class)
+					new_project.layers[layer_i].linked_cels.append(frame_class)
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -114,15 +114,15 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				Global.canvas.add_child(guide)
 				guide_line = file.get_line()
 
-		Global.current_project.size = Vector2(width, height)
-		Global.current_project.frames.append(frame_class)
+		new_project.size = Vector2(width, height)
+		new_project.frames.append(frame_class)
 		frame_line = file.get_line()
 		frame += 1
 
-	Global.current_project.frames = Global.current_project.frames # Just to call Global.frames_changed
-	Global.current_project.current_layer = Global.current_project.layers.size() - 1
-	Global.current_project.current_frame = frame - 1
-	Global.current_project.layers = Global.current_project.layers # Just to call Global.layers_changed
+#	new_project.frames = new_project.frames # Just to call Global.frames_changed
+#	new_project.current_layer = new_project.layers.size() - 1
+#	new_project.current_frame = frame - 1
+#	new_project.layers = new_project.layers # Just to call Global.layers_changed
 
 	if new_guides:
 		var guide_line := file.get_line() # "guideline" no pun intended
@@ -155,8 +155,6 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			Global.color_pickers[1].get_picker().add_preset(color)
 
 	# Load custom brushes
-	Global.remove_brush_buttons()
-
 	var brush_line := file.get_line()
 	while brush_line == "/":
 		var b_width := file.get_16()
@@ -164,7 +162,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		var buffer := file.get_buffer(b_width * b_height * 4)
 		var image := Image.new()
 		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
-		Global.current_project.brushes.append(image)
+		new_project.brushes.append(image)
 		Global.create_brush_button(image)
 		brush_line = file.get_line()
 
@@ -175,18 +173,19 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			var tag_color : Color = file.get_var()
 			var tag_from := file.get_8()
 			var tag_to := file.get_8()
-			Global.current_project.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
-			Global.current_project.animation_tags = Global.current_project.animation_tags # To execute animation_tags_changed()
+			new_project.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
+			new_project.animation_tags = new_project.animation_tags # To execute animation_tags_changed()
 			tag_line = file.get_line()
 
 	file.close()
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
 	if not untitled_backup:
 		# Untitled backup should not change window title and save path
 		current_save_path = path
 		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
-		Global.current_project.has_changed = false
 
 
 func save_pxo_file(path : String, autosave : bool) -> void:

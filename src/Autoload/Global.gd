@@ -359,6 +359,7 @@ func _ready() -> void:
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 
 	projects.append(Project.new())
+	projects[0].layers.append(Layer.new())
 	current_project = projects[0]
 
 

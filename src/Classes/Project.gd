@@ -29,7 +29,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	size = _size
 	x_max = size.x
 	y_max = size.y
-	layers.append(Layer.new())
 	undo_redo = UndoRedo.new()
 
 	Global.tabs.add_tab(name)
