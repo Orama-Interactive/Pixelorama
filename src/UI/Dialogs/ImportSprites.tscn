@@ -24,7 +24,6 @@ margin_bottom = 312.0
 margin_right = 161.0
 margin_bottom = 304.0
 mouse_default_cursor_shape = 2
-pressed = true
 text = "Import as new frame"
 
 [node name="ImportSpritesheet" type="CheckBox" parent="HBoxContainer2"]

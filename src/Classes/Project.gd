@@ -206,7 +206,8 @@ func frame_changed(value : int) -> void:
 				layer.frame_container.get_child(i).pressed = false
 
 	# Select the new frame
-	Global.frame_ids.get_child(current_frame).add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
+	if current_frame < Global.frame_ids.get_child_count():
+		Global.frame_ids.get_child(current_frame).add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
 	if current_frame < layers[current_layer].frame_container.get_child_count():
 		layers[current_layer].frame_container.get_child(current_frame).pressed = true
 

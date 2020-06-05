@@ -225,8 +225,7 @@ func handle_loading_files(files : PoolStringArray) -> void:
 		if file.get_extension().to_lower() == "pxo":
 				_on_OpenSprite_file_selected(file)
 		else:
-			if file == files[0]:
-				$ImportSprites.new_frame = false
+			$ImportSprites.new_frame = false
 			$ImportSprites._on_ImportSprites_files_selected([file])
 			$ImportSprites.new_frame = true
 

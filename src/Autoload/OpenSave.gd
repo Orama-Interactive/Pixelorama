@@ -20,14 +20,14 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
 	if err == ERR_FILE_UNRECOGNIZED:
-		err =  file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
+		err = file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
 		Global.notification_label("File failed to open")
 		file.close()
 		return
 
-	var new_project := Project.new()
+	var new_project := Project.new([], path.get_file())
 
 	var file_version := file.get_line() # Example, "v0.7.10-beta"
 	var file_ver_splitted := file_version.split("-")
