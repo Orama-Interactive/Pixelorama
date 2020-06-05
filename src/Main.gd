@@ -4,7 +4,6 @@ var opensprite_file_selected := false
 var file_menu : PopupMenu
 var view_menu : PopupMenu
 var redone := false
-var unsaved_canvas_state := 0
 var is_quitting_on_save := false
 
 
@@ -241,12 +240,8 @@ func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
 	handle_loading_files(_files)
 
 
-func on_new_project_file_menu_option_pressed(id : int) -> void:
-	if Global.current_project.has_changed:
-		unsaved_canvas_state = id
-		$UnsavedCanvasDialog.popup_centered()
-	else:
-		$CreateNewImage.popup_centered()
+func on_new_project_file_menu_option_pressed() -> void:
+	$CreateNewImage.popup_centered()
 	Global.dialog_open(true)
 
 
@@ -256,11 +251,10 @@ func open_project_file() -> void:
 	opensprite_file_selected = false
 
 
-func on_open_last_project_file_menu_option_pressed(id : int) -> void:
+func on_open_last_project_file_menu_option_pressed() -> void:
 	# Check if last project path is set and if yes then open
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
 		if Global.current_project.has_changed:
-			unsaved_canvas_state = id
 			$UnsavedCanvasDialog.popup_centered()
 			Global.dialog_open(true)
 		else:
@@ -303,11 +297,11 @@ func export_file() -> void:
 func file_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # New
-			on_new_project_file_menu_option_pressed(id)
+			on_new_project_file_menu_option_pressed()
 		1: # Open
 			open_project_file()
 		2: # Open last project
-			on_open_last_project_file_menu_option_pressed(id)
+			on_open_last_project_file_menu_option_pressed()
 		3: # Save
 			save_project_file()
 		4: # Save as
@@ -555,11 +549,7 @@ func load_last_project() -> void:
 
 
 func _on_UnsavedCanvasDialog_confirmed() -> void:
-	if unsaved_canvas_state == 0: # New image
-		$CreateNewImage.popup_centered()
-		Global.dialog_open(true)
-	elif unsaved_canvas_state == 2: # Open last project
-		load_last_project()
+	load_last_project()
 
 
 func _on_OpenSprite_file_selected(path : String) -> void:

@@ -73,20 +73,14 @@ func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
 	var height : int = height_value.value
 	var fill_color : Color = fill_color_node.color
-	Global.clear_frames()
-	Global.current_project.layers.clear()
-	Global.current_project.layers.append(Layer.new())
+
+	var frame : Frame = Global.canvas.new_empty_frame()
+	Global.projects.append(Project.new([frame]))
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.current_project.size = Vector2(width, height).floor()
 	Global.canvas.fill_color = fill_color
-	var frame : Frame = Global.canvas.new_empty_frame()
 	Global.canvas.camera_zoom()
-	Global.current_project.frames.append(frame)
 
-	Global.current_project.current_layer = 0
-	Global.current_project.frames = Global.current_project.frames # To trigger Global.frames_changed()
-	Global.current_project.current_frame = 0
-	Global.current_project.layers = Global.current_project.layers # To trigger Global.layers_changed()
-	Global.current_project.has_changed = false
 	if fill_color.a > 0:
 		Global.current_project.frames[0].cels[0].image.fill(fill_color)
 		Global.current_project.frames[0].cels[0].image.lock()
