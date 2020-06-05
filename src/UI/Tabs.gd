@@ -19,7 +19,9 @@ func _on_Tabs_tab_close(tab : int) -> void:
 
 
 func _on_Tabs_reposition_active_tab_request(idx_to : int) -> void:
-	pass
+	var temp = Global.projects[Global.current_project_index]
+	Global.projects[Global.current_project_index] = Global.projects[idx_to]
+	Global.projects[idx_to] = temp
 
 
 func delete_tab(tab : int) -> void:
