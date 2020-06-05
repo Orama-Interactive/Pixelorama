@@ -117,6 +117,7 @@ func change_project() -> void:
 		Global.create_brush_button(brush)
 
 	Global.canvas.update()
+	Global.transparent_checker._ready()
 
 
 func frames_changed(value : Array) -> void:

@@ -246,9 +246,9 @@ func camera_zoom() -> void:
 	Global.transparent_checker._ready() # To update the rect size
 
 
-func new_empty_frame(first_time := false) -> Frame:
+func new_empty_frame(first_time := false, single_layer := false) -> Frame:
 	var frame := Frame.new()
-	for l in Global.current_project.layers:
+	for l in Global.current_project.layers: # Create as many cels as there are layers
 		# The sprite itself
 		var sprite := Image.new()
 		if first_time:
@@ -262,6 +262,9 @@ func new_empty_frame(first_time := false) -> Frame:
 		sprite.fill(fill_color)
 		sprite.lock()
 		frame.cels.append(Cel.new(sprite, 1))
+
+		if single_layer:
+			break
 
 	return frame
 
