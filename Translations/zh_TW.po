@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 15:06\n"
+"PO-Revision-Date: 2020-06-06 15:16\n"
 
 msgid "OK"
 msgstr "確定"
@@ -489,7 +489,7 @@ msgid "Unsaved Image"
 msgstr "圖片還沒儲存"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "你有未儲存的改變，確定要離開嗎?"
 
 msgid "Save before exiting?"
 msgstr "要先儲存再離開嗎?"
@@ -735,7 +735,7 @@ msgid "Options:"
 msgstr "選項："
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "放大到畫面大小"
 
 msgid "100% Zoom"
 msgstr ""
@@ -789,10 +789,10 @@ msgstr "跳到最後一張\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "洋蔥皮設定"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "開關洋蔥皮"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1037,13 +1037,13 @@ msgid "Patrons:"
 msgstr "贊助者："
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "希望你或你公司的名字出現在開啟畫面上嗎?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "成為白金贊助者"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "成為黃金贊助者"
 
 msgid "Become a Patron"
 msgstr "成為贊助者"
@@ -1076,7 +1076,7 @@ msgid "Lock aspect ratio:"
 msgstr "鎖定長寬比"
 
 msgid "Templates:"
-msgstr ""
+msgstr "模板："
 
 msgid "Preset"
 msgstr ""
@@ -1085,7 +1085,7 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "預設"
 
 msgid "Custom"
 msgstr "自訂"
