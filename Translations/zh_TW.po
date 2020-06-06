@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 15:26\n"
+"PO-Revision-Date: 2020-06-06 15:35\n"
 
 msgid "OK"
 msgstr "確定"
@@ -518,7 +518,9 @@ msgstr "長方形選取\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "縮放\n\n"
+"%s換成左鍵\n"
+"%s換成右鍵"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -609,7 +611,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "在鼠標旁顯示右鍵工具圖標"
 
 msgid "Guides color:"
-msgstr "輔助線顏色:"
+msgstr "輔助線顏色："
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "尺標輔助線的顏色"
@@ -633,7 +635,7 @@ msgid "A color of the grid"
 msgstr "格線顏色"
 
 msgid "Checker size:"
-msgstr "空白格大小"
+msgstr "空白格大小："
 
 msgid "Size of the transparent checker background"
 msgstr "空白背景格的大小"
@@ -654,7 +656,7 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr "畫筆"
+msgstr "畫筆："
 
 msgid "Select a brush"
 msgstr "選擇畫筆"
@@ -663,16 +665,16 @@ msgid "Brush: Pixel"
 msgstr "畫筆: 像素"
 
 msgid "Brush: Circle"
-msgstr "畫筆: 像素"
+msgstr "畫筆: 圓形"
 
 msgid "Brush: Filled Circle"
-msgstr "畫筆: 像素"
+msgstr "畫筆: 填滿的圓形"
 
 msgid "Custom brush"
 msgstr "自訂畫筆"
 
 msgid "Brush size:"
-msgstr "畫筆大小:"
+msgstr "畫筆大小："
 
 msgid "Brush color from"
 msgstr "畫筆顏色"
@@ -681,16 +683,16 @@ msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 
 msgid "Fill area:"
-msgstr "填滿:"
+msgstr "填滿："
 
 msgid "Same color area"
-msgstr ""
+msgstr "同色區"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "同色像素"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "填滿："
 
 msgid "Selected Color"
 msgstr ""
@@ -702,19 +704,19 @@ msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
-msgstr "稍亮"
+msgstr "變亮"
 
 msgid "Darken"
-msgstr "稍暗"
+msgstr "變暗"
 
 msgid "Amount:"
-msgstr "程度:"
+msgstr "程度："
 
 msgid "Lighten/Darken amount"
 msgstr "變亮或變暗的程度"
 
 msgid "Pick for:"
-msgstr "挑選:"
+msgstr "挑選："
 
 msgid "Left Color"
 msgstr "左鍵工具顏色"
@@ -756,7 +758,7 @@ msgid "Vertical"
 msgstr "垂直"
 
 msgid "Current frame:"
-msgstr "目前畫面:"
+msgstr "目前畫面："
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -809,7 +811,7 @@ msgid "Ping-pong loop"
 msgstr "乒乓重複"
 
 msgid "Onion Skinning:"
-msgstr "洋蔥皮:"
+msgstr "洋蔥皮："
 
 msgid "Past Frames"
 msgstr "過去畫面"
@@ -831,13 +833,13 @@ msgid "Blue-Red Mode"
 msgstr "藍紅模式"
 
 msgid "Add a new frame"
-msgstr "新增畫面"
+msgstr "新增影格"
 
 msgid "Remove Frame"
-msgstr "刪除畫面"
+msgstr "刪除影格"
 
 msgid "Clone Frame"
-msgstr "複製畫面"
+msgstr "複製影格"
 
 msgid "Move Left"
 msgstr "左移"
@@ -879,13 +881,13 @@ msgid "Merge current layer with the one below"
 msgstr "合併此圖層與下面的圖層"
 
 msgid "Opacity:"
-msgstr "能見度:"
+msgstr "能見度："
 
 msgid "Toggle layer's visibility"
 msgstr "開關圖層可視"
 
 msgid "Lock/unlock layer"
-msgstr "鎖住\\解鎖圖層"
+msgstr "鎖住/解鎖圖層"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -899,10 +901,10 @@ msgid "Palettes"
 msgstr "色盤"
 
 msgid "Add a new palette"
-msgstr "色盤"
+msgstr "新增色盤"
 
 msgid "Edit currently selected palette"
-msgstr "新增色盤"
+msgstr "編輯目前色盤"
 
 msgid "Choose a palette"
 msgstr "選擇色盤"
@@ -950,22 +952,22 @@ msgid "Redo: Change Layer Order"
 msgstr "復原 改變圖層順序"
 
 msgid "Undo: Add Frame"
-msgstr "取消 新增畫面"
+msgstr "取消 新增影格"
 
 msgid "Redo: Add Frame"
-msgstr "復原 新增畫面"
+msgstr "復原 新增影格"
 
 msgid "Undo: Remove Frame"
-msgstr "取消 刪除畫面"
+msgstr "取消 刪除影格"
 
 msgid "Redo: Remove Frame"
-msgstr "復原 刪除畫面"
+msgstr "復原 刪除影格"
 
 msgid "Undo: Change Frame Order"
-msgstr "取消 改變畫面順序"
+msgstr "取消 改變影格順序"
 
 msgid "Redo: Change Frame Order"
-msgstr "復原 改變畫面順序"
+msgstr "復原 改變影格順序"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "取消 刪除自訂畫筆"
@@ -1007,13 +1009,13 @@ msgid "New Empty Palette"
 msgstr "空的色盤"
 
 msgid "Import Palette"
-msgstr "輸入色盤"
+msgstr "匯入色盤"
 
 msgid "Palette Name:"
-msgstr "色盤名稱:"
+msgstr "色盤名稱："
 
 msgid "Color Name:"
-msgstr "顏色:"
+msgstr "顏色名稱："
 
 msgid "Use current left & right colors"
 msgstr "使用目前左右鍵顏色"
