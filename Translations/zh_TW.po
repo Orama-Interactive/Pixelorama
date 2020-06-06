@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 14:27\n"
+"PO-Revision-Date: 2020-06-06 14:46\n"
 
 msgid "OK"
 msgstr "確定"
@@ -324,7 +324,7 @@ msgid "Blue"
 msgstr "藍色"
 
 msgid "Caramel"
-msgstr ""
+msgstr "黃褐色"
 
 msgid "Light"
 msgstr "變亮"
@@ -633,22 +633,22 @@ msgid "A color of the grid"
 msgstr "格線顏色"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "空白格大小"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "空白背景格的大小"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "空白格顏色1："
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "空白背景格的顏色1"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "空白格顏色2："
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "空白背景格的顏色2"
 
 msgid "Only custom preset can be modified"
 msgstr ""
@@ -1097,7 +1097,7 @@ msgid "Zoom"
 msgstr "縮放"
 
 msgid "Color Picker"
-msgstr "選色器"
+msgstr "撿色器"
 
 msgid "Pencil"
 msgstr "鉛筆"
