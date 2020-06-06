@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 15:16\n"
+"PO-Revision-Date: 2020-06-06 15:26\n"
 
 msgid "OK"
 msgstr "確定"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "幫助"
 
 msgid "New"
-msgstr ""
+msgstr "新增"
 
 msgid "New..."
 msgstr "開新檔案"
@@ -77,7 +77,7 @@ msgid "Import PNG..."
 msgstr "匯入PNG檔"
 
 msgid "Export"
-msgstr "輸出PNG檔"
+msgstr "輸出"
 
 msgid "Export..."
 msgstr "輸出..."
@@ -149,13 +149,13 @@ msgid "Import as new frame"
 msgstr "輸入為下一張"
 
 msgid "Import as a spritesheet"
-msgstr "垂直spritesheet"
+msgstr "匯入為spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "輸出圖片"
+msgstr "輸出圖片為PNG"
 
 msgid "Export Sprite"
 msgstr "輸出圖片"
@@ -171,13 +171,13 @@ msgstr "檔案位址或檔案名稱無效"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr "無法加載 '%s'. Error code: %s"
+msgstr "無法加載 '%s'. 錯誤代碼: %s"
 
 msgid "Frame"
 msgstr "影格"
 
 msgid "Frames:"
-msgstr "影格:"
+msgstr "影格："
 
 msgid "All Frames"
 msgstr "所有影格"
@@ -192,7 +192,7 @@ msgid "Preview:"
 msgstr "預覽："
 
 msgid "Frame:"
-msgstr "影格:"
+msgstr "影格："
 
 msgid "Orientation:"
 msgstr ""
@@ -201,7 +201,7 @@ msgid "Browse"
 msgstr "瀏覽"
 
 msgid "Resize:"
-msgstr "調整尺寸"
+msgstr "調整尺寸："
 
 msgid "Cancel Export"
 msgstr "取消輸出"
@@ -240,31 +240,31 @@ msgid "Columns"
 msgstr "行"
 
 msgid "Columns:"
-msgstr "行:"
+msgstr "行："
 
 msgid "Rows"
 msgstr "列"
 
 msgid "Rows:"
-msgstr "列:"
+msgstr "列："
 
 msgid "Path:"
-msgstr "路徑:"
+msgstr "路徑："
 
 msgid "Directories & Files:"
-msgstr "資料夾與檔案:"
+msgstr "資料夾與檔案："
 
 msgid "Create Folder"
 msgstr "新增資料夾"
 
 msgid "File:"
-msgstr "檔案:"
+msgstr "檔案："
 
 msgid "Interpolation:"
-msgstr "插值:"
+msgstr "插值："
 
 msgid "Nearest"
-msgstr "最近"
+msgstr "最近值"
 
 msgid "Bilinear"
 msgstr "雙線性"
@@ -303,13 +303,13 @@ msgid "None"
 msgstr "無"
 
 msgid "Affect Brush's Alpha"
-msgstr "影響畫筆Alpha"
+msgstr "影響畫筆透明度"
 
 msgid "Color:"
-msgstr "顏色:"
+msgstr "顏色："
 
 msgid "Guide color:"
-msgstr "輔助線顏色:"
+msgstr "輔助線顏色："
 
 msgid "System Language"
 msgstr "系統語言"
@@ -327,10 +327,10 @@ msgid "Caramel"
 msgstr "黃褐色"
 
 msgid "Light"
-msgstr "變亮"
+msgstr "稍亮"
 
 msgid "Invert colors"
-msgstr "互補"
+msgstr "互補色"
 
 msgid "Desaturation"
 msgstr "去飽和"
@@ -348,7 +348,7 @@ msgid "Type:"
 msgstr "類型："
 
 msgid "Angle:"
-msgstr "角度:"
+msgstr "角度："
 
 msgid "Hue"
 msgstr "色相"
@@ -363,16 +363,16 @@ msgid "Apply"
 msgstr "套用"
 
 msgid "Diagonal"
-msgstr "角落"
+msgstr "對角線"
 
 msgid "Place inside image"
-msgstr "Place inside image"
+msgstr "放在圖中"
 
 msgid "Thickness:"
-msgstr "粗細:"
+msgstr "粗細："
 
 msgid "View Splash Screen"
-msgstr "關於"
+msgstr "啟動畫面"
 
 msgid "Online Docs"
 msgstr "線上文件"
