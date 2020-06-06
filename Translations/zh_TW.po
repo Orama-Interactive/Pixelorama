@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-06-06 14:06\n"
 
 msgid "OK"
 msgstr "確定"
@@ -68,7 +68,7 @@ msgid "Save as..."
 msgstr "儲存為"
 
 msgid "Import"
-msgstr ""
+msgstr "匯入"
 
 msgid "Import..."
 msgstr "匯入..."
@@ -177,10 +177,10 @@ msgid "Frame"
 msgstr "影格"
 
 msgid "Frames:"
-msgstr ""
+msgstr "影格:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "所有影格"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -219,7 +219,7 @@ msgid "All frames as multiple files"
 msgstr "影格各自為獨立檔案"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "所有影格為一個動畫檔"
 
 msgid "Background:"
 msgstr ""
@@ -447,16 +447,16 @@ msgid "Esperanto"
 msgstr "世界語"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "印尼文"
 
 msgid "Czech"
-msgstr ""
+msgstr "捷克文"
 
 msgid "Arabic"
-msgstr ""
+msgstr "阿拉伯文"
 
 msgid "Turkish"
-msgstr ""
+msgstr "土耳其文"
 
 msgid "Development Team"
 msgstr "開發團隊"
@@ -579,10 +579,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "顏色改回初始值(左黑色, 右白色)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "左鍵工具"
 
 msgid "Right tool"
-msgstr ""
+msgstr "右鍵工具"
 
 msgid "Left pixel indicator"
 msgstr "左鍵工具準心"
@@ -597,19 +597,19 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "在畫布上顯示右鍵工具"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "顯示左鍵工具圖標"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "在鼠標旁顯示左鍵工具圖標"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "顯示右鍵工具圖標"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "在鼠標旁顯示右鍵工具圖標"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "輔助線顏色:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
