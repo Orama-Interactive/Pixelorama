@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 14:56\n"
+"PO-Revision-Date: 2020-06-06 15:06\n"
 
 msgid "OK"
 msgstr "確定"
@@ -992,13 +992,13 @@ msgid "File saved"
 msgstr "檔案已儲存"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "檔案已自動儲存"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "開啟失敗"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "儲存失敗"
 
 msgid "File exported"
 msgstr "檔案已輸出"
@@ -1016,7 +1016,7 @@ msgid "Color Name:"
 msgstr "顏色:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "使用目前左右鍵顏色"
 
 msgid "Create a new empty palette?"
 msgstr "新增空的色盤?"
@@ -1034,7 +1034,7 @@ msgid "Edit Palette"
 msgstr "編輯色盤"
 
 msgid "Patrons:"
-msgstr "Patrons:"
+msgstr "贊助者："
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -1046,7 +1046,7 @@ msgid "Become a Gold Sponsor"
 msgstr ""
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "成為贊助者"
 
 msgid "Don't show again"
 msgstr "不再顯示"
@@ -1055,25 +1055,25 @@ msgid "Image Options"
 msgstr "圖片選項"
 
 msgid "Default width:"
-msgstr ""
+msgstr "預設寬度："
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "開新檔案的預設寬度："
 
 msgid "Default height:"
-msgstr ""
+msgstr "預設高度："
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "開新檔案的預設高度："
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "預設背景顏色："
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "新檔案的預設背景顏色"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "鎖定長寬比"
 
 msgid "Templates:"
 msgstr ""
@@ -1088,10 +1088,10 @@ msgid "Default"
 msgstr ""
 
 msgid "Custom"
-msgstr ""
+msgstr "自訂"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "矩形選取"
 
 msgid "Zoom"
 msgstr "縮放"
@@ -1112,7 +1112,7 @@ msgid "Lighten/Darken"
 msgstr "變亮/變暗"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "切換顏色"
 
 msgid "Set the shortcut"
 msgstr "設定快捷鍵"
@@ -1121,7 +1121,7 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr "設定快捷鍵"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "按鍵已使用"
 
 msgid "Left Tool:"
 msgstr "左鍵工具："
