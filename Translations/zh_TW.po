@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 14:16\n"
+"PO-Revision-Date: 2020-06-06 14:27\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1136,31 +1136,31 @@ msgid "A tool assigned to the right mouse button"
 msgstr "右鍵指定工具"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "找不到上一個檔案"
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "你沒有打開或儲存Pixelorama檔案!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "開啟最近的檔案"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "開啟最近的檔案..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "啟動時自動開啟上一次編輯的檔案"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "啟動時自動開啟上一次編輯的檔案"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "啟動自動儲存"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "自動儲存間隔："
 
 msgid "minute(s)"
-msgstr ""
+msgstr "分鐘"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1169,27 +1169,28 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "關閉"
 
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "你有%s自動儲存的備份。\n"
+"要打開嗎?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "開啟備份"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "移除目前選取的色盤"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "不能刪除色盤"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "無法刪除不存在的色盤"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "刪除色盤出錯! 錯誤代碼：%s"
 
