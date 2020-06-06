@@ -27,7 +27,16 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		file.close()
 		return
 
-	var new_project := Project.new([], path.get_file())
+	var empty_project : bool = Global.current_project.frames.size() == 1 and Global.current_project.layers.size() == 1 and Global.current_project.frames[0].cels[0].image.is_invisible() and Global.current_project.animation_tags.size() == 0
+	var new_project : Project
+	if empty_project:
+		new_project = Global.current_project
+		new_project.frames = []
+		new_project.layers = []
+		new_project.animation_tags.clear()
+		new_project.name = path.get_file()
+	else:
+		new_project = Project.new([], path.get_file())
 
 	var file_version := file.get_line() # Example, "v0.7.10-beta"
 	var file_ver_splitted := file_version.split("-")
@@ -119,11 +128,6 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		frame_line = file.get_line()
 		frame += 1
 
-#	new_project.frames = new_project.frames # Just to call Global.frames_changed
-#	new_project.current_layer = new_project.layers.size() - 1
-#	new_project.current_frame = frame - 1
-#	new_project.layers = new_project.layers # Just to call Global.layers_changed
-
 	if new_guides:
 		var guide_line := file.get_line() # "guideline" no pun intended
 		while guide_line == "|": # Load guides
@@ -178,8 +182,12 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			tag_line = file.get_line()
 
 	file.close()
-	Global.projects.append(new_project)
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	if !empty_project:
+		Global.projects.append(new_project)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	else:
+		new_project.frames = new_project.frames # Just to call frames_changed
+		new_project.layers = new_project.layers # Just to call layers_changed
 	Global.canvas.camera_zoom()
 
 	if not untitled_backup:
@@ -336,13 +344,10 @@ func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
 	for i in range(project_paths.size()):
 		# If project path is the same as backup save path -> the backup was untitled
 		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
-		# We need "i + 1" because the paths must be stored in
-		# the new array slots, created from the Project class which was
-		# created in the above open_pxo_file() method
-		backup_save_paths[i + 1] = backup_paths[i]
+		backup_save_paths[i] = backup_paths[i]
 
 		if project_paths[i] != backup_paths[i]: # If the user has saved
-			current_save_paths[i + 1] = project_paths[i]
+			current_save_paths[i] = project_paths[i]
 			Global.window_title = project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
 			Global.current_project.has_changed = true
 

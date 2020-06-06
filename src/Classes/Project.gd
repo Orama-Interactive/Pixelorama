@@ -230,7 +230,7 @@ func frame_changed(value : int) -> void:
 	# Select the new frame
 	if current_frame < Global.frame_ids.get_child_count():
 		Global.frame_ids.get_child(current_frame).add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
-	if current_frame < layers[current_layer].frame_container.get_child_count():
+	if layers and current_frame < layers[current_layer].frame_container.get_child_count():
 		layers[current_layer].frame_container.get_child(current_frame).pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
@@ -259,6 +259,8 @@ func layer_changed(value : int) -> void:
 
 
 func toggle_layer_buttons_layers() -> void:
+	if !layers:
+		return
 	if layers[current_layer].locked:
 		Global.disable_button(Global.remove_layer_button, true)
 
