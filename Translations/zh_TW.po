@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-06 14:46\n"
+"PO-Revision-Date: 2020-06-06 14:56\n"
 
 msgid "OK"
 msgstr "確定"
@@ -282,7 +282,7 @@ msgid "Language"
 msgstr "語言"
 
 msgid "Themes"
-msgstr "皮膚"
+msgstr "主題"
 
 msgid "Canvas"
 msgstr "畫布"
@@ -486,7 +486,7 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "確定要離開Pixelorama嗎?"
 
 msgid "Unsaved Image"
-msgstr "未儲存的圖片"
+msgstr "圖片還沒儲存"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
@@ -702,10 +702,10 @@ msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
-msgstr "變亮"
+msgstr "稍亮"
 
 msgid "Darken"
-msgstr "變暗"
+msgstr "稍暗"
 
 msgid "Amount:"
 msgstr "程度:"
@@ -889,8 +889,8 @@ msgstr "鎖住\\解鎖圖層"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
+msgstr "開關 Cel 連結\n\n"
+"連結的 Cel 會在多個影格重複"
 
 msgid "Palette"
 msgstr "色盤"
