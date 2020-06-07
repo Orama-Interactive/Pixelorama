@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-06-07 15:46\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -146,7 +146,7 @@ msgid "Open File(s)"
 msgstr "Malfermi dosiero(j)n"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importi kiel nova kadro"
 
 msgid "Import as a spritesheet"
 msgstr ""
@@ -199,13 +199,13 @@ msgid "Orientation:"
 msgstr "Orientiĝo:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Foliumo"
 
 msgid "Resize:"
 msgstr "Reskali:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Nuligi eksporton"
 
 msgid "Alert!"
 msgstr ""
