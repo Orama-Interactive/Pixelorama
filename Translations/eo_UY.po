@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-06-07 15:46\n"
+"PO-Revision-Date: 2020-06-07 15:59\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -301,7 +301,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Neniu"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
@@ -376,7 +376,7 @@ msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Enreta dokumentaro"
 
 msgid "Issue Tracker"
 msgstr ""
@@ -466,7 +466,7 @@ msgid "Lead Programmer"
 msgstr "Ĉefa programisto"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UIa desegnilo"
 
 msgid "GitHub Contributors"
 msgstr "Kontribuantoj de GitHub"
