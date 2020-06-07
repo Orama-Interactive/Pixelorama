@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-06-07 18:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -53,7 +53,7 @@ msgid "Help"
 msgstr "Ayuda"
 
 msgid "New"
-msgstr ""
+msgstr "Nuevo"
 
 msgid "New..."
 msgstr "Nuevo..."
@@ -68,7 +68,7 @@ msgid "Save as..."
 msgstr "Guardar como..."
 
 msgid "Import"
-msgstr ""
+msgstr "Importar"
 
 msgid "Import..."
 msgstr "Importar..."
@@ -134,7 +134,7 @@ msgid "Show Guides"
 msgstr "Mostrar guías"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Mostrar timeline de animación"
 
 msgid "Fill with color:"
 msgstr "Rellenar con color:"
@@ -146,10 +146,10 @@ msgid "Open File(s)"
 msgstr "Abrir archivo(s)"
 
 msgid "Import as new frame"
-msgstr ""
+msgstr "Importar como nuevo fotograma"
 
 msgid "Import as a spritesheet"
-msgstr ""
+msgstr "Importar como spritesheet"
 
 msgid "Save Sprite as .pxo"
 msgstr "Guardar Sprite como .pxo"
@@ -164,59 +164,60 @@ msgid "File Exists, Overwrite?"
 msgstr "Archivo existente, ¿Sobrescribir?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "El archivo \"%s\" ya existe. ¿Desea sobreescribir?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "¡Ruta de directorio o nombre de archivo no es válido!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "No se puede cargar el archivo '%s'.\n"
+"Código de error: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Fotograma"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Fotogramas:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Todos los fotogramas"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animación"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Vista previa:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Fotograma:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientación:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Explorar"
 
 msgid "Resize:"
 msgstr "Redimensionar:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Cancelar exportación"
 
 msgid "Alert!"
-msgstr ""
+msgstr "¡Alerta!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Seleccionar carpeta actual"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Abrir un directorio"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Todos los fotogramas como múltiples archivos"
 
 msgid "All frames as a single file animation"
 msgstr ""
@@ -498,10 +499,10 @@ msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Guardar y salir"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Salir sin guardar"
 
 msgid "Utility Tools"
 msgstr "Utilidades"
