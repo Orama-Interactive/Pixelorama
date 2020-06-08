@@ -4,13 +4,21 @@
 <p align="center">
     Made by Orama Interactive with the Godot Engine, written in GDScript!
 </p>
- <p align="center">  
+<p align="center">
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" />
     </a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg" alt="Repository size" />
     </a>
+    <a href="https://github.com/Orama-Interactive/Pixelorama/releases">
+        <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" />
+    </a>
+    <a href="https://github.com/Orama-Interactive/Pixelorama/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" />
+    </a>
+</p>
+<p align="center">
     <a href="https://discord.gg/GTMtr8s">
         <img src="https://discordapp.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
     </a>
@@ -19,9 +27,6 @@
     </a>
     <a href="https://github.com/Calinou/awesome-godot">
         <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Godot" />
-    </a>
-    <a href="https://github.com/Orama-Interactive/Pixelorama/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" />
     </a>
 </p>
  
