@@ -149,6 +149,8 @@ var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
+var open_sprites_dialog : FileDialog
+var save_sprites_dialog : FileDialog
 var import_sprites_dialog : FileDialog
 var export_dialog : AcceptDialog
 var preferences_dialog : AcceptDialog
@@ -266,6 +268,8 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
+	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
+	save_sprites_dialog = find_node_by_name(root, "SaveSprite")
 	import_sprites_dialog = find_node_by_name(root, "ImportSprites")
 	export_dialog = find_node_by_name(root, "ExportDialog")
 	preferences_dialog = find_node_by_name(root, "PreferencesDialog")

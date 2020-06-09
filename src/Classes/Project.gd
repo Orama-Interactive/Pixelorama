@@ -135,6 +135,14 @@ func change_project() -> void:
 	if has_changed:
 		Global.window_title = Global.window_title + "(*)"
 
+	var save_path = OpenSave.current_save_paths[Global.current_project_index]
+	if save_path != "":
+		Global.open_sprites_dialog.current_path = save_path
+		Global.save_sprites_dialog.current_path = save_path
+		Global.control.file_menu.set_item_text(3, tr("Save") + " %s" % save_path.get_file())
+	else:
+		Global.control.file_menu.set_item_text(3, tr("Save"))
+
 
 func name_changed(value : String) -> void:
 	name = value
