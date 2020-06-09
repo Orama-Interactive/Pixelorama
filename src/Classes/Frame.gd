@@ -5,5 +5,6 @@ class_name Frame extends Reference
 
 var cels : Array # An array of Cels
 
+
 func _init(_cels := []) -> void:
 	cels = _cels

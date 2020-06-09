@@ -1,5 +1,7 @@
 class_name Cel extends Reference
-# A class for cel properties
+# A class for cel properties.
+# The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
+# The "image" variable is where the image data of each cel are.
 
 
 var image : Image setget image_changed

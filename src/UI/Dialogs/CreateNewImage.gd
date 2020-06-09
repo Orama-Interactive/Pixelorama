@@ -74,7 +74,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	var height : int = height_value.value
 	var fill_color : Color = fill_color_node.color
 
-	var frame : Frame = Global.canvas.new_empty_frame(false, true)
+	var frame : Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
 	var new_project := Project.new([frame])
 	new_project.layers.append(Layer.new())
 	Global.projects.append(new_project)
