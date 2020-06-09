@@ -73,6 +73,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	var width : int = width_value.value
 	var height : int = height_value.value
 	var fill_color : Color = fill_color_node.color
+	Global.canvas.fill_color = fill_color
 
 	var frame : Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
 	var new_project := Project.new([frame])
@@ -80,13 +81,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.current_project.size = Vector2(width, height).floor()
-	Global.canvas.fill_color = fill_color
 	Global.canvas.camera_zoom()
-
-	if fill_color.a > 0:
-		Global.current_project.frames[0].cels[0].image.fill(fill_color)
-		Global.current_project.frames[0].cels[0].image.lock()
-		Global.canvas.update_texture(0)
 
 
 func _on_CreateNewImage_about_to_show() -> void:
