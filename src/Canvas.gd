@@ -70,11 +70,26 @@ func _draw() -> void:
 						var start_pos_x = mouse_pos.x - (Global.brush_sizes[i] >> 1)
 						var start_pos_y = mouse_pos.y - (Global.brush_sizes[i] >> 1)
 						draw_rect(Rect2(start_pos_x, start_pos_y, Global.brush_sizes[i], Global.brush_sizes[i]), Color.blue, false)
+						#Check for tile mode
+						if Global.tile_mode and point_in_rectangle(mouse_pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
+							if !point_in_rectangle(mouse_pos, Vector2(Global.current_project.x_min - 1,Global.current_project.y_min - 1), Vector2(Global.current_project.x_max,Global.current_project.y_max)):
+								var new_start_pos_x = posmod(start_pos_x,Global.current_project.size.x)
+								var new_start_pos_y = posmod(start_pos_y,Global.current_project.size.y)
+								draw_rect(Rect2(new_start_pos_x, new_start_pos_y, Global.brush_sizes[i], Global.brush_sizes[i]), Color.green, false)
 				elif Global.current_brush_types[i] == Global.Brush_Types.CIRCLE || Global.current_brush_types[i] == Global.Brush_Types.FILLED_CIRCLE:
 					if Global.current_tools[i] == Global.Tools.PENCIL || Global.current_tools[i] == Global.Tools.ERASER:
 						draw_set_transform(mouse_pos, rotation, scale)
 						for rect in Global.left_circle_points:
 							draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
+						
+						#Check for tile mode
+						if Global.tile_mode and point_in_rectangle(mouse_pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
+							if !point_in_rectangle(mouse_pos, Vector2(Global.current_project.x_min - 1,Global.current_project.y_min - 1), Vector2(Global.current_project.x_max,Global.current_project.y_max)):
+								var pos = mouse_pos.posmodv(Global.current_project.size)
+								if pos != mouse_pos:
+									draw_set_transform(pos,rotation,scale)
+									for rect in Global.left_circle_points:
+										draw_rect(Rect2(rect, Vector2.ONE), Color.green, false)
 						draw_set_transform(position, rotation, scale)
 				else:
 					if Global.current_tools[i] == Global.Tools.PENCIL || Global.current_tools[i] == Global.Tools.ERASER:

@@ -17,6 +17,11 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressu
 	var x_max = Global.current_project.x_max
 	var y_min = Global.current_project.y_min
 	var y_max = Global.current_project.y_max
+	
+#	#Check if Tiling is enabled and whether mouse is in TilingPreviews
+	if Global.tile_mode and point_in_rectangle(pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
+		pos = pos.posmodv(Global.current_project.size)
+	
 	if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 		return
 
@@ -68,10 +73,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		drawer.v_mirror = vertical_mirror
 
 		if brush_type == Global.Brush_Types.PIXEL || current_action == Global.Tools.LIGHTENDARKEN:
-			var start_pos_x = pos.x - (brush_size >> 1)
-			var start_pos_y = pos.y - (brush_size >> 1)
-			var end_pos_x = start_pos_x + brush_size
-			var end_pos_y = start_pos_y + brush_size
+			var start_pos_x = floor(pos.x - (brush_size >> 1))
+			var start_pos_y = floor(pos.y - (brush_size >> 1))
+			var end_pos_x = floor(start_pos_x + brush_size)
+			var end_pos_y = floor(start_pos_y + brush_size)
 
 			for cur_pos_x in range(start_pos_x, end_pos_x):
 				for cur_pos_y in range(start_pos_y, end_pos_y):
@@ -99,6 +104,10 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 
 			var custom_brush_size := custom_brush_image.get_size() - Vector2.ONE
 			pos = pos.floor()
+			#	#Check if Tiling is enabled and whether mouse is in TilingPreviews
+			if Global.tile_mode and point_in_rectangle(pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
+				pos = pos.posmodv(Global.current_project.size)
+			
 			var dst := rectangle_center(pos, custom_brush_size)
 			var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
 			# Rectangle with the same size as the brush, but at cursor's position
