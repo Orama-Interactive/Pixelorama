@@ -5,6 +5,7 @@ var file_menu : PopupMenu
 var view_menu : PopupMenu
 var redone := false
 var is_quitting_on_save := false
+var zen_mode := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -127,7 +128,8 @@ func setup_view_menu() -> void:
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-		"Show Animation Timeline" : 0
+		"Show Animation Timeline" : 0,
+		"Zen Mode" : InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers()
 		}
 	view_menu = Global.view_menu.get_popup()
 
@@ -170,7 +172,7 @@ func setup_image_menu() -> void:
 func setup_help_menu() -> void:
 	var help_menu_items := {
 		"View Splash Screen" : 0,
-		"Online Docs" : 0,
+		"Online Docs" : InputMap.get_action_list("open_docs")[0].get_scancode_with_modifiers(),
 		"Issue Tracker" : 0,
 		"Changelog" : 0,
 		"About Pixelorama" : 0
@@ -358,9 +360,21 @@ func toggle_show_guides() -> void:
 
 
 func toggle_show_anim_timeline() -> void:
+	if zen_mode:
+		return
 	Global.show_animation_timeline = !Global.show_animation_timeline
 	view_menu.set_item_checked(4, Global.show_animation_timeline)
 	Global.animation_timeline.visible = Global.show_animation_timeline
+
+
+func toggle_zen_mode() -> void:
+	if Global.show_animation_timeline:
+		Global.animation_timeline.visible = zen_mode
+	$MenuAndUI/UI/ToolPanel.visible = zen_mode
+	$MenuAndUI/UI/RightPanel.visible = zen_mode
+	$MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer.visible = zen_mode
+	zen_mode = !zen_mode
+	view_menu.set_item_checked(5, zen_mode)
 
 
 func view_menu_id_pressed(id : int) -> void:
@@ -375,6 +389,8 @@ func view_menu_id_pressed(id : int) -> void:
 			toggle_show_guides()
 		4: # Show animation timeline
 			toggle_show_anim_timeline()
+		5: # Fullscreen mode
+			toggle_zen_mode()
 
 	Global.canvas.update()
 
