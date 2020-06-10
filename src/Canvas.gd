@@ -14,7 +14,7 @@ var sprite_changed_this_frame := false # for optimization purposes
 var is_making_line := false
 var made_line := false
 var is_making_selection := -1
-var line_2d : Line2D
+var line_pos = []
 var pen_pressure := 1.0 # For tablet pressure sensitivity
 
 
@@ -23,13 +23,7 @@ func _ready() -> void:
 	var frame : Frame = new_empty_frame(true)
 	Global.current_project.frames.append(frame)
 	camera_zoom()
-
-	line_2d = Line2D.new()
-	line_2d.width = 0.5
-	line_2d.default_color = Color.darkgray
-	line_2d.add_point(previous_mouse_pos_for_lines)
-	line_2d.add_point(previous_mouse_pos_for_lines)
-	add_child(line_2d)
+	line_pos = [previous_mouse_pos_for_lines, previous_mouse_pos_for_lines]
 
 
 func _draw() -> void:
@@ -76,6 +70,17 @@ func _draw() -> void:
 								var new_start_pos_x = posmod(start_pos_x,Global.current_project.size.x)
 								var new_start_pos_y = posmod(start_pos_y,Global.current_project.size.y)
 								draw_rect(Rect2(new_start_pos_x, new_start_pos_y, Global.brush_sizes[i], Global.brush_sizes[i]), Color.green, false)
+						if is_making_line:
+							var line_rect = plot_line(line_pos[1], line_pos[0])
+							for rect in line_rect:
+								draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
+								#Check for tile mode
+								if Global.tile_mode and point_in_rectangle(mouse_pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
+									if !point_in_rectangle(mouse_pos, Vector2(Global.current_project.x_min - 1,Global.current_project.y_min - 1), Vector2(Global.current_project.x_max,Global.current_project.y_max)):
+										rect.x = posmod(rect.x,Global.current_project.size.x)
+										rect.y = posmod(rect.y,Global.current_project.size.y)
+										draw_rect(Rect2(rect, Vector2.ONE), Color.green, false)
+
 				elif Global.current_brush_types[i] == Global.Brush_Types.CIRCLE || Global.current_brush_types[i] == Global.Brush_Types.FILLED_CIRCLE:
 					if Global.current_tools[i] == Global.Tools.PENCIL || Global.current_tools[i] == Global.Tools.ERASER:
 						draw_set_transform(mouse_pos, rotation, scale)
@@ -189,20 +194,20 @@ func _input(event : InputEvent) -> void:
 
 	if Global.can_draw && Global.has_focus && Input.is_action_just_pressed("shift") && ([Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_tools[0]) || [Global.Tools.PENCIL, Global.Tools.ERASER, Global.Tools.LIGHTENDARKEN].has(Global.current_tools[1])):
 		is_making_line = true
-		line_2d.set_point_position(0, previous_mouse_pos_for_lines)
+		line_pos[0] = previous_mouse_pos_for_lines
 	elif Input.is_action_just_released("shift"):
 		is_making_line = false
-		line_2d.set_point_position(1, line_2d.points[0])
+		line_pos[1] = line_pos[0]
 
 	if is_making_line:
-		var point0 : Vector2 = line_2d.points[0]
+		var point0 : Vector2 = line_pos[0]
 		var angle := stepify(rad2deg(mouse_pos.angle_to_point(point0)), 0.01)
 		if Input.is_action_pressed("ctrl"):
 			angle = round(angle / 15) * 15
 			var distance : float = point0.distance_to(mouse_pos)
-			line_2d.set_point_position(1, point0 + Vector2.RIGHT.rotated(deg2rad(angle)) * distance)
+			line_pos[1] = point0 + Vector2.RIGHT.rotated(deg2rad(angle)) * distance
 		else:
-			line_2d.set_point_position(1, mouse_pos)
+			line_pos[1] = mouse_pos
 
 		if angle < 0:
 			angle = 360 + angle
@@ -409,8 +414,8 @@ func pencil_and_eraser(sprite : Image, mouse_pos : Vector2, color : Color, curre
 	if made_line:
 		return
 	if is_making_line:
-		DrawingAlgos.fill_gaps(sprite, line_2d.points[1], previous_mouse_pos_for_lines, color, current_mouse_button, pen_pressure, current_action)
-		DrawingAlgos.draw_brush(sprite, line_2d.points[1], color, current_mouse_button, pen_pressure, current_action)
+		DrawingAlgos.fill_gaps(sprite, line_pos[1], previous_mouse_pos_for_lines, color, current_mouse_button, pen_pressure, current_action)
+		DrawingAlgos.draw_brush(sprite, line_pos[1], color, current_mouse_button, pen_pressure, current_action)
 		made_line = true
 	else:
 		# Draw
@@ -558,6 +563,32 @@ func draw_grid(grid_type : int) -> void:
 		for x in range(0, size.x, Global.grid_height * 2):
 			var yy2 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
 			draw_line(Vector2(x, size.y), Vector2(size.x, size.y - yy2), Global.grid_color)
+
+
+# Bresenham's Algorithm
+# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
+func plot_line(end_pos : Vector2, start_pos : Vector2) -> Array:
+	start_pos = start_pos.floor()
+	end_pos = end_pos.floor()
+	var line_points := []
+	var dx := int(abs(end_pos.x - start_pos.x))
+	var dy := int(-abs(end_pos.y - start_pos.y))
+	var err := dx + dy
+	var e2 := err << 1 # err * 2
+	var sx = 1 if start_pos.x < end_pos.x else -1
+	var sy = 1 if start_pos.y < end_pos.y else -1
+	var x = start_pos.x
+	var y = start_pos.y
+	while !(x == end_pos.x && y == end_pos.y):
+		line_points.append(Vector2(x, y))
+		e2 = err << 1
+		if e2 >= dy:
+			err += dy
+			x += sx
+		if e2 <= dx:
+			err += dx
+			y += sy
+	return line_points
 
 
 # Checks if a point is inside a rectangle
