@@ -17,11 +17,11 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressu
 	var x_max = Global.current_project.x_max
 	var y_min = Global.current_project.y_min
 	var y_max = Global.current_project.y_max
-	
+
 #	#Check if Tiling is enabled and whether mouse is in TilingPreviews
 	if Global.tile_mode and point_in_rectangle(pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
 		pos = pos.posmodv(Global.current_project.size)
-	
+
 	if !point_in_rectangle(pos, Vector2(x_min - 1, y_min - 1), Vector2(x_max, y_max)):
 		return
 
@@ -107,7 +107,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 			#	#Check if Tiling is enabled and whether mouse is in TilingPreviews
 			if Global.tile_mode and point_in_rectangle(pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
 				pos = pos.posmodv(Global.current_project.size)
-			
+
 			var dst := rectangle_center(pos, custom_brush_size)
 			var src_rect := Rect2(Vector2.ZERO, custom_brush_size + Vector2.ONE)
 			# Rectangle with the same size as the brush, but at cursor's position

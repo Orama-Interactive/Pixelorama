@@ -10,11 +10,12 @@ var opacity : float
 
 
 func _init(_image := Image.new(), _opacity := 1.0) -> void:
+	image_texture = ImageTexture.new()
 	self.image = _image
 	opacity = _opacity
 
 
 func image_changed(value : Image) -> void:
 	image = value
-	image_texture = ImageTexture.new()
-	image_texture.create_from_image(image, 0)
+	if !image.is_empty():
+		image_texture.create_from_image(image, 0)

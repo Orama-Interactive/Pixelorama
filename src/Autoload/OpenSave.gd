@@ -38,7 +38,52 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	else:
 		new_project = Project.new([], path.get_file())
 
-	var file_version := file.get_line() # Example, "v0.7.10-beta"
+	var first_line := file.get_line()
+	var dict := JSON.parse(first_line)
+	if dict.error != OK:
+		open_old_pxo_file(file, new_project, first_line)
+	else:
+		if typeof(dict.result) != TYPE_DICTIONARY:
+			print("Error, json parsed result is: %s" % typeof(dict.result))
+			file.close()
+			return
+
+		new_project.deserialize(dict.result)
+		for frame in new_project.frames:
+			for cel in frame.cels:
+				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
+				cel.image.create_from_data(new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer)
+				cel.image = cel.image # Just to call image_changed
+
+		if dict.result.has("brushes"):
+			for brush in dict.result.brushes:
+				var b_width = brush.size_x
+				var b_height = brush.size_y
+				var buffer := file.get_buffer(b_width * b_height * 4)
+				var image := Image.new()
+				image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+				new_project.brushes.append(image)
+				Global.create_brush_button(image)
+
+	file.close()
+	if !empty_project:
+		Global.projects.append(new_project)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	else:
+		new_project.frames = new_project.frames # Just to call frames_changed
+		new_project.layers = new_project.layers # Just to call layers_changed
+	Global.canvas.camera_zoom()
+
+	if not untitled_backup:
+		# Untitled backup should not change window title and save path
+		current_save_paths[Global.current_project_index] = path
+		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+
+
+# For pxo files older than v0.8
+func open_old_pxo_file(file : File, new_project : Project, first_line : String) -> void:
+#	var file_version := file.get_line() # Example, "v0.7.10-beta"
+	var file_version := first_line
 	var file_ver_splitted := file_version.split("-")
 	var file_ver_splitted_numbers := file_ver_splitted[0].split(".")
 
@@ -104,6 +149,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
 					new_project.layers[layer_i].linked_cels.append(frame_class)
+					frame_class.cels[layer_i].image = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image
+					frame_class.cels[layer_i].image_texture = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image_texture
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -121,6 +168,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 					guide.add_point(Vector2(file.get_16(), 99999))
 				guide.has_focus = false
 				Global.canvas.add_child(guide)
+				new_project.guides.append(guide)
 				guide_line = file.get_line()
 
 		new_project.size = Vector2(width, height)
@@ -141,6 +189,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				guide.add_point(Vector2(file.get_16(), 99999))
 			guide.has_focus = false
 			Global.canvas.add_child(guide)
+			new_project.guides.append(guide)
 			guide_line = file.get_line()
 
 	# Load tool options
@@ -181,113 +230,39 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 			new_project.animation_tags = new_project.animation_tags # To execute animation_tags_changed()
 			tag_line = file.get_line()
 
-	file.close()
-	if !empty_project:
-		Global.projects.append(new_project)
-		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	else:
-		new_project.frames = new_project.frames # Just to call frames_changed
-		new_project.layers = new_project.layers # Just to call layers_changed
-	Global.canvas.camera_zoom()
-
-	if not untitled_backup:
-		# Untitled backup should not change window title and save path
-		current_save_paths[Global.current_project_index] = path
-		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
-
 
 func save_pxo_file(path : String, autosave : bool, project : Project = Global.current_project) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
 	if err == OK:
-		# Store Pixelorama version
-		file.store_line(Global.current_version)
+		if !autosave:
+			project.name = path.get_file()
+			current_save_paths[Global.current_project_index] = path
 
-		# Store Global layers
-		for layer in project.layers:
-			file.store_line(".")
-			file.store_line(layer.name)
-			file.store_8(layer.visible)
-			file.store_8(layer.locked)
-			file.store_8(layer.new_cels_linked)
-			var linked_cels := []
-			for frame in layer.linked_cels:
-				linked_cels.append(project.frames.find(frame))
-			file.store_var(linked_cels) # Linked cels as cel numbers
-
-		file.store_line("END_GLOBAL_LAYERS")
-
-		 # Store frames
+		var to_save = JSON.print(project.serialize())
+		file.store_line(to_save)
 		for frame in project.frames:
-			file.store_line("--")
-			file.store_16(project.size.x)
-			file.store_16(project.size.y)
-			for cel in frame.cels: # Store canvas layers
-				file.store_line("-")
+			for cel in frame.cels:
 				file.store_buffer(cel.image.get_data())
-				file.store_float(cel.opacity)
-			file.store_line("END_LAYERS")
 
-		file.store_line("END_FRAMES")
-
-		# Store guides
-		for child in Global.canvas.get_children():
-			if child is Guide:
-				file.store_line("|")
-				file.store_8(child.type)
-				if child.type == child.Types.HORIZONTAL:
-					file.store_16(child.points[0].y)
-					file.store_16(child.points[1].y)
-				else:
-					file.store_16(child.points[1].x)
-					file.store_16(child.points[0].x)
-		file.store_line("END_GUIDES")
-
-		# Save tool options
-		var left_color : Color = Global.color_pickers[0].color
-		var right_color : Color = Global.color_pickers[1].color
-		var left_brush_size : int = Global.brush_sizes[0]
-		var right_brush_size : int = Global.brush_sizes[1]
-		file.store_var(left_color)
-		file.store_var(right_color)
-		file.store_8(left_brush_size)
-		file.store_8(right_brush_size)
-
-		# Save custom brushes
-		for i in range(project.brushes.size()):
-			var brush = project.brushes[i]
-			file.store_line("/")
-			file.store_16(brush.get_size().x)
-			file.store_16(brush.get_size().y)
+		for brush in project.brushes:
 			file.store_buffer(brush.get_data())
-		file.store_line("END_BRUSHES")
-
-		# Store animation tags
-		for tag in project.animation_tags:
-			file.store_line(".T/")
-			file.store_line(tag.name)
-			file.store_var(tag.color)
-			file.store_8(tag.from)
-			file.store_8(tag.to)
-		file.store_line("END_FRAME_TAGS")
 
 		file.close()
-
-		if project.has_changed and not autosave:
-			project.has_changed = false
 
 		if autosave:
 			Global.notification_label("File autosaved")
 		else:
 			# First remove backup then set current save path
+			if project.has_changed:
+				project.has_changed = false
 			remove_backup(Global.current_project_index)
-			current_save_paths[Global.current_project_index] = path
 			Global.notification_label("File saved")
-			project.name = path.get_file()
 			Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
 
 	else:
 		Global.notification_label("File failed to save")
+		file.close()
 
 
 func update_autosave() -> void:

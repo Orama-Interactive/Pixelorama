@@ -144,6 +144,117 @@ func change_project() -> void:
 		Global.control.file_menu.set_item_text(3, tr("Save"))
 
 
+func serialize() -> Dictionary:
+	var layer_data := []
+	for layer in layers:
+		var linked_cels := []
+		for cel in layer.linked_cels:
+			linked_cels.append(frames.find(cel))
+
+		layer_data.append({
+			"name" : layer.name,
+			"visible" : layer.visible,
+			"locked" : layer.locked,
+			"new_cels_linked" : layer.new_cels_linked,
+			"linked_cels" : linked_cels,
+		})
+
+	var tag_data := []
+	for tag in animation_tags:
+		tag_data.append({
+			"name" : tag.name,
+			"color" : tag.color.to_html(),
+			"from" : tag.from,
+			"to" : tag.to,
+		})
+
+	var guide_data := []
+	for guide in guides:
+		var coords = guide.points[0].x
+		if guide.type == Guide.Types.HORIZONTAL:
+			coords = guide.points[0].y
+
+		guide_data.append({"type" : guide.type, "pos" : coords})
+
+	var frame_data := []
+	for frame in frames:
+		var cel_data := []
+		for cel in frame.cels:
+			cel_data.append({
+				"opacity" : cel.opacity,
+#				"image_data" : cel.image.get_data()
+			})
+		frame_data.append({
+			"cels" : cel_data
+		})
+	var brush_data := []
+	for brush in brushes:
+		brush_data.append({
+			"size_x" : brush.get_size().x,
+			"size_y" : brush.get_size().y
+		})
+
+	var project_data := {
+		"pixelorama_version" : Global.current_version,
+		"name" : name,
+		"size_x" : size.x,
+		"size_y" : size.y,
+		"save_path" : OpenSave.current_save_paths[Global.projects.find(self)],
+		"layers" : layer_data,
+		"tags" : tag_data,
+		"guides" : guide_data,
+		"frames" : frame_data,
+		"brushes" : brush_data,
+	}
+
+	return project_data
+
+
+func deserialize(dict : Dictionary) -> void:
+	if dict.has("name"):
+		name = dict.name
+	if dict.has("size_x"):
+		size.x = dict.size_x
+	if dict.has("size_y"):
+		size.y = dict.size_y
+	if dict.has("save_path"):
+		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
+	if dict.has("frames"):
+		for frame in dict.frames:
+			var cels := []
+			for cel in frame.cels:
+				cels.append(Cel.new(Image.new(), cel.opacity))
+			frames.append(Frame.new(cels))
+		if dict.has("layers"):
+			var layer_i :=  0
+			for saved_layer in dict.layers:
+				var linked_cels := []
+				for linked_cel_number in saved_layer.linked_cels:
+					linked_cels.append(frames[linked_cel_number])
+					frames[linked_cel_number].cels[layer_i].image = linked_cels[0].cels[layer_i].image
+					frames[linked_cel_number].cels[layer_i].image_texture = linked_cels[0].cels[layer_i].image_texture
+				var layer := Layer.new(saved_layer.name, saved_layer.visible, saved_layer.locked, HBoxContainer.new(), saved_layer.new_cels_linked, linked_cels)
+				layers.append(layer)
+				layer_i += 1
+	if dict.has("tags"):
+		for tag in dict.tags:
+			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
+		self.animation_tags = animation_tags
+	if dict.has("guides"):
+		for g in dict.guides:
+			var guide := Guide.new()
+			guide.type = g.type
+			if guide.type == Guide.Types.HORIZONTAL:
+				guide.add_point(Vector2(-99999, g.pos))
+				guide.add_point(Vector2(99999, g.pos))
+			else:
+				guide.add_point(Vector2(g.pos, -99999))
+				guide.add_point(Vector2(g.pos, 99999))
+			guide.has_focus = false
+			Global.canvas.add_child(guide)
+			guides.append(guide)
+
+
 func name_changed(value : String) -> void:
 	name = value
 	Global.tabs.set_tab_title(Global.tabs.current_tab, name)

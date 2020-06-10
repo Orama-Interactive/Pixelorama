@@ -81,7 +81,7 @@ func _draw() -> void:
 						draw_set_transform(mouse_pos, rotation, scale)
 						for rect in Global.left_circle_points:
 							draw_rect(Rect2(rect, Vector2.ONE), Color.blue, false)
-						
+
 						#Check for tile mode
 						if Global.tile_mode and point_in_rectangle(mouse_pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
 							if !point_in_rectangle(mouse_pos, Vector2(Global.current_project.x_min - 1,Global.current_project.y_min - 1), Vector2(Global.current_project.x_max,Global.current_project.y_max)):

@@ -5,9 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v0.8] - Unreleased
+This update has been brought to you by the contributions of:
+Darshan Phaldesai (luiq54)
 
 ### Added
 - Project tabs! You can now have multiple projects open at the same time, and access each one with tabs.
+- You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))
+
+### Changed
+- The .pxo file structure has been changed. It's now consisted of a JSON-structured metadata part, where all the data that can be stored as text are, and a binary part, that contain all the actual image data for each cel and project brush.
 <br><br>
 
 ## [v0.7.1] - Unreleased
