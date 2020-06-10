@@ -177,7 +177,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 		Global.canvas.previous_mouse_pos_for_lines.x = clamp(Global.canvas.previous_mouse_pos_for_lines.x, Global.canvas.location.x, Global.canvas.location.x + Global.current_project.size.x)
 		Global.canvas.previous_mouse_pos_for_lines.y = clamp(Global.canvas.previous_mouse_pos_for_lines.y, Global.canvas.location.y, Global.canvas.location.y + Global.current_project.size.y)
 		if Global.canvas.is_making_line:
-			Global.canvas.line_2d.set_point_position(0, Global.canvas.previous_mouse_pos_for_lines)
+			Global.canvas.line_pos[0] = Global.canvas.previous_mouse_pos_for_lines
 
 
 # Bresenham's Algorithm
