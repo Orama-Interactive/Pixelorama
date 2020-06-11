@@ -16,6 +16,14 @@ func _ready() -> void:
 	update_autosave()
 
 
+func handle_loading_files(files : PoolStringArray) -> void:
+	for file in files:
+		if file.get_extension().to_lower() == "pxo":
+			open_pxo_file(file)
+		else:
+			open_image_file(file)
+
+
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
@@ -78,6 +86,15 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		# Untitled backup should not change window title and save path
 		current_save_paths[Global.current_project_index] = path
 		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+		Global.save_sprites_dialog.current_path = path
+		# Set last opened project path and save
+		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.save("user://cache.ini")
+		Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
+		Global.export_dialog.directory_path = path.get_base_dir()
+		Global.export_dialog.was_exported = false
+		Global.control.file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
+		Global.control.file_menu.set_item_text(5, tr("Export"))
 
 
 # For pxo files older than v0.8
@@ -260,9 +277,51 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 			Global.notification_label("File saved")
 			Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
 
+			# Set last opened project path and save
+			Global.config_cache.set_value("preferences", "last_project_path", path)
+			Global.config_cache.save("user://cache.ini")
+			Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
+			Global.export_dialog.directory_path = path.get_base_dir()
+			Global.export_dialog.was_exported = false
+			Global.control.file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
+
 	else:
 		Global.notification_label("File failed to save")
 		file.close()
+
+
+func open_image_file(path : String) -> void:
+	var project := Global.current_project
+	var image := Image.new()
+	var err := image.load(path)
+	if err != OK: # An error occured
+		var file_name : String = path.get_file()
+		Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return
+
+	project = Project.new([], path.get_file())
+	project.layers.append(Layer.new())
+	Global.projects.append(project)
+	project.size = image.get_size()
+
+	var frame := Frame.new()
+	image.convert(Image.FORMAT_RGBA8)
+	image.lock()
+	frame.cels.append(Cel.new(image, 1))
+
+	project.frames.append(frame)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+	Global.window_title = path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
+	if project.has_changed:
+		Global.window_title = Global.window_title + "(*)"
+	var file_name := path.get_basename().get_file()
+	var directory_path := path.get_basename().replace(file_name, "")
+	Global.export_dialog.directory_path = directory_path
+	Global.export_dialog.file_name = file_name
 
 
 func update_autosave() -> void:

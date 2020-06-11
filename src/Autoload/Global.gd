@@ -151,7 +151,6 @@ var zoom_level_label : Label
 
 var open_sprites_dialog : FileDialog
 var save_sprites_dialog : FileDialog
-var import_sprites_dialog : FileDialog
 var export_dialog : AcceptDialog
 var preferences_dialog : AcceptDialog
 var unsaved_changes_dialog : ConfirmationDialog
@@ -270,7 +269,6 @@ func _ready() -> void:
 
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
 	save_sprites_dialog = find_node_by_name(root, "SaveSprite")
-	import_sprites_dialog = find_node_by_name(root, "ImportSprites")
 	export_dialog = find_node_by_name(root, "ExportDialog")
 	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
 	unsaved_changes_dialog = find_node_by_name(root, "UnsavedCanvasDialog")

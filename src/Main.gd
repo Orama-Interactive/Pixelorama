@@ -43,7 +43,7 @@ func _ready() -> void:
 	# If the user wants to run Pixelorama with arguments in terminal mode
 	# or open files with Pixelorama directly, then handle that
 	if OS.get_cmdline_args():
-		handle_loading_files(OS.get_cmdline_args())
+		OpenSave.handle_loading_files(OS.get_cmdline_args())
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
 
 
@@ -90,7 +90,6 @@ func setup_file_menu() -> void:
 		'Open last project...' : 0,
 		"Save..." : InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
 		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
-		"Import..." : InputMap.get_action_list("import_file")[0].get_scancode_with_modifiers(),
 		"Export..." : InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
 		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
 		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
@@ -223,21 +222,13 @@ func handle_backup() -> void:
 			load_last_project()
 
 
-func handle_loading_files(files : PoolStringArray) -> void:
-	for file in files:
-		if file.get_extension().to_lower() == "pxo":
-				_on_OpenSprite_file_selected(file)
-		else:
-			$ImportSprites._on_ImportSprites_files_selected([file])
-
-
 func _notification(what : int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 		show_quit_dialog()
 
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
-	handle_loading_files(_files)
+	OpenSave.handle_loading_files(_files)
 
 
 func on_new_project_file_menu_option_pressed() -> void:
@@ -276,12 +267,6 @@ func save_project_file_as() -> void:
 	Global.dialog_open(true)
 
 
-func import_file() -> void:
-	$ImportSprites.popup_centered()
-	Global.dialog_open(true)
-	opensprite_file_selected = false
-
-
 func export_file() -> void:
 	if $ExportDialog.was_exported == false:
 		$ExportDialog.popup_centered()
@@ -302,14 +287,12 @@ func file_menu_id_pressed(id : int) -> void:
 			save_project_file()
 		4: # Save as
 			save_project_file_as()
-		5: # Import
-			import_file()
-		6: # Export
+		5: # Export
 			export_file()
-		7: # Export as
+		6: # Export as
 			$ExportDialog.popup_centered()
 			Global.dialog_open(true)
-		8: # Quit
+		7: # Quit
 			show_quit_dialog()
 
 
@@ -550,7 +533,7 @@ func load_last_project() -> void:
 		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
 		var file_check := File.new()
 		if file_check.file_exists(file_path): # If yes then load the file
-			_on_OpenSprite_file_selected(file_path)
+			OpenSave.open_pxo_file(file_path)
 		else:
 			# If file doesn't exist on disk then warn user about this
 			Global.error_dialog.set_text("Cannot find last project file.")
@@ -559,35 +542,17 @@ func load_last_project() -> void:
 
 
 func _on_OpenSprite_file_selected(path : String) -> void:
-	OpenSave.open_pxo_file(path)
-
-	$SaveSprite.current_path = path
-	# Set last opened project path and save
-	Global.config_cache.set_value("preferences", "last_project_path", path)
-	Global.config_cache.save("user://cache.ini")
-	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
-	$ExportDialog.directory_path = path.get_base_dir()
-	$ExportDialog.was_exported = false
-	file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
-	file_menu.set_item_text(6, tr("Export"))
+	OpenSave.handle_loading_files([path])
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
 	OpenSave.save_pxo_file(path, false)
 
-	# Set last opened project path and save
-	Global.config_cache.set_value("preferences", "last_project_path", path)
-	Global.config_cache.save("user://cache.ini")
-	$ExportDialog.file_name = path.get_file().trim_suffix(".pxo")
-	$ExportDialog.directory_path = path.get_base_dir()
-	$ExportDialog.was_exported = false
-	file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
-
 	if is_quitting_on_save:
 		_on_QuitDialog_confirmed()
 
 
-func _on_ImportSprites_popup_hide() -> void:
+func _on_OpenSprite_popup_hide() -> void:
 	if !opensprite_file_selected:
 		_can_draw_true()
 
@@ -639,3 +604,4 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
+

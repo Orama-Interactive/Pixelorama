@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
-[ext_resource path="res://src/UI/Dialogs/ImportSprites.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/UI/Dialogs/ScaleImage.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/Preferences/PreferencesDialog.tscn" type="PackedScene" id=32]
 [ext_resource path="res://src/UI/Dialogs/OutlineDialog.tscn" type="PackedScene" id=33]
@@ -53,8 +52,6 @@ __meta__ = {
 [node name="OpenSprite" parent="." instance=ExtResource( 12 )]
 
 [node name="SaveSprite" parent="." instance=ExtResource( 11 )]
-
-[node name="ImportSprites" parent="." instance=ExtResource( 29 )]
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
@@ -117,10 +114,9 @@ visible = false
 [connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
-[connection signal="popup_hide" from="OpenSprite" to="." method="_on_ImportSprites_popup_hide"]
+[connection signal="popup_hide" from="OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="ImportSprites" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ExportDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
