@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-13 17:56\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "Afbeeldingsgrootte"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Canvas grootte"
 
 msgid "Width:"
 msgstr "Breedte:"
@@ -112,7 +112,7 @@ msgid "Crop Image"
 msgstr "Afbeelding bijsnijden"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Canvas formaat aanpassen"
 
 msgid "Rotate Image"
 msgstr ""
@@ -145,7 +145,7 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen modus"
 
 msgid "Fill with color:"
 msgstr ""
