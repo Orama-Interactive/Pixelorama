@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==0 ? 0 : n%10==1 && n%100!=11 ? 1 : 2);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: lv\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-06-13 17:27\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -27,6 +29,9 @@ msgstr "Lūdzu, apstiprini..."
 
 msgid "Image Size"
 msgstr "Attēla izmērs"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Platums:"
@@ -106,6 +111,9 @@ msgstr "Mainīt attēla izmēru"
 msgid "Crop Image"
 msgstr "Apgriest attēlu"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Rotēt attēlu"
 
@@ -134,6 +142,9 @@ msgid "Show Guides"
 msgstr "Rādīt vadlīnijas"
 
 msgid "Show Animation Timeline"
+msgstr ""
+
+msgid "Zen Mode"
 msgstr ""
 
 msgid "Fill with color:"
