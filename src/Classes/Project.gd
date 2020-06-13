@@ -139,9 +139,9 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.control.file_menu.set_item_text(3, tr("Save") + " %s" % save_path.get_file())
+		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % save_path.get_file())
 	else:
-		Global.control.file_menu.set_item_text(3, tr("Save"))
+		Global.file_menu.get_popup().set_item_text(3, tr("Save"))
 
 
 func serialize() -> Dictionary:

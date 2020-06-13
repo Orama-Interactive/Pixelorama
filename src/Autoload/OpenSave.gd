@@ -93,8 +93,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
 		Global.export_dialog.directory_path = path.get_base_dir()
 		Global.export_dialog.was_exported = false
-		Global.control.file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
-		Global.control.file_menu.set_item_text(5, tr("Export"))
+		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
+		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
 
 
 # For pxo files older than v0.8
@@ -283,7 +283,7 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 			Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
 			Global.export_dialog.directory_path = path.get_base_dir()
 			Global.export_dialog.was_exported = false
-			Global.control.file_menu.set_item_text(3, tr("Save") + " %s" % path.get_file())
+			Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 	else:
 		Global.notification_label("File failed to save")

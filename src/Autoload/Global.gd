@@ -150,6 +150,7 @@ var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
+var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
 var save_sprites_dialog : FileDialog
 var export_dialog : AcceptDialog
@@ -223,6 +224,8 @@ var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
 var palette_import_file_dialog : FileDialog
 var error_dialog : AcceptDialog
+var quit_dialog : ConfirmationDialog
+var quit_and_save_dialog : ConfirmationDialog
 
 onready var current_version : String = ProjectSettings.get_setting("application/config/Version")
 
@@ -269,6 +272,7 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
+	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
 	save_sprites_dialog = find_node_by_name(root, "SaveSprite")
 	export_dialog = find_node_by_name(root, "ExportDialog")
@@ -361,6 +365,8 @@ func _ready() -> void:
 	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
+	quit_dialog = find_node_by_name(root, "QuitDialog")
+	quit_and_save_dialog = find_node_by_name(root, "QuitAndSaveDialog")
 
 	projects.append(Project.new())
 	projects[0].layers.append(Layer.new())
