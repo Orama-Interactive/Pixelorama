@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/UI/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/PatternsPopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/BrushesPopup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/Dialogs/ResizeCanvas.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
@@ -50,12 +51,18 @@ __meta__ = {
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="." instance=ExtResource( 12 )]
+current_dir = "/Users"
+current_path = "/Users/"
 
 [node name="SaveSprite" parent="." instance=ExtResource( 11 )]
+current_dir = "/Users"
+current_path = "/Users/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
+
+[node name="ResizeCanvas" parent="." instance=ExtResource( 7 )]
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
@@ -119,6 +126,7 @@ visible = false
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ExportDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="ResizeCanvas" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="RotateImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]

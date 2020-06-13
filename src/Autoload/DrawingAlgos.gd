@@ -636,6 +636,24 @@ func crop_image(image : Image) -> void:
 	Global.current_project.undo_redo.commit_action()
 
 
+func resize_canvas(width : int, height : int) -> void:
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Scale")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	for f in Global.current_project.frames:
+		for c in f.cels:
+			var sprite := Image.new()
+			sprite.copy_from(c.image)
+			sprite.crop(width, height)
+			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
+			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
+
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()
+
+
 func invert_image_colors(image : Image) -> void:
 	Global.canvas.handle_undo("Draw")
 	for xx in image.get_size().x:

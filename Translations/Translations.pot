@@ -19,6 +19,9 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
+msgid "Canvas Size"
+msgstr ""
+
 msgid "Width:"
 msgstr ""
 
@@ -97,6 +100,9 @@ msgstr ""
 msgid "Crop Image"
 msgstr ""
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr ""
 
@@ -125,6 +131,9 @@ msgid "Show Guides"
 msgstr ""
 
 msgid "Show Animation Timeline"
+msgstr ""
+
+msgid "Zen Mode"
 msgstr ""
 
 msgid "Fill with color:"

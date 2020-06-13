@@ -79,6 +79,7 @@ func setup_image_menu() -> void:
 	var image_menu_items := {
 		"Scale Image" : 0,
 		"Crop Image" : 0,
+		"Resize Canvas" : 0,
 		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
 		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
 		"Rotate Image" : 0,
@@ -275,30 +276,38 @@ func image_menu_id_pressed(id : int) -> void:
 		1: # Crop Image
 			DrawingAlgos.crop_image(image)
 
-		2: # Flip Horizontal
+		2: # Resize Canvas
+			show_resize_canvas_popup()
+
+		3: # Flip Horizontal
 			flip_image(true)
 
-		3: # Flip Vertical
+		4: # Flip Vertical
 			flip_image(false)
 
-		4: # Rotate
+		5: # Rotate
 			show_rotate_image_popup()
 
-		5: # Invert Colors
+		6: # Invert Colors
 			DrawingAlgos.invert_image_colors(image)
 
-		6: # Desaturation
+		7: # Desaturation
 			DrawingAlgos.desaturate_image(image)
 
-		7: # Outline
+		8: # Outline
 			show_add_outline_popup()
 
-		8: # HSV
+		9: # HSV
 			show_hsv_configuration_popup()
 
 
 func show_scale_image_popup() -> void:
 	Global.control.get_node("ScaleImage").popup_centered()
+	Global.dialog_open(true)
+
+
+func show_resize_canvas_popup() -> void:
+	Global.control.get_node("ResizeCanvas").popup_centered()
 	Global.dialog_open(true)
 
 

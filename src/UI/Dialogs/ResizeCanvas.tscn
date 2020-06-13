@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/ScaleImage.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/ResizeCanvas.gd" type="Script" id=1]
 
-[node name="ScaleImage" type="ConfirmationDialog"]
+[node name="ResizeCanvas" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 114.0
 script = ExtResource( 1 )
@@ -11,30 +11,30 @@ script = ExtResource( 1 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 102.0
+margin_bottom = 78.0
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
 margin_right = 184.0
 margin_bottom = 14.0
-text = "Image Size"
+text = "Canvas Size"
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 184.0
-margin_bottom = 94.0
+margin_bottom = 70.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 2
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 46.0
 margin_bottom = 19.0
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 89.0
-margin_right = 168.0
+margin_left = 48.0
+margin_right = 122.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -44,33 +44,18 @@ suffix = "px"
 
 [node name="Height" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 33.0
-margin_right = 87.0
+margin_right = 46.0
 margin_bottom = 47.0
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 89.0
+margin_left = 48.0
 margin_top = 28.0
-margin_right = 168.0
+margin_right = 122.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
-
-[node name="InterpolationLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 59.0
-margin_right = 87.0
-margin_bottom = 73.0
-text = "Interpolation:"
-
-[node name="InterpolationType" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 89.0
-margin_top = 56.0
-margin_right = 168.0
-margin_bottom = 76.0
-text = "Nearest"
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
-selected = 0
-[connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]
+[connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
