@@ -181,7 +181,6 @@ func _on_QuitDialog_confirmed() -> void:
 
 func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
-#	Global.tabs.delete_tab(0)
 	OpenSave.autosave_timer.start()
 	$ExportDialog.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
 	$ExportDialog.directory_path = OpenSave.current_save_paths[0].get_base_dir()

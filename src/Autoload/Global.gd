@@ -241,6 +241,7 @@ func _ready() -> void:
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
 	image_clipboard = Image.new()
+	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")

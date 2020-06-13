@@ -162,8 +162,6 @@ func _input(event : InputEvent) -> void:
 		Global.cursor_position_label.text = "[%s×%s]    %s, %s" % [current_project.size.x, current_project.size.y, mouse_pos_floored.x, mouse_pos_floored.y]
 		if !cursor_image_has_changed:
 			cursor_image_has_changed = true
-			if Global.cursor_image.get_data().get_size() != Vector2.ZERO:
-				Input.set_custom_mouse_cursor(Global.cursor_image, 0, Vector2(15, 15))
 			if Global.show_left_tool_icon:
 				Global.left_cursor.visible = true
 			if Global.show_right_tool_icon:
@@ -174,7 +172,6 @@ func _input(event : InputEvent) -> void:
 			cursor_image_has_changed = false
 			Global.left_cursor.visible = false
 			Global.right_cursor.visible = false
-			Input.set_custom_mouse_cursor(null)
 
 	# Handle Undo/Redo
 	var can_handle : bool = Global.can_draw && Global.has_focus && !made_line

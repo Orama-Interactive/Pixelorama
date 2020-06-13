@@ -22,7 +22,7 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=21]
 [ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 expand_margin_top = 6.0
 
@@ -266,6 +266,7 @@ margin_left = 16.0
 margin_right = 890.0
 margin_bottom = 426.0
 focus_mode = 2
+mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -320,7 +321,7 @@ script = ExtResource( 7 )
 [node name="AnimationTimeline" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
 margin_top = 492.0
 margin_bottom = 692.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="RightPanel" type="Panel" parent="."]
 margin_left = 950.0

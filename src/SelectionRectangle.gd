@@ -67,7 +67,7 @@ func _process(_delta : float) -> void:
 			update()
 
 	else:
-		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
+		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 	if is_dragging:
 		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_pressed("right_mouse")):
