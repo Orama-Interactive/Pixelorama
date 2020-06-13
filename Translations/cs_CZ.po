@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: cs\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-06-13 17:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -27,6 +29,9 @@ msgstr "Prosím, potvrďte..."
 
 msgid "Image Size"
 msgstr "Velikost obrázku"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Šířka:"
@@ -106,6 +111,9 @@ msgstr "Škálovat obrázek"
 msgid "Crop Image"
 msgstr "Oříznout obrázek"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
@@ -135,6 +143,9 @@ msgstr "Zobrazit vodítka"
 
 msgid "Show Animation Timeline"
 msgstr "Zobrazit časovou osu animace"
+
+msgid "Zen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Vyplnit barvou:"
