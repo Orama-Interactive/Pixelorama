@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: eo\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-06-07 16:46\n"
+"PO-Revision-Date: 2020-06-13 17:27\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -27,6 +29,9 @@ msgstr "Bonvolu konfirmu..."
 
 msgid "Image Size"
 msgstr "Mezuro de bildo"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Larĝo:"
@@ -106,6 +111,9 @@ msgstr "Skali bildon"
 msgid "Crop Image"
 msgstr "Tondi bildon"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Turni bildon"
 
@@ -135,6 +143,9 @@ msgstr "Montri direktliniojn"
 
 msgid "Show Animation Timeline"
 msgstr "Montri animacian kronologion"
+
+msgid "Zen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Plenigi per koloro:"
