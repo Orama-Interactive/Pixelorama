@@ -21,7 +21,20 @@ func handle_loading_files(files : PoolStringArray) -> void:
 		if file.get_extension().to_lower() == "pxo":
 			open_pxo_file(file)
 		else:
-			open_image_file(file)
+			var image := Image.new()
+			var err := image.load(file)
+			if err != OK: # An error occured
+				var file_name : String = file.get_file()
+				Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
+				Global.error_dialog.popup_centered()
+				Global.dialog_open(true)
+				continue
+
+			var preview_dialog : ConfirmationDialog = preload("res://src/UI/Dialogs/PreviewDialog.tscn").instance()
+			preview_dialog.path = file
+			preview_dialog.image = image
+			Global.control.add_child(preview_dialog)
+			preview_dialog.popup_centered()
 
 
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
@@ -290,16 +303,8 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 		file.close()
 
 
-func open_image_file(path : String) -> void:
+func open_image_file(path : String, image : Image) -> void:
 	var project := Global.current_project
-	var image := Image.new()
-	var err := image.load(path)
-	if err != OK: # An error occured
-		var file_name : String = path.get_file()
-		Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
-		return
 
 	project = Project.new([], path.get_file())
 	project.layers.append(Layer.new())
