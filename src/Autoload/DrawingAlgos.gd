@@ -332,7 +332,14 @@ func blend_colors(color_1 : Color, color_2 : Color) -> Color:
 
 
 # Custom blend rect function, needed because Godot's issue #31124
+# The issue has been solved in Godot 3.2.2 and the method will be removed
+# once 3.2.2 stable is released
 func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:
+	var godot_version = Engine.get_version_info()
+	if godot_version.major >= 3 and godot_version.minor >= 2 and godot_version.patch >= 2:
+		bg.blend_rect(brush, src_rect, dst)
+		return
+
 	var brush_size := brush.get_size()
 	var clipped_src_rect := Rect2(Vector2.ZERO, brush_size).clip(src_rect)
 	if clipped_src_rect.size.x <= 0 || clipped_src_rect.size.y <= 0:
