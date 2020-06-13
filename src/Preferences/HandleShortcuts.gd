@@ -78,8 +78,8 @@ func _on_PresetOptionButton_item_selected(id : int) -> void:
 
 func apply_shortcuts_preset(preset) -> void:
 	for action in preset:
-		var old_input_event : InputEventKey = InputMap.get_action_list(action)[0]
-		set_action_shortcut(action, old_input_event, preset[action])
+		var _old_input_event : InputEventKey = InputMap.get_action_list(action)[0]
+		set_action_shortcut(action, _old_input_event, preset[action])
 		get_node("Shortcuts/" + action).text = OS.get_scancode_string(preset[action].get_scancode_with_modifiers())
 
 

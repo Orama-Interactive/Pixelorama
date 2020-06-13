@@ -429,8 +429,8 @@ func animation_tags_changed(value : Array) -> void:
 
 		tag_c.rect_position.x = (tag.from - 1) * 39 + tag.from
 
-		var size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (size + 1) * 39
+		var tag_size : int = tag.to - tag.from
+		tag_c.rect_min_size.x = (tag_size + 1) * 39
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 

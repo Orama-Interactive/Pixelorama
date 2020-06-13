@@ -6,7 +6,7 @@ var tag_vboxes := []
 var delete_tag_button : Button
 
 onready var main_vbox_cont : VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
-onready var add_tag_button : TextureButton = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
+onready var add_tag_button : Button = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
 onready var options_dialog = $TagOptions
 
 
