@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-06-13 17:27\n"
 
 msgid "OK"
 msgstr "确定"
@@ -27,6 +29,9 @@ msgstr "确认..."
 
 msgid "Image Size"
 msgstr "图像大小"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "宽度:"
@@ -106,6 +111,9 @@ msgstr "缩放图像"
 msgid "Crop Image"
 msgstr "裁剪图像"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "旋转图像"
 
@@ -135,6 +143,9 @@ msgstr "显示指南"
 
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
+
+msgid "Zen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "使用颜色填充:"
