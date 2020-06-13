@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: pl\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-06-13 17:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -27,6 +29,9 @@ msgstr "Proszę potwierdzić..."
 
 msgid "Image Size"
 msgstr "Rozmiar obrazu"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -106,6 +111,9 @@ msgstr "Skaluj obraz"
 msgid "Crop Image"
 msgstr "Przytnij obraz"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Obróć obraz"
 
@@ -135,6 +143,9 @@ msgstr "Pokaż prowadnice"
 
 msgid "Show Animation Timeline"
 msgstr "Pokaż linię czasu animacji"
+
+msgid "Zen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Wypełnij kolorem:"
