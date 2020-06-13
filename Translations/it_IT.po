@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-13 22:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "Dimensione dell'immagine"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Dimensione Tela"
 
 msgid "Width:"
 msgstr "Larghezza:"
@@ -112,7 +112,7 @@ msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Ridimensiona Tela"
 
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
@@ -145,7 +145,7 @@ msgid "Show Animation Timeline"
 msgstr "Mostra la Linea del Tempo dell'animazione"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Modalità Zen"
 
 msgid "Fill with color:"
 msgstr "Riempi con il colore:"
