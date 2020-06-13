@@ -575,6 +575,226 @@ func colorDistance(c1 : Color, c2 : Color) -> float:
 		return sqrt(pow((c1.r - c2.r)*255, 2) + pow((c1.g - c2.g)*255, 2)
 		+ pow((c1.b - c2.b)*255, 2) + pow((c1.a - c2.a)*255, 2))
 
+# Image effects
+
+func scale_image(width : int, height : int, interpolation : int) -> void:
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Scale")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+
+	for f in Global.current_project.frames:
+		for i in range(f.cels.size() - 1, -1, -1):
+			var sprite := Image.new()
+			sprite.copy_from(f.cels[i].image)
+			sprite.resize(width, height, interpolation)
+			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
+			Global.current_project.undo_redo.add_undo_property(f.cels[i].image, "data", f.cels[i].image.data)
+
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()
+
+
+func crop_image(image : Image) -> void:
+	# Use first cel as a starting rectangle
+	var used_rect : Rect2 = image.get_used_rect()
+
+	for f in Global.current_project.frames:
+		# However, if first cel is empty, loop through all cels until we find one that isn't
+		for cel in f.cels:
+			if used_rect != Rect2(0, 0, 0, 0):
+				break
+			else:
+				if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = cel.image.get_used_rect()
+
+		# Merge all layers with content
+		for cel in f.cels:
+				if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
+					used_rect = used_rect.merge(cel.image.get_used_rect())
+
+	# If no layer has any content, just return
+	if used_rect == Rect2(0, 0, 0, 0):
+		return
+
+	var width := used_rect.size.x
+	var height := used_rect.size.y
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Scale")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	for f in Global.current_project.frames:
+		# Loop through all the layers to crop them
+		for j in range(Global.current_project.layers.size() - 1, -1, -1):
+			var sprite : Image = f.cels[j].image.get_rect(used_rect)
+			Global.current_project.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
+			Global.current_project.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
+
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()
+
+
+func invert_image_colors(image : Image) -> void:
+	Global.canvas.handle_undo("Draw")
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			var px_color = image.get_pixel(xx, yy).inverted()
+			if px_color.a == 0:
+				continue
+			image.set_pixel(xx, yy, px_color)
+	Global.canvas.handle_redo("Draw")
+
+
+func desaturate_image(image : Image) -> void:
+	Global.canvas.handle_undo("Draw")
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			var px_color = image.get_pixel(xx, yy)
+			if px_color.a == 0:
+				continue
+			var gray = image.get_pixel(xx, yy).v
+			px_color = Color(gray, gray, gray, px_color.a)
+			image.set_pixel(xx, yy, px_color)
+	Global.canvas.handle_redo("Draw")
+
+
+func generate_outline(image : Image, outline_color : Color, thickness : int, diagonal : bool, inside_image : bool) -> void:
+	if image.is_invisible():
+		return
+	var new_image := Image.new()
+	new_image.copy_from(image)
+	new_image.lock()
+
+	Global.canvas.handle_undo("Draw")
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			var pos = Vector2(xx, yy)
+			var current_pixel := image.get_pixelv(pos)
+			if current_pixel.a == 0:
+				continue
+
+			for i in range(1, thickness + 1):
+				if inside_image:
+					var outline_pos : Vector2 = pos + Vector2.LEFT # Left
+					if outline_pos.x < 0 || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.RIGHT * (i - 1)
+						if new_pos.x < Global.current_project.size.x:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					outline_pos = pos + Vector2.RIGHT # Right
+					if outline_pos.x >= Global.current_project.size.x || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.LEFT * (i - 1)
+						if new_pos.x >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					outline_pos = pos + Vector2.UP # Up
+					if outline_pos.y < 0 || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.DOWN * (i - 1)
+						if new_pos.y < Global.current_project.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					outline_pos = pos + Vector2.DOWN # Down
+					if outline_pos.y >= Global.current_project.size.y || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.UP * (i - 1)
+						if new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					if diagonal:
+						outline_pos = pos + (Vector2.LEFT + Vector2.UP) # Top left
+						if (outline_pos.x < 0 && outline_pos.y < 0) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.DOWN) * (i - 1)
+							if new_pos.x < Global.current_project.size.x && new_pos.y < Global.current_project.size.y:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.LEFT + Vector2.DOWN) # Bottom left
+						if (outline_pos.x < 0 && outline_pos.y >= Global.current_project.size.y) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.UP) * (i - 1)
+							if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.RIGHT + Vector2.UP) # Top right
+						if (outline_pos.x >= Global.current_project.size.x && outline_pos.y < 0) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.DOWN) * (i - 1)
+							if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.RIGHT + Vector2.DOWN) # Bottom right
+						if (outline_pos.x >= Global.current_project.size.x && outline_pos.y >= Global.current_project.size.y) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.UP) * (i - 1)
+							if new_pos.x >= 0 && new_pos.y >= 0:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+				else:
+					var new_pos : Vector2 = pos + Vector2.LEFT * i # Left
+					if new_pos.x >= 0:
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a == 0:
+							new_image.set_pixelv(new_pos, outline_color)
+
+					new_pos = pos + Vector2.RIGHT * i # Right
+					if new_pos.x < Global.current_project.size.x:
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a == 0:
+							new_image.set_pixelv(new_pos, outline_color)
+
+					new_pos = pos + Vector2.UP * i # Up
+					if new_pos.y >= 0:
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a == 0:
+							new_image.set_pixelv(new_pos, outline_color)
+
+					new_pos = pos + Vector2.DOWN * i # Down
+					if new_pos.y < Global.current_project.size.y:
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a == 0:
+							new_image.set_pixelv(new_pos, outline_color)
+
+					if diagonal:
+						new_pos = pos + (Vector2.LEFT + Vector2.UP) * i # Top left
+						if new_pos.x >= 0 && new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						new_pos = pos + (Vector2.LEFT + Vector2.DOWN) * i # Bottom left
+						if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						new_pos = pos + (Vector2.RIGHT + Vector2.UP) * i # Top right
+						if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+						new_pos = pos + (Vector2.RIGHT + Vector2.DOWN) * i # Bottom right
+						if new_pos.x < Global.current_project.size.x && new_pos.y < Global.current_project.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+	image.copy_from(new_image)
+	Global.canvas.handle_redo("Draw")
+
 
 func adjust_hsv(img: Image, id : int, delta : float) -> void:
 	var x_min = Global.current_project.x_min
