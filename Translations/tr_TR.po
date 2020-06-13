@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: tr\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-06-13 17:26\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -27,6 +29,9 @@ msgstr "Lütfen Onaylayın..."
 
 msgid "Image Size"
 msgstr "Resim Boyutu"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Genişlik:"
@@ -106,6 +111,9 @@ msgstr "Resmi Ölçüle"
 msgid "Crop Image"
 msgstr "Resmi Kes"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
@@ -135,6 +143,9 @@ msgstr "Rehber"
 
 msgid "Show Animation Timeline"
 msgstr "Animasyon Çizelgesini Göster"
+
+msgid "Zen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr ""
