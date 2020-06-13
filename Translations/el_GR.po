@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: el\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-06 19:06\n"
+"PO-Revision-Date: 2020-06-13 17:27\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -27,6 +29,9 @@ msgstr "Παρακαλώ επιβεβαιώστε..."
 
 msgid "Image Size"
 msgstr "Μέγεθος εικόνας"
+
+msgid "Canvas Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Πλάτος:"
@@ -106,6 +111,9 @@ msgstr "Κλιμάκωση εικόνας"
 msgid "Crop Image"
 msgstr "Περικοπή"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
@@ -135,6 +143,9 @@ msgstr "Εμφάνιση οδηγών"
 
 msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
+
+msgid "Zen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Γέμισμα με χρώμα:"
