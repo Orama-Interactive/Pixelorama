@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-14 16:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "Bildgröße"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Canvasgröße"
 
 msgid "Width:"
 msgstr "Breite:"
@@ -112,7 +112,7 @@ msgid "Crop Image"
 msgstr "Bild zuschneiden"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Canvas skalieren"
 
 msgid "Rotate Image"
 msgstr "Bild drehen"
@@ -145,7 +145,7 @@ msgid "Show Animation Timeline"
 msgstr "Zeige Animations-Zeitleiste"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen-Modus"
 
 msgid "Fill with color:"
 msgstr "Fülle mit Farbe:"
