@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-14 10:47\n"
 
 msgid "OK"
 msgstr "确定"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "图像大小"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "画布尺寸"
 
 msgid "Width:"
 msgstr "宽度:"
@@ -112,7 +112,7 @@ msgid "Crop Image"
 msgstr "裁剪图像"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "调整画布尺寸"
 
 msgid "Rotate Image"
 msgstr "旋转图像"
@@ -145,7 +145,7 @@ msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "禅定模式"
 
 msgid "Fill with color:"
 msgstr "使用颜色填充:"
