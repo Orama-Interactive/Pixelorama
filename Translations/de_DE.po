@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-06-14 16:46\n"
+"PO-Revision-Date: 2020-06-14 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1087,7 +1087,7 @@ msgid "A default background color of a new image"
 msgstr "Eine Standard-Hintergrundfarbe eines neuen Bildes"
 
 msgid "Lock aspect ratio:"
-msgstr "Seitenverhältnis Sperren:"
+msgstr "Seitenverhältnis sperren:"
 
 msgid "Templates:"
 msgstr "Vorlagen:"
