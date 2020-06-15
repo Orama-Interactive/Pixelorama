@@ -49,27 +49,28 @@ __meta__ = {
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
+window_title = "Please Confirm..."
 
 [node name="OpenSprite" parent="." instance=ExtResource( 12 )]
-current_dir = "/Users"
-current_path = "/Users/"
 
 [node name="SaveSprite" parent="." instance=ExtResource( 11 )]
-current_dir = "/Users"
-current_path = "/Users/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
+window_title = "Please Confirm..."
 
 [node name="ResizeCanvas" parent="." instance=ExtResource( 7 )]
+window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
+window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
+window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
@@ -82,6 +83,7 @@ dialog_text = "You have unsaved changes. If you proceed, the progress you have m
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
@@ -108,6 +110,7 @@ margin_right = 349.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
+window_title = "Please Confirm..."
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
 

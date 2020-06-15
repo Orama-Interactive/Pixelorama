@@ -84,7 +84,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				var image := Image.new()
 				image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
 				new_project.brushes.append(image)
-				Global.create_brush_button(image)
+				Brushes.add_project_brush(image)
 
 	file.close()
 	if !empty_project:
@@ -223,19 +223,13 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 			guide_line = file.get_line()
 
 	# Load tool options
-	Global.color_pickers[0].color = file.get_var()
-	Global.color_pickers[1].color = file.get_var()
-	Global.brush_sizes[0] = file.get_8()
-	Global.brush_size_edits[0].value = Global.brush_sizes[0]
-	Global.brush_sizes[1] = file.get_8()
-	Global.brush_size_edits[1].value = Global.brush_sizes[1]
+	file.get_var()
+	file.get_var()
+	file.get_8()
+	file.get_8()
 	if file_major_version == 0 and file_minor_version < 7:
-		var left_palette = file.get_var()
-		var right_palette = file.get_var()
-		for color in left_palette:
-			Global.color_pickers[0].get_picker().add_preset(color)
-		for color in right_palette:
-			Global.color_pickers[1].get_picker().add_preset(color)
+		file.get_var()
+		file.get_var()
 
 	# Load custom brushes
 	var brush_line := file.get_line()
@@ -246,7 +240,7 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 		var image := Image.new()
 		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
 		new_project.brushes.append(image)
-		Global.create_brush_button(image)
+		Brushes.add_project_brush(image)
 		brush_line = file.get_line()
 
 	if file_major_version >= 0 and file_minor_version > 6:

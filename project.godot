@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/AnimationTag.gd"
 }, {
+"base": "Popup",
+"class": "Brushes",
+"language": "GDScript",
+"path": "res://src/UI/BrushesPopup.gd"
+}, {
 "base": "Node2D",
 "class": "Canvas",
 "language": "GDScript",
@@ -59,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Palette/PaletteColor.gd"
 }, {
+"base": "PopupPanel",
+"class": "Patterns",
+"language": "GDScript",
+"path": "res://src/UI/PatternsPopup.gd"
+}, {
 "base": "Reference",
 "class": "Project",
 "language": "GDScript",
@@ -66,6 +76,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
+"Brushes": "",
 "Canvas": "",
 "Cel": "",
 "Drawer": "",
@@ -75,6 +86,7 @@ _global_script_class_icons={
 "LayerButton": "",
 "Palette": "",
 "PaletteColor": "",
+"Patterns": "",
 "Project": ""
 }
 
@@ -97,6 +109,7 @@ Global="*res://src/Autoload/Global.gd"
 Import="*res://src/Autoload/Import.gd"
 OpenSave="*res://src/Autoload/OpenSave.gd"
 DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
+Tools="*res://src/Autoload/Tools.gd"
 
 [debug]
 

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/ColorPicker.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="ColorPicker" type="VBoxContainer" parent="." index="1"]
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 56.0
+
+[node name="Label" type="Label" parent="ColorPicker" index="0"]
+margin_left = 32.0
+margin_right = 83.0
+margin_bottom = 14.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Pick for:"
+
+[node name="Options" type="OptionButton" parent="ColorPicker" index="1"]
+margin_left = 13.0
+margin_top = 18.0
+margin_right = 103.0
+margin_bottom = 38.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Left Color"
+items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
+selected = 0
+
+[node name="PixelPerfect" parent="." index="2"]
+visible = false
+margin_top = 60.0
+margin_bottom = 84.0
+
+[node name="EmptySpacer" parent="." index="3"]
+visible = false
+margin_top = 60.0
+margin_bottom = 72.0
+
+[node name="Mirror" parent="." index="4"]
+visible = false
+margin_top = 60.0
+margin_bottom = 77.0
+[connection signal="item_selected" from="ColorPicker/Options" to="." method="_on_Options_item_selected"]

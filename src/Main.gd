@@ -19,9 +19,6 @@ func _ready() -> void:
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	Global.color_pickers[0].get_picker().presets_visible = false
-	Global.color_pickers[1].get_picker().presets_visible = false
-
 	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
 	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
 
