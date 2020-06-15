@@ -1,34 +1,35 @@
 extends WindowDialog
 
-onready var changes_label : Label = $"Contents/HBoxContainer/Buttons_Changelog/VBoxContainer/Changlog/ChangesLabel"
-onready var art_by_label : Label = $"Contents/HBoxContainer/Logo_ArtWork/CenterContainer/ArtContainer/ArtCredits"
-onready var show_on_startup_button : CheckBox = $"Contents/MarginContainer/Info/VBoxContainer/HBoxContainer/ShowOnStartup"
-onready var developed_by_label : Label = $"Contents/MarginContainer/Info/VBoxContainer/Branding/VBoxContainer/DevelopedBy"
-onready var platinum_placeholder_label : Label = $"Contents/MarginContainer/Info/Sponsors/PlatinumContainer/PlaceholderLabel"
-onready var gold_placeholder_label : Label = $"Contents/MarginContainer/Info/Sponsors/GoldContainer/PlaceholderLabel"
-
 
 func _on_SplashDialog_about_to_show() -> void:
+	var art_by_label : Label = Global.find_node_by_name(self, "ArtByLabel")
+	var show_on_startup_button : CheckBox = Global.find_node_by_name(self, "ShowOnStartup")
+	var developed_by_label : Label = Global.find_node_by_name(self, "DevelopedBy")
+	var become_platinum : Button = Global.find_node_by_name(self, "BecomePlatinum")
+	var become_gold : Button = Global.find_node_by_name(self, "BecomeGold")
+	var become_patron : Button = Global.find_node_by_name(self, "BecomePatron")
+
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
 	window_title = "Pixelorama" + " " + Global.current_version
-	changes_label.text = Global.current_version + " " + tr("Changes")
 
-	art_by_label.text = tr("Art by") + ": Erevos"
+	art_by_label.text = tr("Art by") + ":"
+	become_platinum.text = "- " + tr("Become a Platinum Sponsor")
+	become_gold.text = "- " + tr("Become a Gold Sponsor")
+	become_patron.text = "- " + tr("Become a Patron")
 	if "zh" in TranslationServer.get_locale():
-		show_on_startup_button.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Small.tres"))
-		developed_by_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Small.tres"))
-		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres"))
-		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/CJK/NotoSansCJKtc-Regular.tres"))
+		show_on_startup_button.add_font_override("font", preload("res://assets/fonts/CJK/NotoSansCJKtc-Small.tres"))
+		developed_by_label.add_font_override("font", preload("res://assets/fonts/CJK/NotoSansCJKtc-Small.tres"))
 	else:
-		show_on_startup_button.add_font_override("font", preload("res://Assets/Fonts/Roboto-Small.tres"))
-		developed_by_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Small.tres"))
-		platinum_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Bold.tres"))
-		gold_placeholder_label.add_font_override("font", preload("res://Assets/Fonts/Roboto-Bold.tres"))
+		show_on_startup_button.add_font_override("font", preload("res://assets/fonts/Roboto-Small.tres"))
+		developed_by_label.add_font_override("font", preload("res://assets/fonts/Roboto-Small.tres"))
+
+	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox("panel", "WindowDialog").bg_color
+	get_stylebox("panel", "WindowDialog").border_color = Global.control.theme.get_stylebox("panel", "WindowDialog").border_color
 
 
 func _on_ArtCredits_pressed() -> void:
-	OS.shell_open("https://www.instagram.com/erevoid")
+	OS.shell_open("https://twitter.com/WishdreamStar")
 
 
 func _on_ShowOnStartup_toggled(pressed : bool) -> void:
@@ -56,20 +57,20 @@ func _on_DiscordButton_pressed() -> void:
 
 
 func _on_NewBtn_pressed() -> void:
-	Global.control.file_menu_id_pressed(0)
 	visible = false
+	Global.control.file_menu_id_pressed(0)
 
 
 func _on_OpenBtn__pressed() -> void:
-	Global.control.file_menu_id_pressed(1)
 	visible = false
+	Global.control.file_menu_id_pressed(1)
 
 
 func _on_OpenLastBtn_pressed() -> void:
-	Global.control.file_menu_id_pressed(2)
 	visible = false
+	Global.control.file_menu_id_pressed(2)
 
 
 func _on_ImportBtn_pressed() -> void:
-	Global.control.file_menu_id_pressed(5)
 	visible = false
+	Global.control.file_menu_id_pressed(5)

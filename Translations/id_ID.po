@@ -1,0 +1,1198 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Language: id\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"Project-Id-Version: pixelorama\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Indonesian\n"
+"Language: id_ID\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
+
+msgid "OK"
+msgstr "Oke"
+
+msgid "Cancel"
+msgstr "Batal"
+
+msgid "Open"
+msgstr "Buka"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Please Confirm..."
+msgstr "Konfirmasi..."
+
+msgid "Image Size"
+msgstr "Ukuran Gambar"
+
+msgid "Width:"
+msgstr "Panjang:"
+
+msgid "Height:"
+msgstr "Lebar:"
+
+msgid "File"
+msgstr "Berkas/File"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "View"
+msgstr "Tampilan"
+
+msgid "Image"
+msgstr "Gambar"
+
+msgid "Effects"
+msgstr "Efek"
+
+msgid "Help"
+msgstr "Bantuan"
+
+msgid "New"
+msgstr "Baru"
+
+msgid "New..."
+msgstr "Baru..."
+
+msgid "Open..."
+msgstr "Buka..."
+
+msgid "Save..."
+msgstr "Simpan..."
+
+msgid "Save as..."
+msgstr "Simpan sebagai..."
+
+msgid "Import"
+msgstr "Impor"
+
+msgid "Import..."
+msgstr "Impor..."
+
+msgid "Import PNG..."
+msgstr "Impor PNG..."
+
+msgid "Export"
+msgstr "Ekspor"
+
+msgid "Export..."
+msgstr "Ekspor..."
+
+msgid "Export as..."
+msgstr "Ekspor sebagai..."
+
+msgid "Export PNG..."
+msgstr "Ekspor PNG..."
+
+msgid "Export PNG as..."
+msgstr "Ekspor PNG sebagai..."
+
+msgid "Quit"
+msgstr "Keluar"
+
+msgid "Undo"
+msgstr "Undo"
+
+msgid "Redo"
+msgstr "Redo"
+
+msgid "Scale Image"
+msgstr "Perbesar/perkecil gambar"
+
+msgid "Crop Image"
+msgstr "Potong Gambar"
+
+msgid "Rotate Image"
+msgstr "Putar Gambar"
+
+msgid "Clear Selection"
+msgstr "Hapus Pilihan"
+
+msgid "Flip Horizontal"
+msgstr "Balikkan Horizontal"
+
+msgid "Flip Vertical"
+msgstr "Balikkan Vertikal"
+
+msgid "Preferences"
+msgstr "Preferensi"
+
+msgid "Tile Mode"
+msgstr "Mode Gambar Berulang"
+
+msgid "Show Grid"
+msgstr "Tampilkan garis"
+
+msgid "Show Rulers"
+msgstr "Pakai Penggaris"
+
+msgid "Show Guides"
+msgstr "Tampilkan Petunjuk"
+
+msgid "Show Animation Timeline"
+msgstr "Tampilkan Frame Animasi"
+
+msgid "Fill with color:"
+msgstr "Isi dengan warna:"
+
+msgid "Open a File"
+msgstr "Buka file"
+
+msgid "Open File(s)"
+msgstr "Buka file (lebih dari satu)"
+
+msgid "Import as new frame"
+msgstr "Import sebagai frame animasi baru"
+
+msgid "Import as a spritesheet"
+msgstr "Impor sebagai Spritesheet"
+
+msgid "Save Sprite as .pxo"
+msgstr "Simpan \"sprite\" dengan .pxo"
+
+msgid "Export Sprite as .png"
+msgstr "Ekspor \"sprite\" sebagai .png"
+
+msgid "Export Sprite"
+msgstr "Ekspor \"sprite\""
+
+msgid "File Exists, Overwrite?"
+msgstr "Folder ini mengandung nama yang sama, Lanjutkan?"
+
+msgid "File %s already exists. Overwrite?"
+msgstr "Folder %s sudah ada. Lanjutkan?"
+
+msgid "Directory path or file name is not valid!"
+msgstr "Folder tidak valid"
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr "Error saat membaca file '%s'.\n"
+"Kode Error: %s"
+
+msgid "Frame"
+msgstr "Frame"
+
+msgid "Frames:"
+msgstr "Frame:"
+
+msgid "All Frames"
+msgstr "Semua Frame"
+
+msgid "Spritesheet"
+msgstr "Spritesheet"
+
+msgid "Animation"
+msgstr "Animasi"
+
+msgid "Preview:"
+msgstr "Preview:"
+
+msgid "Frame:"
+msgstr "Frame:"
+
+msgid "Orientation:"
+msgstr "Orientasi:"
+
+msgid "Browse"
+msgstr "Telusuri"
+
+msgid "Resize:"
+msgstr "Ubah ukuran:"
+
+msgid "Cancel Export"
+msgstr "Batalkan Mengekspor"
+
+msgid "Alert!"
+msgstr "Peringatan!"
+
+msgid "Select Current Folder"
+msgstr "Pindah dalam folder saat ini"
+
+msgid "Open a Directory"
+msgstr "Buka direktori"
+
+msgid "All frames as multiple files"
+msgstr "Semua frame sebagai banyak file"
+
+msgid "All frames as a single file animation"
+msgstr "Semua frames sebagai satu animasi"
+
+msgid "Background:"
+msgstr "Latar belakang:"
+
+msgid "Direction:"
+msgstr "Arah:"
+
+msgid "Forward"
+msgstr "Maju"
+
+msgid "Backwards"
+msgstr "Mundur"
+
+msgid "Ping-Pong"
+msgstr "\"Ping-Pong\""
+
+msgid "Columns"
+msgstr "Kolom"
+
+msgid "Columns:"
+msgstr "Kolom:"
+
+msgid "Rows"
+msgstr "Baris"
+
+msgid "Rows:"
+msgstr "Baris:"
+
+msgid "Path:"
+msgstr "Path:"
+
+msgid "Directories & Files:"
+msgstr "Direktori & File:"
+
+msgid "Create Folder"
+msgstr "Buat Folder"
+
+msgid "File:"
+msgstr "Berkas/File:"
+
+msgid "Interpolation:"
+msgstr "Interpolasi:"
+
+msgid "Nearest"
+msgstr "\"Nearest\""
+
+msgid "Bilinear"
+msgstr "\"Bilinear\""
+
+msgid "Cubic"
+msgstr "\"Cubic\""
+
+msgid "Trilinear"
+msgstr "\"Trilinear\""
+
+msgid "General"
+msgstr "Umum"
+
+msgid "Language"
+msgstr "Bahasa"
+
+msgid "Themes"
+msgstr "Tema"
+
+msgid "Canvas"
+msgstr "Kanvas"
+
+msgid "Shortcuts"
+msgstr "Pintasan"
+
+msgid "Smooth Zoom"
+msgstr "Zoom Halus"
+
+msgid "Adds a smoother transition when zooming in or out"
+msgstr "Memperhalus gerakan saat memperbesar atau memperkecil"
+
+msgid "Tablet pressure sensitivity:"
+msgstr "Tablet pressure sensitifitas:"
+
+msgid "None"
+msgstr "Tak satupun"
+
+msgid "Affect Brush's Alpha"
+msgstr "Memberi efek pada brush alpha"
+
+msgid "Color:"
+msgstr "Warna:"
+
+msgid "Guide color:"
+msgstr "Warna Panduan:"
+
+msgid "System Language"
+msgstr "Bahasa Sistem"
+
+msgid "Dark"
+msgstr "Gelap"
+
+msgid "Gray"
+msgstr "Abu-abu"
+
+msgid "Blue"
+msgstr "Biru"
+
+msgid "Caramel"
+msgstr "Karamel"
+
+msgid "Light"
+msgstr "Terang"
+
+msgid "Invert colors"
+msgstr "Balikkan warna"
+
+msgid "Desaturation"
+msgstr "Desaturasi"
+
+msgid "Outline"
+msgstr "Garis luar"
+
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Ganti Hue/Saturation/Value"
+
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Diagonal"
+msgstr "Diagonal"
+
+msgid "Place inside image"
+msgstr "Letakkan di dalam gambar"
+
+msgid "Thickness:"
+msgstr "Ketebalan:"
+
+msgid "View Splash Screen"
+msgstr "Tampilkan \"Splash Screen\""
+
+msgid "Online Docs"
+msgstr ""
+
+msgid "Issue Tracker"
+msgstr "Issue Tracker"
+
+msgid "Changelog"
+msgstr "Perubahan"
+
+msgid "About Pixelorama"
+msgstr "Tentang Pixelorama"
+
+msgid "Developed by Orama Interactive"
+msgstr "Dibuat oleh Orama Interactive"
+
+msgid "Website"
+msgstr "Situs web"
+
+msgid "Donate"
+msgstr "Donasi"
+
+msgid "Developers"
+msgstr "Developer"
+
+msgid "Contributors"
+msgstr "Kontributor"
+
+msgid "Donors"
+msgstr "Donatur"
+
+msgid "Translators"
+msgstr "Penerjemah"
+
+msgid "English"
+msgstr "Inggris"
+
+msgid "Greek"
+msgstr "Yunani"
+
+msgid "French"
+msgstr "Prancis"
+
+msgid "German"
+msgstr "Jerman"
+
+msgid "Polish"
+msgstr "Polski"
+
+msgid "Brazilian Portuguese"
+msgstr "Portugis (Brasil)"
+
+msgid "Russian"
+msgstr "Rusia"
+
+msgid "Chinese Simplified"
+msgstr "China (Simpel)"
+
+msgid "Chinese Traditional"
+msgstr "China (Tradisional)"
+
+msgid "Italian"
+msgstr "Italia"
+
+msgid "Latvian"
+msgstr "Latvi"
+
+msgid "Spanish"
+msgstr "Spanyol"
+
+msgid "Esperanto"
+msgstr "Esperanto"
+
+msgid "Indonesian"
+msgstr "Indonesia"
+
+msgid "Czech"
+msgstr "Ceko"
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
+
+msgid "Development Team"
+msgstr "Tim Developer"
+
+msgid "Lead Programmer"
+msgstr "Pemimpin Pemograman"
+
+msgid "UI Designer"
+msgstr "Desainer UI"
+
+msgid "GitHub Contributors"
+msgstr "Kontribusi Github"
+
+msgid "Art by"
+msgstr "Oleh"
+
+msgid "untitled"
+msgstr "tanpa nama"
+
+msgid "imported"
+msgstr "telah diimpor"
+
+msgid "copy"
+msgstr "salin"
+
+msgid "Are you sure you want to exit Pixelorama?"
+msgstr "Yakin ingin keluar?"
+
+msgid "Unsaved Image"
+msgstr "Gambar belum disimpan"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Perubahan belum tersimpan, perubahan akan hilang jika kamu melanjutkan."
+
+msgid "Save before exiting?"
+msgstr "Simpan sebelum keluar?"
+
+msgid "You have unsaved progress. How do you wish to proceed?"
+msgstr "Perubahan belum tersimpan. Lanjutkan?"
+
+msgid "Save & Exit"
+msgstr "Simpan & Keluar"
+
+msgid "Exit without saving"
+msgstr "Keluar tanpa menyimpan"
+
+msgid "Utility Tools"
+msgstr "\"Utility Tools\""
+
+msgid "Rectangular Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Press %s to move the content"
+msgstr "Seleksi Kotak\n\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan\n\n"
+"Tekan %s untuk menggerakkan gambar"
+
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Zoom\n\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan "
+
+msgid "Color Picker\n"
+"Select a color from a pixel of the sprite\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Color Picker\n"
+"Ambil warna dari pixel yang ada di canvas\n\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan"
+
+msgid "Draw Tools"
+msgstr "Alat menggambar"
+
+msgid "Pencil\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
+msgstr "Pensil\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan\n"
+"Tahan %s untuk membuat garis lurus"
+
+msgid "Eraser\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
+msgstr "Penghapus\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan\n"
+"Tahan %s untuk menghapus lurus"
+
+msgid "Bucket\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Ember\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan"
+
+msgid "Lighten/Darken\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Percerah/Gelapkan\n"
+"%s untuk mouse kiri\n"
+"%s untuk mouse kanan"
+
+msgid "Choose a color for the left tool"
+msgstr "Pilih warna untuk alat yang berada di kiri"
+
+msgid "Choose a color for the right tool"
+msgstr "Pilih warna untuk alat yang berada di kanan"
+
+msgid "Switch left and right colors\n"
+"(%s)"
+msgstr "Tukar warna kiri dan kanan\n"
+"(%s)"
+
+msgid "Reset the colors to their default state (black for left, white for right)"
+msgstr "Balikkan ke warna default (hitam untuk kiri, putih untuk kanan)"
+
+msgid "Left tool"
+msgstr "Alat Kiri"
+
+msgid "Right tool"
+msgstr "Alat Kanan"
+
+msgid "Left pixel indicator"
+msgstr "Indikator pixel kiri"
+
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
+msgstr "Perlihatkan indikator pixel mouse kiri atau brush di kanvas saat menggambar"
+
+msgid "Right pixel indicator"
+msgstr "Indikator pixel kanan"
+
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
+msgstr "Perlihatkan indikator pixel mouse kanan atau brush di kanvas saat menggambar"
+
+msgid "Show left tool icon"
+msgstr "Perlihatkan ikon alat kiri "
+
+msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
+msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
+
+msgid "Show right tool icon"
+msgstr "Perlihatkan ikon alat kanan"
+
+msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
+
+msgid "Guides color:"
+msgstr "Warna Panduan:"
+
+msgid "A color of ruler guides displayed on the canvas"
+msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
+
+msgid "Grid width:"
+msgstr "Lebar Kisi:"
+
+msgid "Sets how far apart are vertical lines of the grid"
+msgstr "Seberapa jauh garis vertikal dari kisi"
+
+msgid "Grid height:"
+msgstr "Tinggi Kisi:"
+
+msgid "Sets how far apart are horizontal lines of the grid"
+msgstr "Seberapa jauh garis horizontal dari kisi"
+
+msgid "Grid color:"
+msgstr "Warna Kisi:"
+
+msgid "A color of the grid"
+msgstr "Warna dari kisi"
+
+msgid "Checker size:"
+msgstr "Besar pola catur:"
+
+msgid "Size of the transparent checker background"
+msgstr "Besar dari pola catur yang ada di latar"
+
+msgid "Checker color 1:"
+msgstr "Warna pola catur 1:"
+
+msgid "First color of the transparent checker background"
+msgstr "Warna pertama dari pola catur yang ada di latar"
+
+msgid "Checker color 2:"
+msgstr "Warna pola catur 2:"
+
+msgid "Second color of the transparent checker background"
+msgstr "Warna kedua dari pola catur yang ada di latar"
+
+msgid "Only custom preset can be modified"
+msgstr "Hanya preset kustom yang bisa di edit"
+
+msgid "Brush:"
+msgstr "Kuas:"
+
+msgid "Select a brush"
+msgstr "Pilih satu kuas"
+
+msgid "Brush: Pixel"
+msgstr "Kuas: Pixel"
+
+msgid "Brush: Circle"
+msgstr "Kuas: Bulat"
+
+msgid "Brush: Filled Circle"
+msgstr "Kuas: Bulat Penuh"
+
+msgid "Custom brush"
+msgstr "Kuas kostum"
+
+msgid "Brush size:"
+msgstr "Ukuran kuas:"
+
+msgid "Brush color from"
+msgstr "Warna dari"
+
+msgid "0: Color from the brush itself, 100: the currently selected color"
+msgstr "0: Warna dari kuas sendiri, 100: warna dari yang dipilih saat ini"
+
+msgid "Fill area:"
+msgstr "Area \"fill\":"
+
+msgid "Same color area"
+msgstr "Area dengan warna yang sama"
+
+msgid "Same color pixels"
+msgstr "Pixel dengan warna yang sama"
+
+msgid "Fill with:"
+msgstr "Isi dengan:"
+
+msgid "Selected Color"
+msgstr "Warna yang dipilih"
+
+msgid "Pattern"
+msgstr "Pola"
+
+msgid "Offset"
+msgstr "Offset"
+
+msgid "Lighten"
+msgstr "Terangkan"
+
+msgid "Darken"
+msgstr "Gelapkan"
+
+msgid "Amount:"
+msgstr "Jumlah:"
+
+msgid "Lighten/Darken amount"
+msgstr "Jumlah Penerang/Penggelap"
+
+msgid "Pick for:"
+msgstr "Ambil untuk:"
+
+msgid "Left Color"
+msgstr "Warna Kiri"
+
+msgid "Right Color"
+msgstr "Warna Kanan"
+
+msgid "Mode:"
+msgstr "Mode:"
+
+msgid "Zoom in"
+msgstr "Perbesar"
+
+msgid "Zoom out"
+msgstr "Perkecil"
+
+msgid "Options:"
+msgstr "Opsi:"
+
+msgid "Fit to frame"
+msgstr "Paskan dengan frame"
+
+msgid "100% Zoom"
+msgstr "Perbesar 100%"
+
+msgid "Mirroring"
+msgstr "Mirroring"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Enable horizontal mirrored drawing"
+msgstr "Aktifkan \"mirror\" horizontal saat menggambar"
+
+msgid "Enable vertical mirrored drawing"
+msgstr "Aktifkan \"mirror\" vertikal saat menggambar"
+
+msgid "Vertical"
+msgstr "Vertikal"
+
+msgid "Current frame:"
+msgstr "Frame saat ini:"
+
+msgid "Jump to the first frame\n"
+"(%s)"
+msgstr "Lompat ke frame pertama (%s)"
+
+msgid "Go to the previous frame\n"
+"(%s)"
+msgstr "Mundur ke frame sebelumnya (%s)"
+
+msgid "Play the animation backwards (from end to beginning)\n"
+"(%s)"
+msgstr "Mainkan animasi secara mundur (dari akhir sampai awal) \n"
+"(%s)"
+
+msgid "Play the animation forward (from beginning to end)\n"
+"(%s)"
+msgstr "Mainkan animasi secara normal (dari awal sampai akhir)\n"
+"(%s)"
+
+msgid "Go to the next frame\n"
+"(%s)"
+msgstr "Maju ke frame berikutnya\n"
+"(%s)"
+
+msgid "Jump to the last frame\n"
+"(%s)"
+msgstr "Lompat ke frame pertama (%s)"
+
+msgid "Onion Skinning settings"
+msgstr "Settingan \"Onion Skinning\""
+
+msgid "Enable/disable Onion Skinning"
+msgstr "Aktifkan/Matikan \"Onion Skinning\""
+
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
+msgstr "Seberapa banyak frame setiap detik saat animasinya dimainkan?\n"
+"Semakin banyak FPS-nya, semakin cepat animasinya."
+
+msgid "No loop"
+msgstr "Tidak ada perulangan"
+
+msgid "Cycle loop"
+msgstr "Perulangan \"Cycle\""
+
+msgid "Ping-pong loop"
+msgstr "Perulangan \"Ping Pong\""
+
+msgid "Onion Skinning:"
+msgstr "\"Onion Skinning\":"
+
+msgid "Past Frames"
+msgstr "Frame sebelum"
+
+msgid "Future Frames"
+msgstr "Frame setelah"
+
+msgid "Manage frame tags"
+msgstr "Ganti tanda frame (frame tags)"
+
+msgid "Animation plays only on frames of the same tag"
+msgstr "Animasi dimainkan hanya jika frame memiliki tanda yang sama"
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
+msgstr "Jika diseleksi, Animasi hanya main jika frame memiliki tanda/tag yang sama\n"
+"Jika tidak, maka animasi akan main untuk semua frame."
+
+msgid "Blue-Red Mode"
+msgstr "Mode Biru-Merah"
+
+msgid "Add a new frame"
+msgstr "Tambah frame baru"
+
+msgid "Remove Frame"
+msgstr "Hapus frame"
+
+msgid "Clone Frame"
+msgstr "Duplikasikan Frame"
+
+msgid "Move Left"
+msgstr "Geser ke kiri"
+
+msgid "Move Right"
+msgstr "Geser ke kanan"
+
+msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Link Cel"
+msgstr "Sambungkan/Link Cel"
+
+msgid "Unlink Cel"
+msgstr "Putuskan/Unlink Cel"
+
+msgid "Layer"
+msgstr "Lapisan/Layer"
+
+msgid "Layers"
+msgstr "Lapisan/Layers"
+
+msgid "Create a new layer"
+msgstr "Tambah lapisan/layer baru"
+
+msgid "Remove current layer"
+msgstr "Hapus lapisan/layer"
+
+msgid "Move up the current layer"
+msgstr "Geser ke atas lapisan/layer ini"
+
+msgid "Move down the current layer"
+msgstr "Geser ke bawah lapisan/layer ini"
+
+msgid "Clone current layer"
+msgstr "Duplikat lapisan/layer ini"
+
+msgid "Merge current layer with the one below"
+msgstr "Satukan lapisan/layer ini dengan yang dibawah"
+
+msgid "Opacity:"
+msgstr "Kegelapan:"
+
+msgid "Toggle layer's visibility"
+msgstr "Sembunyikan/Perlihatkan lapisan/layer"
+
+msgid "Lock/unlock layer"
+msgstr "Kunci lapisan/layer"
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr "Aktifkan cel linking\n"
+"Cel yang terhubung/linked di bagikan untuk beberapa frame"
+
+msgid "Palette"
+msgstr "Palet"
+
+msgid "Palettes"
+msgstr "Palet"
+
+msgid "Add a new palette"
+msgstr "Tambahkan palet yang baru"
+
+msgid "Edit currently selected palette"
+msgstr "Edit palet yang sedang di pilih"
+
+msgid "Choose a palette"
+msgstr "Pilih satu palet"
+
+msgid "Undo: Draw"
+msgstr "Undo: gambar"
+
+msgid "Redo: Draw"
+msgstr "Redo: gambar"
+
+msgid "Undo: Rectangle Select"
+msgstr "Undo: Pilihan kotak"
+
+msgid "Redo: Rectangle Select"
+msgstr "Redo: Pilihan kotak"
+
+msgid "Undo: Scale"
+msgstr "Undo: Besar"
+
+msgid "Redo: Scale"
+msgstr "Redo: Besar"
+
+msgid "Undo: Add Layer"
+msgstr "Undo: tambahkan lapisan/layer"
+
+msgid "Redo: Add Layer"
+msgstr "Redo: tambahkan lapisan/layer"
+
+msgid "Undo: Remove Layer"
+msgstr "Undo: Hapus lapisan/layer"
+
+msgid "Redo: Remove Layer"
+msgstr "Redo: Hapus lapisan/layer"
+
+msgid "Undo: Merge Layer"
+msgstr "Undo: satukan lapisan/layer"
+
+msgid "Redo: Merge Layer"
+msgstr "Redo: satukan lapisan/layer"
+
+msgid "Undo: Change Layer Order"
+msgstr "Undo: Perubahan pada urutan lapisan/layer"
+
+msgid "Redo: Change Layer Order"
+msgstr "Redo: Perubahan pada urutan lapisan/layer"
+
+msgid "Undo: Add Frame"
+msgstr "Undo: tambahkan lapisan/layer"
+
+msgid "Redo: Add Frame"
+msgstr "Redo: tambahkan lapisan/layer"
+
+msgid "Undo: Remove Frame"
+msgstr "Undo: Hapus lapisan/layer"
+
+msgid "Redo: Remove Frame"
+msgstr "Redo: Hapus lapisan/layer"
+
+msgid "Undo: Change Frame Order"
+msgstr "Undo: Perubahan pada urutan lapisan/layer"
+
+msgid "Redo: Change Frame Order"
+msgstr "Redo: Perubahan pada urutan lapisan/layer"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Undo: Hapus kuas kostum"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Redo: Hapus kuas kostum"
+
+msgid "Undo: Modify Frame Tag"
+msgstr "Undo: Tanda pada frame"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Redo: Tanda pada frame"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Undo: Hapus tanda dari frame"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Redo: Hapus tanda dari frame"
+
+msgid "Move Guide"
+msgstr "Gerakkan panduan"
+
+msgid "File saved"
+msgstr "File Tersimpan"
+
+msgid "File autosaved"
+msgstr "File tersimpan"
+
+msgid "File failed to open"
+msgstr "File gagal dibuka"
+
+msgid "File failed to save"
+msgstr "File gagal disimpan"
+
+msgid "File exported"
+msgstr "File sudah terekspor"
+
+msgid "New Empty Palette"
+msgstr "Palet kosong baru"
+
+msgid "Import Palette"
+msgstr "Impor palet"
+
+msgid "Palette Name:"
+msgstr "Nama palet:"
+
+msgid "Color Name:"
+msgstr "Nama warna:"
+
+msgid "Use current left & right colors"
+msgstr ""
+
+msgid "Create a new empty palette?"
+msgstr "Buat palet kosong baru?"
+
+msgid "Error: Palette must have a valid name."
+msgstr "Error: nama palet tidak valid."
+
+msgid "Error: Palette named '%s' already exists!"
+msgstr "Error: Palet bernama %s sudah ada"
+
+msgid "Invalid Palette file!"
+msgstr "File palet tidak valid"
+
+msgid "Edit Palette"
+msgstr "Edit Palet"
+
+msgid "Patrons:"
+msgstr "Patrons:"
+
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
+
+msgid "Become a Platinum Sponsor"
+msgstr ""
+
+msgid "Become a Gold Sponsor"
+msgstr ""
+
+msgid "Become a Patron"
+msgstr ""
+
+msgid "Don't show again"
+msgstr "Jangan perlihatkan lagi"
+
+msgid "Image Options"
+msgstr "Opsi Menggambar"
+
+msgid "Default width:"
+msgstr "Panjang default:"
+
+msgid "A default width of a new image"
+msgstr "Panjang default untuk gambar baru"
+
+msgid "Default height:"
+msgstr "Lebar default:"
+
+msgid "A default height of a new image"
+msgstr "Lebar default untuk gambar baru"
+
+msgid "Default fill color:"
+msgstr "Warna \"fill\" default:"
+
+msgid "A default background color of a new image"
+msgstr "Warna latar belakang gambar default\n"
+" "
+
+msgid "Lock aspect ratio:"
+msgstr "Kunci aspek rasio"
+
+msgid "Templates:"
+msgstr "Templet/Sampul:"
+
+msgid "Preset"
+msgstr "Preset"
+
+msgid "Preset:"
+msgstr "Preset:"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "Custom"
+msgstr "Kustom"
+
+msgid "Rectangular Selection"
+msgstr "Seleksi petak"
+
+msgid "Zoom"
+msgstr "Perbesar"
+
+msgid "Color Picker"
+msgstr "\"Color Picker\""
+
+msgid "Pencil"
+msgstr "Pensil"
+
+msgid "Eraser"
+msgstr "Penghapus"
+
+msgid "Bucket"
+msgstr "\"Bucket\""
+
+msgid "Lighten/Darken"
+msgstr "Pergelap/Terangkan"
+
+msgid "Switch Colors"
+msgstr "Ganti warna"
+
+msgid "Set the shortcut"
+msgstr "Pilih pintasan"
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr "Tekan huruf di keyboard sebagai pintasan (bisa dikombinasikan)"
+
+msgid "Already assigned"
+msgstr "Sudah dipilih, Pilih yang lain!"
+
+msgid "Left Tool:"
+msgstr "Alat Kiri:"
+
+msgid "A tool assigned to the left mouse button"
+msgstr "Alat ditetapkan untuk mouse kiri"
+
+msgid "Right Tool:"
+msgstr "Alat Kanan:"
+
+msgid "A tool assigned to the right mouse button"
+msgstr "Alat ditetapkan untuk mouse kanan"
+
+msgid "Cannot find last project file."
+msgstr "Tidak bisa menemukan proyek terakhir"
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Kamu belum menyimpan atau membuka suatu proyek di Pixelorama!"
+
+msgid "Open Last Project"
+msgstr "Buka proyek terakhir"
+
+msgid "Open last project..."
+msgstr "Buka proyek terakhir..."
+
+msgid "Open last project on startup"
+msgstr "Buka proyek terakhir saat mulai"
+
+msgid "Opens last opened project on startup"
+msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
+
+msgid "Enable autosave"
+msgstr "Aktifkan autosave (simpan otomatis)"
+
+msgid "Autosave interval:"
+msgstr "Selang waktu menyimpan otomatis:"
+
+msgid "minute(s)"
+msgstr "menit"
+
+msgid "Create new directory for each frame tag"
+msgstr "Buat direktori baru untuk setiap frame tag"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Buat banyak file tetapi setiap file disimpan di direktori berbeda yang sesuai dengan tag frame-nya"
+
+msgid "Close"
+msgstr "Tutup"
+
+msgid "Delete"
+msgstr "Hapus"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "Backup yang tersimpan otomatis untuk %s ditemukan\n"
+"Apakah kamu ingin muat ulang?"
+
+msgid "Backup reloaded"
+msgstr "Backup dimuat ulang"
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr ""
+

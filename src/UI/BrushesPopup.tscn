@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/UI/BrushButton.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Image" id=5]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 9,
+"mipmaps": false,
+"width": 9
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 3
+flags = 3
+image = SubResource( 5 )
+size = Vector2( 9, 9 )
+
+[sub_resource type="Image" id=6]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 0, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 0, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 255, 0, 255, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 9,
+"mipmaps": false,
+"width": 9
+}
+
+[sub_resource type="ImageTexture" id=4]
+flags = 3
+flags = 3
+image = SubResource( 6 )
+size = Vector2( 9, 9 )
+
+[node name="BrushesPopup" type="Popup"]
+margin_right = 226.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 144 )
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+drag_to_rearrange_enabled = true
+
+[node name="File" type="ScrollContainer" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="FileBrushContainer" type="GridContainer" parent="TabContainer/File"]
+margin_right = 104.0
+margin_bottom = 32.0
+columns = 6
+
+[node name="PixelBrushButton" parent="TabContainer/File/FileBrushContainer" instance=ExtResource( 2 )]
+hint_tooltip = "Pixel brush"
+mouse_default_cursor_shape = 2
+
+[node name="CircleBrushButton" parent="TabContainer/File/FileBrushContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_right = 68.0
+hint_tooltip = "Filled circle brush"
+mouse_default_cursor_shape = 2
+brush_type = 1
+custom_brush_index = -2
+
+[node name="BrushTexture" parent="TabContainer/File/FileBrushContainer/CircleBrushButton" index="0"]
+texture = SubResource( 2 )
+
+[node name="FilledCircleBrushButton" parent="TabContainer/File/FileBrushContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_right = 104.0
+hint_tooltip = "Circle brush"
+mouse_default_cursor_shape = 2
+brush_type = 2
+custom_brush_index = -1
+
+[node name="BrushTexture" parent="TabContainer/File/FileBrushContainer/FilledCircleBrushButton" index="0"]
+texture = SubResource( 4 )
+
+[node name="Project" type="ScrollContainer" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="ProjectBrushContainer" type="GridContainer" parent="TabContainer/Project"]
+columns = 5
+
+[editable path="TabContainer/File/FileBrushContainer/CircleBrushButton"]
+
+[editable path="TabContainer/File/FileBrushContainer/FilledCircleBrushButton"]

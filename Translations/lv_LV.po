@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -52,6 +52,9 @@ msgstr "Efekti"
 msgid "Help"
 msgstr "Palīdzība"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "Jauns..."
 
@@ -63,6 +66,9 @@ msgstr "Saglabāt..."
 
 msgid "Save as..."
 msgstr "Saglabāt kā..."
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr "Importēt..."
@@ -171,6 +177,12 @@ msgstr "Nevar ielādēd failu '%s'.\n"
 msgid "Frame"
 msgstr ""
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -181,6 +193,9 @@ msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
+msgstr ""
+
+msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
@@ -306,8 +321,11 @@ msgstr "Tumš"
 msgid "Gray"
 msgstr "Pelēks"
 
-msgid "Gold"
-msgstr "Zelta"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "Gaišs"
@@ -324,6 +342,27 @@ msgstr "Ārlīnija"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "Diagonāle"
 
@@ -335,6 +374,9 @@ msgstr "Biezums:"
 
 msgid "View Splash Screen"
 msgstr "Rādīt uzplaiksnījuma ekrānu"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "Problēmu izsekotājs"
@@ -405,6 +447,18 @@ msgstr "Spāņu"
 msgid "Esperanto"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Izstrādes komanda"
 
@@ -431,6 +485,12 @@ msgstr "kopēt"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Tiešām vēlies pārtraukt darbu ar Pixelorama?"
+
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr ""
 
 msgid "Save before exiting?"
 msgstr ""
@@ -519,11 +579,11 @@ msgstr "Samainīt vietām kreiso un labo krāsu\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Atjaunot noklusējuma krāsas (melns priekš kreisās, balts priekšlabās)"
 
-msgid "Left tool options"
-msgstr "Kreisā rīka uzstādījumi"
+msgid "Left tool"
+msgstr ""
 
-msgid "Right tool options"
-msgstr "Labā rīka uzstādījumi"
+msgid "Right tool"
+msgstr ""
 
 msgid "Left pixel indicator"
 msgstr "Kreisā pikseļa indikātors"
@@ -573,19 +633,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
@@ -624,16 +684,22 @@ msgstr "0: Krāsa no pašas otas, 100: no atzīmētās krāsas"
 msgid "Fill area:"
 msgstr "Aizpildīt laukumu:"
 
-msgid "Area of the same color"
-msgstr "Vienādas krāsas laukums"
-
-msgid "All pixels of the same color"
-msgstr "Visus pikseļus vienādā krāsā"
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
@@ -692,9 +758,6 @@ msgstr "Vertikāls"
 
 msgid "Current frame:"
 msgstr "Patreizējais kadrs:"
-
-msgid "Current frame: 1/1"
-msgstr "Patreizējais kadrs: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -784,6 +847,9 @@ msgid "Move Right"
 msgstr "Pārvietoties pa labi"
 
 msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Link Cel"
 msgstr ""
 
 msgid "Unlink Cel"
@@ -907,11 +973,32 @@ msgstr "Atcelt: Pielāgotās otas dzēšanu"
 msgid "Redo: Delete Custom Brush"
 msgstr "Atkārtot: Pielāgotās otas dzēšanu"
 
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Pārvietot vadlīniju"
 
 msgid "File saved"
 msgstr "Fails saglabāts"
+
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
 
 msgid "File exported"
 msgstr "Fails eksportēts"
@@ -927,6 +1014,9 @@ msgstr "Paletes nosaukums:"
 
 msgid "Color Name:"
 msgstr "Krāsas nosaukums:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Izveidot jaunu tukšu paleti?"
@@ -946,26 +1036,20 @@ msgstr "Rediģēt paleti"
 msgid "Patrons:"
 msgstr "Labvēļi:"
 
-msgid "Changes"
-msgstr "Izmaiņas"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "Platīna sponsors"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Zelta sponsors"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Platīna sponsora aizvietotājs"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Zelta sponsora aizvietotājs"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "Vairāk nerādīt"
-
-msgid "Take this spot!"
-msgstr "Ieņemt šo vietu!"
 
 msgid "Image Options"
 msgstr "Bildes uzstādījumi"
@@ -1049,5 +1133,63 @@ msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
+msgstr ""
+
+msgid "Cannot find last project file."
+msgstr ""
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open Last Project"
+msgstr ""
+
+msgid "Open last project..."
+msgstr ""
+
+msgid "Open last project on startup"
+msgstr ""
+
+msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
+
+msgid "Create new directory for each frame tag"
+msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "確定"
@@ -52,6 +52,9 @@ msgstr "效果"
 msgid "Help"
 msgstr "幫助"
 
+msgid "New"
+msgstr ""
+
 msgid "New..."
 msgstr "開新檔案"
 
@@ -63,6 +66,9 @@ msgstr "儲存"
 
 msgid "Save as..."
 msgstr "儲存為"
+
+msgid "Import"
+msgstr ""
 
 msgid "Import..."
 msgstr "匯入..."
@@ -170,6 +176,12 @@ msgstr "無法加載 '%s'. Error code: %s"
 msgid "Frame"
 msgstr "影格"
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -181,6 +193,9 @@ msgstr "預覽："
 
 msgid "Frame:"
 msgstr "影格:"
+
+msgid "Orientation:"
+msgstr ""
 
 msgid "Browse"
 msgstr "瀏覽"
@@ -305,8 +320,11 @@ msgstr "變暗"
 msgid "Gray"
 msgstr "灰階"
 
-msgid "Gold"
-msgstr "金色"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
+msgstr ""
 
 msgid "Light"
 msgstr "變亮"
@@ -323,6 +341,27 @@ msgstr "描邊"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr "角落"
 
@@ -334,6 +373,9 @@ msgstr "粗細:"
 
 msgid "View Splash Screen"
 msgstr "關於"
+
+msgid "Online Docs"
+msgstr ""
 
 msgid "Issue Tracker"
 msgstr "回報問題"
@@ -404,6 +446,18 @@ msgstr "西班牙文"
 msgid "Esperanto"
 msgstr "世界語"
 
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
+
 msgid "Development Team"
 msgstr "開發團隊"
 
@@ -430,6 +484,12 @@ msgstr "複製"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "確定要離開Pixelorama嗎?"
+
+msgid "Unsaved Image"
+msgstr ""
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr ""
 
 msgid "Save before exiting?"
 msgstr "要先儲存再離開嗎?"
@@ -518,11 +578,11 @@ msgstr "左右工具顏色互換\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "顏色改回初始值(左黑色, 右白色)"
 
-msgid "Left tool options"
-msgstr "左鍵工具選項"
+msgid "Left tool"
+msgstr ""
 
-msgid "Right tool options"
-msgstr "右鍵工具選項"
+msgid "Right tool"
+msgstr ""
 
 msgid "Left pixel indicator"
 msgstr "左鍵工具準心"
@@ -572,19 +632,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
@@ -623,16 +683,22 @@ msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 msgid "Fill area:"
 msgstr "填滿:"
 
-msgid "Area of the same color"
-msgstr "同顏色的區塊"
-
-msgid "All pixels of the same color"
-msgstr "同顏色的像素"
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
@@ -691,9 +757,6 @@ msgstr "垂直"
 
 msgid "Current frame:"
 msgstr "目前畫面:"
-
-msgid "Current frame: 1/1"
-msgstr "目前畫面: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -783,6 +846,9 @@ msgid "Move Right"
 msgstr "右移"
 
 msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Link Cel"
 msgstr ""
 
 msgid "Unlink Cel"
@@ -907,11 +973,32 @@ msgstr "取消 刪除自訂畫筆"
 msgid "Redo: Delete Custom Brush"
 msgstr "復原 刪除自訂畫筆"
 
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "移動輔助線"
 
 msgid "File saved"
 msgstr "檔案已儲存"
+
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr ""
+
+msgid "File failed to save"
+msgstr ""
 
 msgid "File exported"
 msgstr "檔案已輸出"
@@ -927,6 +1014,9 @@ msgstr "色盤名稱:"
 
 msgid "Color Name:"
 msgstr "顏色:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "新增空的色盤?"
@@ -946,26 +1036,20 @@ msgstr "編輯色盤"
 msgid "Patrons:"
 msgstr "Patrons:"
 
-msgid "Changes"
-msgstr "更新紀錄"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr ""
 
-msgid "Platinum Sponsor"
-msgstr "白金贊助人"
+msgid "Become a Platinum Sponsor"
+msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "黃金贊助人"
+msgid "Become a Gold Sponsor"
+msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "白金贊助保持人"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "黃金贊助保持人"
+msgid "Become a Patron"
+msgstr ""
 
 msgid "Don't show again"
 msgstr "不再顯示"
-
-msgid "Take this spot!"
-msgstr "Take this spot!"
 
 msgid "Image Options"
 msgstr "圖片選項"
@@ -1049,5 +1133,63 @@ msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
+msgstr ""
+
+msgid "Cannot find last project file."
+msgstr ""
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr ""
+
+msgid "Open Last Project"
+msgstr ""
+
+msgid "Open last project..."
+msgstr ""
+
+msgid "Open last project on startup"
+msgstr ""
+
+msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
+
+msgid "Create new directory for each frame tag"
+msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 

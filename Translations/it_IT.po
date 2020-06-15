@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-04-18 16:47\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Effetti"
 msgid "Help"
 msgstr "Aiuto"
 
+msgid "New"
+msgstr "Nuovo"
+
 msgid "New..."
 msgstr "Nuovo..."
 
@@ -63,6 +66,9 @@ msgstr "Salva..."
 
 msgid "Save as..."
 msgstr "Salva come..."
+
+msgid "Import"
+msgstr "Importa"
 
 msgid "Import..."
 msgstr "Importa..."
@@ -171,6 +177,12 @@ msgstr "Impossibile caricare il file '%s'.\n"
 msgid "Frame"
 msgstr "Fotogrammi"
 
+msgid "Frames:"
+msgstr "Fotogrammi:"
+
+msgid "All Frames"
+msgstr "Tutti i fotogrammi"
+
 msgid "Spritesheet"
 msgstr "Spritesheet"
 
@@ -182,6 +194,9 @@ msgstr "Anteprima:"
 
 msgid "Frame:"
 msgstr "Fotogrammi:"
+
+msgid "Orientation:"
+msgstr "Orientazione:"
 
 msgid "Browse"
 msgstr "Esplora"
@@ -306,8 +321,11 @@ msgstr "Scuro"
 msgid "Gray"
 msgstr "Grigio"
 
-msgid "Gold"
-msgstr "Oro"
+msgid "Blue"
+msgstr "Blu"
+
+msgid "Caramel"
+msgstr "Caramello"
 
 msgid "Light"
 msgstr "Chiaro"
@@ -324,6 +342,27 @@ msgstr "Contorno"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Regola Tonalità/Saturazione/Valore"
 
+msgid "Adjust HSV"
+msgstr "Regola HSV"
+
+msgid "Type:"
+msgstr "Tipologia:"
+
+msgid "Angle:"
+msgstr "Angolo:"
+
+msgid "Hue"
+msgstr "Tinta"
+
+msgid "Saturation"
+msgstr "Saturazione"
+
+msgid "Value"
+msgstr "Valore"
+
+msgid "Apply"
+msgstr "Applica"
+
 msgid "Diagonal"
 msgstr "Diagonale"
 
@@ -335,6 +374,9 @@ msgstr "Spessore:"
 
 msgid "View Splash Screen"
 msgstr "Visualizza lo splash screen"
+
+msgid "Online Docs"
+msgstr "Online Docs"
 
 msgid "Issue Tracker"
 msgstr "Tracciatore problemi"
@@ -405,6 +447,18 @@ msgstr "Spagnolo"
 msgid "Esperanto"
 msgstr "Esperanto"
 
+msgid "Indonesian"
+msgstr "Indonesiano"
+
+msgid "Czech"
+msgstr "Ceco"
+
+msgid "Arabic"
+msgstr "Arabo"
+
+msgid "Turkish"
+msgstr "Turco"
+
 msgid "Development Team"
 msgstr "Team di sviluppo"
 
@@ -431,6 +485,12 @@ msgstr "copia"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Sei sicuro di voler uscire da Pixelorama?"
+
+msgid "Unsaved Image"
+msgstr "Immagine non salvata"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Hai delle modifiche non salvate. Se procedi, i progressi compiuti andranno persi."
 
 msgid "Save before exiting?"
 msgstr "Salva prima di uscire?"
@@ -521,11 +581,11 @@ msgstr "Scambia i colori sinistro e destro\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
 
-msgid "Left tool options"
-msgstr "Opzioni dello strumento sinistro"
+msgid "Left tool"
+msgstr "Strumento sinistra"
 
-msgid "Right tool options"
-msgstr "Opzioni dello strumento destro"
+msgid "Right tool"
+msgstr "Strumento destra"
 
 msgid "Left pixel indicator"
 msgstr "Indicatore pixel strumento sinistro"
@@ -575,20 +635,20 @@ msgstr "Colore della griglia:"
 msgid "A color of the grid"
 msgstr "Un colore della griglia"
 
-msgid "Checker size"
-msgstr "Dimensione checker"
+msgid "Checker size:"
+msgstr "Dimensione checker:"
 
 msgid "Size of the transparent checker background"
 msgstr "Dimensioni dello sfondo trasparente del checker"
 
-msgid "Checker color 1"
-msgstr "Colore checker 1"
+msgid "Checker color 1:"
+msgstr "Colore checker 1:"
 
 msgid "First color of the transparent checker background"
 msgstr "Primo colore dello sfondo trasparente del checker"
 
-msgid "Checker color 2"
-msgstr "Colore checker 2"
+msgid "Checker color 2:"
+msgstr "Colore checker 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Secondo colore dello sfondo trasparente del checker"
@@ -626,17 +686,23 @@ msgstr "0: Colore dal pennello stesso, 100: il colore selezionato"
 msgid "Fill area:"
 msgstr "Riempi l'area:"
 
-msgid "Area of the same color"
-msgstr "Area dello stesso colore"
-
-msgid "All pixels of the same color"
-msgstr "Tutti i pixel dello stesso colore"
-
 msgid "Same color area"
 msgstr "Stessa area di colore"
 
 msgid "Same color pixels"
 msgstr "Stessi pixel di colore"
+
+msgid "Fill with:"
+msgstr "Riempi con:"
+
+msgid "Selected Color"
+msgstr "Colore selezionato"
+
+msgid "Pattern"
+msgstr "Sequenza"
+
+msgid "Offset"
+msgstr "Offset"
 
 msgid "Lighten"
 msgstr "Schiarisci"
@@ -694,9 +760,6 @@ msgstr "Verticale"
 
 msgid "Current frame:"
 msgstr "Frame corrente:"
-
-msgid "Current frame: 1/1"
-msgstr "Frame corrente: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -788,6 +851,9 @@ msgstr "Muovi a destra"
 
 msgid "Add Frame Tag"
 msgstr "Aggiungi tag Frame"
+
+msgid "Link Cel"
+msgstr "Cel link"
 
 msgid "Unlink Cel"
 msgstr "Scollega Cel"
@@ -911,11 +977,32 @@ msgstr "Annulla: Elimina pennello personalizzato"
 msgid "Redo: Delete Custom Brush"
 msgstr "Ripeti: Elimina pennello personalizzato"
 
+msgid "Undo: Modify Frame Tag"
+msgstr "Annulla: Modifica tag Frame"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Ripristina: Modifica Tag Frame"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Annulla: Elimina tag Frame"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Ripristina: Elimina tag Frame"
+
 msgid "Move Guide"
 msgstr "Muovi la guida"
 
 msgid "File saved"
 msgstr "File salvato"
+
+msgid "File autosaved"
+msgstr "File salvato automaticamente"
+
+msgid "File failed to open"
+msgstr "Impossibile aprire il file"
+
+msgid "File failed to save"
+msgstr "Impossibile salvare il file"
 
 msgid "File exported"
 msgstr "File esportato"
@@ -931,6 +1018,9 @@ msgstr "Nome Palette:"
 
 msgid "Color Name:"
 msgstr "Nome Colore:"
+
+msgid "Use current left & right colors"
+msgstr "Usa i colori sinistro e destro attuali"
 
 msgid "Create a new empty palette?"
 msgstr "Creare una nuova palette vuota?"
@@ -950,26 +1040,20 @@ msgstr "Modifica Palette"
 msgid "Patrons:"
 msgstr "Sostenitori:"
 
-msgid "Changes"
-msgstr "Cambiamenti"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "Vuoi che il tuo nome o la tua azienda siano mostrati nella schermata iniziale?"
 
-msgid "Platinum Sponsor"
-msgstr "Sponsor di Platino"
+msgid "Become a Platinum Sponsor"
+msgstr "Diventa uno Sponsor Platinum"
 
-msgid "Gold Sponsors"
-msgstr "Sponsor d'Oro"
+msgid "Become a Gold Sponsor"
+msgstr "Diventa uno Sponsor Gold"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Placeholder Sponsor Platinum"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Placeholder Sponsor Oro"
+msgid "Become a Patron"
+msgstr "Diventa un sostenitore"
 
 msgid "Don't show again"
 msgstr "Non mostrare di nuovo"
-
-msgid "Take this spot!"
-msgstr "Prendi questo posto!"
 
 msgid "Image Options"
 msgstr "Opzioni dell'immagine:"
@@ -1055,8 +1139,62 @@ msgstr "Strumento destra:"
 msgid "A tool assigned to the right mouse button"
 msgstr "Uno strumento assegnato al pulsante destro del mouse"
 
-msgid "Lock aspect ratio:"
-msgstr "Blocca rapporto d'aspetto:"
+msgid "Cannot find last project file."
+msgstr "Impossibile trovare l'ultimo file del progetto."
 
-msgid "Templates:"
-msgstr "Modelli:"
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Non hai ancora salvato o aperto alcun progetto in Pixelorama!"
+
+msgid "Open Last Project"
+msgstr "Apri l'ultimo progetto"
+
+msgid "Open last project..."
+msgstr "Apri l'ultimo progetto..."
+
+msgid "Open last project on startup"
+msgstr "Apri l'ultimo progetto all'avvio"
+
+msgid "Opens last opened project on startup"
+msgstr "Apri l'ultimo progetto aperto all'avvio"
+
+msgid "Enable autosave"
+msgstr "Abilita salvataggio automatico"
+
+msgid "Autosave interval:"
+msgstr "Intervallo di salvataggio automatico:"
+
+msgid "minute(s)"
+msgstr "minuto(i)"
+
+msgid "Create new directory for each frame tag"
+msgstr "Crea nuova cartella per ogni tag frame"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Crea più file ma ogni file è memorizzato in una cartella diversa che corrisponde al tag frame"
+
+msgid "Close"
+msgstr "Chiudi"
+
+msgid "Delete"
+msgstr "Elimina"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "È stato trovato il backup automatico per %s\n"
+"Vuoi ricaricarlo?"
+
+msgid "Backup reloaded"
+msgstr "Backup ricaricato"
+
+msgid "Remove currently selected palette"
+msgstr "Rimuovi la tavolozza attualmente selezionata"
+
+msgid "You can't remove more palettes!"
+msgstr "Non puoi rimuovere altre tavolozze!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Impossibile rimuovere la tavolozza, perché non esiste!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Si è verificato un errore durante la rimozione della tavolozza! Codice errore: %s"
+

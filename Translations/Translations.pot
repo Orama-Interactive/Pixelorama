@@ -19,6 +19,9 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
+msgid "Canvas Size"
+msgstr ""
+
 msgid "Width:"
 msgstr ""
 
@@ -97,6 +100,9 @@ msgstr ""
 msgid "Crop Image"
 msgstr ""
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr ""
 
@@ -125,6 +131,9 @@ msgid "Show Guides"
 msgstr ""
 
 msgid "Show Animation Timeline"
+msgstr ""
+
+msgid "Zen Mode"
 msgstr ""
 
 msgid "Fill with color:"
@@ -165,6 +174,12 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
+msgstr ""
+
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
 msgstr ""
 
 msgid "Spritesheet"
@@ -305,7 +320,10 @@ msgstr ""
 msgid "Gray"
 msgstr ""
 
-msgid "Gold"
+msgid "Blue"
+msgstr ""
+
+msgid "Caramel"
 msgstr ""
 
 msgid "Light"
@@ -323,6 +341,27 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Adjust HSV"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr ""
+
+msgid "Hue"
+msgstr ""
+
+msgid "Saturation"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Diagonal"
 msgstr ""
 
@@ -333,6 +372,9 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "View Splash Screen"
+msgstr ""
+
+msgid "Online Docs"
 msgstr ""
 
 msgid "Issue Tracker"
@@ -402,6 +444,18 @@ msgid "Spanish"
 msgstr ""
 
 msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Development Team"
@@ -687,9 +741,6 @@ msgstr ""
 msgid "Current frame:"
 msgstr ""
 
-msgid "Current frame: 1/1"
-msgstr ""
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr ""
@@ -939,6 +990,9 @@ msgstr ""
 msgid "Color Name:"
 msgstr ""
 
+msgid "Use current left & right colors"
+msgstr ""
+
 msgid "Create a new empty palette?"
 msgstr ""
 
@@ -957,25 +1011,19 @@ msgstr ""
 msgid "Patrons:"
 msgstr ""
 
-msgid "Changes"
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Platinum Sponsor"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors"
+msgid "Become a Gold Sponsor"
 msgstr ""
 
-msgid "Platinum Sponsor Placeholder"
-msgstr ""
-
-msgid "Gold Sponsors Placeholder"
+msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
-
-msgid "Take this spot!"
 msgstr ""
 
 msgid "Image Options"
@@ -1080,6 +1128,15 @@ msgstr ""
 msgid "Opens last opened project on startup"
 msgstr ""
 
+msgid "Enable autosave"
+msgstr ""
+
+msgid "Autosave interval:"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
+
 msgid "Create new directory for each frame tag"
 msgstr ""
 
@@ -1097,4 +1154,16 @@ msgid "Autosaved backup for %s was found.\n"
 msgstr ""
 
 msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""

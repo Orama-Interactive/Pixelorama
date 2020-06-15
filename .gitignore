@@ -1,7 +1,17 @@
+
 # Godot-specific ignores
 .import/
 export_presets.cfg
 
-Translations/Update Translations.bat
-Scripts/Old/
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# System/tool-specific ignores
+.directory
+*~
 

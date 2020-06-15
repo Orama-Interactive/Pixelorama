@@ -5,7 +5,7 @@ export var index := 0;
 export var color : Color = Color.white
 export var draggable := false
 
-var drag_preview_texture = preload("res://Assets/Graphics/Palette/swatch_drag_preview.png")
+var drag_preview_texture = preload("res://assets/graphics/palette/swatch_drag_preview.png")
 
 
 func get_drag_data(_position):

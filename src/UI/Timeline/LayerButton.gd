@@ -15,28 +15,25 @@ func _ready() -> void:
 	linked_button = Global.find_node_by_name(self, "LinkButton")
 	label = Global.find_node_by_name(self, "Label")
 	line_edit = Global.find_node_by_name(self, "LineEdit")
-	var theme_type := Global.theme_type
-	if theme_type == "Gold":
-		theme_type = "Dark"
 
-	if Global.layers[i][1]:
-		visibility_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/layer_visible.png" % theme_type.to_lower())
+	if Global.current_project.layers[i].visible:
+		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")
 		visibility_button.get_child(0).rect_size = Vector2(24, 14)
 		visibility_button.get_child(0).rect_position = Vector2(4, 9)
 	else:
-		visibility_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/layer_invisible.png" % theme_type.to_lower())
+		Global.change_button_texturerect(visibility_button.get_child(0), "layer_invisible.png")
 		visibility_button.get_child(0).rect_size = Vector2(24, 8)
 		visibility_button.get_child(0).rect_position = Vector2(4, 12)
 
-	if Global.layers[i][2]:
-		lock_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/lock.png" % theme_type.to_lower())
+	if Global.current_project.layers[i].locked:
+		Global.change_button_texturerect(lock_button.get_child(0), "lock.png")
 	else:
-		lock_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/unlock.png" % theme_type.to_lower())
+		Global.change_button_texturerect(lock_button.get_child(0), "unlock.png")
 
-	if Global.layers[i][4]: # If new layers will be linked
-		linked_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/linked_layer.png" % theme_type.to_lower())
+	if Global.current_project.layers[i].new_cels_linked: # If new layers will be linked
+		Global.change_button_texturerect(linked_button.get_child(0), "linked_layer.png")
 	else:
-		linked_button.get_child(0).texture = load("res://Assets/Graphics/%s_themes/layers/unlinked_layer.png" % theme_type.to_lower())
+		Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
 
 
 func _input(event : InputEvent) -> void:
@@ -62,20 +59,21 @@ func save_layer_name(new_name : String) -> void:
 	line_edit.editable = false
 	label.text = new_name
 	Global.layers_changed_skip = true
-	Global.layers[i][0] = new_name
+	Global.current_project.layers[i].name = new_name
 
 
 func _on_VisibilityButton_pressed() -> void:
-	Global.layers[i][1] = !Global.layers[i][1]
+	Global.current_project.layers[i].visible = !Global.current_project.layers[i].visible
 	Global.canvas.update()
 
 
 func _on_LockButton_pressed() -> void:
-	Global.layers[i][2] = !Global.layers[i][2]
+	Global.current_project.layers[i].locked = !Global.current_project.layers[i].locked
 
 
 func _on_LinkButton_pressed() -> void:
-	Global.layers[i][4] = !Global.layers[i][4]
-	if Global.layers[i][4] && !Global.layers[i][5]:
-		Global.layers[i][5].append(Global.canvas)
-		Global.layers[i][3].get_child(Global.current_frame)._ready()
+	Global.current_project.layers[i].new_cels_linked = !Global.current_project.layers[i].new_cels_linked
+	if Global.current_project.layers[i].new_cels_linked && !Global.current_project.layers[i].linked_cels:
+		# If button is pressed and there are no linked cels in the layer
+		Global.current_project.layers[i].linked_cels.append(Global.current_project.frames[Global.current_project.current_frame])
+		Global.current_project.layers[i].frame_container.get_child(Global.current_project.current_frame)._ready()

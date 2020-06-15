@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -52,6 +52,9 @@ msgstr "效果"
 msgid "Help"
 msgstr "帮助"
 
+msgid "New"
+msgstr "新建"
+
 msgid "New..."
 msgstr "新建..."
 
@@ -63,6 +66,9 @@ msgstr "保存..."
 
 msgid "Save as..."
 msgstr "另存为..."
+
+msgid "Import"
+msgstr "导入"
 
 msgid "Import..."
 msgstr "导入..."
@@ -171,6 +177,12 @@ msgstr "无法加载文件 '%s'。\n"
 msgid "Frame"
 msgstr "帧"
 
+msgid "Frames:"
+msgstr "帧:"
+
+msgid "All Frames"
+msgstr "所有帧"
+
 msgid "Spritesheet"
 msgstr "精灵表"
 
@@ -182,6 +194,9 @@ msgstr "预览："
 
 msgid "Frame:"
 msgstr "帧:"
+
+msgid "Orientation:"
+msgstr "方向："
 
 msgid "Browse"
 msgstr "浏览"
@@ -271,7 +286,7 @@ msgid "Themes"
 msgstr "主题"
 
 msgid "Canvas"
-msgstr ""
+msgstr "画布"
 
 msgid "Shortcuts"
 msgstr "快捷键"
@@ -306,8 +321,11 @@ msgstr "深色"
 msgid "Gray"
 msgstr "灰色"
 
-msgid "Gold"
-msgstr "金色"
+msgid "Blue"
+msgstr "蓝色"
+
+msgid "Caramel"
+msgstr "浅褐色"
 
 msgid "Light"
 msgstr "白色"
@@ -324,6 +342,27 @@ msgstr "轮廓"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "调整色相/饱和度/值"
 
+msgid "Adjust HSV"
+msgstr "调整 HSV"
+
+msgid "Type:"
+msgstr "类型："
+
+msgid "Angle:"
+msgstr "角度："
+
+msgid "Hue"
+msgstr "色相"
+
+msgid "Saturation"
+msgstr "饱和度"
+
+msgid "Value"
+msgstr "值"
+
+msgid "Apply"
+msgstr "应用"
+
 msgid "Diagonal"
 msgstr "对角线"
 
@@ -335,6 +374,9 @@ msgstr "厚度:"
 
 msgid "View Splash Screen"
 msgstr "查看启动画面"
+
+msgid "Online Docs"
+msgstr "在线文档"
 
 msgid "Issue Tracker"
 msgstr "问题追踪器"
@@ -405,6 +447,18 @@ msgstr "西班牙语"
 msgid "Esperanto"
 msgstr "世界语"
 
+msgid "Indonesian"
+msgstr "印度尼西亚语"
+
+msgid "Czech"
+msgstr "捷克语"
+
+msgid "Arabic"
+msgstr "阿拉伯语"
+
+msgid "Turkish"
+msgstr "土耳其语"
+
 msgid "Development Team"
 msgstr "开发团队"
 
@@ -431,6 +485,12 @@ msgstr "复制"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "您确定要退出 Pixelorama 吗?"
+
+msgid "Unsaved Image"
+msgstr "未保存的图像"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "您有未保存的更改。如果您继续，您的进度将会丢失。"
 
 msgid "Save before exiting?"
 msgstr "退出前保存吗？"
@@ -521,11 +581,11 @@ msgstr "左右切换颜色\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "重置颜色为默认状态（黑色为左，白色为右）"
 
-msgid "Left tool options"
-msgstr "左键工具选项"
+msgid "Left tool"
+msgstr "左键工具"
 
-msgid "Right tool options"
-msgstr "右键工具选项"
+msgid "Right tool"
+msgstr "右键工具"
 
 msgid "Left pixel indicator"
 msgstr "左键工具指示"
@@ -575,23 +635,23 @@ msgstr "网格颜色："
 msgid "A color of the grid"
 msgstr "网格颜色"
 
-msgid "Checker size"
-msgstr ""
+msgid "Checker size:"
+msgstr "检查器大小："
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "透明检查器背景大小"
 
-msgid "Checker color 1"
-msgstr ""
+msgid "Checker color 1:"
+msgstr "检查器颜色 1："
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "透明检查器背景的第一个颜色"
 
-msgid "Checker color 2"
-msgstr ""
+msgid "Checker color 2:"
+msgstr "检查器颜色 2："
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "透明检查器背景的第二个颜色"
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
@@ -626,17 +686,23 @@ msgstr "0：画笔本身的颜色，100：当前选择的颜色"
 msgid "Fill area:"
 msgstr "填充区域:"
 
-msgid "Area of the same color"
-msgstr "相同颜色区域"
-
-msgid "All pixels of the same color"
-msgstr "所有相同颜色的像素"
-
 msgid "Same color area"
 msgstr "相同颜色区域"
 
 msgid "Same color pixels"
 msgstr "相同颜色像素"
+
+msgid "Fill with:"
+msgstr "填充使用："
+
+msgid "Selected Color"
+msgstr "选择颜色"
+
+msgid "Pattern"
+msgstr "模式"
+
+msgid "Offset"
+msgstr "偏移"
 
 msgid "Lighten"
 msgstr "减淡"
@@ -694,9 +760,6 @@ msgstr "垂直"
 
 msgid "Current frame:"
 msgstr "当前帧:"
-
-msgid "Current frame: 1/1"
-msgstr "当前帧: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -788,6 +851,9 @@ msgstr "向右移动"
 
 msgid "Add Frame Tag"
 msgstr "添加帧标签"
+
+msgid "Link Cel"
+msgstr "取消链接单元"
 
 msgid "Unlink Cel"
 msgstr "取消链接单元"
@@ -911,11 +977,32 @@ msgstr "撤消: 删除自定义画笔"
 msgid "Redo: Delete Custom Brush"
 msgstr "重做: 删除自定义画笔"
 
+msgid "Undo: Modify Frame Tag"
+msgstr "撤销：修改帧标签"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "重做：修改帧标签"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "撤销：删除帧标签"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "重做：删除帧标签"
+
 msgid "Move Guide"
 msgstr "移除辅助线"
 
 msgid "File saved"
 msgstr "文件已保存"
+
+msgid "File autosaved"
+msgstr "文件已自动保存"
+
+msgid "File failed to open"
+msgstr "文件打开失败"
+
+msgid "File failed to save"
+msgstr "文件保存失败"
 
 msgid "File exported"
 msgstr "文件已导出"
@@ -931,6 +1018,9 @@ msgstr "调色板名称:"
 
 msgid "Color Name:"
 msgstr "颜色名称:"
+
+msgid "Use current left & right colors"
+msgstr "使用当前左侧和右侧颜色"
 
 msgid "Create a new empty palette?"
 msgstr "创建一个新的空调色板?"
@@ -950,26 +1040,20 @@ msgstr "编辑调色板"
 msgid "Patrons:"
 msgstr "赞助:"
 
-msgid "Changes"
-msgstr "更改"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "想要在启动屏幕上显示您的名字或公司吗？"
 
-msgid "Platinum Sponsor"
-msgstr "白金赞助商"
+msgid "Become a Platinum Sponsor"
+msgstr "成为白金赞助商"
 
-msgid "Gold Sponsors"
-msgstr "金牌赞助商"
+msgid "Become a Gold Sponsor"
+msgstr "成为赞助商"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "白金赞助商占位符"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "金牌赞助商占位符"
+msgid "Become a Patron"
+msgstr "成为赞助者"
 
 msgid "Don't show again"
 msgstr "不再显示"
-
-msgid "Take this spot!"
-msgstr "获取该位置!"
 
 msgid "Image Options"
 msgstr "图像选项"
@@ -1054,4 +1138,62 @@ msgstr "右键工具："
 
 msgid "A tool assigned to the right mouse button"
 msgstr "分配给鼠标右键的工具"
+
+msgid "Cannot find last project file."
+msgstr "无法找到最后一个项目文件。"
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "您尚未在 Pixelorama 中保存或打开任何项目！"
+
+msgid "Open Last Project"
+msgstr "打开最后项目"
+
+msgid "Open last project..."
+msgstr "打开最后一个项目..."
+
+msgid "Open last project on startup"
+msgstr "在启动时打开最后一个项目"
+
+msgid "Opens last opened project on startup"
+msgstr "在启动时打开最后打开的项目"
+
+msgid "Enable autosave"
+msgstr "启用自动保存"
+
+msgid "Autosave interval:"
+msgstr "自动保存间隔："
+
+msgid "minute(s)"
+msgstr "分钟"
+
+msgid "Create new directory for each frame tag"
+msgstr "为每个帧标签创建新的目录"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同目录"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "找到了 %s 的自动备份。你想要重新加载吗？"
+
+msgid "Backup reloaded"
+msgstr "重新加载备份"
+
+msgid "Remove currently selected palette"
+msgstr "删除当前所选调色板"
+
+msgid "You can't remove more palettes!"
+msgstr "您无法删除更多调色板！"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "无法删除调色板，因为它不存在！"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "删除调色板时发生错误！ 错误代码：%s"
 

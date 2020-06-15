@@ -2,7 +2,7 @@ extends Button
 
 const RULER_WIDTH := 16
 
-var font := preload("res://Assets/Fonts/Roboto-Small.tres")
+var font := preload("res://assets/fonts/Roboto-Small.tres")
 var major_subdivision := 2
 var minor_subdivision := 4
 
@@ -43,14 +43,14 @@ func _draw() -> void:
 	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Vector2.ZERO)
 	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Global.main_viewport.rect_size)
 
-	for i in range(ceil(first.x), ceil(last.x)):
-		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0))
-		if i % (major_subdivision * minor_subdivision) == 0:
+	for j in range(ceil(first.x), ceil(last.x)):
+		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(j, 0))
+		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(position.x + RULER_WIDTH, 0), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
-			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(i, 0)).x
+			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(j, 0)).x
 			draw_string(font, Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 4), str(int(val)))
 		else:
-			if i % minor_subdivision == 0:
+			if j % minor_subdivision == 0:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)
 			else:
 				draw_line(Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66), Vector2(position.x + RULER_WIDTH, RULER_WIDTH), Color.white)

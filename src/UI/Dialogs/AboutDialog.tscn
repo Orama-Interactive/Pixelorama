@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/AboutDialog.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/icons/icon_64x64.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Fonts/Roboto-Italic.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/Graphics/splash_screen/orama_64x64.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Fonts/Roboto-Small.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/graphics/icons/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Roboto-Italic.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=5]
 
 [node name="AboutDialog" type="WindowDialog"]
-margin_right = 512.0
-margin_bottom = 288.0
-rect_min_size = Vector2( 512, 288 )
+margin_right = 600.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 600, 400 )
 window_title = "About Pixelorama"
 resizable = true
 script = ExtResource( 1 )
@@ -24,24 +24,26 @@ margin_bottom = -8.0
 alignment = 1
 
 [node name="IconsButtons" type="HBoxContainer" parent="AboutUI"]
-margin_right = 488.0
+margin_right = 576.0
 margin_bottom = 64.0
 
 [node name="PixeloramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
 margin_right = 64.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 2 )
+expand = true
 
 [node name="SloganAndLinks" type="CenterContainer" parent="AboutUI/IconsButtons"]
 margin_left = 68.0
-margin_right = 420.0
+margin_right = 508.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AboutUI/IconsButtons/SloganAndLinks"]
-margin_left = 64.0
+margin_left = 108.0
 margin_top = 12.0
-margin_right = 288.0
+margin_right = 332.0
 margin_bottom = 51.0
 
 [node name="Pixelorama" type="Label" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
@@ -77,44 +79,44 @@ mouse_default_cursor_shape = 2
 text = "Donate"
 
 [node name="OramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
-margin_left = 424.0
-margin_right = 488.0
+margin_left = 512.0
+margin_right = 576.0
 margin_bottom = 64.0
 texture = ExtResource( 4 )
 
 [node name="HSeparator" type="HSeparator" parent="AboutUI"]
 margin_top = 68.0
-margin_right = 488.0
+margin_right = 576.0
 margin_bottom = 72.0
 
 [node name="Credits" type="HSplitContainer" parent="AboutUI"]
 margin_top = 76.0
-margin_right = 488.0
-margin_bottom = 233.0
+margin_right = 576.0
+margin_bottom = 345.0
 size_flags_vertical = 3
 
 [node name="Groups" type="Tree" parent="AboutUI/Credits"]
 margin_right = 120.0
-margin_bottom = 157.0
+margin_bottom = 269.0
 rect_min_size = Vector2( 120, 120 )
 custom_constants/item_margin = -2
 hide_root = true
 
 [node name="Developers" type="VBoxContainer" parent="AboutUI/Credits"]
 margin_left = 132.0
-margin_right = 488.0
-margin_bottom = 157.0
+margin_right = 576.0
+margin_bottom = 269.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="AboutUI/Credits/Developers"]
-margin_right = 356.0
+margin_right = 444.0
 margin_bottom = 14.0
 text = "Development Team"
 
 [node name="DeveloperTree" type="Tree" parent="AboutUI/Credits/Developers"]
 margin_top = 18.0
-margin_right = 356.0
-margin_bottom = 157.0
+margin_right = 444.0
+margin_bottom = 269.0
 size_flags_vertical = 3
 custom_constants/item_margin = -2
 custom_constants/button_margin = 2
@@ -181,21 +183,21 @@ custom_constants/item_margin = -2
 hide_root = true
 
 [node name="HSeparator2" type="HSeparator" parent="AboutUI"]
-margin_top = 237.0
-margin_right = 488.0
-margin_bottom = 241.0
+margin_top = 349.0
+margin_right = 576.0
+margin_bottom = 353.0
 
 [node name="MadeBy" type="Label" parent="AboutUI"]
-margin_top = 245.0
-margin_right = 488.0
-margin_bottom = 259.0
+margin_top = 357.0
+margin_right = 576.0
+margin_bottom = 371.0
 text = "Developed by Orama Interactive"
 align = 1
 
 [node name="Copyright" type="Label" parent="AboutUI"]
-margin_top = 263.0
-margin_right = 488.0
-margin_bottom = 276.0
+margin_top = 375.0
+margin_right = 576.0
+margin_bottom = 388.0
 custom_fonts/font = ExtResource( 5 )
 text = "Copyright 2019-2020 Orama Interactive"
 align = 1

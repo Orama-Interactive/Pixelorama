@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/PreviewDialog.gd" type="Script" id=1]
+
+[node name="PreviewDialog" type="ConfirmationDialog"]
+margin_right = 200.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 400, 70 )
+popup_exclusive = true
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 308.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+margin_left = 42.0
+margin_right = 342.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]

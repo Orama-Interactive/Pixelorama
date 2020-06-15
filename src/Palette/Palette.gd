@@ -3,6 +3,8 @@ extends Reference
 
 
 var name : String = "Custom_Palette"
+# Its purpose is to store pallete source path to enable removing it in the future.
+var source_path : String
 var colors : Array = []
 var comments : String = ""
 var editable : bool = true
@@ -93,6 +95,7 @@ func save_to_file(path : String) -> void:
 	file.open(path, File.WRITE)
 	file.store_string(_serialize())
 	file.close()
+	source_path = path
 
 
 func duplicate(): # -> Palette
@@ -140,8 +143,9 @@ func deserialize(input_string : String): # -> Palette
 				result.comments = data.comments
 			if data.has("editable"):
 				result.editable = data.editable
-			for color_data in data.colors:
-				result.add_color(color_data.data, color_data.name)
+			if data.has("colors"):
+				for color_data in data.colors:
+					result.add_color(color_data.data, color_data.name)
 
 	return result
 
@@ -155,7 +159,13 @@ func load_from_file(path : String): # -> Palette
 
 		var text : String = file.get_as_text()
 		result = deserialize(text)
+		result.source_path = path
 
 		file.close()
 
 	return result
+
+
+func remove_file() -> int:
+	var dir = Directory.new()
+	return dir.remove(source_path)

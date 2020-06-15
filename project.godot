@@ -9,15 +9,40 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "AnimationTag",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationTag.gd"
+}, {
 "base": "Node2D",
 "class": "Canvas",
 "language": "GDScript",
 "path": "res://src/Canvas.gd"
 }, {
+"base": "Reference",
+"class": "Cel",
+"language": "GDScript",
+"path": "res://src/Classes/Cel.gd"
+}, {
+"base": "Reference",
+"class": "Drawer",
+"language": "GDScript",
+"path": "res://src/Classes/Drawers.gd"
+}, {
+"base": "Reference",
+"class": "Frame",
+"language": "GDScript",
+"path": "res://src/Classes/Frame.gd"
+}, {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
 "path": "res://src/UI/Rulers/Guides.gd"
+}, {
+"base": "Reference",
+"class": "Layer",
+"language": "GDScript",
+"path": "res://src/Classes/Layer.gd"
 }, {
 "base": "Button",
 "class": "LayerButton",
@@ -33,13 +58,24 @@ _global_script_classes=[ {
 "class": "PaletteColor",
 "language": "GDScript",
 "path": "res://src/Palette/PaletteColor.gd"
+}, {
+"base": "Reference",
+"class": "Project",
+"language": "GDScript",
+"path": "res://src/Classes/Project.gd"
 } ]
 _global_script_class_icons={
+"AnimationTag": "",
 "Canvas": "",
+"Cel": "",
+"Drawer": "",
+"Frame": "",
 "Guide": "",
+"Layer": "",
 "LayerButton": "",
 "Palette": "",
-"PaletteColor": ""
+"PaletteColor": "",
+"Project": ""
 }
 
 [application]
@@ -48,18 +84,19 @@ config/name="Pixelorama"
 config/description="A free & open-source 2D sprite editor"
 run/main_scene="res://src/Main.tscn"
 run/low_processor_mode=true
-boot_splash/image="res://Assets/Graphics/splash.png"
+boot_splash/image="res://assets/graphics/splash.png"
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
-config/icon="res://Assets/Graphics/icons/icon.png"
-config/macos_native_icon="res://Assets/Graphics/icons/icon.icns"
-config/windows_native_icon="res://Assets/Graphics/icons/icon.ico"
-config/Version="v0.7"
+config/icon="res://assets/graphics/icons/icon.png"
+config/macos_native_icon="res://assets/graphics/icons/icon.icns"
+config/windows_native_icon="res://assets/graphics/icons/icon.ico"
+config/Version="v0.8-dev"
 
 [autoload]
 
 Global="*res://src/Autoload/Global.gd"
 Import="*res://src/Autoload/Import.gd"
 OpenSave="*res://src/Autoload/OpenSave.gd"
+DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
 
 [debug]
 
@@ -250,11 +287,6 @@ save_file_as={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
-import_file={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
- ]
-}
 export_file={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
@@ -355,10 +387,20 @@ play_forward={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777248,"unicode":0,"echo":false,"script":null)
  ]
 }
+zen_mode={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777253,"unicode":0,"echo":false,"script":null)
+ ]
+}
+open_docs={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777255,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/fr_FR.po", "res://Translations/it_IT.po", "res://Translations/pl_PL.po", "res://Translations/ru_RU.po", "res://Translations/es_ES.po", "res://Translations/zh_CN.po", "res://Translations/lv_LV.po", "res://Translations/eo_UY.po" )
+translations=PoolStringArray( "res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/fr_FR.po", "res://Translations/it_IT.po", "res://Translations/pl_PL.po", "res://Translations/ru_RU.po", "res://Translations/es_ES.po", "res://Translations/zh_CN.po", "res://Translations/lv_LV.po", "res://Translations/eo_UY.po", "res://Translations/cs_CZ.po", "res://Translations/id_ID.po" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]

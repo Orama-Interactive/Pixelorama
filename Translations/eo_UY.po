@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-04-18 15:38\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -52,6 +52,9 @@ msgstr "Efektoj"
 msgid "Help"
 msgstr "Helpo"
 
+msgid "New"
+msgstr "Nova"
+
 msgid "New..."
 msgstr "Nova..."
 
@@ -64,8 +67,11 @@ msgstr "Konservi..."
 msgid "Save as..."
 msgstr "Konservi kiel..."
 
+msgid "Import"
+msgstr "Enporti"
+
 msgid "Import..."
-msgstr ""
+msgstr "Enporti..."
 
 msgid "Import PNG..."
 msgstr "Enporti PNGn..."
@@ -74,10 +80,10 @@ msgid "Export"
 msgstr "Elporti"
 
 msgid "Export..."
-msgstr ""
+msgstr "Elporti..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Elporti kiel..."
 
 msgid "Export PNG..."
 msgstr "Elporti PNGn..."
@@ -158,10 +164,10 @@ msgid "File Exists, Overwrite?"
 msgstr "Dosiero ekzistas, ĉu rekonservi?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Dosiero %s jam ekzistas. Ĉu rekonservi?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Dosieruja vojo aŭ dosiera nomo estas malĝusta!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -169,19 +175,28 @@ msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
 "Kodo de eraro: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Kadro"
+
+msgid "Frames:"
+msgstr "Kadroj:"
+
+msgid "All Frames"
+msgstr "Ĉiuj kadroj"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animacio"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Antaŭvido:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Kadro:"
+
+msgid "Orientation:"
+msgstr "Orientiĝo:"
 
 msgid "Browse"
 msgstr ""
@@ -199,22 +214,22 @@ msgid "Select Current Folder"
 msgstr ""
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Malfermi dosierujon"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Ĉiuj kadroj kiel multaj dosieroj"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Ĉiuj kadroj kiel animacio de unu dosiero"
 
 msgid "Background:"
-msgstr ""
+msgstr "Fono:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direkto:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Antaŭen"
 
 msgid "Backwards"
 msgstr ""
@@ -226,13 +241,13 @@ msgid "Columns"
 msgstr "Kolumnoj"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolumnoj:"
 
 msgid "Rows"
 msgstr "Vicoj"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Vicoj:"
 
 msgid "Path:"
 msgstr "Vojo:"
@@ -271,7 +286,7 @@ msgid "Themes"
 msgstr "Temoj"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Kanvaso"
 
 msgid "Shortcuts"
 msgstr ""
@@ -306,14 +321,17 @@ msgstr "Malhela"
 msgid "Gray"
 msgstr "Griza"
 
-msgid "Gold"
-msgstr "Ora"
+msgid "Blue"
+msgstr "Blua"
+
+msgid "Caramel"
+msgstr "Karamela"
 
 msgid "Light"
 msgstr "Hela"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Inverti kolorojn"
 
 msgid "Desaturation"
 msgstr ""
@@ -324,16 +342,40 @@ msgstr "Konturoj"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
-msgid "Diagonal"
+msgid "Adjust HSV"
 msgstr ""
+
+msgid "Type:"
+msgstr "Tipo:"
+
+msgid "Angle:"
+msgstr "Angulo:"
+
+msgid "Hue"
+msgstr "Nuanco"
+
+msgid "Saturation"
+msgstr "Satureco"
+
+msgid "Value"
+msgstr "Valoro"
+
+msgid "Apply"
+msgstr "Apliki"
+
+msgid "Diagonal"
+msgstr "Diagonala"
 
 msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Dikeco:"
 
 msgid "View Splash Screen"
+msgstr ""
+
+msgid "Online Docs"
 msgstr ""
 
 msgid "Issue Tracker"
@@ -346,7 +388,7 @@ msgid "About Pixelorama"
 msgstr "Pri Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Ellaborita de Orama Interactive"
 
 msgid "Website"
 msgstr "Retejo"
@@ -405,6 +447,18 @@ msgstr "Hispana"
 msgid "Esperanto"
 msgstr ""
 
+msgid "Indonesian"
+msgstr ""
+
+msgid "Czech"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Turkish"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Teamo de ellaboro"
 
@@ -431,6 +485,12 @@ msgstr "kopii"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Ĉu vi vere volas eliri Pixeloraman?"
+
+msgid "Unsaved Image"
+msgstr "Nekonservita bildo"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Vi havas nekonservitajn ŝanĝojn. Se vi daŭrigos, la progreso de vi farita perdiĝos."
 
 msgid "Save before exiting?"
 msgstr "Ĉu konservi antaŭ elirado?"
@@ -502,11 +562,11 @@ msgstr ""
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
 
-msgid "Left tool options"
-msgstr "Agordoj de maldekstra ilo"
+msgid "Left tool"
+msgstr "Maldekstra ilo"
 
-msgid "Right tool options"
-msgstr "Agordoj de dekstra ilo"
+msgid "Right tool"
+msgstr "Dekstra ilo"
 
 msgid "Left pixel indicator"
 msgstr "Indikatoro de maldekstra rastrumero"
@@ -556,19 +616,19 @@ msgstr ""
 msgid "A color of the grid"
 msgstr ""
 
-msgid "Checker size"
+msgid "Checker size:"
 msgstr ""
 
 msgid "Size of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 1"
+msgid "Checker color 1:"
 msgstr ""
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
-msgid "Checker color 2"
+msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
@@ -607,16 +667,22 @@ msgstr ""
 msgid "Fill area:"
 msgstr "Plenumi areon:"
 
-msgid "Area of the same color"
-msgstr ""
-
-msgid "All pixels of the same color"
-msgstr ""
-
 msgid "Same color area"
 msgstr ""
 
 msgid "Same color pixels"
+msgstr ""
+
+msgid "Fill with:"
+msgstr ""
+
+msgid "Selected Color"
+msgstr ""
+
+msgid "Pattern"
+msgstr "Ŝablono"
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
@@ -626,7 +692,7 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Sumo:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
@@ -650,7 +716,7 @@ msgid "Zoom out"
 msgstr ""
 
 msgid "Options:"
-msgstr ""
+msgstr "Agordoj:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -671,12 +737,9 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikala"
 
 msgid "Current frame:"
-msgstr ""
-
-msgid "Current frame: 1/1"
 msgstr ""
 
 msgid "Jump to the first frame\n"
@@ -726,10 +789,10 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Estintaj kadroj"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Estontaj kadroj"
 
 msgid "Manage frame tags"
 msgstr ""
@@ -742,16 +805,16 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Blua-ruĝa modo"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Aldoni novan kadron"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Forigi kadron"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Kloni kadron"
 
 msgid "Move Left"
 msgstr "Movi maldekstren"
@@ -760,6 +823,9 @@ msgid "Move Right"
 msgstr "Movi dekstren"
 
 msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Link Cel"
 msgstr ""
 
 msgid "Unlink Cel"
@@ -772,7 +838,7 @@ msgid "Layers"
 msgstr "Tavoloj"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Krei novan tavolon"
 
 msgid "Remove current layer"
 msgstr ""
@@ -796,7 +862,7 @@ msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Fiksi/malfiksi tavolon"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -809,13 +875,13 @@ msgid "Palettes"
 msgstr "Paletroj"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Aldoni novan paletron"
 
 msgid "Edit currently selected palette"
 msgstr ""
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Elekti paletron"
 
 msgid "Undo: Draw"
 msgstr "Malfaritas: Pentri"
@@ -883,11 +949,32 @@ msgstr "Malfaritas: Forigi propran penikon"
 msgid "Redo: Delete Custom Brush"
 msgstr "Refaritas: Forigi propran penikon"
 
+msgid "Undo: Modify Frame Tag"
+msgstr ""
+
+msgid "Redo: Modify Frame Tag"
+msgstr ""
+
+msgid "Undo: Delete Frame Tag"
+msgstr ""
+
+msgid "Redo: Delete Frame Tag"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Movi direktlinion"
 
 msgid "File saved"
 msgstr "Dosiero konservitas"
+
+msgid "File autosaved"
+msgstr ""
+
+msgid "File failed to open"
+msgstr "Dosiero ne sukcesis malfermiĝi"
+
+msgid "File failed to save"
+msgstr "Dosiero ne sukcesis konservi"
 
 msgid "File exported"
 msgstr "Dosiero elportitas"
@@ -903,6 +990,9 @@ msgstr "Nomo de paletro:"
 
 msgid "Color Name:"
 msgstr "Nomo de koloro:"
+
+msgid "Use current left & right colors"
+msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Ĉu krei novan malplenan paletron?"
@@ -920,55 +1010,49 @@ msgid "Edit Palette"
 msgstr "Redakti paletron"
 
 msgid "Patrons:"
+msgstr "Patronoj:"
+
+msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
-msgid "Changes"
-msgstr "Ŝanĝoj"
-
-msgid "Platinum Sponsor"
+msgid "Become a Platinum Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors"
-msgstr "Oraj sponsoroj"
-
-msgid "Platinum Sponsor Placeholder"
+msgid "Become a Gold Sponsor"
 msgstr ""
 
-msgid "Gold Sponsors Placeholder"
-msgstr ""
+msgid "Become a Patron"
+msgstr "Iĝi Patrono"
 
 msgid "Don't show again"
 msgstr "Ne montri denove"
-
-msgid "Take this spot!"
-msgstr ""
 
 msgid "Image Options"
 msgstr "Bildagordoj"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Defaŭlta larĝo:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Defaŭlta larĝo de nova bildo"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Defaŭlta alto:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Defaŭlta alto de nova bildo"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Defaŭlta plenigkoloro:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Defaŭlta fona koloro de nova bildo"
 
 msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "Ŝablonoj:"
 
 msgid "Preset"
 msgstr ""
@@ -977,7 +1061,7 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Defaŭta"
 
 msgid "Custom"
 msgstr ""
@@ -989,41 +1073,99 @@ msgid "Zoom"
 msgstr ""
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Kolora elektilo"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Krajono"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Skrapileto"
 
 msgid "Bucket"
 msgstr ""
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Lumigi/Mallumigi"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Interŝanĝi kolorojn"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Meti la ligilon"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Premu klavon aŭ kombinaĵon de klavoj por meti la ligilon"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Jam asignitas"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Maldekstra ilo:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Ilo, asignita al la musa maldekstra butono"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Dekstra ilo:"
 
 msgid "A tool assigned to the right mouse button"
+msgstr "Ilo, asignita al la musa dekstra butono"
+
+msgid "Cannot find last project file."
+msgstr "Ne povas trovi dosieron de la lasta projekto."
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Vi ankoraŭ ne konservis aŭ malfermis iun ajn projekton en Pixelorama!"
+
+msgid "Open Last Project"
+msgstr "Malfermi lastan projekton"
+
+msgid "Open last project..."
+msgstr "Malfermi lastan projekton..."
+
+msgid "Open last project on startup"
+msgstr "Malfermi lastan projekton dum startigo"
+
+msgid "Opens last opened project on startup"
+msgstr "Malfermas lastan apertigitan projekton dum startigo"
+
+msgid "Enable autosave"
+msgstr "Ŝalti aŭtokonservadon"
+
+msgid "Autosave interval:"
+msgstr "Aŭtokonserva intervalo:"
+
+msgid "minute(s)"
+msgstr "minuto(j)"
+
+msgid "Create new directory for each frame tag"
 msgstr ""
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr ""
+
+msgid "Close"
+msgstr "Fermi"
+
+msgid "Delete"
+msgstr "Forigi"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr "Vi ne povas forigi pli da paletroj!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Ne povas forigi la paletron, ĉar ĝi ne ekzistas!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Eraro okazis dum la paletra forigado! Kodo de eraro: %s"
 

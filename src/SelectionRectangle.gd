@@ -20,24 +20,24 @@ func _ready() -> void:
 
 
 func _process(_delta : float) -> void:
-	if Global.layers[Global.current_layer][2]:
+	if Global.current_project.layers[Global.current_project.current_layer].locked:
 		return
 	var mouse_pos: Vector2 = get_local_mouse_position() - Global.canvas.location
 	var mouse_pos_floored := mouse_pos.floor()
 	var start_pos := polygon[0]
 	var end_pos := polygon[2]
-	var current_layer_index : int = Global.current_layer
-	var layer : Image = Global.canvas.layers[current_layer_index][0]
+	var current_layer_index : int = Global.current_project.current_layer
+	var layer : Image = Global.current_project.frames[Global.current_project.current_frame].cels[current_layer_index].image
 
 	if end_pos == start_pos:
 		visible = false
 	else:
 		visible = true
 
-	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, polygon[0], polygon[2]) and Global.selected_pixels.size() > 0 and (Global.current_left_tool == "RectSelect" or Global.current_right_tool == "RectSelect"):
+	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, polygon[0], polygon[2]) and Global.current_project.selected_pixels.size() > 0 and (Global.current_tools[0] == Global.Tools.RECTSELECT or Global.current_tools[1] == Global.Tools.RECTSELECT):
 		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_pressed("right_mouse")):
+		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_just_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_just_pressed("right_mouse")):
 			# Begin dragging
 			is_dragging = true
 			if Input.is_key_pressed(KEY_SHIFT):
@@ -53,11 +53,11 @@ func _process(_delta : float) -> void:
 				img.unlock()
 				img.resize(polygon[2].x - polygon[0].x, polygon[2].y - polygon[0].y, 0)
 				img.lock()
-				for i in range(Global.selected_pixels.size()):
-					var curr_px = Global.selected_pixels[i]
-					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
+				for i in range(Global.current_project.selected_pixels.size()):
+					var curr_px = Global.current_project.selected_pixels[i]
+					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.current_project.size):
 						orig_colors.append(layer.get_pixelv(curr_px)) # Color of pixel
-						var px = curr_px - Global.selected_pixels[0]
+						var px = curr_px - Global.current_project.selected_pixels[0]
 						img.set_pixelv(px, orig_colors[i])
 						layer.set_pixelv(curr_px, Color(0, 0, 0, 0))
 					else: # If part of selection is outside canvas
@@ -66,13 +66,11 @@ func _process(_delta : float) -> void:
 			tex.create_from_image(img, 0)
 			update()
 
-			# Makes line2d invisible
-			Global.canvas.line_2d.default_color = Color(0, 0, 0, 0)
 	else:
-		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_ARROW
+		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 	if is_dragging:
-		if (Global.current_left_tool == "RectSelect" && Input.is_action_pressed("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_pressed("right_mouse")):
+		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_pressed("right_mouse")):
 			# Drag
 			start_pos.x = orig_x + mouse_pos_floored.x
 			end_pos.x = diff_x + mouse_pos_floored.x
@@ -84,14 +82,14 @@ func _process(_delta : float) -> void:
 			polygon[2] = end_pos
 			polygon[3] = Vector2(start_pos.x, end_pos.y)
 
-		if (Global.current_left_tool == "RectSelect" && Input.is_action_just_released("left_mouse")) || (Global.current_right_tool == "RectSelect" && Input.is_action_just_released("right_mouse")):
+		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_just_released("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_just_released("right_mouse")):
 			# Release Drag
 			is_dragging = false
 			if move_pixels:
 				for i in range(orig_colors.size()):
 					if orig_colors[i].a > 0:
-						var px = polygon[0] + Global.selected_pixels[i] - Global.selected_pixels[0]
-						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.canvas.size):
+						var px = polygon[0] + Global.current_project.selected_pixels[i] - Global.current_project.selected_pixels[0]
+						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.current_project.size):
 							layer.set_pixelv(px, orig_colors[i])
 				Global.canvas.update_texture(current_layer_index)
 				img.fill(Color(0, 0, 0, 0))
@@ -99,17 +97,14 @@ func _process(_delta : float) -> void:
 				update()
 
 			orig_colors.clear()
-			Global.selected_pixels.clear()
+			Global.current_project.selected_pixels.clear()
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					Global.selected_pixels.append(Vector2(xx, yy))
+					Global.current_project.selected_pixels.append(Vector2(xx, yy))
 
 			Global.canvas.handle_redo("Rectangle Select") # Redo
 
-			# Makes line2d visible
-			Global.canvas.line_2d.default_color = Color.darkgray
-
-	if Global.selected_pixels.size() > 0:
+	if Global.current_project.selected_pixels.size() > 0:
 		# Handle copy
 		if Input.is_action_just_pressed("copy"):
 			# Save as custom brush
@@ -118,7 +113,7 @@ func _process(_delta : float) -> void:
 			if brush_img.is_invisible():
 				return
 			brush_img = brush_img.get_rect(brush_img.get_used_rect()) # Save only the visible pixels
-			Global.custom_brushes.append(brush_img)
+			Global.current_project.brushes.append(brush_img)
 			Global.create_brush_button(brush_img)
 
 			# Have it in the clipboard so it can be pasted later
@@ -135,7 +130,7 @@ func _process(_delta : float) -> void:
 			Global.canvas.handle_undo("Draw")
 			for xx in range(start_pos.x, end_pos.x):
 				for yy in range(start_pos.y, end_pos.y):
-					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.canvas.size):
+					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.current_project.size):
 						layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
 			Global.canvas.handle_redo("Draw")
 

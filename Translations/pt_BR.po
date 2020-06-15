@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-04-18 15:39\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,6 +52,9 @@ msgstr "Efeitos"
 msgid "Help"
 msgstr "Ajuda"
 
+msgid "New"
+msgstr "Novo"
+
 msgid "New..."
 msgstr "Novo..."
 
@@ -63,6 +66,9 @@ msgstr "Salvar..."
 
 msgid "Save as..."
 msgstr "Salvar como..."
+
+msgid "Import"
+msgstr "Importar"
 
 msgid "Import..."
 msgstr "Importar..."
@@ -107,10 +113,10 @@ msgid "Clear Selection"
 msgstr "Limpar Seleção"
 
 msgid "Flip Horizontal"
-msgstr "Virar Horizontalmente"
+msgstr "Inverter Horizontalmente"
 
 msgid "Flip Vertical"
-msgstr "Virar Verticalmente"
+msgstr "Inverter Verticalmente"
 
 msgid "Preferences"
 msgstr "Preferências"
@@ -161,7 +167,7 @@ msgid "File %s already exists. Overwrite?"
 msgstr "O arquivo %s já existe. Substituir?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Caminho do diretório ou nome do arquivo inválido!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -171,6 +177,12 @@ msgstr "Impossível carregar o arquivo '%s'.\n"
 msgid "Frame"
 msgstr "Quadro"
 
+msgid "Frames:"
+msgstr ""
+
+msgid "All Frames"
+msgstr ""
+
 msgid "Spritesheet"
 msgstr ""
 
@@ -178,13 +190,16 @@ msgid "Animation"
 msgstr "Animação"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Prévia:"
 
 msgid "Frame:"
 msgstr "Quadro:"
 
+msgid "Orientation:"
+msgstr "Orientação:"
+
 msgid "Browse"
-msgstr ""
+msgstr "Localizar"
 
 msgid "Resize:"
 msgstr "Redimensionar:"
@@ -205,13 +220,13 @@ msgid "All frames as multiple files"
 msgstr "Todos os quadros como vários arquivos"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Todos os quadros como animação em um único arquivo"
 
 msgid "Background:"
-msgstr ""
+msgstr "Plano de fundo:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direção:"
 
 msgid "Forward"
 msgstr "Avançar"
@@ -220,7 +235,7 @@ msgid "Backwards"
 msgstr "Voltar"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Pingue-pongue"
 
 msgid "Columns"
 msgstr "Colunas"
@@ -250,13 +265,13 @@ msgid "Interpolation:"
 msgstr "Interpolação:"
 
 msgid "Nearest"
-msgstr "Próximo"
+msgstr "Mais Próximo"
 
 msgid "Bilinear"
 msgstr "Bilinear"
 
 msgid "Cubic"
-msgstr "Cúbico"
+msgstr "Cúbica"
 
 msgid "Trilinear"
 msgstr "Trilinear"
@@ -271,7 +286,7 @@ msgid "Themes"
 msgstr "Temas"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Tela"
 
 msgid "Shortcuts"
 msgstr "Atalhos"
@@ -280,7 +295,7 @@ msgid "Smooth Zoom"
 msgstr "Ampliar Suave"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Adiciona uma transição mais suave ao aumentar ou diminuir o zoom"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilidade de pressão do Tablet:"
@@ -306,8 +321,11 @@ msgstr "Escuro"
 msgid "Gray"
 msgstr "Cinza"
 
-msgid "Gold"
-msgstr "Ouro"
+msgid "Blue"
+msgstr "Azul"
+
+msgid "Caramel"
+msgstr "Caramelo"
 
 msgid "Light"
 msgstr "Claro"
@@ -322,7 +340,28 @@ msgid "Outline"
 msgstr "Contorno"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ajustar Matiz/Saturação/Valor"
+
+msgid "Adjust HSV"
+msgstr "Ajustar MSV"
+
+msgid "Type:"
+msgstr "Tipo:"
+
+msgid "Angle:"
+msgstr "Ângulo:"
+
+msgid "Hue"
+msgstr "Matriz"
+
+msgid "Saturation"
+msgstr "Saturação"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Apply"
+msgstr "Aplique"
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -335,6 +374,9 @@ msgstr "Espessura:"
 
 msgid "View Splash Screen"
 msgstr "Ver Tela de Abertura"
+
+msgid "Online Docs"
+msgstr "Documentação Online"
 
 msgid "Issue Tracker"
 msgstr "Rastreador de problemas"
@@ -405,6 +447,18 @@ msgstr "Espanhol"
 msgid "Esperanto"
 msgstr "Esperanto"
 
+msgid "Indonesian"
+msgstr "Indonésio"
+
+msgid "Czech"
+msgstr "Tcheco"
+
+msgid "Arabic"
+msgstr "Árabe"
+
+msgid "Turkish"
+msgstr "Turco"
+
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
 
@@ -431,6 +485,12 @@ msgstr "copiar"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Tem certeza que quer sair do Pixelorama?"
+
+msgid "Unsaved Image"
+msgstr "Imagem não salva"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Você tem alterações não salvas. Se você prosseguir, o progresso que você fez será perdido."
 
 msgid "Save before exiting?"
 msgstr "Salvar antes de sair?"
@@ -459,7 +519,9 @@ msgstr "Seleção Retangular\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -519,11 +581,11 @@ msgstr "Mudar as cores esquerda e direita\n"
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Redefina as cores para o seu estado padrão (preto para a esquerda, branco para a direita)"
 
-msgid "Left tool options"
-msgstr "Opções da ferramenta esquerda"
+msgid "Left tool"
+msgstr "Ferramenta da esquerda"
 
-msgid "Right tool options"
-msgstr "Opções da ferramente direita"
+msgid "Right tool"
+msgstr "Ferramenta da direita"
 
 msgid "Left pixel indicator"
 msgstr "Pixel indicador esquerdo"
@@ -538,61 +600,61 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Mostrar o indicador pixel do mouse direito ou o pincel na tela quando desenhando"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Mostrar ícone da ferramenta da esquerda"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Exibe um ícone da ferramenta da esquerda selecionada ao lado do cursor na tela"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Mostrar ícone da ferramenta da direita"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Exibe um ícone da ferramenta da direita selecionada ao lado do cursor na tela"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Cor das guias:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Cor das guias de régua exibidas na tela"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Largura da grade:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Define a distância entre linhas verticais da grade"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Altura da grade:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Define a distância entre linhas horizontais da grade"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Cor da grade:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "A cor da grade"
 
-msgid "Checker size"
-msgstr ""
+msgid "Checker size:"
+msgstr "Tamanho do quadriculado xadrez:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Tamanho do xadrez do fundo transparente"
 
-msgid "Checker color 1"
-msgstr ""
+msgid "Checker color 1:"
+msgstr "Cor 1 do xadrez:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Primeira cor do xadrez do fundo transparente"
 
-msgid "Checker color 2"
-msgstr ""
+msgid "Checker color 2:"
+msgstr "Cor 2 do xadrez:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Segunda cor do xadrez do fundo transparente"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Apenas predefinição personalizada pode ser modificada"
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -624,16 +686,22 @@ msgstr "0: Cor do próprio pincel, 100: A cor atualmente selecionada"
 msgid "Fill area:"
 msgstr "Área de preenchimento:"
 
-msgid "Area of the same color"
-msgstr "Área da mesma cor"
-
-msgid "All pixels of the same color"
-msgstr "Todos os pixels da mesma cor"
-
 msgid "Same color area"
-msgstr ""
+msgstr "Área de mesma cor"
 
 msgid "Same color pixels"
+msgstr "Pixels de mesma cor"
+
+msgid "Fill with:"
+msgstr "Preencher com:"
+
+msgid "Selected Color"
+msgstr "Cor selecionada"
+
+msgid "Pattern"
+msgstr "Padrão"
+
+msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
@@ -661,19 +729,19 @@ msgid "Mode:"
 msgstr "Modo:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Aumentar zoom"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Diminuir zoom"
 
 msgid "Options:"
 msgstr "Opções:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Ajustar à moldura"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Zoom 100%"
 
 msgid "Mirroring"
 msgstr "Espelhamento"
@@ -692,9 +760,6 @@ msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Quadro atual:"
-
-msgid "Current frame: 1/1"
-msgstr "Quadro atual: 1/1"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -727,10 +792,10 @@ msgstr "Pular para o último quadro\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Configurações do Onion Skinning"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Ativar/desativar Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -756,14 +821,15 @@ msgid "Future Frames"
 msgstr "Quadro Sucessores"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Gerenciar tags de quadro"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "A animação só é reproduzida em quadros de mesma tag"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Se selecionado, a animação é reproduzida apenas nos quadros que possuem a mesma tag.\n"
+"Caso contrário, a animação será reproduzida em todos os quadros, ignorando as tags."
 
 msgid "Blue-Red Mode"
 msgstr "Modo Azul-Vermelho"
@@ -786,8 +852,11 @@ msgstr "Mover para a Direita"
 msgid "Add Frame Tag"
 msgstr ""
 
+msgid "Link Cel"
+msgstr "Vincular célula"
+
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Desvincular célula"
 
 msgid "Layer"
 msgstr "Camada"
@@ -824,7 +893,8 @@ msgstr "Bloquear/desbloquear camada"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Ativar/desativar vínculo de células\n\n"
+"Células vinculadas estão sendo compartilhadas entre quadros"
 
 msgid "Palette"
 msgstr "Paleta"
@@ -907,11 +977,32 @@ msgstr "Desfazer: Deletar Pincel Customizado"
 msgid "Redo: Delete Custom Brush"
 msgstr "Refazer: Deletar Pincel Customizado"
 
+msgid "Undo: Modify Frame Tag"
+msgstr "Desfazer: Modificar Tag do Quadro"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Refazer: Modificar Tag do Quadro"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Desfazer: Excluir Tag do Quadro"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Refazer: Excluir Tag do Quadro"
+
 msgid "Move Guide"
 msgstr "Mover Guia"
 
 msgid "File saved"
 msgstr "Arquivo salvo"
+
+msgid "File autosaved"
+msgstr "Arquivo salvo automaticamente"
+
+msgid "File failed to open"
+msgstr "Arquivo falhou ao abrir"
+
+msgid "File failed to save"
+msgstr "Arquivo falhou ao salvar"
 
 msgid "File exported"
 msgstr "Arquivo exportado"
@@ -927,6 +1018,9 @@ msgstr "Nome da Paleta:"
 
 msgid "Color Name:"
 msgstr "Nome da Cor:"
+
+msgid "Use current left & right colors"
+msgstr "Use as cores esquerda e direita atuais"
 
 msgid "Create a new empty palette?"
 msgstr "Criar uma nova paleta vazia?"
@@ -946,59 +1040,53 @@ msgstr "Editar Paleta"
 msgid "Patrons:"
 msgstr "Patrões"
 
-msgid "Changes"
-msgstr "Mudanças"
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "Quer que seu nome ou sua empresa seja mostrado na tela de abertura?"
 
-msgid "Platinum Sponsor"
-msgstr "Patrocinador de Platina"
+msgid "Become a Platinum Sponsor"
+msgstr "Seja um Patrocinador Platina"
 
-msgid "Gold Sponsors"
-msgstr "Patrocinadores de Ouro"
+msgid "Become a Gold Sponsor"
+msgstr "Seja um Patrocinador Ouro"
 
-msgid "Platinum Sponsor Placeholder"
-msgstr "Espaço Reservado de Patrocinador de Platina"
-
-msgid "Gold Sponsors Placeholder"
-msgstr "Espaço Reservado de Patrocinadores de Ouro"
+msgid "Become a Patron"
+msgstr "Seja um Patrono"
 
 msgid "Don't show again"
 msgstr "Não mostrar de novo"
-
-msgid "Take this spot!"
-msgstr "Peque este lugar!"
 
 msgid "Image Options"
 msgstr "Opções de Imagem"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Largura padrão:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Largura padrão de uma nova imagem"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Altura padrão:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Altura padrão de uma nova imagem"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Cor de preenchimento padrão:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Cor de fundo padrão de uma nova imagem"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Fixar proporção:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Modelos:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Predefinição"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Predefinição:"
 
 msgid "Default"
 msgstr "Padrão"
@@ -1028,26 +1116,84 @@ msgid "Lighten/Darken"
 msgstr "Iluminar/Escurece"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Trocar Cores"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Definir o atalho"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Aperte uma tecla ou uma combinação de teclas para definir o atalho"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Já atribuído"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Ferramenta da Esquerda:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Ferramenta atribuída ao botão esquerdo do mouse"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Ferramenta da Direita:"
 
 msgid "A tool assigned to the right mouse button"
+msgstr "Ferramenta atribuída ao botão direito do mouse"
+
+msgid "Cannot find last project file."
+msgstr "Não foi possível localizar arquivo do último projeto."
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Você ainda não salvou nem abriu nenhum projeto no Pixelorama!"
+
+msgid "Open Last Project"
+msgstr "Abrir último projeto"
+
+msgid "Open last project..."
+msgstr "Abrir último projeto..."
+
+msgid "Open last project on startup"
+msgstr "Abrir último projeto ao iniciar"
+
+msgid "Opens last opened project on startup"
+msgstr "Abrir último projeto aberto ao iniciar"
+
+msgid "Enable autosave"
+msgstr "Habilitar salvamento automático"
+
+msgid "Autosave interval:"
+msgstr "Intervalo do salvamento automático:"
+
+msgid "minute(s)"
+msgstr "minuto(s)"
+
+msgid "Create new directory for each frame tag"
+msgstr "Criar novo diretório para cada tag de quadro"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Cria vários arquivos, mas cada arquivo é armazenado em um diretório diferente que corresponde à sua tag de quadro"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Delete"
+msgstr "Deletar"
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr ""
+
+msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
