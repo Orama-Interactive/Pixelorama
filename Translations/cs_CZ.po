@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-16 15:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,12 +74,6 @@ msgstr "Uložit jako..."
 
 msgid "Import"
 msgstr "Importovat"
-
-msgid "Import..."
-msgstr "Importovat..."
-
-msgid "Import PNG..."
-msgstr "Importovat PNG..."
 
 msgid "Export"
 msgstr "Exportovat"
@@ -156,11 +150,29 @@ msgstr "Otevřít soubor"
 msgid "Open File(s)"
 msgstr "Otevřít soubor(y)"
 
-msgid "Import as new frame"
-msgstr "Importovat jako nový snímek"
+msgid "Import as:"
+msgstr ""
 
-msgid "Import as a spritesheet"
-msgstr "Importovat jako spritesheet"
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Uložit obrázek jako .pxo"
