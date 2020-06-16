@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-16 15:01\n"
 
 msgid "OK"
 msgstr "確定"
@@ -74,12 +74,6 @@ msgstr "儲存為"
 
 msgid "Import"
 msgstr "匯入"
-
-msgid "Import..."
-msgstr "匯入..."
-
-msgid "Import PNG..."
-msgstr "匯入PNG檔"
 
 msgid "Export"
 msgstr "輸出"
@@ -156,11 +150,29 @@ msgstr "打開舊檔"
 msgid "Open File(s)"
 msgstr "打開舊檔"
 
-msgid "Import as new frame"
-msgstr "輸入為下一張"
+msgid "Import as:"
+msgstr ""
 
-msgid "Import as a spritesheet"
-msgstr "匯入為spritesheet"
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
