@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-06-16 15:01\n"
+"PO-Revision-Date: 2020-06-16 16:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,28 +151,28 @@ msgid "Open File(s)"
 msgstr "Apri il(i) File"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importa come:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Nuova scheda"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Scheda Sprite (nuova scheda)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Nuovo quadro"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nuovo livello"
 
 msgid "New palette"
-msgstr ""
+msgstr "Nuova tavolozza"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Quadri orizzontali:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Quadri verticali:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Salva lo Sprite come .pxo"
