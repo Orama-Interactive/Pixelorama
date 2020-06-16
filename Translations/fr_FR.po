@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-06-14 08:35\n"
+"PO-Revision-Date: 2020-06-16 15:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,12 +74,6 @@ msgstr "Enregistrer sous..."
 
 msgid "Import"
 msgstr "Importer"
-
-msgid "Import..."
-msgstr "Importer..."
-
-msgid "Import PNG..."
-msgstr "Importer une image PNG..."
 
 msgid "Export"
 msgstr "Exporter une image"
@@ -156,11 +150,29 @@ msgstr "Ouvrir un fichier"
 msgid "Open File(s)"
 msgstr "Ouvrir des fichiers"
 
-msgid "Import as new frame"
-msgstr "Importer en tant que trame"
+msgid "Import as:"
+msgstr ""
 
-msgid "Import as a spritesheet"
-msgstr "Importer comme étant une spritesheet"
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
