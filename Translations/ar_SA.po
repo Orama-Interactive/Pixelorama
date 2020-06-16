@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-16 15:00\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -74,12 +74,6 @@ msgstr "حفظ باسم..."
 
 msgid "Import"
 msgstr "استيراد"
-
-msgid "Import..."
-msgstr "استيراد..."
-
-msgid "Import PNG..."
-msgstr "استيراد PNG..."
 
 msgid "Export"
 msgstr "تصدير"
@@ -156,10 +150,28 @@ msgstr "فتح ملف"
 msgid "Open File(s)"
 msgstr "فتح ملفات"
 
-msgid "Import as new frame"
-msgstr "استيراد كإطار جديد"
+msgid "Import as:"
+msgstr ""
 
-msgid "Import as a spritesheet"
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
