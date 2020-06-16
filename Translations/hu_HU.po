@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-16 15:00\n"
 
 msgid "OK"
 msgstr ""
@@ -73,12 +73,6 @@ msgid "Save as..."
 msgstr ""
 
 msgid "Import"
-msgstr ""
-
-msgid "Import..."
-msgstr ""
-
-msgid "Import PNG..."
 msgstr ""
 
 msgid "Export"
@@ -156,10 +150,28 @@ msgstr ""
 msgid "Open File(s)"
 msgstr ""
 
-msgid "Import as new frame"
+msgid "Import as:"
 msgstr ""
 
-msgid "Import as a spritesheet"
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
