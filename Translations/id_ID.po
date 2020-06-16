@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-06-13 17:27\n"
+"PO-Revision-Date: 2020-06-16 15:01\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -74,12 +74,6 @@ msgstr "Simpan sebagai..."
 
 msgid "Import"
 msgstr "Impor"
-
-msgid "Import..."
-msgstr "Impor..."
-
-msgid "Import PNG..."
-msgstr "Impor PNG..."
 
 msgid "Export"
 msgstr "Ekspor"
@@ -156,11 +150,29 @@ msgstr "Buka file"
 msgid "Open File(s)"
 msgstr "Buka file (lebih dari satu)"
 
-msgid "Import as new frame"
-msgstr "Import sebagai frame animasi baru"
+msgid "Import as:"
+msgstr ""
 
-msgid "Import as a spritesheet"
-msgstr "Impor sebagai Spritesheet"
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Simpan \"sprite\" dengan .pxo"
