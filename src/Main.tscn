@@ -51,12 +51,8 @@ __meta__ = {
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="." instance=ExtResource( 12 )]
-current_dir = "/Users"
-current_path = "/Users/"
 
 [node name="SaveSprite" parent="." instance=ExtResource( 11 )]
-current_dir = "/Users"
-current_path = "/Users/"
 
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 

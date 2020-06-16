@@ -1,5 +1,6 @@
 extends Node
 
+
 var current_save_paths := [] # Array of strings
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths := [] # Array of strings
@@ -303,10 +304,8 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 		file.close()
 
 
-func open_image_file(path : String, image : Image) -> void:
-	var project := Global.current_project
-
-	project = Project.new([], path.get_file())
+func open_image_as_new_tab(path : String, image : Image) -> void:
+	var project = Project.new([], path.get_file())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
 	project.size = image.get_size()
@@ -317,6 +316,40 @@ func open_image_file(path : String, image : Image) -> void:
 	frame.cels.append(Cel.new(image, 1))
 
 	project.frames.append(frame)
+	set_new_tab(project, path)
+
+
+func open_image_as_spritesheet(path : String, image : Image, horizontal : int, vertical : int) -> void:
+	var project = Project.new([], path.get_file())
+	project.layers.append(Layer.new())
+	Global.projects.append(project)
+	horizontal = min(horizontal, image.get_size().x)
+	vertical = min(vertical, image.get_size().y)
+	var frame_width := image.get_size().x / horizontal
+	var frame_height := image.get_size().y / vertical
+	for yy in range(vertical):
+		for xx in range(horizontal):
+			var frame := Frame.new()
+			var cropped_image := Image.new()
+			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			project.size = cropped_image.get_size()
+			cropped_image.convert(Image.FORMAT_RGBA8)
+			cropped_image.lock()
+			frame.cels.append(Cel.new(cropped_image, 1))
+
+			for _i in range(1, project.layers.size()):
+				var empty_sprite := Image.new()
+				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+				empty_sprite.fill(Color(0, 0, 0, 0))
+				empty_sprite.lock()
+				frame.cels.append(Cel.new(empty_sprite, 1))
+
+			project.frames.append(frame)
+
+	set_new_tab(project, path)
+
+
+func set_new_tab(project : Project, path : String) -> void:
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
