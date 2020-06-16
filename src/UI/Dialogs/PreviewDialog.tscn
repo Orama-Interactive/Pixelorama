@@ -42,6 +42,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+
+[node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 304.0
 margin_right = 534.0
@@ -57,6 +61,7 @@ text = "Import as:"
 margin_left = 70.0
 margin_right = 151.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "New tab"
 items = [ "New tab", null, false, 0, null, "Spritesheet (new tab)", null, false, 1, null, "New frame", null, true, 2, null, "New layer", null, true, 3, null, "New palette", null, true, 4, null ]
 selected = 0
