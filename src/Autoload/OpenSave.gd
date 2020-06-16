@@ -36,6 +36,7 @@ func handle_loading_files(files : PoolStringArray) -> void:
 			preview_dialog.image = image
 			Global.control.add_child(preview_dialog)
 			preview_dialog.popup_centered()
+			Global.dialog_open(true)
 
 
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:

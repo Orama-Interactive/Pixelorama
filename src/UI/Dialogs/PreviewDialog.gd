@@ -21,6 +21,11 @@ func _on_PreviewDialog_about_to_show() -> void:
 
 func _on_PreviewDialog_popup_hide() -> void:
 	queue_free()
+	# Call Global.dialog_open() only if it's the only preview dialog opened
+	for child in Global.control.get_children():
+		if child != self and "PreviewDialog" in child.name:
+			return
+	Global.dialog_open(false)
 
 
 func _on_PreviewDialog_confirmed() -> void:
