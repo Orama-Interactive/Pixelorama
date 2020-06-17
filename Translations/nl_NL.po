@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-06-16 15:26\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -148,6 +148,9 @@ msgid "Open a File"
 msgstr ""
 
 msgid "Open File(s)"
+msgstr ""
+
+msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
