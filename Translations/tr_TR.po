@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-16 15:00\n"
+"PO-Revision-Date: 2020-06-17 13:53\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -148,6 +148,9 @@ msgid "Open a File"
 msgstr "Dosya Aç"
 
 msgid "Open File(s)"
+msgstr ""
+
+msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
