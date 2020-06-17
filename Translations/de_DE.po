@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-06-16 15:01\n"
+"PO-Revision-Date: 2020-06-17 07:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,28 +151,28 @@ msgid "Open File(s)"
 msgstr "Öffne Datei(en)"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importiere als:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Neuer Tab"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Spritesheet (neuer Tab)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Neuer Frame"
 
 msgid "New layer"
-msgstr ""
+msgstr "Neue Ebene"
 
 msgid "New palette"
-msgstr ""
+msgstr "Neue Palette"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Horizontale Frames:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Vertikale Frames:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Speichere Sprite als .pxo"
