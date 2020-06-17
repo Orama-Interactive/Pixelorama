@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-06-16 15:00\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -149,6 +149,9 @@ msgstr "Malfermi dosieron"
 
 msgid "Open File(s)"
 msgstr "Malfermi dosiero(j)n"
+
+msgid "Import Options"
+msgstr ""
 
 msgid "Import as:"
 msgstr ""
