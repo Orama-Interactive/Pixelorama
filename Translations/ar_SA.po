@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-06-16 15:00\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -149,6 +149,9 @@ msgstr "فتح ملف"
 
 msgid "Open File(s)"
 msgstr "فتح ملفات"
+
+msgid "Import Options"
+msgstr ""
 
 msgid "Import as:"
 msgstr ""
