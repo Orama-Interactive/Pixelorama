@@ -19,6 +19,7 @@ func _ready() -> void:
 
 func handle_loading_files(files : PoolStringArray) -> void:
 	for file in files:
+		file = file.replace("\\", "/")
 		if file.get_extension().to_lower() == "pxo":
 			open_pxo_file(file)
 		else:

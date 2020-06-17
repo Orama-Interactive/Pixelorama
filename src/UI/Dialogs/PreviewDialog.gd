@@ -38,6 +38,8 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_tab(path, image)
 	elif current_import_option == ImageImportOptions.SPRITESHEET:
 		OpenSave.open_image_as_spritesheet(path, image, spritesheet_horizontal, spritesheet_vertical)
+	elif current_import_option == ImageImportOptions.PALETTE:
+		Global.palette_container.on_palette_import_file_selected(path)
 
 
 func _on_ImportOption_item_selected(id : int) -> void:
