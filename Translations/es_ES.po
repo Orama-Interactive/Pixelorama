@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-06-16 15:00\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,6 +149,9 @@ msgstr "Abrir un archivo"
 
 msgid "Open File(s)"
 msgstr "Abrir archivo(s)"
+
+msgid "Import Options"
+msgstr ""
 
 msgid "Import as:"
 msgstr ""
