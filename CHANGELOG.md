@@ -10,10 +10,11 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 
 ### Added
 - Project tabs! You can now have multiple projects open at the same time, and access each one with tabs.
-- Ability to remove the current palette. [#239](https://github.com/Orama-Interactive/Pixelorama/pull/239))
-- You can now drag & drop files into the program while it's running to open them.
+- Ability to remove the current palette. ([#239](https://github.com/Orama-Interactive/Pixelorama/pull/239))
+- You can now drag & drop files into the program while it's running to open them. You can open .pxo files, image files and palette (json and gpl) files this way.
 - You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))
 - Added Resize Canvas option to Image menu.
+- You can now preview how the frames of the spritesheet you are importing will look.
 
 ### Changed
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
@@ -23,14 +24,14 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - When making a straight line, a preview of how the line's pixels will look is now being shown. ([#260](https://github.com/Orama-Interactive/Pixelorama/pull/260))
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
-- The "Import" option from the file menu has been removed, users can now import image files from "Open". (This is still a WIP)
+- The "Import" option from the file menu has been removed, users can now import image files from "Open".
 
 ### Fixed
-- Exporting large images and drawing with large image brushes is now a lot faster.
+- Exporting large images and drawing with large image brushes is now a lot faster. (Because of Godot 3.2.2)
 - Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files. ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
 - Fixed alpha blending and lighting/darkening issues when drawing pixels with mirroring.
 - Fixed issue where if you moved a frame to the start (move left), it was invisible.
-- Fixed a rare issue with Undo/Redo not working while motion drawing and making lines.
+- Fixed a rare issue with Undo/Redo not working while motion-drawing and making lines.
 - Grid and guides are now longer being displayed on previews. ([#205](https://github.com/Orama-Interactive/Pixelorama/issues/205))
 - Fixed a rare problem where the custom mouse cursor's image was failing to load.
 - Importing a non-palette json file no longer crashes the app.
