@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-16 15:01\n"
+"PO-Revision-Date: 2020-06-17 00:35\n"
 
 msgid "OK"
 msgstr "确定"
@@ -151,28 +151,28 @@ msgid "Open File(s)"
 msgstr "打开文件"
 
 msgid "Import as:"
-msgstr ""
+msgstr "导入为："
 
 msgid "New tab"
-msgstr ""
+msgstr "新建选项卡"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "纸张（新建选项卡）"
 
 msgid "New frame"
-msgstr ""
+msgstr "新建帧"
 
 msgid "New layer"
-msgstr ""
+msgstr "新建图层"
 
 msgid "New palette"
-msgstr ""
+msgstr "新建调色板"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "水平帧："
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "垂直帧："
 
 msgid "Save Sprite as .pxo"
 msgstr "保存 Sprite 为 .pxo"
