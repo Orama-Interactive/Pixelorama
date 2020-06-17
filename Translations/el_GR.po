@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-16 15:01\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -149,6 +149,9 @@ msgstr "Άνοιγμα αρχείου"
 
 msgid "Open File(s)"
 msgstr "Άνοιγμα αρχείου/ων"
+
+msgid "Import Options"
+msgstr ""
 
 msgid "Import as:"
 msgstr ""
