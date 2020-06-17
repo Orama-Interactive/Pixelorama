@@ -55,14 +55,26 @@ func _on_HorizontalFrames_value_changed(value) -> void:
 	spritesheet_horizontal = value
 	for child in texture_rect.get_node("HorizLines").get_children():
 		child.queue_free()
+
+	var image_size_y = texture_rect.rect_size.y
+	var image_size_x = texture_rect.rect_size.x
+	if image.get_size().x > image.get_size().y:
+		var scale_ratio = image.get_size().x / image_size_x
+		image_size_y = image.get_size().y / scale_ratio
+	else:
+		var scale_ratio = image.get_size().y / image_size_y
+		image_size_x = image.get_size().x / scale_ratio
+
+	var offset_x = (300 - image_size_x) / 2
+	var offset_y = (300 - image_size_y) / 2
 	if value > 1:
-		var line_distance = texture_rect.rect_size.x / value
+		var line_distance = image_size_x / value
 		for i in range(1, value):
 			var line_2d := Line2D.new()
 			line_2d.width = 1
 			line_2d.position = Vector2.ZERO
-			line_2d.add_point(Vector2(i * line_distance, 0))
-			line_2d.add_point(Vector2(i * line_distance, texture_rect.rect_size.x))
+			line_2d.add_point(Vector2(i * line_distance + offset_x, offset_y))
+			line_2d.add_point(Vector2(i * line_distance + offset_x, image_size_y + offset_y))
 			texture_rect.get_node("HorizLines").add_child(line_2d)
 
 
@@ -70,12 +82,24 @@ func _on_VerticalFrames_value_changed(value) -> void:
 	spritesheet_vertical = value
 	for child in texture_rect.get_node("VerticalLines").get_children():
 		child.queue_free()
+
+	var image_size_y = texture_rect.rect_size.y
+	var image_size_x = texture_rect.rect_size.x
+	if image.get_size().x > image.get_size().y:
+		var scale_ratio = image.get_size().x / image_size_x
+		image_size_y = image.get_size().y / scale_ratio
+	else:
+		var scale_ratio = image.get_size().y / image_size_y
+		image_size_x = image.get_size().x / scale_ratio
+
+	var offset_x = (300 - image_size_x) / 2
+	var offset_y = (300 - image_size_y) / 2
 	if value > 1:
-		var line_distance = texture_rect.rect_size.y / value
+		var line_distance = image_size_y / value
 		for i in range(1, value):
 			var line_2d := Line2D.new()
 			line_2d.width = 1
 			line_2d.position = Vector2.ZERO
-			line_2d.add_point(Vector2(0, i * line_distance))
-			line_2d.add_point(Vector2(texture_rect.rect_size.y, i * line_distance))
+			line_2d.add_point(Vector2(offset_x, i * line_distance + offset_y))
+			line_2d.add_point(Vector2(image_size_x + offset_x, i * line_distance + offset_y))
 			texture_rect.get_node("VerticalLines").add_child(line_2d)
