@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-06-16 15:01\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr ""
@@ -148,6 +148,9 @@ msgid "Open a File"
 msgstr ""
 
 msgid "Open File(s)"
+msgstr ""
+
+msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
