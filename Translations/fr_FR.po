@@ -1187,14 +1187,14 @@ msgid "Backup reloaded"
 msgstr "Sauvegarde rechargée"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Supprimer la palette actuellement sélectionnée"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Vous ne pouvez pas supprimer plus de palettes!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "La palette ne peut pas être supprimée, car celle-ci n'existe pas!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Une erreur est survenue lors de la suppression de la palette! Code d'erreur: %s"
 
