@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-06-16 15:01\n"
+"PO-Revision-Date: 2020-06-17 13:54\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -149,6 +149,9 @@ msgstr "Buka file"
 
 msgid "Open File(s)"
 msgstr "Buka file (lebih dari satu)"
+
+msgid "Import Options"
+msgstr ""
 
 msgid "Import as:"
 msgstr ""
