@@ -7,6 +7,7 @@ margin_right = 200.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 550, 70 )
 popup_exclusive = true
+window_title = "Import Options"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {

@@ -139,6 +139,9 @@ msgstr ""
 msgid "Open File(s)"
 msgstr ""
 
+msgid "Import Options"
+msgstr ""
+
 msgid "Import as:"
 msgstr ""
 

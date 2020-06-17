@@ -13,15 +13,12 @@ onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureR
 onready var spritesheet_options = $VBoxContainer/HBoxContainer/SpritesheetOptions
 
 
-func _ready() -> void:
-	spritesheet_options.get_node("HorizontalFrames").max_value = min(spritesheet_options.get_node("HorizontalFrames").max_value, image.get_size().x)
-	spritesheet_options.get_node("VerticalFrames").max_value = min(spritesheet_options.get_node("VerticalFrames").max_value, image.get_size().y)
-
-
 func _on_PreviewDialog_about_to_show() -> void:
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image)
 	texture_rect.texture = img_texture
+	spritesheet_options.get_node("HorizontalFrames").max_value = min(spritesheet_options.get_node("HorizontalFrames").max_value, image.get_size().x)
+	spritesheet_options.get_node("VerticalFrames").max_value = min(spritesheet_options.get_node("VerticalFrames").max_value, image.get_size().y)
 
 
 func _on_PreviewDialog_popup_hide() -> void:
