@@ -50,7 +50,7 @@ func on_palette_import_file_selected(path : String) -> void:
 		palette = Palette.new().load_from_file(path)
 	elif path.to_lower().ends_with("gpl"):
 		palette = Import.import_gpl(path)
-	elif path.to_lower().ends_with("png"):
+	elif path.to_lower().ends_with("png") or path.to_lower().ends_with("bmp") or path.to_lower().ends_with("hdr") or path.to_lower().ends_with("jpg") or path.to_lower().ends_with("svg") or path.to_lower().ends_with("tga") or path.to_lower().ends_with("webp"):
 		palette = Import.import_png_palette(path)
 
 	if palette:
