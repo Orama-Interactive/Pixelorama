@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-06-17 13:54\n"
+"PO-Revision-Date: 2020-06-18 15:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "Rozmiar obrazu"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Rozmiar płótna"
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -106,7 +106,7 @@ msgid "Crop Image"
 msgstr "Przytnij obraz"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Zmień rozmiar płótna"
 
 msgid "Rotate Image"
 msgstr "Obróć obraz"
@@ -139,7 +139,7 @@ msgid "Show Animation Timeline"
 msgstr "Pokaż linię czasu animacji"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Tryb zen"
 
 msgid "Fill with color:"
 msgstr "Wypełnij kolorem:"
@@ -151,31 +151,31 @@ msgid "Open File(s)"
 msgstr "Otwórz plik(i)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Opcje importowania"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importuj jako:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Nowa karta"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Spritesheet (nowa karta)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Nowa klatka"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nowa warstwa"
 
 msgid "New palette"
-msgstr ""
+msgstr "Nowa paleta"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Klatki poziome:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Klatki pionowe:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Zapisz obraz jako .pxo"
