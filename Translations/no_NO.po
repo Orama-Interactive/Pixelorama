@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-18 20:47\n"
+"PO-Revision-Date: 2020-06-18 20:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -711,81 +711,84 @@ msgid "Offset"
 msgstr "Forskyvning"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Lys opp"
 
 msgid "Darken"
-msgstr ""
+msgstr "Formørk"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Mengde:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Lys opp/Formørk mengde"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Velg for:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Venstre Farge"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Høyre Farge"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Modus:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Zoom inn"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Zoom ut"
 
 msgid "Options:"
-msgstr ""
+msgstr "Innstillinger:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Tilpass til ramme"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Zoom"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Speiling"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horisontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Aktivér horisontaltspeilet tegning"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Aktivér vertikaltspeilet tegning"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikal"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Gjeldende ramme:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Gå til den første rammen\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Gå til forrige ramme\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Spill animasjonen bakover (fra slutten mot starten) (%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Spill animasjonen forover (fra starten mot slutten) (%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Gå til neste ramme\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
@@ -945,22 +948,22 @@ msgid "Redo: Merge Layer"
 msgstr ""
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Angre: Endre Lagrekkefølge"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Gjør om: Endre Lagrekkefølge"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Angre: Legg til Ramme"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Gjør om: Legg til Ramme"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Angre: Fjern Ramme"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Gjør om: Fjern Ramme"
 
 msgid "Undo: Change Frame Order"
 msgstr ""
