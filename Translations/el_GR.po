@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-17 13:54\n"
+"PO-Revision-Date: 2020-06-18 16:41\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "Μέγεθος εικόνας"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Μέγεθος Καμβά"
 
 msgid "Width:"
 msgstr "Πλάτος:"
