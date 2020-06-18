@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-18 20:57\n"
+"PO-Revision-Date: 2020-06-18 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -966,16 +966,16 @@ msgid "Redo: Remove Frame"
 msgstr "Gjør om: Fjern Ramme"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Angre: Endre Lagrekkefølge"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Gjør om: Endre Lagrekkefølge"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Angre: Slett Tilpasset Børste"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Gjør om: Slett Tilpasset Børste"
 
 msgid "Undo: Modify Frame Tag"
 msgstr ""
@@ -993,70 +993,70 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Fil lagret"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fil automatisk lagret"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Filen kunne ikke åpnes"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Filen kunne ikke lagres"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fil eksportert"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Ny Tom Palett"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importer Palett"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Palettnavn:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Fargenavn:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Bruk gjeldene høyre- og venstrefarger"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Opprette en nyt tom palett?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Feil: Palett må ha et gyldig navn."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Feil: En palett kalt '%s' finnes allerede!"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Ugyldig Palettfil!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Redigér Palett"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Abonnenter på Patreon:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Vil du at navnet ditt eller firmaet ditt skal vises på oppstartskjermen?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Bli en Platinumsponsor"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Bli en Gullsponsor"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Bli abonnent på Patreon"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Ikke vis igjen"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Bildealternativer"
 
 msgid "Default width:"
 msgstr ""
