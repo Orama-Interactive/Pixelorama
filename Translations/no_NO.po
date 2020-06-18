@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-18 20:37\n"
+"PO-Revision-Date: 2020-06-18 20:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -404,64 +404,64 @@ msgid "Online Docs"
 msgstr "Online Bruksanvisning"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problemsporer"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Endringslogg"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Om Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Utviklet av Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Nettside"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donér"
 
 msgid "Developers"
-msgstr ""
+msgstr "Utviklere"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Bidragsytere"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donorer"
 
 msgid "Translators"
-msgstr ""
+msgstr "Oversettere"
 
 msgid "English"
-msgstr ""
+msgstr "Engelsk"
 
 msgid "Greek"
-msgstr ""
+msgstr "Gresk"
 
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasiliansk Portugisisk"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Kinesisk (forenklet)"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Kinesisk (tradisjonell)"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 msgid "Latvian"
 msgstr ""
@@ -633,82 +633,82 @@ msgid "Grid height:"
 msgstr ""
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Angir hvor langt fra hverandre de horisontale linjene er i rutenettet"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Rutenettfarge:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "En farge av rutenettet"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Størrelse på sjekkere:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Størrelse på den gjennomsiktige bakgrunnen av sjekkere"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Sjekkerfarge 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Første farge på den gjennomsiktige bakgrunnen av sjekkere"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Sjekkerfarge 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Børste:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Velg en børste"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Børste: Piksel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Børste: Sirkel"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Børste: Fylt Sirkel"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Egendefinert Børste"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Børstestørrelse:"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Børstefarge fra"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Farge fra børsten selv, 100: den valgte fargen"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Fyll område:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Område med lik farge"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Piksler med lik farge"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Fyll med:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Valgt Farge"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Mønster"
 
 msgid "Offset"
-msgstr ""
+msgstr "Forskyvning"
 
 msgid "Lighten"
 msgstr ""
