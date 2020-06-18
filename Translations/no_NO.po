@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-18 21:07\n"
+"PO-Revision-Date: 2020-06-18 21:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,83 +163,83 @@ msgid "Spritesheet (new tab)"
 msgstr "Tegneark (ny fane)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Ny ramme"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nytt lag"
 
 msgid "New palette"
-msgstr ""
+msgstr "Ny palett"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Horisontale rammer:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Vertikale rammer:"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Lagre Figur som .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksportér Figur som .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksportér Figur"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Filen Eksisterer, Overskrive?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Filen %s finnes fra før. Overskrive?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Banen eller filnavnet er ikke gyldig!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Kan ikke laste fil '%s'. Feilkode: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Ramme"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Rammer:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Alle Rammer"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Tegneark"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animasjon"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Forhåndsvisning:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Ramme:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Retning:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Bla gjennom"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Endre størrelse:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Avbryt Eksport"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Advarsel!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Velg Gjeldende Mappe"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Åpne en Mappe"
 
 msgid "All frames as multiple files"
 msgstr ""
@@ -248,70 +248,70 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Bakgrunn:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Retning:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Fremover"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Bakover"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolonner"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolonner:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rader"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Rader:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Bane:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Mapper & Filer:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Opprett Mappe"
 
 msgid "File:"
-msgstr ""
+msgstr "Fil:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolering:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Nærmeste"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineær"
 
 msgid "Cubic"
 msgstr ""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineær"
 
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 msgid "Themes"
 msgstr ""
 
 msgid "Canvas"
-msgstr ""
+msgstr "Lerret"
 
 msgid "Shortcuts"
 msgstr "Snarveier"
@@ -464,10 +464,10 @@ msgid "Italian"
 msgstr "Italiensk"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Latvisk"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 msgid "Esperanto"
 msgstr ""
@@ -839,16 +839,16 @@ msgid "Add a new frame"
 msgstr ""
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Fjern Ramme"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Klon Ramme"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Flytt til Venstre"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Flytt til Høyre"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -860,16 +860,16 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Lag"
 
 msgid "Layers"
-msgstr ""
+msgstr "Lag"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Lag et nytt lag"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Fjern gjeldende lag"
 
 msgid "Move up the current layer"
 msgstr ""
@@ -897,19 +897,19 @@ msgid "Enable/disable cel linking\n\n"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Palett"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletter"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Legg til en ny palett"
 
 msgid "Edit currently selected palette"
 msgstr ""
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Velg en palett"
 
 msgid "Undo: Draw"
 msgstr ""
@@ -1059,58 +1059,58 @@ msgid "Image Options"
 msgstr "Bildealternativer"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Standardbredde:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "En standardbredde for et nytt bilde"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Standardhøyde:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "En standardhøyde for et nytt bilde"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Standard fyllfarge:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "En standard bakgrunnsfarge for et nytt bilde"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Lås størrelsesforhold:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Maler:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Forhåndsvalg"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Forhåndsvalg:"
 
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 msgid "Custom"
-msgstr ""
+msgstr "Egendefinert"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Rektangulær Markering"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Fargevelger"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Blyant"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Viskelær"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Bøtte"
 
 msgid "Lighten/Darken"
 msgstr ""
@@ -1173,10 +1173,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
