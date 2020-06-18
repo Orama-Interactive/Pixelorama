@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-06-17 13:54\n"
+"PO-Revision-Date: 2020-06-18 19:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "Image Size"
 msgstr "Размер изображения"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Размер холста"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -106,7 +106,7 @@ msgid "Crop Image"
 msgstr "Обрезать изображение"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Изменить размер холста"
 
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
@@ -154,28 +154,28 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr ""
+msgstr "Импортировать как:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Новая вкладка"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Новый кадр"
 
 msgid "New layer"
-msgstr ""
+msgstr "Новый слой"
 
 msgid "New palette"
-msgstr ""
+msgstr "Новая палитра"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Кадров по горизонтали:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Кадров по вертикали:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Сохранить спрайт как .pxo"
