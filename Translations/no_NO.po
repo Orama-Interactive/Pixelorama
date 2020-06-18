@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-18 20:26\n"
+"PO-Revision-Date: 2020-06-18 20:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -157,10 +157,10 @@ msgid "Import as:"
 msgstr "Importér som:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Ny fane"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Tegneark (ny fane)"
 
 msgid "New frame"
 msgstr ""
@@ -314,94 +314,94 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Snarveier"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Glatt Zoom"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Legger til en jevnere overgang når du zoomer inn eller ut"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Tegnebrettets trykkfølsomhet:"
 
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Påvirker Børstens Alpha"
 
 msgid "Color:"
-msgstr ""
+msgstr "Farge:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Guide farge:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Systemspråk"
 
 msgid "Dark"
-msgstr ""
+msgstr "Mørk"
 
 msgid "Gray"
-msgstr ""
+msgstr "Grå"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blå"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamell"
 
 msgid "Light"
-msgstr ""
+msgstr "Lys"
 
 msgid "Invert colors"
-msgstr ""
+msgstr "Inverter farger"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Avmettning"
 
 msgid "Outline"
-msgstr ""
+msgstr "Omriss"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Justér Fargetone/Metning/Verdi"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Justér HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Vinkel:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Fargetone"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Metning"
 
 msgid "Value"
-msgstr ""
+msgstr "Verdi"
 
 msgid "Apply"
-msgstr ""
+msgstr "Bruk"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Plassér inne i bildet"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Tykkelse:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Vis Oppstartsbilde"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Online Bruksanvisning"
 
 msgid "Issue Tracker"
 msgstr ""
