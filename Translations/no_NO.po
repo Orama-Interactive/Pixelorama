@@ -10,73 +10,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-17 13:53\n"
+"PO-Revision-Date: 2020-06-18 20:17\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 msgid "Open"
-msgstr ""
+msgstr "Åpne"
 
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Vennligst Bekreft..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "Bildestørrelse"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Lerretstørrelse"
 
 msgid "Width:"
-msgstr ""
+msgstr "Bredde:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Høyde:"
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "Edit"
-msgstr ""
+msgstr "Rediger"
 
 msgid "View"
-msgstr ""
+msgstr "Vis"
 
 msgid "Image"
-msgstr ""
+msgstr "Bilde"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effekter"
 
 msgid "Help"
-msgstr ""
+msgstr "Hjelp"
 
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 msgid "New..."
-msgstr ""
+msgstr "Ny..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Åpne..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Lagre..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Lagre som..."
 
 msgid "Import"
-msgstr ""
+msgstr "Importer"
 
 msgid "Export"
-msgstr ""
+msgstr "Eksporter"
 
 msgid "Export..."
 msgstr ""
