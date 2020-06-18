@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-18 20:17\n"
+"PO-Revision-Date: 2020-06-18 20:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -79,82 +79,82 @@ msgid "Export"
 msgstr "Eksporter"
 
 msgid "Export..."
-msgstr ""
+msgstr "Eksporter..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Eksporter som..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Eksporter PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Eksporter PNG som..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Avslutt"
 
 msgid "Undo"
-msgstr ""
+msgstr "Angre"
 
 msgid "Redo"
-msgstr ""
+msgstr "Gjør om igjen"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Skalér Bilde"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Beskjær Bilde"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Forandre Størrelse på Lerret"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotér Bilde"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Fjern Merking"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Speilvend Horisontalt"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Speilvend Vertikalt"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Preferanser"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Flismodus"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Vis Rutenett"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Vis Linjaler"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Vis Guider"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Vis Animasjonstidslinje"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zenmodus"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Fyll med farge:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Åpne en Fil"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Åpne Fil(er)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Importeringsvalg"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importér som:"
 
 msgid "New tab"
 msgstr ""
