@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-17 13:54\n"
+"PO-Revision-Date: 2020-06-19 00:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -151,7 +151,7 @@ msgid "Open File(s)"
 msgstr "打开文件"
 
 msgid "Import Options"
-msgstr ""
+msgstr "导入选项"
 
 msgid "Import as:"
 msgstr "导入为："
