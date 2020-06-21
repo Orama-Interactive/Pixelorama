@@ -373,6 +373,29 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	project.frames.append(frame)
 	project.frames = project.frames # Just to call frames_changed()
 	project.current_frame = project.frames.size() - 1
+	project.current_layer = layer_index
+
+
+func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+
+	var layer := Layer.new(file_name)
+	for i in project.frames.size():
+		if i == frame_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			project.frames[i].cels.append(Cel.new(image, 1))
+		else:
+			var empty_image := Image.new()
+			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			empty_image.lock()
+			project.frames[i].cels.append(Cel.new(empty_image, 1))
+
+	project.layers.append(layer)
+	project.layers = project.layers # Just to call layers_changed()
+	project.current_layer = project.layers.size() - 1
+	project.current_frame = frame_index
 
 
 func set_new_tab(project : Project, path : String) -> void:

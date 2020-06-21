@@ -37,6 +37,8 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_spritesheet(path, image, spritesheet_horizontal, spritesheet_vertical)
 	elif current_import_option == ImageImportOptions.NEW_FRAME:
 		OpenSave.open_image_as_new_frame(image)
+	elif current_import_option == ImageImportOptions.NEW_LAYER:
+		OpenSave.open_image_as_new_layer(image, path.get_file())
 	elif current_import_option == ImageImportOptions.PALETTE:
 		Global.palette_container.on_palette_import_file_selected(path)
 
