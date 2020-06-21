@@ -9,5 +9,5 @@ func _draw() -> void:
 	# Draw current frame layers
 	for i in range(current_cels.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if current_project.layers[i].visible: # if it's visible
+		if i < current_project.layers.size() and current_project.layers[i].visible: # if it's visible
 			draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
