@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-06-21 06:37\n"
+"PO-Revision-Date: 2020-06-21 06:47\n"
 
 msgid "OK"
 msgstr "예"
@@ -106,7 +106,7 @@ msgid "Crop Image"
 msgstr "이미지 자르기"
 
 msgid "Resize Canvas"
-msgstr "캔버스 크기 재설정"
+msgstr "캔버스 크기 조정"
 
 msgid "Rotate Image"
 msgstr "이미지 회전"
@@ -187,17 +187,18 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "파일이 이미 존재합니다, 덮어씌우시겠습니까?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "파일 %s이(가) 이미 존재합니다. 덮어씌우시겠습니까?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
+"오류 코드: %s"
 
 msgid "Frame"
 msgstr ""
@@ -212,10 +213,10 @@ msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "애니메이션"
 
 msgid "Preview:"
-msgstr ""
+msgstr "미리 보기:"
 
 msgid "Frame:"
 msgstr ""
@@ -224,22 +225,22 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "찾아보기"
 
 msgid "Resize:"
-msgstr ""
+msgstr "크기 조정"
 
 msgid "Cancel Export"
 msgstr ""
 
 msgid "Alert!"
-msgstr ""
+msgstr "경고!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "현 폴더 선택"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "디렉토리 열기"
 
 msgid "All frames as multiple files"
 msgstr ""
@@ -248,10 +249,10 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "배경:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "방향:"
 
 msgid "Forward"
 msgstr ""
@@ -263,22 +264,22 @@ msgid "Ping-Pong"
 msgstr ""
 
 msgid "Columns"
-msgstr ""
+msgstr "열"
 
 msgid "Columns:"
-msgstr ""
+msgstr "열:"
 
 msgid "Rows"
-msgstr ""
+msgstr "행"
 
 msgid "Rows:"
-msgstr ""
+msgstr "행:"
 
 msgid "Path:"
-msgstr ""
+msgstr "경로:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "디렉토리 & 파일:"
 
 msgid "Create Folder"
 msgstr "폴더 생성"
@@ -338,7 +339,7 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "시스템 언어"
 
 msgid "Dark"
 msgstr ""
