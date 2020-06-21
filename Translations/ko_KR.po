@@ -10,67 +10,67 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-06-21 06:27\n"
+"PO-Revision-Date: 2020-06-21 06:37\n"
 
 msgid "OK"
 msgstr "예"
 
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 msgid "Open"
-msgstr ""
+msgstr "열기"
 
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "확인이 필요합니다..."
 
 msgid "Image Size"
-msgstr ""
+msgstr "이미지 크기"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "캔버스 크기"
 
 msgid "Width:"
-msgstr ""
+msgstr "너비:"
 
 msgid "Height:"
-msgstr ""
+msgstr "높이:"
 
 msgid "File"
-msgstr ""
+msgstr "파일"
 
 msgid "Edit"
-msgstr ""
+msgstr "편집"
 
 msgid "View"
-msgstr ""
+msgstr "보기"
 
 msgid "Image"
-msgstr ""
+msgstr "이미지"
 
 msgid "Effects"
-msgstr ""
+msgstr "효과"
 
 msgid "Help"
-msgstr ""
+msgstr "도움말"
 
 msgid "New"
-msgstr ""
+msgstr "신규"
 
 msgid "New..."
-msgstr ""
+msgstr "신규..."
 
 msgid "Open..."
-msgstr ""
+msgstr "열기..."
 
 msgid "Save..."
-msgstr ""
+msgstr "저장하기..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "다른 이름으로 저장하기..."
 
 msgid "Import"
 msgstr ""
@@ -91,46 +91,46 @@ msgid "Export PNG as..."
 msgstr ""
 
 msgid "Quit"
-msgstr ""
+msgstr "종료"
 
 msgid "Undo"
-msgstr ""
+msgstr "실행 취소"
 
 msgid "Redo"
-msgstr ""
+msgstr "다시 실행"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "이미지 크기"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "이미지 자르기"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "캔버스 크기 재설정"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "이미지 회전"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "선택 영역 지우기"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "좌우 대칭"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "상하 대칭"
 
 msgid "Preferences"
-msgstr ""
+msgstr "환경설정"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "타일 모드"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "격자 표시"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "눈금자 표시"
 
 msgid "Show Guides"
 msgstr ""
@@ -139,16 +139,16 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "젠 모드"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "색상으로 채우기:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "파일 열기"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "여러 파일 열기"
 
 msgid "Import Options"
 msgstr ""
@@ -157,7 +157,7 @@ msgid "Import as:"
 msgstr ""
 
 msgid "New tab"
-msgstr ""
+msgstr "새 창"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
@@ -166,7 +166,7 @@ msgid "New frame"
 msgstr ""
 
 msgid "New layer"
-msgstr ""
+msgstr "새 레이어"
 
 msgid "New palette"
 msgstr ""
@@ -281,19 +281,19 @@ msgid "Directories & Files:"
 msgstr ""
 
 msgid "Create Folder"
-msgstr ""
+msgstr "폴더 생성"
 
 msgid "File:"
-msgstr ""
+msgstr "파일:"
 
 msgid "Interpolation:"
 msgstr ""
 
 msgid "Nearest"
-msgstr ""
+msgstr "근접"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "이중선형"
 
 msgid "Cubic"
 msgstr ""
@@ -302,19 +302,19 @@ msgid "Trilinear"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "일반적"
 
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 msgid "Themes"
-msgstr ""
+msgstr "테마"
 
 msgid "Canvas"
-msgstr ""
+msgstr "캔버스"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "단축키"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -326,13 +326,13 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "색상:"
 
 msgid "Guide color:"
 msgstr ""
