@@ -64,7 +64,7 @@ margin_right = 151.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "New tab"
-items = [ "New tab", null, false, 0, null, "Spritesheet (new tab)", null, false, 1, null, "New frame", null, true, 2, null, "New layer", null, true, 3, null, "New palette", null, false, 4, null ]
+items = [ "New tab", null, false, 0, null, "Spritesheet (new tab)", null, false, 1, null, "New frame", null, false, 2, null, "New layer", null, true, 3, null, "New palette", null, false, 4, null, "New brush", null, true, 5, null, "New pattern", null, true, 6, null ]
 selected = 0
 
 [node name="SpritesheetOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]

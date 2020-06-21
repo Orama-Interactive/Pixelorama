@@ -354,6 +354,27 @@ func open_image_as_spritesheet(path : String, image : Image, horizontal : int, v
 	set_new_tab(project, path)
 
 
+func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+
+	var frame := Frame.new()
+	for i in project.layers.size():
+		if i == layer_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			frame.cels.append(Cel.new(image, 1))
+		else:
+			var empty_image := Image.new()
+			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			empty_image.lock()
+			frame.cels.append(Cel.new(empty_image, 1))
+
+	project.frames.append(frame)
+	project.frames = project.frames # Just to call frames_changed()
+	project.current_frame = project.frames.size() - 1
+
+
 func set_new_tab(project : Project, path : String) -> void:
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()

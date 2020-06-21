@@ -1,7 +1,7 @@
 extends ConfirmationDialog
 
 
-enum ImageImportOptions {NEW_TAB, SPRITESHEET, NEW_FRAME, NEW_LAYER, PALETTE}
+enum ImageImportOptions {NEW_TAB, SPRITESHEET, NEW_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
 
 var path : String
 var image : Image
@@ -35,6 +35,8 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_tab(path, image)
 	elif current_import_option == ImageImportOptions.SPRITESHEET:
 		OpenSave.open_image_as_spritesheet(path, image, spritesheet_horizontal, spritesheet_vertical)
+	elif current_import_option == ImageImportOptions.NEW_FRAME:
+		OpenSave.open_image_as_new_frame(image)
 	elif current_import_option == ImageImportOptions.PALETTE:
 		Global.palette_container.on_palette_import_file_selected(path)
 
