@@ -373,53 +373,57 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 
 	new_frames.append(frame)
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Frame")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
 
-	Global.current_project.undo_redo.add_do_property(project, "frames", new_frames)
-	Global.current_project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
-	Global.current_project.undo_redo.add_do_property(project, "current_layer", layer_index)
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_layer", layer_index)
 
-	Global.current_project.undo_redo.add_undo_property(project, "frames", project.frames)
-	Global.current_project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-	Global.current_project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.commit_action()
 
 
 func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_layers : Array = Global.current_project.layers.duplicate()
-
 	var layer := Layer.new(file_name)
+
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
+		var new_cels : Array = project.frames[i].cels.duplicate(true)
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
 			image.lock()
-			project.frames[i].cels.append(Cel.new(image, 1))
+			new_cels.append(Cel.new(image, 1))
 		else:
 			var empty_image := Image.new()
 			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			empty_image.lock()
-			project.frames[i].cels.append(Cel.new(empty_image, 1))
+			new_cels.append(Cel.new(empty_image, 1))
+
+		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
+		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
 
 	new_layers.append(layer)
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Layer")
-	Global.current_project.undo_redo.add_do_property(project, "current_layer", new_layers.size() - 1)
-	Global.current_project.undo_redo.add_do_property(project, "layers", new_layers)
-	Global.current_project.undo_redo.add_do_property(project, "current_frame", frame_index)
+	project.undo_redo.add_do_property(project, "current_layer", new_layers.size() - 1)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "current_frame", frame_index)
 
-	Global.current_project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	Global.current_project.undo_redo.add_undo_property(project, "layers", project.layers)
-	Global.current_project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
 
 
 func set_new_tab(project : Project, path : String) -> void:

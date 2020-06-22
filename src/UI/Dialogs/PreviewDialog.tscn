@@ -101,6 +101,46 @@ margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
+
+[node name="NewFrameOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 286.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
+margin_top = 5.0
+margin_right = 53.0
+margin_bottom = 19.0
+text = "At layer:"
+
+[node name="AtLayerSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
+margin_left = 57.0
+margin_right = 131.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+max_value = 0.0
+
+[node name="NewLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 286.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
+margin_top = 5.0
+margin_right = 53.0
+margin_bottom = 19.0
+text = "At frame:"
+
+[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
+margin_left = 57.0
+margin_right = 131.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+max_value = 1.0
+value = 1.0
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]

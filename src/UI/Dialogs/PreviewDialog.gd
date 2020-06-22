@@ -11,6 +11,8 @@ var spritesheet_vertical := 1
 
 onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var spritesheet_options = $VBoxContainer/HBoxContainer/SpritesheetOptions
+onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
+onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
 
 
 func _on_PreviewDialog_about_to_show() -> void:
@@ -36,23 +38,35 @@ func _on_PreviewDialog_confirmed() -> void:
 	elif current_import_option == ImageImportOptions.SPRITESHEET:
 		OpenSave.open_image_as_spritesheet(path, image, spritesheet_horizontal, spritesheet_vertical)
 	elif current_import_option == ImageImportOptions.NEW_FRAME:
-		OpenSave.open_image_as_new_frame(image)
+		var layer_index : int = new_frame_options.get_node("AtLayerSpinbox").value
+		OpenSave.open_image_as_new_frame(image, layer_index)
 	elif current_import_option == ImageImportOptions.NEW_LAYER:
-		OpenSave.open_image_as_new_layer(image, path.get_file())
+		var frame_index : int = new_layer_options.get_node("AtFrameSpinbox").value - 1
+		OpenSave.open_image_as_new_layer(image, path.get_file(), frame_index)
 	elif current_import_option == ImageImportOptions.PALETTE:
 		Global.palette_container.on_palette_import_file_selected(path)
 
 
 func _on_ImportOption_item_selected(id : int) -> void:
 	current_import_option = id
+	spritesheet_options.visible = false
+	new_frame_options.visible = false
+	new_layer_options.visible = false
+	texture_rect.get_child(0).visible = false
+	texture_rect.get_child(1).visible = false
+
 	if id == ImageImportOptions.SPRITESHEET:
 		spritesheet_options.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
-	else:
-		spritesheet_options.visible = false
-		texture_rect.get_child(0).visible = false
-		texture_rect.get_child(1).visible = false
+
+	elif id == ImageImportOptions.NEW_FRAME:
+		new_frame_options.visible = true
+		new_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
+
+	elif id == ImageImportOptions.NEW_LAYER:
+		new_layer_options.visible = true
+		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
 
 
 func _on_HorizontalFrames_value_changed(value) -> void:
