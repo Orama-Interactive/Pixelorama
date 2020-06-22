@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-22 12:46\n"
+"PO-Revision-Date: 2020-06-22 13:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -628,13 +628,13 @@ msgid "Show left tool icon"
 msgstr "Vis venstre verktøyikon"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Viser ikonet til det valgte venstreverktøyet ved siden av markøren på lerretet"
 
 msgid "Show right tool icon"
 msgstr "Vis høyre verktøyikon"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Viser ikonet til det valgte høyreverktøyet ved siden av markøren på lerretet"
 
 msgid "Guides color:"
 msgstr "Guidefarge:"
@@ -822,7 +822,8 @@ msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Hvor mange rammer per sekund skal animasjonen forhåndsvises i?\n"
+"Fler rammer per sekund betyr en raskere animasjon."
 
 msgid "No loop"
 msgstr "Ingen loop"
@@ -999,16 +1000,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Gjør om: Slett Tilpasset Børste"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Angre: Endre Rammemerkelapp"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Gjør om: Endre Rammemerkelapp"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Angre: Slett Rammemerkelapp"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Gjør om: Slett Rammemerkelapp"
 
 msgid "Move Guide"
 msgstr "Flytteveiledning"
@@ -1143,7 +1144,7 @@ msgid "Set the shortcut"
 msgstr "Sett snarveien"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Trykk på en tast eller en tastekombinasjon for å angi snarveien"
 
 msgid "Already assigned"
 msgstr "Allerede tildelt"
@@ -1188,7 +1189,7 @@ msgid "minute(s)"
 msgstr "minutt(er)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Opprett ny mappe for hver rammemerkelapp"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
@@ -1201,7 +1202,8 @@ msgstr "Slett"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "En sikkerhetskopi av %s ble funnet.\n"
+"Vil du laste den på nytt?"
 
 msgid "Backup reloaded"
 msgstr "Sikkerhetskopien lastet inn"
@@ -1216,5 +1218,5 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Kan ikke fjerne paletten, den eksisterer ikke!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Det oppsto en feil under fjerning av paletten! Feilkode: %s"
 
