@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-19 00:58\n"
+"PO-Revision-Date: 2020-06-23 19:12\n"
 
 msgid "OK"
 msgstr "确定"
@@ -170,6 +170,12 @@ msgstr "新建图层"
 
 msgid "New palette"
 msgstr "新建调色板"
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
 
 msgid "Horizontal frames:"
 msgstr "水平帧："
@@ -484,6 +490,12 @@ msgstr "阿拉伯语"
 
 msgid "Turkish"
 msgstr "土耳其语"
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
 
 msgid "Development Team"
 msgstr "开发团队"
