@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-23 08:33\n"
+"PO-Revision-Date: 2020-06-23 08:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,7 +163,7 @@ msgid "Spritesheet (new tab)"
 msgstr "Tegneark (ny fane)"
 
 msgid "New frame"
-msgstr "Ny ramme"
+msgstr "Nytt bilde"
 
 msgid "New layer"
 msgstr "Nytt lag"
@@ -172,10 +172,10 @@ msgid "New palette"
 msgstr "Ny palett"
 
 msgid "Horizontal frames:"
-msgstr "Horisontale rammer:"
+msgstr "Horisontale bilder:"
 
 msgid "Vertical frames:"
-msgstr "Vertikale rammer:"
+msgstr "Vertikale bilder:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Lagre Figur som .pxo"
@@ -200,13 +200,13 @@ msgid "Can't load file '%s'.\n"
 msgstr "Kan ikke laste fil '%s'. Feilkode: %s"
 
 msgid "Frame"
-msgstr "Ramme"
+msgstr "Bilde"
 
 msgid "Frames:"
-msgstr "Rammer:"
+msgstr "Bilder:"
 
 msgid "All Frames"
-msgstr "Alle Rammer"
+msgstr "Alle Bilder"
 
 msgid "Spritesheet"
 msgstr "Tegneark"
@@ -218,7 +218,7 @@ msgid "Preview:"
 msgstr "Forhåndsvisning:"
 
 msgid "Frame:"
-msgstr "Ramme:"
+msgstr "Bilde:"
 
 msgid "Orientation:"
 msgstr "Retning:"
@@ -242,10 +242,10 @@ msgid "Open a Directory"
 msgstr "Åpne en Mappe"
 
 msgid "All frames as multiple files"
-msgstr "Alle rammer som flere filer"
+msgstr "Alle bilder som flere filer"
 
 msgid "All frames as a single file animation"
-msgstr "Alle rammer som en enkelt fil"
+msgstr "Alle bilder som en enkelt fil"
 
 msgid "Background:"
 msgstr "Bakgrunn:"
@@ -640,7 +640,7 @@ msgid "Guides color:"
 msgstr "Guidefarge:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Farge som brukes av linjal og guider på lerretet"
 
 msgid "Grid width:"
 msgstr "Rutenettbredde:"
@@ -763,7 +763,7 @@ msgid "Options:"
 msgstr "Innstillinger:"
 
 msgid "Fit to frame"
-msgstr "Tilpass til ramme"
+msgstr "Tilpass til bilde"
 
 msgid "100% Zoom"
 msgstr "100% Zoom"
@@ -784,16 +784,16 @@ msgid "Vertical"
 msgstr "Vertikal"
 
 msgid "Current frame:"
-msgstr "Gjeldende ramme:"
+msgstr "Gjeldende bilde:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr "Gå til den første rammen\n"
+msgstr "Gå til det første bildet\n"
 "(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "Gå til forrige ramme\n"
+msgstr "Gå til forrige bilde\n"
 "(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
@@ -806,24 +806,24 @@ msgstr "Spill animasjonen forover (fra starten mot slutten) (%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "Gå til neste ramme\n"
+msgstr "Gå til neste bilde\n"
 "(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr "Gå til den første rammen\n"
+msgstr "Gå til det første bildet\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr "Innstillinger for å se flere rammer samtidig (\"Onion Skinning\")"
+msgstr "Innstillinger for å se flere bilder samtidig (\"Onion Skinning\")"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Aktiver/deaktiver Se flere rammer samtidig (\"Onion Skinning\")"
+msgstr "Aktiver/deaktiver Se flere bilder samtidig (\"Onion Skinning\")"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Hvor mange rammer per sekund skal animasjonen forhåndsvises i?\n"
-"Fler rammer per sekund betyr en raskere animasjon."
+msgstr "Hvor mange bilder per sekund skal animasjonen forhåndsvises i?\n"
+"Flere bilder per sekund betyr en raskere animasjon."
 
 msgid "No loop"
 msgstr "Ingen loop"
@@ -835,36 +835,36 @@ msgid "Ping-pong loop"
 msgstr "Ping-pong-loop"
 
 msgid "Onion Skinning:"
-msgstr "Se flere rammer samtidig (\"Onion Skinning\"):"
+msgstr "Se flere bilder samtidig (\"Onion Skinning\"):"
 
 msgid "Past Frames"
-msgstr "Tidligere rammer"
+msgstr "Tidligere bilder"
 
 msgid "Future Frames"
-msgstr "Fremtidige rammer"
+msgstr "Fremtidige bilder"
 
 msgid "Manage frame tags"
-msgstr "Administrér rammemerkelapper"
+msgstr "Administrér bildemerkelapper"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "Animasjon spiller kun på rammer med samme merkelapp"
+msgstr "Animasjon spiller kun på bilder med samme merkelapp"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Hvis valgt, spiller animasjonen bare på rammene som har samme merkelapp.\n"
-"Om ikke vil animasjonen spille for alle rammer."
+msgstr "Hvis valgt, spiller animasjonen bare på bildene som har samme merkelapp.\n"
+"Om ikke vil animasjonen spille for alle bilder."
 
 msgid "Blue-Red Mode"
 msgstr "Blå-Rød-Modus"
 
 msgid "Add a new frame"
-msgstr "Legg til ny ramme"
+msgstr "Legg til nytt bilde"
 
 msgid "Remove Frame"
-msgstr "Fjern Ramme"
+msgstr "Fjern Bilde"
 
 msgid "Clone Frame"
-msgstr "Klon Ramme"
+msgstr "Klon Bilde"
 
 msgid "Move Left"
 msgstr "Flytt til Venstre"
@@ -917,7 +917,7 @@ msgstr "Lås/lås opp lag"
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Aktiver/deaktiver cellelenking\n\n"
-"Lenkede celler deles mellom flere rammer"
+"Lenkede celler deles mellom flere bilder"
 
 msgid "Palette"
 msgstr "Palett"
@@ -977,16 +977,16 @@ msgid "Redo: Change Layer Order"
 msgstr "Gjør om: Endre Lagrekkefølge"
 
 msgid "Undo: Add Frame"
-msgstr "Angre: Legg til Ramme"
+msgstr "Angre: Legg til Bilde"
 
 msgid "Redo: Add Frame"
-msgstr "Gjør om: Legg til Ramme"
+msgstr "Gjør om: Legg til Bilde"
 
 msgid "Undo: Remove Frame"
-msgstr "Angre: Fjern Ramme"
+msgstr "Angre: Fjern Bilde"
 
 msgid "Redo: Remove Frame"
-msgstr "Gjør om: Fjern Ramme"
+msgstr "Gjør om: Fjern Bilde"
 
 msgid "Undo: Change Frame Order"
 msgstr "Angre: Endre Lagrekkefølge"
@@ -1001,16 +1001,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Gjør om: Slett Tilpasset Børste"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Angre: Endre Rammemerkelapp"
+msgstr "Angre: Endre Bildemerkelapp"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Gjør om: Endre Rammemerkelapp"
+msgstr "Gjør om: Endre Bildemerkelapp"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Angre: Slett Rammemerkelapp"
+msgstr "Angre: Slett Bildemerkelapp"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Gjør om: Slett Rammemerkelapp"
+msgstr "Gjør om: Slett Bildemerkelapp"
 
 msgid "Move Guide"
 msgstr "Flytteveiledning"
@@ -1190,10 +1190,10 @@ msgid "minute(s)"
 msgstr "minutt(er)"
 
 msgid "Create new directory for each frame tag"
-msgstr "Opprett ny mappe for hver rammemerkelapp"
+msgstr "Opprett ny mappe for hver bildemerkelapp"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Oppretter flere filer, hver fil lagres i en mappe som tilsvarer rammemerkelappen sin"
+msgstr "Oppretter flere filer, hver fil lagres i en mappe som tilsvarer bildemerkelappen sin"
 
 msgid "Close"
 msgstr "Lukk"
