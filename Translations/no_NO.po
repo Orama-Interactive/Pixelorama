@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-23 08:46\n"
+"PO-Revision-Date: 2020-06-23 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -170,6 +170,12 @@ msgstr "Nytt lag"
 
 msgid "New palette"
 msgstr "Ny palett"
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
 
 msgid "Horizontal frames:"
 msgstr "Horisontale bilder:"
@@ -483,6 +489,12 @@ msgstr "Arabisk"
 
 msgid "Turkish"
 msgstr "Tyrkisk"
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
