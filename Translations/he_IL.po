@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-06-17 13:54\n"
+"PO-Revision-Date: 2020-06-23 19:11\n"
 
 msgid "OK"
 msgstr ""
@@ -169,6 +169,12 @@ msgid "New layer"
 msgstr ""
 
 msgid "New palette"
+msgstr ""
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
@@ -482,6 +488,12 @@ msgid "Arabic"
 msgstr ""
 
 msgid "Turkish"
+msgstr ""
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
 msgstr ""
 
 msgid "Development Team"
