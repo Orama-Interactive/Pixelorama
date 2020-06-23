@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-23 19:11\n"
+"PO-Revision-Date: 2020-06-23 20:57\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -494,7 +494,7 @@ msgid "Norwegian"
 msgstr ""
 
 msgid "Korean"
-msgstr ""
+msgstr "Korece"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -530,7 +530,7 @@ msgid "You have unsaved changes. If you proceed, the progress you have made will
 msgstr ""
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Çıkıştan önce kaydetsin mi?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr "Kaydedilmemiş işlemin var. Ne yapılmasını istersin?"
@@ -1055,13 +1055,13 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Platin Sponsor Ol"
 
 msgid "Become a Gold Sponsor"
 msgstr "Altın Sponsor Ol"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Patron Ol"
 
 msgid "Don't show again"
 msgstr "Bir daha gösterme"
@@ -1191,7 +1191,7 @@ msgstr "Sil"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "%s için yedek bulundu. Geri yüklemek ister misin?"
 
 msgid "Backup reloaded"
 msgstr "Yedek yüklendi"
@@ -1203,7 +1203,7 @@ msgid "You can't remove more palettes!"
 msgstr "Daha fazla palet silemezsin!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Olmayan paleti silemezsin!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Paleti kaldırırken bir hata oldu! Hata kodu: %s"
