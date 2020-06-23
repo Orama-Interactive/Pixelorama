@@ -87,7 +87,7 @@ rect_min_size = Vector2( 4, 0 )
 [node name="Buttons" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos"]
 margin_left = 8.0
 margin_right = 298.0
-margin_bottom = 110.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 290, 0 )
 size_flags_vertical = 0
 custom_constants/separation = 10
@@ -111,13 +111,6 @@ margin_right = 290.0
 margin_bottom = 80.0
 mouse_default_cursor_shape = 2
 text = "Open Last Project"
-
-[node name="ImportBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
-margin_top = 90.0
-margin_right = 290.0
-margin_bottom = 110.0
-mouse_default_cursor_shape = 2
-text = "Import"
 
 [node name="Info" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos"]
 margin_left = 302.0
@@ -285,7 +278,6 @@ rect_min_size = Vector2( 4, 0 )
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn " to="." method="_on_OpenBtn__pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/ImportBtn" to="." method="_on_ImportBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePlatinum" to="." method="_on_TakeThisSpot_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomeGold" to="." method="_on_TakeThisSpot_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePatron" to="." method="_on_TakeThisSpot_pressed"]
