@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-17 13:53\n"
+"PO-Revision-Date: 2020-06-23 08:46\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1139,7 +1139,7 @@ msgid "A tool assigned to the right mouse button"
 msgstr ""
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Son proje bulunamadı."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
@@ -1148,13 +1148,13 @@ msgid "Open Last Project"
 msgstr "Son Projeyi Aç"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Son projeyi aç..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Başlangıçta son projeyi aç"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Başlangıçta son projeyi açar"
 
 msgid "Enable autosave"
 msgstr "Otomatik kaydetmeyi etkinleştir"
