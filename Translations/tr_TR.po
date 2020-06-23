@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-23 10:12\n"
+"PO-Revision-Date: 2020-06-23 15:52\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1046,7 +1046,7 @@ msgid "Become a Platinum Sponsor"
 msgstr ""
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Altın Sponsor Ol"
 
 msgid "Become a Patron"
 msgstr ""
