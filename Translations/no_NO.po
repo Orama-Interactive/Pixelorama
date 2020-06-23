@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-22 13:02\n"
+"PO-Revision-Date: 2020-06-23 08:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -616,13 +616,13 @@ msgid "Left pixel indicator"
 msgstr "Venstre pikselindikator"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Vis pikselindikator eller børste for venstre musepeker på lerretet når du tegner"
 
 msgid "Right pixel indicator"
 msgstr "Høyre pikselindikator"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Vis pikselindikator eller børste for høyre musepeker på lerretet når du tegner"
 
 msgid "Show left tool icon"
 msgstr "Vis venstre verktøyikon"
@@ -815,10 +815,10 @@ msgstr "Gå til den første rammen\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Innstillinger for å se flere rammer samtidig (\"Onion Skinning\")"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Aktiver/deaktiver Se flere rammer samtidig (\"Onion Skinning\")"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -835,7 +835,7 @@ msgid "Ping-pong loop"
 msgstr "Ping-pong-loop"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Se flere rammer samtidig (\"Onion Skinning\"):"
 
 msgid "Past Frames"
 msgstr "Tidligere rammer"
@@ -916,7 +916,8 @@ msgstr "Lås/lås opp lag"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Aktiver/deaktiver cellelenking\n\n"
+"Lenkede celler deles mellom flere rammer"
 
 msgid "Palette"
 msgstr "Palett"
@@ -1165,7 +1166,7 @@ msgid "Cannot find last project file."
 msgstr "Finner ikke siste prosjektfil."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Du har ikke lagret eller åpnet et prosjekt i Pixelorama enda!"
 
 msgid "Open Last Project"
 msgstr "Åpne Siste Prosjekt"
@@ -1192,7 +1193,7 @@ msgid "Create new directory for each frame tag"
 msgstr "Opprett ny mappe for hver rammemerkelapp"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Oppretter flere filer, hver fil lagres i en mappe som tilsvarer rammemerkelappen sin"
 
 msgid "Close"
 msgstr "Lukk"
