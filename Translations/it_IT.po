@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-06-23 19:12\n"
+"PO-Revision-Date: 2020-06-23 20:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -172,10 +172,10 @@ msgid "New palette"
 msgstr "Nuova tavolozza"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nuova pennello"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nuovo motivo"
 
 msgid "Horizontal frames:"
 msgstr "Quadri orizzontali:"
@@ -492,10 +492,10 @@ msgid "Turkish"
 msgstr "Turco"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvegese"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coreano"
 
 msgid "Development Team"
 msgstr "Team di sviluppo"
