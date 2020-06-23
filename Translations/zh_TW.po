@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-17 13:54\n"
+"PO-Revision-Date: 2020-06-23 19:12\n"
 
 msgid "OK"
 msgstr "確定"
@@ -169,6 +169,12 @@ msgid "New layer"
 msgstr ""
 
 msgid "New palette"
+msgstr ""
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
@@ -483,6 +489,12 @@ msgstr "阿拉伯文"
 
 msgid "Turkish"
 msgstr "土耳其文"
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
 
 msgid "Development Team"
 msgstr "開發團隊"
