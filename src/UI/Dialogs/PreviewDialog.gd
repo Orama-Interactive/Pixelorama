@@ -42,9 +42,18 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_frame(image, layer_index)
 	elif current_import_option == ImageImportOptions.NEW_LAYER:
 		var frame_index : int = new_layer_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_as_new_layer(image, path.get_file(), frame_index)
+		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 	elif current_import_option == ImageImportOptions.PALETTE:
 		Global.palette_container.on_palette_import_file_selected(path)
+	elif current_import_option == ImageImportOptions.BRUSH:
+		var file_name : String = path.get_basename().get_file()
+		Global.file_brushes.append(image)
+		Global.create_brush_button(image, Global.Brush_Types.FILE, file_name)
+
+		# Copy the image file into the "pixelorama/Brushes" directory
+		var location := "Brushes".plus_file(path.get_file())
+		var dir = Directory.new()
+		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
 
 func _on_ImportOption_item_selected(id : int) -> void:

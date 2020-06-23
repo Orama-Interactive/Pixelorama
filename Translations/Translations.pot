@@ -160,6 +160,12 @@ msgstr ""
 msgid "New palette"
 msgstr ""
 
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
+
 msgid "Horizontal frames:"
 msgstr ""
 
@@ -471,6 +477,12 @@ msgid "Arabic"
 msgstr ""
 
 msgid "Turkish"
+msgstr ""
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
 msgstr ""
 
 msgid "Development Team"
