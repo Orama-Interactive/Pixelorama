@@ -236,15 +236,7 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
 				Global.patterns.append(image)
-
-				var pattern_button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
-				pattern_button.image = image
-				var pattern_tex := ImageTexture.new()
-				pattern_tex.create_from_image(image, 0)
-				pattern_button.get_child(0).texture = pattern_tex
-				pattern_button.hint_tooltip = pattern
-				pattern_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				Global.patterns_popup.get_node("ScrollContainer/PatternContainer").add_child(pattern_button)
+				Global.create_pattern_button(image, pattern)
 
 			if Global.patterns.size() > 0:
 				var image_size = Global.patterns[0].get_size()

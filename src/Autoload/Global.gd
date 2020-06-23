@@ -611,6 +611,17 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	brush_container.add_child(brush_button)
 
 
+func create_pattern_button(image : Image, hint_tooltip := "") -> void:
+	var pattern_button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
+	pattern_button.image = image
+	var pattern_tex := ImageTexture.new()
+	pattern_tex.create_from_image(image, 0)
+	pattern_button.get_child(0).texture = pattern_tex
+	pattern_button.hint_tooltip = hint_tooltip
+	pattern_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	patterns_popup.get_node("ScrollContainer/PatternContainer").add_child(pattern_button)
+
+
 func remove_brush_buttons() -> void:
 	current_brush_types[0] = Brush_Types.PIXEL
 	current_brush_types[1] = Brush_Types.PIXEL

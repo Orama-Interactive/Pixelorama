@@ -35,23 +35,40 @@ func _on_PreviewDialog_popup_hide() -> void:
 func _on_PreviewDialog_confirmed() -> void:
 	if current_import_option == ImageImportOptions.NEW_TAB:
 		OpenSave.open_image_as_new_tab(path, image)
+
 	elif current_import_option == ImageImportOptions.SPRITESHEET:
 		OpenSave.open_image_as_spritesheet(path, image, spritesheet_horizontal, spritesheet_vertical)
+
 	elif current_import_option == ImageImportOptions.NEW_FRAME:
 		var layer_index : int = new_frame_options.get_node("AtLayerSpinbox").value
 		OpenSave.open_image_as_new_frame(image, layer_index)
+
 	elif current_import_option == ImageImportOptions.NEW_LAYER:
 		var frame_index : int = new_layer_options.get_node("AtFrameSpinbox").value - 1
 		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
+
 	elif current_import_option == ImageImportOptions.PALETTE:
 		Global.palette_container.on_palette_import_file_selected(path)
+
 	elif current_import_option == ImageImportOptions.BRUSH:
 		var file_name : String = path.get_basename().get_file()
+		image.convert(Image.FORMAT_RGBA8)
 		Global.file_brushes.append(image)
 		Global.create_brush_button(image, Global.Brush_Types.FILE, file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
 		var location := "Brushes".plus_file(path.get_file())
+		var dir = Directory.new()
+		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+
+	elif current_import_option == ImageImportOptions.PATTERN:
+		var file_name : String = path.get_basename().get_file()
+		image.convert(Image.FORMAT_RGBA8)
+		Global.patterns.append(image)
+		Global.create_pattern_button(image, file_name)
+
+		# Copy the image file into the "pixelorama/Patterns" directory
+		var location := "Patterns".plus_file(path.get_file())
 		var dir = Directory.new()
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
