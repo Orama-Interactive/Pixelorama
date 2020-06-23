@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-23 10:00\n"
+"PO-Revision-Date: 2020-06-23 10:12\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1182,7 +1182,7 @@ msgid "Autosaved backup for %s was found.\n"
 msgstr ""
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Yedek yüklendi"
 
 msgid "Remove currently selected palette"
 msgstr "Seçili paleti sil"
