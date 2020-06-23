@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-23 20:57\n"
+"PO-Revision-Date: 2020-06-23 21:37\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1040,7 +1040,7 @@ msgid "Error: Palette must have a valid name."
 msgstr "Hata: Paletin herhangi bir ismi olmalıdır."
 
 msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Hata: '%s' isimli palet zaten var!"
 
 msgid "Invalid Palette file!"
 msgstr "Geçersiz palet dosyası!"
@@ -1049,7 +1049,7 @@ msgid "Edit Palette"
 msgstr "Paleti Düzenle"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patronlar:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -1130,7 +1130,7 @@ msgid "Switch Colors"
 msgstr ""
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Kısayol seç"
 
 msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
