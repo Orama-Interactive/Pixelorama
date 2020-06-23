@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-06-23 19:12\n"
+"PO-Revision-Date: 2020-06-23 21:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -172,10 +172,10 @@ msgid "New palette"
 msgstr "Новая палитра"
 
 msgid "New brush"
-msgstr ""
+msgstr "Новая кисть"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Новый узор"
 
 msgid "Horizontal frames:"
 msgstr "Кадров по горизонтали:"
@@ -492,10 +492,10 @@ msgid "Turkish"
 msgstr "Турецкий"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвежский"
 
 msgid "Korean"
-msgstr ""
+msgstr "Корейский"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
