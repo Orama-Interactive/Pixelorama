@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-24 12:55\n"
+"PO-Revision-Date: 2020-06-24 17:13\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1041,9 +1041,6 @@ msgstr "Yeni palet oluşturulsun mu?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Hata: Paletin herhangi bir ismi olmalıdır."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Hata: '%s' isimli palet zaten var!"
 
 msgid "Invalid Palette file!"
 msgstr "Geçersiz palet dosyası!"
