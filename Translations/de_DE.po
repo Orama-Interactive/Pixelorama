@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 11:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Height:"
 msgstr "Höhe:"
 
 msgid "Center"
-msgstr ""
+msgstr "Zentrieren"
 
 msgid "File"
 msgstr "Datei"
@@ -175,10 +175,10 @@ msgid "New palette"
 msgstr "Neue Palette"
 
 msgid "New brush"
-msgstr ""
+msgstr "Neuer Pinsel"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Neues Muster"
 
 msgid "Horizontal frames:"
 msgstr "Horizontale Frames:"
@@ -365,7 +365,7 @@ msgid "Light"
 msgstr "Hell"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Farben umkehren"
 
 msgid "Desaturation"
 msgstr "Entsättigung"
@@ -494,10 +494,10 @@ msgid "Turkish"
 msgstr "Türkisch"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norwegisch"
 
 msgid "Korean"
-msgstr ""
+msgstr "Koreanisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
