@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-06-24 01:06\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1066,9 +1066,6 @@ msgstr "Создать пустую палитру?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Ошибка: Палитра должна иметь корректное имя."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Ошибка: Палитра с именем '%s' уже существует!"
 
 msgid "Invalid Palette file!"
 msgstr "Недопустимый файл палитры!"
