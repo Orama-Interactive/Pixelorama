@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-24 17:14\n"
+"PO-Revision-Date: 2020-06-24 17:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1050,6 +1050,9 @@ msgstr "Ny Tom Palett"
 
 msgid "Import Palette"
 msgstr "Importer Palett"
+
+msgid "Create Palette From Current Sprite"
+msgstr ""
 
 msgid "Palette Name:"
 msgstr "Palettnavn:"
