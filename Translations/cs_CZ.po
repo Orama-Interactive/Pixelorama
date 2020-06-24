@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-06-24 17:14\n"
+"PO-Revision-Date: 2020-06-24 17:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1053,6 +1053,9 @@ msgstr "Nová prázdná paleta"
 
 msgid "Import Palette"
 msgstr "Importovat paletu"
+
+msgid "Create Palette From Current Sprite"
+msgstr ""
 
 msgid "Palette Name:"
 msgstr "Název palety:"
