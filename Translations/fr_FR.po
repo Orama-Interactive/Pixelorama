@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-06-24 06:10\n"
+"PO-Revision-Date: 2020-06-24 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1068,9 +1068,6 @@ msgstr "Créer une nouvelle palette vide?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Erreur: La palette doit avoir un nom valide."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Erreur: La palette nommée '%s' existe déjà!"
 
 msgid "Invalid Palette file!"
 msgstr "Fichier Palette invalide!"
