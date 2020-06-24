@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1067,9 +1067,6 @@ msgstr "Utworzyć nową pustą paletę kolorów?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Błąd: Paleta kolorów musi mieć poprawną nazwę."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Błąd: Paleta kolorów o nazwie '%s' już istnieje!"
 
 msgid "Invalid Palette file!"
 msgstr "Niepoprawny plik palety kolorów!"
