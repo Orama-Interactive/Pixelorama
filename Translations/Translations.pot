@@ -22,6 +22,9 @@ msgstr ""
 msgid "Canvas Size"
 msgstr ""
 
+msgid "Frame Size"
+msgstr ""
+
 msgid "Width:"
 msgstr ""
 

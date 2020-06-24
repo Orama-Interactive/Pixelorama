@@ -47,10 +47,28 @@ __meta__ = {
 
 [node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 304.0
 margin_right = 534.0
-margin_bottom = 324.0
+margin_bottom = 318.0
+custom_constants/separation = 32
+
+[node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
+margin_right = 117.0
+margin_bottom = 14.0
+text = "Image Size: 64×64"
+
+[node name="FrameSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
+visible = false
+margin_left = 149.0
+margin_right = 266.0
+margin_bottom = 14.0
+text = "Frame size: 64×64"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 322.0
+margin_right = 534.0
+margin_bottom = 342.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_top = 3.0
