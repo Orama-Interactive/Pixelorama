@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1068,9 +1068,6 @@ msgstr "Δημιουργία νέας κενής παλέτας;"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Σφάλμα: Η παλέτα πρέπει να έχει έγκυρο όνομα."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Σφάλμα: Η παλέτα με το όνομα '%s' υπάρχει ήδη!"
 
 msgid "Invalid Palette file!"
 msgstr "Μη έγκυρο αρχείο παλέτας!"
