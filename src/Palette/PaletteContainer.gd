@@ -54,18 +54,14 @@ func on_palette_import_file_selected(path : String) -> void:
 		palette = Import.import_png_palette(path)
 
 	if palette:
-		if not Global.palettes.has(palette.name):
-			Global.palettes[palette.name] = palette
-			Global.palette_option_button.add_item(palette.name)
-			var index: int = Global.palette_option_button.get_item_count() - 1
-			Global.palette_option_button.set_item_metadata(index, palette.name)
-			Global.palette_option_button.select(index)
-			on_palette_select(palette.name)
-			save_palette(palette.name, palette.name + ".json")
-		else:
-			Global.error_dialog.set_text(tr("Error: Palette named '%s' already exists!") % palette.name)
-			Global.error_dialog.popup_centered()
-			Global.dialog_open(true)
+		palette.name = palette_name_replace(palette.name)
+		Global.palettes[palette.name] = palette
+		Global.palette_option_button.add_item(palette.name)
+		var index: int = Global.palette_option_button.get_item_count() - 1
+		Global.palette_option_button.set_item_metadata(index, palette.name)
+		Global.palette_option_button.select(index)
+		on_palette_select(palette.name)
+		save_palette(palette.name, palette.name + ".json")
 	else:
 		Global.error_dialog.set_text("Invalid Palette file!")
 		Global.error_dialog.popup_centered()
@@ -87,10 +83,10 @@ func on_new_palette_confirmed() -> void:
 
 func add_palette_menu_id_pressed(id : int) -> void:
 	match id:
-		0:	# New Empty Palette
-			Global.palette_container.on_new_empty_palette()
-		1:	# Import Palette
-			Global.palette_container.on_import_palette()
+		0: # New Empty Palette
+			on_new_empty_palette()
+		1: # Import Palette
+			on_import_palette()
 
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
@@ -99,8 +95,8 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	# Check if new name is valid
 	if name.empty():
 		return tr("Error: Palette must have a valid name.")
-	if Global.palettes.has(name):
-		return tr("Error: Palette named '%s' already exists!") % name
+
+	name = palette_name_replace(name)
 
 	new_palette.name = name
 	# Check if source palette has data
@@ -120,6 +116,19 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 
 	on_palette_select(name)
 	return ""
+
+
+# Checks if the palette name already exists
+# If it does, add a number to its name, for example
+# "Palette_Name" will become "Palette_Name (2)", "Palette_Name (3)", etc.
+func palette_name_replace(name : String) -> String:
+	var i := 1
+	var temp_name := name
+	while Global.palettes.has(temp_name):
+		i += 1
+		temp_name = name + " (%s)" % i
+	name = temp_name
+	return name
 
 
 func on_edit_palette() -> void:

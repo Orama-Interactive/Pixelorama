@@ -26,6 +26,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Pixel perfect is no longer enabled when the brush size is bigger than 1px.
 - The .pxo file structure has been changed. It's now consisted of a JSON-structured metadata part, where all the data that can be stored as text are, and a binary part, that contain all the actual image data for each cel and project brush.
 - When making a straight line, a preview of how the line's pixels will look is now being shown. ([#260](https://github.com/Orama-Interactive/Pixelorama/pull/260))
+- When making a new palette or importing one and its name already exists, Pixelorama will add a number to its name. For example, "Palette_Name" would become "Palette_Name (2)", "Palette_Name (3)", etc.
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
 
