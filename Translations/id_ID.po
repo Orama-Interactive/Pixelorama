@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1065,9 +1065,6 @@ msgstr "Buat palet kosong baru?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: nama palet tidak valid."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Error: Palet bernama %s sudah ada"
 
 msgid "Invalid Palette file!"
 msgstr "File palet tidak valid"
