@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-06-23 19:11\n"
+"PO-Revision-Date: 2020-06-24 00:27\n"
 
 msgid "OK"
 msgstr ""
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-msgid "Invert colors"
+msgid "Invert Colors"
 msgstr ""
 
 msgid "Desaturation"
