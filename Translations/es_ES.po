@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-06-24 17:14\n"
+"PO-Revision-Date: 2020-06-24 17:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1025,6 +1025,9 @@ msgstr "Nueva Paleta Vacía"
 
 msgid "Import Palette"
 msgstr "Importar Paleta"
+
+msgid "Create Palette From Current Sprite"
+msgstr ""
 
 msgid "Palette Name:"
 msgstr "Nombre de la Paleta:"
