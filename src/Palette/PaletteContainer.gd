@@ -87,6 +87,8 @@ func add_palette_menu_id_pressed(id : int) -> void:
 			on_new_empty_palette()
 		1: # Import Palette
 			on_import_palette()
+		2: # Create Palette From Current Sprite
+			create_palette_from_sprite()
 
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
@@ -147,6 +149,28 @@ func on_edit_palette() -> void:
 	else:
 		from_palette = null
 		Global.edit_palette_popup.open(current_palette)
+
+
+func create_palette_from_sprite() -> void:
+	var current_project : Project = Global.current_project
+	var new_palette_name : String = current_project.name
+	var result : String = create_new_palette(new_palette_name, null)
+	if not result.empty():
+		Global.error_dialog.set_text(result)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+	else:
+		var current_cel : Cel = current_project.frames[current_project.current_frame].cels[current_project.current_layer]
+		var cel_image : Image = current_cel.image
+		var palette : Palette = Global.palettes[current_palette]
+		for x in cel_image.get_size().x:
+			for y in cel_image.get_size().y:
+				var color : Color = cel_image.get_pixel(x, y)
+				if color.a > 0 and !palette.has_color(color):
+					palette.add_color(color)
+
+		save_palette(current_palette, current_palette + ".json")
+		_display_palette(palette)
 
 
 func _on_PaletteOptionButton_item_selected(ID : int) -> void:

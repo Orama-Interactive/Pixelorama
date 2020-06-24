@@ -1014,6 +1014,9 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
+msgid "Create Palette From Current Sprite"
+msgstr ""
+
 msgid "Palette Name:"
 msgstr ""
 
