@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-06-24 17:14\n"
+"PO-Revision-Date: 2020-06-24 17:27\n"
 
 msgid "OK"
 msgstr "예"
@@ -1024,6 +1024,9 @@ msgid "New Empty Palette"
 msgstr ""
 
 msgid "Import Palette"
+msgstr ""
+
+msgid "Create Palette From Current Sprite"
 msgstr ""
 
 msgid "Palette Name:"
