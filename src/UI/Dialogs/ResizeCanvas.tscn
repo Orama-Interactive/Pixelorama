@@ -11,7 +11,10 @@ script = ExtResource( 1 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 152.0
+margin_bottom = 176.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
 margin_right = 184.0
@@ -21,20 +24,20 @@ text = "Canvas Size"
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 184.0
-margin_bottom = 144.0
+margin_bottom = 168.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 2
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 5.0
-margin_right = 46.0
+margin_right = 54.0
 margin_bottom = 19.0
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 48.0
-margin_right = 122.0
+margin_left = 56.0
+margin_right = 130.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -44,14 +47,14 @@ suffix = "px"
 
 [node name="Height" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 33.0
-margin_right = 46.0
+margin_right = 54.0
 margin_bottom = 47.0
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 48.0
+margin_left = 56.0
 margin_top = 28.0
-margin_right = 122.0
+margin_right = 130.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -61,26 +64,26 @@ suffix = "px"
 
 [node name="OffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 56.0
-margin_right = 46.0
+margin_right = 54.0
 margin_bottom = 70.0
 text = "Offset"
 
 [node name="EmptySpacer" type="Control" parent="VBoxContainer/OptionsContainer"]
-margin_left = 48.0
+margin_left = 56.0
 margin_top = 56.0
-margin_right = 122.0
+margin_right = 130.0
 margin_bottom = 70.0
 
 [node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 79.0
-margin_right = 46.0
+margin_right = 54.0
 margin_bottom = 93.0
 text = "X:"
 
 [node name="XSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 48.0
+margin_left = 56.0
 margin_top = 74.0
-margin_right = 122.0
+margin_right = 130.0
 margin_bottom = 98.0
 mouse_default_cursor_shape = 2
 max_value = 0.0
@@ -88,20 +91,27 @@ suffix = "px"
 
 [node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 107.0
-margin_right = 46.0
+margin_right = 54.0
 margin_bottom = 121.0
 text = "Y:"
 
 [node name="YSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 48.0
+margin_left = 56.0
 margin_top = 102.0
-margin_right = 122.0
+margin_right = 130.0
 margin_bottom = 126.0
 mouse_default_cursor_shape = 2
 max_value = 0.0
 suffix = "px"
+
+[node name="CenterButton" type="Button" parent="VBoxContainer/OptionsContainer"]
+margin_top = 130.0
+margin_right = 54.0
+margin_bottom = 150.0
+text = "Center"
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/YSpinBox" to="." method="_on_YSpinBox_value_changed"]
+[connection signal="pressed" from="VBoxContainer/OptionsContainer/CenterButton" to="." method="_on_CenterButton_pressed"]

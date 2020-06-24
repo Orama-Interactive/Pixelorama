@@ -28,6 +28,9 @@ msgstr ""
 msgid "Height:"
 msgstr ""
 
+msgid "Center"
+msgstr ""
+
 msgid "File"
 msgstr ""
 

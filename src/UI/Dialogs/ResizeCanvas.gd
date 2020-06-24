@@ -34,3 +34,8 @@ func _on_XSpinBox_value_changed(value : int) -> void:
 
 func _on_YSpinBox_value_changed(value : int) -> void:
 	offset_y = value
+
+
+func _on_CenterButton_pressed() -> void:
+	x_spinbox.value = (x_spinbox.min_value + x_spinbox.max_value) / 2
+	y_spinbox.value = (y_spinbox.min_value + y_spinbox.max_value) / 2

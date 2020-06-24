@@ -15,16 +15,19 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))
 - Added Resize Canvas option to Image menu.
 - You can now preview how the frames of the spritesheet you are importing will look.
+- You can now import image files as layers. Their size will be cropped to the project's size.
+- You can import image files as brushes, patterns and palettes.
 
 ### Changed
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
 - The guides are now the same for all frames.
+- The "Import" option from the file menu has been removed, users can now import image files from "Open".
+- Imported frames are now being cropped to the project's size. It is no longer possible to have multiple sizes for each frame at all in the same project.
 - Pixel perfect is no longer enabled when the brush size is bigger than 1px.
 - The .pxo file structure has been changed. It's now consisted of a JSON-structured metadata part, where all the data that can be stored as text are, and a binary part, that contain all the actual image data for each cel and project brush.
 - When making a straight line, a preview of how the line's pixels will look is now being shown. ([#260](https://github.com/Orama-Interactive/Pixelorama/pull/260))
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
-- The "Import" option from the file menu has been removed, users can now import image files from "Open".
 
 ### Fixed
 - Exporting large images and drawing with large image brushes is now a lot faster. (Because of Godot 3.2.2)
