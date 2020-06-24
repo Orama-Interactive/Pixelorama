@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-06-24 00:27\n"
+"PO-Revision-Date: 2020-06-24 00:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Largeur :"
 
 msgid "Height:"
 msgstr "Hauteur :"
+
+msgid "Center"
+msgstr ""
 
 msgid "File"
 msgstr "Fichier"
