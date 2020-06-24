@@ -6,13 +6,20 @@ var height := 64
 var offset_x := 0
 var offset_y := 0
 var image : Image
+var first_time := true
 
+onready var width_spinbox : SpinBox = $VBoxContainer/OptionsContainer/WidthValue
+onready var height_spinbox : SpinBox = $VBoxContainer/OptionsContainer/HeightValue
 onready var x_spinbox : SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
 onready var y_spinbox : SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
 onready var preview_rect : TextureRect = $VBoxContainer/Preview
 
 
 func _on_ResizeCanvas_about_to_show() -> void:
+	if first_time:
+		width_spinbox.value = Global.current_project.size.x
+		height_spinbox.value = Global.current_project.size.y
+
 	image = Image.new()
 	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	image.lock()
@@ -38,6 +45,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 
 func _on_ResizeCanvas_confirmed() -> void:
 	DrawingAlgos.resize_canvas(width, height, offset_x, offset_y)
+	first_time = false
 
 
 func _on_WidthValue_value_changed(value : int) -> void:
