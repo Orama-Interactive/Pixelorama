@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1068,9 +1068,6 @@ msgstr "Vytvořit novou prázdnou paletu?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Chyba: Paleta musí mít platný název."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Chyba: Paleta s názvem '%s' již existuje!"
 
 msgid "Invalid Palette file!"
 msgstr "Neplatný soubor palety!"
