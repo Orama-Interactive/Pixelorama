@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 10:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Height:"
 msgstr "Altezza:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 msgid "File"
 msgstr "File"
@@ -366,7 +366,7 @@ msgid "Light"
 msgstr "Chiaro"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Inverti Colori"
 
 msgid "Desaturation"
 msgstr "Desaturazione"
