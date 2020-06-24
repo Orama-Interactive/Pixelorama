@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-24 00:27\n"
+"PO-Revision-Date: 2020-06-24 00:39\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -38,6 +38,9 @@ msgstr "Genişlik:"
 
 msgid "Height:"
 msgstr "Yükseklik:"
+
+msgid "Center"
+msgstr ""
 
 msgid "File"
 msgstr "Dosya"
