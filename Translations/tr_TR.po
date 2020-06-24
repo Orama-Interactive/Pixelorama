@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 10:04\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -365,7 +365,7 @@ msgid "Light"
 msgstr "Açık"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Renkleri Tersle"
 
 msgid "Desaturation"
 msgstr ""
@@ -413,7 +413,7 @@ msgid "Online Docs"
 msgstr "Çevrimiçi Dökümanlar"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Sorun İzleyici"
 
 msgid "Changelog"
 msgstr "Değişiklikler"
@@ -530,7 +530,7 @@ msgid "Unsaved Image"
 msgstr "Kaydedilmemiş Resim"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Kaydedilmemiş değişiklikler var. Devam edecek misiniz?"
 
 msgid "Save before exiting?"
 msgstr "Çıkıştan önce kaydetsin mi?"
