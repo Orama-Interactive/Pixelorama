@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-06-24 17:27\n"
+"PO-Revision-Date: 2020-06-24 22:29\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -32,6 +32,9 @@ msgstr "Afbeeldingsgrootte"
 
 msgid "Canvas Size"
 msgstr "Canvas grootte"
+
+msgid "Frame Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Breedte:"
