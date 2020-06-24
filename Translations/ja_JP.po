@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-06-24 17:28\n"
+"PO-Revision-Date: 2020-06-24 22:29\n"
 
 msgid "OK"
 msgstr ""
@@ -31,6 +31,9 @@ msgid "Image Size"
 msgstr ""
 
 msgid "Canvas Size"
+msgstr ""
+
+msgid "Frame Size"
 msgstr ""
 
 msgid "Width:"
