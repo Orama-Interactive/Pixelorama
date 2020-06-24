@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2020-06-24 17:13\n"
+"PO-Revision-Date: 2020-06-24 17:27\n"
 
 msgid "OK"
 msgstr ""
@@ -1023,6 +1023,9 @@ msgid "New Empty Palette"
 msgstr ""
 
 msgid "Import Palette"
+msgstr ""
+
+msgid "Create Palette From Current Sprite"
 msgstr ""
 
 msgid "Palette Name:"
