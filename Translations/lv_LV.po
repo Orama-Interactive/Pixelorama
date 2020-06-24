@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1064,9 +1064,6 @@ msgstr "Izveidot jaunu tukšu paleti?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Kļūda: Paletei nepieciešams derīgs nosaukums."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Kļūda: Paletes nosaukums '%s' jau eksistē!"
 
 msgid "Invalid Palette file!"
 msgstr "Nederīgs paletes fails!"
