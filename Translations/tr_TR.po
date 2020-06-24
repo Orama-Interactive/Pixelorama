@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-24 10:04\n"
+"PO-Revision-Date: 2020-06-24 12:10\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1037,7 +1037,7 @@ msgid "Use current left & right colors"
 msgstr ""
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Yeni palet oluşturulsun mu?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Hata: Paletin herhangi bir ismi olmalıdır."
