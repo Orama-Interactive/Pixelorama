@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-06-24 17:28\n"
+"PO-Revision-Date: 2020-06-24 18:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1053,7 +1053,7 @@ msgid "Import Palette"
 msgstr "Импорт Палитры"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Создать палитру из текущего спрайта"
 
 msgid "Palette Name:"
 msgstr "Название палитры:"
