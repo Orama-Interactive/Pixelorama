@@ -83,7 +83,7 @@ func setup_image_menu() -> void:
 		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
 		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
 		"Rotate Image" : 0,
-		"Invert colors" : 0,
+		"Invert Colors" : 0,
 		"Desaturation" : 0,
 		"Outline" : 0,
 		"Adjust Hue/Saturation/Value" : 0
@@ -93,7 +93,7 @@ func setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items.keys():
 		image_menu.add_item(item, i, image_menu_items[item])
-		if i == 4:
+		if i == 2:
 			image_menu.add_separator()
 		i += 1
 

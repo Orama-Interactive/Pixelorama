@@ -636,15 +636,15 @@ func crop_image(image : Image) -> void:
 	Global.current_project.undo_redo.commit_action()
 
 
-func resize_canvas(width : int, height : int) -> void:
+func resize_canvas(width : int, height : int, offset_x : int, offset_y : int) -> void:
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Scale")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
 	for f in Global.current_project.frames:
 		for c in f.cels:
 			var sprite := Image.new()
-			sprite.copy_from(c.image)
-			sprite.crop(width, height)
+			sprite.create(width, height, false, Image.FORMAT_RGBA8)
+			sprite.blend_rect(c.image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2(offset_x, offset_y))
 			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
 

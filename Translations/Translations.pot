@@ -350,7 +350,7 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-msgid "Invert colors"
+msgid "Invert Colors"
 msgstr ""
 
 msgid "Desaturation"
