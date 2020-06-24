@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-24 02:10\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1068,9 +1068,6 @@ msgstr "创建一个新的空调色板?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "错误：调色板必须具有有效的名称。"
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "错误：名为 '%s' 的调色板已存在!"
 
 msgid "Invalid Palette file!"
 msgstr "无效的调色板文件!"
