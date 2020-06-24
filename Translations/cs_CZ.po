@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-06-24 17:27\n"
+"PO-Revision-Date: 2020-06-24 22:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,6 +31,9 @@ msgid "Image Size"
 msgstr "Velikost obrázku"
 
 msgid "Canvas Size"
+msgstr ""
+
+msgid "Frame Size"
 msgstr ""
 
 msgid "Width:"
