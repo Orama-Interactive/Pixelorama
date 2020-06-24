@@ -37,7 +37,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Fixed a rare issue with Undo/Redo not working while motion-drawing and making lines.
 - Grid and guides are now longer being displayed on previews. ([#205](https://github.com/Orama-Interactive/Pixelorama/issues/205))
 - Fixed a rare problem where the custom mouse cursor's image was failing to load.
-- Importing a non-palette json file no longer crashes the app.
+- Importing corrupted image files and non-palette json files no longer crash the app.
 <br><br>
 
 ## [v0.7] - 2020-05-16
