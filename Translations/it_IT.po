@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-06-24 17:28\n"
+"PO-Revision-Date: 2020-06-24 22:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -32,6 +32,9 @@ msgstr "Dimensione dell'immagine"
 
 msgid "Canvas Size"
 msgstr "Dimensione Tela"
+
+msgid "Frame Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Larghezza:"
