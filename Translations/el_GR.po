@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-24 17:14\n"
+"PO-Revision-Date: 2020-06-24 17:28\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1053,6 +1053,9 @@ msgstr "Νέα Κενή Παλέτα"
 
 msgid "Import Palette"
 msgstr "Εισαγωγή Παλέτας"
+
+msgid "Create Palette From Current Sprite"
+msgstr ""
 
 msgid "Palette Name:"
 msgstr "Όνομα Παλέτας:"
