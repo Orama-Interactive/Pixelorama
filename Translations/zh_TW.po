@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 17:14\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1066,9 +1066,6 @@ msgstr "新增空的色盤?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "錯誤: 色盤名字無法使用"
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "已有檔案名為 ‘%s’"
 
 msgid "Invalid Palette file!"
 msgstr "色盤檔無法使用"
