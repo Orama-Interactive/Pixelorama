@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-24 00:39\n"
+"PO-Revision-Date: 2020-06-24 02:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -40,7 +40,7 @@ msgid "Height:"
 msgstr "高度:"
 
 msgid "Center"
-msgstr ""
+msgstr "中心"
 
 msgid "File"
 msgstr "文件"
@@ -175,10 +175,10 @@ msgid "New palette"
 msgstr "新建调色板"
 
 msgid "New brush"
-msgstr ""
+msgstr "新建画笔"
 
 msgid "New pattern"
-msgstr ""
+msgstr "新建图案"
 
 msgid "Horizontal frames:"
 msgstr "水平帧："
@@ -366,7 +366,7 @@ msgid "Light"
 msgstr "白色"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "反相颜色"
 
 msgid "Desaturation"
 msgstr "去饱和"
@@ -495,10 +495,10 @@ msgid "Turkish"
 msgstr "土耳其语"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "挪威语"
 
 msgid "Korean"
-msgstr ""
+msgstr "韩语"
 
 msgid "Development Team"
 msgstr "开发团队"
