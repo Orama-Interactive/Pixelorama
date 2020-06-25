@@ -29,7 +29,7 @@ jobs:
         run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
       - name: Clone Pixelorama Repository 📁
         run: |
-          git clone --recurse-submodules -b master https://github.com/Orama-Interactive/Pixelorama.git
+          git clone https://github.com/Orama-Interactive/Pixelorama.git
           cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/windows-64bit
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
@@ -55,7 +55,7 @@ jobs:
         run: godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
       - name: Clone Pixelorama Repository 📁
         run: |
-          git clone --recurse-submodules -b master https://github.com/Orama-Interactive/Pixelorama.git
+          git clone https://github.com/Orama-Interactive/Pixelorama.git
           cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/linux-64bit
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
