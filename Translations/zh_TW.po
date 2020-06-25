@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 03:55\n"
+"PO-Revision-Date: 2020-06-25 04:06\n"
 
 msgid "OK"
 msgstr "確定"
@@ -190,10 +190,10 @@ msgid "Vertical frames:"
 msgstr "垂直影格："
 
 msgid "Save Sprite as .pxo"
-msgstr "存成 .pxo"
+msgstr "儲存圖片為 .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "輸出圖片為PNG"
+msgstr "輸出圖片為 .png"
 
 msgid "Export Sprite"
 msgstr "輸出圖片"
@@ -239,7 +239,7 @@ msgid "Browse"
 msgstr "瀏覽"
 
 msgid "Resize:"
-msgstr "調整尺寸："
+msgstr "調整大小："
 
 msgid "Cancel Export"
 msgstr "取消輸出"
@@ -251,7 +251,7 @@ msgid "Select Current Folder"
 msgstr "選擇當前資料夾"
 
 msgid "Open a Directory"
-msgstr "打開資料夾"
+msgstr "開啟資料夾"
 
 msgid "All frames as multiple files"
 msgstr "影格各自為獨立檔案"
@@ -272,7 +272,7 @@ msgid "Backwards"
 msgstr "往回"
 
 msgid "Ping-Pong"
-msgstr "乒乓"
+msgstr "來回"
 
 msgid "Columns"
 msgstr "行"
@@ -293,7 +293,7 @@ msgid "Directories & Files:"
 msgstr "資料夾與檔案："
 
 msgid "Create Folder"
-msgstr "新增資料夾"
+msgstr "創建資料夾"
 
 msgid "File:"
 msgstr "檔案："
@@ -308,7 +308,7 @@ msgid "Bilinear"
 msgstr "雙線性"
 
 msgid "Cubic"
-msgstr "三次樣條"
+msgstr "雙三次插值"
 
 msgid "Trilinear"
 msgstr "三線性"
