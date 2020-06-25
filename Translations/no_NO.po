@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-25 09:36\n"
+"PO-Revision-Date: 2020-06-25 09:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -43,7 +43,7 @@ msgid "Height:"
 msgstr "Høyde:"
 
 msgid "Center"
-msgstr ""
+msgstr "Midtstill"
 
 msgid "File"
 msgstr "Fil"
@@ -178,10 +178,10 @@ msgid "New palette"
 msgstr "Ny palett"
 
 msgid "New brush"
-msgstr ""
+msgstr "Ny børste"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nytt mønster"
 
 msgid "Horizontal frames:"
 msgstr "Horisontale bilder:"
@@ -368,7 +368,7 @@ msgid "Light"
 msgstr "Lys"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Invertér Farger"
 
 msgid "Desaturation"
 msgstr "Avmettning"
@@ -497,10 +497,10 @@ msgid "Turkish"
 msgstr "Tyrkisk"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norsk"
 
 msgid "Korean"
-msgstr ""
+msgstr "Koreansk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
@@ -1055,7 +1055,7 @@ msgid "Import Palette"
 msgstr "Importer Palett"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Opprett Palett Fra Gjeldene Figur"
 
 msgid "Palette Name:"
 msgstr "Palettnavn:"
