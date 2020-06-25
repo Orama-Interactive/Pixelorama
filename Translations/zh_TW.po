@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-06-25 03:11\n"
 
 msgid "OK"
 msgstr "確定"
@@ -19,7 +19,7 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Open"
-msgstr "打開"
+msgstr "開啟"
 
 msgid "Save"
 msgstr "儲存"
@@ -28,22 +28,22 @@ msgid "Please Confirm..."
 msgstr "確認..."
 
 msgid "Image Size"
-msgstr "圖片尺寸"
+msgstr "圖片大小"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "版面大小"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "影格大小"
 
 msgid "Width:"
-msgstr "寬:"
+msgstr "寬度："
 
 msgid "Height:"
-msgstr "高:"
+msgstr "高度："
 
 msgid "Center"
-msgstr ""
+msgstr "中心"
 
 msgid "File"
 msgstr "檔案"
@@ -55,7 +55,7 @@ msgid "View"
 msgstr "檢視"
 
 msgid "Image"
-msgstr "圖片尺寸"
+msgstr "圖片"
 
 msgid "Effects"
 msgstr "效果"
@@ -112,7 +112,7 @@ msgid "Crop Image"
 msgstr "擷取部分圖片"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "調整版面大小"
 
 msgid "Rotate Image"
 msgstr "旋轉圖片"
@@ -145,7 +145,7 @@ msgid "Show Animation Timeline"
 msgstr "顯示動畫時間線"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen 模式"
 
 msgid "Fill with color:"
 msgstr "填滿"
@@ -157,31 +157,31 @@ msgid "Open File(s)"
 msgstr "打開舊檔"
 
 msgid "Import Options"
-msgstr ""
+msgstr "匯入選項"
 
 msgid "Import as:"
-msgstr ""
+msgstr "匯入為："
 
 msgid "New tab"
-msgstr ""
+msgstr "新增分頁"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "新增影格"
 
 msgid "New layer"
-msgstr ""
+msgstr "新增圖層"
 
 msgid "New palette"
-msgstr ""
+msgstr "新增調色盤"
 
 msgid "New brush"
-msgstr ""
+msgstr "新增筆刷"
 
 msgid "New pattern"
-msgstr ""
+msgstr "新增圖樣"
 
 msgid "Horizontal frames:"
 msgstr ""
@@ -233,7 +233,7 @@ msgid "Frame:"
 msgstr "影格："
 
 msgid "Orientation:"
-msgstr ""
+msgstr "方向:"
 
 msgid "Browse"
 msgstr "瀏覽"
@@ -368,7 +368,7 @@ msgid "Light"
 msgstr "稍亮"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "反轉色彩"
 
 msgid "Desaturation"
 msgstr "去飽和"
@@ -497,10 +497,10 @@ msgid "Turkish"
 msgstr "土耳其文"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "挪威文"
 
 msgid "Korean"
-msgstr ""
+msgstr "韓文"
 
 msgid "Development Team"
 msgstr "開發團隊"
@@ -739,13 +739,13 @@ msgid "Fill with:"
 msgstr "填滿："
 
 msgid "Selected Color"
-msgstr ""
+msgstr "已選取顏色"
 
 msgid "Pattern"
-msgstr ""
+msgstr "圖樣"
 
 msgid "Offset"
-msgstr ""
+msgstr "偏移"
 
 msgid "Lighten"
 msgstr "變亮"
@@ -1125,7 +1125,7 @@ msgid "Templates:"
 msgstr "模板："
 
 msgid "Preset"
-msgstr ""
+msgstr "預設"
 
 msgid "Preset:"
 msgstr ""
