@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 04:36\n"
+"PO-Revision-Date: 2020-06-25 04:45\n"
 
 msgid "OK"
 msgstr "確定"
@@ -802,7 +802,7 @@ msgid "Vertical"
 msgstr "垂直"
 
 msgid "Current frame:"
-msgstr "目前畫面："
+msgstr "目前影格："
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -816,17 +816,17 @@ msgstr "到前一張\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr "倒著播動畫\n"
+msgstr "倒著播放動畫\n"
 "(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr "播動畫\n"
+msgstr "播放動畫\n"
 "(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "到後一張\n"
+msgstr "到下一張\n"
 "(%s)"
 
 msgid "Jump to the last frame\n"
@@ -835,10 +835,10 @@ msgstr "跳到最後一張\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr "洋蔥皮設定"
+msgstr "Onion Skinning 設定"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "開關洋蔥皮"
+msgstr "開關 Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -849,13 +849,13 @@ msgid "No loop"
 msgstr "不重複"
 
 msgid "Cycle loop"
-msgstr "輪迴重複"
+msgstr "循環重複"
 
 msgid "Ping-pong loop"
-msgstr "乒乓重複"
+msgstr "來回重複"
 
 msgid "Onion Skinning:"
-msgstr "洋蔥皮："
+msgstr "Onion Skinning："
 
 msgid "Past Frames"
 msgstr "過去畫面"
@@ -874,7 +874,7 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "如選定, 動畫只播放相同標籤的影格, 否則會播放所有影格."
 
 msgid "Blue-Red Mode"
-msgstr "藍紅模式"
+msgstr "Blue-Red 模式"
 
 msgid "Add a new frame"
 msgstr "新增影格"
@@ -925,7 +925,7 @@ msgid "Merge current layer with the one below"
 msgstr "合併此圖層與下面的圖層"
 
 msgid "Opacity:"
-msgstr "能見度："
+msgstr "透明度："
 
 msgid "Toggle layer's visibility"
 msgstr "開關圖層可視"
@@ -954,10 +954,10 @@ msgid "Choose a palette"
 msgstr "選擇色盤"
 
 msgid "Undo: Draw"
-msgstr "取消 上一筆"
+msgstr "取消 繪畫"
 
 msgid "Redo: Draw"
-msgstr "復原 上一筆"
+msgstr "復原 繪畫"
 
 msgid "Undo: Rectangle Select"
 msgstr "取消 長方形選取"
