@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-25 08:01\n"
+"PO-Revision-Date: 2020-06-25 08:24\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -157,7 +157,7 @@ msgid "Open File(s)"
 msgstr ""
 
 msgid "Import Options"
-msgstr ""
+msgstr "İçeri Aktarma Ayarları"
 
 msgid "Import as:"
 msgstr ""
@@ -294,7 +294,7 @@ msgid "Directories & Files:"
 msgstr ""
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Yeni Klasör"
 
 msgid "File:"
 msgstr "Dosya:"
@@ -345,7 +345,7 @@ msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Renk:"
 
 msgid "Guide color:"
 msgstr ""
@@ -363,7 +363,7 @@ msgid "Blue"
 msgstr "Mavi"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamel"
 
 msgid "Light"
 msgstr "Açık"
@@ -411,7 +411,7 @@ msgid "Thickness:"
 msgstr "Kalınlık:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Açılış Ekranını Göster"
 
 msgid "Online Docs"
 msgstr "Çevrimiçi Dökümanlar"
