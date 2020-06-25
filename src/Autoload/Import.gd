@@ -109,7 +109,7 @@ func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
 		var first_image : Image = loaded_images.pop_front()
 
 		# The index which this random brush will be at
-		var next_random_brush_index := Global.file_brush_container.get_child_count()
+		var next_random_brush_index : int = Global.file_brush_container.get_child_count()
 
 		Global.file_brushes.append(first_image)
 		Global.create_brush_button(first_image, Global.Brush_Types.RANDOM_FILE, tooltip_name)
