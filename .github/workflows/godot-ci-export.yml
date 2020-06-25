@@ -34,7 +34,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: windows
+          name: Windows-64bit
           path: ./build/windows-64bit/
 
   export-linux:
@@ -60,7 +60,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: linux
+          name: Linux-64bit
           path: ./build/linux-64bit/
 
   export-mac:
@@ -82,7 +82,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: mac
+          name: Mac
           path: ./build/mac/
 
   export-web:
