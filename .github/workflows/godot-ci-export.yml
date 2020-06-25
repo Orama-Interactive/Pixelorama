@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+        with:
+          submodules: true
       - name: Setup
         run: |
           mkdir -v -p build/windows  ~/.local/share/godot/templates
@@ -28,9 +30,7 @@ jobs:
       - name: Clone Pixelorama Repository
         run: |
           git clone --recurse-submodules -b master https://github.com/Orama-Interactive/Pixelorama.git
-          ls .
           cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/windows
-          cp /__w/Pixelorama/Pixelorama/Pixelorama/addons/godot-gifexporter/bin/win/libgifexporter.windows.64.dll ./build/windows
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -45,6 +45,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+        with:
+          submodules: true
       - name: Setup
         run: |
           mkdir -v -p build/linux ~/.local/share/godot/templates
@@ -65,6 +67,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+        with:
+          submodules: true
       - name: Setup
         run: |
           mkdir -v -p build/mac ~/.local/share/godot/templates
@@ -85,6 +89,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+        with:
+          submodules: true
       - name: Setup
         run: |
           mkdir -v -p build/web ~/.local/share/godot/templates
