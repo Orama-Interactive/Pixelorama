@@ -249,10 +249,22 @@ func _ready() -> void:
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
+
+	var pencil_cursor_image = preload("res://assets/graphics/cursor_icons/pencil_cursor.png")
+	var eraser_cursor_image = preload("res://assets/graphics/cursor_icons/eraser_cursor.png")
+
 	left_cursor_tool_texture = ImageTexture.new()
-	left_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/pencil_cursor.png"))
+	if pencil_cursor_image is Image:
+		left_cursor_tool_texture.create_from_image(pencil_cursor_image)
+	elif pencil_cursor_image is ImageTexture:
+		left_cursor_tool_texture.create_from_image(pencil_cursor_image.get_data())
+
 	right_cursor_tool_texture = ImageTexture.new()
-	right_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/eraser_cursor.png"))
+	if eraser_cursor_image is Image:
+		right_cursor_tool_texture.create_from_image(eraser_cursor_image)
+	elif eraser_cursor_image is ImageTexture:
+		right_cursor_tool_texture.create_from_image(eraser_cursor_image.get_data())
+
 	tabs = find_node_by_name(root, "Tabs")
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
