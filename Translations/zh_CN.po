@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-06-25 02:31\n"
 
 msgid "OK"
 msgstr "确定"
@@ -34,7 +34,7 @@ msgid "Canvas Size"
 msgstr "画布尺寸"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "帧大小"
 
 msgid "Width:"
 msgstr "宽度:"
@@ -1058,7 +1058,7 @@ msgid "Import Palette"
 msgstr "导入调色板"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "从当前 Sprite 创建调色板"
 
 msgid "Palette Name:"
 msgstr "调色板名称:"
