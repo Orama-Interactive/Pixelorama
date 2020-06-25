@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 03:45\n"
+"PO-Revision-Date: 2020-06-25 03:55\n"
 
 msgid "OK"
 msgstr "確定"
@@ -184,10 +184,10 @@ msgid "New pattern"
 msgstr "新增圖樣"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "水平影格："
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "垂直影格："
 
 msgid "Save Sprite as .pxo"
 msgstr "存成 .pxo"
@@ -199,10 +199,10 @@ msgid "Export Sprite"
 msgstr "輸出圖片"
 
 msgid "File Exists, Overwrite?"
-msgstr "有同名檔案，要覆蓋掉嗎"
+msgstr "檔案已存在，要覆寫嗎？"
 
 msgid "File %s already exists. Overwrite?"
-msgstr "%s 已經存在。要覆蓋嗎?"
+msgstr "檔案 %s 已經存在，要覆寫嗎？"
 
 msgid "Directory path or file name is not valid!"
 msgstr "檔案位址或檔案名稱無效"
@@ -867,11 +867,11 @@ msgid "Manage frame tags"
 msgstr "管理影格標籤"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "動畫只播放相同的影格標籤"
+msgstr "動畫只播放相同標籤的影格"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "如選定, 動畫只播放相同標籤的影格, 否則會播放所有影格."
 
 msgid "Blue-Red Mode"
 msgstr "藍紅模式"
