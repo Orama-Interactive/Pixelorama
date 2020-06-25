@@ -79,10 +79,6 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Mac Build 🔧
         run: godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
-      - name: Clone Pixelorama Repository 📁
-        run: |
-          git clone https://github.com/Orama-Interactive/Pixelorama.git
-          zip -m /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/mac/$EXPORT_NAME.zip/$EXPORT_NAME.app/Contents/Resources
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
