@@ -28,8 +28,9 @@ jobs:
       - name: Clone Pixelorama Repository
         run: |
           git clone --recurse-submodules -b master https://github.com/Orama-Interactive/Pixelorama.git
-          cp -R /Pixelorama/pixelorama /build/windows
-          cp /Pixelorama/addons/godot-gifexporter/bin/win/libgifexporter.windows.64.dll /build/windows
+          ls .
+          cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama /build/windows
+          cp /__w/Pixelorama/Pixelorama/Pixelorama/addons/godot-gifexporter/bin/win/libgifexporter.windows.64.dll /build/windows
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
