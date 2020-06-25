@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-25 07:43\n"
+"PO-Revision-Date: 2020-06-25 08:01\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1059,7 +1059,7 @@ msgid "Patrons:"
 msgstr "Patronlar:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Senin yada şirketinin isminin açılış ekranında görünmesini ister misin?"
 
 msgid "Become a Platinum Sponsor"
 msgstr "Platin Sponsor Ol"
