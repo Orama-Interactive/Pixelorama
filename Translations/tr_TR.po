@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-25 06:49\n"
+"PO-Revision-Date: 2020-06-25 07:43\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -172,7 +172,7 @@ msgid "New frame"
 msgstr ""
 
 msgid "New layer"
-msgstr ""
+msgstr "Yeni katman"
 
 msgid "New palette"
 msgstr ""
@@ -209,7 +209,8 @@ msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "'%s' dosyası yüklenemedi.\n"
+"Hata kodu: %s"
 
 msgid "Frame"
 msgstr "Kare"
