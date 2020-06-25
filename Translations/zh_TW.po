@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 04:26\n"
+"PO-Revision-Date: 2020-06-25 04:36\n"
 
 msgid "OK"
 msgstr "確定"
@@ -410,7 +410,7 @@ msgid "Thickness:"
 msgstr "粗細："
 
 msgid "View Splash Screen"
-msgstr "啟動畫面"
+msgstr "顯示啟動畫面"
 
 msgid "Online Docs"
 msgstr "線上文件"
@@ -464,7 +464,7 @@ msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙文"
 
 msgid "Russian"
-msgstr "俄文"
+msgstr "俄羅斯文"
 
 msgid "Chinese Simplified"
 msgstr "簡體中文"
@@ -576,7 +576,7 @@ msgstr "撿色器\n"
 "%s換成右鍵"
 
 msgid "Draw Tools"
-msgstr "繪製工具"
+msgstr "繪畫工具"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -664,13 +664,13 @@ msgid "Grid width:"
 msgstr "格線寬度："
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr "設定垂直格線的寬"
+msgstr "設定垂直格線的寬度"
 
 msgid "Grid height:"
 msgstr "格線高度："
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "設定水平格線的高"
+msgstr "設定水平格線的高度"
 
 msgid "Grid color:"
 msgstr "格線顏色："
