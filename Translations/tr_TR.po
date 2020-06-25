@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-06-25 06:49\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -248,7 +248,7 @@ msgid "Alert!"
 msgstr "Uyarı!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Geçerli Klasörü Seç"
 
 msgid "Open a Directory"
 msgstr ""
@@ -515,7 +515,7 @@ msgid "GitHub Contributors"
 msgstr ""
 
 msgid "Art by"
-msgstr ""
+msgstr "Çizen"
 
 msgid "untitled"
 msgstr ""
@@ -805,11 +805,11 @@ msgstr ""
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Sonraki kareye geç (%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Son kareye geç (%s)"
 
 msgid "Onion Skinning settings"
 msgstr ""
