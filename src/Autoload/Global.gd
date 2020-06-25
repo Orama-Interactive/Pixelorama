@@ -660,19 +660,27 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 func update_custom_brush(mouse_button : int) -> void:
 	var brush_type : int = current_brush_types[mouse_button]
 	if brush_type == Brush_Types.PIXEL:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/pixel_image.png")
-		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		var pixel = preload("res://assets/graphics/pixel_image.png")
+		if pixel is Image:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		elif pixel is ImageTexture:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
 	elif brush_type == Brush_Types.CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_9x9.png")
-		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		var pixel = preload("res://assets/graphics/circle_9x9.png")
+		if pixel is Image:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		elif pixel is ImageTexture:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
+
 		left_circle_points = plot_circle(brush_sizes[0])
 		right_circle_points = plot_circle(brush_sizes[1])
 	elif brush_type == Brush_Types.FILLED_CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		var pixel = preload("res://assets/graphics/circle_filled_9x9.png")
+		if pixel is Image:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		elif pixel is ImageTexture:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
+
 		left_circle_points = plot_circle(brush_sizes[0])
 		right_circle_points = plot_circle(brush_sizes[1])
 	else:
