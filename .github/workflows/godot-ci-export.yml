@@ -25,6 +25,11 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Windows Build
         run: godot -v --export "Windows Desktop 64-bit" ./build/windows/$EXPORT_NAME.exe
+      - name: Copy DLL
+        uses: canastro/copy-file-action@master
+        with:
+          source: "addons/godot-gifexporter/bin/win/libgifexporter.windows.64.dll"
+          target: "./build/windows/libgifexporter.windows.64.dll"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
