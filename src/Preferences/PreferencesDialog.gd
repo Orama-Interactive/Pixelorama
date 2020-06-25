@@ -53,6 +53,13 @@ func _ready() -> void:
 			Global.set(pref[0], value)
 			node.set(pref[2], value)
 
+	if OS.get_name() == "HTML5":
+		right_side.get_node("General/EnableAutosave").visible = false
+		right_side.get_node("General/AutosaveInterval").visible = false
+		right_side.get_node("General/OpenLastProject").visible = false
+		Global.enable_autosave = false
+		Global.open_last_project = false
+
 
 func _on_Preference_toggled(button_pressed : bool, prop : String) -> void:
 	Global.set(prop, button_pressed)
