@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 03:36\n"
+"PO-Revision-Date: 2020-06-25 03:45\n"
 
 msgid "OK"
 msgstr "確定"
@@ -697,7 +697,7 @@ msgid "Second color of the transparent checker background"
 msgstr "空白背景格的顏色2"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "只能修改自訂配置"
 
 msgid "Brush:"
 msgstr "畫筆："
@@ -784,7 +784,7 @@ msgid "Fit to frame"
 msgstr "放大到畫面大小"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% 縮放"
 
 msgid "Mirroring"
 msgstr "鏡像"
@@ -867,7 +867,7 @@ msgid "Manage frame tags"
 msgstr "管理影格標籤"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "動畫只播放相同的影格標籤"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1125,10 +1125,10 @@ msgid "Templates:"
 msgstr "模板："
 
 msgid "Preset"
-msgstr "預設"
+msgstr "配置"
 
 msgid "Preset:"
-msgstr "預設："
+msgstr "配置："
 
 msgid "Default"
 msgstr "預設"
