@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 04:06\n"
+"PO-Revision-Date: 2020-06-25 04:16\n"
 
 msgid "OK"
 msgstr "確定"
@@ -302,16 +302,16 @@ msgid "Interpolation:"
 msgstr "插值："
 
 msgid "Nearest"
-msgstr "最近值"
+msgstr "點採樣"
 
 msgid "Bilinear"
-msgstr "雙線性"
+msgstr "雙線性插值"
 
 msgid "Cubic"
 msgstr "雙三次插值"
 
 msgid "Trilinear"
-msgstr "三線性"
+msgstr "三線性插值"
 
 msgid "General"
 msgstr "一般"
