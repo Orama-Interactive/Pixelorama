@@ -1,4 +1,4 @@
-name: "godot-ci-export"
+name: "godot-ci-test"
 
 on:
   push:
