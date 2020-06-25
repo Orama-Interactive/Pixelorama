@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-06-25 09:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -34,7 +34,7 @@ msgid "Canvas Size"
 msgstr "Lerretstørrelse"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Bildestørrelse"
 
 msgid "Width:"
 msgstr "Bredde:"
