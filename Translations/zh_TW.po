@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 03:11\n"
+"PO-Revision-Date: 2020-06-25 03:16\n"
 
 msgid "OK"
 msgstr "確定"
@@ -166,7 +166,7 @@ msgid "New tab"
 msgstr "新增分頁"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Spritesheet (新增分頁)"
 
 msgid "New frame"
 msgstr "新增影格"
@@ -864,7 +864,7 @@ msgid "Future Frames"
 msgstr "未來畫面"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "管理影格標籤"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1128,7 +1128,7 @@ msgid "Preset"
 msgstr "預設"
 
 msgid "Preset:"
-msgstr ""
+msgstr "預設："
 
 msgid "Default"
 msgstr "預設"
