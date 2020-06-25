@@ -5,6 +5,9 @@
     Made by Orama Interactive with the Godot Engine, written in GDScript!
 </p>
 <p align="center">
+    <a href="https://github.com/Orama-Interactive/Pixelorama/actions">
+        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/godot-ci-test/badge.svg" alt="Build Passing" />
+    </a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" />
     </a>
@@ -45,6 +48,9 @@ You can also support the development on patreon: [![Become a Patron!](https://c5
 - [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
 - [Snap Store (Linux)](https://snapcraft.io/pixelorama)
+
+You can also find early access builds in the [GitHub Actions page](https://github.com/Orama-Interactive/Pixelorama/actions). There's also a [Web version available](https://orama-interactive.github.io/Pixelorama/early_access/).
+Keep in mind that these versions will have bugs and are unstable. Unless you're interested in testing the main branch of Pixelorama, it's recommended that you stick to a stable version.
 
 ## Documentation
 You can find Online Documentation for Pixelorama here: https://orama-interactive.github.io/Pixelorama-Docs
