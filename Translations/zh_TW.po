@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 03:16\n"
+"PO-Revision-Date: 2020-06-25 03:26\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1020,16 +1020,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "復原 刪除自訂畫筆"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "取消：修改影格標籤"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "復原：修改影格標籤"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "取消：刪除影格標籤"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "復原：刪除影格標籤"
 
 msgid "Move Guide"
 msgstr "移動輔助線"
@@ -1056,7 +1056,7 @@ msgid "Import Palette"
 msgstr "匯入色盤"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "從圖片中的顏色創建色盤"
 
 msgid "Palette Name:"
 msgstr "色盤名稱："
