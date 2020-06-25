@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 04:45\n"
+"PO-Revision-Date: 2020-06-25 04:56\n"
 
 msgid "OK"
 msgstr "確定"
@@ -178,7 +178,7 @@ msgid "New palette"
 msgstr "新增調色盤"
 
 msgid "New brush"
-msgstr "新增筆刷"
+msgstr "新增畫筆"
 
 msgid "New pattern"
 msgstr "新增圖樣"
@@ -1050,7 +1050,7 @@ msgid "File exported"
 msgstr "檔案已輸出"
 
 msgid "New Empty Palette"
-msgstr "空的色盤"
+msgstr "新增空的色盤"
 
 msgid "Import Palette"
 msgstr "匯入色盤"
@@ -1065,10 +1065,10 @@ msgid "Color Name:"
 msgstr "顏色名稱："
 
 msgid "Use current left & right colors"
-msgstr "使用目前左右鍵顏色"
+msgstr "使用目前左右顏色"
 
 msgid "Create a new empty palette?"
-msgstr "新增空的色盤?"
+msgstr "創建新的空白色盤?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "錯誤: 色盤名字無法使用"
@@ -1104,13 +1104,13 @@ msgid "Default width:"
 msgstr "預設寬度："
 
 msgid "A default width of a new image"
-msgstr "開新檔案的預設寬度："
+msgstr "新檔案的預設寬度："
 
 msgid "Default height:"
 msgstr "預設高度："
 
 msgid "A default height of a new image"
-msgstr "開新檔案的預設高度："
+msgstr "新檔案的預設高度："
 
 msgid "Default fill color:"
 msgstr "預設背景顏色："
@@ -1137,7 +1137,7 @@ msgid "Custom"
 msgstr "自訂"
 
 msgid "Rectangular Selection"
-msgstr "矩形選取"
+msgstr "長方形選取"
 
 msgid "Zoom"
 msgstr "縮放"
@@ -1182,10 +1182,10 @@ msgid "A tool assigned to the right mouse button"
 msgstr "右鍵指定工具"
 
 msgid "Cannot find last project file."
-msgstr "找不到上一個檔案"
+msgstr "找不到上一次編輯的檔案"
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr "你沒有打開或儲存Pixelorama檔案!"
+msgstr "你尚未打開或儲存Pixelorama檔案!"
 
 msgid "Open Last Project"
 msgstr "開啟最近的檔案"
