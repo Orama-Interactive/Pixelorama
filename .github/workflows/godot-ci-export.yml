@@ -17,21 +17,21 @@ jobs:
     container:
       image: docker://barichello/godot-ci:3.2.1
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup
+      - name: Setup 💻
         run: |
           mkdir -v -p build/windows-64bit  ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Windows Build
+      - name: Windows Build 🔧
         run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
-      - name: Clone Pixelorama Repository
+      - name: Clone Pixelorama Repository 📁
         run: |
           git clone --recurse-submodules -b master https://github.com/Orama-Interactive/Pixelorama.git
           cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/windows-64bit
-      - name: Upload Artifact
+      - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
           name: Windows-64bit
@@ -43,21 +43,21 @@ jobs:
     container:
       image: docker://barichello/godot-ci:3.2.1
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup
+      - name: Setup 💻
         run: |
           mkdir -v -p build/linux-64bit ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Linux Build
+      - name: Linux Build 🔧
         run: godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
-      - name: Clone Pixelorama Repository
+      - name: Clone Pixelorama Repository 📁
         run: |
           git clone --recurse-submodules -b master https://github.com/Orama-Interactive/Pixelorama.git
           cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/linux-64bit
-      - name: Upload Artifact
+      - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
           name: Linux-64bit
@@ -69,17 +69,17 @@ jobs:
     container:
       image: docker://barichello/godot-ci:3.2.1
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup
+      - name: Setup 💻
         run: |
           mkdir -v -p build/mac ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Mac Build
+      - name: Mac Build 🔧
         run: godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
-      - name: Upload Artifact
+      - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
           name: Mac
@@ -91,15 +91,15 @@ jobs:
     container:
       image: docker://barichello/godot-ci:3.2.1
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup
+      - name: Setup 💻
         run: |
           mkdir -v -p build/web ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Web Build
+      - name: Web Build 🔧
         run: godot -v --export "HTML5" ./build/web/index.html
       - name: Install rsync 📚
         run: |
