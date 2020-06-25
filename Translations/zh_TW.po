@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 03:26\n"
+"PO-Revision-Date: 2020-06-25 03:36\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1209,10 +1209,10 @@ msgid "minute(s)"
 msgstr "分鐘"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "為每個影格標籤創建資料夾"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "根據影格標籤在不同的資料夾創建多個獨立檔案"
 
 msgid "Close"
 msgstr "關閉"
