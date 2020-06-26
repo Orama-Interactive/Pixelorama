@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-26 18:47\n"
+"PO-Revision-Date: 2020-06-26 18:57\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1149,7 +1149,7 @@ msgid "Left Tool:"
 msgstr ""
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Sol fareye bir araç atandı"
 
 msgid "Right Tool:"
 msgstr ""
