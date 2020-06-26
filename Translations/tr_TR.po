@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-25 08:24\n"
+"PO-Revision-Date: 2020-06-26 08:01\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -790,11 +790,11 @@ msgstr "Geçerli kare:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "İlk kareye atla (%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Önceki kareye geç (%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
@@ -1029,7 +1029,7 @@ msgid "New Empty Palette"
 msgstr "Yeni Palet"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Palet Aktar"
 
 msgid "Create Palette From Current Sprite"
 msgstr ""
