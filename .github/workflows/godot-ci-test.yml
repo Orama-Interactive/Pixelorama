@@ -5,6 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    paths-ignore: "Translations/*"
 
 env:
   GODOT_VERSION: 3.2.2
