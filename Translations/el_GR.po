@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-06-26 13:55\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -34,7 +34,7 @@ msgid "Canvas Size"
 msgstr "Μέγεθος Καμβά"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Μέγεθος Καρέ"
 
 msgid "Width:"
 msgstr "Πλάτος:"
@@ -43,7 +43,7 @@ msgid "Height:"
 msgstr "Ύψος:"
 
 msgid "Center"
-msgstr ""
+msgstr "Κέντρο"
 
 msgid "File"
 msgstr "Αρχείο"
@@ -169,7 +169,7 @@ msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Νέο καρέ"
 
 msgid "New layer"
 msgstr ""
