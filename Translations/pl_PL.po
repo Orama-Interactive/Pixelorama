@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-06-26 14:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -34,7 +34,7 @@ msgid "Canvas Size"
 msgstr "Rozmiar płótna"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Rozmiar klatki"
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -43,7 +43,7 @@ msgid "Height:"
 msgstr "Wysokość:"
 
 msgid "Center"
-msgstr ""
+msgstr "Środek"
 
 msgid "File"
 msgstr "Plik"
@@ -178,10 +178,10 @@ msgid "New palette"
 msgstr "Nowa paleta"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nowy pędzel"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nowy wzorzec"
 
 msgid "Horizontal frames:"
 msgstr "Klatki poziome:"
@@ -368,7 +368,7 @@ msgid "Light"
 msgstr "Jasny"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Odwróć kolory"
 
 msgid "Desaturation"
 msgstr "Desaturacja (zmniejsz nasycenie)"
@@ -497,10 +497,10 @@ msgid "Turkish"
 msgstr "Turecki"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norweski"
 
 msgid "Korean"
-msgstr ""
+msgstr "Koreański"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -1057,7 +1057,7 @@ msgid "Import Palette"
 msgstr "Importuj paletę kolorów"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Utwórz paletę z aktualnego Sprite'a"
 
 msgid "Palette Name:"
 msgstr "Nazwa palety kolorów:"
