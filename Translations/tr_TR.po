@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-06-26 08:01\n"
+"PO-Revision-Date: 2020-06-26 08:39\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1143,7 +1143,7 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr "Bir kısayol seçmek için bir tuş yada bir tuş kombinasyonuna basın"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Aynı tuş zaten atanıldı"
 
 msgid "Left Tool:"
 msgstr ""
