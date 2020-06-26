@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-26 13:55\n"
+"PO-Revision-Date: 2020-06-26 13:58\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -163,7 +163,7 @@ msgid "Import as:"
 msgstr ""
 
 msgid "New tab"
-msgstr ""
+msgstr "Νέα καρτέλα"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
@@ -172,16 +172,16 @@ msgid "New frame"
 msgstr "Νέο καρέ"
 
 msgid "New layer"
-msgstr ""
+msgstr "Νέα στρώση"
 
 msgid "New palette"
-msgstr ""
+msgstr "Νέα παλέτα"
 
 msgid "New brush"
-msgstr ""
+msgstr "Νέο πινέλο"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Νέο μοτίβο"
 
 msgid "Horizontal frames:"
 msgstr ""
@@ -498,10 +498,10 @@ msgid "Turkish"
 msgstr "Τουρκικά"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Νορβηγικά"
 
 msgid "Korean"
-msgstr ""
+msgstr "Κορεάτικα"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
