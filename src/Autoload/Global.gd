@@ -582,25 +582,25 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 	var first_frame : BaseButton = find_node_by_name(root, "FirstFrame")
 	first_frame.hint_tooltip = tr("""Jump to the first frame
-(%s)""") % "Ctrl+Home"
+(%s)""") % InputMap.get_action_list("go_to_first_frame")[0].as_text()
 
 	var previous_frame : BaseButton = find_node_by_name(root, "PreviousFrame")
 	previous_frame.hint_tooltip = tr("""Go to the previous frame
-(%s)""") % "Ctrl+Left"
+(%s)""") % InputMap.get_action_list("go_to_previous_frame")[0].as_text()
 
 	play_backwards.hint_tooltip = tr("""Play the animation backwards (from end to beginning)
-(%s)""") % "F4"
+(%s)""") % InputMap.get_action_list("play_backwards")[0].as_text()
 
 	play_forward.hint_tooltip = tr("""Play the animation forward (from beginning to end)
-(%s)""") % "F5"
+(%s)""") % InputMap.get_action_list("play_forward")[0].as_text()
 
 	var next_frame : BaseButton = find_node_by_name(root, "NextFrame")
 	next_frame.hint_tooltip = tr("""Go to the next frame
-(%s)""") % "Ctrl+Right"
+(%s)""") % InputMap.get_action_list("go_to_next_frame")[0].as_text()
 
 	var last_frame : BaseButton = find_node_by_name(root, "LastFrame")
 	last_frame.hint_tooltip = tr("""Jump to the last frame
-(%s)""") % "Ctrl+End"
+(%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
 
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
