@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-06-24 22:28\n"
+"PO-Revision-Date: 2020-06-29 13:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -34,7 +34,7 @@ msgid "Canvas Size"
 msgstr "Taille du Canevas"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Taille de l'image"
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -178,7 +178,7 @@ msgid "New palette"
 msgstr "Nouvelle palette"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nouveau pinceau"
 
 msgid "New pattern"
 msgstr ""
