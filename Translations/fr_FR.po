@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-06-29 13:25\n"
+"PO-Revision-Date: 2020-06-29 13:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -181,7 +181,7 @@ msgid "New brush"
 msgstr "Nouveau pinceau"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
 msgstr "Trame horizontale:"
@@ -369,7 +369,7 @@ msgid "Light"
 msgstr "Clair"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Inverser les couleurs"
 
 msgid "Desaturation"
 msgstr "Désaturation"
@@ -498,10 +498,10 @@ msgid "Turkish"
 msgstr "Turc"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvégien"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coréen"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
@@ -1058,7 +1058,7 @@ msgid "Import Palette"
 msgstr "Importer une palette"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Créer une palette à partir du sprite actuel"
 
 msgid "Palette Name:"
 msgstr "Nom de la palette:"
