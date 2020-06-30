@@ -77,11 +77,6 @@ func _ready() -> void:
 		$VBoxContainer/AnimationOptions/AnimationType.selected = AnimationType.MULTIPLE_FILES
 		$VBoxContainer/AnimationOptions/AnimationType.disabled = true
 
-	# If we're on HTML5, don't let the user change the directory path
-	if OS.get_name() == "HTML5":
-		$VBoxContainer/Path.visible = false
-		directory_path = "user://"
-
 
 func show_tab() -> void:
 	$VBoxContainer/FrameOptions.hide()
@@ -502,6 +497,11 @@ func _on_ExportDialog_about_to_show() -> void:
 	# If export already occured - fill the dialog with previous export settings
 	if was_exported:
 		restore_previous_export_settings()
+
+	# If we're on HTML5, don't let the user change the directory path
+	if OS.get_name() == "HTML5":
+		$VBoxContainer/Path.visible = false
+		directory_path = "user://"
 
 	if directory_path.empty():
 		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
