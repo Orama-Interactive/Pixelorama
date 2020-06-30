@@ -313,13 +313,8 @@ func import_gpl(path : String) -> Palette:
 	return result
 
 
-func import_png_palette(path: String) -> Palette:
+func import_png_palette(path: String, image : Image) -> Palette:
 	var result: Palette = null
-
-	var image := Image.new()
-	var err := image.load(path)
-	if err != OK: # An error occured
-		return null
 
 	var height: int = image.get_height()
 	var width: int = image.get_width()
@@ -335,9 +330,6 @@ func import_png_palette(path: String) -> Palette:
 				result.add_color(color, "#" + color.to_html())
 	image.unlock()
 
-	var name_start = path.find_last('/') + 1
-	var name_end = path.find_last('.')
-	if name_end > name_start:
-		result.name = path.substr(name_start, name_end - name_start)
+	result.name = path.get_basename().get_file()
 
 	return result

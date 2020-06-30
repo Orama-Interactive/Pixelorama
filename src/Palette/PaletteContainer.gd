@@ -51,8 +51,22 @@ func on_palette_import_file_selected(path : String) -> void:
 	elif path.to_lower().ends_with("gpl"):
 		palette = Import.import_gpl(path)
 	elif path.to_lower().ends_with("png") or path.to_lower().ends_with("bmp") or path.to_lower().ends_with("hdr") or path.to_lower().ends_with("jpg") or path.to_lower().ends_with("svg") or path.to_lower().ends_with("tga") or path.to_lower().ends_with("webp"):
-		palette = Import.import_png_palette(path)
+		var image := Image.new()
+		var err := image.load(path)
+		if !err:
+			import_image_palette(path, image)
+			return
 
+	attempt_to_import_palette(palette)
+
+
+func import_image_palette(path : String, image : Image) -> void:
+	var palette : Palette = null
+	palette = Import.import_png_palette(path, image)
+	attempt_to_import_palette(palette)
+
+
+func attempt_to_import_palette(palette : Palette) -> void:
 	if palette:
 		palette.name = palette_name_replace(palette.name)
 		Global.palettes[palette.name] = palette

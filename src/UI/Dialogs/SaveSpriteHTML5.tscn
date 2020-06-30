@@ -1,7 +1,6 @@
 [gd_scene format=2]
 
 [node name="SaveSpriteHTML5" type="ConfirmationDialog"]
-visible = true
 margin_right = 200.0
 margin_bottom = 70.0
 

@@ -52,7 +52,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
 	elif current_import_option == ImageImportOptions.PALETTE:
-		Global.palette_container.on_palette_import_file_selected(path)
+		Global.palette_container.import_image_palette(path, image)
 
 	elif current_import_option == ImageImportOptions.BRUSH:
 		var file_name : String = path.get_basename().get_file()

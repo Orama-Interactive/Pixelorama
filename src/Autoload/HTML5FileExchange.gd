@@ -53,7 +53,7 @@ func _define_js() -> void:
 	""", true)
 
 
-func load_image() -> Image:
+func load_image() -> void:
 	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
 		return
 
@@ -62,7 +62,7 @@ func load_image() -> Image:
 
 	yield(self, "InFocus") # wait until js prompt is closed
 
-	yield(get_tree().create_timer(0.1), "timeout") #give some time for async js data load
+	yield(get_tree().create_timer(0.5), "timeout") #give some time for async js data load
 
 	if JavaScript.eval("canceled;", true): # if File Dialog closed w/o file
 		return
@@ -75,12 +75,12 @@ func load_image() -> Image:
 			break
 		yield(get_tree().create_timer(1.0), "timeout") # need more time to load data
 
-	var imageType = JavaScript.eval("fileType;", true)
-	var imageName = JavaScript.eval("fileName;", true)
+	var image_type = JavaScript.eval("fileType;", true)
+	var image_name = JavaScript.eval("fileName;", true)
 
 	var image = Image.new()
 	var image_error
-	match imageType:
+	match image_type:
 		"image/png":
 			image_error = image.load_png_from_buffer(imageData)
 		"image/jpeg":
@@ -94,7 +94,7 @@ func load_image() -> Image:
 		print("An error occurred while trying to display the image.")
 		return
 	else:
-		return image
+		OpenSave.handle_loading_image(image_name, image)
 
 
 func save_image(image : Image, file_name : String = "export") -> void:

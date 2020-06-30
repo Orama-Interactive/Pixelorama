@@ -145,9 +145,12 @@ func on_new_project_file_menu_option_pressed() -> void:
 
 
 func open_project_file() -> void:
-	Global.open_sprites_dialog.popup_centered()
-	Global.dialog_open(true)
-	Global.control.opensprite_file_selected = false
+	if OS.get_name() == "HTML5":
+		Html5FileExchange.load_image()
+	else:
+		Global.open_sprites_dialog.popup_centered()
+		Global.dialog_open(true)
+		Global.control.opensprite_file_selected = false
 
 
 func on_open_last_project_file_menu_option_pressed() -> void:
