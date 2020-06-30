@@ -97,6 +97,7 @@ Global="*res://src/Autoload/Global.gd"
 Import="*res://src/Autoload/Import.gd"
 OpenSave="*res://src/Autoload/OpenSave.gd"
 DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
+Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 
 [debug]
 

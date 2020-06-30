@@ -77,6 +77,11 @@ func _ready() -> void:
 		$VBoxContainer/AnimationOptions/AnimationType.selected = AnimationType.MULTIPLE_FILES
 		$VBoxContainer/AnimationOptions/AnimationType.disabled = true
 
+	# If we're on HTML5, don't let the user change the directory path
+	if OS.get_name() == "HTML5":
+		$VBoxContainer/Path.visible = false
+		directory_path = "user://"
+
 
 func show_tab() -> void:
 	$VBoxContainer/FrameOptions.hide()
@@ -348,9 +353,12 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 		$GifExporter.end_export()
 	else:
 		for i in range(processed_images.size()):
-			var err = processed_images[i].save_png(export_paths[i])
-			if err != OK:
-				OS.alert("Can't save file")
+			if OS.get_name() == "HTML5":
+				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
+			else:
+				var err = processed_images[i].save_png(export_paths[i])
+				if err != OK:
+					OS.alert("Can't save file")
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
