@@ -101,5 +101,5 @@ func save_image(image : Image, file_name : String = "export") -> void:
 	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
 		return
 
-	var png_data = Array(image.get_data())
+	var png_data = Array(image.save_png_to_buffer())
 	JavaScript.eval("download('%s', %s, 'image/png');" % [file_name, str(png_data)], true)
