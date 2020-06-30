@@ -286,6 +286,16 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 
 		file.close()
 
+		if OS.get_name() == "HTML5" and !autosave:
+			file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+			if !err:
+				var file_data = Array(file.get_buffer(file.get_len()))
+				JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
+			file.close()
+			# Remove the .pxo file from memory, as we don't need it anymore
+			var dir = Directory.new()
+			dir.remove(path)
+
 		if autosave:
 			Global.notification_label("File autosaved")
 		else:

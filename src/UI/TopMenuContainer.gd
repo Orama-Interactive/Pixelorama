@@ -162,16 +162,23 @@ func on_open_last_project_file_menu_option_pressed() -> void:
 
 func save_project_file() -> void:
 	Global.control.is_quitting_on_save = false
-	if OpenSave.current_save_paths[Global.current_project_index] == "":
-		Global.save_sprites_dialog.popup_centered()
+	var path = OpenSave.current_save_paths[Global.current_project_index]
+	if path == "":
+		if OS.get_name() == "HTML5":
+			Global.save_sprites_html5_dialog.popup_centered()
+		else:
+			Global.save_sprites_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		Global.control._on_SaveSprite_file_selected(OpenSave.current_save_paths[Global.current_project_index])
+		Global.control._on_SaveSprite_file_selected(path)
 
 
 func save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
-	Global.save_sprites_dialog.popup_centered()
+	if OS.get_name() == "HTML5":
+		Global.save_sprites_html5_dialog.popup_centered()
+	else:
+		Global.save_sprites_dialog.popup_centered()
 	Global.dialog_open(true)
 
 

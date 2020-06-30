@@ -145,6 +145,13 @@ func _on_SaveSprite_file_selected(path : String) -> void:
 		_on_QuitDialog_confirmed()
 
 
+func _on_SaveSpriteHTML5_confirmed() -> void:
+	var file_name = Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text
+	file_name += ".pxo"
+	var path = "user://".plus_file(file_name)
+	OpenSave.save_pxo_file(path, false)
+
+
 func _on_OpenSprite_popup_hide() -> void:
 	if !opensprite_file_selected:
 		_can_draw_true()

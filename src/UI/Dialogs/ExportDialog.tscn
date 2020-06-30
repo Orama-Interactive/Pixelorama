@@ -346,8 +346,8 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "C:/Users"
-current_path = "C:/Users/"
+current_dir = "/Users"
+current_path = "/Users/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
