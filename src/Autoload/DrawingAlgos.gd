@@ -18,7 +18,7 @@ func draw_pixel_blended(sprite : Image, pos : Vector2, color : Color, pen_pressu
 	var y_min = Global.current_project.y_min
 	var y_max = Global.current_project.y_max
 
-#	#Check if Tiling is enabled and whether mouse is in TilingPreviews
+	# Check if Tiling is enabled and whether mouse is in TilingPreviews
 	if Global.tile_mode and point_in_rectangle(pos,Vector2( - Global.current_project.size.x - 1 , - Global.current_project.size.y -1 ), Vector2(2 * Global.current_project.size.x, 2 * Global.current_project.size.y)):
 		pos = pos.posmodv(Global.current_project.size)
 
@@ -144,13 +144,13 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 				mirror_y -= 1
 			# Use custom blend function cause of godot's issue  #31124
 			if color.a > 0: # If it's the pencil
-				blend_rect(sprite, custom_brush_image, src_rect, dst)
+				sprite.blend_rect(custom_brush_image, src_rect, dst)
 				if horizontal_mirror:
-					blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
+					sprite.blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, dst.y))
 				if vertical_mirror:
-					blend_rect(sprite, custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
+					sprite.blend_rect(custom_brush_image, src_rect, Vector2(dst.x, mirror_y))
 				if horizontal_mirror && vertical_mirror:
-					blend_rect(sprite, custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
+					sprite.blend_rect(custom_brush_image, src_rect, Vector2(mirror_x, mirror_y))
 
 			else: # if it's transparent - if it's the eraser
 				var custom_brush := Image.new()
@@ -329,39 +329,6 @@ func blend_colors(color_1 : Color, color_2 : Color) -> Color:
 		color.g = (color_1.g * color_1.a + color_2.g * color_2.a * (1-color_1.a)) / color.a
 		color.b = (color_1.b * color_1.a + color_2.b * color_2.a * (1-color_1.a)) / color.a
 	return color
-
-
-# Custom blend rect function, needed because Godot's issue #31124
-# The issue has been solved in Godot 3.2.2 and the method will be removed
-# once 3.2.2 stable is released
-func blend_rect(bg : Image, brush : Image, src_rect : Rect2, dst : Vector2) -> void:
-	var godot_version = Engine.get_version_info()
-	if godot_version.major >= 3 and godot_version.minor >= 2 and godot_version.patch >= 2:
-		bg.blend_rect(brush, src_rect, dst)
-		return
-
-	var brush_size := brush.get_size()
-	var clipped_src_rect := Rect2(Vector2.ZERO, brush_size).clip(src_rect)
-	if clipped_src_rect.size.x <= 0 || clipped_src_rect.size.y <= 0:
-		return
-	var src_underscan := Vector2(min(0, src_rect.position.x), min(0, src_rect.position.y))
-	var dest_rect := Rect2(0, 0, bg.get_width(), bg.get_height()).clip(Rect2(dst - src_underscan, clipped_src_rect.size))
-
-	for x in range(0, dest_rect.size.x):
-		for y in range(0, dest_rect.size.y):
-			var src_x := clipped_src_rect.position.x + x;
-			var src_y := clipped_src_rect.position.y + y;
-
-			var dst_x := dest_rect.position.x + x;
-			var dst_y := dest_rect.position.y + y;
-
-			brush.lock()
-			var brush_color := brush.get_pixel(src_x, src_y)
-			var bg_color := bg.get_pixel(dst_x, dst_y)
-			var out_color := blend_colors(brush_color, bg_color)
-			if out_color.a != 0:
-				bg.set_pixel(dst_x, dst_y, out_color)
-			brush.unlock()
 
 
 func scale3X(sprite : Image, tol : float = 50) -> Image:
