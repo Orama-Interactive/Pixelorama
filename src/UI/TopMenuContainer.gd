@@ -360,7 +360,10 @@ func help_menu_id_pressed(id : int) -> void:
 		2: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		3: # Changelog
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v07---2020-05-16")
+			if OS.get_name() == "OSX":
+				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md")
+			else:
+				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v07---2020-05-16")
 		4: # About Pixelorama
 			Global.control.get_node("AboutDialog").popup_centered()
 			Global.dialog_open(true)
