@@ -40,8 +40,11 @@ func on_new_empty_palette() -> void:
 
 
 func on_import_palette() -> void:
-	Global.palette_import_file_dialog.popup_centered()
-	Global.dialog_open(true)
+	if OS.get_name() == "HTML5":
+		Html5FileExchange.load_palette()
+	else:
+		Global.palette_import_file_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func on_palette_import_file_selected(path : String) -> void:
@@ -49,7 +52,12 @@ func on_palette_import_file_selected(path : String) -> void:
 	if path.to_lower().ends_with("json"):
 		palette = Palette.new().load_from_file(path)
 	elif path.to_lower().ends_with("gpl"):
-		palette = Import.import_gpl(path)
+		var file = File.new()
+		if file.file_exists(path):
+			file.open(path, File.READ)
+			var text = file.get_as_text()
+			file.close()
+			palette = Import.import_gpl(path, text)
 	elif path.to_lower().ends_with("png") or path.to_lower().ends_with("bmp") or path.to_lower().ends_with("hdr") or path.to_lower().ends_with("jpg") or path.to_lower().ends_with("svg") or path.to_lower().ends_with("tga") or path.to_lower().ends_with("webp"):
 		var image := Image.new()
 		var err := image.load(path)

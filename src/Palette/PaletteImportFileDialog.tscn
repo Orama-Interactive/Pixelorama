@@ -11,5 +11,5 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.json ; JavaScript Object Notation", "*.gpl ; Gimp Palette Library", "*.png; Portable Network Graphics" )
-current_dir = "C:/Users"
-current_path = "C:/Users/"
+current_dir = "/Users"
+current_path = "/Users/"

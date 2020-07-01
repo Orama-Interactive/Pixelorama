@@ -256,59 +256,51 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 				Global.fill_pattern_containers[1].get_child(3).get_child(1).max_value = image_size.y - 1
 
 
-func import_gpl(path : String) -> Palette:
+func import_gpl(path : String, text : String) -> Palette:
 	# Refer to app/core/gimppalette-load.c of the GIMP for the "living spec"
 	var result : Palette = null
-	var file = File.new()
-	if file.file_exists(path):
-		file.open(path, File.READ)
-		var text = file.get_as_text()
-		var lines = text.split('\n')
-		var line_number := 0
-		var comments := ""
-		for line in lines:
-			# Check if valid Gimp Palette Library file
-			if line_number == 0:
-				if line != "GIMP Palette":
-					break
-				else:
-					result = Palette.new()
-					# Use filename as palette name in case reading old
-					# palette format (must read more to determine)
-					var name_start = path.find_last('/') + 1
-					var name_end = path.find_last('.')
-					if name_end > name_start:
-						result.name = path.substr(name_start, name_end - name_start)
+	var lines = text.split('\n')
+	var line_number := 0
+	var comments := ""
+	for line in lines:
+		# Check if valid Gimp Palette Library file
+		if line_number == 0:
+			if not "GIMP Palette" in line:
+				break
+			else:
+				result = Palette.new()
+				# Use filename as palette name in case reading old
+				# palette format (must read more to determine)
+				result.name = path.get_basename().get_file()
 
-			# Comments
-			if line.begins_with('#'):
-				comments += line.trim_prefix('#') + '\n'
-				# Some programs output palette name in a comment for old format
-				if line.begins_with("#Palette Name: "):
-					result.name = line.replace("#Palette Name: ", "")
-				pass
-			elif line.begins_with("Name: "):
-				result.name = line.replace("Name: ", "")
-				pass
-			elif line.begins_with("Columns: "):
-				# Number of colors in this palette. Unecessary and often wrong
-				pass
-			elif line_number > 0 && line.length() >= 9:
-				line = line.replace("\t", " ")
-				var color_data : PoolStringArray = line.split(" ", false, 4)
-				var red : float = color_data[0].to_float() / 255.0
-				var green : float = color_data[1].to_float() / 255.0
-				var blue : float = color_data[2].to_float() / 255.0
-				var color = Color(red, green, blue)
-				if color_data.size() >= 4:
-					result.add_color(color, color_data[3])
-				else:
-					result.add_color(color)
-			line_number += 1
+		# Comments
+		if line.begins_with('#'):
+			comments += line.trim_prefix('#') + '\n'
+			# Some programs output palette name in a comment for old format
+			if line.begins_with("#Palette Name: "):
+				result.name = line.replace("#Palette Name: ", "")
+			pass
+		elif line.begins_with("Name: "):
+			result.name = line.replace("Name: ", "")
+			pass
+		elif line.begins_with("Columns: "):
+			# Number of colors in this palette. Unecessary and often wrong
+			pass
+		elif line_number > 0 && line.length() >= 9:
+			line = line.replace("\t", " ")
+			var color_data : PoolStringArray = line.split(" ", false, 4)
+			var red : float = color_data[0].to_float() / 255.0
+			var green : float = color_data[1].to_float() / 255.0
+			var blue : float = color_data[2].to_float() / 255.0
+			var color = Color(red, green, blue)
+			if color_data.size() >= 4:
+				result.add_color(color, color_data[3])
+			else:
+				result.add_color(color)
+		line_number += 1
 
-		if result:
-			result.comments = comments
-		file.close()
+	if result:
+		result.comments = comments
 
 	return result
 
