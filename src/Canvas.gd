@@ -128,11 +128,10 @@ func _input(event : InputEvent) -> void:
 	# Godot 3.2 and above only code
 	if Engine.get_version_info().major == 3 && Engine.get_version_info().minor >= 2:
 		if event is InputEventMouseMotion:
-			pen_pressure = event.pressure
-
-			# To be removed once Godot 3.2.2 is out of beta
-			if event.pressure == 0.0: # Drawing with mouse
-				pen_pressure = 1 # This causes problems with tablets though
+			if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.NONE:
+				pen_pressure = 1
+			else:
+				pen_pressure = event.pressure
 
 	sprite_changed_this_frame = false
 	var mouse_pos := current_pixel

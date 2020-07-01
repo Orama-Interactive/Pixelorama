@@ -14,6 +14,7 @@ func _notification(notification:int) -> void:
 	if notification == MainLoop.NOTIFICATION_WM_FOCUS_IN:
 		emit_signal("InFocus")
 
+
 func _define_js() -> void:
 	# Define JS script
 	JavaScript.eval("""
@@ -57,23 +58,23 @@ func load_image() -> void:
 	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
 		return
 
-	# Execute js function
-	JavaScript.eval("upload_image();", true) # opens prompt for choosing file
+	# Execute JS function
+	JavaScript.eval("upload_image();", true) # Opens prompt for choosing file
 
-	yield(self, "InFocus") # wait until js prompt is closed
+	yield(self, "InFocus") # Wait until JS prompt is closed
 
-	yield(get_tree().create_timer(0.5), "timeout") #give some time for async js data load
+	yield(get_tree().create_timer(0.5), "timeout") # Give some time for async JS data load
 
-	if JavaScript.eval("canceled;", true): # if File Dialog closed w/o file
+	if JavaScript.eval("canceled;", true): # If File Dialog closed w/o file
 		return
 
-	# use data from png data
+	# Use data from png data
 	var imageData
 	while true:
 		imageData = JavaScript.eval("fileData;", true)
 		if imageData != null:
 			break
-		yield(get_tree().create_timer(1.0), "timeout") # need more time to load data
+		yield(get_tree().create_timer(1.0), "timeout") # Need more time to load data
 
 	var image_type = JavaScript.eval("fileType;", true)
 	var image_name = JavaScript.eval("fileName;", true)

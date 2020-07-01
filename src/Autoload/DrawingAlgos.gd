@@ -84,7 +84,7 @@ func draw_brush(sprite : Image, pos : Vector2, color : Color, current_mouse_butt
 					Global.canvas.sprite_changed_this_frame = true
 
 		elif brush_type == Global.Brush_Types.CIRCLE || brush_type == Global.Brush_Types.FILLED_CIRCLE:
-			plot_circle(sprite, pos.x, pos.y, brush_size, color, brush_type == Global.Brush_Types.FILLED_CIRCLE)
+			plot_circle(sprite, pos.x, pos.y, brush_size, color, pen_pressure, brush_type == Global.Brush_Types.FILLED_CIRCLE)
 			Global.canvas.sprite_changed_this_frame = true
 
 		else:
@@ -205,7 +205,7 @@ func fill_gaps(sprite : Image, end_pos : Vector2, start_pos : Vector2, color : C
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fill := false) -> void:
+func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, pen_pressure : float, fill := false) -> void:
 	var radius := r # Used later for filling
 	var x := -r
 	var y := 0
@@ -215,10 +215,10 @@ func plot_circle(sprite : Image, xm : int, ym : int, r : int, color : Color, fil
 		var quadrant_2 := Vector2(xm - y, ym - x)
 		var quadrant_3 := Vector2(xm + x, ym - y)
 		var quadrant_4 := Vector2(xm + y, ym + x)
-		draw_pixel_blended(sprite, quadrant_1, color, Global.canvas.pen_pressure)
-		draw_pixel_blended(sprite, quadrant_2, color, Global.canvas.pen_pressure)
-		draw_pixel_blended(sprite, quadrant_3, color, Global.canvas.pen_pressure)
-		draw_pixel_blended(sprite, quadrant_4, color, Global.canvas.pen_pressure)
+		draw_pixel_blended(sprite, quadrant_1, color, pen_pressure)
+		draw_pixel_blended(sprite, quadrant_2, color, pen_pressure)
+		draw_pixel_blended(sprite, quadrant_3, color, pen_pressure)
+		draw_pixel_blended(sprite, quadrant_4, color, pen_pressure)
 
 		r = err
 		if r <= y:
