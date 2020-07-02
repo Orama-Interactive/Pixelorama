@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-07-02 06:45\n"
+"PO-Revision-Date: 2020-07-02 06:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -112,55 +112,55 @@ msgid "Crop Image"
 msgstr "画像のトリミング"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "キャンバスサイズを変更"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "画像を回転"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "選択をクリア"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "水平方向に反転"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "垂直方向に反転"
 
 msgid "Preferences"
-msgstr ""
+msgstr "設定"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "タイルモード"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "グリッドを表示"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "ルーラーを表示"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "ガイドを表示"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "アニメーションのタイムラインを表示"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zenモード"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "塗りつぶし"
 
 msgid "Open a File"
-msgstr ""
+msgstr "ファイルを開く"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "ファイルを開く"
 
 msgid "Import Options"
-msgstr ""
+msgstr "インポートオプション"
 
 msgid "Import as:"
-msgstr ""
+msgstr "形式を指定してインポート"
 
 msgid "New tab"
 msgstr ""
