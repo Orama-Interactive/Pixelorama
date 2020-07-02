@@ -10,106 +10,106 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-07-02 06:45\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 msgid "Open"
-msgstr ""
+msgstr "開く"
 
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "確認して下さい"
 
 msgid "Image Size"
-msgstr ""
+msgstr "画像サイズ"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "キャンバス サイズ"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "フレームサイズ"
 
 msgid "Width:"
-msgstr ""
+msgstr "幅:"
 
 msgid "Height:"
-msgstr ""
+msgstr "高さ:"
 
 msgid "Center"
-msgstr ""
+msgstr "中央揃え"
 
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 msgid "View"
-msgstr ""
+msgstr "表示"
 
 msgid "Image"
-msgstr ""
+msgstr "画像"
 
 msgid "Effects"
-msgstr ""
+msgstr "エフェクト"
 
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 msgid "New"
-msgstr ""
+msgstr "新規"
 
 msgid "New..."
-msgstr ""
+msgstr "新規..."
 
 msgid "Open..."
-msgstr ""
+msgstr "開く..."
 
 msgid "Save..."
-msgstr ""
+msgstr "保存..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "名前をつけて保存"
 
 msgid "Import"
-msgstr ""
+msgstr "インポート"
 
 msgid "Export"
-msgstr ""
+msgstr "エクスポート"
 
 msgid "Export..."
-msgstr ""
+msgstr "エクスポート..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "書式を指定してエクスポート…"
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "PNGでエクスポート..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "PNGに名前をつけてエクスポート..."
 
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 msgid "Undo"
-msgstr ""
+msgstr "元に戻す"
 
 msgid "Redo"
-msgstr ""
+msgstr "やり直し"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "画像の拡大縮小"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "画像のトリミング"
 
 msgid "Resize Canvas"
 msgstr ""
