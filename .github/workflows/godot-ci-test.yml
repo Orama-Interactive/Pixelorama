@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  GODOT_VERSION: 3.2.1
+  GODOT_VERSION: 3.2.2
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -30,6 +30,7 @@ jobs:
       - name: Copy pixelorama folder 📁
         run: |
           cp -R ./pixelorama ./build/windows-64bit
+          rm ./build/windows-64bit/pixelorama/.gdignore
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
