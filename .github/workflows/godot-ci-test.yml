@@ -27,10 +27,9 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
         run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
-      - name: Clone Pixelorama Repository 📁
+      - name: Copy pixelorama folder 📁
         run: |
-          git clone https://github.com/Orama-Interactive/Pixelorama.git
-          cp -R /__w/Pixelorama/Pixelorama/Pixelorama/pixelorama ./build/windows-64bit
+          cp /pixelorama ./build/windows-64bit
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
