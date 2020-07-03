@@ -29,7 +29,7 @@ jobs:
         run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
       - name: Copy pixelorama folder 📁
         run: |
-          cp ./pixelorama ./build/windows-64bit
+          cp -R ./pixelorama ./build/windows-64bit
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
