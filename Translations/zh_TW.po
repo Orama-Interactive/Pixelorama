@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-06-25 04:56\n"
+"PO-Revision-Date: 2020-07-04 23:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -26,6 +26,9 @@ msgstr "儲存"
 
 msgid "Please Confirm..."
 msgstr "確認..."
+
+msgid "File Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "圖片大小"
