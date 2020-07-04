@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-06-25 09:44\n"
+"PO-Revision-Date: 2020-07-04 23:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -26,6 +26,9 @@ msgstr "Lagre"
 
 msgid "Please Confirm..."
 msgstr "Vennligst Bekreft..."
+
+msgid "File Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Bildestørrelse"
