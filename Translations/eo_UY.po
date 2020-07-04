@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-07-04 23:28\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -26,6 +26,9 @@ msgstr "Konservi"
 
 msgid "Please Confirm..."
 msgstr "Bonvolu konfirmu..."
+
+msgid "File Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Mezuro de bildo"
