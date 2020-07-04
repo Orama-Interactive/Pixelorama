@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-07-04 23:27\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -26,6 +26,9 @@ msgstr "Opslaan"
 
 msgid "Please Confirm..."
 msgstr "Bevestig..."
+
+msgid "File Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Afbeeldingsgrootte"
