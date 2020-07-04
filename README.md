@@ -28,7 +28,7 @@
     <a href="https://crowdin.com/project/pixelorama">
         <img src="https://badges.crowdin.net/pixelorama/localized.svg" alt="Crowdin Localized %" />
     </a>
-    <a href="https://github.com/Calinou/awesome-godot">
+    <a href="https://github.com/godotengine/awesome-godot">
         <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Godot" />
     </a>
 </p>

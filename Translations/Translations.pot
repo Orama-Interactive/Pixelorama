@@ -16,6 +16,9 @@ msgstr ""
 msgid "Please Confirm..."
 msgstr ""
 
+msgid "File Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr ""
 
