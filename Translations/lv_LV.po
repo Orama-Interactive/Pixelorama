@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-06-24 22:29\n"
+"PO-Revision-Date: 2020-07-04 23:28\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -26,6 +26,9 @@ msgstr "Saglabāt"
 
 msgid "Please Confirm..."
 msgstr "Lūdzu, apstiprini..."
+
+msgid "File Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Attēla izmērs"
