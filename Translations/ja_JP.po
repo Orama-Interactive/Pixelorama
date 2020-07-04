@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-07-02 06:58\n"
+"PO-Revision-Date: 2020-07-04 23:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -26,6 +26,9 @@ msgstr "保存"
 
 msgid "Please Confirm..."
 msgstr "確認して下さい"
+
+msgid "File Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "画像サイズ"
