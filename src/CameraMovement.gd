@@ -124,6 +124,7 @@ func _input(event : InputEvent) -> void:
 
 		Global.horizontal_ruler.update()
 		Global.vertical_ruler.update()
+		save_values_to_project()
 
 
 # Zoom Camera
@@ -185,3 +186,15 @@ func fit_to_frame(size : Vector2) -> void:
 		Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 		Global.horizontal_ruler.update()
 		Global.vertical_ruler.update()
+
+
+func save_values_to_project() -> void:
+	if name == "Camera2D":
+		Global.current_project.cameras_zoom[0] = zoom
+		Global.current_project.cameras_offset[0] = offset
+	if name == "Camera2D2":
+		Global.current_project.cameras_zoom[1] = zoom
+		Global.current_project.cameras_offset[1] = offset
+	if name == "CameraPreview":
+		Global.current_project.cameras_zoom[2] = zoom
+		Global.current_project.cameras_offset[2] = offset

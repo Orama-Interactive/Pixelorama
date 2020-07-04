@@ -1,8 +1,22 @@
 extends Node
 
+
 enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
+enum Direction {UP, DOWN, LEFT, RIGHT}
+enum Mouse_Button {LEFT, RIGHT}
+enum Tools {PENCIL, ERASER, BUCKET, LIGHTENDARKEN, RECTSELECT, COLORPICKER, ZOOM}
+enum Theme_Types {DARK, BLUE, CARAMEL, LIGHT}
+enum Fill_Area {SAME_COLOR_AREA, SAME_COLOR_PIXELS}
+enum Fill_With {COLOR, PATTERN}
+enum Lighten_Darken_Mode {LIGHTEN, DARKEN}
+enum Zoom_Mode {ZOOM_IN, ZOOM_OUT}
+
+# Stuff for arrowkey-based canvas movements nyaa ^.^
+const low_speed_move_rate := 150.0
+const medium_speed_move_rate := 750.0
+const high_speed_move_rate := 3750.0
 
 var root_directory := "."
 var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
@@ -10,17 +24,9 @@ var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
 var directory_module : Reference
 
-# Stuff for arrowkey-based canvas movements nyaa ^.^
-const low_speed_move_rate := 150.0
-const medium_speed_move_rate := 750.0
-const high_speed_move_rate := 3750.0
-
-enum Direction {
-	UP = 0,
-	DOWN = 1,
-	LEFT = 2,
-	RIGHT = 3
-}
+var projects := [] # Array of Projects
+var current_project : Project
+var current_project_index := 0 setget project_changed
 
 # Indices are as in the Direction enum
 # This is the total time the key for
@@ -28,16 +34,8 @@ enum Direction {
 var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
 var loaded_locales : Array
-var undo_redo : UndoRedo
-var undos := 0 # The number of times we added undo properties
-var project_has_changed := false # Checks if the user has made changes to the project
-
 # Canvas related stuff
-var canvases := [] setget canvases_changed
-var layers := [] setget layers_changed
 var layers_changed_skip := false
-var current_frame := 0 setget frame_changed
-var current_layer := 0 setget layer_changed
 
 var can_draw := false
 
@@ -49,13 +47,11 @@ var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture : ImageTexture
 var right_cursor_tool_texture : ImageTexture
 
-var selected_pixels := []
 var image_clipboard : Image
-var animation_tags := [] setget animation_tags_changed # [Name, Color, From, To]
 var play_only_tags := true
 
-var theme_type := "Dark"
-var is_default_image := true
+# Preferences
+var theme_type : int = Theme_Types.DARK
 var default_image_width := 64
 var default_image_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
@@ -68,45 +64,30 @@ var checker_size := 10
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 
+var autosave_interval := 5.0
+var enable_autosave := true
+
 # Tools & options
-var current_left_tool := "Pencil"
-var current_right_tool := "Eraser"
+var current_tools := [Tools.PENCIL, Tools.ERASER]
 var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 
-# 0 for area of same color, 1 for all pixels of the same color
-var left_fill_area := 0
-var right_fill_area := 0
+var fill_areas := [Fill_Area.SAME_COLOR_AREA, Fill_Area.SAME_COLOR_AREA]
+var fill_with := [Fill_With.COLOR, Fill_With.COLOR]
+var fill_pattern_offsets := [Vector2.ZERO, Vector2.ZERO]
 
-var left_fill_with := 0
-var right_fill_with := 0
+var ld_modes := [Lighten_Darken_Mode.LIGHTEN, Lighten_Darken_Mode.LIGHTEN]
+var ld_amounts := [0.1, 0.1]
 
-var left_fill_pattern_offset := Vector2.ZERO
-var right_fill_pattern_offset := Vector2.ZERO
+var color_picker_for := [Mouse_Button.LEFT, Mouse_Button.RIGHT]
 
-# 0 for lighten, 1 for darken
-var left_ld := 0
-var right_ld := 0
-var left_ld_amount := 0.1
-var right_ld_amount := 0.1
+var zoom_modes := [Zoom_Mode.ZOOM_IN, Zoom_Mode.ZOOM_OUT]
 
-# 0 for the left, 1 for the right
-var left_color_picker_for := 0
-var right_color_picker_for := 1
-
-# 0 for zoom in, 1 for zoom out
-var left_zoom_mode := 0
-var right_zoom_mode := 1
-
-var left_horizontal_mirror := false
-var left_vertical_mirror := false
-var right_horizontal_mirror := false
-var right_vertical_mirror := false
-
-var left_pixel_perfect := false
-var right_pixel_perfect := false
+var horizontal_mirror := [false, false]
+var vertical_mirror := [false, false]
+var pixel_perfect := [false, false]
 
 # View menu options
 var tile_mode := false
@@ -122,29 +103,23 @@ var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
 
 # Brushes
-var left_brush_size := 1
-var right_brush_size := 1
-var current_left_brush_type = Brush_Types.PIXEL
-var current_right_brush_type = Brush_Types.PIXEL
+var file_brushes := []
+var brush_sizes := [1, 1]
+var current_brush_types := [Brush_Types.PIXEL, Brush_Types.PIXEL]
+var brush_images := [Image.new(), Image.new()]
+var brush_textures := [ImageTexture.new(), ImageTexture.new()]
 
-var brush_type_window_position := "left"
+var brush_type_window_position : int = Mouse_Button.LEFT
 var left_circle_points := []
 var right_circle_points := []
 
 var brushes_from_files := 0
-var custom_brushes := []
-var custom_left_brush_index := -1
-var custom_right_brush_index := -1
-var custom_left_brush_image : Image
-var custom_right_brush_image : Image
-var custom_left_brush_texture := ImageTexture.new()
-var custom_right_brush_texture := ImageTexture.new()
+var custom_brush_indexes := [-1, -1]
 
 # Patterns
 var patterns := []
-var pattern_window_position := "left"
-var pattern_left_image : Image
-var pattern_right_image : Image
+var pattern_window_position : int = Mouse_Button.LEFT
+var pattern_images := [Image.new(), Image.new()]
 
 # Palettes
 var palettes := {}
@@ -155,9 +130,10 @@ var top_menu_container : Panel
 var left_cursor : Sprite
 var right_cursor : Sprite
 var canvas : Canvas
-var canvas_parent : Node
+var tabs : Tabs
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
+var small_preview_viewport : ViewportContainer
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
@@ -174,67 +150,54 @@ var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
-var import_sprites_dialog : FileDialog
+var new_image_dialog : ConfirmationDialog
+var open_sprites_dialog : FileDialog
+var save_sprites_dialog : FileDialog
+var save_sprites_html5_dialog : ConfirmationDialog
 var export_dialog : AcceptDialog
+var preferences_dialog : AcceptDialog
+var unsaved_changes_dialog : ConfirmationDialog
 
-var left_color_picker : ColorPickerButton
-var right_color_picker : ColorPickerButton
+var color_pickers := []
 
 var color_switch_button : BaseButton
 
-var left_tool_options_container : Container
-var right_tool_options_container : Container
+var tool_options_containers := []
 
-var left_brush_type_container : Container
-var right_brush_type_container : Container
-var left_brush_type_button : BaseButton
-var right_brush_type_button : BaseButton
+var brush_type_containers := []
+var brush_type_buttons := []
 var brushes_popup : Popup
 var file_brush_container : GridContainer
 var project_brush_container : GridContainer
 var patterns_popup : Popup
 
-var left_brush_size_edit : SpinBox
-var left_brush_size_slider : HSlider
-var right_brush_size_edit : SpinBox
-var right_brush_size_slider : HSlider
+var brush_size_edits := []
+var brush_size_sliders := []
 
-var left_pixel_perfect_container : VBoxContainer
-var right_pixel_perfect_container : VBoxContainer
+var pixel_perfect_containers := []
 
-var left_color_interpolation_container : Container
-var right_color_interpolation_container : Container
-var left_interpolate_spinbox : SpinBox
-var left_interpolate_slider : HSlider
-var right_interpolate_spinbox : SpinBox
-var right_interpolate_slider : HSlider
+var color_interpolation_containers := []
+var interpolate_spinboxes := []
+var interpolate_sliders := []
 
-var left_fill_area_container : Container
-var left_fill_pattern_container : Container
-var right_fill_area_container : Container
-var right_fill_pattern_container : Container
+var fill_area_containers := []
+var fill_pattern_containers := []
 
-var left_ld_container : Container
-var left_ld_amount_slider : HSlider
-var left_ld_amount_spinbox : SpinBox
-var right_ld_container : Container
-var right_ld_amount_slider : HSlider
-var right_ld_amount_spinbox : SpinBox
+var ld_containers := []
+var ld_amount_sliders := []
+var ld_amount_spinboxes := []
 
-var left_colorpicker_container : Container
-var right_colorpicker_container : Container
+var colorpicker_containers := []
 
-var left_zoom_container : Container
-var right_zoom_container : Container
+var zoom_containers := []
 
-var left_mirror_container : Container
-var right_mirror_container : Container
+var mirror_containers := []
 
 var animation_timeline : Panel
 
 var animation_timer : Timer
 var frame_ids : HBoxContainer
-var current_frame_label : Label
+var current_frame_mark_label : Label
 var onion_skinning_button : BaseButton
 var loop_animation_button : BaseButton
 var play_forward : BaseButton
@@ -261,8 +224,9 @@ var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
 var palette_import_file_dialog : FileDialog
-
 var error_dialog : AcceptDialog
+var quit_dialog : ConfirmationDialog
+var quit_and_save_dialog : ConfirmationDialog
 
 onready var current_version : String = ProjectSettings.get_setting("application/config/Version")
 
@@ -277,9 +241,8 @@ func _ready() -> void:
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
-
-	undo_redo = UndoRedo.new()
 	image_clipboard = Image.new()
+	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
@@ -287,15 +250,27 @@ func _ready() -> void:
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
-	canvases.append(canvas)
+
+	var pencil_cursor_image = preload("res://assets/graphics/cursor_icons/pencil_cursor.png")
+	var eraser_cursor_image = preload("res://assets/graphics/cursor_icons/eraser_cursor.png")
+
 	left_cursor_tool_texture = ImageTexture.new()
-	left_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/pencil_cursor.png"))
+	if pencil_cursor_image is Image:
+		left_cursor_tool_texture.create_from_image(pencil_cursor_image)
+	elif pencil_cursor_image is ImageTexture:
+		left_cursor_tool_texture.create_from_image(pencil_cursor_image.get_data())
+
 	right_cursor_tool_texture = ImageTexture.new()
-	right_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/eraser_cursor.png"))
-	canvas_parent = canvas.get_parent()
+	if eraser_cursor_image is Image:
+		right_cursor_tool_texture.create_from_image(eraser_cursor_image)
+	elif eraser_cursor_image is ImageTexture:
+		right_cursor_tool_texture.create_from_image(eraser_cursor_image.get_data())
+
+	tabs = find_node_by_name(root, "Tabs")
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
-	camera = find_node_by_name(canvas_parent, "Camera2D")
+	small_preview_viewport = find_node_by_name(root, "PreviewViewportContainer")
+	camera = find_node_by_name(main_viewport, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	camera_preview = find_node_by_name(root, "CameraPreview")
 	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
@@ -311,60 +286,65 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
-	import_sprites_dialog = find_node_by_name(root, "ImportSprites")
+	new_image_dialog = find_node_by_name(root, "CreateNewImage")
+	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
+	save_sprites_dialog = find_node_by_name(root, "SaveSprite")
+	save_sprites_html5_dialog = find_node_by_name(root, "SaveSpriteHTML5")
 	export_dialog = find_node_by_name(root, "ExportDialog")
+	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
+	unsaved_changes_dialog = find_node_by_name(root, "UnsavedCanvasDialog")
 
-	left_tool_options_container = find_node_by_name(root, "LeftToolOptions")
-	right_tool_options_container = find_node_by_name(root, "RightToolOptions")
+	tool_options_containers.append(find_node_by_name(root, "LeftToolOptions"))
+	tool_options_containers.append(find_node_by_name(root, "RightToolOptions"))
 
-	left_color_picker = find_node_by_name(root, "LeftColorPickerButton")
-	right_color_picker = find_node_by_name(root, "RightColorPickerButton")
+	color_pickers.append(find_node_by_name(root, "LeftColorPickerButton"))
+	color_pickers.append(find_node_by_name(root, "RightColorPickerButton"))
 	color_switch_button = find_node_by_name(root, "ColorSwitch")
 
-	left_brush_type_container = find_node_by_name(left_tool_options_container, "LeftBrushType")
-	right_brush_type_container = find_node_by_name(right_tool_options_container, "RightBrushType")
-	left_brush_type_button = find_node_by_name(left_brush_type_container, "LeftBrushTypeButton")
-	right_brush_type_button = find_node_by_name(right_brush_type_container, "RightBrushTypeButton")
+	brush_type_containers.append(find_node_by_name(tool_options_containers[0], "LeftBrushType"))
+	brush_type_containers.append(find_node_by_name(tool_options_containers[1], "RightBrushType"))
+	brush_type_buttons.append(find_node_by_name(brush_type_containers[0], "LeftBrushTypeButton"))
+	brush_type_buttons.append(find_node_by_name(brush_type_containers[1], "RightBrushTypeButton"))
 	brushes_popup = find_node_by_name(root, "BrushesPopup")
 	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
 	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 	patterns_popup = find_node_by_name(root, "PatternsPopup")
 
-	left_brush_size_edit = find_node_by_name(root, "LeftBrushSizeEdit")
-	left_brush_size_slider = find_node_by_name(root, "LeftBrushSizeSlider")
-	right_brush_size_edit = find_node_by_name(root, "RightBrushSizeEdit")
-	right_brush_size_slider = find_node_by_name(root, "RightBrushSizeSlider")
+	brush_size_edits.append(find_node_by_name(root, "LeftBrushSizeEdit"))
+	brush_size_sliders.append(find_node_by_name(root, "LeftBrushSizeSlider"))
+	brush_size_edits.append(find_node_by_name(root, "RightBrushSizeEdit"))
+	brush_size_sliders.append(find_node_by_name(root, "RightBrushSizeSlider"))
 
-	left_pixel_perfect_container = find_node_by_name(root, "LeftBrushPixelPerfectMode")
-	right_pixel_perfect_container = find_node_by_name(root, "RightBrushPixelPerfectMode")
+	pixel_perfect_containers.append(find_node_by_name(root, "LeftBrushPixelPerfectMode"))
+	pixel_perfect_containers.append(find_node_by_name(root, "RightBrushPixelPerfectMode"))
 
-	left_color_interpolation_container = find_node_by_name(root, "LeftColorInterpolation")
-	right_color_interpolation_container = find_node_by_name(root, "RightColorInterpolation")
-	left_interpolate_spinbox = find_node_by_name(root, "LeftInterpolateFactor")
-	left_interpolate_slider = find_node_by_name(root, "LeftInterpolateSlider")
-	right_interpolate_spinbox = find_node_by_name(root, "RightInterpolateFactor")
-	right_interpolate_slider = find_node_by_name(root, "RightInterpolateSlider")
+	color_interpolation_containers.append(find_node_by_name(root, "LeftColorInterpolation"))
+	color_interpolation_containers.append(find_node_by_name(root, "RightColorInterpolation"))
+	interpolate_spinboxes.append(find_node_by_name(root, "LeftInterpolateFactor"))
+	interpolate_sliders.append(find_node_by_name(root, "LeftInterpolateSlider"))
+	interpolate_spinboxes.append(find_node_by_name(root, "RightInterpolateFactor"))
+	interpolate_sliders.append(find_node_by_name(root, "RightInterpolateSlider"))
 
-	left_fill_area_container = find_node_by_name(root, "LeftFillArea")
-	left_fill_pattern_container = find_node_by_name(root, "LeftFillPattern")
-	right_fill_area_container = find_node_by_name(root, "RightFillArea")
-	right_fill_pattern_container = find_node_by_name(root, "RightFillPattern")
+	fill_area_containers.append(find_node_by_name(root, "LeftFillArea"))
+	fill_pattern_containers.append(find_node_by_name(root, "LeftFillPattern"))
+	fill_area_containers.append(find_node_by_name(root, "RightFillArea"))
+	fill_pattern_containers.append(find_node_by_name(root, "RightFillPattern"))
 
-	left_ld_container = find_node_by_name(root, "LeftLDOptions")
-	left_ld_amount_slider = find_node_by_name(root, "LeftLDAmountSlider")
-	left_ld_amount_spinbox = find_node_by_name(root, "LeftLDAmountSpinbox")
-	right_ld_container = find_node_by_name(root, "RightLDOptions")
-	right_ld_amount_slider = find_node_by_name(root, "RightLDAmountSlider")
-	right_ld_amount_spinbox = find_node_by_name(root, "RightLDAmountSpinbox")
+	ld_containers.append(find_node_by_name(root, "LeftLDOptions"))
+	ld_amount_sliders.append(find_node_by_name(root, "LeftLDAmountSlider"))
+	ld_amount_spinboxes.append(find_node_by_name(root, "LeftLDAmountSpinbox"))
+	ld_containers.append(find_node_by_name(root, "RightLDOptions"))
+	ld_amount_sliders.append(find_node_by_name(root, "RightLDAmountSlider"))
+	ld_amount_spinboxes.append(find_node_by_name(root, "RightLDAmountSpinbox"))
 
-	left_colorpicker_container = find_node_by_name(root, "LeftColorPickerOptions")
-	right_colorpicker_container = find_node_by_name(root, "RightColorPickerOptions")
+	colorpicker_containers.append(find_node_by_name(root, "LeftColorPickerOptions"))
+	colorpicker_containers.append(find_node_by_name(root, "RightColorPickerOptions"))
 
-	left_zoom_container = find_node_by_name(root, "LeftZoomOptions")
-	right_zoom_container = find_node_by_name(root, "RightZoomOptions")
+	zoom_containers.append(find_node_by_name(root, "LeftZoomOptions"))
+	zoom_containers.append(find_node_by_name(root, "RightZoomOptions"))
 
-	left_mirror_container = find_node_by_name(root, "LeftMirrorButtons")
-	right_mirror_container = find_node_by_name(root, "RightMirrorButtons")
+	mirror_containers.append(find_node_by_name(root, "LeftMirrorButtons"))
+	mirror_containers.append(find_node_by_name(root, "RightMirrorButtons"))
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 
@@ -372,7 +352,7 @@ func _ready() -> void:
 	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
 	animation_timer = find_node_by_name(animation_timeline, "AnimationTimer")
 	frame_ids = find_node_by_name(animation_timeline, "FrameIDs")
-	current_frame_label = find_node_by_name(control, "CurrentFrame")
+	current_frame_mark_label = find_node_by_name(control, "CurrentFrameMark")
 	onion_skinning_button = find_node_by_name(animation_timeline, "OnionSkinning")
 	loop_animation_button = find_node_by_name(animation_timeline, "LoopAnim")
 	play_forward = find_node_by_name(animation_timeline, "PlayForward")
@@ -400,14 +380,16 @@ func _ready() -> void:
 	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
+	quit_dialog = find_node_by_name(root, "QuitDialog")
+	quit_and_save_dialog = find_node_by_name(root, "QuitAndSaveDialog")
 
-	# Store [Layer name (0), Layer visibility boolean (1), Layer lock boolean (2), Frame container (3),
-	# will new cels be linked boolean (4), Array of linked cels (5)]
-	layers.append([tr("Layer") + " 0", true, false, HBoxContainer.new(), false, []])
+	projects.append(Project.new())
+	projects[0].layers.append(Layer.new())
+	current_project = projects[0]
 
 
 # Thanks to https://godotengine.org/qa/17524/how-to-find-an-instanced-scene-by-its-name
-func find_node_by_name(root, node_name) -> Node:
+func find_node_by_name(root : Node, node_name : String) -> Node:
 	if root.get_name() == node_name:
 		return root
 	for child in root.get_children():
@@ -428,80 +410,69 @@ func notification_label(text : String) -> void:
 
 
 func general_undo() -> void:
-	undos -= 1
-	var action_name := undo_redo.get_current_action_name()
+	current_project.undos -= 1
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
 func general_redo() -> void:
-	if undos < undo_redo.get_version(): # If we did undo and then redo
-		undos = undo_redo.get_version()
+	if current_project.undos < current_project.undo_redo.get_version(): # If we did undo and then redo
+		current_project.undos = current_project.undo_redo.get_version()
 	if control.redone:
-		var action_name := undo_redo.get_current_action_name()
+		var action_name : String = current_project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)
 
 
-func undo(_canvases : Array, layer_index : int = -1) -> void:
+func undo(_frame_index := -1, _layer_index := -1) -> void:
 	general_undo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
-		for c in _canvases:
-			if layer_index > -1:
-				c.update_texture(layer_index)
-			else:
-				for i in c.layers.size():
-					c.update_texture(i)
+		if _layer_index > -1 and _frame_index > -1:
+			canvas.update_texture(_layer_index, _frame_index)
+		else:
+			for i in current_project.frames.size():
+				for j in current_project.layers.size():
+					canvas.update_texture(j, i)
 
-			if action_name == "Scale":
-				c.camera_zoom()
+		if action_name == "Scale":
+			canvas.camera_zoom()
 
-	if action_name == "Add Frame":
-		canvas_parent.remove_child(_canvases[0])
-		# This actually means that canvases.size is one, but it hasn't been updated yet
-		if canvases.size() == 2: # Stop animating
+	elif "Frame" in action_name:
+		# This actually means that frames.size is one, but it hasn't been updated yet
+		if current_project.frames.size() == 2: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
-	elif action_name == "Remove Frame":
-		canvas_parent.add_child(_canvases[0])
-		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
-	elif action_name == "Change Frame Order":
-		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
-	if !project_has_changed:
-		project_has_changed = true
+	if !current_project.has_changed:
+		current_project.has_changed = true
 		self.window_title = window_title + "(*)"
 
 
-func redo(_canvases : Array, layer_index : int = -1) -> void:
+func redo(_frame_index := -1, _layer_index := -1) -> void:
 	general_redo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
-		for c in _canvases:
-			if layer_index > -1:
-				c.update_texture(layer_index)
-			else:
-				for i in c.layers.size():
-					c.update_texture(i)
+		if _layer_index > -1 and _frame_index > -1:
+			canvas.update_texture(_layer_index, _frame_index)
+		else:
+			for i in current_project.frames.size():
+				for j in current_project.layers.size():
+					canvas.update_texture(j, i)
 
-			if action_name == "Scale":
-				c.camera_zoom()
+		if action_name == "Scale":
+			canvas.camera_zoom()
 
-	if action_name == "Add Frame":
-		canvas_parent.add_child(_canvases[0])
-	elif action_name == "Remove Frame":
-		canvas_parent.remove_child(_canvases[0])
-		if canvases.size() == 1: # Stop animating
+	elif "Frame" in action_name:
+		if current_project.frames.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
-	elif action_name == "Change Frame Order":
-		canvas_parent.move_child(_canvases[0], _canvases[0].frame)
 
 	canvas.update()
-	if !project_has_changed:
-		project_has_changed = true
+	if !current_project.has_changed:
+		current_project.has_changed = true
 		self.window_title = window_title + "(*)"
 
 
@@ -510,185 +481,10 @@ func title_changed(value : String) -> void:
 	OS.set_window_title(value)
 
 
-func canvases_changed(value : Array) -> void:
-	canvases = value
-	for container in frames_container.get_children():
-		for button in container.get_children():
-			container.remove_child(button)
-			button.queue_free()
-		frames_container.remove_child(container)
-
-	for frame_id in frame_ids.get_children():
-		frame_ids.remove_child(frame_id)
-		frame_id.queue_free()
-
-	for i in range(layers.size() - 1, -1, -1):
-		frames_container.add_child(layers[i][3])
-
-	for j in range(canvases.size()):
-		var label := Label.new()
-		label.rect_min_size.x = 36
-		label.align = Label.ALIGN_CENTER
-		label.text = str(j + 1)
-		frame_ids.add_child(label)
-
-		for i in range(layers.size() - 1, -1, -1):
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
-
-			layers[i][3].add_child(cel_button)
-
-	# This is useful in case tagged frames get deleted DURING the animation is playing
-	# otherwise, this code is useless in this context, since these values are being set
-	# when the play buttons get pressed, anyway
-	animation_timeline.first_frame = 0
-	animation_timeline.last_frame = canvases.size() - 1
-	if play_only_tags:
-		for tag in animation_tags:
-			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
-				animation_timeline.first_frame = tag[2] - 1
-				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
-
-
-func clear_canvases() -> void:
-	for child in canvas_parent.get_children():
-		if child is Canvas:
-			child.queue_free()
-	canvases.clear()
-	animation_tags.clear()
-	self.animation_tags = animation_tags # To execute animation_tags_changed()
-
-	# Stop playing the animation
-	play_backwards.pressed = false
-	play_forward.pressed = false
-	animation_timer.stop()
-
-	self.window_title = "(" + tr("untitled") + ") - Pixelorama " + Global.current_version
-	OpenSave.current_save_path = ""
-	control.get_node("ExportDialog").was_exported = false
-	control.file_menu.set_item_text(3, tr("Save..."))
-	control.file_menu.set_item_text(6, tr("Export..."))
-	undo_redo.clear_history(false)
-
-
-func layers_changed(value : Array) -> void:
-	layers = value
-	if layers_changed_skip:
-		layers_changed_skip = false
-		return
-
-	for container in layers_container.get_children():
-		container.queue_free()
-
-	for container in frames_container.get_children():
-		for button in container.get_children():
-			container.remove_child(button)
-			button.queue_free()
-		frames_container.remove_child(container)
-
-	for i in range(layers.size() - 1, -1, -1):
-		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
-		layer_container.i = i
-		if !layers[i][0]:
-			layers[i][0] = tr("Layer") + " %s" % i
-
-		layers_container.add_child(layer_container)
-		layer_container.label.text = layers[i][0]
-		layer_container.line_edit.text = layers[i][0]
-
-		frames_container.add_child(layers[i][3])
-		for j in range(canvases.size()):
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = Global.canvases[j].layers[i][1]
-
-			layers[i][3].add_child(cel_button)
-
-	var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
-	layer_button.pressed = true
-	self.current_frame = current_frame # Call frame_changed to update UI
-
-	if layers[current_layer][2]:
-		disable_button(remove_layer_button, true)
-
-	if layers.size() == 1:
-		disable_button(remove_layer_button, true)
-		disable_button(move_up_layer_button, true)
-		disable_button(move_down_layer_button, true)
-		disable_button(merge_down_layer_button, true)
-	elif !layers[current_layer][2]:
-		disable_button(remove_layer_button, false)
-
-
-func frame_changed(value : int) -> void:
-	current_frame = value
-	current_frame_label.text = tr("Current frame:") + " %s/%s" % [str(current_frame + 1), canvases.size()]
-
-	var i := 0
-	for c in canvases: # De-select all the other canvases/frames
-		c.visible = false
-		c.is_making_line = false
-		c.line_2d.set_point_position(1, c.line_2d.points[0])
-		var text_color := Color.white
-		if theme_type == "Caramel" || theme_type == "Light":
-			text_color = Color.black
-		frame_ids.get_child(i).add_color_override("font_color", text_color)
-		for layer in layers:
-			if i < layer[3].get_child_count():
-				layer[3].get_child(i).pressed = false
-		i += 1
-
-	# Select the new canvas/frame
-	canvas = canvases[current_frame]
-	canvas.visible = true
-	frame_ids.get_child(current_frame).add_color_override("font_color", control.theme.get_color("Selected Color", "Label"))
-	if current_frame < layers[current_layer][3].get_child_count():
-		layers[current_layer][3].get_child(current_frame).pressed = true
-
-	if canvases.size() == 1:
-		disable_button(remove_frame_button, true)
-	elif !layers[current_layer][2]:
-		disable_button(remove_frame_button, false)
-
-	Global.transparent_checker._ready() # To update the rect size
-
-
-func layer_changed(value : int) -> void:
-	current_layer = value
-	layer_opacity_slider.value = canvas.layers[current_layer][2] * 100
-	layer_opacity_spinbox.value = canvas.layers[current_layer][2] * 100
-
-	for container in layers_container.get_children():
-		container.pressed = false
-
-	if current_layer < layers_container.get_child_count():
-		var layer_button = layers_container.get_child(layers_container.get_child_count() - 1 - current_layer)
-		layer_button.pressed = true
-
-	if current_layer < layers.size() - 1:
-		disable_button(move_up_layer_button, false)
-	else:
-		disable_button(move_up_layer_button, true)
-
-	if current_layer > 0:
-		disable_button(move_down_layer_button, false)
-		disable_button(merge_down_layer_button, false)
-	else:
-		disable_button(move_down_layer_button, true)
-		disable_button(merge_down_layer_button, true)
-
-	if current_layer < layers.size():
-		if layers[current_layer][2]:
-			disable_button(remove_layer_button, true)
-		else:
-			if layers.size() > 1:
-				disable_button(remove_layer_button, false)
-
-	yield(get_tree().create_timer(0.01), "timeout")
-	self.current_frame = current_frame # Call frame_changed to update UI
+func project_changed(value : int) -> void:
+	current_project_index = value
+	current_project = projects[value]
+	current_project.change_project()
 
 
 func dialog_open(open : bool) -> void:
@@ -711,8 +507,8 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 
 	if button is Button:
 		var theme := theme_type
-		if theme == "Caramel":
-			theme = "Dark"
+		if theme == Theme_Types.CARAMEL:
+			theme = Theme_Types.DARK
 		for c in button.get_children():
 			if c is TextureRect:
 				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
@@ -727,39 +523,6 @@ func change_button_texturerect(texture_button : TextureRect, new_file_name : Str
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
 	texture_button.texture = load(directory_path.plus_file(new_file_name))
-
-
-func animation_tags_changed(value : Array) -> void:
-	animation_tags = value
-	for child in tag_container.get_children():
-		child.queue_free()
-
-	for tag in animation_tags:
-		var tag_c : Container = load("res://src/UI/Timeline/AnimationTag.tscn").instance()
-		tag_container.add_child(tag_c)
-		var tag_position := tag_container.get_child_count() - 1
-		tag_container.move_child(tag_c, tag_position)
-		tag_c.get_node("Label").text = tag[0]
-		tag_c.get_node("Label").modulate = tag[1]
-		tag_c.get_node("Line2D").default_color = tag[1]
-
-		tag_c.rect_position.x = (tag[2] - 1) * 39 + tag[2]
-
-		var size : int = tag[3] - tag[2]
-		tag_c.rect_min_size.x = (size + 1) * 39
-		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
-		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
-
-	# This is useful in case tags get modified DURING the animation is playing
-	# otherwise, this code is useless in this context, since these values are being set
-	# when the play buttons get pressed, anyway
-	animation_timeline.first_frame = 0
-	animation_timeline.last_frame = canvases.size() - 1
-	if play_only_tags:
-		for tag in animation_tags:
-			if current_frame + 1 >= tag[2] && current_frame + 1 <= tag[3]:
-				animation_timeline.first_frame = tag[2] - 1
-				animation_timeline.last_frame = min(canvases.size() - 1, tag[3] - 1)
 
 
 func update_hint_tooltips() -> void:
@@ -821,35 +584,36 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 	var first_frame : BaseButton = find_node_by_name(root, "FirstFrame")
 	first_frame.hint_tooltip = tr("""Jump to the first frame
-(%s)""") % "Ctrl+Home"
+(%s)""") % InputMap.get_action_list("go_to_first_frame")[0].as_text()
 
 	var previous_frame : BaseButton = find_node_by_name(root, "PreviousFrame")
 	previous_frame.hint_tooltip = tr("""Go to the previous frame
-(%s)""") % "Ctrl+Left"
+(%s)""") % InputMap.get_action_list("go_to_previous_frame")[0].as_text()
 
 	play_backwards.hint_tooltip = tr("""Play the animation backwards (from end to beginning)
-(%s)""") % "F4"
+(%s)""") % InputMap.get_action_list("play_backwards")[0].as_text()
 
 	play_forward.hint_tooltip = tr("""Play the animation forward (from beginning to end)
-(%s)""") % "F5"
+(%s)""") % InputMap.get_action_list("play_forward")[0].as_text()
 
 	var next_frame : BaseButton = find_node_by_name(root, "NextFrame")
 	next_frame.hint_tooltip = tr("""Go to the next frame
-(%s)""") % "Ctrl+Right"
+(%s)""") % InputMap.get_action_list("go_to_next_frame")[0].as_text()
 
 	var last_frame : BaseButton = find_node_by_name(root, "LastFrame")
 	last_frame.hint_tooltip = tr("""Jump to the last frame
-(%s)""") % "Ctrl+End"
+(%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
 
 
 func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
 	var brush_container
 	var brush_button = load("res://src/UI/BrushButton.tscn").instance()
 	brush_button.brush_type = brush_type
-	brush_button.custom_brush_index = custom_brushes.size() - 1
 	if brush_type == Brush_Types.FILE || brush_type == Brush_Types.RANDOM_FILE:
+		brush_button.custom_brush_index = file_brushes.size() - 1
 		brush_container = file_brush_container
 	else:
+		brush_button.custom_brush_index = current_project.brushes.size() - 1
 		brush_container = project_brush_container
 	var brush_tex := ImageTexture.new()
 	brush_tex.create_from_image(brush_img, 0)
@@ -861,79 +625,78 @@ func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hi
 	brush_container.add_child(brush_button)
 
 
+func create_pattern_button(image : Image, hint_tooltip := "") -> void:
+	var pattern_button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
+	pattern_button.image = image
+	var pattern_tex := ImageTexture.new()
+	pattern_tex.create_from_image(image, 0)
+	pattern_button.get_child(0).texture = pattern_tex
+	pattern_button.hint_tooltip = hint_tooltip
+	pattern_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	patterns_popup.get_node("ScrollContainer/PatternContainer").add_child(pattern_button)
+
+
 func remove_brush_buttons() -> void:
-	current_left_brush_type = Brush_Types.PIXEL
-	current_right_brush_type = Brush_Types.PIXEL
+	current_brush_types[0] = Brush_Types.PIXEL
+	current_brush_types[1] = Brush_Types.PIXEL
 	for child in project_brush_container.get_children():
 		child.queue_free()
 
 
 func undo_custom_brush(_brush_button : BaseButton = null) -> void:
 	general_undo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.add_child(_brush_button)
-		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index - brushes_from_files)
+		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index)
 		_brush_button.get_node("DeleteButton").visible = false
 
 
 func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 	general_redo()
-	var action_name := undo_redo.get_current_action_name()
+	var action_name : String = current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		project_brush_container.remove_child(_brush_button)
 
 
-func update_left_custom_brush() -> void:
-	if current_left_brush_type == Brush_Types.PIXEL:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/pixel_image.png")
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-	elif current_left_brush_type == Brush_Types.CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_9x9.png")
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-		left_circle_points = plot_circle(left_brush_size)
-	elif current_left_brush_type == Brush_Types.FILLED_CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		left_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-		left_circle_points = plot_circle(left_brush_size)
+func update_custom_brush(mouse_button : int) -> void:
+	var brush_type : int = current_brush_types[mouse_button]
+	if brush_type == Brush_Types.PIXEL:
+		var pixel = preload("res://assets/graphics/pixel_image.png")
+		if pixel is Image:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		elif pixel is ImageTexture:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
+	elif brush_type == Brush_Types.CIRCLE:
+		var pixel = preload("res://assets/graphics/circle_9x9.png")
+		if pixel is Image:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		elif pixel is ImageTexture:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
+
+		left_circle_points = plot_circle(brush_sizes[0])
+		right_circle_points = plot_circle(brush_sizes[1])
+	elif brush_type == Brush_Types.FILLED_CIRCLE:
+		var pixel = preload("res://assets/graphics/circle_filled_9x9.png")
+		if pixel is Image:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
+		elif pixel is ImageTexture:
+			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
+
+		left_circle_points = plot_circle(brush_sizes[0])
+		right_circle_points = plot_circle(brush_sizes[1])
 	else:
 		var custom_brush := Image.new()
-		custom_brush.copy_from(custom_brushes[custom_left_brush_index])
+		if brush_type == Brush_Types.FILE or brush_type == Brush_Types.RANDOM_FILE:
+			custom_brush.copy_from(file_brushes[custom_brush_indexes[mouse_button]])
+		else:
+			custom_brush.copy_from(current_project.brushes[custom_brush_indexes[mouse_button]])
 		var custom_brush_size = custom_brush.get_size()
-		custom_brush.resize(custom_brush_size.x * left_brush_size, custom_brush_size.y * left_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_left_brush_image = blend_image_with_color(custom_brush, left_color_picker.color, left_interpolate_spinbox.value / 100)
-		custom_left_brush_texture.create_from_image(custom_left_brush_image, 0)
+		custom_brush.resize(custom_brush_size.x * brush_sizes[mouse_button], custom_brush_size.y * brush_sizes[mouse_button], Image.INTERPOLATE_NEAREST)
+		brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
+		brush_textures[mouse_button].create_from_image(brush_images[mouse_button], 0)
 
-		left_brush_type_button.get_child(0).texture = custom_left_brush_texture
-
-
-func update_right_custom_brush() -> void:
-	if current_right_brush_type == Brush_Types.PIXEL:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/pixel_image.png")
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-	elif current_right_brush_type == Brush_Types.CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_9x9.png")
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-		right_circle_points = plot_circle(right_brush_size)
-	elif current_right_brush_type == Brush_Types.FILLED_CIRCLE:
-		var pixel := Image.new()
-		pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		right_brush_type_button.get_child(0).texture.create_from_image(pixel, 0)
-		right_circle_points = plot_circle(right_brush_size)
-	else:
-		var custom_brush := Image.new()
-		custom_brush.copy_from(custom_brushes[custom_right_brush_index])
-		var custom_brush_size = custom_brush.get_size()
-		custom_brush.resize(custom_brush_size.x * right_brush_size, custom_brush_size.y * right_brush_size, Image.INTERPOLATE_NEAREST)
-		custom_right_brush_image = blend_image_with_color(custom_brush, right_color_picker.color, right_interpolate_spinbox.value / 100)
-		custom_right_brush_texture.create_from_image(custom_right_brush_image, 0)
-
-		right_brush_type_button.get_child(0).texture = custom_right_brush_texture
+		brush_type_buttons[mouse_button].get_child(0).texture = brush_textures[mouse_button]
 
 
 func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
@@ -979,212 +742,6 @@ func plot_circle(r : int) -> Array:
 	return circle_points
 
 
-func scale3X(sprite : Image, tol : float = 50) -> Image:
-	var scaled = Image.new()
-	scaled.create(sprite.get_width()*3, sprite.get_height()*3, false, Image.FORMAT_RGBA8)
-	scaled.lock()
-	sprite.lock()
-	var a : Color
-	var b : Color
-	var c : Color
-	var d : Color
-	var e : Color
-	var f : Color
-	var g : Color
-	var h : Color
-	var i : Color
-
-	for x in range(1,sprite.get_width()-1):
-		for y in range(1,sprite.get_height()-1):
-			var xs : float = 3*x
-			var ys : float = 3*y
-
-			a = sprite.get_pixel(x-1,y-1)
-			b = sprite.get_pixel(x,y-1)
-			c = sprite.get_pixel(x+1,y-1)
-			d = sprite.get_pixel(x-1,y)
-			e = sprite.get_pixel(x,y)
-			f = sprite.get_pixel(x+1,y)
-			g = sprite.get_pixel(x-1,y+1)
-			h = sprite.get_pixel(x,y+1)
-			i = sprite.get_pixel(x+1,y+1)
-
-			var db : bool = similarColors(d, b, tol)
-			var dh : bool = similarColors(d, h, tol)
-			var bf : bool = similarColors(f, b, tol)
-			var ec : bool = similarColors(e, c, tol)
-			var ea : bool = similarColors(e, a, tol)
-			var fh : bool = similarColors(f, h, tol)
-			var eg : bool = similarColors(e, g, tol)
-			var ei : bool = similarColors(e, i, tol)
-
-			scaled.set_pixel(xs-1, ys-1, d if (db and !dh and !bf) else e )
-			scaled.set_pixel(xs, ys-1, b if (db and !dh and !bf and !ec) or
-			(bf and !db and !fh and !ea) else e)
-			scaled.set_pixel(xs+1, ys-1, f if (bf and !db and !fh) else e)
-			scaled.set_pixel(xs-1, ys, d if (dh and !fh and !db and !ea) or
-			 (db and !dh and !bf and !eg) else e)
-			scaled.set_pixel(xs, ys, e);
-			scaled.set_pixel(xs+1, ys, f if (bf and !db and !fh and !ei) or
-			(fh and !bf and !dh and !ec) else e)
-			scaled.set_pixel(xs-1, ys+1, d if (dh and !fh and !db) else e)
-			scaled.set_pixel(xs, ys+1, h if (fh and !bf and !dh and !eg) or
-			(dh and !fh and !db and !ei) else e)
-			scaled.set_pixel(xs+1, ys+1, f if (fh and !bf and !dh) else e)
-
-	scaled.unlock()
-	sprite.unlock()
-	return scaled
-
-
-func rotxel(sprite : Image, angle : float) -> void:
-
-	# If angle is simple, then nn rotation is the best
-
-	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:
-		nn_rotate(sprite, angle)
-		return
-
-	var aux : Image = Image.new()
-	aux.copy_from(sprite)
-	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
-	var ox : int
-	var oy : int
-	var p : Color
-	aux.lock()
-	sprite.lock()
-	for x in range(sprite.get_width()):
-		for y in range(sprite.get_height()):
-			var dx = 3*(x - center.x)
-			var dy = 3*(y - center.y)
-			var found_pixel : bool = false
-			for k in range(9):
-				var i = -1 + k % 3
-				var j = -1 + int(k / 3)
-				var dir = atan2(dy + j, dx + i)
-				var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
-				dir -= angle
-				ox = round(center.x*3 + 1 + mag*cos(dir))
-				oy = round(center.y*3 + 1 + mag*sin(dir))
-
-				if (sprite.get_width() % 2 != 0):
-					ox += 1
-					oy += 1
-
-				if (ox >= 0 && ox < sprite.get_width()*3
-					&& oy >= 0 && oy < sprite.get_height()*3):
-						found_pixel = true
-						break
-
-			if !found_pixel:
-				sprite.set_pixel(x, y, Color(0,0,0,0))
-				continue
-
-			var fil : int = oy % 3
-			var col : int = ox % 3
-			var index : int = col + 3*fil
-
-			ox = round((ox - 1)/3.0);
-			oy = round((oy - 1)/3.0);
-			var a : Color
-			var b : Color
-			var c : Color
-			var d : Color
-			var e : Color
-			var f : Color
-			var g : Color
-			var h : Color
-			var i : Color
-			if (ox == 0 || ox == sprite.get_width() - 1 ||
-				oy == 0 || oy == sprite.get_height() - 1):
-					p = aux.get_pixel(ox, oy)
-			else:
-				a = aux.get_pixel(ox-1,oy-1);
-				b = aux.get_pixel(ox,oy-1);
-				c = aux.get_pixel(ox+1,oy-1);
-				d = aux.get_pixel(ox-1,oy);
-				e = aux.get_pixel(ox,oy);
-				f = aux.get_pixel(ox+1,oy);
-				g = aux.get_pixel(ox-1,oy+1);
-				h = aux.get_pixel(ox,oy+1);
-				i = aux.get_pixel(ox+1,oy+1);
-
-				match(index):
-					0:
-						p = d if (similarColors(d,b) && !similarColors(d,h)
-						 && !similarColors(b,f)) else e;
-					1:
-						p = b if ((similarColors(d,b) && !similarColors(d,h) &&
-						 !similarColors(b,f) && !similarColors(e,c)) ||
-						 (similarColors(b,f) && !similarColors(d,b) &&
-						 !similarColors(f,h) && !similarColors(e,a))) else e;
-					2:
-						p = f if (similarColors(b,f) && !similarColors(d,b) &&
-						 !similarColors(f,h)) else e;
-					3:
-						p = d if ((similarColors(d,h) && !similarColors(f,h) &&
-						 !similarColors(d,b) && !similarColors(e,a)) ||
-						 (similarColors(d,b) && !similarColors(d,h) &&
-						!similarColors(b,f) && !similarColors(e,g))) else e;
-					4:
-						p = e
-					5:
-						p =  f if((similarColors(b,f) && !similarColors(d,b) &&
-						 !similarColors(f,h) && !similarColors(e,i))
-						 || (similarColors(f,h) && !similarColors(b,f) &&
-						 !similarColors(d,h) && !similarColors(e,c))) else e;
-					6:
-						p = d if (similarColors(d,h) && !similarColors(f,h) &&
-						 !similarColors(d,b)) else e;
-					7:
-						p = h if ((similarColors(f,h) && !similarColors(f,b) &&
-						 !similarColors(d,h) && !similarColors(e,g))
-						 || (similarColors(d,h) && !similarColors(f,h) &&
-						 !similarColors(d,b) && !similarColors(e,i))) else e;
-					8:
-						p = f if (similarColors(f,h) && !similarColors(f,b) &&
-						 !similarColors(d,h)) else e;
-			sprite.set_pixel(x, y, p)
-	sprite.unlock()
-	aux.unlock()
-
-
-func fake_rotsprite(sprite : Image, angle : float) -> void:
-	sprite.copy_from(scale3X(sprite))
-	nn_rotate(sprite,angle)
-	sprite.resize(sprite.get_width()/3,sprite.get_height()/3,0)
-
-
-func nn_rotate(sprite : Image, angle : float) -> void:
-	var aux : Image = Image.new()
-	aux.copy_from(sprite)
-	sprite.lock()
-	aux.lock()
-	var ox: int
-	var oy: int
-	var center : Vector2 = Vector2(sprite.get_width()/2, sprite.get_height()/2)
-	for x in range(sprite.get_width()):
-		for y in range(sprite.get_height()):
-			ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
-			oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
-			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
-				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
-			else:
-				sprite.set_pixel(x, y, Color(0,0,0,0))
-	sprite.unlock()
-	aux.unlock()
-
-
-func similarColors(c1 : Color, c2 : Color, tol : float = 100) -> bool:
-	var dist = colorDistance(c1, c2)
-	return dist <= tol
-
-
-func colorDistance(c1 : Color, c2 : Color) -> float:
-		return sqrt(pow((c1.r - c2.r)*255, 2) + pow((c1.g - c2.g)*255, 2)
-		+ pow((c1.b - c2.b)*255, 2) + pow((c1.a - c2.a)*255, 2))
-
-
 func _exit_tree() -> void:
 	config_cache.set_value("window", "screen", OS.current_screen)
 	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
@@ -1192,5 +749,8 @@ func _exit_tree() -> void:
 	config_cache.set_value("window", "size", OS.window_size)
 	config_cache.save("user://cache.ini")
 
-	# Thanks to qarmin from GitHub for pointing this out
-	undo_redo.free()
+	var i := 0
+	for project in projects:
+		project.undo_redo.free()
+		OpenSave.remove_backup(i)
+		i += 1

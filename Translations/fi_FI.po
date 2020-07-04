@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-06-02 17:09\n"
 
 msgid "OK"
 msgstr ""
@@ -741,9 +741,6 @@ msgstr ""
 msgid "Current frame:"
 msgstr ""
 
-msgid "Current frame: 1/1"
-msgstr ""
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr ""
@@ -1157,5 +1154,17 @@ msgid "Autosaved backup for %s was found.\n"
 msgstr ""
 
 msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-05-15 20:42\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -761,9 +761,6 @@ msgstr "Verticale"
 msgid "Current frame:"
 msgstr "Frame corrente:"
 
-msgid "Current frame: 1/1"
-msgstr "Frame corrente: 1/1"
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Salta al primo frame\n"
@@ -1188,4 +1185,16 @@ msgstr "È stato trovato il backup automatico per %s\n"
 
 msgid "Backup reloaded"
 msgstr "Backup ricaricato"
+
+msgid "Remove currently selected palette"
+msgstr "Rimuovi la tavolozza attualmente selezionata"
+
+msgid "You can't remove more palettes!"
+msgstr "Non puoi rimuovere altre tavolozze!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Impossibile rimuovere la tavolozza, perché non esiste!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Si è verificato un errore durante la rimozione della tavolozza! Codice errore: %s"
 

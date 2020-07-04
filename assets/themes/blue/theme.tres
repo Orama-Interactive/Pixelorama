@@ -121,10 +121,6 @@ image = SubResource( 12 )
 size = Vector2( 12, 12 )
 
 [sub_resource type="StyleBoxFlat" id=14]
-content_margin_left = 3.0
-content_margin_right = 3.0
-content_margin_top = 3.0
-content_margin_bottom = 3.0
 bg_color = Color( 0.15, 0.1725, 0.2325, 1 )
 draw_center = false
 border_color = Color( 0.125, 0.14375, 0.19375, 1 )
@@ -171,8 +167,8 @@ image = SubResource( 19 )
 size = Vector2( 31, 19 )
 
 [sub_resource type="StyleBoxFlat" id=21]
-content_margin_left = 4.5
-content_margin_right = 4.5
+content_margin_left = 5.0
+content_margin_right = 5.0
 content_margin_top = 3.0
 content_margin_bottom = 3.0
 bg_color = Color( 0.231373, 0.266667, 0.360784, 1 )
@@ -9079,10 +9075,6 @@ draw_center = false
 border_color = Color( 0.41, 0.61, 0.91, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=1385]
-content_margin_left = 3.0
-content_margin_right = 3.0
-content_margin_top = 3.0
-content_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxEmpty" id=1386]
 content_margin_left = 0.0
@@ -9575,7 +9567,7 @@ CheckBox/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
 CheckBox/colors/font_color_pressed = Color( 0.41, 0.61, 0.91, 1 )
 CheckBox/colors/icon_color_hover = Color( 1.15, 1.15, 1.15, 1 )
 CheckBox/constants/check_vadjust = 0
-CheckBox/constants/hseparation = 3
+CheckBox/constants/hseparation = 4
 CheckBox/fonts/font = null
 CheckBox/icons/checked = SubResource( 7 )
 CheckBox/icons/radio_checked = SubResource( 9 )
@@ -10417,7 +10409,7 @@ ItemList/colors/guide_color = Color( 1, 1, 1, 0.05 )
 ItemList/constants/hseparation = 2
 ItemList/constants/icon_margin = 3
 ItemList/constants/line_separation = 2
-ItemList/constants/vseparation = 2
+ItemList/constants/vseparation = 4
 ItemList/styles/bg = SubResource( 1407 )
 ItemList/styles/bg_focus = SubResource( 1382 )
 ItemList/styles/cursor = SubResource( 1408 )
@@ -10427,10 +10419,10 @@ ItemList/styles/selected_focus = SubResource( 1410 )
 "Label/colors/Selected Color" = Color( 0.545098, 0.619608, 0.788235, 1 )
 Label/colors/font_color = Color( 0.8, 0.8075, 0.8275, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
-Label/constants/line_spacing = 2
+Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
-Label/constants/shadow_offset_x = 0
-Label/constants/shadow_offset_y = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
 Label/styles/normal = SubResource( 1385 )
 LineEdit/colors/clear_button_color = Color( 0.8, 0.8075, 0.8275, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 0.41, 0.61, 0.91, 1 )
@@ -10581,7 +10573,7 @@ Tree/constants/hseparation = 3
 Tree/constants/item_margin = 9
 Tree/constants/scroll_border = 30
 Tree/constants/scroll_speed = 12
-Tree/constants/vseparation = 3
+Tree/constants/vseparation = 4
 Tree/icons/arrow = SubResource( 591 )
 Tree/icons/arrow_collapsed = SubResource( 593 )
 Tree/icons/checked = SubResource( 7 )

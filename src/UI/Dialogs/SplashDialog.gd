@@ -58,19 +58,14 @@ func _on_DiscordButton_pressed() -> void:
 
 func _on_NewBtn_pressed() -> void:
 	visible = false
-	Global.control.file_menu_id_pressed(0)
+	Global.top_menu_container.file_menu_id_pressed(0)
 
 
 func _on_OpenBtn__pressed() -> void:
 	visible = false
-	Global.control.file_menu_id_pressed(1)
+	Global.top_menu_container.file_menu_id_pressed(1)
 
 
 func _on_OpenLastBtn_pressed() -> void:
 	visible = false
-	Global.control.file_menu_id_pressed(2)
-
-
-func _on_ImportBtn_pressed() -> void:
-	visible = false
-	Global.control.file_menu_id_pressed(5)
+	Global.top_menu_container.file_menu_id_pressed(2)

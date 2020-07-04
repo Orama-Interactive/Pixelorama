@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-05-15 19:39\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -760,9 +760,6 @@ msgstr "Pionowe"
 msgid "Current frame:"
 msgstr "Obecna klatka:"
 
-msgid "Current frame: 1/1"
-msgstr "Obecna klatka: 1/1"
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Skocz do pierwszej klatki\n"
@@ -1187,4 +1184,16 @@ msgstr "Znaleziono automatyczną kopię zapasową dla %s.\n"
 
 msgid "Backup reloaded"
 msgstr "Wczytano ponownię kopię zapasową"
+
+msgid "Remove currently selected palette"
+msgstr "Usuń aktualnie wybraną paletę"
+
+msgid "You can't remove more palettes!"
+msgstr "Nie możesz usunąć więcej palet!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Nie można usunąć palety, ponieważ nie istnieje!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Wystąpił błąd podczas usuwania palety! Kod błędu: %s"
 

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-05-15 22:01\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -761,9 +761,6 @@ msgstr "Вертикально"
 msgid "Current frame:"
 msgstr "Текущий кадр:"
 
-msgid "Current frame: 1/1"
-msgstr "Текущий кадр: 1/1"
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Перейти к первому кадру\n"
@@ -1186,4 +1183,16 @@ msgstr "Найдена автосохраненная резервная коп�
 
 msgid "Backup reloaded"
 msgstr "Резервная копия восстановлена"
+
+msgid "Remove currently selected palette"
+msgstr "Удалить выбранную на данный момент палитру"
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Невозможно удалить палитру, потому что она не существует!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Произошла ошибка при удалении палитры! Код ошибки: %s"
 

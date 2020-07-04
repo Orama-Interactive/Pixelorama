@@ -109,9 +109,9 @@ func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
 		var first_image : Image = loaded_images.pop_front()
 
 		# The index which this random brush will be at
-		var next_random_brush_index := Global.file_brush_container.get_child_count()
+		var next_random_brush_index : int = Global.file_brush_container.get_child_count()
 
-		Global.custom_brushes.append(first_image)
+		Global.file_brushes.append(first_image)
 		Global.create_brush_button(first_image, Global.Brush_Types.RANDOM_FILE, tooltip_name)
 	#	# Process the rest
 		for remaining_image in loaded_images:
@@ -127,7 +127,7 @@ func add_plain_brush(path: String, tooltip_name: String) -> void:
 		return
 	# do the standard conversion thing...
 	image.convert(Image.FORMAT_RGBA8)
-	Global.custom_brushes.append(image)
+	Global.file_brushes.append(image)
 	Global.create_brush_button(image, Global.Brush_Types.FILE, tooltip_name)
 
 
@@ -214,7 +214,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 						# Mark this as a processed relpath
 						processed_subdir_paths[nonrandomised_subdir][relative_path] = true
 
-	Global.brushes_from_files = Global.custom_brushes.size()
+	Global.brushes_from_files = Global.file_brushes.size()
 
 
 func import_patterns(priority_ordered_search_path: Array) -> void:
@@ -236,83 +236,77 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
 				Global.patterns.append(image)
-
-				var pattern_button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
-				pattern_button.image = image
-				var pattern_tex := ImageTexture.new()
-				pattern_tex.create_from_image(image, 0)
-				pattern_button.get_child(0).texture = pattern_tex
-				pattern_button.hint_tooltip = pattern
-				pattern_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				Global.patterns_popup.get_node("ScrollContainer/PatternContainer").add_child(pattern_button)
+				Global.create_pattern_button(image, pattern)
 
 			if Global.patterns.size() > 0:
 				var image_size = Global.patterns[0].get_size()
 
-				Global.pattern_left_image = Global.patterns[0]
+				Global.pattern_images[0] = Global.patterns[0]
 				var pattern_left_tex := ImageTexture.new()
-				pattern_left_tex.create_from_image(Global.pattern_left_image, 0)
-				Global.left_fill_pattern_container.get_child(0).get_child(0).texture = pattern_left_tex
-				Global.left_fill_pattern_container.get_child(2).get_child(1).max_value = image_size.x - 1
-				Global.left_fill_pattern_container.get_child(3).get_child(1).max_value = image_size.y - 1
+				pattern_left_tex.create_from_image(Global.pattern_images[0], 0)
+				Global.fill_pattern_containers[0].get_child(0).get_child(0).texture = pattern_left_tex
+				Global.fill_pattern_containers[0].get_child(2).get_child(1).max_value = image_size.x - 1
+				Global.fill_pattern_containers[0].get_child(3).get_child(1).max_value = image_size.y - 1
 
-				Global.pattern_right_image = Global.patterns[0]
+				Global.pattern_images[1] = Global.patterns[0]
 				var pattern_right_tex := ImageTexture.new()
-				pattern_right_tex.create_from_image(Global.pattern_right_image, 0)
-				Global.right_fill_pattern_container.get_child(0).get_child(0).texture = pattern_right_tex
-				Global.right_fill_pattern_container.get_child(2).get_child(1).max_value = image_size.x - 1
-				Global.right_fill_pattern_container.get_child(3).get_child(1).max_value = image_size.y - 1
+				pattern_right_tex.create_from_image(Global.pattern_images[1], 0)
+				Global.fill_pattern_containers[1].get_child(0).get_child(0).texture = pattern_right_tex
+				Global.fill_pattern_containers[1].get_child(2).get_child(1).max_value = image_size.x - 1
+				Global.fill_pattern_containers[1].get_child(3).get_child(1).max_value = image_size.y - 1
 
 
-func import_gpl(path : String) -> Palette:
+func import_gpl(path : String, text : String) -> Palette:
+	# Refer to app/core/gimppalette-load.c of the GIMP for the "living spec"
 	var result : Palette = null
-	var file = File.new()
-	if file.file_exists(path):
-		file.open(path, File.READ)
-		var text = file.get_as_text()
-		var lines = text.split('\n')
-		var line_number := 0
-		var comments := ""
-		for line in lines:
-			# Check if valid Gimp Palette Library file
-			if line_number == 0:
-				if line != "GIMP Palette":
-					break
-				else:
-					result = Palette.new()
-					var name_start = path.find_last('/') + 1
-					var name_end = path.find_last('.')
-					if name_end > name_start:
-						result.name = path.substr(name_start, name_end - name_start)
+	var lines = text.split('\n')
+	var line_number := 0
+	var comments := ""
+	for line in lines:
+		# Check if valid Gimp Palette Library file
+		if line_number == 0:
+			if not "GIMP Palette" in line:
+				break
+			else:
+				result = Palette.new()
+				# Use filename as palette name in case reading old
+				# palette format (must read more to determine)
+				result.name = path.get_basename().get_file()
 
-			# Comments
-			if line.begins_with('#'):
-				comments += line.trim_prefix('#') + '\n'
-				pass
-			elif line_number > 0 && line.length() >= 12:
-				line = line.replace("\t", " ")
-				var color_data : PoolStringArray = line.split(" ", false, 4)
-				var red : float = color_data[0].to_float() / 255.0
-				var green : float = color_data[1].to_float() / 255.0
-				var blue : float = color_data[2].to_float() / 255.0
-				var color = Color(red, green, blue)
+		# Comments
+		if line.begins_with('#'):
+			comments += line.trim_prefix('#') + '\n'
+			# Some programs output palette name in a comment for old format
+			if line.begins_with("#Palette Name: "):
+				result.name = line.replace("#Palette Name: ", "")
+			pass
+		elif line.begins_with("Name: "):
+			result.name = line.replace("Name: ", "")
+			pass
+		elif line.begins_with("Columns: "):
+			# Number of colors in this palette. Unecessary and often wrong
+			pass
+		elif line_number > 0 && line.length() >= 9:
+			line = line.replace("\t", " ")
+			var color_data : PoolStringArray = line.split(" ", false, 4)
+			var red : float = color_data[0].to_float() / 255.0
+			var green : float = color_data[1].to_float() / 255.0
+			var blue : float = color_data[2].to_float() / 255.0
+			var color = Color(red, green, blue)
+			if color_data.size() >= 4:
 				result.add_color(color, color_data[3])
-			line_number += 1
+			else:
+				result.add_color(color)
+		line_number += 1
 
-		if result:
-			result.comments = comments
-		file.close()
+	if result:
+		result.comments = comments
 
 	return result
 
 
-func import_png_palette(path: String) -> Palette:
+func import_png_palette(path: String, image : Image) -> Palette:
 	var result: Palette = null
-
-	var image := Image.new()
-	var err := image.load(path)
-	if err != OK: # An error occured
-		return null
 
 	var height: int = image.get_height()
 	var width: int = image.get_width()
@@ -328,9 +322,6 @@ func import_png_palette(path: String) -> Palette:
 				result.add_color(color, "#" + color.to_html())
 	image.unlock()
 
-	var name_start = path.find_last('/') + 1
-	var name_end = path.find_last('.')
-	if name_end > name_start:
-		result.name = path.substr(name_start, name_end - name_start)
+	result.name = path.get_basename().get_file()
 
 	return result

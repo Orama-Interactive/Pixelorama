@@ -8,7 +8,7 @@ onready var popup_menu : PopupMenu = $PopupMenu
 
 func _ready() -> void:
 	hint_tooltip = "Frame: %s, Layer: %s" % [frame + 1, layer]
-	if Global.canvases[frame] in Global.layers[layer][5]:
+	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
 		popup_menu.set_item_text(4, "Unlink Cel")
 		popup_menu.set_item_metadata(4, "Unlink Cel")
@@ -20,10 +20,10 @@ func _ready() -> void:
 
 func _on_CelButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
-		Global.current_frame = frame
-		Global.current_layer = layer
+		Global.current_project.current_frame = frame
+		Global.current_project.current_layer = layer
 	elif Input.is_action_just_released("right_mouse"):
-		if Global.canvases.size() == 1:
+		if Global.current_project.frames.size() == 1:
 			popup_menu.set_item_disabled(0, true)
 			popup_menu.set_item_disabled(2, true)
 			popup_menu.set_item_disabled(3, true)
@@ -31,7 +31,7 @@ func _on_CelButton_pressed() -> void:
 			popup_menu.set_item_disabled(0, false)
 			if frame > 0:
 				popup_menu.set_item_disabled(2, false)
-			if frame < Global.canvases.size() - 1:
+			if frame < Global.current_project.frames.size() - 1:
 				popup_menu.set_item_disabled(3, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
@@ -53,69 +53,68 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 		3: # Move Right
 			change_frame_order(1)
 		4: # Unlink Cel
-			var cel_index : int = Global.layers[layer][5].find(Global.canvases[frame])
-			var c = Global.canvases[frame]
-			var new_layers := Global.layers.duplicate(true)
-			var new_canvas_layers : Array = c.layers.duplicate(true)
+			var cel_index : int = Global.current_project.layers[layer].linked_cels.find(Global.current_project.frames[frame])
+			var f = Global.current_project.frames[frame]
+			var new_layers : Array = Global.current_project.layers.duplicate()
+			# Loop through the array to create new classes for each element, so that they
+			# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+			for i in new_layers.size():
+				var new_linked_cels = new_layers[i].linked_cels.duplicate()
+				new_layers[i] = Layer.new(new_layers[i].name, new_layers[i].visible, new_layers[i].locked, new_layers[i].frame_container, new_layers[i].new_cels_linked, new_linked_cels)
+			var new_cels : Array = f.cels.duplicate()
+			for i in new_cels.size():
+				new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
 
 			if popup_menu.get_item_metadata(4) == "Unlink Cel":
-				new_layers[layer][5].remove(cel_index)
+				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
-				sprite.copy_from(Global.canvases[frame].layers[layer][0])
+				sprite.copy_from(Global.current_project.frames[frame].cels[layer].image)
 				sprite.lock()
-				var tex := ImageTexture.new()
-				tex.create_from_image(sprite, 0)
-				new_canvas_layers[layer][0] = sprite
-				new_canvas_layers[layer][1] = tex
+				new_cels[layer].image = sprite
 
-				Global.undo_redo.create_action("Unlink Cel")
-				Global.undo_redo.add_do_property(Global, "layers", new_layers)
-				Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
-				Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
-				Global.undo_redo.add_undo_property(c, "layers", c.layers)
+				Global.current_project.undo_redo.create_action("Unlink Cel")
+				Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+				Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+				Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
+				Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-				Global.undo_redo.add_undo_method(Global, "undo", [Global.canvases[frame]], layer)
-				Global.undo_redo.add_do_method(Global, "redo", [Global.canvases[frame]], layer)
-				Global.undo_redo.commit_action()
+				Global.current_project.undo_redo.add_undo_method(Global, "undo")
+				Global.current_project.undo_redo.add_do_method(Global, "redo")
+				Global.current_project.undo_redo.commit_action()
 			elif popup_menu.get_item_metadata(4) == "Link Cel":
-				new_layers[layer][5].append(Global.canvases[frame])
-				Global.undo_redo.create_action("Link Cel")
-				Global.undo_redo.add_do_property(Global, "layers", new_layers)
-				if new_layers[layer][5].size() > 1:
+				new_layers[layer].linked_cels.append(Global.current_project.frames[frame])
+				Global.current_project.undo_redo.create_action("Link Cel")
+				Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
-					new_canvas_layers[layer][0] = new_layers[layer][5][0].layers[layer][0]
-					new_canvas_layers[layer][1] = new_layers[layer][5][0].layers[layer][1]
-					Global.undo_redo.add_do_property(c, "layers", new_canvas_layers)
-					Global.undo_redo.add_undo_property(c, "layers", c.layers)
+					new_cels[layer].image = new_layers[layer].linked_cels[0].cels[layer].image
+					new_cels[layer].image_texture = new_layers[layer].linked_cels[0].cels[layer].image_texture
+					Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+					Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-				Global.undo_redo.add_undo_property(Global, "layers", Global.layers)
-				Global.undo_redo.add_undo_method(Global, "undo", [Global.canvases[frame]], layer)
-				Global.undo_redo.add_do_method(Global, "redo", [Global.canvases[frame]], layer)
-				Global.undo_redo.commit_action()
+				Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
+				Global.current_project.undo_redo.add_undo_method(Global, "undo")
+				Global.current_project.undo_redo.add_do_method(Global, "redo")
+				Global.current_project.undo_redo.commit_action()
 
 
 func change_frame_order(rate : int) -> void:
 	var change = frame + rate
-	var new_canvases := Global.canvases.duplicate()
-	var temp = new_canvases[frame]
-	new_canvases[frame] = new_canvases[change]
-	new_canvases[change] = temp
+	var new_frames : Array = Global.current_project.frames.duplicate()
+	var temp = new_frames[frame]
+	new_frames[frame] = new_frames[change]
+	new_frames[change] = temp
 
-	Global.undo_redo.create_action("Change Frame Order")
-	Global.undo_redo.add_do_property(Global, "canvases", new_canvases)
-	Global.undo_redo.add_do_property(Global.canvases[frame], "frame", change)
-	Global.undo_redo.add_do_property(Global.canvases[change], "frame", frame)
+	Global.current_project.undo_redo.create_action("Change Frame Order")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 
-	if Global.current_frame == frame:
-		Global.undo_redo.add_do_property(Global, "current_frame", change)
-		Global.undo_redo.add_undo_property(Global, "current_frame", Global.current_frame)
+	if Global.current_project.current_frame == frame:
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", change)
+		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
 
-	Global.undo_redo.add_undo_property(Global, "canvases", Global.canvases)
-	Global.undo_redo.add_undo_property(Global.canvases[frame], "frame", frame)
-	Global.undo_redo.add_undo_property(Global.canvases[change], "frame", change)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 
-	Global.undo_redo.add_undo_method(Global, "undo", [Global.canvases[frame]])
-	Global.undo_redo.add_do_method(Global, "redo", [Global.canvases[frame]])
-	Global.undo_redo.commit_action()
-
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()

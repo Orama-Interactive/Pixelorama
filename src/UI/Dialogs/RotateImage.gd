@@ -32,11 +32,11 @@ func _on_RotateImage_confirmed() -> void:
 	Global.canvas.handle_undo("Draw")
 	match $VBoxContainer/HBoxContainer2/OptionButton.text:
 		"Rotxel":
-			Global.rotxel(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+			DrawingAlgos.rotxel(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 		"Nearest neighbour":
-			Global.nn_rotate(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+			DrawingAlgos.nn_rotate(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 		"Upscale, Rotate and Downscale":
-			Global.fake_rotsprite(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+			DrawingAlgos.fake_rotsprite(layer,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	Global.canvas.handle_redo("Draw")
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
 
@@ -45,11 +45,11 @@ func rotate() -> void:
 	sprite.copy_from(aux_img)
 	match $VBoxContainer/HBoxContainer2/OptionButton.text:
 		"Rotxel":
-			Global.rotxel(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+			DrawingAlgos.rotxel(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 		"Nearest neighbour":
-			Global.nn_rotate(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+			DrawingAlgos.nn_rotate(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 		"Upscale, Rotate and Downscale":
-			Global.fake_rotsprite(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
+			DrawingAlgos.fake_rotsprite(sprite,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
 	texture.create_from_image(sprite, 0)
 
 

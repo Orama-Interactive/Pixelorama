@@ -4,13 +4,24 @@
 <p align="center">
     Made by Orama Interactive with the Godot Engine, written in GDScript!
 </p>
- <p align="center">  
+<p align="center">
+    <a href="https://github.com/Orama-Interactive/Pixelorama/actions">
+        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/godot-ci-test/badge.svg" alt="Build Passing" />
+    </a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" />
     </a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg" alt="Repository size" />
     </a>
+    <a href="https://github.com/Orama-Interactive/Pixelorama/releases">
+        <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" />
+    </a>
+    <a href="https://github.com/Orama-Interactive/Pixelorama/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" />
+    </a>
+</p>
+<p align="center">
     <a href="https://discord.gg/GTMtr8s">
         <img src="https://discordapp.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
     </a>
@@ -19,9 +30,6 @@
     </a>
     <a href="https://github.com/Calinou/awesome-godot">
         <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Godot" />
-    </a>
-    <a href="https://github.com/Orama-Interactive/Pixelorama/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" />
     </a>
 </p>
  
@@ -41,6 +49,9 @@ You can also support the development on patreon: [![Become a Patron!](https://c5
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
 - [Snap Store (Linux)](https://snapcraft.io/pixelorama)
 
+You can also find early access builds in the [GitHub Actions page](https://github.com/Orama-Interactive/Pixelorama/actions). There's also a [Web version available](https://orama-interactive.github.io/Pixelorama/early_access/).
+Keep in mind that these versions will have bugs and are unstable. Unless you're interested in testing the main branch of Pixelorama, it's recommended that you stick to a stable version.
+
 ## Documentation
 You can find Online Documentation for Pixelorama here: https://orama-interactive.github.io/Pixelorama-Docs
 
@@ -50,7 +61,7 @@ It's still work in progress so there are some pages missing. If you want to cont
 Pixelorama uses Godot 3.2, so you will need to have it in order to run the project.
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
-Pixelorama uses a GDNative addon for gif exporting, since it's not possible to do it natively with Godot. In order to ensure that your clone works properly, you will need to use the command `git submodule update --init` right after you clone.
+Pixelorama uses a [GDNative addon for gif exporting](https://github.com/novhack/godot-gifexporter), since it's not possible to do it natively with Godot. In order to ensure that your clone works properly, you will need to use the command `git submodule update --init` right after you clone.
 
 Note that the addon only works in Windows and Linux platforms, for the time being. Pixelorama should run without it fine on other platforms. 
 

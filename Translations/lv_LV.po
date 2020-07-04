@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-05-15 19:09\n"
+"PO-Revision-Date: 2020-06-02 17:10\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -759,9 +759,6 @@ msgstr "Vertikāls"
 msgid "Current frame:"
 msgstr "Patreizējais kadrs:"
 
-msgid "Current frame: 1/1"
-msgstr "Patreizējais kadrs: 1/1"
-
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Pirmais kadrs\n"
@@ -1182,5 +1179,17 @@ msgid "Autosaved backup for %s was found.\n"
 msgstr ""
 
 msgid "Backup reloaded"
+msgstr ""
+
+msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr ""
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr ""
+
+msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 

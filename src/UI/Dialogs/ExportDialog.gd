@@ -3,7 +3,7 @@ extends AcceptDialog
 enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
 var current_tab : int = ExportTab.FRAME
 
-# All canvases and their layers processed/blended into images
+# All frames and their layers processed/blended into images
 var processed_images = [] # Image[]
 
 # Frame options
@@ -11,7 +11,7 @@ var frame_number := 0
 
 # Spritesheet options
 var frame_current_tag := 0 # Export only current frame tag
-var canvas_size := 1
+var number_of_frames := 1
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 var orientation : int = Orientation.ROWS
 # How many rows/columns before new line is added
@@ -89,8 +89,8 @@ func show_tab() -> void:
 			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
 			$FrameTimer.stop()
 			if not was_exported:
-				frame_number = Global.current_frame + 1
-			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.max_value = Global.canvases.size() + 1
+				frame_number = Global.current_project.current_frame + 1
+			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.max_value = Global.current_project.frames.size() + 1
 			var prev_frame_number = $VBoxContainer/FrameOptions/FrameNumber/FrameNumber.value
 			$VBoxContainer/FrameOptions/FrameNumber/FrameNumber.value = frame_number
 			if prev_frame_number == frame_number:
@@ -101,13 +101,13 @@ func show_tab() -> void:
 			file_format = FileFormat.PNG
 			if not was_exported:
 				orientation = Orientation.ROWS
-				lines_count = int(ceil(sqrt(canvas_size)))
+				lines_count = int(ceil(sqrt(number_of_frames)))
 			process_spritesheet()
 			$VBoxContainer/File/FileFormat.selected = FileFormat.PNG
 			$VBoxContainer/SpritesheetOptions/Frames/Frames.select(frame_current_tag)
 			$FrameTimer.stop()
 			$VBoxContainer/SpritesheetOptions/Orientation/Orientation.selected = orientation
-			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = canvas_size
+			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = number_of_frames
 			$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.value = lines_count
 			$VBoxContainer/SpritesheetOptions/Orientation/LinesCountLabel.text = "Columns:"
 			$VBoxContainer/SpritesheetOptions.show()
@@ -135,10 +135,10 @@ func external_export() -> void:
 
 
 func process_frame() -> void:
-	var canvas = Global.canvases[frame_number - 1]
+	var frame = Global.current_project.frames[frame_number - 1]
 	var image := Image.new()
-	image.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
-	blend_layers(image, canvas)
+	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+	blend_layers(image, frame)
 	processed_images.clear()
 	processed_images.append(image)
 
@@ -147,21 +147,21 @@ func process_spritesheet() -> void:
 	# Range of frames determined by tags
 	var frames := []
 	if frame_current_tag > 0:
-		var frame_start = Global.animation_tags[frame_current_tag - 1][2]
-		var frame_end = Global.animation_tags[frame_current_tag - 1][3]
-		frames = Global.canvases.slice(frame_start-1, frame_end-1, 1, true)
+		var frame_start = Global.current_project.animation_tags[frame_current_tag - 1].from
+		var frame_end = Global.current_project.animation_tags[frame_current_tag - 1].to
+		frames = Global.current_project.frames.slice(frame_start-1, frame_end-1, 1, true)
 	else:
-		frames = Global.canvases
+		frames = Global.current_project.frames
 
 	# Then store the size of frames for other functions
-	canvas_size = frames.size()
+	number_of_frames = frames.size()
 
 	# If rows mode selected calculate columns count and vice versa
 	var spritesheet_columns = lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
 	var spritesheet_rows = lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
 
-	var width = Global.canvas.size.x * spritesheet_columns
-	var height = Global.canvas.size.y * spritesheet_rows
+	var width = Global.current_project.size.x * spritesheet_columns
+	var height = Global.current_project.size.y * spritesheet_rows
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -170,26 +170,26 @@ func process_spritesheet() -> void:
 	var hh := 0
 	var vv := 0
 
-	for canvas in frames:
+	for frame in frames:
 		if orientation == Orientation.ROWS:
 			if vv < spritesheet_columns:
-				origin.x = canvas.size.x * vv
+				origin.x = Global.current_project.size.x * vv
 				vv += 1
 			else:
 				hh += 1
 				origin.x = 0
 				vv = 1
-				origin.y = canvas.size.y * hh
+				origin.y = Global.current_project.size.y * hh
 		else:
 			if hh < spritesheet_rows:
-				origin.y = canvas.size.y * hh
+				origin.y = Global.current_project.size.y * hh
 				hh += 1
 			else:
 				vv += 1
 				origin.y = 0
 				hh = 1
-				origin.x = canvas.size.x * vv
-		blend_layers(whole_image, canvas, origin)
+				origin.x = Global.current_project.size.x * vv
+		blend_layers(whole_image, frame, origin)
 
 	processed_images.clear()
 	processed_images.append(whole_image)
@@ -197,10 +197,10 @@ func process_spritesheet() -> void:
 
 func process_animation() -> void:
 	processed_images.clear()
-	for canvas in Global.canvases:
+	for frame in Global.current_project.frames:
 		var image := Image.new()
-		image.create(canvas.size.x, canvas.size.y, false, Image.FORMAT_RGBA8)
-		blend_layers(image, canvas)
+		image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+		blend_layers(image, frame)
 		processed_images.append(image)
 
 
@@ -280,11 +280,11 @@ func remove_previews() -> void:
 
 func get_proccessed_image_animation_tag_and_start_id(processed_image_id : int) -> Array:
 	var result_animation_tag_and_start_id = null
-	for animation_tag in Global.animation_tags:
+	for animation_tag in Global.current_project.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
 		# Then stop
-		if (processed_image_id + 1) >= animation_tag[2] and (processed_image_id + 1) <= animation_tag[3]:
-			result_animation_tag_and_start_id = [animation_tag[0], animation_tag[2]]
+		if (processed_image_id + 1) >= animation_tag.from and (processed_image_id + 1) <= animation_tag.to:
+			result_animation_tag_and_start_id = [animation_tag.name, animation_tag.from]
 			break
 	return result_animation_tag_and_start_id
 
@@ -348,34 +348,37 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 		$GifExporter.end_export()
 	else:
 		for i in range(processed_images.size()):
-			var err = processed_images[i].save_png(export_paths[i])
-			if err != OK:
-				OS.alert("Can't save file")
+			if OS.get_name() == "HTML5":
+				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
+			else:
+				var err = processed_images[i].save_png(export_paths[i])
+				if err != OK:
+					OS.alert("Can't save file")
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	store_export_settings()
-	Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
+	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 	Global.notification_label("File(s) exported")
 	hide()
 
 
 # Blends canvas layers into passed image starting from the origin position
-func blend_layers(image: Image, canvas: Canvas, origin: Vector2 = Vector2(0, 0)) -> void:
+func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)) -> void:
 	image.lock()
 	var layer_i := 0
-	for layer in canvas.layers:
-		if Global.layers[layer_i][1]:
-			var layer_image := Image.new()
-			layer_image.copy_from(layer[0])
-			layer_image.lock()
-			if layer[2] < 1: # If we have layer transparency
-				for xx in layer_image.get_size().x:
-					for yy in layer_image.get_size().y:
-						var pixel_color := layer_image.get_pixel(xx, yy)
-						var alpha : float = pixel_color.a * layer[2]
-						layer_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			canvas.blend_rect(image, layer_image, Rect2(canvas.position, canvas.size), origin)
+	for cel in frame.cels:
+		if Global.current_project.layers[layer_i].visible:
+			var cel_image := Image.new()
+			cel_image.copy_from(cel.image)
+			cel_image.lock()
+			if cel.opacity < 1: # If we have cel transparency
+				for xx in cel_image.get_size().x:
+					for yy in cel_image.get_size().y:
+						var pixel_color := cel_image.get_pixel(xx, yy)
+						var alpha : float = pixel_color.a * cel.opacity
+						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
 		layer_i += 1
 	image.unlock()
 
@@ -416,7 +419,7 @@ func create_export_path(multifile: bool, frame: int = 0) -> String:
 
 
 func frames_divided_by_spritesheet_lines() -> int:
-	return int(ceil(canvas_size / float(lines_count)))
+	return int(ceil(number_of_frames / float(lines_count)))
 
 
 func file_format_string(format_enum : int) -> String:
@@ -453,8 +456,8 @@ func create_frame_tag_list() -> void:
 	frame_container.add_item("All Frames", 0) # Re-add removed 'All Frames' item
 
 	# Repopulate list with current tag list
-	for item in Global.animation_tags:
-		frame_container.add_item(item[0])
+	for item in Global.current_project.animation_tags:
+		frame_container.add_item(item.name)
 
 
 func store_export_settings() -> void:
@@ -476,8 +479,8 @@ func store_export_settings() -> void:
 # Fill the dialog with previous export settings
 func restore_previous_export_settings() -> void:
 	current_tab = exported_tab
-	frame_number = exported_frame_number if exported_frame_number <= Global.canvases.size() else Global.canvases.size()
-	frame_current_tag = exported_frame_current_tag if exported_frame_current_tag <= Global.animation_tags.size() else 0
+	frame_number = exported_frame_number if exported_frame_number <= Global.current_project.frames.size() else Global.current_project.frames.size()
+	frame_current_tag = exported_frame_current_tag if exported_frame_current_tag <= Global.current_project.animation_tags.size() else 0
 	orientation = exported_orientation
 	lines_count = exported_lines_count
 	animation_type = exported_animation_type
@@ -494,6 +497,11 @@ func _on_ExportDialog_about_to_show() -> void:
 	# If export already occured - fill the dialog with previous export settings
 	if was_exported:
 		restore_previous_export_settings()
+
+	# If we're on HTML5, don't let the user change the directory path
+	if OS.get_name() == "HTML5":
+		$VBoxContainer/Path.visible = false
+		directory_path = "user://"
 
 	if directory_path.empty():
 		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -667,5 +675,5 @@ func _on_Frames_item_selected(id : int) -> void:
 	frame_current_tag = id
 	process_spritesheet()
 	set_preview()
-	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = canvas_size
+	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.max_value = number_of_frames
 	$VBoxContainer/SpritesheetOptions/Orientation/LinesCount.value = lines_count

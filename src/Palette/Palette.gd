@@ -143,8 +143,9 @@ func deserialize(input_string : String): # -> Palette
 				result.comments = data.comments
 			if data.has("editable"):
 				result.editable = data.editable
-			for color_data in data.colors:
-				result.add_color(color_data.data, color_data.name)
+			if data.has("colors"):
+				for color_data in data.colors:
+					result.add_color(color_data.data, color_data.name)
 
 	return result
 
