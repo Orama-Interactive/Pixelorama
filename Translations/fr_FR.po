@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-04 23:27\n"
+"PO-Revision-Date: 2020-07-05 09:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Veuillez confirmer..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nom du fichier:"
 
 msgid "Image Size"
 msgstr "Taille de l'image"
