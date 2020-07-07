@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/UI/PatternsPopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/BrushesPopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Dialogs/ResizeCanvas.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
@@ -49,28 +50,25 @@ __meta__ = {
 [node name="SplashDialog" parent="." instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
-window_title = "Please Confirm..."
 
 [node name="OpenSprite" parent="." instance=ExtResource( 12 )]
 
 [node name="SaveSprite" parent="." instance=ExtResource( 11 )]
 
+[node name="SaveSpriteHTML5" parent="." instance=ExtResource( 8 )]
+
 [node name="ExportDialog" parent="." instance=ExtResource( 39 )]
 
 [node name="ScaleImage" parent="." instance=ExtResource( 31 )]
-window_title = "Please Confirm..."
 
 [node name="ResizeCanvas" parent="." instance=ExtResource( 7 )]
-window_title = "Please Confirm..."
 
 [node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
 
 [node name="RotateImage" parent="." instance=ExtResource( 38 )]
-window_title = "Please Confirm..."
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
 visible = false
-window_title = "Please Confirm..."
 
 [node name="AboutDialog" parent="." instance=ExtResource( 34 )]
 
@@ -83,7 +81,6 @@ dialog_text = "You have unsaved changes. If you proceed, the progress you have m
 [node name="QuitDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
-window_title = "Please Confirm..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
@@ -110,7 +107,6 @@ margin_right = 349.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
-window_title = "Please Confirm..."
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
 
@@ -127,6 +123,8 @@ visible = false
 [connection signal="popup_hide" from="OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
 [connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="SaveSpriteHTML5" to="." method="_on_SaveSpriteHTML5_confirmed"]
+[connection signal="popup_hide" from="SaveSpriteHTML5" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ExportDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="ResizeCanvas" to="." method="_can_draw_true"]

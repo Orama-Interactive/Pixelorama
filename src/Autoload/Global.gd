@@ -111,6 +111,7 @@ var zoom_level_label : Label
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
 var save_sprites_dialog : FileDialog
+var save_sprites_html5_dialog : ConfirmationDialog
 var export_dialog : AcceptDialog
 var preferences_dialog : AcceptDialog
 var unsaved_changes_dialog : ConfirmationDialog
@@ -177,10 +178,22 @@ func _ready() -> void:
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
+
+	var pencil_cursor_image = preload("res://assets/graphics/cursor_icons/pencil_cursor.png")
+	var eraser_cursor_image = preload("res://assets/graphics/cursor_icons/eraser_cursor.png")
+
 	left_cursor_tool_texture = ImageTexture.new()
-	left_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/pencil_cursor.png"))
+	if pencil_cursor_image is Image:
+		left_cursor_tool_texture.create_from_image(pencil_cursor_image)
+	elif pencil_cursor_image is ImageTexture:
+		left_cursor_tool_texture.create_from_image(pencil_cursor_image.get_data())
+
 	right_cursor_tool_texture = ImageTexture.new()
-	right_cursor_tool_texture.create_from_image(preload("res://assets/graphics/cursor_icons/eraser_cursor.png"))
+	if eraser_cursor_image is Image:
+		right_cursor_tool_texture.create_from_image(eraser_cursor_image)
+	elif eraser_cursor_image is ImageTexture:
+		right_cursor_tool_texture.create_from_image(eraser_cursor_image.get_data())
+
 	tabs = find_node_by_name(root, "Tabs")
 	main_viewport = find_node_by_name(root, "ViewportContainer")
 	second_viewport = find_node_by_name(root, "ViewportContainer2")
@@ -204,6 +217,7 @@ func _ready() -> void:
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
 	save_sprites_dialog = find_node_by_name(root, "SaveSprite")
+	save_sprites_html5_dialog = find_node_by_name(root, "SaveSpriteHTML5")
 	export_dialog = find_node_by_name(root, "ExportDialog")
 	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
 	unsaved_changes_dialog = find_node_by_name(root, "UnsavedCanvasDialog")
@@ -451,25 +465,25 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 	var first_frame : BaseButton = find_node_by_name(root, "FirstFrame")
 	first_frame.hint_tooltip = tr("""Jump to the first frame
-(%s)""") % "Ctrl+Home"
+(%s)""") % InputMap.get_action_list("go_to_first_frame")[0].as_text()
 
 	var previous_frame : BaseButton = find_node_by_name(root, "PreviousFrame")
 	previous_frame.hint_tooltip = tr("""Go to the previous frame
-(%s)""") % "Ctrl+Left"
+(%s)""") % InputMap.get_action_list("go_to_previous_frame")[0].as_text()
 
 	play_backwards.hint_tooltip = tr("""Play the animation backwards (from end to beginning)
-(%s)""") % "F4"
+(%s)""") % InputMap.get_action_list("play_backwards")[0].as_text()
 
 	play_forward.hint_tooltip = tr("""Play the animation forward (from beginning to end)
-(%s)""") % "F5"
+(%s)""") % InputMap.get_action_list("play_forward")[0].as_text()
 
 	var next_frame : BaseButton = find_node_by_name(root, "NextFrame")
 	next_frame.hint_tooltip = tr("""Go to the next frame
-(%s)""") % "Ctrl+Right"
+(%s)""") % InputMap.get_action_list("go_to_next_frame")[0].as_text()
 
 	var last_frame : BaseButton = find_node_by_name(root, "LastFrame")
 	last_frame.hint_tooltip = tr("""Jump to the last frame
-(%s)""") % "Ctrl+End"
+(%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html

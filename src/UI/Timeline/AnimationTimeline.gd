@@ -441,7 +441,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		var new_layer := Image.new()
 		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
 		new_layer.lock()
-		DrawingAlgos.blend_rect(new_layer, selected_layer, Rect2(Global.canvas.location, Global.current_project.size), Vector2.ZERO)
+		new_layer.blend_rect(selected_layer, Rect2(Global.canvas.location, Global.current_project.size), Vector2.ZERO)
 		new_cels.remove(Global.current_project.current_layer)
 		if !selected_layer.is_invisible() and Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels.size() > 1 and (f in Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels):
 			new_layers[Global.current_project.current_layer - 1].linked_cels.erase(f)

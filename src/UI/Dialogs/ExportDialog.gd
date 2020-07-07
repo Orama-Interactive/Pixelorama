@@ -348,14 +348,17 @@ func export_processed_images(ignore_overwrites : bool) -> void:
 		$GifExporter.end_export()
 	else:
 		for i in range(processed_images.size()):
-			var err = processed_images[i].save_png(export_paths[i])
-			if err != OK:
-				OS.alert("Can't save file")
+			if OS.get_name() == "HTML5":
+				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
+			else:
+				var err = processed_images[i].save_png(export_paths[i])
+				if err != OK:
+					OS.alert("Can't save file")
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	store_export_settings()
-	Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
+	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 	Global.notification_label("File(s) exported")
 	hide()
 
@@ -375,7 +378,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var pixel_color := cel_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			DrawingAlgos.blend_rect(image, cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
+			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
 		layer_i += 1
 	image.unlock()
 
@@ -494,6 +497,11 @@ func _on_ExportDialog_about_to_show() -> void:
 	# If export already occured - fill the dialog with previous export settings
 	if was_exported:
 		restore_previous_export_settings()
+
+	# If we're on HTML5, don't let the user change the directory path
+	if OS.get_name() == "HTML5":
+		$VBoxContainer/Path.visible = false
+		directory_path = "user://"
 
 	if directory_path.empty():
 		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)

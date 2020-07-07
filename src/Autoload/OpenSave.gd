@@ -1,5 +1,6 @@
 extends Node
 
+
 var current_save_paths := [] # Array of strings
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths := [] # Array of strings
@@ -18,9 +19,13 @@ func _ready() -> void:
 
 func handle_loading_files(files : PoolStringArray) -> void:
 	for file in files:
-		if file.get_extension().to_lower() == "pxo":
+		file = file.replace("\\", "/")
+		var file_ext : String = file.get_extension().to_lower()
+		if file_ext == "pxo": # Pixelorama project file
 			open_pxo_file(file)
-		else:
+		elif file_ext == "json" or file_ext == "gpl": # Palettes
+			Global.palette_container.on_palette_import_file_selected(file)
+		else: # Image files
 			var image := Image.new()
 			var err := image.load(file)
 			if err != OK: # An error occured
@@ -29,12 +34,16 @@ func handle_loading_files(files : PoolStringArray) -> void:
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 				continue
+			handle_loading_image(file, image)
 
-			var preview_dialog : ConfirmationDialog = preload("res://src/UI/Dialogs/PreviewDialog.tscn").instance()
-			preview_dialog.path = file
-			preview_dialog.image = image
-			Global.control.add_child(preview_dialog)
-			preview_dialog.popup_centered()
+
+func handle_loading_image(file : String, image : Image) -> void:
+	var preview_dialog : ConfirmationDialog = preload("res://src/UI/Dialogs/PreviewDialog.tscn").instance()
+	preview_dialog.path = file
+	preview_dialog.image = image
+	Global.control.add_child(preview_dialog)
+	preview_dialog.popup_centered()
+	Global.dialog_open(true)
 
 
 func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
@@ -274,6 +283,16 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 
 		file.close()
 
+		if OS.get_name() == "HTML5" and !autosave:
+			err = file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+			if !err:
+				var file_data = Array(file.get_buffer(file.get_len()))
+				JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
+			file.close()
+			# Remove the .pxo file from memory, as we don't need it anymore
+			var dir = Directory.new()
+			dir.remove(path)
+
 		if autosave:
 			Global.notification_label("File autosaved")
 		else:
@@ -297,10 +316,8 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 		file.close()
 
 
-func open_image_file(path : String, image : Image) -> void:
-	var project := Global.current_project
-
-	project = Project.new([], path.get_file())
+func open_image_as_new_tab(path : String, image : Image) -> void:
+	var project = Project.new([], path.get_file())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
 	project.size = image.get_size()
@@ -311,6 +328,112 @@ func open_image_file(path : String, image : Image) -> void:
 	frame.cels.append(Cel.new(image, 1))
 
 	project.frames.append(frame)
+	set_new_tab(project, path)
+
+
+func open_image_as_spritesheet(path : String, image : Image, horizontal : int, vertical : int) -> void:
+	var project = Project.new([], path.get_file())
+	project.layers.append(Layer.new())
+	Global.projects.append(project)
+	horizontal = min(horizontal, image.get_size().x)
+	vertical = min(vertical, image.get_size().y)
+	var frame_width := image.get_size().x / horizontal
+	var frame_height := image.get_size().y / vertical
+	for yy in range(vertical):
+		for xx in range(horizontal):
+			var frame := Frame.new()
+			var cropped_image := Image.new()
+			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			project.size = cropped_image.get_size()
+			cropped_image.convert(Image.FORMAT_RGBA8)
+			cropped_image.lock()
+			frame.cels.append(Cel.new(cropped_image, 1))
+
+			for _i in range(1, project.layers.size()):
+				var empty_sprite := Image.new()
+				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+				empty_sprite.fill(Color(0, 0, 0, 0))
+				empty_sprite.lock()
+				frame.cels.append(Cel.new(empty_sprite, 1))
+
+			project.frames.append(frame)
+
+	set_new_tab(project, path)
+
+
+func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+	var new_frames : Array = project.frames.duplicate()
+
+	var frame := Frame.new()
+	for i in project.layers.size():
+		if i == layer_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			frame.cels.append(Cel.new(image, 1))
+		else:
+			var empty_image := Image.new()
+			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			empty_image.lock()
+			frame.cels.append(Cel.new(empty_image, 1))
+
+	new_frames.append(frame)
+
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
+
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_layer", layer_index)
+
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.commit_action()
+
+
+func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+	var new_layers : Array = Global.current_project.layers.duplicate()
+	var layer := Layer.new(file_name)
+
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Add Layer")
+	for i in project.frames.size():
+		var new_cels : Array = project.frames[i].cels.duplicate(true)
+		if i == frame_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			new_cels.append(Cel.new(image, 1))
+		else:
+			var empty_image := Image.new()
+			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			empty_image.lock()
+			new_cels.append(Cel.new(empty_image, 1))
+
+		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
+		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+
+	new_layers.append(layer)
+
+	project.undo_redo.add_do_property(project, "current_layer", new_layers.size() - 1)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "current_frame", frame_index)
+
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
+
+
+func set_new_tab(project : Project, path : String) -> void:
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 

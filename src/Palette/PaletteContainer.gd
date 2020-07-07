@@ -40,8 +40,11 @@ func on_new_empty_palette() -> void:
 
 
 func on_import_palette() -> void:
-	Global.palette_import_file_dialog.popup_centered()
-	Global.dialog_open(true)
+	if OS.get_name() == "HTML5":
+		Html5FileExchange.load_palette()
+	else:
+		Global.palette_import_file_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func on_palette_import_file_selected(path : String) -> void:
@@ -49,23 +52,38 @@ func on_palette_import_file_selected(path : String) -> void:
 	if path.to_lower().ends_with("json"):
 		palette = Palette.new().load_from_file(path)
 	elif path.to_lower().ends_with("gpl"):
-		palette = Import.import_gpl(path)
-	elif path.to_lower().ends_with("png"):
-		palette = Import.import_png_palette(path)
+		var file = File.new()
+		if file.file_exists(path):
+			file.open(path, File.READ)
+			var text = file.get_as_text()
+			file.close()
+			palette = Import.import_gpl(path, text)
+	elif path.to_lower().ends_with("png") or path.to_lower().ends_with("bmp") or path.to_lower().ends_with("hdr") or path.to_lower().ends_with("jpg") or path.to_lower().ends_with("svg") or path.to_lower().ends_with("tga") or path.to_lower().ends_with("webp"):
+		var image := Image.new()
+		var err := image.load(path)
+		if !err:
+			import_image_palette(path, image)
+			return
 
+	attempt_to_import_palette(palette)
+
+
+func import_image_palette(path : String, image : Image) -> void:
+	var palette : Palette = null
+	palette = Import.import_png_palette(path, image)
+	attempt_to_import_palette(palette)
+
+
+func attempt_to_import_palette(palette : Palette) -> void:
 	if palette:
-		if not Global.palettes.has(palette.name):
-			Global.palettes[palette.name] = palette
-			Global.palette_option_button.add_item(palette.name)
-			var index: int = Global.palette_option_button.get_item_count() - 1
-			Global.palette_option_button.set_item_metadata(index, palette.name)
-			Global.palette_option_button.select(index)
-			on_palette_select(palette.name)
-			save_palette(palette.name, palette.name + ".json")
-		else:
-			Global.error_dialog.set_text(tr("Error: Palette named '%s' already exists!") % palette.name)
-			Global.error_dialog.popup_centered()
-			Global.dialog_open(true)
+		palette.name = palette_name_replace(palette.name)
+		Global.palettes[palette.name] = palette
+		Global.palette_option_button.add_item(palette.name)
+		var index: int = Global.palette_option_button.get_item_count() - 1
+		Global.palette_option_button.set_item_metadata(index, palette.name)
+		Global.palette_option_button.select(index)
+		on_palette_select(palette.name)
+		save_palette(palette.name, palette.name + ".json")
 	else:
 		Global.error_dialog.set_text("Invalid Palette file!")
 		Global.error_dialog.popup_centered()
@@ -87,10 +105,12 @@ func on_new_palette_confirmed() -> void:
 
 func add_palette_menu_id_pressed(id : int) -> void:
 	match id:
-		0:	# New Empty Palette
-			Global.palette_container.on_new_empty_palette()
-		1:	# Import Palette
-			Global.palette_container.on_import_palette()
+		0: # New Empty Palette
+			on_new_empty_palette()
+		1: # Import Palette
+			on_import_palette()
+		2: # Create Palette From Current Sprite
+			create_palette_from_sprite()
 
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
@@ -99,8 +119,8 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	# Check if new name is valid
 	if name.empty():
 		return tr("Error: Palette must have a valid name.")
-	if Global.palettes.has(name):
-		return tr("Error: Palette named '%s' already exists!") % name
+
+	name = palette_name_replace(name)
 
 	new_palette.name = name
 	# Check if source palette has data
@@ -122,6 +142,19 @@ func create_new_palette(name : String, _from_palette : Palette) -> String: # Ret
 	return ""
 
 
+# Checks if the palette name already exists
+# If it does, add a number to its name, for example
+# "Palette_Name" will become "Palette_Name (2)", "Palette_Name (3)", etc.
+func palette_name_replace(name : String) -> String:
+	var i := 1
+	var temp_name := name
+	while Global.palettes.has(temp_name):
+		i += 1
+		temp_name = name + " (%s)" % i
+	name = temp_name
+	return name
+
+
 func on_edit_palette() -> void:
 	var palette : Palette = Global.palettes[current_palette]
 
@@ -138,6 +171,28 @@ func on_edit_palette() -> void:
 	else:
 		from_palette = null
 		Global.edit_palette_popup.open(current_palette)
+
+
+func create_palette_from_sprite() -> void:
+	var current_project : Project = Global.current_project
+	var new_palette_name : String = current_project.name
+	var result : String = create_new_palette(new_palette_name, null)
+	if not result.empty():
+		Global.error_dialog.set_text(result)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+	else:
+		var current_cel : Cel = current_project.frames[current_project.current_frame].cels[current_project.current_layer]
+		var cel_image : Image = current_cel.image
+		var palette : Palette = Global.palettes[current_palette]
+		for x in cel_image.get_size().x:
+			for y in cel_image.get_size().y:
+				var color : Color = cel_image.get_pixel(x, y)
+				if color.a > 0 and !palette.has_color(color):
+					palette.add_color(color)
+
+		save_palette(current_palette, current_palette + ".json")
+		_display_palette(palette)
 
 
 func _on_PaletteOptionButton_item_selected(ID : int) -> void:

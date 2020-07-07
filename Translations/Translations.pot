@@ -16,16 +16,25 @@ msgstr ""
 msgid "Please Confirm..."
 msgstr ""
 
+msgid "File Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr ""
 
 msgid "Canvas Size"
 msgstr ""
 
+msgid "Frame Size"
+msgstr ""
+
 msgid "Width:"
 msgstr ""
 
 msgid "Height:"
+msgstr ""
+
+msgid "Center"
 msgstr ""
 
 msgid "File"
@@ -62,12 +71,6 @@ msgid "Save as..."
 msgstr ""
 
 msgid "Import"
-msgstr ""
-
-msgid "Import..."
-msgstr ""
-
-msgid "Import PNG..."
 msgstr ""
 
 msgid "Export"
@@ -145,10 +148,37 @@ msgstr ""
 msgid "Open File(s)"
 msgstr ""
 
-msgid "Import as new frame"
+msgid "Import Options"
 msgstr ""
 
-msgid "Import as a spritesheet"
+msgid "Import as:"
+msgstr ""
+
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
@@ -329,7 +359,7 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-msgid "Invert colors"
+msgid "Invert Colors"
 msgstr ""
 
 msgid "Desaturation"
@@ -456,6 +486,12 @@ msgid "Arabic"
 msgstr ""
 
 msgid "Turkish"
+msgstr ""
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
 msgstr ""
 
 msgid "Development Team"
@@ -984,6 +1020,9 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
+msgid "Create Palette From Current Sprite"
+msgstr ""
+
 msgid "Palette Name:"
 msgstr ""
 
@@ -997,9 +1036,6 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
-
-msgid "Error: Palette named '%s' already exists!"
 msgstr ""
 
 msgid "Invalid Palette file!"

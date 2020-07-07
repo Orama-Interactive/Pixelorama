@@ -58,7 +58,7 @@ mouse_default_cursor_shape = 2
 [node name="PopupMenu" type="PopupMenu" parent="PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette"]
 margin_right = 115.0
 margin_bottom = 54.0
-items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "New Empty Palette", null, 0, false, false, 0, 0, null, "", false, "Import Palette", null, 0, false, false, 1, 0, null, "", false, "Create Palette From Current Sprite", null, 0, false, false, 2, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }

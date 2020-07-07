@@ -5,27 +5,36 @@
 [node name="PreviewDialog" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 400, 70 )
+rect_min_size = Vector2( 550, 70 )
 popup_exclusive = true
+window_title = "Import Options"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = 308.0
+margin_bottom = -36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
-margin_left = 42.0
-margin_right = 342.0
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 534.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
+margin_left = 117.0
+margin_right = 417.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 300 )
 expand = true
@@ -33,6 +42,126 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+
+[node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 304.0
+margin_right = 534.0
+margin_bottom = 318.0
+custom_constants/separation = 32
+
+[node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
+margin_right = 117.0
+margin_bottom = 14.0
+text = "Image Size: 64×64"
+
+[node name="FrameSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
+visible = false
+margin_left = 149.0
+margin_right = 266.0
+margin_bottom = 14.0
+text = "Frame size: 64×64"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 322.0
+margin_right = 534.0
+margin_bottom = 342.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 66.0
+margin_bottom = 17.0
+text = "Import as:"
+
+[node name="ImportOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 70.0
+margin_right = 151.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "New tab"
+items = [ "New tab", null, false, 0, null, "Spritesheet (new tab)", null, false, 1, null, "New frame", null, false, 2, null, "New layer", null, false, 3, null, "New palette", null, false, 4, null, "New brush", null, false, 5, null, "New pattern", null, false, 6, null ]
+selected = 0
+
+[node name="SpritesheetOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 533.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
+margin_top = 5.0
+margin_right = 118.0
+margin_bottom = 19.0
+text = "Horizontal frames:"
+
+[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
+margin_left = 122.0
+margin_right = 196.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
+margin_left = 200.0
+margin_top = 5.0
+margin_right = 300.0
+margin_bottom = 19.0
+text = "Vertical frames:"
+
+[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
+margin_left = 304.0
+margin_right = 378.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="NewFrameOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 286.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
+margin_top = 5.0
+margin_right = 53.0
+margin_bottom = 19.0
+text = "At layer:"
+
+[node name="AtLayerSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
+margin_left = 57.0
+margin_right = 131.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+max_value = 0.0
+
+[node name="NewLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 286.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
+margin_top = 5.0
+margin_right = 53.0
+margin_bottom = 19.0
+text = "At frame:"
+
+[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
+margin_left = 57.0
+margin_right = 131.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+max_value = 1.0
+value = 1.0
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]

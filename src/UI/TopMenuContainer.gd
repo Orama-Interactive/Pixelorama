@@ -86,7 +86,7 @@ func setup_image_menu() -> void:
 		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
 		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
 		"Rotate Image" : 0,
-		"Invert colors" : 0,
+		"Invert Colors" : 0,
 		"Desaturation" : 0,
 		"Outline" : 0,
 		"Adjust Hue/Saturation/Value" : 0
@@ -96,7 +96,7 @@ func setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items.keys():
 		image_menu.add_item(item, i, image_menu_items[item])
-		if i == 4:
+		if i == 2:
 			image_menu.add_separator()
 		i += 1
 
@@ -148,9 +148,12 @@ func on_new_project_file_menu_option_pressed() -> void:
 
 
 func open_project_file() -> void:
-	Global.open_sprites_dialog.popup_centered()
-	Global.dialog_open(true)
-	Global.control.opensprite_file_selected = false
+	if OS.get_name() == "HTML5":
+		Html5FileExchange.load_image()
+	else:
+		Global.open_sprites_dialog.popup_centered()
+		Global.dialog_open(true)
+		Global.control.opensprite_file_selected = false
 
 
 func on_open_last_project_file_menu_option_pressed() -> void:
@@ -165,16 +168,23 @@ func on_open_last_project_file_menu_option_pressed() -> void:
 
 func save_project_file() -> void:
 	Global.control.is_quitting_on_save = false
-	if OpenSave.current_save_paths[Global.current_project_index] == "":
-		Global.save_sprites_dialog.popup_centered()
+	var path = OpenSave.current_save_paths[Global.current_project_index]
+	if path == "":
+		if OS.get_name() == "HTML5":
+			Global.save_sprites_html5_dialog.popup_centered()
+		else:
+			Global.save_sprites_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		Global.control._on_SaveSprite_file_selected(OpenSave.current_save_paths[Global.current_project_index])
+		Global.control._on_SaveSprite_file_selected(path)
 
 
 func save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
-	Global.save_sprites_dialog.popup_centered()
+	if OS.get_name() == "HTML5":
+		Global.save_sprites_html5_dialog.popup_centered()
+	else:
+		Global.save_sprites_dialog.popup_centered()
 	Global.dialog_open(true)
 
 
@@ -354,7 +364,10 @@ func help_menu_id_pressed(id : int) -> void:
 		2: # Issue Tracker
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		3: # Changelog
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v07---2020-05-16")
+			if OS.get_name() == "OSX":
+				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md")
+			else:
+				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v07---2020-05-16")
 		4: # About Pixelorama
 			Global.control.get_node("AboutDialog").popup_centered()
 			Global.dialog_open(true)

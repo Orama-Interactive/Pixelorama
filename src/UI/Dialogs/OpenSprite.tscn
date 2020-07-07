@@ -8,5 +8,5 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project", "*.png ; PNG Image", "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image" )
-current_dir = "C:/Users"
-current_path = "C:/Users/"
+current_dir = "/Users"
+current_path = "/Users/"

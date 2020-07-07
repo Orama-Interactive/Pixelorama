@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="SaveSpriteHTML5" type="ConfirmationDialog"]
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="FileNameContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileNameLabel" type="Label" parent="FileNameContainer"]
+margin_top = 6.0
+margin_right = 69.0
+margin_bottom = 20.0
+text = "File Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileNameLineEdit" type="LineEdit" parent="FileNameContainer"]
+margin_left = 73.0
+margin_top = 1.0
+margin_right = 184.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}

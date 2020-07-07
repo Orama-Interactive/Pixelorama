@@ -25,6 +25,8 @@ var preferences = [
 	["checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color"],
 ]
 
+var selected_item := 0
+
 onready var list : ItemList = $HSplitContainer/List
 onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
 onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
@@ -33,6 +35,10 @@ onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
 func _ready() -> void:
 	# Replace OK with Close since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = tr("Close")
+
+	if OS.get_name() == "HTML5":
+		right_side.get_node("General/OpenLastProject").visible = false
+		Global.open_last_project = false
 
 	for pref in preferences:
 		var node = right_side.get_node(pref[1])
@@ -104,7 +110,7 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	list.add_item("  " + tr("Image"))
 	list.add_item("  " + tr("Shortcuts"))
 
-	list.select(1 if changed_language else 0)
+	list.select(1 if changed_language else selected_item)
 	general.get_node("AutosaveInterval/AutosaveInterval").suffix = tr("minute(s)")
 
 
@@ -113,5 +119,6 @@ func _on_PreferencesDialog_popup_hide() -> void:
 
 
 func _on_List_item_selected(index) -> void:
+	selected_item = index
 	for child in right_side.get_children():
 		child.visible = child.name == ["General", "Languages", "Themes", "Canvas", "Image", "Shortcuts"][index]
