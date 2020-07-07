@@ -13,22 +13,26 @@ signal brush_selected(brush)
 signal brush_removed(brush)
 enum {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 
+var pixel_image = preload("res://assets/graphics/pixel_image.png")
+var circle_image = preload("res://assets/graphics/circle_9x9.png")
+var circle_filled_image = preload("res://assets/graphics/circle_filled_9x9.png")
+
 
 func _ready() -> void:
 	var container = Global.brushes_popup.get_node("TabContainer/File/FileBrushContainer")
-	var button = create_button(preload("res://assets/graphics/pixel_image.png"))
+	var button = create_button(pixel_image)
 	button.brush.type = PIXEL
 	button.hint_tooltip = "Pixel brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
-	button = create_button(preload("res://assets/graphics/circle_9x9.png"))
+	button = create_button(circle_image)
 	button.brush.type = CIRCLE
 	button.hint_tooltip = "Circle brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
-	button = create_button(preload("res://assets/graphics/circle_filled_9x9.png"))
+	button = create_button(circle_filled_image)
 	button.brush.type = FILLED_CIRCLE
 	button.hint_tooltip = "Filled circle brush"
 	container.add_child(button)
