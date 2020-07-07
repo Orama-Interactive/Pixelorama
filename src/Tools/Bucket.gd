@@ -144,8 +144,12 @@ func _flood_fill(position : Vector2) -> void:
 			return
 
 	image.lock()
+	var processed := BitMap.new()
+	processed.create(image.get_size())
 	var q = [position]
 	for n in q:
+		if processed.get_bit(n):
+			continue
 		var west : Vector2 = n
 		var east : Vector2 = n
 		while west.x >= project.x_min && image.get_pixelv(west).is_equal_approx(color):
@@ -155,6 +159,7 @@ func _flood_fill(position : Vector2) -> void:
 		for px in range(west.x + 1, east.x):
 			var p := Vector2(px, n.y)
 			_set_pixel(image, p.x, p.y, tool_slot.color)
+			processed.set_bit(p, true)
 			var north := p + Vector2.UP
 			var south := p + Vector2.DOWN
 			if north.y >= project.y_min && image.get_pixelv(north).is_equal_approx(color):
