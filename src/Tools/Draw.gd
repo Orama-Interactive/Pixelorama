@@ -89,11 +89,11 @@ func update_config() -> void:
 func update_brush() -> void:
 	match _brush.type:
 		Brushes.PIXEL:
-			_brush_texture.create_from_image(preload("res://assets/graphics/pixel_image.png"), 0)
+			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png"), 0)
 		Brushes.CIRCLE:
-			_brush_texture.create_from_image(preload("res://assets/graphics/circle_9x9.png"), 0)
+			_brush_texture.create_from_image(load("res://assets/graphics/circle_9x9.png"), 0)
 		Brushes.FILLED_CIRCLE:
-			_brush_texture.create_from_image(preload("res://assets/graphics/circle_filled_9x9.png"), 0)
+			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"), 0)
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			if _brush.random.size() <= 1:
 				_brush_image = _create_blended_brush_image(_brush.image)
@@ -197,6 +197,8 @@ func draw_tool(position : Vector2) -> void:
 			draw_tool_brush(position)
 
 
+# Bresenham's Algorithm
+# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func draw_fill_gap(start : Vector2, end : Vector2) -> void:
 	var dx := int(abs(end.x - start.x))
 	var dy := int(-abs(end.y - start.y))
@@ -225,6 +227,7 @@ func draw_tool_pixel(position : Vector2) -> void:
 			_set_pixel(Vector2(x, y))
 
 
+# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func draw_tool_circle(position : Vector2, fill := false) -> void:
 	var r := _brush_size
 	var x := -r

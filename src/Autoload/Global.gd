@@ -37,8 +37,8 @@ var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var open_last_project := false
 var smooth_zoom := true
 var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
-var left_cursor_tool_texture : ImageTexture
-var right_cursor_tool_texture : ImageTexture
+var left_cursor_tool_texture := ImageTexture.new()
+var right_cursor_tool_texture := ImageTexture.new()
 
 var image_clipboard : Image
 var play_only_tags := true
@@ -178,21 +178,6 @@ func _ready() -> void:
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
-
-	var pencil_cursor_image = preload("res://assets/graphics/cursor_icons/pencil_cursor.png")
-	var eraser_cursor_image = preload("res://assets/graphics/cursor_icons/eraser_cursor.png")
-
-	left_cursor_tool_texture = ImageTexture.new()
-	if pencil_cursor_image is Image:
-		left_cursor_tool_texture.create_from_image(pencil_cursor_image)
-	elif pencil_cursor_image is ImageTexture:
-		left_cursor_tool_texture.create_from_image(pencil_cursor_image.get_data())
-
-	right_cursor_tool_texture = ImageTexture.new()
-	if eraser_cursor_image is Image:
-		right_cursor_tool_texture.create_from_image(eraser_cursor_image)
-	elif eraser_cursor_image is ImageTexture:
-		right_cursor_tool_texture.create_from_image(eraser_cursor_image.get_data())
 
 	tabs = find_node_by_name(root, "Tabs")
 	main_viewport = find_node_by_name(root, "ViewportContainer")
@@ -484,31 +469,6 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 	var last_frame : BaseButton = find_node_by_name(root, "LastFrame")
 	last_frame.hint_tooltip = tr("""Jump to the last frame
 (%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
-
-
-# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-# This is not used for drawing, rather for finding the points required
-# for the mouse cursor/position indicator
-func plot_circle(r : int) -> Array:
-	var circle_points := []
-	var xm := 0
-	var ym := 0
-	var x := -r
-	var y := 0
-	var err := 2 - r * 2
-	while x < 0:
-		circle_points.append(Vector2(xm - x, ym + y))
-		circle_points.append(Vector2(xm - y, ym - x))
-		circle_points.append(Vector2(xm + x, ym - y))
-		circle_points.append(Vector2(xm + y, ym + x))
-		r = err
-		if r <= y:
-			y += 1
-			err += y * 2 + 1
-		if r > x || err > y:
-			x += 1
-			err += x * 2 + 1
-	return circle_points
 
 
 func _exit_tree() -> void:
