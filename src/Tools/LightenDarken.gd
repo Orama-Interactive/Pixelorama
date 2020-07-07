@@ -5,7 +5,6 @@ var _last_position := Vector2.INF
 var _changed := false
 var _mode := 0
 var _amount := 10
-var _factor := 1
 
 
 class LightenDarkenOp extends Drawer.ColorOp:
@@ -33,7 +32,7 @@ func _on_LightenDarken_item_selected(id : int):
 
 
 func _on_LightenDarken_value_changed(value : float):
-	_amount = value
+	_amount = int(value)
 	update_config()
 	save_config()
 
@@ -108,6 +107,6 @@ func draw_end(_position : Vector2) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(_image : Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(_image : Image, _src_rect: Rect2, _dst: Vector2) -> void:
 	_changed = true
 	draw_tool_pixel(_cursor.floor())

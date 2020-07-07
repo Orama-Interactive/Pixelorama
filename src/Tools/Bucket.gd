@@ -35,14 +35,14 @@ func _on_Pattern_selected(pattern : Patterns.Pattern) -> void:
 	save_config()
 
 
-func _on_PatternOffsetX_value_changed(value):
-	_offset_x = value
+func _on_PatternOffsetX_value_changed(value : float):
+	_offset_x = int(value)
 	update_config()
 	save_config()
 
 
-func _on_PatternOffsetY_value_changed(value):
-	_offset_y = value
+func _on_PatternOffsetY_value_changed(value : float):
+	_offset_y = int(value)
 	update_config()
 	save_config()
 

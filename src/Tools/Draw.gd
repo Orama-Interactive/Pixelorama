@@ -38,14 +38,14 @@ func _on_Brush_selected(brush : Brushes.Brush) -> void:
 	save_config()
 
 
-func _on_BrushSize_value_changed(value) -> void:
-	_brush_size = value
+func _on_BrushSize_value_changed(value : float) -> void:
+	_brush_size = int(value)
 	update_config()
 	save_config()
 
 
 func _on_InterpolateFactor_value_changed(value : float) -> void:
-	_brush_interpolate = value
+	_brush_interpolate = int(value)
 	update_config()
 	save_config()
 
