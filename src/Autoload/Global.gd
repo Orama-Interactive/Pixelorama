@@ -88,6 +88,7 @@ var zoom_modes := [Zoom_Mode.ZOOM_IN, Zoom_Mode.ZOOM_OUT]
 var horizontal_mirror := [false, false]
 var vertical_mirror := [false, false]
 var pixel_perfect := [false, false]
+var pixel_image = preload("res://assets/graphics/pixel_image.png")
 
 # View menu options
 var tile_mode := false
@@ -660,11 +661,8 @@ func redo_custom_brush(_brush_button : BaseButton = null) -> void:
 func update_custom_brush(mouse_button : int) -> void:
 	var brush_type : int = current_brush_types[mouse_button]
 	if brush_type == Brush_Types.PIXEL:
-		var pixel = preload("res://assets/graphics/pixel_image.png")
-		if pixel is Image:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-		elif pixel is ImageTexture:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
+		
+		brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel_image, 0)
 	elif brush_type == Brush_Types.CIRCLE:
 		var pixel = preload("res://assets/graphics/circle_9x9.png")
 		if pixel is Image:
