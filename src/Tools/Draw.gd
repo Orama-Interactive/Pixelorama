@@ -143,7 +143,7 @@ func update_line_polylines(start : Vector2, end : Vector2) -> void:
 
 
 func restore_image() -> void:
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var image = project.frames[project.current_frame].cels[project.current_layer].image
 	image.unlock()
 	image.data = _undo_data[image]
@@ -156,7 +156,7 @@ func prepare_undo() -> void:
 
 func commit_undo(action : String) -> void:
 	var redo_data = _get_undo_data()
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var frame := -1
 	var layer := -1
 	if Global.animation_timer.is_stopped():
@@ -482,7 +482,7 @@ func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
 
 func _get_undo_data() -> Dictionary:
 	var data = {}
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var frames := project.frames
 	if Global.animation_timer.is_stopped():
 		frames = [project.frames[project.current_frame]]

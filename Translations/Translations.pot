@@ -97,6 +97,15 @@ msgstr ""
 msgid "Redo"
 msgstr ""
 
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
 msgid "Scale Image"
 msgstr ""
 

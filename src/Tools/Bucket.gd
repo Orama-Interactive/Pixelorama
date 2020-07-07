@@ -107,7 +107,7 @@ func draw_end(_position : Vector2) -> void:
 
 
 func fill_in_color(position : Vector2) -> void:
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var image := _get_draw_image()
 	var color := image.get_pixelv(position)
 	if _fill_with == 0 or _pattern == null:
@@ -122,7 +122,7 @@ func fill_in_color(position : Vector2) -> void:
 
 
 func fill_in_area(position : Vector2) -> void:
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var mirror_x := project.x_max + project.x_min - position.x - 1
 	var mirror_y := project.y_max + project.y_min - position.y - 1
 
@@ -136,7 +136,7 @@ func fill_in_area(position : Vector2) -> void:
 
 
 func _flood_fill(position : Vector2) -> void:
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var image := _get_draw_image()
 	var color := image.get_pixelv(position)
 	if _fill_with == 0 or _pattern == null:
@@ -177,7 +177,7 @@ func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
 
 func commit_undo(action : String, undo_data : Dictionary) -> void:
 	var redo_data = _get_undo_data()
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 
 	project.undos += 1
@@ -191,7 +191,7 @@ func commit_undo(action : String, undo_data : Dictionary) -> void:
 
 func _get_undo_data() -> Dictionary:
 	var data = {}
-	var project := Global.current_project
+	var project : Project = Global.current_project
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	image.unlock()
 	data["image_data"] = image.data
