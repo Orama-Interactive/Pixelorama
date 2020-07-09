@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 18:20\n"
+"PO-Revision-Date: 2020-07-09 18:32\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -19,25 +19,25 @@ msgid "Cancel"
 msgstr "Cancel·lar"
 
 msgid "Open"
-msgstr "Obre"
+msgstr "Obrir"
 
 msgid "Save"
-msgstr ""
+msgstr "Desar"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Si us plau, confirmeu..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nom del fitxer:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Mida de l'imatge"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Mida del llenç"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Mida del marc"
 
 msgid "Width:"
 msgstr ""
@@ -49,118 +49,118 @@ msgid "Center"
 msgstr ""
 
 msgid "File"
-msgstr ""
+msgstr "Fitxer"
 
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 msgid "View"
 msgstr ""
 
 msgid "Image"
-msgstr ""
+msgstr "Imatge"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efectes"
 
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 msgid "New..."
-msgstr ""
+msgstr "Nou..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Obrir..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Desar..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Desa com a..."
 
 msgid "Import"
-msgstr ""
+msgstr "Importar"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportar..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportar com a..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exportar PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Exportar PNG com a..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Sortir"
 
 msgid "Undo"
-msgstr ""
+msgstr "Desfer"
 
 msgid "Redo"
-msgstr ""
+msgstr "Refer"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 msgid "Paste"
-msgstr ""
+msgstr "Enganxar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Escalar l'imatge"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Retallar l'imatge"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Redimensionar llenç"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotar l'imatge"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Netejar la selecció"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Voltejar horitzontalment"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Voltejar verticalment"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Preferències"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Mode Tile"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Mostrar la quadrícula"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Mostrar regles"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Mostrar guies"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Mostrar línia de temps de l'animació"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Mode Zen"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Omple amb color:"
 
 msgid "Open a File"
 msgstr ""
