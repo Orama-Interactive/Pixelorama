@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-07-09 11:41\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -107,6 +107,15 @@ msgstr "Undo"
 
 msgid "Redo"
 msgstr "Redo"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Hapus"
 
 msgid "Scale Image"
 msgstr "Perbesar/perkecil gambar"
@@ -1221,7 +1230,7 @@ msgid "Close"
 msgstr "Tutup"
 
 msgid "Delete"
-msgstr "Hapus"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
