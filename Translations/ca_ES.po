@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 18:37\n"
+"PO-Revision-Date: 2020-07-09 18:49\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr ""
 
 msgid "Center"
-msgstr ""
+msgstr "Centre"
 
 msgid "File"
 msgstr "Fitxer"
@@ -163,43 +163,43 @@ msgid "Fill with color:"
 msgstr "Omple amb color:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Obrir un fitxer"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Obrir fitxer(s)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Opcions d'importació"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importar com a:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Pestanya nova"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Nou fotograma"
 
 msgid "New layer"
 msgstr ""
 
 msgid "New palette"
-msgstr ""
+msgstr "Nova paleta"
 
 msgid "New brush"
 msgstr ""
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nou patró"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Fotogrames horitzontals:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Fotogrames verticales:"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
@@ -208,7 +208,7 @@ msgid "Export Sprite as .png"
 msgstr ""
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr ""
@@ -263,10 +263,10 @@ msgid "Select Current Folder"
 msgstr ""
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Obrir directori"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Tots els fotogrames com a mútliples fitxers"
 
 msgid "All frames as a single file animation"
 msgstr ""
@@ -284,7 +284,7 @@ msgid "Backwards"
 msgstr ""
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
 msgstr ""
@@ -293,10 +293,10 @@ msgid "Columns:"
 msgstr ""
 
 msgid "Rows"
-msgstr ""
+msgstr "Files"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Files:"
 
 msgid "Path:"
 msgstr ""
@@ -317,7 +317,7 @@ msgid "Nearest"
 msgstr ""
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineal"
 
 msgid "Cubic"
 msgstr ""
