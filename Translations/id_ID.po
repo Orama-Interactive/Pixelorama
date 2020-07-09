@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-07-04 23:28\n"
+"PO-Revision-Date: 2020-07-09 11:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -28,16 +28,16 @@ msgid "Please Confirm..."
 msgstr "Konfirmasi..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nama File:"
 
 msgid "Image Size"
 msgstr "Ukuran Gambar"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Ukuran Kanvas"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Ukuran Bingkai"
 
 msgid "Width:"
 msgstr "Panjang:"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Lebar:"
 
 msgid "Center"
-msgstr ""
+msgstr "Tengah"
 
 msgid "File"
 msgstr "Berkas/File"
@@ -115,7 +115,7 @@ msgid "Crop Image"
 msgstr "Potong Gambar"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Ubah Ukuran Kanvas"
 
 msgid "Rotate Image"
 msgstr "Putar Gambar"
@@ -148,7 +148,7 @@ msgid "Show Animation Timeline"
 msgstr "Tampilkan Frame Animasi"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Mode Zen"
 
 msgid "Fill with color:"
 msgstr "Isi dengan warna:"
@@ -160,25 +160,25 @@ msgid "Open File(s)"
 msgstr "Buka file (lebih dari satu)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Piliha Impor"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Impor Sebagai:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Tab baru"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Frame Baru"
 
 msgid "New layer"
-msgstr ""
+msgstr "Layer baru"
 
 msgid "New palette"
-msgstr ""
+msgstr "Palet baru"
 
 msgid "New brush"
 msgstr ""
