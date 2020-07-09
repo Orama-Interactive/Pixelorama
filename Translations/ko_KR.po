@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-07-04 23:27\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "예"
@@ -107,6 +107,15 @@ msgstr "실행 취소"
 
 msgid "Redo"
 msgstr "다시 실행"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
 
 msgid "Scale Image"
 msgstr "이미지 크기"
