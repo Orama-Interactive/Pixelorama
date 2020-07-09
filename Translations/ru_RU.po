@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-09 12:40\n"
+"PO-Revision-Date: 2020-07-09 19:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -109,10 +109,10 @@ msgid "Redo"
 msgstr "Повторить"
 
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 msgid "Paste"
-msgstr ""
+msgstr "Вставить"
 
 msgid "Delete"
 msgstr "Удалить"
@@ -1230,7 +1230,7 @@ msgid "Close"
 msgstr "Закрыть"
 
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
