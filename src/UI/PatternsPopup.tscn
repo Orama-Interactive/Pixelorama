@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/PatternsPopup.gd" type="Script" id=1]
 
 [node name="PatternsPopup" type="PopupPanel"]
 margin_right = 226.0
 margin_bottom = 104.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

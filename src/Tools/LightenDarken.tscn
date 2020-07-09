@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/LightenDarken.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="LightenDarken" type="OptionButton" parent="." index="4"]
+margin_left = 12.0
+margin_top = 102.0
+margin_right = 104.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Lighten"
+items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
+selected = 0
+
+[node name="Amount" type="VBoxContainer" parent="." index="5"]
+margin_top = 126.0
+margin_right = 116.0
+margin_bottom = 188.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Amount" index="0"]
+margin_left = 30.0
+margin_right = 85.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Amount:"
+
+[node name="Spinbox" type="SpinBox" parent="Amount" index="1"]
+margin_left = 21.0
+margin_top = 18.0
+margin_right = 95.0
+margin_bottom = 42.0
+hint_tooltip = "Lighten/Darken amount"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+value = 10.0
+align = 1
+
+[node name="Slider" type="HSlider" parent="Amount" index="2"]
+margin_left = 12.0
+margin_top = 46.0
+margin_right = 104.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+value = 10.0
+ticks_on_borders = true
+
+[node name="EmptySpacer" parent="." index="7"]
+margin_top = 192.0
+margin_bottom = 204.0
+
+[node name="Mirror" parent="." index="8"]
+margin_top = 208.0
+margin_bottom = 225.0
+[connection signal="item_selected" from="LightenDarken" to="." method="_on_LightenDarken_item_selected"]
+[connection signal="value_changed" from="Amount/Spinbox" to="." method="_on_LightenDarken_value_changed"]
+[connection signal="value_changed" from="Amount/Slider" to="." method="_on_LightenDarken_value_changed"]

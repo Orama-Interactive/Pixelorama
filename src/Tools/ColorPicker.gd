@@ -1,0 +1,45 @@
+extends "res://src/Tools/Base.gd"
+
+
+var _color_slot := 0
+
+
+func _on_Options_item_selected(id):
+	_color_slot = id
+	update_config()
+	save_config()
+
+
+func get_config() -> Dictionary:
+	return {
+		"color_slot" : _color_slot,
+	}
+
+
+func set_config(config : Dictionary) -> void:
+	_color_slot = config.get("color_slot", _color_slot)
+
+
+func update_config() -> void:
+	$ColorPicker/Options.selected = _color_slot
+
+
+func draw_start(position : Vector2) -> void:
+	_pick_color(position)
+
+
+func draw_move(position : Vector2) -> void:
+	_pick_color(position)
+
+
+func draw_end(_position : Vector2) -> void:
+	pass
+
+
+func _pick_color(position : Vector2) -> void:
+	var image := Image.new()
+	image.copy_from(_get_draw_image())
+	image.lock()
+	var color := image.get_pixelv(position)
+	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
+	Tools.assign_color(color, button)

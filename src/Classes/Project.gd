@@ -16,11 +16,12 @@ var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
 
-var selected_pixels := []
 var x_min := 0
 var x_max := 64
 var y_min := 0
 var y_max := 64
+
+var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
@@ -37,6 +38,11 @@ func _init(_frames := [], _name := tr("untitled")) -> void:
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
+
+
+func _set_selected_rect(value : Rect2) -> void:
+	selected_rect = value
+	Global.selection_rectangle.set_rect(value)
 
 
 func change_project() -> void:
@@ -94,16 +100,7 @@ func change_project() -> void:
 	self.animation_tags = animation_tags
 
 	# Change the selection rectangle
-	if selected_pixels.size() != 0:
-		Global.selection_rectangle.polygon[0] = Vector2(x_min, y_min)
-		Global.selection_rectangle.polygon[1] = Vector2(x_max, y_min)
-		Global.selection_rectangle.polygon[2] = Vector2(x_max, y_max)
-		Global.selection_rectangle.polygon[3] = Vector2(x_min, y_max)
-	else:
-		Global.selection_rectangle.polygon[0] = Vector2.ZERO
-		Global.selection_rectangle.polygon[1] = Vector2.ZERO
-		Global.selection_rectangle.polygon[2] = Vector2.ZERO
-		Global.selection_rectangle.polygon[3] = Vector2.ZERO
+	Global.selection_rectangle.set_rect(selected_rect)
 
 	# Change the guides
 	for guide in Global.canvas.get_children():
@@ -114,11 +111,9 @@ func change_project() -> void:
 				guide.visible = false
 
 	# Change the project brushes
-	for child in Global.project_brush_container.get_children():
-		child.queue_free()
-
+	Brushes.clear_project_brush()
 	for brush in brushes:
-		Global.create_brush_button(brush)
+		Brushes.add_project_brush(brush)
 
 	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
 	var i := 0

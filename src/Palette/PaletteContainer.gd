@@ -220,11 +220,9 @@ func on_color_select(index : int) -> void:
 	var color : Color = Global.palettes[current_palette].get_color(index)
 
 	if Input.is_action_just_pressed("left_mouse"):
-		Global.color_pickers[0].color = color
-		Global.update_custom_brush(0)
+		Tools.assign_color(color, BUTTON_LEFT)
 	elif Input.is_action_just_pressed("right_mouse"):
-		Global.color_pickers[1].color = color
-		Global.update_custom_brush(1)
+		Tools.assign_color(color, BUTTON_RIGHT)
 
 
 func _load_palettes() -> void:

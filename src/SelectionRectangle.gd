@@ -1,144 +1,156 @@
 extends Polygon2D
 
-var img : Image
-var tex : ImageTexture
-var is_dragging := false
-var move_pixels := false
-var diff_x := 0.0
-var diff_y := 0.0
-var orig_x := 0.0
-var orig_y := 0.0
-var orig_colors := []
+
+var _selected_rect := Rect2(0, 0, 0, 0)
+var _clipped_rect := Rect2(0, 0, 0, 0)
+var _move_image := Image.new()
+var _move_texture := ImageTexture.new()
+var _clear_image := Image.new()
+var _move_pixel := false
+var _clipboard := Image.new()
+var _undo_data := {}
 
 
 func _ready() -> void:
-	img = Image.new()
-	img.create(1, 1, false, Image.FORMAT_RGBA8)
-	img.lock()
-	tex = ImageTexture.new()
-	tex.create_from_image(img, 0)
-
-
-func _process(_delta : float) -> void:
-	if Global.current_project.layers[Global.current_project.current_layer].locked:
-		return
-	var mouse_pos: Vector2 = get_local_mouse_position() - Global.canvas.location
-	var mouse_pos_floored := mouse_pos.floor()
-	var start_pos := polygon[0]
-	var end_pos := polygon[2]
-	var current_layer_index : int = Global.current_project.current_layer
-	var layer : Image = Global.current_project.frames[Global.current_project.current_frame].cels[current_layer_index].image
-
-	if end_pos == start_pos:
-		visible = false
-	else:
-		visible = true
-
-	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, polygon[0], polygon[2]) and Global.current_project.selected_pixels.size() > 0 and (Global.current_tools[0] == Global.Tools.RECTSELECT or Global.current_tools[1] == Global.Tools.RECTSELECT):
-		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_MOVE
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_just_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_just_pressed("right_mouse")):
-			# Begin dragging
-			is_dragging = true
-			if Input.is_key_pressed(KEY_SHIFT):
-				move_pixels = true
-			else:
-				move_pixels = false
-				img.fill(Color(0, 0, 0, 0))
-			diff_x = end_pos.x - mouse_pos_floored.x
-			diff_y = end_pos.y - mouse_pos_floored.y
-			orig_x = start_pos.x - mouse_pos_floored.x
-			orig_y = start_pos.y - mouse_pos_floored.y
-			if move_pixels:
-				img.unlock()
-				img.resize(polygon[2].x - polygon[0].x, polygon[2].y - polygon[0].y, 0)
-				img.lock()
-				for i in range(Global.current_project.selected_pixels.size()):
-					var curr_px = Global.current_project.selected_pixels[i]
-					if point_in_rectangle(curr_px, Global.canvas.location - Vector2.ONE, Global.current_project.size):
-						orig_colors.append(layer.get_pixelv(curr_px)) # Color of pixel
-						var px = curr_px - Global.current_project.selected_pixels[0]
-						img.set_pixelv(px, orig_colors[i])
-						layer.set_pixelv(curr_px, Color(0, 0, 0, 0))
-					else: # If part of selection is outside canvas
-						orig_colors.append(Color(0, 0, 0, 0))
-				Global.canvas.update_texture(current_layer_index)
-			tex.create_from_image(img, 0)
-			update()
-
-	else:
-		get_parent().get_parent().mouse_default_cursor_shape = Input.CURSOR_CROSS
-
-	if is_dragging:
-		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_pressed("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_pressed("right_mouse")):
-			# Drag
-			start_pos.x = orig_x + mouse_pos_floored.x
-			end_pos.x = diff_x + mouse_pos_floored.x
-
-			start_pos.y = orig_y + mouse_pos_floored.y
-			end_pos.y = diff_y + mouse_pos_floored.y
-			polygon[0] = start_pos
-			polygon[1] = Vector2(end_pos.x, start_pos.y)
-			polygon[2] = end_pos
-			polygon[3] = Vector2(start_pos.x, end_pos.y)
-
-		if (Global.current_tools[0] == Global.Tools.RECTSELECT && Input.is_action_just_released("left_mouse")) || (Global.current_tools[1] == Global.Tools.RECTSELECT && Input.is_action_just_released("right_mouse")):
-			# Release Drag
-			is_dragging = false
-			if move_pixels:
-				for i in range(orig_colors.size()):
-					if orig_colors[i].a > 0:
-						var px = polygon[0] + Global.current_project.selected_pixels[i] - Global.current_project.selected_pixels[0]
-						if point_in_rectangle(px, Global.canvas.location - Vector2.ONE, Global.current_project.size):
-							layer.set_pixelv(px, orig_colors[i])
-				Global.canvas.update_texture(current_layer_index)
-				img.fill(Color(0, 0, 0, 0))
-				tex.create_from_image(img, 0)
-				update()
-
-			orig_colors.clear()
-			Global.current_project.selected_pixels.clear()
-			for xx in range(start_pos.x, end_pos.x):
-				for yy in range(start_pos.y, end_pos.y):
-					Global.current_project.selected_pixels.append(Vector2(xx, yy))
-
-			Global.canvas.handle_redo("Rectangle Select") # Redo
-
-	if Global.current_project.selected_pixels.size() > 0:
-		# Handle copy
-		if Input.is_action_just_pressed("copy"):
-			# Save as custom brush
-			var brush_img := Image.new()
-			brush_img = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
-			if brush_img.is_invisible():
-				return
-			brush_img = brush_img.get_rect(brush_img.get_used_rect()) # Save only the visible pixels
-			Global.current_project.brushes.append(brush_img)
-			Global.create_brush_button(brush_img)
-
-			# Have it in the clipboard so it can be pasted later
-			Global.image_clipboard = layer.get_rect(Rect2(polygon[0], polygon[2] - polygon[0]))
-
-		# Handle paste
-		if Input.is_action_just_pressed("paste") && Global.image_clipboard.get_size() > Vector2.ZERO:
-			Global.canvas.handle_undo("Draw")
-			layer.blend_rect(Global.image_clipboard, Rect2(Vector2.ZERO, polygon[2]-polygon[0]), polygon[0])
-			layer.lock()
-			Global.canvas.handle_redo("Draw")
-
-		if Input.is_action_just_pressed("delete"):
-			Global.canvas.handle_undo("Draw")
-			for xx in range(start_pos.x, end_pos.x):
-				for yy in range(start_pos.y, end_pos.y):
-					if point_in_rectangle(Vector2(xx, yy), Global.canvas.location - Vector2.ONE, Global.canvas.location + Global.current_project.size):
-						layer.set_pixel(xx, yy, Color(0, 0, 0, 0))
-			Global.canvas.handle_redo("Draw")
+	_clear_image.create(1, 1, false, Image.FORMAT_RGBA8)
+	_clear_image.fill(Color(0, 0, 0, 0))
 
 
 func _draw() -> void:
-	if img.get_size() == polygon[2] - polygon[0]:
-		draw_texture(tex, polygon[0], Color(1, 1, 1, 0.5))
+	if _move_pixel:
+		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
 
 
-func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
-	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
+func has_point(position : Vector2) -> bool:
+	return _selected_rect.has_point(position)
+
+
+func get_rect() -> Rect2:
+	return _selected_rect
+
+func set_rect(rect : Rect2) -> void:
+	_selected_rect = rect
+	polygon[0] = rect.position
+	polygon[1] = Vector2(rect.end.x, rect.position.y)
+	polygon[2] = rect.end
+	polygon[3] = Vector2(rect.position.x, rect.end.y)
+	visible = not rect.has_no_area()
+
+
+func move_rect(move : Vector2) -> void:
+	_selected_rect.position += move
+	_clipped_rect.position += move
+	set_rect(_selected_rect)
+
+
+func select_rect() -> void:
+	var undo_data = _get_undo_data(false)
+	Global.current_project.selected_rect = _selected_rect
+	commit_undo("Rectangle Select", undo_data)
+
+
+func move_start(move_pixel : bool) -> void:
+	if not move_pixel:
+		return
+
+	_undo_data = _get_undo_data(true)
+	var project := Global.current_project
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+
+	var rect = Rect2(Vector2.ZERO, project.size)
+	_clipped_rect = rect.clip(_selected_rect)
+	_move_image = image.get_rect(_clipped_rect)
+	_move_texture.create_from_image(_move_image, 0)
+
+	var size := _clipped_rect.size
+	rect = Rect2(Vector2.ZERO, size)
+	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+	image.blit_rect(_clear_image, rect, _clipped_rect.position)
+	Global.canvas.update_texture(project.current_layer)
+
+	_move_pixel = true
+	update()
+
+
+func move_end() -> void:
+	var undo_data = _undo_data if _move_pixel else _get_undo_data(false)
+
+	if _move_pixel:
+		var project := Global.current_project
+		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		var size := _clipped_rect.size
+		var rect = Rect2(Vector2.ZERO, size)
+		image.blit_rect_mask(_move_image, _move_image, rect, _clipped_rect.position)
+		_move_pixel = false
+		update()
+
+	Global.current_project.selected_rect = _selected_rect
+	commit_undo("Rectangle Select", undo_data)
+	_undo_data.clear()
+
+
+func copy() -> void:
+	if _selected_rect.has_no_area():
+		return
+
+	var project := Global.current_project
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	_clipboard = image.get_rect(_selected_rect)
+	if _clipboard.is_invisible():
+		return
+	var brush = _clipboard.get_rect(_clipboard.get_used_rect())
+	project.brushes.append(brush)
+	Brushes.add_project_brush(brush)
+
+
+func paste() -> void:
+	if _clipboard.get_size() <= Vector2.ZERO:
+		return
+
+	var undo_data = _get_undo_data(true)
+	var project := Global.current_project
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var size := _selected_rect.size
+	var rect = Rect2(Vector2.ZERO, size)
+	image.blend_rect(_clipboard, rect, _selected_rect.position)
+	commit_undo("Draw", undo_data)
+
+
+func delete() -> void:
+	var undo_data = _get_undo_data(true)
+	var project := Global.current_project
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var size := _selected_rect.size
+	var rect = Rect2(Vector2.ZERO, size)
+	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+	image.blit_rect(_clear_image, rect, _selected_rect.position)
+	commit_undo("Draw", undo_data)
+
+
+func commit_undo(action : String, undo_data : Dictionary) -> void:
+	var redo_data = _get_undo_data("image_data" in undo_data)
+	var project := Global.current_project
+
+	project.undos += 1
+	project.undo_redo.create_action(action)
+	project.undo_redo.add_do_property(project, "selected_rect", redo_data["selected_rect"])
+	project.undo_redo.add_undo_property(project, "selected_rect", undo_data["selected_rect"])
+	if "image_data" in undo_data:
+		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		project.undo_redo.add_do_property(image, "data", redo_data["image_data"])
+		project.undo_redo.add_undo_property(image, "data", undo_data["image_data"])
+	project.undo_redo.add_do_method(Global, "redo", project.current_frame, project.current_layer)
+	project.undo_redo.add_undo_method(Global, "undo", project.current_frame, project.current_layer)
+	project.undo_redo.commit_action()
+
+
+func _get_undo_data(undo_image : bool) -> Dictionary:
+	var data = {}
+	var project := Global.current_project
+	data["selected_rect"] = Global.current_project.selected_rect
+	if undo_image:
+		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		image.unlock()
+		data["image_data"] = image.data
+		image.lock()
+	return data
