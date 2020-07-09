@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-07-04 23:27\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -107,6 +107,15 @@ msgstr "Angre"
 
 msgid "Redo"
 msgstr "Gjør om igjen"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Slett"
 
 msgid "Scale Image"
 msgstr "Skalér Bilde"
@@ -1220,7 +1229,7 @@ msgid "Close"
 msgstr "Lukk"
 
 msgid "Delete"
-msgstr "Slett"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
