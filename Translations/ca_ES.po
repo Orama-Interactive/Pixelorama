@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 18:32\n"
+"PO-Revision-Date: 2020-07-09 18:37\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -302,7 +302,7 @@ msgid "Path:"
 msgstr ""
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Directoris i fitxers:"
 
 msgid "Create Folder"
 msgstr ""
