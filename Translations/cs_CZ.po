@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-07-04 23:27\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -107,6 +107,15 @@ msgstr "Zpět"
 
 msgid "Redo"
 msgstr "Znovu"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Smazat"
 
 msgid "Scale Image"
 msgstr "Škálovat obrázek"
@@ -1223,7 +1232,7 @@ msgid "Close"
 msgstr "Zavřít"
 
 msgid "Delete"
-msgstr "Smazat"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
