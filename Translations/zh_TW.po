@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-07-09 10:51\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "確定"
@@ -107,6 +107,15 @@ msgstr "取消"
 
 msgid "Redo"
 msgstr "復原"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "刪除"
 
 msgid "Scale Image"
 msgstr "調整尺寸"
@@ -1221,7 +1230,7 @@ msgid "Close"
 msgstr "關閉"
 
 msgid "Delete"
-msgstr "刪除"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
