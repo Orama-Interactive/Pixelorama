@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-07-09 19:59\n"
+"PO-Revision-Date: 2020-07-09 20:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -375,7 +375,7 @@ msgid "Blue"
 msgstr "Azul"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramel"
 
 msgid "Light"
 msgstr "Claro"
@@ -710,7 +710,7 @@ msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Sólo se puede modificar el ajuste preestablecido"
 
 msgid "Brush:"
 msgstr "Pincel:"
