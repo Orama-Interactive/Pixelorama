@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-04 23:28\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -107,6 +107,15 @@ msgstr "Αναίρεση"
 
 msgid "Redo"
 msgstr "Ακύρωση αναίρεσης"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Διαγραφή"
 
 msgid "Scale Image"
 msgstr "Κλιμάκωση εικόνας"
@@ -1223,7 +1232,7 @@ msgid "Close"
 msgstr "Κλείσιμο"
 
 msgid "Delete"
-msgstr "Διαγραφή"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
