@@ -48,6 +48,8 @@ func _on_PatternOffsetY_value_changed(value : float):
 
 
 func get_config() -> Dictionary:
+	if !_pattern:
+		return {}
 	return {
 		"pattern_index" : _pattern.index,
 		"fill_area" : _fill_area,
@@ -58,8 +60,9 @@ func get_config() -> Dictionary:
 
 
 func set_config(config : Dictionary) -> void:
-	var index = config.get("pattern_index", _pattern.index)
-	_pattern = Global.patterns_popup.get_pattern(index)
+	if _pattern:
+		var index = config.get("pattern_index", _pattern.index)
+		_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
 	_fill_with = config.get("fill_with", _fill_with)
 	_offset_x = config.get("offset_x", _offset_x)
@@ -78,7 +81,10 @@ func update_config() -> void:
 
 func update_pattern() -> void:
 	if _pattern == null:
-		_pattern = Global.patterns_popup.default_pattern
+		if Global.patterns_popup.default_pattern == null:
+			return
+		else:
+			_pattern = Global.patterns_popup.default_pattern
 	var tex := ImageTexture.new()
 	tex.create_from_image(_pattern.image, 0)
 	$FillPattern/Type/Texture.texture = tex

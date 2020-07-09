@@ -3,8 +3,8 @@ class_name Drawer
 
 class ColorOp:
 	var strength := 1.0
-	
-	
+
+
 	func process(src: Color, _dst: Color) -> Color:
 		return src
 
