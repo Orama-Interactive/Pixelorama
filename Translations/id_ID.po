@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-07-09 11:15\n"
+"PO-Revision-Date: 2020-07-09 11:22\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -181,16 +181,16 @@ msgid "New palette"
 msgstr "Palet baru"
 
 msgid "New brush"
-msgstr ""
+msgstr "Brush baru"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Pola baru"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Frame horisontal:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Frame vertikal:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Simpan \"sprite\" dengan .pxo"
@@ -372,7 +372,7 @@ msgid "Light"
 msgstr "Terang"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Balikkan warna"
 
 msgid "Desaturation"
 msgstr "Desaturasi"
@@ -384,7 +384,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ganti Hue/Saturation/Value"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Atur HSV"
 
 msgid "Type:"
 msgstr ""
