@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-07-04 23:28\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -107,6 +107,15 @@ msgstr "Malfari"
 
 msgid "Redo"
 msgstr "Refari"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Forigi"
 
 msgid "Scale Image"
 msgstr "Skali bildon"
@@ -1195,7 +1204,7 @@ msgid "Close"
 msgstr "Fermi"
 
 msgid "Delete"
-msgstr "Forigi"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
