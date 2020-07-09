@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-07-09 12:40\n"
+"PO-Revision-Date: 2020-07-09 19:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,16 +28,16 @@ msgid "Please Confirm..."
 msgstr "Confirme, por favor..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nombre del archivo:"
 
 msgid "Image Size"
 msgstr "Tamaño de la imagen"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Tamaño del lienzo"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Tamaño del marco"
 
 msgid "Width:"
 msgstr "Ancho:"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Alto:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 msgid "File"
 msgstr "Archivo"
@@ -109,7 +109,7 @@ msgid "Redo"
 msgstr "Rehacer"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 msgid "Paste"
 msgstr ""
@@ -345,13 +345,13 @@ msgid "Smooth Zoom"
 msgstr ""
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Añade una transición más suave cuando se acerca o aleja"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sensibilidad de la presión de la tableta:"
 
 msgid "None"
-msgstr ""
+msgstr "Nada"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
