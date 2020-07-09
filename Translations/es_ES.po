@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-07-09 19:18\n"
+"PO-Revision-Date: 2020-07-09 19:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -112,10 +112,10 @@ msgid "Copy"
 msgstr "Copiar"
 
 msgid "Paste"
-msgstr ""
+msgstr "Pegar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 msgid "Scale Image"
 msgstr "Escalar imagen"
@@ -124,7 +124,7 @@ msgid "Crop Image"
 msgstr "Recortar la imagen"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Redimensionar lienzo"
 
 msgid "Rotate Image"
 msgstr "Rotar Imagen"
@@ -157,7 +157,7 @@ msgid "Show Animation Timeline"
 msgstr "Mostrar timeline de animación"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Modo zen"
 
 msgid "Fill with color:"
 msgstr "Rellenar con color:"
@@ -172,34 +172,34 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importar como:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Nueva pestaña"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Nuevo fotograma"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nueva capa"
 
 msgid "New palette"
-msgstr ""
+msgstr "Nueva paleta"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nuevo pincel"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nuevo patrón"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Fotogramas horizontales:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Fotogramas verticales:"
 
 msgid "Save Sprite as .pxo"
 msgstr "Guardar Sprite como .pxo"
@@ -270,22 +270,22 @@ msgid "All frames as multiple files"
 msgstr "Todos los fotogramas como múltiples archivos"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Todos los fotogramas como una animación de un solo archivo"
 
 msgid "Background:"
-msgstr ""
+msgstr "Fondo:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Dirección:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Hacia adelante"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Reversa"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping Pong"
 
 msgid "Columns"
 msgstr "Columnas"
@@ -327,7 +327,7 @@ msgid "Trilinear"
 msgstr "Trilineal"
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "Language"
 msgstr "Idioma"
@@ -336,13 +336,13 @@ msgid "Themes"
 msgstr "Temas"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Lienzo"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Teclas de acceso directo"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Zoom suavizado"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Añade una transición más suave cuando se acerca o aleja"
@@ -351,10 +351,10 @@ msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilidad de la presión de la tableta:"
 
 msgid "None"
-msgstr "Nada"
+msgstr "Ninguno"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Afectar opacidad del pincel"
 
 msgid "Color:"
 msgstr "Color:"
@@ -372,7 +372,7 @@ msgid "Gray"
 msgstr "Gris"
 
 msgid "Blue"
-msgstr ""
+msgstr "Azul"
 
 msgid "Caramel"
 msgstr ""
@@ -381,7 +381,7 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Invertir Colores"
 
 msgid "Desaturation"
 msgstr "Desaturación"
@@ -390,28 +390,28 @@ msgid "Outline"
 msgstr "Silueta"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ajustar Matiz/Saturación/Valor"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajustar HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Ángulo:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Matiz"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturación"
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -426,7 +426,7 @@ msgid "View Splash Screen"
 msgstr "Mostrar Pantalla de bienvenida"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentación en línea"
 
 msgid "Issue Tracker"
 msgstr "Gestor de Problemas"
@@ -438,7 +438,7 @@ msgid "About Pixelorama"
 msgstr "Acerca de Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Desarrollado por Orama Interactive"
 
 msgid "Website"
 msgstr "Sitio Web"
@@ -480,7 +480,7 @@ msgid "Russian"
 msgstr "Ruso"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Chino (simplificado)"
 
 msgid "Chinese Traditional"
 msgstr "Chino tradicional"
@@ -489,31 +489,31 @@ msgid "Italian"
 msgstr "Italiano"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letón"
 
 msgid "Spanish"
 msgstr "Español"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesio"
 
 msgid "Czech"
-msgstr ""
+msgstr "Checo"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Árabe"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Noruego"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coreano"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
@@ -540,19 +540,19 @@ msgid "copy"
 msgstr "copiar"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "¿Estás seguro que quieres salir de Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Imagen sin guardad"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Tienes cambios sin guardar. Si sigues, perderás todo tu progreso."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "¿Guardar antes de salir?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Tienes un progreso sin guardar. ¿Cómo quieres continuar?"
 
 msgid "Save & Exit"
 msgstr "Guardar y salir"
@@ -567,18 +567,26 @@ msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Selección rectangular\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Presione %s para mover el contenido"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selector de color\n"
+"Seleccione un color de un píxel del sprite\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Draw Tools"
 msgstr "Herramientas de Dibujo"
@@ -587,23 +595,33 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Lápiz\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Mantén pulsado %s para crear una línea"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Borrador\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Mantén pulsado %s para crear una línea"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Cubo de pintura\n\n"
+"%s para botón izquierdo del ratón\n"
+"%s para botón derecho del ratón"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Iluminar/Oscurecer\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Choose a color for the left tool"
 msgstr ""
@@ -763,16 +781,16 @@ msgid "Right Color"
 msgstr "Color derecho"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Modo:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Acercar"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Alejar"
 
 msgid "Options:"
-msgstr ""
+msgstr "Opciones:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -808,15 +826,18 @@ msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Reproduce la animación hacia atrás (de final a principio)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Reproducir la animación hacia adelante (de principio a fin)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Ir al siguiente marco\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
@@ -854,11 +875,12 @@ msgid "Manage frame tags"
 msgstr ""
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "La animación sólo se reproduce en fotogramas de la misma etiqueta"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Si se selecciona, la animación se reproduce sólo en los marcos que tienen la misma etiqueta.\n"
+"Si no es así, la animación se reproducirá para todos los marcos, ignorando etiquetas."
 
 msgid "Blue-Red Mode"
 msgstr "Modo Rojo-Azul"
@@ -882,10 +904,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Vincular celda"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Desvincular celda"
 
 msgid "Layer"
 msgstr "Capa"
@@ -900,25 +922,25 @@ msgid "Remove current layer"
 msgstr "Eliminar capa actual"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Mover capa hacia arriba"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Mover capa hacia abajo"
 
 msgid "Clone current layer"
 msgstr "Clonar capa actual"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Combinar la capa actual con la de abajo"
 
 msgid "Opacity:"
 msgstr "Opacidad:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Alternar visibilidad de capa(s)"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Bloquear/desbloquear capa"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -931,7 +953,7 @@ msgid "Palettes"
 msgstr "Paletas"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Añadir una nueva paleta"
 
 msgid "Edit currently selected palette"
 msgstr ""
@@ -1024,7 +1046,7 @@ msgid "File saved"
 msgstr "Archivo guardado"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Archivo guardado automáticamente"
 
 msgid "File failed to open"
 msgstr ""
@@ -1117,10 +1139,10 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Predeterminado"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 msgid "Rectangular Selection"
 msgstr ""
@@ -1144,7 +1166,7 @@ msgid "Lighten/Darken"
 msgstr ""
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Cambiar colores"
 
 msgid "Set the shortcut"
 msgstr ""
@@ -1153,19 +1175,19 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Ya asignado"
 
 msgid "Left Tool:"
 msgstr ""
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Una herramienta asignada al botón izquierdo del ratón"
 
 msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Una herramienta asignada al botón derecho del ratón"
 
 msgid "Cannot find last project file."
 msgstr ""
@@ -1204,14 +1226,15 @@ msgid "Close"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Se ha encontrado la copia de seguridad guardada para %s.\n"
+"¿Desea cargarla?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Copia de seguridad cargada"
 
 msgid "Remove currently selected palette"
 msgstr ""
