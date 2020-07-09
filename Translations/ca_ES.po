@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 18:49\n"
+"PO-Revision-Date: 2020-07-09 19:09\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -254,13 +254,13 @@ msgid "Resize:"
 msgstr ""
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Cancel·lar exportació"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Alerta!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Seleccionar carpeta actual"
 
 msgid "Open a Directory"
 msgstr "Obrir directori"
@@ -269,28 +269,28 @@ msgid "All frames as multiple files"
 msgstr "Tots els fotogrames com a mútliples fitxers"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Tots els fotogrames com a un fitxer d'animació únic"
 
 msgid "Background:"
-msgstr ""
+msgstr "Fons:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direcció:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Cap endavant"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Cap endarrere"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Columnes"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Columnes:"
 
 msgid "Rows"
 msgstr "Files"
@@ -305,46 +305,46 @@ msgid "Directories & Files:"
 msgstr "Directoris i fitxers:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Crear una carpeta"
 
 msgid "File:"
-msgstr ""
+msgstr "Fitxer:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolació:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Més proper"
 
 msgid "Bilinear"
 msgstr "Bilineal"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineal"
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "Language"
-msgstr ""
+msgstr "Llenguatge"
 
 msgid "Themes"
-msgstr ""
+msgstr "Temes"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Llenç"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Accesos directos"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Zoom suavitzat"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Afegeix una transició suau quan es fa zoom"
 
 msgid "Tablet pressure sensitivity:"
 msgstr ""
