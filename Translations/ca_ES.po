@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 19:18\n"
+"PO-Revision-Date: 2020-07-09 23:33\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -224,10 +224,10 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Fotograma"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Fotogrames:"
 
 msgid "All Frames"
 msgstr ""
