@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-07-09 19:39\n"
+"PO-Revision-Date: 2020-07-09 19:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "New tab"
 msgstr "Nueva pestaña"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Hoja de sprites (nueva pestaña)"
 
 msgid "New frame"
 msgstr "Nuevo fotograma"
@@ -624,38 +624,39 @@ msgstr "Iluminar/Oscurecer\n\n"
 "%s para el botón derecho del ratón"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Elegir un color para la herramienta izquierda"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Elegir un color para la herramienta derecha"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Cambiar color izquierdo y derecho\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Restablecer los colores a su estado predeterminado (negro a la izquierda, blanco a la derecha)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Herramienta izquierda"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Herramienta derecha"
 
 msgid "Left pixel indicator"
 msgstr "Indicador de píxel izquierdo"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Mostrar el indicador de píxeles del clic izquierdo o el borrador en el lienzo al dibujar"
 
 msgid "Right pixel indicator"
 msgstr "Indicador de píxel derecho"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Mostrar el indicador de píxeles del clic derecho o el borrador en el lienzo al dibujar"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Mostrar icono de herramienta izquierda"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
@@ -944,7 +945,8 @@ msgstr "Bloquear/desbloquear capa"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Activar/desactivar vínculo de celdas\n\n"
+"Se comparten celdas a través de múltiples fotogramas"
 
 msgid "Palette"
 msgstr "Paleta"
@@ -956,10 +958,10 @@ msgid "Add a new palette"
 msgstr "Añadir una nueva paleta"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Editar la paleta seleccionada"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Elegir una paleta"
 
 msgid "Undo: Draw"
 msgstr "Deshacer: Dibujar"
@@ -1028,16 +1030,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Rehacer: Eliminar Pincel Personalizado"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Deshacer: Modificar la etiqueta del fotograma"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Rehacer: Modificar la etiqueta del fotograma"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Deshacer: Eliminar etiqueta de fotograma"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Rehacer: Eliminar la etiqueta del fotograma"
 
 msgid "Move Guide"
 msgstr "Mover Guía"
@@ -1049,10 +1051,10 @@ msgid "File autosaved"
 msgstr "Archivo guardado automáticamente"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Error al abrir el archivo"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Error al guardar"
 
 msgid "File exported"
 msgstr "Archivo exportado"
@@ -1064,7 +1066,7 @@ msgid "Import Palette"
 msgstr "Importar Paleta"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Crear paleta a partir del sprite actual"
 
 msgid "Palette Name:"
 msgstr "Nombre de la Paleta:"
@@ -1073,7 +1075,7 @@ msgid "Color Name:"
 msgstr "Nombre del Color:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Usar los colores actuales de izquierda y derecha"
 
 msgid "Create a new empty palette?"
 msgstr "¿Crear una nueva paleta vacía?"
@@ -1091,16 +1093,16 @@ msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "¿Quieres que tu nombre o tu empresa se muestren en la pantalla de inicio?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Conviértete en Patrocinador Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Conviértete en Patrocinador Gold"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Conviértete en Patron"
 
 msgid "Don't show again"
 msgstr "No mostrar de nuevo"
@@ -1109,28 +1111,28 @@ msgid "Image Options"
 msgstr "Opciones de imagen"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Ancho por Defecto:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Un ancho por defecto de una nueva imagen"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Altura por Defecto:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Una altura por defecto de una nueva imagen"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Color de relleno predeterminado:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Un color de fondo predeterminado de una nueva imagen"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Bloquear relación de aspecto:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Plantillas:"
 
 msgid "Preset"
 msgstr ""
@@ -1145,76 +1147,76 @@ msgid "Custom"
 msgstr "Personalizado"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Selección rectangular"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Selector de color"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Lápiz"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Borrador"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Cubo de pintura"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Iluminar/Oscurecer"
 
 msgid "Switch Colors"
 msgstr "Cambiar colores"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Selecciona el acceso directo"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Presione una tecla o una combinación de teclas para establecer el acceso directo"
 
 msgid "Already assigned"
 msgstr "Ya asignado"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Herramienta izquierda:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr "Una herramienta asignada al botón izquierdo del ratón"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Herramienta derecha:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Una herramienta asignada al botón derecho del ratón"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "No se pudo encontrar el último archivo de proyecto."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "¡No has guardado o abierto ningún proyecto en Pixelorama aún!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Abrir el último proyecto"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Abrir el último proyecto..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Abrir el último proyecto al iniciar"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Abre el último proyecto abierto al iniciar"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Activar guardado automático"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Intervalo de guardado automático:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minuto(s)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
