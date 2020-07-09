@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 19:09\n"
+"PO-Revision-Date: 2020-07-09 19:18\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -347,16 +347,16 @@ msgid "Adds a smoother transition when zooming in or out"
 msgstr "Afegeix una transició suau quan es fa zoom"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sensibilitat de la pressió de la tableta:"
 
 msgid "None"
-msgstr ""
+msgstr "Cap"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Color:"
 
 msgid "Guide color:"
 msgstr ""
@@ -437,136 +437,139 @@ msgid "About Pixelorama"
 msgstr ""
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Desenvolupat per Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Lloc web"
 
 msgid "Donate"
-msgstr ""
+msgstr "Feu una donació"
 
 msgid "Developers"
-msgstr ""
+msgstr "Desenvolupadors"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Col·laboradors"
 
 msgid "Donors"
 msgstr ""
 
 msgid "Translators"
-msgstr ""
+msgstr "Traductors"
 
 msgid "English"
-msgstr ""
+msgstr "Anglès"
 
 msgid "Greek"
-msgstr ""
+msgstr "Grec"
 
 msgid "French"
-msgstr ""
+msgstr "Francès"
 
 msgid "German"
-msgstr ""
+msgstr "Alemany"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polonès"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portuguès de Brasil"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rus"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Xinès Simplificat"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Xinès Tradicional"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italià"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letó"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Espanyol (Castellá)"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesi"
 
 msgid "Czech"
-msgstr ""
+msgstr "Txec"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Àrab"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turc"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Noruec"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coreà"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Equip desenvolupador"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Programador principal"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Dissenyador de UI"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Col·laboradors de Github"
 
 msgid "Art by"
-msgstr ""
+msgstr "Art per"
 
 msgid "untitled"
-msgstr ""
+msgstr "sense títol"
 
 msgid "imported"
-msgstr ""
+msgstr "importat"
 
 msgid "copy"
-msgstr ""
+msgstr "copiar"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Esteu segur que voleu tancar Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Imatge no desada"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Tens canvis sense desar. Si vols contiunar, el progrés es perderá."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Desar abans de sortir?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Tens canvis sense desar. Com vols proceder?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Desar i sortir"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Sortir sense desar"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Eines d'utilitat"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Secció rectangular\n\n"
+"%s per botó esquerre de l'ratolí\n"
+"%s per botó dret de l'ratolí\n\n"
+"Pressiona %s per a moure el contingut"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
