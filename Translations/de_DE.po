@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-07-04 23:28\n"
+"PO-Revision-Date: 2020-07-09 12:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -107,6 +107,15 @@ msgstr "Rückgängig"
 
 msgid "Redo"
 msgstr "Wiederherstellen"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Löschen"
 
 msgid "Scale Image"
 msgstr "Bild skalieren"
@@ -1222,7 +1231,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Delete"
-msgstr "Löschen"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
