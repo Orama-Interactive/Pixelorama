@@ -10,16 +10,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 12:39\n"
+"PO-Revision-Date: 2020-07-09 18:20\n"
 
 msgid "OK"
-msgstr ""
+msgstr "D'acord"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·lar"
 
 msgid "Open"
-msgstr ""
+msgstr "Obre"
 
 msgid "Save"
 msgstr ""
