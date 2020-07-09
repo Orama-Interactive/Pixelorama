@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 23:33\n"
+"PO-Revision-Date: 2020-07-09 23:46\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -40,10 +40,10 @@ msgid "Frame Size"
 msgstr "Mida del marc"
 
 msgid "Width:"
-msgstr ""
+msgstr "Amplada:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Alçada:"
 
 msgid "Center"
 msgstr "Centre"
@@ -55,7 +55,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "View"
-msgstr ""
+msgstr "Veure"
 
 msgid "Image"
 msgstr "Imatge"
@@ -184,13 +184,13 @@ msgid "New frame"
 msgstr "Nou fotograma"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nova capa"
 
 msgid "New palette"
 msgstr "Nova paleta"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nou pinzell"
 
 msgid "New pattern"
 msgstr "Nou patró"
@@ -214,14 +214,15 @@ msgid "File Exists, Overwrite?"
 msgstr ""
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "El fitxer \"%s\" ja existeix. El vos sobreescriure?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "La ruta o directori de l'arxiu no existeix!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "No es pot carregar el fitxer '%s'.\n"
+"Codi d'error: %s"
 
 msgid "Frame"
 msgstr "Fotograma"
@@ -230,28 +231,28 @@ msgid "Frames:"
 msgstr "Fotogrames:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Tots els fotogrames"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animació"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Previsualització:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Fotograma:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientació:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Navegar"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Redimensionar:"
 
 msgid "Cancel Export"
 msgstr "Cancel·lar exportació"
@@ -299,7 +300,7 @@ msgid "Rows:"
 msgstr "Files:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Ruta:"
 
 msgid "Directories & Files:"
 msgstr "Directoris i fitxers:"
@@ -365,16 +366,16 @@ msgid "System Language"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "Fosc"
 
 msgid "Gray"
-msgstr ""
+msgstr "Gris"
 
 msgid "Blue"
 msgstr ""
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramel"
 
 msgid "Light"
 msgstr ""
@@ -395,22 +396,22 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipus:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Angle:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Tonalitat"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturació"
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 msgid "Diagonal"
 msgstr ""
@@ -425,16 +426,16 @@ msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentació en línia"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Rastrejador d'incidències"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Registre de canvis"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Sobre Pixelorama"
 
 msgid "Developed by Orama Interactive"
 msgstr "Desenvolupat per Orama Interactive"
@@ -452,7 +453,7 @@ msgid "Contributors"
 msgstr "Col·laboradors"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donadors"
 
 msgid "Translators"
 msgstr "Traductors"
@@ -583,7 +584,7 @@ msgid "Color Picker\n"
 msgstr ""
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Eines de dibuix"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -621,19 +622,19 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 msgid "Left tool"
-msgstr ""
+msgstr "Eina esquerra"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Eina dreta"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Indicador de píxel esquerre"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indicador de píxel dret"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
@@ -696,25 +697,25 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Pinzell:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Triar un pinzell"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Pinzell: Píxel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Pinzell: Cercle"
 
 msgid "Brush: Filled Circle"
 msgstr ""
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Pinzell personalitzat"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Mida del pinzell:"
 
 msgid "Brush color from"
 msgstr ""
@@ -726,22 +727,22 @@ msgid "Fill area:"
 msgstr ""
 
 msgid "Same color area"
-msgstr ""
+msgstr "Àrea del mateix color"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Pixels del mateix color"
 
 msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Color seleccionat"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Patró"
 
 msgid "Offset"
-msgstr ""
+msgstr "Desfasament"
 
 msgid "Lighten"
 msgstr ""
@@ -750,7 +751,7 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Quantitat:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
@@ -759,13 +760,13 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "Color esquerre"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Color dret"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mode:"
 
 msgid "Zoom in"
 msgstr ""
@@ -774,10 +775,10 @@ msgid "Zoom out"
 msgstr ""
 
 msgid "Options:"
-msgstr ""
+msgstr "Opcions:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Ajustar al fotograma"
 
 msgid "100% Zoom"
 msgstr ""
@@ -798,7 +799,7 @@ msgid "Vertical"
 msgstr ""
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Fotograma actual:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -841,7 +842,7 @@ msgid "Cycle loop"
 msgstr ""
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Bucle Ping-Pong"
 
 msgid "Onion Skinning:"
 msgstr ""
