@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-09 23:46\n"
+"PO-Revision-Date: 2020-07-09 23:56\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -211,7 +211,7 @@ msgid "Export Sprite"
 msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "El fitxer existeix, sobrescriure?"
 
 msgid "File %s already exists. Overwrite?"
 msgstr "El fitxer \"%s\" ja existeix. El vos sobreescriure?"
@@ -360,10 +360,10 @@ msgid "Color:"
 msgstr "Color:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Color de la guia:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Idioma del sistema"
 
 msgid "Dark"
 msgstr "Fosc"
@@ -372,7 +372,7 @@ msgid "Gray"
 msgstr "Gris"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 msgid "Caramel"
 msgstr "Caramel"
@@ -381,13 +381,13 @@ msgid "Light"
 msgstr ""
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Invertir colors"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturació"
 
 msgid "Outline"
-msgstr ""
+msgstr "Contorn"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
@@ -414,16 +414,16 @@ msgid "Apply"
 msgstr "Aplicar"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Gruix:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Mostrar pantalla de benvinguda"
 
 msgid "Online Docs"
 msgstr "Documentació en línia"
@@ -609,10 +609,10 @@ msgid "Lighten/Darken\n\n"
 msgstr ""
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Triar un color per l'eina esquerra"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Triar un color per l'eina dreta"
 
 msgid "Switch left and right colors\n"
 "(%s)"
@@ -640,13 +640,13 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Mostrar icona de la eina esquerra"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Mostrar icona de la eina dreta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
@@ -658,22 +658,22 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Ample de la quadrícula:"
 
 msgid "Sets how far apart are vertical lines of the grid"
 msgstr ""
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Alçada de la quadrícula:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Color de la quadrícula:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Un color de la quadrícula"
 
 msgid "Checker size:"
 msgstr ""
@@ -819,11 +819,13 @@ msgstr ""
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Anar al següent fotograma\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Anar al últim fotograma\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -833,13 +835,14 @@ msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Quants fotogrames per segon ha de ser la vista prèvia de l'animació?\n"
+"Com més FPS, més ràpida es reprodueix l’animació."
 
 msgid "No loop"
-msgstr ""
+msgstr "Sense bucle"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Bucle de cicle"
 
 msgid "Ping-pong loop"
 msgstr "Bucle Ping-Pong"
@@ -876,10 +879,10 @@ msgid "Clone Frame"
 msgstr ""
 
 msgid "Move Left"
-msgstr ""
+msgstr "Moure a l'Esquerra"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Moure a la Dreta"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -891,34 +894,34 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Capa"
 
 msgid "Layers"
-msgstr ""
+msgstr "Capes"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Crear una nova capa"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Esborrar la capa actual"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Moure la capa cap amunt"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Moure la capa cap avall"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Clonar la capa actual"
 
 msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacitat:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Activa/desactiva la visibilitat de la capa"
 
 msgid "Lock/unlock layer"
 msgstr ""
@@ -940,13 +943,13 @@ msgid "Edit currently selected palette"
 msgstr ""
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Triar una paleta"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Desfer: Dibuixar"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Refer: Dibuixar"
 
 msgid "Undo: Rectangle Select"
 msgstr ""
