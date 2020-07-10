@@ -22,6 +22,13 @@ func _ready() -> void:
 	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
 	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
 
+	var zstd_checkbox := CheckBox.new()
+	zstd_checkbox.name = "ZSTDCompression"
+	zstd_checkbox.pressed = true
+	zstd_checkbox.text = "Use ZSTD Compression"
+	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	$SaveSprite.get_vbox().add_child(zstd_checkbox)
+
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 	show_splash_screen()
@@ -136,7 +143,8 @@ func _on_OpenSprite_file_selected(path : String) -> void:
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
-	OpenSave.save_pxo_file(path, false)
+	var zstd = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
+	OpenSave.save_pxo_file(path, false, zstd)
 
 	if is_quitting_on_save:
 		_on_QuitDialog_confirmed()
@@ -146,7 +154,7 @@ func _on_SaveSpriteHTML5_confirmed() -> void:
 	var file_name = Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text
 	file_name += ".pxo"
 	var path = "user://".plus_file(file_name)
-	OpenSave.save_pxo_file(path, false)
+	OpenSave.save_pxo_file(path, false, false)
 
 
 func _on_OpenSprite_popup_hide() -> void:

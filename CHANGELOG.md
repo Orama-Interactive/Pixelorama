@@ -19,6 +19,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - You can now preview how the frames of the spritesheet you are importing will look.
 - You can now import image files as layers. Their size will be cropped to the project's size.
 - You can import image files as brushes, patterns and palettes.
+- Selection region and size are now being shown when making a selection on the top, next to the position label. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 
 ### Changed
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
@@ -27,13 +28,19 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Imported frames are now being cropped to the project's size. It is no longer possible to have multiple sizes for each frame at all in the same project.
 - Pixel perfect is no longer enabled when the brush size is bigger than 1px.
 - The .pxo file structure has been changed. It's now consisted of a JSON-structured metadata part, where all the data that can be stored as text are, and a binary part, that contain all the actual image data for each cel and project brush.
+- You can now choose if you want your .pxo to use ZSTD compression or not.
+- To make a straight line, you now have to hold Shift while dragging (moving and pressing) your mouse. Releasing your mouse button makes the line. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - When making a straight line, a preview of how the line's pixels will look is now being shown. ([#260](https://github.com/Orama-Interactive/Pixelorama/pull/260))
+- Drawing lines with Ctrl are now constrained at 1:1 and 1:2 ([#201](https://github.com/Orama-Interactive/Pixelorama/issues/201))
+- Pixelorama now remembers the selected colors, tools and their options when it's closed and re-opened. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
+- Drawing brushes with mirror also mirrors the images of the brushes themselves. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - When making a new palette or importing one and its name already exists, Pixelorama will add a number to its name. For example, "Palette_Name" would become "Palette_Name (2)", "Palette_Name (3)", etc.
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
 
 ### Fixed
 - Exporting large images and drawing with large image brushes is now a lot faster. (Because of Godot 3.2.2)
+- Pixel perfect strokes no longer leave gaps when the mouse is moving fast. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Fixed failed imports of gpl palettes by adding support for the newer variant of gpl files. ([#250](https://github.com/Orama-Interactive/Pixelorama/pull/250))
 - Fixed alpha blending and lighting/darkening issues when drawing pixels with mirroring.
 - Fixed issue where if you moved a frame to the start (move left), it was invisible.
@@ -41,6 +48,8 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Grid and guides are now longer being displayed on previews. ([#205](https://github.com/Orama-Interactive/Pixelorama/issues/205))
 - Fixed a rare problem where the custom mouse cursor's image was failing to load.
 - Importing corrupted image files and non-palette json files no longer crash the app.
+- Drawing brushes no longer have clipping issues. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
+- When undoing a removal of a brush, the brush index is no longer incorrect. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 <br><br>
 
 ## [v0.7] - 2020-05-16

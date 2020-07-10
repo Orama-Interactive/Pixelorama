@@ -264,9 +264,14 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 			tag_line = file.get_line()
 
 
-func save_pxo_file(path : String, autosave : bool, project : Project = Global.current_project) -> void:
-	var file := File.new()
-	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	var file : File = File.new()
+	var err
+	if use_zstd_compression:
+		err = file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+	else:
+		err = file.open(path, File.WRITE)
+
 	if err == OK:
 		if !autosave:
 			project.name = path.get_file()
@@ -284,7 +289,7 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 		file.close()
 
 		if OS.get_name() == "HTML5" and !autosave:
-			err = file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+			err = file.open(path, File.READ)
 			if !err:
 				var file_data = Array(file.get_buffer(file.get_len()))
 				JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
@@ -460,7 +465,7 @@ func _on_Autosave_timeout() -> void:
 			backup_save_paths[i] = "user://backup-" + String(OS.get_unix_time()) + "-%s" % i
 
 		store_backup_path(i)
-		save_pxo_file(backup_save_paths[i], true, Global.projects[i])
+		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
 
 
 # Backup paths are stored in two ways:

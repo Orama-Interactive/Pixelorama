@@ -70,6 +70,9 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
+msgid "Use ZSTD Compression"
+msgstr ""
+
 msgid "Import"
 msgstr ""
 
