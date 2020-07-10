@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-10 12:41\n"
+"PO-Revision-Date: 2020-07-10 13:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -112,7 +112,7 @@ msgid "Copy"
 msgstr "Copier"
 
 msgid "Paste"
-msgstr ""
+msgstr "Coller"
 
 msgid "Delete"
 msgstr "Supprimer"
@@ -124,7 +124,7 @@ msgid "Crop Image"
 msgstr "Rogner l'image"
 
 msgid "Resize Canvas"
-msgstr "Redimensionner le Canevas"
+msgstr "Redimensionner le canevas"
 
 msgid "Rotate Image"
 msgstr "Pivoter l'image"
@@ -1232,7 +1232,7 @@ msgid "Close"
 msgstr "Fermer"
 
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
