@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-07-09 12:40\n"
+"PO-Revision-Date: 2020-07-10 23:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -80,6 +80,9 @@ msgstr "Salvar..."
 
 msgid "Save as..."
 msgstr "Salvar como..."
+
+msgid "Use ZSTD Compression"
+msgstr ""
 
 msgid "Import"
 msgstr "Importar"
