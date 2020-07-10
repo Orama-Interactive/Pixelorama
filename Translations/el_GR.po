@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-09 12:40\n"
+"PO-Revision-Date: 2020-07-10 23:10\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -80,6 +80,9 @@ msgstr "Αποθήκευση..."
 
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
+
+msgid "Use ZSTD Compression"
+msgstr ""
 
 msgid "Import"
 msgstr "Εισαγωγή"
