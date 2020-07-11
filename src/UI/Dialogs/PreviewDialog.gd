@@ -127,8 +127,8 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 		var scale_ratio = image.get_size().y / image_size_y
 		image_size_x = image.get_size().x / scale_ratio
 
-	var offset_x = (300 - image_size_x) / 2
-	var offset_y = (300 - image_size_y) / 2
+	var offset_x = (texture_rect.rect_size.x - image_size_x) / 2
+	var offset_y = (texture_rect.rect_size.y - image_size_y) / 2
 
 	if value > 1:
 		var line_distance

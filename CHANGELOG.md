@@ -19,6 +19,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - You can now preview how the frames of the spritesheet you are importing will look.
 - You can now import image files as layers. Their size will be cropped to the project's size.
 - You can import image files as brushes, patterns and palettes.
+- Added "Copy", "Paste" and "Delete" options in the Edit menu. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Selection region and size are now being shown when making a selection on the top, next to the position label. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 
 ### Changed

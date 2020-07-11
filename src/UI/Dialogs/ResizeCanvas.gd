@@ -39,8 +39,8 @@ func _on_ResizeCanvas_about_to_show() -> void:
 		layer_i += 1
 	image.unlock()
 
-	update_preview()
 	preview_rect.get_node("TransparentChecker").rect_size = preview_rect.rect_size
+	update_preview()
 
 
 func _on_ResizeCanvas_confirmed() -> void:
@@ -86,3 +86,18 @@ func update_preview() -> void:
 	var preview_texture := ImageTexture.new()
 	preview_texture.create_from_image(preview_image, 0)
 	preview_rect.texture = preview_texture
+	update_transparent_background_size(preview_image)
+
+
+func update_transparent_background_size(preview_image : Image) -> void:
+	var image_size_y = preview_rect.rect_size.y
+	var image_size_x = preview_rect.rect_size.x
+	if preview_image.get_size().x > preview_image.get_size().y:
+		var scale_ratio = preview_image.get_size().x / image_size_x
+		image_size_y = preview_image.get_size().y / scale_ratio
+	else:
+		var scale_ratio = preview_image.get_size().y / image_size_y
+		image_size_x = preview_image.get_size().x / scale_ratio
+
+	preview_rect.get_node("TransparentChecker").rect_size.x = image_size_x
+	preview_rect.get_node("TransparentChecker").rect_size.y = image_size_y
