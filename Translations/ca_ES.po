@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-11 03:35\n"
+"PO-Revision-Date: 2020-07-11 03:45\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -811,7 +811,8 @@ msgstr "Anar al primer fotograma\n"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Anar al fotograma anterior\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
@@ -861,7 +862,7 @@ msgid "Future Frames"
 msgstr ""
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Gestiona etiquetes de fotogrames"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1133,7 +1134,7 @@ msgid "Custom"
 msgstr "Personalitzat"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Selecció de Rectangle"
 
 msgid "Zoom"
 msgstr "Ampliar"
@@ -1178,16 +1179,16 @@ msgid "A tool assigned to the right mouse button"
 msgstr ""
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "No es pot trobar el fitxer del projecte més recent."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Obrir Projecte més recent"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Obrir Projecte més recent..."
 
 msgid "Open last project on startup"
 msgstr ""
