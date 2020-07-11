@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-07-10 23:10\n"
+"PO-Revision-Date: 2020-07-11 00:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Salva come..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Usa Compressione ZSTD"
 
 msgid "Import"
 msgstr "Importa"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Ripeti"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 msgid "Paste"
-msgstr ""
+msgstr "Incolla"
 
 msgid "Delete"
 msgstr "Elimina"
@@ -1235,7 +1235,7 @@ msgid "Close"
 msgstr "Chiudi"
 
 msgid "Delete"
-msgstr ""
+msgstr "Elimina"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
