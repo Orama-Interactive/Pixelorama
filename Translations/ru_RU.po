@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-10 23:10\n"
+"PO-Revision-Date: 2020-07-11 23:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Сохранить как..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Использовать сжатие ZSTD"
 
 msgid "Import"
 msgstr "Импортировать"
