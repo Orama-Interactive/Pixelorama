@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-10 23:09\n"
+"PO-Revision-Date: 2020-07-11 03:25\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Desa com a..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Utilitzar compressió ZSTD"
 
 msgid "Import"
 msgstr "Importar"
@@ -205,10 +205,10 @@ msgid "Vertical frames:"
 msgstr "Fotogrames verticales:"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Desar Sprite com a .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Exportar Sprite com a .png"
 
 msgid "Export Sprite"
 msgstr "Exportar Sprite"
@@ -357,7 +357,7 @@ msgid "None"
 msgstr "Cap"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Afectar l'opacitat de l'pinzell"
 
 msgid "Color:"
 msgstr "Color:"
@@ -381,7 +381,7 @@ msgid "Caramel"
 msgstr "Caramel"
 
 msgid "Light"
-msgstr ""
+msgstr "Llum"
 
 msgid "Invert Colors"
 msgstr "Invertir colors"
@@ -655,7 +655,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr ""
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Color de la guia:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
@@ -727,7 +727,7 @@ msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Omplir area:"
 
 msgid "Same color area"
 msgstr "Àrea del mateix color"
@@ -736,7 +736,7 @@ msgid "Same color pixels"
 msgstr "Pixels del mateix color"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Omplir amb:"
 
 msgid "Selected Color"
 msgstr "Color seleccionat"
@@ -787,10 +787,10 @@ msgid "100% Zoom"
 msgstr ""
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Reflex"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horitzontal"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -799,14 +799,15 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Fotograma actual:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Anar al primer fotograma\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
@@ -870,10 +871,10 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Mode Blau-Vermell"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Afegir un nou fotograma"
 
 msgid "Remove Frame"
 msgstr ""
