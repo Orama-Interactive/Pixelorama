@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-07-10 23:10\n"
+"PO-Revision-Date: 2020-07-12 00:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Proszę potwierdzić..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nazwa pliku:"
 
 msgid "Image Size"
 msgstr "Rozmiar obrazu"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Zapisz jako..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Użyj kompresji ZSTD"
 
 msgid "Import"
 msgstr "Importowanie"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Przywróć zmiany"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopiuj"
 
 msgid "Paste"
-msgstr ""
+msgstr "Wklej"
 
 msgid "Delete"
 msgstr "Usuń"
@@ -1234,7 +1234,7 @@ msgid "Close"
 msgstr "Zamknij"
 
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
