@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-07-10 23:10\n"
+"PO-Revision-Date: 2020-07-12 00:20\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Simpan sebagai..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Gunakan kompresi ZSTD"
 
 msgid "Import"
 msgstr "Impor"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Redo"
 
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 msgid "Paste"
-msgstr ""
+msgstr "Tempel"
 
 msgid "Delete"
 msgstr "Hapus"
