@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-13 18:49\n"
+"PO-Revision-Date: 2020-07-13 18:56\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1001,10 +1001,10 @@ msgid "Undo: Add Layer"
 msgstr ""
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Refer: Afegir Capa"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Desfer: Eliminar Capa"
 
 msgid "Redo: Remove Layer"
 msgstr ""
@@ -1103,10 +1103,10 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Editar Paleta"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patróns:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
