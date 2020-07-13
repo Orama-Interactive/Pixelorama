@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-11 03:45\n"
+"PO-Revision-Date: 2020-07-13 18:18\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -203,6 +203,18 @@ msgstr "Fotogrames horitzontals:"
 
 msgid "Vertical frames:"
 msgstr "Fotogrames verticales:"
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Desar Sprite com a .pxo"
@@ -719,6 +731,12 @@ msgstr "Pinzell personalitzat"
 
 msgid "Brush size:"
 msgstr "Mida del pinzell:"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr ""
