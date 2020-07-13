@@ -156,11 +156,12 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 
 
 func add_brush(type : int) -> void:
-	var file_name_ext : String = path.get_file()
-	file_name_ext = brush_name_replace(file_name_ext)
-	var file_name : String = file_name_ext.get_basename()
 	image.convert(Image.FORMAT_RGBA8)
 	if type == BrushTypes.FILE:
+		var file_name_ext : String = path.get_file()
+		file_name_ext = brush_name_replace(file_name_ext)
+		var file_name : String = file_name_ext.get_basename()
+
 		file_name = brush_name_replace(file_name)
 		Brushes.add_file_brush([image], file_name)
 
@@ -170,8 +171,9 @@ func add_brush(type : int) -> void:
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
 	elif type == BrushTypes.PROJECT:
+		var file_name : String =  path.get_file().get_basename()
 		Global.current_project.brushes.append(image)
-		Brushes.add_project_brush(image)
+		Brushes.add_project_brush(image, file_name)
 
 
 # Checks if the brush name already exists

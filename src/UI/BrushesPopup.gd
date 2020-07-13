@@ -71,10 +71,11 @@ static func add_file_brush(images : Array, hint := "") -> void:
 	button.brush.index = button.get_index()
 
 
-static func add_project_brush(image : Image) -> void:
+static func add_project_brush(image : Image, hint := "") -> void:
 	var button = create_button(image)
 	button.brush.type = CUSTOM
 	button.brush.image = image
+	button.hint_tooltip = hint
 	var container = Global.brushes_popup.get_node("TabContainer/Project/ProjectBrushContainer")
 	container.add_child(button)
 	button.brush.index = button.get_index()
