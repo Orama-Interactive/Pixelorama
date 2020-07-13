@@ -154,16 +154,36 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 
 
 func add_brush(type : int) -> void:
-	var file_name : String = path.get_basename().get_file()
+	var file_name_ext : String = path.get_file()
+	file_name_ext = brush_name_replace(file_name_ext)
+	var file_name : String = file_name_ext.get_basename()
 	image.convert(Image.FORMAT_RGBA8)
 	if type == BrushTypes.FILE:
+		file_name = brush_name_replace(file_name)
 		Brushes.add_file_brush([image], file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(path.get_file())
+		var location := "Brushes".plus_file(file_name_ext)
 		var dir = Directory.new()
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
 	elif type == BrushTypes.PROJECT:
 		Global.current_project.brushes.append(image)
 		Brushes.add_project_brush(image)
+
+
+# Checks if the brush name already exists
+# If it does, add a number to its name, for example
+# "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
+func brush_name_replace(name : String) -> String:
+	var i := 1
+	var file_ext = name.get_extension()
+	var temp_name := name
+	var brush_dir := Directory.new()
+	brush_dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+	while brush_dir.file_exists(temp_name):
+		i += 1
+		temp_name = name.get_basename() + " (%s)" % i
+		temp_name += "." + file_ext
+	name = temp_name
+	return name
