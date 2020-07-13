@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-07-10 23:10\n"
+"PO-Revision-Date: 2020-07-13 18:18\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -203,6 +203,18 @@ msgstr "Horizontale frames:"
 
 msgid "Vertical frames:"
 msgstr "Verticale frames:"
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr ""
@@ -714,6 +726,12 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
+msgstr ""
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Brush color from"
