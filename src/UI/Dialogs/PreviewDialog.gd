@@ -62,7 +62,7 @@ func _on_PreviewDialog_confirmed() -> void:
 
 	elif current_import_option == ImageImportOptions.PATTERN:
 		var file_name_ext : String = path.get_file()
-		file_name_ext = pattern_name_replace(file_name_ext)
+		file_name_ext = file_name_replace(file_name_ext, "Patterns")
 		var file_name : String = file_name_ext.get_basename()
 		image.convert(Image.FORMAT_RGBA8)
 		Global.patterns_popup.add(image, file_name)
@@ -159,10 +159,9 @@ func add_brush(type : int) -> void:
 	image.convert(Image.FORMAT_RGBA8)
 	if type == BrushTypes.FILE:
 		var file_name_ext : String = path.get_file()
-		file_name_ext = brush_name_replace(file_name_ext)
+		file_name_ext = file_name_replace(file_name_ext, "Brushes")
 		var file_name : String = file_name_ext.get_basename()
 
-		file_name = brush_name_replace(file_name)
 		Brushes.add_file_brush([image], file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
@@ -176,29 +175,15 @@ func add_brush(type : int) -> void:
 		Brushes.add_project_brush(image, file_name)
 
 
-# Checks if the brush name already exists
+# Checks if the file already exists
 # If it does, add a number to its name, for example
 # "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
-func brush_name_replace(name : String) -> String:
+func file_name_replace(name : String, folder : String) -> String:
 	var i := 1
 	var file_ext = name.get_extension()
 	var temp_name := name
 	var dir := Directory.new()
-	dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
-	while dir.file_exists(temp_name):
-		i += 1
-		temp_name = name.get_basename() + " (%s)" % i
-		temp_name += "." + file_ext
-	name = temp_name
-	return name
-
-
-func pattern_name_replace(name : String) -> String:
-	var i := 1
-	var file_ext = name.get_extension()
-	var temp_name := name
-	var dir := Directory.new()
-	dir.open(Global.directory_module.xdg_data_home.plus_file("Patterns"))
+	dir.open(Global.directory_module.xdg_data_home.plus_file(folder))
 	while dir.file_exists(temp_name):
 		i += 1
 		temp_name = name.get_basename() + " (%s)" % i
