@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-07-12 00:20\n"
+"PO-Revision-Date: 2020-07-13 18:18\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -203,6 +203,18 @@ msgstr "Frame horisontal:"
 
 msgid "Vertical frames:"
 msgstr "Frame vertikal:"
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Simpan \"sprite\" dengan .pxo"
@@ -735,6 +747,12 @@ msgstr "Kuas kostum"
 
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Warna dari"
