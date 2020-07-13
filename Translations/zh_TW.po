@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-07-10 23:10\n"
+"PO-Revision-Date: 2020-07-13 09:13\n"
 
 msgid "OK"
 msgstr "確定"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "儲存為"
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "使用 ZSTD 壓縮"
 
 msgid "Import"
 msgstr "匯入"
