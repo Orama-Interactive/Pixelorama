@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-07-11 00:36\n"
+"PO-Revision-Date: 2020-07-13 18:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -203,6 +203,18 @@ msgstr "Quadri orizzontali:"
 
 msgid "Vertical frames:"
 msgstr "Quadri verticali:"
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Salva lo Sprite come .pxo"
@@ -735,6 +747,12 @@ msgstr "Pennello personalizzato"
 
 msgid "Brush size:"
 msgstr "Dimensione del pennello:"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Colore del pennello da"
