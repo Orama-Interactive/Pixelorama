@@ -193,6 +193,18 @@ msgstr ""
 msgid "Vertical frames:"
 msgstr ""
 
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
+
 msgid "Save Sprite as .pxo"
 msgstr ""
 
@@ -703,6 +715,12 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
+msgstr ""
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Brush color from"

@@ -2,6 +2,7 @@ extends ConfirmationDialog
 
 
 enum ImageImportOptions {NEW_TAB, SPRITESHEET, NEW_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
+enum BrushTypes {FILE, PROJECT, RANDOM}
 
 var path : String
 var image : Image
@@ -15,6 +16,7 @@ onready var frame_size_label : Label = $VBoxContainer/SizeContainer/FrameSizeLab
 onready var spritesheet_options = $VBoxContainer/HBoxContainer/SpritesheetOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
+onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
 
 
 func _on_PreviewDialog_about_to_show() -> void:
@@ -55,14 +57,8 @@ func _on_PreviewDialog_confirmed() -> void:
 		Global.palette_container.import_image_palette(path, image)
 
 	elif current_import_option == ImageImportOptions.BRUSH:
-		var file_name : String = path.get_basename().get_file()
-		image.convert(Image.FORMAT_RGBA8)
-		Brushes.add_file_brush([image], file_name)
-
-		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(path.get_file())
-		var dir = Directory.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var brush_type_option : int = new_brush_options.get_node("BrushTypeOption").selected
+		add_brush(brush_type_option)
 
 	elif current_import_option == ImageImportOptions.PATTERN:
 		var file_name : String = path.get_basename().get_file()
@@ -81,6 +77,7 @@ func _on_ImportOption_item_selected(id : int) -> void:
 	spritesheet_options.visible = false
 	new_frame_options.visible = false
 	new_layer_options.visible = false
+	new_brush_options.visible = false
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
 
@@ -97,6 +94,9 @@ func _on_ImportOption_item_selected(id : int) -> void:
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
 		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+
+	elif id == ImageImportOptions.BRUSH:
+		new_brush_options.visible = true
 
 
 func _on_HorizontalFrames_value_changed(value : int) -> void:
@@ -151,3 +151,19 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
 	var frame_height = floor(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
+
+
+func add_brush(type : int) -> void:
+	var file_name : String = path.get_basename().get_file()
+	image.convert(Image.FORMAT_RGBA8)
+	if type == BrushTypes.FILE:
+		Brushes.add_file_brush([image], file_name)
+
+		# Copy the image file into the "pixelorama/Brushes" directory
+		var location := "Brushes".plus_file(path.get_file())
+		var dir = Directory.new()
+		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+
+	elif type == BrushTypes.PROJECT:
+		Global.current_project.brushes.append(image)
+		Brushes.add_project_brush(image)
