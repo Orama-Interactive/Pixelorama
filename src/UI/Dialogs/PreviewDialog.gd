@@ -61,12 +61,14 @@ func _on_PreviewDialog_confirmed() -> void:
 		add_brush(brush_type_option)
 
 	elif current_import_option == ImageImportOptions.PATTERN:
-		var file_name : String = path.get_basename().get_file()
+		var file_name_ext : String = path.get_file()
+		file_name_ext = pattern_name_replace(file_name_ext)
+		var file_name : String = file_name_ext.get_basename()
 		image.convert(Image.FORMAT_RGBA8)
 		Global.patterns_popup.add(image, file_name)
 
 		# Copy the image file into the "pixelorama/Patterns" directory
-		var location := "Patterns".plus_file(path.get_file())
+		var location := "Patterns".plus_file(file_name_ext)
 		var dir = Directory.new()
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
@@ -179,9 +181,23 @@ func brush_name_replace(name : String) -> String:
 	var i := 1
 	var file_ext = name.get_extension()
 	var temp_name := name
-	var brush_dir := Directory.new()
-	brush_dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
-	while brush_dir.file_exists(temp_name):
+	var dir := Directory.new()
+	dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+	while dir.file_exists(temp_name):
+		i += 1
+		temp_name = name.get_basename() + " (%s)" % i
+		temp_name += "." + file_ext
+	name = temp_name
+	return name
+
+
+func pattern_name_replace(name : String) -> String:
+	var i := 1
+	var file_ext = name.get_extension()
+	var temp_name := name
+	var dir := Directory.new()
+	dir.open(Global.directory_module.xdg_data_home.plus_file("Patterns"))
+	while dir.file_exists(temp_name):
 		i += 1
 		temp_name = name.get_basename() + " (%s)" % i
 		temp_name += "." + file_ext
