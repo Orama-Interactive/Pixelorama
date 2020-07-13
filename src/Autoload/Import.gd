@@ -221,7 +221,8 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 			var err := image.load(path.plus_file(pattern))
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
-				Global.patterns_popup.add(image)
+				var tooltip_name = pattern.get_basename()
+				Global.patterns_popup.add(image, tooltip_name)
 
 
 func import_gpl(path : String, text : String) -> Palette:
