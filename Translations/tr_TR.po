@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-07-10 23:09\n"
+"PO-Revision-Date: 2020-07-13 18:18\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -202,6 +202,18 @@ msgid "Horizontal frames:"
 msgstr ""
 
 msgid "Vertical frames:"
+msgstr ""
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
@@ -718,6 +730,12 @@ msgstr "Özel fırça"
 
 msgid "Brush size:"
 msgstr "Fırça boyutu:"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr ""
