@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-13 18:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -205,16 +205,16 @@ msgid "Vertical frames:"
 msgstr "Кадров по вертикали:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Тип кисти:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Кисть файла"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Кисть проекта"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Случайная кисть"
 
 msgid "Save Sprite as .pxo"
 msgstr "Сохранить спрайт как .pxo"
@@ -749,10 +749,10 @@ msgid "Brush size:"
 msgstr "Размер кисти:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Перезаписать"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Пиксельная точность"
 
 msgid "Brush color from"
 msgstr "Цвет кисти из"
