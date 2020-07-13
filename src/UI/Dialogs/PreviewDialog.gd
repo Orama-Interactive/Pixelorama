@@ -57,8 +57,7 @@ func _on_PreviewDialog_confirmed() -> void:
 	elif current_import_option == ImageImportOptions.BRUSH:
 		var file_name : String = path.get_basename().get_file()
 		image.convert(Image.FORMAT_RGBA8)
-		Global.file_brushes.append(image)
-		Global.create_brush_button(image, Global.Brush_Types.FILE, file_name)
+		Brushes.add_file_brush([image], file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
 		var location := "Brushes".plus_file(path.get_file())
@@ -68,8 +67,7 @@ func _on_PreviewDialog_confirmed() -> void:
 	elif current_import_option == ImageImportOptions.PATTERN:
 		var file_name : String = path.get_basename().get_file()
 		image.convert(Image.FORMAT_RGBA8)
-		Global.patterns.append(image)
-		Global.create_pattern_button(image, file_name)
+		Global.patterns_popup.add(image, file_name)
 
 		# Copy the image file into the "pixelorama/Patterns" directory
 		var location := "Patterns".plus_file(path.get_file())
