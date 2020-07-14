@@ -9,6 +9,7 @@ var image : Image
 var current_import_option : int = ImageImportOptions.NEW_TAB
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
+var brush_type : int = BrushTypes.FILE
 
 onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var image_size_label : Label = $VBoxContainer/SizeContainer/ImageSizeLabel
@@ -17,6 +18,7 @@ onready var spritesheet_options = $VBoxContainer/HBoxContainer/SpritesheetOption
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
 onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
+onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
 
 
 func _on_PreviewDialog_about_to_show() -> void:
@@ -57,8 +59,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		Global.palette_container.import_image_palette(path, image)
 
 	elif current_import_option == ImageImportOptions.BRUSH:
-		var brush_type_option : int = new_brush_options.get_node("BrushTypeOption").selected
-		add_brush(brush_type_option)
+		add_brush()
 
 	elif current_import_option == ImageImportOptions.PATTERN:
 		var file_name_ext : String = path.get_file()
@@ -155,9 +156,16 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
 
 
-func add_brush(type : int) -> void:
+func _on_BrushTypeOption_item_selected(index : int) -> void:
+	brush_type = index
+	new_brush_name.visible = false
+	if brush_type == BrushTypes.RANDOM:
+		new_brush_name.visible = true
+
+
+func add_brush() -> void:
 	image.convert(Image.FORMAT_RGBA8)
-	if type == BrushTypes.FILE:
+	if brush_type == BrushTypes.FILE:
 		var file_name_ext : String = path.get_file()
 		file_name_ext = file_name_replace(file_name_ext, "Brushes")
 		var file_name : String = file_name_ext.get_basename()
@@ -169,10 +177,36 @@ func add_brush(type : int) -> void:
 		var dir = Directory.new()
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
-	elif type == BrushTypes.PROJECT:
+	elif brush_type == BrushTypes.PROJECT:
 		var file_name : String =  path.get_file().get_basename()
 		Global.current_project.brushes.append(image)
 		Brushes.add_project_brush(image, file_name)
+
+	elif brush_type == BrushTypes.RANDOM:
+		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
+		if !brush_name.is_valid_filename():
+			return
+		var dir := Directory.new()
+		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+		if !dir.dir_exists(brush_name):
+			dir.make_dir(brush_name)
+
+		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes").plus_file(brush_name))
+		var random_brushes := []
+		dir.list_dir_begin()
+		var curr_file := dir.get_next()
+		while curr_file != "":
+			print(curr_file)
+			if curr_file.begins_with("%") and brush_name in curr_file:
+				random_brushes.append(curr_file)
+			curr_file = dir.get_next()
+		dir.list_dir_end()
+
+		var file_ext : String = path.get_file().get_extension()
+		var index : int = random_brushes.size() + 1
+		var file_name = "%" + brush_name + str(index) + "." + file_ext
+		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
+		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
 
 # Checks if the file already exists

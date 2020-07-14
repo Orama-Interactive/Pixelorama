@@ -26,15 +26,15 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 706.0
+margin_right = 534.0
 margin_bottom = 300.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 203.0
-margin_right = 503.0
+margin_left = 117.0
+margin_right = 417.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 300 )
 expand = true
@@ -49,7 +49,7 @@ __meta__ = {
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 304.0
-margin_right = 706.0
+margin_right = 534.0
 margin_bottom = 318.0
 custom_constants/separation = 32
 
@@ -67,7 +67,7 @@ text = "Frame size: 64×64"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 322.0
-margin_right = 706.0
+margin_right = 534.0
 margin_bottom = 342.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
@@ -163,26 +163,44 @@ value = 1.0
 [node name="NewBrushOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
 margin_left = 155.0
-margin_right = 324.0
-margin_bottom = 20.0
+margin_right = 471.0
+margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
-margin_top = 3.0
+margin_top = 5.0
 margin_right = 73.0
-margin_bottom = 17.0
+margin_bottom = 19.0
 text = "Brush type:"
 
 [node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
 margin_left = 77.0
 margin_right = 169.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 text = "File brush"
-items = [ "File brush", null, false, 0, null, "Project brush", null, false, 1, null, "Random brush", null, true, 2, null ]
+items = [ "File brush", null, false, 0, null, "Project brush", null, false, 1, null, "Random brush", null, false, 2, null ]
 selected = 0
+
+[node name="BrushName" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
+visible = false
+margin_left = 173.0
+margin_right = 316.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewBrushOptions/BrushName"]
+margin_top = 5.0
+margin_right = 81.0
+margin_bottom = 19.0
+text = "Brush name:"
+
+[node name="BrushNameLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/NewBrushOptions/BrushName"]
+margin_left = 85.0
+margin_right = 143.0
+margin_bottom = 24.0
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/NewBrushOptions/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]
