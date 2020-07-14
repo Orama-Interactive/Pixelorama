@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-14 01:01\n"
 
 msgid "OK"
 msgstr "确定"
@@ -205,16 +205,16 @@ msgid "Vertical frames:"
 msgstr "垂直帧："
 
 msgid "Brush type:"
-msgstr ""
+msgstr "画笔类型："
 
 msgid "File brush"
-msgstr ""
+msgstr "文件笔画"
 
 msgid "Project brush"
-msgstr ""
+msgstr "项目笔画"
 
 msgid "Random brush"
-msgstr ""
+msgstr "随机笔画"
 
 msgid "Save Sprite as .pxo"
 msgstr "保存 Sprite 为 .pxo"
@@ -749,10 +749,10 @@ msgid "Brush size:"
 msgstr "画笔大小:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "覆盖"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "完美像素"
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
