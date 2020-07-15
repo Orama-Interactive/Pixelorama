@@ -53,7 +53,11 @@ var TStrings ={
 
 
 func _ready() -> void:
+	width_value.value = Global.default_image_width
+	height_value.value = Global.default_image_height
+	fill_color_node.color = Global.default_fill_color
 	fill_color_node.get_picker().presets_visible = false
+
 	ratio_box.connect("pressed", self, "_on_RatioCheckBox_toggled", [ratio_box.pressed])
 	templates_options.connect("item_selected", self, "_on_TemplatesOptions_item_selected")
 
@@ -82,17 +86,6 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.current_project.size = Vector2(width, height).floor()
 	Global.canvas.camera_zoom()
-
-
-func _on_CreateNewImage_about_to_show() -> void:
-	width_value.value = Global.default_image_width
-	height_value.value = Global.default_image_height
-	fill_color_node.color = Global.default_fill_color
-	templates_options.selected = Templates.TDefault
-	ratio_box.pressed = false
-	for spin_box in [width_value, height_value]:
-		if spin_box.is_connected("value_changed", self, "_on_SizeValue_value_changed"):
-			spin_box.disconnect("value_changed", self, "_on_SizeValue_value_changed")
 
 
 var aspect_ratio: float

@@ -196,7 +196,6 @@ func add_brush() -> void:
 		dir.list_dir_begin()
 		var curr_file := dir.get_next()
 		while curr_file != "":
-			print(curr_file)
 			if curr_file.begins_with("%") and brush_name in curr_file:
 				random_brushes.append(curr_file)
 			curr_file = dir.get_next()
