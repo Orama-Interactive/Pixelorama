@@ -34,6 +34,9 @@ func setup_file_menu() -> void:
 
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
 
+	if OS.get_name() == "HTML5":
+		file_menu.set_item_disabled(2, true)
+
 
 func setup_edit_menu() -> void:
 	var edit_menu_items := {
