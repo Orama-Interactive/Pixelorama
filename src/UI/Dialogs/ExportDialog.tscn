@@ -319,6 +319,7 @@ margin_left = 34.0
 margin_right = 376.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+text = "untitled"
 align = 2
 
 [node name="FileFormat" type="OptionButton" parent="VBoxContainer/File"]

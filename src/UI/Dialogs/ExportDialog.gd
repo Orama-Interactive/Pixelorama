@@ -31,7 +31,7 @@ var new_dir_for_each_frame_tag : bool = true # you don't need to store this afte
 
 # Export directory path and export file name
 var directory_path := ""
-var file_name := ""
+var file_name := "untitled"
 var file_format : int = FileFormat.PNG
 enum FileFormat { PNG = 0, GIF = 1}
 
