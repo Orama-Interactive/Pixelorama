@@ -16,6 +16,8 @@ var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
 
+var x_symmetry_point := -1
+var y_symmetry_point := -1
 var x_min := 0
 var x_max := 64
 var y_min := 0

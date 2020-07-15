@@ -67,13 +67,17 @@ func set_pixel_perfect(value: bool) -> void:
 
 
 func set_pixel(image: Image, position: Vector2, color: Color) -> void:
-	var mirror_x = Global.current_project.x_max + Global.current_project.x_min - position.x - 1
-	var mirror_y = Global.current_project.y_max + Global.current_project.y_min - position.y - 1
+	var project : Project = Global.current_project
+
+	var mirror_x = project.size.x - project.x_symmetry_point - position.x
+	var mirror_y = project.size.y - project.y_symmetry_point - position.y
+	var mirror_x_inside : bool = mirror_x >= project.x_min and mirror_x <= project.x_max - 1
+	var mirror_y_inside : bool = mirror_y >= project.y_min and mirror_y <= project.y_max - 1
 
 	drawers[0].set_pixel(image, position, color, color_op)
-	if horizontal_mirror:
+	if horizontal_mirror and mirror_x_inside:
 		drawers[1].set_pixel(image, Vector2(mirror_x, position.y), color, color_op)
-		if vertical_mirror:
+		if vertical_mirror and mirror_y_inside:
 			drawers[2].set_pixel(image, Vector2(mirror_x, mirror_y), color, color_op)
-	if vertical_mirror:
+	if vertical_mirror and mirror_y_inside:
 		drawers[3].set_pixel(image, Vector2(position.x, mirror_y), color, color_op)

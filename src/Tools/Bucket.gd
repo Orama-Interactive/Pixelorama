@@ -129,15 +129,17 @@ func fill_in_color(position : Vector2) -> void:
 
 func fill_in_area(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	var mirror_x := project.x_max + project.x_min - position.x - 1
-	var mirror_y := project.y_max + project.y_min - position.y - 1
+	var mirror_x = project.size.x - project.x_symmetry_point - position.x
+	var mirror_y = project.size.y - project.y_symmetry_point - position.y
+	var mirror_x_inside : bool = mirror_x >= project.x_min and mirror_x <= project.x_max - 1
+	var mirror_y_inside : bool = mirror_y >= project.y_min and mirror_y <= project.y_max - 1
 
 	_flood_fill(position)
-	if tool_slot.horizontal_mirror:
+	if tool_slot.horizontal_mirror and mirror_x_inside:
 		_flood_fill(Vector2(mirror_x, position.y))
-		if tool_slot.vertical_mirror:
+		if tool_slot.vertical_mirror and mirror_y_inside:
 			_flood_fill(Vector2(mirror_x, mirror_y))
-	if tool_slot.vertical_mirror:
+	if tool_slot.vertical_mirror and mirror_y_inside:
 		_flood_fill(Vector2(position.x, mirror_y))
 
 
