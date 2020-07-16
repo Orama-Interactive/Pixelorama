@@ -269,8 +269,8 @@ func draw_tool_brush(position : Vector2) -> void:
 	dst = dst_rect.position
 
 	var project : Project = Global.current_project
-	var mirror_x = project.size.x - (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
-	var mirror_y = project.size.y - (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
+	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
+	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 	var mirror_x_inside : bool = mirror_x >= project.x_min and mirror_x <= project.x_max - 1
 	var mirror_y_inside : bool = mirror_y >= project.y_min and mirror_y <= project.y_max - 1
 
@@ -279,7 +279,7 @@ func draw_tool_brush(position : Vector2) -> void:
 		_draw_brush_image(_mirror_brushes.x, _flip_rect(src_rect, size, true, false), Vector2(mirror_x, dst.y))
 		if tool_slot.vertical_mirror and mirror_y_inside:
 			_draw_brush_image(_mirror_brushes.xy, _flip_rect(src_rect, size, true, true), Vector2(mirror_x, mirror_y))
-	if tool_slot.vertical_mirror and mirror_x_inside:
+	if tool_slot.vertical_mirror and mirror_y_inside:
 		_draw_brush_image(_mirror_brushes.y, _flip_rect(src_rect, size, false, true), Vector2(dst.x, mirror_y))
 
 

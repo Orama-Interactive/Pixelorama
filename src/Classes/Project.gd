@@ -16,8 +16,10 @@ var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
 
-var x_symmetry_point := -1
-var y_symmetry_point := -1
+var x_symmetry_point := size.x / 2 + 1
+var y_symmetry_point := size.y / 2 + 1
+var x_symmetry_axis : SymmetryGuide
+var y_symmetry_axis : SymmetryGuide
 var x_min := 0
 var x_max := 64
 var y_min := 0
@@ -40,6 +42,22 @@ func _init(_frames := [], _name := tr("untitled")) -> void:
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
+
+	if !x_symmetry_axis:
+		x_symmetry_axis = SymmetryGuide.new()
+		x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
+		x_symmetry_axis.project = self
+		x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point))
+		x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point))
+		Global.canvas.add_child(x_symmetry_axis)
+
+	if !y_symmetry_axis:
+		y_symmetry_axis = SymmetryGuide.new()
+		y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
+		y_symmetry_axis.project = self
+		y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
+		y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
+		Global.canvas.add_child(y_symmetry_axis)
 
 
 func _set_selected_rect(value : Rect2) -> void:
@@ -167,6 +185,8 @@ func serialize() -> Dictionary:
 
 	var guide_data := []
 	for guide in guides:
+		if guide is SymmetryGuide:
+			continue
 		var coords = guide.points[0].x
 		if guide.type == Guide.Types.HORIZONTAL:
 			coords = guide.points[0].y
@@ -200,6 +220,7 @@ func serialize() -> Dictionary:
 		"layers" : layer_data,
 		"tags" : tag_data,
 		"guides" : guide_data,
+		"symmetry_points" : [x_symmetry_point, y_symmetry_point],
 		"frames" : frame_data,
 		"brushes" : brush_data,
 	}
@@ -250,6 +271,13 @@ func deserialize(dict : Dictionary) -> void:
 			guide.has_focus = false
 			Global.canvas.add_child(guide)
 			guides.append(guide)
+	if dict.has("symmetry_points"):
+		x_symmetry_point = dict.symmetry_points[0]
+		y_symmetry_point = dict.symmetry_points[1]
+		x_symmetry_axis.points[0].y = floor(y_symmetry_point / 2 + 1)
+		x_symmetry_axis.points[1].y = floor(y_symmetry_point / 2 + 1)
+		y_symmetry_axis.points[0].x = floor(x_symmetry_point / 2 + 1)
+		y_symmetry_axis.points[1].x = floor(x_symmetry_point / 2 + 1)
 
 
 func name_changed(value : String) -> void:

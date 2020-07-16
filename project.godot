@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
-"path": "res://src/UI/Rulers/Guides.gd"
+"path": "res://src/UI/Rulers/Guide.gd"
 }, {
 "base": "Reference",
 "class": "Layer",
@@ -73,6 +73,11 @@ _global_script_classes=[ {
 "class": "Project",
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
+}, {
+"base": "Guide",
+"class": "SymmetryGuide",
+"language": "GDScript",
+"path": "res://src/UI/Rulers/SymmetryGuide.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
@@ -87,7 +92,8 @@ _global_script_class_icons={
 "Palette": "",
 "PaletteColor": "",
 "Patterns": "",
-"Project": ""
+"Project": "",
+"SymmetryGuide": ""
 }
 
 [application]
