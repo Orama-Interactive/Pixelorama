@@ -42,6 +42,8 @@ var right_cursor_tool_texture := ImageTexture.new()
 
 var image_clipboard : Image
 var play_only_tags := true
+var show_x_symmetry_axis := false
+var show_y_symmetry_axis := false
 
 # Preferences
 var theme_type : int = Theme_Types.DARK

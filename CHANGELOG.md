@@ -15,6 +15,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - You can now drag & drop files into the program while it's running to open them. You can open .pxo files, image files and palette (json and gpl) files this way.
 - You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))
 - Added Resize Canvas option to Image menu.
+- Added Symmetry Guides. They let you change the axis of symmetry for mirroring. ([#133](https://github.com/Orama-Interactive/Pixelorama/issues/133))
 - Palettes can now be created from the colors of the selected sprite.
 - You can now preview how the frames of the spritesheet you are importing will look.
 - You can now import image files as layers. Their size will be cropped to the project's size.

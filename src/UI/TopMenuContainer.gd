@@ -260,8 +260,13 @@ func toggle_show_guides() -> void:
 	Global.show_guides = !Global.show_guides
 	view_menu.set_item_checked(3, Global.show_guides)
 	for guide in Global.canvas.get_children():
-		if guide is Guide:
+		if guide is Guide and guide in Global.current_project.guides:
 			guide.visible = Global.show_guides
+			if guide is SymmetryGuide:
+				if guide.type == Guide.Types.HORIZONTAL:
+					guide.visible = Global.show_x_symmetry_axis and Global.show_guides
+				else:
+					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 
 
 func toggle_show_anim_timeline() -> void:

@@ -4,6 +4,7 @@ class_name SymmetryGuide extends Guide
 func _ready() -> void:
 	._ready()
 	has_focus = false
+	visible = false
 
 
 func _input(_event : InputEvent) -> void:

@@ -126,7 +126,12 @@ func change_project() -> void:
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
 			if guide in guides:
-				guide.visible = true
+				guide.visible = Global.show_guides
+				if guide is SymmetryGuide:
+					if guide.type == Guide.Types.HORIZONTAL:
+						guide.visible = Global.show_x_symmetry_axis and Global.show_guides
+					else:
+						guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 			else:
 				guide.visible = false
 
