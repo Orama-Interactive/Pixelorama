@@ -1,10 +1,18 @@
 class_name SymmetryGuide extends Guide
 
 
+var _texture = preload("res://assets/graphics/dotted_line.png")
+
+
 func _ready() -> void:
 	._ready()
 	has_focus = false
 	visible = false
+	texture = _texture
+	texture_mode = Line2D.LINE_TEXTURE_TILE
+	width = Global.camera.zoom.x * 4
+	yield(get_tree().create_timer(0.01), "timeout")
+	modulate = Global.guide_color
 
 
 func _input(_event : InputEvent) -> void:
@@ -13,6 +21,9 @@ func _input(_event : InputEvent) -> void:
 		project.y_symmetry_point = points[0].y * 2 - 1
 	elif type == Types.VERTICAL:
 		project.x_symmetry_point = points[0].x * 2 - 1
+
+	yield(get_tree().create_timer(0.01), "timeout")
+	width = Global.camera.zoom.x * 4
 
 
 func outside_canvas() -> bool:

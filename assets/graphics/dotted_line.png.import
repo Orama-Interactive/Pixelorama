@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/dotted_line.png-9a94e4e6ebf9c11e53076f53e529d37a.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/graphics/dotted_line.png"
+dest_files=[ "res://.import/dotted_line.png-9a94e4e6ebf9c11e53076f53e529d37a.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=1
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
