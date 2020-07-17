@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-17 10:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Bitte bestätigen..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Dateiname:"
 
 msgid "Image Size"
 msgstr "Bildgröße"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Speichern als..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD-Komprimierung verwenden"
 
 msgid "Import"
 msgstr "Importieren"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Wiederherstellen"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 msgid "Paste"
-msgstr ""
+msgstr "Einfügen"
 
 msgid "Delete"
 msgstr "Löschen"
@@ -205,16 +205,16 @@ msgid "Vertical frames:"
 msgstr "Vertikale Frames:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Pinseltyp:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Datei-Pinsel"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Projekt-Pinsel"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Zufälliger Pinsel"
 
 msgid "Save Sprite as .pxo"
 msgstr "Speichere Sprite als .pxo"
@@ -748,10 +748,10 @@ msgid "Brush size:"
 msgstr "Pinselgröße:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Überschreiben"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Perfekte Pixel"
 
 msgid "Brush color from"
 msgstr "Pinselfarbe von"
@@ -1252,7 +1252,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
