@@ -2,10 +2,7 @@
 
 [ext_resource path="res://src/UI/Dialogs/OutlineDialog.gd" type="Script" id=1]
 
-
-
 [node name="OutlineDialog" type="ConfirmationDialog"]
-visible = true
 margin_right = 200.0
 margin_bottom = 70.0
 script = ExtResource( 1 )

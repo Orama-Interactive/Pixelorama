@@ -324,12 +324,12 @@ func image_menu_id_pressed(id : int) -> void:
 
 
 func show_scale_image_popup() -> void:
-	Global.control.get_node("ScaleImage").popup_centered()
+	Global.control.get_node("Dialogs/ScaleImage").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_resize_canvas_popup() -> void:
-	Global.control.get_node("ResizeCanvas").popup_centered()
+	Global.control.get_node("Dialogs/ResizeCanvas").popup_centered()
 	Global.dialog_open(true)
 
 
@@ -347,25 +347,25 @@ func flip_image(horizontal : bool) -> void:
 
 func show_rotate_image_popup() -> void:
 	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
-	Global.control.get_node("RotateImage").set_sprite(image)
-	Global.control.get_node("RotateImage").popup_centered()
+	Global.control.get_node("Dialogs/RotateImage").set_sprite(image)
+	Global.control.get_node("Dialogs/RotateImage").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_add_outline_popup() -> void:
-	Global.control.get_node("OutlineDialog").popup_centered()
+	Global.control.get_node("Dialogs/OutlineDialog").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_hsv_configuration_popup() -> void:
-	Global.control.get_node("HSVDialog").popup_centered()
+	Global.control.get_node("Dialogs/HSVDialog").popup_centered()
 	Global.dialog_open(true)
 
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Splash Screen
-			Global.control.get_node("SplashDialog").popup_centered()
+			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
 			Global.dialog_open(true)
 		1: # Online Docs
 			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
@@ -377,5 +377,5 @@ func help_menu_id_pressed(id : int) -> void:
 			else:
 				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v07---2020-05-16")
 		4: # About Pixelorama
-			Global.control.get_node("AboutDialog").popup_centered()
+			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)

@@ -19,15 +19,15 @@ func _ready() -> void:
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	$QuitAndSaveDialog.add_button("Save & Exit", false, "Save")
-	$QuitAndSaveDialog.get_ok().text = "Exit without saving"
+	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
+	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
 
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true
 	zstd_checkbox.text = "Use ZSTD Compression"
 	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	$SaveSprite.get_vbox().add_child(zstd_checkbox)
+	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
 
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
@@ -82,7 +82,7 @@ func show_splash_screen() -> void:
 	# Wait for the window to adjust itself, so the popup is correctly centered
 	yield(get_tree().create_timer(0.01), "timeout")
 	if Global.config_cache.get_value("preferences", "startup"):
-		$SplashDialog.popup_centered() # Splash screen
+		$Dialogs/SplashDialog.popup_centered() # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
 	else:
 		Global.can_draw = true
@@ -90,7 +90,8 @@ func show_splash_screen() -> void:
 
 func handle_backup() -> void:
 	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
-	$BackupConfirmation.get_cancel().text = tr("Delete")
+	var backup_confirmation : ConfirmationDialog = $Dialogs/BackupConfirmation
+	backup_confirmation.get_cancel().text = tr("Delete")
 	if Global.config_cache.has_section("backups"):
 		var project_paths = Global.config_cache.get_section_keys("backups")
 		if project_paths.size() > 0:
@@ -100,10 +101,10 @@ func handle_backup() -> void:
 				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
-			$BackupConfirmation.dialog_text = tr($BackupConfirmation.dialog_text) % project_paths
-			$BackupConfirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
-			$BackupConfirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
-			$BackupConfirmation.popup_centered()
+			backup_confirmation.dialog_text = tr(backup_confirmation.dialog_text) % project_paths
+			backup_confirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
+			backup_confirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
+			backup_confirmation.popup_centered()
 			Global.can_draw = false
 			modulate = Color(0.5, 0.5, 0.5)
 		else:
@@ -179,8 +180,8 @@ func show_quit_dialog() -> void:
 func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 	if action == "Save":
 		is_quitting_on_save = true
-		$SaveSprite.popup_centered()
-		$QuitDialog.hide()
+		Global.save_sprites_dialog.popup_centered()
+		Global.quit_dialog.hide()
 		Global.dialog_open(true)
 
 
@@ -194,9 +195,9 @@ func _on_QuitDialog_confirmed() -> void:
 func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
 	OpenSave.autosave_timer.start()
-	$ExportDialog.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
-	$ExportDialog.directory_path = OpenSave.current_save_paths[0].get_base_dir()
-	$ExportDialog.was_exported = false
+	Global.export_dialog.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
+	Global.export_dialog.directory_path = OpenSave.current_save_paths[0].get_base_dir()
+	Global.export_dialog.was_exported = false
 	Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
 	Global.file_menu.get_popup().set_item_text(5, tr("Export"))
 

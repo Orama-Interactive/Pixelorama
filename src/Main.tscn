@@ -43,49 +43,67 @@ __meta__ = {
 
 [node name="UI" parent="MenuAndUI" instance=ExtResource( 4 )]
 
-[node name="BrushesPopup" parent="." instance=ExtResource( 6 )]
+[node name="Dialogs" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="PatternsPopup" parent="." instance=ExtResource( 5 )]
+[node name="BrushesPopup" parent="Dialogs" instance=ExtResource( 6 )]
 
-[node name="SplashDialog" parent="." instance=ExtResource( 27 )]
+[node name="PatternsPopup" parent="Dialogs" instance=ExtResource( 5 )]
 
-[node name="CreateNewImage" parent="." instance=ExtResource( 28 )]
+[node name="SplashDialog" parent="Dialogs" instance=ExtResource( 27 )]
 
-[node name="OpenSprite" parent="." instance=ExtResource( 12 )]
+[node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
+margin_right = 375.0
 
-[node name="SaveSprite" parent="." instance=ExtResource( 11 )]
+[node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
 
-[node name="SaveSpriteHTML5" parent="." instance=ExtResource( 8 )]
+[node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
+margin_left = 108.0
+margin_top = 40.0
+margin_right = 623.0
+margin_bottom = 388.0
 
-[node name="ExportDialog" parent="." instance=ExtResource( 39 )]
+[node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 
-[node name="ScaleImage" parent="." instance=ExtResource( 31 )]
+[node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
 
-[node name="ResizeCanvas" parent="." instance=ExtResource( 7 )]
+[node name="ScaleImage" parent="Dialogs" instance=ExtResource( 31 )]
+margin_bottom = 127.0
 
-[node name="PreferencesDialog" parent="." instance=ExtResource( 32 )]
+[node name="ResizeCanvas" parent="Dialogs" instance=ExtResource( 7 )]
+margin_right = 216.0
+margin_bottom = 392.0
 
-[node name="RotateImage" parent="." instance=ExtResource( 38 )]
+[node name="PreferencesDialog" parent="Dialogs" instance=ExtResource( 32 )]
+margin_right = 617.0
 
-[node name="OutlineDialog" parent="." instance=ExtResource( 33 )]
-visible = false
+[node name="RotateImage" parent="Dialogs" instance=ExtResource( 38 )]
 
-[node name="AboutDialog" parent="." instance=ExtResource( 34 )]
+[node name="OutlineDialog" parent="Dialogs" instance=ExtResource( 33 )]
+margin_right = 217.0
+margin_bottom = 106.0
 
-[node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="."]
-margin_right = 200.0
+[node name="AboutDialog" parent="Dialogs" instance=ExtResource( 34 )]
+
+[node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
+margin_right = 467.0
 margin_bottom = 70.0
 window_title = "Unsaved Image"
 dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
 
-[node name="QuitDialog" type="ConfirmationDialog" parent="."]
-margin_right = 200.0
+[node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
+margin_right = 243.0
 margin_bottom = 70.0
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
-[node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="."]
-margin_right = 200.0
+[node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
+margin_right = 330.0
 margin_bottom = 70.0
 window_title = "Save before exiting?"
 resizable = true
@@ -94,15 +112,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ErrorDialog" type="AcceptDialog" parent="."]
-margin_right = 76.0
+[node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
+margin_right = 151.0
 margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="HSVDialog" parent="." instance=ExtResource( 44 )]
+[node name="HSVDialog" parent="Dialogs" instance=ExtResource( 44 )]
 
-[node name="BackupConfirmation" type="ConfirmationDialog" parent="."]
+[node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 349.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 250, 87.5 )
@@ -117,27 +135,27 @@ visible = false
 visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]
-[connection signal="popup_hide" from="SplashDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="CreateNewImage" to="." method="_can_draw_true"]
-[connection signal="file_selected" from="OpenSprite" to="." method="_on_OpenSprite_file_selected"]
-[connection signal="popup_hide" from="OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
-[connection signal="file_selected" from="SaveSprite" to="." method="_on_SaveSprite_file_selected"]
-[connection signal="popup_hide" from="SaveSprite" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="SaveSpriteHTML5" to="." method="_on_SaveSpriteHTML5_confirmed"]
-[connection signal="popup_hide" from="SaveSpriteHTML5" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="ExportDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="ScaleImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="ResizeCanvas" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="PreferencesDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="RotateImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="OutlineDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="AboutDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="UnsavedCanvasDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="QuitDialog" to="." method="_on_QuitDialog_confirmed"]
-[connection signal="popup_hide" from="QuitDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]
-[connection signal="custom_action" from="QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
-[connection signal="popup_hide" from="QuitAndSaveDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="ErrorDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="HSVDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="BackupConfirmation" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
+[connection signal="file_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="popup_hide" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
+[connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
+[connection signal="popup_hide" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="Dialogs/SaveSpriteHTML5" to="." method="_on_SaveSpriteHTML5_confirmed"]
+[connection signal="popup_hide" from="Dialogs/SaveSpriteHTML5" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ExportDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ScaleImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ResizeCanvas" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/PreferencesDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/RotateImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/OutlineDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/AboutDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/UnsavedCanvasDialog" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="Dialogs/QuitDialog" to="." method="_on_QuitDialog_confirmed"]
+[connection signal="popup_hide" from="Dialogs/QuitDialog" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]
+[connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
+[connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/HSVDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
