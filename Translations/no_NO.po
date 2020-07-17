@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-17 09:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Vennligst Bekreft..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Filnavn:"
 
 msgid "Image Size"
 msgstr "Bildestørrelse"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Lagre som..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Bruk ZSTD-Komprimering"
 
 msgid "Import"
 msgstr "Importer"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Gjør om igjen"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopier"
 
 msgid "Paste"
-msgstr ""
+msgstr "Lim inn"
 
 msgid "Delete"
 msgstr "Slett"
