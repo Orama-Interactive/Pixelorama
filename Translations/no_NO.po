@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-07-17 09:11\n"
+"PO-Revision-Date: 2020-07-17 09:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -205,16 +205,16 @@ msgid "Vertical frames:"
 msgstr "Vertikale bilder:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Børstetype:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Filbørste"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Prosjektbørste"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Tilfeldig børste"
 
 msgid "Save Sprite as .pxo"
 msgstr "Lagre Figur som .pxo"
@@ -748,10 +748,10 @@ msgid "Brush size:"
 msgstr "Børstestørrelse:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Overskriv"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pikselperfekt"
 
 msgid "Brush color from"
 msgstr "Børstefarge fra"
@@ -1250,7 +1250,7 @@ msgid "Close"
 msgstr "Lukk"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
