@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-18 14:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -406,6 +406,9 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr ""
 
@@ -434,6 +437,12 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
+msgstr ""
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
 msgstr ""
 
 msgid "View Splash Screen"
