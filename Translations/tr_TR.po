@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-18 14:26\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -407,6 +407,9 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr ""
 
@@ -436,6 +439,12 @@ msgstr ""
 
 msgid "Thickness:"
 msgstr "Kalınlık:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Açılış Ekranını Göster"
