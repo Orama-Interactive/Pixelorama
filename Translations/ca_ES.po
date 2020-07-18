@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-13 18:56\n"
+"PO-Revision-Date: 2020-07-18 14:26\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -407,6 +407,9 @@ msgstr "Contorn"
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr ""
 
@@ -436,6 +439,12 @@ msgstr ""
 
 msgid "Thickness:"
 msgstr "Gruix:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Mostrar pantalla de benvinguda"
