@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-13 18:38\n"
+"PO-Revision-Date: 2020-07-18 14:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -407,6 +407,9 @@ msgstr "Обводка"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr "Настройка цвета"
 
@@ -436,6 +439,12 @@ msgstr "Поместить внутри изображения"
 
 msgid "Thickness:"
 msgstr "Толщина:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Экран приветствия"
