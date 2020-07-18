@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-18 14:27\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -407,6 +407,9 @@ msgstr "Περίγραμμα"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr "Ρύθμιση HSV"
 
@@ -436,6 +439,12 @@ msgstr "Τοποθέτηση μέσα στην εικόνα"
 
 msgid "Thickness:"
 msgstr "Πάχος:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Εμφάνιση οθόνης εκκίνησης"
