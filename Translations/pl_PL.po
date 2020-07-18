@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-18 14:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -406,6 +406,9 @@ msgstr "Krawędź"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr "Dostosuj HSV"
 
@@ -435,6 +438,12 @@ msgstr "Umieść wewnątrz obrazu"
 
 msgid "Thickness:"
 msgstr "Grubość:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Pokaż ekran powitalny"
