@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-13 18:18\n"
+"PO-Revision-Date: 2020-07-18 14:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -407,6 +407,9 @@ msgstr "Contour"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajuster la Teinte/Saturation/Valeur"
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr "Ajuster HSV"
 
@@ -436,6 +439,12 @@ msgstr "Placer à l'intérieur de l'image"
 
 msgid "Thickness:"
 msgstr "Épaisseur:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
