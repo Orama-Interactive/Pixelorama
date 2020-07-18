@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-07-18 14:27\n"
+"PO-Revision-Date: 2020-07-18 16:10\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -443,6 +443,18 @@ msgid "Colors:"
 msgstr ""
 
 msgid "Steps:"
+msgstr ""
+
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
 msgstr ""
 
 msgid "View Splash Screen"
