@@ -11,6 +11,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 ### Added
 - The Web (HTML5) is now a supported platform of Pixelorama! It is now possible to save .png and .pxo files, as well as load image and palette files in the Web version. Only limitation so far is that the users cannot load .pxo files. Also, this may not work on mobile.
 - Project tabs! You can now have multiple projects open at the same time, and access each one with tabs.
+- Gradient generation. A new option under the "Image" menu that lets you generate a RGB gradient in the current cel.
 - Ability to remove the current palette. ([#239](https://github.com/Orama-Interactive/Pixelorama/pull/239))
 - You can now drag & drop files into the program while it's running to open them. You can open .pxo files, image files and palette (json and gpl) files this way.
 - You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))

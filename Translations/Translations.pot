@@ -434,6 +434,18 @@ msgstr ""
 msgid "Steps:"
 msgstr ""
 
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
+msgstr ""
+
 msgid "View Splash Screen"
 msgstr ""
 

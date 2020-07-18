@@ -1,6 +1,9 @@
 extends Node
 
 
+enum GradientDirection {TOP, BOTTOM, LEFT, RIGHT}
+
+
 func scale3X(sprite : Image, tol : float = 50) -> Image:
 	var scaled = Image.new()
 	scaled.create(sprite.get_width()*3, sprite.get_height()*3, false, Image.FORMAT_RGBA8)
@@ -501,7 +504,7 @@ func adjust_hsv(img: Image, id : int, delta : float) -> void:
 	img.unlock()
 
 
-func generate_gradient(image : Image, colors : Array, steps := 2) -> void:
+func generate_gradient(image : Image, colors : Array, steps := 2, direction : int = GradientDirection.TOP) -> void:
 	if colors.size() < 2:
 		return
 
@@ -512,11 +515,25 @@ func generate_gradient(image : Image, colors : Array, steps := 2) -> void:
 		colors.insert(1, color)
 
 	image.lock()
+	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
+		colors.invert()
 	var size := image.get_size()
-	var gradient_height = size.y / steps
-	for i in steps:
-		for xx in size.x:
-			var start = i * gradient_height
-			var end = (i + 1) * gradient_height
-			for yy in range(start, end):
-				image.set_pixel(xx, yy, colors[i])
+	var gradient_size
+
+	if direction == GradientDirection.TOP or direction == GradientDirection.BOTTOM:
+		gradient_size = size.y / steps
+		for i in steps:
+			for xx in size.x:
+				var start = i * gradient_size
+				var end = (i + 1) * gradient_size
+				for yy in range(start, end):
+					image.set_pixel(xx, yy, colors[i])
+
+	else:
+		gradient_size = size.x / steps
+		for i in steps:
+			for yy in size.y:
+				var start = i * gradient_size
+				var end = (i + 1) * gradient_size
+				for xx in range(start, end):
+					image.set_pixel(xx, yy, colors[i])

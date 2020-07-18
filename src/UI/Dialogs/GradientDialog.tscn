@@ -23,7 +23,7 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 184.0
+margin_right = 188.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 expand = true
@@ -31,7 +31,7 @@ stretch_mode = 6
 
 [node name="ColorsContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 104.0
-margin_right = 184.0
+margin_right = 188.0
 margin_bottom = 124.0
 
 [node name="Label" type="Label" parent="VBoxContainer/ColorsContainer"]
@@ -57,7 +57,7 @@ color = Color( 1, 1, 1, 1 )
 
 [node name="StepsContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 128.0
-margin_right = 184.0
+margin_right = 188.0
 margin_bottom = 152.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -76,8 +76,32 @@ margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = 2.0
 value = 2.0
+
+[node name="DirectionContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 156.0
+margin_right = 188.0
+margin_bottom = 176.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/DirectionContainer"]
+margin_top = 3.0
+margin_right = 63.0
+margin_bottom = 17.0
+text = "Direction:"
+
+[node name="DirectionOptionButton" type="OptionButton" parent="VBoxContainer/DirectionContainer"]
+margin_left = 67.0
+margin_right = 188.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Top to Bottom"
+items = [ "Top to Bottom", null, false, 0, null, "Bottom to Top", null, false, 1, null, "Left to Right", null, false, 2, null, "Right to Left", null, false, 3, null ]
+selected = 0
 [connection signal="about_to_show" from="." to="." method="_on_GradientDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_GradientDialog_confirmed"]
 [connection signal="color_changed" from="VBoxContainer/ColorsContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="color_changed" from="VBoxContainer/ColorsContainer/ColorPickerButton2" to="." method="_on_ColorPickerButton2_color_changed"]
 [connection signal="value_changed" from="VBoxContainer/StepsContainer/StepSpinBox" to="." method="_on_StepSpinBox_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/DirectionContainer/DirectionOptionButton" to="." method="_on_OptionButton_item_selected"]
