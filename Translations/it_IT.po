@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-07-18 16:10\n"
+"PO-Revision-Date: 2020-07-18 20:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -447,16 +447,16 @@ msgid "Steps:"
 msgstr ""
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Dall'alto verso il basso"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Dal basso verso l'alto"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Da sinistra a destra"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Da destra a sinistra"
 
 msgid "View Splash Screen"
 msgstr "Visualizza lo splash screen"
