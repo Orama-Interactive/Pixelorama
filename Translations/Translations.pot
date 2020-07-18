@@ -395,6 +395,9 @@ msgstr ""
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
+msgid "Gradient"
+msgstr ""
+
 msgid "Adjust HSV"
 msgstr ""
 
@@ -423,6 +426,12 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
+msgstr ""
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
 msgstr ""
 
 msgid "View Splash Screen"

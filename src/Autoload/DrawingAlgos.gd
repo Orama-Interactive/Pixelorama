@@ -499,3 +499,24 @@ func adjust_hsv(img: Image, id : int, delta : float) -> void:
 					img.set_pixel(i,j,c)
 
 	img.unlock()
+
+
+func generate_gradient(image : Image, colors : Array, steps := 2) -> void:
+	if colors.size() < 2:
+		return
+
+	var t = 1.0 / (steps - 1)
+	for i in range(1, steps - 1):
+		var color : Color
+		color = colors[-1].linear_interpolate(colors[0], t * i)
+		colors.insert(1, color)
+
+	image.lock()
+	var size := image.get_size()
+	var gradient_height = size.y / steps
+	for i in steps:
+		for xx in size.x:
+			var start = i * gradient_height
+			var end = (i + 1) * gradient_height
+			for yy in range(start, end):
+				image.set_pixel(xx, yy, colors[i])

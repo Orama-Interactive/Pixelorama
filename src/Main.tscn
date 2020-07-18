@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/UI/BrushesPopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Dialogs/ResizeCanvas.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/Dialogs/GradientDialog.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
@@ -128,6 +129,8 @@ popup_exclusive = true
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
 
+[node name="GradientDialog" parent="Dialogs" instance=ExtResource( 9 )]
+
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
 
@@ -159,3 +162,4 @@ visible = false
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/HSVDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/GradientDialog" to="." method="_can_draw_true"]
