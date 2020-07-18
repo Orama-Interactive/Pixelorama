@@ -11,14 +11,10 @@ onready var color2 : ColorPickerButton = $VBoxContainer/ColorsContainer/ColorPic
 onready var steps : SpinBox = $VBoxContainer/StepsContainer/StepSpinBox
 
 
-func _ready() -> void:
-	current_cel = Image.new()
+func _on_GradientDialog_about_to_show() -> void:
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
 	preview_texture.flags = 0
-
-
-func _on_GradientDialog_about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	update_preview()
 
