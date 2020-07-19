@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-07-18 16:10\n"
+"PO-Revision-Date: 2020-07-19 18:56\n"
 
 msgid "OK"
 msgstr "確定"
@@ -407,7 +407,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "調整色相、飽和度、亮度"
 
 msgid "Gradient"
-msgstr ""
+msgstr "顏色漸變"
 
 msgid "Adjust HSV"
 msgstr "調整HSV"
@@ -440,22 +440,22 @@ msgid "Thickness:"
 msgstr "粗細："
 
 msgid "Colors:"
-msgstr ""
+msgstr "顏色："
 
 msgid "Steps:"
-msgstr ""
+msgstr "色階數："
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "從上到下"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "從下到上"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "從左到右"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "從右到左"
 
 msgid "View Splash Screen"
 msgstr "顯示啟動畫面"
