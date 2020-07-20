@@ -3,7 +3,7 @@ class_name Project extends Reference
 
 
 var name := "" setget name_changed
-var size := Vector2(64, 64)
+var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
@@ -16,15 +16,12 @@ var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
 
-var x_symmetry_point := size.x / 2 + 1
-var y_symmetry_point := size.y / 2 + 1
+var x_symmetry_point
+var y_symmetry_point
 var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
-var x_min := 0
-var x_max := 64
-var y_min := 0
-var y_max := 64
 
+var selected_pixels := []
 var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
 
 # For every camera (currently there are 3)
@@ -32,16 +29,20 @@ var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.1
 var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
 
 
-func _init(_frames := [], _name := tr("untitled")) -> void:
+func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
 	name = _name
-	x_max = size.x
-	y_max = size.y
+	size = _size
+	select_all_pixels()
+
 	undo_redo = UndoRedo.new()
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
+
+	x_symmetry_point = size.x / 2 + 1
+	y_symmetry_point = size.y / 2 + 1
 
 	if !x_symmetry_axis:
 		x_symmetry_axis = SymmetryGuide.new()
@@ -58,6 +59,17 @@ func _init(_frames := [], _name := tr("untitled")) -> void:
 		y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
 		y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
 		Global.canvas.add_child(y_symmetry_axis)
+
+
+func select_all_pixels() -> void:
+	clear_selection()
+	for x in size.x:
+		for y in size.y:
+			selected_pixels.append(Vector2(x, y))
+
+
+func clear_selection() -> void:
+	selected_pixels.clear()
 
 
 func _set_selected_rect(value : Rect2) -> void:
@@ -288,6 +300,12 @@ func deserialize(dict : Dictionary) -> void:
 func name_changed(value : String) -> void:
 	name = value
 	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+
+
+func size_changed(value : Vector2) -> void:
+	size = value
+	if Global.selection_rectangle._selected_rect.has_no_area():
+		select_all_pixels()
 
 
 func frames_changed(value : Array) -> void:

@@ -455,51 +455,44 @@ func generate_outline(image : Image, outline_color : Color, thickness : int, dia
 
 
 func adjust_hsv(img: Image, id : int, delta : float) -> void:
-	var x_min = Global.current_project.x_min
-	var x_max = Global.current_project.x_max
-	var y_min = Global.current_project.y_min
-	var y_max = Global.current_project.y_max
 	img.lock()
 
 	match id:
 		0: # Hue
-			for i in range(x_min, x_max):
-				for j in range(y_min, y_max):
-					var c : Color = img.get_pixel(i,j)
-					var hue = range_lerp(c.h,0,1,-180,180)
-					hue = hue + delta
+			for i in Global.current_project.selected_pixels:
+				var c : Color = img.get_pixelv(i)
+				var hue = range_lerp(c.h,0,1,-180,180)
+				hue = hue + delta
 
-					while(hue >= 180):
-						hue -= 360
-					while(hue < -180):
-						hue += 360
-					c.h = range_lerp(hue,-180,180,0,1)
-					img.set_pixel(i,j,c)
+				while(hue >= 180):
+					hue -= 360
+				while(hue < -180):
+					hue += 360
+				c.h = range_lerp(hue,-180,180,0,1)
+				img.set_pixelv(i,c)
 
 		1: # Saturation
-			for i in range(x_min, x_max):
-				for j in range(y_min, y_max):
-					var c : Color = img.get_pixel(i,j)
-					var sat = c.s
-					if delta > 0:
-						sat = range_lerp(delta,0,100,c.s,1)
-					elif delta < 0:
-						sat = range_lerp(delta,-100,0,0,c.s)
-					c.s = sat
-					img.set_pixel(i,j,c)
+			for i in Global.current_project.selected_pixels:
+				var c : Color = img.get_pixelv(i)
+				var sat = c.s
+				if delta > 0:
+					sat = range_lerp(delta,0,100,c.s,1)
+				elif delta < 0:
+					sat = range_lerp(delta,-100,0,0,c.s)
+				c.s = sat
+				img.set_pixelv(i,c)
 
 		2: # Value
-			for i in range(x_min, x_max):
-				for j in range(y_min, y_max):
-					var c : Color = img.get_pixel(i,j)
-					var val = c.v
-					if delta > 0:
-						val = range_lerp(delta,0,100,c.v,1)
-					elif delta < 0:
-						val = range_lerp(delta,-100,0,0,c.v)
+			for i in Global.current_project.selected_pixels:
+				var c : Color = img.get_pixelv(i)
+				var val = c.v
+				if delta > 0:
+					val = range_lerp(delta,0,100,c.v,1)
+				elif delta < 0:
+					val = range_lerp(delta,-100,0,0,c.v)
 
-					c.v = val
-					img.set_pixel(i,j,c)
+				c.v = val
+				img.set_pixelv(i,c)
 
 	img.unlock()
 

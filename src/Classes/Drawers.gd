@@ -71,8 +71,14 @@ func set_pixel(image: Image, position: Vector2, color: Color) -> void:
 
 	var mirror_x = project.x_symmetry_point - position.x
 	var mirror_y = project.y_symmetry_point - position.y
-	var mirror_x_inside : bool = mirror_x >= project.x_min and mirror_x <= project.x_max - 1
-	var mirror_y_inside : bool = mirror_y >= project.y_min and mirror_y <= project.y_max - 1
+	var selected_pixels_x := []
+	var selected_pixels_y := []
+	for i in project.selected_pixels:
+		selected_pixels_x.append(i.x)
+		selected_pixels_y.append(i.y)
+
+	var mirror_x_inside : bool = mirror_x in selected_pixels_x
+	var mirror_y_inside : bool = mirror_y in selected_pixels_y
 
 	drawers[0].set_pixel(image, position, color, color_op)
 	if horizontal_mirror and mirror_x_inside:

@@ -80,11 +80,10 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.canvas.fill_color = fill_color
 
 	var frame : Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
-	var new_project := Project.new([frame])
+	var new_project := Project.new([frame], tr("untitled"), Vector2(width, height).floor())
 	new_project.layers.append(Layer.new())
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.current_project.size = Vector2(width, height).floor()
 	Global.canvas.camera_zoom()
 
 

@@ -322,10 +322,9 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 
 
 func open_image_as_new_tab(path : String, image : Image) -> void:
-	var project = Project.new([], path.get_file())
+	var project = Project.new([], path.get_file(), image.get_size())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
-	project.size = image.get_size()
 
 	var frame := Frame.new()
 	image.convert(Image.FORMAT_RGBA8)

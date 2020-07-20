@@ -68,15 +68,6 @@ func _input(event : InputEvent) -> void:
 	sprite_changed_this_frame = false
 
 	var current_project : Project = Global.current_project
-	current_project.x_min = location.x
-	current_project.x_max = location.x + current_project.size.x
-	current_project.y_min = location.y
-	current_project.y_max = location.y + current_project.size.y
-	if not current_project.selected_rect.has_no_area():
-		current_project.x_min = max(current_project.x_min, current_project.selected_rect.position.x)
-		current_project.x_max = min(current_project.x_max, current_project.selected_rect.end.x)
-		current_project.y_min = max(current_project.y_min, current_project.selected_rect.position.y)
-		current_project.y_max = min(current_project.y_max, current_project.selected_rect.end.y)
 
 	if Global.has_focus:
 		if !cursor_image_has_changed:

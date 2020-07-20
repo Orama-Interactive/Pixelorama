@@ -28,6 +28,7 @@ func has_point(position : Vector2) -> bool:
 func get_rect() -> Rect2:
 	return _selected_rect
 
+
 func set_rect(rect : Rect2) -> void:
 	_selected_rect = rect
 	polygon[0] = rect.position
@@ -35,6 +36,19 @@ func set_rect(rect : Rect2) -> void:
 	polygon[2] = rect.end
 	polygon[3] = Vector2(rect.position.x, rect.end.y)
 	visible = not rect.has_no_area()
+
+	var project : Project = Global.current_project
+	if rect.has_no_area():
+		project.select_all_pixels()
+	else:
+		project.clear_selection()
+		for x in range(rect.position.x, rect.end.x):
+			for y in range(rect.position.y, rect.end.y):
+				if x < 0 or x >= project.size.x:
+					continue
+				if y < 0 or y >= project.size.y:
+					continue
+				project.selected_pixels.append(Vector2(x, y))
 
 
 func move_rect(move : Vector2) -> void:

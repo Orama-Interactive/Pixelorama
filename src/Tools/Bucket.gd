@@ -94,7 +94,7 @@ func update_pattern() -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	if not _get_draw_rect().has_point(position):
+	if not position in Global.current_project.selected_pixels:
 		return
 	var undo_data = _get_undo_data()
 	if _fill_area == 0:
@@ -121,18 +121,23 @@ func fill_in_color(position : Vector2) -> void:
 			return
 
 	image.lock()
-	for y in range(project.y_min, project.y_max):
-		for x in range(project.x_min, project.x_max):
-			if image.get_pixel(x, y).is_equal_approx(color):
-				_set_pixel(image, x, y, tool_slot.color)
+	for i in project.selected_pixels:
+		if image.get_pixelv(i).is_equal_approx(color):
+			_set_pixel(image, i.x, i.y, tool_slot.color)
 
 
 func fill_in_area(position : Vector2) -> void:
 	var project : Project = Global.current_project
 	var mirror_x = project.x_symmetry_point - position.x
 	var mirror_y = project.y_symmetry_point - position.y
-	var mirror_x_inside : bool = mirror_x >= project.x_min and mirror_x <= project.x_max - 1
-	var mirror_y_inside : bool = mirror_y >= project.y_min and mirror_y <= project.y_max - 1
+	var selected_pixels_x := []
+	var selected_pixels_y := []
+	for i in project.selected_pixels:
+		selected_pixels_x.append(i.x)
+		selected_pixels_y.append(i.y)
+
+	var mirror_x_inside : bool = mirror_x in selected_pixels_x
+	var mirror_y_inside : bool = mirror_y in selected_pixels_y
 
 	_flood_fill(position)
 	if tool_slot.horizontal_mirror and mirror_x_inside:
@@ -160,9 +165,9 @@ func _flood_fill(position : Vector2) -> void:
 			continue
 		var west : Vector2 = n
 		var east : Vector2 = n
-		while west.x >= project.x_min && image.get_pixelv(west).is_equal_approx(color):
+		while west in project.selected_pixels && image.get_pixelv(west).is_equal_approx(color):
 			west += Vector2.LEFT
-		while east.x < project.x_max && image.get_pixelv(east).is_equal_approx(color):
+		while east in project.selected_pixels && image.get_pixelv(east).is_equal_approx(color):
 			east += Vector2.RIGHT
 		for px in range(west.x + 1, east.x):
 			var p := Vector2(px, n.y)
@@ -170,9 +175,9 @@ func _flood_fill(position : Vector2) -> void:
 			processed.set_bit(p, true)
 			var north := p + Vector2.UP
 			var south := p + Vector2.DOWN
-			if north.y >= project.y_min && image.get_pixelv(north).is_equal_approx(color):
+			if north in project.selected_pixels && image.get_pixelv(north).is_equal_approx(color):
 				q.append(north)
-			if south.y < project.y_max && image.get_pixelv(south).is_equal_approx(color):
+			if south in project.selected_pixels && image.get_pixelv(south).is_equal_approx(color):
 				q.append(south)
 
 

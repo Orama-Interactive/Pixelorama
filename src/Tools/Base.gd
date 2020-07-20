@@ -77,11 +77,8 @@ func draw_indicator() -> void:
 
 
 func _get_draw_rect() -> Rect2:
-	var x_min : int = Global.current_project.x_min
-	var x_max : int = Global.current_project.x_max
-	var y_min : int = Global.current_project.y_min
-	var y_max : int = Global.current_project.y_max
-	return Rect2(x_min, y_min, x_max - x_min, y_max - y_min)
+	var selected_pixels = Global.current_project.selected_pixels
+	return Rect2(selected_pixels[0].x, selected_pixels[0].y, selected_pixels[-1].x - selected_pixels[0].x + 1, selected_pixels[-1].y - selected_pixels[0].y + 1)
 
 
 func _get_tile_mode_rect() -> Rect2:
