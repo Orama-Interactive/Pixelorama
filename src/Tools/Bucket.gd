@@ -128,18 +128,27 @@ func fill_in_color(position : Vector2) -> void:
 
 func fill_in_area(position : Vector2) -> void:
 	var project : Project = Global.current_project
+	_flood_fill(position)
+
+	# Handle Mirroring
 	var mirror_x = project.x_symmetry_point - position.x
 	var mirror_y = project.y_symmetry_point - position.y
-	var selected_pixels_x := []
-	var selected_pixels_y := []
-	for i in project.selected_pixels:
-		selected_pixels_x.append(i.x)
-		selected_pixels_y.append(i.y)
+	var mirror_x_inside : bool
+	var mirror_y_inside : bool
+	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	if entire_image_selected:
+		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
+		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
+	else:
+		var selected_pixels_x := []
+		var selected_pixels_y := []
+		for i in project.selected_pixels:
+			selected_pixels_x.append(i.x)
+			selected_pixels_y.append(i.y)
 
-	var mirror_x_inside : bool = mirror_x in selected_pixels_x
-	var mirror_y_inside : bool = mirror_y in selected_pixels_y
+		mirror_x_inside = mirror_x in selected_pixels_x
+		mirror_y_inside = mirror_y in selected_pixels_y
 
-	_flood_fill(position)
 	if tool_slot.horizontal_mirror and mirror_x_inside:
 		_flood_fill(Vector2(mirror_x, position.y))
 		if tool_slot.vertical_mirror and mirror_y_inside:
@@ -165,9 +174,9 @@ func _flood_fill(position : Vector2) -> void:
 			continue
 		var west : Vector2 = n
 		var east : Vector2 = n
-		while west in project.selected_pixels && image.get_pixelv(west).is_equal_approx(color):
+		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(color):
 			west += Vector2.LEFT
-		while east in project.selected_pixels && image.get_pixelv(east).is_equal_approx(color):
+		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(color):
 			east += Vector2.RIGHT
 		for px in range(west.x + 1, east.x):
 			var p := Vector2(px, n.y)
@@ -175,13 +184,22 @@ func _flood_fill(position : Vector2) -> void:
 			processed.set_bit(p, true)
 			var north := p + Vector2.UP
 			var south := p + Vector2.DOWN
-			if north in project.selected_pixels && image.get_pixelv(north).is_equal_approx(color):
+			if north.y >= 0 && image.get_pixelv(north).is_equal_approx(color):
 				q.append(north)
-			if south in project.selected_pixels && image.get_pixelv(south).is_equal_approx(color):
+			if south.y < project.size.y && image.get_pixelv(south).is_equal_approx(color):
 				q.append(south)
 
 
 func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
+	var project : Project = Global.current_project
+	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	if entire_image_selected:
+		if not _get_draw_rect().has_point(Vector2(x, y)):
+			return
+	else:
+		if not Vector2(x, y) in project.selected_pixels:
+			return
+
 	if _fill_with == 0 or _pattern == null:
 		image.set_pixel(x, y, color)
 	else:
