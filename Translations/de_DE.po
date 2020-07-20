@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-07-18 16:11\n"
+"PO-Revision-Date: 2020-07-20 06:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -407,7 +407,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Farbton/Sättigung/Wert anpassen"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradient"
 
 msgid "Adjust HSV"
 msgstr "HSV anpassen"
@@ -440,22 +440,22 @@ msgid "Thickness:"
 msgstr "Dicke:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Farben:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Schritte:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Von oben nach unten"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Von unten nach oben"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Von links nach rechts"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Von rechts nach links"
 
 msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
