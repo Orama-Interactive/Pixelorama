@@ -68,19 +68,27 @@ func set_pixel_perfect(value: bool) -> void:
 
 func set_pixel(image: Image, position: Vector2, color: Color) -> void:
 	var project : Project = Global.current_project
+	drawers[0].set_pixel(image, position, color, color_op)
 
+	# Handle Mirroring
 	var mirror_x = project.x_symmetry_point - position.x
 	var mirror_y = project.y_symmetry_point - position.y
-	var selected_pixels_x := []
-	var selected_pixels_y := []
-	for i in project.selected_pixels:
-		selected_pixels_x.append(i.x)
-		selected_pixels_y.append(i.y)
+	var mirror_x_inside : bool
+	var mirror_y_inside : bool
+	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	if entire_image_selected:
+		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
+		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
+	else:
+		var selected_pixels_x := []
+		var selected_pixels_y := []
+		for i in project.selected_pixels:
+			selected_pixels_x.append(i.x)
+			selected_pixels_y.append(i.y)
 
-	var mirror_x_inside : bool = mirror_x in selected_pixels_x
-	var mirror_y_inside : bool = mirror_y in selected_pixels_y
+		mirror_x_inside = mirror_x in selected_pixels_x
+		mirror_y_inside = mirror_y in selected_pixels_y
 
-	drawers[0].set_pixel(image, position, color, color_op)
 	if horizontal_mirror and mirror_x_inside:
 		drawers[1].set_pixel(image, Vector2(mirror_x, position.y), color, color_op)
 		if vertical_mirror and mirror_y_inside:

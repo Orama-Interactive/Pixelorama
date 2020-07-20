@@ -269,18 +269,27 @@ func draw_tool_brush(position : Vector2) -> void:
 	dst = dst_rect.position
 
 	var project : Project = Global.current_project
+	_draw_brush_image(_brush_image, src_rect, dst)
+
+	# Handle Mirroring
 	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
-	var selected_pixels_x := []
-	var selected_pixels_y := []
-	for i in project.selected_pixels:
-		selected_pixels_x.append(i.x)
-		selected_pixels_y.append(i.y)
+	var mirror_x_inside : bool
+	var mirror_y_inside : bool
+	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	if entire_image_selected:
+		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
+		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
+	else:
+		var selected_pixels_x := []
+		var selected_pixels_y := []
+		for i in project.selected_pixels:
+			selected_pixels_x.append(i.x)
+			selected_pixels_y.append(i.y)
 
-	var mirror_x_inside : bool = mirror_x in selected_pixels_x
-	var mirror_y_inside : bool = mirror_y in selected_pixels_y
+		mirror_x_inside = mirror_x in selected_pixels_x
+		mirror_y_inside = mirror_y in selected_pixels_y
 
-	_draw_brush_image(_brush_image, src_rect, dst)
 	if tool_slot.horizontal_mirror and mirror_x_inside:
 		_draw_brush_image(_mirror_brushes.x, _flip_rect(src_rect, size, true, false), Vector2(mirror_x, dst.y))
 		if tool_slot.vertical_mirror and mirror_y_inside:
@@ -319,11 +328,17 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 
 
 func _set_pixel(position : Vector2) -> void:
+	var project : Project = Global.current_project
 	if Global.tile_mode and _get_tile_mode_rect().has_point(position):
-		position = position.posmodv(Global.current_project.size)
+		position = position.posmodv(project.size)
 
-	if not position in Global.current_project.selected_pixels:
-		return
+	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	if entire_image_selected:
+		if not _get_draw_rect().has_point(position):
+			return
+	else:
+		if not position in project.selected_pixels:
+			return
 
 	var image := _get_draw_image()
 	var i := int(position.x + position.y * image.get_size().x)
