@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-18 16:10\n"
+"PO-Revision-Date: 2020-07-20 22:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -773,7 +773,7 @@ msgid "Overwrite"
 msgstr ""
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Parfait"
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
