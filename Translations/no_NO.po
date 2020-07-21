@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-07-18 16:10\n"
+"PO-Revision-Date: 2020-07-21 19:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -161,6 +161,9 @@ msgstr "Vis Animasjonstidslinje"
 
 msgid "Zen Mode"
 msgstr "Zenmodus"
+
+msgid "Fullscreen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Fyll med farge:"
