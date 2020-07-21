@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-07-20 06:07\n"
+"PO-Revision-Date: 2020-07-21 19:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -161,6 +161,9 @@ msgstr "Zeige Animations-Zeitleiste"
 
 msgid "Zen Mode"
 msgstr "Zen-Modus"
+
+msgid "Fullscreen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "Fülle mit Farbe:"
