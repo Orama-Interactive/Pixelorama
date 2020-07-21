@@ -151,6 +151,9 @@ msgstr ""
 msgid "Zen Mode"
 msgstr ""
 
+msgid "Fullscreen Mode"
+msgstr ""
+
 msgid "Fill with color:"
 msgstr ""
 

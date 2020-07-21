@@ -52,9 +52,6 @@ func _input(event : InputEvent) -> void:
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
-	if event.is_action_pressed("toggle_fullscreen"):
-		OS.window_fullscreen = !OS.window_fullscreen
-
 	if event.is_action_pressed("redo_secondary"): # Shift + Ctrl + Z
 		redone = true
 		Global.current_project.undo_redo.redo()

@@ -42,6 +42,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - The "create new image" dialog now remembers the last created canvas size. The default image settings are being used only when Pixelorama first launches. ([#178](https://github.com/Orama-Interactive/Pixelorama/issues/178))
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
+- Fullscreen can be toggled on and off from the View menu.
 
 ### Fixed
 - Exporting large images and drawing with large image brushes is now a lot faster. (Because of Godot 3.2.2)
