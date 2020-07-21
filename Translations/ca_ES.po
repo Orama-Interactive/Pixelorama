@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-21 19:18\n"
+"PO-Revision-Date: 2020-07-21 20:07\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -163,7 +163,7 @@ msgid "Zen Mode"
 msgstr "Mode Zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Pantalla completa"
 
 msgid "Fill with color:"
 msgstr "Omple amb color:"
@@ -411,7 +411,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
-msgstr ""
+msgstr "Degradat"
 
 msgid "Adjust HSV"
 msgstr ""
@@ -444,10 +444,10 @@ msgid "Thickness:"
 msgstr "Gruix:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Colors:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Passos:"
 
 msgid "Top to Bottom"
 msgstr ""
