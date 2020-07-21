@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-18 16:48\n"
+"PO-Revision-Date: 2020-07-21 19:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,6 +160,9 @@ msgid "Show Animation Timeline"
 msgstr "Показать таймлайн анимации"
 
 msgid "Zen Mode"
+msgstr ""
+
+msgid "Fullscreen Mode"
 msgstr ""
 
 msgid "Fill with color:"
