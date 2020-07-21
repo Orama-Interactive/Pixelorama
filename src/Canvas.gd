@@ -14,6 +14,7 @@ var sprite_changed_this_frame := false # for optimization purposes
 func _ready() -> void:
 	var frame : Frame = new_empty_frame(true)
 	Global.current_project.frames.append(frame)
+	yield(get_tree().create_timer(0.2), "timeout")
 	camera_zoom()
 
 

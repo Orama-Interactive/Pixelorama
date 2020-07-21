@@ -59,6 +59,8 @@ func _input(event : InputEvent) -> void:
 
 
 func setup_application_window_size() -> void:
+	if OS.get_name() == "HTML5":
+		return
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	OS.min_window_size = Vector2(1024, 576)
 
@@ -77,7 +79,7 @@ func setup_application_window_size() -> void:
 
 func show_splash_screen() -> void:
 	# Wait for the window to adjust itself, so the popup is correctly centered
-	yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree().create_timer(0.2), "timeout")
 	if Global.config_cache.get_value("preferences", "startup"):
 		$Dialogs/SplashDialog.popup_centered() # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
