@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-07-21 19:18\n"
+"PO-Revision-Date: 2020-07-21 21:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,16 +28,16 @@ msgid "Please Confirm..."
 msgstr "Por Favor Confirme..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nome do Arquivo:"
 
 msgid "Image Size"
 msgstr "Tamanho da Imagem"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Tamanho da Tela"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Tamanho do Quadro"
 
 msgid "Width:"
 msgstr "Largura:"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Altura:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centralizado"
 
 msgid "File"
 msgstr "Arquivo"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Salvar como..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Usar Compressão ZSTD"
 
 msgid "Import"
 msgstr "Importar"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Refazer"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 msgid "Paste"
-msgstr ""
+msgstr "Colar"
 
 msgid "Delete"
 msgstr "Deletar"
@@ -127,7 +127,7 @@ msgid "Crop Image"
 msgstr "Cortar imagem"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Redimensionar Tela"
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
@@ -160,10 +160,10 @@ msgid "Show Animation Timeline"
 msgstr "Mostrar linha do tempo de animação"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Modo Zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Modo Tela Cheia"
 
 msgid "Fill with color:"
 msgstr "Preencher com cor:"
@@ -175,43 +175,43 @@ msgid "Open File(s)"
 msgstr "Abrir Arquivo(s)..."
 
 msgid "Import Options"
-msgstr ""
+msgstr "Importar Opções"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importar como:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Nova Aba"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Spritesheet (nova aba)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Novo Quadro"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nova camada"
 
 msgid "New palette"
-msgstr ""
+msgstr "Nova paleta"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nova escova"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Novo padrão"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Quadros horizontais:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Quadros verticais:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tipo do pincel:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Pincel de limpeza"
 
 msgid "Project brush"
 msgstr ""
