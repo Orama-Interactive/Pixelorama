@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-07-21 21:53\n"
+"PO-Revision-Date: 2020-07-21 22:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -214,10 +214,10 @@ msgid "File brush"
 msgstr "Pincel de limpeza"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Pincel do projeto"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Pincel aleatório"
 
 msgid "Save Sprite as .pxo"
 msgstr "Salvar Sprite como .pxo"
@@ -246,13 +246,13 @@ msgid "Frame"
 msgstr "Quadro"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Quadros:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Todos os quadros"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
 msgstr "Animação"
@@ -399,7 +399,7 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Inverter Cores"
 
 msgid "Desaturation"
 msgstr "Dessaturação"
@@ -411,7 +411,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Matiz/Saturação/Valor"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradiente"
 
 msgid "Adjust HSV"
 msgstr "Ajustar MSV"
@@ -444,22 +444,22 @@ msgid "Thickness:"
 msgstr "Espessura:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Cores:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Etapas:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Cima para Baixo"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Baixo para Cima"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Esquerda para a Direita"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Direita para Esquerda"
 
 msgid "View Splash Screen"
 msgstr "Ver Tela de Abertura"
@@ -549,10 +549,10 @@ msgid "Turkish"
 msgstr "Turco"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norueguês"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coreano"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -773,10 +773,10 @@ msgid "Brush size:"
 msgstr "Tamanho do pincel:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Substituir"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfeito"
 
 msgid "Brush color from"
 msgstr "Cor de pincel do"
@@ -803,7 +803,7 @@ msgid "Pattern"
 msgstr "Padrão"
 
 msgid "Offset"
-msgstr ""
+msgstr "Deslocamento"
 
 msgid "Lighten"
 msgstr "Iluminar"
@@ -1115,7 +1115,7 @@ msgid "Import Palette"
 msgstr "Importar Paleta"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Criar paleta a partir do Sprite Atual"
 
 msgid "Palette Name:"
 msgstr "Nome da Paleta:"
@@ -1277,24 +1277,25 @@ msgid "Close"
 msgstr "Fechar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Deletar"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Foi encontrado um backup salvo automaticamente em %s.\n"
+"Você deseja recarregá-lo?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Backup recarregado"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Remover paleta selecionada"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Você não pode remover mais paletas!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Não foi possível remover a paleta porque não existe!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Ocorreu um erro ao remover a paleta! Código do erro: %s"
 
