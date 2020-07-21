@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-07-18 16:10\n"
+"PO-Revision-Date: 2020-07-21 19:18\n"
 
 msgid "OK"
 msgstr "예"
@@ -161,6 +161,9 @@ msgstr ""
 
 msgid "Zen Mode"
 msgstr "젠 모드"
+
+msgid "Fullscreen Mode"
+msgstr ""
 
 msgid "Fill with color:"
 msgstr "색상으로 채우기:"
