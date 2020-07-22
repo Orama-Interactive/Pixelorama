@@ -41,8 +41,8 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
 
-	x_symmetry_point = size.x / 2 + 1
-	y_symmetry_point = size.y / 2 + 1
+	x_symmetry_point = size.x / 2
+	y_symmetry_point = size.y / 2
 
 	if !x_symmetry_axis:
 		x_symmetry_axis = SymmetryGuide.new()
