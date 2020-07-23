@@ -6,7 +6,10 @@
 </p>
 <p align="center">
     <a href="https://github.com/Orama-Interactive/Pixelorama/actions">
-        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/godot-ci-test/badge.svg" alt="Build Passing" />
+        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/dev-desktop-builds/badge.svg" alt="Build Passing" />
+    </a>
+    <a href="https://orama-interactive.github.io/Pixelorama/early_access/">
+        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/dev-web/badge.svg" alt="Build Passing" />
     </a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" />
@@ -14,14 +17,14 @@
     <a href="https://github.com/Orama-Interactive/Pixelorama">
         <img src="https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg" alt="Repository size" />
     </a>
-    <a href="https://github.com/Orama-Interactive/Pixelorama/releases">
-        <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" />
-    </a>
     <a href="https://github.com/Orama-Interactive/Pixelorama/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" />
     </a>
 </p>
 <p align="center">
+    <a href="https://github.com/Orama-Interactive/Pixelorama/releases">
+        <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" />
+    </a>
     <a href="https://discord.gg/GTMtr8s">
         <img src="https://discordapp.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
     </a>
