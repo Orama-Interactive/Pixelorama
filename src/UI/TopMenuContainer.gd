@@ -331,17 +331,17 @@ func image_menu_id_pressed(id : int) -> void:
 		9: # HSV
 			show_hsv_configuration_popup()
 		10: # Gradient
-			Global.control.get_node("Dialogs/GradientDialog").popup_centered()
+			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
 			Global.dialog_open(true)
 
 
 func show_scale_image_popup() -> void:
-	Global.control.get_node("Dialogs/ScaleImage").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/ScaleImage").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_resize_canvas_popup() -> void:
-	Global.control.get_node("Dialogs/ResizeCanvas").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
 	Global.dialog_open(true)
 
 
@@ -359,18 +359,18 @@ func flip_image(horizontal : bool) -> void:
 
 func show_rotate_image_popup() -> void:
 	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
-	Global.control.get_node("Dialogs/RotateImage").set_sprite(image)
-	Global.control.get_node("Dialogs/RotateImage").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/RotateImage").set_sprite(image)
+	Global.control.get_node("Dialogs/ImageEffects/RotateImage").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_add_outline_popup() -> void:
-	Global.control.get_node("Dialogs/OutlineDialog").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/OutlineDialog").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_hsv_configuration_popup() -> void:
-	Global.control.get_node("Dialogs/HSVDialog").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
 	Global.dialog_open(true)
 
 

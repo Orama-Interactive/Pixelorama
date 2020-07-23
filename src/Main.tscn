@@ -52,6 +52,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ImageEffects" type="Control" parent="Dialogs"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ScaleImage" parent="Dialogs/ImageEffects" instance=ExtResource( 31 )]
+margin_bottom = 127.0
+
+[node name="ResizeCanvas" parent="Dialogs/ImageEffects" instance=ExtResource( 7 )]
+margin_right = 216.0
+margin_bottom = 392.0
+
+[node name="RotateImage" parent="Dialogs/ImageEffects" instance=ExtResource( 38 )]
+
+[node name="OutlineDialog" parent="Dialogs/ImageEffects" instance=ExtResource( 33 )]
+margin_right = 217.0
+margin_bottom = 106.0
+
+[node name="HSVDialog" parent="Dialogs/ImageEffects" instance=ExtResource( 44 )]
+
+[node name="GradientDialog" parent="Dialogs/ImageEffects" instance=ExtResource( 9 )]
+margin_bottom = 214.0
+
 [node name="BrushesPopup" parent="Dialogs" instance=ExtResource( 6 )]
 
 [node name="PatternsPopup" parent="Dialogs" instance=ExtResource( 5 )]
@@ -73,21 +95,8 @@ margin_bottom = 388.0
 
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
 
-[node name="ScaleImage" parent="Dialogs" instance=ExtResource( 31 )]
-margin_bottom = 127.0
-
-[node name="ResizeCanvas" parent="Dialogs" instance=ExtResource( 7 )]
-margin_right = 216.0
-margin_bottom = 392.0
-
 [node name="PreferencesDialog" parent="Dialogs" instance=ExtResource( 32 )]
 margin_right = 617.0
-
-[node name="RotateImage" parent="Dialogs" instance=ExtResource( 38 )]
-
-[node name="OutlineDialog" parent="Dialogs" instance=ExtResource( 33 )]
-margin_right = 217.0
-margin_bottom = 106.0
 
 [node name="AboutDialog" parent="Dialogs" instance=ExtResource( 34 )]
 
@@ -119,8 +128,6 @@ margin_bottom = 60.0
 window_title = "Error!"
 dialog_text = "This is an error message!"
 
-[node name="HSVDialog" parent="Dialogs" instance=ExtResource( 44 )]
-
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 349.0
 margin_bottom = 88.0
@@ -129,8 +136,6 @@ popup_exclusive = true
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
 
-[node name="GradientDialog" parent="Dialogs" instance=ExtResource( 9 )]
-
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
 
@@ -138,6 +143,12 @@ visible = false
 visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]
+[connection signal="popup_hide" from="Dialogs/ImageEffects/ScaleImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ImageEffects/ResizeCanvas" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ImageEffects/RotateImage" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ImageEffects/OutlineDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ImageEffects/HSVDialog" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/ImageEffects/GradientDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_file_selected"]
@@ -147,11 +158,7 @@ visible = false
 [connection signal="confirmed" from="Dialogs/SaveSpriteHTML5" to="." method="_on_SaveSpriteHTML5_confirmed"]
 [connection signal="popup_hide" from="Dialogs/SaveSpriteHTML5" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ExportDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ScaleImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ResizeCanvas" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/PreferencesDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/RotateImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/OutlineDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/AboutDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/UnsavedCanvasDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="Dialogs/QuitDialog" to="." method="_on_QuitDialog_confirmed"]
@@ -160,6 +167,4 @@ visible = false
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/HSVDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/GradientDialog" to="." method="_can_draw_true"]
