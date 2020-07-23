@@ -35,9 +35,7 @@ func _on_Cancel_pressed() -> void:
 
 func _on_Apply_pressed() -> void:
 	Global.canvas.handle_undo("Draw")
-	DrawingAlgos.adjust_hsv(current_cel,0,hue_slider.value)
-	DrawingAlgos.adjust_hsv(current_cel,1,sat_slider.value)
-	DrawingAlgos.adjust_hsv(current_cel,2,val_slider.value)
+	DrawingAlgos.adjust_hsv(current_cel, hue_slider.value, sat_slider.value, val_slider.value)
 	Global.canvas.update_texture(Global.current_project.current_layer)
 	Global.canvas.handle_redo("Draw")
 	reset()
@@ -57,9 +55,7 @@ func reset() -> void:
 
 func update_preview() -> void:
 	preview_image.copy_from(current_cel)
-	DrawingAlgos.adjust_hsv(preview_image,0,hue_slider.value)
-	DrawingAlgos.adjust_hsv(preview_image,1,sat_slider.value)
-	DrawingAlgos.adjust_hsv(preview_image,2,val_slider.value)
+	DrawingAlgos.adjust_hsv(preview_image, hue_slider.value, sat_slider.value, val_slider.value)
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
 

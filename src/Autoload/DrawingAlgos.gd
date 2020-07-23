@@ -454,45 +454,37 @@ func generate_outline(image : Image, outline_color : Color, thickness : int, dia
 	Global.canvas.handle_redo("Draw")
 
 
-func adjust_hsv(img: Image, id : int, delta : float) -> void:
+func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float) -> void:
 	img.lock()
+	for i in Global.current_project.selected_pixels:
+		var c : Color = img.get_pixelv(i)
+		# Hue
+		var hue = range_lerp(c.h,0,1,-180,180)
+		hue = hue + delta_h
 
-	match id:
-		0: # Hue
-			for i in Global.current_project.selected_pixels:
-				var c : Color = img.get_pixelv(i)
-				var hue = range_lerp(c.h,0,1,-180,180)
-				hue = hue + delta
+		while(hue >= 180):
+			hue -= 360
+		while(hue < -180):
+			hue += 360
 
-				while(hue >= 180):
-					hue -= 360
-				while(hue < -180):
-					hue += 360
-				c.h = range_lerp(hue,-180,180,0,1)
-				img.set_pixelv(i,c)
+		# Saturation
+		var sat = c.s
+		if delta_s > 0:
+			sat = range_lerp(delta_s,0,100,c.s,1)
+		elif delta_s < 0:
+			sat = range_lerp(delta_s,-100,0,0,c.s)
 
-		1: # Saturation
-			for i in Global.current_project.selected_pixels:
-				var c : Color = img.get_pixelv(i)
-				var sat = c.s
-				if delta > 0:
-					sat = range_lerp(delta,0,100,c.s,1)
-				elif delta < 0:
-					sat = range_lerp(delta,-100,0,0,c.s)
-				c.s = sat
-				img.set_pixelv(i,c)
+		# Value
+		var val = c.v
+		if delta_v > 0:
+			val = range_lerp(delta_v,0,100,c.v,1)
+		elif delta_v < 0:
+			val = range_lerp(delta_v,-100,0,0,c.v)
 
-		2: # Value
-			for i in Global.current_project.selected_pixels:
-				var c : Color = img.get_pixelv(i)
-				var val = c.v
-				if delta > 0:
-					val = range_lerp(delta,0,100,c.v,1)
-				elif delta < 0:
-					val = range_lerp(delta,-100,0,0,c.v)
-
-				c.v = val
-				img.set_pixelv(i,c)
+		c.h = range_lerp(hue,-180,180,0,1)
+		c.s = sat
+		c.v = val
+		img.set_pixelv(i,c)
 
 	img.unlock()
 
