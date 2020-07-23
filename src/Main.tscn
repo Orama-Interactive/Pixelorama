@@ -55,6 +55,7 @@ __meta__ = {
 [node name="ImageEffects" type="Control" parent="Dialogs"]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="ScaleImage" parent="Dialogs/ImageEffects" instance=ExtResource( 31 )]
 margin_bottom = 127.0
