@@ -45,17 +45,27 @@ func _on_Apply_pressed() -> void:
 		Global.canvas.handle_undo("Draw")
 		DrawingAlgos.adjust_hsv(current_cel, hue_slider.value, sat_slider.value, val_slider.value, pixels)
 		Global.canvas.handle_redo("Draw")
+
 	elif affect == FRAME:
 		Global.canvas.handle_undo("Draw", Global.current_project, -1)
 		for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
 			DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
 		Global.canvas.handle_redo("Draw", Global.current_project, -1)
+
 	elif affect == ALL_FRAMES:
 		Global.canvas.handle_undo("Draw", Global.current_project, -1, -1)
 		for frame in Global.current_project.frames:
 			for cel in frame.cels:
 				DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
 		Global.canvas.handle_redo("Draw", Global.current_project, -1, -1)
+
+	elif affect == ALL_PROJECTS:
+		for project in Global.projects:
+			Global.canvas.handle_undo("Draw", project, -1, -1)
+			for frame in project.frames:
+				for cel in frame.cels:
+					DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
+			Global.canvas.handle_redo("Draw", project, -1, -1)
 	reset()
 	visible = false
 

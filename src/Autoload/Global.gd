@@ -277,71 +277,73 @@ func notification_label(text : String) -> void:
 	get_tree().get_root().add_child(notification)
 
 
-func general_undo() -> void:
-	current_project.undos -= 1
-	var action_name : String = current_project.undo_redo.get_current_action_name()
+func general_undo(project : Project = current_project) -> void:
+	project.undos -= 1
+	var action_name : String = project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
-func general_redo() -> void:
-	if current_project.undos < current_project.undo_redo.get_version(): # If we did undo and then redo
-		current_project.undos = current_project.undo_redo.get_version()
+func general_redo(project : Project = current_project) -> void:
+	if project.undos < project.undo_redo.get_version(): # If we did undo and then redo
+		project.undos = project.undo_redo.get_version()
 	if control.redone:
-		var action_name : String = current_project.undo_redo.get_current_action_name()
+		var action_name : String = project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)
 
 
-func undo(_frame_index := -1, _layer_index := -1) -> void:
-	general_undo()
-	var action_name : String = current_project.undo_redo.get_current_action_name()
+func undo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
+	general_undo(project)
+	var action_name : String = project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
-			canvas.update_texture(_layer_index, _frame_index)
+			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
-			for i in current_project.frames.size():
-				for j in current_project.layers.size():
-					canvas.update_texture(j, i)
+			for i in project.frames.size():
+				for j in project.layers.size():
+					canvas.update_texture(j, i, project)
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
-		if current_project.frames.size() == 2: # Stop animating
+		if project.frames.size() == 2: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 
 	canvas.update()
-	if !current_project.has_changed:
-		current_project.has_changed = true
-		self.window_title = window_title + "(*)"
+	if !project.has_changed:
+		project.has_changed = true
+		if project == current_project:
+			self.window_title = window_title + "(*)"
 
 
-func redo(_frame_index := -1, _layer_index := -1) -> void:
-	general_redo()
-	var action_name : String = current_project.undo_redo.get_current_action_name()
+func redo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
+	general_redo(project)
+	var action_name : String = project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
-			canvas.update_texture(_layer_index, _frame_index)
+			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
-			for i in current_project.frames.size():
-				for j in current_project.layers.size():
-					canvas.update_texture(j, i)
+			for i in project.frames.size():
+				for j in project.layers.size():
+					canvas.update_texture(j, i, project)
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
 
 	elif "Frame" in action_name:
-		if current_project.frames.size() == 1: # Stop animating
+		if project.frames.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 
 	canvas.update()
-	if !current_project.has_changed:
-		current_project.has_changed = true
-		self.window_title = window_title + "(*)"
+	if !project.has_changed:
+		project.has_changed = true
+		if project == current_project:
+			self.window_title = window_title + "(*)"
 
 
 func title_changed(value : String) -> void:

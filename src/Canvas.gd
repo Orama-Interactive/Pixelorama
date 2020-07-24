@@ -164,7 +164,7 @@ func handle_undo(action : String, project : Project = Global.current_project, la
 		var data = cel.image.data
 		cel.image.lock()
 		project.undo_redo.add_undo_property(cel.image, "data", data)
-	project.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index)
+	project.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index, project)
 
 	can_undo = false
 
@@ -199,19 +199,20 @@ func handle_redo(_action : String, project : Project = Global.current_project, l
 
 	for cel in cels:
 		project.undo_redo.add_do_property(cel.image, "data", cel.image.data)
-	project.undo_redo.add_do_method(Global, "redo", frame_index, layer_index)
+	project.undo_redo.add_do_method(Global, "redo", frame_index, layer_index, project)
 	project.undo_redo.commit_action()
 
 
-func update_texture(layer_index : int, frame_index := -1) -> void:
+func update_texture(layer_index : int, frame_index := -1, project : Project = Global.current_project) -> void:
 	if frame_index == -1:
-		frame_index = Global.current_project.current_frame
-	var current_cel : Cel = Global.current_project.frames[frame_index].cels[layer_index]
+		frame_index = project.current_frame
+	var current_cel : Cel = project.frames[frame_index].cels[layer_index]
 	current_cel.image_texture.create_from_image(current_cel.image, 0)
 
-	var frame_texture_rect : TextureRect
-	frame_texture_rect = Global.find_node_by_name(Global.current_project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
-	frame_texture_rect.texture = current_cel.image_texture
+	if project == Global.current_project:
+		var frame_texture_rect : TextureRect
+		frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+		frame_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:
