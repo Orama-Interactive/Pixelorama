@@ -1,5 +1,10 @@
 extends WindowDialog
 
+
+enum {CEL, FRAME, ALL_FRAMES, ALL_PROJECTS}
+
+var affect : int = CEL
+var pixels := []
 var current_cel : Image
 var preview_image : Image
 var preview_texture : ImageTexture
@@ -13,6 +18,7 @@ onready var sat_spinbox = $MarginContainer/VBoxContainer/HBoxContainer/TextBoxes
 onready var val_spinbox = $MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Value
 
 onready var preview = $MarginContainer/VBoxContainer/TextureRect
+onready var selection_checkbox : CheckBox = $MarginContainer/VBoxContainer/AffectHBoxContainer/SelectionCheckBox
 
 
 func _ready() -> void:
@@ -25,6 +31,7 @@ func _ready() -> void:
 func _on_HSVDialog_about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	preview_image.copy_from(current_cel)
+	_on_SelectionCheckBox_toggled(selection_checkbox.pressed)
 	update_preview()
 
 
@@ -34,10 +41,15 @@ func _on_Cancel_pressed() -> void:
 
 
 func _on_Apply_pressed() -> void:
-	Global.canvas.handle_undo("Draw")
-	DrawingAlgos.adjust_hsv(current_cel, hue_slider.value, sat_slider.value, val_slider.value)
-	Global.canvas.update_texture(Global.current_project.current_layer)
-	Global.canvas.handle_redo("Draw")
+	if affect == CEL:
+		Global.canvas.handle_undo("Draw")
+		DrawingAlgos.adjust_hsv(current_cel, hue_slider.value, sat_slider.value, val_slider.value, pixels)
+		Global.canvas.handle_redo("Draw")
+	elif affect == FRAME:
+		Global.canvas.handle_undo("Draw", Global.current_project, -1)
+		for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
+			DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
+		Global.canvas.handle_redo("Draw", Global.current_project, -1)
 	reset()
 	visible = false
 
@@ -55,7 +67,7 @@ func reset() -> void:
 
 func update_preview() -> void:
 	preview_image.copy_from(current_cel)
-	DrawingAlgos.adjust_hsv(preview_image, hue_slider.value, sat_slider.value, val_slider.value)
+	DrawingAlgos.adjust_hsv(preview_image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
 
@@ -94,3 +106,19 @@ func _on_Value_value_changed(value : float) -> void:
 	val_spinbox.value = value
 	val_slider.value = value
 	update_preview()
+
+
+func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
+	pixels.clear()
+	if button_pressed:
+		pixels = Global.current_project.selected_pixels.duplicate()
+	else:
+		for x in Global.current_project.size.x:
+			for y in Global.current_project.size.y:
+				pixels.append(Vector2(x, y))
+
+	update_preview()
+
+
+func _on_AffectOptionButton_item_selected(index : int) -> void:
+	affect = index

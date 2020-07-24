@@ -454,9 +454,9 @@ func generate_outline(image : Image, outline_color : Color, thickness : int, dia
 	Global.canvas.handle_redo("Draw")
 
 
-func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float) -> void:
+func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, pixels : Array) -> void:
 	img.lock()
-	for i in Global.current_project.selected_pixels:
+	for i in pixels:
 		var c : Color = img.get_pixelv(i)
 		# Hue
 		var hue = range_lerp(c.h,0,1,-180,180)

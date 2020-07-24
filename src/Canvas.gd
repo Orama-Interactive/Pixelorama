@@ -129,50 +129,78 @@ func new_empty_frame(first_time := false, single_layer := false, size := Global.
 	return frame
 
 
-func handle_undo(action : String) -> void:
+func handle_undo(action : String, project : Project = Global.current_project, layer_index := -2, frame_index := -2) -> void:
 	if !can_undo:
 		return
+
+	if layer_index <= -2:
+		layer_index = project.current_layer
+	if frame_index <= -2:
+		frame_index = project.current_frame
+
+	var cels := []
 	var frames := []
-	var frame_index := -1
-	var layer_index := -1
-	if Global.animation_timer.is_stopped(): # if we're not animating, store only the current canvas
-		frames.append(Global.current_project.frames[Global.current_project.current_frame])
-		frame_index = Global.current_project.current_frame
-		layer_index = Global.current_project.current_layer
-	else: # If we're animating, store all frames
-		frames = Global.current_project.frames
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action(action)
+	var layers := []
+	if frame_index == -1:
+		frames = project.frames
+	else:
+		frames.append(project.frames[frame_index])
+
+	if layer_index == -1:
+		layers = project.layers
+	else:
+		layers.append(project.layers[layer_index])
+
 	for f in frames:
-		# I'm not sure why I have to unlock it, but...
-		# ...if I don't, it doesn't work properly
-		f.cels[Global.current_project.current_layer].image.unlock()
-		var data = f.cels[Global.current_project.current_layer].image.data
-		f.cels[Global.current_project.current_layer].image.lock()
-		Global.current_project.undo_redo.add_undo_property(f.cels[Global.current_project.current_layer].image, "data", data)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index)
+		for l in layers:
+			var index = project.layers.find(l)
+			cels.append(f.cels[index])
+
+	project.undos += 1
+	project.undo_redo.create_action(action)
+	for cel in cels:
+		# If we don't unlock the image, it doesn't work properly
+		cel.image.unlock()
+		var data = cel.image.data
+		cel.image.lock()
+		project.undo_redo.add_undo_property(cel.image, "data", data)
+	project.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index)
 
 	can_undo = false
 
 
-func handle_redo(_action : String) -> void:
+func handle_redo(_action : String, project : Project = Global.current_project, layer_index := -2, frame_index := -2) -> void:
 	can_undo = true
-
-	if Global.current_project.undos < Global.current_project.undo_redo.get_version():
+	if project.undos < project.undo_redo.get_version():
 		return
+
+	if layer_index <= -2:
+		layer_index = project.current_layer
+	if frame_index <= -2:
+		frame_index = project.current_frame
+
+	var cels := []
 	var frames := []
-	var frame_index := -1
-	var layer_index := -1
-	if Global.animation_timer.is_stopped():
-		frames.append(Global.current_project.frames[Global.current_project.current_frame])
-		frame_index = Global.current_project.current_frame
-		layer_index = Global.current_project.current_layer
+	var layers := []
+	if frame_index == -1:
+		frames = project.frames
 	else:
-		frames = Global.current_project.frames
+		frames.append(project.frames[frame_index])
+
+	if layer_index == -1:
+		layers = project.layers
+	else:
+		layers.append(project.layers[layer_index])
+
 	for f in frames:
-		Global.current_project.undo_redo.add_do_property(f.cels[Global.current_project.current_layer].image, "data", f.cels[Global.current_project.current_layer].image.data)
-	Global.current_project.undo_redo.add_do_method(Global, "redo", frame_index, layer_index)
-	Global.current_project.undo_redo.commit_action()
+		for l in layers:
+			var index = project.layers.find(l)
+			cels.append(f.cels[index])
+
+	for cel in cels:
+		project.undo_redo.add_do_property(cel.image, "data", cel.image.data)
+	project.undo_redo.add_do_method(Global, "redo", frame_index, layer_index)
+	project.undo_redo.commit_action()
 
 
 func update_texture(layer_index : int, frame_index := -1) -> void:
