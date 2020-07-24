@@ -61,10 +61,18 @@ func _on_Apply_pressed() -> void:
 
 	elif affect == ALL_PROJECTS:
 		for project in Global.projects:
+			var _pixels := []
+			if selection_checkbox.pressed:
+				_pixels = project.selected_pixels.duplicate()
+			else:
+				for x in project.size.x:
+					for y in project.size.y:
+						_pixels.append(Vector2(x, y))
+
 			Global.canvas.handle_undo("Draw", project, -1, -1)
 			for frame in project.frames:
 				for cel in frame.cels:
-					DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
+					DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, _pixels)
 			Global.canvas.handle_redo("Draw", project, -1, -1)
 	reset()
 	visible = false
