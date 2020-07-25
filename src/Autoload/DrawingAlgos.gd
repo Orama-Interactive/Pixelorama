@@ -499,10 +499,11 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 		color = colors[-1].linear_interpolate(colors[0], t * i)
 		colors.insert(1, color)
 
-	image.lock()
+	image.unlock()
 	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
 		colors.invert()
 	var size := image.get_size()
+	image.lock()
 	var gradient_size
 
 	if direction == GradientDirection.TOP or direction == GradientDirection.BOTTOM:
