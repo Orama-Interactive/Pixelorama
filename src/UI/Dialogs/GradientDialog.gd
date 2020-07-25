@@ -46,5 +46,4 @@ func _on_OptionButton_item_selected(_index : int) -> void:
 func _on_GradientDialog_confirmed() -> void:
 	Global.canvas.handle_undo("Draw")
 	DrawingAlgos.generate_gradient(current_cel, [color1.color, color2.color], steps.value, direction.selected)
-	Global.canvas.update_texture(Global.current_project.current_layer)
 	Global.canvas.handle_redo("Draw")

@@ -300,7 +300,7 @@ func toggle_fullscreen() -> void:
 func image_menu_id_pressed(id : int) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked
 		return
-	var image : Image = Global.current_project.frames[0].cels[0].image
+	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	match id:
 		0: # Scale Image
 			show_scale_image_popup()
