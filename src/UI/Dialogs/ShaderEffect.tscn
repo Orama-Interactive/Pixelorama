@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/ShaderEffect.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+
+[node name="ShaderEffect" type="ConfirmationDialog"]
+margin_right = 200.0
+margin_bottom = 228.0
+rect_min_size = Vector2( 0, 0 )
+resizable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 255.0
+margin_bottom = 48.0
+text = "This is an experimental feature and may not be included in the stable version"
+autowrap = true
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 255.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/ViewportContainer"]
+size = Vector2( 1, 1 )
+transparent_bg = true
+handle_input_locally = false
+disable_3d = true
+usage = 0
+render_target_update_mode = 0
+gui_disable_input = true
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/ViewportContainer/Viewport"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ChooseShader" type="Button" parent="VBoxContainer"]
+margin_top = 57.0
+margin_right = 255.0
+margin_bottom = 77.0
+mouse_default_cursor_shape = 2
+text = "Choose Shader"
+
+[node name="ShaderLoadedLabel" type="Label" parent="VBoxContainer"]
+margin_top = 81.0
+margin_right = 255.0
+margin_bottom = 95.0
+text = "No shader loaded!"
+autowrap = true
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 263.0
+margin_bottom = 192.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*shader" )
+current_dir = "/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+[connection signal="about_to_show" from="." to="." method="_on_ShaderEffect_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_ShaderEffect_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_ShaderEffect_popup_hide"]
+[connection signal="pressed" from="VBoxContainer/ChooseShader" to="." method="_on_ChooseShader_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

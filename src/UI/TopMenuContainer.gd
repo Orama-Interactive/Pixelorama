@@ -94,7 +94,8 @@ func setup_image_menu() -> void:
 		"Desaturation" : 0,
 		"Outline" : 0,
 		"Adjust Hue/Saturation/Value" : 0,
-		"Gradient" : 0
+		"Gradient" : 0,
+		"Shader" : 0
 		}
 	var image_menu : PopupMenu = Global.image_menu.get_popup()
 
@@ -332,6 +333,9 @@ func image_menu_id_pressed(id : int) -> void:
 			show_hsv_configuration_popup()
 		10: # Gradient
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
+			Global.dialog_open(true)
+		11: # Shader
+			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
 			Global.dialog_open(true)
 
 
