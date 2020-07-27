@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-07-27 01:06\n"
+"PO-Revision-Date: 2020-07-27 01:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -452,13 +452,13 @@ msgid "Top to Bottom"
 msgstr "Od góry do dołu"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Od dołu do góry"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Od lewej do prawej"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Od prawej do lewej"
 
 msgid "View Splash Screen"
 msgstr "Pokaż ekran powitalny"
@@ -772,10 +772,10 @@ msgid "Brush size:"
 msgstr "Rozmiar pędzla:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Nadpisz"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
