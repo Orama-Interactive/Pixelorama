@@ -13,9 +13,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -121.0
-margin_top = -52.0
+margin_top = -66.0
 margin_right = 121.0
-margin_bottom = 24.0
+margin_bottom = 38.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
@@ -64,4 +64,14 @@ margin_right = 242.0
 margin_bottom = 76.0
 mouse_default_cursor_shape = 2
 text = "Place inside image"
+
+[node name="SelectionCheckBox" type="CheckBox" parent="OptionsContainer"]
+margin_top = 80.0
+margin_right = 90.0
+margin_bottom = 104.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Only affect selection"
+[connection signal="about_to_show" from="." to="." method="_on_OutlineDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_OutlineDialog_confirmed"]
+[connection signal="toggled" from="OptionsContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
