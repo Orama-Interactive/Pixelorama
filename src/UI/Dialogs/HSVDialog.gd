@@ -25,7 +25,6 @@ func _ready() -> void:
 	current_cel = Image.new()
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
-	preview_texture.flags = 0
 
 
 func _on_HSVDialog_about_to_show() -> void:

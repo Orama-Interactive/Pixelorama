@@ -12,10 +12,14 @@ onready var steps : SpinBox = $VBoxContainer/StepsContainer/StepSpinBox
 onready var direction : OptionButton = $VBoxContainer/DirectionContainer/DirectionOptionButton
 
 
-func _on_GradientDialog_about_to_show() -> void:
+func _ready() -> void:
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
-	preview_texture.flags = 0
+	color1.get_picker().presets_visible = false
+	color2.get_picker().presets_visible = false
+
+
+func _on_GradientDialog_about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	update_preview()
 

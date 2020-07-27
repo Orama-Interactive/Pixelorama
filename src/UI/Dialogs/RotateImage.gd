@@ -6,7 +6,6 @@ var layer : Image
 
 func _ready() -> void:
 	texture = ImageTexture.new()
-	texture.flags = 0
 	aux_img = Image.new()
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Rotxel")
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Upscale, Rotate and Downscale")

@@ -50,22 +50,22 @@ func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 	update_preview()
 
 
-func _on_ThickValue_value_changed(value : int):
+func _on_ThickValue_value_changed(value : int) -> void:
 	thickness = value
 	update_preview()
 
 
-func _on_OutlineColor_color_changed(_color : Color):
+func _on_OutlineColor_color_changed(_color : Color) -> void:
 	color = _color
 	update_preview()
 
 
-func _on_DiagonalCheckBox_toggled(button_pressed : bool):
+func _on_DiagonalCheckBox_toggled(button_pressed : bool) -> void:
 	diagonal = button_pressed
 	update_preview()
 
 
-func _on_InsideImageCheckBox_toggled(button_pressed : bool):
+func _on_InsideImageCheckBox_toggled(button_pressed : bool) -> void:
 	inside_image = button_pressed
 	update_preview()
 
