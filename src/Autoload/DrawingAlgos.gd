@@ -324,8 +324,8 @@ func generate_outline(image : Image, pixels : Array, outline_color : Color, thic
 	var new_image := Image.new()
 	new_image.copy_from(image)
 	new_image.lock()
+	image.lock()
 
-	Global.canvas.handle_undo("Draw")
 	for pos in pixels:
 		var current_pixel := image.get_pixelv(pos)
 		if current_pixel.a == 0:
@@ -448,8 +448,9 @@ func generate_outline(image : Image, pixels : Array, outline_color : Color, thic
 						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
+	image.unlock()
+	new_image.unlock()
 	image.copy_from(new_image)
-	Global.canvas.handle_redo("Draw")
 
 
 func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, pixels : Array) -> void:
