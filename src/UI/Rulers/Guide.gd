@@ -63,10 +63,12 @@ func _draw() -> void:
 func outside_canvas() -> bool:
 	if type == Types.HORIZONTAL:
 		if points[0].y < 0 || points[0].y > project.size.y:
+			project.guides.erase(self)
 			queue_free()
 			return true
 	else:
 		if points[0].x < 0 || points[0].x > project.size.x:
+			project.guides.erase(self)
 			queue_free()
 			return true
 	return false

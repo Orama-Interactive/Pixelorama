@@ -204,6 +204,8 @@ func serialize() -> Dictionary:
 	for guide in guides:
 		if guide is SymmetryGuide:
 			continue
+		if !is_instance_valid(guide):
+			continue
 		var coords = guide.points[0].x
 		if guide.type == Guide.Types.HORIZONTAL:
 			coords = guide.points[0].y
