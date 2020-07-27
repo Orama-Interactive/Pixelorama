@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-07-21 19:19\n"
+"PO-Revision-Date: 2020-07-27 01:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,7 +163,7 @@ msgid "Zen Mode"
 msgstr "Tryb zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Tryb pełnoekranowy"
 
 msgid "Fill with color:"
 msgstr "Wypełnij kolorem:"
@@ -208,16 +208,16 @@ msgid "Vertical frames:"
 msgstr "Klatki pionowe:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Typ pędzla:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Pędzel programu (File brush)"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Pędzel projektu"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Losowy pędzel"
 
 msgid "Save Sprite as .pxo"
 msgstr "Zapisz obraz jako .pxo"
@@ -410,7 +410,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradient"
 
 msgid "Adjust HSV"
 msgstr "Dostosuj HSV"
@@ -443,13 +443,13 @@ msgid "Thickness:"
 msgstr "Grubość:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Kolory:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Kroki:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Od góry do dołu"
 
 msgid "Bottom to Top"
 msgstr ""
