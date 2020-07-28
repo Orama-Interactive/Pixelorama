@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 16:20\n"
+"PO-Revision-Date: 2020-07-28 16:29\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -166,22 +166,22 @@ msgid "Fullscreen Mode"
 msgstr "Teljes képernyős mód"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Kitöltés színnel:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Fájl megnyitása"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Fájl(ok) megnyitása"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Importálás beállításai"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importálás másként:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Új lap"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
