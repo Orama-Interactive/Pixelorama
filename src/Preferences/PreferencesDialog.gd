@@ -2,15 +2,15 @@ extends AcceptDialog
 
 # Preferences table: [Prop name in Global, relative node path, value type]
 var preferences = [
-	["open_last_project", "General/OpenLastProject", "pressed"],
-	["smooth_zoom", "General/SmoothZoom", "pressed"],
-	["pressure_sensitivity_mode", "General/PressureSentivity/PressureSensitivityOptionButton", "selected"],
-	["show_left_tool_icon", "General/GridContainer/LeftToolIconCheckbox", "pressed"],
-	["show_right_tool_icon", "General/GridContainer/RightToolIconCheckbox", "pressed"],
-	["left_square_indicator_visible", "General/GridContainer/LeftIndicatorCheckbox", "pressed"],
-	["right_square_indicator_visible", "General/GridContainer/RightIndicatorCheckbox", "pressed"],
-	["autosave_interval", "General/AutosaveInterval/AutosaveInterval", "value"],
-	["enable_autosave", "General/EnableAutosave", "pressed"],
+	["open_last_project", "Startup/StartupContainer/OpenLastProject", "pressed"],
+	["smooth_zoom", "Canvas/SmoothZoom", "pressed"],
+	["pressure_sensitivity_mode", "Startup/PressureSentivity/PressureSensitivityOptionButton", "selected"],
+	["show_left_tool_icon", "Indicators/IndicatorsContainer/LeftToolIconCheckbox", "pressed"],
+	["show_right_tool_icon", "Indicators/IndicatorsContainer/RightToolIconCheckbox", "pressed"],
+	["left_square_indicator_visible", "Indicators/IndicatorsContainer/LeftIndicatorCheckbox", "pressed"],
+	["right_square_indicator_visible", "Indicators/IndicatorsContainer/RightIndicatorCheckbox", "pressed"],
+	["autosave_interval", "Backup/AutosaveContainer/AutosaveInterval", "value"],
+	["enable_autosave", "Backup/AutosaveContainer/EnableAutosave", "pressed"],
 
 	["default_image_width", "Image/ImageOptions/ImageDefaultWidth", "value"],
 	["default_image_height", "Image/ImageOptions/ImageDefaultHeight", "value"],
@@ -29,7 +29,7 @@ var selected_item := 0
 
 onready var list : ItemList = $HSplitContainer/List
 onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
-onready var general = $HSplitContainer/ScrollContainer/VBoxContainer/General
+onready var autosave_interval : SpinBox = $HSplitContainer/ScrollContainer/VBoxContainer/Backup/AutosaveContainer/AutosaveInterval
 
 
 func _ready() -> void:
@@ -37,7 +37,8 @@ func _ready() -> void:
 	get_ok().text = tr("Close")
 
 	if OS.get_name() == "HTML5":
-		right_side.get_node("General/OpenLastProject").visible = false
+		right_side.get_node("Startup").queue_free()
+		right_side.get_node("Languages").visible = true
 		Global.open_last_project = false
 
 	for pref in preferences:
@@ -87,6 +88,11 @@ func _on_Preference_item_selected(id : int, prop : String) -> void:
 func preference_update(prop : String) -> void:
 	if prop in ["autosave_interval", "enable_autosave"]:
 		OpenSave.update_autosave()
+		autosave_interval.editable = Global.enable_autosave
+		if autosave_interval.editable:
+			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		else:
+			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 	if prop in ["grid_width", "grid_height", "grid_color"]:
 		Global.canvas.update()
@@ -103,22 +109,28 @@ func preference_update(prop : String) -> void:
 
 
 func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
-	list.add_item("  " + tr("General"))
+	if OS.get_name() != "HTML5":
+		list.add_item("  " + tr("Startup"))
 	list.add_item("  " + tr("Language"))
 	list.add_item("  " + tr("Themes"))
 	list.add_item("  " + tr("Canvas"))
 	list.add_item("  " + tr("Image"))
 	list.add_item("  " + tr("Shortcuts"))
+	list.add_item("  " + tr("Backup"))
+	list.add_item("  " + tr("Indicators"))
 
 	list.select(1 if changed_language else selected_item)
-	general.get_node("AutosaveInterval/AutosaveInterval").suffix = tr("minute(s)")
+	autosave_interval.suffix = tr("minute(s)")
 
 
 func _on_PreferencesDialog_popup_hide() -> void:
 	list.clear()
 
 
-func _on_List_item_selected(index) -> void:
+func _on_List_item_selected(index : int) -> void:
 	selected_item = index
 	for child in right_side.get_children():
-		child.visible = child.name == ["General", "Languages", "Themes", "Canvas", "Image", "Shortcuts"][index]
+		var content_list = ["Startup", "Languages", "Themes", "Canvas", "Image", "Shortcuts", "Backup", "Indicators"]
+		if OS.get_name() == "HTML5":
+			content_list.erase("Startup")
+		child.visible = child.name == content_list[index]

@@ -33,9 +33,6 @@ var layers_changed_skip := false
 var can_draw := false
 
 var has_focus := false
-var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
-var open_last_project := false
-var smooth_zoom := true
 var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture := ImageTexture.new()
 var right_cursor_tool_texture := ImageTexture.new()
@@ -46,6 +43,9 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 
 # Preferences
+var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
+var open_last_project := false
+var smooth_zoom := true
 var theme_type : int = Theme_Types.DARK
 var default_image_width := 64
 var default_image_height := 64

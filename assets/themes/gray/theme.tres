@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=37 format=2]
+[gd_resource type="Theme" load_steps=38 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/themes/dark/icons/grabber.png" type="Texture" id=2]
@@ -189,6 +189,18 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.2, 0.2, 0.2, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0.180392, 0.180392, 0.180392, 1 )
@@ -405,7 +417,7 @@ LineEdit/fonts/font = null
 LineEdit/icons/clear = null
 LineEdit/styles/focus = null
 LineEdit/styles/normal = SubResource( 19 )
-LineEdit/styles/read_only = null
+LineEdit/styles/read_only = SubResource( 31 )
 MenuButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 MenuButton/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
 MenuButton/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )

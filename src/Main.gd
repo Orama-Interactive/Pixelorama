@@ -124,6 +124,8 @@ func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
 
 
 func load_last_project() -> void:
+	if OS.get_name() == "HTML5":
+		return
 	# Check if any project was saved or opened last time
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
 		# Check if file still exists on disk
