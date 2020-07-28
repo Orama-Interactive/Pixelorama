@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-07-27 01:16\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -346,6 +346,9 @@ msgstr "Trójlinowa"
 msgid "General"
 msgstr "Ogólne"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Język"
 
@@ -357,6 +360,15 @@ msgstr "Płótno"
 
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Płynne przybliżanie"
@@ -705,11 +717,17 @@ msgstr "Pokaż ikonę prawego narzędzia"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Wyświetla ikonę prawego wybranego narzędzia obok kursora na płótnie"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Kolor prowadnic:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Kolor prowadnic wyświetlanych na płótnie"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Szerokość siatki:"
@@ -728,6 +746,9 @@ msgstr "Kolor siatki:"
 
 msgid "A color of the grid"
 msgstr "Kolor siatki"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Rozmiar komórek:"
