@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 14:13\n"
+"PO-Revision-Date: 2020-07-28 14:27\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -1154,28 +1154,28 @@ msgid "Default fill color:"
 msgstr "Alapértelmezett kitöltő szín:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Alapértelmezett háttérszíne az új képnek"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Méretarány lezárása:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Sablonok:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Séma"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Séma:"
 
 msgid "Default"
-msgstr ""
+msgstr "Alapértelmezett"
 
 msgid "Custom"
-msgstr ""
+msgstr "Egyéni"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Téglalap alakú kijelölés"
 
 msgid "Zoom"
 msgstr "Nagyít/kicsinyít"
@@ -1190,37 +1190,37 @@ msgid "Eraser"
 msgstr "Radír"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Vödör"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Világosítás/Sötétítés"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Színek cserélése"
 
 msgid "Set the shortcut"
 msgstr "Parancsikon beállítása"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Nyomj meg egy gombot vagy gombkombinációt a Parancsikon beállításához"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Már hozzá van rendelve"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Bal eszköz:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Az eszköz már hozzá van rendelve a bal egérgombhoz"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Jobb eszköz:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Az eszköz már hozzá van rendelve a jobb egérgombhoz"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Nem található az utolsó projektfájl."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
