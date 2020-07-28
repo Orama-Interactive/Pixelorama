@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 17:38\n"
+"PO-Revision-Date: 2020-07-28 17:48\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -154,7 +154,7 @@ msgid "Show Rulers"
 msgstr "Vonalzók megjelenítése"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Útmutatók megjelenítése"
 
 msgid "Show Animation Timeline"
 msgstr "Animáció idővonal megjelenítése"
@@ -705,7 +705,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr ""
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Útmutatók színe:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
@@ -777,7 +777,7 @@ msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Ecset színből"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
@@ -1086,7 +1086,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr ""
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Útmutató mozgatása"
 
 msgid "File saved"
 msgstr "Fájl elmentve"
@@ -1119,7 +1119,7 @@ msgid "Color Name:"
 msgstr "Szín neve:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Használd a mostani bal & jobb színeket"
 
 msgid "Create a new empty palette?"
 msgstr "Létrehoz egy új és üres palettát?"
@@ -1292,5 +1292,5 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Hiba történt a paletta eltávolítása közben! Error kód: %s"
 
