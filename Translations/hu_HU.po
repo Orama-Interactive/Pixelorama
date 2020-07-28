@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 14:27\n"
+"PO-Revision-Date: 2020-07-28 14:37\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -1115,7 +1115,7 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Paletta Szerkesztése"
 
 msgid "Patrons:"
 msgstr "Támogatók:"
@@ -1223,31 +1223,31 @@ msgid "Cannot find last project file."
 msgstr "Nem található az utolsó projektfájl."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Még nem mentettél vagy nyitottál meg projektet Pixeloramában!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Utolsó projekt megnyitása"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Utolsó projekt megnyitása..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Utolsó projekt megnyitása indításkor"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Utolsó projektet megnyissa indításkor"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Automatikus mentés bekapcsolása"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Időköz az automatikus mentések között:"
 
 msgid "minute(s)"
 msgstr "perc(ek)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Hozzon létre új könyvtárat minden címkéhez"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
