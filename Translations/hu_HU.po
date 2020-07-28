@@ -10,136 +10,136 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-21 19:18\n"
+"PO-Revision-Date: 2020-07-28 13:23\n"
 
 msgid "OK"
-msgstr ""
+msgstr "RENDBEN"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 msgid "Open"
-msgstr ""
+msgstr "Megnyit"
 
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Kérjük, erősítse meg..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Fájlnév:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Képméret"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Vászon mérete"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Keretméret"
 
 msgid "Width:"
-msgstr ""
+msgstr "Szélesség:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Magasság:"
 
 msgid "Center"
-msgstr ""
+msgstr "Középre"
 
 msgid "File"
-msgstr ""
+msgstr "Fájl"
 
 msgid "Edit"
-msgstr ""
+msgstr "Szerkeszt"
 
 msgid "View"
-msgstr ""
+msgstr "Nézet"
 
 msgid "Image"
-msgstr ""
+msgstr "Kép"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effektek"
 
 msgid "Help"
-msgstr ""
+msgstr "Súgó"
 
 msgid "New"
-msgstr ""
+msgstr "Új"
 
 msgid "New..."
-msgstr ""
+msgstr "Új..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Megnyitás..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Mentés..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Mentés másként..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD Tömörítés használata"
 
 msgid "Import"
-msgstr ""
+msgstr "Importálás"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportálás"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportálás..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportálás másként..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exportálás PNG-ként..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "PNG Exportálása mint..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Kilépés"
 
 msgid "Undo"
-msgstr ""
+msgstr "Visszavonás"
 
 msgid "Redo"
-msgstr ""
+msgstr "Mégis"
 
 msgid "Copy"
-msgstr ""
+msgstr "Másolás"
 
 msgid "Paste"
-msgstr ""
+msgstr "Beillesztés"
 
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Kép átméretezése"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Kép levágása"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Vászon átméretezése"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Kép forgatása"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Kijelölés törlése"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Vízszintes tükrözés"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Függőleges tükrözés"
 
 msgid "Preferences"
 msgstr ""
