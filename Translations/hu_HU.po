@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 13:23\n"
+"PO-Revision-Date: 2020-07-28 13:36\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -145,22 +145,22 @@ msgid "Preferences"
 msgstr ""
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Csempe mód"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Rács megjelenítése"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Vonalzók megjelenítése"
 
 msgid "Show Guides"
 msgstr ""
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Animáció idővonal megjelenítése"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen mód"
 
 msgid "Fullscreen Mode"
 msgstr ""
@@ -308,103 +308,103 @@ msgid "Columns"
 msgstr ""
 
 msgid "Columns:"
-msgstr ""
+msgstr "Oszlopok:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Sorok"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Sorok:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Útvonal:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Könyvtárak és fájlok:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Mappa létrehozása"
 
 msgid "File:"
-msgstr ""
+msgstr "Fájl:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpoláció:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Legközelebbi"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineáris"
 
 msgid "Cubic"
 msgstr ""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineáris"
 
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 msgid "Language"
-msgstr ""
+msgstr "Nyelv"
 
 msgid "Themes"
-msgstr ""
+msgstr "Témák"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Vászon"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Gyorsbillentyűk"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Sima közelítés"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Hozzáad simább átmenettet közelítéskor vagy távolításkor"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Rajztábla nyomásérzékelés:"
 
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Szín:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Segítő szín:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Rendszer nyelv"
 
 msgid "Dark"
-msgstr ""
+msgstr "Sötét"
 
 msgid "Gray"
-msgstr ""
+msgstr "Szürke"
 
 msgid "Blue"
-msgstr ""
+msgstr "Kék"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Krémszín"
 
 msgid "Light"
-msgstr ""
+msgstr "Világos"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Színek invertálása"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Kifakítás"
 
 msgid "Outline"
-msgstr ""
+msgstr "Körvonal"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
