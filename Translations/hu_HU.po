@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 17:48\n"
+"PO-Revision-Date: 2020-07-28 17:57\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -929,7 +929,7 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Kék-Piros Mód"
 
 msgid "Add a new frame"
 msgstr "Új képkocka hozzáadása"
@@ -950,10 +950,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Cella összekapcsolása"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Cella szétkapcsolása"
 
 msgid "Layer"
 msgstr "Réteg"
@@ -1074,16 +1074,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Újra: Egyedi ecset törlése"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Visszavonás: Képkocka címke módosítása"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Újra: Képkocka címke módosítása"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Visszavinás: Képkocka címke törlése"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Újra: Képkocka címke törlése"
 
 msgid "Move Guide"
 msgstr "Útmutató mozgatása"
@@ -1110,7 +1110,7 @@ msgid "Import Palette"
 msgstr "Paletta importálása"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Paletta készítése a mostani képből"
 
 msgid "Palette Name:"
 msgstr "Paletta neve:"
@@ -1266,7 +1266,7 @@ msgid "Create new directory for each frame tag"
 msgstr "Új könyvtár létrehozása minden címkéhez"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Több fájlt hoz létre, de minden fájlt külön könyvtárban tárol, amely megfelel a képkocka címkének"
 
 msgid "Close"
 msgstr "Bezárás"
@@ -1283,13 +1283,13 @@ msgid "Backup reloaded"
 msgstr "Biztonsági mentés újratöltve"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Jelenlegi paletta törlése"
 
 msgid "You can't remove more palettes!"
 msgstr "Nem lehet több palettát eltávolítani!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Nem lehet eltávolítani a palettát, mert nem létezik!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Hiba történt a paletta eltávolítása közben! Error kód: %s"
