@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-07-23 19:46\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "確定"
@@ -346,6 +346,9 @@ msgstr "三線性插值"
 msgid "General"
 msgstr "一般"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "語言"
 
@@ -357,6 +360,15 @@ msgstr "畫布"
 
 msgid "Shortcuts"
 msgstr "快捷鍵"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "平滑縮放"
@@ -705,11 +717,17 @@ msgstr "顯示右鍵工具圖標"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "在鼠標旁顯示右鍵工具圖標"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "輔助線顏色："
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "尺標輔助線的顏色"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "格線寬度："
@@ -728,6 +746,9 @@ msgstr "格線顏色："
 
 msgid "A color of the grid"
 msgstr "格線顏色"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "空白格大小："
