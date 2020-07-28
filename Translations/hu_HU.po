@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 17:29\n"
+"PO-Revision-Date: 2020-07-28 17:38\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -211,7 +211,7 @@ msgid "Brush type:"
 msgstr "Ecset típus:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Fájl ecset"
 
 msgid "Project brush"
 msgstr "Projekt ecset"
@@ -285,7 +285,7 @@ msgid "Open a Directory"
 msgstr "Könyvtár megnyitása"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Összes képkocka mint fájlok"
 
 msgid "All frames as a single file animation"
 msgstr ""
@@ -462,7 +462,7 @@ msgid "Right to Left"
 msgstr "Jobbról balra"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Üdvözlőképernyő megnyitása"
 
 msgid "Online Docs"
 msgstr "Online dokumentumok"
@@ -668,10 +668,11 @@ msgstr "Szín kiválasztása a jobb eszközhöz"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Bal és jobb színek cseréje\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Színek visszaállítása(fekete bal, fehér jobb)"
 
 msgid "Left tool"
 msgstr "Bal eszköz"
@@ -692,13 +693,13 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Bal eszközikon mutatása"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Jobb eszközikon mutatása"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
@@ -725,7 +726,7 @@ msgid "Grid color:"
 msgstr "Rács színe:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "A rács színe"
 
 msgid "Checker size:"
 msgstr ""
@@ -794,7 +795,7 @@ msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Kiválasztott szín"
 
 msgid "Pattern"
 msgstr "Minta"
@@ -900,13 +901,13 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr ""
+msgstr "Nincs loop"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Bicikli loop"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping-pong loop"
 
 msgid "Onion Skinning:"
 msgstr ""
@@ -1262,7 +1263,7 @@ msgid "minute(s)"
 msgstr "perc(ek)"
 
 msgid "Create new directory for each frame tag"
-msgstr "Hozzon létre új könyvtárat minden címkéhez"
+msgstr "Új könyvtár létrehozása minden címkéhez"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
