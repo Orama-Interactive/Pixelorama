@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-07-21 19:18\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -347,6 +347,9 @@ msgstr "Trilineal"
 msgid "General"
 msgstr "General"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
@@ -358,6 +361,15 @@ msgstr "Lienzo"
 
 msgid "Shortcuts"
 msgstr "Teclas de acceso directo"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Zoom suavizado"
@@ -706,11 +718,17 @@ msgstr "Mostrar icono de herramienta derecha"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Muestra un icono de la herramienta derecha seleccionada junto al cursor en el lienzo"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Color de guías:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Un color de las guías de reglas que se muestran en el lienzo"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Ancho de cuadrícula:"
@@ -729,6 +747,9 @@ msgstr "Color de cuadrícula:"
 
 msgid "A color of the grid"
 msgstr "Un color de la cuadrícula"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr ""
