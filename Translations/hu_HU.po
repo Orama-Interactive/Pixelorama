@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 14:56\n"
+"PO-Revision-Date: 2020-07-28 15:22\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -242,25 +242,25 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Képkocka"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Képkockák:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Összes Képkocka"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animáció"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Előnézet:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Képkocka:"
 
 msgid "Orientation:"
 msgstr ""
@@ -269,13 +269,13 @@ msgid "Browse"
 msgstr ""
 
 msgid "Resize:"
-msgstr ""
+msgstr "Átméretezés:"
 
 msgid "Cancel Export"
 msgstr ""
 
 msgid "Alert!"
-msgstr ""
+msgstr "Figyelmeztetés!"
 
 msgid "Select Current Folder"
 msgstr ""
@@ -302,10 +302,10 @@ msgid "Backwards"
 msgstr ""
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Oszlopok"
 
 msgid "Columns:"
 msgstr "Oszlopok:"
@@ -482,109 +482,109 @@ msgid "Website"
 msgstr ""
 
 msgid "Donate"
-msgstr ""
+msgstr "Támogatás"
 
 msgid "Developers"
-msgstr ""
+msgstr "Fejlesztők"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Közreműködők"
 
 msgid "Donors"
-msgstr ""
+msgstr "Támogatók"
 
 msgid "Translators"
-msgstr ""
+msgstr "Fordítók"
 
 msgid "English"
-msgstr ""
+msgstr "Angol"
 
 msgid "Greek"
-msgstr ""
+msgstr "Görög"
 
 msgid "French"
-msgstr ""
+msgstr "Francia"
 
 msgid "German"
-msgstr ""
+msgstr "Német"
 
 msgid "Polish"
-msgstr ""
+msgstr "Lengyel"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazíliai Portugál"
 
 msgid "Russian"
-msgstr ""
+msgstr "Orosz"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Kínai egyszerűsített"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Kínai hagyományos"
 
 msgid "Italian"
-msgstr ""
+msgstr "Olasz"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lett"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spanyol"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Eszperantó"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonéz"
 
 msgid "Czech"
-msgstr ""
+msgstr "Cseh"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arab"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Török"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvég"
 
 msgid "Korean"
-msgstr ""
+msgstr "Koreai"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Fejlesztő csapat"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Vezető programozó"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Felhasználóifelület-dizájner"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub Közreműködők"
 
 msgid "Art by"
-msgstr ""
+msgstr "Rajzot készítette"
 
 msgid "untitled"
-msgstr ""
+msgstr "névtelen"
 
 msgid "imported"
-msgstr ""
+msgstr "importált"
 
 msgid "copy"
 msgstr ""
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Biztos vagy benne, hogy kilépsz Pixeloramából?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Nem mentett kép"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Nem mentett változtatások vannak. Ha folytatja, az elért haladás elveszik."
 
 msgid "Save before exiting?"
 msgstr ""
@@ -593,7 +593,7 @@ msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Mentés és kilépés"
 
 msgid "Exit without saving"
 msgstr ""
@@ -665,10 +665,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 msgid "Left tool"
-msgstr ""
+msgstr "Bal eszköz"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Jobb eszköz"
 
 msgid "Left pixel indicator"
 msgstr ""
@@ -791,7 +791,7 @@ msgid "Pattern"
 msgstr ""
 
 msgid "Offset"
-msgstr ""
+msgstr "Eltolás"
 
 msgid "Lighten"
 msgstr "Világosítás"
@@ -970,7 +970,7 @@ msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Áttetszőség:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -998,10 +998,10 @@ msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Visszavonás: Rajz"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Újra: Rajz"
 
 msgid "Undo: Rectangle Select"
 msgstr ""
