@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-07-21 19:18\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -347,6 +347,9 @@ msgstr "\"Trilinear\""
 msgid "General"
 msgstr "Umum"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Bahasa"
 
@@ -358,6 +361,15 @@ msgstr "Kanvas"
 
 msgid "Shortcuts"
 msgstr "Pintasan"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Zoom Halus"
@@ -706,11 +718,17 @@ msgstr "Perlihatkan ikon alat kanan"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Warna Panduan:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Lebar Kisi:"
@@ -729,6 +747,9 @@ msgstr "Warna Kisi:"
 
 msgid "A color of the grid"
 msgstr "Warna dari kisi"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Besar pola catur:"
