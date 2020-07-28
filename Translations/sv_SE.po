@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2020-07-21 19:18\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr ""
@@ -346,6 +346,9 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -356,6 +359,15 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
 msgstr ""
 
 msgid "Smooth Zoom"
@@ -686,10 +698,16 @@ msgstr ""
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr ""
 
 msgid "A color of ruler guides displayed on the canvas"
+msgstr ""
+
+msgid "Grid"
 msgstr ""
 
 msgid "Grid width:"
@@ -708,6 +726,9 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Transparency"
 msgstr ""
 
 msgid "Checker size:"
