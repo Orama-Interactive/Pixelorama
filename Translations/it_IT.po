@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-07-23 13:26\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -347,6 +347,9 @@ msgstr "Trilineare"
 msgid "General"
 msgstr "Generale"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Lingua"
 
@@ -358,6 +361,15 @@ msgstr "Tela"
 
 msgid "Shortcuts"
 msgstr "Collegamenti"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Zoom smussato"
@@ -706,11 +718,17 @@ msgstr "Mostra l'icona dello strumento destra"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Visualizza un'icona dello strumento destro selezionato accanto al cursore sulla tela"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Colore delle guide:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Un colore di guide per righello visualizzate sulla tela"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Larghezza griglia:"
@@ -729,6 +747,9 @@ msgstr "Colore della griglia:"
 
 msgid "A color of the grid"
 msgstr "Un colore della griglia"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Dimensione checker:"
