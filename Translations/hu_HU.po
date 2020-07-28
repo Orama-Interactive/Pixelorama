@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 16:52\n"
+"PO-Revision-Date: 2020-07-28 17:02\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -217,7 +217,7 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
+msgstr "Véletlenszerű ecset"
 
 msgid "Save Sprite as .pxo"
 msgstr "Kép mentése mint .pxo"
@@ -264,7 +264,7 @@ msgid "Frame:"
 msgstr "Képkocka:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Irány:"
 
 msgid "Browse"
 msgstr "Tallózás"
@@ -282,7 +282,7 @@ msgid "Select Current Folder"
 msgstr "Jelenlegi mappa kiválasztása"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Könyvtár megnyitása"
 
 msgid "All frames as multiple files"
 msgstr ""
@@ -297,10 +297,10 @@ msgid "Direction:"
 msgstr "Irány:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Előre"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Visszafelé"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
@@ -465,16 +465,16 @@ msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Online dokumentumok"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Hibakövető"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Változtatások"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "A Pixelorama-ról"
 
 msgid "Developed by Orama Interactive"
 msgstr ""
@@ -597,7 +597,7 @@ msgid "Save & Exit"
 msgstr "Mentés és kilépés"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Kilépés mentés nélkül"
 
 msgid "Utility Tools"
 msgstr ""
