@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 16:29\n"
+"PO-Revision-Date: 2020-07-28 16:52\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -187,28 +187,28 @@ msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Új képkocka"
 
 msgid "New layer"
-msgstr ""
+msgstr "Új réteg"
 
 msgid "New palette"
-msgstr ""
+msgstr "Új paletta"
 
 msgid "New brush"
-msgstr ""
+msgstr "Új ecset"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Új minta"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Vízszintes képkockák:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Függőleges képkockák:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Ecset típus:"
 
 msgid "File brush"
 msgstr ""
@@ -220,26 +220,27 @@ msgid "Random brush"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Kép mentése mint .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Kép exportálása mint .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Kép exportálása"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fájl létezik, fölülírja?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "\"%s\" fájl már létezik. Felülírja?"
 
 msgid "Directory path or file name is not valid!"
 msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nem lehet megnyitni %s fájlt\n"
+"Error kód: %s"
 
 msgid "Frame"
 msgstr "Képkocka"
@@ -266,19 +267,19 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "Tallózás"
 
 msgid "Resize:"
 msgstr "Átméretezés:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Exportálás megszakítása"
 
 msgid "Alert!"
 msgstr "Figyelmeztetés!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Jelenlegi mappa kiválasztása"
 
 msgid "Open a Directory"
 msgstr ""
@@ -290,10 +291,10 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Háttér:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Irány:"
 
 msgid "Forward"
 msgstr ""
@@ -479,7 +480,7 @@ msgid "Developed by Orama Interactive"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "Weboldal"
 
 msgid "Donate"
 msgstr "Támogatás"
@@ -575,7 +576,7 @@ msgid "imported"
 msgstr "importált"
 
 msgid "copy"
-msgstr ""
+msgstr "másolat"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Biztos vagy benne, hogy kilépsz Pixeloramából?"
