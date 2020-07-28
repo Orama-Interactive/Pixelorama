@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 13:36\n"
+"PO-Revision-Date: 2020-07-28 13:49\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -407,55 +407,55 @@ msgid "Outline"
 msgstr "Körvonal"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Színárnyalat/Telítettség/Érték beállítása"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Színátmenet"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "HSV Beállítása"
 
 msgid "Type:"
-msgstr ""
+msgstr "Típus:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Szög:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Színárnyalat"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Telítettség"
 
 msgid "Value"
-msgstr ""
+msgstr "Érték"
 
 msgid "Apply"
-msgstr ""
+msgstr "Alkamaz"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Átló"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Helyezze be a képet"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Vastagság:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Színek:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Lépések:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Tetejéről Aljáig"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Aljától tetejéig"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Balról jobbra"
 
 msgid "Right to Left"
 msgstr ""
@@ -605,21 +605,29 @@ msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Téglalap alakú kijelölés\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal\n\n"
+"A %s gombot a tartalom mozgatáshoz"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Nagyítás\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Színválasztó\n"
+"Válasz egy színt egy pixeléből a sprite-nak\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Rajzeszözök"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
