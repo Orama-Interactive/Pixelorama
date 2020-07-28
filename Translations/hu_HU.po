@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 14:45\n"
+"PO-Revision-Date: 2020-07-28 14:56\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -809,70 +809,76 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "Bal szín"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Jobb szín"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mód:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Nagyítás"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Kicsinyítés"
 
 msgid "Options:"
-msgstr ""
+msgstr "Beállítások:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Kerethez illesztés"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100%-ig Közelítés"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Tükrözés"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Vízszintes"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Vízszintesen tükrözött rajzolás engedélyezése"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Függőlegesen tükrözött rajzolás engedélyezése"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Függőleges"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Jelenlegi képkocka:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Ugrás az első képkockához \n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Menjen a előző képkockához \n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Animáció lejátszása visszafelé (végétől az elejéig)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Animáció lejátszása előre (elejétől végéig)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Menjen a következő képkockához \n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Ugrás az utolsó képkockához \n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -940,13 +946,13 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Réteg"
 
 msgid "Layers"
-msgstr ""
+msgstr "Rétegek"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Új réteg létrehozása"
 
 msgid "Remove current layer"
 msgstr ""
