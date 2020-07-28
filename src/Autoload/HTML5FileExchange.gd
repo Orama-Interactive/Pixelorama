@@ -226,6 +226,5 @@ func load_shader() -> void:
 	shader.code = file_data
 
 	var shader_effect_dialog = Global.control.get_node("Dialogs/ImageEffects/ShaderEffect")
-	shader_effect_dialog.preview.material.shader = shader
-	shader_effect_dialog.shader_loaded_label.text = tr("Shader loaded:") + " " + file_name.get_basename()
+	shader_effect_dialog.change_shader(shader, file_name.get_basename())
 

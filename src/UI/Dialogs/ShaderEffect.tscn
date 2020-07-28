@@ -7,7 +7,7 @@
 [node name="ShaderEffect" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 228.0
-rect_min_size = Vector2( 0, 0 )
+rect_min_size = Vector2( 400, 300 )
 resizable = true
 script = ExtResource( 2 )
 __meta__ = {
@@ -26,15 +26,15 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 255.0
-margin_bottom = 48.0
+margin_right = 384.0
+margin_bottom = 31.0
 text = "This is an experimental feature and may not be included in the stable version"
 autowrap = true
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer"]
-margin_top = 52.0
-margin_right = 255.0
-margin_bottom = 53.0
+margin_top = 35.0
+margin_right = 384.0
+margin_bottom = 36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,24 +54,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ChooseShader" type="Button" parent="VBoxContainer"]
-margin_top = 57.0
-margin_right = 255.0
-margin_bottom = 77.0
+margin_top = 40.0
+margin_right = 384.0
+margin_bottom = 60.0
 mouse_default_cursor_shape = 2
 text = "Choose Shader"
 
 [node name="ShaderLoadedLabel" type="Label" parent="VBoxContainer"]
-margin_top = 81.0
-margin_right = 255.0
-margin_bottom = 95.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 78.0
 text = "No shader loaded!"
 autowrap = true
+
+[node name="ShaderParams" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 263.0
-margin_bottom = 192.0
+margin_right = 392.0
+margin_bottom = 264.0
 window_title = "Open a File"
 resizable = true
 mode = 0
