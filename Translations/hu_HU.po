@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 15:22\n"
+"PO-Revision-Date: 2020-07-28 16:20\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -142,7 +142,7 @@ msgid "Flip Vertical"
 msgstr "Függőleges tükrözés"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Beállítások"
 
 msgid "Tile Mode"
 msgstr "Csempe mód"
@@ -163,7 +163,7 @@ msgid "Zen Mode"
 msgstr "Zen mód"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Teljes képernyős mód"
 
 msgid "Fill with color:"
 msgstr ""
