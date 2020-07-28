@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-21 19:19\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -347,6 +347,9 @@ msgstr "Τριγραμμική"
 msgid "General"
 msgstr "Γενικά"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -358,6 +361,15 @@ msgstr "Καμβάς"
 
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
@@ -706,11 +718,17 @@ msgstr "Εμφάνιση δεξιού εικονιδίου εργαλείου"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου δεξιού εργαλείου δίπλα στο κέρσορα στον καμβά"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Χρώμα οδηγών:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Το χρώμα των οδηγών που φαίνεται στο καμβά"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Πλάτος πλέγματος:"
@@ -729,6 +747,9 @@ msgstr "Χρώμα πλέγματος:"
 
 msgid "A color of the grid"
 msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Μέγεθος σκακιέρας:"
