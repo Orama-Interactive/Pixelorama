@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 13:49\n"
+"PO-Revision-Date: 2020-07-28 14:13\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -1118,40 +1118,40 @@ msgid "Edit Palette"
 msgstr ""
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Támogatók:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Szerzetnéd hogy a neved vagy a céged feltűnjön a felugró képernyőn?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Legyél Platinum Szponzor"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Legyél Arany Szponzor"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Legyél te is Támogató"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Ne mutasd többet"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Képbeállítások"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Alapértelmezett szélesség:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Alapértelmezett szélessége az új képnek"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Alapértelmezett magasság:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Alapértelmezett magassága az új képnek"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Alapértelmezett kitöltő szín:"
 
 msgid "A default background color of a new image"
 msgstr ""
@@ -1178,16 +1178,16 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
-msgstr ""
+msgstr "Nagyít/kicsinyít"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Színválasztó"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Ceruza"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Radír"
 
 msgid "Bucket"
 msgstr ""
@@ -1199,7 +1199,7 @@ msgid "Switch Colors"
 msgstr ""
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Parancsikon beállítása"
 
 msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
@@ -1244,7 +1244,7 @@ msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
-msgstr ""
+msgstr "perc(ek)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1253,10 +1253,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
