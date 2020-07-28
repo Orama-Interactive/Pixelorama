@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-22 21:43\n"
+"PO-Revision-Date: 2020-07-28 22:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -347,6 +347,9 @@ msgstr "Trilinéaire"
 msgid "General"
 msgstr "Général"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Langue"
 
@@ -358,6 +361,15 @@ msgstr "Toile"
 
 msgid "Shortcuts"
 msgstr "Raccourcis"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Zoom fluide"
@@ -706,11 +718,17 @@ msgstr "Afficher l'icône de l'outil de droite"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Affiche une icône de l'outil de droite sélectionné à côté du curseur sur le canevas"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Couleur des guides:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Une couleur des guides de règle affichée sur le canevas"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Largeur de la grille:"
@@ -729,6 +747,9 @@ msgstr "Couleur de la grille:"
 
 msgid "A color of the grid"
 msgstr "Une couleur de la grille"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Taille du damier:"
