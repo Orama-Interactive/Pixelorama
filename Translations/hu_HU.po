@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 14:37\n"
+"PO-Revision-Date: 2020-07-28 14:45\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -794,16 +794,16 @@ msgid "Offset"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "Világosítás"
 
 msgid "Darken"
-msgstr ""
+msgstr "Sötétítés"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Összeg:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Világosítás/Sötétítés összeg"
 
 msgid "Pick for:"
 msgstr ""
@@ -1106,13 +1106,13 @@ msgid "Use current left & right colors"
 msgstr ""
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Létrehoz egy új és üres palettát?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Error: A palettának érvényes neve kell hogy legyen."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Érvénytelen palettafájl!"
 
 msgid "Edit Palette"
 msgstr "Paletta Szerkesztése"
@@ -1260,16 +1260,17 @@ msgstr "Törlés"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Automatikus biztonsági mentés találva a %s -hoz.\n"
+"Szeretné újra betölteni?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Biztonsági mentés újratöltve"
 
 msgid "Remove currently selected palette"
 msgstr ""
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Nem lehet több palettát eltávolítani!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
