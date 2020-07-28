@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 17:02\n"
+"PO-Revision-Date: 2020-07-28 17:22\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -19,7 +19,7 @@ msgid "Cancel"
 msgstr "Mégse"
 
 msgid "Open"
-msgstr "Megnyit"
+msgstr "Megnyitás"
 
 msgid "Save"
 msgstr "Mentés"
@@ -214,7 +214,7 @@ msgid "File brush"
 msgstr ""
 
 msgid "Project brush"
-msgstr ""
+msgstr "Projekt ecset"
 
 msgid "Random brush"
 msgstr "Véletlenszerű ecset"
@@ -459,7 +459,7 @@ msgid "Left to Right"
 msgstr "Balról jobbra"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Jobbról balra"
 
 msgid "View Splash Screen"
 msgstr ""
@@ -634,18 +634,26 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Ceruza\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal\n\n"
+"Tartsa lenyomva a %s vonal húzásához"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Radír\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal\n\n"
+"Tartsa lenyomva a %s vonal húzásához"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Vödör\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
@@ -672,13 +680,13 @@ msgid "Right tool"
 msgstr "Jobb eszköz"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Bal pixel indikátor"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Jobb pixel indikátor"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
@@ -702,19 +710,19 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Rács szélessége:"
 
 msgid "Sets how far apart are vertical lines of the grid"
 msgstr ""
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Rács magassága:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Rács színe:"
 
 msgid "A color of the grid"
 msgstr ""
@@ -741,22 +749,22 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Ecset:"
 
 msgid "Select a brush"
 msgstr ""
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Ecset: Pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Ecset: Kör"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Ecset: Kitöltött kör"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Egyedi ecset"
 
 msgid "Brush size:"
 msgstr ""
@@ -765,7 +773,7 @@ msgid "Overwrite"
 msgstr ""
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
 msgstr ""
@@ -774,7 +782,7 @@ msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Terület kitöltése:"
 
 msgid "Same color area"
 msgstr ""
@@ -789,7 +797,7 @@ msgid "Selected Color"
 msgstr ""
 
 msgid "Pattern"
-msgstr ""
+msgstr "Minta"
 
 msgid "Offset"
 msgstr "Eltolás"
@@ -904,10 +912,10 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Előző képkockák"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Következő képkockák"
 
 msgid "Manage frame tags"
 msgstr ""
@@ -923,19 +931,19 @@ msgid "Blue-Red Mode"
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Új képkocka hozzáadása"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Képkocka törlése"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Képkocka klónozása"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Mozgás balra"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Mozgás jobbra"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -965,7 +973,7 @@ msgid "Move down the current layer"
 msgstr ""
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Aktuális réteg klónozása"
 
 msgid "Merge current layer with the one below"
 msgstr ""
@@ -984,19 +992,19 @@ msgid "Enable/disable cel linking\n\n"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Paletta"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletták"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Új paletta hozzáadása"
 
 msgid "Edit currently selected palette"
 msgstr ""
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Paletta választása"
 
 msgid "Undo: Draw"
 msgstr "Visszavonás: Rajz"
@@ -1005,19 +1013,19 @@ msgid "Redo: Draw"
 msgstr "Újra: Rajz"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Visszavonás: Téglalap alakú kijelölés"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Újra: Téglalap alakú kijelölés"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Visszavonás: Méret"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Újra: Méret"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Visszavonás: Réteg hozzáadása"
 
 msgid "Redo: Add Layer"
 msgstr ""
@@ -1041,13 +1049,13 @@ msgid "Redo: Change Layer Order"
 msgstr ""
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Visszavonás: Képkocka hozzáadása"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Újra: Képkocka hozzáadása"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Visszavonás: Képkocka törlése"
 
 msgid "Redo: Remove Frame"
 msgstr ""
@@ -1080,34 +1088,34 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Fájl elmentve"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fájl automatikusan elmentve"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "A fájl megnyitása sikertelen"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "A mentés sikertelen"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fájl exportálva"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Új üres paletta"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Paletta importálása"
 
 msgid "Create Palette From Current Sprite"
 msgstr ""
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Paletta neve:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Szín neve:"
 
 msgid "Use current left & right colors"
 msgstr ""
