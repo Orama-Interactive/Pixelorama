@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-28 17:22\n"
+"PO-Revision-Date: 2020-07-28 17:29\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -477,7 +477,7 @@ msgid "About Pixelorama"
 msgstr "A Pixelorama-ról"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Fejleszette: Orama Interactive"
 
 msgid "Website"
 msgstr "Weboldal"
@@ -661,10 +661,10 @@ msgid "Lighten/Darken\n\n"
 msgstr ""
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Szín kiválasztása a bal eszközhöz"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Szín kiválasztása a jobb eszközhöz"
 
 msgid "Switch left and right colors\n"
 "(%s)"
@@ -985,7 +985,7 @@ msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Réteg Bezárása/Kinyitása"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1028,25 +1028,25 @@ msgid "Undo: Add Layer"
 msgstr "Visszavonás: Réteg hozzáadása"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Újra: Réteg hozzáadása"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Visszavonás: Réteg törlése"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Újra: Réteg törlése"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Visszavonás: Réteg Módosítása"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Újra: Réteg Módosítása"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Visszavonás: Rétegek sorrendjének cseréje"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Újra: Rétegek sorrendjének cseréje"
 
 msgid "Undo: Add Frame"
 msgstr "Visszavonás: Képkocka hozzáadása"
@@ -1058,19 +1058,19 @@ msgid "Undo: Remove Frame"
 msgstr "Visszavonás: Képkocka törlése"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Újra: Képkocka törlése"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Visszavonás: Képkockák sorrendjének cseréje"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Újra: Képkockák sorrendjének cseréje"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Visszavonás: Egyedi ecset törlése"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Újra: Egyedi ecset törlése"
 
 msgid "Undo: Modify Frame Tag"
 msgstr ""
