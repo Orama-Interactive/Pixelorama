@@ -177,6 +177,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Cancel"
 [connection signal="about_to_show" from="." to="." method="_on_HSVDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_HSVDialog_popup_hide"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]

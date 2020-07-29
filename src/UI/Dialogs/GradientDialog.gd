@@ -51,3 +51,7 @@ func _on_GradientDialog_confirmed() -> void:
 	Global.canvas.handle_undo("Draw")
 	DrawingAlgos.generate_gradient(current_cel, [color1.color, color2.color], steps.value, direction.selected)
 	Global.canvas.handle_redo("Draw")
+
+
+func _on_GradientDialog_popup_hide() -> void:
+	Global.dialog_open(false)

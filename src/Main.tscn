@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -6,21 +6,15 @@
 [ext_resource path="res://src/UI/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/PatternsPopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/BrushesPopup.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/UI/Dialogs/ResizeCanvas.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/UI/Dialogs/GradientDialog.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/UI/Dialogs/ShaderEffect.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
-[ext_resource path="res://src/UI/Dialogs/ScaleImage.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/Preferences/PreferencesDialog.tscn" type="PackedScene" id=32]
-[ext_resource path="res://src/UI/Dialogs/OutlineDialog.tscn" type="PackedScene" id=33]
 [ext_resource path="res://src/UI/Dialogs/AboutDialog.tscn" type="PackedScene" id=34]
-[ext_resource path="res://src/UI/Dialogs/RotateImage.tscn" type="PackedScene" id=38]
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.tscn" type="PackedScene" id=39]
-[ext_resource path="res://src/UI/Dialogs/HSVDialog.tscn" type="PackedScene" id=44]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -51,31 +45,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ImageEffects" type="Control" parent="Dialogs"]
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ScaleImage" parent="Dialogs/ImageEffects" instance=ExtResource( 31 )]
-margin_bottom = 127.0
-
-[node name="ResizeCanvas" parent="Dialogs/ImageEffects" instance=ExtResource( 7 )]
-margin_right = 216.0
-margin_bottom = 392.0
-
-[node name="RotateImage" parent="Dialogs/ImageEffects" instance=ExtResource( 38 )]
-
-[node name="OutlineDialog" parent="Dialogs/ImageEffects" instance=ExtResource( 33 )]
-margin_right = 217.0
-margin_bottom = 106.0
-
-[node name="HSVDialog" parent="Dialogs/ImageEffects" instance=ExtResource( 44 )]
-
-[node name="GradientDialog" parent="Dialogs/ImageEffects" instance=ExtResource( 9 )]
-margin_bottom = 214.0
-
-[node name="ShaderEffect" parent="Dialogs/ImageEffects" instance=ExtResource( 10 )]
+[node name="ImageEffects" parent="Dialogs" instance=ExtResource( 7 )]
 
 [node name="BrushesPopup" parent="Dialogs" instance=ExtResource( 6 )]
 
@@ -146,12 +116,6 @@ visible = false
 visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]
-[connection signal="popup_hide" from="Dialogs/ImageEffects/ScaleImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ImageEffects/ResizeCanvas" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ImageEffects/RotateImage" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ImageEffects/OutlineDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ImageEffects/HSVDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/ImageEffects/GradientDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_file_selected"]

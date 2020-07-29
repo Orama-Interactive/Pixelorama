@@ -126,6 +126,7 @@ stretch_mode = 5
 show_behind_parent = true
 [connection signal="about_to_show" from="." to="." method="_on_ResizeCanvas_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_ResizeCanvas_popup_hide"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]

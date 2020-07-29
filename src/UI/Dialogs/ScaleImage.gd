@@ -6,3 +6,7 @@ func _on_ScaleImage_confirmed() -> void:
 	var height : int = $VBoxContainer/OptionsContainer/HeightValue.value
 	var interpolation : int = $VBoxContainer/OptionsContainer/InterpolationType.selected
 	DrawingAlgos.scale_image(width, height, interpolation)
+
+
+func _on_ScaleImage_popup_hide() -> void:
+	Global.dialog_open(false)

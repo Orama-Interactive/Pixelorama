@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/ResizeCanvas.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/Dialogs/RotateImage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/UI/Dialogs/ShaderEffect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/Dialogs/HSVDialog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/Dialogs/GradientDialog.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/UI/Dialogs/OutlineDialog.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/Dialogs/ScaleImage.tscn" type="PackedScene" id=14]
+
+[node name="ImageEffects" type="Control"]
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScaleImage" parent="." instance=ExtResource( 14 )]
+margin_bottom = 127.0
+
+[node name="ResizeCanvas" parent="." instance=ExtResource( 8 )]
+margin_right = 216.0
+margin_bottom = 392.0
+
+[node name="RotateImage" parent="." instance=ExtResource( 9 )]
+
+[node name="OutlineDialog" parent="." instance=ExtResource( 13 )]
+margin_right = 217.0
+margin_bottom = 106.0
+
+[node name="HSVDialog" parent="." instance=ExtResource( 11 )]
+
+[node name="GradientDialog" parent="." instance=ExtResource( 12 )]
+margin_bottom = 214.0
+
+[node name="ShaderEffect" parent="." instance=ExtResource( 10 )]

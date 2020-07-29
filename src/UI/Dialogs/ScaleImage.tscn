@@ -74,3 +74,4 @@ text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
 selected = 0
 [connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_ScaleImage_popup_hide"]

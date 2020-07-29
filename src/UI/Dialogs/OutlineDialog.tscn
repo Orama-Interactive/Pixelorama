@@ -99,6 +99,7 @@ items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, 
 selected = 0
 [connection signal="about_to_show" from="." to="." method="_on_OutlineDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_OutlineDialog_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_OutlineDialog_popup_hide"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/ThickValue" to="." method="_on_ThickValue_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/OptionsContainer/OutlineColor" to="." method="_on_OutlineColor_color_changed"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/DiagonalCheckBox" to="." method="_on_DiagonalCheckBox_toggled"]

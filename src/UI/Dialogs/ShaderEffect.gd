@@ -81,9 +81,9 @@ func change_shader(shader : Shader, name : String) -> void:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
 
 		var u_left_side = uniform_split[0].split(":")
-		var u_hint := ""
+		var _u_hint := ""
 		if u_left_side.size() > 1:
-			u_hint = u_left_side[1].strip_edges()
+			_u_hint = u_left_side[1].strip_edges()
 
 		var u_init = u_left_side[0].split(" ")
 		var u_type = u_init[1]

@@ -145,3 +145,7 @@ func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index : int) -> void:
 	affect = index
+
+
+func _on_HSVDialog_popup_hide() -> void:
+	Global.dialog_open(false)

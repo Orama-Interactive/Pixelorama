@@ -108,3 +108,7 @@ func update_preview() -> void:
 
 func _on_AffectOptionButton_item_selected(index : int) -> void:
 	affect = index
+
+
+func _on_OutlineDialog_popup_hide() -> void:
+	Global.dialog_open(false)

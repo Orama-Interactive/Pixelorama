@@ -101,6 +101,7 @@ items = [ "Top to Bottom", null, false, 0, null, "Bottom to Top", null, false, 1
 selected = 0
 [connection signal="about_to_show" from="." to="." method="_on_GradientDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_GradientDialog_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_GradientDialog_popup_hide"]
 [connection signal="color_changed" from="VBoxContainer/ColorsContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="color_changed" from="VBoxContainer/ColorsContainer/ColorPickerButton2" to="." method="_on_ColorPickerButton2_color_changed"]
 [connection signal="value_changed" from="VBoxContainer/StepsContainer/StepSpinBox" to="." method="_on_StepSpinBox_value_changed"]
