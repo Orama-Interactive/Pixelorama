@@ -359,6 +359,9 @@ msgstr ""
 msgid "On"
 msgstr ""
 
+msgid "Restore default value"
+msgstr ""
+
 msgid "Smooth Zoom"
 msgstr ""
 

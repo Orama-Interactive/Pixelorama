@@ -21,6 +21,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - You can now preview how the frames of the spritesheet you are importing will look.
 - You can now import image files as layers. Their size will be cropped to the project's size.
 - You can import image files as brushes, patterns and palettes.
+- Buttons have been added in Preferences to restore each setting to its default state.
 - Added "Copy", "Paste" and "Delete" options in the Edit menu. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Selection region and size are now being shown when making a selection on the top, next to the position label. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Added color overwrite option for the Pencil tool. ([#282](https://github.com/Orama-Interactive/Pixelorama/pull/282))
@@ -39,6 +40,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Pixelorama now remembers the selected colors, tools and their options when it's closed and re-opened. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Drawing brushes with mirror also mirrors the images of the brushes themselves. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - When making a new palette or importing one and its name already exists, Pixelorama will add a number to its name. For example, "Palette_Name" would become "Palette_Name (2)", "Palette_Name (3)", etc.
+- Re-organized preferences dialog.
 - The "create new image" dialog now remembers the last created canvas size. The default image settings are being used only when Pixelorama first launches. ([#178](https://github.com/Orama-Interactive/Pixelorama/issues/178))
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.

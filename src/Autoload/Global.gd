@@ -59,7 +59,7 @@ var checker_size := 10
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 
-var autosave_interval := 5.0
+var autosave_interval := 1.0
 var enable_autosave := true
 
 # Tools & options
