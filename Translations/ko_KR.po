@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-07-28 22:57\n"
+"PO-Revision-Date: 2020-07-29 00:21\n"
 
 msgid "OK"
 msgstr "예"
@@ -369,6 +369,9 @@ msgid "Indicators"
 msgstr ""
 
 msgid "On"
+msgstr ""
+
+msgid "Restore default value"
 msgstr ""
 
 msgid "Smooth Zoom"
