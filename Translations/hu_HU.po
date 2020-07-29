@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 06:08\n"
+"PO-Revision-Date: 2020-07-29 09:02\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Mentés"
 
 msgid "Please Confirm..."
-msgstr "Kérjük, erősítse meg..."
+msgstr "Kérlek, erősítsd meg..."
 
 msgid "File Name:"
 msgstr "Fájlnév:"
@@ -184,7 +184,7 @@ msgid "New tab"
 msgstr "Új lap"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Képsorozat (új ablak)"
 
 msgid "New frame"
 msgstr "Új képkocka"
@@ -603,7 +603,7 @@ msgid "You have unsaved changes. If you proceed, the progress you have made will
 msgstr "Nem mentett változtatások vannak. Ha folytatja, az elért haladás elveszik."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Mentés mielőtt kilépsz?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
@@ -673,7 +673,9 @@ msgstr "Vödör\n\n"
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Világosítás/Sötétítés\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Choose a color for the left tool"
 msgstr "Szín kiválasztása a bal eszközhöz"
