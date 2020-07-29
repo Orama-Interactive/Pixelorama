@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-07-29 00:21\n"
+"PO-Revision-Date: 2020-07-29 11:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -362,7 +362,7 @@ msgid "Shortcuts"
 msgstr "Tastenkürzel"
 
 msgid "Backup"
-msgstr ""
+msgstr "Sicherung"
 
 msgid "Indicators"
 msgstr ""
@@ -371,7 +371,7 @@ msgid "On"
 msgstr ""
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Standardeinstellungen wiederherstellen"
 
 msgid "Smooth Zoom"
 msgstr "Smoother Zoom"
@@ -721,7 +721,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
 
 msgid "Guides"
-msgstr ""
+msgstr "Anleitungen"
 
 msgid "Guides color:"
 msgstr "Guidefarbe:"
@@ -730,7 +730,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Eine Farbe der Linealguides, die auf dem Canvas angezeigt werden"
 
 msgid "Grid"
-msgstr ""
+msgstr "Tabelle"
 
 msgid "Grid width:"
 msgstr "Rasterbreite:"
@@ -751,7 +751,7 @@ msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparenz"
 
 msgid "Checker size:"
 msgstr "Checkergröße:"
