@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-29 00:20\n"
+"PO-Revision-Date: 2020-07-29 11:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Enregistrer sous..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Utiliser la compression ZSTD"
 
 msgid "Import"
 msgstr "Importer"
@@ -208,16 +208,16 @@ msgid "Vertical frames:"
 msgstr "Trame verticale:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Type de pinceau:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Pinceau du fichier"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Pinceau du projet"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Pinceau aléatoire"
 
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
@@ -348,7 +348,7 @@ msgid "General"
 msgstr "Général"
 
 msgid "Startup"
-msgstr ""
+msgstr "Démarrage"
 
 msgid "Language"
 msgstr "Langue"
@@ -363,16 +363,16 @@ msgid "Shortcuts"
 msgstr "Raccourcis"
 
 msgid "Backup"
-msgstr ""
+msgstr "Sauvegarde"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicateurs"
 
 msgid "On"
-msgstr ""
+msgstr "Activé"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Restaurer la valeur par défaut"
 
 msgid "Smooth Zoom"
 msgstr "Zoom fluide"
@@ -426,7 +426,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajuster la Teinte/Saturation/Valeur"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Dégradé"
 
 msgid "Adjust HSV"
 msgstr "Ajuster HSV"
@@ -459,22 +459,22 @@ msgid "Thickness:"
 msgstr "Épaisseur:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Couleurs:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Étapes:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "De haut en bas"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "De bas en haut"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "De gauche à droite"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "De droite à gauche"
 
 msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
@@ -722,7 +722,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Affiche une icône de l'outil de droite sélectionné à côté du curseur sur le canevas"
 
 msgid "Guides"
-msgstr ""
+msgstr "Guides"
 
 msgid "Guides color:"
 msgstr "Couleur des guides:"
@@ -731,7 +731,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Une couleur des guides de règle affichée sur le canevas"
 
 msgid "Grid"
-msgstr ""
+msgstr "Grille"
 
 msgid "Grid width:"
 msgstr "Largeur de la grille:"
@@ -752,7 +752,7 @@ msgid "A color of the grid"
 msgstr "Une couleur de la grille"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparence"
 
 msgid "Checker size:"
 msgstr "Taille du damier:"
@@ -797,7 +797,7 @@ msgid "Brush size:"
 msgstr "Taille de la brosse :"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Écraser"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Parfait"
