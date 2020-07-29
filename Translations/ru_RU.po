@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-29 21:10\n"
+"PO-Revision-Date: 2020-07-29 21:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Снять выделение"
 
 msgid "Flip"
-msgstr ""
+msgstr "Перевернуть"
 
 msgid "Flip Horizontal"
 msgstr "Отразить по горизонтали"
