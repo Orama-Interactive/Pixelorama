@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-07-29 04:07\n"
+"PO-Revision-Date: 2020-07-29 21:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -134,6 +134,9 @@ msgstr "旋转图像"
 
 msgid "Clear Selection"
 msgstr "清除选择"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "水平翻转"
