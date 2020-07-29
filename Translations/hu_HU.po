@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 14:49\n"
+"PO-Revision-Date: 2020-07-29 15:04\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -953,7 +953,8 @@ msgstr "Az animáció csak ugyanazon címkés képkockákat játssza le"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Ha ez ki van választva, akkor az animáció csak az azonos címkével ellátott képkockákat játssza le.\n"
+"Ha nem, az animáció minden képkockát lejátszódik, figyelmen kívül hagyva a címkéket."
 
 msgid "Blue-Red Mode"
 msgstr "Kék-Piros Mód"
