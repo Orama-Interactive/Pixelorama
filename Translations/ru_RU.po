@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-29 00:21\n"
+"PO-Revision-Date: 2020-07-29 09:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -369,7 +369,7 @@ msgid "Indicators"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Вкл"
 
 msgid "Restore default value"
 msgstr ""
@@ -722,7 +722,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Отображает значок выбранного правого инструмента рядом с курсором на холсте"
 
 msgid "Guides"
-msgstr ""
+msgstr "Направляющие"
 
 msgid "Guides color:"
 msgstr "Цвет направляющих:"
@@ -731,7 +731,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Цвет направляющих линейки, отображаемых на холсте"
 
 msgid "Grid"
-msgstr ""
+msgstr "Сетка"
 
 msgid "Grid width:"
 msgstr "Ширина сетки:"
@@ -752,7 +752,7 @@ msgid "A color of the grid"
 msgstr "Цвет сетки"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Прозрачность"
 
 msgid "Checker size:"
 msgstr "Размер клеток:"
