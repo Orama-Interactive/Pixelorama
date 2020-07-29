@@ -87,8 +87,7 @@ func setup_image_menu() -> void:
 		"Scale Image" : 0,
 		"Crop Image" : 0,
 		"Resize Canvas" : 0,
-		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
-		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
+		"Flip" : 0,
 		"Rotate Image" : 0,
 		"Invert Colors" : 0,
 		"Desaturation" : 0,
@@ -311,30 +310,30 @@ func image_menu_id_pressed(id : int) -> void:
 		2: # Resize Canvas
 			show_resize_canvas_popup()
 
-		3: # Flip Horizontal
-			flip_image(true)
+		3: # Flip
+			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
+			Global.dialog_open(true)
 
-		4: # Flip Vertical
-			flip_image(false)
-
-		5: # Rotate
+		4: # Rotate
 			show_rotate_image_popup()
 
-		6: # Invert Colors
+		5: # Invert Colors
 			DrawingAlgos.invert_image_colors(image)
 
-		7: # Desaturation
+		6: # Desaturation
 			DrawingAlgos.desaturate_image(image)
 
-		8: # Outline
+		7: # Outline
 			show_add_outline_popup()
 
-		9: # HSV
+		8: # HSV
 			show_hsv_configuration_popup()
-		10: # Gradient
+
+		9: # Gradient
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
 			Global.dialog_open(true)
-		11: # Shader
+
+		10: # Shader
 			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
 			Global.dialog_open(true)
 
@@ -347,18 +346,6 @@ func show_scale_image_popup() -> void:
 func show_resize_canvas_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
 	Global.dialog_open(true)
-
-
-func flip_image(horizontal : bool) -> void:
-	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
-	Global.canvas.handle_undo("Draw")
-	image.unlock()
-	if horizontal:
-		image.flip_x()
-	else:
-		image.flip_y()
-	image.lock()
-	Global.canvas.handle_redo("Draw")
 
 
 func show_rotate_image_popup() -> void:

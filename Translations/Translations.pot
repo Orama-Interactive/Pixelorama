@@ -124,6 +124,9 @@ msgstr ""
 msgid "Clear Selection"
 msgstr ""
 
+msgid "Flip"
+msgstr ""
+
 msgid "Flip Horizontal"
 msgstr ""
 
