@@ -5,7 +5,9 @@
 
 [sub_resource type="ImageTexture" id=1]
 
-[node name="RestoreDefaultButton" type="TextureButton"]
+[node name="RestoreDefaultButton" type="TextureButton" groups=[
+"UIButtons",
+]]
 margin_right = 16.0
 margin_bottom = 16.0
 disabled = true

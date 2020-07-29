@@ -96,7 +96,7 @@ func change_theme(ID : int) -> void:
 			if button.texture_hover:
 				var hover_file_name = button.texture_hover.resource_path.get_file()
 				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, hover_file_name])
-			if button.texture_disabled:
+			if button.texture_disabled and button.texture_disabled == StreamTexture:
 				var disabled_file_name = button.texture_disabled.resource_path.get_file()
 				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, disabled_file_name])
 		elif button is Button:
