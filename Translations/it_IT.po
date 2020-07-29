@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-07-28 23:47\n"
+"PO-Revision-Date: 2020-07-29 00:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -370,6 +370,9 @@ msgstr "Indicatori"
 
 msgid "On"
 msgstr "Acceso"
+
+msgid "Restore default value"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Zoom smussato"
