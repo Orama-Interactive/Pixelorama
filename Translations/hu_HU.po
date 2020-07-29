@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 14:40\n"
+"PO-Revision-Date: 2020-07-29 14:49\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -606,7 +606,7 @@ msgid "Save before exiting?"
 msgstr "Mentés mielőtt kilépsz?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Nem mentett változtatások vannak. Biztos vagy benne hogy továbblépsz?"
 
 msgid "Save & Exit"
 msgstr "Mentés és kilépés"
