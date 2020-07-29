@@ -238,50 +238,61 @@ custom_fonts/font = ExtResource( 3 )
 group = SubResource( 1 )
 text = "繁體中文 [zh_TW]"
 
-[node name="Themes" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_right = 506.0
-margin_bottom = 136.0
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 164.0
 script = ExtResource( 5 )
 
-[node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_right = 506.0
+[node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_right = 80.0
+margin_bottom = 136.0
+
+[node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
+margin_right = 80.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 group = SubResource( 2 )
 text = "Dark"
 
-[node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+[node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
 margin_top = 28.0
-margin_right = 506.0
+margin_right = 80.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 group = SubResource( 2 )
 text = "Gray"
 
-[node name="Blue Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+[node name="Blue Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
 margin_top = 56.0
-margin_right = 506.0
+margin_right = 80.0
 margin_bottom = 80.0
 mouse_default_cursor_shape = 2
 group = SubResource( 2 )
 text = "Blue"
 
-[node name="Caramel Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+[node name="Caramel Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
 margin_top = 84.0
-margin_right = 506.0
+margin_right = 80.0
 margin_bottom = 108.0
 mouse_default_cursor_shape = 2
 group = SubResource( 2 )
 text = "Caramel"
 
-[node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+[node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
 margin_top = 112.0
-margin_right = 506.0
+margin_right = 80.0
 margin_bottom = 136.0
 mouse_default_cursor_shape = 2
 group = SubResource( 2 )
 text = "Light"
+
+[node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_left = 84.0
+margin_right = 134.0
+margin_bottom = 136.0
+custom_constants/separation = 6
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
@@ -301,13 +312,14 @@ margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomOptions"]
 margin_top = 5.0
-margin_right = 90.0
+margin_right = 110.0
 margin_bottom = 19.0
+rect_min_size = Vector2( 110, 0 )
 text = "Smooth Zoom"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomOptions"]
-margin_left = 94.0
-margin_right = 141.0
+margin_left = 114.0
+margin_right = 161.0
 margin_bottom = 24.0
 hint_tooltip = "Adds a smoother transition when zooming in or out"
 mouse_default_cursor_shape = 2
