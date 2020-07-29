@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 09:02\n"
+"PO-Revision-Date: 2020-07-29 14:08\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -235,7 +235,7 @@ msgid "File %s already exists. Overwrite?"
 msgstr "\"%s\" fájl már létezik. Felülírja?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "A könyvtár elérési útja vagy a fájlnév nem érvényes!"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -288,7 +288,7 @@ msgid "All frames as multiple files"
 msgstr "Összes képkocka mint fájlok"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Minden képkocka egyetlen animációs fájlként"
 
 msgid "Background:"
 msgstr "Háttér:"
@@ -713,13 +713,13 @@ msgid "Show left tool icon"
 msgstr "Bal eszközikon mutatása"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Megjeleníti a kiválasztott bal eszköz ikont a vásznon kurzor mellett"
 
 msgid "Show right tool icon"
 msgstr "Jobb eszközikon mutatása"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Megjeleníti a kiválasztott jobb eszköz ikont a vásznon kurzor mellett"
 
 msgid "Guides"
 msgstr "Útmutatók"
@@ -945,7 +945,7 @@ msgid "Future Frames"
 msgstr "Következő képkockák"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Képkocka címkék módosítása"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -994,10 +994,10 @@ msgid "Remove current layer"
 msgstr "Aktuális réteg eltávolítása"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Jelenlegi réteg felfelé mozgatása"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Jelenlegi réteg lefelé mozgatása"
 
 msgid "Clone current layer"
 msgstr "Aktuális réteg klónozása"
@@ -1028,7 +1028,7 @@ msgid "Add a new palette"
 msgstr "Új paletta hozzáadása"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Jelenlegi paletta módosítása"
 
 msgid "Choose a palette"
 msgstr "Paletta választása"
