@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 05:59\n"
+"PO-Revision-Date: 2020-07-29 06:08\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -816,7 +816,7 @@ msgid "Same color pixels"
 msgstr ""
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Kitöltés ezzel:"
 
 msgid "Selected Color"
 msgstr "Kiválasztott szín"
