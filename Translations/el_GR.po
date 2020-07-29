@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-29 14:40\n"
+"PO-Revision-Date: 2020-07-29 21:11\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -134,6 +134,9 @@ msgstr "Περιστροφή Εικόνας"
 
 msgid "Clear Selection"
 msgstr "Καθαρισμός επιλογής"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
