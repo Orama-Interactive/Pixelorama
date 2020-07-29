@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 00:21\n"
+"PO-Revision-Date: 2020-07-29 05:52\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -348,7 +348,7 @@ msgid "General"
 msgstr "Általános"
 
 msgid "Startup"
-msgstr ""
+msgstr "Indítás"
 
 msgid "Language"
 msgstr "Nyelv"
@@ -363,16 +363,16 @@ msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
 
 msgid "Backup"
-msgstr ""
+msgstr "Biztonsági mentés"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikátorok"
 
 msgid "On"
-msgstr ""
+msgstr "Bekapcsolva"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Alapértékek visszaállítása"
 
 msgid "Smooth Zoom"
 msgstr "Sima közelítés"
@@ -729,7 +729,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Rács"
 
 msgid "Grid width:"
 msgstr "Rács szélessége:"
