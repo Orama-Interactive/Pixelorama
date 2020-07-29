@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 14:16\n"
+"PO-Revision-Date: 2020-07-29 14:40\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -701,13 +701,13 @@ msgid "Left pixel indicator"
 msgstr "Bal pixel indikátor"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Rajzolás közben a bal egér pixel jelzőt vagy ecset megjelenítése a vásznon"
 
 msgid "Right pixel indicator"
 msgstr "Jobb pixel indikátor"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Rajzolás közben a jobb egér pixel jelzőt vagy ecset megjelenítése a vásznon"
 
 msgid "Show left tool icon"
 msgstr "Bal eszközikon mutatása"
@@ -737,13 +737,13 @@ msgid "Grid width:"
 msgstr "Rács szélessége:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Beállítja, hogy a rács függőleges vonalai milyen távolságra legyenek egymástól"
 
 msgid "Grid height:"
 msgstr "Rács magassága:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Beállítja, hogy a rács vízszintes vonalai milyen távolságra legyenek egymástól"
 
 msgid "Grid color:"
 msgstr "Rács színe:"
@@ -917,14 +917,15 @@ msgstr "Ugrás az utolsó képkockához \n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Hagymabőr beállítások"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Hagymabőr be/ki kapcsolása"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Hány képkocka legyen másodpercenként az animáció előnézete?\n"
+"Minél több FPS, annál gyorsabb az animáció lejátszása."
 
 msgid "No loop"
 msgstr "Nincs loop"
@@ -936,7 +937,7 @@ msgid "Ping-pong loop"
 msgstr "Ping-pong loop"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Hagymabőr:"
 
 msgid "Past Frames"
 msgstr "Előző képkockák"
@@ -948,7 +949,7 @@ msgid "Manage frame tags"
 msgstr "Képkocka címkék módosítása"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Az animáció csak ugyanazon címkés képkockákat játssza le"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1003,7 +1004,7 @@ msgid "Clone current layer"
 msgstr "Aktuális réteg klónozása"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Aktuális réteg egyesítése az alatta lévővel"
 
 msgid "Opacity:"
 msgstr "Áttetszőség:"
@@ -1016,7 +1017,8 @@ msgstr "Réteg Bezárása/Kinyitása"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "A cella-összekapcsolás be/ki kapcsolása\n\n"
+"Az összekapcsolt cellák több képkockáig tartanak"
 
 msgid "Palette"
 msgstr "Paletta"
