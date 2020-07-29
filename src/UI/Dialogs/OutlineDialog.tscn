@@ -21,14 +21,15 @@ __meta__ = {
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
 margin_right = 312.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 6
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 4.0
+margin_top = 204.0
 margin_right = 312.0
-margin_bottom = 108.0
+margin_bottom = 308.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
@@ -88,6 +89,14 @@ margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Only affect selection"
+
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+margin_right = 29.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Current cel"
+items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+selected = 0
 [connection signal="about_to_show" from="." to="." method="_on_OutlineDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_OutlineDialog_confirmed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/ThickValue" to="." method="_on_ThickValue_value_changed"]
@@ -95,3 +104,4 @@ text = "Only affect selection"
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/DiagonalCheckBox" to="." method="_on_DiagonalCheckBox_toggled"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/InsideImageCheckBox" to="." method="_on_InsideImageCheckBox_toggled"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
+[connection signal="item_selected" from="VBoxContainer/OptionsContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]
