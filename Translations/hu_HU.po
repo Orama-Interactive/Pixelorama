@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 05:52\n"
+"PO-Revision-Date: 2020-07-29 05:59\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -252,7 +252,7 @@ msgid "All Frames"
 msgstr "Összes Képkocka"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Képsorozat"
 
 msgid "Animation"
 msgstr "Animáció"
@@ -720,7 +720,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr ""
 
 msgid "Guides"
-msgstr ""
+msgstr "Útmutatók"
 
 msgid "Guides color:"
 msgstr "Útmutatók színe:"
@@ -750,7 +750,7 @@ msgid "A color of the grid"
 msgstr "A rács színe"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Átlátszóság"
 
 msgid "Checker size:"
 msgstr ""
@@ -777,7 +777,7 @@ msgid "Brush:"
 msgstr "Ecset:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Ecset kiválasztása"
 
 msgid "Brush: Pixel"
 msgstr "Ecset: Pixel"
@@ -792,10 +792,10 @@ msgid "Custom brush"
 msgstr "Egyedi ecset"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Ecsetméret:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Felülírás"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
@@ -989,7 +989,7 @@ msgid "Create a new layer"
 msgstr "Új réteg létrehozása"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Aktuális réteg eltávolítása"
 
 msgid "Move up the current layer"
 msgstr ""
@@ -1007,7 +1007,7 @@ msgid "Opacity:"
 msgstr "Áttetszőség:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Réteg láthatóságának beállítása"
 
 msgid "Lock/unlock layer"
 msgstr "Réteg Bezárása/Kinyitása"
