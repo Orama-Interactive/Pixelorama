@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/ShaderEffect.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.gd" type="Script" id=1]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -9,7 +9,7 @@ margin_right = 200.0
 margin_bottom = 228.0
 rect_min_size = Vector2( 400, 300 )
 resizable = true
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/OutlineDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.gd" type="Script" id=1]
 
 [node name="OutlineDialog" type="ConfirmationDialog"]
 margin_right = 200.0

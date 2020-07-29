@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/ResizeCanvas.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" type="Script" id=2]
 
 [node name="ResizeCanvas" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 114.0
 resizable = true
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -122,7 +122,7 @@ size_flags_vertical = 0
 expand = true
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 1 )]
 show_behind_parent = true
 [connection signal="about_to_show" from="." to="." method="_on_ResizeCanvas_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]

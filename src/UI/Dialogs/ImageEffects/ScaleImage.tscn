@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/ScaleImage.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" type="Script" id=1]
 
 [node name="ScaleImage" type="ConfirmationDialog"]
 margin_right = 200.0

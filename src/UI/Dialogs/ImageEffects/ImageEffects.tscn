@@ -1,12 +1,16 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/ResizeCanvas.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/UI/Dialogs/RotateImage.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/UI/Dialogs/ShaderEffect.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/UI/Dialogs/HSVDialog.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/UI/Dialogs/GradientDialog.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/UI/Dialogs/OutlineDialog.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/UI/Dialogs/ScaleImage.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn" type="PackedScene" id=14]
+
+
+
+
 
 [node name="ImageEffects" type="Control"]
 mouse_filter = 2
