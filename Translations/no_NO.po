@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-07-29 00:21\n"
+"PO-Revision-Date: 2020-07-29 21:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "Rotér Bilde"
 
 msgid "Clear Selection"
 msgstr "Fjern Merking"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Speilvend Horisontalt"
