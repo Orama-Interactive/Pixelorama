@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-29 11:22\n"
+"PO-Revision-Date: 2020-07-29 21:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "Pivoter l'image"
 
 msgid "Clear Selection"
 msgstr "Ne rien sélectionner"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Miroir horizontal"
