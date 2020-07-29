@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-29 00:20\n"
+"PO-Revision-Date: 2020-07-29 21:10\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -134,6 +134,9 @@ msgstr "Rotar l'imatge"
 
 msgid "Clear Selection"
 msgstr "Netejar la selecció"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Voltejar horitzontalment"
