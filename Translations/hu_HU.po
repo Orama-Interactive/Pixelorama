@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-30 06:59\n"
+"PO-Revision-Date: 2020-07-30 07:13\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -618,7 +618,7 @@ msgid "Exit without saving"
 msgstr "Kilépés mentés nélkül"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Segédprogramok"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
@@ -776,7 +776,7 @@ msgid "Second color of the transparent checker background"
 msgstr "Az átlátszó kockás háttér második színe"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Csak az egyedi beállítások módosíthatók"
 
 msgid "Brush:"
 msgstr "Ecset:"
@@ -845,7 +845,7 @@ msgid "Lighten/Darken amount"
 msgstr "Világosítás/Sötétítés összeg"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Válasszon:"
 
 msgid "Left Color"
 msgstr "Bal szín"
