@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-07-29 21:10\n"
+"PO-Revision-Date: 2020-07-30 01:02\n"
 
 msgid "OK"
 msgstr "确定"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "清除选择"
 
 msgid "Flip"
-msgstr ""
+msgstr "翻转"
 
 msgid "Flip Horizontal"
 msgstr "水平翻转"
@@ -351,7 +351,7 @@ msgid "General"
 msgstr "常规​​​​​"
 
 msgid "Startup"
-msgstr ""
+msgstr "启动"
 
 msgid "Language"
 msgstr "语言"
@@ -366,13 +366,13 @@ msgid "Shortcuts"
 msgstr "快捷键"
 
 msgid "Backup"
-msgstr ""
+msgstr "备份"
 
 msgid "Indicators"
-msgstr ""
+msgstr "指示"
 
 msgid "On"
-msgstr ""
+msgstr "开启"
 
 msgid "Restore default value"
 msgstr "恢复默认值"
@@ -725,7 +725,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
 
 msgid "Guides"
-msgstr ""
+msgstr "手册"
 
 msgid "Guides color:"
 msgstr "参考线颜色："
@@ -734,7 +734,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "显示在画布上标尺参考线的颜色"
 
 msgid "Grid"
-msgstr ""
+msgstr "网格"
 
 msgid "Grid width:"
 msgstr "网格宽度："
@@ -755,7 +755,7 @@ msgid "A color of the grid"
 msgstr "网格颜色"
 
 msgid "Transparency"
-msgstr ""
+msgstr "透明度"
 
 msgid "Checker size:"
 msgstr "检查器大小："
