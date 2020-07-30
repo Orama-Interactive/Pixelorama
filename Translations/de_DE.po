@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-07-29 21:11\n"
+"PO-Revision-Date: 2020-07-30 09:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Ausgewählten Bereich löschen"
 
 msgid "Flip"
-msgstr ""
+msgstr "Umdrehen"
 
 msgid "Flip Horizontal"
 msgstr "Horizontal spiegeln"
@@ -350,7 +350,7 @@ msgid "General"
 msgstr "Allgemein"
 
 msgid "Startup"
-msgstr ""
+msgstr "Start"
 
 msgid "Language"
 msgstr "Sprache"
@@ -368,10 +368,10 @@ msgid "Backup"
 msgstr "Sicherung"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatoren"
 
 msgid "On"
-msgstr ""
+msgstr "An"
 
 msgid "Restore default value"
 msgstr "Standardeinstellungen wiederherstellen"
