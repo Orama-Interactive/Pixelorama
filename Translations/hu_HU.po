@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-30 06:54\n"
+"PO-Revision-Date: 2020-07-30 06:59\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -342,7 +342,7 @@ msgid "Bilinear"
 msgstr "Bilineáris"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 msgid "Trilinear"
 msgstr "Trilineáris"
@@ -390,7 +390,7 @@ msgid "None"
 msgstr "Nincs"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Befolyásolja a ecset alfaját"
 
 msgid "Color:"
 msgstr "Szín:"
