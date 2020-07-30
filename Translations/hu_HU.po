@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-29 21:10\n"
+"PO-Revision-Date: 2020-07-30 06:54\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Kijelölés törlése"
 
 msgid "Flip"
-msgstr ""
+msgstr "Átfordítás"
 
 msgid "Flip Horizontal"
 msgstr "Vízszintes tükrözés"
