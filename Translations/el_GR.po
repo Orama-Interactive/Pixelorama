@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-29 21:11\n"
+"PO-Revision-Date: 2020-07-31 00:47\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -419,6 +419,18 @@ msgstr "Φωτεινό"
 msgid "Invert Colors"
 msgstr ""
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr "Αποκορεσμός"
 
@@ -571,6 +583,9 @@ msgstr "Νορβηγικά"
 
 msgid "Korean"
 msgstr "Κορεάτικα"
+
+msgid "Hungarian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
