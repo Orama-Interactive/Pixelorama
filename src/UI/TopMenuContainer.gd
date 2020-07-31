@@ -194,7 +194,7 @@ func save_project_file_as() -> void:
 
 
 func export_file() -> void:
-	if Global.export_dialog.was_exported == false:
+	if Export.was_exported == false:
 		Global.export_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
