@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-07-30 01:02\n"
+"PO-Revision-Date: 2020-07-31 00:47\n"
 
 msgid "OK"
 msgstr "确定"
@@ -419,6 +419,18 @@ msgstr "白色"
 msgid "Invert Colors"
 msgstr "反相颜色"
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr "去饱和"
 
@@ -571,6 +583,9 @@ msgstr "挪威语"
 
 msgid "Korean"
 msgstr "韩语"
+
+msgid "Hungarian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "开发团队"
