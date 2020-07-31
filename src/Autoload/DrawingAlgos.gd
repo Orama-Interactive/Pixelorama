@@ -294,15 +294,20 @@ func resize_canvas(width : int, height : int, offset_x : int, offset_y : int) ->
 	Global.current_project.undo_redo.commit_action()
 
 
-func invert_image_colors(image : Image) -> void:
-	Global.canvas.handle_undo("Draw")
-	for xx in image.get_size().x:
-		for yy in image.get_size().y:
-			var px_color = image.get_pixel(xx, yy).inverted()
-			if px_color.a == 0:
-				continue
-			image.set_pixel(xx, yy, px_color)
-	Global.canvas.handle_redo("Draw")
+func invert_image_colors(image : Image, pixels : Array, red := true, green := true, blue := true, alpha := false) -> void:
+	image.lock()
+	for i in pixels:
+		var px_color := image.get_pixelv(i)
+		# Manually invert each color channel
+		if red:
+			px_color.r = 1.0 - px_color.r
+		if green:
+			px_color.g = 1.0 - px_color.g
+		if blue:
+			px_color.b = 1.0 - px_color.b
+		if alpha:
+			px_color.a = 1.0 - px_color.a
+		image.set_pixelv(i, px_color)
 
 
 func desaturate_image(image : Image) -> void:

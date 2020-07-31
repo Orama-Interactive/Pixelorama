@@ -318,7 +318,8 @@ func image_menu_id_pressed(id : int) -> void:
 			show_rotate_image_popup()
 
 		5: # Invert Colors
-			DrawingAlgos.invert_image_colors(image)
+			Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog").popup_centered()
+			Global.dialog_open(true)
 
 		6: # Desaturation
 			DrawingAlgos.desaturate_image(image)
