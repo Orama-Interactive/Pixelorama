@@ -117,6 +117,7 @@ OpenSave="*res://src/Autoload/OpenSave.gd"
 DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
 Tools="*res://src/Autoload/Tools.gd"
 Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
+Export="*res://src/Autoload/Export.gd"
 
 [debug]
 
