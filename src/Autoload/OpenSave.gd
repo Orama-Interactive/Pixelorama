@@ -112,9 +112,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
-		Global.export_dialog.directory_path = path.get_base_dir()
-		Global.export_dialog.was_exported = false
+		Export.file_name = path.get_file().trim_suffix(".pxo")
+		Export.directory_path = path.get_base_dir()
+		Export.was_exported = false
 		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
 
@@ -311,9 +311,9 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 			# Set last opened project path and save
 			Global.config_cache.set_value("preferences", "last_project_path", path)
 			Global.config_cache.save("user://cache.ini")
-			Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
-			Global.export_dialog.directory_path = path.get_base_dir()
-			Global.export_dialog.was_exported = false
+			Export.file_name = path.get_file().trim_suffix(".pxo")
+			Export.directory_path = path.get_base_dir()
+			Export.was_exported = false
 			Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 	else:
@@ -446,8 +446,8 @@ func set_new_tab(project : Project, path : String) -> void:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
 	var directory_path := path.get_basename().replace(file_name, "")
-	Global.export_dialog.directory_path = directory_path
-	Global.export_dialog.file_name = file_name
+	Export.directory_path = directory_path
+	Export.file_name = file_name
 
 
 func update_autosave() -> void:

@@ -196,9 +196,9 @@ func _on_QuitDialog_confirmed() -> void:
 func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
 	OpenSave.autosave_timer.start()
-	Global.export_dialog.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
-	Global.export_dialog.directory_path = OpenSave.current_save_paths[0].get_base_dir()
-	Global.export_dialog.was_exported = false
+	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
+	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
+	Export.was_exported = false
 	Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
 	Global.file_menu.get_popup().set_item_text(5, tr("Export"))
 
