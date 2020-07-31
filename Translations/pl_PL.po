@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-07-29 21:10\n"
+"PO-Revision-Date: 2020-07-31 00:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -418,6 +418,18 @@ msgstr "Jasny"
 msgid "Invert Colors"
 msgstr "Odwróć kolory"
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr "Desaturacja (zmniejsz nasycenie)"
 
@@ -570,6 +582,9 @@ msgstr "Norweski"
 
 msgid "Korean"
 msgstr "Koreański"
+
+msgid "Hungarian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Zespół developerski"
