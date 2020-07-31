@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-07-31 14:12\n"
+"PO-Revision-Date: 2020-07-31 14:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Nessuna selezione"
 
 msgid "Flip"
-msgstr ""
+msgstr "Inverti"
 
 msgid "Flip Horizontal"
 msgstr "Rifletti orizzontalmente"
@@ -375,7 +375,7 @@ msgid "On"
 msgstr "Acceso"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Ripristina valore predefinito"
 
 msgid "Smooth Zoom"
 msgstr "Zoom smussato"
