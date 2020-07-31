@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2020-07-29 21:10\n"
+"PO-Revision-Date: 2020-07-31 00:47\n"
 
 msgid "OK"
 msgstr ""
@@ -418,6 +418,18 @@ msgstr ""
 msgid "Invert Colors"
 msgstr ""
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr ""
 
@@ -569,6 +581,9 @@ msgid "Norwegian"
 msgstr ""
 
 msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
 msgstr ""
 
 msgid "Development Team"
