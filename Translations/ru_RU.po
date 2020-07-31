@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-07-29 21:28\n"
+"PO-Revision-Date: 2020-07-31 00:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -419,6 +419,18 @@ msgstr "Светлая"
 msgid "Invert Colors"
 msgstr "Инвертировать цвета"
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr "Обесцвечивание"
 
@@ -571,6 +583,9 @@ msgstr "Норвежский"
 
 msgid "Korean"
 msgstr "Корейский"
+
+msgid "Hungarian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
