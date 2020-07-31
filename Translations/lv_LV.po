@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-07-29 21:11\n"
+"PO-Revision-Date: 2020-07-31 00:47\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -419,6 +419,18 @@ msgstr "Gaišs"
 msgid "Invert Colors"
 msgstr ""
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr "Atsātināt"
 
@@ -570,6 +582,9 @@ msgid "Norwegian"
 msgstr ""
 
 msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
 msgstr ""
 
 msgid "Development Team"
