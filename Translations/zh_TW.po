@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-07-31 00:47\n"
+"PO-Revision-Date: 2020-07-31 04:26\n"
 
 msgid "OK"
 msgstr "確定"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "清除選取區塊"
 
 msgid "Flip"
-msgstr ""
+msgstr "翻轉"
 
 msgid "Flip Horizontal"
 msgstr "水平翻轉"
@@ -350,7 +350,7 @@ msgid "General"
 msgstr "一般"
 
 msgid "Startup"
-msgstr ""
+msgstr "啟動"
 
 msgid "Language"
 msgstr "語言"
@@ -365,16 +365,16 @@ msgid "Shortcuts"
 msgstr "快捷鍵"
 
 msgid "Backup"
-msgstr ""
+msgstr "備份"
 
 msgid "Indicators"
-msgstr ""
+msgstr "指標"
 
 msgid "On"
-msgstr ""
+msgstr "開啟"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "還原為預設值"
 
 msgid "Smooth Zoom"
 msgstr "平滑縮放"
@@ -419,16 +419,16 @@ msgid "Invert Colors"
 msgstr "反轉色彩"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "修改紅色色版"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "修改綠色色版"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "修改藍色色版"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "修改透明色版"
 
 msgid "Desaturation"
 msgstr "去飽和"
@@ -584,7 +584,7 @@ msgid "Korean"
 msgstr "韓文"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "匈牙利文"
 
 msgid "Development Team"
 msgstr "開發團隊"
@@ -739,7 +739,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "在鼠標旁顯示右鍵工具圖標"
 
 msgid "Guides"
-msgstr ""
+msgstr "輔助線"
 
 msgid "Guides color:"
 msgstr "輔助線顏色："
@@ -748,7 +748,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "尺標輔助線的顏色"
 
 msgid "Grid"
-msgstr ""
+msgstr "格線"
 
 msgid "Grid width:"
 msgstr "格線寬度："
@@ -769,7 +769,7 @@ msgid "A color of the grid"
 msgstr "格線顏色"
 
 msgid "Transparency"
-msgstr ""
+msgstr "透明"
 
 msgid "Checker size:"
 msgstr "空白格大小："
