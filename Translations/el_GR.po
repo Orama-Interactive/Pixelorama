@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-01 14:57\n"
+"PO-Revision-Date: 2020-08-01 15:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr "Λειτουργία Zεν"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Λειτουργία Πλήρους Οθόνης"
 
 msgid "Fill with color:"
 msgstr "Γέμισμα με χρώμα:"
@@ -178,16 +178,16 @@ msgid "Open File(s)"
 msgstr "Άνοιγμα αρχείου/ων"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Επιλογές Εισαγωγής"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Εισαγωγή ως:"
 
 msgid "New tab"
 msgstr "Νέα καρτέλα"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Φύλλο καρέ (νέα καρτέλα)"
 
 msgid "New frame"
 msgstr "Νέο καρέ"
@@ -205,22 +205,22 @@ msgid "New pattern"
 msgstr "Νέο μοτίβο"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Οριζόντια καρέ:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Κάθετα καρέ:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Τύπος πινέλου:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Πινέλο από αρχείο"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Πινέλο από project"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Τυχαίο πινέλο"
 
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
@@ -351,7 +351,7 @@ msgid "General"
 msgstr "Γενικά"
 
 msgid "Startup"
-msgstr ""
+msgstr "Εκκίνηση"
 
 msgid "Language"
 msgstr "Γλώσσα"
@@ -366,16 +366,16 @@ msgid "Shortcuts"
 msgstr "Συντομεύσεις"
 
 msgid "Backup"
-msgstr ""
+msgstr "Αντίγραφο ασφαλείας"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Δείκτες"
 
 msgid "On"
-msgstr ""
+msgstr "Ενεργό"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Επαναφορά εργοστασιακής τιμής"
 
 msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
@@ -417,13 +417,13 @@ msgid "Light"
 msgstr "Φωτεινό"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Αντιστροφή χρωμάτων"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Τροποποίηση Κόκκινου Καναλιού"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Τροποποίηση Πράσινου Καναλιού"
 
 msgid "Modify Blue Channel"
 msgstr ""
