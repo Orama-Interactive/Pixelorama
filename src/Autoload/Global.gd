@@ -146,6 +146,8 @@ var merge_down_layer_button : BaseButton
 var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
+var preview_zoom_slider : VSlider
+
 var add_palette_button : BaseButton
 var edit_palette_button : BaseButton
 var palette_option_button : OptionButton
@@ -154,6 +156,7 @@ var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
 var palette_import_file_dialog : FileDialog
+
 var error_dialog : AcceptDialog
 var quit_dialog : ConfirmationDialog
 var quit_and_save_dialog : ConfirmationDialog
@@ -237,6 +240,8 @@ func _ready() -> void:
 
 	layer_opacity_slider = find_node_by_name(animation_timeline, "OpacitySlider")
 	layer_opacity_spinbox = find_node_by_name(animation_timeline, "OpacitySpinBox")
+
+	preview_zoom_slider = find_node_by_name(root, "PreviewZoomSlider")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	edit_palette_button = find_node_by_name(root, "EditPalette")

@@ -100,6 +100,10 @@ func camera_zoom() -> void:
 		else:
 			camera.zoom_max = Vector2.ONE
 
+		if camera == Global.camera_preview:
+			Global.preview_zoom_slider.max_value = -camera.zoom_min.x
+			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
+
 		camera.fit_to_frame(Global.current_project.size)
 		camera.save_values_to_project()
 

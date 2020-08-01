@@ -163,6 +163,8 @@ func change_project() -> void:
 	Global.transparent_checker._ready()
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
+	Global.preview_zoom_slider.value = -Global.camera_preview.zoom.x
+
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.window_title = Global.window_title + "(*)"

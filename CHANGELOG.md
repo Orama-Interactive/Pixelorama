@@ -25,7 +25,10 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Added "Copy", "Paste" and "Delete" options in the Edit menu. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Selection region and size are now being shown when making a selection on the top, next to the position label. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Added color overwrite option for the Pencil tool. ([#282](https://github.com/Orama-Interactive/Pixelorama/pull/282))
-- Added color previews next to the themes in Preferences
+- Flip, desaturation and invert colors now have dialogs with previews and extra options. You can now choose individual color channels to invert, including alpha.
+- Added extra options for most image effects. The user can now choose if the effects will affect the selection, the current cel, current frame, all frames or even all projects!
+- A play button has been added for playing the animation exclusively on the small canvas preview area. A zoom slider for the preview area has been added, too.
+- Added color previews next to the themes in Preferences.
 
 ### Changed
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
