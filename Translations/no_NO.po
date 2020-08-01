@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-08-01 11:06\n"
+"PO-Revision-Date: 2020-08-01 11:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -739,7 +739,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Viser ikonet til det valgte høyreverktøyet ved siden av markøren på lerretet"
 
 msgid "Guides"
-msgstr ""
+msgstr "Guider"
 
 msgid "Guides color:"
 msgstr "Guidefarge:"
@@ -748,7 +748,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Farge som brukes av linjal og guider på lerretet"
 
 msgid "Grid"
-msgstr ""
+msgstr "Rutenett"
 
 msgid "Grid width:"
 msgstr "Rutenettbredde:"
@@ -769,7 +769,7 @@ msgid "A color of the grid"
 msgstr "En farge av rutenettet"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Gjennomsiktighet"
 
 msgid "Checker size:"
 msgstr "Størrelse på sjekkere:"
