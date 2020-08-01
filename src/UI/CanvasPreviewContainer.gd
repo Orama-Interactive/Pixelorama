@@ -13,6 +13,9 @@ func _on_PreviewZoomSlider_value_changed(value : float) -> void:
 
 func _on_PlayButton_toggled(button_pressed : bool) -> void:
 	if button_pressed:
+		if Global.current_project.frames.size() <= 1:
+			play_button.pressed = false
+			return
 		canvas_preview.animation_timer.start()
 		Global.change_button_texturerect(play_button.get_child(0), "pause.png")
 	else:
