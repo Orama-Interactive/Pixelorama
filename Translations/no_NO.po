@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-07-31 00:46\n"
+"PO-Revision-Date: 2020-08-01 11:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Fjern Merking"
 
 msgid "Flip"
-msgstr ""
+msgstr "Vend"
 
 msgid "Flip Horizontal"
 msgstr "Speilvend Horisontalt"
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr "Zenmodus"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Fullskjermmodus"
 
 msgid "Fill with color:"
 msgstr "Fyll med farge:"
@@ -350,7 +350,7 @@ msgid "General"
 msgstr "Generelt"
 
 msgid "Startup"
-msgstr ""
+msgstr "Oppstart"
 
 msgid "Language"
 msgstr "Språk"
@@ -365,16 +365,16 @@ msgid "Shortcuts"
 msgstr "Snarveier"
 
 msgid "Backup"
-msgstr ""
+msgstr "Sikkerhetskopi"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatorer"
 
 msgid "On"
-msgstr ""
+msgstr "På"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Tilbakestill til standardverdier"
 
 msgid "Smooth Zoom"
 msgstr "Glatt Zoom"
@@ -419,16 +419,16 @@ msgid "Invert Colors"
 msgstr "Invertér Farger"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Endre Rød Kanal"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Endre Grønn Kanal"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Endre Blå Kanal"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Endre Alpha Kanal"
 
 msgid "Desaturation"
 msgstr "Avmettning"
@@ -440,7 +440,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Justér Fargetone/Metning/Verdi"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradient"
 
 msgid "Adjust HSV"
 msgstr "Justér HSV"
@@ -473,22 +473,22 @@ msgid "Thickness:"
 msgstr "Tykkelse:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Farger:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Trinn:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Topp til Bunn"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Bunn til Topp"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Venstre til Høyre"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Høyre til Venstre"
 
 msgid "View Splash Screen"
 msgstr "Vis Oppstartsbilde"
@@ -584,7 +584,7 @@ msgid "Korean"
 msgstr "Koreansk"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungarsk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
