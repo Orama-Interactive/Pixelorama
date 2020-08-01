@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.gd" type="Script" id=1]
 
-[node name="InvertColorsDialog" type="ConfirmationDialog"]
+[node name="DesaturateDialog" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 70.0
-window_title = "Invert Colors"
+window_title = "Desaturation"
 resizable = true
 script = ExtResource( 1 )
 

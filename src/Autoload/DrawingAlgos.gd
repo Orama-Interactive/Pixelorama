@@ -310,17 +310,21 @@ func invert_image_colors(image : Image, pixels : Array, red := true, green := tr
 		image.set_pixelv(i, px_color)
 
 
-func desaturate_image(image : Image) -> void:
-	Global.canvas.handle_undo("Draw")
-	for xx in image.get_size().x:
-		for yy in image.get_size().y:
-			var px_color = image.get_pixel(xx, yy)
-			if px_color.a == 0:
-				continue
-			var gray = image.get_pixel(xx, yy).v
-			px_color = Color(gray, gray, gray, px_color.a)
-			image.set_pixel(xx, yy, px_color)
-	Global.canvas.handle_redo("Draw")
+func desaturate_image(image : Image, pixels : Array, red := true, green := true, blue := true, alpha := false) -> void:
+	image.lock()
+	for i in pixels:
+		var px_color := image.get_pixelv(i)
+		var gray = px_color.v
+		if red:
+			px_color.r = gray
+		if green:
+			px_color.g = gray
+		if blue:
+			px_color.b = gray
+		if alpha:
+			px_color.a = gray
+
+		image.set_pixelv(i, px_color)
 
 
 func generate_outline(image : Image, pixels : Array, outline_color : Color, thickness : int, diagonal : bool, inside_image : bool) -> void:

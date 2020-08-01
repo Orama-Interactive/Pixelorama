@@ -322,7 +322,8 @@ func image_menu_id_pressed(id : int) -> void:
 			Global.dialog_open(true)
 
 		6: # Desaturation
-			DrawingAlgos.desaturate_image(image)
+			Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog").popup_centered()
+			Global.dialog_open(true)
 
 		7: # Outline
 			show_add_outline_popup()
