@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-01 15:06\n"
+"PO-Revision-Date: 2020-08-01 15:27\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -426,10 +426,10 @@ msgid "Modify Green Channel"
 msgstr "Τροποποίηση Πράσινου Καναλιού"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Τροποποίηση Μπλε Καναλιού"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Τροποποίηση Καναλιού Διαφάνειας"
 
 msgid "Desaturation"
 msgstr "Αποκορεσμός"
@@ -441,7 +441,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Διαβάθμιση"
 
 msgid "Adjust HSV"
 msgstr "Ρύθμιση HSV"
@@ -474,22 +474,22 @@ msgid "Thickness:"
 msgstr "Πάχος:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Χρώματα:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Βαθμίδες:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Πάνω-κάτω"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Κάτω-πάνω"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Αριστερά-δεξιά"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Δεξιά-αριστερά"
 
 msgid "View Splash Screen"
 msgstr "Εμφάνιση οθόνης εκκίνησης"
@@ -585,7 +585,7 @@ msgid "Korean"
 msgstr "Κορεάτικα"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Ουγγρικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
@@ -740,7 +740,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου δεξιού εργαλείου δίπλα στο κέρσορα στον καμβά"
 
 msgid "Guides"
-msgstr ""
+msgstr "Οδηγοί"
 
 msgid "Guides color:"
 msgstr "Χρώμα οδηγών:"
@@ -749,7 +749,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Το χρώμα των οδηγών που φαίνεται στο καμβά"
 
 msgid "Grid"
-msgstr ""
+msgstr "Πλέγμα"
 
 msgid "Grid width:"
 msgstr "Πλάτος πλέγματος:"
@@ -770,7 +770,7 @@ msgid "A color of the grid"
 msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Διαφάνεια"
 
 msgid "Checker size:"
 msgstr "Μέγεθος σκακιέρας:"
@@ -815,7 +815,7 @@ msgid "Brush size:"
 msgstr "Μέγεθος πινέλου:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Αντικατάσταση"
 
 msgid "Pixel Perfect"
 msgstr ""
@@ -1157,7 +1157,7 @@ msgid "Import Palette"
 msgstr "Εισαγωγή Παλέτας"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Δημιουργία παλέτας από την τρέχουσα εικόνα"
 
 msgid "Palette Name:"
 msgstr "Όνομα Παλέτας:"
@@ -1319,7 +1319,7 @@ msgid "Close"
 msgstr "Κλείσιμο"
 
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
