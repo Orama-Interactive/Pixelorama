@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-07-31 00:47\n"
+"PO-Revision-Date: 2020-08-01 14:57\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Παρακαλώ επιβεβαιώστε..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Όνομα αρχείου:"
 
 msgid "Image Size"
 msgstr "Μέγεθος εικόνας"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Αποθήκευση ως..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Χρήση συμπίεσης ZSTD"
 
 msgid "Import"
 msgstr "Εισαγωγή"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Ακύρωση αναίρεσης"
 
 msgid "Copy"
-msgstr ""
+msgstr "Αντιγραφή"
 
 msgid "Paste"
-msgstr ""
+msgstr "Επικόλληση"
 
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -127,7 +127,7 @@ msgid "Crop Image"
 msgstr "Περικοπή"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Αλλαγή μεγέθους καμβά"
 
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Καθαρισμός επιλογής"
 
 msgid "Flip"
-msgstr ""
+msgstr "Αναστροφή"
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
