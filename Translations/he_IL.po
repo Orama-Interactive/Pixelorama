@@ -10,88 +10,88 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-07-31 00:46\n"
+"PO-Revision-Date: 2020-08-02 19:47\n"
 
 msgid "OK"
-msgstr ""
+msgstr "אישור"
 
 msgid "Cancel"
-msgstr ""
+msgstr "ביטול"
 
 msgid "Open"
-msgstr ""
+msgstr "פתח"
 
 msgid "Save"
-msgstr ""
+msgstr "שמור"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "אנא אשר..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "שם קובץ:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "גודל תמונה"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "גודל משטח הציור"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "גודל פריים"
 
 msgid "Width:"
-msgstr ""
+msgstr "רוחב:"
 
 msgid "Height:"
-msgstr ""
+msgstr "גובה:"
 
 msgid "Center"
-msgstr ""
+msgstr "מרכז"
 
 msgid "File"
-msgstr ""
+msgstr "קובץ"
 
 msgid "Edit"
-msgstr ""
+msgstr "עריכה"
 
 msgid "View"
-msgstr ""
+msgstr "תצוגה"
 
 msgid "Image"
-msgstr ""
+msgstr "תמונה"
 
 msgid "Effects"
-msgstr ""
+msgstr "אפקטים"
 
 msgid "Help"
-msgstr ""
+msgstr "עזרה"
 
 msgid "New"
-msgstr ""
+msgstr "חדש"
 
 msgid "New..."
-msgstr ""
+msgstr "חדש..."
 
 msgid "Open..."
-msgstr ""
+msgstr "פתח..."
 
 msgid "Save..."
-msgstr ""
+msgstr "שמור..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "שמור בשם..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "השתמש בדחיסת ZSTD"
 
 msgid "Import"
-msgstr ""
+msgstr "ייבא"
 
 msgid "Export"
-msgstr ""
+msgstr "ייצא"
 
 msgid "Export..."
-msgstr ""
+msgstr "ייצא..."
 
 msgid "Export as..."
 msgstr ""
