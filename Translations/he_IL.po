@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-08-02 19:47\n"
+"PO-Revision-Date: 2020-08-02 19:56\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -94,73 +94,73 @@ msgid "Export..."
 msgstr "ייצא..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "ייצא בשם..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "ייצא PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "יצא PNG בשם..."
 
 msgid "Quit"
-msgstr ""
+msgstr "צא"
 
 msgid "Undo"
-msgstr ""
+msgstr "בטל"
 
 msgid "Redo"
-msgstr ""
+msgstr "בצע שוב"
 
 msgid "Copy"
-msgstr ""
+msgstr "העתק"
 
 msgid "Paste"
-msgstr ""
+msgstr "הדבק"
 
 msgid "Delete"
-msgstr ""
+msgstr "מחק"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "הגדל/ הקטן תמונה"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "חתוך תמונה"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "שנה את גודל משטח הציור"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "סובב תמונה"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "נקה בחירה"
 
 msgid "Flip"
-msgstr ""
+msgstr "הפוך"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "הפוך אופקית"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "הפוך אנכית"
 
 msgid "Preferences"
-msgstr ""
+msgstr "העדפות"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "מצב אריח"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "הצג רשת"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "הצג סרגלים"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "הצג קווים מנחים"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "הצג את ציר הזמן לאנימציה"
 
 msgid "Zen Mode"
 msgstr ""
