@@ -226,7 +226,14 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 		for i in range(f.cels.size() - 1, -1, -1):
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)
-			sprite.resize(width, height, interpolation)
+			# Different method for scale3x
+			if interpolation == 5:
+				var times : Vector2 = Vector2(ceil(width/(3.0*sprite.get_width())),ceil(height/(3.0*sprite.get_height())))
+				for j in range(max(times.x,times.y)):
+					sprite.copy_from(scale3X(sprite))
+				sprite.resize(width, height, 0)
+			else:
+				sprite.resize(width, height, interpolation)
 			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(f.cels[i].image, "data", f.cels[i].image.data)
 
