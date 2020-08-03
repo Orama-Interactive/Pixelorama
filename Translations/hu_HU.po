@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-07-31 00:46\n"
+"PO-Revision-Date: 2020-08-03 08:23\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -420,16 +420,16 @@ msgid "Invert Colors"
 msgstr "Színek invertálása"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "A piros csatorna módosítása"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "A zöld csatorna módosítása"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "A kék csatorna módosítása"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "A alfa csatorna módosítása"
 
 msgid "Desaturation"
 msgstr "Kifakítás"
@@ -585,7 +585,7 @@ msgid "Korean"
 msgstr "Koreai"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Magyar"
 
 msgid "Development Team"
 msgstr "Fejlesztő csapat"
