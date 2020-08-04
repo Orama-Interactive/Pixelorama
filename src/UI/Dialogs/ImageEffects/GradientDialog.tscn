@@ -5,6 +5,7 @@
 [node name="GradientDialog" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 196.0
+window_title = "Gradient"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {

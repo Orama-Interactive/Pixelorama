@@ -6,6 +6,7 @@
 [node name="ResizeCanvas" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 114.0
+window_title = "Resize Canvas"
 resizable = true
 script = ExtResource( 2 )
 

@@ -5,6 +5,7 @@
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
 margin_bottom = 241.0
+window_title = "Rotate Image"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {

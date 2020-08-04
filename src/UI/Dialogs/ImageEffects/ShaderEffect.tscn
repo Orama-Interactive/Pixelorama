@@ -8,6 +8,7 @@
 margin_right = 200.0
 margin_bottom = 228.0
 rect_min_size = Vector2( 400, 300 )
+window_title = "Shader"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {

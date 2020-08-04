@@ -5,6 +5,8 @@
 [node name="OutlineDialog" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 70.0
+window_title = "Outline"
+resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
