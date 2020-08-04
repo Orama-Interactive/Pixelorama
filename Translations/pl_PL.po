@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-04 19:52\n"
+"PO-Revision-Date: 2020-08-04 20:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -371,10 +371,10 @@ msgid "Indicators"
 msgstr "Wskaźniki"
 
 msgid "On"
-msgstr ""
+msgstr "Włączone"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Przywróć domyślne wartości"
 
 msgid "Smooth Zoom"
 msgstr "Płynne przybliżanie"
@@ -419,16 +419,16 @@ msgid "Invert Colors"
 msgstr "Odwróć kolory"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modyfikuj kanał czerwony"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modyfikuj kanał zielony"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modyfikuj kanał niebieski"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modyfikuj kanał alfa"
 
 msgid "Desaturation"
 msgstr "Desaturacja (zmniejsz nasycenie)"
@@ -584,7 +584,7 @@ msgid "Korean"
 msgstr "Koreański"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Węgierski"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -739,7 +739,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Wyświetla ikonę prawego wybranego narzędzia obok kursora na płótnie"
 
 msgid "Guides"
-msgstr ""
+msgstr "Poradniki"
 
 msgid "Guides color:"
 msgstr "Kolor prowadnic:"
@@ -748,7 +748,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Kolor prowadnic wyświetlanych na płótnie"
 
 msgid "Grid"
-msgstr ""
+msgstr "Siatka"
 
 msgid "Grid width:"
 msgstr "Szerokość siatki:"
@@ -769,7 +769,7 @@ msgid "A color of the grid"
 msgstr "Kolor siatki"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Przezroczystość"
 
 msgid "Checker size:"
 msgstr "Rozmiar komórek:"
