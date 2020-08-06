@@ -229,7 +229,7 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 			# Different method for scale3x
 			if interpolation == 5:
 				var times : Vector2 = Vector2(ceil(width/(3.0*sprite.get_width())),ceil(height/(3.0*sprite.get_height())))
-				for j in range(max(times.x,times.y)):
+				for _j in range(max(times.x,times.y)):
 					sprite.copy_from(scale3X(sprite))
 				sprite.resize(width, height, 0)
 			else:
