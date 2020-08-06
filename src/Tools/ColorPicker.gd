@@ -37,8 +37,14 @@ func draw_end(_position : Vector2) -> void:
 
 
 func _pick_color(position : Vector2) -> void:
+	if position.x < 0 or position.y < 0:
+		return
+
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
+	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
+		return
+
 	image.lock()
 	var color := image.get_pixelv(position)
 	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
