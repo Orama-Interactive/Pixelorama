@@ -98,18 +98,16 @@ size_flags_vertical = 3
 [node name="LeftPanelContainer" type="PanelContainer" parent="ScrollContainer/ToolOptions"]
 margin_left = 16.0
 margin_right = 146.0
-margin_bottom = 14.0
+margin_bottom = 196.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 6
-size_flags_vertical = 0
 
 [node name="RightPanelContainer" type="PanelContainer" parent="ScrollContainer/ToolOptions"]
 margin_left = 183.0
 margin_right = 313.0
-margin_bottom = 14.0
+margin_bottom = 196.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 6
-size_flags_vertical = 0
 [connection signal="pressed" from="ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
 [connection signal="color_changed" from="ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_color_changed" binds= [ false ]]
 [connection signal="popup_closed" from="ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_popup_closed"]
