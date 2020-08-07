@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-07-31 04:26\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "確定"
@@ -239,6 +239,9 @@ msgstr "檔案 %s 已經存在，要覆寫嗎？"
 
 msgid "Directory path or file name is not valid!"
 msgstr "檔案位址或檔案名稱無效"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
