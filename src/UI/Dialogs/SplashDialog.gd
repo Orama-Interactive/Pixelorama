@@ -26,6 +26,9 @@ func _on_SplashDialog_about_to_show() -> void:
 
 	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox("panel", "WindowDialog").bg_color
 	get_stylebox("panel", "WindowDialog").border_color = Global.control.theme.get_stylebox("panel", "WindowDialog").border_color
+	if OS.get_name() == "HTML5":
+		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
+
 
 
 func _on_ArtCredits_pressed() -> void:

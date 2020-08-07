@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn" type="PackedScene" id=14]
+
+[node name="ImageEffects" type="Control"]
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScaleImage" parent="." instance=ExtResource( 14 )]
+margin_bottom = 127.0
+
+[node name="ResizeCanvas" parent="." instance=ExtResource( 8 )]
+margin_right = 216.0
+margin_bottom = 392.0
+
+[node name="RotateImage" parent="." instance=ExtResource( 9 )]
+
+[node name="FlipImageDialog" parent="." instance=ExtResource( 1 )]
+margin_right = 283.0
+margin_bottom = 300.0
+
+[node name="InvertColorsDialog" parent="." instance=ExtResource( 2 )]
+
+[node name="DesaturateDialog" parent="." instance=ExtResource( 3 )]
+
+[node name="OutlineDialog" parent="." instance=ExtResource( 13 )]
+margin_right = 217.0
+margin_bottom = 106.0
+
+[node name="HSVDialog" parent="." instance=ExtResource( 11 )]
+
+[node name="GradientDialog" parent="." instance=ExtResource( 12 )]
+margin_bottom = 214.0
+
+[node name="ShaderEffect" parent="." instance=ExtResource( 10 )]

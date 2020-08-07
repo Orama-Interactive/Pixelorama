@@ -2,12 +2,14 @@ extends ConfirmationDialog
 
 
 enum ImageImportOptions {NEW_TAB, SPRITESHEET, NEW_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
+enum BrushTypes {FILE, PROJECT, RANDOM}
 
 var path : String
 var image : Image
 var current_import_option : int = ImageImportOptions.NEW_TAB
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
+var brush_type : int = BrushTypes.FILE
 
 onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var image_size_label : Label = $VBoxContainer/SizeContainer/ImageSizeLabel
@@ -15,6 +17,8 @@ onready var frame_size_label : Label = $VBoxContainer/SizeContainer/FrameSizeLab
 onready var spritesheet_options = $VBoxContainer/HBoxContainer/SpritesheetOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
+onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
+onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
 
 
 func _on_PreviewDialog_about_to_show() -> void:
@@ -55,24 +59,17 @@ func _on_PreviewDialog_confirmed() -> void:
 		Global.palette_container.import_image_palette(path, image)
 
 	elif current_import_option == ImageImportOptions.BRUSH:
-		var file_name : String = path.get_basename().get_file()
-		image.convert(Image.FORMAT_RGBA8)
-		Global.file_brushes.append(image)
-		Global.create_brush_button(image, Global.Brush_Types.FILE, file_name)
-
-		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(path.get_file())
-		var dir = Directory.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		add_brush()
 
 	elif current_import_option == ImageImportOptions.PATTERN:
-		var file_name : String = path.get_basename().get_file()
+		var file_name_ext : String = path.get_file()
+		file_name_ext = file_name_replace(file_name_ext, "Patterns")
+		var file_name : String = file_name_ext.get_basename()
 		image.convert(Image.FORMAT_RGBA8)
-		Global.patterns.append(image)
-		Global.create_pattern_button(image, file_name)
+		Global.patterns_popup.add(image, file_name)
 
 		# Copy the image file into the "pixelorama/Patterns" directory
-		var location := "Patterns".plus_file(path.get_file())
+		var location := "Patterns".plus_file(file_name_ext)
 		var dir = Directory.new()
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
@@ -83,6 +80,7 @@ func _on_ImportOption_item_selected(id : int) -> void:
 	spritesheet_options.visible = false
 	new_frame_options.visible = false
 	new_layer_options.visible = false
+	new_brush_options.visible = false
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
 
@@ -99,6 +97,9 @@ func _on_ImportOption_item_selected(id : int) -> void:
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
 		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+
+	elif id == ImageImportOptions.BRUSH:
+		new_brush_options.visible = true
 
 
 func _on_HorizontalFrames_value_changed(value : int) -> void:
@@ -127,8 +128,8 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 		var scale_ratio = image.get_size().y / image_size_y
 		image_size_x = image.get_size().x / scale_ratio
 
-	var offset_x = (300 - image_size_x) / 2
-	var offset_y = (300 - image_size_y) / 2
+	var offset_x = (texture_rect.rect_size.x - image_size_x) / 2
+	var offset_y = (texture_rect.rect_size.y - image_size_y) / 2
 
 	if value > 1:
 		var line_distance
@@ -153,3 +154,72 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
 	var frame_height = floor(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
+
+
+func _on_BrushTypeOption_item_selected(index : int) -> void:
+	brush_type = index
+	new_brush_name.visible = false
+	if brush_type == BrushTypes.RANDOM:
+		new_brush_name.visible = true
+
+
+func add_brush() -> void:
+	image.convert(Image.FORMAT_RGBA8)
+	if brush_type == BrushTypes.FILE:
+		var file_name_ext : String = path.get_file()
+		file_name_ext = file_name_replace(file_name_ext, "Brushes")
+		var file_name : String = file_name_ext.get_basename()
+
+		Brushes.add_file_brush([image], file_name)
+
+		# Copy the image file into the "pixelorama/Brushes" directory
+		var location := "Brushes".plus_file(file_name_ext)
+		var dir = Directory.new()
+		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+
+	elif brush_type == BrushTypes.PROJECT:
+		var file_name : String =  path.get_file().get_basename()
+		Global.current_project.brushes.append(image)
+		Brushes.add_project_brush(image, file_name)
+
+	elif brush_type == BrushTypes.RANDOM:
+		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
+		if !brush_name.is_valid_filename():
+			return
+		var dir := Directory.new()
+		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+		if !dir.dir_exists(brush_name):
+			dir.make_dir(brush_name)
+
+		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes").plus_file(brush_name))
+		var random_brushes := []
+		dir.list_dir_begin()
+		var curr_file := dir.get_next()
+		while curr_file != "":
+			if curr_file.begins_with("%") and brush_name in curr_file:
+				random_brushes.append(curr_file)
+			curr_file = dir.get_next()
+		dir.list_dir_end()
+
+		var file_ext : String = path.get_file().get_extension()
+		var index : int = random_brushes.size() + 1
+		var file_name = "%" + brush_name + str(index) + "." + file_ext
+		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
+		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+
+
+# Checks if the file already exists
+# If it does, add a number to its name, for example
+# "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
+func file_name_replace(name : String, folder : String) -> String:
+	var i := 1
+	var file_ext = name.get_extension()
+	var temp_name := name
+	var dir := Directory.new()
+	dir.open(Global.directory_module.xdg_data_home.plus_file(folder))
+	while dir.file_exists(temp_name):
+		i += 1
+		temp_name = name.get_basename() + " (%s)" % i
+		temp_name += "." + file_ext
+	name = temp_name
+	return name

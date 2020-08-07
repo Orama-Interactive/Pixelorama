@@ -93,7 +93,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 				var image := Image.new()
 				image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
 				new_project.brushes.append(image)
-				Global.create_brush_button(image)
+				Brushes.add_project_brush(image)
 
 	file.close()
 	if !empty_project:
@@ -112,9 +112,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
-		Global.export_dialog.directory_path = path.get_base_dir()
-		Global.export_dialog.was_exported = false
+		Export.file_name = path.get_file().trim_suffix(".pxo")
+		Export.directory_path = path.get_base_dir()
+		Export.was_exported = false
 		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
 
@@ -232,19 +232,13 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 			guide_line = file.get_line()
 
 	# Load tool options
-	Global.color_pickers[0].color = file.get_var()
-	Global.color_pickers[1].color = file.get_var()
-	Global.brush_sizes[0] = file.get_8()
-	Global.brush_size_edits[0].value = Global.brush_sizes[0]
-	Global.brush_sizes[1] = file.get_8()
-	Global.brush_size_edits[1].value = Global.brush_sizes[1]
+	file.get_var()
+	file.get_var()
+	file.get_8()
+	file.get_8()
 	if file_major_version == 0 and file_minor_version < 7:
-		var left_palette = file.get_var()
-		var right_palette = file.get_var()
-		for color in left_palette:
-			Global.color_pickers[0].get_picker().add_preset(color)
-		for color in right_palette:
-			Global.color_pickers[1].get_picker().add_preset(color)
+		file.get_var()
+		file.get_var()
 
 	# Load custom brushes
 	var brush_line := file.get_line()
@@ -255,7 +249,7 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 		var image := Image.new()
 		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
 		new_project.brushes.append(image)
-		Global.create_brush_button(image)
+		Brushes.add_project_brush(image)
 		brush_line = file.get_line()
 
 	if file_major_version >= 0 and file_minor_version > 6:
@@ -270,9 +264,14 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 			tag_line = file.get_line()
 
 
-func save_pxo_file(path : String, autosave : bool, project : Project = Global.current_project) -> void:
-	var file := File.new()
-	var err := file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	var file : File = File.new()
+	var err
+	if use_zstd_compression:
+		err = file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+	else:
+		err = file.open(path, File.WRITE)
+
 	if err == OK:
 		if !autosave:
 			project.name = path.get_file()
@@ -290,7 +289,7 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 		file.close()
 
 		if OS.get_name() == "HTML5" and !autosave:
-			file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+			err = file.open(path, File.READ)
 			if !err:
 				var file_data = Array(file.get_buffer(file.get_len()))
 				JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
@@ -312,9 +311,9 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 			# Set last opened project path and save
 			Global.config_cache.set_value("preferences", "last_project_path", path)
 			Global.config_cache.save("user://cache.ini")
-			Global.export_dialog.file_name = path.get_file().trim_suffix(".pxo")
-			Global.export_dialog.directory_path = path.get_base_dir()
-			Global.export_dialog.was_exported = false
+			Export.file_name = path.get_file().trim_suffix(".pxo")
+			Export.directory_path = path.get_base_dir()
+			Export.was_exported = false
 			Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 	else:
@@ -323,10 +322,9 @@ func save_pxo_file(path : String, autosave : bool, project : Project = Global.cu
 
 
 func open_image_as_new_tab(path : String, image : Image) -> void:
-	var project = Project.new([], path.get_file())
+	var project = Project.new([], path.get_file(), image.get_size())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
-	project.size = image.get_size()
 
 	var frame := Frame.new()
 	image.convert(Image.FORMAT_RGBA8)
@@ -448,8 +446,8 @@ func set_new_tab(project : Project, path : String) -> void:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
 	var directory_path := path.get_basename().replace(file_name, "")
-	Global.export_dialog.directory_path = directory_path
-	Global.export_dialog.file_name = file_name
+	Export.directory_path = directory_path
+	Export.file_name = file_name
 
 
 func update_autosave() -> void:
@@ -466,7 +464,7 @@ func _on_Autosave_timeout() -> void:
 			backup_save_paths[i] = "user://backup-" + String(OS.get_unix_time()) + "-%s" % i
 
 		store_backup_path(i)
-		save_pxo_file(backup_save_paths[i], true, Global.projects[i])
+		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
 
 
 # Backup paths are stored in two ways:

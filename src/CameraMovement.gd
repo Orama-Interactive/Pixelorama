@@ -141,6 +141,8 @@ func zoom_camera(dir : int) -> void:
 
 			if name == "Camera2D":
 				Global.zoom_level_label.text = str(round(100 / new_zoom.x)) + " %"
+			elif name == "CameraPreview":
+				Global.preview_zoom_slider.value = -new_zoom.x
 
 	else:
 		var prev_zoom := zoom
@@ -154,7 +156,8 @@ func zoom_camera(dir : int) -> void:
 		offset = offset + (-0.5 * viewport_size + mouse_pos) * (prev_zoom - zoom)
 		if name == "Camera2D":
 			Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-
+		elif name == "CameraPreview":
+			Global.preview_zoom_slider.value = -zoom.x
 
 
 func _on_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
@@ -186,15 +189,17 @@ func fit_to_frame(size : Vector2) -> void:
 		Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 		Global.horizontal_ruler.update()
 		Global.vertical_ruler.update()
+	elif name == "CameraPreview":
+		Global.preview_zoom_slider.value = -zoom.x
 
 
 func save_values_to_project() -> void:
 	if name == "Camera2D":
 		Global.current_project.cameras_zoom[0] = zoom
 		Global.current_project.cameras_offset[0] = offset
-	if name == "Camera2D2":
+	elif name == "Camera2D2":
 		Global.current_project.cameras_zoom[1] = zoom
 		Global.current_project.cameras_offset[1] = offset
-	if name == "CameraPreview":
+	elif name == "CameraPreview":
 		Global.current_project.cameras_zoom[2] = zoom
 		Global.current_project.cameras_offset[2] = offset

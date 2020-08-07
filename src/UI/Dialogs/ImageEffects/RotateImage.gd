@@ -6,7 +6,6 @@ var layer : Image
 
 func _ready() -> void:
 	texture = ImageTexture.new()
-	texture.flags = 0
 	aux_img = Image.new()
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Rotxel")
 	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Upscale, Rotate and Downscale")
@@ -59,3 +58,7 @@ func _on_OptionButton_item_selected(_id) -> void:
 
 func _on_RotateImage_about_to_show() -> void:
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
+
+
+func _on_RotateImage_popup_hide() -> void:
+	Global.dialog_open(false)

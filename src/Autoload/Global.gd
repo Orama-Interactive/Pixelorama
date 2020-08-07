@@ -3,15 +3,8 @@ extends Node
 
 enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
-enum Brush_Types {PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM}
 enum Direction {UP, DOWN, LEFT, RIGHT}
-enum Mouse_Button {LEFT, RIGHT}
-enum Tools {PENCIL, ERASER, BUCKET, LIGHTENDARKEN, RECTSELECT, COLORPICKER, ZOOM}
 enum Theme_Types {DARK, BLUE, CARAMEL, LIGHT}
-enum Fill_Area {SAME_COLOR_AREA, SAME_COLOR_PIXELS}
-enum Fill_With {COLOR, PATTERN}
-enum Lighten_Darken_Mode {LIGHTEN, DARKEN}
-enum Zoom_Mode {ZOOM_IN, ZOOM_OUT}
 
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
@@ -40,17 +33,19 @@ var layers_changed_skip := false
 var can_draw := false
 
 var has_focus := false
-var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
-var open_last_project := false
-var smooth_zoom := true
 var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
-var left_cursor_tool_texture : ImageTexture
-var right_cursor_tool_texture : ImageTexture
+var left_cursor_tool_texture := ImageTexture.new()
+var right_cursor_tool_texture := ImageTexture.new()
 
 var image_clipboard : Image
 var play_only_tags := true
+var show_x_symmetry_axis := false
+var show_y_symmetry_axis := false
 
 # Preferences
+var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
+var open_last_project := false
+var smooth_zoom := true
 var theme_type : int = Theme_Types.DARK
 var default_image_width := 64
 var default_image_height := 64
@@ -64,30 +59,14 @@ var checker_size := 10
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 
-var autosave_interval := 5.0
+var autosave_interval := 1.0
 var enable_autosave := true
 
 # Tools & options
-var current_tools := [Tools.PENCIL, Tools.ERASER]
 var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
-
-var fill_areas := [Fill_Area.SAME_COLOR_AREA, Fill_Area.SAME_COLOR_AREA]
-var fill_with := [Fill_With.COLOR, Fill_With.COLOR]
-var fill_pattern_offsets := [Vector2.ZERO, Vector2.ZERO]
-
-var ld_modes := [Lighten_Darken_Mode.LIGHTEN, Lighten_Darken_Mode.LIGHTEN]
-var ld_amounts := [0.1, 0.1]
-
-var color_picker_for := [Mouse_Button.LEFT, Mouse_Button.RIGHT]
-
-var zoom_modes := [Zoom_Mode.ZOOM_IN, Zoom_Mode.ZOOM_OUT]
-
-var horizontal_mirror := [false, false]
-var vertical_mirror := [false, false]
-var pixel_perfect := [false, false]
 
 # View menu options
 var tile_mode := false
@@ -101,25 +80,6 @@ var onion_skinning := false
 var onion_skinning_past_rate := 1.0
 var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
-
-# Brushes
-var file_brushes := []
-var brush_sizes := [1, 1]
-var current_brush_types := [Brush_Types.PIXEL, Brush_Types.PIXEL]
-var brush_images := [Image.new(), Image.new()]
-var brush_textures := [ImageTexture.new(), ImageTexture.new()]
-
-var brush_type_window_position : int = Mouse_Button.LEFT
-var left_circle_points := []
-var right_circle_points := []
-
-var brushes_from_files := 0
-var custom_brush_indexes := [-1, -1]
-
-# Patterns
-var patterns := []
-var pattern_window_position : int = Mouse_Button.LEFT
-var pattern_images := [Image.new(), Image.new()]
 
 # Palettes
 var palettes := {}
@@ -158,40 +118,10 @@ var export_dialog : AcceptDialog
 var preferences_dialog : AcceptDialog
 var unsaved_changes_dialog : ConfirmationDialog
 
-var color_pickers := []
-
 var color_switch_button : BaseButton
 
-var tool_options_containers := []
-
-var brush_type_containers := []
-var brush_type_buttons := []
 var brushes_popup : Popup
-var file_brush_container : GridContainer
-var project_brush_container : GridContainer
 var patterns_popup : Popup
-
-var brush_size_edits := []
-var brush_size_sliders := []
-
-var pixel_perfect_containers := []
-
-var color_interpolation_containers := []
-var interpolate_spinboxes := []
-var interpolate_sliders := []
-
-var fill_area_containers := []
-var fill_pattern_containers := []
-
-var ld_containers := []
-var ld_amount_sliders := []
-var ld_amount_spinboxes := []
-
-var colorpicker_containers := []
-
-var zoom_containers := []
-
-var mirror_containers := []
 
 var animation_timeline : Panel
 
@@ -216,6 +146,8 @@ var merge_down_layer_button : BaseButton
 var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
+var preview_zoom_slider : VSlider
+
 var add_palette_button : BaseButton
 var edit_palette_button : BaseButton
 var palette_option_button : OptionButton
@@ -224,6 +156,7 @@ var edit_palette_popup : WindowDialog
 var new_palette_dialog : ConfirmationDialog
 var new_palette_name_line_edit : LineEdit
 var palette_import_file_dialog : FileDialog
+
 var error_dialog : AcceptDialog
 var quit_dialog : ConfirmationDialog
 var quit_and_save_dialog : ConfirmationDialog
@@ -250,21 +183,6 @@ func _ready() -> void:
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
 	canvas = find_node_by_name(root, "Canvas")
-
-	var pencil_cursor_image = preload("res://assets/graphics/cursor_icons/pencil_cursor.png")
-	var eraser_cursor_image = preload("res://assets/graphics/cursor_icons/eraser_cursor.png")
-
-	left_cursor_tool_texture = ImageTexture.new()
-	if pencil_cursor_image is Image:
-		left_cursor_tool_texture.create_from_image(pencil_cursor_image)
-	elif pencil_cursor_image is ImageTexture:
-		left_cursor_tool_texture.create_from_image(pencil_cursor_image.get_data())
-
-	right_cursor_tool_texture = ImageTexture.new()
-	if eraser_cursor_image is Image:
-		right_cursor_tool_texture.create_from_image(eraser_cursor_image)
-	elif eraser_cursor_image is ImageTexture:
-		right_cursor_tool_texture.create_from_image(eraser_cursor_image.get_data())
 
 	tabs = find_node_by_name(root, "Tabs")
 	main_viewport = find_node_by_name(root, "ViewportContainer")
@@ -294,57 +212,10 @@ func _ready() -> void:
 	preferences_dialog = find_node_by_name(root, "PreferencesDialog")
 	unsaved_changes_dialog = find_node_by_name(root, "UnsavedCanvasDialog")
 
-	tool_options_containers.append(find_node_by_name(root, "LeftToolOptions"))
-	tool_options_containers.append(find_node_by_name(root, "RightToolOptions"))
-
-	color_pickers.append(find_node_by_name(root, "LeftColorPickerButton"))
-	color_pickers.append(find_node_by_name(root, "RightColorPickerButton"))
 	color_switch_button = find_node_by_name(root, "ColorSwitch")
 
-	brush_type_containers.append(find_node_by_name(tool_options_containers[0], "LeftBrushType"))
-	brush_type_containers.append(find_node_by_name(tool_options_containers[1], "RightBrushType"))
-	brush_type_buttons.append(find_node_by_name(brush_type_containers[0], "LeftBrushTypeButton"))
-	brush_type_buttons.append(find_node_by_name(brush_type_containers[1], "RightBrushTypeButton"))
 	brushes_popup = find_node_by_name(root, "BrushesPopup")
-	file_brush_container = find_node_by_name(brushes_popup, "FileBrushContainer")
-	project_brush_container = find_node_by_name(brushes_popup, "ProjectBrushContainer")
 	patterns_popup = find_node_by_name(root, "PatternsPopup")
-
-	brush_size_edits.append(find_node_by_name(root, "LeftBrushSizeEdit"))
-	brush_size_sliders.append(find_node_by_name(root, "LeftBrushSizeSlider"))
-	brush_size_edits.append(find_node_by_name(root, "RightBrushSizeEdit"))
-	brush_size_sliders.append(find_node_by_name(root, "RightBrushSizeSlider"))
-
-	pixel_perfect_containers.append(find_node_by_name(root, "LeftBrushPixelPerfectMode"))
-	pixel_perfect_containers.append(find_node_by_name(root, "RightBrushPixelPerfectMode"))
-
-	color_interpolation_containers.append(find_node_by_name(root, "LeftColorInterpolation"))
-	color_interpolation_containers.append(find_node_by_name(root, "RightColorInterpolation"))
-	interpolate_spinboxes.append(find_node_by_name(root, "LeftInterpolateFactor"))
-	interpolate_sliders.append(find_node_by_name(root, "LeftInterpolateSlider"))
-	interpolate_spinboxes.append(find_node_by_name(root, "RightInterpolateFactor"))
-	interpolate_sliders.append(find_node_by_name(root, "RightInterpolateSlider"))
-
-	fill_area_containers.append(find_node_by_name(root, "LeftFillArea"))
-	fill_pattern_containers.append(find_node_by_name(root, "LeftFillPattern"))
-	fill_area_containers.append(find_node_by_name(root, "RightFillArea"))
-	fill_pattern_containers.append(find_node_by_name(root, "RightFillPattern"))
-
-	ld_containers.append(find_node_by_name(root, "LeftLDOptions"))
-	ld_amount_sliders.append(find_node_by_name(root, "LeftLDAmountSlider"))
-	ld_amount_spinboxes.append(find_node_by_name(root, "LeftLDAmountSpinbox"))
-	ld_containers.append(find_node_by_name(root, "RightLDOptions"))
-	ld_amount_sliders.append(find_node_by_name(root, "RightLDAmountSlider"))
-	ld_amount_spinboxes.append(find_node_by_name(root, "RightLDAmountSpinbox"))
-
-	colorpicker_containers.append(find_node_by_name(root, "LeftColorPickerOptions"))
-	colorpicker_containers.append(find_node_by_name(root, "RightColorPickerOptions"))
-
-	zoom_containers.append(find_node_by_name(root, "LeftZoomOptions"))
-	zoom_containers.append(find_node_by_name(root, "RightZoomOptions"))
-
-	mirror_containers.append(find_node_by_name(root, "LeftMirrorButtons"))
-	mirror_containers.append(find_node_by_name(root, "RightMirrorButtons"))
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
 
@@ -369,6 +240,8 @@ func _ready() -> void:
 
 	layer_opacity_slider = find_node_by_name(animation_timeline, "OpacitySlider")
 	layer_opacity_spinbox = find_node_by_name(animation_timeline, "OpacitySpinBox")
+
+	preview_zoom_slider = find_node_by_name(root, "PreviewZoomSlider")
 
 	add_palette_button = find_node_by_name(root, "AddPalette")
 	edit_palette_button = find_node_by_name(root, "EditPalette")
@@ -409,71 +282,73 @@ func notification_label(text : String) -> void:
 	get_tree().get_root().add_child(notification)
 
 
-func general_undo() -> void:
-	current_project.undos -= 1
-	var action_name : String = current_project.undo_redo.get_current_action_name()
+func general_undo(project : Project = current_project) -> void:
+	project.undos -= 1
+	var action_name : String = project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
-func general_redo() -> void:
-	if current_project.undos < current_project.undo_redo.get_version(): # If we did undo and then redo
-		current_project.undos = current_project.undo_redo.get_version()
+func general_redo(project : Project = current_project) -> void:
+	if project.undos < project.undo_redo.get_version(): # If we did undo and then redo
+		project.undos = project.undo_redo.get_version()
 	if control.redone:
-		var action_name : String = current_project.undo_redo.get_current_action_name()
+		var action_name : String = project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)
 
 
-func undo(_frame_index := -1, _layer_index := -1) -> void:
-	general_undo()
-	var action_name : String = current_project.undo_redo.get_current_action_name()
+func undo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
+	general_undo(project)
+	var action_name : String = project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
-			canvas.update_texture(_layer_index, _frame_index)
+			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
-			for i in current_project.frames.size():
-				for j in current_project.layers.size():
-					canvas.update_texture(j, i)
+			for i in project.frames.size():
+				for j in project.layers.size():
+					canvas.update_texture(j, i, project)
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
-		if current_project.frames.size() == 2: # Stop animating
+		if project.frames.size() == 2: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 
 	canvas.update()
-	if !current_project.has_changed:
-		current_project.has_changed = true
-		self.window_title = window_title + "(*)"
+	if !project.has_changed:
+		project.has_changed = true
+		if project == current_project:
+			self.window_title = window_title + "(*)"
 
 
-func redo(_frame_index := -1, _layer_index := -1) -> void:
-	general_redo()
-	var action_name : String = current_project.undo_redo.get_current_action_name()
+func redo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
+	general_redo(project)
+	var action_name : String = project.undo_redo.get_current_action_name()
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
-			canvas.update_texture(_layer_index, _frame_index)
+			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
-			for i in current_project.frames.size():
-				for j in current_project.layers.size():
-					canvas.update_texture(j, i)
+			for i in project.frames.size():
+				for j in project.layers.size():
+					canvas.update_texture(j, i, project)
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
 
 	elif "Frame" in action_name:
-		if current_project.frames.size() == 1: # Stop animating
+		if project.frames.size() == 1: # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
 
 	canvas.update()
-	if !current_project.has_changed:
-		current_project.has_changed = true
-		self.window_title = window_title + "(*)"
+	if !project.has_changed:
+		project.has_changed = true
+		if project == current_project:
+			self.window_title = window_title + "(*)"
 
 
 func title_changed(value : String) -> void:
@@ -603,143 +478,6 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 	var last_frame : BaseButton = find_node_by_name(root, "LastFrame")
 	last_frame.hint_tooltip = tr("""Jump to the last frame
 (%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
-
-
-func create_brush_button(brush_img : Image, brush_type := Brush_Types.CUSTOM, hint_tooltip := "") -> void:
-	var brush_container
-	var brush_button = load("res://src/UI/BrushButton.tscn").instance()
-	brush_button.brush_type = brush_type
-	if brush_type == Brush_Types.FILE || brush_type == Brush_Types.RANDOM_FILE:
-		brush_button.custom_brush_index = file_brushes.size() - 1
-		brush_container = file_brush_container
-	else:
-		brush_button.custom_brush_index = current_project.brushes.size() - 1
-		brush_container = project_brush_container
-	var brush_tex := ImageTexture.new()
-	brush_tex.create_from_image(brush_img, 0)
-	brush_button.get_child(0).texture = brush_tex
-	brush_button.hint_tooltip = hint_tooltip
-	brush_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	if brush_type == Brush_Types.RANDOM_FILE:
-		brush_button.random_brushes.append(brush_img)
-	brush_container.add_child(brush_button)
-
-
-func create_pattern_button(image : Image, hint_tooltip := "") -> void:
-	var pattern_button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
-	pattern_button.image = image
-	var pattern_tex := ImageTexture.new()
-	pattern_tex.create_from_image(image, 0)
-	pattern_button.get_child(0).texture = pattern_tex
-	pattern_button.hint_tooltip = hint_tooltip
-	pattern_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	patterns_popup.get_node("ScrollContainer/PatternContainer").add_child(pattern_button)
-
-
-func remove_brush_buttons() -> void:
-	current_brush_types[0] = Brush_Types.PIXEL
-	current_brush_types[1] = Brush_Types.PIXEL
-	for child in project_brush_container.get_children():
-		child.queue_free()
-
-
-func undo_custom_brush(_brush_button : BaseButton = null) -> void:
-	general_undo()
-	var action_name : String = current_project.undo_redo.get_current_action_name()
-	if action_name == "Delete Custom Brush":
-		project_brush_container.add_child(_brush_button)
-		project_brush_container.move_child(_brush_button, _brush_button.custom_brush_index)
-		_brush_button.get_node("DeleteButton").visible = false
-
-
-func redo_custom_brush(_brush_button : BaseButton = null) -> void:
-	general_redo()
-	var action_name : String = current_project.undo_redo.get_current_action_name()
-	if action_name == "Delete Custom Brush":
-		project_brush_container.remove_child(_brush_button)
-
-
-func update_custom_brush(mouse_button : int) -> void:
-	var brush_type : int = current_brush_types[mouse_button]
-	if brush_type == Brush_Types.PIXEL:
-		var pixel = preload("res://assets/graphics/pixel_image.png")
-		if pixel is Image:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-		elif pixel is ImageTexture:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
-	elif brush_type == Brush_Types.CIRCLE:
-		var pixel = preload("res://assets/graphics/circle_9x9.png")
-		if pixel is Image:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-		elif pixel is ImageTexture:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
-
-		left_circle_points = plot_circle(brush_sizes[0])
-		right_circle_points = plot_circle(brush_sizes[1])
-	elif brush_type == Brush_Types.FILLED_CIRCLE:
-		var pixel = preload("res://assets/graphics/circle_filled_9x9.png")
-		if pixel is Image:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel, 0)
-		elif pixel is ImageTexture:
-			brush_type_buttons[mouse_button].get_child(0).texture.create_from_image(pixel.get_data(), 0)
-
-		left_circle_points = plot_circle(brush_sizes[0])
-		right_circle_points = plot_circle(brush_sizes[1])
-	else:
-		var custom_brush := Image.new()
-		if brush_type == Brush_Types.FILE or brush_type == Brush_Types.RANDOM_FILE:
-			custom_brush.copy_from(file_brushes[custom_brush_indexes[mouse_button]])
-		else:
-			custom_brush.copy_from(current_project.brushes[custom_brush_indexes[mouse_button]])
-		var custom_brush_size = custom_brush.get_size()
-		custom_brush.resize(custom_brush_size.x * brush_sizes[mouse_button], custom_brush_size.y * brush_sizes[mouse_button], Image.INTERPOLATE_NEAREST)
-		brush_images[mouse_button] = blend_image_with_color(custom_brush, color_pickers[mouse_button].color, interpolate_spinboxes[mouse_button].value / 100)
-		brush_textures[mouse_button].create_from_image(brush_images[mouse_button], 0)
-
-		brush_type_buttons[mouse_button].get_child(0).texture = brush_textures[mouse_button]
-
-
-func blend_image_with_color(image : Image, color : Color, interpolate_factor : float) -> Image:
-	var blended_image := Image.new()
-	blended_image.copy_from(image)
-	var size := image.get_size()
-	blended_image.lock()
-	for xx in size.x:
-		for yy in size.y:
-			if color.a > 0: # If it's the pencil
-				var current_color := blended_image.get_pixel(xx, yy)
-				if current_color.a > 0:
-					var new_color := current_color.linear_interpolate(color, interpolate_factor)
-					new_color.a = current_color.a
-					blended_image.set_pixel(xx, yy, new_color)
-			else: # If color is transparent - if it's the eraser
-				blended_image.set_pixel(xx, yy, Color(0, 0, 0, 0))
-	return blended_image
-
-
-# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-# This is not used for drawing, rather for finding the points required
-# for the mouse cursor/position indicator
-func plot_circle(r : int) -> Array:
-	var circle_points := []
-	var xm := 0
-	var ym := 0
-	var x := -r
-	var y := 0
-	var err := 2 - r * 2
-	while x < 0:
-		circle_points.append(Vector2(xm - x, ym + y))
-		circle_points.append(Vector2(xm - y, ym - x))
-		circle_points.append(Vector2(xm + x, ym - y))
-		circle_points.append(Vector2(xm + y, ym + x))
-		r = err
-		if r <= y:
-			y += 1
-			err += y * 2 + 1
-		if r > x || err > y:
-			x += 1
-			err += x * 2 + 1
-	return circle_points
 
 
 func _exit_tree() -> void:

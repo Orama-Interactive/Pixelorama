@@ -1,0 +1,38 @@
+[gd_scene format=2]
+
+[node name="ThemeColorPreview" type="ColorRect"]
+margin_right = 50.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 14 )
+color = Color( 0.380392, 0.384314, 0.380392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 3.0
+margin_top = -5.0
+margin_right = 23.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 20, 10 )
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -23.0
+margin_top = -5.0
+margin_right = -3.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 20, 10 )
+color = Color( 0.411765, 0.411765, 0.411765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

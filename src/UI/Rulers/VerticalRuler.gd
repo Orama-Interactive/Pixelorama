@@ -64,8 +64,8 @@ func _on_VerticalRuler_pressed() -> void:
 		return
 	var guide := Guide.new()
 	guide.type = guide.Types.VERTICAL
-	guide.add_point(Vector2(Global.canvas.current_pixel.x, -99999))
-	guide.add_point(Vector2(Global.canvas.current_pixel.x, 99999))
+	guide.add_point(Vector2(Global.canvas.current_pixel.x, -19999))
+	guide.add_point(Vector2(Global.canvas.current_pixel.x, 19999))
 	Global.canvas.add_child(guide)
 	Global.has_focus = false
 	update()

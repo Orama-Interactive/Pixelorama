@@ -119,5 +119,4 @@ margin_bottom = 128.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0, 0 )
-[connection signal="about_to_show" from="." to="." method="_on_CreateNewImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]

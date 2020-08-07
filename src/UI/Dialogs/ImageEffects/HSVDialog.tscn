@@ -1,8 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/HSVDialog.gd" type="Script" id=1]
-
-
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/HSVDialog.gd" type="Script" id=1]
 
 [node name="HSVDialog" type="WindowDialog"]
 margin_left = 1.0
@@ -35,15 +33,15 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 margin_right = 453.0
-margin_bottom = 197.0
+margin_bottom = 169.0
 size_flags_vertical = 3
 expand = true
 stretch_mode = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 201.0
+margin_top = 173.0
 margin_right = 453.0
-margin_bottom = 285.0
+margin_bottom = 257.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -134,6 +132,27 @@ margin_bottom = 84.0
 mouse_default_cursor_shape = 1
 min_value = -100.0
 
+[node name="AffectHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 261.0
+margin_right = 453.0
+margin_bottom = 285.0
+
+[node name="SelectionCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/AffectHBoxContainer"]
+margin_right = 160.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Only affect selection"
+
+[node name="AffectOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/AffectHBoxContainer"]
+margin_left = 164.0
+margin_right = 263.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+text = "Current cel"
+items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+selected = 0
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 289.0
 margin_right = 453.0
@@ -158,11 +177,14 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Cancel"
 [connection signal="about_to_show" from="." to="." method="_on_HSVDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_HSVDialog_popup_hide"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/AffectHBoxContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/AffectHBoxContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Apply" to="." method="_on_Apply_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Cancel" to="." method="_on_Cancel_pressed"]

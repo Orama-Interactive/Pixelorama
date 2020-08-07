@@ -1,22 +1,41 @@
 extends Node
 
 
+onready var themes := [
+	preload("res://assets/themes/dark/theme.tres"),
+	preload("res://assets/themes/gray/theme.tres"),
+	preload("res://assets/themes/blue/theme.tres"),
+	preload("res://assets/themes/caramel/theme.tres"),
+	preload("res://assets/themes/light/theme.tres"),
+]
+onready var buttons_container : BoxContainer = $ThemeButtons
+onready var colors_container : BoxContainer = $ThemeColors
+onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColorPreview.tscn")
+
+
 func _ready() -> void:
-	for child in get_children():
+	for child in buttons_container.get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Theme_pressed", [child.get_index()])
+
+		var theme_color_preview : ColorRect = theme_color_preview_scene.instance()
+		var color1 = themes[child.get_index()].get_stylebox("panel", "Panel").bg_color
+		var color2 = themes[child.get_index()].get_stylebox("panel", "PanelContainer").bg_color
+		theme_color_preview.get_child(0).color = color1
+		theme_color_preview.get_child(1).color = color2
+		colors_container.add_child(theme_color_preview)
 
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
 		change_theme(theme_id)
-		get_child(theme_id).pressed = true
+		buttons_container.get_child(theme_id).pressed = true
 	else:
 		change_theme(0)
-		get_child(0).pressed = true
+		buttons_container.get_child(0).pressed = true
 
 
 func _on_Theme_pressed(index : int) -> void:
-	get_child(index).pressed = true
+	buttons_container.get_child(index).pressed = true
 	change_theme(index)
 
 	Global.config_cache.set_value("preferences", "theme", index)
@@ -25,32 +44,27 @@ func _on_Theme_pressed(index : int) -> void:
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
-	var main_theme : Theme
+	var main_theme : Theme = themes[ID]
 	var top_menu_style
 	var ruler_style
 	if ID == 0: # Dark Theme
 		Global.theme_type = Global.Theme_Types.DARK
-		main_theme = preload("res://assets/themes/dark/theme.tres")
 		top_menu_style = preload("res://assets/themes/dark/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 1: # Gray Theme
 		Global.theme_type = Global.Theme_Types.DARK
-		main_theme = preload("res://assets/themes/gray/theme.tres")
 		top_menu_style = preload("res://assets/themes/gray/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = Global.Theme_Types.BLUE
-		main_theme = preload("res://assets/themes/blue/theme.tres")
 		top_menu_style = preload("res://assets/themes/blue/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/blue/ruler_style.tres")
 	elif ID == 3: # Caramel Theme
 		Global.theme_type = Global.Theme_Types.CARAMEL
-		main_theme = preload("res://assets/themes/caramel/theme.tres")
 		top_menu_style = preload("res://assets/themes/caramel/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/caramel/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.Theme_Types.LIGHT
-		main_theme = preload("res://assets/themes/light/theme.tres")
 		top_menu_style = preload("res://assets/themes/light/top_menu_style.tres")
 		ruler_style = preload("res://assets/themes/light/ruler_style.tres")
 
@@ -96,7 +110,7 @@ func change_theme(ID : int) -> void:
 			if button.texture_hover:
 				var hover_file_name = button.texture_hover.resource_path.get_file()
 				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, hover_file_name])
-			if button.texture_disabled:
+			if button.texture_disabled and button.texture_disabled == StreamTexture:
 				var disabled_file_name = button.texture_disabled.resource_path.get_file()
 				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, disabled_file_name])
 		elif button is Button:

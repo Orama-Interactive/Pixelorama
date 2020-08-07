@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
-[ext_resource path="res://addons/godot-gifexporter/src/GifExporter.gd" type="Script" id=2]
 
 [node name="ExportDialog" type="AcceptDialog"]
 margin_right = 532.0
@@ -183,31 +182,14 @@ margin_right = 516.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 24 )
 
-[node name="BackgroundColorLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_top = 5.0
-margin_right = 78.0
-margin_bottom = 19.0
-text = "Background:"
-valign = 1
-
-[node name="BackgroundColor" type="ColorPickerButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 82.0
-margin_right = 263.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 7
-color = Color( 1, 1, 1, 1 )
-edit_alpha = false
-
 [node name="DirectionLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 267.0
 margin_top = 5.0
-margin_right = 330.0
+margin_right = 63.0
 margin_bottom = 19.0
 text = "Direction:"
 
 [node name="Direction" type="OptionButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 334.0
+margin_left = 67.0
 margin_right = 516.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 100, 0 )
@@ -244,7 +226,7 @@ margin_right = 235.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-min_value = 10.0
+min_value = 50.0
 max_value = 1000.0
 step = 100.0
 value = 100.0
@@ -319,6 +301,7 @@ margin_left = 34.0
 margin_right = 376.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+text = "untitled"
 align = 2
 
 [node name="FileFormat" type="OptionButton" parent="VBoxContainer/File"]
@@ -364,10 +347,10 @@ __meta__ = {
 }
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="Popups"]
-margin_left = 8.0
-margin_top = 180.0
-margin_right = 448.0
-margin_bottom = 280.0
+margin_left = 10.5227
+margin_top = 176.636
+margin_right = 450.523
+margin_bottom = 276.636
 size_flags_horizontal = 0
 size_flags_vertical = 0
 window_title = "Alarm!"
@@ -377,15 +360,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExportProgressBar" type="WindowDialog" parent="Popups"]
+margin_left = 63.0
+margin_top = 215.0
+margin_right = 402.0
+margin_bottom = 256.0
+popup_exclusive = true
+window_title = "Exporting in progress..."
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Popups/ExportProgressBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Popups/ExportProgressBar/MarginContainer"]
+margin_right = 329.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FrameTimer" type="Timer" parent="."]
 __meta__ = {
 "_editor_description_": "Timer to advance animation frames in animation preview."
-}
-
-[node name="GifExporter" type="Node" parent="."]
-script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
 }
 [connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
@@ -398,7 +406,6 @@ __meta__ = {
 [connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimationType" to="." method="_on_AnimationType_item_selected"]
 [connection signal="toggled" from="VBoxContainer/AnimationOptions/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
-[connection signal="color_changed" from="VBoxContainer/AnimationOptions/AnimatedOptions/BackgroundColor" to="." method="_on_BackgroundColor_color_changed"]
 [connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimatedOptions/Direction" to="." method="_on_Direction_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/Options/Resize" to="." method="_on_Resize_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/Options/Interpolation" to="." method="_on_Interpolation_item_selected"]

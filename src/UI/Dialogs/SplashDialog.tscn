@@ -98,7 +98,7 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "New"
 
-[node name="OpenBtn " type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
+[node name="OpenBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
 margin_top = 30.0
 margin_right = 290.0
 margin_bottom = 50.0
@@ -276,7 +276,7 @@ rect_min_size = Vector2( 4, 0 )
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
 [connection signal="pressed" from="Contents/SplashArt/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn " to="." method="_on_OpenBtn__pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn__pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePlatinum" to="." method="_on_TakeThisSpot_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomeGold" to="." method="_on_TakeThisSpot_pressed"]

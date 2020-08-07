@@ -16,6 +16,9 @@ msgstr ""
 msgid "Please Confirm..."
 msgstr ""
 
+msgid "File Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr ""
 
@@ -67,6 +70,9 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
+msgid "Use ZSTD Compression"
+msgstr ""
+
 msgid "Import"
 msgstr ""
 
@@ -94,6 +100,15 @@ msgstr ""
 msgid "Redo"
 msgstr ""
 
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
 msgid "Scale Image"
 msgstr ""
 
@@ -107,6 +122,9 @@ msgid "Rotate Image"
 msgstr ""
 
 msgid "Clear Selection"
+msgstr ""
+
+msgid "Flip"
 msgstr ""
 
 msgid "Flip Horizontal"
@@ -134,6 +152,9 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
+msgstr ""
+
+msgid "Fullscreen Mode"
 msgstr ""
 
 msgid "Fill with color:"
@@ -178,6 +199,18 @@ msgstr ""
 msgid "Vertical frames:"
 msgstr ""
 
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
+
 msgid "Save Sprite as .pxo"
 msgstr ""
 
@@ -194,6 +227,9 @@ msgid "File %s already exists. Overwrite?"
 msgstr ""
 
 msgid "Directory path or file name is not valid!"
+msgstr ""
+
+msgid "Exporting in progress..."
 msgstr ""
 
 msgid "Can't load file '%s'.\n"
@@ -305,6 +341,9 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -315,6 +354,18 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Restore default value"
 msgstr ""
 
 msgid "Smooth Zoom"
@@ -359,6 +410,18 @@ msgstr ""
 msgid "Invert Colors"
 msgstr ""
 
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
+
 msgid "Desaturation"
 msgstr ""
 
@@ -366,6 +429,9 @@ msgid "Outline"
 msgstr ""
 
 msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
+msgid "Gradient"
 msgstr ""
 
 msgid "Adjust HSV"
@@ -396,6 +462,24 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
+msgstr ""
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
+
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
 msgstr ""
 
 msgid "View Splash Screen"
@@ -489,6 +573,9 @@ msgid "Norwegian"
 msgstr ""
 
 msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
 msgstr ""
 
 msgid "Development Team"
@@ -624,10 +711,16 @@ msgstr ""
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr ""
 
 msgid "A color of ruler guides displayed on the canvas"
+msgstr ""
+
+msgid "Grid"
 msgstr ""
 
 msgid "Grid width:"
@@ -646,6 +739,9 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Transparency"
 msgstr ""
 
 msgid "Checker size:"
@@ -688,6 +784,12 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
+msgstr ""
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Brush color from"

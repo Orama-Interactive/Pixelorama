@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/eraser_r.png" type="Texture" id=13]
 [ext_resource path="res://assets/graphics/dark_themes/tools/pencil_l.png" type="Texture" id=14]
 [ext_resource path="res://assets/graphics/dark_themes/tools/lightendarken.png" type="Texture" id=15]
+[ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Canvas.tscn" type="PackedScene" id=19]
@@ -339,47 +340,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="RightPanel/PreviewAndPalettes"]
-margin_left = 8.0
-margin_right = 322.0
-margin_bottom = 164.0
-size_flags_horizontal = 4
-
-[node name="PreviewViewportContainer" type="ViewportContainer" parent="RightPanel/PreviewAndPalettes/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 307.0
-margin_bottom = 157.0
-rect_min_size = Vector2( 0, 150 )
-
-[node name="Viewport" type="Viewport" parent="RightPanel/PreviewAndPalettes/PanelContainer/PreviewViewportContainer"]
-size = Vector2( 300, 150 )
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="TransparentChecker" parent="RightPanel/PreviewAndPalettes/PanelContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 5 )]
-
-[node name="CanvasPreview" parent="RightPanel/PreviewAndPalettes/PanelContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 2 )]
-
-[node name="CameraPreview" type="Camera2D" parent="RightPanel/PreviewAndPalettes/PanelContainer/PreviewViewportContainer/Viewport"]
-offset = Vector2( 32, 32 )
-current = true
-zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 7 )
+[node name="CanvasPreviewContainer" parent="RightPanel/PreviewAndPalettes" instance=ExtResource( 16 )]
+margin_right = 336.0
 
 [node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="RightPanel/PreviewAndPalettes"]
 margin_top = 168.0
-margin_right = 330.0
+margin_right = 336.0
 margin_bottom = 676.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
+margin_right = 336.0
 margin_bottom = 248.0
 
 [node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
+margin_left = 18.0
 margin_top = 260.0
+margin_right = 318.0
 margin_bottom = 508.0
 [connection signal="reposition_active_tab_request" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]

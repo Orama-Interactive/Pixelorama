@@ -105,18 +105,7 @@ func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
 
 	if len(loaded_images) > 0:  # actually have images
 		# to use.
-		# take initial image...
-		var first_image : Image = loaded_images.pop_front()
-
-		# The index which this random brush will be at
-		var next_random_brush_index : int = Global.file_brush_container.get_child_count()
-
-		Global.file_brushes.append(first_image)
-		Global.create_brush_button(first_image, Global.Brush_Types.RANDOM_FILE, tooltip_name)
-	#	# Process the rest
-		for remaining_image in loaded_images:
-			var brush_button = Global.file_brush_container.get_child(next_random_brush_index)
-			brush_button.random_brushes.append(remaining_image)
+		Brushes.add_file_brush(loaded_images, tooltip_name)
 
 # Add a plain brush from the given path to the list of brushes.
 # Taken, again, from find_brushes
@@ -127,8 +116,7 @@ func add_plain_brush(path: String, tooltip_name: String) -> void:
 		return
 	# do the standard conversion thing...
 	image.convert(Image.FORMAT_RGBA8)
-	Global.file_brushes.append(image)
-	Global.create_brush_button(image, Global.Brush_Types.FILE, tooltip_name)
+	Brushes.add_file_brush([image], tooltip_name)
 
 
 # Import brushes, in priority order, from the paths in question in priority order
@@ -214,8 +202,6 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 						# Mark this as a processed relpath
 						processed_subdir_paths[nonrandomised_subdir][relative_path] = true
 
-	Global.brushes_from_files = Global.file_brushes.size()
-
 
 func import_patterns(priority_ordered_search_path: Array) -> void:
 	for path in priority_ordered_search_path:
@@ -235,25 +221,8 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 			var err := image.load(path.plus_file(pattern))
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
-				Global.patterns.append(image)
-				Global.create_pattern_button(image, pattern)
-
-			if Global.patterns.size() > 0:
-				var image_size = Global.patterns[0].get_size()
-
-				Global.pattern_images[0] = Global.patterns[0]
-				var pattern_left_tex := ImageTexture.new()
-				pattern_left_tex.create_from_image(Global.pattern_images[0], 0)
-				Global.fill_pattern_containers[0].get_child(0).get_child(0).texture = pattern_left_tex
-				Global.fill_pattern_containers[0].get_child(2).get_child(1).max_value = image_size.x - 1
-				Global.fill_pattern_containers[0].get_child(3).get_child(1).max_value = image_size.y - 1
-
-				Global.pattern_images[1] = Global.patterns[0]
-				var pattern_right_tex := ImageTexture.new()
-				pattern_right_tex.create_from_image(Global.pattern_images[1], 0)
-				Global.fill_pattern_containers[1].get_child(0).get_child(0).texture = pattern_right_tex
-				Global.fill_pattern_containers[1].get_child(2).get_child(1).max_value = image_size.x - 1
-				Global.fill_pattern_containers[1].get_child(3).get_child(1).max_value = image_size.y - 1
+				var tooltip_name = pattern.get_basename()
+				Global.patterns_popup.add(image, tooltip_name)
 
 
 func import_gpl(path : String, text : String) -> Palette:

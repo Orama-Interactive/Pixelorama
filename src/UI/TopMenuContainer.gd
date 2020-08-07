@@ -34,11 +34,17 @@ func setup_file_menu() -> void:
 
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
 
+	if OS.get_name() == "HTML5":
+		file_menu.set_item_disabled(2, true)
+
 
 func setup_edit_menu() -> void:
 	var edit_menu_items := {
 		"Undo" : InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
 		"Redo" : InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
+		"Copy" : InputMap.get_action_list("copy")[0].get_scancode_with_modifiers(),
+		"Paste" : InputMap.get_action_list("paste")[0].get_scancode_with_modifiers(),
+		"Delete" : InputMap.get_action_list("delete")[0].get_scancode_with_modifiers(),
 		"Clear Selection" : 0,
 		"Preferences" : 0
 		}
@@ -59,7 +65,8 @@ func setup_view_menu() -> void:
 		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
 		"Show Animation Timeline" : 0,
-		"Zen Mode" : InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers()
+		"Zen Mode" : InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
+		"Fullscreen Mode" : InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
 		}
 	view_menu = Global.view_menu.get_popup()
 
@@ -80,13 +87,14 @@ func setup_image_menu() -> void:
 		"Scale Image" : 0,
 		"Crop Image" : 0,
 		"Resize Canvas" : 0,
-		"Flip Horizontal" : InputMap.get_action_list("image_flip_horizontal")[0].get_scancode_with_modifiers(),
-		"Flip Vertical" : InputMap.get_action_list("image_flip_vertical")[0].get_scancode_with_modifiers(),
+		"Flip" : 0,
 		"Rotate Image" : 0,
 		"Invert Colors" : 0,
 		"Desaturation" : 0,
 		"Outline" : 0,
-		"Adjust Hue/Saturation/Value" : 0
+		"Adjust Hue/Saturation/Value" : 0,
+		"Gradient" : 0,
+		"Shader" : 0
 		}
 	var image_menu : PopupMenu = Global.image_menu.get_popup()
 
@@ -186,7 +194,7 @@ func save_project_file_as() -> void:
 
 
 func export_file() -> void:
-	if Global.export_dialog.was_exported == false:
+	if Export.was_exported == false:
 		Global.export_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
@@ -201,15 +209,16 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.control.redone = true
 			Global.current_project.undo_redo.redo()
 			Global.control.redone = false
-		2: # Clear selection
-			Global.canvas.handle_undo("Rectangle Select")
-			Global.selection_rectangle.polygon[0] = Vector2.ZERO
-			Global.selection_rectangle.polygon[1] = Vector2.ZERO
-			Global.selection_rectangle.polygon[2] = Vector2.ZERO
-			Global.selection_rectangle.polygon[3] = Vector2.ZERO
-			Global.current_project.selected_pixels.clear()
-			Global.canvas.handle_redo("Rectangle Select")
-		3: # Preferences
+		2: # Copy
+			Global.selection_rectangle.copy()
+		3: # paste
+			Global.selection_rectangle.paste()
+		4: # Delete
+			Global.selection_rectangle.delete()
+		5: # Clear selection
+			Global.selection_rectangle.set_rect(Rect2(0, 0, 0, 0))
+			Global.selection_rectangle.select_rect()
+		6: # Preferences
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)
 
@@ -226,8 +235,10 @@ func view_menu_id_pressed(id : int) -> void:
 			toggle_show_guides()
 		4: # Show animation timeline
 			toggle_show_anim_timeline()
-		5: # Fullscreen mode
+		5: # Zen mode
 			toggle_zen_mode()
+		6: # Fullscreen mode
+			toggle_fullscreen()
 
 	Global.canvas.update()
 
@@ -253,8 +264,13 @@ func toggle_show_guides() -> void:
 	Global.show_guides = !Global.show_guides
 	view_menu.set_item_checked(3, Global.show_guides)
 	for guide in Global.canvas.get_children():
-		if guide is Guide:
+		if guide is Guide and guide in Global.current_project.guides:
 			guide.visible = Global.show_guides
+			if guide is SymmetryGuide:
+				if guide.type == Guide.Types.HORIZONTAL:
+					guide.visible = Global.show_x_symmetry_axis and Global.show_guides
+				else:
+					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 
 
 func toggle_show_anim_timeline() -> void:
@@ -275,10 +291,15 @@ func toggle_zen_mode() -> void:
 	view_menu.set_item_checked(5, zen_mode)
 
 
+func toggle_fullscreen() -> void:
+	OS.window_fullscreen = !OS.window_fullscreen
+	view_menu.set_item_checked(6, OS.window_fullscreen)
+
+
 func image_menu_id_pressed(id : int) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked
 		return
-	var image : Image = Global.current_project.frames[0].cels[0].image
+	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	match id:
 		0: # Scale Image
 			show_scale_image_popup()
@@ -289,71 +310,67 @@ func image_menu_id_pressed(id : int) -> void:
 		2: # Resize Canvas
 			show_resize_canvas_popup()
 
-		3: # Flip Horizontal
-			flip_image(true)
+		3: # Flip
+			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
+			Global.dialog_open(true)
 
-		4: # Flip Vertical
-			flip_image(false)
-
-		5: # Rotate
+		4: # Rotate
 			show_rotate_image_popup()
 
-		6: # Invert Colors
-			DrawingAlgos.invert_image_colors(image)
+		5: # Invert Colors
+			Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog").popup_centered()
+			Global.dialog_open(true)
 
-		7: # Desaturation
-			DrawingAlgos.desaturate_image(image)
+		6: # Desaturation
+			Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog").popup_centered()
+			Global.dialog_open(true)
 
-		8: # Outline
+		7: # Outline
 			show_add_outline_popup()
 
-		9: # HSV
+		8: # HSV
 			show_hsv_configuration_popup()
+
+		9: # Gradient
+			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
+			Global.dialog_open(true)
+
+		10: # Shader
+			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
+			Global.dialog_open(true)
 
 
 func show_scale_image_popup() -> void:
-	Global.control.get_node("ScaleImage").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/ScaleImage").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_resize_canvas_popup() -> void:
-	Global.control.get_node("ResizeCanvas").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
 	Global.dialog_open(true)
-
-
-func flip_image(horizontal : bool) -> void:
-	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
-	Global.canvas.handle_undo("Draw")
-	image.unlock()
-	if horizontal:
-		image.flip_x()
-	else:
-		image.flip_y()
-	image.lock()
-	Global.canvas.handle_redo("Draw")
 
 
 func show_rotate_image_popup() -> void:
 	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
-	Global.control.get_node("RotateImage").set_sprite(image)
-	Global.control.get_node("RotateImage").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/RotateImage").set_sprite(image)
+	Global.control.get_node("Dialogs/ImageEffects/RotateImage").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_add_outline_popup() -> void:
-	Global.control.get_node("OutlineDialog").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/OutlineDialog").popup_centered()
 	Global.dialog_open(true)
 
 
 func show_hsv_configuration_popup() -> void:
-	Global.control.get_node("HSVDialog").popup_centered()
+	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
 	Global.dialog_open(true)
 
 
 func help_menu_id_pressed(id : int) -> void:
 	match id:
 		0: # Splash Screen
-			Global.control.get_node("SplashDialog").popup_centered()
+			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
 			Global.dialog_open(true)
 		1: # Online Docs
 			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
@@ -365,5 +382,5 @@ func help_menu_id_pressed(id : int) -> void:
 			else:
 				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v07---2020-05-16")
 		4: # About Pixelorama
-			Global.control.get_node("AboutDialog").popup_centered()
+			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)

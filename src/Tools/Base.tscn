@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Tools/Base.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/dark_themes/tools/horizontal_mirror_on.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/dark_themes/tools/horizontal_mirror_off.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/dark_themes/tools/vertical_mirror_on.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/dark_themes/tools/vertical_mirror_off.png" type="Texture" id=5]
+
+[node name="ToolOptions" type="VBoxContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 123.0
+margin_bottom = 65.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Tool"
+align = 1
+autowrap = true
+
+[node name="PixelPerfect" type="CheckBox" parent="."]
+margin_left = 4.0
+margin_top = 18.0
+margin_right = 112.0
+margin_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Pixel Perfect"
+align = 1
+
+[node name="EmptySpacer" type="Control" parent="."]
+margin_top = 46.0
+margin_right = 116.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 0, 12 )
+
+[node name="Mirror" type="HBoxContainer" parent="."]
+margin_top = 62.0
+margin_right = 116.0
+margin_bottom = 79.0
+custom_constants/separation = 44
+alignment = 1
+
+[node name="Horizontal" type="TextureButton" parent="Mirror" groups=[
+"UIButtons",
+]]
+margin_left = 20.0
+margin_right = 35.0
+margin_bottom = 17.0
+hint_tooltip = "Enable horizontal mirrored drawing"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+
+[node name="Vertical" type="TextureButton" parent="Mirror" groups=[
+"UIButtons",
+]]
+margin_left = 79.0
+margin_right = 96.0
+margin_bottom = 17.0
+hint_tooltip = "Enable vertical mirrored drawing"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+[connection signal="toggled" from="PixelPerfect" to="." method="_on_PixelPerfect_toggled"]
+[connection signal="toggled" from="Mirror/Horizontal" to="." method="_on_Horizontal_toggled"]
+[connection signal="toggled" from="Mirror/Vertical" to="." method="_on_Vertical_toggled"]

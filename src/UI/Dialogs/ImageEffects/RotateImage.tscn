@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/UI/Dialogs/RotateImage.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.gd" type="Script" id=1]
 
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
 margin_bottom = 241.0
+window_title = "Rotate Image"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {
@@ -80,6 +81,7 @@ max_value = 359.0
 suffix = "°"
 [connection signal="about_to_show" from="." to="." method="_on_RotateImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_RotateImage_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_RotateImage_popup_hide"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]

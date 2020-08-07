@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/Pencil.gd" type="Script" id=3]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Overwrite" type="CheckBox" parent="." index="3"]
+margin_left = 12.0
+margin_top = 74.0
+margin_right = 103.0
+margin_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Overwrite"
+align = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PixelPerfect" parent="." index="4"]
+margin_top = 102.0
+margin_bottom = 126.0
+
+[node name="EmptySpacer" parent="." index="6"]
+margin_top = 130.0
+margin_bottom = 142.0
+
+[node name="Mirror" parent="." index="7"]
+margin_top = 146.0
+margin_bottom = 163.0
+[connection signal="toggled" from="Overwrite" to="." method="_on_Overwrite_toggled"]

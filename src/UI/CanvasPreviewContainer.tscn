@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/UI/CanvasPreview.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/CanvasPreviewContainer.gd" type="Script" id=3]
+[ext_resource path="res://src/CameraMovement.gd" type="Script" id=4]
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=5]
+[ext_resource path="res://assets/graphics/dark_themes/timeline/play.png" type="Texture" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/size = 10.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+
+[node name="CanvasPreviewContainer" type="HBoxContainer"]
+margin_right = 332.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsContainer" type="PanelContainer" parent="."]
+margin_right = 34.0
+margin_bottom = 164.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 27.0
+margin_bottom = 157.0
+
+[node name="PreviewZoomSlider" type="VSlider" parent="SettingsContainer/VBoxContainer"]
+margin_right = 16.0
+margin_bottom = 126.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+step = 0.01
+
+[node name="PlayButton" type="Button" parent="SettingsContainer/VBoxContainer" groups=[
+"UIButtons",
+]]
+margin_top = 130.0
+margin_right = 20.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 20, 0 )
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="SettingsContainer/VBoxContainer/PlayButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.5
+margin_top = -6.0
+margin_right = 3.5
+margin_bottom = 6.0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviewContainer" type="PanelContainer" parent="."]
+margin_left = 38.0
+margin_right = 332.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+
+[node name="PreviewViewportContainer" type="ViewportContainer" parent="PreviewContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 287.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 0, 150 )
+
+[node name="Viewport" type="Viewport" parent="PreviewContainer/PreviewViewportContainer"]
+size = Vector2( 280, 150 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="TransparentChecker" parent="PreviewContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 2 )]
+material = SubResource( 1 )
+
+[node name="CanvasPreview" parent="PreviewContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 1 )]
+
+[node name="CameraPreview" type="Camera2D" parent="PreviewContainer/PreviewViewportContainer/Viewport"]
+offset = Vector2( 32, 32 )
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 336.0
+margin_right = 336.0
+margin_bottom = 164.0
+[connection signal="value_changed" from="SettingsContainer/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
+[connection signal="toggled" from="SettingsContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_toggled"]

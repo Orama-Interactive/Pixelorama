@@ -69,6 +69,27 @@ func _define_js() -> void:
 			}
 		  });
 	}
+	function upload_shader() {
+		canceled = true;
+		var input = document.createElement('INPUT');
+		input.setAttribute("type", "file");
+		input.setAttribute("accept", ".shader");
+		input.click();
+		input.addEventListener('change', event => {
+			if (event.target.files.length > 0){
+				canceled = false;}
+			var file = event.target.files[0];
+			var reader = new FileReader();
+			fileType = file.type;
+			fileName = file.name;
+			reader.readAsText(file);
+			reader.onloadend = function (evt) {
+				if (evt.target.readyState == FileReader.DONE) {
+					fileData = evt.target.result;
+				}
+			}
+		  });
+	}
 	function download(fileName, byte, type) {
 		var buffer = Uint8Array.from(byte);
 		var blob = new Blob([buffer], { type: type});
@@ -174,3 +195,43 @@ func save_image(image : Image, file_name : String = "export") -> void:
 
 	var png_data = Array(image.save_png_to_buffer())
 	JavaScript.eval("download('%s', %s, 'image/png');" % [file_name, str(png_data)], true)
+
+
+func save_gif(data, file_name : String = "export") -> void:
+	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+		return
+
+	JavaScript.eval("download('%s', %s, 'image/gif');" % [file_name, str(Array(data))], true)
+
+
+func load_shader() -> void:
+	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+		return
+
+	# Execute JS function
+	JavaScript.eval("upload_shader();", true) # Opens prompt for choosing file
+
+	yield(self, "InFocus") # Wait until JS prompt is closed
+
+	yield(get_tree().create_timer(0.5), "timeout") # Give some time for async JS data load
+
+	if JavaScript.eval("canceled;", true): # If File Dialog closed w/o file
+		return
+
+	# Use data from png data
+	var file_data
+	while true:
+		file_data = JavaScript.eval("fileData;", true)
+		if file_data != null:
+			break
+		yield(get_tree().create_timer(1.0), "timeout") # Need more time to load data
+
+#	var file_type = JavaScript.eval("fileType;", true)
+	var file_name = JavaScript.eval("fileName;", true)
+
+	var shader = Shader.new()
+	shader.code = file_data
+
+	var shader_effect_dialog = Global.control.get_node("Dialogs/ImageEffects/ShaderEffect")
+	shader_effect_dialog.change_shader(shader, file_name.get_basename())
+

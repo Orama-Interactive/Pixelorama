@@ -3,7 +3,7 @@ class_name Project extends Reference
 
 
 var name := "" setget name_changed
-var size := Vector2(64, 64)
+var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
@@ -16,27 +16,65 @@ var guides := [] # Array of Guides
 
 var brushes := [] # Array of Images
 
+var x_symmetry_point
+var y_symmetry_point
+var x_symmetry_axis : SymmetryGuide
+var y_symmetry_axis : SymmetryGuide
+
 var selected_pixels := []
-var x_min := 0
-var x_max := 64
-var y_min := 0
-var y_max := 64
+var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
 var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
 
 
-func _init(_frames := [], _name := tr("untitled")) -> void:
+func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
 	name = _name
-	x_max = size.x
-	y_max = size.y
+	size = _size
+	select_all_pixels()
+
 	undo_redo = UndoRedo.new()
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
+
+	x_symmetry_point = size.x / 2
+	y_symmetry_point = size.y / 2
+
+	if !x_symmetry_axis:
+		x_symmetry_axis = SymmetryGuide.new()
+		x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
+		x_symmetry_axis.project = self
+		x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point))
+		x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point))
+		Global.canvas.add_child(x_symmetry_axis)
+
+	if !y_symmetry_axis:
+		y_symmetry_axis = SymmetryGuide.new()
+		y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
+		y_symmetry_axis.project = self
+		y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
+		y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
+		Global.canvas.add_child(y_symmetry_axis)
+
+
+func select_all_pixels() -> void:
+	clear_selection()
+	for x in size.x:
+		for y in size.y:
+			selected_pixels.append(Vector2(x, y))
+
+
+func clear_selection() -> void:
+	selected_pixels.clear()
+
+
+func _set_selected_rect(value : Rect2) -> void:
+	selected_rect = value
+	Global.selection_rectangle.set_rect(value)
 
 
 func change_project() -> void:
@@ -94,31 +132,25 @@ func change_project() -> void:
 	self.animation_tags = animation_tags
 
 	# Change the selection rectangle
-	if selected_pixels.size() != 0:
-		Global.selection_rectangle.polygon[0] = Vector2(x_min, y_min)
-		Global.selection_rectangle.polygon[1] = Vector2(x_max, y_min)
-		Global.selection_rectangle.polygon[2] = Vector2(x_max, y_max)
-		Global.selection_rectangle.polygon[3] = Vector2(x_min, y_max)
-	else:
-		Global.selection_rectangle.polygon[0] = Vector2.ZERO
-		Global.selection_rectangle.polygon[1] = Vector2.ZERO
-		Global.selection_rectangle.polygon[2] = Vector2.ZERO
-		Global.selection_rectangle.polygon[3] = Vector2.ZERO
+	Global.selection_rectangle.set_rect(selected_rect)
 
 	# Change the guides
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
 			if guide in guides:
-				guide.visible = true
+				guide.visible = Global.show_guides
+				if guide is SymmetryGuide:
+					if guide.type == Guide.Types.HORIZONTAL:
+						guide.visible = Global.show_x_symmetry_axis and Global.show_guides
+					else:
+						guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 			else:
 				guide.visible = false
 
 	# Change the project brushes
-	for child in Global.project_brush_container.get_children():
-		child.queue_free()
-
+	Brushes.clear_project_brush()
 	for brush in brushes:
-		Global.create_brush_button(brush)
+		Brushes.add_project_brush(brush)
 
 	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
 	var i := 0
@@ -131,6 +163,8 @@ func change_project() -> void:
 	Global.transparent_checker._ready()
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
+	Global.preview_zoom_slider.value = -Global.camera_preview.zoom.x
+
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.window_title = Global.window_title + "(*)"
@@ -170,6 +204,10 @@ func serialize() -> Dictionary:
 
 	var guide_data := []
 	for guide in guides:
+		if guide is SymmetryGuide:
+			continue
+		if !is_instance_valid(guide):
+			continue
 		var coords = guide.points[0].x
 		if guide.type == Guide.Types.HORIZONTAL:
 			coords = guide.points[0].y
@@ -203,6 +241,7 @@ func serialize() -> Dictionary:
 		"layers" : layer_data,
 		"tags" : tag_data,
 		"guides" : guide_data,
+		"symmetry_points" : [x_symmetry_point, y_symmetry_point],
 		"frames" : frame_data,
 		"brushes" : brush_data,
 	}
@@ -253,11 +292,24 @@ func deserialize(dict : Dictionary) -> void:
 			guide.has_focus = false
 			Global.canvas.add_child(guide)
 			guides.append(guide)
+	if dict.has("symmetry_points"):
+		x_symmetry_point = dict.symmetry_points[0]
+		y_symmetry_point = dict.symmetry_points[1]
+		x_symmetry_axis.points[0].y = floor(y_symmetry_point / 2 + 1)
+		x_symmetry_axis.points[1].y = floor(y_symmetry_point / 2 + 1)
+		y_symmetry_axis.points[0].x = floor(x_symmetry_point / 2 + 1)
+		y_symmetry_axis.points[1].x = floor(x_symmetry_point / 2 + 1)
 
 
 func name_changed(value : String) -> void:
 	name = value
 	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+
+
+func size_changed(value : Vector2) -> void:
+	size = value
+	if Global.selection_rectangle._selected_rect.has_no_area():
+		select_all_pixels()
 
 
 func frames_changed(value : Array) -> void:

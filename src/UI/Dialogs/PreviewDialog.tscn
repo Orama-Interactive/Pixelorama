@@ -54,7 +54,7 @@ margin_bottom = 318.0
 custom_constants/separation = 32
 
 [node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
-margin_right = 117.0
+margin_right = 118.0
 margin_bottom = 14.0
 text = "Image Size: 64×64"
 
@@ -142,26 +142,65 @@ max_value = 0.0
 [node name="NewLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
 margin_left = 155.0
-margin_right = 286.0
+margin_right = 292.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
 margin_top = 5.0
-margin_right = 53.0
+margin_right = 59.0
 margin_bottom = 19.0
 text = "At frame:"
 
 [node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
-margin_left = 57.0
-margin_right = 131.0
+margin_left = 63.0
+margin_right = 137.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 1.0
 value = 1.0
+
+[node name="NewBrushOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 471.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
+margin_top = 5.0
+margin_right = 73.0
+margin_bottom = 19.0
+text = "Brush type:"
+
+[node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
+margin_left = 77.0
+margin_right = 169.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+text = "File brush"
+items = [ "File brush", null, false, 0, null, "Project brush", null, false, 1, null, "Random brush", null, false, 2, null ]
+selected = 0
+
+[node name="BrushName" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
+visible = false
+margin_left = 173.0
+margin_right = 316.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewBrushOptions/BrushName"]
+margin_top = 5.0
+margin_right = 81.0
+margin_bottom = 19.0
+text = "Brush name:"
+
+[node name="BrushNameLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/NewBrushOptions/BrushName"]
+margin_left = 85.0
+margin_right = 143.0
+margin_bottom = 24.0
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/NewBrushOptions/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]

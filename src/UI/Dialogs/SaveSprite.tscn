@@ -13,4 +13,5 @@ resizable = true
 access = 2
 filters = PoolStringArray( "*.pxo ; Pixelorama Project" )
 current_dir = "/Users"
-current_path = "/Users/"
+current_file = "untitled"
+current_path = "/Users/untitled"

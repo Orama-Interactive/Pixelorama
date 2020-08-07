@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/Zoom.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Mode" type="Label" parent="." index="1"]
+margin_left = 38.0
+margin_top = 18.0
+margin_right = 78.0
+margin_bottom = 32.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Mode:"
+
+[node name="ModeOptions" type="OptionButton" parent="." index="2"]
+margin_left = 12.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Zoom in"
+items = [ "Zoom in", null, false, 0, null, "Zoom out", null, false, 1, null ]
+selected = 0
+
+[node name="Options" type="Label" parent="." index="3"]
+margin_left = 30.0
+margin_top = 60.0
+margin_right = 85.0
+margin_bottom = 74.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Options:"
+
+[node name="FitToFrame" type="Button" parent="." index="4"]
+margin_left = 12.0
+margin_top = 78.0
+margin_right = 104.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "Fit to frame"
+
+[node name="100%" type="Button" parent="." index="5"]
+margin_left = 12.0
+margin_top = 102.0
+margin_right = 104.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+text = "100% Zoom"
+
+[node name="PixelPerfect" parent="." index="6"]
+visible = false
+margin_top = 126.0
+margin_bottom = 150.0
+
+[node name="EmptySpacer" parent="." index="7"]
+visible = false
+margin_top = 126.0
+margin_bottom = 138.0
+
+[node name="Mirror" parent="." index="8"]
+visible = false
+margin_top = 126.0
+margin_bottom = 143.0
+[connection signal="item_selected" from="ModeOptions" to="." method="_on_ModeOptions_item_selected"]
+[connection signal="pressed" from="FitToFrame" to="." method="_on_FitToFrame_pressed"]
+[connection signal="pressed" from="100%" to="." method="_on_100_pressed"]

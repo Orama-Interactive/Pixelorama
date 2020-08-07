@@ -1,8 +1,20 @@
 class_name Drawer
 
+
+class ColorOp:
+	var strength := 1.0
+
+
+	func process(src: Color, _dst: Color) -> Color:
+		return src
+
+
 class SimpleDrawer:
-	func set_pixel(_sprite: Image, _pos: Vector2, _new_color: Color) -> void:
-		_sprite.set_pixel(_pos.x, _pos.y, _new_color)
+	func set_pixel(image: Image, position: Vector2, color: Color, op : ColorOp) -> void:
+		var color_old := image.get_pixelv(position)
+		var color_new := op.process(color, color_old)
+		if not color_new.is_equal_approx(color_old):
+			image.set_pixelv(position, color_new)
 
 
 class PixelPerfectDrawer:
@@ -15,9 +27,10 @@ class PixelPerfectDrawer:
 		last_pixels = [null, null]
 
 
-	func set_pixel(_sprite: Image, _pos: Vector2, _new_color: Color) -> void:
-		last_pixels.push_back([_pos, _sprite.get_pixel(_pos.x, _pos.y)])
-		_sprite.set_pixel(_pos.x, _pos.y, _new_color)
+	func set_pixel(image: Image, position: Vector2, color: Color, op : ColorOp) -> void:
+		var color_old = image.get_pixelv(position)
+		last_pixels.push_back([position, color_old])
+		image.set_pixelv(position, op.process(color, color_old))
 
 		var corner = last_pixels.pop_front()
 		var neighbour = last_pixels[0]
@@ -25,14 +38,15 @@ class PixelPerfectDrawer:
 		if corner == null or neighbour == null:
 			return
 
-		if _pos - corner[0] in corners and _pos - neighbour[0] in neighbours:
-			_sprite.set_pixel(neighbour[0].x, neighbour[0].y, neighbour[1])
+		if position - corner[0] in corners and position - neighbour[0] in neighbours:
+			image.set_pixel(neighbour[0].x, neighbour[0].y, neighbour[1])
 			last_pixels[0] = corner
 
 
 var pixel_perfect := false setget set_pixel_perfect
-var h_mirror := false
-var v_mirror := false
+var horizontal_mirror := false
+var vertical_mirror := false
+var color_op := ColorOp.new()
 
 var simple_drawer := SimpleDrawer.new()
 var pixel_perfect_drawers = [PixelPerfectDrawer.new(), PixelPerfectDrawer.new(), PixelPerfectDrawer.new(), PixelPerfectDrawer.new()]
@@ -52,14 +66,32 @@ func set_pixel_perfect(value: bool) -> void:
 		drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
 
-func set_pixel(_sprite: Image, _pos: Vector2, _new_color: Color) -> void:
-	var mirror_x = Global.current_project.x_max + Global.current_project.x_min - _pos.x - 1
-	var mirror_y = Global.current_project.y_max + Global.current_project.y_min - _pos.y - 1
+func set_pixel(image: Image, position: Vector2, color: Color) -> void:
+	var project : Project = Global.current_project
+	drawers[0].set_pixel(image, position, color, color_op)
 
-	drawers[0].set_pixel(_sprite, _pos, _new_color)
-	if h_mirror:
-		drawers[1].set_pixel(_sprite, Vector2(mirror_x, _pos.y), _new_color)
-		if v_mirror:
-			drawers[2].set_pixel(_sprite, Vector2(mirror_x, mirror_y), _new_color)
-	if v_mirror:
-		drawers[3].set_pixel(_sprite, Vector2(_pos.x, mirror_y), _new_color)
+	# Handle Mirroring
+	var mirror_x = project.x_symmetry_point - position.x
+	var mirror_y = project.y_symmetry_point - position.y
+	var mirror_x_inside : bool
+	var mirror_y_inside : bool
+	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	if entire_image_selected:
+		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
+		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
+	else:
+		var selected_pixels_x := []
+		var selected_pixels_y := []
+		for i in project.selected_pixels:
+			selected_pixels_x.append(i.x)
+			selected_pixels_y.append(i.y)
+
+		mirror_x_inside = mirror_x in selected_pixels_x
+		mirror_y_inside = mirror_y in selected_pixels_y
+
+	if horizontal_mirror and mirror_x_inside:
+		drawers[1].set_pixel(image, Vector2(mirror_x, position.y), color, color_op)
+		if vertical_mirror and mirror_y_inside:
+			drawers[2].set_pixel(image, Vector2(mirror_x, mirror_y), color, color_op)
+	if vertical_mirror and mirror_y_inside:
+		drawers[3].set_pixel(image, Vector2(position.x, mirror_y), color, color_op)
