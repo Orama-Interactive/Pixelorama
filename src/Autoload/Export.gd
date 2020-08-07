@@ -1,5 +1,9 @@
 extends Node
 
+# Gif exporter
+const gifexporter = preload("res://addons/gdgifexporter/gifexporter.gd")
+var quantization = preload("res://addons/gdgifexporter/quantization/median_cut.gd").new()
+
 enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
 var current_tab : int = ExportTab.FRAME
 
@@ -20,7 +24,6 @@ var lines_count := 1
 # Animation options
 enum AnimationType { MULTIPLE_FILES = 0, ANIMATED = 1 }
 var animation_type : int = AnimationType.MULTIPLE_FILES
-var background_color : Color = Color.white
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 var direction : int = AnimationDirection.FORWARD
 
@@ -43,7 +46,6 @@ var exported_frame_current_tag : int
 var exported_orientation : int
 var exported_lines_count : int
 var exported_animation_type : int
-var exported_background_color : Color
 var exported_direction : int
 var exported_resize : int
 var exported_interpolation : int
@@ -55,6 +57,16 @@ var exported_file_format : int
 var stop_export = false
 
 var file_exists_alert = "File %s already exists. Overwrite?"
+
+# Export progress variables
+var export_progress_fraction := 0.0
+var export_progress := 0.0
+onready var gif_export_thread := Thread.new()
+
+
+func _exit_tree():
+	if gif_export_thread.is_active():
+		gif_export_thread.wait_to_finish()
 
 
 func process_frame() -> void:
@@ -127,18 +139,18 @@ func process_animation() -> void:
 		processed_images.append(image)
 
 
-func export_processed_images(ignore_overwrites: bool, path_validation_alert_popup: AcceptDialog, file_exists_alert_popup: AcceptDialog, export_dialog: AcceptDialog ) -> bool:
+func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialog ) -> bool:
 	# Stop export if directory path or file name are not valid
 	var dir = Directory.new()
 	if not dir.dir_exists(directory_path) or not file_name.is_valid_filename():
-		path_validation_alert_popup.popup_centered()
+		export_dialog.open_path_validation_alert_popup()
 		return false
 
 	# Check export paths
 	var export_paths = []
 	for i in range(processed_images.size()):
 		stop_export = false
-		var multiple_files := true if (current_tab == ExportTab.ANIMATION && animation_type == AnimationType.MULTIPLE_FILES) else false
+		var multiple_files := true if (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.MULTIPLE_FILES) else false
 		var export_path = create_export_path(multiple_files, i + 1)
 		# If user want to create new directory for each animation tag then check if directories exist and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
@@ -152,8 +164,7 @@ func export_processed_images(ignore_overwrites: bool, path_validation_alert_popu
 			# Ask user if he want's to overwrite the file
 			if not was_exported or (was_exported and not ignore_overwrites):
 				# Overwrite existing file?
-				file_exists_alert_popup.dialog_text = file_exists_alert % export_path
-				file_exists_alert_popup.popup_centered()
+				export_dialog.open_file_exists_alert_popup(file_exists_alert % export_path)
 				# Stops the function until the user decides if he want's to overwrite
 				yield(export_dialog, "resume_export_function")
 				if stop_export:
@@ -161,29 +172,16 @@ func export_processed_images(ignore_overwrites: bool, path_validation_alert_popu
 					return
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if current_tab == ExportTab.ANIMATION && animation_type == AnimationType.ANIMATED:
+		if current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED:
 			break
 
 	# Scale images that are to export
 	scale_processed_images()
 
-	if current_tab == ExportTab.ANIMATION && animation_type == AnimationType.ANIMATED:
-		var frame_delay_in_ms = Global.animation_timer.wait_time * 100
-
-		$GifExporter.begin_export(export_paths[0], processed_images[0].get_width(), processed_images[0].get_height(), frame_delay_in_ms, 0)
-		match direction:
-			AnimationDirection.FORWARD:
-				for i in range(processed_images.size()):
-					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
-			AnimationDirection.BACKWARDS:
-				for i in range(processed_images.size() - 1, -1, -1):
-					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
-			AnimationDirection.PING_PONG:
-				for i in range(0, processed_images.size()):
-					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
-				for i in range(processed_images.size() - 2, 0, -1):
-					$GifExporter.write_frame(processed_images[i], background_color, frame_delay_in_ms)
-		$GifExporter.end_export()
+	if current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED:
+		if gif_export_thread.is_active():
+			gif_export_thread.wait_to_finish()
+		gif_export_thread.start(self, "export_gif", {"export_dialog": export_dialog, "export_paths": export_paths})
 	else:
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
@@ -197,8 +195,52 @@ func export_processed_images(ignore_overwrites: bool, path_validation_alert_popu
 	was_exported = true
 	store_export_settings()
 	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
-	Global.notification_label("File(s) exported")
+
+	# Only show when not exporting gif - gif export finishes in thread
+	if not (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED):
+		Global.notification_label("File(s) exported")
 	return true
+
+
+func export_gif(args: Dictionary) -> void:
+	# Export progress popup
+	export_progress_fraction = 100 / processed_images.size() # one fraction per each frame, one fraction for write to disk
+	export_progress = 0.0
+	args["export_dialog"].set_export_progress_bar(export_progress)
+	args["export_dialog"].toggle_export_progress_popup(true)
+
+	# Export and save gif
+	var exporter = gifexporter.new(processed_images[0].get_width(), processed_images[0].get_height())
+	match direction:
+		AnimationDirection.FORWARD:
+			for i in range(processed_images.size()):
+				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+		AnimationDirection.BACKWARDS:
+			for i in range(processed_images.size() - 1, -1, -1):
+				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+		AnimationDirection.PING_PONG:
+			export_progress_fraction = 100 / (processed_images.size() * 2)
+			for i in range(0, processed_images.size()):
+				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+			for i in range(processed_images.size() - 2, 0, -1):
+				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+	var file: File = File.new()
+
+	file.open(args["export_paths"][0], File.WRITE)
+	file.store_buffer(exporter.export_file_data())
+	file.close()
+	args["export_dialog"].toggle_export_progress_popup(false)
+	Global.notification_label("File(s) exported")
+
+
+func write_frame_to_gif(image: Image, wait_time: float, exporter: Node, export_dialog: Node) -> void:
+	exporter.write_frame(image, wait_time, quantization)
+	increase_export_progress(export_dialog)
+
+
+func increase_export_progress(export_dialog: Node) -> void:
+	export_progress += export_progress_fraction
+	export_dialog.set_export_progress_bar(export_progress)
 
 
 func scale_processed_images() -> void:
@@ -288,7 +330,6 @@ func store_export_settings() -> void:
 	exported_orientation = orientation
 	exported_lines_count = lines_count
 	exported_animation_type = animation_type
-	exported_background_color = background_color
 	exported_direction = direction
 	exported_resize = resize
 	exported_interpolation = interpolation
@@ -305,7 +346,6 @@ func restore_previous_export_settings() -> void:
 	orientation = exported_orientation
 	lines_count = exported_lines_count
 	animation_type = exported_animation_type
-	background_color = exported_background_color
 	direction = exported_direction
 	resize = exported_resize
 	interpolation = exported_interpolation

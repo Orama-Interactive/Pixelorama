@@ -11,8 +11,12 @@ onready var popups = $Popups
 onready var file_exists_alert_popup = $Popups/FileExistsAlert
 onready var path_validation_alert_popup = $Popups/PathValidationAlert
 onready var path_dialog_popup = $Popups/PathDialog
+onready var export_progress_popup = $Popups/ExportProgressBar
+onready var export_progress_bar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 
+onready var animation_options_multiple_animations_directories = $VBoxContainer/AnimationOptions/MultipleAnimationsDirectories
 onready var previews = $VBoxContainer/PreviewScroll/Previews
+onready var frame_timer = $FrameTimer
 
 onready var frame_options = $VBoxContainer/FrameOptions
 onready var frame_options_frame_number = $VBoxContainer/FrameOptions/FrameNumber/FrameNumber
@@ -26,10 +30,8 @@ onready var spritesheet_options_lines_count_label = $VBoxContainer/SpritesheetOp
 onready var animation_options = $VBoxContainer/AnimationOptions
 onready var animation_options_animation_type = $VBoxContainer/AnimationOptions/AnimationType
 onready var animation_options_animation_options = $VBoxContainer/AnimationOptions/AnimatedOptions
-onready var animation_options_background_color = $VBoxContainer/AnimationOptions/AnimatedOptions/BackgroundColor
 onready var animation_options_direction = $VBoxContainer/AnimationOptions/AnimatedOptions/Direction
 
-onready var frame_timer = $FrameTimer
 
 onready var options_resize = $VBoxContainer/Options/Resize
 onready var options_interpolation = $VBoxContainer/Options/Interpolation
@@ -37,8 +39,6 @@ onready var path_container = $VBoxContainer/Path
 onready var path_line_edit = $VBoxContainer/Path/PathLineEdit
 onready var file_line_edit = $VBoxContainer/File/FileLineEdit
 onready var file_file_format = $VBoxContainer/File/FileFormat
-
-onready var animation_options_multiple_animations_directories = $VBoxContainer/AnimationOptions/MultipleAnimationsDirectories
 
 
 func _ready() -> void:
@@ -52,10 +52,8 @@ func _ready() -> void:
 		add_button("Cancel", false, "cancel")
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
 
-	# Disable GIF export for unsupported platforms
-	if not $GifExporter.is_platform_supported():
-		animation_options_animation_type.selected = Export.AnimationType.MULTIPLE_FILES
-		animation_options_animation_type.disabled = true
+	# Remove close button from export progress bar
+	export_progress_popup.get_close_button().hide()
 
 
 func show_tab() -> void:
@@ -95,7 +93,6 @@ func show_tab() -> void:
 			set_file_format_selector()
 			Export.process_animation()
 			animation_options_animation_type.selected = Export.animation_type
-			animation_options_background_color.color = Export.background_color
 			animation_options_direction.selected = Export.direction
 			animation_options.show()
 	set_preview()
@@ -111,7 +108,7 @@ func external_export() -> void:
 			Export.process_spritesheet()
 		Export.ExportTab.ANIMATION:
 			Export.process_animation()
-	if Export.export_processed_images(true, path_validation_alert_popup, file_exists_alert_popup, self):
+	if Export.export_processed_images(true, self):
 		hide()
 
 
@@ -216,6 +213,26 @@ func create_frame_tag_list() -> void:
 		spritesheet_options_frames.add_item(item.name)
 
 
+func open_path_validation_alert_popup() -> void:
+	path_validation_alert_popup.popup_centered()
+
+
+func open_file_exists_alert_popup(dialog_text: String) -> void:
+	file_exists_alert_popup.dialog_text = dialog_text
+	file_exists_alert_popup.popup_centered()
+
+
+func toggle_export_progress_popup(open: bool) -> void:
+	if open:
+		export_progress_popup.popup_centered()
+	else:
+		export_progress_popup.hide()
+
+
+func set_export_progress_bar(value: float) -> void:
+	export_progress_bar.value = value
+
+
 func _on_ExportDialog_about_to_show() -> void:
 	# If export already occured - fill the dialog with previous export settings
 	if Export.was_exported:
@@ -278,10 +295,6 @@ func _on_AnimationType_item_selected(id : int) -> void:
 	set_preview()
 
 
-func _on_BackgroundColor_color_changed(color : Color) -> void:
-	Export.background_color = color
-
-
 func _on_Direction_item_selected(id : int) -> void:
 	Export.direction = id
 	match id:
@@ -303,7 +316,7 @@ func _on_Interpolation_item_selected(id: int) -> void:
 
 
 func _on_ExportDialog_confirmed() -> void:
-	if Export.export_processed_images(false, path_validation_alert_popup, file_exists_alert_popup, self):
+	if Export.export_processed_images(false, self):
 		hide()
 
 
