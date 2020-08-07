@@ -229,6 +229,9 @@ msgstr ""
 msgid "Directory path or file name is not valid!"
 msgstr ""
 
+msgid "Exporting in progress..."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""

@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 This update has been brought to you by the contributions of:
-Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
+Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Michael Alexsander (YeldhamDev), Martin Novák (novhack)
 
 ### Added
 - The Web (HTML5) is now a supported platform of Pixelorama! It is now possible to save .png and .pxo files, as well as load image and palette files in the Web version. Only limitation so far is that the users cannot load .pxo files. Also, this may not work on mobile.
@@ -31,6 +31,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Added color previews next to the themes in Preferences.
 
 ### Changed
+- The GDNative gif exporter addon has been replaced with a GDScript equivalent. This makes gif exporting possible in all currently supported platforms, and it also adds support for transparency. ([#295](https://github.com/Orama-Interactive/Pixelorama/pull/295))
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
 - The guides are now the same for all frames.
 - The "Import" option from the file menu has been removed, users can now import image files from "Open".
@@ -62,6 +63,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo
 - Importing corrupted image files and non-palette json files no longer crash the app.
 - Drawing brushes no longer have clipping issues. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - When undoing a removal of a brush, the brush index is no longer incorrect. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
+- Fix out-of-bounds error when color picking outside the image. ([#291](https://github.com/Orama-Interactive/Pixelorama/pull/291))
 <br><br>
 
 ## [v0.7] - 2020-05-16

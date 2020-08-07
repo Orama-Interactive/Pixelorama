@@ -179,9 +179,12 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	scale_processed_images()
 
 	if current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED:
-		if gif_export_thread.is_active():
-			gif_export_thread.wait_to_finish()
-		gif_export_thread.start(self, "export_gif", {"export_dialog": export_dialog, "export_paths": export_paths})
+		if OS.get_name() == "HTML5":
+			export_gif({"export_dialog": export_dialog, "export_paths": export_paths})
+		else:
+			if gif_export_thread.is_active():
+				gif_export_thread.wait_to_finish()
+			gif_export_thread.start(self, "export_gif", {"export_dialog": export_dialog, "export_paths": export_paths})
 	else:
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
@@ -224,11 +227,15 @@ func export_gif(args: Dictionary) -> void:
 				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
 			for i in range(processed_images.size() - 2, 0, -1):
 				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
-	var file: File = File.new()
 
-	file.open(args["export_paths"][0], File.WRITE)
-	file.store_buffer(exporter.export_file_data())
-	file.close()
+	if OS.get_name() == "HTML5":
+		Html5FileExchange.save_gif(exporter.export_file_data(), args["export_paths"][0])
+
+	else:
+		var file: File = File.new()
+		file.open(args["export_paths"][0], File.WRITE)
+		file.store_buffer(exporter.export_file_data())
+		file.close()
 	args["export_dialog"].toggle_export_progress_popup(false)
 	Global.notification_label("File(s) exported")
 

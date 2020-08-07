@@ -197,6 +197,13 @@ func save_image(image : Image, file_name : String = "export") -> void:
 	JavaScript.eval("download('%s', %s, 'image/png');" % [file_name, str(png_data)], true)
 
 
+func save_gif(data, file_name : String = "export") -> void:
+	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+		return
+
+	JavaScript.eval("download('%s', %s, 'image/gif');" % [file_name, str(Array(data))], true)
+
+
 func load_shader() -> void:
 	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
 		return
