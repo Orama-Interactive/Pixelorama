@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-04 20:04\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -239,6 +239,9 @@ msgstr "Plik %s już istnieje. Nadpisać?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Ścieżka do katalogu lub nazwa pliku nie jest prawidłowa!"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
