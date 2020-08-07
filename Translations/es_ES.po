@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-07-31 00:47\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -239,6 +239,9 @@ msgstr "El archivo \"%s\" ya existe. ¿Desea sobreescribir?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "¡Ruta de directorio o nombre de archivo no es válido!"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
