@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-08-07 08:03\n"
+"PO-Revision-Date: 2020-08-07 13:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Le chemin du répertoire ou le nom du fichier n'est pas valide !"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Export en cours..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -423,16 +423,16 @@ msgid "Invert Colors"
 msgstr "Inverser les couleurs"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modifier Canal Rouge"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modifier Canal Vert"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modifier Canal Bleu"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modifier Canal Alpha"
 
 msgid "Desaturation"
 msgstr "Désaturation"
@@ -588,7 +588,7 @@ msgid "Korean"
 msgstr "Coréen"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Hongrois"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
