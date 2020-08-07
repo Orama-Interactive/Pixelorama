@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-08-07 08:04\n"
+"PO-Revision-Date: 2020-08-07 16:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Verzeichnispfad oder Dateiname ist ungültig!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Export läuft..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
