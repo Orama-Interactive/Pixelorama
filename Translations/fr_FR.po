@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-07-31 00:46\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -239,6 +239,9 @@ msgstr "Le fichier \"%s\" existe déjà. Écraser ?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Le chemin du répertoire ou le nom du fichier n'est pas valide !"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
