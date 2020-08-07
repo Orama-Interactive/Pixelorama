@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-07-31 00:46\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -239,6 +239,9 @@ msgstr "El fitxer \"%s\" ja existeix. El vos sobreescriure?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "La ruta o directori de l'arxiu no existeix!"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
