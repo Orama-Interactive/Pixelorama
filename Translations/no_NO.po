@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-08-01 11:16\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -239,6 +239,9 @@ msgstr "Filen %s finnes fra før. Overskrive?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Banen eller filnavnet er ikke gyldig!"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
