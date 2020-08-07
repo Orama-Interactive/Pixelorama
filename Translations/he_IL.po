@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-08-02 19:56\n"
+"PO-Revision-Date: 2020-08-07 08:03\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -238,6 +238,9 @@ msgid "File %s already exists. Overwrite?"
 msgstr ""
 
 msgid "Directory path or file name is not valid!"
+msgstr ""
+
+msgid "Exporting in progress..."
 msgstr ""
 
 msgid "Can't load file '%s'.\n"
