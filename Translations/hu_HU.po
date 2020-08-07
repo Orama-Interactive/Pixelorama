@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-08-07 08:03\n"
+"PO-Revision-Date: 2020-08-07 16:31\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "A könyvtár elérési útja vagy a fájlnév nem érvényes!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Exportálás folyamatban..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
