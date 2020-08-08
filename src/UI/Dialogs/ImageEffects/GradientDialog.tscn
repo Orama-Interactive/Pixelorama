@@ -24,86 +24,97 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 188.0
+margin_right = 285.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 expand = true
 stretch_mode = 6
 
-[node name="ColorsContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 104.0
-margin_right = 188.0
-margin_bottom = 124.0
+margin_right = 285.0
+margin_bottom = 204.0
+columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ColorsContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 3.0
-margin_right = 44.0
+margin_right = 160.0
 margin_bottom = 17.0
 text = "Colors:"
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/ColorsContainer"]
-margin_left = 48.0
-margin_right = 68.0
+[node name="ColorsContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_right = 285.0
+margin_bottom = 20.0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
+margin_right = 20.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
 
-[node name="ColorPickerButton2" type="ColorPickerButton" parent="VBoxContainer/ColorsContainer"]
-margin_left = 72.0
-margin_right = 92.0
+[node name="ColorPickerButton2" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
+margin_left = 24.0
+margin_right = 44.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
 color = Color( 1, 1, 1, 1 )
 
-[node name="StepsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 128.0
-margin_right = 188.0
-margin_bottom = 152.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="VBoxContainer/StepsContainer"]
-margin_top = 5.0
-margin_right = 39.0
-margin_bottom = 19.0
+[node name="Label2" type="Label" parent="VBoxContainer/OptionsContainer"]
+margin_top = 29.0
+margin_right = 160.0
+margin_bottom = 43.0
 text = "Steps:"
 
-[node name="StepSpinBox" type="SpinBox" parent="VBoxContainer/StepsContainer"]
-margin_left = 43.0
-margin_right = 117.0
-margin_bottom = 24.0
+[node name="StepSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_top = 24.0
+margin_right = 285.0
+margin_bottom = 48.0
 mouse_default_cursor_shape = 2
 min_value = 2.0
 value = 2.0
 
-[node name="DirectionContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 156.0
-margin_right = 188.0
-margin_bottom = 176.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="VBoxContainer/DirectionContainer"]
-margin_top = 3.0
-margin_right = 63.0
-margin_bottom = 17.0
+[node name="Label3" type="Label" parent="VBoxContainer/OptionsContainer"]
+margin_top = 55.0
+margin_right = 160.0
+margin_bottom = 69.0
 text = "Direction:"
 
-[node name="DirectionOptionButton" type="OptionButton" parent="VBoxContainer/DirectionContainer"]
-margin_left = 67.0
-margin_right = 188.0
-margin_bottom = 20.0
+[node name="DirectionOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_top = 52.0
+margin_right = 285.0
+margin_bottom = 72.0
 mouse_default_cursor_shape = 2
 text = "Top to Bottom"
 items = [ "Top to Bottom", null, false, 0, null, "Bottom to Top", null, false, 1, null, "Left to Right", null, false, 2, null, "Right to Left", null, false, 3, null ]
 selected = 0
+
+[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
+margin_top = 76.0
+margin_right = 160.0
+margin_bottom = 100.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Only affect selection"
+
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_top = 76.0
+margin_right = 285.0
+margin_bottom = 100.0
+mouse_default_cursor_shape = 2
+text = "Current cel"
+items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+selected = 0
 [connection signal="about_to_show" from="." to="." method="_on_GradientDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_GradientDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_GradientDialog_popup_hide"]
-[connection signal="color_changed" from="VBoxContainer/ColorsContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
-[connection signal="color_changed" from="VBoxContainer/ColorsContainer/ColorPickerButton2" to="." method="_on_ColorPickerButton2_color_changed"]
-[connection signal="value_changed" from="VBoxContainer/StepsContainer/StepSpinBox" to="." method="_on_StepSpinBox_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/DirectionContainer/DirectionOptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton2" to="." method="_on_ColorPickerButton2_color_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/StepSpinBox" to="." method="_on_StepSpinBox_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/OptionsContainer/DirectionOptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="toggled" from="VBoxContainer/OptionsContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
+[connection signal="item_selected" from="VBoxContainer/OptionsContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]

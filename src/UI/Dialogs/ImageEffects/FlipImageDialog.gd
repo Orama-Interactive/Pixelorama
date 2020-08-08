@@ -12,7 +12,7 @@ var preview_texture : ImageTexture
 onready var preview : TextureRect = $VBoxContainer/Preview
 onready var flip_h : CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
 onready var flip_v : CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
-onready var selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+onready var selection_checkbox : CheckBox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 
 
 func _ready() -> void:
