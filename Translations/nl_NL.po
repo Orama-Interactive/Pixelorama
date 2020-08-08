@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-08-08 16:10\n"
+"PO-Revision-Date: 2020-08-08 21:50\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -112,13 +112,13 @@ msgid "Redo"
 msgstr "Opnieuw uitvoeren"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopiëren"
 
 msgid "Paste"
-msgstr ""
+msgstr "Plakken"
 
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 msgid "Scale Image"
 msgstr "Afbeelding schalen"
