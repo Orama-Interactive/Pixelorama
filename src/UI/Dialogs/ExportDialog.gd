@@ -338,7 +338,7 @@ func _on_FileLineEdit_text_changed(new_text : String) -> void:
 
 
 func _on_FileDialog_dir_selected(dir : String) -> void:
-	Export.path_line_edit.text = dir
+	path_line_edit.text = dir
 	Export.directory_path = dir
 
 
