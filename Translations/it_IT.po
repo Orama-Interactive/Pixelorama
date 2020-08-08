@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-08 21:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -420,19 +420,19 @@ msgid "Light"
 msgstr "Chiaro"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Influisce solo sulla selezione"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Pacchetto corrente"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Quadro corrente"
 
 msgid "All frames"
-msgstr ""
+msgstr "Tutti i quadri"
 
 msgid "All projects"
-msgstr ""
+msgstr "Tutti i progetti"
 
 msgid "Invert Colors"
 msgstr "Inverti Colori"
