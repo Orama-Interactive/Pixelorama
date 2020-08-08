@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-08 23:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Ścieżka do katalogu lub nazwa pliku nie jest prawidłowa!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Eksportowanie w toku..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -419,7 +419,7 @@ msgid "Light"
 msgstr "Jasny"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Wpływ tylko na zaznaczenie"
 
 msgid "Current cel"
 msgstr ""
