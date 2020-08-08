@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-08 17:00\n"
 
 msgid "OK"
 msgstr "确定"
@@ -420,19 +420,19 @@ msgid "Light"
 msgstr "白色"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "仅影响所选"
 
 msgid "Current cel"
-msgstr ""
+msgstr "当前单元格"
 
 msgid "Current frame"
-msgstr ""
+msgstr "当前帧"
 
 msgid "All frames"
-msgstr ""
+msgstr "所有帧"
 
 msgid "All projects"
-msgstr ""
+msgstr "所有项目"
 
 msgid "Invert Colors"
 msgstr "反相颜色"
