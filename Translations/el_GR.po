@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-08 16:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -420,19 +420,19 @@ msgid "Light"
 msgstr "Φωτεινό"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Επηρεάζει μόνο την επιλογή"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Τρέχον cel"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Τρέχον καρέ"
 
 msgid "All frames"
-msgstr ""
+msgstr "Όλα τα καρέ"
 
 msgid "All projects"
-msgstr ""
+msgstr "Όλα τα έργα"
 
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
