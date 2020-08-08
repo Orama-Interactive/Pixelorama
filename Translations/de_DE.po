@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-08-07 16:41\n"
+"PO-Revision-Date: 2020-08-08 10:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1171,7 +1171,7 @@ msgid "Use current left & right colors"
 msgstr "Aktuelle linke und rechte Farben verwenden"
 
 msgid "Create a new empty palette?"
-msgstr "Erstelle eine neue leere Palette"
+msgstr "Neue leere Palette erstellen?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Fehler: Palette muss einen gültigen Namen haben."
