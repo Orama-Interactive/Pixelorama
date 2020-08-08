@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-08-07 08:03\n"
+"PO-Revision-Date: 2020-08-08 16:11\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -417,6 +417,21 @@ msgstr ""
 
 msgid "Light"
 msgstr "فاتح"
+
+msgid "Only affect selection"
+msgstr ""
+
+msgid "Current cel"
+msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr ""
