@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-08 16:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -420,19 +420,19 @@ msgid "Light"
 msgstr "Светлая"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Менять только выделенное"
 
 msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Текущий кадр"
 
 msgid "All frames"
-msgstr ""
+msgstr "Все кадры"
 
 msgid "All projects"
-msgstr ""
+msgstr "Все проекты"
 
 msgid "Invert Colors"
 msgstr "Инвертировать цвета"
