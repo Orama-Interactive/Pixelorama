@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: pl\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-08-08 23:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,14 +27,26 @@ msgstr "Zapisz"
 msgid "Please Confirm..."
 msgstr "Proszę potwierdzić..."
 
+msgid "File Name:"
+msgstr "Nazwa pliku:"
+
 msgid "Image Size"
 msgstr "Rozmiar obrazu"
+
+msgid "Canvas Size"
+msgstr "Rozmiar płótna"
+
+msgid "Frame Size"
+msgstr "Rozmiar klatki"
 
 msgid "Width:"
 msgstr "Szerokość:"
 
 msgid "Height:"
 msgstr "Wysokość:"
+
+msgid "Center"
+msgstr "Środek"
 
 msgid "File"
 msgstr "Plik"
@@ -67,14 +81,11 @@ msgstr "Zapisz..."
 msgid "Save as..."
 msgstr "Zapisz jako..."
 
+msgid "Use ZSTD Compression"
+msgstr "Użyj kompresji ZSTD"
+
 msgid "Import"
 msgstr "Importowanie"
-
-msgid "Import..."
-msgstr "Importuj..."
-
-msgid "Import PNG..."
-msgstr "Importuj PNG…"
 
 msgid "Export"
 msgstr "Eksportuj"
@@ -100,17 +111,32 @@ msgstr "Cofnij"
 msgid "Redo"
 msgstr "Przywróć zmiany"
 
+msgid "Copy"
+msgstr "Kopiuj"
+
+msgid "Paste"
+msgstr "Wklej"
+
+msgid "Delete"
+msgstr "Usuń"
+
 msgid "Scale Image"
 msgstr "Skaluj obraz"
 
 msgid "Crop Image"
 msgstr "Przytnij obraz"
 
+msgid "Resize Canvas"
+msgstr "Zmień rozmiar płótna"
+
 msgid "Rotate Image"
 msgstr "Obróć obraz"
 
 msgid "Clear Selection"
 msgstr "Wyczyść zaznaczenie"
+
+msgid "Flip"
+msgstr "Odwróć"
 
 msgid "Flip Horizontal"
 msgstr "Odbij w poziomie"
@@ -136,6 +162,12 @@ msgstr "Pokaż prowadnice"
 msgid "Show Animation Timeline"
 msgstr "Pokaż linię czasu animacji"
 
+msgid "Zen Mode"
+msgstr "Tryb zen"
+
+msgid "Fullscreen Mode"
+msgstr "Tryb pełnoekranowy"
+
 msgid "Fill with color:"
 msgstr "Wypełnij kolorem:"
 
@@ -145,11 +177,50 @@ msgstr "Otwórz plik"
 msgid "Open File(s)"
 msgstr "Otwórz plik(i)"
 
-msgid "Import as new frame"
-msgstr "Importuj jako nową klatkę"
+msgid "Import Options"
+msgstr "Opcje importowania"
 
-msgid "Import as a spritesheet"
-msgstr "Importuj jako spritesheet"
+msgid "Import as:"
+msgstr "Importuj jako:"
+
+msgid "New tab"
+msgstr "Nowa karta"
+
+msgid "Spritesheet (new tab)"
+msgstr "Spritesheet (nowa karta)"
+
+msgid "New frame"
+msgstr "Nowa klatka"
+
+msgid "New layer"
+msgstr "Nowa warstwa"
+
+msgid "New palette"
+msgstr "Nowa paleta"
+
+msgid "New brush"
+msgstr "Nowy pędzel"
+
+msgid "New pattern"
+msgstr "Nowy wzorzec"
+
+msgid "Horizontal frames:"
+msgstr "Klatki poziome:"
+
+msgid "Vertical frames:"
+msgstr "Klatki pionowe:"
+
+msgid "Brush type:"
+msgstr "Typ pędzla:"
+
+msgid "File brush"
+msgstr "Pędzel programu (File brush)"
+
+msgid "Project brush"
+msgstr "Pędzel projektu"
+
+msgid "Random brush"
+msgstr "Losowy pędzel"
 
 msgid "Save Sprite as .pxo"
 msgstr "Zapisz obraz jako .pxo"
@@ -168,6 +239,9 @@ msgstr "Plik %s już istnieje. Nadpisać?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Ścieżka do katalogu lub nazwa pliku nie jest prawidłowa!"
+
+msgid "Exporting in progress..."
+msgstr "Eksportowanie w toku..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -278,6 +352,9 @@ msgstr "Trójlinowa"
 msgid "General"
 msgstr "Ogólne"
 
+msgid "Startup"
+msgstr "Przy uruchomieniu"
+
 msgid "Language"
 msgstr "Język"
 
@@ -289,6 +366,18 @@ msgstr "Płótno"
 
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
+
+msgid "Backup"
+msgstr "Utwórz kopię zapasową"
+
+msgid "Indicators"
+msgstr "Wskaźniki"
+
+msgid "On"
+msgstr "Włączone"
+
+msgid "Restore default value"
+msgstr "Przywróć domyślne wartości"
 
 msgid "Smooth Zoom"
 msgstr "Płynne przybliżanie"
@@ -329,8 +418,35 @@ msgstr "Karmelowy"
 msgid "Light"
 msgstr "Jasny"
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr "Wpływ tylko na zaznaczenie"
+
+msgid "Current cel"
+msgstr "Bieżąca kalka"
+
+msgid "Current frame"
+msgstr "Aktualna klatka"
+
+msgid "All frames"
+msgstr "Wszystkie klatki"
+
+msgid "All projects"
+msgstr "Wszystkie projekty"
+
+msgid "Invert Colors"
 msgstr "Odwróć kolory"
+
+msgid "Modify Red Channel"
+msgstr "Modyfikuj kanał czerwony"
+
+msgid "Modify Green Channel"
+msgstr "Modyfikuj kanał zielony"
+
+msgid "Modify Blue Channel"
+msgstr "Modyfikuj kanał niebieski"
+
+msgid "Modify Alpha Channel"
+msgstr "Modyfikuj kanał alfa"
 
 msgid "Desaturation"
 msgstr "Desaturacja (zmniejsz nasycenie)"
@@ -340,6 +456,9 @@ msgstr "Krawędź"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
+
+msgid "Gradient"
+msgstr "Gradient"
 
 msgid "Adjust HSV"
 msgstr "Dostosuj HSV"
@@ -370,6 +489,24 @@ msgstr "Umieść wewnątrz obrazu"
 
 msgid "Thickness:"
 msgstr "Grubość:"
+
+msgid "Colors:"
+msgstr "Kolory:"
+
+msgid "Steps:"
+msgstr "Kroki:"
+
+msgid "Top to Bottom"
+msgstr "Od góry do dołu"
+
+msgid "Bottom to Top"
+msgstr "Od dołu do góry"
+
+msgid "Left to Right"
+msgstr "Od lewej do prawej"
+
+msgid "Right to Left"
+msgstr "Od prawej do lewej"
 
 msgid "View Splash Screen"
 msgstr "Pokaż ekran powitalny"
@@ -457,6 +594,15 @@ msgstr "Arabski"
 
 msgid "Turkish"
 msgstr "Turecki"
+
+msgid "Norwegian"
+msgstr "Norweski"
+
+msgid "Korean"
+msgstr "Koreański"
+
+msgid "Hungarian"
+msgstr "Węgierski"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -610,11 +756,17 @@ msgstr "Pokaż ikonę prawego narzędzia"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Wyświetla ikonę prawego wybranego narzędzia obok kursora na płótnie"
 
+msgid "Guides"
+msgstr "Poradniki"
+
 msgid "Guides color:"
 msgstr "Kolor prowadnic:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Kolor prowadnic wyświetlanych na płótnie"
+
+msgid "Grid"
+msgstr "Siatka"
 
 msgid "Grid width:"
 msgstr "Szerokość siatki:"
@@ -633,6 +785,9 @@ msgstr "Kolor siatki:"
 
 msgid "A color of the grid"
 msgstr "Kolor siatki"
+
+msgid "Transparency"
+msgstr "Przezroczystość"
 
 msgid "Checker size:"
 msgstr "Rozmiar komórek:"
@@ -675,6 +830,12 @@ msgstr "Niestandardowy pędzel"
 
 msgid "Brush size:"
 msgstr "Rozmiar pędzla:"
+
+msgid "Overwrite"
+msgstr "Nadpisz"
+
+msgid "Pixel Perfect"
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
@@ -1012,6 +1173,9 @@ msgstr "Nowa pusta paleta kolorów"
 msgid "Import Palette"
 msgstr "Importuj paletę kolorów"
 
+msgid "Create Palette From Current Sprite"
+msgstr "Utwórz paletę z aktualnego Sprite'a"
+
 msgid "Palette Name:"
 msgstr "Nazwa palety kolorów:"
 
@@ -1026,9 +1190,6 @@ msgstr "Utworzyć nową pustą paletę kolorów?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Błąd: Paleta kolorów musi mieć poprawną nazwę."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Błąd: Paleta kolorów o nazwie '%s' już istnieje!"
 
 msgid "Invalid Palette file!"
 msgstr "Niepoprawny plik palety kolorów!"

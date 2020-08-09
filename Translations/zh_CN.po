@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-08-08 17:00\n"
 
 msgid "OK"
 msgstr "确定"
@@ -25,14 +27,26 @@ msgstr "保存"
 msgid "Please Confirm..."
 msgstr "确认..."
 
+msgid "File Name:"
+msgstr "文件名称:"
+
 msgid "Image Size"
 msgstr "图像大小"
+
+msgid "Canvas Size"
+msgstr "画布尺寸"
+
+msgid "Frame Size"
+msgstr "帧大小"
 
 msgid "Width:"
 msgstr "宽度:"
 
 msgid "Height:"
 msgstr "高度:"
+
+msgid "Center"
+msgstr "中心"
 
 msgid "File"
 msgstr "文件"
@@ -67,14 +81,11 @@ msgstr "保存..."
 msgid "Save as..."
 msgstr "另存为..."
 
+msgid "Use ZSTD Compression"
+msgstr "使用 ZSTD 压缩"
+
 msgid "Import"
 msgstr "导入"
-
-msgid "Import..."
-msgstr "导入..."
-
-msgid "Import PNG..."
-msgstr "导入 PNG..."
 
 msgid "Export"
 msgstr "导出"
@@ -100,17 +111,32 @@ msgstr "撤消"
 msgid "Redo"
 msgstr "重做"
 
+msgid "Copy"
+msgstr "复制"
+
+msgid "Paste"
+msgstr "粘贴"
+
+msgid "Delete"
+msgstr "删除"
+
 msgid "Scale Image"
 msgstr "缩放图像"
 
 msgid "Crop Image"
 msgstr "裁剪图像"
 
+msgid "Resize Canvas"
+msgstr "调整画布尺寸"
+
 msgid "Rotate Image"
 msgstr "旋转图像"
 
 msgid "Clear Selection"
 msgstr "清除选择"
+
+msgid "Flip"
+msgstr "翻转"
 
 msgid "Flip Horizontal"
 msgstr "水平翻转"
@@ -136,6 +162,12 @@ msgstr "显示指南"
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
 
+msgid "Zen Mode"
+msgstr "禅定模式"
+
+msgid "Fullscreen Mode"
+msgstr "全屏模式"
+
 msgid "Fill with color:"
 msgstr "使用颜色填充:"
 
@@ -145,11 +177,50 @@ msgstr "打开一个文件"
 msgid "Open File(s)"
 msgstr "打开文件"
 
-msgid "Import as new frame"
-msgstr "导入为新建帧"
+msgid "Import Options"
+msgstr "导入选项"
 
-msgid "Import as a spritesheet"
-msgstr "导入为 Spritesheet"
+msgid "Import as:"
+msgstr "导入为："
+
+msgid "New tab"
+msgstr "新建选项卡"
+
+msgid "Spritesheet (new tab)"
+msgstr "纸张（新建选项卡）"
+
+msgid "New frame"
+msgstr "新建帧"
+
+msgid "New layer"
+msgstr "新建图层"
+
+msgid "New palette"
+msgstr "新建调色板"
+
+msgid "New brush"
+msgstr "新建画笔"
+
+msgid "New pattern"
+msgstr "新建图案"
+
+msgid "Horizontal frames:"
+msgstr "水平帧："
+
+msgid "Vertical frames:"
+msgstr "垂直帧："
+
+msgid "Brush type:"
+msgstr "画笔类型："
+
+msgid "File brush"
+msgstr "文件笔画"
+
+msgid "Project brush"
+msgstr "项目笔画"
+
+msgid "Random brush"
+msgstr "随机笔画"
 
 msgid "Save Sprite as .pxo"
 msgstr "保存 Sprite 为 .pxo"
@@ -168,6 +239,9 @@ msgstr "文件 %s 已经存在。覆盖吗?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "目录路径或文件名无效！"
+
+msgid "Exporting in progress..."
+msgstr "正在导出..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -279,6 +353,9 @@ msgstr "三线性"
 msgid "General"
 msgstr "常规​​​​​"
 
+msgid "Startup"
+msgstr "启动"
+
 msgid "Language"
 msgstr "语言"
 
@@ -290,6 +367,18 @@ msgstr "画布"
 
 msgid "Shortcuts"
 msgstr "快捷键"
+
+msgid "Backup"
+msgstr "备份"
+
+msgid "Indicators"
+msgstr "指示"
+
+msgid "On"
+msgstr "开启"
+
+msgid "Restore default value"
+msgstr "恢复默认值"
 
 msgid "Smooth Zoom"
 msgstr "平滑缩放"
@@ -330,8 +419,35 @@ msgstr "浅褐色"
 msgid "Light"
 msgstr "白色"
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr "仅影响所选"
+
+msgid "Current cel"
+msgstr "当前单元格"
+
+msgid "Current frame"
+msgstr "当前帧"
+
+msgid "All frames"
+msgstr "所有帧"
+
+msgid "All projects"
+msgstr "所有项目"
+
+msgid "Invert Colors"
 msgstr "反相颜色"
+
+msgid "Modify Red Channel"
+msgstr "修改红色通道"
+
+msgid "Modify Green Channel"
+msgstr "修改绿色通道"
+
+msgid "Modify Blue Channel"
+msgstr "修改蓝色通道"
+
+msgid "Modify Alpha Channel"
+msgstr "修改 Alpha 通道"
 
 msgid "Desaturation"
 msgstr "去饱和"
@@ -341,6 +457,9 @@ msgstr "轮廓"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "调整色相/饱和度/值"
+
+msgid "Gradient"
+msgstr "渐变"
 
 msgid "Adjust HSV"
 msgstr "调整 HSV"
@@ -371,6 +490,24 @@ msgstr "放置在图片中"
 
 msgid "Thickness:"
 msgstr "厚度:"
+
+msgid "Colors:"
+msgstr "颜色:"
+
+msgid "Steps:"
+msgstr "步骤："
+
+msgid "Top to Bottom"
+msgstr "从上到下"
+
+msgid "Bottom to Top"
+msgstr "从下到上"
+
+msgid "Left to Right"
+msgstr "从左到右"
+
+msgid "Right to Left"
+msgstr "从右到左"
 
 msgid "View Splash Screen"
 msgstr "查看启动画面"
@@ -458,6 +595,15 @@ msgstr "阿拉伯语"
 
 msgid "Turkish"
 msgstr "土耳其语"
+
+msgid "Norwegian"
+msgstr "挪威语"
+
+msgid "Korean"
+msgstr "韩语"
+
+msgid "Hungarian"
+msgstr "匈牙利语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -611,11 +757,17 @@ msgstr "显示右侧工具图标"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
 
+msgid "Guides"
+msgstr "手册"
+
 msgid "Guides color:"
 msgstr "参考线颜色："
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "显示在画布上标尺参考线的颜色"
+
+msgid "Grid"
+msgstr "网格"
 
 msgid "Grid width:"
 msgstr "网格宽度："
@@ -634,6 +786,9 @@ msgstr "网格颜色："
 
 msgid "A color of the grid"
 msgstr "网格颜色"
+
+msgid "Transparency"
+msgstr "透明度"
 
 msgid "Checker size:"
 msgstr "检查器大小："
@@ -676,6 +831,12 @@ msgstr "自定义画笔"
 
 msgid "Brush size:"
 msgstr "画笔大小:"
+
+msgid "Overwrite"
+msgstr "覆盖"
+
+msgid "Pixel Perfect"
+msgstr "完美像素"
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
@@ -1013,6 +1174,9 @@ msgstr "新建空的调色板"
 msgid "Import Palette"
 msgstr "导入调色板"
 
+msgid "Create Palette From Current Sprite"
+msgstr "从当前 Sprite 创建调色板"
+
 msgid "Palette Name:"
 msgstr "调色板名称:"
 
@@ -1027,9 +1191,6 @@ msgstr "创建一个新的空调色板?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "错误：调色板必须具有有效的名称。"
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "错误：名为 '%s' 的调色板已存在!"
 
 msgid "Invalid Palette file!"
 msgstr "无效的调色板文件!"

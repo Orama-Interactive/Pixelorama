@@ -2,153 +2,224 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: ja\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-08-08 16:11\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 msgid "Open"
-msgstr ""
+msgstr "開く"
 
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 msgid "Please Confirm..."
+msgstr "確認して下さい"
+
+msgid "File Name:"
 msgstr ""
 
 msgid "Image Size"
-msgstr ""
+msgstr "画像サイズ"
+
+msgid "Canvas Size"
+msgstr "キャンバス サイズ"
+
+msgid "Frame Size"
+msgstr "フレームサイズ"
 
 msgid "Width:"
-msgstr ""
+msgstr "幅:"
 
 msgid "Height:"
-msgstr ""
+msgstr "高さ:"
+
+msgid "Center"
+msgstr "中央揃え"
 
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 msgid "View"
-msgstr ""
+msgstr "表示"
 
 msgid "Image"
-msgstr ""
+msgstr "画像"
 
 msgid "Effects"
-msgstr ""
+msgstr "エフェクト"
 
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 msgid "New"
-msgstr ""
+msgstr "新規"
 
 msgid "New..."
-msgstr ""
+msgstr "新規..."
 
 msgid "Open..."
-msgstr ""
+msgstr "開く..."
 
 msgid "Save..."
-msgstr ""
+msgstr "保存..."
 
 msgid "Save as..."
+msgstr "名前をつけて保存"
+
+msgid "Use ZSTD Compression"
 msgstr ""
 
 msgid "Import"
-msgstr ""
-
-msgid "Import..."
-msgstr ""
-
-msgid "Import PNG..."
-msgstr ""
+msgstr "インポート"
 
 msgid "Export"
-msgstr ""
+msgstr "エクスポート"
 
 msgid "Export..."
-msgstr ""
+msgstr "エクスポート..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "書式を指定してエクスポート…"
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "PNGでエクスポート..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "PNGに名前をつけてエクスポート..."
 
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 msgid "Undo"
-msgstr ""
+msgstr "元に戻す"
 
 msgid "Redo"
+msgstr "やり直し"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
 msgstr ""
 
 msgid "Scale Image"
-msgstr ""
+msgstr "画像の拡大縮小"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "画像のトリミング"
+
+msgid "Resize Canvas"
+msgstr "キャンバスサイズを変更"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "画像を回転"
 
 msgid "Clear Selection"
+msgstr "選択をクリア"
+
+msgid "Flip"
 msgstr ""
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "水平方向に反転"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "垂直方向に反転"
 
 msgid "Preferences"
-msgstr ""
+msgstr "設定"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "タイルモード"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "グリッドを表示"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "ルーラーを表示"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "ガイドを表示"
 
 msgid "Show Animation Timeline"
+msgstr "アニメーションのタイムラインを表示"
+
+msgid "Zen Mode"
+msgstr "Zenモード"
+
+msgid "Fullscreen Mode"
 msgstr ""
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "塗りつぶし"
 
 msgid "Open a File"
-msgstr ""
+msgstr "ファイルを開く"
 
 msgid "Open File(s)"
+msgstr "ファイルを開く"
+
+msgid "Import Options"
+msgstr "インポートオプション"
+
+msgid "Import as:"
+msgstr "形式を指定してインポート"
+
+msgid "New tab"
 msgstr ""
 
-msgid "Import as new frame"
+msgid "Spritesheet (new tab)"
 msgstr ""
 
-msgid "Import as a spritesheet"
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
+msgstr ""
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
@@ -167,6 +238,9 @@ msgid "File %s already exists. Overwrite?"
 msgstr ""
 
 msgid "Directory path or file name is not valid!"
+msgstr ""
+
+msgid "Exporting in progress..."
 msgstr ""
 
 msgid "Can't load file '%s'.\n"
@@ -278,6 +352,9 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -288,6 +365,18 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Restore default value"
 msgstr ""
 
 msgid "Smooth Zoom"
@@ -329,7 +418,34 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr ""
+
+msgid "Current cel"
+msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "Invert Colors"
+msgstr ""
+
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
 msgstr ""
 
 msgid "Desaturation"
@@ -339,6 +455,9 @@ msgid "Outline"
 msgstr ""
 
 msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
+msgid "Gradient"
 msgstr ""
 
 msgid "Adjust HSV"
@@ -369,6 +488,24 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
+msgstr ""
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
+
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
 msgstr ""
 
 msgid "View Splash Screen"
@@ -456,6 +593,15 @@ msgid "Arabic"
 msgstr ""
 
 msgid "Turkish"
+msgstr ""
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
 msgstr ""
 
 msgid "Development Team"
@@ -591,10 +737,16 @@ msgstr ""
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr ""
 
 msgid "A color of ruler guides displayed on the canvas"
+msgstr ""
+
+msgid "Grid"
 msgstr ""
 
 msgid "Grid width:"
@@ -613,6 +765,9 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Transparency"
 msgstr ""
 
 msgid "Checker size:"
@@ -655,6 +810,12 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
+msgstr ""
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Brush color from"
@@ -984,6 +1145,9 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
+msgid "Create Palette From Current Sprite"
+msgstr ""
+
 msgid "Palette Name:"
 msgstr ""
 
@@ -997,9 +1161,6 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
-
-msgid "Error: Palette named '%s' already exists!"
 msgstr ""
 
 msgid "Invalid Palette file!"

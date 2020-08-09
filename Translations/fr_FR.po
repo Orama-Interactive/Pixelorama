@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: fr\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-08-08 16:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,7 +27,16 @@ msgstr "Sauvegarder"
 msgid "Please Confirm..."
 msgstr "Veuillez confirmer..."
 
+msgid "File Name:"
+msgstr "Nom du fichier:"
+
 msgid "Image Size"
+msgstr "Taille de l'image"
+
+msgid "Canvas Size"
+msgstr "Taille du Canevas"
+
+msgid "Frame Size"
 msgstr "Taille de l'image"
 
 msgid "Width:"
@@ -33,6 +44,9 @@ msgstr "Largeur :"
 
 msgid "Height:"
 msgstr "Hauteur :"
+
+msgid "Center"
+msgstr "Centre"
 
 msgid "File"
 msgstr "Fichier"
@@ -67,14 +81,11 @@ msgstr "Enregistrer..."
 msgid "Save as..."
 msgstr "Enregistrer sous..."
 
+msgid "Use ZSTD Compression"
+msgstr "Utiliser la compression ZSTD"
+
 msgid "Import"
 msgstr "Importer"
-
-msgid "Import..."
-msgstr "Importer..."
-
-msgid "Import PNG..."
-msgstr "Importer une image PNG..."
 
 msgid "Export"
 msgstr "Exporter une image"
@@ -100,17 +111,32 @@ msgstr "Défaire"
 msgid "Redo"
 msgstr "Refaire"
 
+msgid "Copy"
+msgstr "Copier"
+
+msgid "Paste"
+msgstr "Coller"
+
+msgid "Delete"
+msgstr "Supprimer"
+
 msgid "Scale Image"
 msgstr "Redimensionner l'image"
 
 msgid "Crop Image"
 msgstr "Rogner l'image"
 
+msgid "Resize Canvas"
+msgstr "Redimensionner le canevas"
+
 msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Clear Selection"
 msgstr "Ne rien sélectionner"
+
+msgid "Flip"
+msgstr "Retourner"
 
 msgid "Flip Horizontal"
 msgstr "Miroir horizontal"
@@ -136,6 +162,12 @@ msgstr "Afficher les guides"
 msgid "Show Animation Timeline"
 msgstr "Afficher la chronologie de l'animation"
 
+msgid "Zen Mode"
+msgstr "Mode Zen"
+
+msgid "Fullscreen Mode"
+msgstr "Mode plein écran"
+
 msgid "Fill with color:"
 msgstr "Remplir avec la couleur :"
 
@@ -145,11 +177,50 @@ msgstr "Ouvrir un fichier"
 msgid "Open File(s)"
 msgstr "Ouvrir des fichiers"
 
-msgid "Import as new frame"
-msgstr "Importer en tant que trame"
+msgid "Import Options"
+msgstr "Options d'import"
 
-msgid "Import as a spritesheet"
-msgstr "Importer comme étant une spritesheet"
+msgid "Import as:"
+msgstr "Importer en tant que :"
+
+msgid "New tab"
+msgstr "Nouvel onglet"
+
+msgid "Spritesheet (new tab)"
+msgstr "Spritesheet (nouvel onglet)"
+
+msgid "New frame"
+msgstr "Nouvelle trame"
+
+msgid "New layer"
+msgstr "Nouveau calque"
+
+msgid "New palette"
+msgstr "Nouvelle palette"
+
+msgid "New brush"
+msgstr "Nouveau pinceau"
+
+msgid "New pattern"
+msgstr "Nouveau motif"
+
+msgid "Horizontal frames:"
+msgstr "Trame horizontale:"
+
+msgid "Vertical frames:"
+msgstr "Trame verticale:"
+
+msgid "Brush type:"
+msgstr "Type de pinceau:"
+
+msgid "File brush"
+msgstr "Pinceau du fichier"
+
+msgid "Project brush"
+msgstr "Pinceau du projet"
+
+msgid "Random brush"
+msgstr "Pinceau aléatoire"
 
 msgid "Save Sprite as .pxo"
 msgstr "Enregistrer la sprite au format .pxo"
@@ -168,6 +239,9 @@ msgstr "Le fichier \"%s\" existe déjà. Écraser ?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Le chemin du répertoire ou le nom du fichier n'est pas valide !"
+
+msgid "Exporting in progress..."
+msgstr "Export en cours..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -279,6 +353,9 @@ msgstr "Trilinéaire"
 msgid "General"
 msgstr "Général"
 
+msgid "Startup"
+msgstr "Démarrage"
+
 msgid "Language"
 msgstr "Langue"
 
@@ -290,6 +367,18 @@ msgstr "Toile"
 
 msgid "Shortcuts"
 msgstr "Raccourcis"
+
+msgid "Backup"
+msgstr "Sauvegarde"
+
+msgid "Indicators"
+msgstr "Indicateurs"
+
+msgid "On"
+msgstr "Activé"
+
+msgid "Restore default value"
+msgstr "Restaurer la valeur par défaut"
 
 msgid "Smooth Zoom"
 msgstr "Zoom fluide"
@@ -330,8 +419,35 @@ msgstr "Caramel"
 msgid "Light"
 msgstr "Clair"
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr ""
+
+msgid "Current cel"
+msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "Invert Colors"
 msgstr "Inverser les couleurs"
+
+msgid "Modify Red Channel"
+msgstr "Modifier Canal Rouge"
+
+msgid "Modify Green Channel"
+msgstr "Modifier Canal Vert"
+
+msgid "Modify Blue Channel"
+msgstr "Modifier Canal Bleu"
+
+msgid "Modify Alpha Channel"
+msgstr "Modifier Canal Alpha"
 
 msgid "Desaturation"
 msgstr "Désaturation"
@@ -341,6 +457,9 @@ msgstr "Contour"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajuster la Teinte/Saturation/Valeur"
+
+msgid "Gradient"
+msgstr "Dégradé"
 
 msgid "Adjust HSV"
 msgstr "Ajuster HSV"
@@ -371,6 +490,24 @@ msgstr "Placer à l'intérieur de l'image"
 
 msgid "Thickness:"
 msgstr "Épaisseur:"
+
+msgid "Colors:"
+msgstr "Couleurs:"
+
+msgid "Steps:"
+msgstr "Étapes:"
+
+msgid "Top to Bottom"
+msgstr "De haut en bas"
+
+msgid "Bottom to Top"
+msgstr "De bas en haut"
+
+msgid "Left to Right"
+msgstr "De gauche à droite"
+
+msgid "Right to Left"
+msgstr "De droite à gauche"
 
 msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
@@ -458,6 +595,15 @@ msgstr "Arabe"
 
 msgid "Turkish"
 msgstr "Turc"
+
+msgid "Norwegian"
+msgstr "Norvégien"
+
+msgid "Korean"
+msgstr "Coréen"
+
+msgid "Hungarian"
+msgstr "Hongrois"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
@@ -611,11 +757,17 @@ msgstr "Afficher l'icône de l'outil de droite"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Affiche une icône de l'outil de droite sélectionné à côté du curseur sur le canevas"
 
+msgid "Guides"
+msgstr "Guides"
+
 msgid "Guides color:"
 msgstr "Couleur des guides:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Une couleur des guides de règle affichée sur le canevas"
+
+msgid "Grid"
+msgstr "Grille"
 
 msgid "Grid width:"
 msgstr "Largeur de la grille:"
@@ -634,6 +786,9 @@ msgstr "Couleur de la grille:"
 
 msgid "A color of the grid"
 msgstr "Une couleur de la grille"
+
+msgid "Transparency"
+msgstr "Transparence"
 
 msgid "Checker size:"
 msgstr "Taille du damier:"
@@ -676,6 +831,12 @@ msgstr "Brosse personnalisée"
 
 msgid "Brush size:"
 msgstr "Taille de la brosse :"
+
+msgid "Overwrite"
+msgstr "Écraser"
+
+msgid "Pixel Perfect"
+msgstr "Pixel Parfait"
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
@@ -1013,6 +1174,9 @@ msgstr "Nouvelle palette vide"
 msgid "Import Palette"
 msgstr "Importer une palette"
 
+msgid "Create Palette From Current Sprite"
+msgstr "Créer une palette à partir du sprite actuel"
+
 msgid "Palette Name:"
 msgstr "Nom de la palette:"
 
@@ -1027,9 +1191,6 @@ msgstr "Créer une nouvelle palette vide?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Erreur: La palette doit avoir un nom valide."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Erreur: La palette nommée '%s' existe déjà!"
 
 msgid "Invalid Palette file!"
 msgstr "Fichier Palette invalide!"
@@ -1187,14 +1348,14 @@ msgid "Backup reloaded"
 msgstr "Sauvegarde rechargée"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Supprimer la palette actuellement sélectionnée"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Vous ne pouvez pas supprimer plus de palettes!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Impossible de supprimer la palette, car elle n'existe pas !"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Une erreur est survenue lors de la suppression de la palette ! Code d'erreur : %s"
 

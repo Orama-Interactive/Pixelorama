@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: el\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-06-04 22:19\n"
+"PO-Revision-Date: 2020-08-08 16:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -25,14 +27,26 @@ msgstr "Αποθήκευση"
 msgid "Please Confirm..."
 msgstr "Παρακαλώ επιβεβαιώστε..."
 
+msgid "File Name:"
+msgstr "Όνομα αρχείου:"
+
 msgid "Image Size"
 msgstr "Μέγεθος εικόνας"
+
+msgid "Canvas Size"
+msgstr "Μέγεθος Καμβά"
+
+msgid "Frame Size"
+msgstr "Μέγεθος Καρέ"
 
 msgid "Width:"
 msgstr "Πλάτος:"
 
 msgid "Height:"
 msgstr "Ύψος:"
+
+msgid "Center"
+msgstr "Κέντρο"
 
 msgid "File"
 msgstr "Αρχείο"
@@ -67,14 +81,11 @@ msgstr "Αποθήκευση..."
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
 
+msgid "Use ZSTD Compression"
+msgstr "Χρήση συμπίεσης ZSTD"
+
 msgid "Import"
 msgstr "Εισαγωγή"
-
-msgid "Import..."
-msgstr "Εισαγωγή..."
-
-msgid "Import PNG..."
-msgstr "Εισαγωγή PNG..."
 
 msgid "Export"
 msgstr "Εξαγωγή"
@@ -100,17 +111,32 @@ msgstr "Αναίρεση"
 msgid "Redo"
 msgstr "Ακύρωση αναίρεσης"
 
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+msgid "Paste"
+msgstr "Επικόλληση"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
 msgid "Scale Image"
 msgstr "Κλιμάκωση εικόνας"
 
 msgid "Crop Image"
 msgstr "Περικοπή"
 
+msgid "Resize Canvas"
+msgstr "Αλλαγή μεγέθους καμβά"
+
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
 msgid "Clear Selection"
 msgstr "Καθαρισμός επιλογής"
+
+msgid "Flip"
+msgstr "Αναστροφή"
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
@@ -136,6 +162,12 @@ msgstr "Εμφάνιση οδηγών"
 msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
 
+msgid "Zen Mode"
+msgstr "Λειτουργία Zεν"
+
+msgid "Fullscreen Mode"
+msgstr "Λειτουργία Πλήρους Οθόνης"
+
 msgid "Fill with color:"
 msgstr "Γέμισμα με χρώμα:"
 
@@ -145,11 +177,50 @@ msgstr "Άνοιγμα αρχείου"
 msgid "Open File(s)"
 msgstr "Άνοιγμα αρχείου/ων"
 
-msgid "Import as new frame"
-msgstr "Εισαγωγή ως νέο καρέ"
+msgid "Import Options"
+msgstr "Επιλογές Εισαγωγής"
 
-msgid "Import as a spritesheet"
-msgstr "Εισαγωγή φύλλου καρέ (spritesheet)"
+msgid "Import as:"
+msgstr "Εισαγωγή ως:"
+
+msgid "New tab"
+msgstr "Νέα καρτέλα"
+
+msgid "Spritesheet (new tab)"
+msgstr "Φύλλο καρέ (νέα καρτέλα)"
+
+msgid "New frame"
+msgstr "Νέο καρέ"
+
+msgid "New layer"
+msgstr "Νέα στρώση"
+
+msgid "New palette"
+msgstr "Νέα παλέτα"
+
+msgid "New brush"
+msgstr "Νέο πινέλο"
+
+msgid "New pattern"
+msgstr "Νέο μοτίβο"
+
+msgid "Horizontal frames:"
+msgstr "Οριζόντια καρέ:"
+
+msgid "Vertical frames:"
+msgstr "Κάθετα καρέ:"
+
+msgid "Brush type:"
+msgstr "Τύπος πινέλου:"
+
+msgid "File brush"
+msgstr "Πινέλο από αρχείο"
+
+msgid "Project brush"
+msgstr "Πινέλο από project"
+
+msgid "Random brush"
+msgstr "Τυχαίο πινέλο"
 
 msgid "Save Sprite as .pxo"
 msgstr "Αποθήκευση εικόνας ως .pxo"
@@ -168,6 +239,9 @@ msgstr "Το αρχείο \"%s\" υπάρχει ήδη. Αντικατάστασ
 
 msgid "Directory path or file name is not valid!"
 msgstr "Η διαδρομή του φακέλου ή το όνομα αρχείο δεν είναι έγκυρα!"
+
+msgid "Exporting in progress..."
+msgstr "Εξαγωγή σε εξέλιξη..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -279,6 +353,9 @@ msgstr "Τριγραμμική"
 msgid "General"
 msgstr "Γενικά"
 
+msgid "Startup"
+msgstr "Εκκίνηση"
+
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -290,6 +367,18 @@ msgstr "Καμβάς"
 
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
+
+msgid "Backup"
+msgstr "Αντίγραφο ασφαλείας"
+
+msgid "Indicators"
+msgstr "Δείκτες"
+
+msgid "On"
+msgstr "Ενεργό"
+
+msgid "Restore default value"
+msgstr "Επαναφορά εργοστασιακής τιμής"
 
 msgid "Smooth Zoom"
 msgstr "Ομαλό Ζουμ"
@@ -330,8 +419,35 @@ msgstr "Καραμέλα"
 msgid "Light"
 msgstr "Φωτεινό"
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr "Επηρεάζει μόνο την επιλογή"
+
+msgid "Current cel"
+msgstr "Τρέχον cel"
+
+msgid "Current frame"
+msgstr "Τρέχον καρέ"
+
+msgid "All frames"
+msgstr "Όλα τα καρέ"
+
+msgid "All projects"
+msgstr "Όλα τα έργα"
+
+msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
+
+msgid "Modify Red Channel"
+msgstr "Τροποποίηση Κόκκινου Καναλιού"
+
+msgid "Modify Green Channel"
+msgstr "Τροποποίηση Πράσινου Καναλιού"
+
+msgid "Modify Blue Channel"
+msgstr "Τροποποίηση Μπλε Καναλιού"
+
+msgid "Modify Alpha Channel"
+msgstr "Τροποποίηση Καναλιού Διαφάνειας"
 
 msgid "Desaturation"
 msgstr "Αποκορεσμός"
@@ -341,6 +457,9 @@ msgstr "Περίγραμμα"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
+
+msgid "Gradient"
+msgstr "Διαβάθμιση"
 
 msgid "Adjust HSV"
 msgstr "Ρύθμιση HSV"
@@ -371,6 +490,24 @@ msgstr "Τοποθέτηση μέσα στην εικόνα"
 
 msgid "Thickness:"
 msgstr "Πάχος:"
+
+msgid "Colors:"
+msgstr "Χρώματα:"
+
+msgid "Steps:"
+msgstr "Βαθμίδες:"
+
+msgid "Top to Bottom"
+msgstr "Πάνω-κάτω"
+
+msgid "Bottom to Top"
+msgstr "Κάτω-πάνω"
+
+msgid "Left to Right"
+msgstr "Αριστερά-δεξιά"
+
+msgid "Right to Left"
+msgstr "Δεξιά-αριστερά"
 
 msgid "View Splash Screen"
 msgstr "Εμφάνιση οθόνης εκκίνησης"
@@ -458,6 +595,15 @@ msgstr "Αραβικά"
 
 msgid "Turkish"
 msgstr "Τουρκικά"
+
+msgid "Norwegian"
+msgstr "Νορβηγικά"
+
+msgid "Korean"
+msgstr "Κορεάτικα"
+
+msgid "Hungarian"
+msgstr "Ουγγρικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
@@ -611,11 +757,17 @@ msgstr "Εμφάνιση δεξιού εικονιδίου εργαλείου"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου δεξιού εργαλείου δίπλα στο κέρσορα στον καμβά"
 
+msgid "Guides"
+msgstr "Οδηγοί"
+
 msgid "Guides color:"
 msgstr "Χρώμα οδηγών:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Το χρώμα των οδηγών που φαίνεται στο καμβά"
+
+msgid "Grid"
+msgstr "Πλέγμα"
 
 msgid "Grid width:"
 msgstr "Πλάτος πλέγματος:"
@@ -634,6 +786,9 @@ msgstr "Χρώμα πλέγματος:"
 
 msgid "A color of the grid"
 msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
+
+msgid "Transparency"
+msgstr "Διαφάνεια"
 
 msgid "Checker size:"
 msgstr "Μέγεθος σκακιέρας:"
@@ -676,6 +831,12 @@ msgstr "Προσαρμοσμένο πινέλο"
 
 msgid "Brush size:"
 msgstr "Μέγεθος πινέλου:"
+
+msgid "Overwrite"
+msgstr "Αντικατάσταση"
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
@@ -1013,6 +1174,9 @@ msgstr "Νέα Κενή Παλέτα"
 msgid "Import Palette"
 msgstr "Εισαγωγή Παλέτας"
 
+msgid "Create Palette From Current Sprite"
+msgstr "Δημιουργία παλέτας από την τρέχουσα εικόνα"
+
 msgid "Palette Name:"
 msgstr "Όνομα Παλέτας:"
 
@@ -1027,9 +1191,6 @@ msgstr "Δημιουργία νέας κενής παλέτας;"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Σφάλμα: Η παλέτα πρέπει να έχει έγκυρο όνομα."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Σφάλμα: Η παλέτα με το όνομα '%s' υπάρχει ήδη!"
 
 msgid "Invalid Palette file!"
 msgstr "Μη έγκυρο αρχείο παλέτας!"
@@ -1083,10 +1244,10 @@ msgid "Templates:"
 msgstr "Πρότυπα:"
 
 msgid "Preset"
-msgstr "Προεπιλογή"
+msgstr "Προκαθορισμένο"
 
 msgid "Preset:"
-msgstr "Προεπιλογή:"
+msgstr "Προκαθορισμένο:"
 
 msgid "Default"
 msgstr "Προεπιλογή"

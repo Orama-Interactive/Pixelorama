@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: cs\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-08-08 16:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,14 +27,26 @@ msgstr "Uložit"
 msgid "Please Confirm..."
 msgstr "Prosím, potvrďte..."
 
+msgid "File Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "Velikost obrázku"
+
+msgid "Canvas Size"
+msgstr ""
+
+msgid "Frame Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Šířka:"
 
 msgid "Height:"
 msgstr "Výška:"
+
+msgid "Center"
+msgstr ""
 
 msgid "File"
 msgstr "Soubor"
@@ -67,14 +81,11 @@ msgstr "Uložit..."
 msgid "Save as..."
 msgstr "Uložit jako..."
 
+msgid "Use ZSTD Compression"
+msgstr ""
+
 msgid "Import"
 msgstr "Importovat"
-
-msgid "Import..."
-msgstr "Importovat..."
-
-msgid "Import PNG..."
-msgstr "Importovat PNG..."
 
 msgid "Export"
 msgstr "Exportovat"
@@ -100,17 +111,32 @@ msgstr "Zpět"
 msgid "Redo"
 msgstr "Znovu"
 
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Delete"
+msgstr "Smazat"
+
 msgid "Scale Image"
 msgstr "Škálovat obrázek"
 
 msgid "Crop Image"
 msgstr "Oříznout obrázek"
 
+msgid "Resize Canvas"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
 msgid "Clear Selection"
 msgstr "Smazat výběr"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Překlopit vodorovně"
@@ -136,6 +162,12 @@ msgstr "Zobrazit vodítka"
 msgid "Show Animation Timeline"
 msgstr "Zobrazit časovou osu animace"
 
+msgid "Zen Mode"
+msgstr ""
+
+msgid "Fullscreen Mode"
+msgstr ""
+
 msgid "Fill with color:"
 msgstr "Vyplnit barvou:"
 
@@ -145,11 +177,50 @@ msgstr "Otevřít soubor"
 msgid "Open File(s)"
 msgstr "Otevřít soubor(y)"
 
-msgid "Import as new frame"
-msgstr "Importovat jako nový snímek"
+msgid "Import Options"
+msgstr ""
 
-msgid "Import as a spritesheet"
-msgstr "Importovat jako spritesheet"
+msgid "Import as:"
+msgstr ""
+
+msgid "New tab"
+msgstr ""
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr ""
+
+msgid "New layer"
+msgstr ""
+
+msgid "New palette"
+msgstr ""
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr ""
+
+msgid "Vertical frames:"
+msgstr ""
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Uložit obrázek jako .pxo"
@@ -168,6 +239,9 @@ msgstr "Soubor %s již existuje. Přepsat?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Cesta složky nebo název souboru je neplatný!"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -279,6 +353,9 @@ msgstr "Trilineární"
 msgid "General"
 msgstr "Obecné"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Jazyk"
 
@@ -290,6 +367,18 @@ msgstr "Plátno"
 
 msgid "Shortcuts"
 msgstr "Zkratky"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Restore default value"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Hladké přiblížení/oddálení"
@@ -330,8 +419,35 @@ msgstr "Karamel"
 msgid "Light"
 msgstr "Světlý"
 
-msgid "Invert colors"
-msgstr "Převrátit barvy"
+msgid "Only affect selection"
+msgstr ""
+
+msgid "Current cel"
+msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "Invert Colors"
+msgstr ""
+
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
 
 msgid "Desaturation"
 msgstr "Odbarvit"
@@ -341,6 +457,9 @@ msgstr "Obrys"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Úprava Odstínu/Nasycení/Hodnoty"
+
+msgid "Gradient"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Upravit HSV"
@@ -371,6 +490,24 @@ msgstr "Umístit uvnitř obrázku"
 
 msgid "Thickness:"
 msgstr "Tloušťka:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
+
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Zobrazit uvítací obrazovku"
@@ -458,6 +595,15 @@ msgstr "Arabština"
 
 msgid "Turkish"
 msgstr "Turečtina"
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
@@ -611,11 +757,17 @@ msgstr "Zobrazit ikonu pravého nástroje"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Zobrazí ikonu vybraného pravého nástroje vedle kurzoru na plátně"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Barva vodítek:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Barva vodítek zobrazených na plátně"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Šířka mřížky:"
@@ -634,6 +786,9 @@ msgstr "Barva mřížky:"
 
 msgid "A color of the grid"
 msgstr "Barva mřížky"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Rozměry šachovnice:"
@@ -676,6 +831,12 @@ msgstr "Vlastní štětec"
 
 msgid "Brush size:"
 msgstr "Velikost štětce:"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Barva štětce z"
@@ -1013,6 +1174,9 @@ msgstr "Nová prázdná paleta"
 msgid "Import Palette"
 msgstr "Importovat paletu"
 
+msgid "Create Palette From Current Sprite"
+msgstr ""
+
 msgid "Palette Name:"
 msgstr "Název palety:"
 
@@ -1027,9 +1191,6 @@ msgstr "Vytvořit novou prázdnou paletu?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Chyba: Paleta musí mít platný název."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Chyba: Paleta s názvem '%s' již existuje!"
 
 msgid "Invalid Palette file!"
 msgstr "Neplatný soubor palety!"
@@ -1176,7 +1337,7 @@ msgid "Close"
 msgstr "Zavřít"
 
 msgid "Delete"
-msgstr "Smazat"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"

@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: id\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-08-08 16:11\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -25,14 +27,26 @@ msgstr "Simpan"
 msgid "Please Confirm..."
 msgstr "Konfirmasi..."
 
+msgid "File Name:"
+msgstr "Nama File:"
+
 msgid "Image Size"
 msgstr "Ukuran Gambar"
+
+msgid "Canvas Size"
+msgstr "Ukuran Kanvas"
+
+msgid "Frame Size"
+msgstr "Ukuran Bingkai"
 
 msgid "Width:"
 msgstr "Panjang:"
 
 msgid "Height:"
 msgstr "Lebar:"
+
+msgid "Center"
+msgstr "Tengah"
 
 msgid "File"
 msgstr "Berkas/File"
@@ -67,14 +81,11 @@ msgstr "Simpan..."
 msgid "Save as..."
 msgstr "Simpan sebagai..."
 
+msgid "Use ZSTD Compression"
+msgstr "Gunakan kompresi ZSTD"
+
 msgid "Import"
 msgstr "Impor"
-
-msgid "Import..."
-msgstr "Impor..."
-
-msgid "Import PNG..."
-msgstr "Impor PNG..."
 
 msgid "Export"
 msgstr "Ekspor"
@@ -100,17 +111,32 @@ msgstr "Undo"
 msgid "Redo"
 msgstr "Redo"
 
+msgid "Copy"
+msgstr "Salin"
+
+msgid "Paste"
+msgstr "Tempel"
+
+msgid "Delete"
+msgstr "Hapus"
+
 msgid "Scale Image"
 msgstr "Perbesar/perkecil gambar"
 
 msgid "Crop Image"
 msgstr "Potong Gambar"
 
+msgid "Resize Canvas"
+msgstr "Ubah Ukuran Kanvas"
+
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
 msgid "Clear Selection"
 msgstr "Hapus Pilihan"
+
+msgid "Flip"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Balikkan Horizontal"
@@ -136,6 +162,12 @@ msgstr "Tampilkan Petunjuk"
 msgid "Show Animation Timeline"
 msgstr "Tampilkan Frame Animasi"
 
+msgid "Zen Mode"
+msgstr "Mode Zen"
+
+msgid "Fullscreen Mode"
+msgstr ""
+
 msgid "Fill with color:"
 msgstr "Isi dengan warna:"
 
@@ -145,11 +177,50 @@ msgstr "Buka file"
 msgid "Open File(s)"
 msgstr "Buka file (lebih dari satu)"
 
-msgid "Import as new frame"
-msgstr "Import sebagai frame animasi baru"
+msgid "Import Options"
+msgstr "Piliha Impor"
 
-msgid "Import as a spritesheet"
-msgstr "Impor sebagai Spritesheet"
+msgid "Import as:"
+msgstr "Impor Sebagai:"
+
+msgid "New tab"
+msgstr "Tab baru"
+
+msgid "Spritesheet (new tab)"
+msgstr ""
+
+msgid "New frame"
+msgstr "Frame Baru"
+
+msgid "New layer"
+msgstr "Layer baru"
+
+msgid "New palette"
+msgstr "Palet baru"
+
+msgid "New brush"
+msgstr "Brush baru"
+
+msgid "New pattern"
+msgstr "Pola baru"
+
+msgid "Horizontal frames:"
+msgstr "Frame horisontal:"
+
+msgid "Vertical frames:"
+msgstr "Frame vertikal:"
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
+msgstr ""
 
 msgid "Save Sprite as .pxo"
 msgstr "Simpan \"sprite\" dengan .pxo"
@@ -168,6 +239,9 @@ msgstr "Folder %s sudah ada. Lanjutkan?"
 
 msgid "Directory path or file name is not valid!"
 msgstr "Folder tidak valid"
+
+msgid "Exporting in progress..."
+msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -279,6 +353,9 @@ msgstr "\"Trilinear\""
 msgid "General"
 msgstr "Umum"
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr "Bahasa"
 
@@ -290,6 +367,18 @@ msgstr "Kanvas"
 
 msgid "Shortcuts"
 msgstr "Pintasan"
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Restore default value"
+msgstr ""
 
 msgid "Smooth Zoom"
 msgstr "Zoom Halus"
@@ -330,8 +419,35 @@ msgstr "Karamel"
 msgid "Light"
 msgstr "Terang"
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr ""
+
+msgid "Current cel"
+msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "Invert Colors"
 msgstr "Balikkan warna"
+
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
+msgstr ""
 
 msgid "Desaturation"
 msgstr "Desaturasi"
@@ -342,14 +458,17 @@ msgstr "Garis luar"
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ganti Hue/Saturation/Value"
 
-msgid "Adjust HSV"
+msgid "Gradient"
 msgstr ""
+
+msgid "Adjust HSV"
+msgstr "Atur HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tipe:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Sudut:"
 
 msgid "Hue"
 msgstr ""
@@ -371,6 +490,24 @@ msgstr "Letakkan di dalam gambar"
 
 msgid "Thickness:"
 msgstr "Ketebalan:"
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
+
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
@@ -457,6 +594,15 @@ msgid "Arabic"
 msgstr ""
 
 msgid "Turkish"
+msgstr ""
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
 msgstr ""
 
 msgid "Development Team"
@@ -611,11 +757,17 @@ msgstr "Perlihatkan ikon alat kanan"
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr "Warna Panduan:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
+
+msgid "Grid"
+msgstr ""
 
 msgid "Grid width:"
 msgstr "Lebar Kisi:"
@@ -634,6 +786,9 @@ msgstr "Warna Kisi:"
 
 msgid "A color of the grid"
 msgstr "Warna dari kisi"
+
+msgid "Transparency"
+msgstr ""
 
 msgid "Checker size:"
 msgstr "Besar pola catur:"
@@ -676,6 +831,12 @@ msgstr "Kuas kostum"
 
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Warna dari"
@@ -1010,6 +1171,9 @@ msgstr "Palet kosong baru"
 msgid "Import Palette"
 msgstr "Impor palet"
 
+msgid "Create Palette From Current Sprite"
+msgstr ""
+
 msgid "Palette Name:"
 msgstr "Nama palet:"
 
@@ -1024,9 +1188,6 @@ msgstr "Buat palet kosong baru?"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: nama palet tidak valid."
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr "Error: Palet bernama %s sudah ada"
 
 msgid "Invalid Palette file!"
 msgstr "File palet tidak valid"
@@ -1174,7 +1335,7 @@ msgid "Close"
 msgstr "Tutup"
 
 msgid "Delete"
-msgstr "Hapus"
+msgstr ""
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
