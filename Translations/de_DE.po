@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-09 14:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -419,19 +419,19 @@ msgid "Light"
 msgstr "Hell"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Nur Auswahl beeinflussen"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Aktuelle cel"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Aktueller Rahmen"
 
 msgid "All frames"
-msgstr ""
+msgstr "Alle Frames"
 
 msgid "All projects"
-msgstr ""
+msgstr "Alle Projekte"
 
 msgid "Invert Colors"
 msgstr "Farben umkehren"
@@ -1013,10 +1013,10 @@ msgid "Add Frame Tag"
 msgstr "Frame Tag hinzufügen"
 
 msgid "Link Cel"
-msgstr "Kette verlinken"
+msgstr "Cel verlinken"
 
 msgid "Unlink Cel"
-msgstr "Kette entkoppeln"
+msgstr "Cel entkoppeln"
 
 msgid "Layer"
 msgstr "Ebene"
@@ -1053,8 +1053,8 @@ msgstr "Ebene sperren/entsperren"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Aktiviere/Deaktiviere Kettenverlinkungen\n\n"
-"Verlinkte Ketten werden über mehrere Frames geteilt"
+msgstr "Aktiviere/Deaktiviere Celverlinkungen\n\n"
+"Verlinkte Cels werden über mehrere Frames geteilt"
 
 msgid "Palette"
 msgstr "Palette"
