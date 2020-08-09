@@ -25,6 +25,9 @@ func _ready() -> void:
 	current_cel = Image.new()
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
+	preview.material.set_shader_param("size", Global.checker_size)
+	preview.material.set_shader_param("color1", Global.checker_color_1)
+	preview.material.set_shader_param("color2", Global.checker_color_2)
 
 
 func _on_HSVDialog_about_to_show() -> void:
