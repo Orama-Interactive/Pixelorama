@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-09 02:49\n"
+"PO-Revision-Date: 2020-08-09 03:00\n"
 
 msgid "OK"
 msgstr "確定"
@@ -419,7 +419,7 @@ msgid "Light"
 msgstr "亮色"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "只處理選取區塊"
 
 msgid "Current cel"
 msgstr "目前 Cel"
