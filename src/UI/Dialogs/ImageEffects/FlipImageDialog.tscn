@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/Shaders/TransparentDialog.tres" type="Material" id=2]
 
 [node name="FlipImageDialog" type="ConfirmationDialog"]
 margin_right = 200.0
@@ -15,6 +16,7 @@ margin_right = 275.0
 margin_bottom = 264.0
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
+material = ExtResource( 2 )
 margin_right = 267.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )

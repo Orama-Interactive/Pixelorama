@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/Shaders/TransparentDialog.tres" type="Material" id=2]
 
 [node name="OutlineDialog" type="ConfirmationDialog"]
+visible = true
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = "Outline"
@@ -22,6 +24,7 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
+material = ExtResource( 2 )
 margin_right = 312.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
@@ -93,8 +96,10 @@ pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_right = 29.0
-margin_bottom = 20.0
+margin_left = 164.0
+margin_top = 80.0
+margin_right = 312.0
+margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]

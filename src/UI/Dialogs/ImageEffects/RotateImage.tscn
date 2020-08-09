@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.gd" type="Script" id=1]
+[ext_resource path="res://src/Shaders/TransparentDialog.tres" type="Material" id=2]
 
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
@@ -24,6 +25,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+material = ExtResource( 2 )
 margin_right = 229.0
 margin_bottom = 145.0
 size_flags_vertical = 3
@@ -56,12 +58,12 @@ margin_bottom = 197.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_top = 5.0
-margin_right = 44.0
+margin_right = 40.0
 margin_bottom = 19.0
 text = "Angle:"
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
-margin_left = 48.0
+margin_left = 44.0
 margin_right = 151.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
