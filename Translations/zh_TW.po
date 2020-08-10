@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-09 03:00\n"
+"PO-Revision-Date: 2020-08-10 00:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -579,6 +579,9 @@ msgstr "拉脫維亞文"
 
 msgid "Spanish"
 msgstr "西班牙文"
+
+msgid "Catalan"
+msgstr ""
 
 msgid "Esperanto"
 msgstr "世界語"
@@ -1356,4 +1359,7 @@ msgstr "無法刪除不存在的色盤"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "刪除色盤出錯! 錯誤代碼：%s"
+
+msgid "and"
+msgstr ""
 
