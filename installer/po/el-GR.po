@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-09 20:58\n"
+"PO-Revision-Date: 2020-08-10 09:33\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Εγκατάσταση του ${APPNAME}"
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Δημιουργία συντομέυσεων στο μενού Έναρξης (προαιρετικό)"
+msgstr "Δημιουργία συντομεύσεων στο μενού Έναρξης (προαιρετικό)"
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
