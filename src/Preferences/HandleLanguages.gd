@@ -17,6 +17,8 @@ const languages_dict := {
 	"ru_RU" : ["Русский", "Russian"],
 	"zh_CN" : ["简体中文", "Chinese Simplified"],
 	"zh_TW" : ["繁體中文", "Chinese Traditional"],
+	"no_NO" : ["Norsk", "Norwegian"],
+	"hu_HU" : ["Magyar", "Hungarian"],
 }
 
 var loaded_locales : Array
