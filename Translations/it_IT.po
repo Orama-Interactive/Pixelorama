@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-08 21:21\n"
+"PO-Revision-Date: 2020-08-10 00:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,6 +580,9 @@ msgstr "Lettone"
 
 msgid "Spanish"
 msgstr "Spagnolo"
+
+msgid "Catalan"
+msgstr ""
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -1358,4 +1361,7 @@ msgstr "Impossibile rimuovere la tavolozza, perché non esiste!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Si è verificato un errore durante la rimozione della tavolozza! Codice errore: %s"
+
+msgid "and"
+msgstr ""
 
