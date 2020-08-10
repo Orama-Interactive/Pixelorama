@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-08-08 21:50\n"
+"PO-Revision-Date: 2020-08-10 00:27\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -578,6 +578,9 @@ msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
+msgstr ""
+
+msgid "Catalan"
 msgstr ""
 
 msgid "Esperanto"
@@ -1328,4 +1331,7 @@ msgstr "Kan pallet niet verwijderen, omdat het niet bestaat!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Er is een fout opgetreden bij het verwijderen van het palet. Foutcode: %s"
+
+msgid "and"
+msgstr ""
 
