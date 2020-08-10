@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-10 00:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,6 +580,9 @@ msgstr "Letón"
 
 msgid "Spanish"
 msgstr "Español"
+
+msgid "Catalan"
+msgstr ""
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -1358,4 +1361,7 @@ msgstr "¡No se puede quitar la paleta, porque no existe!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "¡Se ha producido un error al eliminar la paleta! Código de error: %s"
+
+msgid "and"
+msgstr ""
 
