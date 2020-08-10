@@ -26,7 +26,6 @@ var current_project_index := 0 setget project_changed
 # that direction has been pressed.
 var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
-var loaded_locales : Array
 # Canvas related stuff
 var layers_changed_skip := false
 
