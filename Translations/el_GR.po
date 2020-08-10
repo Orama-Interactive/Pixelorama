@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-10 00:28\n"
+"PO-Revision-Date: 2020-08-10 00:39\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -582,7 +582,7 @@ msgid "Spanish"
 msgstr "Ισπανικά"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Καταλανικά"
 
 msgid "Esperanto"
 msgstr "Εσπεράντο"
@@ -1363,5 +1363,5 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Παρουσιάστηκε σφάλμα κατά την αφαίρεση της παλέτας. Κωδικός σφάλματος: %s"
 
 msgid "and"
-msgstr ""
+msgstr "και"
 
