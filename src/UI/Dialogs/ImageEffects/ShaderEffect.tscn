@@ -32,58 +32,46 @@ margin_bottom = 31.0
 text = "This is an experimental feature and may not be included in the stable version"
 autowrap = true
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer"]
+[node name="Preview" type="TextureRect" parent="VBoxContainer"]
+material = SubResource( 1 )
 margin_top = 35.0
 margin_right = 384.0
-margin_bottom = 36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="VBoxContainer/ViewportContainer"]
-size = Vector2( 1, 1 )
-transparent_bg = true
-handle_input_locally = false
-disable_3d = true
-usage = 0
-render_target_update_mode = 0
-gui_disable_input = true
-
-[node name="Preview" type="TextureRect" parent="VBoxContainer/ViewportContainer/Viewport"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_bottom = 235.0
+rect_min_size = Vector2( 200, 200 )
+expand = true
+stretch_mode = 6
 
 [node name="ChooseShader" type="Button" parent="VBoxContainer"]
-margin_top = 40.0
+margin_top = 239.0
 margin_right = 384.0
-margin_bottom = 60.0
+margin_bottom = 259.0
 mouse_default_cursor_shape = 2
 text = "Choose Shader"
 
 [node name="ShaderLoadedLabel" type="Label" parent="VBoxContainer"]
-margin_top = 64.0
+margin_top = 263.0
 margin_right = 384.0
-margin_bottom = 78.0
+margin_bottom = 277.0
 text = "No shader loaded!"
 autowrap = true
 
 [node name="ShaderParams" type="VBoxContainer" parent="VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_top = 281.0
+margin_right = 384.0
+margin_bottom = 281.0
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
-margin_bottom = 264.0
+margin_bottom = 289.0
 window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*shader" )
-current_dir = "/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "/Users/Overloaded/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
+current_dir = "/Users/manos/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
+current_path = "/Users/manos/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
 [connection signal="about_to_show" from="." to="." method="_on_ShaderEffect_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ShaderEffect_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_ShaderEffect_popup_hide"]
