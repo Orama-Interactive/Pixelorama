@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-13 07:40\n"
+"PO-Revision-Date: 2020-08-13 08:05\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -205,31 +205,31 @@ msgid "New pattern"
 msgstr "Yeni desen"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Yatay çerçeveler:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Dikey çerçeveler:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Fırça tipi:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Dosya fırçası"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Proje dosyası"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Rastgele fırça"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Görüntüyü .pxo olarak kaydet"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Görüntüyü .png olarak dışa aktar"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Görüntüyü Dışa Aktar"
 
 msgid "File Exists, Overwrite?"
 msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
@@ -238,10 +238,10 @@ msgid "File %s already exists. Overwrite?"
 msgstr "%s dosyası zaten var. Üzerine yazılsın mı?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Dosya yolu ve dosya adı geçerli değil!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Dışa aktarma işlemi devam ediyor..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -258,7 +258,7 @@ msgid "All Frames"
 msgstr "Tüm Kareler"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Hareketli sayfalar"
 
 msgid "Animation"
 msgstr "Animasyon"
@@ -270,7 +270,7 @@ msgid "Frame:"
 msgstr "Kare:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Oryantasyon:"
 
 msgid "Browse"
 msgstr "Gözat"
@@ -279,7 +279,7 @@ msgid "Resize:"
 msgstr "Boyutlandır:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Dışarı Aktarmayı İptal Et"
 
 msgid "Alert!"
 msgstr "Uyarı!"
@@ -288,7 +288,7 @@ msgid "Select Current Folder"
 msgstr "Geçerli Klasörü Seç"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Bir dosya aç"
 
 msgid "All frames as multiple files"
 msgstr ""
