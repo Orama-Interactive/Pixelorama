@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-13 09:59\n"
+"PO-Revision-Date: 2020-08-13 10:11\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -759,10 +759,10 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Kılavuz çizgisi"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Kılavuz çizgi genişliği:"
 
 msgid "Sets how far apart are vertical lines of the grid"
 msgstr ""
