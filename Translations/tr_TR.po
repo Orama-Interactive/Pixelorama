@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-13 07:34\n"
+"PO-Revision-Date: 2020-08-13 07:40\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -151,7 +151,7 @@ msgid "Tile Mode"
 msgstr "Karo Modu"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Kılavuz çizgilerini göster"
 
 msgid "Show Rulers"
 msgstr "Cetveli Göster"
@@ -163,34 +163,34 @@ msgid "Show Animation Timeline"
 msgstr "Animasyon Çizelgesini Göster"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen Modu"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Tam Ekran Modu"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Renk ile doldur:"
 
 msgid "Open a File"
 msgstr "Dosya Aç"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Dosya(ları) aç"
 
 msgid "Import Options"
 msgstr "İçeri Aktarma Ayarları"
 
 msgid "Import as:"
-msgstr ""
+msgstr "İçe farklı aktar:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Yeni sekme"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Hareketli sayfa (yeni sekme)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Yeni çerçeve"
 
 msgid "New layer"
 msgstr "Yeni katman"
@@ -202,7 +202,7 @@ msgid "New brush"
 msgstr "Yeni Fırça"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Yeni desen"
 
 msgid "Horizontal frames:"
 msgstr ""
