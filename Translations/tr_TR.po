@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-10 00:28\n"
+"PO-Revision-Date: 2020-08-13 07:06\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -28,16 +28,16 @@ msgid "Please Confirm..."
 msgstr "Lütfen Onaylayın..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Dosya Adı:"
 
 msgid "Image Size"
 msgstr "Resim Boyutu"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Tuval Boyutu"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Çerçeve Boyutu"
 
 msgid "Width:"
 msgstr "Genişlik:"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Yükseklik:"
 
 msgid "Center"
-msgstr ""
+msgstr "Merkez"
 
 msgid "File"
 msgstr "Dosya"
