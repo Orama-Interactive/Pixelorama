@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-13 07:06\n"
+"PO-Revision-Date: 2020-08-13 07:34\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Farklı Kaydet..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD sıkıştırması kullan"
 
 msgid "Import"
 msgstr "İçe aktar"
@@ -97,10 +97,10 @@ msgid "Export as..."
 msgstr "Dışa farklı aktar..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "PNG' yi dışa aktar..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "PNG'yi dışa farklı aktar..."
 
 msgid "Quit"
 msgstr "Çıkış"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "İleri Al"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopyala"
 
 msgid "Paste"
-msgstr ""
+msgstr "Yapıştır"
 
 msgid "Delete"
 msgstr "Sil"
@@ -127,7 +127,7 @@ msgid "Crop Image"
 msgstr "Resmi Kes"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Tuvali yeniden boyutlandır"
 
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Seçimi Temizle"
 
 msgid "Flip"
-msgstr ""
+msgstr "Döndür"
 
 msgid "Flip Horizontal"
 msgstr "Yatay Döndür"
@@ -148,7 +148,7 @@ msgid "Preferences"
 msgstr "Tercihler"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Karo Modu"
 
 msgid "Show Grid"
 msgstr ""
