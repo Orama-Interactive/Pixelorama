@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-13 09:51\n"
+"PO-Revision-Date: 2020-08-13 09:59\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -717,43 +717,43 @@ msgstr "Sağ ve sol renklerini değiş\n"
 "(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Renkleri ilk ayarlara döndür (sol için siyah, sağ için beyaz)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Sol araç"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Sağ araç"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Sol piksel göstergesi"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Çizim yaparken sol fare piksel göstergesini ya da tuval üzerinde ki fırçayı göster"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Sağ piksel göstergesi"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Çizim yaparken sağ fare piksel göstergesini ya da tuval üzerinde ki fırçayı göster"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Sol araç ikonunu göster"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Tuval üzerinde ki göstergenin yanında seçilen sol araç ikonunu göster"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Sağ araç ikonunu göster"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Tuval üzerinde ki göstergenin yanında seçilen sağ araç ikonunu göster"
 
 msgid "Guides"
-msgstr ""
+msgstr "Kılavuzlar"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Kılavuzların rengi:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
