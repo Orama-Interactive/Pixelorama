@@ -45,28 +45,14 @@ func _on_Theme_pressed(index : int) -> void:
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
 	var main_theme : Theme = themes[ID]
-	var top_menu_style
-	var ruler_style
-	if ID == 0: # Dark Theme
+	if ID == 0 or ID == 1: # Dark or Gray Theme
 		Global.theme_type = Global.Theme_Types.DARK
-		top_menu_style = preload("res://assets/themes/dark/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
-	elif ID == 1: # Gray Theme
-		Global.theme_type = Global.Theme_Types.DARK
-		top_menu_style = preload("res://assets/themes/gray/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = Global.Theme_Types.BLUE
-		top_menu_style = preload("res://assets/themes/blue/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/blue/ruler_style.tres")
 	elif ID == 3: # Caramel Theme
 		Global.theme_type = Global.Theme_Types.CARAMEL
-		top_menu_style = preload("res://assets/themes/caramel/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/caramel/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.Theme_Types.LIGHT
-		top_menu_style = preload("res://assets/themes/light/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/light/ruler_style.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
@@ -76,6 +62,8 @@ func change_theme(ID : int) -> void:
 	var layer_button_panel_container : PanelContainer = Global.find_node_by_name(Global.animation_timeline, "LayerButtonPanelContainer")
 	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = default_clear_color
 
+	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
+	var ruler_style = main_theme.get_stylebox("Ruler", "Button")
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://src/UI/Rulers/HorizontalRuler.gd" type="Script" id=6]
 [ext_resource path="res://src/CameraMovement.gd" type="Script" id=7]
 [ext_resource path="res://src/SelectionRectangle.gd" type="Script" id=8]
-[ext_resource path="res://assets/themes/dark/ruler_style.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/graphics/dark_themes/tools/bucket.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/dark_themes/tools/colorpicker.png" type="Texture" id=11]
 [ext_resource path="res://assets/graphics/dark_themes/tools/rectselect.png" type="Texture" id=12]
@@ -220,20 +219,16 @@ script = ExtResource( 3 )
 [node name="HorizontalRuler" type="Button" parent="CanvasAndTimeline/ViewportAndRulers"]
 margin_top = 38.0
 margin_right = 902.0
-margin_bottom = 54.0
+margin_bottom = 58.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
 mouse_default_cursor_shape = 14
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 9 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/normal = ExtResource( 9 )
 action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 6 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasAndTimeline/ViewportAndRulers"]
-margin_top = 54.0
+margin_top = 58.0
 margin_right = 902.0
 margin_bottom = 480.0
 size_flags_vertical = 3
@@ -241,23 +236,19 @@ custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer"]
 margin_right = 890.0
-margin_bottom = 426.0
+margin_bottom = 422.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 426.0
+margin_bottom = 422.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 9 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/normal = ExtResource( 9 )
 action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 4 )
@@ -265,7 +256,7 @@ script = ExtResource( 4 )
 [node name="ViewportContainer" type="ViewportContainer" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
 margin_right = 890.0
-margin_bottom = 426.0
+margin_bottom = 422.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -274,7 +265,7 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 874, 426 )
+size = Vector2( 874, 422 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -300,13 +291,13 @@ script = ExtResource( 8 )
 [node name="ViewportContainer2" type="ViewportContainer" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer"]
 margin_left = 902.0
 margin_right = 902.0
-margin_bottom = 426.0
+margin_bottom = 422.0
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 426 )
+size = Vector2( 0, 422 )
 handle_input_locally = false
 render_target_update_mode = 3
 

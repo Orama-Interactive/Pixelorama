@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=38 format=2]
+[gd_resource type="Theme" load_steps=40 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/themes/light/icons/grabber.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://assets/themes/light/icons/hsplit.png" type="Texture" id=4]
 [ext_resource path="res://assets/themes/light/icons/vsplit.png" type="Texture" id=5]
 [ext_resource path="res://assets/themes/light/icons/spinbox.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.419608, 0.403922, 0.337255, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -189,6 +192,9 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.709804, 0.517647, 0.188235, 1 )
+
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0.854902, 0.74902, 0.494118, 1 )
 
@@ -302,6 +308,7 @@ Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
 Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
+Button/styles/Ruler = SubResource( 33 )
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = null
 Button/styles/hover = SubResource( 2 )
@@ -439,6 +446,7 @@ OptionButton/styles/focus = null
 OptionButton/styles/hover = null
 OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
+Panel/styles/TopMenu = SubResource( 32 )
 Panel/styles/panel = SubResource( 20 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
