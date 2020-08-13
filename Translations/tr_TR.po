@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-13 08:05\n"
+"PO-Revision-Date: 2020-08-13 09:51\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -291,43 +291,43 @@ msgid "Open a Directory"
 msgstr "Bir dosya aç"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Çoklu dosya olarak bütün çerçeveler"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Tek dosya animasyon olarak bütün çerçeveler"
 
 msgid "Background:"
 msgstr "Arka plan:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Dosya yolu:"
 
 msgid "Forward"
 msgstr "İleri"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Geriye doğru"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Sütunlar"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Sütunlar:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Satırlar"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Sıralar:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Yol:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Dizinler & Dosyalar:"
 
 msgid "Create Folder"
 msgstr "Yeni Klasör"
@@ -336,13 +336,13 @@ msgid "File:"
 msgstr "Dosya:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "İnterpolasyon:"
 
 msgid "Nearest"
 msgstr "En Yakın"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Çift doğrusal"
 
 msgid "Cubic"
 msgstr "Kübik"
@@ -686,7 +686,10 @@ msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Silgi\n\n"
+"Sol tık için %s\n"
+"Sağ tık için %s\n\n"
+"Bir çizgi için basılı tutun %s"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
@@ -698,17 +701,20 @@ msgstr "Kova\n\n"
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Aydınlatma/Karartma\n\n"
+"Sol tık için %s\n"
+"Sağ tık için %s"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Sol araç için bir renk seç"
 
 msgid "Choose a color for the right tool"
 msgstr "Sağ araç için renk seç"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Sağ ve sol renklerini değiş\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
