@@ -2,11 +2,11 @@ extends Node
 
 
 onready var themes := [
-	preload("res://assets/themes/dark/theme.tres"),
-	preload("res://assets/themes/gray/theme.tres"),
-	preload("res://assets/themes/blue/theme.tres"),
-	preload("res://assets/themes/caramel/theme.tres"),
-	preload("res://assets/themes/light/theme.tres"),
+	[preload("res://assets/themes/dark/theme.tres"), "Dark"],
+	[preload("res://assets/themes/gray/theme.tres"), "Gray"],
+	[preload("res://assets/themes/blue/theme.tres"), "Blue"],
+	[preload("res://assets/themes/caramel/theme.tres"), "Caramel"],
+	[preload("res://assets/themes/light/theme.tres"), "Light"],
 ]
 onready var buttons_container : BoxContainer = $ThemeButtons
 onready var colors_container : BoxContainer = $ThemeColors
@@ -14,13 +14,19 @@ onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColo
 
 
 func _ready() -> void:
-	for child in buttons_container.get_children():
-		if child is Button:
-			child.connect("pressed", self, "_on_Theme_pressed", [child.get_index()])
+	var button_group = ButtonGroup.new()
+	for theme in themes:
+		var button := CheckBox.new()
+		button.name = theme[1]
+		button.text = theme[1]
+		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		button.group = button_group
+		buttons_container.add_child(button)
+		button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
 
 		var theme_color_preview : ColorRect = theme_color_preview_scene.instance()
-		var color1 = themes[child.get_index()].get_stylebox("panel", "Panel").bg_color
-		var color2 = themes[child.get_index()].get_stylebox("panel", "PanelContainer").bg_color
+		var color1 = theme[0].get_stylebox("panel", "Panel").bg_color
+		var color2 = theme[0].get_stylebox("panel", "PanelContainer").bg_color
 		theme_color_preview.get_child(0).color = color1
 		theme_color_preview.get_child(1).color = color2
 		colors_container.add_child(theme_color_preview)
@@ -44,7 +50,7 @@ func _on_Theme_pressed(index : int) -> void:
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
-	var main_theme : Theme = themes[ID]
+	var main_theme : Theme = themes[ID][0]
 	if ID == 0 or ID == 1: # Dark or Gray Theme
 		Global.theme_type = Global.Theme_Types.DARK
 	elif ID == 2: # Godot's Theme

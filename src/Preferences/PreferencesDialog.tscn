@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
@@ -6,8 +6,6 @@
 [ext_resource path="res://src/Preferences/HandleShortcuts.gd" type="Script" id=6]
 
 [sub_resource type="ButtonGroup" id=1]
-
-[sub_resource type="ButtonGroup" id=2]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
@@ -123,45 +121,6 @@ script = ExtResource( 5 )
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_right = 80.0
 margin_bottom = 136.0
-
-[node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_right = 80.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Dark"
-
-[node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 28.0
-margin_right = 80.0
-margin_bottom = 52.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Gray"
-
-[node name="Blue Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 56.0
-margin_right = 80.0
-margin_bottom = 80.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Blue"
-
-[node name="Caramel Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 84.0
-margin_right = 80.0
-margin_bottom = 108.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Caramel"
-
-[node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 112.0
-margin_right = 80.0
-margin_bottom = 136.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Light"
 
 [node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_left = 84.0
