@@ -39,7 +39,6 @@ func _on_ResizeCanvas_about_to_show() -> void:
 		layer_i += 1
 	image.unlock()
 
-	preview_rect.get_node("TransparentChecker").rect_size = preview_rect.rect_size
 	update_preview()
 
 
@@ -80,6 +79,7 @@ func _on_CenterButton_pressed() -> void:
 
 
 func update_preview() -> void:
+	# preview_image is the same as image but offsetted
 	var preview_image := Image.new()
 	preview_image.create(width, height, false, Image.FORMAT_RGBA8)
 	preview_image.blend_rect(image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2(offset_x, offset_y))

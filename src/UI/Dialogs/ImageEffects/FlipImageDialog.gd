@@ -24,6 +24,7 @@ func _ready() -> void:
 func _on_FlipImageDialog_about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	_on_SelectionCheckBox_toggled(selection_checkbox.pressed)
+	update_transparent_background_size()
 
 
 func _on_FlipImageDialog_confirmed() -> void:
@@ -118,6 +119,19 @@ func flip_image(image : Image, _pixels : Array, project : Project = Global.curre
 		image.blit_rect_mask(selected_image, selected_image, Rect2(Vector2.ZERO, selected_image.get_size()), Vector2.ZERO)
 
 
+func update_transparent_background_size() -> void:
+	var image_size_y = preview.rect_size.y
+	var image_size_x = preview.rect_size.x
+	if preview_image.get_size().x > preview_image.get_size().y:
+		var scale_ratio = preview_image.get_size().x / image_size_x
+		image_size_y = preview_image.get_size().y / scale_ratio
+	else:
+		var scale_ratio = preview_image.get_size().y / image_size_y
+		image_size_x = preview_image.get_size().x / scale_ratio
+
+	preview.get_node("TransparentChecker").rect_size.x = image_size_x
+	preview.get_node("TransparentChecker").rect_size.y = image_size_y
+
+
 func _on_FlipImageDialog_popup_hide() -> void:
 	Global.dialog_open(false)
-

@@ -111,6 +111,7 @@ suffix = "px"
 margin_top = 130.0
 margin_right = 54.0
 margin_bottom = 150.0
+mouse_default_cursor_shape = 2
 text = "Center"
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]

@@ -27,8 +27,6 @@ margin_bottom = 392.0
 [node name="RotateImage" parent="." instance=ExtResource( 9 )]
 
 [node name="FlipImageDialog" parent="." instance=ExtResource( 1 )]
-margin_right = 283.0
-margin_bottom = 300.0
 
 [node name="InvertColorsDialog" parent="." instance=ExtResource( 2 )]
 
