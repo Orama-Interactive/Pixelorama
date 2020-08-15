@@ -264,34 +264,53 @@ func draw_grid(grid_type : int) -> void:
 
 	# Doesn't work properly yet
 	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
+		var approx_30_degrees = 26.565
+		var approx_60_degrees = 90 - 26.565
 		var prev_x := 0
 		var prev_y := 0
+
+		# Draw lines starting from the left side, facing down to the right
 		for y in range(0, size.y + 1, Global.grid_width):
-			var yy1 = y + size.y * tan(deg2rad(26.565)) # 30 degrees
+			var yy1 = y + size.y * tan(deg2rad(approx_30_degrees))
+			# End points touch the right side of the canvas, but not the entire of it
 			if yy1 <= (size.y + 0.01):
 				draw_line(Vector2(location.x, y), Vector2(size.x, yy1),Global.grid_color)
+			# End points touch the bottom side of the canvas
 			else:
-				var xx1 = (size.x - y) * tan(deg2rad(90 - 26.565)) # 60 degrees
+				var xx1 = (size.x - y) * tan(deg2rad(approx_60_degrees))
 				draw_line(Vector2(location.x, y), Vector2(xx1, size.y), Global.grid_color)
+
+		# Draw lines starting from the left side, facing up to the right
 		for y in range(0, size.y + 1, Global.grid_height):
-			var xx2 = y * tan(deg2rad(90 - 26.565)) # 60 degrees
+			var xx2 = y * tan(deg2rad(approx_60_degrees))
+
+			# End points touch the upper side of the canvas
 			if xx2 <= (size.x + 0.01):
 				draw_line(Vector2(location.x, y), Vector2(xx2, location.y), Global.grid_color)
 				prev_y = location.y
+
+			# End points touch the right side of the canvas, but not the entire of it
 			else:
 				var distance = (xx2 - prev_x) / 2
-				#var yy2 = (size.y - y) * tan(deg2rad(26.565)) # 30 degrees
+				#var yy2 = (size.y - y) * tan(deg2rad(approx_30_degrees))
 				var yy2 = prev_y + distance
 				draw_line(Vector2(location.x, y), Vector2(size.x, yy2), Global.grid_color)
 				prev_y = yy2
 
 			prev_x = xx2
 
+		# Draw lines from the top side, facing down to the right
+		# End points touch the right side of the canvas, but not the entire of it
+		# Problematic when size.y < size.x / 2
 		for x in range(0, size.x, Global.grid_width * 2):
 			if x == 0:
 				continue
-			var yy1 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
+			var yy1 = (size.x - x) * tan(deg2rad(approx_30_degrees))
 			draw_line(Vector2(x, location.y), Vector2(size.x, yy1), Global.grid_color)
+
+		# Draw lines from the bottom side, facing up to the right.
+		# End points touch the right side of the canvas, but not the entire of it
+		# Problematic when size.y < size.x / 2
 		for x in range(0, size.x, Global.grid_height * 2):
-			var yy2 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
+			var yy2 = (size.x - x) * tan(deg2rad(approx_30_degrees))
 			draw_line(Vector2(x, size.y), Vector2(size.x, size.y - yy2), Global.grid_color)
