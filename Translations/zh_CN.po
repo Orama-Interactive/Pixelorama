@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-10 00:51\n"
+"PO-Revision-Date: 2020-08-17 21:04\n"
 
 msgid "OK"
 msgstr "确定"
@@ -810,6 +810,18 @@ msgstr "检查器颜色 2："
 
 msgid "Second color of the transparent checker background"
 msgstr "透明检查器背景的第二个颜色"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
