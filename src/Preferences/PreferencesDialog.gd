@@ -23,6 +23,8 @@ var preferences = [
 	["checker_size", "Canvas/CheckerOptions/CheckerSizeValue", "value", Global.checker_size],
 	["checker_color_1", "Canvas/CheckerOptions/CheckerColor1", "color", Global.checker_color_1],
 	["checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color", Global.checker_color_2],
+	["checker_follow_movement", "Canvas/CheckerOptions/CheckerFollowMovement", "pressed", Global.checker_follow_movement],
+	["checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed", Global.checker_follow_scale],
 ]
 
 var selected_item := 0
@@ -116,7 +118,7 @@ func preference_update(prop : String) -> void:
 	if prop in ["grid_width", "grid_height", "grid_color"]:
 		Global.canvas.update()
 
-	if prop in ["checker_size", "checker_color_1", "checker_color_2"]:
+	if prop in ["checker_size", "checker_color_1", "checker_color_2", "checker_follow_movement", "checker_follow_scale"]:
 		Global.transparent_checker._ready()
 
 	if prop in ["guide_color"]:

@@ -9,3 +9,14 @@ func _ready() -> void:
 	material.set_shader_param("size", Global.checker_size)
 	material.set_shader_param("color1", Global.checker_color_1)
 	material.set_shader_param("color2", Global.checker_color_2)
+	material.set_shader_param("follow_movement", Global.checker_follow_movement)
+	material.set_shader_param("follow_scale", Global.checker_follow_scale)
+
+
+func update_offset(offset : Vector2, scale : Vector2) -> void:
+	material.set_shader_param("offset", offset)
+	material.set_shader_param("scale", scale)
+
+
+func _on_TransparentChecker_resized():
+	material.set_shader_param("rect_size", rect_size)

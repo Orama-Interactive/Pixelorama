@@ -15,11 +15,7 @@ func _on_FitToFrame_pressed():
 
 
 func _on_100_pressed():
-	Global.camera.zoom = Vector2.ONE
-	Global.camera.offset = Global.current_project.size / 2
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
+	Global.camera.zoom_100()
 
 
 func get_config() -> Dictionary:
