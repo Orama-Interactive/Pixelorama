@@ -29,6 +29,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - Added extra options for most image effects. The user can now choose if the effects will affect the selection, the current cel, current frame, all frames or even all projects!
 - A play button has been added for playing the animation exclusively on the small canvas preview area. A zoom slider for the preview area has been added, too.
 - Added color previews next to the themes in Preferences.
+- Added options for the checkerboard background to follow camera movement and zoom level. ([#311](https://github.com/Orama-Interactive/Pixelorama/pull/311))
 
 ### Changed
 - The GDNative gif exporter addon has been replaced with a GDScript equivalent. This makes gif exporting possible in all currently supported platforms, and it also adds support for transparency. ([#295](https://github.com/Orama-Interactive/Pixelorama/pull/295))

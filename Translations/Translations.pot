@@ -780,6 +780,18 @@ msgstr ""
 msgid "Second color of the transparent checker background"
 msgstr ""
 
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr ""
 

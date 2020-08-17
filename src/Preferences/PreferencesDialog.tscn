@@ -368,7 +368,7 @@ margin_left = 114.0
 margin_top = -186.0
 margin_right = 161.0
 margin_bottom = -162.0
-hint_tooltip = "The transparent checker follow the movement of canvas "
+hint_tooltip = "The transparent checker follow the movement of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
@@ -384,7 +384,7 @@ margin_left = 114.0
 margin_top = -186.0
 margin_right = 161.0
 margin_bottom = -162.0
-hint_tooltip = "The transparent checker follow the zoom level of canvas "
+hint_tooltip = "The transparent checker follow the zoom level of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
