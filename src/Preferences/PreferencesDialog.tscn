@@ -356,6 +356,38 @@ hint_tooltip = "Second color of the transparent checker background"
 mouse_default_cursor_shape = 2
 color = Color( 0.341176, 0.34902, 0.341176, 1 )
 
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_top = -181.0
+margin_right = 110.0
+margin_bottom = -167.0
+rect_min_size = Vector2( 110, 0 )
+text = "Follow Canvas Movement"
+
+[node name="CheckerFollowMovement" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_left = 114.0
+margin_top = -186.0
+margin_right = 161.0
+margin_bottom = -162.0
+hint_tooltip = "The transparent checker follow the movement of canvas "
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_top = -181.0
+margin_right = 110.0
+margin_bottom = -167.0
+rect_min_size = Vector2( 110, 0 )
+text = "Follow Canvas Zoom Level"
+
+[node name="CheckerFollowScale" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_left = 114.0
+margin_top = -186.0
+margin_right = 161.0
+margin_bottom = -162.0
+hint_tooltip = "The transparent checker follow the zoom level of canvas "
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 240.0
