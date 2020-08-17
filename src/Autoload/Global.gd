@@ -310,6 +310,8 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
+			Global.canvas.grid.isometric_polylines.clear()
+			Global.canvas.grid.update()
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
@@ -338,6 +340,8 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
+			Global.canvas.grid.isometric_polylines.clear()
+			Global.canvas.grid.update()
 
 	elif "Frame" in action_name:
 		if project.frames.size() == 1: # Stop animating

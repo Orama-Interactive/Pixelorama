@@ -116,7 +116,8 @@ func preference_update(prop : String) -> void:
 			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 	if prop in ["grid_width", "grid_height", "grid_color"]:
-		Global.canvas.update()
+		Global.canvas.grid.isometric_polylines.clear()
+		Global.canvas.grid.update()
 
 	if prop in ["checker_size", "checker_color_1", "checker_color_2", "checker_follow_movement", "checker_follow_scale"]:
 		Global.transparent_checker._ready()

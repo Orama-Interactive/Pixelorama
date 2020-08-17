@@ -251,6 +251,7 @@ func toggle_tile_mode() -> void:
 func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(1, Global.draw_grid)
+	Global.canvas.grid.update()
 
 
 func toggle_show_rulers() -> void:
