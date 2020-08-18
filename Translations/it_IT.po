@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-17 21:04\n"
+"PO-Revision-Date: 2020-08-18 00:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -812,16 +812,16 @@ msgid "Second color of the transparent checker background"
 msgstr "Secondo colore dello sfondo trasparente del checker"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Segui Il Movimento Tela"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Il controllore trasparente segue il movimento della tela"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Segui il Livello di Zoom della tela"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Il correttore trasparente segue il livello di zoom della tela"
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
