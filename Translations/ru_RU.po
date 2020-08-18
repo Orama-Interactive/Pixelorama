@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-08-17 21:04\n"
+"PO-Revision-Date: 2020-08-18 10:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -812,16 +812,16 @@ msgid "Second color of the transparent checker background"
 msgstr "Второй цвет клеток прозрачного фона"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Следовать движению холста"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Клеточки прозрачности следуют движению холста"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Следовать масштабу холста"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Клеточки прозрачности следуют увеличению/уменьшению холста"
 
 msgid "Only custom preset can be modified"
 msgstr "Только пользовательские предустановки могут быть изменены"
