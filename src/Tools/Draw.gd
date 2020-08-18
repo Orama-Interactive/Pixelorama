@@ -308,7 +308,7 @@ func draw_indicator() -> void:
 
 
 func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> void:
-	var canvas = Global.canvas
+	var canvas = Global.canvas.indicators
 	if _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM] and not _draw_line:
 		position -= (_brush_image.get_size() / 2).floor()
 		position -= offset

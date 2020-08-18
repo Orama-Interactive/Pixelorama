@@ -10,6 +10,7 @@ var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
 
 onready var grid = $Grid
+onready var indicators = $Indicators
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,10 +44,6 @@ func _draw() -> void:
 				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
 				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y), modulate_color) # Right
 				draw_texture(current_cels[i].image_texture, location + size, modulate_color) # Down right
-
-	# Draw rectangle to indicate the pixel currently being hovered on
-	if Global.has_focus and Global.can_draw:
-		Tools.draw_indicator()
 
 
 func _input(event : InputEvent) -> void:
