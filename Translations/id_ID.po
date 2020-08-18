@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-08-17 21:05\n"
+"PO-Revision-Date: 2020-08-18 08:37\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Hapus Pilihan"
 
 msgid "Flip"
-msgstr ""
+msgstr "Balik"
 
 msgid "Flip Horizontal"
 msgstr "Balikkan Horizontal"
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr "Mode Zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Mode Layar Penuh"
 
 msgid "Fill with color:"
 msgstr "Isi dengan warna:"
@@ -211,13 +211,13 @@ msgid "Vertical frames:"
 msgstr "Frame vertikal:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tipe kuas:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Kuas file"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Kuas proyek"
 
 msgid "Random brush"
 msgstr ""
