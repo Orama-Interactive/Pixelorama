@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-17 21:04\n"
+"PO-Revision-Date: 2020-08-18 05:52\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -348,13 +348,13 @@ msgid "Cubic"
 msgstr "Kübik"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Üç çizgili"
 
 msgid "General"
 msgstr "Genel"
 
 msgid "Startup"
-msgstr ""
+msgstr "Başlamak"
 
 msgid "Language"
 msgstr "Dil"
@@ -363,22 +363,22 @@ msgid "Themes"
 msgstr "Temalar"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Tuval"
 
 msgid "Shortcuts"
 msgstr "Kısayollar"
 
 msgid "Backup"
-msgstr ""
+msgstr "Yedekleme"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Göstergeler"
 
 msgid "On"
-msgstr ""
+msgstr "Açık"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Varsayılanları yükle"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -390,7 +390,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Hiç biri"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
@@ -465,16 +465,16 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Tür:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Açı:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Renk Tonu"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Renk doygunluğu"
 
 msgid "Value"
 msgstr "Değer"
@@ -483,7 +483,7 @@ msgid "Apply"
 msgstr "Uygula"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Köşegen"
 
 msgid "Place inside image"
 msgstr ""
@@ -492,22 +492,22 @@ msgid "Thickness:"
 msgstr "Kalınlık:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Renk:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Adımlar:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Yukarıdan aşağıya"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Aşağıdan Yukarıya"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Soldan Sağa"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Sağdan Sola"
 
 msgid "View Splash Screen"
 msgstr "Açılış Ekranını Göster"
@@ -582,7 +582,7 @@ msgid "Spanish"
 msgstr "İspanyolca"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Katalanca"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -606,7 +606,7 @@ msgid "Korean"
 msgstr "Korece"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Macarca"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
