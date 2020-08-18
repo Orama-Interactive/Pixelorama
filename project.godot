@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Canvas",
 "language": "GDScript",
-"path": "res://src/Canvas.gd"
+"path": "res://src/UI/Canvas/Canvas.gd"
 }, {
 "base": "Reference",
 "class": "Cel",
@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
-"path": "res://src/UI/Rulers/Guide.gd"
+"path": "res://src/UI/Canvas/Rulers/Guide.gd"
 }, {
 "base": "Reference",
 "class": "Layer",
@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "Guide",
 "class": "SymmetryGuide",
 "language": "GDScript",
-"path": "res://src/UI/Rulers/SymmetryGuide.gd"
+"path": "res://src/UI/Canvas/Rulers/SymmetryGuide.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",

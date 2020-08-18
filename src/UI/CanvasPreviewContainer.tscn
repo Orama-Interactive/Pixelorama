@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/UI/CanvasPreview.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.gd" type="Script" id=3]
-[ext_resource path="res://src/CameraMovement.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/Canvas/CameraMovement.gd" type="Script" id=4]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=5]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/play.png" type="Texture" id=7]
 
@@ -12,6 +12,11 @@ shader = ExtResource( 5 )
 shader_param/size = 10.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
 
 [node name="CanvasPreviewContainer" type="HBoxContainer"]
 margin_right = 332.0
@@ -32,12 +37,26 @@ margin_top = 7.0
 margin_right = 27.0
 margin_bottom = 157.0
 
+[node name="Label" type="Label" parent="SettingsContainer/VBoxContainer"]
+margin_right = 20.0
+margin_bottom = 14.0
+text = "+"
+align = 1
+
 [node name="PreviewZoomSlider" type="VSlider" parent="SettingsContainer/VBoxContainer"]
+margin_top = 18.0
 margin_right = 16.0
-margin_bottom = 126.0
+margin_bottom = 108.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 3
 step = 0.01
+
+[node name="Label2" type="Label" parent="SettingsContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 20.0
+margin_bottom = 126.0
+text = "-"
+align = 1
 
 [node name="PlayButton" type="Button" parent="SettingsContainer/VBoxContainer" groups=[
 "UIButtons",
