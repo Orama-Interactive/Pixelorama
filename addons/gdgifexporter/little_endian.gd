@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 
 
 func int_to_2bytes(value: int) -> PoolByteArray:

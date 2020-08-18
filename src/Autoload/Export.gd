@@ -240,7 +240,7 @@ func export_gif(args: Dictionary) -> void:
 	Global.notification_label("File(s) exported")
 
 
-func write_frame_to_gif(image: Image, wait_time: float, exporter: Node, export_dialog: Node) -> void:
+func write_frame_to_gif(image: Image, wait_time: float, exporter: Reference, export_dialog: Node) -> void:
 	exporter.write_frame(image, wait_time, quantization)
 	increase_export_progress(export_dialog)
 

@@ -73,7 +73,7 @@ func cursor_move(position : Vector2) -> void:
 
 func draw_indicator() -> void:
 	var rect := Rect2(_cursor, Vector2.ONE)
-	Global.canvas.draw_rect(rect, Color.blue, false)
+	Global.canvas.indicators.draw_rect(rect, Color.blue, false)
 
 
 func _get_draw_rect() -> Rect2:

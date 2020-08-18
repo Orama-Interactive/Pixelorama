@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 
 
 class LSB_LZWBitPacker:

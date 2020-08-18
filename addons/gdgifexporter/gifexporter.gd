@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 
 
 var little_endian = preload('./little_endian.gd').new()
