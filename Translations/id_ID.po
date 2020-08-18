@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-08-18 08:37\n"
+"PO-Revision-Date: 2020-08-18 08:46\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -220,7 +220,7 @@ msgid "Project brush"
 msgstr "Kuas proyek"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Kuas acak"
 
 msgid "Save Sprite as .pxo"
 msgstr "Simpan \"sprite\" dengan .pxo"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Folder tidak valid"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Ekspor sedang berlangsung..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -354,7 +354,7 @@ msgid "General"
 msgstr "Umum"
 
 msgid "Startup"
-msgstr ""
+msgstr "Memulai"
 
 msgid "Language"
 msgstr "Bahasa"
@@ -369,16 +369,16 @@ msgid "Shortcuts"
 msgstr "Pintasan"
 
 msgid "Backup"
-msgstr ""
+msgstr "Cadangan"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikator"
 
 msgid "On"
-msgstr ""
+msgstr "Nyala"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Kembalikan nilai awal"
 
 msgid "Smooth Zoom"
 msgstr "Zoom Halus"
@@ -420,25 +420,25 @@ msgid "Light"
 msgstr "Terang"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Hanya mempengaruhi pilihan"
 
 msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Frame sekarang"
 
 msgid "All frames"
-msgstr ""
+msgstr "Semua frame"
 
 msgid "All projects"
-msgstr ""
+msgstr "Semua proyek"
 
 msgid "Invert Colors"
 msgstr "Balikkan warna"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Ubah channel merah"
 
 msgid "Modify Green Channel"
 msgstr ""
