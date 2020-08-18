@@ -10,6 +10,7 @@ var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
 
 onready var grid = $Grid
+onready var tile_mode = $TileMode
 onready var indicators = $Indicators
 
 
@@ -24,8 +25,8 @@ func _ready() -> void:
 func _draw() -> void:
 	Global.second_viewport.get_child(0).get_node("CanvasPreview").update()
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
+
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
-	var size : Vector2 = Global.current_project.size
 	if Global.onion_skinning:
 		onion_skinning()
 
@@ -35,15 +36,7 @@ func _draw() -> void:
 		if Global.current_project.layers[i].visible: # if it's visible
 			draw_texture(current_cels[i].image_texture, location, modulate_color)
 
-			if Global.tile_mode:
-				draw_texture(current_cels[i].image_texture, Vector2(location.x, location.y + size.y), modulate_color) # Down
-				draw_texture(current_cels[i].image_texture, Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
-				draw_texture(current_cels[i].image_texture, Vector2(location.x - size.x, location.y), modulate_color) # Left
-				draw_texture(current_cels[i].image_texture, location - size, modulate_color) # Up left
-				draw_texture(current_cels[i].image_texture, Vector2(location.x, location.y - size.y), modulate_color) # Up
-				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
-				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y), modulate_color) # Right
-				draw_texture(current_cels[i].image_texture, location + size, modulate_color) # Down right
+	tile_mode.update()
 
 
 func _input(event : InputEvent) -> void:

@@ -28,9 +28,7 @@ var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
 # Canvas related stuff
 var layers_changed_skip := false
-
 var can_draw := false
-
 var has_focus := false
 var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture := ImageTexture.new()
@@ -40,6 +38,7 @@ var image_clipboard : Image
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
+var default_clear_color := Color.gray
 
 # Preferences
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE

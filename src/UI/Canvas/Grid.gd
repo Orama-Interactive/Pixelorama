@@ -23,8 +23,8 @@ func draw_grid(grid_type : int) -> void:
 	# Has problems when the canvas isn't a square, and with some grid sizes
 	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
 		var i := 0
-		for x in range(Global.grid_width, size.x, Global.grid_width * 2):
-			for y in range(0, size.y, Global.grid_width):
+		for x in range(Global.grid_width, size.x + 2, Global.grid_width * 2):
+			for y in range(0, size.y + 1, Global.grid_width):
 				draw_isometric_tile(i, Vector2(x, y))
 				i += 1
 

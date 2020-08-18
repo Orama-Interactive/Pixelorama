@@ -62,11 +62,11 @@ func change_theme(ID : int) -> void:
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
-	var default_clear_color : Color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
-	VisualServer.set_default_clear_color(Color(default_clear_color))
+	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
+	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
 	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
 	var layer_button_panel_container : PanelContainer = Global.find_node_by_name(Global.animation_timeline, "LayerButtonPanelContainer")
-	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = default_clear_color
+	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
 
 	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
 	var ruler_style = main_theme.get_stylebox("Ruler", "Button")
