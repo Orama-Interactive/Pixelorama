@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-08-18 08:46\n"
+"PO-Revision-Date: 2020-08-18 09:37\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -438,16 +438,16 @@ msgid "Invert Colors"
 msgstr "Balikkan warna"
 
 msgid "Modify Red Channel"
-msgstr "Ubah channel merah"
+msgstr "Ubah Channel Merah"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Ubah Channel Hijau"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Ubah Channel Biru"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Ubah Channel Alfa"
 
 msgid "Desaturation"
 msgstr "Desaturasi"
@@ -459,7 +459,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ganti Hue/Saturation/Value"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradien"
 
 msgid "Adjust HSV"
 msgstr "Atur HSV"
@@ -471,16 +471,16 @@ msgid "Angle:"
 msgstr "Sudut:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Warna"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Kejenuhan"
 
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Apply"
-msgstr ""
+msgstr "Terapkan"
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -492,7 +492,7 @@ msgid "Thickness:"
 msgstr "Ketebalan:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Warna:"
 
 msgid "Steps:"
 msgstr ""
