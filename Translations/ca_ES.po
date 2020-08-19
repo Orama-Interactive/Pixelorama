@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-08-17 21:04\n"
+"PO-Revision-Date: 2020-08-19 21:21\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -767,6 +767,21 @@ msgstr ""
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Ample de la quadrícula:"
 
@@ -777,6 +792,12 @@ msgid "Grid height:"
 msgstr "Alçada de la quadrícula:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
+msgstr ""
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
 
 msgid "Grid color:"
