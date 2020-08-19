@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-17 21:04\n"
+"PO-Revision-Date: 2020-08-19 21:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -772,6 +772,21 @@ msgstr "Un color de las guías de reglas que se muestran en el lienzo"
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Ancho de cuadrícula:"
 
@@ -783,6 +798,12 @@ msgstr "Altura de cuadrícula:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Establece cuán lejos están las líneas horizontales de la cuadrícula"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Color de cuadrícula:"
