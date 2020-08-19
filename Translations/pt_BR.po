@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-08-19 02:38\n"
+"PO-Revision-Date: 2020-08-19 21:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -772,6 +772,21 @@ msgstr "Cor das guias de régua exibidas na tela"
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Largura da grade:"
 
@@ -783,6 +798,12 @@ msgstr "Altura da grade:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Define a distância entre linhas horizontais da grade"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Cor da grade:"
