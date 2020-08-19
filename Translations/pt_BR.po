@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-08-17 21:04\n"
+"PO-Revision-Date: 2020-08-19 02:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Caminho do diretório ou nome do arquivo inválido!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Exportação em andamento..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -369,7 +369,7 @@ msgid "Shortcuts"
 msgstr "Atalhos"
 
 msgid "Backup"
-msgstr ""
+msgstr "Backup"
 
 msgid "Indicators"
 msgstr ""
