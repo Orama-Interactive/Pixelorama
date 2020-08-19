@@ -51,6 +51,7 @@ var default_fill_color := Color(0, 0, 0, 0)
 var grid_type = Grid_Types.CARTESIAN
 var grid_width := 1
 var grid_height := 1
+var grid_isometric_cell_size := 2
 var grid_color := Color.black
 var guide_color := Color.purple
 var checker_size := 10

@@ -216,6 +216,25 @@ custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
+[node name="TypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_right = 40.0
+margin_bottom = 14.0
+hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
+mouse_filter = 0
+text = "Grid type:"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="GridType" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_right = 29.0
+margin_bottom = 20.0
+hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
+mouse_default_cursor_shape = 2
+text = "Rectangular"
+items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null, "All", null, false, 2, null ]
+selected = 0
+
 [node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 5.0
 margin_right = 110.0
@@ -256,6 +275,26 @@ mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="IsometricCellSizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_right = 40.0
+margin_bottom = 14.0
+hint_tooltip = "Sets the size of the cells in an isometric grid"
+mouse_filter = 0
+text = "Isometric cell size:"
+
+[node name="IsometricCellSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 28.0
+margin_right = 110.0
+margin_bottom = 52.0
+hint_tooltip = "Sets the size of the cells in an isometric grid"
+mouse_default_cursor_shape = 2
+min_value = 2.0
+max_value = 16384.0
+value = 2.0
 rounded = true
 align = 2
 suffix = "px"

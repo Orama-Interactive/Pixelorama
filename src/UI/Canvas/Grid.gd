@@ -19,17 +19,15 @@ func draw_grid(grid_type : int) -> void:
 		for y in range(Global.grid_height, size.y, Global.grid_height):
 			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
 
-	# Doesn't work properly yet
-	# Has problems when the canvas isn't a square, and with some grid sizes
 	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
 		var i := 0
-		for x in range(Global.grid_width, size.x + 2, Global.grid_width * 2):
-			for y in range(0, size.y + 1, Global.grid_width):
+		for x in range(Global.grid_isometric_cell_size, size.x + 2, Global.grid_isometric_cell_size * 2):
+			for y in range(0, size.y + 1, Global.grid_isometric_cell_size):
 				draw_isometric_tile(i, Vector2(x, y))
 				i += 1
 
 
-func draw_isometric_tile(i : int, origin := Vector2.RIGHT) -> void:
+func draw_isometric_tile(i : int, origin := Vector2.RIGHT, cell_size : int = Global.grid_isometric_cell_size) -> void:
 	# A random value I found by trial and error, I have no idea why it "works"
 	var diff = 1.11754
 	var approx_30_degrees = deg2rad(26.565)
@@ -38,10 +36,10 @@ func draw_isometric_tile(i : int, origin := Vector2.RIGHT) -> void:
 	if i < isometric_polylines.size():
 		pool = isometric_polylines[i]
 	else:
-		var a = origin
-		var b = a + Vector2(cos(approx_30_degrees), sin(approx_30_degrees)) * Global.grid_width * diff
-		var c = a + Vector2.DOWN * Global.grid_width
-		var d = c - Vector2(cos(approx_30_degrees), sin(approx_30_degrees)) * Global.grid_width * diff
+		var a = origin - Vector2(0, 0.5)
+		var b = a + Vector2(cos(approx_30_degrees), sin(approx_30_degrees)) * cell_size * diff
+		var c = a + Vector2.DOWN * cell_size
+		var d = c - Vector2(cos(approx_30_degrees), sin(approx_30_degrees)) * cell_size * diff
 		pool.append(a)
 		pool.append(b)
 		pool.append(c)
