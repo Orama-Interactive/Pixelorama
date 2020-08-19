@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-19 02:28\n"
+"PO-Revision-Date: 2020-08-19 02:38\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "MIME-Version: 1.0\n"
@@ -56,15 +56,15 @@ msgstr "Cria atalhos no Menu Iniciar para ${APPNAME}."
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Cria um atalho na Área de Trabalho para ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Desinstala o ${APPNAME} ${APPVERSION} e remove todos os atalhos."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Remover arquivos de configuração para ${APPNAME}."
 
