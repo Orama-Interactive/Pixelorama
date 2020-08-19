@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-08-19 21:20\n"
+"PO-Revision-Date: 2020-08-19 21:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -773,19 +773,19 @@ msgid "Grid"
 msgstr "Сетка"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Тип сетки:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Переключает тип сетки между прямоугольной, изометрической или обеими сразу"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Прямоугольная"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Изометрическая"
 
 msgid "All"
-msgstr ""
+msgstr "Обе"
 
 msgid "Grid width:"
 msgstr "Ширина сетки:"
@@ -800,10 +800,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Размер изометрических ячеек:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Задает размер ячеек в изометрической сетке"
 
 msgid "Grid color:"
 msgstr "Цвет сетки:"
