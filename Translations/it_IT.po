@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-18 00:26\n"
+"PO-Revision-Date: 2020-08-19 21:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -772,6 +772,21 @@ msgstr "Un colore di guide per righello visualizzate sulla tela"
 msgid "Grid"
 msgstr "Griglia"
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Larghezza griglia:"
 
@@ -783,6 +798,12 @@ msgstr "Altezza della griglia:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Imposta quanto distano le linee orizzontali della griglia"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
