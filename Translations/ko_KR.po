@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 21:38\n"
+"PO-Revision-Date: 2020-08-20 21:48\n"
 
 msgid "OK"
 msgstr "예"
@@ -510,22 +510,22 @@ msgid "Right to Left"
 msgstr "오른쪽에서 왼쪽으로"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "시작 로고 화면 보기"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "온라인 문서"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "이슈 트래커"
 
 msgid "Changelog"
-msgstr ""
+msgstr "변경 사항"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Pixelorama에 대하여"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Orama Interactive가 개발함"
 
 msgid "Website"
 msgstr ""
@@ -696,29 +696,32 @@ msgstr ""
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "밝게/어둡게\n\n"
+"%s 은(는) 왼쪽 클릭\n"
+"%s 은(는) 오른쪽 클릭"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "왼쪽 툴의 색상 선택"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "오른쪽 툴의 색상 선택"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "좌/우 색상 변경\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "색상을 기본 상태로 복원 (블랙을 왼쪽, 화이트를 오른쪽)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "왼쪽 툴"
 
 msgid "Right tool"
-msgstr ""
+msgstr "오른쪽 툴"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "왼쪽 픽셀 인디케이터"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
