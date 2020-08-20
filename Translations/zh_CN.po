@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-19 21:20\n"
+"PO-Revision-Date: 2020-08-20 00:40\n"
 
 msgid "OK"
 msgstr "确定"
@@ -773,7 +773,7 @@ msgid "Grid"
 msgstr "网格"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "网格类型："
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
