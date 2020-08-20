@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 21:48\n"
+"PO-Revision-Date: 2020-08-20 21:59\n"
 
 msgid "OK"
 msgstr "예"
@@ -724,73 +724,73 @@ msgid "Left pixel indicator"
 msgstr "왼쪽 픽셀 인디케이터"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "그리고 있을 때 왼쪽 마우스 픽셀 인디케이터 또는 브러시를 캔버스에 표시하기"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "오른쪽 픽셀 인디케이터"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "그리고 있을 때 오른쪽 마우스 픽셀 인디케이터 또는 브러시를 캔버스에 표시하기"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "왼쪽 툴 아이콘 표시하기"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "커서 옆에 선택된 왼쪽 툴의 아이콘을 캔버스에 표시하기"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "오른쪽 툴 아이콘 표시하기"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "커서 옆에 선택된 오른쪽 툴의 아이콘을 캔버스에 표시하기"
 
 msgid "Guides"
-msgstr ""
+msgstr "안내선"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "안내선 색:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "캔버스에 표시되는 줄자 안내선의 색상"
 
 msgid "Grid"
-msgstr ""
+msgstr "격자"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "격자 타입:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "격자의 타입을 직사각형, 아이소메트릭 또는 둘 다로 설정"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "직사각형"
 
 msgid "Isometric"
-msgstr ""
+msgstr "아이소메트릭"
 
 msgid "All"
-msgstr ""
+msgstr "전체"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "격자 너비"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "격자의 수직 선들이 얼마나 떨어져 있는지 설정"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "격자 높이"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "격자의 수평 선들이 얼마나 떨어져 있는지 설정"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "아이소메트릭 셀 크기"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "아이소메트릭 격자의 셀 크기를 설정"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "격자 색:"
 
 msgid "A color of the grid"
 msgstr ""
