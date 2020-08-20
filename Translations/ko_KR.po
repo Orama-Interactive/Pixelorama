@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 22:08\n"
+"PO-Revision-Date: 2020-08-20 22:19\n"
 
 msgid "OK"
 msgstr "예"
@@ -528,49 +528,49 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive가 개발함"
 
 msgid "Website"
-msgstr ""
+msgstr "웹사이트"
 
 msgid "Donate"
-msgstr ""
+msgstr "후원하기"
 
 msgid "Developers"
-msgstr ""
+msgstr "개발자들"
 
 msgid "Contributors"
-msgstr ""
+msgstr "기여자들"
 
 msgid "Donors"
-msgstr ""
+msgstr "후원자들"
 
 msgid "Translators"
-msgstr ""
+msgstr "번역자들"
 
 msgid "English"
-msgstr ""
+msgstr "영어"
 
 msgid "Greek"
-msgstr ""
+msgstr "그리스어"
 
 msgid "French"
-msgstr ""
+msgstr "프랑스어"
 
 msgid "German"
-msgstr ""
+msgstr "독일어"
 
 msgid "Polish"
-msgstr ""
+msgstr "폴란드어"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "포르투갈어 (브라질)"
 
 msgid "Russian"
-msgstr ""
+msgstr "러시아어"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "중국어 간체"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "중국어 번체"
 
 msgid "Italian"
 msgstr ""
@@ -829,25 +829,25 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "투명 배경 체크 무늬가 캔버스 확대 레벨을 따라감"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "커스텀 프리셋만 수정 가능함"
 
 msgid "Brush:"
-msgstr ""
+msgstr "브러시:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "브러시를 선택"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "브러시: 픽셀"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "브러시: 원"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "브러시: 채워진 원"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "커스텀 브러시"
 
 msgid "Brush size:"
 msgstr ""
@@ -1008,61 +1008,61 @@ msgid "Blue-Red Mode"
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "새 프레임 추가"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "프레임 제거"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "프레임 복제"
 
 msgid "Move Left"
-msgstr ""
+msgstr "왼쪽으로 이동"
 
 msgid "Move Right"
-msgstr ""
+msgstr "오른쪽으로 이동"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "셀 연결"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "셀 연결 해제"
 
 msgid "Layer"
-msgstr ""
+msgstr "레이어"
 
 msgid "Layers"
-msgstr ""
+msgstr "레이어"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "새 레이어 생성"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "현재 레이어 제거"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "현재 레이어를 위로 올리기"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "현재 레이어를 아래로 내리기"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "현재 레이어 복제"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "현재 레이어와 그 아래 레이어를 병합"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "투명도:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "레이어 표시 토글"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "레이어 잠금/잠금 해제"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1367,8 +1367,8 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "팔레트를 제거하던 도중 오류가 발생했습니다! 오류 코드: %s"
 
 msgid "and"
-msgstr ""
+msgstr "그리고"
 
