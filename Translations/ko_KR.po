@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 22:19\n"
+"PO-Revision-Date: 2020-08-20 22:27\n"
 
 msgid "OK"
 msgstr "예"
@@ -573,94 +573,97 @@ msgid "Chinese Traditional"
 msgstr "중국어 번체"
 
 msgid "Italian"
-msgstr ""
+msgstr "이탈리아어"
 
 msgid "Latvian"
-msgstr ""
+msgstr "라트비아어"
 
 msgid "Spanish"
-msgstr ""
+msgstr "스페인어"
 
 msgid "Catalan"
-msgstr ""
+msgstr "카탈로니아어"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "에스페란토어"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "인도네시아어"
 
 msgid "Czech"
-msgstr ""
+msgstr "체코어"
 
 msgid "Arabic"
-msgstr ""
+msgstr "아랍어"
 
 msgid "Turkish"
-msgstr ""
+msgstr "터키어"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "노르웨이어"
 
 msgid "Korean"
-msgstr ""
+msgstr "한국어"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "헝가리어"
 
 msgid "Development Team"
-msgstr ""
+msgstr "개발팀"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "리드 프로그래머"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI 디자이너"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub 기여자"
 
 msgid "Art by"
-msgstr ""
+msgstr "그림 제공"
 
 msgid "untitled"
-msgstr ""
+msgstr "제목 없음"
 
 msgid "imported"
-msgstr ""
+msgstr "불러옴"
 
 msgid "copy"
-msgstr ""
+msgstr "복사"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "정말 Pixelorama를 종료 하시겠습니까?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "저장되지 않은 이미지"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "저장되지 않은 수정사항이 있습니다. 계속하면 수정사항이 무시 됩니다."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "종료하기 전에 저장할까요?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "저장되지 않은 수정사항이 있습니다. 계속하시겠습니까?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "저장 및 종료"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "저장하지 않고 종료"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "유틸리티 도구"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "직사각형 선택\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s 을(를) 눌러 내용물 움직이기"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
