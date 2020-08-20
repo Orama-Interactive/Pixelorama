@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-19 21:20\n"
+"PO-Revision-Date: 2020-08-20 20:59\n"
 
 msgid "OK"
 msgstr "예"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "확인이 필요합니다..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "파일 이름:"
 
 msgid "Image Size"
 msgstr "이미지 크기"
@@ -37,7 +37,7 @@ msgid "Canvas Size"
 msgstr "캔버스 크기"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "프레임 크기"
 
 msgid "Width:"
 msgstr "너비:"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "높이:"
 
 msgid "Center"
-msgstr ""
+msgstr "중심"
 
 msgid "File"
 msgstr "파일"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "다른 이름으로 저장하기..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD 압축 사용"
 
 msgid "Import"
 msgstr ""
