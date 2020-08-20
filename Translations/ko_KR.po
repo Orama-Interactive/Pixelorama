@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 21:17\n"
+"PO-Revision-Date: 2020-08-20 21:29\n"
 
 msgid "OK"
 msgstr "예"
@@ -354,7 +354,7 @@ msgid "General"
 msgstr "일반적"
 
 msgid "Startup"
-msgstr ""
+msgstr "시작"
 
 msgid "Language"
 msgstr "언어"
@@ -369,49 +369,49 @@ msgid "Shortcuts"
 msgstr "단축키"
 
 msgid "Backup"
-msgstr ""
+msgstr "백업"
 
 msgid "Indicators"
-msgstr ""
+msgstr "표기 아이콘"
 
 msgid "On"
-msgstr ""
+msgstr "켜짐"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "기본 값 복원"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "부드러운 확대"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "부드럽게 확대 또는 축소하기"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "태블릿 필압:"
 
 msgid "None"
 msgstr "없음"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "브러시의 알파에 영향을 줌"
 
 msgid "Color:"
 msgstr "색상:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "안내선 색"
 
 msgid "System Language"
 msgstr "시스템 언어"
 
 msgid "Dark"
-msgstr ""
+msgstr "다크"
 
 msgid "Gray"
-msgstr ""
+msgstr "그레이"
 
 msgid "Blue"
-msgstr ""
+msgstr "블루"
 
 msgid "Caramel"
 msgstr ""
