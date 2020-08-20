@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 21:08\n"
+"PO-Revision-Date: 2020-08-20 21:17\n"
 
 msgid "OK"
 msgstr "예"
@@ -205,31 +205,31 @@ msgid "New pattern"
 msgstr "새 패턴"
 
 msgid "Horizontal frames:"
-msgstr "가로 프레임:"
+msgstr "가로축 프레임:"
 
 msgid "Vertical frames:"
-msgstr "세로 프레임:"
+msgstr "세로축 프레임:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "브러시 타입:"
 
 msgid "File brush"
-msgstr ""
+msgstr "파일 브러시"
 
 msgid "Project brush"
-msgstr ""
+msgstr "프로젝트 브러시"
 
 msgid "Random brush"
-msgstr ""
+msgstr "랜덤 브러시"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "스프라이트를 .pxo로 저장"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "스프라이트를 .png로 내보내기"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "스프라이트 내보내기"
 
 msgid "File Exists, Overwrite?"
 msgstr "파일이 이미 존재합니다, 덮어씌우시겠습니까?"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "내보내는 중..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -249,16 +249,16 @@ msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
 "오류 코드: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "프레임"
 
 msgid "Frames:"
-msgstr ""
+msgstr "프레임:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "모든 프레임"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "스프라이트시트"
 
 msgid "Animation"
 msgstr "애니메이션"
@@ -267,10 +267,10 @@ msgid "Preview:"
 msgstr "미리 보기:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "프레임:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "회전:"
 
 msgid "Browse"
 msgstr "찾아보기"
@@ -279,7 +279,7 @@ msgid "Resize:"
 msgstr "크기 조정"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "내보내기 취소"
 
 msgid "Alert!"
 msgstr "경고!"
@@ -291,10 +291,10 @@ msgid "Open a Directory"
 msgstr "디렉토리 열기"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "모든 프레임을 여러 파일로"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "모든 프레임을 하나의 파일로"
 
 msgid "Background:"
 msgstr "배경:"
@@ -303,13 +303,13 @@ msgid "Direction:"
 msgstr "방향:"
 
 msgid "Forward"
-msgstr ""
+msgstr "앞"
 
 msgid "Backwards"
-msgstr ""
+msgstr "뒤"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "핑퐁"
 
 msgid "Columns"
 msgstr "열"
@@ -336,7 +336,7 @@ msgid "File:"
 msgstr "파일:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "보간:"
 
 msgid "Nearest"
 msgstr "근접"
@@ -345,10 +345,10 @@ msgid "Bilinear"
 msgstr "이중선형"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilinear"
 
 msgid "General"
 msgstr "일반적"
