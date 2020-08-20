@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 20:59\n"
+"PO-Revision-Date: 2020-08-20 21:08\n"
 
 msgid "OK"
 msgstr "예"
@@ -85,22 +85,22 @@ msgid "Use ZSTD Compression"
 msgstr "ZSTD 압축 사용"
 
 msgid "Import"
-msgstr ""
+msgstr "불러오기"
 
 msgid "Export"
-msgstr ""
+msgstr "내보내기"
 
 msgid "Export..."
-msgstr ""
+msgstr "내보내기..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "다른 이름으로 내보내기..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "PNG로 내보내기"
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "다른 이름으로 PNG로 내보내기..."
 
 msgid "Quit"
 msgstr "종료"
@@ -112,13 +112,13 @@ msgid "Redo"
 msgstr "다시 실행"
 
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 msgid "Paste"
-msgstr ""
+msgstr "붙여넣기"
 
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 msgid "Scale Image"
 msgstr "이미지 크기"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "선택 영역 지우기"
 
 msgid "Flip"
-msgstr ""
+msgstr "뒤집기"
 
 msgid "Flip Horizontal"
 msgstr "좌우 대칭"
@@ -157,16 +157,16 @@ msgid "Show Rulers"
 msgstr "눈금자 표시"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "안내선 표시"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "애니메이션 타임라인 보기"
 
 msgid "Zen Mode"
 msgstr "젠 모드"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "전체 화면"
 
 msgid "Fill with color:"
 msgstr "색상으로 채우기:"
@@ -178,37 +178,37 @@ msgid "Open File(s)"
 msgstr "여러 파일 열기"
 
 msgid "Import Options"
-msgstr ""
+msgstr "불러오기 옵션"
 
 msgid "Import as:"
-msgstr ""
+msgstr "다음으로 가져오기:"
 
 msgid "New tab"
 msgstr "새 창"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "스프레드시트 (새 탭)"
 
 msgid "New frame"
-msgstr ""
+msgstr "새 프레임"
 
 msgid "New layer"
 msgstr "새 레이어"
 
 msgid "New palette"
-msgstr ""
+msgstr "새 팔레트"
 
 msgid "New brush"
-msgstr ""
+msgstr "새 브러시"
 
 msgid "New pattern"
-msgstr ""
+msgstr "새 패턴"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "가로 프레임:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "세로 프레임:"
 
 msgid "Brush type:"
 msgstr ""
