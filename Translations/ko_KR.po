@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-20 21:29\n"
+"PO-Revision-Date: 2020-08-20 21:38\n"
 
 msgid "OK"
 msgstr "예"
@@ -399,7 +399,7 @@ msgid "Color:"
 msgstr "색상:"
 
 msgid "Guide color:"
-msgstr "안내선 색"
+msgstr "안내선 색:"
 
 msgid "System Language"
 msgstr "시스템 언어"
@@ -414,100 +414,100 @@ msgid "Blue"
 msgstr "블루"
 
 msgid "Caramel"
-msgstr ""
+msgstr "카라멜"
 
 msgid "Light"
-msgstr ""
+msgstr "라이트"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "선택 영역만 영향을 줌"
 
 msgid "Current cel"
-msgstr ""
+msgstr "현재 셀"
 
 msgid "Current frame"
-msgstr ""
+msgstr "현재 프레임"
 
 msgid "All frames"
-msgstr ""
+msgstr "모든 프레임"
 
 msgid "All projects"
-msgstr ""
+msgstr "모든 프로젝트"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "색 반전"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "레드 채널 수정"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "그린 채널 수정"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "블루 채널 수정"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "알파 채널 수정"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "채도 낮추기"
 
 msgid "Outline"
-msgstr ""
+msgstr "외곽선"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "색상/채도/명도 수정"
 
 msgid "Gradient"
-msgstr ""
+msgstr "그레디언트"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "HSV 수정"
 
 msgid "Type:"
-msgstr ""
+msgstr "타입:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "각도:"
 
 msgid "Hue"
-msgstr ""
+msgstr "색상"
 
 msgid "Saturation"
-msgstr ""
+msgstr "채도"
 
 msgid "Value"
-msgstr ""
+msgstr "명도"
 
 msgid "Apply"
-msgstr ""
+msgstr "적용"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "비스듬한"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "이미지 안에 두기"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "두께:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "색상:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "단계:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "위에서 아래로"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "아래서 위로"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "왼쪽에서 오른쪽으로"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "오른쪽에서 왼쪽으로"
 
 msgid "View Splash Screen"
 msgstr ""
