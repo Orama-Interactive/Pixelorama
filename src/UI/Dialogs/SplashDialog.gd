@@ -2,7 +2,7 @@ extends WindowDialog
 
 
 func _on_SplashDialog_about_to_show() -> void:
-	var art_by_label : Label = Global.find_node_by_name(self, "ArtByLabel")
+	var art_by_label : Button = Global.find_node_by_name(self, "ArtistName")
 	var show_on_startup_button : CheckBox = Global.find_node_by_name(self, "ShowOnStartup")
 	var developed_by_label : Label = Global.find_node_by_name(self, "DevelopedBy")
 	var become_platinum : Button = Global.find_node_by_name(self, "BecomePlatinum")
@@ -13,7 +13,7 @@ func _on_SplashDialog_about_to_show() -> void:
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
 	window_title = "Pixelorama" + " " + Global.current_version
 
-	art_by_label.text = tr("Art by") + ":"
+	art_by_label.text = tr("Art by: %s") % "Wishdream"
 	become_platinum.text = "- " + tr("Become a Platinum Sponsor")
 	become_gold.text = "- " + tr("Become a Gold Sponsor")
 	become_patron.text = "- " + tr("Become a Patron")

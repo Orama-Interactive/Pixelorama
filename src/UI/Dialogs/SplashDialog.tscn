@@ -53,25 +53,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ArtByLabel" type="Label" parent="Contents/SplashArt/ArtBy"]
-margin_top = 3.0
-margin_right = 42.0
-margin_bottom = 17.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Art by:"
-
 [node name="ArtistName" type="Button" parent="Contents/SplashArt/ArtBy"]
-margin_left = 39.0
-margin_right = 124.0
+margin_right = 77.0
 margin_bottom = 21.0
 hint_tooltip = "https://twitter.com/WishdreamStar"
 mouse_default_cursor_shape = 2
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.764706, 0.764706, 0.764706, 1 )
 custom_colors/font_color_pressed = Color( 0.521569, 0.521569, 0.521569, 1 )
-text = "Wishdream"
+text = "Art by: %s"
 flat = true
 
 [node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents"]

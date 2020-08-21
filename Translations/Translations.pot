@@ -608,7 +608,7 @@ msgstr ""
 msgid "GitHub Contributors"
 msgstr ""
 
-msgid "Art by"
+msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
