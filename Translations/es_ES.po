@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-19 21:21\n"
+"PO-Revision-Date: 2020-08-21 00:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Guardar como..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Utilizar compresión ZSTD"
 
 msgid "Import"
 msgstr "Importar"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Anular selección"
 
 msgid "Flip"
-msgstr ""
+msgstr "Girar"
 
 msgid "Flip Horizontal"
 msgstr "Voltear Horizontalmente"
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr "Modo zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Modo de pantalla completa"
 
 msgid "Fill with color:"
 msgstr "Rellenar con color:"
@@ -178,7 +178,7 @@ msgid "Open File(s)"
 msgstr "Abrir archivo(s)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Opciones de importación"
 
 msgid "Import as:"
 msgstr "Importar como:"
