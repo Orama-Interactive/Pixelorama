@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-21 00:25\n"
+"PO-Revision-Date: 2020-08-21 00:41\n"
 
 msgid "OK"
 msgstr "예"
@@ -935,7 +935,7 @@ msgid "Options:"
 msgstr ""
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "프레임에 맞추기"
 
 msgid "100% Zoom"
 msgstr ""
@@ -956,7 +956,7 @@ msgid "Vertical"
 msgstr ""
 
 msgid "Current frame:"
-msgstr ""
+msgstr "현재 프레임:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1103,7 +1103,7 @@ msgid "Undo: Draw"
 msgstr "실행 취소: 그리기"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "다시 실행: 그리기"
 
 msgid "Undo: Rectangle Select"
 msgstr "실행 취소: 직사각형으로 선택"
@@ -1115,82 +1115,82 @@ msgid "Undo: Scale"
 msgstr "실행 취소: 크기 설정"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "다시 실행: 크기 설정"
 
 msgid "Undo: Add Layer"
 msgstr "실행 취소: 레이어 추가"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "다시 실행: 레이어 추가"
 
 msgid "Undo: Remove Layer"
 msgstr "실행 취소: 레이어 삭제"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "다시 실행: 레이어 삭제"
 
 msgid "Undo: Merge Layer"
 msgstr "실행 취소: 레이어 병합"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "다시 실행: 레이어 병합"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "실행 취소: 레이어 순 변경"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "다시 실행: 레이어 순 변경"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "실행 취소: 프레임 추가"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "다시 실행: 프레임 추가"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "실행 취소: 프레임 삭제"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "다시 실행: 프레임 삭제"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "실행 취소: 프레임 순 변경"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "다시 실행: 프레임 순 변경"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "실행 취소: 사용자 지정 붓 삭제"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "다시 실행: 사용자 지정 붓 삭제"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "실행 취소: 프레임 태그 수정"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "다시 실행: 프레임 태그 수정"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "실행 취소: 프레임 태그 삭제"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "다시 실행: 프레임 태그 삭제"
 
 msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "파일 저장됨"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "파일 자동 저장됨"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "파일 불러오기 실패"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "파일 저장 실패"
 
 msgid "File exported"
 msgstr ""
@@ -1226,7 +1226,7 @@ msgid "Edit Palette"
 msgstr "팔레트 수정"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "후원자:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -1238,43 +1238,43 @@ msgid "Become a Gold Sponsor"
 msgstr ""
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "후원자 되기"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "다시 표시하지 않기"
 
 msgid "Image Options"
-msgstr ""
+msgstr "이미지 설정"
 
 msgid "Default width:"
-msgstr ""
+msgstr "기본 너비:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "새 이미지의 기본 너비"
 
 msgid "Default height:"
-msgstr ""
+msgstr "기본 높이:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "새 이미지의 기본 높이"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "기본 채우기 색:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "새 이미지의 기본 배경 색"
 
 msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "템플릿:"
 
 msgid "Preset"
-msgstr ""
+msgstr "사전 설정"
 
 msgid "Preset:"
-msgstr ""
+msgstr "사전 설정:"
 
 msgid "Default"
 msgstr "기본"
@@ -1283,7 +1283,7 @@ msgid "Custom"
 msgstr "사용자 지정"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "직사각형 선택"
 
 msgid "Zoom"
 msgstr "확대/축소"
