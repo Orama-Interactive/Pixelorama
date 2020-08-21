@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2020-08-19 21:20\n"
+"PO-Revision-Date: 2020-08-21 17:14\n"
 
 msgid "OK"
 msgstr ""
@@ -619,7 +619,7 @@ msgstr ""
 msgid "GitHub Contributors"
 msgstr ""
 
-msgid "Art by"
+msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
