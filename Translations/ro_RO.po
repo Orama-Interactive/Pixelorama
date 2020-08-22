@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 12:48\n"
+"PO-Revision-Date: 2020-08-22 18:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Înălțime:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centrare"
 
 msgid "File"
 msgstr "Fișier"
@@ -214,10 +214,10 @@ msgid "Brush type:"
 msgstr "Tip de pensulă:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Pensulă de fișier"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Pensulă de proiect"
 
 msgid "Random brush"
 msgstr "Pensulă aleatorie"
@@ -420,7 +420,7 @@ msgid "Light"
 msgstr "Luminos"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Afectează doar selecția"
 
 msgid "Current cel"
 msgstr "Celulă actuală"
@@ -785,7 +785,7 @@ msgid "Isometric"
 msgstr "Izometrică"
 
 msgid "All"
-msgstr ""
+msgstr "Toate"
 
 msgid "Grid width:"
 msgstr "Lățimea grilei:"
@@ -872,7 +872,7 @@ msgid "Overwrite"
 msgstr "Suprascriere"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
@@ -1187,7 +1187,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Refacere: ștergerea etichetei cadrului"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Deplasare ghidaj"
 
 msgid "File saved"
 msgstr "Fișier salvat"
