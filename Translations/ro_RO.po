@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 10:16\n"
+"PO-Revision-Date: 2020-08-22 10:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -411,223 +411,223 @@ msgid "Gray"
 msgstr "Gri"
 
 msgid "Blue"
-msgstr ""
+msgstr "Albastru"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramel"
 
 msgid "Light"
-msgstr ""
+msgstr "Luminos"
 
 msgid "Only affect selection"
 msgstr ""
 
 msgid "Current cel"
-msgstr ""
+msgstr "Celulă actuală"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Cadru actual"
 
 msgid "All frames"
-msgstr ""
+msgstr "Toate cadrele"
 
 msgid "All projects"
-msgstr ""
+msgstr "Toate proiectele"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Inversare culori"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modificare canal roșu"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modificare canal verde"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modificare canal albastru"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modificare canal alfa"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturație"
 
 msgid "Outline"
 msgstr ""
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ajustare nuanță/saturație/valoare"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Degrade"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajustare NSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tip:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Unghi:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Nuanță"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturație"
 
 msgid "Value"
-msgstr ""
+msgstr "Valoare"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplicare"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonală"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Așezare în interiorul imaginii"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Grosime:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Culori:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Pași:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "De sus în jos"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "De jos în sus"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "De la stânga la dreapta"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "De la dreapta la stânga"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Vizualizare ecran de întâmpinare"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentație online"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Monitor de probleme"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Jurnal de modificări"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Despre Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Dezvoltat de Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Pagină de internet"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donează"
 
 msgid "Developers"
-msgstr ""
+msgstr "Dezvoltatori"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Contribuitori"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donatori"
 
 msgid "Translators"
-msgstr ""
+msgstr "Traducători"
 
 msgid "English"
-msgstr ""
+msgstr "Engleză"
 
 msgid "Greek"
-msgstr ""
+msgstr "Greacă"
 
 msgid "French"
-msgstr ""
+msgstr "Franceză"
 
 msgid "German"
-msgstr ""
+msgstr "Germană"
 
 msgid "Polish"
-msgstr ""
+msgstr "Poloneză"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugheză braziliană"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rusă"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Chineză simplificată"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Chineză tradițională"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiană"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letonă"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spaniolă"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Catalană"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indoneziană"
 
 msgid "Czech"
-msgstr ""
+msgstr "Cehă"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabă"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turcă"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvegiană"
 
 msgid "Korean"
-msgstr ""
+msgstr "Coreeană"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Maghiară"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Echipa de dezvoltare"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Programator-șef"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Proiectant UI"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Contribuitori GitHub"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Artă realizată de: %s"
 
 msgid "untitled"
-msgstr ""
+msgstr "fără titlu"
 
 msgid "imported"
-msgstr ""
+msgstr "importat"
 
 msgid "copy"
 msgstr ""
