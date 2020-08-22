@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-22 11:57\n"
+"PO-Revision-Date: 2020-08-22 12:06\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
 "MIME-Version: 1.0\n"
@@ -51,20 +51,20 @@ msgstr "تثبيت ${APPNAME} ${APPVERSION}."
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "إنشاء اختصارات قائمة ابدأ لـ ${APPNAME}."
 
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "إنشاء اختصار على سطح المكتب لـ ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "إلغاء تثبيت ${APPNAME} ${APPVERSION} وإزالة جميع الاختصارات."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "إزالة ملفات التكوين لـ ${APPNAME}."
 
