@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-22 08:36\n"
+"PO-Revision-Date: 2020-08-22 08:48\n"
 
 msgid "OK"
 msgstr "確定"
@@ -775,7 +775,7 @@ msgid "Grid type:"
 msgstr "格線類型："
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "設定格線類型為矩形, 等角立體或全部"
 
 msgid "Rectangular"
 msgstr "矩形"
@@ -799,10 +799,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "設定水平格線的高度"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "等角立體間隔大小"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "設定等角立體格線的間隔大小"
 
 msgid "Grid color:"
 msgstr "格線顏色："
