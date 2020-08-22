@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 18:11\n"
+"PO-Revision-Date: 2020-08-22 18:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -387,13 +387,13 @@ msgid "Adds a smoother transition when zooming in or out"
 msgstr "Adaugă o tranziție mai lentă la apropiere sau depărtare"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sensibilitatea de apăsare a tabletei:"
 
 msgid "None"
-msgstr ""
+msgstr "Niciuna"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Afectează valoarea alfa a pensulei"
 
 msgid "Color:"
 msgstr "Culoare:"
