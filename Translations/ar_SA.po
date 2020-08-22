@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-08-22 12:06\n"
+"PO-Revision-Date: 2020-08-22 12:16\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "الرجاء التأكيد..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "اسم الملف:"
 
 msgid "Image Size"
 msgstr "حجم الصورة"
@@ -37,7 +37,7 @@ msgid "Canvas Size"
 msgstr ""
 
 msgid "Frame Size"
-msgstr ""
+msgstr "حجم الإطار"
 
 msgid "Width:"
 msgstr "العرض:"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "حفظ باسم..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "استخدام ضغط ZSTD"
 
 msgid "Import"
 msgstr "استيراد"
@@ -151,10 +151,10 @@ msgid "Tile Mode"
 msgstr "وضع البلاط"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "إظهار الشبكة"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "إظهار المسطرة"
 
 msgid "Show Guides"
 msgstr ""
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr ""
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "وضع ملء الشاشة"
 
 msgid "Fill with color:"
 msgstr "الملئ باللون:"
@@ -178,31 +178,31 @@ msgid "Open File(s)"
 msgstr "فتح ملفات"
 
 msgid "Import Options"
-msgstr ""
+msgstr "خيارات الاستيراد"
 
 msgid "Import as:"
-msgstr ""
+msgstr "استيراد باسم:"
 
 msgid "New tab"
-msgstr ""
+msgstr "علامة تبويب جديدة"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "ورقة الكائن (علامة تبويب جديدة)"
 
 msgid "New frame"
-msgstr ""
+msgstr "إطار جديد"
 
 msgid "New layer"
-msgstr ""
+msgstr "طبقة جديدة"
 
 msgid "New palette"
-msgstr ""
+msgstr "لوحة جديدة"
 
 msgid "New brush"
-msgstr ""
+msgstr "فرشاة جديدة"
 
 msgid "New pattern"
-msgstr ""
+msgstr "نمط جديد"
 
 msgid "Horizontal frames:"
 msgstr ""
