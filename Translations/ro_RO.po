@@ -10,22 +10,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 09:48\n"
+"PO-Revision-Date: 2020-08-22 09:57\n"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "Cancel"
-msgstr "Anulare"
+msgstr "Anulează"
 
 msgid "Open"
-msgstr "Deschidere"
+msgstr "Deschide"
 
 msgid "Save"
-msgstr "Salvare"
+msgstr "Salvează"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Te rugăm să confirmi..."
 
 msgid "File Name:"
 msgstr "Numele fișierului:"
@@ -34,7 +34,7 @@ msgid "Image Size"
 msgstr "Dimensiunea imaginii"
 
 msgid "Canvas Size"
-msgstr "Dimensiunea pânezi"
+msgstr "Dimensiunea pânzei"
 
 msgid "Frame Size"
 msgstr "Dimensiunea cadrului"
@@ -52,118 +52,118 @@ msgid "File"
 msgstr "Fișier"
 
 msgid "Edit"
-msgstr ""
+msgstr "Editare"
 
 msgid "View"
-msgstr ""
+msgstr "Vizualizare"
 
 msgid "Image"
-msgstr ""
+msgstr "Imagine"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efecte"
 
 msgid "Help"
-msgstr ""
+msgstr "Ajutor"
 
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 msgid "New..."
-msgstr ""
+msgstr "Nou..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Deschidere..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Salvare..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Salvare ca..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Utilizare comprimare ZSTD"
 
 msgid "Import"
-msgstr ""
+msgstr "Importare"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportare"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportare..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportare ca..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exportare PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Exportare PNG ca..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Ieșire"
 
 msgid "Undo"
 msgstr ""
 
 msgid "Redo"
-msgstr ""
+msgstr "Refacere"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copiere"
 
 msgid "Paste"
-msgstr ""
+msgstr "Lipire"
 
 msgid "Delete"
-msgstr ""
+msgstr "Ștergere"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Scalare imagine"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Decupare imagine"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Redimensionare pânză"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotire imagine"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Ștergere selecție"
 
 msgid "Flip"
-msgstr ""
+msgstr "Răsturnare"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Răsturnare orizontală"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Răsturnare verticală"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Preferințe"
 
 msgid "Tile Mode"
 msgstr ""
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Afișare grilă"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Afișare rigle"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Afișare ghidaje"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Afișare cronologia animației"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Mod Zen"
 
 msgid "Fullscreen Mode"
 msgstr ""
