@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 10:36\n"
+"PO-Revision-Date: 2020-08-22 10:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -705,12 +705,16 @@ msgstr "Radieră\n\n"
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Recipient\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Luminare/întunecare\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Choose a color for the left tool"
 msgstr "Alege o culoare pentru instrumentul din stânga"
@@ -739,7 +743,7 @@ msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indicator pixel dreapta"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
@@ -748,67 +752,67 @@ msgid "Show left tool icon"
 msgstr "Arată pictograma instrumentului din stânga"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Afișează o pictogramă a instrumentului selectat din stânga de lângă cursorul de pe pânză"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Arată pictograma instrumentului din dreapta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Afișează o pictogramă a instrumentului selectat din dreapta de lângă cursorul de pe pânză"
 
 msgid "Guides"
-msgstr ""
+msgstr "Ghidaje"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Culoare ghidaje:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "O culoare a ghidajelor de riglă afișate pe pânză"
 
 msgid "Grid"
-msgstr ""
+msgstr "Grilă"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Tip de grilă:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Setează tipul de grilă dintre dreptunghiulară, izometrică sau ambele"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Dreptunghiulară"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Izometrică"
 
 msgid "All"
 msgstr ""
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Lățimea grilei:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Înălțimea grilei:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Dimensiunea celulei izometrice:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Setează dimensiunea celulelor dintr-o grilă izometrică"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Culoarea grilei:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "O culoare a grilei"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparență"
 
 msgid "Checker size:"
 msgstr ""
@@ -829,37 +833,37 @@ msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Urmărește mișcarea pânzei"
 
 msgid "The transparent checker follow the movement of canvas"
 msgstr ""
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Urmărește nivelul de panoramare al pânzei"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Doar presetarea personalizată poate fi modificată"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Pensulă:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Selectează o pensulă"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Pensulă: pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Pensulă: cerc"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Pensulă: cerc umplut"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Pensulă personalizată"
 
 msgid "Brush size:"
 msgstr ""
@@ -1300,7 +1304,7 @@ msgid "Lighten/Darken"
 msgstr ""
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Comutare culori"
 
 msgid "Set the shortcut"
 msgstr ""
