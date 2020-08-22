@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 11:57\n"
+"PO-Revision-Date: 2020-08-22 12:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -339,16 +339,16 @@ msgid "Interpolation:"
 msgstr "Interpolare:"
 
 msgid "Nearest"
-msgstr "Cel mai apropiat"
+msgstr "Cea mai apropiată"
 
 msgid "Bilinear"
-msgstr "Biliniar"
+msgstr "Biliniară"
 
 msgid "Cubic"
-msgstr "Cubic"
+msgstr "Cubică"
 
 msgid "Trilinear"
-msgstr "Triliniar"
+msgstr "Triliniară"
 
 msgid "General"
 msgstr "General"
@@ -878,7 +878,7 @@ msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: culoarea provenită din pensulă, 100: culoarea selectată în prezent"
 
 msgid "Fill area:"
 msgstr "Zona de umplere:"
@@ -908,10 +908,10 @@ msgid "Darken"
 msgstr "Întunecare"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Cantitate:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Cantitate luminare/întunecare"
 
 msgid "Pick for:"
 msgstr "Alege pentru:"
