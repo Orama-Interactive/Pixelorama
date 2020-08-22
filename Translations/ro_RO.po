@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 10:09\n"
+"PO-Revision-Date: 2020-08-22 10:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -202,16 +202,16 @@ msgid "New brush"
 msgstr "Pensulă nouă"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Model nou"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Cadre orizontale:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Cadre verticale:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tip de pensulă:"
 
 msgid "File brush"
 msgstr ""
@@ -220,164 +220,165 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
+msgstr "Pensulă aleatorie"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Salvare sprite ca .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Exportare sprite ca .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Exportare sprite"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fișierul există deja. Suprascrii?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Fișierul %s există deja. Suprascrii?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Calea directorului sau numele fișierului nu este valid!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Exportare în desfășurare..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nu se poate încărca fișierul '%s'.\n"
+"Cod de eroare: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Cadru"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Cadre:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Toate cadrele"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Foaie cu sprite-uri"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animație"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Previzualizare:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Cadru:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientare:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Răsfoire"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Redimensionare:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Anulare exportare"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Alertă!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Selectează dosarul actual"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Deschide un director"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Toate cadrele ca fișiere multiple"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Toate cadrele ca o singură animație de fișier"
 
 msgid "Background:"
-msgstr ""
+msgstr "Fundal:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direcție:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Înainte"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Înapoi"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Coloane"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Coloane:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rânduri"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Rânduri:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Cale:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Directoare și fișiere:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Creare dosar"
 
 msgid "File:"
-msgstr ""
+msgstr "Fișier:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolare:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Cel mai apropiat"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Biliniar"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Triliniar"
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "Startup"
-msgstr ""
+msgstr "Pornire"
 
 msgid "Language"
-msgstr ""
+msgstr "Limbă"
 
 msgid "Themes"
-msgstr ""
+msgstr "Teme"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Pânză"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Scurtături"
 
 msgid "Backup"
-msgstr ""
+msgstr "Copie de rezervă"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatori"
 
 msgid "On"
-msgstr ""
+msgstr "Pornit"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Resetare la valoarea implicită"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -395,19 +396,19 @@ msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Culoare:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Culoarea ghidajului:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Limba sistemului"
 
 msgid "Dark"
-msgstr ""
+msgstr "Întunecat"
 
 msgid "Gray"
-msgstr ""
+msgstr "Gri"
 
 msgid "Blue"
 msgstr ""
