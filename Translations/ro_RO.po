@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 10:46\n"
+"PO-Revision-Date: 2020-08-22 10:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -866,16 +866,16 @@ msgid "Custom brush"
 msgstr "Pensulă personalizată"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Dimensiunea pensulei:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Suprascriere"
 
 msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Culoarea pensulei de la"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
@@ -890,22 +890,22 @@ msgid "Same color pixels"
 msgstr ""
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Umplere cu:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Culoare selectată"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Model"
 
 msgid "Offset"
-msgstr ""
+msgstr "Decalaj"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Lighten"
 
 msgid "Darken"
-msgstr ""
+msgstr "Întunecare"
 
 msgid "Amount:"
 msgstr ""
@@ -917,54 +917,56 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "Culoare stânga"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Culoare dreapta"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mod:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Apropiere"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Depărtare"
 
 msgid "Options:"
-msgstr ""
+msgstr "Opțiuni:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Potrivire la cadru"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Panoramare 100%"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Oglindire"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Activează desenul oglindit orizontal"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Activează desenul oglindit vertical"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Cadru actual:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Sari la primul cadru\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Deplasare la cadrul anterior\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
@@ -976,11 +978,13 @@ msgstr ""
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Deplasare la cadrul următor\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Sari la ultimul cadru\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -990,7 +994,8 @@ msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Câte cadre pe secundă ar trebui să aibă previzualizarea animației?\n"
+"Cu cât mai multe cadre, cu atât mai repede rulează animația."
 
 msgid "No loop"
 msgstr ""
@@ -1005,10 +1010,10 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Cadre trecute"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Cadre viitoare"
 
 msgid "Manage frame tags"
 msgstr ""
@@ -1021,22 +1026,22 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Mod albastru-roșu"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Adaugă un cadru nou"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Eliminare cadru"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Clonare cadru"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Deplasare la stânga"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Deplasare la dreapta"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -1048,56 +1053,56 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Strat"
 
 msgid "Layers"
-msgstr ""
+msgstr "Straturi"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Creează un strat nou"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Elimină stratul actual"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Deplasează în sus stratul actual"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Deplasează în jos stratul actual"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Clonează stratul actual"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Îmbină stratul actual cu cel de mai jos"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacitate:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Blocare/deblocare strat"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Paletă"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Palete"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Adaugă o paletă nouă"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Editează paleta selectată în prezent"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Alege o paletă"
 
 msgid "Undo: Draw"
 msgstr ""
@@ -1112,28 +1117,28 @@ msgid "Redo: Rectangle Select"
 msgstr ""
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Anulare: scalare"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Refacere: scalare"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Anulare: adăugare strat"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Refacere: adăugare strat"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Anulare: eliminare strat"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Refacere: eliminare strat"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Anulare: îmbinare strat"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Refacere: îmbinare strat"
 
 msgid "Undo: Change Layer Order"
 msgstr ""
