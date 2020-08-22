@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 11:36\n"
+"PO-Revision-Date: 2020-08-22 11:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -815,34 +815,34 @@ msgid "Transparency"
 msgstr "Transparență"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Dimensiunea carourilor:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Dimensiunea fundalului caroiat transparent"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Culoare carouri 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Prima culoare a fundalului caroiat transparent"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Culoare carouri 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "A doua culoare a fundalului caroiat transparent"
 
 msgid "Follow Canvas Movement"
 msgstr "Urmărește mișcarea pânzei"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Carourile transparente urmăresc mișcarea pânzei"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Urmărește nivelul de panoramare al pânzei"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Carourile transparente urmăresc nivelul de panoramare al pânzei"
 
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
@@ -914,7 +914,7 @@ msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Alege pentru:"
 
 msgid "Left Color"
 msgstr "Culoare stânga"
@@ -970,11 +970,13 @@ msgstr "Deplasare la cadrul anterior\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Redă animația înapoi (de la sfârșit până la început)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Redă animația înainte (de la început până la sfârșit)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
@@ -998,13 +1000,13 @@ msgstr "Câte cadre pe secundă ar trebui să aibă previzualizarea animației?\
 "Cu cât mai multe cadre, cu atât mai repede rulează animația."
 
 msgid "No loop"
-msgstr ""
+msgstr "Fără buclu"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Buclă ciclică"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Buclă ping-pong"
 
 msgid "Onion Skinning:"
 msgstr ""
@@ -1023,7 +1025,8 @@ msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Dacă este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
+"În caz contrar, animația va rula pentru toate cadrele, ignorând etichetele."
 
 msgid "Blue-Red Mode"
 msgstr "Mod albastru-roșu"
@@ -1047,10 +1050,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Conectare celulă"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Deconectare celulă"
 
 msgid "Layer"
 msgstr "Strat"
@@ -1106,10 +1109,10 @@ msgid "Choose a palette"
 msgstr "Alege o paletă"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Anulare: desenare"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Refacere: desenare"
 
 msgid "Undo: Rectangle Select"
 msgstr "Anulare: selectare dreptunghi"
