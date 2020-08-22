@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 18:16\n"
+"PO-Revision-Date: 2020-08-22 18:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -740,13 +740,13 @@ msgid "Left pixel indicator"
 msgstr "Indicator pixel stânga"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Arată pe pânză pensula sau indicatorul pixel al butonului din stânga mausului atunci când se desenează"
 
 msgid "Right pixel indicator"
 msgstr "Indicator pixel dreapta"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Arată pe pânză pensula sau indicatorul pixel al butonului din dreapta mausului atunci când se desenează"
 
 msgid "Show left tool icon"
 msgstr "Arată pictograma instrumentului din stânga"
@@ -989,10 +989,10 @@ msgstr "Sari la ultimul cadru\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Setări pentru cadre multiple simultane"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Activare/dezactivare cadre multiple simultane"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1009,7 +1009,7 @@ msgid "Ping-pong loop"
 msgstr "Buclă ping-pong"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Cadre multiple simultane:"
 
 msgid "Past Frames"
 msgstr "Cadre trecute"
