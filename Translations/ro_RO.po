@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 11:46\n"
+"PO-Revision-Date: 2020-08-22 11:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -881,13 +881,13 @@ msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Zona de umplere:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Zona de aceeași culoare"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Pixelii de aceeași culoare"
 
 msgid "Fill with:"
 msgstr "Umplere cu:"
