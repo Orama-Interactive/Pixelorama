@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 11:26\n"
+"PO-Revision-Date: 2020-08-22 11:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -453,7 +453,7 @@ msgid "Desaturation"
 msgstr "Desaturație"
 
 msgid "Outline"
-msgstr ""
+msgstr "Contur"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustare nuanță/saturație/valoare"
@@ -1016,10 +1016,10 @@ msgid "Future Frames"
 msgstr "Cadre viitoare"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Gestionare etichete de cadru"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1080,14 +1080,15 @@ msgid "Opacity:"
 msgstr "Opacitate:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Comută vizibilitatea stratului"
 
 msgid "Lock/unlock layer"
 msgstr "Blocare/deblocare strat"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Activare/dezactivare conectare celule\n\n"
+"Celulele conectate sunt distribuite între mai multe cadre"
 
 msgid "Palette"
 msgstr "Paletă"
@@ -1111,10 +1112,10 @@ msgid "Redo: Draw"
 msgstr ""
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Anulare: selectare dreptunghi"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Refacere: selectare dreptunghi"
 
 msgid "Undo: Scale"
 msgstr "Anulare: scalare"
@@ -1225,7 +1226,7 @@ msgid "Error: Palette must have a valid name."
 msgstr "Eroare: paleta trebuie să aibă un nume valid."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Fișier de paletă invalid!"
 
 msgid "Edit Palette"
 msgstr "Editare paletă"
@@ -1369,11 +1370,12 @@ msgid "Close"
 msgstr "Închide"
 
 msgid "Delete"
-msgstr ""
+msgstr "Ștergere"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "A fost găsită copia de rezervă pentru %s.\n"
+"Dorești să o reîncarci?"
 
 msgid "Backup reloaded"
 msgstr "Copie de rezervă reîncărcată"
