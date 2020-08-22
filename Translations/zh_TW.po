@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-21 17:14\n"
+"PO-Revision-Date: 2020-08-22 08:36\n"
 
 msgid "OK"
 msgstr "確定"
@@ -620,7 +620,7 @@ msgid "GitHub Contributors"
 msgstr "GitHub 貢獻者"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "%s 繪製"
 
 msgid "untitled"
 msgstr "未命名"
@@ -772,19 +772,19 @@ msgid "Grid"
 msgstr "格線"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "格線類型："
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "矩形"
 
 msgid "Isometric"
-msgstr ""
+msgstr "等角立體"
 
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgid "Grid width:"
 msgstr "格線寬度："
