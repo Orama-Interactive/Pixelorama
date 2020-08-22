@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 09:57\n"
+"PO-Revision-Date: 2020-08-22 10:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -106,7 +106,7 @@ msgid "Quit"
 msgstr "Ieșire"
 
 msgid "Undo"
-msgstr ""
+msgstr "Anulare"
 
 msgid "Redo"
 msgstr "Refacere"
@@ -148,7 +148,7 @@ msgid "Preferences"
 msgstr "Preferințe"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Mod Mozaic"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"
@@ -166,40 +166,40 @@ msgid "Zen Mode"
 msgstr "Mod Zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Mod ecran complet"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Umplere cu culoare:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Deschide un fișier"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Deschidere fișier(e)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Opțiuni de importare"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importare ca:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Filă nouă"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Foaie cu sprite-uri (filă nouă)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Cadru nou"
 
 msgid "New layer"
-msgstr ""
+msgstr "Strat nou"
 
 msgid "New palette"
-msgstr ""
+msgstr "Paletă nouă"
 
 msgid "New brush"
-msgstr ""
+msgstr "Pensulă nouă"
 
 msgid "New pattern"
 msgstr ""
