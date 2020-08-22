@@ -10,46 +10,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-21 17:14\n"
+"PO-Revision-Date: 2020-08-22 09:48\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anulare"
 
 msgid "Open"
-msgstr ""
+msgstr "Deschidere"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvare"
 
 msgid "Please Confirm..."
 msgstr ""
 
 msgid "File Name:"
-msgstr ""
+msgstr "Numele fișierului:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Dimensiunea imaginii"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Dimensiunea pânezi"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Dimensiunea cadrului"
 
 msgid "Width:"
-msgstr ""
+msgstr "Lățime:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Înălțime:"
 
 msgid "Center"
 msgstr ""
 
 msgid "File"
-msgstr ""
+msgstr "Fișier"
 
 msgid "Edit"
 msgstr ""
