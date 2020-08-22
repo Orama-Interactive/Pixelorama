@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 10:56\n"
+"PO-Revision-Date: 2020-08-22 11:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1141,100 +1141,100 @@ msgid "Redo: Merge Layer"
 msgstr "Refacere: îmbinare strat"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Anulare: modificarea ordinii stratului"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Refacere: modificarea ordinii stratului"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Anulare: adăugare cadru"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Refacere: adăugare cadru"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Anulare: eliminare cadru"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Refacere: eliminare cadru"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Anulare: modificarea ordinii cadrului"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Refacere: modificarea ordinii cadrului"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Anulare: ștergere pensulă personalizată"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Refacere: ștergere pensulă personalizată"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Anulare: modificarea etichetei cadrului"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Refacere: modificarea etichetei cadrului"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Anulare: ștergerea etichetei cadrului"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Refacere: ștergerea etichetei cadrului"
 
 msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Fișier salvat"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fișier autosalvat"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Fișierul nu a putut fi deschis"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Fișierul nu a putut fi salvat"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fișier exportat"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Paletă nouă goală"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importare paletă"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Creare paletă din sprite-ul actual"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Numele paletei:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Numele culorii:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Folosește culorile din stânga și dreapta"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Creare paletă nouă goală?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Eroare: paleta trebuie să aibă un nume valid."
 
 msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Editare paletă"
 
 msgid "Patrons:"
 msgstr ""
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Dorești ca numele tău sau al companiei tale să fie afișat pe ecranul de întâmpinare?"
 
 msgid "Become a Platinum Sponsor"
 msgstr ""
@@ -1246,34 +1246,34 @@ msgid "Become a Patron"
 msgstr ""
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Nu mai arăta"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Opțiuni de imagine"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Lățime implicită:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Lățimea implicită a unei imagini noi"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Înălțime implicită:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Înălțimea implicită a unei imagini noi"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Culoare implicită de umplere:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Culoarea implicită de fundal a unei imagini noi"
 
 msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "Șabloane:"
 
 msgid "Preset"
 msgstr ""
@@ -1288,34 +1288,34 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Selecție dreptunghiulară"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Panoramare"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Selector de culori"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Creion"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Radieră"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Recipient"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Luminare/întunecare"
 
 msgid "Switch Colors"
 msgstr "Comutare culori"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Setează scurtătura"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Apasă o tastă sau o combinație de taste pentru a seta scurtătura"
 
 msgid "Already assigned"
 msgstr ""
@@ -1351,16 +1351,16 @@ msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Activare autosalvare"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Interval de autosalvare:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minut(e)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Creează un director nou pentru fiecare etichetă de cadru"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr ""
@@ -1376,20 +1376,20 @@ msgid "Autosaved backup for %s was found.\n"
 msgstr ""
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Copie de rezervă reîncărcată"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Elimină paleta selectată în prezent"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Nu poți elimina mai multe palete!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Paleta nu poate fi eliminată, deoarece nu există!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
 
 msgid "and"
-msgstr ""
+msgstr "și"
 
