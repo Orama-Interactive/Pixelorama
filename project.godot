@@ -109,6 +109,10 @@ config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/Version="v0.8-dev"
 
+[audio]
+
+driver="Dummy"
+
 [autoload]
 
 Global="*res://src/Autoload/Global.gd"
