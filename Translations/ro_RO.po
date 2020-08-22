@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 12:06\n"
+"PO-Revision-Date: 2020-08-22 12:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -381,10 +381,10 @@ msgid "Restore default value"
 msgstr "Resetare la valoarea implicită"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Panoramare lentă"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Adaugă o tranziție mai lentă la apropiere sau depărtare"
 
 msgid "Tablet pressure sensitivity:"
 msgstr ""
@@ -1235,19 +1235,19 @@ msgid "Edit Palette"
 msgstr "Editare paletă"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patroni:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Dorești ca numele tău sau al companiei tale să fie afișat pe ecranul de întâmpinare?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Devino sponsor cu rang de platină"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Devino sponsor cu rang de aur"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Devino un patron"
 
 msgid "Don't show again"
 msgstr "Nu mai arăta"
