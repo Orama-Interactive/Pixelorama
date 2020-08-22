@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-08-21 17:15\n"
+"PO-Revision-Date: 2020-08-22 12:06\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -73,7 +73,7 @@ msgid "New..."
 msgstr "جديد..."
 
 msgid "Open..."
-msgstr "فتخ..."
+msgstr "فتح..."
 
 msgid "Save..."
 msgstr "حفظ..."
@@ -112,13 +112,13 @@ msgid "Redo"
 msgstr "إعادة"
 
 msgid "Copy"
-msgstr ""
+msgstr "نسخ"
 
 msgid "Paste"
-msgstr ""
+msgstr "لصق"
 
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Scale Image"
 msgstr "تغيير مقياس الصورة"
@@ -590,7 +590,7 @@ msgid "Indonesian"
 msgstr "الإندونيسية"
 
 msgid "Czech"
-msgstr "التشيكوسلوفاكية"
+msgstr "التشيكية"
 
 msgid "Arabic"
 msgstr ""
