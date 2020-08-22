@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-22 12:39\n"
+"PO-Revision-Date: 2020-08-22 12:48\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -26,45 +26,45 @@ msgstr "Instalare ${APPNAME}"
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Creează scurtături în meniul Start (opțional)"
+msgstr "Creare comenzi rapide în meniul Start (opțional)"
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Creare comandă rapidă pe spațiul de lucru (opțional)"
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Dezinstalare ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: .\pixelorama.nsi:76
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Eliminare fișiere de configurare (opțional)"
 
 #. DESC_SecInstall
 #: .\pixelorama.nsi:178
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Instalează ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Creează comenzi rapide în meniul Start pentru ${APPNAME}."
 
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Creează o comandă rapidă pe spațiul de lucru pentru ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Dezinstalează ${APPNAME} ${APPVERSION} și elimină toate comenzile rapide."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Elimină fișierele de configurare pentru ${APPNAME}."
 
