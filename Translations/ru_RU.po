@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-08-21 17:15\n"
+"PO-Revision-Date: 2020-08-22 10:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -621,7 +621,7 @@ msgid "GitHub Contributors"
 msgstr "GitHub участники"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Художник: %s"
 
 msgid "untitled"
 msgstr "безымянный"
