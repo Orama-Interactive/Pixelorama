@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 11:06\n"
+"PO-Revision-Date: 2020-08-22 11:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1270,22 +1270,22 @@ msgid "A default background color of a new image"
 msgstr "Culoarea implicită de fundal a unei imagini noi"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Blocare raport aspect:"
 
 msgid "Templates:"
 msgstr "Șabloane:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Presetare"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Presetare:"
 
 msgid "Default"
-msgstr ""
+msgstr "Implicită"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personalizată"
 
 msgid "Rectangular Selection"
 msgstr "Selecție dreptunghiulară"
@@ -1318,37 +1318,37 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr "Apasă o tastă sau o combinație de taste pentru a seta scurtătura"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Alocată deja"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Instrument stânga:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Un instrument alocat butonului din stânga al masului"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Instrument dreapta:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Un instrument alocat butonului din dreapta al masului"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Ultimul fișier de proiect nu poate fi găsit."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Încă nu ai salvat sau deschis niciun proiect în Pixelorama!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Deschide ultimul proiect"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Deschide ultimul proiect..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Deschide ultimul proiect la pornire"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Deschide ultimul proiect deschis la pornire"
 
 msgid "Enable autosave"
 msgstr "Activare autosalvare"
@@ -1363,10 +1363,10 @@ msgid "Create new directory for each frame tag"
 msgstr "Creează un director nou pentru fiecare etichetă de cadru"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt director care corespunde cu eticheta de cadru a acestuia"
 
 msgid "Close"
-msgstr ""
+msgstr "Închide"
 
 msgid "Delete"
 msgstr ""
