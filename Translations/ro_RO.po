@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 12:39\n"
+"PO-Revision-Date: 2020-08-22 12:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "New tab"
 msgstr "Filă nouă"
 
 msgid "Spritesheet (new tab)"
-msgstr "Foaie cu sprite-uri (filă nouă)"
+msgstr "Foaie cu grafice bidimensionale (filă nouă)"
 
 msgid "New frame"
 msgstr "Cadru nou"
@@ -223,13 +223,13 @@ msgid "Random brush"
 msgstr "Pensulă aleatorie"
 
 msgid "Save Sprite as .pxo"
-msgstr "Salvare sprite ca .pxo"
+msgstr "Salvare grafic bidimensional ca .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exportare sprite ca .png"
+msgstr "Exportare grafic bidimensional ca .png"
 
 msgid "Export Sprite"
-msgstr "Exportare sprite"
+msgstr "Exportare grafic bidimensional"
 
 msgid "File Exists, Overwrite?"
 msgstr "Fișierul există deja. Suprascrii?"
@@ -258,7 +258,7 @@ msgid "All Frames"
 msgstr "Toate cadrele"
 
 msgid "Spritesheet"
-msgstr "Foaie cu sprite-uri"
+msgstr "Foaie cu grafice bidimensionale"
 
 msgid "Animation"
 msgstr "Animație"
@@ -366,7 +366,7 @@ msgid "Canvas"
 msgstr "Pânză"
 
 msgid "Shortcuts"
-msgstr "Scurtături"
+msgstr "Comenzi rapide"
 
 msgid "Backup"
 msgstr "Copie de rezervă"
@@ -677,7 +677,7 @@ msgid "Color Picker\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Selector de culori\n"
-"Selectează o culoare dintr-un pixel al sprite-ului\n\n"
+"Selectează o culoare dintr-un pixel al graficului bidimensional\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
@@ -1211,7 +1211,7 @@ msgid "Import Palette"
 msgstr "Importare paletă"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Creare paletă din sprite-ul actual"
+msgstr "Creare paletă din graficul bidimensional actual"
 
 msgid "Palette Name:"
 msgstr "Numele paletei:"
@@ -1316,10 +1316,10 @@ msgid "Switch Colors"
 msgstr "Comutare culori"
 
 msgid "Set the shortcut"
-msgstr "Setează scurtătura"
+msgstr "Setează comanda rapidă"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr "Apasă o tastă sau o combinație de taste pentru a seta scurtătura"
+msgstr "Apasă o tastă sau o combinație de taste pentru a seta comanda rapidă"
 
 msgid "Already assigned"
 msgstr "Alocată deja"
