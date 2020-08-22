@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-21 17:15\n"
+"PO-Revision-Date: 2020-08-22 00:48\n"
 
 msgid "OK"
 msgstr "确定"
@@ -621,7 +621,7 @@ msgid "GitHub Contributors"
 msgstr "GitHub 贡献者"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "艺术作者： %s"
 
 msgid "untitled"
 msgstr "未命名"
