@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-23 15:59\n"
+"PO-Revision-Date: 2020-08-23 16:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1304,22 +1304,22 @@ msgid "Pencil"
 msgstr "Matita"
 
 msgid "Eraser"
-msgstr "Gomma da cancellare"
+msgstr "Gomma"
 
 msgid "Bucket"
 msgstr "Secchio"
 
 msgid "Lighten/Darken"
-msgstr "Lucido/Scuro"
+msgstr "Schiarisci/Scurisci"
 
 msgid "Switch Colors"
-msgstr "Cambia Colori"
+msgstr "Inverti Colori"
 
 msgid "Set the shortcut"
-msgstr "Imposta il collegamento"
+msgstr "Imposta la scorciatoia"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr "Premi un tasto o una combinazione di tasti per impostare il collegamento"
+msgstr "Premere un tasto o una combinazione di tasti per impostare la scorciatoia"
 
 msgid "Already assigned"
 msgstr "Già assegnato"
@@ -1337,7 +1337,7 @@ msgid "A tool assigned to the right mouse button"
 msgstr "Uno strumento assegnato al pulsante destro del mouse"
 
 msgid "Cannot find last project file."
-msgstr "Impossibile trovare l'ultimo file del progetto."
+msgstr "Impossibile trovare il file dell'ultimo progetto."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Non hai ancora salvato o aperto alcun progetto in Pixelorama!"
@@ -1377,23 +1377,23 @@ msgstr "Elimina"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr "È stato trovato il backup automatico per %s\n"
+msgstr "È stato trovato il backup automatico per %s.\n"
 "Vuoi ricaricarlo?"
 
 msgid "Backup reloaded"
 msgstr "Backup ricaricato"
 
 msgid "Remove currently selected palette"
-msgstr "Rimuovi la tavolozza attualmente selezionata"
+msgstr "Rimuovi la palette attualmente selezionata"
 
 msgid "You can't remove more palettes!"
-msgstr "Non puoi rimuovere altre tavolozze!"
+msgstr "Non puoi rimuovere altre palette!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr "Impossibile rimuovere la tavolozza, perché non esiste!"
+msgstr "Impossibile rimuovere la palette, perché non esiste!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Si è verificato un errore durante la rimozione della tavolozza! Codice errore: %s"
+msgstr "Si è verificato un errore durante la rimozione della palette! Codice errore: %s"
 
 msgid "and"
 msgstr "e"
