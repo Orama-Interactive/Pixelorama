@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-23 15:20\n"
+"PO-Revision-Date: 2020-08-23 15:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -294,7 +294,7 @@ msgid "All frames as multiple files"
 msgstr "Tutti i frame come file multipli"
 
 msgid "All frames as a single file animation"
-msgstr "Tutti i fotogrammi sotto forma di animazione di singolo file"
+msgstr "Tutti i frame sotto forma di un singolo file animazione"
 
 msgid "Background:"
 msgstr "Sfondo:"
@@ -303,7 +303,7 @@ msgid "Direction:"
 msgstr "Direzione:"
 
 msgid "Forward"
-msgstr "Inoltra"
+msgstr "Avanti"
 
 msgid "Backwards"
 msgstr "Indietro"
@@ -363,10 +363,10 @@ msgid "Themes"
 msgstr "Temi"
 
 msgid "Canvas"
-msgstr "Tela"
+msgstr "Canvas"
 
 msgid "Shortcuts"
-msgstr "Collegamenti"
+msgstr "Scorciatoie da tastiera"
 
 msgid "Backup"
 msgstr "Backup"
@@ -384,7 +384,7 @@ msgid "Smooth Zoom"
 msgstr "Zoom smussato"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "Aggiunge una transizione più fluida quando si zooma in entrata o fuori"
+msgstr "Aggiunge una transizione più fluida quando si zooma dentro o fuori"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilità della pressione del tablet:"
@@ -420,16 +420,16 @@ msgid "Light"
 msgstr "Chiaro"
 
 msgid "Only affect selection"
-msgstr "Influisce solo sulla selezione"
+msgstr "Influire solo sulla selezione"
 
 msgid "Current cel"
 msgstr "Pacchetto corrente"
 
 msgid "Current frame"
-msgstr "Quadro corrente"
+msgstr "Frame corrente"
 
 msgid "All frames"
-msgstr "Tutti i quadri"
+msgstr "Tutti i frame"
 
 msgid "All projects"
 msgstr "Tutti i progetti"
@@ -465,13 +465,13 @@ msgid "Adjust HSV"
 msgstr "Regola HSV"
 
 msgid "Type:"
-msgstr "Tipologia:"
+msgstr "Tipo:"
 
 msgid "Angle:"
 msgstr "Angolo:"
 
 msgid "Hue"
-msgstr "Tinta"
+msgstr "Tonalità"
 
 msgid "Saturation"
 msgstr "Saturazione"
@@ -498,10 +498,10 @@ msgid "Steps:"
 msgstr "Passaggi:"
 
 msgid "Top to Bottom"
-msgstr "Dall'alto verso il basso"
+msgstr "Dall'alto in basso"
 
 msgid "Bottom to Top"
-msgstr "Dal basso verso l'alto"
+msgstr "Dal basso in alto"
 
 msgid "Left to Right"
 msgstr "Da sinistra a destra"
@@ -510,13 +510,13 @@ msgid "Right to Left"
 msgstr "Da destra a sinistra"
 
 msgid "View Splash Screen"
-msgstr "Visualizza lo splash screen"
+msgstr "Visualizza la schermata iniziale"
 
 msgid "Online Docs"
-msgstr "Online Docs"
+msgstr "Documentazione online"
 
 msgid "Issue Tracker"
-msgstr "Tracciatore problemi"
+msgstr "Tracker dei Problemi"
 
 msgid "Changelog"
 msgstr "Novità"
