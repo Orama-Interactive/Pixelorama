@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-23 15:10\n"
+"PO-Revision-Date: 2020-08-23 15:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -127,16 +127,16 @@ msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
 
 msgid "Resize Canvas"
-msgstr "Ridimensiona Tela"
+msgstr "Ridimensiona Canvas"
 
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
 
 msgid "Clear Selection"
-msgstr "Nessuna selezione"
+msgstr "Pulisci selezione"
 
 msgid "Flip"
-msgstr "Inverti"
+msgstr "Rifletti"
 
 msgid "Flip Horizontal"
 msgstr "Rifletti orizzontalmente"
@@ -160,7 +160,7 @@ msgid "Show Guides"
 msgstr "Mostra le guide"
 
 msgid "Show Animation Timeline"
-msgstr "Mostra la Linea del Tempo dell'animazione"
+msgstr "Mostra la Timeline di animazione"
 
 msgid "Zen Mode"
 msgstr "Modalità Zen"
@@ -187,16 +187,16 @@ msgid "New tab"
 msgstr "Nuova scheda"
 
 msgid "Spritesheet (new tab)"
-msgstr "Scheda Sprite (nuova scheda)"
+msgstr "Spritesheet (nuova scheda)"
 
 msgid "New frame"
-msgstr "Nuovo quadro"
+msgstr "Nuovo frame"
 
 msgid "New layer"
 msgstr "Nuovo livello"
 
 msgid "New palette"
-msgstr "Nuova tavolozza"
+msgstr "Nuova palette"
 
 msgid "New brush"
 msgstr "Nuova pennello"
@@ -205,10 +205,10 @@ msgid "New pattern"
 msgstr "Nuovo motivo"
 
 msgid "Horizontal frames:"
-msgstr "Quadri orizzontali:"
+msgstr "Frame orizzontali:"
 
 msgid "Vertical frames:"
-msgstr "Quadri verticali:"
+msgstr "Frame verticali:"
 
 msgid "Brush type:"
 msgstr "Tipo del pennello:"
@@ -249,13 +249,13 @@ msgstr "Impossibile caricare il file '%s'.\n"
 "Codice di errore: %s"
 
 msgid "Frame"
-msgstr "Fotogrammi"
+msgstr "Frame"
 
 msgid "Frames:"
-msgstr "Fotogrammi:"
+msgstr "Frame:"
 
 msgid "All Frames"
-msgstr "Tutti i fotogrammi"
+msgstr "Tutti i frame"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -267,10 +267,10 @@ msgid "Preview:"
 msgstr "Anteprima:"
 
 msgid "Frame:"
-msgstr "Fotogrammi:"
+msgstr "Frame:"
 
 msgid "Orientation:"
-msgstr "Orientazione:"
+msgstr "Orientamento:"
 
 msgid "Browse"
 msgstr "Esplora"
@@ -291,7 +291,7 @@ msgid "Open a Directory"
 msgstr "Apri una cartella"
 
 msgid "All frames as multiple files"
-msgstr "Tutti i fotogrammi come file multipli"
+msgstr "Tutti i frame come file multipli"
 
 msgid "All frames as a single file animation"
 msgstr "Tutti i fotogrammi sotto forma di animazione di singolo file"
