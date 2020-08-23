@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-22 18:26\n"
+"PO-Revision-Date: 2020-08-23 19:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1235,7 +1235,7 @@ msgid "Edit Palette"
 msgstr "Editare paletă"
 
 msgid "Patrons:"
-msgstr "Patroni:"
+msgstr "Susținători:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Dorești ca numele tău sau al companiei tale să fie afișat pe ecranul de întâmpinare?"
@@ -1247,7 +1247,7 @@ msgid "Become a Gold Sponsor"
 msgstr "Devino sponsor cu rang de aur"
 
 msgid "Become a Patron"
-msgstr "Devino un patron"
+msgstr "Devino susținător"
 
 msgid "Don't show again"
 msgstr "Nu mai arăta"
