@@ -53,6 +53,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 min_value = 1.0
+max_value = 25.0
 value = 1.0
 allow_greater = true
 ticks_on_borders = true
