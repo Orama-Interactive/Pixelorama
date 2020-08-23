@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-23 15:37\n"
+"PO-Revision-Date: 2020-08-23 15:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -818,31 +818,31 @@ msgid "Checker size:"
 msgstr "Dimensione checker:"
 
 msgid "Size of the transparent checker background"
-msgstr "Dimensioni dello sfondo trasparente del checker"
+msgstr "Dimensioni dello sfondo checker trasparente"
 
 msgid "Checker color 1:"
 msgstr "Colore checker 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Primo colore dello sfondo trasparente del checker"
+msgstr "Primo colore dello sfondo checker trasparente"
 
 msgid "Checker color 2:"
 msgstr "Colore checker 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Secondo colore dello sfondo trasparente del checker"
+msgstr "Secondo colore dello sfondo checker trasparente"
 
 msgid "Follow Canvas Movement"
-msgstr "Segui Il Movimento Tela"
+msgstr "Segui Il Movimento del Canvas"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr "Il controllore trasparente segue il movimento della tela"
+msgstr "Il checker trasparente segue il movimento del canvas"
 
 msgid "Follow Canvas Zoom Level"
-msgstr "Segui il Livello di Zoom della tela"
+msgstr "Segui il Livello di Zoom del canvas"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Il correttore trasparente segue il livello di zoom della tela"
+msgstr "Il checker trasparente segue il livello di zoom del canvas"
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
@@ -851,7 +851,7 @@ msgid "Brush:"
 msgstr "Pennello:"
 
 msgid "Select a brush"
-msgstr "Scegli un pennello"
+msgstr "Seleziona un pennello"
 
 msgid "Brush: Pixel"
 msgstr "Pennello: Pixel"
@@ -869,7 +869,7 @@ msgid "Brush size:"
 msgstr "Dimensione del pennello:"
 
 msgid "Overwrite"
-msgstr "Sovrascrivere"
+msgstr "Sovrascrivi"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
@@ -878,16 +878,16 @@ msgid "Brush color from"
 msgstr "Colore del pennello da"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr "0: Colore dal pennello stesso, 100: il colore selezionato"
+msgstr "0: Colore dal pennello stesso, 100: il colore attualmente selezionato"
 
 msgid "Fill area:"
 msgstr "Riempi l'area:"
 
 msgid "Same color area"
-msgstr "Stessa area di colore"
+msgstr "Area dello stesso colore"
 
 msgid "Same color pixels"
-msgstr "Stessi pixel di colore"
+msgstr "Pixel dello stesso colore"
 
 msgid "Fill with:"
 msgstr "Riempi con:"
@@ -896,7 +896,7 @@ msgid "Selected Color"
 msgstr "Colore selezionato"
 
 msgid "Pattern"
-msgstr "Sequenza"
+msgstr "Motivo"
 
 msgid "Offset"
 msgstr "Offset"
@@ -914,7 +914,7 @@ msgid "Lighten/Darken amount"
 msgstr "Quantità di Schiarimento/Scurimento"
 
 msgid "Pick for:"
-msgstr "Seleziona per:"
+msgstr "Scegli per:"
 
 msgid "Left Color"
 msgstr "Colore sinistro"
@@ -935,7 +935,7 @@ msgid "Options:"
 msgstr "Opzioni:"
 
 msgid "Fit to frame"
-msgstr "Adatta al riquadro"
+msgstr "Adatta al frame"
 
 msgid "100% Zoom"
 msgstr "Ingrandimento 100%"
