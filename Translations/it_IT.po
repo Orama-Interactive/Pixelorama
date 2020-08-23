@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-23 15:49\n"
+"PO-Revision-Date: 2020-08-23 15:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -938,19 +938,19 @@ msgid "Fit to frame"
 msgstr "Adatta al frame"
 
 msgid "100% Zoom"
-msgstr "Ingrandimento 100%"
+msgstr "Zoom 100%"
 
 msgid "Mirroring"
-msgstr "Speculare"
+msgstr "Specchiatura"
 
 msgid "Horizontal"
 msgstr "Orizzontale"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr "Abilita disegno speculare orizzontale"
+msgstr "Abilita disegno orizzontale a specchio"
 
 msgid "Enable vertical mirrored drawing"
-msgstr "Abilita disegno speculare verticale"
+msgstr "Abilita disegno verticale a specchio"
 
 msgid "Vertical"
 msgstr "Verticale"
@@ -992,7 +992,7 @@ msgid "Onion Skinning settings"
 msgstr "Impostazioni Onion Skinning"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Abilita/disabilita Onion Skinning"
+msgstr "Abilita/Disabilita Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1000,7 +1000,7 @@ msgstr "Quanti frame al secondo dovrebbe essere l'anteprima dell'animazione?\n"
 "Maggiori gli FPS, più veloce sarà l'animazione."
 
 msgid "No loop"
-msgstr "Nessun ciclo"
+msgstr "Nessun loop"
 
 msgid "Cycle loop"
 msgstr "Loop ciclico"
@@ -1009,7 +1009,7 @@ msgid "Ping-pong loop"
 msgstr "Ping-pong loop"
 
 msgid "Onion Skinning:"
-msgstr "Buccia di Cipolla:"
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Frame Passati"
@@ -1050,7 +1050,7 @@ msgid "Add Frame Tag"
 msgstr "Aggiungi tag Frame"
 
 msgid "Link Cel"
-msgstr "Cel link"
+msgstr "Collega Cel"
 
 msgid "Unlink Cel"
 msgstr "Scollega Cel"
@@ -1083,15 +1083,15 @@ msgid "Opacity:"
 msgstr "Opacità:"
 
 msgid "Toggle layer's visibility"
-msgstr "Attiva/disattiva visibilità del livello"
+msgstr "Attiva/Disattiva visibilità del livello"
 
 msgid "Lock/unlock layer"
-msgstr "Blocca/sblocca livello"
+msgstr "Blocca/Sblocca livello"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Abilita/disabilita il collegamento di cel\n\n"
-"I cels collegati sono condivisi su più fotogrammi"
+msgstr "Abilita/Disabilita il collegamento di cel\n\n"
+"I cel collegati sono condivisi su più frame"
 
 msgid "Palette"
 msgstr "Palette"
@@ -1175,16 +1175,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Ripeti: Elimina pennello personalizzato"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Annulla: Modifica tag Frame"
+msgstr "Annulla: Modifica Tag Frame"
 
 msgid "Redo: Modify Frame Tag"
 msgstr "Ripristina: Modifica Tag Frame"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Annulla: Elimina tag Frame"
+msgstr "Annulla: Elimina Tag Frame"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Ripristina: Elimina tag Frame"
+msgstr "Ripristina: Elimina Tag Frame"
 
 msgid "Move Guide"
 msgstr "Muovi la guida"
@@ -1211,7 +1211,7 @@ msgid "Import Palette"
 msgstr "Importa Palette"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Crea Tavolozza Da Sprite Attuale"
+msgstr "Crea palette dallo sprite attuale"
 
 msgid "Palette Name:"
 msgstr "Nome Palette:"
@@ -1241,10 +1241,10 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Vuoi che il tuo nome o la tua azienda siano mostrati nella schermata iniziale?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Diventa uno Sponsor Platinum"
+msgstr "Diventa uno Sponsor Platino"
 
 msgid "Become a Gold Sponsor"
-msgstr "Diventa uno Sponsor Gold"
+msgstr "Diventa uno Sponsor Oro"
 
 msgid "Become a Patron"
 msgstr "Diventa un sostenitore"
@@ -1253,7 +1253,7 @@ msgid "Don't show again"
 msgstr "Non mostrare di nuovo"
 
 msgid "Image Options"
-msgstr "Opzioni dell'immagine:"
+msgstr "Opzioni dell'immagine"
 
 msgid "Default width:"
 msgstr "Larghezza default:"
@@ -1265,7 +1265,7 @@ msgid "Default height:"
 msgstr "Altezza default:"
 
 msgid "A default height of a new image"
-msgstr "Un'altezza predefinita di una nuova immagini"
+msgstr "Un'altezza predefinita di una nuova immagine"
 
 msgid "Default fill color:"
 msgstr "Colore di riempimento predefinito:"
@@ -1274,7 +1274,7 @@ msgid "A default background color of a new image"
 msgstr "Un colore di sfondo predefinito di una nuova immagine"
 
 msgid "Lock aspect ratio:"
-msgstr "Blocca rapporto d'aspetto:"
+msgstr "Blocca proporzioni:"
 
 msgid "Templates:"
 msgstr "Modelli:"
