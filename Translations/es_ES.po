@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Guardar como..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Utilizar compresión ZSTD"
 
 msgid "Import"
 msgstr "Importar"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Anular selección"
 
 msgid "Flip"
-msgstr ""
+msgstr "Girar"
 
 msgid "Flip Horizontal"
 msgstr "Voltear Horizontalmente"
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr "Modo zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Modo de pantalla completa"
 
 msgid "Fill with color:"
 msgstr "Rellenar con color:"
@@ -178,7 +178,7 @@ msgid "Open File(s)"
 msgstr "Abrir archivo(s)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Opciones de importación"
 
 msgid "Import as:"
 msgstr "Importar como:"
@@ -211,7 +211,7 @@ msgid "Vertical frames:"
 msgstr "Fotogramas verticales:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tipo de pincel:"
 
 msgid "File brush"
 msgstr ""
@@ -581,6 +581,9 @@ msgstr "Letón"
 msgid "Spanish"
 msgstr "Español"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -617,8 +620,8 @@ msgstr "Diseñador de IU"
 msgid "GitHub Contributors"
 msgstr "Colaboradores de GitHub"
 
-msgid "Art by"
-msgstr "Arte por"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "sin título"
@@ -769,6 +772,21 @@ msgstr "Un color de las guías de reglas que se muestran en el lienzo"
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Ancho de cuadrícula:"
 
@@ -780,6 +798,12 @@ msgstr "Altura de cuadrícula:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Establece cuán lejos están las líneas horizontales de la cuadrícula"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Color de cuadrícula:"
@@ -806,6 +830,18 @@ msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
+msgstr ""
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
@@ -1358,4 +1394,7 @@ msgstr "¡No se puede quitar la paleta, porque no existe!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "¡Se ha producido un error al eliminar la paleta! Código de error: %s"
+
+msgid "and"
+msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-08-08 16:10\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -581,6 +581,9 @@ msgstr "Letton"
 msgid "Spanish"
 msgstr "Espagnol"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -617,8 +620,8 @@ msgstr "Designer de l'interface"
 msgid "GitHub Contributors"
 msgstr "Contributeurs de GitHub"
 
-msgid "Art by"
-msgstr "Art par"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "sans titre"
@@ -769,6 +772,21 @@ msgstr "Une couleur des guides de règle affichée sur le canevas"
 msgid "Grid"
 msgstr "Grille"
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Largeur de la grille:"
 
@@ -780,6 +798,12 @@ msgstr "Hauteur de la grille:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Définit la distance entre les lignes horizontales de la grille"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Couleur de la grille:"
@@ -807,6 +831,18 @@ msgstr "Couleur du damier 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Seconde couleur du fond en damier transparent"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
@@ -1358,4 +1394,7 @@ msgstr "Impossible de supprimer la palette, car elle n'existe pas !"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Une erreur est survenue lors de la suppression de la palette ! Code d'erreur : %s"
+
+msgid "and"
+msgstr ""
 

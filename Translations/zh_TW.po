@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-09 03:00\n"
+"PO-Revision-Date: 2020-08-22 08:48\n"
 
 msgid "OK"
 msgstr "確定"
@@ -580,6 +580,9 @@ msgstr "拉脫維亞文"
 msgid "Spanish"
 msgstr "西班牙文"
 
+msgid "Catalan"
+msgstr "加泰隆尼亞語"
+
 msgid "Esperanto"
 msgstr "世界語"
 
@@ -616,8 +619,8 @@ msgstr "UI設計師"
 msgid "GitHub Contributors"
 msgstr "GitHub 貢獻者"
 
-msgid "Art by"
-msgstr "作者"
+msgid "Art by: %s"
+msgstr "%s 繪製"
 
 msgid "untitled"
 msgstr "未命名"
@@ -768,6 +771,21 @@ msgstr "尺標輔助線的顏色"
 msgid "Grid"
 msgstr "格線"
 
+msgid "Grid type:"
+msgstr "格線類型："
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "設定格線類型為矩形, 等角立體或全部"
+
+msgid "Rectangular"
+msgstr "矩形"
+
+msgid "Isometric"
+msgstr "等角立體"
+
+msgid "All"
+msgstr "全部"
+
 msgid "Grid width:"
 msgstr "格線寬度："
 
@@ -779,6 +797,12 @@ msgstr "格線高度："
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "設定水平格線的高度"
+
+msgid "Isometric cell size:"
+msgstr "等角立體間隔大小"
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "設定等角立體格線的間隔大小"
 
 msgid "Grid color:"
 msgstr "格線顏色："
@@ -806,6 +830,18 @@ msgstr "空白格顏色2："
 
 msgid "Second color of the transparent checker background"
 msgstr "空白背景格的顏色2"
+
+msgid "Follow Canvas Movement"
+msgstr "跟隨畫布移動"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "空白背景格跟隨畫布移動"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "跟隨畫布放大縮小"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "空白背景格跟隨畫布放大縮小"
 
 msgid "Only custom preset can be modified"
 msgstr "只能修改自訂配置"
@@ -1356,4 +1392,7 @@ msgstr "無法刪除不存在的色盤"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "刪除色盤出錯! 錯誤代碼：%s"
+
+msgid "and"
+msgstr "和"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -581,6 +581,9 @@ msgstr "Lotyština"
 msgid "Spanish"
 msgstr "Španělština"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -617,8 +620,8 @@ msgstr "Návrhář UI"
 msgid "GitHub Contributors"
 msgstr "Github přispěvatelé"
 
-msgid "Art by"
-msgstr "Dílo od"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "bez názvu"
@@ -769,6 +772,21 @@ msgstr "Barva vodítek zobrazených na plátně"
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Šířka mřížky:"
 
@@ -780,6 +798,12 @@ msgstr "Výška mřížky:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Nastaví, jak daleko jsou od sebe vodorovné čáry mřížky"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Barva mřížky:"
@@ -807,6 +831,18 @@ msgstr "Barva šachovnice 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Druhá barva průhledného šachovnicového pozadí"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Lze upravit pouze vlastní předvolbu"
@@ -1357,5 +1393,8 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
 
 msgid "An error occured while removing the palette! Error code: %s"
+msgstr ""
+
+msgid "and"
 msgstr ""
 

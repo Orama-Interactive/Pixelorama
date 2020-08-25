@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-08 17:00\n"
+"PO-Revision-Date: 2020-08-22 00:48\n"
 
 msgid "OK"
 msgstr "确定"
@@ -581,6 +581,9 @@ msgstr "拉美语"
 msgid "Spanish"
 msgstr "西班牙语"
 
+msgid "Catalan"
+msgstr "加泰罗尼亚语"
+
 msgid "Esperanto"
 msgstr "世界语"
 
@@ -617,8 +620,8 @@ msgstr "UI 设计师"
 msgid "GitHub Contributors"
 msgstr "GitHub 贡献者"
 
-msgid "Art by"
-msgstr "艺术作者"
+msgid "Art by: %s"
+msgstr "艺术作者： %s"
 
 msgid "untitled"
 msgstr "未命名"
@@ -769,6 +772,21 @@ msgstr "显示在画布上标尺参考线的颜色"
 msgid "Grid"
 msgstr "网格"
 
+msgid "Grid type:"
+msgstr "网格类型："
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "设置矩形、方形或两者之间的网格类型"
+
+msgid "Rectangular"
+msgstr "矩形"
+
+msgid "Isometric"
+msgstr "几何体"
+
+msgid "All"
+msgstr "全部"
+
 msgid "Grid width:"
 msgstr "网格宽度："
 
@@ -780,6 +798,12 @@ msgstr "网格高度："
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "设置网格水平线之间的距离"
+
+msgid "Isometric cell size:"
+msgstr "几何单元格大小："
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "设置等深网格中单元格的大小"
 
 msgid "Grid color:"
 msgstr "网格颜色："
@@ -807,6 +831,18 @@ msgstr "检查器颜色 2："
 
 msgid "Second color of the transparent checker background"
 msgstr "透明检查器背景的第二个颜色"
+
+msgid "Follow Canvas Movement"
+msgstr "跟随画布移动"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "透明检查器跟随画布移动"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "跟随画布缩放级别"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "透明检查器跟随画布缩放级别"
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
@@ -1357,4 +1393,7 @@ msgstr "无法删除调色板，因为它不存在！"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "删除调色板时发生错误！ 错误代码：%s"
+
+msgid "and"
+msgstr "和"
 

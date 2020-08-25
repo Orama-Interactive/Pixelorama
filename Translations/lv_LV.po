@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-21 17:14\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -581,6 +581,9 @@ msgstr ""
 msgid "Spanish"
 msgstr "Spāņu"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr ""
 
@@ -617,8 +620,8 @@ msgstr "UI dizaineris"
 msgid "GitHub Contributors"
 msgstr "GitHub līdzdalībnieks"
 
-msgid "Art by"
-msgstr "Mākslas darbu autors"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "bez nosaukuma"
@@ -767,6 +770,21 @@ msgstr ""
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr ""
 
@@ -777,6 +795,12 @@ msgid "Grid height:"
 msgstr ""
 
 msgid "Sets how far apart are horizontal lines of the grid"
+msgstr ""
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
 
 msgid "Grid color:"
@@ -804,6 +828,18 @@ msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
+msgstr ""
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
@@ -1352,5 +1388,8 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
 
 msgid "An error occured while removing the palette! Error code: %s"
+msgstr ""
+
+msgid "and"
 msgstr ""
 

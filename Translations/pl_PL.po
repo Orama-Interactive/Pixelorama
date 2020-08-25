@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-08 23:59\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,6 +580,9 @@ msgstr "Łotewski"
 msgid "Spanish"
 msgstr "Hiszpański"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -616,8 +619,8 @@ msgstr "Projektant interfejsu użytkownika"
 msgid "GitHub Contributors"
 msgstr "Wnieśli wkład (GitHub)"
 
-msgid "Art by"
-msgstr "Grafika wykonana przez"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "bez nazwy"
@@ -768,6 +771,21 @@ msgstr "Kolor prowadnic wyświetlanych na płótnie"
 msgid "Grid"
 msgstr "Siatka"
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Szerokość siatki:"
 
@@ -779,6 +797,12 @@ msgstr "Wysokość siatki:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Ustawia jak daleko od siebie są poziome linie siatki"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Kolor siatki:"
@@ -806,6 +830,18 @@ msgstr "Kolor komórek 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Drugi kolor komórek do rysowania - szachownicy"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
@@ -1357,4 +1393,7 @@ msgstr "Nie można usunąć palety, ponieważ nie istnieje!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Wystąpił błąd podczas usuwania palety! Kod błędu: %s"
+
+msgid "and"
+msgstr ""
 

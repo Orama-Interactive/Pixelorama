@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-08-08 16:10\n"
+"PO-Revision-Date: 2020-08-21 17:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,6 +580,9 @@ msgstr "Latvisk"
 msgid "Spanish"
 msgstr "Spansk"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -616,8 +619,8 @@ msgstr "UI-Designer"
 msgid "GitHub Contributors"
 msgstr "Bidragere på Github"
 
-msgid "Art by"
-msgstr "Kunst av"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "uten navn"
@@ -768,6 +771,21 @@ msgstr "Farge som brukes av linjal og guider på lerretet"
 msgid "Grid"
 msgstr "Rutenett"
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Rutenettbredde:"
 
@@ -779,6 +797,12 @@ msgstr "Rutenetthøyde:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Angir hvor langt fra hverandre de horisontale linjene er i rutenettet"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Rutenettfarge:"
@@ -806,6 +830,18 @@ msgstr "Sjekkerfarge 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
@@ -1355,4 +1391,7 @@ msgstr "Kan ikke fjerne paletten, den eksisterer ikke!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Det oppsto en feil under fjerning av paletten! Feilkode: %s"
+
+msgid "and"
+msgstr ""
 

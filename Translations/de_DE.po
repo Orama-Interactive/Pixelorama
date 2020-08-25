@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-08-09 14:19\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,6 +580,9 @@ msgstr "Lettisch"
 msgid "Spanish"
 msgstr "Spanisch"
 
+msgid "Catalan"
+msgstr "Katalanisch"
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -616,8 +619,8 @@ msgstr "UI Designer"
 msgid "GitHub Contributors"
 msgstr "Github Beitragende"
 
-msgid "Art by"
-msgstr "Zeichnung von"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "unbenannt"
@@ -768,6 +771,21 @@ msgstr "Eine Farbe der Linealguides, die auf dem Canvas angezeigt werden"
 msgid "Grid"
 msgstr "Tabelle"
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Rasterbreite:"
 
@@ -779,6 +797,12 @@ msgstr "Rasterhöhe:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Legt fest, wie weit die horizontalen Linien des Rasters voneinander entfernt sind"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
@@ -806,6 +830,18 @@ msgstr "Checkerfarbe 2:"
 
 msgid "Second color of the transparent checker background"
 msgstr "Zweite Farbe des transparenten Checkerhintergrunds"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
@@ -1357,4 +1393,7 @@ msgstr "Die Palette kann nicht entfernt werden, da sie nicht existiert!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Beim Entfernen der Palette ist ein Fehler aufgetreten! Fehlercode: %s"
+
+msgid "and"
+msgstr "und"
 
