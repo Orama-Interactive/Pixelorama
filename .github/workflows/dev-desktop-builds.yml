@@ -69,18 +69,23 @@ jobs:
 
   export-mac:
     name: Mac Export 🍎
-    runs-on: ubuntu-latest
-    container:
-      image: docker://barichello/godot-ci:3.2.2
+    runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup 💻
+      - name: Download and extract export templates 💾
         run: |
-          mkdir -v -p build/mac ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_${GODOT_VERSION}-stable_export_templates.tpz
+          unzip -a Godot_${GODOT_VERSION}-stable_export_templates.tpz
+          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Download Godot headless binary 💾
+        run: |
+          curl -O https://huskee.cf/files/Godot_v3.2.2-stable_mac_headless.64.zip
+          unzip -a Godot_v3.2.2-stable_mac_headless.64.zip
+          mkdir -v -p ./build/mac/
       - name: Mac Build 🔧
         run: godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact 🚀
