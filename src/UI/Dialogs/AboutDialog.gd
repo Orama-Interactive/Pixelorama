@@ -101,6 +101,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  StarFang208 - " + tr("Italian"))
 	translators.create_item(translators_root).set_text(0, "  Azagaya VJ (azagaya.games) - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Lilly And (KatieAnd) - " + tr("Spanish"))
+	translators.create_item(translators_root).set_text(0, "  UncleFangs - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Jaime Arancibia Soto - " + tr("Spanish") + " " + tr("and") + " " + tr("Catalan"))
 	translators.create_item(translators_root).set_text(0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian"))
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
@@ -108,6 +109,9 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  Martin Novák (novhack) - " + tr("Czech"))
 	translators.create_item(translators_root).set_text(0, "  Lullius - " + tr("Norwegian"))
 	translators.create_item(translators_root).set_text(0, "  Aninuscsalas - " + tr("Hungarian"))
+	translators.create_item(translators_root).set_text(0, "  jaehyeon1090 - " + tr("Korean"))
+	translators.create_item(translators_root).set_text(0, "  sfun_G - " + tr("Korean"))
+	translators.create_item(translators_root).set_text(0, "  LMG - " + tr("Romanian"))
 
 
 func _on_AboutDialog_popup_hide() -> void:
