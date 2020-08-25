@@ -1,4 +1,4 @@
-extends WindowDialog
+extends ConfirmationDialog
 
 
 enum {CEL, FRAME, ALL_FRAMES, ALL_PROJECTS}
@@ -34,12 +34,7 @@ func _on_HSVDialog_about_to_show() -> void:
 	update_preview()
 
 
-func _on_Cancel_pressed() -> void:
-	visible = false
-	reset()
-
-
-func _on_Apply_pressed() -> void:
+func _on_HSVDialog_confirmed() -> void:
 	if affect == CEL:
 		Global.canvas.handle_undo("Draw")
 		DrawingAlgos.adjust_hsv(current_cel, hue_slider.value, sat_slider.value, val_slider.value, pixels)
@@ -74,7 +69,6 @@ func _on_Apply_pressed() -> void:
 					DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, _pixels)
 			Global.canvas.handle_redo("Draw", project, -1, -1)
 	reset()
-	visible = false
 
 
 func reset() -> void:
