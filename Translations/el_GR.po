@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-25 13:46\n"
+"PO-Revision-Date: 2020-08-25 13:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -836,13 +836,13 @@ msgid "Follow Canvas Movement"
 msgstr "Να ακολουθεί τη κίνηση του καμβά"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί τη κίνηση του καμβά"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
 msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
@@ -872,7 +872,7 @@ msgid "Overwrite"
 msgstr "Αντικατάσταση"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
