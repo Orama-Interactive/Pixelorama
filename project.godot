@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Rulers/Guide.gd"
 }, {
+"base": "AcceptDialog",
+"class": "ImageEffect",
+"language": "GDScript",
+"path": "res://src/Classes/ImageEffect.gd"
+}, {
 "base": "Reference",
 "class": "Layer",
 "language": "GDScript",
@@ -87,6 +92,7 @@ _global_script_class_icons={
 "Drawer": "",
 "Frame": "",
 "Guide": "",
+"ImageEffect": "",
 "Layer": "",
 "LayerButton": "",
 "Palette": "",
