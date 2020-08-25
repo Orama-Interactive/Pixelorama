@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-25 14:18\n"
+"PO-Revision-Date: 2020-08-25 17:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -581,7 +581,7 @@ msgid "Spanish"
 msgstr "Hiszpański"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Kataloński"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -608,7 +608,7 @@ msgid "Hungarian"
 msgstr "Węgierski"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumuński"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -623,7 +623,7 @@ msgid "GitHub Contributors"
 msgstr "Wnieśli wkład (GitHub)"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Artysta: %s"
 
 msgid "untitled"
 msgstr "bez nazwy"
@@ -775,19 +775,19 @@ msgid "Grid"
 msgstr "Siatka"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Typ siatki:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Ustawia typ siatki pomiędzy prostokątną, izometryczną lub oba"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Prostokątna"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Izometryczna"
 
 msgid "All"
-msgstr ""
+msgstr "Wszystkie"
 
 msgid "Grid width:"
 msgstr "Szerokość siatki:"
@@ -802,10 +802,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Ustawia jak daleko od siebie są poziome linie siatki"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Rozmiar komórki izometrycznej:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Ustawia rozmiar komórek w siatce izometrycznej"
 
 msgid "Grid color:"
 msgstr "Kolor siatki:"
