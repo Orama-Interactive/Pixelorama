@@ -47,7 +47,7 @@ func _define_js() -> void:
 		canceled = true;
 		var input = document.createElement('INPUT');
 		input.setAttribute("type", "file");
-		input.setAttribute("accept", "application/json, .gpl, image/png, image/jpeg, image/webp");
+		input.setAttribute("accept", "application/json, .gpl, .pal, image/png, image/jpeg, image/webp");
 		input.click();
 		input.addEventListener('change', event => {
 			if (event.target.files.length > 0){
@@ -172,6 +172,10 @@ func load_palette() -> void:
 	if file_name.ends_with(".gpl"):
 		var palette := Palette.new()
 		palette = Import.import_gpl(file_name, palette_data)
+		Global.palette_container.attempt_to_import_palette(palette)
+	elif file_name.end_with(".pal"):
+		var palette := Palette.new()
+		palette = Import.import_pal_palette(file_name, palette_data)
 		Global.palette_container.attempt_to_import_palette(palette)
 	else:
 		match file_type:
