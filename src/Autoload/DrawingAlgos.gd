@@ -504,7 +504,7 @@ func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, p
 	img.unlock()
 
 
-func generate_gradient(image : Image, colors : Array, steps := 2, direction : int = GradientDirection.TOP) -> void:
+func generate_gradient(image : Image, colors : Array, steps := 2, direction : int = GradientDirection.TOP, pixels = Global.current_project.selected_pixels) -> void:
 	if colors.size() < 2:
 		return
 
@@ -517,7 +517,9 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 	image.unlock()
 	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
 		colors.invert()
-	var size := image.get_size()
+
+	var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
+	var size := selection_rectangle.size
 	image.lock()
 	var gradient_size
 
@@ -528,7 +530,8 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 				var start = i * gradient_size
 				var end = (i + 1) * gradient_size
 				for yy in range(start, end):
-					image.set_pixel(xx, yy, colors[i])
+					var pos : Vector2 = Vector2(xx, yy) + pixels[0]
+					image.set_pixelv(pos, colors[i])
 
 	else:
 		gradient_size = size.x / steps
@@ -537,4 +540,5 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 				var start = i * gradient_size
 				var end = (i + 1) * gradient_size
 				for xx in range(start, end):
-					image.set_pixel(xx, yy, colors[i])
+					var pos : Vector2 = Vector2(xx, yy) + pixels[0]
+					image.set_pixelv(pos, colors[i])

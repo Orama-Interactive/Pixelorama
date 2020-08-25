@@ -5,7 +5,10 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    paths-ignore: "Translations/*"
+    paths-ignore: 
+    - "Translations/*"
+    - "installer/*.pot"
+    - "installer/po/*"
 
 env:
   GODOT_VERSION: 3.2.2

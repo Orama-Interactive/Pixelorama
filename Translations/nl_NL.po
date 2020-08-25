@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: nl\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -25,14 +27,26 @@ msgstr "Opslaan"
 msgid "Please Confirm..."
 msgstr "Bevestig..."
 
+msgid "File Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "Afbeeldingsgrootte"
+
+msgid "Canvas Size"
+msgstr "Canvas grootte"
+
+msgid "Frame Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Breedte:"
 
 msgid "Height:"
 msgstr "Hoogte:"
+
+msgid "Center"
+msgstr ""
 
 msgid "File"
 msgstr "Bestand"
@@ -67,14 +81,11 @@ msgstr "Opslaan..."
 msgid "Save as..."
 msgstr "Opslaan als..."
 
+msgid "Use ZSTD Compression"
+msgstr ""
+
 msgid "Import"
 msgstr "Importeren"
-
-msgid "Import..."
-msgstr "Importeren..."
-
-msgid "Import PNG..."
-msgstr "Importeer PNG..."
 
 msgid "Export"
 msgstr "Exporteren"
@@ -100,16 +111,31 @@ msgstr "Ongedaan maken"
 msgid "Redo"
 msgstr "Opnieuw uitvoeren"
 
+msgid "Copy"
+msgstr "Kopiëren"
+
+msgid "Paste"
+msgstr "Plakken"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
 msgid "Scale Image"
 msgstr "Afbeelding schalen"
 
 msgid "Crop Image"
 msgstr "Afbeelding bijsnijden"
 
+msgid "Resize Canvas"
+msgstr "Canvas formaat aanpassen"
+
 msgid "Rotate Image"
 msgstr ""
 
 msgid "Clear Selection"
+msgstr ""
+
+msgid "Flip"
 msgstr ""
 
 msgid "Flip Horizontal"
@@ -136,6 +162,12 @@ msgstr ""
 msgid "Show Animation Timeline"
 msgstr ""
 
+msgid "Zen Mode"
+msgstr "Zen modus"
+
+msgid "Fullscreen Mode"
+msgstr ""
+
 msgid "Fill with color:"
 msgstr ""
 
@@ -145,10 +177,49 @@ msgstr ""
 msgid "Open File(s)"
 msgstr ""
 
-msgid "Import as new frame"
+msgid "Import Options"
 msgstr ""
 
-msgid "Import as a spritesheet"
+msgid "Import as:"
+msgstr "Importeer als:"
+
+msgid "New tab"
+msgstr "Nieuw tabblad"
+
+msgid "Spritesheet (new tab)"
+msgstr "Spritesheet (nieuw tabblad)"
+
+msgid "New frame"
+msgstr "Nieuw frame"
+
+msgid "New layer"
+msgstr "Nieuwe laag"
+
+msgid "New palette"
+msgstr "Nieuw palet"
+
+msgid "New brush"
+msgstr ""
+
+msgid "New pattern"
+msgstr ""
+
+msgid "Horizontal frames:"
+msgstr "Horizontale frames:"
+
+msgid "Vertical frames:"
+msgstr "Verticale frames:"
+
+msgid "Brush type:"
+msgstr ""
+
+msgid "File brush"
+msgstr ""
+
+msgid "Project brush"
+msgstr ""
+
+msgid "Random brush"
 msgstr ""
 
 msgid "Save Sprite as .pxo"
@@ -167,6 +238,9 @@ msgid "File %s already exists. Overwrite?"
 msgstr ""
 
 msgid "Directory path or file name is not valid!"
+msgstr ""
+
+msgid "Exporting in progress..."
 msgstr ""
 
 msgid "Can't load file '%s'.\n"
@@ -278,6 +352,9 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+msgid "Startup"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -288,6 +365,18 @@ msgid "Canvas"
 msgstr ""
 
 msgid "Shortcuts"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Restore default value"
 msgstr ""
 
 msgid "Smooth Zoom"
@@ -329,7 +418,34 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-msgid "Invert colors"
+msgid "Only affect selection"
+msgstr ""
+
+msgid "Current cel"
+msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "Invert Colors"
+msgstr ""
+
+msgid "Modify Red Channel"
+msgstr ""
+
+msgid "Modify Green Channel"
+msgstr ""
+
+msgid "Modify Blue Channel"
+msgstr ""
+
+msgid "Modify Alpha Channel"
 msgstr ""
 
 msgid "Desaturation"
@@ -339,6 +455,9 @@ msgid "Outline"
 msgstr ""
 
 msgid "Adjust Hue/Saturation/Value"
+msgstr ""
+
+msgid "Gradient"
 msgstr ""
 
 msgid "Adjust HSV"
@@ -369,6 +488,24 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
+msgstr ""
+
+msgid "Colors:"
+msgstr ""
+
+msgid "Steps:"
+msgstr ""
+
+msgid "Top to Bottom"
+msgstr ""
+
+msgid "Bottom to Top"
+msgstr ""
+
+msgid "Left to Right"
+msgstr ""
+
+msgid "Right to Left"
 msgstr ""
 
 msgid "View Splash Screen"
@@ -443,6 +580,9 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr ""
 
@@ -458,6 +598,15 @@ msgstr ""
 msgid "Turkish"
 msgstr ""
 
+msgid "Norwegian"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "Hungarian"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 
@@ -470,7 +619,7 @@ msgstr ""
 msgid "GitHub Contributors"
 msgstr ""
 
-msgid "Art by"
+msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
@@ -591,10 +740,31 @@ msgstr ""
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
+msgid "Guides"
+msgstr ""
+
 msgid "Guides color:"
 msgstr ""
 
 msgid "A color of ruler guides displayed on the canvas"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
 msgstr ""
 
 msgid "Grid width:"
@@ -609,10 +779,19 @@ msgstr ""
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr ""
 
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
+
 msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Transparency"
 msgstr ""
 
 msgid "Checker size:"
@@ -631,6 +810,18 @@ msgid "Checker color 2:"
 msgstr ""
 
 msgid "Second color of the transparent checker background"
+msgstr ""
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
@@ -655,6 +846,12 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
+msgstr ""
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Brush color from"
@@ -984,6 +1181,9 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
+msgid "Create Palette From Current Sprite"
+msgstr ""
+
 msgid "Palette Name:"
 msgstr ""
 
@@ -997,9 +1197,6 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
-
-msgid "Error: Palette named '%s' already exists!"
 msgstr ""
 
 msgid "Invalid Palette file!"
@@ -1167,4 +1364,7 @@ msgstr "Kan pallet niet verwijderen, omdat het niet bestaat!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Er is een fout opgetreden bij het verwijderen van het palet. Foutcode: %s"
+
+msgid "and"
+msgstr ""
 

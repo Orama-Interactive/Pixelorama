@@ -1,3 +1,5 @@
 files:
   - source: /Translations/Translations.pot
     translation: /Translations/%locale_with_underscore%.po
+  - source: /installer/*.pot
+    translation: /installer/po/%locale%.po

@@ -160,6 +160,8 @@ func change_project() -> void:
 		i += 1
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
+	Global.canvas.grid.isometric_polylines.clear()
+	Global.canvas.grid.update()
 	Global.transparent_checker._ready()
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
@@ -252,10 +254,10 @@ func serialize() -> Dictionary:
 func deserialize(dict : Dictionary) -> void:
 	if dict.has("name"):
 		name = dict.name
-	if dict.has("size_x"):
+	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
-	if dict.has("size_y"):
 		size.y = dict.size_y
+		select_all_pixels()
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):

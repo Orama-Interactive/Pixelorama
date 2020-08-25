@@ -9,6 +9,10 @@ var can_undo := true
 var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
 
+onready var grid = $Grid
+onready var tile_mode = $TileMode
+onready var indicators = $Indicators
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,8 +25,8 @@ func _ready() -> void:
 func _draw() -> void:
 	Global.second_viewport.get_child(0).get_node("CanvasPreview").update()
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
+
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
-	var size : Vector2 = Global.current_project.size
 	if Global.onion_skinning:
 		onion_skinning()
 
@@ -32,22 +36,7 @@ func _draw() -> void:
 		if Global.current_project.layers[i].visible: # if it's visible
 			draw_texture(current_cels[i].image_texture, location, modulate_color)
 
-			if Global.tile_mode:
-				draw_texture(current_cels[i].image_texture, Vector2(location.x, location.y + size.y), modulate_color) # Down
-				draw_texture(current_cels[i].image_texture, Vector2(location.x - size.x, location.y + size.y), modulate_color) # Down Left
-				draw_texture(current_cels[i].image_texture, Vector2(location.x - size.x, location.y), modulate_color) # Left
-				draw_texture(current_cels[i].image_texture, location - size, modulate_color) # Up left
-				draw_texture(current_cels[i].image_texture, Vector2(location.x, location.y - size.y), modulate_color) # Up
-				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y - size.y), modulate_color) # Up right
-				draw_texture(current_cels[i].image_texture, Vector2(location.x + size.x, location.y), modulate_color) # Right
-				draw_texture(current_cels[i].image_texture, location + size, modulate_color) # Down right
-
-	if Global.draw_grid:
-		draw_grid(Global.grid_type)
-
-	# Draw rectangle to indicate the pixel currently being hovered on
-	if Global.has_focus and Global.can_draw:
-		Tools.draw_indicator()
+	tile_mode.update()
 
 
 func _input(event : InputEvent) -> void:
@@ -251,47 +240,3 @@ func onion_skinning() -> void:
 						color.a = 0.6 / i
 						draw_texture(layer.image_texture, location, color)
 					layer_i += 1
-
-
-func draw_grid(grid_type : int) -> void:
-	var size : Vector2 = Global.current_project.size
-	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
-		for x in range(Global.grid_width, size.x, Global.grid_width):
-			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
-
-		for y in range(Global.grid_height, size.y, Global.grid_height):
-			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
-
-	# Doesn't work properly yet
-	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
-		var prev_x := 0
-		var prev_y := 0
-		for y in range(0, size.y + 1, Global.grid_width):
-			var yy1 = y + size.y * tan(deg2rad(26.565)) # 30 degrees
-			if yy1 <= (size.y + 0.01):
-				draw_line(Vector2(location.x, y), Vector2(size.x, yy1),Global.grid_color)
-			else:
-				var xx1 = (size.x - y) * tan(deg2rad(90 - 26.565)) # 60 degrees
-				draw_line(Vector2(location.x, y), Vector2(xx1, size.y), Global.grid_color)
-		for y in range(0, size.y + 1, Global.grid_height):
-			var xx2 = y * tan(deg2rad(90 - 26.565)) # 60 degrees
-			if xx2 <= (size.x + 0.01):
-				draw_line(Vector2(location.x, y), Vector2(xx2, location.y), Global.grid_color)
-				prev_y = location.y
-			else:
-				var distance = (xx2 - prev_x) / 2
-				#var yy2 = (size.y - y) * tan(deg2rad(26.565)) # 30 degrees
-				var yy2 = prev_y + distance
-				draw_line(Vector2(location.x, y), Vector2(size.x, yy2), Global.grid_color)
-				prev_y = yy2
-
-			prev_x = xx2
-
-		for x in range(0, size.x, Global.grid_width * 2):
-			if x == 0:
-				continue
-			var yy1 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
-			draw_line(Vector2(x, location.y), Vector2(size.x, yy1), Global.grid_color)
-		for x in range(0, size.x, Global.grid_height * 2):
-			var yy2 = (size.x - x) * tan(deg2rad(26.565)) # 30 degrees
-			draw_line(Vector2(x, size.y), Vector2(size.x, size.y - yy2), Global.grid_color)

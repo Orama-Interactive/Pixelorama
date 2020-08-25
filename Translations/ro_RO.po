@@ -2,1169 +2,1399 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: ro\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-06-02 17:10\n"
+"PO-Revision-Date: 2020-08-23 19:46\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anulează"
 
 msgid "Open"
-msgstr ""
+msgstr "Deschide"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvează"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Te rugăm să confirmi..."
+
+msgid "File Name:"
+msgstr "Numele fișierului:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Dimensiunea imaginii"
+
+msgid "Canvas Size"
+msgstr "Dimensiunea pânzei"
+
+msgid "Frame Size"
+msgstr "Dimensiunea cadrului"
 
 msgid "Width:"
-msgstr ""
+msgstr "Lățime:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Înălțime:"
+
+msgid "Center"
+msgstr "Centrare"
 
 msgid "File"
-msgstr ""
+msgstr "Fișier"
 
 msgid "Edit"
-msgstr ""
+msgstr "Editare"
 
 msgid "View"
-msgstr ""
+msgstr "Vizualizare"
 
 msgid "Image"
-msgstr ""
+msgstr "Imagine"
 
 msgid "Effects"
-msgstr ""
+msgstr "Efecte"
 
 msgid "Help"
-msgstr ""
+msgstr "Ajutor"
 
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 msgid "New..."
-msgstr ""
+msgstr "Nou..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Deschidere..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Salvare..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Salvare ca..."
+
+msgid "Use ZSTD Compression"
+msgstr "Utilizare comprimare ZSTD"
 
 msgid "Import"
-msgstr ""
-
-msgid "Import..."
-msgstr ""
-
-msgid "Import PNG..."
-msgstr ""
+msgstr "Importare"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportare"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportare..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportare ca..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exportare PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Exportare PNG ca..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Ieșire"
 
 msgid "Undo"
-msgstr ""
+msgstr "Anulare"
 
 msgid "Redo"
-msgstr ""
+msgstr "Refacere"
+
+msgid "Copy"
+msgstr "Copiere"
+
+msgid "Paste"
+msgstr "Lipire"
+
+msgid "Delete"
+msgstr "Ștergere"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Scalare imagine"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Decupare imagine"
+
+msgid "Resize Canvas"
+msgstr "Redimensionare pânză"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotire imagine"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Ștergere selecție"
+
+msgid "Flip"
+msgstr "Răsturnare"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Răsturnare orizontală"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Răsturnare verticală"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Preferințe"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Mod Mozaic"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Afișare grilă"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Afișare rigle"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Afișare ghidaje"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Afișare cronologia animației"
+
+msgid "Zen Mode"
+msgstr "Mod Zen"
+
+msgid "Fullscreen Mode"
+msgstr "Mod ecran complet"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Umplere cu culoare:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Deschide un fișier"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Deschidere fișier(e)"
 
-msgid "Import as new frame"
-msgstr ""
+msgid "Import Options"
+msgstr "Opțiuni de importare"
 
-msgid "Import as a spritesheet"
-msgstr ""
+msgid "Import as:"
+msgstr "Importare ca:"
+
+msgid "New tab"
+msgstr "Filă nouă"
+
+msgid "Spritesheet (new tab)"
+msgstr "Foaie cu grafice bidimensionale (filă nouă)"
+
+msgid "New frame"
+msgstr "Cadru nou"
+
+msgid "New layer"
+msgstr "Strat nou"
+
+msgid "New palette"
+msgstr "Paletă nouă"
+
+msgid "New brush"
+msgstr "Pensulă nouă"
+
+msgid "New pattern"
+msgstr "Model nou"
+
+msgid "Horizontal frames:"
+msgstr "Cadre orizontale:"
+
+msgid "Vertical frames:"
+msgstr "Cadre verticale:"
+
+msgid "Brush type:"
+msgstr "Tip de pensulă:"
+
+msgid "File brush"
+msgstr "Pensulă de fișier"
+
+msgid "Project brush"
+msgstr "Pensulă de proiect"
+
+msgid "Random brush"
+msgstr "Pensulă aleatorie"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Salvare grafic bidimensional ca .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Exportare grafic bidimensional ca .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Exportare grafic bidimensional"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fișierul există deja. Suprascrii?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Fișierul %s există deja. Suprascrii?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Calea directorului sau numele fișierului nu este valid!"
+
+msgid "Exporting in progress..."
+msgstr "Exportare în desfășurare..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nu se poate încărca fișierul '%s'.\n"
+"Cod de eroare: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Cadru"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Cadre:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Toate cadrele"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Foaie cu grafice bidimensionale"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animație"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Previzualizare:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Cadru:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientare:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Răsfoire"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Redimensionare:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Anulare exportare"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Alertă!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Selectează dosarul actual"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Deschide un director"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Toate cadrele ca fișiere multiple"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Toate cadrele ca o singură animație de fișier"
 
 msgid "Background:"
-msgstr ""
+msgstr "Fundal:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Direcție:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Înainte"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Înapoi"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Coloane"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Coloane:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rânduri"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Rânduri:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Cale:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Directoare și fișiere:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Creare dosar"
 
 msgid "File:"
-msgstr ""
+msgstr "Fișier:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolare:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Cea mai apropiată"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Biliniară"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubică"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Triliniară"
 
 msgid "General"
-msgstr ""
+msgstr "General"
+
+msgid "Startup"
+msgstr "Pornire"
 
 msgid "Language"
-msgstr ""
+msgstr "Limbă"
 
 msgid "Themes"
-msgstr ""
+msgstr "Teme"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Pânză"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Comenzi rapide"
+
+msgid "Backup"
+msgstr "Copie de rezervă"
+
+msgid "Indicators"
+msgstr "Indicatori"
+
+msgid "On"
+msgstr "Pornit"
+
+msgid "Restore default value"
+msgstr "Resetare la valoarea implicită"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Panoramare lentă"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Adaugă o tranziție mai lentă la apropiere sau depărtare"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sensibilitatea de apăsare a tabletei:"
 
 msgid "None"
-msgstr ""
+msgstr "Niciuna"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Afectează valoarea alfa a pensulei"
 
 msgid "Color:"
-msgstr ""
+msgstr "Culoare:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Culoarea ghidajului:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Limba sistemului"
 
 msgid "Dark"
-msgstr ""
+msgstr "Întunecat"
 
 msgid "Gray"
-msgstr ""
+msgstr "Gri"
 
 msgid "Blue"
-msgstr ""
+msgstr "Albastru"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramel"
 
 msgid "Light"
-msgstr ""
+msgstr "Luminos"
 
-msgid "Invert colors"
-msgstr ""
+msgid "Only affect selection"
+msgstr "Afectează doar selecția"
+
+msgid "Current cel"
+msgstr "Celulă actuală"
+
+msgid "Current frame"
+msgstr "Cadru actual"
+
+msgid "All frames"
+msgstr "Toate cadrele"
+
+msgid "All projects"
+msgstr "Toate proiectele"
+
+msgid "Invert Colors"
+msgstr "Inversare culori"
+
+msgid "Modify Red Channel"
+msgstr "Modificare canal roșu"
+
+msgid "Modify Green Channel"
+msgstr "Modificare canal verde"
+
+msgid "Modify Blue Channel"
+msgstr "Modificare canal albastru"
+
+msgid "Modify Alpha Channel"
+msgstr "Modificare canal alfa"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturație"
 
 msgid "Outline"
-msgstr ""
+msgstr "Contur"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ajustare nuanță/saturație/valoare"
+
+msgid "Gradient"
+msgstr "Degrade"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajustare NSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Tip:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Unghi:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Nuanță"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Saturație"
 
 msgid "Value"
-msgstr ""
+msgstr "Valoare"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplicare"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonală"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Așezare în interiorul imaginii"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Grosime:"
+
+msgid "Colors:"
+msgstr "Culori:"
+
+msgid "Steps:"
+msgstr "Pași:"
+
+msgid "Top to Bottom"
+msgstr "De sus în jos"
+
+msgid "Bottom to Top"
+msgstr "De jos în sus"
+
+msgid "Left to Right"
+msgstr "De la stânga la dreapta"
+
+msgid "Right to Left"
+msgstr "De la dreapta la stânga"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Vizualizare ecran de întâmpinare"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Documentație online"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Monitor de probleme"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Jurnal de modificări"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Despre Pixelorama"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Dezvoltat de Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Pagină de internet"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donează"
 
 msgid "Developers"
-msgstr ""
+msgstr "Dezvoltatori"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Contribuitori"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donatori"
 
 msgid "Translators"
-msgstr ""
+msgstr "Traducători"
 
 msgid "English"
-msgstr ""
+msgstr "Engleză"
 
 msgid "Greek"
-msgstr ""
+msgstr "Greacă"
 
 msgid "French"
-msgstr ""
+msgstr "Franceză"
 
 msgid "German"
-msgstr ""
+msgstr "Germană"
 
 msgid "Polish"
-msgstr ""
+msgstr "Poloneză"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugheză braziliană"
 
 msgid "Russian"
-msgstr ""
+msgstr "Rusă"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Chineză simplificată"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Chineză tradițională"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiană"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Letonă"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spaniolă"
+
+msgid "Catalan"
+msgstr "Catalană"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indoneziană"
 
 msgid "Czech"
-msgstr ""
+msgstr "Cehă"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabă"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turcă"
+
+msgid "Norwegian"
+msgstr "Norvegiană"
+
+msgid "Korean"
+msgstr "Coreeană"
+
+msgid "Hungarian"
+msgstr "Maghiară"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Echipa de dezvoltare"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Programator-șef"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Proiectant UI"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Contribuitori GitHub"
 
-msgid "Art by"
-msgstr ""
+msgid "Art by: %s"
+msgstr "Artă realizată de: %s"
 
 msgid "untitled"
-msgstr ""
+msgstr "fără titlu"
 
 msgid "imported"
-msgstr ""
+msgstr "importat"
 
 msgid "copy"
-msgstr ""
+msgstr "copie"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Ești sigur că dorești să ieși din Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Imagine nesalvată"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Ai modificări nesalvate. Dacă continui, progresul efectuat va fi pierdut."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Salvezi înainte de ieșire?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Ai progres nesalvat. Cum dorești să continui?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Salvare și ieșire"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Ieșire fără salvare"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Instrumente utilitare"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Selecție dreptunghiulară\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Apasă pe %s pentru a muta conținutul"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Panoramare\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selector de culori\n"
+"Selectează o culoare dintr-un pixel al graficului bidimensional\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Instrumente de desen"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Creion\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Ține apăsat pe %s pentru a trasa o linie"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Radieră\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Ține apăsat pe %s pentru a trage o line"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Recipient\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Luminare/întunecare\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Alege o culoare pentru instrumentul din stânga"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Alege o culoare pentru instrumentul din dreapta"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Comută culorile din stânga și dreapta\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Resetează culorile la starea lor implicită (negru pentru stânga, alb pentru dreapta)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Instrument stânga"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Instrument dreapta"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Indicator pixel stânga"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Arată pe pânză pensula sau indicatorul pixel al butonului din stânga mausului atunci când se desenează"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indicator pixel dreapta"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Arată pe pânză pensula sau indicatorul pixel al butonului din dreapta mausului atunci când se desenează"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Arată pictograma instrumentului din stânga"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Afișează o pictogramă a instrumentului selectat din stânga de lângă cursorul de pe pânză"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Arată pictograma instrumentului din dreapta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Afișează o pictogramă a instrumentului selectat din dreapta de lângă cursorul de pe pânză"
+
+msgid "Guides"
+msgstr "Ghidaje"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Culoare ghidaje:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "O culoare a ghidajelor de riglă afișate pe pânză"
+
+msgid "Grid"
+msgstr "Grilă"
+
+msgid "Grid type:"
+msgstr "Tip de grilă:"
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "Setează tipul de grilă dintre dreptunghiulară, izometrică sau ambele"
+
+msgid "Rectangular"
+msgstr "Dreptunghiulară"
+
+msgid "Isometric"
+msgstr "Izometrică"
+
+msgid "All"
+msgstr "Toate"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Lățimea grilei:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Înălțimea grilei:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei"
+
+msgid "Isometric cell size:"
+msgstr "Dimensiunea celulei izometrice:"
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "Setează dimensiunea celulelor dintr-o grilă izometrică"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Culoarea grilei:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "O culoare a grilei"
+
+msgid "Transparency"
+msgstr "Transparență"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Dimensiunea carourilor:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Dimensiunea fundalului caroiat transparent"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Culoare carouri 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Prima culoare a fundalului caroiat transparent"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Culoare carouri 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "A doua culoare a fundalului caroiat transparent"
+
+msgid "Follow Canvas Movement"
+msgstr "Urmărește mișcarea pânzei"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "Carourile transparente urmăresc mișcarea pânzei"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "Urmărește nivelul de panoramare al pânzei"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "Carourile transparente urmăresc nivelul de panoramare al pânzei"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Doar presetarea personalizată poate fi modificată"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Pensulă:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Selectează o pensulă"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Pensulă: pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Pensulă: cerc"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Pensulă: cerc umplut"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Pensulă personalizată"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Dimensiunea pensulei:"
+
+msgid "Overwrite"
+msgstr "Suprascriere"
+
+msgid "Pixel Perfect"
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Culoarea pensulei de la"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: culoarea provenită din pensulă, 100: culoarea selectată în prezent"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Zona de umplere:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Zona de aceeași culoare"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Pixelii de aceeași culoare"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Umplere cu:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Culoare selectată"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Model"
 
 msgid "Offset"
-msgstr ""
+msgstr "Decalaj"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Lighten"
 
 msgid "Darken"
-msgstr ""
+msgstr "Întunecare"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Cantitate:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Cantitate luminare/întunecare"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Alege pentru:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Culoare stânga"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Culoare dreapta"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mod:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Apropiere"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Depărtare"
 
 msgid "Options:"
-msgstr ""
+msgstr "Opțiuni:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Potrivire la cadru"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Panoramare 100%"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Oglindire"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Activează desenul oglindit orizontal"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Activează desenul oglindit vertical"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Cadru actual:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Sari la primul cadru\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Deplasare la cadrul anterior\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Redă animația înapoi (de la sfârșit până la început)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Redă animația înainte (de la început până la sfârșit)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Deplasare la cadrul următor\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Sari la ultimul cadru\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Setări pentru cadre multiple simultane"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Activare/dezactivare cadre multiple simultane"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Câte cadre pe secundă ar trebui să aibă previzualizarea animației?\n"
+"Cu cât mai multe cadre, cu atât mai repede rulează animația."
 
 msgid "No loop"
-msgstr ""
+msgstr "Fără buclu"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Buclă ciclică"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Buclă ping-pong"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Cadre multiple simultane:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Cadre trecute"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Cadre viitoare"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Gestionare etichete de cadru"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Dacă este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
+"În caz contrar, animația va rula pentru toate cadrele, ignorând etichetele."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Mod albastru-roșu"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Adaugă un cadru nou"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Eliminare cadru"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Clonare cadru"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Deplasare la stânga"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Deplasare la dreapta"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Conectare celulă"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Deconectare celulă"
 
 msgid "Layer"
-msgstr ""
+msgstr "Strat"
 
 msgid "Layers"
-msgstr ""
+msgstr "Straturi"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Creează un strat nou"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Elimină stratul actual"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Deplasează în sus stratul actual"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Deplasează în jos stratul actual"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Clonează stratul actual"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Îmbină stratul actual cu cel de mai jos"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacitate:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Comută vizibilitatea stratului"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Blocare/deblocare strat"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Activare/dezactivare conectare celule\n\n"
+"Celulele conectate sunt distribuite între mai multe cadre"
 
 msgid "Palette"
-msgstr ""
+msgstr "Paletă"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Palete"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Adaugă o paletă nouă"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Editează paleta selectată în prezent"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Alege o paletă"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Anulare: desenare"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Refacere: desenare"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Anulare: selectare dreptunghi"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Refacere: selectare dreptunghi"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Anulare: scalare"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Refacere: scalare"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Anulare: adăugare strat"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Refacere: adăugare strat"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Anulare: eliminare strat"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Refacere: eliminare strat"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Anulare: îmbinare strat"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Refacere: îmbinare strat"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Anulare: modificarea ordinii stratului"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Refacere: modificarea ordinii stratului"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Anulare: adăugare cadru"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Refacere: adăugare cadru"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Anulare: eliminare cadru"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Refacere: eliminare cadru"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Anulare: modificarea ordinii cadrului"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Refacere: modificarea ordinii cadrului"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Anulare: ștergere pensulă personalizată"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Refacere: ștergere pensulă personalizată"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Anulare: modificarea etichetei cadrului"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Refacere: modificarea etichetei cadrului"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Anulare: ștergerea etichetei cadrului"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Refacere: ștergerea etichetei cadrului"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Deplasare ghidaj"
 
 msgid "File saved"
-msgstr ""
+msgstr "Fișier salvat"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fișier autosalvat"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "Fișierul nu a putut fi deschis"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "Fișierul nu a putut fi salvat"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fișier exportat"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Paletă nouă goală"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importare paletă"
+
+msgid "Create Palette From Current Sprite"
+msgstr "Creare paletă din graficul bidimensional actual"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Numele paletei:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Numele culorii:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Folosește culorile din stânga și dreapta"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Creare paletă nouă goală?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Eroare: paleta trebuie să aibă un nume valid."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Fișier de paletă invalid!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Editare paletă"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Susținători:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Dorești ca numele tău sau al companiei tale să fie afișat pe ecranul de întâmpinare?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Devino sponsor cu rang de platină"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Devino sponsor cu rang de aur"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Devino susținător"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Nu mai arăta"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Opțiuni de imagine"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Lățime implicită:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Lățimea implicită a unei imagini noi"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Înălțime implicită:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Înălțimea implicită a unei imagini noi"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Culoare implicită de umplere:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Culoarea implicită de fundal a unei imagini noi"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Blocare raport aspect:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Șabloane:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Presetare"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Presetare:"
 
 msgid "Default"
-msgstr ""
+msgstr "Implicită"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personalizată"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Selecție dreptunghiulară"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Panoramare"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Selector de culori"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Creion"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Radieră"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Recipient"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Luminare/întunecare"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Comutare culori"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Setează comanda rapidă"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Apasă o tastă sau o combinație de taste pentru a seta comanda rapidă"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Alocată deja"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Instrument stânga:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Un instrument alocat butonului din stânga al masului"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Instrument dreapta:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Un instrument alocat butonului din dreapta al masului"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Ultimul fișier de proiect nu poate fi găsit."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Încă nu ai salvat sau deschis niciun proiect în Pixelorama!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Deschide ultimul proiect"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Deschide ultimul proiect..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Deschide ultimul proiect la pornire"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Deschide ultimul proiect deschis la pornire"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Activare autosalvare"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Interval de autosalvare:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minut(e)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Creează un director nou pentru fiecare etichetă de cadru"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt director care corespunde cu eticheta de cadru a acestuia"
 
 msgid "Close"
-msgstr ""
+msgstr "Închide"
 
 msgid "Delete"
-msgstr ""
+msgstr "Ștergere"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "A fost găsită copia de rezervă pentru %s.\n"
+"Dorești să o reîncarci?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Copie de rezervă reîncărcată"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Elimină paleta selectată în prezent"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Nu poți elimina mai multe palete!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Paleta nu poate fi eliminată, deoarece nu există!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
+
+msgid "and"
+msgstr "și"
 

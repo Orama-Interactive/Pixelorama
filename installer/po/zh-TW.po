@@ -1,0 +1,70 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: pixelorama\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-08 22:43\n"
+"PO-Revision-Date: 2020-08-13 02:20\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
+"X-Crowdin-Language: zh-TW\n"
+"X-Crowdin-File: /master/installer/installer.pot\n"
+"X-Crowdin-File-ID: 10\n"
+
+#. SecInstall
+#: .\pixelorama.nsi:72
+msgid "Install ${APPNAME}"
+msgstr "安裝 ${APPNAME}"
+
+#. SecStartmenu
+#: .\pixelorama.nsi:73
+msgid "Create Start Menu shortcuts (optional)"
+msgstr "創建開始功能表捷徑 (可選)"
+
+#. SecDesktop
+#: .\pixelorama.nsi:74
+msgid "Create shortcut on Desktop (optional)"
+msgstr "創建桌面捷徑 (可選)"
+
+#. un.SecUninstall
+#: .\pixelorama.nsi:75
+msgid "Uninstall ${APPNAME} ${APPVERSION}"
+msgstr "移除 ${APPNAME} ${APPVERSION}"
+
+#. un.SecConfig
+#: .\pixelorama.nsi:76
+msgid "Remove configuration files (optional)"
+msgstr "刪除配置檔案 (可選)"
+
+#. DESC_SecInstall
+#: .\pixelorama.nsi:178
+msgid "Installs ${APPNAME} ${APPVERSION}."
+msgstr "安裝 ${APPNAME} ${APPVERSION}."
+
+#. DESC_SecStartmenu
+#: .\pixelorama.nsi:179
+msgid "Creates Start Menu shortcuts for ${APPNAME}."
+msgstr "為 ${APPNAME} 創建開始功能表捷徑."
+
+#. DESC_SecDesktop
+#: .\pixelorama.nsi:180
+msgid "Creates a Desktop shortcut for ${APPNAME}."
+msgstr "為 ${APPNAME} 創建桌面捷徑."
+
+#. DESC_un.SecUninstall
+#: .\pixelorama.nsi:181
+msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
+msgstr "移除 ${APPNAME} ${APPVERSION} 及刪除所有捷鍵."
+
+#. DESC_un.SecConfig
+#: .\pixelorama.nsi:182
+msgid "Removes configuration files for ${APPNAME}."
+msgstr "為 ${APPNAME} 刪除配置檔案."
+

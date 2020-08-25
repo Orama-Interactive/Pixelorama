@@ -2,11 +2,11 @@ extends Node
 
 
 onready var themes := [
-	preload("res://assets/themes/dark/theme.tres"),
-	preload("res://assets/themes/gray/theme.tres"),
-	preload("res://assets/themes/blue/theme.tres"),
-	preload("res://assets/themes/caramel/theme.tres"),
-	preload("res://assets/themes/light/theme.tres"),
+	[preload("res://assets/themes/dark/theme.tres"), "Dark"],
+	[preload("res://assets/themes/gray/theme.tres"), "Gray"],
+	[preload("res://assets/themes/blue/theme.tres"), "Blue"],
+	[preload("res://assets/themes/caramel/theme.tres"), "Caramel"],
+	[preload("res://assets/themes/light/theme.tres"), "Light"],
 ]
 onready var buttons_container : BoxContainer = $ThemeButtons
 onready var colors_container : BoxContainer = $ThemeColors
@@ -14,13 +14,19 @@ onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColo
 
 
 func _ready() -> void:
-	for child in buttons_container.get_children():
-		if child is Button:
-			child.connect("pressed", self, "_on_Theme_pressed", [child.get_index()])
+	var button_group = ButtonGroup.new()
+	for theme in themes:
+		var button := CheckBox.new()
+		button.name = theme[1]
+		button.text = theme[1]
+		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		button.group = button_group
+		buttons_container.add_child(button)
+		button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
 
 		var theme_color_preview : ColorRect = theme_color_preview_scene.instance()
-		var color1 = themes[child.get_index()].get_stylebox("panel", "Panel").bg_color
-		var color2 = themes[child.get_index()].get_stylebox("panel", "PanelContainer").bg_color
+		var color1 = theme[0].get_stylebox("panel", "Panel").bg_color
+		var color2 = theme[0].get_stylebox("panel", "PanelContainer").bg_color
 		theme_color_preview.get_child(0).color = color1
 		theme_color_preview.get_child(1).color = color2
 		colors_container.add_child(theme_color_preview)
@@ -44,38 +50,26 @@ func _on_Theme_pressed(index : int) -> void:
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
-	var main_theme : Theme = themes[ID]
-	var top_menu_style
-	var ruler_style
-	if ID == 0: # Dark Theme
+	var main_theme : Theme = themes[ID][0]
+	if ID == 0 or ID == 1: # Dark or Gray Theme
 		Global.theme_type = Global.Theme_Types.DARK
-		top_menu_style = preload("res://assets/themes/dark/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
-	elif ID == 1: # Gray Theme
-		Global.theme_type = Global.Theme_Types.DARK
-		top_menu_style = preload("res://assets/themes/gray/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/dark/ruler_style.tres")
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = Global.Theme_Types.BLUE
-		top_menu_style = preload("res://assets/themes/blue/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/blue/ruler_style.tres")
 	elif ID == 3: # Caramel Theme
 		Global.theme_type = Global.Theme_Types.CARAMEL
-		top_menu_style = preload("res://assets/themes/caramel/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/caramel/ruler_style.tres")
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.Theme_Types.LIGHT
-		top_menu_style = preload("res://assets/themes/light/top_menu_style.tres")
-		ruler_style = preload("res://assets/themes/light/ruler_style.tres")
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
-	var default_clear_color : Color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
-	VisualServer.set_default_clear_color(Color(default_clear_color))
+	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
+	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
 	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
 	var layer_button_panel_container : PanelContainer = Global.find_node_by_name(Global.animation_timeline, "LayerButtonPanelContainer")
-	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = default_clear_color
+	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
 
+	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
+	var ruler_style = main_theme.get_stylebox("Ruler", "Button")
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)

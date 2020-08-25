@@ -2,660 +2,877 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: ko\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
-msgstr ""
+msgstr "예"
 
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 msgid "Open"
-msgstr ""
+msgstr "열기"
 
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "확인이 필요합니다..."
+
+msgid "File Name:"
+msgstr "파일 이름:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "이미지 크기"
+
+msgid "Canvas Size"
+msgstr "캔버스 크기"
+
+msgid "Frame Size"
+msgstr "프레임 크기"
 
 msgid "Width:"
-msgstr ""
+msgstr "너비:"
 
 msgid "Height:"
-msgstr ""
+msgstr "높이:"
+
+msgid "Center"
+msgstr "중심"
 
 msgid "File"
-msgstr ""
+msgstr "파일"
 
 msgid "Edit"
-msgstr ""
+msgstr "편집"
 
 msgid "View"
-msgstr ""
+msgstr "보기"
 
 msgid "Image"
-msgstr ""
+msgstr "이미지"
 
 msgid "Effects"
-msgstr ""
+msgstr "효과"
 
 msgid "Help"
-msgstr ""
+msgstr "도움말"
 
 msgid "New"
-msgstr ""
+msgstr "신규"
 
 msgid "New..."
-msgstr ""
+msgstr "신규..."
 
 msgid "Open..."
-msgstr ""
+msgstr "열기..."
 
 msgid "Save..."
-msgstr ""
+msgstr "저장하기..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "다른 이름으로 저장하기..."
+
+msgid "Use ZSTD Compression"
+msgstr "ZSTD 압축 사용"
 
 msgid "Import"
-msgstr ""
-
-msgid "Import..."
-msgstr ""
-
-msgid "Import PNG..."
-msgstr ""
+msgstr "불러오기"
 
 msgid "Export"
-msgstr ""
+msgstr "내보내기"
 
 msgid "Export..."
-msgstr ""
+msgstr "내보내기..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "다른 이름으로 내보내기..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "PNG로 내보내기"
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "다른 이름으로 PNG로 내보내기..."
 
 msgid "Quit"
-msgstr ""
+msgstr "종료"
 
 msgid "Undo"
-msgstr ""
+msgstr "실행 취소"
 
 msgid "Redo"
-msgstr ""
+msgstr "다시 실행"
+
+msgid "Copy"
+msgstr "복사"
+
+msgid "Paste"
+msgstr "붙여넣기"
+
+msgid "Delete"
+msgstr "삭제"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "이미지 크기"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "이미지 자르기"
+
+msgid "Resize Canvas"
+msgstr "캔버스 크기 조정"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "이미지 회전"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "선택 영역 지우기"
+
+msgid "Flip"
+msgstr "뒤집기"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "좌우 대칭"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "상하 대칭"
 
 msgid "Preferences"
-msgstr ""
+msgstr "환경설정"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "타일 모드"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "격자 표시"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "눈금자 표시"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "안내선 표시"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "애니메이션 타임라인 보기"
+
+msgid "Zen Mode"
+msgstr "젠 모드"
+
+msgid "Fullscreen Mode"
+msgstr "전체 화면"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "색상으로 채우기:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "파일 열기"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "여러 파일 열기"
 
-msgid "Import as new frame"
-msgstr ""
+msgid "Import Options"
+msgstr "불러오기 옵션"
 
-msgid "Import as a spritesheet"
-msgstr ""
+msgid "Import as:"
+msgstr "다음으로 가져오기:"
+
+msgid "New tab"
+msgstr "새 창"
+
+msgid "Spritesheet (new tab)"
+msgstr "스프레드시트 (새 탭)"
+
+msgid "New frame"
+msgstr "새 프레임"
+
+msgid "New layer"
+msgstr "새 레이어"
+
+msgid "New palette"
+msgstr "새 팔레트"
+
+msgid "New brush"
+msgstr "새 브러시"
+
+msgid "New pattern"
+msgstr "새 패턴"
+
+msgid "Horizontal frames:"
+msgstr "가로축 프레임:"
+
+msgid "Vertical frames:"
+msgstr "세로축 프레임:"
+
+msgid "Brush type:"
+msgstr "브러시 타입:"
+
+msgid "File brush"
+msgstr "파일 브러시"
+
+msgid "Project brush"
+msgstr "프로젝트 브러시"
+
+msgid "Random brush"
+msgstr "랜덤 브러시"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "스프라이트를 .pxo로 저장"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "스프라이트를 .png로 내보내기"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "스프라이트 내보내기"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "파일이 이미 존재합니다, 덮어씌우시겠습니까?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "파일 %s이(가) 이미 존재합니다. 덮어씌우시겠습니까?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
+
+msgid "Exporting in progress..."
+msgstr "내보내는 중..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
+"오류 코드: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "프레임"
 
 msgid "Frames:"
-msgstr ""
+msgstr "프레임:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "모든 프레임"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "스프라이트시트"
 
 msgid "Animation"
-msgstr ""
+msgstr "애니메이션"
 
 msgid "Preview:"
-msgstr ""
+msgstr "미리 보기:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "프레임:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "회전:"
 
 msgid "Browse"
-msgstr ""
+msgstr "찾아보기"
 
 msgid "Resize:"
-msgstr ""
+msgstr "크기 조정"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "내보내기 취소"
 
 msgid "Alert!"
-msgstr ""
+msgstr "경고!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "현 폴더 선택"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "디렉토리 열기"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "모든 프레임을 여러 파일로"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "모든 프레임을 하나의 파일로"
 
 msgid "Background:"
-msgstr ""
+msgstr "배경:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "방향:"
 
 msgid "Forward"
-msgstr ""
+msgstr "앞"
 
 msgid "Backwards"
-msgstr ""
+msgstr "뒤"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "핑퐁"
 
 msgid "Columns"
-msgstr ""
+msgstr "열"
 
 msgid "Columns:"
-msgstr ""
+msgstr "열:"
 
 msgid "Rows"
-msgstr ""
+msgstr "행"
 
 msgid "Rows:"
-msgstr ""
+msgstr "행:"
 
 msgid "Path:"
-msgstr ""
+msgstr "경로:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "디렉토리 & 파일:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "폴더 생성"
 
 msgid "File:"
-msgstr ""
+msgstr "파일:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "보간:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "근접"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "이중선형"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilinear"
 
 msgid "General"
-msgstr ""
+msgstr "일반적"
+
+msgid "Startup"
+msgstr "시작"
 
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 msgid "Themes"
-msgstr ""
+msgstr "테마"
 
 msgid "Canvas"
-msgstr ""
+msgstr "캔버스"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "단축키"
+
+msgid "Backup"
+msgstr "백업"
+
+msgid "Indicators"
+msgstr "표기 아이콘"
+
+msgid "On"
+msgstr "켜짐"
+
+msgid "Restore default value"
+msgstr "기본 값 복원"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "부드러운 확대"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "부드럽게 확대 또는 축소하기"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "태블릿 필압:"
 
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "브러시의 알파에 영향을 줌"
 
 msgid "Color:"
-msgstr ""
+msgstr "색상:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "안내선 색:"
 
 msgid "System Language"
-msgstr ""
+msgstr "시스템 언어"
 
 msgid "Dark"
-msgstr ""
+msgstr "다크"
 
 msgid "Gray"
-msgstr ""
+msgstr "그레이"
 
 msgid "Blue"
-msgstr ""
+msgstr "블루"
 
 msgid "Caramel"
-msgstr ""
+msgstr "카라멜"
 
 msgid "Light"
-msgstr ""
+msgstr "라이트"
 
-msgid "Invert colors"
-msgstr ""
+msgid "Only affect selection"
+msgstr "선택 영역만 영향을 줌"
+
+msgid "Current cel"
+msgstr "현재 셀"
+
+msgid "Current frame"
+msgstr "현재 프레임"
+
+msgid "All frames"
+msgstr "모든 프레임"
+
+msgid "All projects"
+msgstr "모든 프로젝트"
+
+msgid "Invert Colors"
+msgstr "색 반전"
+
+msgid "Modify Red Channel"
+msgstr "레드 채널 수정"
+
+msgid "Modify Green Channel"
+msgstr "그린 채널 수정"
+
+msgid "Modify Blue Channel"
+msgstr "블루 채널 수정"
+
+msgid "Modify Alpha Channel"
+msgstr "알파 채널 수정"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "채도 낮추기"
 
 msgid "Outline"
-msgstr ""
+msgstr "외곽선"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "색상/채도/명도 수정"
+
+msgid "Gradient"
+msgstr "그레디언트"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "HSV 수정"
 
 msgid "Type:"
-msgstr ""
+msgstr "타입:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "각도:"
 
 msgid "Hue"
-msgstr ""
+msgstr "색상"
 
 msgid "Saturation"
-msgstr ""
+msgstr "채도"
 
 msgid "Value"
-msgstr ""
+msgstr "명도"
 
 msgid "Apply"
-msgstr ""
+msgstr "적용"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "비스듬한"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "이미지 안에 두기"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "두께:"
+
+msgid "Colors:"
+msgstr "색상:"
+
+msgid "Steps:"
+msgstr "단계:"
+
+msgid "Top to Bottom"
+msgstr "위에서 아래로"
+
+msgid "Bottom to Top"
+msgstr "아래서 위로"
+
+msgid "Left to Right"
+msgstr "왼쪽에서 오른쪽으로"
+
+msgid "Right to Left"
+msgstr "오른쪽에서 왼쪽으로"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "시작 로고 화면 보기"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "온라인 문서"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "이슈 트래커"
 
 msgid "Changelog"
-msgstr ""
+msgstr "변경 사항"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Pixelorama에 대하여"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Orama Interactive가 개발함"
 
 msgid "Website"
-msgstr ""
+msgstr "웹사이트"
 
 msgid "Donate"
-msgstr ""
+msgstr "후원하기"
 
 msgid "Developers"
-msgstr ""
+msgstr "개발자들"
 
 msgid "Contributors"
-msgstr ""
+msgstr "기여자들"
 
 msgid "Donors"
-msgstr ""
+msgstr "후원자들"
 
 msgid "Translators"
-msgstr ""
+msgstr "번역자들"
 
 msgid "English"
-msgstr ""
+msgstr "영어"
 
 msgid "Greek"
-msgstr ""
+msgstr "그리스어"
 
 msgid "French"
-msgstr ""
+msgstr "프랑스어"
 
 msgid "German"
-msgstr ""
+msgstr "독일어"
 
 msgid "Polish"
-msgstr ""
+msgstr "폴란드어"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "포르투갈어 (브라질)"
 
 msgid "Russian"
-msgstr ""
+msgstr "러시아어"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "중국어 간체"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "중국어 번체"
 
 msgid "Italian"
-msgstr ""
+msgstr "이탈리아어"
 
 msgid "Latvian"
-msgstr ""
+msgstr "라트비아어"
 
 msgid "Spanish"
-msgstr ""
+msgstr "스페인어"
+
+msgid "Catalan"
+msgstr "카탈로니아어"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "에스페란토어"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "인도네시아어"
 
 msgid "Czech"
-msgstr ""
+msgstr "체코어"
 
 msgid "Arabic"
-msgstr ""
+msgstr "아랍어"
 
 msgid "Turkish"
-msgstr ""
+msgstr "터키어"
+
+msgid "Norwegian"
+msgstr "노르웨이어"
+
+msgid "Korean"
+msgstr "한국어"
+
+msgid "Hungarian"
+msgstr "헝가리어"
 
 msgid "Development Team"
-msgstr ""
+msgstr "개발팀"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "리드 프로그래머"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI 디자이너"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub 기여자"
 
-msgid "Art by"
+msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "제목 없음"
 
 msgid "imported"
-msgstr ""
+msgstr "불러옴"
 
 msgid "copy"
-msgstr ""
+msgstr "복사"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "정말 Pixelorama를 종료 하시겠습니까?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "저장되지 않은 이미지"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "저장되지 않은 수정사항이 있습니다. 계속하면 수정사항이 무시 됩니다."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "종료하기 전에 저장할까요?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "저장되지 않은 수정사항이 있습니다. 계속하시겠습니까?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "저장 및 종료"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "저장하지 않고 종료"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "유틸리티 도구"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "직사각형 선택\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s 을(를) 눌러 내용물 움직이기"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "확대/축소\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "색상 선택기\n"
+"스프라이트에 있는 픽셀의 색상을 선택\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "그리기 툴"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "연필\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s 를 눌러 선을 만듦"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "지우개\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s 를 눌러 선을 만듦"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "양동이\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "밝게/어둡게\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "왼쪽 툴의 색상 선택"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "오른쪽 툴의 색상 선택"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "좌/우 색상 변경\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "색상을 기본 상태로 복원 (블랙을 왼쪽, 화이트를 오른쪽)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "왼쪽 툴"
 
 msgid "Right tool"
-msgstr ""
+msgstr "오른쪽 툴"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "왼쪽 픽셀 인디케이터"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "그리고 있을 때 왼쪽 마우스 픽셀 인디케이터 또는 브러시를 캔버스에 표시하기"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "오른쪽 픽셀 인디케이터"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "그리고 있을 때 오른쪽 마우스 픽셀 인디케이터 또는 브러시를 캔버스에 표시하기"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "왼쪽 툴 아이콘 표시하기"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "커서 옆에 선택된 왼쪽 툴의 아이콘을 캔버스에 표시하기"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "오른쪽 툴 아이콘 표시하기"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "커서 옆에 선택된 오른쪽 툴의 아이콘을 캔버스에 표시하기"
+
+msgid "Guides"
+msgstr "안내선"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "안내선 색:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "캔버스에 표시되는 줄자 안내선의 색상"
+
+msgid "Grid"
+msgstr "격자"
+
+msgid "Grid type:"
+msgstr "격자 타입:"
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "격자의 타입을 직사각형, 아이소메트릭 또는 둘 다로 설정"
+
+msgid "Rectangular"
+msgstr "직사각형"
+
+msgid "Isometric"
+msgstr "아이소메트릭"
+
+msgid "All"
+msgstr "전체"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "격자 너비"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "격자의 수직 선들이 얼마나 떨어져 있는지 설정"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "격자 높이"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "격자의 수평 선들이 얼마나 떨어져 있는지 설정"
+
+msgid "Isometric cell size:"
+msgstr "아이소메트릭 셀 크기"
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "아이소메트릭 격자의 셀 크기를 설정"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "격자 색:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "격자의 색"
+
+msgid "Transparency"
+msgstr "투명도"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "체크 무늬 크기"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "투명 배경 체크 무늬의 크기를 설정"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "체크 무늬 색 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "투명 배경 체크 무늬의 첫번째 색"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "체크 무늬 색 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "투명 배경 체크 무늬의 두번째 색"
+
+msgid "Follow Canvas Movement"
+msgstr "캔버스 움직임을 따라감"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "투명 배경 체크 무늬가 캔버스 움직임을 따라감"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "캔버스 확대 레벨을 따라감"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "투명 배경 체크 무늬가 캔버스 확대 레벨을 따라감"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "커스텀 프리셋만 수정 가능함"
 
 msgid "Brush:"
-msgstr ""
+msgstr "브러시:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "브러시를 선택"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "브러시: 픽셀"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "브러시: 원"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "브러시: 채워진 원"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "커스텀 브러시"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "브러시 크기:"
+
+msgid "Overwrite"
+msgstr "덮어쓰기"
+
+msgid "Pixel Perfect"
+msgstr "픽셀 퍼펙트"
 
 msgid "Brush color from"
 msgstr ""
@@ -718,7 +935,7 @@ msgid "Options:"
 msgstr ""
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "프레임에 맞추기"
 
 msgid "100% Zoom"
 msgstr ""
@@ -739,7 +956,7 @@ msgid "Vertical"
 msgstr ""
 
 msgid "Current frame:"
-msgstr ""
+msgstr "현재 프레임:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -807,209 +1024,209 @@ msgid "Blue-Red Mode"
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "새 프레임 추가"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "프레임 제거"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "프레임 복제"
 
 msgid "Move Left"
-msgstr ""
+msgstr "왼쪽으로 이동"
 
 msgid "Move Right"
-msgstr ""
+msgstr "오른쪽으로 이동"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "셀 연결"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "셀 연결 해제"
 
 msgid "Layer"
-msgstr ""
+msgstr "레이어"
 
 msgid "Layers"
-msgstr ""
+msgstr "레이어"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "새 레이어 생성"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "현재 레이어 제거"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "현재 레이어를 위로 올리기"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "현재 레이어를 아래로 내리기"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "현재 레이어 복제"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "현재 레이어와 그 아래 레이어를 병합"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "투명도:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "레이어 표시 토글"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "레이어 잠금/잠금 해제"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "팔레트"
 
 msgid "Palettes"
-msgstr ""
+msgstr "팔레트"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "새로운 팔레트 추가"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "현재 선택된 팔레트 수정"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "팔레트 선택"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "실행 취소: 그리기"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "다시 실행: 그리기"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "실행 취소: 직사각형으로 선택"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "다시 실행: 직사각형으로 선택"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "실행 취소: 크기 설정"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "다시 실행: 크기 설정"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "실행 취소: 레이어 추가"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "다시 실행: 레이어 추가"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "실행 취소: 레이어 삭제"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "다시 실행: 레이어 삭제"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "실행 취소: 레이어 병합"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "다시 실행: 레이어 병합"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "실행 취소: 레이어 순 변경"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "다시 실행: 레이어 순 변경"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "실행 취소: 프레임 추가"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "다시 실행: 프레임 추가"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "실행 취소: 프레임 삭제"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "다시 실행: 프레임 삭제"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "실행 취소: 프레임 순 변경"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "다시 실행: 프레임 순 변경"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "실행 취소: 사용자 지정 붓 삭제"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "다시 실행: 사용자 지정 붓 삭제"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "실행 취소: 프레임 태그 수정"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "다시 실행: 프레임 태그 수정"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "실행 취소: 프레임 태그 삭제"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "다시 실행: 프레임 태그 삭제"
 
 msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "파일 저장됨"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "파일 자동 저장됨"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "파일 불러오기 실패"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "파일 저장 실패"
 
 msgid "File exported"
 msgstr ""
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "새 빈 팔레트"
 
 msgid "Import Palette"
 msgstr ""
 
-msgid "Palette Name:"
+msgid "Create Palette From Current Sprite"
 msgstr ""
+
+msgid "Palette Name:"
+msgstr "팔레트 이름:"
 
 msgid "Color Name:"
 msgstr ""
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "현재 왼쪽 및 오른쪽 색상 사용"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "새 빈 팔레트를 생성할까요?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "오류: 팔레트는 유효한 이름을 갖고 있어야 합니다."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "유효하지 않은 팔레트 파일입니다!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "팔레트 수정"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "후원자:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -1021,64 +1238,64 @@ msgid "Become a Gold Sponsor"
 msgstr ""
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "후원자 되기"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "다시 표시하지 않기"
 
 msgid "Image Options"
-msgstr ""
+msgstr "이미지 설정"
 
 msgid "Default width:"
-msgstr ""
+msgstr "기본 너비:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "새 이미지의 기본 너비"
 
 msgid "Default height:"
-msgstr ""
+msgstr "기본 높이:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "새 이미지의 기본 높이"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "기본 채우기 색:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "새 이미지의 기본 배경 색"
 
 msgid "Lock aspect ratio:"
 msgstr ""
 
 msgid "Templates:"
-msgstr ""
+msgstr "템플릿:"
 
 msgid "Preset"
-msgstr ""
+msgstr "사전 설정"
 
 msgid "Preset:"
-msgstr ""
+msgstr "사전 설정:"
 
 msgid "Default"
-msgstr ""
+msgstr "기본"
 
 msgid "Custom"
-msgstr ""
+msgstr "사용자 지정"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "직사각형 선택"
 
 msgid "Zoom"
-msgstr ""
+msgstr "확대/축소"
 
 msgid "Color Picker"
 msgstr ""
 
 msgid "Pencil"
-msgstr ""
+msgstr "연필"
 
 msgid "Eraser"
-msgstr ""
+msgstr "지우개"
 
 msgid "Bucket"
 msgstr ""
@@ -1090,13 +1307,13 @@ msgid "Switch Colors"
 msgstr ""
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "단축키 설정"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "키와 키 조합을 눌러 단축키 설정하기"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "이미 지정됨"
 
 msgid "Left Tool:"
 msgstr ""
@@ -1117,22 +1334,22 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "최근 프로젝트 열기"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "최근 프로젝트 열기..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "프로그램을 시작할 때 최근 프로젝트 열기"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "프로그램을 시작할 때 마지막으로 열었던 프로젝트 열기"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "자동 저장 켜기"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "자동 저장 주기:"
 
 msgid "minute(s)"
 msgstr ""
@@ -1144,27 +1361,30 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
 msgstr ""
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "백업본을 다시 불러오는 중"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "현재 선택된 팔레트 제거"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "팔레트를 더 이상 지울 수 없습니다!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "팔레트가 존재하지 않기 때문에, 팔레트를 지울 수 없었습니다!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "팔레트를 제거하던 도중 오류가 발생했습니다! 오류 코드: %s"
+
+msgid "and"
+msgstr "그리고"
 

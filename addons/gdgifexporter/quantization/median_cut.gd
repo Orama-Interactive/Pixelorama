@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 
 
 var converter = preload('../converter.gd').new()
@@ -144,5 +144,5 @@ func quantize_and_convert_to_codes(image: Image) -> Array:
 	if transparency:
 		color_array.push_front([0, 0, 0])
 
-	var data: PoolByteArray = converter.setup(image, color_array)
+	var data: PoolByteArray = converter.get_similar_indexed_datas(image, color_array)
 	return [data, color_array, transparency]

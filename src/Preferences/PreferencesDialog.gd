@@ -16,13 +16,17 @@ var preferences = [
 	["default_image_height", "Image/ImageOptions/ImageDefaultHeight", "value", Global.default_image_height],
 	["default_fill_color", "Image/ImageOptions/DefaultFillColor", "color", Global.default_fill_color],
 
+	["grid_type", "Canvas/GridOptions/GridType", "selected", Global.grid_type],
 	["grid_width", "Canvas/GridOptions/GridWidthValue", "value", Global.grid_width],
 	["grid_height", "Canvas/GridOptions/GridHeightValue", "value", Global.grid_height],
+	["grid_isometric_cell_size", "Canvas/GridOptions/IsometricCellSizeValue", "value", Global.grid_isometric_cell_size],
 	["grid_color", "Canvas/GridOptions/GridColor", "color", Global.grid_color],
 	["guide_color", "Canvas/GuideOptions/GuideColor", "color", Global.guide_color],
 	["checker_size", "Canvas/CheckerOptions/CheckerSizeValue", "value", Global.checker_size],
 	["checker_color_1", "Canvas/CheckerOptions/CheckerColor1", "color", Global.checker_color_1],
 	["checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color", Global.checker_color_2],
+	["checker_follow_movement", "Canvas/CheckerOptions/CheckerFollowMovement", "pressed", Global.checker_follow_movement],
+	["checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed", Global.checker_follow_scale],
 ]
 
 var selected_item := 0
@@ -74,6 +78,9 @@ func _ready() -> void:
 			if pref[2] == "color":
 				preference_update(pref[0])
 				disable_restore_default_button(restore_default_button, Global.get(pref[0]).is_equal_approx(pref[3]))
+			elif pref[2] == "selected":
+				preference_update(pref[0])
+				disable_restore_default_button(restore_default_button, Global.get(pref[0]) == pref[3])
 
 
 func _on_Preference_toggled(button_pressed : bool, prop : String, default_value, restore_default_button : BaseButton) -> void:
@@ -113,10 +120,11 @@ func preference_update(prop : String) -> void:
 		else:
 			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
-	if prop in ["grid_width", "grid_height", "grid_color"]:
-		Global.canvas.update()
+	if prop in ["grid_type", "grid_width", "grid_height", "grid_isometric_cell_size", "grid_color"]:
+		Global.canvas.grid.isometric_polylines.clear()
+		Global.canvas.grid.update()
 
-	if prop in ["checker_size", "checker_color_1", "checker_color_2"]:
+	if prop in ["checker_size", "checker_color_1", "checker_color_2", "checker_follow_movement", "checker_follow_scale"]:
 		Global.transparent_checker._ready()
 
 	if prop in ["guide_color"]:

@@ -1,0 +1,70 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: pixelorama\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-08 22:43\n"
+"PO-Revision-Date: 2020-08-10 08:53\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /master/installer/installer.pot\n"
+"X-Crowdin-File-ID: 10\n"
+
+#. SecInstall
+#: .\pixelorama.nsi:72
+msgid "Install ${APPNAME}"
+msgstr "${APPNAME} installieren"
+
+#. SecStartmenu
+#: .\pixelorama.nsi:73
+msgid "Create Start Menu shortcuts (optional)"
+msgstr "Erstelle Startmenü-Verknüpfungen (optional)"
+
+#. SecDesktop
+#: .\pixelorama.nsi:74
+msgid "Create shortcut on Desktop (optional)"
+msgstr "Verknüpfung auf dem Desktop erstellen (optional)"
+
+#. un.SecUninstall
+#: .\pixelorama.nsi:75
+msgid "Uninstall ${APPNAME} ${APPVERSION}"
+msgstr "${APPNAME} ${APPVERSION} deinstallieren"
+
+#. un.SecConfig
+#: .\pixelorama.nsi:76
+msgid "Remove configuration files (optional)"
+msgstr "Konfigurationsdateien entfernen (optional)"
+
+#. DESC_SecInstall
+#: .\pixelorama.nsi:178
+msgid "Installs ${APPNAME} ${APPVERSION}."
+msgstr "Installiert ${APPNAME} ${APPVERSION}."
+
+#. DESC_SecStartmenu
+#: .\pixelorama.nsi:179
+msgid "Creates Start Menu shortcuts for ${APPNAME}."
+msgstr "Erstellt Verknüpfungen im Startmenü für ${APPNAME}."
+
+#. DESC_SecDesktop
+#: .\pixelorama.nsi:180
+msgid "Creates a Desktop shortcut for ${APPNAME}."
+msgstr "Erstellt eine Desktop-Verknüpfung für ${APPNAME}."
+
+#. DESC_un.SecUninstall
+#: .\pixelorama.nsi:181
+msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
+msgstr "Deinstalliert ${APPNAME} ${APPVERSION} und entfernt alle Verknüpfungen."
+
+#. DESC_un.SecConfig
+#: .\pixelorama.nsi:182
+msgid "Removes configuration files for ${APPNAME}."
+msgstr "Entfernt Konfigurationsdateien für ${APPNAME}."
+

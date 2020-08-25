@@ -2,1169 +2,1399 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
 "X-Crowdin-Language: hu\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-06-02 17:09\n"
+"PO-Revision-Date: 2020-08-21 17:15\n"
 
 msgid "OK"
-msgstr ""
+msgstr "RENDBEN"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 msgid "Open"
-msgstr ""
+msgstr "Megnyitás"
 
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Kérlek, erősítsd meg..."
+
+msgid "File Name:"
+msgstr "Fájlnév:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Képméret"
+
+msgid "Canvas Size"
+msgstr "Vászon mérete"
+
+msgid "Frame Size"
+msgstr "Keretméret"
 
 msgid "Width:"
-msgstr ""
+msgstr "Szélesség:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Magasság:"
+
+msgid "Center"
+msgstr "Középre"
 
 msgid "File"
-msgstr ""
+msgstr "Fájl"
 
 msgid "Edit"
-msgstr ""
+msgstr "Szerkeszt"
 
 msgid "View"
-msgstr ""
+msgstr "Nézet"
 
 msgid "Image"
-msgstr ""
+msgstr "Kép"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effektek"
 
 msgid "Help"
-msgstr ""
+msgstr "Súgó"
 
 msgid "New"
-msgstr ""
+msgstr "Új"
 
 msgid "New..."
-msgstr ""
+msgstr "Új..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Megnyitás..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Mentés..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Mentés másként..."
+
+msgid "Use ZSTD Compression"
+msgstr "ZSTD Tömörítés használata"
 
 msgid "Import"
-msgstr ""
-
-msgid "Import..."
-msgstr ""
-
-msgid "Import PNG..."
-msgstr ""
+msgstr "Importálás"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportálás"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportálás..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportálás másként..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exportálás PNG-ként..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "PNG Exportálása mint..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Kilépés"
 
 msgid "Undo"
-msgstr ""
+msgstr "Visszavonás"
 
 msgid "Redo"
-msgstr ""
+msgstr "Mégis"
+
+msgid "Copy"
+msgstr "Másolás"
+
+msgid "Paste"
+msgstr "Beillesztés"
+
+msgid "Delete"
+msgstr "Törlés"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Kép átméretezése"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Kép levágása"
+
+msgid "Resize Canvas"
+msgstr "Vászon átméretezése"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Kép forgatása"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Kijelölés törlése"
+
+msgid "Flip"
+msgstr "Átfordítás"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Vízszintes tükrözés"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Függőleges tükrözés"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Beállítások"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Csempe mód"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Rács megjelenítése"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Vonalzók megjelenítése"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Útmutatók megjelenítése"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Animáció idővonal megjelenítése"
+
+msgid "Zen Mode"
+msgstr "Zen mód"
+
+msgid "Fullscreen Mode"
+msgstr "Teljes képernyős mód"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Kitöltés színnel:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Fájl megnyitása"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Fájl(ok) megnyitása"
 
-msgid "Import as new frame"
-msgstr ""
+msgid "Import Options"
+msgstr "Importálás beállításai"
 
-msgid "Import as a spritesheet"
-msgstr ""
+msgid "Import as:"
+msgstr "Importálás másként:"
+
+msgid "New tab"
+msgstr "Új lap"
+
+msgid "Spritesheet (new tab)"
+msgstr "Képsorozat (új ablak)"
+
+msgid "New frame"
+msgstr "Új képkocka"
+
+msgid "New layer"
+msgstr "Új réteg"
+
+msgid "New palette"
+msgstr "Új paletta"
+
+msgid "New brush"
+msgstr "Új ecset"
+
+msgid "New pattern"
+msgstr "Új minta"
+
+msgid "Horizontal frames:"
+msgstr "Vízszintes képkockák:"
+
+msgid "Vertical frames:"
+msgstr "Függőleges képkockák:"
+
+msgid "Brush type:"
+msgstr "Ecset típus:"
+
+msgid "File brush"
+msgstr "Fájl ecset"
+
+msgid "Project brush"
+msgstr "Projekt ecset"
+
+msgid "Random brush"
+msgstr "Véletlenszerű ecset"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Kép mentése mint .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Kép exportálása mint .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Kép exportálása"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fájl létezik, fölülírja?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "\"%s\" fájl már létezik. Felülírja?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "A könyvtár elérési útja vagy a fájlnév nem érvényes!"
+
+msgid "Exporting in progress..."
+msgstr "Exportálás folyamatban..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Nem lehet megnyitni %s fájlt\n"
+"Error kód: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Képkocka"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Képkockák:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Összes Képkocka"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Képsorozat"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animáció"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Előnézet:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Képkocka:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Irány:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Tallózás"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Átméretezés:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Exportálás megszakítása"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Figyelmeztetés!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Jelenlegi mappa kiválasztása"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Könyvtár megnyitása"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Összes képkocka mint fájlok"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Minden képkocka egyetlen animációs fájlként"
 
 msgid "Background:"
-msgstr ""
+msgstr "Háttér:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Irány:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Előre"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Visszafelé"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Oszlopok"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Oszlopok:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Sorok"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Sorok:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Útvonal:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Könyvtárak és fájlok:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Mappa létrehozása"
 
 msgid "File:"
-msgstr ""
+msgstr "Fájl:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpoláció:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Legközelebbi"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineáris"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilineáris"
 
 msgid "General"
-msgstr ""
+msgstr "Általános"
+
+msgid "Startup"
+msgstr "Indítás"
 
 msgid "Language"
-msgstr ""
+msgstr "Nyelv"
 
 msgid "Themes"
-msgstr ""
+msgstr "Témák"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Vászon"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Gyorsbillentyűk"
+
+msgid "Backup"
+msgstr "Biztonsági mentés"
+
+msgid "Indicators"
+msgstr "Indikátorok"
+
+msgid "On"
+msgstr "Bekapcsolva"
+
+msgid "Restore default value"
+msgstr "Alapértékek visszaállítása"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Sima közelítés"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Hozzáad simább átmenettet közelítéskor vagy távolításkor"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Rajztábla nyomásérzékelés:"
 
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Befolyásolja a ecset alfaját"
 
 msgid "Color:"
-msgstr ""
+msgstr "Szín:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Segítő szín:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Rendszer nyelv"
 
 msgid "Dark"
-msgstr ""
+msgstr "Sötét"
 
 msgid "Gray"
-msgstr ""
+msgstr "Szürke"
 
 msgid "Blue"
-msgstr ""
+msgstr "Kék"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Krémszín"
 
 msgid "Light"
+msgstr "Világos"
+
+msgid "Only affect selection"
 msgstr ""
 
-msgid "Invert colors"
+msgid "Current cel"
 msgstr ""
+
+msgid "Current frame"
+msgstr ""
+
+msgid "All frames"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "Invert Colors"
+msgstr "Színek invertálása"
+
+msgid "Modify Red Channel"
+msgstr "A piros csatorna módosítása"
+
+msgid "Modify Green Channel"
+msgstr "A zöld csatorna módosítása"
+
+msgid "Modify Blue Channel"
+msgstr "A kék csatorna módosítása"
+
+msgid "Modify Alpha Channel"
+msgstr "A alfa csatorna módosítása"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Kifakítás"
 
 msgid "Outline"
-msgstr ""
+msgstr "Körvonal"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Színárnyalat/Telítettség/Érték beállítása"
+
+msgid "Gradient"
+msgstr "Színátmenet"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "HSV Beállítása"
 
 msgid "Type:"
-msgstr ""
+msgstr "Típus:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Szög:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Színárnyalat"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Telítettség"
 
 msgid "Value"
-msgstr ""
+msgstr "Érték"
 
 msgid "Apply"
-msgstr ""
+msgstr "Alkamaz"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Átló"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Helyezze be a képet"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Vastagság:"
+
+msgid "Colors:"
+msgstr "Színek:"
+
+msgid "Steps:"
+msgstr "Lépések:"
+
+msgid "Top to Bottom"
+msgstr "Tetejéről Aljáig"
+
+msgid "Bottom to Top"
+msgstr "Aljától tetejéig"
+
+msgid "Left to Right"
+msgstr "Balról jobbra"
+
+msgid "Right to Left"
+msgstr "Jobbról balra"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Üdvözlőképernyő megnyitása"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Online dokumentumok"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Hibakövető"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Változtatások"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "A Pixelorama-ról"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Fejleszette: Orama Interactive"
 
 msgid "Website"
-msgstr ""
+msgstr "Weboldal"
 
 msgid "Donate"
-msgstr ""
+msgstr "Támogatás"
 
 msgid "Developers"
-msgstr ""
+msgstr "Fejlesztők"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Közreműködők"
 
 msgid "Donors"
-msgstr ""
+msgstr "Támogatók"
 
 msgid "Translators"
-msgstr ""
+msgstr "Fordítók"
 
 msgid "English"
-msgstr ""
+msgstr "Angol"
 
 msgid "Greek"
-msgstr ""
+msgstr "Görög"
 
 msgid "French"
-msgstr ""
+msgstr "Francia"
 
 msgid "German"
-msgstr ""
+msgstr "Német"
 
 msgid "Polish"
-msgstr ""
+msgstr "Lengyel"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazíliai Portugál"
 
 msgid "Russian"
-msgstr ""
+msgstr "Orosz"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Kínai egyszerűsített"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Kínai hagyományos"
 
 msgid "Italian"
-msgstr ""
+msgstr "Olasz"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lett"
 
 msgid "Spanish"
+msgstr "Spanyol"
+
+msgid "Catalan"
 msgstr ""
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Eszperantó"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonéz"
 
 msgid "Czech"
-msgstr ""
+msgstr "Cseh"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arab"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Török"
+
+msgid "Norwegian"
+msgstr "Norvég"
+
+msgid "Korean"
+msgstr "Koreai"
+
+msgid "Hungarian"
+msgstr "Magyar"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Fejlesztő csapat"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Vezető programozó"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Felhasználóifelület-dizájner"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub Közreműködők"
 
-msgid "Art by"
+msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "névtelen"
 
 msgid "imported"
-msgstr ""
+msgstr "importált"
 
 msgid "copy"
-msgstr ""
+msgstr "másolat"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Biztos vagy benne, hogy kilépsz Pixeloramából?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Nem mentett kép"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Nem mentett változtatások vannak. Ha folytatja, az elért haladás elveszik."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Mentés mielőtt kilépsz?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Nem mentett változtatások vannak. Biztos vagy benne hogy továbblépsz?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Mentés és kilépés"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Kilépés mentés nélkül"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Segédprogramok"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Téglalap alakú kijelölés\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal\n\n"
+"A %s gombot a tartalom mozgatáshoz"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Nagyítás\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Színválasztó\n"
+"Válasz egy színt egy pixeléből a sprite-nak\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "Rajzeszözök"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Ceruza\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal\n\n"
+"Tartsa lenyomva a %s vonal húzásához"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Radír\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal\n\n"
+"Tartsa lenyomva a %s vonal húzásához"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Vödör\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Világosítás/Sötétítés\n\n"
+"%s a bal egérgombbal\n"
+"%s a jobb egérgombbal"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Szín kiválasztása a bal eszközhöz"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Szín kiválasztása a jobb eszközhöz"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Bal és jobb színek cseréje\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Színek visszaállítása(fekete bal, fehér jobb)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Bal eszköz"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Jobb eszköz"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Bal pixel indikátor"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Rajzolás közben a bal egér pixel jelzőt vagy ecset megjelenítése a vásznon"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Jobb pixel indikátor"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Rajzolás közben a jobb egér pixel jelzőt vagy ecset megjelenítése a vásznon"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Bal eszközikon mutatása"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Megjeleníti a kiválasztott bal eszköz ikont a vásznon kurzor mellett"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Jobb eszközikon mutatása"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Megjeleníti a kiválasztott jobb eszköz ikont a vásznon kurzor mellett"
+
+msgid "Guides"
+msgstr "Útmutatók"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Útmutatók színe:"
 
 msgid "A color of ruler guides displayed on the canvas"
+msgstr "A vászonon megjelenített útmutatók színe"
+
+msgid "Grid"
+msgstr "Rács"
+
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
 msgstr ""
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Rács szélessége:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Beállítja, hogy a rács függőleges vonalai milyen távolságra legyenek egymástól"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Rács magassága:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
+msgstr "Beállítja, hogy a rács vízszintes vonalai milyen távolságra legyenek egymástól"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Rács színe:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "A rács színe"
+
+msgid "Transparency"
+msgstr "Átlátszóság"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Kockás háttér mérete:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "A kockás háttér átlátszósága"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Kockás háttér színe 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Az átlátszó kockás háttér első színe"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Kockás háttér színe 2:"
 
 msgid "Second color of the transparent checker background"
+msgstr "Az átlátszó kockás háttér második színe"
+
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Csak az egyedi beállítások módosíthatók"
 
 msgid "Brush:"
-msgstr ""
+msgstr "Ecset:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Ecset kiválasztása"
 
 msgid "Brush: Pixel"
-msgstr ""
+msgstr "Ecset: Pixel"
 
 msgid "Brush: Circle"
-msgstr ""
+msgstr "Ecset: Kör"
 
 msgid "Brush: Filled Circle"
-msgstr ""
+msgstr "Ecset: Kitöltött kör"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Egyedi ecset"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Ecsetméret:"
+
+msgid "Overwrite"
+msgstr "Felülírás"
+
+msgid "Pixel Perfect"
+msgstr "Pixel Perfect"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Ecset színből"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Szín a ecsetből, 100: a jelenleg kiválasztott szín"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Terület kitöltése:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Ugyanaz a színterület"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Ugyanazon színű pixelek"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Kitöltés ezzel:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Kiválasztott szín"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Minta"
 
 msgid "Offset"
-msgstr ""
+msgstr "Eltolás"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Világosítás"
 
 msgid "Darken"
-msgstr ""
+msgstr "Sötétítés"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Összeg:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Világosítás/Sötétítés összeg"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Válasszon:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Bal szín"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Jobb szín"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mód:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Nagyítás"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Kicsinyítés"
 
 msgid "Options:"
-msgstr ""
+msgstr "Beállítások:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Kerethez illesztés"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100%-ig Közelítés"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Tükrözés"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Vízszintes"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Vízszintesen tükrözött rajzolás engedélyezése"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Függőlegesen tükrözött rajzolás engedélyezése"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Függőleges"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Jelenlegi képkocka:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Ugrás az első képkockához \n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Menjen a előző képkockához \n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Animáció lejátszása visszafelé (végétől az elejéig)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Animáció lejátszása előre (elejétől végéig)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Menjen a következő képkockához \n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Ugrás az utolsó képkockához \n"
+"(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Hagymabőr beállítások"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Hagymabőr be/ki kapcsolása"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Hány képkocka legyen másodpercenként az animáció előnézete?\n"
+"Minél több FPS, annál gyorsabb az animáció lejátszása."
 
 msgid "No loop"
-msgstr ""
+msgstr "Nincs loop"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Bicikli loop"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping-pong loop"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Hagymabőr:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Előző képkockák"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Következő képkockák"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Képkocka címkék módosítása"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Az animáció csak ugyanazon címkés képkockákat játssza le"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Ha ez ki van választva, akkor az animáció csak az azonos címkével ellátott képkockákat játssza le.\n"
+"Ha nem, az animáció minden képkockát lejátszódik, figyelmen kívül hagyva a címkéket."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Kék-Piros Mód"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Új képkocka hozzáadása"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Képkocka törlése"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Képkocka klónozása"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Mozgás balra"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Mozgás jobbra"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Cella összekapcsolása"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Cella szétkapcsolása"
 
 msgid "Layer"
-msgstr ""
+msgstr "Réteg"
 
 msgid "Layers"
-msgstr ""
+msgstr "Rétegek"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Új réteg létrehozása"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Aktuális réteg eltávolítása"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Jelenlegi réteg felfelé mozgatása"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Jelenlegi réteg lefelé mozgatása"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Aktuális réteg klónozása"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Aktuális réteg egyesítése az alatta lévővel"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Áttetszőség:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Réteg láthatóságának beállítása"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Réteg Bezárása/Kinyitása"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "A cella-összekapcsolás be/ki kapcsolása\n\n"
+"Az összekapcsolt cellák több képkockáig tartanak"
 
 msgid "Palette"
-msgstr ""
+msgstr "Paletta"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletták"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Új paletta hozzáadása"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Jelenlegi paletta módosítása"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Paletta választása"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Visszavonás: Rajz"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Újra: Rajz"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Visszavonás: Téglalap alakú kijelölés"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Újra: Téglalap alakú kijelölés"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Visszavonás: Méret"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Újra: Méret"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Visszavonás: Réteg hozzáadása"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Újra: Réteg hozzáadása"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Visszavonás: Réteg törlése"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Újra: Réteg törlése"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Visszavonás: Réteg Módosítása"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Újra: Réteg Módosítása"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Visszavonás: Rétegek sorrendjének cseréje"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Újra: Rétegek sorrendjének cseréje"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Visszavonás: Képkocka hozzáadása"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Újra: Képkocka hozzáadása"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Visszavonás: Képkocka törlése"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Újra: Képkocka törlése"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Visszavonás: Képkockák sorrendjének cseréje"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Újra: Képkockák sorrendjének cseréje"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Visszavonás: Egyedi ecset törlése"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Újra: Egyedi ecset törlése"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Visszavonás: Képkocka címke módosítása"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Újra: Képkocka címke módosítása"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Visszavinás: Képkocka címke törlése"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Újra: Képkocka címke törlése"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Útmutató mozgatása"
 
 msgid "File saved"
-msgstr ""
+msgstr "Fájl elmentve"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fájl automatikusan elmentve"
 
 msgid "File failed to open"
-msgstr ""
+msgstr "A fájl megnyitása sikertelen"
 
 msgid "File failed to save"
-msgstr ""
+msgstr "A mentés sikertelen"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fájl exportálva"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Új üres paletta"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Paletta importálása"
+
+msgid "Create Palette From Current Sprite"
+msgstr "Paletta készítése a mostani képből"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Paletta neve:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Szín neve:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Használd a mostani bal & jobb színeket"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Létrehoz egy új és üres palettát?"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
-
-msgid "Error: Palette named '%s' already exists!"
-msgstr ""
+msgstr "Error: A palettának érvényes neve kell hogy legyen."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Érvénytelen palettafájl!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Paletta Szerkesztése"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Támogatók:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Szerzetnéd hogy a neved vagy a céged feltűnjön a felugró képernyőn?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Legyél Platinum Szponzor"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Legyél Arany Szponzor"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Legyél te is Támogató"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Ne mutasd többet"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Képbeállítások"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Alapértelmezett szélesség:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Alapértelmezett szélessége az új képnek"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Alapértelmezett magasság:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Alapértelmezett magassága az új képnek"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Alapértelmezett kitöltő szín:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Alapértelmezett háttérszíne az új képnek"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "Méretarány lezárása:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Sablonok:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Séma"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Séma:"
 
 msgid "Default"
-msgstr ""
+msgstr "Alapértelmezett"
 
 msgid "Custom"
-msgstr ""
+msgstr "Egyéni"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Téglalap alakú kijelölés"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Nagyít/kicsinyít"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Színválasztó"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Ceruza"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Radír"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Vödör"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Világosítás/Sötétítés"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Színek cserélése"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Parancsikon beállítása"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Nyomj meg egy gombot vagy gombkombinációt a Parancsikon beállításához"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Már hozzá van rendelve"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Bal eszköz:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Az eszköz már hozzá van rendelve a bal egérgombhoz"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Jobb eszköz:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Az eszköz már hozzá van rendelve a jobb egérgombhoz"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Nem található az utolsó projektfájl."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Még nem mentettél vagy nyitottál meg projektet Pixeloramában!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Utolsó projekt megnyitása"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Utolsó projekt megnyitása..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Utolsó projekt megnyitása indításkor"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Utolsó projektet megnyissa indításkor"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Automatikus mentés bekapcsolása"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Időköz az automatikus mentések között:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "perc(ek)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Új könyvtár létrehozása minden címkéhez"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Több fájlt hoz létre, de minden fájlt külön könyvtárban tárol, amely megfelel a képkocka címkének"
 
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Automatikus biztonsági mentés találva a %s -hoz.\n"
+"Szeretné újra betölteni?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Biztonsági mentés újratöltve"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Jelenlegi paletta törlése"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Nem lehet több palettát eltávolítani!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Nem lehet eltávolítani a palettát, mert nem létezik!"
 
 msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Hiba történt a paletta eltávolítása közben! Error kód: %s"
+
+msgid "and"
 msgstr ""
 

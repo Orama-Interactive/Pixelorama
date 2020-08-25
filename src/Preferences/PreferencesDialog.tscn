@@ -1,15 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
 [ext_resource path="res://src/Preferences/HandleThemes.gd" type="Script" id=5]
 [ext_resource path="res://src/Preferences/HandleShortcuts.gd" type="Script" id=6]
 
 [sub_resource type="ButtonGroup" id=1]
-
-[sub_resource type="ButtonGroup" id=2]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_left = -3.0
@@ -115,129 +111,6 @@ pressed = true
 group = SubResource( 1 )
 text = "System Language"
 
-[node name="Czech" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 28.0
-margin_right = 506.0
-margin_bottom = 52.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Czech [cs]"
-
-[node name="German" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 56.0
-margin_right = 506.0
-margin_bottom = 80.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Deutsch [de]"
-
-[node name="Greek" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 84.0
-margin_right = 506.0
-margin_bottom = 108.0
-mouse_default_cursor_shape = 2
-custom_fonts/font = ExtResource( 2 )
-group = SubResource( 1 )
-text = "Ελληνικά [el]"
-
-[node name="English" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 112.0
-margin_right = 506.0
-margin_bottom = 136.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "English [en]"
-
-[node name="Esperanto" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 140.0
-margin_right = 506.0
-margin_bottom = 164.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Esperanto [eo]"
-
-[node name="Spanish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 168.0
-margin_right = 506.0
-margin_bottom = 192.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Español [es]"
-
-[node name="French" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 196.0
-margin_right = 506.0
-margin_bottom = 220.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Français [fr]"
-
-[node name="Indonesian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 224.0
-margin_right = 506.0
-margin_bottom = 248.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Indonesian [id]"
-
-[node name="Italian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 252.0
-margin_right = 506.0
-margin_bottom = 276.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Italiano [it]"
-
-[node name="Latvian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 280.0
-margin_right = 506.0
-margin_bottom = 304.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Latvian [lv]"
-
-[node name="Polish" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 308.0
-margin_right = 506.0
-margin_bottom = 332.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Polski [pl]"
-
-[node name="Brazilian Portuguese" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 336.0
-margin_right = 506.0
-margin_bottom = 360.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Português Brasileiro [pt_BR]"
-
-[node name="Russian" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 364.0
-margin_right = 506.0
-margin_bottom = 388.0
-mouse_default_cursor_shape = 2
-group = SubResource( 1 )
-text = "Русский [ru]"
-
-[node name="Chinese Simplified" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 392.0
-margin_right = 506.0
-margin_bottom = 418.0
-mouse_default_cursor_shape = 2
-custom_fonts/font = ExtResource( 3 )
-group = SubResource( 1 )
-text = "简体中文 [zh_CN]"
-
-[node name="Chinese Traditional" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
-margin_top = 422.0
-margin_right = 506.0
-margin_bottom = 448.0
-mouse_default_cursor_shape = 2
-custom_fonts/font = ExtResource( 3 )
-group = SubResource( 1 )
-text = "繁體中文 [zh_TW]"
-
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 28.0
@@ -248,45 +121,6 @@ script = ExtResource( 5 )
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_right = 80.0
 margin_bottom = 136.0
-
-[node name="Dark Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_right = 80.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Dark"
-
-[node name="Gray Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 28.0
-margin_right = 80.0
-margin_bottom = 52.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Gray"
-
-[node name="Blue Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 56.0
-margin_right = 80.0
-margin_bottom = 80.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Blue"
-
-[node name="Caramel Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 84.0
-margin_right = 80.0
-margin_bottom = 108.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Caramel"
-
-[node name="Light Theme" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeButtons"]
-margin_top = 112.0
-margin_right = 80.0
-margin_bottom = 136.0
-mouse_default_cursor_shape = 2
-group = SubResource( 2 )
-text = "Light"
 
 [node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
 margin_left = 84.0
@@ -382,6 +216,25 @@ custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
+[node name="TypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_right = 40.0
+margin_bottom = 14.0
+hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
+mouse_filter = 0
+text = "Grid type:"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="GridType" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_right = 29.0
+margin_bottom = 20.0
+hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
+mouse_default_cursor_shape = 2
+text = "Rectangular"
+items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null, "All", null, false, 2, null ]
+selected = 0
+
 [node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 5.0
 margin_right = 110.0
@@ -422,6 +275,26 @@ mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="IsometricCellSizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_right = 40.0
+margin_bottom = 14.0
+hint_tooltip = "Sets the size of the cells in an isometric grid"
+mouse_filter = 0
+text = "Isometric cell size:"
+
+[node name="IsometricCellSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 28.0
+margin_right = 110.0
+margin_bottom = 52.0
+hint_tooltip = "Sets the size of the cells in an isometric grid"
+mouse_default_cursor_shape = 2
+min_value = 2.0
+max_value = 16384.0
+value = 2.0
 rounded = true
 align = 2
 suffix = "px"
@@ -521,6 +394,38 @@ rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "Second color of the transparent checker background"
 mouse_default_cursor_shape = 2
 color = Color( 0.341176, 0.34902, 0.341176, 1 )
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_top = -181.0
+margin_right = 110.0
+margin_bottom = -167.0
+rect_min_size = Vector2( 110, 0 )
+text = "Follow Canvas Movement"
+
+[node name="CheckerFollowMovement" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_left = 114.0
+margin_top = -186.0
+margin_right = 161.0
+margin_bottom = -162.0
+hint_tooltip = "The transparent checker follow the movement of canvas"
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_top = -181.0
+margin_right = 110.0
+margin_bottom = -167.0
+rect_min_size = Vector2( 110, 0 )
+text = "Follow Canvas Zoom Level"
+
+[node name="CheckerFollowScale" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_left = 114.0
+margin_top = -186.0
+margin_right = 161.0
+margin_bottom = -162.0
+hint_tooltip = "The transparent checker follow the zoom level of canvas"
+mouse_default_cursor_shape = 2
+text = "On"
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false

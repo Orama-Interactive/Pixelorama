@@ -1,0 +1,70 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: pixelorama\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-08 22:43\n"
+"PO-Revision-Date: 2020-08-21 00:25\n"
+"Last-Translator: \n"
+"Language-Team: Korean\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
+"X-Crowdin-Language: ko\n"
+"X-Crowdin-File: /master/installer/installer.pot\n"
+"X-Crowdin-File-ID: 10\n"
+
+#. SecInstall
+#: .\pixelorama.nsi:72
+msgid "Install ${APPNAME}"
+msgstr "${APPNAME} 설치"
+
+#. SecStartmenu
+#: .\pixelorama.nsi:73
+msgid "Create Start Menu shortcuts (optional)"
+msgstr "시작 메뉴에 바로가기 만들기 (선택)"
+
+#. SecDesktop
+#: .\pixelorama.nsi:74
+msgid "Create shortcut on Desktop (optional)"
+msgstr "바탕화면에 바로가기 만들기 (선택)"
+
+#. un.SecUninstall
+#: .\pixelorama.nsi:75
+msgid "Uninstall ${APPNAME} ${APPVERSION}"
+msgstr "${APPNAME} ${APPVERSION} 제거"
+
+#. un.SecConfig
+#: .\pixelorama.nsi:76
+msgid "Remove configuration files (optional)"
+msgstr "배치 파일 제거 (선택)"
+
+#. DESC_SecInstall
+#: .\pixelorama.nsi:178
+msgid "Installs ${APPNAME} ${APPVERSION}."
+msgstr "${APPNAME} ${APPVERSION} 설치하기."
+
+#. DESC_SecStartmenu
+#: .\pixelorama.nsi:179
+msgid "Creates Start Menu shortcuts for ${APPNAME}."
+msgstr "시작 메뉴에 ${APPNAME}의 바로가기 만들기."
+
+#. DESC_SecDesktop
+#: .\pixelorama.nsi:180
+msgid "Creates a Desktop shortcut for ${APPNAME}."
+msgstr "바탕화면에 ${APPNAME}의 바로가기 만들기."
+
+#. DESC_un.SecUninstall
+#: .\pixelorama.nsi:181
+msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
+msgstr "${APPNAME} ${APPVERSION} 제거 및 모든 바로가기 제거하기."
+
+#. DESC_un.SecConfig
+#: .\pixelorama.nsi:182
+msgid "Removes configuration files for ${APPNAME}."
+msgstr "${APPNAME}의 배치 파일 제거하기."
+

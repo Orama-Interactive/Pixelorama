@@ -3,7 +3,7 @@
 ## gdgifexporter
 
 - Upstream: https://github.com/jegor377/godot-gdgifexporter
-- Version: git (9cdc448922717f069dd12e0377c1d9fc09d30f9f, 2020)
+- Version: git (201123154acfb9a1e00149fa708b4f13645d88dc, 2020)
 - License: MIT
 
 Files extracted from source:

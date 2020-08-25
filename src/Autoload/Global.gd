@@ -26,12 +26,9 @@ var current_project_index := 0 setget project_changed
 # that direction has been pressed.
 var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 
-var loaded_locales : Array
 # Canvas related stuff
 var layers_changed_skip := false
-
 var can_draw := false
-
 var has_focus := false
 var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
 var left_cursor_tool_texture := ImageTexture.new()
@@ -41,6 +38,7 @@ var image_clipboard : Image
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
+var default_clear_color := Color.gray
 
 # Preferences
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
@@ -53,11 +51,14 @@ var default_fill_color := Color(0, 0, 0, 0)
 var grid_type = Grid_Types.CARTESIAN
 var grid_width := 1
 var grid_height := 1
+var grid_isometric_cell_size := 2
 var grid_color := Color.black
 var guide_color := Color.purple
 var checker_size := 10
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
+var checker_follow_movement := false
+var checker_follow_scale := false
 
 var autosave_interval := 1.0
 var enable_autosave := true
@@ -309,6 +310,8 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
+			Global.canvas.grid.isometric_polylines.clear()
+			Global.canvas.grid.update()
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
@@ -337,6 +340,8 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
+			Global.canvas.grid.isometric_polylines.clear()
+			Global.canvas.grid.update()
 
 	elif "Frame" in action_name:
 		if project.frames.size() == 1: # Stop animating

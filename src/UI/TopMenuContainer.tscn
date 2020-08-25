@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/themes/dark/top_menu_style.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/UI/TopMenuContainer.gd" type="Script" id=2]
 
 [node name="TopMenuContainer" type="Panel"]
 margin_right = 1280.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
-custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
