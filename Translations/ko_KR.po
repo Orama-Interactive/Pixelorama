@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-21 17:15\n"
+"PO-Revision-Date: 2020-08-25 14:19\n"
 
 msgid "OK"
 msgstr "예"
@@ -607,6 +607,9 @@ msgstr "한국어"
 
 msgid "Hungarian"
 msgstr "헝가리어"
+
+msgid "Romanian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "개발팀"
