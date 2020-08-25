@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-22 17:37\n"
+"PO-Revision-Date: 2020-08-25 13:46\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -773,19 +773,19 @@ msgid "Grid"
 msgstr "Πλέγμα"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Είδος πλέγματος:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Ορίζει το είδος του πλέγματος ανάμεσα σε ορθογωνικό, ισομετρικό ή και τα δύο"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Ορθογωνικό"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Ισομετρικό"
 
 msgid "All"
-msgstr ""
+msgstr "Όλα"
 
 msgid "Grid width:"
 msgstr "Πλάτος πλέγματος:"
@@ -800,10 +800,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Ορίζει το πόσο μακριά είναι οι οριζόντιες γραμμές του πλέγματος"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Μέγεθος ισομετρικού κελιού:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Ορίζει το μέγεθος των κελιών σε ένα ισομετρικό πλέγμα"
 
 msgid "Grid color:"
 msgstr "Χρώμα πλέγματος:"
@@ -833,7 +833,7 @@ msgid "Second color of the transparent checker background"
 msgstr "Δεύτερο χρώμα του διάφανου υποβάθρου - σκακιέρα"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Να ακολουθεί τη κίνηση του καμβά"
 
 msgid "The transparent checker follow the movement of canvas"
 msgstr ""
