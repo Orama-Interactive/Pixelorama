@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-25 14:18\n"
+"PO-Revision-Date: 2020-08-25 15:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -609,7 +609,7 @@ msgid "Hungarian"
 msgstr "Maghiară"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Română"
 
 msgid "Development Team"
 msgstr "Echipa de dezvoltare"
@@ -767,10 +767,10 @@ msgid "Guides"
 msgstr "Ghidaje"
 
 msgid "Guides color:"
-msgstr "Culoare ghidaje:"
+msgstr "Culoare pentru ghidaje:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "O culoare a ghidajelor de riglă afișate pe pânză"
+msgstr "Culoarea ghidajelor de riglă afișate pe pânză"
 
 msgid "Grid"
 msgstr "Grilă"
@@ -788,19 +788,19 @@ msgid "Isometric"
 msgstr "Izometrică"
 
 msgid "All"
-msgstr "Toate"
+msgstr "Ambele"
 
 msgid "Grid width:"
 msgstr "Lățimea grilei:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei"
+msgstr "Setează la ce distanță să se afle una față de cealaltă liniile verticale ale grilei"
 
 msgid "Grid height:"
 msgstr "Înălțimea grilei:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei"
+msgstr "Setează la ce distanță să se afle una față de cealaltă liniile orizontale ale grilei"
 
 msgid "Isometric cell size:"
 msgstr "Dimensiunea celulei izometrice:"
