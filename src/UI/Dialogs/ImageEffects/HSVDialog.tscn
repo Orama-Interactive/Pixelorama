@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/HSVDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="HSVDialog" type="ConfirmationDialog"]
 margin_left = 1.0
@@ -35,12 +36,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="Preview" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 margin_right = 437.0
 margin_bottom = 149.0
 size_flags_vertical = 3
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+
+[node name="TransparentChecker" parent="MarginContainer/VBoxContainer/Preview" instance=ExtResource( 2 )]
+show_behind_parent = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 153.0
@@ -156,14 +160,9 @@ mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
-[connection signal="about_to_show" from="." to="." method="_on_HSVDialog_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_HSVDialog_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_HSVDialog_popup_hide"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/AffectHBoxContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/AffectHBoxContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]

@@ -8,6 +8,7 @@ onready var flip_v : CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
 func set_nodes() -> void:
 	preview = $VBoxContainer/Preview
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
 func _confirmed() -> void:
@@ -56,10 +57,6 @@ func _on_FlipVertical_toggled(_button_pressed : bool) -> void:
 func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 	._on_SelectionCheckBox_toggled(button_pressed)
 	update_preview()
-
-
-func _on_AffectOptionButton_item_selected(index : int) -> void:
-	affect = index
 
 
 func update_preview() -> void:

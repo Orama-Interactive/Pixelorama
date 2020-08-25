@@ -12,6 +12,7 @@ var preview_image : Image
 var preview_texture : ImageTexture
 var preview : TextureRect
 var selection_checkbox : CheckBox
+var affect_option_button : OptionButton
 
 
 func _ready() -> void:
@@ -24,6 +25,8 @@ func _ready() -> void:
 	connect("confirmed", self, "_confirmed")
 	if selection_checkbox:
 		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
+	if affect_option_button:
+		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
 
 
 func _about_to_show() -> void:
@@ -51,6 +54,10 @@ func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 				pixels.append(Vector2(x, y))
 
 	update_preview()
+
+
+func _on_AffectOptionButton_item_selected(index : int) -> void:
+	affect = index
 
 
 func update_preview() -> void:

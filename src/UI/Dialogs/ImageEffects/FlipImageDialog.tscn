@@ -69,4 +69,3 @@ items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, 
 selected = 0
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/FlipHorizontal" to="." method="_on_FlipHorizontal_toggled"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/FlipVertical" to="." method="_on_FlipVertical_toggled"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]
