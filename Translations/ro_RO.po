@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-25 16:25\n"
+"PO-Revision-Date: 2020-08-25 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -423,10 +423,10 @@ msgid "Only affect selection"
 msgstr "Afectează doar selecția"
 
 msgid "Current cel"
-msgstr "Celulă actuală"
+msgstr "Celula actuală"
 
 msgid "Current frame"
-msgstr "Cadru actual"
+msgstr "Cadrul actual"
 
 msgid "All frames"
 msgstr "Toate cadrele"
@@ -734,10 +734,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Resetează culorile la starea lor implicită (negru pentru stânga, alb pentru dreapta)"
 
 msgid "Left tool"
-msgstr "Instrument stânga"
+msgstr "Instrumentul din stânga"
 
 msgid "Right tool"
-msgstr "Instrument dreapta"
+msgstr "Instrumentul din dreapta"
 
 msgid "Left pixel indicator"
 msgstr "Indicator pixel stânga"
@@ -896,7 +896,7 @@ msgid "Fill with:"
 msgstr "Umplere cu:"
 
 msgid "Selected Color"
-msgstr "Culoare selectată"
+msgstr "Culoarea selectată"
 
 msgid "Pattern"
 msgstr "Model"
@@ -920,10 +920,10 @@ msgid "Pick for:"
 msgstr "Alege pentru:"
 
 msgid "Left Color"
-msgstr "Culoare stânga"
+msgstr "Culoarea stângă"
 
 msgid "Right Color"
-msgstr "Culoare dreapta"
+msgstr "Culoarea dreaptă"
 
 msgid "Mode:"
 msgstr "Mod:"
@@ -1328,13 +1328,13 @@ msgid "Already assigned"
 msgstr "Alocată deja"
 
 msgid "Left Tool:"
-msgstr "Instrument stânga:"
+msgstr "Instrumentul din stânga:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr "Un instrument alocat butonului din stânga al masului"
 
 msgid "Right Tool:"
-msgstr "Instrument dreapta:"
+msgstr "Instrumentul din dreapta:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Un instrument alocat butonului din dreapta al masului"
