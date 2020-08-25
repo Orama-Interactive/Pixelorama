@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-25 15:42\n"
+"PO-Revision-Date: 2020-08-25 15:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -959,7 +959,7 @@ msgid "Vertical"
 msgstr "Vertical"
 
 msgid "Current frame:"
-msgstr "Cadru actual:"
+msgstr "Cadrul actual:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -968,7 +968,7 @@ msgstr "Sari la primul cadru\n"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "Deplasare la cadrul anterior\n"
+msgstr "Mergi la cadrul anterior\n"
 "(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
@@ -983,7 +983,7 @@ msgstr "Redă animația înainte (de la început până la sfârșit)\n"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "Deplasare la cadrul următor\n"
+msgstr "Mergi la cadrul următor\n"
 "(%s)"
 
 msgid "Jump to the last frame\n"
@@ -995,7 +995,7 @@ msgid "Onion Skinning settings"
 msgstr "Setări pentru cadre multiple simultane"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Activare/dezactivare cadre multiple simultane"
+msgstr "Activează/dezactivează cadrele multiple simultane"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1021,14 +1021,14 @@ msgid "Future Frames"
 msgstr "Cadre viitoare"
 
 msgid "Manage frame tags"
-msgstr "Gestionare etichete de cadru"
+msgstr "Gestionează etichetele de cadru"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Dacă este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
+msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
 "În caz contrar, animația va rula pentru toate cadrele, ignorând etichetele."
 
 msgid "Blue-Red Mode"
@@ -1038,10 +1038,10 @@ msgid "Add a new frame"
 msgstr "Adaugă un cadru nou"
 
 msgid "Remove Frame"
-msgstr "Eliminare cadru"
+msgstr "Elimină cadrul"
 
 msgid "Clone Frame"
-msgstr "Clonare cadru"
+msgstr "Clonează cadrul"
 
 msgid "Move Left"
 msgstr "Deplasare la stânga"
@@ -1089,12 +1089,12 @@ msgid "Toggle layer's visibility"
 msgstr "Comută vizibilitatea stratului"
 
 msgid "Lock/unlock layer"
-msgstr "Blocare/deblocare strat"
+msgstr "Blochează/deblochează stratul"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Activare/dezactivare conectare celule\n\n"
-"Celulele conectate sunt distribuite între mai multe cadre"
+msgstr "Activează/dezactivează conectarea celulelor\n\n"
+"Celulele conectate sunt distribuite pe mai multe cadre"
 
 msgid "Palette"
 msgstr "Paletă"
