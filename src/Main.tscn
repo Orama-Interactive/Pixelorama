@@ -57,12 +57,18 @@ __meta__ = {
 margin_right = 375.0
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+window_title = "Otwórz plik"
+current_dir = "/Projekty/Godot/Pixelorama"
+current_path = "/Projekty/Godot/Pixelorama/"
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
+window_title = "Zapisz plik"
+current_dir = "/Projekty/Godot/Pixelorama"
+current_path = "/Projekty/Godot/Pixelorama/untitled"
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 
