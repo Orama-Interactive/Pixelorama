@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-25 17:29\n"
+"PO-Revision-Date: 2020-08-25 17:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -817,34 +817,34 @@ msgid "Transparency"
 msgstr "Przezroczystość"
 
 msgid "Checker size:"
-msgstr "Rozmiar komórek:"
+msgstr "Rozmiar komórek przezroczystej siatki:"
 
 msgid "Size of the transparent checker background"
-msgstr "Rozmiar komórek do rysowania - szachownicy"
+msgstr "Rozmiar tła przezroczystej siatki"
 
 msgid "Checker color 1:"
-msgstr "Kolor komórek 1:"
+msgstr "Kolor komórek przezroczystej siatki 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Pierwszy kolor komórek do rysowania - szachownicy"
+msgstr "Pierwszy kolor komórek przezroczystej siatki"
 
 msgid "Checker color 2:"
-msgstr "Kolor komórek 2:"
+msgstr "Kolor komórek przezroczystej siatki 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Drugi kolor komórek do rysowania - szachownicy"
+msgstr "Drugi kolor komórek przezroczystej siatki"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Śledź ruch płótna"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Przezroczysta siatka śledzi ruch płótna"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Śledź poziom przybliżenia płótna"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Przezroczysta siatka śledzi poziom przybliżenia płótna"
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
@@ -1398,5 +1398,5 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Wystąpił błąd podczas usuwania palety! Kod błędu: %s"
 
 msgid "and"
-msgstr ""
+msgstr "i"
 
