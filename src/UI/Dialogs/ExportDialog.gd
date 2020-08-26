@@ -15,7 +15,7 @@ onready var export_progress_popup = $Popups/ExportProgressBar
 onready var export_progress_bar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 
 onready var animation_options_multiple_animations_directories = $VBoxContainer/AnimationOptions/MultipleAnimationsDirectories
-onready var previews = $VBoxContainer/PreviewScroll/Previews
+onready var previews = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
 onready var frame_timer = $FrameTimer
 
 onready var frame_options = $VBoxContainer/FrameOptions
@@ -260,6 +260,9 @@ func _on_ExportDialog_about_to_show() -> void:
 
 	Export.file_exists_alert = tr("File %s already exists. Overwrite?") # Update translation
 
+	# Set the size of the preview checker
+	var checker = $VBoxContainer/PreviewPanel/TransparentChecker
+	checker.rect_size = checker.get_parent().rect_size
 
 func _on_Tabs_tab_clicked(tab : int) -> void:
 	Export.current_tab = tab
@@ -364,7 +367,7 @@ func _on_FileExistsAlert_custom_action(action : String) -> void:
 
 var pingpong_direction = Export.AnimationDirection.FORWARD
 func _on_FrameTimer_timeout() -> void:
-	$VBoxContainer/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
+	$VBoxContainer/PreviewPanel/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
 
 	match Export.direction:
 		Export.AnimationDirection.FORWARD:
