@@ -173,7 +173,7 @@ func load_palette() -> void:
 		var palette := Palette.new()
 		palette = Import.import_gpl(file_name, palette_data)
 		Global.palette_container.attempt_to_import_palette(palette)
-	elif file_name.end_with(".pal"):
+	elif file_name.ends_with(".pal"):
 		var palette := Palette.new()
 		palette = Import.import_pal_palette(file_name, palette_data)
 		Global.palette_container.attempt_to_import_palette(palette)

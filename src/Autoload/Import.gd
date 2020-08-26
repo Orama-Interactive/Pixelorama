@@ -301,7 +301,7 @@ func import_pal_palette(path : String, text : String) -> Palette:
 
 	var lines = text.split('\n')
 
-	if lines[0] != 'JASC-PAL' or lines[1] != '0100':
+	if not 'JASC-PAL' in lines[0] or not '0100' in lines[1]:
 		return result
 	else:
 		result = Palette.new()
