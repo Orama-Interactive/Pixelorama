@@ -294,3 +294,28 @@ func import_png_palette(path: String, image : Image) -> Palette:
 	result.name = path.get_basename().get_file()
 
 	return result
+
+
+func import_pal_palette(path : String, text : String) -> Palette:
+	var result: Palette = null
+
+	var lines = text.split('\n')
+
+	if not 'JASC-PAL' in lines[0] or not '0100' in lines[1]:
+		return result
+	else:
+		result = Palette.new()
+		result.name = path.get_basename().get_file()
+
+	var num_colors = int(lines[2])
+
+	for i in range(3, num_colors + 3):
+		var color_data = lines[i].split(' ')
+		var red : float = color_data[0].to_float() / 255.0
+		var green : float = color_data[1].to_float() / 255.0
+		var blue : float = color_data[2].to_float() / 255.0
+
+		var color = Color(red, green, blue)
+		result.add_color(color)
+
+	return result
