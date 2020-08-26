@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-25 16:58\n"
+"PO-Revision-Date: 2020-08-26 16:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1256,7 +1256,7 @@ msgid "Don't show again"
 msgstr "Nu mai arăta"
 
 msgid "Image Options"
-msgstr "Opțiuni de imagine"
+msgstr "Opțiuni pentru imagine"
 
 msgid "Default width:"
 msgstr "Lățime implicită:"
