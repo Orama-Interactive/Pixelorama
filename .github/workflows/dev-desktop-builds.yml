@@ -75,6 +75,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           submodules: true
+      - name: Setup environment 🔧
+        run: |
+          export GODOT_VERSION=3.2.2
+          export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
           mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
