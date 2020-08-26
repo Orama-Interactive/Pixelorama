@@ -38,6 +38,8 @@ func _about_to_show() -> void:
 	Export.blend_layers(current_frame, frame)
 	if selection_checkbox:
 		_on_SelectionCheckBox_toggled(selection_checkbox.pressed)
+	else:
+		update_preview()
 	update_transparent_background_size()
 
 
