@@ -65,7 +65,11 @@ func reset() -> void:
 
 
 func update_preview() -> void:
-	preview_image.copy_from(current_cel)
+	match affect:
+		CEL:
+			preview_image.copy_from(current_cel)
+		_:
+			preview_image.copy_from(current_frame)
 	DrawingAlgos.adjust_hsv(preview_image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
