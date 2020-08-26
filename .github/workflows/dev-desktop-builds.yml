@@ -69,22 +69,48 @@ jobs:
 
   export-mac:
     name: Mac Export 🍎
-    runs-on: ubuntu-latest
-    container:
-      image: docker://barichello/godot-ci:3.2.2
+    runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup 💻
+      - name: Setup environment 🔧
         run: |
-          mkdir -v -p build/mac ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          export GODOT_VERSION=3.2.2
+          export EXPORT_NAME=Pixelorama
+      - name: Download and extract export templates 💾
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip -a Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Download Godot headless binary 💾
+        run: |
+          curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
+          unzip -a Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
+      - name: Setup 💻
+        run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
-        run: godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
+        run: |
+          chown runner ./Godot
+          chmod +x ./Godot
+          ./Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
+      - name: Make application executable 🔧
+        run: |
+          unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
+          chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
+          rm ./build/mac/Pixelorama.zip
+      - name: Fix application icon 🖼
+        run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+      - name: Copy pixelorama folder 📁
+        run: |
+          cp -R ./pixelorama ./build/mac
+          rm ./build/mac/pixelorama/.gdignore
+      - name: Create DMG archive 🔧
+        run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
           name: Mac
-          path: ./build/mac/
+          path: ./build/mac/Pixelorama.dmg
