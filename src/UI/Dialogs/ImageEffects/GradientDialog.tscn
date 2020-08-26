@@ -25,9 +25,12 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 285.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
+margin_left = 42.0
+margin_right = 242.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
@@ -35,9 +38,9 @@ stretch_mode = 5
 show_behind_parent = true
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 104.0
+margin_top = 204.0
 margin_right = 285.0
-margin_bottom = 204.0
+margin_bottom = 304.0
 columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/OptionsContainer"]

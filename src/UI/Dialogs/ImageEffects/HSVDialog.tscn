@@ -25,6 +25,8 @@ __meta__ = {
 margin_right = 447.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 

@@ -25,9 +25,12 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 229.0
-margin_bottom = 145.0
+margin_left = 14.0
+margin_right = 214.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
@@ -35,9 +38,9 @@ stretch_mode = 5
 show_behind_parent = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 149.0
+margin_top = 204.0
 margin_right = 229.0
-margin_bottom = 169.0
+margin_bottom = 224.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 margin_top = 3.0
@@ -54,9 +57,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 173.0
+margin_top = 228.0
 margin_right = 229.0
-margin_bottom = 197.0
+margin_bottom = 252.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_top = 5.0

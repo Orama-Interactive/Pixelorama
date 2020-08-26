@@ -11,17 +11,9 @@ func set_nodes() -> void:
 	preview = $VBoxContainer/Preview
 
 
-func set_sprite(sprite : Image) -> void:
-	preview_image.copy_from(sprite)
-	current_cel = sprite
-	preview_texture.create_from_image(preview_image, 0)
-	preview.texture = preview_texture
-
-
 func _about_to_show() -> void:
 	._about_to_show()
 	$VBoxContainer/HBoxContainer/HSlider.value = 0
-#	set_sprite(current_cel)
 
 
 func _confirmed() -> void:
