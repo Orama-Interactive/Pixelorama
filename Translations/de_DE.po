@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-08-25 14:19\n"
+"PO-Revision-Date: 2020-08-26 15:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -608,7 +608,7 @@ msgid "Hungarian"
 msgstr "Ungarisch"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumänisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
@@ -623,7 +623,7 @@ msgid "GitHub Contributors"
 msgstr "Github Beitragende"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Kunst von: %s"
 
 msgid "untitled"
 msgstr "unbenannt"
@@ -763,49 +763,49 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
 
 msgid "Guides"
-msgstr "Anleitungen"
+msgstr "Guides"
 
 msgid "Guides color:"
-msgstr "Guidefarbe:"
+msgstr "Guide-Farbe:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "Eine Farbe der Linealguides, die auf dem Canvas angezeigt werden"
+msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
 msgid "Grid"
-msgstr "Tabelle"
+msgstr "Gitter"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Gittertyp:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Legt den Typ des Gitters zwischen rechteckig, isometrisch oder beidem fest"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rechteckig"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isometrisch"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "Grid width:"
 msgstr "Rasterbreite:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Legt fest, wie weit die vertikalen Linien des Rasters voneinander entfernt sind"
+msgstr "Legt fest, wie weit die vertikalen Linien des Gitters voneinander entfernt sind"
 
 msgid "Grid height:"
 msgstr "Rasterhöhe:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Legt fest, wie weit die horizontalen Linien des Rasters voneinander entfernt sind"
+msgstr "Legt fest, wie weit die horizontalen Linien des Gitters voneinander entfernt sind"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Isometrische Zellgröße:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Legt die Größe der Zellen in einem isometrischen Raster fest"
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
@@ -835,16 +835,16 @@ msgid "Second color of the transparent checker background"
 msgstr "Zweite Farbe des transparenten Checkerhintergrunds"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Canvas folgen"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Die transparenten Checker folgen dem Canvas"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Folge Canvas-Zoom-Level"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Die transparenten Checker folgen dem Canvas-Zoom-Level"
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
