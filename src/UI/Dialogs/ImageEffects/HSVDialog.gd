@@ -1,19 +1,19 @@
 extends ImageEffect
 
 
-onready var hue_slider = $MarginContainer/VBoxContainer/HBoxContainer/Sliders/Hue
-onready var sat_slider = $MarginContainer/VBoxContainer/HBoxContainer/Sliders/Saturation
-onready var val_slider = $MarginContainer/VBoxContainer/HBoxContainer/Sliders/Value
+onready var hue_slider = $VBoxContainer/HBoxContainer/Sliders/Hue
+onready var sat_slider = $VBoxContainer/HBoxContainer/Sliders/Saturation
+onready var val_slider = $VBoxContainer/HBoxContainer/Sliders/Value
 
-onready var hue_spinbox = $MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Hue
-onready var sat_spinbox = $MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Saturation
-onready var val_spinbox = $MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Value
+onready var hue_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Hue
+onready var sat_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Saturation
+onready var val_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Value
 
 
 func set_nodes() -> void:
-	preview = $MarginContainer/VBoxContainer/Preview
-	selection_checkbox = $MarginContainer/VBoxContainer/AffectHBoxContainer/SelectionCheckBox
-	affect_option_button = $MarginContainer/VBoxContainer/AffectHBoxContainer/AffectOptionButton
+	preview = $VBoxContainer/Preview
+	selection_checkbox = $VBoxContainer/AffectHBoxContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
 
 
 func _confirmed() -> void:
