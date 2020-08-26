@@ -99,7 +99,7 @@ jobs:
       - name: Make application executable 🔧
         run: |
           unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
-          chmod +x ./Pixelorama.app/Contents/MacOS/Pixelorama
+          chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
           rm ./build/mac/Pixelorama.zip
       - name: Fix application icon 🖼
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
