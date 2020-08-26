@@ -17,6 +17,10 @@ func _ready() -> void:
 		popup_menu.set_item_text(4, "Link Cel")
 		popup_menu.set_item_metadata(4, "Link Cel")
 
+	# Reset the checkers size because it assumes you want the same size as the canvas
+	var checker = $CelTexture/TransparentChecker
+	checker.rect_size = checker.get_parent().rect_size
+
 
 func _on_CelButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
