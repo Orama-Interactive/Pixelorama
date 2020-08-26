@@ -78,8 +78,8 @@ jobs:
       - name: Download and extract export templates 💾
         run: |
           mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-          curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_${GODOT_VERSION}-stable_export_templates.tpz
-          tar xvf Godot_${GODOT_VERSION}-stable_export_templates.tpz
+          curl -o templates.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_${GODOT_VERSION}-stable_export_templates.tpz
+          tar xvf templates.zip
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Download Godot headless binary 💾
         run: |
