@@ -81,10 +81,10 @@ jobs:
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
-          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-          curl -o templates.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_${GODOT_VERSION}-stable_export_templates.tpz
+          mkdir -v -p ~/.local/share/godot/templates/3.2.2.stable
+          curl -o -L templates.zip https://downloads.tuxfamily.org/godotengine/3.2.2/Godot_3.2.2-stable_export_templates.tpz
           tar xvf templates.zip
-          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mv ./templates/* ~/.local/share/godot/templates/3.2.2.stable
       - name: Download Godot headless binary 💾
         run: |
           curl -O https://huskee.cf/files/Godot_v3.2.2-stable_mac_headless.64.zip
@@ -92,12 +92,12 @@ jobs:
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
-        run: Godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
+        run: Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
       - name: Make application executable 🔧
         run: |
-          unzip -a ./build/mac/$EXPORT_NAME.zip
+          unzip -a ./build/mac/Pixelorama.zip
           chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
-          rm ./build/mac/$EXPORT_NAME.zip
+          rm ./build/mac/Pixelorama.zip
       - name: Fix application icon 🖼
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
       - name: Copy pixelorama folder 📁
