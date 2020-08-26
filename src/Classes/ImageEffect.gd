@@ -8,6 +8,7 @@ enum {CEL, FRAME, ALL_FRAMES, ALL_PROJECTS}
 var affect : int = CEL
 var pixels := []
 var current_cel : Image
+var current_frame : Image
 var preview_image : Image
 var preview_texture : ImageTexture
 var preview : TextureRect
@@ -18,6 +19,8 @@ var affect_option_button : OptionButton
 func _ready() -> void:
 	set_nodes()
 	current_cel = Image.new()
+	current_frame = Image.new()
+	current_frame.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
 	connect("about_to_show", self, "_about_to_show")
@@ -31,6 +34,8 @@ func _ready() -> void:
 
 func _about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
+	var frame = Global.current_project.frames[Global.current_project.current_frame]
+	Export.blend_layers(current_frame, frame)
 	if selection_checkbox:
 		_on_SelectionCheckBox_toggled(selection_checkbox.pressed)
 	update_transparent_background_size()
@@ -58,6 +63,7 @@ func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index : int) -> void:
 	affect = index
+	update_preview()
 
 
 func update_preview() -> void:

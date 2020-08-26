@@ -60,7 +60,11 @@ func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 
 
 func update_preview() -> void:
-	preview_image.copy_from(current_cel)
+	match affect:
+		CEL:
+			preview_image.copy_from(current_cel)
+		_:
+			preview_image.copy_from(current_frame)
 	flip_image(preview_image, pixels)
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture

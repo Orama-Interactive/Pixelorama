@@ -69,7 +69,11 @@ func _on_AButton_toggled(button_pressed : bool) -> void:
 
 
 func update_preview() -> void:
-	preview_image.copy_from(current_cel)
+	match affect:
+		CEL:
+			preview_image.copy_from(current_cel)
+		_:
+			preview_image.copy_from(current_frame)
 	DrawingAlgos.desaturate_image(preview_image, pixels, red, green, blue, alpha)
 	preview_image.unlock()
 	preview_texture.create_from_image(preview_image, 0)
