@@ -92,7 +92,7 @@ jobs:
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
-        run: Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
+        run: ./Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
       - name: Make application executable 🔧
         run: |
           unzip -a ./build/mac/Pixelorama.zip
