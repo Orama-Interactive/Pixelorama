@@ -85,11 +85,25 @@ jobs:
         run: |
           curl -O https://huskee.cf/files/Godot_v3.2.2-stable_mac_headless.64.zip
           unzip -a Godot_v3.2.2-stable_mac_headless.64.zip
-          mkdir -v -p ./build/mac/
+      - name: Setup 💻
+        run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
-        run: godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
+        run: Godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
+      - name: Make application executable 🔧
+        run: |
+          unzip -a ./build/mac/$EXPORT_NAME.zip
+          chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
+          rm ./build/mac/$EXPORT_NAME.zip
+      - name: Fix application icon 🖼
+        run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+      - name: Copy pixelorama folder 📁
+        run: |
+          cp -R ./pixelorama ./build/mac
+          rm ./build/mac/pixelorama/.gdignore
+      - name: Create DMG archive 🔧
+        run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
           name: Mac
-          path: ./build/mac/
+          path: ./build/mac/Pixelorama.dmg
