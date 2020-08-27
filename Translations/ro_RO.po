@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-27 17:31\n"
+"PO-Revision-Date: 2020-08-27 18:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1286,10 +1286,10 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Dorești ca numele tău sau al companiei tale să fie afișat pe ecranul de întâmpinare?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Devino sponsor cu rang de platină"
+msgstr "Devino susținător de top"
 
 msgid "Become a Gold Sponsor"
-msgstr "Devino sponsor cu rang de aur"
+msgstr "Devino susținător de vază"
 
 msgid "Become a Patron"
 msgstr "Devino susținător"
