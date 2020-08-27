@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-27 17:05\n"
+"PO-Revision-Date: 2020-08-27 17:11\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1128,7 +1128,7 @@ msgid "Lock/unlock layer"
 msgstr "Κλείδωμα/ξεκλείδωμα της στρώσης"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Καρέ: %s, Στρώση: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
