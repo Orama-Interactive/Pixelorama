@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-27 11:59\n"
+"PO-Revision-Date: 2020-08-27 12:28\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -537,7 +537,7 @@ msgid "Website"
 msgstr "Ιστοσελίδα"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub Αποθετήριο"
 
 msgid "Donate"
 msgstr "Κάντε μια δωρεά"
@@ -866,13 +866,13 @@ msgid "Select a brush"
 msgstr "Επιλέξτε ένα πινέλο"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Πινέλο εικονοστοιχείου"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Πινέλο κύκλου"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Πινέλου κύκλου με γέμισμα"
 
 msgid "Custom brush"
 msgstr "Προσαρμοσμένο πινέλο"
@@ -884,13 +884,13 @@ msgid "Overwrite Color"
 msgstr "Αντικατάσταση Χρώματος"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Αντικαθιστά το χρώμα αντί να το συνδυάζει. Αυτή η επιλογή σχετίζεται μόνο με χρώματα που δεν είναι πλήρως αδιαφανή"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
@@ -1039,28 +1039,28 @@ msgid "Manage frame tags"
 msgstr "Διαχείριση ετικετών καρέ"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Ιδιότητες ετικετών καρέ"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Προσθήκη νέας ετικέτας καρέ"
 
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα:"
 
 msgid "From:"
-msgstr ""
+msgstr "Από:"
 
 msgid "To:"
-msgstr ""
+msgstr "Έως:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Η κίνηση παίζει μόνο σε καρέ της ίδιας καρτέλας"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Ετίκετα %s (Καρέ %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Ετίκετα %s (Καρέ %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
