@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-08-27 13:48\n"
+"PO-Revision-Date: 2020-08-27 13:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -884,13 +884,13 @@ msgid "Overwrite Color"
 msgstr "Sovrascrivi Colore"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Sovrascrive il colore invece di sfumarlo. Questa opzione è rilevante solo con colori che non sono completamente opachi"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
 
 msgid "Brush color from"
 msgstr "Colore del pennello da"
@@ -1039,28 +1039,28 @@ msgid "Manage frame tags"
 msgstr "Gestisci tag dei frame"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Proprietà Etichetta Frame"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Aggiungi un nuovo frame tag"
 
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 msgid "From:"
-msgstr ""
+msgstr "Da:"
 
 msgid "To:"
-msgstr ""
+msgstr "A:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animazione riprodotta solo sui fotogrammi dello stesso tag"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Tag %s (Frame %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Tag %s (Frames %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1265,7 +1265,7 @@ msgid "Create a new empty palette?"
 msgstr "Creare una nuova palette vuota?"
 
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Errore: La Palette deve avere un nome valido."
