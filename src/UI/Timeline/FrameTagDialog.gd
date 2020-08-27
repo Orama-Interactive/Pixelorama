@@ -26,9 +26,9 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		var hbox_cont := HBoxContainer.new()
 		var tag_label := Label.new()
 		if tag.from == tag.to:
-			tag_label.text = "Tag %s (Frame %s)" % [i + 1, tag.from]
+			tag_label.text = tr("Tag %s (Frame %s)") % [i + 1, tag.from]
 		else:
-			tag_label.text = "Tag %s (Frames %s-%s)" % [i + 1, tag.from, tag.to]
+			tag_label.text = tr("Tag %s (Frames %s-%s)") % [i + 1, tag.from, tag.to]
 		hbox_cont.add_child(tag_label)
 
 		var edit_button := Button.new()
@@ -75,7 +75,7 @@ func _on_EditButton_pressed(_tag_id : int) -> void:
 	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.current_project.animation_tags[_tag_id].from
 	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.current_project.animation_tags[_tag_id].to
 	if !delete_tag_button:
-		delete_tag_button = options_dialog.add_button("Delete Tag", true, "delete_tag")
+		delete_tag_button = options_dialog.add_button("Delete", true, "delete_tag")
 	else:
 		delete_tag_button.visible = true
 

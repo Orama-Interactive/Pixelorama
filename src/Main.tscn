@@ -98,7 +98,7 @@ __meta__ = {
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
 margin_right = 151.0
 margin_bottom = 60.0
-window_title = "Error!"
+window_title = "Error"
 dialog_text = "This is an error message!"
 
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
