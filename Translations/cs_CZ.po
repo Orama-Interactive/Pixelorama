@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-08-25 14:19\n"
+"PO-Revision-Date: 2020-08-27 11:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -524,11 +524,20 @@ msgstr "Seznam změn"
 msgid "About Pixelorama"
 msgstr "O Pixeloramě"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Vyvinuto Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "Webové stránky"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Podpořit"
@@ -856,14 +865,14 @@ msgstr "Štětec:"
 msgid "Select a brush"
 msgstr "Vybrat štětec"
 
-msgid "Brush: Pixel"
-msgstr "Štětec: Pixel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Štětec: Kruh"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Štětec: Vyplněný kruh"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Vlastní štětec"
@@ -871,10 +880,16 @@ msgstr "Vlastní štětec"
 msgid "Brush size:"
 msgstr "Velikost štětce:"
 
-msgid "Overwrite"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Brush color from"
@@ -1023,8 +1038,29 @@ msgstr "Budoucí snímky"
 msgid "Manage frame tags"
 msgstr "Spravovat štítky snímků"
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animace hraje pouze na snímcích majících stejný štítek"
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1227,6 +1263,9 @@ msgstr "Použít aktuální barvy vlevo a vpravo"
 
 msgid "Create a new empty palette?"
 msgstr "Vytvořit novou prázdnou paletu?"
+
+msgid "Error"
+msgstr ""
 
 msgid "Error: Palette must have a valid name."
 msgstr "Chyba: Paleta musí mít platný název."
