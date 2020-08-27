@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-27 15:01\n"
+"PO-Revision-Date: 2020-08-27 15:09\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1059,7 +1059,7 @@ msgid "Tag %s (Frame %s)"
 msgstr "標籤 %s (影格 %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "標籤 %s (影格 %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1263,7 +1263,7 @@ msgid "Create a new empty palette?"
 msgstr "創建新的空白色盤?"
 
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 msgid "Error: Palette must have a valid name."
 msgstr "錯誤: 色盤名字無法使用"
