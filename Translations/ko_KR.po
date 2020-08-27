@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-27 11:41\n"
+"PO-Revision-Date: 2020-08-27 17:04\n"
 
 msgid "OK"
 msgstr "예"
@@ -1118,6 +1118,9 @@ msgstr "레이어 표시 토글"
 
 msgid "Lock/unlock layer"
 msgstr "레이어 잠금/잠금 해제"
+
+msgid "Frame: %s, Layer: %s"
+msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
