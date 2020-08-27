@@ -17,40 +17,12 @@ func set_nodes() -> void:
 
 
 func _confirmed() -> void:
-	if affect == CEL:
-		Global.canvas.handle_undo("Draw")
-		DrawingAlgos.adjust_hsv(current_cel, hue_slider.value, sat_slider.value, val_slider.value, pixels)
-		Global.canvas.handle_redo("Draw")
-
-	elif affect == FRAME:
-		Global.canvas.handle_undo("Draw", Global.current_project, -1)
-		for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-			DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
-		Global.canvas.handle_redo("Draw", Global.current_project, -1)
-
-	elif affect == ALL_FRAMES:
-		Global.canvas.handle_undo("Draw", Global.current_project, -1, -1)
-		for frame in Global.current_project.frames:
-			for cel in frame.cels:
-				DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
-		Global.canvas.handle_redo("Draw", Global.current_project, -1, -1)
-
-	elif affect == ALL_PROJECTS:
-		for project in Global.projects:
-			var _pixels := []
-			if selection_checkbox.pressed:
-				_pixels = project.selected_pixels.duplicate()
-			else:
-				for x in project.size.x:
-					for y in project.size.y:
-						_pixels.append(Vector2(x, y))
-
-			Global.canvas.handle_undo("Draw", project, -1, -1)
-			for frame in project.frames:
-				for cel in frame.cels:
-					DrawingAlgos.adjust_hsv(cel.image, hue_slider.value, sat_slider.value, val_slider.value, _pixels)
-			Global.canvas.handle_redo("Draw", project, -1, -1)
+	._confirmed()
 	reset()
+
+
+func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
+	DrawingAlgos.adjust_hsv(_cel, hue_slider.value, sat_slider.value, val_slider.value, _pixels)
 
 
 func reset() -> void:
@@ -62,17 +34,6 @@ func reset() -> void:
 	sat_spinbox.value = 0
 	val_spinbox.value = 0
 	reconnect_signals()
-
-
-func update_preview() -> void:
-	match affect:
-		CEL:
-			preview_image.copy_from(current_cel)
-		_:
-			preview_image.copy_from(current_frame)
-	DrawingAlgos.adjust_hsv(preview_image, hue_slider.value, sat_slider.value, val_slider.value, pixels)
-	preview_texture.create_from_image(preview_image, 0)
-	preview.texture = preview_texture
 
 
 func disconnect_signals() -> void:

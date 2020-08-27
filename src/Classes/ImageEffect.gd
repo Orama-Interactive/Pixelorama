@@ -34,6 +34,7 @@ func _ready() -> void:
 
 func _about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
+	current_frame.fill(Color(0, 0, 0, 0))
 	var frame = Global.current_project.frames[Global.current_project.current_frame]
 	Export.blend_layers(current_frame, frame)
 	if selection_checkbox:
@@ -44,6 +45,41 @@ func _about_to_show() -> void:
 
 
 func _confirmed() -> void:
+	if affect == CEL:
+		Global.canvas.handle_undo("Draw")
+		commit_action(current_cel, pixels)
+		Global.canvas.handle_redo("Draw")
+	elif affect == FRAME:
+		Global.canvas.handle_undo("Draw", Global.current_project, -1)
+		for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
+			commit_action(cel.image, pixels)
+		Global.canvas.handle_redo("Draw", Global.current_project, -1)
+
+	elif affect == ALL_FRAMES:
+		Global.canvas.handle_undo("Draw", Global.current_project, -1, -1)
+		for frame in Global.current_project.frames:
+			for cel in frame.cels:
+				commit_action(cel.image, pixels)
+		Global.canvas.handle_redo("Draw", Global.current_project, -1, -1)
+
+	elif affect == ALL_PROJECTS:
+		for project in Global.projects:
+			var _pixels := []
+			if selection_checkbox.pressed:
+				_pixels = project.selected_pixels.duplicate()
+			else:
+				for x in project.size.x:
+					for y in project.size.y:
+						_pixels.append(Vector2(x, y))
+
+			Global.canvas.handle_undo("Draw", project, -1, -1)
+			for frame in project.frames:
+				for cel in frame.cels:
+					commit_action(cel.image, _pixels, project)
+			Global.canvas.handle_redo("Draw", project, -1, -1)
+
+
+func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
 	pass
 
 
@@ -69,7 +105,14 @@ func _on_AffectOptionButton_item_selected(index : int) -> void:
 
 
 func update_preview() -> void:
-	pass
+	match affect:
+		CEL:
+			preview_image.copy_from(current_cel)
+		_:
+			preview_image.copy_from(current_frame)
+	commit_action(preview_image, pixels)
+	preview_texture.create_from_image(preview_image, 0)
+	preview.texture = preview_texture
 
 
 func update_transparent_background_size() -> void:

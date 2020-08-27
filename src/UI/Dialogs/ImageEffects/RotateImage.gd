@@ -1,10 +1,15 @@
 extends ImageEffect
 
 
+onready var type_option_button : OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
+onready var angle_hslider : HSlider = $VBoxContainer/AngleOptions/AngleHSlider
+onready var angle_spinbox : SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
+
+
 func _ready() -> void:
-	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Rotxel")
-	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Upscale, Rotate and Downscale")
-	$VBoxContainer/HBoxContainer2/OptionButton.add_item("Nearest neighbour")
+	type_option_button.add_item("Rotxel")
+	type_option_button.add_item("Upscale, Rotate and Downscale")
+	type_option_button.add_item("Nearest neighbour")
 
 
 func set_nodes() -> void:
@@ -13,43 +18,32 @@ func set_nodes() -> void:
 
 func _about_to_show() -> void:
 	._about_to_show()
-	$VBoxContainer/HBoxContainer/HSlider.value = 0
+	angle_hslider.value = 0
+
+
+func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
+	match type_option_button.text:
+		"Rotxel":
+			DrawingAlgos.rotxel(_cel,angle_hslider.value*PI/180)
+		"Nearest neighbour":
+			DrawingAlgos.nn_rotate(_cel,angle_hslider.value*PI/180)
+		"Upscale, Rotate and Downscale":
+			DrawingAlgos.fake_rotsprite(_cel,angle_hslider.value*PI/180)
 
 
 func _confirmed() -> void:
-	Global.canvas.handle_undo("Draw")
-	match $VBoxContainer/HBoxContainer2/OptionButton.text:
-		"Rotxel":
-			DrawingAlgos.rotxel(current_cel,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
-		"Nearest neighbour":
-			DrawingAlgos.nn_rotate(current_cel,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
-		"Upscale, Rotate and Downscale":
-			DrawingAlgos.fake_rotsprite(current_cel,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
-	Global.canvas.handle_redo("Draw")
-	$VBoxContainer/HBoxContainer/HSlider.value = 0
+	._confirmed()
+	angle_hslider.value = 0
 
 
 func _on_HSlider_value_changed(_value : float) -> void:
 	update_preview()
-	$VBoxContainer/HBoxContainer/SpinBox.value = $VBoxContainer/HBoxContainer/HSlider.value
+	angle_spinbox.value = angle_hslider.value
 
 
 func _on_SpinBox_value_changed(_value : float) -> void:
-	$VBoxContainer/HBoxContainer/HSlider.value = $VBoxContainer/HBoxContainer/SpinBox.value
+	angle_hslider.value = angle_spinbox.value
 
 
-func update_preview() -> void:
-	preview_image.copy_from(current_cel)
-	match $VBoxContainer/HBoxContainer2/OptionButton.text:
-		"Rotxel":
-			DrawingAlgos.rotxel(preview_image,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
-		"Nearest neighbour":
-			DrawingAlgos.nn_rotate(preview_image,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
-		"Upscale, Rotate and Downscale":
-			DrawingAlgos.fake_rotsprite(preview_image,$VBoxContainer/HBoxContainer/HSlider.value*PI/180)
-	preview_texture.create_from_image(preview_image, 0)
-	preview.texture = preview_texture
-
-
-func _on_OptionButton_item_selected(_id : int) -> void:
+func _on_TypeOptionButton_item_selected(_id : int) -> void:
 	update_preview()
