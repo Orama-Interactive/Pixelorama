@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-27 03:35\n"
+"PO-Revision-Date: 2020-08-27 03:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -378,7 +378,7 @@ msgid "On"
 msgstr "Activar"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Restaurar valor predeterminado"
 
 msgid "Smooth Zoom"
 msgstr "Zoom suavizado"
@@ -420,34 +420,34 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Sólo afecta a la selección"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Celda actual"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Fotograma actual"
 
 msgid "All frames"
-msgstr ""
+msgstr "Todos los fotogramas"
 
 msgid "All projects"
-msgstr ""
+msgstr "Todos los proyectos"
 
 msgid "Invert Colors"
 msgstr "Invertir Colores"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modificar Canal Rojo"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modificar Canal Verde"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modificar Canal Azul"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modificar Canal Alfa"
 
 msgid "Desaturation"
 msgstr "Desaturación"
@@ -459,7 +459,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Matiz/Saturación/Valor"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradiente"
 
 msgid "Adjust HSV"
 msgstr "Ajustar HSV"
@@ -779,7 +779,7 @@ msgid "Grid type:"
 msgstr "Tipo de cuadrícula:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Establece el tipo de cuadrícula entre rectangular, isométrico o ambas"
 
 msgid "Rectangular"
 msgstr "Rectangular"
@@ -824,13 +824,13 @@ msgid "Size of the transparent checker background"
 msgstr ""
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Color 1 del fondo:"
 
 msgid "First color of the transparent checker background"
 msgstr ""
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Color 2 del fondo:"
 
 msgid "Second color of the transparent checker background"
 msgstr ""
