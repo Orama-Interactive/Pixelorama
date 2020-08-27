@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-08-22 10:56\n"
+"PO-Revision-Date: 2020-08-25 17:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -607,6 +607,9 @@ msgstr "Корейский"
 
 msgid "Hungarian"
 msgstr "Венгерский"
+
+msgid "Romanian"
+msgstr "Румынский"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"

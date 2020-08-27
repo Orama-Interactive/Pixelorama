@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-22 08:48\n"
+"PO-Revision-Date: 2020-08-26 12:27\n"
 
 msgid "OK"
 msgstr "確定"
@@ -606,6 +606,9 @@ msgstr "韓文"
 
 msgid "Hungarian"
 msgstr "匈牙利文"
+
+msgid "Romanian"
+msgstr "羅馬尼亞文"
 
 msgid "Development Team"
 msgstr "開發團隊"
