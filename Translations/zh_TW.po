@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-27 11:41\n"
+"PO-Revision-Date: 2020-08-27 14:48\n"
 
 msgid "OK"
 msgstr "確定"
@@ -524,19 +524,19 @@ msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - 像素化你的夢想！"
 
 msgid "Developed by Orama Interactive"
 msgstr "由Orama Interactive開發"
 
 msgid "Copyright 2019-2020 Orama Interactive"
-msgstr ""
+msgstr "版權所有 2019-2020 Orama Interactive"
 
 msgid "Website"
 msgstr "官網"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub 項目"
 
 msgid "Donate"
 msgstr "捐款"
@@ -865,10 +865,10 @@ msgid "Select a brush"
 msgstr "選擇畫筆"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "像素畫筆"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "圓形畫筆"
 
 msgid "Filled circle brush"
 msgstr ""
