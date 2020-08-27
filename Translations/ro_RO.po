@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-27 12:28\n"
+"PO-Revision-Date: 2020-08-27 14:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -743,10 +743,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Resetează culorile la starea lor implicită (negru pentru stânga, alb pentru dreapta)"
 
 msgid "Left tool"
-msgstr "Instrumentul din stânga"
+msgstr "Instrument stânga"
 
 msgid "Right tool"
-msgstr "Instrumentul din dreapta"
+msgstr "Instrument dreapta"
 
 msgid "Left pixel indicator"
 msgstr "Indicator pixel stânga"
