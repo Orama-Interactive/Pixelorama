@@ -7,7 +7,7 @@ onready var popup_menu : PopupMenu = $PopupMenu
 
 
 func _ready() -> void:
-	hint_tooltip = "Frame: %s, Layer: %s" % [frame + 1, layer]
+	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
 		popup_menu.set_item_text(4, "Unlink Cel")
