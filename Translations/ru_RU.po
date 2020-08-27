@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-08-27 17:04\n"
+"PO-Revision-Date: 2020-08-27 20:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -525,7 +525,7 @@ msgid "About Pixelorama"
 msgstr "О Pixeloram'е"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - пикселизуйте свои мечты!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Разработано Orama Interactive"
@@ -537,7 +537,7 @@ msgid "Website"
 msgstr "Сайт"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Репозиторий на GitHub"
 
 msgid "Donate"
 msgstr "Пожертвовать"
@@ -866,7 +866,7 @@ msgid "Select a brush"
 msgstr "Выбрать кисть"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Кисть-пиксель"
 
 msgid "Circle brush"
 msgstr ""
@@ -1048,10 +1048,10 @@ msgid "Name:"
 msgstr ""
 
 msgid "From:"
-msgstr ""
+msgstr "От:"
 
 msgid "To:"
-msgstr ""
+msgstr "До:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1127,7 +1127,7 @@ msgid "Lock/unlock layer"
 msgstr "Блокировать/разблокировать слой"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Кадр: %s, слой: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
