@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-27 13:48\n"
+"PO-Revision-Date: 2020-08-27 17:04\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1126,6 +1126,9 @@ msgstr "切换图层可见性"
 
 msgid "Lock/unlock layer"
 msgstr "锁定/解锁图层"
+
+msgid "Frame: %s, Layer: %s"
+msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
