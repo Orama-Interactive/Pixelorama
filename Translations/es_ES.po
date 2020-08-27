@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-27 03:47\n"
+"PO-Revision-Date: 2020-08-27 03:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -214,10 +214,10 @@ msgid "Brush type:"
 msgstr "Tipo de pincel:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Guardar como pincel"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Proyecto pincel"
 
 msgid "Random brush"
 msgstr "Pincel al azar"
@@ -806,7 +806,7 @@ msgid "Isometric cell size:"
 msgstr "Tamaño de la celda isométrica:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Establecer el tamaño de las celdas en una cuadrícula isométrica"
 
 msgid "Grid color:"
 msgstr "Color de cuadrícula:"
@@ -818,28 +818,28 @@ msgid "Transparency"
 msgstr "Transparencia"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Tamaño del fondo de cuadrícula:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Tamaño del fondo de cuadrícula transparente"
 
 msgid "Checker color 1:"
 msgstr "Color 1 del fondo:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Primer color del fondo transparente"
 
 msgid "Checker color 2:"
 msgstr "Color 2 del fondo:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Segundo color del fondo transparente"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Seguir el movimiento del lienzo"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "El fondo de la cuadrícula transparente sigue el movimiento del lienzo"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Seguir el nivel de zoom del lienzo"
