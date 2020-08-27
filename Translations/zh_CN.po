@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-27 13:35\n"
+"PO-Revision-Date: 2020-08-27 13:48\n"
 
 msgid "OK"
 msgstr "确定"
@@ -866,7 +866,7 @@ msgid "Select a brush"
 msgstr "选择一个画笔"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "像素画笔"
 
 msgid "Circle brush"
 msgstr "圆形画笔"
@@ -1057,10 +1057,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "动画仅在同一个标签的帧上播放"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "标签 %s (帧 %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "标签 %s (帧 %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1265,7 +1265,7 @@ msgid "Create a new empty palette?"
 msgstr "创建一个新的空调色板?"
 
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 msgid "Error: Palette must have a valid name."
 msgstr "错误：调色板必须具有有效的名称。"
