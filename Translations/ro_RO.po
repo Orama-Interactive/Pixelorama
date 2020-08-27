@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-26 16:08\n"
+"PO-Revision-Date: 2020-08-27 12:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -524,11 +524,20 @@ msgstr "Jurnal de modificări"
 msgid "About Pixelorama"
 msgstr "Despre Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr "Pixelorama – Pixelează-ți visele!"
+
 msgid "Developed by Orama Interactive"
 msgstr "Dezvoltat de Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr "Drepturi de autor 2019-2020 Orama Interactive"
+
 msgid "Website"
 msgstr "Pagină de internet"
+
+msgid "GitHub Repo"
+msgstr "Depozit GitHub"
 
 msgid "Donate"
 msgstr "Donează"
@@ -856,14 +865,14 @@ msgstr "Pensulă:"
 msgid "Select a brush"
 msgstr "Selectează o pensulă"
 
-msgid "Brush: Pixel"
-msgstr "Pensulă: pixel"
+msgid "Pixel brush"
+msgstr "Pensulă cu pixeli"
 
-msgid "Brush: Circle"
-msgstr "Pensulă: cerc"
+msgid "Circle brush"
+msgstr "Pensulă cu cerc"
 
-msgid "Brush: Filled Circle"
-msgstr "Pensulă: cerc umplut"
+msgid "Filled circle brush"
+msgstr "Pensulă cu cerc umplut"
 
 msgid "Custom brush"
 msgstr "Pensulă personalizată"
@@ -871,11 +880,17 @@ msgstr "Pensulă personalizată"
 msgid "Brush size:"
 msgstr "Dimensiunea pensulei:"
 
-msgid "Overwrite"
-msgstr "Suprascriere"
+msgid "Overwrite Color"
+msgstr "Suprascriere culoare"
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr "Suprascrie culoarea în loc să o amestece. Această opțiune se aplică doar culorilor care nu sunt pe deplin opace"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
@@ -1023,8 +1038,29 @@ msgstr "Cadre viitoare"
 msgid "Manage frame tags"
 msgstr "Gestionează etichetele de cadru"
 
+msgid "Frame Tag Properties"
+msgstr "Proprietățile etichetelor de cadru"
+
+msgid "Add a new frame tag"
+msgstr "Adaugă o nouă etichetă de cadru"
+
+msgid "Name:"
+msgstr "Nume:"
+
+msgid "From:"
+msgstr "De la:"
+
+msgid "To:"
+msgstr "Până la:"
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
+
+msgid "Tag %s (Frame %s)"
+msgstr "Eticheta %s (Cadrul %s)"
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr "Eticheta %s (Cadrele %s – %s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1227,6 +1263,9 @@ msgstr "Folosește culorile din stânga și dreapta"
 
 msgid "Create a new empty palette?"
 msgstr "Creare paletă nouă goală?"
+
+msgid "Error"
+msgstr "Eroare"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Eroare: paleta trebuie să aibă un nume valid."
