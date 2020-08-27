@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-08-25 14:19\n"
+"PO-Revision-Date: 2020-08-27 03:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -220,7 +220,7 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
+msgstr "Pincel al azar"
 
 msgid "Save Sprite as .pxo"
 msgstr "Guardar Sprite como .pxo"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "¡Ruta de directorio o nombre de archivo no es válido!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Exportación en progreso..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -354,7 +354,7 @@ msgid "General"
 msgstr "General"
 
 msgid "Startup"
-msgstr ""
+msgstr "Inicio"
 
 msgid "Language"
 msgstr "Idioma"
@@ -369,13 +369,13 @@ msgid "Shortcuts"
 msgstr "Teclas de acceso directo"
 
 msgid "Backup"
-msgstr ""
+msgstr "Copia de seguridad"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicadores"
 
 msgid "On"
-msgstr ""
+msgstr "Activar"
 
 msgid "Restore default value"
 msgstr ""
@@ -492,22 +492,22 @@ msgid "Thickness:"
 msgstr "Grosor:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Colores:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Pasos:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "De Arriba hacia Abajo"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "De Abajo hacia Arriba"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Izquierda a Derecha"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Derecha a Izquierda"
 
 msgid "View Splash Screen"
 msgstr "Mostrar Pantalla de bienvenida"
@@ -582,7 +582,7 @@ msgid "Spanish"
 msgstr "Español"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Catalán"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -606,10 +606,10 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Húngaro"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumano"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
@@ -624,7 +624,7 @@ msgid "GitHub Contributors"
 msgstr "Colaboradores de GitHub"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Arte por: %s"
 
 msgid "untitled"
 msgstr "sin título"
@@ -764,7 +764,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Muestra un icono de la herramienta derecha seleccionada junto al cursor en el lienzo"
 
 msgid "Guides"
-msgstr ""
+msgstr "Guías"
 
 msgid "Guides color:"
 msgstr "Color de guías:"
@@ -773,22 +773,22 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Un color de las guías de reglas que se muestran en el lienzo"
 
 msgid "Grid"
-msgstr ""
+msgstr "Cuadrícula"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Tipo de cuadrícula:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rectangular"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isométrico"
 
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
 msgid "Grid width:"
 msgstr "Ancho de cuadrícula:"
@@ -803,7 +803,7 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Establece cuán lejos están las líneas horizontales de la cuadrícula"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Tamaño de la celda isométrica:"
 
 msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
@@ -815,7 +815,7 @@ msgid "A color of the grid"
 msgstr "Un color de la cuadrícula"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparencia"
 
 msgid "Checker size:"
 msgstr ""
@@ -842,10 +842,10 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr ""
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Seguir el nivel de zoom del lienzo"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "El verificador transparente sigue el nivel de zoom del lienzo"
 
 msgid "Only custom preset can be modified"
 msgstr "Sólo se puede modificar el ajuste preestablecido"
@@ -872,10 +872,10 @@ msgid "Brush size:"
 msgstr "Tamaño del pincel:"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Sobreescribir"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixelado perfecto"
 
 msgid "Brush color from"
 msgstr "Color de pincel de"
@@ -1399,5 +1399,5 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "¡Se ha producido un error al eliminar la paleta! Código de error: %s"
 
 msgid "and"
-msgstr ""
+msgstr "y"
 
