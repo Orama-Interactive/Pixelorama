@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-28 02:31\n"
+"PO-Revision-Date: 2020-08-28 02:48\n"
 
 msgid "OK"
 msgstr "예"
@@ -890,134 +890,141 @@ msgid "Pixel Perfect"
 msgstr "픽셀 퍼펙트"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
 
 msgid "Brush color from"
 msgstr ""
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: 브러시 자체의 색상, 100: 현재 선택된 색상"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "채우는 영역:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "같은 색상 영역"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "같은 색상 픽셀"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "이것으로 채우기:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "선택된 색상"
 
 msgid "Pattern"
-msgstr ""
+msgstr "패턴"
 
 msgid "Offset"
-msgstr ""
+msgstr "오프셋"
 
 msgid "Lighten"
-msgstr ""
+msgstr "밝게"
 
 msgid "Darken"
-msgstr ""
+msgstr "어둡게"
 
 msgid "Amount:"
-msgstr ""
+msgstr "양:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "밝게/어둡게 정도"
 
 msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "왼쪽 색상"
 
 msgid "Right Color"
-msgstr ""
+msgstr "오른쪽 색상"
 
 msgid "Mode:"
-msgstr ""
+msgstr "모드:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "확대"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "축소"
 
 msgid "Options:"
-msgstr ""
+msgstr "옵션:"
 
 msgid "Fit to frame"
 msgstr "프레임에 맞추기"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% 줌"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "미러링"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "수평"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "수평 대칭 그리기 활성화"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "수직 대칭 그리기 활성화"
 
 msgid "Vertical"
-msgstr ""
+msgstr "수직"
 
 msgid "Current frame:"
 msgstr "현재 프레임:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "첫 프레임으로 이동\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "이전 프레임으로 이동\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "애니메이션 반대로 재생 (끝에서 처음으로)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "애니메이션 앞으로 재생 (처음에서 끝으로)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "다음 프레임으로 이동\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "마지막 프레임으로 이동\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "어니언 스키닝 설정"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "어니언 스키닝 활성화/비활성화"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "애니메이션 프리뷰가 초당 몇 프레임으로 재생 되게 할까요?\n"
+"FPS가 높을 수록 애니메이션이 빠르게 재생 됩니다."
 
 msgid "No loop"
-msgstr ""
+msgstr "루프 없음"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "루프 순환"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "루프 핑퐁"
 
 msgid "Onion Skinning:"
 msgstr ""
