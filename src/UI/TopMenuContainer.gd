@@ -198,7 +198,7 @@ func export_file() -> void:
 		Global.export_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		Global.export_dialog.external_export()
+		Export.external_export()
 
 
 func edit_menu_id_pressed(id : int) -> void:

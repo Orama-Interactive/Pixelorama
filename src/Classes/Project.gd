@@ -28,6 +28,11 @@ var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
 var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
 
+# Export directory path and export file name
+var directory_path := ""
+var file_name := "untitled"
+var file_format : int = Export.FileFormat.PNG
+
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
@@ -59,6 +64,11 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 		y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
 		y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
 		Global.canvas.add_child(y_symmetry_axis)
+
+	if OS.get_name() == "HTML5":
+		directory_path = "user://"
+	else:
+		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
 
 func select_all_pixels() -> void:
@@ -179,6 +189,15 @@ func change_project() -> void:
 	else:
 		Global.file_menu.get_popup().set_item_text(3, tr("Save"))
 
+	Export.directory_path = directory_path
+	Export.file_name = file_name
+	Export.file_format = file_format
+
+	if directory_path.empty():
+		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
+	else:
+		Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+
 
 func serialize() -> Dictionary:
 	var layer_data := []
@@ -246,6 +265,9 @@ func serialize() -> Dictionary:
 		"symmetry_points" : [x_symmetry_point, y_symmetry_point],
 		"frames" : frame_data,
 		"brushes" : brush_data,
+		"export_directory_path" : directory_path,
+		"export_file_name" : file_name,
+		"export_file_format" : file_format,
 	}
 
 	return project_data
@@ -301,6 +323,12 @@ func deserialize(dict : Dictionary) -> void:
 		x_symmetry_axis.points[1].y = floor(y_symmetry_point / 2 + 1)
 		y_symmetry_axis.points[0].x = floor(x_symmetry_point / 2 + 1)
 		y_symmetry_axis.points[1].x = floor(x_symmetry_point / 2 + 1)
+	if dict.has("export_directory_path"):
+		directory_path = dict.export_directory_path
+	if dict.has("export_file_name"):
+		file_name = dict.export_file_name
+	if dict.has("export_file_format"):
+		file_format = dict.export_file_format
 
 
 func name_changed(value : String) -> void:

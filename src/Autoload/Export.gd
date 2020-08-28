@@ -38,20 +38,7 @@ var file_name := "untitled"
 var file_format : int = FileFormat.PNG
 enum FileFormat { PNG = 0, GIF = 1}
 
-# Store all settings after export, enables a quick re-export with same settings
 var was_exported : bool = false
-var exported_tab : int
-var exported_frame_number : int
-var exported_frame_current_tag : int
-var exported_orientation : int
-var exported_lines_count : int
-var exported_animation_type : int
-var exported_direction : int
-var exported_resize : int
-var exported_interpolation : int
-var exported_directory_path : String
-var exported_file_name : String
-var exported_file_format : int
 
 # Export coroutine signal
 var stop_export = false
@@ -64,9 +51,20 @@ var export_progress := 0.0
 onready var gif_export_thread := Thread.new()
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	if gif_export_thread.is_active():
 		gif_export_thread.wait_to_finish()
+
+
+func external_export() -> void:
+	match current_tab:
+		ExportTab.FRAME:
+			process_frame()
+		ExportTab.SPRITESHEET:
+			process_spritesheet()
+		ExportTab.ANIMATION:
+			process_animation()
+	export_processed_images(true, Global.export_dialog)
 
 
 func process_frame() -> void:
@@ -187,16 +185,17 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			gif_export_thread.start(self, "export_gif", {"export_dialog": export_dialog, "export_paths": export_paths})
 	else:
 		for i in range(processed_images.size()):
+			processed_images[i].unlock()
 			if OS.get_name() == "HTML5":
 				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
 			else:
 				var err = processed_images[i].save_png(export_paths[i])
 				if err != OK:
-					OS.alert("Can't save file")
+					OS.alert("Can't save file. Error code: %s" % err)
+			processed_images[i].lock()
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
-	store_export_settings()
 	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 
 	# Only show when not exporting gif - gif export finishes in thread
@@ -328,35 +327,3 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 
 func frames_divided_by_spritesheet_lines() -> int:
 	return int(ceil(number_of_frames / float(lines_count)))
-
-
-func store_export_settings() -> void:
-	exported_tab = current_tab
-	exported_frame_number = frame_number
-	exported_frame_current_tag = frame_current_tag
-	exported_orientation = orientation
-	exported_lines_count = lines_count
-	exported_animation_type = animation_type
-	exported_direction = direction
-	exported_resize = resize
-	exported_interpolation = interpolation
-	exported_directory_path = directory_path
-	exported_file_name = file_name
-	exported_file_format = file_format
-
-
-# Fill the dialog with previous export settings
-func restore_previous_export_settings() -> void:
-	current_tab = exported_tab
-	frame_number = exported_frame_number if exported_frame_number <= Global.current_project.frames.size() else Global.current_project.frames.size()
-	frame_current_tag = exported_frame_current_tag if exported_frame_current_tag <= Global.current_project.animation_tags.size() else 0
-	orientation = exported_orientation
-	lines_count = exported_lines_count
-	animation_type = exported_animation_type
-	direction = exported_direction
-	resize = exported_resize
-	interpolation = exported_interpolation
-	directory_path = exported_directory_path
-	file_name = exported_file_name
-	file_format = exported_file_format
-

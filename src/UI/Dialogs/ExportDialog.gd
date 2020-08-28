@@ -99,19 +99,6 @@ func show_tab() -> void:
 	tabs.current_tab = Export.current_tab
 
 
-func external_export() -> void:
-	Export.restore_previous_export_settings()
-	match Export.current_tab:
-		Export.ExportTab.FRAME:
-			Export.process_frame()
-		Export.ExportTab.SPRITESHEET:
-			Export.process_spritesheet()
-		Export.ExportTab.ANIMATION:
-			Export.process_animation()
-	if Export.export_processed_images(true, self):
-		hide()
-
-
 func set_preview() -> void:
 	remove_previews()
 	if Export.processed_images.size() == 1 and Export.current_tab != Export.ExportTab.ANIMATION:
@@ -234,10 +221,6 @@ func set_export_progress_bar(value: float) -> void:
 
 
 func _on_ExportDialog_about_to_show() -> void:
-	# If export already occured - fill the dialog with previous export settings
-	if Export.was_exported:
-		Export.restore_previous_export_settings()
-
 	# If we're on HTML5, don't let the user change the directory path
 	if OS.get_name() == "HTML5":
 		path_container.visible = false
@@ -333,19 +316,23 @@ func _on_PathButton_pressed() -> void:
 
 
 func _on_PathLineEdit_text_changed(new_text : String) -> void:
+	Global.current_project.directory_path = new_text
 	Export.directory_path = new_text
 
 
 func _on_FileLineEdit_text_changed(new_text : String) -> void:
+	Global.current_project.file_name = new_text
 	Export.file_name = new_text
 
 
 func _on_FileDialog_dir_selected(dir : String) -> void:
 	path_line_edit.text = dir
+	Global.current_project.directory_path = dir
 	Export.directory_path = dir
 
 
 func _on_FileFormat_item_selected(id : int) -> void:
+	Global.current_project.file_format = id
 	Export.file_format = id
 
 
