@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-28 03:04\n"
+"PO-Revision-Date: 2020-08-28 03:15\n"
 
 msgid "OK"
 msgstr "예"
@@ -893,7 +893,7 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "브러시 색상을 ~에서"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: 브러시 자체의 색상, 100: 현재 선택된 색상"
@@ -1286,10 +1286,10 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "당신의 이름 또는 당신의 회사 이름이 시작화면에 표시 되길 원하시나요?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Platinum 스폰서가 되어주세요"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Gold 스폰서가 되어주세요"
 
 msgid "Become a Patron"
 msgstr "후원자 되기"
@@ -1319,7 +1319,7 @@ msgid "A default background color of a new image"
 msgstr "새 이미지의 기본 배경 색"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "비율 고정"
 
 msgid "Templates:"
 msgstr "템플릿:"
@@ -1343,7 +1343,7 @@ msgid "Zoom"
 msgstr "확대/축소"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "색상 선택기"
 
 msgid "Pencil"
 msgstr "연필"
@@ -1352,13 +1352,13 @@ msgid "Eraser"
 msgstr "지우개"
 
 msgid "Bucket"
-msgstr ""
+msgstr "양동이"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "밝게/어둡게"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "색상 전환"
 
 msgid "Set the shortcut"
 msgstr "단축키 설정"
@@ -1370,22 +1370,22 @@ msgid "Already assigned"
 msgstr "이미 지정됨"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "왼쪽 툴:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "왼쪽 마우스 버튼에 지정된 툴"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "오른쪽 툴:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "오른쪽 마우스 버튼에 지정된 툴"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "최근 프로젝트 파일을 찾을 수 없습니다."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "당신은 아직 Pixelorama에서 프로젝트을 열거나 저장한적이 없습니다!"
 
 msgid "Open Last Project"
 msgstr "최근 프로젝트 열기"
@@ -1406,13 +1406,13 @@ msgid "Autosave interval:"
 msgstr "자동 저장 주기:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "분"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "각 프레임 태그 마다 새로운 폴더 만들기."
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "여러 파일을 만들지만 프레임 태그로 분류되어 다른 폴더에 저장됩니다"
 
 msgid "Close"
 msgstr "닫기"
@@ -1422,7 +1422,8 @@ msgstr "삭제"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "자동 저장된 백업 %s이(가) 발견 되었습니다.\n"
+"다시 로드할까요?"
 
 msgid "Backup reloaded"
 msgstr "백업본을 다시 불러오는 중"
