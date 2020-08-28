@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-08-28 02:48\n"
+"PO-Revision-Date: 2020-08-28 03:04\n"
 
 msgid "OK"
 msgstr "예"
@@ -1027,47 +1027,48 @@ msgid "Ping-pong loop"
 msgstr "루프 핑퐁"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "어니언 스키닝:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "과거 프레임"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "미래 프레임"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "프레임 태그 관리"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "프레임 태그 속성"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "새 프레임 태그 추가"
 
 msgid "Name:"
-msgstr ""
+msgstr "이름:"
 
 msgid "From:"
-msgstr ""
+msgstr "~에서:"
 
 msgid "To:"
-msgstr ""
+msgstr "~로:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "같은 태그의 프레임만 애니메이션이 재생 됩니다."
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "태그 %s (프레임 %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "태그 %s (프레임 %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "선택 되었다면, 같은 태그의 프레임만 애니메이션이 재생 됩니다.\n"
+"그렇지 않다면, 태그를 무시하고 모든 프레임의 애니메이션이 재생 됩니다."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "청-적 모드"
 
 msgid "Add a new frame"
 msgstr "새 프레임 추가"
@@ -1127,11 +1128,12 @@ msgid "Lock/unlock layer"
 msgstr "레이어 잠금/잠금 해제"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "프레임: %s, 레이어: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "셀 연결 활성화/비활성화\n\n"
+"연결된 셀들은 여러 프레임에 공유 됩니다"
 
 msgid "Palette"
 msgstr "팔레트"
@@ -1242,22 +1244,22 @@ msgid "File failed to save"
 msgstr "파일 저장 실패"
 
 msgid "File exported"
-msgstr ""
+msgstr "파일이 내보내졌습니다"
 
 msgid "New Empty Palette"
 msgstr "새 빈 팔레트"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "팔레트 불러오기"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "현재 스프라이트에서 팔레트 생성"
 
 msgid "Palette Name:"
 msgstr "팔레트 이름:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "색상 이름:"
 
 msgid "Use current left & right colors"
 msgstr "현재 왼쪽 및 오른쪽 색상 사용"
@@ -1266,7 +1268,7 @@ msgid "Create a new empty palette?"
 msgstr "새 빈 팔레트를 생성할까요?"
 
 msgid "Error"
-msgstr ""
+msgstr "오류"
 
 msgid "Error: Palette must have a valid name."
 msgstr "오류: 팔레트는 유효한 이름을 갖고 있어야 합니다."
@@ -1281,7 +1283,7 @@ msgid "Patrons:"
 msgstr "후원자:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "당신의 이름 또는 당신의 회사 이름이 시작화면에 표시 되길 원하시나요?"
 
 msgid "Become a Platinum Sponsor"
 msgstr ""
