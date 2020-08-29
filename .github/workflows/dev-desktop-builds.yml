@@ -31,10 +31,10 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
         run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
-      - name: Copy pixelorama folder 📁
+      - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama ./build/windows-64bit
-          rm ./build/windows-64bit/pixelorama/.gdignore
+          cp -R ./pixelorama_data ./build/windows-64bit
+          rm ./build/windows-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
@@ -57,10 +57,10 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
-      - name: Copy pixelorama folder 📁
+      - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama ./build/linux-64bit
-          rm ./build/linux-64bit/pixelorama/.gdignore
+          cp -R ./pixelorama_data ./build/linux-64bit
+          rm ./build/linux-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
@@ -103,10 +103,10 @@ jobs:
           rm ./build/mac/Pixelorama.zip
       - name: Fix application icon 🖼
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
-      - name: Copy pixelorama folder 📁
+      - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama ./build/mac
-          rm ./build/mac/pixelorama/.gdignore
+          cp -R ./pixelorama_data ./build/mac
+          rm ./build/mac/pixelorama_data/.gdignore
       - name: Create DMG archive 🔧
         run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀

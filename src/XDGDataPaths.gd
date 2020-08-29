@@ -12,7 +12,8 @@ var raw_xdg_data_dirs : Array
 const default_xdg_data_home_rel := ".local/share"
 const default_xdg_data_dirs := ["/usr/local/share", "/usr/share"]
 
-const config_subdir_name := "pixelorama"
+const config_subdir_name := "pixelorama_data"
+const xdg_config_subdir_name := "pixelorama"
 
 const palettes_data_subdirectory := "Palettes"
 const brushes_data_subdirectory := "Brushes"
@@ -35,7 +36,7 @@ func _init() -> void:
 			default_xdg_data_home_rel
 		)
 		xdg_data_home = raw_xdg_data_home.plus_file(
-			config_subdir_name
+			xdg_config_subdir_name
 		)
 
 		# Create defaults
@@ -43,7 +44,7 @@ func _init() -> void:
 		raw_xdg_data_dirs = default_xdg_data_dirs
 		for default_loc in raw_xdg_data_dirs:
 			xdg_data_dirs.append(
-				default_loc.plus_file(config_subdir_name)
+				default_loc.plus_file(xdg_config_subdir_name)
 			)
 
 		# Now check the XDG environment variables and if
@@ -52,7 +53,7 @@ func _init() -> void:
 		# Checks the xdg data home var
 		if OS.has_environment("XDG_DATA_HOME"):
 			raw_xdg_data_home = OS.get_environment("XDG_DATA_HOME")
-			xdg_data_home = raw_xdg_data_home.plus_file(config_subdir_name)
+			xdg_data_home = raw_xdg_data_home.plus_file(xdg_config_subdir_name)
 		# Checks the list of files var, and processes them.
 		if OS.has_environment("XDG_DATA_DIRS"):
 			var raw_env_var := OS.get_environment("XDG_DATA_DIRS")
@@ -61,7 +62,7 @@ func _init() -> void:
 			raw_xdg_data_dirs = unappended_subdirs
 			xdg_data_dirs = []
 			for unapp_subdir in raw_xdg_data_dirs:
-				xdg_data_dirs.append(unapp_subdir.plus_file(config_subdir_name))
+				xdg_data_dirs.append(unapp_subdir.plus_file(xdg_config_subdir_name))
 		xdg_data_dirs.append(Global.root_directory.plus_file(config_subdir_name))
 
 	else:
