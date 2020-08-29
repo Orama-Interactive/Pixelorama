@@ -92,7 +92,7 @@ jobs:
           curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip -a Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Download Godot headless binary 💾
+      - name: Download Godot headless binary 🤖
         run: |
           curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
           unzip -a Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
@@ -112,8 +112,8 @@ jobs:
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
       - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama_data ./build/mac
-          rm ./build/mac/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
+          rm ./build/mac/Pixelorama.app/Contents/MacOS/pixelorama_data/.gdignore
       - name: Create DMG archive 🔧
         run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
