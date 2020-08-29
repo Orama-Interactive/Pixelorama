@@ -57,6 +57,9 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
+      - name: Give execute permission ☑️
+        run: 
+          chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/linux-64bit
