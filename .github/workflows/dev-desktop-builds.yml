@@ -61,11 +61,15 @@ jobs:
         run: |
           cp -R ./pixelorama_data ./build/linux-64bit
           rm ./build/linux-64bit/pixelorama_data/.gdignore
+      - name: Create tar.gz archive 🗜️
+        run: |
+          cd build
+          tar zcvf linux-64bit.tar.gz linux-64bit
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v1
         with:
           name: Linux-64bit
-          path: ./build/linux-64bit/
+          path: ./build/linux-64bit.tar.gz
 
   export-mac:
     name: Mac Export 🍎
