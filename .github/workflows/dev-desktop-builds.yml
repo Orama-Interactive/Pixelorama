@@ -105,8 +105,8 @@ jobs:
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
       - name: Copy pixelorama folder 📁
         run: |
-          cp -R ./pixelorama ./build/mac/Pixelorama.app/Contents/Resources
-          rm ./build/mac/Pixelorama.app/Contents/Resources/pixelorama/.gdignore
+          cp -R ./pixelorama ./build/mac
+          rm ./build/mac/pixelorama/.gdignore
       - name: Create DMG archive 🔧
         run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
