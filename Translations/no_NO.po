@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-08-08 16:10\n"
+"PO-Revision-Date: 2020-08-27 11:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -523,11 +523,20 @@ msgstr "Endringslogg"
 msgid "About Pixelorama"
 msgstr "Om Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Utviklet av Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "Nettside"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Donér"
@@ -580,6 +589,9 @@ msgstr "Latvisk"
 msgid "Spanish"
 msgstr "Spansk"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -604,6 +616,9 @@ msgstr "Koreansk"
 msgid "Hungarian"
 msgstr "Ungarsk"
 
+msgid "Romanian"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Utviklingsteam"
 
@@ -616,8 +631,8 @@ msgstr "UI-Designer"
 msgid "GitHub Contributors"
 msgstr "Bidragere på Github"
 
-msgid "Art by"
-msgstr "Kunst av"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "uten navn"
@@ -768,6 +783,21 @@ msgstr "Farge som brukes av linjal og guider på lerretet"
 msgid "Grid"
 msgstr "Rutenett"
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Rutenettbredde:"
 
@@ -779,6 +809,12 @@ msgstr "Rutenetthøyde:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Angir hvor langt fra hverandre de horisontale linjene er i rutenettet"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Rutenettfarge:"
@@ -807,6 +843,18 @@ msgstr "Sjekkerfarge 2:"
 msgid "Second color of the transparent checker background"
 msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
 
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 
@@ -816,14 +864,14 @@ msgstr "Børste:"
 msgid "Select a brush"
 msgstr "Velg en børste"
 
-msgid "Brush: Pixel"
-msgstr "Børste: Piksel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Børste: Sirkel"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Børste: Fylt Sirkel"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Egendefinert Børste"
@@ -831,11 +879,17 @@ msgstr "Egendefinert Børste"
 msgid "Brush size:"
 msgstr "Børstestørrelse:"
 
-msgid "Overwrite"
-msgstr "Overskriv"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr ""
 
 msgid "Pixel Perfect"
 msgstr "Pikselperfekt"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Børstefarge fra"
@@ -981,8 +1035,29 @@ msgstr "Fremtidige bilder"
 msgid "Manage frame tags"
 msgstr "Administrér bildemerkelapper"
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animasjon spiller kun på bilder med samme merkelapp"
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1186,6 +1261,9 @@ msgstr "Bruk gjeldene høyre- og venstrefarger"
 msgid "Create a new empty palette?"
 msgstr "Opprette en nyt tom palett?"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error: Palette must have a valid name."
 msgstr "Feil: Palett må ha et gyldig navn."
 
@@ -1355,4 +1433,7 @@ msgstr "Kan ikke fjerne paletten, den eksisterer ikke!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Det oppsto en feil under fjerning av paletten! Feilkode: %s"
+
+msgid "and"
+msgstr ""
 

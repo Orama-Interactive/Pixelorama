@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-08-09 14:19\n"
+"PO-Revision-Date: 2020-08-27 11:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -523,11 +523,20 @@ msgstr "Änderungen"
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "Website"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Spenden"
@@ -580,6 +589,9 @@ msgstr "Lettisch"
 msgid "Spanish"
 msgstr "Spanisch"
 
+msgid "Catalan"
+msgstr "Katalanisch"
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -604,6 +616,9 @@ msgstr "Koreanisch"
 msgid "Hungarian"
 msgstr "Ungarisch"
 
+msgid "Romanian"
+msgstr "Rumänisch"
+
 msgid "Development Team"
 msgstr "Entwicklerteam"
 
@@ -616,8 +631,8 @@ msgstr "UI Designer"
 msgid "GitHub Contributors"
 msgstr "Github Beitragende"
 
-msgid "Art by"
-msgstr "Zeichnung von"
+msgid "Art by: %s"
+msgstr "Kunst von: %s"
 
 msgid "untitled"
 msgstr "unbenannt"
@@ -757,28 +772,49 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
 
 msgid "Guides"
-msgstr "Anleitungen"
+msgstr "Guides"
 
 msgid "Guides color:"
-msgstr "Guidefarbe:"
+msgstr "Guide-Farbe:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "Eine Farbe der Linealguides, die auf dem Canvas angezeigt werden"
+msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
 msgid "Grid"
-msgstr "Tabelle"
+msgstr "Gitter"
+
+msgid "Grid type:"
+msgstr "Gittertyp:"
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "Legt den Typ des Gitters zwischen rechteckig, isometrisch oder beidem fest"
+
+msgid "Rectangular"
+msgstr "Rechteckig"
+
+msgid "Isometric"
+msgstr "Isometrisch"
+
+msgid "All"
+msgstr "Alle"
 
 msgid "Grid width:"
 msgstr "Rasterbreite:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Legt fest, wie weit die vertikalen Linien des Rasters voneinander entfernt sind"
+msgstr "Legt fest, wie weit die vertikalen Linien des Gitters voneinander entfernt sind"
 
 msgid "Grid height:"
 msgstr "Rasterhöhe:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Legt fest, wie weit die horizontalen Linien des Rasters voneinander entfernt sind"
+msgstr "Legt fest, wie weit die horizontalen Linien des Gitters voneinander entfernt sind"
+
+msgid "Isometric cell size:"
+msgstr "Isometrische Zellgröße:"
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "Legt die Größe der Zellen in einem isometrischen Raster fest"
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
@@ -807,6 +843,18 @@ msgstr "Checkerfarbe 2:"
 msgid "Second color of the transparent checker background"
 msgstr "Zweite Farbe des transparenten Checkerhintergrunds"
 
+msgid "Follow Canvas Movement"
+msgstr "Canvas folgen"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "Die transparenten Checker folgen dem Canvas"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "Folge Canvas-Zoom-Level"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "Die transparenten Checker folgen dem Canvas-Zoom-Level"
+
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
 
@@ -816,14 +864,14 @@ msgstr "Pinsel:"
 msgid "Select a brush"
 msgstr "Wähle einen Pinsel"
 
-msgid "Brush: Pixel"
-msgstr "Pinsel: Pixel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Pinsel: Kreis"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Pinsel: Gefüllter Kreis"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Benutzerdefinierter Pinsel"
@@ -831,11 +879,17 @@ msgstr "Benutzerdefinierter Pinsel"
 msgid "Brush size:"
 msgstr "Pinselgröße:"
 
-msgid "Overwrite"
-msgstr "Überschreiben"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr ""
 
 msgid "Pixel Perfect"
 msgstr "Perfekte Pixel"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Pinselfarbe von"
@@ -983,8 +1037,29 @@ msgstr "Nachfolger Frames"
 msgid "Manage frame tags"
 msgstr "Frame Tags verwalten"
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animation spielt nur auf Frames des gleichen Tags"
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1188,6 +1263,9 @@ msgstr "Aktuelle linke und rechte Farben verwenden"
 msgid "Create a new empty palette?"
 msgstr "Neue leere Palette erstellen?"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error: Palette must have a valid name."
 msgstr "Fehler: Palette muss einen gültigen Namen haben."
 
@@ -1357,4 +1435,7 @@ msgstr "Die Palette kann nicht entfernt werden, da sie nicht existiert!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Beim Entfernen der Palette ist ein Fehler aufgetreten! Fehlercode: %s"
+
+msgid "and"
+msgstr "und"
 

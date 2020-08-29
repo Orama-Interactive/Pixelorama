@@ -25,6 +25,7 @@ margin_right = 233.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
+size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
@@ -67,10 +68,5 @@ mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
-[connection signal="about_to_show" from="." to="." method="_on_FlipImageDialog_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_FlipImageDialog_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_FlipImageDialog_popup_hide"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/FlipHorizontal" to="." method="_on_FlipHorizontal_toggled"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/FlipVertical" to="." method="_on_FlipVertical_toggled"]
-[connection signal="toggled" from="VBoxContainer/OptionsContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]

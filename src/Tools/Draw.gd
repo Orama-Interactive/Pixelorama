@@ -177,6 +177,8 @@ func commit_undo(action : String) -> void:
 
 
 func draw_tool(position : Vector2) -> void:
+	if Global.current_project.layers[Global.current_project.current_layer].locked:
+		return
 	var strength := _strength
 	if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
 		strength *= Tools.pen_pressure

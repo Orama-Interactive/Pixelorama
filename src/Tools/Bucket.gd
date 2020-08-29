@@ -94,7 +94,7 @@ func update_pattern() -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	if not position in Global.current_project.selected_pixels:
+	if not position in Global.current_project.selected_pixels or Global.current_project.layers[Global.current_project.current_layer].locked:
 		return
 	var undo_data = _get_undo_data()
 	if _fill_area == 0:

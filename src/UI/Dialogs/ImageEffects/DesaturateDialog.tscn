@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="DesaturateDialog" type="ConfirmationDialog"]
 margin_right = 200.0
@@ -22,8 +23,13 @@ __meta__ = {
 margin_right = 263.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+
+[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
+show_behind_parent = true
 
 [node name="RGBAContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 204.0
@@ -90,12 +96,7 @@ mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
-[connection signal="about_to_show" from="." to="." method="_on_FlipImageDialog_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_FlipImageDialog_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_FlipImageDialog_popup_hide"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/RButton" to="." method="_on_RButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/GButton" to="." method="_on_GButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/BButton" to="." method="_on_BButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/AButton" to="." method="_on_AButton_toggled"]
-[connection signal="toggled" from="VBoxContainer/OptionsContainer/SelectionCheckBox" to="." method="_on_SelectionCheckBox_toggled"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/AffectOptionButton" to="." method="_on_AffectOptionButton_item_selected"]

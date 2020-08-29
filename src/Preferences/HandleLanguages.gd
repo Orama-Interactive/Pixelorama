@@ -19,6 +19,8 @@ const languages_dict := {
 	"zh_TW" : ["繁體中文", "Chinese Traditional"],
 	"no_NO" : ["Norsk", "Norwegian"],
 	"hu_HU" : ["Magyar", "Hungarian"],
+	"ro_RO" : ["Română", "Romanian"],
+	"ko_KR" : ["한국어", "Korean"],
 }
 
 var loaded_locales : Array
@@ -42,7 +44,7 @@ func _ready() -> void:
 		button.hint_tooltip = languages_dict[locale][1]
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.group = button_group
-		if "zh" in locale:
+		if is_cjk(locale):
 			button.add_font_override("font", cjk_font)
 		add_child(button)
 
@@ -58,7 +60,7 @@ func _ready() -> void:
 	else: # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
-	if "zh" in TranslationServer.get_locale():
+	if is_cjk(TranslationServer.get_locale()):
 		Global.control.theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
 	else:
 		Global.control.theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
@@ -76,7 +78,7 @@ func _on_Language_pressed(index : int) -> void:
 	else:
 		TranslationServer.set_locale(loaded_locales[index - 1])
 
-	if "zh" in TranslationServer.get_locale():
+	if is_cjk(TranslationServer.get_locale()):
 		Global.control.theme.default_font = preload("res://assets/fonts/CJK/NotoSansCJKtc-Regular.tres")
 	else:
 		Global.control.theme.default_font = preload("res://assets/fonts/Roboto-Regular.tres")
@@ -88,3 +90,7 @@ func _on_Language_pressed(index : int) -> void:
 	Global.update_hint_tooltips()
 	Global.preferences_dialog._on_PreferencesDialog_popup_hide()
 	Global.preferences_dialog._on_PreferencesDialog_about_to_show(true)
+
+
+func is_cjk(locale : String) -> bool:
+	return "zh" in locale or "ko" in locale

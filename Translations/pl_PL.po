@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-08-08 23:59\n"
+"PO-Revision-Date: 2020-08-27 11:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -523,11 +523,20 @@ msgstr "Lista zmian"
 msgid "About Pixelorama"
 msgstr "O Pixeloramie"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Tworzony przez: Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "Strona internetowa"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Wspomóż"
@@ -580,6 +589,9 @@ msgstr "Łotewski"
 msgid "Spanish"
 msgstr "Hiszpański"
 
+msgid "Catalan"
+msgstr "Kataloński"
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -604,6 +616,9 @@ msgstr "Koreański"
 msgid "Hungarian"
 msgstr "Węgierski"
 
+msgid "Romanian"
+msgstr "Rumuński"
+
 msgid "Development Team"
 msgstr "Zespół developerski"
 
@@ -616,8 +631,8 @@ msgstr "Projektant interfejsu użytkownika"
 msgid "GitHub Contributors"
 msgstr "Wnieśli wkład (GitHub)"
 
-msgid "Art by"
-msgstr "Grafika wykonana przez"
+msgid "Art by: %s"
+msgstr "Artysta: %s"
 
 msgid "untitled"
 msgstr "bez nazwy"
@@ -768,6 +783,21 @@ msgstr "Kolor prowadnic wyświetlanych na płótnie"
 msgid "Grid"
 msgstr "Siatka"
 
+msgid "Grid type:"
+msgstr "Typ siatki:"
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "Ustawia typ siatki pomiędzy prostokątną, izometryczną lub oba"
+
+msgid "Rectangular"
+msgstr "Prostokątna"
+
+msgid "Isometric"
+msgstr "Izometryczna"
+
+msgid "All"
+msgstr "Wszystkie"
+
 msgid "Grid width:"
 msgstr "Szerokość siatki:"
 
@@ -780,6 +810,12 @@ msgstr "Wysokość siatki:"
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Ustawia jak daleko od siebie są poziome linie siatki"
 
+msgid "Isometric cell size:"
+msgstr "Rozmiar komórki izometrycznej:"
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "Ustawia rozmiar komórek w siatce izometrycznej"
+
 msgid "Grid color:"
 msgstr "Kolor siatki:"
 
@@ -790,22 +826,34 @@ msgid "Transparency"
 msgstr "Przezroczystość"
 
 msgid "Checker size:"
-msgstr "Rozmiar komórek:"
+msgstr "Rozmiar komórek przezroczystej siatki:"
 
 msgid "Size of the transparent checker background"
-msgstr "Rozmiar komórek do rysowania - szachownicy"
+msgstr "Rozmiar tła przezroczystej siatki"
 
 msgid "Checker color 1:"
-msgstr "Kolor komórek 1:"
+msgstr "Kolor komórek przezroczystej siatki 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Pierwszy kolor komórek do rysowania - szachownicy"
+msgstr "Pierwszy kolor komórek przezroczystej siatki"
 
 msgid "Checker color 2:"
-msgstr "Kolor komórek 2:"
+msgstr "Kolor komórek przezroczystej siatki 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Drugi kolor komórek do rysowania - szachownicy"
+msgstr "Drugi kolor komórek przezroczystej siatki"
+
+msgid "Follow Canvas Movement"
+msgstr "Śledź ruch płótna"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "Przezroczysta siatka śledzi ruch płótna"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "Śledź poziom przybliżenia płótna"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "Przezroczysta siatka śledzi poziom przybliżenia płótna"
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
@@ -816,14 +864,14 @@ msgstr "Pędzel:"
 msgid "Select a brush"
 msgstr "Wybierz pędzel"
 
-msgid "Brush: Pixel"
-msgstr "Pędzel: Piksel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Pędzel: Okrąg"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Pędzel: Wypełniony okrąg"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Niestandardowy pędzel"
@@ -831,11 +879,17 @@ msgstr "Niestandardowy pędzel"
 msgid "Brush size:"
 msgstr "Rozmiar pędzla:"
 
-msgid "Overwrite"
-msgstr "Nadpisz"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr ""
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
@@ -983,8 +1037,29 @@ msgstr "Przyszłe klatki"
 msgid "Manage frame tags"
 msgstr "Zarządzaj tagami klatek"
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animacja odtwarza się tylko na klatkach z tym samym tagiem"
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1188,6 +1263,9 @@ msgstr "Użyj aktualnych kolorów lewego i prawego"
 msgid "Create a new empty palette?"
 msgstr "Utworzyć nową pustą paletę kolorów?"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error: Palette must have a valid name."
 msgstr "Błąd: Paleta kolorów musi mieć poprawną nazwę."
 
@@ -1357,4 +1435,7 @@ msgstr "Nie można usunąć palety, ponieważ nie istnieje!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Wystąpił błąd podczas usuwania palety! Kod błędu: %s"
+
+msgid "and"
+msgstr "i"
 

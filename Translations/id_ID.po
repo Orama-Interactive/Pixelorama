@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-08-08 16:11\n"
+"PO-Revision-Date: 2020-08-27 11:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Hapus Pilihan"
 
 msgid "Flip"
-msgstr ""
+msgstr "Balik"
 
 msgid "Flip Horizontal"
 msgstr "Balikkan Horizontal"
@@ -166,7 +166,7 @@ msgid "Zen Mode"
 msgstr "Mode Zen"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Mode Layar Penuh"
 
 msgid "Fill with color:"
 msgstr "Isi dengan warna:"
@@ -211,16 +211,16 @@ msgid "Vertical frames:"
 msgstr "Frame vertikal:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tipe kuas:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Kuas file"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Kuas proyek"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Kuas acak"
 
 msgid "Save Sprite as .pxo"
 msgstr "Simpan \"sprite\" dengan .pxo"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Folder tidak valid"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Ekspor sedang berlangsung..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -354,7 +354,7 @@ msgid "General"
 msgstr "Umum"
 
 msgid "Startup"
-msgstr ""
+msgstr "Memulai"
 
 msgid "Language"
 msgstr "Bahasa"
@@ -369,16 +369,16 @@ msgid "Shortcuts"
 msgstr "Pintasan"
 
 msgid "Backup"
-msgstr ""
+msgstr "Cadangan"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikator"
 
 msgid "On"
-msgstr ""
+msgstr "Nyala"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Kembalikan nilai awal"
 
 msgid "Smooth Zoom"
 msgstr "Zoom Halus"
@@ -420,34 +420,34 @@ msgid "Light"
 msgstr "Terang"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Hanya mempengaruhi pilihan"
 
 msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Frame sekarang"
 
 msgid "All frames"
-msgstr ""
+msgstr "Semua frame"
 
 msgid "All projects"
-msgstr ""
+msgstr "Semua proyek"
 
 msgid "Invert Colors"
 msgstr "Balikkan warna"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Ubah Channel Merah"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Ubah Channel Hijau"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Ubah Channel Biru"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Ubah Channel Alfa"
 
 msgid "Desaturation"
 msgstr "Desaturasi"
@@ -459,7 +459,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Ganti Hue/Saturation/Value"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradien"
 
 msgid "Adjust HSV"
 msgstr "Atur HSV"
@@ -471,16 +471,16 @@ msgid "Angle:"
 msgstr "Sudut:"
 
 msgid "Hue"
-msgstr ""
+msgstr "Warna"
 
 msgid "Saturation"
-msgstr ""
+msgstr "Kejenuhan"
 
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Apply"
-msgstr ""
+msgstr "Terapkan"
 
 msgid "Diagonal"
 msgstr "Diagonal"
@@ -492,7 +492,7 @@ msgid "Thickness:"
 msgstr "Ketebalan:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Warna:"
 
 msgid "Steps:"
 msgstr ""
@@ -524,11 +524,20 @@ msgstr "Perubahan"
 msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Dibuat oleh Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "Situs web"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Donasi"
@@ -581,6 +590,9 @@ msgstr "Latvi"
 msgid "Spanish"
 msgstr "Spanyol"
 
+msgid "Catalan"
+msgstr ""
+
 msgid "Esperanto"
 msgstr "Esperanto"
 
@@ -605,6 +617,9 @@ msgstr ""
 msgid "Hungarian"
 msgstr ""
 
+msgid "Romanian"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Tim Developer"
 
@@ -617,8 +632,8 @@ msgstr "Desainer UI"
 msgid "GitHub Contributors"
 msgstr "Kontribusi Github"
 
-msgid "Art by"
-msgstr "Oleh"
+msgid "Art by: %s"
+msgstr ""
 
 msgid "untitled"
 msgstr "tanpa nama"
@@ -769,6 +784,21 @@ msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
 msgid "Grid"
 msgstr ""
 
+msgid "Grid type:"
+msgstr ""
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr ""
+
+msgid "Rectangular"
+msgstr ""
+
+msgid "Isometric"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Grid width:"
 msgstr "Lebar Kisi:"
 
@@ -780,6 +810,12 @@ msgstr "Tinggi Kisi:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Seberapa jauh garis horizontal dari kisi"
+
+msgid "Isometric cell size:"
+msgstr ""
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Warna Kisi:"
@@ -808,6 +844,18 @@ msgstr "Warna pola catur 2:"
 msgid "Second color of the transparent checker background"
 msgstr "Warna kedua dari pola catur yang ada di latar"
 
+msgid "Follow Canvas Movement"
+msgstr ""
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr ""
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "Hanya preset kustom yang bisa di edit"
 
@@ -817,14 +865,14 @@ msgstr "Kuas:"
 msgid "Select a brush"
 msgstr "Pilih satu kuas"
 
-msgid "Brush: Pixel"
-msgstr "Kuas: Pixel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Kuas: Bulat"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Kuas: Bulat Penuh"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Kuas kostum"
@@ -832,10 +880,16 @@ msgstr "Kuas kostum"
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
 
-msgid "Overwrite"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Brush color from"
@@ -981,8 +1035,29 @@ msgstr "Frame setelah"
 msgid "Manage frame tags"
 msgstr "Ganti tanda frame (frame tags)"
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animasi dimainkan hanya jika frame memiliki tanda yang sama"
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1186,6 +1261,9 @@ msgstr ""
 msgid "Create a new empty palette?"
 msgstr "Buat palet kosong baru?"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error: Palette must have a valid name."
 msgstr "Error: nama palet tidak valid."
 
@@ -1355,5 +1433,8 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
 
 msgid "An error occured while removing the palette! Error code: %s"
+msgstr ""
+
+msgid "and"
 msgstr ""
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
@@ -23,17 +24,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-margin_right = 229.0
-margin_bottom = 145.0
+[node name="Preview" type="TextureRect" parent="VBoxContainer"]
+margin_left = 14.0
+margin_right = 214.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
 size_flags_vertical = 3
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+
+[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
+show_behind_parent = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 149.0
+margin_top = 204.0
 margin_right = 229.0
-margin_bottom = 169.0
+margin_bottom = 224.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 margin_top = 3.0
@@ -41,7 +48,7 @@ margin_right = 34.0
 margin_bottom = 17.0
 text = "Type:"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+[node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 38.0
 margin_right = 229.0
 margin_bottom = 20.0
@@ -49,19 +56,19 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 173.0
+[node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 228.0
 margin_right = 229.0
-margin_bottom = 197.0
+margin_bottom = 252.0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/AngleOptions"]
 margin_top = 5.0
-margin_right = 44.0
+margin_right = 40.0
 margin_bottom = 19.0
 text = "Angle:"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
-margin_left = 48.0
+[node name="AngleHSlider" type="HSlider" parent="VBoxContainer/AngleOptions"]
+margin_left = 44.0
 margin_right = 151.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
@@ -72,16 +79,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+[node name="AngleSpinBox" type="SpinBox" parent="VBoxContainer/AngleOptions"]
 margin_left = 155.0
 margin_right = 229.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 359.0
 suffix = "°"
-[connection signal="about_to_show" from="." to="." method="_on_RotateImage_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_RotateImage_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_RotateImage_popup_hide"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_OptionButton_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleHSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleSpinBox" to="." method="_on_SpinBox_value_changed"]

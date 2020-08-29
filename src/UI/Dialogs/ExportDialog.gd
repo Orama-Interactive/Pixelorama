@@ -15,7 +15,7 @@ onready var export_progress_popup = $Popups/ExportProgressBar
 onready var export_progress_bar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 
 onready var animation_options_multiple_animations_directories = $VBoxContainer/AnimationOptions/MultipleAnimationsDirectories
-onready var previews = $VBoxContainer/PreviewScroll/Previews
+onready var previews = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
 onready var frame_timer = $FrameTimer
 
 onready var frame_options = $VBoxContainer/FrameOptions
@@ -97,19 +97,6 @@ func show_tab() -> void:
 			animation_options.show()
 	set_preview()
 	tabs.current_tab = Export.current_tab
-
-
-func external_export() -> void:
-	Export.restore_previous_export_settings()
-	match Export.current_tab:
-		Export.ExportTab.FRAME:
-			Export.process_frame()
-		Export.ExportTab.SPRITESHEET:
-			Export.process_spritesheet()
-		Export.ExportTab.ANIMATION:
-			Export.process_animation()
-	if Export.export_processed_images(true, self):
-		hide()
 
 
 func set_preview() -> void:
@@ -234,10 +221,6 @@ func set_export_progress_bar(value: float) -> void:
 
 
 func _on_ExportDialog_about_to_show() -> void:
-	# If export already occured - fill the dialog with previous export settings
-	if Export.was_exported:
-		Export.restore_previous_export_settings()
-
 	# If we're on HTML5, don't let the user change the directory path
 	if OS.get_name() == "HTML5":
 		path_container.visible = false
@@ -260,6 +243,9 @@ func _on_ExportDialog_about_to_show() -> void:
 
 	Export.file_exists_alert = tr("File %s already exists. Overwrite?") # Update translation
 
+	# Set the size of the preview checker
+	var checker = $VBoxContainer/PreviewPanel/TransparentChecker
+	checker.rect_size = checker.get_parent().rect_size
 
 func _on_Tabs_tab_clicked(tab : int) -> void:
 	Export.current_tab = tab
@@ -330,19 +316,23 @@ func _on_PathButton_pressed() -> void:
 
 
 func _on_PathLineEdit_text_changed(new_text : String) -> void:
+	Global.current_project.directory_path = new_text
 	Export.directory_path = new_text
 
 
 func _on_FileLineEdit_text_changed(new_text : String) -> void:
+	Global.current_project.file_name = new_text
 	Export.file_name = new_text
 
 
 func _on_FileDialog_dir_selected(dir : String) -> void:
 	path_line_edit.text = dir
+	Global.current_project.directory_path = dir
 	Export.directory_path = dir
 
 
 func _on_FileFormat_item_selected(id : int) -> void:
+	Global.current_project.file_format = id
 	Export.file_format = id
 
 
@@ -364,7 +354,7 @@ func _on_FileExistsAlert_custom_action(action : String) -> void:
 
 var pingpong_direction = Export.AnimationDirection.FORWARD
 func _on_FrameTimer_timeout() -> void:
-	$VBoxContainer/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
+	$VBoxContainer/PreviewPanel/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
 
 	match Export.direction:
 		Export.AnimationDirection.FORWARD:

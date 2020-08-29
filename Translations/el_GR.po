@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-08 16:40\n"
+"PO-Revision-Date: 2020-08-27 12:28\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -524,11 +524,20 @@ msgstr "Καταγραφές αλλαγών"
 msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr "Pixelorama - Pixelate your dreams!"
+
 msgid "Developed by Orama Interactive"
 msgstr "Φτιαγμένο από την Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr "Copyright 2019-2020 Orama Interactive"
+
 msgid "Website"
 msgstr "Ιστοσελίδα"
+
+msgid "GitHub Repo"
+msgstr "GitHub Αποθετήριο"
 
 msgid "Donate"
 msgstr "Κάντε μια δωρεά"
@@ -581,6 +590,9 @@ msgstr "Λετονικά"
 msgid "Spanish"
 msgstr "Ισπανικά"
 
+msgid "Catalan"
+msgstr "Καταλανικά"
+
 msgid "Esperanto"
 msgstr "Εσπεράντο"
 
@@ -605,6 +617,9 @@ msgstr "Κορεάτικα"
 msgid "Hungarian"
 msgstr "Ουγγρικά"
 
+msgid "Romanian"
+msgstr "Ρουμανικά"
+
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
 
@@ -617,8 +632,8 @@ msgstr "Σχεδιαστής UI"
 msgid "GitHub Contributors"
 msgstr "Συνεισφέροντες στο GitHub"
 
-msgid "Art by"
-msgstr "Ζωγραφιά από"
+msgid "Art by: %s"
+msgstr "Ζωγραφιά από: %s"
 
 msgid "untitled"
 msgstr "άτιτλο"
@@ -769,6 +784,21 @@ msgstr "Το χρώμα των οδηγών που φαίνεται στο κα�
 msgid "Grid"
 msgstr "Πλέγμα"
 
+msgid "Grid type:"
+msgstr "Είδος πλέγματος:"
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "Ορίζει το είδος του πλέγματος ανάμεσα σε ορθογωνικό, ισομετρικό ή και τα δύο"
+
+msgid "Rectangular"
+msgstr "Ορθογωνικό"
+
+msgid "Isometric"
+msgstr "Ισομετρικό"
+
+msgid "All"
+msgstr "Όλα"
+
 msgid "Grid width:"
 msgstr "Πλάτος πλέγματος:"
 
@@ -780,6 +810,12 @@ msgstr "Ύψος πλέγματος:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Ορίζει το πόσο μακριά είναι οι οριζόντιες γραμμές του πλέγματος"
+
+msgid "Isometric cell size:"
+msgstr "Μέγεθος ισομετρικού κελιού:"
+
+msgid "Sets the size of the cells in an isometric grid"
+msgstr "Ορίζει το μέγεθος των κελιών σε ένα ισομετρικό πλέγμα"
 
 msgid "Grid color:"
 msgstr "Χρώμα πλέγματος:"
@@ -808,6 +844,18 @@ msgstr "Χρώμα σκακιέρας 2:"
 msgid "Second color of the transparent checker background"
 msgstr "Δεύτερο χρώμα του διάφανου υποβάθρου - σκακιέρα"
 
+msgid "Follow Canvas Movement"
+msgstr "Να ακολουθεί τη κίνηση του καμβά"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί τη κίνηση του καμβά"
+
+msgid "Follow Canvas Zoom Level"
+msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
+
 msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
 
@@ -817,14 +865,14 @@ msgstr "Πινέλο:"
 msgid "Select a brush"
 msgstr "Επιλέξτε ένα πινέλο"
 
-msgid "Brush: Pixel"
-msgstr "Πινέλο: Εικονοστοιχείο"
+msgid "Pixel brush"
+msgstr "Πινέλο εικονοστοιχείου"
 
-msgid "Brush: Circle"
-msgstr "Πινέλο: Κύκλος"
+msgid "Circle brush"
+msgstr "Πινέλο κύκλου"
 
-msgid "Brush: Filled Circle"
-msgstr "Πινέλο: Κύκλος με Γέμισμα"
+msgid "Filled circle brush"
+msgstr "Πινέλου κύκλου με γέμισμα"
 
 msgid "Custom brush"
 msgstr "Προσαρμοσμένο πινέλο"
@@ -832,11 +880,17 @@ msgstr "Προσαρμοσμένο πινέλο"
 msgid "Brush size:"
 msgstr "Μέγεθος πινέλου:"
 
-msgid "Overwrite"
-msgstr "Αντικατάσταση"
+msgid "Overwrite Color"
+msgstr "Αντικατάσταση Χρώματος"
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr "Αντικαθιστά το χρώμα αντί να το συνδυάζει. Αυτή η επιλογή σχετίζεται μόνο με χρώματα που δεν είναι πλήρως αδιαφανή"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfect"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
@@ -984,8 +1038,29 @@ msgstr "Μελλοντικά καρέ"
 msgid "Manage frame tags"
 msgstr "Διαχείριση ετικετών καρέ"
 
+msgid "Frame Tag Properties"
+msgstr "Ιδιότητες ετικετών καρέ"
+
+msgid "Add a new frame tag"
+msgstr "Προσθήκη νέας ετικέτας καρέ"
+
+msgid "Name:"
+msgstr "Όνομα:"
+
+msgid "From:"
+msgstr "Από:"
+
+msgid "To:"
+msgstr "Έως:"
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Η κίνηση παίζει μόνο σε καρέ της ίδιας καρτέλας"
+
+msgid "Tag %s (Frame %s)"
+msgstr "Ετίκετα %s (Καρέ %s)"
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr "Ετίκετα %s (Καρέ %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1189,6 +1264,9 @@ msgstr "Χρήση των επιλεγμένων χρωμάτων (αριστε�
 msgid "Create a new empty palette?"
 msgstr "Δημιουργία νέας κενής παλέτας;"
 
+msgid "Error"
+msgstr "Σφάλμα"
+
 msgid "Error: Palette must have a valid name."
 msgstr "Σφάλμα: Η παλέτα πρέπει να έχει έγκυρο όνομα."
 
@@ -1358,4 +1436,7 @@ msgstr "Δεν γίνεται να διαγραφεί η παλέτα, επει�
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Παρουσιάστηκε σφάλμα κατά την αφαίρεση της παλέτας. Κωδικός σφάλματος: %s"
+
+msgid "and"
+msgstr "και"
 

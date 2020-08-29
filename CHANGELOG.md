@@ -6,12 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 This update has been brought to you by the contributions of:
-Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Michael Alexsander (YeldhamDev), Martin Novák (novhack)
+Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Michael Alexsander (YeldhamDev), Hugo Locurcio (Calinou), Martin Novák (novhack), Xenofon Konitsas (huskeee), Matthew Paul (matthewpaul-us)
 
 ### Added
-- The Web (HTML5) is now a supported platform of Pixelorama! It is now possible to save .png and .pxo files, as well as load image and palette files in the Web version. Only limitation so far is that the users cannot load .pxo files. Also, this may not work on mobile.
-- Project tabs! You can now have multiple projects open at the same time, and access each one with tabs.
+- The Web (HTML5) is now a supported platform of Pixelorama! It is now possible to save .png and .pxo files, as well as load image and palette files in the Web version. Made possible thanks to https://github.com/Pukkah/HTML5-File-Exchange-for-Godot
+- Project tabs! You can now have multiple projects open at the same time, and access each one with tabs. 
 - Gradient generation. A new option under the "Image" menu that lets you generate a RGB gradient in the current cel.
+- The dialog windows of most image effects have been improved. You can now select if you want the effect to apply in the current cel, the entire frame, all frames or even all projects (tabs)!
+- Added previews in all image effect dialog windows with a checkerboard background. Also placed checkerboard backgrounds in the cel buttons of the timeline, and the Export window. ([#206](https://github.com/Orama-Interactive/Pixelorama/issues/206))
+- A new isometric grid!
 - Ability to remove the current palette. ([#239](https://github.com/Orama-Interactive/Pixelorama/pull/239))
 - You can now drag & drop files into the program while it's running to open them. You can open .pxo files, image files and palette (json and gpl) files this way.
 - You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))
@@ -22,6 +25,8 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - You can now import image files as layers. Their size will be cropped to the project's size.
 - You can import image files as brushes, patterns and palettes.
 - Buttons have been added in Preferences to restore each setting to its default state.
+- Created a NSIS installer for Windows. ([#303](https://github.com/Orama-Interactive/Pixelorama/pull/303))
+- Added Scale3X algorithm as an option to scale sprites ([#290](https://github.com/Orama-Interactive/Pixelorama/pull/290))
 - Added "Copy", "Paste" and "Delete" options in the Edit menu. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Selection region and size are now being shown when making a selection on the top, next to the position label. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Added color overwrite option for the Pencil tool. ([#282](https://github.com/Orama-Interactive/Pixelorama/pull/282))
@@ -30,6 +35,8 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - A play button has been added for playing the animation exclusively on the small canvas preview area. A zoom slider for the preview area has been added, too.
 - Added color previews next to the themes in Preferences.
 - Added options for the checkerboard background to follow camera movement and zoom level. ([#311](https://github.com/Orama-Interactive/Pixelorama/pull/311))
+- Added support for importing PAL palette files. ([#315](https://github.com/Orama-Interactive/Pixelorama/pull/315))
+- Added Hungarian, Korean and Romanian translations.
 
 ### Changed
 - The GDNative gif exporter addon has been replaced with a GDScript equivalent. This makes gif exporting possible in all currently supported platforms, and it also adds support for transparency. ([#295](https://github.com/Orama-Interactive/Pixelorama/pull/295))
@@ -51,6 +58,8 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - Language and theme checkboxes are now radio buttons.
 - The Blue theme has more similar margins and seperations with the rest of the themes.
 - Fullscreen can be toggled on and off from the View menu.
+- Multi-threaded rendering has been enabled. ([#294](https://github.com/Orama-Interactive/Pixelorama/pull/294))
+- Use the Dummy audio driver since Pixelorama doesn't play any sounds. ([#312](https://github.com/Orama-Interactive/Pixelorama/pull/312))
 
 ### Fixed
 - Exporting large images and drawing with large image brushes is now a lot faster. (Because of Godot 3.2.2)
