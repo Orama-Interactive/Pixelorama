@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-27 17:04\n"
+"PO-Revision-Date: 2020-08-31 14:54\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -381,7 +381,7 @@ msgid "Restore default value"
 msgstr "Varsayılanları yükle"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Yumuşak Yakınlaştırma"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
@@ -399,7 +399,7 @@ msgid "Color:"
 msgstr "Renk:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Kılavuz çizgileri rengi:"
 
 msgid "System Language"
 msgstr "Sistem Dili"
@@ -426,13 +426,13 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Geçerli kare"
 
 msgid "All frames"
-msgstr ""
+msgstr "Tüm Kareler"
 
 msgid "All projects"
-msgstr ""
+msgstr "Tüm projeler"
 
 msgid "Invert Colors"
 msgstr "Renkleri Tersle"
@@ -780,10 +780,10 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Dikdörtgen"
 
 msgid "Isometric"
-msgstr ""
+msgstr "İzometrik"
 
 msgid "All"
 msgstr ""
