@@ -10,6 +10,7 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 
 ### Added
 - The Web (HTML5) is now a supported platform of Pixelorama! It is now possible to save .png and .pxo files, as well as load image and palette files in the Web version. Made possible thanks to https://github.com/Pukkah/HTML5-File-Exchange-for-Godot
+- Windows, Linux, macOS and Web builds are now automatically generated every time a commit is pushed to master by GitHub Actions.
 - Project tabs! You can now have multiple projects open at the same time, and access each one with tabs. 
 - Gradient generation. A new option under the "Image" menu that lets you generate a RGB gradient in the current cel.
 - The dialog windows of most image effects have been improved. You can now select if you want the effect to apply in the current cel, the entire frame, all frames or even all projects (tabs)!
@@ -51,6 +52,9 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - When making a straight line, a preview of how the line's pixels will look is now being shown. ([#260](https://github.com/Orama-Interactive/Pixelorama/pull/260))
 - Drawing lines with Ctrl are now constrained at 1:1 and 1:2 ([#201](https://github.com/Orama-Interactive/Pixelorama/issues/201))
 - Pixelorama now remembers the selected colors, tools and their options when it's closed and re-opened. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
+- The "pixelorama" folder, which contains data like Brushes, Patterns and Palettes has been renamed to "pixelorama_data" for all non-XDG directory paths.
+- Mac builds will now have the execute permission by default, and they will be in `.dmg` form. ([#319](https://github.com/Orama-Interactive/Pixelorama/pull/319))
+- Linux builds will also have the execute permission by default.
 - Drawing brushes with mirror also mirrors the images of the brushes themselves. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - When making a new palette or importing one and its name already exists, Pixelorama will add a number to its name. For example, "Palette_Name" would become "Palette_Name (2)", "Palette_Name (3)", etc.
 - Re-organized preferences dialog.

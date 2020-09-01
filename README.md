@@ -96,4 +96,5 @@ As of right now, most of the code is written using GDScript, so the mono version
 - All [Godot](https://github.com/godotengine/godot) contributors! Without Godot, Pixelorama would not exist.
 - https://github.com/jegor377/godot-gdgifexporter - the gif exporter Pixelorama uses.
 - https://github.com/Pukkah/HTML5-File-Exchange-for-Godot - responsible for file exchange in Pixelorama's HTML5 (Web) version.
+- https://github.com/aBARICHELLO/godot-ci - for creating a Godot Docker image that lets us export Pixelorama automatically using GitHub Actions.
 - The entire Pixelorama community! Contributors, donors, translators, users, you all have a special place in our hearts! <3
