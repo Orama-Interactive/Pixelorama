@@ -26,7 +26,7 @@
         <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" />
     </a>
     <a href="https://discord.gg/GTMtr8s">
-        <img src="https://discordapp.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
+        <img src="https://discord.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
     </a>
     <a href="https://crowdin.com/project/pixelorama">
         <img src="https://badges.crowdin.net/pixelorama/localized.svg" alt="Crowdin Localized %" />
