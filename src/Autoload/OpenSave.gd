@@ -504,12 +504,26 @@ func remove_backup_by_path(project_path : String, backup_path : String) -> void:
 
 
 func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
-	for i in range(project_paths.size()):
-		# If project path is the same as backup save path -> the backup was untitled
-		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
-		if backup_save_paths.size() == backup_paths.size():
-			backup_save_paths[i] = backup_paths[i]
+	# Clear non-existant backups
+	var deleted_backup_paths := []
+	var dir := Directory.new()
+	for backup in backup_paths:
+		if !dir.file_exists(backup):
+			if Global.config_cache.has_section_key("backups", backup):
+				Global.config_cache.erase_section_key("backups", backup)
+				Global.config_cache.save("user://cache.ini")
+			project_paths.remove(backup_paths.find(backup))
+			deleted_backup_paths.append(backup)
 
+	for deleted in deleted_backup_paths:
+		backup_paths.erase(deleted)
+
+	# Load the backup files
+	for i in range(project_paths.size()):
+		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
+		backup_save_paths[i] = backup_paths[i]
+
+		# If project path is the same as backup save path -> the backup was untitled
 		if project_paths[i] != backup_paths[i]: # If the user has saved
 			current_save_paths[i] = project_paths[i]
 			Global.window_title = project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
