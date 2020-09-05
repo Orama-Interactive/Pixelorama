@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-08-27 11:42\n"
+"PO-Revision-Date: 2020-08-27 17:04\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1099,6 +1099,9 @@ msgstr ""
 
 msgid "Lock/unlock layer"
 msgstr "Fiksi/malfiksi tavolon"
+
+msgid "Frame: %s, Layer: %s"
+msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"

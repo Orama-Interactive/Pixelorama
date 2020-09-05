@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2020-08-27 11:41\n"
+"PO-Revision-Date: 2020-08-27 17:04\n"
 
 msgid "OK"
 msgstr ""
@@ -1097,6 +1097,9 @@ msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Frame: %s, Layer: %s"
 msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
