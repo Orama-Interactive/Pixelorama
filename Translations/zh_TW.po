@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-22 08:48\n"
+"PO-Revision-Date: 2020-08-28 03:26\n"
 
 msgid "OK"
 msgstr "確定"
@@ -523,11 +523,20 @@ msgstr "更新紀錄"
 msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr "Pixelorama - 像素化你的夢想！"
+
 msgid "Developed by Orama Interactive"
 msgstr "由Orama Interactive開發"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr "版權所有 2019-2020 Orama Interactive"
+
 msgid "Website"
 msgstr "官網"
+
+msgid "GitHub Repo"
+msgstr "GitHub 項目"
 
 msgid "Donate"
 msgstr "捐款"
@@ -606,6 +615,9 @@ msgstr "韓文"
 
 msgid "Hungarian"
 msgstr "匈牙利文"
+
+msgid "Romanian"
+msgstr "羅馬尼亞文"
 
 msgid "Development Team"
 msgstr "開發團隊"
@@ -852,14 +864,14 @@ msgstr "畫筆："
 msgid "Select a brush"
 msgstr "選擇畫筆"
 
-msgid "Brush: Pixel"
-msgstr "畫筆: 像素"
+msgid "Pixel brush"
+msgstr "像素畫筆"
 
-msgid "Brush: Circle"
-msgstr "畫筆: 圓形"
+msgid "Circle brush"
+msgstr "圓形畫筆"
 
-msgid "Brush: Filled Circle"
-msgstr "畫筆: 填滿的圓形"
+msgid "Filled circle brush"
+msgstr "填滿圓形畫筆"
 
 msgid "Custom brush"
 msgstr "自訂畫筆"
@@ -867,11 +879,17 @@ msgstr "自訂畫筆"
 msgid "Brush size:"
 msgstr "畫筆大小："
 
-msgid "Overwrite"
-msgstr "覆寫"
+msgid "Overwrite Color"
+msgstr "覆寫顏色"
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏色"
 
 msgid "Pixel Perfect"
 msgstr "完美像素"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr "去除邊緣上多餘的像素使線條平滑"
 
 msgid "Brush color from"
 msgstr "畫筆顏色"
@@ -1019,8 +1037,29 @@ msgstr "未來畫面"
 msgid "Manage frame tags"
 msgstr "管理影格標籤"
 
+msgid "Frame Tag Properties"
+msgstr "影格標籤屬性"
+
+msgid "Add a new frame tag"
+msgstr "新增影格標籤"
+
+msgid "Name:"
+msgstr "名稱："
+
+msgid "From:"
+msgstr "從："
+
+msgid "To:"
+msgstr "到："
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "動畫只播放相同標籤的影格"
+
+msgid "Tag %s (Frame %s)"
+msgstr "標籤 %s (影格 %s)"
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr "標籤 %s (影格 %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1085,6 +1124,9 @@ msgstr "開關圖層可視"
 
 msgid "Lock/unlock layer"
 msgstr "鎖住/解鎖圖層"
+
+msgid "Frame: %s, Layer: %s"
+msgstr "影格：%s，圖層：%s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1222,6 +1264,9 @@ msgstr "使用目前左右顏色"
 
 msgid "Create a new empty palette?"
 msgstr "創建新的空白色盤?"
+
+msgid "Error"
+msgstr "錯誤"
 
 msgid "Error: Palette must have a valid name."
 msgstr "錯誤: 色盤名字無法使用"

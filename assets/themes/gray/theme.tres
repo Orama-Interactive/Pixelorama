@@ -258,6 +258,7 @@ border_width_top = 6
 border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.2, 0.2, 0.2, 1 )
+expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
@@ -274,6 +275,7 @@ border_width_top = 6
 border_width_right = 10
 border_width_bottom = 8
 border_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id=31]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )

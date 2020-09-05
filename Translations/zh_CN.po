@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-08-22 00:48\n"
+"PO-Revision-Date: 2020-08-28 01:14\n"
 
 msgid "OK"
 msgstr "确定"
@@ -524,11 +524,20 @@ msgstr "更新日志"
 msgid "About Pixelorama"
 msgstr "关于 Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr "Pixelorama - 像素化您的梦想！"
+
 msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr "版权所有 2019-2020 Orama Interactive"
+
 msgid "Website"
 msgstr "网站"
+
+msgid "GitHub Repo"
+msgstr "GitHub 项目"
 
 msgid "Donate"
 msgstr "捐赠"
@@ -607,6 +616,9 @@ msgstr "韩语"
 
 msgid "Hungarian"
 msgstr "匈牙利语"
+
+msgid "Romanian"
+msgstr "罗马尼亚文"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -853,14 +865,14 @@ msgstr "画笔:"
 msgid "Select a brush"
 msgstr "选择一个画笔"
 
-msgid "Brush: Pixel"
-msgstr "画笔: 像素"
+msgid "Pixel brush"
+msgstr "像素画笔"
 
-msgid "Brush: Circle"
-msgstr "画笔: 圆圈"
+msgid "Circle brush"
+msgstr "圆形画笔"
 
-msgid "Brush: Filled Circle"
-msgstr "画笔: 实心圆形"
+msgid "Filled circle brush"
+msgstr "填充圆形画笔"
 
 msgid "Custom brush"
 msgstr "自定义画笔"
@@ -868,11 +880,17 @@ msgstr "自定义画笔"
 msgid "Brush size:"
 msgstr "画笔大小:"
 
-msgid "Overwrite"
-msgstr "覆盖"
+msgid "Overwrite Color"
+msgstr "覆盖颜色"
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr "覆盖颜色而不是混合颜色。 此选项仅与不完全不透明的颜色有关"
 
 msgid "Pixel Perfect"
 msgstr "完美像素"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr "通过去除边缘上多余的像素使线条平滑"
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
@@ -1020,8 +1038,29 @@ msgstr "未来帧"
 msgid "Manage frame tags"
 msgstr "管理帧标签"
 
+msgid "Frame Tag Properties"
+msgstr "覆盖标签属性"
+
+msgid "Add a new frame tag"
+msgstr "添加一个新的帧标签"
+
+msgid "Name:"
+msgstr "名称："
+
+msgid "From:"
+msgstr "从："
+
+msgid "To:"
+msgstr "到："
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "动画仅在同一个标签的帧上播放"
+
+msgid "Tag %s (Frame %s)"
+msgstr "标签 %s (帧 %s)"
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr "标签 %s (帧 %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1087,6 +1126,9 @@ msgstr "切换图层可见性"
 
 msgid "Lock/unlock layer"
 msgstr "锁定/解锁图层"
+
+msgid "Frame: %s, Layer: %s"
+msgstr "帧： %s, 图层：%s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1224,6 +1266,9 @@ msgstr "使用当前左侧和右侧颜色"
 
 msgid "Create a new empty palette?"
 msgstr "创建一个新的空调色板?"
+
+msgid "Error"
+msgstr "错误"
 
 msgid "Error: Palette must have a valid name."
 msgstr "错误：调色板必须具有有效的名称。"

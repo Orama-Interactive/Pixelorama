@@ -7,7 +7,7 @@ onready var popup_menu : PopupMenu = $PopupMenu
 
 
 func _ready() -> void:
-	hint_tooltip = "Frame: %s, Layer: %s" % [frame + 1, layer]
+	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
 		popup_menu.set_item_text(4, "Unlink Cel")
@@ -16,6 +16,10 @@ func _ready() -> void:
 		get_node("LinkedIndicator").visible = false
 		popup_menu.set_item_text(4, "Link Cel")
 		popup_menu.set_item_metadata(4, "Link Cel")
+
+	# Reset the checkers size because it assumes you want the same size as the canvas
+	var checker = $CelTexture/TransparentChecker
+	checker.rect_size = checker.get_parent().rect_size
 
 
 func _on_CelButton_pressed() -> void:

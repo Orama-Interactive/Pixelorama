@@ -94,7 +94,7 @@ func setup_image_menu() -> void:
 		"Outline" : 0,
 		"Adjust Hue/Saturation/Value" : 0,
 		"Gradient" : 0,
-		"Shader" : 0
+		# "Shader" : 0
 		}
 	var image_menu : PopupMenu = Global.image_menu.get_popup()
 
@@ -198,7 +198,7 @@ func export_file() -> void:
 		Global.export_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		Global.export_dialog.external_export()
+		Export.external_export()
 
 
 func edit_menu_id_pressed(id : int) -> void:
@@ -352,8 +352,6 @@ func show_resize_canvas_popup() -> void:
 
 
 func show_rotate_image_popup() -> void:
-	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
-	Global.control.get_node("Dialogs/ImageEffects/RotateImage").set_sprite(image)
 	Global.control.get_node("Dialogs/ImageEffects/RotateImage").popup_centered()
 	Global.dialog_open(true)
 

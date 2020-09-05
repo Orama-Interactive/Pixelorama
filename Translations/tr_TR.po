@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-21 17:15\n"
+"PO-Revision-Date: 2020-08-31 15:00\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -381,7 +381,7 @@ msgid "Restore default value"
 msgstr "Varsayılanları yükle"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Yumuşak Yakınlaştırma"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
@@ -399,7 +399,7 @@ msgid "Color:"
 msgstr "Renk:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Kılavuz çizgileri rengi:"
 
 msgid "System Language"
 msgstr "Sistem Dili"
@@ -426,13 +426,13 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Geçerli kare"
 
 msgid "All frames"
-msgstr ""
+msgstr "Tüm Kareler"
 
 msgid "All projects"
-msgstr ""
+msgstr "Tüm projeler"
 
 msgid "Invert Colors"
 msgstr "Renkleri Tersle"
@@ -453,7 +453,7 @@ msgid "Desaturation"
 msgstr ""
 
 msgid "Outline"
-msgstr ""
+msgstr "Anahat"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
@@ -524,11 +524,20 @@ msgstr "Değişiklikler"
 msgid "About Pixelorama"
 msgstr "Pixelorama Hakkında"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "İnternet sitesi"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Bağış"
@@ -607,6 +616,9 @@ msgstr "Korece"
 
 msgid "Hungarian"
 msgstr "Macarca"
+
+msgid "Romanian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -768,10 +780,10 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Dikdörtgen"
 
 msgid "Isometric"
-msgstr ""
+msgstr "İzometrik"
 
 msgid "All"
 msgstr ""
@@ -842,14 +854,14 @@ msgstr "Fırça:"
 msgid "Select a brush"
 msgstr "Bir fırça seç"
 
-msgid "Brush: Pixel"
-msgstr "Fırça: Piksel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Fırça: Daire"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Fırça: Dolu Daire"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Özel fırça"
@@ -857,10 +869,16 @@ msgstr "Özel fırça"
 msgid "Brush size:"
 msgstr "Fırça boyutu:"
 
-msgid "Overwrite"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Brush color from"
@@ -1002,7 +1020,28 @@ msgstr ""
 msgid "Manage frame tags"
 msgstr ""
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
+msgstr ""
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
 msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
@@ -1068,6 +1107,9 @@ msgstr ""
 
 msgid "Lock/unlock layer"
 msgstr "Katmanı kilitle/aç"
+
+msgid "Frame: %s, Layer: %s"
+msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1204,6 +1246,9 @@ msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Yeni palet oluşturulsun mu?"
+
+msgid "Error"
+msgstr ""
 
 msgid "Error: Palette must have a valid name."
 msgstr "Hata: Paletin herhangi bir ismi olmalıdır."

@@ -19,7 +19,7 @@ const languages_dict := {
 	"zh_TW" : ["繁體中文", "Chinese Traditional"],
 	"no_NO" : ["Norsk", "Norwegian"],
 	"hu_HU" : ["Magyar", "Hungarian"],
-	"ro_RO" : ["Romanian", "Romanian"],
+	"ro_RO" : ["Română", "Romanian"],
 	"ko_KR" : ["한국어", "Korean"],
 }
 

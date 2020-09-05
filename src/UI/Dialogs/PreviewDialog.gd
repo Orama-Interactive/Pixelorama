@@ -23,7 +23,7 @@ onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushN
 
 func _on_PreviewDialog_about_to_show() -> void:
 	var img_texture := ImageTexture.new()
-	img_texture.create_from_image(image)
+	img_texture.create_from_image(image, 0)
 	texture_rect.texture = img_texture
 	spritesheet_options.get_node("HorizontalFrames").max_value = min(spritesheet_options.get_node("HorizontalFrames").max_value, image.get_size().x)
 	spritesheet_options.get_node("VerticalFrames").max_value = min(spritesheet_options.get_node("VerticalFrames").max_value, image.get_size().y)

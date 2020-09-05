@@ -31,6 +31,7 @@ margin_right = 112.0
 margin_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
+hint_tooltip = "Makes lines smooth by removing the extra pixels on the edges"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Pixel Perfect"

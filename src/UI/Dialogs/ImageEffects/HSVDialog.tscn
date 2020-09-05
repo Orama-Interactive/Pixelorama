@@ -12,147 +12,134 @@ window_title = "Adjust HSV"
 resizable = true
 script = ExtResource( 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
+margin_right = 455.0
+margin_bottom = 324.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 442.0
-margin_bottom = 270.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Preview" type="TextureRect" parent="MarginContainer/VBoxContainer"]
-margin_right = 437.0
-margin_bottom = 149.0
+[node name="Preview" type="TextureRect" parent="VBoxContainer"]
+margin_right = 447.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
 size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="MarginContainer/VBoxContainer/Preview" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
 show_behind_parent = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 153.0
-margin_right = 437.0
-margin_bottom = 237.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 447.0
+margin_bottom = 288.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Names" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 79.0
+[node name="Names" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 81.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.9
 custom_constants/separation = 8
 
-[node name="Hue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Names"]
-margin_right = 79.0
+[node name="Hue" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
+margin_right = 81.0
 margin_bottom = 14.0
 text = "Hue"
 align = 2
 
-[node name="Saturation" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Names"]
+[node name="Saturation" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
 margin_top = 22.0
-margin_right = 79.0
+margin_right = 81.0
 margin_bottom = 36.0
 text = "Saturation"
 align = 2
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Names"]
+[node name="Value" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
 margin_top = 44.0
-margin_right = 79.0
+margin_right = 81.0
 margin_bottom = 58.0
 text = "Value"
 align = 2
 
-[node name="Sliders" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 89.0
-margin_right = 352.0
+[node name="Sliders" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 91.0
+margin_right = 362.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 custom_constants/separation = 7
 
-[node name="Hue" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
-margin_right = 263.0
+[node name="Hue" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
+margin_right = 271.0
 margin_bottom = 16.0
 mouse_default_cursor_shape = 2
 min_value = -180.0
 max_value = 180.0
 
-[node name="Saturation" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
+[node name="Saturation" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 23.0
-margin_right = 263.0
+margin_right = 271.0
 margin_bottom = 39.0
 mouse_default_cursor_shape = 2
 min_value = -100.0
 
-[node name="Value" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/Sliders"]
+[node name="Value" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 46.0
-margin_right = 263.0
+margin_right = 271.0
 margin_bottom = 62.0
 mouse_default_cursor_shape = 2
 min_value = -100.0
 
-[node name="TextBoxes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 362.0
-margin_right = 436.0
+[node name="TextBoxes" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 372.0
+margin_right = 446.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 custom_constants/separation = 6
 
-[node name="Hue" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
+[node name="Hue" type="SpinBox" parent="VBoxContainer/HBoxContainer/TextBoxes"]
 margin_right = 74.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 1
 min_value = -180.0
 max_value = 180.0
 
-[node name="Saturation" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
+[node name="Saturation" type="SpinBox" parent="VBoxContainer/HBoxContainer/TextBoxes"]
 margin_top = 30.0
 margin_right = 74.0
 margin_bottom = 54.0
 mouse_default_cursor_shape = 1
 min_value = -100.0
 
-[node name="Value" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes"]
+[node name="Value" type="SpinBox" parent="VBoxContainer/HBoxContainer/TextBoxes"]
 margin_top = 60.0
 margin_right = 74.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 1
 min_value = -100.0
 
-[node name="AffectHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 241.0
-margin_right = 437.0
-margin_bottom = 265.0
+[node name="AffectHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 292.0
+margin_right = 447.0
+margin_bottom = 316.0
 
-[node name="SelectionCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/AffectHBoxContainer"]
+[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/AffectHBoxContainer"]
 margin_right = 160.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Only affect selection"
 
-[node name="AffectOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/AffectHBoxContainer"]
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/AffectHBoxContainer"]
 margin_left = 164.0
 margin_right = 263.0
 margin_bottom = 24.0
@@ -160,9 +147,9 @@ mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]

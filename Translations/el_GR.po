@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-08-25 13:50\n"
+"PO-Revision-Date: 2020-08-27 17:11\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -524,11 +524,20 @@ msgstr "Καταγραφές αλλαγών"
 msgid "About Pixelorama"
 msgstr "Σχετικά με το Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr "Pixelorama - Pixelate your dreams!"
+
 msgid "Developed by Orama Interactive"
 msgstr "Φτιαγμένο από την Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr "Copyright 2019-2020 Orama Interactive"
+
 msgid "Website"
 msgstr "Ιστοσελίδα"
+
+msgid "GitHub Repo"
+msgstr "GitHub Αποθετήριο"
 
 msgid "Donate"
 msgstr "Κάντε μια δωρεά"
@@ -607,6 +616,9 @@ msgstr "Κορεάτικα"
 
 msgid "Hungarian"
 msgstr "Ουγγρικά"
+
+msgid "Romanian"
+msgstr "Ρουμανικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
@@ -853,14 +865,14 @@ msgstr "Πινέλο:"
 msgid "Select a brush"
 msgstr "Επιλέξτε ένα πινέλο"
 
-msgid "Brush: Pixel"
-msgstr "Πινέλο: Εικονοστοιχείο"
+msgid "Pixel brush"
+msgstr "Πινέλο εικονοστοιχείου"
 
-msgid "Brush: Circle"
-msgstr "Πινέλο: Κύκλος"
+msgid "Circle brush"
+msgstr "Πινέλο κύκλου"
 
-msgid "Brush: Filled Circle"
-msgstr "Πινέλο: Κύκλος με Γέμισμα"
+msgid "Filled circle brush"
+msgstr "Πινέλου κύκλου με γέμισμα"
 
 msgid "Custom brush"
 msgstr "Προσαρμοσμένο πινέλο"
@@ -868,11 +880,17 @@ msgstr "Προσαρμοσμένο πινέλο"
 msgid "Brush size:"
 msgstr "Μέγεθος πινέλου:"
 
-msgid "Overwrite"
-msgstr "Αντικατάσταση"
+msgid "Overwrite Color"
+msgstr "Αντικατάσταση Χρώματος"
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr "Αντικαθιστά το χρώμα αντί να το συνδυάζει. Αυτή η επιλογή σχετίζεται μόνο με χρώματα που δεν είναι πλήρως αδιαφανή"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
@@ -1020,8 +1038,29 @@ msgstr "Μελλοντικά καρέ"
 msgid "Manage frame tags"
 msgstr "Διαχείριση ετικετών καρέ"
 
+msgid "Frame Tag Properties"
+msgstr "Ιδιότητες ετικετών καρέ"
+
+msgid "Add a new frame tag"
+msgstr "Προσθήκη νέας ετικέτας καρέ"
+
+msgid "Name:"
+msgstr "Όνομα:"
+
+msgid "From:"
+msgstr "Από:"
+
+msgid "To:"
+msgstr "Έως:"
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Η κίνηση παίζει μόνο σε καρέ της ίδιας καρτέλας"
+
+msgid "Tag %s (Frame %s)"
+msgstr "Ετίκετα %s (Καρέ %s)"
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr "Ετίκετα %s (Καρέ %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1087,6 +1126,9 @@ msgstr "Εναλλαγή της ορατότητας της στρώσης"
 
 msgid "Lock/unlock layer"
 msgstr "Κλείδωμα/ξεκλείδωμα της στρώσης"
+
+msgid "Frame: %s, Layer: %s"
+msgstr "Καρέ: %s, Στρώση: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1224,6 +1266,9 @@ msgstr "Χρήση των επιλεγμένων χρωμάτων (αριστε�
 
 msgid "Create a new empty palette?"
 msgstr "Δημιουργία νέας κενής παλέτας;"
+
+msgid "Error"
+msgstr "Σφάλμα"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Σφάλμα: Η παλέτα πρέπει να έχει έγκυρο όνομα."

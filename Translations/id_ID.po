@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-08-21 17:14\n"
+"PO-Revision-Date: 2020-08-27 17:04\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -524,11 +524,20 @@ msgstr "Perubahan"
 msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr "Dibuat oleh Orama Interactive"
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
 msgstr "Situs web"
+
+msgid "GitHub Repo"
+msgstr ""
 
 msgid "Donate"
 msgstr "Donasi"
@@ -606,6 +615,9 @@ msgid "Korean"
 msgstr ""
 
 msgid "Hungarian"
+msgstr ""
+
+msgid "Romanian"
 msgstr ""
 
 msgid "Development Team"
@@ -853,14 +865,14 @@ msgstr "Kuas:"
 msgid "Select a brush"
 msgstr "Pilih satu kuas"
 
-msgid "Brush: Pixel"
-msgstr "Kuas: Pixel"
+msgid "Pixel brush"
+msgstr ""
 
-msgid "Brush: Circle"
-msgstr "Kuas: Bulat"
+msgid "Circle brush"
+msgstr ""
 
-msgid "Brush: Filled Circle"
-msgstr "Kuas: Bulat Penuh"
+msgid "Filled circle brush"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Kuas kostum"
@@ -868,10 +880,16 @@ msgstr "Kuas kostum"
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
 
-msgid "Overwrite"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Brush color from"
@@ -1017,8 +1035,29 @@ msgstr "Frame setelah"
 msgid "Manage frame tags"
 msgstr "Ganti tanda frame (frame tags)"
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animasi dimainkan hanya jika frame memiliki tanda yang sama"
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1084,6 +1123,9 @@ msgstr "Sembunyikan/Perlihatkan lapisan/layer"
 
 msgid "Lock/unlock layer"
 msgstr "Kunci lapisan/layer"
+
+msgid "Frame: %s, Layer: %s"
+msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1221,6 +1263,9 @@ msgstr ""
 
 msgid "Create a new empty palette?"
 msgstr "Buat palet kosong baru?"
+
+msgid "Error"
+msgstr ""
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: nama palet tidak valid."

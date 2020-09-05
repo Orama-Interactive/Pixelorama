@@ -512,10 +512,19 @@ msgstr ""
 msgid "About Pixelorama"
 msgstr ""
 
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr ""
+
 msgid "Developed by Orama Interactive"
 msgstr ""
 
+msgid "Copyright 2019-2020 Orama Interactive"
+msgstr ""
+
 msgid "Website"
+msgstr ""
+
+msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
@@ -825,13 +834,13 @@ msgstr ""
 msgid "Select a brush"
 msgstr ""
 
-msgid "Brush: Pixel"
+msgid "Pixel brush"
 msgstr ""
 
-msgid "Brush: Circle"
+msgid "Circle brush"
 msgstr ""
 
-msgid "Brush: Filled Circle"
+msgid "Filled circle brush"
 msgstr ""
 
 msgid "Custom brush"
@@ -840,10 +849,16 @@ msgstr ""
 msgid "Brush size:"
 msgstr ""
 
-msgid "Overwrite"
+msgid "Overwrite Color"
+msgstr ""
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Brush color from"
@@ -985,7 +1000,28 @@ msgstr ""
 msgid "Manage frame tags"
 msgstr ""
 
+msgid "Frame Tag Properties"
+msgstr ""
+
+msgid "Add a new frame tag"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "From:"
+msgstr ""
+
+msgid "To:"
+msgstr ""
+
 msgid "Animation plays only on frames of the same tag"
+msgstr ""
+
+msgid "Tag %s (Frame %s)"
+msgstr ""
+
+msgid "Tag %s (Frames %s-%s)"
 msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
@@ -1050,6 +1086,9 @@ msgid "Toggle layer's visibility"
 msgstr ""
 
 msgid "Lock/unlock layer"
+msgstr ""
+
+msgid "Frame: %s, Layer: %s"
 msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
@@ -1186,6 +1225,9 @@ msgid "Use current left & right colors"
 msgstr ""
 
 msgid "Create a new empty palette?"
+msgstr ""
+
+msgid "Error"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
