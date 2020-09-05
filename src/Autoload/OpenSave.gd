@@ -504,7 +504,8 @@ func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
 	for i in range(project_paths.size()):
 		# If project path is the same as backup save path -> the backup was untitled
 		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
-		backup_save_paths[i] = backup_paths[i]
+		if backup_save_paths.size() == backup_paths.size():
+			backup_save_paths[i] = backup_paths[i]
 
 		if project_paths[i] != backup_paths[i]: # If the user has saved
 			current_save_paths[i] = project_paths[i]
