@@ -496,7 +496,10 @@ func remove_backup(i : int) -> void:
 
 func remove_backup_by_path(project_path : String, backup_path : String) -> void:
 	Directory.new().remove(backup_path)
-	Global.config_cache.erase_section_key("backups", project_path)
+	if Global.config_cache.has_section_key("backups", project_path):
+		Global.config_cache.erase_section_key("backups", project_path)
+	elif Global.config_cache.has_section_key("backups", backup_path):
+		Global.config_cache.erase_section_key("backups", backup_path)
 	Global.config_cache.save("user://cache.ini")
 
 
