@@ -94,7 +94,7 @@ func setup_image_menu() -> void:
 		"Outline" : 0,
 		"Adjust Hue/Saturation/Value" : 0,
 		"Gradient" : 0,
-		"Shader" : 0
+		# "Shader" : 0
 		}
 	var image_menu : PopupMenu = Global.image_menu.get_popup()
 
