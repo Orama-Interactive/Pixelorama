@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-08-27 17:05\n"
+"PO-Revision-Date: 2020-09-06 14:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,16 +28,16 @@ msgid "Please Confirm..."
 msgstr "Prosím, potvrďte..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Název souboru:"
 
 msgid "Image Size"
 msgstr "Velikost obrázku"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Velikost plátna"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Velikost snímku"
 
 msgid "Width:"
 msgstr "Šířka:"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Výška:"
 
 msgid "Center"
-msgstr ""
+msgstr "Na střed"
 
 msgid "File"
 msgstr "Soubor"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "Uložit jako..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Použít ZSTD kompresi"
 
 msgid "Import"
 msgstr "Importovat"
@@ -112,10 +112,10 @@ msgid "Redo"
 msgstr "Znovu"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopírovat"
 
 msgid "Paste"
-msgstr ""
+msgstr "Vložit"
 
 msgid "Delete"
 msgstr "Smazat"
@@ -127,7 +127,7 @@ msgid "Crop Image"
 msgstr "Oříznout obrázek"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Změnit velikost plátna"
 
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Smazat výběr"
 
 msgid "Flip"
-msgstr ""
+msgstr "Překlopit"
 
 msgid "Flip Horizontal"
 msgstr "Překlopit vodorovně"
@@ -163,10 +163,10 @@ msgid "Show Animation Timeline"
 msgstr "Zobrazit časovou osu animace"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen mód"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Celoobrazovkový režim"
 
 msgid "Fill with color:"
 msgstr "Vyplnit barvou:"
@@ -178,40 +178,40 @@ msgid "Open File(s)"
 msgstr "Otevřít soubor(y)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Nastavení importu"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importovat jako:"
 
 msgid "New tab"
-msgstr ""
+msgstr "Nová záložka"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Spritesheet (nová záložka)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Nový snímek"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nová vrstva"
 
 msgid "New palette"
-msgstr ""
+msgstr "Nová paleta"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nový štětec"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nový vzor"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Vodorovné snímky:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Svislé snímky:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Druh štětce:"
 
 msgid "File brush"
 msgstr ""
