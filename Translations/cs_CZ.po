@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-09-06 14:46\n"
+"PO-Revision-Date: 2020-09-06 15:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,7 +163,7 @@ msgid "Show Animation Timeline"
 msgstr "Zobrazit časovou osu animace"
 
 msgid "Zen Mode"
-msgstr "Zen mód"
+msgstr "Zen režim"
 
 msgid "Fullscreen Mode"
 msgstr "Celoobrazovkový režim"
