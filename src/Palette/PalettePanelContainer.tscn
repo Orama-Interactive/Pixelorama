@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Palette/PaletteContainer.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/dark_themes/palette/edit_palette.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://src/Palette/PaletteImportFileDialog.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Palette/NewPaletteDialog.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Palette/EditPalettePopup.tscn" type="PackedScene" id=7]
+
+[sub_resource type="ButtonGroup" id=1]
 
 [node name="PalettePanelContainer" type="PanelContainer"]
 margin_left = 15.0
@@ -160,6 +162,12 @@ size_flags_horizontal = 3
 columns = 10
 script = ExtResource( 1 )
 
+[node name="DummyBtn" type="Button" parent="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer"]
+visible = false
+margin_right = 12.0
+margin_bottom = 20.0
+group = SubResource( 1 )
+
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 6 )]
 margin_left = 7.0
 margin_top = 7.0
@@ -175,6 +183,8 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 507.0
 margin_bottom = 307.0
+current_dir = "/home/luiq/data/libDev/git/Pixelorama"
+current_path = "/home/luiq/data/libDev/git/Pixelorama/"
 
 [node name="EditPalettePopup" parent="." instance=ExtResource( 7 )]
 margin_left = 7.0

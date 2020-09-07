@@ -7,9 +7,6 @@
 [ext_resource path="res://assets/themes/palette_styleboxes/palette_stylebox_normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/graphics/palette/palette_button_fill.png" type="Texture" id=6]
 
-
-
-
 [sub_resource type="ImageTexture" id=1]
 
 [node name="PaletteButton" type="Button"]
@@ -22,6 +19,7 @@ custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 1 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
+toggle_mode = true
 action_mode = 0
 button_mask = 3
 icon = SubResource( 1 )

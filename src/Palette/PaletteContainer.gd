@@ -218,6 +218,7 @@ func _display_palette(palette : Palette) -> void:
 		new_button.get_child(0).modulate = color
 		new_button.hint_tooltip = "#" + color_data.data.to_upper() + " " + color_data.name
 		new_button.connect("pressed", self, "on_color_select", [index])
+		new_button.group = $DummyBtn.group
 
 		add_child(new_button)
 		index += 1
