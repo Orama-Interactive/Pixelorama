@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Palette/EditPalettePopup.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/new_frame.png" type="Texture" id=2]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=3]
 [ext_resource path="res://assets/graphics/palette/palette_button_fill.png" type="Texture" id=6]
+
+[sub_resource type="ButtonGroup" id=1]
 
 [node name="EditPalettePopup" type="WindowDialog"]
 margin_right = 600.0
@@ -228,6 +230,15 @@ margin_left = 423.0
 margin_right = 580.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
+
+[node name="DummyBtn" type="Button" parent="."]
+visible = false
+margin_left = 322.0
+margin_top = 10.0
+margin_right = 385.0
+margin_bottom = 30.0
+group = SubResource( 1 )
+text = "Dummy"
 [connection signal="popup_hide" from="." to="." method="_on_EditPalettePopup_popup_hide"]
 [connection signal="color_changed" from="VBoxContainer/HBoxContainer/EditPaletteColorPicker" to="." method="_on_EditPaletteColorPicker_color_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/LeftColor" to="." method="_on_LeftColor_pressed"]

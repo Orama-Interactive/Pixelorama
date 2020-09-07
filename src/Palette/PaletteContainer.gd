@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _clear_swatches() -> void:
 	for child in get_children():
-		if child is BaseButton:
+		if child is BaseButton and child.text != "Dummy":
 			child.disconnect("pressed", self, "on_color_select")
 			child.queue_free()
 

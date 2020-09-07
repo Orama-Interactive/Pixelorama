@@ -167,6 +167,7 @@ visible = false
 margin_right = 12.0
 margin_bottom = 20.0
 group = SubResource( 1 )
+text = "Dummy"
 
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 6 )]
 margin_left = 7.0

@@ -12,6 +12,7 @@ onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorName
 onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
 onready var left_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/LeftColor/NinePatchRect
 onready var right_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/RightColor/NinePatchRect
+onready var dummyBtn = $DummyBtn
 
 
 func _ready() -> void:
@@ -46,6 +47,7 @@ func _display_palette() -> void:
 		new_button.index = index
 		new_button.connect("on_drop_data", self, "on_move_swatch")
 		new_button.connect("pressed", self, "on_swatch_select", [new_button])
+		new_button.group = dummyBtn.group
 
 		palette_grid.add_child(new_button)
 		index += 1
@@ -56,7 +58,7 @@ func _display_palette() -> void:
 
 func _clear_swatches() -> void:
 	for child in palette_grid.get_children():
-		if child is BaseButton:
+		if child is BaseButton and child.text != "Dummy":
 			child.disconnect("on_drop_data", self, "on_move_swatch")
 			child.queue_free()
 
@@ -90,6 +92,7 @@ func _on_AddSwatchButton_pressed() -> void:
 	new_button.index = index
 	new_button.connect("on_drop_data", self, "on_move_swatch")
 	new_button.connect("pressed", self, "on_swatch_select", [new_button])
+	new_button.group = dummyBtn.group
 
 	palette_grid.add_child(new_button)
 	on_swatch_select(new_button)
