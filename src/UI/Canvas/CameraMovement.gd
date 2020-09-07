@@ -101,6 +101,7 @@ func process_direction_action_pressed(event: InputEvent) -> void:
 	var this_direction_press_time : float = Global.key_move_press_time[dir]
 	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
 	offset = offset + move_speed * increment * directional_sign_multipliers[dir] * zoom
+	update_rulers()
 	update_transparent_checker_offset()
 
 
@@ -128,13 +129,12 @@ func _input(event : InputEvent) -> void:
 		elif event is InputEventMouseMotion && drag:
 			offset = offset - event.relative * zoom
 			update_transparent_checker_offset()
+			update_rulers()
 		elif is_action_direction_pressed(event):
 			process_direction_action_pressed(event)
 		elif is_action_direction_released(event):
 			process_direction_action_released(event)
 
-		Global.horizontal_ruler.update()
-		Global.vertical_ruler.update()
 		save_values_to_project()
 
 
@@ -150,11 +150,6 @@ func zoom_camera(dir : int) -> void:
 			tween.interpolate_property(self, "offset", offset, new_offset, 0.05, Tween.TRANS_LINEAR, Tween.EASE_IN)
 			tween.start()
 
-			if name == "Camera2D":
-				Global.zoom_level_label.text = str(round(100 / new_zoom.x)) + " %"
-			elif name == "CameraPreview":
-				Global.preview_zoom_slider.value = -new_zoom.x
-
 	else:
 		var prev_zoom := zoom
 		var zoom_margin = zoom * dir / 10
@@ -165,26 +160,33 @@ func zoom_camera(dir : int) -> void:
 			zoom = zoom_max
 
 		offset = offset + (-0.5 * viewport_size + mouse_pos) * (prev_zoom - zoom)
-		update_transparent_checker_offset()
-		if name == "Camera2D":
-			Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-		elif name == "CameraPreview":
-			Global.preview_zoom_slider.value = -zoom.x
+		zoom_changed()
+
+
+func zoom_changed() -> void:
+	update_transparent_checker_offset()
+	if name == "Camera2D":
+		Global.zoom_level_label.text = str(round(100 / zoom.x)) + " %"
+		update_rulers()
+		for guide in Global.current_project.guides:
+			guide.width = zoom.x * 2
+	elif name == "CameraPreview":
+		Global.preview_zoom_slider.value = -zoom.x
+
+
+func update_rulers() -> void:
+	Global.horizontal_ruler.update()
+	Global.vertical_ruler.update()
 
 
 func _on_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
-	update_transparent_checker_offset()
+	zoom_changed()
 
 
-func zoom_100():
+func zoom_100() -> void:
 	zoom = Vector2.ONE
 	offset = Global.current_project.size / 2
-	update_transparent_checker_offset()
-	Global.zoom_level_label.text = str(round(100 / zoom.x)) + " %"
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
+	zoom_changed()
 
 
 func fit_to_frame(size : Vector2) -> void:
@@ -207,13 +209,7 @@ func fit_to_frame(size : Vector2) -> void:
 
 	zoom = Vector2(1 / ratio, 1 / ratio)
 	offset = size / 2
-	update_transparent_checker_offset()
-	if name == "Camera2D":
-		Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
-		Global.horizontal_ruler.update()
-		Global.vertical_ruler.update()
-	elif name == "CameraPreview":
-		Global.preview_zoom_slider.value = -zoom.x
+	zoom_changed()
 
 
 func save_values_to_project() -> void:

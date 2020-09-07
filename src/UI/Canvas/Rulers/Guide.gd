@@ -10,13 +10,12 @@ var project = Global.current_project
 
 
 func _ready() -> void:
-	width = 0.1
+	width = Global.camera.zoom.x
 	default_color = Global.guide_color
 	project.guides.append(self)
 
 
 func _input(_event : InputEvent):
-	width = Global.camera.zoom.x * 2
 	mouse_pos = get_local_mouse_position()
 	if points.size() < 2:
 		return

@@ -5,7 +5,6 @@ var _texture = preload("res://assets/graphics/dotted_line.png")
 
 
 func _ready() -> void:
-	._ready()
 	has_focus = false
 	visible = false
 	texture = _texture
@@ -23,7 +22,6 @@ func _input(_event : InputEvent) -> void:
 		project.x_symmetry_point = points[0].x * 2 - 1
 
 	yield(get_tree().create_timer(0.01), "timeout")
-	width = Global.camera.zoom.x * 4
 
 
 func outside_canvas() -> bool:
