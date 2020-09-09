@@ -12,12 +12,12 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - The Web (HTML5) is now a supported platform of Pixelorama! It is now possible to save .png and .pxo files, as well as load image and palette files in the Web version. Made possible thanks to https://github.com/Pukkah/HTML5-File-Exchange-for-Godot
 - Windows, Linux, macOS and Web builds are now automatically generated every time a commit is pushed to master by GitHub Actions.
 - Project tabs! You can now have multiple projects open at the same time, and access each one with tabs. 
-- Gradient generation. A new option under the "Image" menu that lets you generate a RGB gradient in the current cel.
-- The dialog windows of most image effects have been improved. You can now select if you want the effect to apply in the current cel, the entire frame, all frames or even all projects (tabs)!
+- Gradient generation. A new option under the "Image" menu that lets you generate a RGB gradient.
+- The dialog windows of most image effects have been improved. You can now select if you want the effect to apply in the selection, the current cel, the entire frame, all frames or even all projects (tabs)!
 - Added previews in all image effect dialog windows with a checkerboard background. Also placed checkerboard backgrounds in the cel buttons of the timeline, and the Export window. ([#206](https://github.com/Orama-Interactive/Pixelorama/issues/206))
 - A new isometric grid!
 - Ability to remove the current palette. ([#239](https://github.com/Orama-Interactive/Pixelorama/pull/239))
-- You can now drag & drop files into the program while it's running to open them. You can open .pxo files, image files and palette (json and gpl) files this way.
+- You can now drag & drop files into the program while it's running to open them. You can open .pxo files, image files and palette (json, gpl and pal) files this way.
 - You can now draw on the tiling mode previews! ([#65](https://github.com/Orama-Interactive/Pixelorama/issues/65))
 - Added Resize Canvas option to Image menu.
 - Added Symmetry Guides. They let you change the axis of symmetry for mirroring. ([#133](https://github.com/Orama-Interactive/Pixelorama/issues/133))
@@ -32,7 +32,6 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - Selection region and size are now being shown when making a selection on the top, next to the position label. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Added color overwrite option for the Pencil tool. ([#282](https://github.com/Orama-Interactive/Pixelorama/pull/282))
 - Flip, desaturation and invert colors now have dialogs with previews and extra options. You can now choose individual color channels to invert, including alpha.
-- Added extra options for most image effects. The user can now choose if the effects will affect the selection, the current cel, current frame, all frames or even all projects!
 - A play button has been added for playing the animation exclusively on the small canvas preview area. A zoom slider for the preview area has been added, too.
 - Added color previews next to the themes in Preferences.
 - Added options for the checkerboard background to follow camera movement and zoom level. ([#311](https://github.com/Orama-Interactive/Pixelorama/pull/311))
@@ -43,7 +42,6 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - The GDNative gif exporter addon has been replaced with a GDScript equivalent. This makes gif exporting possible in all currently supported platforms, and it also adds support for transparency. ([#295](https://github.com/Orama-Interactive/Pixelorama/pull/295))
 - Drawing is no longer limited by the canvas boundaries. This means that, if you have a brush largen than 1px, you can draw on the edges of the canvas. All pixels that are being drawn outside of the canvas will still have no effect.
 - The guides are now the same for all frames.
-- The "Import" option from the file menu has been removed, users can now import image files from "Open".
 - Imported frames are now being cropped to the project's size. It is no longer possible to have multiple sizes for each frame at all in the same project.
 - Pixel perfect is no longer enabled when the brush size is bigger than 1px.
 - The .pxo file structure has been changed. It's now consisted of a JSON-structured metadata part, where all the data that can be stored as text are, and a binary part, that contain all the actual image data for each cel and project brush.
@@ -79,6 +77,9 @@ Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Mi
 - When undoing a removal of a brush, the brush index is no longer incorrect. ([#281](https://github.com/Orama-Interactive/Pixelorama/pull/281))
 - Fix out-of-bounds error when color picking outside the image. ([#291](https://github.com/Orama-Interactive/Pixelorama/pull/291))
 - When a color is being selected from a palette, the outline of the color's button no longer disappears when drawing. ([#329](https://github.com/Orama-Interactive/Pixelorama/pull/329))
+
+### Removed
+- The "Import" option from the file menu has been removed, users can now import image files from "Open".
 <br><br>
 
 ## [v0.7] - 2020-05-16
