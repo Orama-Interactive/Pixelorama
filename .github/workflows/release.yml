@@ -1,0 +1,167 @@
+name: "release"
+
+on:
+  push:
+    branches: [ release ]
+
+env:
+  GODOT_VERSION: 3.2.2
+  EXPORT_NAME: Pixelorama
+  TAG: v0.8
+
+jobs:
+  export-windows:
+    name: Windows Export 🗔
+    runs-on: ubuntu-latest
+    container:
+      image: docker://barichello/godot-ci:3.2.2
+    steps:
+      - name: Setup WINE and rcedit 🍷
+        run: |
+          dpkg --add-architecture i386 && apt-get update && apt-get install -y wine-stable && apt-get install -y wine32
+          chown root:root -R ~
+          wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
+          mkdir -v -p ~/.local/share/rcedit
+          mv rcedit-x64.exe ~/.local/share/rcedit
+          godot -q
+          echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-3.tres
+          echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-3.tres
+      - name: Checkout 🛎️
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Setup 💻
+        run: |
+          mkdir -v -p build/windows-64bit  ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Windows Build 🔧
+        run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
+      - name: Copy pixelorama_data folder 📁
+        run: |
+          cp -R ./pixelorama_data ./build/windows-64bit
+          rm ./build/windows-64bit/pixelorama_data/.gdignore
+      - name: Zip 🗜️
+        run: |
+          cd build
+          zip -r windows-64bit.zip windows-64bit
+      - name: Upload Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/windows-64bit.zip
+          asset_name: ${{env.EXPORT_NAME}}[Windows-64bit].zip
+          tag: ${{env.TAG}}
+          overwrite: true
+
+  export-linux:
+    name: Linux Export 🐧
+    runs-on: ubuntu-latest
+    container:
+      image: docker://barichello/godot-ci:3.2.2
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Setup 💻
+        run: |
+          mkdir -v -p build/linux-64bit ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Linux Build 🔧
+        run: godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
+      - name: Give execute permission ☑️
+        run: 
+          chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
+      - name: Copy pixelorama_data folder 📁
+        run: |
+          cp -R ./pixelorama_data ./build/linux-64bit
+          rm ./build/linux-64bit/pixelorama_data/.gdignore
+      - name: Create tar.gz archive 🗜️
+        run: |
+          cd build
+          tar zcvf linux-64bit.tar.gz linux-64bit
+      - name: Upload Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/linux-64bit.tar.gz
+          asset_name: ${{env.EXPORT_NAME}}[Linux-64bit].tar.gz
+          tag: ${{env.TAG}}
+          overwrite: true
+
+  export-mac:
+    name: Mac Export 🍎
+    runs-on: macos-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Setup environment 🔧
+        run: |
+          export GODOT_VERSION=3.2.2
+          export EXPORT_NAME=Pixelorama
+      - name: Download and extract export templates 💾
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip -a Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Download Godot headless binary 🤖
+        run: |
+          curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
+          unzip -a Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
+      - name: Setup 💻
+        run: mkdir -v -p ./build/mac
+      - name: Mac Build 🔧
+        run: |
+          chown runner ./Godot
+          chmod +x ./Godot
+          ./Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
+      - name: Make application executable 🔧
+        run: |
+          unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
+          chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
+          rm ./build/mac/Pixelorama.zip
+      - name: Fix application icon 🖼
+        run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+      - name: Copy pixelorama_data folder 📁
+        run: |
+          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
+          rm ./build/mac/Pixelorama.app/Contents/MacOS/pixelorama_data/.gdignore
+      - name: Create DMG archive 🔧
+        run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
+      - name: Upload Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/mac/Pixelorama.dmg
+          asset_name: ${{env.EXPORT_NAME}}[Mac].dmg
+          tag: ${{env.TAG}}
+          overwrite: true
+    
+  export-web:
+    name: Web Export 🌐
+    runs-on: ubuntu-latest
+    container:
+      image: docker://barichello/godot-ci:3.2.2
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Setup 💻
+        run: |
+          mkdir -v -p build/web ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build 🔧
+        run: godot -v --export "HTML5" ./build/web/index.html
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build/web # The folder the action should deploy.
