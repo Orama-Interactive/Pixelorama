@@ -32,24 +32,37 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/windows-64bit  ~/.local/share/godot/templates
+          mkdir -v -p build/windows-64bit build/windows-32bit ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
-        run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
+        run: |
+          godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
+          godot -v --export "Windows Desktop 32-bit" ./build/windows-32bit/$EXPORT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/windows-64bit
           rm ./build/windows-64bit/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/windows-32bit
+          rm ./build/windows-32bit/pixelorama_data/.gdignore
       - name: Zip 🗜️
         run: |
           cd build
           zip -r windows-64bit.zip windows-64bit
-      - name: Upload Release Asset 🚀
+          zip -r windows-32bit.zip windows-32bit
+      - name: Upload 64-bit Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./build/windows-64bit.zip
           asset_name: ${{env.EXPORT_NAME}}[Windows-64bit].zip
+          tag: ${{env.TAG}}
+          overwrite: true
+      - name: Upload 32-bit Release Asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/windows-32bit.zip
+          asset_name: ${{env.EXPORT_NAME}}[Windows-32bit].zip
           tag: ${{env.TAG}}
           overwrite: true
 
@@ -65,27 +78,41 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/linux-64bit ~/.local/share/godot/templates
+          mkdir -v -p build/linux-64bit build/linux-32bit ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
-        run: godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
+        run: |
+          godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
+          godot -v --export "Linux/X11 32-bit" ./build/linux-32bit/$EXPORT_NAME.x86
       - name: Give execute permission ☑️
         run: 
           chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
+          chmod +x ./build/linux-32bit/$EXPORT_NAME.x86
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/linux-64bit
           rm ./build/linux-64bit/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/linux-32bit
+          rm ./build/linux-32bit/pixelorama_data/.gdignore
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
           tar zcvf linux-64bit.tar.gz linux-64bit
-      - name: Upload Release Asset 🚀
+          tar zcvf linux-32bit.tar.gz linux-32bit
+      - name: Upload 64-bit Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./build/linux-64bit.tar.gz
           asset_name: ${{env.EXPORT_NAME}}[Linux-64bit].tar.gz
+          tag: ${{env.TAG}}
+          overwrite: true
+      - name: Upload 32-bit Release Asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/linux-32bit.tar.gz
+          asset_name: ${{env.EXPORT_NAME}}[Linux-32bit].tar.gz
           tag: ${{env.TAG}}
           overwrite: true
 
