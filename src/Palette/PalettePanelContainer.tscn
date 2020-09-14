@@ -184,8 +184,6 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 507.0
 margin_bottom = 307.0
-current_dir = "/home/luiq/data/libDev/git/Pixelorama"
-current_path = "/home/luiq/data/libDev/git/Pixelorama/"
 
 [node name="EditPalettePopup" parent="." instance=ExtResource( 7 )]
 margin_left = 7.0

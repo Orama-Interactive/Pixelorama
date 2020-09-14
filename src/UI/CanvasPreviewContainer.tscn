@@ -18,47 +18,54 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
-[node name="CanvasPreviewContainer" type="HBoxContainer"]
-margin_right = 332.0
+[node name="CanvasPreviewContainer" type="PanelContainer"]
+margin_right = 278.0
 margin_bottom = 164.0
+rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingsContainer" type="PanelContainer" parent="."]
-margin_right = 34.0
-margin_bottom = 164.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 27.0
+margin_right = 293.0
 margin_bottom = 157.0
 
-[node name="Label" type="Label" parent="SettingsContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_right = 20.0
+margin_bottom = 150.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_left = 6.0
+margin_right = 14.0
 margin_bottom = 14.0
+size_flags_horizontal = 4
 text = "+"
 align = 1
 
-[node name="PreviewZoomSlider" type="VSlider" parent="SettingsContainer/VBoxContainer"]
+[node name="PreviewZoomSlider" type="VSlider" parent="HBoxContainer/VBoxContainer"]
+margin_left = 2.0
 margin_top = 18.0
-margin_right = 16.0
+margin_right = 18.0
 margin_bottom = 108.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 step = 0.01
 
-[node name="Label2" type="Label" parent="SettingsContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_left = 7.0
 margin_top = 112.0
-margin_right = 20.0
+margin_right = 12.0
 margin_bottom = 126.0
+size_flags_horizontal = 4
 text = "-"
 align = 1
 
-[node name="PlayButton" type="Button" parent="SettingsContainer/VBoxContainer" groups=[
+[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer" groups=[
 "UIButtons",
 ]]
 margin_top = 130.0
@@ -68,7 +75,7 @@ rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="SettingsContainer/VBoxContainer/PlayButton"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/PlayButton"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -83,39 +90,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviewContainer" type="PanelContainer" parent="."]
-margin_left = 38.0
-margin_right = 332.0
-margin_bottom = 164.0
-size_flags_horizontal = 4
-
-[node name="PreviewViewportContainer" type="ViewportContainer" parent="PreviewContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 287.0
-margin_bottom = 157.0
+[node name="PreviewViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 284.0
+margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 
-[node name="Viewport" type="Viewport" parent="PreviewContainer/PreviewViewportContainer"]
-size = Vector2( 280, 150 )
+[node name="Viewport" type="Viewport" parent="HBoxContainer/PreviewViewportContainer"]
+size = Vector2( 260, 150 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="TransparentChecker" parent="PreviewContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="HBoxContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 2 )]
 material = SubResource( 1 )
 
-[node name="CanvasPreview" parent="PreviewContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 1 )]
+[node name="CanvasPreview" parent="HBoxContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 1 )]
 
-[node name="CameraPreview" type="Camera2D" parent="PreviewContainer/PreviewViewportContainer/Viewport"]
+[node name="CameraPreview" type="Camera2D" parent="HBoxContainer/PreviewViewportContainer/Viewport"]
 offset = Vector2( 32, 32 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 4 )
-
-[node name="Panel" type="Panel" parent="."]
-margin_left = 336.0
-margin_right = 336.0
-margin_bottom = 164.0
-[connection signal="value_changed" from="SettingsContainer/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
-[connection signal="toggled" from="SettingsContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_toggled"]

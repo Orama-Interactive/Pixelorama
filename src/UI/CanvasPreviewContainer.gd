@@ -1,9 +1,9 @@
-extends HBoxContainer
+extends PanelContainer
 
 
-onready var canvas_preview = $PreviewContainer/PreviewViewportContainer/Viewport/CanvasPreview
-onready var camera : Camera2D = $PreviewContainer/PreviewViewportContainer/Viewport/CameraPreview
-onready var play_button : Button = $SettingsContainer/VBoxContainer/PlayButton
+onready var canvas_preview = $HBoxContainer/PreviewViewportContainer/Viewport/CanvasPreview
+onready var camera : Camera2D = $HBoxContainer/PreviewViewportContainer/Viewport/CameraPreview
+onready var play_button : Button = $HBoxContainer/VBoxContainer/PlayButton
 
 
 func _on_PreviewZoomSlider_value_changed(value : float) -> void:
