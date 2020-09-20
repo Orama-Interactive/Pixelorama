@@ -5,7 +5,8 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 3.2.2
+  GODOT_VERSION: 3.2.3
+  GODOT_VERSION_MAC: 3.2.2
   EXPORT_NAME: Pixelorama
   TAG: v0.8
 
@@ -14,7 +15,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.2
+      image: docker://barichello/godot-ci:3.2.3
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -70,7 +71,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.2
+      image: docker://barichello/godot-ci:3.2.3
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
@@ -130,14 +131,14 @@ jobs:
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
-          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-          curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          unzip -a Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
+          curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION_MAC}/Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
+          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
+          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
-          curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
-          unzip -a Godot_v${GODOT_VERSION}-stable_mac_headless.64.zip
+          curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
+          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
@@ -171,7 +172,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.2
+      image: docker://barichello/godot-ci:3.2.3
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
