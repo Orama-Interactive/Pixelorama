@@ -66,6 +66,9 @@ func _on_HorizontalRuler_pressed() -> void:
 	guide.type = guide.Types.HORIZONTAL
 	guide.add_point(Vector2(-19999, Global.canvas.current_pixel.y))
 	guide.add_point(Vector2(19999, Global.canvas.current_pixel.y))
+	if guide.points.size() < 2:
+		guide.queue_free()
+		return
 	Global.canvas.add_child(guide)
 	Global.has_focus = false
 	update()
