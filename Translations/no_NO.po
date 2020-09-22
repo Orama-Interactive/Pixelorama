@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-08-27 17:04\n"
+"PO-Revision-Date: 2020-09-22 20:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Directory path or file name is not valid!"
 msgstr "Banen eller filnavnet er ikke gyldig!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Eksport pågår..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -419,19 +419,19 @@ msgid "Light"
 msgstr "Lys"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Bare påvirk merket område"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Denne cellen"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Dette bildet"
 
 msgid "All frames"
-msgstr ""
+msgstr "Alle bilder"
 
 msgid "All projects"
-msgstr ""
+msgstr "Alle prosjekter"
 
 msgid "Invert Colors"
 msgstr "Invertér Farger"
@@ -524,19 +524,19 @@ msgid "About Pixelorama"
 msgstr "Om Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pikselér drømmene dine!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Utviklet av Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive"
-msgstr ""
+msgstr "Opphavsrett 2019-2020 Orama Interactive"
 
 msgid "Website"
 msgstr "Nettside"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Github Repo"
 
 msgid "Donate"
 msgstr "Donér"
@@ -590,7 +590,7 @@ msgid "Spanish"
 msgstr "Spansk"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Katalansk"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -617,7 +617,7 @@ msgid "Hungarian"
 msgstr "Ungarsk"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumensk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
@@ -632,7 +632,7 @@ msgid "GitHub Contributors"
 msgstr "Bidragere på Github"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Kunst av %s"
 
 msgid "untitled"
 msgstr "uten navn"
@@ -784,7 +784,7 @@ msgid "Grid"
 msgstr "Rutenett"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Rutenettype:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
