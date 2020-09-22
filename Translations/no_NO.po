@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-09-22 20:39\n"
+"PO-Revision-Date: 2020-09-22 21:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -787,16 +787,16 @@ msgid "Grid type:"
 msgstr "Rutenettype:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Setter typen rutenett til rektangulær, isometrisk eller begge"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rektangulær"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isometrisk"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "Grid width:"
 msgstr "Rutenettbredde:"
@@ -811,10 +811,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Angir hvor langt fra hverandre de horisontale linjene er i rutenettet"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Isometrisk cellestørrelse:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Angir størrelsen på cellene i et isometrisk rutenett"
 
 msgid "Grid color:"
 msgstr "Rutenettfarge:"
@@ -844,13 +844,13 @@ msgid "Second color of the transparent checker background"
 msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Følg lerretbevegelse"
 
 msgid "The transparent checker follow the movement of canvas"
 msgstr ""
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Følg lerretets forstørrelse"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
@@ -865,13 +865,13 @@ msgid "Select a brush"
 msgstr "Velg en børste"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Pikselbørste"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Sirkelbørste"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Fylt sirkelbørste"
 
 msgid "Custom brush"
 msgstr "Egendefinert Børste"
@@ -880,16 +880,16 @@ msgid "Brush size:"
 msgstr "Børstestørrelse:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Overskriv Farge"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Overskriver en farge i stedet for å blande den. Dette valget gjelder bare farger som ikke er helt ugjennomsiktige"
 
 msgid "Pixel Perfect"
 msgstr "Pikselperfekt"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
 
 msgid "Brush color from"
 msgstr "Børstefarge fra"
@@ -1036,28 +1036,28 @@ msgid "Manage frame tags"
 msgstr "Administrér bildemerkelapper"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Bildetagegenskper"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Legg til ny bildetag"
 
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 msgid "From:"
-msgstr ""
+msgstr "Fra:"
 
 msgid "To:"
-msgstr ""
+msgstr "Til:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Animasjon spiller kun på bilder med samme merkelapp"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Tag %s (Bilde %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Tag %s (Bilder %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1125,7 +1125,7 @@ msgid "Lock/unlock layer"
 msgstr "Lås/lås opp lag"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Bilde: %s, Lag: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1265,7 +1265,7 @@ msgid "Create a new empty palette?"
 msgstr "Opprette en nyt tom palett?"
 
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Feil: Palett må ha et gyldig navn."
@@ -1438,5 +1438,5 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Det oppsto en feil under fjerning av paletten! Feilkode: %s"
 
 msgid "and"
-msgstr ""
+msgstr "og"
 
