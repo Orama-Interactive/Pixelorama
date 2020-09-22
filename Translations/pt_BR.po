@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-08-27 17:04\n"
+"PO-Revision-Date: 2020-09-22 15:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -354,7 +354,7 @@ msgid "General"
 msgstr "Geral"
 
 msgid "Startup"
-msgstr ""
+msgstr "Iniciar"
 
 msgid "Language"
 msgstr "Linguagem"
@@ -375,7 +375,7 @@ msgid "Indicators"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Ligado"
 
 msgid "Restore default value"
 msgstr ""
@@ -432,7 +432,7 @@ msgid "All frames"
 msgstr ""
 
 msgid "All projects"
-msgstr ""
+msgstr "Todos Projetos"
 
 msgid "Invert Colors"
 msgstr "Inverter Cores"
@@ -441,13 +441,13 @@ msgid "Modify Red Channel"
 msgstr ""
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modificar O Canal Verde"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modificar O Canal Azul"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modificar O Canal Alfa"
 
 msgid "Desaturation"
 msgstr "Dessaturação"
@@ -525,19 +525,19 @@ msgid "About Pixelorama"
 msgstr "Sobre Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pixelate os seus sonhos!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Desenvolvido por Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive"
-msgstr ""
+msgstr "Direitos Autorais 2019-2020 Orama Interactive"
 
 msgid "Website"
 msgstr "Site"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Repositório do GitHub"
 
 msgid "Donate"
 msgstr "Doar"
@@ -633,7 +633,7 @@ msgid "GitHub Contributors"
 msgstr "Contribuidores do GitHub"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Arte Feita Por: %s"
 
 msgid "untitled"
 msgstr "sem título"
@@ -773,7 +773,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Exibe um ícone da ferramenta da direita selecionada ao lado do cursor na tela"
 
 msgid "Guides"
-msgstr ""
+msgstr "Guias"
 
 msgid "Guides color:"
 msgstr "Cor das guias:"
@@ -782,22 +782,22 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Cor das guias de régua exibidas na tela"
 
 msgid "Grid"
-msgstr ""
+msgstr "Grade"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Tipo De Grade:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Define o tipo de grade entre retangular, isométrica ou ambas"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Retangular"
 
 msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Tudo"
 
 msgid "Grid width:"
 msgstr "Largura da grade:"
@@ -824,7 +824,7 @@ msgid "A color of the grid"
 msgstr "A cor da grade"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparência"
 
 msgid "Checker size:"
 msgstr "Tamanho do quadriculado xadrez:"
@@ -1045,13 +1045,13 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 msgid "From:"
-msgstr ""
+msgstr "De:"
 
 msgid "To:"
-msgstr ""
+msgstr "Para:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "A animação só é reproduzida em quadros de mesma tag"
@@ -1268,7 +1268,7 @@ msgid "Create a new empty palette?"
 msgstr "Criar uma nova paleta vazia?"
 
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Erro: Paleta deve ter um nome válido."
@@ -1441,5 +1441,5 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Ocorreu um erro ao remover a paleta! Código do erro: %s"
 
 msgid "and"
-msgstr ""
+msgstr "e"
 
