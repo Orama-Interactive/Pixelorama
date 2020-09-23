@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-08-31 15:00\n"
+"PO-Revision-Date: 2020-09-23 12:31\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -530,7 +530,10 @@ msgstr ""
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
-msgid "Copyright 2019-2020 Orama Interactive"
+msgid "Copyright 2019-2020 Orama Interactive and contributors"
+msgstr ""
+
+msgid "©2019-2020 by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
