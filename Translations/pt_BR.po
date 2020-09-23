@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-09-23 14:46\n"
+"PO-Revision-Date: 2020-09-23 15:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -426,10 +426,10 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Moldura atual"
 
 msgid "All frames"
-msgstr ""
+msgstr "Todas as molduras"
 
 msgid "All projects"
 msgstr "Todos Projetos"
@@ -797,7 +797,7 @@ msgid "Rectangular"
 msgstr "Retangular"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isométrico"
 
 msgid "All"
 msgstr "Tudo"
@@ -815,10 +815,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Define a distância entre linhas horizontais da grade"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Tamanho da célula Isométrica:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Define o tamanho das células numa grade isométrica"
 
 msgid "Grid color:"
 msgstr "Cor da grade:"
@@ -848,16 +848,16 @@ msgid "Second color of the transparent checker background"
 msgstr "Segunda cor do xadrez do fundo transparente"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Seguir Movimento da Tela"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "O verificador transparente segue o movimento da tela"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Seguir Nível de Zoom da Tela"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "O verificador transparente segue o nível de zoom da tela"
 
 msgid "Only custom preset can be modified"
 msgstr "Apenas predefinição personalizada pode ser modificada"
@@ -1042,10 +1042,10 @@ msgid "Manage frame tags"
 msgstr "Gerenciar tags de quadro"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Propriedades do quadro"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Adicionar um novo quadro"
 
 msgid "Name:"
 msgstr "Nome:"
@@ -1060,10 +1060,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "A animação só é reproduzida em quadros de mesma tag"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Tag %s (Quadro %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Tag %s (Quadros %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
