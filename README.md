@@ -47,7 +47,7 @@ If you like, consider helping us by sponsoring this project! It would enable us 
 You can also support the development on patreon: [![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
 
 ## Download
-- [Itch.io (Windows, Linux & Mac)](https://orama-interactive.itch.io/pixelorama)
+- [Itch.io (Windows, Linux, Mac & Web)](https://orama-interactive.itch.io/pixelorama)
 - [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
 - [Snap Store (Linux)](https://snapcraft.io/pixelorama)
@@ -64,7 +64,7 @@ It's still work in progress so there are some pages missing. If you want to cont
 Pixelorama uses Godot 3.2, so you will need to have it in order to run the project.
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
-## Current features as of version v0.7:
+## Current features as of version v0.8:
 
 - Choosing between 7 tools – pencil, eraser, fill bucket, lighten/darken, color picker, rectangle select and zoom– and mapping them to both of your left and right mouse buttons.
 - Are you an animator? Pixelorama has its own animation timeline just for you! You can work at an individual cel level, where each cel refers to a unique layer and frame. Supports onion skinning, cel linking, motion drawing and frame grouping with tags.
@@ -72,6 +72,7 @@ As of right now, most of the code is written using GDScript, so the mono version
 - Custom brushes! Load your brushes from files or select them in your project with the selection tool, and they will get stored in `.pxo` files!
 - Random custom brushes! Every time you draw, expect to see a different random result!
 - Create or import custom palettes!
+- Multiple project support, using tabs!
 - Pattern filling! Use the bucket tool to fill out an area with a pattern of your choosing.
 - Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames. Importing spritesheets is also supported.
 - Export your gorgeous art as `PNG` or `GIF` files. Exporting your projects as spritesheets is also possible.
@@ -88,7 +89,8 @@ As of right now, most of the code is written using GDScript, so the mono version
 - Υou can zoom in and out with the mouse scroll wheel or the `+` and `-` keys respectively, and pan by clicking the middle mouse button, by holding `Space` or with the arrow keys!
 - Keyboard shortcuts, and the ability to change their bindings.
 - Rulers and guides!
-- Scale, crop, rotate, flip, color invert, HSV-adjust and desaturate your images!
+- Rectangular & isometric grid types.
+- Scale, crop, rotate, flip, color invert, HSV-adjust, desaturate and generate gradients in your images!
 - Multi-language localization support! See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
 
 

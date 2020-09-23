@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2019 Orama Interactive -->
+<!-- Copyright (c) 2019-2020 Orama Interactive and contributors -->
 <component type="desktop">
   <id>com.orama_interactive.Pixelorama.desktop</id>
   <name>Pixelorama</name>
@@ -31,6 +31,7 @@
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
+	<release version="0.8" date="2020-09-23"/>
     <release version="0.7" date="2020-05-16"/>
     <release version="0.6.2" date="2020-02-17"/>
   </releases>
