@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-09-23 15:07\n"
+"PO-Revision-Date: 2020-09-23 15:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -423,7 +423,7 @@ msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Parte Atual"
 
 msgid "Current frame"
 msgstr "Moldura atual"
