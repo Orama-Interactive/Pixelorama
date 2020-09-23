@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-09-23 14:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Clear Selection"
 msgstr "Limpar Seleção"
 
 msgid "Flip"
-msgstr ""
+msgstr "Virar"
 
 msgid "Flip Horizontal"
 msgstr "Inverter Horizontalmente"
@@ -372,13 +372,13 @@ msgid "Backup"
 msgstr "Backup"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicadores"
 
 msgid "On"
 msgstr "Ligado"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Restaurar o valor padrão"
 
 msgid "Smooth Zoom"
 msgstr "Ampliar Suave"
@@ -420,7 +420,7 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Apenas afetar a seleção"
 
 msgid "Current cel"
 msgstr ""
@@ -438,7 +438,7 @@ msgid "Invert Colors"
 msgstr "Inverter Cores"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modificar canal vermelho"
 
 msgid "Modify Green Channel"
 msgstr "Modificar O Canal Verde"
@@ -531,10 +531,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Desenvolvido por Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Direitos reservados 2019-2020 Orama Interactive e Colaboradores"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "© 2019-2020 por Orama Interactive e Contribuidores"
 
 msgid "Website"
 msgstr "Site"
@@ -594,7 +594,7 @@ msgid "Spanish"
 msgstr "Espanhol"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Catalão"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -618,10 +618,10 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Húngaro"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Romeno"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
