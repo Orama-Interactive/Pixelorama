@@ -86,7 +86,7 @@ jobs:
           godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
           godot -v --export "Linux/X11 32-bit" ./build/linux-32bit/$EXPORT_NAME.x86
       - name: Give execute permission ☑️
-        run: 
+        run: |
           chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
           chmod +x ./build/linux-32bit/$EXPORT_NAME.x86
       - name: Copy pixelorama_data folder 📁
