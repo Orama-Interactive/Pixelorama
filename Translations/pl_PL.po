@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-09-03 18:39\n"
+"PO-Revision-Date: 2020-09-23 12:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -529,8 +529,11 @@ msgstr "Pixelorama - Spikselizuj swoje marzenia!"
 msgid "Developed by Orama Interactive"
 msgstr "Tworzony przez: Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive"
-msgstr "Copyright 2019-2020 Orama Interactive"
+msgid "Copyright 2019-2020 Orama Interactive and contributors"
+msgstr ""
+
+msgid "©2019-2020 by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "Strona internetowa"
