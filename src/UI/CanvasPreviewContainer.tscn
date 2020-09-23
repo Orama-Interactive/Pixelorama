@@ -112,3 +112,5 @@ offset = Vector2( 32, 32 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 4 )
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_toggled"]
