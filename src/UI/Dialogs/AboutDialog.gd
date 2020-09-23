@@ -137,7 +137,7 @@ func _on_Groups_item_selected() -> void:
 
 
 func _on_Website_pressed() -> void:
-	OS.shell_open("https://www.orama-interactive.com/pixelorama")
+	OS.shell_open("https://www.orama-interactive.com")
 
 
 func _on_GitHub_pressed() -> void:
