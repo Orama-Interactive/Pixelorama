@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-08-27 18:02\n"
+"PO-Revision-Date: 2020-09-23 12:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -530,8 +530,11 @@ msgstr "Pixelorama – Pixelează-ți visele!"
 msgid "Developed by Orama Interactive"
 msgstr "Dezvoltat de Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive"
-msgstr "Drepturi de autor 2019-2020 Orama Interactive"
+msgid "Copyright 2019-2020 Orama Interactive and contributors"
+msgstr ""
+
+msgid "©2019-2020 by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "Pagină de internet"
