@@ -199,7 +199,7 @@ margin_top = 375.0
 margin_right = 576.0
 margin_bottom = 388.0
 custom_fonts/font = ExtResource( 5 )
-text = "Copyright 2019-2020 Orama Interactive"
+text = "Copyright 2019-2020 Orama Interactive and contributors"
 align = 1
 [connection signal="about_to_show" from="." to="." method="_on_AboutDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_AboutDialog_popup_hide"]

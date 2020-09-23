@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/splash_screen/splash_screen_image_v0.7.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/wishdream.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=7]
-[ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture" id=8]
 [ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
 [ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
@@ -16,8 +15,8 @@ expand_margin_top = 20.0
 
 [node name="SplashDialog" type="WindowDialog"]
 margin_right = 640.0
-margin_bottom = 550.0
-rect_min_size = Vector2( 640, 550 )
+margin_bottom = 570.0
+rect_min_size = Vector2( 640, 572 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -27,51 +26,52 @@ __meta__ = {
 [node name="Contents" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -46.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SplashArt" type="TextureRect" parent="Contents"]
-margin_right = 647.0
+margin_right = 640.0
 margin_bottom = 406.0
 rect_min_size = Vector2( 640, 406 )
 texture = ExtResource( 2 )
 expand = true
-stretch_mode = 5
+stretch_mode = 6
 
-[node name="ArtBy" type="HBoxContainer" parent="Contents/SplashArt"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -117.0
-margin_top = 50.0
-margin_right = -10.0
-margin_bottom = 71.0
+[node name="ArtBy" type="HBoxContainer" parent="Contents"]
+margin_top = 414.0
+margin_right = 640.0
+margin_bottom = 434.0
 grow_horizontal = 0
-custom_constants/separation = -3
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ArtistName" type="Button" parent="Contents/SplashArt/ArtBy"]
-margin_right = 77.0
-margin_bottom = 21.0
+[node name="SpacerControl" type="Control" parent="Contents/ArtBy"]
+margin_right = 4.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="ArtistName" type="Button" parent="Contents/ArtBy"]
+margin_left = 4.0
+margin_right = 81.0
+margin_bottom = 20.0
 hint_tooltip = "https://twitter.com/WishdreamStar"
 mouse_default_cursor_shape = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0.764706, 0.764706, 0.764706, 1 )
-custom_colors/font_color_pressed = Color( 0.521569, 0.521569, 0.521569, 1 )
 text = "Art by: %s"
 flat = true
 
 [node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents"]
-margin_top = 414.0
-margin_right = 647.0
-margin_bottom = 547.0
+margin_top = 442.0
+margin_right = 640.0
+margin_bottom = 546.0
 
 [node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos"]
 margin_right = 4.0
-margin_bottom = 133.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 4, 0 )
 
 [node name="Buttons" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos"]
@@ -104,36 +104,35 @@ text = "Open Last Project"
 
 [node name="Info" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos"]
 margin_left = 302.0
-margin_right = 639.0
-margin_bottom = 133.0
+margin_right = 640.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sponsors" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_right = 201.0
-margin_bottom = 133.0
+margin_right = 294.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors"]
-margin_right = 201.0
-margin_bottom = 133.0
+margin_right = 294.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer"]
-margin_right = 201.0
-margin_bottom = 48.0
+margin_right = 294.0
+margin_bottom = 31.0
 custom_constants/separation = 0
 
 [node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/HBoxContainer"]
 margin_right = 6.0
-margin_bottom = 48.0
+margin_bottom = 31.0
 rect_min_size = Vector2( 6, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -141,21 +140,21 @@ __meta__ = {
 
 [node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/HBoxContainer"]
 margin_left = 6.0
-margin_right = 201.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
+margin_right = 236.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "Want your name or your company to be shown on the splash screen?"
 autowrap = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer"]
-margin_top = 58.0
-margin_right = 201.0
-margin_bottom = 114.0
+margin_top = 41.0
+margin_right = 294.0
+margin_bottom = 97.0
 custom_constants/separation = -2
 
 [node name="BecomePlatinum" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
-margin_right = 201.0
+margin_right = 294.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "- Become a Platinum Sponsor"
@@ -164,7 +163,7 @@ align = 0
 
 [node name="BecomeGold" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
 margin_top = 18.0
-margin_right = 201.0
+margin_right = 294.0
 margin_bottom = 38.0
 mouse_default_cursor_shape = 2
 text = "- Become a Gold Sponsor"
@@ -173,7 +172,7 @@ align = 0
 
 [node name="BecomePatron" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
 margin_top = 36.0
-margin_right = 201.0
+margin_right = 294.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 text = "- Become a Patron"
@@ -181,51 +180,21 @@ flat = true
 align = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_left = 204.0
-margin_right = 337.0
-margin_bottom = 133.0
+margin_left = 298.0
+margin_right = 330.0
+margin_bottom = 104.0
 size_flags_vertical = 3
 custom_constants/separation = 5
 alignment = 2
 
 [node name="Branding" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer"]
-margin_right = 133.0
+margin_right = 32.0
 margin_bottom = 104.0
 size_flags_vertical = 3
 alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
-margin_right = 97.0
-margin_bottom = 104.0
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Logo" type="TextureRect" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/VBoxContainer"]
-margin_top = 3.0
-margin_right = 97.0
-margin_bottom = 67.0
-texture = ExtResource( 8 )
-stretch_mode = 4
-
-[node name="DevelopedBy" type="Label" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/VBoxContainer"]
-margin_top = 71.0
-margin_right = 97.0
-margin_bottom = 84.0
-custom_fonts/font = ExtResource( 7 )
-text = "Orama Interactive"
-align = 1
-
-[node name="Copyright" type="Label" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/VBoxContainer"]
-margin_top = 88.0
-margin_right = 97.0
-margin_bottom = 101.0
-custom_fonts/font = ExtResource( 7 )
-text = "Copyright 2019-2020"
-align = 1
-
 [node name="Links" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
-margin_left = 101.0
-margin_right = 133.0
+margin_right = 32.0
 margin_bottom = 104.0
 
 [node name="GithubButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
@@ -248,23 +217,47 @@ margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
-[node name="ShowOnStartup" type="CheckBox" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer"]
-margin_left = 28.0
-margin_top = 109.0
-margin_right = 133.0
-margin_bottom = 133.0
+[node name="EmptySpacer" type="Control" parent="Contents/ButtonsPatronsLogos/Info"]
+margin_left = 334.0
+margin_right = 338.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="CopyrightLabel" type="Label" parent="Contents"]
+margin_top = 554.0
+margin_right = 640.0
+margin_bottom = 567.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+text = "©2019-2020 by Orama Interactive and contributors"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Contents/CopyrightLabel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -6.0
+margin_right = -2.0
+margin_bottom = 5.0
+size_flags_vertical = 0
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShowOnStartup" type="CheckBox" parent="Contents/CopyrightLabel/HBoxContainer"]
+margin_left = 533.0
+margin_right = 638.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 8
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 7 )
 text = "Don't show again"
-
-[node name="SpacerControl2" type="Control" parent="Contents/ButtonsPatronsLogos"]
-margin_left = 643.0
-margin_right = 647.0
-margin_bottom = 133.0
-rect_min_size = Vector2( 4, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
-[connection signal="pressed" from="Contents/SplashArt/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
+[connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn__pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
@@ -274,4 +267,4 @@ rect_min_size = Vector2( 4, 0 )
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
-[connection signal="toggled" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]
+[connection signal="toggled" from="Contents/CopyrightLabel/HBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]

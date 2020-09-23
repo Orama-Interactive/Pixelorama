@@ -518,7 +518,10 @@ msgstr ""
 msgid "Developed by Orama Interactive"
 msgstr ""
 
-msgid "Copyright 2019-2020 Orama Interactive"
+msgid "Copyright 2019-2020 Orama Interactive and contributors"
+msgstr ""
+
+msgid "©2019-2020 by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
