@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-09-23 18:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -531,10 +531,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Dezvoltat de Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Drepturi de autor 2019-2020 Orama Interactive și contribuitorii"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 de Orama Interactive și contribuitorii"
 
 msgid "Website"
 msgstr "Pagină de internet"
