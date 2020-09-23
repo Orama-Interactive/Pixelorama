@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-08-28 03:26\n"
+"PO-Revision-Date: 2020-09-23 12:31\n"
 
 msgid "OK"
 msgstr "確定"
@@ -529,8 +529,11 @@ msgstr "Pixelorama - 像素化你的夢想！"
 msgid "Developed by Orama Interactive"
 msgstr "由Orama Interactive開發"
 
-msgid "Copyright 2019-2020 Orama Interactive"
-msgstr "版權所有 2019-2020 Orama Interactive"
+msgid "Copyright 2019-2020 Orama Interactive and contributors"
+msgstr ""
+
+msgid "©2019-2020 by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "官網"
