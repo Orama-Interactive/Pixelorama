@@ -6,6 +6,9 @@ onready var animation_timer : Timer = $AnimationTimer
 
 func _draw() -> void:
 	var current_project : Project = Global.current_project
+	if frame >= current_project.frames.size():
+		frame = current_project.current_frame
+
 	$AnimationTimer.wait_time = Global.animation_timer.wait_time
 
 	if animation_timer.is_stopped():

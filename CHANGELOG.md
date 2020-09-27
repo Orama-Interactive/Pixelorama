@@ -6,8 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.8.1] - Unreleased
 ### Fixed
-- Crash where Pixelorama could not load a cached sub-resource - [Issue #339](https://github.com/Orama-Interactive/Pixelorama/issues/339)
+- Fixed crash where Pixelorama could not load a cached sub-resource - [Issue #339](https://github.com/Orama-Interactive/Pixelorama/issues/339)
 - When moving tabs, the projects now move along with their respective tabs.
+- Fixed crash where the animation was playing in the mini canvas preview and then the user switched to a project with less frames.
 <br><br>
 
 ## [v0.8] - 2020-09-23

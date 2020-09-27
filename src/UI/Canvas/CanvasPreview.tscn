@@ -1,39 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-
-var frame : int = 0
-onready var animation_timer : Timer = $AnimationTimer
-
-func _draw() -> void:
-	var current_project : Project = Global.current_project
-	$AnimationTimer.wait_time = Global.animation_timer.wait_time
-
-	if animation_timer.is_stopped():
-		frame = current_project.current_frame
-	var current_cels : Array = current_project.frames[frame].cels
-
-	# Draw current frame layers
-	for i in range(current_cels.size()):
-		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if i < current_project.layers.size() and current_project.layers[i].visible:
-			draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
-
-
-func _on_AnimationTimer_timeout() -> void:
-	var current_project : Project = Global.current_project
-
-	if frame < current_project.frames.size() - 1:
-		frame += 1
-	else:
-		frame = 0
-	update()
-"
+[ext_resource path="res://src/UI/Canvas/CanvasPreview.gd" type="Script" id=1]
 
 [node name="CanvasPreview" type="Node2D"]
-script = SubResource( 1 )
+script = ExtResource( 1 )
 
 [node name="AnimationTimer" type="Timer" parent="."]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
