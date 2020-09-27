@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.8.1] - Unreleased
+### Fixed
+- Crash where Pixelorama could not load a cached sub-resource - [Issue #339](https://github.com/Orama-Interactive/Pixelorama/issues/339)
+- When moving tabs, the projects now move along with their respective tabs.
+<br><br>
+
 ## [v0.8] - 2020-09-23
 This update has been brought to you by the contributions of:
 Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Michael Alexsander (YeldhamDev), Hugo Locurcio (Calinou), Martin Novák (novhack), Xenofon Konitsas (huskeee), Matthew Paul (matthewpaul-us)

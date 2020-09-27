@@ -20,8 +20,8 @@ func _on_Tabs_tab_close(tab : int) -> void:
 
 func _on_Tabs_reposition_active_tab_request(idx_to : int) -> void:
 	var temp = Global.projects[Global.current_project_index]
-	Global.projects[Global.current_project_index] = Global.projects[idx_to]
-	Global.projects[idx_to] = temp
+	Global.projects.erase(temp)
+	Global.projects.insert(idx_to, temp)
 
 	# Change save paths
 	var temp_save_path = OpenSave.current_save_paths[Global.current_project_index]
