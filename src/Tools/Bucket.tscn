@@ -1,8 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/graphics/brush_button.png" type="Texture" id=1]
 [ext_resource path="res://src/Tools/Base.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tools/Bucket.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
 
 [node name="ToolOptions" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -56,14 +64,17 @@ margin_right = 108.0
 margin_bottom = 208.0
 size_flags_horizontal = 4
 
-[node name="Type" type="TextureButton" parent="FillPattern" index="0"]
+[node name="Type" type="Button" parent="FillPattern" index="0"]
 margin_left = 27.0
 margin_right = 59.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Select a brush"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-texture_normal = ExtResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
 
 [node name="Texture" type="TextureRect" parent="FillPattern/Type" index="0"]
 margin_right = 32.0

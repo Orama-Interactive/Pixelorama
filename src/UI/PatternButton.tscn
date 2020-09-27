@@ -1,24 +1,25 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/graphics/brush_button.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/PatternButton.gd" type="Script" id=2]
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
 
-
-
-
-
-[node name="PatternButton" type="TextureButton"]
+[node name="PatternButton" type="Button"]
 margin_right = 32.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 3, 0 )
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
 button_mask = 7
-texture_normal = ExtResource( 1 )
-stretch_mode = 5
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PatternTexture" type="TextureRect" parent="."]
 margin_right = 32.0

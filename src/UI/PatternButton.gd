@@ -1,4 +1,4 @@
-extends TextureButton
+extends BaseButton
 
 
 var pattern := Patterns.Pattern.new()

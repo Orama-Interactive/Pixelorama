@@ -1,8 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/graphics/brush_button.png" type="Texture" id=1]
 [ext_resource path="res://src/Tools/Base.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Tools/Draw.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
 
 [node name="ToolOptions" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -13,15 +21,17 @@ margin_right = 116.0
 margin_bottom = 50.0
 alignment = 1
 
-[node name="Type" type="TextureButton" parent="Brush" index="0"]
-margin_left = 1.0
-margin_right = 37.0
+[node name="Type" type="Button" parent="Brush" index="0"]
+margin_left = 3.0
+margin_right = 35.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 36, 32 )
+rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Select a brush"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-texture_normal = ExtResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
 
 [node name="Texture" type="TextureRect" parent="Brush/Type" index="0"]
 margin_right = 32.0
@@ -33,8 +43,8 @@ __meta__ = {
 }
 
 [node name="Size" type="SpinBox" parent="Brush" index="1"]
-margin_left = 41.0
-margin_right = 115.0
+margin_left = 39.0
+margin_right = 113.0
 margin_bottom = 32.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
