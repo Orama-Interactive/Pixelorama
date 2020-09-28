@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.509804, 0.509804, 0.509804, 1 )
+bg_color = Color( 0.5382, 0.63687, 0.69, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
