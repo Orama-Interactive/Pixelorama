@@ -48,8 +48,10 @@ size_flags_vertical = 3
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -20.5
-margin_right = 20.5
-margin_bottom = 254.0
+margin_right = -6.5
+margin_bottom = 14.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,6 +61,8 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
 margin_bottom = 255.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

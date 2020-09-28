@@ -7,6 +7,7 @@ onready var themes := [
 	[preload("res://assets/themes/blue/theme.tres"), "Blue"],
 	[preload("res://assets/themes/caramel/theme.tres"), "Caramel"],
 	[preload("res://assets/themes/light/theme.tres"), "Light"],
+	[preload("res://assets/themes/purple/theme.tres"), "Purple"],
 ]
 onready var buttons_container : BoxContainer = $ThemeButtons
 onready var colors_container : BoxContainer = $ThemeColors
@@ -59,6 +60,8 @@ func change_theme(ID : int) -> void:
 		Global.theme_type = Global.Theme_Types.CARAMEL
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.Theme_Types.LIGHT
+	elif ID == 5: # Purple Theme
+		Global.theme_type = Global.Theme_Types.DARK
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font

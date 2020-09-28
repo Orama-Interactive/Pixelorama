@@ -26,8 +26,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="EmptySpacer" type="Control" parent="HBoxContainer"]
+margin_bottom = 36.0
+
 [node name="LayerButtons" type="HBoxContainer" parent="HBoxContainer"]
-margin_right = 104.0
+margin_left = 4.0
+margin_right = 108.0
 margin_bottom = 36.0
 
 [node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
@@ -122,8 +126,8 @@ __meta__ = {
 }
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
-margin_left = 108.0
-margin_right = 212.0
+margin_left = 112.0
+margin_right = 216.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 104, 0 )
 mouse_default_cursor_shape = 2

@@ -126,7 +126,7 @@ margin_bottom = 136.0
 margin_left = 84.0
 margin_right = 134.0
 margin_bottom = 136.0
-custom_constants/separation = 6
+custom_constants/separation = 15
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
