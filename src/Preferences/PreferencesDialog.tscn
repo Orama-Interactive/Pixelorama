@@ -129,7 +129,7 @@ margin_bottom = 40.0
 [node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeColorsSpacer"]
 margin_left = 4.0
 margin_right = 4.0
-custom_constants/separation = 10
+custom_constants/separation = 12
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
