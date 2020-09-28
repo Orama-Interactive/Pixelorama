@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-09-28 17:43\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -429,10 +429,10 @@ msgid "Current frame"
 msgstr ""
 
 msgid "All frames"
-msgstr ""
+msgstr "Összes képkocka"
 
 msgid "All projects"
-msgstr ""
+msgstr "Minden projekt"
 
 msgid "Invert Colors"
 msgstr "Színek invertálása"
@@ -800,7 +800,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Mind"
 
 msgid "Grid width:"
 msgstr "Rács szélessége:"
