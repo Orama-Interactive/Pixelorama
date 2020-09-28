@@ -759,9 +759,9 @@ rect_min_size = Vector2( 214, 0 )
 
 [node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_right = 53.0
-margin_bottom = 32.0
+margin_bottom = 14.0
 size_flags_horizontal = 0
-size_flags_vertical = 1
+size_flags_vertical = 0
 text = "Opacity:"
 valign = 1
 
