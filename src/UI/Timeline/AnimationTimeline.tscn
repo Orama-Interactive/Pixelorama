@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/dark_themes/layers/new_layer.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/graphics/dark_themes/layers/move_down_disabled.png" type="Texture" id=5]
 [ext_resource path="res://assets/graphics/dark_themes/layers/merge_down_disabled.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/dark_themes/layers/clone_layer.png" type="Texture" id=7]
-[ext_resource path="res://assets/themes/dark/icons/vsplit.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=20]
@@ -759,9 +758,9 @@ rect_min_size = Vector2( 214, 0 )
 
 [node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_right = 53.0
-margin_bottom = 32.0
+margin_bottom = 14.0
 size_flags_horizontal = 0
-size_flags_vertical = 1
+size_flags_vertical = 0
 text = "Opacity:"
 valign = 1
 
@@ -930,7 +929,6 @@ margin_top = -6.0
 margin_right = 24.0
 margin_bottom = -4.76837e-07
 mouse_filter = 2
-texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

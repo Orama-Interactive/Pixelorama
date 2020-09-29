@@ -21,7 +21,7 @@ __meta__ = {
 
 [node name="FileMenu" type="MenuButton" parent="MenuItems"]
 margin_right = 35.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "File"
 switch_on_hover = true
@@ -29,7 +29,7 @@ switch_on_hover = true
 [node name="EditMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 39.0
 margin_right = 75.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "Edit"
 switch_on_hover = true
@@ -37,7 +37,7 @@ switch_on_hover = true
 [node name="ViewMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 79.0
 margin_right = 121.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
@@ -45,7 +45,7 @@ switch_on_hover = true
 [node name="ImageMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 125.0
 margin_right = 177.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "Image"
 switch_on_hover = true
@@ -53,7 +53,7 @@ switch_on_hover = true
 [node name="HelpMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 181.0
 margin_right = 223.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
 text = "Help"
 switch_on_hover = true
@@ -91,10 +91,10 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = -330.0
-margin_top = -14.0
-margin_bottom = 14.0
+margin_top = -10.0
+margin_right = 0.00012207
+margin_bottom = 13.0
 grow_horizontal = 2
-size_flags_vertical = 0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -103,10 +103,9 @@ __meta__ = {
 [node name="CurrentFrame" type="Label" parent="HBoxContainer"]
 margin_left = 106.0
 margin_right = 198.0
-margin_bottom = 28.0
+margin_bottom = 23.0
 size_flags_vertical = 1
 text = "Current frame:"
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -114,7 +113,6 @@ __meta__ = {
 [node name="CurrentFrameMark" type="Label" parent="HBoxContainer"]
 margin_left = 202.0
 margin_right = 223.0
-margin_bottom = 28.0
+margin_bottom = 23.0
 size_flags_vertical = 1
 text = "1/2"
-valign = 1

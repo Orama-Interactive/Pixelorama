@@ -7,9 +7,10 @@ onready var themes := [
 	[preload("res://assets/themes/blue/theme.tres"), "Blue"],
 	[preload("res://assets/themes/caramel/theme.tres"), "Caramel"],
 	[preload("res://assets/themes/light/theme.tres"), "Light"],
+	[preload("res://assets/themes/purple/theme.tres"), "Purple"],
 ]
 onready var buttons_container : BoxContainer = $ThemeButtons
-onready var colors_container : BoxContainer = $ThemeColors
+onready var colors_container : BoxContainer = $ThemeColorsSpacer/ThemeColors
 onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColorPreview.tscn")
 
 
@@ -59,12 +60,18 @@ func change_theme(ID : int) -> void:
 		Global.theme_type = Global.Theme_Types.CARAMEL
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.Theme_Types.LIGHT
+	elif ID == 5: # Purple Theme
+		Global.theme_type = Global.Theme_Types.DARK
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
 	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
+
 	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
+	var fake_vsplit_grabber : TextureRect = Global.find_node_by_name(Global.animation_timeline, "FakeVSplitContainerGrabber")
+	fake_vsplit_grabber.texture = main_theme.get_icon("grabber", "VSplitContainer")
+
 	var layer_button_panel_container : PanelContainer = Global.find_node_by_name(Global.animation_timeline, "LayerButtonPanelContainer")
 	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
 
@@ -79,13 +86,6 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
-
-	var fake_vsplit_grabber : TextureRect = Global.find_node_by_name(Global.animation_timeline, "FakeVSplitContainerGrabber")
-
-	if Global.theme_type == Global.Theme_Types.DARK or Global.theme_type == Global.Theme_Types.BLUE:
-		fake_vsplit_grabber.texture = preload("res://assets/themes/dark/icons/vsplit.png")
-	else:
-		fake_vsplit_grabber.texture = preload("res://assets/themes/light/icons/vsplit.png")
 
 	for button in get_tree().get_nodes_in_group("UIButtons"):
 		if button is TextureButton:

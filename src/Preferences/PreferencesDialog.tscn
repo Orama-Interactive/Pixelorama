@@ -113,20 +113,23 @@ text = "System Language"
 
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 28.0
 margin_right = 498.0
-margin_bottom = 164.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_right = 80.0
-margin_bottom = 136.0
 
-[node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
-margin_left = 84.0
-margin_right = 134.0
-margin_bottom = 136.0
-custom_constants/separation = 6
+[node name="ThemeColorsSpacer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Control" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeColorsSpacer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Themes/ThemeColorsSpacer"]
+margin_left = 4.0
+margin_right = 4.0
+custom_constants/separation = 12
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false

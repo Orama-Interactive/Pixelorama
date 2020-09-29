@@ -3,7 +3,7 @@
 [node name="ThemeColorPreview" type="ColorRect"]
 margin_right = 50.0
 margin_bottom = 14.0
-rect_min_size = Vector2( 50, 14 )
+rect_min_size = Vector2( 50, 16 )
 color = Color( 0.380392, 0.384314, 0.380392, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
