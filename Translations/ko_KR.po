@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-09-29 22:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -418,6 +418,9 @@ msgstr "카라멜"
 
 msgid "Light"
 msgstr "라이트"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "선택 영역만 영향을 줌"
