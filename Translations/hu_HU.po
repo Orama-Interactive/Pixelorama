@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-09-28 17:43\n"
+"PO-Revision-Date: 2020-09-29 22:40\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -418,6 +418,9 @@ msgstr "Krémszín"
 
 msgid "Light"
 msgstr "Világos"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
