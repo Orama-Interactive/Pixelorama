@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-09-24 12:10\n"
+"PO-Revision-Date: 2020-09-29 22:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -418,6 +418,9 @@ msgstr "Caramello"
 
 msgid "Light"
 msgstr "Chiaro"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Influire solo sulla selezione"
