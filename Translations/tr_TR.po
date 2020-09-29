@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-09-29 20:08\n"
+"PO-Revision-Date: 2020-09-29 22:39\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -418,6 +418,9 @@ msgstr "Karamel"
 
 msgid "Light"
 msgstr "Açık"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
