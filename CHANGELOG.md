@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v0.8.1] - Unreleased
+### Added
+- A new purple theme.
+
+### Changed
+- Changed how Dark, Gray, Caramel and Light themes look. All theme elements now have the same spacing and margins.
+
 ### Fixed
 - Fixed crash where Pixelorama could not load a cached sub-resource - [Issue #339](https://github.com/Orama-Interactive/Pixelorama/issues/339)
 - When moving tabs, the projects now move along with their respective tabs.

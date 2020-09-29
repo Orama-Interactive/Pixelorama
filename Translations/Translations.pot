@@ -407,6 +407,9 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
+msgid "Purple"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr ""
 
