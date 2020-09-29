@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-09-29 22:40\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -418,6 +418,9 @@ msgstr "Caramel"
 
 msgid "Light"
 msgstr "Llum"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
