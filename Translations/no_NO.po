@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-09-29 22:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -417,6 +417,9 @@ msgstr "Karamell"
 
 msgid "Light"
 msgstr "Lys"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Bare påvirk merket område"
