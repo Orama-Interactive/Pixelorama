@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - A new purple theme.
 
 ### Changed
+- Guides now move with a step of 0.5 pixels. That makes it possible to have guides (and symmetry guides) to be in the middle of pixels.
 - Changed how Dark, Gray, Caramel and Light themes look. All theme elements now have the same spacing and margins.
 
 ### Fixed

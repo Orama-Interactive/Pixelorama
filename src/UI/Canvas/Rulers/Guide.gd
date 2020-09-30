@@ -35,11 +35,13 @@ func _input(_event : InputEvent):
 	if has_focus and visible:
 		if Input.is_action_pressed("left_mouse"):
 			if type == Types.HORIZONTAL:
-				points[0].y = round(mouse_pos.y)
-				points[1].y = round(mouse_pos.y)
+				var yy = stepify(mouse_pos.y, 0.5)
+				points[0].y = yy
+				points[1].y = yy
 			else:
-				points[0].x = round(mouse_pos.x)
-				points[1].x = round(mouse_pos.x)
+				var xx = stepify(mouse_pos.x, 0.5)
+				points[0].x = xx
+				points[1].x = xx
 		if Input.is_action_just_released("left_mouse"):
 			Global.has_focus = true
 			has_focus = false
@@ -53,10 +55,10 @@ func _draw() -> void:
 		var zoom: Vector2 = Global.camera.zoom
 		if type == Types.HORIZONTAL:
 			draw_set_transform(Vector2(Global.camera.offset.x - (viewport_size.x / 2) * zoom.x, points[0].y + font.get_height() * zoom.x * 2), rotation, zoom * 2)
-			draw_string(font, Vector2.ZERO, "%spx" % str(round(mouse_pos.y)))
+			draw_string(font, Vector2.ZERO, "%spx" % str(stepify(mouse_pos.y, 0.5)))
 		else:
 			draw_set_transform(Vector2(points[0].x + font.get_height() * zoom.y, Global.camera.offset.y - (viewport_size.y / 2.25) * zoom.y), rotation, zoom * 2)
-			draw_string(font, Vector2.ZERO, "%spx" % str(round(mouse_pos.x)))
+			draw_string(font, Vector2.ZERO, "%spx" % str(stepify(mouse_pos.x, 0.5)))
 
 
 func outside_canvas() -> bool:
