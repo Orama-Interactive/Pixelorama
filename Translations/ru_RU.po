@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-09-29 22:39\n"
+"PO-Revision-Date: 2020-09-30 13:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -420,7 +420,7 @@ msgid "Light"
 msgstr "Светлая"
 
 msgid "Purple"
-msgstr ""
+msgstr "Фиолетовый"
 
 msgid "Only affect selection"
 msgstr "Менять только выделенное"
