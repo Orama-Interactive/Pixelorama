@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-09-29 22:39\n"
+"PO-Revision-Date: 2020-09-30 03:08\n"
 
 msgid "OK"
 msgstr "确定"
@@ -420,7 +420,7 @@ msgid "Light"
 msgstr "白色"
 
 msgid "Purple"
-msgstr ""
+msgstr "紫色"
 
 msgid "Only affect selection"
 msgstr "仅影响所选"
@@ -534,10 +534,10 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "版权所有 2019-2020 Orama Interactive 和贡献者"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
