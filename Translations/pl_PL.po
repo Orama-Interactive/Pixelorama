@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-09-29 22:39\n"
+"PO-Revision-Date: 2020-09-30 21:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -419,7 +419,7 @@ msgid "Light"
 msgstr "Jasny"
 
 msgid "Purple"
-msgstr ""
+msgstr "Fioletowy"
 
 msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
