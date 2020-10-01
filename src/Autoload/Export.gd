@@ -68,15 +68,16 @@ func external_export() -> void:
 
 
 func process_frame() -> void:
+	processed_images.clear()
 	var frame = Global.current_project.frames[frame_number - 1]
 	var image := Image.new()
 	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	blend_layers(image, frame)
-	processed_images.clear()
 	processed_images.append(image)
 
 
 func process_spritesheet() -> void:
+	processed_images.clear()
 	# Range of frames determined by tags
 	var frames := []
 	if frame_current_tag > 0:
@@ -98,7 +99,6 @@ func process_spritesheet() -> void:
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
-	whole_image.lock()
 	var origin := Vector2.ZERO
 	var hh := 0
 	var vv := 0
@@ -124,7 +124,6 @@ func process_spritesheet() -> void:
 				origin.x = Global.current_project.size.x * vv
 		blend_layers(whole_image, frame, origin)
 
-	processed_images.clear()
 	processed_images.append(whole_image)
 
 
@@ -185,14 +184,12 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			gif_export_thread.start(self, "export_gif", {"export_dialog": export_dialog, "export_paths": export_paths})
 	else:
 		for i in range(processed_images.size()):
-			processed_images[i].unlock()
 			if OS.get_name() == "HTML5":
 				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
 			else:
 				var err = processed_images[i].save_png(export_paths[i])
 				if err != OK:
 					OS.alert("Can't save file. Error code: %s" % err)
-			processed_images[i].lock()
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
@@ -321,6 +318,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
+			cel_image.unlock()
 		layer_i += 1
 	image.unlock()
 
