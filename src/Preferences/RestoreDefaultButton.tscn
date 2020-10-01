@@ -10,6 +10,7 @@
 ]]
 margin_right = 16.0
 margin_bottom = 16.0
+size_flags_vertical = 4
 disabled = true
 texture_normal = ExtResource( 1 )
 texture_disabled = SubResource( 1 )
