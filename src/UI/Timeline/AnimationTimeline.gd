@@ -166,6 +166,17 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 func _on_FrameTagButton_pressed() -> void:
 	Global.tag_dialog.popup_centered()
 
+func _on_MoveLeft_pressed() -> void:
+	var frame : int = Global.current_project.current_frame
+	if frame == 0:
+		return
+	Global.current_project.layers[Global.current_project.current_layer].frame_container.get_child(frame).change_frame_order(-1)
+
+func _on_MoveRight_pressed() -> void:
+	var frame : int = Global.current_project.current_frame
+	if frame == last_frame:
+		return
+	Global.current_project.layers[Global.current_project.current_layer].frame_container.get_child(frame).change_frame_order(1)
 
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
@@ -175,7 +186,6 @@ func _on_OnionSkinning_pressed() -> void:
 		Global.change_button_texturerect(texture_button, "onion_skinning.png")
 	else:
 		Global.change_button_texturerect(texture_button, "onion_skinning_off.png")
-
 
 func _on_OnionSkinningSettings_pressed() -> void:
 	$OnionSkinningSettings.popup(Rect2(Global.onion_skinning_button.rect_global_position.x - $OnionSkinningSettings.rect_size.x - 16, Global.onion_skinning_button.rect_global_position.y - 106, 136, 126))
@@ -474,3 +484,4 @@ func _on_OpacitySlider_value_changed(value) -> void:
 
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
+
