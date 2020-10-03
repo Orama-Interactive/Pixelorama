@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-09-29 22:40\n"
+"PO-Revision-Date: 2020-10-03 19:48\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1437,5 +1437,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Ha hagut un error quan es va intentar eliminar la paleta! Codi de error: %s"
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
 msgstr ""
 
