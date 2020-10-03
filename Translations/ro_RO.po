@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-09-30 07:21\n"
+"PO-Revision-Date: 2020-10-03 19:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1448,4 +1448,10 @@ msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
 
 msgid "and"
 msgstr "și"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
 
