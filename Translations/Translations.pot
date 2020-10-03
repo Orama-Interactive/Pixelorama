@@ -1407,3 +1407,9 @@ msgstr ""
 
 msgid "and"
 msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""

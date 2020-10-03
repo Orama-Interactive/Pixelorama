@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/dark_themes/layers/new_layer.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/graphics/dark_themes/layers/move_down_disabled.png" type="Texture" id=5]
 [ext_resource path="res://assets/graphics/dark_themes/layers/merge_down_disabled.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/dark_themes/layers/clone_layer.png" type="Texture" id=7]
+[ext_resource path="res://assets/graphics/dark_themes/timeline/move_arrow.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=20]
@@ -319,19 +320,19 @@ __meta__ = {
 
 [node name="Control" type="Control" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
 margin_left = 225.0
-margin_right = 434.0
+margin_right = 386.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
-margin_left = 438.0
+margin_left = 390.0
 margin_right = 902.0
 margin_bottom = 38.0
 
 [node name="AnimationButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 457.0
+margin_right = 505.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
@@ -339,7 +340,7 @@ custom_constants/separation = 40
 alignment = 2
 
 [node name="FrameButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
-margin_right = 92.0
+margin_right = 140.0
 margin_bottom = 24.0
 
 [node name="AddFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
@@ -455,9 +456,64 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MoveLeft" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
+"UIButtons",
+]]
+margin_left = 96.0
+margin_top = 2.0
+margin_right = 116.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Move the selected frame to the left."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveLeft"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 8 )
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveRight" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
+"UIButtons",
+]]
+margin_left = 120.0
+margin_top = 2.0
+margin_right = 140.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Move the selected frame to the right."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveRight"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
-margin_left = 132.0
-margin_right = 272.0
+margin_left = 180.0
+margin_right = 320.0
 margin_bottom = 24.0
 
 [node name="FirstFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
@@ -637,8 +693,8 @@ __meta__ = {
 }
 
 [node name="LoopButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
-margin_left = 312.0
-margin_right = 450.0
+margin_left = 360.0
+margin_right = 498.0
 margin_bottom = 24.0
 
 [node name="OnionSkinningSettings" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
@@ -942,6 +998,8 @@ __meta__ = {
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveLeft" to="." method="_on_MoveLeft_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveRight" to="." method="_on_MoveRight_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
 [connection signal="toggled" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
