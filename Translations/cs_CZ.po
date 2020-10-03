@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-09-29 22:40\n"
+"PO-Revision-Date: 2020-10-03 19:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1448,4 +1448,10 @@ msgstr "Při odstraňování palety došlo k chybě! Kód chyby: %s"
 
 msgid "and"
 msgstr "a"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
 
