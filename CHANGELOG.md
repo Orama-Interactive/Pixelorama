@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v0.8.1] - Unreleased
+This update has been brought to you by the contributions of:
+Laurenz Reinthaler (Schweini07)
+
 ### Added
 - A new purple theme.
+- Buttons for moving the current frame left or right. ([#344](https://github.com/Orama-Interactive/Pixelorama/pull/344))
 
 ### Changed
 - Guides now move with a step of 0.5 pixels. That makes it possible to have guides (and symmetry guides) to be in the middle of pixels.
