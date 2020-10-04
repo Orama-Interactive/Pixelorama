@@ -136,6 +136,8 @@ func change_project() -> void:
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
+	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
+	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
 	toggle_layer_buttons_layers()
 	toggle_layer_buttons_current_layer()
 
@@ -436,6 +438,8 @@ func frame_changed(value : int) -> void:
 		layers[current_layer].frame_container.get_child(current_frame).pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
+	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
+	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
 
 	Global.canvas.update()
 	Global.transparent_checker._ready() # To update the rect size

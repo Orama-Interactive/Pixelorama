@@ -139,6 +139,8 @@ var tag_container : Control
 var tag_dialog : AcceptDialog
 
 var remove_frame_button : BaseButton
+var move_left_frame_button : BaseButton
+var move_right_frame_button : BaseButton
 
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
@@ -233,6 +235,8 @@ func _ready() -> void:
 	tag_dialog = find_node_by_name(animation_timeline, "FrameTagDialog")
 
 	remove_frame_button = find_node_by_name(animation_timeline, "DeleteFrame")
+	move_left_frame_button = find_node_by_name(animation_timeline, "MoveLeft")
+	move_right_frame_button = find_node_by_name(animation_timeline, "MoveRight")
 
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
