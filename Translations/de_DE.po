@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-03 19:48\n"
+"PO-Revision-Date: 2020-10-04 08:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1449,8 +1449,8 @@ msgid "and"
 msgstr "und"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Verschiebe den ausgewählten Frame nach links."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Verschiebe den ausgewählten Frame nach rechts."
 
