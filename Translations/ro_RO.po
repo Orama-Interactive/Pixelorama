@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-03 19:49\n"
+"PO-Revision-Date: 2020-10-04 07:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1450,8 +1450,8 @@ msgid "and"
 msgstr "și"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Mută cadrul selectat la stânga."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Mută cadrul selectat la dreapta."
 
