@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-03 19:48\n"
+"PO-Revision-Date: 2020-10-04 02:17\n"
 
 msgid "OK"
 msgstr "确定"
@@ -893,7 +893,7 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "覆盖颜色而不是混合颜色。 此选项仅与不完全不透明的颜色有关"
 
 msgid "Pixel Perfect"
-msgstr "完美像素"
+msgstr "平滑像素"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "通过去除边缘上多余的像素使线条平滑"
@@ -1449,8 +1449,8 @@ msgid "and"
 msgstr "和"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "移动所选帧到左侧。"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "移动所选帧到右侧。"
 
