@@ -1,9 +1,14 @@
 extends GridContainer
 
+
+enum {CEL, FRAME, ALL_FRAMES}
+
 const palette_button = preload("res://src/Palette/PaletteButton.tscn")
 
 var current_palette = "Default"
 var from_palette : Palette
+
+onready var palette_from_sprite_dialog = $"../../../../PaletteFromSpriteDialog"
 
 
 func _ready() -> void:
@@ -117,7 +122,8 @@ func add_palette_menu_id_pressed(id : int) -> void:
 		1: # Import Palette
 			on_import_palette()
 		2: # Create Palette From Current Sprite
-			create_palette_from_sprite()
+			palette_from_sprite_dialog.popup_centered()
+			Global.dialog_open(true)
 
 
 func create_new_palette(name : String, _from_palette : Palette) -> String: # Returns empty string, else error string
@@ -188,18 +194,51 @@ func create_palette_from_sprite() -> void:
 		Global.error_dialog.set_text(result)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-	else:
-		var current_cel : Cel = current_project.frames[current_project.current_frame].cels[current_project.current_layer]
-		var cel_image : Image = current_cel.image
-		var palette : Palette = Global.palettes[current_palette]
-		for x in cel_image.get_size().x:
-			for y in cel_image.get_size().y:
-				var color : Color = cel_image.get_pixel(x, y)
-				if color.a > 0 and !palette.has_color(color):
-					palette.add_color(color)
+		return
 
-		save_palette(current_palette, current_palette + ".json")
-		_display_palette(palette)
+	var alpha_checkbox : CheckBox = palette_from_sprite_dialog.get_node("VBoxContainer/AlphaCheckBox")
+	var selection_checkbox : CheckBox = palette_from_sprite_dialog.get_node("VBoxContainer/SelectionCheckBox")
+	var colors_from_optionbutton : OptionButton = palette_from_sprite_dialog.get_node("VBoxContainer/HBoxContainer/ColorsFromOptionButton")
+
+	var palette : Palette = Global.palettes[current_palette]
+	var pixels := []
+
+	if selection_checkbox.pressed:
+		pixels = current_project.selected_pixels.duplicate()
+	else:
+		for x in current_project.size.x:
+			for y in current_project.size.y:
+				pixels.append(Vector2(x, y))
+
+	var cels := []
+	match colors_from_optionbutton.selected:
+		CEL:
+			cels.append(current_project.frames[current_project.current_frame].cels[current_project.current_layer])
+		FRAME:
+			for cel in current_project.frames[current_project.current_frame].cels:
+				cels.append(cel)
+		ALL_FRAMES:
+			for frame in current_project.frames:
+				for cel in frame.cels:
+					cels.append(cel)
+
+	for cel in cels:
+		var cel_image := Image.new()
+		cel_image.copy_from(cel.image)
+		cel_image.lock()
+		if cel_image.is_invisible():
+			continue
+		for i in pixels:
+			var color : Color = cel_image.get_pixelv(i)
+			if color.a > 0:
+				if !alpha_checkbox.pressed:
+					color.a = 1
+				if !palette.has_color(color):
+					palette.add_color(color)
+		cel_image.unlock()
+
+	save_palette(current_palette, current_palette + ".json")
+	_display_palette(palette)
 
 
 func _on_PaletteOptionButton_item_selected(ID : int) -> void:
@@ -373,3 +412,11 @@ func _on_NewPaletteDialog_popup_hide() -> void:
 
 func _on_RemovePalette_pressed() -> void:
 	remove_palette(current_palette)
+
+
+func _on_PaletteFromSpriteDialog_confirmed() -> void:
+	create_palette_from_sprite()
+
+
+func _on_PaletteFromSpriteDialog_popup_hide() -> void:
+	Global.dialog_open(false)

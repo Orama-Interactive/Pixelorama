@@ -11,6 +11,7 @@ Laurenz Reinthaler (Schweini07)
 ### Added
 - A new purple theme.
 - Buttons for moving the current frame left or right. ([#344](https://github.com/Orama-Interactive/Pixelorama/pull/344))
+- Creating palettes from sprites has been enhanced - you can now choose if you want to get colors from the selection, current cel, entire frame or all frames, and if you want the colors to have an alpha component.
 
 ### Changed
 - Guides now move with a step of 0.5 pixels. That makes it possible to have guides (and symmetry guides) to be in the middle of pixels.

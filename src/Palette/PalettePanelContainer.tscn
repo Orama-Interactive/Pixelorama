@@ -190,6 +190,60 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 607.0
 margin_bottom = 577.0
+
+[node name="PaletteFromSpriteDialog" type="ConfirmationDialog" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 281.0
+margin_bottom = 127.0
+window_title = "Create Palette From Current Sprite"
+resizable = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PaletteFromSpriteDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 266.0
+margin_bottom = 84.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlphaCheckBox" type="CheckBox" parent="PaletteFromSpriteDialog/VBoxContainer"]
+margin_right = 258.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Create colors with alpha component"
+
+[node name="SelectionCheckBox" type="CheckBox" parent="PaletteFromSpriteDialog/VBoxContainer"]
+margin_top = 28.0
+margin_right = 258.0
+margin_bottom = 52.0
+mouse_default_cursor_shape = 2
+text = "Get colors only from selection"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PaletteFromSpriteDialog/VBoxContainer"]
+margin_top = 56.0
+margin_right = 258.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PaletteFromSpriteDialog/VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 104.0
+margin_bottom = 17.0
+text = "Get colors from:"
+
+[node name="ColorsFromOptionButton" type="OptionButton" parent="PaletteFromSpriteDialog/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 207.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Current cel"
+items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null ]
+selected = 0
 [connection signal="pressed" from="PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
 [connection signal="pressed" from="PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
 [connection signal="pressed" from="PaletteVBoxContainer/CenterContainer/PaletteButtons/RemovePalette" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_RemovePalette_pressed"]
@@ -198,3 +252,5 @@ margin_bottom = 577.0
 [connection signal="popup_hide" from="NewPaletteDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="file_selected" from="PaletteImportFileDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_palette_import_file_selected"]
 [connection signal="popup_hide" from="PaletteImportFileDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
+[connection signal="confirmed" from="PaletteFromSpriteDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteFromSpriteDialog_confirmed"]
+[connection signal="popup_hide" from="PaletteFromSpriteDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteFromSpriteDialog_popup_hide"]
