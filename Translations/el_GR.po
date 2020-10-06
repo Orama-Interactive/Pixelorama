@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-06 01:47\n"
+"PO-Revision-Date: 2020-10-06 23:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -420,7 +420,7 @@ msgid "Light"
 msgstr "Φωτεινό"
 
 msgid "Purple"
-msgstr ""
+msgstr "Μωβ"
 
 msgid "Only affect selection"
 msgstr "Επηρεάζει μόνο την επιλογή"
@@ -1289,10 +1289,10 @@ msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Χρώματα μόνο από την επιλογή"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Χρώματα από"
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1459,8 +1459,8 @@ msgid "and"
 msgstr "και"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα αριστερά"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά"
 
