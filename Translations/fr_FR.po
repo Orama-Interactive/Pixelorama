@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 01:47\n"
+"PO-Revision-Date: 2020-10-06 16:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1244,10 +1244,10 @@ msgid "File autosaved"
 msgstr "Fichier sauvegardé automatiquement"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Ouverture du fichier échouée. Code d’erreur %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Enregistrement du fichier échoué. Code d’erreur %s"
 
 msgid "File exported"
 msgstr "Fichier exporté"
