@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-10-05 22:19\n"
+"PO-Revision-Date: 2020-10-06 01:47\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1234,10 +1234,10 @@ msgstr "Fitxer desat"
 msgid "File autosaved"
 msgstr "Fitxer desat automaticament"
 
-msgid "File failed to open"
-msgstr "El fitxer ha fallat a l'obrir-se"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
