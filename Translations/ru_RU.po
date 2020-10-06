@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-10-05 22:19\n"
+"PO-Revision-Date: 2020-10-06 01:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1454,7 +1454,7 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Произошла ошибка при удалении палитры! Код ошибки: %s"
 
 msgid "and"
-msgstr ""
+msgstr "и"
 
 msgid "Move the selected frame to the left."
 msgstr "Переместить выделенный кадр влево."
