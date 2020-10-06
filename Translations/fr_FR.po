@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 16:29\n"
+"PO-Revision-Date: 2020-10-06 16:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -420,22 +420,22 @@ msgid "Light"
 msgstr "Clair"
 
 msgid "Purple"
-msgstr ""
+msgstr "Violet"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "N’affecter que la sélection"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Cellule actuelle"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Image actuelle"
 
 msgid "All frames"
-msgstr ""
+msgstr "Toutes les images"
 
 msgid "All projects"
-msgstr ""
+msgstr "Tous les projets"
 
 msgid "Invert Colors"
 msgstr "Inverser les couleurs"
