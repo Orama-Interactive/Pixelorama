@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 18:29\n"
+"PO-Revision-Date: 2020-10-06 18:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1042,13 +1042,13 @@ msgid "Future Frames"
 msgstr "Trames futures"
 
 msgid "Manage frame tags"
-msgstr "Gérer les balises du cadre"
+msgstr "Gérer les balises de la trame"
 
 msgid "Frame Tag Properties"
-msgstr "Propriétés du tag de l’image"
+msgstr "Propriétés de la balise de la trame"
 
 msgid "Add a new frame tag"
-msgstr "Ajouter un nouveau tag à l’image"
+msgstr "Ajouter une nouvelle balise à la trame"
 
 msgid "Name:"
 msgstr "Nom :"
@@ -1060,18 +1060,18 @@ msgid "To:"
 msgstr "À :"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "L'animation ne joue que sur les cadres de même balise"
+msgstr "L'animation ne joue que sur les trames de même balise"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Tag %s (Image %s)"
+msgstr "Balise %s (Trame %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Tag %s (Images %s-%s)"
+msgstr "Balise %s (Trames %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Si coché, l'animation ne joue que sur les images qui ont la même balise.\n"
-"Si ce n'est pas le cas, l'animation sera jouée sur toutes les images, ignorant les balises."
+msgstr "Si sélectionné, l'animation ne joue que sur les trames partageant la même balise.\n"
+"Si ce n'est pas le cas, l'animation sera jouée sur toutes les trames, ignorant les balises."
 
 msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
@@ -1134,7 +1134,7 @@ msgid "Lock/unlock layer"
 msgstr "Verrouiller/déverrouiller le calque"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Image : %s, Couche : %s"
+msgstr "Trame : %s, Couche : %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1223,7 +1223,7 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Refaire : Supprimer la brosse personnalisée"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Annuler: Modifier la balise du cadre"
+msgstr "Annuler : Modifier la balise de la trame"
 
 msgid "Redo: Modify Frame Tag"
 msgstr "Refaire : Modifier la balise de la trame"
@@ -1459,8 +1459,8 @@ msgid "and"
 msgstr "et"
 
 msgid "Move the selected frame to the left."
-msgstr "Déplacer l’image sélectionnée vers la gauche."
+msgstr "Déplacer la trame sélectionnée vers la gauche."
 
 msgid "Move the selected frame to the right."
-msgstr "Déplacer l’image sélectionnée vers la droite."
+msgstr "Déplacer la trame sélectionnée vers la droite."
 
