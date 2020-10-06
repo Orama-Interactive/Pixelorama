@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 16:49\n"
+"PO-Revision-Date: 2020-10-06 16:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -639,7 +639,7 @@ msgid "GitHub Contributors"
 msgstr "Contributeurs de GitHub"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Auteur : %s"
 
 msgid "untitled"
 msgstr "sans titre"
@@ -791,19 +791,19 @@ msgid "Grid"
 msgstr "Grille"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Type de grille :"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Définit le type de grille entre rectangulaire, isométrique ou les deux"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rectangulaire"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isométrique"
 
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 msgid "Grid width:"
 msgstr "Largeur de la grille:"
@@ -818,10 +818,10 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Définit la distance entre les lignes horizontales de la grille"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Taille des cellules isométriques :"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "Définit la taille des cellules dans une grille isométrique"
 
 msgid "Grid color:"
 msgstr "Couleur de la grille:"
@@ -851,10 +851,10 @@ msgid "Second color of the transparent checker background"
 msgstr "Seconde couleur du fond en damier transparent"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Suivre le mouvement du canevas"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Le damier transparent suit le mouvement du canevas"
 
 msgid "Follow Canvas Zoom Level"
 msgstr ""
