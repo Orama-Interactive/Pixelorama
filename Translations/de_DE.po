@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-06 01:47\n"
+"PO-Revision-Date: 2020-10-06 09:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1243,10 +1243,10 @@ msgid "File autosaved"
 msgstr "Datei automatisch gespeichert"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Datei konnte nicht geöffnet werden. Fehlercode %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Datei konnte nicht gespeichert werden. Fehlercode %s"
 
 msgid "File exported"
 msgstr "Datei exportiert"
@@ -1285,13 +1285,13 @@ msgid "Edit Palette"
 msgstr "Bearbeite Palette"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Erstelle Farben mit Alpha-Komponente"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Farben nur aus Auswahl holen"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Farben holen von"
 
 msgid "Patrons:"
 msgstr "Patrons:"
