@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 16:43\n"
+"PO-Revision-Date: 2020-10-06 16:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -528,22 +528,22 @@ msgid "About Pixelorama"
 msgstr "À propos de Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pixélisez vos rêves !"
 
 msgid "Developed by Orama Interactive"
 msgstr "Développé par Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive et contributeurs"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 par Orama Interactive et contributeurs"
 
 msgid "Website"
 msgstr "Site Web"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub Repo"
 
 msgid "Donate"
 msgstr "Faire un don"
@@ -597,7 +597,7 @@ msgid "Spanish"
 msgstr "Espagnol"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Catalan"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -624,7 +624,7 @@ msgid "Hungarian"
 msgstr "Hongrois"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Roumain"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
