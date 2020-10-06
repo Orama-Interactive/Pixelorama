@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 16:56\n"
+"PO-Revision-Date: 2020-10-06 17:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -857,10 +857,10 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr "Le damier transparent suit le mouvement du canevas"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Suivre le niveau de zoom du canevas"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Le damier transparent suit le niveau de zoom du canevas"
 
 msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
@@ -872,13 +872,13 @@ msgid "Select a brush"
 msgstr "Sélectionnez une brosse"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Pinceau pixel"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Pinceau circulaire"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Pinceau circulaire plein"
 
 msgid "Custom brush"
 msgstr "Brosse personnalisée"
@@ -887,7 +887,7 @@ msgid "Brush size:"
 msgstr "Taille de la brosse :"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Écraser la couleur"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
