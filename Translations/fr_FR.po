@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 18:48\n"
+"PO-Revision-Date: 2020-10-06 19:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -205,10 +205,10 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Trame horizontale:"
+msgstr "Trame horizontale :"
 
 msgid "Vertical frames:"
-msgstr "Trame verticale:"
+msgstr "Trame verticale :"
 
 msgid "Brush type:"
 msgstr "Type de pinceau:"
@@ -429,10 +429,10 @@ msgid "Current cel"
 msgstr "Cellule actuelle"
 
 msgid "Current frame"
-msgstr "Image actuelle"
+msgstr "Trame actuelle"
 
 msgid "All frames"
-msgstr "Toutes les images"
+msgstr "Toutes les trames"
 
 msgid "All projects"
 msgstr "Tous les projets"
@@ -959,7 +959,7 @@ msgid "Options:"
 msgstr "Options :"
 
 msgid "Fit to frame"
-msgstr "Ajuster au cadre"
+msgstr "Ajuster à la trame"
 
 msgid "100% Zoom"
 msgstr "Zoom 100%"
