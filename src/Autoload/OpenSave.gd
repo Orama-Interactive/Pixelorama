@@ -53,7 +53,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		err = file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
-		Global.notification_label("File failed to open")
+		Global.notification_label(tr("File failed to open. Error code %s") % err)
 		file.close()
 		return
 
@@ -317,7 +317,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 			Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 	else:
-		Global.notification_label("File failed to save")
+		Global.notification_label(tr("File failed to save. Error code %s") % err)
 		file.close()
 
 
