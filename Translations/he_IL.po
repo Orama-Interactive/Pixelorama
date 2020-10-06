@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-10-05 22:19\n"
+"PO-Revision-Date: 2020-10-06 01:47\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -1214,10 +1214,10 @@ msgstr ""
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
+msgid "File failed to open. Error code %s"
 msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
