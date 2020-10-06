@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 18:01\n"
+"PO-Revision-Date: 2020-10-06 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1045,28 +1045,28 @@ msgid "Manage frame tags"
 msgstr "Gérer les balises du cadre"
 
 msgid "Frame Tag Properties"
-msgstr "Propriétés de l’étiquette de l’image"
+msgstr "Propriétés du tag de l’image"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Ajouter un nouveau tag à l’image"
 
 msgid "Name:"
-msgstr ""
+msgstr "Nom :"
 
 msgid "From:"
-msgstr ""
+msgstr "De :"
 
 msgid "To:"
-msgstr ""
+msgstr "À :"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "L'animation ne joue que sur les cadres de même balise"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Tag %s (Image %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Tag %s (Images %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1134,12 +1134,12 @@ msgid "Lock/unlock layer"
 msgstr "Verrouiller/déverrouiller le calque"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Image : %s, Couche : %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Activer/désactiver la liaison des cellules\n\n"
-"Les cellules liées sont partagées sur plusieurs cadres"
+"Les cellules liées sont partagées sur plusieurs trames"
 
 msgid "Palette"
 msgstr "Palette"
@@ -1226,13 +1226,13 @@ msgid "Undo: Modify Frame Tag"
 msgstr "Annuler: Modifier la balise du cadre"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Refaire: Modifier la balise du cadre"
+msgstr "Refaire : Modifier la balise de la trame"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Annuler : Supprimer la balise du cadre"
+msgstr "Annuler : Supprimer la balise de la trame"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Refaire: Supprimer la balise du cadre"
+msgstr "Refaire : Supprimer la balise de la trame"
 
 msgid "Move Guide"
 msgstr "Déplacer le guide"
@@ -1274,7 +1274,7 @@ msgid "Create a new empty palette?"
 msgstr "Créer une nouvelle palette vide?"
 
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Erreur: La palette doit avoir un nom valide."
@@ -1286,13 +1286,13 @@ msgid "Edit Palette"
 msgstr "Modifier la palette"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Créer des couleurs avec une composante alpha"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Obtenir des couleurs uniquement depuis la sélection"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Obtenir des couleurs depuis"
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1456,11 +1456,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Une erreur est survenue lors de la suppression de la palette ! Code d'erreur : %s"
 
 msgid "and"
-msgstr ""
+msgstr "et"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Déplacer l’image sélectionnée vers la gauche."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Déplacer l’image sélectionnée vers la droite."
 
