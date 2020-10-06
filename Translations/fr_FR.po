@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-06 17:54\n"
+"PO-Revision-Date: 2020-10-06 18:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -890,13 +890,13 @@ msgid "Overwrite Color"
 msgstr "Écraser la couleur"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Écrase la couleur au lieu de la mélanger. Cette option n'est pertinente que pour les couleurs qui ne sont pas totalement opaques"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Parfait"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
@@ -1045,7 +1045,7 @@ msgid "Manage frame tags"
 msgstr "Gérer les balises du cadre"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Propriétés de l’étiquette de l’image"
 
 msgid "Add a new frame tag"
 msgstr ""
