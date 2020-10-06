@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-05 22:19\n"
+"PO-Revision-Date: 2020-10-06 00:37\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1286,13 +1286,13 @@ msgid "Edit Palette"
 msgstr "编辑调色板"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "创建带有 Alpha 组件的颜色"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "仅从所选获取颜色"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "获取颜色从"
 
 msgid "Patrons:"
 msgstr "赞助:"
