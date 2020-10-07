@@ -15,8 +15,8 @@ expand_margin_top = 20.0
 
 [node name="SplashDialog" type="WindowDialog"]
 margin_right = 640.0
-margin_bottom = 570.0
-rect_min_size = Vector2( 640, 572 )
+margin_bottom = 583.0
+rect_min_size = Vector2( 640, 583 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -112,72 +112,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sponsors" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_right = 294.0
-margin_bottom = 104.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 5
-
-[node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors"]
-margin_right = 294.0
-margin_bottom = 104.0
-size_flags_horizontal = 3
-custom_constants/separation = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer"]
-margin_right = 294.0
-margin_bottom = 31.0
-custom_constants/separation = 0
-
-[node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/HBoxContainer"]
+[node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos/Info"]
 margin_right = 6.0
-margin_bottom = 31.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 6, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/HBoxContainer"]
-margin_left = 6.0
-margin_right = 236.0
-margin_bottom = 31.0
+[node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
+margin_left = 10.0
+margin_right = 294.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+
+[node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+margin_right = 284.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
-text = "Want your name or your company to be shown on the splash screen?"
+text = "Patrons:"
 autowrap = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer"]
-margin_top = 41.0
-margin_right = 294.0
-margin_bottom = 97.0
-custom_constants/separation = -2
-
-[node name="BecomePlatinum" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
-margin_right = 294.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-text = "- Become a Platinum Sponsor"
-flat = true
-align = 0
-
-[node name="BecomeGold" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
+[node name="PatronsLabel2" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
 margin_top = 18.0
-margin_right = 294.0
-margin_bottom = 38.0
-mouse_default_cursor_shape = 2
-text = "- Become a Gold Sponsor"
-flat = true
-align = 0
-
-[node name="BecomePatron" type="Button" parent="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer"]
-margin_top = 36.0
-margin_right = 294.0
-margin_bottom = 56.0
-mouse_default_cursor_shape = 2
-text = "- Become a Patron"
-flat = true
-align = 0
+margin_right = 284.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 230, 0 )
+size_flags_vertical = 8
+text = "Hugo Locurcio"
+autowrap = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
 margin_left = 298.0
@@ -261,9 +225,6 @@ __meta__ = {
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn__pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePlatinum" to="." method="_on_TakeThisSpot_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomeGold" to="." method="_on_TakeThisSpot_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/Sponsors/PatronContainer/VBoxContainer/BecomePatron" to="." method="_on_TakeThisSpot_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]

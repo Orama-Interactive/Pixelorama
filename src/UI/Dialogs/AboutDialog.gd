@@ -44,6 +44,7 @@ func _ready() -> void:
 	donors.create_item(donors_root).set_text(0, "  Mike King")
 	donors.create_item(donors_root).set_text(0, "  Guillaume Gautier")
 	donors.create_item(donors_root).set_text(0, "  Isambard")
+	donors.create_item(donors_root).set_text(0, "  Hugo Locurcio")
 
 
 func _on_AboutDialog_about_to_show() -> void:
