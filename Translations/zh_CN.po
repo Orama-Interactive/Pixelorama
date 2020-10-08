@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-06 01:46\n"
+"PO-Revision-Date: 2020-10-08 21:16\n"
 
 msgid "OK"
 msgstr "确定"
@@ -113,6 +113,9 @@ msgstr "重做"
 
 msgid "Copy"
 msgstr "复制"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "粘贴"
