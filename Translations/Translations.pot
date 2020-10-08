@@ -103,6 +103,9 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
+msgid "Cut"
+msgstr ""
+
 msgid "Paste"
 msgstr ""
 

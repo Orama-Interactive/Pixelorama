@@ -128,12 +128,12 @@ func cut() -> void: # This is basically the same as copy + delete
 	_clipboard = image.get_rect(_selected_rect)
 	if _clipboard.is_invisible():
 		return
-		
+
 	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 	var brush = _clipboard.get_rect(_clipboard.get_used_rect())
 	project.brushes.append(brush)
 	Brushes.add_project_brush(brush)
-	Global.selection_rectangle.move_end() #The selection_rectangle can be used while is moved, this prevents malfunctioning
+	move_end() # The selection_rectangle can be used while is moved, this prevents malfunctioning
 	image.blit_rect(_clear_image, rect, _selected_rect.position)
 	commit_undo("Draw", undo_data)
 

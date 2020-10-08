@@ -6,12 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.8.1] - Unreleased
 This update has been brought to you by the contributions of:
-Laurenz Reinthaler (Schweini07)
+Laurenz Reinthaler (Schweini07), PinyaColada
 
 ### Added
-- A new purple theme.
 - Buttons for moving the current frame left or right. ([#344](https://github.com/Orama-Interactive/Pixelorama/pull/344))
 - Creating palettes from sprites has been enhanced - you can now choose if you want to get colors from the selection, current cel, entire frame or all frames, and if you want the colors to have an alpha component.
+- A new "Cut" option in the Edit menu or by pressing `Ctrl-X`. It cuts (deletes & copies) the selection, and you can later paste it. ([#345](https://github.com/Orama-Interactive/Pixelorama/pull/345))
+- A new purple theme.
 
 ### Changed
 - Guides now move with a step of 0.5 pixels. That makes it possible to have guides (and symmetry guides) to be in the middle of pixels.
