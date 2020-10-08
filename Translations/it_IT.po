@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-10-06 02:40\n"
+"PO-Revision-Date: 2020-10-08 21:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -113,6 +113,9 @@ msgstr "Ripeti"
 
 msgid "Copy"
 msgstr "Copia"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "Incolla"
