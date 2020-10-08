@@ -55,16 +55,24 @@ __meta__ = {
 
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 margin_right = 375.0
+window_title = "Confirmeu..."
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+window_title = "Obre un Fitxer"
+current_dir = "/home/pinya/Pixelorama"
+current_path = "/home/pinya/Pixelorama/"
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
+window_title = "Desa un Fitxer"
+current_dir = "/home/pinya/Pixelorama"
+current_path = "/home/pinya/Pixelorama/untitled"
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
+window_title = "Confirmeu..."
 
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
 
@@ -82,6 +90,7 @@ dialog_text = "You have unsaved changes. If you proceed, the progress you have m
 [node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 243.0
 margin_bottom = 70.0
+window_title = "Confirmeu..."
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
@@ -106,6 +115,7 @@ margin_right = 349.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
+window_title = "Confirmeu..."
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
 

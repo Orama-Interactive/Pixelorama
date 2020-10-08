@@ -43,6 +43,7 @@ func setup_edit_menu() -> void:
 		"Undo" : InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
 		"Redo" : InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
 		"Copy" : InputMap.get_action_list("copy")[0].get_scancode_with_modifiers(),
+		"Cut" : InputMap.get_action_list("cut")[0].get_scancode_with_modifiers(),
 		"Paste" : InputMap.get_action_list("paste")[0].get_scancode_with_modifiers(),
 		"Delete" : InputMap.get_action_list("delete")[0].get_scancode_with_modifiers(),
 		"Clear Selection" : 0,
@@ -211,14 +212,16 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.control.redone = false
 		2: # Copy
 			Global.selection_rectangle.copy()
-		3: # paste
+		3: # cut
+			Global.selection_rectangle.cut()
+		4: # paste
 			Global.selection_rectangle.paste()
-		4: # Delete
+		5: # Delete
 			Global.selection_rectangle.delete()
-		5: # Clear selection
+		6: # Clear selection
 			Global.selection_rectangle.set_rect(Rect2(0, 0, 0, 0))
 			Global.selection_rectangle.select_rect()
-		6: # Preferences
+		7: # Preferences
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)
 
