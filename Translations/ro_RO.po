@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-06 07:51\n"
+"PO-Revision-Date: 2020-10-08 21:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -113,6 +113,9 @@ msgstr "Refacere"
 
 msgid "Copy"
 msgstr "Copiere"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "Lipire"
