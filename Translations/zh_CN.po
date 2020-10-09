@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-08 21:16\n"
+"PO-Revision-Date: 2020-10-09 02:17\n"
 
 msgid "OK"
 msgstr "确定"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "复制"
 
 msgid "Cut"
-msgstr ""
+msgstr "剪切"
 
 msgid "Paste"
 msgstr "粘贴"
@@ -1247,10 +1247,10 @@ msgid "File autosaved"
 msgstr "文件已自动保存"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "打开文件失败。错误代码 %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "保存文件失败。错误代码 %s"
 
 msgid "File exported"
 msgstr "文件已导出"
