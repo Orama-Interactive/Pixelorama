@@ -19,7 +19,8 @@ Laurenz Reinthaler (Schweini07), PinyaColada
 - Changed how Dark, Gray, Caramel and Light themes look. All theme elements now have the same spacing and margins.
 
 ### Fixed
-- Fixed crash where Pixelorama could not load a cached sub-resource - ([#339](https://github.com/Orama-Interactive/Pixelorama/issues/339))
+- Most likely fixed an issue that occurred when the user attempted to export the project, which failed due to a locking error (error code 23). (Part of [#331](https://github.com/Orama-Interactive/Pixelorama/issues/3391))
+- Fixed crash where Pixelorama could not load a cached sub-resource. ([#339](https://github.com/Orama-Interactive/Pixelorama/issues/339))
 - When moving tabs, the projects now move along with their respective tabs.
 - Fixed crash where the animation was playing in the mini canvas preview and then the user switched to a project with less frames.
 - Fixed issue with the selection rectangle, where if it was being moved while using paste or delete, it went back to its original position. ([#346](https://github.com/Orama-Interactive/Pixelorama/pull/346))
