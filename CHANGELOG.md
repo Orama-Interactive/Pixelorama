@@ -19,9 +19,10 @@ Laurenz Reinthaler (Schweini07), PinyaColada
 - Changed how Dark, Gray, Caramel and Light themes look. All theme elements now have the same spacing and margins.
 
 ### Fixed
-- Fixed crash where Pixelorama could not load a cached sub-resource - [Issue #339](https://github.com/Orama-Interactive/Pixelorama/issues/339)
+- Fixed crash where Pixelorama could not load a cached sub-resource - ([#339](https://github.com/Orama-Interactive/Pixelorama/issues/339))
 - When moving tabs, the projects now move along with their respective tabs.
 - Fixed crash where the animation was playing in the mini canvas preview and then the user switched to a project with less frames.
+- Fixed issue with the selection rectangle, where if it was being moved while using paste or delete, it went back to its original position. ([#346](https://github.com/Orama-Interactive/Pixelorama/pull/346))
 <br><br>
 
 ## [v0.8] - 2020-09-23
@@ -229,9 +230,9 @@ sapient-cogbag, Kinwailo, Igor Santarek (jegor377), Dávid Gábor BODOR (dragonf
 - The grid options are now being updated realtime when they're being changed from the preferences, and they are also being saved in the config cache file.
 
 ### Fixed
-- Fixed crash that occured when trying to delete contents of a selection, that were outside the canvas.
+- Fixed crash that occurred when trying to delete contents of a selection, that were outside the canvas.
 - Fixed .gpl palettes not being imported correctly - Issue #112
-- Fixed crash that occured when pressing the play buttons on the timeline, on Godot 3.2 - Issue #111
+- Fixed crash that occurred when pressing the play buttons on the timeline, on Godot 3.2 - Issue #111
 - Fixed bug where, if you had a random brush selected and then selected the pencil tool, "brush color from" did not appear.
 - Fixed crash on Godot 3.2.beta6 when pressing the Edit Palette button.
 - The canvas updates automatically when onion skinning settings change.
