@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-08 21:16\n"
 
 msgid "OK"
 msgstr "確定"
@@ -113,6 +113,9 @@ msgstr "復原"
 
 msgid "Copy"
 msgstr "複製"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "貼上"
@@ -418,6 +421,9 @@ msgstr "黃褐色"
 msgid "Light"
 msgstr "亮色"
 
+msgid "Purple"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr "只處理選取區塊"
 
@@ -530,10 +536,10 @@ msgid "Developed by Orama Interactive"
 msgstr "由Orama Interactive開發"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "版權所有 2019-2020 Orama Interactive 與貢獻者"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive 與貢獻者"
 
 msgid "Website"
 msgstr "官網"
@@ -1238,11 +1244,11 @@ msgstr "檔案已儲存"
 msgid "File autosaved"
 msgstr "檔案已自動儲存"
 
-msgid "File failed to open"
-msgstr "開啟失敗"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "儲存失敗"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "檔案已輸出"
@@ -1279,6 +1285,15 @@ msgstr "色盤檔無法使用"
 
 msgid "Edit Palette"
 msgstr "編輯色盤"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "贊助者："
@@ -1443,4 +1458,10 @@ msgstr "刪除色盤出錯! 錯誤代碼：%s"
 
 msgid "and"
 msgstr "和"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
 

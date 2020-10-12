@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-08 21:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -113,6 +113,9 @@ msgstr "Ripeti"
 
 msgid "Copy"
 msgstr "Copia"
+
+msgid "Cut"
+msgstr "Taglia"
 
 msgid "Paste"
 msgstr "Incolla"
@@ -419,6 +422,9 @@ msgstr "Caramello"
 msgid "Light"
 msgstr "Chiaro"
 
+msgid "Purple"
+msgstr "Viola"
+
 msgid "Only affect selection"
 msgstr "Influire solo sulla selezione"
 
@@ -531,10 +537,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Sviluppato da Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive e contributori"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 di Orama Interactive e contributori"
 
 msgid "Website"
 msgstr "Sito web"
@@ -1240,11 +1246,11 @@ msgstr "File salvato"
 msgid "File autosaved"
 msgstr "File salvato automaticamente"
 
-msgid "File failed to open"
-msgstr "Impossibile aprire il file"
+msgid "File failed to open. Error code %s"
+msgstr "Impossibile aprire il file. Codice errore %s"
 
-msgid "File failed to save"
-msgstr "Impossibile salvare il file"
+msgid "File failed to save. Error code %s"
+msgstr "Impossibile salvare il file. Codice errore %s"
 
 msgid "File exported"
 msgstr "File esportato"
@@ -1281,6 +1287,15 @@ msgstr "File Palette non valido!"
 
 msgid "Edit Palette"
 msgstr "Modifica Palette"
+
+msgid "Create colors with alpha component"
+msgstr "Crea colori con componente alfa"
+
+msgid "Get colors only from selection"
+msgstr "Ottieni colori solo dalla selezione"
+
+msgid "Get colors from"
+msgstr "Ottieni colori da"
 
 msgid "Patrons:"
 msgstr "Sostenitori:"
@@ -1445,4 +1460,10 @@ msgstr "Si è verificato un errore durante la rimozione della palette! Codice er
 
 msgid "and"
 msgstr "e"
+
+msgid "Move the selected frame to the left."
+msgstr "Sposta il riquadro selezionato a sinistra."
+
+msgid "Move the selected frame to the right."
+msgstr "Sposta il riquadro selezionato a destra."
 

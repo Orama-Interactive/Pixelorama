@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-08 21:16\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -112,6 +112,9 @@ msgid "Redo"
 msgstr "Pārstrādāt"
 
 msgid "Copy"
+msgstr ""
+
+msgid "Cut"
 msgstr ""
 
 msgid "Paste"
@@ -418,6 +421,9 @@ msgstr ""
 
 msgid "Light"
 msgstr "Gaišs"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
@@ -1236,10 +1242,10 @@ msgstr "Fails saglabāts"
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
+msgid "File failed to open. Error code %s"
 msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
@@ -1277,6 +1283,15 @@ msgstr "Nederīgs paletes fails!"
 
 msgid "Edit Palette"
 msgstr "Rediģēt paleti"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Labvēļi:"
@@ -1439,5 +1454,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
 msgstr ""
 

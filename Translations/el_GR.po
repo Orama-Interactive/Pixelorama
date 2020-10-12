@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-09-23 12:58\n"
+"PO-Revision-Date: 2020-10-12 16:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -113,6 +113,9 @@ msgstr "Ακύρωση αναίρεσης"
 
 msgid "Copy"
 msgstr "Αντιγραφή"
+
+msgid "Cut"
+msgstr "Αποκοπή"
 
 msgid "Paste"
 msgstr "Επικόλληση"
@@ -418,6 +421,9 @@ msgstr "Καραμέλα"
 
 msgid "Light"
 msgstr "Φωτεινό"
+
+msgid "Purple"
+msgstr "Μωβ"
 
 msgid "Only affect selection"
 msgstr "Επηρεάζει μόνο την επιλογή"
@@ -1240,11 +1246,11 @@ msgstr "Το αρχείο αποθηκεύτηκε"
 msgid "File autosaved"
 msgstr "Το αρχείο αποθηκεύτηκε αυτόματα"
 
-msgid "File failed to open"
-msgstr "Απέτυχε το άνοιγμα του αρχείου"
+msgid "File failed to open. Error code %s"
+msgstr "Απέτυχε το άνοιγμα του αρχείου. Κωδικός σφάλματος %s"
 
-msgid "File failed to save"
-msgstr "Απέτυχε η αποθήκευση του αρχείου"
+msgid "File failed to save. Error code %s"
+msgstr "Απέτυχε η αποθήκευση του αρχείου. Κωδικός σφάλματος %s"
 
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
@@ -1281,6 +1287,15 @@ msgstr "Μη έγκυρο αρχείο παλέτας!"
 
 msgid "Edit Palette"
 msgstr "Επεξεργασία Παλέτας"
+
+msgid "Create colors with alpha component"
+msgstr "Δημιουργία χρωμάτων με στοιχεία αδιαφάνειας"
+
+msgid "Get colors only from selection"
+msgstr "Χρώματα μόνο από την επιλογή"
+
+msgid "Get colors from"
+msgstr "Χρώματα από"
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1445,4 +1460,10 @@ msgstr "Παρουσιάστηκε σφάλμα κατά την αφαίρεση
 
 msgid "and"
 msgstr "και"
+
+msgid "Move the selected frame to the left."
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα αριστερά"
+
+msgid "Move the selected frame to the right."
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά"
 

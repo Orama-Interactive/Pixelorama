@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-08 21:16\n"
 
 msgid "OK"
 msgstr "예"
@@ -113,6 +113,9 @@ msgstr "다시 실행"
 
 msgid "Copy"
 msgstr "복사"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "붙여넣기"
@@ -418,6 +421,9 @@ msgstr "카라멜"
 
 msgid "Light"
 msgstr "라이트"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "선택 영역만 영향을 줌"
@@ -1240,11 +1246,11 @@ msgstr "파일 저장됨"
 msgid "File autosaved"
 msgstr "파일 자동 저장됨"
 
-msgid "File failed to open"
-msgstr "파일 불러오기 실패"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "파일 저장 실패"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "파일이 내보내졌습니다"
@@ -1281,6 +1287,15 @@ msgstr "유효하지 않은 팔레트 파일입니다!"
 
 msgid "Edit Palette"
 msgstr "팔레트 수정"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "후원자:"
@@ -1445,4 +1460,10 @@ msgstr "팔레트를 제거하던 도중 오류가 발생했습니다! 오류 �
 
 msgid "and"
 msgstr "그리고"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
 

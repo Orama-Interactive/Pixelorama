@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-09 02:17\n"
 
 msgid "OK"
 msgstr "确定"
@@ -113,6 +113,9 @@ msgstr "重做"
 
 msgid "Copy"
 msgstr "复制"
+
+msgid "Cut"
+msgstr "剪切"
 
 msgid "Paste"
 msgstr "粘贴"
@@ -419,6 +422,9 @@ msgstr "浅褐色"
 msgid "Light"
 msgstr "白色"
 
+msgid "Purple"
+msgstr "紫色"
+
 msgid "Only affect selection"
 msgstr "仅影响所选"
 
@@ -531,10 +537,10 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "版权所有 2019-2020 Orama Interactive 和贡献者"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -890,7 +896,7 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "覆盖颜色而不是混合颜色。 此选项仅与不完全不透明的颜色有关"
 
 msgid "Pixel Perfect"
-msgstr "完美像素"
+msgstr "平滑像素"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "通过去除边缘上多余的像素使线条平滑"
@@ -1240,11 +1246,11 @@ msgstr "文件已保存"
 msgid "File autosaved"
 msgstr "文件已自动保存"
 
-msgid "File failed to open"
-msgstr "文件打开失败"
+msgid "File failed to open. Error code %s"
+msgstr "打开文件失败。错误代码 %s"
 
-msgid "File failed to save"
-msgstr "文件保存失败"
+msgid "File failed to save. Error code %s"
+msgstr "保存文件失败。错误代码 %s"
 
 msgid "File exported"
 msgstr "文件已导出"
@@ -1281,6 +1287,15 @@ msgstr "无效的调色板文件!"
 
 msgid "Edit Palette"
 msgstr "编辑调色板"
+
+msgid "Create colors with alpha component"
+msgstr "创建带有 Alpha 组件的颜色"
+
+msgid "Get colors only from selection"
+msgstr "仅从所选获取颜色"
+
+msgid "Get colors from"
+msgstr "获取颜色从"
 
 msgid "Patrons:"
 msgstr "赞助:"
@@ -1444,4 +1459,10 @@ msgstr "删除调色板时发生错误！ 错误代码：%s"
 
 msgid "and"
 msgstr "和"
+
+msgid "Move the selected frame to the left."
+msgstr "移动所选帧到左侧。"
+
+msgid "Move the selected frame to the right."
+msgstr "移动所选帧到右侧。"
 

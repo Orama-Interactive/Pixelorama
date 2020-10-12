@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-08 21:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -112,6 +112,9 @@ msgid "Redo"
 msgstr "やり直し"
 
 msgid "Copy"
+msgstr ""
+
+msgid "Cut"
 msgstr ""
 
 msgid "Paste"
@@ -416,6 +419,9 @@ msgid "Caramel"
 msgstr ""
 
 msgid "Light"
+msgstr ""
+
+msgid "Purple"
 msgstr ""
 
 msgid "Only affect selection"
@@ -1211,10 +1217,10 @@ msgstr ""
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
+msgid "File failed to open. Error code %s"
 msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
@@ -1251,6 +1257,15 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
+msgstr ""
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
 msgstr ""
 
 msgid "Patrons:"
@@ -1414,5 +1429,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
 msgstr ""
 

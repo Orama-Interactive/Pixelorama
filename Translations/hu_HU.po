@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-10-08 21:17\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -113,6 +113,9 @@ msgstr "Mégis"
 
 msgid "Copy"
 msgstr "Másolás"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "Beillesztés"
@@ -419,20 +422,23 @@ msgstr "Krémszín"
 msgid "Light"
 msgstr "Világos"
 
+msgid "Purple"
+msgstr "Lila"
+
 msgid "Only affect selection"
 msgstr ""
 
 msgid "Current cel"
-msgstr ""
+msgstr "Jelenlegi cella"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Jelenlegi képkocka"
 
 msgid "All frames"
-msgstr ""
+msgstr "Összes képkocka"
 
 msgid "All projects"
-msgstr ""
+msgstr "Minden projekt"
 
 msgid "Invert Colors"
 msgstr "Színek invertálása"
@@ -525,22 +531,22 @@ msgid "About Pixelorama"
 msgstr "A Pixelorama-ról"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pixelate your dreams!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Fejleszette: Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive és hozzáműködők"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 készítette Orama Interactive és hozzáműködők"
 
 msgid "Website"
 msgstr "Weboldal"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub tároló"
 
 msgid "Donate"
 msgstr "Támogatás"
@@ -594,7 +600,7 @@ msgid "Spanish"
 msgstr "Spanyol"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Katalán"
 
 msgid "Esperanto"
 msgstr "Eszperantó"
@@ -621,7 +627,7 @@ msgid "Hungarian"
 msgstr "Magyar"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Román"
 
 msgid "Development Team"
 msgstr "Fejlesztő csapat"
@@ -636,7 +642,7 @@ msgid "GitHub Contributors"
 msgstr "GitHub Közreműködők"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Képet készítette: %s"
 
 msgid "untitled"
 msgstr "névtelen"
@@ -794,13 +800,13 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Négyszögletű"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Izometrikus"
 
 msgid "All"
-msgstr ""
+msgstr "Mind"
 
 msgid "Grid width:"
 msgstr "Rács szélessége:"
@@ -815,7 +821,7 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Beállítja, hogy a rács vízszintes vonalai milyen távolságra legyenek egymástól"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Izometrikus cella méret:"
 
 msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
@@ -869,10 +875,10 @@ msgid "Select a brush"
 msgstr "Ecset kiválasztása"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Pixel ecset"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Kör ecset"
 
 msgid "Filled circle brush"
 msgstr ""
@@ -1045,10 +1051,10 @@ msgid "Frame Tag Properties"
 msgstr ""
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Új képkocka címke hozzáadása"
 
 msgid "Name:"
-msgstr ""
+msgstr "Név:"
 
 msgid "From:"
 msgstr ""
@@ -1131,7 +1137,7 @@ msgid "Lock/unlock layer"
 msgstr "Réteg Bezárása/Kinyitása"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Képkocka: %s, Réteg: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1240,11 +1246,11 @@ msgstr "Fájl elmentve"
 msgid "File autosaved"
 msgstr "Fájl automatikusan elmentve"
 
-msgid "File failed to open"
-msgstr "A fájl megnyitása sikertelen"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "A mentés sikertelen"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "Fájl exportálva"
@@ -1271,7 +1277,7 @@ msgid "Create a new empty palette?"
 msgstr "Létrehoz egy új és üres palettát?"
 
 msgid "Error"
-msgstr ""
+msgstr "Hiba"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: A palettának érvényes neve kell hogy legyen."
@@ -1281,6 +1287,15 @@ msgstr "Érvénytelen palettafájl!"
 
 msgid "Edit Palette"
 msgstr "Paletta Szerkesztése"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Támogatók:"
@@ -1444,5 +1459,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Hiba történt a paletta eltávolítása közben! Error kód: %s"
 
 msgid "and"
+msgstr "és"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
 msgstr ""
 

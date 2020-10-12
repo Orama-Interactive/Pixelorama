@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-10-08 21:17\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -112,6 +112,9 @@ msgid "Redo"
 msgstr "Refari"
 
 msgid "Copy"
+msgstr ""
+
+msgid "Cut"
 msgstr ""
 
 msgid "Paste"
@@ -418,6 +421,9 @@ msgstr "Karamela"
 
 msgid "Light"
 msgstr "Hela"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
@@ -1212,11 +1218,11 @@ msgstr "Dosiero konservitas"
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
-msgstr "Dosiero ne sukcesis malfermiĝi"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "Dosiero ne sukcesis konservi"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "Dosiero elportitas"
@@ -1253,6 +1259,15 @@ msgstr "Malvera dosiero de paletro!"
 
 msgid "Edit Palette"
 msgstr "Redakti paletron"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Patronoj:"
@@ -1415,5 +1430,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Eraro okazis dum la paletra forigado! Kodo de eraro: %s"
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
 msgstr ""
 

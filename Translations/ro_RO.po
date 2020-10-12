@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-10-09 08:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -113,6 +113,9 @@ msgstr "Refacere"
 
 msgid "Copy"
 msgstr "Copiere"
+
+msgid "Cut"
+msgstr "Decupare"
 
 msgid "Paste"
 msgstr "Lipire"
@@ -419,6 +422,9 @@ msgstr "Caramel"
 msgid "Light"
 msgstr "Luminos"
 
+msgid "Purple"
+msgstr "Mov"
+
 msgid "Only affect selection"
 msgstr "Afectează doar selecția"
 
@@ -531,10 +537,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Dezvoltat de Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Drepturi de autor 2019-2020 Orama Interactive și contribuitorii"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 de Orama Interactive și contribuitorii"
 
 msgid "Website"
 msgstr "Pagină de internet"
@@ -1240,11 +1246,11 @@ msgstr "Fișier salvat"
 msgid "File autosaved"
 msgstr "Fișier autosalvat"
 
-msgid "File failed to open"
-msgstr "Fișierul nu a putut fi deschis"
+msgid "File failed to open. Error code %s"
+msgstr "Fișierul nu a putut fi deschis. Cod de eroare %s"
 
-msgid "File failed to save"
-msgstr "Fișierul nu a putut fi salvat"
+msgid "File failed to save. Error code %s"
+msgstr "Fișierul nu a putut fi salvat. Cod de eroare %s"
 
 msgid "File exported"
 msgstr "Fișier exportat"
@@ -1281,6 +1287,15 @@ msgstr "Fișier de paletă invalid!"
 
 msgid "Edit Palette"
 msgstr "Editare paletă"
+
+msgid "Create colors with alpha component"
+msgstr "Creează culori cu componenta alfa"
+
+msgid "Get colors only from selection"
+msgstr "Obține culori doar din selecție"
+
+msgid "Get colors from"
+msgstr "Obține culori din"
 
 msgid "Patrons:"
 msgstr "Susținători:"
@@ -1445,4 +1460,10 @@ msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
 
 msgid "and"
 msgstr "și"
+
+msgid "Move the selected frame to the left."
+msgstr "Mută cadrul selectat la stânga."
+
+msgid "Move the selected frame to the right."
+msgstr "Mută cadrul selectat la dreapta."
 

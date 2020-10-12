@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-10-08 21:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -113,6 +113,9 @@ msgstr "Redo"
 
 msgid "Copy"
 msgstr "Salin"
+
+msgid "Cut"
+msgstr ""
 
 msgid "Paste"
 msgstr "Tempel"
@@ -418,6 +421,9 @@ msgstr "Karamel"
 
 msgid "Light"
 msgstr "Terang"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Hanya mempengaruhi pilihan"
@@ -1237,11 +1243,11 @@ msgstr "File Tersimpan"
 msgid "File autosaved"
 msgstr "File tersimpan"
 
-msgid "File failed to open"
-msgstr "File gagal dibuka"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "File gagal disimpan"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "File sudah terekspor"
@@ -1278,6 +1284,15 @@ msgstr "File palet tidak valid"
 
 msgid "Edit Palette"
 msgstr "Edit Palet"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1442,5 +1457,11 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
 msgstr ""
 
