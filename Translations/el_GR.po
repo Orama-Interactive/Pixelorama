@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-08 21:17\n"
+"PO-Revision-Date: 2020-10-12 16:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Αντιγραφή"
 
 msgid "Cut"
-msgstr ""
+msgstr "Αποκοπή"
 
 msgid "Paste"
 msgstr "Επικόλληση"
@@ -1247,10 +1247,10 @@ msgid "File autosaved"
 msgstr "Το αρχείο αποθηκεύτηκε αυτόματα"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Απέτυχε το άνοιγμα του αρχείου. Κωδικός σφάλματος %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Απέτυχε η αποθήκευση του αρχείου. Κωδικός σφάλματος %s"
 
 msgid "File exported"
 msgstr "Έγινε εξαγωγή αρχείου"
@@ -1289,7 +1289,7 @@ msgid "Edit Palette"
 msgstr "Επεξεργασία Παλέτας"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Δημιουργία χρωμάτων με στοιχεία αδιαφάνειας"
 
 msgid "Get colors only from selection"
 msgstr "Χρώματα μόνο από την επιλογή"
