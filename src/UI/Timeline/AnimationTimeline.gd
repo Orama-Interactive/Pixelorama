@@ -24,9 +24,10 @@ func _h_scroll_changed(value : float) -> void:
 
 
 func add_frame() -> void:
+	var frame_position = Global.current_project.current_frame
 	var frame : Frame = Global.canvas.new_empty_frame()
 	var new_frames : Array = Global.current_project.frames.duplicate()
-	new_frames.append(frame)
+	new_frames.insert(frame_position + 1, frame)
 	var new_layers : Array = Global.current_project.layers.duplicate()
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
@@ -46,7 +47,7 @@ func add_frame() -> void:
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", new_frames.size() - 1)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame_position + 1)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
