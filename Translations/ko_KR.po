@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-08 21:16\n"
+"PO-Revision-Date: 2020-10-13 11:35\n"
 
 msgid "OK"
 msgstr "예"
@@ -1448,6 +1448,9 @@ msgstr "백업본을 다시 불러오는 중"
 
 msgid "Remove currently selected palette"
 msgstr "현재 선택된 팔레트 제거"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
 
 msgid "You can't remove more palettes!"
 msgstr "팔레트를 더 이상 지울 수 없습니다!"
