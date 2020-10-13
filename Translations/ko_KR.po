@@ -537,10 +537,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive가 개발함"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "저작권 2019-2020 Orama and contributors"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "웹사이트"
@@ -1095,7 +1095,7 @@ msgid "Move Right"
 msgstr "오른쪽으로 이동"
 
 msgid "Add Frame Tag"
-msgstr ""
+msgstr "프레임 태그를 추가하세요"
 
 msgid "Link Cel"
 msgstr "셀 연결"
@@ -1238,7 +1238,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr "다시 실행: 프레임 태그 삭제"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "이동 가이드"
 
 msgid "File saved"
 msgstr "파일 저장됨"
@@ -1247,10 +1247,10 @@ msgid "File autosaved"
 msgstr "파일 자동 저장됨"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "코드 에러 때문에 파일을 여는것을 실패했읍니다"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "코드 에러 때문에 파일 세이브를 실패했읍니다"
 
 msgid "File exported"
 msgstr "파일이 내보내졌습니다"
@@ -1462,8 +1462,8 @@ msgid "and"
 msgstr "그리고"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "선택한 플레임을 왼쪽으로 움직여주세요"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
 
