@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-10-13 16:40\n"
+"PO-Revision-Date: 2020-10-13 16:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1450,7 +1450,7 @@ msgid "Remove currently selected palette"
 msgstr "Odstranit aktuálně vybranou paletu"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Jste si jisti, že chcete odstranit tuto paletu? (Nevratná změna)"
 
 msgid "You can't remove more palettes!"
 msgstr "Nelze odstranit více palet!"
@@ -1465,8 +1465,8 @@ msgid "and"
 msgstr "a"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Přesunout vybraný snímek doleva."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Přesunout vybraný snímek doprava."
 
