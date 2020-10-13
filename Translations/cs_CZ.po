@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-13 16:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Kopírovat"
 
 msgid "Cut"
-msgstr ""
+msgstr "Vyjmout"
 
 msgid "Paste"
 msgstr "Vložit"
@@ -423,7 +423,7 @@ msgid "Light"
 msgstr "Světlý"
 
 msgid "Purple"
-msgstr ""
+msgstr "Fialová"
 
 msgid "Only affect selection"
 msgstr "Pouze ovlivňuje výběr"
@@ -537,10 +537,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Vyvinuto Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive a přispěvatelé"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 od Orama Interactive a přispěvatelů"
 
 msgid "Website"
 msgstr "Webové stránky"
@@ -1247,10 +1247,10 @@ msgid "File autosaved"
 msgstr "Soubor automaticky uložen"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Otevření souboru se nezdařilo. Chybový kód %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Soubor se nepodařilo uložit. Kód chyby %s"
 
 msgid "File exported"
 msgstr "Soubor exportován"
@@ -1289,13 +1289,13 @@ msgid "Edit Palette"
 msgstr "Upravit paletu"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Vytvořit barvy s alfa komponentou"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Získat barvy pouze z výběru"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Získat barvy z"
 
 msgid "Patrons:"
 msgstr "Patroni:"
