@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-10-08 21:16\n"
+"PO-Revision-Date: 2020-10-13 11:35\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1442,6 +1442,9 @@ msgid "Backup reloaded"
 msgstr ""
 
 msgid "Remove currently selected palette"
+msgstr ""
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
 msgstr ""
 
 msgid "You can't remove more palettes!"
