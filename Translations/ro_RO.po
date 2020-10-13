@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-13 14:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1450,7 +1450,7 @@ msgid "Remove currently selected palette"
 msgstr "Elimină paleta selectată în prezent"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Sigur vrei să elimini această paletă (aceasta nu va putea fi recuperată)?"
 
 msgid "You can't remove more palettes!"
 msgstr "Nu poți elimina mai multe palete!"
