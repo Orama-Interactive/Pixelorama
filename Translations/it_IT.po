@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-10-08 21:38\n"
+"PO-Revision-Date: 2020-10-13 11:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1448,6 +1448,9 @@ msgstr "Backup ricaricato"
 
 msgid "Remove currently selected palette"
 msgstr "Rimuovi la palette attualmente selezionata"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
 
 msgid "You can't remove more palettes!"
 msgstr "Non puoi rimuovere altre palette!"
