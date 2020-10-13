@@ -36,11 +36,13 @@ If you want to add new features or fix bugs, please make sure that:
 - If you are adding new interactive UI elements such as buttons, don't forget to change their mouse default cursor shape to pointing arrow. Hint tooltips that explain the element's usage to the user are welcome too, just make sure to also include them in `Translations.pot`.
 - If you are adding new scripts and/or scenes, please put them somewhere inside the `src/` directory, and make sure to use PascalCase for your file and folder names. [Read this guide for more information.](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
 - If you are adding images or any type of asset, please put them somewhere inside the `assets/` directory, and make sure to use snake_case for your file and folder names.
-- Do **NOT** use the `l10n_master` branch for development. Do not base your work from it, and do not open Pull Requests targeted at it. It's used specifically by Crowdin for translation handling.
+- Do **NOT** use the `l10n_master`, `release` or `gh-pages` branches for development. Do not base your work from them, and do not open Pull Requests targeted at them.
 - If you want to add an error dialog, use the existing ErrorDialog, change its text and pop it up, instead of making a new one.
 
 Please create different pull requests for each feature you'd like to implement, or each bug you'd like to fix. Make sure your pull request only handles one specific topic, and not multiple. If you want to make multiple changes, make a pull request for each of them. For this reason, it's recommended you create new branches in your forked repository, instead of using your fork's master branch.
 This [Git style guide](https://github.com/agis-/git-style-guide) has some good practices to have in mind.
+
+If you are new to git, [this guide](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/) will help you.
 
 Keep in mind, however, that not all PRs will be merged. Some may need discussion, or others may be downright closed.
 <br><br>
