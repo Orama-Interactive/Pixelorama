@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-10-08 21:17\n"
+"PO-Revision-Date: 2020-10-13 11:36\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -1418,6 +1418,9 @@ msgstr ""
 
 msgid "Remove currently selected palette"
 msgstr "Verwijder geselecteerde palet"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
 
 msgid "You can't remove more palettes!"
 msgstr "Je kunt geen paletten meer verwijderen!"
