@@ -9,6 +9,7 @@ var current_palette = "Default"
 var from_palette : Palette
 
 onready var palette_from_sprite_dialog = $"../../../../PaletteFromSpriteDialog"
+onready var remove_palette_warning = $"../../../../RemovePaletteWarning"
 
 
 func _ready() -> void:
@@ -411,7 +412,8 @@ func _on_NewPaletteDialog_popup_hide() -> void:
 
 
 func _on_RemovePalette_pressed() -> void:
-	remove_palette(current_palette)
+	remove_palette_warning.popup_centered()
+	Global.dialog_open(true)
 
 
 func _on_PaletteFromSpriteDialog_confirmed() -> void:
@@ -419,4 +421,12 @@ func _on_PaletteFromSpriteDialog_confirmed() -> void:
 
 
 func _on_PaletteFromSpriteDialog_popup_hide() -> void:
+	Global.dialog_open(false)
+
+
+func _on_RemovePaletteWarning_confirmed() -> void:
+	remove_palette(current_palette)
+
+
+func _on_RemovePaletteWarning_popup_hide() -> void:
 	Global.dialog_open(false)

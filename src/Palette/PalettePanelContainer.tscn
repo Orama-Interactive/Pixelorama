@@ -244,6 +244,11 @@ mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null ]
 selected = 0
+
+[node name="RemovePaletteWarning" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+dialog_text = "Are you sure you want to remove this palette? (Cannot be undone)"
 [connection signal="pressed" from="PaletteVBoxContainer/CenterContainer/PaletteButtons/AddPalette" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_AddPalette_pressed"]
 [connection signal="pressed" from="PaletteVBoxContainer/CenterContainer/PaletteButtons/EditPalette" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="on_edit_palette"]
 [connection signal="pressed" from="PaletteVBoxContainer/CenterContainer/PaletteButtons/RemovePalette" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_RemovePalette_pressed"]
@@ -254,3 +259,5 @@ selected = 0
 [connection signal="popup_hide" from="PaletteImportFileDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_NewPaletteDialog_popup_hide"]
 [connection signal="confirmed" from="PaletteFromSpriteDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteFromSpriteDialog_confirmed"]
 [connection signal="popup_hide" from="PaletteFromSpriteDialog" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_PaletteFromSpriteDialog_popup_hide"]
+[connection signal="confirmed" from="RemovePaletteWarning" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_RemovePaletteWarning_confirmed"]
+[connection signal="popup_hide" from="RemovePaletteWarning" to="PaletteVBoxContainer/ScrollPalette/CenterPalette/PaletteContainer" method="_on_RemovePaletteWarning_popup_hide"]

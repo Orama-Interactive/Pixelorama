@@ -1408,6 +1408,9 @@ msgstr ""
 msgid "Remove currently selected palette"
 msgstr ""
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr ""
 
