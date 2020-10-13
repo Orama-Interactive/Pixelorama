@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-13 23:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1448,7 +1448,7 @@ msgid "Remove currently selected palette"
 msgstr "Удалить выбранную на данный момент палитру"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить эту палитру? (Действие необратимо)"
 
 msgid "You can't remove more palettes!"
 msgstr "Нельзя удалить больше палитр!"
