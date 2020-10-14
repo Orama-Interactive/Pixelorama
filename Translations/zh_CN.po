@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-10-14 02:00\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1449,7 +1449,7 @@ msgid "Remove currently selected palette"
 msgstr "删除当前所选调色板"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "您确定要删除该调色板吗 (无法撤消)？"
 
 msgid "You can't remove more palettes!"
 msgstr "您无法删除更多调色板！"
