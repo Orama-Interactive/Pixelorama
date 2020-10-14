@@ -31,6 +31,7 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  sapient_cogbag")
 	contributors.create_item(contributor_root).set_text(0, "  Matthew Paul (matthewpaul-us)")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
+	contributors.create_item(contributor_root).set_text(0, "  PinyaColada")
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri (SbNanduri)")
 	contributors.create_item(contributor_root).set_text(0, "  Dávid Gábor BODOR (dragonfi)")
 	contributors.create_item(contributor_root).set_text(0, "  John Jerome Romero (Wishdream)")
@@ -38,7 +39,6 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Aaron Franke (aaronfranke)")
 	contributors.create_item(contributor_root).set_text(0, "  rob-a-bolton")
 	contributors.create_item(contributor_root).set_text(0, "  Vriska Weaver (henlo-birb)")
-	contributors.create_item(contributor_root).set_text(0, "  PinyaColada")
 
 	var donors_root := donors.create_item()
 	donors.create_item(donors_root).set_text(0, "  pcmxms - https://www.nonamefornowsoft.com.br/")
@@ -93,6 +93,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  IagoAndrade - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  chacal_exodius - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  Lucas Santiago (lu.santi.oli) - " + tr("Brazilian Portuguese"))
+	translators.create_item(translators_root).set_text(0, "  TheNoobPro44 - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  Artem (blinovartem) - " + tr("Russian"))
@@ -114,6 +115,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	translators.create_item(translators_root).set_text(0, "  Aninuscsalas - " + tr("Hungarian"))
 	translators.create_item(translators_root).set_text(0, "  jaehyeon1090 - " + tr("Korean"))
 	translators.create_item(translators_root).set_text(0, "  sfun_G - " + tr("Korean"))
+	translators.create_item(translators_root).set_text(0, "  KripC2160 - " + tr("Korean"))
 	translators.create_item(translators_root).set_text(0, "  M. Gabriel Lup - " + tr("Romanian"))
 
 
