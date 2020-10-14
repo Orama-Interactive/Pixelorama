@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-14 06:39\n"
+"PO-Revision-Date: 2020-10-14 06:49\n"
 
 msgid "OK"
 msgstr "예"
@@ -1250,7 +1250,7 @@ msgid "File failed to open. Error code %s"
 msgstr "코드 에러. 파일을 여는것을 실패힜읍니다"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "코드 에러. 파일을 저장을 실패했읍니다"
 
 msgid "File exported"
 msgstr "파일이 내보내졌습니다"
@@ -1465,8 +1465,8 @@ msgid "and"
 msgstr "그리고"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "선택한 프레임을 왼쪽으로 움직여주세요"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
 
