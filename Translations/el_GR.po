@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-12 16:06\n"
+"PO-Revision-Date: 2020-10-13 11:45\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1448,6 +1448,9 @@ msgstr "Το αντίγραφο ασφαλείας επαναφορτώθηκε"
 
 msgid "Remove currently selected palette"
 msgstr "Διαγραφή παλέτας"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή τη παλέτα; (Δεν είναι δυνατή η αναίρεση αυτής της ενέργειας)"
 
 msgid "You can't remove more palettes!"
 msgstr "Δεν μπορείτε να διαγράψετε άλλες παλέτες!"

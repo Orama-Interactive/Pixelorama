@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-08 21:16\n"
+"PO-Revision-Date: 2020-10-14 10:50\n"
 
 msgid "OK"
 msgstr "예"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "복사"
 
 msgid "Cut"
-msgstr ""
+msgstr "잘라내기"
 
 msgid "Paste"
 msgstr "붙여넣기"
@@ -423,7 +423,7 @@ msgid "Light"
 msgstr "라이트"
 
 msgid "Purple"
-msgstr ""
+msgstr "보라색"
 
 msgid "Only affect selection"
 msgstr "선택 영역만 영향을 줌"
@@ -537,10 +537,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive가 개발함"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "저작권 2019-2020 Orama Interactive and contributors"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "웹사이트"
@@ -941,7 +941,7 @@ msgid "Lighten/Darken amount"
 msgstr "밝게/어둡게 정도"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "선택 대상:"
 
 msgid "Left Color"
 msgstr "왼쪽 색상"
@@ -1238,7 +1238,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr "다시 실행: 프레임 태그 삭제"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "이동 가이드"
 
 msgid "File saved"
 msgstr "파일 저장됨"
@@ -1247,10 +1247,10 @@ msgid "File autosaved"
 msgstr "파일 자동 저장됨"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "코드 에러. 파일을 여는것을 실패힜읍니다"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "코드 에러. 파일을 저장을 실패했읍니다"
 
 msgid "File exported"
 msgstr "파일이 내보내졌습니다"
@@ -1289,7 +1289,7 @@ msgid "Edit Palette"
 msgstr "팔레트 수정"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "알파 구성으로 색깔을 만들기"
 
 msgid "Get colors only from selection"
 msgstr ""
@@ -1449,6 +1449,9 @@ msgstr "백업본을 다시 불러오는 중"
 msgid "Remove currently selected palette"
 msgstr "현재 선택된 팔레트 제거"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr "팔레트를 더 이상 지울 수 없습니다!"
 
@@ -1462,8 +1465,8 @@ msgid "and"
 msgstr "그리고"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "선택한 프레임을 왼쪽으로 움직여주세요"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
 

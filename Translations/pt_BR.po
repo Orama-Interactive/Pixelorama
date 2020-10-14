@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-10-08 21:16\n"
+"PO-Revision-Date: 2020-10-13 11:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Copiar"
 
 msgid "Cut"
-msgstr ""
+msgstr "Cortar"
 
 msgid "Paste"
 msgstr "Colar"
@@ -423,7 +423,7 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Purple"
-msgstr ""
+msgstr "Roxo"
 
 msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
@@ -1247,10 +1247,10 @@ msgid "File autosaved"
 msgstr "Arquivo salvo automaticamente"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Arquivo falhou ao abrir. Código do erro %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Arquivo falhou ao salvar. Código de erro %s"
 
 msgid "File exported"
 msgstr "Arquivo exportado"
@@ -1292,10 +1292,10 @@ msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Obter cores somente da seleção"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Obter cores de"
 
 msgid "Patrons:"
 msgstr "Patrões"
@@ -1448,6 +1448,9 @@ msgstr "Backup recarregado"
 
 msgid "Remove currently selected palette"
 msgstr "Remover paleta selecionada"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
 
 msgid "You can't remove more palettes!"
 msgstr "Você não pode remover mais paletas!"

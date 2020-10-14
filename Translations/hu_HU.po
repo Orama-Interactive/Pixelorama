@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-10-08 21:17\n"
+"PO-Revision-Date: 2020-10-13 11:36\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -1448,6 +1448,9 @@ msgstr "Biztonsági mentés újratöltve"
 
 msgid "Remove currently selected palette"
 msgstr "Jelenlegi paletta törlése"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
 
 msgid "You can't remove more palettes!"
 msgstr "Nem lehet több palettát eltávolítani!"

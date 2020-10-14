@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-09 20:48\n"
+"PO-Revision-Date: 2020-10-14 12:36\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr ""
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Masaüstüne kısayol oluştur (opsiyonel)"
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
@@ -51,12 +51,12 @@ msgstr ""
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "${APPNAME} için başlat menüsünde kısayol oluşturur."
 
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "${APPNAME} için masaüstünde kısayol oluşturur."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181

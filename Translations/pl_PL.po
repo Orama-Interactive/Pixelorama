@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-10-08 21:17\n"
+"PO-Revision-Date: 2020-10-13 16:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Kopiuj"
 
 msgid "Cut"
-msgstr ""
+msgstr "Wytnij"
 
 msgid "Paste"
 msgstr "Wklej"
@@ -1246,10 +1246,10 @@ msgid "File autosaved"
 msgstr "Automatycznie zapisano plik"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Nie udało się otworzyć pliku. Kod błędu %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Nie udało się zapisać pliku. Kod błędu %s"
 
 msgid "File exported"
 msgstr "Plik został wyeksportowany"
@@ -1288,13 +1288,13 @@ msgid "Edit Palette"
 msgstr "Edytuj paletę kolorów"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Utwórz kolory z kanałem alpha"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Pobierz kolory tylko z zaznaczenia"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Pobierz kolory z"
 
 msgid "Patrons:"
 msgstr "Patroni:"
@@ -1448,6 +1448,9 @@ msgstr "Wczytano ponownię kopię zapasową"
 msgid "Remove currently selected palette"
 msgstr "Usuń aktualnie wybraną paletę"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "Czy na pewno chcesz usunąć tą paletę? (Nie można cofnąć)"
+
 msgid "You can't remove more palettes!"
 msgstr "Nie możesz usunąć więcej palet!"
 
@@ -1461,8 +1464,8 @@ msgid "and"
 msgstr "i"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Przenieś zaznaczoną klatkę w lewo."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Przenieś zaznaczoną klatkę w prawo."
 
