@@ -10,22 +10,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2020-10-14 16:32\n"
+"PO-Revision-Date: 2020-10-14 16:42\n"
 
 msgid "OK"
-msgstr ""
+msgstr "ठीक है"
 
 msgid "Cancel"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "खोलें"
 
 msgid "Save"
 msgstr ""
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "कृपया पुष्टि करें..."
 
 msgid "File Name:"
 msgstr ""
@@ -40,13 +40,13 @@ msgid "Frame Size"
 msgstr ""
 
 msgid "Width:"
-msgstr ""
+msgstr "चौड़ाई:"
 
 msgid "Height:"
-msgstr ""
+msgstr "लंबाई"
 
 msgid "Center"
-msgstr ""
+msgstr "मध्य"
 
 msgid "File"
 msgstr ""
@@ -55,7 +55,7 @@ msgid "Edit"
 msgstr ""
 
 msgid "View"
-msgstr ""
+msgstr "देखें"
 
 msgid "Image"
 msgstr ""
@@ -64,16 +64,16 @@ msgid "Effects"
 msgstr ""
 
 msgid "Help"
-msgstr ""
+msgstr "सहायता"
 
 msgid "New"
-msgstr ""
+msgstr "नया"
 
 msgid "New..."
-msgstr ""
+msgstr "नया..."
 
 msgid "Open..."
-msgstr ""
+msgstr "खोले..."
 
 msgid "Save..."
 msgstr ""
@@ -103,7 +103,7 @@ msgid "Export PNG as..."
 msgstr ""
 
 msgid "Quit"
-msgstr ""
+msgstr "बंद करे"
 
 msgid "Undo"
 msgstr ""
