@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-14 06:49\n"
+"PO-Revision-Date: 2020-10-14 10:26\n"
 
 msgid "OK"
 msgstr "예"
@@ -941,7 +941,7 @@ msgid "Lighten/Darken amount"
 msgstr "밝게/어둡게 정도"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "선택 대상:"
 
 msgid "Left Color"
 msgstr "왼쪽 색상"
