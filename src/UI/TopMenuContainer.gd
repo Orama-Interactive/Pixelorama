@@ -382,7 +382,7 @@ func help_menu_id_pressed(id : int) -> void:
 			if OS.get_name() == "OSX":
 				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md")
 			else:
-				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v08---2020-09-23")
+				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v08---2020-10-14")
 		4: # About Pixelorama
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)

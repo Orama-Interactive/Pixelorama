@@ -8,7 +8,7 @@ env:
   GODOT_VERSION: 3.2.3
   GODOT_VERSION_MAC: 3.2.2
   EXPORT_NAME: Pixelorama
-  TAG: v0.8
+  TAG: v0.8.1
 
 jobs:
   export-windows:

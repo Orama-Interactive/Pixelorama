@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.8.1] - Unreleased
+## [v0.8.1] - 2020-10-14
 This update has been brought to you by the contributions of:
 Laurenz Reinthaler (Schweini07), PinyaColada
 
