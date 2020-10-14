@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-10-14 20:09\n"
+"PO-Revision-Date: 2020-10-14 20:21\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -531,7 +531,7 @@ msgid "About Pixelorama"
 msgstr "Pixelorama Hakkında"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Hayallerini pikselleştir!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
@@ -540,7 +540,7 @@ msgid "Copyright 2019-2020 Orama Interactive and contributors"
 msgstr ""
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 Orama Interactive ve destekçileri tarafından"
 
 msgid "Website"
 msgstr "İnternet sitesi"
@@ -651,7 +651,7 @@ msgid "imported"
 msgstr ""
 
 msgid "copy"
-msgstr ""
+msgstr "kopya"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Pixelorama'dan çıkmak istediğine emin misin?"
