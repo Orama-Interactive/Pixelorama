@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-14 10:26\n"
+"PO-Revision-Date: 2020-10-14 10:50\n"
 
 msgid "OK"
 msgstr "예"
@@ -1289,7 +1289,7 @@ msgid "Edit Palette"
 msgstr "팔레트 수정"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "알파 구성으로 색깔을 만들기"
 
 msgid "Get colors only from selection"
 msgstr ""
