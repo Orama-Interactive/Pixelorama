@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-10-14 12:36\n"
+"PO-Revision-Date: 2020-10-14 20:09\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "MIME-Version: 1.0\n"
@@ -21,32 +21,32 @@ msgstr ""
 #. SecInstall
 #: .\pixelorama.nsi:72
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Yükle ${APPNAME}"
 
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Başlat Menüsü Kısayolu Ekle (opsiyonel)"
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr "Masaüstüne kısayol oluştur (opsiyonel)"
+msgstr "Masaüstüne Kısayol Oluştur (opsiyonel)"
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Kaldır ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: .\pixelorama.nsi:76
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Konfigürasyon dosyalarını sil (opsiyonel)"
 
 #. DESC_SecInstall
 #: .\pixelorama.nsi:178
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "${APPNAME}${APPVERSION} indirilir."
 
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
@@ -61,10 +61,10 @@ msgstr "${APPNAME} için masaüstünde kısayol oluşturur."
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "${APPNAME}${APPVERSION} silinir ve bütün kısayollar kaldırılır."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "${APPNAME} için konfigürasyon dosyalarını siler."
 
