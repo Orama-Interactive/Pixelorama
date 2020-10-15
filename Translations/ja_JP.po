@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-15 04:07\n"
+"PO-Revision-Date: 2020-10-15 04:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -560,7 +560,7 @@ msgid "Donors"
 msgstr ""
 
 msgid "Translators"
-msgstr ""
+msgstr "翻訳者"
 
 msgid "English"
 msgstr "英語"
@@ -575,7 +575,7 @@ msgid "German"
 msgstr "ドイツ語"
 
 msgid "Polish"
-msgstr ""
+msgstr "ポーランド語"
 
 msgid "Brazilian Portuguese"
 msgstr "ポルトガル語 (ブラジル)"
@@ -599,34 +599,34 @@ msgid "Spanish"
 msgstr "スペイン語"
 
 msgid "Catalan"
-msgstr ""
+msgstr "カタロニア語"
 
 msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr ""
+msgstr "インドネシア語"
 
 msgid "Czech"
-msgstr ""
+msgstr "チェコ語"
 
 msgid "Arabic"
-msgstr ""
+msgstr "アラビア語"
 
 msgid "Turkish"
-msgstr ""
+msgstr "トルコ語"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "ノルウェー語"
 
 msgid "Korean"
 msgstr "韓国語"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "ハンガリー語"
 
 msgid "Romanian"
-msgstr ""
+msgstr "ルーマニア語"
 
 msgid "Development Team"
 msgstr ""
@@ -732,10 +732,10 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 msgid "Left tool"
-msgstr ""
+msgstr "左のツール"
 
 msgid "Right tool"
-msgstr ""
+msgstr "右のツール"
 
 msgid "Left pixel indicator"
 msgstr ""
@@ -849,13 +849,13 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "ブラシ："
 
 msgid "Select a brush"
 msgstr ""
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "ピクセルブラシ"
 
 msgid "Circle brush"
 msgstr ""
@@ -1027,7 +1027,7 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "名前:"
 
 msgid "From:"
 msgstr ""
