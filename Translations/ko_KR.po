@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-15 03:54\n"
+"PO-Revision-Date: 2020-10-15 04:08\n"
 
 msgid "OK"
 msgstr "예"
@@ -1295,7 +1295,7 @@ msgid "Get colors only from selection"
 msgstr "선택한 색깔에서만 가져오기"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "색깔들을 어디에서 가져오기"
 
 msgid "Patrons:"
 msgstr "후원자:"
