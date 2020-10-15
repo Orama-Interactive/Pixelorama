@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-15 11:35\n"
+"PO-Revision-Date: 2020-10-15 12:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -299,10 +299,10 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "バックグラウンド:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "方向:"
 
 msgid "Forward"
 msgstr ""
@@ -335,7 +335,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr ""
+msgstr "ファイル:"
 
 msgid "Interpolation:"
 msgstr ""
@@ -356,28 +356,28 @@ msgid "General"
 msgstr ""
 
 msgid "Startup"
-msgstr ""
+msgstr "スタートアップ"
 
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 msgid "Themes"
-msgstr ""
+msgstr "テーマ"
 
 msgid "Canvas"
-msgstr ""
+msgstr "キャンバス"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "ショートカット"
 
 msgid "Backup"
-msgstr ""
+msgstr "バックアップ"
 
 msgid "Indicators"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "オン"
 
 msgid "Restore default value"
 msgstr ""
@@ -422,7 +422,7 @@ msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr ""
+msgstr "紫"
 
 msgid "Only affect selection"
 msgstr ""
@@ -497,7 +497,7 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "色:"
 
 msgid "Steps:"
 msgstr ""
