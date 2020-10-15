@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-14 10:50\n"
+"PO-Revision-Date: 2020-10-15 03:54\n"
 
 msgid "OK"
 msgstr "예"
@@ -1292,7 +1292,7 @@ msgid "Create colors with alpha component"
 msgstr "알파 구성으로 색깔을 만들기"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "선택한 색깔에서만 가져오기"
 
 msgid "Get colors from"
 msgstr ""
@@ -1450,7 +1450,7 @@ msgid "Remove currently selected palette"
 msgstr "현재 선택된 팔레트 제거"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "이 팔렛을 지울까요? (진행하면 되돌릴 수 없습니다.)"
 
 msgid "You can't remove more palettes!"
 msgstr "팔레트를 더 이상 지울 수 없습니다!"
