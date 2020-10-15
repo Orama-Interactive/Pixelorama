@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-15 04:17\n"
+"PO-Revision-Date: 2020-10-15 11:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "確認して下さい"
 
 msgid "File Name:"
-msgstr ""
+msgstr "ファイル名:"
 
 msgid "Image Size"
 msgstr "画像サイズ"
@@ -112,16 +112,16 @@ msgid "Redo"
 msgstr "やり直し"
 
 msgid "Copy"
-msgstr ""
+msgstr "コピー"
 
 msgid "Cut"
-msgstr ""
+msgstr "カット"
 
 msgid "Paste"
-msgstr ""
+msgstr "ペースト"
 
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 msgid "Scale Image"
 msgstr "画像の拡大縮小"
@@ -217,7 +217,7 @@ msgid "Brush type:"
 msgstr ""
 
 msgid "File brush"
-msgstr ""
+msgstr "ファイルブラシ"
 
 msgid "Project brush"
 msgstr ""
@@ -284,7 +284,7 @@ msgid "Cancel Export"
 msgstr ""
 
 msgid "Alert!"
-msgstr ""
+msgstr "警告！"
 
 msgid "Select Current Folder"
 msgstr ""
