@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-15 04:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -251,7 +251,7 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "フレーム"
 
 msgid "Frames:"
 msgstr ""
@@ -263,13 +263,13 @@ msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "アニメーション"
 
 msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
-msgstr ""
+msgstr "フレーム："
 
 msgid "Orientation:"
 msgstr ""
@@ -398,7 +398,7 @@ msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "色:"
 
 msgid "Guide color:"
 msgstr ""
@@ -413,7 +413,7 @@ msgid "Gray"
 msgstr ""
 
 msgid "Blue"
-msgstr ""
+msgstr "青"
 
 msgid "Caramel"
 msgstr ""
@@ -509,10 +509,10 @@ msgid "Bottom to Top"
 msgstr ""
 
 msgid "Left to Right"
-msgstr ""
+msgstr "左から右"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "右から左"
 
 msgid "View Splash Screen"
 msgstr ""
@@ -536,13 +536,13 @@ msgid "Developed by Orama Interactive"
 msgstr ""
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive and contributors"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive and contributors"
 
 msgid "Website"
-msgstr ""
+msgstr "ウェブサイト"
 
 msgid "GitHub Repo"
 msgstr ""
@@ -563,25 +563,25 @@ msgid "Translators"
 msgstr ""
 
 msgid "English"
-msgstr ""
+msgstr "英語"
 
 msgid "Greek"
-msgstr ""
+msgstr "ギリシャ語"
 
 msgid "French"
-msgstr ""
+msgstr "フランス語"
 
 msgid "German"
-msgstr ""
+msgstr "ドイツ語"
 
 msgid "Polish"
 msgstr ""
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "ポルトガル語 (ブラジル)"
 
 msgid "Russian"
-msgstr ""
+msgstr "ロシア語"
 
 msgid "Chinese Simplified"
 msgstr ""
@@ -590,13 +590,13 @@ msgid "Chinese Traditional"
 msgstr ""
 
 msgid "Italian"
-msgstr ""
+msgstr "イタリア語"
 
 msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
-msgstr ""
+msgstr "スペイン語"
 
 msgid "Catalan"
 msgstr ""
@@ -620,7 +620,7 @@ msgid "Norwegian"
 msgstr ""
 
 msgid "Korean"
-msgstr ""
+msgstr "韓国語"
 
 msgid "Hungarian"
 msgstr ""
