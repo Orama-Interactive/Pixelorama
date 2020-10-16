@@ -127,6 +127,7 @@ var patterns_popup : Popup
 var animation_timeline : Panel
 
 var animation_timer : Timer
+var frame_properties : ConfirmationDialog
 var frame_ids : HBoxContainer
 var current_frame_mark_label : Label
 var onion_skinning_button : BaseButton
@@ -221,6 +222,7 @@ func _ready() -> void:
 	patterns_popup = find_node_by_name(root, "PatternsPopup")
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
+	frame_properties = find_node_by_name(root, "FrameProperties") 
 
 	layers_container = find_node_by_name(animation_timeline, "LayersContainer")
 	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
