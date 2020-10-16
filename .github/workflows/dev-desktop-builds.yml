@@ -51,6 +51,7 @@ jobs:
         with:
           name: Windows-64bit
           path: ./build/windows-64bit/
+          retention-days: 14
 
   export-linux:
     name: Linux Export 🐧
@@ -84,6 +85,7 @@ jobs:
         with:
           name: Linux-64bit
           path: ./build/linux-64bit.tar.gz
+          retention-days: 14
 
   export-mac:
     name: Mac Export 🍎
@@ -132,3 +134,4 @@ jobs:
         with:
           name: Mac
           path: ./build/mac/Pixelorama.dmg
+          retention-days: 14
