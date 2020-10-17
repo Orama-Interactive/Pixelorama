@@ -3,7 +3,6 @@
 [ext_resource path="res://src/UI/Timeline/FrameProperties.gd" type="Script" id=1]
 
 [node name="FrameProperties" type="ConfirmationDialog"]
-visible = true
 margin_right = 209.0
 margin_bottom = 137.0
 script = ExtResource( 1 )
@@ -37,24 +36,24 @@ margin_bottom = 68.0
 columns = 2
 
 [node name="Frame" type="Label" parent="VBoxContainer/GridContainer"]
-margin_right = 105.0
+margin_right = 97.0
 margin_bottom = 14.0
-text = "Frame:"
+text = "Frame"
 
 [node name="FrameNum" type="Label" parent="VBoxContainer/GridContainer"]
-margin_left = 109.0
+margin_left = 101.0
 margin_right = 193.0
 margin_bottom = 14.0
 text = "1"
 
 [node name="FrameDuration" type="Label" parent="VBoxContainer/GridContainer"]
 margin_top = 23.0
-margin_right = 105.0
+margin_right = 97.0
 margin_bottom = 37.0
-text = "Frame duration: "
+text = "Frame duration"
 
 [node name="FrameTime" type="SpinBox" parent="VBoxContainer/GridContainer"]
-margin_left = 109.0
+margin_left = 101.0
 margin_top = 18.0
 margin_right = 193.0
 margin_bottom = 42.0
