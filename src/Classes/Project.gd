@@ -272,6 +272,7 @@ func serialize() -> Dictionary:
 		"export_directory_path" : directory_path,
 		"export_file_name" : file_name,
 		"export_file_format" : file_format,
+		"frame_duration" : frame_duration,
 	}
 
 	return project_data
@@ -333,7 +334,8 @@ func deserialize(dict : Dictionary) -> void:
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
 		file_format = dict.export_file_format
-
+	if dict.has("frame_duration"):
+		frame_duration = dict.frame_duration
 
 func name_changed(value : String) -> void:
 	name = value
