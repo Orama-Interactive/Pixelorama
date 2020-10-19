@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-19 15:11\n"
+"PO-Revision-Date: 2020-10-19 15:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1104,7 +1104,7 @@ msgid "Unlink Cel"
 msgstr "Deconectare celulă"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Proprietățile cadrului"
 
 msgid "Layer"
 msgstr "Strat"
@@ -1241,10 +1241,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Refacere: ștergerea etichetei cadrului"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Anulare: modificarea duratei cadrului"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Refacere: modificarea duratei cadrului"
 
 msgid "Move Guide"
 msgstr "Deplasare ghidaj"
@@ -1480,5 +1480,5 @@ msgid "Move the selected frame to the right."
 msgstr "Mută cadrul selectat la dreapta."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Durata cadrului"
 
