@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-10-13 16:12\n"
+"PO-Revision-Date: 2020-10-19 15:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1102,6 +1102,9 @@ msgstr "Połącz kalkę"
 msgid "Unlink Cel"
 msgstr "Odłącz kalkę"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Warstwa"
 
@@ -1235,6 +1238,12 @@ msgstr "Cofnij: Usuń tag klatek"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Przywróć: Usuń tag klatek"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Przesuń prowadnice"
@@ -1468,4 +1477,7 @@ msgstr "Przenieś zaznaczoną klatkę w lewo."
 
 msgid "Move the selected frame to the right."
 msgstr "Przenieś zaznaczoną klatkę w prawo."
+
+msgid "Frame duration"
+msgstr ""
 
