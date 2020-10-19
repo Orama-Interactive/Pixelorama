@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-10-19 15:10\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1100,6 +1100,9 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Slānis"
 
@@ -1231,6 +1234,12 @@ msgid "Undo: Delete Frame Tag"
 msgstr ""
 
 msgid "Redo: Delete Frame Tag"
+msgstr ""
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
@@ -1463,5 +1472,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 
