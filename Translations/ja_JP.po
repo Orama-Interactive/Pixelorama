@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-19 15:11\n"
+"PO-Revision-Date: 2020-10-19 23:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -82,7 +82,7 @@ msgid "Save as..."
 msgstr "名前をつけて保存"
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD圧縮を使用する"
 
 msgid "Import"
 msgstr "インポート"
@@ -139,7 +139,7 @@ msgid "Clear Selection"
 msgstr "選択をクリア"
 
 msgid "Flip"
-msgstr ""
+msgstr "反転"
 
 msgid "Flip Horizontal"
 msgstr "水平方向に反転"
@@ -169,7 +169,7 @@ msgid "Zen Mode"
 msgstr "Zenモード"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "フルスクリーンモード"
 
 msgid "Fill with color:"
 msgstr "塗りつぶし"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "形式を指定してインポート"
 
 msgid "New tab"
-msgstr ""
+msgstr "新しいタブ"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
