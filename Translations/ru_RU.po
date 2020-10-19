@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-10-13 23:19\n"
+"PO-Revision-Date: 2020-10-19 15:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1102,6 +1102,9 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Слой"
 
@@ -1234,6 +1237,12 @@ msgstr "Отменить: Удалить метку кадра"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Повторить: Удалить метку кадра"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Сдвинуть направляющие"
@@ -1467,4 +1476,7 @@ msgstr "Переместить выделенный кадр влево."
 
 msgid "Move the selected frame to the right."
 msgstr "Переместить выделенный кадр вправо."
+
+msgid "Frame duration"
+msgstr ""
 
