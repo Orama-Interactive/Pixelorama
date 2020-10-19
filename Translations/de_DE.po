@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-13 12:42\n"
+"PO-Revision-Date: 2020-10-19 15:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1102,6 +1102,9 @@ msgstr "Cel verlinken"
 msgid "Unlink Cel"
 msgstr "Cel entkoppeln"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Ebene"
 
@@ -1235,6 +1238,12 @@ msgstr "Rückgängig: Lösche Frame Tag"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Wiederholen: Lösche Frame Tag"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Bewegungsanleitung"
@@ -1468,4 +1477,7 @@ msgstr "Verschiebe den ausgewählten Frame nach links."
 
 msgid "Move the selected frame to the right."
 msgstr "Verschiebe den ausgewählten Frame nach rechts."
+
+msgid "Frame duration"
+msgstr ""
 
