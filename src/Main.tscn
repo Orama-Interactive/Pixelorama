@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/UI/BrushesPopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffects.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/Timeline/FrameProperties.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
@@ -108,6 +109,8 @@ rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
+
+[node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]
 
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false

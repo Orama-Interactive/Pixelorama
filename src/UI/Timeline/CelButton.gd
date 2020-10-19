@@ -101,10 +101,22 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
-
+		5: #Frame Properties
+				Global.frame_properties.popup_centered()
+				Global.dialog_open(true)
+				Global.frame_properties.set_frame_label(frame)
+				Global.frame_properties.set_frame_dur(Global.current_project.frame_duration[frame])
 
 func change_frame_order(rate : int) -> void:
 	var change = frame + rate
+	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
+	if rate > 0: #There is no function in the class Array in godot to make this quickly and this is the fastest way to swap positions I think of
+		frame_duration.insert(change + 1, frame_duration[frame])
+		frame_duration.remove(frame)
+	else:
+		frame_duration.insert(change, frame_duration[frame])
+		frame_duration.remove(frame + 1)
+
 	var new_frames : Array = Global.current_project.frames.duplicate()
 	var temp = new_frames[frame]
 	new_frames[frame] = new_frames[change]
@@ -112,12 +124,14 @@ func change_frame_order(rate : int) -> void:
 
 	Global.current_project.undo_redo.create_action("Change Frame Order")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration)
 
 	if Global.current_project.current_frame == frame:
 		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", change)
 		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
 
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")

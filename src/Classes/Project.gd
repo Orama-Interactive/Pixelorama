@@ -8,6 +8,7 @@ var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
+var frame_duration := [] 
 var layers := [] setget layers_changed # Array of Layers
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
@@ -271,6 +272,7 @@ func serialize() -> Dictionary:
 		"export_directory_path" : directory_path,
 		"export_file_name" : file_name,
 		"export_file_format" : file_format,
+		"frame_duration" : frame_duration,
 	}
 
 	return project_data
@@ -332,7 +334,8 @@ func deserialize(dict : Dictionary) -> void:
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
 		file_format = dict.export_file_format
-
+	if dict.has("frame_duration"):
+		frame_duration = dict.frame_duration
 
 func name_changed(value : String) -> void:
 	name = value

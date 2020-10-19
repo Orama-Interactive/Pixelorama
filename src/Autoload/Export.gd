@@ -213,16 +213,16 @@ func export_gif(args: Dictionary) -> void:
 	match direction:
 		AnimationDirection.FORWARD:
 			for i in range(processed_images.size()):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 		AnimationDirection.BACKWARDS:
 			for i in range(processed_images.size() - 1, -1, -1):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 		AnimationDirection.PING_PONG:
 			export_progress_fraction = 100 / (processed_images.size() * 2)
 			for i in range(0, processed_images.size()):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 			for i in range(processed_images.size() - 2, 0, -1):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 
 	if OS.get_name() == "HTML5":
 		Html5FileExchange.save_gif(exporter.export_file_data(), args["export_paths"][0])
