@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-19 23:48\n"
+"PO-Revision-Date: 2020-10-19 23:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -190,22 +190,22 @@ msgid "New tab"
 msgstr "新しいタブ"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "スプライトシート（新規タブ）"
 
 msgid "New frame"
-msgstr ""
+msgstr "新しいフレーム"
 
 msgid "New layer"
-msgstr ""
+msgstr "新規レイヤー"
 
 msgid "New palette"
-msgstr ""
+msgstr "新しいパレット"
 
 msgid "New brush"
-msgstr ""
+msgstr "新しいブラシ"
 
 msgid "New pattern"
-msgstr ""
+msgstr "新しいパターン"
 
 msgid "Horizontal frames:"
 msgstr ""
