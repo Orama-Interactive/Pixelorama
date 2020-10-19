@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-19 15:11\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1095,6 +1095,9 @@ msgstr "Vincular Cel·la"
 msgid "Unlink Cel"
 msgstr "Desvincular Cel·la"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Capa"
 
@@ -1226,6 +1229,12 @@ msgid "Undo: Delete Frame Tag"
 msgstr ""
 
 msgid "Redo: Delete Frame Tag"
+msgstr ""
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
@@ -1458,5 +1467,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 
