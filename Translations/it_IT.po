@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-10-19 15:11\n"
+"PO-Revision-Date: 2020-10-19 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1104,7 +1104,7 @@ msgid "Unlink Cel"
 msgstr "Scollega Cel"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Proprietà cornice"
 
 msgid "Layer"
 msgstr "Livello"
