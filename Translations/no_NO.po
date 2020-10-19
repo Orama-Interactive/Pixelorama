@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-19 15:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1100,6 +1100,9 @@ msgstr "Koble Sammen Celle"
 msgid "Unlink Cel"
 msgstr "Koble Fra Celle"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Lag"
 
@@ -1233,6 +1236,12 @@ msgstr "Angre: Slett Bildemerkelapp"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Gjør om: Slett Bildemerkelapp"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Flytteveiledning"
@@ -1465,5 +1474,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 
