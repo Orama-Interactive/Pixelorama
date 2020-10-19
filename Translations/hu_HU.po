@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-19 15:11\n"
 
 msgid "OK"
 msgstr "RENDBEN"
@@ -1103,6 +1103,9 @@ msgstr "Cella összekapcsolása"
 msgid "Unlink Cel"
 msgstr "Cella szétkapcsolása"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Réteg"
 
@@ -1236,6 +1239,12 @@ msgstr "Visszavinás: Képkocka címke törlése"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Újra: Képkocka címke törlése"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Útmutató mozgatása"
@@ -1468,5 +1477,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 
