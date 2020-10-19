@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-15 12:57\n"
+"PO-Revision-Date: 2020-10-19 13:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -503,7 +503,7 @@ msgid "Steps:"
 msgstr ""
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "上から下"
 
 msgid "Bottom to Top"
 msgstr ""
@@ -518,7 +518,7 @@ msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Online Docs"
 
 msgid "Issue Tracker"
 msgstr ""
@@ -527,7 +527,7 @@ msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Pixelorama について"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr ""
@@ -545,13 +545,13 @@ msgid "Website"
 msgstr "ウェブサイト"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub Repo"
 
 msgid "Donate"
 msgstr ""
 
 msgid "Developers"
-msgstr ""
+msgstr "開発者"
 
 msgid "Contributors"
 msgstr ""
@@ -602,7 +602,7 @@ msgid "Catalan"
 msgstr "カタロニア語"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "エスペラント語"
 
 msgid "Indonesian"
 msgstr "インドネシア語"
@@ -650,7 +650,7 @@ msgid "imported"
 msgstr ""
 
 msgid "copy"
-msgstr ""
+msgstr "コピー"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
@@ -771,7 +771,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "グリッド"
 
 msgid "Grid type:"
 msgstr ""
