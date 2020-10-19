@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-10-19 15:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1103,6 +1103,9 @@ msgstr "Vincular célula"
 msgid "Unlink Cel"
 msgstr "Desvincular célula"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Camada"
 
@@ -1236,6 +1239,12 @@ msgstr "Desfazer: Excluir Tag do Quadro"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Refazer: Excluir Tag do Quadro"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Mover Guia"
@@ -1468,5 +1477,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 
