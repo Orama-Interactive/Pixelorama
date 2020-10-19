@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-10-19 15:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1103,6 +1103,9 @@ msgstr "Lier la cellule"
 msgid "Unlink Cel"
 msgstr "Délier la cellule"
 
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Couche"
 
@@ -1236,6 +1239,12 @@ msgstr "Annuler : Supprimer la balise de la trame"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Refaire : Supprimer la balise de la trame"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Déplacer le guide"
@@ -1469,4 +1478,7 @@ msgstr "Déplacer la trame sélectionnée vers la gauche."
 
 msgid "Move the selected frame to the right."
 msgstr "Déplacer la trame sélectionnée vers la droite."
+
+msgid "Frame duration"
+msgstr ""
 
