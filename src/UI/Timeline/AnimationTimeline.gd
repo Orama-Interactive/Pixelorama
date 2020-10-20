@@ -65,7 +65,7 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 		return
 	if frame == -1:
 		frame = Global.current_project.current_frame
-	
+
 	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
 	frame_duration.remove(frame)
 	var frame_to_delete : Frame = Global.current_project.frames[frame]
@@ -311,7 +311,7 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 
 	if play:
 		Global.animation_timer.set_one_shot(true) #The wait_time it can't change correctly if it is playing
-		Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1 / fps) 
+		Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1 / fps)
 		Global.animation_timer.start()
 		animation_forward = forward_dir
 	else:

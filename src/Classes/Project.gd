@@ -8,7 +8,7 @@ var undo_redo : UndoRedo
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
-var frame_duration := [] 
+var frame_duration := []
 var layers := [] setget layers_changed # Array of Layers
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed

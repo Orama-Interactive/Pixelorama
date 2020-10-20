@@ -265,6 +265,15 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 
 func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	var serialized_data = project.serialize()
+	if !serialized_data:
+		Global.notification_label(tr("File failed to save. Serialization to dictionary failed."))
+		return
+	var to_save = JSON.print(serialized_data)
+	if !to_save:
+		Global.notification_label(tr("File failed to save. Dictionary to JSON failed."))
+		return
+
 	var file : File = File.new()
 	var err
 	if use_zstd_compression:
@@ -272,53 +281,52 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 	else:
 		err = file.open(path, File.WRITE)
 
-	if err == OK:
-		if !autosave:
-			project.name = path.get_file()
-			current_save_paths[Global.current_project_index] = path
-
-		var to_save = JSON.print(project.serialize())
-		file.store_line(to_save)
-		for frame in project.frames:
-			for cel in frame.cels:
-				file.store_buffer(cel.image.get_data())
-
-		for brush in project.brushes:
-			file.store_buffer(brush.get_data())
-
-		file.close()
-
-		if OS.get_name() == "HTML5" and !autosave:
-			err = file.open(path, File.READ)
-			if !err:
-				var file_data = Array(file.get_buffer(file.get_len()))
-				JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
-			file.close()
-			# Remove the .pxo file from memory, as we don't need it anymore
-			var dir = Directory.new()
-			dir.remove(path)
-
-		if autosave:
-			Global.notification_label("File autosaved")
-		else:
-			# First remove backup then set current save path
-			if project.has_changed:
-				project.has_changed = false
-			remove_backup(Global.current_project_index)
-			Global.notification_label("File saved")
-			Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
-
-			# Set last opened project path and save
-			Global.config_cache.set_value("preferences", "last_project_path", path)
-			Global.config_cache.save("user://cache.ini")
-			Export.file_name = path.get_file().trim_suffix(".pxo")
-			Export.directory_path = path.get_base_dir()
-			Export.was_exported = false
-			Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
-
-	else:
+	if err != OK:
 		Global.notification_label(tr("File failed to save. Error code %s") % err)
 		file.close()
+		return
+
+	if !autosave:
+		project.name = path.get_file()
+		current_save_paths[Global.current_project_index] = path
+
+	file.store_line(to_save)
+	for frame in project.frames:
+		for cel in frame.cels:
+			file.store_buffer(cel.image.get_data())
+
+	for brush in project.brushes:
+		file.store_buffer(brush.get_data())
+
+	file.close()
+
+	if OS.get_name() == "HTML5" and !autosave:
+		err = file.open(path, File.READ)
+		if !err:
+			var file_data = Array(file.get_buffer(file.get_len()))
+			JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
+		file.close()
+		# Remove the .pxo file from memory, as we don't need it anymore
+		var dir = Directory.new()
+		dir.remove(path)
+
+	if autosave:
+		Global.notification_label("File autosaved")
+	else:
+		# First remove backup then set current save path
+		if project.has_changed:
+			project.has_changed = false
+		remove_backup(Global.current_project_index)
+		Global.notification_label("File saved")
+		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+
+		# Set last opened project path and save
+		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.save("user://cache.ini")
+		Export.file_name = path.get_file().trim_suffix(".pxo")
+		Export.directory_path = path.get_base_dir()
+		Export.was_exported = false
+		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 
 func open_image_as_new_tab(path : String, image : Image) -> void:

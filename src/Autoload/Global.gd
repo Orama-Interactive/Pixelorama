@@ -222,7 +222,7 @@ func _ready() -> void:
 	patterns_popup = find_node_by_name(root, "PatternsPopup")
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
-	frame_properties = find_node_by_name(root, "FrameProperties") 
+	frame_properties = find_node_by_name(root, "FrameProperties")
 
 	layers_container = find_node_by_name(animation_timeline, "LayersContainer")
 	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
