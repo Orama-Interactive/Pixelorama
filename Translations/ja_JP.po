@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-20 01:17\n"
+"PO-Revision-Date: 2020-10-20 01:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -220,10 +220,10 @@ msgid "File brush"
 msgstr "ファイルブラシ"
 
 msgid "Project brush"
-msgstr ""
+msgstr "プロジェクトブラシ"
 
 msgid "Random brush"
-msgstr ""
+msgstr "ランダムブラシ"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
