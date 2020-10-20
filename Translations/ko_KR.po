@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-20 00:58\n"
+"PO-Revision-Date: 2020-10-20 01:17\n"
 
 msgid "OK"
 msgstr "예"
@@ -1241,10 +1241,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "다시 실행: 프레임 태그 삭제"
 
 msgid "Undo: Change frame duration"
-msgstr "실행 취소: 프레임 순 변경"
+msgstr "실행 취소: 프레임 기간 변경"
 
 msgid "Redo: Change frame duration"
-msgstr "다시 실행: 프레임 순 변경"
+msgstr "다시 실행: 프레임 기간 변경"
 
 msgid "Move Guide"
 msgstr "이동 가이드"
@@ -1480,5 +1480,5 @@ msgid "Move the selected frame to the right."
 msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
 
 msgid "Frame duration"
-msgstr ""
+msgstr "프레임 기간"
 
