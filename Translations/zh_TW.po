@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-10-20 08:24\n"
+"PO-Revision-Date: 2020-10-20 08:44\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1254,10 +1254,10 @@ msgid "File autosaved"
 msgstr "檔案已自動儲存"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "檔案開啟失敗. 錯誤代碼: %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "檔案儲存失敗. 錯誤代碼: %s"
 
 msgid "File exported"
 msgstr "檔案已輸出"
@@ -1296,13 +1296,13 @@ msgid "Edit Palette"
 msgstr "編輯色盤"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "創建帶有 alpha 的顏色"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "只從選取區塊獲取顏色"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "獲取顏色從"
 
 msgid "Patrons:"
 msgstr "贊助者："
@@ -1457,7 +1457,7 @@ msgid "Remove currently selected palette"
 msgstr "移除目前選取的色盤"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "確定刪除此色盤嗎？(無法取消)"
 
 msgid "You can't remove more palettes!"
 msgstr "不能刪除色盤"
@@ -1472,10 +1472,10 @@ msgid "and"
 msgstr "和"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "移動所選影格到左邊。"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "移動所選影格到右邊。"
 
 msgid "Frame duration"
 msgstr "影格持續時間"
