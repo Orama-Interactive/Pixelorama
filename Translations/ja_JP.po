@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-20 00:16\n"
+"PO-Revision-Date: 2020-10-20 01:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -214,7 +214,7 @@ msgid "Vertical frames:"
 msgstr "垂直フレーム"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "ブラシタイプ:"
 
 msgid "File brush"
 msgstr "ファイルブラシ"
