@@ -196,14 +196,14 @@ func add_brush() -> void:
 		dir.list_dir_begin()
 		var curr_file := dir.get_next()
 		while curr_file != "":
-			if curr_file.begins_with("%") and brush_name in curr_file:
+			if curr_file.begins_with("~") and brush_name in curr_file:
 				random_brushes.append(curr_file)
 			curr_file = dir.get_next()
 		dir.list_dir_end()
 
 		var file_ext : String = path.get_file().get_extension()
 		var index : int = random_brushes.size() + 1
-		var file_name = "%" + brush_name + str(index) + "." + file_ext
+		var file_name = "~" + brush_name + str(index) + "." + file_ext
 		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 

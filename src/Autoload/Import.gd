@@ -68,7 +68,7 @@ func get_brush_files_from_directory(directory: String): # -> Array
 			# and png one at that nya
 			if !the_directory.current_is_dir() and curr_file.get_extension().to_lower() == "png":
 				# if we are a random element, add
-				if "%" in curr_file:
+				if "~" in curr_file:
 					randomised_files.append(curr_file)
 				else:
 					non_randomised_files.append(curr_file)
