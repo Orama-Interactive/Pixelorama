@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-20 01:26\n"
+"PO-Revision-Date: 2020-10-22 07:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -392,7 +392,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "無し"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
@@ -593,7 +593,7 @@ msgid "Italian"
 msgstr "イタリア語"
 
 msgid "Latvian"
-msgstr ""
+msgstr "ラトビア語"
 
 msgid "Spanish"
 msgstr "スペイン語"
@@ -641,10 +641,10 @@ msgid "GitHub Contributors"
 msgstr ""
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Art by: %s"
 
 msgid "untitled"
-msgstr ""
+msgstr "無題"
 
 msgid "imported"
 msgstr ""
@@ -762,7 +762,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr ""
 
 msgid "Guides"
-msgstr ""
+msgstr "ガイド"
 
 msgid "Guides color:"
 msgstr ""
@@ -774,7 +774,7 @@ msgid "Grid"
 msgstr "グリッド"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "グリッドタイプ:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
