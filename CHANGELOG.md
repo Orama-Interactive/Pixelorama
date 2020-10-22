@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## Unreleased
+This update has been brought to you by the contributions of:
+PinyaColada, Rémi Verschelde (akien-mga)
+
+### Added
+- Added a "frame properties" option on the popupmenu that appears when right-clicking on a cel. This lets the user choose a custom frame delay for that specific frame. ([#357](https://github.com/Orama-Interactive/Pixelorama/pull/357))
+
+### Changed
+- `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
+
+### Fixed
+- Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
+- Fixed issue where the user could grab, and could not let go of, the focus of guides even when they were invisible.
+<br><br>
+
 ## [v0.8.1] - 2020-10-14
 This update has been brought to you by the contributions of:
 Laurenz Reinthaler (Schweini07), PinyaColada
