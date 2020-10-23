@@ -59,7 +59,7 @@ var shift := false
 var alt := false
 
 
-func _ready():
+func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
@@ -72,9 +72,9 @@ func _ready():
 	value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "tool", "Eraser")
 	set_tool(value, BUTTON_RIGHT)
 	value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "color", Color.black)
-	assign_color(value, BUTTON_LEFT)
+	assign_color(value, BUTTON_LEFT, false)
 	value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "color", Color.white)
-	assign_color(value, BUTTON_RIGHT)
+	assign_color(value, BUTTON_RIGHT, false)
 
 	update_tool_buttons()
 	update_tool_cursors()
@@ -115,13 +115,14 @@ func default_color() -> void:
 func swap_color() -> void:
 	var left = _slots[BUTTON_LEFT].color
 	var right = _slots[BUTTON_RIGHT].color
-	assign_color(right, BUTTON_LEFT)
-	assign_color(left, BUTTON_RIGHT)
+	assign_color(right, BUTTON_LEFT, false)
+	assign_color(left, BUTTON_RIGHT, false)
 
 
-func assign_color(color : Color, button : int) -> void:
+func assign_color(color : Color, button : int, change_alpha := true) -> void:
 	var c : Color = _slots[button].color
-	if color.a == 0:
+	# This was requested by Issue #54 on GitHub
+	if color.a == 0 and change_alpha:
 		if color.r != c.r or color.g != c.g or color.b != c.b:
 			color.a = 1
 	_slots[button].color = color

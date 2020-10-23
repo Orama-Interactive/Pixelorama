@@ -268,9 +268,9 @@ func on_color_select(index : int) -> void:
 	var color : Color = Global.palettes[current_palette].get_color(index)
 
 	if Input.is_action_just_pressed("left_mouse"):
-		Tools.assign_color(color, BUTTON_LEFT)
+		Tools.assign_color(color, BUTTON_LEFT, false)
 	elif Input.is_action_just_pressed("right_mouse"):
-		Tools.assign_color(color, BUTTON_RIGHT)
+		Tools.assign_color(color, BUTTON_RIGHT, false)
 
 
 func _load_palettes() -> void:

@@ -48,4 +48,4 @@ func _pick_color(position : Vector2) -> void:
 	image.lock()
 	var color := image.get_pixelv(position)
 	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
-	Tools.assign_color(color, button)
+	Tools.assign_color(color, button, false)
