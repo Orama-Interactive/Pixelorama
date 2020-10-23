@@ -258,6 +258,8 @@ func import_gpl(path : String, text : String) -> Palette:
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
 			var color_data : PoolStringArray = line.split(" ", false, 4)
+			if color_data.size() < 3:
+				continue
 			var red : float = color_data[0].to_float() / 255.0
 			var green : float = color_data[1].to_float() / 255.0
 			var blue : float = color_data[2].to_float() / 255.0
