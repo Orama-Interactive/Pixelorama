@@ -15,7 +15,6 @@ func _ready() -> void:
 	tag_scroll_container = Global.find_node_by_name(self, "TagScroll")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / fps
-	Global.current_project.frame_duration.append(1)
 
 
 func _h_scroll_changed(value : float) -> void:

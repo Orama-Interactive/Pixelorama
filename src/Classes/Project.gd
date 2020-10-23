@@ -39,6 +39,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
+	frame_duration.append(1)
 	select_all_pixels()
 
 	undo_redo = UndoRedo.new()
