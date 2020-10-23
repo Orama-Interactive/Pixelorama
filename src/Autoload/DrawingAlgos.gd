@@ -62,146 +62,163 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	return scaled
 
 
-func rotxel(sprite : Image, angle : float) -> void:
+func rotxel(sprite : Image, angle : float, pixels : Array) -> void:
 	# If angle is simple, then nn rotation is the best
-
 	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:
-		nn_rotate(sprite, angle)
+		nn_rotate(sprite, angle, pixels)
 		return
 
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
-# warning-ignore:integer_division
-# warning-ignore:integer_division
-	var center : Vector2 = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
+	var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
+	var center : Vector2 = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
 	var ox : int
 	var oy : int
 	var p : Color
 	aux.lock()
 	sprite.lock()
-	for x in range(sprite.get_width()):
-		for y in range(sprite.get_height()):
-			var dx = 3*(x - center.x)
-			var dy = 3*(y - center.y)
-			var found_pixel : bool = false
-			for k in range(9):
-				var i = -1 + k % 3
+	for pix in pixels:
+		var x = pix.x
+		var y = pix.y
+		var dx = 3*(x - center.x)
+		var dy = 3*(y - center.y)
+		var found_pixel : bool = false
+		for k in range(9):
+			var i = -1 + k % 3
 # warning-ignore:integer_division
-				var j = -1 + int(k / 3)
-				var dir = atan2(dy + j, dx + i)
-				var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
-				dir -= angle
-				ox = round(center.x*3 + 1 + mag*cos(dir))
-				oy = round(center.y*3 + 1 + mag*sin(dir))
+			var j = -1 + int(k / 3)
+			var dir = atan2(dy + j, dx + i)
+			var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
+			dir -= angle
+			ox = round(center.x*3 + 1 + mag*cos(dir))
+			oy = round(center.y*3 + 1 + mag*sin(dir))
 
-				if (sprite.get_width() % 2 != 0):
-					ox += 1
-					oy += 1
+			if (sprite.get_width() % 2 != 0):
+				ox += 1
+				oy += 1
 
-				if (ox >= 0 && ox < sprite.get_width()*3
-					&& oy >= 0 && oy < sprite.get_height()*3):
-						found_pixel = true
-						break
+			if (ox >= 0 && ox < sprite.get_width()*3
+				&& oy >= 0 && oy < sprite.get_height()*3):
+					found_pixel = true
+					break
 
-			if !found_pixel:
-				sprite.set_pixel(x, y, Color(0,0,0,0))
-				continue
+		if !found_pixel:
+			sprite.set_pixel(x, y, Color(0,0,0,0))
+			continue
 
-			var fil : int = oy % 3
-			var col : int = ox % 3
-			var index : int = col + 3*fil
+		var fil : int = oy % 3
+		var col : int = ox % 3
+		var index : int = col + 3*fil
 
-			ox = round((ox - 1)/3.0);
-			oy = round((oy - 1)/3.0);
-			var a : Color
-			var b : Color
-			var c : Color
-			var d : Color
-			var e : Color
-			var f : Color
-			var g : Color
-			var h : Color
-			var i : Color
-			if (ox == 0 || ox == sprite.get_width() - 1 ||
-				oy == 0 || oy == sprite.get_height() - 1):
-					p = aux.get_pixel(ox, oy)
-			else:
-				a = aux.get_pixel(ox-1,oy-1);
-				b = aux.get_pixel(ox,oy-1);
-				c = aux.get_pixel(ox+1,oy-1);
-				d = aux.get_pixel(ox-1,oy);
-				e = aux.get_pixel(ox,oy);
-				f = aux.get_pixel(ox+1,oy);
-				g = aux.get_pixel(ox-1,oy+1);
-				h = aux.get_pixel(ox,oy+1);
-				i = aux.get_pixel(ox+1,oy+1);
+		ox = round((ox - 1)/3.0);
+		oy = round((oy - 1)/3.0);
+		var a : Color
+		var b : Color
+		var c : Color
+		var d : Color
+		var e : Color
+		var f : Color
+		var g : Color
+		var h : Color
+		var i : Color
+		if (ox == 0 || ox == sprite.get_width() - 1 ||
+			oy == 0 || oy == sprite.get_height() - 1):
+				p = aux.get_pixel(ox, oy)
+		else:
+			a = aux.get_pixel(ox-1,oy-1);
+			b = aux.get_pixel(ox,oy-1);
+			c = aux.get_pixel(ox+1,oy-1);
+			d = aux.get_pixel(ox-1,oy);
+			e = aux.get_pixel(ox,oy);
+			f = aux.get_pixel(ox+1,oy);
+			g = aux.get_pixel(ox-1,oy+1);
+			h = aux.get_pixel(ox,oy+1);
+			i = aux.get_pixel(ox+1,oy+1);
 
-				match(index):
-					0:
-						p = d if (similarColors(d,b) && !similarColors(d,h)
-						 && !similarColors(b,f)) else e;
-					1:
-						p = b if ((similarColors(d,b) && !similarColors(d,h) &&
-						 !similarColors(b,f) && !similarColors(e,c)) ||
-						 (similarColors(b,f) && !similarColors(d,b) &&
-						 !similarColors(f,h) && !similarColors(e,a))) else e;
-					2:
-						p = f if (similarColors(b,f) && !similarColors(d,b) &&
-						 !similarColors(f,h)) else e;
-					3:
-						p = d if ((similarColors(d,h) && !similarColors(f,h) &&
-						 !similarColors(d,b) && !similarColors(e,a)) ||
-						 (similarColors(d,b) && !similarColors(d,h) &&
-						!similarColors(b,f) && !similarColors(e,g))) else e;
-					4:
-						p = e
-					5:
-						p =  f if((similarColors(b,f) && !similarColors(d,b) &&
-						 !similarColors(f,h) && !similarColors(e,i))
-						 || (similarColors(f,h) && !similarColors(b,f) &&
-						 !similarColors(d,h) && !similarColors(e,c))) else e;
-					6:
-						p = d if (similarColors(d,h) && !similarColors(f,h) &&
-						 !similarColors(d,b)) else e;
-					7:
-						p = h if ((similarColors(f,h) && !similarColors(f,b) &&
-						 !similarColors(d,h) && !similarColors(e,g))
-						 || (similarColors(d,h) && !similarColors(f,h) &&
-						 !similarColors(d,b) && !similarColors(e,i))) else e;
-					8:
-						p = f if (similarColors(f,h) && !similarColors(f,b) &&
-						 !similarColors(d,h)) else e;
-			sprite.set_pixel(x, y, p)
+			match(index):
+				0:
+					p = d if (similarColors(d,b) && !similarColors(d,h)
+					 && !similarColors(b,f)) else e;
+				1:
+					p = b if ((similarColors(d,b) && !similarColors(d,h) &&
+					 !similarColors(b,f) && !similarColors(e,c)) ||
+					 (similarColors(b,f) && !similarColors(d,b) &&
+					 !similarColors(f,h) && !similarColors(e,a))) else e;
+				2:
+					p = f if (similarColors(b,f) && !similarColors(d,b) &&
+					 !similarColors(f,h)) else e;
+				3:
+					p = d if ((similarColors(d,h) && !similarColors(f,h) &&
+					 !similarColors(d,b) && !similarColors(e,a)) ||
+					 (similarColors(d,b) && !similarColors(d,h) &&
+					!similarColors(b,f) && !similarColors(e,g))) else e;
+				4:
+					p = e
+				5:
+					p =  f if((similarColors(b,f) && !similarColors(d,b) &&
+					 !similarColors(f,h) && !similarColors(e,i))
+					 || (similarColors(f,h) && !similarColors(b,f) &&
+					 !similarColors(d,h) && !similarColors(e,c))) else e;
+				6:
+					p = d if (similarColors(d,h) && !similarColors(f,h) &&
+					 !similarColors(d,b)) else e;
+				7:
+					p = h if ((similarColors(f,h) && !similarColors(f,b) &&
+					 !similarColors(d,h) && !similarColors(e,g))
+					 || (similarColors(d,h) && !similarColors(f,h) &&
+					 !similarColors(d,b) && !similarColors(e,i))) else e;
+				8:
+					p = f if (similarColors(f,h) && !similarColors(f,b) &&
+					 !similarColors(d,h)) else e;
+		sprite.set_pixel(x, y, p)
 	sprite.unlock()
 	aux.unlock()
 
 
-func fake_rotsprite(sprite : Image, angle : float) -> void:
-	sprite.copy_from(scale3X(sprite))
-	nn_rotate(sprite,angle)
+func fake_rotsprite(sprite : Image, angle : float, pixels : Array) -> void:
+	var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
+	var selected_sprite := Image.new()
+	selected_sprite = sprite.get_rect(selection_rectangle)
+	selected_sprite.copy_from(scale3X(selected_sprite))
+	nn_rotate(selected_sprite, angle, [])
 # warning-ignore:integer_division
 # warning-ignore:integer_division
-	sprite.resize(sprite.get_width() / 3, sprite.get_height() / 3, 0)
+	selected_sprite.resize(selected_sprite.get_width() / 3, selected_sprite.get_height() / 3, 0)
+	sprite.blit_rect(selected_sprite, Rect2(Vector2.ZERO, selected_sprite.get_size()), selection_rectangle.position)
 
 
-func nn_rotate(sprite : Image, angle : float) -> void:
+func nn_rotate(sprite : Image, angle : float, pixels : Array) -> void:
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
 	sprite.lock()
 	aux.lock()
 	var ox: int
 	var oy: int
-# warning-ignore:integer_division
-# warning-ignore:integer_division
-	var center : Vector2 = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
-	for x in range(sprite.get_width()):
-		for y in range(sprite.get_height()):
+	var center : Vector2
+	if pixels:
+		var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
+		center = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
+		for pix in pixels:
+			var x = pix.x
+			var y = pix.y
 			ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
 			oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
 			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
 				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
 			else:
 				sprite.set_pixel(x, y, Color(0,0,0,0))
+	else:
+# warning-ignore:integer_division
+# warning-ignore:integer_division
+		center = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
+		for x in range(sprite.get_width()):
+			for y in range(sprite.get_height()):
+				ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
+				oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
+				if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
+					sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
+				else:
+					sprite.set_pixel(x, y, Color(0,0,0,0))
 	sprite.unlock()
 	aux.unlock()
 

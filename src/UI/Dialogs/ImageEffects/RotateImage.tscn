@@ -25,8 +25,8 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_left = 14.0
-margin_right = 214.0
+margin_left = 31.0
+margin_right = 231.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
@@ -39,7 +39,7 @@ show_behind_parent = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 204.0
-margin_right = 229.0
+margin_right = 263.0
 margin_bottom = 224.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
@@ -50,7 +50,7 @@ text = "Type:"
 
 [node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 38.0
-margin_right = 229.0
+margin_right = 263.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -58,7 +58,7 @@ size_flags_vertical = 3
 
 [node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 228.0
-margin_right = 229.0
+margin_right = 263.0
 margin_bottom = 252.0
 
 [node name="Label" type="Label" parent="VBoxContainer/AngleOptions"]
@@ -69,7 +69,7 @@ text = "Angle:"
 
 [node name="AngleHSlider" type="HSlider" parent="VBoxContainer/AngleOptions"]
 margin_left = 44.0
-margin_right = 151.0
+margin_right = 185.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -80,12 +80,33 @@ __meta__ = {
 }
 
 [node name="AngleSpinBox" type="SpinBox" parent="VBoxContainer/AngleOptions"]
-margin_left = 155.0
-margin_right = 229.0
+margin_left = 189.0
+margin_right = 263.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 359.0
 suffix = "°"
+
+[node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 256.0
+margin_right = 263.0
+margin_bottom = 280.0
+
+[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
+margin_right = 160.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Only affect selection"
+
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_right = 263.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+text = "Current cel"
+items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+selected = 0
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleHSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleSpinBox" to="." method="_on_SpinBox_value_changed"]

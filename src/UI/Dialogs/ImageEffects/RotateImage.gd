@@ -14,6 +14,8 @@ func _ready() -> void:
 
 func set_nodes() -> void:
 	preview = $VBoxContainer/Preview
+	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
 func _about_to_show() -> void:
@@ -22,13 +24,14 @@ func _about_to_show() -> void:
 
 
 func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
+	var angle : float = deg2rad(angle_hslider.value)
 	match type_option_button.text:
 		"Rotxel":
-			DrawingAlgos.rotxel(_cel,angle_hslider.value*PI/180)
+			DrawingAlgos.rotxel(_cel, angle, _pixels)
 		"Nearest neighbour":
-			DrawingAlgos.nn_rotate(_cel,angle_hslider.value*PI/180)
+			DrawingAlgos.nn_rotate(_cel, angle, _pixels)
 		"Upscale, Rotate and Downscale":
-			DrawingAlgos.fake_rotsprite(_cel,angle_hslider.value*PI/180)
+			DrawingAlgos.fake_rotsprite(_cel, angle, _pixels)
 
 
 func _confirmed() -> void:
