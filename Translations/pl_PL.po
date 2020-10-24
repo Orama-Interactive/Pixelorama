@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-10-21 09:57\n"
+"PO-Revision-Date: 2020-10-24 19:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1101,6 +1101,9 @@ msgstr "Połącz kalkę"
 
 msgid "Unlink Cel"
 msgstr "Odłącz kalkę"
+
+msgid "Frame Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Właściwości klatki"
