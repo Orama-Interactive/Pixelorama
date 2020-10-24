@@ -337,22 +337,25 @@ __meta__ = {
 }
 
 [node name="CanvasPreviewContainer" parent="RightPanel/PreviewAndPalettes" instance=ExtResource( 16 )]
-margin_left = 15.0
-margin_right = 315.0
+margin_left = 157.0
+margin_right = 457.0
 
 [node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="RightPanel/PreviewAndPalettes"]
 margin_top = 168.0
-margin_right = 330.0
-margin_bottom = 676.0
+margin_right = 614.0
+margin_bottom = 823.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
-margin_bottom = 248.0
+margin_right = 614.0
+margin_bottom = 59.0
 
 [node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
-margin_top = 260.0
-margin_bottom = 508.0
+margin_left = 0.0
+margin_top = 71.0
+margin_right = 614.0
+margin_bottom = 655.0
 [connection signal="reposition_active_tab_request" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_close"]

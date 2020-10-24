@@ -8,8 +8,8 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="EditPalettePopup" type="WindowDialog"]
-margin_right = 600.0
-margin_bottom = 550.0
+margin_right = 790.0
+margin_bottom = 570.0
 rect_min_size = Vector2( 600, 570 )
 window_title = "Edit Palette"
 script = ExtResource( 1 )
@@ -25,7 +25,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 580.0
+margin_right = 770.0
 margin_bottom = 462.0
 size_flags_vertical = 3
 
@@ -35,7 +35,7 @@ margin_bottom = 462.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 312.0
-margin_right = 556.0
+margin_right = 692.0
 margin_bottom = 462.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -43,7 +43,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 244.0
+margin_right = 380.0
 margin_bottom = 408.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -66,7 +66,7 @@ columns = 8
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 412.0
-margin_right = 244.0
+margin_right = 380.0
 margin_bottom = 426.0
 text = "Use current left & right colors"
 align = 1
@@ -74,12 +74,12 @@ autowrap = true
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 430.0
-margin_right = 244.0
+margin_right = 380.0
 margin_bottom = 462.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
-margin_left = 56.0
-margin_right = 188.0
+margin_left = 124.0
+margin_right = 256.0
 margin_bottom = 32.0
 
 [node name="LeftColor" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
@@ -117,14 +117,14 @@ __meta__ = {
 }
 
 [node name="ColorButtons" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 560.0
-margin_right = 580.0
+margin_left = 696.0
+margin_right = 770.0
 margin_bottom = 462.0
 
 [node name="AddSwatchButton" type="Button" parent="VBoxContainer/HBoxContainer/ColorButtons" groups=[
 "UIButtons",
 ]]
-margin_right = 20.0
+margin_right = 74.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 
@@ -146,7 +146,7 @@ __meta__ = {
 "UIButtons",
 ]]
 margin_top = 24.0
-margin_right = 20.0
+margin_right = 74.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
@@ -165,9 +165,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GadientSteps" type="SpinBox" parent="VBoxContainer/HBoxContainer/ColorButtons"]
+margin_top = 357.0
+margin_right = 74.0
+margin_bottom = 72.0
+min_value = 1.0
+max_value = 20.0
+value = 5.0
+
 [node name="PaletteOptions" type="GridContainer" parent="VBoxContainer"]
 margin_top = 470.0
-margin_right = 580.0
+margin_right = 770.0
 margin_bottom = 522.0
 columns = 2
 
@@ -179,7 +187,7 @@ text = "Color Name:"
 
 [node name="EditPaletteColorNameLineEdit" type="LineEdit" parent="VBoxContainer/PaletteOptions"]
 margin_left = 95.0
-margin_right = 580.0
+margin_right = 770.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
@@ -192,42 +200,48 @@ text = "Palette Name:"
 [node name="EditPaletteNameLineEdit" type="LineEdit" parent="VBoxContainer/PaletteOptions"]
 margin_left = 95.0
 margin_top = 28.0
-margin_right = 580.0
+margin_right = 770.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="WindowOptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 530.0
-margin_right = 580.0
+margin_right = 770.0
 margin_bottom = 550.0
 size_flags_horizontal = 3
 
 [node name="SpacerControl" type="Control" parent="VBoxContainer/WindowOptionsContainer"]
-margin_right = 156.0
+margin_right = 163.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="EditPaletteSaveButton" type="Button" parent="VBoxContainer/WindowOptionsContainer"]
-margin_left = 160.0
-margin_right = 201.0
+margin_left = 167.0
+margin_right = 208.0
 margin_bottom = 20.0
 text = "Save"
 
 [node name="SpacerControl2" type="Control" parent="VBoxContainer/WindowOptionsContainer"]
-margin_left = 205.0
-margin_right = 361.0
+margin_left = 212.0
+margin_right = 376.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="SpacerControl4" type="Control" parent="VBoxContainer/WindowOptionsContainer"]
+margin_left = 380.0
+margin_right = 544.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="EditPaletteCancelButton" type="Button" parent="VBoxContainer/WindowOptionsContainer"]
-margin_left = 365.0
-margin_right = 419.0
+margin_left = 548.0
+margin_right = 602.0
 margin_bottom = 20.0
 text = "Cancel"
 
 [node name="SpacerControl3" type="Control" parent="VBoxContainer/WindowOptionsContainer"]
-margin_left = 423.0
-margin_right = 580.0
+margin_left = 606.0
+margin_right = 770.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 

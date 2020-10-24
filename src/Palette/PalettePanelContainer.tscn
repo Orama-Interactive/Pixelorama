@@ -13,8 +13,8 @@
 [node name="PalettePanelContainer" type="PanelContainer"]
 margin_left = 15.0
 margin_top = 261.0
-margin_right = 315.0
-margin_bottom = 516.0
+margin_right = 651.0
+margin_bottom = 845.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -25,13 +25,13 @@ __meta__ = {
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 293.0
-margin_bottom = 248.0
+margin_right = 629.0
+margin_bottom = 577.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PalettesLabel" type="Label" parent="PaletteVBoxContainer"]
-margin_right = 286.0
+margin_right = 622.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -40,12 +40,12 @@ align = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="PaletteVBoxContainer"]
 margin_top = 18.0
-margin_right = 286.0
+margin_right = 622.0
 margin_bottom = 50.0
 
 [node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer/CenterContainer"]
-margin_left = 37.0
-margin_right = 248.0
+margin_left = 205.0
+margin_right = 416.0
 margin_bottom = 32.0
 
 [node name="AddPalette" type="Button" parent="PaletteVBoxContainer/CenterContainer/PaletteButtons" groups=[
@@ -145,19 +145,19 @@ clip_text = true
 
 [node name="ScrollPalette" type="ScrollContainer" parent="PaletteVBoxContainer"]
 margin_top = 54.0
-margin_right = 286.0
-margin_bottom = 241.0
+margin_right = 622.0
+margin_bottom = 570.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterPalette" type="CenterContainer" parent="PaletteVBoxContainer/ScrollPalette"]
-margin_right = 286.0
+margin_right = 622.0
 size_flags_horizontal = 3
 
 [node name="PaletteContainer" type="GridContainer" parent="PaletteVBoxContainer/ScrollPalette/CenterPalette"]
-margin_left = 143.0
-margin_right = 143.0
+margin_left = 311.0
+margin_right = 311.0
 size_flags_horizontal = 3
 columns = 10
 script = ExtResource( 1 )
@@ -188,7 +188,7 @@ margin_bottom = 307.0
 [node name="EditPalettePopup" parent="." instance=ExtResource( 7 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 607.0
+margin_right = 629.0
 margin_bottom = 577.0
 
 [node name="PaletteFromSpriteDialog" type="ConfirmationDialog" parent="."]

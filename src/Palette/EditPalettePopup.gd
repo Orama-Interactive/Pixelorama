@@ -12,6 +12,7 @@ onready var color_name_edit = $VBoxContainer/PaletteOptions/EditPaletteColorName
 onready var palette_name_edit = $VBoxContainer/PaletteOptions/EditPaletteNameLineEdit
 onready var left_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/LeftColor/NinePatchRect
 onready var right_color_button = $VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/RightColor/NinePatchRect
+onready var gradiant_steps = $VBoxContainer/HBoxContainer/ColorButtons/GadientSteps
 onready var dummyBtn = $DummyBtn
 
 
@@ -70,11 +71,42 @@ func on_swatch_select(new_button) -> void:
 
 
 func on_move_swatch(from : int, to : int) -> void:
-	working_palette.move_color(from, to)
-	palette_grid.move_child(palette_grid.get_child(from), to)
-	current_swatch = to
+	if (Input.is_action_pressed("create_gradient")):
+		create_gradient_swatch(from, to)
+	else:
+		working_palette.move_color(from, to)
+		palette_grid.move_child(palette_grid.get_child(from), to)
+		current_swatch = to
 
 	re_index_swatches()
+	
+	
+func create_gradient_swatch(from : int, to : int) -> void:
+	var start_color = working_palette.get_color(from)
+	var end_color = working_palette.get_color(to)
+
+	var index : int = working_palette.colors.size()
+
+	var steps = gradiant_steps.value
+	var step_distance = 1.0 / (float(steps) + 1.0)
+		
+	for i in range(1, steps + 1):
+		var new_color = start_color.linear_interpolate(end_color, i * step_distance)
+		var new_button = palette_button.instance()
+		
+		working_palette.add_color(new_color)
+
+		new_button.color = new_color
+		new_button.get_child(0).modulate = new_color
+		new_button.hint_tooltip = "#" + working_palette.get_color_data(index).to_upper() + " " + working_palette.get_color_name(index)
+		new_button.draggable = true
+		new_button.index = index
+		new_button.connect("on_drop_data", self, "on_move_swatch")
+		new_button.connect("pressed", self, "on_swatch_select", [new_button])
+		new_button.group = dummyBtn.group
+
+		palette_grid.add_child(new_button)
+		index += 1
 
 
 func _on_AddSwatchButton_pressed() -> void:
