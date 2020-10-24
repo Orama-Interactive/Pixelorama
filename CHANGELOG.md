@@ -10,6 +10,7 @@ PinyaColada, Rémi Verschelde (akien-mga)
 
 ### Added
 - Added a "frame properties" option on the popupmenu that appears when right-clicking on a cel. This lets the user choose a custom frame delay for that specific frame. ([#357](https://github.com/Orama-Interactive/Pixelorama/pull/357))
+- You can now select if you want rotation to apply in the selection, the current cel, the entire frame, all frames or even all projects (tabs)!
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
@@ -17,6 +18,8 @@ PinyaColada, Rémi Verschelde (akien-mga)
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
 - Fixed issue where the user could grab, and could not let go of, the focus of guides even when they were invisible.
+- Fixed issues where fully transparent color could not be picked. One of these cases was ([#364](https://github.com/Orama-Interactive/Pixelorama/issues/364)).
+- Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
 <br><br>
 
 ## [v0.8.1] - 2020-10-14

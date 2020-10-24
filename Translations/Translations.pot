@@ -1064,6 +1064,9 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
 msgid "Frame properties"
 msgstr ""
 
