@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-10-20 08:44\n"
+"PO-Revision-Date: 2020-10-24 19:49\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1100,6 +1100,9 @@ msgstr "連結Cel"
 
 msgid "Unlink Cel"
 msgstr "取消Cel連結"
+
+msgid "Frame Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "影格屬性"
