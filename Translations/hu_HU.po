@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-10-23 17:24\n"
+"PO-Revision-Date: 2020-10-24 19:49\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1102,6 +1102,9 @@ msgstr "Cella összekapcsolása"
 
 msgid "Unlink Cel"
 msgstr "Cella szétkapcsolása"
+
+msgid "Frame Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Képkocka tulajdonságai"
