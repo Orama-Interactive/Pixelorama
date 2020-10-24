@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-24 19:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1103,7 +1103,7 @@ msgid "Unlink Cel"
 msgstr ""
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Свойства кадра"
 
 msgid "Frame properties"
 msgstr "Свойства кадра"
