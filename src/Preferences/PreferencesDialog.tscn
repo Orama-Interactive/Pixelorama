@@ -51,7 +51,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 498.0
-margin_bottom = 24.0
+margin_bottom = 384.0
 size_flags_horizontal = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -135,7 +135,7 @@ custom_constants/separation = 12
 visible = false
 margin_top = 28.0
 margin_right = 498.0
-margin_bottom = 280.0
+margin_bottom = 384.0
 
 [node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_right = 498.0
@@ -214,14 +214,15 @@ text = "Grid"
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 122.0
 margin_right = 498.0
-margin_bottom = 174.0
+margin_bottom = 222.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="TypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_top = 3.0
+margin_right = 123.0
+margin_bottom = 17.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_filter = 0
 text = "Grid type:"
@@ -230,7 +231,8 @@ __meta__ = {
 }
 
 [node name="GridType" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_right = 29.0
+margin_left = 127.0
+margin_right = 230.0
 margin_bottom = 20.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
@@ -239,18 +241,19 @@ items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null
 selected = 0
 
 [node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 5.0
-margin_right = 110.0
-margin_bottom = 19.0
+margin_left = 234.0
+margin_top = 3.0
+margin_right = 344.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Sets how far apart are vertical lines of the grid"
 mouse_filter = 0
 text = "Grid width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 114.0
-margin_right = 188.0
-margin_bottom = 24.0
+margin_top = 24.0
+margin_right = 123.0
+margin_bottom = 48.0
 hint_tooltip = "Sets how far apart are vertical lines of the grid"
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -261,18 +264,19 @@ align = 2
 suffix = "px"
 
 [node name="Height" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 192.0
-margin_top = 5.0
-margin_right = 267.0
-margin_bottom = 19.0
+margin_left = 127.0
+margin_top = 29.0
+margin_right = 230.0
+margin_bottom = 43.0
 hint_tooltip = "Sets how far apart are horizontal lines of the grid"
 mouse_filter = 0
 text = "Grid height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 28.0
-margin_right = 110.0
-margin_bottom = 52.0
+margin_left = 234.0
+margin_top = 24.0
+margin_right = 344.0
+margin_bottom = 48.0
 hint_tooltip = "Sets how far apart are horizontal lines of the grid"
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -283,16 +287,18 @@ align = 2
 suffix = "px"
 
 [node name="IsometricCellSizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
 hint_tooltip = "Sets the size of the cells in an isometric grid"
 mouse_filter = 0
 text = "Isometric cell size:"
 
 [node name="IsometricCellSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 28.0
-margin_right = 110.0
-margin_bottom = 52.0
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
 hint_tooltip = "Sets the size of the cells in an isometric grid"
 mouse_default_cursor_shape = 2
 min_value = 2.0
@@ -303,45 +309,44 @@ align = 2
 suffix = "px"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 114.0
-margin_top = 33.0
-margin_right = 188.0
-margin_bottom = 47.0
+margin_left = 234.0
+margin_top = 57.0
+margin_right = 344.0
+margin_bottom = 71.0
 hint_tooltip = "A color of the grid"
 mouse_filter = 0
 text = "Grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 192.0
-margin_top = 28.0
-margin_right = 267.0
-margin_bottom = 52.0
+margin_top = 80.0
+margin_right = 123.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the grid"
 mouse_default_cursor_shape = 2
 
 [node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 178.0
+margin_top = 226.0
 margin_right = 498.0
-margin_bottom = 182.0
+margin_bottom = 230.0
 
 [node name="TransparencyLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 186.0
+margin_top = 234.0
 margin_right = 498.0
-margin_bottom = 200.0
+margin_bottom = 248.0
 text = "Transparency"
 
 [node name="CheckerOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 204.0
+margin_top = 252.0
 margin_right = 498.0
-margin_bottom = 252.0
+margin_bottom = 356.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="SizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 5.0
-margin_right = 110.0
+margin_right = 162.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Size of the transparent checker background"
@@ -349,8 +354,8 @@ mouse_filter = 0
 text = "Checker size:"
 
 [node name="CheckerSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 114.0
-margin_right = 217.0
+margin_left = 166.0
+margin_right = 284.0
 margin_bottom = 24.0
 hint_tooltip = "Size of the transparent checker background"
 mouse_default_cursor_shape = 2
@@ -362,9 +367,9 @@ align = 2
 suffix = "px"
 
 [node name="CheckerColor1Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 221.0
+margin_left = 288.0
 margin_top = 5.0
-margin_right = 324.0
+margin_right = 456.0
 margin_bottom = 19.0
 hint_tooltip = "First color of the transparent checker background"
 mouse_filter = 0
@@ -372,7 +377,7 @@ text = "Checker color 1:"
 
 [node name="CheckerColor1" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 28.0
-margin_right = 110.0
+margin_right = 162.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "First color of the transparent checker background"
@@ -380,18 +385,18 @@ mouse_default_cursor_shape = 2
 color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="CheckerColor2Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 114.0
+margin_left = 166.0
 margin_top = 31.0
-margin_right = 217.0
+margin_right = 284.0
 margin_bottom = 45.0
 hint_tooltip = "Second color of the transparent checker background"
 mouse_filter = 0
 text = "Checker color 2:"
 
 [node name="CheckerColor2" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 221.0
+margin_left = 288.0
 margin_top = 28.0
-margin_right = 324.0
+margin_right = 456.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "Second color of the transparent checker background"
@@ -399,36 +404,58 @@ mouse_default_cursor_shape = 2
 color = Color( 0.341176, 0.34902, 0.341176, 1 )
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_top = -181.0
-margin_right = 110.0
-margin_bottom = -167.0
+margin_top = 57.0
+margin_right = 162.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 110, 0 )
 text = "Follow Canvas Movement"
 
 [node name="CheckerFollowMovement" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 114.0
-margin_top = -186.0
-margin_right = 161.0
-margin_bottom = -162.0
+margin_left = 166.0
+margin_top = 52.0
+margin_right = 284.0
+margin_bottom = 76.0
 hint_tooltip = "The transparent checker follow the movement of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_top = -181.0
-margin_right = 110.0
-margin_bottom = -167.0
+margin_left = 288.0
+margin_top = 57.0
+margin_right = 456.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 110, 0 )
 text = "Follow Canvas Zoom Level"
 
 [node name="CheckerFollowScale" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 114.0
-margin_top = -186.0
-margin_right = 161.0
-margin_bottom = -162.0
+margin_top = 80.0
+margin_right = 162.0
+margin_bottom = 104.0
 hint_tooltip = "The transparent checker follow the zoom level of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
+
+[node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_left = 166.0
+margin_top = 85.0
+margin_right = 284.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 110, 0 )
+hint_tooltip = "Size of the transparent checker background"
+mouse_filter = 0
+text = "Tile mode opacity:"
+
+[node name="TileModeOpacity" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
+margin_left = 288.0
+margin_top = 80.0
+margin_right = 456.0
+margin_bottom = 104.0
+hint_tooltip = "Size of the transparent checker background"
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+align = 2
 
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
