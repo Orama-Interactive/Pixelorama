@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-10-20 05:17\n"
+"PO-Revision-Date: 2020-10-24 19:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1102,6 +1102,9 @@ msgstr "Vincular célula"
 
 msgid "Unlink Cel"
 msgstr "Desvincular célula"
+
+msgid "Frame Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Propriedades do quadro"
