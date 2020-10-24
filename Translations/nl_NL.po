@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-10-19 15:11\n"
+"PO-Revision-Date: 2020-10-24 19:49\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -1073,6 +1073,9 @@ msgid "Link Cel"
 msgstr ""
 
 msgid "Unlink Cel"
+msgstr ""
+
+msgid "Frame Properties"
 msgstr ""
 
 msgid "Frame properties"
