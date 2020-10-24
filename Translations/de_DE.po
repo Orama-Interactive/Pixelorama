@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-19 16:21\n"
+"PO-Revision-Date: 2020-10-24 19:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1101,6 +1101,9 @@ msgstr "Cel verlinken"
 
 msgid "Unlink Cel"
 msgstr "Cel entkoppeln"
+
+msgid "Frame Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Frame-Eigenschaften"
