@@ -33,6 +33,7 @@ var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vect
 var directory_path := ""
 var file_name := "untitled"
 var file_format : int = Export.FileFormat.PNG
+var was_exported := false
 
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
@@ -197,8 +198,9 @@ func change_project() -> void:
 	Export.directory_path = directory_path
 	Export.file_name = file_name
 	Export.file_format = file_format
+	Export.was_exported = was_exported
 
-	if directory_path.empty():
+	if !was_exported:
 		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
 	else:
 		Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))

@@ -326,6 +326,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		Export.file_name = path.get_file().trim_suffix(".pxo")
 		Export.directory_path = path.get_base_dir()
 		Export.was_exported = false
+		project.was_exported = false
 		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 
 
@@ -454,6 +455,8 @@ func set_new_tab(project : Project, path : String) -> void:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
 	var directory_path := path.get_basename().replace(file_name, "")
+	project.directory_path = directory_path
+	project.file_name = file_name
 	Export.directory_path = directory_path
 	Export.file_name = file_name
 
