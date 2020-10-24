@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-24 20:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1104,10 +1104,10 @@ msgid "Unlink Cel"
 msgstr "Αποσύνδεση Cel"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Ιδιότητες Καρέ"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Ιδιότητες καρέ"
 
 msgid "Layer"
 msgstr "Στρώση"
@@ -1244,10 +1244,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Ακύρωση αναίρεσης: Διαγραφή ετικέτας καρέ"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή διάρκειας καρέ"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Ακύρωση αναίρεσης: Αλλαγή διάρκειας καρέ"
 
 msgid "Move Guide"
 msgstr "Μετακίνηση βοηθού"
@@ -1483,5 +1483,5 @@ msgid "Move the selected frame to the right."
 msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά"
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Διάρκεια καρέ"
 
