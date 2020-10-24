@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-20 01:17\n"
+"PO-Revision-Date: 2020-10-24 19:48\n"
 
 msgid "OK"
 msgstr "예"
@@ -1102,6 +1102,9 @@ msgstr "셀 연결"
 
 msgid "Unlink Cel"
 msgstr "셀 연결 해제"
+
+msgid "Frame Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "프레임 속성"
