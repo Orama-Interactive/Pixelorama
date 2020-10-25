@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 10:11\n"
+"PO-Revision-Date: 2020-10-25 12:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1107,7 +1107,7 @@ msgid "Frame Properties"
 msgstr "Propriétés du cadre"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Propriétés de la frame"
 
 msgid "Layer"
 msgstr "Couche"
@@ -1244,10 +1244,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Refaire : Supprimer la balise de la trame"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Annuler : Changer la durée de la frame"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Refaire : Changer la durée de la frame"
 
 msgid "Move Guide"
 msgstr "Déplacer le guide"
@@ -1483,5 +1483,5 @@ msgid "Move the selected frame to the right."
 msgstr "Déplacer la trame sélectionnée vers la droite."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Durée de la frame"
 
