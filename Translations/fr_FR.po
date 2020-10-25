@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 12:48\n"
+"PO-Revision-Date: 2020-10-25 13:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -37,7 +37,7 @@ msgid "Canvas Size"
 msgstr "Taille du canevas"
 
 msgid "Frame Size"
-msgstr "Taille de l'image"
+msgstr "Taille de la frame"
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -193,7 +193,7 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nouvel onglet)"
 
 msgid "New frame"
-msgstr "Nouvelle trame"
+msgstr "Nouvelle frame"
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -208,10 +208,10 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Trame horizontale :"
+msgstr "Frame horizontale :"
 
 msgid "Vertical frames:"
-msgstr "Trame verticale :"
+msgstr "Frame verticale :"
 
 msgid "Brush type:"
 msgstr "Type de pinceau:"
@@ -255,10 +255,10 @@ msgid "Frame"
 msgstr "Frame"
 
 msgid "Frames:"
-msgstr "Images:"
+msgstr "Frames :"
 
 msgid "All Frames"
-msgstr "Toutes les images"
+msgstr "Toutes les frames"
 
 msgid "Spritesheet"
 msgstr "Feuille de calque"
@@ -270,7 +270,7 @@ msgid "Preview:"
 msgstr "Aperçu :"
 
 msgid "Frame:"
-msgstr "Image :"
+msgstr "Frame :"
 
 msgid "Orientation:"
 msgstr "Orientation :"
@@ -294,10 +294,10 @@ msgid "Open a Directory"
 msgstr "Ouvrir un répertoire"
 
 msgid "All frames as multiple files"
-msgstr "Toutes les images sous forme de fichiers multiples"
+msgstr "Toutes les frames sous forme de plusieurs fichiers"
 
 msgid "All frames as a single file animation"
-msgstr "Toutes les images sous forme d'animation de fichier unique"
+msgstr "Toutes les images sous forme d'un fichier d'animation unique"
 
 msgid "Background:"
 msgstr "Arrière-plan :"
@@ -432,10 +432,10 @@ msgid "Current cel"
 msgstr "Cellule actuelle"
 
 msgid "Current frame"
-msgstr "Trame actuelle"
+msgstr "Frame actuelle"
 
 msgid "All frames"
-msgstr "Toutes les trames"
+msgstr "Toutes les frames"
 
 msgid "All projects"
 msgstr "Tous les projets"
@@ -1241,7 +1241,7 @@ msgid "Undo: Delete Frame Tag"
 msgstr "Annuler : Supprimer la balise de la trame"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Refaire : Supprimer la balise de la trame"
+msgstr "Refaire : Supprimer le tag de la frame"
 
 msgid "Undo: Change frame duration"
 msgstr "Annuler : Changer la durée de la frame"
@@ -1477,10 +1477,10 @@ msgid "and"
 msgstr "et"
 
 msgid "Move the selected frame to the left."
-msgstr "Déplacer la trame sélectionnée vers la gauche."
+msgstr "Déplacer la frame sélectionnée vers la gauche."
 
 msgid "Move the selected frame to the right."
-msgstr "Déplacer la trame sélectionnée vers la droite."
+msgstr "Déplacer la frame sélectionnée vers la droite."
 
 msgid "Frame duration"
 msgstr "Durée de la frame"
