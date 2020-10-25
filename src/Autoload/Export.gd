@@ -189,7 +189,9 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			else:
 				var err = processed_images[i].save_png(export_paths[i])
 				if err != OK:
-					OS.alert("Can't save file. Error code: %s" % err)
+					Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
+					Global.error_dialog.popup_centered()
+					Global.dialog_open(true)
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true

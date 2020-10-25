@@ -53,7 +53,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		err = file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
-		Global.notification_label(tr("File failed to open. Error code %s") % err)
+		Global.error_dialog.set_text(tr("File failed to open. Error code %s") % err)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		file.close()
 		return
 
@@ -267,11 +269,15 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
 	var serialized_data = project.serialize()
 	if !serialized_data:
-		Global.notification_label(tr("File failed to save. Serialization to dictionary failed."))
+		Global.error_dialog.set_text(tr("File failed to save. Converting project data to dictionary failed."))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		return
 	var to_save = JSON.print(serialized_data)
 	if !to_save:
-		Global.notification_label(tr("File failed to save. Dictionary to JSON failed."))
+		Global.error_dialog.set_text(tr("File failed to save. Converting dictionary to JSON failed."))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		return
 
 	var file : File = File.new()
@@ -282,7 +288,9 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		err = file.open(path, File.WRITE)
 
 	if err != OK:
-		Global.notification_label(tr("File failed to save. Error code %s") % err)
+		Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		file.close()
 		return
 

@@ -16,6 +16,7 @@ PinyaColada, Rémi Verschelde (akien-mga)
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
 - The default path of the dialogs for opening and saving is now the user's desktop folder.
+- When there are errors in opening and saving files, the errors appear in the form of a popup dialog, instead of a notification or an OS alert.
 
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
