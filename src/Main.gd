@@ -136,22 +136,24 @@ func load_last_project() -> void:
 		var file_check := File.new()
 		if file_check.file_exists(file_path): # If yes then load the file
 			OpenSave.open_pxo_file(file_path)
+			
+			Global.save_project_to_recent_list(file_path)
+			
 		else:
 			# If file doesn't exist on disk then warn user about this
 			Global.error_dialog.set_text("Cannot find last project file.")
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
-			
-			
-func load_recent_project_file(id : int) -> void:
+
+
+func load_recent_project_file(path : String) -> void:
 	if OS.get_name() == "HTML5":
 		return
 		
 	# Check if file still exists on disk
-	var file_path = Global.recent_projects[id]
 	var file_check := File.new()
-	if file_check.file_exists(file_path): # If yes then load the file
-		OpenSave.open_pxo_file(file_path)
+	if file_check.file_exists(path): # If yes then load the file
+		OpenSave.handle_loading_files([path])
 	else:
 		# If file doesn't exist on disk then warn user about this
 		Global.error_dialog.set_text("Cannot find project file.")

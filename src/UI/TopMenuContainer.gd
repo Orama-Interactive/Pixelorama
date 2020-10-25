@@ -43,7 +43,7 @@ func setup_file_menu() -> void:
 
 
 func setup_recent_projects_submenu(item : String) -> void:
-	Global.recent_projects_submenu.connect("id_pressed", self, "recent_projects_submenu_id_pressed")
+	Global.recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
 	Global.update_recent_projects_submenu()
 	
 	file_menu.add_child(Global.recent_projects_submenu)
@@ -212,10 +212,10 @@ func export_file() -> void:
 		Global.dialog_open(true)
 	else:
 		Export.external_export()
-		
 
-func recent_projects_submenu_id_pressed(id : int) -> void:
-	Global.control.load_recent_project_file(id)
+
+func on_recent_projects_submenu_id_pressed(id : int) -> void:
+	Global.control.load_recent_project_file(Global.recent_projects[id])
 
 
 func edit_menu_id_pressed(id : int) -> void:

@@ -517,8 +517,7 @@ func _exit_tree() -> void:
 
 
 func save_project_to_recent_list(path : String) -> void:
-	print(path.get_file().substr(0, 7))
-	if path.get_file().substr(0, 7) == "backup-":
+	if path.get_file().substr(0, 7) == "backup-" or path == "":
 		return
 	
 	if recent_projects.has(path):
