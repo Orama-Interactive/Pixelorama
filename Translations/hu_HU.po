@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1135,6 +1135,9 @@ msgstr "Aktuális réteg egyesítése az alatta lévővel"
 
 msgid "Opacity:"
 msgstr "Áttetszőség:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Réteg láthatóságának beállítása"
