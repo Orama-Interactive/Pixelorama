@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-24 20:37\n"
+"PO-Revision-Date: 2020-10-25 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1098,10 +1098,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr "Conectare celulă"
+msgstr "Conectare cel"
 
 msgid "Unlink Cel"
-msgstr "Deconectare celulă"
+msgstr "Deconectare cel"
 
 msgid "Frame Properties"
 msgstr "Proprietățile cadrului"
