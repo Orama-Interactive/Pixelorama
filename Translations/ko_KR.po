@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-24 19:48\n"
+"PO-Revision-Date: 2020-10-25 23:17\n"
 
 msgid "OK"
 msgstr "예"
@@ -1135,6 +1135,9 @@ msgstr "현재 레이어와 그 아래 레이어를 병합"
 
 msgid "Opacity:"
 msgstr "투명도:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "레이어 표시 토글"
