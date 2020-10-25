@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-10-24 19:48\n"
+"PO-Revision-Date: 2020-10-25 23:17\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1132,6 +1132,9 @@ msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
 
 msgid "Opacity:"
 msgstr "Necaurspīdīgums:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Slāņa redzamības slēdzis"
