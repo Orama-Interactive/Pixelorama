@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 12:39\n"
+"PO-Revision-Date: 2020-10-25 12:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1143,7 +1143,7 @@ msgid "Lock/unlock layer"
 msgstr "Verrouiller/déverrouiller le calque"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Trame : %s, Couche : %s"
+msgstr "Frame : %s, Couche : %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
