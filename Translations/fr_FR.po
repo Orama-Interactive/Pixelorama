@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 14:28\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1135,6 +1135,9 @@ msgstr "Fusionner le calque vers le bas"
 
 msgid "Opacity:"
 msgstr "Opacité:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Afficher/Masquer le calque"
