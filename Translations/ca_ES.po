@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1127,6 +1127,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Opacitat:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Activa/desactiva la visibilitat de la capa"
