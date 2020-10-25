@@ -22,6 +22,9 @@ func _ready() -> void:
 	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
 	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
 
+	Global.open_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+	Global.save_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true

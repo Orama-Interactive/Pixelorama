@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 This update has been brought to you by the contributions of:
+
 PinyaColada, Rémi Verschelde (akien-mga)
 
 ### Added
@@ -14,6 +15,7 @@ PinyaColada, Rémi Verschelde (akien-mga)
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
+- The default path of the dialogs for opening and saving is now the user's desktop folder.
 
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
@@ -25,6 +27,7 @@ PinyaColada, Rémi Verschelde (akien-mga)
 
 ## [v0.8.1] - 2020-10-14
 This update has been brought to you by the contributions of:
+
 Laurenz Reinthaler (Schweini07), PinyaColada
 
 ### Added
@@ -48,6 +51,7 @@ Laurenz Reinthaler (Schweini07), PinyaColada
 
 ## [v0.8] - 2020-09-23
 This update has been brought to you by the contributions of:
+
 Darshan Phaldesai (luiq54), Igor Santarek (jegor377), rob-a-bolton, Kinwailo, Michael Alexsander (YeldhamDev), Hugo Locurcio (Calinou), Martin Novák (novhack), Xenofon Konitsas (huskeee), Matthew Paul (matthewpaul-us)
 
 ### Added
