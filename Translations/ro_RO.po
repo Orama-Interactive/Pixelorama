@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-25 18:39\n"
+"PO-Revision-Date: 2020-10-25 20:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -429,7 +429,7 @@ msgid "Only affect selection"
 msgstr "Afectează doar selecția"
 
 msgid "Current cel"
-msgstr "Celula actuală"
+msgstr "Cel actual"
 
 msgid "Current frame"
 msgstr "Cadrul actual"
@@ -1147,8 +1147,8 @@ msgstr "Cadru: %s, Strat: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Activează/dezactivează conectarea celulelor\n\n"
-"Celulele conectate sunt distribuite pe mai multe cadre"
+msgstr "Activează/dezactivează conectarea celurilor\n\n"
+"Celurile conectate sunt distribuite pe mai multe cadre"
 
 msgid "Palette"
 msgstr "Paletă"
