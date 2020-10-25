@@ -175,6 +175,9 @@ msgstr ""
 msgid "Import as:"
 msgstr ""
 
+msgid "Recent projects":
+msgstr ""
+
 msgid "New tab"
 msgstr ""
 
@@ -1372,6 +1375,9 @@ msgid "A tool assigned to the right mouse button"
 msgstr ""
 
 msgid "Cannot find last project file."
+msgstr ""
+
+msgid "Cannot find project file."
 msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"

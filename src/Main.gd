@@ -141,6 +141,22 @@ func load_last_project() -> void:
 			Global.error_dialog.set_text("Cannot find last project file.")
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
+			
+			
+func load_recent_project_file(id : int) -> void:
+	if OS.get_name() == "HTML5":
+		return
+		
+	# Check if file still exists on disk
+	var file_path = Global.recent_projects[id]
+	var file_check := File.new()
+	if file_check.file_exists(file_path): # If yes then load the file
+		OpenSave.open_pxo_file(file_path)
+	else:
+		# If file doesn't exist on disk then warn user about this
+		Global.error_dialog.set_text("Cannot find project file.")
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func _on_OpenSprite_file_selected(path : String) -> void:
