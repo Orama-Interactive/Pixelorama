@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr ""
@@ -1106,6 +1106,9 @@ msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
+msgstr ""
+
+msgid "Tile mode opacity:"
 msgstr ""
 
 msgid "Toggle layer's visibility"
