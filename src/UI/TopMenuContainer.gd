@@ -31,7 +31,7 @@ func setup_file_menu() -> void:
 
 	for item in file_menu_items.keys():
 		if item == "Recent projects":
-			setup_recent_projects_submenu(item, i)
+			setup_recent_projects_submenu(item)
 		else:
 			file_menu.add_item(item, i, file_menu_items[item])
 			i += 1
@@ -42,7 +42,7 @@ func setup_file_menu() -> void:
 		file_menu.set_item_disabled(2, true)
 
 
-func setup_recent_projects_submenu(item : String, index : int) -> void:
+func setup_recent_projects_submenu(item : String) -> void:
 	Global.recent_projects_submenu.connect("id_pressed", self, "recent_projects_submenu_id_pressed")
 	Global.update_recent_projects_submenu()
 	
