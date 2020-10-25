@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-10-24 19:48\n"
+"PO-Revision-Date: 2020-10-25 23:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1135,6 +1135,9 @@ msgstr "Combinar camada atual com a de baixo"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
