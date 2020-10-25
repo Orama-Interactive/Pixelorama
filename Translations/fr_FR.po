@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 12:00\n"
+"PO-Revision-Date: 2020-10-25 12:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1066,10 +1066,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "L'animation ne joue que sur les trames de même balise"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Balise %s (Trame %s)"
+msgstr "Tag %s (Frame %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Balise %s (Trames %s-%s)"
+msgstr "Tag %s (Frames %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
