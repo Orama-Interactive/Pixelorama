@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-25 09:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1104,7 +1104,7 @@ msgid "Unlink Cel"
 msgstr "Délier la cellule"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Propriétés du cadre"
 
 msgid "Frame properties"
 msgstr ""
