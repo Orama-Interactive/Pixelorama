@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 13:59\n"
+"PO-Revision-Date: 2020-10-25 14:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1048,10 +1048,10 @@ msgid "Manage frame tags"
 msgstr "Gérer les tags de la frame"
 
 msgid "Frame Tag Properties"
-msgstr "Propriétés de la balise de la trame"
+msgstr "Propriétés du tag de la frame"
 
 msgid "Add a new frame tag"
-msgstr "Ajouter une nouvelle balise à la trame"
+msgstr "Ajouter un nouveau tag à la frame"
 
 msgid "Name:"
 msgstr "Nom :"
@@ -1063,7 +1063,7 @@ msgid "To:"
 msgstr "À :"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "L'animation ne joue que sur les trames de même balise"
+msgstr "L'animation ne joue que sur les frames de même tag"
 
 msgid "Tag %s (Frame %s)"
 msgstr "Tag %s (Frame %s)"
@@ -1073,20 +1073,20 @@ msgstr "Tag %s (Frames %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Si sélectionné, l'animation ne joue que sur les trames partageant la même balise.\n"
-"Si ce n'est pas le cas, l'animation sera jouée sur toutes les trames, ignorant les balises."
+msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le même tag.\n"
+"Si ce n'est pas le cas, l'animation sera jouée sur toutes les frames en ignorant les tags."
 
 msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
 
 msgid "Add a new frame"
-msgstr "Ajouter une trame"
+msgstr "Ajouter une frame"
 
 msgid "Remove Frame"
-msgstr "Supprimer la trame"
+msgstr "Supprimer la frame"
 
 msgid "Clone Frame"
-msgstr "Cloner la trame"
+msgstr "Cloner la frame"
 
 msgid "Move Left"
 msgstr "Déplacer vers la gauche"
@@ -1104,7 +1104,7 @@ msgid "Unlink Cel"
 msgstr "Délier la cellule"
 
 msgid "Frame Properties"
-msgstr "Propriétés du cadre"
+msgstr "Propriétés de la frame"
 
 msgid "Frame properties"
 msgstr "Propriétés de la frame"
@@ -1208,22 +1208,22 @@ msgid "Redo: Change Layer Order"
 msgstr "Refaire : Modifier l'ordre des calques"
 
 msgid "Undo: Add Frame"
-msgstr "Annuler : Ajouter une trame"
+msgstr "Annuler : Ajouter une frame"
 
 msgid "Redo: Add Frame"
-msgstr "Refaire : Ajouter une trame"
+msgstr "Refaire : Ajouter une frame"
 
 msgid "Undo: Remove Frame"
-msgstr "Annuler : Supprimer une trame"
+msgstr "Annuler : Supprimer une frame"
 
 msgid "Redo: Remove Frame"
-msgstr "Refaire : Supprimer une trame"
+msgstr "Refaire : Supprimer une frame"
 
 msgid "Undo: Change Frame Order"
-msgstr "Annuler : Modifier l'ordre des trames"
+msgstr "Annuler : Modifier l'ordre des frames"
 
 msgid "Redo: Change Frame Order"
-msgstr "Refaire : Modifier l'ordre des trames"
+msgstr "Refaire : Modifier l'ordre des frames"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Annuler : Supprimer la brosse personnalisée"
@@ -1232,13 +1232,13 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Refaire : Supprimer la brosse personnalisée"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Annuler : Modifier la balise de la trame"
+msgstr "Annuler : Modifier le tag de la frame"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Refaire : Modifier la balise de la trame"
+msgstr "Refaire : Modifier le tag de la frame"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Annuler : Supprimer la balise de la trame"
+msgstr "Annuler : Supprimer le tag de la frame"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Refaire : Supprimer le tag de la frame"
@@ -1439,7 +1439,7 @@ msgid "minute(s)"
 msgstr "minute(s)"
 
 msgid "Create new directory for each frame tag"
-msgstr "Créer un nouveau répertoire pour chaque image"
+msgstr "Créer un nouveau répertoire pour chaque tag de frame"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr "Crée plusieurs fichiers, mais chaque fichier est stocké dans différents répertoires qui correspondent à son image"
