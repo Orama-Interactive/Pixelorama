@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 09:08\n"
+"PO-Revision-Date: 2020-10-25 10:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -34,7 +34,7 @@ msgid "Image Size"
 msgstr "Taille de l'image"
 
 msgid "Canvas Size"
-msgstr "Taille du Canevas"
+msgstr "Taille du canevas"
 
 msgid "Frame Size"
 msgstr "Taille de l'image"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Copier"
 
 msgid "Cut"
-msgstr ""
+msgstr "Couper"
 
 msgid "Paste"
 msgstr "Coller"
@@ -1462,7 +1462,7 @@ msgid "Remove currently selected palette"
 msgstr "Supprimer la palette actuellement sélectionnée"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette palette ? (Opération irréversible)"
 
 msgid "You can't remove more palettes!"
 msgstr "Vous ne pouvez pas supprimer plus de palettes!"
