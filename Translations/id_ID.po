@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-10-24 19:48\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1132,6 +1132,9 @@ msgstr "Satukan lapisan/layer ini dengan yang dibawah"
 
 msgid "Opacity:"
 msgstr "Kegelapan:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Sembunyikan/Perlihatkan lapisan/layer"
