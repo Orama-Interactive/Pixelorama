@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-24 20:37\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1135,6 +1135,9 @@ msgstr "Συγχώνευση της τρέχουσας στρώσης με τη�
 
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Εναλλαγή της ορατότητας της στρώσης"
