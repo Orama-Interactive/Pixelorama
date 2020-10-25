@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-10-24 19:49\n"
+"PO-Revision-Date: 2020-10-25 23:18\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1133,6 +1133,9 @@ msgstr "合併此圖層與下面的圖層"
 
 msgid "Opacity:"
 msgstr "透明度："
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "開關圖層可視"
