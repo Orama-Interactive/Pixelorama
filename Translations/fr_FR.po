@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 14:08\n"
+"PO-Revision-Date: 2020-10-25 14:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -306,13 +306,13 @@ msgid "Direction:"
 msgstr "Direction :"
 
 msgid "Forward"
-msgstr "Avancer"
+msgstr "En avant"
 
 msgid "Backwards"
 msgstr "Reculer"
 
 msgid "Ping-Pong"
-msgstr "Ping Pong"
+msgstr "Ping-Pong"
 
 msgid "Columns"
 msgstr "Colonnes"
@@ -1063,7 +1063,7 @@ msgid "To:"
 msgstr "À :"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "L'animation ne joue que sur les frames de même tag"
+msgstr "L'animation ne joue que sur les frames du même tag"
 
 msgid "Tag %s (Frame %s)"
 msgstr "Tag %s (Frame %s)"
@@ -1074,7 +1074,7 @@ msgstr "Tag %s (Frames %s-%s)"
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
 msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le même tag.\n"
-"Si ce n'est pas le cas, l'animation sera jouée sur toutes les frames en ignorant les tags."
+"Si ce n'est pas le cas, l'animation sera jouée sur toutes les frames, ignorant les tags."
 
 msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
@@ -1442,7 +1442,7 @@ msgid "Create new directory for each frame tag"
 msgstr "Créer un nouveau répertoire pour chaque tag de frame"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Crée plusieurs fichiers, mais chaque fichier est stocké dans différents répertoires qui correspondent à son image"
+msgstr "Crée plusieurs fichiers, mais chaque fichier est stocké dans différents répertoires qui correspondent à son tag de frame"
 
 msgid "Close"
 msgstr "Fermer"
