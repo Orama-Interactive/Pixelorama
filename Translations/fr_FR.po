@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-25 13:47\n"
+"PO-Revision-Date: 2020-10-25 13:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -962,7 +962,7 @@ msgid "Options:"
 msgstr "Options :"
 
 msgid "Fit to frame"
-msgstr "Ajuster à la trame"
+msgstr "Ajuster à la frame"
 
 msgid "100% Zoom"
 msgstr "Zoom 100%"
@@ -983,16 +983,16 @@ msgid "Vertical"
 msgstr "Vertical"
 
 msgid "Current frame:"
-msgstr "Trame actuelle :"
+msgstr "Frame actuelle :"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr "Aller à la première trame\n"
+msgstr "Aller à la première frame\n"
 "(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "Aller à la trame précédente\n"
+msgstr "Aller à la frame précédente\n"
 "(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
@@ -1007,12 +1007,12 @@ msgstr "Jouer l'animation (du début vers la fin)\n"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "Aller à la prochaine trame\n"
+msgstr "Aller à la prochaine frame\n"
 "(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr "Aller à la dernière trame\n"
+msgstr "Aller à la dernière frame\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
@@ -1039,13 +1039,13 @@ msgid "Onion Skinning:"
 msgstr "Peau d'oignon :"
 
 msgid "Past Frames"
-msgstr "Trames passées"
+msgstr "Frames passées"
 
 msgid "Future Frames"
-msgstr "Trames futures"
+msgstr "Frames futures"
 
 msgid "Manage frame tags"
-msgstr "Gérer les balises de la trame"
+msgstr "Gérer les tags de la frame"
 
 msgid "Frame Tag Properties"
 msgstr "Propriétés de la balise de la trame"
