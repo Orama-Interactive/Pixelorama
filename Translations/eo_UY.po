@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-10-24 19:48\n"
+"PO-Revision-Date: 2020-10-25 23:17\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1108,6 +1108,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Opakeco:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr ""
