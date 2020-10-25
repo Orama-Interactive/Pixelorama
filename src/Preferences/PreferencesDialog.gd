@@ -27,6 +27,7 @@ var preferences = [
 	["checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color", Global.checker_color_2],
 	["checker_follow_movement", "Canvas/CheckerOptions/CheckerFollowMovement", "pressed", Global.checker_follow_movement],
 	["checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed", Global.checker_follow_scale],
+	["tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value", Global.tilemode_opacity],
 ]
 
 var selected_item := 0

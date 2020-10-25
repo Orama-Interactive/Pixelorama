@@ -1097,6 +1097,9 @@ msgstr ""
 msgid "Opacity:"
 msgstr ""
 
+msgid "Tile mode opacity:"
+msgstr ""
+
 msgid "Toggle layer's visibility"
 msgstr ""
 

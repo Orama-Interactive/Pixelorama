@@ -23,8 +23,10 @@ func _draw() -> void:
 		# Mostly used to hide the grid if it goes outside the canvas boundaries
 		draw_rect(Rect2(pos, size), Global.default_clear_color)
 
+	var tilemode_opacity = 1.0 - Global.tilemode_opacity
+
 	for i in range(Global.current_project.layers.size()):
-		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
+		var modulate_color := Color(1, 1, 1, current_cels[i].opacity - tilemode_opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
 			if Global.tile_mode:
 				for pos in positions:
