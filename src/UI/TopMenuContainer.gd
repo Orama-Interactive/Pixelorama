@@ -23,19 +23,31 @@ func setup_file_menu() -> void:
 		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
 		"Export..." : InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
 		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
+		"Recent projects": 0,
 		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
 		}
 	file_menu = Global.file_menu.get_popup()
 	var i := 0
 
 	for item in file_menu_items.keys():
-		file_menu.add_item(item, i, file_menu_items[item])
-		i += 1
-
+		if item == "Recent projects":
+			setup_recent_projects_submenu(item)
+		else:
+			file_menu.add_item(item, i, file_menu_items[item])
+			i += 1
+		
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
-
+	
 	if OS.get_name() == "HTML5":
 		file_menu.set_item_disabled(2, true)
+
+
+func setup_recent_projects_submenu(item : String) -> void:
+	Global.recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
+	Global.update_recent_projects_submenu()
+	
+	file_menu.add_child(Global.recent_projects_submenu)
+	file_menu.add_submenu_item(item, Global.recent_projects_submenu.get_name())
 
 
 func setup_edit_menu() -> void:
@@ -200,6 +212,10 @@ func export_file() -> void:
 		Global.dialog_open(true)
 	else:
 		Export.external_export()
+
+
+func on_recent_projects_submenu_id_pressed(id : int) -> void:
+	Global.control.load_recent_project_file(Global.recent_projects[id])
 
 
 func edit_menu_id_pressed(id : int) -> void:

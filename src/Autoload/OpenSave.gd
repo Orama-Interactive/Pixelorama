@@ -119,6 +119,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		Export.was_exported = false
 		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
 		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
+		
+	Global.save_project_to_recent_list(path)
 
 
 # For pxo files older than v0.8
@@ -336,6 +338,8 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		Export.was_exported = false
 		project.was_exported = false
 		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
+		
+	Global.save_project_to_recent_list(path)
 
 
 func open_image_as_new_tab(path : String, image : Image) -> void:

@@ -21,6 +21,8 @@ var projects := [] # Array of Projects
 var current_project : Project
 var current_project_index := 0 setget project_changed
 
+var recent_projects := []
+
 # Indices are as in the Direction enum
 # This is the total time the key for
 # that direction has been pressed.
@@ -112,6 +114,8 @@ var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
+var recent_projects_submenu : PopupMenu
+
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
 var save_sprites_dialog : FileDialog
@@ -175,6 +179,8 @@ func _ready() -> void:
 		root_directory = OS.get_executable_path().get_base_dir()
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
+	
+	recent_projects = config_cache.get_value("data", "recent_projects", [])
 
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
@@ -208,6 +214,9 @@ func _ready() -> void:
 	help_menu = find_node_by_name(root, "HelpMenu")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
+	
+	recent_projects_submenu = PopupMenu.new()	
+	recent_projects_submenu.set_name("recent_projects_submenu")
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
@@ -506,3 +515,25 @@ func _exit_tree() -> void:
 		project.undo_redo.free()
 		OpenSave.remove_backup(i)
 		i += 1
+
+
+func save_project_to_recent_list(path : String) -> void:
+	if path.get_file().substr(0, 7) == "backup-" or path == "":
+		return
+	
+	if recent_projects.has(path):
+		return
+
+	if recent_projects.size() >= 5:
+		recent_projects.pop_front()
+	recent_projects.push_back(path)
+	
+	config_cache.set_value("data", "recent_projects", recent_projects)
+
+	recent_projects_submenu.clear()
+	update_recent_projects_submenu()
+	
+	
+func update_recent_projects_submenu() -> void:
+	for project in Global.recent_projects:
+		recent_projects_submenu.add_item(project.get_file())
