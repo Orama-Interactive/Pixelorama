@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-26 00:28\n"
+"PO-Revision-Date: 2020-10-26 08:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -160,7 +160,7 @@ msgid "Show Rulers"
 msgstr "显示标尺"
 
 msgid "Show Guides"
-msgstr "显示指南"
+msgstr "显示参考线"
 
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
@@ -339,10 +339,10 @@ msgid "File:"
 msgstr "文件:"
 
 msgid "Interpolation:"
-msgstr "插补:"
+msgstr "插值："
 
 msgid "Nearest"
-msgstr "最近"
+msgstr "最临近"
 
 msgid "Bilinear"
 msgstr "双线性"
@@ -782,7 +782,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
 
 msgid "Guides"
-msgstr "手册"
+msgstr "参考线"
 
 msgid "Guides color:"
 msgstr "参考线颜色："
