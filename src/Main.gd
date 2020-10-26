@@ -136,9 +136,6 @@ func load_last_project() -> void:
 		var file_check := File.new()
 		if file_check.file_exists(file_path): # If yes then load the file
 			OpenSave.open_pxo_file(file_path)
-			
-			Global.save_project_to_recent_list(file_path)
-			
 		else:
 			# If file doesn't exist on disk then warn user about this
 			Global.error_dialog.set_text("Cannot find last project file.")
