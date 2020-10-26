@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-26 08:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1137,7 +1137,7 @@ msgid "Opacity:"
 msgstr "Opacitate:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Opacitatea modului Mozaic:"
 
 msgid "Toggle layer's visibility"
 msgstr "Comută vizibilitatea stratului"
