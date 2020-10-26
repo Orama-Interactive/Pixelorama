@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-26 02:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1137,7 +1137,7 @@ msgid "Opacity:"
 msgstr "Opacità:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Opacità modalità piastrelle:"
 
 msgid "Toggle layer's visibility"
 msgstr "Attiva/Disattiva visibilità del livello"
