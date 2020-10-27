@@ -146,7 +146,7 @@ func load_last_project() -> void:
 func load_recent_project_file(path : String) -> void:
 	if OS.get_name() == "HTML5":
 		return
-		
+
 	# Check if file still exists on disk
 	var file_check := File.new()
 	if file_check.file_exists(path): # If yes then load the file

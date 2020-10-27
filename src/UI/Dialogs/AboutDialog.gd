@@ -29,6 +29,7 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Xenofon Konitsas (huskee)")
 	contributors.create_item(contributor_root).set_text(0, "  Matheus Pesegoginski (MatheusPese)")
 	contributors.create_item(contributor_root).set_text(0, "  sapient_cogbag")
+	contributors.create_item(contributor_root).set_text(0, "  dasimonde")
 	contributors.create_item(contributor_root).set_text(0, "  Matthew Paul (matthewpaul-us)")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
 	contributors.create_item(contributor_root).set_text(0, "  PinyaColada")

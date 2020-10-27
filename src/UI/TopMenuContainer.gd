@@ -35,9 +35,9 @@ func setup_file_menu() -> void:
 		else:
 			file_menu.add_item(item, i, file_menu_items[item])
 			i += 1
-		
+
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
-	
+
 	if OS.get_name() == "HTML5":
 		file_menu.set_item_disabled(2, true)
 
@@ -45,7 +45,7 @@ func setup_file_menu() -> void:
 func setup_recent_projects_submenu(item : String) -> void:
 	Global.recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
 	Global.update_recent_projects_submenu()
-	
+
 	file_menu.add_child(Global.recent_projects_submenu)
 	file_menu.add_submenu_item(item, Global.recent_projects_submenu.get_name())
 
