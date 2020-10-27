@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-27 17:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Tile Mode"
-msgstr "Tile Modus"
+msgstr "Tilemodus"
 
 msgid "Show Grid"
 msgstr "Zeige Raster"
@@ -1103,7 +1103,7 @@ msgid "Unlink Cel"
 msgstr "Cel entkoppeln"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Frame-Eigenschaften"
 
 msgid "Frame properties"
 msgstr "Frame-Eigenschaften"
@@ -1136,7 +1136,7 @@ msgid "Opacity:"
 msgstr "Deckkraft"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Tilemodus Deckkraft:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
