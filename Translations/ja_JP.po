@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-28 02:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,10 +254,10 @@ msgid "Frame"
 msgstr "フレーム"
 
 msgid "Frames:"
-msgstr ""
+msgstr "フレーム:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "すべてのフレーム"
 
 msgid "Spritesheet"
 msgstr ""
@@ -470,10 +470,10 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "タイプ:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "角度:"
 
 msgid "Hue"
 msgstr ""
@@ -530,7 +530,7 @@ msgid "About Pixelorama"
 msgstr "Pixelorama について"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - 夢をピクセル化しよう!"
 
 msgid "Developed by Orama Interactive"
 msgstr ""
@@ -554,10 +554,10 @@ msgid "Developers"
 msgstr "開発者"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Contributors"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donors"
 
 msgid "Translators"
 msgstr "翻訳者"
@@ -584,10 +584,10 @@ msgid "Russian"
 msgstr "ロシア語"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "中国語（簡体)"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "中国語 (繁体)"
 
 msgid "Italian"
 msgstr "イタリア語"
@@ -629,16 +629,16 @@ msgid "Romanian"
 msgstr "ルーマニア語"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Development Team"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Lead Programmer"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI Designer"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub Contributors"
 
 msgid "Art by: %s"
 msgstr "Art by: %s"
