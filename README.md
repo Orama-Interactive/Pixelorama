@@ -47,8 +47,10 @@ If you like, consider helping us by sponsoring this project! It would enable us 
 You can also support the development on patreon: [![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
 
 ## Download
+Stable versions:
 - [Itch.io (Windows, Linux, Mac & Web)](https://orama-interactive.itch.io/pixelorama)
 - [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
+- [GitHub Pages (Web)](https://orama-interactive.github.io/Pixelorama/)
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
 - [Snap Store (Linux)](https://snapcraft.io/pixelorama)
 
