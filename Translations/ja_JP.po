@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-28 02:59\n"
+"PO-Revision-Date: 2020-10-28 03:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -533,7 +533,7 @@ msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 夢をピクセル化しよう!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Developed by Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
 msgstr "Copyright 2019-2020 Orama Interactive and contributors"
@@ -548,7 +548,7 @@ msgid "GitHub Repo"
 msgstr "GitHub Repo"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donate"
 
 msgid "Developers"
 msgstr "開発者"
@@ -807,7 +807,7 @@ msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "グリッドの色:"
 
 msgid "A color of the grid"
 msgstr ""
