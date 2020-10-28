@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-10-28 03:08\n"
+"PO-Revision-Date: 2020-10-28 03:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -927,16 +927,16 @@ msgid "Left Color"
 msgstr ""
 
 msgid "Right Color"
-msgstr ""
+msgstr "右の色"
 
 msgid "Mode:"
-msgstr ""
+msgstr "モード:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "ズームイン"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "ズームアウト"
 
 msgid "Options:"
 msgstr ""
@@ -945,7 +945,7 @@ msgid "Fit to frame"
 msgstr ""
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% ズーム"
 
 msgid "Mirroring"
 msgstr ""
@@ -1254,7 +1254,7 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
-msgstr ""
+msgstr "色の名前"
 
 msgid "Use current left & right colors"
 msgstr ""
@@ -1263,7 +1263,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -1374,13 +1374,13 @@ msgid "Already assigned"
 msgstr ""
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "左のツール:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr ""
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "右のツール:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr ""
@@ -1419,7 +1419,7 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 msgid "Delete"
 msgstr ""
