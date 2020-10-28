@@ -503,6 +503,10 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 (%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
 
 
+func is_cjk(locale : String) -> bool:
+	return "zh" in locale or "ko" in locale
+
+
 func _exit_tree() -> void:
 	config_cache.set_value("window", "screen", OS.current_screen)
 	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)

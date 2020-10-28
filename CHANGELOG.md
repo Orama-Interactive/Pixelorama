@@ -19,12 +19,14 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
 - The default path of the dialogs for opening and saving is now the user's desktop folder.
 - When there are errors in opening and saving files, the errors appear in the form of a popup dialog, instead of a notification or an OS alert.
+- The CJK font (for Chinese & Korean) was changed to DroidSansFallback from NotoSansCJKtc. This results in a much smaller exported `.pck` (over 10MB less)
 
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
 - Fixed issue where the user could grab, and could not let go of, the focus of guides even when they were invisible.
 - Fixed issues where fully transparent color could not be picked. One of these cases was ([#364](https://github.com/Orama-Interactive/Pixelorama/issues/364)).
 - Fixed "Export" option in the File menu not working properly when switching between projects, and not remembering the directory path and file name, if the project is an imported image and the tabs were switched.
+- Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
 <br><br>
 

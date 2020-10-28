@@ -46,7 +46,7 @@ margin_top = 12.0
 margin_right = 332.0
 margin_bottom = 51.0
 
-[node name="Pixelorama" type="Label" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
+[node name="PixeloramaSlogan" type="Label" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
 margin_right = 224.0
 margin_bottom = 15.0
 custom_fonts/font = ExtResource( 3 )

@@ -9,6 +9,9 @@ var artworks := {
 
 var chosen_artwork = ""
 
+onready var latin_font = preload("res://assets/fonts/Roboto-Small.tres")
+onready var cjk_font = preload("res://assets/fonts/CJK/DroidSansFallback-Small.tres")
+
 
 func _on_SplashDialog_about_to_show() -> void:
 	var splash_art_texturerect : TextureRect = Global.find_node_by_name(self, "SplashArt")
@@ -26,18 +29,17 @@ func _on_SplashDialog_about_to_show() -> void:
 	art_by_label.text = tr("Art by: %s") % chosen_artwork
 	art_by_label.hint_tooltip = artworks[chosen_artwork][1]
 
-	if "zh" in TranslationServer.get_locale():
-		show_on_startup_button.add_font_override("font", preload("res://assets/fonts/CJK/NotoSansCJKtc-Small.tres"))
-		copyright_label.add_font_override("font", preload("res://assets/fonts/CJK/NotoSansCJKtc-Small.tres"))
+	if Global.is_cjk(TranslationServer.get_locale()):
+		show_on_startup_button.add_font_override("font", cjk_font)
+		copyright_label.add_font_override("font", cjk_font)
 	else:
-		show_on_startup_button.add_font_override("font", preload("res://assets/fonts/Roboto-Small.tres"))
-		copyright_label.add_font_override("font", preload("res://assets/fonts/Roboto-Small.tres"))
+		show_on_startup_button.add_font_override("font", latin_font)
+		copyright_label.add_font_override("font", latin_font)
 
 	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox("panel", "WindowDialog").bg_color
 	get_stylebox("panel", "WindowDialog").border_color = Global.control.theme.get_stylebox("panel", "WindowDialog").border_color
 	if OS.get_name() == "HTML5":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
-
 
 
 func _on_ArtCredits_pressed() -> void:
