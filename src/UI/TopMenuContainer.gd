@@ -19,11 +19,11 @@ func setup_file_menu() -> void:
 		"New..." : InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
 		"Open..." : InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
 		'Open last project...' : 0,
+		"Recent projects": 0,
 		"Save..." : InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
 		"Save as..." : InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
 		"Export..." : InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
 		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
-		"Recent projects": 0,
 		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
 		}
 	file_menu = Global.file_menu.get_popup()

@@ -191,9 +191,9 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % save_path.get_file())
+		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % save_path.get_file())
 	else:
-		Global.file_menu.get_popup().set_item_text(3, tr("Save"))
+		Global.file_menu.get_popup().set_item_text(4, tr("Save"))
 
 	Export.directory_path = directory_path
 	Export.file_name = file_name
@@ -201,9 +201,9 @@ func change_project() -> void:
 	Export.was_exported = was_exported
 
 	if !was_exported:
-		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
+		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
 	else:
-		Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+		Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
 
 func serialize() -> Dictionary:
