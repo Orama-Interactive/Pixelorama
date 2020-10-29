@@ -22,7 +22,8 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 447.0
+margin_left = 123.0
+margin_right = 323.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
@@ -44,29 +45,29 @@ __meta__ = {
 
 [node name="Names" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_right = 81.0
-margin_bottom = 84.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 0.9
-custom_constants/separation = 8
 
 [node name="Hue" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
 margin_right = 81.0
 margin_bottom = 14.0
-text = "Hue"
+text = "Hue:"
 align = 2
 
 [node name="Saturation" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
-margin_top = 22.0
+margin_top = 18.0
 margin_right = 81.0
-margin_bottom = 36.0
-text = "Saturation"
+margin_bottom = 32.0
+text = "Saturation:"
 align = 2
 
 [node name="Value" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
-margin_top = 44.0
+margin_top = 36.0
 margin_right = 81.0
-margin_bottom = 58.0
-text = "Value"
+margin_bottom = 50.0
+text = "Value:"
 align = 2
 
 [node name="Sliders" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
@@ -75,26 +76,28 @@ margin_right = 362.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-custom_constants/separation = 7
+custom_constants/separation = 10
+alignment = 1
 
 [node name="Hue" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
+margin_top = 8.0
 margin_right = 271.0
-margin_bottom = 16.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = -180.0
 max_value = 180.0
 
 [node name="Saturation" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
-margin_top = 23.0
+margin_top = 34.0
 margin_right = 271.0
-margin_bottom = 39.0
+margin_bottom = 50.0
 mouse_default_cursor_shape = 2
 min_value = -100.0
 
 [node name="Value" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
-margin_top = 46.0
+margin_top = 60.0
 margin_right = 271.0
-margin_bottom = 62.0
+margin_bottom = 76.0
 mouse_default_cursor_shape = 2
 min_value = -100.0
 

@@ -467,13 +467,13 @@ msgstr ""
 msgid "Angle:"
 msgstr ""
 
-msgid "Hue"
+msgid "Hue:"
 msgstr ""
 
-msgid "Saturation"
+msgid "Saturation:"
 msgstr ""
 
-msgid "Value"
+msgid "Value:"
 msgstr ""
 
 msgid "Apply"
