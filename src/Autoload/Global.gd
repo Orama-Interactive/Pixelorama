@@ -294,7 +294,7 @@ func find_node_by_name(root : Node, node_name : String) -> Node:
 func notification_label(text : String) -> void:
 	var notification : Label = load("res://src/UI/NotificationLabel.tscn").instance()
 	notification.text = tr(text)
-	notification.rect_position = Vector2(240, OS.window_size.y - animation_timeline.rect_size.y - 20)
+	notification.rect_position = Vector2(70, OS.window_size.y - animation_timeline.rect_size.y - 20)
 	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
