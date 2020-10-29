@@ -116,6 +116,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		Global.config_cache.save("user://cache.ini")
 		Export.file_name = path.get_file().trim_suffix(".pxo")
 		Export.directory_path = path.get_base_dir()
+		new_project.directory_path = Export.directory_path
+		new_project.file_name = Export.file_name
 		Export.was_exported = false
 		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
 		Global.file_menu.get_popup().set_item_text(6, tr("Export"))

@@ -25,7 +25,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
 - Fixed issue where the user could grab and could not let go of the focus of guides even when they were invisible.
 - Fixed issues where fully transparent color could not be picked. One of these cases was [#364](https://github.com/Orama-Interactive/Pixelorama/issues/364).
-- Fixed "Export" option in the File menu not working properly when switching between projects, and not remembering the directory path and file name, if the project is an imported image and the tabs were switched.
+- Fixed "Export" option in the File menu not working properly and not remembering the directory path and file name when switching between projects (tabs).
 - Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
 <br><br>
