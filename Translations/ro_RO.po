@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-10-31 09:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Importare ca:"
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "Proiecte recente:"
 
 msgid "New tab"
 msgstr "Filă nouă"
@@ -480,13 +480,13 @@ msgid "Angle:"
 msgstr "Unghi:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Nuanță:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturație:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Valoare:"
 
 msgid "Apply"
 msgstr "Aplicare"
@@ -1421,7 +1421,7 @@ msgid "Cannot find last project file."
 msgstr "Ultimul fișier de proiect nu poate fi găsit."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Fișierul de proiect nu poate fi găsit."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Încă nu ai salvat sau deschis niciun proiect în Pixelorama!"
