@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-09 20:48\n"
+"PO-Revision-Date: 2020-10-31 09:38\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian\n"
 "MIME-Version: 1.0\n"
@@ -21,50 +21,50 @@ msgstr ""
 #. SecInstall
 #: .\pixelorama.nsi:72
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Pasang ${APPNAME}"
 
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Buat pintas Menu Awal (opsional)"
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Buat pintas dalam Desktop (opsional)"
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Hapus ${APPNAME}${APPVERSION}"
 
 #. un.SecConfig
 #: .\pixelorama.nsi:76
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Buang berkas konfigurasi (opsional)"
 
 #. DESC_SecInstall
 #: .\pixelorama.nsi:178
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Pasang ${APPNAME}${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Buat pintas Menu Awal untuk ${APPNAME}."
 
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Buat pintas Desktop untuk ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Hapus ${APPNAME}${APPVERSION} dan buang semua pintas."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Buang berkas konfigurasi untuk${APPNAME}."
 
