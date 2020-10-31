@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -185,6 +185,9 @@ msgstr "Piliha Impor"
 
 msgid "Import as:"
 msgstr "Impor Sebagai:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Tab baru"
@@ -476,14 +479,14 @@ msgstr "Tipe:"
 msgid "Angle:"
 msgstr "Sudut:"
 
-msgid "Hue"
-msgstr "Warna"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Kejenuhan"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Nilai"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Terapkan"
@@ -1414,6 +1417,9 @@ msgstr "Alat ditetapkan untuk mouse kanan"
 
 msgid "Cannot find last project file."
 msgstr "Tidak bisa menemukan proyek terakhir"
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Kamu belum menyimpan atau membuka suatu proyek di Pixelorama!"
