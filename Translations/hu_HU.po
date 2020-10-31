@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -185,6 +185,9 @@ msgstr "Importálás beállításai"
 
 msgid "Import as:"
 msgstr "Importálás másként:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Új lap"
@@ -476,14 +479,14 @@ msgstr "Típus:"
 msgid "Angle:"
 msgstr "Szög:"
 
-msgid "Hue"
-msgstr "Színárnyalat"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Telítettség"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Érték"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Alkamaz"
@@ -1416,6 +1419,9 @@ msgstr "Az eszköz már hozzá van rendelve a jobb egérgombhoz"
 
 msgid "Cannot find last project file."
 msgstr "Nem található az utolsó projektfájl."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Még nem mentettél vagy nyitottál meg projektet Pixeloramában!"
