@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "確定"
@@ -185,6 +185,9 @@ msgstr "匯入選項"
 
 msgid "Import as:"
 msgstr "匯入為："
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "新增分頁"
@@ -475,14 +478,14 @@ msgstr "類型："
 msgid "Angle:"
 msgstr "角度："
 
-msgid "Hue"
-msgstr "色相"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "飽和度"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "亮度"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "套用"
@@ -1414,6 +1417,9 @@ msgstr "右鍵指定工具"
 
 msgid "Cannot find last project file."
 msgstr "找不到上一次編輯的檔案"
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "你尚未打開或儲存Pixelorama檔案!"
