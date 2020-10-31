@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-31 01:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Importeringsvalg"
 
 msgid "Import as:"
 msgstr "Importér som:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Ny fane"
@@ -475,14 +478,14 @@ msgstr "Type:"
 msgid "Angle:"
 msgstr "Vinkel:"
 
-msgid "Hue"
-msgstr "Fargetone"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Metning"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Verdi"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Bruk"
@@ -1413,6 +1416,9 @@ msgstr "Et verktøy tilknyttet høyre museknapp"
 
 msgid "Cannot find last project file."
 msgstr "Finner ikke siste prosjektfil."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Du har ikke lagret eller åpnet et prosjekt i Pixelorama enda!"
