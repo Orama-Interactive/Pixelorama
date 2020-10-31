@@ -175,7 +175,7 @@ msgstr ""
 msgid "Import as:"
 msgstr ""
 
-msgid "Recent projects":
+msgid "Recent projects:"
 msgstr ""
 
 msgid "New tab"
