@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -185,6 +185,9 @@ msgstr "Επιλογές Εισαγωγής"
 
 msgid "Import as:"
 msgstr "Εισαγωγή ως:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Νέα καρτέλα"
@@ -476,14 +479,14 @@ msgstr "Είδος:"
 msgid "Angle:"
 msgstr "Γωνία:"
 
-msgid "Hue"
-msgstr "Απόχρωση"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Κορεσμός"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Τιμή"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Εφαρμογή"
@@ -1416,6 +1419,9 @@ msgstr "Το εργαλείο που έχει εκχωρηθεί στο δεξί
 
 msgid "Cannot find last project file."
 msgstr "Δεν είναι δυνατή η εύρεση του τελευταίου αρχείου έργου."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Δεν έχετε αποθηκεύσει ούτε ανοίξει κανένα έργο στο Pixelorama ακόμη!"
