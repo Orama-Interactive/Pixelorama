@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-10-26 02:28\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Opzioni Importazione"
 
 msgid "Import as:"
 msgstr "Importa come:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Nuova scheda"
@@ -476,14 +479,14 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Angolo:"
 
-msgid "Hue"
-msgstr "Tonalità"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Saturazione"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valore"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Applica"
@@ -1416,6 +1419,9 @@ msgstr "Uno strumento assegnato al pulsante destro del mouse"
 
 msgid "Cannot find last project file."
 msgstr "Impossibile trovare il file dell'ultimo progetto."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Non hai ancora salvato o aperto alcun progetto in Pixelorama!"
