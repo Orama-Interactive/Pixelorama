@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-10-25 23:17\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -184,6 +184,9 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
+msgstr ""
+
+msgid "Recent projects:"
 msgstr ""
 
 msgid "New tab"
@@ -476,14 +479,14 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Angulo:"
 
-msgid "Hue"
-msgstr "Nuanco"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Satureco"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valoro"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Apliki"
@@ -1388,6 +1391,9 @@ msgstr "Ilo, asignita al la musa dekstra butono"
 
 msgid "Cannot find last project file."
 msgstr "Ne povas trovi dosieron de la lasta projekto."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Vi ankoraŭ ne konservis aŭ malfermis iun ajn projekton en Pixelorama!"
