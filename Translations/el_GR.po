@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-10-31 01:49\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -480,13 +480,13 @@ msgid "Angle:"
 msgstr "Γωνία:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Απόχρωση:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Κορεσμός:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Τιμή:"
 
 msgid "Apply"
 msgstr "Εφαρμογή"
