@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-10-31 13:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Импортировать как:"
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "Недавние проекты:"
 
 msgid "New tab"
 msgstr "Новая вкладка"
@@ -480,13 +480,13 @@ msgid "Angle:"
 msgstr "Угол:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Оттенок:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Насыщенность:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Яркость:"
 
 msgid "Apply"
 msgstr "Применить"
@@ -1419,7 +1419,7 @@ msgid "Cannot find last project file."
 msgstr "Не могу найти файл последнего проекта."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Не могу найти файл проекта."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Вы еще не сохранили и не открыли ни одного проекта в Pixelorama!"
