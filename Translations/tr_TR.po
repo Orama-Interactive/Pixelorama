@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-10-25 23:18\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -185,6 +185,9 @@ msgstr "İçeri Aktarma Ayarları"
 
 msgid "Import as:"
 msgstr "İçe farklı aktar:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Yeni sekme"
@@ -476,14 +479,14 @@ msgstr "Tür:"
 msgid "Angle:"
 msgstr "Açı:"
 
-msgid "Hue"
-msgstr "Renk Tonu"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Renk doygunluğu"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Değer"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Uygula"
@@ -1396,6 +1399,9 @@ msgstr "Sol fareye bir araç atandı"
 
 msgid "Cannot find last project file."
 msgstr "Son proje bulunamadı."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
