@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-10-31 03:32\n"
 
 msgid "OK"
 msgstr "确定"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "导入为："
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "最近项目："
 
 msgid "New tab"
 msgstr "新建选项卡"
@@ -480,13 +480,13 @@ msgid "Angle:"
 msgstr "角度："
 
 msgid "Hue:"
-msgstr ""
+msgstr "色相："
 
 msgid "Saturation:"
-msgstr ""
+msgstr "饱和度："
 
 msgid "Value:"
-msgstr ""
+msgstr "值："
 
 msgid "Apply"
 msgstr "应用"
@@ -1421,7 +1421,7 @@ msgid "Cannot find last project file."
 msgstr "无法找到最后一个项目文件。"
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "无法找到项目文件。"
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "您尚未在 Pixelorama 中保存或打开任何项目！"
