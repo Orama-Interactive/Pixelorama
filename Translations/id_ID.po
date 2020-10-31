@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-10-31 09:38\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Salin"
 
 msgid "Cut"
-msgstr ""
+msgstr "Potong"
 
 msgid "Paste"
 msgstr "Tempel"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Impor Sebagai:"
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "Proyek terbaru:"
 
 msgid "New tab"
 msgstr "Tab baru"
@@ -426,7 +426,7 @@ msgid "Light"
 msgstr "Terang"
 
 msgid "Purple"
-msgstr ""
+msgstr "Ungu"
 
 msgid "Only affect selection"
 msgstr "Hanya mempengaruhi pilihan"
@@ -483,7 +483,7 @@ msgid "Hue:"
 msgstr ""
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturasi:"
 
 msgid "Value:"
 msgstr ""
@@ -504,13 +504,13 @@ msgid "Colors:"
 msgstr "Warna:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Langkah:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Atas ke Bawah"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Bawah ke Atas"
 
 msgid "Left to Right"
 msgstr ""
