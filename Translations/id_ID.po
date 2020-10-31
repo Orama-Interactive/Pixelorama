@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-10-31 09:38\n"
+"PO-Revision-Date: 2020-10-31 09:48\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -480,13 +480,13 @@ msgid "Angle:"
 msgstr "Sudut:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Warna:"
 
 msgid "Saturation:"
 msgstr "Saturasi:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Nilai:"
 
 msgid "Apply"
 msgstr "Terapkan"
@@ -513,16 +513,16 @@ msgid "Bottom to Top"
 msgstr "Bawah ke Atas"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Kiri ke Kanan"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Kanan ke Kiri"
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Dokumen Online"
 
 msgid "Issue Tracker"
 msgstr "Issue Tracker"
@@ -534,13 +534,13 @@ msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pikselasikan mimpimu!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Dibuat oleh Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Hak Cipta 2019-2020 Orama Interactive and contributors"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
 msgstr ""
@@ -615,22 +615,22 @@ msgid "Czech"
 msgstr "Ceko"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Bahasa Arab"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Bahasa Turki"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Bahasa Norwegia"
 
 msgid "Korean"
-msgstr ""
+msgstr "Bahasa Korea"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Bahasa Hungaria"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Bahasa Romania"
 
 msgid "Development Team"
 msgstr "Tim Developer"
@@ -645,7 +645,7 @@ msgid "GitHub Contributors"
 msgstr "Kontribusi Github"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Seni oleh %s"
 
 msgid "untitled"
 msgstr "tanpa nama"
@@ -785,7 +785,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Tunjukkan ikon dari alat yang digunakkan disebelah kursor di kanvas"
 
 msgid "Guides"
-msgstr ""
+msgstr "Panduan"
 
 msgid "Guides color:"
 msgstr "Warna Panduan:"
@@ -803,13 +803,13 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Persegi"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isometrik"
 
 msgid "All"
-msgstr ""
+msgstr "Semua"
 
 msgid "Grid width:"
 msgstr "Lebar Kisi:"
@@ -836,7 +836,7 @@ msgid "A color of the grid"
 msgstr "Warna dari kisi"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparansi"
 
 msgid "Checker size:"
 msgstr "Besar pola catur:"
@@ -857,7 +857,7 @@ msgid "Second color of the transparent checker background"
 msgstr "Warna kedua dari pola catur yang ada di latar"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Ikuti Gerakan Kanvas"
 
 msgid "The transparent checker follow the movement of canvas"
 msgstr ""
@@ -878,7 +878,7 @@ msgid "Select a brush"
 msgstr "Pilih satu kuas"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Kuas pixel"
 
 msgid "Circle brush"
 msgstr ""
@@ -1054,7 +1054,7 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "Nama:"
 
 msgid "From:"
 msgstr ""
@@ -1286,13 +1286,13 @@ msgid "Color Name:"
 msgstr "Nama warna:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Gunakan warna yang di kanan dan kiri"
 
 msgid "Create a new empty palette?"
 msgstr "Buat palet kosong baru?"
 
 msgid "Error"
-msgstr ""
+msgstr "Kesalahan"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: nama palet tidak valid."
@@ -1304,28 +1304,28 @@ msgid "Edit Palette"
 msgstr "Edit Palet"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Buat warna dengan komponen alfa"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Ambil warna hanya dari seleksi"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Ambil warna dari"
 
 msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Ingin nama atau perusahaan di tampilkan pada layar?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Menjadi Sponsor Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Menjadi Sponsor Emas"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Menjadi Pelanggan"
 
 msgid "Don't show again"
 msgstr "Jangan perlihatkan lagi"
@@ -1419,7 +1419,7 @@ msgid "Cannot find last project file."
 msgstr "Tidak bisa menemukan proyek terakhir"
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Berkas projek tidak ditemukan."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Kamu belum menyimpan atau membuka suatu proyek di Pixelorama!"
@@ -1455,7 +1455,7 @@ msgid "Close"
 msgstr "Tutup"
 
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1466,29 +1466,29 @@ msgid "Backup reloaded"
 msgstr "Backup dimuat ulang"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Hapus palet terpilih"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Anda yakin ingin menghapus palet terpilih? (Tidak bisa kembali)"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Kamu tidak bisa menghapus palet lagi!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Tidak bisa menghapus palet, karena palet tidak ada!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Kesalahan terjadi ketika menghapus palet! Kode error: %s"
 
 msgid "and"
-msgstr ""
+msgstr "dan"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Pindahkan gambar terpilih ke kiri."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Pindahkan frame terpilih ke kanan."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Durasi gambar"
 
