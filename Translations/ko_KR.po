@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-10-25 23:17\n"
+"PO-Revision-Date: 2020-10-31 01:37\n"
 
 msgid "OK"
 msgstr "예"
@@ -185,6 +185,9 @@ msgstr "불러오기 옵션"
 
 msgid "Import as:"
 msgstr "다음으로 가져오기:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "새 창"
@@ -476,14 +479,14 @@ msgstr "타입:"
 msgid "Angle:"
 msgstr "각도:"
 
-msgid "Hue"
-msgstr "색상"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "채도"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "명도"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "적용"
@@ -1416,6 +1419,9 @@ msgstr "오른쪽 마우스 버튼에 지정된 툴"
 
 msgid "Cannot find last project file."
 msgstr "최근 프로젝트 파일을 찾을 수 없습니다."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "당신은 아직 Pixelorama에서 프로젝트을 열거나 저장한적이 없습니다!"
