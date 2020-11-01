@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-01 14:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -932,10 +932,10 @@ msgid "Offset"
 msgstr "Offset"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Ombreggiatura Semplice"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Spostamento Tonalità"
 
 msgid "Lighten"
 msgstr "Schiarisci"
