@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-11-01 14:09\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -910,6 +910,12 @@ msgid "Pattern"
 msgstr "Ŝablono"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
