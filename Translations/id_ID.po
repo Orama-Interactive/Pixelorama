@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-01 14:19\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -543,7 +543,7 @@ msgid "Copyright 2019-2020 Orama Interactive and contributors"
 msgstr "Hak Cipta 2019-2020 Orama Interactive and contributors"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "Situs web"
