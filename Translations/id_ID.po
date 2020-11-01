@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-11-01 14:19\n"
+"PO-Revision-Date: 2020-11-01 14:39\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1268,10 +1268,10 @@ msgid "File autosaved"
 msgstr "File tersimpan"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Berkas gagal dibuka. Kode gagal %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Berkas gagal di simpan. Kode gagal %s"
 
 msgid "File exported"
 msgstr "File sudah terekspor"
