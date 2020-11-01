@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-01 15:11\n"
+"PO-Revision-Date: 2020-11-01 18:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -935,7 +935,7 @@ msgid "Simple Shading"
 msgstr "Umbrire simplă"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Schimbare de nuanță"
 
 msgid "Lighten"
 msgstr "Luminare"
