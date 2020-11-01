@@ -6,11 +6,42 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="LightenDarken" type="OptionButton" parent="." index="4"]
-margin_left = 12.0
+[node name="Label" parent="." index="0"]
+margin_right = 126.0
+
+[node name="Brush" parent="." index="1"]
+margin_right = 126.0
+
+[node name="Type" parent="Brush" index="0"]
+margin_left = 8.0
+margin_right = 40.0
+
+[node name="Size" parent="Brush" index="1"]
+margin_left = 44.0
+margin_right = 118.0
+
+[node name="BrushSize" parent="." index="2"]
+margin_left = 17.0
+margin_right = 109.0
+
+[node name="PixelPerfect" parent="." index="3"]
+margin_left = 9.0
+margin_right = 117.0
+
+[node name="ShadingMode" type="OptionButton" parent="." index="4"]
 margin_top = 102.0
-margin_right = 104.0
+margin_right = 126.0
 margin_bottom = 122.0
+mouse_default_cursor_shape = 2
+text = "Simple Shading"
+items = [ "Simple Shading", null, false, 0, null, "Hue Shifting", null, false, 1, null ]
+selected = 0
+
+[node name="LightenDarken" type="OptionButton" parent="." index="5"]
+margin_left = 17.0
+margin_top = 126.0
+margin_right = 109.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
@@ -18,23 +49,23 @@ text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
-[node name="Amount" type="VBoxContainer" parent="." index="5"]
-margin_top = 126.0
-margin_right = 116.0
-margin_bottom = 188.0
+[node name="Amount" type="VBoxContainer" parent="." index="6"]
+margin_top = 150.0
+margin_right = 126.0
+margin_bottom = 212.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Amount" index="0"]
-margin_left = 30.0
-margin_right = 85.0
+margin_left = 35.0
+margin_right = 90.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 text = "Amount:"
 
 [node name="Spinbox" type="SpinBox" parent="Amount" index="1"]
-margin_left = 21.0
+margin_left = 26.0
 margin_top = 18.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 42.0
 hint_tooltip = "Lighten/Darken amount"
 mouse_default_cursor_shape = 2
@@ -43,9 +74,9 @@ value = 10.0
 align = 1
 
 [node name="Slider" type="HSlider" parent="Amount" index="2"]
-margin_left = 12.0
+margin_left = 17.0
 margin_top = 46.0
-margin_right = 104.0
+margin_right = 109.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 92, 0 )
 hint_tooltip = "Lighten/Darken amount"
@@ -56,13 +87,172 @@ size_flags_vertical = 1
 value = 10.0
 ticks_on_borders = true
 
-[node name="EmptySpacer" parent="." index="7"]
-margin_top = 192.0
-margin_bottom = 204.0
+[node name="HueShiftingOptions" type="VBoxContainer" parent="." index="7"]
+visible = false
+margin_top = 216.0
+margin_right = 126.0
+margin_bottom = 410.0
 
-[node name="Mirror" parent="." index="8"]
-margin_top = 208.0
-margin_bottom = 225.0
+[node name="AmountHue" type="VBoxContainer" parent="HueShiftingOptions" index="0"]
+margin_right = 126.0
+margin_bottom = 62.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HueShiftingOptions/AmountHue" index="0"]
+margin_left = 48.0
+margin_right = 78.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Hue:"
+
+[node name="Spinbox" type="SpinBox" parent="HueShiftingOptions/AmountHue" index="1"]
+margin_left = 26.0
+margin_top = 18.0
+margin_right = 100.0
+margin_bottom = 42.0
+hint_tooltip = "Lighten/Darken amount"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+max_value = 359.0
+value = 10.0
+align = 1
+
+[node name="Slider" type="HSlider" parent="HueShiftingOptions/AmountHue" index="2"]
+margin_left = 17.0
+margin_top = 46.0
+margin_right = 109.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+max_value = 359.0
+value = 10.0
+ticks_on_borders = true
+
+[node name="AmountSat" type="VBoxContainer" parent="HueShiftingOptions" index="1"]
+margin_top = 66.0
+margin_right = 126.0
+margin_bottom = 128.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HueShiftingOptions/AmountSat" index="0"]
+margin_left = 29.0
+margin_right = 97.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Saturation:"
+
+[node name="Spinbox" type="SpinBox" parent="HueShiftingOptions/AmountSat" index="1"]
+margin_left = 26.0
+margin_top = 18.0
+margin_right = 100.0
+margin_bottom = 42.0
+hint_tooltip = "Lighten/Darken amount"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+max_value = 100.0
+value = 10.0
+align = 1
+
+[node name="Slider" type="HSlider" parent="HueShiftingOptions/AmountSat" index="2"]
+margin_left = 17.0
+margin_top = 46.0
+margin_right = 109.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+max_value = 100.0
+value = 10.0
+ticks_on_borders = true
+
+[node name="AmountValue" type="VBoxContainer" parent="HueShiftingOptions" index="2"]
+margin_top = 132.0
+margin_right = 126.0
+margin_bottom = 194.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HueShiftingOptions/AmountValue" index="0"]
+margin_left = 43.0
+margin_right = 82.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Value:"
+
+[node name="Spinbox" type="SpinBox" parent="HueShiftingOptions/AmountValue" index="1"]
+margin_left = 26.0
+margin_top = 18.0
+margin_right = 100.0
+margin_bottom = 42.0
+hint_tooltip = "Lighten/Darken amount"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+max_value = 100.0
+value = 10.0
+align = 1
+
+[node name="Slider" type="HSlider" parent="HueShiftingOptions/AmountValue" index="2"]
+margin_left = 17.0
+margin_top = 46.0
+margin_right = 109.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+hint_tooltip = "Lighten/Darken amount"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+max_value = 100.0
+value = 10.0
+ticks_on_borders = true
+
+[node name="ColorInterpolation" parent="." index="8"]
+margin_top = 216.0
+margin_right = 126.0
+margin_bottom = 278.0
+
+[node name="Label" parent="ColorInterpolation" index="0"]
+margin_left = 9.0
+margin_right = 116.0
+
+[node name="Factor" parent="ColorInterpolation" index="1"]
+margin_left = 26.0
+margin_right = 100.0
+
+[node name="Slider" parent="ColorInterpolation" index="2"]
+margin_left = 17.0
+margin_right = 109.0
+
+[node name="EmptySpacer" parent="." index="9"]
+margin_top = 216.0
+margin_right = 126.0
+margin_bottom = 228.0
+
+[node name="Mirror" parent="." index="10"]
+margin_top = 232.0
+margin_right = 126.0
+margin_bottom = 249.0
+
+[node name="Horizontal" parent="Mirror" index="0"]
+margin_left = 25.0
+margin_right = 40.0
+
+[node name="Vertical" parent="Mirror" index="1"]
+margin_left = 84.0
+margin_right = 101.0
+[connection signal="item_selected" from="ShadingMode" to="." method="_on_ShadingMode_item_selected"]
 [connection signal="item_selected" from="LightenDarken" to="." method="_on_LightenDarken_item_selected"]
 [connection signal="value_changed" from="Amount/Spinbox" to="." method="_on_LightenDarken_value_changed"]
 [connection signal="value_changed" from="Amount/Slider" to="." method="_on_LightenDarken_value_changed"]
+[connection signal="value_changed" from="HueShiftingOptions/AmountHue/Spinbox" to="." method="_on_LightenDarken_hue_value_changed"]
+[connection signal="value_changed" from="HueShiftingOptions/AmountHue/Slider" to="." method="_on_LightenDarken_hue_value_changed"]
+[connection signal="value_changed" from="HueShiftingOptions/AmountSat/Spinbox" to="." method="_on_LightenDarken_sat_value_changed"]
+[connection signal="value_changed" from="HueShiftingOptions/AmountSat/Slider" to="." method="_on_LightenDarken_sat_value_changed"]
+[connection signal="value_changed" from="HueShiftingOptions/AmountValue/Spinbox" to="." method="_on_LightenDarken_value_value_changed"]
+[connection signal="value_changed" from="HueShiftingOptions/AmountValue/Slider" to="." method="_on_LightenDarken_value_value_changed"]

@@ -900,6 +900,12 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr ""
 

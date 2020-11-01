@@ -10,6 +10,7 @@ This update has been brought to you by the contributions of:
 PinyaColada, Rémi Verschelde (akien-mga), dasimonde
 
 ### Added
+- The lighten/darken tool now has a hue shifting mode. It lets users configure the shift in hue, saturation and value of the new shaded pixels. ([#189](https://github.com/Orama-Interactive/Pixelorama/issues/189))
 - Added a "frame properties" option on the popup menu that appears when right-clicking on a cel. This lets the user choose a custom frame delay for that specific frame. ([#357](https://github.com/Orama-Interactive/Pixelorama/pull/357))
 - You can now select if you want rotation to apply in the selection, the current cel, the entire frame, all frames or even all projects (tabs)!
 - You can now change the transparency of the Tile Mode in the Preferences. ([#368](https://github.com/Orama-Interactive/Pixelorama/pull/368))
