@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-11-01 14:09\n"
 
 msgid "OK"
 msgstr "確定"
@@ -929,6 +929,12 @@ msgstr "圖樣"
 
 msgid "Offset"
 msgstr "偏移"
+
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
 
 msgid "Lighten"
 msgstr "變亮"
