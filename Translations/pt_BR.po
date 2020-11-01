@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-01 14:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -932,10 +932,10 @@ msgid "Offset"
 msgstr "Deslocamento"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Sombreamento Simples"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Deslocamento de Matiz"
 
 msgid "Lighten"
 msgstr "Iluminar"
