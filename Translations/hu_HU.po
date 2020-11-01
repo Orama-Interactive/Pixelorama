@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-10-31 01:37\n"
+"PO-Revision-Date: 2020-11-01 12:50\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -486,7 +486,7 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr ""
+msgstr "Érték:"
 
 msgid "Apply"
 msgstr "Alkamaz"
@@ -797,7 +797,7 @@ msgid "Grid"
 msgstr "Rács"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Rács típusa:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr "Beállítja a rács típusát négyzetháló, izometrikus vagy mindkettő között"
