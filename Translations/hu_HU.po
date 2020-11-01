@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-11-01 12:50\n"
+"PO-Revision-Date: 2020-11-01 12:59\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Importálás másként:"
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "Utoljára megnyitott projektek:"
 
 msgid "New tab"
 msgstr "Új lap"
@@ -480,10 +480,10 @@ msgid "Angle:"
 msgstr "Szög:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Színárnyalat:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Telítettség:"
 
 msgid "Value:"
 msgstr "Érték:"
@@ -860,7 +860,7 @@ msgid "Follow Canvas Movement"
 msgstr ""
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Az átlátszó négyzetháló követi a vászon mozgását"
 
 msgid "Follow Canvas Zoom Level"
 msgstr ""
@@ -1060,19 +1060,19 @@ msgid "Name:"
 msgstr "Név:"
 
 msgid "From:"
-msgstr ""
+msgstr "Kezdet:"
 
 msgid "To:"
-msgstr ""
+msgstr "Eddig:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "Az animáció csak ugyanazon címkés képkockákat játssza le"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Címke %s (Képkocka %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Címke %s (Képkockák %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1107,7 +1107,7 @@ msgid "Unlink Cel"
 msgstr "Cella szétkapcsolása"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Képkocka tulajdonságai"
 
 msgid "Frame properties"
 msgstr "Képkocka tulajdonságai"
@@ -1421,7 +1421,7 @@ msgid "Cannot find last project file."
 msgstr "Nem található az utolsó projektfájl."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Nem található az utolsó projektfájl."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Még nem mentettél vagy nyitottál meg projektet Pixeloramában!"
