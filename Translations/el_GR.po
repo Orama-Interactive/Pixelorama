@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-11-02 17:55\n"
+"PO-Revision-Date: 2020-11-02 18:03\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -932,10 +932,10 @@ msgid "Offset"
 msgstr "Μετατόπιση"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Απλή Σκίαση"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Μετατόπιση Απόχρωσης"
 
 msgid "Lighten"
 msgstr "Φώτισμα"
