@@ -102,7 +102,9 @@ func get_config() -> Dictionary:
 func set_config(config : Dictionary) -> void:
 	.set_config(config)
 	_shading_mode = config.get("shading_mode", _shading_mode)
+	_drawer.color_op.shading_mode = _shading_mode
 	_mode = config.get("mode", _mode)
+	_drawer.color_op.lighten_or_darken = _mode
 	_amount = config.get("amount", _amount)
 	_hue_amount = config.get("hue_amount", _hue_amount)
 	_sat_amount = config.get("sat_amount", _sat_amount)
