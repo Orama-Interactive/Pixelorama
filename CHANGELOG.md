@@ -29,6 +29,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde
 - Fixed "Export" option in the File menu not working properly and not remembering the directory path and file name when switching between projects (tabs).
 - Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
+- Using the lighten/darken on pixels with an alpha value of 0 no longer has an effect on them.
 <br><br>
 
 ## [v0.8.1] - 2020-10-14

@@ -26,13 +26,13 @@ class LightenDarkenOp extends Drawer.ColorOp:
 
 	func process(_src: Color, dst: Color) -> Color:
 		changed = true
+		if dst.a == 0:
+			return dst
 		if shading_mode == ShadingMode.SIMPLE:
 			if strength > 0:
 				dst = dst.lightened(strength)
-#				dst.h += strength/8
 			elif strength < 0:
 				dst = dst.darkened(-strength)
-#				dst.h += strength/8
 		else:
 			if lighten_or_darken == LightenDarken.LIGHTEN:
 				dst.h += (hue_amount / 359)
