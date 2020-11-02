@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-02 12:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -471,7 +471,7 @@ msgid "Gradient"
 msgstr "Dégradé"
 
 msgid "Adjust HSV"
-msgstr "Ajuster HSV"
+msgstr "Ajuster TSV"
 
 msgid "Type:"
 msgstr "Type:"
@@ -932,7 +932,7 @@ msgid "Offset"
 msgstr "Décalage"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Ombrage simple"
 
 msgid "Hue Shifting"
 msgstr ""
