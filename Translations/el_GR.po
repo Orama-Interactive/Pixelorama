@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-02 17:55\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Εισαγωγή ως:"
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "Πρόσφατα έργα:"
 
 msgid "New tab"
 msgstr "Νέα καρτέλα"
@@ -1146,7 +1146,7 @@ msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Αδιαφάνεια λειτουργίας μοτίβου:"
 
 msgid "Toggle layer's visibility"
 msgstr "Εναλλαγή της ορατότητας της στρώσης"
@@ -1427,7 +1427,7 @@ msgid "Cannot find last project file."
 msgstr "Δεν είναι δυνατή η εύρεση του τελευταίου αρχείου έργου."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Δεν είναι δυνατή η εύρεση του αρχείου έργου."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Δεν έχετε αποθηκεύσει ούτε ανοίξει κανένα έργο στο Pixelorama ακόμη!"
