@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-11-01 14:10\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -185,6 +185,9 @@ msgstr "Opcions d'importació"
 
 msgid "Import as:"
 msgstr "Importar com a:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Pestanya nova"
@@ -476,14 +479,14 @@ msgstr "Tipus:"
 msgid "Angle:"
 msgstr "Angle:"
 
-msgid "Hue"
-msgstr "Tonalitat"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Saturació"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valor"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -923,6 +926,12 @@ msgstr "Patró"
 msgid "Offset"
 msgstr "Desfasament"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr ""
 
@@ -1095,6 +1104,12 @@ msgstr "Vincular Cel·la"
 msgid "Unlink Cel"
 msgstr "Desvincular Cel·la"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Capa"
 
@@ -1121,6 +1136,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Opacitat:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Activa/desactiva la visibilitat de la capa"
@@ -1226,6 +1244,12 @@ msgid "Undo: Delete Frame Tag"
 msgstr ""
 
 msgid "Redo: Delete Frame Tag"
+msgstr ""
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
@@ -1393,6 +1417,9 @@ msgstr ""
 msgid "Cannot find last project file."
 msgstr "No es pot trobar el fitxer del projecte més recent."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
@@ -1458,5 +1485,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 

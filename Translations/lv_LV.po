@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-11-01 14:09\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -184,6 +184,9 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
+msgstr ""
+
+msgid "Recent projects:"
 msgstr ""
 
 msgid "New tab"
@@ -476,13 +479,13 @@ msgstr ""
 msgid "Angle:"
 msgstr ""
 
-msgid "Hue"
+msgid "Hue:"
 msgstr ""
 
-msgid "Saturation"
+msgid "Saturation:"
 msgstr ""
 
-msgid "Value"
+msgid "Value:"
 msgstr ""
 
 msgid "Apply"
@@ -926,6 +929,12 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Izgaismot"
 
@@ -1100,6 +1109,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Slānis"
 
@@ -1126,6 +1141,9 @@ msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
 
 msgid "Opacity:"
 msgstr "Necaurspīdīgums:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Slāņa redzamības slēdzis"
@@ -1231,6 +1249,12 @@ msgid "Undo: Delete Frame Tag"
 msgstr ""
 
 msgid "Redo: Delete Frame Tag"
+msgstr ""
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
@@ -1398,6 +1422,9 @@ msgstr ""
 msgid "Cannot find last project file."
 msgstr ""
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
@@ -1463,5 +1490,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 

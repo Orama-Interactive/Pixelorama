@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-10-13 14:35\n"
+"PO-Revision-Date: 2020-11-01 14:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Opzioni Importazione"
 
 msgid "Import as:"
 msgstr "Importa come:"
+
+msgid "Recent projects:"
+msgstr "Progetti recenti:"
 
 msgid "New tab"
 msgstr "Nuova scheda"
@@ -476,14 +479,14 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Angolo:"
 
-msgid "Hue"
-msgstr "Tonalità"
+msgid "Hue:"
+msgstr "Tonalità:"
 
-msgid "Saturation"
-msgstr "Saturazione"
+msgid "Saturation:"
+msgstr "Saturazione:"
 
-msgid "Value"
-msgstr "Valore"
+msgid "Value:"
+msgstr "Valore:"
 
 msgid "Apply"
 msgstr "Applica"
@@ -928,6 +931,12 @@ msgstr "Motivo"
 msgid "Offset"
 msgstr "Offset"
 
+msgid "Simple Shading"
+msgstr "Ombreggiatura Semplice"
+
+msgid "Hue Shifting"
+msgstr "Spostamento Tonalità"
+
 msgid "Lighten"
 msgstr "Schiarisci"
 
@@ -1103,6 +1112,12 @@ msgstr "Collega Cel"
 msgid "Unlink Cel"
 msgstr "Scollega Cel"
 
+msgid "Frame Properties"
+msgstr "Proprietà Del Frame"
+
+msgid "Frame properties"
+msgstr "Proprietà del frame"
+
 msgid "Layer"
 msgstr "Livello"
 
@@ -1129,6 +1144,9 @@ msgstr "Unisci il livello corrente con quello sottostante"
 
 msgid "Opacity:"
 msgstr "Opacità:"
+
+msgid "Tile mode opacity:"
+msgstr "Opacità modalità piastrelle:"
 
 msgid "Toggle layer's visibility"
 msgstr "Attiva/Disattiva visibilità del livello"
@@ -1236,6 +1254,12 @@ msgstr "Annulla: Elimina Tag Frame"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Ripristina: Elimina Tag Frame"
+
+msgid "Undo: Change frame duration"
+msgstr "Annulla: Cambia la durata del frame"
+
+msgid "Redo: Change frame duration"
+msgstr "Ripeti: cambia la durata del frame"
 
 msgid "Move Guide"
 msgstr "Muovi la guida"
@@ -1402,6 +1426,9 @@ msgstr "Uno strumento assegnato al pulsante destro del mouse"
 msgid "Cannot find last project file."
 msgstr "Impossibile trovare il file dell'ultimo progetto."
 
+msgid "Cannot find project file."
+msgstr "Impossibile trovare il file del progetto."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Non hai ancora salvato o aperto alcun progetto in Pixelorama!"
 
@@ -1469,4 +1496,7 @@ msgstr "Sposta il riquadro selezionato a sinistra."
 
 msgid "Move the selected frame to the right."
 msgstr "Sposta il riquadro selezionato a destra."
+
+msgid "Frame duration"
+msgstr "Durata del frame"
 

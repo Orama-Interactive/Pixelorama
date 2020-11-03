@@ -4,67 +4,67 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-10-31 09:38\n"
+"PO-Revision-Date: 2020-10-14 16:32\n"
 "Last-Translator: \n"
-"Language-Team: Indonesian\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id_ID\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: hi_IN\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
 "X-Crowdin-Project-ID: 385497\n"
-"X-Crowdin-Language: id\n"
+"X-Crowdin-Language: hi\n"
 "X-Crowdin-File: /master/installer/installer.pot\n"
 "X-Crowdin-File-ID: 10\n"
 
 #. SecInstall
 #: .\pixelorama.nsi:72
 msgid "Install ${APPNAME}"
-msgstr "Pasang ${APPNAME}"
+msgstr ""
 
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Buat pintas Menu Awal (opsional)"
+msgstr ""
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr "Buat pintas dalam Desktop (opsional)"
+msgstr ""
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr "Hapus ${APPNAME}${APPVERSION}"
+msgstr ""
 
 #. un.SecConfig
 #: .\pixelorama.nsi:76
 msgid "Remove configuration files (optional)"
-msgstr "Buang berkas konfigurasi (opsional)"
+msgstr ""
 
 #. DESC_SecInstall
 #: .\pixelorama.nsi:178
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr "Pasang ${APPNAME}${APPVERSION}."
+msgstr ""
 
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr "Buat pintas Menu Awal untuk ${APPNAME}."
+msgstr ""
 
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr "Buat pintas Desktop untuk ${APPNAME}."
+msgstr ""
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr "Hapus ${APPNAME}${APPVERSION} dan buang semua pintas."
+msgstr ""
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr "Buang berkas konfigurasi untuk${APPNAME}."
+msgstr ""
 

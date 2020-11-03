@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-13 12:42\n"
+"PO-Revision-Date: 2020-11-02 16:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Tile Mode"
-msgstr "Tile Modus"
+msgstr "Tilemodus"
 
 msgid "Show Grid"
 msgstr "Zeige Raster"
@@ -185,6 +185,9 @@ msgstr "Importoptionen"
 
 msgid "Import as:"
 msgstr "Importiere als:"
+
+msgid "Recent projects:"
+msgstr "Letzte Projekte:"
 
 msgid "New tab"
 msgstr "Neuer Tab"
@@ -475,14 +478,14 @@ msgstr "Typ:"
 msgid "Angle:"
 msgstr "Winkel:"
 
-msgid "Hue"
-msgstr "Farbton"
+msgid "Hue:"
+msgstr "Farbton:"
 
-msgid "Saturation"
-msgstr "Sättigung"
+msgid "Saturation:"
+msgstr "Sättigung:"
 
-msgid "Value"
-msgstr "Wert"
+msgid "Value:"
+msgstr "Wert:"
 
 msgid "Apply"
 msgstr "Übernehmen"
@@ -927,6 +930,12 @@ msgstr "Muster"
 msgid "Offset"
 msgstr "Offset"
 
+msgid "Simple Shading"
+msgstr "Simples Shading"
+
+msgid "Hue Shifting"
+msgstr "Farbtonverschiebung"
+
 msgid "Lighten"
 msgstr "Erhellen"
 
@@ -1102,6 +1111,12 @@ msgstr "Cel verlinken"
 msgid "Unlink Cel"
 msgstr "Cel entkoppeln"
 
+msgid "Frame Properties"
+msgstr "Frame-Eigenschaften"
+
+msgid "Frame properties"
+msgstr "Frame-Eigenschaften"
+
 msgid "Layer"
 msgstr "Ebene"
 
@@ -1128,6 +1143,9 @@ msgstr "Führe aktuelle Ebene mit der darunter zusammen"
 
 msgid "Opacity:"
 msgstr "Deckkraft"
+
+msgid "Tile mode opacity:"
+msgstr "Tilemodus Deckkraft:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
@@ -1235,6 +1253,12 @@ msgstr "Rückgängig: Lösche Frame Tag"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Wiederholen: Lösche Frame Tag"
+
+msgid "Undo: Change frame duration"
+msgstr "Rückgängig: Frame-Dauer ändern"
+
+msgid "Redo: Change frame duration"
+msgstr "Wiederholen: Frame-Dauer ändern"
 
 msgid "Move Guide"
 msgstr "Bewegungsanleitung"
@@ -1401,6 +1425,9 @@ msgstr "Ein Werkzeug, das der rechten Maustaste zugewiesen ist"
 msgid "Cannot find last project file."
 msgstr "Letzte Projektdatei konnte nicht gefunden werden."
 
+msgid "Cannot find project file."
+msgstr "Projektdatei nicht gefunden."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Sie haben noch kein Projekt in Pixelorama gespeichert oder geöffnet!"
 
@@ -1468,4 +1495,7 @@ msgstr "Verschiebe den ausgewählten Frame nach links."
 
 msgid "Move the selected frame to the right."
 msgstr "Verschiebe den ausgewählten Frame nach rechts."
+
+msgid "Frame duration"
+msgstr "Frame-Dauer"
 

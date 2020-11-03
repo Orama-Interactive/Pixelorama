@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-11-01 14:10\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Kopyala"
 
 msgid "Cut"
-msgstr ""
+msgstr "Kes"
 
 msgid "Paste"
 msgstr "Yapıştır"
@@ -185,6 +185,9 @@ msgstr "İçeri Aktarma Ayarları"
 
 msgid "Import as:"
 msgstr "İçe farklı aktar:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Yeni sekme"
@@ -476,14 +479,14 @@ msgstr "Tür:"
 msgid "Angle:"
 msgstr "Açı:"
 
-msgid "Hue"
-msgstr "Renk Tonu"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Renk doygunluğu"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Değer"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Uygula"
@@ -531,7 +534,7 @@ msgid "About Pixelorama"
 msgstr "Pixelorama Hakkında"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Hayallerini pikselleştir!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
@@ -540,7 +543,7 @@ msgid "Copyright 2019-2020 Orama Interactive and contributors"
 msgstr ""
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 Orama Interactive ve destekçileri tarafından"
 
 msgid "Website"
 msgstr "İnternet sitesi"
@@ -651,7 +654,7 @@ msgid "imported"
 msgstr ""
 
 msgid "copy"
-msgstr ""
+msgstr "kopya"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Pixelorama'dan çıkmak istediğine emin misin?"
@@ -795,7 +798,7 @@ msgid "Isometric"
 msgstr "İzometrik"
 
 msgid "All"
-msgstr ""
+msgstr "Tümü"
 
 msgid "Grid width:"
 msgstr "Kılavuz çizgi genişliği:"
@@ -915,6 +918,12 @@ msgid "Pattern"
 msgstr "Şablon"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
@@ -1084,6 +1093,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Katman"
 
@@ -1110,6 +1125,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Saydamlık:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -1215,6 +1233,12 @@ msgid "Undo: Delete Frame Tag"
 msgstr ""
 
 msgid "Redo: Delete Frame Tag"
+msgstr ""
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
@@ -1338,7 +1362,7 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
-msgstr ""
+msgstr "Yakınlaştır"
 
 msgid "Color Picker"
 msgstr "Renk Seçici"
@@ -1377,10 +1401,13 @@ msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Sol fareye bir araç atandı"
 
 msgid "Cannot find last project file."
 msgstr "Son proje bulunamadı."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
@@ -1416,7 +1443,7 @@ msgid "Close"
 msgstr "Kapat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1429,7 +1456,7 @@ msgid "Remove currently selected palette"
 msgstr "Seçili paleti sil"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Bu paleti kaldırmak istediğine emin misin? (Geri alınamaz)"
 
 msgid "You can't remove more palettes!"
 msgstr "Daha fazla palet silemezsin!"
@@ -1447,5 +1474,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-11-01 14:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Importar Opções"
 
 msgid "Import as:"
 msgstr "Importar como:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Nova Aba"
@@ -476,14 +479,14 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Ângulo:"
 
-msgid "Hue"
-msgstr "Matriz"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Saturação"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valor"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Aplique"
@@ -928,6 +931,12 @@ msgstr "Padrão"
 msgid "Offset"
 msgstr "Deslocamento"
 
+msgid "Simple Shading"
+msgstr "Sombreamento Simples"
+
+msgid "Hue Shifting"
+msgstr "Deslocamento de Matiz"
+
 msgid "Lighten"
 msgstr "Iluminar"
 
@@ -1103,6 +1112,12 @@ msgstr "Vincular célula"
 msgid "Unlink Cel"
 msgstr "Desvincular célula"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr "Propriedades do quadro"
+
 msgid "Layer"
 msgstr "Camada"
 
@@ -1129,6 +1144,9 @@ msgstr "Combinar camada atual com a de baixo"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
@@ -1236,6 +1254,12 @@ msgstr "Desfazer: Excluir Tag do Quadro"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Refazer: Excluir Tag do Quadro"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Mover Guia"
@@ -1402,6 +1426,9 @@ msgstr "Ferramenta atribuída ao botão direito do mouse"
 msgid "Cannot find last project file."
 msgstr "Não foi possível localizar arquivo do último projeto."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Você ainda não salvou nem abriu nenhum projeto no Pixelorama!"
 
@@ -1468,5 +1495,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 

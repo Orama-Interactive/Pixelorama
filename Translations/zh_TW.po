@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-10-13 11:35\n"
+"PO-Revision-Date: 2020-11-01 14:09\n"
 
 msgid "OK"
 msgstr "確定"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "複製"
 
 msgid "Cut"
-msgstr ""
+msgstr "剪下"
 
 msgid "Paste"
 msgstr "貼上"
@@ -185,6 +185,9 @@ msgstr "匯入選項"
 
 msgid "Import as:"
 msgstr "匯入為："
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "新增分頁"
@@ -422,7 +425,7 @@ msgid "Light"
 msgstr "亮色"
 
 msgid "Purple"
-msgstr ""
+msgstr "紫色"
 
 msgid "Only affect selection"
 msgstr "只處理選取區塊"
@@ -475,14 +478,14 @@ msgstr "類型："
 msgid "Angle:"
 msgstr "角度："
 
-msgid "Hue"
-msgstr "色相"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "飽和度"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "亮度"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "套用"
@@ -927,6 +930,12 @@ msgstr "圖樣"
 msgid "Offset"
 msgstr "偏移"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "變亮"
 
@@ -1101,6 +1110,12 @@ msgstr "連結Cel"
 msgid "Unlink Cel"
 msgstr "取消Cel連結"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr "影格屬性"
+
 msgid "Layer"
 msgstr "圖層"
 
@@ -1127,6 +1142,9 @@ msgstr "合併此圖層與下面的圖層"
 
 msgid "Opacity:"
 msgstr "透明度："
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "開關圖層可視"
@@ -1235,6 +1253,12 @@ msgstr "取消：刪除影格標籤"
 msgid "Redo: Delete Frame Tag"
 msgstr "復原：刪除影格標籤"
 
+msgid "Undo: Change frame duration"
+msgstr "取消：改變影格持續時間"
+
+msgid "Redo: Change frame duration"
+msgstr "復原：改變影格持續時間"
+
 msgid "Move Guide"
 msgstr "移動輔助線"
 
@@ -1245,10 +1269,10 @@ msgid "File autosaved"
 msgstr "檔案已自動儲存"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "檔案開啟失敗. 錯誤代碼: %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "檔案儲存失敗. 錯誤代碼: %s"
 
 msgid "File exported"
 msgstr "檔案已輸出"
@@ -1287,13 +1311,13 @@ msgid "Edit Palette"
 msgstr "編輯色盤"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "創建帶有 alpha 的顏色"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "只從選取區塊獲取顏色"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "獲取顏色從"
 
 msgid "Patrons:"
 msgstr "贊助者："
@@ -1400,6 +1424,9 @@ msgstr "右鍵指定工具"
 msgid "Cannot find last project file."
 msgstr "找不到上一次編輯的檔案"
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "你尚未打開或儲存Pixelorama檔案!"
 
@@ -1448,7 +1475,7 @@ msgid "Remove currently selected palette"
 msgstr "移除目前選取的色盤"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "確定刪除此色盤嗎？(無法取消)"
 
 msgid "You can't remove more palettes!"
 msgstr "不能刪除色盤"
@@ -1463,8 +1490,11 @@ msgid "and"
 msgstr "和"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "移動所選影格到左邊。"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "移動所選影格到右邊。"
+
+msgid "Frame duration"
+msgstr "影格持續時間"
 

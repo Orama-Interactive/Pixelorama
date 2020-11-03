@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-10-13 11:45\n"
+"PO-Revision-Date: 2020-11-02 18:03\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -185,6 +185,9 @@ msgstr "Επιλογές Εισαγωγής"
 
 msgid "Import as:"
 msgstr "Εισαγωγή ως:"
+
+msgid "Recent projects:"
+msgstr "Πρόσφατα έργα:"
 
 msgid "New tab"
 msgstr "Νέα καρτέλα"
@@ -476,14 +479,14 @@ msgstr "Είδος:"
 msgid "Angle:"
 msgstr "Γωνία:"
 
-msgid "Hue"
-msgstr "Απόχρωση"
+msgid "Hue:"
+msgstr "Απόχρωση:"
 
-msgid "Saturation"
-msgstr "Κορεσμός"
+msgid "Saturation:"
+msgstr "Κορεσμός:"
 
-msgid "Value"
-msgstr "Τιμή"
+msgid "Value:"
+msgstr "Τιμή:"
 
 msgid "Apply"
 msgstr "Εφαρμογή"
@@ -928,6 +931,12 @@ msgstr "Μοτίβο"
 msgid "Offset"
 msgstr "Μετατόπιση"
 
+msgid "Simple Shading"
+msgstr "Απλή Σκίαση"
+
+msgid "Hue Shifting"
+msgstr "Μετατόπιση Απόχρωσης"
+
 msgid "Lighten"
 msgstr "Φώτισμα"
 
@@ -1103,6 +1112,12 @@ msgstr "Σύνδεση Cel"
 msgid "Unlink Cel"
 msgstr "Αποσύνδεση Cel"
 
+msgid "Frame Properties"
+msgstr "Ιδιότητες Καρέ"
+
+msgid "Frame properties"
+msgstr "Ιδιότητες καρέ"
+
 msgid "Layer"
 msgstr "Στρώση"
 
@@ -1129,6 +1144,9 @@ msgstr "Συγχώνευση της τρέχουσας στρώσης με τη�
 
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
+
+msgid "Tile mode opacity:"
+msgstr "Αδιαφάνεια λειτουργίας μοτίβου:"
 
 msgid "Toggle layer's visibility"
 msgstr "Εναλλαγή της ορατότητας της στρώσης"
@@ -1236,6 +1254,12 @@ msgstr "Αναίρεση: Διαγραφή ετικέτας καρέ"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Ακύρωση αναίρεσης: Διαγραφή ετικέτας καρέ"
+
+msgid "Undo: Change frame duration"
+msgstr "Αναίρεση: Αλλαγή διάρκειας καρέ"
+
+msgid "Redo: Change frame duration"
+msgstr "Ακύρωση αναίρεσης: Αλλαγή διάρκειας καρέ"
 
 msgid "Move Guide"
 msgstr "Μετακίνηση βοηθού"
@@ -1402,6 +1426,9 @@ msgstr "Το εργαλείο που έχει εκχωρηθεί στο δεξί
 msgid "Cannot find last project file."
 msgstr "Δεν είναι δυνατή η εύρεση του τελευταίου αρχείου έργου."
 
+msgid "Cannot find project file."
+msgstr "Δεν είναι δυνατή η εύρεση του αρχείου έργου."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Δεν έχετε αποθηκεύσει ούτε ανοίξει κανένα έργο στο Pixelorama ακόμη!"
 
@@ -1469,4 +1496,7 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 
 msgid "Move the selected frame to the right."
 msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά"
+
+msgid "Frame duration"
+msgstr "Διάρκεια καρέ"
 

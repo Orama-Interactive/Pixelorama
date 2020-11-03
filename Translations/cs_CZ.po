@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-10-13 16:49\n"
+"PO-Revision-Date: 2020-11-01 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Nastavení importu"
 
 msgid "Import as:"
 msgstr "Importovat jako:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Nová záložka"
@@ -476,14 +479,14 @@ msgstr "Typ:"
 msgid "Angle:"
 msgstr "Úhel:"
 
-msgid "Hue"
-msgstr "Odstín"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Sytost"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Hodnota"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Použít"
@@ -928,6 +931,12 @@ msgstr "Šablona"
 msgid "Offset"
 msgstr "Odsazení"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Zesvětlení"
 
@@ -1103,6 +1112,12 @@ msgstr "Připojit buňku"
 msgid "Unlink Cel"
 msgstr "Odpojit buňku"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Vrstva"
 
@@ -1129,6 +1144,9 @@ msgstr "Sloučit aktuální vrstvu s vrstvou níže"
 
 msgid "Opacity:"
 msgstr "Průhlednost:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Přepnout viditelnost vrstvy"
@@ -1236,6 +1254,12 @@ msgstr "Zpět: Odstranit snímkový štítek"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Vpřed: Odstranit snímkový štítek"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Přesunout vodítko"
@@ -1402,6 +1426,9 @@ msgstr "Nástroj přiřazený k pravému tlačítku myši"
 msgid "Cannot find last project file."
 msgstr "Nelze nalézt soubor posledního projektu."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Zatím jste neuložili ani neotevřeli žádný projekt v Pixeloramě!"
 
@@ -1469,4 +1496,7 @@ msgstr "Přesunout vybraný snímek doleva."
 
 msgid "Move the selected frame to the right."
 msgstr "Přesunout vybraný snímek doprava."
+
+msgid "Frame duration"
+msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-10-14 02:00\n"
+"PO-Revision-Date: 2020-11-02 09:03\n"
 
 msgid "OK"
 msgstr "确定"
@@ -160,7 +160,7 @@ msgid "Show Rulers"
 msgstr "显示标尺"
 
 msgid "Show Guides"
-msgstr "显示指南"
+msgstr "显示参考线"
 
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
@@ -185,6 +185,9 @@ msgstr "导入选项"
 
 msgid "Import as:"
 msgstr "导入为："
+
+msgid "Recent projects:"
+msgstr "最近项目："
 
 msgid "New tab"
 msgstr "新建选项卡"
@@ -339,10 +342,10 @@ msgid "File:"
 msgstr "文件:"
 
 msgid "Interpolation:"
-msgstr "插补:"
+msgstr "插值："
 
 msgid "Nearest"
-msgstr "最近"
+msgstr "最临近"
 
 msgid "Bilinear"
 msgstr "双线性"
@@ -476,14 +479,14 @@ msgstr "类型："
 msgid "Angle:"
 msgstr "角度："
 
-msgid "Hue"
-msgstr "色相"
+msgid "Hue:"
+msgstr "色相："
 
-msgid "Saturation"
-msgstr "饱和度"
+msgid "Saturation:"
+msgstr "饱和度："
 
-msgid "Value"
-msgstr "值"
+msgid "Value:"
+msgstr "值："
 
 msgid "Apply"
 msgstr "应用"
@@ -782,7 +785,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
 
 msgid "Guides"
-msgstr "手册"
+msgstr "参考线"
 
 msgid "Guides color:"
 msgstr "参考线颜色："
@@ -927,6 +930,12 @@ msgstr "模式"
 
 msgid "Offset"
 msgstr "偏移"
+
+msgid "Simple Shading"
+msgstr "简单阴影"
+
+msgid "Hue Shifting"
+msgstr "色调偏移"
 
 msgid "Lighten"
 msgstr "减淡"
@@ -1103,6 +1112,12 @@ msgstr "取消链接单元"
 msgid "Unlink Cel"
 msgstr "取消链接单元"
 
+msgid "Frame Properties"
+msgstr "帧属性"
+
+msgid "Frame properties"
+msgstr "帧属性"
+
 msgid "Layer"
 msgstr "图层"
 
@@ -1129,6 +1144,9 @@ msgstr "当前图层与下面图层合并"
 
 msgid "Opacity:"
 msgstr "不透明度:"
+
+msgid "Tile mode opacity:"
+msgstr "平铺模式不透明度："
 
 msgid "Toggle layer's visibility"
 msgstr "切换图层可见性"
@@ -1236,6 +1254,12 @@ msgstr "撤销：删除帧标签"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "重做：删除帧标签"
+
+msgid "Undo: Change frame duration"
+msgstr "撤消：更改帧持续时间"
+
+msgid "Redo: Change frame duration"
+msgstr "重做：更改帧持续时间"
 
 msgid "Move Guide"
 msgstr "移除辅助线"
@@ -1402,6 +1426,9 @@ msgstr "分配给鼠标右键的工具"
 msgid "Cannot find last project file."
 msgstr "无法找到最后一个项目文件。"
 
+msgid "Cannot find project file."
+msgstr "无法找到项目文件。"
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "您尚未在 Pixelorama 中保存或打开任何项目！"
 
@@ -1468,4 +1495,7 @@ msgstr "移动所选帧到左侧。"
 
 msgid "Move the selected frame to the right."
 msgstr "移动所选帧到右侧。"
+
+msgid "Frame duration"
+msgstr "帧持续时间"
 

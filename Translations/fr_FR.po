@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-11-02 13:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -34,10 +34,10 @@ msgid "Image Size"
 msgstr "Taille de l'image"
 
 msgid "Canvas Size"
-msgstr "Taille du Canevas"
+msgstr "Taille du canevas"
 
 msgid "Frame Size"
-msgstr "Taille de l'image"
+msgstr "Taille de la frame"
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Copier"
 
 msgid "Cut"
-msgstr ""
+msgstr "Couper"
 
 msgid "Paste"
 msgstr "Coller"
@@ -186,6 +186,9 @@ msgstr "Options d'import"
 msgid "Import as:"
 msgstr "Importer en tant que :"
 
+msgid "Recent projects:"
+msgstr "Projets récents :"
+
 msgid "New tab"
 msgstr "Nouvel onglet"
 
@@ -193,7 +196,7 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nouvel onglet)"
 
 msgid "New frame"
-msgstr "Nouvelle trame"
+msgstr "Nouvelle frame"
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -208,10 +211,10 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Trame horizontale :"
+msgstr "Frame horizontale :"
 
 msgid "Vertical frames:"
-msgstr "Trame verticale :"
+msgstr "Frame verticale :"
 
 msgid "Brush type:"
 msgstr "Type de pinceau:"
@@ -255,10 +258,10 @@ msgid "Frame"
 msgstr "Frame"
 
 msgid "Frames:"
-msgstr "Images:"
+msgstr "Frames :"
 
 msgid "All Frames"
-msgstr "Toutes les images"
+msgstr "Toutes les frames"
 
 msgid "Spritesheet"
 msgstr "Feuille de calque"
@@ -270,7 +273,7 @@ msgid "Preview:"
 msgstr "Aperçu :"
 
 msgid "Frame:"
-msgstr "Image :"
+msgstr "Frame :"
 
 msgid "Orientation:"
 msgstr "Orientation :"
@@ -294,10 +297,10 @@ msgid "Open a Directory"
 msgstr "Ouvrir un répertoire"
 
 msgid "All frames as multiple files"
-msgstr "Toutes les images sous forme de fichiers multiples"
+msgstr "Toutes les frames sous forme de plusieurs fichiers"
 
 msgid "All frames as a single file animation"
-msgstr "Toutes les images sous forme d'animation de fichier unique"
+msgstr "Toutes les images sous forme d'un fichier d'animation unique"
 
 msgid "Background:"
 msgstr "Arrière-plan :"
@@ -306,13 +309,13 @@ msgid "Direction:"
 msgstr "Direction :"
 
 msgid "Forward"
-msgstr "Avancer"
+msgstr "En avant"
 
 msgid "Backwards"
 msgstr "Reculer"
 
 msgid "Ping-Pong"
-msgstr "Ping Pong"
+msgstr "Ping-Pong"
 
 msgid "Columns"
 msgstr "Colonnes"
@@ -432,10 +435,10 @@ msgid "Current cel"
 msgstr "Cellule actuelle"
 
 msgid "Current frame"
-msgstr "Trame actuelle"
+msgstr "Frame actuelle"
 
 msgid "All frames"
-msgstr "Toutes les trames"
+msgstr "Toutes les frames"
 
 msgid "All projects"
 msgstr "Tous les projets"
@@ -468,7 +471,7 @@ msgid "Gradient"
 msgstr "Dégradé"
 
 msgid "Adjust HSV"
-msgstr "Ajuster HSV"
+msgstr "Ajuster TSV"
 
 msgid "Type:"
 msgstr "Type:"
@@ -476,14 +479,14 @@ msgstr "Type:"
 msgid "Angle:"
 msgstr "Angle :"
 
-msgid "Hue"
-msgstr "Teinte"
+msgid "Hue:"
+msgstr "Teinte :"
 
-msgid "Saturation"
-msgstr "Saturation"
+msgid "Saturation:"
+msgstr "Saturation :"
 
-msgid "Value"
-msgstr "Valeur"
+msgid "Value:"
+msgstr "Valeur :"
 
 msgid "Apply"
 msgstr "Appliquer"
@@ -928,6 +931,12 @@ msgstr "Motif"
 msgid "Offset"
 msgstr "Décalage"
 
+msgid "Simple Shading"
+msgstr "Ombrage simple"
+
+msgid "Hue Shifting"
+msgstr "Changement de teinte"
+
 msgid "Lighten"
 msgstr "Éclaircir"
 
@@ -962,7 +971,7 @@ msgid "Options:"
 msgstr "Options :"
 
 msgid "Fit to frame"
-msgstr "Ajuster à la trame"
+msgstr "Ajuster à la frame"
 
 msgid "100% Zoom"
 msgstr "Zoom 100%"
@@ -983,16 +992,16 @@ msgid "Vertical"
 msgstr "Vertical"
 
 msgid "Current frame:"
-msgstr "Trame actuelle :"
+msgstr "Frame actuelle :"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr "Aller à la première trame\n"
+msgstr "Aller à la première frame\n"
 "(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "Aller à la trame précédente\n"
+msgstr "Aller à la frame précédente\n"
 "(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
@@ -1007,12 +1016,12 @@ msgstr "Jouer l'animation (du début vers la fin)\n"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "Aller à la prochaine trame\n"
+msgstr "Aller à la prochaine frame\n"
 "(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr "Aller à la dernière trame\n"
+msgstr "Aller à la dernière frame\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
@@ -1039,19 +1048,19 @@ msgid "Onion Skinning:"
 msgstr "Peau d'oignon :"
 
 msgid "Past Frames"
-msgstr "Trames passées"
+msgstr "Frames passées"
 
 msgid "Future Frames"
-msgstr "Trames futures"
+msgstr "Frames futures"
 
 msgid "Manage frame tags"
-msgstr "Gérer les balises de la trame"
+msgstr "Gérer les tags de la frame"
 
 msgid "Frame Tag Properties"
-msgstr "Propriétés de la balise de la trame"
+msgstr "Propriétés du tag de la frame"
 
 msgid "Add a new frame tag"
-msgstr "Ajouter une nouvelle balise à la trame"
+msgstr "Ajouter un nouveau tag à la frame"
 
 msgid "Name:"
 msgstr "Nom :"
@@ -1063,30 +1072,30 @@ msgid "To:"
 msgstr "À :"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "L'animation ne joue que sur les trames de même balise"
+msgstr "L'animation ne joue que sur les frames du même tag"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Balise %s (Trame %s)"
+msgstr "Tag %s (Frame %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Balise %s (Trames %s-%s)"
+msgstr "Tag %s (Frames %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Si sélectionné, l'animation ne joue que sur les trames partageant la même balise.\n"
-"Si ce n'est pas le cas, l'animation sera jouée sur toutes les trames, ignorant les balises."
+msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le même tag.\n"
+"Si ce n'est pas le cas, l'animation sera jouée sur toutes les frames, ignorant les tags."
 
 msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
 
 msgid "Add a new frame"
-msgstr "Ajouter une trame"
+msgstr "Ajouter une frame"
 
 msgid "Remove Frame"
-msgstr "Supprimer la trame"
+msgstr "Supprimer la frame"
 
 msgid "Clone Frame"
-msgstr "Cloner la trame"
+msgstr "Cloner la frame"
 
 msgid "Move Left"
 msgstr "Déplacer vers la gauche"
@@ -1102,6 +1111,12 @@ msgstr "Lier la cellule"
 
 msgid "Unlink Cel"
 msgstr "Délier la cellule"
+
+msgid "Frame Properties"
+msgstr "Propriétés de la frame"
+
+msgid "Frame properties"
+msgstr "Propriétés de la frame"
 
 msgid "Layer"
 msgstr "Couche"
@@ -1130,6 +1145,9 @@ msgstr "Fusionner le calque vers le bas"
 msgid "Opacity:"
 msgstr "Opacité:"
 
+msgid "Tile mode opacity:"
+msgstr "Opacité du mode tuile :"
+
 msgid "Toggle layer's visibility"
 msgstr "Afficher/Masquer le calque"
 
@@ -1137,12 +1155,12 @@ msgid "Lock/unlock layer"
 msgstr "Verrouiller/déverrouiller le calque"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Trame : %s, Couche : %s"
+msgstr "Frame : %s, Couche : %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Activer/désactiver la liaison des cellules\n\n"
-"Les cellules liées sont partagées sur plusieurs trames"
+"Les cellules liées sont partagées sur plusieurs frames"
 
 msgid "Palette"
 msgstr "Palette"
@@ -1202,22 +1220,22 @@ msgid "Redo: Change Layer Order"
 msgstr "Refaire : Modifier l'ordre des calques"
 
 msgid "Undo: Add Frame"
-msgstr "Annuler : Ajouter une trame"
+msgstr "Annuler : Ajouter une frame"
 
 msgid "Redo: Add Frame"
-msgstr "Refaire : Ajouter une trame"
+msgstr "Refaire : Ajouter une frame"
 
 msgid "Undo: Remove Frame"
-msgstr "Annuler : Supprimer une trame"
+msgstr "Annuler : Supprimer une frame"
 
 msgid "Redo: Remove Frame"
-msgstr "Refaire : Supprimer une trame"
+msgstr "Refaire : Supprimer une frame"
 
 msgid "Undo: Change Frame Order"
-msgstr "Annuler : Modifier l'ordre des trames"
+msgstr "Annuler : Modifier l'ordre des frames"
 
 msgid "Redo: Change Frame Order"
-msgstr "Refaire : Modifier l'ordre des trames"
+msgstr "Refaire : Modifier l'ordre des frames"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Annuler : Supprimer la brosse personnalisée"
@@ -1226,16 +1244,22 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Refaire : Supprimer la brosse personnalisée"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Annuler : Modifier la balise de la trame"
+msgstr "Annuler : Modifier le tag de la frame"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Refaire : Modifier la balise de la trame"
+msgstr "Refaire : Modifier le tag de la frame"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Annuler : Supprimer la balise de la trame"
+msgstr "Annuler : Supprimer le tag de la frame"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Refaire : Supprimer la balise de la trame"
+msgstr "Refaire : Supprimer le tag de la frame"
+
+msgid "Undo: Change frame duration"
+msgstr "Annuler : Changer la durée de la frame"
+
+msgid "Redo: Change frame duration"
+msgstr "Refaire : Changer la durée de la frame"
 
 msgid "Move Guide"
 msgstr "Déplacer le guide"
@@ -1402,6 +1426,9 @@ msgstr "Un outil assigné au bouton droit de la souris"
 msgid "Cannot find last project file."
 msgstr "Impossible de trouver le dernier fichier du projet."
 
+msgid "Cannot find project file."
+msgstr "Impossible de trouver le fichier du projet."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Vous n'avez pas encore enregistré ou ouvert de projet dans Pixelorama !"
 
@@ -1427,10 +1454,10 @@ msgid "minute(s)"
 msgstr "minute(s)"
 
 msgid "Create new directory for each frame tag"
-msgstr "Créer un nouveau répertoire pour chaque image"
+msgstr "Créer un nouveau répertoire pour chaque tag de frame"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Crée plusieurs fichiers, mais chaque fichier est stocké dans différents répertoires qui correspondent à son image"
+msgstr "Crée plusieurs fichiers mais chacun est stocké dans différents répertoires qui correspondent à son tag de frame"
 
 msgid "Close"
 msgstr "Fermer"
@@ -1450,7 +1477,7 @@ msgid "Remove currently selected palette"
 msgstr "Supprimer la palette actuellement sélectionnée"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette palette ? (Opération irréversible)"
 
 msgid "You can't remove more palettes!"
 msgstr "Vous ne pouvez pas supprimer plus de palettes!"
@@ -1465,8 +1492,11 @@ msgid "and"
 msgstr "et"
 
 msgid "Move the selected frame to the left."
-msgstr "Déplacer la trame sélectionnée vers la gauche."
+msgstr "Déplacer la frame sélectionnée vers la gauche."
 
 msgid "Move the selected frame to the right."
-msgstr "Déplacer la trame sélectionnée vers la droite."
+msgstr "Déplacer la frame sélectionnée vers la droite."
+
+msgid "Frame duration"
+msgstr "Durée de la frame"
 

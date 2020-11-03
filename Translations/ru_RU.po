@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-10-13 23:19\n"
+"PO-Revision-Date: 2020-11-01 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Настройки импорта"
 
 msgid "Import as:"
 msgstr "Импортировать как:"
+
+msgid "Recent projects:"
+msgstr "Недавние проекты:"
 
 msgid "New tab"
 msgstr "Новая вкладка"
@@ -476,14 +479,14 @@ msgstr "Тип:"
 msgid "Angle:"
 msgstr "Угол:"
 
-msgid "Hue"
-msgstr "Оттенок"
+msgid "Hue:"
+msgstr "Оттенок:"
 
-msgid "Saturation"
-msgstr "Насыщенность"
+msgid "Saturation:"
+msgstr "Насыщенность:"
 
-msgid "Value"
-msgstr "Яркость"
+msgid "Value:"
+msgstr "Яркость:"
 
 msgid "Apply"
 msgstr "Применить"
@@ -928,6 +931,12 @@ msgstr "Узором"
 msgid "Offset"
 msgstr "Смещение"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Осветлить"
 
@@ -1102,6 +1111,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr "Свойства кадра"
+
+msgid "Frame properties"
+msgstr "Свойства кадра"
+
 msgid "Layer"
 msgstr "Слой"
 
@@ -1128,6 +1143,9 @@ msgstr "Объединить слой ниже с текущим"
 
 msgid "Opacity:"
 msgstr "Непрозрачность:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Переключить видимость слоя"
@@ -1234,6 +1252,12 @@ msgstr "Отменить: Удалить метку кадра"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Повторить: Удалить метку кадра"
+
+msgid "Undo: Change frame duration"
+msgstr "Отменить: Изменить длительность кадра"
+
+msgid "Redo: Change frame duration"
+msgstr "Повторить: Изменить длительность кадра"
 
 msgid "Move Guide"
 msgstr "Сдвинуть направляющие"
@@ -1400,6 +1424,9 @@ msgstr "Инструмент, присвоенный правой кнопкой
 msgid "Cannot find last project file."
 msgstr "Не могу найти файл последнего проекта."
 
+msgid "Cannot find project file."
+msgstr "Не могу найти файл проекта."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Вы еще не сохранили и не открыли ни одного проекта в Pixelorama!"
 
@@ -1467,4 +1494,7 @@ msgstr "Переместить выделенный кадр влево."
 
 msgid "Move the selected frame to the right."
 msgstr "Переместить выделенный кадр вправо."
+
+msgid "Frame duration"
+msgstr "Длительность кадра"
 

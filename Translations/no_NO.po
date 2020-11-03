@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-10-13 11:36\n"
+"PO-Revision-Date: 2020-11-01 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Importeringsvalg"
 
 msgid "Import as:"
 msgstr "Importér som:"
+
+msgid "Recent projects:"
+msgstr ""
 
 msgid "New tab"
 msgstr "Ny fane"
@@ -475,14 +478,14 @@ msgstr "Type:"
 msgid "Angle:"
 msgstr "Vinkel:"
 
-msgid "Hue"
-msgstr "Fargetone"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Metning"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Verdi"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Bruk"
@@ -927,6 +930,12 @@ msgstr "Mønster"
 msgid "Offset"
 msgstr "Forskyvning"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Lys opp"
 
@@ -1100,6 +1109,12 @@ msgstr "Koble Sammen Celle"
 msgid "Unlink Cel"
 msgstr "Koble Fra Celle"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Lag"
 
@@ -1126,6 +1141,9 @@ msgstr "Slå sammen dette laget med laget nedenfor"
 
 msgid "Opacity:"
 msgstr "Gjennomsiktighet:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Vis/Skjul lag"
@@ -1233,6 +1251,12 @@ msgstr "Angre: Slett Bildemerkelapp"
 
 msgid "Redo: Delete Frame Tag"
 msgstr "Gjør om: Slett Bildemerkelapp"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Flytteveiledning"
@@ -1399,6 +1423,9 @@ msgstr "Et verktøy tilknyttet høyre museknapp"
 msgid "Cannot find last project file."
 msgstr "Finner ikke siste prosjektfil."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Du har ikke lagret eller åpnet et prosjekt i Pixelorama enda!"
 
@@ -1465,5 +1492,8 @@ msgid "Move the selected frame to the left."
 msgstr ""
 
 msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
 msgstr ""
 
