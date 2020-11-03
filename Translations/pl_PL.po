@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-03 13:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Importuj jako:"
 
 msgid "Recent projects:"
-msgstr ""
+msgstr "Ostatnie projekty:"
 
 msgid "New tab"
 msgstr "Nowa karta"
@@ -479,13 +479,13 @@ msgid "Angle:"
 msgstr "Kąt:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Odcień:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Nasycenie:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Wartość:"
 
 msgid "Apply"
 msgstr "Zastosuj"
@@ -931,10 +931,10 @@ msgid "Offset"
 msgstr "Przesunięcie"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Proste Cieniowanie"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Przesuwanie Hue"
 
 msgid "Lighten"
 msgstr "Rozjaśnianie"
@@ -1112,7 +1112,7 @@ msgid "Unlink Cel"
 msgstr "Odłącz kalkę"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Właściwości klatki"
 
 msgid "Frame properties"
 msgstr "Właściwości klatki"
@@ -1145,7 +1145,7 @@ msgid "Opacity:"
 msgstr "Przezroczystość:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Przezroczystość w trybie kafelkowym:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ukrywanie warstwy"
@@ -1426,7 +1426,7 @@ msgid "Cannot find last project file."
 msgstr "Nie można znaleźć pliku ostatniego projektu."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Nie można znaleźć pliku projektu."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Nie zapisałeś lub nie otworzyłeś jeszcze żadnego projektu w Pixeloramie!"
