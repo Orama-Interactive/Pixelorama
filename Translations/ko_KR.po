@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-04 05:28\n"
+"PO-Revision-Date: 2020-11-04 05:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -483,7 +483,7 @@ msgid "Hue:"
 msgstr "색조:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "채도:"
 
 msgid "Value:"
 msgstr "명도:"
@@ -1113,7 +1113,7 @@ msgid "Unlink Cel"
 msgstr "셀 연결 해제"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "프레임 속성"
 
 msgid "Frame properties"
 msgstr "프레임 속성"
@@ -1146,7 +1146,7 @@ msgid "Opacity:"
 msgstr "투명도:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "타일 모드 불투명도:"
 
 msgid "Toggle layer's visibility"
 msgstr "레이어 표시 토글"
