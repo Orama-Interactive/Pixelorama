@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-04 05:12\n"
 
 msgid "OK"
 msgstr "예"
@@ -932,7 +932,7 @@ msgid "Offset"
 msgstr "오프셋"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "간단한 셰이딩"
 
 msgid "Hue Shifting"
 msgstr ""
