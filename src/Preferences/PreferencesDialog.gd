@@ -183,3 +183,5 @@ func _on_ShrinkApplyButton_pressed():
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,
 		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1014,576), Global.shrink)
 	Global.preferences_dialog.popup_centered(Vector2(400, 280))
+	Global.camera.zoom_100()
+	
