@@ -63,6 +63,9 @@ func setup_application_window_size() -> void:
 		return
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	OS.min_window_size = Vector2(1024, 576)
+	
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,
+		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1014,576), Global.shrink)
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):

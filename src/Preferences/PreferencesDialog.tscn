@@ -8,6 +8,7 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
+visible = true
 margin_left = -3.0
 margin_top = 9.0
 margin_right = 419.0
@@ -51,12 +52,12 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 498.0
-margin_bottom = 24.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_right = 498.0
-margin_bottom = 24.0
+margin_bottom = 48.0
 
 [node name="StartupContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
 margin_right = 498.0
@@ -78,9 +79,9 @@ text = "On"
 
 [node name="PressureSentivity" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
 visible = false
-margin_top = 100.0
-margin_right = 506.0
-margin_bottom = 120.0
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 48.0
 
 [node name="PressureSensitivityLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/PressureSentivity"]
 margin_top = 3.0
@@ -95,6 +96,44 @@ margin_bottom = 20.0
 text = "Affect Brush's Alpha"
 items = [ "None", null, false, 0, null, "Affect Brush's Alpha", null, false, 1, null ]
 selected = 1
+
+[node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 48.0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer"]
+margin_top = 3.0
+margin_right = 68.0
+margin_bottom = 17.0
+text = "Shrink GUI"
+
+[node name="ShrinkLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer"]
+margin_left = 72.0
+margin_top = 3.0
+margin_right = 122.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 50, 0 )
+text = "1"
+align = 2
+
+[node name="ShrinkHSlider" type="HSlider" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer"]
+margin_left = 126.0
+margin_right = 446.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 4.0
+step = 0.5
+value = 1.0
+tick_count = 7
+ticks_on_borders = true
+
+[node name="ShrinkApplyButton" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer"]
+margin_left = 450.0
+margin_right = 498.0
+margin_bottom = 20.0
+text = "Apply"
 
 [node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
@@ -912,6 +951,8 @@ __meta__ = {
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
+[connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer/ShrinkHSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
 [connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/PresetOptionButton" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_PresetOptionButton_item_selected"]
 [connection signal="confirmed" from="Popups/ShortcutSelector" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_ShortcutSelector_confirmed"]
 [connection signal="popup_hide" from="Popups/ShortcutSelector" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_ShortcutSelector_popup_hide"]
