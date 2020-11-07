@@ -50,10 +50,11 @@ func _input(event : InputEvent) -> void:
 #	elif not get_viewport_rect().has_point(event.position):
 #		return
 
-	#current_pixel = get_local_mouse_position() + location
+	# Do not use self.get_local_mouse_position() because it return unexpected
+	# value when shrink parameter is not equal to one. At godot version 3.2.3
 	var tmp_transform = get_canvas_transform().affine_inverse()
 	var tmp_position = Global.main_viewport.get_local_mouse_position()
-	current_pixel = tmp_transform.basis_xform(tmp_position)+tmp_transform.origin
+	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin + location
 
 	if Global.has_focus:
 		update()

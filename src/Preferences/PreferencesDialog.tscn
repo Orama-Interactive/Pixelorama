@@ -8,7 +8,6 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-visible = true
 margin_left = -3.0
 margin_top = 9.0
 margin_right = 419.0
