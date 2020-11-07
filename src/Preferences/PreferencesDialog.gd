@@ -3,6 +3,7 @@ extends AcceptDialog
 # Preferences table: [Prop name in Global, relative node path, value type, default value]
 var preferences = [
 	["open_last_project", "Startup/StartupContainer/OpenLastProject", "pressed", Global.open_last_project],
+	["shrink", "Startup/ShrinkContainer/ShrinkHSlider", "value", Global.shrink],
 	["smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed", Global.smooth_zoom],
 	["pressure_sensitivity_mode", "Startup/PressureSentivity/PressureSensitivityOptionButton", "selected", Global.pressure_sensitivity_mode],
 	["show_left_tool_icon", "Indicators/IndicatorsContainer/LeftToolIconCheckbox", "pressed", Global.show_left_tool_icon],
@@ -36,6 +37,7 @@ onready var list : ItemList = $HSplitContainer/List
 onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
 onready var autosave_interval : SpinBox = $HSplitContainer/ScrollContainer/VBoxContainer/Backup/AutosaveContainer/AutosaveInterval
 onready var restore_default_button_scene = preload("res://src/Preferences/RestoreDefaultButton.tscn")
+onready var shrink_label : Label = $HSplitContainer/ScrollContainer/VBoxContainer/Startup/ShrinkContainer/ShrinkLabel
 
 
 func _ready() -> void:
@@ -172,3 +174,15 @@ func _on_List_item_selected(index : int) -> void:
 		if OS.get_name() == "HTML5":
 			content_list.erase("Startup")
 		child.visible = child.name == content_list[index]
+
+
+func _on_HSlider_value_changed(value):
+	shrink_label.text = str(value)
+
+
+func _on_ShrinkApplyButton_pressed():
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,
+		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1014,576), Global.shrink)
+	Global.preferences_dialog.popup_centered(Vector2(400, 280))
+	Global.camera.zoom_100()
+	

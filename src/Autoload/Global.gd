@@ -45,6 +45,7 @@ var default_clear_color := Color.gray
 # Preferences
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var open_last_project := false
+var shrink := 1.0
 var smooth_zoom := true
 var theme_type : int = Theme_Types.DARK
 var default_image_width := 64

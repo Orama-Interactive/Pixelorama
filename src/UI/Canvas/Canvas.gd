@@ -50,7 +50,10 @@ func _input(event : InputEvent) -> void:
 #	elif not get_viewport_rect().has_point(event.position):
 #		return
 
-	current_pixel = get_local_mouse_position() + location
+	#current_pixel = get_local_mouse_position() + location
+	var tmp_transform = get_canvas_transform().affine_inverse()
+	var tmp_position = Global.main_viewport.get_local_mouse_position()
+	current_pixel = tmp_transform.basis_xform(tmp_position)+tmp_transform.origin
 
 	if Global.has_focus:
 		update()
