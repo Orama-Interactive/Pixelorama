@@ -35,13 +35,13 @@ class LightenDarkenOp extends Drawer.ColorOp:
 				dst = dst.darkened(-strength)
 		else:
 			if lighten_or_darken == LightenDarken.LIGHTEN:
-				dst.h += (hue_amount / 359)
-				dst.s -= (sat_amount / 100)
-				dst.v += (value_amount / 100)
+				dst.h += (hue_amount / 359.0)
+				dst.s -= (sat_amount / 100.0)
+				dst.v += (value_amount / 100.0)
 			else:
-				dst.h -= (hue_amount / 359)
-				dst.s += (sat_amount / 100)
-				dst.v -= (value_amount / 100)
+				dst.h -= (hue_amount / 359.0)
+				dst.s += (sat_amount / 100.0)
+				dst.v -= (value_amount / 100.0)
 
 		return dst
 
