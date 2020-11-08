@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-11-02 09:03\n"
+"PO-Revision-Date: 2020-11-08 23:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -365,6 +365,9 @@ msgstr "启动"
 msgid "Language"
 msgstr "语言"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "主题"
 
@@ -409,6 +412,9 @@ msgstr "辅助线颜色:"
 
 msgid "System Language"
 msgstr "系统语言"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "深色"
