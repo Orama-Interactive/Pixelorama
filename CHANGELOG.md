@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.8.2] - Unreleased
 This update has been brought to you by the contributions of:
 
-PinyaColada, Rémi Verschelde (akien-mga), dasimonde
+PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind
 
 ### Added
 - The lighten/darken tool now has a hue shifting mode. It lets users configure the shift in hue, saturation and value of the new shaded pixels. ([#189](https://github.com/Orama-Interactive/Pixelorama/issues/189))
@@ -15,6 +15,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde
 - You can now select if you want rotation to apply in the selection, the current cel, the entire frame, all frames or even all projects (tabs)!
 - You can now change the transparency of the Tile Mode in the Preferences. ([#368](https://github.com/Orama-Interactive/Pixelorama/pull/368))
 - Added a "Recent Projects" option in the File menu, to contain the most recently opened projects.  ([#370](https://github.com/Orama-Interactive/Pixelorama/pull/370))
+- HiDPI support - Pixelorama's UI can now be scaled in the Preferences. ([#140](https://github.com/Orama-Interactive/Pixelorama/issues/140))
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
