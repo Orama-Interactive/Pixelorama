@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-08 23:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -365,6 +365,9 @@ msgstr "Po spuštění"
 msgid "Language"
 msgstr "Jazyk"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Motivy"
 
@@ -409,6 +412,9 @@ msgstr "Barva vodítka:"
 
 msgid "System Language"
 msgstr "Systémový jazyk"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "Tmavý"
