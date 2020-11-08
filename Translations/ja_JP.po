@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-08 23:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -364,6 +364,9 @@ msgstr "スタートアップ"
 msgid "Language"
 msgstr "言語"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "テーマ"
 
@@ -407,6 +410,9 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
+msgstr ""
+
+msgid "Shrink GUI"
 msgstr ""
 
 msgid "Dark"
