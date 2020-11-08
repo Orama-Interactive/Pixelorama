@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-01 18:50\n"
+"PO-Revision-Date: 2020-11-08 23:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -365,6 +365,9 @@ msgstr "Pornire"
 msgid "Language"
 msgstr "Limbă"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Teme"
 
@@ -409,6 +412,9 @@ msgstr "Culoarea ghidajului:"
 
 msgid "System Language"
 msgstr "Limba sistemului"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "Întunecat"
