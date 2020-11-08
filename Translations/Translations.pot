@@ -353,6 +353,9 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr ""
 
@@ -396,6 +399,9 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
+msgstr ""
+
+msgid "Shrink GUI"
 msgstr ""
 
 msgid "Dark"
