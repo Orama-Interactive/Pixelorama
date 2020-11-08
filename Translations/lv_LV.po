@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-08 23:58\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -365,6 +365,9 @@ msgstr ""
 msgid "Language"
 msgstr "Valoda"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Tēmas"
 
@@ -409,6 +412,9 @@ msgstr "Vadlīnijas krāsa:"
 
 msgid "System Language"
 msgstr "Systēmas valoda"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "Tumš"
