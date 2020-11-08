@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-11-02 18:03\n"
+"PO-Revision-Date: 2020-11-08 23:59\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -365,6 +365,9 @@ msgstr "Εκκίνηση"
 msgid "Language"
 msgstr "Γλώσσα"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Θέματα"
 
@@ -409,6 +412,9 @@ msgstr "Χρώμα οδηγών:"
 
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "Σκούρο"
