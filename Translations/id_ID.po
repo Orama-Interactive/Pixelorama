@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-11-01 14:39\n"
+"PO-Revision-Date: 2020-11-08 23:58\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -365,6 +365,9 @@ msgstr "Memulai"
 msgid "Language"
 msgstr "Bahasa"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Tema"
 
@@ -409,6 +412,9 @@ msgstr "Warna Panduan:"
 
 msgid "System Language"
 msgstr "Bahasa Sistem"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "Gelap"
