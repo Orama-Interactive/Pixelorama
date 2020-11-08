@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-11-03 13:02\n"
+"PO-Revision-Date: 2020-11-08 23:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -364,6 +364,9 @@ msgstr "Przy uruchomieniu"
 msgid "Language"
 msgstr "Język"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Motywy"
 
@@ -408,6 +411,9 @@ msgstr "Kolor prowadnicy:"
 
 msgid "System Language"
 msgstr "Język systemowy"
+
+msgid "Shrink GUI"
+msgstr ""
 
 msgid "Dark"
 msgstr "Ciemny"
