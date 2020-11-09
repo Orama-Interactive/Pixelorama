@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-11-08 23:58\n"
+"PO-Revision-Date: 2020-11-09 12:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -412,7 +412,7 @@ msgstr "Guide farge:"
 msgid "System Language"
 msgstr "Systemspråk"
 
-msgid "Shrink GUI"
+msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
