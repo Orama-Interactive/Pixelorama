@@ -401,7 +401,7 @@ msgstr ""
 msgid "System Language"
 msgstr ""
 
-msgid "Shrink GUI"
+msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"

@@ -125,7 +125,7 @@ margin_bottom = 20.0
 margin_top = 3.0
 margin_right = 68.0
 margin_bottom = 17.0
-text = "Shrink GUI"
+text = "Display Scale"
 
 [node name="ShrinkLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
 margin_left = 72.0
@@ -144,7 +144,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 4.0
-step = 0.5
+step = 0.1
 value = 1.0
 tick_count = 7
 ticks_on_borders = true
