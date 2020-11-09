@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-11-09 16:00\n"
+"PO-Revision-Date: 2020-11-09 17:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Импортировать как:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Недавние проекты"
 
 msgid "New tab"
 msgstr "Новая вкладка"
@@ -414,7 +414,7 @@ msgid "System Language"
 msgstr "Системный язык"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Масштаб экрана"
 
 msgid "Dark"
 msgstr "Тёмная"
