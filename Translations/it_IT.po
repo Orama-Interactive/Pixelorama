@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-11-09 16:00\n"
+"PO-Revision-Date: 2020-11-09 20:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Importa come:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Progetti recenti"
 
 msgid "New tab"
 msgstr "Nuova scheda"
