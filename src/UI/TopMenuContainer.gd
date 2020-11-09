@@ -40,6 +40,7 @@ func setup_file_menu() -> void:
 
 	if OS.get_name() == "HTML5":
 		file_menu.set_item_disabled(2, true)
+		file_menu.set_item_disabled(3, true)
 
 
 func setup_recent_projects_submenu(item : String) -> void:
