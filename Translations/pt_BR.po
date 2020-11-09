@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-11-08 23:58\n"
+"PO-Revision-Date: 2020-11-09 12:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -413,7 +413,7 @@ msgstr "Cor da guia:"
 msgid "System Language"
 msgstr "Linguagem do Sistema"
 
-msgid "Shrink GUI"
+msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
