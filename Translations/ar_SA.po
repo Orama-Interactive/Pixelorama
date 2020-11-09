@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-11-08 23:59\n"
+"PO-Revision-Date: 2020-11-09 12:17\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -412,7 +412,7 @@ msgstr "دليل الألوان:"
 msgid "System Language"
 msgstr "لغة النظام"
 
-msgid "Shrink GUI"
+msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
