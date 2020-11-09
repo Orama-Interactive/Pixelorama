@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-11-08 23:59\n"
+"PO-Revision-Date: 2020-11-09 12:17\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -413,7 +413,7 @@ msgstr "Color de la guia:"
 msgid "System Language"
 msgstr "Idioma del sistema"
 
-msgid "Shrink GUI"
+msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
