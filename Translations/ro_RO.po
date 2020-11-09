@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-09 12:36\n"
+"PO-Revision-Date: 2020-11-09 15:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Salvează"
 
 msgid "Please Confirm..."
-msgstr "Te rugăm să confirmi..."
+msgstr "Confirmă alegerea..."
 
 msgid "File Name:"
 msgstr "Numele fișierului:"
@@ -151,7 +151,7 @@ msgid "Preferences"
 msgstr "Preferințe"
 
 msgid "Tile Mode"
-msgstr "Mod Mozaic"
+msgstr "Mod mozaic"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"
@@ -166,7 +166,7 @@ msgid "Show Animation Timeline"
 msgstr "Afișare cronologia animației"
 
 msgid "Zen Mode"
-msgstr "Mod Zen"
+msgstr "Mod zen"
 
 msgid "Fullscreen Mode"
 msgstr "Mod ecran complet"
@@ -1152,7 +1152,7 @@ msgid "Opacity:"
 msgstr "Opacitate:"
 
 msgid "Tile mode opacity:"
-msgstr "Opacitatea modului Mozaic:"
+msgstr "Opacitatea modului mozaic:"
 
 msgid "Toggle layer's visibility"
 msgstr "Comută vizibilitatea stratului"
