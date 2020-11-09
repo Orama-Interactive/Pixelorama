@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-11-09 12:17\n"
+"PO-Revision-Date: 2020-11-09 16:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,7 +186,7 @@ msgstr "Nastavení importu"
 msgid "Import as:"
 msgstr "Importovat jako:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
