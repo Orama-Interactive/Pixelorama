@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-08 23:58\n"
+"PO-Revision-Date: 2020-11-09 05:01\n"
 
 msgid "OK"
 msgstr "예"
@@ -366,7 +366,7 @@ msgid "Language"
 msgstr "언어"
 
 msgid "Interface"
-msgstr ""
+msgstr "인터페이스"
 
 msgid "Themes"
 msgstr "테마"
@@ -414,7 +414,7 @@ msgid "System Language"
 msgstr "시스템 언어"
 
 msgid "Shrink GUI"
-msgstr ""
+msgstr "GUI 축소"
 
 msgid "Dark"
 msgstr "다크"
