@@ -995,7 +995,7 @@ __meta__ = {
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
-[connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkHSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkHSlider" to="." method="_on_ShrinkHSlider_value_changed"]
 [connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
 [connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer/PresetOptionButton" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_PresetOptionButton_item_selected"]
 [connection signal="confirmed" from="Popups/ShortcutSelector" to="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" method="_on_ShortcutSelector_confirmed"]

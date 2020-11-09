@@ -176,13 +176,15 @@ func _on_List_item_selected(index : int) -> void:
 		child.visible = child.name == content_list[index]
 
 
-func _on_HSlider_value_changed(value):
+func _on_ShrinkHSlider_value_changed(value : float) -> void:
 	shrink_label.text = str(value)
 
 
-func _on_ShrinkApplyButton_pressed():
+func _on_ShrinkApplyButton_pressed() -> void:
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,
-		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1014,576), Global.shrink)
-	Global.preferences_dialog.popup_centered(Vector2(400, 280))
-	Global.camera.zoom_100()
-
+		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1024,576), Global.shrink)
+	hide()
+	popup_centered(Vector2(400, 280))
+	Global.dialog_open(true)
+	yield(Global.get_tree().create_timer(0.01), "timeout")
+	Global.camera.fit_to_frame(Global.current_project.size)
