@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-11-09 12:17\n"
+"PO-Revision-Date: 2020-11-09 15:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -366,7 +366,7 @@ msgid "Language"
 msgstr "Langue"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 msgid "Themes"
 msgstr "Thèmes"
