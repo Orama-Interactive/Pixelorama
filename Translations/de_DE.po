@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-11-08 23:59\n"
+"PO-Revision-Date: 2020-11-09 07:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -365,7 +365,7 @@ msgid "Language"
 msgstr "Sprache"
 
 msgid "Interface"
-msgstr ""
+msgstr "Benutzeroberfläche"
 
 msgid "Themes"
 msgstr "Designs"
@@ -413,7 +413,7 @@ msgid "System Language"
 msgstr "Systemsprache"
 
 msgid "Shrink GUI"
-msgstr ""
+msgstr "UI verkleinern"
 
 msgid "Dark"
 msgstr "Dunkel"
