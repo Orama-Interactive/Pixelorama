@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-11-08 23:58\n"
+"PO-Revision-Date: 2020-11-09 11:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -366,7 +366,7 @@ msgid "Language"
 msgstr "Язык"
 
 msgid "Interface"
-msgstr ""
+msgstr "Интерфейс"
 
 msgid "Themes"
 msgstr "Темы оформления"
@@ -414,7 +414,7 @@ msgid "System Language"
 msgstr "Системный язык"
 
 msgid "Shrink GUI"
-msgstr ""
+msgstr "Уменьшить графический интерфейс"
 
 msgid "Dark"
 msgstr "Тёмная"
