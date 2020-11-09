@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-09 16:00\n"
+"PO-Revision-Date: 2020-11-09 16:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Importare ca:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Proiecte recente"
 
 msgid "New tab"
 msgstr "Filă nouă"
