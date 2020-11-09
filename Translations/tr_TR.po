@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-11-09 12:18\n"
+"PO-Revision-Date: 2020-11-09 16:00\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -186,7 +186,7 @@ msgstr "İçeri Aktarma Ayarları"
 msgid "Import as:"
 msgstr "İçe farklı aktar:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
