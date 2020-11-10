@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-11-09 16:00\n"
+"PO-Revision-Date: 2020-11-10 06:16\n"
 
 msgid "OK"
 msgstr "确定"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "导入为："
 
 msgid "Recent projects"
-msgstr ""
+msgstr "最近项目"
 
 msgid "New tab"
 msgstr "新建选项卡"
@@ -366,7 +366,7 @@ msgid "Language"
 msgstr "语言"
 
 msgid "Interface"
-msgstr ""
+msgstr "界面"
 
 msgid "Themes"
 msgstr "主题"
@@ -414,7 +414,7 @@ msgid "System Language"
 msgstr "系统语言"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "显示缩放"
 
 msgid "Dark"
 msgstr "深色"
