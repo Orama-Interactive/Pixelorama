@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-11-10 02:24\n"
+"PO-Revision-Date: 2020-11-10 19:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -414,7 +414,7 @@ msgid "System Language"
 msgstr "Linguagem do Sistema"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Mostrar escala"
 
 msgid "Dark"
 msgstr "Escuro"
@@ -492,7 +492,7 @@ msgid "Saturation:"
 msgstr "Saturação:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Valor:"
 
 msgid "Apply"
 msgstr "Aplique"
