@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-11-09 15:59\n"
+"PO-Revision-Date: 2020-11-10 02:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "Importar como:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Projetos recentes"
 
 msgid "New tab"
 msgstr "Nova Aba"
@@ -366,7 +366,7 @@ msgid "Language"
 msgstr "Linguagem"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 msgid "Themes"
 msgstr "Temas"
@@ -486,10 +486,10 @@ msgid "Angle:"
 msgstr "Ângulo:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Matiz:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturação:"
 
 msgid "Value:"
 msgstr ""
@@ -1119,7 +1119,7 @@ msgid "Unlink Cel"
 msgstr "Desvincular célula"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Propriedades do Quadro"
 
 msgid "Frame properties"
 msgstr "Propriedades do quadro"
@@ -1265,7 +1265,7 @@ msgid "Undo: Change frame duration"
 msgstr ""
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Refazer: Mudar Ordem dos Frames"
 
 msgid "Move Guide"
 msgstr "Mover Guia"
@@ -1433,7 +1433,7 @@ msgid "Cannot find last project file."
 msgstr "Não foi possível localizar arquivo do último projeto."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Não foi possível localizar arquivo do último projeto."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Você ainda não salvou nem abriu nenhum projeto no Pixelorama!"
@@ -1498,10 +1498,10 @@ msgid "and"
 msgstr "e"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Mova o frame selecionado para a esquerda."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Mova o frame selecionado para a direita."
 
 msgid "Frame duration"
 msgstr ""
