@@ -339,6 +339,11 @@ func deserialize(dict : Dictionary) -> void:
 		file_format = dict.export_file_format
 	if dict.has("frame_duration"):
 		frame_duration = dict.frame_duration
+	else:
+		for i in frames.size():
+			if i < frame_duration.size():
+				continue
+			frame_duration.append(1)
 
 func name_changed(value : String) -> void:
 	name = value

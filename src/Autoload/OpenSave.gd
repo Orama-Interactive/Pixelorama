@@ -218,6 +218,8 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 		new_project.size = Vector2(width, height)
 		new_project.frames.append(frame_class)
+		if frame >= new_project.frame_duration.size():
+			new_project.frame_duration.append(1)
 		frame_line = file.get_line()
 		frame += 1
 
