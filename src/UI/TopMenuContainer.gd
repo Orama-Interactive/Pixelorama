@@ -74,7 +74,7 @@ func setup_edit_menu() -> void:
 
 func setup_view_menu() -> void:
 	var view_menu_items := {
-		"Tile Mode" : InputMap.get_action_list("tile_mode")[0].get_scancode_with_modifiers(),
+		"Tile Mode" : 0,
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
@@ -86,14 +86,22 @@ func setup_view_menu() -> void:
 
 	var i := 0
 	for item in view_menu_items.keys():
-		view_menu.add_check_item(item, i, view_menu_items[item])
+		if item == "Tile Mode":
+			setup_tile_mode_submenu(item)
+		else:
+			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
-
 	view_menu.set_item_checked(2, true) # Show Rulers
 	view_menu.set_item_checked(3, true) # Show Guides
 	view_menu.set_item_checked(4, true) # Show Animation Timeline
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+
+
+func setup_tile_mode_submenu(item : String):
+	Global.tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
+	view_menu.add_child(Global.tile_mode_submenu)
+	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
 
 
 func setup_image_menu() -> void:
@@ -259,7 +267,6 @@ func view_menu_id_pressed(id : int) -> void:
 			toggle_zen_mode()
 		6: # Fullscreen mode
 			toggle_fullscreen()
-
 	Global.canvas.update()
 
 
@@ -384,6 +391,35 @@ func show_add_outline_popup() -> void:
 func show_hsv_configuration_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
 	Global.dialog_open(true)
+
+func tile_mode_submenu_id_pressed(id : int):
+	var pos
+	match id:
+		0:
+			Global.tile_mode = Global.Tile_Mode.NONE
+			Global.transparent_checker.set_size(Global.current_project.size)
+			pos = Vector2.ZERO
+		1:
+			Global.tile_mode = Global.Tile_Mode.BOTH
+			Global.transparent_checker.set_size(Global.current_project.size*3)
+			pos = -Global.current_project.size
+		2:
+			Global.tile_mode = Global.Tile_Mode.XAXIS
+			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*3, Global.current_project.size.y*1))
+			pos = Vector2(-Global.current_project.size.x, 0)
+		3:
+			Global.tile_mode = Global.Tile_Mode.YAXIS
+			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
+			pos = Vector2(0, -Global.current_project.size.x)
+	for i in range(len(Global.Tile_Mode)):
+		if  i != id:
+			Global.tile_mode_submenu.set_item_checked(i, false)
+		else:
+			Global.tile_mode_submenu.set_item_checked(i, true)
+	Global.transparent_checker.set_position(pos)
+	Global.canvas.grid.set_position(pos)
+	Global.canvas.tile_mode.update()
+	Global.canvas.grid.update()
 
 
 func help_menu_id_pressed(id : int) -> void:

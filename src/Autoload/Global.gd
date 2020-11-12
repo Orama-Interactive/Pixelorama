@@ -5,7 +5,7 @@ enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum Theme_Types {DARK, BLUE, CARAMEL, LIGHT}
-
+enum Tile_Mode {NONE, BOTH, XAXIS, YAXIS}
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -74,7 +74,7 @@ var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 
 # View menu options
-var tile_mode := false
+var tile_mode : int = Tile_Mode.NONE
 var draw_grid := false
 var show_rulers := true
 var show_guides := true
@@ -116,6 +116,7 @@ var cursor_position_label : Label
 var zoom_level_label : Label
 
 var recent_projects_submenu : PopupMenu
+var tile_mode_submenu : PopupMenu
 
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
@@ -157,7 +158,6 @@ var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
 var preview_zoom_slider : VSlider
-
 var add_palette_button : BaseButton
 var edit_palette_button : BaseButton
 var palette_option_button : OptionButton
@@ -218,6 +218,15 @@ func _ready() -> void:
 
 	recent_projects_submenu = PopupMenu.new()
 	recent_projects_submenu.set_name("recent_projects_submenu")
+
+	tile_mode_submenu = PopupMenu.new()
+	tile_mode_submenu.set_name("tile_mode_submenu")
+	tile_mode_submenu.add_check_item("None", 0)
+	tile_mode_submenu.set_item_checked(0, true)
+	tile_mode_submenu.add_check_item("Tiled In Both Axis", 1)
+	tile_mode_submenu.add_check_item("Tiled In X Axis", 2)
+	tile_mode_submenu.add_check_item("Tiled In Y Axis", 3)
+	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
