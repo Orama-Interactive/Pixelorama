@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-11-10 16:17\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1504,4 +1504,13 @@ msgstr "Verschiebe den ausgewählten Frame nach rechts."
 
 msgid "Frame duration"
 msgstr "Frame-Dauer"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 
