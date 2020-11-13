@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-09 16:18\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1505,4 +1505,13 @@ msgstr "Mută cadrul selectat la dreapta."
 
 msgid "Frame duration"
 msgstr "Durata cadrului"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 
