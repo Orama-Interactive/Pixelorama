@@ -253,8 +253,6 @@ func edit_menu_id_pressed(id : int) -> void:
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
-		0: # Tile mode
-			toggle_tile_mode()
 		1: # Show grid
 			toggle_show_grid()
 		2: # Show rulers
@@ -268,12 +266,6 @@ func view_menu_id_pressed(id : int) -> void:
 		6: # Fullscreen mode
 			toggle_fullscreen()
 	Global.canvas.update()
-
-
-func toggle_tile_mode() -> void:
-	Global.tile_mode = !Global.tile_mode
-	view_menu.set_item_checked(0, Global.tile_mode)
-
 
 func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
@@ -393,31 +385,28 @@ func show_hsv_configuration_popup() -> void:
 	Global.dialog_open(true)
 
 func tile_mode_submenu_id_pressed(id : int):
-	var pos
 	match id:
 		0:
 			Global.tile_mode = Global.Tile_Mode.NONE
 			Global.transparent_checker.set_size(Global.current_project.size)
-			pos = Vector2.ZERO
+			Global.transparent_checker.set_position(Vector2.ZERO)
 		1:
 			Global.tile_mode = Global.Tile_Mode.BOTH
 			Global.transparent_checker.set_size(Global.current_project.size*3)
-			pos = -Global.current_project.size
+			Global.transparent_checker.set_position(-Global.current_project.size)
 		2:
 			Global.tile_mode = Global.Tile_Mode.XAXIS
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*3, Global.current_project.size.y*1))
-			pos = Vector2(-Global.current_project.size.x, 0)
+			Global.transparent_checker.set_position(Vector2(-Global.current_project.size.x, 0))
 		3:
 			Global.tile_mode = Global.Tile_Mode.YAXIS
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
-			pos = Vector2(0, -Global.current_project.size.x)
+			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.x))
 	for i in range(len(Global.Tile_Mode)):
 		if  i != id:
 			Global.tile_mode_submenu.set_item_checked(i, false)
 		else:
 			Global.tile_mode_submenu.set_item_checked(i, true)
-	Global.transparent_checker.set_position(pos)
-	Global.canvas.grid.set_position(pos)
 	Global.canvas.tile_mode.update()
 	Global.canvas.grid.update()
 
