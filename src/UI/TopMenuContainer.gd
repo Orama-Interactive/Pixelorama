@@ -74,7 +74,7 @@ func setup_edit_menu() -> void:
 
 func setup_view_menu() -> void:
 	var view_menu_items := {
-		"Tile Mode" : InputMap.get_action_list("tile_mode")[0].get_scancode_with_modifiers(),
+		"Tile Mode" : 0,
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
@@ -86,14 +86,22 @@ func setup_view_menu() -> void:
 
 	var i := 0
 	for item in view_menu_items.keys():
-		view_menu.add_check_item(item, i, view_menu_items[item])
+		if item == "Tile Mode":
+			setup_tile_mode_submenu(item)
+		else:
+			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
-
 	view_menu.set_item_checked(2, true) # Show Rulers
 	view_menu.set_item_checked(3, true) # Show Guides
 	view_menu.set_item_checked(4, true) # Show Animation Timeline
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+
+
+func setup_tile_mode_submenu(item : String):
+	Global.tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
+	view_menu.add_child(Global.tile_mode_submenu)
+	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
 
 
 func setup_image_menu() -> void:
@@ -245,8 +253,6 @@ func edit_menu_id_pressed(id : int) -> void:
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
-		0: # Tile mode
-			toggle_tile_mode()
 		1: # Show grid
 			toggle_show_grid()
 		2: # Show rulers
@@ -259,13 +265,19 @@ func view_menu_id_pressed(id : int) -> void:
 			toggle_zen_mode()
 		6: # Fullscreen mode
 			toggle_fullscreen()
-
 	Global.canvas.update()
 
 
-func toggle_tile_mode() -> void:
-	Global.tile_mode = !Global.tile_mode
-	view_menu.set_item_checked(0, Global.tile_mode)
+func tile_mode_submenu_id_pressed(id : int):
+	Global.transparent_checker._init_position(id)
+	for i in range(len(Global.Tile_Mode)):
+		if  i != id:
+			Global.tile_mode_submenu.set_item_checked(i, false)
+		else:
+			Global.tile_mode_submenu.set_item_checked(i, true)
+	Global.canvas.tile_mode.update()
+	Global.canvas.grid.update()
+	Global.canvas.grid.set_position(Global.transparent_checker.get_position())
 
 
 func toggle_show_grid() -> void:

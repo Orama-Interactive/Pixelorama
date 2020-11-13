@@ -11,7 +11,7 @@ func _draw() -> void:
 
 
 func draw_grid(grid_type : int) -> void:
-	var size : Vector2 = Global.current_project.size
+	var size : Vector2 = Global.transparent_checker.rect_size
 	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
 		for x in range(Global.grid_width, size.x, Global.grid_width):
 			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
