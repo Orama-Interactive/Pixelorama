@@ -36,8 +36,8 @@ func _init_position(id : int):
 		2:
 			Global.tile_mode = Global.Tile_Mode.XAXIS
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*3, Global.current_project.size.y*1))
-			Global.transparent_checker.set_position(Vector2(-Global.current_project.size.y, 0))
+			Global.transparent_checker.set_position(Vector2(-Global.current_project.size.x, 0))
 		3:
 			Global.tile_mode = Global.Tile_Mode.YAXIS
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
-			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.x))
+			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.y))
