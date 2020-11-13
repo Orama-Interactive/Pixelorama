@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-11-09 18:31\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1505,4 +1505,13 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 
 msgid "Frame duration"
 msgstr "Διάρκεια καρέ"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 
