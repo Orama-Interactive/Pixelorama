@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-11-10 06:16\n"
+"PO-Revision-Date: 2020-11-13 18:28\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1504,4 +1504,13 @@ msgstr "移动所选帧到右侧。"
 
 msgid "Frame duration"
 msgstr "帧持续时间"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 
