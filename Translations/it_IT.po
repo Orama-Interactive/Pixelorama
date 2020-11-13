@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-11-09 20:51\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1505,4 +1505,13 @@ msgstr "Sposta il riquadro selezionato a destra."
 
 msgid "Frame duration"
 msgstr "Durata del frame"
+
+msgid "Tiled In Both Axis"
+msgstr "Piastrellato In Entrambi Gli Assi"
+
+msgid "Tiled In X Axis"
+msgstr "Piastrellato Nell'Asse X"
+
+msgid "Tiled In Y Axis"
+msgstr "Piastrellato Nell'Asse Y"
 
