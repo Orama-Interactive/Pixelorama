@@ -267,6 +267,18 @@ func view_menu_id_pressed(id : int) -> void:
 			toggle_fullscreen()
 	Global.canvas.update()
 
+
+func tile_mode_submenu_id_pressed(id : int):
+	Global.transparent_checker._init_position(id)
+	for i in range(len(Global.Tile_Mode)):
+		if  i != id:
+			Global.tile_mode_submenu.set_item_checked(i, false)
+		else:
+			Global.tile_mode_submenu.set_item_checked(i, true)
+	Global.canvas.tile_mode.update()
+	Global.canvas.grid.update()
+
+
 func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(1, Global.draw_grid)
@@ -383,32 +395,6 @@ func show_add_outline_popup() -> void:
 func show_hsv_configuration_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
 	Global.dialog_open(true)
-
-func tile_mode_submenu_id_pressed(id : int):
-	match id:
-		0:
-			Global.tile_mode = Global.Tile_Mode.NONE
-			Global.transparent_checker.set_size(Global.current_project.size)
-			Global.transparent_checker.set_position(Vector2.ZERO)
-		1:
-			Global.tile_mode = Global.Tile_Mode.BOTH
-			Global.transparent_checker.set_size(Global.current_project.size*3)
-			Global.transparent_checker.set_position(-Global.current_project.size)
-		2:
-			Global.tile_mode = Global.Tile_Mode.XAXIS
-			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*3, Global.current_project.size.y*1))
-			Global.transparent_checker.set_position(Vector2(-Global.current_project.size.x, 0))
-		3:
-			Global.tile_mode = Global.Tile_Mode.YAXIS
-			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
-			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.x))
-	for i in range(len(Global.Tile_Mode)):
-		if  i != id:
-			Global.tile_mode_submenu.set_item_checked(i, false)
-		else:
-			Global.tile_mode_submenu.set_item_checked(i, true)
-	Global.canvas.tile_mode.update()
-	Global.canvas.grid.update()
 
 
 func help_menu_id_pressed(id : int) -> void:

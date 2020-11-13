@@ -11,6 +11,7 @@ func _ready() -> void:
 	material.set_shader_param("color2", Global.checker_color_2)
 	material.set_shader_param("follow_movement", Global.checker_follow_movement)
 	material.set_shader_param("follow_scale", Global.checker_follow_scale)
+	_init_position(Global.tile_mode)
 
 
 func update_offset(offset : Vector2, scale : Vector2) -> void:
@@ -20,3 +21,23 @@ func update_offset(offset : Vector2, scale : Vector2) -> void:
 
 func _on_TransparentChecker_resized():
 	material.set_shader_param("rect_size", rect_size)
+
+
+func _init_position(id : int):
+	match id:
+		0:
+			Global.tile_mode = Global.Tile_Mode.NONE
+			Global.transparent_checker.set_size(Global.current_project.size)
+			Global.transparent_checker.set_position(Vector2.ZERO)
+		1:
+			Global.tile_mode = Global.Tile_Mode.BOTH
+			Global.transparent_checker.set_size(Global.current_project.size*3)
+			Global.transparent_checker.set_position(-Global.current_project.size)
+		2:
+			Global.tile_mode = Global.Tile_Mode.XAXIS
+			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*3, Global.current_project.size.y*1))
+			Global.transparent_checker.set_position(Vector2(-Global.current_project.size.x, 0))
+		3:
+			Global.tile_mode = Global.Tile_Mode.YAXIS
+			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
+			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.x))
