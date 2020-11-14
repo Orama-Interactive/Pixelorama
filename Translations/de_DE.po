@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-14 08:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1506,11 +1506,11 @@ msgid "Frame duration"
 msgstr "Frame-Dauer"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "In beiden Achsen gekachelt"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "In X-Achse gekachelt"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Tiled in Y-Achse"
 
