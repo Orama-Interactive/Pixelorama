@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-14 10:48\n"
+"PO-Revision-Date: 2020-11-14 10:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -438,7 +438,7 @@ msgid "Only affect selection"
 msgstr "Afectează doar selecția"
 
 msgid "Current cel"
-msgstr "Cel actual"
+msgstr "Celul actual"
 
 msgid "Current frame"
 msgstr "Cadrul actual"
@@ -1304,7 +1304,7 @@ msgid "Use current left & right colors"
 msgstr "Folosește culorile din stânga și dreapta"
 
 msgid "Create a new empty palette?"
-msgstr "Creare paletă nouă goală?"
+msgstr "Creezi o paletă nouă goală?"
 
 msgid "Error"
 msgstr "Eroare"
@@ -1319,7 +1319,7 @@ msgid "Edit Palette"
 msgstr "Editare paletă"
 
 msgid "Create colors with alpha component"
-msgstr "Creează culori cu componenta alfa"
+msgstr "Creează culori cu componentă alfa"
 
 msgid "Get colors only from selection"
 msgstr "Obține culori doar din selecție"
