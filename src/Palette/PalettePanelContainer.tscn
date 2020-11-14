@@ -234,7 +234,7 @@ __meta__ = {
 margin_top = 3.0
 margin_right = 104.0
 margin_bottom = 17.0
-text = "Get colors from:"
+text = "Get colors from"
 
 [node name="ColorsFromOptionButton" type="OptionButton" parent="PaletteFromSpriteDialog/VBoxContainer/HBoxContainer"]
 margin_left = 108.0

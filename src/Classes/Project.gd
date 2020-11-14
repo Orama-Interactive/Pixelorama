@@ -345,6 +345,7 @@ func deserialize(dict : Dictionary) -> void:
 				continue
 			frame_duration.append(1)
 
+
 func name_changed(value : String) -> void:
 	name = value
 	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
