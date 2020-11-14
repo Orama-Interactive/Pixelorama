@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-14 10:59\n"
+"PO-Revision-Date: 2020-11-14 11:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -297,7 +297,7 @@ msgid "Open a Directory"
 msgstr "Deschide un director"
 
 msgid "All frames as multiple files"
-msgstr "Toate cadrele ca fișiere multiple"
+msgstr "Toate cadrele sub formă de fișiere multiple"
 
 msgid "All frames as a single file animation"
 msgstr "Toate cadrele ca o singură animație de fișier"
