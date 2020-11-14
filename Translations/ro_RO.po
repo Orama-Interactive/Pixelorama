@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-14 10:38\n"
+"PO-Revision-Date: 2020-11-14 10:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1483,7 +1483,7 @@ msgid "Remove currently selected palette"
 msgstr "Elimină paleta selectată în prezent"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Sigur vrei să elimini această paletă (aceasta nu va putea fi recuperată)?"
+msgstr "Sigur vrei să elimini această paletă (nu va putea fi recuperată)?"
 
 msgid "You can't remove more palettes!"
 msgstr "Nu poți elimina mai multe palete!"
@@ -1498,10 +1498,10 @@ msgid "and"
 msgstr "și"
 
 msgid "Move the selected frame to the left."
-msgstr "Mută cadrul selectat la stânga."
+msgstr "Deplasează cadrul selectat la stânga."
 
 msgid "Move the selected frame to the right."
-msgstr "Mută cadrul selectat la dreapta."
+msgstr "Deplasează cadrul selectat la dreapta."
 
 msgid "Frame duration"
 msgstr "Durata cadrului"
