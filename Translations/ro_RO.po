@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-14 10:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -399,7 +399,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilitatea de apăsare a tabletei:"
 
 msgid "None"
-msgstr "Niciuna"
+msgstr "Niciunul"
 
 msgid "Affect Brush's Alpha"
 msgstr "Afectează valoarea alfa a pensulei"
@@ -1507,11 +1507,11 @@ msgid "Frame duration"
 msgstr "Durata cadrului"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Mozaicat pe ambele axe"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Mozaicat pe axa X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Mozaicat pe axa Y"
 
