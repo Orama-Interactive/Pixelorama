@@ -34,6 +34,7 @@ func _ready() -> void:
 
 func _about_to_show() -> void:
 	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
+	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
 	current_frame.fill(Color(0, 0, 0, 0))
 	var frame = Global.current_project.frames[Global.current_project.current_frame]
 	Export.blend_layers(current_frame, frame)

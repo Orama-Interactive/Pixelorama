@@ -7,21 +7,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.8.2] - Unreleased
 This update has been brought to you by the contributions of:
 
-PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind
+PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 
 ### Added
 - The lighten/darken tool now has a hue shifting mode. It lets users configure the shift in hue, saturation and value of the new shaded pixels. ([#189](https://github.com/Orama-Interactive/Pixelorama/issues/189))
 - Added a "frame properties" option on the popup menu that appears when right-clicking on a cel. This lets the user choose a custom frame delay for that specific frame. ([#357](https://github.com/Orama-Interactive/Pixelorama/pull/357))
 - You can now select if you want rotation to apply in the selection, the current cel, the entire frame, all frames or even all projects (tabs)!
 - You can now change the transparency of the Tile Mode in the Preferences. ([#368](https://github.com/Orama-Interactive/Pixelorama/pull/368))
-- Added a "Recent Projects" option in the File menu, to contain the most recently opened projects.  ([#370](https://github.com/Orama-Interactive/Pixelorama/pull/370))
+- Added a "Recent Projects" option in the File menu, to contain the most recently opened projects. ([#370](https://github.com/Orama-Interactive/Pixelorama/pull/370))
 - HiDPI support - Pixelorama's UI can now be scaled in the Preferences. ([#140](https://github.com/Orama-Interactive/Pixelorama/issues/140))
+- More options have been added to Tile mode, Tile only in X Axis, Y Axis or both Axis. ([#378](https://github.com/Orama-Interactive/Pixelorama/pull/378))
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
 - The default path of the dialogs for opening and saving is now the user's desktop folder.
 - When there are errors in opening and saving files, the errors appear in the form of a popup dialog, instead of a notification or an OS alert.
 - The CJK font (for Chinese & Korean) was changed to DroidSansFallback from NotoSansCJKtc. This results in a much smaller exported `.pck` (over 10MB less)
+- In onion skinning, you can now set the past and future steps to 0. ([#380](https://github.com/Orama-Interactive/Pixelorama/pull/380))
 
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
@@ -32,6 +34,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind
 - Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
 - Using the lighten/darken on pixels with an alpha value of 0 no longer has an effect on them.
+- Fixed freeze when switching to a project of a larger size and using an image effect, with the affected parts being set to something different that "Current cel".
 <br><br>
 
 ## [v0.8.1] - 2020-10-14
