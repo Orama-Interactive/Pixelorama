@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-13 18:28\n"
+"PO-Revision-Date: 2020-11-15 13:58\n"
 
 msgid "OK"
 msgstr "예"
@@ -187,7 +187,7 @@ msgid "Import as:"
 msgstr "다음으로 가져오기:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "최근 프로잭트"
 
 msgid "New tab"
 msgstr "새 창"
@@ -414,7 +414,7 @@ msgid "System Language"
 msgstr "시스템 언어"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "디스플레이 크기"
 
 msgid "Dark"
 msgstr "다크"
