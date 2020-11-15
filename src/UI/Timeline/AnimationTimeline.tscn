@@ -951,7 +951,6 @@ margin_top = 18.0
 margin_right = 212.0
 margin_bottom = 42.0
 mouse_default_cursor_shape = 2
-min_value = 1.0
 value = 1.0
 align = 1
 
@@ -966,7 +965,6 @@ margin_top = 64.0
 margin_right = 212.0
 margin_bottom = 88.0
 mouse_default_cursor_shape = 2
-min_value = 1.0
 value = 1.0
 align = 1
 
