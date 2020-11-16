@@ -83,6 +83,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	var new_project := Project.new([frame], tr("untitled"), Vector2(width, height).floor())
 	new_project.layers.append(Layer.new())
 	Global.projects.append(new_project)
+	Global.tile_mode.append(Global.Tile_Mode.NONE)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 

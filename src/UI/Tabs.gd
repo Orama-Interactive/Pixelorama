@@ -3,6 +3,7 @@ extends Tabs
 
 func _on_Tabs_tab_changed(tab : int) -> void:
 	Global.current_project_index = tab
+	Global.top_menu_container.tile_mode_submenu_id_pressed(Global.tile_mode[Global.current_project_index])
 
 
 func _on_Tabs_tab_close(tab : int) -> void:

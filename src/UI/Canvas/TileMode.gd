@@ -19,7 +19,7 @@ func _draw() -> void:
 
 
 func get_tile_positions(size):
-	match Global.tile_mode:
+	match Global.tile_mode[Global.current_project_index]:
 		1:
 			return [
 				Vector2(location.x, location.y + size.y), # Down

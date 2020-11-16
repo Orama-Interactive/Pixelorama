@@ -270,6 +270,7 @@ func view_menu_id_pressed(id : int) -> void:
 
 func tile_mode_submenu_id_pressed(id : int):
 	Global.transparent_checker._init_position(id)
+	Global.tile_mode[Global.current_project_index] = Global.Tile_Mode.NONE if id == 0 else Global.Tile_Mode.BOTH if id == 1 else Global.Tile_Mode.XAXIS if id == 2 else Global.Tile_Mode.YAXIS
 	for i in range(len(Global.Tile_Mode)):
 		if  i != id:
 			Global.tile_mode_submenu.set_item_checked(i, false)
@@ -278,7 +279,6 @@ func tile_mode_submenu_id_pressed(id : int):
 	Global.canvas.tile_mode.update()
 	Global.canvas.grid.update()
 	Global.canvas.grid.set_position(Global.transparent_checker.get_position())
-
 
 func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
