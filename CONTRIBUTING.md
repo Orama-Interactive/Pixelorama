@@ -44,7 +44,7 @@ This [Git style guide](https://github.com/agis-/git-style-guide) has some good p
 
 If you are new to git, [this guide](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/) will help you.
 
-Keep in mind, however, that not all PRs will be merged. Some may need discussion, or others may be downright closed.
+Keep in mind, however, that not all PRs will be merged. Some may need discussion, or others may be downright closed. To avoid that, it's best to create an [issue](https://github.com/Orama-Interactive/Pixelorama/issues) in the form of a proposal about the PR you are thinking to open, before actually opening it. That way, people can discuss and share their opinions and thoughts about the matter. This is especially necessary when the PR is meant to change how an already existing feature works, as some people may disagree with the change, or want to offer alternative ideas.
 <br><br>
 
 ## Contributing translations
