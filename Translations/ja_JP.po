@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-17 04:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -416,19 +416,19 @@ msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "ダーク"
 
 msgid "Gray"
-msgstr ""
+msgstr "グレー"
 
 msgid "Blue"
 msgstr "青"
 
 msgid "Caramel"
-msgstr ""
+msgstr "キャラメル"
 
 msgid "Light"
-msgstr ""
+msgstr "ライト"
 
 msgid "Purple"
 msgstr "紫"
@@ -792,10 +792,10 @@ msgid "Rectangular"
 msgstr ""
 
 msgid "Isometric"
-msgstr ""
+msgstr "アイソメトリック"
 
 msgid "All"
-msgstr ""
+msgstr "すべて"
 
 msgid "Grid width:"
 msgstr ""
@@ -867,7 +867,7 @@ msgid "Pixel brush"
 msgstr "ピクセルブラシ"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "円のブラシ"
 
 msgid "Filled circle brush"
 msgstr ""
@@ -954,7 +954,7 @@ msgid "Zoom out"
 msgstr "ズームアウト"
 
 msgid "Options:"
-msgstr ""
+msgstr "オプション："
 
 msgid "Fit to frame"
 msgstr ""
