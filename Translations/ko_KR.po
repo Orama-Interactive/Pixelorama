@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-15 13:58\n"
+"PO-Revision-Date: 2020-11-17 02:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -1507,11 +1507,11 @@ msgid "Frame duration"
 msgstr "프레임 기간"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "양 축으로 타일을 두르기"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "X 축으로 타일을 두르기"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Y 축으로 타일을 두르기"
 
