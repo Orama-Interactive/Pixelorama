@@ -44,7 +44,7 @@ Join our Discord community server​ where we can discuss about Pixelorama and a
 
 If you like, consider helping us by sponsoring this project! It would enable us to focus more on Pixelorama, and make more projects in the future!
 
-You can also support the development on patreon: [![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
+Toss A Coin For A New Feature: [![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
 
 ## Download
 Stable versions:
