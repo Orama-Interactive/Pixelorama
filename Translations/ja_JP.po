@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-17 04:28\n"
+"PO-Revision-Date: 2020-11-18 05:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -912,7 +912,7 @@ msgid "Selected Color"
 msgstr ""
 
 msgid "Pattern"
-msgstr ""
+msgstr "パターン"
 
 msgid "Offset"
 msgstr ""
@@ -966,7 +966,7 @@ msgid "Mirroring"
 msgstr ""
 
 msgid "Horizontal"
-msgstr ""
+msgstr "水平"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -1140,10 +1140,10 @@ msgid "Enable/disable cel linking\n\n"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "パレット"
 
 msgid "Palettes"
-msgstr ""
+msgstr "パレット"
 
 msgid "Add a new palette"
 msgstr ""
