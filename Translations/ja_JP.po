@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-18 05:47\n"
+"PO-Revision-Date: 2020-11-18 06:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -494,7 +494,7 @@ msgid "Value:"
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "適用"
 
 msgid "Diagonal"
 msgstr ""
@@ -1308,10 +1308,10 @@ msgid "Become a Platinum Sponsor"
 msgstr ""
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "ゴールドスポンサーになる"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "パトロンになる"
 
 msgid "Don't show again"
 msgstr ""
@@ -1359,19 +1359,19 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
-msgstr ""
+msgstr "ズーム"
 
 msgid "Color Picker"
 msgstr ""
 
 msgid "Pencil"
-msgstr ""
+msgstr "ペン/鉛筆"
 
 msgid "Eraser"
-msgstr ""
+msgstr "消しゴム"
 
 msgid "Bucket"
-msgstr ""
+msgstr "バケット"
 
 msgid "Lighten/Darken"
 msgstr ""
@@ -1440,7 +1440,7 @@ msgid "Close"
 msgstr "閉じる"
 
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1465,7 +1465,7 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
-msgstr ""
+msgstr "と"
 
 msgid "Move the selected frame to the left."
 msgstr ""
