@@ -497,7 +497,6 @@ margin_top = 85.0
 margin_right = 284.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 110, 0 )
-hint_tooltip = "Size of the transparent checker background"
 mouse_filter = 0
 text = "Tile mode opacity:"
 
@@ -506,7 +505,6 @@ margin_left = 288.0
 margin_top = 80.0
 margin_right = 456.0
 margin_bottom = 104.0
-hint_tooltip = "Size of the transparent checker background"
 mouse_default_cursor_shape = 2
 max_value = 1.0
 step = 0.1
