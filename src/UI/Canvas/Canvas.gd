@@ -27,8 +27,6 @@ func _draw() -> void:
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
 
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
-	if Global.onion_skinning:
-		onion_skinning()
 
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
@@ -36,6 +34,8 @@ func _draw() -> void:
 		if Global.current_project.layers[i].visible: # if it's visible
 			draw_texture(current_cels[i].image_texture, location, modulate_color)
 
+	if Global.onion_skinning:
+		onion_skinning()
 	tile_mode.update()
 
 

@@ -23,6 +23,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - The default path of the dialogs for opening and saving is now the user's desktop folder.
 - When there are errors in opening and saving files, the errors appear in the form of a popup dialog, instead of a notification or an OS alert.
 - The CJK font (for Chinese & Korean) was changed to DroidSansFallback from NotoSansCJKtc. This results in a much smaller exported `.pck` (over 10MB less)
+- Onion skinned previous and next frames are now being drawn on top of the current frame. This fixes issues where onion skinning would not work with an opaque background.
 - In onion skinning, you can now set the past and future steps to 0. ([#380](https://github.com/Orama-Interactive/Pixelorama/pull/380))
 
 ### Fixed
