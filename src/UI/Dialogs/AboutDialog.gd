@@ -36,6 +36,7 @@ func _ready() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Marco Galli (Gaarco)")
 	contributors.create_item(contributor_root).set_text(0, "  Xenofon Konitsas (huskee)")
 	contributors.create_item(contributor_root).set_text(0, "  Matheus Pesegoginski (MatheusPese)")
+	contributors.create_item(contributor_root).set_text(0, "  AbhinavKDev (abhinav3967)")
 	contributors.create_item(contributor_root).set_text(0, "  sapient_cogbag")
 	contributors.create_item(contributor_root).set_text(0, "  dasimonde")
 	contributors.create_item(contributor_root).set_text(0, "  Matthew Paul (matthewpaul-us)")
@@ -57,6 +58,7 @@ func _ready() -> void:
 	donors.create_item(donors_root).set_text(0, "  Guillaume Gautier")
 	donors.create_item(donors_root).set_text(0, "  Isambard")
 	donors.create_item(donors_root).set_text(0, "  Hugo Locurcio")
+	donors.create_item(donors_root).set_text(0, "  MysteryStudio")
 
 
 func _on_AboutDialog_about_to_show() -> void:
