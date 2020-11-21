@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-11-01 14:39\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,8 +186,8 @@ msgstr "Opzioni Importazione"
 msgid "Import as:"
 msgstr "Importa come:"
 
-msgid "Recent projects:"
-msgstr "Progetti recenti:"
+msgid "Recent projects"
+msgstr "Progetti recenti"
 
 msgid "New tab"
 msgstr "Nuova scheda"
@@ -365,6 +365,9 @@ msgstr "Avvio"
 msgid "Language"
 msgstr "Lingua"
 
+msgid "Interface"
+msgstr "Interfaccia"
+
 msgid "Themes"
 msgstr "Temi"
 
@@ -409,6 +412,9 @@ msgstr "Colore della guida:"
 
 msgid "System Language"
 msgstr "Lingua di sistema"
+
+msgid "Display Scale"
+msgstr "Scala Schermo"
 
 msgid "Dark"
 msgstr "Scuro"
@@ -1499,4 +1505,13 @@ msgstr "Sposta il riquadro selezionato a destra."
 
 msgid "Frame duration"
 msgstr "Durata del frame"
+
+msgid "Tiled In Both Axis"
+msgstr "Piastrellato In Entrambi Gli Assi"
+
+msgid "Tiled In X Axis"
+msgstr "Piastrellato Nell'Asse X"
+
+msgid "Tiled In Y Axis"
+msgstr "Piastrellato Nell'Asse Y"
 

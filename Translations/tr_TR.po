@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -186,7 +186,7 @@ msgstr "İçeri Aktarma Ayarları"
 msgid "Import as:"
 msgstr "İçe farklı aktar:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -365,6 +365,9 @@ msgstr "Başlamak"
 msgid "Language"
 msgstr "Dil"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temalar"
 
@@ -409,6 +412,9 @@ msgstr "Kılavuz çizgileri rengi:"
 
 msgid "System Language"
 msgstr "Sistem Dili"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Koyu"
@@ -1477,5 +1483,14 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

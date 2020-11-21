@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-17 02:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -186,8 +186,8 @@ msgstr "불러오기 옵션"
 msgid "Import as:"
 msgstr "다음으로 가져오기:"
 
-msgid "Recent projects:"
-msgstr ""
+msgid "Recent projects"
+msgstr "최근 프로잭트"
 
 msgid "New tab"
 msgstr "새 창"
@@ -365,6 +365,9 @@ msgstr "시작"
 msgid "Language"
 msgstr "언어"
 
+msgid "Interface"
+msgstr "인터페이스"
+
 msgid "Themes"
 msgstr "테마"
 
@@ -409,6 +412,9 @@ msgstr "안내선 색:"
 
 msgid "System Language"
 msgstr "시스템 언어"
+
+msgid "Display Scale"
+msgstr "디스플레이 크기"
 
 msgid "Dark"
 msgstr "다크"
@@ -480,13 +486,13 @@ msgid "Angle:"
 msgstr "각도:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "색조:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "채도:"
 
 msgid "Value:"
-msgstr ""
+msgstr "명도:"
 
 msgid "Apply"
 msgstr "적용"
@@ -932,10 +938,10 @@ msgid "Offset"
 msgstr "오프셋"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "간단한 셰이딩"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "색조 변화"
 
 msgid "Lighten"
 msgstr "밝게"
@@ -1113,7 +1119,7 @@ msgid "Unlink Cel"
 msgstr "셀 연결 해제"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "프레임 속성"
 
 msgid "Frame properties"
 msgstr "프레임 속성"
@@ -1146,7 +1152,7 @@ msgid "Opacity:"
 msgstr "투명도:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "타일 모드 불투명도:"
 
 msgid "Toggle layer's visibility"
 msgstr "레이어 표시 토글"
@@ -1427,7 +1433,7 @@ msgid "Cannot find last project file."
 msgstr "최근 프로젝트 파일을 찾을 수 없습니다."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "프로젝트 파일을 찾을 수 없읍니다."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "당신은 아직 Pixelorama에서 프로젝트을 열거나 저장한적이 없습니다!"
@@ -1499,4 +1505,13 @@ msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
 
 msgid "Frame duration"
 msgstr "프레임 기간"
+
+msgid "Tiled In Both Axis"
+msgstr "양 축으로 타일을 두르기"
+
+msgid "Tiled In X Axis"
+msgstr "X 축으로 타일을 두르기"
+
+msgid "Tiled In Y Axis"
+msgstr "Y 축으로 타일을 두르기"
 

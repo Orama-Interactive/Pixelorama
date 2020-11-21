@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-11-02 09:03\n"
+"PO-Revision-Date: 2020-11-14 07:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -186,8 +186,8 @@ msgstr "导入选项"
 msgid "Import as:"
 msgstr "导入为："
 
-msgid "Recent projects:"
-msgstr "最近项目："
+msgid "Recent projects"
+msgstr "最近项目"
 
 msgid "New tab"
 msgstr "新建选项卡"
@@ -365,6 +365,9 @@ msgstr "启动"
 msgid "Language"
 msgstr "语言"
 
+msgid "Interface"
+msgstr "界面"
+
 msgid "Themes"
 msgstr "主题"
 
@@ -409,6 +412,9 @@ msgstr "辅助线颜色:"
 
 msgid "System Language"
 msgstr "系统语言"
+
+msgid "Display Scale"
+msgstr "显示缩放"
 
 msgid "Dark"
 msgstr "深色"
@@ -1498,4 +1504,13 @@ msgstr "移动所选帧到右侧。"
 
 msgid "Frame duration"
 msgstr "帧持续时间"
+
+msgid "Tiled In Both Axis"
+msgstr "在两个轴上平移"
+
+msgid "Tiled In X Axis"
+msgstr "在 X 轴上平移"
+
+msgid "Tiled In Y Axis"
+msgstr "在 Y 轴上平移"
 

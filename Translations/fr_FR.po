@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-11-02 13:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,8 +186,8 @@ msgstr "Options d'import"
 msgid "Import as:"
 msgstr "Importer en tant que :"
 
-msgid "Recent projects:"
-msgstr "Projets récents :"
+msgid "Recent projects"
+msgstr "Projets récents"
 
 msgid "New tab"
 msgstr "Nouvel onglet"
@@ -365,6 +365,9 @@ msgstr "Démarrage"
 msgid "Language"
 msgstr "Langue"
 
+msgid "Interface"
+msgstr "Interface"
+
 msgid "Themes"
 msgstr "Thèmes"
 
@@ -409,6 +412,9 @@ msgstr "Couleur du guide:"
 
 msgid "System Language"
 msgstr "Langue système"
+
+msgid "Display Scale"
+msgstr "Échelle d'affichage"
 
 msgid "Dark"
 msgstr "Sombre"
@@ -1499,4 +1505,13 @@ msgstr "Déplacer la frame sélectionnée vers la droite."
 
 msgid "Frame duration"
 msgstr "Durée de la frame"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

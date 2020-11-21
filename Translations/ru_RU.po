@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,8 +186,8 @@ msgstr "Настройки импорта"
 msgid "Import as:"
 msgstr "Импортировать как:"
 
-msgid "Recent projects:"
-msgstr "Недавние проекты:"
+msgid "Recent projects"
+msgstr "Недавние проекты"
 
 msgid "New tab"
 msgstr "Новая вкладка"
@@ -365,6 +365,9 @@ msgstr ""
 msgid "Language"
 msgstr "Язык"
 
+msgid "Interface"
+msgstr "Интерфейс"
+
 msgid "Themes"
 msgstr "Темы оформления"
 
@@ -409,6 +412,9 @@ msgstr "Цвет направляющих:"
 
 msgid "System Language"
 msgstr "Системный язык"
+
+msgid "Display Scale"
+msgstr "Масштаб экрана"
 
 msgid "Dark"
 msgstr "Тёмная"
@@ -1497,4 +1503,13 @@ msgstr "Переместить выделенный кадр вправо."
 
 msgid "Frame duration"
 msgstr "Длительность кадра"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

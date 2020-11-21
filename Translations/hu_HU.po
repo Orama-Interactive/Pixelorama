@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -186,8 +186,8 @@ msgstr "Importálás beállításai"
 msgid "Import as:"
 msgstr "Importálás másként:"
 
-msgid "Recent projects:"
-msgstr "Utoljára megnyitott projektek:"
+msgid "Recent projects"
+msgstr ""
 
 msgid "New tab"
 msgstr "Új lap"
@@ -365,6 +365,9 @@ msgstr "Indítás"
 msgid "Language"
 msgstr "Nyelv"
 
+msgid "Interface"
+msgstr "Felhasználói felület"
+
 msgid "Themes"
 msgstr "Témák"
 
@@ -409,6 +412,9 @@ msgstr "Segítő szín:"
 
 msgid "System Language"
 msgstr "Rendszer nyelv"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Sötét"
@@ -1499,4 +1505,13 @@ msgstr "Mozgassa a kijelölt keretet jobbra."
 
 msgid "Frame duration"
 msgstr "Képkocka időtartalma"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

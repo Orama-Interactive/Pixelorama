@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-13 18:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -186,7 +186,7 @@ msgstr "匯入選項"
 msgid "Import as:"
 msgstr "匯入為："
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -364,6 +364,9 @@ msgstr "啟動"
 msgid "Language"
 msgstr "語言"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "主題"
 
@@ -408,6 +411,9 @@ msgstr "輔助線顏色："
 
 msgid "System Language"
 msgstr "系統語言"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "暗色"
@@ -1497,4 +1503,13 @@ msgstr "移動所選影格到右邊。"
 
 msgid "Frame duration"
 msgstr "影格持續時間"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

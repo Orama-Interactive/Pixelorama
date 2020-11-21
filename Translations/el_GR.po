@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-11-02 18:03\n"
+"PO-Revision-Date: 2020-11-14 13:49\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -186,8 +186,8 @@ msgstr "Επιλογές Εισαγωγής"
 msgid "Import as:"
 msgstr "Εισαγωγή ως:"
 
-msgid "Recent projects:"
-msgstr "Πρόσφατα έργα:"
+msgid "Recent projects"
+msgstr "Πρόσφατα έργα"
 
 msgid "New tab"
 msgstr "Νέα καρτέλα"
@@ -365,6 +365,9 @@ msgstr "Εκκίνηση"
 msgid "Language"
 msgstr "Γλώσσα"
 
+msgid "Interface"
+msgstr "Περιβάλλον"
+
 msgid "Themes"
 msgstr "Θέματα"
 
@@ -409,6 +412,9 @@ msgstr "Χρώμα οδηγών:"
 
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
+
+msgid "Display Scale"
+msgstr "Κλίμακα Εμφάνισης"
 
 msgid "Dark"
 msgstr "Σκούρο"
@@ -1499,4 +1505,13 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 
 msgid "Frame duration"
 msgstr "Διάρκεια καρέ"
+
+msgid "Tiled In Both Axis"
+msgstr "Επανάληψη και στους 2 άξονες"
+
+msgid "Tiled In X Axis"
+msgstr "Επανάληψη στον Άξονα Χ"
+
+msgid "Tiled In Y Axis"
+msgstr "Επανάληψη στον Άξονα Υ"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,7 +186,7 @@ msgstr "Nastavení importu"
 msgid "Import as:"
 msgstr "Importovat jako:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -365,6 +365,9 @@ msgstr "Po spuštění"
 msgid "Language"
 msgstr "Jazyk"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Motivy"
 
@@ -409,6 +412,9 @@ msgstr "Barva vodítka:"
 
 msgid "System Language"
 msgstr "Systémový jazyk"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Tmavý"
@@ -1498,5 +1504,14 @@ msgid "Move the selected frame to the right."
 msgstr "Přesunout vybraný snímek doprava."
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-11-02 16:16\n"
+"PO-Revision-Date: 2020-11-14 08:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,8 +186,8 @@ msgstr "Importoptionen"
 msgid "Import as:"
 msgstr "Importiere als:"
 
-msgid "Recent projects:"
-msgstr "Letzte Projekte:"
+msgid "Recent projects"
+msgstr "Letzte Projekte"
 
 msgid "New tab"
 msgstr "Neuer Tab"
@@ -364,6 +364,9 @@ msgstr "Start"
 msgid "Language"
 msgstr "Sprache"
 
+msgid "Interface"
+msgstr "Benutzeroberfläche"
+
 msgid "Themes"
 msgstr "Designs"
 
@@ -408,6 +411,9 @@ msgstr "Guidefarbe"
 
 msgid "System Language"
 msgstr "Systemsprache"
+
+msgid "Display Scale"
+msgstr "Bildschirmgröße"
 
 msgid "Dark"
 msgstr "Dunkel"
@@ -1498,4 +1504,13 @@ msgstr "Verschiebe den ausgewählten Frame nach rechts."
 
 msgid "Frame duration"
 msgstr "Frame-Dauer"
+
+msgid "Tiled In Both Axis"
+msgstr "In beiden Achsen gekachelt"
+
+msgid "Tiled In X Axis"
+msgstr "In X-Achse gekachelt"
+
+msgid "Tiled In Y Axis"
+msgstr "Tiled in Y-Achse"
 

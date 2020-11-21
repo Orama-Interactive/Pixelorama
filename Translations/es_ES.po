@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,7 +186,7 @@ msgstr "Opciones de importación"
 msgid "Import as:"
 msgstr "Importar como:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -365,6 +365,9 @@ msgstr "Inicio"
 msgid "Language"
 msgstr "Idioma"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temas"
 
@@ -409,6 +412,9 @@ msgstr "Color de guía:"
 
 msgid "System Language"
 msgstr "Idioma del sistema"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Oscuro"
@@ -1498,5 +1504,14 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

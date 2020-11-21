@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-01 18:50\n"
+"PO-Revision-Date: 2020-11-14 14:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Salvează"
 
 msgid "Please Confirm..."
-msgstr "Te rugăm să confirmi..."
+msgstr "Confirmă alegerea..."
 
 msgid "File Name:"
 msgstr "Numele fișierului:"
@@ -151,7 +151,7 @@ msgid "Preferences"
 msgstr "Preferințe"
 
 msgid "Tile Mode"
-msgstr "Mod Mozaic"
+msgstr "Mod mozaic"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"
@@ -166,7 +166,7 @@ msgid "Show Animation Timeline"
 msgstr "Afișare cronologia animației"
 
 msgid "Zen Mode"
-msgstr "Mod Zen"
+msgstr "Mod zen"
 
 msgid "Fullscreen Mode"
 msgstr "Mod ecran complet"
@@ -186,8 +186,8 @@ msgstr "Opțiuni de importare"
 msgid "Import as:"
 msgstr "Importare ca:"
 
-msgid "Recent projects:"
-msgstr "Proiecte recente:"
+msgid "Recent projects"
+msgstr "Proiecte recente"
 
 msgid "New tab"
 msgstr "Filă nouă"
@@ -297,10 +297,10 @@ msgid "Open a Directory"
 msgstr "Deschide un director"
 
 msgid "All frames as multiple files"
-msgstr "Toate cadrele ca fișiere multiple"
+msgstr "Toate cadrele sub formă de fișiere multiple"
 
 msgid "All frames as a single file animation"
-msgstr "Toate cadrele ca o singură animație de fișier"
+msgstr "Toate cadrele sub formă de animație într-un singur fișier"
 
 msgid "Background:"
 msgstr "Fundal:"
@@ -365,6 +365,9 @@ msgstr "Pornire"
 msgid "Language"
 msgstr "Limbă"
 
+msgid "Interface"
+msgstr "Interfață"
+
 msgid "Themes"
 msgstr "Teme"
 
@@ -396,7 +399,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilitatea de apăsare a tabletei:"
 
 msgid "None"
-msgstr "Niciuna"
+msgstr "Niciunul"
 
 msgid "Affect Brush's Alpha"
 msgstr "Afectează valoarea alfa a pensulei"
@@ -409,6 +412,9 @@ msgstr "Culoarea ghidajului:"
 
 msgid "System Language"
 msgstr "Limba sistemului"
+
+msgid "Display Scale"
+msgstr "Scala de afișare"
 
 msgid "Dark"
 msgstr "Întunecat"
@@ -432,7 +438,7 @@ msgid "Only affect selection"
 msgstr "Afectează doar selecția"
 
 msgid "Current cel"
-msgstr "Cel actual"
+msgstr "Celul actual"
 
 msgid "Current frame"
 msgstr "Cadrul actual"
@@ -715,7 +721,7 @@ msgid "Pencil\n\n"
 msgstr "Creion\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului\n\n"
-"Ține apăsat pe %s pentru a trasa o linie"
+"Ține apăsată tasta %s pentru a trasa o linie"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
@@ -724,7 +730,7 @@ msgid "Eraser\n\n"
 msgstr "Radieră\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului\n\n"
-"Ține apăsat pe %s pentru a trage o line"
+"Ține apăsată tasta %s pentru a trasa o linie"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
@@ -1146,7 +1152,7 @@ msgid "Opacity:"
 msgstr "Opacitate:"
 
 msgid "Tile mode opacity:"
-msgstr "Opacitatea modului Mozaic:"
+msgstr "Opacitatea modului mozaic:"
 
 msgid "Toggle layer's visibility"
 msgstr "Comută vizibilitatea stratului"
@@ -1298,7 +1304,7 @@ msgid "Use current left & right colors"
 msgstr "Folosește culorile din stânga și dreapta"
 
 msgid "Create a new empty palette?"
-msgstr "Creare paletă nouă goală?"
+msgstr "Creezi o paletă nouă goală?"
 
 msgid "Error"
 msgstr "Eroare"
@@ -1313,7 +1319,7 @@ msgid "Edit Palette"
 msgstr "Editare paletă"
 
 msgid "Create colors with alpha component"
-msgstr "Creează culori cu componenta alfa"
+msgstr "Creează culori cu componentă alfa"
 
 msgid "Get colors only from selection"
 msgstr "Obține culori doar din selecție"
@@ -1477,7 +1483,7 @@ msgid "Remove currently selected palette"
 msgstr "Elimină paleta selectată în prezent"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Sigur vrei să elimini această paletă (aceasta nu va putea fi recuperată)?"
+msgstr "Sigur vrei să elimini această paletă (nu va putea fi recuperată)?"
 
 msgid "You can't remove more palettes!"
 msgstr "Nu poți elimina mai multe palete!"
@@ -1492,11 +1498,20 @@ msgid "and"
 msgstr "și"
 
 msgid "Move the selected frame to the left."
-msgstr "Mută cadrul selectat la stânga."
+msgstr "Deplasează cadrul selectat la stânga."
 
 msgid "Move the selected frame to the right."
-msgstr "Mută cadrul selectat la dreapta."
+msgstr "Deplasează cadrul selectat la dreapta."
 
 msgid "Frame duration"
 msgstr "Durata cadrului"
+
+msgid "Tiled In Both Axis"
+msgstr "Mozaicat pe ambele axe"
+
+msgid "Tiled In X Axis"
+msgstr "Mozaicat pe axa X"
+
+msgid "Tiled In Y Axis"
+msgstr "Mozaicat pe axa Y"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-11-01 14:09\n"
+"PO-Revision-Date: 2020-11-13 18:28\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Lūdzu, apstiprini..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Faila nosaukums:"
 
 msgid "Image Size"
 msgstr "Attēla izmērs"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Augstums:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centrs"
 
 msgid "File"
 msgstr "Fails"
@@ -67,7 +67,7 @@ msgid "Help"
 msgstr "Palīdzība"
 
 msgid "New"
-msgstr ""
+msgstr "Jauns"
 
 msgid "New..."
 msgstr "Jauns..."
@@ -112,16 +112,16 @@ msgid "Redo"
 msgstr "Pārstrādāt"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopēt"
 
 msgid "Cut"
-msgstr ""
+msgstr "Izgriezt"
 
 msgid "Paste"
-msgstr ""
+msgstr "Iekopēt"
 
 msgid "Delete"
-msgstr ""
+msgstr "Izdzēst"
 
 msgid "Scale Image"
 msgstr "Mainīt attēla izmēru"
@@ -139,7 +139,7 @@ msgid "Clear Selection"
 msgstr "Notīrīt atlasi"
 
 msgid "Flip"
-msgstr ""
+msgstr "Apmest"
 
 msgid "Flip Horizontal"
 msgstr "Apmest horizontāli"
@@ -184,13 +184,13 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importēt kā:"
 
-msgid "Recent projects:"
-msgstr ""
+msgid "Recent projects"
+msgstr "Pēdējie Projekti"
 
 msgid "New tab"
-msgstr ""
+msgstr "Jauna cilne"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
@@ -285,7 +285,7 @@ msgid "Resize:"
 msgstr "Mainīt izmēru:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Atcelt eksportēšanu"
 
 msgid "Alert!"
 msgstr ""
@@ -365,6 +365,9 @@ msgstr ""
 msgid "Language"
 msgstr "Valoda"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Tēmas"
 
@@ -409,6 +412,9 @@ msgstr "Vadlīnijas krāsa:"
 
 msgid "System Language"
 msgstr "Systēmas valoda"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Tumš"
@@ -1493,5 +1499,14 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

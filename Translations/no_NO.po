@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,7 +186,7 @@ msgstr "Importeringsvalg"
 msgid "Import as:"
 msgstr "Importér som:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -364,6 +364,9 @@ msgstr "Oppstart"
 msgid "Language"
 msgstr "Språk"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temaer"
 
@@ -408,6 +411,9 @@ msgstr "Guide farge:"
 
 msgid "System Language"
 msgstr "Systemspråk"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Mørk"
@@ -1495,5 +1501,14 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

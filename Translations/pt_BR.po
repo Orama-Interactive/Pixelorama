@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-11-01 14:19\n"
+"PO-Revision-Date: 2020-11-13 18:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,8 +186,8 @@ msgstr "Importar Opções"
 msgid "Import as:"
 msgstr "Importar como:"
 
-msgid "Recent projects:"
-msgstr ""
+msgid "Recent projects"
+msgstr "Projetos recentes"
 
 msgid "New tab"
 msgstr "Nova Aba"
@@ -365,6 +365,9 @@ msgstr "Iniciar"
 msgid "Language"
 msgstr "Linguagem"
 
+msgid "Interface"
+msgstr "Interface"
+
 msgid "Themes"
 msgstr "Temas"
 
@@ -409,6 +412,9 @@ msgstr "Cor da guia:"
 
 msgid "System Language"
 msgstr "Linguagem do Sistema"
+
+msgid "Display Scale"
+msgstr "Mostrar escala"
 
 msgid "Dark"
 msgstr "Escuro"
@@ -480,13 +486,13 @@ msgid "Angle:"
 msgstr "Ângulo:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Matiz:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturação:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Valor:"
 
 msgid "Apply"
 msgstr "Aplique"
@@ -1113,7 +1119,7 @@ msgid "Unlink Cel"
 msgstr "Desvincular célula"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Propriedades do Quadro"
 
 msgid "Frame properties"
 msgstr "Propriedades do quadro"
@@ -1259,7 +1265,7 @@ msgid "Undo: Change frame duration"
 msgstr ""
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Refazer: Mudar Ordem dos Frames"
 
 msgid "Move Guide"
 msgstr "Mover Guia"
@@ -1427,7 +1433,7 @@ msgid "Cannot find last project file."
 msgstr "Não foi possível localizar arquivo do último projeto."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Não foi possível localizar arquivo do último projeto."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Você ainda não salvou nem abriu nenhum projeto no Pixelorama!"
@@ -1492,11 +1498,20 @@ msgid "and"
 msgstr "e"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Mova o frame selecionado para a esquerda."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Mova o frame selecionado para a direita."
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

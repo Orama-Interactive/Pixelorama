@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-11-01 14:10\n"
+"PO-Revision-Date: 2020-11-13 18:29\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -186,7 +186,7 @@ msgstr "خيارات الاستيراد"
 msgid "Import as:"
 msgstr "استيراد باسم:"
 
-msgid "Recent projects:"
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -364,6 +364,9 @@ msgstr ""
 msgid "Language"
 msgstr "اللغة"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr ""
 
@@ -408,6 +411,9 @@ msgstr "دليل الألوان:"
 
 msgid "System Language"
 msgstr "لغة النظام"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "غامق"
@@ -1468,5 +1474,14 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

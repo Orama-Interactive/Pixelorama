@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-11-03 13:02\n"
+"PO-Revision-Date: 2020-11-14 21:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -186,8 +186,8 @@ msgstr "Opcje importowania"
 msgid "Import as:"
 msgstr "Importuj jako:"
 
-msgid "Recent projects:"
-msgstr "Ostatnie projekty:"
+msgid "Recent projects"
+msgstr "Ostatnie projekty"
 
 msgid "New tab"
 msgstr "Nowa karta"
@@ -364,6 +364,9 @@ msgstr "Przy uruchomieniu"
 msgid "Language"
 msgstr "Język"
 
+msgid "Interface"
+msgstr "Interfejs"
+
 msgid "Themes"
 msgstr "Motywy"
 
@@ -408,6 +411,9 @@ msgstr "Kolor prowadnicy:"
 
 msgid "System Language"
 msgstr "Język systemowy"
+
+msgid "Display Scale"
+msgstr "Pokaż skalę"
 
 msgid "Dark"
 msgstr "Ciemny"
@@ -1498,4 +1504,13 @@ msgstr "Przenieś zaznaczoną klatkę w prawo."
 
 msgid "Frame duration"
 msgstr "Czas trwania klatki"
+
+msgid "Tiled In Both Axis"
+msgstr "Kafelkowanie na obu osiach"
+
+msgid "Tiled In X Axis"
+msgstr "Kafelkowanie na osi X"
+
+msgid "Tiled In Y Axis"
+msgstr "Kafelkowanie na osi Y"
 

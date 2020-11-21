@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-11-01 14:39\n"
+"PO-Revision-Date: 2020-11-13 18:28\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -186,8 +186,8 @@ msgstr "Piliha Impor"
 msgid "Import as:"
 msgstr "Impor Sebagai:"
 
-msgid "Recent projects:"
-msgstr "Proyek terbaru:"
+msgid "Recent projects"
+msgstr ""
 
 msgid "New tab"
 msgstr "Tab baru"
@@ -365,6 +365,9 @@ msgstr "Memulai"
 msgid "Language"
 msgstr "Bahasa"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Tema"
 
@@ -409,6 +412,9 @@ msgstr "Warna Panduan:"
 
 msgid "System Language"
 msgstr "Bahasa Sistem"
+
+msgid "Display Scale"
+msgstr ""
 
 msgid "Dark"
 msgstr "Gelap"
@@ -1497,4 +1503,13 @@ msgstr "Pindahkan frame terpilih ke kanan."
 
 msgid "Frame duration"
 msgstr "Durasi gambar"
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 
