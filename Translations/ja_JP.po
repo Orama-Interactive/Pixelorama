@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-18 06:12\n"
+"PO-Revision-Date: 2020-11-22 12:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -263,7 +263,7 @@ msgid "All Frames"
 msgstr "すべてのフレーム"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
 msgstr "アニメーション"
