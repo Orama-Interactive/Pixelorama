@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -152,6 +152,9 @@ msgstr "Nastavení"
 
 msgid "Tile Mode"
 msgstr "Režim dlaždic"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Zobrazit mřížku"
