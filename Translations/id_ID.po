@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2020-11-13 18:28\n"
+"PO-Revision-Date: 2020-11-23 16:59\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -152,6 +152,9 @@ msgstr "Preferensi"
 
 msgid "Tile Mode"
 msgstr "Mode Gambar Berulang"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Tampilkan garis"
