@@ -4,7 +4,7 @@ extends Node2D
 
 var location := Vector2.ZERO
 var fill_color := Color(0, 0, 0, 0)
-var current_pixel := Vector2.ZERO # pretty much same as mouse_pos, but can be accessed externally
+var current_pixel := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
@@ -28,6 +28,12 @@ func _draw() -> void:
 
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
 
+	var _position := position
+	var _scale := scale
+	if Global.mirror_view:
+		_position.x = _position.x + Global.current_project.size.x
+		_scale.x = -1
+	draw_set_transform(_position, rotation, _scale)
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
@@ -37,6 +43,7 @@ func _draw() -> void:
 	if Global.onion_skinning:
 		onion_skinning()
 	tile_mode.update()
+	draw_set_transform(position, rotation, scale)
 
 
 func _input(event : InputEvent) -> void:

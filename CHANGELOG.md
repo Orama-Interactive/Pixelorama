@@ -17,6 +17,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - Added a "Recent Projects" option in the File menu, to contain the most recently opened projects. ([#370](https://github.com/Orama-Interactive/Pixelorama/pull/370))
 - HiDPI support - Pixelorama's UI can now be scaled in the Preferences. ([#140](https://github.com/Orama-Interactive/Pixelorama/issues/140))
 - More options have been added to Tile mode, Tile only in X Axis, Y Axis or both Axis. ([#378](https://github.com/Orama-Interactive/Pixelorama/pull/378))
+- Added a "Mirror View" option in the View menu, which is used to flip the canvas horizontally and non-destructively. ([#227](https://github.com/Orama-Interactive/Pixelorama/issues/227))
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
