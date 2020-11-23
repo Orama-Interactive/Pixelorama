@@ -75,6 +75,7 @@ func setup_edit_menu() -> void:
 func setup_view_menu() -> void:
 	var view_menu_items := {
 		"Tile Mode" : 0,
+		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
@@ -91,9 +92,9 @@ func setup_view_menu() -> void:
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
-	view_menu.set_item_checked(2, true) # Show Rulers
-	view_menu.set_item_checked(3, true) # Show Guides
-	view_menu.set_item_checked(4, true) # Show Animation Timeline
+	view_menu.set_item_checked(3, true) # Show Rulers
+	view_menu.set_item_checked(4, true) # Show Guides
+	view_menu.set_item_checked(5, true) # Show Animation Timeline
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 
@@ -253,17 +254,19 @@ func edit_menu_id_pressed(id : int) -> void:
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
-		1: # Show grid
+		1: # Mirror View
+			toggle_mirror_view()
+		2: # Show grid
 			toggle_show_grid()
-		2: # Show rulers
+		3: # Show rulers
 			toggle_show_rulers()
-		3: # Show guides
+		4: # Show guides
 			toggle_show_guides()
-		4: # Show animation timeline
+		5: # Show animation timeline
 			toggle_show_anim_timeline()
-		5: # Zen mode
+		6: # Zen mode
 			toggle_zen_mode()
-		6: # Fullscreen mode
+		7: # Fullscreen mode
 			toggle_fullscreen()
 	Global.canvas.update()
 
@@ -280,22 +283,27 @@ func tile_mode_submenu_id_pressed(id : int):
 	Global.canvas.grid.set_position(Global.transparent_checker.get_position())
 
 
+func toggle_mirror_view() -> void:
+	Global.mirror_view = !Global.mirror_view
+	view_menu.set_item_checked(1, Global.mirror_view)
+
+
 func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
-	view_menu.set_item_checked(1, Global.draw_grid)
+	view_menu.set_item_checked(2, Global.draw_grid)
 	Global.canvas.grid.update()
 
 
 func toggle_show_rulers() -> void:
 	Global.show_rulers = !Global.show_rulers
-	view_menu.set_item_checked(2, Global.show_rulers)
+	view_menu.set_item_checked(3, Global.show_rulers)
 	Global.horizontal_ruler.visible = Global.show_rulers
 	Global.vertical_ruler.visible = Global.show_rulers
 
 
 func toggle_show_guides() -> void:
 	Global.show_guides = !Global.show_guides
-	view_menu.set_item_checked(3, Global.show_guides)
+	view_menu.set_item_checked(4, Global.show_guides)
 	for guide in Global.canvas.get_children():
 		if guide is Guide and guide in Global.current_project.guides:
 			guide.visible = Global.show_guides
@@ -310,7 +318,7 @@ func toggle_show_anim_timeline() -> void:
 	if zen_mode:
 		return
 	Global.show_animation_timeline = !Global.show_animation_timeline
-	view_menu.set_item_checked(4, Global.show_animation_timeline)
+	view_menu.set_item_checked(5, Global.show_animation_timeline)
 	Global.animation_timeline.visible = Global.show_animation_timeline
 
 
@@ -321,12 +329,12 @@ func toggle_zen_mode() -> void:
 	Global.control.get_node("MenuAndUI/UI/RightPanel").visible = zen_mode
 	Global.control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
-	view_menu.set_item_checked(5, zen_mode)
+	view_menu.set_item_checked(6, zen_mode)
 
 
 func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
-	view_menu.set_item_checked(6, OS.window_fullscreen)
+	view_menu.set_item_checked(7, OS.window_fullscreen)
 
 
 func image_menu_id_pressed(id : int) -> void:

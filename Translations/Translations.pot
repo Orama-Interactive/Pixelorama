@@ -142,6 +142,9 @@ msgstr ""
 msgid "Tile Mode"
 msgstr ""
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr ""
 
