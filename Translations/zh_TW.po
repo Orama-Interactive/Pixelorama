@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-11-13 18:28\n"
+"PO-Revision-Date: 2020-11-23 16:59\n"
 
 msgid "OK"
 msgstr "確定"
@@ -152,6 +152,9 @@ msgstr "偏好設定"
 
 msgid "Tile Mode"
 msgstr "拼圖模式"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "顯示格線"
