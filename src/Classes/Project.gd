@@ -5,6 +5,7 @@ class_name Project extends Reference
 var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
+var tile_mode : int = Global.Tile_Mode.NONE
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
