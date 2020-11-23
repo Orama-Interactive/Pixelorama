@@ -334,7 +334,7 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 
 func _set_pixel(position : Vector2) -> void:
 	var project : Project = Global.current_project
-  if Global.mirror_view:
+	if Global.mirror_view:
 		position.x = project.size.x - position.x - 1
 	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
