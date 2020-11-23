@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -151,6 +151,9 @@ msgid "Preferences"
 msgstr ""
 
 msgid "Tile Mode"
+msgstr ""
+
+msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
