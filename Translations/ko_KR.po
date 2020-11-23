@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-11-17 02:39\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "예"
@@ -152,6 +152,9 @@ msgstr "환경설정"
 
 msgid "Tile Mode"
 msgstr "타일 모드"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "격자 표시"
