@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -152,6 +152,9 @@ msgstr "Beállítások"
 
 msgid "Tile Mode"
 msgstr "Csempe mód"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Rács megjelenítése"
