@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-11-23 16:58\n"
+"PO-Revision-Date: 2020-11-24 08:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "Tilemodus"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Spiegel-Ansicht"
 
 msgid "Show Grid"
 msgstr "Zeige Raster"
