@@ -260,7 +260,7 @@ func draw_tool_brush(position : Vector2) -> void:
 	if Global.mirror_view:
 		position.x = Global.current_project.size.x - position.x
 
-	if Global.tile_mode and _get_tile_mode_rect().has_point(position):
+	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(position):
 		position = position.posmodv(Global.current_project.size)
 
 	var size := _brush_image.get_size()
