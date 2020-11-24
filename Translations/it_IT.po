@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-11-23 16:58\n"
+"PO-Revision-Date: 2020-11-24 01:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "Modalità Tile"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Vista a Specchio"
 
 msgid "Show Grid"
 msgstr "Mostra la griglia"
