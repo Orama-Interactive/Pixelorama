@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-11-23 16:59\n"
+"PO-Revision-Date: 2020-11-24 00:45\n"
 
 msgid "OK"
 msgstr "确定"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "平铺模式"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "镜像视图"
 
 msgid "Show Grid"
 msgstr "显示网格"
