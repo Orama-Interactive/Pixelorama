@@ -82,7 +82,7 @@ func _get_draw_rect() -> Rect2:
 
 
 func _get_tile_mode_rect() -> Rect2:
-	match Global.tile_mode:
+	match Global.current_project.tile_mode:
 		Global.Tile_Mode.XAXIS:
 			return Rect2(Vector2(-Global.current_project.size.x,0), Vector2(Global.current_project.size.x * 3,Global.current_project.size.y))
 		Global.Tile_Mode.YAXIS:

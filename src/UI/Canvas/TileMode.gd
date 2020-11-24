@@ -20,7 +20,7 @@ func _draw() -> void:
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity - tilemode_opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
-			if Global.tile_mode:
+			if Global.current_project.tile_mode:
 				for pos in positions:
 					draw_texture(current_cels[i].image_texture, pos, modulate_color)
 
@@ -28,7 +28,7 @@ func _draw() -> void:
 
 
 func get_tile_positions(size):
-	match Global.tile_mode:
+	match Global.current_project.tile_mode:
 		1:
 			return [
 				Vector2(location.x, location.y + size.y), # Down

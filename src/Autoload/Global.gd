@@ -74,7 +74,6 @@ var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 
 # View menu options
-var tile_mode : int = Tile_Mode.NONE
 var mirror_view := false
 var draw_grid := false
 var show_rulers := true
