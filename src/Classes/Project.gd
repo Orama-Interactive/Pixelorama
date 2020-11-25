@@ -323,8 +323,8 @@ func deserialize(dict : Dictionary) -> void:
 				guide.add_point(Vector2(g.pos, -99999))
 				guide.add_point(Vector2(g.pos, 99999))
 			guide.has_focus = false
+			guide.project = self
 			Global.canvas.add_child(guide)
-			guides.append(guide)
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]

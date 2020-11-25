@@ -32,7 +32,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - Fixed issue where the user could grab and could not let go of the focus of guides even when they were invisible.
 - Fixed issues where fully transparent color could not be picked. One of these cases was [#364](https://github.com/Orama-Interactive/Pixelorama/issues/364).
 - Fixed "Export" option in the File menu not working properly and not remembering the directory path and file name when switching between projects (tabs).
-- Fixed crash when loading a pxo older of 0.8.1 and selecting a frame other than the first.
+- When opening a .pxo project which has guides, they will no longer be added to the project at the first tab too.
 - Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
 - Using the lighten/darken on pixels with an alpha value of 0 no longer has an effect on them.
