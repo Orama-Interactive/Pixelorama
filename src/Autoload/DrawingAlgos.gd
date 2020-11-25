@@ -235,9 +235,7 @@ func colorDistance(c1 : Color, c2 : Color) -> float:
 # Image effects
 
 func scale_image(width : int, height : int, interpolation : int) -> void:
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Scale")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	general_do_scale(width, height)
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
@@ -254,10 +252,7 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(f.cels[i].image, "data", f.cels[i].image.data)
 
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	general_undo_scale()
 
 
 func crop_image(image : Image) -> void:
@@ -284,9 +279,7 @@ func crop_image(image : Image) -> void:
 
 	var width := used_rect.size.x
 	var height := used_rect.size.y
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Scale")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	general_do_scale(width, height)
 	for f in Global.current_project.frames:
 		# Loop through all the layers to crop them
 		for j in range(Global.current_project.layers.size() - 1, -1, -1):
@@ -294,16 +287,11 @@ func crop_image(image : Image) -> void:
 			Global.current_project.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
 
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	general_undo_scale()
 
 
 func resize_canvas(width : int, height : int, offset_x : int, offset_y : int) -> void:
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Scale")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	general_do_scale(width, height)
 	for f in Global.current_project.frames:
 		for c in f.cels:
 			var sprite := Image.new()
@@ -312,7 +300,36 @@ func resize_canvas(width : int, height : int, offset_x : int, offset_y : int) ->
 			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
 
+	general_undo_scale()
+
+
+func general_do_scale(width : int, height : int) -> void:
+	var x_ratio = Global.current_project.size.x / width
+	var y_ratio = Global.current_project.size.y / height
+	var new_x_symmetry_point = Global.current_project.x_symmetry_point / x_ratio
+	var new_y_symmetry_point = Global.current_project.y_symmetry_point / y_ratio
+	var new_x_symmetry_axis_points = Global.current_project.x_symmetry_axis.points
+	var new_y_symmetry_axis_points = Global.current_project.y_symmetry_axis.points
+	new_x_symmetry_axis_points[0].y /= y_ratio
+	new_x_symmetry_axis_points[1].y /= y_ratio
+	new_y_symmetry_axis_points[0].x /= x_ratio
+	new_y_symmetry_axis_points[1].x /= x_ratio
+
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Scale")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "x_symmetry_point", new_x_symmetry_point)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "y_symmetry_point", new_y_symmetry_point)
+	Global.current_project.undo_redo.add_do_property(Global.current_project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
+	Global.current_project.undo_redo.add_do_property(Global.current_project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
+
+
+func general_undo_scale() -> void:
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "x_symmetry_point", Global.current_project.x_symmetry_point)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "y_symmetry_point", Global.current_project.y_symmetry_point)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project.x_symmetry_axis, "points", Global.current_project.x_symmetry_axis.points)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project.y_symmetry_axis, "points", Global.current_project.y_symmetry_axis.points)
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.commit_action()
