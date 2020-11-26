@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/size = 10.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
 
 [node name="CelButton" type="Button"]
 margin_top = 18.0
@@ -34,6 +46,7 @@ __meta__ = {
 
 [node name="TransparentChecker" parent="CelTexture" instance=ExtResource( 2 )]
 show_behind_parent = true
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0

@@ -19,11 +19,11 @@ func update_offset(offset : Vector2, scale : Vector2) -> void:
 	material.set_shader_param("scale", scale)
 
 
-func _on_TransparentChecker_resized():
+func _on_TransparentChecker_resized() -> void:
 	material.set_shader_param("rect_size", rect_size)
 
 
-func _init_position(id : int):
+func _init_position(id : int) -> void:
 	match id:
 		0:
 			Global.current_project.tile_mode = Global.Tile_Mode.NONE

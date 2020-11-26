@@ -34,6 +34,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - Fixed "Export" option in the File menu not working properly and not remembering the directory path and file name when switching between projects (tabs).
 - When opening a .pxo project which has guides, they will no longer be added to the project at the first tab too.
 - Symmetry guides now adjust their position when the image is being resized. ([#379](https://github.com/Orama-Interactive/Pixelorama/issues/379))
+- Fixed various issues with the transparent background checker size. ([#377](https://github.com/Orama-Interactive/Pixelorama/issues/377))
 - Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
 - Using the lighten/darken on pixels with an alpha value of 0 no longer has an effect on them.

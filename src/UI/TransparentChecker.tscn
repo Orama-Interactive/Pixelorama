@@ -8,6 +8,11 @@ shader = ExtResource( 1 )
 shader_param/size = 10.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
 
 [node name="TransparentChecker" type="ColorRect"]
 material = SubResource( 1 )

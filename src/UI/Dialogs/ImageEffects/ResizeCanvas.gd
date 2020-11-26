@@ -38,8 +38,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 	if first_time:
 		width_spinbox.value = Global.current_project.size.x
 		height_spinbox.value = Global.current_project.size.y
-	else:
-		update_preview()
+	update_preview()
 
 
 func _on_ResizeCanvas_confirmed() -> void:
