@@ -39,7 +39,8 @@
 [![Pixelorama's UI](https://static.wixstatic.com/media/673cdd_061f5f9602ea4c35b6d4f3c50713d36a~mv2.png)](https://www.youtube.com/watch?v=NLb0TNxZ27E&list=PLVEP1Zz6BUpBiQC0CB6eNBhhLF4tEwBB-&index=10)
 Art by Wishdream - winner of the first Pixelorama splash screen art contest!
 
-Make sure to visit our website for more information! https://www.orama-interactive.com/pixelorama
+Make sure to visit our website for more information! https://www.orama-interactive.com
+
 Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
 
 If you like, consider helping us by sponsoring this project! It would enable us to focus more on Pixelorama, and make more projects in the future!

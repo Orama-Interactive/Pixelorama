@@ -16,16 +16,17 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - You can now change the transparency of the Tile Mode in the Preferences. ([#368](https://github.com/Orama-Interactive/Pixelorama/pull/368))
 - Added a "Recent Projects" option in the File menu, to contain the most recently opened projects. ([#370](https://github.com/Orama-Interactive/Pixelorama/pull/370))
 - HiDPI support - Pixelorama's UI can now be scaled in the Preferences. ([#140](https://github.com/Orama-Interactive/Pixelorama/issues/140))
-- More options have been added to Tile mode, Tile only in X Axis, Y Axis or both Axis. ([#378](https://github.com/Orama-Interactive/Pixelorama/pull/378))
+- More options have been added to Tile mode; Tile only in X Axis, Y Axis or both Axis. ([#378](https://github.com/Orama-Interactive/Pixelorama/pull/378))
 - Added a "Mirror View" option in the View menu, which is used to flip the canvas horizontally and non-destructively. ([#227](https://github.com/Orama-Interactive/Pixelorama/issues/227))
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
 - The default path of the dialogs for opening and saving is now the user's desktop folder.
 - When there are errors in opening and saving files, the errors appear in the form of a popup dialog, instead of a notification or an OS alert.
-- The CJK font (for Chinese & Korean) was changed to DroidSansFallback from NotoSansCJKtc. This results in a much smaller exported `.pck` (over 10MB less)
+- The CJK font (for Chinese & Korean) was changed to DroidSansFallback from NotoSansCJKtc. This results in a much smaller exported `.pck` (over 10MB less!)
 - Onion skinned previous and next frames are now being drawn on top of the current frame. This fixes issues where onion skinning would not work with an opaque background.
 - In onion skinning, you can now set the past and future steps to 0. ([#380](https://github.com/Orama-Interactive/Pixelorama/pull/380))
+- Tile mode is now project-specific. ([#388](https://github.com/Orama-Interactive/Pixelorama/pull/388))
 
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.
@@ -35,9 +36,9 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - When opening a .pxo project which has guides, they will no longer be added to the project at the first tab too.
 - Symmetry guides now adjust their position when the image is being resized. ([#379](https://github.com/Orama-Interactive/Pixelorama/issues/379))
 - Fixed various issues with the transparent background checker size. ([#377](https://github.com/Orama-Interactive/Pixelorama/issues/377))
-- Fixed Chinese and Korean characters not displaying properly in the Splash dialog and the About dialog.
+- Fixed Chinese and Korean characters not being displayed properly in the Splash dialog and the About dialog.
 - Fixed crash when importing an incorrectly formatted GIMP Color Palette file. ([#363](https://github.com/Orama-Interactive/Pixelorama/issues/363))
-- Using the lighten/darken on pixels with an alpha value of 0 no longer has an effect on them.
+- Using the lighten/darken tool on pixels with an alpha value of 0 no longer has an effect on them.
 - Fixed freeze when switching to a project of a larger size and using an image effect, with the affected parts being set to something different that "Current cel".
 <br><br>
 
