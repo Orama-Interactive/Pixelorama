@@ -8,7 +8,8 @@ env:
   GODOT_VERSION: 3.2.3
   GODOT_VERSION_MAC: 3.2.2
   EXPORT_NAME: Pixelorama
-  TAG: v0.8.1
+  TAG: v0.8.2
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
   export-windows:
@@ -58,7 +59,7 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Windows-64bit].zip
           tag: ${{env.TAG}}
           overwrite: true
-      - name: Upload 32-bit Release Asset
+      - name: Upload 32-bit Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -66,6 +67,10 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Windows-32bit].zip
           tag: ${{env.TAG}}
           overwrite: true
+      - name: Upload Release Assets to itch.io 🎮
+        run: |
+          butler push ./build/windows-64bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-64 --userversion ${{env.TAG}}
+          butler push ./build/windows-32bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-32 --userversion ${{env.TAG}}
 
   export-linux:
     name: Linux Export 🐧
@@ -108,7 +113,7 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Linux-64bit].tar.gz
           tag: ${{env.TAG}}
           overwrite: true
-      - name: Upload 32-bit Release Asset
+      - name: Upload 32-bit Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -116,6 +121,10 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Linux-32bit].tar.gz
           tag: ${{env.TAG}}
           overwrite: true
+      - name: Upload Release Assets to itch.io 🎮
+        run: |
+          butler push ./build/linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-64 --userversion ${{env.TAG}}
+          butler push ./build/linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-32 --userversion ${{env.TAG}}
 
   export-mac:
     name: Mac Export 🍎
@@ -167,6 +176,9 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Mac].dmg
           tag: ${{env.TAG}}
           overwrite: true
+      - name: Upload Release Assets to itch.io 🎮
+        run: |
+          butler push ./build/mac/Pixelorama.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
     
   export-web:
     name: Web Export 🌐
@@ -193,3 +205,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: build/web # The folder the action should deploy.
+      - name: Upload Release Assets to itch.io 🎮
+        run: |
+          butler push ./build/web ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:web --userversion ${{env.TAG}}
