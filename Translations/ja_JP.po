@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-18 06:12\n"
+"PO-Revision-Date: 2020-11-25 04:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -153,6 +153,9 @@ msgstr "設定"
 msgid "Tile Mode"
 msgstr "タイルモード"
 
+msgid "Mirror View"
+msgstr "ミラービュー"
+
 msgid "Show Grid"
 msgstr "グリッドを表示"
 
@@ -263,7 +266,7 @@ msgid "All Frames"
 msgstr "すべてのフレーム"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
 msgstr "アニメーション"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-11-14 13:49\n"
+"PO-Revision-Date: 2020-11-23 17:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -152,6 +152,9 @@ msgstr "Προτιμήσεις"
 
 msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
+
+msgid "Mirror View"
+msgstr "Αναστροφή Προβολής"
 
 msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -152,6 +152,9 @@ msgstr "Preferències"
 
 msgid "Tile Mode"
 msgstr "Mode Tile"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Mostrar la quadrícula"

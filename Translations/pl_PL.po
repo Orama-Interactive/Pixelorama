@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-11-14 21:47\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -152,6 +152,9 @@ msgstr "Ustawienia"
 
 msgid "Tile Mode"
 msgstr "Tryb kafelkowy"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Pokaż siatkę"

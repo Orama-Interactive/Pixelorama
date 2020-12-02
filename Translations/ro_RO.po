@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-11-14 14:11\n"
+"PO-Revision-Date: 2020-11-23 17:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -152,6 +152,9 @@ msgstr "Preferințe"
 
 msgid "Tile Mode"
 msgstr "Mod mozaic"
+
+msgid "Mirror View"
+msgstr "Vizualizare oglindită"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"

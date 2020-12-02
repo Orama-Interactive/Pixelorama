@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-11-13 18:29\n"
+"PO-Revision-Date: 2020-11-24 19:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -152,6 +152,9 @@ msgstr "Настройки"
 
 msgid "Tile Mode"
 msgstr "Бесшовный режим"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Показывать сетку"
@@ -423,7 +426,7 @@ msgid "Gray"
 msgstr "Серая"
 
 msgid "Blue"
-msgstr ""
+msgstr "Синий"
 
 msgid "Caramel"
 msgstr ""
