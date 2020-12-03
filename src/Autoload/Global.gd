@@ -221,11 +221,11 @@ func _ready() -> void:
 
 	tile_mode_submenu = PopupMenu.new()
 	tile_mode_submenu.set_name("tile_mode_submenu")
-	tile_mode_submenu.add_check_item("None", 0)
+	tile_mode_submenu.add_radio_check_item("None", 0)
 	tile_mode_submenu.set_item_checked(0, true)
-	tile_mode_submenu.add_check_item("Tiled In Both Axis", 1)
-	tile_mode_submenu.add_check_item("Tiled In X Axis", 2)
-	tile_mode_submenu.add_check_item("Tiled In Y Axis", 3)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", 1)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", 2)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", 3)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")

@@ -206,6 +206,13 @@ func change_project() -> void:
 	else:
 		Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
+	for j in range(len(Global.Tile_Mode)):
+		if j != tile_mode:
+			Global.tile_mode_submenu.set_item_checked(j, false)
+		else:
+			Global.tile_mode_submenu.set_item_checked(j, true)
+
+
 
 func serialize() -> Dictionary:
 	var layer_data := []

@@ -271,10 +271,10 @@ func view_menu_id_pressed(id : int) -> void:
 	Global.canvas.update()
 
 
-func tile_mode_submenu_id_pressed(id : int):
+func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.transparent_checker._init_position(id)
 	for i in range(len(Global.Tile_Mode)):
-		if  i != id:
+		if i != id:
 			Global.tile_mode_submenu.set_item_checked(i, false)
 		else:
 			Global.tile_mode_submenu.set_item_checked(i, true)
