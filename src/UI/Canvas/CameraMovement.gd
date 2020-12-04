@@ -128,6 +128,11 @@ func _input(event : InputEvent) -> void:
 			zoom_camera(1)
 		elif event is InputEventPanGesture: # Pan Gesture on a Latop touchpad
 			zoom_camera(round(event.delta.y))
+		elif event is InputEventMagnifyGesture: # Zoom Gesture on a Laptop touchpad
+			if event.factor < 1:
+				zoom_camera(1)
+			else:
+				zoom_camera(-1)
 		elif event is InputEventMouseMotion && drag:
 			offset = offset - event.relative * zoom
 			update_transparent_checker_offset()
