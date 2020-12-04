@@ -126,6 +126,13 @@ func _input(event : InputEvent) -> void:
 			zoom_camera(-1)
 		elif event.is_action_pressed("zoom_out"): # Wheel Down Event
 			zoom_camera(1)
+		elif event is InputEventMagnifyGesture: # Zoom Gesture on a Laptop touchpad
+			if event.factor < 1:
+				zoom_camera(1)
+			else:
+				zoom_camera(-1)
+		elif event is InputEventPanGesture: # Pan Gesture on a Latop touchpad
+			offset = offset + event.delta * zoom * 7 # for moving the canvas
 		elif event is InputEventMouseMotion && drag:
 			offset = offset - event.relative * zoom
 			update_transparent_checker_offset()
