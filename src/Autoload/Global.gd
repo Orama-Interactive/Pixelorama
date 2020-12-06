@@ -176,6 +176,8 @@ onready var current_version : String = ProjectSettings.get_setting("application/
 
 func _ready() -> void:
 	randomize()
+	if OS.get_name() == "OSX":
+		use_osx_shortcuts()
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	# Load settings from the config file
@@ -551,3 +553,13 @@ func save_project_to_recent_list(path : String) -> void:
 func update_recent_projects_submenu() -> void:
 	for project in Global.recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
+
+func use_osx_shortcuts() -> void:
+	var inputmap := InputMap 
+	
+	for action in inputmap.get_actions():
+		var event : InputEvent = inputmap.get_action_list(action)[0] 
+		
+		if event.control:
+			event.control = false
+			event.command = true
