@@ -4,7 +4,9 @@ about: Report a bug in Pixelorama
 title: ''
 labels: bug
 assignees: ''
+
 ---
+
 <!-- Please search existing issues for potential duplicates before filing yours:
 https://github.com/Orama-Interactive/Pixelorama/issues?q=is%3Aissue
 -->
