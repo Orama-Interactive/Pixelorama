@@ -1,0 +1,12 @@
+contact_links:
+  - name: Feature proposals
+    url: https://github.com/Orama-Interactive/Pixelorama/discussions/new
+    about: Share ideas for new features in Discussions, under the "Ideas" category.
+    
+  - name: Ask a Question
+    url: https://github.com/Orama-Interactive/Pixelorama/discussions/new
+    about: Ask the community for help in Discussions, under the "Q&A" category.
+
+  - name: Documentation repository
+    url: https://github.com/Orama-Interactive/Pixelorama-Docs
+    about: Please report issues with documentation on the Pixelorama documentation repository, not here.
