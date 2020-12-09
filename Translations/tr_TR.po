@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-09 08:54\n"
+"PO-Revision-Date: 2020-12-09 09:18\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -793,13 +793,13 @@ msgid "Guides color:"
 msgstr "Kılavuzların rengi:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Tuvalde gösterilen yardımcı çizgilerin rengi"
 
 msgid "Grid"
 msgstr "Kılavuz çizgisi"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Izgara tipi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
@@ -823,7 +823,7 @@ msgid "Grid height:"
 msgstr ""
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "Izgaradaki ufuk çizgilerinin arasındaki boşlukları belirler"
 
 msgid "Isometric cell size:"
 msgstr ""
@@ -859,7 +859,7 @@ msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Tuvaldeki Hareketi Takip Et"
 
 msgid "The transparent checker follow the movement of canvas"
 msgstr ""
@@ -1046,41 +1046,42 @@ msgid "Past Frames"
 msgstr "Önceki Kareler"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Gelecek Kareler"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Kare etiketlerini yönet"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Kare etiketi özellikleri"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Yeni kare etiketi ekle"
 
 msgid "Name:"
-msgstr ""
+msgstr "İsim:"
 
 msgid "From:"
-msgstr ""
+msgstr "Gönderen:"
 
 msgid "To:"
-msgstr ""
+msgstr "Alıcı:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Animasyon sadece aynı etiketli karelerde oynatılır"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Etiket %s( Kare %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Etiket %s (Kareler %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatılır.\n"
+"Seçili değil ise animasyon bütün karelerde oynatılır."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Mavi-Kırmızı Modu"
 
 msgid "Add a new frame"
 msgstr "Yeni bir kare ekle"
@@ -1092,25 +1093,25 @@ msgid "Clone Frame"
 msgstr "Kareyi Klonla"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Sola Taşı"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Sağa Taşı"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Hücreye köprüle"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Hücre köprüsünü sil"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Kare Özellikleri"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Kare özellikleri"
 
 msgid "Layer"
 msgstr "Katman"
@@ -1134,7 +1135,7 @@ msgid "Clone current layer"
 msgstr "Katmanı kopyala"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Aktif katmanı alttaki katmanla birleştir"
 
 msgid "Opacity:"
 msgstr "Saydamlık:"
@@ -1183,70 +1184,70 @@ msgid "Redo: Rectangle Select"
 msgstr ""
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Geri al: Ölçülendirme"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Yeniden uygula: Ölçülendirme"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Geri al: Katman ekle"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Yeniden uygula: Katman Ekle"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Geri al: Katmanı Sil"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Yeniden uygula: Katmanı sil"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Geri al: Katmanları Birleştir"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Yeniden uygula: Katmanları Birleştir"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Geri al: Katman sırasını değiştir"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Yeniden uygula: Katman sırasını değiştir"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Geri al: Kare Ekle"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Yeniden uygula: Kare Ekle"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Geri al: Kareyi Sil"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Yeniden uygula: Kareyi sil"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Geri al: Kare sırasını değiştir"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Yeniden uygula: Kare sırasını değiştir"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Geri al: Özel Fırçayı sil"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Yeniden uygula: Özel Fırçayı sil"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Geri al: Kare etiketini değiştir"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Yeniden uygula: Kare etiketini değiştir"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Geri al: Kare etiketini sil"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Yeniden uygula: Kare etiketini sil"
 
 msgid "Undo: Change frame duration"
 msgstr ""
@@ -1405,13 +1406,13 @@ msgid "Already assigned"
 msgstr "Aynı tuş zaten atanıldı"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Sol araç:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr "Sol fareye bir araç atandı"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Sağ araç:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Sol fareye bir araç atandı"
@@ -1420,7 +1421,7 @@ msgid "Cannot find last project file."
 msgstr "Son proje bulunamadı."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Proje dosyası bulunamadı."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
@@ -1484,20 +1485,20 @@ msgid "and"
 msgstr "ve"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Seçili kareyi sola taşı."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Seçili kareyi sağa taşı."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Kare beklemesi"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "2 Yörüngedede Döşendi"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "X yörüngesinde döşendi"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Y yörüngesinde döşendi"
 
