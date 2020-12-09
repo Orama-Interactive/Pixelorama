@@ -386,6 +386,7 @@ func open_image_as_spritesheet(path : String, image : Image, horizontal : int, v
 				frame.cels.append(Cel.new(empty_sprite, 1))
 
 			project.frames.append(frame)
+			project.frame_duration.append(1)
 
 	set_new_tab(project, path)
 
@@ -409,7 +410,7 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 			frame.cels.append(Cel.new(empty_image, 1))
 
 	new_frames.append(frame)
-	frame_duration.insert(project.current_frame + 1, 1)
+	frame_duration.append(1)
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
