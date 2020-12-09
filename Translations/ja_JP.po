@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-09 05:23\n"
+"PO-Revision-Date: 2020-12-09 05:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -731,14 +731,15 @@ msgid "Lighten/Darken\n\n"
 msgstr ""
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "左ツールの色を選択してくだ"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "右のツールの色を選択してください"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "左右の色を切り替える\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr ""
@@ -822,7 +823,7 @@ msgid "Grid color:"
 msgstr "グリッドの色:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "グリッドの色"
 
 msgid "Transparency"
 msgstr ""
@@ -966,7 +967,7 @@ msgid "100% Zoom"
 msgstr "100% ズーム"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "ミラーリング"
 
 msgid "Horizontal"
 msgstr "水平"
@@ -1008,7 +1009,7 @@ msgid "Jump to the last frame\n"
 msgstr ""
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "オニオンスキン設定"
 
 msgid "Enable/disable Onion Skinning"
 msgstr ""
@@ -1018,7 +1019,7 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr ""
+msgstr "ループなし"
 
 msgid "Cycle loop"
 msgstr ""
@@ -1027,7 +1028,7 @@ msgid "Ping-pong loop"
 msgstr ""
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "オニオンスキン:"
 
 msgid "Past Frames"
 msgstr ""
@@ -1048,10 +1049,10 @@ msgid "Name:"
 msgstr "名前:"
 
 msgid "From:"
-msgstr ""
+msgstr "開始："
 
 msgid "To:"
-msgstr ""
+msgstr "終了:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1100,10 +1101,10 @@ msgid "Frame properties"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "レイヤー"
 
 msgid "Layers"
-msgstr ""
+msgstr "レイヤー"
 
 msgid "Create a new layer"
 msgstr ""
@@ -1353,7 +1354,7 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "既定"
 
 msgid "Custom"
 msgstr ""
@@ -1431,7 +1432,7 @@ msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
-msgstr ""
+msgstr "分"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
