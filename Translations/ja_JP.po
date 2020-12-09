@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-11-25 04:31\n"
+"PO-Revision-Date: 2020-12-09 05:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -392,7 +392,7 @@ msgid "Restore default value"
 msgstr ""
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "スムーズズーム"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
