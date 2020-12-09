@@ -50,7 +50,7 @@ func add_frame() -> void:
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", Global.current_project.current_frame + 1)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration) #Add a 1 in the list of frame_duration
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration) # Add an 1 in the list of frame_duration
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame )

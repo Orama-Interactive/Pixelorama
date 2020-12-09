@@ -555,11 +555,11 @@ func update_recent_projects_submenu() -> void:
 		recent_projects_submenu.add_item(project.get_file())
 
 func use_osx_shortcuts() -> void:
-	var inputmap := InputMap 
-	
+	var inputmap := InputMap
+
 	for action in inputmap.get_actions():
-		var event : InputEvent = inputmap.get_action_list(action)[0] 
-		
+		var event : InputEvent = inputmap.get_action_list(action)[0]
+
 		if event.control:
 			event.control = false
 			event.command = true

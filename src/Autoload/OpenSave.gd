@@ -394,6 +394,7 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_frames : Array = project.frames.duplicate()
+	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
 
 	var frame := Frame.new()
 	for i in project.layers.size():
@@ -408,6 +409,7 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 			frame.cels.append(Cel.new(empty_image, 1))
 
 	new_frames.append(frame)
+	frame_duration.insert(project.current_frame + 1, 1)
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
@@ -417,10 +419,12 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	project.undo_redo.add_do_property(project, "frames", new_frames)
 	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
 	project.undo_redo.add_do_property(project, "current_layer", layer_index)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration) # Add an 1 in the list of frame_duration
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
 	project.undo_redo.commit_action()
 
 
