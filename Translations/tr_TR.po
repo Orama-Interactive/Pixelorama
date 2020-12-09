@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-09 09:18\n"
+"PO-Revision-Date: 2020-12-09 09:40\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1141,20 +1141,21 @@ msgid "Opacity:"
 msgstr "Saydamlık:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Döşeme modu saydamlığı:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Katmanların görünürlüğünü Aç/Kapat"
 
 msgid "Lock/unlock layer"
 msgstr "Katmanı kilitle/aç"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Kare: %s, Katman: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Hücre köprülemesini Aç/Kapat\n\n"
+"Köprülenmiş hücreler birçok kare tarafından paylaşılır"
 
 msgid "Palette"
 msgstr "Palet"
@@ -1172,16 +1173,16 @@ msgid "Choose a palette"
 msgstr "Bir palet seç"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Geri Al: Çizim"
 
 msgid "Redo: Draw"
 msgstr "İleri: Çizim"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Geri al: Dikdörtgen Seçim"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Yeniden Uygula: Dikdörtgen Seçim"
 
 msgid "Undo: Scale"
 msgstr "Geri al: Ölçülendirme"
@@ -1250,10 +1251,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Yeniden uygula: Kare etiketini sil"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Geri al: Kare zamanlamasını değiştir"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Yeniden uygula: Kare zamanlamasını değiştir"
 
 msgid "Move Guide"
 msgstr ""
