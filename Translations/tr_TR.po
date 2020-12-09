@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-09 08:41\n"
+"PO-Revision-Date: 2020-12-09 08:54\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -477,10 +477,10 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Renk/Doygunluk/Ton değerlerini Ayarla"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradyan"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "R/D/T değerlerini Ayarla"
 
 msgid "Type:"
 msgstr "Tür:"
@@ -489,13 +489,13 @@ msgid "Angle:"
 msgstr "Açı:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Renk:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Doygunluk:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Ton:"
 
 msgid "Apply"
 msgstr "Uygula"
@@ -504,7 +504,7 @@ msgid "Diagonal"
 msgstr "Köşegen"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "İç Resim Yerleştir"
 
 msgid "Thickness:"
 msgstr "Kalınlık:"
@@ -549,7 +549,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Bütün hakları 2019-2020 Orama interaktif ve destekçileri tarafından saklı bulunmaktadır"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
 msgstr "©2019-2020 Orama Interactive ve destekçileri tarafından"
@@ -558,7 +558,7 @@ msgid "Website"
 msgstr "İnternet sitesi"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub Repo"
 
 msgid "Donate"
 msgstr "Bağış"
@@ -639,7 +639,7 @@ msgid "Hungarian"
 msgstr "Macarca"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumence"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -651,16 +651,16 @@ msgid "UI Designer"
 msgstr "KA Tasarımcısı"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub destekçileri"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Sanatçı:%s"
 
 msgid "untitled"
-msgstr ""
+msgstr "başlıksız"
 
 msgid "imported"
-msgstr ""
+msgstr "içe aktarılan"
 
 msgid "copy"
 msgstr "kopya"
@@ -693,12 +693,16 @@ msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "Karesel Seçim\n\n"
+"%s için farenin sol tuşu\n"
+"%s için farenin sağ tuşu\n\n"
+"Taşımak için %s'a basın"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "%s için sol tıkla\n"
+"%s için sağ tıkla"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -828,13 +832,13 @@ msgid "Sets the size of the cells in an isometric grid"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Izgara rengi:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Izgaranın rengi"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Şeffaflık"
 
 msgid "Checker size:"
 msgstr ""
