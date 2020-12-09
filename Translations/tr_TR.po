@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-11-30 13:24\n"
+"PO-Revision-Date: 2020-12-09 08:41\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "Karo Modu"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Yansima"
 
 msgid "Show Grid"
 msgstr "Kılavuz çizgilerini göster"
@@ -190,7 +190,7 @@ msgid "Import as:"
 msgstr "İçe farklı aktar:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Son Projeleriniz"
 
 msgid "New tab"
 msgstr "Yeni sekme"
@@ -369,7 +369,7 @@ msgid "Language"
 msgstr "Dil"
 
 msgid "Interface"
-msgstr ""
+msgstr "Arayüz"
 
 msgid "Themes"
 msgstr "Temalar"
@@ -405,7 +405,7 @@ msgid "None"
 msgstr "Hiç biri"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Fırçanın geçirgenliğini etkile"
 
 msgid "Color:"
 msgstr "Renk:"
@@ -417,7 +417,7 @@ msgid "System Language"
 msgstr "Sistem Dili"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Görüntü Ölçeği"
 
 msgid "Dark"
 msgstr "Koyu"
@@ -435,13 +435,13 @@ msgid "Light"
 msgstr "Açık"
 
 msgid "Purple"
-msgstr ""
+msgstr "Mor"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Sadece seçilene uygula"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Aktif kare"
 
 msgid "Current frame"
 msgstr "Geçerli kare"
@@ -456,25 +456,25 @@ msgid "Invert Colors"
 msgstr "Renkleri Tersle"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Kırmızı kanalı değiştir"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Yeşil kanalı değiştir"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Mavi kanalı değiştir"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Geçirgenlik Kanalını etkile"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Solgunlaştır"
 
 msgid "Outline"
 msgstr "Anahat"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Renk/Doygunluk/Ton değerlerini Ayarla"
 
 msgid "Gradient"
 msgstr ""
