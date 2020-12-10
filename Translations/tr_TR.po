@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-09 09:40\n"
+"PO-Revision-Date: 2020-12-10 05:01\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1374,7 +1374,7 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Dikdörtgen Seçim"
 
 msgid "Zoom"
 msgstr "Yakınlaştır"
@@ -1392,10 +1392,10 @@ msgid "Bucket"
 msgstr "Kova"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "Açık/Koyu"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Rekleri Değiştir"
 
 msgid "Set the shortcut"
 msgstr "Kısayol seç"
@@ -1443,16 +1443,16 @@ msgid "Enable autosave"
 msgstr "Otomatik kaydetmeyi etkinleştir"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Otomatik kaydetme aralığı:"
 
 msgid "minute(s)"
 msgstr "dakika(lar)"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Her kare etiketi için yeni bir klasör oluşturuluyor"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Birçok dosya kaydediyor fakat her dosya etiketine karşılık gelen farklı bir klasör içerisinde"
 
 msgid "Close"
 msgstr "Kapat"
