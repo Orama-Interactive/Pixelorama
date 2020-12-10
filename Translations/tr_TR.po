@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-10 05:33\n"
+"PO-Revision-Date: 2020-12-10 05:51\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -907,28 +907,28 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Renkleri karıştırmak yerine rengin üzerine yazar. Bu seçenek sadece tamamiyle opak olmayan renkler için geçerlidir"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Mükemmel Piksel"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Çizgileri kenarlardaki fazla pikselleri silerek yumuşatır"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Fırça rengini buradan"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Rengi fırçadan alır, 100: şu an seçili olan renk"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Alanı Doldur:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Aynı renk alan"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Aynı renk pikseller"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Bununla Doldur:"
 
 msgid "Selected Color"
 msgstr "Seçilen renk"
@@ -940,16 +940,16 @@ msgid "Offset"
 msgstr ""
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Basit Gölgeleme"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Ton Kayması"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Aydınlat"
 
 msgid "Darken"
-msgstr ""
+msgstr "Koyulaştır"
 
 msgid "Amount:"
 msgstr "Miktar:"
@@ -961,13 +961,13 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "Sol Renk"
 
 msgid "Right Color"
 msgstr "Sağ Renk"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mod:"
 
 msgid "Zoom in"
 msgstr "Yakınlaştır"
@@ -979,10 +979,10 @@ msgid "Options:"
 msgstr "Ayarlar:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Çerçeveye Sığdır"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Ölçek"
 
 msgid "Mirroring"
 msgstr "Yansıtma"
@@ -991,10 +991,10 @@ msgid "Horizontal"
 msgstr "Yatay"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Çizim için yatay aynamalamayı aktif et"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Çizim için dikey aynamalamayı aktif et"
 
 msgid "Vertical"
 msgstr "Dikey"
@@ -1012,11 +1012,13 @@ msgstr "Önceki kareye geç (%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Animasyonu tersten oynat (son kareden ilk kareye)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Animasyonu oynat(ilk kareden son kareye)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
@@ -1027,14 +1029,15 @@ msgid "Jump to the last frame\n"
 msgstr "Son kareye geç (%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Onion Skinning özellikleri"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Onion Skinning aktif/pasif et"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Animasyon gösterimi saniyede kaç kare olmalı?\n"
+"Kare sayısı yükseldikçe, animasyon daha hızlı oynar."
 
 msgid "No loop"
 msgstr "Döngü kapalı"
@@ -1043,10 +1046,10 @@ msgid "Cycle loop"
 msgstr "Döngüyü açık"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Pinpon döngüsü"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Önceki Kareler"
@@ -1374,7 +1377,7 @@ msgid "Preset:"
 msgstr "Hazır Ayarlar:"
 
 msgid "Default"
-msgstr ""
+msgstr "Varsayılan"
 
 msgid "Custom"
 msgstr "Özel"
