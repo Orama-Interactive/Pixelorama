@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-10 05:01\n"
+"PO-Revision-Date: 2020-12-10 05:21\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -687,7 +687,7 @@ msgid "Exit without saving"
 msgstr "Kaydetmeden çık"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "Yardımcı araçlar"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
@@ -708,7 +708,10 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Damlalık\n\n"
+"Sprite pikselinden bir renk seç\n\n"
+"%s için sol tıkla\n"
+"%s için sağ tıkla"
 
 msgid "Draw Tools"
 msgstr "Çizim Aletleri"
@@ -717,7 +720,10 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Kalem\n\n"
+"%s için sol tıkla\n"
+"%s için sağ tıkla\n\n"
+"Çizgi çizmek için %s basılı tut"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
@@ -802,7 +808,7 @@ msgid "Grid type:"
 msgstr "Izgara tipi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Izgara modunu seç izometrik, dikdörtgensel veya ikisi birden"
 
 msgid "Rectangular"
 msgstr "Dikdörtgen"
@@ -1257,7 +1263,7 @@ msgid "Redo: Change frame duration"
 msgstr "Yeniden uygula: Kare zamanlamasını değiştir"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Kılavuzu Taşı"
 
 msgid "File saved"
 msgstr "Dosya kaydedildi"
@@ -1266,13 +1272,13 @@ msgid "File autosaved"
 msgstr "Dosya kaydedildi"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Dosya açılamadı. Hata kodu %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Dosya kaydedilemedi. Hata kodu %s"
 
 msgid "File exported"
-msgstr ""
+msgstr "Dosya dışa aktarıldı"
 
 msgid "New Empty Palette"
 msgstr "Yeni Palet"
@@ -1281,7 +1287,7 @@ msgid "Import Palette"
 msgstr "Palet Aktar"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Renk paletini aktif spritedan oluştur"
 
 msgid "Palette Name:"
 msgstr "Palet İsmi:"
@@ -1290,13 +1296,13 @@ msgid "Color Name:"
 msgstr "Renk İsmi:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Seçili olan sol & sağ renkleri kullan"
 
 msgid "Create a new empty palette?"
 msgstr "Yeni palet oluşturulsun mu?"
 
 msgid "Error"
-msgstr ""
+msgstr "Hata"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Hata: Paletin herhangi bir ismi olmalıdır."
@@ -1308,13 +1314,13 @@ msgid "Edit Palette"
 msgstr "Paleti Düzenle"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Renkleri geçirgenlik birimi ile oluştur"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Renkleri sadece seçimden al"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Renkleri şuradan al"
 
 msgid "Patrons:"
 msgstr "Patronlar:"
@@ -1338,40 +1344,40 @@ msgid "Image Options"
 msgstr "Resim Ayarları"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Varsayılan genişlik:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Yeni resmin varsayılan genişliği"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Varsayılan Yükseklik:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Yeni resmin varsayılan yüksekliği"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Varsayılan dolgu rengi:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Yeni resmin varsayılan arkaplan rengi"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "En boy oranlarını kilitle:"
 
 msgid "Templates:"
 msgstr "Şablonlar:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Hazır Ayarlar"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Hazır Ayarlar:"
 
 msgid "Default"
 msgstr ""
 
 msgid "Custom"
-msgstr ""
+msgstr "Özel"
 
 msgid "Rectangular Selection"
 msgstr "Dikdörtgen Seçim"
