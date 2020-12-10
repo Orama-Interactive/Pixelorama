@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-10 15:12\n"
+"PO-Revision-Date: 2020-12-10 15:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -465,22 +465,22 @@ msgid "Modify Blue Channel"
 msgstr "青チャンネルを変更"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "アルファチャンネルを変更"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "彩度を下げる"
 
 msgid "Outline"
-msgstr ""
+msgstr "アウトライン"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "色相/彩度/値を調整"
 
 msgid "Gradient"
-msgstr ""
+msgstr "グラディエーション"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "HSVを調整"
 
 msgid "Type:"
 msgstr "タイプ:"
@@ -489,22 +489,22 @@ msgid "Angle:"
 msgstr "角度:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "色相:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "彩度:"
 
 msgid "Value:"
-msgstr ""
+msgstr "値:"
 
 msgid "Apply"
 msgstr "適用"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "対角線"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "画像内に配置"
 
 msgid "Thickness:"
 msgstr ""
@@ -528,7 +528,7 @@ msgid "Right to Left"
 msgstr "右から左"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "スプラッシュ スクリーンを表示"
 
 msgid "Online Docs"
 msgstr "Online Docs"
@@ -1160,46 +1160,46 @@ msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "元に戻す: 描画"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "やり直し: 描画"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "元に戻す: 長方形の選択"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "やり直し: 長方形の選択"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "元に戻す: スケール"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "やり直し: スケール"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "元に戻す: レイヤーを追加"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "やり直し: レイヤーを追加"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "元に戻す: レイヤーを削除"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "やり直し: レイヤーを削除"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "元に戻す: レイヤーの結合"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "やり直し: レイヤーの結合"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "元に戻す: レイヤーの順番を変更"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "やり直し: レイヤーの順番を変更"
 
 msgid "Undo: Add Frame"
 msgstr ""
