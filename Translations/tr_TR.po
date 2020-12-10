@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-10 05:51\n"
+"PO-Revision-Date: 2020-12-10 06:05\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -937,7 +937,7 @@ msgid "Pattern"
 msgstr "Şablon"
 
 msgid "Offset"
-msgstr ""
+msgstr "Uzaklık"
 
 msgid "Simple Shading"
 msgstr "Basit Gölgeleme"
@@ -958,7 +958,7 @@ msgid "Lighten/Darken amount"
 msgstr "Açıklık/Karanlık miktarı"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "İçin Seç:"
 
 msgid "Left Color"
 msgstr "Sol Renk"
