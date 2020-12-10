@@ -101,7 +101,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
-		5: #Frame Properties
+		5: # Frame Properties
 				Global.frame_properties.popup_centered()
 				Global.dialog_open(true)
 				Global.frame_properties.set_frame_label(frame)

@@ -57,6 +57,7 @@ margin_left = 101.0
 margin_top = 18.0
 margin_right = 193.0
 margin_bottom = 42.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 step = 0.05
 value = 2.0

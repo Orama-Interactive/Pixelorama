@@ -21,6 +21,7 @@ const languages_dict := {
 	"hu_HU" : ["Magyar", "Hungarian"],
 	"ro_RO" : ["Română", "Romanian"],
 	"ko_KR" : ["한국어", "Korean"],
+	"tr_TR" : ["Türkçe", "Turkish"],
 }
 
 var loaded_locales : Array
