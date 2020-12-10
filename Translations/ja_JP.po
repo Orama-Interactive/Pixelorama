@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-09 05:43\n"
+"PO-Revision-Date: 2020-12-10 15:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -190,7 +190,7 @@ msgid "Import as:"
 msgstr "形式を指定してインポート"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "最近のプロジェクト"
 
 msgid "New tab"
 msgstr "新しいタブ"
@@ -232,29 +232,30 @@ msgid "Random brush"
 msgstr "ランダムブラシ"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "スプライトを .pxo として保存"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr ".png としてエクスポート"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "スプライトをエクスポート"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "ファイルが存在します。上書きしますか？"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "ファイル %s は既に存在しています。上書きしますか？"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "ディレクトリパスまたはファイル名が無効です！"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "エクスポート中..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "ファイル '%s' を読み込むことができません。\n"
+"エラーコード: %s"
 
 msgid "Frame"
 msgstr "フレーム"
@@ -272,19 +273,19 @@ msgid "Animation"
 msgstr "アニメーション"
 
 msgid "Preview:"
-msgstr ""
+msgstr "プレビュー:"
 
 msgid "Frame:"
 msgstr "フレーム："
 
 msgid "Orientation:"
-msgstr ""
+msgstr "向き:"
 
 msgid "Browse"
-msgstr ""
+msgstr "参照"
 
 msgid "Resize:"
-msgstr ""
+msgstr "サイズを変更"
 
 msgid "Cancel Export"
 msgstr "エクスポートをキャンセル"
@@ -293,16 +294,16 @@ msgid "Alert!"
 msgstr "警告！"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "現在のフォルダを選択"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "ディレクトリを開く"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "すべてのフレームを複数のファイルとしてエクスポート"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "すべてのフレームを単一のアニメーションファイルとしてエクスポート"
 
 msgid "Background:"
 msgstr "バックグラウンド:"
@@ -311,55 +312,55 @@ msgid "Direction:"
 msgstr "方向:"
 
 msgid "Forward"
-msgstr ""
+msgstr "前方から"
 
 msgid "Backwards"
-msgstr ""
+msgstr "後方から"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "列"
 
 msgid "Columns:"
-msgstr ""
+msgstr "列:"
 
 msgid "Rows"
-msgstr ""
+msgstr "行"
 
 msgid "Rows:"
-msgstr ""
+msgstr "行:"
 
 msgid "Path:"
-msgstr ""
+msgstr "パス:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "ディレクトリとファイル:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "フォルダーを作成"
 
 msgid "File:"
 msgstr "ファイル:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "補間:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "ニアレスト"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "バイリニア"
 
 msgid "Cubic"
-msgstr ""
+msgstr "キュービック"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "トライリニア"
 
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 msgid "Startup"
 msgstr "スタートアップ"
@@ -368,7 +369,7 @@ msgid "Language"
 msgstr "言語"
 
 msgid "Interface"
-msgstr ""
+msgstr "インターフェース"
 
 msgid "Themes"
 msgstr "テーマ"
@@ -383,40 +384,40 @@ msgid "Backup"
 msgstr "バックアップ"
 
 msgid "Indicators"
-msgstr ""
+msgstr "インジケーター"
 
 msgid "On"
 msgstr "オン"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "既定値へ戻す"
 
 msgid "Smooth Zoom"
 msgstr "スムーズズーム"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "ズームインまたはズームアウト時にスムーズなトランジションを追加します"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "タブレットの圧力感度:"
 
 msgid "None"
 msgstr "無し"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "ブラシのアルファに影響"
 
 msgid "Color:"
 msgstr "色:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "ガイドの色:"
 
 msgid "System Language"
-msgstr ""
+msgstr "システム言語"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "表示スケール"
 
 msgid "Dark"
 msgstr "ダーク"
@@ -437,31 +438,31 @@ msgid "Purple"
 msgstr "紫"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "選択範囲のみに影響"
 
 msgid "Current cel"
-msgstr ""
+msgstr "現在のセル"
 
 msgid "Current frame"
-msgstr ""
+msgstr "現在のフレーム"
 
 msgid "All frames"
-msgstr ""
+msgstr "すべてのフレーム"
 
 msgid "All projects"
-msgstr ""
+msgstr "すべてのプロジェクト"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "色を反転"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "赤チャンネルを変更"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "緑チャンネルを変更"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "青チャンネルを変更"
 
 msgid "Modify Alpha Channel"
 msgstr ""
