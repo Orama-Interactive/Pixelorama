@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-10 05:21\n"
+"PO-Revision-Date: 2020-12-10 05:27\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -823,19 +823,19 @@ msgid "Grid width:"
 msgstr "Kılavuz çizgi genişliği:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Izgaradaki dikey çizgilerinin arasındaki boşlukları belirler"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Izgara yüksekliği:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Izgaradaki ufuk çizgilerinin arasındaki boşlukları belirler"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "Izometrik hücre boyutu:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "İzometrik ızgaradaki hücrelerin boyutunu belirler"
 
 msgid "Grid color:"
 msgstr "Izgara rengi:"
@@ -847,22 +847,22 @@ msgid "Transparency"
 msgstr "Şeffaflık"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Dama deseni boyutu:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Arkaplandaki geçirgen dama desenleri boyutu"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Dama deseni rengi 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Arkaplandaki geçirgen dama deseninin 1. rengi"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Dama deseni rengi 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Arkaplandaki geçirgen dama deseninin 2. rengi"
 
 msgid "Follow Canvas Movement"
 msgstr "Tuvaldeki Hareketi Takip Et"
