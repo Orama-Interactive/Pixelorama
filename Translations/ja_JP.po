@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-10 15:29\n"
+"PO-Revision-Date: 2020-12-10 15:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -507,19 +507,19 @@ msgid "Place inside image"
 msgstr "画像内に配置"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "厚さ:"
 
 msgid "Colors:"
 msgstr "色:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "手順:"
 
 msgid "Top to Bottom"
 msgstr "上から下"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "下から上へ"
 
 msgid "Left to Right"
 msgstr "左から右"
@@ -534,10 +534,10 @@ msgid "Online Docs"
 msgstr "Online Docs"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "課題管理"
 
 msgid "Changelog"
-msgstr ""
+msgstr "更新履歴"
 
 msgid "About Pixelorama"
 msgstr "Pixelorama について"
@@ -660,31 +660,31 @@ msgid "untitled"
 msgstr "無題"
 
 msgid "imported"
-msgstr ""
+msgstr "インポート済み"
 
 msgid "copy"
 msgstr "コピー"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Pixeloramaを終了してもよろしいですか？"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "保存されていない画像"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "保存されていない変更があります。続行すると、進行状況は失われます。"
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "終了する前に保存しますか？"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "保存されていない進行状況があります。どのように進めますか？"
 
 msgid "Save & Exit"
 msgstr "セーブして終了"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "保存せずに終了"
 
 msgid "Utility Tools"
 msgstr ""
