@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-11 08:45\n"
+"PO-Revision-Date: 2020-12-11 09:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -992,77 +992,84 @@ msgid "Horizontal"
 msgstr "水平"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "左右対称描画を有効化"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "上下対称描画を有効化"
 
 msgid "Vertical"
-msgstr ""
+msgstr "垂直方向"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "現在のフレーム:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "最初のフレームにジャンプ\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "前のフレームに移動\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "アニメーションを逆方向に再生する (終了から始めまで)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "アニメーションを前方に再生する(開始から終了まで)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "次のフレームに移動\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "最後のフレームにジャンプ\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "オニオンスキン設定"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "オニオンスキンを有効/無効にする"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "アニメーションフレームは1秒あたり何フレームにする必要がありますか？\n"
+"FPSが高いほど、アニメーションの再生が速くなります。"
 
 msgid "No loop"
 msgstr "ループなし"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "周期ループ"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "ピンポンループ"
 
 msgid "Onion Skinning:"
 msgstr "オニオンスキン:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "過去のフレーム"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "今後のフレーム"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "フレームタグを管理"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "フレームタグのプロパティ"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "新しいフレームタグを追加"
 
 msgid "Name:"
 msgstr "名前:"
@@ -1074,50 +1081,51 @@ msgid "To:"
 msgstr "終了:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "アニメーションは同じタグのフレームでのみ再生されます"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "タグ %s (フレーム %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "タグ %s (フレーム %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "選択した場合、同じタグを持つフレームでのみのアニメーションが再生されます。\n"
+"そうでない場合、タグを無視してすべてのフレームでのアニメーションが再生されます。"
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "青-赤モード"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "新しいフレームを追加"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "フレームを削除"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "フレームを複製"
 
 msgid "Move Left"
-msgstr ""
+msgstr "左へ移動"
 
 msgid "Move Right"
-msgstr ""
+msgstr "右へ移動"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "セルをリンク"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "セルのリンクを解除"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "フレームのプロパティ"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "フレームのプロパティ"
 
 msgid "Layer"
 msgstr "レイヤー"
@@ -1126,41 +1134,42 @@ msgid "Layers"
 msgstr "レイヤー"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "新しいレイヤーを作成"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "現在のレイヤーを削除"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "現在のレイヤーを上に移動"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "現在のレイヤーを下に移動"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "現在のレイヤーを複製"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "現在のレイヤーと下のレイヤーを結合"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "不透明度:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "タイルモードの不透明度:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "レイヤーの表示を切り替える"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "レイヤーのロック/ロック解除"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "フレーム: %s, レイヤー: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "セルリンクを有効/無効にする\n\n"
+"リンクされたセルは複数のフレームで共有されています"
 
 msgid "Palette"
 msgstr "パレット"
@@ -1169,13 +1178,13 @@ msgid "Palettes"
 msgstr "パレット"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "新しいパレットを追加"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "現在選択されているパレットを編集"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "パレットを選択"
 
 msgid "Undo: Draw"
 msgstr "元に戻す: 描画"
@@ -1220,73 +1229,73 @@ msgid "Redo: Change Layer Order"
 msgstr "やり直し: レイヤーの順番を変更"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "元に戻す: フレームを追加"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "やり直し: フレームを追加"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "元に戻す: フレームを削除"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "やり直し: フレームを削除"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "元に戻す: フレームの順番を変更"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "やり直し: フレームの順番を変更"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "元に戻す: カスタムブラシの削除"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "やり直し: カスタムブラシの削除"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "元に戻す: フレームタグの変更"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "やり直し: フレームタグの変更"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "元に戻す: フレームタグの削除"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "やり直し: フレームタグの削除"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "元に戻す: フレームの長さを変更"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "やり直し: フレームの長さを変更"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "ガイドを移動"
 
 msgid "File saved"
-msgstr ""
+msgstr "ファイルが保存されました"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "ファイルが自動保存されました"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "ファイルを開けませんでした。エラーコード %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "ファイルを保存できませんでした。エラーコード %s"
 
 msgid "File exported"
-msgstr ""
+msgstr "ファイルをエクスポートしました"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "新しい空のパレット"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "パレットをインポート"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "現在のスプライトからパレットを作成"
 
 msgid "Palette Name:"
 msgstr "パレット名:"
@@ -1295,40 +1304,40 @@ msgid "Color Name:"
 msgstr "色の名前"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "現在の左右の色を使用"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "新しい空のパレットを作成しますか？"
 
 msgid "Error"
 msgstr "エラー"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "エラー: パレットには有効な名前が必要です。"
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "無効なパレットファイルです！"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "パレットを編集"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "アルファコンポーネントを使用して色を作成"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "選択した色のみを取得します"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "色を取得"
 
 msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "スプラッシュ画面にあなたの名前または会社を表示したいですか？"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "プラチナスポンサーになる"
 
 msgid "Become a Gold Sponsor"
 msgstr "ゴールドスポンサーになる"
@@ -1337,55 +1346,55 @@ msgid "Become a Patron"
 msgstr "パトロンになる"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "今後表示しない"
 
 msgid "Image Options"
-msgstr ""
+msgstr "画像オプション"
 
 msgid "Default width:"
-msgstr ""
+msgstr "デフォルトの幅:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "新しい画像のデフォルトの幅"
 
 msgid "Default height:"
-msgstr ""
+msgstr "デフォルトの高さ:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "新しい画像のデフォルトの高さ"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "既定の塗りつぶしの色:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "新しい画像の既定の背景色"
 
 msgid "Lock aspect ratio:"
-msgstr ""
+msgstr "アスペクト比をロック:"
 
 msgid "Templates:"
-msgstr ""
+msgstr "テンプレート:"
 
 msgid "Preset"
-msgstr ""
+msgstr "プリセット"
 
 msgid "Preset:"
-msgstr ""
+msgstr "プリセット:"
 
 msgid "Default"
 msgstr "既定"
 
 msgid "Custom"
-msgstr ""
+msgstr "カスタム"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "矩形選択"
 
 msgid "Zoom"
 msgstr "ズーム"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "カラーピッカー"
 
 msgid "Pencil"
 msgstr "ペン/鉛筆"
@@ -1397,67 +1406,67 @@ msgid "Bucket"
 msgstr "バケット"
 
 msgid "Lighten/Darken"
-msgstr ""
+msgstr "明るく/暗く"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "色の切り替え"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "ショートカットを設定"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "キーまたはキーの組み合わせを押してショートカットを設定します"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "割り当て済みです"
 
 msgid "Left Tool:"
 msgstr "左のツール:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "マウスの左ボタンに割り当てられたツール"
 
 msgid "Right Tool:"
 msgstr "右のツール:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "マウスの右ボタンに割り当てられたツール"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "最後のプロジェクトファイルが見つかりません。"
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "プロジェクトファイルが見つかりません。"
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Pixeloramaでプロジェクトを保存または開いていません！"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "最後のプロジェクトを開く"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "前回のプロジェクトを開く..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "起動時に最後のプロジェクトを開く"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "起動時に最後に開いたプロジェクトを開く"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "自動保存を有効化"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "自動保存の間隔:"
 
 msgid "minute(s)"
 msgstr "分"
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "フレームタグごとに新しいディレクトリを作成"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "複数のファイルを作成しますが、各ファイルはフレームタグに対応する異なるディレクトリに保存されます。"
 
 msgid "Close"
 msgstr "閉じる"
@@ -1467,44 +1476,45 @@ msgstr "削除"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "%s の自動保存されたバックアップが見つかりました。\n"
+"再読み込みしますか？"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "バックアップを再読み込みしました"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "現在選択されているパレットを削除"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "このパレットを削除してもよろしいですか？ (元に戻すことはできません)"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "これ以上のパレットは削除できません！"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "パレットが存在しないため、削除できません！"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "パレットの削除中にエラーが発生しました！エラーコード: %s"
 
 msgid "and"
 msgstr "と"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "選択したフレームを左に移動します。"
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "選択したフレームを右に移動します。"
 
 msgid "Frame duration"
-msgstr ""
+msgstr "フレームの長さ"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "両方の軸にタイルされています"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "X軸にタイルされています"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Y軸にタイルされています"
 
