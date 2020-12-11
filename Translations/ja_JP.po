@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-11 09:19\n"
+"PO-Revision-Date: 2020-12-11 13:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -640,6 +640,9 @@ msgstr "ハンガリー語"
 
 msgid "Romanian"
 msgstr "ルーマニア語"
+
+msgid "Japanese"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Development Team"
