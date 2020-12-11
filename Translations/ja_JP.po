@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-10 15:35\n"
+"PO-Revision-Date: 2020-12-11 06:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -803,22 +803,22 @@ msgid "All"
 msgstr "すべて"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "グリッドの幅:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "グリッドの垂直方向の線の距離を設定します。"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "グリッドの高さ:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr ""
+msgstr "グリッドの水平方向の線の距離を設定します"
 
 msgid "Isometric cell size:"
-msgstr ""
+msgstr "等角セルサイズ:"
 
 msgid "Sets the size of the cells in an isometric grid"
-msgstr ""
+msgstr "等角グリッドのセルのサイズを設定します"
 
 msgid "Grid color:"
 msgstr "グリッドの色:"
@@ -827,25 +827,25 @@ msgid "A color of the grid"
 msgstr "グリッドの色"
 
 msgid "Transparency"
-msgstr ""
+msgstr "透明度"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "チェッカーのサイズ:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "透明なチェッカーの背景のサイズ"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "チェッカーの色 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "透明なチェッカーの背景の最初の色"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "チェッカーの色 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "透明なチェッカーの背景の2番目の色"
 
 msgid "Follow Canvas Movement"
 msgstr ""
