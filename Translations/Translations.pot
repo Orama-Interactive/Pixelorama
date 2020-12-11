@@ -629,6 +629,9 @@ msgstr ""
 msgid "Romanian"
 msgstr ""
 
+msgid "Japanese"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 
