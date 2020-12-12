@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-12-11 13:12\n"
+"PO-Revision-Date: 2020-12-12 16:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Vue Miroir"
 
 msgid "Show Grid"
 msgstr "Afficher la grille"
@@ -642,7 +642,7 @@ msgid "Romanian"
 msgstr "Roumain"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonais"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
@@ -1513,11 +1513,11 @@ msgid "Frame duration"
 msgstr "Durée de la frame"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Mode Tuile sur les Deux Axes"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Mode Tuile sur l'Axe X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Mode Tuile sur l'Axe Y"
 
