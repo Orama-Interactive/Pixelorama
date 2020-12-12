@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-12-12 17:04\n"
+"PO-Revision-Date: 2020-12-12 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -291,7 +291,7 @@ msgid "Cancel Export"
 msgstr "Annuler l'exportation"
 
 msgid "Alert!"
-msgstr "Attention !"
+msgstr "Alerte !"
 
 msgid "Select Current Folder"
 msgstr "Sélectionner le dossier actuel"
@@ -315,7 +315,7 @@ msgid "Forward"
 msgstr "En avant"
 
 msgid "Backwards"
-msgstr "Reculer"
+msgstr "En Arrière"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
@@ -324,13 +324,13 @@ msgid "Columns"
 msgstr "Colonnes"
 
 msgid "Columns:"
-msgstr "Colonnes:"
+msgstr "Colonnes :"
 
 msgid "Rows"
 msgstr "Lignes"
 
 msgid "Rows:"
-msgstr "Lignes:"
+msgstr "Lignes :"
 
 msgid "Path:"
 msgstr "Chemin :"
@@ -375,7 +375,7 @@ msgid "Themes"
 msgstr "Thèmes"
 
 msgid "Canvas"
-msgstr "Toile"
+msgstr "Canevas"
 
 msgid "Shortcuts"
 msgstr "Raccourcis"
@@ -399,10 +399,10 @@ msgid "Adds a smoother transition when zooming in or out"
 msgstr "Ajoute une transition plus douce lors d'un zoom avant ou arrière"
 
 msgid "Tablet pressure sensitivity:"
-msgstr "Sensibilité à la pression de la tablette:"
+msgstr "Sensibilité à la pression de la tablette :"
 
 msgid "None"
-msgstr "Aucun"
+msgstr "Aucune"
 
 msgid "Affect Brush's Alpha"
 msgstr "Affecter l'Alpha du pinceau"
@@ -411,7 +411,7 @@ msgid "Color:"
 msgstr "Couleur :"
 
 msgid "Guide color:"
-msgstr "Couleur du guide:"
+msgstr "Couleur du guide :"
 
 msgid "System Language"
 msgstr "Langue système"
@@ -438,7 +438,7 @@ msgid "Purple"
 msgstr "Violet"
 
 msgid "Only affect selection"
-msgstr "N’affecter que la sélection"
+msgstr "Affecter uniquement la sélection"
 
 msgid "Current cel"
 msgstr "Cellule actuelle"
@@ -456,16 +456,16 @@ msgid "Invert Colors"
 msgstr "Inverser les couleurs"
 
 msgid "Modify Red Channel"
-msgstr "Modifier Canal Rouge"
+msgstr "Modifier le Canal Rouge"
 
 msgid "Modify Green Channel"
-msgstr "Modifier Canal Vert"
+msgstr "Modifier le Canal Vert"
 
 msgid "Modify Blue Channel"
-msgstr "Modifier Canal Bleu"
+msgstr "Modifier le Canal Bleu"
 
 msgid "Modify Alpha Channel"
-msgstr "Modifier Canal Alpha"
+msgstr "Modifier le Canal Alpha"
 
 msgid "Desaturation"
 msgstr "Désaturation"
