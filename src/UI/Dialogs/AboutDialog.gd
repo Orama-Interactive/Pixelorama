@@ -104,6 +104,7 @@ func create_donors() -> void:
 	donors.create_item(donors_root).set_text(0, "  Isambard")
 	donors.create_item(donors_root).set_text(0, "  Hugo Locurcio")
 	donors.create_item(donors_root).set_text(0, "  MysteryStudio")
+	donors.create_item(donors_root).set_text(0, "  Daniel Gagnon")
 
 
 func create_contributors() -> void:
@@ -186,7 +187,10 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  Aninuscsalas - " + tr("Hungarian"))
 	translators.create_item(translators_root).set_text(0, "  jaehyeon1090 - " + tr("Korean"))
 	translators.create_item(translators_root).set_text(0, "  sfun_G - " + tr("Korean"))
-	translators.create_item(translators_root).set_text(0, "  KripC2160 - " + tr("Korean"))
+	translators.create_item(translators_root).set_text(0, "  KripC2160 - " + tr("Korean") + " " + tr("and") + " " + tr("Japanese"))
+	translators.create_item(translators_root).set_text(0, "  daisuke osada (barlog) - " + tr("Japanese"))
+	translators.create_item(translators_root).set_text(0, "  Motomo.exe - " + tr("Japanese"))
+	translators.create_item(translators_root).set_text(0, "  hebekeg - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  M. Gabriel Lup - " + tr("Romanian"))
 	translators.create_item(translators_root).set_text(0, "  ANormalKnife - " + tr("Turkish"))
 	translators.create_item(translators_root).set_text(0, "  kmsecer - " + tr("Turkish"))

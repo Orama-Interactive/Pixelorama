@@ -516,7 +516,7 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 
 func is_cjk(locale : String) -> bool:
-	return "zh" in locale or "ko" in locale
+	return "zh" in locale or "ko" in locale or "ja" in locale
 
 
 func _exit_tree() -> void:
