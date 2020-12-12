@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-11-23 16:58\n"
+"PO-Revision-Date: 2020-12-11 13:12\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -190,7 +190,7 @@ msgid "Import as:"
 msgstr "Importálás másként:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Utoljára megnyitott projektek"
 
 msgid "New tab"
 msgstr "Új lap"
@@ -417,7 +417,7 @@ msgid "System Language"
 msgstr "Rendszer nyelv"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Skála megjelenítése"
 
 msgid "Dark"
 msgstr "Sötét"
@@ -640,6 +640,9 @@ msgstr "Magyar"
 
 msgid "Romanian"
 msgstr "Román"
+
+msgid "Japanese"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Fejlesztő csapat"
