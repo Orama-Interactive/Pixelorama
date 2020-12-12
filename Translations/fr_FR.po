@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-12-12 16:53\n"
+"PO-Revision-Date: 2020-12-12 17:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,13 +28,13 @@ msgid "Please Confirm..."
 msgstr "Veuillez confirmer..."
 
 msgid "File Name:"
-msgstr "Nom du fichier:"
+msgstr "Nom du fichier :"
 
 msgid "Image Size"
 msgstr "Taille de l'image"
 
 msgid "Canvas Size"
-msgstr "Taille du canevas"
+msgstr "Taille du Canevas"
 
 msgid "Frame Size"
 msgstr "Taille de la frame"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Hauteur :"
 
 msgid "Center"
-msgstr "Centre"
+msgstr "Centrer"
 
 msgid "File"
 msgstr "Fichier"
@@ -88,7 +88,7 @@ msgid "Import"
 msgstr "Importer"
 
 msgid "Export"
-msgstr "Exporter une image"
+msgstr "Exporter"
 
 msgid "Export..."
 msgstr "Exporter..."
@@ -97,7 +97,7 @@ msgid "Export as..."
 msgstr "Exporter en tant que..."
 
 msgid "Export PNG..."
-msgstr "Exporter une image PNG..."
+msgstr "Exporter sous format PNG..."
 
 msgid "Export PNG as..."
 msgstr "Exporter une image PNG sous..."
@@ -106,10 +106,10 @@ msgid "Quit"
 msgstr "Quitter"
 
 msgid "Undo"
-msgstr "Défaire"
+msgstr "Annuler"
 
 msgid "Redo"
-msgstr "Refaire"
+msgstr "Rétablir"
 
 msgid "Copy"
 msgstr "Copier"
@@ -136,13 +136,13 @@ msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Clear Selection"
-msgstr "Ne rien sélectionner"
+msgstr "Effacer la Sélection"
 
 msgid "Flip"
 msgstr "Retourner"
 
 msgid "Flip Horizontal"
-msgstr "Miroir horizontal"
+msgstr "Retourner Horizontalement"
 
 msgid "Flip Vertical"
 msgstr "Miroir vertical"
@@ -166,7 +166,7 @@ msgid "Show Guides"
 msgstr "Afficher les guides"
 
 msgid "Show Animation Timeline"
-msgstr "Afficher la chronologie de l'animation"
+msgstr "Afficher la Timeline d'Animation"
 
 msgid "Zen Mode"
 msgstr "Mode Zen"
@@ -214,16 +214,16 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Frame horizontale :"
+msgstr "Frames horizontaux :"
 
 msgid "Vertical frames:"
-msgstr "Frame verticale :"
+msgstr "Frames verticaux :"
 
 msgid "Brush type:"
-msgstr "Type de pinceau:"
+msgstr "Type de pinceau :"
 
 msgid "File brush"
-msgstr "Pinceau du fichier"
+msgstr "Fichier du Pinceau"
 
 msgid "Project brush"
 msgstr "Pinceau du projet"
@@ -232,10 +232,10 @@ msgid "Random brush"
 msgstr "Pinceau aléatoire"
 
 msgid "Save Sprite as .pxo"
-msgstr "Enregistrer la sprite au format .pxo"
+msgstr "Enregistrer le sprite au format .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exporter le Sprite en .png"
+msgstr "Exporter le Sprite sous format .png"
 
 msgid "Export Sprite"
 msgstr "Exporter le sprite"
@@ -267,7 +267,7 @@ msgid "All Frames"
 msgstr "Toutes les frames"
 
 msgid "Spritesheet"
-msgstr "Feuille de calque"
+msgstr "Spritesheet"
 
 msgid "Animation"
 msgstr "Animation"
@@ -285,7 +285,7 @@ msgid "Browse"
 msgstr "Parcourir"
 
 msgid "Resize:"
-msgstr "Redimensionner:"
+msgstr "Redimensionner :"
 
 msgid "Cancel Export"
 msgstr "Annuler l'exportation"
