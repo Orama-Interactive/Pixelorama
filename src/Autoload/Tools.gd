@@ -68,8 +68,12 @@ func _ready() -> void:
 	_tool_buttons = Global.find_node_by_name(Global.control, "ToolButtons")
 
 	var value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
+	if not value in _tools:
+		value = "Pencil"
 	set_tool(value, BUTTON_LEFT)
 	value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "tool", "Eraser")
+	if not value in _tools:
+		value = "Eraser"
 	set_tool(value, BUTTON_RIGHT)
 	value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "color", Color.black)
 	assign_color(value, BUTTON_LEFT, false)
