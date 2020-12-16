@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2020-12-16 18:26\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -34,7 +34,7 @@ msgid "Image Size"
 msgstr "حجم الصورة"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "حجم الكانفاس"
 
 msgid "Frame Size"
 msgstr "حجم الإطار"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "الطول:"
 
 msgid "Center"
-msgstr ""
+msgstr "في المنتصف"
 
 msgid "File"
 msgstr "الملف"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "نسخ"
 
 msgid "Cut"
-msgstr ""
+msgstr "قص"
 
 msgid "Paste"
 msgstr "لصق"
@@ -130,7 +130,7 @@ msgid "Crop Image"
 msgstr "تقطيع الصورة"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "تغيير حجم الكانفاس"
 
 msgid "Rotate Image"
 msgstr "تدوير الصورة"
@@ -139,7 +139,7 @@ msgid "Clear Selection"
 msgstr "إزالة التحديد"
 
 msgid "Flip"
-msgstr ""
+msgstr "لف"
 
 msgid "Flip Horizontal"
 msgstr "التدوير بشكل أفقي"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "وضع البلاط"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "عرض المرآة"
 
 msgid "Show Grid"
 msgstr "إظهار الشبكة"
@@ -163,7 +163,7 @@ msgid "Show Rulers"
 msgstr "إظهار المسطرة"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "إظهار الإرشادات"
 
 msgid "Show Animation Timeline"
 msgstr ""
