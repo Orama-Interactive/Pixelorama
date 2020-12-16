@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-16 18:26\n"
+"PO-Revision-Date: 2020-12-16 18:39\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -166,10 +166,10 @@ msgid "Show Guides"
 msgstr "إظهار الإرشادات"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "إظهار الخيط الزمني للرسوم المتحركة"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "وضع التأمل"
 
 msgid "Fullscreen Mode"
 msgstr "وضع ملء الشاشة"
@@ -190,7 +190,7 @@ msgid "Import as:"
 msgstr "استيراد باسم:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "المشاريع الأخيرة"
 
 msgid "New tab"
 msgstr "علامة تبويب جديدة"
@@ -214,71 +214,72 @@ msgid "New pattern"
 msgstr "نمط جديد"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "الأطر الأفقية:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "الأطر العمودية:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "نوع الفرشاة:"
 
 msgid "File brush"
-msgstr ""
+msgstr "إستعمال صورة كفرشاة"
 
 msgid "Project brush"
-msgstr ""
+msgstr "إستعمال فرشاة شخصية"
 
 msgid "Random brush"
-msgstr ""
+msgstr "فرشاة عشوائية"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "حفظ سبريت ك.pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "تصدير سبريت ك.png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "تصدير سبريت"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "الملف موجود، هل تريد إستبداله؟"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "ملف %s موجود بالفعل. هل تريد إستبداله؟"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "مسار المجلد أو اسم الملف غير صالح!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "جاري التصدير..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "لا يمكن تحميل الملف '%s'.\n"
+"رمز الخطأ: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "الإطار"
 
 msgid "Frames:"
-msgstr ""
+msgstr "إطارات:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "كل الإطارات"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "ورقة السبريت"
 
 msgid "Animation"
-msgstr ""
+msgstr "الرسوم المتحركة"
 
 msgid "Preview:"
-msgstr ""
+msgstr "معاينة:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "الإطار:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "الإتجاه:"
 
 msgid "Browse"
 msgstr ""
