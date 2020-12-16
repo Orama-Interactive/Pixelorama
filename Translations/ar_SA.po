@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-16 18:49\n"
+"PO-Revision-Date: 2020-12-16 18:55\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -549,16 +549,16 @@ msgid "Developed by Orama Interactive"
 msgstr "تم تطويره بواسطة Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "حقوق الطبع والنشر 2019-2020 أوراما انتراكتيف والمساهمين"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©حقوق الطبع والنشر 2019-2020 أوراما انتراكتيف والمساهمين"
 
 msgid "Website"
 msgstr "الموقع"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "مخزن GitHub"
 
 msgid "Donate"
 msgstr "تبرّع"
@@ -612,7 +612,7 @@ msgid "Spanish"
 msgstr "الإسبانية"
 
 msgid "Catalan"
-msgstr ""
+msgstr "الكاتالونية"
 
 msgid "Esperanto"
 msgstr "إسبرانتو"
@@ -624,19 +624,19 @@ msgid "Czech"
 msgstr "التشيكية"
 
 msgid "Arabic"
-msgstr ""
+msgstr "العربيّة"
 
 msgid "Turkish"
-msgstr ""
+msgstr "التركية"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "النرويجية"
 
 msgid "Korean"
-msgstr ""
+msgstr "الكورية"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "الهنغارية"
 
 msgid "Romanian"
 msgstr ""
