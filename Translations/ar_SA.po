@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-16 18:39\n"
+"PO-Revision-Date: 2020-12-16 18:49\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -282,28 +282,28 @@ msgid "Orientation:"
 msgstr "الإتجاه:"
 
 msgid "Browse"
-msgstr ""
+msgstr "تصفّح"
 
 msgid "Resize:"
-msgstr ""
+msgstr "تغيير الحجم:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "إلغاء التصدير"
 
 msgid "Alert!"
-msgstr ""
+msgstr "تنبيه!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "اختر المجلد الحالي"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "فتح الدليل"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "جميع الإطارات كملفات متعددة"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "جميع الإطارات كرسوم متحركة لملف واحد"
 
 msgid "Background:"
 msgstr "الخلفيّة:"
@@ -312,34 +312,34 @@ msgid "Direction:"
 msgstr "الاتجاه:"
 
 msgid "Forward"
-msgstr ""
+msgstr "إلى الأمام"
 
 msgid "Backwards"
-msgstr ""
+msgstr "إلى الوراء"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "بينغ بونغ"
 
 msgid "Columns"
-msgstr ""
+msgstr "الخانات"
 
 msgid "Columns:"
-msgstr ""
+msgstr "الخانات:"
 
 msgid "Rows"
-msgstr ""
+msgstr "الصفوف"
 
 msgid "Rows:"
-msgstr ""
+msgstr "الصفوف:"
 
 msgid "Path:"
-msgstr ""
+msgstr "المسار:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "المجلدات والملفات:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "إنشاء مجلد"
 
 msgid "File:"
 msgstr ""
@@ -519,31 +519,31 @@ msgid "Top to Bottom"
 msgstr ""
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "أسفل إلى أعلى"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "من اليسار إلى اليمين"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "من اليمين إلى اليسار"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "عرض شاشة البداية"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "التعليمات عبر الانترنت"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "متعقب المشاكل"
 
 msgid "Changelog"
-msgstr ""
+msgstr "سِجل التغييرات"
 
 msgid "About Pixelorama"
 msgstr "حول Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "بيكسلوراما - بيكسل أحلامك!"
 
 msgid "Developed by Orama Interactive"
 msgstr "تم تطويره بواسطة Orama Interactive"
