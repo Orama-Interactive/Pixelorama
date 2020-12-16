@@ -149,7 +149,7 @@ func add_animated_preview() -> void:
 
 	previews.add_child(container)
 	frame_timer.set_one_shot(true) #The wait_time it can't change correctly if it is playing
-	frame_timer.wait_time = Global.current_project.frame_duration[animated_preview_current_frame] * (1 / Global.animation_timeline.fps)
+	frame_timer.wait_time = Global.current_project.frames[animated_preview_current_frame].duration * (1 / Global.animation_timeline.fps)
 	frame_timer.start()
 
 
@@ -363,14 +363,14 @@ func _on_FrameTimer_timeout() -> void:
 				animated_preview_current_frame = 0
 			else:
 				animated_preview_current_frame += 1
-			frame_timer.wait_time = Global.current_project.frame_duration[(animated_preview_current_frame - 1) % (animated_preview_frames.size())] * (1 / Global.animation_timeline.fps)
+			frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame - 1) % (animated_preview_frames.size())].duration * (1 / Global.animation_timeline.fps)
 			frame_timer.start()
 		Export.AnimationDirection.BACKWARDS:
 			if animated_preview_current_frame == 0:
 				animated_preview_current_frame = Export.processed_images.size() - 1
 			else:
 				animated_preview_current_frame -= 1
-			frame_timer.wait_time = Global.current_project.frame_duration[(animated_preview_current_frame + 1) % (animated_preview_frames.size())] * (1 / Global.animation_timeline.fps)
+			frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame + 1) % (animated_preview_frames.size())].duration * (1 / Global.animation_timeline.fps)
 			frame_timer.start()
 		Export.AnimationDirection.PING_PONG:
 			match pingpong_direction:
@@ -382,7 +382,7 @@ func _on_FrameTimer_timeout() -> void:
 							animated_preview_current_frame = 0
 					else:
 						animated_preview_current_frame += 1
-					frame_timer.wait_time = Global.current_project.frame_duration[(animated_preview_current_frame - 1) % (animated_preview_frames.size())] * (1 / Global.animation_timeline.fps)
+					frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame - 1) % (animated_preview_frames.size())].duration * (1 / Global.animation_timeline.fps)
 					frame_timer.start()
 				Export.AnimationDirection.BACKWARDS:
 					if animated_preview_current_frame == 0:
@@ -392,7 +392,7 @@ func _on_FrameTimer_timeout() -> void:
 						pingpong_direction = Export.AnimationDirection.FORWARD
 					else:
 						animated_preview_current_frame -= 1
-					frame_timer.wait_time = Global.current_project.frame_duration[(animated_preview_current_frame + 1) % (animated_preview_frames.size())] * (1 / Global.animation_timeline.fps)
+					frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame + 1) % (animated_preview_frames.size())].duration * (1 / Global.animation_timeline.fps)
 					frame_timer.start()
 
 

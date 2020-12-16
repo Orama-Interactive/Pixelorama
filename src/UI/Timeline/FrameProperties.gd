@@ -13,16 +13,16 @@ func _on_FrameProperties_popup_hide() -> void:
 	Global.dialog_open(false)
 
 func _on_FrameProperties_confirmed():
-	var frame : int = int(frame_num.get_text())
+	var frame : int = int(frame_num.get_text()) - 1
 	var duration : float = frame_dur.get_value()
-	var frame_duration = Global.current_project.frame_duration.duplicate()
-	frame_duration[frame - 1] = duration
+	var new_duration = Global.current_project.frames[frame].duration
+	new_duration = duration
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Change frame duration")
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
+	Global.current_project.undo_redo.add_do_property(Global.current_project.frames[frame], "duration", new_duration)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project.frames[frame], "duration", Global.current_project.frames[frame].duration)
 
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")

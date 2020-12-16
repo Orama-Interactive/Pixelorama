@@ -9,7 +9,7 @@ func _draw() -> void:
 	if frame >= current_project.frames.size():
 		frame = current_project.current_frame
 
-	$AnimationTimer.wait_time = current_project.frame_duration[frame] * (1 / Global.animation_timeline.fps)
+	$AnimationTimer.wait_time = current_project.frames[frame].duration * (1 / Global.animation_timeline.fps)
 
 	if animation_timer.is_stopped():
 		frame = current_project.current_frame
@@ -30,6 +30,6 @@ func _on_AnimationTimer_timeout() -> void:
 		frame = 0
 
 	$AnimationTimer.set_one_shot(true)
-	$AnimationTimer.wait_time = Global.current_project.frame_duration[frame] * (1 / Global.animation_timeline.fps)
+	$AnimationTimer.wait_time = Global.current_project.frames[frame].duration * (1 / Global.animation_timeline.fps)
 	$AnimationTimer.start()
 	update()

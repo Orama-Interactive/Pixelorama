@@ -9,7 +9,6 @@ var tile_mode : int = Global.Tile_Mode.NONE
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
-var frame_duration := []
 var layers := [] setget layers_changed # Array of Layers
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
@@ -41,7 +40,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
-	frame_duration.append(1)
 	select_all_pixels()
 
 	undo_redo = UndoRedo.new()
@@ -259,7 +257,8 @@ func serialize() -> Dictionary:
 #				"image_data" : cel.image.get_data()
 			})
 		frame_data.append({
-			"cels" : cel_data
+			"cels" : cel_data,
+			"duration" : frame.duration
 		})
 	var brush_data := []
 	for brush in brushes:
@@ -283,7 +282,6 @@ func serialize() -> Dictionary:
 		"export_directory_path" : directory_path,
 		"export_file_name" : file_name,
 		"export_file_format" : file_format,
-		"frame_duration" : frame_duration,
 	}
 
 	return project_data
@@ -299,11 +297,20 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):
+		var frame_i := 0
 		for frame in dict.frames:
 			var cels := []
 			for cel in frame.cels:
 				cels.append(Cel.new(Image.new(), cel.opacity))
-			frames.append(Frame.new(cels))
+			var duration := 1.0
+			if frame.has("duration"):
+				duration = frame.duration
+			elif dict.has("frame_duration"):
+				duration = dict.frame_duration[frame_i]
+
+			frames.append(Frame.new(cels, duration))
+			frame_i += 1
+
 		if dict.has("layers"):
 			var layer_i :=  0
 			for saved_layer in dict.layers:
@@ -345,13 +352,6 @@ func deserialize(dict : Dictionary) -> void:
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
 		file_format = dict.export_file_format
-	if dict.has("frame_duration"):
-		frame_duration = dict.frame_duration
-	else:
-		for i in frames.size():
-			if i < frame_duration.size():
-				continue
-			frame_duration.append(1)
 
 
 func name_changed(value : String) -> void:

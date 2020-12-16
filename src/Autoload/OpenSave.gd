@@ -218,8 +218,6 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 		new_project.size = Vector2(width, height)
 		new_project.frames.append(frame_class)
-		if frame >= new_project.frame_duration.size():
-			new_project.frame_duration.append(1)
 		frame_line = file.get_line()
 		frame += 1
 
@@ -386,7 +384,6 @@ func open_image_as_spritesheet(path : String, image : Image, horizontal : int, v
 				frame.cels.append(Cel.new(empty_sprite, 1))
 
 			project.frames.append(frame)
-			project.frame_duration.append(1)
 
 	set_new_tab(project, path)
 
@@ -395,7 +392,6 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_frames : Array = project.frames.duplicate()
-	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
 
 	var frame := Frame.new()
 	for i in project.layers.size():
@@ -410,7 +406,6 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 			frame.cels.append(Cel.new(empty_image, 1))
 
 	new_frames.append(frame)
-	frame_duration.append(1)
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
@@ -420,12 +415,10 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	project.undo_redo.add_do_property(project, "frames", new_frames)
 	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
 	project.undo_redo.add_do_property(project, "current_layer", layer_index)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration) # Add an 1 in the list of frame_duration
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
 	project.undo_redo.commit_action()
 
 
