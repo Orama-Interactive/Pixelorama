@@ -1,6 +1,5 @@
 extends Panel
 
-var fps := 6.0
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
@@ -8,13 +7,15 @@ var last_frame := 0
 
 var timeline_scroll : ScrollContainer
 var tag_scroll_container : ScrollContainer
+var fps_spinbox : SpinBox
 
 
 func _ready() -> void:
 	timeline_scroll = Global.find_node_by_name(self, "TimelineScroll")
 	tag_scroll_container = Global.find_node_by_name(self, "TagScroll")
+	fps_spinbox = find_node("FPSValue")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
-	Global.animation_timer.wait_time = 1 / fps
+	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 
 
 func _h_scroll_changed(value : float) -> void:
@@ -230,6 +231,7 @@ func _on_AnimationTimer_timeout() -> void:
 		$AnimationTimer.stop()
 		return
 
+	var fps = Global.current_project.fps
 	if animation_forward:
 		if Global.current_project.current_frame < last_frame:
 			Global.current_project.current_frame += 1
@@ -299,6 +301,7 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 	if play:
 		Global.animation_timer.set_one_shot(true) # The wait_time can't change correctly if it is playing
 		var duration : float = Global.current_project.frames[Global.current_project.current_frame].duration
+		var fps = Global.current_project.fps
 		Global.animation_timer.wait_time = duration * (1 / fps)
 		Global.animation_timer.start()
 		animation_forward = forward_dir
@@ -325,8 +328,8 @@ func _on_FirstFrame_pressed() -> void:
 
 
 func _on_FPSValue_value_changed(value : float) -> void:
-	fps = float(value)
-	Global.animation_timer.wait_time = 1 / fps
+	Global.current_project.fps = float(value)
+	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 
 
 func _on_PastOnionSkinning_value_changed(value : float) -> void:

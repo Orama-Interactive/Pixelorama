@@ -23,6 +23,17 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=21]
 [ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
 
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 9 )
+shader_param/size = 10.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
+
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 9 )
 shader_param/size = 10.0
@@ -34,18 +45,7 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 9 )
-shader_param/size = 10.0
-shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
-shader_param/color2 = Color( 1, 1, 1, 1 )
-shader_param/offset = Vector2( 0, 0 )
-shader_param/scale = Vector2( 0, 0 )
-shader_param/rect_size = Vector2( 0, 0 )
-shader_param/follow_movement = false
-shader_param/follow_scale = false
-
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 expand_margin_top = 6.0
 
@@ -299,7 +299,7 @@ usage = 0
 render_target_update_mode = 3
 
 [node name="TransparentChecker" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 5 )]
-material = SubResource( 2 )
+material = SubResource( 1 )
 
 [node name="Canvas" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
 
@@ -331,7 +331,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="TransparentChecker" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 5 )]
-material = SubResource( 3 )
+material = SubResource( 2 )
 
 [node name="CanvasPreview" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 
@@ -343,7 +343,7 @@ script = ExtResource( 7 )
 [node name="AnimationTimeline" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
 margin_top = 492.0
 margin_bottom = 692.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="RightPanel" type="Panel" parent="."]
 margin_left = 950.0

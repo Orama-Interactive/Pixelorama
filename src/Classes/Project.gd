@@ -14,8 +14,8 @@ var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
 var animation_tags := [] setget animation_tags_changed # Array of AnimationTags
 var guides := [] # Array of Guides
-
 var brushes := [] # Array of Images
+var fps := 6.0
 
 var x_symmetry_point
 var y_symmetry_point
@@ -177,6 +177,7 @@ func change_project() -> void:
 	Global.canvas.grid.isometric_polylines.clear()
 	Global.canvas.grid.update()
 	Global.transparent_checker._ready()
+	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
 	Global.preview_zoom_slider.value = -Global.camera_preview.zoom.x
@@ -282,6 +283,7 @@ func serialize() -> Dictionary:
 		"export_directory_path" : directory_path,
 		"export_file_name" : file_name,
 		"export_file_format" : file_format,
+		"fps" : fps
 	}
 
 	return project_data
@@ -352,6 +354,8 @@ func deserialize(dict : Dictionary) -> void:
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
 		file_format = dict.export_file_format
+	if dict.has("fps"):
+		fps = dict.fps
 
 
 func name_changed(value : String) -> void:

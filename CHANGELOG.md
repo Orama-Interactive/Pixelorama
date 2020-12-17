@@ -4,10 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+
+## Unreleased
+This update has been brought to you by the contributions of:
+
+Laurenz Reinthaler (Schweini07)
+
+### Added
+- The FPS of the project animation is now stored in the pxo file.
+
+### Changed
+- CPU usage has been significantly been lowered when Pixelorama is idle. ([#394](https://github.com/Orama-Interactive/Pixelorama/pull/394))
+<br><br>
+
 ## [v0.8.2] - 2020-12-12
 This update has been brought to you by the contributions of:
 
-PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
+PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev, Laurenz Reinthaler (Schweini07)
 
 ### Added
 - The lighten/darken tool now has a hue shifting mode. It lets users configure the shift in hue, saturation and value of the new shaded pixels. ([#189](https://github.com/Orama-Interactive/Pixelorama/issues/189))
