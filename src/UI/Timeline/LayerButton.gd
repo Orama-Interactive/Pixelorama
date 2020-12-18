@@ -1,6 +1,7 @@
 class_name LayerButton
 extends Button
 
+
 var i := 0
 var visibility_button : BaseButton
 var lock_button : BaseButton
@@ -10,11 +11,24 @@ var line_edit : LineEdit
 
 
 func _ready() -> void:
-	visibility_button = Global.find_node_by_name(self, "VisibilityButton")
-	lock_button = Global.find_node_by_name(self, "LockButton")
-	linked_button = Global.find_node_by_name(self, "LinkButton")
-	label = Global.find_node_by_name(self, "Label")
-	line_edit = Global.find_node_by_name(self, "LineEdit")
+	visibility_button = find_node("VisibilityButton")
+	lock_button = find_node("LockButton")
+	linked_button = find_node("LinkButton")
+	label = find_node("Label")
+	line_edit = find_node("LineEdit")
+
+	var layer_buttons = find_node("LayerButtons")
+	for child in layer_buttons.get_children():
+		var texture = child.get_child(0)
+		var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
+		var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
+		var normal_file_name = texture.texture.resource_path.get_file()
+		var theme_type := Global.theme_type
+		if theme_type == Global.Theme_Types.CARAMEL or theme_type == Global.Theme_Types.BLUE:
+			theme_type = Global.Theme_Types.DARK
+
+		var theme_type_string : String = Global.Theme_Types.keys()[theme_type].to_lower()
+		texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
 
 	if Global.current_project.layers[i].visible:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")
