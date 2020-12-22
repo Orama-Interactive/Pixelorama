@@ -40,7 +40,8 @@ signal color_changed(color, button)
 
 var _tools = {
 	"RectSelect" : "res://src/Tools/RectSelect.tscn",
-	"Zoom" : "res://src/Tools/Zoom.tscn",
+	"Zoom" : "res://src/Tools/Pan.tscn",
+	"Pan" : "res://src/Tools/Pan.tscn",
 	"ColorPicker" : "res://src/Tools/ColorPicker.tscn",
 	"Pencil" : "res://src/Tools/Pencil.tscn",
 	"Eraser" : "res://src/Tools/Eraser.tscn",
