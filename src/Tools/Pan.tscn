@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/Pan.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="PixelPerfect" parent="." index="1"]
+visible = false
+margin_top = 126.0
+margin_bottom = 150.0
+
+[node name="EmptySpacer" parent="." index="2"]
+visible = false
+margin_top = 126.0
+margin_bottom = 138.0
+
+[node name="Mirror" parent="." index="3"]
+visible = false
+margin_top = 126.0
+margin_bottom = 143.0

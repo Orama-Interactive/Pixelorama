@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/pan_cursor.png-d26b4ee611af84aa6cee0ba9a3bf0b20.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/pan_cursor.png"
+dest_files=[ "res://.import/pan_cursor.png-d26b4ee611af84aa6cee0ba9a3bf0b20.image" ]
+
+[params]
+

@@ -5,6 +5,7 @@ extends VBoxContainer
 onready var tools := [
 	[$RectSelect, "rectangle_select"],
 	[$Zoom, "zoom"],
+	[$Pan, "pan"],
 	[$ColorPicker, "colorpicker"],
 	[$Pencil, "pencil"],
 	[$Eraser, "eraser"],
