@@ -27,9 +27,9 @@ func _input(event : InputEvent) -> void:
 		if event.is_action_pressed(action):
 			return
 	for t in tools: # Handle tool shortcuts
-		if event.is_action_pressed("right_" + t[1] + "_tool"): # Shortcut for right button (with Alt)
+		if event.is_action_pressed("right_" + t[1] + "_tool") and !event.control: # Shortcut for right button (with Alt)
 			Tools.assign_tool(t[0].name, BUTTON_RIGHT)
-		elif event.is_action_pressed("left_" + t[1] + "_tool"): # Shortcut for left button
+		elif event.is_action_pressed("left_" + t[1] + "_tool") and !event.control: # Shortcut for left button
 			Tools.assign_tool(t[0].name, BUTTON_LEFT)
 
 
