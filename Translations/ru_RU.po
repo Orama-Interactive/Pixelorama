@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-12-19 15:32\n"
+"PO-Revision-Date: 2020-12-27 11:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -567,7 +567,7 @@ msgid "Developers"
 msgstr "Разработчики"
 
 msgid "Contributors"
-msgstr "Разработчики"
+msgstr "Участники"
 
 msgid "Donors"
 msgstr "Спонсоры"
@@ -914,7 +914,7 @@ msgid "Pixel Perfect"
 msgstr "Пиксельная точность"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
 
 msgid "Brush color from"
 msgstr "Цвет кисти из"
