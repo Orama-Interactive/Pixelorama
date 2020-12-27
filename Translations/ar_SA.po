@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-16 19:16\n"
+"PO-Revision-Date: 2020-12-27 13:03\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -893,7 +893,7 @@ msgid "Pixel brush"
 msgstr ""
 
 msgid "Circle brush"
-msgstr ""
+msgstr "فرشاة الدائرة"
 
 msgid "Filled circle brush"
 msgstr ""
@@ -902,7 +902,7 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
-msgstr ""
+msgstr "حجم الفرشاة:"
 
 msgid "Overwrite Color"
 msgstr ""
