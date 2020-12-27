@@ -143,6 +143,7 @@ margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
+allow_greater = true
 
 [node name="ToLabel" type="Label" parent="TagOptions/GridContainer"]
 margin_left = 132.0
@@ -159,6 +160,7 @@ margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
+allow_greater = true 
 [connection signal="about_to_show" from="." to="." method="_on_FrameTagDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_FrameTagDialog_popup_hide"]
 [connection signal="pressed" from="VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag" to="." method="_on_AddTag_pressed"]
