@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-12-28 12:38\n"
+"PO-Revision-Date: 2020-12-28 12:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Высота:"
 
 msgid "Center"
-msgstr ""
+msgstr "По центру"
 
 msgid "File"
 msgstr "Файл"
@@ -267,7 +267,7 @@ msgid "All Frames"
 msgstr "Все кадры"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Таблица спрайтов"
 
 msgid "Animation"
 msgstr "Анимация"
@@ -390,7 +390,7 @@ msgid "On"
 msgstr "Вкл"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Восстановить по умолчанию"
 
 msgid "Smooth Zoom"
 msgstr "Плавное масштабирование"
@@ -896,7 +896,7 @@ msgid "Circle brush"
 msgstr "Круглая кисть"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Заполненная круглая кисть"
 
 msgid "Custom brush"
 msgstr "Своя кисть"
@@ -944,7 +944,7 @@ msgid "Offset"
 msgstr "Смещение"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Простое затенение"
 
 msgid "Hue Shifting"
 msgstr ""
