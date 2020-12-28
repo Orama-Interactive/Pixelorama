@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-12-27 11:23\n"
+"PO-Revision-Date: 2020-12-28 12:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "Бесшовный режим"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Зеркальный вид"
 
 msgid "Show Grid"
 msgstr "Показывать сетку"
@@ -196,7 +196,7 @@ msgid "New tab"
 msgstr "Новая вкладка"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Таблица спрайтов (новая вкладка)"
 
 msgid "New frame"
 msgstr "Новый кадр"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr ""
 
 msgid "Indicators"
-msgstr ""
+msgstr "Индикатор"
 
 msgid "On"
 msgstr "Вкл"
@@ -1329,7 +1329,7 @@ msgid "Get colors only from selection"
 msgstr "Получить цвета только из выделенного"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Получить цвета от"
 
 msgid "Patrons:"
 msgstr "Меценаты:"
