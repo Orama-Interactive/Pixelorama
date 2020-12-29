@@ -8,7 +8,7 @@ func _draw() -> void:
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
 	var size : Vector2 = Global.current_project.size
 	var positions : Array = get_tile_positions(size)
-	var tilemode_opacity = 1.0 - Global.tilemode_opacity
+	var tilemode_opacity := Global.tilemode_opacity
 
 	var _position := position
 	var _scale := scale
@@ -18,7 +18,7 @@ func _draw() -> void:
 	draw_set_transform(_position, rotation, _scale)
 
 	for i in range(Global.current_project.layers.size()):
-		var modulate_color := Color(1, 1, 1, current_cels[i].opacity - tilemode_opacity)
+		var modulate_color := Color(1, 1, 1, current_cels[i].opacity * tilemode_opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
 			if Global.current_project.tile_mode:
 				for pos in positions:
