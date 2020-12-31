@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 12:54\n"
+"PO-Revision-Date: 2020-12-31 13:14\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -300,19 +300,19 @@ msgid "Open a Directory"
 msgstr "Відкрити каталог"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Усі кадри як декілька файлів"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Всі кадри як один файл анімації"
 
 msgid "Background:"
-msgstr ""
+msgstr "Тло:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Напрямок:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Вперед"
 
 msgid "Backwards"
 msgstr "Назад"
@@ -369,91 +369,91 @@ msgid "Language"
 msgstr "Мова"
 
 msgid "Interface"
-msgstr ""
+msgstr "Інтерфейс"
 
 msgid "Themes"
-msgstr ""
+msgstr "Теми"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Полотно"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Ярлики"
 
 msgid "Backup"
-msgstr ""
+msgstr "Резервна копія"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Індикатори"
 
 msgid "On"
-msgstr ""
+msgstr "Вкл"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Відновити значення за замовчуванням"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "М'яке маштабування"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Додає більш плавний перехід при масштабуванні"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Чутливість до натиску на планшет:"
 
 msgid "None"
-msgstr ""
+msgstr "Нічого"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Вплив на альфу щітки"
 
 msgid "Color:"
-msgstr ""
+msgstr "Колір:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Колір напрямних:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Мова системи"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Масштаб екрану"
 
 msgid "Dark"
-msgstr ""
+msgstr "Темна"
 
 msgid "Gray"
-msgstr ""
+msgstr "Cіра"
 
 msgid "Blue"
-msgstr ""
+msgstr "Синя"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Карамель"
 
 msgid "Light"
-msgstr ""
+msgstr "Світла"
 
 msgid "Purple"
-msgstr ""
+msgstr "Фіолетова"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Змінити лише виділенне"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Поточна клітинка"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Поточний кадр"
 
 msgid "All frames"
-msgstr ""
+msgstr "Всі кадри"
 
 msgid "All projects"
-msgstr ""
+msgstr "Всі проєкти"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Інвертувати кольори"
 
 msgid "Modify Red Channel"
 msgstr ""
