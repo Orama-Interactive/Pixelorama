@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 12:46\n"
+"PO-Revision-Date: 2020-12-31 12:54\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -247,56 +247,57 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Файл \"%s\" вже існує. Перезаписати?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Шлях до каталогу або ім'я файлу недійсні!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Виконується експорт..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Не вдалося завантажити файл '%s.\n"
+"Код помилки: %s"
 
 msgid "Frame"
 msgstr "Кадр"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Кадри:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Всі кадри"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Таблиця спрайтів"
 
 msgid "Animation"
-msgstr ""
+msgstr "Анімація"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Попередній перегляд:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Кадр:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Орієнтація:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Огляд"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Змінити розмір:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Скасувати експорт"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Увага!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Виберіть поточний каталог"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Відкрити каталог"
 
 msgid "All frames as multiple files"
 msgstr ""
@@ -338,7 +339,7 @@ msgid "Directories & Files:"
 msgstr "Каталоги та файли:"
 
 msgid "Create Folder"
-msgstr "Створити папку"
+msgstr "Створити каталог"
 
 msgid "File:"
 msgstr "Файл:"
