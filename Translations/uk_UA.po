@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 13:56\n"
+"PO-Revision-Date: 2020-12-31 17:35\n"
 
 msgid "OK"
-msgstr "Гаразд"
+msgstr "ОК"
 
 msgid "Cancel"
 msgstr "Відмінити"
