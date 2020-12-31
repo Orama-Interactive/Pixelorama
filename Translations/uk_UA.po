@@ -10,121 +10,121 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2020-12-31 12:17\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Гаразд"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Відмінити"
 
 msgid "Open"
-msgstr ""
+msgstr "Відкрити"
 
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Будь ласка, підтвердіть..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Ім'я файлу:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Розмір зображення"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Розмір полотна"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Розмір кадру"
 
 msgid "Width:"
-msgstr ""
+msgstr "Ширина:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Висота:"
 
 msgid "Center"
-msgstr ""
+msgstr "По центру"
 
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 msgid "Edit"
-msgstr ""
+msgstr "Редагувати"
 
 msgid "View"
-msgstr ""
+msgstr "Перегляд"
 
 msgid "Image"
-msgstr ""
+msgstr "Зображення"
 
 msgid "Effects"
-msgstr ""
+msgstr "Ефекти"
 
 msgid "Help"
-msgstr ""
+msgstr "Допомога"
 
 msgid "New"
-msgstr ""
+msgstr "Новий"
 
 msgid "New..."
-msgstr ""
+msgstr "Новий..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Відкрити..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Зберегти..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Зберегти як..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Використовувати стиснення ZSTD"
 
 msgid "Import"
-msgstr ""
+msgstr "Імпортувати"
 
 msgid "Export"
-msgstr ""
+msgstr "Експортувати"
 
 msgid "Export..."
-msgstr ""
+msgstr "Експортувати..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Експортувати як..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Експорт у PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Експорт в PNG як..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Вийти"
 
 msgid "Undo"
-msgstr ""
+msgstr "Відмінити"
 
 msgid "Redo"
-msgstr ""
+msgstr "Відновити"
 
 msgid "Copy"
-msgstr ""
+msgstr "Копіювати"
 
 msgid "Cut"
-msgstr ""
+msgstr "Вирізати"
 
 msgid "Paste"
-msgstr ""
+msgstr "Вставити"
 
 msgid "Delete"
-msgstr ""
+msgstr "Вилучити"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Масштабувати зображення"
 
 msgid "Crop Image"
 msgstr ""
