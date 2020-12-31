@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 13:36\n"
+"PO-Revision-Date: 2020-12-31 13:45\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -618,70 +618,70 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Індонезійська"
 
 msgid "Czech"
-msgstr ""
+msgstr "Чеська"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Арабська"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Турецька"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвезька"
 
 msgid "Korean"
-msgstr ""
+msgstr "Корейська"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Венгерська"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Румунська"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Японська"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Команда розробників"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Ведучий Програміст"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI дизайнер"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "Помічники на Github"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Художник: %s"
 
 msgid "untitled"
-msgstr ""
+msgstr "без назви"
 
 msgid "imported"
-msgstr ""
+msgstr "імпортовано"
 
 msgid "copy"
-msgstr ""
+msgstr "копіювати"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Ви дійсно бажаєте вийти з Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Незбережене зображення"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "У вас є незбережені зміни. Якщо ви продовжите, прогрес буде втрачений."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Зберегти перед виходом?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Ви маєте незбережений прогрес. Як Ви хочете продовжити?"
 
 msgid "Save & Exit"
 msgstr ""
