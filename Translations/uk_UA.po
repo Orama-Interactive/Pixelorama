@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 12:25\n"
+"PO-Revision-Date: 2020-12-31 12:36\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -163,28 +163,28 @@ msgid "Show Rulers"
 msgstr "Показати лінійки"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Показати посібники"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Показувати шкалу часу анімацій"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Режим \"Дзен\""
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Повноекранний режим"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Заливка кольором:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Відкрити файл"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Відкрити файл(и)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Параметри імпорту"
 
 msgid "Import as:"
 msgstr ""
@@ -365,7 +365,7 @@ msgid "Startup"
 msgstr "Запуск"
 
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
 msgid "Interface"
 msgstr ""
