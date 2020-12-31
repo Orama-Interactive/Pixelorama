@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 12:36\n"
+"PO-Revision-Date: 2020-12-31 12:46\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -187,64 +187,64 @@ msgid "Import Options"
 msgstr "Параметри імпорту"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Імпортувати як:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Нещодавні проекти"
 
 msgid "New tab"
-msgstr ""
+msgstr "Нова вкладка"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Таблиця спрайтів (нова вкладка)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Новий кадр"
 
 msgid "New layer"
-msgstr ""
+msgstr "Новий шар"
 
 msgid "New palette"
-msgstr ""
+msgstr "Нова палітра"
 
 msgid "New brush"
-msgstr ""
+msgstr "Нова щітка"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Новий шаблон"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Горизонтальні кадри:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Вертикальні кадри:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Тип пензлика:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Файл щітки"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Пензль проекту"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Випадковий пензлик"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Зберегти спрайт як .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Експортувати спрайт в .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Експортувати спрайт"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Файл існує, перезаписати?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Файл \"%s\" вже існує. Перезаписати?"
 
 msgid "Directory path or file name is not valid!"
 msgstr ""
@@ -257,7 +257,7 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Кадр"
 
 msgid "Frames:"
 msgstr ""
