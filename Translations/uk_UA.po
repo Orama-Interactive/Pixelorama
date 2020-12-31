@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 13:26\n"
+"PO-Revision-Date: 2020-12-31 13:36\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -606,16 +606,16 @@ msgid "Italian"
 msgstr "Італійська"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Латвійська"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Іспанська"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Каталанська"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
 msgstr ""
@@ -787,31 +787,31 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Сітка"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Тип сітки:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Встановлює тип сітки між прямокутником, ізометричним або обидва"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Прямокутна"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Ізометрична"
 
 msgid "All"
-msgstr ""
+msgstr "Усі"
 
 msgid "Grid width:"
-msgstr ""
+msgstr "Ширина сітки:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr ""
+msgstr "Встановлює, як далеко розташовані вертикальні лінії сітки"
 
 msgid "Grid height:"
-msgstr ""
+msgstr "Висота сітки:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr ""
