@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 12:17\n"
+"PO-Revision-Date: 2020-12-31 12:25\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -127,40 +127,40 @@ msgid "Scale Image"
 msgstr "Масштабувати зображення"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Обрізати зображення"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Змінити розмір полотна"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Повернути зображення"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Зняти виділення"
 
 msgid "Flip"
-msgstr ""
+msgstr "Віддзеркалити"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Віддзеркалити по горизонталі"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Віддзеркалити по вертикалі"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Налаштування"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Режим плитки"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Дзеркальний перегляд"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Показати сітку"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Показати лінійки"
 
 msgid "Show Guides"
 msgstr ""
@@ -314,55 +314,55 @@ msgid "Forward"
 msgstr ""
 
 msgid "Backwards"
-msgstr ""
+msgstr "Назад"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Пінг-Понг"
 
 msgid "Columns"
-msgstr ""
+msgstr "Стовпці"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Стовпці:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Рядки"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Рядки:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Шлях:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Каталоги та файли:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Створити папку"
 
 msgid "File:"
-msgstr ""
+msgstr "Файл:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Інтерполяція:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Найближчі"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Білінійна"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Кубічна"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Трилінійна"
 
 msgid "General"
-msgstr ""
+msgstr "Загальні"
 
 msgid "Startup"
-msgstr ""
+msgstr "Запуск"
 
 msgid "Language"
 msgstr ""
