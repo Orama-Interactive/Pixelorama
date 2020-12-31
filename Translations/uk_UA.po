@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2020-12-31 13:14\n"
+"PO-Revision-Date: 2020-12-31 13:26\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -438,7 +438,7 @@ msgid "Purple"
 msgstr "Фіолетова"
 
 msgid "Only affect selection"
-msgstr "Змінити лише виділенне"
+msgstr "Впливає лише на обране"
 
 msgid "Current cel"
 msgstr "Поточна клітинка"
@@ -456,154 +456,154 @@ msgid "Invert Colors"
 msgstr "Інвертувати кольори"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Змінити червоний канал"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Змінити зелений канал"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Змінити синій канал"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Змінити альфа-канал"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Знебарвлення"
 
 msgid "Outline"
-msgstr ""
+msgstr "Контур"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Змінити Відтінки/Насиченість/Яскравість"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Градієнт"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Налаштування HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Тип:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Кут:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Відтінок:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Насиченість:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Яскравість:"
 
 msgid "Apply"
-msgstr ""
+msgstr "Застосувати"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Діагональ"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Розмістити всередині зображення"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Товщина:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Кольори:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Кроки:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Зверху донизу"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Знизу вгору"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Зліва направо"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Справа наліво"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Переглянути екран привітання"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Онлайн документація"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Трекер помилок"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Список змін"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Про Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Пікселорама - пікселізуйте свої мрії!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Розроблено Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive і учасники"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©Copyright 2019-2020 Orama Interactive і учасники"
 
 msgid "Website"
-msgstr ""
+msgstr "Веб-сайт"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub репозиторій"
 
 msgid "Donate"
-msgstr ""
+msgstr "Підтримати"
 
 msgid "Developers"
-msgstr ""
+msgstr "Розробники"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Учасники"
 
 msgid "Donors"
-msgstr ""
+msgstr "Спонсори"
 
 msgid "Translators"
-msgstr ""
+msgstr "Перекладачі"
 
 msgid "English"
-msgstr ""
+msgstr "Англійська"
 
 msgid "Greek"
-msgstr ""
+msgstr "Грецька"
 
 msgid "French"
-msgstr ""
+msgstr "Французька"
 
 msgid "German"
-msgstr ""
+msgstr "Німецька"
 
 msgid "Polish"
-msgstr ""
+msgstr "Польська"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Бразильська португальська"
 
 msgid "Russian"
-msgstr ""
+msgstr "Російська"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Китайська спрощена"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Китайська традиційна"
 
 msgid "Italian"
-msgstr ""
+msgstr "Італійська"
 
 msgid "Latvian"
 msgstr ""
