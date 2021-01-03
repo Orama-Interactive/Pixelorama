@@ -9,6 +9,8 @@ var can_undo := true
 var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
 
+onready var currently_visible_frame : Viewport = $CurrentlyVisibleFrame
+onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
 onready var grid = $Grid
 onready var tile_mode = $TileMode
 onready var indicators = $Indicators
@@ -42,6 +44,8 @@ func _draw() -> void:
 
 	if Global.onion_skinning:
 		onion_skinning()
+	currently_visible_frame.size = Global.current_project.size
+	current_frame_drawer.update()
 	tile_mode.update()
 	draw_set_transform(position, rotation, scale)
 
