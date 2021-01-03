@@ -193,7 +193,7 @@ margin_right = 640.0
 margin_bottom = 567.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 7 )
-text = "©2019-2020 by Orama Interactive and contributors"
+text = "©2019-present by Orama Interactive and contributors"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Contents/CopyrightLabel"]
