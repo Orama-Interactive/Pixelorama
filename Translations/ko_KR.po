@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-12-12 12:53\n"
+"PO-Revision-Date: 2021-01-03 19:05\n"
 
 msgid "OK"
 msgstr "예"
@@ -548,11 +548,8 @@ msgstr "Pixelorama - 당신의 꿈을 픽셀 화하세요!"
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive가 개발함"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "저작권 2019-2020 Orama Interactive and contributors"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "웹사이트"
