@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2020-12-11 13:21\n"
+"PO-Revision-Date: 2021-01-03 19:05\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -548,11 +548,8 @@ msgstr "Pixelorama - Pixelate your dreams!"
 msgid "Developed by Orama Interactive"
 msgstr "Φτιαγμένο από την Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive και συνεισφέροντες"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 Orama Interactive και συνεισφέροντες"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "Ιστοσελίδα"
