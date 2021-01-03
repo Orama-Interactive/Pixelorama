@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-27 13:03\n"
+"PO-Revision-Date: 2021-01-03 19:05\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -548,11 +548,8 @@ msgstr "بيكسلوراما - بيكسل أحلامك!"
 msgid "Developed by Orama Interactive"
 msgstr "تم تطويره بواسطة Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "حقوق الطبع والنشر 2019-2020 أوراما انتراكتيف والمساهمين"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©حقوق الطبع والنشر 2019-2020 أوراما انتراكتيف والمساهمين"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "الموقع"
