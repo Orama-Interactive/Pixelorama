@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-19 07:38\n"
+"PO-Revision-Date: 2021-01-03 19:05\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -548,11 +548,8 @@ msgstr "Pixelorama - Hayallerini pikselleştir!"
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Bütün hakları 2019-2020 Orama interaktif ve destekçileri tarafından saklı bulunmaktadır"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 Orama Interactive ve destekçileri tarafından"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "İnternet sitesi"
