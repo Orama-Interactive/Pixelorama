@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-11 18:07\n"
+"PO-Revision-Date: 2021-01-03 19:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -548,11 +548,8 @@ msgstr "Pixelorama - 夢をピクセル化しよう!"
 msgid "Developed by Orama Interactive"
 msgstr "Developed by Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive and contributors"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "ウェブサイト"
