@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-03 19:05\n"
+"PO-Revision-Date: 2021-01-04 12:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -548,7 +548,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "@2019-Gegenwart von Orama Interactive und Mitwirkenden"
 
 msgid "Website"
 msgstr "Website"
