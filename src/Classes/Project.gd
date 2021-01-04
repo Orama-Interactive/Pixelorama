@@ -465,15 +465,16 @@ func frame_changed(value : int) -> void:
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
 	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
 
+	if current_frame < frames.size():
+		Global.layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
+		Global.layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
+
 	Global.canvas.update()
 	Global.transparent_checker._ready() # To update the rect size
 
 
 func layer_changed(value : int) -> void:
 	current_layer = value
-	if current_frame < frames.size():
-		Global.layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
-		Global.layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
 
 	for container in Global.layers_container.get_children():
 		container.pressed = false
