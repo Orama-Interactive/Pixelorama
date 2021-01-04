@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-01-03 19:05\n"
+"PO-Revision-Date: 2021-01-04 00:44\n"
 
 msgid "OK"
 msgstr "确定"
@@ -549,7 +549,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©版权所有 2019- Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
