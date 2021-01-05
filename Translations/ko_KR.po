@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-03 19:05\n"
+"PO-Revision-Date: 2021-01-05 08:07\n"
 
 msgid "OK"
 msgstr "예"
@@ -549,7 +549,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive가 개발함"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "웹사이트"
