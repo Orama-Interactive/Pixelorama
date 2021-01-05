@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2021-01-05 19:56\n"
+"PO-Revision-Date: 2021-01-05 20:07\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -380,19 +380,19 @@ msgid "Shortcuts"
 msgstr "Пречице"
 
 msgid "Backup"
-msgstr ""
+msgstr "Резервна копија"
 
 msgid "Performance"
-msgstr ""
+msgstr "Перформансе"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Индикатори"
 
 msgid "On"
-msgstr ""
+msgstr "Укључено"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Врати подразумевану вриједност"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -404,40 +404,40 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Ништа"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Боја:"
 
 msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "Системски језик"
 
 msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "Тамно"
 
 msgid "Gray"
-msgstr ""
+msgstr "Сиво"
 
 msgid "Blue"
-msgstr ""
+msgstr "Плаво"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Карамел"
 
 msgid "Light"
-msgstr ""
+msgstr "Светло"
 
 msgid "Purple"
-msgstr ""
+msgstr "Љубичасто"
 
 msgid "Only affect selection"
 msgstr ""
@@ -446,13 +446,13 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Тренутни фрејм"
 
 msgid "All frames"
-msgstr ""
+msgstr "Сви фрејмови"
 
 msgid "All projects"
-msgstr ""
+msgstr "Сви пројекти"
 
 msgid "Invert Colors"
 msgstr ""
@@ -575,118 +575,118 @@ msgid "Translators"
 msgstr ""
 
 msgid "English"
-msgstr ""
+msgstr "Енглески"
 
 msgid "Greek"
-msgstr ""
+msgstr "Грчки"
 
 msgid "French"
-msgstr ""
+msgstr "Француски"
 
 msgid "German"
-msgstr ""
+msgstr "Њемачки"
 
 msgid "Polish"
-msgstr ""
+msgstr "Пољски"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Бразилски португалски"
 
 msgid "Russian"
-msgstr ""
+msgstr "Руски"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Кинески поједностављени"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Кинески традиционални"
 
 msgid "Italian"
-msgstr ""
+msgstr "Италијански"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Летонски"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Шпански"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Каталонски"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Есперанто"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Индонежански"
 
 msgid "Czech"
-msgstr ""
+msgstr "Чешки"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Арапски"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Турски"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвешки"
 
 msgid "Korean"
-msgstr ""
+msgstr "Корејски"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Мађарски"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Румунски"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Јапански"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Развојни тим"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Главни програмер"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI дизајнер"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub сарадници"
 
 msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "безимено"
 
 msgid "imported"
-msgstr ""
+msgstr "увезено"
 
 msgid "copy"
-msgstr ""
+msgstr "копирано"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Да ли сте сигурни да желите да изађете из Pixelorama-е?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Несачуване слика"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Имате несачуване измене. Ако наставите даље, сав напредак ће бити изгубљен."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Сачувајте прије изласка?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Имате несачуваних измјена. Како желите да наставите?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Сачувај & изађи"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Изађи без чувања"
 
 msgid "Utility Tools"
 msgstr ""
