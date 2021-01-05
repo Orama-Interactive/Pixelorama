@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-05 18:13\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr "Αντίγραφο ασφαλείας"
 
 msgid "Performance"
-msgstr ""
+msgstr "Επίδοση"
 
 msgid "Indicators"
 msgstr "Δείκτες"
