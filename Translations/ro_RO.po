@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-05 19:24\n"
+"PO-Revision-Date: 2021-01-05 19:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -893,7 +893,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Dacă această opțiune este activată, limita CPS a aplicației este setată la 1 în momentul în care fereastra aplicației pierde focalizarea. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Limita CPS se resetează când mausul intră în fereastra aplicației."
 
 msgid "Brush:"
 msgstr "Pensulă:"
