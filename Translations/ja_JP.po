@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-05 18:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr "バックアップ"
 
 msgid "Performance"
-msgstr ""
+msgstr "パフォーマンス"
 
 msgid "Indicators"
 msgstr "インジケーター"
@@ -552,7 +552,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Developed by Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-present by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "ウェブサイト"
@@ -884,16 +884,16 @@ msgid "Only custom preset can be modified"
 msgstr "カスタムプリセットのみ変更できます"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "アプリのFPS上限を設定:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "アプリがフォーカスを失った場合、FPSを1に制限する"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失った場合のアプリケーションのFPS制限が1に設定されます。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったときにFPS制限がリセットされます。"
 
 msgid "Brush:"
 msgstr "ブラシ："
