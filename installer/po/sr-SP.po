@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-09 20:48\n"
+"PO-Revision-Date: 2021-01-05 22:36\n"
 "Last-Translator: \n"
 "Language-Team: Serbian (Cyrillic)\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +21,17 @@ msgstr ""
 #. SecInstall
 #: .\pixelorama.nsi:72
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Инсталирај ${APPNAME}"
 
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Креирај пречицу у Старт Менију (опционално)"
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Креирај пречицу на десктопу (опционално)"
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
