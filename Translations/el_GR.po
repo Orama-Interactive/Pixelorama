@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-01-03 19:33\n"
+"PO-Revision-Date: 2021-01-05 18:04\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -382,6 +382,9 @@ msgstr "Συντομεύσεις"
 
 msgid "Backup"
 msgstr "Αντίγραφο ασφαλείας"
+
+msgid "Performance"
+msgstr ""
 
 msgid "Indicators"
 msgstr "Δείκτες"
@@ -879,6 +882,18 @@ msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολο�
 
 msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
+
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Πινέλο:"
