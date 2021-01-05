@@ -10,145 +10,145 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-05 19:56\n"
 
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Одустани"
 
 msgid "Open"
-msgstr ""
+msgstr "Отвори"
 
 msgid "Save"
-msgstr ""
+msgstr "Сачувај"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Молимо вас потврдите..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Име фајла:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Величина слике"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Величина канваса"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Величина фрејма"
 
 msgid "Width:"
-msgstr ""
+msgstr "Ширина:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Висина:"
 
 msgid "Center"
-msgstr ""
+msgstr "Центар"
 
 msgid "File"
-msgstr ""
+msgstr "Фајл"
 
 msgid "Edit"
-msgstr ""
+msgstr "Уреди"
 
 msgid "View"
-msgstr ""
+msgstr "Преглед"
 
 msgid "Image"
-msgstr ""
+msgstr "Слика"
 
 msgid "Effects"
-msgstr ""
+msgstr "Ефекти"
 
 msgid "Help"
-msgstr ""
+msgstr "Помоћ"
 
 msgid "New"
-msgstr ""
+msgstr "Ново"
 
 msgid "New..."
-msgstr ""
+msgstr "Ново..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Отвори..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Сачувај..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Сачувај као..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Користи ZSTD компресију"
 
 msgid "Import"
-msgstr ""
+msgstr "Увези"
 
 msgid "Export"
-msgstr ""
+msgstr "Извези"
 
 msgid "Export..."
-msgstr ""
+msgstr "Извези..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Извези као..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Извези PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Извези PNG као..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Изађи"
 
 msgid "Undo"
-msgstr ""
+msgstr "Опозови"
 
 msgid "Redo"
-msgstr ""
+msgstr "Вратити"
 
 msgid "Copy"
-msgstr ""
+msgstr "Копирај"
 
 msgid "Cut"
-msgstr ""
+msgstr "Исеци"
 
 msgid "Paste"
-msgstr ""
+msgstr "Налепи"
 
 msgid "Delete"
-msgstr ""
+msgstr "Обриши"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Скалирај слику"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Исеци слику"
 
 msgid "Resize Canvas"
 msgstr ""
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Ротирај слику"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Очисти избор"
 
 msgid "Flip"
-msgstr ""
+msgstr "Обрни"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Обрни хоризонтално"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Обрни вертикално"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Подешавања"
 
 msgid "Tile Mode"
 msgstr ""
@@ -157,10 +157,10 @@ msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Прикажи решетку"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Прикажи лењир"
 
 msgid "Show Guides"
 msgstr ""
@@ -305,79 +305,79 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Позадина:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Смер:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Напред"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Назад"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Пинг-Понг"
 
 msgid "Columns"
-msgstr ""
+msgstr "Колоне"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Колоне:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Редови"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Редови:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Патх:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Директоријуми & Фајлови:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Направи фолдер"
 
 msgid "File:"
-msgstr ""
+msgstr "Фајл:"
 
 msgid "Interpolation:"
 msgstr ""
 
 msgid "Nearest"
-msgstr ""
+msgstr "Најближи"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Билинеарно"
 
 msgid "Cubic"
 msgstr ""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Трилинеарно"
 
 msgid "General"
-msgstr ""
+msgstr "Опште"
 
 msgid "Startup"
-msgstr ""
+msgstr "Покретање"
 
 msgid "Language"
-msgstr ""
+msgstr "Језик"
 
 msgid "Interface"
-msgstr ""
+msgstr "Интерфејс"
 
 msgid "Themes"
-msgstr ""
+msgstr "Теме"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Канвас"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Пречице"
 
 msgid "Backup"
 msgstr ""
