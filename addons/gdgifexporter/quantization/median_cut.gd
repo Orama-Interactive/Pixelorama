@@ -13,9 +13,10 @@ class TreeNode:
 	var average_color: Array
 	var axis: int
 	var median: int
-	var parent: TreeNode
-	var left: TreeNode
-	var right: TreeNode
+	# Comments is workaround for Godot memory leak bug
+	var parent#: TreeNode
+	var left#: TreeNode
+	var right#: TreeNode
 
 
 	func _init(_parent: TreeNode, _colors: Array):
