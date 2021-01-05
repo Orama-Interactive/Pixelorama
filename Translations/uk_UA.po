@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-05 21:20\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr "Резервна копія"
 
 msgid "Performance"
-msgstr ""
+msgstr "Продуктивність"
 
 msgid "Indicators"
 msgstr "Індикатори"
@@ -870,7 +870,7 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Установити обмеження FPS додатку:"
 
 msgid "Limit FPS to 1 when app loses focus"
 msgstr ""
