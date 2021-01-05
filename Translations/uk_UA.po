@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-01-05 21:20\n"
+"PO-Revision-Date: 2021-01-05 21:37\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -552,7 +552,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Розроблено Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-сьогодні Orama Interactive і учасники"
 
 msgid "Website"
 msgstr "Веб-сайт"
@@ -873,13 +873,13 @@ msgid "Set application FPS limit:"
 msgstr "Установити обмеження FPS додатку:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Обмежити FPS до 1, коли змінити фокус програми"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Встановлює обмеження кадрів в секунду. Чим нижче значення, ти менше додаток використовує CPU, але програма починає працювати повільніше, стає менш стабільною і може не реагувати. 0 означає, що немає ніяких обмежень."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Якщо цей параметр увімкнено, коли вікно додатку втрачає фокус, то обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
 
 msgid "Brush:"
 msgstr ""
