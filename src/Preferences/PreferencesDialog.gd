@@ -29,6 +29,9 @@ var preferences = [
 	["checker_follow_movement", "Canvas/CheckerOptions/CheckerFollowMovement", "pressed", Global.checker_follow_movement],
 	["checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed", Global.checker_follow_scale],
 	["tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value", Global.tilemode_opacity],
+
+	["fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", Global.fps_limit],
+	["fps_limit_focus", "Performance/PerformanceContainer/EnableLimitFPSFocus", "pressed", Global.fps_limit_focus],
 ]
 
 var selected_item := 0
@@ -135,6 +138,9 @@ func preference_update(prop : String) -> void:
 			if guide is Guide:
 				guide.default_color = Global.guide_color
 
+	if prop in ["fps_limit"]:
+		Engine.set_target_fps(Global.fps_limit)
+
 	Global.config_cache.save("user://cache.ini")
 
 
@@ -157,6 +163,7 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	list.add_item("  " + tr("Image"))
 	list.add_item("  " + tr("Shortcuts"))
 	list.add_item("  " + tr("Backup"))
+	list.add_item("  " + tr("Performance"))
 	list.add_item("  " + tr("Indicators"))
 
 	list.select(1 if changed_language else selected_item)
@@ -170,7 +177,7 @@ func _on_PreferencesDialog_popup_hide() -> void:
 func _on_List_item_selected(index : int) -> void:
 	selected_item = index
 	for child in right_side.get_children():
-		var content_list = ["Startup", "Languages", "Interface", "Canvas", "Image", "Shortcuts", "Backup", "Indicators"]
+		var content_list = ["Startup", "Languages", "Interface", "Canvas", "Image", "Shortcuts", "Backup", "Performance", "Indicators"]
 		if OS.get_name() == "HTML5":
 			content_list.erase("Startup")
 		child.visible = child.name == content_list[index]

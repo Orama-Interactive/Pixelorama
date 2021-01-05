@@ -141,9 +141,11 @@ func _notification(what : int) -> void:
 		MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 			show_quit_dialog()
 		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when the mouse isn't in the window anymore
-			Engine.set_target_fps(1) # then set the fps to 1 to relieve the cpu
+			if Global.fps_limit_focus:
+				Engine.set_target_fps(1) # then set the fps to 1 to relieve the cpu
 		MainLoop.NOTIFICATION_WM_MOUSE_ENTER: # Opposite of the above
-			Engine.set_target_fps(0) # 0 stands for maximum fps
+			if Global.fps_limit_focus:
+				Engine.set_target_fps(Global.fps_limit) # 0 stands for maximum fps
 
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:

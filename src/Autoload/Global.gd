@@ -63,6 +63,8 @@ var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 var checker_follow_movement := false
 var checker_follow_scale := false
 var tilemode_opacity := 1.0
+var fps_limit_focus := true
+var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true

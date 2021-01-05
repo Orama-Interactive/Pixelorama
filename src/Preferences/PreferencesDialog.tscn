@@ -887,6 +887,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Performance" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+visible = false
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 80.0
+
+[node name="PerformanceContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance"]
+margin_right = 498.0
+margin_bottom = 52.0
+columns = 3
+
+[node name="SetFPSLimitLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_top = 5.0
+margin_right = 158.0
+margin_bottom = 19.0
+hint_tooltip = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_filter = 0
+size_flags_horizontal = 0
+text = "Set application FPS limit:"
+
+[node name="SetFPSLimit" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_left = 162.0
+margin_right = 257.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 95, 0 )
+hint_tooltip = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+max_value = 144.0
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnableLimitFPSFocusLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_left = 261.0
+margin_top = 5.0
+margin_right = 490.0
+margin_bottom = 19.0
+hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+mouse_filter = 0
+text = "Limit FPS to 1 when app loses focus"
+
+[node name="EnableLimitFPSFocus" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_top = 28.0
+margin_right = 158.0
+margin_bottom = 52.0
+hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+mouse_default_cursor_shape = 2
+pressed = true
+text = "On"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Indicators" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 54.0
