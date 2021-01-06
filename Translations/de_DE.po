@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-06 16:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -383,7 +383,7 @@ msgid "Backup"
 msgstr "Sicherung"
 
 msgid "Performance"
-msgstr ""
+msgstr "Leistung"
 
 msgid "Indicators"
 msgstr "Indikatoren"
@@ -883,16 +883,16 @@ msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "FPS Limit festlegen:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "FPS auf 1 begrenzen, wenn Pixelorama den Fokus verliert"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Legt die Grenze der Frames pro Sekunde fest. Je niedriger die Anzahl, desto niedriger die CPU-Auslastung, aber die Anwendung wird langsamer und reagier langsamer. 0 bedeutet, dass es keine Grenze gibt."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verliert, wird die FPS Grenze der Anwendung auf 1 gesetzt. Dies reduziert die CPU-Auslastung im Hintergrund. Das FPS-Limit wird zurückgesetzt, wenn die Maus in das Fenster der Anwendung eintritt."
 
 msgid "Brush:"
 msgstr "Pinsel:"
