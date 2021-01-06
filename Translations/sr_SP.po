@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2021-01-05 20:07\n"
+"PO-Revision-Date: 2021-01-06 12:36\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -130,7 +130,7 @@ msgid "Crop Image"
 msgstr "Исеци слику"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Промијените величину канваса"
 
 msgid "Rotate Image"
 msgstr "Ротирај слику"
@@ -163,61 +163,61 @@ msgid "Show Rulers"
 msgstr "Прикажи лењир"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Прикажи помоћнике"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Прикажи траку са анимацијама"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Зен мод"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Пуноекрански мод"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Попуни бојом:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Отвори фајл"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Отвори фајл(ове)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Опције увоза"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Увези као:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Скорашњи пројекти"
 
 msgid "New tab"
-msgstr ""
+msgstr "Нови таб"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Нови фрејм"
 
 msgid "New layer"
-msgstr ""
+msgstr "Нови слој"
 
 msgid "New palette"
-msgstr ""
+msgstr "Нова палета"
 
 msgid "New brush"
-msgstr ""
+msgstr "Нова четкица"
 
 msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Хоризонтални фрејмови:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Вертикални фрејмови:"
 
 msgid "Brush type:"
 msgstr ""
