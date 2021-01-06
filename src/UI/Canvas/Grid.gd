@@ -1,7 +1,6 @@
 extends Node2D
 
 
-var location := Vector2.ZERO
 var isometric_polylines := [] # An array of PoolVector2Arrays
 
 
@@ -14,10 +13,10 @@ func draw_grid(grid_type : int) -> void:
 	var size : Vector2 = Global.transparent_checker.rect_size
 	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
 		for x in range(Global.grid_width, size.x, Global.grid_width):
-			draw_line(Vector2(x, location.y), Vector2(x, size.y), Global.grid_color, true)
+			draw_line(Vector2(x, 0), Vector2(x, size.y), Global.grid_color, true)
 
 		for y in range(Global.grid_height, size.y, Global.grid_height):
-			draw_line(Vector2(location.x, y), Vector2(size.x, y), Global.grid_color, true)
+			draw_line(Vector2(0, y), Vector2(size.x, y), Global.grid_color, true)
 
 	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
 		var i := 0
