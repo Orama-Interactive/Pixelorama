@@ -375,7 +375,7 @@ func add_layer(is_new := true) -> void:
 		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
 		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_layer", Global.current_project.current_layer + 1)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_layer", Global.current_project.layers.size())
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_layer", Global.current_project.current_layer)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
