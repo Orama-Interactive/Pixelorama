@@ -1,9 +1,6 @@
 extends Node2D
 
 
-var location := Vector2.ZERO
-
-
 func _draw() -> void:
 	var size : Vector2 = Global.current_project.size
 	var positions : Array = get_tile_positions(size)
@@ -28,24 +25,24 @@ func get_tile_positions(size):
 	match Global.current_project.tile_mode:
 		1:
 			return [
-				Vector2(location.x, location.y + size.y), # Down
-				Vector2(location.x - size.x, location.y + size.y), # Down left
-				Vector2(location.x - size.x, location.y), # Left
-				location - size, # Up left
-				Vector2(location.x, location.y - size.y), # Up
-				Vector2(location.x + size.x, location.y - size.y), # Up right
-				Vector2(location.x + size.x, location.y), # Right
-				location + size # Down right
+				Vector2(0, size.y), # Down
+				Vector2(-size.x, size.y), # Down left
+				Vector2(-size.x, 0), # Left
+				-size, # Up left
+				Vector2(0, -size.y), # Up
+				Vector2(size.x, -size.y), # Up right
+				Vector2(size.x, 0), # Right
+				size # Down right
 			]
 		2:
 			return [
-				Vector2(location.x + size.x, location.y), # Right
-				Vector2(location.x - size.x, location.y), # Left
+				Vector2(size.x, 0), # Right
+				Vector2(-size.x, 0), # Left
 			]
 		3:
 			return [
-				Vector2(location.x, location.y + size.y), # Down
-				Vector2(location.x, location.y - size.y), # Up
+				Vector2(0, size.y), # Down
+				Vector2(0, -size.y), # Up
 			]
 		_:
 			return []

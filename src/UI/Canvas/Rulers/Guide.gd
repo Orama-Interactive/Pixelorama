@@ -28,7 +28,7 @@ func _input(_event : InputEvent):
 		point0.x -= width * 3
 		point1.x += width * 3
 	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, point0, point1) and Input.is_action_just_pressed("left_mouse") and visible:
-		if !point_in_rectangle(Global.canvas.current_pixel, Global.canvas.location, Global.canvas.location + project.size):
+		if !point_in_rectangle(Global.canvas.current_pixel, Vector2.ZERO, project.size):
 			has_focus = true
 			Global.has_focus = false
 			update()

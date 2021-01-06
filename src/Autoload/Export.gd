@@ -320,7 +320,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var pixel_color := cel_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
+			image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), origin)
 			cel_image.unlock()
 		layer_i += 1
 	image.unlock()

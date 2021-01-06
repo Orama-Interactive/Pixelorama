@@ -31,7 +31,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 						var pixel_color := cel_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), Vector2.ZERO)
+			image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO)
 		layer_i += 1
 	image.unlock()
 
