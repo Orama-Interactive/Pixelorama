@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-06 08:23\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -154,7 +154,7 @@ msgid "Tile Mode"
 msgstr "Csempe mód"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Tükör Nézet"
 
 msgid "Show Grid"
 msgstr "Rács megjelenítése"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr "Biztonsági mentés"
 
 msgid "Performance"
-msgstr ""
+msgstr "Teljesítmény"
 
 msgid "Indicators"
 msgstr "Indikátorok"
@@ -552,7 +552,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Fejleszette: Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-jelenleg készítette Orama Interactive és hozzáműködők"
 
 msgid "Website"
 msgstr "Weboldal"
@@ -642,7 +642,7 @@ msgid "Romanian"
 msgstr "Román"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japán"
 
 msgid "Development Team"
 msgstr "Fejlesztő csapat"
