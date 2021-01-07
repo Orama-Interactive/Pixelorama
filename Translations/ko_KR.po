@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-07 09:28\n"
 
 msgid "OK"
 msgstr "예"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr "백업"
 
 msgid "Performance"
-msgstr ""
+msgstr "성능"
 
 msgid "Indicators"
 msgstr "표기 아이콘"
@@ -884,7 +884,7 @@ msgid "Only custom preset can be modified"
 msgstr "커스텀 프리셋만 수정 가능함"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "애플리케이션 FPS 제한 설정"
 
 msgid "Limit FPS to 1 when app loses focus"
 msgstr ""
