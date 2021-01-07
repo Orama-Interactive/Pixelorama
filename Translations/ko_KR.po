@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-07 09:28\n"
+"PO-Revision-Date: 2021-01-07 10:03\n"
 
 msgid "OK"
 msgstr "예"
@@ -884,10 +884,10 @@ msgid "Only custom preset can be modified"
 msgstr "커스텀 프리셋만 수정 가능함"
 
 msgid "Set application FPS limit:"
-msgstr "애플리케이션 FPS 제한 설정"
+msgstr "프로그램 FPS 제한 설정"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "프로그램이 관심을 잃었을때 FPS를 1로 제한합니다"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
