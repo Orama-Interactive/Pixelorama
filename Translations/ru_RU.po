@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-01-05 18:03\n"
+"PO-Revision-Date: 2021-01-07 13:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
-msgstr ""
+msgstr "Производительность"
 
 msgid "Indicators"
 msgstr "Индикатор"
@@ -884,10 +884,10 @@ msgid "Only custom preset can be modified"
 msgstr "Только пользовательские предустановки могут быть изменены"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Ограничение кадров в секунду:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Ограничить до 1 кадра в секунду, когда приложение в фоне"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
