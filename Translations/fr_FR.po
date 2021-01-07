@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-07 12:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -884,16 +884,16 @@ msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Définir la limite FPS de l'application :"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Limiter le FPS à 1 lorsque l'application perd le focus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Si cette option est activée, lorsque la fenêtre de l'application perd le focus, la limite FPS de l'application est définie à 1. Cela aide à réduire l'utilisation du processeur en cas d'inactivité. La limite FPS est réinitialisée lorsque la souris entre dans la fenêtre de l'application."
 
 msgid "Brush:"
 msgstr "Brosse :"
