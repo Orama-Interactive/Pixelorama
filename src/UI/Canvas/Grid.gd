@@ -10,13 +10,13 @@ func _draw() -> void:
 
 
 func draw_grid(grid_type : int) -> void:
-	var size : Vector2 = Global.transparent_checker.rect_size
+	var size : Vector2 = Global.current_project.size
 	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
-		for x in range(Global.grid_width, size.x, Global.grid_width):
-			draw_line(Vector2(x, 0), Vector2(x, size.y), Global.grid_color, true)
+		for x in range(0, size.x + 1, Global.grid_width):
+			draw_line(Vector2(x, 0), Vector2(x, size.y), Global.grid_color)
 
-		for y in range(Global.grid_height, size.y, Global.grid_height):
-			draw_line(Vector2(0, y), Vector2(size.x, y), Global.grid_color, true)
+		for y in range(0, size.y + 1, Global.grid_height):
+			draw_line(Vector2(0, y), Vector2(size.x, y), Global.grid_color)
 
 	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
 		var i := 0
