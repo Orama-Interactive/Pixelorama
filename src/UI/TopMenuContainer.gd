@@ -3,7 +3,7 @@ extends Panel
 
 enum FILE_MENU_ID {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EDIT_MENU_ID {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
-enum VIEW_MENU_ID {TILE_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+enum VIEW_MENU_ID {TILE_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum IMAGE_MENU_ID {SCALE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HELP_MENU_ID {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
 
@@ -84,6 +84,7 @@ func setup_view_menu() -> void:
 		"Tile Mode" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
+		"Show Pixel Grid" : InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers" : InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides" : InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
 		"Show Animation Timeline" : 0,
@@ -265,6 +266,8 @@ func view_menu_id_pressed(id : int) -> void:
 			toggle_mirror_view()
 		VIEW_MENU_ID.SHOW_GRID:
 			toggle_show_grid()
+		VIEW_MENU_ID.SHOW_PIXEL_GRID:
+			toggle_show_pixel_grid()
 		VIEW_MENU_ID.SHOW_RULERS:
 			toggle_show_rulers()
 		VIEW_MENU_ID.SHOW_GUIDES:
@@ -284,6 +287,7 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	for i in Global.Tile_Mode.values():
 		Global.tile_mode_submenu.set_item_checked(i, i == id)
 	Global.canvas.tile_mode.update()
+	Global.canvas.pixel_grid.update()
 
 
 func toggle_mirror_view() -> void:
@@ -295,6 +299,12 @@ func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(VIEW_MENU_ID.SHOW_GRID, Global.draw_grid)
 	Global.canvas.grid.update()
+
+
+func toggle_show_pixel_grid() -> void:
+	Global.draw_pixel_grid = !Global.draw_pixel_grid
+	view_menu.set_item_checked(VIEW_MENU_ID.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
+	Global.canvas.pixel_grid.update()
 
 
 func toggle_show_rulers() -> void:

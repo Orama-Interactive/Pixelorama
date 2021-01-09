@@ -10,6 +10,7 @@ var sprite_changed_this_frame := false # for optimization purposes
 
 onready var currently_visible_frame : Viewport = $CurrentlyVisibleFrame
 onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
+onready var pixel_grid = $PixelGrid
 onready var grid = $Grid
 onready var tile_mode = $TileMode
 onready var indicators = $Indicators

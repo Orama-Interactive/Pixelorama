@@ -22,6 +22,8 @@ var preferences = [
 	["grid_height", "Canvas/GridOptions/GridHeightValue", "value", Global.grid_height],
 	["grid_isometric_cell_size", "Canvas/GridOptions/IsometricCellSizeValue", "value", Global.grid_isometric_cell_size],
 	["grid_color", "Canvas/GridOptions/GridColor", "color", Global.grid_color],
+	["pixel_grid_show_at_zoom", "Canvas/PixelGridOptions/ShowAtZoom", "value", Global.pixel_grid_show_at_zoom],
+	["pixel_grid_color", "Canvas/PixelGridOptions/GridColor", "color", Global.pixel_grid_color],
 	["guide_color", "Canvas/GuideOptions/GuideColor", "color", Global.guide_color],
 	["checker_size", "Canvas/CheckerOptions/CheckerSizeValue", "value", Global.checker_size],
 	["checker_color_1", "Canvas/CheckerOptions/CheckerColor1", "color", Global.checker_color_1],
@@ -129,6 +131,9 @@ func preference_update(prop : String) -> void:
 	if prop in ["grid_type", "grid_width", "grid_height", "grid_isometric_cell_size", "grid_color"]:
 		Global.canvas.grid.isometric_polylines.clear()
 		Global.canvas.grid.update()
+
+	if prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:
+		Global.canvas.pixel_grid.update()
 
 	if prop in ["checker_size", "checker_color_1", "checker_color_2", "checker_follow_movement", "checker_follow_scale"]:
 		Global.transparent_checker._ready()

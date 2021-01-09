@@ -176,6 +176,7 @@ func change_project() -> void:
 	Global.canvas.update()
 	Global.canvas.grid.isometric_polylines.clear()
 	Global.canvas.grid.update()
+	Global.canvas.pixel_grid.update()
 	Global.transparent_checker._ready()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
