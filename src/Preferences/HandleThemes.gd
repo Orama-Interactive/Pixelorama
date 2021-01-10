@@ -34,6 +34,8 @@ func _ready() -> void:
 
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
+		if theme_id >= themes.size():
+			theme_id = 0
 		change_theme(theme_id)
 		buttons_container.get_child(theme_id).pressed = true
 	else:
