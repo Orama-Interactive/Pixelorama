@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-11 00:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -384,7 +384,7 @@ msgid "Backup"
 msgstr "Backup"
 
 msgid "Performance"
-msgstr ""
+msgstr "Desempenho"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -552,7 +552,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Desenvolvido por Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "© 2019-por Orama Interactive e Contribuidores"
 
 msgid "Website"
 msgstr "Site"
@@ -642,7 +642,7 @@ msgid "Romanian"
 msgstr "Romeno"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonês"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -884,16 +884,16 @@ msgid "Only custom preset can be modified"
 msgstr "Apenas predefinição personalizada pode ser modificada"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Definir o limite de FPS do aplicativo:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Limitar a 1 FPS quando o app perder o foco"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Define o limite dos quadros do aplicativo por segundo. Quanto menor o número, menor o uso da CPU, mas o aplicativo fica mais lento, com qualidade ruim e sem resposta. 0 significa que não há limite."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Se esta opção for ativada, quando a janela do aplicativo perder o foco, o limite de FPS do aplicativo é definido como 1. Isso ajuda a diminuir o uso da CPU quando estiver inativo. O limite de FPS está sendo redefinido quando o mouse entra na janela do aplicativo."
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1280,7 +1280,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Refazer: Excluir Tag do Quadro"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Desfazer: Alterar a duração do quadro"
 
 msgid "Redo: Change frame duration"
 msgstr "Refazer: Mudar Ordem dos Frames"
@@ -1337,7 +1337,7 @@ msgid "Edit Palette"
 msgstr "Editar Paleta"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Crie cores com o componente alpha"
 
 msgid "Get colors only from selection"
 msgstr "Obter cores somente da seleção"
@@ -1501,7 +1501,7 @@ msgid "Remove currently selected palette"
 msgstr "Remover paleta selecionada"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Você tem certeza que deseja remover esta paleta? (Não pode ser desfeito)"
 
 msgid "You can't remove more palettes!"
 msgstr "Você não pode remover mais paletas!"
