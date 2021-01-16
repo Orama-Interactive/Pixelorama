@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-01-06 08:23\n"
+"PO-Revision-Date: 2021-01-16 18:32\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -158,6 +158,9 @@ msgstr "Tükör Nézet"
 
 msgid "Show Grid"
 msgstr "Rács megjelenítése"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Vonalzók megjelenítése"
@@ -846,6 +849,21 @@ msgstr "Rács színe:"
 
 msgid "A color of the grid"
 msgstr "A rács színe"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Átlátszóság"
