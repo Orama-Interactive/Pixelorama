@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-01-06 00:44\n"
+"PO-Revision-Date: 2021-01-16 18:31\n"
 
 msgid "OK"
 msgstr "确定"
@@ -158,6 +158,9 @@ msgstr "镜像视图"
 
 msgid "Show Grid"
 msgstr "显示网格"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "显示标尺"
@@ -846,6 +849,21 @@ msgstr "网格颜色："
 
 msgid "A color of the grid"
 msgstr "网格颜色"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "透明度"
