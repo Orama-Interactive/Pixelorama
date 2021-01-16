@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-07 12:58\n"
+"PO-Revision-Date: 2021-01-16 18:31\n"
 
 msgid "OK"
 msgstr "예"
@@ -158,6 +158,9 @@ msgstr "미러뷰"
 
 msgid "Show Grid"
 msgstr "격자 표시"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "눈금자 표시"
@@ -846,6 +849,21 @@ msgstr "격자 색:"
 
 msgid "A color of the grid"
 msgstr "격자의 색"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "투명도"
