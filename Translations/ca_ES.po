@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-01-05 18:04\n"
+"PO-Revision-Date: 2021-01-16 18:32\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -158,6 +158,9 @@ msgstr ""
 
 msgid "Show Grid"
 msgstr "Mostrar la quadrícula"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Mostrar regles"
@@ -841,6 +844,21 @@ msgstr "Color de la quadrícula:"
 
 msgid "A color of the grid"
 msgstr "Un color de la quadrícula"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr ""
