@@ -54,7 +54,10 @@ var default_fill_color := Color(0, 0, 0, 0)
 var grid_type = Grid_Types.CARTESIAN
 var grid_width := 2
 var grid_height := 2
-var grid_isometric_cell_size := 2
+var grid_isometric_cell_bounds_width := 16
+var grid_isometric_cell_bounds_height := 8
+var grid_isometric_offset_x := 0
+var grid_isometric_offset_y := 0
 var grid_color := Color.black
 var pixel_grid_show_at_zoom := 1500.0 # percentage
 var pixel_grid_color := Color("91212121")
@@ -343,7 +346,6 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.isometric_polylines.clear()
 			Global.canvas.grid.update()
 			Global.canvas.pixel_grid.update()
 			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
@@ -375,7 +377,6 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.isometric_polylines.clear()
 			Global.canvas.grid.update()
 			Global.canvas.pixel_grid.update()
 			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]

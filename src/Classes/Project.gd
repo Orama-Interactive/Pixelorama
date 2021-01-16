@@ -174,7 +174,6 @@ func change_project() -> void:
 		i += 1
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
-	Global.canvas.grid.isometric_polylines.clear()
 	Global.canvas.grid.update()
 	Global.canvas.pixel_grid.update()
 	Global.transparent_checker._ready()
