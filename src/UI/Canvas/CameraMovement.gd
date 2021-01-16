@@ -174,6 +174,7 @@ func zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if name == "Camera2D":
 		Global.zoom_level_label.text = str(round(100 / zoom.x)) + " %"
+		Global.canvas.pixel_grid.update()
 		update_rulers()
 		for guide in Global.current_project.guides:
 			guide.width = zoom.x * 2

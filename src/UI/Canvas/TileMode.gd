@@ -23,7 +23,7 @@ func _draw() -> void:
 
 func get_tile_positions(size):
 	match Global.current_project.tile_mode:
-		1:
+		Global.Tile_Mode.BOTH:
 			return [
 				Vector2(0, size.y), # Down
 				Vector2(-size.x, size.y), # Down left
@@ -34,12 +34,12 @@ func get_tile_positions(size):
 				Vector2(size.x, 0), # Right
 				size # Down right
 			]
-		2:
+		Global.Tile_Mode.XAXIS:
 			return [
 				Vector2(size.x, 0), # Right
 				Vector2(-size.x, 0), # Left
 			]
-		3:
+		Global.Tile_Mode.YAXIS:
 			return [
 				Vector2(0, size.y), # Down
 				Vector2(0, -size.y), # Up

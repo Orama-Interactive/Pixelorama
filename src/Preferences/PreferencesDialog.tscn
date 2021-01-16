@@ -386,6 +386,67 @@ margin_top = 226.0
 margin_right = 498.0
 margin_bottom = 230.0
 
+[node name="PixelGridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 234.0
+margin_right = 498.0
+margin_bottom = 248.0
+text = "Pixel Grid"
+
+[node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 122.0
+margin_right = 498.0
+margin_bottom = 222.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3
+
+[node name="ShowAtZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_left = 234.0
+margin_top = 3.0
+margin_right = 344.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 110, 0 )
+hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
+mouse_filter = 0
+text = "Show at zoom:"
+
+[node name="ShowAtZoom" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_top = 24.0
+margin_right = 123.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 80, 0 )
+hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
+mouse_default_cursor_shape = 2
+min_value = 500.0
+max_value = 16384.0
+step = 100.0
+value = 1500.0
+rounded = true
+align = 2
+suffix = "%"
+
+[node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_left = 234.0
+margin_top = 57.0
+margin_right = 344.0
+margin_bottom = 71.0
+hint_tooltip = "A color of the pixel grid"
+mouse_filter = 0
+text = "Pixel grid color:"
+
+[node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_top = 80.0
+margin_right = 123.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 64, 20 )
+hint_tooltip = "A color of the pixel grid"
+mouse_default_cursor_shape = 2
+
+[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 226.0
+margin_right = 498.0
+margin_bottom = 230.0
+
 [node name="TransparencyLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 234.0
 margin_right = 498.0

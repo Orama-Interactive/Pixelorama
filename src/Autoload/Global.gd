@@ -52,10 +52,12 @@ var default_image_width := 64
 var default_image_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
 var grid_type = Grid_Types.CARTESIAN
-var grid_width := 1
-var grid_height := 1
+var grid_width := 2
+var grid_height := 2
 var grid_isometric_cell_size := 2
 var grid_color := Color.black
+var pixel_grid_show_at_zoom := 1500.0 # percentage
+var pixel_grid_color := Color("91212121")
 var guide_color := Color.purple
 var checker_size := 10
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
@@ -78,6 +80,7 @@ var right_square_indicator_visible := false
 # View menu options
 var mirror_view := false
 var draw_grid := false
+var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
 var show_animation_timeline := true
@@ -225,11 +228,11 @@ func _ready() -> void:
 
 	tile_mode_submenu = PopupMenu.new()
 	tile_mode_submenu.set_name("tile_mode_submenu")
-	tile_mode_submenu.add_radio_check_item("None", 0)
-	tile_mode_submenu.set_item_checked(0, true)
-	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", 1)
-	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", 2)
-	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", 3)
+	tile_mode_submenu.add_radio_check_item("None", Tile_Mode.NONE)
+	tile_mode_submenu.set_item_checked(Tile_Mode.NONE, true)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Tile_Mode.BOTH)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Tile_Mode.XAXIS)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Tile_Mode.YAXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
@@ -342,6 +345,7 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			canvas.camera_zoom()
 			Global.canvas.grid.isometric_polylines.clear()
 			Global.canvas.grid.update()
+			Global.canvas.pixel_grid.update()
 			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
@@ -373,6 +377,7 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			canvas.camera_zoom()
 			Global.canvas.grid.isometric_polylines.clear()
 			Global.canvas.grid.update()
+			Global.canvas.pixel_grid.update()
 			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:

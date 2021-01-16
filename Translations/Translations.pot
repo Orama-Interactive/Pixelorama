@@ -148,6 +148,9 @@ msgstr ""
 msgid "Show Grid"
 msgstr ""
 
+msgid "Show Pixel Grid"
+msgstr ""
+
 msgid "Show Rulers"
 msgstr ""
 
@@ -814,6 +817,21 @@ msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
