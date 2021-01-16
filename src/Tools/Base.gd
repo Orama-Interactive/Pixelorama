@@ -81,18 +81,6 @@ func _get_draw_rect() -> Rect2:
 	return Rect2(selected_pixels[0].x, selected_pixels[0].y, selected_pixels[-1].x - selected_pixels[0].x + 1, selected_pixels[-1].y - selected_pixels[0].y + 1)
 
 
-func _get_tile_mode_rect() -> Rect2:
-	match Global.current_project.tile_mode:
-		Global.Tile_Mode.XAXIS:
-			return Rect2(Vector2(-Global.current_project.size.x,0), Vector2(Global.current_project.size.x * 3,Global.current_project.size.y))
-		Global.Tile_Mode.YAXIS:
-			return Rect2(Vector2(0,-Global.current_project.size.y), Vector2(Global.current_project.size.x,Global.current_project.size.y * 3))
-		Global.Tile_Mode.BOTH:
-			return Rect2(-Global.current_project.size, Global.current_project.size * 3)
-	return Rect2(Vector2(0,0),Global.current_project.size)
-
-
-
 func _get_draw_image() -> Image:
 	var project : Project = Global.current_project
 	return project.frames[project.current_frame].cels[project.current_layer].image
