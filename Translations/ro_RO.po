@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-05 19:41\n"
+"PO-Revision-Date: 2021-01-16 18:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,9 @@ msgstr "Vizualizare oglindită"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Afișare rigle"
@@ -846,6 +849,21 @@ msgstr "Culoarea grilei:"
 
 msgid "A color of the grid"
 msgstr "Culoarea atribuită grilei"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Transparență"
