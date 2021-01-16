@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-01-10 15:46\n"
+"PO-Revision-Date: 2021-01-16 18:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,9 @@ msgstr "Widok lustrzany"
 
 msgid "Show Grid"
 msgstr "Pokaż siatkę"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Pokaż linijki"
@@ -845,6 +848,21 @@ msgstr "Kolor siatki:"
 
 msgid "A color of the grid"
 msgstr "Kolor siatki"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Przezroczystość"
