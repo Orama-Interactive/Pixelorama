@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-01-05 18:13\n"
+"PO-Revision-Date: 2021-01-16 18:32\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -158,6 +158,9 @@ msgstr "Αναστροφή Προβολής"
 
 msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Εμφάνιση χαράκων"
@@ -846,6 +849,21 @@ msgstr "Χρώμα πλέγματος:"
 
 msgid "A color of the grid"
 msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Διαφάνεια"
