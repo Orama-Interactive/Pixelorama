@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-01-14 12:42\n"
+"PO-Revision-Date: 2021-01-16 18:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,9 @@ msgstr "Vue Miroir"
 
 msgid "Show Grid"
 msgstr "Afficher la grille"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Afficher les règles"
@@ -846,6 +849,21 @@ msgstr "Couleur de la grille:"
 
 msgid "A color of the grid"
 msgstr "Une couleur de la grille"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Transparence"
