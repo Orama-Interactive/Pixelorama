@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-01-07 13:25\n"
+"PO-Revision-Date: 2021-01-16 18:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,9 @@ msgstr "Зеркальный вид"
 
 msgid "Show Grid"
 msgstr "Показывать сетку"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Показывать линейки"
@@ -846,6 +849,21 @@ msgstr "Цвет сетки:"
 
 msgid "A color of the grid"
 msgstr "Цвет сетки"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Прозрачность"
