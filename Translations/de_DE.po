@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-17 08:41\n"
+"PO-Revision-Date: 2021-01-17 08:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -808,13 +808,13 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
 msgid "Grid"
-msgstr "Gitter"
+msgstr "Raster"
 
 msgid "Grid type:"
-msgstr "Gittertyp:"
+msgstr "Rastertyp:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Legt den Typ des Gitters zwischen rechteckig, isometrisch oder beidem fest"
+msgstr "Legt den Typ des Rasters zwischen rechteckig, isometrisch oder beidem fest"
 
 msgid "Rectangular"
 msgstr "Rechteckig"
@@ -829,13 +829,13 @@ msgid "Grid width:"
 msgstr "Rasterbreite:"
 
 msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Legt fest, wie weit die vertikalen Linien des Gitters voneinander entfernt sind"
+msgstr "Legt fest, wie weit die vertikalen Linien des Rasters voneinander entfernt sind"
 
 msgid "Grid height:"
 msgstr "Rasterhöhe:"
 
 msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Legt fest, wie weit die horizontalen Linien des Gitters voneinander entfernt sind"
+msgstr "Legt fest, wie weit die horizontalen Linien des Rasters voneinander entfernt sind"
 
 msgid "Isometric cell size:"
 msgstr "Isometrische Zellgröße:"
