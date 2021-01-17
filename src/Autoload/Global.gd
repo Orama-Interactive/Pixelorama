@@ -58,6 +58,7 @@ var grid_isometric_cell_bounds_width := 16
 var grid_isometric_cell_bounds_height := 8
 var grid_offset_x := 0
 var grid_offset_y := 0
+var grid_draw_over_tile_mode := false
 var grid_color := Color.black
 var pixel_grid_show_at_zoom := 1500.0 # percentage
 var pixel_grid_color := Color("91212121")

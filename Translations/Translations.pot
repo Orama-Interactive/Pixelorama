@@ -831,6 +831,12 @@ msgstr ""
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled grid will be drawn only over the original image"
+msgstr ""
+
 msgid "Grid color:"
 msgstr ""
 

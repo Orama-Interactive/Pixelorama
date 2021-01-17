@@ -24,6 +24,7 @@ var preferences = [
 	["grid_isometric_cell_bounds_height", "Canvas/GridOptions/IsometricCellBoundsHeightValue", "value", Global.grid_isometric_cell_bounds_height],
 	["grid_offset_x", "Canvas/GridOptions/GridOffsetXValue", "value", Global.grid_offset_x],
 	["grid_offset_y", "Canvas/GridOptions/GridOffsetYValue", "value", Global.grid_offset_y],
+	["grid_draw_over_tile_mode", "Canvas/GridOptions/GridDrawOverTileMode", "pressed", Global.grid_draw_over_tile_mode],
 	["grid_color", "Canvas/GridOptions/GridColor", "color", Global.grid_color],
 	["pixel_grid_show_at_zoom", "Canvas/PixelGridOptions/ShowAtZoom", "value", Global.pixel_grid_show_at_zoom],
 	["pixel_grid_color", "Canvas/PixelGridOptions/GridColor", "color", Global.pixel_grid_color],
@@ -131,7 +132,7 @@ func preference_update(prop : String) -> void:
 		else:
 			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
-	if prop in ["grid_type", "grid_width", "grid_height", "grid_isometric_cell_bounds_width", "grid_isometric_cell_bounds_height", "grid_offset_x", "grid_offset_y", "grid_color"]:
+	if prop in ["grid_type", "grid_width", "grid_height", "grid_isometric_cell_bounds_width", "grid_isometric_cell_bounds_height", "grid_offset_x", "grid_offset_y", "grid_draw_over_tile_mode", "grid_color"]:
 		Global.canvas.grid.update()
 
 	if prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:

@@ -428,6 +428,24 @@ rounded = true
 align = 2
 suffix = "px"
 
+[node name="GridDrawOverTileModeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = -99.0
+margin_right = 131.0
+margin_bottom = -85.0
+rect_min_size = Vector2( 110, 0 )
+hint_tooltip = "If disabled grid will be drawn only over the original image"
+mouse_filter = 0
+text = "Draw over Tile Mode:"
+
+[node name="GridDrawOverTileMode" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 114.0
+margin_top = -104.0
+margin_right = 161.0
+margin_bottom = -80.0
+hint_tooltip = "If disabled grid will be drawn only over the original image"
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 234.0
 margin_top = 57.0
