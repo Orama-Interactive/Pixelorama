@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-01-16 18:31\n"
+"PO-Revision-Date: 2021-01-17 23:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,7 +160,7 @@ msgid "Show Grid"
 msgstr "Mostrar Grade"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Exibir Grade de Pixels"
 
 msgid "Show Rulers"
 msgstr "Mostrar Réguas"
@@ -851,19 +851,19 @@ msgid "A color of the grid"
 msgstr "A cor da grade"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Grade de Pixel"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Mostrar no zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Define o zoom mínimo no qual a grade de pixel será exibida"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Cor da grade de pixels:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "A cor da grade de pixels"
 
 msgid "Transparency"
 msgstr "Transparência"
