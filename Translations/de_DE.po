@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-16 18:32\n"
+"PO-Revision-Date: 2021-01-17 08:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,7 +160,7 @@ msgid "Show Grid"
 msgstr "Zeige Raster"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Pixelraster anzeigen"
 
 msgid "Show Rulers"
 msgstr "Zeige Lineale"
@@ -850,19 +850,19 @@ msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixelraster"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Bei Zoom anzeigen:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Legt den minimalen Zoom fest, bei dem das Pixelraster angezeigt wird"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Pixelrasterfarbe:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Eine Farbe des Pixelrasters"
 
 msgid "Transparency"
 msgstr "Transparenz"
