@@ -275,7 +275,7 @@ custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
-[node name="TypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridTypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 3.0
 margin_right = 123.0
 margin_bottom = 17.0
@@ -296,48 +296,48 @@ text = "Rectangular"
 items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null, "All", null, false, 2, null ]
 selected = 0
 
-[node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 234.0
 margin_top = 3.0
 margin_right = 344.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 110, 0 )
-hint_tooltip = "Sets how far apart are vertical lines of the grid"
+hint_tooltip = "Sets how far apart are vertical lines of the rectangular grid"
 mouse_filter = 0
-text = "Grid width:"
+text = "Rectangular grid width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 24.0
 margin_right = 123.0
 margin_bottom = 48.0
-hint_tooltip = "Sets how far apart are vertical lines of the grid"
+hint_tooltip = "Sets how far apart are vertical lines of the rectangular grid"
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
-value = 1.0
+value = 2.0
 rounded = true
 align = 2
 suffix = "px"
 
-[node name="Height" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 127.0
 margin_top = 29.0
 margin_right = 230.0
 margin_bottom = 43.0
-hint_tooltip = "Sets how far apart are horizontal lines of the grid"
+hint_tooltip = "Sets how far apart are horizontal lines of the rectangular grid"
 mouse_filter = 0
-text = "Grid height:"
+text = "Rectangular grid height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 234.0
 margin_top = 24.0
 margin_right = 344.0
 margin_bottom = 48.0
-hint_tooltip = "Sets how far apart are horizontal lines of the grid"
+hint_tooltip = "Sets how far apart are horizontal lines of the rectangular grid"
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
-value = 1.0
+value = 2.0
 rounded = true
 align = 2
 suffix = "px"
@@ -386,20 +386,20 @@ rounded = true
 align = 2
 suffix = "px"
 
-[node name="IsometricGridOffsetXLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridOffsetXLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 57.0
 margin_right = 123.0
 margin_bottom = 71.0
-hint_tooltip = "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+hint_tooltip = "Sets grid's x offset from the canvas origin (top left corner of the image)"
 mouse_filter = 0
-text = "Isometric grid offset x:"
+text = "Grid offset x:"
 
-[node name="IsometricGridOffsetXValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridOffsetXValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 127.0
 margin_top = 52.0
 margin_right = 230.0
 margin_bottom = 76.0
-hint_tooltip = "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+hint_tooltip = "Sets grid's x offset from the canvas origin (top left corner of the image)"
 mouse_default_cursor_shape = 2
 min_value = -16384.0
 max_value = 16384.0
@@ -407,20 +407,20 @@ rounded = true
 align = 2
 suffix = "px"
 
-[node name="IsometricGridOffsetYLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridOffsetYLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 57.0
 margin_right = 123.0
 margin_bottom = 71.0
-hint_tooltip = "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+hint_tooltip = "Sets grid's y offset from the canvas origin (top left corner of the image)"
 mouse_filter = 0
-text = "Isometric grid offset y:"
+text = "Grid offset y:"
 
-[node name="IsometricGridOffsetYValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridOffsetYValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 127.0
 margin_top = 52.0
 margin_right = 230.0
 margin_bottom = 76.0
-hint_tooltip = "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+hint_tooltip = "Sets grid's y offset from the canvas origin (top left corner of the image)"
 mouse_default_cursor_shape = 2
 min_value = -16384.0
 max_value = 16384.0
