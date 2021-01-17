@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-17 06:20\n"
+"PO-Revision-Date: 2021-01-17 06:29\n"
 
 msgid "OK"
 msgstr "예"
@@ -857,7 +857,7 @@ msgid "Show at zoom:"
 msgstr ""
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "픽셀 격자를 표시할 최소 확대 설정"
 
 msgid "Pixel grid color:"
 msgstr ""
