@@ -18,15 +18,26 @@ func _draw() -> void:
 
 
 func _draw_cartesian_grid(target_rect : Rect2) -> void:
+	# Using Array instead of PoolVector2Array to avoid kinda
+	# random "resize: Can't resize PoolVector if locked" errors.
+	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
+	# It will be converted to PoolVector2Array before being sent to be rendered.
+	var grid_multiline_points := []
+
 	var x : float = target_rect.position.x + fposmod(Global.grid_offset_x - target_rect.position.x, Global.grid_width)
 	while x <= target_rect.end.x:
-		draw_line(Vector2(x, target_rect.position.y), Vector2(x, target_rect.end.y), Global.grid_color)
+		grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
+		grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
 		x += Global.grid_width
 
 	var y : float = target_rect.position.y + fposmod(Global.grid_offset_y - target_rect.position.y, Global.grid_height)
 	while y <= target_rect.end.y:
-		draw_line(Vector2(target_rect.position.x, y), Vector2(target_rect.end.x, y), Global.grid_color)
+		grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
+		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
 		y += Global.grid_height
+
+	if not grid_multiline_points.empty():
+		draw_multiline(grid_multiline_points, Global.grid_color)
 
 
 func _draw_isometric_grid(target_rect : Rect2) -> void:

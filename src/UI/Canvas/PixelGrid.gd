@@ -9,11 +9,23 @@ func _draw() -> void:
 	if zoom_percentage < Global.pixel_grid_show_at_zoom:
 		return
 
-	var rect : Rect2 = Global.current_project.get_tile_mode_rect()
-	if rect.has_no_area():
+	var target_rect : Rect2 = Global.current_project.get_tile_mode_rect()
+	if target_rect.has_no_area():
 		return
 
-	for x in range(ceil(rect.position.x), floor(rect.end.x) + 1):
-		draw_line(Vector2(x, rect.position.y), Vector2(x, rect.end.y), Global.pixel_grid_color)
-	for y in range(ceil(rect.position.y), floor(rect.end.y) + 1):
-		draw_line(Vector2(rect.position.x, y), Vector2(rect.end.x, y), Global.pixel_grid_color)
+	# Using Array instead of PoolVector2Array to avoid kinda
+	# random "resize: Can't resize PoolVector if locked" errors.
+	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
+	# It will be converted to PoolVector2Array before being sent to be rendered.
+	var grid_multiline_points := []
+
+	for x in range(ceil(target_rect.position.x), floor(target_rect.end.x) + 1):
+		grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
+		grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
+
+	for y in range(ceil(target_rect.position.y), floor(target_rect.end.y) + 1):
+		grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
+		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
+
+	if not grid_multiline_points.empty():
+		draw_multiline(grid_multiline_points, Global.pixel_grid_color)
