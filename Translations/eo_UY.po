@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2021-01-16 18:32\n"
+"PO-Revision-Date: 2021-01-18 21:05\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -819,10 +819,28 @@ msgstr ""
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr ""
 
-msgid "Isometric cell size:"
+msgid "Isometric cell bounds width:"
 msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric grid offset x:"
+msgstr ""
+
+msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Isometric grid offset y:"
+msgstr ""
+
+msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Grid color:"
