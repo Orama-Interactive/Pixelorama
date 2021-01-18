@@ -288,6 +288,7 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 		Global.tile_mode_submenu.set_item_checked(i, i == id)
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
+	Global.canvas.grid.update()
 
 
 func toggle_mirror_view() -> void:

@@ -1,50 +1,86 @@
 extends Node2D
 
 
-var isometric_polylines := [] # An array of PoolVector2Arrays
-
-
 func _draw() -> void:
-	if Global.draw_grid:
-		draw_grid(Global.grid_type)
+	if not Global.draw_grid:
+		return
 
+	var rect := Rect2(Vector2.ZERO, Global.current_project.size)
+	if rect.has_no_area():
+		return
 
-func draw_grid(grid_type : int) -> void:
-	var size : Vector2 = Global.current_project.size
+	var grid_type : int = Global.grid_type
 	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
-		for x in range(0, size.x + 1, Global.grid_width):
-			draw_line(Vector2(x, 0), Vector2(x, size.y), Global.grid_color)
+		var start_x : float = wrapf(0, rect.position.x, rect.position.x + Global.grid_width)
+		for x in range(start_x, rect.end.x + 1, Global.grid_width):
+			draw_line(Vector2(x, rect.position.y), Vector2(x, rect.end.y), Global.grid_color)
 
-		for y in range(0, size.y + 1, Global.grid_height):
-			draw_line(Vector2(0, y), Vector2(size.x, y), Global.grid_color)
+		var start_y : float = wrapf(0, rect.position.y, rect.position.y + Global.grid_height)
+		for y in range(start_y, rect.end.y + 1, Global.grid_height):
+			draw_line(Vector2(rect.position.x, y), Vector2(rect.end.x, y), Global.grid_color)
 
 	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
-		var i := 0
-		for x in range(Global.grid_isometric_cell_size, size.x + 2, Global.grid_isometric_cell_size * 2):
-			for y in range(0, size.y + 1, Global.grid_isometric_cell_size):
-				draw_isometric_tile(i, Vector2(x, y))
-				i += 1
+		_draw_isometric_grid(rect)
 
 
-func draw_isometric_tile(i : int, origin := Vector2.RIGHT, cell_size : int = Global.grid_isometric_cell_size) -> void:
-	# A random value I found by trial and error, I have no idea why it "works"
-	var diff = 1.11754
-	var approx_30_degrees = deg2rad(26.565)
+func _draw_isometric_grid(target_rect : Rect2) -> void:
+	# Using Array instead of PoolVector2Array to avoid kinda
+	# random "resize: Can't resize PoolVector if locked" errors.
+	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
+	# It will be converted to PoolVector2Array before being sent to be rendered.
+	var grid_multiline_points := []
 
-	var pool := PoolVector2Array()
-	if i < isometric_polylines.size():
-		pool = isometric_polylines[i]
-	else:
-		var a = origin - Vector2(0, 0.5)
-		var b = a + Vector2(cos(approx_30_degrees), sin(approx_30_degrees)) * cell_size * diff
-		var c = a + Vector2.DOWN * cell_size
-		var d = c - Vector2(cos(approx_30_degrees), sin(approx_30_degrees)) * cell_size * diff
-		pool.append(a)
-		pool.append(b)
-		pool.append(c)
-		pool.append(d)
-		pool.append(a)
-		isometric_polylines.append(pool)
+	var cell_size := Vector2(Global.grid_isometric_cell_bounds_width, Global.grid_isometric_cell_bounds_height)
+	var max_cell_count : Vector2 = target_rect.size / cell_size
 
-	if pool.size() > 2:
-		draw_polyline(pool, Global.grid_color)
+	var origin := Vector2(Global.grid_isometric_offset_x, Global.grid_isometric_offset_y)
+	var origin_offset : Vector2 = (origin - target_rect.position).posmodv(cell_size)
+
+	# lines ↗↗↗ (from bottom-left to top-right)
+	var per_cell_offset := cell_size * Vector2(1, -1)
+
+	#  lines ↗↗↗ starting from the rect's left side (top to bottom):
+	var y : float = fposmod(origin_offset.y + cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y)
+	while y < target_rect.size.y:
+		var start : Vector2 = target_rect.position + Vector2(0, y)
+		var cells_to_rect_bounds : float = min(max_cell_count.x, y / cell_size.y)
+		var end : Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		grid_multiline_points.push_back(start)
+		grid_multiline_points.push_back(end)
+		y += cell_size.y
+
+	#  lines ↗↗↗ starting from the rect's bottom side (left to right):
+	var x : float = (y - target_rect.size.y) / cell_size.y * cell_size.x
+	while x < target_rect.size.x:
+		var start : Vector2 = target_rect.position + Vector2(x, target_rect.size.y)
+		var cells_to_rect_bounds : float = min(max_cell_count.y, max_cell_count.x - x / cell_size.x)
+		var end : Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		grid_multiline_points.push_back(start)
+		grid_multiline_points.push_back(end)
+		x += cell_size.x
+
+	# lines ↘↘↘ (from top-left to bottom-right)
+	per_cell_offset = cell_size
+
+	#  lines ↘↘↘ starting from the rect's left side (top to bottom):
+	y = fposmod(origin_offset.y - cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y)
+	while y < target_rect.size.y:
+		var start : Vector2 = target_rect.position + Vector2(0, y)
+		var cells_to_rect_bounds : float = min(max_cell_count.x, max_cell_count.y - y / cell_size.y)
+		var end : Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		grid_multiline_points.push_back(start)
+		grid_multiline_points.push_back(end)
+		y += cell_size.y
+
+	#  lines ↘↘↘ starting from the rect's top side (left to right):
+	x = fposmod(origin_offset.x - cell_size.x * (0.5 + origin_offset.y / cell_size.y), cell_size.x)
+	while x < target_rect.size.x:
+		var start : Vector2 = target_rect.position + Vector2(x, 0)
+		var cells_to_rect_bounds : float = min(max_cell_count.y, max_cell_count.x - x / cell_size.x)
+		var end : Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		grid_multiline_points.push_back(start)
+		grid_multiline_points.push_back(end)
+		x += cell_size.x
+
+	if not grid_multiline_points.empty():
+		draw_multiline(grid_multiline_points, Global.grid_color)

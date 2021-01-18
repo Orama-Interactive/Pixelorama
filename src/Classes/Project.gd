@@ -174,7 +174,6 @@ func change_project() -> void:
 		i += 1
 	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
-	Global.canvas.grid.isometric_polylines.clear()
 	Global.canvas.grid.update()
 	Global.canvas.pixel_grid.update()
 	Global.transparent_checker._ready()
@@ -566,3 +565,16 @@ func has_changed_changed(value : bool) -> void:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
 	else:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+
+
+func get_tile_mode_rect() -> Rect2:
+	match Global.current_project.tile_mode:
+		Global.Tile_Mode.NONE:
+			return Rect2(Vector2.ZERO, size)
+		Global.Tile_Mode.XAXIS:
+			return Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
+		Global.Tile_Mode.YAXIS:
+			return Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)
+		Global.Tile_Mode.BOTH:
+			return Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
+	return Rect2()

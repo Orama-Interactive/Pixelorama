@@ -342,24 +342,88 @@ rounded = true
 align = 2
 suffix = "px"
 
-[node name="IsometricCellSizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="IsometricCellBoundsWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 57.0
 margin_right = 123.0
 margin_bottom = 71.0
-hint_tooltip = "Sets the size of the cells in an isometric grid"
+hint_tooltip = "Sets the width of the isometric cell's axis aligned bounding box"
 mouse_filter = 0
-text = "Isometric cell size:"
+text = "Isometric cell bounds width:"
 
-[node name="IsometricCellSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="IsometricCellBoundsWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 127.0
 margin_top = 52.0
 margin_right = 230.0
 margin_bottom = 76.0
-hint_tooltip = "Sets the size of the cells in an isometric grid"
+hint_tooltip = "Sets the width of the isometric cell's axis aligned bounding box"
 mouse_default_cursor_shape = 2
 min_value = 2.0
 max_value = 16384.0
-value = 2.0
+value = 16.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="IsometricCellBoundsHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets the height of the isometric cell's axis aligned bounding box"
+mouse_filter = 0
+text = "Isometric cell bounds height:"
+
+[node name="IsometricCellBoundsHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets the height of the isometric cell's axis aligned bounding box"
+mouse_default_cursor_shape = 2
+min_value = 2.0
+max_value = 16384.0
+value = 8.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="IsometricGridOffsetXLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+mouse_filter = 0
+text = "Isometric grid offset x:"
+
+[node name="IsometricGridOffsetXValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+mouse_default_cursor_shape = 2
+min_value = -16384.0
+max_value = 16384.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="IsometricGridOffsetYLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+mouse_filter = 0
+text = "Isometric grid offset y:"
+
+[node name="IsometricGridOffsetYValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+mouse_default_cursor_shape = 2
+min_value = -16384.0
+max_value = 16384.0
 rounded = true
 align = 2
 suffix = "px"
