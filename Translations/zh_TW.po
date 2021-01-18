@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-01-16 18:31\n"
+"PO-Revision-Date: 2021-01-18 21:04\n"
 
 msgid "OK"
 msgstr "確定"
@@ -837,11 +837,29 @@ msgstr "格線高度："
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "設定水平格線的高度"
 
-msgid "Isometric cell size:"
-msgstr "等角立體間隔大小"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "設定等角立體格線的間隔大小"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric grid offset x:"
+msgstr ""
+
+msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Isometric grid offset y:"
+msgstr ""
+
+msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "格線顏色："
