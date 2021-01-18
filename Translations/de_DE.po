@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-17 08:51\n"
+"PO-Revision-Date: 2021-01-18 21:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -837,11 +837,29 @@ msgstr "Rasterhöhe:"
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Legt fest, wie weit die horizontalen Linien des Rasters voneinander entfernt sind"
 
-msgid "Isometric cell size:"
-msgstr "Isometrische Zellgröße:"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Legt die Größe der Zellen in einem isometrischen Raster fest"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric grid offset x:"
+msgstr ""
+
+msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Isometric grid offset y:"
+msgstr ""
+
+msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
