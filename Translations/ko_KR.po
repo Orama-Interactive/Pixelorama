@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-17 06:29\n"
+"PO-Revision-Date: 2021-01-18 21:04\n"
 
 msgid "OK"
 msgstr "예"
@@ -838,11 +838,29 @@ msgstr "격자 높이"
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "격자의 수평 선들이 얼마나 떨어져 있는지 설정"
 
-msgid "Isometric cell size:"
-msgstr "아이소메트릭 셀 크기"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "아이소메트릭 격자의 셀 크기를 설정"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric grid offset x:"
+msgstr ""
+
+msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Isometric grid offset y:"
+msgstr ""
+
+msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "격자 색:"
