@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-01-17 13:52\n"
+"PO-Revision-Date: 2021-01-18 21:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -838,11 +838,29 @@ msgstr "Высота сетки:"
 msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
 
-msgid "Isometric cell size:"
-msgstr "Размер изометрических ячеек:"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Задает размер ячеек в изометрической сетке"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric grid offset x:"
+msgstr ""
+
+msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Isometric grid offset y:"
+msgstr ""
+
+msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Цвет сетки:"
