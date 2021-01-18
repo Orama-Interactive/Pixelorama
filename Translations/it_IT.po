@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-18 21:05\n"
+"PO-Revision-Date: 2021-01-18 23:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -839,25 +839,25 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Imposta quanto distano le linee orizzontali della griglia"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Larghezza dei limiti delle celle isometrice:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Imposta la larghezza del riquadro di delimitazione dell'asse isometrico allineato"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Altezza dei limiti delle celle isometrice:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Imposta l'altezza del riquadro di delimitazione dell'asse isometrico allineato"
 
 msgid "Isometric grid offset x:"
-msgstr ""
+msgstr "Scostamento della griglia isometrica x:"
 
 msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Imposta lo spostamento x della griglia isometrica dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
 msgid "Isometric grid offset y:"
-msgstr ""
+msgstr "Scostamento della griglia isometrica y:"
 
 msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
