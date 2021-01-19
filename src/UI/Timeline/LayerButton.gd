@@ -24,10 +24,10 @@ func _ready() -> void:
 		var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 		var normal_file_name = texture.texture.resource_path.get_file()
 		var theme_type := Global.theme_type
-		if theme_type == Global.Theme_Types.CARAMEL or theme_type == Global.Theme_Types.BLUE:
-			theme_type = Global.Theme_Types.DARK
+		if theme_type == Global.ThemeTypes.CARAMEL or theme_type == Global.ThemeTypes.BLUE:
+			theme_type = Global.ThemeTypes.DARK
 
-		var theme_type_string : String = Global.Theme_Types.keys()[theme_type].to_lower()
+		var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
 		texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
 
 	if Global.current_project.layers[i].visible:

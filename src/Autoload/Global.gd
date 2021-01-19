@@ -1,11 +1,11 @@
 extends Node
 
 
-enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
-enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
+enum GridTypes {CARTESIAN, ISOMETRIC, ALL}
+enum PressureSensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Direction {UP, DOWN, LEFT, RIGHT}
-enum Theme_Types {DARK, BLUE, CARAMEL, LIGHT}
-enum Tile_Mode {NONE, BOTH, XAXIS, YAXIS}
+enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
+enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -43,15 +43,15 @@ var show_y_symmetry_axis := false
 var default_clear_color := Color.gray
 
 # Preferences
-var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
+var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
 var shrink := 1.0
 var smooth_zoom := true
-var theme_type : int = Theme_Types.DARK
+var theme_type : int = ThemeTypes.DARK
 var default_image_width := 64
 var default_image_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
-var grid_type = Grid_Types.CARTESIAN
+var grid_type = GridTypes.CARTESIAN
 var grid_width := 2
 var grid_height := 2
 var grid_isometric_cell_bounds_width := 16
@@ -232,11 +232,11 @@ func _ready() -> void:
 
 	tile_mode_submenu = PopupMenu.new()
 	tile_mode_submenu.set_name("tile_mode_submenu")
-	tile_mode_submenu.add_radio_check_item("None", Tile_Mode.NONE)
-	tile_mode_submenu.set_item_checked(Tile_Mode.NONE, true)
-	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Tile_Mode.BOTH)
-	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Tile_Mode.XAXIS)
-	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Tile_Mode.YAXIS)
+	tile_mode_submenu.add_radio_check_item("None", TileMode.NONE)
+	tile_mode_submenu.set_item_checked(TileMode.NONE, true)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", TileMode.BOTH)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", TileMode.X_AXIS)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", TileMode.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
@@ -426,8 +426,8 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 
 	if button is Button:
 		var theme := theme_type
-		if theme == Theme_Types.CARAMEL:
-			theme = Theme_Types.DARK
+		if theme == ThemeTypes.CARAMEL:
+			theme = ThemeTypes.DARK
 		for c in button.get_children():
 			if c is TextureRect:
 				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")

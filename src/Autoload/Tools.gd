@@ -186,7 +186,7 @@ func handle_draw(position : Vector2, event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Engine.get_version_info().major == 3 && Engine.get_version_info().minor >= 2:
 			pen_pressure = event.pressure
-			if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.NONE:
+			if Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
 				pen_pressure = 1.0
 
 		if not position.is_equal_approx(_last_position):

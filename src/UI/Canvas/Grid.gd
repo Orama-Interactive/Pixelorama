@@ -14,10 +14,10 @@ func _draw() -> void:
 		return
 
 	var grid_type : int = Global.grid_type
-	if grid_type == Global.Grid_Types.CARTESIAN || grid_type == Global.Grid_Types.ALL:
+	if grid_type == Global.GridTypes.CARTESIAN || grid_type == Global.GridTypes.ALL:
 		_draw_cartesian_grid(target_rect)
 
-	if grid_type == Global.Grid_Types.ISOMETRIC || grid_type == Global.Grid_Types.ALL:
+	if grid_type == Global.GridTypes.ISOMETRIC || grid_type == Global.GridTypes.ALL:
 		_draw_isometric_grid(target_rect)
 
 
