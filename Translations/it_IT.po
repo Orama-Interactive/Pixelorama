@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-18 23:02\n"
+"PO-Revision-Date: 2021-01-19 00:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -860,7 +860,7 @@ msgid "Isometric grid offset y:"
 msgstr "Scostamento della griglia isometrica y:"
 
 msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Imposta lo spostamento y della griglia isometrica dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
