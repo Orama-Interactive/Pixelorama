@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-01-18 21:04\n"
+"PO-Revision-Date: 2021-01-19 01:30\n"
 
 msgid "OK"
 msgstr "确定"
@@ -160,7 +160,7 @@ msgid "Show Grid"
 msgstr "显示网格"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "显示像素网格"
 
 msgid "Show Rulers"
 msgstr "显示标尺"
@@ -839,28 +839,28 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "设置网格水平线之间的距离"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "几何单元格边界宽度："
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "设置等深单元轴对齐边界框的宽度"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "几何单元格边界高度："
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "设置等深单元轴对齐边界框的高度"
 
 msgid "Isometric grid offset x:"
-msgstr ""
+msgstr "等距网格偏移 x："
 
 msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "设置等距网格相对于画布原点的 x 偏移量（图像左上角）"
 
 msgid "Isometric grid offset y:"
-msgstr ""
+msgstr "等距网格偏移 y："
 
 msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "设置等距网格相对于画布原点的 y 偏移量（图像左上角）"
 
 msgid "Grid color:"
 msgstr "网格颜色："
@@ -869,19 +869,19 @@ msgid "A color of the grid"
 msgstr "网格颜色"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "像素网格"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "在缩放时显示："
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "设置显示像素网格的最小缩放"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "像素网格颜色："
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "像素网格颜色"
 
 msgid "Transparency"
 msgstr "透明度"
