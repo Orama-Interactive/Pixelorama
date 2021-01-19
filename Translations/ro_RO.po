@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-18 21:05\n"
+"PO-Revision-Date: 2021-01-19 12:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -851,16 +851,16 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric grid offset x:"
-msgstr ""
+msgstr "Decalajul grilei izometrice x:"
 
 msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Setează decalajul grilei izometrice x față de originea pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Isometric grid offset y:"
-msgstr ""
+msgstr "Decalajul grilei izometrice y:"
 
 msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Setează decalajul grilei izometrice y față de originea pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Grid color:"
 msgstr "Culoarea grilei:"
