@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-19 12:30\n"
+"PO-Revision-Date: 2021-01-19 15:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -839,28 +839,28 @@ msgid "Sets how far apart are horizontal lines of the grid"
 msgstr "Setează la ce distanță să se afle una față de cealaltă liniile orizontale ale grilei"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Lățimea limitelor celulelor izometrice:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Setează lățimea casetei de delimitare aliniate axial a celulei izometrice"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Înălțimea limitelor celulelor izometrice:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Setează înălțimea casetei de delimitare aliniate axial a celulei izometrice"
 
 msgid "Isometric grid offset x:"
 msgstr "Decalajul grilei izometrice x:"
 
 msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Setează decalajul grilei izometrice x față de originea pânzei (colțul din partea din stânga sus a imaginii)"
+msgstr "Setează decalajul grilei izometrice x față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Isometric grid offset y:"
 msgstr "Decalajul grilei izometrice y:"
 
 msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Setează decalajul grilei izometrice y față de originea pânzei (colțul din partea din stânga sus a imaginii)"
+msgstr "Setează decalajul grilei izometrice y față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Grid color:"
 msgstr "Culoarea grilei:"
