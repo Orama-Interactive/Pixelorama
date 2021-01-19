@@ -178,7 +178,10 @@ jobs:
           overwrite: true
       - name: Upload Release Assets to itch.io 🎮
         run: |
-          butler push ./build/mac/Pixelorama.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
+          curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler push ./build/mac/Pixelorama.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
     
   export-web:
     name: Web Export 🌐
