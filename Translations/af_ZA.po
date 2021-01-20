@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2021-01-20 00:21\n"
+"PO-Revision-Date: 2021-01-20 14:30\n"
 
 msgid "OK"
 msgstr ""
@@ -815,7 +815,7 @@ msgstr ""
 msgid "Rectangular grid height:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of rectangular the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
 msgid "Isometric cell bounds width:"
