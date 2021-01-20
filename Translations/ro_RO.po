@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-20 14:30\n"
+"PO-Revision-Date: 2021-01-20 15:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -836,7 +836,7 @@ msgid "Rectangular grid height:"
 msgstr "Înălțimea grilei dreptunghiulare:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei dreptunghiulare"
 
 msgid "Isometric cell bounds width:"
 msgstr "Lățimea limitelor celulelor izometrice:"
@@ -863,10 +863,10 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr "Setează decalajul y al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Afișare peste modul mozaic:"
 
 msgid "If disabled grid will be drawn only over the original image"
-msgstr ""
+msgstr "Dacă opțiunea este dezactivată, grila va fi afișată doar peste imaginea originală"
 
 msgid "Grid color:"
 msgstr "Culoarea grilei:"
