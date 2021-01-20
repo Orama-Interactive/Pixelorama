@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-20 06:21\n"
+"PO-Revision-Date: 2021-01-20 14:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -835,7 +835,7 @@ msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale gri
 msgid "Rectangular grid height:"
 msgstr "Înălțimea grilei dreptunghiulare:"
 
-msgid "Sets how far apart are horizontal lines of rectangular the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
 msgid "Isometric cell bounds width:"
