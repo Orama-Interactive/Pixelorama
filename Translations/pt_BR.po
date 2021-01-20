@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-01-18 21:04\n"
+"PO-Revision-Date: 2021-01-20 00:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -826,17 +826,17 @@ msgstr "Isométrico"
 msgid "All"
 msgstr "Tudo"
 
-msgid "Grid width:"
-msgstr "Largura da grade:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Define a distância entre linhas verticais da grade"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Altura da grade:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Define a distância entre linhas horizontais da grade"
+msgid "Sets how far apart are horizontal lines of rectangular the grid"
+msgstr ""
 
 msgid "Isometric cell bounds width:"
 msgstr ""
@@ -850,16 +850,22 @@ msgstr ""
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
-msgid "Isometric grid offset x:"
+msgid "Grid offset x:"
 msgstr ""
 
-msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
-msgid "Isometric grid offset y:"
+msgid "Grid offset y:"
 msgstr ""
 
-msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
