@@ -131,10 +131,10 @@ func update_mirror_brush() -> void:
 
 func update_mask() -> void:
 	var size := _get_draw_image().get_size()
-	_mask = PoolByteArray()
-	_mask.resize(size.x * size.y)
-	for i in _mask.size():
-		_mask[i] = 0
+	# Faster then zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
+	var nulled_array := []
+	nulled_array.resize(size.x * size.y)
+	_mask = PoolByteArray(nulled_array)
 
 
 func update_line_polylines(start : Vector2, end : Vector2) -> void:
