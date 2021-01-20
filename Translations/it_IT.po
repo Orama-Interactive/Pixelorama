@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-19 00:17\n"
+"PO-Revision-Date: 2021-01-20 00:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -826,17 +826,17 @@ msgstr "Isometrica"
 msgid "All"
 msgstr "Tutte"
 
-msgid "Grid width:"
-msgstr "Larghezza griglia:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Imposta quanto distante sono le linee verticali della griglia"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Altezza della griglia:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Imposta quanto distano le linee orizzontali della griglia"
+msgid "Sets how far apart are horizontal lines of rectangular the grid"
+msgstr ""
 
 msgid "Isometric cell bounds width:"
 msgstr "Larghezza dei limiti delle celle isometrice:"
@@ -850,17 +850,23 @@ msgstr "Altezza dei limiti delle celle isometrice:"
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "Imposta l'altezza del riquadro di delimitazione dell'asse isometrico allineato"
 
-msgid "Isometric grid offset x:"
-msgstr "Scostamento della griglia isometrica x:"
+msgid "Grid offset x:"
+msgstr ""
 
-msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Imposta lo spostamento x della griglia isometrica dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
-msgid "Isometric grid offset y:"
-msgstr "Scostamento della griglia isometrica y:"
+msgid "Grid offset y:"
+msgstr ""
 
-msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Imposta lo spostamento y della griglia isometrica dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
