@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-20 00:21\n"
+"PO-Revision-Date: 2021-01-20 03:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -827,16 +827,16 @@ msgid "All"
 msgstr "Tutte"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Larghezza della griglia rettangolare:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Imposta la distanza tra le linee verticali della griglia rettangolare"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Altezza della griglia rettangolare:"
 
 msgid "Sets how far apart are horizontal lines of rectangular the grid"
-msgstr ""
+msgstr "Imposta la distanza tra le linee orizzontali della griglia rettangolare"
 
 msgid "Isometric cell bounds width:"
 msgstr "Larghezza dei limiti delle celle isometrice:"
@@ -851,22 +851,22 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "Imposta l'altezza del riquadro di delimitazione dell'asse isometrico allineato"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Spostamento griglia x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Imposta lo spostamento x della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Spostamento griglia y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Imposta lo spostamento y della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Disegna sulla modalità piastrelle:"
 
 msgid "If disabled grid will be drawn only over the original image"
-msgstr ""
+msgstr "Se disabilitata la griglia verrà disegnata solo sopra l'immagine originale"
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
