@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-01-20 06:49\n"
+"PO-Revision-Date: 2021-01-20 07:01\n"
 
 msgid "OK"
 msgstr "确定"
@@ -830,13 +830,13 @@ msgid "Rectangular grid width:"
 msgstr "矩形网格宽度："
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "设置矩形网格垂直线之间的距离"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "矩形网格高度："
 
 msgid "Sets how far apart are horizontal lines of rectangular the grid"
-msgstr ""
+msgstr "设置矩形网格水平线之间的距离"
 
 msgid "Isometric cell bounds width:"
 msgstr "几何单元格边界宽度："
@@ -851,22 +851,22 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "设置等深单元轴对齐边界框的高度"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "网格偏移 X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "设置等距网格相对于画布原点的 x 偏移量(图像左上角)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "网格偏移 Y："
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "设置等距网格相对于画布原点的 y 偏移量(图像左上角)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "在平铺模式绘制："
 
 msgid "If disabled grid will be drawn only over the original image"
-msgstr ""
+msgstr "如果禁用网格只能在原始图像上绘制"
 
 msgid "Grid color:"
 msgstr "网格颜色："
