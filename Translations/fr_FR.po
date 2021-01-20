@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-01-20 00:21\n"
+"PO-Revision-Date: 2021-01-20 14:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -387,7 +387,7 @@ msgid "Backup"
 msgstr "Sauvegarde"
 
 msgid "Performance"
-msgstr ""
+msgstr "Performance"
 
 msgid "Indicators"
 msgstr "Indicateurs"
@@ -835,7 +835,7 @@ msgstr ""
 msgid "Rectangular grid height:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of rectangular the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
 msgid "Isometric cell bounds width:"
