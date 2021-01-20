@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-01-19 12:30\n"
+"PO-Revision-Date: 2021-01-20 00:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -826,17 +826,17 @@ msgstr "アイソメトリック"
 msgid "All"
 msgstr "すべて"
 
-msgid "Grid width:"
-msgstr "グリッドの幅:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "グリッドの垂直方向の線の距離を設定します。"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "グリッドの高さ:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "グリッドの水平方向の線の距離を設定します"
+msgid "Sets how far apart are horizontal lines of rectangular the grid"
+msgstr ""
 
 msgid "Isometric cell bounds width:"
 msgstr "等角セルの境界の幅:"
@@ -850,17 +850,23 @@ msgstr "等角セルの境界の高さ:"
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "等角セルの軸揃えの境界ボックスの高さを設定します"
 
-msgid "Isometric grid offset x:"
-msgstr "等角グリッドの x のオフセット:"
+msgid "Grid offset x:"
+msgstr ""
 
-msgid "Sets isometric grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "キャンバスの原点 (画像の左上隅) からの等角グリッドの x オフセットを設定します。"
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
-msgid "Isometric grid offset y:"
-msgstr "等角グリッドの y のオフセット:"
+msgid "Grid offset y:"
+msgstr ""
 
-msgid "Sets isometric grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "キャンバスの原点 (画像の左上隅) からの等角グリッドの y オフセットを設定します。"
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "グリッドの色:"
