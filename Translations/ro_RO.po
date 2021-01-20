@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-20 00:21\n"
+"PO-Revision-Date: 2021-01-20 06:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -827,13 +827,13 @@ msgid "All"
 msgstr "Ambele"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Lățimea grilei dreptunghiulare:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei dreptunghiulare"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Înălțimea grilei dreptunghiulare:"
 
 msgid "Sets how far apart are horizontal lines of rectangular the grid"
 msgstr ""
@@ -851,16 +851,16 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "Setează înălțimea casetei de delimitare aliniate axial a celulei izometrice"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Decalaj grilă x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Setează decalajul x al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Decalaj grilă y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Setează decalajul y al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
