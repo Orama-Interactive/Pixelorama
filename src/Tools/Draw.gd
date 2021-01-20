@@ -180,7 +180,7 @@ func draw_tool(position : Vector2) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked:
 		return
 	var strength := _strength
-	if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
+	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
 
 	_drawer.pixel_perfect = tool_slot.pixel_perfect if _brush_size == 1 else false

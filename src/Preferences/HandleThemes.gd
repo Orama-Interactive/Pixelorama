@@ -55,15 +55,15 @@ func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
 	var main_theme : Theme = themes[ID][0]
 	if ID == 0 or ID == 1: # Dark or Gray Theme
-		Global.theme_type = Global.Theme_Types.DARK
+		Global.theme_type = Global.ThemeTypes.DARK
 	elif ID == 2: # Godot's Theme
-		Global.theme_type = Global.Theme_Types.BLUE
+		Global.theme_type = Global.ThemeTypes.BLUE
 	elif ID == 3: # Caramel Theme
-		Global.theme_type = Global.Theme_Types.CARAMEL
+		Global.theme_type = Global.ThemeTypes.CARAMEL
 	elif ID == 4: # Light Theme
-		Global.theme_type = Global.Theme_Types.LIGHT
+		Global.theme_type = Global.ThemeTypes.LIGHT
 	elif ID == 5: # Purple Theme
-		Global.theme_type = Global.Theme_Types.DARK
+		Global.theme_type = Global.ThemeTypes.DARK
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
@@ -95,10 +95,10 @@ func change_theme(ID : int) -> void:
 			var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
 			var normal_file_name = button.texture_normal.resource_path.get_file()
 			var theme_type := Global.theme_type
-			if theme_type == Global.Theme_Types.BLUE:
-				theme_type = Global.Theme_Types.DARK
+			if theme_type == Global.ThemeTypes.BLUE:
+				theme_type = Global.ThemeTypes.DARK
 
-			var theme_type_string : String = Global.Theme_Types.keys()[theme_type].to_lower()
+			var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
 			button.texture_normal = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
 			if button.texture_pressed:
 				var pressed_file_name = button.texture_pressed.resource_path.get_file()
@@ -121,10 +121,10 @@ func change_theme(ID : int) -> void:
 				var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 				var normal_file_name = texture.texture.resource_path.get_file()
 				var theme_type := Global.theme_type
-				if theme_type == Global.Theme_Types.CARAMEL or (theme_type == Global.Theme_Types.BLUE and button_category != "tools"):
-					theme_type = Global.Theme_Types.DARK
+				if theme_type == Global.ThemeTypes.CARAMEL or (theme_type == Global.ThemeTypes.BLUE and button_category != "tools"):
+					theme_type = Global.ThemeTypes.DARK
 
-				var theme_type_string : String = Global.Theme_Types.keys()[theme_type].to_lower()
+				var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
 				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
 
 	# Make sure the frame text gets updated

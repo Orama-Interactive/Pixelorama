@@ -25,15 +25,15 @@ func _on_TransparentChecker_resized() -> void:
 
 func _init_position(tile_mode : int) -> void:
 	match tile_mode:
-		Global.Tile_Mode.NONE:
+		Global.TileMode.NONE:
 			Global.transparent_checker.set_size(Global.current_project.size)
 			Global.transparent_checker.set_position(Vector2.ZERO)
-		Global.Tile_Mode.BOTH:
+		Global.TileMode.BOTH:
 			Global.transparent_checker.set_size(Global.current_project.size*3)
 			Global.transparent_checker.set_position(-Global.current_project.size)
-		Global.Tile_Mode.XAXIS:
+		Global.TileMode.X_AXIS:
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*3, Global.current_project.size.y*1))
 			Global.transparent_checker.set_position(Vector2(-Global.current_project.size.x, 0))
-		Global.Tile_Mode.YAXIS:
+		Global.TileMode.Y_AXIS:
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
 			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.y))

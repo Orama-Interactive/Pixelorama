@@ -9,9 +9,9 @@ var node : Node
 
 func _ready() -> void:
 	# Handle themes
-	if Global.theme_type == Global.Theme_Types.LIGHT:
+	if Global.theme_type == Global.ThemeTypes.LIGHT:
 		texture_normal = load("res://assets/graphics/light_themes/misc/icon_reload.png")
-	elif Global.theme_type == Global.Theme_Types.CARAMEL:
+	elif Global.theme_type == Global.ThemeTypes.CARAMEL:
 		texture_normal = load("res://assets/graphics/caramel_themes/misc/icon_reload.png")
 
 
