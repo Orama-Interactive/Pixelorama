@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-01-20 14:30\n"
+"PO-Revision-Date: 2021-01-20 14:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,7 +160,7 @@ msgid "Show Grid"
 msgstr "Afficher la grille"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Afficher la grille des pixels"
 
 msgid "Show Rulers"
 msgstr "Afficher les règles"
@@ -875,19 +875,19 @@ msgid "A color of the grid"
 msgstr "Une couleur de la grille"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Grille des pixels"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Afficher au zoom :"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Définit le zoom minimal à partir duquel la grille de pixels sera affichée"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Couleur de la grille de pixels :"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Une couleur de la grille de pixels"
 
 msgid "Transparency"
 msgstr "Transparence"
