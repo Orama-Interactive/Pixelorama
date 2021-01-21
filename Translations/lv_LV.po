@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2021-01-20 14:29\n"
+"PO-Revision-Date: 2021-01-21 00:00\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -705,6 +705,11 @@ msgstr "Taisnstūra iezīmēšana\n\n"
 "Nospied %s, lai pārvietotu saturu"
 
 msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr ""
@@ -1444,6 +1449,9 @@ msgid "Rectangular Selection"
 msgstr "Taisnstūra iezīmēšana"
 
 msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"
