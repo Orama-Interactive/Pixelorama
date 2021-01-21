@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-01-20 14:29\n"
+"PO-Revision-Date: 2021-01-21 00:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -710,6 +710,11 @@ msgid "Zoom\n\n"
 msgstr "Zoom\n\n"
 "%s para o botão esquerdo do mouse\n"
 "%s para o botão direito do mouse"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -1449,6 +1454,9 @@ msgstr "Seleção Retangular"
 
 msgid "Zoom"
 msgstr "Zoom"
+
+msgid "Pan"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Seleção de Cores"
