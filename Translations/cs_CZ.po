@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-01-20 14:30\n"
+"PO-Revision-Date: 2021-01-21 00:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -710,6 +710,11 @@ msgid "Zoom\n\n"
 msgstr "Přiblížit/oddálit\n\n"
 "%s pro levé tlačítko myši\n"
 "%s pro pravé tlačítko myši"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -1449,6 +1454,9 @@ msgstr "Obdélníkový výběr"
 
 msgid "Zoom"
 msgstr "Přiblížení/oddálení"
+
+msgid "Pan"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Kapátko"
