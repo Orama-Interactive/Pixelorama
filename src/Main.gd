@@ -7,6 +7,9 @@ var is_quitting_on_save := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	### minor addition by variable
+	get_node("MenuAndUI/TopMenuContainer/Mode").connect("item_selected",self,"mode_selected")
+	###
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
 
@@ -55,26 +58,10 @@ func _input(event : InputEvent) -> void:
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
-	# The section of code below is reserved for Undo and Redo! Do not place code for Input below, but above.
-	if !event.is_echo(): # Checks if the action is pressed down
-		if event.is_action_pressed("redo_secondary"): # Done, so that "redo_secondary" hasn't
-			redone = true # a slight delay before it starts. The "redo" and "undo" action don't have a slight delay,
-			Global.current_project.undo_redo.redo() # The "redo" and "undo" action don't have a slight delay,
-			redone = false # because they get called as an accelerator once pressed (TopMenuContainer.gd / Line 152).
-		return
-
-	if event.is_action("redo"): # Ctrl + Y
+	if event.is_action_pressed("redo_secondary"): # Shift + Ctrl + Z
 		redone = true
 		Global.current_project.undo_redo.redo()
 		redone = false
-
-	if event.is_action("redo_secondary"): # Shift + Ctrl + Z
-		redone = true
-		Global.current_project.undo_redo.redo()
-		redone = false
-
-	if event.is_action("undo") and !event.shift: # Ctrl + Z and check if shift isn't pressed
-		Global.current_project.undo_redo.undo() # so "undo" isn't accidentaly triggered while using "redo_secondary"
 
 
 func setup_application_window_size() -> void:
@@ -137,15 +124,8 @@ func handle_backup() -> void:
 
 
 func _notification(what : int) -> void:
-	match what:
-		MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
-			show_quit_dialog()
-		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when the mouse isn't in the window anymore
-			if Global.fps_limit_focus:
-				Engine.set_target_fps(1) # then set the fps to 1 to relieve the cpu
-		MainLoop.NOTIFICATION_WM_MOUSE_ENTER: # Opposite of the above
-			if Global.fps_limit_focus:
-				Engine.set_target_fps(Global.fps_limit) # 0 stands for maximum fps
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
+		show_quit_dialog()
 
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
@@ -254,3 +234,21 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
+
+
+#minor addition by Variable
+func mode_selected(id):
+	print(id)
+	if id == 0:
+		animation_mode()
+	elif id == 1:
+		draw_mode()
+
+func animation_mode():
+	get_node("MenuAndUI/UI").get_node("CanvasAndTimeline/AnimationTimeline").visible = true
+	get_node("MenuAndUI/UI").get_node("RightPanel/PreviewAndPalettes/CanvasPreviewContainer").visible = true
+	
+func draw_mode():
+	get_node("MenuAndUI/UI").get_node("CanvasAndTimeline/AnimationTimeline").visible = false
+	get_node("MenuAndUI/UI").get_node("RightPanel/PreviewAndPalettes/CanvasPreviewContainer").visible = false
+	
