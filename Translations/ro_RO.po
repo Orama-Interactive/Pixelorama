@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-21 00:01\n"
+"PO-Revision-Date: 2021-01-21 06:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -399,7 +399,7 @@ msgid "Restore default value"
 msgstr "Resetare la valoarea implicită"
 
 msgid "Smooth Zoom"
-msgstr "Panoramare lentă"
+msgstr "Transfocare lentă"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Adaugă o tranziție mai lentă la apropiere sau depărtare"
@@ -707,7 +707,7 @@ msgstr "Selecție dreptunghiulară\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Panoramare\n\n"
+msgstr "Transfocare\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
@@ -883,10 +883,10 @@ msgid "Pixel Grid"
 msgstr "Grilă de pixeli"
 
 msgid "Show at zoom:"
-msgstr "Afișare la panoramare:"
+msgstr "Afișare la transfocare:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr "Setează nivelul minim de panoramare la care va fi afișată grila de pixeli"
+msgstr "Setează nivelul minim de transfocare la care va fi afișată grila de pixeli"
 
 msgid "Pixel grid color:"
 msgstr "Culoarea grilei de pixeli:"
@@ -922,10 +922,10 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr "Carourile transparente urmăresc mișcarea pânzei"
 
 msgid "Follow Canvas Zoom Level"
-msgstr "Urmărește nivelul de panoramare al pânzei"
+msgstr "Urmărește nivelul de transfocare al pânzei"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Carourile transparente urmăresc nivelul de panoramare al pânzei"
+msgstr "Carourile transparente urmăresc nivelul de transfocare al pânzei"
 
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
