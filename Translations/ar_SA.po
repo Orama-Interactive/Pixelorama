@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-01-20 14:29\n"
+"PO-Revision-Date: 2021-01-21 00:00\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -710,6 +710,11 @@ msgid "Zoom\n\n"
 msgstr "تكبير\n\n"
 "%s لزر الماوس الأيسر\n"
 "%s لزر الماوس الأيمن"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -1439,6 +1444,9 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"
