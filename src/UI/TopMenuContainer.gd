@@ -3,7 +3,8 @@ extends Panel
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
-enum ViewMenuId {TILE_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+########Minor addition by Variable
+enum ViewMenuId {TILE_MODE,TRANSPARENT_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 ########Minor addition by Variable
 enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
@@ -79,10 +80,11 @@ func setup_edit_menu() -> void:
 
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
-
+########Minor addition by Variable
 func setup_view_menu() -> void:
 	var view_menu_items := { # order as in ViewMenuId enum
 		"Tile Mode" : 0,
+		"Transparent Mode" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid" : InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
@@ -264,6 +266,8 @@ func edit_menu_id_pressed(id : int) -> void:
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
+		ViewMenuId.TRANSPARENT_MODE:
+			toggle_transparent_mode()
 		ViewMenuId.MIRROR_VIEW:
 			toggle_mirror_view()
 		ViewMenuId.SHOW_GRID:
@@ -297,7 +301,24 @@ func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
-
+########Minor addition by Variable 
+func toggle_transparent_mode() -> void:
+	var checker :ColorRect = get_parent().get_node("UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
+	var viewport :Viewport = get_parent().get_node("UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport")
+	if checker.material.get_shader_param("alpha") == 1:
+		checker.material.set_shader_param("alpha",0.5)
+		viewport.transparent_bg = true
+		view_menu.set_item_checked(ViewMenuId.TRANSPARENT_MODE, true)
+		get_tree().get_root().set_transparent_background(true)
+		OS.window_per_pixel_transparency_enabled = true
+	
+	elif checker.material.get_shader_param("alpha") == 0.5:
+		checker.material.set_shader_param("alpha",1)
+		viewport.transparent_bg = false
+		view_menu.set_item_checked(ViewMenuId.TRANSPARENT_MODE, false)
+		get_tree().get_root().set_transparent_background(false)
+		OS.window_per_pixel_transparency_enabled = false
+		
 func toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(ViewMenuId.SHOW_GRID, Global.draw_grid)
