@@ -8,13 +8,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 This update has been brought to you by the contributions of:
 
-Laurenz Reinthaler (Schweini07)
+Laurenz Reinthaler (Schweini07), kleonc
 
 ### Added
-- The FPS of the project animation is now stored in the pxo file.
+- A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
+- Added a new "Performance" tab in the Preferences that exposes options related to the application's FPS to the user.
+- Added a new pixel grid, which is a grid of size 1px and it appears after a certain zoom level. ([#427](https://github.com/Orama-Interactive/Pixelorama/pull/427))
+- Addet offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
+- The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))
 
 ### Changed
+- Undo and redo now work when their respective keyboard shortcuts are being held. ([#405](https://github.com/Orama-Interactive/Pixelorama/pull/405))
 - CPU usage has been significantly been lowered when Pixelorama is idle. ([#394](https://github.com/Orama-Interactive/Pixelorama/pull/394))
+- The FPS of the project animation is now stored in the pxo file. This effectively means that every project can have its own FPS.
+- You can now toggle if you want the grid to be drawn over the tile mode or just the original part of the canvas. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
+- Frame tags can now be set for frames larger than 100. ([#408](https://github.com/Orama-Interactive/Pixelorama/pull/408))
+
+### Fixed
+- Fixed layer button textures not being updated properly when changing theme. ([#404](https://github.com/Orama-Interactive/Pixelorama/issues/404))
+- Keyboard shortcut conflicts between tool shortcuts and other shortcuts that use the "Control" key, like menu shortcuts, have been resolved. ([#407](https://github.com/Orama-Interactive/Pixelorama/pull/407))
+- The opacity of a cel and the tile mode opacity are now multiplicative. ([#414](https://github.com/Orama-Interactive/Pixelorama/pull/414))
+- Fixed an issue where adding a new layer did not select it, rather it was selecting the above layer of the previously selected layer. ([#424](https://github.com/Orama-Interactive/Pixelorama/pull/424))
+- Fixed cel opacity not being always updated on the UI. ([#420](https://github.com/Orama-Interactive/Pixelorama/pull/420))
 <br><br>
 
 ## [v0.8.2] - 2020-12-12
