@@ -337,7 +337,8 @@ func general_redo(project : Project = current_project) -> void:
 func undo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_undo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
+	#minor change by Variable
+	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
@@ -350,7 +351,11 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			Global.canvas.grid.update()
 			Global.canvas.pixel_grid.update()
 			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
-
+#minor change by Variable
+		elif action_name == "Centralize":
+			Global.canvas.grid.update()
+			Global.canvas.pixel_grid.update()
+			
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
 		if project.frames.size() == 2: # Stop animating
@@ -368,7 +373,8 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 func redo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_redo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
+	#minor change by Variable
+	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
@@ -381,6 +387,10 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			Global.canvas.grid.update()
 			Global.canvas.pixel_grid.update()
 			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+#minor change by Variable (add middle two lines of scale here)
+		elif action_name == "Centralize":
+			Global.canvas.grid.update()
+			Global.canvas.pixel_grid.update()
 
 	elif "Frame" in action_name:
 		if project.frames.size() == 1: # Stop animating
