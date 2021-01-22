@@ -91,17 +91,18 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = -330.0
-margin_top = -10.0
-margin_right = -132.0
-margin_bottom = 13.0
+margin_top = -14.0
+margin_bottom = 14.0
 grow_horizontal = 2
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CurrentFrame" type="Label" parent="HBoxContainer"]
-margin_right = 92.0
-margin_bottom = 23.0
+margin_left = 106.0
+margin_right = 198.0
+margin_bottom = 28.0
 size_flags_vertical = 1
 text = "Current frame:"
 __meta__ = {
@@ -109,24 +110,8 @@ __meta__ = {
 }
 
 [node name="CurrentFrameMark" type="Label" parent="HBoxContainer"]
-margin_left = 96.0
-margin_right = 117.0
-margin_bottom = 23.0
+margin_left = 202.0
+margin_right = 223.0
+margin_bottom = 28.0
 size_flags_vertical = 1
 text = "1/2"
-
-[node name="Mode" type="OptionButton" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 508.0
-margin_top = -11.0
-margin_right = 625.0
-margin_bottom = 12.0
-text = "Animation"
-items = [ "Animation", null, false, 0, false, "Drawing", null, false, 0, false ]
-selected = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
