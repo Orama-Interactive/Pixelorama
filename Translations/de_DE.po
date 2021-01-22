@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-22 12:36\n"
+"PO-Revision-Date: 2021-01-22 12:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Tile Mode"
-msgstr "Tilemodus"
+msgstr "Kachelmodus"
 
 msgid "Mirror View"
 msgstr "Spiegel-Ansicht"
@@ -842,34 +842,34 @@ msgid "Rectangular grid height:"
 msgstr "Höhe des Rechteckrasters:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Legt fest, wie weit sich die horizontalen Linien des rechteckigen Rasters voneinander unterscheiden"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Isometrische Zellengrenzbreite:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Legt die Breite der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Isometrische Zellgrenzenhöhe:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Legt die Höhe der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "X-Rasteroffset:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Legt den X-Offset des Rasters vom Ursprung der Leinwand fest (linke obere Ecke des Bildes)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Y-Rasteroffset:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Legt den Y-Offset vom Ursprung der Leinwand fest (linke obere Ecke des Bilds)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Über Kachelmodus zeichnen:"
 
 msgid "If disabled grid will be drawn only over the original image"
 msgstr "Wenn deaktiviert, wird das Raster nur über das Originalbild gezeichnet"
@@ -1218,7 +1218,7 @@ msgid "Opacity:"
 msgstr "Deckkraft"
 
 msgid "Tile mode opacity:"
-msgstr "Tilemodus Deckkraft:"
+msgstr "Kachelmodus Deckkraft:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
@@ -1582,5 +1582,5 @@ msgid "Tiled In X Axis"
 msgstr "In X-Achse gekachelt"
 
 msgid "Tiled In Y Axis"
-msgstr "Tiled in Y-Achse"
+msgstr "In Y-Achse gekachelt"
 
