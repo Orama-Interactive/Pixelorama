@@ -363,32 +363,7 @@ func image_menu_id_pressed(id : int) -> void:
 
 ########Minor addition by Variable
 		ImageMenuId.CENTRALIZE_IMAGE:
-			# Use first cel as a starting rectangle
-			var used_rect : Rect2 = image.get_used_rect()
-				
-			# However, if first cel is empty, loop through all cels until we find one that isn't
-			for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-				if used_rect != Rect2(0, 0, 0, 0):
-					break
-				else:
-					if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
-						used_rect = cel.image.get_used_rect()
-			# Merge all layers with content
-			for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-					if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
-						used_rect = used_rect.merge(cel.image.get_used_rect())
-			# If no layer has any content, just return
-			if used_rect == Rect2(0, 0, 0, 0):
-				return
-				
-			var img_position = used_rect.position
-			var width :float = used_rect.size.x       # width of current drawing in frame
-			var height :float = used_rect.size.y      # height of current drawing in frame
-			
-			### Setting offset for centralization
-			var offset_x :int = (((Global.current_project.size.x/width)/2)*width) - (width/2 + img_position.x)
-			var offset_y :int = (((Global.current_project.size.y/height)/2)*height) - (height/2 + img_position.y)
-			centralize(Global.current_project.size.x,Global.current_project.size.y,offset_x,offset_y)
+			DrawingAlgos.centralize(image)
 ##########
 
 		ImageMenuId.CROP_IMAGE:
@@ -471,44 +446,3 @@ func help_menu_id_pressed(id : int) -> void:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)
 
-# Minor addition by Variable
-func centralize(width : int, height : int, offset_x : int, offset_y : int) -> void:
-	general_do_centralize(width, height)
-	for c in Global.current_project.frames[Global.current_project.current_frame].cels:
-		var sprite := Image.new()
-		sprite.create(width, height, false, Image.FORMAT_RGBA8)
-		sprite.blend_rect(c.image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2(offset_x, offset_y))
-		Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
-		Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
-
-	general_undo_centralize()
-func general_do_centralize(width : int, height : int) -> void:
-	var x_ratio = Global.current_project.size.x / width
-	var y_ratio = Global.current_project.size.y / height
-	var new_x_symmetry_point = Global.current_project.x_symmetry_point / x_ratio
-	var new_y_symmetry_point = Global.current_project.y_symmetry_point / y_ratio
-	var new_x_symmetry_axis_points = Global.current_project.x_symmetry_axis.points
-	var new_y_symmetry_axis_points = Global.current_project.y_symmetry_axis.points
-	new_x_symmetry_axis_points[0].y /= y_ratio
-	new_x_symmetry_axis_points[1].y /= y_ratio
-	new_y_symmetry_axis_points[0].x /= x_ratio
-	new_y_symmetry_axis_points[1].x /= x_ratio
-
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Centralize")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "x_symmetry_point", new_x_symmetry_point)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "y_symmetry_point", new_y_symmetry_point)
-	Global.current_project.undo_redo.add_do_property(Global.current_project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
-	Global.current_project.undo_redo.add_do_property(Global.current_project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
-
-
-func general_undo_centralize() -> void:
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "x_symmetry_point", Global.current_project.x_symmetry_point)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "y_symmetry_point", Global.current_project.y_symmetry_point)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project.x_symmetry_axis, "points", Global.current_project.x_symmetry_axis.points)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project.y_symmetry_axis, "points", Global.current_project.y_symmetry_axis.points)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
