@@ -7,9 +7,6 @@ var is_quitting_on_save := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	### minor addition by variable
-	get_node("MenuAndUI/TopMenuContainer/Mode").connect("item_selected",self,"mode_selected")
-	###
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
 
@@ -235,20 +232,3 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 	if Global.open_last_project:
 		load_last_project()
 
-
-#minor addition by Variable
-func mode_selected(id):
-	print(id)
-	if id == 0:
-		animation_mode()
-	elif id == 1:
-		draw_mode()
-
-func animation_mode():
-	get_node("MenuAndUI/UI").get_node("CanvasAndTimeline/AnimationTimeline").visible = true
-	get_node("MenuAndUI/UI").get_node("RightPanel/PreviewAndPalettes/CanvasPreviewContainer").visible = true
-	
-func draw_mode():
-	get_node("MenuAndUI/UI").get_node("CanvasAndTimeline/AnimationTimeline").visible = false
-	get_node("MenuAndUI/UI").get_node("RightPanel/PreviewAndPalettes/CanvasPreviewContainer").visible = false
-	
