@@ -105,6 +105,7 @@ func create_donors() -> void:
 	donors.create_item(donors_root).set_text(0, "  Hugo Locurcio")
 	donors.create_item(donors_root).set_text(0, "  MysteryStudio")
 	donors.create_item(donors_root).set_text(0, "  Daniel Gagnon")
+	donors.create_item(donors_root).set_text(0, "  Ryan C. Gordon (icculus)")
 
 
 func create_contributors() -> void:
@@ -113,11 +114,12 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  CheetoHead (greusser)")
 	contributors.create_item(contributor_root).set_text(0, "  Michael Alexsander (YeldhamDev)")
 	contributors.create_item(contributor_root).set_text(0, "  Martin Novák (novhack)")
+	contributors.create_item(contributor_root).set_text(0, "  Laurenz Reinthaler (Schweini07)")
 	contributors.create_item(contributor_root).set_text(0, "  azagaya")
+	contributors.create_item(contributor_root).set_text(0, "  kleonc")
 	contributors.create_item(contributor_root).set_text(0, "  Kinwailo")
 	contributors.create_item(contributor_root).set_text(0, "  Igor Santarek (jegor377)")
 	contributors.create_item(contributor_root).set_text(0, "  Darshan Phaldesai (luiq54)")
-	contributors.create_item(contributor_root).set_text(0, "  Laurenz Reinthaler (Schweini07)")
 	contributors.create_item(contributor_root).set_text(0, "  Martin Zabinski (Martin1991zab)")
 	contributors.create_item(contributor_root).set_text(0, "  Marco Galli (Gaarco)")
 	contributors.create_item(contributor_root).set_text(0, "  Xenofon Konitsas (huskee)")
