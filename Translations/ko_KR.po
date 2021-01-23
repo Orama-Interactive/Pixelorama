@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-21 00:51\n"
+"PO-Revision-Date: 2021-01-23 03:30\n"
 
 msgid "OK"
 msgstr "예"
@@ -858,13 +858,13 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "격자 오프셋 x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "격자 오프셋 y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
