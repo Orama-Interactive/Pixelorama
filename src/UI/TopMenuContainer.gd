@@ -4,7 +4,8 @@ extends Panel
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
 enum ViewMenuId {TILE_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
-enum ImageMenuId {SCALE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
+########Minor addition by Variable
+enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
 
 
@@ -112,10 +113,11 @@ func setup_tile_mode_submenu(item : String):
 	view_menu.add_child(Global.tile_mode_submenu)
 	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
 
-
+###### Minor addition by variable
 func setup_image_menu() -> void:
 	var image_menu_items := { # order as in ImageMenuId enum
 		"Scale Image" : 0,
+		"Centralize Image" : 0, #added the centralize option
 		"Crop Image" : 0,
 		"Resize Canvas" : 0,
 		"Flip" : 0,
@@ -358,6 +360,12 @@ func image_menu_id_pressed(id : int) -> void:
 	match id:
 		ImageMenuId.SCALE_IMAGE:
 			show_scale_image_popup()
+
+		###Minor addition by Variable
+		ImageMenuId.CENTRALIZE_IMAGE:
+			DrawingAlgos.centralize(image)
+		###### The rest is in DrawingAlgos.gd and Global.gd
+
 
 		ImageMenuId.CROP_IMAGE:
 			DrawingAlgos.crop_image(image)
