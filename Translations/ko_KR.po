@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-23 03:40\n"
+"PO-Revision-Date: 2021-01-25 20:11\n"
 
 msgid "OK"
 msgstr "예"
@@ -1433,8 +1433,14 @@ msgstr "기본 채우기 색:"
 msgid "A default background color of a new image"
 msgstr "새 이미지의 기본 배경 색"
 
-msgid "Lock aspect ratio:"
-msgstr "비율 고정"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "템플릿:"
