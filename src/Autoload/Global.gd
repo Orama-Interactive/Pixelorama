@@ -337,8 +337,6 @@ func general_redo(project : Project = current_project) -> void:
 func undo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_undo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	
-	#minor change by Variable (i added action_name == "Centralize" here)
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
@@ -370,8 +368,6 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 func redo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_redo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	
-	#minor change by Variable (i added action_name == "Centralize" here)
 	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
