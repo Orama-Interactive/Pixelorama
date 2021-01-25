@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-01-21 00:01\n"
+"PO-Revision-Date: 2021-01-25 20:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1429,8 +1429,14 @@ msgstr "Цвет заливки по умолчанию:"
 msgid "A default background color of a new image"
 msgstr "Цвет фона по умолчанию для нового изображения"
 
-msgid "Lock aspect ratio:"
-msgstr "Фиксированные пропорции:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Шаблоны:"
