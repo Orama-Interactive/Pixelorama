@@ -361,7 +361,7 @@ func image_menu_id_pressed(id : int) -> void:
 			show_scale_image_popup()
 
 		ImageMenuId.CENTRALIZE_IMAGE:
-			DrawingAlgos.centralize(image)
+			DrawingAlgos.centralize()
 
 		ImageMenuId.CROP_IMAGE:
 			DrawingAlgos.crop_image(image)
