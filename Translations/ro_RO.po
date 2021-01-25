@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-25 20:12\n"
+"PO-Revision-Date: 2021-01-25 20:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1434,13 +1434,13 @@ msgid "A default background color of a new image"
 msgstr "Culoarea implicită de fundal a unei imagini noi"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Blocare raport aspect"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Portret"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Peisaj"
 
 msgid "Templates:"
 msgstr "Șabloane:"
