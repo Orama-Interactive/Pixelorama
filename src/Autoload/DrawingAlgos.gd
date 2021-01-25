@@ -255,7 +255,7 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 	general_undo_scale()
 
 
-func centralize(image) -> void:
+func centralize() -> void:
 	# first we will use a few lines of code similar to the lines in "crop_image(image)"
 	# for obtaining the rectangular boundaries of the drawing
 	
