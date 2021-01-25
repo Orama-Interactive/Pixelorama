@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2021-01-21 00:00\n"
+"PO-Revision-Date: 2021-01-25 20:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1428,8 +1428,14 @@ msgstr "Standard fyllfarge:"
 msgid "A default background color of a new image"
 msgstr "En standard bakgrunnsfarge for et nytt bilde"
 
-msgid "Lock aspect ratio:"
-msgstr "Lås størrelsesforhold:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Maler:"
