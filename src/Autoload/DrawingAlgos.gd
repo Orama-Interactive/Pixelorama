@@ -259,38 +259,21 @@ func centralize(image) -> void:
 	# first we will use a few lines of code similar to the lines in "crop_image(image)"
 	# for obtaining the rectangular boundaries of the drawing
 	
-	# Use first cel as a starting rectangle
-	var used_rect : Rect2 = image.get_used_rect()
-	# However, if first cel is empty, loop through all cels until we find one that isn't
+	# Find used rect of the current frame (across all of the layers)
+	var used_rect := Rect2()
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-		if used_rect != Rect2(0, 0, 0, 0):
-			break
-		else:
-			if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
-				used_rect = cel.image.get_used_rect()
-	# Merge all layers with content
-	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-			if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
-				used_rect = used_rect.merge(cel.image.get_used_rect())
-	# If no layer has any content, just return
-	if used_rect == Rect2(0, 0, 0, 0):
+		var cel_rect : Rect2 = cel.image.get_used_rect()
+		if not cel_rect.has_no_area():
+			used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
+	if used_rect.has_no_area():
 		return
 	
-	var img_position = used_rect.position   # Now we the current image position
-	var width :float = used_rect.size.x     # width of image
-	var height :float = used_rect.size.y    # and height of image
-	
-	# Finding how much we should move the image centralize it.
-	var offset_x :int = (((Global.current_project.size.x/width)/2)*width) - (width/2 + img_position.x)
-	var offset_y :int = (((Global.current_project.size.y/height)/2)*height) - (height/2 + img_position.y)
-	# Note that offset_x and offset_y are intentionally "int" so that they can round up the central point incase the value is in decimals
-	
-	# Create an empty Image of the same size as the orignal and draw the same image with the given offset
+	var offset : Vector2 = (0.5 * (Global.current_project.size - used_rect.size)).floor()
 	general_do_centralize()
 	for c in Global.current_project.frames[Global.current_project.current_frame].cels:
 		var sprite := Image.new()
 		sprite.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
-		sprite.blend_rect(c.image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2(offset_x, offset_y))
+		sprite.blend_rect(c.image, used_rect, offset)
 		Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
 		Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
 	general_undo_centralize()
@@ -375,9 +358,11 @@ func general_undo_scale() -> void:
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.commit_action()
 
+
 func general_do_centralize() -> void:
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Centralize")
+
 
 func general_undo_centralize() -> void:
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
