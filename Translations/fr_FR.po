@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-01-21 11:30\n"
+"PO-Revision-Date: 2021-01-25 20:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1433,8 +1433,14 @@ msgstr "Couleur de remplissage par défaut:"
 msgid "A default background color of a new image"
 msgstr "Une couleur de fond par défaut d'une nouvelle image"
 
-msgid "Lock aspect ratio:"
-msgstr "Corriger le ratio d'aspect:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Modèles:"
