@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-01-21 00:00\n"
+"PO-Revision-Date: 2021-01-25 20:11\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1429,8 +1429,14 @@ msgid "A default background color of a new image"
 msgstr "Warna latar belakang gambar default\n"
 " "
 
-msgid "Lock aspect ratio:"
-msgstr "Kunci aspek rasio"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Templet/Sampul:"
