@@ -112,6 +112,7 @@ func setup_tile_mode_submenu(item : String):
 	view_menu.add_child(Global.tile_mode_submenu)
 	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
 
+
 func setup_image_menu() -> void:
 	var image_menu_items := { # order as in ImageMenuId enum
 		"Scale Image" : 0,
@@ -361,7 +362,6 @@ func image_menu_id_pressed(id : int) -> void:
 
 		ImageMenuId.CENTRALIZE_IMAGE:
 			DrawingAlgos.centralize(image)
-
 
 		ImageMenuId.CROP_IMAGE:
 			DrawingAlgos.crop_image(image)
