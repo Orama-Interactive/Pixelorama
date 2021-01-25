@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-01-21 00:00\n"
+"PO-Revision-Date: 2021-01-25 20:11\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1426,8 +1426,14 @@ msgstr "Varsayılan dolgu rengi:"
 msgid "A default background color of a new image"
 msgstr "Yeni resmin varsayılan arkaplan rengi"
 
-msgid "Lock aspect ratio:"
-msgstr "En boy oranlarını kilitle:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Şablonlar:"
