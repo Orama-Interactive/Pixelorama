@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-01-21 00:01\n"
+"PO-Revision-Date: 2021-01-25 20:12\n"
 
 msgid "OK"
 msgstr ""
@@ -1402,7 +1402,13 @@ msgstr ""
 msgid "A default background color of a new image"
 msgstr ""
 
-msgid "Lock aspect ratio:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
 msgstr ""
 
 msgid "Templates:"
