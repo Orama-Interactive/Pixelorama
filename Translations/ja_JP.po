@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-01-21 16:45\n"
+"PO-Revision-Date: 2021-01-25 20:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1433,8 +1433,14 @@ msgstr "既定の塗りつぶしの色:"
 msgid "A default background color of a new image"
 msgstr "新しい画像の既定の背景色"
 
-msgid "Lock aspect ratio:"
-msgstr "アスペクト比をロック:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "テンプレート:"
