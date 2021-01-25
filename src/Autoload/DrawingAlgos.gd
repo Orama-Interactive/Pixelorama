@@ -256,9 +256,6 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 
 
 func centralize() -> void:
-	# first we will use a few lines of code similar to the lines in "crop_image(image)"
-	# for obtaining the rectangular boundaries of the drawing
-	
 	# Find used rect of the current frame (across all of the layers)
 	var used_rect := Rect2()
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
