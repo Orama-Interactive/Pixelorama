@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-01-21 00:01\n"
+"PO-Revision-Date: 2021-01-25 20:12\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1431,8 +1431,14 @@ msgstr "Alapértelmezett kitöltő szín:"
 msgid "A default background color of a new image"
 msgstr "Alapértelmezett háttérszíne az új képnek"
 
-msgid "Lock aspect ratio:"
-msgstr "Méretarány lezárása:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Sablonok:"
