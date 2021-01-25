@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-01-21 00:00\n"
+"PO-Revision-Date: 2021-01-25 20:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1430,8 +1430,14 @@ msgstr "Domyślny kolor wypełnienia:"
 msgid "A default background color of a new image"
 msgstr "Domyślny kolor tła dla nowego obrazu"
 
-msgid "Lock aspect ratio:"
-msgstr "Zablokuj proporcje:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Szablony:"
