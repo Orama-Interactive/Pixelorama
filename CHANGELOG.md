@@ -16,6 +16,7 @@ Laurenz Reinthaler (Schweini07), kleonc
 - Added a new pixel grid, which is a grid of size 1px and it appears after a certain zoom level. ([#427](https://github.com/Orama-Interactive/Pixelorama/pull/427))
 - Addet offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))
+- Added portrait and landscape buttons in the new image dialog.
 
 ### Changed
 - Undo and redo now work when their respective keyboard shortcuts are being held. ([#405](https://github.com/Orama-Interactive/Pixelorama/pull/405))
@@ -23,6 +24,7 @@ Laurenz Reinthaler (Schweini07), kleonc
 - The FPS of the project animation is now stored in the pxo file. This effectively means that every project can have its own FPS.
 - You can now toggle if you want the grid to be drawn over the tile mode or just the original part of the canvas. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - Frame tags can now be set for frames larger than 100. ([#408](https://github.com/Orama-Interactive/Pixelorama/pull/408))
+- The "lock aspect ratio" button in the create new image dialog has been changed to a texture button.
 
 ### Fixed
 - Fixed layer button textures not being updated properly when changing theme. ([#404](https://github.com/Orama-Interactive/Pixelorama/issues/404))
