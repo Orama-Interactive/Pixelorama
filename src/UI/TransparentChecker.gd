@@ -37,3 +37,14 @@ func _init_position(tile_mode : int) -> void:
 		Global.TileMode.Y_AXIS:
 			Global.transparent_checker.set_size(Vector2(Global.current_project.size.x*1, Global.current_project.size.y*3))
 			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.y))
+
+func transparent_mode(state :bool) -> void:
+	# first make viewport transparent then background and then viewport
+	get_parent().transparent_bg = state
+	get_tree().get_root().set_transparent_background(state)
+	OS.window_per_pixel_transparency_enabled = state
+	# this controls opacity 0 for transparent, 1 or a greater value than 1 is opaque
+	if state:
+		material.set("shader_param/alpha",0.5)
+	else:
+		material.set("shader_param/alpha",1)

@@ -3,7 +3,7 @@ extends Panel
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
-enum ViewMenuId {TILE_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+enum ViewMenuId {TILE_MODE, TRANSPARENT_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
 
@@ -82,6 +82,7 @@ func setup_edit_menu() -> void:
 func setup_view_menu() -> void:
 	var view_menu_items := { # order as in ViewMenuId enum
 		"Tile Mode" : 0,
+		"Transparent Mode" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid" : InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
@@ -265,6 +266,8 @@ func view_menu_id_pressed(id : int) -> void:
 	match id:
 		ViewMenuId.MIRROR_VIEW:
 			toggle_mirror_view()
+		ViewMenuId.TRANSPARENT_MODE:
+			toggle_transparent_mode()
 		ViewMenuId.SHOW_GRID:
 			toggle_show_grid()
 		ViewMenuId.SHOW_PIXEL_GRID:
@@ -295,6 +298,13 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
+
+
+func toggle_transparent_mode() -> void:
+	Global.transparent_view = !Global.transparent_view
+	view_menu.set_item_checked(ViewMenuId.TRANSPARENT_MODE, Global.transparent_view)
+	var checker :ColorRect = get_parent().get_node("UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
+	checker.transparent_mode(Global.transparent_view)
 
 
 func toggle_show_grid() -> void:
