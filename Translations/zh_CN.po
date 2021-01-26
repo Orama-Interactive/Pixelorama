@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-01-26 14:43\n"
+"PO-Revision-Date: 2021-01-26 22:50\n"
 
 msgid "OK"
 msgstr "确定"
@@ -125,6 +125,12 @@ msgstr "删除"
 
 msgid "Scale Image"
 msgstr "缩放图像"
+
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
 
 msgid "Crop Image"
 msgstr "裁剪图像"
