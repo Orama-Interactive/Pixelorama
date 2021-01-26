@@ -1,79 +1,215 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_guides.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect.png" type="Texture" id=4]
 
 [node name="ScaleImage" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 114.0
 rect_min_size = Vector2( 250, 87.5 )
 window_title = "Scale Image"
+resizable = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 242.0
-margin_bottom = 102.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
 margin_right = 234.0
-margin_bottom = 14.0
+margin_bottom = 23.0
 text = "Image Size"
 
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 18.0
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 27.0
 margin_right = 234.0
-margin_bottom = 94.0
-custom_constants/vseparation = 4
-custom_constants/hseparation = 2
-columns = 2
+margin_bottom = 31.0
 
-[node name="WidthLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 5.0
-margin_right = 87.0
-margin_bottom = 19.0
+[node name="PixelsLabel" type="Label" parent="VBoxContainer"]
+margin_top = 35.0
+margin_right = 234.0
+margin_bottom = 58.0
+text = "Pixels"
+
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 62.0
+margin_right = 234.0
+margin_bottom = 112.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
+margin_right = 221.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+
+[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+margin_right = 221.0
+margin_bottom = 23.0
+
+[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+margin_right = 90.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 90, 0 )
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 89.0
-margin_right = 168.0
-margin_bottom = 24.0
+[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+margin_left = 94.0
+margin_right = 221.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="Height" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 33.0
-margin_right = 87.0
-margin_bottom = 47.0
+[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+margin_top = 27.0
+margin_right = 221.0
+margin_bottom = 50.0
+
+[node name="Height" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+margin_right = 90.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 90, 0 )
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 89.0
-margin_top = 28.0
-margin_right = 168.0
-margin_bottom = 52.0
+[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+margin_left = 94.0
+margin_right = 221.0
+margin_bottom = 23.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="InterpolationLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 59.0
-margin_right = 87.0
-margin_bottom = 73.0
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer"]
+margin_left = 225.0
+margin_right = 234.0
+margin_bottom = 50.0
+texture = ExtResource( 2 )
+
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.5
+margin_top = -9.0
+margin_right = 11.5
+margin_bottom = 7.0
+hint_tooltip = "Lock aspect ratio"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 116.0
+margin_right = 234.0
+margin_bottom = 120.0
+
+[node name="PercentageLabel" type="Label" parent="VBoxContainer"]
+margin_top = 124.0
+margin_right = 234.0
+margin_bottom = 147.0
+text = "Percentage"
+
+[node name="PercentageContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 151.0
+margin_right = 234.0
+margin_bottom = 201.0
+
+[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
+margin_right = 234.0
+margin_bottom = 23.0
+
+[node name="WidthLabel" type="Label" parent="VBoxContainer/PercentageContainer/WidthContainer"]
+margin_right = 90.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 90, 0 )
+text = "Width:"
+
+[node name="WidthValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/WidthContainer"]
+margin_left = 94.0
+margin_right = 234.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 16384.0
+step = 0.01
+value = 100.0
+suffix = "%"
+
+[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
+margin_top = 27.0
+margin_right = 234.0
+margin_bottom = 50.0
+
+[node name="Height" type="Label" parent="VBoxContainer/PercentageContainer/HeightContainer"]
+margin_right = 90.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 90, 0 )
+text = "Height:"
+
+[node name="HeightValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/HeightContainer"]
+margin_left = 94.0
+margin_right = 234.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 16384.0
+step = 0.01
+value = 100.0
+suffix = "%"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+margin_top = 205.0
+margin_right = 234.0
+margin_bottom = 209.0
+
+[node name="InterpolationContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 213.0
+margin_right = 234.0
+margin_bottom = 236.0
+
+[node name="InterpolationLabel" type="Label" parent="VBoxContainer/InterpolationContainer"]
+margin_right = 90.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 90, 0 )
 text = "Interpolation:"
 
-[node name="InterpolationType" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 89.0
-margin_top = 56.0
-margin_right = 168.0
-margin_bottom = 76.0
+[node name="InterpolationType" type="OptionButton" parent="VBoxContainer/InterpolationContainer"]
+margin_left = 94.0
+margin_right = 234.0
+margin_bottom = 23.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null, "Scale3X", null, false, 5, null ]
 selected = 0
+[connection signal="about_to_show" from="." to="." method="_on_ScaleImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_ScaleImage_popup_hide"]
+[connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
+[connection signal="toggled" from="VBoxContainer/SizeContainer/TextureRect/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]
+[connection signal="value_changed" from="VBoxContainer/PercentageContainer/WidthContainer/WidthValuePerc" to="." method="_on_WidthValuePerc_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PercentageContainer/HeightContainer/HeightValuePerc" to="." method="_on_HeightValuePerc_value_changed"]
