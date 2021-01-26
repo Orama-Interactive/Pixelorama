@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-01-25 20:11\n"
+"PO-Revision-Date: 2021-01-26 11:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,7 +160,7 @@ msgid "Show Grid"
 msgstr "Pokaż siatkę"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Pokaż siatkę pixeli"
 
 msgid "Show Rulers"
 msgstr "Pokaż linijki"
@@ -713,7 +713,9 @@ msgstr "Przybliżenie\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Przesuń\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -831,46 +833,46 @@ msgid "All"
 msgstr "Wszystkie"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Szerokość siatki:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Ustawia jak daleko od siebie są pionowe linie siatki"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Długość siatki:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Ustawia jak daleko od siebie są pionowe linie siatki"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Szerokość granic komórki izometrycznej:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Ustawia szerokość osi komórki izometrycznej położonej na granicy pola"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Długość granic komórki izometrycznej:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Ustawia długość osi komórki izometrycznej położonej na granicy pola"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Przesunięcie siatki x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Ustawia przesunięcie siatki na osi x od pozycji płótna (lewy górny róg obrazu)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Przesunięcie siatki y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Ustawia przesunięcie siatki na osi y od pozycji płótna (lewy górny róg obrazu)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Rysuj nad trybem kafelkowym:"
 
 msgid "If disabled grid will be drawn only over the original image"
-msgstr ""
+msgstr "Jeśli wyłączone, siatka będzie rysowana nad oryginalnym obrazem"
 
 msgid "Grid color:"
 msgstr "Kolor siatki:"
@@ -879,19 +881,19 @@ msgid "A color of the grid"
 msgstr "Kolor siatki"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Siatka pikseli"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Pokaż w powiększeniu:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Ustawia minimalne przybliżenie, przy którym siatka pixeli będzie wyświetlana"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Kolor siatki pikseli:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Kolor siatki pikseli"
 
 msgid "Transparency"
 msgstr "Przezroczystość"
@@ -1431,13 +1433,13 @@ msgid "A default background color of a new image"
 msgstr "Domyślny kolor tła dla nowego obrazu"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Wymuś współczynnik proporcji"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Orientacja pionowa"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Orientacja pozioma"
 
 msgid "Templates:"
 msgstr "Szablony:"
@@ -1461,7 +1463,7 @@ msgid "Zoom"
 msgstr "Przybliżenie"
 
 msgid "Pan"
-msgstr ""
+msgstr "Przesunięcie"
 
 msgid "Color Picker"
 msgstr "Próbnik"
