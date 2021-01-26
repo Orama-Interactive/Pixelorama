@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-01-26 14:43\n"
+"PO-Revision-Date: 2021-01-26 22:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -125,6 +125,12 @@ msgstr "Smazat"
 
 msgid "Scale Image"
 msgstr "Škálovat obrázek"
+
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
 
 msgid "Crop Image"
 msgstr "Oříznout obrázek"
