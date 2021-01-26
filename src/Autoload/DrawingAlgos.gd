@@ -255,6 +255,27 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 	general_undo_scale()
 
 
+func centralize() -> void:
+	# Find used rect of the current frame (across all of the layers)
+	var used_rect := Rect2()
+	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
+		var cel_rect : Rect2 = cel.image.get_used_rect()
+		if not cel_rect.has_no_area():
+			used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
+	if used_rect.has_no_area():
+		return
+
+	var offset : Vector2 = (0.5 * (Global.current_project.size - used_rect.size)).floor()
+	general_do_centralize()
+	for c in Global.current_project.frames[Global.current_project.current_frame].cels:
+		var sprite := Image.new()
+		sprite.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+		sprite.blend_rect(c.image, used_rect, offset)
+		Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
+		Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
+	general_undo_centralize()
+
+
 func crop_image(image : Image) -> void:
 	# Use first cel as a starting rectangle
 	var used_rect : Rect2 = image.get_used_rect()
@@ -330,6 +351,17 @@ func general_undo_scale() -> void:
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "y_symmetry_point", Global.current_project.y_symmetry_point)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project.x_symmetry_axis, "points", Global.current_project.x_symmetry_axis.points)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project.y_symmetry_axis, "points", Global.current_project.y_symmetry_axis.points)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()
+
+
+func general_do_centralize() -> void:
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Centralize")
+
+
+func general_undo_centralize() -> void:
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.commit_action()

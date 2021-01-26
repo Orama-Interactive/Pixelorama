@@ -121,6 +121,9 @@ msgstr ""
 msgid "Resize Canvas"
 msgstr ""
 
+msgid "Centralize Image"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr ""
 

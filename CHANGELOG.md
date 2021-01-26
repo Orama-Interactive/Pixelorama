@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 This update has been brought to you by the contributions of:
 
-Laurenz Reinthaler (Schweini07), kleonc
+Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
@@ -17,6 +17,7 @@ Laurenz Reinthaler (Schweini07), kleonc
 - Addet offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))
 - Added portrait and landscape buttons in the new image dialog.
+- Added a new Centralize Image option in the Image menu, which places the visible pixels of the image in the center of the canvas. ([#441](https://github.com/Orama-Interactive/Pixelorama/pull/441))
 
 ### Changed
 - Undo and redo now work when their respective keyboard shortcuts are being held. ([#405](https://github.com/Orama-Interactive/Pixelorama/pull/405))
