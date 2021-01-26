@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-01-25 20:12\n"
+"PO-Revision-Date: 2021-01-26 14:43\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -131,6 +131,9 @@ msgstr "Retallar l'imatge"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar llenç"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Rotar l'imatge"
