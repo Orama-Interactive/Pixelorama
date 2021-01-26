@@ -83,6 +83,7 @@ var right_square_indicator_visible := false
 
 # View menu options
 var mirror_view := false
+var transparent_view := false
 var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
