@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-01-25 20:11\n"
+"PO-Revision-Date: 2021-01-26 14:42\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -131,6 +131,9 @@ msgstr "تقطيع الصورة"
 
 msgid "Resize Canvas"
 msgstr "تغيير حجم الكانفاس"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "تدوير الصورة"
