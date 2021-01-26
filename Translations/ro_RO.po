@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-01-26 14:43\n"
+"PO-Revision-Date: 2021-01-26 15:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -133,7 +133,7 @@ msgid "Resize Canvas"
 msgstr "Redimensionare pânză"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralizare imagine"
 
 msgid "Rotate Image"
 msgstr "Rotire imagine"
