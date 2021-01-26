@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-26 22:49\n"
+"PO-Revision-Date: 2021-01-26 23:59\n"
 
 msgid "OK"
 msgstr "예"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "이미지 크기"
 
 msgid "Pixels"
-msgstr ""
+msgstr "픽셀"
 
 msgid "Percentage"
-msgstr ""
+msgstr "비율"
 
 msgid "Crop Image"
 msgstr "이미지 자르기"
