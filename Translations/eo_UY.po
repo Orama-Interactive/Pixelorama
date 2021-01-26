@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2021-01-25 20:12\n"
+"PO-Revision-Date: 2021-01-26 14:43\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -130,6 +130,9 @@ msgid "Crop Image"
 msgstr "Tondi bildon"
 
 msgid "Resize Canvas"
+msgstr ""
+
+msgid "Centralize Image"
 msgstr ""
 
 msgid "Rotate Image"
