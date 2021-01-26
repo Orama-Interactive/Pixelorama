@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-26 14:43\n"
+"PO-Revision-Date: 2021-01-26 17:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -133,7 +133,7 @@ msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralizza Immagine"
 
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
