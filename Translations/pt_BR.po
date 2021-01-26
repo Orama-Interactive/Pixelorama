@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-01-25 20:11\n"
+"PO-Revision-Date: 2021-01-26 14:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -131,6 +131,9 @@ msgstr "Cortar imagem"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
