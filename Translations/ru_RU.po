@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-01-25 20:12\n"
+"PO-Revision-Date: 2021-01-26 14:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -131,6 +131,9 @@ msgstr "Обрезать изображение"
 
 msgid "Resize Canvas"
 msgstr "Изменить размер холста"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
