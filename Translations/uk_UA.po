@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-01-25 20:12\n"
+"PO-Revision-Date: 2021-01-26 14:43\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -131,6 +131,9 @@ msgstr "Обрізати зображення"
 
 msgid "Resize Canvas"
 msgstr "Змінити розмір полотна"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Повернути зображення"
