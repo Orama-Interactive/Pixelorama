@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-26 04:30\n"
+"PO-Revision-Date: 2021-01-26 14:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -131,6 +131,9 @@ msgstr "Ritaglia l'immagine"
 
 msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
