@@ -264,7 +264,7 @@ func centralize() -> void:
 			used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
 	if used_rect.has_no_area():
 		return
-	
+
 	var offset : Vector2 = (0.5 * (Global.current_project.size - used_rect.size)).floor()
 	general_do_centralize()
 	for c in Global.current_project.frames[Global.current_project.current_frame].cels:

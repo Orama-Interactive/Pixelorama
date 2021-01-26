@@ -40,7 +40,7 @@ signal color_changed(color, button)
 
 var _tools = {
 	"RectSelect" : "res://src/Tools/RectSelect.tscn",
-	"Zoom" : "res://src/Tools/Pan.tscn",
+	"Zoom" : "res://src/Tools/Zoom.tscn",
 	"Pan" : "res://src/Tools/Pan.tscn",
 	"ColorPicker" : "res://src/Tools/ColorPicker.tscn",
 	"Pencil" : "res://src/Tools/Pencil.tscn",
@@ -184,10 +184,9 @@ func handle_draw(position : Vector2, event : InputEvent) -> void:
 				_active_button = -1
 
 	if event is InputEventMouseMotion:
-		if Engine.get_version_info().major == 3 && Engine.get_version_info().minor >= 2:
-			pen_pressure = event.pressure
-			if Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
-				pen_pressure = 1.0
+		pen_pressure = event.pressure
+		if Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
+			pen_pressure = 1.0
 
 		if not position.is_equal_approx(_last_position):
 			_last_position = position
