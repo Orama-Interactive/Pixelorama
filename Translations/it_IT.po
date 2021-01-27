@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-26 22:50\n"
+"PO-Revision-Date: 2021-01-27 01:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "Scala l'immagine"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Percentuale"
 
 msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
