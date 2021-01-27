@@ -377,8 +377,8 @@ func toggle_zen_mode() -> void:
 
 
 func toggle_fullscreen() -> void:
+	OS.window_maximized = !OS.window_borderless
 	OS.window_borderless = !OS.window_borderless
-	OS.window_maximized = OS.window_borderless
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_borderless)
 
 func image_menu_id_pressed(id : int) -> void:
