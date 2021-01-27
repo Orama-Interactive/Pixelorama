@@ -98,6 +98,8 @@ func setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			setup_tile_mode_submenu(item)
+		elif item == "Transparent Mode":
+			setup_transparent_mode_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -112,6 +114,13 @@ func setup_tile_mode_submenu(item : String):
 	Global.tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
 	view_menu.add_child(Global.tile_mode_submenu)
 	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
+
+
+func setup_transparent_mode_submenu(item : String):
+	Global.transparency_submenu.connect("id_pressed", self, "transparent_mode_submenu_id_pressed")
+	view_menu.add_child(Global.transparency_submenu)
+	view_menu.add_submenu_item(item, Global.transparency_submenu.get_name())
+
 
 
 func setup_image_menu() -> void:
@@ -266,8 +275,6 @@ func view_menu_id_pressed(id : int) -> void:
 	match id:
 		ViewMenuId.MIRROR_VIEW:
 			toggle_mirror_view()
-		ViewMenuId.TRANSPARENT_MODE:
-			toggle_transparent_mode()
 		ViewMenuId.SHOW_GRID:
 			toggle_show_grid()
 		ViewMenuId.SHOW_PIXEL_GRID:
@@ -295,16 +302,28 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.canvas.grid.update()
 
 
+func transparent_mode_submenu_id_pressed(id : float) -> void:
+	for i in 11:
+		Global.transparency_submenu.set_item_checked(i, i == id)
+	set_transparency(id/10)
+
+
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
-func toggle_transparent_mode() -> void:
-	Global.transparent_view = !Global.transparent_view
-	view_menu.set_item_checked(ViewMenuId.TRANSPARENT_MODE, Global.transparent_view)
+func set_transparency(value :float) -> void:
+	print(value)
+	if value == 1:
+		get_node("../../Alternate transparent Background").visible = false
+	else:
+		get_node("../../Alternate transparent Background").visible = true
 	var checker :ColorRect = get_parent().get_node("UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
-	checker.transparent_mode(Global.transparent_view)
+	var color :Color = Global.control.theme.get_stylebox("panel", "PanelContainer").bg_color
+	color.a = value
+	get_node("../../Alternate transparent Background").color = color
+	checker.transparency(value)
 
 
 func toggle_show_grid() -> void:
@@ -358,9 +377,9 @@ func toggle_zen_mode() -> void:
 
 
 func toggle_fullscreen() -> void:
-	OS.window_fullscreen = !OS.window_fullscreen
-	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
-
+	OS.window_borderless = !OS.window_borderless
+	OS.window_maximized = OS.window_borderless
+	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_borderless)
 
 func image_menu_id_pressed(id : int) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked

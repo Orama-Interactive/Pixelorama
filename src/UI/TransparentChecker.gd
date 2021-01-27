@@ -39,13 +39,15 @@ func _init_position(tile_mode : int) -> void:
 			Global.transparent_checker.set_position(Vector2(0, -Global.current_project.size.y))
 
 
-func transparent_mode(state :bool) -> void:
+func transparency(value :float) -> void:
 	# first make viewport transparent then background and then viewport
-	get_parent().transparent_bg = state
-	get_tree().get_root().set_transparent_background(state)
-	OS.window_per_pixel_transparency_enabled = state
-	# this controls opacity 0 for transparent, 1 or a greater value than 1 is opaque
-	if state:
-		material.set("shader_param/alpha",0.5)
+	if value == 1:
+		get_parent().transparent_bg = false
+		get_tree().get_root().set_transparent_background(false)
 	else:
-		material.set("shader_param/alpha",1)
+		get_parent().transparent_bg = true
+		get_tree().get_root().set_transparent_background(true)
+	
+	# this controls opacity 0 for transparent, 1 or a greater value than 1 is opaque
+	# i have set a minimum amount for the fade (We would'nt want the canvas to dissapear now would we?)
+	material.set("shader_param/alpha",clamp(value,0.1,1))
