@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-01-26 22:50\n"
+"PO-Revision-Date: 2021-01-27 09:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "画像の拡大縮小"
 
 msgid "Pixels"
-msgstr ""
+msgstr "ピクセル"
 
 msgid "Percentage"
-msgstr ""
+msgstr "割合"
 
 msgid "Crop Image"
 msgstr "画像のトリミング"
