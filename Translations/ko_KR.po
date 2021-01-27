@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-27 00:24\n"
+"PO-Revision-Date: 2021-01-27 04:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -139,7 +139,7 @@ msgid "Resize Canvas"
 msgstr "캔버스 크기 조정"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "이미지 중앙 집중화"
 
 msgid "Rotate Image"
 msgstr "이미지 회전"
@@ -879,7 +879,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "타일 모드 위에 그리기"
 
 msgid "If disabled grid will be drawn only over the original image"
 msgstr ""
@@ -894,7 +894,7 @@ msgid "Pixel Grid"
 msgstr "픽셀 격자"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "확대/축소 시 표시:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr "픽셀 격자를 표시할 최소 확대 설정"
