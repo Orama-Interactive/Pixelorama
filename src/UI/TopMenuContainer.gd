@@ -314,7 +314,6 @@ func toggle_mirror_view() -> void:
 
 
 func set_transparency(value :float) -> void:
-	print(value)
 	if value == 1:
 		get_node("../../Alternate transparent Background").visible = false
 	else:
