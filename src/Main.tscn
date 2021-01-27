@@ -39,6 +39,67 @@ __meta__ = {
 [node name="TopMenuContainer" parent="MenuAndUI" instance=ExtResource( 3 )]
 
 [node name="UI" parent="MenuAndUI" instance=ExtResource( 4 )]
+margin_top = 28.0
+margin_bottom = 720.0
+
+[node name="ToolButtons" parent="MenuAndUI/UI/ToolPanel/PanelContainer" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 34.0
+margin_bottom = 286.0
+
+[node name="ViewportAndRulers" parent="MenuAndUI/UI/CanvasAndTimeline" index="0"]
+margin_bottom = 484.0
+
+[node name="TabsContainer" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers" index="0"]
+margin_bottom = 29.0
+
+[node name="Tabs" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 900.0
+margin_bottom = 27.0
+
+[node name="HorizontalRuler" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers" index="1"]
+margin_top = 29.0
+margin_bottom = 52.0
+
+[node name="HSplitContainer" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers" index="2"]
+margin_top = 52.0
+margin_bottom = 484.0
+
+[node name="ViewportandVerticalRuler" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer" index="0"]
+margin_right = 894.0
+margin_bottom = 432.0
+
+[node name="VerticalRuler" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler" index="0"]
+margin_bottom = 432.0
+
+[node name="ViewportContainer" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler" index="1"]
+margin_right = 894.0
+margin_bottom = 432.0
+
+[node name="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" index="0"]
+size = Vector2( 878, 432 )
+
+[node name="ViewportContainer2" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer" index="1"]
+margin_bottom = 432.0
+
+[node name="Viewport" parent="MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2" index="0"]
+size = Vector2( 0, 432 )
+
+[node name="CanvasPreviewContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes" index="0"]
+margin_bottom = 154.0
+
+[node name="ToolAndPaletteVSplit" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes" index="1"]
+margin_top = 158.0
+
+[node name="ColorAndToolOptions" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" index="0"]
+margin_bottom = 255.0
+
+[node name="PalettePanelContainer" parent="MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" index="1"]
+margin_top = 263.0
+margin_bottom = 518.0
 
 [node name="Dialogs" type="Control" parent="."]
 mouse_filter = 2
@@ -58,12 +119,16 @@ __meta__ = {
 margin_right = 375.0
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Var-Transparentalize"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Var-Transparentalize/"
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Var-Transparentalize"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Var-Transparentalize/untitled"
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 
@@ -138,3 +203,5 @@ visible = false
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
+
+[editable path="MenuAndUI/UI"]
