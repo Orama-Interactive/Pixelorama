@@ -6,6 +6,7 @@ enum PressureSensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
 enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
+
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -127,6 +128,7 @@ var zoom_level_label : Label
 
 var recent_projects_submenu : PopupMenu
 var tile_mode_submenu : PopupMenu
+var transparency_submenu : PopupMenu
 
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
@@ -239,6 +241,22 @@ func _ready() -> void:
 	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", TileMode.X_AXIS)
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", TileMode.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
+
+	transparency_submenu = PopupMenu.new()
+	transparency_submenu.set_name("set value")
+	transparency_submenu.add_radio_check_item("100%")
+	transparency_submenu.add_radio_check_item("90%")
+	transparency_submenu.add_radio_check_item("80%")
+	transparency_submenu.add_radio_check_item("70%")
+	transparency_submenu.add_radio_check_item("60%")
+	transparency_submenu.add_radio_check_item("50%")
+	transparency_submenu.add_radio_check_item("40%")
+	transparency_submenu.add_radio_check_item("30%")
+	transparency_submenu.add_radio_check_item("20%")
+	transparency_submenu.add_radio_check_item("10%")
+	transparency_submenu.add_radio_check_item("0%")
+	transparency_submenu.set_item_checked(10, true)
+	transparency_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
