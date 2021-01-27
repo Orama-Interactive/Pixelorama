@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-01-26 22:50\n"
+"PO-Revision-Date: 2021-01-27 00:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "缩放图像"
 
 msgid "Pixels"
-msgstr ""
+msgstr "像素"
 
 msgid "Percentage"
-msgstr ""
+msgstr "百分比"
 
 msgid "Crop Image"
 msgstr "裁剪图像"
@@ -139,7 +139,7 @@ msgid "Resize Canvas"
 msgstr "调整画布尺寸"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "集成图像"
 
 msgid "Rotate Image"
 msgstr "旋转图像"
@@ -852,7 +852,7 @@ msgid "Rectangular grid height:"
 msgstr "矩形网格高度："
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "设置矩形网格水平线之间的距离"
 
 msgid "Isometric cell bounds width:"
 msgstr "几何单元格边界宽度："
@@ -1443,13 +1443,13 @@ msgid "A default background color of a new image"
 msgstr "设置新建图像的背景颜色"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "锁定长宽比"
 
 msgid "Portrait"
-msgstr ""
+msgstr "纵向"
 
 msgid "Landscape"
-msgstr ""
+msgstr "横向"
 
 msgid "Templates:"
 msgstr "模板："
