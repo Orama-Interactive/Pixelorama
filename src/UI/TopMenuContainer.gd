@@ -302,12 +302,8 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.canvas.grid.update()
 
 
-func toggle_mirror_view() -> void:
-	Global.mirror_view = !Global.mirror_view
-	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
-
-
 func set_transparency(value :float) -> void:
+	Global.transparency_submenu.get_child(1).get_child(2).text = str("Current Value : ", value * 100, " %")
 	value = 1 - value
 	if value == 1:
 		get_node("../../Alternate transparent Background").visible = false
@@ -318,6 +314,11 @@ func set_transparency(value :float) -> void:
 	color.a = value
 	get_node("../../Alternate transparent Background").color = color
 	checker.transparency(value)
+
+
+func toggle_mirror_view() -> void:
+	Global.mirror_view = !Global.mirror_view
+	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
 func toggle_show_grid() -> void:
