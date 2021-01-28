@@ -117,7 +117,7 @@ func setup_tile_mode_submenu(item : String):
 
 
 func setup_transparent_mode_submenu(item : String):
-	Global.transparency_submenu.connect("id_pressed", self, "transparent_mode_submenu_id_pressed")
+	Global.transparency_submenu.get_child(1).get_child(1).connect("value_changed", self, "set_transparency")
 	view_menu.add_child(Global.transparency_submenu)
 	view_menu.add_submenu_item(item, Global.transparency_submenu.get_name())
 
@@ -302,18 +302,13 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.canvas.grid.update()
 
 
-func transparent_mode_submenu_id_pressed(id : float) -> void:
-	for i in 11:
-		Global.transparency_submenu.set_item_checked(i, i == id)
-	set_transparency(id/10)
-
-
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
 func set_transparency(value :float) -> void:
+	value = 1 - value
 	if value == 1:
 		get_node("../../Alternate transparent Background").visible = false
 	else:
