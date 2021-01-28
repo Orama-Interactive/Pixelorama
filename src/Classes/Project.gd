@@ -6,6 +6,7 @@ var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
 var tile_mode : int = Global.TileMode.NONE
+var tile_mode_rects := [] # Cached to avoid recalculation
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
@@ -40,6 +41,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
+	update_tile_mode_rects()
 	select_all_pixels()
 
 	undo_redo = UndoRedo.new()
@@ -362,6 +364,7 @@ func name_changed(value : String) -> void:
 
 func size_changed(value : Vector2) -> void:
 	size = value
+	update_tile_mode_rects()
 	if Global.selection_rectangle._selected_rect.has_no_area():
 		select_all_pixels()
 
@@ -568,13 +571,12 @@ func has_changed_changed(value : bool) -> void:
 
 
 func get_tile_mode_rect() -> Rect2:
-	match Global.current_project.tile_mode:
-		Global.TileMode.NONE:
-			return Rect2(Vector2.ZERO, size)
-		Global.TileMode.X_AXIS:
-			return Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
-		Global.TileMode.Y_AXIS:
-			return Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)
-		Global.TileMode.BOTH:
-			return Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
-	return Rect2()
+	return tile_mode_rects[tile_mode]
+
+
+func update_tile_mode_rects() -> void:
+	tile_mode_rects.resize(Global.TileMode.size())
+	tile_mode_rects[Global.TileMode.NONE] = Rect2(Vector2.ZERO, size)
+	tile_mode_rects[Global.TileMode.BOTH] = Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
+	tile_mode_rects[Global.TileMode.X_AXIS] = Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
+	tile_mode_rects[Global.TileMode.Y_AXIS] = Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)

@@ -131,7 +131,7 @@ func update_mirror_brush() -> void:
 
 func update_mask() -> void:
 	var size := _get_draw_image().get_size()
-	# Faster then zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
+	# Faster than zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
 	nulled_array.resize(size.x * size.y)
 	_mask = PoolByteArray(nulled_array)
@@ -363,7 +363,6 @@ func _create_blended_brush_image(image : Image) -> Image:
 	var brush := Image.new()
 	brush.copy_from(image)
 	brush = _blend_image(brush, tool_slot.color, _brush_interpolate / 100.0)
-	brush.unlock()
 	brush.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 	return brush
 
@@ -378,6 +377,7 @@ func _blend_image(image : Image, color : Color, factor : float) -> Image:
 				var color_new := color_old.linear_interpolate(color, factor)
 				color_new.a = color_old.a
 				image.set_pixel(x, y, color_new)
+	image.unlock()
 	return image
 
 
@@ -394,9 +394,9 @@ func _create_brush_indicator() -> BitMap:
 
 
 func _create_image_indicator(image : Image) -> BitMap:
-			var bitmap := BitMap.new()
-			bitmap.create_from_image_alpha(image, 0.0)
-			return bitmap
+	var bitmap := BitMap.new()
+	bitmap.create_from_image_alpha(image, 0.0)
+	return bitmap
 
 
 func _create_pixel_indicator(size : int) -> BitMap:
