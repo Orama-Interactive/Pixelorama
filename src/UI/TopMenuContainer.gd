@@ -117,7 +117,7 @@ func setup_tile_mode_submenu(item : String):
 
 
 func setup_transparent_mode_submenu(item : String):
-	Global.transparency_submenu.get_child(1).get_child(1).connect("value_changed", self, "set_transparency")
+	Global.transparency_submenu.connect("id_pressed", self, "transparent_mode_submenu_id_pressed")
 	view_menu.add_child(Global.transparency_submenu)
 	view_menu.add_submenu_item(item, Global.transparency_submenu.get_name())
 
@@ -302,9 +302,19 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.canvas.grid.update()
 
 
+func transparent_mode_submenu_id_pressed(id : float) -> void:
+	for i in 11:
+		Global.transparency_submenu.set_item_checked(i, i == id)
+	set_transparency(id/10)
+
+
+func toggle_mirror_view() -> void:
+	Global.mirror_view = !Global.mirror_view
+	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
+
+
 func set_transparency(value :float) -> void:
-	Global.transparency_submenu.get_child(1).get_child(2).text = str("Current Value : ", value * 100, " %")
-	value = 1 - value
+	print(value)
 	if value == 1:
 		get_node("../../Alternate transparent Background").visible = false
 	else:
@@ -314,11 +324,6 @@ func set_transparency(value :float) -> void:
 	color.a = value
 	get_node("../../Alternate transparent Background").color = color
 	checker.transparency(value)
-
-
-func toggle_mirror_view() -> void:
-	Global.mirror_view = !Global.mirror_view
-	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
 func toggle_show_grid() -> void:
@@ -372,7 +377,7 @@ func toggle_zen_mode() -> void:
 
 
 func toggle_fullscreen() -> void:
-	OS.window_fullscreen = !OS.window_fullscreen
+	OS.window_borderless = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
 
 func image_menu_id_pressed(id : int) -> void:
