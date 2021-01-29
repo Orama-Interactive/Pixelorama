@@ -12,6 +12,7 @@ Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
+- Dragging and dropping individual cels in the timeline to change their position is now possible.
 - Added a new "Performance" tab in the Preferences that exposes options related to the application's FPS to the user.
 - Added a new pixel grid, which is a grid of size 1px and it appears after a certain zoom level. ([#427](https://github.com/Orama-Interactive/Pixelorama/pull/427))
 - Added offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
