@@ -303,9 +303,14 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 
 
 func transparent_mode_submenu_id_pressed(id : float) -> void:
-	for i in 11:
-		Global.transparency_submenu.set_item_checked(i, i == id)
-	set_transparency(id/10)
+	if OS.window_fullscreen:
+		for i in 11:
+			Global.transparency_submenu.set_item_checked(i, i == 10)
+		set_transparency(1)
+	else:
+		for i in 11:
+			Global.transparency_submenu.set_item_checked(i, i == id)
+		set_transparency(id/10)
 
 
 func toggle_mirror_view() -> void:
@@ -378,9 +383,9 @@ func toggle_zen_mode() -> void:
 func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
-	# toggling fullscreen disables "window_per_pixel_transparency" so we have to enable it again
-	OS.window_per_pixel_transparency_enabled = true
-
+	# if window is fullscreen then reset transparency
+	if OS.window_fullscreen:
+		transparent_mode_submenu_id_pressed(10)
 
 func image_menu_id_pressed(id : int) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked
