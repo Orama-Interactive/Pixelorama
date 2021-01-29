@@ -3,7 +3,7 @@ extends Panel
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
-enum ViewMenuId {TILE_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+enum ViewMenuId {TILE_MODE, TRANSPARENT_MODE, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
 
@@ -82,6 +82,7 @@ func setup_edit_menu() -> void:
 func setup_view_menu() -> void:
 	var view_menu_items := { # order as in ViewMenuId enum
 		"Tile Mode" : 0,
+		"Transparent Mode" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid" : InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
@@ -97,6 +98,8 @@ func setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			setup_tile_mode_submenu(item)
+		elif item == "Transparent Mode":
+			setup_transparent_mode_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -111,6 +114,12 @@ func setup_tile_mode_submenu(item : String):
 	Global.tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
 	view_menu.add_child(Global.tile_mode_submenu)
 	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
+
+
+func setup_transparent_mode_submenu(item : String):
+	Global.transparency_submenu.connect("id_pressed", self, "transparent_mode_submenu_id_pressed")
+	view_menu.add_child(Global.transparency_submenu)
+	view_menu.add_submenu_item(item, Global.transparency_submenu.get_name())
 
 
 func setup_image_menu() -> void:
@@ -292,6 +301,29 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.canvas.grid.update()
 
 
+func transparent_mode_submenu_id_pressed(id : float) -> void:
+	if OS.window_fullscreen:
+		for i in 11:
+			Global.transparency_submenu.set_item_checked(i, i == 10)
+		set_transparency(1)
+	else:
+		for i in 11:
+			Global.transparency_submenu.set_item_checked(i, i == id)
+		set_transparency(id/10)
+
+
+func set_transparency(value :float) -> void:
+	if value == 1:
+		get_node("../../Alternate transparent Background").visible = false
+	else:
+		get_node("../../Alternate transparent Background").visible = true
+	var checker :ColorRect = get_parent().get_node("UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
+	var color :Color = Global.control.theme.get_stylebox("panel", "PanelContainer").bg_color
+	color.a = value
+	get_node("../../Alternate transparent Background").color = color
+	checker.transparency(value)
+
+
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
@@ -350,6 +382,9 @@ func toggle_zen_mode() -> void:
 func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
+	# if window is fullscreen then reset transparency
+	if OS.window_fullscreen:
+		transparent_mode_submenu_id_pressed(10)
 
 
 func image_menu_id_pressed(id : int) -> void:
