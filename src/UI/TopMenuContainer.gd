@@ -372,9 +372,8 @@ func toggle_zen_mode() -> void:
 
 
 func toggle_fullscreen() -> void:
-	OS.window_borderless = !OS.window_borderless
-	OS.window_maximized = OS.window_borderless
-	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_borderless)
+	OS.window_fullscreen = !OS.window_fullscreen
+	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
 
 func image_menu_id_pressed(id : int) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked
