@@ -243,26 +243,19 @@ func _ready() -> void:
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	transparency_submenu = PopupMenu.new()
-	transparency_submenu.rect_min_size.x = 210
-	transparency_submenu.rect_min_size.y = 80
-	var v_container := VBoxContainer.new()
-	v_container.rect_min_size.x = 200
-	v_container.rect_min_size.y = transparency_submenu.rect_min_size.y
-	var label := Label.new()
-	label.text = "Set Transparency:"
-	label.align = Label.ALIGN_CENTER
-	var slider := HSlider.new()
-	slider.max_value = 1
-	slider.min_value = 0
-	slider.step = 0.01
-	slider.value = 0
-	var stats := Label.new()
-	stats.text = "Current Value : 0%"
-	stats.align = Label.ALIGN_LEFT
-	v_container.add_child(label)
-	v_container.add_child(slider)
-	v_container.add_child(stats)
-	transparency_submenu.add_child(v_container)
+	transparency_submenu.set_name("set value")
+	transparency_submenu.add_radio_check_item("100%")
+	transparency_submenu.add_radio_check_item("90%")
+	transparency_submenu.add_radio_check_item("80%")
+	transparency_submenu.add_radio_check_item("70%")
+	transparency_submenu.add_radio_check_item("60%")
+	transparency_submenu.add_radio_check_item("50%")
+	transparency_submenu.add_radio_check_item("40%")
+	transparency_submenu.add_radio_check_item("30%")
+	transparency_submenu.add_radio_check_item("20%")
+	transparency_submenu.add_radio_check_item("10%")
+	transparency_submenu.add_radio_check_item("0%")
+	transparency_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
