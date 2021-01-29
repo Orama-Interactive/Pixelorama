@@ -314,7 +314,6 @@ func toggle_mirror_view() -> void:
 
 
 func set_transparency(value :float) -> void:
-	print(value)
 	if value == 1:
 		get_node("../../Alternate transparent Background").visible = false
 	else:
@@ -379,6 +378,9 @@ func toggle_zen_mode() -> void:
 func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
+	# toggling fullscreen disables "window_per_pixel_transparency" so we have to enable it again
+	OS.window_per_pixel_transparency_enabled = true
+
 
 func image_menu_id_pressed(id : int) -> void:
 	if Global.current_project.layers[Global.current_project.current_layer].locked: # No changes if the layer is locked
