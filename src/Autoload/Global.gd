@@ -255,6 +255,7 @@ func _ready() -> void:
 	transparency_submenu.add_radio_check_item("20%")
 	transparency_submenu.add_radio_check_item("10%")
 	transparency_submenu.add_radio_check_item("0%")
+	transparency_submenu.set_item_checked(10, true)
 	transparency_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
