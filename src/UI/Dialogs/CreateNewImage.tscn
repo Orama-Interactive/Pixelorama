@@ -11,6 +11,8 @@
 margin_right = 300.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 375, 200 )
+window_title = "New..."
+resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -43,15 +45,17 @@ margin_bottom = 46.0
 
 [node name="TemplatesLabel" type="Label" parent="VBoxContainer/TemplatesContainer"]
 margin_top = 3.0
-margin_right = 71.0
+margin_right = 100.0
 margin_bottom = 17.0
+rect_min_size = Vector2( 100, 0 )
 text = "Templates:"
 
 [node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/TemplatesContainer"]
-margin_left = 75.0
-margin_right = 150.0
+margin_left = 104.0
+margin_right = 359.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 toggle_mode = false
 text = "Default"
 items = [ "Default", null, false, 0, null ]
@@ -63,25 +67,27 @@ margin_right = 359.0
 margin_bottom = 102.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
-margin_right = 124.0
+margin_right = 346.0
 margin_bottom = 52.0
+size_flags_horizontal = 3
 
 [node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
-margin_right = 124.0
+margin_right = 346.0
 margin_bottom = 24.0
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
 margin_top = 5.0
-margin_right = 46.0
+margin_right = 100.0
 margin_bottom = 19.0
-rect_min_size = Vector2( 46, 0 )
+rect_min_size = Vector2( 100, 0 )
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
-margin_left = 50.0
-margin_right = 124.0
+margin_left = 104.0
+margin_right = 346.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
@@ -89,36 +95,42 @@ suffix = "px"
 
 [node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 124.0
+margin_right = 346.0
 margin_bottom = 52.0
 
-[node name="Height" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+[node name="HeightLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
 margin_top = 5.0
-margin_right = 46.0
+margin_right = 100.0
 margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
-margin_left = 50.0
-margin_right = 124.0
+margin_left = 104.0
+margin_right = 346.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer"]
-margin_left = 128.0
-margin_right = 148.0
+margin_left = 350.0
+margin_right = 359.0
 margin_bottom = 52.0
 texture = ExtResource( 6 )
 
 [node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect"]
-margin_left = 2.0
-margin_top = 14.0
-margin_right = 18.0
-margin_bottom = 30.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.5
+margin_top = -9.0
+margin_right = 11.5
+margin_bottom = 7.0
 hint_tooltip = "Lock aspect ratio"
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -189,16 +201,18 @@ margin_bottom = 150.0
 
 [node name="FillColorLabel" type="Label" parent="VBoxContainer/FillColorContainer"]
 margin_top = 3.0
-margin_right = 90.0
+margin_right = 100.0
 margin_bottom = 17.0
+rect_min_size = Vector2( 100, 0 )
 text = "Fill with color:"
 
 [node name="FillColor" type="ColorPickerButton" parent="VBoxContainer/FillColorContainer"]
-margin_left = 94.0
-margin_right = 158.0
+margin_left = 104.0
+margin_right = 359.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 color = Color( 0, 0, 0, 0 )
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="item_selected" from="VBoxContainer/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]

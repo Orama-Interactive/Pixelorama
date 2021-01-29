@@ -284,7 +284,7 @@ func view_menu_id_pressed(id : int) -> void:
 
 func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.current_project.tile_mode = id
-	Global.transparent_checker._init_position(id)
+	Global.transparent_checker.fit_rect(Global.current_project.get_tile_mode_rect())
 	for i in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(i, i == id)
 	Global.canvas.tile_mode.update()
