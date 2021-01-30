@@ -127,6 +127,7 @@ margin_bottom = 243.0
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Add a new color"
 mouse_default_cursor_shape = 2
 text = "+"
 
@@ -135,6 +136,7 @@ margin_top = 28.0
 margin_right = 24.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Remove a selected color"
 mouse_default_cursor_shape = 2
 text = "-"
 
