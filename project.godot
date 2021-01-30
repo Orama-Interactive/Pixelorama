@@ -64,15 +64,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Timeline/LayerButton.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "Palette",
 "language": "GDScript",
 "path": "res://src/Palette/Palette.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "PaletteColor",
 "language": "GDScript",
 "path": "res://src/Palette/PaletteColor.gd"
+}, {
+"base": "PanelContainer",
+"class": "PalettePanel",
+"language": "GDScript",
+"path": "res://src/Palette/PalettePanel.gd"
+}, {
+"base": "ColorRect",
+"class": "PaletteSwatch",
+"language": "GDScript",
+"path": "res://src/Palette/PaletteSwatch.gd"
 }, {
 "base": "PopupPanel",
 "class": "Patterns",
@@ -103,6 +113,8 @@ _global_script_class_icons={
 "LayerButton": "",
 "Palette": "",
 "PaletteColor": "",
+"PalettePanel": "",
+"PaletteSwatch": "",
 "Patterns": "",
 "Project": "",
 "SymmetryGuide": ""
@@ -134,6 +146,7 @@ DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
 Tools="*res://src/Autoload/Tools.gd"
 Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 Export="*res://src/Autoload/Export.gd"
+Palettes="*res://src/Autoload/Palettes.gd"
 
 [debug]
 
