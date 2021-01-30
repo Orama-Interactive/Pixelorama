@@ -294,6 +294,7 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
+		update_tile_mode_rects()
 		select_all_pixels()
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
