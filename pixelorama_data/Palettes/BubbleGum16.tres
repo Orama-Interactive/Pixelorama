@@ -1,0 +1,111 @@
+[gd_resource type="Resource" load_steps=19 format=2]
+
+[ext_resource path="res://src/Palette/Palette.gd" type="Script" id=1]
+[ext_resource path="res://src/Palette/PaletteColor.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+color = Color( 0, 0, 0, 1 )
+index = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+color = Color( 0.498039, 0.0235294, 0.133333, 1 )
+index = 1
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+color = Color( 0.839216, 0.141176, 0.0666667, 1 )
+index = 2
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+color = Color( 1, 0.517647, 0.14902, 1 )
+index = 3
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+color = Color( 1, 0.819608, 0, 1 )
+index = 4
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+color = Color( 0.980392, 0.992157, 1, 1 )
+index = 5
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+color = Color( 1, 0.501961, 0.643137, 1 )
+index = 6
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+color = Color( 1, 0.14902, 0.454902, 1 )
+index = 7
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+color = Color( 0.580392, 0.129412, 0.415686, 1 )
+index = 8
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+color = Color( 0.262745, 0, 0.403922, 1 )
+index = 9
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+color = Color( 0.137255, 0.286275, 0.458824, 1 )
+index = 10
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+color = Color( 0.407843, 0.682353, 0.831373, 1 )
+index = 11
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+color = Color( 0.74902, 1, 0.235294, 1 )
+index = 12
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+color = Color( 0.0627451, 0.823529, 0.458824, 1 )
+index = 13
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+color = Color( 0, 0.470588, 0.6, 1 )
+index = 14
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+color = Color( 0, 0.156863, 0.34902, 1 )
+index = 15
+
+[resource]
+resource_name = "BubbleGum16"
+script = ExtResource( 1 )
+name = "BubbleGum16"
+comment = "Author: PineTreePizza/CheetoHead"
+width = 8
+height = 8
+colors = {
+0: SubResource( 1 ),
+1: SubResource( 2 ),
+2: SubResource( 3 ),
+3: SubResource( 4 ),
+4: SubResource( 5 ),
+5: SubResource( 6 ),
+6: SubResource( 7 ),
+7: SubResource( 8 ),
+8: SubResource( 9 ),
+9: SubResource( 10 ),
+10: SubResource( 11 ),
+11: SubResource( 12 ),
+12: SubResource( 13 ),
+13: SubResource( 14 ),
+14: SubResource( 15 ),
+15: SubResource( 16 )
+}
+colors_max = 64
