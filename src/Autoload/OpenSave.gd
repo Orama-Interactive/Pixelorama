@@ -529,19 +529,21 @@ func remove_backup_by_path(project_path : String, backup_path : String) -> void:
 
 
 func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
+	assert(project_paths.size() == backup_paths.size())
 	# Clear non-existant backups
-	var deleted_backup_paths := []
+	var existing_backups_count := 0
 	var dir := Directory.new()
-	for backup in backup_paths:
-		if !dir.file_exists(backup):
-			if Global.config_cache.has_section_key("backups", backup):
-				Global.config_cache.erase_section_key("backups", backup)
+	for i in range(backup_paths.size()):
+		if dir.file_exists(backup_paths[i]):
+			project_paths[existing_backups_count] = project_paths[i]
+			backup_paths[existing_backups_count] = backup_paths[i]
+			existing_backups_count += 1
+		else:
+			if Global.config_cache.has_section_key("backups", backup_paths[i]):
+				Global.config_cache.erase_section_key("backups", backup_paths[i])
 				Global.config_cache.save("user://cache.ini")
-			project_paths.remove(backup_paths.find(backup))
-			deleted_backup_paths.append(backup)
-
-	for deleted in deleted_backup_paths:
-		backup_paths.erase(deleted)
+	project_paths.resize(existing_backups_count)
+	backup_paths.resize(existing_backups_count)
 
 	# Load the backup files
 	for i in range(project_paths.size()):
