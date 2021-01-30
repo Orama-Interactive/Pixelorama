@@ -46,7 +46,7 @@ func handle_loading_image(file : String, image : Image) -> void:
 	Global.dialog_open(true)
 
 
-func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
+func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty : bool = true) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
 	if err == ERR_FILE_UNRECOGNIZED:
@@ -59,7 +59,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		file.close()
 		return
 
-	var empty_project : bool = Global.current_project.frames.size() == 1 and Global.current_project.layers.size() == 1 and Global.current_project.frames[0].cels[0].image.is_invisible() and Global.current_project.animation_tags.size() == 0
+	var empty_project : bool = Global.current_project.is_empty() and replace_empty
 	var new_project : Project
 	if empty_project:
 		new_project = Global.current_project
@@ -547,7 +547,7 @@ func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
 
 	# Load the backup files
 	for i in range(project_paths.size()):
-		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
+		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i], i == 0)
 		backup_save_paths[i] = backup_paths[i]
 
 		# If project path is the same as backup save path -> the backup was untitled

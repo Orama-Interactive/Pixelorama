@@ -580,3 +580,7 @@ func update_tile_mode_rects() -> void:
 	tile_mode_rects[Global.TileMode.BOTH] = Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
 	tile_mode_rects[Global.TileMode.X_AXIS] = Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
 	tile_mode_rects[Global.TileMode.Y_AXIS] = Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)
+
+
+func is_empty() -> bool:
+	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
