@@ -4,6 +4,10 @@ var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
 var last_frame := 0
+var is_mouse_hover := false
+var cel_size := 36 setget cel_size_changed
+var min_cel_size := 36
+var max_cel_size := 144
 
 var timeline_scroll : ScrollContainer
 var tag_scroll_container : ScrollContainer
@@ -20,10 +24,45 @@ func _ready() -> void:
 	fps_spinbox.value = Global.current_project.fps
 
 
+func _input(event : InputEvent) -> void:
+	var mouse_pos := get_global_mouse_position()
+	var timeline_rect := Rect2(rect_global_position, rect_size)
+	if timeline_rect.has_point(mouse_pos):
+		if Input.is_key_pressed(KEY_CONTROL):
+			self.cel_size += (2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out")))
+
+
 func _h_scroll_changed(value : float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = timeline_scroll.get_child(0).rect_size.x - 212
 	tag_scroll_container.scroll_horizontal = value
+
+
+func cel_size_changed(value : int) -> void:
+	cel_size = clamp(value, min_cel_size, max_cel_size)
+	for layer_button in Global.layers_container.get_children():
+		layer_button.rect_min_size.y = cel_size
+		layer_button.rect_size.y = cel_size
+	for layer in Global.current_project.layers:
+		for cel_button in layer.frame_container.get_children():
+			cel_button.rect_min_size.x = cel_size
+			cel_button.rect_min_size.y = cel_size
+			cel_button.rect_size.x = cel_size
+			cel_button.rect_size.y = cel_size
+
+	for frame_id in Global.frame_ids.get_children():
+		frame_id.rect_min_size.x = cel_size
+		frame_id.rect_size.x = cel_size
+
+	for tag_c in Global.tag_container.get_children():
+		var tag_base_size = cel_size + 3
+		var tag : AnimationTag = tag_c.tag
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + tag.from
+		var tag_size : int = tag.to - tag.from
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size
+		tag_c.rect_size.x = (tag_size + 1) * tag_base_size
+		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
+		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
 
 func add_frame() -> void:
@@ -502,4 +541,3 @@ func _on_OpacitySlider_value_changed(value) -> void:
 
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
-

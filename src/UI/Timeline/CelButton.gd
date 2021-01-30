@@ -7,6 +7,9 @@ onready var popup_menu : PopupMenu = $PopupMenu
 
 
 func _ready() -> void:
+	rect_min_size.x = Global.animation_timeline.cel_size
+	rect_min_size.y = Global.animation_timeline.cel_size
+
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
@@ -20,6 +23,16 @@ func _ready() -> void:
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
+
+
+func _on_CelButton_resized() -> void:
+	get_node("CelTexture").rect_min_size.x = rect_min_size.x - 4
+	get_node("CelTexture").rect_min_size.y = rect_min_size.y - 4
+
+	get_node("LinkedIndicator").polygon[1].x = rect_min_size.x
+	get_node("LinkedIndicator").polygon[2].x = rect_min_size.x
+	get_node("LinkedIndicator").polygon[2].y = rect_min_size.y
+	get_node("LinkedIndicator").polygon[3].y = rect_min_size.y
 
 
 func _on_CelButton_pressed() -> void:

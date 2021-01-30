@@ -127,7 +127,7 @@ func change_project() -> void:
 
 	for j in range(frames.size()): # Create frame ID labels
 		var label := Label.new()
-		label.rect_min_size.x = 36
+		label.rect_min_size.x = Global.animation_timeline.cel_size
 		label.align = Label.ALIGN_CENTER
 		label.text = str(j + 1)
 		if j == current_frame:
@@ -383,7 +383,7 @@ func frames_changed(value : Array) -> void:
 
 	for j in range(frames.size()):
 		var label := Label.new()
-		label.rect_min_size.x = 36
+		label.rect_min_size.x = Global.animation_timeline.cel_size
 		label.align = Label.ALIGN_CENTER
 		label.text = str(j + 1)
 		Global.frame_ids.add_child(label)
@@ -532,18 +532,19 @@ func animation_tags_changed(value : Array) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_c : Container = load("res://src/UI/Timeline/AnimationTag.tscn").instance()
+		var tag_base_size = Global.animation_timeline.cel_size + 3
+		var tag_c : Container = load("res://src/UI/Timeline/AnimationTagUI.tscn").instance()
 		Global.tag_container.add_child(tag_c)
+		tag_c.tag = tag
 		var tag_position : int = Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
 		tag_c.get_node("Label").text = tag.name
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag.from - 1) * 39 + tag.from
-
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + tag.from
 		var tag_size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * 39
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
