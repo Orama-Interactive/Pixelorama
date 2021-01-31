@@ -281,7 +281,7 @@ func draw_tool_brush(position : Vector2) -> void:
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 	var mirror_x_inside : bool
 	var mirror_y_inside : bool
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	var entire_image_selected : bool = project.selected_pixels.empty()
 	if entire_image_selected:
 		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
 		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
@@ -307,7 +307,7 @@ func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
 	if Global.current_project.tile_mode and Global.current_project.get_tile_mode_rect().has_point(_cursor):
 		var tile := _line_start if _draw_line else _cursor
-		if not tile in Global.current_project.selected_pixels:
+		if not Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(tile):
 			var offset := tile - tile.posmodv(Global.current_project.size)
 			draw_indicator_at(_cursor, offset, Color.green)
 
@@ -339,7 +339,7 @@ func _set_pixel(position : Vector2) -> void:
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	var entire_image_selected : bool = project.selected_pixels.empty()
 	if entire_image_selected:
 		if not _get_draw_rect().has_point(position):
 			return

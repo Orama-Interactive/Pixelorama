@@ -29,15 +29,17 @@ Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 - Frame tags can now be set for frames larger than 100. ([#408](https://github.com/Orama-Interactive/Pixelorama/pull/408))
 - The "lock aspect ratio" button in the create new image dialog has been changed to a texture button.
 - Improved the "Scale Image" dialog. It now automatically sets the size to the current project's size, has a button to lock aspect ratio, and resizing based on percentage.
+- Having no active selection no longer treats all the pixels of the canvas as selected. This is also a performance boost, especially for larger images, as Pixelorama no longer has to loop through all of the pixels to select them.
 - Tile mode rects are now cached for a little speedup. ([#443](https://github.com/Orama-Interactive/Pixelorama/pull/443))
 
 ### Fixed
+- Fixed issue with pixels being selected outside of the canvas boundaries, when the selection rectangle was outside the canvas and its size got reduced.
 - Fixed layer button textures not being updated properly when changing theme. ([#404](https://github.com/Orama-Interactive/Pixelorama/issues/404))
 - Keyboard shortcut conflicts between tool shortcuts and other shortcuts that use the "Control" key, like menu shortcuts, have been resolved. ([#407](https://github.com/Orama-Interactive/Pixelorama/pull/407))
 - The opacity of a cel and the tile mode opacity are now multiplicative. ([#414](https://github.com/Orama-Interactive/Pixelorama/pull/414))
 - Fixed an issue where adding a new layer did not select it, rather it was selecting the above layer of the previously selected layer. ([#424](https://github.com/Orama-Interactive/Pixelorama/pull/424))
 - Fixed cel opacity not always being updated on the UI. ([#420](https://github.com/Orama-Interactive/Pixelorama/pull/420))
-- Loading empty backuped projects no longer result in a crash. ([#445](https://github.com/Orama-Interactive/Pixelorama/issues/445))
+- Loading empty backed up projects no longer result in a crash. ([#445](https://github.com/Orama-Interactive/Pixelorama/issues/445))
 - Fixed potential index out of bounds error when loading backup files. ([#446](https://github.com/Orama-Interactive/Pixelorama/pull/446))
 <br><br>
 

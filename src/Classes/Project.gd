@@ -42,7 +42,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	name = _name
 	size = _size
 	update_tile_mode_rects()
-	select_all_pixels()
 
 	undo_redo = UndoRedo.new()
 
@@ -295,7 +294,6 @@ func deserialize(dict : Dictionary) -> void:
 		size.x = dict.size_x
 		size.y = dict.size_y
 		update_tile_mode_rects()
-		select_all_pixels()
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):
@@ -366,8 +364,7 @@ func name_changed(value : String) -> void:
 func size_changed(value : Vector2) -> void:
 	size = value
 	update_tile_mode_rects()
-	if Global.selection_rectangle._selected_rect.has_no_area():
-		select_all_pixels()
+	Global.selection_rectangle.set_rect(Global.selection_rectangle.get_rect())
 
 
 func frames_changed(value : Array) -> void:
