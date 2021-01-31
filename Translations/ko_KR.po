@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-27 04:39\n"
+"PO-Revision-Date: 2021-01-31 05:18\n"
 
 msgid "OK"
 msgstr "예"
@@ -843,13 +843,13 @@ msgid "All"
 msgstr "전체"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "직사각형 격자 폭"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "직사각형 격자의 수직선 간격 설정"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "직사각형 격자 높이"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
