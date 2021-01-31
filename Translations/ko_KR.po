@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-31 05:18\n"
+"PO-Revision-Date: 2021-01-31 05:28\n"
 
 msgid "OK"
 msgstr "예"
@@ -855,13 +855,13 @@ msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "아이소메트릭 셀 경계 너비:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "아이소메트릭 셀 경계 높이:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
