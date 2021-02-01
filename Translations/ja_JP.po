@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-01-27 09:42\n"
+"PO-Revision-Date: 2021-02-01 16:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -881,8 +881,8 @@ msgstr "キャンバスの原点 (画像の左上隅) からのグリッドの y
 msgid "Draw over Tile Mode:"
 msgstr "タイルモードの上に表示:"
 
-msgid "If disabled grid will be drawn only over the original image"
-msgstr "無効にすると、グリッドは元の画像の上にのみ描画されます"
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "グリッドの色:"
