@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-02-01 16:01\n"
+"PO-Revision-Date: 2021-02-01 17:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -882,7 +882,7 @@ msgid "Draw over Tile Mode:"
 msgstr "Disegna sulla modalità piastrelle:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Se disattivata, la griglia verrà disegnata solo sopra l'immagine originale"
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
