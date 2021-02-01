@@ -204,7 +204,7 @@ func create_palette_from_sprite() -> void:
 	var palette : Palette = Global.palettes[current_palette]
 	var pixels := []
 
-	if selection_checkbox.pressed:
+	if selection_checkbox.pressed and current_project.selected_pixels:
 		pixels = current_project.selected_pixels.duplicate()
 	else:
 		for x in current_project.size.x:

@@ -11,6 +11,7 @@ var line_edit : LineEdit
 
 
 func _ready() -> void:
+	rect_min_size.y = Global.animation_timeline.cel_size
 	visibility_button = find_node("VisibilityButton")
 	lock_button = find_node("LockButton")
 	linked_button = find_node("LinkButton")

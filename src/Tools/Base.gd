@@ -77,8 +77,11 @@ func draw_indicator() -> void:
 
 
 func _get_draw_rect() -> Rect2:
-	var selected_pixels = Global.current_project.selected_pixels
-	return Rect2(selected_pixels[0].x, selected_pixels[0].y, selected_pixels[-1].x - selected_pixels[0].x + 1, selected_pixels[-1].y - selected_pixels[0].y + 1)
+	if Global.current_project.selected_pixels.empty():
+		return Global.current_project.tile_mode_rects[Global.TileMode.NONE]
+	else:
+		var selected_pixels = Global.current_project.selected_pixels
+		return Rect2(selected_pixels[0].x, selected_pixels[0].y, selected_pixels[-1].x - selected_pixels[0].x + 1, selected_pixels[-1].y - selected_pixels[0].y + 1)
 
 
 func _get_draw_image() -> Image:

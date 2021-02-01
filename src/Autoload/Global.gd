@@ -375,6 +375,9 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			play_backwards.pressed = false
 			animation_timer.stop()
 
+	elif "Move Cels" == action_name:
+		project.frames = project.frames # to call frames_changed
+
 	canvas.update()
 	if !project.has_changed:
 		project.has_changed = true
@@ -404,6 +407,9 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
+
+	elif "Move Cels" == action_name:
+		project.frames = project.frames # to call frames_changed
 
 	canvas.update()
 	if !project.has_changed:

@@ -66,7 +66,7 @@ func _confirmed() -> void:
 	elif affect == ALL_PROJECTS:
 		for project in Global.projects:
 			var _pixels := []
-			if selection_checkbox.pressed:
+			if selection_checkbox.pressed and project.selected_pixels:
 				_pixels = project.selected_pixels.duplicate()
 			else:
 				for x in project.size.x:
@@ -90,7 +90,7 @@ func set_nodes() -> void:
 
 func _on_SelectionCheckBox_toggled(button_pressed : bool) -> void:
 	pixels.clear()
-	if button_pressed:
+	if button_pressed and Global.current_project.selected_pixels:
 		pixels = Global.current_project.selected_pixels.duplicate()
 	else:
 		for x in Global.current_project.size.x:

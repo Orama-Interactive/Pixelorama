@@ -848,7 +848,7 @@ msgstr ""
 msgid "Draw over Tile Mode:"
 msgstr ""
 
-msgid "If disabled grid will be drawn only over the original image"
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"

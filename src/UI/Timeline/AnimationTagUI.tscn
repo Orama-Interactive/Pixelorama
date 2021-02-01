@@ -1,9 +1,12 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="AnimationTag" type="VBoxContainer"]
+[ext_resource path="res://src/UI/Timeline/AnimationTagUI.gd" type="Script" id=1]
+
+[node name="AnimationTagUI" type="VBoxContainer"]
 margin_right = 39.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 39, 32 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -11,7 +14,6 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="."]
 points = PoolVector2Array( 0, 32, 0, 0, 39, 0, 39, 32 )
 width = 1.0
-texture_mode = 1313163520
 
 [node name="Label" type="Label" parent="."]
 margin_left = 7.0
