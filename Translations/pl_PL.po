@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-01-28 17:16\n"
+"PO-Revision-Date: 2021-02-01 16:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -880,8 +880,8 @@ msgstr "Ustawia przesunięcie siatki na osi y od pozycji płótna (lewy górny r
 msgid "Draw over Tile Mode:"
 msgstr "Rysuj nad trybem kafelkowym:"
 
-msgid "If disabled grid will be drawn only over the original image"
-msgstr "Jeśli wyłączone, siatka będzie rysowana nad oryginalnym obrazem"
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Kolor siatki:"
