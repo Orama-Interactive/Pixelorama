@@ -31,6 +31,7 @@ Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 - Improved the "Scale Image" dialog. It now automatically sets the size to the current project's size, has a button to lock aspect ratio, and resizing based on percentage.
 - Having no active selection no longer treats all the pixels of the canvas as selected. This is also a performance boost, especially for larger images, as Pixelorama no longer has to loop through all of the pixels to select them.
 - Tile mode rects are now cached for a little speedup. ([#443](https://github.com/Orama-Interactive/Pixelorama/pull/443))
+- The zoom tool now works on the second canvas too.
 
 ### Fixed
 - Fixed issue with pixels being selected outside of the canvas boundaries, when the selection rectangle was outside the canvas and its size got reduced.
