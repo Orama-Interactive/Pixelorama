@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-01-26 22:50\n"
+"PO-Revision-Date: 2021-02-01 16:01\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -874,7 +874,7 @@ msgstr ""
 msgid "Draw over Tile Mode:"
 msgstr ""
 
-msgid "If disabled grid will be drawn only over the original image"
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
