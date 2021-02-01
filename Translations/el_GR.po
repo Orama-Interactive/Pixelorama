@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-01-26 22:50\n"
+"PO-Revision-Date: 2021-02-01 15:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "Κλιμάκωση εικόνας"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Εικονοστοιχεία"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Ποσοστό"
 
 msgid "Crop Image"
 msgstr "Περικοπή"
@@ -139,7 +139,7 @@ msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Μετακίνηση εικόνας στο κέντρο"
 
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
@@ -169,7 +169,7 @@ msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Εμφάνιση pixel πλέγματος"
 
 msgid "Show Rulers"
 msgstr "Εμφάνιση χαράκων"
@@ -841,67 +841,67 @@ msgid "All"
 msgstr "Όλα"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Πλάτος ορθογωνίου πλέγματος:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Ορίζει το πόσο μακριά είναι οι κάθετες γραμμές του ορθογώνιου πλέγματος"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Ύψος ορθογωνίου πλέγματος:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Ορίζει το πόσο μακριά είναι οι οριζόντιες γραμμές του ορθογώνιου πλέγματος"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Πλάτος ισομετρικού κελιού:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Ύψος ισομετρικού κελιού:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Μετατόπιση πλέγματος x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Ορίζει την μετατόπιση x του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Μετατόπιση πλέγματος y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Ορίζει την μετατόπιση y του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Εμφάνιση πάνω από τη λειτουργία μοτίβου:"
 
 msgid "If disabled grid will be drawn only over the original image"
-msgstr ""
+msgstr "Εάν απενεργοποιηθεί, το πλέγμα θα εμφανίζεται μόνο πάνω από την αρχική εικόνα"
 
 msgid "Grid color:"
 msgstr "Χρώμα πλέγματος:"
 
 msgid "A color of the grid"
-msgstr "Το χρώμα του πλέαγματος που φαίνεται στον καμβά"
+msgstr "Το χρώμα του πλέγματος που φαίνεται στον καμβά"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixel πλέγμα"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Εμφάνιση στο επίπεδο μεγέθυνσης:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Ορίζει το ελάχιστο επίπεδο μεγέθυνσης (ζουμ) στο οποίο θα εμφανίζεται το pixel πλέγμα"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Χρώμα pixel πλέγματος:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Το χρώμα του pixel πλέγματος που φαίνεται στον καμβά"
 
 msgid "Transparency"
 msgstr "Διαφάνεια"
@@ -940,10 +940,10 @@ msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Ορισμός ορίου FPS εφαρμογής:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Περιορισμός FPS (καρέ ανά δευτερόλεπτο) σε 1 όταν η εφαρμογή χάνει την εστίαση"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
@@ -1441,13 +1441,13 @@ msgid "A default background color of a new image"
 msgstr "Το προεπιλεγμένο χρώμα των καινούριων εικόνων"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Κλείδωμα αναλογίας διαστάσεων"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Κατακόρυφος προσανατολισμός"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Οριζόντιος προσανατολισμός"
 
 msgid "Templates:"
 msgstr "Πρότυπα:"
