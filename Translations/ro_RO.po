@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-02-01 16:02\n"
+"PO-Revision-Date: 2021-02-01 16:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -882,7 +882,7 @@ msgid "Draw over Tile Mode:"
 msgstr "Afișare peste modul mozaic:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Dacă opțiunea este dezactivată, grila va fi afișată doar peste imaginea originală"
 
 msgid "Grid color:"
 msgstr "Culoarea grilei:"
