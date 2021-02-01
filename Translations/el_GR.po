@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-02-01 16:01\n"
+"PO-Revision-Date: 2021-02-01 16:10\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -882,7 +882,7 @@ msgid "Draw over Tile Mode:"
 msgstr "Εμφάνιση πάνω από τη λειτουργία μοτίβου:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Εάν είναι απενεργοποιημένο, το πλέγμα θα εμφανίζεται μόνο πάνω από την αρχική εικόνα"
 
 msgid "Grid color:"
 msgstr "Χρώμα πλέγματος:"
