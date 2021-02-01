@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-02-01 16:01\n"
+"PO-Revision-Date: 2021-02-01 21:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -880,7 +880,7 @@ msgid "Draw over Tile Mode:"
 msgstr ""
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Если отключено, сетка будет рисоваться только поверх исходного изображения"
 
 msgid "Grid color:"
 msgstr "Цвет сетки:"
