@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-01-31 05:28\n"
+"PO-Revision-Date: 2021-02-01 16:00\n"
 
 msgid "OK"
 msgstr "예"
@@ -881,7 +881,7 @@ msgstr ""
 msgid "Draw over Tile Mode:"
 msgstr "타일 모드 위에 그리기"
 
-msgid "If disabled grid will be drawn only over the original image"
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
