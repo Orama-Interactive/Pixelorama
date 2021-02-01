@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-02-01 16:01\n"
+"PO-Revision-Date: 2021-02-01 21:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -881,7 +881,7 @@ msgid "Draw over Tile Mode:"
 msgstr "Über Kachelmodus zeichnen:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Wenn deaktiviert, wird das Raster nur über das Originalbild gezeichnet"
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
