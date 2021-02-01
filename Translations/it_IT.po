@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-01-27 01:00\n"
+"PO-Revision-Date: 2021-02-01 16:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -881,8 +881,8 @@ msgstr "Imposta lo spostamento y della griglia dall'origine della superficie (an
 msgid "Draw over Tile Mode:"
 msgstr "Disegna sulla modalità piastrelle:"
 
-msgid "If disabled grid will be drawn only over the original image"
-msgstr "Se disabilitata la griglia verrà disegnata solo sopra l'immagine originale"
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
