@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-01-26 22:50\n"
+"PO-Revision-Date: 2021-02-01 16:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -880,8 +880,8 @@ msgstr "Legt den Y-Offset vom Ursprung der Leinwand fest (linke obere Ecke des B
 msgid "Draw over Tile Mode:"
 msgstr "Über Kachelmodus zeichnen:"
 
-msgid "If disabled grid will be drawn only over the original image"
-msgstr "Wenn deaktiviert, wird das Raster nur über das Originalbild gezeichnet"
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
