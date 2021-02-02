@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-02-01 16:01\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -161,6 +161,9 @@ msgstr "Preferências"
 
 msgid "Tile Mode"
 msgstr "Modo de Tile"
+
+msgid "Window Transparency"
+msgstr ""
 
 msgid "Mirror View"
 msgstr ""
