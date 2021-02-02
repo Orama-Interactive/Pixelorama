@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-02-01 16:01\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -161,6 +161,9 @@ msgstr "Tercihler"
 
 msgid "Tile Mode"
 msgstr "Karo Modu"
+
+msgid "Window Transparency"
+msgstr ""
 
 msgid "Mirror View"
 msgstr "Yansima"
