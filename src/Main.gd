@@ -7,6 +7,16 @@ var is_quitting_on_save := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var alternate_transparent_background = ColorRect.new()
+	add_child(alternate_transparent_background)
+	move_child(alternate_transparent_background,0)
+	alternate_transparent_background.visible = false
+	alternate_transparent_background.name = "AlternateTransparentBackground"
+	alternate_transparent_background.anchor_left = ANCHOR_BEGIN
+	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
+	alternate_transparent_background.anchor_right = ANCHOR_END
+	alternate_transparent_background.anchor_bottom = ANCHOR_END
+	
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
 
