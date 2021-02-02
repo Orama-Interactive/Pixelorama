@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-02-02 17:33\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -163,7 +163,7 @@ msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Διαφάνεια Παραθύρου"
 
 msgid "Mirror View"
 msgstr "Αναστροφή Προβολής"
