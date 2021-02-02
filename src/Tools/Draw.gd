@@ -1,4 +1,4 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _brush := Brushes.get_default_brush()

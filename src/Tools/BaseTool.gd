@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name BaseTool extends VBoxContainer
 
 
 var kname : String
@@ -8,7 +8,7 @@ var cursor_text := ""
 var _cursor := Vector2.INF
 
 
-func _ready():
+func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
 	$Label.text = tool_slot.name
 
@@ -19,12 +19,12 @@ func _ready():
 	$Mirror/Vertical.pressed = tool_slot.vertical_mirror
 
 
-func _on_PixelPerfect_toggled(button_pressed : bool):
+func _on_PixelPerfect_toggled(button_pressed : bool) -> void:
 	tool_slot.pixel_perfect = button_pressed
 	tool_slot.save_config()
 
 
-func _on_Horizontal_toggled(button_pressed : bool):
+func _on_Horizontal_toggled(button_pressed : bool) -> void:
 	tool_slot.horizontal_mirror = button_pressed
 	tool_slot.save_config()
 	Global.show_y_symmetry_axis = button_pressed
@@ -34,7 +34,7 @@ func _on_Horizontal_toggled(button_pressed : bool):
 	Global.current_project.y_symmetry_axis.visible = Global.show_y_symmetry_axis and Global.show_guides
 
 
-func _on_Vertical_toggled(button_pressed : bool):
+func _on_Vertical_toggled(button_pressed : bool) -> void:
 	tool_slot.vertical_mirror = button_pressed
 	tool_slot.save_config()
 	Global.show_x_symmetry_axis = button_pressed

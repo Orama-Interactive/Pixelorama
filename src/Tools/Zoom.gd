@@ -1,20 +1,20 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _zoom_mode := 0
 
 
-func _on_ModeOptions_item_selected(id):
+func _on_ModeOptions_item_selected(id : int) -> void:
 	_zoom_mode = id
 	update_config()
 	save_config()
 
 
-func _on_FitToFrame_pressed():
+func _on_FitToFrame_pressed() -> void:
 	Global.camera.fit_to_frame(Global.current_project.size)
 
 
-func _on_100_pressed():
+func _on_100_pressed() -> void:
 	Global.camera.zoom_100()
 
 

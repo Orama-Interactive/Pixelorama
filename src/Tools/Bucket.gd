@@ -1,4 +1,4 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _pattern : Patterns.Pattern
@@ -35,13 +35,13 @@ func _on_Pattern_selected(pattern : Patterns.Pattern) -> void:
 	save_config()
 
 
-func _on_PatternOffsetX_value_changed(value : float):
+func _on_PatternOffsetX_value_changed(value : float) -> void:
 	_offset_x = int(value)
 	update_config()
 	save_config()
 
 
-func _on_PatternOffsetY_value_changed(value : float):
+func _on_PatternOffsetY_value_changed(value : float) -> void:
 	_offset_y = int(value)
 	update_config()
 	save_config()

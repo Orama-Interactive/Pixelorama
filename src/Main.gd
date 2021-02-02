@@ -16,7 +16,7 @@ func _ready() -> void:
 	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_right = ANCHOR_END
 	alternate_transparent_background.anchor_bottom = ANCHOR_END
-	
+
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
 

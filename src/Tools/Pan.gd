@@ -1,4 +1,5 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
+
 
 func draw_start(_position : Vector2) -> void:
 	Global.camera.drag = true
