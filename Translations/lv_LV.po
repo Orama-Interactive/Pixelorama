@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2021-02-01 16:00\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -161,6 +161,9 @@ msgstr "Iestatījumi"
 
 msgid "Tile Mode"
 msgstr "Flīžu režīms"
+
+msgid "Window Transparency"
+msgstr ""
 
 msgid "Mirror View"
 msgstr ""
