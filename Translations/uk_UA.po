@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-02-01 16:02\n"
+"PO-Revision-Date: 2021-02-02 17:26\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -161,6 +161,9 @@ msgstr "Налаштування"
 
 msgid "Tile Mode"
 msgstr "Режим плитки"
+
+msgid "Window Transparency"
+msgstr ""
 
 msgid "Mirror View"
 msgstr "Дзеркальний перегляд"
