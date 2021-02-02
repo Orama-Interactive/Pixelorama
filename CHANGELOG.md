@@ -15,6 +15,7 @@ Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 - Dragging and dropping individual cels in the timeline to change their position is now possible.
 - You can now resize cels in the timeline by holding `Control` and scrolling with the mouse wheel.
 - Added a new "Performance" tab in the Preferences that exposes options related to the application's FPS to the user.
+- You can now change the transparency of the application's window, allowing for easier tracing/rotoscoping. (Does not work on the Web version) ([#444](https://github.com/Orama-Interactive/Pixelorama/pull/444))
 - Added a new pixel grid, which is a grid of size 1px and it appears after a certain zoom level. ([#427](https://github.com/Orama-Interactive/Pixelorama/pull/427))
 - Added offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))

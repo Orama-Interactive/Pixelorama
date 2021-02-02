@@ -146,6 +146,8 @@ window/size/width=1280
 window/size/height=720
 window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
+window/per_pixel_transparency/allowed.HTML5=false
+window/per_pixel_transparency/enabled.HTML5=false
 
 [importer_defaults]
 

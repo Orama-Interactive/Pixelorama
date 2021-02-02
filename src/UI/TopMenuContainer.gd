@@ -108,6 +108,8 @@ func setup_view_menu() -> void:
 	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+	if OS.get_name() == "HTML5":
+		view_menu.set_item_disabled(ViewMenuId.WINDOW_TRANSPARENCY, true)
 
 
 func setup_tile_mode_submenu(item : String):

@@ -151,6 +151,9 @@ msgstr ""
 msgid "Tile Mode"
 msgstr ""
 
+msgid "Window Transparency"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
