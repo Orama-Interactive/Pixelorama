@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2021-02-01 16:02\n"
+"PO-Revision-Date: 2021-02-02 17:26\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -161,6 +161,9 @@ msgstr "Agordoj"
 
 msgid "Tile Mode"
 msgstr "Kahela reĝimo"
+
+msgid "Window Transparency"
+msgstr ""
 
 msgid "Mirror View"
 msgstr ""
