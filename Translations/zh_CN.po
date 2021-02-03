@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-02-03 03:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -885,7 +885,7 @@ msgid "Draw over Tile Mode:"
 msgstr "在平铺模式绘制："
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr "如果禁用网格只能在原始图像上绘制"
+msgstr "如果禁用，网格只能在原始图像上绘制"
 
 msgid "Grid color:"
 msgstr "网格颜色："
