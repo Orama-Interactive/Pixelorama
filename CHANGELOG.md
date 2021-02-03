@@ -12,7 +12,10 @@ Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
+- Dragging and dropping individual cels in the timeline to change their position is now possible.
+- You can now resize cels in the timeline by holding `Control` and scrolling with the mouse wheel.
 - Added a new "Performance" tab in the Preferences that exposes options related to the application's FPS to the user.
+- You can now change the transparency of the application's window, allowing for easier tracing/rotoscoping. (Does not work on the Web version) ([#444](https://github.com/Orama-Interactive/Pixelorama/pull/444))
 - Added a new pixel grid, which is a grid of size 1px and it appears after a certain zoom level. ([#427](https://github.com/Orama-Interactive/Pixelorama/pull/427))
 - Added offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))
@@ -27,13 +30,19 @@ Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
 - Frame tags can now be set for frames larger than 100. ([#408](https://github.com/Orama-Interactive/Pixelorama/pull/408))
 - The "lock aspect ratio" button in the create new image dialog has been changed to a texture button.
 - Improved the "Scale Image" dialog. It now automatically sets the size to the current project's size, has a button to lock aspect ratio, and resizing based on percentage.
+- Having no active selection no longer treats all the pixels of the canvas as selected. This is also a performance boost, especially for larger images, as Pixelorama no longer has to loop through all of the pixels to select them.
+- Tile mode rects are now cached for a little speedup. ([#443](https://github.com/Orama-Interactive/Pixelorama/pull/443))
+- The zoom tool now works on the second canvas too.
 
 ### Fixed
+- Fixed issue with pixels being selected outside of the canvas boundaries, when the selection rectangle was outside the canvas and its size got reduced.
 - Fixed layer button textures not being updated properly when changing theme. ([#404](https://github.com/Orama-Interactive/Pixelorama/issues/404))
 - Keyboard shortcut conflicts between tool shortcuts and other shortcuts that use the "Control" key, like menu shortcuts, have been resolved. ([#407](https://github.com/Orama-Interactive/Pixelorama/pull/407))
 - The opacity of a cel and the tile mode opacity are now multiplicative. ([#414](https://github.com/Orama-Interactive/Pixelorama/pull/414))
 - Fixed an issue where adding a new layer did not select it, rather it was selecting the above layer of the previously selected layer. ([#424](https://github.com/Orama-Interactive/Pixelorama/pull/424))
-- Fixed cel opacity not being always updated on the UI. ([#420](https://github.com/Orama-Interactive/Pixelorama/pull/420))
+- Fixed cel opacity not always being updated on the UI. ([#420](https://github.com/Orama-Interactive/Pixelorama/pull/420))
+- Loading empty backed up projects no longer result in a crash. ([#445](https://github.com/Orama-Interactive/Pixelorama/issues/445))
+- Fixed potential index out of bounds error when loading backup files. ([#446](https://github.com/Orama-Interactive/Pixelorama/pull/446))
 <br><br>
 
 ## [v0.8.2] - 2020-12-12

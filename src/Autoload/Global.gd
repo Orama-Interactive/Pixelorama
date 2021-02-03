@@ -126,6 +126,7 @@ var zoom_level_label : Label
 
 var recent_projects_submenu : PopupMenu
 var tile_mode_submenu : PopupMenu
+var window_transparency_submenu : PopupMenu
 
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
@@ -238,6 +239,22 @@ func _ready() -> void:
 	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", TileMode.X_AXIS)
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", TileMode.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
+
+	window_transparency_submenu = PopupMenu.new()
+	window_transparency_submenu.set_name("set value")
+	window_transparency_submenu.add_radio_check_item("100%")
+	window_transparency_submenu.add_radio_check_item("90%")
+	window_transparency_submenu.add_radio_check_item("80%")
+	window_transparency_submenu.add_radio_check_item("70%")
+	window_transparency_submenu.add_radio_check_item("60%")
+	window_transparency_submenu.add_radio_check_item("50%")
+	window_transparency_submenu.add_radio_check_item("40%")
+	window_transparency_submenu.add_radio_check_item("30%")
+	window_transparency_submenu.add_radio_check_item("20%")
+	window_transparency_submenu.add_radio_check_item("10%")
+	window_transparency_submenu.add_radio_check_item("0%")
+	window_transparency_submenu.set_item_checked(10, true)
+	window_transparency_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
@@ -358,6 +375,9 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			play_backwards.pressed = false
 			animation_timer.stop()
 
+	elif "Move Cels" == action_name:
+		project.frames = project.frames # to call frames_changed
+
 	canvas.update()
 	if !project.has_changed:
 		project.has_changed = true
@@ -387,6 +407,9 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()
+
+	elif "Move Cels" == action_name:
+		project.frames = project.frames # to call frames_changed
 
 	canvas.update()
 	if !project.has_changed:

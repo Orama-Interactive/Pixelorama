@@ -1,10 +1,10 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _color_slot := 0
 
 
-func _on_Options_item_selected(id):
+func _on_Options_item_selected(id : int) -> void:
 	_color_slot = id
 	update_config()
 	save_config()

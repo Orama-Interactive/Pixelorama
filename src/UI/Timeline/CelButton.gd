@@ -7,6 +7,9 @@ onready var popup_menu : PopupMenu = $PopupMenu
 
 
 func _ready() -> void:
+	rect_min_size.x = Global.animation_timeline.cel_size
+	rect_min_size.y = Global.animation_timeline.cel_size
+
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
@@ -20,6 +23,16 @@ func _ready() -> void:
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
+
+
+func _on_CelButton_resized() -> void:
+	get_node("CelTexture").rect_min_size.x = rect_min_size.x - 4
+	get_node("CelTexture").rect_min_size.y = rect_min_size.y - 4
+
+	get_node("LinkedIndicator").polygon[1].x = rect_min_size.x
+	get_node("LinkedIndicator").polygon[2].x = rect_min_size.x
+	get_node("LinkedIndicator").polygon[2].y = rect_min_size.y
+	get_node("LinkedIndicator").polygon[3].y = rect_min_size.y
 
 
 func _on_CelButton_pressed() -> void:
@@ -107,6 +120,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.frame_properties.set_frame_label(frame)
 				Global.frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
+
 func change_frame_order(rate : int) -> void:
 	var change = frame + rate
 	var new_frames : Array = Global.current_project.frames.duplicate()
@@ -122,6 +136,66 @@ func change_frame_order(rate : int) -> void:
 		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()
+
+
+func get_drag_data(_position) -> Array:
+	var button := Button.new()
+	button.rect_size = rect_size
+	button.theme = Global.control.theme
+	var texture_rect := TextureRect.new()
+	texture_rect.rect_size = $CelTexture.rect_size
+	texture_rect.rect_position = $CelTexture.rect_position
+	texture_rect.expand = true
+	texture_rect.texture = $CelTexture.texture
+	button.add_child(texture_rect)
+	set_drag_preview(button)
+
+	return [frame, layer]
+
+
+func can_drop_data(_pos, data) -> bool:
+	if typeof(data) == TYPE_ARRAY:
+		var new_frame = data[0]
+		var new_layer = data[1]
+		if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels or Global.current_project.frames[new_frame] in Global.current_project.layers[new_layer].linked_cels:
+			# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
+			return false
+		else:
+			return true
+	else:
+		return false
+
+
+func drop_data(_pos, data) -> void:
+	var new_frame = data[0]
+	var new_layer = data[1]
+
+	var this_frame_new_cels = Global.current_project.frames[frame].cels.duplicate()
+	var new_frame_new_cels
+	var temp = this_frame_new_cels[layer]
+	this_frame_new_cels[layer] = Global.current_project.frames[new_frame].cels[new_layer]
+	if frame == new_frame:
+		this_frame_new_cels[new_layer] = temp
+	else:
+		new_frame_new_cels = Global.current_project.frames[new_frame].cels.duplicate()
+		new_frame_new_cels[new_layer] = temp
+
+	Global.current_project.undo_redo.create_action("Move Cels")
+	Global.current_project.undo_redo.add_do_property(Global.current_project.frames[frame], "cels", this_frame_new_cels)
+
+	if frame != new_frame: # If the cel moved to a different frame
+		Global.current_project.undo_redo.add_do_property(Global.current_project.frames[new_frame], "cels", new_frame_new_cels)
+
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame)
+		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+
+		Global.current_project.undo_redo.add_undo_property(Global.current_project.frames[new_frame], "cels", Global.current_project.frames[new_frame].cels)
+
+	Global.current_project.undo_redo.add_undo_property(Global.current_project.frames[frame], "cels", Global.current_project.frames[frame].cels)
 
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")

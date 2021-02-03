@@ -42,7 +42,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	name = _name
 	size = _size
 	update_tile_mode_rects()
-	select_all_pixels()
 
 	undo_redo = UndoRedo.new()
 
@@ -127,7 +126,7 @@ func change_project() -> void:
 
 	for j in range(frames.size()): # Create frame ID labels
 		var label := Label.new()
-		label.rect_min_size.x = 36
+		label.rect_min_size.x = Global.animation_timeline.cel_size
 		label.align = Label.ALIGN_CENTER
 		label.text = str(j + 1)
 		if j == current_frame:
@@ -294,7 +293,7 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
-		select_all_pixels()
+		update_tile_mode_rects()
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):
@@ -365,8 +364,7 @@ func name_changed(value : String) -> void:
 func size_changed(value : Vector2) -> void:
 	size = value
 	update_tile_mode_rects()
-	if Global.selection_rectangle._selected_rect.has_no_area():
-		select_all_pixels()
+	Global.selection_rectangle.set_rect(Global.selection_rectangle.get_rect())
 
 
 func frames_changed(value : Array) -> void:
@@ -382,7 +380,7 @@ func frames_changed(value : Array) -> void:
 
 	for j in range(frames.size()):
 		var label := Label.new()
-		label.rect_min_size.x = 36
+		label.rect_min_size.x = Global.animation_timeline.cel_size
 		label.align = Label.ALIGN_CENTER
 		label.text = str(j + 1)
 		Global.frame_ids.add_child(label)
@@ -531,18 +529,19 @@ func animation_tags_changed(value : Array) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_c : Container = load("res://src/UI/Timeline/AnimationTag.tscn").instance()
+		var tag_base_size = Global.animation_timeline.cel_size + 3
+		var tag_c : Container = load("res://src/UI/Timeline/AnimationTagUI.tscn").instance()
 		Global.tag_container.add_child(tag_c)
+		tag_c.tag = tag
 		var tag_position : int = Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
 		tag_c.get_node("Label").text = tag.name
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag.from - 1) * 39 + tag.from
-
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + tag.from
 		var tag_size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * 39
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
@@ -580,3 +579,7 @@ func update_tile_mode_rects() -> void:
 	tile_mode_rects[Global.TileMode.BOTH] = Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
 	tile_mode_rects[Global.TileMode.X_AXIS] = Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
 	tile_mode_rects[Global.TileMode.Y_AXIS] = Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)
+
+
+func is_empty() -> bool:
+	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0

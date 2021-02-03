@@ -1,4 +1,4 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _start := Rect2(0, 0, 0, 0)

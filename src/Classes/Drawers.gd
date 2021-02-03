@@ -75,7 +75,7 @@ func set_pixel(image: Image, position: Vector2, color: Color) -> void:
 	var mirror_y = project.y_symmetry_point - position.y
 	var mirror_x_inside : bool
 	var mirror_y_inside : bool
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	var entire_image_selected : bool = project.selected_pixels.empty()
 	if entire_image_selected:
 		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
 		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y

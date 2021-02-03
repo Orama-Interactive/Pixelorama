@@ -39,7 +39,7 @@ func set_rect(rect : Rect2) -> void:
 
 	var project : Project = Global.current_project
 	if rect.has_no_area():
-		project.select_all_pixels()
+		project.selected_pixels = []
 	else:
 		project.clear_selection()
 		for x in range(rect.position.x, rect.end.x):

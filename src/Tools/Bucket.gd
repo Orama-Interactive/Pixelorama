@@ -1,4 +1,4 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _pattern : Patterns.Pattern
@@ -35,13 +35,13 @@ func _on_Pattern_selected(pattern : Patterns.Pattern) -> void:
 	save_config()
 
 
-func _on_PatternOffsetX_value_changed(value : float):
+func _on_PatternOffsetX_value_changed(value : float) -> void:
 	_offset_x = int(value)
 	update_config()
 	save_config()
 
 
-func _on_PatternOffsetY_value_changed(value : float):
+func _on_PatternOffsetY_value_changed(value : float) -> void:
 	_offset_y = int(value)
 	update_config()
 	save_config()
@@ -94,7 +94,9 @@ func update_pattern() -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	if not position in Global.current_project.selected_pixels or Global.current_project.layers[Global.current_project.current_layer].locked:
+	if Global.current_project.layers[Global.current_project.current_layer].locked or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position):
+		return
+	if Global.current_project.selected_pixels and not position in Global.current_project.selected_pixels:
 		return
 	var undo_data = _get_undo_data()
 	if _fill_area == 0:
@@ -121,7 +123,15 @@ func fill_in_color(position : Vector2) -> void:
 			return
 
 	image.lock()
-	for i in project.selected_pixels:
+	var pixels := []
+	if project.selected_pixels:
+		pixels = project.selected_pixels.duplicate()
+	else:
+		for x in Global.current_project.size.x:
+			for y in Global.current_project.size.y:
+				pixels.append(Vector2(x, y))
+
+	for i in pixels:
 		if image.get_pixelv(i).is_equal_approx(color):
 			_set_pixel(image, i.x, i.y, tool_slot.color)
 
@@ -135,7 +145,7 @@ func fill_in_area(position : Vector2) -> void:
 	var mirror_y = project.y_symmetry_point - position.y
 	var mirror_x_inside : bool
 	var mirror_y_inside : bool
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	var entire_image_selected : bool = project.selected_pixels.empty()
 	if entire_image_selected:
 		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
 		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
@@ -192,7 +202,7 @@ func _flood_fill(position : Vector2) -> void:
 
 func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
 	var project : Project = Global.current_project
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
+	var entire_image_selected : bool = project.selected_pixels.empty()
 	if entire_image_selected:
 		if not _get_draw_rect().has_point(Vector2(x, y)):
 			return

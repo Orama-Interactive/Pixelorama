@@ -67,4 +67,5 @@ invert_enable = true
 invert_border = 1.0
 polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
+[connection signal="resized" from="." to="." method="_on_CelButton_resized"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
