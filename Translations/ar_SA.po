@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -34,7 +34,7 @@ msgid "Image Size"
 msgstr "حجم الصورة"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "حجم الكانفاس"
 
 msgid "Frame Size"
 msgstr "حجم الإطار"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "الطول:"
 
 msgid "Center"
-msgstr ""
+msgstr "في المنتصف"
 
 msgid "File"
 msgstr "الملف"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "نسخ"
 
 msgid "Cut"
-msgstr ""
+msgstr "قص"
 
 msgid "Paste"
 msgstr "لصق"
@@ -126,10 +126,19 @@ msgstr "حذف"
 msgid "Scale Image"
 msgstr "تغيير مقياس الصورة"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "تقطيع الصورة"
 
 msgid "Resize Canvas"
+msgstr "تغيير حجم الكانفاس"
+
+msgid "Centralize Image"
 msgstr ""
 
 msgid "Rotate Image"
@@ -139,7 +148,7 @@ msgid "Clear Selection"
 msgstr "إزالة التحديد"
 
 msgid "Flip"
-msgstr ""
+msgstr "لف"
 
 msgid "Flip Horizontal"
 msgstr "التدوير بشكل أفقي"
@@ -153,23 +162,29 @@ msgstr "خيارات"
 msgid "Tile Mode"
 msgstr "وضع البلاط"
 
-msgid "Mirror View"
+msgid "Window Transparency"
 msgstr ""
+
+msgid "Mirror View"
+msgstr "عرض المرآة"
 
 msgid "Show Grid"
 msgstr "إظهار الشبكة"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "إظهار المسطرة"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "إظهار الإرشادات"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "إظهار الخيط الزمني للرسوم المتحركة"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "وضع التأمل"
 
 msgid "Fullscreen Mode"
 msgstr "وضع ملء الشاشة"
@@ -190,7 +205,7 @@ msgid "Import as:"
 msgstr "استيراد باسم:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "المشاريع الأخيرة"
 
 msgid "New tab"
 msgstr "علامة تبويب جديدة"
@@ -214,95 +229,96 @@ msgid "New pattern"
 msgstr "نمط جديد"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "الأطر الأفقية:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "الأطر العمودية:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "نوع الفرشاة:"
 
 msgid "File brush"
-msgstr ""
+msgstr "إستعمال صورة كفرشاة"
 
 msgid "Project brush"
-msgstr ""
+msgstr "إستعمال فرشاة شخصية"
 
 msgid "Random brush"
-msgstr ""
+msgstr "فرشاة عشوائية"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "حفظ سبريت ك.pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "تصدير سبريت ك.png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "تصدير سبريت"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "الملف موجود، هل تريد إستبداله؟"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "ملف %s موجود بالفعل. هل تريد إستبداله؟"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "مسار المجلد أو اسم الملف غير صالح!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "جاري التصدير..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "لا يمكن تحميل الملف '%s'.\n"
+"رمز الخطأ: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "الإطار"
 
 msgid "Frames:"
-msgstr ""
+msgstr "إطارات:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "كل الإطارات"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "ورقة السبريت"
 
 msgid "Animation"
-msgstr ""
+msgstr "الرسوم المتحركة"
 
 msgid "Preview:"
-msgstr ""
+msgstr "معاينة:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "الإطار:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "الإتجاه:"
 
 msgid "Browse"
-msgstr ""
+msgstr "تصفّح"
 
 msgid "Resize:"
-msgstr ""
+msgstr "تغيير الحجم:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "إلغاء التصدير"
 
 msgid "Alert!"
-msgstr ""
+msgstr "تنبيه!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "اختر المجلد الحالي"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "فتح الدليل"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "جميع الإطارات كملفات متعددة"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "جميع الإطارات كرسوم متحركة لملف واحد"
 
 msgid "Background:"
 msgstr "الخلفيّة:"
@@ -311,34 +327,34 @@ msgid "Direction:"
 msgstr "الاتجاه:"
 
 msgid "Forward"
-msgstr ""
+msgstr "إلى الأمام"
 
 msgid "Backwards"
-msgstr ""
+msgstr "إلى الوراء"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "بينغ بونغ"
 
 msgid "Columns"
-msgstr ""
+msgstr "الخانات"
 
 msgid "Columns:"
-msgstr ""
+msgstr "الخانات:"
 
 msgid "Rows"
-msgstr ""
+msgstr "الصفوف"
 
 msgid "Rows:"
-msgstr ""
+msgstr "الصفوف:"
 
 msgid "Path:"
-msgstr ""
+msgstr "المسار:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "المجلدات والملفات:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "إنشاء مجلد"
 
 msgid "File:"
 msgstr ""
@@ -380,6 +396,9 @@ msgid "Shortcuts"
 msgstr "اختصارات"
 
 msgid "Backup"
+msgstr ""
+
+msgid "Performance"
 msgstr ""
 
 msgid "Indicators"
@@ -518,46 +537,43 @@ msgid "Top to Bottom"
 msgstr ""
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "أسفل إلى أعلى"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "من اليسار إلى اليمين"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "من اليمين إلى اليسار"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "عرض شاشة البداية"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "التعليمات عبر الانترنت"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "متعقب المشاكل"
 
 msgid "Changelog"
-msgstr ""
+msgstr "سِجل التغييرات"
 
 msgid "About Pixelorama"
 msgstr "حول Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "بيكسلوراما - بيكسل أحلامك!"
 
 msgid "Developed by Orama Interactive"
 msgstr "تم تطويره بواسطة Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
-
-msgid "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
 msgstr "الموقع"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "مخزن GitHub"
 
 msgid "Donate"
 msgstr "تبرّع"
@@ -611,7 +627,7 @@ msgid "Spanish"
 msgstr "الإسبانية"
 
 msgid "Catalan"
-msgstr ""
+msgstr "الكاتالونية"
 
 msgid "Esperanto"
 msgstr "إسبرانتو"
@@ -623,81 +639,91 @@ msgid "Czech"
 msgstr "التشيكية"
 
 msgid "Arabic"
-msgstr ""
+msgstr "العربيّة"
 
 msgid "Turkish"
-msgstr ""
+msgstr "التركية"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "النرويجية"
 
 msgid "Korean"
-msgstr ""
+msgstr "الكورية"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "الهنغارية"
 
 msgid "Romanian"
-msgstr ""
+msgstr "الرومانية"
 
 msgid "Japanese"
-msgstr ""
+msgstr "اليابانية"
 
 msgid "Development Team"
 msgstr "فريق التطوير"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "المبرمج الرئيسي"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "مصمم UI"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "مساهمو الGitHub"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "الفن بواسطة: %s"
 
 msgid "untitled"
-msgstr ""
+msgstr "غير معنون"
 
 msgid "imported"
-msgstr ""
+msgstr "مستورد"
 
 msgid "copy"
-msgstr ""
+msgstr "نسخ"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "هل أنت متأكد من أنك تريد الخروج من Pixelorama؟"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "صورة غير محفوظة"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "لديك تغييرات غير محفوظة. إذا قمت بالمتابعة، سيتم فقدان التقدم الذي حققته."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "حفظ قبل الخروج؟"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "لم تقم بحفظ التقدم. كيف ترغب في المتابعة؟"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "حفظ وخروج"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "الخروج دون حفظ"
 
 msgid "Utility Tools"
-msgstr ""
+msgstr "أدوات مفيدة"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Press %s to move the content"
-msgstr ""
+msgstr "تحديد مستطيل\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن\n\n"
+"اضغط %s لنقل المحتوى"
 
 msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "تكبير\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن"
+
+msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr ""
@@ -706,57 +732,71 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "منتقي الألوان\n"
+"حدد لون من بكسل سبريت\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن"
 
 msgid "Draw Tools"
-msgstr ""
+msgstr "أدوات الرسم"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "القلم\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن\n\n"
+"اضغط %s لإنشاء سطر"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "الممحاة\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن\n\n"
+"اضغط على %s لإنشاء سطر"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "دلو\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "تفتيح/تغميق\n\n"
+"%s لزر الماوس الأيسر\n"
+"%s لزر الماوس الأيمن"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "اختر لون الأداة اليسرى"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "اختر لون الأداة اليمنى"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "تبديل الألوان اليسرى واليمنى\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "إعادة تعيين الألوان إلى حالتها الافتراضية (أسود لليسار، أبيض لليمين)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "الأداة اليسرى"
 
 msgid "Right tool"
-msgstr ""
+msgstr "الأداة اليمنى"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "مؤشر البكسل الأيسر"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "إظهار مؤشر الماوس الأيسر بكسل أو الفرشاة على الكانفا عند الرسم"
 
 msgid "Right pixel indicator"
 msgstr ""
@@ -803,28 +843,67 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Grid width:"
+msgid "Rectangular grid width:"
 msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
 
-msgid "Grid height:"
+msgid "Rectangular grid height:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
-msgid "Isometric cell size:"
+msgid "Isometric cell bounds width:"
 msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
@@ -863,6 +942,18 @@ msgstr ""
 msgid "Only custom preset can be modified"
 msgstr ""
 
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
+
 msgid "Brush:"
 msgstr ""
 
@@ -873,7 +964,7 @@ msgid "Pixel brush"
 msgstr ""
 
 msgid "Circle brush"
-msgstr ""
+msgstr "فرشاة الدائرة"
 
 msgid "Filled circle brush"
 msgstr ""
@@ -882,7 +973,7 @@ msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
-msgstr ""
+msgstr "حجم الفرشاة:"
 
 msgid "Overwrite Color"
 msgstr ""
@@ -1343,7 +1434,13 @@ msgstr ""
 msgid "A default background color of a new image"
 msgstr ""
 
-msgid "Lock aspect ratio:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
 msgstr ""
 
 msgid "Templates:"
@@ -1365,6 +1462,9 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"

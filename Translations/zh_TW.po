@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "確定"
@@ -126,11 +126,20 @@ msgstr "刪除"
 msgid "Scale Image"
 msgstr "調整尺寸"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "擷取部分圖片"
 
 msgid "Resize Canvas"
 msgstr "調整版面大小"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "旋轉圖片"
@@ -153,11 +162,17 @@ msgstr "偏好設定"
 msgid "Tile Mode"
 msgstr "拼圖模式"
 
+msgid "Window Transparency"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
 msgstr "顯示格線"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "顯示尺規"
@@ -382,6 +397,9 @@ msgstr "快捷鍵"
 msgid "Backup"
 msgstr "備份"
 
+msgid "Performance"
+msgstr ""
+
 msgid "Indicators"
 msgstr "指標"
 
@@ -547,11 +565,8 @@ msgstr "Pixelorama - 像素化你的夢想！"
 msgid "Developed by Orama Interactive"
 msgstr "由Orama Interactive開發"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "版權所有 2019-2020 Orama Interactive 與貢獻者"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 by Orama Interactive 與貢獻者"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "官網"
@@ -707,6 +722,11 @@ msgstr "縮放\n\n"
 "%s換成左鍵\n"
 "%s換成右鍵"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -822,29 +842,68 @@ msgstr "等角立體"
 msgid "All"
 msgstr "全部"
 
-msgid "Grid width:"
-msgstr "格線寬度："
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "設定垂直格線的寬度"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "格線高度："
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "設定水平格線的高度"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr ""
 
-msgid "Isometric cell size:"
-msgstr "等角立體間隔大小"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "設定等角立體格線的間隔大小"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "格線顏色："
 
 msgid "A color of the grid"
 msgstr "格線顏色"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "透明"
@@ -881,6 +940,18 @@ msgstr "空白背景格跟隨畫布放大縮小"
 
 msgid "Only custom preset can be modified"
 msgstr "只能修改自訂配置"
+
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "畫筆："
@@ -1370,8 +1441,14 @@ msgstr "預設背景顏色："
 msgid "A default background color of a new image"
 msgstr "新檔案的預設背景顏色"
 
-msgid "Lock aspect ratio:"
-msgstr "鎖定長寬比"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "模板："
@@ -1393,6 +1470,9 @@ msgstr "長方形選取"
 
 msgid "Zoom"
 msgstr "縮放"
+
+msgid "Pan"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "撿色器"

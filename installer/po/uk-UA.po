@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-09 20:48\n"
+"PO-Revision-Date: 2020-12-31 12:05\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
@@ -21,50 +21,50 @@ msgstr ""
 #. SecInstall
 #: .\pixelorama.nsi:72
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Встановити ${APPNAME}"
 
 #. SecStartmenu
 #: .\pixelorama.nsi:73
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Створити ярлики меню Пуск (необов'язково)"
 
 #. SecDesktop
 #: .\pixelorama.nsi:74
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Створити ярлик на стільниці (необов'язково)"
 
 #. un.SecUninstall
 #: .\pixelorama.nsi:75
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Видалити ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: .\pixelorama.nsi:76
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Видалити конфігураційні файли (необов'язково)"
 
 #. DESC_SecInstall
 #: .\pixelorama.nsi:178
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Встановлює ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: .\pixelorama.nsi:179
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Створює ярлики меню Пуск для ${APPNAME}."
 
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Створює ярлик на стільниці для ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Видаляє ${APPNAME} ${APPVERSION} та стирає всі ярлики."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Видаляє файли конфігурації для ${APPNAME}."
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-12-12 01:22\n"
+"PO-Revision-Date: 2021-02-03 03:51\n"
 
 msgid "OK"
 msgstr "确定"
@@ -126,11 +126,20 @@ msgstr "删除"
 msgid "Scale Image"
 msgstr "缩放图像"
 
+msgid "Pixels"
+msgstr "像素"
+
+msgid "Percentage"
+msgstr "百分比"
+
 msgid "Crop Image"
 msgstr "裁剪图像"
 
 msgid "Resize Canvas"
 msgstr "调整画布尺寸"
+
+msgid "Centralize Image"
+msgstr "集成图像"
 
 msgid "Rotate Image"
 msgstr "旋转图像"
@@ -153,11 +162,17 @@ msgstr "首选项"
 msgid "Tile Mode"
 msgstr "平铺模式"
 
+msgid "Window Transparency"
+msgstr "窗口透明"
+
 msgid "Mirror View"
 msgstr "镜像视图"
 
 msgid "Show Grid"
 msgstr "显示网格"
+
+msgid "Show Pixel Grid"
+msgstr "显示像素网格"
 
 msgid "Show Rulers"
 msgstr "显示标尺"
@@ -383,6 +398,9 @@ msgstr "快捷键"
 msgid "Backup"
 msgstr "备份"
 
+msgid "Performance"
+msgstr "性能"
+
 msgid "Indicators"
 msgstr "指示"
 
@@ -548,11 +566,8 @@ msgstr "Pixelorama - 像素化您的梦想！"
 msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "版权所有 2019-2020 Orama Interactive 和贡献者"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 by Orama Interactive 和贡献者"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©版权所有 2019- Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -708,6 +723,13 @@ msgstr "油漆桶\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "平移\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键"
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -823,29 +845,68 @@ msgstr "几何体"
 msgid "All"
 msgstr "全部"
 
-msgid "Grid width:"
-msgstr "网格宽度："
+msgid "Rectangular grid width:"
+msgstr "矩形网格宽度："
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "设置网格垂直线之间的距离"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr "设置矩形网格垂直线之间的距离"
 
-msgid "Grid height:"
-msgstr "网格高度："
+msgid "Rectangular grid height:"
+msgstr "矩形网格高度："
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "设置网格水平线之间的距离"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr "设置矩形网格水平线之间的距离"
 
-msgid "Isometric cell size:"
-msgstr "几何单元格大小："
+msgid "Isometric cell bounds width:"
+msgstr "几何单元格边界宽度："
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "设置等深网格中单元格的大小"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr "设置等深单元轴对齐边界框的宽度"
+
+msgid "Isometric cell bounds height:"
+msgstr "几何单元格边界高度："
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr "设置等深单元轴对齐边界框的高度"
+
+msgid "Grid offset x:"
+msgstr "网格偏移 X:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr "设置等距网格相对于画布原点的 x 偏移量(图像左上角)"
+
+msgid "Grid offset y:"
+msgstr "网格偏移 Y："
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr "设置等距网格相对于画布原点的 y 偏移量(图像左上角)"
+
+msgid "Draw over Tile Mode:"
+msgstr "在平铺模式绘制："
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr "如果禁用，网格只能在原始图像上绘制"
 
 msgid "Grid color:"
 msgstr "网格颜色："
 
 msgid "A color of the grid"
 msgstr "网格颜色"
+
+msgid "Pixel Grid"
+msgstr "像素网格"
+
+msgid "Show at zoom:"
+msgstr "在缩放时显示："
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "设置显示像素网格的最小缩放"
+
+msgid "Pixel grid color:"
+msgstr "像素网格颜色："
+
+msgid "A color of the pixel grid"
+msgstr "像素网格颜色"
 
 msgid "Transparency"
 msgstr "透明度"
@@ -882,6 +943,18 @@ msgstr "透明检查器跟随画布缩放级别"
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
+
+msgid "Set application FPS limit:"
+msgstr "设置应用程序 FPS 限制："
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "当应用程序失去焦点时 FPS 限制为 1。"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "如果启用此选项，则当应用程序的窗口失去焦点时，应用程序的 FPS 限制将设置为 1。这有助于降低空闲状态下的 CPU 使用率。当鼠标进入应用程序窗口时将重置 FPS 限制。"
 
 msgid "Brush:"
 msgstr "画笔:"
@@ -1372,8 +1445,14 @@ msgstr "默认填充颜色："
 msgid "A default background color of a new image"
 msgstr "设置新建图像的背景颜色"
 
-msgid "Lock aspect ratio:"
-msgstr "锁定长宽比："
+msgid "Lock aspect ratio"
+msgstr "锁定长宽比"
+
+msgid "Portrait"
+msgstr "纵向"
+
+msgid "Landscape"
+msgstr "横向"
 
 msgid "Templates:"
 msgstr "模板："
@@ -1395,6 +1474,9 @@ msgstr "矩形选区"
 
 msgid "Zoom"
 msgstr "缩放"
+
+msgid "Pan"
+msgstr "平移"
 
 msgid "Color Picker"
 msgstr "拾色器"

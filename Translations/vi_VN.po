@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr ""
@@ -126,10 +126,19 @@ msgstr ""
 msgid "Scale Image"
 msgstr ""
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr ""
 
 msgid "Resize Canvas"
+msgstr ""
+
+msgid "Centralize Image"
 msgstr ""
 
 msgid "Rotate Image"
@@ -153,10 +162,16 @@ msgstr ""
 msgid "Tile Mode"
 msgstr ""
 
+msgid "Window Transparency"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
+msgstr ""
+
+msgid "Show Pixel Grid"
 msgstr ""
 
 msgid "Show Rulers"
@@ -382,6 +397,9 @@ msgstr ""
 msgid "Backup"
 msgstr ""
 
+msgid "Performance"
+msgstr ""
+
 msgid "Indicators"
 msgstr ""
 
@@ -547,10 +565,7 @@ msgstr ""
 msgid "Developed by Orama Interactive"
 msgstr ""
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
-
-msgid "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
@@ -702,6 +717,11 @@ msgid "Zoom\n\n"
 "%s for right mouse button"
 msgstr ""
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -803,28 +823,67 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Grid width:"
+msgid "Rectangular grid width:"
 msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
 
-msgid "Grid height:"
+msgid "Rectangular grid height:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
-msgid "Isometric cell size:"
+msgid "Isometric cell bounds width:"
 msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
@@ -861,6 +920,18 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
+msgstr ""
+
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1343,7 +1414,13 @@ msgstr ""
 msgid "A default background color of a new image"
 msgstr ""
 
-msgid "Lock aspect ratio:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
 msgstr ""
 
 msgid "Templates:"
@@ -1365,6 +1442,9 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"

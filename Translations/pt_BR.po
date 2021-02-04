@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -126,11 +126,20 @@ msgstr "Deletar"
 msgid "Scale Image"
 msgstr "Redimensionar Imagem"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "Cortar imagem"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
@@ -153,11 +162,17 @@ msgstr "Preferências"
 msgid "Tile Mode"
 msgstr "Modo de Tile"
 
+msgid "Window Transparency"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
 msgstr "Mostrar Grade"
+
+msgid "Show Pixel Grid"
+msgstr "Exibir Grade de Pixels"
 
 msgid "Show Rulers"
 msgstr "Mostrar Réguas"
@@ -383,6 +398,9 @@ msgstr "Atalhos"
 msgid "Backup"
 msgstr "Backup"
 
+msgid "Performance"
+msgstr "Desempenho"
+
 msgid "Indicators"
 msgstr "Indicadores"
 
@@ -548,11 +566,8 @@ msgstr "Pixelorama - Pixelate os seus sonhos!"
 msgid "Developed by Orama Interactive"
 msgstr "Desenvolvido por Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Direitos reservados 2019-2020 Orama Interactive e Colaboradores"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "© 2019-2020 por Orama Interactive e Contribuidores"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "© 2019-por Orama Interactive e Contribuidores"
 
 msgid "Website"
 msgstr "Site"
@@ -642,7 +657,7 @@ msgid "Romanian"
 msgstr "Romeno"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonês"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -707,6 +722,11 @@ msgid "Zoom\n\n"
 msgstr "Zoom\n\n"
 "%s para o botão esquerdo do mouse\n"
 "%s para o botão direito do mouse"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -823,29 +843,68 @@ msgstr "Isométrico"
 msgid "All"
 msgstr "Tudo"
 
-msgid "Grid width:"
-msgstr "Largura da grade:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Define a distância entre linhas verticais da grade"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Altura da grade:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Define a distância entre linhas horizontais da grade"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr ""
 
-msgid "Isometric cell size:"
-msgstr "Tamanho da célula Isométrica:"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Define o tamanho das células numa grade isométrica"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Cor da grade:"
 
 msgid "A color of the grid"
 msgstr "A cor da grade"
+
+msgid "Pixel Grid"
+msgstr "Grade de Pixel"
+
+msgid "Show at zoom:"
+msgstr "Mostrar no zoom:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Define o zoom mínimo no qual a grade de pixel será exibida"
+
+msgid "Pixel grid color:"
+msgstr "Cor da grade de pixels:"
+
+msgid "A color of the pixel grid"
+msgstr "A cor da grade de pixels"
 
 msgid "Transparency"
 msgstr "Transparência"
@@ -882,6 +941,18 @@ msgstr "O verificador transparente segue o nível de zoom da tela"
 
 msgid "Only custom preset can be modified"
 msgstr "Apenas predefinição personalizada pode ser modificada"
+
+msgid "Set application FPS limit:"
+msgstr "Definir o limite de FPS do aplicativo:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "Limitar a 1 FPS quando o app perder o foco"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "Define o limite dos quadros do aplicativo por segundo. Quanto menor o número, menor o uso da CPU, mas o aplicativo fica mais lento, com qualidade ruim e sem resposta. 0 significa que não há limite."
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "Se esta opção for ativada, quando a janela do aplicativo perder o foco, o limite de FPS do aplicativo é definido como 1. Isso ajuda a diminuir o uso da CPU quando estiver inativo. O limite de FPS está sendo redefinido quando o mouse entra na janela do aplicativo."
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1268,7 +1339,7 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Refazer: Excluir Tag do Quadro"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Desfazer: Alterar a duração do quadro"
 
 msgid "Redo: Change frame duration"
 msgstr "Refazer: Mudar Ordem dos Frames"
@@ -1325,7 +1396,7 @@ msgid "Edit Palette"
 msgstr "Editar Paleta"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Crie cores com o componente alpha"
 
 msgid "Get colors only from selection"
 msgstr "Obter cores somente da seleção"
@@ -1372,8 +1443,14 @@ msgstr "Cor de preenchimento padrão:"
 msgid "A default background color of a new image"
 msgstr "Cor de fundo padrão de uma nova imagem"
 
-msgid "Lock aspect ratio:"
-msgstr "Fixar proporção:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Modelos:"
@@ -1395,6 +1472,9 @@ msgstr "Seleção Retangular"
 
 msgid "Zoom"
 msgstr "Zoom"
+
+msgid "Pan"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Seleção de Cores"
@@ -1489,7 +1569,7 @@ msgid "Remove currently selected palette"
 msgstr "Remover paleta selecionada"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Você tem certeza que deseja remover esta paleta? (Não pode ser desfeito)"
 
 msgid "You can't remove more palettes!"
 msgstr "Você não pode remover mais paletas!"
@@ -1510,7 +1590,7 @@ msgid "Move the selected frame to the right."
 msgstr "Mova o frame selecionado para a direita."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Duração do quadro"
 
 msgid "Tiled In Both Axis"
 msgstr ""

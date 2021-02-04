@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-12-11 17:26\n"
+"PO-Revision-Date: 2021-02-02 17:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -126,11 +126,20 @@ msgstr "Löschen"
 msgid "Scale Image"
 msgstr "Bild skalieren"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "Bild zuschneiden"
 
 msgid "Resize Canvas"
 msgstr "Canvas skalieren"
+
+msgid "Centralize Image"
+msgstr "Bild zentrieren"
 
 msgid "Rotate Image"
 msgstr "Bild drehen"
@@ -151,13 +160,19 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Tile Mode"
-msgstr "Tilemodus"
+msgstr "Kachelmodus"
+
+msgid "Window Transparency"
+msgstr ""
 
 msgid "Mirror View"
 msgstr "Spiegel-Ansicht"
 
 msgid "Show Grid"
 msgstr "Zeige Raster"
+
+msgid "Show Pixel Grid"
+msgstr "Pixelraster anzeigen"
 
 msgid "Show Rulers"
 msgstr "Zeige Lineale"
@@ -382,6 +397,9 @@ msgstr "Tastenkürzel"
 msgid "Backup"
 msgstr "Sicherung"
 
+msgid "Performance"
+msgstr "Leistung"
+
 msgid "Indicators"
 msgstr "Indikatoren"
 
@@ -547,11 +565,8 @@ msgstr "Pixelorama - Vollpixele deine Träume!"
 msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive und Mitwirkende"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©Copyright 2019-2020 von Orama Interactive und Mitwirkende"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "@2019-Gegenwart von Orama Interactive und Mitwirkenden"
 
 msgid "Website"
 msgstr "Website"
@@ -707,6 +722,13 @@ msgstr "Zoom\n\n"
 "%s für linke Maustaste\n"
 "%s für rechte Maustaste"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Schwenk\n\n"
+"%s für linke Maustaste\n"
+"%s für rechte Maustaste"
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -805,13 +827,13 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
 msgid "Grid"
-msgstr "Gitter"
+msgstr "Raster"
 
 msgid "Grid type:"
-msgstr "Gittertyp:"
+msgstr "Rastertyp:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Legt den Typ des Gitters zwischen rechteckig, isometrisch oder beidem fest"
+msgstr "Legt den Typ des Rasters zwischen rechteckig, isometrisch oder beidem fest"
 
 msgid "Rectangular"
 msgstr "Rechteckig"
@@ -822,29 +844,68 @@ msgstr "Isometrisch"
 msgid "All"
 msgstr "Alle"
 
-msgid "Grid width:"
-msgstr "Rasterbreite:"
+msgid "Rectangular grid width:"
+msgstr "Breite des Rechteckrasters:"
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Legt fest, wie weit die vertikalen Linien des Gitters voneinander entfernt sind"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr "Legt fest, wie weit die vertikalen Linien des rechteckigen Rasters entfernt sind"
 
-msgid "Grid height:"
-msgstr "Rasterhöhe:"
+msgid "Rectangular grid height:"
+msgstr "Höhe des Rechteckrasters:"
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Legt fest, wie weit die horizontalen Linien des Gitters voneinander entfernt sind"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr "Legt fest, wie weit sich die horizontalen Linien des rechteckigen Rasters voneinander unterscheiden"
 
-msgid "Isometric cell size:"
-msgstr "Isometrische Zellgröße:"
+msgid "Isometric cell bounds width:"
+msgstr "Isometrische Zellengrenzbreite:"
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Legt die Größe der Zellen in einem isometrischen Raster fest"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr "Legt die Breite der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
+
+msgid "Isometric cell bounds height:"
+msgstr "Isometrische Zellgrenzenhöhe:"
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr "Legt die Höhe der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
+
+msgid "Grid offset x:"
+msgstr "X-Rasteroffset:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr "Legt den X-Offset des Rasters vom Ursprung der Leinwand fest (linke obere Ecke des Bildes)"
+
+msgid "Grid offset y:"
+msgstr "Y-Rasteroffset:"
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr "Legt den Y-Offset vom Ursprung der Leinwand fest (linke obere Ecke des Bilds)"
+
+msgid "Draw over Tile Mode:"
+msgstr "Über Kachelmodus zeichnen:"
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr "Wenn deaktiviert, wird das Raster nur über das Originalbild gezeichnet"
 
 msgid "Grid color:"
 msgstr "Rasterfarbe:"
 
 msgid "A color of the grid"
 msgstr "Eine Farbe des Gitters"
+
+msgid "Pixel Grid"
+msgstr "Pixelraster"
+
+msgid "Show at zoom:"
+msgstr "Bei Zoom anzeigen:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Legt den minimalen Zoom fest, bei dem das Pixelraster angezeigt wird"
+
+msgid "Pixel grid color:"
+msgstr "Pixelrasterfarbe:"
+
+msgid "A color of the pixel grid"
+msgstr "Eine Farbe des Pixelrasters"
 
 msgid "Transparency"
 msgstr "Transparenz"
@@ -881,6 +942,18 @@ msgstr "Die transparenten Checker folgen dem Canvas-Zoom-Level"
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
+
+msgid "Set application FPS limit:"
+msgstr "FPS Limit festlegen:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "FPS auf 1 begrenzen, wenn Pixelorama den Fokus verliert"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "Legt die Grenze der Frames pro Sekunde fest. Je niedriger die Anzahl, desto niedriger die CPU-Auslastung, aber die Anwendung wird langsamer und reagier langsamer. 0 bedeutet, dass es keine Grenze gibt."
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verliert, wird die FPS Grenze der Anwendung auf 1 gesetzt. Dies reduziert die CPU-Auslastung im Hintergrund. Das FPS-Limit wird zurückgesetzt, wenn die Maus in das Fenster der Anwendung eintritt."
 
 msgid "Brush:"
 msgstr "Pinsel:"
@@ -1157,7 +1230,7 @@ msgid "Opacity:"
 msgstr "Deckkraft"
 
 msgid "Tile mode opacity:"
-msgstr "Tilemodus Deckkraft:"
+msgstr "Kachelmodus Deckkraft:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
@@ -1371,8 +1444,14 @@ msgstr "Standardfüllfarbe:"
 msgid "A default background color of a new image"
 msgstr "Eine Standard-Hintergrundfarbe eines neuen Bildes"
 
-msgid "Lock aspect ratio:"
-msgstr "Seitenverhältnis sperren:"
+msgid "Lock aspect ratio"
+msgstr "Seitenverhältnis sperren"
+
+msgid "Portrait"
+msgstr "Hochformat"
+
+msgid "Landscape"
+msgstr "Querformat"
 
 msgid "Templates:"
 msgstr "Vorlagen:"
@@ -1394,6 +1473,9 @@ msgstr "Rechteckige Auswahl"
 
 msgid "Zoom"
 msgstr "Zoom"
+
+msgid "Pan"
+msgstr "Schwenk"
 
 msgid "Color Picker"
 msgstr "Farbauswahl"
@@ -1518,5 +1600,5 @@ msgid "Tiled In X Axis"
 msgstr "In X-Achse gekachelt"
 
 msgid "Tiled In Y Axis"
-msgstr "Tiled in Y-Achse"
+msgstr "In Y-Achse gekachelt"
 

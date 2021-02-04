@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2020-12-11 13:12\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -126,11 +126,20 @@ msgstr "Usuń"
 msgid "Scale Image"
 msgstr "Skaluj obraz"
 
+msgid "Pixels"
+msgstr "Piksele"
+
+msgid "Percentage"
+msgstr "Procentowo"
+
 msgid "Crop Image"
 msgstr "Przytnij obraz"
 
 msgid "Resize Canvas"
 msgstr "Zmień rozmiar płótna"
+
+msgid "Centralize Image"
+msgstr "Wyśrodkuj obraz"
 
 msgid "Rotate Image"
 msgstr "Obróć obraz"
@@ -153,11 +162,17 @@ msgstr "Ustawienia"
 msgid "Tile Mode"
 msgstr "Tryb kafelkowy"
 
+msgid "Window Transparency"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Widok lustrzany"
 
 msgid "Show Grid"
 msgstr "Pokaż siatkę"
+
+msgid "Show Pixel Grid"
+msgstr "Pokaż siatkę pixeli"
 
 msgid "Show Rulers"
 msgstr "Pokaż linijki"
@@ -382,6 +397,9 @@ msgstr "Skróty klawiszowe"
 msgid "Backup"
 msgstr "Utwórz kopię zapasową"
 
+msgid "Performance"
+msgstr "Wydajność"
+
 msgid "Indicators"
 msgstr "Wskaźniki"
 
@@ -547,11 +565,8 @@ msgstr "Pixelorama - Spikselizuj swoje marzenia!"
 msgid "Developed by Orama Interactive"
 msgstr "Tworzony przez: Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive i wnoszący wkład"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©Copyright 2019-2020 Orama Interactive i wnoszący wkład"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©2019-teraz przez Oramę Interactive i współtwórców"
 
 msgid "Website"
 msgstr "Strona internetowa"
@@ -641,7 +656,7 @@ msgid "Romanian"
 msgstr "Rumuński"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japoński"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -704,6 +719,13 @@ msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Przybliżenie\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Przesuń\n\n"
 "%s dla lewego przycisku myszy\n"
 "%s dla prawego przycisku myszy"
 
@@ -822,29 +844,68 @@ msgstr "Izometryczna"
 msgid "All"
 msgstr "Wszystkie"
 
-msgid "Grid width:"
+msgid "Rectangular grid width:"
 msgstr "Szerokość siatki:"
 
-msgid "Sets how far apart are vertical lines of the grid"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr "Ustawia jak daleko od siebie są pionowe linie siatki"
 
-msgid "Grid height:"
-msgstr "Wysokość siatki:"
+msgid "Rectangular grid height:"
+msgstr "Długość siatki:"
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Ustawia jak daleko od siebie są poziome linie siatki"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr "Ustawia jak daleko od siebie są pionowe linie siatki"
 
-msgid "Isometric cell size:"
-msgstr "Rozmiar komórki izometrycznej:"
+msgid "Isometric cell bounds width:"
+msgstr "Szerokość granic komórki izometrycznej:"
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Ustawia rozmiar komórek w siatce izometrycznej"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr "Ustawia szerokość osi komórki izometrycznej położonej na granicy pola"
+
+msgid "Isometric cell bounds height:"
+msgstr "Długość granic komórki izometrycznej:"
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr "Ustawia długość osi komórki izometrycznej położonej na granicy pola"
+
+msgid "Grid offset x:"
+msgstr "Przesunięcie siatki x:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr "Ustawia przesunięcie siatki na osi x od pozycji płótna (lewy górny róg obrazu)"
+
+msgid "Grid offset y:"
+msgstr "Przesunięcie siatki y:"
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr "Ustawia przesunięcie siatki na osi y od pozycji płótna (lewy górny róg obrazu)"
+
+msgid "Draw over Tile Mode:"
+msgstr "Rysuj nad trybem kafelkowym:"
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Kolor siatki:"
 
 msgid "A color of the grid"
 msgstr "Kolor siatki"
+
+msgid "Pixel Grid"
+msgstr "Siatka pikseli"
+
+msgid "Show at zoom:"
+msgstr "Pokaż w powiększeniu:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Ustawia minimalne przybliżenie, przy którym siatka pixeli będzie wyświetlana"
+
+msgid "Pixel grid color:"
+msgstr "Kolor siatki pikseli:"
+
+msgid "A color of the pixel grid"
+msgstr "Kolor siatki pikseli"
 
 msgid "Transparency"
 msgstr "Przezroczystość"
@@ -881,6 +942,18 @@ msgstr "Przezroczysta siatka śledzi poziom przybliżenia płótna"
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
+
+msgid "Set application FPS limit:"
+msgstr "Ustaw limit FPS dla aplikacji:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "Ogranicz limit FPS do 1, kiedy okno aplikacji straci skupienie"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "Ustawia limit klatek aplikacji na sekundę. Im niższa liczba, tym niższe zużycie procesora, ale aplikacja staje się wolniejsza. 0 oznacza, że nie ma limitu."
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "Jeśli ta opcja jest włączona i okno aplikacji straci skupienie, to limit FPS aplikacji jest ustawiony na 1. To pomaga obniżyć zużycie procesora podczas bezczynności. Limit FPS zostanie przywrócony, gdy kursor myszy wróci na okno aplikacji."
 
 msgid "Brush:"
 msgstr "Pędzel:"
@@ -1371,8 +1444,14 @@ msgstr "Domyślny kolor wypełnienia:"
 msgid "A default background color of a new image"
 msgstr "Domyślny kolor tła dla nowego obrazu"
 
-msgid "Lock aspect ratio:"
-msgstr "Zablokuj proporcje:"
+msgid "Lock aspect ratio"
+msgstr "Wymuś współczynnik proporcji"
+
+msgid "Portrait"
+msgstr "Orientacja pionowa"
+
+msgid "Landscape"
+msgstr "Orientacja pozioma"
 
 msgid "Templates:"
 msgstr "Szablony:"
@@ -1394,6 +1473,9 @@ msgstr "Zaznaczenie prostokątne"
 
 msgid "Zoom"
 msgstr "Przybliżenie"
+
+msgid "Pan"
+msgstr "Przesunięcie"
 
 msgid "Color Picker"
 msgstr "Próbnik"
