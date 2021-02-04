@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-02-04 09:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,7 +163,7 @@ msgid "Tile Mode"
 msgstr "Tryb kafelkowy"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Przezroczystość okna"
 
 msgid "Mirror View"
 msgstr "Widok lustrzany"
@@ -884,7 +884,7 @@ msgid "Draw over Tile Mode:"
 msgstr "Rysuj nad trybem kafelkowym:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Jeśli wyłączone, siatka będzie rysowana tylko nad oryginalnym obrazem"
 
 msgid "Grid color:"
 msgstr "Kolor siatki:"
