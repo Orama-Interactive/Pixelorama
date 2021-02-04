@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2020-12-11 17:26\n"
+"PO-Revision-Date: 2021-02-02 20:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -126,11 +126,20 @@ msgstr "Elimina"
 msgid "Scale Image"
 msgstr "Scala l'immagine"
 
+msgid "Pixels"
+msgstr "Pixels"
+
+msgid "Percentage"
+msgstr "Percentuale"
+
 msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
 
 msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
+
+msgid "Centralize Image"
+msgstr "Centralizza Immagine"
 
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
@@ -153,11 +162,17 @@ msgstr "Preferenze"
 msgid "Tile Mode"
 msgstr "Modalità Tile"
 
+msgid "Window Transparency"
+msgstr "Trasparenza Finestra"
+
 msgid "Mirror View"
 msgstr "Vista a Specchio"
 
 msgid "Show Grid"
 msgstr "Mostra la griglia"
+
+msgid "Show Pixel Grid"
+msgstr "Mostra Griglia Pixel"
 
 msgid "Show Rulers"
 msgstr "Mostra i righelli"
@@ -383,6 +398,9 @@ msgstr "Scorciatoie da tastiera"
 msgid "Backup"
 msgstr "Backup"
 
+msgid "Performance"
+msgstr "Prestazioni"
+
 msgid "Indicators"
 msgstr "Indicatori"
 
@@ -548,11 +566,8 @@ msgstr "Pixelorama - Pixelate i vostri sogni!"
 msgid "Developed by Orama Interactive"
 msgstr "Sviluppato da Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive e contributori"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 di Orama Interactive e contributori"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©2019-presente da Orama Interactive e contributori"
 
 msgid "Website"
 msgstr "Sito web"
@@ -708,6 +723,13 @@ msgstr "Zoom\n\n"
 "%s per il pulsante sinistro del mouse\n"
 "%s per il pulsante destro del mouse"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Pan\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse"
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -823,29 +845,68 @@ msgstr "Isometrica"
 msgid "All"
 msgstr "Tutte"
 
-msgid "Grid width:"
-msgstr "Larghezza griglia:"
+msgid "Rectangular grid width:"
+msgstr "Larghezza della griglia rettangolare:"
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Imposta quanto distante sono le linee verticali della griglia"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr "Imposta la distanza tra le linee verticali della griglia rettangolare"
 
-msgid "Grid height:"
-msgstr "Altezza della griglia:"
+msgid "Rectangular grid height:"
+msgstr "Altezza della griglia rettangolare:"
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Imposta quanto distano le linee orizzontali della griglia"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr "Imposta la distanza tra le linee orizzontali della griglia rettangolare"
 
-msgid "Isometric cell size:"
-msgstr "Dimensione delle celle isometriche:"
+msgid "Isometric cell bounds width:"
+msgstr "Larghezza dei limiti delle celle isometrice:"
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Imposta la dimensione delle celle in una griglia isometrica"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr "Imposta la larghezza del riquadro di delimitazione dell'asse isometrico allineato"
+
+msgid "Isometric cell bounds height:"
+msgstr "Altezza dei limiti delle celle isometrice:"
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr "Imposta l'altezza del riquadro di delimitazione dell'asse isometrico allineato"
+
+msgid "Grid offset x:"
+msgstr "Spostamento griglia x:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr "Imposta lo spostamento x della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
+
+msgid "Grid offset y:"
+msgstr "Spostamento griglia y:"
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr "Imposta lo spostamento y della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
+
+msgid "Draw over Tile Mode:"
+msgstr "Disegna sulla modalità piastrelle:"
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr "Se disattivata, la griglia verrà disegnata solo sopra l'immagine originale"
 
 msgid "Grid color:"
 msgstr "Colore della griglia:"
 
 msgid "A color of the grid"
 msgstr "Un colore della griglia"
+
+msgid "Pixel Grid"
+msgstr "Griglia Pixel"
+
+msgid "Show at zoom:"
+msgstr "Visualizza allo zoom:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Imposta lo zoom minimo con cui verrà visualizzata la griglia dei pixel"
+
+msgid "Pixel grid color:"
+msgstr "Colore della griglia pixel:"
+
+msgid "A color of the pixel grid"
+msgstr "Un colore della griglia pixel"
 
 msgid "Transparency"
 msgstr "Trasparenza"
@@ -882,6 +943,18 @@ msgstr "Il checker trasparente segue il livello di zoom del canvas"
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
+
+msgid "Set application FPS limit:"
+msgstr "Imposta limite FPS dell'applicazione:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "Limita FPS a 1 quando l'applicazione perde il focus"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "Imposta il limite dei quadri dell'applicazione al secondo. Più basso è il numero, minore è l'uso della CPU, ma l'applicazione diventa più lenta, choppier e non reattiva. 0 significa che non c'è limite."
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "Se attivata, quando la finestra dell'applicazione perde il fuoco, il limite FPS dell'applicazione è impostato a 1. Questo aiuta a ridurre l'utilizzo della CPU quando è inattivo. Il limite FPS viene azzerato quando il mouse entra nella finestra dell'applicazione."
 
 msgid "Brush:"
 msgstr "Pennello:"
@@ -1372,8 +1445,14 @@ msgstr "Colore di riempimento predefinito:"
 msgid "A default background color of a new image"
 msgstr "Un colore di sfondo predefinito di una nuova immagine"
 
-msgid "Lock aspect ratio:"
-msgstr "Blocca proporzioni:"
+msgid "Lock aspect ratio"
+msgstr "Blocca proporzioni"
+
+msgid "Portrait"
+msgstr "Ritratto"
+
+msgid "Landscape"
+msgstr "Paesaggio"
 
 msgid "Templates:"
 msgstr "Modelli:"
@@ -1395,6 +1474,9 @@ msgstr "Selezione rettangolare"
 
 msgid "Zoom"
 msgstr "Zoom"
+
+msgid "Pan"
+msgstr "Pan"
 
 msgid "Color Picker"
 msgstr "Selettore colore"

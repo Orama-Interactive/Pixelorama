@@ -10,214 +10,229 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Одустани"
 
 msgid "Open"
-msgstr ""
+msgstr "Отвори"
 
 msgid "Save"
-msgstr ""
+msgstr "Сачувај"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Молимо вас потврдите..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Име фајла:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Величина слике"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Величина канваса"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Величина фрејма"
 
 msgid "Width:"
-msgstr ""
+msgstr "Ширина:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Висина:"
 
 msgid "Center"
-msgstr ""
+msgstr "Центар"
 
 msgid "File"
-msgstr ""
+msgstr "Фајл"
 
 msgid "Edit"
-msgstr ""
+msgstr "Уреди"
 
 msgid "View"
-msgstr ""
+msgstr "Преглед"
 
 msgid "Image"
-msgstr ""
+msgstr "Слика"
 
 msgid "Effects"
-msgstr ""
+msgstr "Ефекти"
 
 msgid "Help"
-msgstr ""
+msgstr "Помоћ"
 
 msgid "New"
-msgstr ""
+msgstr "Ново"
 
 msgid "New..."
-msgstr ""
+msgstr "Ново..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Отвори..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Сачувај..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Сачувај као..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Користи ZSTD компресију"
 
 msgid "Import"
-msgstr ""
+msgstr "Увези"
 
 msgid "Export"
-msgstr ""
+msgstr "Извези"
 
 msgid "Export..."
-msgstr ""
+msgstr "Извези..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Извези као..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Извези PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Извези PNG као..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Изађи"
 
 msgid "Undo"
-msgstr ""
+msgstr "Опозови"
 
 msgid "Redo"
-msgstr ""
+msgstr "Вратити"
 
 msgid "Copy"
-msgstr ""
+msgstr "Копирај"
 
 msgid "Cut"
-msgstr ""
+msgstr "Исеци"
 
 msgid "Paste"
-msgstr ""
+msgstr "Налепи"
 
 msgid "Delete"
-msgstr ""
+msgstr "Обриши"
 
 msgid "Scale Image"
+msgstr "Скалирај слику"
+
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
 msgstr ""
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Исеци слику"
 
 msgid "Resize Canvas"
+msgstr "Промијените величину канваса"
+
+msgid "Centralize Image"
 msgstr ""
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Ротирај слику"
 
 msgid "Clear Selection"
-msgstr ""
+msgstr "Очисти избор"
 
 msgid "Flip"
-msgstr ""
+msgstr "Обрни"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Обрни хоризонтално"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Обрни вертикално"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Подешавања"
 
 msgid "Tile Mode"
+msgstr ""
+
+msgid "Window Transparency"
 msgstr ""
 
 msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
+msgstr "Прикажи решетку"
+
+msgid "Show Pixel Grid"
 msgstr ""
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Прикажи лењир"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Прикажи помоћнике"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Прикажи траку са анимацијама"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Зен мод"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Пуноекрански мод"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Попуни бојом:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Отвори фајл"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Отвори фајл(ове)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Опције увоза"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Увези као:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Скорашњи пројекти"
 
 msgid "New tab"
-msgstr ""
+msgstr "Нови таб"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Нови фрејм"
 
 msgid "New layer"
-msgstr ""
+msgstr "Нови слој"
 
 msgid "New palette"
-msgstr ""
+msgstr "Нова палета"
 
 msgid "New brush"
-msgstr ""
+msgstr "Нова четкица"
 
 msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Хоризонтални фрејмови:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Вертикални фрејмови:"
 
 msgid "Brush type:"
 msgstr ""
@@ -305,91 +320,94 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Позадина:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Смер:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Напред"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Назад"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Пинг-Понг"
 
 msgid "Columns"
-msgstr ""
+msgstr "Колоне"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Колоне:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Редови"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Редови:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Патх:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Директоријуми & Фајлови:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Направи фолдер"
 
 msgid "File:"
-msgstr ""
+msgstr "Фајл:"
 
 msgid "Interpolation:"
 msgstr ""
 
 msgid "Nearest"
-msgstr ""
+msgstr "Најближи"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Билинеарно"
 
 msgid "Cubic"
 msgstr ""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Трилинеарно"
 
 msgid "General"
-msgstr ""
+msgstr "Опште"
 
 msgid "Startup"
-msgstr ""
+msgstr "Покретање"
 
 msgid "Language"
-msgstr ""
+msgstr "Језик"
 
 msgid "Interface"
-msgstr ""
+msgstr "Интерфејс"
 
 msgid "Themes"
-msgstr ""
+msgstr "Теме"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Канвас"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Пречице"
 
 msgid "Backup"
-msgstr ""
+msgstr "Резервна копија"
+
+msgid "Performance"
+msgstr "Перформансе"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Индикатори"
 
 msgid "On"
-msgstr ""
+msgstr "Укључено"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Врати подразумевану вриједност"
 
 msgid "Smooth Zoom"
 msgstr ""
@@ -401,40 +419,40 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Ништа"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Боја:"
 
 msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "Системски језик"
 
 msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "Тамно"
 
 msgid "Gray"
-msgstr ""
+msgstr "Сиво"
 
 msgid "Blue"
-msgstr ""
+msgstr "Плаво"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Карамел"
 
 msgid "Light"
-msgstr ""
+msgstr "Светло"
 
 msgid "Purple"
-msgstr ""
+msgstr "Љубичасто"
 
 msgid "Only affect selection"
 msgstr ""
@@ -443,13 +461,13 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Тренутни фрејм"
 
 msgid "All frames"
-msgstr ""
+msgstr "Сви фрејмови"
 
 msgid "All projects"
-msgstr ""
+msgstr "Сви пројекти"
 
 msgid "Invert Colors"
 msgstr ""
@@ -547,10 +565,7 @@ msgstr ""
 msgid "Developed by Orama Interactive"
 msgstr ""
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
-
-msgid "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
@@ -575,118 +590,118 @@ msgid "Translators"
 msgstr ""
 
 msgid "English"
-msgstr ""
+msgstr "Енглески"
 
 msgid "Greek"
-msgstr ""
+msgstr "Грчки"
 
 msgid "French"
-msgstr ""
+msgstr "Француски"
 
 msgid "German"
-msgstr ""
+msgstr "Њемачки"
 
 msgid "Polish"
-msgstr ""
+msgstr "Пољски"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Бразилски португалски"
 
 msgid "Russian"
-msgstr ""
+msgstr "Руски"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Кинески поједностављени"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Кинески традиционални"
 
 msgid "Italian"
-msgstr ""
+msgstr "Италијански"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Летонски"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Шпански"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Каталонски"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Есперанто"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Индонежански"
 
 msgid "Czech"
-msgstr ""
+msgstr "Чешки"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Арапски"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Турски"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвешки"
 
 msgid "Korean"
-msgstr ""
+msgstr "Корејски"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Мађарски"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Румунски"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Јапански"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Развојни тим"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Главни програмер"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI дизајнер"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub сарадници"
 
 msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "безимено"
 
 msgid "imported"
-msgstr ""
+msgstr "увезено"
 
 msgid "copy"
-msgstr ""
+msgstr "копирано"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Да ли сте сигурни да желите да изађете из Pixelorama-е?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Несачуване слика"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Имате несачуване измене. Ако наставите даље, сав напредак ће бити изгубљен."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Сачувајте прије изласка?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Имате несачуваних измјена. Како желите да наставите?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Сачувај & изађи"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Изађи без чувања"
 
 msgid "Utility Tools"
 msgstr ""
@@ -698,6 +713,11 @@ msgid "Rectangular Selection\n\n"
 msgstr ""
 
 msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr ""
@@ -803,28 +823,67 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Grid width:"
+msgid "Rectangular grid width:"
 msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
 
-msgid "Grid height:"
+msgid "Rectangular grid height:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
-msgid "Isometric cell size:"
+msgid "Isometric cell bounds width:"
 msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
@@ -861,6 +920,18 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Only custom preset can be modified"
+msgstr ""
+
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1343,7 +1414,13 @@ msgstr ""
 msgid "A default background color of a new image"
 msgstr ""
 
-msgid "Lock aspect ratio:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
 msgstr ""
 
 msgid "Templates:"
@@ -1365,6 +1442,9 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"

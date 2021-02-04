@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2020-12-11 13:12\n"
+"PO-Revision-Date: 2021-02-02 17:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,13 +28,13 @@ msgid "Please Confirm..."
 msgstr "Veuillez confirmer..."
 
 msgid "File Name:"
-msgstr "Nom du fichier:"
+msgstr "Nom du fichier :"
 
 msgid "Image Size"
 msgstr "Taille de l'image"
 
 msgid "Canvas Size"
-msgstr "Taille du canevas"
+msgstr "Taille du Canevas"
 
 msgid "Frame Size"
 msgstr "Taille de la frame"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Hauteur :"
 
 msgid "Center"
-msgstr "Centre"
+msgstr "Centrer"
 
 msgid "File"
 msgstr "Fichier"
@@ -88,7 +88,7 @@ msgid "Import"
 msgstr "Importer"
 
 msgid "Export"
-msgstr "Exporter une image"
+msgstr "Exporter"
 
 msgid "Export..."
 msgstr "Exporter..."
@@ -97,7 +97,7 @@ msgid "Export as..."
 msgstr "Exporter en tant que..."
 
 msgid "Export PNG..."
-msgstr "Exporter une image PNG..."
+msgstr "Exporter sous format PNG..."
 
 msgid "Export PNG as..."
 msgstr "Exporter une image PNG sous..."
@@ -106,10 +106,10 @@ msgid "Quit"
 msgstr "Quitter"
 
 msgid "Undo"
-msgstr "Défaire"
+msgstr "Annuler"
 
 msgid "Redo"
-msgstr "Refaire"
+msgstr "Rétablir"
 
 msgid "Copy"
 msgstr "Copier"
@@ -126,23 +126,32 @@ msgstr "Supprimer"
 msgid "Scale Image"
 msgstr "Redimensionner l'image"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "Rogner l'image"
 
 msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
 
+msgid "Centralize Image"
+msgstr ""
+
 msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Clear Selection"
-msgstr "Ne rien sélectionner"
+msgstr "Effacer la Sélection"
 
 msgid "Flip"
 msgstr "Retourner"
 
 msgid "Flip Horizontal"
-msgstr "Miroir horizontal"
+msgstr "Retourner Horizontalement"
 
 msgid "Flip Vertical"
 msgstr "Miroir vertical"
@@ -153,11 +162,17 @@ msgstr "Préférences"
 msgid "Tile Mode"
 msgstr "Mode tuile"
 
-msgid "Mirror View"
+msgid "Window Transparency"
 msgstr ""
+
+msgid "Mirror View"
+msgstr "Vue Miroir"
 
 msgid "Show Grid"
 msgstr "Afficher la grille"
+
+msgid "Show Pixel Grid"
+msgstr "Afficher la grille des pixels"
 
 msgid "Show Rulers"
 msgstr "Afficher les règles"
@@ -166,7 +181,7 @@ msgid "Show Guides"
 msgstr "Afficher les guides"
 
 msgid "Show Animation Timeline"
-msgstr "Afficher la chronologie de l'animation"
+msgstr "Afficher la Timeline d'Animation"
 
 msgid "Zen Mode"
 msgstr "Mode Zen"
@@ -214,16 +229,16 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Frame horizontale :"
+msgstr "Frames horizontaux :"
 
 msgid "Vertical frames:"
-msgstr "Frame verticale :"
+msgstr "Frames verticaux :"
 
 msgid "Brush type:"
-msgstr "Type de pinceau:"
+msgstr "Type de pinceau :"
 
 msgid "File brush"
-msgstr "Pinceau du fichier"
+msgstr "Fichier du Pinceau"
 
 msgid "Project brush"
 msgstr "Pinceau du projet"
@@ -232,10 +247,10 @@ msgid "Random brush"
 msgstr "Pinceau aléatoire"
 
 msgid "Save Sprite as .pxo"
-msgstr "Enregistrer la sprite au format .pxo"
+msgstr "Enregistrer le sprite au format .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exporter le Sprite en .png"
+msgstr "Exporter le Sprite sous format .png"
 
 msgid "Export Sprite"
 msgstr "Exporter le sprite"
@@ -267,7 +282,7 @@ msgid "All Frames"
 msgstr "Toutes les frames"
 
 msgid "Spritesheet"
-msgstr "Feuille de calque"
+msgstr "Spritesheet"
 
 msgid "Animation"
 msgstr "Animation"
@@ -285,13 +300,13 @@ msgid "Browse"
 msgstr "Parcourir"
 
 msgid "Resize:"
-msgstr "Redimensionner:"
+msgstr "Redimensionner :"
 
 msgid "Cancel Export"
 msgstr "Annuler l'exportation"
 
 msgid "Alert!"
-msgstr "Attention !"
+msgstr "Alerte !"
 
 msgid "Select Current Folder"
 msgstr "Sélectionner le dossier actuel"
@@ -315,7 +330,7 @@ msgid "Forward"
 msgstr "En avant"
 
 msgid "Backwards"
-msgstr "Reculer"
+msgstr "En Arrière"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
@@ -324,13 +339,13 @@ msgid "Columns"
 msgstr "Colonnes"
 
 msgid "Columns:"
-msgstr "Colonnes:"
+msgstr "Colonnes :"
 
 msgid "Rows"
 msgstr "Lignes"
 
 msgid "Rows:"
-msgstr "Lignes:"
+msgstr "Lignes :"
 
 msgid "Path:"
 msgstr "Chemin :"
@@ -375,13 +390,16 @@ msgid "Themes"
 msgstr "Thèmes"
 
 msgid "Canvas"
-msgstr "Toile"
+msgstr "Canevas"
 
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
 msgid "Backup"
 msgstr "Sauvegarde"
+
+msgid "Performance"
+msgstr "Performance"
 
 msgid "Indicators"
 msgstr "Indicateurs"
@@ -399,10 +417,10 @@ msgid "Adds a smoother transition when zooming in or out"
 msgstr "Ajoute une transition plus douce lors d'un zoom avant ou arrière"
 
 msgid "Tablet pressure sensitivity:"
-msgstr "Sensibilité à la pression de la tablette:"
+msgstr "Sensibilité à la pression de la tablette :"
 
 msgid "None"
-msgstr "Aucun"
+msgstr "Aucune"
 
 msgid "Affect Brush's Alpha"
 msgstr "Affecter l'Alpha du pinceau"
@@ -411,7 +429,7 @@ msgid "Color:"
 msgstr "Couleur :"
 
 msgid "Guide color:"
-msgstr "Couleur du guide:"
+msgstr "Couleur du guide :"
 
 msgid "System Language"
 msgstr "Langue système"
@@ -438,7 +456,7 @@ msgid "Purple"
 msgstr "Violet"
 
 msgid "Only affect selection"
-msgstr "N’affecter que la sélection"
+msgstr "Affecter uniquement la sélection"
 
 msgid "Current cel"
 msgstr "Cellule actuelle"
@@ -456,16 +474,16 @@ msgid "Invert Colors"
 msgstr "Inverser les couleurs"
 
 msgid "Modify Red Channel"
-msgstr "Modifier Canal Rouge"
+msgstr "Modifier le Canal Rouge"
 
 msgid "Modify Green Channel"
-msgstr "Modifier Canal Vert"
+msgstr "Modifier le Canal Vert"
 
 msgid "Modify Blue Channel"
-msgstr "Modifier Canal Bleu"
+msgstr "Modifier le Canal Bleu"
 
 msgid "Modify Alpha Channel"
-msgstr "Modifier Canal Alpha"
+msgstr "Modifier le Canal Alpha"
 
 msgid "Desaturation"
 msgstr "Désaturation"
@@ -548,11 +566,8 @@ msgstr "Pixelorama - Pixélisez vos rêves !"
 msgid "Developed by Orama Interactive"
 msgstr "Développé par Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive et contributeurs"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 par Orama Interactive et contributeurs"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©2019-présent par Orama Interactive et contributeurs"
 
 msgid "Website"
 msgstr "Site Web"
@@ -642,7 +657,7 @@ msgid "Romanian"
 msgstr "Roumain"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonais"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
@@ -707,6 +722,13 @@ msgid "Zoom\n\n"
 msgstr "Zoom\n\n"
 "%s pour le bouton de souris gauche\n"
 "%s pour le bouton de souris droit"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Déplacer\n\n"
+"%s pour le bouton gauche de la souris\n"
+"%s pour le bouton droit de la souris"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -823,29 +845,68 @@ msgstr "Isométrique"
 msgid "All"
 msgstr "Tous"
 
-msgid "Grid width:"
-msgstr "Largeur de la grille:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Définit la distance entre les lignes verticales de la grille"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Hauteur de la grille:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Définit la distance entre les lignes horizontales de la grille"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr ""
 
-msgid "Isometric cell size:"
-msgstr "Taille des cellules isométriques :"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Définit la taille des cellules dans une grille isométrique"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Couleur de la grille:"
 
 msgid "A color of the grid"
 msgstr "Une couleur de la grille"
+
+msgid "Pixel Grid"
+msgstr "Grille des pixels"
+
+msgid "Show at zoom:"
+msgstr "Afficher au zoom :"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Définit le zoom minimal à partir duquel la grille de pixels sera affichée"
+
+msgid "Pixel grid color:"
+msgstr "Couleur de la grille de pixels :"
+
+msgid "A color of the pixel grid"
+msgstr "Une couleur de la grille de pixels"
 
 msgid "Transparency"
 msgstr "Transparence"
@@ -882,6 +943,18 @@ msgstr "Le damier transparent suit le niveau de zoom du canevas"
 
 msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
+
+msgid "Set application FPS limit:"
+msgstr "Définir la limite FPS de l'application :"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "Limiter le FPS à 1 lorsque l'application perd le focus"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "Si cette option est activée, lorsque la fenêtre de l'application perd le focus, la limite FPS de l'application est définie à 1. Cela aide à réduire l'utilisation du processeur en cas d'inactivité. La limite FPS est réinitialisée lorsque la souris entre dans la fenêtre de l'application."
 
 msgid "Brush:"
 msgstr "Brosse :"
@@ -1372,8 +1445,14 @@ msgstr "Couleur de remplissage par défaut:"
 msgid "A default background color of a new image"
 msgstr "Une couleur de fond par défaut d'une nouvelle image"
 
-msgid "Lock aspect ratio:"
-msgstr "Corriger le ratio d'aspect:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Modèles:"
@@ -1395,6 +1474,9 @@ msgstr "Sélection rectangulaire"
 
 msgid "Zoom"
 msgstr "Zoom"
+
+msgid "Pan"
+msgstr "Déplacer"
 
 msgid "Color Picker"
 msgstr "Sélecteur de couleurs"
@@ -1513,11 +1595,11 @@ msgid "Frame duration"
 msgstr "Durée de la frame"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Mode Tuile sur les Deux Axes"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Mode Tuile sur l'Axe X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Mode Tuile sur l'Axe Y"
 

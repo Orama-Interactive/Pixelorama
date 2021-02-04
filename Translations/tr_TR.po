@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-12-11 13:12\n"
+"PO-Revision-Date: 2021-02-02 17:25\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -126,11 +126,20 @@ msgstr "Sil"
 msgid "Scale Image"
 msgstr "Resmi Ölçüle"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "Resmi Kes"
 
 msgid "Resize Canvas"
 msgstr "Tuvali yeniden boyutlandır"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
@@ -153,11 +162,17 @@ msgstr "Tercihler"
 msgid "Tile Mode"
 msgstr "Karo Modu"
 
+msgid "Window Transparency"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Yansima"
 
 msgid "Show Grid"
 msgstr "Kılavuz çizgilerini göster"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Cetveli Göster"
@@ -383,6 +398,9 @@ msgstr "Kısayollar"
 msgid "Backup"
 msgstr "Yedekleme"
 
+msgid "Performance"
+msgstr ""
+
 msgid "Indicators"
 msgstr "Göstergeler"
 
@@ -548,11 +566,8 @@ msgstr "Pixelorama - Hayallerini pikselleştir!"
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Bütün hakları 2019-2020 Orama interaktif ve destekçileri tarafından saklı bulunmaktadır"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 Orama Interactive ve destekçileri tarafından"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "İnternet sitesi"
@@ -642,7 +657,7 @@ msgid "Romanian"
 msgstr "Rumence"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonca"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -706,6 +721,11 @@ msgid "Zoom\n\n"
 "%s for right mouse button"
 msgstr "%s için sol tıkla\n"
 "%s için sağ tıkla"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -822,29 +842,68 @@ msgstr "İzometrik"
 msgid "All"
 msgstr "Tümü"
 
-msgid "Grid width:"
-msgstr "Kılavuz çizgi genişliği:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Izgaradaki dikey çizgilerinin arasındaki boşlukları belirler"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Izgara yüksekliği:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Izgaradaki ufuk çizgilerinin arasındaki boşlukları belirler"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr ""
 
-msgid "Isometric cell size:"
-msgstr "Izometrik hücre boyutu:"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "İzometrik ızgaradaki hücrelerin boyutunu belirler"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
 
 msgid "Grid color:"
 msgstr "Izgara rengi:"
 
 msgid "A color of the grid"
 msgstr "Izgaranın rengi"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
 
 msgid "Transparency"
 msgstr "Şeffaflık"
@@ -881,6 +940,18 @@ msgstr "Geçirgen dama deseni tuval ölçek seviyesini takip eder"
 
 msgid "Only custom preset can be modified"
 msgstr "Sadece özel yapılmış seçenekler değiştirilebilir"
+
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Fırça:"
@@ -1367,8 +1438,14 @@ msgstr "Varsayılan dolgu rengi:"
 msgid "A default background color of a new image"
 msgstr "Yeni resmin varsayılan arkaplan rengi"
 
-msgid "Lock aspect ratio:"
-msgstr "En boy oranlarını kilitle:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
 
 msgid "Templates:"
 msgstr "Şablonlar:"
@@ -1390,6 +1467,9 @@ msgstr "Dikdörtgen Seçim"
 
 msgid "Zoom"
 msgstr "Yakınlaştır"
+
+msgid "Pan"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Renk Seçici"

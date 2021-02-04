@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-12-11 16:28\n"
+"PO-Revision-Date: 2021-02-02 19:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -126,11 +126,20 @@ msgstr "Ștergere"
 msgid "Scale Image"
 msgstr "Scalare imagine"
 
+msgid "Pixels"
+msgstr "Pixeli"
+
+msgid "Percentage"
+msgstr "Procentaj"
+
 msgid "Crop Image"
 msgstr "Decupare imagine"
 
 msgid "Resize Canvas"
 msgstr "Redimensionare pânză"
+
+msgid "Centralize Image"
+msgstr "Centralizare imagine"
 
 msgid "Rotate Image"
 msgstr "Rotire imagine"
@@ -153,11 +162,17 @@ msgstr "Preferințe"
 msgid "Tile Mode"
 msgstr "Mod mozaic"
 
+msgid "Window Transparency"
+msgstr "Transparența ferestrei"
+
 msgid "Mirror View"
 msgstr "Vizualizare oglindită"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"
+
+msgid "Show Pixel Grid"
+msgstr "Afișare grilă de pixeli"
 
 msgid "Show Rulers"
 msgstr "Afișare rigle"
@@ -383,6 +398,9 @@ msgstr "Comenzi rapide"
 msgid "Backup"
 msgstr "Copie de rezervă"
 
+msgid "Performance"
+msgstr "Performanță"
+
 msgid "Indicators"
 msgstr "Indicatori"
 
@@ -393,7 +411,7 @@ msgid "Restore default value"
 msgstr "Resetare la valoarea implicită"
 
 msgid "Smooth Zoom"
-msgstr "Panoramare lentă"
+msgstr "Transfocare lentă"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Adaugă o tranziție mai lentă la apropiere sau depărtare"
@@ -548,11 +566,8 @@ msgstr "Pixelorama – Pixelează-ți visele!"
 msgid "Developed by Orama Interactive"
 msgstr "Dezvoltat de Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Drepturi de autor 2019-2020 Orama Interactive și contribuitorii"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 de Orama Interactive și contribuitorii"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©2019-prezent de Orama Interactive și contribuitorii"
 
 msgid "Website"
 msgstr "Pagină de internet"
@@ -704,6 +719,13 @@ msgstr "Selecție dreptunghiulară\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
+msgstr "Transfocare\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr "Panoramare\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
@@ -823,29 +845,68 @@ msgstr "Izometrică"
 msgid "All"
 msgstr "Ambele"
 
-msgid "Grid width:"
-msgstr "Lățimea grilei:"
+msgid "Rectangular grid width:"
+msgstr "Lățimea grilei dreptunghiulare:"
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Setează la ce distanță să se afle una față de cealaltă liniile verticale ale grilei"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei dreptunghiulare"
 
-msgid "Grid height:"
-msgstr "Înălțimea grilei:"
+msgid "Rectangular grid height:"
+msgstr "Înălțimea grilei dreptunghiulare:"
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Setează la ce distanță să se afle una față de cealaltă liniile orizontale ale grilei"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei dreptunghiulare"
 
-msgid "Isometric cell size:"
-msgstr "Dimensiunea celulei izometrice:"
+msgid "Isometric cell bounds width:"
+msgstr "Lățimea limitelor celulelor izometrice:"
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Setează dimensiunea celulelor dintr-o grilă izometrică"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr "Setează lățimea casetei de delimitare aliniate axial a celulei izometrice"
+
+msgid "Isometric cell bounds height:"
+msgstr "Înălțimea limitelor celulelor izometrice:"
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr "Setează înălțimea casetei de delimitare aliniate axial a celulei izometrice"
+
+msgid "Grid offset x:"
+msgstr "Decalaj grilă x:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr "Setează decalajul x al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
+
+msgid "Grid offset y:"
+msgstr "Decalaj grilă y:"
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr "Setează decalajul y al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
+
+msgid "Draw over Tile Mode:"
+msgstr "Afișare peste modul mozaic:"
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr "Dacă opțiunea este dezactivată, grila va fi afișată doar peste imaginea originală"
 
 msgid "Grid color:"
 msgstr "Culoarea grilei:"
 
 msgid "A color of the grid"
 msgstr "Culoarea atribuită grilei"
+
+msgid "Pixel Grid"
+msgstr "Grilă de pixeli"
+
+msgid "Show at zoom:"
+msgstr "Afișare la transfocare:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Setează nivelul minim de transfocare la care va fi afișată grila de pixeli"
+
+msgid "Pixel grid color:"
+msgstr "Culoarea grilei de pixeli:"
+
+msgid "A color of the pixel grid"
+msgstr "O culoare a grilei de pixeli"
 
 msgid "Transparency"
 msgstr "Transparență"
@@ -875,13 +936,25 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr "Carourile transparente urmăresc mișcarea pânzei"
 
 msgid "Follow Canvas Zoom Level"
-msgstr "Urmărește nivelul de panoramare al pânzei"
+msgstr "Urmărește nivelul de transfocare al pânzei"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Carourile transparente urmăresc nivelul de panoramare al pânzei"
+msgstr "Carourile transparente urmăresc nivelul de transfocare al pânzei"
 
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
+
+msgid "Set application FPS limit:"
+msgstr "Setează limita CPS a aplicației:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "Limitează CPS la 1 când aplicația pierde focalizarea"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "Dacă această opțiune este activată, limita CPS a aplicației este setată la 1 în momentul în care fereastra aplicației pierde focalizarea. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Limita CPS se resetează când mausul intră în fereastra aplicației."
 
 msgid "Brush:"
 msgstr "Pensulă:"
@@ -986,7 +1059,7 @@ msgid "Fit to frame"
 msgstr "Potrivire la cadru"
 
 msgid "100% Zoom"
-msgstr "Panoramare 100%"
+msgstr "Transfocare 100%"
 
 msgid "Mirroring"
 msgstr "Oglindire"
@@ -1372,8 +1445,14 @@ msgstr "Culoare implicită de umplere:"
 msgid "A default background color of a new image"
 msgstr "Culoarea implicită de fundal a unei imagini noi"
 
-msgid "Lock aspect ratio:"
-msgstr "Blocare raport aspect:"
+msgid "Lock aspect ratio"
+msgstr "Blocare raport aspect"
+
+msgid "Portrait"
+msgstr "Portret"
+
+msgid "Landscape"
+msgstr "Peisaj"
 
 msgid "Templates:"
 msgstr "Șabloane:"
@@ -1394,6 +1473,9 @@ msgid "Rectangular Selection"
 msgstr "Selecție dreptunghiulară"
 
 msgid "Zoom"
+msgstr "Transfocare"
+
+msgid "Pan"
 msgstr "Panoramare"
 
 msgid "Color Picker"
