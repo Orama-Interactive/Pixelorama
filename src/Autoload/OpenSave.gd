@@ -428,6 +428,16 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_no := 0) -> void
 			image.convert(Image.FORMAT_RGBA8)
 			image.lock()
 			frame.cels[layer_index] = (Cel.new(image, 1))
+	
+	project.undos += 1
+	project.undo_redo.create_action("Replaced Frame")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
+
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.commit_action()
 
 
 func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
