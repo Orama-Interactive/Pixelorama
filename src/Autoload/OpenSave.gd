@@ -412,31 +412,44 @@ func open_image_as_spritesheet_layer(path : String, image : Image, file_name : S
 				if image_no == 1:
 					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no - 1)
 				else:
-					open_image_at_frame(cropped_image, 1, start_frame + (image_no - 1))
+					open_image_at_frame(cropped_image, Global.current_project.layers.size() - 1, start_frame + (image_no - 1))
 			else:
 				# if no more frames are present then start making new frames
-				open_image_as_new_frame(cropped_image, 1)
+				open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
 
 
-func open_image_at_frame(image : Image, layer_index := 0, frame_no := 0) -> void:
+func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_frames : Array = project.frames.duplicate()
-	var frame = project.frames[frame_no]
-	for i in project.frames.size():
-		if i == frame_no:
-			image.convert(Image.FORMAT_RGBA8)
-			image.lock()
-			frame.cels[layer_index] = (Cel.new(image, 1))
-	
+
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Frame")
-	project.undo_redo.add_do_method(Global, "redo")
-	project.undo_redo.add_undo_method(Global, "undo")
+	
+	var frames :Array = []
+	# create a duplicate of "project.frames"
+	for i in project.frames.size():
+		var frame := Frame.new()
+		frame.cels = project.frames[i].cels.duplicate(true)
+		frames.append(frame)
+	
+	for i in project.frames.size():
+		if i == frame_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			frames[i].cels[layer_index] = (Cel.new(image, 1))
+			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
+			print(frames[i].cels)
+			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+			print(project.frames[i].cels)
 
-	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_property(project, "frames", frames)
+	project.undo_redo.add_do_property(project, "current_frame", frame_index)
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
 	project.undo_redo.commit_action()
 
 
