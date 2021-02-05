@@ -1,276 +1,623 @@
-extends ConfirmationDialog
+extends Node
 
 
-enum ImageImportOptions {NEW_TAB, SPRITESHEET_TAB, SPRITESHEET_LAYER, NEW_FRAME, REPLACE_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
-enum BrushTypes {FILE, PROJECT, RANDOM}
+var current_save_paths := [] # Array of strings
+# Stores a filename of a backup file in user:// until user saves manually
+var backup_save_paths := [] # Array of strings
 
-var path : String
-var image : Image
-var current_import_option : int = ImageImportOptions.NEW_TAB
-var spritesheet_horizontal := 1
-var spritesheet_vertical := 1
-var brush_type : int = BrushTypes.FILE
-
-onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
-onready var image_size_label : Label = $VBoxContainer/SizeContainer/ImageSizeLabel
-onready var frame_size_label : Label = $VBoxContainer/SizeContainer/FrameSizeLabel
-onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
-onready var spritesheet_layer_options = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
-onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
-onready var replace_frame_options = $VBoxContainer/HBoxContainer/ReplaceFrameOptions
-onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
-onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
-onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
+onready var autosave_timer : Timer
 
 
-func _on_PreviewDialog_about_to_show() -> void:
-	var import_options :OptionButton= get_node("VBoxContainer/HBoxContainer/ImportOption")
-	
-	# populate the import_options
-	for i in ImageImportOptions.size():
-		if i == ImageImportOptions.NEW_TAB:
-			import_options.add_item("New tab")
-		if i == ImageImportOptions.SPRITESHEET_TAB:
-			import_options.add_item("Spritesheet (new tab)")
-		if i == ImageImportOptions.SPRITESHEET_LAYER:
-			import_options.add_item("Spritesheet (new layer)")
-		if i == ImageImportOptions.NEW_FRAME:
-			import_options.add_item("New frame")
-		if i == ImageImportOptions.REPLACE_FRAME:
-			import_options.add_item("Replace Frame")
-		if i == ImageImportOptions.NEW_LAYER:
-			import_options.add_item("New layer")
-		if i == ImageImportOptions.PALETTE:
-			import_options.add_item("New palette")
-		if i == ImageImportOptions.BRUSH:
-			import_options.add_item("New brush")
-		if i == ImageImportOptions.PATTERN:
-			import_options.add_item("New pattern")
-	
-	var img_texture := ImageTexture.new()
-	img_texture.create_from_image(image, 0)
-	texture_rect.texture = img_texture
-	spritesheet_tab_options.get_node("HorizontalFrames").max_value = min(spritesheet_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x)
-	spritesheet_tab_options.get_node("VerticalFrames").max_value = min(spritesheet_tab_options.get_node("VerticalFrames").max_value, image.get_size().y)
-	image_size_label.text = tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
-	frame_size_label.text = tr("Frame Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
+func _ready() -> void:
+	autosave_timer = Timer.new()
+	autosave_timer.one_shot = false
+	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE
+	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
+	add_child(autosave_timer)
+	update_autosave()
 
 
-func _on_PreviewDialog_popup_hide() -> void:
-	queue_free()
-	# Call Global.dialog_open() only if it's the only preview dialog opened
-	for child in Global.control.get_children():
-		if child != self and "PreviewDialog" in child.name:
-			return
-	Global.dialog_open(false)
+func handle_loading_files(files : PoolStringArray) -> void:
+	for file in files:
+		file = file.replace("\\", "/")
+		var file_ext : String = file.get_extension().to_lower()
+		if file_ext == "pxo": # Pixelorama project file
+			open_pxo_file(file)
+		elif file_ext == "json" or file_ext == "gpl" or file_ext == "pal": # Palettes
+			Global.palette_container.on_palette_import_file_selected(file)
+		else: # Image files
+			var image := Image.new()
+			var err := image.load(file)
+			if err != OK: # An error occured
+				var file_name : String = file.get_file()
+				Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
+				Global.error_dialog.popup_centered()
+				Global.dialog_open(true)
+				continue
+			handle_loading_image(file, image)
 
 
-func _on_PreviewDialog_confirmed() -> void:
-	if current_import_option == ImageImportOptions.NEW_TAB:
-		OpenSave.open_image_as_new_tab(path, image)
-
-	elif current_import_option == ImageImportOptions.SPRITESHEET_TAB:
-		OpenSave.open_image_as_spritesheet_tab(path, image, spritesheet_horizontal, spritesheet_vertical)
-
-	elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
-		var frame_index : int = spritesheet_layer_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_as_spritesheet_layer(path, image, path.get_basename().get_file(), spritesheet_horizontal, spritesheet_vertical, frame_index)
-
-	elif current_import_option == ImageImportOptions.NEW_FRAME:
-		var layer_index : int = new_frame_options.get_node("AtLayerSpinbox").value
-		OpenSave.open_image_as_new_frame(image, layer_index)
-
-	elif current_import_option == ImageImportOptions.REPLACE_FRAME:
-		var layer_index : int = replace_frame_options.get_node("AtLayerSpinbox").value
-		var frame_index : int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_at_frame(image, layer_index, frame_index)
-
-	elif current_import_option == ImageImportOptions.NEW_LAYER:
-		var frame_index : int = new_layer_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
-
-	elif current_import_option == ImageImportOptions.PALETTE:
-		Global.palette_container.import_image_palette(path, image)
-
-	elif current_import_option == ImageImportOptions.BRUSH:
-		add_brush()
-
-	elif current_import_option == ImageImportOptions.PATTERN:
-		var file_name_ext : String = path.get_file()
-		file_name_ext = file_name_replace(file_name_ext, "Patterns")
-		var file_name : String = file_name_ext.get_basename()
-		image.convert(Image.FORMAT_RGBA8)
-		Global.patterns_popup.add(image, file_name)
-
-		# Copy the image file into the "pixelorama/Patterns" directory
-		var location := "Patterns".plus_file(file_name_ext)
-		var dir = Directory.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+func handle_loading_image(file : String, image : Image) -> void:
+	var preview_dialog : ConfirmationDialog = preload("res://src/UI/Dialogs/PreviewDialog.tscn").instance()
+	preview_dialog.path = file
+	preview_dialog.image = image
+	Global.control.add_child(preview_dialog)
+	preview_dialog.popup_centered()
+	Global.dialog_open(true)
 
 
-func _on_ImportOption_item_selected(id : int) -> void:
-	current_import_option = id
-	frame_size_label.visible = false
-	spritesheet_tab_options.visible = false
-	spritesheet_layer_options.visible = false
-	new_frame_options.visible = false
-	replace_frame_options.visible = false
-	new_layer_options.visible = false
-	new_brush_options.visible = false
-	texture_rect.get_child(0).visible = false
-	texture_rect.get_child(1).visible = false
-	rect_size.x = 550
+func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty : bool = true) -> void:
+	var file := File.new()
+	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+	if err == ERR_FILE_UNRECOGNIZED:
+		err = file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
 
-	if id == ImageImportOptions.SPRITESHEET_TAB:
-		frame_size_label.visible = true
-		spritesheet_tab_options.visible = true
-		texture_rect.get_child(0).visible = true
-		texture_rect.get_child(1).visible = true
-		rect_size.x = spritesheet_tab_options.rect_size.x
-	
-	elif id == ImageImportOptions.SPRITESHEET_LAYER:
-		frame_size_label.visible = true
-		spritesheet_layer_options.visible = true
-		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
-		texture_rect.get_child(0).visible = true
-		texture_rect.get_child(1).visible = true
-		rect_size.x = spritesheet_layer_options.rect_size.x
+	if err != OK:
+		Global.error_dialog.set_text(tr("File failed to open. Error code %s") % err)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		file.close()
+		return
 
-	elif id == ImageImportOptions.NEW_FRAME:
-		new_frame_options.visible = true
-		new_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
-
-	elif id == ImageImportOptions.REPLACE_FRAME:
-		replace_frame_options.visible = true
-		replace_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
-		replace_frame_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
-
-	elif id == ImageImportOptions.NEW_LAYER:
-		new_layer_options.visible = true
-		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
-
-	elif id == ImageImportOptions.BRUSH:
-		new_brush_options.visible = true
-
-
-func _on_HorizontalFrames_value_changed(value : int) -> void:
-	spritesheet_horizontal = value
-	for child in texture_rect.get_node("HorizLines").get_children():
-		child.queue_free()
-
-	spritesheet_frame_value_changed(value, false)
-
-
-func _on_VerticalFrames_value_changed(value : int) -> void:
-	spritesheet_vertical = value
-	for child in texture_rect.get_node("VerticalLines").get_children():
-		child.queue_free()
-
-	spritesheet_frame_value_changed(value, true)
-
-
-func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
-	var image_size_y = texture_rect.rect_size.y
-	var image_size_x = texture_rect.rect_size.x
-	if image.get_size().x > image.get_size().y:
-		var scale_ratio = image.get_size().x / image_size_x
-		image_size_y = image.get_size().y / scale_ratio
+	var empty_project : bool = Global.current_project.is_empty() and replace_empty
+	var new_project : Project
+	if empty_project:
+		new_project = Global.current_project
+		new_project.frames = []
+		new_project.layers = []
+		new_project.animation_tags.clear()
+		new_project.name = path.get_file()
 	else:
-		var scale_ratio = image.get_size().y / image_size_y
-		image_size_x = image.get_size().x / scale_ratio
+		new_project = Project.new([], path.get_file())
 
-	var offset_x = (texture_rect.rect_size.x - image_size_x) / 2
-	var offset_y = (texture_rect.rect_size.y - image_size_y) / 2
-
-	if value > 1:
-		var line_distance
-		if vertical:
-			line_distance = image_size_y / value
-		else:
-			line_distance = image_size_x / value
-
-		for i in range(1, value):
-			var line_2d := Line2D.new()
-			line_2d.width = 1
-			line_2d.position = Vector2.ZERO
-			if vertical:
-				line_2d.add_point(Vector2(offset_x, i * line_distance + offset_y))
-				line_2d.add_point(Vector2(image_size_x + offset_x, i * line_distance + offset_y))
-				texture_rect.get_node("VerticalLines").add_child(line_2d)
-			else:
-				line_2d.add_point(Vector2(i * line_distance + offset_x, offset_y))
-				line_2d.add_point(Vector2(i * line_distance + offset_x, image_size_y + offset_y))
-				texture_rect.get_node("HorizLines").add_child(line_2d)
-
-	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
-	var frame_height = floor(image.get_size().y / spritesheet_vertical)
-	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
-
-
-func _on_BrushTypeOption_item_selected(index : int) -> void:
-	brush_type = index
-	new_brush_name.visible = false
-	if brush_type == BrushTypes.RANDOM:
-		new_brush_name.visible = true
-
-
-func add_brush() -> void:
-	image.convert(Image.FORMAT_RGBA8)
-	if brush_type == BrushTypes.FILE:
-		var file_name_ext : String = path.get_file()
-		file_name_ext = file_name_replace(file_name_ext, "Brushes")
-		var file_name : String = file_name_ext.get_basename()
-
-		Brushes.add_file_brush([image], file_name)
-
-		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(file_name_ext)
-		var dir = Directory.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
-
-	elif brush_type == BrushTypes.PROJECT:
-		var file_name : String =  path.get_file().get_basename()
-		Global.current_project.brushes.append(image)
-		Brushes.add_project_brush(image, file_name)
-
-	elif brush_type == BrushTypes.RANDOM:
-		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
-		if !brush_name.is_valid_filename():
+	var first_line := file.get_line()
+	var dict := JSON.parse(first_line)
+	if dict.error != OK:
+		open_old_pxo_file(file, new_project, first_line)
+	else:
+		if typeof(dict.result) != TYPE_DICTIONARY:
+			print("Error, json parsed result is: %s" % typeof(dict.result))
+			file.close()
 			return
-		var dir := Directory.new()
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
-		if !dir.dir_exists(brush_name):
-			dir.make_dir(brush_name)
 
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes").plus_file(brush_name))
-		var random_brushes := []
-		dir.list_dir_begin()
-		var curr_file := dir.get_next()
-		while curr_file != "":
-			if curr_file.begins_with("~") and brush_name in curr_file:
-				random_brushes.append(curr_file)
-			curr_file = dir.get_next()
-		dir.list_dir_end()
+		new_project.deserialize(dict.result)
+		for frame in new_project.frames:
+			for cel in frame.cels:
+				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
+				cel.image.create_from_data(new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer)
+				cel.image = cel.image # Just to call image_changed
 
-		var file_ext : String = path.get_file().get_extension()
-		var index : int = random_brushes.size() + 1
-		var file_name = "~" + brush_name + str(index) + "." + file_ext
-		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		if dict.result.has("brushes"):
+			for brush in dict.result.brushes:
+				var b_width = brush.size_x
+				var b_height = brush.size_y
+				var buffer := file.get_buffer(b_width * b_height * 4)
+				var image := Image.new()
+				image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+				new_project.brushes.append(image)
+				Brushes.add_project_brush(image)
+
+	file.close()
+	if !empty_project:
+		Global.projects.append(new_project)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	else:
+		new_project.frames = new_project.frames # Just to call frames_changed
+		new_project.layers = new_project.layers # Just to call layers_changed
+	Global.canvas.camera_zoom()
+
+	if not untitled_backup:
+		# Untitled backup should not change window title and save path
+		current_save_paths[Global.current_project_index] = path
+		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+		Global.save_sprites_dialog.current_path = path
+		# Set last opened project path and save
+		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.save("user://cache.ini")
+		Export.file_name = path.get_file().trim_suffix(".pxo")
+		Export.directory_path = path.get_base_dir()
+		new_project.directory_path = Export.directory_path
+		new_project.file_name = Export.file_name
+		Export.was_exported = false
+		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+
+	Global.save_project_to_recent_list(path)
 
 
-# Checks if the file already exists
-# If it does, add a number to its name, for example
-# "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
-func file_name_replace(name : String, folder : String) -> String:
-	var i := 1
-	var file_ext = name.get_extension()
-	var temp_name := name
+# For pxo files older than v0.8
+func open_old_pxo_file(file : File, new_project : Project, first_line : String) -> void:
+#	var file_version := file.get_line() # Example, "v0.7.10-beta"
+	var file_version := first_line
+	var file_ver_splitted := file_version.split("-")
+	var file_ver_splitted_numbers := file_ver_splitted[0].split(".")
+
+	# In the above example, the major version would return "0",
+	# the minor version would return "7", the patch "10"
+	# and the status would return "beta"
+	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
+	var file_minor_version = int(file_ver_splitted_numbers[1])
+	var file_patch_version := 0
+	var _file_status_version : String
+
+	if file_ver_splitted_numbers.size() > 2:
+		file_patch_version = int(file_ver_splitted_numbers[2])
+	if file_ver_splitted.size() > 1:
+		_file_status_version = file_ver_splitted[1]
+
+	if file_major_version == 0 and file_minor_version < 5:
+		Global.notification_label("File is from an older version of Pixelorama, as such it might not work properly")
+
+	var new_guides := true
+	if file_major_version == 0:
+		if file_minor_version < 7 or (file_minor_version == 7 and file_patch_version == 0):
+			new_guides = false
+
+	var frame := 0
+
+	var linked_cels := []
+	if file_major_version >= 0 and file_minor_version > 6:
+		var global_layer_line := file.get_line()
+		while global_layer_line == ".":
+			var layer_name := file.get_line()
+			var layer_visibility := file.get_8()
+			var layer_lock := file.get_8()
+			var layer_new_cels_linked := file.get_8()
+			linked_cels.append(file.get_var())
+
+			var l := Layer.new(layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, [])
+			new_project.layers.append(l)
+			global_layer_line = file.get_line()
+
+	var frame_line := file.get_line()
+	while frame_line == "--": # Load frames
+		var frame_class := Frame.new()
+		var width := file.get_16()
+		var height := file.get_16()
+
+		var layer_i := 0
+		var layer_line := file.get_line()
+		while layer_line == "-": # Load layers
+			var buffer := file.get_buffer(width * height * 4)
+			if file_major_version == 0 and file_minor_version < 7:
+				var layer_name_old_version = file.get_line()
+				if frame == 0:
+					var l := Layer.new(layer_name_old_version)
+					new_project.layers.append(l)
+			var cel_opacity := 1.0
+			if file_major_version >= 0 and file_minor_version > 5:
+				cel_opacity = file.get_float()
+			var image := Image.new()
+			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
+			image.lock()
+			frame_class.cels.append(Cel.new(image, cel_opacity))
+			if file_major_version >= 0 and file_minor_version >= 7:
+				if frame in linked_cels[layer_i]:
+					new_project.layers[layer_i].linked_cels.append(frame_class)
+					frame_class.cels[layer_i].image = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image
+					frame_class.cels[layer_i].image_texture = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image_texture
+
+			layer_i += 1
+			layer_line = file.get_line()
+
+		if !new_guides:
+			var guide_line := file.get_line() # "guideline" no pun intended
+			while guide_line == "|": # Load guides
+				var guide := Guide.new()
+				guide.type = file.get_8()
+				if guide.type == guide.Types.HORIZONTAL:
+					guide.add_point(Vector2(-99999, file.get_16()))
+					guide.add_point(Vector2(99999, file.get_16()))
+				else:
+					guide.add_point(Vector2(file.get_16(), -99999))
+					guide.add_point(Vector2(file.get_16(), 99999))
+				guide.has_focus = false
+				Global.canvas.add_child(guide)
+				new_project.guides.append(guide)
+				guide_line = file.get_line()
+
+		new_project.size = Vector2(width, height)
+		new_project.frames.append(frame_class)
+		frame_line = file.get_line()
+		frame += 1
+
+	if new_guides:
+		var guide_line := file.get_line() # "guideline" no pun intended
+		while guide_line == "|": # Load guides
+			var guide := Guide.new()
+			guide.type = file.get_8()
+			if guide.type == guide.Types.HORIZONTAL:
+				guide.add_point(Vector2(-99999, file.get_16()))
+				guide.add_point(Vector2(99999, file.get_16()))
+			else:
+				guide.add_point(Vector2(file.get_16(), -99999))
+				guide.add_point(Vector2(file.get_16(), 99999))
+			guide.has_focus = false
+			Global.canvas.add_child(guide)
+			new_project.guides.append(guide)
+			guide_line = file.get_line()
+
+	# Load tool options
+	file.get_var()
+	file.get_var()
+	file.get_8()
+	file.get_8()
+	if file_major_version == 0 and file_minor_version < 7:
+		file.get_var()
+		file.get_var()
+
+	# Load custom brushes
+	var brush_line := file.get_line()
+	while brush_line == "/":
+		var b_width := file.get_16()
+		var b_height := file.get_16()
+		var buffer := file.get_buffer(b_width * b_height * 4)
+		var image := Image.new()
+		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+		new_project.brushes.append(image)
+		Brushes.add_project_brush(image)
+		brush_line = file.get_line()
+
+	if file_major_version >= 0 and file_minor_version > 6:
+		var tag_line := file.get_line()
+		while tag_line == ".T/":
+			var tag_name := file.get_line()
+			var tag_color : Color = file.get_var()
+			var tag_from := file.get_8()
+			var tag_to := file.get_8()
+			new_project.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
+			new_project.animation_tags = new_project.animation_tags # To execute animation_tags_changed()
+			tag_line = file.get_line()
+
+
+func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	var serialized_data = project.serialize()
+	if !serialized_data:
+		Global.error_dialog.set_text(tr("File failed to save. Converting project data to dictionary failed."))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return
+	var to_save = JSON.print(serialized_data)
+	if !to_save:
+		Global.error_dialog.set_text(tr("File failed to save. Converting dictionary to JSON failed."))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return
+
+	var file : File = File.new()
+	var err
+	if use_zstd_compression:
+		err = file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+	else:
+		err = file.open(path, File.WRITE)
+
+	if err != OK:
+		Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		file.close()
+		return
+
+	if !autosave:
+		project.name = path.get_file()
+		current_save_paths[Global.current_project_index] = path
+
+	file.store_line(to_save)
+	for frame in project.frames:
+		for cel in frame.cels:
+			file.store_buffer(cel.image.get_data())
+
+	for brush in project.brushes:
+		file.store_buffer(brush.get_data())
+
+	file.close()
+
+	if OS.get_name() == "HTML5" and !autosave:
+		err = file.open(path, File.READ)
+		if !err:
+			var file_data = Array(file.get_buffer(file.get_len()))
+			JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
+		file.close()
+		# Remove the .pxo file from memory, as we don't need it anymore
+		var dir = Directory.new()
+		dir.remove(path)
+
+	if autosave:
+		Global.notification_label("File autosaved")
+	else:
+		# First remove backup then set current save path
+		if project.has_changed:
+			project.has_changed = false
+		remove_backup(Global.current_project_index)
+		Global.notification_label("File saved")
+		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+
+		# Set last opened project path and save
+		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.save("user://cache.ini")
+		Export.file_name = path.get_file().trim_suffix(".pxo")
+		Export.directory_path = path.get_base_dir()
+		Export.was_exported = false
+		project.was_exported = false
+		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+
+	Global.save_project_to_recent_list(path)
+
+
+func open_image_as_new_tab(path : String, image : Image) -> void:
+	var project = Project.new([], path.get_file(), image.get_size())
+	project.layers.append(Layer.new())
+	Global.projects.append(project)
+
+	var frame := Frame.new()
+	image.convert(Image.FORMAT_RGBA8)
+	image.lock()
+	frame.cels.append(Cel.new(image, 1))
+
+	project.frames.append(frame)
+	set_new_tab(project, path)
+
+
+func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : int, vertical : int) -> void:
+	var project = Project.new([], path.get_file())
+	project.layers.append(Layer.new())
+	Global.projects.append(project)
+	horizontal = min(horizontal, image.get_size().x)
+	vertical = min(vertical, image.get_size().y)
+	var frame_width := image.get_size().x / horizontal
+	var frame_height := image.get_size().y / vertical
+	for yy in range(vertical):
+		for xx in range(horizontal):
+			var frame := Frame.new()
+			var cropped_image := Image.new()
+			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			project.size = cropped_image.get_size()
+			cropped_image.convert(Image.FORMAT_RGBA8)
+			cropped_image.lock()
+			frame.cels.append(Cel.new(cropped_image, 1))
+
+			for _i in range(1, project.layers.size()):
+				var empty_sprite := Image.new()
+				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+				empty_sprite.fill(Color(0, 0, 0, 0))
+				empty_sprite.lock()
+				frame.cels.append(Cel.new(empty_sprite, 1))
+
+			project.frames.append(frame)
+
+	set_new_tab(project, path)
+
+
+func open_image_as_spritesheet_layer(path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
+	# data needed to slice images
+	horizontal = min(horizontal, image.get_size().x)
+	vertical = min(vertical, image.get_size().y)
+	var frame_width := image.get_size().x / horizontal
+	var frame_height := image.get_size().y / vertical
+
+	# resize canvas to if "frame_width" or "frame_height" is too large
+	var project_width :int = max(frame_width, Global.current_project.size.x)
+	var project_height :int = max(frame_height, Global.current_project.size.y)
+	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0) 
+
+	# slice images
+	var image_no :int = 0
+	for yy in range(vertical):
+		for xx in range(horizontal):
+			var cropped_image := Image.new()
+			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			image_no += 1
+			if (start_frame + (image_no - 1)) < Global.current_project.frames.size():
+				# if frames are already present then fill those first
+				if image_no == 1:
+					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no - 1)
+				else:
+					open_image_at_frame(cropped_image, Global.current_project.layers.size() - 1, start_frame + (image_no - 1))
+			else:
+				# if no more frames are present then start making new frames
+				open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
+
+
+func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+
+	project.undos += 1
+	project.undo_redo.create_action("Replaced Frame")
+	
+	var frames :Array = []
+	# create a duplicate of "project.frames"
+	for i in project.frames.size():
+		var frame := Frame.new()
+		frame.cels = project.frames[i].cels.duplicate(true)
+		frames.append(frame)
+	
+	for i in project.frames.size():
+		if i == frame_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			frames[i].cels[layer_index] = (Cel.new(image, 1))
+			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
+			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+
+	project.undo_redo.add_do_property(project, "frames", frames)
+	project.undo_redo.add_do_property(project, "current_frame", frame_index)
+
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.commit_action()
+
+
+func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+	var new_frames : Array = project.frames.duplicate()
+
+	var frame := Frame.new()
+	for i in project.layers.size():
+		if i == layer_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			frame.cels.append(Cel.new(image, 1))
+		else:
+			var empty_image := Image.new()
+			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			empty_image.lock()
+			frame.cels.append(Cel.new(empty_image, 1))
+
+	new_frames.append(frame)
+
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
+
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_layer", layer_index)
+
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.commit_action()
+
+
+func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+	var new_layers : Array = Global.current_project.layers.duplicate()
+	var layer := Layer.new(file_name)
+
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Add Layer")
+	for i in project.frames.size():
+		var new_cels : Array = project.frames[i].cels.duplicate(true)
+		if i == frame_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			new_cels.append(Cel.new(image, 1))
+		else:
+			var empty_image := Image.new()
+			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			empty_image.lock()
+			new_cels.append(Cel.new(empty_image, 1))
+
+		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
+		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+
+
+	new_layers.append(layer)
+
+	project.undo_redo.add_do_property(project, "current_layer", new_layers.size() - 1)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "current_frame", frame_index)
+
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
+
+
+func set_new_tab(project : Project, path : String) -> void:
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+	Global.window_title = path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
+	if project.has_changed:
+		Global.window_title = Global.window_title + "(*)"
+	var file_name := path.get_basename().get_file()
+	var directory_path := path.get_basename().replace(file_name, "")
+	project.directory_path = directory_path
+	project.file_name = file_name
+	Export.directory_path = directory_path
+	Export.file_name = file_name
+
+
+func update_autosave() -> void:
+	autosave_timer.stop()
+	autosave_timer.wait_time = Global.autosave_interval * 60 # Interval parameter is in minutes, wait_time is seconds
+	if Global.enable_autosave:
+		autosave_timer.start()
+
+
+func _on_Autosave_timeout() -> void:
+	for i in range(backup_save_paths.size()):
+		if backup_save_paths[i] == "":
+			# Create a new backup file if it doesn't exist yet
+			backup_save_paths[i] = "user://backup-" + String(OS.get_unix_time()) + "-%s" % i
+
+		store_backup_path(i)
+		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
+
+
+# Backup paths are stored in two ways:
+# 1) User already manually saved and defined a save path -> {current_save_path, backup_save_path}
+# 2) User didn't manually saved, "untitled" backup is stored -> {backup_save_path, backup_save_path}
+func store_backup_path(i : int) -> void:
+	if current_save_paths[i] != "":
+		# Remove "untitled" backup if it existed on this project instance
+		if Global.config_cache.has_section_key("backups", backup_save_paths[i]):
+			Global.config_cache.erase_section_key("backups", backup_save_paths[i])
+
+		Global.config_cache.set_value("backups", current_save_paths[i], backup_save_paths[i])
+	else:
+		Global.config_cache.set_value("backups", backup_save_paths[i], backup_save_paths[i])
+
+	Global.config_cache.save("user://cache.ini")
+
+
+func remove_backup(i : int) -> void:
+	# Remove backup file
+	if backup_save_paths[i] != "":
+		if current_save_paths[i] != "":
+			remove_backup_by_path(current_save_paths[i], backup_save_paths[i])
+		else:
+			# If manual save was not yet done - remove "untitled" backup
+			remove_backup_by_path(backup_save_paths[i], backup_save_paths[i])
+		backup_save_paths[i] = ""
+
+
+func remove_backup_by_path(project_path : String, backup_path : String) -> void:
+	Directory.new().remove(backup_path)
+	if Global.config_cache.has_section_key("backups", project_path):
+		Global.config_cache.erase_section_key("backups", project_path)
+	elif Global.config_cache.has_section_key("backups", backup_path):
+		Global.config_cache.erase_section_key("backups", backup_path)
+	Global.config_cache.save("user://cache.ini")
+
+
+func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
+	assert(project_paths.size() == backup_paths.size())
+	# Clear non-existant backups
+	var existing_backups_count := 0
 	var dir := Directory.new()
-	dir.open(Global.directory_module.xdg_data_home.plus_file(folder))
-	while dir.file_exists(temp_name):
-		i += 1
-		temp_name = name.get_basename() + " (%s)" % i
-		temp_name += "." + file_ext
-	name = temp_name
-	return name
+	for i in range(backup_paths.size()):
+		if dir.file_exists(backup_paths[i]):
+			project_paths[existing_backups_count] = project_paths[i]
+			backup_paths[existing_backups_count] = backup_paths[i]
+			existing_backups_count += 1
+		else:
+			if Global.config_cache.has_section_key("backups", backup_paths[i]):
+				Global.config_cache.erase_section_key("backups", backup_paths[i])
+				Global.config_cache.save("user://cache.ini")
+	project_paths.resize(existing_backups_count)
+	backup_paths.resize(existing_backups_count)
+
+	# Load the backup files
+	for i in range(project_paths.size()):
+		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i], i == 0)
+		backup_save_paths[i] = backup_paths[i]
+
+		# If project path is the same as backup save path -> the backup was untitled
+		if project_paths[i] != backup_paths[i]: # If the user has saved
+			current_save_paths[i] = project_paths[i]
+			Global.window_title = project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
+			Global.current_project.has_changed = true
+
+	Global.notification_label("Backup reloaded")
