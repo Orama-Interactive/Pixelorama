@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-02-05 08:06\n"
 
 msgid "OK"
 msgstr "예"
@@ -163,7 +163,7 @@ msgid "Tile Mode"
 msgstr "타일 모드"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "창 투명도"
 
 msgid "Mirror View"
 msgstr "미러뷰"
@@ -885,7 +885,7 @@ msgid "Draw over Tile Mode:"
 msgstr "타일 모드 위에 그리기"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "비활성화된 경우 격자는 원래 이미지 위에만 그려집니다."
 
 msgid "Grid color:"
 msgstr "격자 색:"
