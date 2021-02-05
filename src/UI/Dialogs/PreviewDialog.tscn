@@ -26,15 +26,15 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 692.0
+margin_right = 534.0
 margin_bottom = 300.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 196.0
-margin_right = 496.0
+margin_left = 117.0
+margin_right = 417.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 300 )
 expand = true
@@ -49,7 +49,7 @@ __meta__ = {
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 304.0
-margin_right = 692.0
+margin_right = 534.0
 margin_bottom = 318.0
 custom_constants/separation = 32
 
@@ -67,19 +67,19 @@ text = "Frame size: 64×64"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 322.0
-margin_right = 692.0
-margin_bottom = 346.0
+margin_right = 534.0
+margin_bottom = 342.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_top = 5.0
+margin_top = 3.0
 margin_right = 66.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 text = "Import as:"
 
 [node name="ImportOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 margin_left = 70.0
 margin_right = 151.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "New tab"
 
@@ -185,6 +185,41 @@ margin_right = 131.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 0.0
+
+[node name="ReplaceFrameOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 155.0
+margin_right = 433.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+margin_top = 5.0
+margin_right = 56.0
+margin_bottom = 19.0
+text = "At Layer:"
+
+[node name="AtLayerSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+margin_left = 60.0
+margin_right = 134.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+max_value = 0.0
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+margin_left = 138.0
+margin_top = 5.0
+margin_right = 200.0
+margin_bottom = 19.0
+text = "At Frame:"
+
+[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+margin_left = 204.0
+margin_right = 278.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+max_value = 0.0
+value = 1.0
 
 [node name="NewLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
