@@ -82,20 +82,22 @@ margin_right = 151.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "New tab"
+items = [ "New tab", null, false, 0, null, "Spritesheet (new tab)", null, false, 1, null, "New frame", null, false, 2, null, "New layer", null, false, 3, null, "New palette", null, false, 4, null, "New brush", null, false, 5, null, "New pattern", null, false, 6, null ]
+selected = 0
 
-[node name="SpritesheetTabOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="SpritesheetOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
 margin_left = 155.0
 margin_right = 533.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
 margin_top = 5.0
 margin_right = 118.0
 margin_bottom = 19.0
 text = "Horizontal frames:"
 
-[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
 margin_left = 122.0
 margin_right = 196.0
 margin_bottom = 24.0
@@ -103,67 +105,18 @@ mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
 margin_left = 200.0
 margin_top = 5.0
 margin_right = 300.0
 margin_bottom = 19.0
 text = "Vertical frames:"
 
-[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetOptions"]
 margin_left = 304.0
 margin_right = 378.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-min_value = 1.0
-value = 1.0
-
-[node name="SpritesheetLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
-margin_left = 155.0
-margin_right = 692.0
-margin_bottom = 24.0
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-margin_top = 5.0
-margin_right = 118.0
-margin_bottom = 19.0
-text = "Horizontal frames:"
-
-[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-margin_left = 122.0
-margin_right = 196.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-min_value = 1.0
-value = 1.0
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-margin_left = 200.0
-margin_top = 5.0
-margin_right = 300.0
-margin_bottom = 19.0
-text = "Vertical frames:"
-
-[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-margin_left = 304.0
-margin_right = 378.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-min_value = 1.0
-value = 1.0
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-margin_left = 382.0
-margin_top = 5.0
-margin_right = 459.0
-margin_bottom = 19.0
-text = "Start Frame:"
-
-[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-margin_left = 463.0
-margin_right = 537.0
-margin_bottom = 24.0
 min_value = 1.0
 value = 1.0
 
@@ -185,41 +138,6 @@ margin_right = 131.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 0.0
-
-[node name="ReplaceFrameOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
-margin_left = 155.0
-margin_right = 433.0
-margin_bottom = 24.0
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
-margin_top = 5.0
-margin_right = 56.0
-margin_bottom = 19.0
-text = "At Layer:"
-
-[node name="AtLayerSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
-margin_left = 60.0
-margin_right = 134.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-max_value = 0.0
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
-margin_left = 138.0
-margin_top = 5.0
-margin_right = 200.0
-margin_bottom = 19.0
-text = "At Frame:"
-
-[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
-margin_left = 204.0
-margin_right = 278.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-min_value = 1.0
-max_value = 0.0
-value = 1.0
 
 [node name="NewLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
@@ -283,8 +201,6 @@ margin_bottom = 24.0
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetLayerOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetLayerOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/NewBrushOptions/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]
