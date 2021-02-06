@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 This update has been brought to you by the contributions of:
 
-Laurenz Reinthaler (Schweini07), kleonc, Variable-ind
+Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable)
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
