@@ -1,0 +1,139 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/Text.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="PixelPerfect" parent="." index="1"]
+visible = false
+
+[node name="EmptySpacer" parent="." index="2"]
+visible = false
+margin_top = 18.0
+margin_bottom = 30.0
+
+[node name="Mirror" parent="." index="3"]
+visible = false
+margin_top = 18.0
+margin_bottom = 35.0
+
+[node name="FontLabel" type="Label" parent="." index="4"]
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 32.0
+text = "Font:"
+align = 1
+
+[node name="FontOptionButton" type="OptionButton" parent="." index="5"]
+margin_top = 36.0
+margin_right = 116.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+text = "Roboto"
+items = [ "Roboto", null, false, 0, null ]
+selected = 0
+
+[node name="Allignment" type="OptionButton" parent="." index="6"]
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 80.0
+text = "Left"
+align = 1
+items = [ "Left", null, false, 0, null, "Centre", null, false, 1, null, "Right", null, false, 2, null ]
+selected = 0
+
+[node name="TextEdit" type="TextEdit" parent="." index="7"]
+margin_top = 84.0
+margin_right = 116.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 0, 50 )
+wrap_enabled = true
+
+[node name="TextSizeLabel" type="Label" parent="." index="8"]
+margin_top = 138.0
+margin_right = 116.0
+margin_bottom = 152.0
+text = "Text size:"
+align = 1
+
+[node name="TextSizeSpinBox" type="SpinBox" parent="." index="9"]
+margin_top = 156.0
+margin_right = 116.0
+margin_bottom = 180.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+max_value = 128.0
+value = 16.0
+
+[node name="OutlineLabel" type="Label" parent="." index="10"]
+margin_top = 184.0
+margin_right = 116.0
+margin_bottom = 198.0
+text = "Outline:"
+align = 1
+
+[node name="OutlineContainer" type="HBoxContainer" parent="." index="11"]
+margin_top = 202.0
+margin_right = 116.0
+margin_bottom = 226.0
+alignment = 1
+
+[node name="OutlineColorPickerButton" type="ColorPickerButton" parent="OutlineContainer" index="0"]
+margin_left = 7.0
+margin_right = 31.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+mouse_default_cursor_shape = 2
+color = Color( 1, 1, 1, 1 )
+
+[node name="OutlineSpinBox" type="SpinBox" parent="OutlineContainer" index="1"]
+margin_left = 35.0
+margin_right = 109.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+
+[node name="ApplyText" type="Button" parent="." index="12"]
+margin_top = 230.0
+margin_right = 116.0
+margin_bottom = 250.0
+text = "Apply Text"
+
+[node name="Control" type="Control" parent="." index="13"]
+margin_top = 254.0
+margin_right = 116.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 0, 12 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LoadFontButton" type="Button" parent="." index="14"]
+margin_top = 270.0
+margin_right = 116.0
+margin_bottom = 290.0
+mouse_default_cursor_shape = 2
+text = "Load Font"
+
+[node name="FontFileDialog" type="FileDialog" parent="." index="15"]
+margin_right = 400.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 400, 400 )
+window_title = "Open File(s)"
+resizable = true
+mode = 1
+access = 2
+filters = PoolStringArray( "*.ttf", "*.otf" )
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-add-text"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-add-text/"
+[connection signal="item_selected" from="FontOptionButton" to="." method="_on_FontOptionButton_item_selected"]
+[connection signal="item_selected" from="Allignment" to="." method="_on_Allignment_item_selected"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="value_changed" from="TextSizeSpinBox" to="." method="_on_TextSizeSpinBox_value_changed"]
+[connection signal="color_changed" from="OutlineContainer/OutlineColorPickerButton" to="." method="_on_OutlineColorPickerButton_color_changed"]
+[connection signal="value_changed" from="OutlineContainer/OutlineSpinBox" to="." method="_on_OutlineSpinBox_value_changed"]
+[connection signal="pressed" from="ApplyText" to="." method="_on_ApplyText_pressed"]
+[connection signal="pressed" from="LoadFontButton" to="." method="_on_LoadFontButton_pressed"]
+[connection signal="files_selected" from="FontFileDialog" to="." method="_on_FontFileDialog_files_selected"]
+[connection signal="popup_hide" from="FontFileDialog" to="." method="_on_FontFileDialog_popup_hide"]
