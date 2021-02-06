@@ -26,26 +26,16 @@ onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushN
 func _on_PreviewDialog_about_to_show() -> void:
 	var import_options :OptionButton= get_node("VBoxContainer/HBoxContainer/ImportOption")
 	
-	# populate the import_options
-	for i in ImageImportOptions.size():
-		if i == ImageImportOptions.NEW_TAB:
-			import_options.add_item("New tab")
-		if i == ImageImportOptions.SPRITESHEET_TAB:
-			import_options.add_item("Spritesheet (new tab)")
-		if i == ImageImportOptions.SPRITESHEET_LAYER:
-			import_options.add_item("Spritesheet (new layer)")
-		if i == ImageImportOptions.NEW_FRAME:
-			import_options.add_item("New frame")
-		if i == ImageImportOptions.REPLACE_FRAME:
-			import_options.add_item("Replace Frame")
-		if i == ImageImportOptions.NEW_LAYER:
-			import_options.add_item("New layer")
-		if i == ImageImportOptions.PALETTE:
-			import_options.add_item("New palette")
-		if i == ImageImportOptions.BRUSH:
-			import_options.add_item("New brush")
-		if i == ImageImportOptions.PATTERN:
-			import_options.add_item("New pattern")
+	# # order as in ImageImportOptions enum
+	import_options.add_item("New tab")
+	import_options.add_item("Spritesheet (new tab)")
+	import_options.add_item("Spritesheet (new layer)")
+	import_options.add_item("New frame")
+	import_options.add_item("Replace Frame")
+	import_options.add_item("New layer")
+	import_options.add_item("New palette")
+	import_options.add_item("New brush")
+	import_options.add_item("New pattern")
 	
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image, 0)
@@ -130,6 +120,7 @@ func _on_ImportOption_item_selected(id : int) -> void:
 	
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
+		spritesheet_tab_options.visible = true
 		spritesheet_layer_options.visible = true
 		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
 		texture_rect.get_child(0).visible = true
