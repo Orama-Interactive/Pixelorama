@@ -12,7 +12,6 @@ var font_data_index := 0
 var text_size := 16
 var outline_color := Color.white
 var outline_size := 0
-var allignment := 0
 var current_text = ""
 
 onready var font_data : DynamicFontData = preload("res://assets/fonts/Roboto-Regular.ttf")
@@ -80,11 +79,9 @@ func update_config() -> void:
 func draw_start(position : Vector2) -> void:
 	if text_label:
 		current_text = text_label.text
-		allignment = text_label.align
 		text_label.queue_free()
 
 	text_label = Label.new()
-	text_label.align = allignment
 	text_label.text = current_text
 	text_edit_pos = position
 	text_label.rect_min_size = Vector2(32, max(32, font.get_height()))
@@ -234,12 +231,3 @@ func _on_TextEdit_text_changed():
 
 func _on_ApplyText_pressed():
 	text_to_pixels()
-
-
-func _on_Allignment_item_selected(index):
-	if index == 0:
-		text_label.align = Label.ALIGN_LEFT
-	elif index == 1:
-		text_label.align = Label.ALIGN_CENTER
-	elif index == 2:
-		text_label.align = Label.ALIGN_RIGHT
