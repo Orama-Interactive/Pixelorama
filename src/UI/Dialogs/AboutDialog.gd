@@ -140,7 +140,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Vriska Weaver (henlo-birb)")
 	contributors.create_item(contributor_root).set_text(0, "  Rémi Verschelde (akien-mga)")
 	contributors.create_item(contributor_root).set_text(0, "  gschwind")
-	contributors.create_item(contributor_root).set_text(0, "  Variable-ind")
+	contributors.create_item(contributor_root).set_text(0, "  Fayez Akhtar (Variable)")
 
 
 func create_translators() -> void:
