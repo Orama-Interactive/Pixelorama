@@ -406,16 +406,16 @@ func open_image_as_spritesheet_layer(path : String, image : Image, file_name : S
 		for xx in range(horizontal):
 			var cropped_image := Image.new()
 			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
-			image_no += 1
-			if (start_frame + (image_no - 1)) < Global.current_project.frames.size():
+			if (start_frame + (image_no)) < Global.current_project.frames.size():
 				# if frames are already present then fill those first
-				if image_no == 1:
-					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no - 1)
+				if image_no == 0:
+					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no)
 				else:
-					open_image_at_frame(cropped_image, Global.current_project.layers.size() - 1, start_frame + (image_no - 1))
+					open_image_at_frame(cropped_image, Global.current_project.layers.size() - 1, start_frame + image_no)
 			else:
 				# if no more frames are present then start making new frames
 				open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
+			image_no += 1
 
 
 func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> void:
