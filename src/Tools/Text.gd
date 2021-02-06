@@ -226,6 +226,7 @@ func _on_OutlineSpinBox_value_changed(value : int) -> void:
 func _on_TextEdit_text_changed():
 	current_text = $TextEdit.text
 	if text_label:
+		text_label.add_color_override("font_color", tool_slot.color)
 		text_label.text = current_text
 
 
