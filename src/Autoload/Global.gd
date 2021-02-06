@@ -525,6 +525,12 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 %s for left mouse button
 %s for right mouse button""") % [InputMap.get_action_list("left_lightdark_tool")[0].as_text(), InputMap.get_action_list("right_lightdark_tool")[0].as_text()]
 
+	var txt : BaseButton = find_node_by_name(root, "Text")
+	txt.hint_tooltip = tr("""Text Tool
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_text_tool")[0].as_text(), InputMap.get_action_list("right_text_tool")[0].as_text()]
+
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
 (%s)""") % InputMap.get_action_list("switch_colors")[0].as_text()
