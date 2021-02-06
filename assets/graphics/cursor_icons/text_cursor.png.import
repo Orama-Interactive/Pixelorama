@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/text_cursor.png-46628cf6392befd7350cadc065719d3b.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/text_cursor.png"
+dest_files=[ "res://.import/text_cursor.png-46628cf6392befd7350cadc065719d3b.image" ]
+
+[params]
+
