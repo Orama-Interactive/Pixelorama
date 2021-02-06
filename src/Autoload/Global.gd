@@ -477,15 +477,23 @@ func change_button_texturerect(texture_button : TextureRect, new_file_name : Str
 
 
 func update_hint_tooltips() -> void:
-	var root = get_tree().get_root()
+	var root = control
+	var tool_buttons = root.find_node("ToolButtons")
 
-	var rect_select : BaseButton = find_node_by_name(root, "RectSelect")
+	var rect_select : BaseButton = tool_buttons.find_node("RectSelect")
 	rect_select.hint_tooltip = tr("""Rectangular Selection
 
 %s for left mouse button
 %s for right mouse button
 
 Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
+
+	var move_select : BaseButton = tool_buttons.find_node("Move")
+	move_select.hint_tooltip = tr("""Move
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_move_tool")[0].as_text(), InputMap.get_action_list("right_move_tool")[0].as_text()]
+
 
 	var zoom_tool : BaseButton = find_node_by_name(root, "Zoom")
 	zoom_tool.hint_tooltip = tr("""Zoom

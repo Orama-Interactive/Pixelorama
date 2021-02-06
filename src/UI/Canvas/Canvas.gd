@@ -7,6 +7,7 @@ var current_pixel := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
+var move_preview_location := Vector2.ZERO
 
 onready var currently_visible_frame : Viewport = $CurrentlyVisibleFrame
 onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
@@ -30,7 +31,7 @@ func _draw() -> void:
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
 
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
-
+	var current_layer : int = Global.current_project.current_layer
 	var _position := position
 	var _scale := scale
 	if Global.mirror_view:
@@ -41,7 +42,10 @@ func _draw() -> void:
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
-			draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+			if i == current_layer:
+				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+			else:
+				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
 	if Global.onion_skinning:
 		onion_skinning()

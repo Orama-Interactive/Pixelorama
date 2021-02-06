@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
 [ext_resource path="res://assets/graphics/dark_themes/tools/rectangletool.png" type="Texture" id=24]
 [ext_resource path="res://assets/graphics/dark_themes/tools/ellipsetool.png" type="Texture" id=25]
+[ext_resource path="res://assets/graphics/dark_themes/tools/move.png" type="Texture" id=26]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -113,12 +114,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Zoom" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
+[node name="Move" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/Move"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zoom" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
+"UIButtons",
+]]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -134,9 +153,9 @@ __meta__ = {
 [node name="Pan" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 72.0
+margin_top = 108.0
 margin_right = 32.0
-margin_bottom = 104.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -152,9 +171,9 @@ __meta__ = {
 [node name="ColorPicker" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 108.0
+margin_top = 144.0
 margin_right = 32.0
-margin_bottom = 140.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -170,9 +189,9 @@ __meta__ = {
 [node name="Pencil" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 144.0
+margin_top = 180.0
 margin_right = 32.0
-margin_bottom = 176.0
+margin_bottom = 212.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -188,9 +207,9 @@ __meta__ = {
 [node name="Eraser" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 180.0
+margin_top = 216.0
 margin_right = 32.0
-margin_bottom = 212.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -206,9 +225,9 @@ __meta__ = {
 [node name="Bucket" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 216.0
+margin_top = 252.0
 margin_right = 32.0
-margin_bottom = 248.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -224,9 +243,9 @@ __meta__ = {
 [node name="LightenDarken" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 252.0
+margin_top = 288.0
 margin_right = 32.0
-margin_bottom = 284.0
+margin_bottom = 320.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
