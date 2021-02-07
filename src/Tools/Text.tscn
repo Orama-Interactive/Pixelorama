@@ -32,7 +32,6 @@ margin_right = 116.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 text = "Roboto"
-items = [ "Roboto", null, false, 0, null ]
 selected = 0
 
 [node name="TextEdit" type="TextEdit" parent="." index="6"]
