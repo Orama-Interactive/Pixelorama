@@ -389,7 +389,7 @@ script = ExtResource( 7 )
 [node name="SelectionRectangle" type="Polygon2D" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 visible = false
 z_index = 1
-color = Color( 0.0823529, 0.694118, 0.623529, 0.592157 )
+color = Color( 1, 1, 1, 0 )
 invert_enable = true
 invert_border = 0.5
 polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )

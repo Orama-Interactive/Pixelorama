@@ -1,6 +1,8 @@
 extends Polygon2D
 
 
+var line_offset := Vector2.ZERO setget _offset_changed
+var tween : Tween
 var _selected_rect := Rect2(0, 0, 0, 0)
 var _clipped_rect := Rect2(0, 0, 0, 0)
 var _move_image := Image.new()
@@ -12,13 +14,104 @@ var _undo_data := {}
 
 
 func _ready() -> void:
+	tween = Tween.new()
+	tween.connect("tween_completed", self, "_offset_tween_completed")
+	add_child(tween)
+	tween.interpolate_property(self, "line_offset", Vector2.ZERO, Vector2(2, 2), 1)
+	tween.start()
 	_clear_image.create(1, 1, false, Image.FORMAT_RGBA8)
 	_clear_image.fill(Color(0, 0, 0, 0))
+#	set_rect(Rect2(16, 20, 4, 4))
+
+
+func _offset_tween_completed(_object, _key) -> void:
+	self.line_offset = Vector2.ZERO
+	tween.interpolate_property(self, "line_offset", Vector2.ZERO, Vector2(2, 2), 1)
+	tween.start()
+
+
+func _offset_changed(value : Vector2) -> void:
+	line_offset = value
+	update()
 
 
 func _draw() -> void:
+	var points : PoolVector2Array = polygon
+	for i in range(1, points.size() + 1):
+		var point0 = points[i - 1]
+		var point1
+		if i >= points.size():
+			point1 = points[0]
+		else:
+			point1 = points[i]
+		var start_x = min(point0.x, point1.x)
+		var start_y = min(point0.y, point1.y)
+		var end_x = max(point0.x, point1.x)
+		var end_y = max(point0.y, point1.y)
+
+		var start := Vector2(start_x, start_y)
+		var end := Vector2(end_x, end_y)
+		draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
+
 	if _move_pixel:
 		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
+
+
+# Taken and modified from https://github.com/juddrgledhill/godot-dashed-line
+func draw_dashed_line(from : Vector2, to : Vector2, color : Color, color2 : Color, width := 1.0, dash_length := 1.0, cap_end := false, antialiased := false) -> void:
+	var length = (to - from).length()
+	var normal = (to - from).normalized()
+	var dash_step = normal * dash_length
+
+	var horizontal : bool = from.y == to.y
+	var _offset : Vector2
+	if horizontal:
+		_offset = Vector2(line_offset.x, 0)
+	else:
+		_offset = Vector2(0, line_offset.y)
+
+	if length < dash_length: # not long enough to dash
+		draw_line(from, to, color, width, antialiased)
+		return
+
+	else:
+		var draw_flag = true
+		var segment_start = from
+		var steps = length/dash_length
+		for _start_length in range(0, steps + 1):
+			var segment_end = segment_start + dash_step
+
+			var start = segment_start + _offset
+			start.x = min(start.x, to.x)
+			start.y = min(start.y, to.y)
+
+			var end = segment_end + _offset
+			end.x = min(end.x, to.x)
+			end.y = min(end.y, to.y)
+			if draw_flag:
+				draw_line(start, end, color, width, antialiased)
+			else:
+				draw_line(start, end, color2, width, antialiased)
+				if _offset.length() < 1:
+					draw_line(from, from + _offset, color2, width, antialiased)
+				else:
+					var from_offseted : Vector2 = from + _offset
+					var halfway_point : Vector2 = from_offseted
+					if horizontal:
+						halfway_point += Vector2.LEFT
+					else:
+						halfway_point += Vector2.UP
+
+					from_offseted.x = min(from_offseted.x, to.x)
+					from_offseted.y = min(from_offseted.y, to.y)
+					draw_line(halfway_point, from_offseted, color2, width, antialiased)
+					draw_line(from, halfway_point, color, width, antialiased)
+
+			segment_start = segment_end
+			draw_flag = !draw_flag
+
+		if cap_end:
+			draw_line(segment_start, to, color, width, antialiased)
 
 
 func has_point(position : Vector2) -> bool:
