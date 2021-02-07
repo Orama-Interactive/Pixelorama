@@ -8,7 +8,6 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-visible = true
 margin_left = -3.0
 margin_top = 9.0
 margin_right = 419.0
@@ -52,7 +51,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 498.0
-margin_bottom = 306.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -731,6 +730,7 @@ mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0, 0 )
 
 [node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+visible = false
 margin_top = 28.0
 margin_right = 498.0
 margin_bottom = 306.0
