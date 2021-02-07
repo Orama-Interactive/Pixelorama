@@ -2,26 +2,26 @@ extends BaseTool
 
 
 var loaded_fonts := [
-	preload("res://assets/fonts/Roboto-Regular.ttf"),
-	preload("res://assets/fonts/Pixel fonts/CloisterBlack.ttf"),
-	preload("res://assets/fonts/Pixel fonts/SHPinscher-Regular.otf"),
-	preload("res://assets/fonts/Pixel fonts/slkscr.ttf"),
 	preload("res://assets/fonts/Pixel fonts/slkscrb.ttf"),
-	preload("res://assets/fonts/Pixel fonts/slkscre.ttf"),
 	preload("res://assets/fonts/Pixel fonts/slkscreb.ttf"),
+	preload("res://assets/fonts/Pixel fonts/slkscr.ttf"),
+	preload("res://assets/fonts/Pixel fonts/slkscre.ttf"),
+	preload("res://assets/fonts/Roboto-Regular.ttf"),
 	preload("res://assets/fonts/Pixel fonts/VT323-Regular.ttf"),
+	preload("res://assets/fonts/Pixel fonts/SHPinscher-Regular.otf"),
+	preload("res://assets/fonts/Pixel fonts/CloisterBlack.ttf"),
 ]
 var loaded_fonts_paths := [] # String[]
 var text_label : Label
 var text_edit_pos := Vector2.ZERO
 
 var font_data_index := 0
-var text_size := 16
+var text_size := 8
 var outline_color := Color.white
 var outline_size := 0
 var current_text = ""
 
-onready var font_data : DynamicFontData = preload("res://assets/fonts/Roboto-Regular.ttf")
+onready var font_data : DynamicFontData = loaded_fonts[0]
 onready var font := DynamicFont.new()
 onready var font_optionbutton : OptionButton = $FontOptionButton
 onready var font_filedialog : FileDialog = $FontFileDialog
@@ -30,14 +30,14 @@ onready var text_edit_stylebox : StyleBox = preload("res://assets/themes/text_to
 
 func _ready():
 	# same order as in "loaded_fonts"
-	font_optionbutton.add_item("Roboto")
-	font_optionbutton.add_item("CloisterBlack")
-	font_optionbutton.add_item("SHpinsher")
-	font_optionbutton.add_item("Slkscr")
 	font_optionbutton.add_item("Slkscb")
-	font_optionbutton.add_item("Slkscre")
 	font_optionbutton.add_item("Slkscreb")
+	font_optionbutton.add_item("Slkscr")
+	font_optionbutton.add_item("Slkscre")
+	font_optionbutton.add_item("Roboto")
 	font_optionbutton.add_item("VT323")
+	font_optionbutton.add_item("SHpinsher")
+	font_optionbutton.add_item("CloisterBlack")
 
 func _process(delta):
 	if text_label:
