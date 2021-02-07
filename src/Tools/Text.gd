@@ -39,6 +39,13 @@ func _ready():
 	font_optionbutton.add_item("Slkscreb")
 	font_optionbutton.add_item("VT323")
 
+func _process(delta):
+	if text_label:
+		# update text color if it is changed
+		if text_label.get_color("font_color", "Label") != tool_slot.color:
+			text_label.add_color_override("font_color", tool_slot.color)
+
+
 func get_config() -> Dictionary:
 	return {
 		"font_data_index" : font_data_index,
@@ -181,6 +188,9 @@ func _on_TextSizeSpinBox_value_changed(value : int) -> void:
 	text_size = value
 	font.size = text_size
 	save_config()
+	if text_label:
+		# reset rect to zero so that it can auto-set its size by the text inside it
+		text_label.rect_size = Vector2.ZERO
 
 
 func _on_FontOptionButton_item_selected(index : int) -> void:
@@ -244,8 +254,9 @@ func _on_OutlineSpinBox_value_changed(value : int) -> void:
 func _on_TextEdit_text_changed():
 	current_text = $TextEdit.text
 	if text_label:
-		text_label.add_color_override("font_color", tool_slot.color)
 		text_label.text = current_text
+		# reset rect to zero so that it can auto-set its size by the text inside it
+		text_label.rect_size = Vector2.ZERO
 
 
 func _on_ApplyText_pressed():
