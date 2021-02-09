@@ -1,7 +1,7 @@
 extends ConfirmationDialog
 
 
-enum ImageImportOptions {NEW_TAB, SPRITESHEET, NEW_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
+enum ImageImportOptions {NEW_TAB, SPRITESHEET_TAB, SPRITESHEET_LAYER, NEW_FRAME, REPLACE_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
 enum BrushTypes {FILE, PROJECT, RANDOM}
 
 var path : String
@@ -14,19 +14,34 @@ var brush_type : int = BrushTypes.FILE
 onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var image_size_label : Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 onready var frame_size_label : Label = $VBoxContainer/SizeContainer/FrameSizeLabel
-onready var spritesheet_options = $VBoxContainer/HBoxContainer/SpritesheetOptions
+onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
+onready var spritesheet_layer_options = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
+onready var replace_frame_options = $VBoxContainer/HBoxContainer/ReplaceFrameOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
 onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
 onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
 
 
 func _on_PreviewDialog_about_to_show() -> void:
+	var import_options :OptionButton= get_node("VBoxContainer/HBoxContainer/ImportOption")
+	
+	# # order as in ImageImportOptions enum
+	import_options.add_item("New tab")
+	import_options.add_item("Spritesheet (new tab)")
+	import_options.add_item("Spritesheet (new layer)")
+	import_options.add_item("New frame")
+	import_options.add_item("Replace Frame")
+	import_options.add_item("New layer")
+	import_options.add_item("New palette")
+	import_options.add_item("New brush")
+	import_options.add_item("New pattern")
+	
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image, 0)
 	texture_rect.texture = img_texture
-	spritesheet_options.get_node("HorizontalFrames").max_value = min(spritesheet_options.get_node("HorizontalFrames").max_value, image.get_size().x)
-	spritesheet_options.get_node("VerticalFrames").max_value = min(spritesheet_options.get_node("VerticalFrames").max_value, image.get_size().y)
+	spritesheet_tab_options.get_node("HorizontalFrames").max_value = min(spritesheet_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x)
+	spritesheet_tab_options.get_node("VerticalFrames").max_value = min(spritesheet_tab_options.get_node("VerticalFrames").max_value, image.get_size().y)
 	image_size_label.text = tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	frame_size_label.text = tr("Frame Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 
@@ -44,12 +59,21 @@ func _on_PreviewDialog_confirmed() -> void:
 	if current_import_option == ImageImportOptions.NEW_TAB:
 		OpenSave.open_image_as_new_tab(path, image)
 
-	elif current_import_option == ImageImportOptions.SPRITESHEET:
-		OpenSave.open_image_as_spritesheet(path, image, spritesheet_horizontal, spritesheet_vertical)
+	elif current_import_option == ImageImportOptions.SPRITESHEET_TAB:
+		OpenSave.open_image_as_spritesheet_tab(path, image, spritesheet_horizontal, spritesheet_vertical)
+
+	elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
+		var frame_index : int = spritesheet_layer_options.get_node("AtFrameSpinbox").value - 1
+		OpenSave.open_image_as_spritesheet_layer(path, image, path.get_basename().get_file(), spritesheet_horizontal, spritesheet_vertical, frame_index)
 
 	elif current_import_option == ImageImportOptions.NEW_FRAME:
 		var layer_index : int = new_frame_options.get_node("AtLayerSpinbox").value
 		OpenSave.open_image_as_new_frame(image, layer_index)
+
+	elif current_import_option == ImageImportOptions.REPLACE_FRAME:
+		var layer_index : int = replace_frame_options.get_node("AtLayerSpinbox").value
+		var frame_index : int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
+		OpenSave.open_image_at_frame(image, layer_index, frame_index)
 
 	elif current_import_option == ImageImportOptions.NEW_LAYER:
 		var frame_index : int = new_layer_options.get_node("AtFrameSpinbox").value - 1
@@ -77,22 +101,40 @@ func _on_PreviewDialog_confirmed() -> void:
 func _on_ImportOption_item_selected(id : int) -> void:
 	current_import_option = id
 	frame_size_label.visible = false
-	spritesheet_options.visible = false
+	spritesheet_tab_options.visible = false
+	spritesheet_layer_options.visible = false
 	new_frame_options.visible = false
+	replace_frame_options.visible = false
 	new_layer_options.visible = false
 	new_brush_options.visible = false
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
+	rect_size.x = 550
 
-	if id == ImageImportOptions.SPRITESHEET:
+	if id == ImageImportOptions.SPRITESHEET_TAB:
 		frame_size_label.visible = true
-		spritesheet_options.visible = true
+		spritesheet_tab_options.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
+		rect_size.x = spritesheet_tab_options.rect_size.x
+	
+	elif id == ImageImportOptions.SPRITESHEET_LAYER:
+		frame_size_label.visible = true
+		spritesheet_tab_options.visible = true
+		spritesheet_layer_options.visible = true
+		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		texture_rect.get_child(0).visible = true
+		texture_rect.get_child(1).visible = true
+		rect_size.x = spritesheet_layer_options.rect_size.x
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true
 		new_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
+
+	elif id == ImageImportOptions.REPLACE_FRAME:
+		replace_frame_options.visible = true
+		replace_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
+		replace_frame_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
