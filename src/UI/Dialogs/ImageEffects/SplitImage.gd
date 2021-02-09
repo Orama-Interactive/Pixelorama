@@ -42,10 +42,10 @@ func _on_PreviewDialog_about_to_show() -> void:
 	frame_size_label.text = tr("Frame Size") + ": " + str(image.get_size().x / spritesheet_horizontal) + "×" + str(image.get_size().y / spritesheet_vertical)
 	for child in texture_rect.get_node("VerticalLines").get_children():
 		child.queue_free()
-	spritesheet_frame_value_changed(spritesheet_vertical, true)
+	frame_value_changed(spritesheet_vertical, true)
 	for child in texture_rect.get_node("HorizLines").get_children():
 		child.queue_free()
-	spritesheet_frame_value_changed(spritesheet_horizontal, false)
+	frame_value_changed(spritesheet_horizontal, false)
 
 
 func _on_PreviewDialog_popup_hide() -> void:
@@ -62,7 +62,7 @@ func _on_HorizontalFrames_value_changed(value : int) -> void:
 	for child in texture_rect.get_node("HorizLines").get_children():
 		child.queue_free()
 
-	spritesheet_frame_value_changed(value, false)
+	frame_value_changed(value, false)
 
 
 func _on_VerticalFrames_value_changed(value : int) -> void:
@@ -70,10 +70,10 @@ func _on_VerticalFrames_value_changed(value : int) -> void:
 	for child in texture_rect.get_node("VerticalLines").get_children():
 		child.queue_free()
 
-	spritesheet_frame_value_changed(value, true)
+	frame_value_changed(value, true)
 
 
-func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
+func frame_value_changed(value : int, vertical : bool) -> void:
 	var image_size_y = texture_rect.rect_size.y
 	var image_size_x = texture_rect.rect_size.x
 	if image.get_size().x > image.get_size().y:
@@ -116,7 +116,6 @@ func split_image(image : Image, horizontal : int, vertical : int) -> void:
 	var start_frame = Global.current_project.current_frame
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
-	print(image.get_size())
 	var frame_width := image.get_size().x / horizontal
 	var frame_height := image.get_size().y / vertical
 
