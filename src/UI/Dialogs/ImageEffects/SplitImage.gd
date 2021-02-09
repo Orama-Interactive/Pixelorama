@@ -31,11 +31,9 @@ func _on_PreviewDialog_about_to_show() -> void:
 			image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO)
 		layer_i += 1
 	image.unlock()
-	var preview_image := Image.new()
-	preview_image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
-	preview_image.blend_rect(image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO)
+	
 	var preview_texture := ImageTexture.new()
-	preview_texture.create_from_image(preview_image, 0)
+	preview_texture.create_from_image(image, 0)
 	texture_rect.texture = preview_texture
 	
 	split_image_options.get_node("HorizontalFrames").max_value = min(split_image_options.get_node("HorizontalFrames").max_value, image.get_size().x)
