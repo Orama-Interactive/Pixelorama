@@ -1,0 +1,111 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/SplitImage.gd" type="Script" id=1]
+
+[node name="SplitImage" type="ConfirmationDialog"]
+visible = true
+margin_right = 573.0
+margin_bottom = 390.0
+rect_min_size = Vector2( 550, 70 )
+popup_exclusive = true
+window_title = "Import Options"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 557.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
+margin_left = 128.0
+margin_right = 428.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+
+[node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 304.0
+margin_right = 557.0
+margin_bottom = 318.0
+custom_constants/separation = 32
+
+[node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
+margin_right = 118.0
+margin_bottom = 14.0
+text = "Image Size: 64×64"
+
+[node name="FrameSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
+margin_left = 150.0
+margin_right = 268.0
+margin_bottom = 14.0
+text = "Frame size: 64×64"
+
+[node name="SplitImageOptions" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 322.0
+margin_right = 557.0
+margin_bottom = 346.0
+
+[node name="Label" type="Label" parent="VBoxContainer/SplitImageOptions"]
+margin_top = 5.0
+margin_right = 118.0
+margin_bottom = 19.0
+text = "Horizontal frames:"
+
+[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/SplitImageOptions"]
+margin_left = 122.0
+margin_right = 196.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="Label2" type="Label" parent="VBoxContainer/SplitImageOptions"]
+margin_left = 200.0
+margin_top = 5.0
+margin_right = 300.0
+margin_bottom = 19.0
+text = "Vertical frames:"
+
+[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/SplitImageOptions"]
+margin_left = 304.0
+margin_right = 378.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="MoveToCorner" type="CheckBox" parent="VBoxContainer/SplitImageOptions"]
+margin_left = 382.0
+margin_right = 557.0
+margin_bottom = 24.0
+text = "Move to top left corner"
+[connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
+[connection signal="value_changed" from="VBoxContainer/SplitImageOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SplitImageOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
