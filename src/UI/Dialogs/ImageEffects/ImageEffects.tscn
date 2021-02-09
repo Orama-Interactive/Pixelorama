@@ -22,6 +22,7 @@ __meta__ = {
 margin_bottom = 127.0
 
 [node name="SplitImage" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="ResizeCanvas" parent="." instance=ExtResource( 8 )]
 margin_right = 216.0
