@@ -4,7 +4,7 @@
 
 [node name="SplitImage" type="ConfirmationDialog"]
 margin_right = 573.0
-margin_bottom = 390.0
+margin_bottom = 446.0
 rect_min_size = Vector2( 550, 70 )
 window_title = "Split Image"
 resizable = true
@@ -97,11 +97,17 @@ mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 
-[node name="MoveToCorner" type="CheckBox" parent="VBoxContainer/SplitImageOptions"]
-margin_left = 382.0
+[node name="MoveToCorner" type="CheckBox" parent="VBoxContainer"]
+margin_top = 350.0
 margin_right = 557.0
-margin_bottom = 24.0
+margin_bottom = 374.0
 text = "Move to top left corner"
+
+[node name="MergeLayers" type="CheckBox" parent="VBoxContainer"]
+margin_top = 378.0
+margin_right = 557.0
+margin_bottom = 402.0
+text = "Merge Layers (other layers will not be affected)"
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]

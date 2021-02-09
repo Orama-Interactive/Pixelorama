@@ -119,18 +119,35 @@ func split_image(image : Image, horizontal : int, vertical : int) -> void:
 	var frame_width := image.get_size().x / horizontal
 	var frame_height := image.get_size().y / vertical
 
-	# resize canvas to if "frame_width" or "frame_height" is too large
-	var project_width :int = max(frame_width, Global.current_project.size.x)
-	var project_height :int = max(frame_height, Global.current_project.size.y)
-	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0) 
+	if get_node("VBoxContainer/MergeLayers").pressed:
+		for yy in range(vertical):
+			for xx in range(horizontal):
+				var cropped_image := Image.new()
+				cropped_image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+				
+				if get_node("VBoxContainer/MoveToCorner").pressed:
+					cropped_image.blend_rect(image, Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height), Vector2.ZERO)
+				else:
+					cropped_image.blend_rect(image, Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height), Vector2(frame_width * xx, frame_height * yy))
+				OpenSave.open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
 
-	# slice images
-	for yy in range(vertical):
-		for xx in range(horizontal):
-			var cropped_image := Image.new()
-			cropped_image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
-			if split_image_options.get_node("MoveToCorner").pressed:
-				cropped_image.blend_rect(image, Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height), Vector2.ZERO)
-			else:
-				cropped_image.blend_rect(image, Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height), Vector2(frame_width * xx, frame_height * yy))
-			OpenSave.open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
+	else:
+		var frame_to_split = Global.current_project.frames[start_frame]
+		var start_split_frame = Global.current_project.frames.size()
+		for i in frame_to_split.cels.size():
+			var frame_no = start_split_frame
+			for yy in range(vertical):
+				for xx in range(horizontal):
+					var cropped_image := Image.new()
+					cropped_image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+					
+					if get_node("VBoxContainer/MoveToCorner").pressed:
+						cropped_image.blend_rect(frame_to_split.cels[i].image, Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height), Vector2.ZERO)
+					else:
+						cropped_image.blend_rect(frame_to_split.cels[i].image, Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height), Vector2(frame_width * xx, frame_height * yy))
+					
+					if i == 0:
+						OpenSave.open_image_as_new_frame(cropped_image, 0)
+					else:
+						OpenSave.open_image_at_frame(cropped_image, i, frame_no)
+						frame_no += 1
