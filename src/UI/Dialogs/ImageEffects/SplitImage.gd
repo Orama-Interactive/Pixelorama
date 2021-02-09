@@ -40,6 +40,12 @@ func _on_PreviewDialog_about_to_show() -> void:
 	split_image_options.get_node("VerticalFrames").max_value = min(split_image_options.get_node("VerticalFrames").max_value, image.get_size().y)
 	image_size_label.text = tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	frame_size_label.text = tr("Frame Size") + ": " + str(image.get_size().x / spritesheet_horizontal) + "×" + str(image.get_size().y / spritesheet_vertical)
+	for child in texture_rect.get_node("VerticalLines").get_children():
+		child.queue_free()
+	spritesheet_frame_value_changed(spritesheet_vertical, true)
+	for child in texture_rect.get_node("HorizLines").get_children():
+		child.queue_free()
+	spritesheet_frame_value_changed(spritesheet_horizontal, false)
 
 
 func _on_PreviewDialog_popup_hide() -> void:
@@ -110,6 +116,7 @@ func split_image(image : Image, horizontal : int, vertical : int) -> void:
 	var start_frame = Global.current_project.current_frame
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
+	print(image.get_size())
 	var frame_width := image.get_size().x / horizontal
 	var frame_height := image.get_size().y / vertical
 

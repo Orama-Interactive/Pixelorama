@@ -3,12 +3,10 @@
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/SplitImage.gd" type="Script" id=1]
 
 [node name="SplitImage" type="ConfirmationDialog"]
-visible = true
 margin_right = 573.0
 margin_bottom = 390.0
 rect_min_size = Vector2( 550, 70 )
-popup_exclusive = true
-window_title = "Import Options"
+window_title = "Split Image"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {
