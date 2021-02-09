@@ -58,12 +58,16 @@ __meta__ = {
 margin_right = 375.0
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-split_image"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-split_image/"
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-split_image"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-split_image/untitled"
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 
