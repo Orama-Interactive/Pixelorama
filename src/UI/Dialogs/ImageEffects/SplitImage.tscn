@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/SplitImage.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="SplitImage" type="ConfirmationDialog"]
 margin_right = 573.0
@@ -31,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
+[node name="Preview" type="TextureRect" parent="VBoxContainer/CenterContainer"]
 margin_left = 128.0
 margin_right = 428.0
 margin_bottom = 300.0
@@ -42,9 +43,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+[node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/Preview"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+[node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/Preview"]
+
+[node name="CentreContainer" type="CenterContainer" parent="VBoxContainer/CenterContainer/Preview"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransparentChecker" parent="VBoxContainer/CenterContainer/Preview/CentreContainer" instance=ExtResource( 2 )]
+margin_left = 130.0
+margin_top = 130.0
+margin_right = 170.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 40, 40 )
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 304.0

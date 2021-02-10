@@ -6,7 +6,7 @@ var image : Image
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
 
-onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
+onready var preview_rect : TextureRect = $VBoxContainer/CenterContainer/Preview
 onready var image_size_label : Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 onready var frame_size_label : Label = $VBoxContainer/SizeContainer/FrameSizeLabel
 onready var split_image_options = $VBoxContainer/SplitImageOptions
@@ -34,18 +34,21 @@ func _on_PreviewDialog_about_to_show() -> void:
 	
 	var preview_texture := ImageTexture.new()
 	preview_texture.create_from_image(image, 0)
-	texture_rect.texture = preview_texture
+	preview_rect.texture = preview_texture
 	
 	split_image_options.get_node("HorizontalFrames").max_value = min(split_image_options.get_node("HorizontalFrames").max_value, image.get_size().x)
 	split_image_options.get_node("VerticalFrames").max_value = min(split_image_options.get_node("VerticalFrames").max_value, image.get_size().y)
 	image_size_label.text = tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	frame_size_label.text = tr("Frame Size") + ": " + str(image.get_size().x / spritesheet_horizontal) + "×" + str(image.get_size().y / spritesheet_vertical)
-	for child in texture_rect.get_node("VerticalLines").get_children():
+	
+	for child in preview_rect.get_node("VerticalLines").get_children():
 		child.queue_free()
 	frame_value_changed(spritesheet_vertical, true)
-	for child in texture_rect.get_node("HorizLines").get_children():
+	for child in preview_rect.get_node("HorizLines").get_children():
 		child.queue_free()
 	frame_value_changed(spritesheet_horizontal, false)
+	
+	update_transparent_background_size(image)
 
 
 func _on_PreviewDialog_popup_hide() -> void:
@@ -57,9 +60,24 @@ func _on_PreviewDialog_confirmed() -> void:
 		return
 	split_image(image, spritesheet_horizontal, spritesheet_vertical)
 
+
+func update_transparent_background_size(preview_image : Image) -> void:
+	var image_size_y = preview_rect.rect_size.y
+	var image_size_x = preview_rect.rect_size.x
+	if preview_image.get_size().x > preview_image.get_size().y:
+		var scale_ratio = preview_image.get_size().x / image_size_x
+		image_size_y = preview_image.get_size().y / scale_ratio
+	else:
+		var scale_ratio = preview_image.get_size().y / image_size_y
+		image_size_x = preview_image.get_size().x / scale_ratio
+
+	var checker = preview_rect.get_node("CentreContainer/TransparentChecker")
+	checker.rect_min_size = Vector2(image_size_x, image_size_y)
+
+
 func _on_HorizontalFrames_value_changed(value : int) -> void:
 	spritesheet_horizontal = value
-	for child in texture_rect.get_node("HorizLines").get_children():
+	for child in preview_rect.get_node("HorizLines").get_children():
 		child.queue_free()
 
 	frame_value_changed(value, false)
@@ -67,15 +85,15 @@ func _on_HorizontalFrames_value_changed(value : int) -> void:
 
 func _on_VerticalFrames_value_changed(value : int) -> void:
 	spritesheet_vertical = value
-	for child in texture_rect.get_node("VerticalLines").get_children():
+	for child in preview_rect.get_node("VerticalLines").get_children():
 		child.queue_free()
 
 	frame_value_changed(value, true)
 
 
 func frame_value_changed(value : int, vertical : bool) -> void:
-	var image_size_y = texture_rect.rect_size.y
-	var image_size_x = texture_rect.rect_size.x
+	var image_size_y = preview_rect.rect_size.y
+	var image_size_x = preview_rect.rect_size.x
 	if image.get_size().x > image.get_size().y:
 		var scale_ratio = image.get_size().x / image_size_x
 		image_size_y = image.get_size().y / scale_ratio
@@ -83,8 +101,8 @@ func frame_value_changed(value : int, vertical : bool) -> void:
 		var scale_ratio = image.get_size().y / image_size_y
 		image_size_x = image.get_size().x / scale_ratio
 
-	var offset_x = (texture_rect.rect_size.x - image_size_x) / 2
-	var offset_y = (texture_rect.rect_size.y - image_size_y) / 2
+	var offset_x = (preview_rect.rect_size.x - image_size_x) / 2
+	var offset_y = (preview_rect.rect_size.y - image_size_y) / 2
 
 	if value > 1:
 		var line_distance
@@ -100,11 +118,11 @@ func frame_value_changed(value : int, vertical : bool) -> void:
 			if vertical:
 				line_2d.add_point(Vector2(offset_x, i * line_distance + offset_y))
 				line_2d.add_point(Vector2(image_size_x + offset_x, i * line_distance + offset_y))
-				texture_rect.get_node("VerticalLines").add_child(line_2d)
+				preview_rect.get_node("VerticalLines").add_child(line_2d)
 			else:
 				line_2d.add_point(Vector2(i * line_distance + offset_x, offset_y))
 				line_2d.add_point(Vector2(i * line_distance + offset_x, image_size_y + offset_y))
-				texture_rect.get_node("HorizLines").add_child(line_2d)
+				preview_rect.get_node("HorizLines").add_child(line_2d)
 
 	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
 	var frame_height = floor(image.get_size().y / spritesheet_vertical)
