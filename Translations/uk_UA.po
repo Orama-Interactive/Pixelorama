@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-02-11 18:53\n"
+"PO-Revision-Date: 2021-02-11 19:12\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "Масштабувати зображення"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Пікселі"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Відсоток"
 
 msgid "Crop Image"
 msgstr "Обрізати зображення"
@@ -139,7 +139,7 @@ msgid "Resize Canvas"
 msgstr "Змінити розмір полотна"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Централізувати зображення"
 
 msgid "Rotate Image"
 msgstr "Повернути зображення"
@@ -163,7 +163,7 @@ msgid "Tile Mode"
 msgstr "Режим плитки"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Прозорість вікна"
 
 msgid "Mirror View"
 msgstr "Дзеркальний перегляд"
@@ -884,13 +884,13 @@ msgid "Show at zoom:"
 msgstr "Показати при збільшенні:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Встановлює мінімальне масштабування, при якому буде відображатися сітка для пікселів"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Колір піксельної сітки:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Колір піксельної сітки"
 
 msgid "Transparency"
 msgstr ""
