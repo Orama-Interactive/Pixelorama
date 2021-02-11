@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-02-11 18:45\n"
+"PO-Revision-Date: 2021-02-11 18:53\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -172,7 +172,7 @@ msgid "Show Grid"
 msgstr "Показати сітку"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Показати сітку пікселів"
 
 msgid "Show Rulers"
 msgstr "Показати лінійки"
@@ -878,10 +878,10 @@ msgid "A color of the grid"
 msgstr ""
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Сітка пікселів"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Показати при збільшенні:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
@@ -938,7 +938,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Встановлює обмеження кадрів в секунду. Чим нижче значення, ти менше додаток використовує CPU, але програма починає працювати повільніше, стає менш стабільною і може не реагувати. 0 означає, що немає ніяких обмежень."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Якщо цей параметр увімкнено, коли вікно додатку втрачає фокус, то обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
+msgstr "Якщо цей параметр увімкнено, то коли вікно додатку втратить фокус, обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
 
 msgid "Brush:"
 msgstr ""
