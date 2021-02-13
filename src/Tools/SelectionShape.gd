@@ -1,8 +1,10 @@
-extends Polygon2D
+class_name SelectionShape extends Polygon2D
 
 
 var line_offset := Vector2.ZERO setget _offset_changed
 var tween : Tween
+var local_selected_pixels := [] setget _local_selected_pixels_changed # Array of Vector2s
+var clear_selection_on_tree_exit := true
 var _selected_rect := Rect2(0, 0, 0, 0)
 var _clipped_rect := Rect2(0, 0, 0, 0)
 var _move_image := Image.new()
@@ -52,6 +54,20 @@ func _draw() -> void:
 		var start := Vector2(start_x, start_y)
 		var end := Vector2(end_x, end_y)
 		draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
+
+	if !local_selected_pixels:
+		return
+	var rect_pos := _selected_rect.position
+	var rect_end := _selected_rect.end
+	draw_circle(rect_pos, 1, Color.gray)
+	draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_pos.y), 1, Color.gray)
+	draw_circle(Vector2(rect_end.x, rect_pos.y), 1, Color.gray)
+	draw_circle(Vector2(rect_end.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
+	draw_circle(rect_end, 1, Color.gray)
+	draw_circle(Vector2(rect_end.x, rect_end.y), 1, Color.gray)
+	draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_end.y), 1, Color.gray)
+	draw_circle(Vector2(rect_pos.x, rect_end.y), 1, Color.gray)
+	draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
 
 	if _move_pixel:
 		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
@@ -114,8 +130,22 @@ func draw_dashed_line(from : Vector2, to : Vector2, color : Color, color2 : Colo
 			draw_line(segment_start, to, color, width, antialiased)
 
 
+func _local_selected_pixels_changed(value : Array) -> void:
+	for pixel in local_selected_pixels:
+		if pixel in Global.current_project.selected_pixels:
+			Global.current_project.selected_pixels.erase(pixel)
+
+	local_selected_pixels = value
+
+	for pixel in local_selected_pixels:
+		if pixel in Global.current_project.selected_pixels:
+			continue
+		else:
+			Global.current_project.selected_pixels.append(pixel)
+
+
 func has_point(position : Vector2) -> bool:
-	return _selected_rect.has_point(position)
+	return Geometry.is_point_in_polygon(position, polygon)
 
 
 func get_rect() -> Rect2:
@@ -128,32 +158,69 @@ func set_rect(rect : Rect2) -> void:
 	polygon[1] = Vector2(rect.end.x, rect.position.y)
 	polygon[2] = rect.end
 	polygon[3] = Vector2(rect.position.x, rect.end.y)
-	visible = not rect.has_no_area()
-
-	var project : Project = Global.current_project
-	if rect.has_no_area():
-		project.selected_pixels = []
-	else:
-		project.clear_selection()
-		for x in range(rect.position.x, rect.end.x):
-			for y in range(rect.position.y, rect.end.y):
-				if x < 0 or x >= project.size.x:
-					continue
-				if y < 0 or y >= project.size.y:
-					continue
-				project.selected_pixels.append(Vector2(x, y))
+#	visible = not rect.has_no_area()
 
 
-func move_rect(move : Vector2) -> void:
+func move_polygon(move : Vector2) -> void:
 	_selected_rect.position += move
 	_clipped_rect.position += move
-	set_rect(_selected_rect)
+	for i in polygon.size():
+		polygon[i] += move
+#	set_rect(_selected_rect)
+
+
+func move_polygon_end(new_pos : Vector2, old_pos : Vector2) -> void:
+	var diff := new_pos - old_pos
+	var selected_pixels_copy = local_selected_pixels.duplicate()
+	for i in selected_pixels_copy.size():
+		selected_pixels_copy[i] += diff
+
+	self.local_selected_pixels = selected_pixels_copy
 
 
 func select_rect() -> void:
-	var undo_data = _get_undo_data(false)
-	Global.current_project.selected_rect = _selected_rect
-	commit_undo("Rectangle Select", undo_data)
+	var project : Project = Global.current_project
+	self.local_selected_pixels = []
+	var selected_pixels_copy = local_selected_pixels.duplicate()
+	for x in range(_selected_rect.position.x, _selected_rect.end.x):
+		for y in range(_selected_rect.position.y, _selected_rect.end.y):
+			var pos := Vector2(x, y)
+#			if polygon.size() > 4: # if it's not a rectangle
+#				if !Geometry.is_point_in_polygon(pos, polygon):
+#					continue
+			if x < 0 or x >= project.size.x:
+				continue
+			if y < 0 or y >= project.size.y:
+				continue
+			selected_pixels_copy.append(pos)
+
+	self.local_selected_pixels = selected_pixels_copy
+	if local_selected_pixels.size() == 0:
+		queue_free()
+		return
+	merge_multiple_selections()
+#	var undo_data = _get_undo_data(false)
+#	Global.current_project.selected_rect = _selected_rect
+#	commit_undo("Rectangle Select", undo_data)
+
+
+func merge_multiple_selections() -> void:
+	if Global.current_project.selections.size() < 2:
+		return
+	for selection in Global.current_project.selections:
+		if selection == self:
+			continue
+		var arr = Geometry.merge_polygons_2d(polygon, selection.polygon)
+#		print(arr)
+		if arr.size() == 1: # if the selections intersect
+			set_polygon(arr[0])
+			_selected_rect = _selected_rect.merge(selection._selected_rect)
+			var selected_pixels_copy = local_selected_pixels.duplicate()
+			for pixel in selection.local_selected_pixels:
+				selected_pixels_copy.append(pixel)
+			selection.clear_selection_on_tree_exit = false
+			selection.queue_free()
+			self.local_selected_pixels = selected_pixels_copy
 
 
 func move_start(move_pixel : bool) -> void:
@@ -283,3 +350,9 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 		data["image_data"] = image.data
 		image.lock()
 	return data
+
+
+func _on_SelectionShape_tree_exiting() -> void:
+	Global.current_project.selections.erase(self)
+	if clear_selection_on_tree_exit:
+		self.local_selected_pixels = []

@@ -9,12 +9,16 @@ func draw_start(position : Vector2) -> void:
 	starting_pos = position
 	offset = position
 	if Global.current_project.selected_pixels:
-		Global.selection_rectangle.move_start(true)
+		pass
+#		Global.selection_rectangl.move_start(true)
 
 
 func draw_move(position : Vector2) -> void:
 	if Global.current_project.selected_pixels:
-		Global.selection_rectangle.move_rect(position - offset)
+		for selection in Global.current_project.selections:
+			selection.move_polygon(position - offset)
+		offset = position
+#		Global.selection_rectangl.move_rect(position - offset)
 	else:
 		Global.canvas.move_preview_location = position - starting_pos
 	offset = position
@@ -37,7 +41,8 @@ func draw_end(position : Vector2) -> void:
 
 #			print(pixels[3])
 			if project.selected_pixels:
-				Global.selection_rectangle.move_end()
+				for selection in Global.current_project.selections:
+					selection.select_rect()
 			else:
 				Global.canvas.move_preview_location = Vector2.ZERO
 				var image_copy := Image.new()

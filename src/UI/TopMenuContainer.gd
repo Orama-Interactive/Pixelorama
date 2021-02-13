@@ -265,16 +265,21 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.current_project.undo_redo.redo()
 			Global.control.redone = false
 		EditMenuId.COPY:
-			Global.selection_rectangle.copy()
+			pass
+#			Global.selection_rectangl.copy()
 		EditMenuId.CUT:
-			Global.selection_rectangle.cut()
+			pass
+#			Global.selection_rectangl.cut()
 		EditMenuId.PASTE:
-			Global.selection_rectangle.paste()
+			pass
+#			Global.selection_rectangl.paste()
 		EditMenuId.DELETE:
-			Global.selection_rectangle.delete()
+			pass
+#			Global.selection_rectangl.delete()
 		EditMenuId.CLEAR_SELECTION:
-			Global.selection_rectangle.set_rect(Rect2(0, 0, 0, 0))
-			Global.selection_rectangle.select_rect()
+			pass
+#			Global.selection_rectangl.set_rect(Rect2(0, 0, 0, 0))
+#			Global.selection_rectangl.select_rect()
 		EditMenuId.PREFERENCES:
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)

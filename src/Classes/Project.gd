@@ -1,7 +1,6 @@
 class_name Project extends Reference
 # A class for project properties.
 
-
 var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
@@ -24,7 +23,7 @@ var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
 var selected_pixels := []
-var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
+var selections := [] setget _set_selections # Array of SelectionShape(s)
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
@@ -85,9 +84,9 @@ func clear_selection() -> void:
 	selected_pixels.clear()
 
 
-func _set_selected_rect(value : Rect2) -> void:
-	selected_rect = value
-	Global.selection_rectangle.set_rect(value)
+func _set_selections(value : Array) -> void:
+	selections = value
+#	Global.selection_rectangl.set_rect(value)
 
 
 func change_project() -> void:
@@ -147,7 +146,7 @@ func change_project() -> void:
 	self.animation_tags = animation_tags
 
 	# Change the selection rectangle
-	Global.selection_rectangle.set_rect(selected_rect)
+#	Global.selection_rectangl.set_rect(selected_rect)
 
 	# Change the guides
 	for guide in Global.canvas.get_children():
@@ -363,7 +362,7 @@ func name_changed(value : String) -> void:
 func size_changed(value : Vector2) -> void:
 	size = value
 	update_tile_mode_rects()
-	Global.selection_rectangle.set_rect(Global.selection_rectangle.get_rect())
+#	Global.selection_rectangl.set_rect(Global.selection_rectangl.get_rect())
 
 
 func frames_changed(value : Array) -> void:
@@ -582,3 +581,16 @@ func update_tile_mode_rects() -> void:
 
 func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
+
+
+func get_selection_image() -> Image:
+	var image := Image.new()
+	var cel_image : Image = frames[current_frame].cels[current_layer].image
+	image.copy_from(cel_image)
+	image.lock()
+	image.fill(Color(0, 0, 0, 0))
+	for pixel in selected_pixels:
+		var color : Color = cel_image.get_pixelv(pixel)
+		image.set_pixelv(pixel, color)
+	image.unlock()
+	return image

@@ -114,7 +114,6 @@ var small_preview_viewport : ViewportContainer
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
-var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
 var transparent_checker : ColorRect
@@ -218,7 +217,6 @@ func _ready() -> void:
 	camera = find_node_by_name(main_viewport, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	camera_preview = find_node_by_name(root, "CameraPreview")
-	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
 	transparent_checker = find_node_by_name(root, "TransparentChecker")
