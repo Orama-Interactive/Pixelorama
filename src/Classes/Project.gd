@@ -583,6 +583,62 @@ func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
 
 
+func get_selection_polygon() -> PoolVector2Array:
+	if !selected_pixels:
+		return PoolVector2Array()
+	var polygon := PoolVector2Array()
+#	var corner = selected_pixels[0]
+	for pix in selected_pixels:
+		var polygon_point = pix
+		var right_n : Vector2 = pix + Vector2.RIGHT
+		var left_n : Vector2 = pix + Vector2.LEFT
+		var down_n : Vector2 = pix + Vector2.DOWN
+		var up_n : Vector2 = pix + Vector2.UP
+
+		var x_axis : bool = right_n in selected_pixels and left_n in selected_pixels
+		var y_axis : bool = down_n in selected_pixels and up_n in selected_pixels
+		if x_axis or y_axis:
+#			if not right_n in selected_pixels and down_n + Vector2.DOWN + Vector2.RIGHT in selected_pixels:
+#				polygon.append(right_n + Vector2.DOWN)
+#			else:
+			continue
+		else:
+			if !(right_n in selected_pixels):
+				polygon_point += Vector2.RIGHT
+			if !(down_n in selected_pixels):
+				polygon_point += Vector2.DOWN
+			polygon.append(polygon_point)
+	polygon = sort_polygon(polygon)
+#	print(polygon)
+	return polygon
+
+
+func sort_polygon(polygon : PoolVector2Array) -> PoolVector2Array:
+	# Find the center point of the polygon
+	var x := 0
+	var y := 0
+	for p in polygon:
+		x += p.x
+		y += p.y
+	var center := Vector2(x / polygon.size(), y / polygon.size())
+
+	# Sort points by angle from the center
+	var angles := []
+	for p in polygon:
+		angles.append([p, center.angle_to_point(p)])
+	angles.sort_custom(self, "sort_by_angle")
+	polygon.resize(0)
+	for p in angles:
+		polygon.append(p[0])
+	return polygon
+
+
+static func sort_by_angle(a, b) -> bool:
+	if a[1] < b[1]:
+		return true
+	return false
+
+
 func get_selection_image() -> Image:
 	var image := Image.new()
 	var cel_image : Image = frames[current_frame].cels[current_layer].image
