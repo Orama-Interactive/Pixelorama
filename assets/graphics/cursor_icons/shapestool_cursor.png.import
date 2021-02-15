@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/shapestool_cursor.png-0c8451361a0aa7a2d0959d7b71511073.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/shapestool_cursor.png"
+dest_files=[ "res://.import/shapestool_cursor.png-0c8451361a0aa7a2d0959d7b71511073.image" ]
+
+[params]
+

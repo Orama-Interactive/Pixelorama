@@ -11,6 +11,7 @@ onready var tools := [
 	[$Eraser, "eraser"],
 	[$Bucket, "fill"],
 	[$LightenDarken, "lightdark"],
+	[$ShapesTool, "shapestool"],
 ]
 
 

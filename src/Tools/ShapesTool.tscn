@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/ShapesTool.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Brush" parent="." index="1"]
+margin_bottom = 42.0
+
+[node name="Type" parent="Brush" index="0"]
+visible = false
+
+[node name="Size" parent="Brush" index="1"]
+margin_left = 21.0
+margin_right = 95.0
+margin_bottom = 24.0
+
+[node name="BrushSize" parent="." index="2"]
+margin_top = 46.0
+margin_bottom = 62.0
+
+[node name="PixelPerfect" parent="." index="3"]
+visible = false
+margin_top = 66.0
+margin_bottom = 90.0
+
+[node name="ColorInterpolation" parent="." index="4"]
+margin_top = 66.0
+margin_bottom = 128.0
+
+[node name="ShapesDropdown" type="OptionButton" parent="." index="5"]
+margin_top = 66.0
+margin_right = 116.0
+margin_bottom = 86.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EmptySpacer" parent="." index="6"]
+margin_top = 90.0
+margin_bottom = 102.0
+
+[node name="Mirror" parent="." index="7"]
+visible = false
+margin_top = 106.0
+margin_bottom = 123.0
+[connection signal="item_selected" from="ShapesDropdown" to="." method="_on_ShapesDropdown_item_selected"]

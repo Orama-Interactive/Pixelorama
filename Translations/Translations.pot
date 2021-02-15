@@ -742,6 +742,12 @@ msgid "Lighten/Darken\n\n"
 "%s for right mouse button"
 msgstr ""
 
+msgid "Shapes Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr ""
 
