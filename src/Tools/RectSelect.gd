@@ -17,7 +17,12 @@ func draw_start(position : Vector2) -> void:
 		i += 1
 
 	if current_selection_id == -1:
-		current_selection_id = Global.current_project.selections.size()
+		if !Tools.shift and !Tools.control:
+			for selection in Global.current_project.selections:
+				selection.queue_free()
+			current_selection_id = 0
+		else:
+			current_selection_id = Global.current_project.selections.size()
 		var selection_shape := preload("res://src/Tools/SelectionShape.tscn").instance()
 		Global.current_project.selections.append(selection_shape)
 		Global.canvas.add_child(selection_shape)
@@ -70,7 +75,7 @@ func draw_end(position : Vector2) -> void:
 			_selection.move_polygon_end(position, start_position)
 	else:
 		var selection : SelectionShape = Global.current_project.selections[current_selection_id]
-		selection.select_rect()
+		selection.select_rect(!Tools.control)
 #	_drag = false
 	_move = false
 	cursor_text = ""

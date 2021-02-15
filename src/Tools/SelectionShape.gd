@@ -181,7 +181,7 @@ func move_polygon_end(new_pos : Vector2, old_pos : Vector2) -> void:
 	self.local_selected_pixels = selected_pixels_copy
 
 
-func select_rect() -> void:
+func select_rect(merge := true) -> void:
 	var project : Project = Global.current_project
 	self.local_selected_pixels = []
 	var selected_pixels_copy = local_selected_pixels.duplicate()
@@ -201,30 +201,38 @@ func select_rect() -> void:
 	if local_selected_pixels.size() == 0:
 		queue_free()
 		return
-	merge_multiple_selections()
+	merge_multiple_selections(merge)
 #	var undo_data = _get_undo_data(false)
 #	Global.current_project.selected_rect = _selected_rect
 #	commit_undo("Rectangle Select", undo_data)
 
 
-func merge_multiple_selections() -> void:
+func merge_multiple_selections(merge := true) -> void:
 	if Global.current_project.selections.size() < 2:
 		return
 	for selection in Global.current_project.selections:
 		if selection == self:
 			continue
-		var arr = Geometry.merge_polygons_2d(polygon, selection.polygon)
-#		print(arr)
-		if arr.size() == 1: # if the selections intersect
-			set_polygon(arr[0])
-			_selected_rect = _selected_rect.merge(selection._selected_rect)
-			var selected_pixels_copy = local_selected_pixels.duplicate()
-			for pixel in selection.local_selected_pixels:
-				selected_pixels_copy.append(pixel)
-			selection.clear_selection_on_tree_exit = false
-			selection.queue_free()
-			self.local_selected_pixels = selected_pixels_copy
-
+		if merge:
+			var arr = Geometry.merge_polygons_2d(polygon, selection.polygon)
+			if arr.size() == 1: # if the selections intersect
+				set_polygon(arr[0])
+				_selected_rect = _selected_rect.merge(selection._selected_rect)
+				var selected_pixels_copy = local_selected_pixels.duplicate()
+				for pixel in selection.local_selected_pixels:
+					selected_pixels_copy.append(pixel)
+				selection.clear_selection_on_tree_exit = false
+				selection.queue_free()
+				self.local_selected_pixels = selected_pixels_copy
+		else:
+			var arr = Geometry.clip_polygons_2d(selection.polygon, polygon)
+			if arr.size() == 1: # if the selections intersect
+				selection.set_polygon(arr[0])
+				var selected_pixels_copy = selection.local_selected_pixels.duplicate()
+				for pixel in local_selected_pixels:
+					selected_pixels_copy.erase(pixel)
+				selection.local_selected_pixels = selected_pixels_copy
+				queue_free()
 
 func move_start(move_pixel : bool) -> void:
 	if not move_pixel:
