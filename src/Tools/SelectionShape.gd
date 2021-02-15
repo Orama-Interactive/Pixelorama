@@ -228,14 +228,20 @@ func merge_multiple_selections(merge := true) -> void:
 				self.local_selected_pixels = selected_pixels_copy
 		else:
 			var arr = Geometry.clip_polygons_2d(selection.polygon, polygon)
+#			print(arr.size())
 			if arr.size() == 0: # if the new selection completely overlaps the current
 				selection.queue_free()
-			elif arr.size() == 1: # if the selections intersect
+			else: # if the selections intersect
 				selection.set_polygon(arr[0])
 				var selected_pixels_copy = selection.local_selected_pixels.duplicate()
 				for pixel in local_selected_pixels:
 					selected_pixels_copy.erase(pixel)
 				selection.local_selected_pixels = selected_pixels_copy
+				for i in range(1, arr.size()):
+					var selection_shape = load("res://src/Tools/SelectionShape.tscn").instance()
+					Global.current_project.selections.append(selection_shape)
+					Global.canvas.add_child(selection_shape)
+					selection_shape.set_polygon(arr[i])
 
 
 func move_start(move_pixel : bool) -> void:
