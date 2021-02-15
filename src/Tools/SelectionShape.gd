@@ -23,7 +23,6 @@ func _ready() -> void:
 	tween.start()
 	_clear_image.create(1, 1, false, Image.FORMAT_RGBA8)
 	_clear_image.fill(Color(0, 0, 0, 0))
-#	set_rect(Rect2(16, 20, 4, 4))
 
 
 func _offset_tween_completed(_object, _key) -> void:
@@ -57,17 +56,18 @@ func _draw() -> void:
 
 	if !local_selected_pixels:
 		return
-	var rect_pos := _selected_rect.position
-	var rect_end := _selected_rect.end
-	draw_circle(rect_pos, 1, Color.gray)
-	draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_pos.y), 1, Color.gray)
-	draw_circle(Vector2(rect_end.x, rect_pos.y), 1, Color.gray)
-	draw_circle(Vector2(rect_end.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
-	draw_circle(rect_end, 1, Color.gray)
-	draw_circle(Vector2(rect_end.x, rect_end.y), 1, Color.gray)
-	draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_end.y), 1, Color.gray)
-	draw_circle(Vector2(rect_pos.x, rect_end.y), 1, Color.gray)
-	draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
+#	draw_polygon(Global.current_project.get_selection_polygon(), [Color(1, 1, 1, 0.5)])
+#	var rect_pos := _selected_rect.position
+#	var rect_end := _selected_rect.end
+#	draw_circle(rect_pos, 1, Color.gray)
+#	draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_pos.y), 1, Color.gray)
+#	draw_circle(Vector2(rect_end.x, rect_pos.y), 1, Color.gray)
+#	draw_circle(Vector2(rect_end.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
+#	draw_circle(rect_end, 1, Color.gray)
+#	draw_circle(Vector2(rect_end.x, rect_end.y), 1, Color.gray)
+#	draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_end.y), 1, Color.gray)
+#	draw_circle(Vector2(rect_pos.x, rect_end.y), 1, Color.gray)
+#	draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
 
 	if _move_pixel:
 		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
@@ -142,6 +142,9 @@ func _local_selected_pixels_changed(value : Array) -> void:
 			continue
 		else:
 			Global.current_project.selected_pixels.append(pixel)
+
+#	if value:
+#		Global.canvas.get_node("Selection").generate_polygons()
 
 
 func has_point(position : Vector2) -> bool:
