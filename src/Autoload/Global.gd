@@ -531,7 +531,8 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 %s for left mouse button
 %s for right mouse button
 
-Hold %s to create a 1:1 shape""") % [InputMap.get_action_list("left_shapestool_tool")[0].as_text(), InputMap.get_action_list("right_shapestool_tool")[0].as_text(), "Shift" ]
+Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_shapestool_tool")[0].as_text(), InputMap.get_action_list("right_shapestool_tool")[0].as_text(), "Shift", "Alt"]
 
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors

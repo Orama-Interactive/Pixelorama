@@ -30,20 +30,28 @@ margin_bottom = 90.0
 margin_top = 66.0
 margin_bottom = 128.0
 
-[node name="ShapesDropdown" type="OptionButton" parent="." index="5"]
+[node name="FillCheckbox" type="CheckBox" parent="." index="5"]
 margin_top = 66.0
 margin_right = 116.0
-margin_bottom = 86.0
+margin_bottom = 90.0
+hint_tooltip = "Fills the drawn shape with color, instead of drawing a hollow shape"
+text = "Fill Shape"
+
+[node name="ShapesDropdown" type="OptionButton" parent="." index="6"]
+margin_top = 94.0
+margin_right = 116.0
+margin_bottom = 114.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EmptySpacer" parent="." index="6"]
-margin_top = 90.0
-margin_bottom = 102.0
+[node name="EmptySpacer" parent="." index="7"]
+margin_top = 118.0
+margin_bottom = 130.0
 
-[node name="Mirror" parent="." index="7"]
+[node name="Mirror" parent="." index="8"]
 visible = false
 margin_top = 106.0
 margin_bottom = 123.0
+[connection signal="toggled" from="FillCheckbox" to="." method="_on_FillCheckbox_toggled"]
 [connection signal="item_selected" from="ShapesDropdown" to="." method="_on_ShapesDropdown_item_selected"]
