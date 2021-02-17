@@ -147,6 +147,7 @@ var _shapes := [
 	Ellipse.new(),
 ]
 var _curr_shape: ShapeToolOption = _shapes[0]
+var _curr_shape_i := 0 setget _set_curr_shape_i
 var _fill := 0
 var _drawing := false
 
@@ -159,7 +160,36 @@ func _ready() -> void:
 	for shape in _shapes:
 		$ShapesDropdown.add_item(shape.name)
 
-	_fill = $FillCheckbox.pressed
+
+func _on_ShapesDropdown_item_selected(index: int) -> void:
+	_set_curr_shape_i(index)
+	update_config()
+	save_config()
+
+
+func _on_FillCheckbox_toggled(button_pressed: bool) -> void:
+	_fill = button_pressed
+	update_config()
+	save_config()
+
+
+func get_config() -> Dictionary:
+	var config := .get_config()
+	config["fill"] = _fill
+	config["curr_shape"] = _curr_shape_i
+	return config
+
+
+func set_config(config: Dictionary) -> void:
+	.set_config(config)
+	_fill = config.get("fill", _fill)
+	_set_curr_shape_i(config.get("curr_shape", _curr_shape_i))
+
+
+func update_config() -> void:
+	.update_config()
+	$FillCheckbox.pressed = _fill
+	$ShapesDropdown.select(_curr_shape_i)
 
 
 func draw_start(position : Vector2) -> void:
@@ -235,9 +265,6 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	return rect
 
 
-func _on_ShapesDropdown_item_selected(index: int) -> void:
-	_curr_shape = _shapes[index]
-
-
-func _on_FillCheckbox_toggled(button_pressed: bool) -> void:
-	_fill = button_pressed
+func _set_curr_shape_i(i: int) -> void:
+	_curr_shape_i = i
+	_curr_shape = _shapes[i]
