@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-02-17 21:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -115,7 +115,7 @@ msgid "Copy"
 msgstr "Copiar"
 
 msgid "Cut"
-msgstr ""
+msgstr "Cortar"
 
 msgid "Paste"
 msgstr "Pegar"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "Escalar imagen"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Píxeles"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Porcentaje"
 
 msgid "Crop Image"
 msgstr "Recortar la imagen"
@@ -139,7 +139,7 @@ msgid "Resize Canvas"
 msgstr "Redimensionar lienzo"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralizar imagen"
 
 msgid "Rotate Image"
 msgstr "Rotar Imagen"
@@ -163,16 +163,16 @@ msgid "Tile Mode"
 msgstr "Modo mosaico"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Transparencia de ventana"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Vista de espejo"
 
 msgid "Show Grid"
 msgstr "Mostrar cuadrícula"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Mostrar cuadrícula de píxeles"
 
 msgid "Show Rulers"
 msgstr "Mostrar Reglas"
@@ -205,7 +205,7 @@ msgid "Import as:"
 msgstr "Importar como:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Proyectos recientes"
 
 msgid "New tab"
 msgstr "Nueva pestaña"
@@ -384,7 +384,7 @@ msgid "Language"
 msgstr "Idioma"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interfaz"
 
 msgid "Themes"
 msgstr "Temas"
@@ -399,7 +399,7 @@ msgid "Backup"
 msgstr "Copia de seguridad"
 
 msgid "Performance"
-msgstr ""
+msgstr "Rendimiento"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -435,7 +435,7 @@ msgid "System Language"
 msgstr "Idioma del sistema"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Escala de interfaz"
 
 msgid "Dark"
 msgstr "Oscuro"
@@ -453,7 +453,7 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Purple"
-msgstr ""
+msgstr "Morado"
 
 msgid "Only affect selection"
 msgstr "Sólo afecta a la selección"
@@ -507,13 +507,13 @@ msgid "Angle:"
 msgstr "Ángulo:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Matiz:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturación:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Valor:"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -561,19 +561,19 @@ msgid "About Pixelorama"
 msgstr "Acerca de Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - ¡Pixela tus sueños!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Desarrollado por Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-presente por Orama Interactive y colaboradores"
 
 msgid "Website"
 msgstr "Sitio Web"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Repositorio GitHub"
 
 msgid "Donate"
 msgstr "Donar"
@@ -657,7 +657,7 @@ msgid "Romanian"
 msgstr "Rumano"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonés"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
