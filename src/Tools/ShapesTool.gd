@@ -155,7 +155,7 @@ func _init() -> void:
 	_drawer.color_op = Drawer.ColorOp.new()
 
 
-func _ready():
+func _ready() -> void:
 	for shape in _shapes:
 		$ShapesDropdown.add_item(shape.name)
 
@@ -191,11 +191,9 @@ func draw_end(position : Vector2) -> void:
 	_drawing = false
 
 
-func draw_indicator():
-	.draw_indicator()
-
+func draw_preview() -> void:
 	if _drawing:
-		var canvas = Global.canvas.indicators
+		var canvas = Global.canvas.previews
 		var rect = _get_result_rect(_start, _dest)
 		var indicator = BitMap.new()
 		var points = _curr_shape.get_draw_points_filled(rect.size) if _fill else _curr_shape.get_draw_points(rect.size)

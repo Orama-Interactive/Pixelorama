@@ -166,6 +166,11 @@ func draw_indicator() -> void:
 		_slots[BUTTON_RIGHT].tool_node.draw_indicator()
 
 
+func draw_preview() -> void:
+	_slots[BUTTON_LEFT].tool_node.draw_preview()
+	_slots[BUTTON_RIGHT].tool_node.draw_preview()
+
+
 func handle_draw(position : Vector2, event : InputEvent) -> void:
 	if not (Global.can_draw and Global.has_focus):
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/UI/Canvas/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/Grid.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/UI/Canvas/TileMode.gd" type="Script" id=4]
 [ext_resource path="res://src/UI/Canvas/CurrentFrameDrawer.gd" type="Script" id=5]
 [ext_resource path="res://src/UI/Canvas/PixelGrid.gd" type="Script" id=6]
+[ext_resource path="res://src/UI/Canvas/Previews.gd" type="Script" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
@@ -37,3 +38,6 @@ script = ExtResource( 2 )
 
 [node name="Indicators" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="Previews" type="Node2D" parent="."]
+script = ExtResource( 7 )
