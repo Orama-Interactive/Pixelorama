@@ -66,7 +66,7 @@ func setup_edit_menu() -> void:
 		"Cut" : InputMap.get_action_list("cut")[0].get_scancode_with_modifiers(),
 		"Paste" : InputMap.get_action_list("paste")[0].get_scancode_with_modifiers(),
 		"Delete" : InputMap.get_action_list("delete")[0].get_scancode_with_modifiers(),
-		"Clear Selection" : 0,
+		"Clear Selection" : InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
 		"Preferences" : 0
 		}
 	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
