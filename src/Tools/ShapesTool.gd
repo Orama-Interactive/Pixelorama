@@ -58,24 +58,30 @@ class Ellipse extends ShapeToolOption:
 		for point in border:
 			bitmap.set_bit(point, 1)
 
-		for x in range(1, _size.x - 1):
+		for x in range(1, ceil(_size.x / 2)):
 			var fill := false
 			var prev_was_true := false
 			for y in range(0, ceil(_size.y / 2)):
-				var top_p = Vector2(x, y)
-				var bottom_p = Vector2(x, _size.y - y - 1)
-				var bit = bitmap.get_bit(top_p)
+				var top_l_p = Vector2(x, y)
+				var bottom_l_p = Vector2(x, _size.y - y - 1)
+				var top_r_p = Vector2(_size.x - x - 1, y)
+				var bottom_r_p = Vector2(_size.x - x - 1, _size.y - y - 1)
+				var bit = bitmap.get_bit(top_l_p)
 
 				if bit and not prev_was_true and not fill:
 					prev_was_true = true
 				elif not bit and prev_was_true:
-					pool.append(top_p)
-					pool.append(bottom_p)
+					pool.append(top_l_p)
+					pool.append(bottom_l_p)
+					pool.append(top_r_p)
+					pool.append(bottom_r_p)
 					prev_was_true = false
 					fill = true
 				elif fill and not bit:
-					pool.append(top_p)
-					pool.append(bottom_p)
+					pool.append(top_l_p)
+					pool.append(bottom_l_p)
+					pool.append(top_r_p)
+					pool.append(bottom_r_p)
 				elif fill and bit:
 					break
 
@@ -131,11 +137,12 @@ class Ellipse extends ShapeToolOption:
 
 		while y0-y1 < b:
 			pool.append(Vector2(x0-1, y0))
-			pool.append(Vector2(x1+1, y0+1))
+			pool.append(Vector2(x1+1, y0))
 			pool.append(Vector2(x0-1, y1))
-			pool.append(Vector2(x1+1, y1-1))
+			pool.append(Vector2(x1+1, y1))
 			y0+=1
 			y1-=1
+
 
 		return pool
 
