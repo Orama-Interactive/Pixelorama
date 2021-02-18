@@ -7,51 +7,63 @@
 script = ExtResource( 2 )
 
 [node name="Brush" parent="." index="1"]
+visible = false
+
+[node name="ThicknessSpinbox" type="SpinBox" parent="." index="2"]
+margin_top = 18.0
+margin_right = 116.0
 margin_bottom = 42.0
+min_value = 1.0
+value = 1.0
+align = 1
 
-[node name="Type" parent="Brush" index="0"]
-visible = false
-
-[node name="Size" parent="Brush" index="1"]
-margin_left = 21.0
-margin_right = 95.0
-margin_bottom = 24.0
-
-[node name="BrushSize" parent="." index="2"]
+[node name="ThicknessSlider" type="HSlider" parent="." index="3"]
 margin_top = 46.0
+margin_right = 116.0
 margin_bottom = 62.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
 
-[node name="PixelPerfect" parent="." index="3"]
-visible = false
-margin_top = 66.0
-margin_bottom = 90.0
-
-[node name="ColorInterpolation" parent="." index="4"]
-margin_top = 66.0
-margin_bottom = 128.0
-
-[node name="FillCheckbox" type="CheckBox" parent="." index="5"]
+[node name="ShapesDropdown" type="OptionButton" parent="." index="4"]
 margin_top = 66.0
 margin_right = 116.0
-margin_bottom = 90.0
-hint_tooltip = "Fills the drawn shape with color, instead of drawing a hollow shape"
-text = "Fill Shape"
-
-[node name="ShapesDropdown" type="OptionButton" parent="." index="6"]
-margin_top = 94.0
-margin_right = 116.0
-margin_bottom = 114.0
+margin_bottom = 86.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EmptySpacer" parent="." index="7"]
+[node name="BrushSize" parent="." index="5"]
+visible = false
+margin_top = 18.0
+margin_bottom = 34.0
+
+[node name="PixelPerfect" parent="." index="6"]
+visible = false
+margin_top = 66.0
+margin_bottom = 90.0
+
+[node name="ColorInterpolation" parent="." index="7"]
+margin_top = 66.0
+margin_bottom = 128.0
+
+[node name="FillCheckbox" type="CheckBox" parent="." index="8"]
+margin_top = 90.0
+margin_right = 116.0
+margin_bottom = 114.0
+hint_tooltip = "Fills the drawn shape with color, instead of drawing a hollow shape"
+text = "Fill Shape"
+
+[node name="EmptySpacer" parent="." index="9"]
 margin_top = 118.0
 margin_bottom = 130.0
 
-[node name="Mirror" parent="." index="8"]
+[node name="Mirror" parent="." index="10"]
 visible = false
 margin_top = 106.0
 margin_bottom = 123.0
-[connection signal="toggled" from="FillCheckbox" to="." method="_on_FillCheckbox_toggled"]
+[connection signal="value_changed" from="ThicknessSpinbox" to="." method="_on_Thickness_value_changed"]
+[connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
 [connection signal="item_selected" from="ShapesDropdown" to="." method="_on_ShapesDropdown_item_selected"]
+[connection signal="toggled" from="FillCheckbox" to="." method="_on_FillCheckbox_toggled"]

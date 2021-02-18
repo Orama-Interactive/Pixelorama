@@ -7,11 +7,29 @@ class ShapeToolOption:
 		name = n
 
 
-	func get_draw_points_filled(_size: Vector2) -> PoolVector2Array:
+	func _outline_point(p: Vector2, thickness: int = 1, include_p: bool = true) -> PoolVector2Array:
+		var pool := PoolVector2Array()
+
+		if thickness != 1:
+			var t_of = thickness - 1
+			for x in range (-t_of, thickness):
+				for y in range (-t_of, thickness):
+					if x == 0 and y == 0 and not include_p:
+						continue
+
+					pool.append(p + Vector2(x,y))
+
+
+		elif include_p:
+			pool.append(p)
+		return pool
+
+
+	func get_draw_points_filled(_size: Vector2, _thickness: int = 1) -> PoolVector2Array:
 		return PoolVector2Array()
 
 
-	func get_draw_points(_size: Vector2) -> PoolVector2Array:
+	func get_draw_points(_size: Vector2, _thickness: int = 1) -> PoolVector2Array:
 		return PoolVector2Array()
 
 
@@ -20,26 +38,45 @@ class Rectangle extends ShapeToolOption:
 		pass
 
 
-	func get_draw_points_filled(_size: Vector2) -> PoolVector2Array:
+	func get_draw_points_filled(_size: Vector2, thickness: int = 1) -> PoolVector2Array:
 		var pool := PoolVector2Array()
-
-		for y in range(0, _size.y):
-			for x in range(0, _size.x):
+		var t_of := thickness - 1
+		for y in range(- t_of, _size.y + t_of):
+			for x in range(-t_of, _size.x + t_of):
 				pool.append(Vector2(x, y))
 
 		return pool
 
 
-	func get_draw_points(_size: Vector2) -> PoolVector2Array:
+	func _get_unfilled_square_ps(pos: Vector2, _size: Vector2):
 		var pool := PoolVector2Array()
 
-		for x in range(0, _size.x):
-			pool.append(Vector2(x, 0))
-			pool.append(Vector2(x, _size.y - 1))
+		var y1 = _size.y + pos.y - 1
+		for x in range(pos.x, _size.x + pos.x):
+			var t := Vector2(x, pos.y)
+			var b := Vector2(x, y1)
+			pool.append(t)
+			pool.append(b)
 
-		for y in range(1, _size.y - 1):
-			pool.append(Vector2(0, y))
-			pool.append(Vector2(_size.x - 1, y))
+		var x1 = _size.x + pos.x - 1
+		for y in range(pos.y + 1, _size.y + pos.y):
+			var l := Vector2(pos.x, y)
+			var r := Vector2(x1, y)
+			pool.append(l)
+			pool.append(r)
+
+		return pool
+
+
+	func get_draw_points(_size: Vector2, thickness: int = 1) -> PoolVector2Array:
+		var pool := PoolVector2Array()
+		var t_of: int = thickness - 1
+
+		if thickness == 1:
+			pool = _get_unfilled_square_ps(Vector2(0, 0), _size)
+		else:
+			for i in range(-t_of, thickness):
+				pool.append_array(_get_unfilled_square_ps(Vector2(i, i), _size - Vector2(2 * i, 2 * i)))
 
 		return pool
 
@@ -49,39 +86,37 @@ class Ellipse extends ShapeToolOption:
 		pass
 
 # Probably a terrible way to do this, but I couldn't get any other algorithm to work correctly or that is consistent to the ellipse's get_draw_points
-	func get_draw_points_filled(_size: Vector2) -> PoolVector2Array:
-		var border = get_draw_points(_size)
+	func get_draw_points_filled(size: Vector2, thickness: int = 1) -> PoolVector2Array:
+		var border = get_draw_points(size, thickness)
 		var pool := PoolVector2Array(border)
 		var bitmap = BitMap.new()
-		bitmap.create(_size)
+		bitmap.create(size)
 
 		for point in border:
-			bitmap.set_bit(point, 1)
+			if point.x >= 0 and point.y >= 0 and point.x < size.x and point.y < size.y:
+				bitmap.set_bit(point, 1)
 
-		for x in range(1, ceil(_size.x / 2)):
+		for x in range(1, ceil(size.x / 2)):
 			var fill := false
 			var prev_was_true := false
-			for y in range(0, ceil(_size.y / 2)):
+			for y in range(0, ceil(size.y / 2)):
 				var top_l_p = Vector2(x, y)
-				var bottom_l_p = Vector2(x, _size.y - y - 1)
-				var top_r_p = Vector2(_size.x - x - 1, y)
-				var bottom_r_p = Vector2(_size.x - x - 1, _size.y - y - 1)
+				var bottom_l_p = Vector2(x, size.y - y - 1)
+				var top_r_p = Vector2(size.x - x - 1, y)
+				var bottom_r_p = Vector2(size.x - x - 1, size.y - y - 1)
 				var bit = bitmap.get_bit(top_l_p)
 
 				if bit and not prev_was_true and not fill:
 					prev_was_true = true
-				elif not bit and prev_was_true:
+				if not bit and (fill or prev_was_true):
 					pool.append(top_l_p)
 					pool.append(bottom_l_p)
 					pool.append(top_r_p)
 					pool.append(bottom_r_p)
-					prev_was_true = false
-					fill = true
-				elif fill and not bit:
-					pool.append(top_l_p)
-					pool.append(bottom_l_p)
-					pool.append(top_r_p)
-					pool.append(bottom_r_p)
+
+					if prev_was_true:
+						prev_was_true = false
+						fill = true
 				elif fill and bit:
 					break
 
@@ -89,7 +124,7 @@ class Ellipse extends ShapeToolOption:
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-	func get_draw_points(_size: Vector2) -> PoolVector2Array:
+	func get_draw_points(_size: Vector2, thickness: int = 1) -> PoolVector2Array:
 		var pool := PoolVector2Array()
 		var x0 : int = 0
 		var x1 : int = _size.x - 1
@@ -117,10 +152,19 @@ class Ellipse extends ShapeToolOption:
 		b1 = 8*b*b
 
 		while x0 <= x1:
-			pool.append(Vector2(x1, y0))
-			pool.append(Vector2(x0, y0))
-			pool.append(Vector2(x0, y1))
-			pool.append(Vector2(x1, y1))
+			var v1 := Vector2(x1, y0)
+			var v2 := Vector2(x0, y0)
+			var v3 := Vector2(x0, y1)
+			var v4 := Vector2(x1, y1)
+			pool.append(v1)
+			pool.append(v2)
+			pool.append(v3)
+			pool.append(v4)
+			pool.append_array(_outline_point(v1, thickness, false))
+			pool.append_array(_outline_point(v2, thickness, false))
+			pool.append_array(_outline_point(v3, thickness, false))
+			pool.append_array(_outline_point(v4, thickness, false))
+
 			e2 = 2*err;
 
 			if e2 <= dy:
@@ -136,10 +180,18 @@ class Ellipse extends ShapeToolOption:
 				err += dx
 
 		while y0-y1 < b:
-			pool.append(Vector2(x0-1, y0))
-			pool.append(Vector2(x1+1, y0))
-			pool.append(Vector2(x0-1, y1))
-			pool.append(Vector2(x1+1, y1))
+			var v1 := Vector2(x0-1, y0)
+			var v2 := Vector2(x1+1, y0)
+			var v3 := Vector2(x0-1, y1)
+			var v4 := Vector2(x1+1, y1)
+			pool.append(v1)
+			pool.append(v2)
+			pool.append(v3)
+			pool.append(v4)
+			pool.append_array(_outline_point(v1, thickness, false))
+			pool.append_array(_outline_point(v2, thickness, false))
+			pool.append_array(_outline_point(v3, thickness, false))
+			pool.append_array(_outline_point(v4, thickness, false))
 			y0+=1
 			y1-=1
 
@@ -157,6 +209,7 @@ var _curr_shape: ShapeToolOption = _shapes[0]
 var _curr_shape_i := 0 setget _set_curr_shape_i
 var _fill := 0
 var _drawing := false
+var _thickness := 1
 
 
 func _init() -> void:
@@ -166,6 +219,12 @@ func _init() -> void:
 func _ready() -> void:
 	for shape in _shapes:
 		$ShapesDropdown.add_item(shape.name)
+
+
+func _on_Thickness_value_changed(value: int):
+	_thickness = value
+	update_config()
+	save_config()
 
 
 func _on_ShapesDropdown_item_selected(index: int) -> void:
@@ -184,6 +243,7 @@ func get_config() -> Dictionary:
 	var config := .get_config()
 	config["fill"] = _fill
 	config["curr_shape"] = _curr_shape_i
+	config["thickness"] = _thickness
 	return config
 
 
@@ -191,12 +251,15 @@ func set_config(config: Dictionary) -> void:
 	.set_config(config)
 	_fill = config.get("fill", _fill)
 	_set_curr_shape_i(config.get("curr_shape", _curr_shape_i))
+	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
 	.update_config()
 	$FillCheckbox.pressed = _fill
 	$ShapesDropdown.select(_curr_shape_i)
+	$ThicknessSlider.value = _thickness
+	$ThicknessSpinbox.value = _thickness
 
 
 func draw_start(position : Vector2) -> void:
@@ -214,8 +277,7 @@ func draw_move(position : Vector2) -> void:
 
 func draw_end(position : Vector2) -> void:
 	var rect = _get_result_rect(_start, position)
-
-	var points = _curr_shape.get_draw_points_filled(rect.size) if _fill else _curr_shape.get_draw_points(rect.size)
+	var points = _curr_shape.get_draw_points_filled(rect.size, _thickness) if _fill else _curr_shape.get_draw_points(rect.size, _thickness)
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes brake the tool
 		_drawer.reset()
@@ -233,14 +295,16 @@ func draw_preview() -> void:
 		var canvas = Global.canvas.previews
 		var rect = _get_result_rect(_start, _dest)
 		var indicator = BitMap.new()
-		var points = _curr_shape.get_draw_points_filled(rect.size) if _fill else _curr_shape.get_draw_points(rect.size)
-		indicator.create(rect.size)
+		var points = _curr_shape.get_draw_points_filled(rect.size, _thickness) if _fill else _curr_shape.get_draw_points(rect.size, _thickness)
+		var t_offset := _thickness - 1
+		var t_offsetv := Vector2(t_offset, t_offset)
+		indicator.create(rect.size + t_offsetv * 2)
 		for point in points:
-			indicator.set_bit(point, 1)
+			indicator.set_bit(point + t_offsetv, 1)
 
 		var polylines = _create_polylines(indicator)
 
-		canvas.draw_set_transform(rect.position, canvas.rotation, canvas.scale)
+		canvas.draw_set_transform(rect.position - t_offsetv, canvas.rotation, canvas.scale)
 		for line in polylines:
 			var pool := PoolVector2Array(line)
 			canvas.draw_polyline(pool, tool_slot.color)
@@ -275,3 +339,5 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 func _set_curr_shape_i(i: int) -> void:
 	_curr_shape_i = i
 	_curr_shape = _shapes[i]
+
+
