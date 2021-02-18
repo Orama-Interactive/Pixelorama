@@ -125,7 +125,7 @@ class Ellipse extends ShapeToolOption:
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 	func get_draw_points(_size: Vector2, thickness: int = 1) -> PoolVector2Array:
-		var pool := PoolVector2Array()
+		var array := []
 		var x0 : int = 0
 		var x1 : int = _size.x - 1
 		var y0 : int = 0
@@ -156,14 +156,14 @@ class Ellipse extends ShapeToolOption:
 			var v2 := Vector2(x0, y0)
 			var v3 := Vector2(x0, y1)
 			var v4 := Vector2(x1, y1)
-			pool.append(v1)
-			pool.append(v2)
-			pool.append(v3)
-			pool.append(v4)
-			pool.append_array(_outline_point(v1, thickness, false))
-			pool.append_array(_outline_point(v2, thickness, false))
-			pool.append_array(_outline_point(v3, thickness, false))
-			pool.append_array(_outline_point(v4, thickness, false))
+			array.append(v1)
+			array.append(v2)
+			array.append(v3)
+			array.append(v4)
+			array += Array(_outline_point(v1, thickness, false))
+			array += Array(_outline_point(v2, thickness, false))
+			array += Array(_outline_point(v3, thickness, false))
+			array += Array(_outline_point(v4, thickness, false))
 
 			e2 = 2*err;
 
@@ -184,19 +184,19 @@ class Ellipse extends ShapeToolOption:
 			var v2 := Vector2(x1+1, y0)
 			var v3 := Vector2(x0-1, y1)
 			var v4 := Vector2(x1+1, y1)
-			pool.append(v1)
-			pool.append(v2)
-			pool.append(v3)
-			pool.append(v4)
-			pool.append_array(_outline_point(v1, thickness, false))
-			pool.append_array(_outline_point(v2, thickness, false))
-			pool.append_array(_outline_point(v3, thickness, false))
-			pool.append_array(_outline_point(v4, thickness, false))
+			array.append(v1)
+			array.append(v2)
+			array.append(v3)
+			array.append(v4)
+			array += Array(_outline_point(v1, thickness, false))
+			array += Array(_outline_point(v2, thickness, false))
+			array += Array(_outline_point(v3, thickness, false))
+			array += Array(_outline_point(v4, thickness, false))
 			y0+=1
 			y1-=1
 
 
-		return pool
+		return PoolVector2Array(array)
 
 
 var _start := Vector2.ZERO
@@ -210,6 +210,7 @@ var _curr_shape_i := 0 setget _set_curr_shape_i
 var _fill := 0
 var _drawing := false
 var _thickness := 1
+var _keep_preview := false
 
 
 func _init() -> void:
@@ -264,38 +265,43 @@ func update_config() -> void:
 
 func draw_start(position : Vector2) -> void:
 	update_mask()
-	prepare_undo()
 
-	_start = position
-	_dest = position
-	_drawing = true
+	if Tools.control:
+		_keep_preview = false
+
+	if _keep_preview:
+		_draw_shape(_start, _dest)
+		_start = Vector2.ZERO
+		_dest = Vector2.ZERO
+		_keep_preview = false
+	else:
+		_start = position
+		_dest = position
+		_drawing = true
 
 
 func draw_move(position : Vector2) -> void:
-	_dest = position
+	if _drawing:
+		_dest = position
 
 
 func draw_end(position : Vector2) -> void:
-	var rect = _get_result_rect(_start, position)
-	var points = _curr_shape.get_draw_points_filled(rect.size, _thickness) if _fill else _curr_shape.get_draw_points(rect.size, _thickness)
-	for point in points:
-		# Reset drawer every time because pixel perfect sometimes brake the tool
-		_drawer.reset()
-		draw_tool(rect.position + point)
-
-	commit_undo("Draw Shape")
-	_start = Vector2.ZERO
-	_dest = Vector2.ZERO
-
-	_drawing = false
+	if _drawing:
+		if Tools.control:
+			_keep_preview = true
+		else:
+			_draw_shape(_start, position)
+			_start = Vector2.ZERO
+			_dest = Vector2.ZERO
+		_drawing = false
 
 
 func draw_preview() -> void:
-	if _drawing:
+	if _drawing or _keep_preview:
 		var canvas = Global.canvas.previews
 		var rect = _get_result_rect(_start, _dest)
 		var indicator = BitMap.new()
-		var points = _curr_shape.get_draw_points_filled(rect.size, _thickness) if _fill else _curr_shape.get_draw_points(rect.size, _thickness)
+		var points = _get_shape_points(rect.size)
 		var t_offset := _thickness - 1
 		var t_offsetv := Vector2(t_offset, t_offset)
 		indicator.create(rect.size + t_offsetv * 2)
@@ -309,6 +315,18 @@ func draw_preview() -> void:
 			var pool := PoolVector2Array(line)
 			canvas.draw_polyline(pool, tool_slot.color)
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
+
+
+func _draw_shape(origin: Vector2, dest: Vector2) -> void:
+	var rect = _get_result_rect(origin, dest)
+	var points = _get_shape_points(rect.size)
+	prepare_undo()
+	for point in points:
+		# Reset drawer every time because pixel perfect sometimes brake the tool
+		_drawer.reset()
+		draw_tool(rect.position + point)
+
+	commit_undo("Draw Shape")
 
 
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
@@ -334,6 +352,10 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 	rect.size += Vector2.ONE
 	return rect
+
+
+func _get_shape_points(size: Vector2) -> PoolVector2Array:
+	return _curr_shape.get_draw_points_filled(size, _thickness) if _fill else _curr_shape.get_draw_points(size, _thickness)
 
 
 func _set_curr_shape_i(i: int) -> void:
