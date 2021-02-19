@@ -38,28 +38,28 @@ class Rectangle extends ShapeToolOption:
 		pass
 
 
-	func get_draw_points_filled(_size: Vector2, thickness: int = 1) -> PoolVector2Array:
+	func get_draw_points_filled(size: Vector2, thickness: int = 1) -> PoolVector2Array:
 		var array := []
 		var t_of := thickness - 1
-		for y in range(- t_of, _size.y + t_of):
-			for x in range(-t_of, _size.x + t_of):
+		for y in range(- t_of, size.y + t_of):
+			for x in range(-t_of, size.x + t_of):
 				array.append(Vector2(x, y))
 
 		return PoolVector2Array(array)
 
 
-	func _get_unfilled_square_ps(pos: Vector2, _size: Vector2):
+	func _get_unfilled_square_ps(pos: Vector2, size: Vector2):
 		var array := []
 
-		var y1 = _size.y + pos.y - 1
-		for x in range(pos.x, _size.x + pos.x):
+		var y1 = size.y + pos.y - 1
+		for x in range(pos.x, size.x + pos.x):
 			var t := Vector2(x, pos.y)
 			var b := Vector2(x, y1)
 			array.append(t)
 			array.append(b)
 
-		var x1 = _size.x + pos.x - 1
-		for y in range(pos.y + 1, _size.y + pos.y):
+		var x1 = size.x + pos.x - 1
+		for y in range(pos.y + 1, size.y + pos.y):
 			var l := Vector2(pos.x, y)
 			var r := Vector2(x1, y)
 			array.append(l)
@@ -68,15 +68,15 @@ class Rectangle extends ShapeToolOption:
 		return PoolVector2Array(array)
 
 
-	func get_draw_points(_size: Vector2, thickness: int = 1) -> PoolVector2Array:
+	func get_draw_points(size: Vector2, thickness: int = 1) -> PoolVector2Array:
 		var t_of: int = thickness - 1
 
 		if thickness == 1:
-			return _get_unfilled_square_ps(Vector2(0, 0), _size)
+			return _get_unfilled_square_ps(Vector2(0, 0), size)
 		else:
 			var array := []
 			for i in range(-t_of, thickness):
-				array += Array(_get_unfilled_square_ps(Vector2(i, i), _size - Vector2(2 * i, 2 * i)))
+				array += Array(_get_unfilled_square_ps(Vector2(i, i), size - Vector2(2 * i, 2 * i)))
 
 			return PoolVector2Array(array)
 
@@ -211,6 +211,7 @@ var _fill := 0
 var _drawing := false
 var _thickness := 1
 var _keep_preview := false
+var _prev_rect := Rect2()
 
 
 func _init() -> void:
@@ -268,11 +269,11 @@ func draw_start(position : Vector2) -> void:
 
 	if Tools.control:
 		_keep_preview = false
+		_prev_rect = Rect2()
 
 	if _keep_preview:
-		_draw_shape(_start, _dest)
-		_start = Vector2.ZERO
-		_dest = Vector2.ZERO
+		_draw_shape(_prev_rect.position, _prev_rect.end)
+		_prev_rect = Rect2()
 		_keep_preview = false
 	else:
 		_start = position
@@ -285,21 +286,29 @@ func draw_move(position : Vector2) -> void:
 		_dest = position
 
 
+func cursor_move(position : Vector2):
+	.cursor_move(position)
+	if _keep_preview:
+		_prev_rect.position = position
+
+
 func draw_end(position : Vector2) -> void:
 	if _drawing:
 		if Tools.control:
+			_prev_rect = _get_result_rect(_start, position)
 			_keep_preview = true
 		else:
 			_draw_shape(_start, position)
-			_start = Vector2.ZERO
-			_dest = Vector2.ZERO
+
+		_start = Vector2.ZERO
+		_dest = Vector2.ZERO
 		_drawing = false
 
 
 func draw_preview() -> void:
 	if _drawing or _keep_preview:
 		var canvas = Global.canvas.previews
-		var rect = _get_result_rect(_start, _dest)
+		var rect = _get_result_rect(_start, _dest) if not _keep_preview else _get_result_rect(_prev_rect.position, _prev_rect.end)
 		var indicator = BitMap.new()
 		var points = _get_shape_points(rect.size)
 		var t_offset := _thickness - 1
@@ -333,15 +342,16 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
 
 	if Tools.alt:
-		var new_size = (dest - origin).floor()
-		if Tools.shift:
+		var new_size := (dest - origin).floor()
+		new_size = (new_size / 2).floor() if _keep_preview else new_size
+		if Tools.shift and not _keep_preview:
 			var _square_size := max(abs(new_size.x), abs(new_size.y))
 			new_size = Vector2(_square_size, _square_size)
 
 		origin -= new_size
 		dest = origin + 2 * new_size
 
-	if Tools.shift and not Tools.alt:
+	if Tools.shift and not Tools.alt and not _keep_preview:
 		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
