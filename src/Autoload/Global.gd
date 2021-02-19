@@ -532,7 +532,10 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 %s for right mouse button
 
 Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_shapestool_tool")[0].as_text(), InputMap.get_action_list("right_shapestool_tool")[0].as_text(), "Shift", "Alt"]
+Hold %s to center the shape on the click origin
+Hold %s when releasing the draw button to make the preview follow the mouse
+While the preview is following the mouse, press the draw button to draw the preview
+If %s is being held when pressing the draw button instead, the shape will be redrawn""") % [InputMap.get_action_list("left_shapestool_tool")[0].as_text(), InputMap.get_action_list("right_shapestool_tool")[0].as_text(), "Shift", "Alt", "Ctrl", "Ctrl" ]
 
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
