@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-02-02 19:31\n"
+"PO-Revision-Date: 2021-02-20 21:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -549,7 +549,7 @@ msgid "View Splash Screen"
 msgstr "Vizualizare ecran de întâmpinare"
 
 msgid "Online Docs"
-msgstr "Documentație online"
+msgstr "Documentație virtuală"
 
 msgid "Issue Tracker"
 msgstr "Monitor de probleme"
