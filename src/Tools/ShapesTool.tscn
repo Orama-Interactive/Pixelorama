@@ -60,9 +60,8 @@ margin_top = 118.0
 margin_bottom = 130.0
 
 [node name="Mirror" parent="." index="10"]
-visible = false
-margin_top = 106.0
-margin_bottom = 123.0
+margin_top = 134.0
+margin_bottom = 151.0
 [connection signal="value_changed" from="ThicknessSpinbox" to="." method="_on_Thickness_value_changed"]
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
 [connection signal="item_selected" from="ShapesDropdown" to="." method="_on_ShapesDropdown_item_selected"]
