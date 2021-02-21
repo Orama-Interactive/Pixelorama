@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-02-21 09:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -130,7 +130,7 @@ msgid "Pixels"
 msgstr ""
 
 msgid "Percentage"
-msgstr ""
+msgstr "Pourcentage"
 
 msgid "Crop Image"
 msgstr "Rogner l'image"
@@ -163,7 +163,7 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Transparence de fenêtre"
 
 msgid "Mirror View"
 msgstr "Vue Miroir"
@@ -1446,13 +1446,13 @@ msgid "A default background color of a new image"
 msgstr "Une couleur de fond par défaut d'une nouvelle image"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Verrouiller les proportions"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Portrait"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Paysage"
 
 msgid "Templates:"
 msgstr "Modèles:"
