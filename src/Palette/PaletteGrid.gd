@@ -61,6 +61,11 @@ func select_swatch(mouse_button: int, index: int, old_index: int) -> void:
 		swatches[index].show_selected_highlight(true, mouse_button)
 
 
+func unselect_swatch(mouse_button: int, index: int) -> void:
+	if index >= 0 and index < swatches.size():
+		swatches[index].show_selected_highlight(false, mouse_button)
+
+
 func set_swatch_color(index: int, color: Color) -> void:
 	if index >= 0 and index < swatches.size():
 		swatches[index].color = color

@@ -169,14 +169,12 @@ columns = 8
 script = ExtResource( 5 )
 
 [node name="EditPaletteDialog" parent="." instance=ExtResource( 1 )]
-visible = false
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 317.0
 margin_bottom = 442.0
 
 [node name="CreatePaletteDialog" parent="." instance=ExtResource( 4 )]
-visible = false
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 317.0
@@ -186,8 +184,8 @@ margin_bottom = 312.0
 visible = false
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 357.0
-margin_bottom = 457.0
+margin_right = 317.0
+margin_bottom = 312.0
 [connection signal="item_selected" from="PaletteVBoxContainer/PaletteButtons/PaletteSelect" to="." method="_on_PaletteSelect_item_selected"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]

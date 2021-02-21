@@ -16,6 +16,7 @@ onready var get_colors_from_input := $VBoxContainer/ColorsSettings/GetColorsFrom
 
 onready var colors_settings := $VBoxContainer/ColorsSettings
 onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
+onready var enter_name_warning := $VBoxContainer/EnterNameWarning
 
 # Opens dialog
 func open(opened_current_palette: Palette) -> void:
@@ -58,6 +59,7 @@ func toggle_already_exists_warning(visible: bool) -> void:
 
 func toggle_ok_button_disability(disable: bool) -> void:
 	get_ok().disabled = disable
+	enter_name_warning.visible = disable
 
 
 func _on_CreatePaletteDialog_popup_hide() -> void:

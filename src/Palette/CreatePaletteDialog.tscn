@@ -3,7 +3,6 @@
 [ext_resource path="res://src/Palette/CreatePaletteDialog.gd" type="Script" id=1]
 
 [node name="CreatePaletteDialog" type="ConfirmationDialog"]
-visible = true
 margin_top = 1.0
 margin_right = 300.0
 margin_bottom = 438.0
@@ -93,6 +92,8 @@ margin_right = 284.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
 align = 2
 
 [node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
@@ -108,6 +109,8 @@ margin_right = 284.0
 margin_bottom = 162.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
 align = 2
 
 [node name="ColorsSettings" type="VBoxContainer" parent="VBoxContainer"]
@@ -154,10 +157,21 @@ selected = 0
 [node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]
 margin_top = 230.0
 margin_right = 284.0
-margin_bottom = 393.0
+margin_bottom = 309.0
 size_flags_vertical = 7
 custom_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
 text = "Palette with the same name and path already exists!"
+align = 1
+valign = 2
+autowrap = true
+
+[node name="EnterNameWarning" type="Label" parent="VBoxContainer"]
+margin_top = 313.0
+margin_right = 284.0
+margin_bottom = 393.0
+size_flags_vertical = 7
+custom_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+text = "Palette name is required!"
 align = 1
 valign = 2
 autowrap = true

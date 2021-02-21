@@ -20,6 +20,8 @@ onready var create_palette_dialog := $CreatePaletteDialog
 onready var hidden_color_picker := $HiddenColorPickerButton
 
 func _ready() -> void:
+	Tools.connect("color_changed", self, "_color_changed")
+
 	setup_palettes_selector()
 	redraw_current_palette()
 
@@ -174,3 +176,18 @@ func _on_EditPaletteDialog_deleted() -> void:
 	Palettes.current_palete_delete()
 	setup_palettes_selector()
 	redraw_current_palette()
+
+
+func _color_changed(_color: Color, button: int) -> void:
+	if hidden_color_picker.get_popup().visible == false:
+		# Unselect swatches when tools color is changed
+		var swatch_to_unselect = -1
+
+		if button == BUTTON_LEFT:
+			swatch_to_unselect = Palettes.left_selected_color
+			Palettes.left_selected_color = -1
+		elif button == BUTTON_RIGHT:
+			swatch_to_unselect = Palettes.right_selected_color
+			Palettes.right_selected_color = -1
+
+		palette_grid.unselect_swatch(button, swatch_to_unselect)

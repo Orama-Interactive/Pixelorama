@@ -3,7 +3,6 @@
 [ext_resource path="res://src/Palette/EditPaletteDialog.gd" type="Script" id=1]
 
 [node name="EditPaletteDialog" type="ConfirmationDialog"]
-visible = true
 margin_right = 409.0
 margin_bottom = 535.0
 window_title = "Edit Palette"
