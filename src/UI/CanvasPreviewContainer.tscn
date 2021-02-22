@@ -10,6 +10,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
 shader_param/size = 10.0
+shader_param/alpha = 1.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
 shader_param/offset = Vector2( 0, 0 )
@@ -23,6 +24,7 @@ margin_right = 278.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
+size_flags_vertical = 0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

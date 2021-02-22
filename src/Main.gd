@@ -4,7 +4,6 @@ var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var alternate_transparent_background = ColorRect.new()
@@ -19,6 +18,9 @@ func _ready() -> void:
 
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
+	handle_resize()
+	get_tree().get_root().connect("size_changed", self, "handle_resize")
+
 
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
@@ -53,6 +55,62 @@ func _ready() -> void:
 	if OS.get_cmdline_args():
 		OpenSave.handle_loading_files(OS.get_cmdline_args())
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
+
+
+func handle_resize() -> void:
+	var aspect_ratio = get_viewport_rect().size.x/(0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
+	if (  (aspect_ratio <= 3.0/4.0 and Global.current_project.panel_layout != Global.PanelLayout.WIDESCREEN) 
+		or Global.current_project.panel_layout == Global.PanelLayout.TALLSCREEN):
+		change_ui_layout("tallscreen")
+	else:
+		change_ui_layout("widescreen")
+
+
+func change_ui_layout(mode : String) -> void:
+	var UI = get_node("MenuAndUI/UI")
+	var BottomPanel = UI.get_node("CanvasAndTimeline/BottomPanel")
+	var RightPanel  = UI.get_node("RightPanel")
+	
+	if mode == "tallscreen" and RightPanel != null:
+		reparent_node_to(RightPanel, BottomPanel, -1)
+		RightPanel.rect_min_size.y = 360
+		reparent_node_to(RightPanel.get_node("PreviewAndPalettes/CanvasPreviewContainer"), RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit"), 0) 
+		replace_node_with(RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit"), HBoxContainer.new())
+		RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions").rect_min_size.x = 280
+	elif mode == "widescreen" and RightPanel == null:
+		RightPanel = UI.get_node("CanvasAndTimeline/BottomPanel/RightPanel")
+		reparent_node_to(RightPanel, UI, -1)
+		RightPanel.rect_min_size.y = 0
+		reparent_node_to(RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/CanvasPreviewContainer"), RightPanel.get_node("PreviewAndPalettes"), 0) 
+		replace_node_with(RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit"), VSplitContainer.new())
+		RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions").rect_min_size.x = 0
+
+
+# helper function (change_ui_layout)
+# warning: this doesn't really copy any sort of attributes, except a few that were needed in my particular case
+func replace_node_with(old : Node, new : Node):
+		var tempname = old.name
+		old.name = "old"
+		new.name = tempname
+		new.size_flags_vertical = old.size_flags_horizontal
+		new.size_flags_vertical = old.size_flags_vertical
+		# new.set("custom_constants/autohide", old.get("custom_constants/autohide"))
+		if new is HBoxContainer:
+			new.set_alignment(HBoxContainer.ALIGN_CENTER)
+		old.get_parent().add_child(new)
+		for n in old.get_children():
+			reparent_node_to(n, new, -1)
+		old.get_parent().remove_child(old)
+		old.queue_free()
+
+
+# helper function (change_ui_layout)
+func reparent_node_to(node : Node, dest : Node, pos : int) -> void:
+		node.get_parent().remove_child(node)
+		dest.add_child(node)
+		node.set_owner(dest)
+		if pos >= 0:
+			dest.move_child(node, pos)
 
 
 func _input(event : InputEvent) -> void:

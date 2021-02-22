@@ -83,6 +83,7 @@ func setup_view_menu() -> void:
 	var view_menu_items := { # order as in ViewMenuId enum
 		"Tile Mode" : 0,
 		"Window Transparency" : 0,
+		"Panel Layout" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid" : InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
@@ -100,6 +101,8 @@ func setup_view_menu() -> void:
 			setup_tile_mode_submenu(item)
 		elif item == "Window Transparency":
 			setup_window_transparency_submenu(item)
+		elif item == "Panel Layout":
+			setup_panel_layout_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -122,6 +125,12 @@ func setup_window_transparency_submenu(item : String):
 	Global.window_transparency_submenu.connect("id_pressed", self, "window_transparency_submenu_id_pressed")
 	view_menu.add_child(Global.window_transparency_submenu)
 	view_menu.add_submenu_item(item, Global.window_transparency_submenu.get_name())
+
+
+func setup_panel_layout_submenu(item : String):
+	Global.panel_layout_submenu.connect("id_pressed", self, "panel_layout_submenu_id_pressed")
+	view_menu.add_child(Global.panel_layout_submenu)
+	view_menu.add_submenu_item(item, Global.panel_layout_submenu.get_name())
 
 
 func setup_image_menu() -> void:
@@ -312,6 +321,13 @@ func window_transparency_submenu_id_pressed(id : float) -> void:
 		for i in 11:
 			Global.window_transparency_submenu.set_item_checked(i, i == id)
 		window_transparency(id/10)
+
+
+func panel_layout_submenu_id_pressed(id : int) -> void:
+	Global.current_project.panel_layout = id
+	for i in Global.TileMode.values():
+		Global.panel_layout_submenu.set_item_checked(i, i == id)
+	get_tree().get_root().get_node("Control").handle_resize()
 
 
 func window_transparency(value :float) -> void:

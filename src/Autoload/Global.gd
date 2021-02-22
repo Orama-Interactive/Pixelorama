@@ -6,6 +6,7 @@ enum PressureSensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
 enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
+enum PanelLayout {AUTO, WIDESCREEN, TALLSCREEN}
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -127,6 +128,7 @@ var zoom_level_label : Label
 var recent_projects_submenu : PopupMenu
 var tile_mode_submenu : PopupMenu
 var window_transparency_submenu : PopupMenu
+var panel_layout_submenu : PopupMenu
 
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
@@ -255,6 +257,14 @@ func _ready() -> void:
 	window_transparency_submenu.add_radio_check_item("0%")
 	window_transparency_submenu.set_item_checked(10, true)
 	window_transparency_submenu.hide_on_checkable_item_selection = false
+
+	panel_layout_submenu = PopupMenu.new()
+	panel_layout_submenu.set_name("panel_layout_submenu")
+	panel_layout_submenu.add_radio_check_item("Auto", PanelLayout.AUTO)
+	panel_layout_submenu.set_item_checked(PanelLayout.AUTO, true)
+	panel_layout_submenu.add_radio_check_item("Widescreen", PanelLayout.WIDESCREEN)
+	panel_layout_submenu.add_radio_check_item("Tallscreen", PanelLayout.TALLSCREEN)
+	panel_layout_submenu.hide_on_checkable_item_selection = false
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
