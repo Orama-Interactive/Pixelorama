@@ -82,6 +82,8 @@ func change_ui_layout(mode : String) -> void:
 			RightPanel = UI.get_node("CanvasAndTimeline/BottomPanel/RightPanel")
 		if get_viewport_rect().size.x < 948:
 			RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/CanvasPreviewContainer").visible = false
+		else:
+			RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/CanvasPreviewContainer").visible = true
 	elif mode == "widescreen":
 		if RightPanel == null:
 			RightPanel = UI.get_node("CanvasAndTimeline/BottomPanel/RightPanel")
