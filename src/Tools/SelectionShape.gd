@@ -4,6 +4,8 @@ class_name SelectionShape extends Polygon2D
 var line_offset := Vector2.ZERO setget _offset_changed
 var tween : Tween
 var local_selected_pixels := [] setget _local_selected_pixels_changed # Array of Vector2s
+var local_image := Image.new()
+var local_image_texture := ImageTexture.new()
 var clear_selection_on_tree_exit := true
 var _selected_rect := Rect2(0, 0, 0, 0)
 var _clipped_rect := Rect2(0, 0, 0, 0)
@@ -69,8 +71,11 @@ func _draw() -> void:
 #	draw_circle(Vector2(rect_pos.x, rect_end.y), 1, Color.gray)
 #	draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
 
-	if _move_pixel:
-		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
+	if !local_image.is_empty():
+		draw_texture(local_image_texture, _selected_rect.position, Color(1, 1, 1, 0.5))
+
+#	if _move_pixel:
+#		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
 
 
 # Taken and modified from https://github.com/juddrgledhill/godot-dashed-line
@@ -191,10 +196,10 @@ func select_rect(merge := true) -> void:
 #			if polygon.size() > 4: # if it's not a rectangle
 #				if !Geometry.is_point_in_polygon(pos, polygon):
 #					continue
-			if x < 0 or x >= project.size.x:
-				continue
-			if y < 0 or y >= project.size.y:
-				continue
+#			if x < 0 or x >= project.size.x:
+#				continue
+#			if y < 0 or y >= project.size.y:
+#				continue
 			selected_pixels_copy.append(pos)
 
 	self.local_selected_pixels = selected_pixels_copy
@@ -217,6 +222,7 @@ func merge_multiple_selections(merge := true) -> void:
 			continue
 		if merge:
 			var arr = Geometry.merge_polygons_2d(polygon, selection.polygon)
+#			print(arr.size())
 			if arr.size() == 1: # if the selections intersect
 				set_polygon(arr[0])
 				_selected_rect = _selected_rect.merge(selection._selected_rect)
@@ -228,7 +234,6 @@ func merge_multiple_selections(merge := true) -> void:
 				self.local_selected_pixels = selected_pixels_copy
 		else:
 			var arr = Geometry.clip_polygons_2d(selection.polygon, polygon)
-#			print(arr.size())
 			if arr.size() == 0: # if the new selection completely overlaps the current
 				selection.queue_free()
 			else: # if the selections intersect
@@ -244,44 +249,93 @@ func merge_multiple_selections(merge := true) -> void:
 					selection_shape.set_polygon(arr[i])
 
 
-func move_start(move_pixel : bool) -> void:
-	if not move_pixel:
+func get_image() -> Image:
+	var project : Project = Global.current_project
+	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var image := Image.new()
+	image = cel_image.get_rect(_selected_rect)
+#	print(polygon.size())
+	if polygon.size() > 4:
+		image.lock()
+		var image_pixel := Vector2.ZERO
+		for x in range(_selected_rect.position.x, _selected_rect.end.x):
+			image_pixel.y = 0
+			for y in range(_selected_rect.position.y, _selected_rect.end.y):
+				var pos := Vector2(x, y)
+#				if not Geometry.is_point_in_polygon(pos, polygon):
+				if not pos in local_selected_pixels:
+	#				print(pixel)
+					image.set_pixelv(image_pixel, Color(0, 0, 0, 0))
+				image_pixel.y += 1
+			image_pixel.x += 1
+
+		image.unlock()
+#	image.create(_selected_rect.size.x, _selected_rect.size.y, false, Image.FORMAT_RGBA8)
+
+	return image
+
+
+func move_content_start() -> void:
+	if !local_image.is_empty():
 		return
-
-	_undo_data = _get_undo_data(true)
-	var project := Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-
-	var rect = Rect2(Vector2.ZERO, project.size)
-	_clipped_rect = rect.clip(_selected_rect)
-	_move_image = image.get_rect(_clipped_rect)
-	_move_texture.create_from_image(_move_image, 0)
-
-	var size := _clipped_rect.size
-	rect = Rect2(Vector2.ZERO, size)
-	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-	image.blit_rect(_clear_image, rect, _clipped_rect.position)
+	local_image = get_image()
+	local_image_texture.create_from_image(local_image, 0)
+	var project : Project = Global.current_project
+	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	_clear_image.resize(_selected_rect.size.x, _selected_rect.size.y, Image.INTERPOLATE_NEAREST)
+	cel_image.blit_rect_mask(_clear_image, local_image, Rect2(Vector2.ZERO, _selected_rect.size), _selected_rect.position)
 	Global.canvas.update_texture(project.current_layer)
 
-	_move_pixel = true
-	update()
+
+func move_content_end() -> void:
+	if local_image.is_empty():
+		return
+	var project : Project = Global.current_project
+	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	cel_image.blit_rect_mask(local_image, local_image, Rect2(Vector2.ZERO, _selected_rect.size), _selected_rect.position)
+	Global.canvas.update_texture(project.current_layer)
+	local_image = Image.new()
+	local_image_texture = ImageTexture.new()
 
 
-func move_end() -> void:
-	var undo_data = _undo_data if _move_pixel else _get_undo_data(false)
-
-	if _move_pixel:
-		var project := Global.current_project
-		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		var size := _clipped_rect.size
-		var rect = Rect2(Vector2.ZERO, size)
-		image.blit_rect_mask(_move_image, _move_image, rect, _clipped_rect.position)
-		_move_pixel = false
-		update()
-
-	Global.current_project.selected_rect = _selected_rect
-	commit_undo("Rectangle Select", undo_data)
-	_undo_data.clear()
+#func move_start(move_pixel : bool) -> void:
+#	if not move_pixel:
+#		return
+#
+#	_undo_data = _get_undo_data(true)
+#	var project := Global.current_project
+#	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+#
+#	var rect = Rect2(Vector2.ZERO, project.size)
+#	_clipped_rect = rect.clip(_selected_rect)
+#	_move_image = image.get_rect(_clipped_rect)
+#	_move_texture.create_from_image(_move_image, 0)
+#
+#	var size := _clipped_rect.size
+#	rect = Rect2(Vector2.ZERO, size)
+#	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+#	image.blit_rect(_clear_image, rect, _clipped_rect.position)
+#	Global.canvas.update_texture(project.current_layer)
+#
+#	_move_pixel = true
+#	update()
+#
+#
+#func move_end() -> void:
+#	var undo_data = _undo_data if _move_pixel else _get_undo_data(false)
+#
+#	if _move_pixel:
+#		var project := Global.current_project
+#		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+#		var size := _clipped_rect.size
+#		var rect = Rect2(Vector2.ZERO, size)
+#		image.blit_rect_mask(_move_image, _move_image, rect, _clipped_rect.position)
+#		_move_pixel = false
+#		update()
+#
+#	Global.current_project.selected_rect = _selected_rect
+#	commit_undo("Rectangle Select", undo_data)
+#	_undo_data.clear()
 
 
 func copy() -> void:
@@ -314,7 +368,7 @@ func cut() -> void: # This is basically the same as copy + delete
 	var brush = _clipboard.get_rect(_clipboard.get_used_rect())
 	project.brushes.append(brush)
 	Brushes.add_project_brush(brush)
-	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
+#	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
 	image.blit_rect(_clear_image, rect, _selected_rect.position)
 	commit_undo("Draw", undo_data)
 
@@ -328,7 +382,7 @@ func paste() -> void:
 	var size := _selected_rect.size
 	var rect = Rect2(Vector2.ZERO, size)
 	image.blend_rect(_clipboard, rect, _selected_rect.position)
-	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
+#	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
 	commit_undo("Draw", undo_data)
 
 
@@ -340,7 +394,7 @@ func delete() -> void:
 	var rect = Rect2(Vector2.ZERO, size)
 	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 	image.blit_rect(_clear_image, rect, _selected_rect.position)
-	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
+#	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
 	commit_undo("Draw", undo_data)
 
 
@@ -374,6 +428,7 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 
 
 func _on_SelectionShape_tree_exiting() -> void:
+	move_content_end()
 	Global.current_project.selections.erase(self)
 	if clear_selection_on_tree_exit:
 		self.local_selected_pixels = []

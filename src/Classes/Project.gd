@@ -639,14 +639,14 @@ static func sort_by_angle(a, b) -> bool:
 	return false
 
 
-func get_selection_image() -> Image:
-	var image := Image.new()
-	var cel_image : Image = frames[current_frame].cels[current_layer].image
-	image.copy_from(cel_image)
-	image.lock()
-	image.fill(Color(0, 0, 0, 0))
-	for pixel in selected_pixels:
-		var color : Color = cel_image.get_pixelv(pixel)
-		image.set_pixelv(pixel, color)
-	image.unlock()
-	return image
+#func get_selection_image() -> Image:
+#	var image := Image.new()
+#	var cel_image : Image = frames[current_frame].cels[current_layer].image
+#	image.copy_from(cel_image)
+#	image.lock()
+#	image.fill(Color(0, 0, 0, 0))
+#	for pixel in selected_pixels:
+#		var color : Color = cel_image.get_pixelv(pixel)
+#		image.set_pixelv(pixel, color)
+#	image.unlock()
+#	return image
