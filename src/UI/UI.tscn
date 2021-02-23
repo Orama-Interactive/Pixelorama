@@ -359,13 +359,18 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="BottomPanel" type="VBoxContainer" parent="CanvasAndTimeline"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasAndTimeline"]
 margin_top = 492.0
 margin_right = 902.0
 margin_bottom = 692.0
 size_flags_horizontal = 3
 
-[node name="AnimationTimeline" parent="CanvasAndTimeline/BottomPanel" instance=ExtResource( 18 )]
+[node name="BottomPanel" type="VBoxContainer" parent="CanvasAndTimeline/HBoxContainer"]
+margin_right = 902.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+
+[node name="AnimationTimeline" parent="CanvasAndTimeline/HBoxContainer/BottomPanel" instance=ExtResource( 18 )]
 margin_top = 0.0
 margin_bottom = 200.0
 size_flags_vertical = 3
@@ -400,6 +405,7 @@ size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
+margin_right = 332.0
 margin_bottom = 248.0
 
 [node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]

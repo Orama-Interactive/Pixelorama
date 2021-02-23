@@ -67,37 +67,49 @@ func handle_resize() -> void:
 
 
 func change_ui_layout(mode : String) -> void:
-	var UI = get_node("MenuAndUI/UI")
-	var BottomPanel = UI.get_node("CanvasAndTimeline/BottomPanel")
-	var RightPanel  = UI.get_node("RightPanel")
+	var UI           = get_node("MenuAndUI/UI")
+	var BottomPanel  = UI.get_node("CanvasAndTimeline/HBoxContainer/BottomPanel")
+
+	var current_mode = "widescreen"
+	var RightPanel   = UI.get_node("RightPanel") 
 	
+	if RightPanel == null:
+		current_mode = "tallscreen"
+		RightPanel   = BottomPanel.get_node("RightPanel")
+	
+	var ToolAndPaletteVSplit   = RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit")
+	var ColorAndToolOptions    = ToolAndPaletteVSplit.get_node("ColorAndToolOptions")
+	var CanvasPreviewContainer = RightPanel.get_node("PreviewAndPalettes/CanvasPreviewContainer") if current_mode == "widescreen" else ToolAndPaletteVSplit.get_node("CanvasPreviewContainer")
+
+
 	if mode == "tallscreen":
-		if RightPanel != null:
-			reparent_node_to(RightPanel, BottomPanel, -1)
+		if mode != current_mode:
+			reparent_node_to(RightPanel, BottomPanel, 0)
 			RightPanel.rect_min_size.y = 360
-			reparent_node_to(RightPanel.get_node("PreviewAndPalettes/CanvasPreviewContainer"), RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit"), 0) 
-			replace_node_with(RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit"), HBoxContainer.new())
-			RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions").rect_min_size.x = 280
+			reparent_node_to(CanvasPreviewContainer, ToolAndPaletteVSplit, 1) 
+			ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, HBoxContainer.new())
+			ColorAndToolOptions.rect_min_size.x = 280
+			reparent_node_to(UI.get_node("ToolPanel"), UI.get_node("CanvasAndTimeline/HBoxContainer"), 0)
 		else:
-			RightPanel = UI.get_node("CanvasAndTimeline/BottomPanel/RightPanel")
-		if get_viewport_rect().size.x < 948:
-			RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/CanvasPreviewContainer").visible = false
+			RightPanel = BottomPanel.get_node("RightPanel")
+		if get_viewport_rect().size.x < 908:
+			CanvasPreviewContainer.visible = false
 		else:
-			RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/CanvasPreviewContainer").visible = true
+			CanvasPreviewContainer.visible = true
 	elif mode == "widescreen":
-		if RightPanel == null:
-			RightPanel = UI.get_node("CanvasAndTimeline/BottomPanel/RightPanel")
+		if mode != current_mode:
 			reparent_node_to(RightPanel, UI, -1)
 			RightPanel.rect_min_size.y = 0
-			reparent_node_to(RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/CanvasPreviewContainer"), RightPanel.get_node("PreviewAndPalettes"), 0) 
-			replace_node_with(RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit"), VSplitContainer.new())
-			RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions").rect_min_size.x = 0
-			RightPanel.get_node("PreviewAndPalettes/CanvasPreviewContainer").visible = true
+			reparent_node_to(CanvasPreviewContainer, RightPanel.get_node("PreviewAndPalettes"), 0) 
+			replace_node_with(ToolAndPaletteVSplit, VSplitContainer.new())
+			ColorAndToolOptions.rect_min_size.x = 0
+			CanvasPreviewContainer.visible = true
+			reparent_node_to(UI.get_node("CanvasAndTimeline/HBoxContainer/ToolPanel"), UI, 0)
 
 
 # helper function (change_ui_layout)
 # warning: this doesn't really copy any sort of attributes, except a few that were needed in my particular case
-func replace_node_with(old : Node, new : Node):
+func replace_node_with(old : Node, new : Node) -> Node:
 		var tempname = old.name
 		old.name = "old"
 		new.name = tempname
@@ -106,11 +118,13 @@ func replace_node_with(old : Node, new : Node):
 		# new.set("custom_constants/autohide", old.get("custom_constants/autohide"))
 		if new is HBoxContainer:
 			new.set_alignment(HBoxContainer.ALIGN_CENTER)
+			new.set("custom_constants/separation", 20)
 		old.get_parent().add_child(new)
 		for n in old.get_children():
 			reparent_node_to(n, new, -1)
 		old.get_parent().remove_child(old)
 		old.queue_free()
+		return new
 
 
 # helper function (change_ui_layout)
