@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/shapefill_cursor.png-92e2eb2d034b5dad97a36d73f762a443.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/shapefill_cursor.png"
+dest_files=[ "res://.import/shapefill_cursor.png-92e2eb2d034b5dad97a36d73f762a443.image" ]
+
+[params]
+

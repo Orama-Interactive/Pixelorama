@@ -8,6 +8,7 @@ onready var tools := [
 	[$Pan, "pan"],
 	[$ColorPicker, "colorpicker"],
 	[$Pencil, "pencil"],
+	[$ShapeFill, "shape_fill"],
 	[$Eraser, "eraser"],
 	[$Bucket, "fill"],
 	[$LightenDarken, "lightdark"],

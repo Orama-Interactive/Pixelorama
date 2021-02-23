@@ -505,6 +505,13 @@ Select a color from a pixel of the sprite
 
 Hold %s to make a line""") % [InputMap.get_action_list("left_pencil_tool")[0].as_text(), InputMap.get_action_list("right_pencil_tool")[0].as_text(), "Shift"]
 
+	var shape_fill : BaseButton = find_node_by_name(root, "ShapeFill")
+	
+	shape_fill.hint_tooltip = tr("""Shape Fill
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_shape_fill_tool")[0].as_text(), InputMap.get_action_list("right_shape_fill_tool")[0].as_text()]
+
 	var eraser : BaseButton = find_node_by_name(root, "Eraser")
 	eraser.hint_tooltip = tr("""Eraser
 

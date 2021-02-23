@@ -44,6 +44,7 @@ var _tools = {
 	"Pan" : "res://src/Tools/Pan.tscn",
 	"ColorPicker" : "res://src/Tools/ColorPicker.tscn",
 	"Pencil" : "res://src/Tools/Pencil.tscn",
+	"ShapeFill" : "res://src/Tools/ShapeFill.tscn",
 	"Eraser" : "res://src/Tools/Eraser.tscn",
 	"Bucket" : "res://src/Tools/Bucket.tscn",
 	"LightenDarken" : "res://src/Tools/LightenDarken.tscn",

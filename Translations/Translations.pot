@@ -726,6 +726,11 @@ msgid "Pencil\n\n"
 "Hold %s to make a line"
 msgstr ""
 
+msgid "Shape Fill\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
