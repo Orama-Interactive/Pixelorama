@@ -169,23 +169,6 @@ func set_rect(rect : Rect2) -> void:
 #	visible = not rect.has_no_area()
 
 
-func move_polygon(move : Vector2) -> void:
-	_selected_rect.position += move
-	_clipped_rect.position += move
-	for i in polygon.size():
-		polygon[i] += move
-#	set_rect(_selected_rect)
-
-
-func move_polygon_end(new_pos : Vector2, old_pos : Vector2) -> void:
-	var diff := new_pos - old_pos
-	var selected_pixels_copy = local_selected_pixels.duplicate()
-	for i in selected_pixels_copy.size():
-		selected_pixels_copy[i] += diff
-
-	self.local_selected_pixels = selected_pixels_copy
-
-
 func select_rect(merge := true) -> void:
 	var project : Project = Global.current_project
 	self.local_selected_pixels = []
@@ -245,7 +228,7 @@ func merge_multiple_selections(merge := true) -> void:
 				for i in range(1, arr.size()):
 					var selection_shape = load("res://src/Tools/SelectionShape.tscn").instance()
 					Global.current_project.selections.append(selection_shape)
-					Global.canvas.add_child(selection_shape)
+					Global.canvas.selection.add_child(selection_shape)
 					selection_shape.set_polygon(arr[i])
 
 
@@ -273,29 +256,6 @@ func get_image() -> Image:
 #	image.create(_selected_rect.size.x, _selected_rect.size.y, false, Image.FORMAT_RGBA8)
 
 	return image
-
-
-func move_content_start() -> void:
-	if !local_image.is_empty():
-		return
-	local_image = get_image()
-	local_image_texture.create_from_image(local_image, 0)
-	var project : Project = Global.current_project
-	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	_clear_image.resize(_selected_rect.size.x, _selected_rect.size.y, Image.INTERPOLATE_NEAREST)
-	cel_image.blit_rect_mask(_clear_image, local_image, Rect2(Vector2.ZERO, _selected_rect.size), _selected_rect.position)
-	Global.canvas.update_texture(project.current_layer)
-
-
-func move_content_end() -> void:
-	if local_image.is_empty():
-		return
-	var project : Project = Global.current_project
-	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	cel_image.blit_rect_mask(local_image, local_image, Rect2(Vector2.ZERO, _selected_rect.size), _selected_rect.position)
-	Global.canvas.update_texture(project.current_layer)
-	local_image = Image.new()
-	local_image_texture = ImageTexture.new()
 
 
 #func move_start(move_pixel : bool) -> void:
@@ -428,7 +388,7 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 
 
 func _on_SelectionShape_tree_exiting() -> void:
-	move_content_end()
+	get_parent().move_content_end()
 	Global.current_project.selections.erase(self)
 	if clear_selection_on_tree_exit:
 		self.local_selected_pixels = []

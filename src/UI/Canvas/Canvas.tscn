@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/UI/Canvas/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/Grid.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/UI/Canvas/CurrentFrameDrawer.gd" type="Script" id=5]
 [ext_resource path="res://src/UI/Canvas/PixelGrid.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/Canvas/Previews.gd" type="Script" id=7]
+[ext_resource path="res://src/UI/Canvas/Selection.gd" type="Script" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
@@ -35,6 +36,9 @@ script = ExtResource( 6 )
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource( 2 )
+
+[node name="Selection" type="Node2D" parent="."]
+script = ExtResource( 7 )
 
 [node name="Indicators" type="Node2D" parent="."]
 script = ExtResource( 3 )

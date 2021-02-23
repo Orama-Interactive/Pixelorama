@@ -11,9 +11,10 @@ var move_preview_location := Vector2.ZERO
 
 onready var currently_visible_frame : Viewport = $CurrentlyVisibleFrame
 onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
+onready var tile_mode = $TileMode
 onready var pixel_grid = $PixelGrid
 onready var grid = $Grid
-onready var tile_mode = $TileMode
+onready var selection = $Selection
 onready var indicators = $Indicators
 onready var previews = $Previews
 

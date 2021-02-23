@@ -25,7 +25,7 @@ func draw_start(position : Vector2) -> void:
 			current_selection_id = Global.current_project.selections.size()
 		var selection_shape := preload("res://src/Tools/SelectionShape.tscn").instance()
 		Global.current_project.selections.append(selection_shape)
-		Global.canvas.add_child(selection_shape)
+		Global.canvas.selection.add_child(selection_shape)
 		_start = Rect2(position, Vector2.ZERO)
 		selection_shape.set_rect(_start)
 	else:
@@ -49,8 +49,7 @@ func draw_move(position : Vector2) -> void:
 	var selection : SelectionShape = Global.current_project.selections[current_selection_id]
 
 	if _move:
-		for _selection in Global.current_project.selections:
-			_selection.move_polygon(position - _offset)
+		Global.canvas.selection.move_borders(position - _offset)
 		_offset = position
 		_set_cursor_text(selection.get_rect())
 	else:
@@ -58,21 +57,11 @@ func draw_move(position : Vector2) -> void:
 		rect = rect.grow_individual(0, 0, 1, 1)
 		selection.set_rect(rect)
 		_set_cursor_text(rect)
-#	if _move:
-#		Global.selection_rectangle.move_rect(position - _offset)
-#		_offset = position
-#		_set_cursor_text(Global.selection_rectangle.get_rect())
-#	else:
-#		var rect := _start.expand(position).abs()
-#		rect = rect.grow_individual(0, 0, 1, 1)
-#		Global.selection_rectangle.set_rect(rect)
-#		_set_cursor_text(rect)
 
 
 func draw_end(position : Vector2) -> void:
 	if _move:
-		for _selection in Global.current_project.selections:
-			_selection.move_polygon_end(position, start_position)
+		Global.canvas.selection.move_borders_end(position, start_position)
 	else:
 		var selection : SelectionShape = Global.current_project.selections[current_selection_id]
 		selection.select_rect(!Tools.control)
