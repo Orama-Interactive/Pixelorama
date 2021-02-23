@@ -405,7 +405,6 @@ size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
-margin_right = 332.0
 margin_bottom = 248.0
 
 [node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]

@@ -90,8 +90,6 @@ func change_ui_layout(mode : String) -> void:
 			ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, HBoxContainer.new())
 			ColorAndToolOptions.rect_min_size.x = 280
 			reparent_node_to(UI.get_node("ToolPanel"), UI.get_node("CanvasAndTimeline/HBoxContainer"), 0)
-		else:
-			RightPanel = BottomPanel.get_node("RightPanel")
 		if get_viewport_rect().size.x < 908:
 			CanvasPreviewContainer.visible = false
 		else:
