@@ -28,6 +28,9 @@ msgstr ""
 msgid "Frame Size"
 msgstr ""
 
+msgid "Size"
+msgstr ""
+
 msgid "Width:"
 msgstr ""
 
