@@ -10,7 +10,6 @@ func draw_start(position : Vector2) -> void:
 	offset = position
 	if Global.current_project.selected_pixels:
 		Global.canvas.selection.move_content_start()
-#		Global.selection_rectangl.move_start(true)
 
 
 func draw_move(position : Vector2) -> void:

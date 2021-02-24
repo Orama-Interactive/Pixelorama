@@ -9,25 +9,37 @@ extends Node2D
 #	var selected_pixels := [] # Array of Vector2s - the selected pixels
 
 
+func move_borders_start() -> void:
+	for shape in get_children():
+		shape.temp_polygon = shape.polygon
+
+
 func move_borders(move : Vector2) -> void:
 	for shape in get_children():
 		shape._selected_rect.position += move
-		shape._clipped_rect.position += move
 		for i in shape.polygon.size():
 			shape.polygon[i] += move
 
 
 func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
+#	for shape in get_children():
+#		var diff := new_pos - old_pos
+#		for i in shape.polygon.size():
+#			shape.polygon[i] -= diff # Temporarily set the polygon back to be used for undoredo
+	var undo_data = _get_undo_data(false)
 	for shape in get_children():
+		shape.temp_polygon = shape.polygon
 		var diff := new_pos - old_pos
 		var selected_pixels_copy = shape.local_selected_pixels.duplicate()
 		for i in selected_pixels_copy.size():
 			selected_pixels_copy[i] += diff
 
 		shape.local_selected_pixels = selected_pixels_copy
+	commit_undo("Rectangle Select", undo_data)
 
 
 func move_content_start() -> void:
+	move_borders_start()
 	for shape in get_children():
 		if !shape.local_image.is_empty():
 			return
@@ -50,6 +62,51 @@ func move_content_end() -> void:
 		Global.canvas.update_texture(project.current_layer)
 		shape.local_image = Image.new()
 		shape.local_image_texture = ImageTexture.new()
+
+
+func commit_undo(action : String, undo_data : Dictionary) -> void:
+	var redo_data = _get_undo_data("image_data" in undo_data)
+	var project := Global.current_project
+
+	project.undos += 1
+	project.undo_redo.create_action(action)
+	var i := 0
+	for shape in get_children():
+		project.undo_redo.add_do_property(shape, "temp_polygon", redo_data["temp_polygon_%s" % i])
+		project.undo_redo.add_do_property(shape, "_selected_rect", redo_data["_selected_rect_%s" % i])
+		project.undo_redo.add_do_property(shape, "local_selected_pixels", redo_data["local_selected_pixels_%s" % i])
+		project.undo_redo.add_undo_property(shape, "temp_polygon", undo_data["temp_polygon_%s" % i])
+		project.undo_redo.add_undo_property(shape, "_selected_rect", undo_data["_selected_rect_%s" % i])
+		project.undo_redo.add_undo_property(shape, "local_selected_pixels", undo_data["local_selected_pixels_%s" % i])
+		i += 1
+
+	if "image_data" in undo_data:
+		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		project.undo_redo.add_do_property(image, "data", redo_data["image_data"])
+		project.undo_redo.add_undo_property(image, "data", undo_data["image_data"])
+	project.undo_redo.add_do_method(Global, "redo", project.current_frame, project.current_layer)
+	project.undo_redo.add_undo_method(Global, "undo", project.current_frame, project.current_layer)
+	project.undo_redo.commit_action()
+
+
+func _get_undo_data(undo_image : bool) -> Dictionary:
+	var data = {}
+	var project := Global.current_project
+	var i := 0
+	for shape in get_children():
+		data["temp_polygon_%s" % i] = shape.temp_polygon
+		data["_selected_rect_%s" % i] = shape._selected_rect
+		data["local_selected_pixels_%s" % i] = shape.local_selected_pixels
+		i += 1
+#	data["selected_rect"] = Global.current_project.selected_rect
+	if undo_image:
+		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		image.unlock()
+		data["image_data"] = image.data
+		image.lock()
+	for d in data.keys():
+		print(d, data[d])
+	return data
 
 
 func generate_rect(pixels : Array) -> Rect2:

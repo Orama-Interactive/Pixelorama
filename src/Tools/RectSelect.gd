@@ -33,6 +33,7 @@ func draw_start(position : Vector2) -> void:
 		_move = true
 		_offset = position
 		start_position = position
+		Global.canvas.selection.move_borders_start()
 		_set_cursor_text(selection.get_rect())
 #	if Global.selection_rectangle.has_point(position):
 #		_move = true

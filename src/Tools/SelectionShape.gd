@@ -7,8 +7,8 @@ var local_selected_pixels := [] setget _local_selected_pixels_changed # Array of
 var local_image := Image.new()
 var local_image_texture := ImageTexture.new()
 var clear_selection_on_tree_exit := true
+var temp_polygon : PoolVector2Array setget _temp_polygon_changed
 var _selected_rect := Rect2(0, 0, 0, 0)
-var _clipped_rect := Rect2(0, 0, 0, 0)
 var _move_image := Image.new()
 var _move_texture := ImageTexture.new()
 var _clear_image := Image.new()
@@ -150,6 +150,11 @@ func _local_selected_pixels_changed(value : Array) -> void:
 
 #	if value:
 #		Global.canvas.get_node("Selection").generate_polygons()
+
+
+func _temp_polygon_changed(value : PoolVector2Array) -> void:
+	temp_polygon = value
+	polygon = temp_polygon
 
 
 func has_point(position : Vector2) -> bool:
@@ -311,80 +316,51 @@ func copy() -> void:
 	project.brushes.append(brush)
 	Brushes.add_project_brush(brush)
 
-func cut() -> void: # This is basically the same as copy + delete
-	if _selected_rect.has_no_area():
-		return
-
-	var undo_data = _get_undo_data(true)
-	var project := Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	var size := _selected_rect.size
-	var rect = Rect2(Vector2.ZERO, size)
-	_clipboard = image.get_rect(_selected_rect)
-	if _clipboard.is_invisible():
-		return
-
-	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-	var brush = _clipboard.get_rect(_clipboard.get_used_rect())
-	project.brushes.append(brush)
-	Brushes.add_project_brush(brush)
-#	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
-	image.blit_rect(_clear_image, rect, _selected_rect.position)
-	commit_undo("Draw", undo_data)
-
-func paste() -> void:
-	if _clipboard.get_size() <= Vector2.ZERO:
-		return
-
-	var undo_data = _get_undo_data(true)
-	var project := Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	var size := _selected_rect.size
-	var rect = Rect2(Vector2.ZERO, size)
-	image.blend_rect(_clipboard, rect, _selected_rect.position)
-#	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
-	commit_undo("Draw", undo_data)
-
-
-func delete() -> void:
-	var undo_data = _get_undo_data(true)
-	var project := Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	var size := _selected_rect.size
-	var rect = Rect2(Vector2.ZERO, size)
-	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-	image.blit_rect(_clear_image, rect, _selected_rect.position)
-#	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
-	commit_undo("Draw", undo_data)
-
-
-func commit_undo(action : String, undo_data : Dictionary) -> void:
-	var redo_data = _get_undo_data("image_data" in undo_data)
-	var project := Global.current_project
-
-	project.undos += 1
-	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_property(project, "selected_rect", redo_data["selected_rect"])
-	project.undo_redo.add_undo_property(project, "selected_rect", undo_data["selected_rect"])
-	if "image_data" in undo_data:
-		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		project.undo_redo.add_do_property(image, "data", redo_data["image_data"])
-		project.undo_redo.add_undo_property(image, "data", undo_data["image_data"])
-	project.undo_redo.add_do_method(Global, "redo", project.current_frame, project.current_layer)
-	project.undo_redo.add_undo_method(Global, "undo", project.current_frame, project.current_layer)
-	project.undo_redo.commit_action()
-
-
-func _get_undo_data(undo_image : bool) -> Dictionary:
-	var data = {}
-	var project := Global.current_project
-	data["selected_rect"] = Global.current_project.selected_rect
-	if undo_image:
-		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		image.unlock()
-		data["image_data"] = image.data
-		image.lock()
-	return data
+#func cut() -> void: # This is basically the same as copy + delete
+#	if _selected_rect.has_no_area():
+#		return
+#
+#	var undo_data = _get_undo_data(true)
+#	var project := Global.current_project
+#	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+#	var size := _selected_rect.size
+#	var rect = Rect2(Vector2.ZERO, size)
+#	_clipboard = image.get_rect(_selected_rect)
+#	if _clipboard.is_invisible():
+#		return
+#
+#	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+#	var brush = _clipboard.get_rect(_clipboard.get_used_rect())
+#	project.brushes.append(brush)
+#	Brushes.add_project_brush(brush)
+##	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
+#	image.blit_rect(_clear_image, rect, _selected_rect.position)
+#	commit_undo("Draw", undo_data)
+#
+#func paste() -> void:
+#	if _clipboard.get_size() <= Vector2.ZERO:
+#		return
+#
+#	var undo_data = _get_undo_data(true)
+#	var project := Global.current_project
+#	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+#	var size := _selected_rect.size
+#	var rect = Rect2(Vector2.ZERO, size)
+#	image.blend_rect(_clipboard, rect, _selected_rect.position)
+##	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
+#	commit_undo("Draw", undo_data)
+#
+#
+#func delete() -> void:
+#	var undo_data = _get_undo_data(true)
+#	var project := Global.current_project
+#	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+#	var size := _selected_rect.size
+#	var rect = Rect2(Vector2.ZERO, size)
+#	_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+#	image.blit_rect(_clear_image, rect, _selected_rect.position)
+##	move_end() # The selection_rectangle can be used while is moving, this prevents malfunctioning
+#	commit_undo("Draw", undo_data)
 
 
 func _on_SelectionShape_tree_exiting() -> void:
