@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -23,7 +23,8 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=21]
 [ext_resource path="res://assets/graphics/dark_themes/tools/pan.png" type="Texture" id=22]
 [ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
-[ext_resource path="res://assets/graphics/dark_themes/tools/shapestool.png" type="Texture" id=24]
+[ext_resource path="res://assets/graphics/dark_themes/tools/rectangletool.png" type="Texture" id=24]
+[ext_resource path="res://assets/graphics/dark_themes/tools/ellipsetool.png" type="Texture" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -87,7 +88,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
-margin_bottom = 327.0
+margin_bottom = 363.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -238,7 +239,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShapesTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
+[node name="RectangleTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 288.0
@@ -248,10 +249,28 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/ShapesTool"]
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/RectangleTool"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EllipseTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
+"UIButtons",
+]]
+margin_top = 324.0
+margin_right = 32.0
+margin_bottom = 356.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/EllipseTool"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

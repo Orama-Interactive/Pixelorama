@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/rectangletool_cursor.png-d193807b8b3306722800e39d525f344e.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/rectangletool_cursor.png"
+dest_files=[ "res://.import/rectangletool_cursor.png-d193807b8b3306722800e39d525f344e.image" ]
+
+[params]
+

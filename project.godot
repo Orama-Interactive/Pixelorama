@@ -84,11 +84,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
 }, {
-"base": "Reference",
-"class": "ShapeToolOptions",
-"language": "GDScript",
-"path": "res://src/Classes/ShapeToolOptions.gd"
-}, {
 "base": "Guide",
 "class": "SymmetryGuide",
 "language": "GDScript",
@@ -110,7 +105,6 @@ _global_script_class_icons={
 "PaletteColor": "",
 "Patterns": "",
 "Project": "",
-"ShapeToolOptions": "",
 "SymmetryGuide": ""
 }
 
