@@ -105,7 +105,7 @@ func change_ui_layout(mode : String) -> void:
 
 	if not colorpicker_is_switched and CanvasPreviewContainer.visible and mode == "tallscreen":
 		reparent_node_to(myScrollContainer, ToolAndPaletteVSplit, 0)
-		myScrollContainer.rect_min_size = Vector2(330, 196)
+		myScrollContainer.rect_min_size = Vector2(268, 196)
 		ColorAndToolOptions.set("custom_constants/separation", 20)
 		reparent_node_to(CanvasPreviewContainer, ColorAndToolOptions, -1)
 	elif colorpicker_is_switched and (not CanvasPreviewContainer.visible or mode != "tallscreen"):
