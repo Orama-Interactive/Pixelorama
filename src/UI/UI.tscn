@@ -365,10 +365,12 @@ margin_right = 902.0
 margin_bottom = 692.0
 size_flags_horizontal = 3
 
-[node name="BottomPanel" type="VBoxContainer" parent="CanvasAndTimeline/HBoxContainer"]
+[node name="BottomPanel" type="VSplitContainer" parent="CanvasAndTimeline/HBoxContainer"]
 margin_right = 902.0
 margin_bottom = 200.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/autohide = 0
 
 [node name="AnimationTimeline" parent="CanvasAndTimeline/HBoxContainer/BottomPanel" instance=ExtResource( 18 )]
 margin_top = 0.0
