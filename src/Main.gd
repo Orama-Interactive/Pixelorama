@@ -4,6 +4,17 @@ var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
 
+var tallscreen_is_active = false
+onready var UI                     := $MenuAndUI/UI
+onready	var BottomPanel            := $MenuAndUI/UI/CanvasAndTimeline/HBoxContainer/BottomPanel
+onready var RightPanel             := $MenuAndUI/UI/RightPanel
+onready var ToolAndPaletteVSplit   := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit
+onready var ColorAndToolOptions    := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
+onready var CanvasPreviewContainer := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreviewContainer
+onready var ToolPanel              := $MenuAndUI/UI/ToolPanel
+onready var myScrollContainer   := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var alternate_transparent_background = ColorRect.new()
@@ -67,71 +78,77 @@ func handle_resize() -> void:
 
 
 func change_ui_layout(mode : String) -> void:
-	var UI           = get_node("MenuAndUI/UI")
-	var BottomPanel  = UI.get_node("CanvasAndTimeline/HBoxContainer/BottomPanel")
-
-	var current_mode = "widescreen"
-	var RightPanel   = UI.get_node("RightPanel") 
+	var colorpicker_is_switched = true if ToolAndPaletteVSplit.has_node("ScrollContainer") else false
 	
-	if RightPanel == null:
-		current_mode = "tallscreen"
-		RightPanel   = BottomPanel.get_node("RightPanel")
+	if mode == "tallscreen" and not tallscreen_is_active:
+		tallscreen_is_active = true
+		reparent_node_to(RightPanel, BottomPanel, 0)
+		RightPanel.rect_min_size.y = 300
+		reparent_node_to(CanvasPreviewContainer, ToolAndPaletteVSplit, 1) 
+		ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, HBoxContainer.new())
+		ColorAndToolOptions.rect_min_size.x = 280
+		reparent_node_to(ToolPanel, UI.get_node("CanvasAndTimeline/HBoxContainer"), 0)
+	elif mode == "widescreen" and tallscreen_is_active:
+		tallscreen_is_active = false
+		reparent_node_to(RightPanel, UI, -1)
+		RightPanel.rect_min_size.y = 0
+		reparent_node_to(CanvasPreviewContainer, RightPanel.get_node("PreviewAndPalettes"), 0) 
+		ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, VSplitContainer.new())
+		ColorAndToolOptions.rect_min_size.x = 0
+		CanvasPreviewContainer.visible = true
+		reparent_node_to(ToolPanel, UI, 0)
 	
-	var ToolAndPaletteVSplit   = RightPanel.get_node("PreviewAndPalettes/ToolAndPaletteVSplit")
-	var ColorAndToolOptions    = ToolAndPaletteVSplit.get_node("ColorAndToolOptions")
-	var CanvasPreviewContainer = RightPanel.get_node("PreviewAndPalettes/CanvasPreviewContainer") if current_mode == "widescreen" else ToolAndPaletteVSplit.get_node("CanvasPreviewContainer")
+	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
+		CanvasPreviewContainer.visible = false
+	else:
+		CanvasPreviewContainer.visible = true
 
-
-	if mode == "tallscreen":
-		if mode != current_mode:
-			reparent_node_to(RightPanel, BottomPanel, 0)
-			RightPanel.rect_min_size.y = 360
-			reparent_node_to(CanvasPreviewContainer, ToolAndPaletteVSplit, 1) 
-			ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, HBoxContainer.new())
-			ColorAndToolOptions.rect_min_size.x = 280
-			reparent_node_to(UI.get_node("ToolPanel"), UI.get_node("CanvasAndTimeline/HBoxContainer"), 0)
-		if get_viewport_rect().size.x < 908:
-			CanvasPreviewContainer.visible = false
+	if not colorpicker_is_switched and CanvasPreviewContainer.visible and mode == "tallscreen":
+		reparent_node_to(myScrollContainer, ToolAndPaletteVSplit, 0)
+		myScrollContainer.rect_min_size = Vector2(330, 196)
+		ColorAndToolOptions.set("custom_constants/separation", 20)
+		reparent_node_to(CanvasPreviewContainer, ColorAndToolOptions, -1)
+	elif colorpicker_is_switched and (not CanvasPreviewContainer.visible or mode != "tallscreen"):
+		reparent_node_to(myScrollContainer, ColorAndToolOptions, -1)
+		myScrollContainer.rect_min_size = Vector2(0, 0)
+		ColorAndToolOptions.set("custom_constants/separation", 8)
+		if mode == "widescreen":
+			reparent_node_to(CanvasPreviewContainer, RightPanel.get_node("PreviewAndPalettes"), 0)
 		else:
-			CanvasPreviewContainer.visible = true
-	elif mode == "widescreen":
-		if mode != current_mode:
-			reparent_node_to(RightPanel, UI, -1)
-			RightPanel.rect_min_size.y = 0
-			reparent_node_to(CanvasPreviewContainer, RightPanel.get_node("PreviewAndPalettes"), 0) 
-			replace_node_with(ToolAndPaletteVSplit, VSplitContainer.new())
-			ColorAndToolOptions.rect_min_size.x = 0
-			CanvasPreviewContainer.visible = true
-			reparent_node_to(UI.get_node("CanvasAndTimeline/HBoxContainer/ToolPanel"), UI, 0)
+			reparent_node_to(CanvasPreviewContainer, ToolAndPaletteVSplit, 1)
 
 
 # helper function (change_ui_layout)
 # warning: this doesn't really copy any sort of attributes, except a few that were needed in my particular case
 func replace_node_with(old : Node, new : Node) -> Node:
-		var tempname = old.name
-		old.name = "old"
-		new.name = tempname
-		new.size_flags_vertical = old.size_flags_horizontal
-		new.size_flags_vertical = old.size_flags_vertical
-		# new.set("custom_constants/autohide", old.get("custom_constants/autohide"))
-		if new is HBoxContainer:
-			new.set_alignment(HBoxContainer.ALIGN_CENTER)
-			new.set("custom_constants/separation", 20)
-		old.get_parent().add_child(new)
-		for n in old.get_children():
-			reparent_node_to(n, new, -1)
-		old.get_parent().remove_child(old)
-		old.queue_free()
-		return new
+	var tempname = old.name
+	old.name = "old"
+	new.name = tempname
+	new.size_flags_vertical = old.size_flags_horizontal
+	new.size_flags_vertical = old.size_flags_vertical
+	# new.set("custom_constants/autohide", old.get("custom_constants/autohide"))
+	if new is HBoxContainer:
+		new.set_alignment(HBoxContainer.ALIGN_CENTER)
+		new.set("custom_constants/separation", 20)
+	old.get_parent().add_child(new)
+	for n in old.get_children():
+		reparent_node_to(n, new, -1)
+	old.get_parent().remove_child(old)
+	old.queue_free()
+	return new
 
 
 # helper function (change_ui_layout)
-func reparent_node_to(node : Node, dest : Node, pos : int) -> void:
+func reparent_node_to(node : Node, dest : Node, pos : int) -> bool:
+	if dest is Node and node is Node:
 		node.get_parent().remove_child(node)
 		dest.add_child(node)
 		node.set_owner(dest)
 		if pos >= 0:
 			dest.move_child(node, pos)
+		return true
+	else:
+		return false
 
 
 func _input(event : InputEvent) -> void:
