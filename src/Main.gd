@@ -151,6 +151,7 @@ func _notification(what : int) -> void:
 		MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 			show_quit_dialog()
 		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when the mouse isn't in the window anymore
+			Global.has_focus = false
 			if Global.fps_limit_focus:
 				Engine.set_target_fps(1) # then set the fps to 1 to relieve the cpu
 		MainLoop.NOTIFICATION_WM_MOUSE_ENTER: # Opposite of the above
