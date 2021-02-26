@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-02-04 09:02\n"
+"PO-Revision-Date: 2021-02-26 13:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -458,7 +458,7 @@ msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
 
 msgid "Current cel"
-msgstr "Bieżąca kalka"
+msgstr "Bieżąca komórka"
 
 msgid "Current frame"
 msgstr "Aktualna klatka"
@@ -1191,10 +1191,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr "Połącz kalkę"
+msgstr "Połącz komórkę"
 
 msgid "Unlink Cel"
-msgstr "Odłącz kalkę"
+msgstr "Odłącz komórkę"
 
 msgid "Frame Properties"
 msgstr "Właściwości klatki"
@@ -1243,8 +1243,8 @@ msgstr "Klatka: %s, Warstwa: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Włącz/wyłącz łączenie kalek\n\n"
-"Złączone kalki są współdzielone przez wiele klatek"
+msgstr "Włącz/wyłącz łączenie komórek\n\n"
+"Złączone komórki są współdzielone przez wiele komórek"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
