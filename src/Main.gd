@@ -5,15 +5,14 @@ var redone := false
 var is_quitting_on_save := false
 
 var tallscreen_is_active = false
-onready var UI                     := $MenuAndUI/UI
-onready	var BottomPanel            := $MenuAndUI/UI/CanvasAndTimeline/HBoxContainer/BottomPanel
-onready var RightPanel             := $MenuAndUI/UI/RightPanel
-onready var ToolAndPaletteVSplit   := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit
-onready var ColorAndToolOptions    := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
-onready var CanvasPreviewContainer := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreviewContainer
-onready var ToolPanel              := $MenuAndUI/UI/ToolPanel
-onready var myScrollContainer   := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
-
+onready var ui := $MenuAndUI/UI
+onready var bottom_panel := $MenuAndUI/UI/CanvasAndTimeline/HBoxContainer/BottomPanel
+onready var right_panel := $MenuAndUI/UI/RightPanel
+onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit
+onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
+onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreviewContainer
+onready var tool_panel := $MenuAndUI/UI/ToolPanel
+onready var scroll_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,44 +77,44 @@ func handle_resize() -> void:
 
 
 func change_ui_layout(mode : String) -> void:
-	var colorpicker_is_switched = true if ToolAndPaletteVSplit.has_node("ScrollContainer") else false
+	var colorpicker_is_switched = true if tool_and_palette_vsplit.has_node("ScrollContainer") else false
 	
 	if mode == "tallscreen" and not tallscreen_is_active:
 		tallscreen_is_active = true
-		reparent_node_to(RightPanel, BottomPanel, 0)
-		RightPanel.rect_min_size.y = 300
-		reparent_node_to(CanvasPreviewContainer, ToolAndPaletteVSplit, 1) 
-		ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, HBoxContainer.new())
-		ColorAndToolOptions.rect_min_size.x = 280
-		reparent_node_to(ToolPanel, UI.get_node("CanvasAndTimeline/HBoxContainer"), 0)
+		reparent_node_to(right_panel, bottom_panel, 0)
+		right_panel.rect_min_size.y = 300
+		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1) 
+		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
+		color_and_tool_options.rect_min_size.x = 280
+		reparent_node_to(tool_panel, ui.get_node("CanvasAndTimeline/HBoxContainer"), 0)
 	elif mode == "widescreen" and tallscreen_is_active:
 		tallscreen_is_active = false
-		reparent_node_to(RightPanel, UI, -1)
-		RightPanel.rect_min_size.y = 0
-		reparent_node_to(CanvasPreviewContainer, RightPanel.get_node("PreviewAndPalettes"), 0) 
-		ToolAndPaletteVSplit = replace_node_with(ToolAndPaletteVSplit, VSplitContainer.new())
-		ColorAndToolOptions.rect_min_size.x = 0
-		CanvasPreviewContainer.visible = true
-		reparent_node_to(ToolPanel, UI, 0)
+		reparent_node_to(right_panel, ui, -1)
+		right_panel.rect_min_size.y = 0
+		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0) 
+		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
+		color_and_tool_options.rect_min_size.x = 0
+		canvas_preview_container.visible = true
+		reparent_node_to(tool_panel, ui, 0)
 	
 	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
-		CanvasPreviewContainer.visible = false
+		canvas_preview_container.visible = false
 	else:
-		CanvasPreviewContainer.visible = true
+		canvas_preview_container.visible = true
 
-	if not colorpicker_is_switched and CanvasPreviewContainer.visible and mode == "tallscreen":
-		reparent_node_to(myScrollContainer, ToolAndPaletteVSplit, 0)
-		myScrollContainer.rect_min_size = Vector2(268, 196)
-		ColorAndToolOptions.set("custom_constants/separation", 20)
-		reparent_node_to(CanvasPreviewContainer, ColorAndToolOptions, -1)
-	elif colorpicker_is_switched and (not CanvasPreviewContainer.visible or mode != "tallscreen"):
-		reparent_node_to(myScrollContainer, ColorAndToolOptions, -1)
-		myScrollContainer.rect_min_size = Vector2(0, 0)
-		ColorAndToolOptions.set("custom_constants/separation", 8)
+	if not colorpicker_is_switched and canvas_preview_container.visible and mode == "tallscreen":
+		reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
+		scroll_container.rect_min_size = Vector2(268, 196)
+		color_and_tool_options.set("custom_constants/separation", 20)
+		reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
+	elif colorpicker_is_switched and (not canvas_preview_container.visible or mode != "tallscreen"):
+		reparent_node_to(scroll_container, color_and_tool_options, -1)
+		scroll_container.rect_min_size = Vector2(0, 0)
+		color_and_tool_options.set("custom_constants/separation", 8)
 		if mode == "widescreen":
-			reparent_node_to(CanvasPreviewContainer, RightPanel.get_node("PreviewAndPalettes"), 0)
+			reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
 		else:
-			reparent_node_to(CanvasPreviewContainer, ToolAndPaletteVSplit, 1)
+			reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 
 
 # helper function (change_ui_layout)
