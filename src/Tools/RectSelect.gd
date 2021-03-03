@@ -10,12 +10,15 @@ var _move := false
 
 
 func draw_start(position : Vector2) -> void:
+	Global.canvas.selection.move_content_end()
 	for selection in Global.canvas.selection.polygons:
 		if selection.rect_outline.has_point(position):
 			current_selection = selection
 
 	if !current_selection:
 		if !Tools.shift and !Tools.control:
+			for p in Global.canvas.selection.polygons:
+				p.selected_pixels = []
 			Global.canvas.selection.polygons.clear()
 		_start = Rect2(position, Vector2.ZERO)
 		var new_selection = Global.canvas.selection.SelectionPolygon.new(_start)

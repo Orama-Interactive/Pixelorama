@@ -3,11 +3,12 @@ extends Node2D
 
 class SelectionPolygon:
 #	var project : Project
-	var border := PoolVector2Array()
+	var border := []
 	var rect_outline : Rect2
 #	var rects := [] # Array of Rect2s
 	var selected_pixels := [] setget _selected_pixels_changed # Array of Vector2s - the selected pixels
-
+	var image := Image.new() setget _image_changed
+	var image_texture := ImageTexture.new()
 
 	func _init(rect : Rect2) -> void:
 		rect_outline = rect
@@ -37,6 +38,12 @@ class SelectionPolygon:
 				continue
 			else:
 				Global.current_project.selected_pixels.append(pixel)
+
+
+	func _image_changed(value : Image) -> void:
+		image = value
+		image_texture = ImageTexture.new()
+		image_texture.create_from_image(image, 0)
 
 
 var polygons := [] # Array of SelectionPolygon(s)
@@ -158,28 +165,28 @@ func merge_multiple_selections(polygon : SelectionPolygon, merge := true) -> voi
 
 func move_content_start() -> void:
 	move_borders_start()
-	for shape in get_children():
-		if !shape.local_image.is_empty():
+	for p in polygons:
+		if !p.image.is_empty():
 			return
-		shape.local_image = shape.get_image()
-		shape.local_image_texture.create_from_image(shape.local_image, 0)
+		p.image = get_image_from_polygon(p)
 		var project : Project = Global.current_project
 		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		shape._clear_image.resize(shape._selected_rect.size.x, shape._selected_rect.size.y, Image.INTERPOLATE_NEAREST)
-		cel_image.blit_rect_mask(shape._clear_image, shape.local_image, Rect2(Vector2.ZERO, shape._selected_rect.size), shape._selected_rect.position)
+#		shape._clear_image.resize(shape._selected_rect.size.x, shape._selected_rect.size.y, Image.INTERPOLATE_NEAREST)
+		var clear_image := Image.new()
+		clear_image.create(p.image.get_width(), p.image.get_height(), false, Image.FORMAT_RGBA8)
+		cel_image.blit_rect_mask(clear_image, p.image, Rect2(Vector2.ZERO, p.rect_outline.size), p.rect_outline.position)
 		Global.canvas.update_texture(project.current_layer)
 
 
 func move_content_end() -> void:
-	for shape in get_children():
-		if shape.local_image.is_empty():
+	for p in polygons:
+		if p.image.is_empty():
 			return
 		var project : Project = Global.current_project
 		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		cel_image.blit_rect_mask(shape.local_image, shape.local_image, Rect2(Vector2.ZERO, shape._selected_rect.size), shape._selected_rect.position)
+		cel_image.blit_rect_mask(p.image, p.image, Rect2(Vector2.ZERO, p.rect_outline.size), p.rect_outline.position)
 		Global.canvas.update_texture(project.current_layer)
-		shape.local_image = Image.new()
-		shape.local_image_texture = ImageTexture.new()
+		p.image = Image.new()
 
 
 func commit_undo(action : String, undo_data : Dictionary) -> void:
@@ -231,8 +238,8 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 
 
 func _draw() -> void:
-	for polygon in polygons:
-		var points : PoolVector2Array = polygon.border
+	for p in polygons:
+		var points : Array = p.border
 #		print(polygon)
 		for i in range(1, points.size() + 1):
 			var point0 = points[i - 1]
@@ -250,9 +257,11 @@ func _draw() -> void:
 			var end := Vector2(end_x, end_y)
 			draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
 
+			if !p.image.is_empty():
+				draw_texture(p.image_texture, p.rect_outline.position, Color(1, 1, 1, 1))
+
 #		if !polygon.selected_pixels:
 #			return
-	#	draw_polygon(Global.current_project.get_selection_polygon(), [Color(1, 1, 1, 0.5)])
 	#	var rect_pos := _selected_rect.position
 	#	var rect_end := _selected_rect.end
 	#	draw_circle(rect_pos, 1, Color.gray)
@@ -265,8 +274,6 @@ func _draw() -> void:
 	#	draw_circle(Vector2(rect_pos.x, rect_end.y), 1, Color.gray)
 	#	draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), 1, Color.gray)
 
-#		if !local_image.is_empty():
-#			draw_texture(local_image_texture, _selected_rect.position, Color(1, 1, 1, 0.5))
 
 	#	if _move_pixel:
 	#		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
@@ -329,13 +336,13 @@ func draw_dashed_line(from : Vector2, to : Vector2, color : Color, color2 : Colo
 			draw_line(segment_start, to, color, width, antialiased)
 
 
-func get_bounding_rectangle(polygon : PoolVector2Array) -> Rect2:
+func get_bounding_rectangle(borders : PoolVector2Array) -> Rect2:
 	var rect := Rect2()
-	var xmin = polygon[0].x
-	var xmax = polygon[0].x
-	var ymin = polygon[0].y
-	var ymax = polygon[0].y
-	for edge in polygon:
+	var xmin = borders[0].x
+	var xmax = borders[0].x
+	var ymin = borders[0].y
+	var ymax = borders[0].y
+	for edge in borders:
 		if edge.x < xmin:
 			xmin = edge.x
 		if edge.x > xmax:
@@ -347,6 +354,30 @@ func get_bounding_rectangle(polygon : PoolVector2Array) -> Rect2:
 	rect.position = Vector2(xmin, ymin)
 	rect.end = Vector2(xmax, ymax)
 	return rect
+
+
+func get_image_from_polygon(polygon : SelectionPolygon) -> Image:
+	var rect : Rect2 = polygon.rect_outline
+	var project : Project = Global.current_project
+	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var image := Image.new()
+	image = cel_image.get_rect(rect)
+	if polygon.border.size() > 4:
+		image.lock()
+		var image_pixel := Vector2.ZERO
+		for x in range(rect.position.x, rect.end.x):
+			image_pixel.y = 0
+			for y in range(rect.position.y, rect.end.y):
+				var pos := Vector2(x, y)
+				if not pos in polygon.selected_pixels:
+					image.set_pixelv(image_pixel, Color(0, 0, 0, 0))
+				image_pixel.y += 1
+			image_pixel.x += 1
+
+		image.unlock()
+#	image.create(_selected_rect.size.x, _selected_rect.size.y, false, Image.FORMAT_RGBA8)
+
+	return image
 
 
 func generate_rect(pixels : Array) -> Rect2:
