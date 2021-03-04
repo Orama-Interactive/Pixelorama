@@ -23,6 +23,7 @@ var current_project : Project
 var current_project_index := 0 setget project_changed
 
 var recent_projects := []
+var panel_layout = PanelLayout.AUTO
 
 # Indices are as in the Direction enum
 # This is the total time the key for
@@ -125,6 +126,10 @@ var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
+var tool_panel : Panel
+var right_panel : Panel
+var tabs_container : PanelContainer
+
 var recent_projects_submenu : PopupMenu
 var tile_mode_submenu : PopupMenu
 var window_transparency_submenu : PopupMenu
@@ -196,6 +201,7 @@ func _ready() -> void:
 	config_cache.load("user://cache.ini")
 
 	recent_projects = config_cache.get_value("data", "recent_projects", [])
+	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
@@ -205,6 +211,7 @@ func _ready() -> void:
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
+
 	top_menu_container = find_node_by_name(control, "TopMenuContainer")
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
@@ -229,6 +236,10 @@ func _ready() -> void:
 	help_menu = find_node_by_name(root, "HelpMenu")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
+
+	tool_panel = control.get_node("MenuAndUI/UI/ToolPanel")
+	right_panel = control.get_node("MenuAndUI/UI/RightPanel")
+	tabs_container = control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer")
 
 	recent_projects_submenu = PopupMenu.new()
 	recent_projects_submenu.set_name("recent_projects_submenu")
@@ -261,10 +272,10 @@ func _ready() -> void:
 	panel_layout_submenu = PopupMenu.new()
 	panel_layout_submenu.set_name("panel_layout_submenu")
 	panel_layout_submenu.add_radio_check_item("Auto", PanelLayout.AUTO)
-	panel_layout_submenu.set_item_checked(PanelLayout.AUTO, true)
 	panel_layout_submenu.add_radio_check_item("Widescreen", PanelLayout.WIDESCREEN)
 	panel_layout_submenu.add_radio_check_item("Tallscreen", PanelLayout.TALLSCREEN)
 	panel_layout_submenu.hide_on_checkable_item_selection = false
+	panel_layout_submenu.set_item_checked(panel_layout, true)
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
@@ -567,6 +578,7 @@ func is_cjk(locale : String) -> bool:
 
 
 func _exit_tree() -> void:
+	config_cache.set_value("window", "panel_layout", panel_layout)
 	config_cache.set_value("window", "screen", OS.current_screen)
 	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
 	config_cache.set_value("window", "position", OS.window_position)

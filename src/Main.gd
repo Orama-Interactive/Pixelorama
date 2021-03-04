@@ -69,8 +69,8 @@ func _ready() -> void:
 
 func handle_resize() -> void:
 	var aspect_ratio = get_viewport_rect().size.x/(0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
-	if (  (aspect_ratio <= 3.0/4.0 and Global.current_project.panel_layout != Global.PanelLayout.WIDESCREEN) 
-		or Global.current_project.panel_layout == Global.PanelLayout.TALLSCREEN):
+	if (  (aspect_ratio <= 3.0/4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN) 
+		or Global.panel_layout == Global.PanelLayout.TALLSCREEN):
 		change_ui_layout("tallscreen")
 	else:
 		change_ui_layout("widescreen")

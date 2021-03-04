@@ -3,10 +3,9 @@ extends Panel
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
-enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
-
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -324,8 +323,8 @@ func window_transparency_submenu_id_pressed(id : float) -> void:
 
 
 func panel_layout_submenu_id_pressed(id : int) -> void:
-	Global.current_project.panel_layout = id
-	for i in Global.TileMode.values():
+	Global.panel_layout = id
+	for i in Global.PanelLayout.values():
 		Global.panel_layout_submenu.set_item_checked(i, i == id)
 	get_tree().get_root().get_node("Control").handle_resize()
 
@@ -390,9 +389,9 @@ func toggle_show_anim_timeline() -> void:
 func toggle_zen_mode() -> void:
 	if Global.show_animation_timeline:
 		Global.animation_timeline.visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/ToolPanel").visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/RightPanel").visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer").visible = zen_mode
+	Global.tool_panel.visible = zen_mode
+	Global.right_panel.visible = zen_mode
+	Global.tabs_container.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 

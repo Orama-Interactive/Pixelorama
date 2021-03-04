@@ -6,7 +6,6 @@ var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
 var tile_mode : int = Global.TileMode.NONE
-var panel_layout : int = Global.PanelLayout.AUTO
 var tile_mode_rects := [] # Cached to avoid recalculation
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
@@ -209,9 +208,6 @@ func change_project() -> void:
 
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
-	for j in Global.PanelLayout.values():
-		Global.panel_layout_submenu.set_item_checked(j, j == panel_layout)
-
 
 
 func serialize() -> Dictionary:
