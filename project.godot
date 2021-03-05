@@ -99,11 +99,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
 }, {
-"base": "Polygon2D",
-"class": "SelectionShape",
-"language": "GDScript",
-"path": "res://src/Tools/SelectionShape.gd"
-}, {
 "base": "Guide",
 "class": "SymmetryGuide",
 "language": "GDScript",
@@ -128,7 +123,6 @@ _global_script_class_icons={
 "PaletteSwatch": "",
 "Patterns": "",
 "Project": "",
-"SelectionShape": "",
 "SymmetryGuide": ""
 }
 
