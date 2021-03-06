@@ -4,10 +4,9 @@ extends "res://src/Tools/ShapeDrawer.gd"
 func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
 	var array := []
 	var t_of := _thickness - 1
-	var xr := range(size.x + t_of * 2)
 
 	for y in range(size.y + t_of * 2):
-		for x in xr:
+		for x in range(size.x + t_of * 2):
 			array.append(Vector2(x, y))
 
 	return PoolVector2Array(array)

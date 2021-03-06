@@ -12,7 +12,7 @@ func _init() -> void:
 	_drawer.color_op = Drawer.ColorOp.new()
 
 
-func _on_Thickness_value_changed(value: int):
+func _on_Thickness_value_changed(value: int) -> void:
 	_thickness = value
 	update_config()
 	save_config()
@@ -109,13 +109,14 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 
 # Given an origin point and destination point, returns a rect representing where the shape will be drawn and what it's size
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
+	# WARNING: Don't replace Input.is_action_pressed for Tools.control, it makes the preview jittery on windows
 	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
 
 	# Center the rect on the mouse
-	if Tools.alt:
+	if Input.is_action_pressed("ctrl"):
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
-		if Tools.control:
+		if Input.is_action_pressed("shift"):
 			var _square_size := max(abs(new_size.x), abs(new_size.y))
 			new_size = Vector2(_square_size, _square_size)
 
@@ -123,8 +124,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		dest = origin + 2 * new_size
 
 	# Make rect 1:1 while not trying to center it
-	# Don't replace this for Tools.control, it makes the preview jittery on windows
-	if Input.is_action_pressed("ctrl"):
+	if Input.is_action_pressed("shift"):
 		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size

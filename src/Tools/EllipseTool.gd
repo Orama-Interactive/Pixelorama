@@ -12,9 +12,6 @@ func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
 		var prev_is_true := false
 		for y in range(0, ceil(offseted_size.y / 2)):
 			var top_l_p := Vector2(x, y)
-			var bottom_l_p := Vector2(x, offseted_size.y - y - 1)
-			var top_r_p := Vector2(offseted_size.x - x - 1, y)
-			var bottom_r_p := Vector2(offseted_size.x - x - 1, offseted_size.y - y - 1)
 			var bit := bitmap.get_bit(top_l_p)
 
 			if bit and not fill:
@@ -23,9 +20,9 @@ func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
 
 			if not bit and (fill or prev_is_true):
 				filling.append(top_l_p)
-				filling.append(bottom_l_p)
-				filling.append(top_r_p)
-				filling.append(bottom_r_p)
+				filling.append(Vector2(x, offseted_size.y - y - 1))
+				filling.append(Vector2(offseted_size.x - x - 1, y))
+				filling.append(Vector2(offseted_size.x - x - 1, offseted_size.y - y - 1))
 
 				if prev_is_true:
 					fill = true
@@ -41,10 +38,9 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 	if _thickness == 1:
 		return PoolVector2Array(_get_ellipse_points(Vector2.ZERO, size))
 
-
 	var size_offset := Vector2.ONE * 2 * (_thickness - 1)
 	var new_size := size + size_offset
-	var inner_ellipse_size = new_size - 2*size_offset
+	var inner_ellipse_size = new_size - 2 * size_offset
 
 	# The inner ellipse is to small to create a gap in the middle of the ellipse, just return a filled ellipse
 	if inner_ellipse_size.x <= 2 and inner_ellipse_size.y <= 2:

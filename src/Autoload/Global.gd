@@ -532,7 +532,7 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 %s for right mouse button
 
 Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_rectangletool_tool")[0].as_text(), InputMap.get_action_list("right_rectangletool_tool")[0].as_text(), "Ctrl", "Alt" ]
+Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_rectangletool_tool")[0].as_text(), InputMap.get_action_list("right_rectangletool_tool")[0].as_text(), "Shift", "Ctrl" ]
 
 	var ellipsetool : BaseButton = find_node_by_name(root, "EllipseTool")
 	ellipsetool.hint_tooltip = tr("""Ellipse Tool
@@ -541,7 +541,7 @@ Hold %s to center the shape on the click origin""") % [InputMap.get_action_list(
 %s for right mouse button
 
 Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_ellipsetool_tool")[0].as_text(), InputMap.get_action_list("right_ellipsetool_tool")[0].as_text(), "Ctrl", "Alt" ]
+Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_ellipsetool_tool")[0].as_text(), InputMap.get_action_list("right_ellipsetool_tool")[0].as_text(), "Shift", "Ctrl" ]
 
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
