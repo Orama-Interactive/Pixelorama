@@ -359,9 +359,23 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="AnimationTimeline" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasAndTimeline"]
 margin_top = 492.0
+margin_right = 902.0
 margin_bottom = 692.0
+size_flags_horizontal = 3
+
+[node name="BottomPanel" type="VSplitContainer" parent="CanvasAndTimeline/HBoxContainer"]
+margin_right = 902.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="AnimationTimeline" parent="CanvasAndTimeline/HBoxContainer/BottomPanel" instance=ExtResource( 18 )]
+margin_top = 0.0
+margin_bottom = 200.0
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 3 )
 
 [node name="RightPanel" type="Panel" parent="."]
@@ -388,6 +402,7 @@ margin_right = 315.0
 margin_top = 168.0
 margin_right = 330.0
 margin_bottom = 676.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/autohide = 0
 

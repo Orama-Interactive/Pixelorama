@@ -210,7 +210,6 @@ func change_project() -> void:
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
 
-
 func serialize() -> Dictionary:
 	var layer_data := []
 	for layer in layers:

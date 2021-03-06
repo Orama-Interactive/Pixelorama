@@ -3,10 +3,9 @@ extends Panel
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
-enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
-
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -83,6 +82,7 @@ func setup_view_menu() -> void:
 	var view_menu_items := { # order as in ViewMenuId enum
 		"Tile Mode" : 0,
 		"Window Transparency" : 0,
+		"Panel Layout" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid" : InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
@@ -100,6 +100,8 @@ func setup_view_menu() -> void:
 			setup_tile_mode_submenu(item)
 		elif item == "Window Transparency":
 			setup_window_transparency_submenu(item)
+		elif item == "Panel Layout":
+			setup_panel_layout_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -122,6 +124,12 @@ func setup_window_transparency_submenu(item : String):
 	Global.window_transparency_submenu.connect("id_pressed", self, "window_transparency_submenu_id_pressed")
 	view_menu.add_child(Global.window_transparency_submenu)
 	view_menu.add_submenu_item(item, Global.window_transparency_submenu.get_name())
+
+
+func setup_panel_layout_submenu(item : String):
+	Global.panel_layout_submenu.connect("id_pressed", self, "panel_layout_submenu_id_pressed")
+	view_menu.add_child(Global.panel_layout_submenu)
+	view_menu.add_submenu_item(item, Global.panel_layout_submenu.get_name())
 
 
 func setup_image_menu() -> void:
@@ -314,6 +322,13 @@ func window_transparency_submenu_id_pressed(id : float) -> void:
 		window_transparency(id/10)
 
 
+func panel_layout_submenu_id_pressed(id : int) -> void:
+	Global.panel_layout = id
+	for i in Global.PanelLayout.values():
+		Global.panel_layout_submenu.set_item_checked(i, i == id)
+	get_tree().get_root().get_node("Control").handle_resize()
+
+
 func window_transparency(value :float) -> void:
 	if value == 1:
 		get_node("../../AlternateTransparentBackground").visible = false
@@ -374,9 +389,9 @@ func toggle_show_anim_timeline() -> void:
 func toggle_zen_mode() -> void:
 	if Global.show_animation_timeline:
 		Global.animation_timeline.visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/ToolPanel").visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/RightPanel").visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer").visible = zen_mode
+	Global.tool_panel.visible = zen_mode
+	Global.right_panel.visible = zen_mode
+	Global.tabs_container.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 

@@ -23,6 +23,7 @@ margin_right = 278.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
+size_flags_vertical = 0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
