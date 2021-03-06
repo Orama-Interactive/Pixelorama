@@ -14,9 +14,8 @@ func draw_start(position : Vector2) -> void:
 
 func draw_move(position : Vector2) -> void:
 	if Global.current_project.selected_pixels:
-		Global.canvas.selection.move_borders(position - offset)
+		Global.canvas.selection.move_content(position - offset)
 		offset = position
-#		Global.selection_rectangl.move_rect(position - offset)
 	else:
 		Global.canvas.move_preview_location = position - starting_pos
 	offset = position

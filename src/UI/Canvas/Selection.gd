@@ -7,8 +7,6 @@ class SelectionPolygon:
 	var rect_outline : Rect2
 #	var rects := [] # Array of Rect2s
 	var selected_pixels := [] setget _selected_pixels_changed # Array of Vector2s - the selected pixels
-	var image := Image.new() setget _image_changed
-	var image_texture := ImageTexture.new()
 
 	func _init(rect : Rect2) -> void:
 		rect_outline = rect
@@ -40,15 +38,12 @@ class SelectionPolygon:
 				Global.current_project.selected_pixels.append(pixel)
 
 
-	func _image_changed(value : Image) -> void:
-		image = value
-		image_texture = ImageTexture.new()
-		image_texture.create_from_image(image, 0)
-
-
 var polygons := [] # Array of SelectionPolygon(s)
 var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
+var move_preview_location := Vector2.ZERO
+var preview_image := Image.new()
+var preview_image_texture : ImageTexture
 var undo_data : Dictionary
 
 
@@ -161,28 +156,23 @@ func merge_multiple_selections(polygon : SelectionPolygon, merge := true) -> voi
 
 func move_content_start() -> void:
 #	move_borders_start()
-	for p in polygons:
-		if !p.image.is_empty():
-			return
-		p.image = get_image_from_polygon(p)
-		var project : Project = Global.current_project
-		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-#		shape._clear_image.resize(shape._selected_rect.size.x, shape._selected_rect.size.y, Image.INTERPOLATE_NEAREST)
-		var clear_image := Image.new()
-		clear_image.create(p.image.get_width(), p.image.get_height(), false, Image.FORMAT_RGBA8)
-		cel_image.blit_rect_mask(clear_image, p.image, Rect2(Vector2.ZERO, p.rect_outline.size), p.rect_outline.position)
-		Global.canvas.update_texture(project.current_layer)
+	get_preview_image()
+
+
+func move_content(move : Vector2) -> void:
+	move_borders(move)
+	move_preview_location += move
 
 
 func move_content_end() -> void:
-	for p in polygons:
-		if p.image.is_empty():
-			return
-		var project : Project = Global.current_project
-		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		cel_image.blit_rect_mask(p.image, p.image, Rect2(Vector2.ZERO, p.rect_outline.size), p.rect_outline.position)
-		Global.canvas.update_texture(project.current_layer)
-		p.image = Image.new()
+	if preview_image.is_empty():
+		return
+	var project : Project = Global.current_project
+	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), move_preview_location)
+	Global.canvas.update_texture(project.current_layer)
+	preview_image = Image.new()
+	move_preview_location = Vector2.ZERO
 
 
 func commit_undo(action : String, _undo_data : Dictionary) -> void:
@@ -196,7 +186,6 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 	var i := 0
 	for polygon in polygons:
 		project.undo_redo.add_do_property(polygon, "border", redo_data["border_%s" % i])
-		print(redo_data["border_%s" % i], " Undo ", _undo_data["border_%s" % i])
 		project.undo_redo.add_do_property(polygon, "rect_outline", redo_data["rect_outline_%s" % i])
 		project.undo_redo.add_do_property(polygon, "selected_pixels", redo_data["selected_pixels_%s" % i])
 		project.undo_redo.add_undo_property(polygon, "border", _undo_data["border_%s" % i])
@@ -274,8 +263,8 @@ func _draw() -> void:
 		draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), radius, Color.gray)
 
 
-	#	if _move_pixel:
-	#		draw_texture(_move_texture, _clipped_rect.position, Color(1, 1, 1, 0.5))
+	if !preview_image.is_empty():
+		draw_texture(preview_image_texture, move_preview_location, Color(1, 1, 1, 0.5))
 
 
 # Taken and modified from https://github.com/juddrgledhill/godot-dashed-line
@@ -355,25 +344,23 @@ func get_bounding_rectangle(borders : Array) -> Rect2:
 	return rect
 
 
-func get_image_from_polygon(polygon : SelectionPolygon) -> Image:
-	var rect : Rect2 = polygon.rect_outline
+func get_preview_image() -> void:
+	if !preview_image.is_empty():
+		return
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	var image := Image.new()
-	image = cel_image.get_rect(rect)
-	if polygon.border.size() > 4:
-		image.lock()
-		var image_pixel := Vector2.ZERO
-		for x in range(rect.position.x, rect.end.x):
-			image_pixel.y = 0
-			for y in range(rect.position.y, rect.end.y):
-				var pos := Vector2(x, y)
-				if not pos in polygon.selected_pixels:
-					image.set_pixelv(image_pixel, Color(0, 0, 0, 0))
-				image_pixel.y += 1
-			image_pixel.x += 1
+	preview_image.copy_from(cel_image)
+	preview_image.lock()
+	for x in range(0, project.size.x):
+		for y in range(0, project.size.y):
+			var pos := Vector2(x, y)
+			if not pos in project.selected_pixels:
+				preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
+	preview_image.unlock()
+	preview_image_texture = ImageTexture.new()
+	preview_image_texture.create_from_image(preview_image, 0)
 
-		image.unlock()
-#	image.create(_selected_rect.size.x, _selected_rect.size.y, false, Image.FORMAT_RGBA8)
-
-	return image
+	var clear_image := Image.new()
+	clear_image.create(preview_image.get_width(), preview_image.get_height(), false, Image.FORMAT_RGBA8)
+	cel_image.blit_rect_mask(clear_image, preview_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
+	Global.canvas.update_texture(project.current_layer)
