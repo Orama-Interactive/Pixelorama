@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-02-02 17:56\n"
+"PO-Revision-Date: 2021-03-07 18:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1445,10 +1445,10 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Портретная"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Горизонтальное"
 
 msgid "Templates:"
 msgstr "Шаблоны:"
