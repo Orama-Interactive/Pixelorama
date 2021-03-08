@@ -2,11 +2,9 @@ extends Node2D
 
 
 class SelectionPolygon:
-#	var project : Project
 	var border := []
 	var rect_outline : Rect2
 #	var rects := [] # Array of Rect2s
-	var selected_pixels := [] setget _selected_pixels_changed # Array of Vector2s - the selected pixels
 
 	func _init(rect : Rect2) -> void:
 		rect_outline = rect
@@ -23,22 +21,6 @@ class SelectionPolygon:
 		border[2] = rect.end
 		border[3] = Vector2(rect.position.x, rect.end.y)
 
-
-	func _selected_pixels_changed(value : Array) -> void:
-		for pixel in selected_pixels:
-			if pixel in Global.current_project.selected_pixels:
-				Global.current_project.selected_pixels.erase(pixel)
-
-		selected_pixels = value
-
-		for pixel in selected_pixels:
-			if pixel in Global.current_project.selected_pixels:
-				continue
-			else:
-				Global.current_project.selected_pixels.append(pixel)
-
-
-var polygons := [] # Array of SelectionPolygon(s)
 var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
 var move_preview_location := Vector2.ZERO
@@ -71,7 +53,7 @@ func move_borders_start() -> void:
 
 
 func move_borders(move : Vector2) -> void:
-	for polygon in polygons:
+	for polygon in Global.current_project.selections:
 		polygon.rect_outline.position += move
 		var borders_copy = polygon.border.duplicate()
 		for i in borders_copy.size():
@@ -81,77 +63,80 @@ func move_borders(move : Vector2) -> void:
 
 
 func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
-	for polygon in polygons:
-		var diff := new_pos - old_pos
-		var selected_pixels_copy = polygon.selected_pixels.duplicate()
-		for i in selected_pixels_copy.size():
-			selected_pixels_copy[i] += diff
+	var diff := new_pos - old_pos
+	var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
+	for i in selected_pixels_copy.size():
+		selected_pixels_copy[i] += diff
 
-		polygon.selected_pixels = selected_pixels_copy
+	Global.current_project.selected_pixels = selected_pixels_copy
 	commit_undo("Rectangle Select", undo_data)
 
 
 func select_rect(merge := true) -> void:
 	var project : Project = Global.current_project
-	var polygon : SelectionPolygon = polygons[-1]
-	polygon.selected_pixels = []
-	project.selections.append(polygon)
-	var selected_pixels_copy = polygon.selected_pixels.duplicate()
+	var polygon : SelectionPolygon = Global.current_project.selections[-1]
+	var selected_pixels_copy = project.selected_pixels.duplicate()
+	var polygon_pixels := []
 	for x in range(polygon.rect_outline.position.x, polygon.rect_outline.end.x):
 		for y in range(polygon.rect_outline.position.y, polygon.rect_outline.end.y):
 			var pos := Vector2(x, y)
+			polygon_pixels.append(pos)
+			if pos in selected_pixels_copy or !merge:
+				continue
 			selected_pixels_copy.append(pos)
 
-	polygon.selected_pixels = selected_pixels_copy
-	if polygon.selected_pixels.size() == 0:
-		polygons.erase(polygon)
+	project.selected_pixels = selected_pixels_copy
+	if polygon_pixels.size() == 0:
+		project.selections.erase(polygon)
 		return
-	merge_multiple_selections(polygon, merge)
-	if not merge:
-		polygon.selected_pixels = []
-		polygons.erase(polygon)
+	if merge:
+		merge_selections(polygon)
+	else:
+		clip_selections(polygon, polygon_pixels)
+		project.selections.erase(polygon)
 
 
-func merge_multiple_selections(polygon : SelectionPolygon, merge := true) -> void:
-	if polygons.size() < 2:
+func merge_selections(polygon : SelectionPolygon) -> void:
+	if Global.current_project.selections.size() < 2:
 		return
 	var to_erase := []
-	for p in polygons:
+	for p in Global.current_project.selections:
 		if p == polygon:
 			continue
-		if merge:
-			var arr = Geometry.merge_polygons_2d(polygon.border, p.border)
-#			print(arr.size())
-			if arr.size() == 1: # if the selections intersect
-				polygon.border = arr[0]
-				polygon.rect_outline = polygon.rect_outline.merge(p.rect_outline)
-				var selected_pixels_copy = polygon.selected_pixels.duplicate()
-				for pixel in p.selected_pixels:
-					selected_pixels_copy.append(pixel)
-#				selection.clear_selection_on_tree_exit = false
-#				selection.queue_free()
-#				polygons.erase(p)
-				to_erase.append(p)
-				polygon.selected_pixels = selected_pixels_copy
-		else:
-			var arr = Geometry.clip_polygons_2d(p.border, polygon.border)
-			if arr.size() == 0: # if the new selection completely overlaps the current
-				p.selected_pixels = []
-				to_erase.append(p)
-			else: # if the selections intersect
-				p.border = arr[0]
-				var selected_pixels_copy = p.selected_pixels.duplicate()
-				for pixel in polygon.selected_pixels:
-					selected_pixels_copy.erase(pixel)
-				p.selected_pixels = selected_pixels_copy
-				for i in range(1, arr.size()):
-					var rect = get_bounding_rectangle(arr[i])
-					var new_polygon := SelectionPolygon.new(rect)
-					new_polygon.border = arr[i]
-					polygons.append(new_polygon)
+		var arr := Geometry.merge_polygons_2d(polygon.border, p.border)
+		if arr.size() == 1: # if the selections intersect
+			polygon.border = arr[0]
+			polygon.rect_outline = polygon.rect_outline.merge(p.rect_outline)
+			to_erase.append(p)
 
 	for p in to_erase:
-		polygons.erase(p)
+		Global.current_project.selections.erase(p)
+
+
+func clip_selections(polygon : SelectionPolygon, polygon_pixels : Array) -> void:
+	var to_erase := []
+	for p in Global.current_project.selections:
+		if p == polygon:
+			continue
+		var arr := Geometry.clip_polygons_2d(p.border, polygon.border)
+		if arr.size() == 0: # if the new selection completely overlaps the current
+			to_erase.append(p)
+		else:
+			p.border = arr[0]
+			p.rect_outline = get_bounding_rectangle(p.border)
+			for i in range(1, arr.size()):
+				var rect = get_bounding_rectangle(arr[i])
+				var new_polygon := SelectionPolygon.new(rect)
+				new_polygon.border = arr[i]
+				Global.current_project.selections.append(new_polygon)
+
+		var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
+		for pixel in polygon_pixels:
+			selected_pixels_copy.erase(pixel)
+		Global.current_project.selected_pixels = selected_pixels_copy
+
+	for p in to_erase:
+		Global.current_project.selections.erase(p)
 
 
 func move_content_start() -> void:
@@ -182,15 +167,16 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.undo_redo.add_do_property(project, "selections", redo_data["selections"])
+	project.undo_redo.add_do_property(project, "selected_pixels", redo_data["selected_pixels"])
 	project.undo_redo.add_undo_property(project, "selections", _undo_data["selections"])
+	project.undo_redo.add_undo_property(project, "selected_pixels", _undo_data["selected_pixels"])
 	var i := 0
-	for polygon in polygons:
-		project.undo_redo.add_do_property(polygon, "border", redo_data["border_%s" % i])
-		project.undo_redo.add_do_property(polygon, "rect_outline", redo_data["rect_outline_%s" % i])
-		project.undo_redo.add_do_property(polygon, "selected_pixels", redo_data["selected_pixels_%s" % i])
-		project.undo_redo.add_undo_property(polygon, "border", _undo_data["border_%s" % i])
-		project.undo_redo.add_undo_property(polygon, "rect_outline", _undo_data["rect_outline_%s" % i])
-		project.undo_redo.add_undo_property(polygon, "selected_pixels", _undo_data["selected_pixels_%s" % i])
+	for polygon in Global.current_project.selections:
+		if "border_%s" % i in _undo_data:
+			project.undo_redo.add_do_property(polygon, "border", redo_data["border_%s" % i])
+			project.undo_redo.add_do_property(polygon, "rect_outline", redo_data["rect_outline_%s" % i])
+			project.undo_redo.add_undo_property(polygon, "border", _undo_data["border_%s" % i])
+			project.undo_redo.add_undo_property(polygon, "rect_outline", _undo_data["rect_outline_%s" % i])
 		i += 1
 
 	if "image_data" in _undo_data:
@@ -209,10 +195,10 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 	var project := Global.current_project
 	var i := 0
 	data["selections"] = project.selections
-	for polygon in polygons:
+	data["selected_pixels"] = project.selected_pixels
+	for polygon in Global.current_project.selections:
 		data["border_%s" % i] = polygon.border
 		data["rect_outline_%s" % i] = polygon.rect_outline
-		data["selected_pixels_%s" % i] = polygon.selected_pixels
 		i += 1
 
 	if undo_image:
@@ -226,7 +212,7 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 
 
 func _draw() -> void:
-	for p in polygons:
+	for p in Global.current_project.selections:
 		var points : Array = p.border
 		for i in range(1, points.size() + 1):
 			var point0 = points[i - 1]
@@ -243,9 +229,6 @@ func _draw() -> void:
 			var start := Vector2(start_x, start_y)
 			var end := Vector2(end_x, end_y)
 			draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
-
-			if !p.image.is_empty():
-				draw_texture(p.image_texture, p.rect_outline.position, Color(1, 1, 1, 1))
 
 #		if !polygon.selected_pixels:
 #			return

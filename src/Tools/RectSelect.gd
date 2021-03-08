@@ -7,23 +7,28 @@ var _start := Rect2(0, 0, 0, 0)
 var _offset := Vector2.ZERO
 var _drag := false
 var _move := false
+var undo_data : Dictionary
 
 
 func draw_start(position : Vector2) -> void:
 	Global.canvas.selection.move_content_end()
-	for selection in Global.canvas.selection.polygons:
+	undo_data = Global.canvas.selection._get_undo_data(false)
+	for selection in Global.current_project.selections:
 		if selection.rect_outline.has_point(position):
 			current_selection = selection
 
 	if !current_selection:
+		var selections : Array = Global.current_project.selections.duplicate()
 		if !Tools.shift and !Tools.control:
-			for p in Global.canvas.selection.polygons:
-				p.selected_pixels = []
-			Global.canvas.selection.polygons.clear()
+			var selected_pixels : Array = Global.current_project.selected_pixels.duplicate()
+			selected_pixels.clear()
+			Global.current_project.selected_pixels = selected_pixels
+			selections.clear()
 		_start = Rect2(position, Vector2.ZERO)
 		var new_selection = Global.canvas.selection.SelectionPolygon.new(_start)
-		Global.canvas.selection.polygons.append(new_selection)
+		selections.append(new_selection)
 		current_selection = new_selection
+		Global.current_project.selections = selections
 #			for selection in Global.current_project.selections:
 #				selection.queue_free()
 #			current_selection_id = 0
@@ -69,6 +74,7 @@ func draw_end(position : Vector2) -> void:
 		Global.canvas.selection.move_borders_end(position, start_position)
 	else:
 		Global.canvas.selection.select_rect(!Tools.control)
+		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 #		var undo_data = Global.canvas.selection._get_undo_data(false)
 #		current_selection.select_rect(!Tools.control)
 #		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
