@@ -12,6 +12,7 @@ onready var ratio_box : BaseButton = find_node("AspectRatioButton")
 
 
 func _on_ScaleImage_about_to_show() -> void:
+	Global.canvas.selection.move_content_confirm()
 	width_value.value = Global.current_project.size.x
 	height_value.value = Global.current_project.size.y
 	width_value_perc.value = 100

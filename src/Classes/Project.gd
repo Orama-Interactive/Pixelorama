@@ -73,6 +73,19 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
 
+func commit_undo() -> void:
+	if Global.canvas.selection.is_moving_content:
+		Global.canvas.selection.move_content_cancel()
+	else:
+		undo_redo.undo()
+
+
+func commit_redo() -> void:
+	Global.control.redone = true
+	undo_redo.redo()
+	Global.control.redone = false
+
+
 func select_all_pixels() -> void:
 	clear_selection()
 	for x in size.x:

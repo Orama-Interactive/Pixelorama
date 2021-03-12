@@ -259,11 +259,9 @@ func on_recent_projects_submenu_id_pressed(id : int) -> void:
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
 		EditMenuId.UNDO:
-			Global.current_project.undo_redo.undo()
+			Global.current_project.commit_undo()
 		EditMenuId.REDO:
-			Global.control.redone = true
-			Global.current_project.undo_redo.redo()
-			Global.control.redone = false
+			Global.current_project.commit_redo()
 		EditMenuId.COPY:
 			pass
 #			Global.selection_rectangl.copy()

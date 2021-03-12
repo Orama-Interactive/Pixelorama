@@ -24,6 +24,7 @@ class SelectionPolygon:
 var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
 var move_preview_location := Vector2.ZERO
+var is_moving_content := false
 var preview_image := Image.new()
 var preview_image_texture : ImageTexture
 var undo_data : Dictionary
@@ -35,6 +36,15 @@ func _ready() -> void:
 	add_child(tween)
 	tween.interpolate_property(self, "line_offset", Vector2.ZERO, Vector2(2, 2), 1)
 	tween.start()
+
+
+func _input(event : InputEvent):
+	if event is InputEventKey:
+		if is_moving_content:
+			if event.scancode == 16777221:
+				move_content_confirm()
+			elif event.scancode == 16777217:
+				move_content_cancel()
 
 
 func _offset_tween_completed(_object, _key) -> void:
@@ -140,8 +150,10 @@ func clip_selections(polygon : SelectionPolygon, polygon_pixels : Array) -> void
 
 
 func move_content_start() -> void:
-#	move_borders_start()
-	get_preview_image()
+	if !is_moving_content:
+		is_moving_content = true
+		undo_data = _get_undo_data(true)
+		get_preview_image()
 
 
 func move_content(move : Vector2) -> void:
@@ -149,15 +161,40 @@ func move_content(move : Vector2) -> void:
 	move_preview_location += move
 
 
-func move_content_end() -> void:
-	if preview_image.is_empty():
+func move_content_confirm() -> void:
+	if !is_moving_content:
 		return
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), move_preview_location)
 	Global.canvas.update_texture(project.current_layer)
+	var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
+	for i in selected_pixels_copy.size():
+		selected_pixels_copy[i] += move_preview_location
+	Global.current_project.selected_pixels = selected_pixels_copy
 	preview_image = Image.new()
 	move_preview_location = Vector2.ZERO
+	is_moving_content = false
+	commit_undo("Move Selection", undo_data)
+
+
+func move_content_cancel() -> void:
+	if preview_image.is_empty():
+		return
+	for polygon in Global.current_project.selections:
+		polygon.rect_outline.position -= move_preview_location
+		var borders_copy = polygon.border.duplicate()
+		for i in borders_copy.size():
+			borders_copy[i] -= move_preview_location
+		polygon.border = borders_copy
+
+	move_preview_location = Vector2.ZERO
+	is_moving_content = false
+	var project : Project = Global.current_project
+	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), move_preview_location)
+	Global.canvas.update_texture(project.current_layer)
+	preview_image = Image.new()
 
 
 func commit_undo(action : String, _undo_data : Dictionary) -> void:
@@ -168,8 +205,10 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 	project.undo_redo.create_action(action)
 	project.undo_redo.add_do_property(project, "selections", redo_data["selections"])
 	project.undo_redo.add_do_property(project, "selected_pixels", redo_data["selected_pixels"])
+
 	project.undo_redo.add_undo_property(project, "selections", _undo_data["selections"])
 	project.undo_redo.add_undo_property(project, "selected_pixels", _undo_data["selected_pixels"])
+
 	var i := 0
 	for polygon in Global.current_project.selections:
 		if "border_%s" % i in _undo_data:
@@ -246,7 +285,7 @@ func _draw() -> void:
 		draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), radius, Color.gray)
 
 
-	if !preview_image.is_empty():
+	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, move_preview_location, Color(1, 1, 1, 0.5))
 
 
@@ -328,22 +367,21 @@ func get_bounding_rectangle(borders : Array) -> Rect2:
 
 
 func get_preview_image() -> void:
-	if !preview_image.is_empty():
-		return
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	preview_image.copy_from(cel_image)
-	preview_image.lock()
-	for x in range(0, project.size.x):
-		for y in range(0, project.size.y):
-			var pos := Vector2(x, y)
-			if not pos in project.selected_pixels:
-				preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
-	preview_image.unlock()
-	preview_image_texture = ImageTexture.new()
-	preview_image_texture.create_from_image(preview_image, 0)
+	if preview_image.is_empty():
+		preview_image.copy_from(cel_image)
+		preview_image.lock()
+		for x in range(0, project.size.x):
+			for y in range(0, project.size.y):
+				var pos := Vector2(x, y)
+				if not pos in project.selected_pixels:
+					preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
+		preview_image.unlock()
+		preview_image_texture = ImageTexture.new()
+		preview_image_texture.create_from_image(preview_image, 0)
 
 	var clear_image := Image.new()
 	clear_image.create(preview_image.get_width(), preview_image.get_height(), false, Image.FORMAT_RGBA8)
-	cel_image.blit_rect_mask(clear_image, preview_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
+	cel_image.blit_rect_mask(clear_image, preview_image, Rect2(Vector2.ZERO, project.size), move_preview_location)
 	Global.canvas.update_texture(project.current_layer)

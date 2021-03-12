@@ -256,6 +256,7 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 
 
 func centralize() -> void:
+	Global.canvas.selection.move_content_confirm()
 	# Find used rect of the current frame (across all of the layers)
 	var used_rect := Rect2()
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
@@ -277,6 +278,7 @@ func centralize() -> void:
 
 
 func crop_image(image : Image) -> void:
+	Global.canvas.selection.move_content_confirm()
 	# Use first cel as a starting rectangle
 	var used_rect : Rect2 = image.get_used_rect()
 

@@ -11,7 +11,7 @@ var undo_data : Dictionary
 
 
 func draw_start(position : Vector2) -> void:
-	Global.canvas.selection.move_content_end()
+	Global.canvas.selection.move_content_confirm()
 	undo_data = Global.canvas.selection._get_undo_data(false)
 	for selection in Global.current_project.selections:
 		if selection.rect_outline.has_point(position):
