@@ -73,6 +73,7 @@ margin_right = 393.0
 margin_bottom = 106.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
+max_value = 64.0
 align = 2
 
 [node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
@@ -88,6 +89,7 @@ margin_right = 393.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
+max_value = 64.0
 align = 2
 
 [node name="PathLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]

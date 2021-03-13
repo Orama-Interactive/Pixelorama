@@ -8,7 +8,8 @@ var edited_swatch_index = -1
 
 onready var palette_select := $PaletteVBoxContainer/PaletteButtons/PaletteSelect
 onready var add_palette_button := $PaletteVBoxContainer/PaletteButtons/AddPalette
-onready var palette_grid := $PaletteVBoxContainer/SwatchesContainer/ScrollPalette/MarginPalette/CenterPalette/PaletteGrid
+onready var palette_grid := $PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer/HBoxContainer/PaletteGrid
+onready var palette_scroll := $PaletteVBoxContainer/SwatchesContainer/PaletteScroll
 
 onready var add_color_button := $PaletteVBoxContainer/SwatchesContainer/ColorButtons/AddColor
 onready var delete_color_button := $PaletteVBoxContainer/SwatchesContainer/ColorButtons/DeleteColor
@@ -53,6 +54,7 @@ func select_palette(palette_path: String) -> void:
 		palette_select.selected = palette_id
 		Palettes.select_palette(palette_path)
 		palette_grid.display_palette(Palettes.get_current_palette())
+		palette_scroll.set_sliders(Palettes.get_current_palette(), palette_grid.grid_window_origin)
 
 		var left_selected = Palettes.current_palette_get_selected_color_index(BUTTON_LEFT)
 		var right_selected = Palettes.current_palette_get_selected_color_index(BUTTON_RIGHT)
@@ -104,7 +106,10 @@ func _on_PaletteSelect_item_selected(index: int) -> void:
 func _on_AddColor_gui_input(event: InputEvent) -> void:
 	if Palettes.is_any_palette_selected():
 		if event is InputEventMouseButton and event.pressed and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT):
-			Palettes.current_palette_add_color(event.button_index)
+			# Gets the grid index that corresponds to the top left of current grid window
+			# Color will be added at the start of the currently scrolled part of palette - not the absolute beginning of palette
+			var start_index = palette_grid.convert_grid_index_to_palette_index(0)
+			Palettes.current_palette_add_color(event.button_index, start_index)
 			redraw_current_palette()
 			toggle_add_delete_buttons()
 

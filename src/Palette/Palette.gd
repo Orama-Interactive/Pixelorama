@@ -84,13 +84,16 @@ func reindex_colors_on_width_increase(old_width: int) -> void:
 
 
 # Adds new color to the first empty swatch
-func add_color(new_color: Color) -> void:
+func add_color(new_color: Color, start_index: int = 0) -> void:
+	if start_index >= colors_max:
+		return
+
 	# If palette is full automatically increase the palette height
 	if is_full():
 		height += 1
 
-	# Find the first empty index and insert a new color
-	for i in range(colors_max):
+	# Find the first empty index since start index and insert a new color
+	for i in range(start_index, colors_max):
 		if not colors.has(i):
 			colors[i] = PaletteColor.new(new_color, i)
 			break

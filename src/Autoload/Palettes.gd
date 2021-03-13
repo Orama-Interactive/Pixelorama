@@ -192,11 +192,11 @@ func current_palete_delete() -> void:
 		current_palette = null
 
 
-func current_palette_add_color(mouse_button: int) -> void:
+func current_palette_add_color(mouse_button: int, start_index: int = 0) -> void:
 	if not current_palette.is_full() and (mouse_button == BUTTON_LEFT or mouse_button == BUTTON_RIGHT):
 		# Get color on left or right tool
 		var color = Tools.get_assigned_color(mouse_button)
-		current_palette.add_color(color)
+		current_palette.add_color(color, start_index)
 		current_palette_save()
 
 

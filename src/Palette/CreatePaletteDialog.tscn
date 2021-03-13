@@ -93,6 +93,7 @@ margin_bottom = 134.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 min_value = 1.0
+max_value = 64.0
 value = 1.0
 align = 2
 
@@ -110,6 +111,7 @@ margin_bottom = 162.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 min_value = 1.0
+max_value = 64.0
 value = 1.0
 align = 2
 
