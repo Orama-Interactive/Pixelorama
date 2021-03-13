@@ -251,6 +251,12 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 
 
 func _draw() -> void:
+	var _position := position
+	var _scale := scale
+	if Global.mirror_view:
+		_position.x = _position.x + Global.current_project.size.x
+		_scale.x = -1
+	draw_set_transform(_position, rotation, _scale)
 	for p in Global.current_project.selections:
 		var points : Array = p.border
 		for i in range(1, points.size() + 1):
@@ -287,6 +293,7 @@ func _draw() -> void:
 
 	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, move_preview_location, Color(1, 1, 1, 0.5))
+	draw_set_transform(position, rotation, scale)
 
 
 # Taken and modified from https://github.com/juddrgledhill/godot-dashed-line
