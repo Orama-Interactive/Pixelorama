@@ -18,14 +18,11 @@ func draw_start(position : Vector2) -> void:
 			current_selection = selection
 
 	if !current_selection:
-		var selections : Array = Global.current_project.selections.duplicate()
 		if !Tools.shift and !Tools.control:
-			var selected_pixels : Array = Global.current_project.selected_pixels.duplicate()
-			selected_pixels.clear()
-			Global.current_project.selected_pixels = selected_pixels
-			selections.clear()
+			Global.canvas.selection.clear_selection()
 		_start = Rect2(position, Vector2.ZERO)
 		var new_selection = Global.canvas.selection.SelectionPolygon.new(_start)
+		var selections : Array = Global.current_project.selections.duplicate()
 		selections.append(new_selection)
 		current_selection = new_selection
 		Global.current_project.selections = selections

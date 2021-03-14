@@ -430,6 +430,7 @@ func title_changed(value : String) -> void:
 
 
 func project_changed(value : int) -> void:
+	canvas.selection.move_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
 	current_project.change_project()

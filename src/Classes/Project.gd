@@ -596,6 +596,7 @@ func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
 
 
+## Experiments, unused for now
 func get_selection_polygon() -> PoolVector2Array:
 	if !selected_pixels:
 		return PoolVector2Array()

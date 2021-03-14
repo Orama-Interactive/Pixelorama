@@ -4,7 +4,6 @@ extends Node2D
 class SelectionPolygon:
 	var border := []
 	var rect_outline : Rect2
-#	var rects := [] # Array of Rect2s
 
 	func _init(rect : Rect2) -> void:
 		rect_outline = rect
@@ -21,6 +20,15 @@ class SelectionPolygon:
 		border[2] = rect.end
 		border[3] = Vector2(rect.position.x, rect.end.y)
 
+
+class Clipboard:
+	var image := Image.new()
+	var polygons := [] # Array of SelectionPolygons
+	var position := Vector2.ZERO
+	var selected_pixels := []
+
+
+var clipboard := Clipboard.new()
 var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
 var move_preview_location := Vector2.ZERO
@@ -167,7 +175,6 @@ func move_content_confirm() -> void:
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), move_preview_location)
-	Global.canvas.update_texture(project.current_layer)
 	var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
 	for i in selected_pixels_copy.size():
 		selected_pixels_copy[i] += move_preview_location
@@ -248,6 +255,73 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 #	for d in data.keys():
 #		print(d, data[d])
 	return data
+
+
+func cut() -> void:
+	copy()
+	delete()
+
+
+func copy() -> void:
+	var project := Global.current_project
+	if project.selected_pixels.empty():
+		return
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var selection_rectangle := get_big_bounding_rectangle()
+	var to_copy := Image.new()
+	to_copy = image.get_rect(selection_rectangle)
+	to_copy.lock()
+	if project.selections.size() > 1 or project.selections[0].border.size() > 4:
+		# Only remove unincluded pixels if the selection is not a single rectangle
+		for x in to_copy.get_size().x:
+			for y in to_copy.get_size().y:
+				var pos := Vector2(x, y)
+				if not (pos + selection_rectangle.position) in project.selected_pixels:
+					to_copy.set_pixelv(pos, Color(0))
+	to_copy.unlock()
+	clipboard.image = to_copy
+	for selection in project.selections:
+		var selection_duplicate := SelectionPolygon.new(selection.rect_outline)
+		selection_duplicate.border = selection.border
+		clipboard.polygons.append(selection_duplicate)
+	clipboard.position = selection_rectangle.position
+	clipboard.selected_pixels = project.selected_pixels.duplicate()
+
+
+func paste() -> void:
+	if !clipboard.image:
+		return
+	var _undo_data = _get_undo_data(true)
+	var project := Global.current_project
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	clear_selection()
+	project.selections = clipboard.polygons.duplicate()
+	project.selected_pixels = clipboard.selected_pixels.duplicate()
+	image.blend_rect(clipboard.image, Rect2(Vector2.ZERO, project.size), clipboard.position)
+	commit_undo("Draw", _undo_data)
+
+
+func delete() -> void:
+	var project := Global.current_project
+	if project.selected_pixels.empty():
+		return
+	var _undo_data = _get_undo_data(true)
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	for pixel in project.selected_pixels:
+		image.set_pixelv(pixel, Color(0))
+	commit_undo("Draw", _undo_data)
+
+
+func clear_selection(use_undo := false) -> void:
+	var _undo_data = _get_undo_data(false)
+	var selections : Array = Global.current_project.selections.duplicate()
+	var selected_pixels : Array = Global.current_project.selected_pixels.duplicate()
+	selected_pixels.clear()
+	Global.current_project.selected_pixels = selected_pixels
+	selections.clear()
+	Global.current_project.selections = selections
+	if use_undo:
+		commit_undo("Clear Selection", _undo_data)
 
 
 func _draw() -> void:
@@ -392,3 +466,13 @@ func get_preview_image() -> void:
 	clear_image.create(preview_image.get_width(), preview_image.get_height(), false, Image.FORMAT_RGBA8)
 	cel_image.blit_rect_mask(clear_image, preview_image, Rect2(Vector2.ZERO, project.size), move_preview_location)
 	Global.canvas.update_texture(project.current_layer)
+
+
+func get_big_bounding_rectangle() -> Rect2:
+	# Returns a rectangle that contains the entire selection, with multiple polygons
+	var project : Project = Global.current_project
+	var rect := Rect2()
+	rect = project.selections[0].rect_outline
+	for i in range(1, project.selections.size()):
+		rect = rect.merge(project.selections[i].rect_outline)
+	return rect
