@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-03-14 18:09\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -943,7 +943,7 @@ msgid "Only custom preset can be modified"
 msgstr "Csak az egyedi beállítások módosíthatók"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Applikáció FPS limitjének beállítása:"
 
 msgid "Limit FPS to 1 when app loses focus"
 msgstr ""
@@ -1447,10 +1447,10 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Álló"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Fekvő"
 
 msgid "Templates:"
 msgstr "Sablonok:"
@@ -1474,7 +1474,7 @@ msgid "Zoom"
 msgstr "Nagyít/kicsinyít"
 
 msgid "Pan"
-msgstr ""
+msgstr "Fordítás"
 
 msgid "Color Picker"
 msgstr "Színválasztó"
