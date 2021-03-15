@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-03-15 01:42\n"
+"PO-Revision-Date: 2021-03-15 05:30\n"
 
 msgid "OK"
 msgstr "예"
@@ -232,7 +232,7 @@ msgid "New frame"
 msgstr "새 프레임"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "프레임 변경"
 
 msgid "New layer"
 msgstr "새 레이어"
@@ -253,7 +253,7 @@ msgid "Vertical frames:"
 msgstr "세로축 프레임:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "시작 프레임:"
 
 msgid "Brush type:"
 msgstr "브러시 타입:"
