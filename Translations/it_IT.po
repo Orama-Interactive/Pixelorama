@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-03-15 01:42\n"
+"PO-Revision-Date: 2021-03-15 07:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,16 +166,16 @@ msgid "Window Transparency"
 msgstr "Trasparenza Finestra"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Layout Pannello"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Widescreen"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Tallscreen"
 
 msgid "Mirror View"
 msgstr "Vista a Specchio"
@@ -226,13 +226,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nuova scheda)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nuovo livello)"
 
 msgid "New frame"
 msgstr "Nuovo frame"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Sostituisci fotogramma"
 
 msgid "New layer"
 msgstr "Nuovo livello"
@@ -253,7 +253,7 @@ msgid "Vertical frames:"
 msgstr "Frame verticali:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Fotogramma iniziale:"
 
 msgid "Brush type:"
 msgstr "Tipo del pennello:"
