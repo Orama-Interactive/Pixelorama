@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-02-08 05:00\n"
+"PO-Revision-Date: 2021-03-15 01:42\n"
 
 msgid "OK"
 msgstr "예"
@@ -165,6 +165,18 @@ msgstr "타일 모드"
 msgid "Window Transparency"
 msgstr "창 투명도"
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "미러뷰"
 
@@ -213,8 +225,14 @@ msgstr "새 창"
 msgid "Spritesheet (new tab)"
 msgstr "스프레드시트 (새 탭)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "새 프레임"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "새 레이어"
@@ -233,6 +251,9 @@ msgstr "가로축 프레임:"
 
 msgid "Vertical frames:"
 msgstr "세로축 프레임:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "브러시 타입:"
