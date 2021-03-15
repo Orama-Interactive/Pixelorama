@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-03-14 18:09\n"
+"PO-Revision-Date: 2021-03-15 01:42\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -165,6 +165,18 @@ msgstr "Csempe mód"
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Tükör Nézet"
 
@@ -213,8 +225,14 @@ msgstr "Új lap"
 msgid "Spritesheet (new tab)"
 msgstr "Képsorozat (új ablak)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Új képkocka"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Új réteg"
@@ -233,6 +251,9 @@ msgstr "Vízszintes képkockák:"
 
 msgid "Vertical frames:"
 msgstr "Függőleges képkockák:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Ecset típus:"
