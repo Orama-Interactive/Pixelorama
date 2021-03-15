@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-02-02 17:33\n"
+"PO-Revision-Date: 2021-03-15 01:42\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -165,6 +165,18 @@ msgstr "Λειτουργία μοτίβου"
 msgid "Window Transparency"
 msgstr "Διαφάνεια Παραθύρου"
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Αναστροφή Προβολής"
 
@@ -213,8 +225,14 @@ msgstr "Νέα καρτέλα"
 msgid "Spritesheet (new tab)"
 msgstr "Φύλλο καρέ (νέα καρτέλα)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Νέο καρέ"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Νέα στρώση"
@@ -233,6 +251,9 @@ msgstr "Οριζόντια καρέ:"
 
 msgid "Vertical frames:"
 msgstr "Κάθετα καρέ:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Τύπος πινέλου:"
