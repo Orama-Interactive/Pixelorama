@@ -388,7 +388,7 @@ func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : in
 	set_new_tab(project, path)
 
 
-func open_image_as_spritesheet_layer(path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
+func open_image_as_spritesheet_layer(_path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
 	# data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
