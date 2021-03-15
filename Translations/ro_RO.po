@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-02-20 21:50\n"
+"PO-Revision-Date: 2021-03-15 01:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,6 +165,18 @@ msgstr "Mod mozaic"
 msgid "Window Transparency"
 msgstr "Transparența ferestrei"
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Vizualizare oglindită"
 
@@ -213,8 +225,14 @@ msgstr "Filă nouă"
 msgid "Spritesheet (new tab)"
 msgstr "Foaie cu grafice bidimensionale (filă nouă)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Cadru nou"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Strat nou"
@@ -233,6 +251,9 @@ msgstr "Cadre orizontale:"
 
 msgid "Vertical frames:"
 msgstr "Cadre verticale:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Tip de pensulă:"
