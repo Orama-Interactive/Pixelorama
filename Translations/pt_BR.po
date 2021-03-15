@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-03-15 01:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,6 +165,18 @@ msgstr "Modo de Tile"
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
@@ -213,8 +225,14 @@ msgstr "Nova Aba"
 msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nova aba)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Novo Quadro"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nova camada"
@@ -233,6 +251,9 @@ msgstr "Quadros horizontais:"
 
 msgid "Vertical frames:"
 msgstr "Quadros verticais:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Tipo do pincel:"
