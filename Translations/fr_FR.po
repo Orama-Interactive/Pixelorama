@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-02-27 11:49\n"
+"PO-Revision-Date: 2021-03-15 01:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,6 +165,18 @@ msgstr "Mode tuile"
 msgid "Window Transparency"
 msgstr "Transparence de fenêtre"
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Vue Miroir"
 
@@ -213,8 +225,14 @@ msgstr "Nouvel onglet"
 msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nouvel onglet)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Nouvelle frame"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -233,6 +251,9 @@ msgstr "Frames horizontaux :"
 
 msgid "Vertical frames:"
 msgstr "Frames verticaux :"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Type de pinceau :"
