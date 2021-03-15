@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-02-11 19:12\n"
+"PO-Revision-Date: 2021-03-15 01:43\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -165,6 +165,18 @@ msgstr "Режим плитки"
 msgid "Window Transparency"
 msgstr "Прозорість вікна"
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Дзеркальний перегляд"
 
@@ -213,8 +225,14 @@ msgstr "Нова вкладка"
 msgid "Spritesheet (new tab)"
 msgstr "Таблиця спрайтів (нова вкладка)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Новий кадр"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Новий шар"
@@ -233,6 +251,9 @@ msgstr "Горизонтальні кадри:"
 
 msgid "Vertical frames:"
 msgstr "Вертикальні кадри:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Тип пензлика:"
