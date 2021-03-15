@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-03-15 01:43\n"
+"PO-Revision-Date: 2021-03-15 06:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -166,16 +166,16 @@ msgid "Window Transparency"
 msgstr "窗口透明"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "面板布局"
 
 msgid "Auto"
-msgstr ""
+msgstr "自动"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "宽屏"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "高屏"
 
 msgid "Mirror View"
 msgstr "镜像视图"
@@ -226,13 +226,13 @@ msgid "Spritesheet (new tab)"
 msgstr "纸张（新建选项卡）"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "纸张（新建图层）"
 
 msgid "New frame"
 msgstr "新建帧"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "替换帧"
 
 msgid "New layer"
 msgstr "新建图层"
@@ -253,7 +253,7 @@ msgid "Vertical frames:"
 msgstr "垂直帧："
 
 msgid "Start frame:"
-msgstr ""
+msgstr "开始帧："
 
 msgid "Brush type:"
 msgstr "画笔类型："
