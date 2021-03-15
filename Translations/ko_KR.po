@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-03-15 05:30\n"
+"PO-Revision-Date: 2021-03-15 05:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -226,7 +226,7 @@ msgid "Spritesheet (new tab)"
 msgstr "스프레드시트 (새 탭)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "스프레드시트 (새 레이어)"
 
 msgid "New frame"
 msgstr "새 프레임"
