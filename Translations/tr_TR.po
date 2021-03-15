@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-03-15 01:43\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -165,6 +165,18 @@ msgstr "Karo Modu"
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Yansima"
 
@@ -213,8 +225,14 @@ msgstr "Yeni sekme"
 msgid "Spritesheet (new tab)"
 msgstr "Hareketli sayfa (yeni sekme)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Yeni çerçeve"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Yeni katman"
@@ -233,6 +251,9 @@ msgstr "Yatay çerçeveler:"
 
 msgid "Vertical frames:"
 msgstr "Dikey çerçeveler:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Fırça tipi:"
