@@ -154,6 +154,18 @@ msgstr ""
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
@@ -202,7 +214,13 @@ msgstr ""
 msgid "Spritesheet (new tab)"
 msgstr ""
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
+msgstr ""
+
+msgid "Replace frame"
 msgstr ""
 
 msgid "New layer"
@@ -221,6 +239,9 @@ msgid "Horizontal frames:"
 msgstr ""
 
 msgid "Vertical frames:"
+msgstr ""
+
+msgid "Start frame:"
 msgstr ""
 
 msgid "Brush type:"

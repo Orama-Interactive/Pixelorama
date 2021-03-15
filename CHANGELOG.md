@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 This update has been brought to you by the contributions of:
 
-Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable)
+Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespleasure, ballerburg9005
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
@@ -20,7 +20,11 @@ Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable)
 - Added offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))
 - Added portrait and landscape buttons in the new image dialog.
+- Full support for auto Tallscren/Widescreen has been implemented. ([#458](https://github.com/Orama-Interactive/Pixelorama/pull/458))
 - Added a new Centralize Image option in the Image menu, which places the visible pixels of the image in the center of the canvas. ([#441](https://github.com/Orama-Interactive/Pixelorama/pull/441))
+- Implemented the options to import a spritesheet as a new layer and to import an image and have it replace an already existing frame. ([#453](https://github.com/Orama-Interactive/Pixelorama/pull/453))
+- More templates have been added when creating a new sprite. ([#450](https://github.com/Orama-Interactive/Pixelorama/pull/450))
+- Added a keyboard shortcut for clear selection, `Control-D`. ([#457](https://github.com/Orama-Interactive/Pixelorama/pull/457))
 
 ### Changed
 - Undo and redo now work when their respective keyboard shortcuts are being held. ([#405](https://github.com/Orama-Interactive/Pixelorama/pull/405))

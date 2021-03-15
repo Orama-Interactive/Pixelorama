@@ -69,7 +69,7 @@ func _ready() -> void:
 
 func handle_resize() -> void:
 	var aspect_ratio = get_viewport_rect().size.x/(0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
-	if (  (aspect_ratio <= 3.0/4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN) 
+	if (  (aspect_ratio <= 3.0/4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN)
 		or Global.panel_layout == Global.PanelLayout.TALLSCREEN):
 		change_ui_layout("tallscreen")
 	else:
@@ -78,12 +78,12 @@ func handle_resize() -> void:
 
 func change_ui_layout(mode : String) -> void:
 	var colorpicker_is_switched = true if tool_and_palette_vsplit.has_node("ScrollContainer") else false
-	
+
 	if mode == "tallscreen" and not tallscreen_is_active:
 		tallscreen_is_active = true
 		reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 300
-		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1) 
+		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
 		color_and_tool_options.rect_min_size.x = 280
 		reparent_node_to(tool_panel, ui.get_node("CanvasAndTimeline/HBoxContainer"), 0)
@@ -91,12 +91,12 @@ func change_ui_layout(mode : String) -> void:
 		tallscreen_is_active = false
 		reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
-		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0) 
+		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
 		color_and_tool_options.rect_min_size.x = 0
 		canvas_preview_container.visible = true
 		reparent_node_to(tool_panel, ui, 0)
-	
+
 	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
 		canvas_preview_container.visible = false
 	else:

@@ -398,7 +398,7 @@ func open_image_as_spritesheet_layer(path : String, image : Image, file_name : S
 	# resize canvas to if "frame_width" or "frame_height" is too large
 	var project_width :int = max(frame_width, Global.current_project.size.x)
 	var project_height :int = max(frame_height, Global.current_project.size.y)
-	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0) 
+	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0)
 
 	# slice images
 	var image_no :int = 0
@@ -424,14 +424,14 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> v
 
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Frame")
-	
+
 	var frames :Array = []
 	# create a duplicate of "project.frames"
 	for i in project.frames.size():
 		var frame := Frame.new()
 		frame.cels = project.frames[i].cels.duplicate(true)
 		frames.append(frame)
-	
+
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
@@ -445,7 +445,7 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> v
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-	
+
 	project.undo_redo.add_do_method(Global, "redo")
 	project.undo_redo.add_undo_method(Global, "undo")
 	project.undo_redo.commit_action()

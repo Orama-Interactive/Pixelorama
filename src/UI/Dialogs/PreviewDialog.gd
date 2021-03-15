@@ -25,18 +25,18 @@ onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushN
 
 func _on_PreviewDialog_about_to_show() -> void:
 	var import_options :OptionButton= get_node("VBoxContainer/HBoxContainer/ImportOption")
-	
+
 	# # order as in ImageImportOptions enum
 	import_options.add_item("New tab")
 	import_options.add_item("Spritesheet (new tab)")
 	import_options.add_item("Spritesheet (new layer)")
 	import_options.add_item("New frame")
-	import_options.add_item("Replace Frame")
+	import_options.add_item("Replace frame")
 	import_options.add_item("New layer")
 	import_options.add_item("New palette")
 	import_options.add_item("New brush")
 	import_options.add_item("New pattern")
-	
+
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image, 0)
 	texture_rect.texture = img_texture
@@ -117,7 +117,7 @@ func _on_ImportOption_item_selected(id : int) -> void:
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
 		rect_size.x = spritesheet_tab_options.rect_size.x
-	
+
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
 		spritesheet_tab_options.visible = true
