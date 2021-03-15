@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-03-15 01:42\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -165,6 +165,18 @@ msgstr "وضع البلاط"
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "عرض المرآة"
 
@@ -213,8 +225,14 @@ msgstr "علامة تبويب جديدة"
 msgid "Spritesheet (new tab)"
 msgstr "ورقة الكائن (علامة تبويب جديدة)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "إطار جديد"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "طبقة جديدة"
@@ -233,6 +251,9 @@ msgstr "الأطر الأفقية:"
 
 msgid "Vertical frames:"
 msgstr "الأطر العمودية:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "نوع الفرشاة:"
