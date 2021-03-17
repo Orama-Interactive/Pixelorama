@@ -48,6 +48,7 @@ var default_clear_color := Color.gray
 var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
 var shrink := 1.0
+var dim_on_popup := true
 var smooth_zoom := true
 var theme_type : int = ThemeTypes.DARK
 var default_image_width := 64
@@ -453,7 +454,8 @@ func project_changed(value : int) -> void:
 func dialog_open(open : bool) -> void:
 	if open:
 		can_draw = false
-		control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color(0.5, 0.5, 0.5), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		if dim_on_popup:
+			control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color(0.5, 0.5, 0.5), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	else:
 		can_draw = true
 		control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color.white, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)

@@ -446,6 +446,9 @@ msgstr ""
 msgid "Display Scale"
 msgstr ""
 
+msgid "Dim interface on dialog popup"
+msgstr ""
+
 msgid "Dark"
 msgstr ""
 

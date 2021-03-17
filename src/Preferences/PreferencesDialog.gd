@@ -4,6 +4,7 @@ extends AcceptDialog
 var preferences = [
 	["open_last_project", "Startup/StartupContainer/OpenLastProject", "pressed", Global.open_last_project],
 	["shrink", "Interface/ShrinkContainer/ShrinkHSlider", "value", Global.shrink],
+	["dim_on_popup", "Interface/DimPopup/CheckBox", "pressed", Global.dim_on_popup],
 	["smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed", Global.smooth_zoom],
 	["pressure_sensitivity_mode", "Startup/PressureSentivity/PressureSensitivityOptionButton", "selected", Global.pressure_sensitivity_mode],
 	["show_left_tool_icon", "Indicators/IndicatorsContainer/LeftToolIconCheckbox", "pressed", Global.show_left_tool_icon],
