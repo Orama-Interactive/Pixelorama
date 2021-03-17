@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-03-15 01:42\n"
+"PO-Revision-Date: 2021-03-17 17:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -457,6 +457,9 @@ msgstr "Системный язык"
 
 msgid "Display Scale"
 msgstr "Масштаб экрана"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "Тёмная"
