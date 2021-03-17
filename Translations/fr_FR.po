@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-03-15 01:42\n"
+"PO-Revision-Date: 2021-03-17 17:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -457,6 +457,9 @@ msgstr "Langue système"
 
 msgid "Display Scale"
 msgstr "Échelle d'affichage"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "Sombre"
