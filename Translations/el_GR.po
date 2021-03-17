@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-03-17 19:24\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -459,7 +459,7 @@ msgid "Display Scale"
 msgstr "Κλίμακα Εμφάνισης"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφανίζεται αναδυόμενο παράθυρο"
 
 msgid "Dark"
 msgstr "Σκούρο"
