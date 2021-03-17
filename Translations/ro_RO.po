@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-03-15 07:42\n"
+"PO-Revision-Date: 2021-03-17 17:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -457,6 +457,9 @@ msgstr "Limba sistemului"
 
 msgid "Display Scale"
 msgstr "Scala de afișare"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "Întunecat"
