@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-03-15 02:31\n"
+"PO-Revision-Date: 2021-03-17 17:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -457,6 +457,9 @@ msgstr "システム言語"
 
 msgid "Display Scale"
 msgstr "表示スケール"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "ダーク"
