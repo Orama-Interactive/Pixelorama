@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-03-17 17:36\n"
+"PO-Revision-Date: 2021-03-17 19:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -458,7 +458,7 @@ msgid "Display Scale"
 msgstr "Bildschirmgröße"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
 
 msgid "Dark"
 msgstr "Dunkel"
