@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-03-18 17:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,16 +166,16 @@ msgid "Window Transparency"
 msgstr "Przezroczystość okna"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Układ panelu"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatyczny"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Szeroki ekran"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Długi ekran"
 
 msgid "Mirror View"
 msgstr "Widok lustrzany"
@@ -226,13 +226,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nowa karta)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nowa warstwa)"
 
 msgid "New frame"
 msgstr "Nowa klatka"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Zamień klatkę"
 
 msgid "New layer"
 msgstr "Nowa warstwa"
@@ -253,7 +253,7 @@ msgid "Vertical frames:"
 msgstr "Klatki pionowe:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Klatka początkowa:"
 
 msgid "Brush type:"
 msgstr "Typ pędzla:"
@@ -458,7 +458,7 @@ msgid "Display Scale"
 msgstr "Pokaż skalę"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Przyciemnij interfejs, kiedy pojawia się okno dialogowe"
 
 msgid "Dark"
 msgstr "Ciemny"
