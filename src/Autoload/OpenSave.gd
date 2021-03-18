@@ -119,8 +119,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 		new_project.directory_path = Export.directory_path
 		new_project.file_name = Export.file_name
 		Export.was_exported = false
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
-		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 	Global.save_project_to_recent_list(path)
 
@@ -339,7 +339,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		Export.directory_path = path.get_base_dir()
 		Export.was_exported = false
 		project.was_exported = false
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
 	Global.save_project_to_recent_list(path)
 

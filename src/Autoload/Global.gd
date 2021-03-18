@@ -118,11 +118,6 @@ var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
 var transparent_checker : ColorRect
 
-var file_menu : MenuButton
-var edit_menu : MenuButton
-var view_menu : MenuButton
-var image_menu : MenuButton
-var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
@@ -221,11 +216,6 @@ func _ready() -> void:
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
 	transparent_checker = find_node_by_name(root, "TransparentChecker")
 
-	file_menu = find_node_by_name(root, "FileMenu")
-	edit_menu = find_node_by_name(root, "EditMenu")
-	view_menu = find_node_by_name(root, "ViewMenu")
-	image_menu = find_node_by_name(root, "ImageMenu")
-	help_menu = find_node_by_name(root, "HelpMenu")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 

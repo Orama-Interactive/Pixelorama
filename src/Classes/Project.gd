@@ -86,17 +86,6 @@ func commit_redo() -> void:
 	Global.control.redone = false
 
 
-func select_all_pixels() -> void:
-	clear_selection()
-	for x in size.x:
-		for y in size.y:
-			selected_pixels.append(Vector2(x, y))
-
-
-func clear_selection() -> void:
-	selected_pixels.clear()
-
-
 func _set_selections(value : Array) -> void:
 	selections = value
 #	Global.selection_rectangl.set_rect(value)
@@ -204,9 +193,9 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % save_path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % save_path.get_file())
 	else:
-		Global.file_menu.get_popup().set_item_text(4, tr("Save"))
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save"))
 
 	Export.directory_path = directory_path
 	Export.file_name = file_name
@@ -214,9 +203,9 @@ func change_project() -> void:
 	Export.was_exported = was_exported
 
 	if !was_exported:
-		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 	else:
-		Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)

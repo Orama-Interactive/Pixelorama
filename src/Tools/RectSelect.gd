@@ -26,32 +26,11 @@ func draw_start(position : Vector2) -> void:
 		selections.append(new_selection)
 		current_selection = new_selection
 		Global.current_project.selections = selections
-#			for selection in Global.current_project.selections:
-#				selection.queue_free()
-#			current_selection_id = 0
-#		else:
-#			current_selection_id = Global.current_project.selections.size()
-#		var selection_shape := preload("res://src/Tools/SelectionShape.tscn").instance()
-#		current_selection = selection_shape
-##		Global.current_project.selections.append(selection_shape)
-#		Global.canvas.selection.add_child(selection_shape)
-#		_start = Rect2(position, Vector2.ZERO)
-#		selection_shape.set_rect(_start)
 	else:
 		_move = true
 		_offset = position
 		start_position = position
 		Global.canvas.selection.move_borders_start()
-#		_set_cursor_text(selection.get_rect())
-#	if Global.selection_rectangle.has_point(position):
-#		_move = true
-#		_offset = position
-#		Global.selection_rectangle.move_start(Tools.shift)
-#		_set_cursor_text(Global.selection_rectangle.get_rect())
-#	else:
-#		_drag = true
-#		_start = Rect2(position, Vector2.ZERO)
-#		Global.selection_rectangle.set_rect(_start)
 
 
 func draw_move(position : Vector2) -> void:

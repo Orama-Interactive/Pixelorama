@@ -346,8 +346,8 @@ func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Arra
 	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
 	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	Export.was_exported = false
-	Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
-	Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+	Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
+	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 
 func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) -> void:

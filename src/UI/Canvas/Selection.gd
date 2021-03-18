@@ -312,7 +312,21 @@ func delete() -> void:
 	commit_undo("Draw", _undo_data)
 
 
+func select_all() -> void:
+	var project := Global.current_project
+	var _undo_data = _get_undo_data(false)
+	clear_selection()
+	var full_rect = Rect2(Vector2.ZERO, project.size)
+	var new_selection = SelectionPolygon.new(full_rect)
+	var selections : Array = project.selections.duplicate()
+	selections.append(new_selection)
+	project.selections = selections
+	select_rect()
+	commit_undo("Rectangle Select", _undo_data)
+
+
 func clear_selection(use_undo := false) -> void:
+	move_content_confirm()
 	var _undo_data = _get_undo_data(false)
 	var selections : Array = Global.current_project.selections.duplicate()
 	var selected_pixels : Array = Global.current_project.selected_pixels.duplicate()
