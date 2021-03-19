@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-03-19 10:14\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "Kép átméretezése"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Képkockák"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Százalék"
 
 msgid "Crop Image"
 msgstr "Kép levágása"
@@ -166,7 +166,7 @@ msgid "Window Transparency"
 msgstr ""
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Lap elrendezés"
 
 msgid "Auto"
 msgstr ""
