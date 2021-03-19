@@ -3,10 +3,11 @@ extends Node2D
 
 class SelectionPolygon:
 	var border := []
-	var rect_outline : Rect2
+	var rect_outline : Rect2 setget _rect_outline_changed
+	var gizmos := [Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2()] # Array of Rect2s
 
 	func _init(rect : Rect2) -> void:
-		rect_outline = rect
+		self.rect_outline = rect
 		border.append(rect.position)
 		border.append(Vector2(rect.end.x, rect.position.y))
 		border.append(rect.end)
@@ -14,11 +15,27 @@ class SelectionPolygon:
 
 
 	func set_rect(rect : Rect2) -> void:
-		rect_outline = rect
+		self.rect_outline = rect
 		border[0] = rect.position
 		border[1] = Vector2(rect.end.x, rect.position.y)
 		border[2] = rect.end
 		border[3] = Vector2(rect.position.x, rect.end.y)
+
+
+	func _rect_outline_changed(value : Rect2) -> void:
+		rect_outline = value
+		var rect_pos : Vector2 = rect_outline.position
+		var rect_end : Vector2 = rect_outline.end
+		var size := Vector2.ONE
+		# Clockwise, starting from top-left corner
+		gizmos[0] = Rect2(rect_pos - size, size)
+		gizmos[1] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y), size)
+		gizmos[2] = Rect2(Vector2(rect_end.x, rect_pos.y - size.y), size)
+		gizmos[3] = Rect2(Vector2(rect_end.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
+		gizmos[4] = Rect2(rect_end, size)
+		gizmos[5] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_end.y), size)
+		gizmos[6] = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
+		gizmos[7] = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
 
 
 class Clipboard:
@@ -363,20 +380,14 @@ func _draw() -> void:
 			var end := Vector2(end_x, end_y)
 			draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
 
-#		if !polygon.selected_pixels:
-#			return
-		var rect_pos : Vector2 = p.rect_outline.position
-		var rect_end : Vector2 = p.rect_outline.end
-		var radius := 0.5
-		draw_circle(rect_pos, radius, Color.gray)
-		draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_pos.y), radius, Color.gray)
-		draw_circle(Vector2(rect_end.x, rect_pos.y), radius, Color.gray)
-		draw_circle(Vector2(rect_end.x, (rect_end.y + rect_pos.y) / 2), radius, Color.gray)
-		draw_circle(rect_end, radius, Color.gray)
-		draw_circle(Vector2(rect_end.x, rect_end.y), radius, Color.gray)
-		draw_circle(Vector2((rect_end.x + rect_pos.x) / 2, rect_end.y), radius, Color.gray)
-		draw_circle(Vector2(rect_pos.x, rect_end.y), radius, Color.gray)
-		draw_circle(Vector2(rect_pos.x, (rect_end.y + rect_pos.y) / 2), radius, Color.gray)
+		for gizmo in p.gizmos: # Draw gizmos
+			draw_rect(gizmo, Color.black)
+			var filled_rect : Rect2 = gizmo
+			var filled_size := Vector2(0.2, 0.2)
+			filled_rect.position += filled_size
+			filled_rect.size -= filled_size * 2
+			draw_rect(filled_rect, Color.white) # Filled white square
+
 
 
 	if is_moving_content and !preview_image.is_empty():
