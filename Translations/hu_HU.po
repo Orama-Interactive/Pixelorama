@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-03-19 10:14\n"
+"PO-Revision-Date: 2021-03-19 10:24\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -127,7 +127,7 @@ msgid "Scale Image"
 msgstr "Kép átméretezése"
 
 msgid "Pixels"
-msgstr "Képkockák"
+msgstr "Pixelek"
 
 msgid "Percentage"
 msgstr "Százalék"
@@ -163,19 +163,19 @@ msgid "Tile Mode"
 msgstr "Csempe mód"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Ablak átlátszóság"
 
 msgid "Panel Layout"
 msgstr "Lap elrendezés"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatikus"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Szélesvászon"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Magasképernyő"
 
 msgid "Mirror View"
 msgstr "Tükör Nézet"
@@ -226,13 +226,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Képsorozat (új ablak)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Képsorozat (új réteg)"
 
 msgid "New frame"
 msgstr "Új képkocka"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Képkocka kicserélése"
 
 msgid "New layer"
 msgstr "Új réteg"
@@ -253,7 +253,7 @@ msgid "Vertical frames:"
 msgstr "Függőleges képkockák:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Kezdő képkocka:"
 
 msgid "Brush type:"
 msgstr "Ecset típus:"
@@ -916,7 +916,7 @@ msgid "A color of the grid"
 msgstr "A rács színe"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixel Rács"
 
 msgid "Show at zoom:"
 msgstr ""
