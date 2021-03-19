@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-03-19 10:24\n"
+"PO-Revision-Date: 2021-03-19 10:46\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -591,7 +591,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Fejleszette: Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-jelenleg készítette Orama Interactive és hozzáműködők"
+msgstr "©2019-jelenleg készítette Orama Interactive és közreműködők"
 
 msgid "Website"
 msgstr "Weboldal"
@@ -892,13 +892,13 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Rács elállítása x tengelyen:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Rács elállítása y tengelyen:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
@@ -970,7 +970,7 @@ msgid "Set application FPS limit:"
 msgstr "Applikáció FPS limitjének beállítása:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "FPS 1-re limitálása amikor az alkalmazás a háttérbe kerül"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
@@ -1039,7 +1039,7 @@ msgid "Offset"
 msgstr "Eltolás"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Egyszerű árnyékolás"
 
 msgid "Hue Shifting"
 msgstr ""
