@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-03-19 10:46\n"
+"PO-Revision-Date: 2021-03-19 10:52\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -925,10 +925,10 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Pixelrács színe:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "A pixelrács színe"
 
 msgid "Transparency"
 msgstr "Átlátszóság"
@@ -1042,7 +1042,7 @@ msgid "Simple Shading"
 msgstr "Egyszerű árnyékolás"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Színárnyalat-váltás"
 
 msgid "Lighten"
 msgstr "Világosítás"
@@ -1468,7 +1468,7 @@ msgid "A default background color of a new image"
 msgstr "Alapértelmezett háttérszíne az új képnek"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Méretarány lezárása"
 
 msgid "Portrait"
 msgstr "Álló"
