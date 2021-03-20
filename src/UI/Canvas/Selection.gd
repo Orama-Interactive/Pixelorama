@@ -3,8 +3,8 @@ extends Node2D
 
 class SelectionPolygon:
 	var border := []
-	var rect_outline : Rect2 setget _rect_outline_changed
-	var gizmos := [Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2()] # Array of Rect2s
+	var rect_outline : Rect2
+
 
 	func _init(rect : Rect2) -> void:
 		self.rect_outline = rect
@@ -22,27 +22,12 @@ class SelectionPolygon:
 		border[3] = Vector2(rect.position.x, rect.end.y)
 
 
-	func _rect_outline_changed(value : Rect2) -> void:
-		rect_outline = value
-		var rect_pos : Vector2 = rect_outline.position
-		var rect_end : Vector2 = rect_outline.end
-		var size := Vector2.ONE
-		# Clockwise, starting from top-left corner
-		gizmos[0] = Rect2(rect_pos - size, size)
-		gizmos[1] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y), size)
-		gizmos[2] = Rect2(Vector2(rect_end.x, rect_pos.y - size.y), size)
-		gizmos[3] = Rect2(Vector2(rect_end.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
-		gizmos[4] = Rect2(rect_end, size)
-		gizmos[5] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_end.y), size)
-		gizmos[6] = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
-		gizmos[7] = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
-
-
 class Clipboard:
 	var image := Image.new()
 	var polygons := [] # Array of SelectionPolygons
 	var position := Vector2.ZERO
 	var selected_pixels := []
+	var big_bounding_rectangle := Rect2()
 
 
 var clipboard := Clipboard.new()
@@ -50,9 +35,11 @@ var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
 var move_preview_location := Vector2.ZERO
 var is_moving_content := false
+var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 var preview_image := Image.new()
 var preview_image_texture : ImageTexture
 var undo_data : Dictionary
+var gizmos := [Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2()] # Array of Rect2s
 
 
 func _ready() -> void:
@@ -63,7 +50,7 @@ func _ready() -> void:
 	tween.start()
 
 
-func _input(event : InputEvent):
+func _input(event : InputEvent) -> void:
 	if event is InputEventKey:
 		if is_moving_content:
 			if event.scancode == 16777221:
@@ -83,11 +70,28 @@ func _offset_changed(value : Vector2) -> void:
 	update()
 
 
+func _big_bounding_rectangle_changed(value : Rect2) -> void:
+	big_bounding_rectangle = value
+	var rect_pos : Vector2 = big_bounding_rectangle.position
+	var rect_end : Vector2 = big_bounding_rectangle.end
+	var size := Vector2.ONE
+	# Clockwise, starting from top-left corner
+	gizmos[0] = Rect2(rect_pos - size, size)
+	gizmos[1] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y), size)
+	gizmos[2] = Rect2(Vector2(rect_end.x, rect_pos.y - size.y), size)
+	gizmos[3] = Rect2(Vector2(rect_end.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
+	gizmos[4] = Rect2(rect_end, size)
+	gizmos[5] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_end.y), size)
+	gizmos[6] = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
+	gizmos[7] = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
+
+
 func move_borders_start() -> void:
 	undo_data = _get_undo_data(false)
 
 
 func move_borders(move : Vector2) -> void:
+	self.big_bounding_rectangle.position += move
 	for polygon in Global.current_project.selections:
 		polygon.rect_outline.position += move
 		var borders_copy = polygon.border.duplicate()
@@ -129,6 +133,7 @@ func select_rect(merge := true) -> void:
 	else:
 		clip_selections(polygon, polygon_pixels)
 		project.selections.erase(polygon)
+	self.big_bounding_rectangle = get_big_bounding_rectangle()
 
 
 func merge_selections(polygon : SelectionPolygon) -> void:
@@ -229,9 +234,11 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 	project.undo_redo.create_action(action)
 	project.undo_redo.add_do_property(project, "selections", redo_data["selections"])
 	project.undo_redo.add_do_property(project, "selected_pixels", redo_data["selected_pixels"])
+	project.undo_redo.add_do_property(self, "big_bounding_rectangle", redo_data["big_bounding_rectangle"])
 
 	project.undo_redo.add_undo_property(project, "selections", _undo_data["selections"])
 	project.undo_redo.add_undo_property(project, "selected_pixels", _undo_data["selected_pixels"])
+	project.undo_redo.add_undo_property(self, "big_bounding_rectangle", _undo_data["big_bounding_rectangle"])
 
 	var i := 0
 	for polygon in Global.current_project.selections:
@@ -259,6 +266,7 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 	var i := 0
 	data["selections"] = project.selections
 	data["selected_pixels"] = project.selected_pixels
+	data["big_bounding_rectangle"] = big_bounding_rectangle
 	for polygon in Global.current_project.selections:
 		data["border_%s" % i] = polygon.border
 		data["rect_outline_%s" % i] = polygon.rect_outline
@@ -284,25 +292,25 @@ func copy() -> void:
 	if project.selected_pixels.empty():
 		return
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	var selection_rectangle := get_big_bounding_rectangle()
 	var to_copy := Image.new()
-	to_copy = image.get_rect(selection_rectangle)
-	to_copy.lock()
+	to_copy = image.get_rect(big_bounding_rectangle)
 	if project.selections.size() > 1 or project.selections[0].border.size() > 4:
+		to_copy.lock()
 		# Only remove unincluded pixels if the selection is not a single rectangle
 		for x in to_copy.get_size().x:
 			for y in to_copy.get_size().y:
 				var pos := Vector2(x, y)
-				if not (pos + selection_rectangle.position) in project.selected_pixels:
+				if not (pos + big_bounding_rectangle.position) in project.selected_pixels:
 					to_copy.set_pixelv(pos, Color(0))
-	to_copy.unlock()
+		to_copy.unlock()
 	clipboard.image = to_copy
 	for selection in project.selections:
 		var selection_duplicate := SelectionPolygon.new(selection.rect_outline)
 		selection_duplicate.border = selection.border
 		clipboard.polygons.append(selection_duplicate)
-	clipboard.position = selection_rectangle.position
+	clipboard.position = big_bounding_rectangle.position
 	clipboard.selected_pixels = project.selected_pixels.duplicate()
+	clipboard.big_bounding_rectangle = big_bounding_rectangle
 
 
 func paste() -> void:
@@ -314,6 +322,7 @@ func paste() -> void:
 	clear_selection()
 	project.selections = clipboard.polygons.duplicate()
 	project.selected_pixels = clipboard.selected_pixels.duplicate()
+	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 	image.blend_rect(clipboard.image, Rect2(Vector2.ZERO, project.size), clipboard.position)
 	commit_undo("Draw", _undo_data)
 
@@ -351,6 +360,7 @@ func clear_selection(use_undo := false) -> void:
 	Global.current_project.selected_pixels = selected_pixels
 	selections.clear()
 	Global.current_project.selections = selections
+	self.big_bounding_rectangle = Rect2()
 	if use_undo:
 		commit_undo("Clear Selection", _undo_data)
 
@@ -380,7 +390,8 @@ func _draw() -> void:
 			var end := Vector2(end_x, end_y)
 			draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
 
-		for gizmo in p.gizmos: # Draw gizmos
+	if big_bounding_rectangle.size > Vector2.ZERO:
+		for gizmo in gizmos: # Draw gizmos
 			draw_rect(gizmo, Color.black)
 			var filled_rect : Rect2 = gizmo
 			var filled_size := Vector2(0.2, 0.2)
@@ -497,6 +508,8 @@ func get_big_bounding_rectangle() -> Rect2:
 	# Returns a rectangle that contains the entire selection, with multiple polygons
 	var project : Project = Global.current_project
 	var rect := Rect2()
+	if project.selections.size() == 0:
+		return rect
 	rect = project.selections[0].rect_outline
 	for i in range(1, project.selections.size()):
 		rect = rect.merge(project.selections[i].rect_outline)

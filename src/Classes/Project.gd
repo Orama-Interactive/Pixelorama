@@ -210,6 +210,8 @@ func change_project() -> void:
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
+	Global.canvas.selection.big_bounding_rectangle = Global.canvas.selection.get_big_bounding_rectangle()
+
 
 func serialize() -> Dictionary:
 	var layer_data := []
