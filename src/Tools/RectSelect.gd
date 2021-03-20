@@ -31,13 +31,14 @@ func draw_start(position : Vector2) -> void:
 		_offset = position
 		start_position = position
 		Global.canvas.selection.move_borders_start()
+		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
 
 
 func draw_move(position : Vector2) -> void:
 	if _move:
 		Global.canvas.selection.move_borders(position - _offset)
 		_offset = position
-#		_set_cursor_text(selection.get_rect())
+		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
 	else:
 		var rect := _start.expand(position).abs()
 		rect = rect.grow_individual(0, 0, 1, 1)
@@ -51,11 +52,7 @@ func draw_end(position : Vector2) -> void:
 	else:
 		Global.canvas.selection.select_rect(!Tools.control)
 		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
-#		var undo_data = Global.canvas.selection._get_undo_data(false)
-#		current_selection.select_rect(!Tools.control)
-#		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
-#	_drag = false
-#	Global.canvas.selection.move_borders_end(position, start_position)
+
 	_move = false
 	cursor_text = ""
 	start_position = Vector2.INF
