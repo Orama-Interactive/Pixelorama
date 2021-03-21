@@ -155,6 +155,7 @@ func merge_selections(polygon : SelectionPolygon) -> void:
 
 func clip_selections(polygon : SelectionPolygon, polygon_pixels : Array) -> void:
 	var to_erase := []
+	var to_append := []
 	for p in Global.current_project.selections:
 		if p == polygon:
 			continue
@@ -168,7 +169,7 @@ func clip_selections(polygon : SelectionPolygon, polygon_pixels : Array) -> void
 				var rect = get_bounding_rectangle(arr[i])
 				var new_polygon := SelectionPolygon.new(rect)
 				new_polygon.border = arr[i]
-				Global.current_project.selections.append(new_polygon)
+				to_append.append(new_polygon)
 
 		var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
 		for pixel in polygon_pixels:
@@ -177,6 +178,9 @@ func clip_selections(polygon : SelectionPolygon, polygon_pixels : Array) -> void
 
 	for p in to_erase:
 		Global.current_project.selections.erase(p)
+
+	for p in to_append:
+		Global.current_project.selections.append(p)
 
 
 func move_content_start() -> void:
