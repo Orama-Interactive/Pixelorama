@@ -30,6 +30,27 @@ class Clipboard:
 	var big_bounding_rectangle := Rect2()
 
 
+class Gizmo:
+	var rect : Rect2
+	var direction := Vector2.ZERO
+
+	func _init(_direction : Vector2) -> void:
+		direction = _direction
+
+
+	func get_cursor() -> int:
+		var cursor := Input.CURSOR_MOVE
+		if direction == Vector2(-1, -1) or direction == Vector2(1, 1): # Top left or bottom right
+			cursor = Input.CURSOR_FDIAGSIZE
+		elif direction == Vector2(1, -1) or direction == Vector2(-1, 1): # Top right or bottom left
+			cursor = Input.CURSOR_BDIAGSIZE
+		elif direction == Vector2(0, -1) or direction == Vector2(0, 1): # Center top or center bottom
+			cursor = Input.CURSOR_VSIZE
+		elif direction == Vector2(-1, 0) or direction == Vector2(1, 0): # Center left or center right
+			cursor = Input.CURSOR_HSIZE
+		return cursor
+
+
 var clipboard := Clipboard.new()
 var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
@@ -39,7 +60,8 @@ var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 var preview_image := Image.new()
 var preview_image_texture : ImageTexture
 var undo_data : Dictionary
-var gizmos := [Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2(), Rect2()] # Array of Rect2s
+var gizmos := [] # Array of Gizmos
+var is_dragging_gizmo := false
 
 
 func _ready() -> void:
@@ -49,14 +71,41 @@ func _ready() -> void:
 	tween.interpolate_property(self, "line_offset", Vector2.ZERO, Vector2(2, 2), 1)
 	tween.start()
 
+	gizmos.append(Gizmo.new(Vector2(-1, -1))) # Top left
+	gizmos.append(Gizmo.new(Vector2(0, -1))) # Center top
+	gizmos.append(Gizmo.new(Vector2(1, -1))) # Top right
+	gizmos.append(Gizmo.new(Vector2(1, 0))) # Center right
+	gizmos.append(Gizmo.new(Vector2(1, 1))) # Bottom right
+	gizmos.append(Gizmo.new(Vector2(0, 1))) # Center bottom
+	gizmos.append(Gizmo.new(Vector2(-1, 1))) # Bottom left
+	gizmos.append(Gizmo.new(Vector2(-1, 0))) # Center left
+
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventKey:
-		if is_moving_content:
+		if is_moving_content: # Temporary code
 			if event.scancode == 16777221:
 				move_content_confirm()
 			elif event.scancode == 16777217:
 				move_content_cancel()
+	elif event is InputEventMouse:
+		var gizmo
+		for g in gizmos:
+			if g.rect.has_point(Global.canvas.current_pixel):
+				gizmo = g
+				break
+		if gizmo:
+			Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
+		elif !is_dragging_gizmo:
+			Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
+
+		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+			if gizmo and event.pressed:
+				Global.has_focus = false
+				is_dragging_gizmo = true
+			elif is_dragging_gizmo:
+				Global.has_focus = true
+				is_dragging_gizmo = false
 
 
 func _offset_tween_completed(_object, _key) -> void:
@@ -76,14 +125,14 @@ func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	var rect_end : Vector2 = big_bounding_rectangle.end
 	var size := Vector2.ONE
 	# Clockwise, starting from top-left corner
-	gizmos[0] = Rect2(rect_pos - size, size)
-	gizmos[1] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y), size)
-	gizmos[2] = Rect2(Vector2(rect_end.x, rect_pos.y - size.y), size)
-	gizmos[3] = Rect2(Vector2(rect_end.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
-	gizmos[4] = Rect2(rect_end, size)
-	gizmos[5] = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_end.y), size)
-	gizmos[6] = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
-	gizmos[7] = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
+	gizmos[0].rect = Rect2(rect_pos - size, size)
+	gizmos[1].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y), size)
+	gizmos[2].rect = Rect2(Vector2(rect_end.x, rect_pos.y - size.y), size)
+	gizmos[3].rect = Rect2(Vector2(rect_end.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
+	gizmos[4].rect = Rect2(rect_end, size)
+	gizmos[5].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_end.y), size)
+	gizmos[6].rect = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
+	gizmos[7].rect = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
 
 
 func move_borders_start() -> void:
@@ -396,8 +445,8 @@ func _draw() -> void:
 
 	if big_bounding_rectangle.size > Vector2.ZERO:
 		for gizmo in gizmos: # Draw gizmos
-			draw_rect(gizmo, Color.black)
-			var filled_rect : Rect2 = gizmo
+			draw_rect(gizmo.rect, Color.black)
+			var filled_rect : Rect2 = gizmo.rect
 			var filled_size := Vector2(0.2, 0.2)
 			filled_rect.position += filled_size
 			filled_rect.size -= filled_size * 2
