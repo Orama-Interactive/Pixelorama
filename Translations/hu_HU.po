@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-03-19 10:52\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -127,10 +127,10 @@ msgid "Scale Image"
 msgstr "Kép átméretezése"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixelek"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Százalék"
 
 msgid "Crop Image"
 msgstr "Kép levágása"
@@ -163,7 +163,19 @@ msgid "Tile Mode"
 msgstr "Csempe mód"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Ablak átlátszóság"
+
+msgid "Panel Layout"
+msgstr "Lap elrendezés"
+
+msgid "Auto"
+msgstr "Automatikus"
+
+msgid "Widescreen"
+msgstr "Szélesvászon"
+
+msgid "Tallscreen"
+msgstr "Magasképernyő"
 
 msgid "Mirror View"
 msgstr "Tükör Nézet"
@@ -213,8 +225,14 @@ msgstr "Új lap"
 msgid "Spritesheet (new tab)"
 msgstr "Képsorozat (új ablak)"
 
+msgid "Spritesheet (new layer)"
+msgstr "Képsorozat (új réteg)"
+
 msgid "New frame"
 msgstr "Új képkocka"
+
+msgid "Replace frame"
+msgstr "Képkocka kicserélése"
 
 msgid "New layer"
 msgstr "Új réteg"
@@ -233,6 +251,9 @@ msgstr "Vízszintes képkockák:"
 
 msgid "Vertical frames:"
 msgstr "Függőleges képkockák:"
+
+msgid "Start frame:"
+msgstr "Kezdő képkocka:"
 
 msgid "Brush type:"
 msgstr "Ecset típus:"
@@ -437,6 +458,9 @@ msgstr "Rendszer nyelv"
 msgid "Display Scale"
 msgstr "Skála megjelenítése"
 
+msgid "Dim interface on dialog popup"
+msgstr ""
+
 msgid "Dark"
 msgstr "Sötét"
 
@@ -567,7 +591,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Fejleszette: Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-jelenleg készítette Orama Interactive és hozzáműködők"
+msgstr "©2019-jelenleg készítette Orama Interactive és közreműködők"
 
 msgid "Website"
 msgstr "Weboldal"
@@ -868,13 +892,13 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Rács elállítása x tengelyen:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Rács elállítása y tengelyen:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
@@ -892,7 +916,7 @@ msgid "A color of the grid"
 msgstr "A rács színe"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixel Rács"
 
 msgid "Show at zoom:"
 msgstr ""
@@ -901,10 +925,10 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Pixelrács színe:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "A pixelrács színe"
 
 msgid "Transparency"
 msgstr "Átlátszóság"
@@ -943,10 +967,10 @@ msgid "Only custom preset can be modified"
 msgstr "Csak az egyedi beállítások módosíthatók"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Applikáció FPS limitjének beállítása:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "FPS 1-re limitálása amikor az alkalmazás a háttérbe kerül"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
@@ -1015,10 +1039,10 @@ msgid "Offset"
 msgstr "Eltolás"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Egyszerű árnyékolás"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Színárnyalat-váltás"
 
 msgid "Lighten"
 msgstr "Világosítás"
@@ -1444,13 +1468,13 @@ msgid "A default background color of a new image"
 msgstr "Alapértelmezett háttérszíne az új képnek"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Méretarány lezárása"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Álló"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Fekvő"
 
 msgid "Templates:"
 msgstr "Sablonok:"
@@ -1474,7 +1498,7 @@ msgid "Zoom"
 msgstr "Nagyít/kicsinyít"
 
 msgid "Pan"
-msgstr ""
+msgstr "Fordítás"
 
 msgid "Color Picker"
 msgstr "Színválasztó"

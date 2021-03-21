@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-02-02 19:31\n"
+"PO-Revision-Date: 2021-03-17 17:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,6 +165,18 @@ msgstr "Mod mozaic"
 msgid "Window Transparency"
 msgstr "Transparența ferestrei"
 
+msgid "Panel Layout"
+msgstr "Dispunere panou"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Widescreen"
+msgstr "Ecran lat"
+
+msgid "Tallscreen"
+msgstr "Ecran înalt"
+
 msgid "Mirror View"
 msgstr "Vizualizare oglindită"
 
@@ -213,8 +225,14 @@ msgstr "Filă nouă"
 msgid "Spritesheet (new tab)"
 msgstr "Foaie cu grafice bidimensionale (filă nouă)"
 
+msgid "Spritesheet (new layer)"
+msgstr "Foaie cu grafice bidimensionale (strat nou)"
+
 msgid "New frame"
 msgstr "Cadru nou"
+
+msgid "Replace frame"
+msgstr "Înlocuire cadru"
 
 msgid "New layer"
 msgstr "Strat nou"
@@ -233,6 +251,9 @@ msgstr "Cadre orizontale:"
 
 msgid "Vertical frames:"
 msgstr "Cadre verticale:"
+
+msgid "Start frame:"
+msgstr "Cadru de pornire:"
 
 msgid "Brush type:"
 msgstr "Tip de pensulă:"
@@ -437,6 +458,9 @@ msgstr "Limba sistemului"
 msgid "Display Scale"
 msgstr "Scala de afișare"
 
+msgid "Dim interface on dialog popup"
+msgstr ""
+
 msgid "Dark"
 msgstr "Întunecat"
 
@@ -549,7 +573,7 @@ msgid "View Splash Screen"
 msgstr "Vizualizare ecran de întâmpinare"
 
 msgid "Online Docs"
-msgstr "Documentație online"
+msgstr "Documentație virtuală"
 
 msgid "Issue Tracker"
 msgstr "Monitor de probleme"

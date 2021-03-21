@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-03-17 17:36\n"
 
 msgid "OK"
 msgstr ""
@@ -165,6 +165,18 @@ msgstr ""
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
@@ -213,7 +225,13 @@ msgstr ""
 msgid "Spritesheet (new tab)"
 msgstr ""
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
+msgstr ""
+
+msgid "Replace frame"
 msgstr ""
 
 msgid "New layer"
@@ -232,6 +250,9 @@ msgid "Horizontal frames:"
 msgstr ""
 
 msgid "Vertical frames:"
+msgstr ""
+
+msgid "Start frame:"
 msgstr ""
 
 msgid "Brush type:"
@@ -434,6 +455,9 @@ msgid "System Language"
 msgstr ""
 
 msgid "Display Scale"
+msgstr ""
+
+msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-02-02 23:11\n"
+"PO-Revision-Date: 2021-03-17 17:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,6 +165,18 @@ msgstr "タイルモード"
 msgid "Window Transparency"
 msgstr "ウィンドウの透明度"
 
+msgid "Panel Layout"
+msgstr "パネルのレイアウト"
+
+msgid "Auto"
+msgstr "オート"
+
+msgid "Widescreen"
+msgstr "ワイドスクリーン"
+
+msgid "Tallscreen"
+msgstr "トールスクリーン"
+
 msgid "Mirror View"
 msgstr "ミラービュー"
 
@@ -213,8 +225,14 @@ msgstr "新しいタブ"
 msgid "Spritesheet (new tab)"
 msgstr "スプライトシート（新規タブ）"
 
+msgid "Spritesheet (new layer)"
+msgstr "スプライトシート (新規レイヤー)"
+
 msgid "New frame"
 msgstr "新しいフレーム"
+
+msgid "Replace frame"
+msgstr "フレームを置換"
 
 msgid "New layer"
 msgstr "新規レイヤー"
@@ -233,6 +251,9 @@ msgstr "水平フレーム:"
 
 msgid "Vertical frames:"
 msgstr "垂直フレーム"
+
+msgid "Start frame:"
+msgstr "開始フレーム:"
 
 msgid "Brush type:"
 msgstr "ブラシタイプ:"
@@ -436,6 +457,9 @@ msgstr "システム言語"
 
 msgid "Display Scale"
 msgstr "表示スケール"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "ダーク"

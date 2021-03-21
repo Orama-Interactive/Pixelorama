@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-03-17 17:35\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -165,6 +165,18 @@ msgstr "Mode Gambar Berulang"
 msgid "Window Transparency"
 msgstr ""
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
@@ -213,8 +225,14 @@ msgstr "Tab baru"
 msgid "Spritesheet (new tab)"
 msgstr ""
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Frame Baru"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Layer baru"
@@ -233,6 +251,9 @@ msgstr "Frame horisontal:"
 
 msgid "Vertical frames:"
 msgstr "Frame vertikal:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Tipe kuas:"
@@ -435,6 +456,9 @@ msgid "System Language"
 msgstr "Bahasa Sistem"
 
 msgid "Display Scale"
+msgstr ""
+
+msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"

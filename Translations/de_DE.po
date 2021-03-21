@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-03-17 19:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,7 +163,19 @@ msgid "Tile Mode"
 msgstr "Kachelmodus"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Fenstertransparenz"
+
+msgid "Panel Layout"
+msgstr "Panel-Layout"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Widescreen"
+msgstr "Breitbild"
+
+msgid "Tallscreen"
+msgstr "Hochbildschirm"
 
 msgid "Mirror View"
 msgstr "Spiegel-Ansicht"
@@ -213,8 +225,14 @@ msgstr "Neuer Tab"
 msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (neuer Tab)"
 
+msgid "Spritesheet (new layer)"
+msgstr "Spritesheet (neue Ebene)"
+
 msgid "New frame"
 msgstr "Neuer Frame"
+
+msgid "Replace frame"
+msgstr "Frame ersetzen"
 
 msgid "New layer"
 msgstr "Neue Ebene"
@@ -233,6 +251,9 @@ msgstr "Horizontale Frames:"
 
 msgid "Vertical frames:"
 msgstr "Vertikale Frames:"
+
+msgid "Start frame:"
+msgstr "Startframe:"
 
 msgid "Brush type:"
 msgstr "Pinseltyp:"
@@ -435,6 +456,9 @@ msgstr "Systemsprache"
 
 msgid "Display Scale"
 msgstr "Bildschirmgröße"
+
+msgid "Dim interface on dialog popup"
+msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
 
 msgid "Dark"
 msgstr "Dunkel"

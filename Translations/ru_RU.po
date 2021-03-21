@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-02-02 17:56\n"
+"PO-Revision-Date: 2021-03-17 17:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,6 +165,18 @@ msgstr "Бесшовный режим"
 msgid "Window Transparency"
 msgstr "Прозрачность окна"
 
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr "Зеркальный вид"
 
@@ -213,8 +225,14 @@ msgstr "Новая вкладка"
 msgid "Spritesheet (new tab)"
 msgstr "Таблица спрайтов (новая вкладка)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Новый кадр"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Новый слой"
@@ -233,6 +251,9 @@ msgstr "Кадров по горизонтали:"
 
 msgid "Vertical frames:"
 msgstr "Кадров по вертикали:"
+
+msgid "Start frame:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Тип кисти:"
@@ -436,6 +457,9 @@ msgstr "Системный язык"
 
 msgid "Display Scale"
 msgstr "Масштаб экрана"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "Тёмная"
@@ -1445,10 +1469,10 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Портретная"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Горизонтальное"
 
 msgid "Templates:"
 msgstr "Шаблоны:"
