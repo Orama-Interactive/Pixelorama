@@ -53,6 +53,5 @@ func _on_PaletteGrid_gui_input(event) -> void:
 			drag_start_position = event.position + Vector2(h_slider.value, v_slider.value) * PaletteSwatch.SWATCH_SIZE
 
 	if event is InputEventMouseMotion and drag_started:
-		# Sets sliders
 		h_slider.value = (drag_start_position.x - event.position.x) / PaletteSwatch.SWATCH_SIZE.x
 		v_slider.value = (drag_start_position.y - event.position.y) / PaletteSwatch.SWATCH_SIZE.y

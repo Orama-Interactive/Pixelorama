@@ -7,6 +7,7 @@ signal swatch_dropped(source_index, target_index)
 
 const PaletteSwatchScene := preload("res://src/Palette/PaletteSwatch.tscn")
 
+# Must be integer values
 const MAX_GRID_SIZE = Vector2(8, 8)
 
 var swatches := [] # PaletteSwatch
@@ -127,7 +128,6 @@ func reset_empty_swatches_color() -> void:
 
 func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
 	var palette_index = convert_grid_index_to_palette_index(index)
-	#print("pressed ", palette_index)
 	emit_signal("swatch_pressed", mouse_button, palette_index)
 
 
@@ -139,18 +139,15 @@ func _on_PaletteSwatch_double_clicked(mouse_button: int, position: Vector2, inde
 func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:
 	var palette_source_index = convert_grid_index_to_palette_index(source_index)
 	var palette_target_index = convert_grid_index_to_palette_index(target_index)
-	#print("dropped ", palette_source_index, " ", palette_target_index)
 	emit_signal("swatch_dropped", palette_source_index, palette_target_index)
 
 
 # Grid index adds grid window origin
 func convert_grid_index_to_palette_index(index: int) -> int:
-	#return index + (grid_window_origin.y * displayed_palette.width + grid_window_origin.x) + (index / 8 * (displayed_palette.width - 8))
-	return (index / int(grid_size.x) + grid_window_origin.y) * displayed_palette.width + (index % int(grid_size.x) + grid_window_origin.x)
+	return int(index / grid_size.x + grid_window_origin.y) * displayed_palette.width + (index % int(grid_size.x) + grid_window_origin.x)
 
 
 func convert_palette_index_to_grid_index(palette_index: int) -> int:
-	#return palette_index - (grid_window_origin.y * 8 + grid_window_origin.x) - (palette_index / displayed_palette.width * (displayed_palette.width - 8))
-	var x = palette_index % int(displayed_palette.width)
-	var y = palette_index / int(displayed_palette.height)
-	return (x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x
+	var x: int = palette_index % displayed_palette.width
+	var y: int = palette_index / displayed_palette.height
+	return int((x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x)
