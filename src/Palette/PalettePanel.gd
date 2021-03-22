@@ -184,7 +184,7 @@ func _on_EditPaletteDialog_deleted() -> void:
 
 
 func _color_changed(_color: Color, button: int) -> void:
-	if hidden_color_picker.get_popup().visible == false:
+	if hidden_color_picker.get_popup().visible == false and Palettes.get_current_palette():
 		# Unselect swatches when tools color is changed
 		var swatch_to_unselect = -1
 

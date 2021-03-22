@@ -151,26 +151,23 @@ script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
 margin_right = 282.0
-margin_bottom = 12.0
 size_flags_horizontal = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer"]
 margin_right = 282.0
-margin_bottom = 12.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer"]
-margin_left = 133.0
-margin_right = 149.0
-margin_bottom = 12.0
+margin_left = 141.0
+margin_right = 141.0
 
 [node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer/HBoxContainer"]
-margin_bottom = 12.0
 rect_pivot_offset = Vector2( -123.214, 138.568 )
 columns = 8
 script = ExtResource( 5 )
 
 [node name="VScrollBar" type="VScrollBar" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer/HBoxContainer"]
+visible = false
 margin_left = 4.0
 margin_right = 16.0
 margin_bottom = 12.0
@@ -179,13 +176,14 @@ page = 8.0
 custom_step = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
-margin_top = 16.0
+margin_top = 4.0
 margin_right = 282.0
-margin_bottom = 28.0
+margin_bottom = 4.0
 custom_constants/margin_right = 20
 custom_constants/margin_left = 6
 
 [node name="HScrollBar" type="HScrollBar" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/MarginContainer"]
+visible = false
 margin_left = 6.0
 margin_right = 262.0
 margin_bottom = 12.0
@@ -198,12 +196,14 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 317.0
 margin_bottom = 442.0
+rect_min_size = Vector2( 250, 87.5 )
 
 [node name="CreatePaletteDialog" parent="." instance=ExtResource( 4 )]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 317.0
 margin_bottom = 312.0
+rect_min_size = Vector2( 250, 87.5 )
 
 [node name="HiddenColorPickerButton" type="ColorPickerButton" parent="."]
 visible = false

@@ -50,6 +50,9 @@ func display_palette(palette: Palette) -> void:
 	if not palette:
 		return
 
+	if swatches.size() == 0:
+		init_swatches()
+
 	if palette.width < MAX_GRID_SIZE.x or palette.height < MAX_GRID_SIZE.y:
 		grid_size = Vector2(palette.width, palette.height)
 		clear_swatches()

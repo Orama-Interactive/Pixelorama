@@ -281,24 +281,32 @@ func load_palettes() -> void:
 	Global.directory_module.ensure_xdg_user_dirs_exist()
 	var search_locations = Global.directory_module.get_palette_search_path_in_order()
 	var priority_ordered_files := get_palette_priority_file_map(search_locations)
+	var palettes_write_path: String = Global.directory_module.get_palette_write_path()
 
 	# Iterate backwards, so any palettes defined in default files
 	# get overwritten by those of the same name in user files
 	search_locations.invert()
 	priority_ordered_files.invert()
 	for i in range(len(search_locations)):
+		# If palette is not in palettes write path - make it's copy in the write path
+		var make_copy := false
+		if search_locations[i] != palettes_write_path:
+			make_copy = true
+
 		var base_directory : String = search_locations[i]
 		var palette_files : Array = priority_ordered_files[i]
 		for file_name in palette_files:
 			var palette: Palette = load(base_directory.plus_file(file_name))
 			if palette:
+				if make_copy:
+					# Makes a copy of the palette
+					save_palette(palette)
 				palette.resource_name = palette.resource_path.get_file().trim_suffix(".tres")
 				palettes[palette.resource_path] = palette
 
 				# Store index of the default palette
 				if palette.name == DEFAULT_PALETTE_NAME:
 					select_palette(palette.resource_path)
-
 
 	if not current_palette && palettes.size() > 0:
 		select_palette(palettes.keys()[0])
@@ -358,8 +366,7 @@ func get_palette_files(path : String ) -> Array:
 
 
 # Locate the highest priority palette by the given relative filename
-# If none is found in the directories, then do nothing and return
-# null
+# If none is found in the directories, then do nothing and return null
 func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> String:
 	var priority_fmap : Array = get_palette_priority_file_map(looking_paths)
 	for i in range(len(looking_paths)):
@@ -367,7 +374,6 @@ func get_best_palette_file_location(looking_paths: Array, fname: String):  # -> 
 		var the_files : Array = priority_fmap[i]
 		if the_files.has(fname):
 			return base_path.plus_file(fname)
-
 	return null
 
 
