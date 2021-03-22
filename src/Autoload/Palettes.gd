@@ -407,6 +407,13 @@ func import_palette(path: String) -> void:
 			var err := image.load(path)
 			if !err:
 				palette = import_image_palette(path, image)
+		"json":
+			var file = File.new()
+			if file.file_exists(path):
+				file.open(path, File.READ)
+				var text = file.get_as_text()
+				file.close()
+				palette = import_json_palette(text)
 
 	if palette:
 		var palette_path := save_palette(palette)
@@ -416,7 +423,7 @@ func import_palette(path: String) -> void:
 		Global.palette_panel.select_palette(palette_path)
 
 
-func import_gpl(path : String, text : String) -> Palette:
+func import_gpl(path: String, text: String) -> Palette:
 	# Refer to app/core/gimppalette-load.c of the GIMP for the "living spec"
 	var result : Palette = null
 	var lines = text.split('\n')
@@ -466,7 +473,7 @@ func import_gpl(path : String, text : String) -> Palette:
 	return result
 
 
-func import_pal_palette(path : String, text : String) -> Palette:
+func import_pal_palette(path: String, text: String) -> Palette:
 	var result: Palette = null
 
 	var lines = text.split('\n')
@@ -490,7 +497,7 @@ func import_pal_palette(path : String, text : String) -> Palette:
 	return result
 
 
-func import_image_palette(path: String, image : Image) -> Palette:
+func import_image_palette(path: String, image: Image) -> Palette:
 	var result: Palette = Palette.new(path.get_basename().get_file())
 
 	var height: int = image.get_height()
@@ -504,5 +511,30 @@ func import_image_palette(path: String, image : Image) -> Palette:
 			if not result.has_color(color):
 				result.add_color(color)
 	image.unlock()
+
+	return result
+
+
+# Import of deprecated older json palette format
+func import_json_palette(text: String):
+	var result: Palette = Palette.new()
+	var result_json = JSON.parse(text)
+
+	if result_json.error != OK:  # If parse has errors
+		printerr("JSON palette import error")
+		printerr("Error: ", result_json.error)
+		printerr("Error Line: ", result_json.error_line)
+		printerr("Error String: ", result_json.error_string)
+		result = null
+	else:  # If parse OK
+		var data = result_json.result
+		if data.has("name"): # If data is 'valid' palette file
+			result.name = data.name
+			if data.has("comments"):
+				result.comment = data.comments
+			if data.has("colors"):
+				for color_data in data.colors:
+					var color: Color = Color(color_data.data)
+					result.add_color(color)
 
 	return result
