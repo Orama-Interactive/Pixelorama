@@ -302,6 +302,8 @@ func load_palettes() -> void:
 					# Makes a copy of the palette
 					save_palette(palette)
 				palette.resource_name = palette.resource_path.get_file().trim_suffix(".tres")
+				# On Windows for some reason paths can contain "res://" in front of them which breaks saving
+				palette.resource_path = palette.resource_path.trim_prefix("res://")
 				palettes[palette.resource_path] = palette
 
 				# Store index of the default palette
