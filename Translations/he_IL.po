@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2021-03-23 19:52\n"
+"PO-Revision-Date: 2021-03-23 20:03\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -127,7 +127,7 @@ msgid "Scale Image"
 msgstr "הגדל/ הקטן תמונה"
 
 msgid "Pixels"
-msgstr ""
+msgstr "פיקסלים"
 
 msgid "Percentage"
 msgstr ""
@@ -163,7 +163,7 @@ msgid "Tile Mode"
 msgstr "מצב אריח"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "שקיפות חלון"
 
 msgid "Panel Layout"
 msgstr ""
@@ -265,7 +265,7 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
+msgstr "מברשת אקראית"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
