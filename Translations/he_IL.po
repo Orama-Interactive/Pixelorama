@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-03-23 19:52\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -277,7 +277,7 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "הקובץ קיים. להחליף?"
 
 msgid "File %s already exists. Overwrite?"
 msgstr ""
