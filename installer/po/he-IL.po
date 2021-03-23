@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2021-03-23 19:52\n"
+"PO-Revision-Date: 2021-03-23 20:04\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "MIME-Version: 1.0\n"
@@ -56,15 +56,15 @@ msgstr "הוסף קיצור דרך לתפריט התחל עבור ${APPNAME}."
 #. DESC_SecDesktop
 #: .\pixelorama.nsi:180
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "הוסף קיצור קיצור דרך לשולחן העבודה עבור ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: .\pixelorama.nsi:181
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "הסר ${APPNAME} ${APPVERSION} ומחק את כל קיצורי הדרך."
 
 #. DESC_un.SecConfig
 #: .\pixelorama.nsi:182
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "הסר קבצי הגדרות עבור ${APPNAME}."
 
