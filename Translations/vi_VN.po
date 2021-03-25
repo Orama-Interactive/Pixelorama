@@ -10,73 +10,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-03-25 15:15\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Huỷ"
 
 msgid "Open"
-msgstr ""
+msgstr "Mở"
 
 msgid "Save"
-msgstr ""
+msgstr "Lưu"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Vui lòng xác nhận..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Tên Tệp:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Kích thước hình ảnh"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Kích thước tấm nền"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Kích thước khung hình"
 
 msgid "Width:"
-msgstr ""
+msgstr "Rộng:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Cao:"
 
 msgid "Center"
-msgstr ""
+msgstr "Căn giữa"
 
 msgid "File"
-msgstr ""
+msgstr "Tệp"
 
 msgid "Edit"
-msgstr ""
+msgstr "Chỉnh sửa"
 
 msgid "View"
-msgstr ""
+msgstr "Xem"
 
 msgid "Image"
-msgstr ""
+msgstr "Hình ảnh"
 
 msgid "Effects"
-msgstr ""
+msgstr "Hiệu ứng"
 
 msgid "Help"
-msgstr ""
+msgstr "Trợ giúp"
 
 msgid "New"
-msgstr ""
+msgstr "Mới"
 
 msgid "New..."
-msgstr ""
+msgstr "Mới..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Mở..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Lưu..."
 
 msgid "Save as..."
 msgstr ""
