@@ -97,7 +97,7 @@ func draw_start(position : Vector2) -> void:
 	Global.canvas.selection.move_content_confirm()
 	if Global.current_project.layers[Global.current_project.current_layer].locked or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position):
 		return
-	if Global.current_project.selected_pixels and not position in Global.current_project.selected_pixels:
+	if Global.current_project.has_selection() and not Global.current_project.selection_bitmap.get_bit(position):
 		return
 	var undo_data = _get_undo_data()
 	if _fill_area == 0:
@@ -124,17 +124,14 @@ func fill_in_color(position : Vector2) -> void:
 			return
 
 	image.lock()
-	var pixels := []
-	if project.selected_pixels:
-		pixels = project.selected_pixels.duplicate()
-	else:
-		for x in Global.current_project.size.x:
-			for y in Global.current_project.size.y:
-				pixels.append(Vector2(x, y))
 
-	for i in pixels:
-		if image.get_pixelv(i).is_equal_approx(color):
-			_set_pixel(image, i.x, i.y, tool_slot.color)
+	for x in Global.current_project.size.x:
+		for y in Global.current_project.size.y:
+			var pos := Vector2(x, y)
+			if project.has_selection() and not project.selection_bitmap.get_bit(pos):
+				continue
+			if image.get_pixelv(pos).is_equal_approx(color):
+				_set_pixel(image, x, y, tool_slot.color)
 
 
 func fill_in_area(position : Vector2) -> void:
@@ -146,19 +143,9 @@ func fill_in_area(position : Vector2) -> void:
 	var mirror_y = project.y_symmetry_point - position.y
 	var mirror_x_inside : bool
 	var mirror_y_inside : bool
-	var entire_image_selected : bool = project.selected_pixels.empty()
-	if entire_image_selected:
-		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
-		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
-	else:
-		var selected_pixels_x := []
-		var selected_pixels_y := []
-		for i in project.selected_pixels:
-			selected_pixels_x.append(i.x)
-			selected_pixels_y.append(i.y)
 
-		mirror_x_inside = mirror_x in selected_pixels_x
-		mirror_y_inside = mirror_y in selected_pixels_y
+	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, position.y))
+	mirror_y_inside = project.can_pixel_get_drawn(Vector2(position.x, mirror_y))
 
 	if tool_slot.horizontal_mirror and mirror_x_inside:
 		_flood_fill(Vector2(mirror_x, position.y))
@@ -203,13 +190,8 @@ func _flood_fill(position : Vector2) -> void:
 
 func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
 	var project : Project = Global.current_project
-	var entire_image_selected : bool = project.selected_pixels.empty()
-	if entire_image_selected:
-		if not _get_draw_rect().has_point(Vector2(x, y)):
-			return
-	else:
-		if not Vector2(x, y) in project.selected_pixels:
-			return
+	if !project.can_pixel_get_drawn(Vector2(x, y)):
+		return
 
 	if _fill_with == 0 or _pattern == null:
 		image.set_pixel(x, y, color)

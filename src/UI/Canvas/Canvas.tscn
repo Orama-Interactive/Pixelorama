@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/UI/Canvas/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/Grid.gd" type="Script" id=2]
@@ -8,9 +8,19 @@
 [ext_resource path="res://src/UI/Canvas/PixelGrid.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/Canvas/Previews.gd" type="Script" id=7]
 [ext_resource path="res://src/UI/Canvas/Selection.gd" type="Script" id=8]
+[ext_resource path="res://src/Shaders/MarchingAntsOutline.shader" type="Shader" id=9]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 8 )
+shader_param/first_color = Color( 1, 1, 1, 1 )
+shader_param/second_color = Color( 0, 0, 0, 1 )
+shader_param/animated = true
+shader_param/width = 0.05
+shader_param/frequency = 200.0
+shader_param/stripe_direction = 0.5
 
 [node name="Canvas" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,6 +49,10 @@ script = ExtResource( 2 )
 
 [node name="Selection" type="Node2D" parent="."]
 script = ExtResource( 7 )
+
+[node name="MarchingAntsOutline" type="Sprite" parent="Selection"]
+material = SubResource( 2 )
+centered = false
 
 [node name="Indicators" type="Node2D" parent="."]
 script = ExtResource( 3 )

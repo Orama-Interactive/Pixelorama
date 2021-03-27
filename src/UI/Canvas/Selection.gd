@@ -1,32 +1,9 @@
 extends Node2D
 
 
-class SelectionPolygon:
-	var border := []
-	var rect_outline : Rect2
-
-
-	func _init(rect : Rect2) -> void:
-		self.rect_outline = rect
-		border.append(rect.position)
-		border.append(Vector2(rect.end.x, rect.position.y))
-		border.append(rect.end)
-		border.append(Vector2(rect.position.x, rect.end.y))
-
-
-	func set_rect(rect : Rect2) -> void:
-		self.rect_outline = rect
-		border[0] = rect.position
-		border[1] = Vector2(rect.end.x, rect.position.y)
-		border[2] = rect.end
-		border[3] = Vector2(rect.position.x, rect.end.y)
-
-
 class Clipboard:
 	var image := Image.new()
-	var polygons := [] # Array of SelectionPolygons
-	var position := Vector2.ZERO
-	var selected_pixels := []
+	var selection_bitmap := BitMap.new()
 	var big_bounding_rectangle := Rect2()
 
 
@@ -54,7 +31,6 @@ class Gizmo:
 var clipboard := Clipboard.new()
 var tween : Tween
 var line_offset := Vector2.ZERO setget _offset_changed
-var move_preview_location := Vector2.ZERO
 var is_moving_content := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 var preview_image := Image.new()
@@ -63,6 +39,8 @@ var undo_data : Dictionary
 var gizmos := [] # Array of Gizmos
 var dragged_gizmo : Gizmo = null
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
+
+onready var marching_ants_outline : Sprite = $MarchingAntsOutline
 
 
 func _ready() -> void:
@@ -153,96 +131,44 @@ func move_borders_start() -> void:
 
 
 func move_borders(move : Vector2) -> void:
+	marching_ants_outline.offset += move
 	self.big_bounding_rectangle.position += move
-	for polygon in Global.current_project.selections:
-		polygon.rect_outline.position += move
-		var borders_copy = polygon.border.duplicate()
-		for i in borders_copy.size():
-			borders_copy[i] += move
-
-		polygon.border = borders_copy
 
 
 func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
+	marching_ants_outline.offset = Vector2.ZERO
 	var diff := new_pos - old_pos
-	var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
-	for i in selected_pixels_copy.size():
-		selected_pixels_copy[i] += diff
+	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
+	Global.current_project.move_bitmap_values(selected_bitmap_copy, diff)
 
-	Global.current_project.selected_pixels = selected_pixels_copy
+	Global.current_project.selection_bitmap = selected_bitmap_copy
 	commit_undo("Rectangle Select", undo_data)
 
 
-func select_rect(merge := true) -> void:
+func select_rect(rect : Rect2, select := true) -> void:
 	var project : Project = Global.current_project
-	var polygon : SelectionPolygon = Global.current_project.selections[-1]
-	var selected_pixels_copy = project.selected_pixels.duplicate()
-	var polygon_pixels := []
-	for x in range(polygon.rect_outline.position.x, polygon.rect_outline.end.x):
-		for y in range(polygon.rect_outline.position.y, polygon.rect_outline.end.y):
-			var pos := Vector2(x, y)
-			polygon_pixels.append(pos)
-			if pos in selected_pixels_copy or !merge:
-				continue
-			selected_pixels_copy.append(pos)
+	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
+	var offset_position := Vector2.ZERO
+	if big_bounding_rectangle.position.x < 0:
+		rect.position.x -= big_bounding_rectangle.position.x
+		offset_position.x = big_bounding_rectangle.position.x
+	if big_bounding_rectangle.position.y < 0:
+		rect.position.y -= big_bounding_rectangle.position.y
+		offset_position.y = big_bounding_rectangle.position.y
 
-	project.selected_pixels = selected_pixels_copy
-	if polygon_pixels.size() == 0:
-		project.selections.erase(polygon)
-		return
-	if merge:
-		merge_selections(polygon)
-	else:
-		clip_selections(polygon, polygon_pixels)
-		project.selections.erase(polygon)
-	self.big_bounding_rectangle = get_big_bounding_rectangle()
+	if offset_position != Vector2.ZERO:
+		big_bounding_rectangle.position -= offset_position
+		project.move_bitmap_values(selection_bitmap_copy, -offset_position)
 
+	selection_bitmap_copy.set_bit_rect(rect, select)
+	big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 
-func merge_selections(polygon : SelectionPolygon) -> void:
-	if Global.current_project.selections.size() < 2:
-		return
-	var to_erase := []
-	for p in Global.current_project.selections:
-		if p == polygon:
-			continue
-		var arr := Geometry.merge_polygons_2d(polygon.border, p.border)
-		if arr.size() == 1: # if the selections intersect
-			polygon.border = arr[0]
-			polygon.rect_outline = polygon.rect_outline.merge(p.rect_outline)
-			to_erase.append(p)
+	if offset_position != Vector2.ZERO:
+		big_bounding_rectangle.position += offset_position
+		project.move_bitmap_values(selection_bitmap_copy, offset_position)
 
-	for p in to_erase:
-		Global.current_project.selections.erase(p)
-
-
-func clip_selections(polygon : SelectionPolygon, polygon_pixels : Array) -> void:
-	var to_erase := []
-	var to_append := []
-	for p in Global.current_project.selections:
-		if p == polygon:
-			continue
-		var arr := Geometry.clip_polygons_2d(p.border, polygon.border)
-		if arr.size() == 0: # if the new selection completely overlaps the current
-			to_erase.append(p)
-		else:
-			p.border = arr[0]
-			p.rect_outline = get_bounding_rectangle(p.border)
-			for i in range(1, arr.size()):
-				var rect = get_bounding_rectangle(arr[i])
-				var new_polygon := SelectionPolygon.new(rect)
-				new_polygon.border = arr[i]
-				to_append.append(new_polygon)
-
-		var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
-		for pixel in polygon_pixels:
-			selected_pixels_copy.erase(pixel)
-		Global.current_project.selected_pixels = selected_pixels_copy
-
-	for p in to_erase:
-		Global.current_project.selections.erase(p)
-
-	for p in to_append:
-		Global.current_project.selections.append(p)
+	project.selection_bitmap = selection_bitmap_copy
+	self.big_bounding_rectangle = big_bounding_rectangle # call getter method
 
 
 func move_content_start() -> void:
@@ -254,7 +180,6 @@ func move_content_start() -> void:
 
 func move_content(move : Vector2) -> void:
 	move_borders(move)
-	move_preview_location += move
 
 
 func move_content_confirm() -> void:
@@ -263,12 +188,12 @@ func move_content_confirm() -> void:
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
-	var selected_pixels_copy = Global.current_project.selected_pixels.duplicate()
-	for i in selected_pixels_copy.size():
-		selected_pixels_copy[i] += move_preview_location
-	Global.current_project.selected_pixels = selected_pixels_copy
+	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
+	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
+
+	Global.current_project.selection_bitmap = selected_bitmap_copy
 	preview_image = Image.new()
-	move_preview_location = Vector2.ZERO
+	marching_ants_outline.offset = Vector2.ZERO
 	is_moving_content = false
 	commit_undo("Move Selection", undo_data)
 
@@ -276,15 +201,9 @@ func move_content_confirm() -> void:
 func move_content_cancel() -> void:
 	if preview_image.is_empty():
 		return
-	self.big_bounding_rectangle.position -= move_preview_location
-	for polygon in Global.current_project.selections:
-		polygon.rect_outline.position -= move_preview_location
-		var borders_copy = polygon.border.duplicate()
-		for i in borders_copy.size():
-			borders_copy[i] -= move_preview_location
-		polygon.border = borders_copy
+	self.big_bounding_rectangle.position -= marching_ants_outline.offset
+	marching_ants_outline.offset = Vector2.ZERO
 
-	move_preview_location = Vector2.ZERO
 	is_moving_content = false
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
@@ -299,22 +218,14 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_property(project, "selections", redo_data["selections"])
-	project.undo_redo.add_do_property(project, "selected_pixels", redo_data["selected_pixels"])
+	project.undo_redo.add_do_property(project, "selection_bitmap", redo_data["selection_bitmap"])
 	project.undo_redo.add_do_property(self, "big_bounding_rectangle", redo_data["big_bounding_rectangle"])
+	project.undo_redo.add_do_property(marching_ants_outline, "offset", redo_data["outline_offset"])
 
-	project.undo_redo.add_undo_property(project, "selections", _undo_data["selections"])
-	project.undo_redo.add_undo_property(project, "selected_pixels", _undo_data["selected_pixels"])
+	project.undo_redo.add_undo_property(project, "selection_bitmap", _undo_data["selection_bitmap"])
 	project.undo_redo.add_undo_property(self, "big_bounding_rectangle", _undo_data["big_bounding_rectangle"])
+	project.undo_redo.add_undo_property(marching_ants_outline, "offset", _undo_data["outline_offset"])
 
-	var i := 0
-	for polygon in Global.current_project.selections:
-		if "border_%s" % i in _undo_data:
-			project.undo_redo.add_do_property(polygon, "border", redo_data["border_%s" % i])
-			project.undo_redo.add_do_property(polygon, "rect_outline", redo_data["rect_outline_%s" % i])
-			project.undo_redo.add_undo_property(polygon, "border", _undo_data["border_%s" % i])
-			project.undo_redo.add_undo_property(polygon, "rect_outline", _undo_data["rect_outline_%s" % i])
-		i += 1
 
 	if "image_data" in _undo_data:
 		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
@@ -330,14 +241,9 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 func _get_undo_data(undo_image : bool) -> Dictionary:
 	var data := {}
 	var project := Global.current_project
-	var i := 0
-	data["selections"] = project.selections
-	data["selected_pixels"] = project.selected_pixels
+	data["selection_bitmap"] = project.selection_bitmap
 	data["big_bounding_rectangle"] = big_bounding_rectangle
-	for polygon in Global.current_project.selections:
-		data["border_%s" % i] = polygon.border
-		data["rect_outline_%s" % i] = polygon.rect_outline
-		i += 1
+	data["outline_offset"] = marching_ants_outline.offset
 
 	if undo_image:
 		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
@@ -356,27 +262,21 @@ func cut() -> void:
 
 func copy() -> void:
 	var project := Global.current_project
-	if project.selected_pixels.empty():
+	if !project.has_selection():
 		return
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	var to_copy := Image.new()
 	to_copy = image.get_rect(big_bounding_rectangle)
-	if project.selections.size() > 1 or project.selections[0].border.size() > 4:
-		to_copy.lock()
-		# Only remove unincluded pixels if the selection is not a single rectangle
-		for x in to_copy.get_size().x:
-			for y in to_copy.get_size().y:
-				var pos := Vector2(x, y)
-				if not (pos + big_bounding_rectangle.position) in project.selected_pixels:
-					to_copy.set_pixelv(pos, Color(0))
-		to_copy.unlock()
+	to_copy.lock()
+	# Only remove unincluded pixels if the selection is not a single rectangle
+	for x in to_copy.get_size().x:
+		for y in to_copy.get_size().y:
+			var pos := Vector2(x, y)
+			if not project.selection_bitmap.get_bit(pos + big_bounding_rectangle.position):
+				to_copy.set_pixelv(pos, Color(0))
+	to_copy.unlock()
 	clipboard.image = to_copy
-	for selection in project.selections:
-		var selection_duplicate := SelectionPolygon.new(selection.rect_outline)
-		selection_duplicate.border = selection.border
-		clipboard.polygons.append(selection_duplicate)
-	clipboard.position = big_bounding_rectangle.position
-	clipboard.selected_pixels = project.selected_pixels.duplicate()
+	clipboard.selection_bitmap = project.selection_bitmap.duplicate()
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
 
 
@@ -387,21 +287,23 @@ func paste() -> void:
 	var project := Global.current_project
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	clear_selection()
-	project.selections = clipboard.polygons.duplicate()
-	project.selected_pixels = clipboard.selected_pixels.duplicate()
+	project.selection_bitmap = clipboard.selection_bitmap.duplicate()
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
-	image.blend_rect(clipboard.image, Rect2(Vector2.ZERO, project.size), clipboard.position)
+	image.blend_rect(clipboard.image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
 	commit_undo("Draw", _undo_data)
 
 
 func delete() -> void:
 	var project := Global.current_project
-	if project.selected_pixels.empty():
+	if !project.has_selection():
 		return
 	var _undo_data = _get_undo_data(true)
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	for pixel in project.selected_pixels:
-		image.set_pixelv(pixel, Color(0))
+	for x in big_bounding_rectangle.size.x:
+		for y in big_bounding_rectangle.size.y:
+			var pos := Vector2(x, y) + big_bounding_rectangle.position
+			if project.can_pixel_get_drawn(pos):
+				image.set_pixelv(pos, Color(0))
 	commit_undo("Draw", _undo_data)
 
 
@@ -410,24 +312,19 @@ func select_all() -> void:
 	var _undo_data = _get_undo_data(false)
 	clear_selection()
 	var full_rect = Rect2(Vector2.ZERO, project.size)
-	var new_selection = SelectionPolygon.new(full_rect)
-	var selections : Array = project.selections.duplicate()
-	selections.append(new_selection)
-	project.selections = selections
-	select_rect()
+	select_rect(full_rect)
 	commit_undo("Rectangle Select", _undo_data)
 
 
 func clear_selection(use_undo := false) -> void:
 	move_content_confirm()
+	var project := Global.current_project
+	var full_rect = Rect2(Vector2.ZERO, project.selection_bitmap.get_size())
 	var _undo_data = _get_undo_data(false)
-	var selections : Array = Global.current_project.selections.duplicate()
-	var selected_pixels : Array = Global.current_project.selected_pixels.duplicate()
-	selected_pixels.clear()
-	Global.current_project.selected_pixels = selected_pixels
-	selections.clear()
-	Global.current_project.selections = selections
+	select_rect(full_rect, false)
+
 	self.big_bounding_rectangle = Rect2()
+	marching_ants_outline.offset = Vector2.ZERO
 	if use_undo:
 		commit_undo("Clear Selection", _undo_data)
 
@@ -439,23 +336,6 @@ func _draw() -> void:
 		_position.x = _position.x + Global.current_project.size.x
 		_scale.x = -1
 	draw_set_transform(_position, rotation, _scale)
-	for p in Global.current_project.selections:
-		var points : Array = p.border
-		for i in range(1, points.size() + 1):
-			var point0 = points[i - 1]
-			var point1
-			if i >= points.size():
-				point1 = points[0]
-			else:
-				point1 = points[i]
-			var start_x = min(point0.x, point1.x)
-			var start_y = min(point0.y, point1.y)
-			var end_x = max(point0.x, point1.x)
-			var end_y = max(point0.y, point1.y)
-
-			var start := Vector2(start_x, start_y)
-			var end := Vector2(end_x, end_y)
-			draw_dashed_line(start, end, Color.white, Color.black, 1.0, 1.0, false)
 
 	if big_bounding_rectangle.size > Vector2.ZERO:
 		for gizmo in gizmos: # Draw gizmos
@@ -472,83 +352,6 @@ func _draw() -> void:
 	draw_set_transform(position, rotation, scale)
 
 
-# Taken and modified from https://github.com/juddrgledhill/godot-dashed-line
-func draw_dashed_line(from : Vector2, to : Vector2, color : Color, color2 : Color, width := 1.0, dash_length := 1.0, cap_end := false, antialiased := false) -> void:
-	var length = (to - from).length()
-	var normal = (to - from).normalized()
-	var dash_step = normal * dash_length
-
-	var horizontal : bool = from.y == to.y
-	var _offset : Vector2
-	if horizontal:
-		_offset = Vector2(line_offset.x, 0)
-	else:
-		_offset = Vector2(0, line_offset.y)
-
-	if length < dash_length: # not long enough to dash
-		draw_line(from, to, color, width, antialiased)
-		return
-
-	else:
-		var draw_flag = true
-		var segment_start = from
-		var steps = length/dash_length
-		for _start_length in range(0, steps + 1):
-			var segment_end = segment_start + dash_step
-
-			var start = segment_start + _offset
-			start.x = min(start.x, to.x)
-			start.y = min(start.y, to.y)
-
-			var end = segment_end + _offset
-			end.x = min(end.x, to.x)
-			end.y = min(end.y, to.y)
-			if draw_flag:
-				draw_line(start, end, color, width, antialiased)
-			else:
-				draw_line(start, end, color2, width, antialiased)
-				if _offset.length() < 1:
-					draw_line(from, from + _offset, color2, width, antialiased)
-				else:
-					var from_offseted : Vector2 = from + _offset
-					var halfway_point : Vector2 = from_offseted
-					if horizontal:
-						halfway_point += Vector2.LEFT
-					else:
-						halfway_point += Vector2.UP
-
-					from_offseted.x = min(from_offseted.x, to.x)
-					from_offseted.y = min(from_offseted.y, to.y)
-					draw_line(halfway_point, from_offseted, color2, width, antialiased)
-					draw_line(from, halfway_point, color, width, antialiased)
-
-			segment_start = segment_end
-			draw_flag = !draw_flag
-
-		if cap_end:
-			draw_line(segment_start, to, color, width, antialiased)
-
-
-func get_bounding_rectangle(borders : Array) -> Rect2:
-	var rect := Rect2()
-	var xmin = borders[0].x
-	var xmax = borders[0].x
-	var ymin = borders[0].y
-	var ymax = borders[0].y
-	for edge in borders:
-		if edge.x < xmin:
-			xmin = edge.x
-		if edge.x > xmax:
-			xmax = edge.x
-		if edge.y < ymin:
-			ymin = edge.y
-		if edge.y > ymax:
-			ymax = edge.y
-	rect.position = Vector2(xmin, ymin)
-	rect.end = Vector2(xmax, ymax)
-	return rect
-
-
 func get_preview_image() -> void:
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
@@ -559,7 +362,7 @@ func get_preview_image() -> void:
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
 				var pos := Vector2(x, y)
-				if not (pos + big_bounding_rectangle.position) in project.selected_pixels:
+				if not project.selection_bitmap.get_bit(pos + big_bounding_rectangle.position):
 					preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
 		preview_image.unlock()
 		preview_image_texture = ImageTexture.new()
@@ -575,9 +378,6 @@ func get_big_bounding_rectangle() -> Rect2:
 	# Returns a rectangle that contains the entire selection, with multiple polygons
 	var project : Project = Global.current_project
 	var rect := Rect2()
-	if project.selections.size() == 0:
-		return rect
-	rect = project.selections[0].rect_outline
-	for i in range(1, project.selections.size()):
-		rect = rect.merge(project.selections[i].rect_outline)
+	var image : Image = project.bitmap_to_image(project.selection_bitmap)
+	rect = image.get_used_rect()
 	return rect

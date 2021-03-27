@@ -22,8 +22,8 @@ var y_symmetry_point
 var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
+var selection_bitmap := BitMap.new() setget _selection_bitmap_changed
 var selected_pixels := []
-var selections := [] setget _set_selections # Array of SelectionShape(s)
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
@@ -40,6 +40,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
+	selection_bitmap.create(size)
 	update_tile_mode_rects()
 
 	undo_redo = UndoRedo.new()
@@ -86,9 +87,12 @@ func commit_redo() -> void:
 	Global.control.redone = false
 
 
-func _set_selections(value : Array) -> void:
-	selections = value
-#	Global.selection_rectangl.set_rect(value)
+func _selection_bitmap_changed(value : BitMap) -> void:
+	selection_bitmap = value
+	var image : Image = bitmap_to_image(selection_bitmap)
+	var image_texture := ImageTexture.new()
+	image_texture.create_from_image(image, 0)
+	Global.canvas.selection.marching_ants_outline.texture = image_texture
 
 
 func change_project() -> void:
@@ -210,7 +214,8 @@ func change_project() -> void:
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
-	Global.canvas.selection.big_bounding_rectangle = Global.canvas.selection.get_big_bounding_rectangle()
+	self.selection_bitmap = selection_bitmap # call getter method
+	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
 
 
 func serialize() -> Dictionary:
@@ -587,71 +592,91 @@ func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
 
 
-## Experiments, unused for now
-func get_selection_polygon() -> PoolVector2Array:
-	if !selected_pixels:
-		return PoolVector2Array()
-	var polygon := PoolVector2Array()
-#	var corner = selected_pixels[0]
-	for pix in selected_pixels:
-		var polygon_point = pix
-		var right_n : Vector2 = pix + Vector2.RIGHT
-		var left_n : Vector2 = pix + Vector2.LEFT
-		var down_n : Vector2 = pix + Vector2.DOWN
-		var up_n : Vector2 = pix + Vector2.UP
-
-		var x_axis : bool = right_n in selected_pixels and left_n in selected_pixels
-		var y_axis : bool = down_n in selected_pixels and up_n in selected_pixels
-		if x_axis or y_axis:
-#			if not right_n in selected_pixels and down_n + Vector2.DOWN + Vector2.RIGHT in selected_pixels:
-#				polygon.append(right_n + Vector2.DOWN)
-#			else:
-			continue
-		else:
-			if !(right_n in selected_pixels):
-				polygon_point += Vector2.RIGHT
-			if !(down_n in selected_pixels):
-				polygon_point += Vector2.DOWN
-			polygon.append(polygon_point)
-	polygon = sort_polygon(polygon)
-#	print(polygon)
-	return polygon
+func has_selection(bitmap : BitMap = selection_bitmap) -> bool:
+	return bitmap.get_true_bit_count() > 0
 
 
-func sort_polygon(polygon : PoolVector2Array) -> PoolVector2Array:
-	# Find the center point of the polygon
-	var x := 0
-	var y := 0
-	for p in polygon:
-		x += p.x
-		y += p.y
-	var center := Vector2(x / polygon.size(), y / polygon.size())
-
-	# Sort points by angle from the center
-	var angles := []
-	for p in polygon:
-		angles.append([p, center.angle_to_point(p)])
-	angles.sort_custom(self, "sort_by_angle")
-	polygon.resize(0)
-	for p in angles:
-		polygon.append(p[0])
-	return polygon
-
-
-static func sort_by_angle(a, b) -> bool:
-	if a[1] < b[1]:
+func can_pixel_get_drawn(pixel : Vector2) -> bool:
+	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	if selection_position.x < 0:
+		pixel.x -= selection_position.x
+	if selection_position.y < 0:
+		pixel.y -= selection_position.y
+	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
+		return false
+	if has_selection():
+		return selection_bitmap.get_bit(pixel)
+	else:
 		return true
-	return false
+
+# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
+func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> void:
+	if new_size == bitmap.get_size():
+		return
+	var new_bitmap := BitMap.new()
+	new_bitmap.create(new_size)
+	var lw = min(bitmap.get_size().x, new_size.x)
+	var lh = min(bitmap.get_size().y, new_size.y)
+	for x in lw:
+		for y in lh:
+			new_bitmap.set_bit(Vector2(x, y), bitmap.get_bit(Vector2(x, y)))
+
+	bitmap = new_bitmap
 
 
-#func get_selection_image() -> Image:
-#	var image := Image.new()
-#	var cel_image : Image = frames[current_frame].cels[current_layer].image
-#	image.copy_from(cel_image)
-#	image.lock()
-#	image.fill(Color(0, 0, 0, 0))
-#	for pixel in selected_pixels:
-#		var color : Color = cel_image.get_pixelv(pixel)
-#		image.set_pixelv(pixel, color)
-#	image.unlock()
-#	return image
+# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
+func bitmap_to_image(bitmap : BitMap) -> Image:
+	var image := Image.new()
+	var width := bitmap.get_size().x
+	var height := bitmap.get_size().y
+	image.create(width, height, false, Image.FORMAT_LA8)
+	image.lock()
+	for x in width:
+		for y in height:
+			var pos := Vector2(x, y)
+			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
+			image.set_pixelv(pos, color)
+	image.unlock()
+	return image
+
+
+func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
+	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
+	if has_selection(bitmap):
+		var image : Image = bitmap_to_image(bitmap)
+		rect = image.get_used_rect()
+	return rect
+
+
+#func selection_is_rectangle(bitmap : BitMap = selection_bitmap) -> bool:
+#	var selection_rect = get_selection_rectangle(bitmap)
+#	return selection_rect == Global.canvas.selection.big_bounding_rectangle
+
+
+func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
+	var selection_node = Global.canvas.selection
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var image : Image = bitmap_to_image(bitmap)
+	var selection_rect := image.get_used_rect()
+	var smaller_image := image.get_rect(selection_rect)
+	image.lock()
+	image.fill(Color(0))
+	selection_rect.position += to
+	var dst := selection_position
+	var x_diff = selection_rect.end.x - size.x
+	var y_diff = selection_rect.end.y - size.y
+	var nw = max(size.x, size.x + x_diff)
+	var nh = max(size.y, size.y + y_diff)
+
+	if selection_position.x < 0:
+		nw -= selection_position.x
+		selection_node.marching_ants_outline.offset.x = selection_position.x
+		dst.x = 0
+	if selection_position.y < 0:
+		nh -= selection_position.y
+		selection_node.marching_ants_outline.offset.y = selection_position.y
+		dst.y = 0
+
+	image.crop(nw, nh)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, size), dst)
+	bitmap.create_from_image_alpha(image)

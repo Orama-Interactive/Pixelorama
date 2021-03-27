@@ -178,6 +178,8 @@ func zoom_changed() -> void:
 		update_rulers()
 		for guide in Global.current_project.guides:
 			guide.width = zoom.x * 2
+		Global.canvas.selection.marching_ants_outline.material.set_shader_param("width", zoom.x)
+		Global.canvas.selection.marching_ants_outline.material.set_shader_param("frequency", (1.0 / zoom.x) * 10)
 	elif name == "CameraPreview":
 		Global.preview_zoom_slider.value = -zoom.x
 

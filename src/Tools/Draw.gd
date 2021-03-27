@@ -281,19 +281,8 @@ func draw_tool_brush(position : Vector2) -> void:
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 	var mirror_x_inside : bool
 	var mirror_y_inside : bool
-	var entire_image_selected : bool = project.selected_pixels.empty()
-	if entire_image_selected:
-		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
-		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
-	else:
-		var selected_pixels_x := []
-		var selected_pixels_y := []
-		for i in project.selected_pixels:
-			selected_pixels_x.append(i.x)
-			selected_pixels_y.append(i.y)
-
-		mirror_x_inside = mirror_x in selected_pixels_x
-		mirror_y_inside = mirror_y in selected_pixels_y
+	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, dst.y))
+	mirror_y_inside = project.can_pixel_get_drawn(Vector2(dst.x, mirror_y))
 
 	if tool_slot.horizontal_mirror and mirror_x_inside:
 		_draw_brush_image(_mirror_brushes.x, _flip_rect(src_rect, size, true, false), Vector2(mirror_x, dst.y))
@@ -337,13 +326,8 @@ func _set_pixel(position : Vector2) -> void:
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 
-	var entire_image_selected : bool = project.selected_pixels.empty()
-	if entire_image_selected:
-		if not _get_draw_rect().has_point(position):
-			return
-	else:
-		if not position in project.selected_pixels:
-			return
+	if !project.can_pixel_get_drawn(position):
+		return
 
 	var image := _get_draw_image()
 	var i := int(position.x + position.y * image.get_size().x)
