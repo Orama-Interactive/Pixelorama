@@ -244,6 +244,12 @@ msgstr ""
 msgid "Start frame:"
 msgstr ""
 
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
+
 msgid "Brush type:"
 msgstr ""
 
