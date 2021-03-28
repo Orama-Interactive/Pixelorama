@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-03-17 19:24\n"
+"PO-Revision-Date: 2021-03-28 00:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -254,6 +254,12 @@ msgstr "Κάθετα καρέ:"
 
 msgid "Start frame:"
 msgstr "Καρέ έναρξης:"
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Τύπος πινέλου:"
