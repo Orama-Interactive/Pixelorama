@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-03-19 12:37\n"
+"PO-Revision-Date: 2021-03-28 00:20\n"
 
 msgid "OK"
 msgstr "예"
@@ -254,6 +254,12 @@ msgstr "세로축 프레임:"
 
 msgid "Start frame:"
 msgstr "시작 프레임:"
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "브러시 타입:"
