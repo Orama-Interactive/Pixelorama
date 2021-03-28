@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-03-17 17:36\n"
+"PO-Revision-Date: 2021-03-28 00:20\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -253,6 +253,12 @@ msgid "Vertical frames:"
 msgstr "Fotogrames verticales:"
 
 msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
 msgstr ""
 
 msgid "Brush type:"
