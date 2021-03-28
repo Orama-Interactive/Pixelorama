@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-28 11:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -256,10 +256,10 @@ msgid "Start frame:"
 msgstr "Fotogramma iniziale:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Al telaio:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "A livello:"
 
 msgid "Brush type:"
 msgstr "Tipo del pennello:"
