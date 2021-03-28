@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-28 00:30\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -256,10 +256,10 @@ msgid "Start frame:"
 msgstr "Καρέ έναρξης:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Στο καρέ:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Στη στρώση:"
 
 msgid "Brush type:"
 msgstr "Τύπος πινέλου:"
@@ -1190,10 +1190,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Η κίνηση παίζει μόνο σε καρέ της ίδιας καρτέλας"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Ετίκετα %s (Καρέ %s)"
+msgstr "Ετικέτα %s (Καρέ %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Ετίκετα %s (Καρέ %s-%s)"
+msgstr "Ετικέτα %s (Καρέ %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
