@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2021-03-23 20:03\n"
+"PO-Revision-Date: 2021-03-28 00:20\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -253,6 +253,12 @@ msgid "Vertical frames:"
 msgstr ""
 
 msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
 msgstr ""
 
 msgid "Brush type:"
