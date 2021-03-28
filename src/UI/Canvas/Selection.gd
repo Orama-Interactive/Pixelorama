@@ -346,7 +346,6 @@ func _draw() -> void:
 			filled_rect.size -= filled_size * 2
 			draw_rect(filled_rect, Color.white) # Filled white square
 
-
 	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
 	draw_set_transform(position, rotation, scale)

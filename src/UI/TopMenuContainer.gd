@@ -368,6 +368,11 @@ func window_transparency(value :float) -> void:
 
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
+	Global.canvas.selection.marching_ants_outline.scale.x = -Global.canvas.selection.marching_ants_outline.scale.x
+	if Global.mirror_view:
+		Global.canvas.selection.marching_ants_outline.position.x = Global.canvas.selection.marching_ants_outline.position.x + Global.current_project.size.x
+	else:
+		Global.canvas.selection.marching_ants_outline.position.x = 0
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
