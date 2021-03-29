@@ -258,8 +258,6 @@ func draw_tool_circle(position : Vector2, fill := false) -> void:
 
 func draw_tool_brush(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	if Global.mirror_view:
-		position.x = project.size.x - position.x
 
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
@@ -334,8 +332,6 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 
 func _set_pixel(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	if Global.mirror_view:
-		position.x = project.size.x - position.x - 1
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 
