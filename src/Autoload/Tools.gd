@@ -169,6 +169,10 @@ func handle_draw(position : Vector2, event : InputEvent) -> void:
 	if not (Global.can_draw and Global.has_focus):
 		return
 
+	var draw_pos := position
+	if Global.mirror_view:
+		draw_pos.x = Global.current_project.size.x - position.x - 1
+
 	if event is InputEventWithModifiers:
 		control = event.control
 		shift = event.shift
@@ -178,9 +182,9 @@ func handle_draw(position : Vector2, event : InputEvent) -> void:
 		if event.button_index in [BUTTON_LEFT, BUTTON_RIGHT]:
 			if event.pressed and _active_button == -1:
 				_active_button = event.button_index
-				_slots[_active_button].tool_node.draw_start(position)
+				_slots[_active_button].tool_node.draw_start(draw_pos)
 			elif not event.pressed and event.button_index == _active_button:
-				_slots[_active_button].tool_node.draw_end(position)
+				_slots[_active_button].tool_node.draw_end(draw_pos)
 				_active_button = -1
 
 	if event is InputEventMouseMotion:
@@ -193,7 +197,7 @@ func handle_draw(position : Vector2, event : InputEvent) -> void:
 			_slots[BUTTON_LEFT].tool_node.cursor_move(position)
 			_slots[BUTTON_RIGHT].tool_node.cursor_move(position)
 			if _active_button != -1:
-				_slots[_active_button].tool_node.draw_move(position)
+				_slots[_active_button].tool_node.draw_move(draw_pos)
 
 	var project : Project = Global.current_project
 	var text := "[%s×%s]" % [project.size.x, project.size.y]
