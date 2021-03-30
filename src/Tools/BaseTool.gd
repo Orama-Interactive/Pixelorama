@@ -76,6 +76,10 @@ func draw_indicator() -> void:
 	Global.canvas.indicators.draw_rect(rect, Color.blue, false)
 
 
+func draw_preview() -> void:
+	pass
+
+
 func _get_draw_rect() -> Rect2:
 	if Global.current_project.selected_pixels.empty():
 		return Global.current_project.tile_mode_rects[Global.TileMode.NONE]

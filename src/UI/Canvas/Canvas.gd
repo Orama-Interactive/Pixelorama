@@ -14,6 +14,7 @@ onready var pixel_grid = $PixelGrid
 onready var grid = $Grid
 onready var tile_mode = $TileMode
 onready var indicators = $Indicators
+onready var previews = $Previews
 
 
 # Called when the node enters the scene tree for the first time.

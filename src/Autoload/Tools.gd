@@ -47,6 +47,8 @@ var _tools = {
 	"Eraser" : "res://src/Tools/Eraser.tscn",
 	"Bucket" : "res://src/Tools/Bucket.tscn",
 	"LightenDarken" : "res://src/Tools/LightenDarken.tscn",
+	"RectangleTool" : "res://src/Tools/RectangleTool.tscn",
+	"EllipseTool" : "res://src/Tools/EllipseTool.tscn",
 }
 var _slots = {}
 var _panels = {}
@@ -163,6 +165,11 @@ func draw_indicator() -> void:
 		_slots[BUTTON_LEFT].tool_node.draw_indicator()
 	if Global.right_square_indicator_visible:
 		_slots[BUTTON_RIGHT].tool_node.draw_indicator()
+
+
+func draw_preview() -> void:
+	_slots[BUTTON_LEFT].tool_node.draw_preview()
+	_slots[BUTTON_RIGHT].tool_node.draw_preview()
 
 
 func handle_draw(position : Vector2, event : InputEvent) -> void:
