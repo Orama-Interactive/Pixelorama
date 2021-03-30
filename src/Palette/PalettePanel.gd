@@ -74,8 +74,12 @@ func redraw_current_palette() -> void:
 	var current_palette = Palettes.get_current_palette()
 	if current_palette:
 		select_palette(current_palette.resource_path)
+		add_color_button.show()
+		delete_color_button.show()
 	else:
 		palette_grid.clear_swatches()
+		add_color_button.hide()
+		delete_color_button.hide()
 
 
 func toggle_add_delete_buttons() -> void:

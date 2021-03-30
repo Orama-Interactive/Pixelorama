@@ -92,6 +92,7 @@ func save_palette(palette: Palette) -> String:
 
 
 func create_new_palette(preset: int, name: String, comment: String, width: int, height: int, add_alpha_colors: bool, get_colors_from: int) -> void:
+	check_palette_settings_values(name, width, height)
 	match preset:
 		NewPalettePresetType.Empty:
 			create_new_empty_palette(name, comment, width, height)
@@ -172,6 +173,7 @@ func fill_new_palette_with_colors(pixels: Array, new_palette: Palette, add_alpha
 
 
 func current_palette_edit(name: String, comment: String, width: int, height: int) -> void:
+	check_palette_settings_values(name, width, height)
 	current_palette.edit(name, width, height, comment)
 	var palette_path = current_palette_save()
 	palettes[palette_path] = current_palette
@@ -275,6 +277,14 @@ func current_palette_is_empty() -> bool:
 
 func current_palette_is_full() -> bool:
 	return current_palette.is_full()
+
+
+func check_palette_settings_values(name: String, width: int, height: int) -> bool:
+	# Just in case. These values should be not allowed in gui.
+	if name.length() <= 0 or width <= 0 or height <= 0:
+		printerr("Palette width, height and name length must be greater than 0!")
+		return false
+	return true
 
 
 func load_palettes() -> void:
