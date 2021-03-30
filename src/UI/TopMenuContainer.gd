@@ -373,6 +373,7 @@ func toggle_mirror_view() -> void:
 		Global.canvas.selection.marching_ants_outline.position.x = Global.canvas.selection.marching_ants_outline.position.x + Global.current_project.size.x
 	else:
 		Global.canvas.selection.marching_ants_outline.position.x = 0
+	Global.canvas.selection.update()
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 

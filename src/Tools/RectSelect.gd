@@ -36,6 +36,8 @@ func draw_move(position : Vector2) -> void:
 		rect = _start.expand(position).abs()
 		rect = rect.grow_individual(0, 0, 1, 1)
 		_set_cursor_text(rect)
+		Global.canvas.selection.drawn_rect = rect
+		Global.canvas.selection.update()
 
 
 func draw_end(position : Vector2) -> void:
@@ -49,6 +51,8 @@ func draw_end(position : Vector2) -> void:
 	cursor_text = ""
 	start_position = Vector2.INF
 	rect = Rect2(0, 0, 0, 0)
+	Global.canvas.selection.drawn_rect = rect
+	Global.canvas.selection.update()
 
 
 func cursor_move(_position : Vector2) -> void:

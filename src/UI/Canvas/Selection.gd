@@ -29,13 +29,12 @@ class Gizmo:
 
 
 var clipboard := Clipboard.new()
-var tween : Tween
-var line_offset := Vector2.ZERO setget _offset_changed
 var is_moving_content := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 var preview_image := Image.new()
 var preview_image_texture : ImageTexture
 var undo_data : Dictionary
+var drawn_rect := Rect2(0, 0, 0, 0)
 var gizmos := [] # Array of Gizmos
 var dragged_gizmo : Gizmo = null
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
@@ -44,12 +43,6 @@ onready var marching_ants_outline : Sprite = $MarchingAntsOutline
 
 
 func _ready() -> void:
-	tween = Tween.new()
-	tween.connect("tween_completed", self, "_offset_tween_completed")
-	add_child(tween)
-	tween.interpolate_property(self, "line_offset", Vector2.ZERO, Vector2(2, 2), 1)
-	tween.start()
-
 	gizmos.append(Gizmo.new(Vector2(-1, -1))) # Top left
 	gizmos.append(Gizmo.new(Vector2(0, -1))) # Center top
 	gizmos.append(Gizmo.new(Vector2(1, -1))) # Top right
@@ -99,17 +92,6 @@ func _input(event : InputEvent) -> void:
 				dragged_gizmo = null
 
 
-func _offset_tween_completed(_object, _key) -> void:
-	self.line_offset = Vector2.ZERO
-	tween.interpolate_property(self, "line_offset", Vector2.ZERO, Vector2(2, 2), 1)
-	tween.start()
-
-
-func _offset_changed(value : Vector2) -> void:
-	line_offset = value
-	update()
-
-
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	big_bounding_rectangle = value
 	var rect_pos : Vector2 = big_bounding_rectangle.position
@@ -133,6 +115,7 @@ func move_borders_start() -> void:
 func move_borders(move : Vector2) -> void:
 	marching_ants_outline.offset += move
 	self.big_bounding_rectangle.position += move
+	update()
 
 
 func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
@@ -143,6 +126,7 @@ func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
 	commit_undo("Rectangle Select", undo_data)
+	update()
 
 
 func select_rect(rect : Rect2, select := true) -> void:
@@ -196,6 +180,7 @@ func move_content_confirm() -> void:
 	marching_ants_outline.offset = Vector2.ZERO
 	is_moving_content = false
 	commit_undo("Move Selection", undo_data)
+	update()
 
 
 func move_content_cancel() -> void:
@@ -210,6 +195,7 @@ func move_content_cancel() -> void:
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
 	preview_image = Image.new()
+	update()
 
 
 func commit_undo(action : String, _undo_data : Dictionary) -> void:
@@ -336,7 +322,7 @@ func _draw() -> void:
 		_position.x = _position.x + Global.current_project.size.x
 		_scale.x = -1
 	draw_set_transform(_position, rotation, _scale)
-
+	draw_rect(drawn_rect, Color.black, false)
 	if big_bounding_rectangle.size > Vector2.ZERO:
 		for gizmo in gizmos: # Draw gizmos
 			draw_rect(gizmo.rect, Color.black)
