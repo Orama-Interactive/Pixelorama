@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-03-28 00:16\n"
+"PO-Revision-Date: 2021-03-30 17:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -37,6 +37,9 @@ msgid "Canvas Size"
 msgstr "Размер холста"
 
 msgid "Frame Size"
+msgstr ""
+
+msgid "Size"
 msgstr ""
 
 msgid "Width:"
@@ -802,6 +805,26 @@ msgstr "Осветление/Затемнение\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Выбор цвета для левого инструмента"
 
@@ -1016,6 +1039,12 @@ msgstr "Пиксельная точность"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Цвет кисти из"
