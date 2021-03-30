@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -38,6 +38,9 @@ msgstr "Tuval Boyutu"
 
 msgid "Frame Size"
 msgstr "Çerçeve Boyutu"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Genişlik:"
@@ -801,6 +804,26 @@ msgstr "Aydınlatma/Karartma\n\n"
 "Sol tık için %s\n"
 "Sağ tık için %s"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Sol araç için bir renk seç"
 
@@ -1015,6 +1038,12 @@ msgstr "Mükemmel Piksel"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Çizgileri kenarlardaki fazla pikselleri silerek yumuşatır"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Fırça rengini buradan"
