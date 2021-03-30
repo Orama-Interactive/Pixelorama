@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Rozmiar płótna"
 
 msgid "Frame Size"
 msgstr "Rozmiar klatki"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -803,6 +806,26 @@ msgstr "Rozjaśnianie/Ściemnianie\n\n"
 "%s dla lewego przycisku myszy\n"
 "%s dla prawego przycisku myszy"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Wybiera kolor dla lewego narzędzia"
 
@@ -1017,6 +1040,12 @@ msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Sprawia, że linie są gładkie przez usunięcie dodatkowych pikseli na krawędziach"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
