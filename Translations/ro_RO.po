@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-03-28 10:09\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Dimensiunea pânzei"
 
 msgid "Frame Size"
 msgstr "Dimensiunea cadrului"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Lățime:"
@@ -804,6 +807,26 @@ msgstr "Luminare/întunecare\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Alege o culoare pentru instrumentul din stânga"
 
@@ -1018,6 +1041,12 @@ msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
