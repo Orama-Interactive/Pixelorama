@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:12\n"
 
 msgid "OK"
 msgstr "確定"
@@ -38,6 +38,9 @@ msgstr "版面大小"
 
 msgid "Frame Size"
 msgstr "影格大小"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "寬度："
@@ -801,6 +804,26 @@ msgstr "變亮/變暗\n\n"
 "%s換成左鍵\n"
 "%s換成右鍵"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "選擇左鍵工具顏色"
 
@@ -1015,6 +1038,12 @@ msgstr "完美像素"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "去除邊緣上多餘的像素使線條平滑"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "畫筆顏色"
