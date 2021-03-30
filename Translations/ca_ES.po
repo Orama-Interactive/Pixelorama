@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -38,6 +38,9 @@ msgstr "Mida del llenç"
 
 msgid "Frame Size"
 msgstr "Mida del marc"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Amplada:"
@@ -798,6 +801,26 @@ msgid "Lighten/Darken\n\n"
 "%s for right mouse button"
 msgstr ""
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Triar un color per l'eina esquerra"
 
@@ -1010,6 +1033,12 @@ msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
 
 msgid "Brush color from"
