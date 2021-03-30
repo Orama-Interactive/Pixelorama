@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-03-28 14:30\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "キャンバス サイズ"
 
 msgid "Frame Size"
 msgstr "フレームサイズ"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "幅:"
@@ -804,6 +807,26 @@ msgstr "明るく/暗く\n\n"
 "%sでマウスの左ボタンを 明るく/暗く に変更\n"
 "%sでマウスの右ボタンを 明るく/暗く に変更"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "左ツールの色を選択してくだ"
 
@@ -1018,6 +1041,12 @@ msgstr "ピクセルパーフェクト"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "エッジの余分なピクセルを削除することで線を滑らかにします"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "ブラシの色"
