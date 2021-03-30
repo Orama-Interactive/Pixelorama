@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Taille du Canevas"
 
 msgid "Frame Size"
 msgstr "Taille de la frame"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -804,6 +807,26 @@ msgstr "Éclaircir/Assombrir\n\n"
 "%s pour le bouton gauche de la souris\n"
 "%s pour le bouton droit de la souris"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Choisissez une couleur pour l'outil gauche"
 
@@ -1018,6 +1041,12 @@ msgstr "Pixel Parfait"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
