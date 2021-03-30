@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-03-28 00:21\n"
+"PO-Revision-Date: 2021-03-30 17:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -38,6 +38,9 @@ msgstr "Ukuran Kanvas"
 
 msgid "Frame Size"
 msgstr "Ukuran Bingkai"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Panjang:"
@@ -802,6 +805,26 @@ msgstr "Percerah/Gelapkan\n"
 "%s untuk mouse kiri\n"
 "%s untuk mouse kanan"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Pilih warna untuk alat yang berada di kiri"
 
@@ -1015,6 +1038,12 @@ msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
 
 msgid "Brush color from"
