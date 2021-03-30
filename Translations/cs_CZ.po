@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Velikost plátna"
 
 msgid "Frame Size"
 msgstr "Velikost snímku"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Šířka:"
@@ -802,6 +805,26 @@ msgstr "Zesvětlení/Ztmavení\n\n"
 "%s pro levé tlačítko myši\n"
 "%s pro pravé tlačítko myší"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Vyberte barvu pro levý nástroj"
 
@@ -1016,6 +1039,12 @@ msgstr "Pixel perfekt"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Vyhladí čáry odstraněním pixelů navíc na okrajích"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Barva štětce z"
