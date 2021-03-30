@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2021-03-28 00:20\n"
+"PO-Revision-Date: 2021-03-30 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Lerretstørrelse"
 
 msgid "Frame Size"
 msgstr "Bildestørrelse"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Bredde:"
@@ -801,6 +804,26 @@ msgstr "Lys opp/Formørk\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Velg en farge for venstre verktøy"
 
@@ -1015,6 +1038,12 @@ msgstr "Pikselperfekt"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Børstefarge fra"
