@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-03-30 23:20\n"
+"PO-Revision-Date: 2021-03-30 23:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1051,10 +1051,10 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Riempi Forma"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Riempie la forma disegnata con il colore, invece di disegnare una forma cava"
 
 msgid "Brush color from"
 msgstr "Colore del pennello da"
