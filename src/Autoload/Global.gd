@@ -195,7 +195,7 @@ func _ready() -> void:
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
 	image_clipboard = Image.new()
-	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
@@ -358,11 +358,12 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
+		canvas.selection.update()
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.update()
-			Global.canvas.pixel_grid.update()
-			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			canvas.grid.update()
+			canvas.pixel_grid.update()
+			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
@@ -392,11 +393,12 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
+		canvas.selection.update()
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.update()
-			Global.canvas.pixel_grid.update()
-			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			canvas.grid.update()
+			canvas.pixel_grid.update()
+			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
 		if project.frames.size() == 1: # Stop animating
@@ -613,7 +615,7 @@ func save_project_to_recent_list(path : String) -> void:
 
 
 func update_recent_projects_submenu() -> void:
-	for project in Global.recent_projects:
+	for project in recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
 
 func use_osx_shortcuts() -> void:

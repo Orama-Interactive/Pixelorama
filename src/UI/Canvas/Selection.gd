@@ -311,6 +311,7 @@ func clear_selection(use_undo := false) -> void:
 
 	self.big_bounding_rectangle = Rect2()
 	marching_ants_outline.offset = Vector2.ZERO
+	update()
 	if use_undo:
 		commit_undo("Clear Selection", _undo_data)
 
