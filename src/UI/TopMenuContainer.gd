@@ -5,7 +5,7 @@ enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS,
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, PREFERENCES}
 enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
-enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION}
+enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
 
 var file_menu_button : MenuButton
@@ -178,6 +178,7 @@ func setup_select_menu() -> void:
 	var select_menu_items := { # order as in EditMenuId enum
 		"Select All" : InputMap.get_action_list("select_all")[0].get_scancode_with_modifiers(),
 		"Clear Selection" : InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
+		"Invert" : InputMap.get_action_list("invert_selection")[0].get_scancode_with_modifiers(),
 		}
 	var select_menu : PopupMenu = select_menu_button.get_popup()
 	var i := 0
@@ -513,6 +514,8 @@ func select_menu_id_pressed(id : int) -> void:
 			Global.canvas.selection.select_all()
 		SelectMenuId.CLEAR_SELECTION:
 			Global.canvas.selection.clear_selection(true)
+		SelectMenuId.INVERT:
+			Global.canvas.selection.invert()
 
 
 func help_menu_id_pressed(id : int) -> void:

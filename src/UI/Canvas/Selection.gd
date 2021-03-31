@@ -302,6 +302,16 @@ func select_all() -> void:
 	commit_undo("Rectangle Select", _undo_data)
 
 
+func invert() -> void:
+	var project := Global.current_project
+	var _undo_data = _get_undo_data(false)
+	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
+	project.invert_bitmap(selection_bitmap_copy)
+	project.selection_bitmap = selection_bitmap_copy
+	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
+	commit_undo("Rectangle Select", _undo_data)
+
+
 func clear_selection(use_undo := false) -> void:
 	move_content_confirm()
 	var project := Global.current_project

@@ -609,6 +609,14 @@ func can_pixel_get_drawn(pixel : Vector2) -> bool:
 	else:
 		return true
 
+
+func invert_bitmap(bitmap : BitMap) -> void:
+	for x in bitmap.get_size().x:
+		for y in bitmap.get_size().y:
+			var pos := Vector2(x, y)
+			bitmap.set_bit(pos, !bitmap.get_bit(pos))
+
+
 # Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
 func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> void:
 	if new_size == bitmap.get_size():
