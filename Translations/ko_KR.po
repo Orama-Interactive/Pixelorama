@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-03-30 17:13\n"
+"PO-Revision-Date: 2021-03-31 05:51\n"
 
 msgid "OK"
 msgstr "예"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "프레임 크기"
 
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 msgid "Width:"
 msgstr "너비:"
@@ -822,10 +822,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "직사각형"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "타원"
 
 msgid "Choose a color for the left tool"
 msgstr "왼쪽 툴의 색상 선택"
@@ -1043,7 +1043,7 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "도형 채우기"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
