@@ -100,7 +100,6 @@ func update_brush() -> void:
 			else:
 				var random = randi() % _brush.random.size()
 				_brush_image = _create_blended_brush_image(_brush.random[random])
-			_brush_image.lock()
 			_brush_texture.create_from_image(_brush_image, 0)
 			update_mirror_brush()
 	_indicator = _create_brush_indicator()
@@ -114,7 +113,6 @@ func update_random_image() -> void:
 		return
 	var random = randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
-	_brush_image.lock()
 	_brush_texture.create_from_image(_brush_image, 0)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
@@ -273,23 +271,43 @@ func draw_tool_brush(position : Vector2) -> void:
 		return
 	var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
 	dst = dst_rect.position
-
-	_draw_brush_image(_brush_image, src_rect, dst)
+	var brush_image : Image = remove_unselected_parts_of_brush(_brush_image, dst)
+	_draw_brush_image(brush_image, src_rect, dst)
 
 	# Handle Mirroring
 	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
-	var mirror_x_inside : bool
-	var mirror_y_inside : bool
-	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, dst.y))
-	mirror_y_inside = project.can_pixel_get_drawn(Vector2(dst.x, mirror_y))
 
-	if tool_slot.horizontal_mirror and mirror_x_inside:
-		_draw_brush_image(_mirror_brushes.x, _flip_rect(src_rect, size, true, false), Vector2(mirror_x, dst.y))
-		if tool_slot.vertical_mirror and mirror_y_inside:
-			_draw_brush_image(_mirror_brushes.xy, _flip_rect(src_rect, size, true, true), Vector2(mirror_x, mirror_y))
-	if tool_slot.vertical_mirror and mirror_y_inside:
-		_draw_brush_image(_mirror_brushes.y, _flip_rect(src_rect, size, false, true), Vector2(dst.x, mirror_y))
+	if tool_slot.horizontal_mirror:
+		var x_dst := Vector2(mirror_x, dst.y)
+		var mirror_brush_x : Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
+		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
+		if tool_slot.vertical_mirror:
+			var xy_dst := Vector2(mirror_x, mirror_y)
+			var mirror_brush_xy : Image = remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
+			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
+	if tool_slot.vertical_mirror:
+		var y_dst := Vector2(dst.x, mirror_y)
+		var mirror_brush_y : Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
+		_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)
+
+
+func remove_unselected_parts_of_brush(brush : Image, dst : Vector2) -> Image:
+	var project : Project = Global.current_project
+	var size := brush.get_size()
+	var new_brush := Image.new()
+	new_brush.copy_from(_mirror_brushes.x)
+	if !project.has_selection():
+		return new_brush
+
+	new_brush.lock()
+	for x in size.x:
+		for y in size.y:
+			var pos := Vector2(x, y) + dst
+			if !project.selection_bitmap.get_bit(pos):
+				new_brush.set_pixel(x, y, Color(0))
+	new_brush.unlock()
+	return new_brush
 
 
 func draw_indicator() -> void:
