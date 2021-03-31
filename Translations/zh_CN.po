@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-03-30 17:13\n"
+"PO-Revision-Date: 2021-03-31 00:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "帧大小"
 
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 msgid "Width:"
 msgstr "宽度:"
