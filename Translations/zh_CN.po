@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-03-31 00:39\n"
+"PO-Revision-Date: 2021-03-31 01:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -259,10 +259,10 @@ msgid "Start frame:"
 msgstr "开始帧："
 
 msgid "At frame:"
-msgstr ""
+msgstr "在帧："
 
 msgid "At layer:"
-msgstr ""
+msgstr "在图层："
 
 msgid "Brush type:"
 msgstr "画笔类型："
