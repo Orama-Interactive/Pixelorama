@@ -22,10 +22,12 @@ func _on_ColorPickerButton_color_changed(color : Color, right : bool):
 
 func _on_ColorPickerButton_pressed() -> void:
 	Global.can_draw = false
+	Tools.disconnect("color_changed", self, "update_color")
 
 
 func _on_ColorPickerButton_popup_closed() -> void:
 	Global.can_draw = true
+	Tools.connect("color_changed", self, "update_color")
 
 
 func _on_ColorDefaults_pressed() -> void:
