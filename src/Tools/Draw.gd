@@ -130,6 +130,8 @@ func update_mirror_brush() -> void:
 
 
 func update_mask() -> void:
+	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
+		return
 	var size := _get_draw_image().get_size()
 	# Faster than zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
@@ -345,8 +347,11 @@ func _set_pixel(position : Vector2) -> void:
 
 	var image := _get_draw_image()
 	var i := int(position.x + position.y * image.get_size().x)
-	if _mask[i] < Tools.pen_pressure:
-		_mask[i] = Tools.pen_pressure
+	if Global.pressure_sensitivity_mode != Global.PressureSensitivity.NONE:
+		if _mask[i] < Tools.pen_pressure:
+			_mask[i] = Tools.pen_pressure
+			_drawer.set_pixel(image, position, tool_slot.color)
+	else:
 		_drawer.set_pixel(image, position, tool_slot.color)
 
 
