@@ -97,7 +97,7 @@ func draw_start(position : Vector2) -> void:
 	Global.canvas.selection.move_content_confirm()
 	if Global.current_project.layers[Global.current_project.current_layer].locked or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position):
 		return
-	if Global.current_project.has_selection() and not Global.current_project.selection_bitmap.get_bit(position):
+	if Global.current_project.has_selection and not Global.current_project.selection_bitmap.get_bit(position):
 		return
 	var undo_data = _get_undo_data()
 	if _fill_area == 0:
@@ -128,7 +128,7 @@ func fill_in_color(position : Vector2) -> void:
 	for x in Global.current_project.size.x:
 		for y in Global.current_project.size.y:
 			var pos := Vector2(x, y)
-			if project.has_selection() and not project.selection_bitmap.get_bit(pos):
+			if project.has_selection and not project.selection_bitmap.get_bit(pos):
 				continue
 			if image.get_pixelv(pos).is_equal_approx(color):
 				_set_pixel(image, x, y, tool_slot.color)

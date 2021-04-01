@@ -248,7 +248,7 @@ func cut() -> void:
 
 func copy() -> void:
 	var project := Global.current_project
-	if !project.has_selection():
+	if !project.has_selection:
 		return
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	var to_copy := Image.new()
@@ -281,7 +281,7 @@ func paste() -> void:
 
 func delete() -> void:
 	var project := Global.current_project
-	if !project.has_selection():
+	if !project.has_selection:
 		return
 	var _undo_data = _get_undo_data(true)
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image

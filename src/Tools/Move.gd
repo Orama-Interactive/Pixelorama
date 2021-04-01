@@ -8,12 +8,12 @@ var offset : Vector2
 func draw_start(position : Vector2) -> void:
 	starting_pos = position
 	offset = position
-	if Global.current_project.has_selection():
+	if Global.current_project.has_selection:
 		Global.canvas.selection.move_content_start()
 
 
 func draw_move(position : Vector2) -> void:
-	if Global.current_project.has_selection():
+	if Global.current_project.has_selection:
 		Global.canvas.selection.move_content(position - offset)
 		offset = position
 	else:
@@ -28,7 +28,7 @@ func draw_end(position : Vector2) -> void:
 		var project : Project = Global.current_project
 		var image : Image = _get_draw_image()
 
-		if project.has_selection():
+		if project.has_selection:
 			pass
 #			Global.canvas.selection.move_content_end()
 #			Global.canvas.selection.move_borders_end(position, starting_pos)

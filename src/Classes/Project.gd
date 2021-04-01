@@ -23,6 +23,7 @@ var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
 var selection_bitmap := BitMap.new() setget _selection_bitmap_changed
+var has_selection := false
 var selected_pixels := []
 
 # For every camera (currently there are 3)
@@ -93,6 +94,7 @@ func _selection_bitmap_changed(value : BitMap) -> void:
 	var image_texture := ImageTexture.new()
 	image_texture.create_from_image(image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
+	has_selection = !image.is_invisible()
 
 
 func change_project() -> void:
@@ -592,10 +594,6 @@ func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
 
 
-func has_selection(bitmap : BitMap = selection_bitmap) -> bool:
-	return bitmap.get_true_bit_count() > 0
-
-
 func can_pixel_get_drawn(pixel : Vector2) -> bool:
 	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 	if selection_position.x < 0:
@@ -604,7 +602,7 @@ func can_pixel_get_drawn(pixel : Vector2) -> bool:
 		pixel.y -= selection_position.y
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
-	if has_selection():
+	if has_selection:
 		return selection_bitmap.get_bit(pixel)
 	else:
 		return true
@@ -650,7 +648,7 @@ func bitmap_to_image(bitmap : BitMap) -> Image:
 
 func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
 	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
-	if has_selection(bitmap):
+	if bitmap.get_true_bit_count() > 0:
 		var image : Image = bitmap_to_image(bitmap)
 		rect = image.get_used_rect()
 	return rect
