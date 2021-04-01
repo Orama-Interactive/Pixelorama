@@ -635,7 +635,8 @@ func bitmap_to_image(bitmap : BitMap) -> Image:
 	var image := Image.new()
 	var width := bitmap.get_size().x
 	var height := bitmap.get_size().y
-	image.create(width, height, false, Image.FORMAT_LA8)
+	var square_size = max(width, height)
+	image.create(square_size, square_size, false, Image.FORMAT_LA8)
 	image.lock()
 	for x in width:
 		for y in height:
