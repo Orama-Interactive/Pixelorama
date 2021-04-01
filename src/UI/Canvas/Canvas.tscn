@@ -14,7 +14,7 @@
 blend_mode = 4
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 8 )
+shader = ExtResource( 9 )
 shader_param/first_color = Color( 1, 1, 1, 1 )
 shader_param/second_color = Color( 0, 0, 0, 1 )
 shader_param/animated = true
@@ -48,7 +48,7 @@ script = ExtResource( 6 )
 script = ExtResource( 2 )
 
 [node name="Selection" type="Node2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="MarchingAntsOutline" type="Sprite" parent="Selection"]
 material = SubResource( 2 )

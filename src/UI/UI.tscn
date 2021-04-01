@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -88,7 +88,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
-margin_bottom = 363.0
+margin_bottom = 399.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -126,7 +126,7 @@ button_mask = 3
 [node name="TextureRect" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/Move"]
 margin_right = 32.0
 margin_bottom = 32.0
-texture = ExtResource( 24 )
+texture = ExtResource( 26 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -260,9 +260,9 @@ __meta__ = {
 [node name="RectangleTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 288.0
+margin_top = 324.0
 margin_right = 32.0
-margin_bottom = 320.0
+margin_bottom = 356.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -278,9 +278,9 @@ __meta__ = {
 [node name="EllipseTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 324.0
+margin_top = 360.0
 margin_right = 32.0
-margin_bottom = 356.0
+margin_bottom = 392.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
