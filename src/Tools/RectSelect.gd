@@ -15,8 +15,6 @@ func draw_start(position : Vector2) -> void:
 	undo_data = Global.canvas.selection._get_undo_data(false)
 
 	if !Global.canvas.selection.big_bounding_rectangle.has_point(position):
-		if !Tools.shift and !Tools.control:
-			Global.canvas.selection.clear_selection()
 		_start = Rect2(position, Vector2.ZERO)
 
 	else:
@@ -44,8 +42,13 @@ func draw_end(position : Vector2) -> void:
 	if _move:
 		Global.canvas.selection.move_borders_end(position, start_position)
 	else:
-		Global.canvas.selection.select_rect(rect, !Tools.control)
-		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+		if !Tools.shift and !Tools.control:
+			Global.canvas.selection.clear_selection()
+			if rect.size == Vector2.ZERO and Global.current_project.has_selection:
+				Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+		if rect.size != Vector2.ZERO:
+			Global.canvas.selection.select_rect(rect, !Tools.control)
+			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 
 	_move = false
 	cursor_text = ""

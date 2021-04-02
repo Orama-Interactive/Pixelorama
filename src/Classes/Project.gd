@@ -22,7 +22,7 @@ var y_symmetry_point
 var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
-var selection_bitmap := BitMap.new() setget _selection_bitmap_changed
+var selection_bitmap := BitMap.new()
 var has_selection := false
 var selected_pixels := []
 
@@ -88,13 +88,14 @@ func commit_redo() -> void:
 	Global.control.redone = false
 
 
-func _selection_bitmap_changed(value : BitMap) -> void:
-	selection_bitmap = value
-	var image : Image = bitmap_to_image(selection_bitmap)
+func selection_bitmap_changed() -> void:
+	var image := Image.new()
+	has_selection = selection_bitmap.get_true_bit_count() > 0
+	if has_selection:
+		image = bitmap_to_image(selection_bitmap)
 	var image_texture := ImageTexture.new()
 	image_texture.create_from_image(image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
-	has_selection = !image.is_invisible()
 
 
 func change_project() -> void:
@@ -216,7 +217,7 @@ func change_project() -> void:
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
-	self.selection_bitmap = selection_bitmap # call getter method
+	selection_bitmap_changed()
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
 
 

@@ -218,7 +218,9 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 		project.undo_redo.add_do_property(image, "data", redo_data["image_data"])
 		project.undo_redo.add_undo_property(image, "data", _undo_data["image_data"])
 	project.undo_redo.add_do_method(Global, "redo", project.current_frame, project.current_layer)
+	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
 	project.undo_redo.add_undo_method(Global, "undo", project.current_frame, project.current_layer)
+	project.undo_redo.add_undo_method(project, "selection_bitmap_changed")
 	project.undo_redo.commit_action()
 
 	undo_data.clear()
@@ -313,8 +315,10 @@ func invert() -> void:
 
 
 func clear_selection(use_undo := false) -> void:
-	move_content_confirm()
 	var project := Global.current_project
+	if !project.has_selection:
+		return
+	move_content_confirm()
 	var full_rect = Rect2(Vector2.ZERO, project.selection_bitmap.get_size())
 	var _undo_data = _get_undo_data(false)
 	select_rect(full_rect, false)
