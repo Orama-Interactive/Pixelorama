@@ -31,6 +31,7 @@ class Gizmo:
 var clipboard := Clipboard.new()
 var is_moving_content := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
 var original_bitmap := BitMap.new()
 var preview_image := Image.new()
@@ -166,6 +167,7 @@ func move_content_start() -> void:
 		undo_data = _get_undo_data(true)
 		get_preview_image()
 		original_bitmap = Global.current_project.selection_bitmap.duplicate()
+		original_big_bounding_rectangle = big_bounding_rectangle
 		update()
 
 
@@ -195,10 +197,13 @@ func move_content_confirm() -> void:
 func move_content_cancel() -> void:
 	if preview_image.is_empty():
 		return
-	self.big_bounding_rectangle.position -= marching_ants_outline.offset
 	marching_ants_outline.offset = Vector2.ZERO
 
 	is_moving_content = false
+	self.big_bounding_rectangle = original_big_bounding_rectangle
+	Global.current_project.selection_bitmap = original_bitmap
+	Global.current_project.selection_bitmap_changed()
+	preview_image = original_preview_image
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
