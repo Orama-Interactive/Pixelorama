@@ -31,8 +31,10 @@ class Gizmo:
 var clipboard := Clipboard.new()
 var is_moving_content := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+var original_preview_image := Image.new()
+var original_bitmap := BitMap.new()
 var preview_image := Image.new()
-var preview_image_texture : ImageTexture
+var preview_image_texture := ImageTexture.new()
 var undo_data : Dictionary
 var drawn_rect := Rect2(0, 0, 0, 0)
 var gizmos := [] # Array of Gizmos
@@ -76,22 +78,20 @@ func _input(event : InputEvent) -> void:
 				Global.has_focus = false
 				dragged_gizmo = gizmo
 				mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
+				move_content_start()
 			elif dragged_gizmo:
 				Global.has_focus = true
 				var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
 				diff = diff.round()
-				print(diff)
-				print(preview_image.get_size())
 				var left := 0.0 if dragged_gizmo.direction.x >= 0 else diff.x
 				var top := 0.0 if dragged_gizmo.direction.y >= 0 else diff.y
 				var right := diff.x if dragged_gizmo.direction.x >= 0 else 0.0
 				var bottom := diff.y if dragged_gizmo.direction.y >= 0 else 0.0
 				self.big_bounding_rectangle = big_bounding_rectangle.grow_individual(left, top, right, bottom)
+				preview_image.copy_from(original_preview_image)
 				preview_image.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
 				preview_image_texture.create_from_image(preview_image, 0)
-				var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
-				Global.current_project.resize_bitmap_values(selected_bitmap_copy, big_bounding_rectangle.size)
-				Global.current_project.selection_bitmap = selected_bitmap_copy
+				Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, big_bounding_rectangle.size)
 				Global.current_project.selection_bitmap_changed()
 				dragged_gizmo = null
 				update()
@@ -165,6 +165,7 @@ func move_content_start() -> void:
 		is_moving_content = true
 		undo_data = _get_undo_data(true)
 		get_preview_image()
+		original_bitmap = Global.current_project.selection_bitmap.duplicate()
 		update()
 
 
@@ -182,7 +183,9 @@ func move_content_confirm() -> void:
 	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
 	Global.current_project.selection_bitmap = selected_bitmap_copy
 
+	original_preview_image = Image.new()
 	preview_image = Image.new()
+	original_bitmap = BitMap.new()
 	marching_ants_outline.offset = Vector2.ZERO
 	is_moving_content = false
 	commit_undo("Move Selection", undo_data)
@@ -200,7 +203,9 @@ func move_content_cancel() -> void:
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
+	original_preview_image = Image.new()
 	preview_image = Image.new()
+	original_bitmap = BitMap.new()
 	update()
 
 
@@ -361,22 +366,22 @@ func _draw() -> void:
 func get_preview_image() -> void:
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	if preview_image.is_empty():
-#		preview_image.copy_from(cel_image)
-		preview_image = cel_image.get_rect(big_bounding_rectangle)
-		preview_image.lock()
+	if original_preview_image.is_empty():
+#		original_preview_image.copy_from(cel_image)
+		original_preview_image = cel_image.get_rect(big_bounding_rectangle)
+		original_preview_image.lock()
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
 				var pos := Vector2(x, y)
 				if not project.selection_bitmap.get_bit(pos + big_bounding_rectangle.position):
-					preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
-		preview_image.unlock()
-		preview_image_texture = ImageTexture.new()
+					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
+		original_preview_image.unlock()
+		preview_image.copy_from(original_preview_image)
 		preview_image_texture.create_from_image(preview_image, 0)
 
 	var clear_image := Image.new()
-	clear_image.create(preview_image.get_width(), preview_image.get_height(), false, Image.FORMAT_RGBA8)
-	cel_image.blit_rect_mask(clear_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
+	clear_image.create(original_preview_image.get_width(), original_preview_image.get_height(), false, Image.FORMAT_RGBA8)
+	cel_image.blit_rect_mask(clear_image, original_preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
 
 
