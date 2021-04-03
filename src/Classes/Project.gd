@@ -688,3 +688,16 @@ func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
 	image.crop(nw, nh)
 	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, size), dst)
 	bitmap.create_from_image_alpha(image)
+
+
+func resize_bitmap_values(bitmap : BitMap, new_size : Vector2) -> void:
+	var selection_node = Global.canvas.selection
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var image : Image = bitmap_to_image(bitmap)
+	var selection_rect := image.get_used_rect()
+	var smaller_image := image.get_rect(selection_rect)
+	image.lock()
+	image.fill(Color(0))
+	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, size), selection_position)
+	bitmap.create_from_image_alpha(image)

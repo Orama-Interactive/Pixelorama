@@ -89,7 +89,12 @@ func _input(event : InputEvent) -> void:
 				self.big_bounding_rectangle = big_bounding_rectangle.grow_individual(left, top, right, bottom)
 				preview_image.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
 				preview_image_texture.create_from_image(preview_image, 0)
+				var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
+				Global.current_project.resize_bitmap_values(selected_bitmap_copy, big_bounding_rectangle.size)
+				Global.current_project.selection_bitmap = selected_bitmap_copy
+				Global.current_project.selection_bitmap_changed()
 				dragged_gizmo = null
+				update()
 
 
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
@@ -160,6 +165,7 @@ func move_content_start() -> void:
 		is_moving_content = true
 		undo_data = _get_undo_data(true)
 		get_preview_image()
+		update()
 
 
 func move_content(move : Vector2) -> void:
@@ -174,8 +180,8 @@ func move_content_confirm() -> void:
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
-
 	Global.current_project.selection_bitmap = selected_bitmap_copy
+
 	preview_image = Image.new()
 	marching_ants_outline.offset = Vector2.ZERO
 	is_moving_content = false
