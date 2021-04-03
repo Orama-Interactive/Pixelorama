@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-03-30 17:12\n"
+"PO-Revision-Date: 2021-04-03 22:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr ""
 
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -169,16 +169,16 @@ msgid "Window Transparency"
 msgstr "Прозрачность окна"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Расположение панелей"
 
 msgid "Auto"
-msgstr ""
+msgstr "Автоматически"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Широкий экран"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Высокий экран"
 
 msgid "Mirror View"
 msgstr "Зеркальный вид"
@@ -235,7 +235,7 @@ msgid "New frame"
 msgstr "Новый кадр"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Заменить кадр"
 
 msgid "New layer"
 msgstr "Новый слой"
@@ -256,13 +256,13 @@ msgid "Vertical frames:"
 msgstr "Кадров по вертикали:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Начальный кадр:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "В кадре:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "На слое:"
 
 msgid "Brush type:"
 msgstr "Тип кисти:"
@@ -468,7 +468,7 @@ msgid "Display Scale"
 msgstr "Масштаб экрана"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Затемнять интерфейс при появлении диалога"
 
 msgid "Dark"
 msgstr "Тёмная"
@@ -820,10 +820,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Прямоугольник"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Эллипс"
 
 msgid "Choose a color for the left tool"
 msgstr "Выбор цвета для левого инструмента"
@@ -1041,10 +1041,10 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Заполнить фигуру"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Заполняет нарисованную фигуру цветом, вместо того, чтобы нарисовать пустую фигуру"
 
 msgid "Brush color from"
 msgstr "Цвет кисти из"
