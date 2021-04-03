@@ -327,46 +327,57 @@ func resize_canvas(width : int, height : int, offset_x : int, offset_y : int) ->
 
 
 func general_do_scale(width : int, height : int) -> void:
-	var x_ratio = Global.current_project.size.x / width
-	var y_ratio = Global.current_project.size.y / height
-	var new_x_symmetry_point = Global.current_project.x_symmetry_point / x_ratio
-	var new_y_symmetry_point = Global.current_project.y_symmetry_point / y_ratio
-	var new_x_symmetry_axis_points = Global.current_project.x_symmetry_axis.points
-	var new_y_symmetry_axis_points = Global.current_project.y_symmetry_axis.points
+	var project := Global.current_project
+	var size := Vector2(width, height).floor()
+	var x_ratio = project.size.x / width
+	var y_ratio = project.size.y / height
+
+	var bitmap : BitMap
+	bitmap = project.resize_bitmap(project.selection_bitmap, size)
+
+	var new_x_symmetry_point = project.x_symmetry_point / x_ratio
+	var new_y_symmetry_point = project.y_symmetry_point / y_ratio
+	var new_x_symmetry_axis_points = project.x_symmetry_axis.points
+	var new_y_symmetry_axis_points = project.y_symmetry_axis.points
 	new_x_symmetry_axis_points[0].y /= y_ratio
 	new_x_symmetry_axis_points[1].y /= y_ratio
 	new_y_symmetry_axis_points[0].x /= x_ratio
 	new_y_symmetry_axis_points[1].x /= x_ratio
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Scale")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "x_symmetry_point", new_x_symmetry_point)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "y_symmetry_point", new_y_symmetry_point)
-	Global.current_project.undo_redo.add_do_property(Global.current_project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
-	Global.current_project.undo_redo.add_do_property(Global.current_project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
+	project.undos += 1
+	project.undo_redo.create_action("Scale")
+	project.undo_redo.add_do_property(project, "size", size)
+	project.undo_redo.add_do_property(project, "selection_bitmap", bitmap)
+	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
+	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
+	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
+	project.undo_redo.add_do_property(project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
 
 
 func general_undo_scale() -> void:
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "x_symmetry_point", Global.current_project.x_symmetry_point)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "y_symmetry_point", Global.current_project.y_symmetry_point)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project.x_symmetry_axis, "points", Global.current_project.x_symmetry_axis.points)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project.y_symmetry_axis, "points", Global.current_project.y_symmetry_axis.points)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	var project := Global.current_project
+	project.undo_redo.add_undo_property(project, "size", project.size)
+	project.undo_redo.add_undo_property(project, "selection_bitmap", project.selection_bitmap)
+	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
+	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
+	project.undo_redo.add_undo_property(project.x_symmetry_axis, "points", project.x_symmetry_axis.points)
+	project.undo_redo.add_undo_property(project.y_symmetry_axis, "points", project.y_symmetry_axis.points)
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
 
 
 func general_do_centralize() -> void:
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Centralize")
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Centralize")
 
 
 func general_undo_centralize() -> void:
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	var project := Global.current_project
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
 
 
 func invert_image_colors(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:

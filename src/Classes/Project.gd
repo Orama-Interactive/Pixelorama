@@ -618,9 +618,9 @@ func invert_bitmap(bitmap : BitMap) -> void:
 
 
 # Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
-func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> void:
+func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> BitMap:
 	if new_size == bitmap.get_size():
-		return
+		return bitmap
 	var new_bitmap := BitMap.new()
 	new_bitmap.create(new_size)
 	var lw = min(bitmap.get_size().x, new_size.x)
@@ -629,7 +629,7 @@ func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> void:
 		for y in lh:
 			new_bitmap.set_bit(Vector2(x, y), bitmap.get_bit(Vector2(x, y)))
 
-	bitmap = new_bitmap
+	return new_bitmap
 
 
 # Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
