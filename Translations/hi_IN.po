@@ -10,37 +10,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2021-04-03 06:48\n"
+"PO-Revision-Date: 2021-04-03 07:08\n"
 
 msgid "OK"
 msgstr "ठीक है"
 
 msgid "Cancel"
-msgstr ""
+msgstr "कैंसिल करें"
 
 msgid "Open"
 msgstr "खोलें"
 
 msgid "Save"
-msgstr ""
+msgstr "सेव करें"
 
 msgid "Please Confirm..."
-msgstr "कृप्या पुष्टि करें..."
+msgstr "कृपया पुष्टि करें..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "फ़ाइल नाम:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "चित्र का आकार"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "कैनवास का आकार"
 
 msgid "Frame Size"
 msgstr ""
 
 msgid "Size"
-msgstr "आकार"
+msgstr "साइज़"
 
 msgid "Width:"
 msgstr "चौड़ाई:"
