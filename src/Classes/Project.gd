@@ -219,6 +219,7 @@ func change_project() -> void:
 
 	selection_bitmap_changed()
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
+	Global.canvas.selection.update()
 
 
 func serialize() -> Dictionary:
