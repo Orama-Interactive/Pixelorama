@@ -18,7 +18,7 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
-func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
+func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
 	DrawingAlgos.generate_gradient(_cel, [color1.color, color2.color], steps.value, direction.selected, selection_checkbox.pressed, _project)
 
 

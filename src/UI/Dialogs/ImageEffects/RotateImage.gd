@@ -23,15 +23,15 @@ func _about_to_show() -> void:
 	angle_hslider.value = 0
 
 
-func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
+func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
 	var angle : float = deg2rad(angle_hslider.value)
 	match type_option_button.text:
 		"Rotxel":
-			DrawingAlgos.rotxel(_cel, angle, _pixels)
+			DrawingAlgos.rotxel(_cel, angle, selection_checkbox.pressed, _project)
 		"Nearest neighbour":
-			DrawingAlgos.nn_rotate(_cel, angle, _pixels)
+			DrawingAlgos.nn_rotate(_cel, angle, selection_checkbox.pressed, _project)
 		"Upscale, Rotate and Downscale":
-			DrawingAlgos.fake_rotsprite(_cel, angle, _pixels)
+			DrawingAlgos.fake_rotsprite(_cel, angle, selection_checkbox.pressed, _project)
 
 
 func _confirmed() -> void:

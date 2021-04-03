@@ -24,7 +24,6 @@ var y_symmetry_axis : SymmetryGuide
 
 var selection_bitmap := BitMap.new()
 var has_selection := false
-var selected_pixels := []
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
