@@ -22,7 +22,7 @@ func _confirmed() -> void:
 
 
 func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
-	DrawingAlgos.adjust_hsv(_cel, hue_slider.value, sat_slider.value, val_slider.value, _pixels)
+	DrawingAlgos.adjust_hsv(_cel, hue_slider.value, sat_slider.value, val_slider.value, selection_checkbox.pressed, _project)
 
 
 func reset() -> void:

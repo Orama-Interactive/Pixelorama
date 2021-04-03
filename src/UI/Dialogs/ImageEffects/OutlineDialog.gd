@@ -21,7 +21,7 @@ func set_nodes() -> void:
 
 
 func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
-	DrawingAlgos.generate_outline(_cel, _pixels, color, thickness, diagonal, inside_image)
+	DrawingAlgos.generate_outline(_cel, selection_checkbox.pressed, _project, color, thickness, diagonal, inside_image)
 
 
 func _on_ThickValue_value_changed(value : int) -> void:

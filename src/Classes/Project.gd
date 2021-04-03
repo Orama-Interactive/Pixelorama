@@ -90,11 +90,11 @@ func commit_redo() -> void:
 
 func selection_bitmap_changed() -> void:
 	var image := Image.new()
+	var image_texture := ImageTexture.new()
 	has_selection = selection_bitmap.get_true_bit_count() > 0
 	if has_selection:
 		image = bitmap_to_image(selection_bitmap)
-	var image_texture := ImageTexture.new()
-	image_texture.create_from_image(image, 0)
+		image_texture.create_from_image(image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 
 

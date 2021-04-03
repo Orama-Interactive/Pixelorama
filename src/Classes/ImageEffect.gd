@@ -113,6 +113,7 @@ func update_preview() -> void:
 		_:
 			preview_image.copy_from(current_frame)
 	commit_action(preview_image, pixels)
+	preview_image.unlock()
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
 
