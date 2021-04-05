@@ -31,6 +31,7 @@ class Gizmo:
 var clipboard := Clipboard.new()
 var is_moving_content := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+var temp_rect := Rect2()
 var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
 var original_bitmap := BitMap.new()
@@ -79,23 +80,33 @@ func _input(event : InputEvent) -> void:
 				Global.has_focus = false
 				dragged_gizmo = gizmo
 				mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
+				temp_rect = big_bounding_rectangle
 				move_content_start()
+				marching_ants_outline.offset = Vector2.ZERO
 			elif dragged_gizmo:
 				Global.has_focus = true
-				var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
-				diff = diff.round()
-				var left := 0.0 if dragged_gizmo.direction.x >= 0 else diff.x
-				var top := 0.0 if dragged_gizmo.direction.y >= 0 else diff.y
-				var right := diff.x if dragged_gizmo.direction.x >= 0 else 0.0
-				var bottom := diff.y if dragged_gizmo.direction.y >= 0 else 0.0
-				self.big_bounding_rectangle = big_bounding_rectangle.grow_individual(left, top, right, bottom)
-				preview_image.copy_from(original_preview_image)
-				preview_image.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
-				preview_image_texture.create_from_image(preview_image, 0)
-				Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, big_bounding_rectangle.size)
-				Global.current_project.selection_bitmap_changed()
 				dragged_gizmo = null
-				update()
+
+		if dragged_gizmo:
+			var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
+			var dir := dragged_gizmo.direction
+			if diff != Vector2.ZERO:
+				mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
+			var left := 0.0 if dir.x >= 0 else diff.x
+			var top := 0.0 if dir.y >= 0 else diff.y
+			var right := diff.x if dir.x >= 0 else 0.0
+			var bottom := diff.y if dir.y >= 0 else 0.0
+			temp_rect = temp_rect.grow_individual(left, top, right, bottom)
+			big_bounding_rectangle = temp_rect.abs()
+			big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
+			self.big_bounding_rectangle.size = big_bounding_rectangle.size.ceil()
+			var size = big_bounding_rectangle.size.abs()
+			preview_image.copy_from(original_preview_image)
+			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+			preview_image_texture.create_from_image(preview_image, 0)
+			Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size)
+			Global.current_project.selection_bitmap_changed()
+			update()
 
 
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
@@ -354,7 +365,7 @@ func _draw() -> void:
 		_scale.x = -1
 	draw_set_transform(_position, rotation, _scale)
 	draw_rect(drawn_rect, Color.black, false)
-	if big_bounding_rectangle.size > Vector2.ZERO:
+	if big_bounding_rectangle.size != Vector2.ZERO:
 		for gizmo in gizmos: # Draw gizmos
 			draw_rect(gizmo.rect, Color.black)
 			var filled_rect : Rect2 = gizmo.rect
