@@ -103,6 +103,10 @@ func _input(event : InputEvent) -> void:
 			var size = big_bounding_rectangle.size.abs()
 			preview_image.copy_from(original_preview_image)
 			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+			if temp_rect.size.x < 0:
+				preview_image.flip_x()
+			if temp_rect.size.y < 0:
+				preview_image.flip_x()
 			preview_image_texture.create_from_image(preview_image, 0)
 			Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size)
 			Global.current_project.selection_bitmap_changed()
