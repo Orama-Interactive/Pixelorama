@@ -335,8 +335,10 @@ func invert() -> void:
 	var project := Global.current_project
 	var _undo_data = _get_undo_data(false)
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
+	selection_bitmap_copy = project.resize_bitmap(selection_bitmap_copy, project.size)
 	project.invert_bitmap(selection_bitmap_copy)
 	project.selection_bitmap = selection_bitmap_copy
+	Global.current_project.selection_bitmap_changed()
 	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 	commit_undo("Rectangle Select", _undo_data)
 
@@ -346,8 +348,9 @@ func clear_selection(use_undo := false) -> void:
 	if !project.has_selection:
 		return
 	move_content_confirm()
-	var full_rect = Rect2(Vector2.ZERO, project.selection_bitmap.get_size())
 	var _undo_data = _get_undo_data(false)
+	project.selection_bitmap = project.resize_bitmap(project.selection_bitmap, project.size)
+	var full_rect = Rect2(Vector2.ZERO, project.selection_bitmap.get_size())
 	select_rect(full_rect, false)
 
 	self.big_bounding_rectangle = Rect2()

@@ -691,15 +691,20 @@ func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
 
 
 func resize_bitmap_values(bitmap : BitMap, new_size : Vector2) -> BitMap:
-	var new_bitmap := BitMap.new()
 	var selection_node = Global.canvas.selection
 	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var new_bitmap_size := Vector2()
+	new_bitmap_size.x = max(size.x, selection_position.x + new_size.x)
+	new_bitmap_size.y = max(size.y, selection_position.y + new_size.y)
+	var new_bitmap := BitMap.new()
 	var image : Image = bitmap_to_image(bitmap)
 	var selection_rect := image.get_used_rect()
 	var smaller_image := image.get_rect(selection_rect)
 	image.lock()
 	image.fill(Color(0))
 	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
-	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, size), selection_position)
+	if new_bitmap_size != size:
+		image.crop(new_bitmap_size.x, new_bitmap_size.y)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), selection_position)
 	new_bitmap.create_from_image_alpha(image)
 	return new_bitmap
