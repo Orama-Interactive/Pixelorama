@@ -336,6 +336,7 @@ func select_all() -> void:
 
 
 func invert() -> void:
+	move_content_confirm()
 	var project := Global.current_project
 	var _undo_data = _get_undo_data(false)
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
