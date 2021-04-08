@@ -106,9 +106,9 @@ func _input(event : InputEvent) -> void:
 			if temp_rect.size.x < 0:
 				preview_image.flip_x()
 			if temp_rect.size.y < 0:
-				preview_image.flip_x()
+				preview_image.flip_y()
 			preview_image_texture.create_from_image(preview_image, 0)
-			Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size)
+			Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
 			Global.current_project.selection_bitmap_changed()
 			update()
 
