@@ -5,7 +5,7 @@ enum GradientDirection {TOP, BOTTOM, LEFT, RIGHT}
 
 
 func scale3X(sprite : Image, tol : float = 50) -> Image:
-	var scaled = Image.new()
+	var scaled := Image.new()
 	scaled.create(sprite.get_width()*3, sprite.get_height()*3, false, Image.FORMAT_RGBA8)
 	scaled.lock()
 	sprite.lock()
@@ -62,32 +62,23 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	return scaled
 
 
-func rotxel(sprite : Image, angle : float, affect_selection : bool, project : Project) -> void:
+func rotxel(sprite : Image, angle : float, pivot : Vector2) -> void:
 	# If angle is simple, then nn rotation is the best
 	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:
-		nn_rotate(sprite, angle, affect_selection, project)
+		nn_rotate(sprite, angle, pivot)
 		return
 
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
-	var selection_rectangle := Rect2()
-	if affect_selection and project.has_selection:
-		selection_rectangle = project.get_selection_rectangle()
-	else:
-		selection_rectangle = Rect2(Vector2.ZERO, project.size)
-	var center : Vector2 = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
 	var ox : int
 	var oy : int
 	var p : Color
 	aux.lock()
 	sprite.lock()
-	for x in project.size.x:
-		for y in project.size.y:
-			var pos := Vector2(x, y)
-			if affect_selection and !project.can_pixel_get_drawn(pos):
-				continue
-			var dx = 3*(x - center.x)
-			var dy = 3*(y - center.y)
+	for x in sprite.get_size().x:
+		for y in sprite.get_size().y:
+			var dx = 3*(x - pivot.x)
+			var dy = 3*(y - pivot.y)
 			var found_pixel : bool = false
 			for k in range(9):
 				var i = -1 + k % 3
@@ -96,8 +87,8 @@ func rotxel(sprite : Image, angle : float, affect_selection : bool, project : Pr
 				var dir = atan2(dy + j, dx + i)
 				var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
 				dir -= angle
-				ox = round(center.x*3 + 1 + mag*cos(dir))
-				oy = round(center.y*3 + 1 + mag*sin(dir))
+				ox = round(pivot.x*3 + 1 + mag*cos(dir))
+				oy = round(pivot.y*3 + 1 + mag*sin(dir))
 
 				if (sprite.get_width() % 2 != 0):
 					ox += 1
@@ -181,56 +172,32 @@ func rotxel(sprite : Image, angle : float, affect_selection : bool, project : Pr
 	aux.unlock()
 
 
-func fake_rotsprite(sprite : Image, angle : float, affect_selection : bool, project : Project) -> void:
-	var selection_rectangle := Rect2()
-	if affect_selection and project.has_selection:
-		selection_rectangle = project.get_selection_rectangle()
-	else:
-		selection_rectangle = Rect2(Vector2.ZERO, project.size)
+func fake_rotsprite(sprite : Image, angle : float, pivot : Vector2) -> void:
 	var selected_sprite := Image.new()
-	selected_sprite = sprite.get_rect(selection_rectangle)
+	selected_sprite.copy_from(sprite)
 	selected_sprite.copy_from(scale3X(selected_sprite))
-	nn_rotate(selected_sprite, angle, false, project)
+	nn_rotate(selected_sprite, angle, pivot * 3)
 # warning-ignore:integer_division
 # warning-ignore:integer_division
 	selected_sprite.resize(selected_sprite.get_width() / 3, selected_sprite.get_height() / 3, 0)
-	sprite.blit_rect(selected_sprite, Rect2(Vector2.ZERO, selected_sprite.get_size()), selection_rectangle.position)
+	sprite.blit_rect(selected_sprite, Rect2(Vector2.ZERO, selected_sprite.get_size()), Vector2.ZERO)
 
 
-func nn_rotate(sprite : Image, angle : float, affect_selection : bool, project : Project) -> void:
+func nn_rotate(sprite : Image, angle : float, pivot : Vector2) -> void:
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
 	sprite.lock()
 	aux.lock()
 	var ox: int
 	var oy: int
-	var center : Vector2
-	if project.has_selection and affect_selection:
-		var selection_rectangle :=  project.get_selection_rectangle()
-		center = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
-		for x in project.size.x:
-			for y in project.size.y:
-				var pos := Vector2(x, y)
-				if !project.can_pixel_get_drawn(pos):
-					continue
-				ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
-				oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
-				if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
-					sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
-				else:
-					sprite.set_pixel(x, y, Color(0,0,0,0))
-	else:
-# warning-ignore:integer_division
-# warning-ignore:integer_division
-		center = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
-		for x in range(sprite.get_width()):
-			for y in range(sprite.get_height()):
-				ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
-				oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
-				if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
-					sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
-				else:
-					sprite.set_pixel(x, y, Color(0,0,0,0))
+	for x in range(sprite.get_width()):
+		for y in range(sprite.get_height()):
+			ox = (x - pivot.x)*cos(angle) + (y - pivot.y)*sin(angle) + pivot.x
+			oy = -(x - pivot.x)*sin(angle) + (y - pivot.y)*cos(angle) + pivot.y
+			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
+				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
+			else:
+				sprite.set_pixel(x, y, Color(0,0,0,0))
 	sprite.unlock()
 	aux.unlock()
 
