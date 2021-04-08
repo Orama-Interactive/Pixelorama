@@ -203,7 +203,7 @@ func move_content_confirm() -> void:
 	original_preview_image = Image.new()
 	preview_image = Image.new()
 	original_bitmap = BitMap.new()
-	marching_ants_outline.offset = Vector2.ZERO
+#	marching_ants_outline.offset = Vector2.ZERO
 	is_moving_content = false
 	commit_undo("Move Selection", undo_data)
 	update()
@@ -397,6 +397,8 @@ func get_preview_image() -> void:
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
 				var pos := Vector2(x, y)
+				if big_bounding_rectangle.position.x < 0 or big_bounding_rectangle.position.y < 0:
+					continue
 				if not project.selection_bitmap.get_bit(pos + big_bounding_rectangle.position):
 					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
 		original_preview_image.unlock()
