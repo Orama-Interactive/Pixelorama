@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-03-30 17:13\n"
+"PO-Revision-Date: 2021-04-08 17:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "Rozmiar klatki"
 
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -259,10 +259,10 @@ msgid "Start frame:"
 msgstr "Klatka początkowa:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "W klatce:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Na warstwie:"
 
 msgid "Brush type:"
 msgstr "Typ pędzla:"
