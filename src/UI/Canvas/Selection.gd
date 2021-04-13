@@ -40,7 +40,10 @@ var preview_image_texture := ImageTexture.new()
 var undo_data : Dictionary
 var drawn_rect := Rect2(0, 0, 0, 0)
 var gizmos := [] # Array of Gizmos
+var rotation_gizmo := Rect2()
 var dragged_gizmo : Gizmo = null
+var is_rotating := false
+var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 
 onready var marching_ants_outline : Sprite = $MarchingAntsOutline
@@ -66,6 +69,7 @@ func _input(event : InputEvent) -> void:
 				move_content_cancel()
 	elif event is InputEventMouse:
 		var gizmo
+		var rot_gizmo := rotation_gizmo.has_point(Global.canvas.current_pixel)
 		for g in gizmos:
 			if g.rect.has_point(Global.canvas.current_pixel):
 				gizmo = g
@@ -76,41 +80,34 @@ func _input(event : InputEvent) -> void:
 			Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-			if gizmo and event.pressed:
-				Global.has_focus = false
-				dragged_gizmo = gizmo
-				mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
-				temp_rect = big_bounding_rectangle
-				move_content_start()
-				marching_ants_outline.offset = Vector2.ZERO
+			if event.pressed:
+				if gizmo:
+					Global.has_focus = false
+					dragged_gizmo = gizmo
+					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
+					temp_rect = big_bounding_rectangle
+					move_content_start()
+					marching_ants_outline.offset = Vector2.ZERO
+				if rot_gizmo:
+					Global.has_focus = false
+					is_rotating = true
+					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
+					temp_rect = big_bounding_rectangle
+					move_content_start()
+					var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
+					original_preview_image.crop(img_size, img_size)
+					marching_ants_outline.offset = Vector2.ZERO
 			elif dragged_gizmo:
 				Global.has_focus = true
 				dragged_gizmo = null
+			elif is_rotating:
+				Global.has_focus = true
+				is_rotating = false
 
 		if dragged_gizmo:
-			var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
-			var dir := dragged_gizmo.direction
-			if diff != Vector2.ZERO:
-				mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
-			var left := 0.0 if dir.x >= 0 else diff.x
-			var top := 0.0 if dir.y >= 0 else diff.y
-			var right := diff.x if dir.x >= 0 else 0.0
-			var bottom := diff.y if dir.y >= 0 else 0.0
-			temp_rect = temp_rect.grow_individual(left, top, right, bottom)
-			big_bounding_rectangle = temp_rect.abs()
-			big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
-			self.big_bounding_rectangle.size = big_bounding_rectangle.size.ceil()
-			var size = big_bounding_rectangle.size.abs()
-			preview_image.copy_from(original_preview_image)
-			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-			if temp_rect.size.x < 0:
-				preview_image.flip_x()
-			if temp_rect.size.y < 0:
-				preview_image.flip_y()
-			preview_image_texture.create_from_image(preview_image, 0)
-			Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
-			Global.current_project.selection_bitmap_changed()
-			update()
+			gizmo_resize()
+		if is_rotating:
+			gizmo_rotate()
 
 
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
@@ -127,6 +124,66 @@ func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	gizmos[5].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_end.y), size)
 	gizmos[6].rect = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
 	gizmos[7].rect = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
+
+	rotation_gizmo = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - 2), size)
+
+
+func gizmo_resize() -> void:
+	var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
+	var dir := dragged_gizmo.direction
+	if diff != Vector2.ZERO:
+		mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
+	var left := 0.0 if dir.x >= 0 else diff.x
+	var top := 0.0 if dir.y >= 0 else diff.y
+	var right := diff.x if dir.x >= 0 else 0.0
+	var bottom := diff.y if dir.y >= 0 else 0.0
+	temp_rect = temp_rect.grow_individual(left, top, right, bottom)
+	big_bounding_rectangle = temp_rect.abs()
+	big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
+	self.big_bounding_rectangle.size = big_bounding_rectangle.size.ceil()
+	var size = big_bounding_rectangle.size.abs()
+	preview_image.copy_from(original_preview_image)
+	preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+	if temp_rect.size.x < 0:
+		preview_image.flip_x()
+	if temp_rect.size.y < 0:
+		preview_image.flip_y()
+	preview_image_texture.create_from_image(preview_image, 0)
+	Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
+	Global.current_project.selection_bitmap_changed()
+	update()
+
+
+func gizmo_rotate() -> void:
+	var angle := Global.canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
+	angle = deg2rad(floor(rad2deg(angle)))
+	if angle == prev_angle:
+		print("hm")
+		return
+	prev_angle = angle
+#	print(rad2deg(angle))
+#	var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
+# warning-ignore:integer_division
+# warning-ignore:integer_division
+#	var pivot = Vector2(original_preview_image.get_width() / 2, original_preview_image.get_height() / 2)
+	var pivot = Vector2(big_bounding_rectangle.size.x / 2, big_bounding_rectangle.size.y / 2)
+	preview_image.copy_from(original_preview_image)
+	if temp_rect.position != big_bounding_rectangle.position:
+		preview_image.fill(Color(0, 0, 0, 0))
+		var pos_diff := (temp_rect.position - big_bounding_rectangle.position).abs()
+#		pos_diff.y = 0
+		preview_image.blit_rect(original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff)
+	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
+	preview_image_texture.create_from_image(preview_image, 0)
+
+	var bitmap_image = Global.current_project.bitmap_to_image(original_bitmap)
+	var bitmap_pivot = temp_rect.position + ((temp_rect.end - temp_rect.position) / 2)
+	DrawingAlgos.nn_rotate(bitmap_image, angle, bitmap_pivot)
+	Global.current_project.selection_bitmap.create_from_image_alpha(bitmap_image)
+	Global.current_project.selection_bitmap_changed()
+	self.big_bounding_rectangle = bitmap_image.get_used_rect()
+#	print(big_bounding_rectangle)
+	update()
 
 
 func move_borders_start() -> void:
@@ -199,6 +256,8 @@ func move_content_confirm() -> void:
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
 	Global.current_project.selection_bitmap = selected_bitmap_copy
+	var bitmap_image = Global.current_project.bitmap_to_image(selected_bitmap_copy)
+	self.big_bounding_rectangle = bitmap_image.get_used_rect()
 
 	original_preview_image = Image.new()
 	preview_image = Image.new()
@@ -382,6 +441,13 @@ func _draw() -> void:
 			filled_rect.size -= filled_size * 2
 			draw_rect(filled_rect, Color.white) # Filled white square
 
+		draw_rect(rotation_gizmo, Color.black)
+		var filled_rect : Rect2 = rotation_gizmo
+		var filled_size := Vector2(0.2, 0.2)
+		filled_rect.position += filled_size
+		filled_rect.size -= filled_size * 2
+		draw_rect(filled_rect, Color.white) # Filled white square
+
 	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
 	draw_set_transform(position, rotation, scale)
@@ -397,10 +463,9 @@ func get_preview_image() -> void:
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
 				var pos := Vector2(x, y)
-				if big_bounding_rectangle.position.x < 0 or big_bounding_rectangle.position.y < 0:
-					continue
-				if not project.selection_bitmap.get_bit(pos + big_bounding_rectangle.position):
+				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
+
 		original_preview_image.unlock()
 		preview_image.copy_from(original_preview_image)
 		preview_image_texture.create_from_image(preview_image, 0)
