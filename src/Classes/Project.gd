@@ -596,13 +596,13 @@ func is_empty() -> bool:
 
 
 func can_pixel_get_drawn(pixel : Vector2) -> bool:
+	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
+		return false
 	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 	if selection_position.x < 0:
 		pixel.x -= selection_position.x
 	if selection_position.y < 0:
 		pixel.y -= selection_position.y
-	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
-		return false
 	if has_selection:
 		return selection_bitmap.get_bit(pixel)
 	else:
@@ -664,6 +664,8 @@ func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
 func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
 	var selection_node = Global.canvas.selection
 	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_end : Vector2 = selection_node.big_bounding_rectangle.end
+
 	var image : Image = bitmap_to_image(bitmap)
 	var selection_rect := image.get_used_rect()
 	var smaller_image := image.get_rect(selection_rect)
@@ -671,8 +673,8 @@ func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
 	image.fill(Color(0))
 	selection_rect.position += to
 	var dst := selection_position
-	var x_diff = selection_rect.end.x - size.x
-	var y_diff = selection_rect.end.y - size.y
+	var x_diff = selection_end.x - size.x
+	var y_diff = selection_end.y - size.y
 	var nw = max(size.x, size.x + x_diff)
 	var nh = max(size.y, size.y + y_diff)
 
@@ -680,13 +682,22 @@ func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
 		nw -= selection_position.x
 		selection_node.marching_ants_outline.offset.x = selection_position.x
 		dst.x = 0
+	else:
+		selection_node.marching_ants_outline.offset.x = 0
 	if selection_position.y < 0:
 		nh -= selection_position.y
 		selection_node.marching_ants_outline.offset.y = selection_position.y
 		dst.y = 0
+	else:
+		selection_node.marching_ants_outline.offset.y = 0
+
+	if nw <= image.get_size().x:
+		nw = image.get_size().x
+	if nh <= image.get_size().y:
+		nh = image.get_size().y
 
 	image.crop(nw, nh)
-	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, size), dst)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
 	bitmap.create_from_image_alpha(image)
 
 

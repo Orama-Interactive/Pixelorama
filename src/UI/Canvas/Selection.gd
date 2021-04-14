@@ -35,6 +35,7 @@ var temp_rect := Rect2()
 var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
 var original_bitmap := BitMap.new()
+var original_offset := Vector2.ZERO
 var preview_image := Image.new()
 var preview_image_texture := ImageTexture.new()
 var undo_data : Dictionary
@@ -168,16 +169,16 @@ func gizmo_rotate() -> void:
 #	var pivot = Vector2(original_preview_image.get_width() / 2, original_preview_image.get_height() / 2)
 	var pivot = Vector2(big_bounding_rectangle.size.x / 2, big_bounding_rectangle.size.y / 2)
 	preview_image.copy_from(original_preview_image)
-	if temp_rect.position != big_bounding_rectangle.position:
+	if original_big_bounding_rectangle.position != big_bounding_rectangle.position:
 		preview_image.fill(Color(0, 0, 0, 0))
-		var pos_diff := (temp_rect.position - big_bounding_rectangle.position).abs()
+		var pos_diff := (original_big_bounding_rectangle.position - big_bounding_rectangle.position).abs()
 #		pos_diff.y = 0
 		preview_image.blit_rect(original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff)
 	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
 	preview_image_texture.create_from_image(preview_image, 0)
 
 	var bitmap_image = Global.current_project.bitmap_to_image(original_bitmap)
-	var bitmap_pivot = temp_rect.position + ((temp_rect.end - temp_rect.position) / 2)
+	var bitmap_pivot = original_big_bounding_rectangle.position + ((original_big_bounding_rectangle.end - original_big_bounding_rectangle.position) / 2)
 	DrawingAlgos.nn_rotate(bitmap_image, angle, bitmap_pivot)
 	Global.current_project.selection_bitmap.create_from_image_alpha(bitmap_image)
 	Global.current_project.selection_bitmap_changed()
@@ -240,6 +241,7 @@ func move_content_start() -> void:
 		get_preview_image()
 		original_bitmap = Global.current_project.selection_bitmap.duplicate()
 		original_big_bounding_rectangle = big_bounding_rectangle
+		original_offset = marching_ants_outline.offset
 		update()
 
 
@@ -256,8 +258,6 @@ func move_content_confirm() -> void:
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
 	Global.current_project.selection_bitmap = selected_bitmap_copy
-	var bitmap_image = Global.current_project.bitmap_to_image(selected_bitmap_copy)
-	self.big_bounding_rectangle = bitmap_image.get_used_rect()
 
 	original_preview_image = Image.new()
 	preview_image = Image.new()
@@ -271,7 +271,7 @@ func move_content_confirm() -> void:
 func move_content_cancel() -> void:
 	if preview_image.is_empty():
 		return
-	marching_ants_outline.offset = Vector2.ZERO
+	marching_ants_outline.offset = original_offset
 
 	is_moving_content = false
 	self.big_bounding_rectangle = original_big_bounding_rectangle
@@ -415,7 +415,7 @@ func clear_selection(use_undo := false) -> void:
 	var _undo_data = _get_undo_data(false)
 	project.selection_bitmap = project.resize_bitmap(project.selection_bitmap, project.size)
 	var full_rect = Rect2(Vector2.ZERO, project.selection_bitmap.get_size())
-	select_rect(full_rect, false)
+	project.selection_bitmap.set_bit_rect(full_rect, false)
 
 	self.big_bounding_rectangle = Rect2()
 	marching_ants_outline.offset = Vector2.ZERO
