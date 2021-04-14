@@ -159,7 +159,6 @@ func gizmo_rotate() -> void:
 	var angle := Global.canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
 	angle = deg2rad(floor(rad2deg(angle)))
 	if angle == prev_angle:
-		print("hm")
 		return
 	prev_angle = angle
 #	print(rad2deg(angle))
@@ -254,7 +253,7 @@ func move_content_confirm() -> void:
 		return
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
+	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
 	Global.current_project.selection_bitmap = selected_bitmap_copy
@@ -280,7 +279,7 @@ func move_content_cancel() -> void:
 	preview_image = original_preview_image
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
+	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
 	original_preview_image = Image.new()
 	preview_image = Image.new()
@@ -460,6 +459,7 @@ func get_preview_image() -> void:
 #		original_preview_image.copy_from(cel_image)
 		original_preview_image = cel_image.get_rect(big_bounding_rectangle)
 		original_preview_image.lock()
+		# For non-rectangular selections
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
 				var pos := Vector2(x, y)
@@ -472,7 +472,7 @@ func get_preview_image() -> void:
 
 	var clear_image := Image.new()
 	clear_image.create(original_preview_image.get_width(), original_preview_image.get_height(), false, Image.FORMAT_RGBA8)
-	cel_image.blit_rect_mask(clear_image, original_preview_image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
+	cel_image.blit_rect_mask(clear_image, original_preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
 
 
