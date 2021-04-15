@@ -183,6 +183,10 @@ func zoom_changed() -> void:
 		var size := max(Global.current_project.selection_bitmap.get_size().x, Global.current_project.selection_bitmap.get_size().y)
 		marching_ants.material.set_shader_param("width", zoom.x)
 		marching_ants.material.set_shader_param("frequency", (1.0 / zoom.x) * 10 * size / 64)
+		for gizmo in Global.canvas.selection.gizmos:
+			if gizmo.rect.size == Vector2.ZERO:
+				return
+			Global.canvas.selection.update_gizmos()
 
 	elif name == "CameraPreview":
 		Global.preview_zoom_slider.value = -zoom.x

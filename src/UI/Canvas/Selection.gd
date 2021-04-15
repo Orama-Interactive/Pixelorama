@@ -8,16 +8,22 @@ class Clipboard:
 
 
 class Gizmo:
+	enum Type {SCALE, ROTATE}
+
 	var rect : Rect2
 	var direction := Vector2.ZERO
+	var type : int
 
-	func _init(_direction : Vector2) -> void:
+	func _init(_type : int = Type.SCALE, _direction := Vector2.ZERO) -> void:
+		type = _type
 		direction = _direction
 
 
 	func get_cursor() -> int:
 		var cursor := Input.CURSOR_MOVE
-		if direction == Vector2(-1, -1) or direction == Vector2(1, 1): # Top left or bottom right
+		if direction == Vector2.ZERO:
+			return Input.CURSOR_POINTING_HAND
+		elif direction == Vector2(-1, -1) or direction == Vector2(1, 1): # Top left or bottom right
 			cursor = Input.CURSOR_FDIAGSIZE
 		elif direction == Vector2(1, -1) or direction == Vector2(-1, 1): # Top right or bottom left
 			cursor = Input.CURSOR_BDIAGSIZE
@@ -41,9 +47,7 @@ var preview_image_texture := ImageTexture.new()
 var undo_data : Dictionary
 var drawn_rect := Rect2(0, 0, 0, 0)
 var gizmos := [] # Array of Gizmos
-var rotation_gizmo := Rect2()
 var dragged_gizmo : Gizmo = null
-var is_rotating := false
 var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 
@@ -51,14 +55,16 @@ onready var marching_ants_outline : Sprite = $MarchingAntsOutline
 
 
 func _ready() -> void:
-	gizmos.append(Gizmo.new(Vector2(-1, -1))) # Top left
-	gizmos.append(Gizmo.new(Vector2(0, -1))) # Center top
-	gizmos.append(Gizmo.new(Vector2(1, -1))) # Top right
-	gizmos.append(Gizmo.new(Vector2(1, 0))) # Center right
-	gizmos.append(Gizmo.new(Vector2(1, 1))) # Bottom right
-	gizmos.append(Gizmo.new(Vector2(0, 1))) # Center bottom
-	gizmos.append(Gizmo.new(Vector2(-1, 1))) # Bottom left
-	gizmos.append(Gizmo.new(Vector2(-1, 0))) # Center left
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1))) # Top left
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, -1))) # Center top
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, -1))) # Top right
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, 0))) # Center right
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, 1))) # Bottom right
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, 1))) # Center bottom
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 1))) # Bottom left
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 0))) # Center left
+
+	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
 
 func _input(event : InputEvent) -> void:
@@ -70,7 +76,6 @@ func _input(event : InputEvent) -> void:
 				move_content_cancel()
 	elif event is InputEventMouse:
 		var gizmo
-		var rot_gizmo := rotation_gizmo.has_point(Global.canvas.current_pixel)
 		for g in gizmos:
 			if g.rect.has_point(Global.canvas.current_pixel):
 				gizmo = g
@@ -84,38 +89,35 @@ func _input(event : InputEvent) -> void:
 			if event.pressed:
 				if gizmo:
 					Global.has_focus = false
+					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					dragged_gizmo = gizmo
-					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					temp_rect = big_bounding_rectangle
 					move_content_start()
 					marching_ants_outline.offset = Vector2.ZERO
-				if rot_gizmo:
-					Global.has_focus = false
-					is_rotating = true
-					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
-					temp_rect = big_bounding_rectangle
-					move_content_start()
-					var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
-					original_preview_image.crop(img_size, img_size)
-					marching_ants_outline.offset = Vector2.ZERO
+					if gizmo.type == Gizmo.Type.ROTATE:
+						var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
+						original_preview_image.crop(img_size, img_size)
+
 			elif dragged_gizmo:
 				Global.has_focus = true
 				dragged_gizmo = null
-			elif is_rotating:
-				Global.has_focus = true
-				is_rotating = false
 
 		if dragged_gizmo:
-			gizmo_resize()
-		if is_rotating:
-			gizmo_rotate()
+			if dragged_gizmo.type == Gizmo.Type.SCALE:
+				gizmo_resize()
+			else:
+				gizmo_rotate()
 
 
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	big_bounding_rectangle = value
+	update_gizmos()
+
+
+func update_gizmos() -> void:
 	var rect_pos : Vector2 = big_bounding_rectangle.position
 	var rect_end : Vector2 = big_bounding_rectangle.end
-	var size := Vector2.ONE
+	var size := Vector2.ONE * Global.camera.zoom * 10
 	# Clockwise, starting from top-left corner
 	gizmos[0].rect = Rect2(rect_pos - size, size)
 	gizmos[1].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y), size)
@@ -126,7 +128,9 @@ func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	gizmos[6].rect = Rect2(Vector2(rect_pos.x - size.x, rect_end.y), size)
 	gizmos[7].rect = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
 
-	rotation_gizmo = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - 2), size)
+	# Rotation gizmo (temp)
+	gizmos[8].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size)
+	update()
 
 
 func gizmo_resize() -> void:
@@ -435,17 +439,10 @@ func _draw() -> void:
 		for gizmo in gizmos: # Draw gizmos
 			draw_rect(gizmo.rect, Color.black)
 			var filled_rect : Rect2 = gizmo.rect
-			var filled_size := Vector2(0.2, 0.2)
+			var filled_size : Vector2 = gizmo.rect.size * Vector2(0.2, 0.2)
 			filled_rect.position += filled_size
 			filled_rect.size -= filled_size * 2
 			draw_rect(filled_rect, Color.white) # Filled white square
-
-		draw_rect(rotation_gizmo, Color.black)
-		var filled_rect : Rect2 = rotation_gizmo
-		var filled_size := Vector2(0.2, 0.2)
-		filled_rect.position += filled_size
-		filled_rect.size -= filled_size * 2
-		draw_rect(filled_rect, Color.white) # Filled white square
 
 	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
