@@ -174,21 +174,12 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
-	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
-	var i := 0
-	for camera in cameras:
-		camera.zoom = cameras_zoom[i]
-		camera.offset = cameras_offset[i]
-		i += 1
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
 	Global.canvas.grid.update()
-	Global.canvas.pixel_grid.update()
 	Global.transparent_checker._ready()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
-	Global.preview_zoom_slider.value = -Global.camera_preview.zoom.x
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -219,6 +210,13 @@ func change_project() -> void:
 	selection_bitmap_changed()
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
 	Global.canvas.selection.update()
+
+	var i := 0
+	for camera in [Global.camera, Global.camera2, Global.camera_preview]:
+		camera.zoom = cameras_zoom[i]
+		camera.offset = cameras_offset[i]
+		camera.zoom_changed()
+		i += 1
 
 
 func serialize() -> Dictionary:
