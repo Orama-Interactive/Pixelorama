@@ -65,18 +65,18 @@ func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 1))) # Bottom left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 0))) # Center left
 
-	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
+#	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventKey:
 		if is_moving_content: # Temporary code
-			if event.scancode == 16777221:
+			if event.scancode == 16777221: # Enter
 				move_content_confirm()
-			elif event.scancode == 16777217:
+			elif event.scancode == 16777217: # Escape
 				move_content_cancel()
 	elif event is InputEventMouse:
-		var gizmo
+		var gizmo : Gizmo
 		for g in gizmos:
 			if g.rect.has_point(Global.canvas.current_pixel):
 				gizmo = g
@@ -130,7 +130,7 @@ func update_gizmos() -> void:
 	gizmos[7].rect = Rect2(Vector2(rect_pos.x - size.x, (rect_end.y + rect_pos.y - size.y) / 2), size)
 
 	# Rotation gizmo (temp)
-	gizmos[8].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size)
+#	gizmos[8].rect = Rect2(Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size)
 	update()
 
 
@@ -160,13 +160,12 @@ func gizmo_resize() -> void:
 	update()
 
 
-func gizmo_rotate() -> void:
+func gizmo_rotate() -> void: # Does not work properly yet
 	var angle := Global.canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
 	angle = deg2rad(floor(rad2deg(angle)))
 	if angle == prev_angle:
 		return
 	prev_angle = angle
-#	print(rad2deg(angle))
 #	var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
 # warning-ignore:integer_division
 # warning-ignore:integer_division
@@ -187,7 +186,6 @@ func gizmo_rotate() -> void:
 	Global.current_project.selection_bitmap.create_from_image_alpha(bitmap_image)
 	Global.current_project.selection_bitmap_changed()
 	self.big_bounding_rectangle = bitmap_image.get_used_rect()
-#	print(big_bounding_rectangle)
 	update()
 
 
@@ -329,8 +327,7 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 		image.unlock()
 		data["image_data"] = image.data
 		image.lock()
-#	for d in data.keys():
-#		print(d, data[d])
+
 	return data
 
 
