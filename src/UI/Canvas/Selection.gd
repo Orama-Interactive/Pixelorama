@@ -5,6 +5,7 @@ class Clipboard:
 	var image := Image.new()
 	var selection_bitmap := BitMap.new()
 	var big_bounding_rectangle := Rect2()
+	var selection_offset := Vector2.ZERO
 
 
 class Gizmo:
@@ -352,12 +353,18 @@ func copy() -> void:
 	for x in to_copy.get_size().x:
 		for y in to_copy.get_size().y:
 			var pos := Vector2(x, y)
-			if not project.selection_bitmap.get_bit(pos + big_bounding_rectangle.position):
+			var offset_pos = big_bounding_rectangle.position
+			if offset_pos.x < 0:
+				offset_pos.x = 0
+			if offset_pos.y < 0:
+				offset_pos.y = 0
+			if not project.selection_bitmap.get_bit(pos + offset_pos):
 				to_copy.set_pixelv(pos, Color(0))
 	to_copy.unlock()
 	clipboard.image = to_copy
 	clipboard.selection_bitmap = project.selection_bitmap.duplicate()
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
+	clipboard.selection_offset = marching_ants_outline.offset
 
 
 func paste() -> void:
@@ -369,6 +376,7 @@ func paste() -> void:
 	clear_selection()
 	project.selection_bitmap = clipboard.selection_bitmap.duplicate()
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
+	marching_ants_outline.offset = clipboard.selection_offset
 	image.blend_rect(clipboard.image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
 	commit_undo("Draw", _undo_data)
 
