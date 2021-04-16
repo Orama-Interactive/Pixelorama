@@ -424,9 +424,11 @@ func clear_selection(use_undo := false) -> void:
 		return
 	move_content_confirm()
 	var _undo_data = _get_undo_data(false)
-	project.selection_bitmap = project.resize_bitmap(project.selection_bitmap, project.size)
-	var full_rect = Rect2(Vector2.ZERO, project.selection_bitmap.get_size())
-	project.selection_bitmap.set_bit_rect(full_rect, false)
+	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
+	selection_bitmap_copy = project.resize_bitmap(selection_bitmap_copy, project.size)
+	var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
+	selection_bitmap_copy.set_bit_rect(full_rect, false)
+	project.selection_bitmap = selection_bitmap_copy
 
 	self.big_bounding_rectangle = Rect2()
 	marching_ants_outline.offset = Vector2.ZERO
