@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Palette/PaletteSwatch.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float size = 10.0;
+uniform vec4 color1 : hint_color = vec4(0.7, 0.7, 0.7, 1.0);
+uniform vec4 color2 : hint_color = vec4(1.0);
+uniform vec2 offset = vec2(0.0);
+uniform vec2 scale = vec2(0.0);
+uniform vec2 rect_size = vec2(0.0);
+uniform bool follow_movement = false;
+uniform bool follow_scale = false;
+
+void fragment() {
+	vec2 ref_pos = FRAGCOORD.xy;
+	if (follow_scale) {
+		if (!follow_movement)
+			ref_pos /= scale;
+		else
+			ref_pos = UV * rect_size;
+	}
+	else if (follow_movement)
+		ref_pos -= mod(offset, size * 2.0);
+
+	vec2 pos = mod(ref_pos, size * 2.0);
+	bool c1 = any(lessThan(pos, vec2(size)));
+	bool c2 = any(greaterThanEqual(pos, vec2(size)));
+	float c = c1 && c2 ? 1.0: 0.0;
+	COLOR = mix(color1, color2, c);
+	COLOR.a = 1.0;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/size = 10.0
+shader_param/color1 = Color( 0.878431, 0.878431, 0.878431, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0.8, 0.8 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = true
+
+[node name="PaletteSwatch" type="ColorRect"]
+anchor_left = 2.60711e-05
+anchor_top = -2.75612e-05
+anchor_right = 2.60711e-05
+anchor_bottom = -2.75612e-05
+margin_left = -0.033371
+margin_top = 0.0198441
+margin_right = 25.9666
+margin_bottom = 26.0198
+rect_min_size = Vector2( 8, 8 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+color = Color( 0, 0, 0, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TransparentChecker" type="ColorRect" parent="."]
+show_behind_parent = true
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="." to="." method="_on_PaletteSlot_gui_input"]

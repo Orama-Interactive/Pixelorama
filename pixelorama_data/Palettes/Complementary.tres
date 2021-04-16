@@ -1,0 +1,165 @@
+[gd_resource type="Resource" load_steps=28 format=2]
+
+[ext_resource path="res://src/Palette/Palette.gd" type="Script" id=1]
+[ext_resource path="res://src/Palette/PaletteColor.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+color = Color( 0.701961, 0.317647, 0.00784314, 1 )
+index = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+color = Color( 1, 0.6, 0.270588, 1 )
+index = 1
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+color = Color( 1, 0.443137, 0, 1 )
+index = 2
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+color = Color( 0, 0.6, 0.701961, 1 )
+index = 3
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+color = Color( 0, 0.854902, 1, 1 )
+index = 4
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+color = Color( 0.701961, 0.00784314, 0.00784314, 1 )
+index = 5
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+color = Color( 1, 0.270588, 0.270588, 1 )
+index = 6
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+color = Color( 1, 0.00784314, 0.00392157, 1 )
+index = 7
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+color = Color( 0, 0.701961, 0.2, 1 )
+index = 8
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+color = Color( 0, 1, 0.282353, 1 )
+index = 9
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+color = Color( 0.501961, 0.00784314, 0.701961, 1 )
+index = 10
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+color = Color( 0.792157, 0.270588, 1, 1 )
+index = 11
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+color = Color( 0.705882, 0, 0.996078, 1 )
+index = 12
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+color = Color( 0.498039, 0.701961, 0, 1 )
+index = 13
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+color = Color( 0.709804, 1, 0, 1 )
+index = 14
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+color = Color( 0.00784314, 0.0666667, 0.701961, 1 )
+index = 15
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+color = Color( 0.270588, 0.329412, 1, 1 )
+index = 16
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+color = Color( 0.00392157, 0.0862745, 1, 1 )
+index = 17
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+color = Color( 0.701961, 0.54902, 0, 1 )
+index = 18
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+color = Color( 1, 0.788235, 0, 1 )
+index = 19
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+color = Color( 0.00784314, 0.619608, 0.701961, 1 )
+index = 20
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 2 )
+color = Color( 0.478431, 0.941176, 1, 1 )
+index = 21
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 2 )
+color = Color( 0, 0.882353, 1, 1 )
+index = 22
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+color = Color( 0.701961, 0.301961, 0, 1 )
+index = 23
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 2 )
+color = Color( 1, 0.435294, 0, 1 )
+index = 24
+
+[resource]
+resource_name = "Complementary"
+script = ExtResource( 1 )
+name = "Complementary"
+comment = "Author: Erevoid"
+width = 8
+height = 8
+colors = {
+0: SubResource( 1 ),
+1: SubResource( 2 ),
+2: SubResource( 3 ),
+3: SubResource( 4 ),
+4: SubResource( 5 ),
+5: SubResource( 6 ),
+6: SubResource( 7 ),
+7: SubResource( 8 ),
+8: SubResource( 9 ),
+9: SubResource( 10 ),
+10: SubResource( 11 ),
+11: SubResource( 12 ),
+12: SubResource( 13 ),
+13: SubResource( 14 ),
+14: SubResource( 15 ),
+15: SubResource( 16 ),
+16: SubResource( 17 ),
+17: SubResource( 18 ),
+18: SubResource( 19 ),
+19: SubResource( 20 ),
+20: SubResource( 21 ),
+21: SubResource( 22 ),
+22: SubResource( 23 ),
+23: SubResource( 24 ),
+24: SubResource( 25 )
+}
+colors_max = 64

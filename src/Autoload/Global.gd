@@ -176,14 +176,7 @@ var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
 var preview_zoom_slider : VSlider
-var add_palette_button : BaseButton
-var edit_palette_button : BaseButton
-var palette_option_button : OptionButton
-var palette_container : GridContainer
-var edit_palette_popup : WindowDialog
-var new_palette_dialog : ConfirmationDialog
-var new_palette_name_line_edit : LineEdit
-var palette_import_file_dialog : FileDialog
+var palette_panel : PalettePanel
 
 var error_dialog : AcceptDialog
 var quit_dialog : ConfirmationDialog
@@ -320,14 +313,7 @@ func _ready() -> void:
 
 	preview_zoom_slider = find_node_by_name(root, "PreviewZoomSlider")
 
-	add_palette_button = find_node_by_name(root, "AddPalette")
-	edit_palette_button = find_node_by_name(root, "EditPalette")
-	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
-	palette_container = find_node_by_name(root, "PaletteContainer")
-	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
-	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")
-	new_palette_name_line_edit = find_node_by_name(new_palette_dialog, "NewPaletteNameLineEdit")
-	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
+	palette_panel = find_node_by_name(root, "PalettePanel")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 	quit_dialog = find_node_by_name(root, "QuitDialog")

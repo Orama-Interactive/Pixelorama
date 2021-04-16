@@ -23,8 +23,8 @@ func handle_loading_files(files : PoolStringArray) -> void:
 		var file_ext : String = file.get_extension().to_lower()
 		if file_ext == "pxo": # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "json" or file_ext == "gpl" or file_ext == "pal": # Palettes
-			Global.palette_container.on_palette_import_file_selected(file)
+		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json": # Palettes
+			Palettes.import_palette(file)
 		else: # Image files
 			var image := Image.new()
 			var err := image.load(file)

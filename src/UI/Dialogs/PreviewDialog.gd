@@ -80,7 +80,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
 	elif current_import_option == ImageImportOptions.PALETTE:
-		Global.palette_container.import_image_palette(path, image)
+		Palettes.import_palette(path)
 
 	elif current_import_option == ImageImportOptions.BRUSH:
 		add_brush()

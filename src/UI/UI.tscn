@@ -19,7 +19,7 @@
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/Canvas/Canvas.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/Palette/PalettePanelContainer.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/Palette/PalettePanel.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/graphics/dark_themes/tools/zoom.png" type="Texture" id=21]
 [ext_resource path="res://assets/graphics/dark_themes/tools/pan.png" type="Texture" id=22]
 [ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
@@ -449,8 +449,10 @@ custom_constants/autohide = 0
 [node name="ColorAndToolOptions" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
 margin_bottom = 248.0
 
-[node name="PalettePanelContainer" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
+[node name="PalettePanel" parent="RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
+margin_left = 15.0
 margin_top = 260.0
+margin_right = 315.0
 margin_bottom = 508.0
 [connection signal="reposition_active_tab_request" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]

@@ -131,3 +131,6 @@ func change_theme(ID : int) -> void:
 	Global.current_project.current_frame = Global.current_project.current_frame
 
 	Global.preferences_dialog.get_node("Popups/ShortcutSelector").theme = main_theme
+
+	# Sets disabled theme color on palette swatches
+	Global.palette_panel.reset_empty_palette_swatches_color()
