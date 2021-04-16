@@ -202,9 +202,8 @@ func move_borders(move : Vector2) -> void:
 
 func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
 	marching_ants_outline.offset = Vector2.ZERO
-	var diff := new_pos - old_pos
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
-	Global.current_project.move_bitmap_values(selected_bitmap_copy, diff)
+	Global.current_project.move_bitmap_values(selected_bitmap_copy)
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
 	commit_undo("Rectangle Select", undo_data)
@@ -224,14 +223,14 @@ func select_rect(rect : Rect2, select := true) -> void:
 
 	if offset_position != Vector2.ZERO:
 		big_bounding_rectangle.position -= offset_position
-		project.move_bitmap_values(selection_bitmap_copy, -offset_position)
+		project.move_bitmap_values(selection_bitmap_copy)
 
 	selection_bitmap_copy.set_bit_rect(rect, select)
 	big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 
 	if offset_position != Vector2.ZERO:
 		big_bounding_rectangle.position += offset_position
-		project.move_bitmap_values(selection_bitmap_copy, offset_position)
+		project.move_bitmap_values(selection_bitmap_copy)
 
 	project.selection_bitmap = selection_bitmap_copy
 	self.big_bounding_rectangle = big_bounding_rectangle # call getter method
@@ -259,7 +258,7 @@ func move_content_confirm() -> void:
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
-	Global.current_project.move_bitmap_values(selected_bitmap_copy, marching_ants_outline.offset)
+	Global.current_project.move_bitmap_values(selected_bitmap_copy)
 	Global.current_project.selection_bitmap = selected_bitmap_copy
 
 	original_preview_image = Image.new()
@@ -407,6 +406,7 @@ func invert() -> void:
 	project.selection_bitmap = selection_bitmap_copy
 	Global.current_project.selection_bitmap_changed()
 	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
+	marching_ants_outline.offset = Vector2.ZERO
 	commit_undo("Rectangle Select", _undo_data)
 
 

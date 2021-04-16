@@ -654,12 +654,7 @@ func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
 	return rect
 
 
-#func selection_is_rectangle(bitmap : BitMap = selection_bitmap) -> bool:
-#	var selection_rect = get_selection_rectangle(bitmap)
-#	return selection_rect == Global.canvas.selection.big_bounding_rectangle
-
-
-func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
+func move_bitmap_values(bitmap : BitMap) -> void:
 	var selection_node = Global.canvas.selection
 	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
 	var selection_end : Vector2 = selection_node.big_bounding_rectangle.end
@@ -669,7 +664,6 @@ func move_bitmap_values(bitmap : BitMap, to : Vector2) -> void:
 	var smaller_image := image.get_rect(selection_rect)
 	image.lock()
 	image.fill(Color(0))
-	selection_rect.position += to
 	var dst := selection_position
 	var x_diff = selection_end.x - size.x
 	var y_diff = selection_end.y - size.y
