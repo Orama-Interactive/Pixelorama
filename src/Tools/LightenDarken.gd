@@ -200,7 +200,7 @@ func update_strength() -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	update_mask()
+	update_mask(false)
 	_changed = false
 	_drawer.color_op.changed = false
 
