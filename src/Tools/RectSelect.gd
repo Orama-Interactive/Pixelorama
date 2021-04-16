@@ -14,15 +14,16 @@ func draw_start(position : Vector2) -> void:
 	Global.canvas.selection.move_content_confirm()
 	undo_data = Global.canvas.selection._get_undo_data(false)
 
-	if !Global.canvas.selection.big_bounding_rectangle.has_point(position):
-		_start = Rect2(position, Vector2.ZERO)
-
-	else:
+	if Global.current_project.selection_bitmap.get_bit(position) and !Tools.control and !Tools.shift:
+		# Move current selection
 		_move = true
 		_offset = position
 		start_position = position
 		Global.canvas.selection.move_borders_start()
 		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
+
+	else:
+		_start = Rect2(position, Vector2.ZERO)
 
 
 func draw_move(position : Vector2) -> void:

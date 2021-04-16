@@ -213,7 +213,7 @@ func move_borders_end() -> void:
 func select_rect(rect : Rect2, select := true) -> void:
 	var project : Project = Global.current_project
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
-	var offset_position := Vector2.ZERO
+	var offset_position := Vector2.ZERO # Used only if the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
 	if big_bounding_rectangle.position.x < 0:
 		rect.position.x -= big_bounding_rectangle.position.x
 		offset_position.x = big_bounding_rectangle.position.x
