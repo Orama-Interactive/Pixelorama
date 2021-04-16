@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-04-16 18:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1671,38 +1671,38 @@ msgid "Tiled In Y Axis"
 msgstr "Mozaicat pe axa Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Creează o paletă nouă"
 
 msgid "Create New Palette"
-msgstr ""
+msgstr "Creare paletă nouă"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Comentariu:"
 
 msgid "Empty"
 msgstr ""
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Din paleta actuală"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Din graficul bidimensional actual"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Din selecția actuală"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Adaugă o culoare nouă"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Elimină o culoare selectată"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Există deja paleta cu același nume și aceeași cale!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Denumirea paletei este necesară!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Reducerea dimensiunii paletei va reseta pozițiile culorilor. Culorile care nu se potrivesc cu dimensiunea paletei noi vor fi pierdute!"
 
