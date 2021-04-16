@@ -160,9 +160,6 @@ func change_project() -> void:
 
 	self.animation_tags = animation_tags
 
-	# Change the selection rectangle
-#	Global.selection_rectangl.set_rect(selected_rect)
-
 	# Change the guides
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
@@ -214,6 +211,7 @@ func change_project() -> void:
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
+	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 	selection_bitmap_changed()
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
@@ -381,7 +379,6 @@ func name_changed(value : String) -> void:
 func size_changed(value : Vector2) -> void:
 	size = value
 	update_tile_mode_rects()
-#	Global.selection_rectangl.set_rect(Global.selection_rectangl.get_rect())
 
 
 func frames_changed(value : Array) -> void:

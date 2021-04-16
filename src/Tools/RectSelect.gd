@@ -1,11 +1,9 @@
 extends BaseTool
 
 
-var start_position := Vector2.INF
-var rect := Rect2(0, 0, 0, 0)
+var _rect := Rect2(0, 0, 0, 0)
 var _start := Rect2(0, 0, 0, 0)
 var _offset := Vector2.ZERO
-var _drag := false
 var _move := false
 var undo_data : Dictionary
 
@@ -24,9 +22,7 @@ func draw_start(position : Vector2) -> void:
 		# Move current selection
 		_move = true
 		_offset = position
-		start_position = position
 		Global.canvas.selection.move_borders_start()
-		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
 
 	else:
 		_start = Rect2(position, Vector2.ZERO)
@@ -38,10 +34,10 @@ func draw_move(position : Vector2) -> void:
 		_offset = position
 		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
 	else:
-		rect = _start.expand(position).abs()
-		rect = rect.grow_individual(0, 0, 1, 1)
-		_set_cursor_text(rect)
-		Global.canvas.selection.drawn_rect = rect
+		_rect = _start.expand(position).abs()
+		_rect = _rect.grow_individual(0, 0, 1, 1)
+		_set_cursor_text(_rect)
+		Global.canvas.selection.drawn_rect = _rect
 		Global.canvas.selection.update()
 
 
@@ -51,34 +47,20 @@ func draw_end(_position : Vector2) -> void:
 	else:
 		if !Tools.shift and !Tools.control:
 			Global.canvas.selection.clear_selection()
-			if rect.size == Vector2.ZERO and Global.current_project.has_selection:
+			if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
 				Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
-		if rect.size != Vector2.ZERO:
-			Global.canvas.selection.select_rect(rect, !Tools.control)
+		if _rect.size != Vector2.ZERO:
+			Global.canvas.selection.select_rect(_rect, !Tools.control)
 			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 
 	_move = false
 	cursor_text = ""
-	start_position = Vector2.INF
-	rect = Rect2(0, 0, 0, 0)
-	Global.canvas.selection.drawn_rect = rect
+	_rect = Rect2(0, 0, 0, 0)
+	Global.canvas.selection.drawn_rect = _rect
 	Global.canvas.selection.update()
 
 
-func cursor_move(_position : Vector2) -> void:
-	pass
-#	if _drag:
-#		_cursor = Vector2.INF
-#	elif Global.selection_rectangle.has_point(position):
-#		_cursor = Vector2.INF
-#		Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_MOVE
-#		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#	else:
-#		_cursor = position
-#		Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
-
-
-func _set_cursor_text(_rect : Rect2) -> void:
-	cursor_text = "%s, %s" % [_rect.position.x, _rect.position.y]
-	cursor_text += " -> %s, %s" % [_rect.end.x - 1, _rect.end.y - 1]
-	cursor_text += " (%s, %s)" % [_rect.size.x, _rect.size.y]
+func _set_cursor_text(rect : Rect2) -> void:
+	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
+	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
+	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
