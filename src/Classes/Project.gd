@@ -102,6 +102,7 @@ func selection_bitmap_changed() -> void:
 func _selection_offset_changed(value : Vector2) -> void:
 	selection_offset = value
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
+	Global.canvas.selection.update_on_zoom(Global.camera.zoom.x)
 
 
 func change_project() -> void:
@@ -727,4 +728,5 @@ func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, fl
 		image.crop(new_bitmap_size.x, new_bitmap_size.y)
 	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
 	new_bitmap.create_from_image_alpha(image)
+
 	return new_bitmap

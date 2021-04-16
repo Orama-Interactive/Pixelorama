@@ -134,6 +134,16 @@ func update_gizmos() -> void:
 	update()
 
 
+func update_on_zoom(zoom : float) -> void:
+	var size := max(Global.current_project.selection_bitmap.get_size().x, Global.current_project.selection_bitmap.get_size().y)
+	marching_ants_outline.material.set_shader_param("width", zoom)
+	marching_ants_outline.material.set_shader_param("frequency", (1.0 / zoom) * 10 * size / 64)
+	for gizmo in gizmos:
+		if gizmo.rect.size == Vector2.ZERO:
+			return
+	update_gizmos()
+
+
 func gizmo_resize() -> void:
 	var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
 	var dir := dragged_gizmo.direction
