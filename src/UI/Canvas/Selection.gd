@@ -200,7 +200,7 @@ func move_borders(move : Vector2) -> void:
 	update()
 
 
-func move_borders_end(new_pos : Vector2, old_pos : Vector2) -> void:
+func move_borders_end() -> void:
 	marching_ants_outline.offset = Vector2.ZERO
 	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy)

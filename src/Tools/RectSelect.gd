@@ -38,9 +38,9 @@ func draw_move(position : Vector2) -> void:
 		Global.canvas.selection.update()
 
 
-func draw_end(position : Vector2) -> void:
+func draw_end(_position : Vector2) -> void:
 	if _move:
-		Global.canvas.selection.move_borders_end(position, start_position)
+		Global.canvas.selection.move_borders_end()
 	else:
 		if !Tools.shift and !Tools.control:
 			Global.canvas.selection.clear_selection()
