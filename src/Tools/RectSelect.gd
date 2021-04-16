@@ -20,7 +20,7 @@ func draw_start(position : Vector2) -> void:
 	if selection_position.y < 0:
 		offsetted_pos.y -= selection_position.y
 
-	if Global.current_project.selection_bitmap.get_bit(offsetted_pos) and !Tools.control and !Tools.shift:
+	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and Global.current_project.selection_bitmap.get_bit(offsetted_pos) and !Tools.control and !Tools.shift:
 		# Move current selection
 		_move = true
 		_offset = position
