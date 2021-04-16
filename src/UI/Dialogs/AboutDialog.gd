@@ -144,6 +144,8 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  THWLF")
 	contributors.create_item(contributor_root).set_text(0, "  Gamespleasure")
 	contributors.create_item(contributor_root).set_text(0, "  ballerburg9005")
+	contributors.create_item(contributor_root).set_text(0, "  DragonOfWar")
+	contributors.create_item(contributor_root).set_text(0, "  kevinms")
 
 
 func create_translators() -> void:
