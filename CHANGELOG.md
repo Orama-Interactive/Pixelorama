@@ -4,11 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.9] - Unreleased
+This update has been brought to you by the contributions of:
+
+DragonOfWar, novhack
+
+### Added
+- New rectangle and ellipse shape tools. ([#456](https://github.com/Orama-Interactive/Pixelorama/pull/456))
+
+### Changed
+- The palette system has been completely replaced with a new one. See [#447](https://github.com/Orama-Interactive/Pixelorama/pull/447) for more details.
+<br><br>
 
 ## [v0.8.3] - Unreleased
 This update has been brought to you by the contributions of:
 
-Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespleasure, ballerburg9005
+Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespleasure, ballerburg9005, kevinms
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
@@ -41,6 +52,7 @@ Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespl
 
 ### Fixed
 - Fixed issue with pixels being selected outside of the canvas boundaries, when the selection rectangle was outside the canvas and its size got reduced.
+- Major performance increase when drawing large images.
 - Fixed layer button textures not being updated properly when changing theme. ([#404](https://github.com/Orama-Interactive/Pixelorama/issues/404))
 - Keyboard shortcut conflicts between tool shortcuts and other shortcuts that use the "Control" key, like menu shortcuts, have been resolved. ([#407](https://github.com/Orama-Interactive/Pixelorama/pull/407))
 - The opacity of a cel and the tile mode opacity are now multiplicative. ([#414](https://github.com/Orama-Interactive/Pixelorama/pull/414))
@@ -49,6 +61,8 @@ Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespl
 - Fixed cel opacity not always being updated on the UI. ([#420](https://github.com/Orama-Interactive/Pixelorama/pull/420))
 - Loading empty backed up projects no longer result in a crash. ([#445](https://github.com/Orama-Interactive/Pixelorama/issues/445))
 - Fixed potential index out of bounds error when loading backup files. ([#446](https://github.com/Orama-Interactive/Pixelorama/pull/446))
+- Mirroring view should now work on all tools.
+- Fixed hue and saturation getting reset when draging value slider to zero. ([#473](https://github.com/Orama-Interactive/Pixelorama/pull/473))
 <br><br>
 
 ## [v0.8.2] - 2020-12-12
