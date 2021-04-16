@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-04-16 19:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1671,38 +1671,38 @@ msgid "Tiled In Y Axis"
 msgstr "Piastrellato Nell'Asse Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Crea una nuova tavolozza"
 
 msgid "Create New Palette"
-msgstr ""
+msgstr "Crea Nuova Tavolozza"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Commento:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Vuoto"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Dalla Tavolozza Corrente"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Dallo Sprite Corrente"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Dalla Selezione Corrente"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Aggiungi un nuovo colore"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Rimuovi un colore selezionato"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Tavolozza con lo stesso nome e percorso esiste già!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Il nome della tavolozza è richiesto!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Ridurre la dimensione della tavolozza ripristinerà le posizioni dei colori. I colori che non si adattano alle nuove dimensioni della tavolozza andranno persi!"
 
