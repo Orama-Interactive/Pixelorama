@@ -590,12 +590,13 @@ func generate_gradient(image : Image, colors : Array, steps : int, direction : i
 	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
 		colors.invert()
 
-	var selection_rectangle := Rect2()
-	if affect_selection and project.has_selection:
-		selection_rectangle = project.get_selection_rectangle()
+	var draw_rectangle := Rect2()
+	var selection := affect_selection and project.has_selection
+	if selection:
+		draw_rectangle = project.get_selection_rectangle()
 	else:
-		selection_rectangle = Rect2(Vector2.ZERO, project.size)
-	var size := selection_rectangle.size
+		draw_rectangle = Rect2(Vector2.ZERO, project.size)
+	var size := draw_rectangle.size
 	image.lock()
 	var gradient_size
 
@@ -606,7 +607,9 @@ func generate_gradient(image : Image, colors : Array, steps : int, direction : i
 				var start = i * gradient_size
 				var end = (i + 1) * gradient_size
 				for yy in range(start, end):
-					var pos : Vector2 = Vector2(xx, yy) + selection_rectangle.position
+					var pos : Vector2 = Vector2(xx, yy) + draw_rectangle.position
+					if selection and !project.selection_bitmap.get_bit(pos):
+						continue
 					image.set_pixelv(pos, colors[i])
 
 	else:
@@ -616,5 +619,7 @@ func generate_gradient(image : Image, colors : Array, steps : int, direction : i
 				var start = i * gradient_size
 				var end = (i + 1) * gradient_size
 				for xx in range(start, end):
-					var pos : Vector2 = Vector2(xx, yy) + selection_rectangle.position
+					var pos : Vector2 = Vector2(xx, yy) + draw_rectangle.position
+					if selection and !project.selection_bitmap.get_bit(pos):
+						continue
 					image.set_pixelv(pos, colors[i])
