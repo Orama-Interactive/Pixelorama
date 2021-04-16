@@ -13,8 +13,14 @@ var undo_data : Dictionary
 func draw_start(position : Vector2) -> void:
 	Global.canvas.selection.move_content_confirm()
 	undo_data = Global.canvas.selection._get_undo_data(false)
+	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	var offsetted_pos := position
+	if selection_position.x < 0:
+		offsetted_pos.x -= selection_position.x
+	if selection_position.y < 0:
+		offsetted_pos.y -= selection_position.y
 
-	if Global.current_project.selection_bitmap.get_bit(position) and !Tools.control and !Tools.shift:
+	if Global.current_project.selection_bitmap.get_bit(offsetted_pos) and !Tools.control and !Tools.shift:
 		# Move current selection
 		_move = true
 		_offset = position
