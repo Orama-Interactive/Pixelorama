@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-04-16 18:09\n"
+"PO-Revision-Date: 2021-04-16 20:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1659,38 +1659,38 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Создать новую палитру"
 
 msgid "Create New Palette"
-msgstr ""
+msgstr "Создать новую палитру"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Комментарий:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Пустой"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Из текущей палитры"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Из текущего спрайта"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Из выделенного"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Добавить новый цвет"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Удалить выбранный цвет"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Палитра с таким названием по такому пути уже существует!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Необходимо указать имя палитры!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Уменьшение размера палитры сбросит позиции цветов. Цвета, которые не поместятся в новую палитру, будут потеряны!"
 
