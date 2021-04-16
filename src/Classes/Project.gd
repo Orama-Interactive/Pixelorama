@@ -23,6 +23,8 @@ var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
 var selection_bitmap := BitMap.new()
+# This is useful for when the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
+var selection_offset := Vector2.ZERO setget _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
@@ -95,6 +97,11 @@ func selection_bitmap_changed() -> void:
 		image = bitmap_to_image(selection_bitmap)
 		image_texture.create_from_image(image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
+
+
+func _selection_offset_changed(value : Vector2) -> void:
+	selection_offset = value
+	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 
 
 func change_project() -> void:
@@ -207,8 +214,10 @@ func change_project() -> void:
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
+	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 	selection_bitmap_changed()
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
+	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
 
 	var i := 0
@@ -672,16 +681,16 @@ func move_bitmap_values(bitmap : BitMap) -> void:
 
 	if selection_position.x < 0:
 		nw -= selection_position.x
-		selection_node.marching_ants_outline.offset.x = selection_position.x
+		self.selection_offset.x = selection_position.x
 		dst.x = 0
 	else:
-		selection_node.marching_ants_outline.offset.x = 0
+		self.selection_offset.x = 0
 	if selection_position.y < 0:
 		nh -= selection_position.y
-		selection_node.marching_ants_outline.offset.y = selection_position.y
+		self.selection_offset.y = selection_position.y
 		dst.y = 0
 	else:
-		selection_node.marching_ants_outline.offset.y = 0
+		self.selection_offset.y = 0
 
 	if nw <= image.get_size().x:
 		nw = image.get_size().x
@@ -704,11 +713,11 @@ func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, fl
 	var image : Image = bitmap_to_image(bitmap)
 	var selection_rect := image.get_used_rect()
 	var smaller_image := image.get_rect(selection_rect)
-	if selection_position.x < 0:
-		selection_node.marching_ants_outline.offset.x = selection_position.x
+	if selection_position.x <= 0:
+		self.selection_offset.x = selection_position.x
 		dst.x = 0
-	if selection_position.y < 0:
-		selection_node.marching_ants_outline.offset.y = selection_position.y
+	if selection_position.y <= 0:
+		self.selection_offset.y = selection_position.y
 		dst.y = 0
 	image.lock()
 	image.fill(Color(0))
