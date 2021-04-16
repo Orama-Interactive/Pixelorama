@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-04-16 18:50\n"
+"PO-Revision-Date: 2021-04-16 19:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -468,7 +468,7 @@ msgid "Display Scale"
 msgstr "Scala de afișare"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Întunecă interfața la apariția ferestrei de dialog"
 
 msgid "Dark"
 msgstr "Întunecat"
@@ -1680,7 +1680,7 @@ msgid "Comment:"
 msgstr "Comentariu:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Goală"
 
 msgid "From Current Palette"
 msgstr "Din paleta actuală"
