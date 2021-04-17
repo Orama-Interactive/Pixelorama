@@ -110,6 +110,28 @@ func _input(event : InputEvent) -> void:
 				gizmo_rotate()
 
 
+func _draw() -> void:
+	var _position := position
+	var _scale := scale
+	if Global.mirror_view:
+		_position.x = _position.x + Global.current_project.size.x
+		_scale.x = -1
+	draw_set_transform(_position, rotation, _scale)
+	draw_rect(drawn_rect, Color.black, false)
+	if big_bounding_rectangle.size != Vector2.ZERO:
+		for gizmo in gizmos: # Draw gizmos
+			draw_rect(gizmo.rect, Color.black)
+			var filled_rect : Rect2 = gizmo.rect
+			var filled_size : Vector2 = gizmo.rect.size * Vector2(0.2, 0.2)
+			filled_rect.position += filled_size
+			filled_rect.size -= filled_size * 2
+			draw_rect(filled_rect, Color.white) # Filled white square
+
+	if is_moving_content and !preview_image.is_empty():
+		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
+	draw_set_transform(position, rotation, scale)
+
+
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	big_bounding_rectangle = value
 	update_gizmos()
@@ -199,25 +221,6 @@ func gizmo_rotate() -> void: # Does not work properly yet
 	update()
 
 
-func move_borders_start() -> void:
-	undo_data = _get_undo_data(false)
-
-
-func move_borders(move : Vector2) -> void:
-	marching_ants_outline.offset += move
-	self.big_bounding_rectangle.position += move
-	update()
-
-
-func move_borders_end() -> void:
-	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
-	Global.current_project.move_bitmap_values(selected_bitmap_copy)
-
-	Global.current_project.selection_bitmap = selected_bitmap_copy
-	commit_undo("Rectangle Select", undo_data)
-	update()
-
-
 func select_rect(rect : Rect2, select := true) -> void:
 	var project : Project = Global.current_project
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
@@ -242,6 +245,26 @@ func select_rect(rect : Rect2, select := true) -> void:
 
 	project.selection_bitmap = selection_bitmap_copy
 	self.big_bounding_rectangle = big_bounding_rectangle # call getter method
+
+
+
+func move_borders_start() -> void:
+	undo_data = _get_undo_data(false)
+
+
+func move_borders(move : Vector2) -> void:
+	marching_ants_outline.offset += move
+	self.big_bounding_rectangle.position += move
+	update()
+
+
+func move_borders_end() -> void:
+	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
+	Global.current_project.move_bitmap_values(selected_bitmap_copy)
+
+	Global.current_project.selection_bitmap = selected_bitmap_copy
+	commit_undo("Rectangle Select", undo_data)
+	update()
 
 
 func move_content_start() -> void:
@@ -440,28 +463,6 @@ func clear_selection(use_undo := false) -> void:
 	update()
 	if use_undo:
 		commit_undo("Clear Selection", _undo_data)
-
-
-func _draw() -> void:
-	var _position := position
-	var _scale := scale
-	if Global.mirror_view:
-		_position.x = _position.x + Global.current_project.size.x
-		_scale.x = -1
-	draw_set_transform(_position, rotation, _scale)
-	draw_rect(drawn_rect, Color.black, false)
-	if big_bounding_rectangle.size != Vector2.ZERO:
-		for gizmo in gizmos: # Draw gizmos
-			draw_rect(gizmo.rect, Color.black)
-			var filled_rect : Rect2 = gizmo.rect
-			var filled_size : Vector2 = gizmo.rect.size * Vector2(0.2, 0.2)
-			filled_rect.position += filled_size
-			filled_rect.size -= filled_size * 2
-			draw_rect(filled_rect, Color.white) # Filled white square
-
-	if is_moving_content and !preview_image.is_empty():
-		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
-	draw_set_transform(position, rotation, scale)
 
 
 func get_preview_image() -> void:
