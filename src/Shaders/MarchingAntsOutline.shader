@@ -5,24 +5,24 @@ shader_type canvas_item;
 uniform vec4 first_color : hint_color = vec4(1.0);
 uniform vec4 second_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform bool animated = true;
-uniform float width : hint_range(0, 2) = 0.2;
+uniform float width : hint_range(0, 2) = 0.05;
 uniform float frequency = 50.0;
 uniform float stripe_direction : hint_range(0, 1) = 0.5;
 
 
 bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
-	for (float i = -ceil(width); i <= ceil(width); i++) {
-		float x = abs(i) > width ? width * sign(i) : i;
-		float offset = width;
-		
-		for (float j = -ceil(offset); j <= ceil(offset); j++) {
-			float y = abs(j) > offset ? offset * sign(j) : j;
-			vec2 xy = uv + texture_pixel_size * vec2(x, y);
-			
-			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a == 0.0) == true) {
-				return true;
-			}
-		}
+	float i = -ceil(width);
+	float j = ceil(width);
+	float x1 = abs(i) > width ? width * sign(i) : i;
+	float x2 = abs(j) > width ? width * sign(j) : j;
+	float y1 = abs(i) > width ? width * sign(i) : i;
+	float y2 = abs(j) > width ? width * sign(j) : j;
+	
+	vec2 xy1 = uv + texture_pixel_size * vec2(x1, y1);
+	vec2 xy2 = uv + texture_pixel_size * vec2(x2, y2);
+	
+	if (xy1 != clamp(xy1, vec2(0.0), vec2(1.0)) || texture(texture, xy1).a == 0.0 || xy2 != clamp(xy2, vec2(0.0), vec2(1.0)) || texture(texture, xy2).a == 0.0) {
+		return true;
 	}
 	
 	return false;
