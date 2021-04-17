@@ -114,16 +114,10 @@ var small_preview_viewport : ViewportContainer
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
-var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
 var transparent_checker : ColorRect
 
-var file_menu : MenuButton
-var edit_menu : MenuButton
-var view_menu : MenuButton
-var image_menu : MenuButton
-var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
@@ -201,7 +195,7 @@ func _ready() -> void:
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
 	image_clipboard = Image.new()
-	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
@@ -218,16 +212,10 @@ func _ready() -> void:
 	camera = find_node_by_name(main_viewport, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	camera_preview = find_node_by_name(root, "CameraPreview")
-	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
 	transparent_checker = find_node_by_name(root, "TransparentChecker")
 
-	file_menu = find_node_by_name(root, "FileMenu")
-	edit_menu = find_node_by_name(root, "EditMenu")
-	view_menu = find_node_by_name(root, "ViewMenu")
-	image_menu = find_node_by_name(root, "ImageMenu")
-	help_menu = find_node_by_name(root, "HelpMenu")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
@@ -362,7 +350,7 @@ func general_redo(project : Project = current_project) -> void:
 func undo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_undo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	if action_name == "Draw" or action_name == "Draw Shape" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
+	if action_name == "Draw" or action_name == "Draw Shape" or action_name == "Rectangle Select" or action_name == "Move Selection" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
@@ -370,11 +358,12 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
+		canvas.selection.update()
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.update()
-			Global.canvas.pixel_grid.update()
-			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			canvas.grid.update()
+			canvas.pixel_grid.update()
+			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
@@ -396,7 +385,7 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 func redo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_redo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	if action_name == "Draw" or action_name == "Draw Shape" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
+	if action_name == "Draw" or action_name == "Draw Shape" or action_name == "Rectangle Select" or action_name == "Move Selection" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
@@ -404,11 +393,12 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
+		canvas.selection.update()
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.update()
-			Global.canvas.pixel_grid.update()
-			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			canvas.grid.update()
+			canvas.pixel_grid.update()
+			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
 		if project.frames.size() == 1: # Stop animating
@@ -432,6 +422,7 @@ func title_changed(value : String) -> void:
 
 
 func project_changed(value : int) -> void:
+	canvas.selection.move_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
 	current_project.change_project()
@@ -477,15 +468,23 @@ func change_button_texturerect(texture_button : TextureRect, new_file_name : Str
 
 
 func update_hint_tooltips() -> void:
-	var root = get_tree().get_root()
+	var root = control
+	var tool_buttons = root.find_node("ToolButtons")
 
-	var rect_select : BaseButton = find_node_by_name(root, "RectSelect")
+	var rect_select : BaseButton = tool_buttons.find_node("RectSelect")
 	rect_select.hint_tooltip = tr("""Rectangular Selection
 
 %s for left mouse button
 %s for right mouse button
 
 Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
+
+	var move_select : BaseButton = tool_buttons.find_node("Move")
+	move_select.hint_tooltip = tr("""Move
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_move_tool")[0].as_text(), InputMap.get_action_list("right_move_tool")[0].as_text()]
+
 
 	var zoom_tool : BaseButton = find_node_by_name(root, "Zoom")
 	zoom_tool.hint_tooltip = tr("""Zoom
@@ -616,7 +615,7 @@ func save_project_to_recent_list(path : String) -> void:
 
 
 func update_recent_projects_submenu() -> void:
-	for project in Global.recent_projects:
+	for project in recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
 
 func use_osx_shortcuts() -> void:

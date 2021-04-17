@@ -16,6 +16,7 @@ onready var preview_rect : TextureRect = $VBoxContainer/Preview
 
 
 func _on_ResizeCanvas_about_to_show() -> void:
+	Global.canvas.selection.move_content_confirm()
 	image = Image.new()
 	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	image.lock()

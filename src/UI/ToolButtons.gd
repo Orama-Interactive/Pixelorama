@@ -4,6 +4,7 @@ extends VBoxContainer
 # Node, shortcut
 onready var tools := [
 	[$RectSelect, "rectangle_select"],
+	[$Move, "move"],
 	[$Zoom, "zoom"],
 	[$Pan, "pan"],
 	[$ColorPicker, "colorpicker"],

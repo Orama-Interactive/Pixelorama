@@ -1,7 +1,6 @@
 class_name Project extends Reference
 # A class for project properties.
 
-
 var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
@@ -23,8 +22,10 @@ var y_symmetry_point
 var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
-var selected_pixels := []
-var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
+var selection_bitmap := BitMap.new()
+# This is useful for when the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
+var selection_offset := Vector2.ZERO setget _selection_offset_changed
+var has_selection := false
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
@@ -41,6 +42,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
+	selection_bitmap.create(size)
 	update_tile_mode_rects()
 
 	undo_redo = UndoRedo.new()
@@ -74,20 +76,33 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
 
-func select_all_pixels() -> void:
-	clear_selection()
-	for x in size.x:
-		for y in size.y:
-			selected_pixels.append(Vector2(x, y))
+func commit_undo() -> void:
+	if Global.canvas.selection.is_moving_content:
+		Global.canvas.selection.move_content_cancel()
+	else:
+		undo_redo.undo()
 
 
-func clear_selection() -> void:
-	selected_pixels.clear()
+func commit_redo() -> void:
+	Global.control.redone = true
+	undo_redo.redo()
+	Global.control.redone = false
 
 
-func _set_selected_rect(value : Rect2) -> void:
-	selected_rect = value
-	Global.selection_rectangle.set_rect(value)
+func selection_bitmap_changed() -> void:
+	var image := Image.new()
+	var image_texture := ImageTexture.new()
+	has_selection = selection_bitmap.get_true_bit_count() > 0
+	if has_selection:
+		image = bitmap_to_image(selection_bitmap)
+		image_texture.create_from_image(image, 0)
+	Global.canvas.selection.marching_ants_outline.texture = image_texture
+
+
+func _selection_offset_changed(value : Vector2) -> void:
+	selection_offset = value
+	Global.canvas.selection.marching_ants_outline.offset = selection_offset
+	Global.canvas.selection.update_on_zoom(Global.camera.zoom.x)
 
 
 func change_project() -> void:
@@ -146,9 +161,6 @@ func change_project() -> void:
 
 	self.animation_tags = animation_tags
 
-	# Change the selection rectangle
-	Global.selection_rectangle.set_rect(selected_rect)
-
 	# Change the guides
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
@@ -167,21 +179,12 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
-	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
-	var i := 0
-	for camera in cameras:
-		camera.zoom = cameras_zoom[i]
-		camera.offset = cameras_offset[i]
-		i += 1
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
 	Global.canvas.grid.update()
-	Global.canvas.pixel_grid.update()
 	Global.transparent_checker._ready()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
-	Global.preview_zoom_slider.value = -Global.camera_preview.zoom.x
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -192,9 +195,9 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % save_path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % save_path.get_file())
 	else:
-		Global.file_menu.get_popup().set_item_text(4, tr("Save"))
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save"))
 
 	Export.directory_path = directory_path
 	Export.file_name = file_name
@@ -202,12 +205,26 @@ func change_project() -> void:
 	Export.was_exported = was_exported
 
 	if !was_exported:
-		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 	else:
-		Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
 	for j in Global.TileMode.values():
 		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
+
+	# Change selection effect & bounding rectangle
+	Global.canvas.selection.marching_ants_outline.offset = selection_offset
+	selection_bitmap_changed()
+	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
+	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
+	Global.canvas.selection.update()
+
+	var i := 0
+	for camera in [Global.camera, Global.camera2, Global.camera_preview]:
+		camera.zoom = cameras_zoom[i]
+		camera.offset = cameras_offset[i]
+		camera.zoom_changed()
+		i += 1
 
 
 func serialize() -> Dictionary:
@@ -363,7 +380,6 @@ func name_changed(value : String) -> void:
 func size_changed(value : Vector2) -> void:
 	size = value
 	update_tile_mode_rects()
-	Global.selection_rectangle.set_rect(Global.selection_rectangle.get_rect())
 
 
 func frames_changed(value : Array) -> void:
@@ -582,3 +598,135 @@ func update_tile_mode_rects() -> void:
 
 func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
+
+
+func can_pixel_get_drawn(pixel : Vector2) -> bool:
+	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
+		return false
+	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	if selection_position.x < 0:
+		pixel.x -= selection_position.x
+	if selection_position.y < 0:
+		pixel.y -= selection_position.y
+	if has_selection:
+		return selection_bitmap.get_bit(pixel)
+	else:
+		return true
+
+
+func invert_bitmap(bitmap : BitMap) -> void:
+	for x in bitmap.get_size().x:
+		for y in bitmap.get_size().y:
+			var pos := Vector2(x, y)
+			bitmap.set_bit(pos, !bitmap.get_bit(pos))
+
+
+# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
+func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> BitMap:
+	if new_size == bitmap.get_size():
+		return bitmap
+	var new_bitmap := BitMap.new()
+	new_bitmap.create(new_size)
+	var lw = min(bitmap.get_size().x, new_size.x)
+	var lh = min(bitmap.get_size().y, new_size.y)
+	for x in lw:
+		for y in lh:
+			new_bitmap.set_bit(Vector2(x, y), bitmap.get_bit(Vector2(x, y)))
+
+	return new_bitmap
+
+
+# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
+func bitmap_to_image(bitmap : BitMap) -> Image:
+	var image := Image.new()
+	var width := bitmap.get_size().x
+	var height := bitmap.get_size().y
+	var square_size = max(width, height)
+	image.create(square_size, square_size, false, Image.FORMAT_LA8)
+	image.lock()
+	for x in width:
+		for y in height:
+			var pos := Vector2(x, y)
+			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
+			image.set_pixelv(pos, color)
+	image.unlock()
+	return image
+
+
+func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
+	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
+	if bitmap.get_true_bit_count() > 0:
+		var image : Image = bitmap_to_image(bitmap)
+		rect = image.get_used_rect()
+	return rect
+
+
+func move_bitmap_values(bitmap : BitMap) -> void:
+	var selection_node = Global.canvas.selection
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_end : Vector2 = selection_node.big_bounding_rectangle.end
+
+	var image : Image = bitmap_to_image(bitmap)
+	var selection_rect := image.get_used_rect()
+	var smaller_image := image.get_rect(selection_rect)
+	image.lock()
+	image.fill(Color(0))
+	var dst := selection_position
+	var x_diff = selection_end.x - size.x
+	var y_diff = selection_end.y - size.y
+	var nw = max(size.x, size.x + x_diff)
+	var nh = max(size.y, size.y + y_diff)
+
+	if selection_position.x < 0:
+		nw -= selection_position.x
+		self.selection_offset.x = selection_position.x
+		dst.x = 0
+	else:
+		self.selection_offset.x = 0
+	if selection_position.y < 0:
+		nh -= selection_position.y
+		self.selection_offset.y = selection_position.y
+		dst.y = 0
+	else:
+		self.selection_offset.y = 0
+
+	if nw <= image.get_size().x:
+		nw = image.get_size().x
+	if nh <= image.get_size().y:
+		nh = image.get_size().y
+
+	image.crop(nw, nh)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
+	bitmap.create_from_image_alpha(image)
+
+
+func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, flip_y : bool) -> BitMap:
+	var selection_node = Global.canvas.selection
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var dst := selection_position
+	var new_bitmap_size := size
+	new_bitmap_size.x = max(size.x, abs(selection_position.x) + new_size.x)
+	new_bitmap_size.y = max(size.y, abs(selection_position.y) + new_size.y)
+	var new_bitmap := BitMap.new()
+	var image : Image = bitmap_to_image(bitmap)
+	var selection_rect := image.get_used_rect()
+	var smaller_image := image.get_rect(selection_rect)
+	if selection_position.x <= 0:
+		self.selection_offset.x = selection_position.x
+		dst.x = 0
+	if selection_position.y <= 0:
+		self.selection_offset.y = selection_position.y
+		dst.y = 0
+	image.lock()
+	image.fill(Color(0))
+	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
+	if flip_x:
+		smaller_image.flip_x()
+	if flip_y:
+		smaller_image.flip_y()
+	if new_bitmap_size != size:
+		image.crop(new_bitmap_size.x, new_bitmap_size.y)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
+	new_bitmap.create_from_image_alpha(image)
+
+	return new_bitmap

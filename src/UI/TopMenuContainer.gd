@@ -2,10 +2,18 @@ extends Panel
 
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
-enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, CLEAR_SELECTION, PREFERENCES}
+enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, PREFERENCES}
 enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
-enum ImageMenuId {SCALE_IMAGE,CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
+enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
+enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
+
+var file_menu_button : MenuButton
+var edit_menu_button : MenuButton
+var view_menu_button : MenuButton
+var image_menu_button : MenuButton
+var select_menu_button : MenuButton
+var help_menu_button : MenuButton
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -13,10 +21,18 @@ var zen_mode := false
 
 
 func _ready() -> void:
+	file_menu_button = find_node("FileMenu")
+	edit_menu_button = find_node("EditMenu")
+	view_menu_button = find_node("ViewMenu")
+	image_menu_button = find_node("ImageMenu")
+	select_menu_button = find_node("SelectMenu")
+	help_menu_button = find_node("HelpMenu")
+
 	setup_file_menu()
 	setup_edit_menu()
 	setup_view_menu()
 	setup_image_menu()
+	setup_select_menu()
 	setup_help_menu()
 
 
@@ -32,7 +48,7 @@ func setup_file_menu() -> void:
 		"Export as..." : InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
 		"Quit" : InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
 		}
-	file_menu = Global.file_menu.get_popup()
+	file_menu = file_menu_button.get_popup()
 	var i := 0
 
 	for item in file_menu_items.keys():
@@ -65,10 +81,9 @@ func setup_edit_menu() -> void:
 		"Cut" : InputMap.get_action_list("cut")[0].get_scancode_with_modifiers(),
 		"Paste" : InputMap.get_action_list("paste")[0].get_scancode_with_modifiers(),
 		"Delete" : InputMap.get_action_list("delete")[0].get_scancode_with_modifiers(),
-		"Clear Selection" : InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
 		"Preferences" : 0
 		}
-	var edit_menu : PopupMenu = Global.edit_menu.get_popup()
+	var edit_menu : PopupMenu = edit_menu_button.get_popup()
 	var i := 0
 
 	for item in edit_menu_items.keys():
@@ -92,7 +107,7 @@ func setup_view_menu() -> void:
 		"Zen Mode" : InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode" : InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
 		}
-	view_menu = Global.view_menu.get_popup()
+	view_menu = view_menu_button.get_popup()
 
 	var i := 0
 	for item in view_menu_items.keys():
@@ -147,7 +162,7 @@ func setup_image_menu() -> void:
 		"Gradient" : 0,
 		# "Shader" : 0
 		}
-	var image_menu : PopupMenu = Global.image_menu.get_popup()
+	var image_menu : PopupMenu = image_menu_button.get_popup()
 
 	var i := 0
 	for item in image_menu_items.keys():
@@ -159,6 +174,22 @@ func setup_image_menu() -> void:
 	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
 
 
+func setup_select_menu() -> void:
+	var select_menu_items := { # order as in EditMenuId enum
+		"Select All" : InputMap.get_action_list("select_all")[0].get_scancode_with_modifiers(),
+		"Clear Selection" : InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
+		"Invert" : InputMap.get_action_list("invert_selection")[0].get_scancode_with_modifiers(),
+		}
+	var select_menu : PopupMenu = select_menu_button.get_popup()
+	var i := 0
+
+	for item in select_menu_items.keys():
+		select_menu.add_item(item, i, select_menu_items[item])
+		i += 1
+
+	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
+
+
 func setup_help_menu() -> void:
 	var help_menu_items := { # order as in HelpMenuId enum
 		"View Splash Screen" : 0,
@@ -167,7 +198,7 @@ func setup_help_menu() -> void:
 		"Changelog" : 0,
 		"About Pixelorama" : 0
 		}
-	var help_menu : PopupMenu = Global.help_menu.get_popup()
+	var help_menu : PopupMenu = help_menu_button.get_popup()
 
 	var i := 0
 	for item in help_menu_items.keys():
@@ -259,22 +290,17 @@ func on_recent_projects_submenu_id_pressed(id : int) -> void:
 func edit_menu_id_pressed(id : int) -> void:
 	match id:
 		EditMenuId.UNDO:
-			Global.current_project.undo_redo.undo()
+			Global.current_project.commit_undo()
 		EditMenuId.REDO:
-			Global.control.redone = true
-			Global.current_project.undo_redo.redo()
-			Global.control.redone = false
+			Global.current_project.commit_redo()
 		EditMenuId.COPY:
-			Global.selection_rectangle.copy()
+			Global.canvas.selection.copy()
 		EditMenuId.CUT:
-			Global.selection_rectangle.cut()
+			Global.canvas.selection.cut()
 		EditMenuId.PASTE:
-			Global.selection_rectangle.paste()
+			Global.canvas.selection.paste()
 		EditMenuId.DELETE:
-			Global.selection_rectangle.delete()
-		EditMenuId.CLEAR_SELECTION:
-			Global.selection_rectangle.set_rect(Rect2(0, 0, 0, 0))
-			Global.selection_rectangle.select_rect()
+			Global.canvas.selection.delete()
 		EditMenuId.PREFERENCES:
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)
@@ -343,6 +369,12 @@ func window_transparency(value :float) -> void:
 
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
+	Global.canvas.selection.marching_ants_outline.scale.x = -Global.canvas.selection.marching_ants_outline.scale.x
+	if Global.mirror_view:
+		Global.canvas.selection.marching_ants_outline.position.x = Global.canvas.selection.marching_ants_outline.position.x + Global.current_project.size.x
+	else:
+		Global.canvas.selection.marching_ants_outline.position.x = 0
+	Global.canvas.selection.update()
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
@@ -474,6 +506,16 @@ func show_add_outline_popup() -> void:
 func show_hsv_configuration_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
 	Global.dialog_open(true)
+
+
+func select_menu_id_pressed(id : int) -> void:
+	match id:
+		SelectMenuId.SELECT_ALL:
+			Global.canvas.selection.select_all()
+		SelectMenuId.CLEAR_SELECTION:
+			Global.canvas.selection.clear_selection(true)
+		SelectMenuId.INVERT:
+			Global.canvas.selection.invert()
 
 
 func help_menu_id_pressed(id : int) -> void:

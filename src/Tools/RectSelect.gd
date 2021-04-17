@@ -1,56 +1,63 @@
 extends BaseTool
 
 
+var _rect := Rect2(0, 0, 0, 0)
 var _start := Rect2(0, 0, 0, 0)
 var _offset := Vector2.ZERO
-var _drag := false
 var _move := false
+var undo_data : Dictionary
 
 
 func draw_start(position : Vector2) -> void:
-	if Global.selection_rectangle.has_point(position):
+	Global.canvas.selection.move_content_confirm()
+	undo_data = Global.canvas.selection._get_undo_data(false)
+	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	var offsetted_pos := position
+	if selection_position.x < 0:
+		offsetted_pos.x -= selection_position.x
+	if selection_position.y < 0:
+		offsetted_pos.y -= selection_position.y
+
+	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and Global.current_project.selection_bitmap.get_bit(offsetted_pos) and !Tools.control and !Tools.shift:
+		# Move current selection
 		_move = true
 		_offset = position
-		Global.selection_rectangle.move_start(Tools.shift)
-		_set_cursor_text(Global.selection_rectangle.get_rect())
+		Global.canvas.selection.move_borders_start()
+
 	else:
-		_drag = true
 		_start = Rect2(position, Vector2.ZERO)
-		Global.selection_rectangle.set_rect(_start)
 
 
 func draw_move(position : Vector2) -> void:
 	if _move:
-		Global.selection_rectangle.move_rect(position - _offset)
+		Global.canvas.selection.move_borders(position - _offset)
 		_offset = position
-		_set_cursor_text(Global.selection_rectangle.get_rect())
+		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
 	else:
-		var rect := _start.expand(position).abs()
-		rect = rect.grow_individual(0, 0, 1, 1)
-		Global.selection_rectangle.set_rect(rect)
-		_set_cursor_text(rect)
+		_rect = _start.expand(position).abs()
+		_rect = _rect.grow_individual(0, 0, 1, 1)
+		_set_cursor_text(_rect)
+		Global.canvas.selection.drawn_rect = _rect
+		Global.canvas.selection.update()
 
 
 func draw_end(_position : Vector2) -> void:
 	if _move:
-		Global.selection_rectangle.move_end()
+		Global.canvas.selection.move_borders_end()
 	else:
-		Global.selection_rectangle.select_rect()
-	_drag = false
+		if !Tools.shift and !Tools.control:
+			Global.canvas.selection.clear_selection()
+			if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
+				Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+		if _rect.size != Vector2.ZERO:
+			Global.canvas.selection.select_rect(_rect, !Tools.control)
+			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+
 	_move = false
 	cursor_text = ""
-
-
-func cursor_move(position : Vector2) -> void:
-	if _drag:
-		_cursor = Vector2.INF
-	elif Global.selection_rectangle.has_point(position):
-		_cursor = Vector2.INF
-		Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_MOVE
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:
-		_cursor = position
-		Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
+	_rect = Rect2(0, 0, 0, 0)
+	Global.canvas.selection.drawn_rect = _rect
+	Global.canvas.selection.update()
 
 
 func _set_cursor_text(rect : Rect2) -> void:

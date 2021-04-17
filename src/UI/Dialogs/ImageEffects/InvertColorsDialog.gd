@@ -13,8 +13,8 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
-func commit_action(_cel : Image, _pixels : Array, _project : Project = Global.current_project) -> void:
-	DrawingAlgos.invert_image_colors(_cel, _pixels, red, green, blue, alpha)
+func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
+	DrawingAlgos.invert_image_colors(_cel, selection_checkbox.pressed, _project, red, green, blue, alpha)
 
 
 func _on_RButton_toggled(button_pressed : bool) -> void:

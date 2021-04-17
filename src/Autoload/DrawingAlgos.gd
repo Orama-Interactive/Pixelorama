@@ -5,7 +5,7 @@ enum GradientDirection {TOP, BOTTOM, LEFT, RIGHT}
 
 
 func scale3X(sprite : Image, tol : float = 50) -> Image:
-	var scaled = Image.new()
+	var scaled := Image.new()
 	scaled.create(sprite.get_width()*3, sprite.get_height()*3, false, Image.FORMAT_RGBA8)
 	scaled.lock()
 	sprite.lock()
@@ -62,163 +62,142 @@ func scale3X(sprite : Image, tol : float = 50) -> Image:
 	return scaled
 
 
-func rotxel(sprite : Image, angle : float, pixels : Array) -> void:
+func rotxel(sprite : Image, angle : float, pivot : Vector2) -> void:
 	# If angle is simple, then nn rotation is the best
 	if angle == 0 || angle == PI/2 || angle == PI || angle == 2*PI:
-		nn_rotate(sprite, angle, pixels)
+		nn_rotate(sprite, angle, pivot)
 		return
 
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
-	var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
-	var center : Vector2 = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
 	var ox : int
 	var oy : int
 	var p : Color
 	aux.lock()
 	sprite.lock()
-	for pix in pixels:
-		var x = pix.x
-		var y = pix.y
-		var dx = 3*(x - center.x)
-		var dy = 3*(y - center.y)
-		var found_pixel : bool = false
-		for k in range(9):
-			var i = -1 + k % 3
+	for x in sprite.get_size().x:
+		for y in sprite.get_size().y:
+			var dx = 3*(x - pivot.x)
+			var dy = 3*(y - pivot.y)
+			var found_pixel : bool = false
+			for k in range(9):
+				var i = -1 + k % 3
 # warning-ignore:integer_division
-			var j = -1 + int(k / 3)
-			var dir = atan2(dy + j, dx + i)
-			var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
-			dir -= angle
-			ox = round(center.x*3 + 1 + mag*cos(dir))
-			oy = round(center.y*3 + 1 + mag*sin(dir))
+				var j = -1 + int(k / 3)
+				var dir = atan2(dy + j, dx + i)
+				var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
+				dir -= angle
+				ox = round(pivot.x*3 + 1 + mag*cos(dir))
+				oy = round(pivot.y*3 + 1 + mag*sin(dir))
 
-			if (sprite.get_width() % 2 != 0):
-				ox += 1
-				oy += 1
+				if (sprite.get_width() % 2 != 0):
+					ox += 1
+					oy += 1
 
-			if (ox >= 0 && ox < sprite.get_width()*3
-				&& oy >= 0 && oy < sprite.get_height()*3):
-					found_pixel = true
-					break
+				if (ox >= 0 && ox < sprite.get_width()*3
+					&& oy >= 0 && oy < sprite.get_height()*3):
+						found_pixel = true
+						break
 
-		if !found_pixel:
-			sprite.set_pixel(x, y, Color(0,0,0,0))
-			continue
+			if !found_pixel:
+				sprite.set_pixel(x, y, Color(0,0,0,0))
+				continue
 
-		var fil : int = oy % 3
-		var col : int = ox % 3
-		var index : int = col + 3*fil
+			var fil : int = oy % 3
+			var col : int = ox % 3
+			var index : int = col + 3*fil
 
-		ox = round((ox - 1)/3.0);
-		oy = round((oy - 1)/3.0);
-		var a : Color
-		var b : Color
-		var c : Color
-		var d : Color
-		var e : Color
-		var f : Color
-		var g : Color
-		var h : Color
-		var i : Color
-		if (ox == 0 || ox == sprite.get_width() - 1 ||
-			oy == 0 || oy == sprite.get_height() - 1):
-				p = aux.get_pixel(ox, oy)
-		else:
-			a = aux.get_pixel(ox-1,oy-1);
-			b = aux.get_pixel(ox,oy-1);
-			c = aux.get_pixel(ox+1,oy-1);
-			d = aux.get_pixel(ox-1,oy);
-			e = aux.get_pixel(ox,oy);
-			f = aux.get_pixel(ox+1,oy);
-			g = aux.get_pixel(ox-1,oy+1);
-			h = aux.get_pixel(ox,oy+1);
-			i = aux.get_pixel(ox+1,oy+1);
+			ox = round((ox - 1)/3.0);
+			oy = round((oy - 1)/3.0);
+			var a : Color
+			var b : Color
+			var c : Color
+			var d : Color
+			var e : Color
+			var f : Color
+			var g : Color
+			var h : Color
+			var i : Color
+			if (ox == 0 || ox == sprite.get_width() - 1 ||
+				oy == 0 || oy == sprite.get_height() - 1):
+					p = aux.get_pixel(ox, oy)
+			else:
+				a = aux.get_pixel(ox-1,oy-1);
+				b = aux.get_pixel(ox,oy-1);
+				c = aux.get_pixel(ox+1,oy-1);
+				d = aux.get_pixel(ox-1,oy);
+				e = aux.get_pixel(ox,oy);
+				f = aux.get_pixel(ox+1,oy);
+				g = aux.get_pixel(ox-1,oy+1);
+				h = aux.get_pixel(ox,oy+1);
+				i = aux.get_pixel(ox+1,oy+1);
 
-			match(index):
-				0:
-					p = d if (similarColors(d,b) && !similarColors(d,h)
-					 && !similarColors(b,f)) else e;
-				1:
-					p = b if ((similarColors(d,b) && !similarColors(d,h) &&
-					 !similarColors(b,f) && !similarColors(e,c)) ||
-					 (similarColors(b,f) && !similarColors(d,b) &&
-					 !similarColors(f,h) && !similarColors(e,a))) else e;
-				2:
-					p = f if (similarColors(b,f) && !similarColors(d,b) &&
-					 !similarColors(f,h)) else e;
-				3:
-					p = d if ((similarColors(d,h) && !similarColors(f,h) &&
-					 !similarColors(d,b) && !similarColors(e,a)) ||
-					 (similarColors(d,b) && !similarColors(d,h) &&
-					!similarColors(b,f) && !similarColors(e,g))) else e;
-				4:
-					p = e
-				5:
-					p =  f if((similarColors(b,f) && !similarColors(d,b) &&
-					 !similarColors(f,h) && !similarColors(e,i))
-					 || (similarColors(f,h) && !similarColors(b,f) &&
-					 !similarColors(d,h) && !similarColors(e,c))) else e;
-				6:
-					p = d if (similarColors(d,h) && !similarColors(f,h) &&
-					 !similarColors(d,b)) else e;
-				7:
-					p = h if ((similarColors(f,h) && !similarColors(f,b) &&
-					 !similarColors(d,h) && !similarColors(e,g))
-					 || (similarColors(d,h) && !similarColors(f,h) &&
-					 !similarColors(d,b) && !similarColors(e,i))) else e;
-				8:
-					p = f if (similarColors(f,h) && !similarColors(f,b) &&
-					 !similarColors(d,h)) else e;
-		sprite.set_pixel(x, y, p)
+				match(index):
+					0:
+						p = d if (similarColors(d,b) && !similarColors(d,h)
+						 && !similarColors(b,f)) else e;
+					1:
+						p = b if ((similarColors(d,b) && !similarColors(d,h) &&
+						 !similarColors(b,f) && !similarColors(e,c)) ||
+						 (similarColors(b,f) && !similarColors(d,b) &&
+						 !similarColors(f,h) && !similarColors(e,a))) else e;
+					2:
+						p = f if (similarColors(b,f) && !similarColors(d,b) &&
+						 !similarColors(f,h)) else e;
+					3:
+						p = d if ((similarColors(d,h) && !similarColors(f,h) &&
+						 !similarColors(d,b) && !similarColors(e,a)) ||
+						 (similarColors(d,b) && !similarColors(d,h) &&
+						!similarColors(b,f) && !similarColors(e,g))) else e;
+					4:
+						p = e
+					5:
+						p =  f if((similarColors(b,f) && !similarColors(d,b) &&
+						 !similarColors(f,h) && !similarColors(e,i))
+						 || (similarColors(f,h) && !similarColors(b,f) &&
+						 !similarColors(d,h) && !similarColors(e,c))) else e;
+					6:
+						p = d if (similarColors(d,h) && !similarColors(f,h) &&
+						 !similarColors(d,b)) else e;
+					7:
+						p = h if ((similarColors(f,h) && !similarColors(f,b) &&
+						 !similarColors(d,h) && !similarColors(e,g))
+						 || (similarColors(d,h) && !similarColors(f,h) &&
+						 !similarColors(d,b) && !similarColors(e,i))) else e;
+					8:
+						p = f if (similarColors(f,h) && !similarColors(f,b) &&
+						 !similarColors(d,h)) else e;
+			sprite.set_pixel(x, y, p)
 	sprite.unlock()
 	aux.unlock()
 
 
-func fake_rotsprite(sprite : Image, angle : float, pixels : Array) -> void:
-	var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
+func fake_rotsprite(sprite : Image, angle : float, pivot : Vector2) -> void:
 	var selected_sprite := Image.new()
-	selected_sprite = sprite.get_rect(selection_rectangle)
+	selected_sprite.copy_from(sprite)
 	selected_sprite.copy_from(scale3X(selected_sprite))
-	nn_rotate(selected_sprite, angle, [])
+	nn_rotate(selected_sprite, angle, pivot * 3)
 # warning-ignore:integer_division
 # warning-ignore:integer_division
 	selected_sprite.resize(selected_sprite.get_width() / 3, selected_sprite.get_height() / 3, 0)
-	sprite.blit_rect(selected_sprite, Rect2(Vector2.ZERO, selected_sprite.get_size()), selection_rectangle.position)
+	sprite.blit_rect(selected_sprite, Rect2(Vector2.ZERO, selected_sprite.get_size()), Vector2.ZERO)
 
 
-func nn_rotate(sprite : Image, angle : float, pixels : Array) -> void:
+func nn_rotate(sprite : Image, angle : float, pivot : Vector2) -> void:
 	var aux : Image = Image.new()
 	aux.copy_from(sprite)
 	sprite.lock()
 	aux.lock()
 	var ox: int
 	var oy: int
-	var center : Vector2
-	if pixels:
-		var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
-		center = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
-		for pix in pixels:
-			var x = pix.x
-			var y = pix.y
-			ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
-			oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
+	for x in range(sprite.get_width()):
+		for y in range(sprite.get_height()):
+			ox = (x - pivot.x)*cos(angle) + (y - pivot.y)*sin(angle) + pivot.x
+			oy = -(x - pivot.x)*sin(angle) + (y - pivot.y)*cos(angle) + pivot.y
 			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
 				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
 			else:
 				sprite.set_pixel(x, y, Color(0,0,0,0))
-	else:
-# warning-ignore:integer_division
-# warning-ignore:integer_division
-		center = Vector2(sprite.get_width() / 2, sprite.get_height() / 2)
-		for x in range(sprite.get_width()):
-			for y in range(sprite.get_height()):
-				ox = (x - center.x)*cos(angle) + (y - center.y)*sin(angle) + center.x
-				oy = -(x - center.x)*sin(angle) + (y - center.y)*cos(angle) + center.y
-				if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
-					sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
-				else:
-					sprite.set_pixel(x, y, Color(0,0,0,0))
 	sprite.unlock()
 	aux.unlock()
 
@@ -256,6 +235,7 @@ func scale_image(width : int, height : int, interpolation : int) -> void:
 
 
 func centralize() -> void:
+	Global.canvas.selection.move_content_confirm()
 	# Find used rect of the current frame (across all of the layers)
 	var used_rect := Rect2()
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
@@ -277,6 +257,7 @@ func centralize() -> void:
 
 
 func crop_image(image : Image) -> void:
+	Global.canvas.selection.move_content_confirm()
 	# Use first cel as a starting rectangle
 	var used_rect : Rect2 = image.get_used_rect()
 
@@ -325,82 +306,101 @@ func resize_canvas(width : int, height : int, offset_x : int, offset_y : int) ->
 
 
 func general_do_scale(width : int, height : int) -> void:
-	var x_ratio = Global.current_project.size.x / width
-	var y_ratio = Global.current_project.size.y / height
-	var new_x_symmetry_point = Global.current_project.x_symmetry_point / x_ratio
-	var new_y_symmetry_point = Global.current_project.y_symmetry_point / y_ratio
-	var new_x_symmetry_axis_points = Global.current_project.x_symmetry_axis.points
-	var new_y_symmetry_axis_points = Global.current_project.y_symmetry_axis.points
+	var project := Global.current_project
+	var size := Vector2(width, height).floor()
+	var x_ratio = project.size.x / width
+	var y_ratio = project.size.y / height
+
+	var bitmap : BitMap
+	bitmap = project.resize_bitmap(project.selection_bitmap, size)
+
+	var new_x_symmetry_point = project.x_symmetry_point / x_ratio
+	var new_y_symmetry_point = project.y_symmetry_point / y_ratio
+	var new_x_symmetry_axis_points = project.x_symmetry_axis.points
+	var new_y_symmetry_axis_points = project.y_symmetry_axis.points
 	new_x_symmetry_axis_points[0].y /= y_ratio
 	new_x_symmetry_axis_points[1].y /= y_ratio
 	new_y_symmetry_axis_points[0].x /= x_ratio
 	new_y_symmetry_axis_points[1].x /= x_ratio
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Scale")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "size", Vector2(width, height).floor())
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "x_symmetry_point", new_x_symmetry_point)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "y_symmetry_point", new_y_symmetry_point)
-	Global.current_project.undo_redo.add_do_property(Global.current_project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
-	Global.current_project.undo_redo.add_do_property(Global.current_project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
+	project.undos += 1
+	project.undo_redo.create_action("Scale")
+	project.undo_redo.add_do_property(project, "size", size)
+	project.undo_redo.add_do_property(project, "selection_bitmap", bitmap)
+	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
+	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
+	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
+	project.undo_redo.add_do_property(project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
 
 
 func general_undo_scale() -> void:
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "size", Global.current_project.size)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "x_symmetry_point", Global.current_project.x_symmetry_point)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "y_symmetry_point", Global.current_project.y_symmetry_point)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project.x_symmetry_axis, "points", Global.current_project.x_symmetry_axis.points)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project.y_symmetry_axis, "points", Global.current_project.y_symmetry_axis.points)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	var project := Global.current_project
+	project.undo_redo.add_undo_property(project, "size", project.size)
+	project.undo_redo.add_undo_property(project, "selection_bitmap", project.selection_bitmap)
+	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
+	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
+	project.undo_redo.add_undo_property(project.x_symmetry_axis, "points", project.x_symmetry_axis.points)
+	project.undo_redo.add_undo_property(project.y_symmetry_axis, "points", project.y_symmetry_axis.points)
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
 
 
 func general_do_centralize() -> void:
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Centralize")
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Centralize")
 
 
 func general_undo_centralize() -> void:
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+	var project := Global.current_project
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.commit_action()
 
 
-func invert_image_colors(image : Image, pixels : Array, red := true, green := true, blue := true, alpha := false) -> void:
+func invert_image_colors(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
 	image.lock()
-	for i in pixels:
-		var px_color := image.get_pixelv(i)
-		# Manually invert each color channel
-		if red:
-			px_color.r = 1.0 - px_color.r
-		if green:
-			px_color.g = 1.0 - px_color.g
-		if blue:
-			px_color.b = 1.0 - px_color.b
-		if alpha:
-			px_color.a = 1.0 - px_color.a
-		image.set_pixelv(i, px_color)
+	for x in project.size.x:
+		for y in project.size.y:
+			var pos := Vector2(x, y)
+			if affect_selection and !project.can_pixel_get_drawn(pos):
+				continue
+			var px_color := image.get_pixelv(pos)
+			# Manually invert each color channel
+			if red:
+				px_color.r = 1.0 - px_color.r
+			if green:
+				px_color.g = 1.0 - px_color.g
+			if blue:
+				px_color.b = 1.0 - px_color.b
+			if alpha:
+				px_color.a = 1.0 - px_color.a
+			image.set_pixelv(pos, px_color)
 
 
-func desaturate_image(image : Image, pixels : Array, red := true, green := true, blue := true, alpha := false) -> void:
+func desaturate_image(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
 	image.lock()
-	for i in pixels:
-		var px_color := image.get_pixelv(i)
-		var gray = px_color.v
-		if red:
-			px_color.r = gray
-		if green:
-			px_color.g = gray
-		if blue:
-			px_color.b = gray
-		if alpha:
-			px_color.a = gray
+	for x in project.size.x:
+		for y in project.size.y:
+			var pos := Vector2(x, y)
+			if affect_selection and !project.can_pixel_get_drawn(pos):
+				continue
+			var px_color := image.get_pixelv(pos)
+			var gray = px_color.v
+			if red:
+				px_color.r = gray
+			if green:
+				px_color.g = gray
+			if blue:
+				px_color.b = gray
+			if alpha:
+				px_color.a = gray
 
-		image.set_pixelv(i, px_color)
+			image.set_pixelv(pos, px_color)
 
 
-func generate_outline(image : Image, pixels : Array, outline_color : Color, thickness : int, diagonal : bool, inside_image : bool) -> void:
+func generate_outline(image : Image, affect_selection : bool, project : Project, outline_color : Color, thickness : int, diagonal : bool, inside_image : bool) -> void:
 	if image.is_invisible():
 		return
 	var new_image := Image.new()
@@ -408,169 +408,175 @@ func generate_outline(image : Image, pixels : Array, outline_color : Color, thic
 	new_image.lock()
 	image.lock()
 
-	for pos in pixels:
-		var current_pixel := image.get_pixelv(pos)
-		if current_pixel.a == 0:
-			continue
+	for x in project.size.x:
+		for y in project.size.y:
+			var pos := Vector2(x, y)
+			var current_pixel := image.get_pixelv(pos)
+			if affect_selection and !project.can_pixel_get_drawn(pos):
+				continue
+			if current_pixel.a == 0:
+				continue
 
-		for i in range(1, thickness + 1):
-			if inside_image:
-				var outline_pos : Vector2 = pos + Vector2.LEFT # Left
-				if outline_pos.x < 0 || image.get_pixelv(outline_pos).a == 0:
-					var new_pos : Vector2 = pos + Vector2.RIGHT * (i - 1)
-					if new_pos.x < Global.current_project.size.x:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a > 0:
-							new_image.set_pixelv(new_pos, outline_color)
+			for i in range(1, thickness + 1):
+				if inside_image:
+					var outline_pos : Vector2 = pos + Vector2.LEFT # Left
+					if outline_pos.x < 0 || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.RIGHT * (i - 1)
+						if new_pos.x < Global.current_project.size.x:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
 
-				outline_pos = pos + Vector2.RIGHT # Right
-				if outline_pos.x >= Global.current_project.size.x || image.get_pixelv(outline_pos).a == 0:
-					var new_pos : Vector2 = pos + Vector2.LEFT * (i - 1)
+					outline_pos = pos + Vector2.RIGHT # Right
+					if outline_pos.x >= Global.current_project.size.x || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.LEFT * (i - 1)
+						if new_pos.x >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					outline_pos = pos + Vector2.UP # Up
+					if outline_pos.y < 0 || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.DOWN * (i - 1)
+						if new_pos.y < Global.current_project.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					outline_pos = pos + Vector2.DOWN # Down
+					if outline_pos.y >= Global.current_project.size.y || image.get_pixelv(outline_pos).a == 0:
+						var new_pos : Vector2 = pos + Vector2.UP * (i - 1)
+						if new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a > 0:
+								new_image.set_pixelv(new_pos, outline_color)
+
+					if diagonal:
+						outline_pos = pos + (Vector2.LEFT + Vector2.UP) # Top left
+						if (outline_pos.x < 0 && outline_pos.y < 0) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.DOWN) * (i - 1)
+							if new_pos.x < Global.current_project.size.x && new_pos.y < Global.current_project.size.y:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.LEFT + Vector2.DOWN) # Bottom left
+						if (outline_pos.x < 0 && outline_pos.y >= Global.current_project.size.y) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.UP) * (i - 1)
+							if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.RIGHT + Vector2.UP) # Top right
+						if (outline_pos.x >= Global.current_project.size.x && outline_pos.y < 0) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.DOWN) * (i - 1)
+							if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+						outline_pos = pos + (Vector2.RIGHT + Vector2.DOWN) # Bottom right
+						if (outline_pos.x >= Global.current_project.size.x && outline_pos.y >= Global.current_project.size.y) || image.get_pixelv(outline_pos).a == 0:
+							var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.UP) * (i - 1)
+							if new_pos.x >= 0 && new_pos.y >= 0:
+								var new_pixel = image.get_pixelv(new_pos)
+								if new_pixel.a > 0:
+									new_image.set_pixelv(new_pos, outline_color)
+
+				else:
+					var new_pos : Vector2 = pos + Vector2.LEFT * i # Left
 					if new_pos.x >= 0:
 						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a > 0:
+						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
-				outline_pos = pos + Vector2.UP # Up
-				if outline_pos.y < 0 || image.get_pixelv(outline_pos).a == 0:
-					var new_pos : Vector2 = pos + Vector2.DOWN * (i - 1)
-					if new_pos.y < Global.current_project.size.y:
+					new_pos = pos + Vector2.RIGHT * i # Right
+					if new_pos.x < Global.current_project.size.x:
 						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a > 0:
+						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
-				outline_pos = pos + Vector2.DOWN # Down
-				if outline_pos.y >= Global.current_project.size.y || image.get_pixelv(outline_pos).a == 0:
-					var new_pos : Vector2 = pos + Vector2.UP * (i - 1)
+					new_pos = pos + Vector2.UP * i # Up
 					if new_pos.y >= 0:
 						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a > 0:
+						if new_pixel.a == 0:
 							new_image.set_pixelv(new_pos, outline_color)
 
-				if diagonal:
-					outline_pos = pos + (Vector2.LEFT + Vector2.UP) # Top left
-					if (outline_pos.x < 0 && outline_pos.y < 0) || image.get_pixelv(outline_pos).a == 0:
-						var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.DOWN) * (i - 1)
-						if new_pos.x < Global.current_project.size.x && new_pos.y < Global.current_project.size.y:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
+					new_pos = pos + Vector2.DOWN * i # Down
+					if new_pos.y < Global.current_project.size.y:
+						var new_pixel = image.get_pixelv(new_pos)
+						if new_pixel.a == 0:
+							new_image.set_pixelv(new_pos, outline_color)
 
-					outline_pos = pos + (Vector2.LEFT + Vector2.DOWN) # Bottom left
-					if (outline_pos.x < 0 && outline_pos.y >= Global.current_project.size.y) || image.get_pixelv(outline_pos).a == 0:
-						var new_pos : Vector2 = pos + (Vector2.RIGHT + Vector2.UP) * (i - 1)
-						if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-					outline_pos = pos + (Vector2.RIGHT + Vector2.UP) # Top right
-					if (outline_pos.x >= Global.current_project.size.x && outline_pos.y < 0) || image.get_pixelv(outline_pos).a == 0:
-						var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.DOWN) * (i - 1)
-						if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-					outline_pos = pos + (Vector2.RIGHT + Vector2.DOWN) # Bottom right
-					if (outline_pos.x >= Global.current_project.size.x && outline_pos.y >= Global.current_project.size.y) || image.get_pixelv(outline_pos).a == 0:
-						var new_pos : Vector2 = pos + (Vector2.LEFT + Vector2.UP) * (i - 1)
+					if diagonal:
+						new_pos = pos + (Vector2.LEFT + Vector2.UP) * i # Top left
 						if new_pos.x >= 0 && new_pos.y >= 0:
 							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
+							if new_pixel.a == 0:
 								new_image.set_pixelv(new_pos, outline_color)
 
-			else:
-				var new_pos : Vector2 = pos + Vector2.LEFT * i # Left
-				if new_pos.x >= 0:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
+						new_pos = pos + (Vector2.LEFT + Vector2.DOWN) * i # Bottom left
+						if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
 
-				new_pos = pos + Vector2.RIGHT * i # Right
-				if new_pos.x < Global.current_project.size.x:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
+						new_pos = pos + (Vector2.RIGHT + Vector2.UP) * i # Top right
+						if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
 
-				new_pos = pos + Vector2.UP * i # Up
-				if new_pos.y >= 0:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
-
-				new_pos = pos + Vector2.DOWN * i # Down
-				if new_pos.y < Global.current_project.size.y:
-					var new_pixel = image.get_pixelv(new_pos)
-					if new_pixel.a == 0:
-						new_image.set_pixelv(new_pos, outline_color)
-
-				if diagonal:
-					new_pos = pos + (Vector2.LEFT + Vector2.UP) * i # Top left
-					if new_pos.x >= 0 && new_pos.y >= 0:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					new_pos = pos + (Vector2.LEFT + Vector2.DOWN) * i # Bottom left
-					if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					new_pos = pos + (Vector2.RIGHT + Vector2.UP) * i # Top right
-					if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					new_pos = pos + (Vector2.RIGHT + Vector2.DOWN) * i # Bottom right
-					if new_pos.x < Global.current_project.size.x && new_pos.y < Global.current_project.size.y:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
+						new_pos = pos + (Vector2.RIGHT + Vector2.DOWN) * i # Bottom right
+						if new_pos.x < Global.current_project.size.x && new_pos.y < Global.current_project.size.y:
+							var new_pixel = image.get_pixelv(new_pos)
+							if new_pixel.a == 0:
+								new_image.set_pixelv(new_pos, outline_color)
 
 	image.unlock()
 	new_image.unlock()
 	image.copy_from(new_image)
 
 
-func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, pixels : Array) -> void:
+func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, affect_selection : bool, project : Project) -> void:
 	img.lock()
-	for i in pixels:
-		var c : Color = img.get_pixelv(i)
-		# Hue
-		var hue = range_lerp(c.h,0,1,-180,180)
-		hue = hue + delta_h
+	for x in project.size.x:
+		for y in project.size.y:
+			var pos := Vector2(x, y)
+			if affect_selection and !project.can_pixel_get_drawn(pos):
+				continue
+			var c : Color = img.get_pixelv(pos)
+			# Hue
+			var hue = range_lerp(c.h,0,1,-180,180)
+			hue = hue + delta_h
 
-		while(hue >= 180):
-			hue -= 360
-		while(hue < -180):
-			hue += 360
+			while(hue >= 180):
+				hue -= 360
+			while(hue < -180):
+				hue += 360
 
-		# Saturation
-		var sat = c.s
-		if delta_s > 0:
-			sat = range_lerp(delta_s,0,100,c.s,1)
-		elif delta_s < 0:
-			sat = range_lerp(delta_s,-100,0,0,c.s)
+			# Saturation
+			var sat = c.s
+			if delta_s > 0:
+				sat = range_lerp(delta_s,0,100,c.s,1)
+			elif delta_s < 0:
+				sat = range_lerp(delta_s,-100,0,0,c.s)
 
-		# Value
-		var val = c.v
-		if delta_v > 0:
-			val = range_lerp(delta_v,0,100,c.v,1)
-		elif delta_v < 0:
-			val = range_lerp(delta_v,-100,0,0,c.v)
+			# Value
+			var val = c.v
+			if delta_v > 0:
+				val = range_lerp(delta_v,0,100,c.v,1)
+			elif delta_v < 0:
+				val = range_lerp(delta_v,-100,0,0,c.v)
 
-		c.h = range_lerp(hue,-180,180,0,1)
-		c.s = sat
-		c.v = val
-		img.set_pixelv(i,c)
-
-	img.unlock()
+			c.h = range_lerp(hue,-180,180,0,1)
+			c.s = sat
+			c.v = val
+			img.set_pixelv(pos, c)
 
 
-func generate_gradient(image : Image, colors : Array, steps := 2, direction : int = GradientDirection.TOP, pixels = Global.current_project.selected_pixels) -> void:
+func generate_gradient(image : Image, colors : Array, steps : int, direction : int, affect_selection : bool, project : Project) -> void:
 	if colors.size() < 2:
 		return
 
@@ -584,8 +590,13 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
 		colors.invert()
 
-	var selection_rectangle := Rect2(pixels[0].x, pixels[0].y, pixels[-1].x - pixels[0].x + 1, pixels[-1].y - pixels[0].y + 1)
-	var size := selection_rectangle.size
+	var draw_rectangle := Rect2()
+	var selection := affect_selection and project.has_selection
+	if selection:
+		draw_rectangle = project.get_selection_rectangle()
+	else:
+		draw_rectangle = Rect2(Vector2.ZERO, project.size)
+	var size := draw_rectangle.size
 	image.lock()
 	var gradient_size
 
@@ -596,7 +607,9 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 				var start = i * gradient_size
 				var end = (i + 1) * gradient_size
 				for yy in range(start, end):
-					var pos : Vector2 = Vector2(xx, yy) + pixels[0]
+					var pos : Vector2 = Vector2(xx, yy) + draw_rectangle.position
+					if selection and !project.selection_bitmap.get_bit(pos):
+						continue
 					image.set_pixelv(pos, colors[i])
 
 	else:
@@ -606,5 +619,7 @@ func generate_gradient(image : Image, colors : Array, steps := 2, direction : in
 				var start = i * gradient_size
 				var end = (i + 1) * gradient_size
 				for xx in range(start, end):
-					var pos : Vector2 = Vector2(xx, yy) + pixels[0]
+					var pos : Vector2 = Vector2(xx, yy) + draw_rectangle.position
+					if selection and !project.selection_bitmap.get_bit(pos):
+						continue
 					image.set_pixelv(pos, colors[i])
