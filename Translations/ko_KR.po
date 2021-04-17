@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-04-17 10:28\n"
+"PO-Revision-Date: 2021-04-17 10:39\n"
 
 msgid "OK"
 msgstr "예"
@@ -1682,10 +1682,10 @@ msgid "Empty"
 msgstr "비어 있음"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "현재 팔레트에서"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "현재 스프라이트에서"
 
 msgid "From Current Selection"
 msgstr ""
@@ -1694,7 +1694,7 @@ msgid "Add a new color"
 msgstr "새 색상 추가"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "선택한 색상 제거"
 
 msgid "Palette with the same name and path already exists!"
 msgstr ""
