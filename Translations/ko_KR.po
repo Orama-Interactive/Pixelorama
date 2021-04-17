@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-04-17 10:28\n"
 
 msgid "OK"
 msgstr "예"
@@ -1673,13 +1673,13 @@ msgid "Create a new palette"
 msgstr ""
 
 msgid "Create New Palette"
-msgstr ""
+msgstr "새 팔레트 생성"
 
 msgid "Comment:"
-msgstr ""
+msgstr "댓글:"
 
 msgid "Empty"
-msgstr ""
+msgstr "비어 있음"
 
 msgid "From Current Palette"
 msgstr ""
@@ -1691,7 +1691,7 @@ msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "새 색상 추가"
 
 msgid "Remove a selected color"
 msgstr ""
@@ -1700,7 +1700,7 @@ msgid "Palette with the same name and path already exists!"
 msgstr ""
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "팔레트의 이름이 필요합니다!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
