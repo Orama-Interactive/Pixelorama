@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-04-17 00:29\n"
+"PO-Revision-Date: 2021-04-17 00:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1679,29 +1679,29 @@ msgid "Comment:"
 msgstr "注释："
 
 msgid "Empty"
-msgstr ""
+msgstr "空的"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "从当前调色板"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "从当前 Sprite"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "从当前选择"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "添加一个新颜色"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "删除所选颜色"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "具有相同名称和路径的调色板已经存在！"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "调色板名称为必填项！"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺寸的颜色将丢失！"
 
