@@ -487,12 +487,3 @@ func get_preview_image() -> void:
 	clear_image.create(original_preview_image.get_width(), original_preview_image.get_height(), false, Image.FORMAT_RGBA8)
 	cel_image.blit_rect_mask(clear_image, original_preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
-
-
-func get_big_bounding_rectangle() -> Rect2:
-	# Returns a rectangle that contains the entire selection, with multiple polygons
-	var project : Project = Global.current_project
-	var rect := Rect2()
-	var image : Image = project.bitmap_to_image(project.selection_bitmap)
-	rect = image.get_used_rect()
-	return rect

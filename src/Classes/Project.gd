@@ -654,11 +654,30 @@ func bitmap_to_image(bitmap : BitMap) -> Image:
 
 
 func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
-	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
-	if bitmap.get_true_bit_count() > 0:
-		var image : Image = bitmap_to_image(bitmap)
-		rect = image.get_used_rect()
-	return rect
+	if bitmap.get_true_bit_count() == 0:
+		return Rect2()
+
+	var minx := 0xFFFFFF
+	var miny := 0xFFFFFF
+	var maxx := -1
+	var maxy := -1
+	for j in bitmap.get_size().y:
+		for i in bitmap.get_size().x:
+			if !bitmap.get_bit(Vector2(i, j)):
+				continue
+			if i > maxx:
+				maxx = i
+			if j > maxy:
+				maxy = j
+			if i < minx:
+				minx = i
+			if j < miny:
+				miny = j
+
+	if maxx == -1:
+		return Rect2()
+	else:
+		return Rect2(minx, miny, maxx - minx + 1, maxy - miny + 1)
 
 
 func move_bitmap_values(bitmap : BitMap) -> void:
