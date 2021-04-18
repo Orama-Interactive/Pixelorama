@@ -62,6 +62,10 @@ var control := false
 var shift := false
 var alt := false
 
+onready var left_tool_background := preload("res://assets/graphics/tool_backgrounds/l.png")
+onready var right_tool_background := preload("res://assets/graphics/tool_backgrounds/r.png")
+onready var left_right_tool_background := preload("res://assets/graphics/tool_backgrounds/l_r.png")
+
 
 func _ready() -> void:
 	yield(get_tree(), "idle_frame")
@@ -144,14 +148,15 @@ func get_assigned_color(button : int) -> Color:
 
 func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
-		var texture : TextureRect = child.get_child(0)
-		var filename = child.name.to_lower()
+		var texture : TextureRect = child.get_node("Background")
 		if _slots[BUTTON_LEFT].tool_node.name == child.name:
-			filename += "_l"
-		if _slots[BUTTON_RIGHT].tool_node.name == child.name:
-			filename += "_r"
-		filename += ".png"
-		Global.change_button_texturerect(texture, filename)
+			texture.texture = left_tool_background
+			if _slots[BUTTON_RIGHT].tool_node.name == child.name:
+				texture.texture = left_right_tool_background
+		elif _slots[BUTTON_RIGHT].tool_node.name == child.name:
+			texture.texture = right_tool_background
+		else:
+			texture.texture = null
 
 
 func update_tool_cursors() -> void:

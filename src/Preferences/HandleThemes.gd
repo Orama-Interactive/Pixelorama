@@ -112,7 +112,7 @@ func change_theme(ID : int) -> void:
 		elif button is Button:
 			var texture : TextureRect
 			for child in button.get_children():
-				if child is TextureRect:
+				if child is TextureRect and child.name != "Background":
 					texture = child
 					break
 
