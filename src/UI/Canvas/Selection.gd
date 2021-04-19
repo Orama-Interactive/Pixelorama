@@ -37,6 +37,7 @@ class Gizmo:
 
 var clipboard := Clipboard.new()
 var is_moving_content := false
+var is_pasting := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 var temp_rect := Rect2()
 var original_big_bounding_rectangle := Rect2()
@@ -296,6 +297,7 @@ func move_content_confirm() -> void:
 	preview_image = Image.new()
 	original_bitmap = BitMap.new()
 	is_moving_content = false
+	is_pasting = false
 	commit_undo("Move Selection", undo_data)
 	update()
 
@@ -311,12 +313,14 @@ func move_content_cancel() -> void:
 	project.selection_bitmap = original_bitmap
 	project.selection_bitmap_changed()
 	preview_image = original_preview_image
-	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
-	Global.canvas.update_texture(project.current_layer)
+	if !is_pasting:
+		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
+		Global.canvas.update_texture(project.current_layer)
 	original_preview_image = Image.new()
 	preview_image = Image.new()
 	original_bitmap = BitMap.new()
+	is_pasting = false
 	update()
 
 
@@ -398,15 +402,25 @@ func copy() -> void:
 func paste() -> void:
 	if !clipboard.image:
 		return
-	var _undo_data = _get_undo_data(true)
+	undo_data = _get_undo_data(true)
 	var project := Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+
+	original_bitmap = Global.current_project.selection_bitmap.duplicate()
+	original_big_bounding_rectangle = big_bounding_rectangle
+	original_offset = Global.current_project.selection_offset
+
 	clear_selection()
 	project.selection_bitmap = clipboard.selection_bitmap.duplicate()
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 	project.selection_offset = clipboard.selection_offset
-	image.blend_rect(clipboard.image, Rect2(Vector2.ZERO, project.size), big_bounding_rectangle.position)
-	commit_undo("Draw", _undo_data)
+
+	is_moving_content = true
+	is_pasting = true
+	original_preview_image = clipboard.image
+	preview_image.copy_from(original_preview_image)
+	preview_image_texture.create_from_image(preview_image, 0)
+
+	project.selection_bitmap_changed()
 
 
 func delete() -> void:
