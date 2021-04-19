@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/colorselect_cursor.png-4ef918151476710e2b5b5727913a4294.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/colorselect_cursor.png"
+dest_files=[ "res://.import/colorselect_cursor.png-4ef918151476710e2b5b5727913a4294.image" ]
+
+[params]
+

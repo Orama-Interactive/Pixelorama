@@ -479,6 +479,13 @@ func update_hint_tooltips() -> void:
 
 Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
 
+	var color_select : BaseButton = tool_buttons.find_node("ColorSelect")
+	color_select.hint_tooltip = tr("""Select By Color
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_color_select_tool")[0].as_text(), InputMap.get_action_list("right_color_select_tool")[0].as_text()]
+
+
 	var move_select : BaseButton = tool_buttons.find_node("Move")
 	move_select.hint_tooltip = tr("""Move
 
