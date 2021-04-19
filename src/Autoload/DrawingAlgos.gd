@@ -359,45 +359,47 @@ func general_undo_centralize() -> void:
 	project.undo_redo.commit_action()
 
 
-func invert_image_colors(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
-	image.lock()
-	for x in project.size.x:
-		for y in project.size.y:
-			var pos := Vector2(x, y)
-			if affect_selection and !project.can_pixel_get_drawn(pos):
-				continue
-			var px_color := image.get_pixelv(pos)
-			# Manually invert each color channel
-			if red:
-				px_color.r = 1.0 - px_color.r
-			if green:
-				px_color.g = 1.0 - px_color.g
-			if blue:
-				px_color.b = 1.0 - px_color.b
-			if alpha:
-				px_color.a = 1.0 - px_color.a
-			image.set_pixelv(pos, px_color)
+# TO BE REMOVED
+# func invert_image_colors(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
+# 	image.lock()
+# 	for x in project.size.x:
+# 		for y in project.size.y:
+# 			var pos := Vector2(x, y)
+# 			if affect_selection and !project.can_pixel_get_drawn(pos):
+# 				continue
+# 			var px_color := image.get_pixelv(pos)
+# 			# Manually invert each color channel
+# 			if red:
+# 				px_color.r = 1.0 - px_color.r
+# 			if green:
+# 				px_color.g = 1.0 - px_color.g
+# 			if blue:
+# 				px_color.b = 1.0 - px_color.b
+# 			if alpha:
+# 				px_color.a = 1.0 - px_color.a
+# 			image.set_pixelv(pos, px_color)
 
 
-func desaturate_image(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
-	image.lock()
-	for x in project.size.x:
-		for y in project.size.y:
-			var pos := Vector2(x, y)
-			if affect_selection and !project.can_pixel_get_drawn(pos):
-				continue
-			var px_color := image.get_pixelv(pos)
-			var gray = px_color.v
-			if red:
-				px_color.r = gray
-			if green:
-				px_color.g = gray
-			if blue:
-				px_color.b = gray
-			if alpha:
-				px_color.a = gray
+# TO BE REMOVED
+# func desaturate_image(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
+# 	image.lock()
+# 	for x in project.size.x:
+# 		for y in project.size.y:
+# 			var pos := Vector2(x, y)
+# 			if affect_selection and !project.can_pixel_get_drawn(pos):
+# 				continue
+# 			var px_color := image.get_pixelv(pos)
+# 			var gray = px_color.v
+# 			if red:
+# 				px_color.r = gray
+# 			if green:
+# 				px_color.g = gray
+# 			if blue:
+# 				px_color.b = gray
+# 			if alpha:
+# 				px_color.a = gray
 
-			image.set_pixelv(pos, px_color)
+# 			image.set_pixelv(pos, px_color)
 
 
 func generate_outline(image : Image, affect_selection : bool, project : Project, outline_color : Color, thickness : int, diagonal : bool, inside_image : bool) -> void:
@@ -539,41 +541,42 @@ func generate_outline(image : Image, affect_selection : bool, project : Project,
 	image.copy_from(new_image)
 
 
-func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, affect_selection : bool, project : Project) -> void:
-	img.lock()
-	for x in project.size.x:
-		for y in project.size.y:
-			var pos := Vector2(x, y)
-			if affect_selection and !project.can_pixel_get_drawn(pos):
-				continue
-			var c : Color = img.get_pixelv(pos)
-			# Hue
-			var hue = range_lerp(c.h,0,1,-180,180)
-			hue = hue + delta_h
+# TO BE REMOVED
+# func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, affect_selection : bool, project : Project) -> void:
+# 	img.lock()
+# 	for x in project.size.x:
+# 		for y in project.size.y:
+# 			var pos := Vector2(x, y)
+# 			if affect_selection and !project.can_pixel_get_drawn(pos):
+# 				continue
+# 			var c : Color = img.get_pixelv(pos)
+# 			# Hue
+# 			var hue = range_lerp(c.h,0,1,-180,180)
+# 			hue = hue + delta_h
 
-			while(hue >= 180):
-				hue -= 360
-			while(hue < -180):
-				hue += 360
+# 			while(hue >= 180):
+# 				hue -= 360
+# 			while(hue < -180):
+# 				hue += 360
 
-			# Saturation
-			var sat = c.s
-			if delta_s > 0:
-				sat = range_lerp(delta_s,0,100,c.s,1)
-			elif delta_s < 0:
-				sat = range_lerp(delta_s,-100,0,0,c.s)
+# 			# Saturation
+# 			var sat = c.s
+# 			if delta_s > 0:
+# 				sat = range_lerp(delta_s,0,100,c.s,1)
+# 			elif delta_s < 0:
+# 				sat = range_lerp(delta_s,-100,0,0,c.s)
 
-			# Value
-			var val = c.v
-			if delta_v > 0:
-				val = range_lerp(delta_v,0,100,c.v,1)
-			elif delta_v < 0:
-				val = range_lerp(delta_v,-100,0,0,c.v)
+# 			# Value
+# 			var val = c.v
+# 			if delta_v > 0:
+# 				val = range_lerp(delta_v,0,100,c.v,1)
+# 			elif delta_v < 0:
+# 				val = range_lerp(delta_v,-100,0,0,c.v)
 
-			c.h = range_lerp(hue,-180,180,0,1)
-			c.s = sat
-			c.v = val
-			img.set_pixelv(pos, c)
+# 			c.h = range_lerp(hue,-180,180,0,1)
+# 			c.s = sat
+# 			c.v = val
+# 			img.set_pixelv(pos, c)
 
 
 func generate_gradient(image : Image, colors : Array, steps : int, direction : int, affect_selection : bool, project : Project) -> void:
