@@ -456,6 +456,7 @@ func remove_cel_buttons() -> void:
 
 
 func frame_changed(value : int) -> void:
+	Global.canvas.selection.move_content_confirm()
 	current_frame = value
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
@@ -487,6 +488,7 @@ func frame_changed(value : int) -> void:
 
 
 func layer_changed(value : int) -> void:
+	Global.canvas.selection.move_content_confirm()
 	current_layer = value
 
 	for container in Global.layers_container.get_children():
