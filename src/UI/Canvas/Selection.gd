@@ -379,20 +379,23 @@ func copy() -> void:
 		return
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	var to_copy := Image.new()
-	to_copy = image.get_rect(big_bounding_rectangle)
-	to_copy.lock()
-	# Only remove unincluded pixels if the selection is not a single rectangle
-	for x in to_copy.get_size().x:
-		for y in to_copy.get_size().y:
-			var pos := Vector2(x, y)
-			var offset_pos = big_bounding_rectangle.position
-			if offset_pos.x < 0:
-				offset_pos.x = 0
-			if offset_pos.y < 0:
-				offset_pos.y = 0
-			if not project.selection_bitmap.get_bit(pos + offset_pos):
-				to_copy.set_pixelv(pos, Color(0))
-	to_copy.unlock()
+	if is_moving_content:
+		to_copy.copy_from(preview_image)
+	else:
+		to_copy = image.get_rect(big_bounding_rectangle)
+		to_copy.lock()
+		# Remove unincluded pixels if the selection is not a single rectangle
+		for x in to_copy.get_size().x:
+			for y in to_copy.get_size().y:
+				var pos := Vector2(x, y)
+				var offset_pos = big_bounding_rectangle.position
+				if offset_pos.x < 0:
+					offset_pos.x = 0
+				if offset_pos.y < 0:
+					offset_pos.y = 0
+				if not project.selection_bitmap.get_bit(pos + offset_pos):
+					to_copy.set_pixelv(pos, Color(0))
+		to_copy.unlock()
 	clipboard.image = to_copy
 	clipboard.selection_bitmap = project.selection_bitmap.duplicate()
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
@@ -427,6 +430,16 @@ func delete() -> void:
 	var project := Global.current_project
 	if !project.has_selection:
 		return
+	if is_moving_content:
+		is_moving_content = false
+		original_preview_image = Image.new()
+		preview_image = Image.new()
+		original_bitmap = BitMap.new()
+		is_pasting = false
+		update()
+		commit_undo("Draw", undo_data)
+		return
+
 	var _undo_data = _get_undo_data(true)
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	for x in big_bounding_rectangle.size.x:
