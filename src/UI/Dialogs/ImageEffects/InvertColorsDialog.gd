@@ -26,7 +26,7 @@ func _confirmed() -> void:
 	._confirmed()
 
 func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
-	var selection = Global.canvas.selection.get_big_bounding_image()
+	var selection = _project.bitmap_to_image(_project.selection_bitmap, false)
 	var selection_tex = ImageTexture.new()
 	selection_tex.create_from_image(selection)
 
@@ -49,7 +49,7 @@ func commit_action(_cel : Image, _project : Project = Global.current_project) ->
 			"has_selection": _project.has_selection
 		}
 		var gen: ShaderImageEffect = ShaderImageEffect.new()
-		gen.generate_image(_cel, shaderPath, params)
+		gen.generate_image(_cel, shaderPath, params, _project.size)
 		yield(gen, "done")
 
 

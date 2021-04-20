@@ -637,12 +637,15 @@ func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> BitMap:
 
 
 # Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
-func bitmap_to_image(bitmap : BitMap) -> Image:
+func bitmap_to_image(bitmap : BitMap, square := true) -> Image:
 	var image := Image.new()
 	var width := bitmap.get_size().x
 	var height := bitmap.get_size().y
-	var square_size = max(width, height)
-	image.create(square_size, square_size, false, Image.FORMAT_LA8)
+	if square:
+		var square_size = max(width, height)
+		image.create(square_size, square_size, false, Image.FORMAT_LA8)
+	else:
+		image.create(width, height, false, Image.FORMAT_LA8)
 	image.lock()
 	for x in width:
 		for y in height:
