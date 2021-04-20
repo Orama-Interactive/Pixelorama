@@ -486,6 +486,13 @@ Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_sel
 %s for right mouse button""") % [InputMap.get_action_list("left_color_select_tool")[0].as_text(), InputMap.get_action_list("right_color_select_tool")[0].as_text()]
 
 
+	var magic_wand : BaseButton = tool_buttons.find_node("MagicWand")
+	magic_wand.hint_tooltip = tr("""Magic Wand
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_magic_wand_tool")[0].as_text(), InputMap.get_action_list("right_magic_wand_tool")[0].as_text()]
+
+
 	var move_select : BaseButton = tool_buttons.find_node("Move")
 	move_select.hint_tooltip = tr("""Move
 
