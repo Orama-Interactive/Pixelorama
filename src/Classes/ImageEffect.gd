@@ -47,28 +47,39 @@ func _about_to_show() -> void:
 
 func _confirmed() -> void:
 	if affect == CEL:
+		if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn(): # No changes if the layer is locked or invisible
+			return
 		Global.canvas.handle_undo("Draw")
 		commit_action(current_cel)
 		Global.canvas.handle_redo("Draw")
 	elif affect == FRAME:
 		Global.canvas.handle_undo("Draw", Global.current_project, -1)
+		var i := 0
 		for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-			commit_action(cel.image)
+			if Global.current_project.layers[i].can_layer_get_drawn():
+				commit_action(cel.image)
+			i += 1
 		Global.canvas.handle_redo("Draw", Global.current_project, -1)
 
 	elif affect == ALL_FRAMES:
 		Global.canvas.handle_undo("Draw", Global.current_project, -1, -1)
 		for frame in Global.current_project.frames:
+			var i := 0
 			for cel in frame.cels:
-				commit_action(cel.image)
+				if Global.current_project.layers[i].can_layer_get_drawn():
+					commit_action(cel.image)
+				i += 1
 		Global.canvas.handle_redo("Draw", Global.current_project, -1, -1)
 
 	elif affect == ALL_PROJECTS:
 		for project in Global.projects:
 			Global.canvas.handle_undo("Draw", project, -1, -1)
 			for frame in project.frames:
+				var i := 0
 				for cel in frame.cels:
-					commit_action(cel.image, project)
+					if project.layers[i].can_layer_get_drawn():
+						commit_action(cel.image, project)
+					i += 1
 			Global.canvas.handle_redo("Draw", project, -1, -1)
 
 

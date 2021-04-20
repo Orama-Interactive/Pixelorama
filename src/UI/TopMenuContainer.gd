@@ -437,8 +437,6 @@ func toggle_fullscreen() -> void:
 
 
 func image_menu_id_pressed(id : int) -> void:
-	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn(): # No changes if the layer is locked or invisible
-		return
 	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	match id:
 		ImageMenuId.SCALE_IMAGE:
