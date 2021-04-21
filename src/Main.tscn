@@ -119,6 +119,7 @@ visible = false
 visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]
+
 [connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="file_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_file_selected"]

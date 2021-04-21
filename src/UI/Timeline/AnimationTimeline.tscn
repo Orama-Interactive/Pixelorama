@@ -988,6 +988,7 @@ mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
