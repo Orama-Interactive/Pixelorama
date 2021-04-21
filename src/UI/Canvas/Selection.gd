@@ -82,10 +82,11 @@ func _input(event : InputEvent) -> void:
 				move_content_cancel()
 	elif event is InputEventMouse:
 		var gizmo : Gizmo
-		for g in gizmos:
-			if g.rect.has_point(Global.canvas.current_pixel):
-				gizmo = g
-				break
+		if big_bounding_rectangle.size != Vector2.ZERO:
+			for g in gizmos:
+				if g.rect.has_point(Global.canvas.current_pixel):
+					gizmo = g
+					break
 		if gizmo:
 			Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
 		elif !dragged_gizmo:
