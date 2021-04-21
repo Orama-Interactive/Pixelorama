@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-04-21 07:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1670,38 +1670,38 @@ msgid "Tiled In Y Axis"
 msgstr "Kafelkowanie na osi Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Stwórz nową paletę"
 
 msgid "Create New Palette"
-msgstr ""
+msgstr "Stwórz nową paletę"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Komentarz:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Pusta"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Z bieżącej palety"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Z bieżącego obrazu"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Z bieżącego zaznaczenia"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Dodaj nowy kolor"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Usuń wybrany kolor"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Paleta z tą nazwą i ścieżką już istnieje!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Wymagana jest nazwa palety!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Zmniejszenie rozmiaru palety zresetuje pozycje kolorów. Kolory, które nie mieszczą się w nowym rozmiarze palety zostaną utracone!"
 
