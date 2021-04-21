@@ -742,9 +742,13 @@ func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, fl
 	if selection_position.x <= 0:
 		self.selection_offset.x = selection_position.x
 		dst.x = 0
+	else:
+		self.selection_offset.x = 0
 	if selection_position.y <= 0:
 		self.selection_offset.y = selection_position.y
 		dst.y = 0
+	else:
+		self.selection_offset.y = 0
 	image.lock()
 	image.fill(Color(0))
 	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
