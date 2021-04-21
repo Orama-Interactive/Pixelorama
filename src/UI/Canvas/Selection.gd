@@ -39,11 +39,15 @@ var clipboard := Clipboard.new()
 var is_moving_content := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+
 var temp_rect := Rect2()
+var temp_bitmap := BitMap.new()
+
 var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
 var original_bitmap := BitMap.new()
 var original_offset := Vector2.ZERO
+
 var preview_image := Image.new()
 var preview_image_texture := ImageTexture.new()
 var undo_data : Dictionary
@@ -94,6 +98,7 @@ func _input(event : InputEvent) -> void:
 					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					dragged_gizmo = gizmo
 					temp_rect = big_bounding_rectangle
+					temp_bitmap = Global.current_project.selection_bitmap
 					move_content_start()
 					Global.current_project.selection_offset = Vector2.ZERO
 					if gizmo.type == Gizmo.Type.ROTATE:
@@ -188,7 +193,7 @@ func gizmo_resize() -> void:
 	if temp_rect.size.y < 0:
 		preview_image.flip_y()
 	preview_image_texture.create_from_image(preview_image, 0)
-	Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(original_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
+	Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(temp_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
 	Global.current_project.selection_bitmap_changed()
 	update()
 
@@ -260,7 +265,7 @@ func move_borders(move : Vector2) -> void:
 
 
 func move_borders_end() -> void:
-	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
+	var selected_bitmap_copy := Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy)
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
@@ -381,6 +386,9 @@ func copy() -> void:
 	var to_copy := Image.new()
 	if is_moving_content:
 		to_copy.copy_from(preview_image)
+		var selected_bitmap_copy := Global.current_project.selection_bitmap.duplicate()
+		Global.current_project.move_bitmap_values(selected_bitmap_copy, false)
+		clipboard.selection_bitmap = selected_bitmap_copy
 	else:
 		to_copy = image.get_rect(big_bounding_rectangle)
 		to_copy.lock()
@@ -396,8 +404,8 @@ func copy() -> void:
 				if not project.selection_bitmap.get_bit(pos + offset_pos):
 					to_copy.set_pixelv(pos, Color(0))
 		to_copy.unlock()
+		clipboard.selection_bitmap = project.selection_bitmap.duplicate()
 	clipboard.image = to_copy
-	clipboard.selection_bitmap = project.selection_bitmap.duplicate()
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
 	clipboard.selection_offset = project.selection_offset
 
@@ -405,6 +413,7 @@ func copy() -> void:
 func paste() -> void:
 	if !clipboard.image:
 		return
+	clear_selection()
 	undo_data = _get_undo_data(true)
 	var project := Global.current_project
 
@@ -412,7 +421,6 @@ func paste() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
 
-	clear_selection()
 	project.selection_bitmap = clipboard.selection_bitmap.duplicate()
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 	project.selection_offset = clipboard.selection_offset
