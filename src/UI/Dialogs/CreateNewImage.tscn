@@ -153,7 +153,6 @@ hint_tooltip = "Portrait"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-enabled_focus_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeButtonsContainer/PortraitButton"]
 anchor_left = 0.5
@@ -178,7 +177,6 @@ hint_tooltip = "Landscape"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-enabled_focus_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeButtonsContainer/LandscapeButton"]
 anchor_left = 0.5
@@ -214,6 +212,7 @@ rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 color = Color( 0, 0, 0, 0 )
+
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
 [connection signal="item_selected" from="VBoxContainer/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]

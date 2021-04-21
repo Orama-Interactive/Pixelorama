@@ -462,7 +462,6 @@ rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
 mouse_default_cursor_shape = 14
 action_mode = 0
-enabled_focus_mode = 0
 script = ExtResource( 6 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasAndTimeline/ViewportAndRulers"]
@@ -488,7 +487,6 @@ mouse_default_cursor_shape = 15
 size_flags_horizontal = 0
 size_flags_vertical = 3
 action_mode = 0
-enabled_focus_mode = 0
 script = ExtResource( 4 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
@@ -596,6 +594,7 @@ margin_left = 15.0
 margin_top = 260.0
 margin_right = 315.0
 margin_bottom = 508.0
+
 [connection signal="reposition_active_tab_request" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
