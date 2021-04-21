@@ -85,7 +85,7 @@ func _input(event : InputEvent) -> void:
 		if big_bounding_rectangle.size != Vector2.ZERO:
 			for g in gizmos:
 				if g.rect.has_point(Global.canvas.current_pixel):
-					gizmo = g
+					gizmo = Gizmo.new(g.type, g.direction)
 					break
 		if gizmo:
 			Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
@@ -98,13 +98,17 @@ func _input(event : InputEvent) -> void:
 					Global.has_focus = false
 					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					dragged_gizmo = gizmo
-					temp_rect = big_bounding_rectangle
-					temp_bitmap = Global.current_project.selection_bitmap
-					move_content_start()
-					Global.current_project.selection_offset = Vector2.ZERO
-					if gizmo.type == Gizmo.Type.ROTATE:
-						var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
-						original_preview_image.crop(img_size, img_size)
+					if !is_moving_content:
+						temp_rect = big_bounding_rectangle
+						temp_bitmap = Global.current_project.selection_bitmap
+						move_content_start()
+						Global.current_project.selection_offset = Vector2.ZERO
+						if gizmo.type == Gizmo.Type.ROTATE:
+							var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
+							original_preview_image.crop(img_size, img_size)
+					else:
+						dragged_gizmo.direction.x *= sign(temp_rect.size.x)
+						dragged_gizmo.direction.y *= sign(temp_rect.size.y)
 
 			elif dragged_gizmo:
 				Global.has_focus = true
