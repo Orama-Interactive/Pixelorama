@@ -35,6 +35,9 @@ class Gizmo:
 		return cursor
 
 
+enum SelectionOperation {ADD, SUBTRACT, INTERSECT}
+
+
 var clipboard := Clipboard.new()
 var is_moving_content := false
 var is_pasting := false
@@ -244,7 +247,7 @@ func gizmo_rotate() -> void: # Does not work properly yet
 	update()
 
 
-func select_rect(rect : Rect2, select := true) -> void:
+func select_rect(rect : Rect2, operation : int = SelectionOperation.ADD) -> void:
 	var project : Project = Global.current_project
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
 	var offset_position := Vector2.ZERO # Used only if the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
@@ -259,7 +262,17 @@ func select_rect(rect : Rect2, select := true) -> void:
 		big_bounding_rectangle.position -= offset_position
 		project.move_bitmap_values(selection_bitmap_copy)
 
-	selection_bitmap_copy.set_bit_rect(rect, select)
+	if operation == SelectionOperation.ADD:
+		selection_bitmap_copy.set_bit_rect(rect, true)
+	elif operation == SelectionOperation.SUBTRACT:
+		selection_bitmap_copy.set_bit_rect(rect, false)
+	elif operation == SelectionOperation.INTERSECT:
+		var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
+		selection_bitmap_copy.set_bit_rect(full_rect, false)
+		for x in range(rect.position.x, rect.end.x):
+			for y in range(rect.position.y, rect.end.y):
+				var pos := Vector2(x, y)
+				selection_bitmap_copy.set_bit(pos, project.selection_bitmap.get_bit(pos))
 	big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 
 	if offset_position != Vector2.ZERO:

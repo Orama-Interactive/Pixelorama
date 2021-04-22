@@ -8,6 +8,7 @@ var _move := false
 
 var _add := false # Shift + Mouse Click
 var _subtract := false # Ctrl + Mouse Click
+var _intersect := false # Shift + Ctrl + Mouse Click
 var _square := false # Mouse Click + Shift
 var _expand_from_center := false # Mouse Click + Ctrl
 
@@ -44,8 +45,9 @@ func draw_start(position : Vector2) -> void:
 
 	else:
 		_start_pos = position
-		_add = Tools.shift
-		_subtract = Tools.control
+		_intersect = Tools.shift && Tools.control
+		_add = Tools.shift && !_intersect
+		_subtract = Tools.control && !_intersect
 
 
 func draw_move(position : Vector2) -> void:
@@ -64,12 +66,17 @@ func draw_end(_position : Vector2) -> void:
 	if _move:
 		Global.canvas.selection.move_borders_end()
 	else:
-		if !_add and !_subtract:
+		if !_add and !_subtract and !_intersect:
 			Global.canvas.selection.clear_selection()
 			if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
 				Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 		if _rect.size != Vector2.ZERO:
-			Global.canvas.selection.select_rect(_rect, !_subtract)
+			var operation := 0
+			if _subtract:
+				operation = 1
+			elif _intersect:
+				operation = 2
+			Global.canvas.selection.select_rect(_rect, operation)
 			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 
 	_move = false
