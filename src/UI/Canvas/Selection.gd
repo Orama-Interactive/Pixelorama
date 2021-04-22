@@ -107,8 +107,20 @@ func _input(event : InputEvent) -> void:
 							var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
 							original_preview_image.crop(img_size, img_size)
 					else:
+						var prev_temp_rect := temp_rect
 						dragged_gizmo.direction.x *= sign(temp_rect.size.x)
 						dragged_gizmo.direction.y *= sign(temp_rect.size.y)
+						temp_rect = big_bounding_rectangle
+						# If prev_temp_rect, which used to be the previous temp_rect, has negative size,
+						# switch the position and end point in temp_rect
+						if prev_temp_rect.size.x < 0:
+							var pos = temp_rect.position.x
+							temp_rect.position.x = temp_rect.end.x
+							temp_rect.end.x = pos
+						if prev_temp_rect.size.y < 0:
+							var pos = temp_rect.position.y
+							temp_rect.position.y = temp_rect.end.y
+							temp_rect.end.y = pos
 
 			elif dragged_gizmo:
 				Global.has_focus = true
