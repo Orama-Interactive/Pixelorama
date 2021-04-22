@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-04-17 10:39\n"
+"PO-Revision-Date: 2021-04-22 11:15\n"
 
 msgid "OK"
 msgstr "예"
@@ -1670,7 +1670,7 @@ msgid "Tiled In Y Axis"
 msgstr "Y 축으로 타일을 두르기"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "새 팔레트 생성"
 
 msgid "Create New Palette"
 msgstr "새 팔레트 생성"
@@ -1688,7 +1688,7 @@ msgid "From Current Sprite"
 msgstr "현재 스프라이트에서"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "현재 선택된 영역부터"
 
 msgid "Add a new color"
 msgstr "새 색상 추가"
@@ -1697,7 +1697,7 @@ msgid "Remove a selected color"
 msgstr "선택한 색상 제거"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "동일한 이름과 경로를가진 팔레트가 이미 존재합니다!"
 
 msgid "Palette name is required!"
 msgstr "팔레트의 이름이 필요합니다!"
