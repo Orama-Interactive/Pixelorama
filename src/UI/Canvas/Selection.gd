@@ -204,7 +204,14 @@ func gizmo_resize() -> void:
 	temp_rect = temp_rect.grow_individual(left, top, right, bottom)
 	big_bounding_rectangle = temp_rect.abs()
 	big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
-	self.big_bounding_rectangle.size = big_bounding_rectangle.size.ceil()
+	big_bounding_rectangle.size = big_bounding_rectangle.size.floor()
+	if big_bounding_rectangle.size.x == 0:
+		big_bounding_rectangle.size.x = 1
+	if big_bounding_rectangle.size.y == 0:
+		big_bounding_rectangle.size.y = 1
+
+	self.big_bounding_rectangle = big_bounding_rectangle # Call the setter method
+
 	var size = big_bounding_rectangle.size.abs()
 	preview_image.copy_from(original_preview_image)
 	preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
