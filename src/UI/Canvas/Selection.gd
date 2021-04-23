@@ -78,10 +78,10 @@ func _ready() -> void:
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventKey:
-		if is_moving_content: # Temporary code
-			if event.scancode == 16777221: # Enter
+		if is_moving_content:
+			if Input.is_action_just_pressed("enter"):
 				transform_content_confirm()
-			elif event.scancode == 16777217: # Escape
+			elif Input.is_action_just_pressed("escape"):
 				transform_content_cancel()
 	elif event is InputEventMouse:
 		var gizmo : Gizmo
