@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 env:
-  GODOT_VERSION: 3.2.3
+  GODOT_VERSION: 3.3
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.3
+      image: docker://barichello/godot-ci:3.3
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
