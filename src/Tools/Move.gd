@@ -9,7 +9,7 @@ func draw_start(position : Vector2) -> void:
 	_starting_pos = position
 	_offset = position
 	if Global.current_project.has_selection:
-		Global.canvas.selection.move_content_start()
+		Global.canvas.selection.transform_content_start()
 
 
 func draw_move(position : Vector2) -> void:

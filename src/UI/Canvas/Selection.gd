@@ -80,9 +80,9 @@ func _input(event : InputEvent) -> void:
 	if event is InputEventKey:
 		if is_moving_content: # Temporary code
 			if event.scancode == 16777221: # Enter
-				move_content_confirm()
+				transform_content_confirm()
 			elif event.scancode == 16777217: # Escape
-				move_content_cancel()
+				transform_content_cancel()
 	elif event is InputEventMouse:
 		var gizmo : Gizmo
 		if big_bounding_rectangle.size != Vector2.ZERO:
@@ -104,7 +104,7 @@ func _input(event : InputEvent) -> void:
 					if !is_moving_content:
 						temp_rect = big_bounding_rectangle
 						temp_bitmap = Global.current_project.selection_bitmap
-						move_content_start()
+						transform_content_start()
 						Global.current_project.selection_offset = Vector2.ZERO
 						if gizmo.type == Gizmo.Type.ROTATE:
 							var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
@@ -310,7 +310,7 @@ func move_borders_end() -> void:
 	update()
 
 
-func move_content_start() -> void:
+func transform_content_start() -> void:
 	if !is_moving_content:
 		is_moving_content = true
 		undo_data = _get_undo_data(true)
@@ -325,7 +325,7 @@ func move_content(move : Vector2) -> void:
 	move_borders(move)
 
 
-func move_content_confirm() -> void:
+func transform_content_confirm() -> void:
 	if !is_moving_content:
 		return
 	var project : Project = Global.current_project
@@ -344,7 +344,7 @@ func move_content_confirm() -> void:
 	update()
 
 
-func move_content_cancel() -> void:
+func transform_content_cancel() -> void:
 	if preview_image.is_empty():
 		return
 	var project : Project = Global.current_project
@@ -505,7 +505,7 @@ func select_all() -> void:
 
 
 func invert() -> void:
-	move_content_confirm()
+	transform_content_confirm()
 	var project := Global.current_project
 	var _undo_data = _get_undo_data(false)
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
@@ -522,7 +522,7 @@ func clear_selection(use_undo := false) -> void:
 	var project := Global.current_project
 	if !project.has_selection:
 		return
-	move_content_confirm()
+	transform_content_confirm()
 	var _undo_data = _get_undo_data(false)
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
 	selection_bitmap_copy = project.resize_bitmap(selection_bitmap_copy, project.size)

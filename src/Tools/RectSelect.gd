@@ -28,7 +28,7 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	Global.canvas.selection.move_content_confirm()
+	Global.canvas.selection.transform_content_confirm()
 	undo_data = Global.canvas.selection._get_undo_data(false)
 	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 	var offsetted_pos := position

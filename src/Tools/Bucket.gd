@@ -94,7 +94,7 @@ func update_pattern() -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	Global.canvas.selection.move_content_confirm()
+	Global.canvas.selection.transform_content_confirm()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn() or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position):
 		return
 	if Global.current_project.has_selection and not Global.current_project.can_pixel_get_drawn(position):

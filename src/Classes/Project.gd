@@ -78,7 +78,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 
 func commit_undo() -> void:
 	if Global.canvas.selection.is_moving_content:
-		Global.canvas.selection.move_content_cancel()
+		Global.canvas.selection.transform_content_cancel()
 	else:
 		undo_redo.undo()
 
@@ -456,7 +456,7 @@ func remove_cel_buttons() -> void:
 
 
 func frame_changed(value : int) -> void:
-	Global.canvas.selection.move_content_confirm()
+	Global.canvas.selection.transform_content_confirm()
 	current_frame = value
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
@@ -488,7 +488,7 @@ func frame_changed(value : int) -> void:
 
 
 func layer_changed(value : int) -> void:
-	Global.canvas.selection.move_content_confirm()
+	Global.canvas.selection.transform_content_confirm()
 	current_layer = value
 
 	for container in Global.layers_container.get_children():

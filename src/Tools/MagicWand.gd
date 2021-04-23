@@ -8,7 +8,7 @@ var undo_data : Dictionary
 
 
 func draw_start(_position : Vector2) -> void:
-	Global.canvas.selection.move_content_confirm()
+	Global.canvas.selection.transform_content_confirm()
 	undo_data = Global.canvas.selection._get_undo_data(false)
 	_intersect = Tools.shift && Tools.control
 	_add = Tools.shift && !_intersect

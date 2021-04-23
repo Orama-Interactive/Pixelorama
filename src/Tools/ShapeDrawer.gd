@@ -53,6 +53,7 @@ func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
 
 
 func draw_start(position : Vector2) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 
 	_start = position
