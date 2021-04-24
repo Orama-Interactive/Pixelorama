@@ -446,6 +446,10 @@ func copy() -> void:
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
 	clipboard.selection_offset = project.selection_offset
 
+	var brush : Image = to_copy.get_rect(to_copy.get_used_rect())
+	project.brushes.append(brush)
+	Brushes.add_project_brush(brush)
+
 
 func paste() -> void:
 	if !clipboard.image:
