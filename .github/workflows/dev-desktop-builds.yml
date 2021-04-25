@@ -12,7 +12,7 @@ on:
 
 env:
   GODOT_VERSION: 3.3
-  GODOT_VERSION_MAC: 3.2.2
+  GODOT_VERSION_MAC: 3.3
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -97,7 +97,7 @@ jobs:
           submodules: true
       - name: Setup environment 🔧
         run: |
-          export GODOT_VERSION=3.2.2
+          export GODOT_VERSION=3.3
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
