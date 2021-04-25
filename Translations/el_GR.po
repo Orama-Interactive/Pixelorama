@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-04-25 22:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "Μέγεθος Καρέ"
 
 msgid "Size"
-msgstr ""
+msgstr "Μέγεθος"
 
 msgid "Width:"
 msgstr "Πλάτος:"
@@ -822,10 +822,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Ορθογώνιο"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Έλλειψη"
 
 msgid "Choose a color for the left tool"
 msgstr "Επιλέξτε ένα χρώμα για το αριστερό εργαλείο"
@@ -1043,7 +1043,7 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Γέμισμα Σχήματος"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
@@ -1669,10 +1669,10 @@ msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"
-msgstr ""
+msgstr "Σχόλια:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Κενή"
 
 msgid "From Current Palette"
 msgstr ""
