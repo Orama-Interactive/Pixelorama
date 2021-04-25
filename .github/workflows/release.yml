@@ -167,7 +167,7 @@ jobs:
           cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
           rm ./build/mac/Pixelorama.app/Contents/MacOS/pixelorama_data/.gdignore
       - name: Create DMG archive 🔧
-        run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
+        run: hdiutil create -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
