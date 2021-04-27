@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-03-19 12:37\n"
+"PO-Revision-Date: 2021-04-22 11:15\n"
 
 msgid "OK"
 msgstr "예"
@@ -38,6 +38,9 @@ msgstr "캔버스 크기"
 
 msgid "Frame Size"
 msgstr "프레임 크기"
+
+msgid "Size"
+msgstr "크기"
 
 msgid "Width:"
 msgstr "너비:"
@@ -254,6 +257,12 @@ msgstr "세로축 프레임:"
 
 msgid "Start frame:"
 msgstr "시작 프레임:"
+
+msgid "At frame:"
+msgstr "프레임:"
+
+msgid "At layer:"
+msgstr "레이어:"
 
 msgid "Brush type:"
 msgstr "브러시 타입:"
@@ -798,6 +807,33 @@ msgstr "밝게/어둡게\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s을(를) 눌러 1:1 도형을 만듦\n"
+"%s을(를) 눌러 도형을 클릭 원점에 놓음\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "타원 도구\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s을(를) 눌러 1:1 도형을 만듦\n"
+"%s을(를) 눌러 도형을 클릭 원점에 놓음\n"
+
+msgid "Rectangle"
+msgstr "직사각형"
+
+msgid "Ellipse"
+msgstr "타원"
+
 msgid "Choose a color for the left tool"
 msgstr "왼쪽 툴의 색상 선택"
 
@@ -1012,6 +1048,12 @@ msgstr "픽셀 퍼펙트"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
+
+msgid "Fill Shape"
+msgstr "도형 채우기"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "브러시 색상을 ~에서"
@@ -1626,4 +1668,40 @@ msgstr "X 축으로 타일을 두르기"
 
 msgid "Tiled In Y Axis"
 msgstr "Y 축으로 타일을 두르기"
+
+msgid "Create a new palette"
+msgstr "새 팔레트 생성"
+
+msgid "Create New Palette"
+msgstr "새 팔레트 생성"
+
+msgid "Comment:"
+msgstr "댓글:"
+
+msgid "Empty"
+msgstr "비어 있음"
+
+msgid "From Current Palette"
+msgstr "현재 팔레트에서"
+
+msgid "From Current Sprite"
+msgstr "현재 스프라이트에서"
+
+msgid "From Current Selection"
+msgstr "현재 선택된 영역부터"
+
+msgid "Add a new color"
+msgstr "새 색상 추가"
+
+msgid "Remove a selected color"
+msgstr "선택한 색상 제거"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "동일한 이름과 경로를가진 팔레트가 이미 존재합니다!"
+
+msgid "Palette name is required!"
+msgstr "팔레트의 이름이 필요합니다!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
 

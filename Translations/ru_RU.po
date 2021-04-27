@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-04-16 20:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Размер холста"
 
 msgid "Frame Size"
 msgstr ""
+
+msgid "Size"
+msgstr "Размер"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -166,16 +169,16 @@ msgid "Window Transparency"
 msgstr "Прозрачность окна"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Расположение панелей"
 
 msgid "Auto"
-msgstr ""
+msgstr "Автоматически"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Широкий экран"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Высокий экран"
 
 msgid "Mirror View"
 msgstr "Зеркальный вид"
@@ -232,7 +235,7 @@ msgid "New frame"
 msgstr "Новый кадр"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Заменить кадр"
 
 msgid "New layer"
 msgstr "Новый слой"
@@ -253,7 +256,13 @@ msgid "Vertical frames:"
 msgstr "Кадров по вертикали:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Начальный кадр:"
+
+msgid "At frame:"
+msgstr "В кадре:"
+
+msgid "At layer:"
+msgstr "На слое:"
 
 msgid "Brush type:"
 msgstr "Тип кисти:"
@@ -459,7 +468,7 @@ msgid "Display Scale"
 msgstr "Масштаб экрана"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Затемнять интерфейс при появлении диалога"
 
 msgid "Dark"
 msgstr "Тёмная"
@@ -796,6 +805,26 @@ msgstr "Осветление/Затемнение\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr "Прямоугольник"
+
+msgid "Ellipse"
+msgstr "Эллипс"
+
 msgid "Choose a color for the left tool"
 msgstr "Выбор цвета для левого инструмента"
 
@@ -1010,6 +1039,12 @@ msgstr "Пиксельная точность"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
+
+msgid "Fill Shape"
+msgstr "Заполнить фигуру"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "Заполняет нарисованную фигуру цветом, вместо того, чтобы нарисовать пустую фигуру"
 
 msgid "Brush color from"
 msgstr "Цвет кисти из"
@@ -1622,4 +1657,40 @@ msgstr ""
 
 msgid "Tiled In Y Axis"
 msgstr ""
+
+msgid "Create a new palette"
+msgstr "Создать новую палитру"
+
+msgid "Create New Palette"
+msgstr "Создать новую палитру"
+
+msgid "Comment:"
+msgstr "Комментарий:"
+
+msgid "Empty"
+msgstr "Пустой"
+
+msgid "From Current Palette"
+msgstr "Из текущей палитры"
+
+msgid "From Current Sprite"
+msgstr "Из текущего спрайта"
+
+msgid "From Current Selection"
+msgstr "Из выделенного"
+
+msgid "Add a new color"
+msgstr "Добавить новый цвет"
+
+msgid "Remove a selected color"
+msgstr "Удалить выбранный цвет"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "Палитра с таким названием по такому пути уже существует!"
+
+msgid "Palette name is required!"
+msgstr "Необходимо указать имя палитры!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "Уменьшение размера палитры сбросит позиции цветов. Цвета, которые не поместятся в новую палитру, будут потеряны!"
 

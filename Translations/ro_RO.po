@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-03-17 17:36\n"
+"PO-Revision-Date: 2021-04-16 19:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Dimensiunea pânzei"
 
 msgid "Frame Size"
 msgstr "Dimensiunea cadrului"
+
+msgid "Size"
+msgstr "Dimensiune"
 
 msgid "Width:"
 msgstr "Lățime:"
@@ -255,6 +258,12 @@ msgstr "Cadre verticale:"
 msgid "Start frame:"
 msgstr "Cadru de pornire:"
 
+msgid "At frame:"
+msgstr "La cadrul:"
+
+msgid "At layer:"
+msgstr "La stratul:"
+
 msgid "Brush type:"
 msgstr "Tip de pensulă:"
 
@@ -459,7 +468,7 @@ msgid "Display Scale"
 msgstr "Scala de afișare"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Întunecă interfața la apariția ferestrei de dialog"
 
 msgid "Dark"
 msgstr "Întunecat"
@@ -798,6 +807,34 @@ msgstr "Luminare/întunecare\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Instrument Dreptunghi\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Ține apăsată tasta %s pentru a crea o formă 1:1\n"
+"Ține apăsată tasta %s pentru a centra forma la originea clicului\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Instrument Elipsă\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Ține apăsată tasta %s pentru a crea o formă 1:1\n"
+"Ține apăsată tasta %s pentru a centra forma la originea clicului\n"
+
+msgid "Rectangle"
+msgstr "Dreptunghi"
+
+msgid "Ellipse"
+msgstr "Elipsă"
+
 msgid "Choose a color for the left tool"
 msgstr "Alege o culoare pentru instrumentul din stânga"
 
@@ -1012,6 +1049,12 @@ msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
+
+msgid "Fill Shape"
+msgstr "Umplere formă"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "Umple cu culoare forma desenată, în loc să deseneze o formă goală"
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
@@ -1626,4 +1669,40 @@ msgstr "Mozaicat pe axa X"
 
 msgid "Tiled In Y Axis"
 msgstr "Mozaicat pe axa Y"
+
+msgid "Create a new palette"
+msgstr "Creează o paletă nouă"
+
+msgid "Create New Palette"
+msgstr "Creare paletă nouă"
+
+msgid "Comment:"
+msgstr "Comentariu:"
+
+msgid "Empty"
+msgstr "Goală"
+
+msgid "From Current Palette"
+msgstr "Din paleta actuală"
+
+msgid "From Current Sprite"
+msgstr "Din graficul bidimensional actual"
+
+msgid "From Current Selection"
+msgstr "Din selecția actuală"
+
+msgid "Add a new color"
+msgstr "Adaugă o culoare nouă"
+
+msgid "Remove a selected color"
+msgstr "Elimină o culoare selectată"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "Există deja paleta cu același nume și aceeași cale!"
+
+msgid "Palette name is required!"
+msgstr "Denumirea paletei este necesară!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "Reducerea dimensiunii paletei va reseta pozițiile culorilor. Culorile care nu se potrivesc cu dimensiunea paletei noi vor fi pierdute!"
 

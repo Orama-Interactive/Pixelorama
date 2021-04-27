@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-04-17 00:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -38,6 +38,9 @@ msgstr "画布尺寸"
 
 msgid "Frame Size"
 msgstr "帧大小"
+
+msgid "Size"
+msgstr "大小"
 
 msgid "Width:"
 msgstr "宽度:"
@@ -255,6 +258,12 @@ msgstr "垂直帧："
 msgid "Start frame:"
 msgstr "开始帧："
 
+msgid "At frame:"
+msgstr "在帧："
+
+msgid "At layer:"
+msgstr "在图层："
+
 msgid "Brush type:"
 msgstr "画笔类型："
 
@@ -459,7 +468,7 @@ msgid "Display Scale"
 msgstr "显示缩放"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "对话框弹出时变暗界面"
 
 msgid "Dark"
 msgstr "深色"
@@ -798,6 +807,34 @@ msgstr "变淡/加深\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "矩形工具\n\n"
+"%s 鼠标左键\n"
+"%s 鼠标右键\n\n"
+"按住 %s 可创建 1:1 形状\n"
+"按住 %s 可将形状置于单击原始位置\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "椭圆工具\n\n"
+"%s 鼠标左键\n"
+"%s 鼠标右键\n\n"
+"按住 %s 可创建 1:1 形状\n"
+"按住 %s 可将形状置于单击原始位置\n"
+
+msgid "Rectangle"
+msgstr "矩形工具"
+
+msgid "Ellipse"
+msgstr "椭圆工具"
+
 msgid "Choose a color for the left tool"
 msgstr "选择左键工具颜色"
 
@@ -1012,6 +1049,12 @@ msgstr "平滑像素"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "通过去除边缘上多余的像素使线条平滑"
+
+msgid "Fill Shape"
+msgstr "填充形状"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "用颜色填充绘制的形状，而不是绘制空心形状"
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
@@ -1625,4 +1668,40 @@ msgstr "在 X 轴上平移"
 
 msgid "Tiled In Y Axis"
 msgstr "在 Y 轴上平移"
+
+msgid "Create a new palette"
+msgstr "创建一个新的调色板"
+
+msgid "Create New Palette"
+msgstr "创建新的调色板"
+
+msgid "Comment:"
+msgstr "注释："
+
+msgid "Empty"
+msgstr "空的"
+
+msgid "From Current Palette"
+msgstr "从当前调色板"
+
+msgid "From Current Sprite"
+msgstr "从当前 Sprite"
+
+msgid "From Current Selection"
+msgstr "从当前选择"
+
+msgid "Add a new color"
+msgstr "添加一个新颜色"
+
+msgid "Remove a selected color"
+msgstr "删除所选颜色"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "具有相同名称和路径的调色板已经存在！"
+
+msgid "Palette name is required!"
+msgstr "调色板名称为必填项！"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺寸的颜色将丢失！"
 
