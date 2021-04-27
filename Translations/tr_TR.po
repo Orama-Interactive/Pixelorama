@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -38,6 +38,9 @@ msgstr "Tuval Boyutu"
 
 msgid "Frame Size"
 msgstr "Çerçeve Boyutu"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Genişlik:"
@@ -253,6 +256,12 @@ msgid "Vertical frames:"
 msgstr "Dikey çerçeveler:"
 
 msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
 msgstr ""
 
 msgid "Brush type:"
@@ -795,6 +804,26 @@ msgstr "Aydınlatma/Karartma\n\n"
 "Sol tık için %s\n"
 "Sağ tık için %s"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Sol araç için bir renk seç"
 
@@ -1009,6 +1038,12 @@ msgstr "Mükemmel Piksel"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Çizgileri kenarlardaki fazla pikselleri silerek yumuşatır"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Fırça rengini buradan"
@@ -1618,4 +1653,40 @@ msgstr "X yörüngesinde döşendi"
 
 msgid "Tiled In Y Axis"
 msgstr "Y yörüngesinde döşendi"
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
 

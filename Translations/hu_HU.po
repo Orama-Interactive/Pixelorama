@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-03-19 10:52\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -38,6 +38,9 @@ msgstr "Vászon mérete"
 
 msgid "Frame Size"
 msgstr "Keretméret"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Szélesség:"
@@ -254,6 +257,12 @@ msgstr "Függőleges képkockák:"
 
 msgid "Start frame:"
 msgstr "Kezdő képkocka:"
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Ecset típus:"
@@ -796,6 +805,26 @@ msgstr "Világosítás/Sötétítés\n\n"
 "%s a bal egérgombbal\n"
 "%s a jobb egérgombbal"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Szín kiválasztása a bal eszközhöz"
 
@@ -1010,6 +1039,12 @@ msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "A vonalakat simává teszi azáltal, hogy eltávolítja a széleken lévő extra képpontokat"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Ecset színből"
@@ -1623,5 +1658,41 @@ msgid "Tiled In X Axis"
 msgstr ""
 
 msgid "Tiled In Y Axis"
+msgstr ""
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
 

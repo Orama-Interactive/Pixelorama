@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-03-17 19:59\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Canvasgröße"
 
 msgid "Frame Size"
 msgstr "Frame-Größe"
+
+msgid "Size"
+msgstr "Größe"
 
 msgid "Width:"
 msgstr "Breite:"
@@ -254,6 +257,12 @@ msgstr "Vertikale Frames:"
 
 msgid "Start frame:"
 msgstr "Startframe:"
+
+msgid "At frame:"
+msgstr "Bei dem Frame:"
+
+msgid "At layer:"
+msgstr "Bei der Ebene:"
 
 msgid "Brush type:"
 msgstr "Pinseltyp:"
@@ -797,6 +806,34 @@ msgstr "Erhellen/Verdunkeln\n\n"
 "%s für linke Maustaste\n"
 "%s für rechte Maustaste"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Rechteck-Werkzeug\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Halten Sie %s gedrückt, um eine 1:1 Form zu erstellen\n"
+"Halten Sie %s gedrückt, um die Form auf dem Klickpunkt zu zentrieren\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Ellipse Tool\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Halten Sie %s gedrückt, um eine 1:1 Form zu erstellen\n"
+"Halten Sie %s gedrückt, um die Form mit dem Klick zu zentrieren\n"
+
+msgid "Rectangle"
+msgstr "Rechteck"
+
+msgid "Ellipse"
+msgstr "Elipse"
+
 msgid "Choose a color for the left tool"
 msgstr "Wähle eine Farbe für das linke Werkzeug"
 
@@ -1011,6 +1048,12 @@ msgstr "Perfekte Pixel"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Macht Linien glatt, indem die zusätzlichen Pixel an den Kanten entfernt werden"
+
+msgid "Fill Shape"
+msgstr "Füllform"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "Füllt die gezeichnete Form mit Farbe, anstatt eine hohle Form zu zeichnen"
 
 msgid "Brush color from"
 msgstr "Pinselfarbe von"
@@ -1625,4 +1668,40 @@ msgstr "In X-Achse gekachelt"
 
 msgid "Tiled In Y Axis"
 msgstr "In Y-Achse gekachelt"
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
 

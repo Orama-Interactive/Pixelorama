@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-03-18 17:54\n"
+"PO-Revision-Date: 2021-04-21 07:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Rozmiar płótna"
 
 msgid "Frame Size"
 msgstr "Rozmiar klatki"
+
+msgid "Size"
+msgstr "Rozmiar"
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -254,6 +257,12 @@ msgstr "Klatki pionowe:"
 
 msgid "Start frame:"
 msgstr "Klatka początkowa:"
+
+msgid "At frame:"
+msgstr "W klatce:"
+
+msgid "At layer:"
+msgstr "Na warstwie:"
 
 msgid "Brush type:"
 msgstr "Typ pędzla:"
@@ -779,23 +788,51 @@ msgid "Eraser\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Gumka\n\n"
-"%s dla lewego przycisku myszy\n"
-"%s dla prawego przycisku myszy\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
 "Przytrzymaj %s aby użyć w linii prostej"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Wiaderko\n\n"
-"%s dla lewego przycisku myszy\n"
-"%s dla prawego przycisku myszy"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy"
 
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Rozjaśnianie/Ściemnianie\n\n"
-"%s dla lewego przycisku myszy\n"
-"%s dla prawego przycisku myszy"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy"
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Prostokąt\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
+"Przytrzymaj %s aby stworzyć kwadrat\n"
+"Przytrzymaj %s aby wyśrodkować kształt na źródłowym miejscu kliknięcia\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Elipsa\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
+"Przytrzymaj %s aby stworzyć okrąg/koło\n"
+"Przytrzymaj %s aby wyśrodkować kształt na źródłowym miejscu kliknięcia\n"
+
+msgid "Rectangle"
+msgstr "Prostokąt"
+
+msgid "Ellipse"
+msgstr "Elipsa"
 
 msgid "Choose a color for the left tool"
 msgstr "Wybiera kolor dla lewego narzędzia"
@@ -1011,6 +1048,12 @@ msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Sprawia, że linie są gładkie przez usunięcie dodatkowych pikseli na krawędziach"
+
+msgid "Fill Shape"
+msgstr "Wypełnij kształt"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "Wypełnia narysowany kształt kolorem, zamiast rysować same obramowanie"
 
 msgid "Brush color from"
 msgstr "Nadpisywanie koloru pędzla"
@@ -1625,4 +1668,40 @@ msgstr "Kafelkowanie na osi X"
 
 msgid "Tiled In Y Axis"
 msgstr "Kafelkowanie na osi Y"
+
+msgid "Create a new palette"
+msgstr "Stwórz nową paletę"
+
+msgid "Create New Palette"
+msgstr "Stwórz nową paletę"
+
+msgid "Comment:"
+msgstr "Komentarz:"
+
+msgid "Empty"
+msgstr "Pusta"
+
+msgid "From Current Palette"
+msgstr "Z bieżącej palety"
+
+msgid "From Current Sprite"
+msgstr "Z bieżącego obrazu"
+
+msgid "From Current Selection"
+msgstr "Z bieżącego zaznaczenia"
+
+msgid "Add a new color"
+msgstr "Dodaj nowy kolor"
+
+msgid "Remove a selected color"
+msgstr "Usuń wybrany kolor"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "Paleta z tą nazwą i ścieżką już istnieje!"
+
+msgid "Palette name is required!"
+msgstr "Wymagana jest nazwa palety!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "Zmniejszenie rozmiaru palety zresetuje pozycje kolorów. Kolory, które nie mieszczą się w nowym rozmiarze palety zostaną utracone!"
 

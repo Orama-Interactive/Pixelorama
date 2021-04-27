@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-03-17 17:35\n"
+"PO-Revision-Date: 2021-04-17 10:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "キャンバス サイズ"
 
 msgid "Frame Size"
 msgstr "フレームサイズ"
+
+msgid "Size"
+msgstr "サイズ"
 
 msgid "Width:"
 msgstr "幅:"
@@ -255,6 +258,12 @@ msgstr "垂直フレーム"
 msgid "Start frame:"
 msgstr "開始フレーム:"
 
+msgid "At frame:"
+msgstr "すべてのフレーム:"
+
+msgid "At layer:"
+msgstr "レイヤーで:"
+
 msgid "Brush type:"
 msgstr "ブラシタイプ:"
 
@@ -459,7 +468,7 @@ msgid "Display Scale"
 msgstr "表示スケール"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "ダイアログポップアップ時にインターフェースを薄暗くする"
 
 msgid "Dark"
 msgstr "ダーク"
@@ -798,6 +807,34 @@ msgstr "明るく/暗く\n\n"
 "%sでマウスの左ボタンを 明るく/暗く に変更\n"
 "%sでマウスの右ボタンを 明るく/暗く に変更"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "矩形ツール\n\n"
+"%sでマウスの左ボタンを 矩形ツール に変更\n"
+"%sでマウスの右ボタンを 矩形ツール に変更\n\n"
+"%sを長押しして正方形を作成\n"
+"%sを長押ししてクリックした場所を原点に図形を配置\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "楕円形ツール\n\n"
+"%sでマウスの左ボタンを 楕円形ツール に変更\n"
+"%sでマウスの右ボタンを 楕円形ツール に変更\n\n"
+"%sを長押しして真円を作成\n"
+"%sを長押ししてクリックした場所を原点に図形を配置\n"
+
+msgid "Rectangle"
+msgstr "矩形"
+
+msgid "Ellipse"
+msgstr "楕円形"
+
 msgid "Choose a color for the left tool"
 msgstr "左ツールの色を選択してくだ"
 
@@ -1012,6 +1049,12 @@ msgstr "ピクセルパーフェクト"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "エッジの余分なピクセルを削除することで線を滑らかにします"
+
+msgid "Fill Shape"
+msgstr "図形の塗りつぶし"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "中が空の図形を描くのではなく、描画した図形を色で塗りつぶします"
 
 msgid "Brush color from"
 msgstr "ブラシの色"
@@ -1626,4 +1669,40 @@ msgstr "X軸にタイルされています"
 
 msgid "Tiled In Y Axis"
 msgstr "Y軸にタイルされています"
+
+msgid "Create a new palette"
+msgstr "新しいパレットを作成"
+
+msgid "Create New Palette"
+msgstr "新しい空のパレットを作成しますか"
+
+msgid "Comment:"
+msgstr "コメント:"
+
+msgid "Empty"
+msgstr "空"
+
+msgid "From Current Palette"
+msgstr "現在のパレットから"
+
+msgid "From Current Sprite"
+msgstr "現在のスプライトから"
+
+msgid "From Current Selection"
+msgstr "現在の選択範囲から"
+
+msgid "Add a new color"
+msgstr "新しい色を追加"
+
+msgid "Remove a selected color"
+msgstr "選択した色を削除"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "同じ名前とパスを持つパレットが既に存在します！"
+
+msgid "Palette name is required!"
+msgstr "パレット名が必要です！"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "パレットサイズを小さくすると、色の位置がリセットされます。新しいパレットサイズに合わない色は失われます！"
 
