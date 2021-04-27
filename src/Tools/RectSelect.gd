@@ -1,4 +1,4 @@
-extends BaseTool
+extends "res://src/Tools/SelectionTool.gd"
 
 
 var _rect := Rect2(0, 0, 0, 0)
@@ -6,13 +6,8 @@ var _start_pos := Vector2.ZERO
 var _offset := Vector2.ZERO
 var _move := false
 
-var _add := false # Shift + Mouse Click
-var _subtract := false # Ctrl + Mouse Click
-var _intersect := false # Shift + Ctrl + Mouse Click
 var _square := false # Mouse Click + Shift
 var _expand_from_center := false # Mouse Click + Ctrl
-
-var undo_data : Dictionary
 
 
 func _input(event : InputEvent) -> void:
@@ -28,26 +23,20 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	undo_data = Global.canvas.selection._get_undo_data(false)
+	.draw_start(position)
 	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 	var offsetted_pos := position
 	if selection_position.x < 0:
 		offsetted_pos.x -= selection_position.x
 	if selection_position.y < 0:
 		offsetted_pos.y -= selection_position.y
-
 	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and Global.current_project.selection_bitmap.get_bit(offsetted_pos) and !Tools.control and !Tools.shift:
 		# Move current selection
 		_move = true
 		_offset = position
 		Global.canvas.selection.move_borders_start()
-
 	else:
 		_start_pos = position
-		_intersect = Tools.shift && Tools.control
-		_add = Tools.shift && !_intersect
-		_subtract = Tools.control && !_intersect
 
 
 func draw_move(position : Vector2) -> void:
