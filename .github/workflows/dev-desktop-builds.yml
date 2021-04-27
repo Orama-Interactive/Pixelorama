@@ -2,7 +2,7 @@ name: "dev-desktop-builds"
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, 0.8 ]
   pull_request:
     branches: [ master ]
     paths-ignore: 
