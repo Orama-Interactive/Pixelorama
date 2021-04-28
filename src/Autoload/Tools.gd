@@ -39,9 +39,9 @@ class Slot:
 signal color_changed(color, button)
 
 var _tools = {
-	"RectSelect" : "res://src/Tools/RectSelect.tscn",
-	"ColorSelect" : "res://src/Tools/ColorSelect.tscn",
-	"MagicWand" : "res://src/Tools/MagicWand.tscn",
+	"RectSelect" : "res://src/Tools/SelectionTools/RectSelect.tscn",
+	"ColorSelect" : "res://src/Tools/SelectionTools/ColorSelect.tscn",
+	"MagicWand" : "res://src/Tools/SelectionTools/MagicWand.tscn",
 	"Move" : "res://src/Tools/Move.tscn",
 	"Zoom" : "res://src/Tools/Zoom.tscn",
 	"Pan" : "res://src/Tools/Pan.tscn",
