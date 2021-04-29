@@ -99,6 +99,7 @@ jobs:
         run: |
           export GODOT_VERSION=3.3
           export EXPORT_NAME=Pixelorama
+          brew install wget
       - name: Download and extract export templates 💾
         run: |
           mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
@@ -107,7 +108,7 @@ jobs:
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
-          curl -O https://github.com/huskeee/godot-headless-mac/releases/download/3.3-stable/Godot_v3.3-stable_mac_headless.64.zip
+          wget https://github.com/huskeee/godot-headless-mac/releases/download/3.3-stable/Godot_v3.3-stable_mac_headless.64.zip
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip  
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
