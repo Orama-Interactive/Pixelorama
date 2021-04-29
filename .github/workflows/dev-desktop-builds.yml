@@ -99,7 +99,6 @@ jobs:
         run: |
           export GODOT_VERSION=3.3
           export EXPORT_NAME=Pixelorama
-          brew install wget
       - name: Download and extract export templates 💾
         run: |
           mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
