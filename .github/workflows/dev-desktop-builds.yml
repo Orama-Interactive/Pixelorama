@@ -106,9 +106,11 @@ jobs:
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
-        run: |
-          curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
-          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
+        uses: pozetroninc/github-action-get-latest-release@v0.5.0
+        with:
+          repository: huskeee/godot-headless-mac
+      - name: Extract Godot headless binary 🤖
+        run: unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip  
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
