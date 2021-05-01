@@ -1,4 +1,4 @@
-extends "res://src/Tools/SelectionTools/SelectionTool.gd"
+extends SelectionTool
 
 
 func draw_move(_position : Vector2) -> void:

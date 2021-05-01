@@ -160,6 +160,12 @@ func _draw() -> void:
 
 func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	big_bounding_rectangle = value
+	for slot in Tools._slots.values():
+		if slot.tool_node is SelectionTool:
+			slot.tool_node.xspinbox.value = value.position.x
+			slot.tool_node.yspinbox.value = value.position.y
+			slot.tool_node.wspinbox.value = value.size.x
+			slot.tool_node.hspinbox.value = value.size.y
 	update_gizmos()
 
 

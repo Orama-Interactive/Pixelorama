@@ -129,6 +129,7 @@ margin_bottom = 114.0
 [node name="Mirror" parent="." index="6"]
 margin_top = 118.0
 margin_bottom = 135.0
+
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/Size" to="." method="_on_BrushSize_value_changed"]
 [connection signal="value_changed" from="BrushSize" to="." method="_on_BrushSize_value_changed"]

@@ -6,15 +6,128 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="PixelPerfect" parent="." index="1"]
+[node name="PositionLabel" type="Label" parent="." index="1"]
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 32.0
+text = "Position:"
+align = 1
+
+[node name="XContainer" type="HBoxContainer" parent="." index="2"]
+margin_left = 10.0
+margin_top = 36.0
+margin_right = 105.0
+margin_bottom = 60.0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="XContainer" index="0"]
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 17, 0 )
+text = "X:"
+
+[node name="XSpinBox" type="SpinBox" parent="XContainer" index="1"]
+margin_left = 21.0
+margin_right = 95.0
+margin_bottom = 24.0
+hint_tooltip = "X coordinate of the top left corner"
+mouse_default_cursor_shape = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="YContainer" type="HBoxContainer" parent="." index="3"]
+margin_left = 10.0
+margin_top = 64.0
+margin_right = 105.0
+margin_bottom = 88.0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="YContainer" index="0"]
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 17, 0 )
+text = "Y:"
+
+[node name="YSpinBox" type="SpinBox" parent="YContainer" index="1"]
+margin_left = 21.0
+margin_right = 95.0
+margin_bottom = 24.0
+hint_tooltip = "Y coordinate of the top left corner"
+mouse_default_cursor_shape = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="SizeLabel" type="Label" parent="." index="4"]
+margin_top = 92.0
+margin_right = 116.0
+margin_bottom = 106.0
+text = "Size:"
+align = 1
+
+[node name="WidthContainer" type="HBoxContainer" parent="." index="5"]
+margin_left = 10.0
+margin_top = 110.0
+margin_right = 105.0
+margin_bottom = 134.0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="WidthContainer" index="0"]
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 17, 0 )
+text = "W:"
+
+[node name="WSpinBox" type="SpinBox" parent="WidthContainer" index="1"]
+margin_left = 21.0
+margin_right = 95.0
+margin_bottom = 24.0
+hint_tooltip = "Width of selection"
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="HeightContainer" type="HBoxContainer" parent="." index="6"]
+margin_left = 10.0
+margin_top = 138.0
+margin_right = 105.0
+margin_bottom = 162.0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="HeightContainer" index="0"]
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 17, 0 )
+text = "H:"
+
+[node name="HSpinBox" type="SpinBox" parent="HeightContainer" index="1"]
+margin_left = 21.0
+margin_right = 95.0
+margin_bottom = 24.0
+hint_tooltip = "Height of selection"
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="PixelPerfect" parent="." index="7"]
 visible = false
 
-[node name="EmptySpacer" parent="." index="2"]
+[node name="EmptySpacer" parent="." index="8"]
 visible = false
 margin_top = 18.0
 margin_bottom = 30.0
 
-[node name="Mirror" parent="." index="3"]
+[node name="Mirror" parent="." index="9"]
 visible = false
 margin_top = 18.0
 margin_bottom = 35.0
+
+[connection signal="value_changed" from="XContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]
+[connection signal="value_changed" from="YContainer/YSpinBox" to="." method="_on_YSpinBox_value_changed"]
+[connection signal="value_changed" from="WidthContainer/WSpinBox" to="." method="_on_WSpinBox_value_changed"]
+[connection signal="value_changed" from="HeightContainer/HSpinBox" to="." method="_on_HSpinBox_value_changed"]

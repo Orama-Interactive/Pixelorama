@@ -1,4 +1,4 @@
-extends "res://src/Tools/SelectionTools/SelectionTool.gd"
+extends SelectionTool
 
 
 var _rect := Rect2(0, 0, 0, 0)
