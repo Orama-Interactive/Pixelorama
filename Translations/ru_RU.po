@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-04-16 20:19\n"
+"PO-Revision-Date: 2021-05-02 16:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -426,7 +426,7 @@ msgid "Shortcuts"
 msgstr "Горячие клавишы"
 
 msgid "Backup"
-msgstr ""
+msgstr "Резервная копия"
 
 msgid "Performance"
 msgstr "Производительность"
