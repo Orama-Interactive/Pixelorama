@@ -1,11 +1,7 @@
 extends SelectionTool
 
 
-func draw_move(_position : Vector2) -> void:
-	pass
-
-
-func draw_end(position : Vector2) -> void:
+func apply_selection(position : Vector2) -> void:
 	var project : Project = Global.current_project
 	if position.x < 0 or position.y < 0:
 		return

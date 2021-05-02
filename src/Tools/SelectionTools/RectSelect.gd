@@ -3,8 +3,6 @@ extends SelectionTool
 
 var _rect := Rect2(0, 0, 0, 0)
 var _start_pos := Vector2.ZERO
-var _offset := Vector2.ZERO
-var _move := false
 
 var _square := false # Mouse Click + Shift
 var _expand_from_center := false # Mouse Click + Ctrl
@@ -24,57 +22,41 @@ func _input(event : InputEvent) -> void:
 
 func draw_start(position : Vector2) -> void:
 	.draw_start(position)
-	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
-	var offsetted_pos := position
-	if selection_position.x < 0:
-		offsetted_pos.x -= selection_position.x
-	if selection_position.y < 0:
-		offsetted_pos.y -= selection_position.y
-	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and Global.current_project.selection_bitmap.get_bit(offsetted_pos) and !Tools.control and !Tools.shift:
-		# Move current selection
-		_move = true
-		_offset = position
-		Global.canvas.selection.move_borders_start()
-	else:
+	if !_move:
 		_start_pos = position
 
 
 func draw_move(position : Vector2) -> void:
-	if _move:
-		Global.canvas.selection.move_borders(position - _offset)
-		_offset = position
-		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
-	else:
+	.draw_move(position)
+	if !_move:
 		_rect = _get_result_rect(_start_pos, position)
 		_set_cursor_text(_rect)
 		Global.canvas.selection.drawn_rect = _rect
 		Global.canvas.selection.update()
 
 
-func draw_end(_position : Vector2) -> void:
-	if _move:
-		Global.canvas.selection.move_borders_end()
-	else:
-		if !_add and !_subtract and !_intersect:
-			Global.canvas.selection.clear_selection()
-			if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
-				Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
-		if _rect.size != Vector2.ZERO:
-			var operation := 0
-			if _subtract:
-				operation = 1
-			elif _intersect:
-				operation = 2
-			Global.canvas.selection.select_rect(_rect, operation)
-			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
-
-	_move = false
-	cursor_text = ""
+func draw_end(position : Vector2) -> void:
+	.draw_end(position)
 	_rect = Rect2(0, 0, 0, 0)
 	Global.canvas.selection.drawn_rect = _rect
 	Global.canvas.selection.update()
 	_square = false
 	_expand_from_center = false
+
+
+func apply_selection(_position) -> void:
+	if !_add and !_subtract and !_intersect:
+		Global.canvas.selection.clear_selection()
+		if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
+			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+	if _rect.size != Vector2.ZERO:
+		var operation := 0
+		if _subtract:
+			operation = 1
+		elif _intersect:
+			operation = 2
+		Global.canvas.selection.select_rect(_rect, operation)
+		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 
 
 # Given an origin point and destination point, returns a rect representing where the shape will be drawn and what it's size
@@ -106,9 +88,3 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	rect.size += Vector2.ONE
 
 	return rect
-
-
-func _set_cursor_text(rect : Rect2) -> void:
-	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
-	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
-	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]

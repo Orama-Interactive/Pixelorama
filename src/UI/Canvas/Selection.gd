@@ -307,12 +307,15 @@ func move_borders(move : Vector2) -> void:
 	update()
 
 
-func move_borders_end() -> void:
+func move_borders_end(undo := true) -> void:
 	var selected_bitmap_copy := Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy)
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
-	commit_undo("Rectangle Select", undo_data)
+	if undo:
+		commit_undo("Rectangle Select", undo_data)
+	else:
+		Global.current_project.selection_bitmap_changed()
 	update()
 
 
