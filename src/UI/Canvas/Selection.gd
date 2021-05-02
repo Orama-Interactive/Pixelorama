@@ -101,9 +101,9 @@ func _input(event : InputEvent) -> void:
 					Global.has_focus = false
 					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					dragged_gizmo = gizmo
+					temp_bitmap = Global.current_project.selection_bitmap
 					if !is_moving_content:
 						temp_rect = big_bounding_rectangle
-						temp_bitmap = Global.current_project.selection_bitmap
 						transform_content_start()
 						Global.current_project.selection_offset = Vector2.ZERO
 						if gizmo.type == Gizmo.Type.ROTATE:
