@@ -29,6 +29,7 @@ func draw_start(position : Vector2) -> void:
 	_intersect = Tools.shift && Tools.control
 	_add = Tools.shift && !_intersect
 	_subtract = Tools.control && !_intersect
+	_offset = position
 
 	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 	var offsetted_pos := position
@@ -39,7 +40,6 @@ func draw_start(position : Vector2) -> void:
 	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and Global.current_project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift:
 		# Move current selection
 		_move = true
-		_offset = position
 		if Tools.control and Tools.alt: # Move selection without content
 			Global.canvas.selection.transform_content_confirm()
 			_move_content = false

@@ -6,6 +6,7 @@ var _start_pos := Vector2.ZERO
 
 var _square := false # Mouse Click + Shift
 var _expand_from_center := false # Mouse Click + Ctrl
+var _displace_origin = false # Mouse Click + Alt
 
 
 func _input(event : InputEvent) -> void:
@@ -18,6 +19,10 @@ func _input(event : InputEvent) -> void:
 			_expand_from_center = true
 		elif event.is_action_released("ctrl"):
 			_expand_from_center = false
+		if event.is_action_pressed("alt"):
+			_displace_origin = true
+		elif event.is_action_released("alt"):
+			_displace_origin = false
 
 
 func draw_start(position : Vector2) -> void:
@@ -29,10 +34,13 @@ func draw_start(position : Vector2) -> void:
 func draw_move(position : Vector2) -> void:
 	.draw_move(position)
 	if !_move:
+		if _displace_origin:
+			_start_pos += position - _offset
 		_rect = _get_result_rect(_start_pos, position)
 		_set_cursor_text(_rect)
 		Global.canvas.selection.drawn_rect = _rect
 		Global.canvas.selection.update()
+		_offset = position
 
 
 func draw_end(position : Vector2) -> void:
@@ -42,6 +50,7 @@ func draw_end(position : Vector2) -> void:
 	Global.canvas.selection.update()
 	_square = false
 	_expand_from_center = false
+	_displace_origin = false
 
 
 func apply_selection(_position) -> void:
