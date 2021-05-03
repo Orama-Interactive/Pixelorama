@@ -19,6 +19,9 @@ func draw_move(position : Vector2) -> void:
 			position.y = _start_pos.y
 		else:
 			position.x = _start_pos.x
+	if Tools.control: # Snap to grid
+		position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
+
 	if Global.current_project.has_selection:
 		Global.canvas.selection.move_content(position - _offset)
 		_offset = position

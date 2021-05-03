@@ -9,6 +9,7 @@ var _offset := Vector2.ZERO
 var _add := false # Shift + Mouse Click
 var _subtract := false # Ctrl + Mouse Click
 var _intersect := false # Shift + Ctrl + Mouse Click
+var _snap_to_grid := false # Mouse Click + Ctrl
 
 var undo_data : Dictionary
 
@@ -25,6 +26,19 @@ func _ready() -> void:
 	yspinbox.value = select_rect.position.y
 	wspinbox.value = select_rect.size.x
 	hspinbox.value = select_rect.size.y
+
+
+func _input(event : InputEvent) -> void:
+	if _move:
+		if event.is_action_pressed("ctrl"):
+			_snap_to_grid = true
+			var grid_size := Vector2(Global.grid_width, Global.grid_height)
+			_offset = _offset.snapped(grid_size)
+			var prev_pos = selection_node.big_bounding_rectangle.position
+			selection_node.big_bounding_rectangle.position = selection_node.big_bounding_rectangle.position.snapped(grid_size)
+			selection_node.marching_ants_outline.offset += selection_node.big_bounding_rectangle.position - prev_pos
+		elif event.is_action_released("ctrl"):
+			_snap_to_grid = false
 
 
 func draw_start(position : Vector2) -> void:
@@ -70,6 +84,8 @@ func draw_move(position : Vector2) -> void:
 				position.y = _start_pos.y
 			else:
 				position.x = _start_pos.x
+		if _snap_to_grid:
+			position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
 
 		if _move_content:
 			selection_node.move_content(position - _offset)
@@ -87,6 +103,7 @@ func draw_end(_position : Vector2) -> void:
 		apply_selection(_position)
 
 	_move = false
+	_snap_to_grid = false
 	cursor_text = ""
 
 
