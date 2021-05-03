@@ -285,6 +285,8 @@ func select_rect(rect : Rect2, operation : int = SelectionOperation.ADD) -> void
 		for x in range(rect.position.x, rect.end.x):
 			for y in range(rect.position.y, rect.end.y):
 				var pos := Vector2(x, y)
+				if !Rect2(Vector2.ZERO, selection_bitmap_copy.get_size()).has_point(pos):
+					continue
 				selection_bitmap_copy.set_bit(pos, project.selection_bitmap.get_bit(pos))
 	big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 
