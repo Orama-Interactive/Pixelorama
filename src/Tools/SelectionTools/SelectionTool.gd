@@ -3,7 +3,9 @@ class_name SelectionTool extends BaseTool
 
 var _move := false
 var _move_content := true
+var _start_pos := Vector2.ZERO
 var _offset := Vector2.ZERO
+
 var _add := false # Shift + Mouse Click
 var _subtract := false # Ctrl + Mouse Click
 var _intersect := false # Shift + Ctrl + Mouse Click
@@ -29,6 +31,7 @@ func draw_start(position : Vector2) -> void:
 	_intersect = Tools.shift && Tools.control
 	_add = Tools.shift && !_intersect
 	_subtract = Tools.control && !_intersect
+	_start_pos = position
 	_offset = position
 
 	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
@@ -53,10 +56,18 @@ func draw_start(position : Vector2) -> void:
 
 func draw_move(position : Vector2) -> void:
 	if _move:
+		if Tools.shift: # Snap to axis
+			var angle := position.angle_to_point(_start_pos)
+			if abs(angle) <= PI / 4 or abs(angle) >= 3*PI / 4:
+				position.y = _start_pos.y
+			else:
+				position.x = _start_pos.x
+
 		if _move_content:
 			Global.canvas.selection.move_content(position - _offset)
 		else:
 			Global.canvas.selection.move_borders(position - _offset)
+
 		_offset = position
 		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
 

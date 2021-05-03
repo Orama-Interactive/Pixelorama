@@ -1,29 +1,41 @@
 extends BaseTool
 
 
-var _starting_pos : Vector2
+var _start_pos : Vector2
 var _offset : Vector2
 
 
 func draw_start(position : Vector2) -> void:
-	_starting_pos = position
+	_start_pos = position
 	_offset = position
 	if Global.current_project.has_selection:
 		Global.canvas.selection.transform_content_start()
 
 
 func draw_move(position : Vector2) -> void:
+	if Tools.shift: # Snap to axis
+		var angle := position.angle_to_point(_start_pos)
+		if abs(angle) <= PI / 4 or abs(angle) >= 3*PI / 4:
+			position.y = _start_pos.y
+		else:
+			position.x = _start_pos.x
 	if Global.current_project.has_selection:
 		Global.canvas.selection.move_content(position - _offset)
 		_offset = position
 	else:
-		Global.canvas.move_preview_location = position - _starting_pos
+		Global.canvas.move_preview_location = position - _start_pos
 	_offset = position
 
 
 func draw_end(position : Vector2) -> void:
-	if _starting_pos != Vector2.INF:
-		var pixel_diff : Vector2 = position - _starting_pos
+	if _start_pos != Vector2.INF:
+		if Tools.shift: # Snap to axis
+			var angle := position.angle_to_point(_start_pos)
+			if abs(angle) <= PI / 4 or abs(angle) >= 3*PI / 4:
+				position.y = _start_pos.y
+			else:
+				position.x = _start_pos.x
+		var pixel_diff : Vector2 = position - _start_pos
 		var project : Project = Global.current_project
 		var image : Image = _get_draw_image()
 
@@ -37,4 +49,4 @@ func draw_end(position : Vector2) -> void:
 
 			Global.canvas.handle_redo("Draw")
 
-	_starting_pos = Vector2.INF
+	_start_pos = Vector2.INF

@@ -2,7 +2,6 @@ extends SelectionTool
 
 
 var _rect := Rect2(0, 0, 0, 0)
-var _start_pos := Vector2.ZERO
 
 var _square := false # Mouse Click + Shift
 var _expand_from_center := false # Mouse Click + Ctrl
@@ -23,12 +22,6 @@ func _input(event : InputEvent) -> void:
 			_displace_origin = true
 		elif event.is_action_released("alt"):
 			_displace_origin = false
-
-
-func draw_start(position : Vector2) -> void:
-	.draw_start(position)
-	if !_move:
-		_start_pos = position
 
 
 func draw_move(position : Vector2) -> void:
