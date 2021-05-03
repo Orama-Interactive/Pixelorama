@@ -12,6 +12,7 @@ var _intersect := false # Shift + Ctrl + Mouse Click
 
 var undo_data : Dictionary
 
+onready var selection_node : Node2D = Global.canvas.selection
 onready var xspinbox : SpinBox = find_node("XSpinBox")
 onready var yspinbox : SpinBox = find_node("YSpinBox")
 onready var wspinbox : SpinBox = find_node("WSpinBox")
@@ -19,7 +20,7 @@ onready var hspinbox : SpinBox = find_node("HSpinBox")
 
 
 func _ready() -> void:
-	var select_rect : Rect2 = Global.canvas.selection.big_bounding_rectangle
+	var select_rect : Rect2 = selection_node.big_bounding_rectangle
 	xspinbox.value = select_rect.position.x
 	yspinbox.value = select_rect.position.y
 	wspinbox.value = select_rect.size.x
@@ -27,31 +28,38 @@ func _ready() -> void:
 
 
 func draw_start(position : Vector2) -> void:
-	undo_data = Global.canvas.selection._get_undo_data(false)
+	var project : Project = Global.current_project
+	undo_data = selection_node._get_undo_data(false)
 	_intersect = Tools.shift && Tools.control
 	_add = Tools.shift && !_intersect
 	_subtract = Tools.control && !_intersect
 	_start_pos = position
 	_offset = position
 
-	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
 	var offsetted_pos := position
 	if selection_position.x < 0:
 		offsetted_pos.x -= selection_position.x
 	if selection_position.y < 0:
 		offsetted_pos.y -= selection_position.y
-	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and Global.current_project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift:
+	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift:
 		# Move current selection
 		_move = true
 		if Tools.control and Tools.alt: # Move selection without content
-			Global.canvas.selection.transform_content_confirm()
+			selection_node.transform_content_confirm()
 			_move_content = false
-			Global.canvas.selection.move_borders_start()
+			selection_node.move_borders_start()
 		else:
 			_move_content = true
-			Global.canvas.selection.transform_content_start()
+			if Tools.alt: # Move the selection without cutting it from the original position / makes a quick copy of it
+				selection_node.transform_content_confirm()
+			selection_node.transform_content_start()
+			if Tools.alt: # Continuation of the above
+				var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+				cel_image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+
 	else:
-		Global.canvas.selection.transform_content_confirm()
+		selection_node.transform_content_confirm()
 
 
 func draw_move(position : Vector2) -> void:
@@ -64,17 +72,17 @@ func draw_move(position : Vector2) -> void:
 				position.x = _start_pos.x
 
 		if _move_content:
-			Global.canvas.selection.move_content(position - _offset)
+			selection_node.move_content(position - _offset)
 		else:
-			Global.canvas.selection.move_borders(position - _offset)
+			selection_node.move_borders(position - _offset)
 
 		_offset = position
-		_set_cursor_text(Global.canvas.selection.big_bounding_rectangle)
+		_set_cursor_text(selection_node.big_bounding_rectangle)
 
 
 func draw_end(_position : Vector2) -> void:
 	if _move:
-		Global.canvas.selection.move_borders_end(!_move_content)
+		selection_node.move_borders_end(!_move_content)
 	else:
 		apply_selection(_position)
 
@@ -94,9 +102,9 @@ func _set_cursor_text(rect : Rect2) -> void:
 
 func _on_XSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
-	if !project.has_selection or Global.canvas.selection.big_bounding_rectangle.position.x == value:
+	if !project.has_selection or selection_node.big_bounding_rectangle.position.x == value:
 		return
-	Global.canvas.selection.big_bounding_rectangle.position.x = value
+	selection_node.big_bounding_rectangle.position.x = value
 
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
 	project.move_bitmap_values(selection_bitmap_copy)
@@ -106,9 +114,9 @@ func _on_XSpinBox_value_changed(value : float) -> void:
 
 func _on_YSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
-	if !project.has_selection or Global.canvas.selection.big_bounding_rectangle.position.y == value:
+	if !project.has_selection or selection_node.big_bounding_rectangle.position.y == value:
 		return
-	Global.canvas.selection.big_bounding_rectangle.position.y = value
+	selection_node.big_bounding_rectangle.position.y = value
 
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
 	project.move_bitmap_values(selection_bitmap_copy)
@@ -118,29 +126,29 @@ func _on_YSpinBox_value_changed(value : float) -> void:
 
 func _on_WSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
-	if !project.has_selection or Global.canvas.selection.big_bounding_rectangle.size.x == value or Global.canvas.selection.big_bounding_rectangle.size.x <= 0:
+	if !project.has_selection or selection_node.big_bounding_rectangle.size.x == value or selection_node.big_bounding_rectangle.size.x <= 0:
 		return
-	Global.canvas.selection.big_bounding_rectangle.size.x = value
+	selection_node.big_bounding_rectangle.size.x = value
 	resize_selection()
 
 
 func _on_HSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
-	if !project.has_selection or Global.canvas.selection.big_bounding_rectangle.size.y == value or Global.canvas.selection.big_bounding_rectangle.size.y <= 0:
+	if !project.has_selection or selection_node.big_bounding_rectangle.size.y == value or selection_node.big_bounding_rectangle.size.y <= 0:
 		return
-	Global.canvas.selection.big_bounding_rectangle.size.y = value
+	selection_node.big_bounding_rectangle.size.y = value
 	resize_selection()
 
 
 func resize_selection() -> void:
 	var project : Project = Global.current_project
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
-	selection_bitmap_copy = project.resize_bitmap_values(project.selection_bitmap, Global.canvas.selection.big_bounding_rectangle.size, false, false)
+	selection_bitmap_copy = project.resize_bitmap_values(project.selection_bitmap, selection_node.big_bounding_rectangle.size, false, false)
 	project.selection_bitmap = selection_bitmap_copy
 	project.selection_bitmap_changed()
 
-	if Global.canvas.selection.is_moving_content:
-		var preview_image : Image = Global.canvas.selection.preview_image
-		preview_image.copy_from(Global.canvas.selection.original_preview_image)
-		preview_image.resize(Global.canvas.selection.big_bounding_rectangle.size.x, Global.canvas.selection.big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
-		Global.canvas.selection.preview_image_texture.create_from_image(preview_image, 0)
+	if selection_node.is_moving_content:
+		var preview_image : Image = selection_node.preview_image
+		preview_image.copy_from(selection_node.original_preview_image)
+		preview_image.resize(selection_node.big_bounding_rectangle.size.x, selection_node.big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
+		selection_node.preview_image_texture.create_from_image(preview_image, 0)
