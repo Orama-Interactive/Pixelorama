@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-05-04 10:36\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -39,7 +39,7 @@ msgstr "Vászon mérete"
 msgid "Frame Size"
 msgstr "Keretméret"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
