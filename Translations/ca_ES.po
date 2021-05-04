@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-05-04 10:36\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -39,7 +39,7 @@ msgstr "Mida del llenç"
 msgid "Frame Size"
 msgstr "Mida del marc"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
