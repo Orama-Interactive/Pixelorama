@@ -16,7 +16,7 @@ DragonOfWar, novhack
 - The palette system has been completely replaced with a new one. See [#447](https://github.com/Orama-Interactive/Pixelorama/pull/447) for more details.
 <br><br>
 
-## [v0.8.3] - Unreleased
+## [v0.8.3] - 2021-05-04
 This update has been brought to you by the contributions of:
 
 Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespleasure, ballerburg9005, kevinms
