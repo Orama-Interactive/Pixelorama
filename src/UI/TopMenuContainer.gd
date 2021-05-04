@@ -484,11 +484,7 @@ func help_menu_id_pressed(id : int) -> void:
 		HelpMenuId.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		HelpMenuId.CHANGELOG:
-			if OS.get_name() == "OSX":
-				# Issue #275 - remove when macOS builds use Godot 3.2.3
-				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md")
-			else:
-				OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v082---2020-12-12")
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v083---2021-05-04")
 		HelpMenuId.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)
