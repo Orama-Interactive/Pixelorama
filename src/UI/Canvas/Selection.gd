@@ -54,7 +54,6 @@ var original_offset := Vector2.ZERO
 var preview_image := Image.new()
 var preview_image_texture := ImageTexture.new()
 var undo_data : Dictionary
-var drawn_rect := Rect2(0, 0, 0, 0)
 var gizmos := [] # Array of Gizmos
 var dragged_gizmo : Gizmo = null
 var prev_angle := 0
@@ -143,7 +142,6 @@ func _draw() -> void:
 		_position.x = _position.x + Global.current_project.size.x
 		_scale.x = -1
 	draw_set_transform(_position, rotation, _scale)
-	draw_rect(drawn_rect, Color.black, false)
 	if big_bounding_rectangle.size != Vector2.ZERO:
 		for gizmo in gizmos: # Draw gizmos
 			draw_rect(gizmo.rect, Color.black)

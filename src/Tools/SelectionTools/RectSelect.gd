@@ -32,19 +32,28 @@ func draw_move(position : Vector2) -> void:
 			_start_pos += position - _offset
 		_rect = _get_result_rect(_start_pos, position)
 		_set_cursor_text(_rect)
-		Global.canvas.selection.drawn_rect = _rect
-		Global.canvas.selection.update()
 		_offset = position
 
 
 func draw_end(position : Vector2) -> void:
 	.draw_end(position)
 	_rect = Rect2(0, 0, 0, 0)
-	Global.canvas.selection.drawn_rect = _rect
-	Global.canvas.selection.update()
 	_square = false
 	_expand_from_center = false
 	_displace_origin = false
+
+
+func draw_preview() -> void:
+	if !_move:
+		var canvas : Node2D = Global.canvas.previews
+		var _position := canvas.position
+		var _scale := canvas.scale
+		if Global.mirror_view:
+			_position.x = _position.x + Global.current_project.size.x
+			_scale.x = -1
+		canvas.draw_set_transform(_position, canvas.rotation, _scale)
+		canvas.draw_rect(_rect, Color.black, false)
+		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
 func apply_selection(_position) -> void:
