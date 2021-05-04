@@ -118,14 +118,12 @@ allow_greater = true
 visible = false
 
 [node name="EmptySpacer" parent="." index="8"]
-visible = false
-margin_top = 18.0
-margin_bottom = 30.0
+margin_top = 166.0
+margin_bottom = 178.0
 
 [node name="Mirror" parent="." index="9"]
-visible = false
-margin_top = 18.0
-margin_bottom = 35.0
+margin_top = 182.0
+margin_bottom = 199.0
 
 [connection signal="value_changed" from="XContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]
 [connection signal="value_changed" from="YContainer/YSpinBox" to="." method="_on_YSpinBox_value_changed"]

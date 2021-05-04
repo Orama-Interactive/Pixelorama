@@ -73,6 +73,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )
+
 [connection signal="toggled" from="PixelPerfect" to="." method="_on_PixelPerfect_toggled"]
 [connection signal="toggled" from="Mirror/Horizontal" to="." method="_on_Horizontal_toggled"]
 [connection signal="toggled" from="Mirror/Vertical" to="." method="_on_Vertical_toggled"]
