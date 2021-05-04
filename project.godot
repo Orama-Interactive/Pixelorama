@@ -64,15 +64,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Timeline/LayerButton.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "Palette",
 "language": "GDScript",
 "path": "res://src/Palette/Palette.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "PaletteColor",
 "language": "GDScript",
 "path": "res://src/Palette/PaletteColor.gd"
+}, {
+"base": "GridContainer",
+"class": "PaletteGrid",
+"language": "GDScript",
+"path": "res://src/Palette/PaletteGrid.gd"
+}, {
+"base": "PanelContainer",
+"class": "PalettePanel",
+"language": "GDScript",
+"path": "res://src/Palette/PalettePanel.gd"
+}, {
+"base": "ColorRect",
+"class": "PaletteSwatch",
+"language": "GDScript",
+"path": "res://src/Palette/PaletteSwatch.gd"
 }, {
 "base": "PopupPanel",
 "class": "Patterns",
@@ -83,6 +98,16 @@ _global_script_classes=[ {
 "class": "Project",
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
+}, {
+"base": "BaseTool",
+"class": "SelectionTool",
+"language": "GDScript",
+"path": "res://src/Tools/SelectionTools/SelectionTool.gd"
+}, {
+"base": "Reference",
+"class": "ShaderImageEffect",
+"language": "GDScript",
+"path": "res://src/Classes/ShaderImageEffect.gd"
 }, {
 "base": "Guide",
 "class": "SymmetryGuide",
@@ -103,8 +128,13 @@ _global_script_class_icons={
 "LayerButton": "",
 "Palette": "",
 "PaletteColor": "",
+"PaletteGrid": "",
+"PalettePanel": "",
+"PaletteSwatch": "",
 "Patterns": "",
 "Project": "",
+"SelectionTool": "",
+"ShaderImageEffect": "",
 "SymmetryGuide": ""
 }
 
@@ -119,7 +149,7 @@ boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/Version="v0.8.3-dev"
+config/Version="v0.9-dev"
 
 [audio]
 
@@ -134,6 +164,7 @@ DrawingAlgos="*res://src/Autoload/DrawingAlgos.gd"
 Tools="*res://src/Autoload/Tools.gd"
 Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 Export="*res://src/Autoload/Export.gd"
+Palettes="*res://src/Autoload/Palettes.gd"
 
 [debug]
 
@@ -442,6 +473,87 @@ right_pan_tool={
 show_pixel_grid={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":72,"unicode":0,"echo":false,"script":null)
+ ]
+}
+clear_selection={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left_rectangletool_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_rectangletool_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left_ellipsetool_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_ellipsetool_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left_move_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":84,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_move_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":84,"unicode":0,"echo":false,"script":null)
+ ]
+}
+select_all={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+invert_selection={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left_color_select_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_color_select_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left_magic_wand_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_magic_wand_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+enter={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
+ ]
+}
+escape={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
+}
+alt={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777240,"unicode":0,"echo":false,"script":null)
  ]
 }
 

@@ -4,6 +4,15 @@ var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
 
+var tallscreen_is_active = false
+onready var ui := $MenuAndUI/UI
+onready var bottom_panel := $MenuAndUI/UI/CanvasAndTimeline/HBoxContainer/BottomPanel
+onready var right_panel := $MenuAndUI/UI/RightPanel
+onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit
+onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
+onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreviewContainer
+onready var tool_panel := $MenuAndUI/UI/ToolPanel
+onready var scroll_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,6 +28,9 @@ func _ready() -> void:
 
 	get_tree().set_auto_accept_quit(false)
 	setup_application_window_size()
+	handle_resize()
+	get_tree().get_root().connect("size_changed", self, "handle_resize")
+
 
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
@@ -55,6 +67,89 @@ func _ready() -> void:
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
 
 
+func handle_resize() -> void:
+	var aspect_ratio = get_viewport_rect().size.x/(0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
+	if (  (aspect_ratio <= 3.0/4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN)
+		or Global.panel_layout == Global.PanelLayout.TALLSCREEN):
+		change_ui_layout("tallscreen")
+	else:
+		change_ui_layout("widescreen")
+
+
+func change_ui_layout(mode : String) -> void:
+	var colorpicker_is_switched = true if tool_and_palette_vsplit.has_node("ScrollContainer") else false
+
+	if mode == "tallscreen" and not tallscreen_is_active:
+		tallscreen_is_active = true
+		reparent_node_to(right_panel, bottom_panel, 0)
+		right_panel.rect_min_size.y = 300
+		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
+		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
+		color_and_tool_options.rect_min_size.x = 280
+		reparent_node_to(tool_panel, ui.get_node("CanvasAndTimeline/HBoxContainer"), 0)
+	elif mode == "widescreen" and tallscreen_is_active:
+		tallscreen_is_active = false
+		reparent_node_to(right_panel, ui, -1)
+		right_panel.rect_min_size.y = 0
+		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
+		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
+		color_and_tool_options.rect_min_size.x = 0
+		canvas_preview_container.visible = true
+		reparent_node_to(tool_panel, ui, 0)
+
+	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
+		canvas_preview_container.visible = false
+	else:
+		canvas_preview_container.visible = true
+
+	if not colorpicker_is_switched and canvas_preview_container.visible and mode == "tallscreen":
+		reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
+		scroll_container.rect_min_size = Vector2(268, 196)
+		color_and_tool_options.set("custom_constants/separation", 20)
+		reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
+	elif colorpicker_is_switched and (not canvas_preview_container.visible or mode != "tallscreen"):
+		reparent_node_to(scroll_container, color_and_tool_options, -1)
+		scroll_container.rect_min_size = Vector2(0, 0)
+		color_and_tool_options.set("custom_constants/separation", 8)
+		if mode == "widescreen":
+			reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
+		else:
+			reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
+
+
+# helper function (change_ui_layout)
+# warning: this doesn't really copy any sort of attributes, except a few that were needed in my particular case
+func replace_node_with(old : Node, new : Node) -> Node:
+	var tempname = old.name
+	old.name = "old"
+	new.name = tempname
+	new.size_flags_vertical = old.size_flags_horizontal
+	new.size_flags_vertical = old.size_flags_vertical
+	# new.set("custom_constants/autohide", old.get("custom_constants/autohide"))
+	if new is HBoxContainer:
+		new.set_alignment(HBoxContainer.ALIGN_CENTER)
+		new.set("custom_constants/separation", 20)
+	old.get_parent().add_child(new)
+	for n in old.get_children():
+		reparent_node_to(n, new, -1)
+	old.get_parent().remove_child(old)
+	old.queue_free()
+	return new
+
+
+# helper function (change_ui_layout)
+func reparent_node_to(node : Node, dest : Node, pos : int) -> bool:
+	if dest is Node and node is Node:
+		node.get_parent().remove_child(node)
+		dest.add_child(node)
+		node.set_owner(dest)
+		if pos >= 0:
+			dest.move_child(node, pos)
+		return true
+	else:
+		return false
+
+
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	Global.left_cursor.texture = Global.left_cursor_tool_texture
@@ -67,24 +162,21 @@ func _input(event : InputEvent) -> void:
 
 	# The section of code below is reserved for Undo and Redo! Do not place code for Input below, but above.
 	if !event.is_echo(): # Checks if the action is pressed down
-		if event.is_action_pressed("redo_secondary"): # Done, so that "redo_secondary" hasn't
-			redone = true # a slight delay before it starts. The "redo" and "undo" action don't have a slight delay,
-			Global.current_project.undo_redo.redo() # The "redo" and "undo" action don't have a slight delay,
-			redone = false # because they get called as an accelerator once pressed (TopMenuContainer.gd / Line 152).
+		if event.is_action_pressed("redo_secondary"):
+			# Done, so that "redo_secondary" hasn't a slight delay before it starts.
+			# The "redo" and "undo" action don't have a slight delay,
+			# because they get called as an accelerator once pressed (TopMenuContainer.gd / Line 152).
+			Global.current_project.commit_redo()
 		return
 
 	if event.is_action("redo"): # Ctrl + Y
-		redone = true
-		Global.current_project.undo_redo.redo()
-		redone = false
+		Global.current_project.commit_redo()
 
 	if event.is_action("redo_secondary"): # Shift + Ctrl + Z
-		redone = true
-		Global.current_project.undo_redo.redo()
-		redone = false
+		Global.current_project.commit_redo()
 
 	if event.is_action("undo") and !event.shift: # Ctrl + Z and check if shift isn't pressed
-		Global.current_project.undo_redo.undo() # so "undo" isn't accidentaly triggered while using "redo_secondary"
+		Global.current_project.commit_undo() # so "undo" isn't accidentaly triggered while using "redo_secondary"
 
 
 func setup_application_window_size() -> void:
@@ -151,6 +243,7 @@ func _notification(what : int) -> void:
 		MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 			show_quit_dialog()
 		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when the mouse isn't in the window anymore
+			Global.has_focus = false
 			if Global.fps_limit_focus:
 				Engine.set_target_fps(1) # then set the fps to 1 to relieve the cpu
 		MainLoop.NOTIFICATION_WM_MOUSE_ENTER: # Opposite of the above
@@ -253,8 +346,8 @@ func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Arra
 	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
 	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	Export.was_exported = false
-	Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
-	Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+	Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
+	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 
 func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) -> void:

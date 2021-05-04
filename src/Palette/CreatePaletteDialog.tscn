@@ -1,0 +1,183 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Palette/CreatePaletteDialog.gd" type="Script" id=1]
+
+[node name="CreatePaletteDialog" type="ConfirmationDialog"]
+margin_top = 1.0
+margin_right = 300.0
+margin_bottom = 438.0
+window_title = "Create New Palette"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.000793701
+anchor_right = 0.000793701
+margin_left = 7.76189
+margin_top = 8.0
+margin_right = 291.762
+margin_bottom = 401.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
+margin_right = 284.0
+margin_bottom = 162.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PresetLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_right = 67.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+text = "Preset:"
+valign = 1
+
+[node name="Preset" type="OptionButton" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_right = 284.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+text = "Empty"
+items = [ "Empty", null, false, 0, null, "From Current Palette", null, false, 1, null, "From Current Sprite", null, false, 2, null, "From Current Selection", null, false, 3, null ]
+selected = 0
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 33.0
+margin_right = 67.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 50, 0 )
+text = "Name:"
+
+[node name="Name" type="LineEdit" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 28.0
+margin_right = 284.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+
+[node name="CommentLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 74.0
+margin_right = 67.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 50, 0 )
+text = "Comment:"
+
+[node name="Comment" type="TextEdit" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 56.0
+margin_right = 284.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+
+[node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 115.0
+margin_right = 67.0
+margin_bottom = 129.0
+text = "Width:"
+
+[node name="Width" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 110.0
+margin_right = 284.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 64.0
+value = 1.0
+align = 2
+
+[node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 143.0
+margin_right = 67.0
+margin_bottom = 157.0
+text = "Height:"
+
+[node name="Height" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 138.0
+margin_right = 284.0
+margin_bottom = 162.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 64.0
+value = 1.0
+align = 2
+
+[node name="ColorsSettings" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 166.0
+margin_right = 284.0
+margin_bottom = 226.0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ColorsSettings"]
+margin_right = 284.0
+margin_bottom = 4.0
+
+[node name="AddAlphaColors" type="CheckBox" parent="VBoxContainer/ColorsSettings"]
+margin_top = 8.0
+margin_right = 284.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 24 )
+text = "Create colors with alpha component"
+
+[node name="GetColorsFrom" type="HBoxContainer" parent="VBoxContainer/ColorsSettings"]
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 60.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GetColorsFromLabel" type="Label" parent="VBoxContainer/ColorsSettings/GetColorsFrom"]
+margin_top = 5.0
+margin_right = 104.0
+margin_bottom = 19.0
+text = "Get colors from:"
+
+[node name="GetColorsFrom" type="OptionButton" parent="VBoxContainer/ColorsSettings/GetColorsFrom"]
+margin_left = 108.0
+margin_right = 284.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Current frame"
+items = [ "Current frame", null, false, 0, null, "Current cel", null, false, 1, null, "All frames", null, false, 2, null ]
+selected = 0
+
+[node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]
+margin_top = 230.0
+margin_right = 284.0
+margin_bottom = 309.0
+size_flags_vertical = 7
+custom_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+text = "Palette with the same name and path already exists!"
+align = 1
+valign = 2
+autowrap = true
+
+[node name="EnterNameWarning" type="Label" parent="VBoxContainer"]
+margin_top = 313.0
+margin_right = 284.0
+margin_bottom = 393.0
+size_flags_vertical = 7
+custom_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+text = "Palette name is required!"
+align = 1
+valign = 2
+autowrap = true
+[connection signal="confirmed" from="." to="." method="_on_CreatePaletteDialog_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_CreatePaletteDialog_popup_hide"]
+[connection signal="item_selected" from="VBoxContainer/PaletteMetadata/Preset" to="." method="_on_Preset_item_selected"]
+[connection signal="text_changed" from="VBoxContainer/PaletteMetadata/Name" to="." method="_on_Name_text_changed"]

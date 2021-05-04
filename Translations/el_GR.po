@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-02-02 17:33\n"
+"PO-Revision-Date: 2021-04-25 22:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -38,6 +38,9 @@ msgstr "Μέγεθος Καμβά"
 
 msgid "Frame Size"
 msgstr "Μέγεθος Καρέ"
+
+msgid "Size"
+msgstr "Μέγεθος"
 
 msgid "Width:"
 msgstr "Πλάτος:"
@@ -165,6 +168,18 @@ msgstr "Λειτουργία μοτίβου"
 msgid "Window Transparency"
 msgstr "Διαφάνεια Παραθύρου"
 
+msgid "Panel Layout"
+msgstr "Διάταξη Πλαισίου"
+
+msgid "Auto"
+msgstr "Αυτόματο"
+
+msgid "Widescreen"
+msgstr "Οριζόντια"
+
+msgid "Tallscreen"
+msgstr "Κάθετη"
+
 msgid "Mirror View"
 msgstr "Αναστροφή Προβολής"
 
@@ -213,8 +228,14 @@ msgstr "Νέα καρτέλα"
 msgid "Spritesheet (new tab)"
 msgstr "Φύλλο καρέ (νέα καρτέλα)"
 
+msgid "Spritesheet (new layer)"
+msgstr "Φύλλο καρέ (νέα στρώση)"
+
 msgid "New frame"
 msgstr "Νέο καρέ"
+
+msgid "Replace frame"
+msgstr "Αντικατάσταση καρέ"
 
 msgid "New layer"
 msgstr "Νέα στρώση"
@@ -233,6 +254,15 @@ msgstr "Οριζόντια καρέ:"
 
 msgid "Vertical frames:"
 msgstr "Κάθετα καρέ:"
+
+msgid "Start frame:"
+msgstr "Καρέ έναρξης:"
+
+msgid "At frame:"
+msgstr "Στο καρέ:"
+
+msgid "At layer:"
+msgstr "Στη στρώση:"
 
 msgid "Brush type:"
 msgstr "Τύπος πινέλου:"
@@ -436,6 +466,9 @@ msgstr "Γλώσσα Συστήματος"
 
 msgid "Display Scale"
 msgstr "Κλίμακα Εμφάνισης"
+
+msgid "Dim interface on dialog popup"
+msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφανίζεται αναδυόμενο παράθυρο"
 
 msgid "Dark"
 msgstr "Σκούρο"
@@ -774,6 +807,26 @@ msgstr "Φώτισμα/Σκούρημα\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr "Ορθογώνιο"
+
+msgid "Ellipse"
+msgstr "Έλλειψη"
+
 msgid "Choose a color for the left tool"
 msgstr "Επιλέξτε ένα χρώμα για το αριστερό εργαλείο"
 
@@ -989,6 +1042,12 @@ msgstr "Pixel Perfect"
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
 
+msgid "Fill Shape"
+msgstr "Γέμισμα Σχήματος"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
+
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
 
@@ -1160,10 +1219,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Η κίνηση παίζει μόνο σε καρέ της ίδιας καρτέλας"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Ετίκετα %s (Καρέ %s)"
+msgstr "Ετικέτα %s (Καρέ %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Ετίκετα %s (Καρέ %s-%s)"
+msgstr "Ετικέτα %s (Καρέ %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1602,4 +1661,40 @@ msgstr "Επανάληψη στον Άξονα Χ"
 
 msgid "Tiled In Y Axis"
 msgstr "Επανάληψη στον Άξονα Υ"
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr "Σχόλια:"
+
+msgid "Empty"
+msgstr "Κενή"
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
 

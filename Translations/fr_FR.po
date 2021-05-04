@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Taille du Canevas"
 
 msgid "Frame Size"
 msgstr "Taille de la frame"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -127,10 +130,10 @@ msgid "Scale Image"
 msgstr "Redimensionner l'image"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Pourcentage"
 
 msgid "Crop Image"
 msgstr "Rogner l'image"
@@ -163,6 +166,18 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Window Transparency"
+msgstr "Transparence de fenêtre"
+
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
 msgstr ""
 
 msgid "Mirror View"
@@ -213,8 +228,14 @@ msgstr "Nouvel onglet"
 msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nouvel onglet)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Nouvelle frame"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -233,6 +254,15 @@ msgstr "Frames horizontaux :"
 
 msgid "Vertical frames:"
 msgstr "Frames verticaux :"
+
+msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Type de pinceau :"
@@ -436,6 +466,9 @@ msgstr "Langue système"
 
 msgid "Display Scale"
 msgstr "Échelle d'affichage"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "Sombre"
@@ -774,6 +807,26 @@ msgstr "Éclaircir/Assombrir\n\n"
 "%s pour le bouton gauche de la souris\n"
 "%s pour le bouton droit de la souris"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
 msgid "Choose a color for the left tool"
 msgstr "Choisissez une couleur pour l'outil gauche"
 
@@ -988,6 +1041,12 @@ msgstr "Pixel Parfait"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
@@ -1446,13 +1505,13 @@ msgid "A default background color of a new image"
 msgstr "Une couleur de fond par défaut d'une nouvelle image"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Verrouiller les proportions"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Portrait"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Paysage"
 
 msgid "Templates:"
 msgstr "Modèles:"
@@ -1602,4 +1661,40 @@ msgstr "Mode Tuile sur l'Axe X"
 
 msgid "Tiled In Y Axis"
 msgstr "Mode Tuile sur l'Axe Y"
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
 

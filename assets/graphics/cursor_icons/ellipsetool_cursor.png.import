@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/ellipsetool_cursor.png-6ec52a212382915d04dbdd69eb1637a5.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/ellipsetool_cursor.png"
+dest_files=[ "res://.import/ellipsetool_cursor.png-6ec52a212382915d04dbdd69eb1637a5.image" ]
+
+[params]
+

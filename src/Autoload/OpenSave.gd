@@ -23,8 +23,8 @@ func handle_loading_files(files : PoolStringArray) -> void:
 		var file_ext : String = file.get_extension().to_lower()
 		if file_ext == "pxo": # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "json" or file_ext == "gpl" or file_ext == "pal": # Palettes
-			Global.palette_container.on_palette_import_file_selected(file)
+		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json": # Palettes
+			Palettes.import_palette(file)
 		else: # Image files
 			var image := Image.new()
 			var err := image.load(file)
@@ -119,8 +119,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 		new_project.directory_path = Export.directory_path
 		new_project.file_name = Export.file_name
 		Export.was_exported = false
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
-		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 	Global.save_project_to_recent_list(path)
 
@@ -339,7 +339,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		Export.directory_path = path.get_base_dir()
 		Export.was_exported = false
 		project.was_exported = false
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
 	Global.save_project_to_recent_list(path)
 
@@ -388,7 +388,7 @@ func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : in
 	set_new_tab(project, path)
 
 
-func open_image_as_spritesheet_layer(path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
+func open_image_as_spritesheet_layer(_path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
 	# data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
@@ -398,7 +398,7 @@ func open_image_as_spritesheet_layer(path : String, image : Image, file_name : S
 	# resize canvas to if "frame_width" or "frame_height" is too large
 	var project_width :int = max(frame_width, Global.current_project.size.x)
 	var project_height :int = max(frame_height, Global.current_project.size.y)
-	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0) 
+	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0)
 
 	# slice images
 	var image_no :int = 0
@@ -424,14 +424,14 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> v
 
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Frame")
-	
+
 	var frames :Array = []
 	# create a duplicate of "project.frames"
 	for i in project.frames.size():
 		var frame := Frame.new()
 		frame.cels = project.frames[i].cels.duplicate(true)
 		frames.append(frame)
-	
+
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
@@ -445,7 +445,7 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> v
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-	
+
 	project.undo_redo.add_do_method(Global, "redo")
 	project.undo_redo.add_undo_method(Global, "undo")
 	project.undo_redo.commit_action()

@@ -159,6 +159,7 @@ margin_right = 42.0
 [node name="Vertical" parent="Mirror" index="1"]
 margin_left = 86.0
 margin_right = 103.0
+
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]

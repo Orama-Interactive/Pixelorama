@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/magicwand_cursor.png-101895aac3a0f59e7ab4bec0b6974cb2.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/magicwand_cursor.png"
+dest_files=[ "res://.import/magicwand_cursor.png-101895aac3a0f59e7ab4bec0b6974cb2.image" ]
+
+[params]
+

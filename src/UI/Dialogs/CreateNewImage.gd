@@ -18,7 +18,7 @@ var templates := [
 	Template.new(Vector2(32, 32)),
 	Template.new(Vector2(64, 64)),
 	Template.new(Vector2(128, 128)),
-	
+
 	# Nintendo
 	Template.new(Vector2(160, 144), "GB"),
 	Template.new(Vector2(240, 160), "GBA"),
@@ -28,17 +28,17 @@ var templates := [
 	Template.new(Vector2(512, 480), "SNES (PAL)"),
 	Template.new(Vector2(646, 486), "N64 (NTSC)"),
 	Template.new(Vector2(786, 576), "N64 (PAL)"),
-	
+
 	# Sega
 	Template.new(Vector2(256, 192), "SMS (NTSC)"),
 	Template.new(Vector2(256, 224), "SMS (PAL)"),
 	Template.new(Vector2(160, 144), "GG"),
 	Template.new(Vector2(320, 224), "MD (NTSC)"),
 	Template.new(Vector2(320, 240), "MD (PAL)"),
-	
+
 	# NEC
 	Template.new(Vector2(256, 239), "PC Engine"),	#256×224 to 512×242 (mostly 256×239)
-	
+
 	# DOS
 	Template.new(Vector2(320, 200), "DOS EGA"),
 	Template.new(Vector2(320, 200), "DOS VGA"),
@@ -47,7 +47,7 @@ var templates := [
 	Template.new(Vector2(320, 200), "DOS CGA (4-Colour)"),
 	Template.new(Vector2(160, 240), "DOS CGA (Composite)"),
 	Template.new(Vector2(160, 240), "Tandy"),
-	
+
 	# Commodore
 	Template.new(Vector2(320, 200), "Amiga OCS LowRes (NTSC)"),
 	Template.new(Vector2(320, 256), "Amiga OCS LowRes (PAL)"),
@@ -57,7 +57,7 @@ var templates := [
 	Template.new(Vector2(1280, 256), "Amiga ECS SuperHiRes  (PAL)"),
 	Template.new(Vector2(640, 480), "Amiga ECS Multiscan"),
 	Template.new(Vector2(320, 200), "C64"),
-	
+
 	# Sinclair
 	Template.new(Vector2(256, 192), "ZX Spectrum"),
 ]

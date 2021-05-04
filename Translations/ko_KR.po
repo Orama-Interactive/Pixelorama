@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-02-02 17:25\n"
+"PO-Revision-Date: 2021-04-22 11:15\n"
 
 msgid "OK"
 msgstr "예"
@@ -38,6 +38,9 @@ msgstr "캔버스 크기"
 
 msgid "Frame Size"
 msgstr "프레임 크기"
+
+msgid "Size"
+msgstr "크기"
 
 msgid "Width:"
 msgstr "너비:"
@@ -163,7 +166,19 @@ msgid "Tile Mode"
 msgstr "타일 모드"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "창 투명도"
+
+msgid "Panel Layout"
+msgstr "파넬 배치"
+
+msgid "Auto"
+msgstr "자동"
+
+msgid "Widescreen"
+msgstr "와이드스크린"
+
+msgid "Tallscreen"
+msgstr "톨스크린"
 
 msgid "Mirror View"
 msgstr "미러뷰"
@@ -213,8 +228,14 @@ msgstr "새 창"
 msgid "Spritesheet (new tab)"
 msgstr "스프레드시트 (새 탭)"
 
+msgid "Spritesheet (new layer)"
+msgstr "스프레드시트 (새 레이어)"
+
 msgid "New frame"
 msgstr "새 프레임"
+
+msgid "Replace frame"
+msgstr "프레임 변경"
 
 msgid "New layer"
 msgstr "새 레이어"
@@ -233,6 +254,15 @@ msgstr "가로축 프레임:"
 
 msgid "Vertical frames:"
 msgstr "세로축 프레임:"
+
+msgid "Start frame:"
+msgstr "시작 프레임:"
+
+msgid "At frame:"
+msgstr "프레임:"
+
+msgid "At layer:"
+msgstr "레이어:"
 
 msgid "Brush type:"
 msgstr "브러시 타입:"
@@ -436,6 +466,9 @@ msgstr "시스템 언어"
 
 msgid "Display Scale"
 msgstr "디스플레이 크기"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "다크"
@@ -774,6 +807,33 @@ msgstr "밝게/어둡게\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s을(를) 눌러 1:1 도형을 만듦\n"
+"%s을(를) 눌러 도형을 클릭 원점에 놓음\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "타원 도구\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s을(를) 눌러 1:1 도형을 만듦\n"
+"%s을(를) 눌러 도형을 클릭 원점에 놓음\n"
+
+msgid "Rectangle"
+msgstr "직사각형"
+
+msgid "Ellipse"
+msgstr "타원"
+
 msgid "Choose a color for the left tool"
 msgstr "왼쪽 툴의 색상 선택"
 
@@ -855,37 +915,37 @@ msgid "Rectangular grid height:"
 msgstr "직사각형 격자 높이"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "직사각형 격자의 수평선 간격 설정"
 
 msgid "Isometric cell bounds width:"
 msgstr "아이소메트릭 셀 경계 너비:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "아이소메트릭 셀의 너비를 설정합니다"
 
 msgid "Isometric cell bounds height:"
 msgstr "아이소메트릭 셀 경계 높이:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "아이소메트릭 셀의 높이를 설정합니다"
 
 msgid "Grid offset x:"
 msgstr "격자 오프셋 x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "캔버스 원점에서 격자의 x 오프셋을 설정합니다 (이미지의 왼쪽 상단 모서리)"
 
 msgid "Grid offset y:"
 msgstr "격자 오프셋 y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "캔버스 원점에서 격자의 y 오프셋을 설정합니다 (이미지의 왼쪽 상단 모서리)"
 
 msgid "Draw over Tile Mode:"
 msgstr "타일 모드 위에 그리기"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "비활성화된 경우 격자는 원래 이미지 위에만 그려집니다."
 
 msgid "Grid color:"
 msgstr "격자 색:"
@@ -988,6 +1048,12 @@ msgstr "픽셀 퍼펙트"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
+
+msgid "Fill Shape"
+msgstr "도형 채우기"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "브러시 색상을 ~에서"
@@ -1602,4 +1668,40 @@ msgstr "X 축으로 타일을 두르기"
 
 msgid "Tiled In Y Axis"
 msgstr "Y 축으로 타일을 두르기"
+
+msgid "Create a new palette"
+msgstr "새 팔레트 생성"
+
+msgid "Create New Palette"
+msgstr "새 팔레트 생성"
+
+msgid "Comment:"
+msgstr "댓글:"
+
+msgid "Empty"
+msgstr "비어 있음"
+
+msgid "From Current Palette"
+msgstr "현재 팔레트에서"
+
+msgid "From Current Sprite"
+msgstr "현재 스프라이트에서"
+
+msgid "From Current Selection"
+msgstr "현재 선택된 영역부터"
+
+msgid "Add a new color"
+msgstr "새 색상 추가"
+
+msgid "Remove a selected color"
+msgstr "선택한 색상 제거"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "동일한 이름과 경로를가진 팔레트가 이미 존재합니다!"
+
+msgid "Palette name is required!"
+msgstr "팔레트의 이름이 필요합니다!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
 

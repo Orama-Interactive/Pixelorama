@@ -11,8 +11,8 @@ on:
     - "installer/po/*"
 
 env:
-  GODOT_VERSION: 3.2.3
-  GODOT_VERSION_MAC: 3.2.2
+  GODOT_VERSION: 3.3
+  GODOT_VERSION_MAC: 3.3
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.3
+      image: docker://barichello/godot-ci:3.3
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -57,7 +57,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.3
+      image: docker://barichello/godot-ci:3.3
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
@@ -97,7 +97,7 @@ jobs:
           submodules: true
       - name: Setup environment 🔧
         run: |
-          export GODOT_VERSION=3.2.2
+          export GODOT_VERSION=3.3
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
@@ -107,8 +107,8 @@ jobs:
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
-          curl -O https://huskee.cf/files/Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
-          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
+          wget https://github.com/huskeee/godot-headless-mac/releases/download/3.3-stable/Godot_v3.3-stable_mac_headless.64.zip
+          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip  
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
@@ -128,7 +128,7 @@ jobs:
           cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
           rm ./build/mac/Pixelorama.app/Contents/MacOS/pixelorama_data/.gdignore
       - name: Create DMG archive 🔧
-        run: hdiutil create -size 70m -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
+        run: hdiutil create -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v2
         with:

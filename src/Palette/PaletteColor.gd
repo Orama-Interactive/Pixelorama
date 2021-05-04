@@ -1,54 +1,12 @@
 class_name PaletteColor
-extends Reference
+extends Resource
+
+const UNSET_INDEX := -1
+
+export var color : Color = Color.transparent
+export var index := UNSET_INDEX
 
 
-var color : Color = Color.black setget _set_color
-var data : String = "" setget _set_data
-var name : String = "no name"
-
-
-func get_class() -> String:
-	return "PaletteColor"
-
-
-func is_class(_name : String) -> bool:
-	return _name == "PaletteColor" or .is_class(_name)
-
-
-func _init(new_color : Color = Color.black, new_name : String = "no name") -> void:
-	self.color = new_color
-	self.name = new_name
-
-
-func _set_color(new_value : Color) -> void:
-	color = new_value
-	data = color.to_html(true)
-
-
-func _set_data(new_value : String) -> void:
-	data = new_value
-	color = Color(data)
-
-
-func toDict() -> Dictionary:
-	var result = {
-			"data" : data,
-			"name" : name
-		}
-	return result
-
-
-func fromDict(input_dict : Dictionary): # -> PaletteColor
-	var result = get_script().new()
-
-	result.data = input_dict.data
-	result.name = input_dict.name
-
-	return result
-
-
-func duplicate(): # -> PaletteColor
-	var copy = get_script().new() # : PaletteColor
-	copy.data = data
-	copy.name = name
-	return copy
+func _init(init_color: Color = Color.black, init_index: int = UNSET_INDEX) -> void:
+	color = init_color
+	index = init_index

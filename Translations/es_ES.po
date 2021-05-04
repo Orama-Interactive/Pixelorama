@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-02-02 17:26\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Tamaño del lienzo"
 
 msgid "Frame Size"
 msgstr "Tamaño del marco"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Ancho:"
@@ -115,7 +118,7 @@ msgid "Copy"
 msgstr "Copiar"
 
 msgid "Cut"
-msgstr ""
+msgstr "Cortar"
 
 msgid "Paste"
 msgstr "Pegar"
@@ -127,10 +130,10 @@ msgid "Scale Image"
 msgstr "Escalar imagen"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Píxeles"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Porcentaje"
 
 msgid "Crop Image"
 msgstr "Recortar la imagen"
@@ -139,7 +142,7 @@ msgid "Resize Canvas"
 msgstr "Redimensionar lienzo"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralizar imagen"
 
 msgid "Rotate Image"
 msgstr "Rotar Imagen"
@@ -163,16 +166,28 @@ msgid "Tile Mode"
 msgstr "Modo mosaico"
 
 msgid "Window Transparency"
+msgstr "Transparencia de ventana"
+
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
 msgstr ""
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Vista de espejo"
 
 msgid "Show Grid"
 msgstr "Mostrar cuadrícula"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Mostrar cuadrícula de píxeles"
 
 msgid "Show Rulers"
 msgstr "Mostrar Reglas"
@@ -205,7 +220,7 @@ msgid "Import as:"
 msgstr "Importar como:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Proyectos recientes"
 
 msgid "New tab"
 msgstr "Nueva pestaña"
@@ -213,8 +228,14 @@ msgstr "Nueva pestaña"
 msgid "Spritesheet (new tab)"
 msgstr "Hoja de sprites (nueva pestaña)"
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
 msgstr "Nuevo fotograma"
+
+msgid "Replace frame"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nueva capa"
@@ -233,6 +254,15 @@ msgstr "Fotogramas horizontales:"
 
 msgid "Vertical frames:"
 msgstr "Fotogramas verticales:"
+
+msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Tipo de pincel:"
@@ -384,7 +414,7 @@ msgid "Language"
 msgstr "Idioma"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interfaz"
 
 msgid "Themes"
 msgstr "Temas"
@@ -399,7 +429,7 @@ msgid "Backup"
 msgstr "Copia de seguridad"
 
 msgid "Performance"
-msgstr ""
+msgstr "Rendimiento"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -435,6 +465,9 @@ msgid "System Language"
 msgstr "Idioma del sistema"
 
 msgid "Display Scale"
+msgstr "Escala de interfaz"
+
+msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
@@ -453,7 +486,7 @@ msgid "Light"
 msgstr "Claro"
 
 msgid "Purple"
-msgstr ""
+msgstr "Morado"
 
 msgid "Only affect selection"
 msgstr "Sólo afecta a la selección"
@@ -507,13 +540,13 @@ msgid "Angle:"
 msgstr "Ángulo:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Matiz:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturación:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Valor:"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -561,19 +594,19 @@ msgid "About Pixelorama"
 msgstr "Acerca de Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - ¡Pixela tus sueños!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Desarrollado por Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-presente por Orama Interactive y colaboradores"
 
 msgid "Website"
 msgstr "Sitio Web"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Repositorio GitHub"
 
 msgid "Donate"
 msgstr "Donar"
@@ -657,7 +690,7 @@ msgid "Romanian"
 msgstr "Rumano"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonés"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
@@ -771,6 +804,26 @@ msgid "Lighten/Darken\n\n"
 msgstr "Iluminar/Oscurecer\n\n"
 "%s para el botón izquierdo del ratón\n"
 "%s para el botón derecho del ratón"
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
 
 msgid "Choose a color for the left tool"
 msgstr "Elegir un color para la herramienta izquierda"
@@ -985,6 +1038,12 @@ msgid "Pixel Perfect"
 msgstr "Pixelado perfecto"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
 
 msgid "Brush color from"
@@ -1599,5 +1658,41 @@ msgid "Tiled In X Axis"
 msgstr ""
 
 msgid "Tiled In Y Axis"
+msgstr ""
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
 

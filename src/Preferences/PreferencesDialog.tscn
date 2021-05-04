@@ -115,7 +115,7 @@ text = "System Language"
 visible = false
 margin_top = 28.0
 margin_right = 498.0
-margin_bottom = 66.0
+margin_bottom = 110.0
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_right = 498.0
@@ -123,21 +123,21 @@ margin_bottom = 20.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
 margin_top = 3.0
-margin_right = 68.0
+margin_right = 84.0
 margin_bottom = 17.0
 text = "Display Scale"
 
 [node name="ShrinkLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_left = 72.0
+margin_left = 88.0
 margin_top = 3.0
-margin_right = 122.0
+margin_right = 138.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 50, 0 )
 text = "1"
 align = 2
 
 [node name="ShrinkHSlider" type="HSlider" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_left = 126.0
+margin_left = 142.0
 margin_right = 446.0
 margin_bottom = 16.0
 mouse_default_cursor_shape = 2
@@ -156,20 +156,40 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Apply"
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_right = 40.0
-margin_bottom = 4.0
-
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+[node name="DimPopup" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_top = 24.0
 margin_right = 498.0
-margin_bottom = 38.0
-text = "Themes"
+margin_bottom = 48.0
 
-[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
+margin_top = 5.0
+margin_right = 207.0
+margin_bottom = 19.0
+text = "Dim interface on dialog popup"
+
+[node name="CheckBox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
+margin_left = 211.0
+margin_right = 258.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "On"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_top = 52.0
 margin_right = 498.0
 margin_bottom = 56.0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 60.0
+margin_right = 498.0
+margin_bottom = 74.0
+text = "Themes"
+
+[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 78.0
+margin_right = 498.0
+margin_bottom = 82.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]

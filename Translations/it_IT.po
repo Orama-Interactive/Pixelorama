@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-02-02 20:47\n"
+"PO-Revision-Date: 2021-04-16 19:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "Dimensione Canvas"
 
 msgid "Frame Size"
 msgstr "Dimensione Frame"
+
+msgid "Size"
+msgstr "Dimensione"
 
 msgid "Width:"
 msgstr "Larghezza:"
@@ -165,6 +168,18 @@ msgstr "Modalità Tile"
 msgid "Window Transparency"
 msgstr "Trasparenza Finestra"
 
+msgid "Panel Layout"
+msgstr "Layout Pannello"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Widescreen"
+msgstr "Widescreen"
+
+msgid "Tallscreen"
+msgstr "Tallscreen"
+
 msgid "Mirror View"
 msgstr "Vista a Specchio"
 
@@ -213,8 +228,14 @@ msgstr "Nuova scheda"
 msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nuova scheda)"
 
+msgid "Spritesheet (new layer)"
+msgstr "Spritesheet (nuovo livello)"
+
 msgid "New frame"
 msgstr "Nuovo frame"
+
+msgid "Replace frame"
+msgstr "Sostituisci fotogramma"
 
 msgid "New layer"
 msgstr "Nuovo livello"
@@ -233,6 +254,15 @@ msgstr "Frame orizzontali:"
 
 msgid "Vertical frames:"
 msgstr "Frame verticali:"
+
+msgid "Start frame:"
+msgstr "Fotogramma iniziale:"
+
+msgid "At frame:"
+msgstr "Al telaio:"
+
+msgid "At layer:"
+msgstr "A livello:"
 
 msgid "Brush type:"
 msgstr "Tipo del pennello:"
@@ -436,6 +466,9 @@ msgstr "Lingua di sistema"
 
 msgid "Display Scale"
 msgstr "Scala Schermo"
+
+msgid "Dim interface on dialog popup"
+msgstr "Oscura l'interfaccia nella finestra di dialogo"
 
 msgid "Dark"
 msgstr "Scuro"
@@ -774,6 +807,34 @@ msgstr "Schiarisci/Scurisci\n\n"
 "%s per il tasto sinistro del mouse\n"
 "%s per il tasto destro del mouse"
 
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Strumento rettangolo\n\n"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse\n\n"
+"Tieni premuto %s per creare una forma 1:1\n"
+"Tieni premuto %s per centrare la forma sull'origine del clic\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "Strumento rettangolo\n\n"
+"%s per il tasto sinistro del mouse\n"
+"%s per il tasto destro del mouse\n\n"
+"Tieni premuto %s per creare una forma 1:1\n"
+"Tieni premuto %s per centrare la forma sull'origine del clic\n"
+
+msgid "Rectangle"
+msgstr "Rettangolo"
+
+msgid "Ellipse"
+msgstr "Ellisse"
+
 msgid "Choose a color for the left tool"
 msgstr "Scegli un colore per lo strumento sinistro"
 
@@ -988,6 +1049,12 @@ msgstr "Pixel Perfect"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
+
+msgid "Fill Shape"
+msgstr "Riempi Forma"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "Riempie la forma disegnata con il colore, invece di disegnare una forma cava"
 
 msgid "Brush color from"
 msgstr "Colore del pennello da"
@@ -1602,4 +1669,40 @@ msgstr "Piastrellato Nell'Asse X"
 
 msgid "Tiled In Y Axis"
 msgstr "Piastrellato Nell'Asse Y"
+
+msgid "Create a new palette"
+msgstr "Crea una nuova tavolozza"
+
+msgid "Create New Palette"
+msgstr "Crea Nuova Tavolozza"
+
+msgid "Comment:"
+msgstr "Commento:"
+
+msgid "Empty"
+msgstr "Vuoto"
+
+msgid "From Current Palette"
+msgstr "Dalla Tavolozza Corrente"
+
+msgid "From Current Sprite"
+msgstr "Dallo Sprite Corrente"
+
+msgid "From Current Selection"
+msgstr "Dalla Selezione Corrente"
+
+msgid "Add a new color"
+msgstr "Aggiungi un nuovo colore"
+
+msgid "Remove a selected color"
+msgstr "Rimuovi un colore selezionato"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "Tavolozza con lo stesso nome e percorso esiste già!"
+
+msgid "Palette name is required!"
+msgstr "Il nome della tavolozza è richiesto!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "Ridurre la dimensione della tavolozza ripristinerà le posizioni dei colori. I colori che non si adattano alle nuove dimensioni della tavolozza andranno persi!"
 

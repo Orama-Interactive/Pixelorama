@@ -178,6 +178,9 @@ func zoom_changed() -> void:
 		update_rulers()
 		for guide in Global.current_project.guides:
 			guide.width = zoom.x * 2
+
+		Global.canvas.selection.update_on_zoom(zoom.x)
+
 	elif name == "CameraPreview":
 		Global.preview_zoom_slider.value = -zoom.x
 

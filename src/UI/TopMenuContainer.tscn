@@ -21,7 +21,7 @@ __meta__ = {
 
 [node name="FileMenu" type="MenuButton" parent="MenuItems"]
 margin_right = 35.0
-margin_bottom = 23.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "File"
 switch_on_hover = true
@@ -29,31 +29,39 @@ switch_on_hover = true
 [node name="EditMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 39.0
 margin_right = 75.0
-margin_bottom = 23.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Edit"
 switch_on_hover = true
 
-[node name="ViewMenu" type="MenuButton" parent="MenuItems"]
+[node name="SelectMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 79.0
-margin_right = 121.0
-margin_bottom = 23.0
+margin_right = 130.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-text = "View"
+text = "Select"
 switch_on_hover = true
 
 [node name="ImageMenu" type="MenuButton" parent="MenuItems"]
-margin_left = 125.0
-margin_right = 177.0
-margin_bottom = 23.0
+margin_left = 134.0
+margin_right = 186.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Image"
 switch_on_hover = true
 
+[node name="ViewMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 190.0
+margin_right = 232.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "View"
+switch_on_hover = true
+
 [node name="HelpMenu" type="MenuButton" parent="MenuItems"]
-margin_left = 181.0
-margin_right = 223.0
-margin_bottom = 23.0
+margin_left = 236.0
+margin_right = 278.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Help"
 switch_on_hover = true

@@ -6,6 +6,7 @@ enum PressureSensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
 enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
+enum PanelLayout {AUTO, WIDESCREEN, TALLSCREEN}
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -22,6 +23,7 @@ var current_project : Project
 var current_project_index := 0 setget project_changed
 
 var recent_projects := []
+var panel_layout = PanelLayout.AUTO
 
 # Indices are as in the Direction enum
 # This is the total time the key for
@@ -46,6 +48,7 @@ var default_clear_color := Color.gray
 var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
 var shrink := 1.0
+var dim_on_popup := true
 var smooth_zoom := true
 var theme_type : int = ThemeTypes.DARK
 var default_image_width := 64
@@ -111,22 +114,21 @@ var small_preview_viewport : ViewportContainer
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
-var selection_rectangle : Polygon2D
 var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
 var transparent_checker : ColorRect
 
-var file_menu : MenuButton
-var edit_menu : MenuButton
-var view_menu : MenuButton
-var image_menu : MenuButton
-var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
+
+var tool_panel : Panel
+var right_panel : Panel
+var tabs_container : PanelContainer
 
 var recent_projects_submenu : PopupMenu
 var tile_mode_submenu : PopupMenu
 var window_transparency_submenu : PopupMenu
+var panel_layout_submenu : PopupMenu
 
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
@@ -168,14 +170,7 @@ var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
 var preview_zoom_slider : VSlider
-var add_palette_button : BaseButton
-var edit_palette_button : BaseButton
-var palette_option_button : OptionButton
-var palette_container : GridContainer
-var edit_palette_popup : WindowDialog
-var new_palette_dialog : ConfirmationDialog
-var new_palette_name_line_edit : LineEdit
-var palette_import_file_dialog : FileDialog
+var palette_panel : PalettePanel
 
 var error_dialog : AcceptDialog
 var quit_dialog : ConfirmationDialog
@@ -194,15 +189,17 @@ func _ready() -> void:
 	config_cache.load("user://cache.ini")
 
 	recent_projects = config_cache.get_value("data", "recent_projects", [])
+	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
 	directory_module = XDGDataPaths.new()
 	image_clipboard = Image.new()
-	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
 	var root = get_tree().get_root()
 	control = find_node_by_name(root, "Control")
+
 	top_menu_container = find_node_by_name(control, "TopMenuContainer")
 	left_cursor = find_node_by_name(root, "LeftCursor")
 	right_cursor = find_node_by_name(root, "RightCursor")
@@ -215,18 +212,16 @@ func _ready() -> void:
 	camera = find_node_by_name(main_viewport, "Camera2D")
 	camera2 = find_node_by_name(root, "Camera2D2")
 	camera_preview = find_node_by_name(root, "CameraPreview")
-	selection_rectangle = find_node_by_name(root, "SelectionRectangle")
 	horizontal_ruler = find_node_by_name(root, "HorizontalRuler")
 	vertical_ruler = find_node_by_name(root, "VerticalRuler")
 	transparent_checker = find_node_by_name(root, "TransparentChecker")
 
-	file_menu = find_node_by_name(root, "FileMenu")
-	edit_menu = find_node_by_name(root, "EditMenu")
-	view_menu = find_node_by_name(root, "ViewMenu")
-	image_menu = find_node_by_name(root, "ImageMenu")
-	help_menu = find_node_by_name(root, "HelpMenu")
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
+
+	tool_panel = control.get_node("MenuAndUI/UI/ToolPanel")
+	right_panel = control.get_node("MenuAndUI/UI/RightPanel")
+	tabs_container = control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer")
 
 	recent_projects_submenu = PopupMenu.new()
 	recent_projects_submenu.set_name("recent_projects_submenu")
@@ -255,6 +250,14 @@ func _ready() -> void:
 	window_transparency_submenu.add_radio_check_item("0%")
 	window_transparency_submenu.set_item_checked(10, true)
 	window_transparency_submenu.hide_on_checkable_item_selection = false
+
+	panel_layout_submenu = PopupMenu.new()
+	panel_layout_submenu.set_name("panel_layout_submenu")
+	panel_layout_submenu.add_radio_check_item("Auto", PanelLayout.AUTO)
+	panel_layout_submenu.add_radio_check_item("Widescreen", PanelLayout.WIDESCREEN)
+	panel_layout_submenu.add_radio_check_item("Tallscreen", PanelLayout.TALLSCREEN)
+	panel_layout_submenu.hide_on_checkable_item_selection = false
+	panel_layout_submenu.set_item_checked(panel_layout, true)
 
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
@@ -298,14 +301,7 @@ func _ready() -> void:
 
 	preview_zoom_slider = find_node_by_name(root, "PreviewZoomSlider")
 
-	add_palette_button = find_node_by_name(root, "AddPalette")
-	edit_palette_button = find_node_by_name(root, "EditPalette")
-	palette_option_button = find_node_by_name(root, "PaletteOptionButton")
-	palette_container = find_node_by_name(root, "PaletteContainer")
-	edit_palette_popup = find_node_by_name(root, "EditPalettePopup")
-	new_palette_dialog = find_node_by_name(root, "NewPaletteDialog")
-	new_palette_name_line_edit = find_node_by_name(new_palette_dialog, "NewPaletteNameLineEdit")
-	palette_import_file_dialog = find_node_by_name(root, "PaletteImportFileDialog")
+	palette_panel = find_node_by_name(root, "PalettePanel")
 
 	error_dialog = find_node_by_name(root, "ErrorDialog")
 	quit_dialog = find_node_by_name(root, "QuitDialog")
@@ -354,7 +350,7 @@ func general_redo(project : Project = current_project) -> void:
 func undo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_undo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
+	if action_name == "Draw" or action_name == "Draw Shape" or action_name == "Rectangle Select" or action_name == "Move Selection" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
@@ -362,11 +358,12 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
+		canvas.selection.update()
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.update()
-			Global.canvas.pixel_grid.update()
-			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			canvas.grid.update()
+			canvas.pixel_grid.update()
+			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
@@ -388,7 +385,7 @@ func undo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 func redo(_frame_index := -1, _layer_index := -1, project : Project = current_project) -> void:
 	general_redo(project)
 	var action_name : String = project.undo_redo.get_current_action_name()
-	if action_name == "Draw" or action_name == "Rectangle Select" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
+	if action_name == "Draw" or action_name == "Draw Shape" or action_name == "Rectangle Select" or action_name == "Move Selection" or action_name == "Scale" or action_name == "Centralize" or action_name == "Merge Layer" or action_name == "Link Cel" or action_name == "Unlink Cel":
 		if _layer_index > -1 and _frame_index > -1:
 			canvas.update_texture(_layer_index, _frame_index, project)
 		else:
@@ -396,11 +393,12 @@ func redo(_frame_index := -1, _layer_index := -1, project : Project = current_pr
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
+		canvas.selection.update()
 		if action_name == "Scale":
 			canvas.camera_zoom()
-			Global.canvas.grid.update()
-			Global.canvas.pixel_grid.update()
-			Global.cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			canvas.grid.update()
+			canvas.pixel_grid.update()
+			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
 		if project.frames.size() == 1: # Stop animating
@@ -424,6 +422,7 @@ func title_changed(value : String) -> void:
 
 
 func project_changed(value : int) -> void:
+	canvas.selection.transform_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
 	current_project.change_project()
@@ -432,7 +431,8 @@ func project_changed(value : int) -> void:
 func dialog_open(open : bool) -> void:
 	if open:
 		can_draw = false
-		control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color(0.5, 0.5, 0.5), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		if dim_on_popup:
+			control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color(0.5, 0.5, 0.5), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	else:
 		can_draw = true
 		control.get_node("ModulateTween").interpolate_property(control, "modulate", control.modulate, Color.white, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
@@ -468,15 +468,37 @@ func change_button_texturerect(texture_button : TextureRect, new_file_name : Str
 
 
 func update_hint_tooltips() -> void:
-	var root = get_tree().get_root()
+	var root = control
+	var tool_buttons = root.find_node("ToolButtons")
 
-	var rect_select : BaseButton = find_node_by_name(root, "RectSelect")
+	var rect_select : BaseButton = tool_buttons.find_node("RectSelect")
 	rect_select.hint_tooltip = tr("""Rectangular Selection
 
 %s for left mouse button
 %s for right mouse button
 
 Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
+
+	var color_select : BaseButton = tool_buttons.find_node("ColorSelect")
+	color_select.hint_tooltip = tr("""Select By Color
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_color_select_tool")[0].as_text(), InputMap.get_action_list("right_color_select_tool")[0].as_text()]
+
+
+	var magic_wand : BaseButton = tool_buttons.find_node("MagicWand")
+	magic_wand.hint_tooltip = tr("""Magic Wand
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_magic_wand_tool")[0].as_text(), InputMap.get_action_list("right_magic_wand_tool")[0].as_text()]
+
+
+	var move_select : BaseButton = tool_buttons.find_node("Move")
+	move_select.hint_tooltip = tr("""Move
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_move_tool")[0].as_text(), InputMap.get_action_list("right_move_tool")[0].as_text()]
+
 
 	var zoom_tool : BaseButton = find_node_by_name(root, "Zoom")
 	zoom_tool.hint_tooltip = tr("""Zoom
@@ -525,6 +547,24 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 %s for left mouse button
 %s for right mouse button""") % [InputMap.get_action_list("left_lightdark_tool")[0].as_text(), InputMap.get_action_list("right_lightdark_tool")[0].as_text()]
 
+	var recttool : BaseButton = find_node_by_name(root, "RectangleTool")
+	recttool.hint_tooltip = tr("""Rectangle Tool
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_rectangletool_tool")[0].as_text(), InputMap.get_action_list("right_rectangletool_tool")[0].as_text(), "Shift", "Ctrl" ]
+
+	var ellipsetool : BaseButton = find_node_by_name(root, "EllipseTool")
+	ellipsetool.hint_tooltip = tr("""Ellipse Tool
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_ellipsetool_tool")[0].as_text(), InputMap.get_action_list("right_ellipsetool_tool")[0].as_text(), "Shift", "Ctrl" ]
+
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
 (%s)""") % InputMap.get_action_list("switch_colors")[0].as_text()
@@ -557,6 +597,7 @@ func is_cjk(locale : String) -> bool:
 
 
 func _exit_tree() -> void:
+	config_cache.set_value("window", "panel_layout", panel_layout)
 	config_cache.set_value("window", "screen", OS.current_screen)
 	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
 	config_cache.set_value("window", "position", OS.window_position)
@@ -588,7 +629,7 @@ func save_project_to_recent_list(path : String) -> void:
 
 
 func update_recent_projects_submenu() -> void:
-	for project in Global.recent_projects:
+	for project in recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
 
 func use_osx_shortcuts() -> void:

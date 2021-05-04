@@ -1,0 +1,145 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Palette/EditPaletteDialog.gd" type="Script" id=1]
+
+[node name="EditPaletteDialog" type="ConfirmationDialog"]
+margin_right = 409.0
+margin_bottom = 535.0
+window_title = "Edit Palette"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
+margin_right = 393.0
+margin_bottom = 188.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 50, 0 )
+text = "Name:"
+
+[node name="Name" type="LineEdit" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_right = 393.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+
+[node name="CommentLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 46.0
+margin_right = 67.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 50, 0 )
+text = "Comment:"
+
+[node name="Comment" type="TextEdit" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 28.0
+margin_right = 393.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+
+[node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 87.0
+margin_right = 67.0
+margin_bottom = 101.0
+text = "Width:"
+
+[node name="Width" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 82.0
+margin_right = 393.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 64.0
+value = 1.0
+align = 2
+
+[node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 115.0
+margin_right = 67.0
+margin_bottom = 129.0
+text = "Height:"
+
+[node name="Height" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 110.0
+margin_right = 393.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 64.0
+value = 1.0
+align = 2
+
+[node name="PathLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+margin_top = 156.0
+margin_right = 67.0
+margin_bottom = 170.0
+text = "Path:"
+
+[node name="Path" type="TextEdit" parent="VBoxContainer/PaletteMetadata"]
+margin_left = 71.0
+margin_top = 138.0
+margin_right = 393.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+readonly = true
+wrap_enabled = true
+
+[node name="SizeReducedWarning" type="Label" parent="VBoxContainer"]
+margin_top = 192.0
+margin_right = 393.0
+margin_bottom = 223.0
+custom_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+text = "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+align = 1
+valign = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]
+margin_top = 227.0
+margin_right = 393.0
+margin_bottom = 241.0
+custom_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+text = "Palette with the same name and path already exists!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
+[connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
+[connection signal="popup_hide" from="." to="." method="_on_EditPaletteDialog_popup_hide"]
+[connection signal="text_changed" from="VBoxContainer/PaletteMetadata/Name" to="." method="_on_Name_text_changed"]
+[connection signal="value_changed" from="VBoxContainer/PaletteMetadata/Width" to="." method="_on_size_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PaletteMetadata/Height" to="." method="_on_size_value_changed"]

@@ -1,0 +1,255 @@
+[gd_resource type="Resource" load_steps=43 format=2]
+
+[ext_resource path="res://src/Palette/Palette.gd" type="Script" id=1]
+[ext_resource path="res://src/Palette/PaletteColor.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+color = Color( 0.196078, 0.219608, 0.501961, 1 )
+index = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+color = Color( 0.690196, 0.717647, 1, 1 )
+index = 1
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+color = Color( 0.388235, 0.435294, 1, 1 )
+index = 2
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+color = Color( 0.301961, 0.317647, 0.509804, 1 )
+index = 3
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+color = Color( 0.313726, 0.352941, 0.8, 1 )
+index = 4
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+color = Color( 0.203922, 0.462745, 0.521569, 1 )
+index = 5
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+color = Color( 0.690196, 0.945098, 1, 1 )
+index = 6
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+color = Color( 0.388235, 0.886275, 1, 1 )
+index = 7
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+color = Color( 0.282353, 0.47451, 0.521569, 1 )
+index = 8
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+color = Color( 0.313726, 0.709804, 0.8, 1 )
+index = 9
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+color = Color( 0.25098, 0.521569, 0.172549, 1 )
+index = 10
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+color = Color( 0.678431, 1, 0.580392, 1 )
+index = 11
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+color = Color( 0.486275, 1, 0.329412, 1 )
+index = 12
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+color = Color( 0.133333, 0.541176, 0.0117647, 1 )
+index = 13
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+color = Color( 0.392157, 0.8, 0.262745, 1 )
+index = 14
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+color = Color( 0.521569, 0.498039, 0.109804, 1 )
+index = 15
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+color = Color( 1, 0.984314, 0.658824, 1 )
+index = 16
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+color = Color( 1, 0.960784, 0.211765, 1 )
+index = 17
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+color = Color( 0.541176, 0.52549, 0.231373, 1 )
+index = 18
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+color = Color( 0.8, 0.764706, 0.168627, 1 )
+index = 19
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+color = Color( 0.521569, 0.301961, 0.0823529, 1 )
+index = 20
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 2 )
+color = Color( 1, 0.803922, 0.611765, 1 )
+index = 21
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 2 )
+color = Color( 1, 0.580392, 0.160784, 1 )
+index = 22
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+color = Color( 0.541176, 0.372549, 0.203922, 1 )
+index = 23
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 2 )
+color = Color( 0.8, 0.458824, 0.12549, 1 )
+index = 24
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 2 )
+color = Color( 0.341176, 0.0627451, 0.0392157, 1 )
+index = 25
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 2 )
+color = Color( 0.921569, 0.176471, 0.109804, 1 )
+index = 26
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 2 )
+color = Color( 0.819608, 0.14902, 0.0901961, 1 )
+index = 27
+
+[sub_resource type="Resource" id=29]
+script = ExtResource( 2 )
+color = Color( 0.360784, 0.0705882, 0.0431373, 1 )
+index = 28
+
+[sub_resource type="Resource" id=30]
+script = ExtResource( 2 )
+color = Color( 0.619608, 0.113725, 0.0666667, 1 )
+index = 29
+
+[sub_resource type="Resource" id=31]
+script = ExtResource( 2 )
+color = Color( 0.321569, 0.0666667, 0.341176, 1 )
+index = 30
+
+[sub_resource type="Resource" id=32]
+script = ExtResource( 2 )
+color = Color( 0.870588, 0.192157, 0.921569, 1 )
+index = 31
+
+[sub_resource type="Resource" id=33]
+script = ExtResource( 2 )
+color = Color( 0.776471, 0.164706, 0.819608, 1 )
+index = 32
+
+[sub_resource type="Resource" id=34]
+script = ExtResource( 2 )
+color = Color( 0.341176, 0.0745098, 0.360784, 1 )
+index = 33
+
+[sub_resource type="Resource" id=35]
+script = ExtResource( 2 )
+color = Color( 0.588235, 0.12549, 0.619608, 1 )
+index = 34
+
+[sub_resource type="Resource" id=36]
+script = ExtResource( 2 )
+color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
+index = 35
+
+[sub_resource type="Resource" id=37]
+script = ExtResource( 2 )
+color = Color( 0.670588, 0.670588, 0.670588, 1 )
+index = 36
+
+[sub_resource type="Resource" id=38]
+script = ExtResource( 2 )
+color = Color( 0.431373, 0.431373, 0.431373, 1 )
+index = 37
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 2 )
+color = Color( 0.176471, 0.176471, 0.176471, 1 )
+index = 38
+
+[sub_resource type="Resource" id=40]
+script = ExtResource( 2 )
+color = Color( 0.380392, 0.380392, 0.380392, 1 )
+index = 39
+
+[resource]
+resource_name = "Monochromatic"
+script = ExtResource( 1 )
+name = "Monochromatic"
+comment = "Author: Erevoid"
+width = 8
+height = 8
+colors = {
+0: SubResource( 1 ),
+1: SubResource( 2 ),
+2: SubResource( 3 ),
+3: SubResource( 4 ),
+4: SubResource( 5 ),
+5: SubResource( 6 ),
+6: SubResource( 7 ),
+7: SubResource( 8 ),
+8: SubResource( 9 ),
+9: SubResource( 10 ),
+10: SubResource( 11 ),
+11: SubResource( 12 ),
+12: SubResource( 13 ),
+13: SubResource( 14 ),
+14: SubResource( 15 ),
+15: SubResource( 16 ),
+16: SubResource( 17 ),
+17: SubResource( 18 ),
+18: SubResource( 19 ),
+19: SubResource( 20 ),
+20: SubResource( 21 ),
+21: SubResource( 22 ),
+22: SubResource( 23 ),
+23: SubResource( 24 ),
+24: SubResource( 25 ),
+25: SubResource( 26 ),
+26: SubResource( 27 ),
+27: SubResource( 28 ),
+28: SubResource( 29 ),
+29: SubResource( 30 ),
+30: SubResource( 31 ),
+31: SubResource( 32 ),
+32: SubResource( 33 ),
+33: SubResource( 34 ),
+34: SubResource( 35 ),
+35: SubResource( 36 ),
+36: SubResource( 37 ),
+37: SubResource( 38 ),
+38: SubResource( 39 ),
+39: SubResource( 40 )
+}
+colors_max = 64

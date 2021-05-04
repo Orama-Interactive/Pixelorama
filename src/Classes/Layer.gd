@@ -17,3 +17,7 @@ func _init(_name := tr("Layer") + " 0", _visible := true, _locked := false, _fra
 	frame_container = _frame_container
 	new_cels_linked = _new_cels_linked
 	linked_cels = _linked_cels
+
+
+func can_layer_get_drawn() -> bool:
+	return visible && !locked

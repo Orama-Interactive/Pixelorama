@@ -46,6 +46,7 @@ func update_config() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 	_changed = false
 	_drawer.color_op.changed = false

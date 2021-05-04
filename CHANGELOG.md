@@ -4,11 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-
-## Unreleased
+## [v0.9] - Unreleased
 This update has been brought to you by the contributions of:
 
-Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable)
+DragonOfWar, novhack
+
+### Added
+- New rectangle and ellipse shape tools. ([#456](https://github.com/Orama-Interactive/Pixelorama/pull/456))
+
+### Changed
+- The palette system has been completely replaced with a new one. See [#447](https://github.com/Orama-Interactive/Pixelorama/pull/447) for more details.
+<br><br>
+
+## [v0.8.3] - 2021-05-04
+This update has been brought to you by the contributions of:
+
+Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespleasure, ballerburg9005, kevinms
 
 ### Added
 - A new pan tool, used to move around the canvas. ([#399](https://github.com/Orama-Interactive/Pixelorama/pull/399))
@@ -19,13 +30,20 @@ Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable)
 - Added a new pixel grid, which is a grid of size 1px and it appears after a certain zoom level. ([#427](https://github.com/Orama-Interactive/Pixelorama/pull/427))
 - Added offset options to the grid. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - The isometric grid has been refactored to work better and to offer more changeable options, such as the width and height of the cell bounds. ([#430](https://github.com/Orama-Interactive/Pixelorama/pull/430))
+- Pixelorama macOS binaries are now universal, which means that they should work with both x86_64 and ARM64 Mac devices. - Thanks to Godot 3.3
 - Added portrait and landscape buttons in the new image dialog.
+- Full support for auto Tallscreen/Widescreen has been implemented. ([#458](https://github.com/Orama-Interactive/Pixelorama/pull/458))
 - Added a new Centralize Image option in the Image menu, which places the visible pixels of the image in the center of the canvas. ([#441](https://github.com/Orama-Interactive/Pixelorama/pull/441))
+- Implemented the options to import a spritesheet as a new layer and to import an image and have it replace an already existing frame. ([#453](https://github.com/Orama-Interactive/Pixelorama/pull/453))
+- More templates have been added when creating a new sprite. ([#450](https://github.com/Orama-Interactive/Pixelorama/pull/450))
+- Added a keyboard shortcut for clear selection, `Control-D`. ([#457](https://github.com/Orama-Interactive/Pixelorama/pull/457))
+- Added an option in the Preferences for interface dimming on dialog popup. If this is enabled, the application background gets darker when a dialog window pops up.
 
 ### Changed
 - Undo and redo now work when their respective keyboard shortcuts are being held. ([#405](https://github.com/Orama-Interactive/Pixelorama/pull/405))
 - CPU usage has been significantly been lowered when Pixelorama is idle. ([#394](https://github.com/Orama-Interactive/Pixelorama/pull/394))
 - The FPS of the project animation is now stored in the pxo file. This effectively means that every project can have its own FPS.
+- You can no longer draw on hidden layers.
 - You can now toggle if you want the grid to be drawn over the tile mode or just the original part of the canvas. ([#434](https://github.com/Orama-Interactive/Pixelorama/pull/434))
 - Frame tags can now be set for frames larger than 100. ([#408](https://github.com/Orama-Interactive/Pixelorama/pull/408))
 - The "lock aspect ratio" button in the create new image dialog has been changed to a texture button.
@@ -36,13 +54,19 @@ Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable)
 
 ### Fixed
 - Fixed issue with pixels being selected outside of the canvas boundaries, when the selection rectangle was outside the canvas and its size got reduced.
+- Major performance increase when drawing large images.
 - Fixed layer button textures not being updated properly when changing theme. ([#404](https://github.com/Orama-Interactive/Pixelorama/issues/404))
 - Keyboard shortcut conflicts between tool shortcuts and other shortcuts that use the "Control" key, like menu shortcuts, have been resolved. ([#407](https://github.com/Orama-Interactive/Pixelorama/pull/407))
 - The opacity of a cel and the tile mode opacity are now multiplicative. ([#414](https://github.com/Orama-Interactive/Pixelorama/pull/414))
 - Fixed an issue where adding a new layer did not select it, rather it was selecting the above layer of the previously selected layer. ([#424](https://github.com/Orama-Interactive/Pixelorama/pull/424))
+- Fixed issue that occurred when the application window regained focus and the tool was immediatly activated. ([35f97eb](https://github.com/Orama-Interactive/Pixelorama/commit/35f97ebe6f90bd2a5994b294231738ef4a6b998c))
 - Fixed cel opacity not always being updated on the UI. ([#420](https://github.com/Orama-Interactive/Pixelorama/pull/420))
 - Loading empty backed up projects no longer result in a crash. ([#445](https://github.com/Orama-Interactive/Pixelorama/issues/445))
 - Fixed potential index out of bounds error when loading backup files. ([#446](https://github.com/Orama-Interactive/Pixelorama/pull/446))
+- Mirroring view should now work on all tools.
+- Fixed hue and saturation getting reset when draging value slider to zero. ([#473](https://github.com/Orama-Interactive/Pixelorama/pull/473))
+- Image effects will not longer get applied to locked and/or hidden layers.
+- Fixed memory leaks when opening and closing Pixelorama. ([#387](https://github.com/Orama-Interactive/Pixelorama/issues/387))
 <br><br>
 
 ## [v0.8.2] - 2020-12-12
