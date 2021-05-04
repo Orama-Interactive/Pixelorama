@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-05-04 10:36\n"
+"PO-Revision-Date: 2021-05-04 12:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "Dimensiunea cadrului"
 
 msgid "Size:"
-msgstr ""
+msgstr "Dimensiune:"
 
 msgid "Width:"
 msgstr "Lățime:"
