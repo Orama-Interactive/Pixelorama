@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-05-04 10:36\n"
+"PO-Revision-Date: 2021-05-04 13:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "Frame-Größe"
 
 msgid "Size:"
-msgstr ""
+msgstr "Größe:"
 
 msgid "Width:"
 msgstr "Breite:"
@@ -130,10 +130,10 @@ msgid "Scale Image"
 msgstr "Bild skalieren"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixel"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Prozent"
 
 msgid "Crop Image"
 msgstr "Bild zuschneiden"
@@ -1670,38 +1670,38 @@ msgid "Tiled In Y Axis"
 msgstr "In Y-Achse gekachelt"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Neue Palette erstellen"
 
 msgid "Create New Palette"
-msgstr ""
+msgstr "Neue Palette erstellen"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Kommentar:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Leer"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Aus aktueller Palette"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Aus aktuellem Sprite"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Aus aktueller Auswahl"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Neue Farbe hinzufügen"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Eine ausgewählte Farbe entfernen"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Eine Palette mit dem gleichen Namen und Pfad existiert bereits!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Palettenname ist erforderlich!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Die Verkleinerung der Farbpalette wird die Position der Farben zurücksetzen. Farben, die nicht in die neue Farbpalette passen, gehen verloren!"
 
