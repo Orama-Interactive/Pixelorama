@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-05-04 10:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -39,7 +39,7 @@ msgstr "Tamanho da Tela"
 msgid "Frame Size"
 msgstr "Tamanho do Quadro"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
