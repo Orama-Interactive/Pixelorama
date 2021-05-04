@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-05-04 10:36\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -39,7 +39,7 @@ msgstr "Tuval Boyutu"
 msgid "Frame Size"
 msgstr "Çerçeve Boyutu"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
