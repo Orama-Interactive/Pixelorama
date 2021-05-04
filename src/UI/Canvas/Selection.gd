@@ -341,10 +341,10 @@ func transform_content_confirm() -> void:
 		return
 	var project : Project = Global.current_project
 	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
-	var selected_bitmap_copy = Global.current_project.selection_bitmap.duplicate()
-	Global.current_project.move_bitmap_values(selected_bitmap_copy)
-	Global.current_project.selection_bitmap = selected_bitmap_copy
+	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
+	var selected_bitmap_copy = project.selection_bitmap.duplicate()
+	project.move_bitmap_values(selected_bitmap_copy)
+	project.selection_bitmap = selected_bitmap_copy
 
 	original_preview_image = Image.new()
 	preview_image = Image.new()
@@ -434,8 +434,8 @@ func copy() -> void:
 	var to_copy := Image.new()
 	if is_moving_content:
 		to_copy.copy_from(preview_image)
-		var selected_bitmap_copy := Global.current_project.selection_bitmap.duplicate()
-		Global.current_project.move_bitmap_values(selected_bitmap_copy, false)
+		var selected_bitmap_copy := project.selection_bitmap.duplicate()
+		project.move_bitmap_values(selected_bitmap_copy, false)
 		clipboard.selection_bitmap = selected_bitmap_copy
 	else:
 		to_copy = image.get_rect(big_bounding_rectangle)
@@ -469,9 +469,9 @@ func paste() -> void:
 	undo_data = _get_undo_data(true)
 	var project := Global.current_project
 
-	original_bitmap = Global.current_project.selection_bitmap.duplicate()
+	original_bitmap = project.selection_bitmap.duplicate()
 	original_big_bounding_rectangle = big_bounding_rectangle
-	original_offset = Global.current_project.selection_offset
+	original_offset = project.selection_offset
 
 	project.selection_bitmap = clipboard.selection_bitmap.duplicate()
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
@@ -527,7 +527,7 @@ func invert() -> void:
 	selection_bitmap_copy = project.resize_bitmap(selection_bitmap_copy, project.size)
 	project.invert_bitmap(selection_bitmap_copy)
 	project.selection_bitmap = selection_bitmap_copy
-	Global.current_project.selection_bitmap_changed()
+	project.selection_bitmap_changed()
 	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 	project.selection_offset = Vector2.ZERO
 	commit_undo("Rectangle Select", _undo_data)
