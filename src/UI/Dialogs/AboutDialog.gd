@@ -159,6 +159,8 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  RED (REDOOO) - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Aidan Olsen (PossiblyAShrub) - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Jean-Loup Macarit (leyk973) - " + tr("French"))
+	translators.create_item(translators_root).set_text(0, "  Lulullia (lulullia902) - " + tr("French"))
+	translators.create_item(translators_root).set_text(0, "  Nicolas.C (nico57c) - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Schweini07 - " + tr("German"))
 	translators.create_item(translators_root).set_text(0, "  Martin Zabinski (Martin1991zab) - " + tr("German"))
 	translators.create_item(translators_root).set_text(0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish"))
