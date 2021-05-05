@@ -67,6 +67,7 @@ Laurenz Reinthaler (Schweini07), kleonc, Fayez Akhtar (Variable), THWLF, Gamespl
 - Fixed hue and saturation getting reset when draging value slider to zero. ([#473](https://github.com/Orama-Interactive/Pixelorama/pull/473))
 - Image effects will not longer get applied to locked and/or hidden layers.
 - Fixed memory leaks when opening and closing Pixelorama. ([#387](https://github.com/Orama-Interactive/Pixelorama/issues/387))
+- The color picker now displays "HSV" and "Raw" next to the respective CheckButtons - thanks to Godot 3.3.
 <br><br>
 
 ## [v0.8.2] - 2020-12-12
