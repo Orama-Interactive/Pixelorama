@@ -26,6 +26,8 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	.draw_move(position)
 	if !_move:
 		if _displace_origin:
@@ -36,6 +38,8 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	.draw_end(position)
 	_rect = Rect2(0, 0, 0, 0)
 	_square = false

@@ -37,9 +37,11 @@ class Gizmo:
 
 enum SelectionOperation {ADD, SUBTRACT, INTERSECT}
 
+const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
 
 var clipboard := Clipboard.new()
 var is_moving_content := false
+var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 
@@ -82,6 +84,9 @@ func _input(event : InputEvent) -> void:
 				transform_content_confirm()
 			elif Input.is_action_just_pressed("escape"):
 				transform_content_cancel()
+
+		move_with_arrow_keys(event)
+
 	elif event is InputEventMouse:
 		var gizmo : Gizmo
 		if big_bounding_rectangle.size != Vector2.ZERO:
@@ -133,6 +138,60 @@ func _input(event : InputEvent) -> void:
 				gizmo_resize()
 			else:
 				gizmo_rotate()
+
+
+func move_with_arrow_keys(event : InputEvent) -> void:
+	var selection_tool_selected := false
+	for slot in Tools._slots.values():
+		if slot.tool_node is SelectionTool:
+			selection_tool_selected = true
+			break
+	if !selection_tool_selected:
+		return
+
+	if Global.current_project.has_selection:
+		if is_action_direction_pressed(event) and !arrow_key_move:
+			arrow_key_move = true
+			if Input.is_key_pressed(KEY_ALT):
+				transform_content_confirm()
+				move_borders_start()
+				is_moving_content = false
+			else:
+				transform_content_start()
+				is_moving_content = true
+		if is_action_direction_released(event) and arrow_key_move:
+			arrow_key_move = false
+			move_borders_end(!is_moving_content)
+
+		if is_action_direction(event) and arrow_key_move:
+			var step := Vector2.ONE
+			if Input.is_key_pressed(KEY_CONTROL):
+				step = Vector2(Global.grid_width, Global.grid_height)
+			move_content(Vector2(int(event.is_action("ui_right")) - int(event.is_action("ui_left")), int(event.is_action("ui_down")) - int(event.is_action("ui_up"))) * step)
+
+
+# Check if an event is a ui_up/down/left/right event-press
+func is_action_direction_pressed(event : InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action_pressed(action):
+			return true
+	return false
+
+
+# Check if an event is a ui_up/down/left/right event release
+func is_action_direction(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action(action):
+			return true
+	return false
+
+
+# Check if an event is a ui_up/down/left/right event release
+func is_action_direction_released(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action_released(action):
+			return true
+	return false
 
 
 func _draw() -> void:
@@ -302,6 +361,8 @@ func move_borders_start() -> void:
 
 
 func move_borders(move : Vector2) -> void:
+	if move == Vector2.ZERO:
+		return
 	marching_ants_outline.offset += move
 	self.big_bounding_rectangle.position += move
 	update()

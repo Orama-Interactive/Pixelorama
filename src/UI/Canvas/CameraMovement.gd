@@ -50,6 +50,9 @@ const key_move_action_names := ["ui_up", "ui_down", "ui_left", "ui_right"]
 
 # Check if an event is a ui_up/down/left/right event-press :)
 func is_action_direction_pressed(event : InputEvent, allow_echo: bool = true) -> bool:
+	for slot in Tools._slots.values():
+		if slot.tool_node is SelectionTool:
+			return false
 	for action in key_move_action_names:
 		if event.is_action_pressed(action, allow_echo):
 			return true
@@ -58,6 +61,9 @@ func is_action_direction_pressed(event : InputEvent, allow_echo: bool = true) ->
 
 # Check if an event is a ui_up/down/left/right event release nya
 func is_action_direction_released(event: InputEvent) -> bool:
+	for slot in Tools._slots.values():
+		if slot.tool_node is SelectionTool:
+			return false
 	for action in key_move_action_names:
 		if event.is_action_released(action):
 			return true

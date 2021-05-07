@@ -42,6 +42,8 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	var project : Project = Global.current_project
 	undo_data = selection_node._get_undo_data(false)
 	_intersect = Tools.shift && Tools.control
@@ -77,6 +79,8 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	if _move:
 		if Tools.shift: # Snap to axis
 			var angle := position.angle_to_point(_start_pos)
@@ -97,6 +101,8 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(_position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	if _move:
 		selection_node.move_borders_end(!_move_content)
 	else:
