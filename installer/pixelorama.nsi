@@ -1,17 +1,19 @@
 ; Pixelorama Installer NSIS Script
 ; Copyright Xenofon Konitsas (huskee) 2020
+; Licensed under the MIT License
 
 
 ; Helper variables so that we don't change 20 instances of the version for every update
 
   !define APPNAME "Pixelorama"
-  !define APPVERSION "0.8-dev"
+  !define APPVERSION "0.9"
   !define COMPANYNAME "Orama Interactive"
 
 
 ; Include the Modern UI library
   
   !include "MUI2.nsh"
+  !include "FileAssociation.nsh"
 
 
 ; Basic Installer Info 
@@ -100,22 +102,21 @@
     ; Copy all files to install directory
       File "pixelorama.exe"
       File "pixelorama.pck"
-      File "libgifexporter.windows.64.dll"
 
-      SetOutPath "$INSTDIR\pixelorama"
-      File /nonfatal /a /r "pixelorama\*"
+      SetOutPath "$INSTDIR\pixelorama_data"
+      File /nonfatal /a /r "pixelorama_data\*"
     
     ; Store installation folder in the registry
       WriteRegStr HKCU "Software\${COMPANYNAME}\${APPNAME}" "InstallDir" $INSTDIR
 
     ; Create uninstaller
-      WriteUninstaller "$INSTDIR\Uninstall.exe"
+      WriteUninstaller "$INSTDIR\uninstall.exe"
 
     ; Create Add/Remove Programs entry
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
       "DisplayName" "${APPNAME}" 
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
-      "UninstallString" "$INSTDIR\Uninstall.exe"
+      "UninstallString" "$INSTDIR\uninstall.exe"
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
       "InstallLocation" "$INSTDIR"
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
@@ -128,6 +129,9 @@
       "NoModify" 1 
       WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
       "NoRepair" 1
+    
+    ; Associate .pxo files with Pixelorama
+      ${registerExtension} "$INSTDIR\pixelorama.exe" ".pxo" "Pixelorama project"
 
   SectionEnd
 
@@ -137,8 +141,8 @@
     ; Create folder in Start Menu\Programs and create shortcuts for app and uninstaller
     CreateDirectory "$SMPROGRAMS\${COMPANYNAME}"
   
-    CreateShortCut "$SMPROGRAMS\${COMPANYNAME}\Pixelorama ${APPVERSION}.lnk" "$INSTDIR\Pixelorama.exe"
-    CreateShortCut "$SMPROGRAMS\${COMPANYNAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+    CreateShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME} ${APPVERSION}.lnk" "$INSTDIR\Pixelorama.exe"
+    CreateShortCut "$SMPROGRAMS\${COMPANYNAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 
   SectionEnd
 
@@ -166,11 +170,10 @@
     SectionIn RO
 
     ; Delete all files and folders created by the installer
-    Delete "$INSTDIR\Uninstall.exe"
+    Delete "$INSTDIR\uninstall.exe"
     Delete "$INSTDIR\Pixelorama.exe"
     Delete "$INSTDIR\Pixelorama.pck"
-    Delete "$INSTDIR\libgifexporter.windows.64.dll"
-    RMDir /r "$INSTDIR\pixelorama"
+    RMDir /r "$INSTDIR\pixelorama_data"
 
     ; Delete shortcuts
     RMDir /r "$SMPROGRAMS\${COMPANYNAME}"
@@ -186,13 +189,16 @@
     ; Delete the Add/Remove Programs entry
     DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}"
 
+    ; Delete the .pxo file association
+    ${unregisterExtension} ".pxo" "Pixelorama project"
+
   SectionEnd
 
 
   Section "un.$(un.SecConfig)" un.SecConfig ; Configuration removal section
 
     ; Delete the application's settings file 
-    Delete "$APPDATA\Godot\app_userdata\Pixelorama\cache.ini"
+    Delete "$APPDATA\Godot\app_userdata\${APPNAME}\cache.ini"
 
   SectionEnd
 
