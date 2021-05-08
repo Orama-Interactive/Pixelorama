@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-05-04 10:36\n"
+"PO-Revision-Date: 2021-05-08 19:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "Rozmiar klatki"
 
 msgid "Size:"
-msgstr ""
+msgstr "Rozmiar:"
 
 msgid "Width:"
 msgstr "Szerokość:"
