@@ -110,7 +110,10 @@ func _input(event : InputEvent) -> void:
 					temp_bitmap = Global.current_project.selection_bitmap
 					if !is_moving_content:
 						temp_rect = big_bounding_rectangle
-						transform_content_start()
+						if Input.is_action_pressed("alt"):
+							undo_data = _get_undo_data(false)
+						else:
+							transform_content_start()
 						Global.current_project.selection_offset = Vector2.ZERO
 						if gizmo.type == Gizmo.Type.ROTATE:
 							var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
@@ -136,6 +139,8 @@ func _input(event : InputEvent) -> void:
 			elif dragged_gizmo:
 				Global.has_focus = true
 				dragged_gizmo = null
+				if !is_moving_content:
+					commit_undo("Rectangle Select", undo_data)
 
 		if dragged_gizmo:
 			if dragged_gizmo.type == Gizmo.Type.SCALE:
@@ -314,13 +319,14 @@ func gizmo_resize() -> void:
 	self.big_bounding_rectangle = big_bounding_rectangle # Call the setter method
 
 	var size = big_bounding_rectangle.size.abs()
-	preview_image.copy_from(original_preview_image)
-	preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-	if temp_rect.size.x < 0:
-		preview_image.flip_x()
-	if temp_rect.size.y < 0:
-		preview_image.flip_y()
-	preview_image_texture.create_from_image(preview_image, 0)
+	if is_moving_content:
+		preview_image.copy_from(original_preview_image)
+		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+		if temp_rect.size.x < 0:
+			preview_image.flip_x()
+		if temp_rect.size.y < 0:
+			preview_image.flip_y()
+		preview_image_texture.create_from_image(preview_image, 0)
 	Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(temp_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
 	Global.current_project.selection_bitmap_changed()
 	update()
@@ -475,6 +481,9 @@ func transform_content_cancel() -> void:
 
 
 func commit_undo(action : String, _undo_data : Dictionary) -> void:
+	if !_undo_data:
+		print("No undo data found!")
+		return
 	var redo_data = _get_undo_data("image_data" in _undo_data)
 	var project := Global.current_project
 
