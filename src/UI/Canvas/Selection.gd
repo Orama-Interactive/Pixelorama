@@ -47,6 +47,8 @@ var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 
 var temp_rect := Rect2()
 var temp_bitmap := BitMap.new()
+var rect_aspect_ratio := 0.0
+var temp_rect_size := Vector2.ZERO
 
 var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
@@ -128,6 +130,8 @@ func _input(event : InputEvent) -> void:
 							var pos = temp_rect.position.y
 							temp_rect.position.y = temp_rect.end.y
 							temp_rect.end.y = pos
+					rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
+					temp_rect_size = temp_rect.size
 
 			elif dragged_gizmo:
 				Global.has_focus = true
@@ -256,15 +260,49 @@ func update_on_zoom(zoom : float) -> void:
 
 
 func gizmo_resize() -> void:
-	var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
 	var dir := dragged_gizmo.direction
-	if diff != Vector2.ZERO:
-		mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
-	var left := 0.0 if dir.x >= 0 else diff.x
-	var top := 0.0 if dir.y >= 0 else diff.y
-	var right := diff.x if dir.x >= 0 else 0.0
-	var bottom := diff.y if dir.y >= 0 else 0.0
-	temp_rect = temp_rect.grow_individual(left, top, right, bottom)
+	if dir.x > 0:
+		temp_rect.size.x = Global.canvas.current_pixel.x - temp_rect.position.x
+	elif dir.x < 0:
+		var end_x = temp_rect.end.x
+		temp_rect.position.x = Global.canvas.current_pixel.x
+		temp_rect.end.x = end_x
+	else:
+		temp_rect.size.x = temp_rect_size.x
+
+	if dir.y > 0:
+		temp_rect.size.y = Global.canvas.current_pixel.y - temp_rect.position.y
+	elif dir.y < 0:
+		var end_y = temp_rect.end.y
+		temp_rect.position.y = Global.canvas.current_pixel.y
+		temp_rect.end.y = end_y
+	else:
+		temp_rect.size.y = temp_rect_size.y
+
+	if Input.is_action_pressed("shift"): # Maintain aspect ratio
+		var end_y = temp_rect.end.y
+		if dir == Vector2(1, -1) or dir.x == 0: # Top right corner, center top and center bottom
+			var size := temp_rect.size.y
+			if sign(size) != sign(temp_rect.size.x): # Needed in order for resizing to work properly in negative sizes
+				if temp_rect.size.x > 0:
+					size = abs(size)
+				else:
+					size = -abs(size)
+			temp_rect.size.x = size / rect_aspect_ratio
+
+		else: # The rest of the corners
+			var size := temp_rect.size.x
+			if sign(size) != sign(temp_rect.size.y): # Needed in order for resizing to work properly in negative sizes
+				if temp_rect.size.y > 0:
+					size = abs(size)
+				else:
+					size = -abs(size)
+			temp_rect.size.y = size * rect_aspect_ratio
+
+		if dir == Vector2(-1, -1): # Top left corner
+			# Inspired by the solution answered in https://stackoverflow.com/questions/50230967/drag-resizing-rectangle-with-fixed-aspect-ratio-northwest-corner
+			temp_rect.position.y = end_y - temp_rect.size.y
+
 	big_bounding_rectangle = temp_rect.abs()
 	big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
 	big_bounding_rectangle.size = big_bounding_rectangle.size.floor()
