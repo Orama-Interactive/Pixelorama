@@ -96,10 +96,11 @@ func _input(event : InputEvent) -> void:
 				if g.rect.has_point(Global.canvas.current_pixel):
 					gizmo = Gizmo.new(g.type, g.direction)
 					break
-		if gizmo:
-			Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
-		elif !dragged_gizmo:
-			Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
+		if !dragged_gizmo:
+			if gizmo:
+				Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
+			else:
+				Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if event.pressed:
