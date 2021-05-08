@@ -21,11 +21,7 @@ onready var hspinbox : SpinBox = find_node("HSpinBox")
 
 
 func _ready() -> void:
-	var select_rect : Rect2 = selection_node.big_bounding_rectangle
-	xspinbox.value = select_rect.position.x
-	yspinbox.value = select_rect.position.y
-	wspinbox.value = select_rect.size.x
-	hspinbox.value = select_rect.size.y
+	set_spinbox_values()
 
 
 func _input(event : InputEvent) -> void:
@@ -39,6 +35,19 @@ func _input(event : InputEvent) -> void:
 			selection_node.marching_ants_outline.offset += selection_node.big_bounding_rectangle.position - prev_pos
 		elif event.is_action_released("ctrl"):
 			_snap_to_grid = false
+
+
+func set_spinbox_values() -> void:
+	var select_rect : Rect2 = selection_node.big_bounding_rectangle
+	xspinbox.editable = !select_rect.has_no_area()
+	yspinbox.editable = !select_rect.has_no_area()
+	wspinbox.editable = !select_rect.has_no_area()
+	hspinbox.editable = !select_rect.has_no_area()
+
+	xspinbox.value = select_rect.position.x
+	yspinbox.value = select_rect.position.y
+	wspinbox.value = select_rect.size.x
+	hspinbox.value = select_rect.size.y
 
 
 func draw_start(position : Vector2) -> void:
