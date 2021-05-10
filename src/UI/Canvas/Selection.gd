@@ -442,18 +442,19 @@ func transform_content_confirm() -> void:
 	if !is_moving_content:
 		return
 	var project : Project = Global.current_project
-	var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
-	var selected_bitmap_copy = project.selection_bitmap.duplicate()
-	project.move_bitmap_values(selected_bitmap_copy)
-	project.selection_bitmap = selected_bitmap_copy
+	if project.current_frame < project.frames.size() and project.current_layer < project.layers.size():
+		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+		cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
+		var selected_bitmap_copy = project.selection_bitmap.duplicate()
+		project.move_bitmap_values(selected_bitmap_copy)
+		project.selection_bitmap = selected_bitmap_copy
+		commit_undo("Move Selection", undo_data)
 
 	original_preview_image = Image.new()
 	preview_image = Image.new()
 	original_bitmap = BitMap.new()
 	is_moving_content = false
 	is_pasting = false
-	commit_undo("Move Selection", undo_data)
 	update()
 
 
