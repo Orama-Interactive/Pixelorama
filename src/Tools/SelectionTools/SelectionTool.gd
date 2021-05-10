@@ -21,11 +21,7 @@ onready var hspinbox : SpinBox = find_node("HSpinBox")
 
 
 func _ready() -> void:
-	var select_rect : Rect2 = selection_node.big_bounding_rectangle
-	xspinbox.value = select_rect.position.x
-	yspinbox.value = select_rect.position.y
-	wspinbox.value = select_rect.size.x
-	hspinbox.value = select_rect.size.y
+	set_spinbox_values()
 
 
 func _input(event : InputEvent) -> void:
@@ -41,7 +37,22 @@ func _input(event : InputEvent) -> void:
 			_snap_to_grid = false
 
 
+func set_spinbox_values() -> void:
+	var select_rect : Rect2 = selection_node.big_bounding_rectangle
+	xspinbox.editable = !select_rect.has_no_area()
+	yspinbox.editable = !select_rect.has_no_area()
+	wspinbox.editable = !select_rect.has_no_area()
+	hspinbox.editable = !select_rect.has_no_area()
+
+	xspinbox.value = select_rect.position.x
+	yspinbox.value = select_rect.position.y
+	wspinbox.value = select_rect.size.x
+	hspinbox.value = select_rect.size.y
+
+
 func draw_start(position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	var project : Project = Global.current_project
 	undo_data = selection_node._get_undo_data(false)
 	_intersect = Tools.shift && Tools.control
@@ -77,6 +88,8 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	if _move:
 		if Tools.shift: # Snap to axis
 			var angle := position.angle_to_point(_start_pos)
@@ -97,6 +110,8 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(_position : Vector2) -> void:
+	if selection_node.arrow_key_move:
+		return
 	if _move:
 		selection_node.move_borders_end(!_move_content)
 	else:

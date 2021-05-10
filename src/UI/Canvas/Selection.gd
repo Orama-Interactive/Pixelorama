@@ -37,14 +37,18 @@ class Gizmo:
 
 enum SelectionOperation {ADD, SUBTRACT, INTERSECT}
 
+const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
 
 var clipboard := Clipboard.new()
 var is_moving_content := false
+var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 
 var temp_rect := Rect2()
 var temp_bitmap := BitMap.new()
+var rect_aspect_ratio := 0.0
+var temp_rect_size := Vector2.ZERO
 
 var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
@@ -82,6 +86,9 @@ func _input(event : InputEvent) -> void:
 				transform_content_confirm()
 			elif Input.is_action_just_pressed("escape"):
 				transform_content_cancel()
+
+		move_with_arrow_keys(event)
+
 	elif event is InputEventMouse:
 		var gizmo : Gizmo
 		if big_bounding_rectangle.size != Vector2.ZERO:
@@ -89,10 +96,11 @@ func _input(event : InputEvent) -> void:
 				if g.rect.has_point(Global.canvas.current_pixel):
 					gizmo = Gizmo.new(g.type, g.direction)
 					break
-		if gizmo:
-			Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
-		elif !dragged_gizmo:
-			Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
+		if !dragged_gizmo:
+			if gizmo:
+				Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
+			else:
+				Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if event.pressed:
@@ -103,7 +111,10 @@ func _input(event : InputEvent) -> void:
 					temp_bitmap = Global.current_project.selection_bitmap
 					if !is_moving_content:
 						temp_rect = big_bounding_rectangle
-						transform_content_start()
+						if Input.is_action_pressed("alt"):
+							undo_data = _get_undo_data(false)
+						else:
+							transform_content_start()
 						Global.current_project.selection_offset = Vector2.ZERO
 						if gizmo.type == Gizmo.Type.ROTATE:
 							var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
@@ -123,16 +134,74 @@ func _input(event : InputEvent) -> void:
 							var pos = temp_rect.position.y
 							temp_rect.position.y = temp_rect.end.y
 							temp_rect.end.y = pos
+					rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
+					temp_rect_size = temp_rect.size
 
 			elif dragged_gizmo:
 				Global.has_focus = true
 				dragged_gizmo = null
+				if !is_moving_content:
+					commit_undo("Rectangle Select", undo_data)
 
 		if dragged_gizmo:
 			if dragged_gizmo.type == Gizmo.Type.SCALE:
 				gizmo_resize()
 			else:
 				gizmo_rotate()
+
+
+func move_with_arrow_keys(event : InputEvent) -> void:
+	var selection_tool_selected := false
+	for slot in Tools._slots.values():
+		if slot.tool_node is SelectionTool:
+			selection_tool_selected = true
+			break
+	if !selection_tool_selected:
+		return
+
+	if Global.current_project.has_selection:
+		if is_action_direction_pressed(event) and !arrow_key_move:
+			arrow_key_move = true
+			if Input.is_key_pressed(KEY_ALT):
+				transform_content_confirm()
+				move_borders_start()
+				is_moving_content = false
+			else:
+				transform_content_start()
+				is_moving_content = true
+		if is_action_direction_released(event) and arrow_key_move:
+			arrow_key_move = false
+			move_borders_end(!is_moving_content)
+
+		if is_action_direction(event) and arrow_key_move:
+			var step := Vector2.ONE
+			if Input.is_key_pressed(KEY_CONTROL):
+				step = Vector2(Global.grid_width, Global.grid_height)
+			move_content(Vector2(int(event.is_action("ui_right")) - int(event.is_action("ui_left")), int(event.is_action("ui_down")) - int(event.is_action("ui_up"))) * step)
+
+
+# Check if an event is a ui_up/down/left/right event-press
+func is_action_direction_pressed(event : InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action_pressed(action):
+			return true
+	return false
+
+
+# Check if an event is a ui_up/down/left/right event release
+func is_action_direction(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action(action):
+			return true
+	return false
+
+
+# Check if an event is a ui_up/down/left/right event release
+func is_action_direction_released(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action_released(action):
+			return true
+	return false
 
 
 func _draw() -> void:
@@ -160,10 +229,7 @@ func _big_bounding_rectangle_changed(value : Rect2) -> void:
 	big_bounding_rectangle = value
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
-			slot.tool_node.xspinbox.value = value.position.x
-			slot.tool_node.yspinbox.value = value.position.y
-			slot.tool_node.wspinbox.value = value.size.x
-			slot.tool_node.hspinbox.value = value.size.y
+			slot.tool_node.set_spinbox_values()
 	update_gizmos()
 
 
@@ -197,15 +263,49 @@ func update_on_zoom(zoom : float) -> void:
 
 
 func gizmo_resize() -> void:
-	var diff : Vector2 = (Global.canvas.current_pixel - mouse_pos_on_gizmo_drag) * dragged_gizmo.direction
 	var dir := dragged_gizmo.direction
-	if diff != Vector2.ZERO:
-		mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
-	var left := 0.0 if dir.x >= 0 else diff.x
-	var top := 0.0 if dir.y >= 0 else diff.y
-	var right := diff.x if dir.x >= 0 else 0.0
-	var bottom := diff.y if dir.y >= 0 else 0.0
-	temp_rect = temp_rect.grow_individual(left, top, right, bottom)
+	if dir.x > 0:
+		temp_rect.size.x = Global.canvas.current_pixel.x - temp_rect.position.x
+	elif dir.x < 0:
+		var end_x = temp_rect.end.x
+		temp_rect.position.x = Global.canvas.current_pixel.x
+		temp_rect.end.x = end_x
+	else:
+		temp_rect.size.x = temp_rect_size.x
+
+	if dir.y > 0:
+		temp_rect.size.y = Global.canvas.current_pixel.y - temp_rect.position.y
+	elif dir.y < 0:
+		var end_y = temp_rect.end.y
+		temp_rect.position.y = Global.canvas.current_pixel.y
+		temp_rect.end.y = end_y
+	else:
+		temp_rect.size.y = temp_rect_size.y
+
+	if Input.is_action_pressed("shift"): # Maintain aspect ratio
+		var end_y = temp_rect.end.y
+		if dir == Vector2(1, -1) or dir.x == 0: # Top right corner, center top and center bottom
+			var size := temp_rect.size.y
+			if sign(size) != sign(temp_rect.size.x): # Needed in order for resizing to work properly in negative sizes
+				if temp_rect.size.x > 0:
+					size = abs(size)
+				else:
+					size = -abs(size)
+			temp_rect.size.x = size / rect_aspect_ratio
+
+		else: # The rest of the corners
+			var size := temp_rect.size.x
+			if sign(size) != sign(temp_rect.size.y): # Needed in order for resizing to work properly in negative sizes
+				if temp_rect.size.y > 0:
+					size = abs(size)
+				else:
+					size = -abs(size)
+			temp_rect.size.y = size * rect_aspect_ratio
+
+		if dir == Vector2(-1, -1): # Top left corner
+			# Inspired by the solution answered in https://stackoverflow.com/questions/50230967/drag-resizing-rectangle-with-fixed-aspect-ratio-northwest-corner
+			temp_rect.position.y = end_y - temp_rect.size.y
+
 	big_bounding_rectangle = temp_rect.abs()
 	big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
 	big_bounding_rectangle.size = big_bounding_rectangle.size.floor()
@@ -217,13 +317,14 @@ func gizmo_resize() -> void:
 	self.big_bounding_rectangle = big_bounding_rectangle # Call the setter method
 
 	var size = big_bounding_rectangle.size.abs()
-	preview_image.copy_from(original_preview_image)
-	preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-	if temp_rect.size.x < 0:
-		preview_image.flip_x()
-	if temp_rect.size.y < 0:
-		preview_image.flip_y()
-	preview_image_texture.create_from_image(preview_image, 0)
+	if is_moving_content:
+		preview_image.copy_from(original_preview_image)
+		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+		if temp_rect.size.x < 0:
+			preview_image.flip_x()
+		if temp_rect.size.y < 0:
+			preview_image.flip_y()
+		preview_image_texture.create_from_image(preview_image, 0)
 	Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(temp_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
 	Global.current_project.selection_bitmap_changed()
 	update()
@@ -302,6 +403,8 @@ func move_borders_start() -> void:
 
 
 func move_borders(move : Vector2) -> void:
+	if move == Vector2.ZERO:
+		return
 	marching_ants_outline.offset += move
 	self.big_bounding_rectangle.position += move
 	update()
@@ -376,6 +479,9 @@ func transform_content_cancel() -> void:
 
 
 func commit_undo(action : String, _undo_data : Dictionary) -> void:
+	if !_undo_data:
+		print("No undo data found!")
+		return
 	var redo_data = _get_undo_data("image_data" in _undo_data)
 	var project := Global.current_project
 
