@@ -113,7 +113,7 @@ func draw_end(_position : Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	if _move:
-		selection_node.move_borders_end(!_move_content)
+		selection_node.move_borders_end()
 	else:
 		apply_selection(_position)
 

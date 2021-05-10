@@ -165,13 +165,11 @@ func move_with_arrow_keys(event : InputEvent) -> void:
 			if Input.is_key_pressed(KEY_ALT):
 				transform_content_confirm()
 				move_borders_start()
-				is_moving_content = false
 			else:
 				transform_content_start()
-				is_moving_content = true
 		if is_action_direction_released(event) and arrow_key_move:
 			arrow_key_move = false
-			move_borders_end(!is_moving_content)
+			move_borders_end()
 
 		if is_action_direction(event) and arrow_key_move:
 			var step := Vector2.ONE
@@ -410,12 +408,12 @@ func move_borders(move : Vector2) -> void:
 	update()
 
 
-func move_borders_end(undo := true) -> void:
+func move_borders_end() -> void:
 	var selected_bitmap_copy := Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy)
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
-	if undo:
+	if !is_moving_content:
 		commit_undo("Rectangle Select", undo_data)
 	else:
 		Global.current_project.selection_bitmap_changed()
@@ -424,9 +422,12 @@ func move_borders_end(undo := true) -> void:
 
 func transform_content_start() -> void:
 	if !is_moving_content:
-		is_moving_content = true
 		undo_data = _get_undo_data(true)
 		get_preview_image()
+		if original_preview_image.is_empty():
+			undo_data = _get_undo_data(false)
+			return
+		is_moving_content = true
 		original_bitmap = Global.current_project.selection_bitmap.duplicate()
 		original_big_bounding_rectangle = big_bounding_rectangle
 		original_offset = Global.current_project.selection_offset
@@ -671,6 +672,9 @@ func get_preview_image() -> void:
 					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
 
 		original_preview_image.unlock()
+		if original_preview_image.is_invisible():
+			original_preview_image = Image.new()
+			return
 		preview_image.copy_from(original_preview_image)
 		preview_image_texture.create_from_image(preview_image, 0)
 

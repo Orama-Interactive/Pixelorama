@@ -42,7 +42,9 @@ func draw_end(position : Vector2) -> void:
 		var project : Project = Global.current_project
 		var image : Image = _get_draw_image()
 
-		if !project.has_selection:
+		if project.has_selection:
+			Global.canvas.selection.move_borders_end()
+		else:
 			Global.canvas.move_preview_location = Vector2.ZERO
 			var image_copy := Image.new()
 			image_copy.copy_from(image)
