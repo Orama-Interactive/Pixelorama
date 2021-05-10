@@ -424,6 +424,7 @@ func toggle_zen_mode() -> void:
 	Global.tool_panel.visible = zen_mode
 	Global.right_panel.visible = zen_mode
 	Global.tabs_container.visible = zen_mode
+	Global.control.get_node("MenuAndUI/UI/CanvasAndTimeline/HBoxContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 
