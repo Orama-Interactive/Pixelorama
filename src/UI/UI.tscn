@@ -432,6 +432,7 @@ margin_right = 950.0
 margin_bottom = 692.0
 size_flags_horizontal = 3
 custom_constants/autohide = 0
+split_offset = 278
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="CanvasAndTimeline"]
 margin_right = 902.0
@@ -539,7 +540,14 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
+[node name="AnimationTimeline" parent="CanvasAndTimeline" instance=ExtResource( 18 )]
+margin_top = 492.0
+margin_bottom = 692.0
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasAndTimeline"]
+visible = false
 margin_top = 492.0
 margin_right = 902.0
 margin_bottom = 692.0
@@ -551,12 +559,6 @@ margin_bottom = 200.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/autohide = 0
-
-[node name="AnimationTimeline" parent="CanvasAndTimeline/HBoxContainer/BottomPanel" instance=ExtResource( 18 )]
-margin_top = 0.0
-margin_bottom = 200.0
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
 
 [node name="RightPanel" type="Panel" parent="."]
 margin_left = 950.0
