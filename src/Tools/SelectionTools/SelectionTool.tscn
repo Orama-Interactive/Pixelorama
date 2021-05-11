@@ -125,7 +125,12 @@ margin_bottom = 178.0
 margin_top = 182.0
 margin_bottom = 199.0
 
+[node name="Timer" type="Timer" parent="." index="10"]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="value_changed" from="XContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]
 [connection signal="value_changed" from="YContainer/YSpinBox" to="." method="_on_YSpinBox_value_changed"]
 [connection signal="value_changed" from="WidthContainer/WSpinBox" to="." method="_on_WSpinBox_value_changed"]
 [connection signal="value_changed" from="HeightContainer/HSpinBox" to="." method="_on_HSpinBox_value_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

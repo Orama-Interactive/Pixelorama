@@ -11,6 +11,9 @@ var _subtract := false # Ctrl + Mouse Click
 var _intersect := false # Shift + Ctrl + Mouse Click
 var _snap_to_grid := false # Mouse Click + Ctrl
 
+# Used to check if the state of content transformation has been changed
+# while draw_move() is being called. For example, pressing Enter while still moving content
+var _content_transformation_check := false
 var undo_data : Dictionary
 
 onready var selection_node : Node2D = Global.canvas.selection
@@ -18,6 +21,7 @@ onready var xspinbox : SpinBox = find_node("XSpinBox")
 onready var yspinbox : SpinBox = find_node("YSpinBox")
 onready var wspinbox : SpinBox = find_node("WSpinBox")
 onready var hspinbox : SpinBox = find_node("HSpinBox")
+onready var timer : Timer = $Timer
 
 
 func _ready() -> void:
@@ -86,9 +90,15 @@ func draw_start(position : Vector2) -> void:
 	else:
 		selection_node.transform_content_confirm()
 
+	_content_transformation_check = selection_node.is_moving_content
+
 
 func draw_move(position : Vector2) -> void:
 	if selection_node.arrow_key_move:
+		return
+	# This is true if content transformation has been confirmed (pressed Enter for example)
+	# while the content is being moved
+	if _content_transformation_check != selection_node.is_moving_content:
 		return
 	if _move:
 		if Tools.shift: # Snap to axis
@@ -112,10 +122,11 @@ func draw_move(position : Vector2) -> void:
 func draw_end(_position : Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	if _move:
-		selection_node.move_borders_end(!_move_content)
-	else:
-		apply_selection(_position)
+	if _content_transformation_check == selection_node.is_moving_content:
+		if _move:
+			selection_node.move_borders_end()
+		else:
+			apply_selection(_position)
 
 	_move = false
 	_snap_to_grid = false
@@ -136,6 +147,9 @@ func _on_XSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
 	if !project.has_selection or selection_node.big_bounding_rectangle.position.x == value:
 		return
+	if timer.is_stopped():
+		undo_data = selection_node._get_undo_data(false)
+	timer.start()
 	selection_node.big_bounding_rectangle.position.x = value
 
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
@@ -148,6 +162,9 @@ func _on_YSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
 	if !project.has_selection or selection_node.big_bounding_rectangle.position.y == value:
 		return
+	if timer.is_stopped():
+		undo_data = selection_node._get_undo_data(false)
+	timer.start()
 	selection_node.big_bounding_rectangle.position.y = value
 
 	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
@@ -160,6 +177,9 @@ func _on_WSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
 	if !project.has_selection or selection_node.big_bounding_rectangle.size.x == value or selection_node.big_bounding_rectangle.size.x <= 0:
 		return
+	if timer.is_stopped():
+		undo_data = selection_node._get_undo_data(false)
+	timer.start()
 	selection_node.big_bounding_rectangle.size.x = value
 	resize_selection()
 
@@ -168,19 +188,29 @@ func _on_HSpinBox_value_changed(value : float) -> void:
 	var project : Project = Global.current_project
 	if !project.has_selection or selection_node.big_bounding_rectangle.size.y == value or selection_node.big_bounding_rectangle.size.y <= 0:
 		return
+	if timer.is_stopped():
+		undo_data = selection_node._get_undo_data(false)
+	timer.start()
 	selection_node.big_bounding_rectangle.size.y = value
 	resize_selection()
 
 
 func resize_selection() -> void:
 	var project : Project = Global.current_project
-	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
-	selection_bitmap_copy = project.resize_bitmap_values(project.selection_bitmap, selection_node.big_bounding_rectangle.size, false, false)
-	project.selection_bitmap = selection_bitmap_copy
-	project.selection_bitmap_changed()
-
+	var bitmap : BitMap = project.selection_bitmap
 	if selection_node.is_moving_content:
+		bitmap = selection_node.original_bitmap
 		var preview_image : Image = selection_node.preview_image
 		preview_image.copy_from(selection_node.original_preview_image)
 		preview_image.resize(selection_node.big_bounding_rectangle.size.x, selection_node.big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
 		selection_node.preview_image_texture.create_from_image(preview_image, 0)
+
+	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
+	selection_bitmap_copy = project.resize_bitmap_values(bitmap, selection_node.big_bounding_rectangle.size, false, false)
+	project.selection_bitmap = selection_bitmap_copy
+	project.selection_bitmap_changed()
+
+
+func _on_Timer_timeout() -> void:
+	if !selection_node.is_moving_content:
+		selection_node.commit_undo("Move Selection", undo_data)

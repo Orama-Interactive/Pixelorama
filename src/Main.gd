@@ -81,6 +81,9 @@ func change_ui_layout(mode : String) -> void:
 
 	if mode == "tallscreen" and not tallscreen_is_active:
 		tallscreen_is_active = true
+		# changing visibility and re-parenting of nodes for tall screen
+		ui.get_node("CanvasAndTimeline/HBoxContainer").visible = true
+		reparent_node_to(Global.animation_timeline, ui.get_node("CanvasAndTimeline/HBoxContainer/BottomPanel"), 0)
 		reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 300
 		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
@@ -89,6 +92,9 @@ func change_ui_layout(mode : String) -> void:
 		reparent_node_to(tool_panel, ui.get_node("CanvasAndTimeline/HBoxContainer"), 0)
 	elif mode == "widescreen" and tallscreen_is_active:
 		tallscreen_is_active = false
+		# Reparenting and hiding nodes to adjust wide-screen
+		reparent_node_to(Global.animation_timeline, ui.get_node("CanvasAndTimeline"), 1)
+		ui.get_node("CanvasAndTimeline/HBoxContainer").visible = false
 		reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
 		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)

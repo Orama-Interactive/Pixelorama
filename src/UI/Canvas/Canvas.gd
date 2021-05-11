@@ -220,13 +220,15 @@ func handle_redo(_action : String, project : Project = Global.current_project, l
 func update_texture(layer_index : int, frame_index := -1, project : Project = Global.current_project) -> void:
 	if frame_index == -1:
 		frame_index = project.current_frame
-	var current_cel : Cel = project.frames[frame_index].cels[layer_index]
-	current_cel.image_texture.create_from_image(current_cel.image, 0)
 
-	if project == Global.current_project:
-		var frame_texture_rect : TextureRect
-		frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
-		frame_texture_rect.texture = current_cel.image_texture
+	if frame_index < project.frames.size() and layer_index < project.layers.size():
+		var current_cel : Cel = project.frames[frame_index].cels[layer_index]
+		current_cel.image_texture.create_from_image(current_cel.image, 0)
+
+		if project == Global.current_project:
+			var frame_texture_rect : TextureRect
+			frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+			frame_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:
