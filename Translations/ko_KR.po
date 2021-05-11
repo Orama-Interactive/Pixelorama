@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 18:12\n"
 
 msgid "OK"
 msgstr "예"
@@ -1673,9 +1673,6 @@ msgid "Tiled In Y Axis"
 msgstr "Y 축으로 타일을 두르기"
 
 msgid "Create a new palette"
-msgstr "새 팔레트 생성"
-
-msgid "Create New Palette"
 msgstr "새 팔레트 생성"
 
 msgid "Comment:"
