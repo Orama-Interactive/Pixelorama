@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 17:04\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -40,7 +40,7 @@ msgid "Frame Size"
 msgstr "Μέγεθος Καρέ"
 
 msgid "Size:"
-msgstr ""
+msgstr "Μέγεθος:"
 
 msgid "Width:"
 msgstr "Πλάτος:"
@@ -148,10 +148,10 @@ msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
 msgid "Clear"
-msgstr ""
+msgstr "Εκκαθάριση"
 
 msgid "Invert"
-msgstr ""
+msgstr "Αντιστροφή"
 
 msgid "Flip"
 msgstr "Αναστροφή"
@@ -1666,7 +1666,7 @@ msgid "Tiled In Y Axis"
 msgstr "Επανάληψη στον Άξονα Υ"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Δημιουργία νέας παλέτας"
 
 msgid "Create New Palette"
 msgstr ""
