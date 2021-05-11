@@ -136,7 +136,10 @@ msgstr ""
 msgid "Rotate Image"
 msgstr ""
 
-msgid "Clear Selection"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
 msgstr ""
 
 msgid "Flip"

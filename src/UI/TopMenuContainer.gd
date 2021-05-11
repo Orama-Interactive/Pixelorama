@@ -176,8 +176,8 @@ func setup_image_menu() -> void:
 
 func setup_select_menu() -> void:
 	var select_menu_items := { # order as in EditMenuId enum
-		"Select All" : InputMap.get_action_list("select_all")[0].get_scancode_with_modifiers(),
-		"Clear Selection" : InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
+		"All" : InputMap.get_action_list("select_all")[0].get_scancode_with_modifiers(),
+		"Clear" : InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
 		"Invert" : InputMap.get_action_list("invert_selection")[0].get_scancode_with_modifiers(),
 		}
 	var select_menu : PopupMenu = select_menu_button.get_popup()
