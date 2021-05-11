@@ -11,6 +11,9 @@ var _subtract := false # Ctrl + Mouse Click
 var _intersect := false # Shift + Ctrl + Mouse Click
 var _snap_to_grid := false # Mouse Click + Ctrl
 
+# Used to check if the state of content transformation has been changed
+# while draw_move() is being called. For example, pressing Enter while still moving content
+var _content_transformation_check := false
 var undo_data : Dictionary
 
 onready var selection_node : Node2D = Global.canvas.selection
@@ -87,9 +90,15 @@ func draw_start(position : Vector2) -> void:
 	else:
 		selection_node.transform_content_confirm()
 
+	_content_transformation_check = selection_node.is_moving_content
+
 
 func draw_move(position : Vector2) -> void:
 	if selection_node.arrow_key_move:
+		return
+	# This is true if content transformation has been confirmed (pressed Enter for example)
+	# while the content is being moved
+	if _content_transformation_check != selection_node.is_moving_content:
 		return
 	if _move:
 		if Tools.shift: # Snap to axis
@@ -113,10 +122,11 @@ func draw_move(position : Vector2) -> void:
 func draw_end(_position : Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	if _move:
-		selection_node.move_borders_end()
-	else:
-		apply_selection(_position)
+	if _content_transformation_check == selection_node.is_moving_content:
+		if _move:
+			selection_node.move_borders_end()
+		else:
+			apply_selection(_position)
 
 	_move = false
 	_snap_to_grid = false
