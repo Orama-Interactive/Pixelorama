@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2021-05-04 10:36\n"
+"PO-Revision-Date: 2021-05-11 16:51\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -147,8 +147,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Rotēt attēlu"
 
-msgid "Clear Selection"
-msgstr "Notīrīt atlasi"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "Apmest"
