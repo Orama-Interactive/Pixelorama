@@ -271,6 +271,8 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 
 func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	if !autosave:
+		project.name = path.get_file()
 	var serialized_data = project.serialize()
 	if !serialized_data:
 		Global.error_dialog.set_text(tr("File failed to save. Converting project data to dictionary failed."))
@@ -299,7 +301,6 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		return
 
 	if !autosave:
-		project.name = path.get_file()
 		current_save_paths[Global.current_project_index] = path
 
 	file.store_line(to_save)
