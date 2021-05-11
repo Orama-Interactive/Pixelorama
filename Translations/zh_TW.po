@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 18:11\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1662,9 +1662,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"
