@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-05-04 13:24\n"
+"PO-Revision-Date: 2021-05-11 16:51\n"
 
 msgid "OK"
 msgstr "예"
@@ -147,8 +147,11 @@ msgstr "이미지 중앙 집중화"
 msgid "Rotate Image"
 msgstr "이미지 회전"
 
-msgid "Clear Selection"
-msgstr "선택 영역 지우기"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "뒤집기"
