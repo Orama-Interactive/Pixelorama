@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 18:12\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1658,9 +1658,6 @@ msgid "Tiled In Y Axis"
 msgstr "Y yörüngesinde döşendi"
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"
