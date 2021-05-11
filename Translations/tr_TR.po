@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-05-04 10:36\n"
+"PO-Revision-Date: 2021-05-11 16:51\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -147,8 +147,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
-msgid "Clear Selection"
-msgstr "Seçimi Temizle"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "Döndür"
