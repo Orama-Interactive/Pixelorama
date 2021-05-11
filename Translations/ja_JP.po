@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 18:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1675,9 +1675,6 @@ msgstr "Y軸にタイルされています"
 
 msgid "Create a new palette"
 msgstr "新しいパレットを作成"
-
-msgid "Create New Palette"
-msgstr "新しい空のパレットを作成しますか"
 
 msgid "Comment:"
 msgstr "コメント:"
