@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 18:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1674,9 +1674,6 @@ msgstr "在 Y 轴上平移"
 
 msgid "Create a new palette"
 msgstr "创建一个新的调色板"
-
-msgid "Create New Palette"
-msgstr "创建新的调色板"
 
 msgid "Comment:"
 msgstr "注释："
