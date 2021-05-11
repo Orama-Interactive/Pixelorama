@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-05-11 17:04\n"
+"PO-Revision-Date: 2021-05-11 18:12\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1667,9 +1667,6 @@ msgstr "Επανάληψη στον Άξονα Υ"
 
 msgid "Create a new palette"
 msgstr "Δημιουργία νέας παλέτας"
-
-msgid "Create New Palette"
-msgstr ""
 
 msgid "Comment:"
 msgstr "Σχόλια:"
