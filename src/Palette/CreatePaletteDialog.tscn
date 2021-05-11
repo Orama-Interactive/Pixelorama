@@ -6,7 +6,7 @@
 margin_top = 1.0
 margin_right = 300.0
 margin_bottom = 438.0
-window_title = "Create New Palette"
+window_title = "Create a new palette"
 resizable = true
 script = ExtResource( 1 )
 __meta__ = {
@@ -177,6 +177,7 @@ text = "Palette name is required!"
 align = 1
 valign = 2
 autowrap = true
+
 [connection signal="confirmed" from="." to="." method="_on_CreatePaletteDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_CreatePaletteDialog_popup_hide"]
 [connection signal="item_selected" from="VBoxContainer/PaletteMetadata/Preset" to="." method="_on_Preset_item_selected"]

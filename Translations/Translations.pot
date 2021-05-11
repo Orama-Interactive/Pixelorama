@@ -1625,9 +1625,6 @@ msgstr ""
 msgid "Create a new palette"
 msgstr ""
 
-msgid "Create New Palette"
-msgstr ""
-
 msgid "Comment:"
 msgstr ""
 
