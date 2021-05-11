@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-05-11 17:42\n"
+"PO-Revision-Date: 2021-05-11 18:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1673,9 +1673,6 @@ msgid "Tiled In Y Axis"
 msgstr "In Y-Achse gekachelt"
 
 msgid "Create a new palette"
-msgstr "Neue Palette erstellen"
-
-msgid "Create New Palette"
 msgstr "Neue Palette erstellen"
 
 msgid "Comment:"
