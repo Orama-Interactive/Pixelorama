@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-05-11 16:51\n"
+"PO-Revision-Date: 2021-05-11 17:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -148,10 +148,10 @@ msgid "Rotate Image"
 msgstr "Bild drehen"
 
 msgid "Clear"
-msgstr ""
+msgstr "Leeren"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertieren"
 
 msgid "Flip"
 msgstr "Umdrehen"
