@@ -358,10 +358,10 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
-		x_symmetry_axis.points[0].y = floor(y_symmetry_point / 2 + 1)
-		x_symmetry_axis.points[1].y = floor(y_symmetry_point / 2 + 1)
-		y_symmetry_axis.points[0].x = floor(x_symmetry_point / 2 + 1)
-		y_symmetry_axis.points[1].x = floor(x_symmetry_point / 2 + 1)
+		for point in x_symmetry_axis.points:
+			point.y = floor(y_symmetry_point / 2 + 1)
+		for point in y_symmetry_axis.points:
+			point.x = floor(x_symmetry_point / 2 + 1)
 	if dict.has("export_directory_path"):
 		directory_path = dict.export_directory_path
 	if dict.has("export_file_name"):
