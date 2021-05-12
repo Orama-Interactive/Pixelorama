@@ -5,13 +5,17 @@ var redone := false
 var is_quitting_on_save := false
 
 var tallscreen_is_active = false
+
 onready var ui := $MenuAndUI/UI
-onready var bottom_panel := $MenuAndUI/UI/CanvasAndTimeline/HBoxContainer/BottomPanel
+onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
+
+onready var tallscreen_hsplit_container : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer
+onready var bottom_panel : VSplitContainer = tallscreen_hsplit_container.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
 onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit
 onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
 onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreviewContainer
-onready var tool_panel := $MenuAndUI/UI/ToolPanel
+onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var scroll_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
 # Called when the node enters the scene tree for the first time.
@@ -82,26 +86,28 @@ func change_ui_layout(mode : String) -> void:
 	if mode == "tallscreen" and not tallscreen_is_active:
 		tallscreen_is_active = true
 		# changing visibility and re-parenting of nodes for tall screen
-		ui.get_node("CanvasAndTimeline/HBoxContainer").visible = true
-		reparent_node_to(Global.animation_timeline, ui.get_node("CanvasAndTimeline/HBoxContainer/BottomPanel"), 0)
+		tallscreen_hsplit_container.visible = true
+		tallscreen_hsplit_container.split_offset = tools_and_canvas.split_offset
+		reparent_node_to(Global.animation_timeline, tallscreen_hsplit_container.get_node("BottomPanel"), 0)
 		reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 300
 		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
 		color_and_tool_options.rect_min_size.x = 280
-		reparent_node_to(tool_panel, ui.get_node("CanvasAndTimeline/HBoxContainer"), 0)
+		reparent_node_to(tool_panel, tallscreen_hsplit_container, 0)
 	elif mode == "widescreen" and tallscreen_is_active:
 		tallscreen_is_active = false
 		# Reparenting and hiding nodes to adjust wide-screen
-		reparent_node_to(Global.animation_timeline, ui.get_node("CanvasAndTimeline"), 1)
-		ui.get_node("CanvasAndTimeline/HBoxContainer").visible = false
+		reparent_node_to(Global.animation_timeline, ui.get_node("ToolsAndCanvas/CanvasAndTimeline"), 1)
+		tallscreen_hsplit_container.visible = false
+		tools_and_canvas.split_offset = tallscreen_hsplit_container.split_offset
 		reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
 		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
 		color_and_tool_options.rect_min_size.x = 0
 		canvas_preview_container.visible = true
-		reparent_node_to(tool_panel, ui, 0)
+		reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
 
 	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
 		canvas_preview_container.visible = false

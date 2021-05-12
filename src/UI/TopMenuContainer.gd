@@ -360,7 +360,7 @@ func window_transparency(value :float) -> void:
 		get_node("../../AlternateTransparentBackground").visible = false
 	else:
 		get_node("../../AlternateTransparentBackground").visible = true
-	var checker :ColorRect = get_parent().get_node("UI/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
+	var checker :ColorRect = get_parent().get_node("UI/ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
 	var color :Color = Global.control.theme.get_stylebox("panel", "PanelContainer").bg_color
 	color.a = value
 	get_node("../../AlternateTransparentBackground").color = color
@@ -424,7 +424,7 @@ func toggle_zen_mode() -> void:
 	Global.tool_panel.visible = zen_mode
 	Global.right_panel.visible = zen_mode
 	Global.tabs_container.visible = zen_mode
-	Global.control.get_node("MenuAndUI/UI/CanvasAndTimeline/HBoxContainer").visible = zen_mode
+	Global.control.tallscreen_hsplit_container.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 

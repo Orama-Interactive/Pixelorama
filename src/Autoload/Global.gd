@@ -219,9 +219,9 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
-	tool_panel = control.get_node("MenuAndUI/UI/ToolPanel")
-	right_panel = control.get_node("MenuAndUI/UI/RightPanel")
-	tabs_container = control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer")
+	tool_panel = control.find_node("ToolPanel")
+	right_panel = control.find_node("RightPanel")
+	tabs_container = control.find_node("TabsContainer")
 
 	recent_projects_submenu = PopupMenu.new()
 	recent_projects_submenu.set_name("recent_projects_submenu")
