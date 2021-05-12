@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/graphics/tool_backgrounds/r.png" type="Texture" id=27]
 [ext_resource path="res://assets/graphics/dark_themes/tools/colorselect.png" type="Texture" id=28]
 [ext_resource path="res://assets/graphics/dark_themes/tools/magicwand.png" type="Texture" id=29]
+[ext_resource path="res://assets/graphics/dark_themes/tools/linetool.png" type="Texture" id=30]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -92,7 +93,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
-margin_bottom = 471.0
+margin_bottom = 507.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -376,12 +377,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RectangleTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
+[node name="LineTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 396.0
 margin_right = 32.0
 margin_bottom = 428.0
+rect_min_size = Vector2( 32, 32 )
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="Background" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/LineTool"]
+margin_right = 32.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="ToolPanel/PanelContainer/ToolButtons/LineTool"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RectangleTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
+"UIButtons",
+]]
+margin_top = 432.0
+margin_right = 32.0
+margin_bottom = 464.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
@@ -404,9 +430,9 @@ __meta__ = {
 [node name="EllipseTool" type="Button" parent="ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
-margin_top = 432.0
+margin_top = 468.0
 margin_right = 32.0
-margin_bottom = 464.0
+margin_bottom = 500.0
 rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
