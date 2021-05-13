@@ -294,11 +294,11 @@ func draw_tool_brush(position : Vector2) -> void:
 
 func remove_unselected_parts_of_brush(brush : Image, dst : Vector2) -> Image:
 	var project : Project = Global.current_project
+	if !project.has_selection:
+		return brush
 	var size := brush.get_size()
 	var new_brush := Image.new()
-	new_brush.copy_from(_mirror_brushes.x)
-	if !project.has_selection:
-		return new_brush
+	new_brush.copy_from(brush)
 
 	new_brush.lock()
 	for x in size.x:
