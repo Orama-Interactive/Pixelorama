@@ -852,7 +852,7 @@ margin_top = 28.0
 margin_right = 214.0
 margin_bottom = 52.0
 hint_tooltip = "If enabled the opacity of entire layer will be affected.
-(Use of slider will cause lag so it is disabled to encourage use of spinbox)"
+(Warning : Use of slider will cause lag so use of spinbox is encouraged)"
 text = "Effect opacity of entire layer?"
 
 [node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
