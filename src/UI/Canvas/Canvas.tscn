@@ -62,8 +62,8 @@ script = ExtResource( 3 )
 [node name="Previews" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
-[node name="OnionFuture" type="Node2D" parent="."]
-script = ExtResource( 10 )
-
 [node name="OnionPast" type="Node2D" parent="."]
 script = ExtResource( 11 )
+
+[node name="OnionFuture" type="Node2D" parent="."]
+script = ExtResource( 10 )
