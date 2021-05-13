@@ -358,10 +358,10 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
-		x_symmetry_axis.points[0].y = floor(y_symmetry_point / 2 + 1)
-		x_symmetry_axis.points[1].y = floor(y_symmetry_point / 2 + 1)
-		y_symmetry_axis.points[0].x = floor(x_symmetry_point / 2 + 1)
-		y_symmetry_axis.points[1].x = floor(x_symmetry_point / 2 + 1)
+		for point in x_symmetry_axis.points:
+			point.y = floor(y_symmetry_point / 2 + 1)
+		for point in y_symmetry_axis.points:
+			point.x = floor(x_symmetry_point / 2 + 1)
 	if dict.has("export_directory_path"):
 		directory_path = dict.export_directory_path
 	if dict.has("export_file_name"):
@@ -693,7 +693,6 @@ func move_bitmap_values(bitmap : BitMap, move_offset := true) -> void:
 	var image : Image = bitmap_to_image(bitmap)
 	var selection_rect := image.get_used_rect()
 	var smaller_image := image.get_rect(selection_rect)
-	image.lock()
 	image.fill(Color(0))
 	var dst := selection_position
 	var x_diff = selection_end.x - size.x
@@ -749,7 +748,6 @@ func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, fl
 		dst.y = 0
 	else:
 		self.selection_offset.y = 0
-	image.lock()
 	image.fill(Color(0))
 	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
 	if flip_x:

@@ -111,10 +111,10 @@ func _input(event : InputEvent) -> void:
 					if Input.is_action_pressed("alt"):
 						transform_content_confirm()
 					if !is_moving_content:
-						temp_rect = big_bounding_rectangle
-						temp_bitmap = Global.current_project.selection_bitmap
 						if Input.is_action_pressed("alt"):
 							undo_data = _get_undo_data(false)
+							temp_rect = big_bounding_rectangle
+							temp_bitmap = Global.current_project.selection_bitmap
 						else:
 							transform_content_start()
 						Global.current_project.selection_offset = Vector2.ZERO
@@ -425,6 +425,8 @@ func move_borders_end() -> void:
 func transform_content_start() -> void:
 	if !is_moving_content:
 		undo_data = _get_undo_data(true)
+		temp_rect = big_bounding_rectangle
+		temp_bitmap = Global.current_project.selection_bitmap
 		get_preview_image()
 		if original_preview_image.is_empty():
 			undo_data = _get_undo_data(false)

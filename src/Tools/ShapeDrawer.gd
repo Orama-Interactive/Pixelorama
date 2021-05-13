@@ -92,7 +92,7 @@ func draw_end(position : Vector2) -> void:
 
 func draw_preview() -> void:
 	if _drawing:
-		var canvas = Global.canvas.previews
+		var canvas : CanvasItem = Global.canvas.previews
 		var indicator := BitMap.new()
 		var rect := _get_result_rect(_start, _dest)
 		var points := _get_points(rect.size)
@@ -115,7 +115,7 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	var points := _get_points(rect.size)
 	prepare_undo()
 	for point in points:
-		# Reset drawer every time because pixel perfect sometimes brake the tool
+		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offseted based on the shape's thickness
 		draw_tool(rect.position + point - Vector2.ONE * (_thickness - 1))

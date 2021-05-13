@@ -219,9 +219,9 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
-	tool_panel = control.get_node("MenuAndUI/UI/ToolPanel")
-	right_panel = control.get_node("MenuAndUI/UI/RightPanel")
-	tabs_container = control.get_node("MenuAndUI/UI/CanvasAndTimeline/ViewportAndRulers/TabsContainer")
+	tool_panel = control.find_node("ToolPanel")
+	right_panel = control.find_node("RightPanel")
+	tabs_container = control.find_node("TabsContainer")
 
 	recent_projects_submenu = PopupMenu.new()
 	recent_projects_submenu.set_name("recent_projects_submenu")
@@ -546,6 +546,17 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 %s for left mouse button
 %s for right mouse button""") % [InputMap.get_action_list("left_lightdark_tool")[0].as_text(), InputMap.get_action_list("right_lightdark_tool")[0].as_text()]
+
+	var linetool : BaseButton = find_node_by_name(root, "LineTool")
+	linetool.hint_tooltip = tr("""Line Tool
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to snap the angle of the line
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""") % [InputMap.get_action_list("left_linetool_tool")[0].as_text(), InputMap.get_action_list("right_linetool_tool")[0].as_text(), "Shift", "Ctrl", "Alt"]
+
 
 	var recttool : BaseButton = find_node_by_name(root, "RectangleTool")
 	recttool.hint_tooltip = tr("""Rectangle Tool

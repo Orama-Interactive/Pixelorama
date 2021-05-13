@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends GridContainer
 
 
 # Node, shortcut
@@ -14,6 +14,7 @@ onready var tools := [
 	[$Eraser, "eraser"],
 	[$Bucket, "fill"],
 	[$LightenDarken, "lightdark"],
+	[$LineTool, "linetool"],
 	[$RectangleTool, "rectangletool"],
 	[$EllipseTool, "ellipsetool"],
 ]
@@ -44,3 +45,8 @@ func _on_Tool_pressed(tool_pressed : BaseButton) -> void:
 	button = BUTTON_RIGHT if Input.is_action_just_released("right_mouse") else button
 	if button != -1:
 		Tools.assign_tool(tool_pressed.name, button)
+
+
+func _on_ToolsAndCanvas_dragged(_offset : int) -> void:
+	var tool_panel_size : Vector2 = get_parent().get_parent().rect_size
+	columns = clamp(tool_panel_size.x / 40, 1, 8)

@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/LineTool.gd" type="Script" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Brush" parent="." index="1"]
+visible = false
+
+[node name="ShapeThickness" type="HBoxContainer" parent="." index="2"]
+margin_left = 6.0
+margin_top = 18.0
+margin_right = 110.0
+margin_bottom = 42.0
+size_flags_horizontal = 4
+custom_constants/separation = 0
+
+[node name="Label2" type="Label" parent="ShapeThickness" index="0"]
+margin_top = 5.0
+margin_right = 30.0
+margin_bottom = 19.0
+text = "Size:"
+align = 1
+
+[node name="ThicknessSpinbox" type="SpinBox" parent="ShapeThickness" index="1"]
+margin_left = 30.0
+margin_right = 104.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+min_value = 1.0
+value = 1.0
+align = 1
+suffix = "px"
+
+[node name="ThicknessSlider" type="HSlider" parent="." index="3"]
+margin_left = 12.0
+margin_top = 46.0
+margin_right = 104.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
+
+[node name="BrushSize" parent="." index="4"]
+visible = false
+margin_top = 18.0
+margin_bottom = 34.0
+
+[node name="PixelPerfect" parent="." index="5"]
+visible = false
+margin_top = 66.0
+margin_bottom = 90.0
+
+[node name="ColorInterpolation" parent="." index="6"]
+margin_top = 66.0
+margin_bottom = 128.0
+
+[node name="EmptySpacer" parent="." index="7"]
+margin_top = 66.0
+margin_bottom = 78.0
+
+[node name="Mirror" parent="." index="8"]
+margin_top = 82.0
+margin_bottom = 99.0
+
+[connection signal="value_changed" from="ShapeThickness/ThicknessSpinbox" to="." method="_on_Thickness_value_changed"]
+[connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
