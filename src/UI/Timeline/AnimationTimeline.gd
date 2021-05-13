@@ -536,9 +536,11 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	if !Global.layer_opacity_checkbox.pressed:
 		Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].opacity = value / 100
 	else:
-		for frame in Global.current_project.frames.size():
-			Global.current_project.frames[frame].cels[Global.current_project.current_layer].opacity = value / 100
-	
+		if value/100 != Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].opacity:
+			for frame in Global.current_project.frames.size():
+				Global.current_project.frames[frame].cels[Global.current_project.current_layer].opacity = value / 100
+		else:
+			pass
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
