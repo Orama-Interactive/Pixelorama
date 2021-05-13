@@ -167,6 +167,7 @@ var move_up_layer_button : BaseButton
 var move_down_layer_button : BaseButton
 var merge_down_layer_button : BaseButton
 var layer_opacity_slider : HSlider
+var layer_opacity_checkbox : CheckBox
 var layer_opacity_spinbox : SpinBox
 
 var preview_zoom_slider : VSlider
@@ -297,6 +298,7 @@ func _ready() -> void:
 	merge_down_layer_button = find_node_by_name(animation_timeline, "MergeDownLayer")
 
 	layer_opacity_slider = find_node_by_name(animation_timeline, "OpacitySlider")
+	layer_opacity_checkbox = find_node_by_name(animation_timeline, "AffectAllLayer")
 	layer_opacity_spinbox = find_node_by_name(animation_timeline, "OpacitySpinBox")
 
 	preview_zoom_slider = find_node_by_name(root, "PreviewZoomSlider")
