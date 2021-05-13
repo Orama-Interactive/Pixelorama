@@ -800,21 +800,25 @@ suffix = "FPS"
 [node name="OpacityAndTagContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
 margin_top = 50.0
 margin_right = 902.0
-margin_bottom = 82.0
+margin_bottom = 102.0
 custom_constants/separation = 2
 
 [node name="SpacerControl" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_right = 4.0
-margin_bottom = 32.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 4, 0 )
 
-[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="OpacityContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 6.0
 margin_right = 220.0
-margin_bottom = 32.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 214, 0 )
 
-[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+[node name="OpacityValueProperties" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_right = 214.0
+margin_bottom = 24.0
+
+[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties"]
 margin_right = 53.0
 margin_bottom = 14.0
 size_flags_horizontal = 0
@@ -822,10 +826,10 @@ size_flags_vertical = 0
 text = "Opacity:"
 valign = 1
 
-[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties"]
 margin_left = 57.0
 margin_right = 136.0
-margin_bottom = 32.0
+margin_bottom = 24.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -833,20 +837,28 @@ size_flags_vertical = 1
 value = 100.0
 ticks_on_borders = true
 
-[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties"]
 margin_left = 140.0
-margin_top = 4.0
 margin_right = 214.0
-margin_bottom = 28.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 value = 100.0
 align = 1
+suffix = "%"
+
+[node name="AffectAllLayer" type="CheckBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_top = 28.0
+margin_right = 214.0
+margin_bottom = 52.0
+hint_tooltip = "If enabled the opacity of entire layer will be affected.
+(Use of slider will cause lag so it is disabled to encourage use of spinbox)"
+text = "Effect opacity of entire layer?"
 
 [node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 222.0
-margin_right = 902.0
-margin_bottom = 32.0
+margin_right = 900.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_horizontal = 3
 theme = SubResource( 20 )
@@ -854,14 +866,19 @@ scroll_vertical_enabled = false
 
 [node name="TagContainer" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
 
-[node name="SpacerControl2" type="Control" parent="AnimationContainer/TimelineContainer"]
-margin_top = 86.0
+[node name="VBoxContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_left = 902.0
 margin_right = 902.0
-margin_bottom = 94.0
+margin_bottom = 52.0
+
+[node name="SpacerControl2" type="Control" parent="AnimationContainer/TimelineContainer"]
+margin_top = 106.0
+margin_right = 902.0
+margin_bottom = 114.0
 rect_min_size = Vector2( 0, 8 )
 
 [node name="PanelContainer" type="PanelContainer" parent="AnimationContainer/TimelineContainer"]
-margin_top = 98.0
+margin_top = 118.0
 margin_right = 902.0
 margin_bottom = 200.0
 size_flags_vertical = 3
@@ -870,17 +887,17 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 895.0
-margin_bottom = 95.0
+margin_bottom = 75.0
 size_flags_vertical = 3
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll"]
 margin_right = 252.0
-margin_bottom = 88.0
+margin_bottom = 68.0
 size_flags_vertical = 3
 
 [node name="LayerVBoxCont" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
 margin_right = 212.0
-margin_bottom = 88.0
+margin_bottom = 68.0
 
 [node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_right = 212.0
@@ -901,7 +918,7 @@ margin_right = 212.0
 [node name="FrameButtonsAndIds" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 216.0
 margin_right = 252.0
-margin_bottom = 88.0
+margin_bottom = 68.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
@@ -1011,8 +1028,9 @@ __meta__ = {
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="toggled" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/AffectAllLayer" to="." method="_on_AffectAllLayer_toggled"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
