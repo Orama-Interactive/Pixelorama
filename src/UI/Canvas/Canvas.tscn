@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/UI/Canvas/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/Grid.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/UI/Canvas/Previews.gd" type="Script" id=7]
 [ext_resource path="res://src/UI/Canvas/Selection.gd" type="Script" id=8]
 [ext_resource path="res://src/Shaders/MarchingAntsOutline.shader" type="Shader" id=9]
+[ext_resource path="res://src/UI/Canvas/OnionFuture.gd" type="Script" id=10]
+[ext_resource path="res://src/UI/Canvas/OnionPast.gd" type="Script" id=11]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
@@ -59,3 +61,9 @@ script = ExtResource( 3 )
 
 [node name="Previews" type="Node2D" parent="."]
 script = ExtResource( 7 )
+
+[node name="OnionFuture" type="Node2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="OnionPast" type="Node2D" parent="."]
+script = ExtResource( 11 )
