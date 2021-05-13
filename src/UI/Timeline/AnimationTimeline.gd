@@ -545,11 +545,6 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	Global.canvas.update()
 
 
-func _on_AffectAllLayer_toggled(button_pressed):
-	#using slider will cause lag so it is disabled to encourage spinbox
-	Global.layer_opacity_slider.editable = !button_pressed
-
-
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
 

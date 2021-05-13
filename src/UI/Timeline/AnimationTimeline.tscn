@@ -1030,7 +1030,6 @@ __meta__ = {
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacityValueProperties/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="toggled" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/AffectAllLayer" to="." method="_on_AffectAllLayer_toggled"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
