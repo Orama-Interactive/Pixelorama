@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/ellipseselect_cursor.png-3fa011c4b6f46ebf291d56f2dc801e19.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/ellipseselect_cursor.png"
+dest_files=[ "res://.import/ellipseselect_cursor.png-3fa011c4b6f46ebf291d56f2dc801e19.image" ]
+
+[params]
+

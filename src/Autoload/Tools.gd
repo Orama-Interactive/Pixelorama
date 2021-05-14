@@ -40,6 +40,7 @@ signal color_changed(color, button)
 
 var _tools = {
 	"RectSelect" : "res://src/Tools/SelectionTools/RectSelect.tscn",
+	"EllipseSelect" : "res://src/Tools/SelectionTools/EllipseSelect.tscn",
 	"ColorSelect" : "res://src/Tools/SelectionTools/ColorSelect.tscn",
 	"MagicWand" : "res://src/Tools/SelectionTools/MagicWand.tscn",
 	"Move" : "res://src/Tools/Move.tscn",

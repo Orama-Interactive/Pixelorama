@@ -477,9 +477,14 @@ func update_hint_tooltips() -> void:
 	rect_select.hint_tooltip = tr("""Rectangular Selection
 
 %s for left mouse button
-%s for right mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text()]
 
-Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_select_tool")[0].as_text(), InputMap.get_action_list("right_rectangle_select_tool")[0].as_text(), "Shift"]
+	var ellipse_select : BaseButton = tool_buttons.find_node("EllipseSelect")
+	ellipse_select.hint_tooltip = tr("""Elliptical Selection
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_ellipse_select_tool")[0].as_text(), InputMap.get_action_list("right_ellipse_select_tool")[0].as_text()]
+
 
 	var color_select : BaseButton = tool_buttons.find_node("ColorSelect")
 	color_select.hint_tooltip = tr("""Select By Color
