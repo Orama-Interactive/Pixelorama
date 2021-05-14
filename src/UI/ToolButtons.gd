@@ -4,6 +4,7 @@ extends GridContainer
 # Node, shortcut
 onready var tools := [
 	[$RectSelect, "rectangle_select"],
+	[$EllipseSelect, "ellipse_select"],
 	[$ColorSelect, "color_select"],
 	[$MagicWand, "magic_wand"],
 	[$Move, "move"],
