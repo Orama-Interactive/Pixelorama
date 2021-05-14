@@ -925,8 +925,8 @@ margin_bottom = 20.0
 
 [node name="OnionSkinningSettings" type="WindowDialog" parent="."]
 margin_right = 300.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 300, 240 )
+margin_bottom = 323.0
+rect_min_size = Vector2( 300, 320 )
 window_title = "Onion Skin Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -937,9 +937,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = 4.0
-margin_top = -103.0
+margin_top = -153.5
 margin_right = -4.0
-margin_bottom = 111.0
+margin_bottom = 161.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1029,6 +1029,20 @@ selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 209.0
+margin_right = 292.0
+margin_bottom = 274.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0.333333, 0.901961, 0.462745, 1 )
+text = "Note:
+If you want a layer to ignore Onion-skinning simply add \"ignore_onion\" in its name
+(it is case-insensitive)"
+align = 1
+valign = 1
+autowrap = true
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
 
