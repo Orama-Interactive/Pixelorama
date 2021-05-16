@@ -43,6 +43,7 @@ var _tools = {
 	"EllipseSelect" : "res://src/Tools/SelectionTools/EllipseSelect.tscn",
 	"ColorSelect" : "res://src/Tools/SelectionTools/ColorSelect.tscn",
 	"MagicWand" : "res://src/Tools/SelectionTools/MagicWand.tscn",
+	"Lasso" : "res://src/Tools/SelectionTools/Lasso.tscn",
 	"Move" : "res://src/Tools/Move.tscn",
 	"Zoom" : "res://src/Tools/Zoom.tscn",
 	"Pan" : "res://src/Tools/Pan.tscn",

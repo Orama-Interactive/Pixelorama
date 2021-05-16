@@ -7,6 +7,7 @@ onready var tools := [
 	[$EllipseSelect, "ellipse_select"],
 	[$ColorSelect, "color_select"],
 	[$MagicWand, "magic_wand"],
+	[$Lasso, "lasso"],
 	[$Move, "move"],
 	[$Zoom, "zoom"],
 	[$Pan, "pan"],
