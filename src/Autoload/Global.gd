@@ -498,6 +498,13 @@ func update_hint_tooltips() -> void:
 %s for right mouse button""") % [InputMap.get_action_list("left_magic_wand_tool")[0].as_text(), InputMap.get_action_list("right_magic_wand_tool")[0].as_text()]
 
 
+	var lasso : BaseButton = tool_buttons.find_node("Lasso")
+	lasso.hint_tooltip = tr("""Lasso / Free Select Tool
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_lasso_tool")[0].as_text(), InputMap.get_action_list("right_lasso_tool")[0].as_text()]
+
+
 	var move_select : BaseButton = tool_buttons.find_node("Move")
 	move_select.hint_tooltip = tr("""Move
 
