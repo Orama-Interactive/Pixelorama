@@ -32,7 +32,7 @@ func draw_end(position : Vector2) -> void:
 
 
 func draw_preview() -> void:
-	if !_move:
+	if _last_position != Vector2.INF and !_move:
 		var canvas : Node2D = Global.canvas.previews
 		var _position := canvas.position
 		var _scale := canvas.scale
@@ -88,6 +88,7 @@ func apply_selection(_position) -> void:
 
 	Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 	_draw_points.clear()
+	_last_position = Vector2.INF
 
 
 func lasso_selection(bitmap : BitMap, points : PoolVector2Array) -> void:
