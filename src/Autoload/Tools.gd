@@ -41,6 +41,7 @@ signal color_changed(color, button)
 var _tools = {
 	"RectSelect" : "res://src/Tools/SelectionTools/RectSelect.tscn",
 	"EllipseSelect" : "res://src/Tools/SelectionTools/EllipseSelect.tscn",
+	"PolygonSelect" : "res://src/Tools/SelectionTools/PolygonSelect.tscn",
 	"ColorSelect" : "res://src/Tools/SelectionTools/ColorSelect.tscn",
 	"MagicWand" : "res://src/Tools/SelectionTools/MagicWand.tscn",
 	"Lasso" : "res://src/Tools/SelectionTools/Lasso.tscn",

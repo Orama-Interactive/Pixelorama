@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/polygonselect_cursor.png-75834308db46d270a4fc7c38d5d978ac.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/polygonselect_cursor.png"
+dest_files=[ "res://.import/polygonselect_cursor.png-75834308db46d270a4fc7c38d5d978ac.image" ]
+
+[params]
+

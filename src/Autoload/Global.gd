@@ -484,6 +484,13 @@ func update_hint_tooltips() -> void:
 %s for right mouse button""") % [InputMap.get_action_list("left_ellipse_select_tool")[0].as_text(), InputMap.get_action_list("right_ellipse_select_tool")[0].as_text()]
 
 
+	var polygon_select : BaseButton = tool_buttons.find_node("PolygonSelect")
+	polygon_select.hint_tooltip = tr("""Polygonal Selection
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_polygon_select_tool")[0].as_text(), InputMap.get_action_list("right_polygon_select_tool")[0].as_text()]
+
+
 	var color_select : BaseButton = tool_buttons.find_node("ColorSelect")
 	color_select.hint_tooltip = tr("""Select By Color
 
