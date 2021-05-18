@@ -105,7 +105,7 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(rect.position - t_offsetv, canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), tool_slot.color)
+			canvas.draw_polyline(PoolVector2Array(line), Color.black)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 

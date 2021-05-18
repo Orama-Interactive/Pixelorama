@@ -5,6 +5,9 @@ var _move := false
 var _move_content := true
 var _start_pos := Vector2.ZERO
 var _offset := Vector2.ZERO
+# For tools such as the Polygon selection tool where you have to
+# click multiple times to create a selection
+var _ongoing_selection := false
 
 var _add := false # Shift + Mouse Click
 var _subtract := false # Ctrl + Mouse Click
@@ -71,7 +74,7 @@ func draw_start(position : Vector2) -> void:
 		offsetted_pos.x -= selection_position.x
 	if selection_position.y < 0:
 		offsetted_pos.y -= selection_position.y
-	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift:
+	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift and !_ongoing_selection:
 		# Move current selection
 		_move = true
 		if Tools.control and Tools.alt: # Move selection without content
