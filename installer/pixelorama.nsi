@@ -1,19 +1,19 @@
 ; Pixelorama Installer NSIS Script
-; Copyright Xenofon Konitsas (huskee) 2020
+; Copyright Xenofon Konitsas (huskee) 2021
 ; Licensed under the MIT License
 
 
 ; Helper variables so that we don't change 20 instances of the version for every update
 
   !define APPNAME "Pixelorama"
-  !define APPVERSION "0.9"
+  !define APPVERSION "v0.9"
   !define COMPANYNAME "Orama Interactive"
 
 
 ; Include the Modern UI library
   
   !include "MUI2.nsh"
-  !include "FileAssociation.nsh"
+  !include "x64.nsh"
 
 
 ; Basic Installer Info 
@@ -52,11 +52,15 @@
   !define MUI_COMPONENTSPAGE_SMALLDESC
   !define MUI_FINISHPAGE_NOAUTOCLOSE
   !define MUI_UNFINISHPAGE_NOAUTOCLOSE
-  !define MUI_FINISHPAGE_RUN "pixelorama.exe"
+  !define MUI_FINISHPAGE_RUN "$INSTDIR\pixelorama.exe"
 
 ; Language selection settings
   
   !define MUI_LANGDLL_ALLLANGUAGES
+  ## Remember the installer language
+  !define MUI_LANGDLL_REGISTRY_ROOT HKCU
+  !define MUI_LANGDLL_REGISTRY_KEY "Software\${COMPANYNAME}\${APPNAME}"
+  !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
 
 
 ; Installer pages
@@ -100,11 +104,17 @@
       SetOutPath "$INSTDIR"
 
     ; Copy all files to install directory
-      File "pixelorama.exe"
-      File "pixelorama.pck"
+      ${If} ${RunningX64}
+        File "..\build\windows-64bit\pixelorama.exe"
+        File "..\build\windows-64bit\pixelorama.pck"
+      ${Else}
+        File "..\build\windows-32bit\pixelorama.exe"
+        File "..\build\windows-32bit\pixelorama.pck"
+      ${EndIf}
+      File "..\assets\pxo.ico"
 
       SetOutPath "$INSTDIR\pixelorama_data"
-      File /nonfatal /a /r "pixelorama_data\*"
+      File /nonfatal /r "..\build\pixelorama_data\*"
     
     ; Store installation folder in the registry
       WriteRegStr HKCU "Software\${COMPANYNAME}\${APPNAME}" "InstallDir" $INSTDIR
@@ -117,6 +127,8 @@
       "DisplayName" "${APPNAME}" 
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
       "UninstallString" "$INSTDIR\uninstall.exe"
+      WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
+      "DisplayIcon" "$INSTDIR\pixelorama.exe,0"
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
       "InstallLocation" "$INSTDIR"
       WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" \
@@ -131,8 +143,17 @@
       "NoRepair" 1
     
     ; Associate .pxo files with Pixelorama
-      ${registerExtension} "$INSTDIR\pixelorama.exe" ".pxo" "Pixelorama project"
+      WriteRegStr HKCR ".pxo" "" "Pixelorama project"
+      WriteRegStr HKCR ".pxo" "ContentType" "image/pixelorama"
+      WriteRegStr HKCR ".pxo" "PerceivedType" "document"
 
+      WriteRegStr HKCR "Pixelorama project" "" "Pixelorama project"
+      WriteRegStr HKCR "Pixelorama project\shell" "" "open"
+      WriteRegStr HKCR "Pixelorama project\DefaultIcon" "" "$INSTDIR\pxo.ico"
+
+      WriteRegStr HKCR "Pixelorama project\shell\open\command" "" '$INSTDIR\${APPNAME}.exe "%1"'
+      WriteRegStr HKCR "Pixelorama project\shell\edit" "" "Edit project in ${APPNAME}"
+      WriteRegStr HKCR "Pixelorama project\shell\edit\command" "" '$INSTDIR\${APPNAME}.exe "%1"'
   SectionEnd
 
 
@@ -173,7 +194,9 @@
     Delete "$INSTDIR\uninstall.exe"
     Delete "$INSTDIR\Pixelorama.exe"
     Delete "$INSTDIR\Pixelorama.pck"
+    Delete "$INSTDIR\pxo.ico"
     RMDir /r "$INSTDIR\pixelorama_data"
+    RMDir "$INSTDIR"
 
     ; Delete shortcuts
     RMDir /r "$SMPROGRAMS\${COMPANYNAME}"
@@ -190,7 +213,8 @@
     DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}"
 
     ; Delete the .pxo file association
-    ${unregisterExtension} ".pxo" "Pixelorama project"
+    DeleteRegKey HKCR "Pixelorama project"
+    DeleteRegKey HKCR ".pxo"
 
   SectionEnd
 
@@ -201,6 +225,13 @@
     Delete "$APPDATA\Godot\app_userdata\${APPNAME}\cache.ini"
 
   SectionEnd
+
+; Uninstaller functions
+  
+  Function un.onInit
+   !insertmacro MUI_UNGETLANGUAGE
+  
+  FunctionEnd
 
  
 ; Section description language strings for multilingual support
