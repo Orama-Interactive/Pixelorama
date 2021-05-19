@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/UI/Canvas/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/Grid.gd" type="Script" id=2]
@@ -25,7 +25,7 @@ shader_param/width = 0.05
 shader_param/frequency = 200.0
 shader_param/stripe_direction = 0.5
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 10 )
 
 [node name="Canvas" type="Node2D"]
@@ -64,11 +64,11 @@ centered = false
 script = ExtResource( 3 )
 
 [node name="Previews" type="Node2D" parent="."]
-material = SubResource( 4 )
+material = SubResource( 3 )
 script = ExtResource( 7 )
 
-[node name="OnionPast" type="Node2D" parent="."]
+[node name="OnionFuture" type="Node2D" parent="."]
 script = ExtResource( 11 )
 
-[node name="OnionFuture" type="Node2D" parent="."]
-script = ExtResource( 10 )
+[node name="OnionPast" type="Node2D" parent="."]
+script = ExtResource( 12 )
