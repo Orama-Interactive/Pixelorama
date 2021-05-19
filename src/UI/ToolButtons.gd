@@ -5,6 +5,7 @@ extends GridContainer
 onready var tools := [
 	[$RectSelect, "rectangle_select"],
 	[$EllipseSelect, "ellipse_select"],
+	[$PolygonSelect, "polygon_select"],
 	[$ColorSelect, "color_select"],
 	[$MagicWand, "magic_wand"],
 	[$Lasso, "lasso"],
