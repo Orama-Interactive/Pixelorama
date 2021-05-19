@@ -43,10 +43,10 @@ func _draw() -> void:
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
-				if i == current_layer:
-					draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
-				else:
-					draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+			if i == current_layer:
+				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+			else:
+				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
 	if Global.onion_skinning:
 		refresh_onion()
