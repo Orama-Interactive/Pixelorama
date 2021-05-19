@@ -43,10 +43,10 @@ func _draw() -> void:
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
-			if i == current_layer:
-				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
-			else:
-				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+				if i == current_layer:
+					draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+				else:
+					draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
 	if Global.onion_skinning:
 		refresh_onion()
@@ -234,40 +234,3 @@ func update_texture(layer_index : int, frame_index := -1, project : Project = Gl
 func refresh_onion() -> void:
 	$OnionPast.update()
 	$OnionFuture.update()
-
-
-# No longer needed but kept for reference
-#func onion_skinning() -> void:
-#	# Past
-#	if Global.onion_skinning_past_rate > 0:
-#		var color : Color
-#		if Global.onion_skinning_blue_red:
-#			color = Color.blue
-#		else:
-#			color = Color.white
-#		for i in range(1, Global.onion_skinning_past_rate + 1):
-#			if Global.current_project.current_frame >= i:
-#				var layer_i := 0
-#				for layer in Global.current_project.frames[Global.current_project.current_frame - i].cels:
-#					if Global.current_project.layers[layer_i].visible:
-#						color.a = 0.6 / i
-#						draw_texture(layer.image_texture, Vector2.ZERO, color)
-#						update()
-#					layer_i += 1
-#
-#	# Future
-#	if Global.onion_skinning_future_rate > 0:
-#		var color : Color
-#		if Global.onion_skinning_blue_red:
-#			color = Color.red
-#		else:
-#			color = Color.white
-#		for i in range(1, Global.onion_skinning_future_rate + 1):
-#			if Global.current_project.current_frame < Global.current_project.frames.size() - i:
-#				var layer_i := 0
-#				for layer in Global.current_project.frames[Global.current_project.current_frame + i].cels:
-#					if Global.current_project.layers[layer_i].visible:
-#						color.a = 0.6 / i
-#						draw_texture(layer.image_texture, Vector2.ZERO, color)
-#						update()
-#					layer_i += 1
