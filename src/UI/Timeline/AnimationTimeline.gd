@@ -224,7 +224,7 @@ func _on_MoveRight_pressed() -> void:
 
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
-	Global.canvas.update()
+	Global.canvas.refresh_onion()
 	var texture_button : TextureRect = Global.onion_skinning_button.get_child(0)
 	if Global.onion_skinning:
 		Global.change_button_texturerect(texture_button, "onion_skinning.png")
@@ -390,6 +390,16 @@ func _on_FutureOnionSkinning_value_changed(value : float) -> void:
 func _on_BlueRedMode_toggled(button_pressed : bool) -> void:
 	Global.onion_skinning_blue_red = button_pressed
 	Global.canvas.update()
+
+
+func _on_PastPlacement_item_selected(index):
+	Global.past_above_canvas = (index == 0)
+	Global.canvas.get_node("OnionPast").set("show_behind_parent", !Global.past_above_canvas) 
+
+
+func _on_FuturePlacement_item_selected(index):
+	Global.future_above_canvas = (index == 0)
+	Global.canvas.get_node("OnionFuture").set("show_behind_parent", !Global.future_above_canvas)
 
 
 # Layer buttons

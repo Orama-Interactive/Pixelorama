@@ -10,6 +10,8 @@
 [ext_resource path="res://src/UI/Canvas/Selection.gd" type="Script" id=8]
 [ext_resource path="res://src/Shaders/MarchingAntsOutline.shader" type="Shader" id=9]
 [ext_resource path="res://src/Shaders/AutoInvertColors.shader" type="Shader" id=10]
+[ext_resource path="res://src/UI/Canvas/OnionFuture.gd" type="Script" id=11]
+[ext_resource path="res://src/UI/Canvas/OnionPast.gd" type="Script" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
@@ -64,3 +66,9 @@ script = ExtResource( 3 )
 [node name="Previews" type="Node2D" parent="."]
 material = SubResource( 4 )
 script = ExtResource( 7 )
+
+[node name="OnionPast" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="OnionFuture" type="Node2D" parent="."]
+script = ExtResource( 10 )
