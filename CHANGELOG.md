@@ -7,13 +7,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.9] - Unreleased
 This update has been brought to you by the contributions of:
 
-DragonOfWar, novhack
+DragonOfWar, novhack, Fayez Akhtar (Variable), Darshan Phaldesai (luiq54)
 
 ### Added
-- New rectangle and ellipse shape tools. ([#456](https://github.com/Orama-Interactive/Pixelorama/pull/456))
+- A total of 9 new tools!
+- New selection tools, including elliptical, magic wand, select by color, lasso (freehand selection) and polygonal selection tools.
+- A new move tool, that lets you move the content of the current cel, or the content of the selection, if there is any.
+- New rectangle and ellipse shape tools. [#456](https://github.com/Orama-Interactive/Pixelorama/pull/456)
+- A new line tool.
 
 ### Changed
+- The selection system has been completely changed and has become a lot more powerful. See [#129](https://github.com/Orama-Interactive/Pixelorama/issues/129#issuecomment-756799706) for more details.
 - The palette system has been completely replaced with a new one. See [#447](https://github.com/Orama-Interactive/Pixelorama/pull/447) for more details.
+- Image color inverting, desaturation and HSV adjusting are now shader based. This improves the performance of these image effects and prevents crashes on large images. [#475](https://github.com/Orama-Interactive/Pixelorama/pull/475)
+- The toolbar on the left can now be resized by the user.
+
+### Fixed
+- Zen mode now hides the animation timeline again. [#478](https://github.com/Orama-Interactive/Pixelorama/pull/478)
+- Pixelorama should no longer crash when loading a project and the symmetry axes fail to load. They will still fail to load, but the app will no longer crash. [e8b36bbc61154641ce9eec1f0a845a0061d3585d](https://github.com/Orama-Interactive/Pixelorama/commit/e8b36bbc61154641ce9eec1f0a845a0061d3585d)
 <br><br>
 
 ## [v0.8.3] - 2021-05-04
