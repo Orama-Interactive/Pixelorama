@@ -1,8 +1,8 @@
 extends Node
 
 # Gif exporter
-const gifexporter = preload("res://addons/gdgifexporter/gifexporter.gd")
-var quantization = preload("res://addons/gdgifexporter/quantization/median_cut.gd").new()
+const GIFExporter = preload("res://addons/gdgifexporter/exporter.gd")
+const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/median_cut.gd")
 
 enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
 var current_tab : int = ExportTab.FRAME
@@ -212,7 +212,7 @@ func export_gif(args: Dictionary) -> void:
 	args["export_dialog"].toggle_export_progress_popup(true)
 
 	# Export and save gif
-	var exporter = gifexporter.new(processed_images[0].get_width(), processed_images[0].get_height())
+	var exporter = GIFExporter.new(processed_images[0].get_width(), processed_images[0].get_height())
 	match direction:
 		AnimationDirection.FORWARD:
 			for i in range(processed_images.size()):
@@ -240,7 +240,7 @@ func export_gif(args: Dictionary) -> void:
 
 
 func write_frame_to_gif(image: Image, wait_time: float, exporter: Reference, export_dialog: Node) -> void:
-	exporter.write_frame(image, wait_time, quantization)
+	exporter.add_frame(image, wait_time, MedianCutQuantization)
 	increase_export_progress(export_dialog)
 
 
