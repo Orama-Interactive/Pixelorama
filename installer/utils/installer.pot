@@ -1,9 +1,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Pixelorama 0.9\n"
+"Project-Id-Version: MTA San Andreas Installer 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-07 04:44\n"
+"POT-Creation-Date: 2021-05-06 20:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,51 +13,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. SecInstall
-#: ..\pixelorama.nsi:84
+#: ../pixelorama.nsi:84
 msgid "Install ${APPNAME}"
 msgstr ""
 
 #. SecStartmenu
-#: ..\pixelorama.nsi:85
+#: ../pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
 msgstr ""
 
 #. SecDesktop
-#: ..\pixelorama.nsi:86
+#: ../pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
 msgstr ""
 
 #. un.SecUninstall
-#: ..\pixelorama.nsi:87
+#: ../pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
 msgstr ""
 
 #. un.SecConfig
-#: ..\pixelorama.nsi:88
+#: ../pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
 msgstr ""
 
 #. DESC_SecInstall
-#: ..\pixelorama.nsi:200
+#: ../pixelorama.nsi:202
 msgid "Installs ${APPNAME} ${APPVERSION}."
 msgstr ""
 
 #. DESC_SecStartmenu
-#: ..\pixelorama.nsi:201
+#: ../pixelorama.nsi:203
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
 msgstr ""
 
 #. DESC_SecDesktop
-#: ..\pixelorama.nsi:202
+#: ../pixelorama.nsi:204
 msgid "Creates a Desktop shortcut for ${APPNAME}."
 msgstr ""
 
 #. DESC_un.SecUninstall
-#: ..\pixelorama.nsi:203
+#: ../pixelorama.nsi:205
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
 msgstr ""
 
 #. DESC_un.SecConfig
-#: ..\pixelorama.nsi:204
+#: ../pixelorama.nsi:206
 msgid "Removes configuration files for ${APPNAME}."
 msgstr ""
