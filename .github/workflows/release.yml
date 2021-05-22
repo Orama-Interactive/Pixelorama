@@ -8,7 +8,7 @@ env:
   GODOT_VERSION: 3.3
   GODOT_VERSION_MAC: 3.3
   EXPORT_NAME: Pixelorama
-  TAG: v0.8.3
+  TAG: v0.9
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -18,9 +18,9 @@ jobs:
     container:
       image: docker://barichello/godot-ci:3.3
     steps:
-      - name: Setup WINE and rcedit 🍷
+      - name: Setup WINE, rcedit and NSIS 🍷
         run: |
-          dpkg --add-architecture i386 && apt-get update && apt-get install -y wine-stable && apt-get install -y wine32
+          dpkg --add-architecture i386 && apt-get update && apt-get install -y wine-stable wine32 nsis
           chown root:root -R ~
           wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
           mkdir -v -p ~/.local/share/rcedit
@@ -42,15 +42,19 @@ jobs:
           godot -v --export "Windows Desktop 32-bit" ./build/windows-32bit/$EXPORT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama_data ./build/windows-64bit
-          rm ./build/windows-64bit/pixelorama_data/.gdignore
-          cp -R ./pixelorama_data ./build/windows-32bit
-          rm ./build/windows-32bit/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build
+          rm ./build/pixelorama_data/.gdignore
       - name: Zip 🗜️
+        working-directory: ./build
         run: |
-          cd build
-          zip -r windows-64bit.zip windows-64bit
-          zip -r windows-32bit.zip windows-32bit
+          zip windows-64bit.zip -rj windows-64bit && zip -r windows-64bit.zip pixelorama_data
+          zip windows-32bit.zip -rj windows-32bit && zip -r windows-32bit.zip pixelorama_data
+      - name: Build installer 🔧
+        run: |
+          python3 ./installer/utils/po2nsi.py -i ./installer/pixelorama.nsi -o ./installer/pixelorama_loc.nsi -p ./installer/po -l "English" -v
+          makensis ./installer/pixelorama_loc.nsi
+          mkdir ./build/installer
+          mv ./installer/${EXPORT_NAME}_${TAG}_setup.exe ./build/installer
       - name: Upload 64-bit Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
@@ -65,6 +69,13 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./build/windows-32bit.zip
           asset_name: ${{env.EXPORT_NAME}}[Windows-32bit].zip
+          tag: ${{env.TAG}}
+          overwrite: true
+      - name: Upload installer Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/installer/${{env.EXPORT_NAME}}_${{env.TAG}}_setup.exe
           tag: ${{env.TAG}}
           overwrite: true
       - name: Upload Release Assets to itch.io 🎮
