@@ -42,7 +42,7 @@ If you want to add new features or fix bugs, please make sure that:
 Please create different pull requests for each feature you'd like to implement, or each bug you'd like to fix. Make sure your pull request only handles one specific topic, and not multiple. If you want to make multiple changes, make a pull request for each of them. For this reason, it's recommended you create new branches in your forked repository, instead of using your fork's master branch.
 This [Git style guide](https://github.com/agis-/git-style-guide) has some good practices to have in mind.
 
-If you are new to git, [this guide](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/) will help you.
+If you are new to contributing to open source projects, make sure to read [this guide](https://opensource.guide/how-to-contribute/) before contributing. If you are new to git, [this guide](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/) will help you.
 
 Keep in mind, however, that not all PRs will be merged. Some may need discussion, or others may be downright closed. To avoid that, it's best to create an [issue](https://github.com/Orama-Interactive/Pixelorama/issues) in the form of a proposal about the PR you are thinking to open, before actually opening it. That way, people can discuss and share their opinions and thoughts about the matter. This is especially necessary when the PR is meant to change how an already existing feature works, as some people may disagree with the change, or want to offer alternative ideas.
 <br><br>
@@ -55,12 +55,10 @@ If you need help with the context of some strings, or want to translate in a lan
 ## Communicating with developers
 To communicate with developers (e.g. to discuss a feature you want to implement or a bug you want to fix), the following channels can be used:
 
-- [GitHub Issues](https://github.com/Orama-Interactive/Pixelorama/issues): If there is an
-  existing issue about a topic you want to discuss, just add a comment to it -
+- [GitHub Issues](https://github.com/Orama-Interactive/Pixelorama/issues) or [GitHub Discussions](https://github.com/Orama-Interactive/Pixelorama/discussions): If there is an
+  existing issue or discussion about a topic you want to discuss, just add a comment to it -
   all developers watch the repository and will get an email notification. You
-  can also create a new issue - please keep in mind to create issues only to
-  discuss quite specific points about the development, and not general user
-  feedback or support requests.
+  can also create a new issue/discussion.
 - [Our Discord Server](https://discord.gg/GTMtr8s): All developers and most contributors are there, so it's the best way for direct chat
   about Pixelorama. You can use the channel `#pixelorama-dev` to stay up to date with Pixelorama's developments real-time,
   or talk about the developments and request new features. If you seek support, please use the `#pixelorama-help` channel instead.
