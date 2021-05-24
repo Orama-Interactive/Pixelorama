@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-05-11 18:12\n"
+"PO-Revision-Date: 2021-05-24 23:51\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -29,6 +29,9 @@ msgstr "Kérlek, erősítsd meg..."
 
 msgid "File Name:"
 msgstr "Fájlnév:"
+
+msgid "Project Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Képméret"
@@ -808,11 +811,20 @@ msgstr "Világosítás/Sötétítés\n\n"
 "%s a bal egérgombbal\n"
 "%s a jobb egérgombbal"
 
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -820,6 +832,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -1039,6 +1052,9 @@ msgstr "Keverés helyett felülírja a színt. Ez az opció csak nem teljesen á
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "A vonalakat simává teszi azáltal, hogy eltávolítja a széleken lévő extra képpontokat"
