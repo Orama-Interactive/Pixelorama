@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_guides.png" type="Texture" id=6]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
-visible = true
 margin_right = 375.0
 margin_bottom = 222.0
 rect_min_size = Vector2( 375, 222 )
