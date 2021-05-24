@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-05-11 18:12\n"
+"PO-Revision-Date: 2021-05-24 23:51\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -29,6 +29,9 @@ msgstr "Lütfen Onaylayın..."
 
 msgid "File Name:"
 msgstr "Dosya Adı:"
+
+msgid "Project Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Resim Boyutu"
@@ -807,11 +810,20 @@ msgstr "Aydınlatma/Karartma\n\n"
 "Sol tık için %s\n"
 "Sağ tık için %s"
 
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -819,6 +831,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -1038,6 +1051,9 @@ msgstr "Renkleri karıştırmak yerine rengin üzerine yazar. Bu seçenek sadece
 
 msgid "Pixel Perfect"
 msgstr "Mükemmel Piksel"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Çizgileri kenarlardaki fazla pikselleri silerek yumuşatır"
