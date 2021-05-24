@@ -99,13 +99,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.canvas.fill_color = fill_color
 
 	var frame : Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
-	var new_project : Project
-	var proj_name :String = $VBoxContainer/ProjectName/NameInput.text
-	if proj_name.is_valid_filename():
-		new_project = Project.new([frame], tr(proj_name), Vector2(width, height).floor())
-	else:
-		# an empty field or non valid name...
-		new_project = Project.new([frame], tr("untitled"), Vector2(width, height).floor())
+	var new_project := Project.new([frame], tr("untitled"), Vector2(width, height).floor())
 	new_project.layers.append(Layer.new())
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
@@ -137,21 +131,12 @@ func toggle_size_buttons() -> void:
 
 
 func _on_TemplatesOptions_item_selected(id : int) -> void:
-	#if a template is chosen while "ratio button" is pressed then temporarily release it
-	var temporary_release = false
-	if ratio_box.pressed:
-		ratio_box.pressed = false
-		temporary_release = true
-	
 	if id > 0:
 		width_value.value = templates[id - 1].resolution.x
 		height_value.value = templates[id - 1].resolution.y
 	else:
 		width_value.value = Global.default_image_width
 		height_value.value = Global.default_image_height
-	
-	if temporary_release:
-		ratio_box.pressed = true
 
 
 func _on_PortraitButton_toggled(button_pressed : bool) -> void:
