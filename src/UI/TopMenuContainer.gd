@@ -259,8 +259,10 @@ func save_project_file() -> void:
 	if path == "":
 		if OS.get_name() == "HTML5":
 			Global.save_sprites_html5_dialog.popup_centered()
+			Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text = Global.current_project.name
 		else:
 			Global.save_sprites_dialog.popup_centered()
+			Global.save_sprites_dialog.current_file = Global.current_project.name
 		Global.dialog_open(true)
 	else:
 		Global.control._on_SaveSprite_file_selected(path)
@@ -270,8 +272,10 @@ func save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
 	if OS.get_name() == "HTML5":
 		Global.save_sprites_html5_dialog.popup_centered()
+		Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text = Global.current_project.name
 	else:
 		Global.save_sprites_dialog.popup_centered()
+		Global.save_sprites_dialog.current_file = Global.current_project.name
 	Global.dialog_open(true)
 
 

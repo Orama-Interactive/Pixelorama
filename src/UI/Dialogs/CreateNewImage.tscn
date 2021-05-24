@@ -8,9 +8,9 @@
 [ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_guides.png" type="Texture" id=6]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
-margin_right = 300.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 375, 200 )
+margin_right = 375.0
+margin_bottom = 222.0
+rect_min_size = Vector2( 375, 222 )
 window_title = "New..."
 resizable = true
 script = ExtResource( 1 )
@@ -22,26 +22,46 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 367.0
-margin_bottom = 164.0
+margin_bottom = 186.0
 size_flags_horizontal = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ImageSize" type="Label" parent="VBoxContainer"]
+[node name="ProjectName" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 359.0
-margin_bottom = 14.0
+margin_bottom = 24.0
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/ProjectName"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
+text = "Project Name:"
+
+[node name="NameInput" type="LineEdit" parent="VBoxContainer/ProjectName"]
+margin_left = 104.0
+margin_right = 359.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter name... (Default \"untitled\")"
+
+[node name="ImageSize" type="Label" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 359.0
+margin_bottom = 42.0
 text = "Image Size"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 18.0
+margin_top = 46.0
 margin_right = 359.0
-margin_bottom = 22.0
+margin_bottom = 50.0
 
 [node name="TemplatesContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 26.0
+margin_top = 54.0
 margin_right = 359.0
-margin_bottom = 46.0
+margin_bottom = 74.0
 
 [node name="TemplatesLabel" type="Label" parent="VBoxContainer/TemplatesContainer"]
 margin_top = 3.0
@@ -62,9 +82,9 @@ items = [ "Default", null, false, 0, null ]
 selected = 0
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 50.0
+margin_top = 78.0
 margin_right = 359.0
-margin_bottom = 102.0
+margin_bottom = 130.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
 margin_right = 346.0
@@ -141,9 +161,9 @@ __meta__ = {
 }
 
 [node name="SizeButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 106.0
+margin_top = 134.0
 margin_right = 359.0
-margin_bottom = 126.0
+margin_bottom = 154.0
 
 [node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer"]
 margin_right = 20.0
@@ -193,9 +213,9 @@ __meta__ = {
 }
 
 [node name="FillColorContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 130.0
+margin_top = 158.0
 margin_right = 359.0
-margin_bottom = 150.0
+margin_bottom = 178.0
 
 [node name="FillColorLabel" type="Label" parent="VBoxContainer/FillColorContainer"]
 margin_top = 3.0
