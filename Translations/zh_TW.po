@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-05-11 18:11\n"
+"PO-Revision-Date: 2021-05-24 23:51\n"
 
 msgid "OK"
 msgstr "確定"
@@ -29,6 +29,9 @@ msgstr "確認..."
 
 msgid "File Name:"
 msgstr "檔案名稱："
+
+msgid "Project Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "圖片大小"
@@ -807,11 +810,20 @@ msgstr "變亮/變暗\n\n"
 "%s換成左鍵\n"
 "%s換成右鍵"
 
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -819,6 +831,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -1038,6 +1051,9 @@ msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏
 
 msgid "Pixel Perfect"
 msgstr "完美像素"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "去除邊緣上多餘的像素使線條平滑"
