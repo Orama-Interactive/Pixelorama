@@ -28,7 +28,7 @@ msgstr ""
 msgid "Frame Size"
 msgstr ""
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
@@ -136,7 +136,10 @@ msgstr ""
 msgid "Rotate Image"
 msgstr ""
 
-msgid "Clear Selection"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
 msgstr ""
 
 msgid "Flip"
@@ -1620,9 +1623,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"
