@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian\n"
 "Language: no_NO\n"
-"PO-Revision-Date: 2021-05-11 18:12\n"
+"PO-Revision-Date: 2021-05-24 23:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -29,6 +29,9 @@ msgstr "Vennligst Bekreft..."
 
 msgid "File Name:"
 msgstr "Filnavn:"
+
+msgid "Project Name:"
+msgstr ""
 
 msgid "Image Size"
 msgstr "Bildestørrelse"
@@ -807,11 +810,20 @@ msgstr "Lys opp/Formørk\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -819,6 +831,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -1038,6 +1051,9 @@ msgstr "Overskriver en farge i stedet for å blande den. Dette valget gjelder ba
 
 msgid "Pixel Perfect"
 msgstr "Pikselperfekt"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
