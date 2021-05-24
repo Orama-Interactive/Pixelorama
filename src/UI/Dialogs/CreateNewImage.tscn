@@ -43,7 +43,6 @@ text = "Project Name:"
 margin_left = 104.0
 margin_right = 359.0
 margin_bottom = 24.0
-mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter name... (Default \"untitled\")"
 

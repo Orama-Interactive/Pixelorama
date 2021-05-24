@@ -142,14 +142,14 @@ func _on_TemplatesOptions_item_selected(id : int) -> void:
 	if ratio_box.pressed:
 		ratio_box.pressed = false
 		temporary_release = true
-	
+
 	if id > 0:
 		width_value.value = templates[id - 1].resolution.x
 		height_value.value = templates[id - 1].resolution.y
 	else:
 		width_value.value = Global.default_image_width
 		height_value.value = Global.default_image_height
-	
+
 	if temporary_release:
 		ratio_box.pressed = true
 
