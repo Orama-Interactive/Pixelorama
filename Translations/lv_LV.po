@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2021-05-24 23:51\n"
+"PO-Revision-Date: 2021-05-25 19:52\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -128,6 +128,9 @@ msgstr "Iekopēt"
 
 msgid "Delete"
 msgstr "Izdzēst"
+
+msgid "New Brush"
+msgstr ""
 
 msgid "Scale Image"
 msgstr "Mainīt attēla izmēru"
