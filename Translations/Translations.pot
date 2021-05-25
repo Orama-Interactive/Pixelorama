@@ -118,6 +118,9 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr ""
 

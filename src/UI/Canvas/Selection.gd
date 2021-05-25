@@ -567,10 +567,6 @@ func copy() -> void:
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
 	clipboard.selection_offset = project.selection_offset
 
-	var brush : Image = to_copy.get_rect(to_copy.get_used_rect())
-	project.brushes.append(brush)
-	Brushes.add_project_brush(brush)
-
 
 func paste() -> void:
 	if !clipboard.image:
@@ -618,6 +614,40 @@ func delete() -> void:
 			if project.can_pixel_get_drawn(pos):
 				image.set_pixelv(pos, Color(0))
 	commit_undo("Draw", _undo_data)
+
+
+func new_brush() -> void:
+	var project := Global.current_project
+	if !project.has_selection:
+		return
+
+	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var brush := Image.new()
+	if is_moving_content:
+		brush.copy_from(preview_image)
+		var selected_bitmap_copy := project.selection_bitmap.duplicate()
+		project.move_bitmap_values(selected_bitmap_copy, false)
+		clipboard.selection_bitmap = selected_bitmap_copy
+	else:
+		brush = image.get_rect(big_bounding_rectangle)
+		brush.lock()
+		# Remove unincluded pixels if the selection is not a single rectangle
+		for x in brush.get_size().x:
+			for y in brush.get_size().y:
+				var pos := Vector2(x, y)
+				var offset_pos = big_bounding_rectangle.position
+				if offset_pos.x < 0:
+					offset_pos.x = 0
+				if offset_pos.y < 0:
+					offset_pos.y = 0
+				if not project.selection_bitmap.get_bit(pos + offset_pos):
+					brush.set_pixelv(pos, Color(0))
+		brush.unlock()
+
+	if !brush.is_invisible():
+		var brush_used : Image = brush.get_rect(brush.get_used_rect())
+		project.brushes.append(brush_used)
+		Brushes.add_project_brush(brush_used)
 
 
 func select_all() -> void:
