@@ -134,7 +134,7 @@ script = ExtResource( 1 )
 name = "Triad"
 comment = "Author: Erevoid"
 width = 8
-height = 8
+height = 4
 colors = {
 0: SubResource( 1 ),
 1: SubResource( 2 ),
@@ -162,4 +162,4 @@ colors = {
 23: SubResource( 24 ),
 24: SubResource( 25 )
 }
-colors_max = 64
+colors_max = 32

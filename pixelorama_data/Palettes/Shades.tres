@@ -184,7 +184,7 @@ script = ExtResource( 1 )
 name = "Shades"
 comment = "Author: Erevoid"
 width = 8
-height = 8
+height = 5
 colors = {
 0: SubResource( 1 ),
 1: SubResource( 2 ),
@@ -222,4 +222,4 @@ colors = {
 33: SubResource( 34 ),
 34: SubResource( 35 )
 }
-colors_max = 64
+colors_max = 40
