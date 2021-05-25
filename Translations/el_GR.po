@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-05-25 00:13\n"
+"PO-Revision-Date: 2021-05-25 19:52\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -128,6 +128,9 @@ msgstr "Επικόλληση"
 
 msgid "Delete"
 msgstr "Διαγραφή"
+
+msgid "New Brush"
+msgstr ""
 
 msgid "Scale Image"
 msgstr "Κλιμάκωση εικόνας"
