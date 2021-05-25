@@ -569,7 +569,7 @@ func copy() -> void:
 
 
 func paste() -> void:
-	if !clipboard.image:
+	if clipboard.image.is_empty():
 		return
 	clear_selection()
 	undo_data = _get_undo_data(true)
