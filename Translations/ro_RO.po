@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-05-24 23:51\n"
+"PO-Revision-Date: 2021-05-25 05:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Numele fișierului:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Numele proiectului:"
 
 msgid "Image Size"
 msgstr "Dimensiunea imaginii"
