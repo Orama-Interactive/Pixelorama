@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-05-24 23:51\n"
+"PO-Revision-Date: 2021-05-25 19:52\n"
 
 msgid "OK"
 msgstr "確定"
@@ -128,6 +128,9 @@ msgstr "貼上"
 
 msgid "Delete"
 msgstr "刪除"
+
+msgid "New Brush"
+msgstr ""
 
 msgid "Scale Image"
 msgstr "調整尺寸"
