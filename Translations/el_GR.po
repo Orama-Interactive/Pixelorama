@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-05-24 23:51\n"
+"PO-Revision-Date: 2021-05-25 00:13\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Όνομα αρχείου:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Όνομα έργου:"
 
 msgid "Image Size"
 msgstr "Μέγεθος εικόνας"
@@ -1056,7 +1056,7 @@ msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Εσωτερικό γέμισμα"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
