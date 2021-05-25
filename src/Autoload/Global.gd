@@ -578,7 +578,6 @@ Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""") % [InputMap.get_action_list("left_linetool_tool")[0].as_text(), InputMap.get_action_list("right_linetool_tool")[0].as_text(), "Shift", "Ctrl", "Alt"]
 
-
 	var recttool : BaseButton = find_node_by_name(root, "RectangleTool")
 	recttool.hint_tooltip = tr("""Rectangle Tool
 
@@ -586,7 +585,8 @@ Hold %s to displace the shape's origin""") % [InputMap.get_action_list("left_lin
 %s for right mouse button
 
 Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_rectangletool_tool")[0].as_text(), InputMap.get_action_list("right_rectangletool_tool")[0].as_text(), "Shift", "Ctrl" ]
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""") % [InputMap.get_action_list("left_rectangletool_tool")[0].as_text(), InputMap.get_action_list("right_rectangletool_tool")[0].as_text(), "Shift", "Ctrl", "Alt"]
 
 	var ellipsetool : BaseButton = find_node_by_name(root, "EllipseTool")
 	ellipsetool.hint_tooltip = tr("""Ellipse Tool
@@ -595,7 +595,8 @@ Hold %s to center the shape on the click origin""") % [InputMap.get_action_list(
 %s for right mouse button
 
 Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin""") % [InputMap.get_action_list("left_ellipsetool_tool")[0].as_text(), InputMap.get_action_list("right_ellipsetool_tool")[0].as_text(), "Shift", "Ctrl" ]
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""") % [InputMap.get_action_list("left_ellipsetool_tool")[0].as_text(), InputMap.get_action_list("right_ellipsetool_tool")[0].as_text(), "Shift", "Ctrl", "Alt"]
 
 	var color_switch : BaseButton = find_node_by_name(root, "ColorSwitch")
 	color_switch.hint_tooltip = tr("""Switch left and right colors
