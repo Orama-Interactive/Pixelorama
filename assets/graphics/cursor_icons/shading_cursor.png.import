@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/shading_cursor.png-4bcf9d942739aeda75b6ade1e6510ac0.image"
+
+[deps]
+
+source_file="res://assets/graphics/cursor_icons/shading_cursor.png"
+dest_files=[ "res://.import/shading_cursor.png-4bcf9d942739aeda75b6ade1e6510ac0.image" ]
+
+[params]
+

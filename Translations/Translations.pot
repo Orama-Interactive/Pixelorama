@@ -779,7 +779,7 @@ msgid "Bucket\n\n"
 "%s for right mouse button"
 msgstr ""
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr ""
@@ -1529,7 +1529,7 @@ msgstr ""
 msgid "Bucket"
 msgstr ""
 
-msgid "Lighten/Darken"
+msgid "Shading Tool"
 msgstr ""
 
 msgid "Switch Colors"

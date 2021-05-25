@@ -969,19 +969,19 @@ margin_top = 132.0
 margin_right = 505.0
 margin_bottom = 152.0
 
-[node name="LightenDarkenLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="ShadingLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 157.0
 margin_right = 137.0
 margin_bottom = 171.0
-text = "Lighten/Darken"
+text = "Shading Tool"
 
-[node name="left_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="left_shading_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
 margin_top = 154.0
 margin_right = 321.0
 margin_bottom = 174.0
 
-[node name="right_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="right_shading_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 326.0
 margin_top = 154.0
 margin_right = 505.0
@@ -1228,6 +1228,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]

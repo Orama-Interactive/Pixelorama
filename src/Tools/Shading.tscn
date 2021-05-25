@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tools/LightenDarken.gd" type="Script" id=2]
+[ext_resource path="res://src/Tools/Shading.gd" type="Script" id=2]
+
 
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

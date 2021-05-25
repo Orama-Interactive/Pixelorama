@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/graphics/dark_themes/tools/rectselect.png" type="Texture" id=12]
 [ext_resource path="res://assets/graphics/dark_themes/tools/eraser.png" type="Texture" id=13]
 [ext_resource path="res://assets/graphics/tool_backgrounds/l.png" type="Texture" id=14]
-[ext_resource path="res://assets/graphics/dark_themes/tools/lightendarken.png" type="Texture" id=15]
+[ext_resource path="res://assets/graphics/dark_themes/tools/shading.png" type="Texture" id=15]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
@@ -428,7 +428,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LightenDarken" type="Button" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons" groups=[
+[node name="Shading" type="Button" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons" groups=[
 "UIButtons",
 ]]
 margin_top = 468.0
@@ -438,14 +438,14 @@ rect_min_size = Vector2( 32, 32 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/LightenDarken"]
+[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Shading"]
 margin_right = 32.0
 margin_bottom = 32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/LightenDarken"]
+[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Shading"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 15 )
