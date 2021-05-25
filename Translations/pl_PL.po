@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-05-24 23:51\n"
+"PO-Revision-Date: 2021-05-25 19:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -128,6 +128,9 @@ msgstr "Wklej"
 
 msgid "Delete"
 msgstr "Usuń"
+
+msgid "New Brush"
+msgstr ""
 
 msgid "Scale Image"
 msgstr "Skaluj obraz"
