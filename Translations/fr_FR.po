@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-05-24 23:51\n"
+"PO-Revision-Date: 2021-05-25 19:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -128,6 +128,9 @@ msgstr "Coller"
 
 msgid "Delete"
 msgstr "Supprimer"
+
+msgid "New Brush"
+msgstr ""
 
 msgid "Scale Image"
 msgstr "Redimensionner l'image"
