@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-05-25 19:52\n"
+"PO-Revision-Date: 2021-05-25 22:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -130,7 +130,7 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Новая кисть"
 
 msgid "Scale Image"
 msgstr "Изменить размер изображения"
