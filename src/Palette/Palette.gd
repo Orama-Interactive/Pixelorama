@@ -43,8 +43,9 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 		# If size was reduced colors must be reindexed to fit into new smaller size
 		reindex_colors_on_size_reduce(true)
 
-	if old_width < new_width:
+	if old_width < new_width and colors_max > old_colors_max:
 		# If width increases colors have to be reindexed so they keep same grid positions
+		# unless the height has become smaller and we have to re-position the colors so that they won't get erased
 		reindex_colors_on_width_increase(old_width)
 
 
