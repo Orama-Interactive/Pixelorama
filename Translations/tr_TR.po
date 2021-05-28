@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-05-25 23:19\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -430,6 +430,9 @@ msgstr "Temalar"
 
 msgid "Canvas"
 msgstr "Tuval"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Kısayollar"
@@ -1007,6 +1010,15 @@ msgstr "Tuval ölçek seviyesini takip et"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Geçirgen dama deseni tuval ölçek seviyesini takip eder"
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Sadece özel yapılmış seçenekler değiştirilebilir"
