@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-05-26 17:31\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -429,6 +429,9 @@ msgstr "Designs"
 
 msgid "Canvas"
 msgstr "Canvas"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Tastenkürzel"
@@ -1021,6 +1024,15 @@ msgstr "Folge Canvas-Zoom-Level"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Die transparenten Checker folgen dem Canvas-Zoom-Level"
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
