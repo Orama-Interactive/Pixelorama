@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-05-28 00:50\n"
+"PO-Revision-Date: 2021-05-28 15:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -431,7 +431,7 @@ msgid "Canvas"
 msgstr "Canvas"
 
 msgid "Selection"
-msgstr ""
+msgstr "Auswahl"
 
 msgid "Shortcuts"
 msgstr "Tastenkürzel"
