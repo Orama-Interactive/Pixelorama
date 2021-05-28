@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2021-05-25 23:19\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -429,6 +429,9 @@ msgstr "Теме"
 
 msgid "Canvas"
 msgstr "Канвас"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Пречице"
@@ -989,6 +992,15 @@ msgid "Follow Canvas Zoom Level"
 msgstr ""
 
 msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
 msgstr ""
 
 msgid "Only custom preset can be modified"
