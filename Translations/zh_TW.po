@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-05-25 23:19\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "確定"
@@ -429,6 +429,9 @@ msgstr "主題"
 
 msgid "Canvas"
 msgstr "畫布"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "快捷鍵"
@@ -1007,6 +1010,15 @@ msgstr "跟隨畫布放大縮小"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "空白背景格跟隨畫布放大縮小"
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "只能修改自訂配置"
