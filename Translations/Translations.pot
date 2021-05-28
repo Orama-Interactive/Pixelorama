@@ -419,6 +419,9 @@ msgstr ""
 msgid "Canvas"
 msgstr ""
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr ""
 
@@ -978,6 +981,15 @@ msgid "Follow Canvas Zoom Level"
 msgstr ""
 
 msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
 msgstr ""
 
 msgid "Only custom preset can be modified"

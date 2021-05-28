@@ -37,6 +37,10 @@ var preferences = [
 	["checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed", Global.checker_follow_scale],
 	["tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value", Global.tilemode_opacity],
 
+	["selection_animated_borders", "Selection/SelectionOptions/Animate", "pressed", Global.selection_animated_borders],
+	["selection_border_color_1", "Selection/SelectionOptions/BorderColor1", "color", Global.selection_border_color_1],
+	["selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color", Global.selection_border_color_2],
+
 	["fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", Global.fps_limit],
 	["fps_limit_focus", "Performance/PerformanceContainer/EnableLimitFPSFocus", "pressed", Global.fps_limit_focus],
 ]
@@ -150,6 +154,12 @@ func preference_update(prop : String) -> void:
 	if prop in ["fps_limit"]:
 		Engine.set_target_fps(Global.fps_limit)
 
+	if prop in ["selection_animated_borders", "selection_border_color_1", "selection_border_color_2"]:
+		Global.canvas.selection.marching_ants_outline.material.set_shader_param("animated", Global.selection_animated_borders)
+		Global.canvas.selection.marching_ants_outline.material.set_shader_param("first_color", Global.selection_border_color_1)
+		Global.canvas.selection.marching_ants_outline.material.set_shader_param("second_color", Global.selection_border_color_2)
+		Global.canvas.selection.update()
+
 	Global.config_cache.save("user://cache.ini")
 
 
@@ -169,6 +179,7 @@ func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
 	list.add_item("  " + tr("Language"))
 	list.add_item("  " + tr("Interface"))
 	list.add_item("  " + tr("Canvas"))
+	list.add_item("  " + tr("Selection"))
 	list.add_item("  " + tr("Image"))
 	list.add_item("  " + tr("Shortcuts"))
 	list.add_item("  " + tr("Backup"))
@@ -186,7 +197,7 @@ func _on_PreferencesDialog_popup_hide() -> void:
 func _on_List_item_selected(index : int) -> void:
 	selected_item = index
 	for child in right_side.get_children():
-		var content_list = ["Startup", "Languages", "Interface", "Canvas", "Image", "Shortcuts", "Backup", "Performance", "Indicators"]
+		var content_list = ["Startup", "Languages", "Interface", "Canvas", "Selection", "Image", "Shortcuts", "Backup", "Performance", "Indicators"]
 		if OS.get_name() == "HTML5":
 			content_list.erase("Startup")
 		child.visible = child.name == content_list[index]

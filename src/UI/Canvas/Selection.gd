@@ -213,12 +213,12 @@ func _draw() -> void:
 	draw_set_transform(_position, rotation, _scale)
 	if big_bounding_rectangle.size != Vector2.ZERO:
 		for gizmo in gizmos: # Draw gizmos
-			draw_rect(gizmo.rect, Color.black)
+			draw_rect(gizmo.rect, Global.selection_border_color_2)
 			var filled_rect : Rect2 = gizmo.rect
 			var filled_size : Vector2 = gizmo.rect.size * Vector2(0.2, 0.2)
 			filled_rect.position += filled_size
 			filled_rect.size -= filled_size * 2
-			draw_rect(filled_rect, Color.white) # Filled white square
+			draw_rect(filled_rect, Global.selection_border_color_1) # Filled white square
 
 	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
