@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-05-28 00:51\n"
+"PO-Revision-Date: 2021-05-28 09:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -432,7 +432,7 @@ msgid "Canvas"
 msgstr "Холст"
 
 msgid "Selection"
-msgstr ""
+msgstr "Выделение"
 
 msgid "Shortcuts"
 msgstr "Горячие клавишы"
@@ -1015,13 +1015,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Клеточки прозрачности следуют увеличению/уменьшению холста"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Анимированные границы выделения"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Цвет границы 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Цвет границы 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Только пользовательские предустановки могут быть изменены"
