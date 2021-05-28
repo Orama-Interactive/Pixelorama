@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-05-28 00:50\n"
+"PO-Revision-Date: 2021-05-28 18:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nome do Arquivo:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nome do projeto:"
 
 msgid "Image Size"
 msgstr "Tamanho da Imagem"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Tamanho do Quadro"
 
 msgid "Size:"
-msgstr ""
+msgstr "Tamanho:"
 
 msgid "Width:"
 msgstr "Largura:"
@@ -130,16 +130,16 @@ msgid "Delete"
 msgstr "Deletar"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Novo Pincel"
 
 msgid "Scale Image"
 msgstr "Redimensionar Imagem"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Percentagem"
 
 msgid "Crop Image"
 msgstr "Cortar imagem"
@@ -148,16 +148,16 @@ msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralizar Imagem"
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
 
 msgid "Clear"
-msgstr ""
+msgstr "Limpar"
 
 msgid "Invert"
-msgstr ""
+msgstr "Inverter"
 
 msgid "Flip"
 msgstr "Virar"
@@ -178,16 +178,16 @@ msgid "Window Transparency"
 msgstr ""
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Layout do Painel"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automático"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Tela Cheia"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Tela Alta"
 
 msgid "Mirror View"
 msgstr ""
@@ -432,7 +432,7 @@ msgid "Canvas"
 msgstr "Tela"
 
 msgid "Selection"
-msgstr ""
+msgstr "Seleção"
 
 msgid "Shortcuts"
 msgstr "Atalhos"
@@ -1013,13 +1013,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "O verificador transparente segue o nível de zoom da tela"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Bordas de seleção animada"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Cor da borda 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Cor da borda 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Apenas predefinição personalizada pode ser modificada"
