@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-05-28 18:31\n"
+"PO-Revision-Date: 2021-05-28 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -973,7 +973,7 @@ msgid "Draw over Tile Mode:"
 msgstr ""
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Se desativado, a grade será desenhada somente sobre a imagem original"
 
 msgid "Grid color:"
 msgstr "Cor da grade:"
@@ -1084,16 +1084,16 @@ msgid "Pixel Perfect"
 msgstr "Pixel Perfeito"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Preenchimento interno"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Torna as linhas suaves removendo os pixels extras nas bordas"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Preencher Forma"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Preenche a forma desenhada com cor, em vez de desenhar uma forma oca"
 
 msgid "Brush color from"
 msgstr "Cor de pincel do"
@@ -1555,7 +1555,7 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Retrato"
 
 msgid "Landscape"
 msgstr ""
@@ -1597,7 +1597,7 @@ msgid "Bucket"
 msgstr "Preenchimento"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Ferramenta de sombreamento"
 
 msgid "Switch Colors"
 msgstr "Trocar Cores"
@@ -1710,19 +1710,19 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Criar uma nova paleta"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Comentário:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Vazio"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Da Paleta atual"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Do Sprite Atual"
 
 msgid "From Current Selection"
 msgstr ""
