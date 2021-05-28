@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-05-28 00:51\n"
+"PO-Revision-Date: 2021-05-28 04:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -432,7 +432,7 @@ msgid "Canvas"
 msgstr "Pânză"
 
 msgid "Selection"
-msgstr ""
+msgstr "Selecție"
 
 msgid "Shortcuts"
 msgstr "Comenzi rapide"
@@ -1032,13 +1032,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Carourile transparente urmăresc nivelul de transfocare al pânzei"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Margini de selecție animate"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Culoarea marginii 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Culoarea marginii 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
