@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-05-25 23:19\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -430,6 +430,9 @@ msgstr "Теми"
 
 msgid "Canvas"
 msgstr "Полотно"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Ярлики"
@@ -995,6 +998,15 @@ msgid "Follow Canvas Zoom Level"
 msgstr ""
 
 msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
 msgstr ""
 
 msgid "Only custom preset can be modified"
