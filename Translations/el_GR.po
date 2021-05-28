@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-05-25 23:19\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -430,6 +430,9 @@ msgstr "Θέματα"
 
 msgid "Canvas"
 msgstr "Καμβάς"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
@@ -1010,6 +1013,15 @@ msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζου
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
