@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-05-25 23:19\n"
+"PO-Revision-Date: 2021-05-28 00:50\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -430,6 +430,9 @@ msgstr "Témák"
 
 msgid "Canvas"
 msgstr "Vászon"
+
+msgid "Selection"
+msgstr ""
 
 msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
@@ -1008,6 +1011,15 @@ msgstr ""
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Az átlátszó négyzetháló követi a vászon nagyítási szintjét"
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Csak az egyedi beállítások módosíthatók"
