@@ -54,7 +54,7 @@ func display_palette(palette: Palette) -> void:
 		init_swatches()
 
 	if palette.width < MAX_GRID_SIZE.x or palette.height < MAX_GRID_SIZE.y:
-		grid_size = Vector2(palette.width, palette.height)
+		grid_size = Vector2(min(palette.width, MAX_GRID_SIZE.x), min(palette.height, MAX_GRID_SIZE.y))
 		clear_swatches()
 		init_swatches()
 	elif palette.width >= MAX_GRID_SIZE.x and palette.height >= MAX_GRID_SIZE.y and grid_size != MAX_GRID_SIZE:
@@ -152,5 +152,5 @@ func convert_grid_index_to_palette_index(index: int) -> int:
 
 func convert_palette_index_to_grid_index(palette_index: int) -> int:
 	var x: int = palette_index % displayed_palette.width
-	var y: int = palette_index / displayed_palette.height
+	var y: int = palette_index / displayed_palette.width
 	return int((x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x)

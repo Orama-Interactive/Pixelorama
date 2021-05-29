@@ -23,7 +23,7 @@ shader_param/width = 0.05
 shader_param/frequency = 200.0
 shader_param/stripe_direction = 0.5
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 10 )
 
 [node name="Canvas" type="Node2D"]
@@ -62,5 +62,5 @@ centered = false
 script = ExtResource( 3 )
 
 [node name="Previews" type="Node2D" parent="."]
-material = SubResource( 4 )
+material = SubResource( 3 )
 script = ExtResource( 7 )

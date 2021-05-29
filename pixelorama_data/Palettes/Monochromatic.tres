@@ -209,7 +209,7 @@ script = ExtResource( 1 )
 name = "Monochromatic"
 comment = "Author: Erevoid"
 width = 8
-height = 8
+height = 5
 colors = {
 0: SubResource( 1 ),
 1: SubResource( 2 ),
@@ -252,4 +252,4 @@ colors = {
 38: SubResource( 39 ),
 39: SubResource( 40 )
 }
-colors_max = 64
+colors_max = 40

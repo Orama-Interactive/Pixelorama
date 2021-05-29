@@ -89,7 +89,7 @@ script = ExtResource( 1 )
 name = "BubbleGum16"
 comment = "Author: PineTreePizza/CheetoHead"
 width = 8
-height = 8
+height = 2
 colors = {
 0: SubResource( 1 ),
 1: SubResource( 2 ),
@@ -108,4 +108,4 @@ colors = {
 14: SubResource( 15 ),
 15: SubResource( 16 )
 }
-colors_max = 64
+colors_max = 16

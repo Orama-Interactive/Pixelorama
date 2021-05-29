@@ -19,6 +19,9 @@ msgstr ""
 msgid "File Name:"
 msgstr ""
 
+msgid "Project Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr ""
 
@@ -113,6 +116,9 @@ msgid "Paste"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "New Brush"
 msgstr ""
 
 msgid "Scale Image"
@@ -411,6 +417,9 @@ msgid "Themes"
 msgstr ""
 
 msgid "Canvas"
+msgstr ""
+
+msgid "Selection"
 msgstr ""
 
 msgid "Shortcuts"
@@ -773,9 +782,17 @@ msgid "Bucket\n\n"
 "%s for right mouse button"
 msgstr ""
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle Tool\n\n"
@@ -783,6 +800,7 @@ msgid "Rectangle Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -790,6 +808,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -964,6 +983,15 @@ msgstr ""
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr ""
 
@@ -1007,6 +1035,9 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr ""
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Fill inside"
 msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
@@ -1510,7 +1541,7 @@ msgstr ""
 msgid "Bucket"
 msgstr ""
 
-msgid "Lighten/Darken"
+msgid "Shading Tool"
 msgstr ""
 
 msgid "Switch Colors"

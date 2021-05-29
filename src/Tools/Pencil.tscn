@@ -50,6 +50,7 @@ margin_left = 19.0
 margin_top = 130.0
 margin_right = 109.0
 margin_bottom = 154.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill inside"
 align = 1

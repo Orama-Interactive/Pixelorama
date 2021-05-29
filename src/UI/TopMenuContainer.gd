@@ -2,7 +2,7 @@ extends Panel
 
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
-enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, PREFERENCES}
+enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES}
 enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
@@ -81,6 +81,7 @@ func setup_edit_menu() -> void:
 		"Cut" : InputMap.get_action_list("cut")[0].get_scancode_with_modifiers(),
 		"Paste" : InputMap.get_action_list("paste")[0].get_scancode_with_modifiers(),
 		"Delete" : InputMap.get_action_list("delete")[0].get_scancode_with_modifiers(),
+		"New Brush" : InputMap.get_action_list("new_brush")[0].get_scancode_with_modifiers(),
 		"Preferences" : 0
 		}
 	var edit_menu : PopupMenu = edit_menu_button.get_popup()
@@ -259,8 +260,10 @@ func save_project_file() -> void:
 	if path == "":
 		if OS.get_name() == "HTML5":
 			Global.save_sprites_html5_dialog.popup_centered()
+			Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text = Global.current_project.name
 		else:
 			Global.save_sprites_dialog.popup_centered()
+			Global.save_sprites_dialog.current_file = Global.current_project.name
 		Global.dialog_open(true)
 	else:
 		Global.control._on_SaveSprite_file_selected(path)
@@ -270,8 +273,10 @@ func save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
 	if OS.get_name() == "HTML5":
 		Global.save_sprites_html5_dialog.popup_centered()
+		Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text = Global.current_project.name
 	else:
 		Global.save_sprites_dialog.popup_centered()
+		Global.save_sprites_dialog.current_file = Global.current_project.name
 	Global.dialog_open(true)
 
 
@@ -301,6 +306,8 @@ func edit_menu_id_pressed(id : int) -> void:
 			Global.canvas.selection.paste()
 		EditMenuId.DELETE:
 			Global.canvas.selection.delete()
+		EditMenuId.NEW_BRUSH:
+			Global.canvas.selection.new_brush()
 		EditMenuId.PREFERENCES:
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)

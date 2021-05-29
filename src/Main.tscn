@@ -55,7 +55,6 @@ __meta__ = {
 [node name="SplashDialog" parent="Dialogs" instance=ExtResource( 27 )]
 
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
-margin_right = 375.0
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
 
