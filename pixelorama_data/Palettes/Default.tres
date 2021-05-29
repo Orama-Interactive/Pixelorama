@@ -169,7 +169,7 @@ script = ExtResource( 2 )
 name = "Default"
 comment = "Author: CheetoHead/greusser"
 width = 8
-height = 8
+height = 4
 colors = {
 0: SubResource( 1 ),
 1: SubResource( 2 ),
@@ -204,4 +204,4 @@ colors = {
 30: SubResource( 31 ),
 31: SubResource( 32 )
 }
-colors_max = 64
+colors_max = 32

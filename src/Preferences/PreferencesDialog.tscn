@@ -674,6 +674,67 @@ step = 0.1
 value = 1.0
 align = 2
 
+[node name="Selection" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+visible = false
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 76.0
+
+[node name="SelectionOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection"]
+margin_right = 498.0
+margin_bottom = 48.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3
+
+[node name="AnimateLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
+margin_top = 5.0
+margin_right = 176.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 110, 0 )
+mouse_filter = 0
+text = "Animated selection borders"
+
+[node name="Animate" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
+margin_left = 180.0
+margin_right = 275.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "On"
+
+[node name="BorderColor1Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
+margin_left = 279.0
+margin_top = 5.0
+margin_right = 374.0
+margin_bottom = 19.0
+mouse_filter = 0
+text = "Border color 1:"
+
+[node name="BorderColor1" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
+margin_top = 28.0
+margin_right = 176.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+color = Color( 1, 1, 1, 1 )
+
+[node name="BorderColor2Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
+margin_left = 180.0
+margin_top = 31.0
+margin_right = 275.0
+margin_bottom = 45.0
+mouse_filter = 0
+text = "Border color 2:"
+
+[node name="BorderColor2" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
+margin_left = 279.0
+margin_top = 28.0
+margin_right = 374.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+
 [node name="Image" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 240.0
@@ -969,19 +1030,19 @@ margin_top = 132.0
 margin_right = 505.0
 margin_bottom = 152.0
 
-[node name="LightenDarkenLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="ShadingLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 157.0
 margin_right = 137.0
 margin_bottom = 171.0
-text = "Lighten/Darken"
+text = "Shading Tool"
 
-[node name="left_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="left_shading_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 142.0
 margin_top = 154.0
 margin_right = 321.0
 margin_bottom = 174.0
 
-[node name="right_lightdark_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="right_shading_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 326.0
 margin_top = 154.0
 margin_right = 505.0
@@ -1228,6 +1289,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]

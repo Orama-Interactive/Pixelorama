@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lightendarken.png-3d83685a1fead1fb3733687db3aa5ec7.stex"
+path="res://.import/shading.png-73285f7dba63c1426103fe5c7ec10d06.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/light_themes/tools/lightendarken.png"
-dest_files=[ "res://.import/lightendarken.png-3d83685a1fead1fb3733687db3aa5ec7.stex" ]
+source_file="res://assets/graphics/light_themes/tools/shading.png"
+dest_files=[ "res://.import/shading.png-73285f7dba63c1426103fe5c7ec10d06.stex" ]
 
 [params]
 

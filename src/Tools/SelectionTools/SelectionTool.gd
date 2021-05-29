@@ -112,6 +112,7 @@ func draw_move(position : Vector2) -> void:
 				position.x = _start_pos.x
 		if _snap_to_grid:
 			position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
+			position += Vector2(Global.grid_offset_x, Global.grid_offset_y)
 
 		if _move_content:
 			selection_node.move_content(position - _offset)

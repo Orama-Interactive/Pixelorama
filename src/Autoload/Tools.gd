@@ -52,7 +52,7 @@ var _tools = {
 	"Pencil" : "res://src/Tools/Pencil.tscn",
 	"Eraser" : "res://src/Tools/Eraser.tscn",
 	"Bucket" : "res://src/Tools/Bucket.tscn",
-	"LightenDarken" : "res://src/Tools/LightenDarken.tscn",
+	"Shading" : "res://src/Tools/Shading.tscn",
 	"LineTool" : "res://src/Tools/LineTool.tscn",
 	"RectangleTool" : "res://src/Tools/RectangleTool.tscn",
 	"EllipseTool" : "res://src/Tools/EllipseTool.tscn",

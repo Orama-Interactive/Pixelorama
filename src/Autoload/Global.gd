@@ -72,6 +72,11 @@ var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 var checker_follow_movement := false
 var checker_follow_scale := false
 var tilemode_opacity := 1.0
+
+var selection_animated_borders := true
+var selection_border_color_1 := Color.white
+var selection_border_color_2 := Color.black
+
 var fps_limit_focus := true
 var fps_limit := 0
 
@@ -562,11 +567,11 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 %s for left mouse button
 %s for right mouse button""") % [InputMap.get_action_list("left_fill_tool")[0].as_text(), InputMap.get_action_list("right_fill_tool")[0].as_text()]
 
-	var ld : BaseButton = find_node_by_name(root, "LightenDarken")
-	ld.hint_tooltip = tr("""Lighten/Darken
+	var ld : BaseButton = find_node_by_name(root, "Shading")
+	ld.hint_tooltip = tr("""Shading Tool
 
 %s for left mouse button
-%s for right mouse button""") % [InputMap.get_action_list("left_lightdark_tool")[0].as_text(), InputMap.get_action_list("right_lightdark_tool")[0].as_text()]
+%s for right mouse button""") % [InputMap.get_action_list("left_shading_tool")[0].as_text(), InputMap.get_action_list("right_shading_tool")[0].as_text()]
 
 	var linetool : BaseButton = find_node_by_name(root, "LineTool")
 	linetool.hint_tooltip = tr("""Line Tool
