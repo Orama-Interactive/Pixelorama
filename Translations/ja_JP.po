@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-05-28 00:50\n"
+"PO-Revision-Date: 2021-05-29 15:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -154,10 +154,10 @@ msgid "Rotate Image"
 msgstr "画像を回転"
 
 msgid "Clear"
-msgstr ""
+msgstr "削除"
 
 msgid "Invert"
-msgstr ""
+msgstr "反転"
 
 msgid "Flip"
 msgstr "反転"
@@ -432,7 +432,7 @@ msgid "Canvas"
 msgstr "キャンバス"
 
 msgid "Selection"
-msgstr ""
+msgstr "選択範囲"
 
 msgid "Shortcuts"
 msgstr "ショートカット"
@@ -815,7 +815,9 @@ msgstr "バケツ\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "シューディングツール\n\n"
+"%sでマウスの左ボタンを シューディングツール に変更\n"
+"%sでマウスの右ボタンを シューディングツール に変更"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -1030,13 +1032,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "透明なチェッカーはキャンバスのズームレベルに従います"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "アニメーション化された範囲"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "境界色 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "境界色 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "カスタムプリセットのみ変更できます"
@@ -1597,7 +1599,7 @@ msgid "Bucket"
 msgstr "バケット"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "シェーディングツール"
 
 msgid "Switch Colors"
 msgstr "色の切り替え"
