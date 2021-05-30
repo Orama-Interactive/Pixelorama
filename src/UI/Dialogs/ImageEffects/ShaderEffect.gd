@@ -130,6 +130,20 @@ func change_shader(_shader : Shader, name : String) -> void:
 			hbox.add_child(label)
 			hbox.add_child(spinbox)
 			shader_params.add_child(hbox)
+		elif u_type == "int":
+			var label := Label.new()
+			label.text = u_name
+			var spinbox := SpinBox.new()
+			spinbox.min_value = 0
+			spinbox.max_value = 255
+			spinbox.step = 1
+			if u_value != "":
+				spinbox.value = int(u_value)
+			spinbox.connect("value_changed", self, "set_shader_param", [u_name])
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(spinbox)
+			shader_params.add_child(hbox)
 
 #		print("---")
 #		print(uniform_split)
