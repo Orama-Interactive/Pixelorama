@@ -166,10 +166,10 @@ func update_tool_buttons() -> void:
 
 
 func update_tool_cursors() -> void:
-	var image = "res://assets/graphics/cursor_icons/%s_cursor.png" % _slots[BUTTON_LEFT].tool_node.name.to_lower()
-	Global.left_cursor_tool_texture.create_from_image(load(image), 0)
-	image = "res://assets/graphics/cursor_icons/%s_cursor.png" % _slots[BUTTON_RIGHT].tool_node.name.to_lower()
-	Global.right_cursor_tool_texture.create_from_image(load(image), 0)
+	var left_image = load("res://assets/graphics/cursor_icons/%s_cursor.png" % _slots[BUTTON_LEFT].tool_node.name.to_lower())
+	Global.left_cursor_tool_texture = left_image
+	var right_image = load("res://assets/graphics/cursor_icons/%s_cursor.png" % _slots[BUTTON_RIGHT].tool_node.name.to_lower())
+	Global.right_cursor_tool_texture = right_image
 
 
 func draw_indicator() -> void:

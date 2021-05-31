@@ -188,7 +188,7 @@ texture={
 "compress/lossy_quality": 0.7,
 "compress/mode": 0,
 "compress/normal_map": 0,
-"detect_3d": true,
+"detect_3d": false,
 "flags/anisotropic": false,
 "flags/filter": false,
 "flags/mipmaps": false,

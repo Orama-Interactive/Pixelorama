@@ -35,8 +35,8 @@ var layers_changed_skip := false
 var can_draw := false
 var has_focus := false
 var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
-var left_cursor_tool_texture := ImageTexture.new()
-var right_cursor_tool_texture := ImageTexture.new()
+var left_cursor_tool_texture := StreamTexture.new()
+var right_cursor_tool_texture := StreamTexture.new()
 
 var image_clipboard : Image
 var play_only_tags := true
