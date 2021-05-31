@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-05-31 10:57\n"
+"PO-Revision-Date: 2021-05-31 11:06\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1720,7 +1720,7 @@ msgid "Palette with the same name and path already exists!"
 msgstr ""
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Palettanév megadása szükséges!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
