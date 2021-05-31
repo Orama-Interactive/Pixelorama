@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-05-28 00:50\n"
+"PO-Revision-Date: 2021-05-31 10:57\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Fájlnév:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Projekt neve:"
 
 msgid "Image Size"
 msgstr "Képméret"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Keretméret"
 
 msgid "Size:"
-msgstr ""
+msgstr "Méret:"
 
 msgid "Width:"
 msgstr "Szélesség:"
@@ -130,7 +130,7 @@ msgid "Delete"
 msgstr "Törlés"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Új ecset"
 
 msgid "Scale Image"
 msgstr "Kép átméretezése"
@@ -154,10 +154,10 @@ msgid "Rotate Image"
 msgstr "Kép forgatása"
 
 msgid "Clear"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertálás"
 
 msgid "Flip"
 msgstr "Átfordítás"
@@ -840,10 +840,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Téglalap"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipszis"
 
 msgid "Choose a color for the left tool"
 msgstr "Szín kiválasztása a bal eszközhöz"
@@ -920,7 +920,7 @@ msgid "Rectangular grid width:"
 msgstr ""
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Beállítja, hogy a rács függőleges vonalai milyen távolságra legyenek egymástól"
 
 msgid "Rectangular grid height:"
 msgstr ""
