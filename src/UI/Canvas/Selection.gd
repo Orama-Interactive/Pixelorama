@@ -601,6 +601,8 @@ func paste() -> void:
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 	project.selection_offset = clipboard.selection_offset
 
+	temp_bitmap = project.selection_bitmap
+	temp_rect = big_bounding_rectangle
 	is_moving_content = true
 	is_pasting = true
 	original_preview_image = clipboard.image
