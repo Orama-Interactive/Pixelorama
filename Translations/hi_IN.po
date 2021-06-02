@@ -10,13 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2021-05-28 00:50\n"
+"PO-Revision-Date: 2021-06-02 04:19\n"
 
 msgid "OK"
 msgstr "ठीक है"
 
 msgid "Cancel"
-msgstr "कैंसिल करें"
+msgstr "कैन्सल करें"
 
 msgid "Open"
 msgstr "खोलें"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "फ़ाइल नाम:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "प्रोजेक्ट नाम:"
 
 msgid "Image Size"
 msgstr "चित्र का आकार"
@@ -40,10 +40,10 @@ msgid "Canvas Size"
 msgstr "कैनवास का आकार"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "फ्रेम का आकार"
 
 msgid "Size:"
-msgstr ""
+msgstr "आकार"
 
 msgid "Width:"
 msgstr "चौड़ाई:"
@@ -55,19 +55,19 @@ msgid "Center"
 msgstr "मध्य"
 
 msgid "File"
-msgstr ""
+msgstr "फ़ाइल"
 
 msgid "Edit"
-msgstr ""
+msgstr "बदलाव करें"
 
 msgid "View"
 msgstr "देखें"
 
 msgid "Image"
-msgstr ""
+msgstr "चित्र"
 
 msgid "Effects"
-msgstr ""
+msgstr "प्रभाव"
 
 msgid "Help"
 msgstr "सहायता"
