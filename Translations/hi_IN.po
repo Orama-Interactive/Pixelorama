@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2021-06-02 04:19\n"
+"PO-Revision-Date: 2021-06-02 04:28\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -82,55 +82,55 @@ msgid "Open..."
 msgstr "खोले..."
 
 msgid "Save..."
-msgstr ""
+msgstr "सेव करें"
 
 msgid "Save as..."
-msgstr ""
+msgstr "अन्य रूप मे सेव करें"
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD कम्प्रेशन इस्तेमाल करें"
 
 msgid "Import"
-msgstr ""
+msgstr "इम्पोर्ट"
 
 msgid "Export"
-msgstr ""
+msgstr "एक्सपोर्ट"
 
 msgid "Export..."
-msgstr ""
+msgstr "एक्सपोर्ट..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "अन्य रूप में एक्सपोर्ट करें"
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "PNG एक्सपोर्ट करें"
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "अन्य रूप में PNG एक्सपोर्ट करें"
 
 msgid "Quit"
 msgstr "बंद करे"
 
 msgid "Undo"
-msgstr ""
+msgstr "पूर्ववत् करें"
 
 msgid "Redo"
-msgstr ""
+msgstr "पुनः करें"
 
 msgid "Copy"
-msgstr ""
+msgstr "कॉपी करें"
 
 msgid "Cut"
-msgstr ""
+msgstr "काटें"
 
 msgid "Paste"
-msgstr ""
+msgstr "चिपकाएँ"
 
 msgid "Delete"
-msgstr ""
+msgstr "मिटायें"
 
 msgid "New Brush"
-msgstr ""
+msgstr "नया ब्रश"
 
 msgid "Scale Image"
 msgstr ""
