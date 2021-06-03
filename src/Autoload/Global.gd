@@ -34,7 +34,7 @@ var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 var layers_changed_skip := false
 var can_draw := false
 var has_focus := false
-var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
+var cursor_image = preload("res://assets/graphics/cursor.png")
 var left_cursor_tool_texture := StreamTexture.new()
 var right_cursor_tool_texture := StreamTexture.new()
 
@@ -51,6 +51,8 @@ var shrink := 1.0
 var dim_on_popup := true
 var smooth_zoom := true
 var theme_type : int = ThemeTypes.DARK
+var modulate_button_color : Color = Color.gray
+
 var default_image_width := 64
 var default_image_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
@@ -453,16 +455,12 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 	if button is Button:
-		var theme := theme_type
-		if theme == ThemeTypes.CARAMEL:
-			theme = ThemeTypes.DARK
 		for c in button.get_children():
 			if c is TextureRect:
-				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
 				if disable:
-					change_button_texturerect(c, "%s_disabled.png" % normal_file_name)
+					c.modulate.a = 0.5
 				else:
-					change_button_texturerect(c, "%s.png" % normal_file_name)
+					c.modulate.a = 1
 				break
 
 

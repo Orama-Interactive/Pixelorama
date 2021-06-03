@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/graphics/dark_themes/misc/color_switch.png" type="Texture" id=1]
-[ext_resource path="res://assets/graphics/dark_themes/misc/color_defaults.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/misc/color_switch.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/misc/color_defaults.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/ColorAndToolOptions.gd" type="Script" id=8]
 
 [sub_resource type="ShortCut" id=1]
@@ -73,9 +73,7 @@ margin_right = 330.0
 margin_bottom = 51.0
 size_flags_horizontal = 3
 
-[node name="ColorDefaults" type="TextureButton" parent="ColorButtonsVertical/ColorDefaultsCenter" groups=[
-"UIButtons",
-]]
+[node name="ColorDefaults" type="TextureButton" parent="ColorButtonsVertical/ColorDefaultsCenter"]
 margin_left = 152.0
 margin_right = 177.0
 margin_bottom = 8.0
@@ -108,6 +106,7 @@ margin_right = 313.0
 margin_bottom = 196.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 6
+
 [connection signal="pressed" from="ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
 [connection signal="color_changed" from="ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_color_changed" binds= [ false ]]
 [connection signal="popup_closed" from="ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_popup_closed"]

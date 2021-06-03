@@ -24,21 +24,14 @@ func _ready() -> void:
 		var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
 		var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 		var normal_file_name = texture.texture.resource_path.get_file()
-		var theme_type := Global.theme_type
-		if theme_type == Global.ThemeTypes.CARAMEL or theme_type == Global.ThemeTypes.BLUE:
-			theme_type = Global.ThemeTypes.DARK
 
-		var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
-		texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
+		texture.texture = load("res://assets/graphics/%s/%s" % [button_category, normal_file_name])
+		texture.modulate = Global.modulate_button_color
 
 	if Global.current_project.layers[i].visible:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")
-		visibility_button.get_child(0).rect_size = Vector2(24, 14)
-		visibility_button.get_child(0).rect_position = Vector2(4, 9)
 	else:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_invisible.png")
-		visibility_button.get_child(0).rect_size = Vector2(24, 8)
-		visibility_button.get_child(0).rect_position = Vector2(4, 12)
 
 	if Global.current_project.layers[i].locked:
 		Global.change_button_texturerect(lock_button.get_child(0), "lock.png")

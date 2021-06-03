@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/dark_themes/misc/portrait.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/dark_themes/misc/landscape.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_2.png" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect.png" type="Texture" id=5]
-[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_guides.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/misc/portrait.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/misc/landscape.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=6]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
 margin_right = 375.0
@@ -135,13 +135,17 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=[
+"UIButtons",
+]]
 margin_left = 350.0
 margin_right = 359.0
 margin_bottom = 52.0
 texture = ExtResource( 6 )
 
-[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect"]
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=[
+"UIButtons",
+]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -164,7 +168,9 @@ margin_top = 134.0
 margin_right = 359.0
 margin_bottom = 154.0
 
-[node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer"]
+[node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=[
+"UIButtons",
+]]
 margin_right = 20.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
@@ -187,7 +193,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LandscapeButton" type="Button" parent="VBoxContainer/SizeButtonsContainer"]
+[node name="LandscapeButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=[
+"UIButtons",
+]]
 margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 20.0

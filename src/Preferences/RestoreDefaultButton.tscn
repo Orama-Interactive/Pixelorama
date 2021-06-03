@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/graphics/dark_themes/misc/icon_reload.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/misc/icon_reload.png" type="Texture" id=1]
 [ext_resource path="res://src/Preferences/RestoreDefaultButton.gd" type="Script" id=2]
+
 
 [sub_resource type="ImageTexture" id=1]
 

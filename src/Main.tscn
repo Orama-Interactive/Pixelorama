@@ -111,10 +111,14 @@ Do you want to reload it?"
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]
 
-[node name="LeftCursor" type="Sprite" parent="."]
+[node name="LeftCursor" type="Sprite" parent="." groups=[
+"UIButtons",
+]]
 visible = false
 
-[node name="RightCursor" type="Sprite" parent="."]
+[node name="RightCursor" type="Sprite" parent="." groups=[
+"UIButtons",
+]]
 visible = false
 
 [node name="ModulateTween" type="Tween" parent="."]

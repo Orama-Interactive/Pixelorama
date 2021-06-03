@@ -54,16 +54,20 @@ func _on_Theme_pressed(index : int) -> void:
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
 	var main_theme : Theme = themes[ID][0]
-	if ID == 0 or ID == 1: # Dark or Gray Theme
+	var darkergray := Color(0.2, 0.2, 0.2)
+
+	if ID == 0 or ID == 1 or ID == 5: # Dark, Gray or Purple Theme
 		Global.theme_type = Global.ThemeTypes.DARK
+		Global.modulate_button_color = Color.gray
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = Global.ThemeTypes.BLUE
+		Global.modulate_button_color = Color.gray
 	elif ID == 3: # Caramel Theme
 		Global.theme_type = Global.ThemeTypes.CARAMEL
+		Global.modulate_button_color = darkergray
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.ThemeTypes.LIGHT
-	elif ID == 5: # Purple Theme
-		Global.theme_type = Global.ThemeTypes.DARK
+		Global.modulate_button_color = darkergray
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
@@ -91,24 +95,9 @@ func change_theme(ID : int) -> void:
 
 	for button in get_tree().get_nodes_in_group("UIButtons"):
 		if button is TextureButton:
-			var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
-			var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
-			var normal_file_name = button.texture_normal.resource_path.get_file()
-			var theme_type := Global.theme_type
-			if theme_type == Global.ThemeTypes.BLUE:
-				theme_type = Global.ThemeTypes.DARK
-
-			var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
-			button.texture_normal = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
-			if button.texture_pressed:
-				var pressed_file_name = button.texture_pressed.resource_path.get_file()
-				button.texture_pressed = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, pressed_file_name])
-			if button.texture_hover:
-				var hover_file_name = button.texture_hover.resource_path.get_file()
-				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, hover_file_name])
-			if button.texture_disabled and button.texture_disabled == StreamTexture:
-				var disabled_file_name = button.texture_disabled.resource_path.get_file()
-				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, disabled_file_name])
+			button.modulate = Global.modulate_button_color
+			if button.disabled:
+				button.modulate.a = 0.5
 		elif button is Button:
 			var texture : TextureRect
 			for child in button.get_children():
@@ -117,15 +106,11 @@ func change_theme(ID : int) -> void:
 					break
 
 			if texture:
-				var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
-				var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
-				var normal_file_name = texture.texture.resource_path.get_file()
-				var theme_type := Global.theme_type
-				if theme_type == Global.ThemeTypes.CARAMEL or (theme_type == Global.ThemeTypes.BLUE and button_category != "tools"):
-					theme_type = Global.ThemeTypes.DARK
-
-				var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
-				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
+				texture.modulate = Global.modulate_button_color
+				if button.disabled:
+					texture.modulate.a = 0.5
+		elif button is TextureRect or button is Sprite:
+			button.modulate = Global.modulate_button_color
 
 	# Make sure the frame text gets updated
 	Global.current_project.current_frame = Global.current_project.current_frame
