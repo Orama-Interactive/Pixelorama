@@ -26,7 +26,7 @@ func _ready() -> void:
 		var normal_file_name = texture.texture.resource_path.get_file()
 
 		texture.texture = load("res://assets/graphics/%s/%s" % [button_category, normal_file_name])
-		texture.modulate = Global.modulate_button_color
+		texture.modulate = Global.modulate_icon_color
 
 	if Global.current_project.layers[i].visible:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")

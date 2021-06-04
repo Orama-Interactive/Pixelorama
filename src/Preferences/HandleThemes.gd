@@ -1,14 +1,17 @@
 extends Node
 
 
+var theme_index := 0
+
 onready var themes := [
-	[preload("res://assets/themes/dark/theme.tres"), "Dark"],
-	[preload("res://assets/themes/gray/theme.tres"), "Gray"],
-	[preload("res://assets/themes/blue/theme.tres"), "Blue"],
-	[preload("res://assets/themes/caramel/theme.tres"), "Caramel"],
-	[preload("res://assets/themes/light/theme.tres"), "Light"],
-	[preload("res://assets/themes/purple/theme.tres"), "Purple"],
+	[preload("res://assets/themes/dark/theme.tres"), "Dark", Color.gray],
+	[preload("res://assets/themes/gray/theme.tres"), "Gray", Color.gray],
+	[preload("res://assets/themes/blue/theme.tres"), "Blue", Color.gray],
+	[preload("res://assets/themes/caramel/theme.tres"), "Caramel", Color(0.2, 0.2, 0.2)],
+	[preload("res://assets/themes/light/theme.tres"), "Light", Color(0.2, 0.2, 0.2)],
+	[preload("res://assets/themes/purple/theme.tres"), "Purple", Color.gray],
 ]
+
 onready var buttons_container : BoxContainer = $ThemeButtons
 onready var colors_container : BoxContainer = $ThemeColorsSpacer/ThemeColors
 onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColorPreview.tscn")
@@ -53,21 +56,20 @@ func _on_Theme_pressed(index : int) -> void:
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
+	theme_index = ID
 	var main_theme : Theme = themes[ID][0]
-	var darkergray := Color(0.2, 0.2, 0.2)
 
 	if ID == 0 or ID == 1 or ID == 5: # Dark, Gray or Purple Theme
 		Global.theme_type = Global.ThemeTypes.DARK
-		Global.modulate_button_color = Color.gray
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = Global.ThemeTypes.BLUE
-		Global.modulate_button_color = Color.gray
 	elif ID == 3: # Caramel Theme
 		Global.theme_type = Global.ThemeTypes.CARAMEL
-		Global.modulate_button_color = darkergray
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.ThemeTypes.LIGHT
-		Global.modulate_button_color = darkergray
+
+	if Global.icon_color_from == Global.IconColorFrom.THEME:
+		Global.modulate_icon_color = themes[ID][2]
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
@@ -93,24 +95,7 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
-	for button in get_tree().get_nodes_in_group("UIButtons"):
-		if button is TextureButton:
-			button.modulate = Global.modulate_button_color
-			if button.disabled:
-				button.modulate.a = 0.5
-		elif button is Button:
-			var texture : TextureRect
-			for child in button.get_children():
-				if child is TextureRect and child.name != "Background":
-					texture = child
-					break
-
-			if texture:
-				texture.modulate = Global.modulate_button_color
-				if button.disabled:
-					texture.modulate.a = 0.5
-		elif button is TextureRect or button is Sprite:
-			button.modulate = Global.modulate_button_color
+	change_icon_colors()
 
 	# Make sure the frame text gets updated
 	Global.current_project.current_frame = Global.current_project.current_frame
@@ -119,3 +104,24 @@ func change_theme(ID : int) -> void:
 
 	# Sets disabled theme color on palette swatches
 	Global.palette_panel.reset_empty_palette_swatches_color()
+
+
+func change_icon_colors() -> void:
+	for node in get_tree().get_nodes_in_group("UIButtons"):
+		if node is TextureButton:
+			node.modulate = Global.modulate_icon_color
+			if node.disabled:
+				node.modulate.a = 0.5
+		elif node is Button:
+			var texture : TextureRect
+			for child in node.get_children():
+				if child is TextureRect and child.name != "Background":
+					texture = child
+					break
+
+			if texture:
+				texture.modulate = Global.modulate_icon_color
+				if node.disabled:
+					texture.modulate.a = 0.5
+		elif node is TextureRect or node is Sprite:
+			node.modulate = Global.modulate_icon_color

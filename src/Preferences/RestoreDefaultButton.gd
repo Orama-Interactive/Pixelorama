@@ -8,7 +8,7 @@ var node : Node
 
 
 func _ready() -> void:
-	modulate = Global.modulate_button_color
+	modulate = Global.modulate_icon_color
 
 
 func _on_RestoreDefaultButton_pressed() -> void:
