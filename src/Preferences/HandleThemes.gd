@@ -110,7 +110,7 @@ func change_icon_colors() -> void:
 	for node in get_tree().get_nodes_in_group("UIButtons"):
 		if node is TextureButton:
 			node.modulate = Global.modulate_icon_color
-			if node.disabled:
+			if node.disabled and not ("RestoreDefaultButton" in node.name):
 				node.modulate.a = 0.5
 		elif node is Button:
 			var texture : TextureRect
