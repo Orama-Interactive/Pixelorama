@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-05-28 00:50\n"
+"PO-Revision-Date: 2021-06-04 18:55\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -498,6 +498,15 @@ msgid "Light"
 msgstr "فاتح"
 
 msgid "Purple"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
 msgstr ""
 
 msgid "Only affect selection"
