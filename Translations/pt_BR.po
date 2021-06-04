@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-06-04 11:22\n"
+"PO-Revision-Date: 2021-06-04 11:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -175,7 +175,7 @@ msgid "Tile Mode"
 msgstr "Modo de Tile"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Transparência da Janela"
 
 msgid "Panel Layout"
 msgstr "Layout do Painel"
@@ -1560,7 +1560,7 @@ msgid "Portrait"
 msgstr "Retrato"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Modo Paisagem / Horizontal"
 
 msgid "Templates:"
 msgstr "Modelos:"
@@ -1584,7 +1584,7 @@ msgid "Zoom"
 msgstr "Zoom"
 
 msgid "Pan"
-msgstr ""
+msgstr "Mover"
 
 msgid "Color Picker"
 msgstr "Seleção de Cores"
