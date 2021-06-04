@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-06-04 18:54\n"
+"PO-Revision-Date: 2021-06-04 19:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nazwa pliku:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nazwa projektu:"
 
 msgid "Image Size"
 msgstr "Rozmiar obrazu"
@@ -500,7 +500,7 @@ msgid "Purple"
 msgstr "Fioletowy"
 
 msgid "Theme"
-msgstr ""
+msgstr "Motyw"
 
 msgid "Icon color from:"
 msgstr ""
