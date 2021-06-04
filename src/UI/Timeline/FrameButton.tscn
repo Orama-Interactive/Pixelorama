@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Timeline/FrameButton.gd" type="Script" id=1]
+
+[node name="FrameButton" type="Button"]
+margin_right = 12.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "1"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

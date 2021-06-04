@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/graphics/layers/delete.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
+[ext_resource path="res://src/UI/Timeline/FrameButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
@@ -905,21 +906,17 @@ margin_bottom = 88.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs"]
-margin_top = 1.0
+[node name="FrameButton" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
 margin_right = 36.0
-margin_bottom = 15.0
 rect_min_size = Vector2( 36, 0 )
-text = "1"
-align = 1
 
 [node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
-margin_top = 20.0
+margin_top = 24.0
 margin_right = 36.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
