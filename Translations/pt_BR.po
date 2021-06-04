@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-06-04 11:31\n"
+"PO-Revision-Date: 2021-06-04 18:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -499,6 +499,15 @@ msgstr "Claro"
 
 msgid "Purple"
 msgstr "Roxo"
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
