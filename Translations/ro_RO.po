@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-06-04 18:55\n"
+"PO-Revision-Date: 2021-06-04 19:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -501,13 +501,13 @@ msgid "Purple"
 msgstr "Mov"
 
 msgid "Theme"
-msgstr ""
+msgstr "Temă"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Culoarea pictogramei din:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Culoarea pictogramei:"
 
 msgid "Only affect selection"
 msgstr "Afectează doar selecția"
