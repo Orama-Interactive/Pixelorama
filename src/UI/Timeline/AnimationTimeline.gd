@@ -212,14 +212,14 @@ func _on_MoveLeft_pressed() -> void:
 	var frame : int = Global.current_project.current_frame
 	if frame == 0:
 		return
-	Global.current_project.layers[Global.current_project.current_layer].frame_container.get_child(frame).change_frame_order(-1)
+	Global.frame_ids.get_child(frame).change_frame_order(-1)
 
 
 func _on_MoveRight_pressed() -> void:
 	var frame : int = Global.current_project.current_frame
 	if frame == last_frame:
 		return
-	Global.current_project.layers[Global.current_project.current_layer].frame_container.get_child(frame).change_frame_order(1)
+	Global.frame_ids.get_child(frame).change_frame_order(1)
 
 
 func _on_OnionSkinning_pressed() -> void:
