@@ -160,7 +160,7 @@ editable = false
 caret_blink = true
 caret_blink_speed = 0.5
 
-[connection signal="pressed" from="." to="." method="_on_LayerContainer_pressed"]
+[connection signal="gui_input" from="." to="." method="_on_LayerContainer_gui_input"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LinkButton" to="." method="_on_LinkButton_pressed"]

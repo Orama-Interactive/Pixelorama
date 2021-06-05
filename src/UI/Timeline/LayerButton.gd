@@ -2,7 +2,7 @@ class_name LayerButton
 extends Button
 
 
-var i := 0
+var layer := 0
 var visibility_button : BaseButton
 var lock_button : BaseButton
 var linked_button : BaseButton
@@ -28,17 +28,17 @@ func _ready() -> void:
 		texture.texture = load("res://assets/graphics/%s/%s" % [button_category, normal_file_name])
 		texture.modulate = Global.modulate_icon_color
 
-	if Global.current_project.layers[i].visible:
+	if Global.current_project.layers[layer].visible:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")
 	else:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_invisible.png")
 
-	if Global.current_project.layers[i].locked:
+	if Global.current_project.layers[layer].locked:
 		Global.change_button_texturerect(lock_button.get_child(0), "lock.png")
 	else:
 		Global.change_button_texturerect(lock_button.get_child(0), "unlock.png")
 
-	if Global.current_project.layers[i].new_cels_linked: # If new layers will be linked
+	if Global.current_project.layers[layer].new_cels_linked: # If new layers will be linked
 		Global.change_button_texturerect(linked_button.get_child(0), "linked_layer.png")
 	else:
 		Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
@@ -49,12 +49,14 @@ func _input(event : InputEvent) -> void:
 		save_layer_name(line_edit.text)
 
 
-func _on_LayerContainer_pressed() -> void:
-	pressed = !pressed
-	label.visible = false
-	line_edit.visible = true
-	line_edit.editable = true
-	line_edit.grab_focus()
+func _on_LayerContainer_gui_input(event : InputEvent):
+	if event is InputEventMouseButton:
+		Global.current_project.current_layer = layer
+		if event.doubleclick:
+			label.visible = false
+			line_edit.visible = true
+			line_edit.editable = true
+			line_edit.grab_focus()
 
 
 func _on_LineEdit_focus_exited() -> void:
@@ -67,21 +69,21 @@ func save_layer_name(new_name : String) -> void:
 	line_edit.editable = false
 	label.text = new_name
 	Global.layers_changed_skip = true
-	Global.current_project.layers[i].name = new_name
+	Global.current_project.layers[layer].name = new_name
 
 
 func _on_VisibilityButton_pressed() -> void:
-	Global.current_project.layers[i].visible = !Global.current_project.layers[i].visible
+	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
 
 
 func _on_LockButton_pressed() -> void:
-	Global.current_project.layers[i].locked = !Global.current_project.layers[i].locked
+	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 
 
 func _on_LinkButton_pressed() -> void:
-	Global.current_project.layers[i].new_cels_linked = !Global.current_project.layers[i].new_cels_linked
-	if Global.current_project.layers[i].new_cels_linked && !Global.current_project.layers[i].linked_cels:
+	Global.current_project.layers[layer].new_cels_linked = !Global.current_project.layers[layer].new_cels_linked
+	if Global.current_project.layers[layer].new_cels_linked && !Global.current_project.layers[layer].linked_cels:
 		# If button is pressed and there are no linked cels in the layer
-		Global.current_project.layers[i].linked_cels.append(Global.current_project.frames[Global.current_project.current_frame])
-		Global.current_project.layers[i].frame_container.get_child(Global.current_project.current_frame)._ready()
+		Global.current_project.layers[layer].linked_cels.append(Global.current_project.frames[Global.current_project.current_frame])
+		Global.current_project.layers[layer].frame_container.get_child(Global.current_project.current_frame)._ready()
