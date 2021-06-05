@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-06-04 18:55\n"
+"PO-Revision-Date: 2021-06-05 17:38\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -501,13 +501,13 @@ msgid "Purple"
 msgstr "Lila"
 
 msgid "Theme"
-msgstr ""
+msgstr "Téma"
 
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Ikon színe:"
 
 msgid "Only affect selection"
 msgstr ""
@@ -1082,7 +1082,7 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "A vonalakat simává teszi azáltal, hogy eltávolítja a széleken lévő extra képpontokat"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Alakzat kitöltése"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
@@ -1705,25 +1705,25 @@ msgid "Create a new palette"
 msgstr ""
 
 msgid "Comment:"
-msgstr ""
+msgstr "Megjegyzés:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Üres"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Jelenlegi palettából"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Az aktuális képből"
 
 msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Új szín hozzáadása"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Kiválasztott szín törlése"
 
 msgid "Palette with the same name and path already exists!"
 msgstr ""
