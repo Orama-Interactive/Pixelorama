@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-04 18:54\n"
+"PO-Revision-Date: 2021-06-05 00:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -501,13 +501,13 @@ msgid "Purple"
 msgstr "紫色"
 
 msgid "Theme"
-msgstr ""
+msgstr "主题"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "图标颜色从："
 
 msgid "Icon color:"
-msgstr ""
+msgstr "图标颜色："
 
 msgid "Only affect selection"
 msgstr "仅影响所选"
