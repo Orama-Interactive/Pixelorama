@@ -69,3 +69,44 @@ func change_frame_order(rate : int) -> void:
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.commit_action()
+
+
+func get_drag_data(_position) -> Array:
+	var button := Button.new()
+	button.rect_size = rect_size
+	button.theme = Global.control.theme
+	button.text = text
+	set_drag_preview(button)
+
+	return ["Frame", frame]
+
+
+func can_drop_data(_pos, data) -> bool:
+	if typeof(data) == TYPE_ARRAY:
+		return data[0] == "Frame"
+	else:
+		return false
+
+
+func drop_data(_pos, data) -> void:
+	var new_frame = data[1]
+	if frame == new_frame:
+		return
+
+	var new_frames : Array = Global.current_project.frames.duplicate()
+	var temp = new_frames[frame]
+	new_frames[frame] = new_frames[new_frame]
+	new_frames[new_frame] = temp
+
+	Global.current_project.undo_redo.create_action("Change Frame Order")
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
+
+	if Global.current_project.current_frame == frame:
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", new_frame)
+		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()

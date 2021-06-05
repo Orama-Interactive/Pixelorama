@@ -128,13 +128,13 @@ func get_drag_data(_position) -> Array:
 	button.add_child(texture_rect)
 	set_drag_preview(button)
 
-	return [frame, layer]
+	return ["Cel", frame, layer]
 
 
 func can_drop_data(_pos, data) -> bool:
-	if typeof(data) == TYPE_ARRAY:
-		var new_frame = data[0]
-		var new_layer = data[1]
+	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
+		var new_frame = data[1]
+		var new_layer = data[2]
 		if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels or Global.current_project.frames[new_frame] in Global.current_project.layers[new_layer].linked_cels:
 			# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
 			return false
@@ -145,8 +145,8 @@ func can_drop_data(_pos, data) -> bool:
 
 
 func drop_data(_pos, data) -> void:
-	var new_frame = data[0]
-	var new_layer = data[1]
+	var new_frame = data[1]
+	var new_layer = data[2]
 
 	var this_frame_new_cels = Global.current_project.frames[frame].cels.duplicate()
 	var new_frame_new_cels
