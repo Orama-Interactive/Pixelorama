@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-04 18:55\n"
+"PO-Revision-Date: 2021-06-05 09:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -501,7 +501,7 @@ msgid "Purple"
 msgstr "Фиолетовый"
 
 msgid "Theme"
-msgstr ""
+msgstr "Тема"
 
 msgid "Icon color from:"
 msgstr ""
