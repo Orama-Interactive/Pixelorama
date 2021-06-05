@@ -1,7 +1,12 @@
 extends Button
 
+enum MenuOptions {DELETE, LINK, PROPERTIES}
+
+
 var frame := 0
 var layer := 0
+var cel : Cel
+var image : Image
 
 onready var popup_menu : PopupMenu = $PopupMenu
 
@@ -13,16 +18,18 @@ func _ready() -> void:
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
-		popup_menu.set_item_text(0, "Unlink Cel")
-		popup_menu.set_item_metadata(0, "Unlink Cel")
+		popup_menu.set_item_text(MenuOptions.LINK, "Unlink Cel")
+		popup_menu.set_item_metadata(MenuOptions.LINK, "Unlink Cel")
 	else:
 		get_node("LinkedIndicator").visible = false
-		popup_menu.set_item_text(0, "Link Cel")
-		popup_menu.set_item_metadata(0, "Link Cel")
+		popup_menu.set_item_text(MenuOptions.LINK, "Link Cel")
+		popup_menu.set_item_metadata(MenuOptions.LINK, "Link Cel")
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
+	cel = Global.current_project.frames[frame].cels[layer]
+	image = cel.image
 
 
 func _on_CelButton_resized() -> void:
@@ -44,14 +51,17 @@ func _on_CelButton_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"): # Middle mouse click
 		pressed = !pressed
-		Global.animation_timeline._on_DeleteFrame_pressed(frame)
+		delete_cel_contents()
 	else: # An example of this would be Space
 		pressed = !pressed
 
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
-		0: # Unlink Cel
+		MenuOptions.DELETE:
+			delete_cel_contents()
+
+		MenuOptions.LINK:
 			var cel_index : int = Global.current_project.layers[layer].linked_cels.find(Global.current_project.frames[frame])
 			var f = Global.current_project.frames[frame]
 			var new_layers : Array = Global.current_project.layers.duplicate()
@@ -64,7 +74,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			for i in new_cels.size():
 				new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
 
-			if popup_menu.get_item_metadata(0) == "Unlink Cel":
+			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
 				sprite.copy_from(Global.current_project.frames[frame].cels[layer].image)
@@ -80,7 +90,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
-			elif popup_menu.get_item_metadata(0) == "Link Cel":
+			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
 				new_layers[layer].linked_cels.append(Global.current_project.frames[frame])
 				Global.current_project.undo_redo.create_action("Link Cel")
 				Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
@@ -96,6 +106,14 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
+
+
+func delete_cel_contents() -> void:
+	if image.is_invisible():
+		return
+	Global.canvas.handle_undo("Draw", Global.current_project, layer, frame)
+	image.fill(0)
+	Global.canvas.handle_redo("Draw", Global.current_project, layer, frame)
 
 
 func get_drag_data(_position) -> Array:

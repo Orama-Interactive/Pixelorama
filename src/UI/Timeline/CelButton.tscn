@@ -57,7 +57,7 @@ margin_bottom = 0.0
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-items = [ "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
+items = [ "Delete", null, 0, false, false, -1, 0, null, "", false, "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
