@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-06-04 18:54\n"
+"PO-Revision-Date: 2021-06-05 18:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -501,13 +501,13 @@ msgid "Purple"
 msgstr "紫"
 
 msgid "Theme"
-msgstr ""
+msgstr "テーマ"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "次のもののアイコンの色:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "アイコンの色:"
 
 msgid "Only affect selection"
 msgstr "選択範囲のみに影響"
