@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-06-04 18:55\n"
+"PO-Revision-Date: 2021-06-05 00:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -501,13 +501,13 @@ msgid "Purple"
 msgstr "Viola"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Colore icona da:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Colore dell'icona:"
 
 msgid "Only affect selection"
 msgstr "Influire solo sulla selezione"
