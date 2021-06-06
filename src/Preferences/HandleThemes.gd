@@ -1,14 +1,17 @@
 extends Node
 
 
+var theme_index := 0
+
 onready var themes := [
-	[preload("res://assets/themes/dark/theme.tres"), "Dark"],
-	[preload("res://assets/themes/gray/theme.tres"), "Gray"],
-	[preload("res://assets/themes/blue/theme.tres"), "Blue"],
-	[preload("res://assets/themes/caramel/theme.tres"), "Caramel"],
-	[preload("res://assets/themes/light/theme.tres"), "Light"],
-	[preload("res://assets/themes/purple/theme.tres"), "Purple"],
+	[preload("res://assets/themes/dark/theme.tres"), "Dark", Color.gray],
+	[preload("res://assets/themes/gray/theme.tres"), "Gray", Color.gray],
+	[preload("res://assets/themes/blue/theme.tres"), "Blue", Color.gray],
+	[preload("res://assets/themes/caramel/theme.tres"), "Caramel", Color(0.2, 0.2, 0.2)],
+	[preload("res://assets/themes/light/theme.tres"), "Light", Color(0.2, 0.2, 0.2)],
+	[preload("res://assets/themes/purple/theme.tres"), "Purple", Color.gray],
 ]
+
 onready var buttons_container : BoxContainer = $ThemeButtons
 onready var colors_container : BoxContainer = $ThemeColorsSpacer/ThemeColors
 onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColorPreview.tscn")
@@ -53,8 +56,10 @@ func _on_Theme_pressed(index : int) -> void:
 
 func change_theme(ID : int) -> void:
 	var font = Global.control.theme.default_font
+	theme_index = ID
 	var main_theme : Theme = themes[ID][0]
-	if ID == 0 or ID == 1: # Dark or Gray Theme
+
+	if ID == 0 or ID == 1 or ID == 5: # Dark, Gray or Purple Theme
 		Global.theme_type = Global.ThemeTypes.DARK
 	elif ID == 2: # Godot's Theme
 		Global.theme_type = Global.ThemeTypes.BLUE
@@ -62,8 +67,9 @@ func change_theme(ID : int) -> void:
 		Global.theme_type = Global.ThemeTypes.CARAMEL
 	elif ID == 4: # Light Theme
 		Global.theme_type = Global.ThemeTypes.LIGHT
-	elif ID == 5: # Purple Theme
-		Global.theme_type = Global.ThemeTypes.DARK
+
+	if Global.icon_color_from == Global.IconColorFrom.THEME:
+		Global.modulate_icon_color = themes[ID][2]
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
@@ -89,43 +95,7 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
-	for button in get_tree().get_nodes_in_group("UIButtons"):
-		if button is TextureButton:
-			var last_backslash = button.texture_normal.resource_path.get_base_dir().find_last("/")
-			var button_category = button.texture_normal.resource_path.get_base_dir().right(last_backslash + 1)
-			var normal_file_name = button.texture_normal.resource_path.get_file()
-			var theme_type := Global.theme_type
-			if theme_type == Global.ThemeTypes.BLUE:
-				theme_type = Global.ThemeTypes.DARK
-
-			var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
-			button.texture_normal = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
-			if button.texture_pressed:
-				var pressed_file_name = button.texture_pressed.resource_path.get_file()
-				button.texture_pressed = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, pressed_file_name])
-			if button.texture_hover:
-				var hover_file_name = button.texture_hover.resource_path.get_file()
-				button.texture_hover = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, hover_file_name])
-			if button.texture_disabled and button.texture_disabled == StreamTexture:
-				var disabled_file_name = button.texture_disabled.resource_path.get_file()
-				button.texture_disabled = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, disabled_file_name])
-		elif button is Button:
-			var texture : TextureRect
-			for child in button.get_children():
-				if child is TextureRect and child.name != "Background":
-					texture = child
-					break
-
-			if texture:
-				var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
-				var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
-				var normal_file_name = texture.texture.resource_path.get_file()
-				var theme_type := Global.theme_type
-				if theme_type == Global.ThemeTypes.CARAMEL or (theme_type == Global.ThemeTypes.BLUE and button_category != "tools"):
-					theme_type = Global.ThemeTypes.DARK
-
-				var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
-				texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
+	change_icon_colors()
 
 	# Make sure the frame text gets updated
 	Global.current_project.current_frame = Global.current_project.current_frame
@@ -134,3 +104,24 @@ func change_theme(ID : int) -> void:
 
 	# Sets disabled theme color on palette swatches
 	Global.palette_panel.reset_empty_palette_swatches_color()
+
+
+func change_icon_colors() -> void:
+	for node in get_tree().get_nodes_in_group("UIButtons"):
+		if node is TextureButton:
+			node.modulate = Global.modulate_icon_color
+			if node.disabled and not ("RestoreDefaultButton" in node.name):
+				node.modulate.a = 0.5
+		elif node is Button:
+			var texture : TextureRect
+			for child in node.get_children():
+				if child is TextureRect and child.name != "Background":
+					texture = child
+					break
+
+			if texture:
+				texture.modulate = Global.modulate_icon_color
+				if node.disabled:
+					texture.modulate.a = 0.5
+		elif node is TextureRect or node is Sprite:
+			node.modulate = Global.modulate_icon_color

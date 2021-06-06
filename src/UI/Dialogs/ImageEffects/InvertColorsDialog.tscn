@@ -20,7 +20,8 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 263.0
+margin_left = 31.0
+margin_right = 231.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
@@ -96,6 +97,7 @@ mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
+
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/RButton" to="." method="_on_RButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/GButton" to="." method="_on_GButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/BButton" to="." method="_on_BButton_toggled"]

@@ -49,6 +49,7 @@ var temp_rect := Rect2()
 var temp_bitmap := BitMap.new()
 var rect_aspect_ratio := 0.0
 var temp_rect_size := Vector2.ZERO
+var temp_rect_pivot := Vector2.ZERO
 
 var original_big_bounding_rectangle := Rect2()
 var original_preview_image := Image.new()
@@ -138,6 +139,7 @@ func _input(event : InputEvent) -> void:
 							temp_rect.end.y = pos
 					rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
 					temp_rect_size = temp_rect.size
+					temp_rect_pivot = temp_rect.position + ((temp_rect.end - temp_rect.position) / 2).floor()
 
 			elif dragged_gizmo:
 				Global.has_focus = true
@@ -264,23 +266,19 @@ func update_on_zoom(zoom : float) -> void:
 
 func gizmo_resize() -> void:
 	var dir := dragged_gizmo.direction
-	if dir.x > 0:
-		temp_rect.size.x = Global.canvas.current_pixel.x - temp_rect.position.x
-	elif dir.x < 0:
-		var end_x = temp_rect.end.x
-		temp_rect.position.x = Global.canvas.current_pixel.x
-		temp_rect.end.x = end_x
-	else:
-		temp_rect.size.x = temp_rect_size.x
 
-	if dir.y > 0:
-		temp_rect.size.y = Global.canvas.current_pixel.y - temp_rect.position.y
-	elif dir.y < 0:
-		var end_y = temp_rect.end.y
-		temp_rect.position.y = Global.canvas.current_pixel.y
-		temp_rect.end.y = end_y
+	if Input.is_action_pressed("ctrl"):
+		# Code inspired from https://github.com/GDQuest/godot-open-rpg
+		if dir.x != 0 and dir.y != 0: # Border gizmos
+			temp_rect.size = ((Global.canvas.current_pixel - temp_rect_pivot) * 2.0 * dir)
+		elif dir.y == 0: # Center left and right gizmos
+			temp_rect.size.x = (Global.canvas.current_pixel.x - temp_rect_pivot.x) * 2.0 * dir.x
+		elif dir.x == 0: # Center top and bottom gizmos
+			temp_rect.size.y = (Global.canvas.current_pixel.y - temp_rect_pivot.y) * 2.0 * dir.y
+		temp_rect = Rect2(-1.0 * temp_rect.size / 2 + temp_rect_pivot, temp_rect.size)
+
 	else:
-		temp_rect.size.y = temp_rect_size.y
+		resize_rect(Global.canvas.current_pixel, dir)
 
 	if Input.is_action_pressed("shift"): # Maintain aspect ratio
 		var end_y = temp_rect.end.y
@@ -328,6 +326,26 @@ func gizmo_resize() -> void:
 	Global.current_project.selection_bitmap = Global.current_project.resize_bitmap_values(temp_bitmap, size, temp_rect.size.x < 0, temp_rect.size.y < 0)
 	Global.current_project.selection_bitmap_changed()
 	update()
+
+
+func resize_rect(pos : Vector2, dir : Vector2) -> void:
+	if dir.x > 0:
+		temp_rect.size.x = pos.x - temp_rect.position.x
+	elif dir.x < 0:
+		var end_x = temp_rect.end.x
+		temp_rect.position.x = pos.x
+		temp_rect.end.x = end_x
+	else:
+		temp_rect.size.x = temp_rect_size.x
+
+	if dir.y > 0:
+		temp_rect.size.y = pos.y - temp_rect.position.y
+	elif dir.y < 0:
+		var end_y = temp_rect.end.y
+		temp_rect.position.y = pos.y
+		temp_rect.end.y = end_y
+	else:
+		temp_rect.size.y = temp_rect_size.y
 
 
 func gizmo_rotate() -> void: # Does not work properly yet
@@ -583,6 +601,8 @@ func paste() -> void:
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 	project.selection_offset = clipboard.selection_offset
 
+	temp_bitmap = project.selection_bitmap
+	temp_rect = big_bounding_rectangle
 	is_moving_content = true
 	is_pasting = true
 	original_preview_image = clipboard.image

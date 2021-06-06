@@ -16,7 +16,9 @@ func _ready() -> void:
 	load_config()
 	$PixelPerfect.pressed = tool_slot.pixel_perfect
 	$Mirror/Horizontal.pressed = tool_slot.horizontal_mirror
+	$Mirror/Horizontal.modulate = Global.modulate_icon_color
 	$Mirror/Vertical.pressed = tool_slot.vertical_mirror
+	$Mirror/Vertical.modulate = Global.modulate_icon_color
 
 
 func _on_PixelPerfect_toggled(button_pressed : bool) -> void:

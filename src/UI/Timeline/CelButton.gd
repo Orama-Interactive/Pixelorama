@@ -1,7 +1,12 @@
 extends Button
 
+enum MenuOptions {DELETE, LINK, PROPERTIES}
+
+
 var frame := 0
 var layer := 0
+var cel : Cel
+var image : Image
 
 onready var popup_menu : PopupMenu = $PopupMenu
 
@@ -13,16 +18,18 @@ func _ready() -> void:
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
 		get_node("LinkedIndicator").visible = true
-		popup_menu.set_item_text(4, "Unlink Cel")
-		popup_menu.set_item_metadata(4, "Unlink Cel")
+		popup_menu.set_item_text(MenuOptions.LINK, "Unlink Cel")
+		popup_menu.set_item_metadata(MenuOptions.LINK, "Unlink Cel")
 	else:
 		get_node("LinkedIndicator").visible = false
-		popup_menu.set_item_text(4, "Link Cel")
-		popup_menu.set_item_metadata(4, "Link Cel")
+		popup_menu.set_item_text(MenuOptions.LINK, "Link Cel")
+		popup_menu.set_item_metadata(MenuOptions.LINK, "Link Cel")
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
+	cel = Global.current_project.frames[frame].cels[layer]
+	image = cel.image
 
 
 func _on_CelButton_resized() -> void:
@@ -40,36 +47,21 @@ func _on_CelButton_pressed() -> void:
 		Global.current_project.current_frame = frame
 		Global.current_project.current_layer = layer
 	elif Input.is_action_just_released("right_mouse"):
-		if Global.current_project.frames.size() == 1:
-			popup_menu.set_item_disabled(0, true)
-			popup_menu.set_item_disabled(2, true)
-			popup_menu.set_item_disabled(3, true)
-		else:
-			popup_menu.set_item_disabled(0, false)
-			if frame > 0:
-				popup_menu.set_item_disabled(2, false)
-			if frame < Global.current_project.frames.size() - 1:
-				popup_menu.set_item_disabled(3, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"): # Middle mouse click
 		pressed = !pressed
-		Global.animation_timeline._on_DeleteFrame_pressed(frame)
+		delete_cel_contents()
 	else: # An example of this would be Space
 		pressed = !pressed
 
 
 func _on_PopupMenu_id_pressed(ID : int) -> void:
 	match ID:
-		0: # Remove Frame
-			Global.animation_timeline._on_DeleteFrame_pressed(frame)
-		1: # Clone Frame
-			Global.animation_timeline._on_CopyFrame_pressed(frame)
-		2: # Move Left
-			change_frame_order(-1)
-		3: # Move Right
-			change_frame_order(1)
-		4: # Unlink Cel
+		MenuOptions.DELETE:
+			delete_cel_contents()
+
+		MenuOptions.LINK:
 			var cel_index : int = Global.current_project.layers[layer].linked_cels.find(Global.current_project.frames[frame])
 			var f = Global.current_project.frames[frame]
 			var new_layers : Array = Global.current_project.layers.duplicate()
@@ -82,7 +74,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 			for i in new_cels.size():
 				new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
 
-			if popup_menu.get_item_metadata(4) == "Unlink Cel":
+			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
 				sprite.copy_from(Global.current_project.frames[frame].cels[layer].image)
@@ -98,7 +90,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
-			elif popup_menu.get_item_metadata(4) == "Link Cel":
+			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
 				new_layers[layer].linked_cels.append(Global.current_project.frames[frame])
 				Global.current_project.undo_redo.create_action("Link Cel")
 				Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
@@ -114,32 +106,14 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
-		5: # Frame Properties
-				Global.frame_properties.popup_centered()
-				Global.dialog_open(true)
-				Global.frame_properties.set_frame_label(frame)
-				Global.frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
 
-func change_frame_order(rate : int) -> void:
-	var change = frame + rate
-	var new_frames : Array = Global.current_project.frames.duplicate()
-	var temp = new_frames[frame]
-	new_frames[frame] = new_frames[change]
-	new_frames[change] = temp
-
-	Global.current_project.undo_redo.create_action("Change Frame Order")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-
-	if Global.current_project.current_frame == frame:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", change)
-		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
-
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.commit_action()
+func delete_cel_contents() -> void:
+	if image.is_invisible():
+		return
+	Global.canvas.handle_undo("Draw", Global.current_project, layer, frame)
+	image.fill(0)
+	Global.canvas.handle_redo("Draw", Global.current_project, layer, frame)
 
 
 func get_drag_data(_position) -> Array:
@@ -154,13 +128,13 @@ func get_drag_data(_position) -> Array:
 	button.add_child(texture_rect)
 	set_drag_preview(button)
 
-	return [frame, layer]
+	return ["Cel", frame, layer]
 
 
 func can_drop_data(_pos, data) -> bool:
-	if typeof(data) == TYPE_ARRAY:
-		var new_frame = data[0]
-		var new_layer = data[1]
+	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
+		var new_frame = data[1]
+		var new_layer = data[2]
 		if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels or Global.current_project.frames[new_frame] in Global.current_project.layers[new_layer].linked_cels:
 			# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
 			return false
@@ -171,8 +145,8 @@ func can_drop_data(_pos, data) -> bool:
 
 
 func drop_data(_pos, data) -> void:
-	var new_frame = data[0]
-	var new_layer = data[1]
+	var new_frame = data[1]
+	var new_layer = data[2]
 
 	var this_frame_new_cels = Global.current_project.frames[frame].cels.duplicate()
 	var new_frame_new_cels

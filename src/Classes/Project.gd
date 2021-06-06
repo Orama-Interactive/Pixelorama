@@ -37,6 +37,8 @@ var file_name := "untitled"
 var file_format : int = Export.FileFormat.PNG
 var was_exported := false
 
+var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
+
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
@@ -120,7 +122,7 @@ func change_project() -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		# Create layer buttons
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
-		layer_container.i = i
+		layer_container.layer = i
 		if layers[i].name == tr("Layer") + " 0":
 			layers[i].name = tr("Layer") + " %s" % i
 
@@ -140,13 +142,13 @@ func change_project() -> void:
 			layers[i].frame_container.add_child(cel_button)
 
 	for j in range(frames.size()): # Create frame ID labels
-		var label := Label.new()
-		label.rect_min_size.x = Global.animation_timeline.cel_size
-		label.align = Label.ALIGN_CENTER
-		label.text = str(j + 1)
+		var button : Button = frame_button_node.instance()
+		button.frame = j
+		button.rect_min_size.x = Global.animation_timeline.cel_size
+		button.text = str(j + 1)
 		if j == current_frame:
-			label.add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
-		Global.frame_ids.add_child(label)
+			button.add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
+		Global.frame_ids.add_child(button)
 
 	var layer_button = Global.layers_container.get_child(Global.layers_container.get_child_count() - 1 - current_layer)
 	layer_button.pressed = true
@@ -394,11 +396,11 @@ func frames_changed(value : Array) -> void:
 		Global.frames_container.add_child(layers[i].frame_container)
 
 	for j in range(frames.size()):
-		var label := Label.new()
-		label.rect_min_size.x = Global.animation_timeline.cel_size
-		label.align = Label.ALIGN_CENTER
-		label.text = str(j + 1)
-		Global.frame_ids.add_child(label)
+		var button : Button = frame_button_node.instance()
+		button.frame = j
+		button.rect_min_size.x = Global.animation_timeline.cel_size
+		button.text = str(j + 1)
+		Global.frame_ids.add_child(button)
 
 		for i in range(layers.size() - 1, -1, -1):
 			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
@@ -424,7 +426,7 @@ func layers_changed(value : Array) -> void:
 
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
-		layer_container.i = i
+		layer_container.layer = i
 		if layers[i].name == tr("Layer") + " 0":
 			layers[i].name = tr("Layer") + " %s" % i
 

@@ -2,21 +2,17 @@ class_name LayerButton
 extends Button
 
 
-var i := 0
-var visibility_button : BaseButton
-var lock_button : BaseButton
-var linked_button : BaseButton
-var label : Label
-var line_edit : LineEdit
+var layer := 0
+
+onready var visibility_button : BaseButton = find_node("VisibilityButton")
+onready var lock_button : BaseButton = find_node("LockButton")
+onready var linked_button : BaseButton = find_node("LinkButton")
+onready var label : Label = find_node("Label")
+onready var line_edit : LineEdit = find_node("LineEdit")
 
 
 func _ready() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
-	visibility_button = find_node("VisibilityButton")
-	lock_button = find_node("LockButton")
-	linked_button = find_node("LinkButton")
-	label = find_node("Label")
-	line_edit = find_node("LineEdit")
 
 	var layer_buttons = find_node("LayerButtons")
 	for child in layer_buttons.get_children():
@@ -24,28 +20,21 @@ func _ready() -> void:
 		var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
 		var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 		var normal_file_name = texture.texture.resource_path.get_file()
-		var theme_type := Global.theme_type
-		if theme_type == Global.ThemeTypes.CARAMEL or theme_type == Global.ThemeTypes.BLUE:
-			theme_type = Global.ThemeTypes.DARK
 
-		var theme_type_string : String = Global.ThemeTypes.keys()[theme_type].to_lower()
-		texture.texture = load("res://assets/graphics/%s_themes/%s/%s" % [theme_type_string, button_category, normal_file_name])
+		texture.texture = load("res://assets/graphics/%s/%s" % [button_category, normal_file_name])
+		texture.modulate = Global.modulate_icon_color
 
-	if Global.current_project.layers[i].visible:
+	if Global.current_project.layers[layer].visible:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")
-		visibility_button.get_child(0).rect_size = Vector2(24, 14)
-		visibility_button.get_child(0).rect_position = Vector2(4, 9)
 	else:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_invisible.png")
-		visibility_button.get_child(0).rect_size = Vector2(24, 8)
-		visibility_button.get_child(0).rect_position = Vector2(4, 12)
 
-	if Global.current_project.layers[i].locked:
+	if Global.current_project.layers[layer].locked:
 		Global.change_button_texturerect(lock_button.get_child(0), "lock.png")
 	else:
 		Global.change_button_texturerect(lock_button.get_child(0), "unlock.png")
 
-	if Global.current_project.layers[i].new_cels_linked: # If new layers will be linked
+	if Global.current_project.layers[layer].new_cels_linked: # If new layers will be linked
 		Global.change_button_texturerect(linked_button.get_child(0), "linked_layer.png")
 	else:
 		Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
@@ -56,12 +45,14 @@ func _input(event : InputEvent) -> void:
 		save_layer_name(line_edit.text)
 
 
-func _on_LayerContainer_pressed() -> void:
-	pressed = !pressed
-	label.visible = false
-	line_edit.visible = true
-	line_edit.editable = true
-	line_edit.grab_focus()
+func _on_LayerContainer_gui_input(event : InputEvent):
+	if event is InputEventMouseButton:
+		Global.current_project.current_layer = layer
+		if event.doubleclick:
+			label.visible = false
+			line_edit.visible = true
+			line_edit.editable = true
+			line_edit.grab_focus()
 
 
 func _on_LineEdit_focus_exited() -> void:
@@ -74,21 +65,68 @@ func save_layer_name(new_name : String) -> void:
 	line_edit.editable = false
 	label.text = new_name
 	Global.layers_changed_skip = true
-	Global.current_project.layers[i].name = new_name
+	Global.current_project.layers[layer].name = new_name
 
 
 func _on_VisibilityButton_pressed() -> void:
-	Global.current_project.layers[i].visible = !Global.current_project.layers[i].visible
+	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
 
 
 func _on_LockButton_pressed() -> void:
-	Global.current_project.layers[i].locked = !Global.current_project.layers[i].locked
+	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 
 
 func _on_LinkButton_pressed() -> void:
-	Global.current_project.layers[i].new_cels_linked = !Global.current_project.layers[i].new_cels_linked
-	if Global.current_project.layers[i].new_cels_linked && !Global.current_project.layers[i].linked_cels:
+	Global.current_project.layers[layer].new_cels_linked = !Global.current_project.layers[layer].new_cels_linked
+	if Global.current_project.layers[layer].new_cels_linked && !Global.current_project.layers[layer].linked_cels:
 		# If button is pressed and there are no linked cels in the layer
-		Global.current_project.layers[i].linked_cels.append(Global.current_project.frames[Global.current_project.current_frame])
-		Global.current_project.layers[i].frame_container.get_child(Global.current_project.current_frame)._ready()
+		Global.current_project.layers[layer].linked_cels.append(Global.current_project.frames[Global.current_project.current_frame])
+		Global.current_project.layers[layer].frame_container.get_child(Global.current_project.current_frame)._ready()
+
+
+func get_drag_data(_position) -> Array:
+	var button := Button.new()
+	button.rect_size = rect_size
+	button.theme = Global.control.theme
+	button.text = label.text
+	set_drag_preview(button)
+
+	return ["Layer", layer]
+
+
+func can_drop_data(_pos, data) -> bool:
+	if typeof(data) == TYPE_ARRAY:
+		return data[0] == "Layer"
+	else:
+		return false
+
+
+func drop_data(_pos, data) -> void:
+	var new_layer = data[1]
+	if layer == new_layer:
+		return
+
+	var new_layers : Array = Global.current_project.layers.duplicate()
+	var temp = new_layers[layer]
+	new_layers[layer] = new_layers[new_layer]
+	new_layers[new_layer] = temp
+
+	Global.current_project.undo_redo.create_action("Change Layer Order")
+	for f in Global.current_project.frames:
+		var new_cels : Array = f.cels.duplicate()
+		var temp_canvas = new_cels[layer]
+		new_cels[layer] = new_cels[new_layer]
+		new_cels[new_layer] = temp_canvas
+		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+
+	if Global.current_project.current_layer == layer:
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_layer", new_layer)
+		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_layer", Global.current_project.current_layer)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
+
+	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.commit_action()

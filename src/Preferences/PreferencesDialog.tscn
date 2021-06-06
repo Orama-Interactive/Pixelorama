@@ -115,7 +115,7 @@ text = "System Language"
 visible = false
 margin_top = 28.0
 margin_right = 498.0
-margin_bottom = 110.0
+margin_bottom = 134.0
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_right = 498.0
@@ -163,13 +163,13 @@ margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
 margin_top = 5.0
-margin_right = 207.0
+margin_right = 193.0
 margin_bottom = 19.0
 text = "Dim interface on dialog popup"
 
 [node name="CheckBox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
-margin_left = 211.0
-margin_right = 258.0
+margin_left = 197.0
+margin_right = 244.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 pressed = true
@@ -206,6 +206,47 @@ margin_bottom = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 custom_constants/separation = 12
+
+[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 52.0
+margin_right = 498.0
+margin_bottom = 56.0
+
+[node name="IconColorFrom" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 86.0
+margin_right = 498.0
+margin_bottom = 106.0
+columns = 3
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_top = 3.0
+margin_right = 102.0
+margin_bottom = 17.0
+text = "Icon color from:"
+
+[node name="IconColorOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_left = 106.0
+margin_right = 179.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Theme"
+items = [ "Theme", null, false, 0, null, "Custom", null, false, 1, null ]
+selected = 0
+
+[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_top = -83.0
+margin_right = 102.0
+margin_bottom = -69.0
+text = "Icon color:"
+
+[node name="IconColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_top = 24.0
+margin_right = 64.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+color = Color( 0.75, 0.75, 0.75, 1 )
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false

@@ -18,6 +18,12 @@ func _input(event : InputEvent) -> void:
 			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
 			ready_to_apply = true
 			apply_selection(Vector2.ZERO) # Argument doesn't matter
+	elif event is InputEventKey:
+		if event.is_action_pressed("escape") and _ongoing_selection:
+			_ongoing_selection = false
+			_draw_points.clear()
+			ready_to_apply = false
+			Global.canvas.previews.update()
 
 
 func draw_start(position : Vector2) -> void:

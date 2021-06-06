@@ -38,10 +38,7 @@ func _about_to_show() -> void:
 	current_frame.fill(Color(0, 0, 0, 0))
 	var frame = Global.current_project.frames[Global.current_project.current_frame]
 	Export.blend_layers(current_frame, frame)
-	if selection_checkbox:
-		_on_SelectionCheckBox_toggled(selection_checkbox.pressed)
-	else:
-		update_preview()
+	update_preview()
 	update_transparent_background_size()
 
 

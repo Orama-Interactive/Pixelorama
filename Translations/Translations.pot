@@ -488,6 +488,15 @@ msgstr ""
 msgid "Purple"
 msgstr ""
 
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr ""
 

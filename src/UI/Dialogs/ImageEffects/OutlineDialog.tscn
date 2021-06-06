@@ -23,7 +23,8 @@ __meta__ = {
 }
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_right = 312.0
+margin_left = 56.0
+margin_right = 256.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
@@ -99,12 +100,15 @@ pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_right = 29.0
-margin_bottom = 20.0
+margin_left = 164.0
+margin_top = 80.0
+margin_right = 312.0
+margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 text = "Current cel"
 items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
+
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/ThickValue" to="." method="_on_ThickValue_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/OptionsContainer/OutlineColor" to="." method="_on_OutlineColor_color_changed"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/DiagonalCheckBox" to="." method="_on_DiagonalCheckBox_toggled"]

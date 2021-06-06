@@ -224,6 +224,7 @@ func fit_to_frame(size : Vector2) -> void:
 			v_ratio = Global.main_viewport.rect_size.y / size.y
 			ratio = min(h_ratio, v_ratio)
 
+	ratio = clamp(ratio, 0.1, ratio)
 	zoom = Vector2(1 / ratio, 1 / ratio)
 	offset = size / 2
 	zoom_changed()
