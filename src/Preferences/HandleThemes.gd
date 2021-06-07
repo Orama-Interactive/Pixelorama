@@ -50,6 +50,9 @@ func _on_Theme_pressed(index : int) -> void:
 	buttons_container.get_child(index).pressed = true
 	change_theme(index)
 
+	# Make sure the frame text gets updated
+	Global.current_project.current_frame = Global.current_project.current_frame
+
 	Global.config_cache.set_value("preferences", "theme", index)
 	Global.config_cache.save("user://cache.ini")
 
@@ -96,9 +99,6 @@ func change_theme(ID : int) -> void:
 	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
 	change_icon_colors()
-
-	# Make sure the frame text gets updated
-	Global.current_project.current_frame = Global.current_project.current_frame
 
 	Global.preferences_dialog.get_node("Popups/ShortcutSelector").theme = main_theme
 
