@@ -686,7 +686,7 @@ msgstr ""
 msgid "Turkish"
 msgstr ""
 
-msgid "Norwegian"
+msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Korean"
