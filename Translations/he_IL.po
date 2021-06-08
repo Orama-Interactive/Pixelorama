@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2021-06-04 18:55\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -697,7 +697,7 @@ msgstr ""
 msgid "Turkish"
 msgstr ""
 
-msgid "Norwegian"
+msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Korean"
