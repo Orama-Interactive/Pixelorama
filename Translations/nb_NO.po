@@ -1,0 +1,1733 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: pixelorama\n"
+"X-Crowdin-Project-ID: 385497\n"
+"X-Crowdin-Language: nb\n"
+"X-Crowdin-File: /master/Translations/Translations.pot\n"
+"X-Crowdin-File-ID: 5\n"
+"Project-Id-Version: pixelorama\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Norwegian Bokmal\n"
+"Language: nb_NO\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
+
+msgid "OK"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Open"
+msgstr "Åpne"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Please Confirm..."
+msgstr "Vennligst Bekreft..."
+
+msgid "File Name:"
+msgstr "Filnavn:"
+
+msgid "Project Name:"
+msgstr ""
+
+msgid "Image Size"
+msgstr "Bildestørrelse"
+
+msgid "Canvas Size"
+msgstr "Lerretstørrelse"
+
+msgid "Frame Size"
+msgstr "Bildestørrelse"
+
+msgid "Size:"
+msgstr ""
+
+msgid "Width:"
+msgstr "Bredde:"
+
+msgid "Height:"
+msgstr "Høyde:"
+
+msgid "Center"
+msgstr "Midtstill"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "View"
+msgstr "Vis"
+
+msgid "Image"
+msgstr "Bilde"
+
+msgid "Effects"
+msgstr "Effekter"
+
+msgid "Help"
+msgstr "Hjelp"
+
+msgid "New"
+msgstr "Ny"
+
+msgid "New..."
+msgstr "Ny..."
+
+msgid "Open..."
+msgstr "Åpne..."
+
+msgid "Save..."
+msgstr "Lagre..."
+
+msgid "Save as..."
+msgstr "Lagre som..."
+
+msgid "Use ZSTD Compression"
+msgstr "Bruk ZSTD-Komprimering"
+
+msgid "Import"
+msgstr "Importer"
+
+msgid "Export"
+msgstr "Eksporter"
+
+msgid "Export..."
+msgstr "Eksporter..."
+
+msgid "Export as..."
+msgstr "Eksporter som..."
+
+msgid "Export PNG..."
+msgstr "Eksporter PNG..."
+
+msgid "Export PNG as..."
+msgstr "Eksporter PNG som..."
+
+msgid "Quit"
+msgstr "Avslutt"
+
+msgid "Undo"
+msgstr "Angre"
+
+msgid "Redo"
+msgstr "Gjør om igjen"
+
+msgid "Copy"
+msgstr "Kopier"
+
+msgid "Cut"
+msgstr ""
+
+msgid "Paste"
+msgstr "Lim inn"
+
+msgid "Delete"
+msgstr "Slett"
+
+msgid "New Brush"
+msgstr ""
+
+msgid "Scale Image"
+msgstr "Skalér Bilde"
+
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
+msgid "Crop Image"
+msgstr "Beskjær Bilde"
+
+msgid "Resize Canvas"
+msgstr "Forandre Størrelse på Lerret"
+
+msgid "Centralize Image"
+msgstr ""
+
+msgid "Rotate Image"
+msgstr "Rotér Bilde"
+
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
+
+msgid "Flip"
+msgstr "Vend"
+
+msgid "Flip Horizontal"
+msgstr "Speilvend Horisontalt"
+
+msgid "Flip Vertical"
+msgstr "Speilvend Vertikalt"
+
+msgid "Preferences"
+msgstr "Preferanser"
+
+msgid "Tile Mode"
+msgstr "Flismodus"
+
+msgid "Window Transparency"
+msgstr ""
+
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
+msgid "Mirror View"
+msgstr ""
+
+msgid "Show Grid"
+msgstr "Vis Rutenett"
+
+msgid "Show Pixel Grid"
+msgstr ""
+
+msgid "Show Rulers"
+msgstr "Vis Linjaler"
+
+msgid "Show Guides"
+msgstr "Vis Guider"
+
+msgid "Show Animation Timeline"
+msgstr "Vis Animasjonstidslinje"
+
+msgid "Zen Mode"
+msgstr "Zenmodus"
+
+msgid "Fullscreen Mode"
+msgstr "Fullskjermmodus"
+
+msgid "Fill with color:"
+msgstr "Fyll med farge:"
+
+msgid "Open a File"
+msgstr "Åpne en Fil"
+
+msgid "Open File(s)"
+msgstr "Åpne Fil(er)"
+
+msgid "Import Options"
+msgstr "Importeringsvalg"
+
+msgid "Import as:"
+msgstr "Importér som:"
+
+msgid "Recent projects"
+msgstr ""
+
+msgid "New tab"
+msgstr "Ny fane"
+
+msgid "Spritesheet (new tab)"
+msgstr "Tegneark (ny fane)"
+
+msgid "Spritesheet (new layer)"
+msgstr ""
+
+msgid "New frame"
+msgstr "Nytt bilde"
+
+msgid "Replace frame"
+msgstr ""
+
+msgid "New layer"
+msgstr "Nytt lag"
+
+msgid "New palette"
+msgstr "Ny palett"
+
+msgid "New brush"
+msgstr "Ny børste"
+
+msgid "New pattern"
+msgstr "Nytt mønster"
+
+msgid "Horizontal frames:"
+msgstr "Horisontale bilder:"
+
+msgid "Vertical frames:"
+msgstr "Vertikale bilder:"
+
+msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
+
+msgid "Brush type:"
+msgstr "Børstetype:"
+
+msgid "File brush"
+msgstr "Filbørste"
+
+msgid "Project brush"
+msgstr "Prosjektbørste"
+
+msgid "Random brush"
+msgstr "Tilfeldig børste"
+
+msgid "Save Sprite as .pxo"
+msgstr "Lagre Figur som .pxo"
+
+msgid "Export Sprite as .png"
+msgstr "Eksportér Figur som .png"
+
+msgid "Export Sprite"
+msgstr "Eksportér Figur"
+
+msgid "File Exists, Overwrite?"
+msgstr "Filen Eksisterer, Overskrive?"
+
+msgid "File %s already exists. Overwrite?"
+msgstr "Filen %s finnes fra før. Overskrive?"
+
+msgid "Directory path or file name is not valid!"
+msgstr "Banen eller filnavnet er ikke gyldig!"
+
+msgid "Exporting in progress..."
+msgstr "Eksport pågår..."
+
+msgid "Can't load file '%s'.\n"
+"Error code: %s"
+msgstr "Kan ikke laste fil '%s'. Feilkode: %s"
+
+msgid "Frame"
+msgstr "Bilde"
+
+msgid "Frames:"
+msgstr "Bilder:"
+
+msgid "All Frames"
+msgstr "Alle Bilder"
+
+msgid "Spritesheet"
+msgstr "Tegneark"
+
+msgid "Animation"
+msgstr "Animasjon"
+
+msgid "Preview:"
+msgstr "Forhåndsvisning:"
+
+msgid "Frame:"
+msgstr "Bilde:"
+
+msgid "Orientation:"
+msgstr "Retning:"
+
+msgid "Browse"
+msgstr "Bla gjennom"
+
+msgid "Resize:"
+msgstr "Endre størrelse:"
+
+msgid "Cancel Export"
+msgstr "Avbryt Eksport"
+
+msgid "Alert!"
+msgstr "Advarsel!"
+
+msgid "Select Current Folder"
+msgstr "Velg Gjeldende Mappe"
+
+msgid "Open a Directory"
+msgstr "Åpne en Mappe"
+
+msgid "All frames as multiple files"
+msgstr "Alle bilder som flere filer"
+
+msgid "All frames as a single file animation"
+msgstr "Alle bilder som en enkelt fil"
+
+msgid "Background:"
+msgstr "Bakgrunn:"
+
+msgid "Direction:"
+msgstr "Retning:"
+
+msgid "Forward"
+msgstr "Fremover"
+
+msgid "Backwards"
+msgstr "Bakover"
+
+msgid "Ping-Pong"
+msgstr ""
+
+msgid "Columns"
+msgstr "Kolonner"
+
+msgid "Columns:"
+msgstr "Kolonner:"
+
+msgid "Rows"
+msgstr "Rader"
+
+msgid "Rows:"
+msgstr "Rader:"
+
+msgid "Path:"
+msgstr "Bane:"
+
+msgid "Directories & Files:"
+msgstr "Mapper & Filer:"
+
+msgid "Create Folder"
+msgstr "Opprett Mappe"
+
+msgid "File:"
+msgstr "Fil:"
+
+msgid "Interpolation:"
+msgstr "Interpolering:"
+
+msgid "Nearest"
+msgstr "Nærmeste"
+
+msgid "Bilinear"
+msgstr "Bilineær"
+
+msgid "Cubic"
+msgstr "Kubikk"
+
+msgid "Trilinear"
+msgstr "Trilineær"
+
+msgid "General"
+msgstr "Generelt"
+
+msgid "Startup"
+msgstr "Oppstart"
+
+msgid "Language"
+msgstr "Språk"
+
+msgid "Interface"
+msgstr ""
+
+msgid "Themes"
+msgstr "Temaer"
+
+msgid "Canvas"
+msgstr "Lerret"
+
+msgid "Selection"
+msgstr ""
+
+msgid "Shortcuts"
+msgstr "Snarveier"
+
+msgid "Backup"
+msgstr "Sikkerhetskopi"
+
+msgid "Performance"
+msgstr ""
+
+msgid "Indicators"
+msgstr "Indikatorer"
+
+msgid "On"
+msgstr "På"
+
+msgid "Restore default value"
+msgstr "Tilbakestill til standardverdier"
+
+msgid "Smooth Zoom"
+msgstr "Glatt Zoom"
+
+msgid "Adds a smoother transition when zooming in or out"
+msgstr "Legger til en jevnere overgang når du zoomer inn eller ut"
+
+msgid "Tablet pressure sensitivity:"
+msgstr "Tegnebrettets trykkfølsomhet:"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Affect Brush's Alpha"
+msgstr "Påvirker Børstens Alpha"
+
+msgid "Color:"
+msgstr "Farge:"
+
+msgid "Guide color:"
+msgstr "Guide farge:"
+
+msgid "System Language"
+msgstr "Systemspråk"
+
+msgid "Display Scale"
+msgstr ""
+
+msgid "Dim interface on dialog popup"
+msgstr ""
+
+msgid "Dark"
+msgstr "Mørk"
+
+msgid "Gray"
+msgstr "Grå"
+
+msgid "Blue"
+msgstr "Blå"
+
+msgid "Caramel"
+msgstr "Karamell"
+
+msgid "Light"
+msgstr "Lys"
+
+msgid "Purple"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
+
+msgid "Only affect selection"
+msgstr "Bare påvirk merket område"
+
+msgid "Current cel"
+msgstr "Denne cellen"
+
+msgid "Current frame"
+msgstr "Dette bildet"
+
+msgid "All frames"
+msgstr "Alle bilder"
+
+msgid "All projects"
+msgstr "Alle prosjekter"
+
+msgid "Invert Colors"
+msgstr "Invertér Farger"
+
+msgid "Modify Red Channel"
+msgstr "Endre Rød Kanal"
+
+msgid "Modify Green Channel"
+msgstr "Endre Grønn Kanal"
+
+msgid "Modify Blue Channel"
+msgstr "Endre Blå Kanal"
+
+msgid "Modify Alpha Channel"
+msgstr "Endre Alpha Kanal"
+
+msgid "Desaturation"
+msgstr "Avmettning"
+
+msgid "Outline"
+msgstr "Omriss"
+
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Justér Fargetone/Metning/Verdi"
+
+msgid "Gradient"
+msgstr ""
+
+msgid "Adjust HSV"
+msgstr "Justér HSV"
+
+msgid "Type:"
+msgstr ""
+
+msgid "Angle:"
+msgstr "Vinkel:"
+
+msgid "Hue:"
+msgstr ""
+
+msgid "Saturation:"
+msgstr ""
+
+msgid "Value:"
+msgstr ""
+
+msgid "Apply"
+msgstr "Bruk"
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "Place inside image"
+msgstr "Plassér inne i bildet"
+
+msgid "Thickness:"
+msgstr "Tykkelse:"
+
+msgid "Colors:"
+msgstr "Farger:"
+
+msgid "Steps:"
+msgstr "Trinn:"
+
+msgid "Top to Bottom"
+msgstr "Topp til Bunn"
+
+msgid "Bottom to Top"
+msgstr "Bunn til Topp"
+
+msgid "Left to Right"
+msgstr "Venstre til Høyre"
+
+msgid "Right to Left"
+msgstr "Høyre til Venstre"
+
+msgid "View Splash Screen"
+msgstr "Vis Oppstartsbilde"
+
+msgid "Online Docs"
+msgstr "Online Bruksanvisning"
+
+msgid "Issue Tracker"
+msgstr "Problemsporer"
+
+msgid "Changelog"
+msgstr "Endringslogg"
+
+msgid "About Pixelorama"
+msgstr "Om Pixelorama"
+
+msgid "Pixelorama - Pixelate your dreams!"
+msgstr "Pixelorama - Pikselér drømmene dine!"
+
+msgid "Developed by Orama Interactive"
+msgstr "Utviklet av Orama Interactive"
+
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
+
+msgid "Website"
+msgstr "Nettside"
+
+msgid "GitHub Repo"
+msgstr "Github Repo"
+
+msgid "Donate"
+msgstr "Donér"
+
+msgid "Developers"
+msgstr "Utviklere"
+
+msgid "Contributors"
+msgstr "Bidragsytere"
+
+msgid "Donors"
+msgstr "Donorer"
+
+msgid "Translators"
+msgstr "Oversettere"
+
+msgid "English"
+msgstr "Engelsk"
+
+msgid "Greek"
+msgstr "Gresk"
+
+msgid "French"
+msgstr "Fransk"
+
+msgid "German"
+msgstr "Tysk"
+
+msgid "Polish"
+msgstr "Polsk"
+
+msgid "Brazilian Portuguese"
+msgstr "Brasiliansk Portugisisk"
+
+msgid "Russian"
+msgstr "Russisk"
+
+msgid "Chinese Simplified"
+msgstr "Kinesisk (forenklet)"
+
+msgid "Chinese Traditional"
+msgstr "Kinesisk (tradisjonell)"
+
+msgid "Italian"
+msgstr "Italiensk"
+
+msgid "Latvian"
+msgstr "Latvisk"
+
+msgid "Spanish"
+msgstr "Spansk"
+
+msgid "Catalan"
+msgstr "Katalansk"
+
+msgid "Esperanto"
+msgstr ""
+
+msgid "Indonesian"
+msgstr "Indonesisk"
+
+msgid "Czech"
+msgstr "Tjekkisk"
+
+msgid "Arabic"
+msgstr "Arabisk"
+
+msgid "Turkish"
+msgstr "Tyrkisk"
+
+msgid "Norwegian Bokmål"
+msgstr ""
+
+msgid "Korean"
+msgstr "Koreansk"
+
+msgid "Hungarian"
+msgstr "Ungarsk"
+
+msgid "Romanian"
+msgstr "Rumensk"
+
+msgid "Japanese"
+msgstr ""
+
+msgid "Development Team"
+msgstr "Utviklingsteam"
+
+msgid "Lead Programmer"
+msgstr "Hovedprogrammerer"
+
+msgid "UI Designer"
+msgstr "UI-Designer"
+
+msgid "GitHub Contributors"
+msgstr "Bidragere på Github"
+
+msgid "Art by: %s"
+msgstr "Kunst av %s"
+
+msgid "untitled"
+msgstr "uten navn"
+
+msgid "imported"
+msgstr "importert"
+
+msgid "copy"
+msgstr "kopier"
+
+msgid "Are you sure you want to exit Pixelorama?"
+msgstr "Er du sikker på at du vil avslutte Pixelorama?"
+
+msgid "Unsaved Image"
+msgstr "Ulagret Bilde"
+
+msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
+msgstr "Du har ulagrede endringer. Hvis du fortsetter vil fremgangen du har gjort gå tapt."
+
+msgid "Save before exiting?"
+msgstr "Lagre før du avslutter?"
+
+msgid "You have unsaved progress. How do you wish to proceed?"
+msgstr "Du har ulagret fremgang. Hvordan ønsker du å fortsette?"
+
+msgid "Save & Exit"
+msgstr "Lagre & Avslutt"
+
+msgid "Exit without saving"
+msgstr "Avslutt uten å lagre"
+
+msgid "Utility Tools"
+msgstr "Verktøy"
+
+msgid "Rectangular Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Press %s to move the content"
+msgstr "Rektangulær Markering\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Trykk %s for å flytte innholdet"
+
+msgid "Zoom\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Zoom\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
+
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Color Picker\n"
+"Select a color from a pixel of the sprite\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Fargevelger\n"
+"Velg en farge fra en piksel på figuren\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
+
+msgid "Draw Tools"
+msgstr "Tegneverktøy"
+
+msgid "Pencil\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
+msgstr "Blyant\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å lage en linje"
+
+msgid "Eraser\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to make a line"
+msgstr "Viskelær\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å lage en linje"
+
+msgid "Bucket\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Bøtte\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
+
+msgid "Shading Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
+
+msgid "Choose a color for the left tool"
+msgstr "Velg en farge for venstre verktøy"
+
+msgid "Choose a color for the right tool"
+msgstr "Velg en farge for høyre verktøy"
+
+msgid "Switch left and right colors\n"
+"(%s)"
+msgstr "Bytt venstre og høyre farger\n"
+"(%s)"
+
+msgid "Reset the colors to their default state (black for left, white for right)"
+msgstr "Tilbakestill farger (svart til venstre, hvit for høyre)"
+
+msgid "Left tool"
+msgstr "Venstre verktøy"
+
+msgid "Right tool"
+msgstr "Høyre verktøy"
+
+msgid "Left pixel indicator"
+msgstr "Venstre pikselindikator"
+
+msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
+msgstr "Vis pikselindikator eller børste for venstre musepeker på lerretet når du tegner"
+
+msgid "Right pixel indicator"
+msgstr "Høyre pikselindikator"
+
+msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
+msgstr "Vis pikselindikator eller børste for høyre musepeker på lerretet når du tegner"
+
+msgid "Show left tool icon"
+msgstr "Vis venstre verktøyikon"
+
+msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
+msgstr "Viser ikonet til det valgte venstreverktøyet ved siden av markøren på lerretet"
+
+msgid "Show right tool icon"
+msgstr "Vis høyre verktøyikon"
+
+msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr "Viser ikonet til det valgte høyreverktøyet ved siden av markøren på lerretet"
+
+msgid "Guides"
+msgstr "Guider"
+
+msgid "Guides color:"
+msgstr "Guidefarge:"
+
+msgid "A color of ruler guides displayed on the canvas"
+msgstr "Farge som brukes av linjal og guider på lerretet"
+
+msgid "Grid"
+msgstr "Rutenett"
+
+msgid "Grid type:"
+msgstr "Rutenettype:"
+
+msgid "Sets the type of the grid between rectangular, isometric or both"
+msgstr "Setter typen rutenett til rektangulær, isometrisk eller begge"
+
+msgid "Rectangular"
+msgstr "Rektangulær"
+
+msgid "Isometric"
+msgstr "Isometrisk"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Rectangular grid width:"
+msgstr ""
+
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
+
+msgid "Rectangular grid height:"
+msgstr ""
+
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr ""
+
+msgid "Isometric cell bounds width:"
+msgstr ""
+
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr ""
+
+msgid "Grid color:"
+msgstr "Rutenettfarge:"
+
+msgid "A color of the grid"
+msgstr "En farge av rutenettet"
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
+msgstr ""
+
+msgid "Transparency"
+msgstr "Gjennomsiktighet"
+
+msgid "Checker size:"
+msgstr "Størrelse på sjekkere:"
+
+msgid "Size of the transparent checker background"
+msgstr "Størrelse på den gjennomsiktige bakgrunnen av sjekkere"
+
+msgid "Checker color 1:"
+msgstr "Sjekkerfarge 1:"
+
+msgid "First color of the transparent checker background"
+msgstr "Første farge på den gjennomsiktige bakgrunnen av sjekkere"
+
+msgid "Checker color 2:"
+msgstr "Sjekkerfarge 2:"
+
+msgid "Second color of the transparent checker background"
+msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
+
+msgid "Follow Canvas Movement"
+msgstr "Følg lerretbevegelse"
+
+msgid "The transparent checker follow the movement of canvas"
+msgstr ""
+
+msgid "Follow Canvas Zoom Level"
+msgstr "Følg lerretets forstørrelse"
+
+msgid "The transparent checker follow the zoom level of canvas"
+msgstr ""
+
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
+msgid "Only custom preset can be modified"
+msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
+
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
+
+msgid "Brush:"
+msgstr "Børste:"
+
+msgid "Select a brush"
+msgstr "Velg en børste"
+
+msgid "Pixel brush"
+msgstr "Pikselbørste"
+
+msgid "Circle brush"
+msgstr "Sirkelbørste"
+
+msgid "Filled circle brush"
+msgstr "Fylt sirkelbørste"
+
+msgid "Custom brush"
+msgstr "Egendefinert Børste"
+
+msgid "Brush size:"
+msgstr "Børstestørrelse:"
+
+msgid "Overwrite Color"
+msgstr "Overskriv Farge"
+
+msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
+msgstr "Overskriver en farge i stedet for å blande den. Dette valget gjelder bare farger som ikke er helt ugjennomsiktige"
+
+msgid "Pixel Perfect"
+msgstr "Pikselperfekt"
+
+msgid "Fill inside"
+msgstr ""
+
+msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
+
+msgid "Brush color from"
+msgstr "Børstefarge fra"
+
+msgid "0: Color from the brush itself, 100: the currently selected color"
+msgstr "0: Farge fra børsten selv, 100: den valgte fargen"
+
+msgid "Fill area:"
+msgstr "Fyll område:"
+
+msgid "Same color area"
+msgstr "Område med lik farge"
+
+msgid "Same color pixels"
+msgstr "Piksler med lik farge"
+
+msgid "Fill with:"
+msgstr "Fyll med:"
+
+msgid "Selected Color"
+msgstr "Valgt Farge"
+
+msgid "Pattern"
+msgstr "Mønster"
+
+msgid "Offset"
+msgstr "Forskyvning"
+
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
+msgid "Lighten"
+msgstr "Lys opp"
+
+msgid "Darken"
+msgstr "Formørk"
+
+msgid "Amount:"
+msgstr "Mengde:"
+
+msgid "Lighten/Darken amount"
+msgstr "Lys opp/Formørk mengde"
+
+msgid "Pick for:"
+msgstr "Velg for:"
+
+msgid "Left Color"
+msgstr "Venstre Farge"
+
+msgid "Right Color"
+msgstr "Høyre Farge"
+
+msgid "Mode:"
+msgstr "Modus:"
+
+msgid "Zoom in"
+msgstr "Zoom inn"
+
+msgid "Zoom out"
+msgstr "Zoom ut"
+
+msgid "Options:"
+msgstr "Innstillinger:"
+
+msgid "Fit to frame"
+msgstr "Tilpass til bilde"
+
+msgid "100% Zoom"
+msgstr ""
+
+msgid "Mirroring"
+msgstr "Speiling"
+
+msgid "Horizontal"
+msgstr "Horisontal"
+
+msgid "Enable horizontal mirrored drawing"
+msgstr "Aktivér horisontaltspeilet tegning"
+
+msgid "Enable vertical mirrored drawing"
+msgstr "Aktivér vertikaltspeilet tegning"
+
+msgid "Vertical"
+msgstr "Vertikal"
+
+msgid "Current frame:"
+msgstr "Gjeldende bilde:"
+
+msgid "Jump to the first frame\n"
+"(%s)"
+msgstr "Gå til det første bildet\n"
+"(%s)"
+
+msgid "Go to the previous frame\n"
+"(%s)"
+msgstr "Gå til forrige bilde\n"
+"(%s)"
+
+msgid "Play the animation backwards (from end to beginning)\n"
+"(%s)"
+msgstr "Spill animasjonen bakover (fra slutten mot starten) (%s)"
+
+msgid "Play the animation forward (from beginning to end)\n"
+"(%s)"
+msgstr "Spill animasjonen forover (fra starten mot slutten) (%s)"
+
+msgid "Go to the next frame\n"
+"(%s)"
+msgstr "Gå til neste bilde\n"
+"(%s)"
+
+msgid "Jump to the last frame\n"
+"(%s)"
+msgstr "Gå til det første bildet\n"
+"(%s)"
+
+msgid "Onion Skinning settings"
+msgstr "Innstillinger for å se flere bilder samtidig (\"Onion Skinning\")"
+
+msgid "Enable/disable Onion Skinning"
+msgstr "Aktiver/deaktiver Se flere bilder samtidig (\"Onion Skinning\")"
+
+msgid "How many frames per second should the animation preview be?\n"
+"The more FPS, the faster the animation plays."
+msgstr "Hvor mange bilder per sekund skal animasjonen forhåndsvises i?\n"
+"Flere bilder per sekund betyr en raskere animasjon."
+
+msgid "No loop"
+msgstr "Ingen loop"
+
+msgid "Cycle loop"
+msgstr "Syklusloop"
+
+msgid "Ping-pong loop"
+msgstr "Ping-pong-loop"
+
+msgid "Onion Skinning:"
+msgstr "Se flere bilder samtidig (\"Onion Skinning\"):"
+
+msgid "Past Frames"
+msgstr "Tidligere bilder"
+
+msgid "Future Frames"
+msgstr "Fremtidige bilder"
+
+msgid "Manage frame tags"
+msgstr "Administrér bildemerkelapper"
+
+msgid "Frame Tag Properties"
+msgstr "Bildetagegenskper"
+
+msgid "Add a new frame tag"
+msgstr "Legg til ny bildetag"
+
+msgid "Name:"
+msgstr "Navn:"
+
+msgid "From:"
+msgstr "Fra:"
+
+msgid "To:"
+msgstr "Til:"
+
+msgid "Animation plays only on frames of the same tag"
+msgstr "Animasjon spiller kun på bilder med samme merkelapp"
+
+msgid "Tag %s (Frame %s)"
+msgstr "Tag %s (Bilde %s)"
+
+msgid "Tag %s (Frames %s-%s)"
+msgstr "Tag %s (Bilder %s-%s)"
+
+msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
+"If it's not, the animation will play for all frames, ignoring tags."
+msgstr "Hvis valgt, spiller animasjonen bare på bildene som har samme merkelapp.\n"
+"Om ikke vil animasjonen spille for alle bilder."
+
+msgid "Blue-Red Mode"
+msgstr "Blå-Rød-Modus"
+
+msgid "Add a new frame"
+msgstr "Legg til nytt bilde"
+
+msgid "Remove Frame"
+msgstr "Fjern Bilde"
+
+msgid "Clone Frame"
+msgstr "Klon Bilde"
+
+msgid "Move Left"
+msgstr "Flytt til Venstre"
+
+msgid "Move Right"
+msgstr "Flytt til Høyre"
+
+msgid "Add Frame Tag"
+msgstr ""
+
+msgid "Link Cel"
+msgstr "Koble Sammen Celle"
+
+msgid "Unlink Cel"
+msgstr "Koble Fra Celle"
+
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
+msgid "Layer"
+msgstr "Lag"
+
+msgid "Layers"
+msgstr "Lag"
+
+msgid "Create a new layer"
+msgstr "Lag et nytt lag"
+
+msgid "Remove current layer"
+msgstr "Fjern gjeldende lag"
+
+msgid "Move up the current layer"
+msgstr "Flytt dette laget opp"
+
+msgid "Move down the current layer"
+msgstr "Flytt dette laget ned"
+
+msgid "Clone current layer"
+msgstr "Klon dette laget"
+
+msgid "Merge current layer with the one below"
+msgstr "Slå sammen dette laget med laget nedenfor"
+
+msgid "Opacity:"
+msgstr "Gjennomsiktighet:"
+
+msgid "Tile mode opacity:"
+msgstr ""
+
+msgid "Toggle layer's visibility"
+msgstr "Vis/Skjul lag"
+
+msgid "Lock/unlock layer"
+msgstr "Lås/lås opp lag"
+
+msgid "Frame: %s, Layer: %s"
+msgstr "Bilde: %s, Lag: %s"
+
+msgid "Enable/disable cel linking\n\n"
+"Linked cels are being shared across multiple frames"
+msgstr "Aktiver/deaktiver cellelenking\n\n"
+"Lenkede celler deles mellom flere bilder"
+
+msgid "Palette"
+msgstr "Palett"
+
+msgid "Palettes"
+msgstr "Paletter"
+
+msgid "Add a new palette"
+msgstr "Legg til en ny palett"
+
+msgid "Edit currently selected palette"
+msgstr "Redigér valgt palett"
+
+msgid "Choose a palette"
+msgstr "Velg en palett"
+
+msgid "Undo: Draw"
+msgstr "Angre: Tegne"
+
+msgid "Redo: Draw"
+msgstr "Gjør om: Tegne"
+
+msgid "Undo: Rectangle Select"
+msgstr "Angre: Velg Rektangel"
+
+msgid "Redo: Rectangle Select"
+msgstr "Gjør om: Velg Rektangel"
+
+msgid "Undo: Scale"
+msgstr "Angre: Skalér"
+
+msgid "Redo: Scale"
+msgstr "Gjør om: Skalér"
+
+msgid "Undo: Add Layer"
+msgstr "Angre: Legg til Lag"
+
+msgid "Redo: Add Layer"
+msgstr "Gjør om: Legg til Lag"
+
+msgid "Undo: Remove Layer"
+msgstr "Angre: Fjern Lag"
+
+msgid "Redo: Remove Layer"
+msgstr "Gjør om: Fjern Lag"
+
+msgid "Undo: Merge Layer"
+msgstr "Angre: Sammanslå Lag"
+
+msgid "Redo: Merge Layer"
+msgstr "Gjør om: Sammanslå Lag"
+
+msgid "Undo: Change Layer Order"
+msgstr "Angre: Endre Lagrekkefølge"
+
+msgid "Redo: Change Layer Order"
+msgstr "Gjør om: Endre Lagrekkefølge"
+
+msgid "Undo: Add Frame"
+msgstr "Angre: Legg til Bilde"
+
+msgid "Redo: Add Frame"
+msgstr "Gjør om: Legg til Bilde"
+
+msgid "Undo: Remove Frame"
+msgstr "Angre: Fjern Bilde"
+
+msgid "Redo: Remove Frame"
+msgstr "Gjør om: Fjern Bilde"
+
+msgid "Undo: Change Frame Order"
+msgstr "Angre: Endre Lagrekkefølge"
+
+msgid "Redo: Change Frame Order"
+msgstr "Gjør om: Endre Lagrekkefølge"
+
+msgid "Undo: Delete Custom Brush"
+msgstr "Angre: Slett Tilpasset Børste"
+
+msgid "Redo: Delete Custom Brush"
+msgstr "Gjør om: Slett Tilpasset Børste"
+
+msgid "Undo: Modify Frame Tag"
+msgstr "Angre: Endre Bildemerkelapp"
+
+msgid "Redo: Modify Frame Tag"
+msgstr "Gjør om: Endre Bildemerkelapp"
+
+msgid "Undo: Delete Frame Tag"
+msgstr "Angre: Slett Bildemerkelapp"
+
+msgid "Redo: Delete Frame Tag"
+msgstr "Gjør om: Slett Bildemerkelapp"
+
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
+msgid "Move Guide"
+msgstr "Flytteveiledning"
+
+msgid "File saved"
+msgstr "Fil lagret"
+
+msgid "File autosaved"
+msgstr "Fil automatisk lagret"
+
+msgid "File failed to open. Error code %s"
+msgstr ""
+
+msgid "File failed to save. Error code %s"
+msgstr ""
+
+msgid "File exported"
+msgstr "Fil eksportert"
+
+msgid "New Empty Palette"
+msgstr "Ny Tom Palett"
+
+msgid "Import Palette"
+msgstr "Importer Palett"
+
+msgid "Create Palette From Current Sprite"
+msgstr "Opprett Palett Fra Gjeldene Figur"
+
+msgid "Palette Name:"
+msgstr "Palettnavn:"
+
+msgid "Color Name:"
+msgstr "Fargenavn:"
+
+msgid "Use current left & right colors"
+msgstr "Bruk gjeldene høyre- og venstrefarger"
+
+msgid "Create a new empty palette?"
+msgstr "Opprette en nyt tom palett?"
+
+msgid "Error"
+msgstr "Feil"
+
+msgid "Error: Palette must have a valid name."
+msgstr "Feil: Palett må ha et gyldig navn."
+
+msgid "Invalid Palette file!"
+msgstr "Ugyldig Palettfil!"
+
+msgid "Edit Palette"
+msgstr "Redigér Palett"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
+
+msgid "Patrons:"
+msgstr "Abonnenter på Patreon:"
+
+msgid "Want your name or your company to be shown on the splash screen?"
+msgstr "Vil du at navnet ditt eller firmaet ditt skal vises på oppstartskjermen?"
+
+msgid "Become a Platinum Sponsor"
+msgstr "Bli en Platinumsponsor"
+
+msgid "Become a Gold Sponsor"
+msgstr "Bli en Gullsponsor"
+
+msgid "Become a Patron"
+msgstr "Bli abonnent på Patreon"
+
+msgid "Don't show again"
+msgstr "Ikke vis igjen"
+
+msgid "Image Options"
+msgstr "Bildealternativer"
+
+msgid "Default width:"
+msgstr "Standardbredde:"
+
+msgid "A default width of a new image"
+msgstr "En standardbredde for et nytt bilde"
+
+msgid "Default height:"
+msgstr "Standardhøyde:"
+
+msgid "A default height of a new image"
+msgstr "En standardhøyde for et nytt bilde"
+
+msgid "Default fill color:"
+msgstr "Standard fyllfarge:"
+
+msgid "A default background color of a new image"
+msgstr "En standard bakgrunnsfarge for et nytt bilde"
+
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
+msgstr ""
+
+msgid "Templates:"
+msgstr "Maler:"
+
+msgid "Preset"
+msgstr "Forhåndsvalg"
+
+msgid "Preset:"
+msgstr "Forhåndsvalg:"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Custom"
+msgstr "Egendefinert"
+
+msgid "Rectangular Selection"
+msgstr "Rektangulær Markering"
+
+msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
+msgstr ""
+
+msgid "Color Picker"
+msgstr "Fargevelger"
+
+msgid "Pencil"
+msgstr "Blyant"
+
+msgid "Eraser"
+msgstr "Viskelær"
+
+msgid "Bucket"
+msgstr "Bøtte"
+
+msgid "Shading Tool"
+msgstr ""
+
+msgid "Switch Colors"
+msgstr "Bytt Farger"
+
+msgid "Set the shortcut"
+msgstr "Sett snarveien"
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr "Trykk på en tast eller en tastekombinasjon for å angi snarveien"
+
+msgid "Already assigned"
+msgstr "Allerede tildelt"
+
+msgid "Left Tool:"
+msgstr "Venstre Verktøy:"
+
+msgid "A tool assigned to the left mouse button"
+msgstr "Et verktøy tilknyttet venstre museknapp"
+
+msgid "Right Tool:"
+msgstr "Høyre Verktøy:"
+
+msgid "A tool assigned to the right mouse button"
+msgstr "Et verktøy tilknyttet høyre museknapp"
+
+msgid "Cannot find last project file."
+msgstr "Finner ikke siste prosjektfil."
+
+msgid "Cannot find project file."
+msgstr ""
+
+msgid "You haven't saved or opened any project in Pixelorama yet!"
+msgstr "Du har ikke lagret eller åpnet et prosjekt i Pixelorama enda!"
+
+msgid "Open Last Project"
+msgstr "Åpne Siste Prosjekt"
+
+msgid "Open last project..."
+msgstr "Åpne siste prosjekt..."
+
+msgid "Open last project on startup"
+msgstr "Åpne siste prosjekt ved oppstart"
+
+msgid "Opens last opened project on startup"
+msgstr "Åpne sist åpnede prosjekt ved oppstart"
+
+msgid "Enable autosave"
+msgstr "Aktivér automatisk lagring"
+
+msgid "Autosave interval:"
+msgstr "Intervall for automatisk lagring:"
+
+msgid "minute(s)"
+msgstr "minutt(er)"
+
+msgid "Create new directory for each frame tag"
+msgstr "Opprett ny mappe for hver bildemerkelapp"
+
+msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgstr "Oppretter flere filer, hver fil lagres i en mappe som tilsvarer bildemerkelappen sin"
+
+msgid "Close"
+msgstr "Lukk"
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaved backup for %s was found.\n"
+"Do you want to reload it?"
+msgstr "En sikkerhetskopi av %s ble funnet.\n"
+"Vil du laste den på nytt?"
+
+msgid "Backup reloaded"
+msgstr "Sikkerhetskopien lastet inn"
+
+msgid "Remove currently selected palette"
+msgstr "Fjern valgt palett"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
+msgid "You can't remove more palettes!"
+msgstr "Du kan ikke fjerne flere paletter!"
+
+msgid "Cannot remove the palette, because it doesn't exist!"
+msgstr "Kan ikke fjerne paletten, den eksisterer ikke!"
+
+msgid "An error occured while removing the palette! Error code: %s"
+msgstr "Det oppsto en feil under fjerning av paletten! Feilkode: %s"
+
+msgid "and"
+msgstr "og"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
+
