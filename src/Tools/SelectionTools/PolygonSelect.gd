@@ -140,9 +140,8 @@ func lasso_selection(bitmap : BitMap, points : PoolVector2Array) -> void:
 		else:
 			bitmap.set_bit(point, !_subtract)
 
-	var image = _get_draw_image()
 	var v := Vector2()
-	var image_size = image.get_size()
+	var image_size : Vector2 = project.size
 	for x in image_size.x:
 		v.x = x
 		for y in image_size.y:
