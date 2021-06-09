@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-08 17:01\n"
+"PO-Revision-Date: 2021-06-09 00:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -699,7 +699,7 @@ msgid "Turkish"
 msgstr "土耳其语"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "挪威语"
 
 msgid "Korean"
 msgstr "韩语"
