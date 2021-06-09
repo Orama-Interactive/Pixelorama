@@ -844,8 +844,14 @@ size_flags_vertical = 4
 value = 100.0
 align = 1
 
-[node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="SpacerControl2" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 188.0
+margin_right = 217.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 29, 0 )
+
+[node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_left = 219.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
