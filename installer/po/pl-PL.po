@@ -1,16 +1,15 @@
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-08-25 17:38\n"
+"POT-Creation-Date: 2021-05-07 04:44\n"
+"PO-Revision-Date: 2021-05-21 17:41\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl_PL\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Crowdin-Project: pixelorama\n"
 "X-Crowdin-Project-ID: 385497\n"
@@ -19,52 +18,52 @@ msgstr ""
 "X-Crowdin-File-ID: 10\n"
 
 #. SecInstall
-#: .\pixelorama.nsi:72
+#: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
 msgstr "Zainstaluj ${APPNAME}"
 
 #. SecStartmenu
-#: .\pixelorama.nsi:73
+#: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
 msgstr "Utwórz skróty w Menu Start (opcjonalne)"
 
 #. SecDesktop
-#: .\pixelorama.nsi:74
+#: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
 msgstr "Utwórz skrót na pulpicie (opcjonalne)"
 
 #. un.SecUninstall
-#: .\pixelorama.nsi:75
+#: ..\pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
 msgstr "Odinstaluj ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
-#: .\pixelorama.nsi:76
+#: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
 msgstr "Usuń pliki konfiguracyjne (opcjonalnie)"
 
 #. DESC_SecInstall
-#: .\pixelorama.nsi:178
+#: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
 msgstr "Instaluje ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
-#: .\pixelorama.nsi:179
+#: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
 msgstr "Tworzy skróty w Menu Start dla ${APPNAME}."
 
 #. DESC_SecDesktop
-#: .\pixelorama.nsi:180
+#: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
 msgstr "Tworzy skrót na pulpicie dla ${APPNAME}."
 
 #. DESC_un.SecUninstall
-#: .\pixelorama.nsi:181
+#: ..\pixelorama.nsi:203
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
 msgstr "Odinstalowuje ${APPNAME} ${APPVERSION} i usuwa wszystkie skróty."
 
 #. DESC_un.SecConfig
-#: .\pixelorama.nsi:182
+#: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
 msgstr "Usuwa pliki konfiguracyjne dla ${APPNAME}."
 

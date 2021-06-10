@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-04-25 22:48\n"
+"PO-Revision-Date: 2021-06-08 17:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -30,6 +30,9 @@ msgstr "Παρακαλώ επιβεβαιώστε..."
 msgid "File Name:"
 msgstr "Όνομα αρχείου:"
 
+msgid "Project Name:"
+msgstr "Όνομα έργου:"
+
 msgid "Image Size"
 msgstr "Μέγεθος εικόνας"
 
@@ -39,8 +42,8 @@ msgstr "Μέγεθος Καμβά"
 msgid "Frame Size"
 msgstr "Μέγεθος Καρέ"
 
-msgid "Size"
-msgstr "Μέγεθος"
+msgid "Size:"
+msgstr "Μέγεθος:"
 
 msgid "Width:"
 msgstr "Πλάτος:"
@@ -126,6 +129,9 @@ msgstr "Επικόλληση"
 msgid "Delete"
 msgstr "Διαγραφή"
 
+msgid "New Brush"
+msgstr "Νέο πινέλο"
+
 msgid "Scale Image"
 msgstr "Κλιμάκωση εικόνας"
 
@@ -147,8 +153,11 @@ msgstr "Μετακίνηση εικόνας στο κέντρο"
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
-msgid "Clear Selection"
-msgstr "Καθαρισμός επιλογής"
+msgid "Clear"
+msgstr "Εκκαθάριση"
+
+msgid "Invert"
+msgstr "Αντιστροφή"
 
 msgid "Flip"
 msgstr "Αναστροφή"
@@ -422,6 +431,9 @@ msgstr "Θέματα"
 msgid "Canvas"
 msgstr "Καμβάς"
 
+msgid "Selection"
+msgstr "Επιλογή"
+
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
 
@@ -487,6 +499,15 @@ msgstr "Φωτεινό"
 
 msgid "Purple"
 msgstr "Μωβ"
+
+msgid "Theme"
+msgstr "Θέμα"
+
+msgid "Icon color from:"
+msgstr "Χρώμα εικονιδίων από:"
+
+msgid "Icon color:"
+msgstr "Χρώμα εικονιδίων:"
 
 msgid "Only affect selection"
 msgstr "Επηρεάζει μόνο την επιλογή"
@@ -677,8 +698,8 @@ msgstr "Αραβικά"
 msgid "Turkish"
 msgstr "Τουρκικά"
 
-msgid "Norwegian"
-msgstr "Νορβηγικά"
+msgid "Norwegian Bokmål"
+msgstr "Νορβηγικά Μποκμάλ"
 
 msgid "Korean"
 msgstr "Κορεάτικα"
@@ -800,26 +821,51 @@ msgstr "Κουβάς\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Φώτισμα/Σκούρημα\n\n"
+msgstr "Εργαλείο σκίασης\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "Εργαλείο γραμμής\n\n"
+"%s για το αριστερό πλήκτρο του ποντικιού\n"
+"%s για το δεξί πλήκτρο του ποντικιού\n\n"
+"Κρατήστε το %s για να περιορίσετε τη γωνία της γραμμής\n"
+"Κρατήστε το %s για να κεντράρετε το σχήμα στην αρχή του κλικ\n"
+"Κρατήστε το %s για να μετακινήσετε την προέλευση του σχήματος\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr ""
+"Hold %s to displace the shape's origin\n"
+msgstr "Τετράγωνο εργαλείο\n\n"
+"%s για το αριστερό πλήκτρο του ποντικιού\n"
+"%s για το δεξί πλήκτρο του ποντικιού\n\n"
+"Κρατήστε το %s για να δημιουργηθεί ένα 1:1 σχήμα\n"
+"Κρατήστε το %s για να κεντράρετε το σχήμα στην αρχή του κλικ\n"
+"Κρατήστε το %s για να μετακινήσετε την προέλευση του σχήματος\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr ""
+"Hold %s to displace the shape's origin\n"
+msgstr "Εργαλείο έλλειψης\n\n"
+"%s για το αριστερό πλήκτρο του ποντικιού\n"
+"%s για το δεξί πλήκτρο του ποντικιού\n\n"
+"Κρατήστε το %s για να δημιουργηθεί ένα 1:1 σχήμα\n"
+"Κρατήστε το %s για να κεντράρετε το σχήμα στην αρχή του κλικ\n"
+"Κρατήστε το %s για να μετακινήσετε την προέλευση του σχήματος\n"
 
 msgid "Rectangle"
 msgstr "Ορθογώνιο"
@@ -994,6 +1040,15 @@ msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζου
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
+msgid "Animated selection borders"
+msgstr "Κίνηση περιγράμματος επιλογής"
+
+msgid "Border color 1:"
+msgstr "Χρώμα περιγράμματος 1:"
+
+msgid "Border color 2:"
+msgstr "Χρώμα περιγράμματος 2:"
+
 msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
 
@@ -1039,6 +1094,9 @@ msgstr "Αντικαθιστά το χρώμα αντί να το συνδυάζ
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
+msgid "Fill inside"
+msgstr "Εσωτερικό γέμισμα"
+
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
 
@@ -1046,7 +1104,7 @@ msgid "Fill Shape"
 msgstr "Γέμισμα Σχήματος"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Γεμίζει το σχεδιασμένο σχήμα με χρώμα, αντί να σχεδιάστεί ένα άδειο σχήμα"
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"
@@ -1549,8 +1607,8 @@ msgstr "Γόμα"
 msgid "Bucket"
 msgstr "Κουβάς"
 
-msgid "Lighten/Darken"
-msgstr "Φώτισμα/Σκούρημα"
+msgid "Shading Tool"
+msgstr "Εργαλείο Σκίασης"
 
 msgid "Switch Colors"
 msgstr "Εναλλαγή χρωμάτων"
@@ -1663,10 +1721,7 @@ msgid "Tiled In Y Axis"
 msgstr "Επανάληψη στον Άξονα Υ"
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
-msgstr ""
+msgstr "Δημιουργία νέας παλέτας"
 
 msgid "Comment:"
 msgstr "Σχόλια:"
@@ -1675,26 +1730,26 @@ msgid "Empty"
 msgstr "Κενή"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Από την τρέχουσα παλέτα"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Από την τρέχουσα εικόνα"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Από την τρέχουσα επιλογή"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Προσθήκη νέου χρώματος"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Αφαίρεση επιλεγμένου χρώματος"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Υπάρχει ήδη παλέτα με το ίδιο όνομα και διαδρομή!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Απαιτείται όνομα παλέτας!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Η μείωση του μεγέθους της παλέτας θα επηρεάσει τις θέσεις των χρωμάτων. Τα χρώματα που δεν χωρούν στο νέο μέγεθος της παλέτας θα χαθούν!"
 

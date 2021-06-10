@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-04-16 19:21\n"
+"PO-Revision-Date: 2021-06-08 17:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Confirmă alegerea..."
 msgid "File Name:"
 msgstr "Numele fișierului:"
 
+msgid "Project Name:"
+msgstr "Numele proiectului:"
+
 msgid "Image Size"
 msgstr "Dimensiunea imaginii"
 
@@ -39,8 +42,8 @@ msgstr "Dimensiunea pânzei"
 msgid "Frame Size"
 msgstr "Dimensiunea cadrului"
 
-msgid "Size"
-msgstr "Dimensiune"
+msgid "Size:"
+msgstr "Dimensiune:"
 
 msgid "Width:"
 msgstr "Lățime:"
@@ -126,6 +129,9 @@ msgstr "Lipire"
 msgid "Delete"
 msgstr "Ștergere"
 
+msgid "New Brush"
+msgstr "Pensulă nouă"
+
 msgid "Scale Image"
 msgstr "Scalare imagine"
 
@@ -147,8 +153,11 @@ msgstr "Centralizare imagine"
 msgid "Rotate Image"
 msgstr "Rotire imagine"
 
-msgid "Clear Selection"
-msgstr "Ștergere selecție"
+msgid "Clear"
+msgstr "Ștergere"
+
+msgid "Invert"
+msgstr "Inversare"
 
 msgid "Flip"
 msgstr "Răsturnare"
@@ -422,6 +431,9 @@ msgstr "Teme"
 msgid "Canvas"
 msgstr "Pânză"
 
+msgid "Selection"
+msgstr "Selecție"
+
 msgid "Shortcuts"
 msgstr "Comenzi rapide"
 
@@ -487,6 +499,15 @@ msgstr "Luminos"
 
 msgid "Purple"
 msgstr "Mov"
+
+msgid "Theme"
+msgstr "Temă"
+
+msgid "Icon color from:"
+msgstr "Culoarea pictogramei din:"
+
+msgid "Icon color:"
+msgstr "Culoarea pictogramei:"
 
 msgid "Only affect selection"
 msgstr "Afectează doar selecția"
@@ -677,8 +698,8 @@ msgstr "Arabă"
 msgid "Turkish"
 msgstr "Turcă"
 
-msgid "Norwegian"
-msgstr "Norvegiană"
+msgid "Norwegian Bokmål"
+msgstr "Bokmål"
 
 msgid "Korean"
 msgstr "Coreeană"
@@ -800,34 +821,51 @@ msgstr "Recipient\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Luminare/întunecare\n\n"
+msgstr "Instrument de umbrire\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "Instrument Linie\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Ține apăsată tasta %s pentru a fixa unghiul liniei\n"
+"Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
+"Ține apăsată tasta %s pentru a deplasa originea formei\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr "Instrument Dreptunghi\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului\n\n"
 "Ține apăsată tasta %s pentru a crea o formă 1:1\n"
-"Ține apăsată tasta %s pentru a centra forma la originea clicului\n"
+"Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
+"Ține apăsată tasta %s pentru a deplasa originea formei\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr "Instrument Elipsă\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului\n\n"
 "Ține apăsată tasta %s pentru a crea o formă 1:1\n"
-"Ține apăsată tasta %s pentru a centra forma la originea clicului\n"
+"Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
+"Ține apăsată tasta %s pentru a deplasa originea formei\n"
 
 msgid "Rectangle"
 msgstr "Dreptunghi"
@@ -1002,6 +1040,15 @@ msgstr "Urmărește nivelul de transfocare al pânzei"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Carourile transparente urmăresc nivelul de transfocare al pânzei"
 
+msgid "Animated selection borders"
+msgstr "Margini de selecție animate"
+
+msgid "Border color 1:"
+msgstr "Culoarea marginii 1:"
+
+msgid "Border color 2:"
+msgstr "Culoarea marginii 2:"
+
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
 
@@ -1046,6 +1093,9 @@ msgstr "Suprascrie culoarea în loc să o amestece. Această opțiune se aplică
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Fill inside"
+msgstr "Umplere pe interior"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
@@ -1557,8 +1607,8 @@ msgstr "Radieră"
 msgid "Bucket"
 msgstr "Recipient"
 
-msgid "Lighten/Darken"
-msgstr "Luminare/întunecare"
+msgid "Shading Tool"
+msgstr "Instrument de umbrire"
 
 msgid "Switch Colors"
 msgstr "Comutare culori"
@@ -1672,9 +1722,6 @@ msgstr "Mozaicat pe axa Y"
 
 msgid "Create a new palette"
 msgstr "Creează o paletă nouă"
-
-msgid "Create New Palette"
-msgstr "Creare paletă nouă"
 
 msgid "Comment:"
 msgstr "Comentariu:"

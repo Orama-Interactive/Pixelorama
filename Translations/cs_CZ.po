@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Prosím, potvrďte..."
 msgid "File Name:"
 msgstr "Název souboru:"
 
+msgid "Project Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "Velikost obrázku"
 
@@ -39,7 +42,7 @@ msgstr "Velikost plátna"
 msgid "Frame Size"
 msgstr "Velikost snímku"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
@@ -126,6 +129,9 @@ msgstr "Vložit"
 msgid "Delete"
 msgstr "Smazat"
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr "Škálovat obrázek"
 
@@ -147,8 +153,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
-msgid "Clear Selection"
-msgstr "Smazat výběr"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "Překlopit"
@@ -422,6 +431,9 @@ msgstr "Motivy"
 msgid "Canvas"
 msgstr "Plátno"
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr "Zkratky"
 
@@ -487,6 +499,15 @@ msgstr "Světlý"
 
 msgid "Purple"
 msgstr "Fialová"
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Pouze ovlivňuje výběr"
@@ -677,8 +698,8 @@ msgstr "Arabština"
 msgid "Turkish"
 msgstr "Turečtina"
 
-msgid "Norwegian"
-msgstr "Norština"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Korejština"
@@ -798,18 +819,25 @@ msgstr "Kbelík\n\n"
 "%s pro levé tlačítko myši\n"
 "%s pro pravé tlačítko myši"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Zesvětlení/Ztmavení\n\n"
-"%s pro levé tlačítko myši\n"
-"%s pro pravé tlačítko myší"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -817,6 +845,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -992,6 +1021,15 @@ msgstr "Sledovat úroveň přiblížení plátna"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Průhledná šachovnice následuje úroveň přiblížení plátna"
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "Lze upravit pouze vlastní předvolbu"
 
@@ -1036,6 +1074,9 @@ msgstr "Přepíše barvu namísto smíchání. Tato možnost je relevantní pouz
 
 msgid "Pixel Perfect"
 msgstr "Pixel perfekt"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Vyhladí čáry odstraněním pixelů navíc na okrajích"
@@ -1547,8 +1588,8 @@ msgstr "Guma"
 msgid "Bucket"
 msgstr "Kbelík"
 
-msgid "Lighten/Darken"
-msgstr "Zesvětlení/ztmavení"
+msgid "Shading Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Prohodit barvy"
@@ -1661,9 +1702,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"

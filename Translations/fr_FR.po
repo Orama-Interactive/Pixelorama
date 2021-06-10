@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Veuillez confirmer..."
 msgid "File Name:"
 msgstr "Nom du fichier :"
 
+msgid "Project Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "Taille de l'image"
 
@@ -39,7 +42,7 @@ msgstr "Taille du Canevas"
 msgid "Frame Size"
 msgstr "Taille de la frame"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
@@ -126,6 +129,9 @@ msgstr "Coller"
 msgid "Delete"
 msgstr "Supprimer"
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr "Redimensionner l'image"
 
@@ -147,8 +153,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
-msgid "Clear Selection"
-msgstr "Effacer la Sélection"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "Retourner"
@@ -422,6 +431,9 @@ msgstr "Thèmes"
 msgid "Canvas"
 msgstr "Canevas"
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
@@ -487,6 +499,15 @@ msgstr "Clair"
 
 msgid "Purple"
 msgstr "Violet"
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Affecter uniquement la sélection"
@@ -677,8 +698,8 @@ msgstr "Arabe"
 msgid "Turkish"
 msgstr "Turc"
 
-msgid "Norwegian"
-msgstr "Norvégien"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Coréen"
@@ -800,18 +821,25 @@ msgstr "Seau de remplissage\n\n"
 "%s pour le bouton gauche de la souris\n"
 "%s pour le bouton droit de la souris"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Éclaircir/Assombrir\n\n"
-"%s pour le bouton gauche de la souris\n"
-"%s pour le bouton droit de la souris"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -819,6 +847,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -994,6 +1023,15 @@ msgstr "Suivre le niveau de zoom du canevas"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Le damier transparent suit le niveau de zoom du canevas"
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
 
@@ -1038,6 +1076,9 @@ msgstr "Écrase la couleur au lieu de la mélanger. Cette option n'est pertinent
 
 msgid "Pixel Perfect"
 msgstr "Pixel Parfait"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
@@ -1549,8 +1590,8 @@ msgstr "Gomme"
 msgid "Bucket"
 msgstr "Seau de remplissage"
 
-msgid "Lighten/Darken"
-msgstr "Éclaircir/Assombrir"
+msgid "Shading Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Changer les couleurs"
@@ -1663,9 +1704,6 @@ msgid "Tiled In Y Axis"
 msgstr "Mode Tuile sur l'Axe Y"
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"

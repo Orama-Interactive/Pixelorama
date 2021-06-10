@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-06-08 17:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Por Favor Confirme..."
 msgid "File Name:"
 msgstr "Nome do Arquivo:"
 
+msgid "Project Name:"
+msgstr "Nome do projeto:"
+
 msgid "Image Size"
 msgstr "Tamanho da Imagem"
 
@@ -39,8 +42,8 @@ msgstr "Tamanho da Tela"
 msgid "Frame Size"
 msgstr "Tamanho do Quadro"
 
-msgid "Size"
-msgstr ""
+msgid "Size:"
+msgstr "Tamanho:"
 
 msgid "Width:"
 msgstr "Largura:"
@@ -126,14 +129,17 @@ msgstr "Colar"
 msgid "Delete"
 msgstr "Deletar"
 
+msgid "New Brush"
+msgstr "Novo Pincel"
+
 msgid "Scale Image"
 msgstr "Redimensionar Imagem"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Percentagem"
 
 msgid "Crop Image"
 msgstr "Cortar imagem"
@@ -142,13 +148,16 @@ msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralizar Imagem"
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
 
-msgid "Clear Selection"
-msgstr "Limpar Seleção"
+msgid "Clear"
+msgstr "Limpar"
+
+msgid "Invert"
+msgstr "Inverter"
 
 msgid "Flip"
 msgstr "Virar"
@@ -166,22 +175,22 @@ msgid "Tile Mode"
 msgstr "Modo de Tile"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Transparência da Janela"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Layout do Painel"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automático"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Tela Cheia"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Tela Alta"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Visão Espelhada"
 
 msgid "Show Grid"
 msgstr "Mostrar Grade"
@@ -229,13 +238,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nova aba)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nova camada)"
 
 msgid "New frame"
 msgstr "Novo Quadro"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Substituir frame"
 
 msgid "New layer"
 msgstr "Nova camada"
@@ -256,13 +265,13 @@ msgid "Vertical frames:"
 msgstr "Quadros verticais:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Quadro inicial:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Na moldura:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Na camada:"
 
 msgid "Brush type:"
 msgstr "Tipo do pincel:"
@@ -422,6 +431,9 @@ msgstr "Temas"
 msgid "Canvas"
 msgstr "Tela"
 
+msgid "Selection"
+msgstr "Seleção"
+
 msgid "Shortcuts"
 msgstr "Atalhos"
 
@@ -468,7 +480,7 @@ msgid "Display Scale"
 msgstr "Mostrar escala"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Escurecer a interface em um pop-up de diálogo"
 
 msgid "Dark"
 msgstr "Escuro"
@@ -487,6 +499,15 @@ msgstr "Claro"
 
 msgid "Purple"
 msgstr "Roxo"
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
@@ -677,8 +698,8 @@ msgstr "Árabe"
 msgid "Turkish"
 msgstr "Turco"
 
-msgid "Norwegian"
-msgstr "Norueguês"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Coreano"
@@ -759,7 +780,9 @@ msgstr "Zoom\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Mover\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -798,32 +821,57 @@ msgstr "Preenchimento\n\n"
 "%s para o botão esquerdo do mouse\n"
 "%s para o botão direito do mouse"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Iluminar/Escurecer\n\n"
+msgstr "Ferramenta de Sombreamento\n\n"
 "%s para o botão esquerdo do mouse\n"
-"%s para o botão direito do mouse"
+"%s para o botão direito"
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "Ferramenta de linha\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito\n\n"
+"Segure %s para encaixar o ângulo da linha\n"
+"Segure %s para centralizar a forma no clique de origem\n"
+"Mantenha %s para deslocar a origem da forma\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr ""
+"Hold %s to displace the shape's origin\n"
+msgstr "Ferramenta Retângulo\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito\n\n"
+"Segure %s para criar uma forma 1:1\n"
+"Segure %s para centralizar a forma no botão de origem do clique\n"
+"Segure %s para deslocar a origem da forma\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr ""
+"Hold %s to displace the shape's origin\n"
+msgstr "Ferramenta de elipse\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito\n\n"
+"Segure %s para criar uma forma 1:1\n"
+"Segure %s para centralizar a forma no botão de origem do clique\n"
+"Segure %s para deslocar a origem da forma\n"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Retângulo"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Escolha uma cor para a ferramenta esquerda"
@@ -897,19 +945,19 @@ msgid "All"
 msgstr "Tudo"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Largura da grade retangular:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Define a distância entre linhas verticais da grade retangular"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Largura da grade retangular:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Define a distância entre linhas verticais da grade retangular"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Largura das células isométricas:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
@@ -936,7 +984,7 @@ msgid "Draw over Tile Mode:"
 msgstr ""
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Se desativado, a grade será desenhada somente sobre a imagem original"
 
 msgid "Grid color:"
 msgstr "Cor da grade:"
@@ -992,6 +1040,15 @@ msgstr "Seguir Nível de Zoom da Tela"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "O verificador transparente segue o nível de zoom da tela"
 
+msgid "Animated selection borders"
+msgstr "Bordas de seleção animada"
+
+msgid "Border color 1:"
+msgstr "Cor da borda 1:"
+
+msgid "Border color 2:"
+msgstr "Cor da borda 2:"
+
 msgid "Only custom preset can be modified"
 msgstr "Apenas predefinição personalizada pode ser modificada"
 
@@ -1037,14 +1094,17 @@ msgstr "Substitui a cor ao invés de misturá-la. Esta opção é relevante apen
 msgid "Pixel Perfect"
 msgstr "Pixel Perfeito"
 
+msgid "Fill inside"
+msgstr "Preenchimento interno"
+
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Torna as linhas suaves removendo os pixels extras nas bordas"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Preencher Forma"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Preenche a forma desenhada com cor, em vez de desenhar uma forma oca"
 
 msgid "Brush color from"
 msgstr "Cor de pincel do"
@@ -1506,10 +1566,10 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Retrato"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Modo Paisagem / Horizontal"
 
 msgid "Templates:"
 msgstr "Modelos:"
@@ -1533,7 +1593,7 @@ msgid "Zoom"
 msgstr "Zoom"
 
 msgid "Pan"
-msgstr ""
+msgstr "Mover"
 
 msgid "Color Picker"
 msgstr "Seleção de Cores"
@@ -1547,8 +1607,8 @@ msgstr "Borracha"
 msgid "Bucket"
 msgstr "Preenchimento"
 
-msgid "Lighten/Darken"
-msgstr "Iluminar/Escurece"
+msgid "Shading Tool"
+msgstr "Ferramenta de sombreamento"
 
 msgid "Switch Colors"
 msgstr "Trocar Cores"
@@ -1661,38 +1721,35 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
-msgstr ""
+msgstr "Criar uma nova paleta"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Comentário:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Vazio"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Da Paleta atual"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Do Sprite Atual"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Da Seleção Atual"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Adicionar uma nova cor"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Remover uma cor selecionada"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Já existe uma paleta com o mesmo nome e caminho!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "O nome da paleta é obrigatório!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Reduzir o tamanho da paleta irá redefinir as posições de cores. Cores que não se encaixam em novo tamanho da paleta serão perdidas!"
 

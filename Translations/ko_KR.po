@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-04-22 11:15\n"
+"PO-Revision-Date: 2021-06-09 02:18\n"
 
 msgid "OK"
 msgstr "예"
@@ -30,6 +30,9 @@ msgstr "확인이 필요합니다..."
 msgid "File Name:"
 msgstr "파일 이름:"
 
+msgid "Project Name:"
+msgstr "프로젝트 이름:"
+
 msgid "Image Size"
 msgstr "이미지 크기"
 
@@ -39,8 +42,8 @@ msgstr "캔버스 크기"
 msgid "Frame Size"
 msgstr "프레임 크기"
 
-msgid "Size"
-msgstr "크기"
+msgid "Size:"
+msgstr "크기:"
 
 msgid "Width:"
 msgstr "너비:"
@@ -126,6 +129,9 @@ msgstr "붙여넣기"
 msgid "Delete"
 msgstr "삭제"
 
+msgid "New Brush"
+msgstr "새 브러시"
+
 msgid "Scale Image"
 msgstr "이미지 크기"
 
@@ -147,8 +153,11 @@ msgstr "이미지 중앙 집중화"
 msgid "Rotate Image"
 msgstr "이미지 회전"
 
-msgid "Clear Selection"
-msgstr "선택 영역 지우기"
+msgid "Clear"
+msgstr "초기화"
+
+msgid "Invert"
+msgstr "반전"
 
 msgid "Flip"
 msgstr "뒤집기"
@@ -422,6 +431,9 @@ msgstr "테마"
 msgid "Canvas"
 msgstr "캔버스"
 
+msgid "Selection"
+msgstr "선택"
+
 msgid "Shortcuts"
 msgstr "단축키"
 
@@ -468,7 +480,7 @@ msgid "Display Scale"
 msgstr "디스플레이 크기"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "대화 상자 팝업에 인터페이스를 희미하"
 
 msgid "Dark"
 msgstr "다크"
@@ -487,6 +499,15 @@ msgstr "라이트"
 
 msgid "Purple"
 msgstr "보라색"
+
+msgid "Theme"
+msgstr "테마"
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr "아이콘 색상:"
 
 msgid "Only affect selection"
 msgstr "선택 영역만 영향을 줌"
@@ -677,8 +698,8 @@ msgstr "아랍어"
 msgid "Turkish"
 msgstr "터키어"
 
-msgid "Norwegian"
-msgstr "노르웨이어"
+msgid "Norwegian Bokmål"
+msgstr "노르웨이어(보크말)"
 
 msgid "Korean"
 msgstr "한국어"
@@ -800,33 +821,51 @@ msgstr "양동이\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "밝게/어둡게\n\n"
+msgstr "셰이딩 툴\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "선 툴\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼\n\n"
+"%s 를 눌러 선의 각도를 스냅함\n"
+"%s 를 눌러 도형의 클릭 원점 중앙에 놓음\n"
+"%s 를 눌러 원점을 바꿈\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr "%s 은(는) 왼쪽 마우스 버튼\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "직사각형 툴\n\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼\n\n"
-"%s을(를) 눌러 1:1 도형을 만듦\n"
-"%s을(를) 눌러 도형을 클릭 원점에 놓음\n"
+"%s 를 눌러 1:1 비율로 만듦\n"
+"%s 를 눌러 도형의 클릭 원점 중앙에 놓음\n"
+"%s 를 눌러 원점을 바꿈\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr "타원 도구\n\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "원 툴\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼\n\n"
-"%s을(를) 눌러 1:1 도형을 만듦\n"
-"%s을(를) 눌러 도형을 클릭 원점에 놓음\n"
+"%s 를 눌러 1:1 비율로 만듦\n"
+"%s 를 눌러 도형의 클릭 원점 중앙에 놓음\n"
+"%s 를 눌러 원점을 바꿈\n"
 
 msgid "Rectangle"
 msgstr "직사각형"
@@ -1001,6 +1040,15 @@ msgstr "캔버스 확대 레벨을 따라감"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "투명 배경 체크 무늬가 캔버스 확대 레벨을 따라감"
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr "테두리 색상 1:"
+
+msgid "Border color 2:"
+msgstr "테두리 색상 2:"
+
 msgid "Only custom preset can be modified"
 msgstr "커스텀 프리셋만 수정 가능함"
 
@@ -1046,6 +1094,9 @@ msgstr "색을 섞는 대신 덮어씁니다. 이 옵션은 완전 불투명한 
 msgid "Pixel Perfect"
 msgstr "픽셀 퍼펙트"
 
+msgid "Fill inside"
+msgstr "안에 채우기"
+
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
 
@@ -1053,7 +1104,7 @@ msgid "Fill Shape"
 msgstr "도형 채우기"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "빈 도형을 그리는 대신 도형을 색상으로 채우고 그립니다."
 
 msgid "Brush color from"
 msgstr "브러시 색상을 ~에서"
@@ -1556,8 +1607,8 @@ msgstr "지우개"
 msgid "Bucket"
 msgstr "양동이"
 
-msgid "Lighten/Darken"
-msgstr "밝게/어둡게"
+msgid "Shading Tool"
+msgstr "셰이딩 툴"
 
 msgid "Switch Colors"
 msgstr "색상 전환"
@@ -1672,9 +1723,6 @@ msgstr "Y 축으로 타일을 두르기"
 msgid "Create a new palette"
 msgstr "새 팔레트 생성"
 
-msgid "Create New Palette"
-msgstr "새 팔레트 생성"
-
 msgid "Comment:"
 msgstr "댓글:"
 
@@ -1703,5 +1751,5 @@ msgid "Palette name is required!"
 msgstr "팔레트의 이름이 필요합니다!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "팔레트 크기를 줄이면 색상 위치가 재설정됩니다. 새로운 팔레트 크기에 맞지 않는 색상은 손실됩니다!"
 

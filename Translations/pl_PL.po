@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-04-21 07:54\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Proszę potwierdzić..."
 msgid "File Name:"
 msgstr "Nazwa pliku:"
 
+msgid "Project Name:"
+msgstr "Nazwa projektu:"
+
 msgid "Image Size"
 msgstr "Rozmiar obrazu"
 
@@ -39,8 +42,8 @@ msgstr "Rozmiar płótna"
 msgid "Frame Size"
 msgstr "Rozmiar klatki"
 
-msgid "Size"
-msgstr "Rozmiar"
+msgid "Size:"
+msgstr "Rozmiar:"
 
 msgid "Width:"
 msgstr "Szerokość:"
@@ -126,6 +129,9 @@ msgstr "Wklej"
 msgid "Delete"
 msgstr "Usuń"
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr "Skaluj obraz"
 
@@ -147,8 +153,11 @@ msgstr "Wyśrodkuj obraz"
 msgid "Rotate Image"
 msgstr "Obróć obraz"
 
-msgid "Clear Selection"
-msgstr "Wyczyść zaznaczenie"
+msgid "Clear"
+msgstr "Wyczyść"
+
+msgid "Invert"
+msgstr "Odwróć"
 
 msgid "Flip"
 msgstr "Odwróć"
@@ -421,6 +430,9 @@ msgstr "Motywy"
 msgid "Canvas"
 msgstr "Płótno"
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
 
@@ -486,6 +498,15 @@ msgstr "Jasny"
 
 msgid "Purple"
 msgstr "Fioletowy"
+
+msgid "Theme"
+msgstr "Motyw"
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
@@ -676,8 +697,8 @@ msgstr "Arabski"
 msgid "Turkish"
 msgstr "Turecki"
 
-msgid "Norwegian"
-msgstr "Norweski"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Koreański"
@@ -799,34 +820,34 @@ msgstr "Wiaderko\n\n"
 "%s na lewy przycisk myszy\n"
 "%s na prawy przycisk myszy"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Rozjaśnianie/Ściemnianie\n\n"
-"%s na lewy przycisk myszy\n"
-"%s na prawy przycisk myszy"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr "Prostokąt\n\n"
-"%s na lewy przycisk myszy\n"
-"%s na prawy przycisk myszy\n\n"
-"Przytrzymaj %s aby stworzyć kwadrat\n"
-"Przytrzymaj %s aby wyśrodkować kształt na źródłowym miejscu kliknięcia\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr "Elipsa\n\n"
-"%s na lewy przycisk myszy\n"
-"%s na prawy przycisk myszy\n\n"
-"Przytrzymaj %s aby stworzyć okrąg/koło\n"
-"Przytrzymaj %s aby wyśrodkować kształt na źródłowym miejscu kliknięcia\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle"
 msgstr "Prostokąt"
@@ -1001,6 +1022,15 @@ msgstr "Śledź poziom przybliżenia płótna"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Przezroczysta siatka śledzi poziom przybliżenia płótna"
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
 
@@ -1045,6 +1075,9 @@ msgstr "Zastępuje kolor zamiast zmieszać się z nim. Ta opcja zadziała tylko 
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Sprawia, że linie są gładkie przez usunięcie dodatkowych pikseli na krawędziach"
@@ -1556,8 +1589,8 @@ msgstr "Gumka"
 msgid "Bucket"
 msgstr "Wiaderko"
 
-msgid "Lighten/Darken"
-msgstr "Rozjaśnianie/Ściemnianie"
+msgid "Shading Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
@@ -1670,9 +1703,6 @@ msgid "Tiled In Y Axis"
 msgstr "Kafelkowanie na osi Y"
 
 msgid "Create a new palette"
-msgstr "Stwórz nową paletę"
-
-msgid "Create New Palette"
 msgstr "Stwórz nową paletę"
 
 msgid "Comment:"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-04-16 20:19\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Пожалуйста подтвердите..."
 msgid "File Name:"
 msgstr "Имя файла:"
 
+msgid "Project Name:"
+msgstr "Название проекта:"
+
 msgid "Image Size"
 msgstr "Размер изображения"
 
@@ -39,8 +42,8 @@ msgstr "Размер холста"
 msgid "Frame Size"
 msgstr ""
 
-msgid "Size"
-msgstr "Размер"
+msgid "Size:"
+msgstr "Размер:"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -126,14 +129,17 @@ msgstr "Вставить"
 msgid "Delete"
 msgstr "Удалить"
 
+msgid "New Brush"
+msgstr "Новая кисть"
+
 msgid "Scale Image"
 msgstr "Изменить размер изображения"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Пиксели"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Процент"
 
 msgid "Crop Image"
 msgstr "Обрезать изображение"
@@ -142,13 +148,16 @@ msgid "Resize Canvas"
 msgstr "Изменить размер холста"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Централизовать изображение"
 
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
 
-msgid "Clear Selection"
-msgstr "Снять выделение"
+msgid "Clear"
+msgstr "Очистить"
+
+msgid "Invert"
+msgstr "Инвертировать"
 
 msgid "Flip"
 msgstr "Перевернуть"
@@ -306,7 +315,7 @@ msgid "Frame"
 msgstr "Кадр"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Кадры:"
 
 msgid "All Frames"
 msgstr "Все кадры"
@@ -408,7 +417,7 @@ msgid "General"
 msgstr "Общие"
 
 msgid "Startup"
-msgstr ""
+msgstr "Запуск"
 
 msgid "Language"
 msgstr "Язык"
@@ -422,11 +431,14 @@ msgstr "Темы оформления"
 msgid "Canvas"
 msgstr "Холст"
 
+msgid "Selection"
+msgstr "Выделение"
+
 msgid "Shortcuts"
 msgstr "Горячие клавишы"
 
 msgid "Backup"
-msgstr ""
+msgstr "Резервная копия"
 
 msgid "Performance"
 msgstr "Производительность"
@@ -480,13 +492,22 @@ msgid "Blue"
 msgstr "Синий"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Карамель"
 
 msgid "Light"
 msgstr "Светлая"
 
 msgid "Purple"
 msgstr "Фиолетовый"
+
+msgid "Theme"
+msgstr "Тема"
+
+msgid "Icon color from:"
+msgstr "Цвет значка из:"
+
+msgid "Icon color:"
+msgstr "Цвет значка:"
 
 msgid "Only affect selection"
 msgstr "Менять только выделенное"
@@ -600,7 +621,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Разработано Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-настоящее время Orama Interactive и участники"
 
 msgid "Website"
 msgstr "Сайт"
@@ -677,8 +698,8 @@ msgstr "Арабский"
 msgid "Turkish"
 msgstr "Турецкий"
 
-msgid "Norwegian"
-msgstr "Норвежский"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Корейский"
@@ -759,7 +780,9 @@ msgstr "Масштаб\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Сдвиг\n\n"
+"%s левой кнопкой мыши\n"
+"%s для правой кнопки мыши"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -798,18 +821,25 @@ msgstr "Заливка\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Осветление/Затемнение\n\n"
-"%s для левой кнопки мыши\n"
-"%s для правой кнопки мыши"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -817,6 +847,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -897,10 +928,10 @@ msgid "All"
 msgstr "Обе"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Ширина прямоугольной сетки:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Устанавливает расстояние между вертикальными линиями прямоугольной сетки"
 
 msgid "Rectangular grid height:"
 msgstr ""
@@ -992,6 +1023,15 @@ msgstr "Следовать масштабу холста"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Клеточки прозрачности следуют увеличению/уменьшению холста"
 
+msgid "Animated selection borders"
+msgstr "Анимированные границы выделения"
+
+msgid "Border color 1:"
+msgstr "Цвет границы 1:"
+
+msgid "Border color 2:"
+msgstr "Цвет границы 2:"
+
 msgid "Only custom preset can be modified"
 msgstr "Только пользовательские предустановки могут быть изменены"
 
@@ -1036,6 +1076,9 @@ msgstr "Перезаписывает цвет вместо смешивания.
 
 msgid "Pixel Perfect"
 msgstr "Пиксельная точность"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
@@ -1453,7 +1496,7 @@ msgid "Edit Palette"
 msgstr "Изменить палитру"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Создание цветов с помощью альфа-компонента"
 
 msgid "Get colors only from selection"
 msgstr "Получить цвета только из выделенного"
@@ -1501,7 +1544,7 @@ msgid "A default background color of a new image"
 msgstr "Цвет фона по умолчанию для нового изображения"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Заблокировать соотношение сторон"
 
 msgid "Portrait"
 msgstr "Портретная"
@@ -1531,7 +1574,7 @@ msgid "Zoom"
 msgstr "Масштаб"
 
 msgid "Pan"
-msgstr ""
+msgstr "Сдвиг"
 
 msgid "Color Picker"
 msgstr "Выбор цвета (пипетка)"
@@ -1545,8 +1588,8 @@ msgstr "Ластик"
 msgid "Bucket"
 msgstr "Заливка"
 
-msgid "Lighten/Darken"
-msgstr "Осветлить/затемнить"
+msgid "Shading Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Сменить цвета"
@@ -1659,9 +1702,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr "Создать новую палитру"
-
-msgid "Create New Palette"
 msgstr "Создать новую палитру"
 
 msgid "Comment:"

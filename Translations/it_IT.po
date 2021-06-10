@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-04-16 19:21\n"
+"PO-Revision-Date: 2021-06-09 00:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,6 +30,9 @@ msgstr "Per favore conferma..."
 msgid "File Name:"
 msgstr "Nome File:"
 
+msgid "Project Name:"
+msgstr "Nome Progetto:"
+
 msgid "Image Size"
 msgstr "Dimensione dell'immagine"
 
@@ -39,8 +42,8 @@ msgstr "Dimensione Canvas"
 msgid "Frame Size"
 msgstr "Dimensione Frame"
 
-msgid "Size"
-msgstr "Dimensione"
+msgid "Size:"
+msgstr "Dimensione:"
 
 msgid "Width:"
 msgstr "Larghezza:"
@@ -126,6 +129,9 @@ msgstr "Incolla"
 msgid "Delete"
 msgstr "Elimina"
 
+msgid "New Brush"
+msgstr "Nuovo Pennello"
+
 msgid "Scale Image"
 msgstr "Scala l'immagine"
 
@@ -147,8 +153,11 @@ msgstr "Centralizza Immagine"
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
 
-msgid "Clear Selection"
-msgstr "Pulisci selezione"
+msgid "Clear"
+msgstr "Cancella"
+
+msgid "Invert"
+msgstr "Inverti"
 
 msgid "Flip"
 msgstr "Rifletti"
@@ -422,6 +431,9 @@ msgstr "Temi"
 msgid "Canvas"
 msgstr "Canvas"
 
+msgid "Selection"
+msgstr "Selezione"
+
 msgid "Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
@@ -487,6 +499,15 @@ msgstr "Chiaro"
 
 msgid "Purple"
 msgstr "Viola"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Icon color from:"
+msgstr "Colore icona da:"
+
+msgid "Icon color:"
+msgstr "Colore dell'icona:"
 
 msgid "Only affect selection"
 msgstr "Influire solo sulla selezione"
@@ -677,8 +698,8 @@ msgstr "Arabo"
 msgid "Turkish"
 msgstr "Turco"
 
-msgid "Norwegian"
-msgstr "Norvegese"
+msgid "Norwegian Bokmål"
+msgstr "Bokmål norvegese"
 
 msgid "Korean"
 msgstr "Coreano"
@@ -800,34 +821,51 @@ msgstr "Secchio\n\n"
 "%s per il tasto sinistro del mouse\n"
 "%s per il tasto destro del mouse"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Schiarisci/Scurisci\n\n"
-"%s per il tasto sinistro del mouse\n"
-"%s per il tasto destro del mouse"
+msgstr "Strumento ombreggiatura\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse"
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "Strumento linea\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
+"Tieni premuto %s per agganciare l'angolo della linea\n"
+"Tieni premuto %s per centrare la forma sull'origine del clic\n"
+"Tieni premuto %s per spostare l'origine della forma\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr "Strumento rettangolo\n\n"
 "%s per il tasto sinistro del mouse\n"
 "%s per il tasto destro del mouse\n\n"
 "Tieni premuto %s per creare una forma 1:1\n"
 "Tieni premuto %s per centrare la forma sull'origine del clic\n"
+"Tieni premuto %s per spostare l'origine della forma\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-msgstr "Strumento rettangolo\n\n"
+"Hold %s to displace the shape's origin\n"
+msgstr "Strumento Ellisse\n\n"
 "%s per il tasto sinistro del mouse\n"
 "%s per il tasto destro del mouse\n\n"
 "Tieni premuto %s per creare una forma 1:1\n"
 "Tieni premuto %s per centrare la forma sull'origine del clic\n"
+"Tieni premuto %s per spostare l'origine della forma\n"
 
 msgid "Rectangle"
 msgstr "Rettangolo"
@@ -1002,6 +1040,15 @@ msgstr "Segui il Livello di Zoom del canvas"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Il checker trasparente segue il livello di zoom del canvas"
 
+msgid "Animated selection borders"
+msgstr "Bordi selezione animati"
+
+msgid "Border color 1:"
+msgstr "Colore bordo 1:"
+
+msgid "Border color 2:"
+msgstr "Colore bordo 2:"
+
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
 
@@ -1046,6 +1093,9 @@ msgstr "Sovrascrive il colore invece di sfumarlo. Questa opzione è rilevante so
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Fill inside"
+msgstr "Riempi all'interno"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
@@ -1557,8 +1607,8 @@ msgstr "Gomma"
 msgid "Bucket"
 msgstr "Secchio"
 
-msgid "Lighten/Darken"
-msgstr "Schiarisci/Scurisci"
+msgid "Shading Tool"
+msgstr "Strumento Ombreggiatura"
 
 msgid "Switch Colors"
 msgstr "Inverti Colori"
@@ -1672,9 +1722,6 @@ msgstr "Piastrellato Nell'Asse Y"
 
 msgid "Create a new palette"
 msgstr "Crea una nuova tavolozza"
-
-msgid "Create New Palette"
-msgstr "Crea Nuova Tavolozza"
 
 msgid "Comment:"
 msgstr "Commento:"
