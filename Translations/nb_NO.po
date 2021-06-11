@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 23:30\n"
+"PO-Revision-Date: 2021-06-11 23:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -937,37 +937,37 @@ msgid "All"
 msgstr "Alle"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Rektangulært rutenettbredde:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Rektangulært rutenetthøyde:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Isometrisk cellebredde:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Isometrisk cellehøyde:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Rutenettforskyvning x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Rutenettforskyvning y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
@@ -1048,13 +1048,13 @@ msgid "Set application FPS limit:"
 msgstr "Sett prorgammets grense for bilder per sekund:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Begrens til ett bilde per sekund når programmet ikke har fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Hvis denne er påslått og programmet mister fokus vil programmet kun oppdateres i ett bilde per sekund. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
 
 msgid "Brush:"
 msgstr "Børste:"
@@ -1338,7 +1338,7 @@ msgid "Opacity:"
 msgstr "Gjennomsiktighet:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Flismodusgjennomsiktighet:"
 
 msgid "Toggle layer's visibility"
 msgstr "Vis/Skjul lag"
@@ -1463,10 +1463,10 @@ msgid "File autosaved"
 msgstr "Fil automatisk lagret"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Filen kunne ikke åpnes. Feilkode %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Filen kunne ikke lagres. Feilkode %s"
 
 msgid "File exported"
 msgstr "Fil eksportert"
@@ -1505,7 +1505,7 @@ msgid "Edit Palette"
 msgstr "Redigér Palett"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Opprett farger med alfa-komponent"
 
 msgid "Get colors only from selection"
 msgstr "Hent farger kun fra valgt område"
@@ -1702,7 +1702,7 @@ msgid "Frame duration"
 msgstr "Bildevarighet"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Flislagt i begge Akser"
 
 msgid "Tiled In X Axis"
 msgstr "Flislagt I X-aksen"
