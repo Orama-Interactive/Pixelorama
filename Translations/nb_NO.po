@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 23:38\n"
+"PO-Revision-Date: 2021-06-11 23:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -503,7 +503,7 @@ msgid "Purple"
 msgstr "Lilla"
 
 msgid "Theme"
-msgstr ""
+msgstr "Utseende"
 
 msgid "Icon color from:"
 msgstr "Ikonfarge fra:"
@@ -551,7 +551,7 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Justér Fargetone/Metning/Verdi"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradient"
 
 msgid "Adjust HSV"
 msgstr "Justér HSV"
@@ -849,7 +849,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Rektangelverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å lage et kvadrat\n"
+"Hold %s for å sentrere formen på klikkets opprinnelse\n"
+"Hold %s for å forskyve formens opprinnelse\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -857,7 +862,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Rektangelverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å lage en sirkel\n"
+"Hold %s for å sentrere formen på klikkets opprinnelse\n"
+"Hold %s for å forskyve formens opprinnelse\n"
 
 msgid "Rectangle"
 msgstr "Rektangel"
@@ -940,13 +950,13 @@ msgid "Rectangular grid width:"
 msgstr "Rektangulært rutenettbredde:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Angir hvor stort mellomrom det er mellom de vertikale linjene i det rektangulære rutenettet"
 
 msgid "Rectangular grid height:"
 msgstr "Rektangulært rutenetthøyde:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Angir hvor stort mellomrom det er mellom de horisontale linjene i det rektangulære rutenettet"
 
 msgid "Isometric cell bounds width:"
 msgstr "Isometrisk cellebredde:"
@@ -973,7 +983,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Tegn over Flismodus:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
@@ -1033,7 +1043,7 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Animerte markeringslinjer"
 
 msgid "Border color 1:"
 msgstr "Kantfarge 1:"
@@ -1735,11 +1745,11 @@ msgid "Remove a selected color"
 msgstr "Fjern en valgt farge"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Palett med samme navn og bane finnes allerede!"
 
 msgid "Palette name is required!"
 msgstr "Palettnavn er påkrevd!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Redusering av palettstørrelse vil nullstille fargenes lagrede posisjon. Farger som ikke passer inn i den nye palettstørrelsen vil gå tapt!"
 
