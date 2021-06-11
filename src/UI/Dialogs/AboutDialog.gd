@@ -192,7 +192,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
 	translators.create_item(translators_root).set_text(0, "  Blend_Smile - " + tr("Indonesian"))
 	translators.create_item(translators_root).set_text(0, "  Martin Novák (novhack) - " + tr("Czech"))
-	translators.create_item(translators_root).set_text(0, "  Lullius - " + tr("Norwegian"))
+	translators.create_item(translators_root).set_text(0, "  Lullius - " + tr("Norwegian Bokmål"))
 	translators.create_item(translators_root).set_text(0, "  Aninuscsalas - " + tr("Hungarian"))
 	translators.create_item(translators_root).set_text(0, "  jaehyeon1090 - " + tr("Korean"))
 	translators.create_item(translators_root).set_text(0, "  sfun_G - " + tr("Korean"))

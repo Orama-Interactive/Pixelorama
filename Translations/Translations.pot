@@ -49,6 +49,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "Select"
+msgstr ""
+
 msgid "View"
 msgstr ""
 
