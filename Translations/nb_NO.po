@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 22:59\n"
+"PO-Revision-Date: 2021-06-11 23:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -506,10 +506,10 @@ msgid "Theme"
 msgstr ""
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Ikonfarge fra:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Ikonfarge:"
 
 msgid "Only affect selection"
 msgstr "Bare påvirk merket område"
@@ -557,25 +557,25 @@ msgid "Adjust HSV"
 msgstr "Justér HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 msgid "Angle:"
 msgstr "Vinkel:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Fargetone:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Metning:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Verdi:"
 
 msgid "Apply"
 msgstr "Bruk"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
 msgstr "Plassér inne i bildet"
@@ -623,7 +623,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Utviklet av Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-nå av Orama Interaktive og bidragsytere"
 
 msgid "Website"
 msgstr "Nettside"
@@ -782,7 +782,9 @@ msgstr "Zoom\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Panorer\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -824,7 +826,9 @@ msgstr "Bøtte\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Skyggeleggeverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
