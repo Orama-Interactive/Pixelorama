@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 23:08\n"
+"PO-Revision-Date: 2021-06-11 23:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -836,7 +836,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Linjeverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å feste linjevinkelen\n"
+"Hold %s for å sentrere formen på klikkets opprinnelse\n"
+"Hold %s for å forskyve formens opprinnelse\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1082,16 +1087,16 @@ msgid "Pixel Perfect"
 msgstr "Pikselperfekt"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Fyll inn"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Fyll Form"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Fyller den tegnede formen med farge i stedet for å tegne en hul form"
 
 msgid "Brush color from"
 msgstr "Børstefarge fra"
@@ -1121,10 +1126,10 @@ msgid "Offset"
 msgstr "Forskyvning"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Enkel Skyggelegging"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Fargetoneskifting"
 
 msgid "Lighten"
 msgstr "Lys opp"
@@ -1578,7 +1583,7 @@ msgid "Zoom"
 msgstr "Zoom"
 
 msgid "Pan"
-msgstr ""
+msgstr "Panorér"
 
 msgid "Color Picker"
 msgstr "Fargevelger"
@@ -1593,7 +1598,7 @@ msgid "Bucket"
 msgstr "Bøtte"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Skyggeleggingverktøy"
 
 msgid "Switch Colors"
 msgstr "Bytt Farger"
@@ -1623,7 +1628,7 @@ msgid "Cannot find last project file."
 msgstr "Finner ikke siste prosjektfil."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Kan ikke finne prosjektfil."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Du har ikke lagret eller åpnet et prosjekt i Pixelorama enda!"
@@ -1659,7 +1664,7 @@ msgid "Close"
 msgstr "Lukk"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1673,7 +1678,7 @@ msgid "Remove currently selected palette"
 msgstr "Fjern valgt palett"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Er du sikker på at du vil fjerne denne fargepaletten? (Dette kan ikke omgjøres)"
 
 msgid "You can't remove more palettes!"
 msgstr "Du kan ikke fjerne flere paletter!"
@@ -1709,22 +1714,22 @@ msgid "Create a new palette"
 msgstr ""
 
 msgid "Comment:"
-msgstr ""
+msgstr "Kommentar:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Fra Nåværende Palett"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Fra Nåværende Figur"
 
 msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Legg til en ny farge"
 
 msgid "Remove a selected color"
 msgstr ""
@@ -1733,7 +1738,7 @@ msgid "Palette with the same name and path already exists!"
 msgstr ""
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Palettnavn er påkrevd!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
