@@ -78,8 +78,6 @@ func _input(event : InputEvent) -> void:
 
 	sprite_changed_this_frame = false
 
-	var current_project : Project = Global.current_project
-
 	if Global.has_focus:
 		if !cursor_image_has_changed:
 			cursor_image_has_changed = true
@@ -96,7 +94,7 @@ func _input(event : InputEvent) -> void:
 	Tools.handle_draw(current_pixel.floor(), event)
 
 	if sprite_changed_this_frame:
-		update_texture(current_project.current_layer)
+		update_selected_cels_textures()
 
 
 func camera_zoom() -> void:
@@ -229,6 +227,20 @@ func update_texture(layer_index : int, frame_index := -1, project : Project = Gl
 			var frame_texture_rect : TextureRect
 			frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
 			frame_texture_rect.texture = current_cel.image_texture
+
+
+func update_selected_cels_textures(project : Project = Global.current_project) -> void:
+	for cel_index in project.selected_cels:
+		var frame_index : int = cel_index[0]
+		var layer_index : int = cel_index[1]
+		if frame_index < project.frames.size() and layer_index < project.layers.size():
+			var current_cel : Cel = project.frames[frame_index].cels[layer_index]
+			current_cel.image_texture.create_from_image(current_cel.image, 0)
+
+			if project == Global.current_project:
+				var frame_texture_rect : TextureRect
+				frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+				frame_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:

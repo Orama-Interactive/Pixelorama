@@ -193,10 +193,6 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame + 1)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "animation_tags", new_animation_tags)
-	for i in range(Global.current_project.layers.size()):
-		for child in Global.current_project.layers[i].frame_container.get_children():
-			Global.current_project.undo_redo.add_do_property(child, "pressed", false)
-			Global.current_project.undo_redo.add_undo_property(child, "pressed", child.pressed)
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", frame)
@@ -279,6 +275,7 @@ func _on_AnimationTimer_timeout() -> void:
 	var fps = Global.current_project.fps
 	if animation_forward:
 		if Global.current_project.current_frame < last_frame:
+			Global.current_project.selected_cels.clear()
 			Global.current_project.current_frame += 1
 			Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 			Global.animation_timer.start() # Change the frame, change the wait time and start a cycle, this is the best way to do it
@@ -289,6 +286,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_backwards.pressed = false
 					Global.animation_timer.stop()
 				1: # Cycle loop
+					Global.current_project.selected_cels.clear()
 					Global.current_project.current_frame = first_frame
 					Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 					Global.animation_timer.start()
@@ -298,6 +296,7 @@ func _on_AnimationTimer_timeout() -> void:
 
 	else:
 		if Global.current_project.current_frame > first_frame:
+			Global.current_project.selected_cels.clear()
 			Global.current_project.current_frame -= 1
 			Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 			Global.animation_timer.start()
@@ -308,6 +307,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_forward.pressed = false
 					Global.animation_timer.stop()
 				1: # Cycle loop
+					Global.current_project.selected_cels.clear()
 					Global.current_project.current_frame = last_frame
 					Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 					Global.animation_timer.start()
@@ -355,20 +355,24 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 
 
 func _on_NextFrame_pressed() -> void:
+	Global.current_project.selected_cels.clear()
 	if Global.current_project.current_frame < Global.current_project.frames.size() - 1:
 		Global.current_project.current_frame += 1
 
 
 func _on_PreviousFrame_pressed() -> void:
+	Global.current_project.selected_cels.clear()
 	if Global.current_project.current_frame > 0:
 		Global.current_project.current_frame -= 1
 
 
 func _on_LastFrame_pressed() -> void:
+	Global.current_project.selected_cels.clear()
 	Global.current_project.current_frame = Global.current_project.frames.size() - 1
 
 
 func _on_FirstFrame_pressed() -> void:
+	Global.current_project.selected_cels.clear()
 	Global.current_project.current_frame = 0
 
 

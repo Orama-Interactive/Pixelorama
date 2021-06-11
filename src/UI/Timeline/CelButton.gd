@@ -43,13 +43,50 @@ func _on_CelButton_resized() -> void:
 
 
 func _on_CelButton_pressed() -> void:
+	var project := Global.current_project
 	if Input.is_action_just_released("left_mouse"):
-		Global.current_project.current_frame = frame
-		Global.current_project.current_layer = layer
+		var change_cel := true
+		var prev_curr_frame : int = project.current_frame
+		var prev_curr_layer : int = project.current_layer
+
+		if Input.is_action_pressed("shift"):
+			var frame_diff_sign = sign(frame - prev_curr_frame)
+			if frame_diff_sign == 0:
+				frame_diff_sign = 1
+			var layer_diff_sign = sign(layer - prev_curr_layer)
+			if layer_diff_sign == 0:
+				layer_diff_sign = 1
+			for i in range(prev_curr_frame, frame + frame_diff_sign, frame_diff_sign):
+				for j in range(prev_curr_layer, layer + layer_diff_sign, layer_diff_sign):
+					var frame_layer := [i, j]
+					if !project.selected_cels.has(frame_layer):
+						project.selected_cels.append(frame_layer)
+		elif Input.is_action_pressed("ctrl"):
+			var frame_layer := [frame, layer]
+			if project.selected_cels.has(frame_layer):
+				if project.selected_cels.size() > 1:
+					project.selected_cels.erase(frame_layer)
+					change_cel = false
+			else:
+				project.selected_cels.append(frame_layer)
+		else: # If the button is pressed without Shift or Control
+			project.selected_cels.clear()
+			var frame_layer := [frame, layer]
+			if !project.selected_cels.has(frame_layer):
+				project.selected_cels.append(frame_layer)
+
+		if change_cel:
+			project.current_frame = frame
+			project.current_layer = layer
+		else:
+			project.current_frame = project.selected_cels[0][0]
+			project.current_layer = project.selected_cels[0][1]
+			release_focus()
+
 	elif Input.is_action_just_released("right_mouse"):
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
-	elif Input.is_action_just_released("middle_mouse"): # Middle mouse click
+	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
 		delete_cel_contents()
 	else: # An example of this would be Space
@@ -147,6 +184,8 @@ func can_drop_data(_pos, data) -> bool:
 func drop_data(_pos, data) -> void:
 	var new_frame = data[1]
 	var new_layer = data[2]
+	if new_frame == frame and new_layer == layer:
+		return
 
 	var this_frame_new_cels = Global.current_project.frames[frame].cels.duplicate()
 	var new_frame_new_cels
@@ -160,6 +199,9 @@ func drop_data(_pos, data) -> void:
 
 	Global.current_project.undo_redo.create_action("Move Cels")
 	Global.current_project.undo_redo.add_do_property(Global.current_project.frames[frame], "cels", this_frame_new_cels)
+
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_layer", layer)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_layer", Global.current_project.current_layer)
 
 	if frame != new_frame: # If the cel moved to a different frame
 		Global.current_project.undo_redo.add_do_property(Global.current_project.frames[new_frame], "cels", new_frame_new_cels)

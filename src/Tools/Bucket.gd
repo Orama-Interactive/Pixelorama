@@ -117,21 +117,22 @@ func draw_end(_position : Vector2) -> void:
 
 func fill_in_color(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	var image := _get_draw_image()
-	var color := image.get_pixelv(position)
-	if _fill_with == 0 or _pattern == null:
-		if tool_slot.color.is_equal_approx(color):
-			return
+	var color : Color = _get_draw_image().get_pixelv(position)
+	var images := _get_selected_draw_images()
+	for image in images:
+		if _fill_with == 0 or _pattern == null:
+			if tool_slot.color.is_equal_approx(color):
+				return
 
-	image.lock()
+		image.lock()
 
-	for x in Global.current_project.size.x:
-		for y in Global.current_project.size.y:
-			var pos := Vector2(x, y)
-			if project.has_selection and not project.can_pixel_get_drawn(pos):
-				continue
-			if image.get_pixelv(pos).is_equal_approx(color):
-				_set_pixel(image, x, y, tool_slot.color)
+		for x in Global.current_project.size.x:
+			for y in Global.current_project.size.y:
+				var pos := Vector2(x, y)
+				if project.has_selection and not project.can_pixel_get_drawn(pos):
+					continue
+				if image.get_pixelv(pos).is_equal_approx(color):
+					_set_pixel(image, x, y, tool_slot.color)
 
 
 func fill_in_area(position : Vector2) -> void:
@@ -157,35 +158,36 @@ func fill_in_area(position : Vector2) -> void:
 
 func _flood_fill(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	var image := _get_draw_image()
-	var color := image.get_pixelv(position)
-	if _fill_with == 0 or _pattern == null:
-		if tool_slot.color.is_equal_approx(color):
-			return
+	var images := _get_selected_draw_images()
+	for image in images:
+		var color : Color = image.get_pixelv(position)
+		if _fill_with == 0 or _pattern == null:
+			if tool_slot.color.is_equal_approx(color):
+				return
 
-	image.lock()
-	var processed := BitMap.new()
-	processed.create(image.get_size())
-	var q = [position]
-	for n in q:
-		if processed.get_bit(n):
-			continue
-		var west : Vector2 = n
-		var east : Vector2 = n
-		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(color):
-			west += Vector2.LEFT
-		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(color):
-			east += Vector2.RIGHT
-		for px in range(west.x + 1, east.x):
-			var p := Vector2(px, n.y)
-			_set_pixel(image, p.x, p.y, tool_slot.color)
-			processed.set_bit(p, true)
-			var north := p + Vector2.UP
-			var south := p + Vector2.DOWN
-			if north.y >= 0 && image.get_pixelv(north).is_equal_approx(color):
-				q.append(north)
-			if south.y < project.size.y && image.get_pixelv(south).is_equal_approx(color):
-				q.append(south)
+		image.lock()
+		var processed := BitMap.new()
+		processed.create(image.get_size())
+		var q = [position]
+		for n in q:
+			if processed.get_bit(n):
+				continue
+			var west : Vector2 = n
+			var east : Vector2 = n
+			while west.x >= 0 && image.get_pixelv(west).is_equal_approx(color):
+				west += Vector2.LEFT
+			while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(color):
+				east += Vector2.RIGHT
+			for px in range(west.x + 1, east.x):
+				var p := Vector2(px, n.y)
+				_set_pixel(image, p.x, p.y, tool_slot.color)
+				processed.set_bit(p, true)
+				var north := p + Vector2.UP
+				var south := p + Vector2.DOWN
+				if north.y >= 0 && image.get_pixelv(north).is_equal_approx(color):
+					q.append(north)
+				if south.y < project.size.y && image.get_pixelv(south).is_equal_approx(color):
+					q.append(south)
 
 
 func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
@@ -205,24 +207,30 @@ func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
 
 
 func commit_undo(action : String, undo_data : Dictionary) -> void:
-	var redo_data = _get_undo_data()
+	var redo_data := _get_undo_data()
 	var project : Project = Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var frame := -1
+	var layer := -1
+	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
+		frame = project.current_frame
+		layer = project.current_layer
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_property(image, "data", redo_data["image_data"])
-	project.undo_redo.add_undo_property(image, "data", undo_data["image_data"])
-	project.undo_redo.add_do_method(Global, "redo", project.current_frame, project.current_layer)
-	project.undo_redo.add_undo_method(Global, "undo", project.current_frame, project.current_layer)
+	for image in redo_data:
+		project.undo_redo.add_do_property(image, "data", redo_data[image])
+	for image in undo_data:
+		project.undo_redo.add_undo_property(image, "data", undo_data[image])
+	project.undo_redo.add_do_method(Global, "redo", frame, layer)
+	project.undo_redo.add_undo_method(Global, "undo", frame, layer)
 	project.undo_redo.commit_action()
 
 
 func _get_undo_data() -> Dictionary:
-	var data = {}
-	var project : Project = Global.current_project
-	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-	image.unlock()
-	data["image_data"] = image.data
-	image.lock()
+	var data := {}
+	var images := _get_selected_draw_images()
+	for image in images:
+		image.unlock()
+		data[image] = image.data
+		image.lock()
 	return data

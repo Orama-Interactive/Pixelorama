@@ -12,7 +12,29 @@ func _ready() -> void:
 
 func _button_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
+		var prev_curr_frame : int = Global.current_project.current_frame
+		if Input.is_action_pressed("shift"):
+			var frame_diff_sign = sign(frame - prev_curr_frame)
+			if frame_diff_sign == 0:
+				frame_diff_sign = 1
+			for i in range(prev_curr_frame, frame + frame_diff_sign, frame_diff_sign):
+				for j in range(0, Global.current_project.layers.size()):
+					var frame_layer := [i, j]
+					if !Global.current_project.selected_cels.has(frame_layer):
+						Global.current_project.selected_cels.append(frame_layer)
+		elif Input.is_action_pressed("ctrl"):
+			for j in range(0, Global.current_project.layers.size()):
+				var frame_layer := [frame, j]
+				if !Global.current_project.selected_cels.has(frame_layer):
+					Global.current_project.selected_cels.append(frame_layer)
+		else: # If the button is pressed without Shift or Control
+			Global.current_project.selected_cels.clear()
+			var frame_layer := [frame, Global.current_project.current_layer]
+			if !Global.current_project.selected_cels.has(frame_layer):
+				Global.current_project.selected_cels.append(frame_layer)
+
 		Global.current_project.current_frame = frame
+
 	elif Input.is_action_just_released("right_mouse"):
 		if Global.current_project.frames.size() == 1:
 			popup_menu.set_item_disabled(0, true)
@@ -26,7 +48,7 @@ func _button_pressed() -> void:
 				popup_menu.set_item_disabled(3, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
-	elif Input.is_action_just_released("middle_mouse"): # Middle mouse click
+	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
 		Global.animation_timeline._on_DeleteFrame_pressed(frame)
 	else: # An example of this would be Space
@@ -59,12 +81,14 @@ func change_frame_order(rate : int) -> void:
 
 	Global.current_project.undo_redo.create_action("Change Frame Order")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 
 	if Global.current_project.current_frame == frame:
 		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", change)
-		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+	else:
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", Global.current_project.current_frame)
 
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
 
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")

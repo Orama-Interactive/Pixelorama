@@ -45,9 +45,33 @@ func _input(event : InputEvent) -> void:
 		save_layer_name(line_edit.text)
 
 
-func _on_LayerContainer_gui_input(event : InputEvent):
+func _on_LayerContainer_gui_input(event : InputEvent) -> void:
+	var project := Global.current_project
+
 	if event is InputEventMouseButton:
-		Global.current_project.current_layer = layer
+		var prev_curr_layer : int = project.current_layer
+		if Input.is_action_pressed("shift"):
+			var layer_diff_sign = sign(layer - prev_curr_layer)
+			if layer_diff_sign == 0:
+				layer_diff_sign = 1
+			for i in range(0, project.frames.size()):
+				for j in range(prev_curr_layer, layer + layer_diff_sign, layer_diff_sign):
+					var frame_layer := [i, j]
+					if !project.selected_cels.has(frame_layer):
+						project.selected_cels.append(frame_layer)
+		elif Input.is_action_pressed("ctrl"):
+			for i in range(0, project.frames.size()):
+				var frame_layer := [i, layer]
+				if !project.selected_cels.has(frame_layer):
+					project.selected_cels.append(frame_layer)
+		else: # If the button is pressed without Shift or Control
+			project.selected_cels.clear()
+			var frame_layer := [project.current_frame, layer]
+			if !project.selected_cels.has(frame_layer):
+				project.selected_cels.append(frame_layer)
+
+		project.current_layer = layer
+
 		if event.doubleclick:
 			label.visible = false
 			line_edit.visible = true

@@ -9,6 +9,7 @@
 margin_right = 210.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 212, 36 )
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 toggle_mode = true
 action_mode = 0
