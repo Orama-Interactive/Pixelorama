@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 22:48\n"
+"PO-Revision-Date: 2021-06-11 22:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -374,7 +374,7 @@ msgid "Backwards"
 msgstr "Bakover"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
 msgstr "Kolonner"
@@ -443,7 +443,7 @@ msgid "Backup"
 msgstr "Sikkerhetskopi"
 
 msgid "Performance"
-msgstr ""
+msgstr "Ytelse"
 
 msgid "Indicators"
 msgstr "Indikatorer"
@@ -479,7 +479,7 @@ msgid "System Language"
 msgstr "Systemspråk"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Skalering av Grensesnitt"
 
 msgid "Dim interface on dialog popup"
 msgstr ""
@@ -500,7 +500,7 @@ msgid "Light"
 msgstr "Lys"
 
 msgid "Purple"
-msgstr ""
+msgstr "Lilla"
 
 msgid "Theme"
 msgstr ""
@@ -686,7 +686,7 @@ msgid "Catalan"
 msgstr "Katalansk"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
 msgstr "Indonesisk"
@@ -701,7 +701,7 @@ msgid "Turkish"
 msgstr "Tyrkisk"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norsk Bokmål"
 
 msgid "Korean"
 msgstr "Koreansk"
@@ -713,7 +713,7 @@ msgid "Romanian"
 msgstr "Rumensk"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japansk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
@@ -851,10 +851,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rektangel"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Velg en farge for venstre verktøy"
@@ -979,10 +979,10 @@ msgid "Pixel Grid"
 msgstr ""
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Vis ved zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Angir minimal zoom som viser pikselrutenettet"
 
 msgid "Pixel grid color:"
 msgstr ""
@@ -1036,7 +1036,7 @@ msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Sett prorgammets grense for bilder per sekund:"
 
 msgid "Limit FPS to 1 when app loses focus"
 msgstr ""
@@ -1159,7 +1159,7 @@ msgid "Fit to frame"
 msgstr "Tilpass til bilde"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Zoom"
 
 msgid "Mirroring"
 msgstr "Speiling"
@@ -1547,10 +1547,10 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Portrett"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Landskap"
 
 msgid "Templates:"
 msgstr "Maler:"
@@ -1571,7 +1571,7 @@ msgid "Rectangular Selection"
 msgstr "Rektangulær Markering"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Pan"
 msgstr ""
@@ -1690,7 +1690,7 @@ msgid "Move the selected frame to the right."
 msgstr "Flytt det merkede bildet til høyre."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Bildevarighet"
 
 msgid "Tiled In Both Axis"
 msgstr ""
