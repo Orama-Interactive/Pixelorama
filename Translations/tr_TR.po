@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-06-08 17:01\n"
+"PO-Revision-Date: 2021-06-11 16:42\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -59,6 +59,9 @@ msgstr "Dosya"
 
 msgid "Edit"
 msgstr "Düzenle"
+
+msgid "Select"
+msgstr ""
 
 msgid "View"
 msgstr "Görüntü"
