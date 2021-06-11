@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 23:18\n"
+"PO-Revision-Date: 2021-06-11 23:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Spritesheet (new tab)"
 msgstr "Tegneark (ny fane)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Tegneark (nytt lag)"
 
 msgid "New frame"
 msgstr "Nytt bilde"
@@ -274,7 +274,7 @@ msgid "At frame:"
 msgstr "På bilde:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "På lag:"
 
 msgid "Brush type:"
 msgstr "Børstetype:"
@@ -425,7 +425,7 @@ msgid "Language"
 msgstr "Språk"
 
 msgid "Interface"
-msgstr ""
+msgstr "Grensesnitt"
 
 msgid "Themes"
 msgstr "Temaer"
@@ -434,7 +434,7 @@ msgid "Canvas"
 msgstr "Lerret"
 
 msgid "Selection"
-msgstr ""
+msgstr "Markert Område"
 
 msgid "Shortcuts"
 msgstr "Snarveier"
@@ -482,7 +482,7 @@ msgid "Display Scale"
 msgstr "Skalering av Grensesnitt"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Mørklegg grensesnittet bak dialogvindu"
 
 msgid "Dark"
 msgstr "Mørk"
@@ -985,7 +985,7 @@ msgid "A color of the grid"
 msgstr "En farge av rutenettet"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pikselrutenett"
 
 msgid "Show at zoom:"
 msgstr "Vis ved zoom:"
@@ -994,10 +994,10 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr "Angir minimal zoom som viser pikselrutenettet"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Pikselrutenettfarge:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "En farge av pikselrutenettet"
 
 msgid "Transparency"
 msgstr "Gjennomsiktighet"
@@ -1036,10 +1036,10 @@ msgid "Animated selection borders"
 msgstr ""
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Kantfarge 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Kantfarge 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
@@ -1508,10 +1508,10 @@ msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Hent farger kun fra valgt område"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Hent farger fra"
 
 msgid "Patrons:"
 msgstr "Abonnenter på Patreon:"
@@ -1553,7 +1553,7 @@ msgid "A default background color of a new image"
 msgstr "En standard bakgrunnsfarge for et nytt bilde"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Lås størrelsesforhold"
 
 msgid "Portrait"
 msgstr "Portrett"
@@ -1705,13 +1705,13 @@ msgid "Tiled In Both Axis"
 msgstr ""
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Flislagt I X-aksen"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Flislagt I Y-aksen"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Opprett en ny fargepalett"
 
 msgid "Comment:"
 msgstr "Kommentar:"
@@ -1726,13 +1726,13 @@ msgid "From Current Sprite"
 msgstr "Fra Nåværende Figur"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Fra Nåværende Markert Område"
 
 msgid "Add a new color"
 msgstr "Legg til en ny farge"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Fjern en valgt farge"
 
 msgid "Palette with the same name and path already exists!"
 msgstr ""
