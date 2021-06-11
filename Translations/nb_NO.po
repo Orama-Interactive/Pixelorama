@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 16:42\n"
+"PO-Revision-Date: 2021-06-11 22:38\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Filnavn:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Prosjektnavn:"
 
 msgid "Image Size"
 msgstr "Bildestørrelse"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Bildestørrelse"
 
 msgid "Size:"
-msgstr ""
+msgstr "Størrelse:"
 
 msgid "Width:"
 msgstr "Bredde:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Rediger"
 
 msgid "Select"
-msgstr ""
+msgstr "Velg"
 
 msgid "View"
 msgstr "Vis"
@@ -124,7 +124,7 @@ msgid "Copy"
 msgstr "Kopier"
 
 msgid "Cut"
-msgstr ""
+msgstr "Klipp"
 
 msgid "Paste"
 msgstr "Lim inn"
@@ -133,13 +133,13 @@ msgid "Delete"
 msgstr "Slett"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Ny Børste"
 
 msgid "Scale Image"
 msgstr "Skalér Bilde"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Piksler"
 
 msgid "Percentage"
 msgstr ""
