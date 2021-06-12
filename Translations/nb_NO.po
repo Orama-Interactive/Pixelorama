@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-11 23:49\n"
+"PO-Revision-Date: 2021-06-12 00:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -962,31 +962,31 @@ msgid "Isometric cell bounds width:"
 msgstr "Isometrisk cellebredde:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Angir bredden på den isometriske cellens aksejusterte avgrensningsboks"
 
 msgid "Isometric cell bounds height:"
 msgstr "Isometrisk cellehøyde:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Angir høyden på den isometriske cellens aksejusterte avgrensningsboks"
 
 msgid "Grid offset x:"
 msgstr "Rutenettforskyvning x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Angir rutenettets x-forskyvning fra lerretets opprinnelse (øvert til venstre i bildet)"
 
 msgid "Grid offset y:"
 msgstr "Rutenettforskyvning y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Angir rutenettets y-forskyvning fra lerretets opprinnelse (øvert til venstre i bildet)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Tegn over Flismodus:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Hvis deaktivert vil rutenettet bare bli tegnet over det opprinnelige bildet"
 
 msgid "Grid color:"
 msgstr "Rutenettfarge:"
@@ -1013,34 +1013,34 @@ msgid "Transparency"
 msgstr "Gjennomsiktighet"
 
 msgid "Checker size:"
-msgstr "Størrelse på sjekkere:"
+msgstr "Størrelse på sjakkbrett:"
 
 msgid "Size of the transparent checker background"
-msgstr "Størrelse på den gjennomsiktige bakgrunnen av sjekkere"
+msgstr "Størrelse på den gjennomsiktige sjakk-bakgrunnen"
 
 msgid "Checker color 1:"
-msgstr "Sjekkerfarge 1:"
+msgstr "Sjakkbrettfarge 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Første farge på den gjennomsiktige bakgrunnen av sjekkere"
+msgstr "Første farge på den gjennomsiktige sjakk-bakgrunnen"
 
 msgid "Checker color 2:"
-msgstr "Sjekkerfarge 2:"
+msgstr "Sjakkbrettfarge 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
+msgstr "Andre farge på den gjennomsiktige sjakk-bakgrunnen"
 
 msgid "Follow Canvas Movement"
 msgstr "Følg lerretbevegelse"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Den gjennomsiktige sjakk-bakgrunnen følger lerretets bevegelse"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Følg lerretets forstørrelse"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Den gjennomsiktige sjakk-bakgrunnen følger zoom-nivået på lerretet"
 
 msgid "Animated selection borders"
 msgstr "Animerte markeringslinjer"
