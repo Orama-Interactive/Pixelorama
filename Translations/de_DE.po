@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-06-11 17:05\n"
+"PO-Revision-Date: 2021-06-13 23:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -510,6 +510,15 @@ msgstr "Icon-Farbe von:"
 
 msgid "Icon color:"
 msgstr "Icon-Farbe:"
+
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Nur Auswahl beeinflussen"
