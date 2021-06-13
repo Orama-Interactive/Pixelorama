@@ -8,6 +8,8 @@ enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
 enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
 enum PanelLayout {AUTO, WIDESCREEN, TALLSCREEN}
 enum IconColorFrom {THEME, CUSTOM}
+enum ButtonSize {SMALL, BIG}
+
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -56,6 +58,7 @@ var theme_type : int = ThemeTypes.DARK
 var modulate_icon_color := Color.gray
 var icon_color_from : int = IconColorFrom.THEME
 var custom_icon_color := Color.gray
+var tool_button_size : int = ButtonSize.SMALL
 
 var default_image_width := 64
 var default_image_height := 64

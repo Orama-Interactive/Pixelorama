@@ -68,18 +68,14 @@ var control := false
 var shift := false
 var alt := false
 
-onready var left_tool_background := preload("res://assets/graphics/tool_backgrounds/l.png")
-onready var right_tool_background := preload("res://assets/graphics/tool_backgrounds/r.png")
-onready var left_right_tool_background := preload("res://assets/graphics/tool_backgrounds/l_r.png")
-
 
 func _ready() -> void:
+	_tool_buttons = Global.find_node_by_name(Global.control, "ToolButtons")
 	yield(get_tree(), "idle_frame")
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
 	_panels[BUTTON_LEFT] = Global.find_node_by_name(Global.control, "LeftPanelContainer")
 	_panels[BUTTON_RIGHT] = Global.find_node_by_name(Global.control, "RightPanelContainer")
-	_tool_buttons = Global.find_node_by_name(Global.control, "ToolButtons")
 
 	var value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
 	if not value in _tools:
@@ -152,17 +148,32 @@ func get_assigned_color(button : int) -> Color:
 	return _slots[button].color
 
 
+func set_button_size(button_size : int) -> void:
+	if button_size == Global.ButtonSize.SMALL:
+		for t in _tool_buttons.get_children():
+			t.rect_min_size = Vector2(24, 24)
+			t.get_node("ToolIcon").rect_position = Vector2.ONE
+			t.get_node("BackgroundLeft").rect_size.x = 12
+			t.get_node("BackgroundRight").rect_size.x = 12
+			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
+	else:
+		for t in _tool_buttons.get_children():
+			t.rect_min_size = Vector2(32, 32)
+			t.get_node("ToolIcon").rect_position = Vector2.ONE * 5
+			t.get_node("BackgroundLeft").rect_size.x = 16
+			t.get_node("BackgroundRight").rect_size.x = 16
+			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)
+
+	# It doesn't actually set the size to zero, it just resets it
+	_tool_buttons.get_parent().rect_size = Vector2.ZERO
+
+
 func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
-		var texture : TextureRect = child.get_node("Background")
-		if _slots[BUTTON_LEFT].tool_node.name == child.name:
-			texture.texture = left_tool_background
-			if _slots[BUTTON_RIGHT].tool_node.name == child.name:
-				texture.texture = left_right_tool_background
-		elif _slots[BUTTON_RIGHT].tool_node.name == child.name:
-			texture.texture = right_tool_background
-		else:
-			texture.texture = null
+		var left_background : NinePatchRect = child.get_node("BackgroundLeft")
+		var right_background : NinePatchRect = child.get_node("BackgroundRight")
+		left_background.visible = _slots[BUTTON_LEFT].tool_node.name == child.name
+		right_background.visible = _slots[BUTTON_RIGHT].tool_node.name == child.name
 
 
 func update_tool_cursors() -> void:

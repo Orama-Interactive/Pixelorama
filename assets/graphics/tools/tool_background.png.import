@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/l_r.png-542460b9c6fb257be91af1f344bd44df.stex"
+path="res://.import/tool_background.png-6ff92c662de40dca94545bb57f5c1e8e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/tool_backgrounds/l_r.png"
-dest_files=[ "res://.import/l_r.png-542460b9c6fb257be91af1f344bd44df.stex" ]
+source_file="res://assets/graphics/tools/tool_background.png"
+dest_files=[ "res://.import/tool_background.png-6ff92c662de40dca94545bb57f5c1e8e.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/graphics/tools/shading.png" type="Texture" id=11]
 [ext_resource path="res://assets/graphics/tools/linetool.png" type="Texture" id=12]
 [ext_resource path="res://assets/graphics/tools/rectangletool.png" type="Texture" id=13]
-[ext_resource path="res://assets/graphics/tool_backgrounds/l.png" type="Texture" id=14]
 [ext_resource path="res://assets/graphics/tools/ellipseselect.png" type="Texture" id=15]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
@@ -26,13 +25,13 @@
 [ext_resource path="res://assets/graphics/tools/pencil.png" type="Texture" id=24]
 [ext_resource path="res://assets/graphics/tools/bucket.png" type="Texture" id=25]
 [ext_resource path="res://assets/graphics/tools/ellipsetool.png" type="Texture" id=26]
-[ext_resource path="res://assets/graphics/tool_backgrounds/r.png" type="Texture" id=27]
 [ext_resource path="res://assets/graphics/tools/move.png" type="Texture" id=28]
 [ext_resource path="res://assets/graphics/tools/rectselect.png" type="Texture" id=29]
 [ext_resource path="res://assets/graphics/tools/polygonselect.png" type="Texture" id=30]
 [ext_resource path="res://assets/graphics/tools/zoom.png" type="Texture" id=31]
 [ext_resource path="res://assets/graphics/tools/eraser.png" type="Texture" id=32]
 [ext_resource path="res://assets/graphics/tools/magicwand.png" type="Texture" id=33]
+[ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=34]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -111,9 +110,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/RectSelect"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/RectSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/RectSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -138,9 +164,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/EllipseSelect"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/EllipseSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/EllipseSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -165,9 +218,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/PolygonSelect"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/PolygonSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/PolygonSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -192,9 +272,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/ColorSelect"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/ColorSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/ColorSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -219,9 +326,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/MagicWand"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/MagicWand"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/MagicWand"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -246,9 +380,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Lasso"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Lasso"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Lasso"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -273,9 +434,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Move"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Move"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Move"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -300,9 +488,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Zoom"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Zoom"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Zoom"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -327,9 +542,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Pan"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Pan"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Pan"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -354,9 +596,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/ColorPicker"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/ColorPicker"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/ColorPicker"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -381,10 +650,35 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Pencil"]
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 14 )
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Pencil"]
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Pencil"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -409,10 +703,35 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Eraser"]
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 27 )
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Eraser"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Eraser"]
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -437,9 +756,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Bucket"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Bucket"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Bucket"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -464,9 +810,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Shading"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Shading"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/Shading"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -491,9 +864,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/LineTool"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/LineTool"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/LineTool"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -518,9 +918,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/RectangleTool"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/RectangleTool"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/RectangleTool"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -545,9 +972,36 @@ rect_min_size = Vector2( 24, 24 )
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="Background" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/EllipseTool"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/EllipseTool"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/PanelContainer/ToolButtons/EllipseTool"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

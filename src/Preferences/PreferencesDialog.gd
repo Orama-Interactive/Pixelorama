@@ -8,6 +8,7 @@ var preferences = [
 	["dim_on_popup", "Interface/DimPopup/CheckBox", "pressed", Global.dim_on_popup],
 	["icon_color_from", "Interface/IconColorFrom/IconColorOptionButton", "selected", Global.icon_color_from],
 	["custom_icon_color", "Interface/IconColorFrom/IconColorButton", "color", Global.custom_icon_color],
+	["tool_button_size", "Interface/ToolButtonSize/ToolButtonSizeOptionButton", "selected", Global.tool_button_size],
 
 	["pressure_sensitivity_mode", "Startup/PressureSentivity/PressureSensitivityOptionButton", "selected", Global.pressure_sensitivity_mode],
 	["show_left_tool_icon", "Indicators/IndicatorsContainer/LeftToolIconCheckbox", "pressed", Global.show_left_tool_icon],
@@ -171,6 +172,10 @@ func preference_update(prop : String) -> void:
 		else:
 			Global.modulate_icon_color = Global.custom_icon_color
 		themes.change_icon_colors()
+
+
+	if prop == "tool_button_size":
+		Tools.set_button_size(Global.tool_button_size)
 
 	Global.config_cache.save("user://cache.ini")
 
