@@ -148,7 +148,9 @@ func fill_new_palette_with_colors(pixels: Array, new_palette: Palette, add_alpha
 	var cels := []
 	match get_colors_from:
 		GetColorsFrom.CurrentCel:
-			cels.append(current_project.frames[current_project.current_frame].cels[current_project.current_layer])
+			for cel_index in current_project.selected_cels:
+				var cel : Cel = current_project.frames[cel_index[0]].cels[cel_index[1]]
+				cels.append(cel)
 		GetColorsFrom.CurrentFrame:
 			for cel in current_project.frames[current_project.current_frame].cels:
 				cels.append(cel)
