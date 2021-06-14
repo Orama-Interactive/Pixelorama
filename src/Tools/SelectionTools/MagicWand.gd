@@ -12,7 +12,7 @@ func apply_selection(position : Vector2) -> void:
 		selection_bitmap_copy.set_bit_rect(full_rect, false)
 
 	var cel_image := Image.new()
-	cel_image.copy_from(project.frames[project.current_frame].cels[project.current_layer].image)
+	cel_image.copy_from(_get_draw_image())
 	cel_image.lock()
 	flood_fill(position, cel_image, selection_bitmap_copy)
 

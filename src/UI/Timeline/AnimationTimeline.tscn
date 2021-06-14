@@ -1,27 +1,28 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/dark_themes/layers/new_layer.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/dark_themes/layers/delete_layer_disabled.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/dark_themes/layers/move_up_disabled.png" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/dark_themes/layers/move_down_disabled.png" type="Texture" id=5]
-[ext_resource path="res://assets/graphics/dark_themes/layers/merge_down_disabled.png" type="Texture" id=6]
-[ext_resource path="res://assets/graphics/dark_themes/layers/clone_layer.png" type="Texture" id=7]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/move_arrow.png" type="Texture" id=8]
+[ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/layers/move_down.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/layers/move_up.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/layers/merge_down.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/layers/delete.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
+[ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
+[ext_resource path="res://src/UI/Timeline/FrameButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/new_frame.png" type="Texture" id=19]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/remove_frame.png" type="Texture" id=20]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/go_to_first_frame.png" type="Texture" id=21]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/play.png" type="Texture" id=22]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/previous_frame.png" type="Texture" id=23]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/play_backwards.png" type="Texture" id=24]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/go_to_last_frame.png" type="Texture" id=25]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/next_frame.png" type="Texture" id=26]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/copy_frame.png" type="Texture" id=27]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/tag.png" type="Texture" id=28]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/onion_skinning_off.png" type="Texture" id=29]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/expandable.png" type="Texture" id=30]
-[ext_resource path="res://assets/graphics/dark_themes/timeline/loop.png" type="Texture" id=31]
+[ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
+[ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
+[ext_resource path="res://assets/graphics/timeline/go_to_first_frame.png" type="Texture" id=21]
+[ext_resource path="res://assets/graphics/timeline/play.png" type="Texture" id=22]
+[ext_resource path="res://assets/graphics/timeline/previous_frame.png" type="Texture" id=23]
+[ext_resource path="res://assets/graphics/timeline/play_backwards.png" type="Texture" id=24]
+[ext_resource path="res://assets/graphics/timeline/go_to_last_frame.png" type="Texture" id=25]
+[ext_resource path="res://assets/graphics/timeline/next_frame.png" type="Texture" id=26]
+[ext_resource path="res://assets/graphics/timeline/copy_frame.png" type="Texture" id=27]
+[ext_resource path="res://assets/graphics/timeline/tag.png" type="Texture" id=28]
+[ext_resource path="res://assets/graphics/timeline/onion_skinning_off.png" type="Texture" id=29]
+[ext_resource path="res://assets/graphics/timeline/expandable.png" type="Texture" id=30]
+[ext_resource path="res://assets/graphics/timeline/loop.png" type="Texture" id=31]
 [ext_resource path="res://src/UI/Timeline/FrameTagDialog.tscn" type="PackedScene" id=42]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -141,24 +142,24 @@ margin_bottom = 46.0
 size_flags_horizontal = 3
 
 [node name="LayerButtonPanelContainer" type="PanelContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
-margin_right = 221.0
+margin_right = 186.0
 margin_bottom = 38.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="LayerButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer"]
 margin_left = 4.5
 margin_top = 3.0
-margin_right = 216.5
-margin_bottom = 35.0
+margin_right = 181.5
+margin_bottom = 25.0
 size_flags_vertical = 0
-custom_constants/separation = 4
+custom_constants/separation = 9
 
 [node name="AddLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_right = 22.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -168,10 +169,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -9.0
-margin_top = -12.0
-margin_right = 9.0
-margin_bottom = 12.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 2 )
@@ -182,10 +183,10 @@ __meta__ = {
 [node name="RemoveLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_left = 31.0
+margin_right = 53.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Remove current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -202,7 +203,7 @@ margin_right = 7.0
 margin_bottom = 7.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -210,10 +211,10 @@ __meta__ = {
 [node name="MoveUpLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_left = 62.0
+margin_right = 84.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move up the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -224,10 +225,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -7.0
-margin_top = -8.0
-margin_right = 7.0
-margin_bottom = 8.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 4 )
@@ -238,10 +239,10 @@ __meta__ = {
 [node name="MoveDownLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 108.0
-margin_right = 140.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_left = 93.0
+margin_right = 115.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move down the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -252,13 +253,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -7.0
-margin_top = -8.0
-margin_right = 7.0
-margin_bottom = 8.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -266,10 +267,10 @@ __meta__ = {
 [node name="CloneLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 144.0
-margin_right = 176.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_left = 124.0
+margin_right = 146.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Clone current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -279,10 +280,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -8.5
-margin_top = -10.0
-margin_right = 8.5
-margin_bottom = 10.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 7 )
@@ -293,10 +294,10 @@ __meta__ = {
 [node name="MergeDownLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 180.0
-margin_right = 212.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_left = 155.0
+margin_right = 177.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Merge current layer with the one below"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -307,19 +308,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -6.0
-margin_top = -12.0
-margin_right = 6.0
-margin_bottom = 12.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Control" type="Control" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
-margin_left = 225.0
+margin_left = 190.0
 margin_right = 386.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
@@ -810,9 +811,9 @@ rect_min_size = Vector2( 4, 0 )
 
 [node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 6.0
-margin_right = 220.0
+margin_right = 186.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 214, 0 )
+rect_min_size = Vector2( 180, 0 )
 
 [node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_right = 53.0
@@ -824,7 +825,7 @@ valign = 1
 
 [node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_left = 57.0
-margin_right = 136.0
+margin_right = 102.0
 margin_bottom = 32.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -834,17 +835,23 @@ value = 100.0
 ticks_on_borders = true
 
 [node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
-margin_left = 140.0
+margin_left = 106.0
 margin_top = 4.0
-margin_right = 214.0
+margin_right = 180.0
 margin_bottom = 28.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 value = 100.0
 align = 1
 
+[node name="SpacerControl2" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+margin_left = 188.0
+margin_right = 217.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 29, 0 )
+
 [node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_left = 222.0
+margin_left = 219.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -905,21 +912,17 @@ margin_bottom = 88.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="Label" type="Label" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs"]
-margin_top = 1.0
+[node name="FrameButton" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
 margin_right = 36.0
-margin_bottom = 15.0
 rect_min_size = Vector2( 36, 0 )
-text = "1"
-align = 1
 
 [node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
-margin_top = 20.0
+margin_top = 24.0
 margin_right = 36.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
 

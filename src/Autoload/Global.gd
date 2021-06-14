@@ -7,6 +7,9 @@ enum Direction {UP, DOWN, LEFT, RIGHT}
 enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
 enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
 enum PanelLayout {AUTO, WIDESCREEN, TALLSCREEN}
+enum IconColorFrom {THEME, CUSTOM}
+enum ButtonSize {SMALL, BIG}
+
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -34,9 +37,9 @@ var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 var layers_changed_skip := false
 var can_draw := false
 var has_focus := false
-var cursor_image = preload("res://assets/graphics/cursor_icons/cursor.png")
-var left_cursor_tool_texture := ImageTexture.new()
-var right_cursor_tool_texture := ImageTexture.new()
+var cursor_image = preload("res://assets/graphics/cursor.png")
+var left_cursor_tool_texture := StreamTexture.new()
+var right_cursor_tool_texture := StreamTexture.new()
 
 var image_clipboard : Image
 var play_only_tags := true
@@ -47,10 +50,16 @@ var default_clear_color := Color.gray
 # Preferences
 var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
+var smooth_zoom := true
+
 var shrink := 1.0
 var dim_on_popup := true
-var smooth_zoom := true
 var theme_type : int = ThemeTypes.DARK
+var modulate_icon_color := Color.gray
+var icon_color_from : int = IconColorFrom.THEME
+var custom_icon_color := Color.gray
+var tool_button_size : int = ButtonSize.SMALL
+
 var default_image_width := 64
 var default_image_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
@@ -453,16 +462,12 @@ func disable_button(button : BaseButton, disable : bool) -> void:
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 	if button is Button:
-		var theme := theme_type
-		if theme == ThemeTypes.CARAMEL:
-			theme = ThemeTypes.DARK
 		for c in button.get_children():
 			if c is TextureRect:
-				var normal_file_name = c.texture.resource_path.get_file().trim_suffix(".png").replace("_disabled", "")
 				if disable:
-					change_button_texturerect(c, "%s_disabled.png" % normal_file_name)
+					c.modulate.a = 0.5
 				else:
-					change_button_texturerect(c, "%s.png" % normal_file_name)
+					c.modulate.a = 1
 				break
 
 

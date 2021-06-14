@@ -3,9 +3,13 @@ extends AcceptDialog
 # Preferences table: [Prop name in Global, relative node path, value type, default value]
 var preferences = [
 	["open_last_project", "Startup/StartupContainer/OpenLastProject", "pressed", Global.open_last_project],
+
 	["shrink", "Interface/ShrinkContainer/ShrinkHSlider", "value", Global.shrink],
 	["dim_on_popup", "Interface/DimPopup/CheckBox", "pressed", Global.dim_on_popup],
-	["smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed", Global.smooth_zoom],
+	["icon_color_from", "Interface/IconColorFrom/IconColorOptionButton", "selected", Global.icon_color_from],
+	["custom_icon_color", "Interface/IconColorFrom/IconColorButton", "color", Global.custom_icon_color],
+	["tool_button_size", "Interface/ToolButtonSize/ToolButtonSizeOptionButton", "selected", Global.tool_button_size],
+
 	["pressure_sensitivity_mode", "Startup/PressureSentivity/PressureSensitivityOptionButton", "selected", Global.pressure_sensitivity_mode],
 	["show_left_tool_icon", "Indicators/IndicatorsContainer/LeftToolIconCheckbox", "pressed", Global.show_left_tool_icon],
 	["show_right_tool_icon", "Indicators/IndicatorsContainer/RightToolIconCheckbox", "pressed", Global.show_right_tool_icon],
@@ -18,6 +22,7 @@ var preferences = [
 	["default_image_height", "Image/ImageOptions/ImageDefaultHeight", "value", Global.default_image_height],
 	["default_fill_color", "Image/ImageOptions/DefaultFillColor", "color", Global.default_fill_color],
 
+	["smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed", Global.smooth_zoom],
 	["grid_type", "Canvas/GridOptions/GridType", "selected", Global.grid_type],
 	["grid_width", "Canvas/GridOptions/GridWidthValue", "value", Global.grid_width],
 	["grid_height", "Canvas/GridOptions/GridHeightValue", "value", Global.grid_height],
@@ -52,6 +57,7 @@ onready var right_side : VBoxContainer = $HSplitContainer/ScrollContainer/VBoxCo
 onready var autosave_interval : SpinBox = $HSplitContainer/ScrollContainer/VBoxContainer/Backup/AutosaveContainer/AutosaveInterval
 onready var restore_default_button_scene = preload("res://src/Preferences/RestoreDefaultButton.tscn")
 onready var shrink_label : Label = $HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkLabel
+onready var themes : BoxContainer = $"HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"
 
 
 func _ready() -> void:
@@ -159,6 +165,17 @@ func preference_update(prop : String) -> void:
 		Global.canvas.selection.marching_ants_outline.material.set_shader_param("first_color", Global.selection_border_color_1)
 		Global.canvas.selection.marching_ants_outline.material.set_shader_param("second_color", Global.selection_border_color_2)
 		Global.canvas.selection.update()
+
+	if prop in ["icon_color_from", "custom_icon_color"]:
+		if Global.icon_color_from == Global.IconColorFrom.THEME:
+			Global.modulate_icon_color = themes.themes[themes.theme_index][2]
+		else:
+			Global.modulate_icon_color = Global.custom_icon_color
+		themes.change_icon_colors()
+
+
+	if prop == "tool_button_size":
+		Tools.set_button_size(Global.tool_button_size)
 
 	Global.config_cache.save("user://cache.ini")
 

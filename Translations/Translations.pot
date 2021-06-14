@@ -49,6 +49,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "Select"
+msgstr ""
+
 msgid "View"
 msgstr ""
 
@@ -488,6 +491,24 @@ msgstr ""
 msgid "Purple"
 msgstr ""
 
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
+
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr ""
 
@@ -677,7 +698,7 @@ msgstr ""
 msgid "Turkish"
 msgstr ""
 
-msgid "Norwegian"
+msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Korean"

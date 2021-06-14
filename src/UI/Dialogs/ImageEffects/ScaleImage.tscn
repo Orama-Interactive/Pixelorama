@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_guides.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/dark_themes/misc/lock_aspect.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture" id=4]
 
 [node name="ScaleImage" type="ConfirmationDialog"]
 margin_right = 200.0
@@ -28,44 +28,45 @@ __meta__ = {
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
 margin_right = 234.0
-margin_bottom = 23.0
+margin_bottom = 14.0
 text = "Image Size"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 27.0
+margin_top = 18.0
 margin_right = 234.0
-margin_bottom = 31.0
+margin_bottom = 22.0
 
 [node name="PixelsLabel" type="Label" parent="VBoxContainer"]
-margin_top = 35.0
+margin_top = 26.0
 margin_right = 234.0
-margin_bottom = 58.0
+margin_bottom = 40.0
 text = "Pixels"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 62.0
+margin_top = 44.0
 margin_right = 234.0
-margin_bottom = 112.0
+margin_bottom = 96.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
 margin_right = 221.0
-margin_bottom = 50.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
 margin_right = 221.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 23.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 90, 0 )
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
 margin_left = 94.0
 margin_right = 221.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -74,20 +75,21 @@ value = 64.0
 suffix = "px"
 
 [node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
-margin_top = 27.0
+margin_top = 28.0
 margin_right = 221.0
-margin_bottom = 50.0
+margin_bottom = 52.0
 
 [node name="Height" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 23.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 90, 0 )
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
 margin_left = 94.0
 margin_right = 221.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -95,13 +97,17 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=[
+"UIButtons",
+]]
 margin_left = 225.0
 margin_right = 234.0
-margin_bottom = 50.0
+margin_bottom = 52.0
 texture = ExtResource( 2 )
 
-[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect"]
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=[
+"UIButtons",
+]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -120,35 +126,36 @@ __meta__ = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 116.0
+margin_top = 100.0
 margin_right = 234.0
-margin_bottom = 120.0
+margin_bottom = 104.0
 
 [node name="PercentageLabel" type="Label" parent="VBoxContainer"]
-margin_top = 124.0
+margin_top = 108.0
 margin_right = 234.0
-margin_bottom = 147.0
+margin_bottom = 122.0
 text = "Percentage"
 
 [node name="PercentageContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 151.0
+margin_top = 126.0
 margin_right = 234.0
-margin_bottom = 201.0
+margin_bottom = 178.0
 
 [node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
 margin_right = 234.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/PercentageContainer/WidthContainer"]
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 23.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 90, 0 )
 text = "Width:"
 
 [node name="WidthValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/WidthContainer"]
 margin_left = 94.0
 margin_right = 234.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -158,20 +165,21 @@ value = 100.0
 suffix = "%"
 
 [node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
-margin_top = 27.0
+margin_top = 28.0
 margin_right = 234.0
-margin_bottom = 50.0
+margin_bottom = 52.0
 
 [node name="Height" type="Label" parent="VBoxContainer/PercentageContainer/HeightContainer"]
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 23.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 90, 0 )
 text = "Height:"
 
 [node name="HeightValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/HeightContainer"]
 margin_left = 94.0
 margin_right = 234.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -181,30 +189,32 @@ value = 100.0
 suffix = "%"
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-margin_top = 205.0
+margin_top = 182.0
 margin_right = 234.0
-margin_bottom = 209.0
+margin_bottom = 186.0
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 213.0
+margin_top = 190.0
 margin_right = 234.0
-margin_bottom = 236.0
+margin_bottom = 210.0
 
 [node name="InterpolationLabel" type="Label" parent="VBoxContainer/InterpolationContainer"]
+margin_top = 3.0
 margin_right = 90.0
-margin_bottom = 23.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 90, 0 )
 text = "Interpolation:"
 
 [node name="InterpolationType" type="OptionButton" parent="VBoxContainer/InterpolationContainer"]
 margin_left = 94.0
 margin_right = 234.0
-margin_bottom = 23.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null, "Scale3X", null, false, 5, null ]
 selected = 0
+
 [connection signal="about_to_show" from="." to="." method="_on_ScaleImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_ScaleImage_popup_hide"]

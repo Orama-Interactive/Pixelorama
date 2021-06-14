@@ -16,7 +16,9 @@ func _ready() -> void:
 	load_config()
 	$PixelPerfect.pressed = tool_slot.pixel_perfect
 	$Mirror/Horizontal.pressed = tool_slot.horizontal_mirror
+	$Mirror/Horizontal.modulate = Global.modulate_icon_color
 	$Mirror/Vertical.pressed = tool_slot.vertical_mirror
+	$Mirror/Vertical.modulate = Global.modulate_icon_color
 
 
 func _on_PixelPerfect_toggled(button_pressed : bool) -> void:
@@ -90,6 +92,15 @@ func _get_draw_rect() -> Rect2:
 func _get_draw_image() -> Image:
 	var project : Project = Global.current_project
 	return project.frames[project.current_frame].cels[project.current_layer].image
+
+
+func _get_selected_draw_images() -> Array: # Array of Images
+	var images := []
+	var project : Project = Global.current_project
+	for cel_index in project.selected_cels:
+		var cel : Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+		images.append(cel.image)
+	return images
 
 
 func _flip_rect(rect : Rect2, size : Vector2, horizontal : bool, vertical : bool) -> Rect2:

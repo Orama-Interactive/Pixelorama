@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-06-08 17:01\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -30,6 +30,9 @@ msgstr "Konfirmasi..."
 msgid "File Name:"
 msgstr "Nama File:"
 
+msgid "Project Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "Ukuran Gambar"
 
@@ -39,7 +42,7 @@ msgstr "Ukuran Kanvas"
 msgid "Frame Size"
 msgstr "Ukuran Bingkai"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
@@ -126,6 +129,9 @@ msgstr "Tempel"
 msgid "Delete"
 msgstr "Hapus"
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr "Perbesar/perkecil gambar"
 
@@ -147,8 +153,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
-msgid "Clear Selection"
-msgstr "Hapus Pilihan"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "Balik"
@@ -422,6 +431,9 @@ msgstr "Tema"
 msgid "Canvas"
 msgstr "Kanvas"
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr "Pintasan"
 
@@ -487,6 +499,15 @@ msgstr "Terang"
 
 msgid "Purple"
 msgstr "Ungu"
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Hanya mempengaruhi pilihan"
@@ -677,8 +698,8 @@ msgstr "Bahasa Arab"
 msgid "Turkish"
 msgstr "Bahasa Turki"
 
-msgid "Norwegian"
-msgstr "Bahasa Norwegia"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Bahasa Korea"
@@ -798,18 +819,25 @@ msgstr "Ember\n"
 "%s untuk mouse kiri\n"
 "%s untuk mouse kanan"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Percerah/Gelapkan\n"
-"%s untuk mouse kiri\n"
-"%s untuk mouse kanan"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -817,6 +845,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -992,6 +1021,15 @@ msgstr ""
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "Hanya preset kustom yang bisa di edit"
 
@@ -1035,6 +1073,9 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Timpar warna ketimbang campur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya buram"
 
 msgid "Pixel Perfect"
+msgstr ""
+
+msgid "Fill inside"
 msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
@@ -1545,8 +1586,8 @@ msgstr "Penghapus"
 msgid "Bucket"
 msgstr "\"Bucket\""
 
-msgid "Lighten/Darken"
-msgstr "Pergelap/Terangkan"
+msgid "Shading Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Ganti warna"
@@ -1659,9 +1700,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"

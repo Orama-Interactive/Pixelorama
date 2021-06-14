@@ -17,7 +17,7 @@ const languages_dict := {
 	"ru_RU" : ["Русский", "Russian"],
 	"zh_CN" : ["简体中文", "Chinese Simplified"],
 	"zh_TW" : ["繁體中文", "Chinese Traditional"],
-	"no_NO" : ["Norsk", "Norwegian"],
+	"nb_NO" : ["Norsk Bokmål", "Norwegian Bokmål"],
 	"hu_HU" : ["Magyar", "Hungarian"],
 	"ro_RO" : ["Română", "Romanian"],
 	"ko_KR" : ["한국어", "Korean"],

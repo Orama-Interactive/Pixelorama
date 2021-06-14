@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Palette/EditPaletteDialog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/graphics/dark_themes/palette/edit_palette.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/dark_themes/palette/add_palette.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/palette/edit.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/palette/add.png" type="Texture" id=3]
 [ext_resource path="res://src/Palette/CreatePaletteDialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Palette/PaletteGrid.gd" type="Script" id=5]
 [ext_resource path="res://src/Palette/PaletteScroll.gd" type="Script" id=6]
@@ -13,7 +13,6 @@ margin_right = 324.0
 margin_bottom = 319.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
-size_flags_vertical = 3
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,7 +24,6 @@ margin_top = 7.0
 margin_right = 317.0
 margin_bottom = 312.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="PalettesLabel" type="Label" parent="PaletteVBoxContainer"]
 margin_right = 310.0
@@ -38,11 +36,11 @@ align = 1
 [node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer"]
 margin_top = 18.0
 margin_right = 310.0
-margin_bottom = 50.0
+margin_bottom = 40.0
 
 [node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons"]
-margin_right = 238.0
-margin_bottom = 32.0
+margin_right = 258.0
+margin_bottom = 22.0
 grow_horizontal = 0
 rect_min_size = Vector2( 100, 0 )
 hint_tooltip = "Choose a palette"
@@ -53,10 +51,10 @@ clip_text = true
 [node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 242.0
-margin_right = 274.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_left = 262.0
+margin_right = 284.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Edit currently selected palette"
 mouse_default_cursor_shape = 2
 __meta__ = {
@@ -68,10 +66,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -12.0
-margin_top = -12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 2 )
@@ -82,10 +80,10 @@ __meta__ = {
 [node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=[
 "UIButtons",
 ]]
-margin_left = 278.0
+margin_left = 288.0
 margin_right = 310.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new palette"
 mouse_default_cursor_shape = 2
 __meta__ = {
@@ -97,10 +95,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -12.0
-margin_top = -12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 3 )
@@ -109,20 +107,19 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer"]
-margin_top = 54.0
+margin_top = 44.0
 margin_right = 310.0
-margin_bottom = 58.0
+margin_bottom = 48.0
 
 [node name="SwatchesContainer" type="HBoxContainer" parent="PaletteVBoxContainer"]
-margin_top = 62.0
+margin_top = 52.0
 margin_right = 310.0
-margin_bottom = 305.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="ColorButtons" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 margin_right = 24.0
-margin_bottom = 243.0
+margin_bottom = 52.0
 
 [node name="AddColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
 margin_right = 24.0
@@ -144,9 +141,8 @@ text = "-"
 [node name="PaletteScroll" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 margin_left = 28.0
 margin_right = 310.0
-margin_bottom = 243.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
@@ -162,7 +158,6 @@ margin_left = 141.0
 margin_right = 141.0
 
 [node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer/HBoxContainer"]
-rect_pivot_offset = Vector2( -123.214, 138.568 )
 columns = 8
 script = ExtResource( 5 )
 

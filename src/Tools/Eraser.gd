@@ -73,4 +73,7 @@ func _draw_brush_image(_image : Image, src_rect: Rect2, dst: Vector2) -> void:
 	var size := _image.get_size()
 	if _clear_image.get_size() != size:
 		_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-	_get_draw_image().blit_rect_mask(_clear_image, _image, src_rect, dst)
+
+	var images := _get_selected_draw_images()
+	for draw_image in images:
+		draw_image.blit_rect_mask(_clear_image, _image, src_rect, dst)

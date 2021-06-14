@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-06-08 17:01\n"
 
 msgid "OK"
 msgstr "確定"
@@ -30,6 +30,9 @@ msgstr "確認..."
 msgid "File Name:"
 msgstr "檔案名稱："
 
+msgid "Project Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "圖片大小"
 
@@ -39,7 +42,7 @@ msgstr "版面大小"
 msgid "Frame Size"
 msgstr "影格大小"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
@@ -126,6 +129,9 @@ msgstr "貼上"
 msgid "Delete"
 msgstr "刪除"
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr "調整尺寸"
 
@@ -147,8 +153,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "旋轉圖片"
 
-msgid "Clear Selection"
-msgstr "清除選取區塊"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr "翻轉"
@@ -421,6 +430,9 @@ msgstr "主題"
 msgid "Canvas"
 msgstr "畫布"
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
@@ -486,6 +498,15 @@ msgstr "亮色"
 
 msgid "Purple"
 msgstr "紫色"
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "只處理選取區塊"
@@ -676,8 +697,8 @@ msgstr "阿拉伯文"
 msgid "Turkish"
 msgstr "土耳其文"
 
-msgid "Norwegian"
-msgstr "挪威文"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "韓文"
@@ -797,18 +818,25 @@ msgstr "油漆桶\n\n"
 "%s換成左鍵\n"
 "%s換成右鍵"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "變亮/變暗\n\n"
-"%s換成左鍵\n"
-"%s換成右鍵"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -816,6 +844,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -991,6 +1020,15 @@ msgstr "跟隨畫布放大縮小"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "空白背景格跟隨畫布放大縮小"
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr "只能修改自訂配置"
 
@@ -1035,6 +1073,9 @@ msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏
 
 msgid "Pixel Perfect"
 msgstr "完美像素"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "去除邊緣上多餘的像素使線條平滑"
@@ -1545,8 +1586,8 @@ msgstr "橡皮擦"
 msgid "Bucket"
 msgstr "油漆桶"
 
-msgid "Lighten/Darken"
-msgstr "變亮/變暗"
+msgid "Shading Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "切換顏色"
@@ -1659,9 +1700,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"

@@ -8,11 +8,7 @@ var node : Node
 
 
 func _ready() -> void:
-	# Handle themes
-	if Global.theme_type == Global.ThemeTypes.LIGHT:
-		texture_normal = load("res://assets/graphics/light_themes/misc/icon_reload.png")
-	elif Global.theme_type == Global.ThemeTypes.CARAMEL:
-		texture_normal = load("res://assets/graphics/caramel_themes/misc/icon_reload.png")
+	modulate = Global.modulate_icon_color
 
 
 func _on_RestoreDefaultButton_pressed() -> void:

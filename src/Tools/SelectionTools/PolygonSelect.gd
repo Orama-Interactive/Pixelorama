@@ -18,6 +18,12 @@ func _input(event : InputEvent) -> void:
 			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
 			ready_to_apply = true
 			apply_selection(Vector2.ZERO) # Argument doesn't matter
+	elif event is InputEventKey:
+		if event.is_action_pressed("escape") and _ongoing_selection:
+			_ongoing_selection = false
+			_draw_points.clear()
+			ready_to_apply = false
+			Global.canvas.previews.update()
 
 
 func draw_start(position : Vector2) -> void:
@@ -134,9 +140,8 @@ func lasso_selection(bitmap : BitMap, points : PoolVector2Array) -> void:
 		else:
 			bitmap.set_bit(point, !_subtract)
 
-	var image = _get_draw_image()
 	var v := Vector2()
-	var image_size = image.get_size()
+	var image_size : Vector2 = project.size
 	for x in image_size.x:
 		v.x = x
 		for y in image_size.y:

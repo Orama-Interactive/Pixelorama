@@ -130,7 +130,7 @@ func update_mirror_brush() -> void:
 func update_mask(can_skip := true) -> void:
 	if can_skip and Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
 		return
-	var size := _get_draw_image().get_size()
+	var size : Vector2 = Global.current_project.size
 	# Faster than zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
 	nulled_array.resize(size.x * size.y)
@@ -155,11 +155,11 @@ func prepare_undo() -> void:
 
 
 func commit_undo(action : String) -> void:
-	var redo_data = _get_undo_data()
+	var redo_data := _get_undo_data()
 	var project : Project = Global.current_project
 	var frame := -1
 	var layer := -1
-	if Global.animation_timer.is_stopped():
+	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
 		frame = project.current_frame
 		layer = project.current_layer
 
@@ -347,14 +347,15 @@ func _set_pixel(position : Vector2) -> void:
 	if !project.can_pixel_get_drawn(position):
 		return
 
-	var image := _get_draw_image()
-	var i := int(position.x + position.y * image.get_size().x)
-	if _mask.size() >= i + 1:
-		if _mask[i] < Tools.pen_pressure:
-			_mask[i] = Tools.pen_pressure
+	var images := _get_selected_draw_images()
+	for image in images:
+		var i := int(position.x + position.y * image.get_size().x)
+		if _mask.size() >= i + 1:
+			if _mask[i] < Tools.pen_pressure:
+				_mask[i] = Tools.pen_pressure
+				_drawer.set_pixel(image, position, tool_slot.color)
+		else:
 			_drawer.set_pixel(image, position, tool_slot.color)
-	else:
-		_drawer.set_pixel(image, position, tool_slot.color)
 
 
 func _draw_brush_image(_image : Image, _src_rect: Rect2, _dst: Vector2) -> void:
@@ -515,13 +516,18 @@ func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
 
 
 func _get_undo_data() -> Dictionary:
-	var data = {}
+	var data := {}
 	var project : Project = Global.current_project
-	var frames := project.frames
+	var cels := [] # Array of Cels
 	if Global.animation_timer.is_stopped():
-		frames = [project.frames[project.current_frame]]
-	for frame in frames:
-		var image : Image = frame.cels[project.current_layer].image
+		for cel_index in project.selected_cels:
+			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
+	else:
+		for frame in project.frames:
+			var cel : Cel = frame.cels[project.current_layer]
+			cels.append(cel)
+	for cel in cels:
+		var image : Image = cel.image
 		image.unlock()
 		data[image] = image.data
 		image.lock()

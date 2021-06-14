@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-04-16 18:10\n"
+"PO-Revision-Date: 2021-06-08 17:00\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -30,6 +30,9 @@ msgstr "Si us plau, confirmeu..."
 msgid "File Name:"
 msgstr "Nom del fitxer:"
 
+msgid "Project Name:"
+msgstr ""
+
 msgid "Image Size"
 msgstr "Mida de l'imatge"
 
@@ -39,7 +42,7 @@ msgstr "Mida del llenç"
 msgid "Frame Size"
 msgstr "Mida del marc"
 
-msgid "Size"
+msgid "Size:"
 msgstr ""
 
 msgid "Width:"
@@ -126,6 +129,9 @@ msgstr "Enganxar"
 msgid "Delete"
 msgstr "Eliminar"
 
+msgid "New Brush"
+msgstr ""
+
 msgid "Scale Image"
 msgstr "Escalar l'imatge"
 
@@ -147,8 +153,11 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Rotar l'imatge"
 
-msgid "Clear Selection"
-msgstr "Netejar la selecció"
+msgid "Clear"
+msgstr ""
+
+msgid "Invert"
+msgstr ""
 
 msgid "Flip"
 msgstr ""
@@ -422,6 +431,9 @@ msgstr "Temes"
 msgid "Canvas"
 msgstr "Llenç"
 
+msgid "Selection"
+msgstr ""
+
 msgid "Shortcuts"
 msgstr "Accesos directos"
 
@@ -486,6 +498,15 @@ msgid "Light"
 msgstr "Llum"
 
 msgid "Purple"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Icon color from:"
+msgstr ""
+
+msgid "Icon color:"
 msgstr ""
 
 msgid "Only affect selection"
@@ -677,8 +698,8 @@ msgstr "Àrab"
 msgid "Turkish"
 msgstr "Turc"
 
-msgid "Norwegian"
-msgstr "Noruec"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Korean"
 msgstr "Coreà"
@@ -796,9 +817,17 @@ msgstr "Cubeta\n\n"
 "%s pel botó esquerre del ratolí\n"
 "%s pel botó dret del ratolí"
 
-msgid "Lighten/Darken\n\n"
+msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
+msgstr ""
+
+msgid "Line Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to snap the angle of the line\n"
+"Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle Tool\n\n"
@@ -806,6 +835,7 @@ msgid "Rectangle Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -813,6 +843,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
+"Hold %s to displace the shape's origin\n"
 msgstr ""
 
 msgid "Rectangle"
@@ -987,6 +1018,15 @@ msgstr ""
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
+msgid "Animated selection borders"
+msgstr ""
+
+msgid "Border color 1:"
+msgstr ""
+
+msgid "Border color 2:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr ""
 
@@ -1031,6 +1071,9 @@ msgstr ""
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
+
+msgid "Fill inside"
+msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
@@ -1538,7 +1581,7 @@ msgstr "Goma d'esborrar"
 msgid "Bucket"
 msgstr "Cubeta"
 
-msgid "Lighten/Darken"
+msgid "Shading Tool"
 msgstr ""
 
 msgid "Switch Colors"
@@ -1651,9 +1694,6 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
-
-msgid "Create New Palette"
 msgstr ""
 
 msgid "Comment:"

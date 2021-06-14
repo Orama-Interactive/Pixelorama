@@ -103,17 +103,14 @@ func draw_end(_position : Vector2) -> void:
 		if _fill_inside:
 			_draw_points.append(_position)
 			if _draw_points.size() > 3:
-				var image = _get_draw_image()
 				var v = Vector2()
-				var image_size = image.get_size()
+				var image_size = Global.current_project.size
 				for x in image_size.x:
 					v.x = x
 					for y in image_size.y:
 						v.y = y
 						if Geometry.is_point_in_polygon(v, _draw_points):
-							image.lock()
 							draw_tool(v)
-							image.unlock()
 	if _changed or _drawer.color_op.changed:
 		commit_undo("Draw")
 	cursor_text = ""
@@ -122,9 +119,10 @@ func draw_end(_position : Vector2) -> void:
 
 func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
+	var images := _get_selected_draw_images()
 	if _overwrite:
-		_get_draw_image().blit_rect(image, src_rect, dst)
+		for draw_image in images:
+			draw_image.blit_rect(image, src_rect, dst)
 	else:
-		_get_draw_image().blend_rect(image, src_rect, dst)
-
-
+		for draw_image in images:
+			draw_image.blend_rect(image, src_rect, dst)

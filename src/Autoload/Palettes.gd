@@ -148,7 +148,9 @@ func fill_new_palette_with_colors(pixels: Array, new_palette: Palette, add_alpha
 	var cels := []
 	match get_colors_from:
 		GetColorsFrom.CurrentCel:
-			cels.append(current_project.frames[current_project.current_frame].cels[current_project.current_layer])
+			for cel_index in current_project.selected_cels:
+				var cel : Cel = current_project.frames[cel_index[0]].cels[cel_index[1]]
+				cels.append(cel)
 		GetColorsFrom.CurrentFrame:
 			for cel in current_project.frames[current_project.current_frame].cels:
 				cels.append(cel)
@@ -443,30 +445,27 @@ func import_gpl(path: String, text: String) -> Palette:
 	var result : Palette = null
 	var lines = text.split('\n')
 	var line_number := 0
+	var palette_name := path.get_basename().get_file()
 	var comments := ""
+	var colors := PoolColorArray()
+
 	for line in lines:
 		# Check if valid Gimp Palette Library file
 		if line_number == 0:
 			if not "GIMP Palette" in line:
-				break
-			else:
-				# Use filename as palette name in case reading old
-				# palette format (must read more to determine)
-				result = Palette.new(path.get_basename().get_file())
+				return result
 
 		# Comments
 		if line.begins_with('#'):
 			comments += line.trim_prefix('#') + '\n'
 			# Some programs output palette name in a comment for old format
 			if line.begins_with("#Palette Name: "):
-				result.name = line.replace("#Palette Name: ", "")
-			pass
+				palette_name = line.replace("#Palette Name: ", "")
 		elif line.begins_with("Name: "):
-			result.name = line.replace("Name: ", "")
-			pass
+			palette_name = line.replace("Name: ", "")
 		elif line.begins_with("Columns: "):
 			# Number of colors in this palette. Unecessary and often wrong
-			pass
+			continue
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
 			var color_data : PoolStringArray = line.split(" ", false, 4)
@@ -476,27 +475,28 @@ func import_gpl(path: String, text: String) -> Palette:
 			var color = Color(red, green, blue)
 			if color_data.size() >= 4:
 				# Ignore color name for now - result.add_color(color, color_data[3])
-				result.add_color(color)
+				colors.append(color)
 				#
 			else:
-				result.add_color(color)
+				colors.append(color)
 		line_number += 1
 
-	if result:
-		result.comment = comments
+	if line_number > 0:
+		var height : int = ceil(colors.size() / 8.0)
+		result = Palette.new(palette_name, 8, height, comments)
+		for color in colors:
+			result.add_color(color)
 
 	return result
 
 
 func import_pal_palette(path: String, text: String) -> Palette:
 	var result: Palette = null
-
+	var colors := PoolColorArray()
 	var lines = text.split('\n')
 
 	if not 'JASC-PAL' in lines[0] or not '0100' in lines[1]:
 		return result
-	else:
-		result = Palette.new(path.get_basename().get_file())
 
 	var num_colors = int(lines[2])
 
@@ -507,14 +507,18 @@ func import_pal_palette(path: String, text: String) -> Palette:
 		var blue : float = color_data[2].to_float() / 255.0
 
 		var color = Color(red, green, blue)
-		result.add_color(color)
+		colors.append(color)
 
+	var height : int = ceil(colors.size() / 8.0)
+	result = Palette.new(path.get_basename().get_file(), 8, height)
+	for color in colors:
+		result.add_color(color)
 	return result
 
 
 func import_image_palette(path: String, image: Image) -> Palette:
-	var result: Palette = Palette.new(path.get_basename().get_file())
 
+	var colors := []
 	var height: int = image.get_height()
 	var width: int = image.get_width()
 
@@ -523,9 +527,14 @@ func import_image_palette(path: String, image: Image) -> Palette:
 	for y in range(0, height):
 		for x in range(0, width):
 			var color: Color = image.get_pixel(x, y)
-			if not result.has_color(color):
-				result.add_color(color)
+			if !colors.has(color):
+				colors.append(color)
 	image.unlock()
+
+	var palette_height : int = ceil(colors.size() / 8.0)
+	var result: Palette = Palette.new(path.get_basename().get_file(), 8, palette_height)
+	for color in colors:
+		result.add_color(color)
 
 	return result
 

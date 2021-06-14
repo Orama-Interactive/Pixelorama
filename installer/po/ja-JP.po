@@ -1,16 +1,15 @@
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-08 22:43\n"
-"PO-Revision-Date: 2020-12-10 14:30\n"
+"POT-Creation-Date: 2021-05-07 04:44\n"
+"PO-Revision-Date: 2021-05-21 17:41\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
+"Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja_JP\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: pixelorama\n"
 "X-Crowdin-Project-ID: 385497\n"
@@ -19,52 +18,52 @@ msgstr ""
 "X-Crowdin-File-ID: 10\n"
 
 #. SecInstall
-#: .\pixelorama.nsi:72
+#: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
 msgstr "${APPNAME} をインストール"
 
 #. SecStartmenu
-#: .\pixelorama.nsi:73
+#: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
 msgstr "スタートメニューにショートカットを作成 (オプション)"
 
 #. SecDesktop
-#: .\pixelorama.nsi:74
+#: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
 msgstr "デスクトップにショートカットを作成 (オプション)"
 
 #. un.SecUninstall
-#: .\pixelorama.nsi:75
+#: ..\pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
 msgstr "${APPNAME} ${APPVERSION} をアンインストール"
 
 #. un.SecConfig
-#: .\pixelorama.nsi:76
+#: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
 msgstr "設定ファイルを削除 (オプション)"
 
 #. DESC_SecInstall
-#: .\pixelorama.nsi:178
+#: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
 msgstr "${APPNAME} ${APPVERSION} をインストールします。"
 
 #. DESC_SecStartmenu
-#: .\pixelorama.nsi:179
+#: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
 msgstr "${APPNAME} のスタートメニューショートカットを作成します。"
 
 #. DESC_SecDesktop
-#: .\pixelorama.nsi:180
+#: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
 msgstr "${APPNAME} のデスクトップショートカットを作成します。"
 
 #. DESC_un.SecUninstall
-#: .\pixelorama.nsi:181
+#: ..\pixelorama.nsi:203
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
 msgstr "${APPNAME} ${APPVERSION} をアンインストールし、すべてのショートカットを削除します。"
 
 #. DESC_un.SecConfig
-#: .\pixelorama.nsi:182
+#: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
 msgstr "${APPNAME} の設定ファイルを削除します。"
 

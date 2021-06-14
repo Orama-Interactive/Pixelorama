@@ -53,3 +53,6 @@ func _on_Tool_pressed(tool_pressed : BaseButton) -> void:
 func _on_ToolsAndCanvas_dragged(_offset : int) -> void:
 	var tool_panel_size : Vector2 = get_parent().get_parent().rect_size
 	columns = clamp(tool_panel_size.x / 40, 1, 8)
+
+	# It doesn't actually set the size to zero, it just resets it
+	get_parent().rect_size = Vector2.ZERO
