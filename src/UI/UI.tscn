@@ -85,7 +85,9 @@ rect_min_size = Vector2( 48, 0 )
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ToolsAndCanvas/ToolPanel"]
-margin_left = 6.0
+margin_left = 9.0
+margin_right = 47.0
+margin_bottom = 486.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 __meta__ = {

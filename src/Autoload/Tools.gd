@@ -156,6 +156,7 @@ func set_button_size(button_size : int) -> void:
 			t.get_node("BackgroundLeft").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
+		_tool_buttons.get_parent().rect_position.x = 9
 	else:
 		for t in _tool_buttons.get_children():
 			t.rect_min_size = Vector2(32, 32)
@@ -163,6 +164,7 @@ func set_button_size(button_size : int) -> void:
 			t.get_node("BackgroundLeft").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)
+		_tool_buttons.get_parent().rect_position.x = 6
 
 	# It doesn't actually set the size to zero, it just resets it
 	_tool_buttons.get_parent().rect_size = Vector2.ZERO
