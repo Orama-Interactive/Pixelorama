@@ -13,7 +13,6 @@ margin_right = 324.0
 margin_bottom = 319.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
-size_flags_vertical = 3
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,7 +24,6 @@ margin_top = 7.0
 margin_right = 317.0
 margin_bottom = 312.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="PalettesLabel" type="Label" parent="PaletteVBoxContainer"]
 margin_right = 310.0
@@ -116,13 +114,12 @@ margin_bottom = 48.0
 [node name="SwatchesContainer" type="HBoxContainer" parent="PaletteVBoxContainer"]
 margin_top = 52.0
 margin_right = 310.0
-margin_bottom = 305.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="ColorButtons" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 margin_right = 24.0
-margin_bottom = 253.0
+margin_bottom = 52.0
 
 [node name="AddColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
 margin_right = 24.0
@@ -144,9 +141,8 @@ text = "-"
 [node name="PaletteScroll" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 margin_left = 28.0
 margin_right = 310.0
-margin_bottom = 253.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
@@ -162,7 +158,6 @@ margin_left = 141.0
 margin_right = 141.0
 
 [node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer/HBoxContainer"]
-rect_pivot_offset = Vector2( -123.214, 138.568 )
 columns = 8
 script = ExtResource( 5 )
 
