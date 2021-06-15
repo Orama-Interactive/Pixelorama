@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -770,9 +770,6 @@ msgstr "Simpan & Keluar"
 msgid "Exit without saving"
 msgstr "Keluar tanpa menyimpan"
 
-msgid "Utility Tools"
-msgstr "\"Utility Tools\""
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -802,9 +799,6 @@ msgstr "Color Picker\n"
 "Ambil warna dari pixel yang ada di canvas\n\n"
 "%s untuk mouse kiri\n"
 "%s untuk mouse kanan"
-
-msgid "Draw Tools"
-msgstr "Alat menggambar"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
