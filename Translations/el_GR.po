@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-06-15 11:20\n"
+"PO-Revision-Date: 2021-06-15 13:17\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Επεξεργασία"
 
 msgid "Select"
-msgstr ""
+msgstr "Επιλογή"
 
 msgid "View"
 msgstr "Προβολή"
@@ -513,13 +513,13 @@ msgid "Icon color:"
 msgstr "Χρώμα εικονιδίων:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Μέγεθος κουμπιών εργαλείων:"
 
 msgid "Small"
-msgstr ""
+msgstr "Μικρά"
 
 msgid "Big"
-msgstr ""
+msgstr "Μεγάλα"
 
 msgid "Only affect selection"
 msgstr "Επηρεάζει μόνο την επιλογή"
