@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -770,9 +770,6 @@ msgstr "Konservi kaj eliri"
 msgid "Exit without saving"
 msgstr "Eliri sen konservado"
 
-msgid "Utility Tools"
-msgstr "Utililoj"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -794,9 +791,6 @@ msgid "Color Picker\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr ""
-
-msgid "Draw Tools"
-msgstr "Pentriloj"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
