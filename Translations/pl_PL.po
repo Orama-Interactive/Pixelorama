@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 03:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Edycja"
 
 msgid "Select"
-msgstr ""
+msgstr "Zaznacz"
 
 msgid "View"
 msgstr "Widok"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "Usuń"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nowy pędzel"
 
 msgid "Scale Image"
 msgstr "Skaluj obraz"
@@ -434,7 +434,7 @@ msgid "Canvas"
 msgstr "Płótno"
 
 msgid "Selection"
-msgstr ""
+msgstr "Zaznaczanie"
 
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
