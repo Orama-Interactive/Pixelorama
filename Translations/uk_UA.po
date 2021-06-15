@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 01:00\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Ім'я файлу:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Назва проєкту:"
 
 msgid "Image Size"
 msgstr "Розмір зображення"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Розмір кадру"
 
 msgid "Size:"
-msgstr ""
+msgstr "Розмір:"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "Вилучити"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Новий пензель"
 
 msgid "Scale Image"
 msgstr "Масштабувати зображення"
@@ -256,7 +256,7 @@ msgid "New palette"
 msgstr "Нова палітра"
 
 msgid "New brush"
-msgstr "Нова щітка"
+msgstr "Новий пензель"
 
 msgid "New pattern"
 msgstr "Новий шаблон"
@@ -277,16 +277,16 @@ msgid "At layer:"
 msgstr ""
 
 msgid "Brush type:"
-msgstr "Тип пензлика:"
+msgstr "Тип пензля:"
 
 msgid "File brush"
 msgstr "Файл щітки"
 
 msgid "Project brush"
-msgstr "Пензль проекту"
+msgstr "Пензель проєкту"
 
 msgid "Random brush"
-msgstr "Випадковий пензлик"
+msgstr "Випадковий пензель"
 
 msgid "Save Sprite as .pxo"
 msgstr "Зберегти спрайт як .pxo"
@@ -468,7 +468,7 @@ msgid "None"
 msgstr "Нічого"
 
 msgid "Affect Brush's Alpha"
-msgstr "Вплив на альфу щітки"
+msgstr "Вплив на альфу пензля"
 
 msgid "Color:"
 msgstr "Колір:"
