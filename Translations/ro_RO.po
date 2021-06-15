@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-06-14 05:40\n"
+"PO-Revision-Date: 2021-06-15 11:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -770,9 +770,6 @@ msgstr "Salvare și ieșire"
 msgid "Exit without saving"
 msgstr "Ieșire fără salvare"
 
-msgid "Utility Tools"
-msgstr "Instrumente utilitare"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -804,9 +801,6 @@ msgstr "Selector de culoare\n"
 "Selectează o culoare dintr-un pixel al graficului bidimensional\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
-
-msgid "Draw Tools"
-msgstr "Instrumente de desen"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
