@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 01:20\n"
+"PO-Revision-Date: 2021-06-15 01:28\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -800,7 +800,10 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Піпетка\n"
+"Вибирає колір пікселю зі спрайта\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Draw Tools"
 msgstr ""
@@ -956,25 +959,25 @@ msgid "Grid offset x:"
 msgstr "Зсув сітки за X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Вказує зсування сітки за віссю X від початку координат (верхнього лівого краю зображення)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Зсув сітки за Y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Вказує зсування сітки за віссю Y від початку координат (верхнього лівого краю зображення)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Якщо вимкнено, сітка буде показуватися тільки над оригінальним зображенням"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Колір сітки:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Колір, який матиме сітка"
 
 msgid "Pixel Grid"
 msgstr "Сітка пікселів"
@@ -1571,7 +1574,7 @@ msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Піпетка"
 
 msgid "Pencil"
 msgstr ""
