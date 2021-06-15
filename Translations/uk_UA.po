@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 12:17\n"
+"PO-Revision-Date: 2021-06-15 12:25\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1491,13 +1491,13 @@ msgid "Error"
 msgstr "Помилка"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Помилка: у палітри має бути правильна назва."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Неправильний файл палітри!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Редагувати палітру"
 
 msgid "Create colors with alpha component"
 msgstr ""
@@ -1506,7 +1506,7 @@ msgid "Get colors only from selection"
 msgstr "Брати кольори тільки з виділення"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Брати кольори з"
 
 msgid "Patrons:"
 msgstr "Меценати:"
@@ -1584,7 +1584,7 @@ msgid "Color Picker"
 msgstr "Піпетка"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Олівець"
 
 msgid "Eraser"
 msgstr "Гумка"
@@ -1608,16 +1608,16 @@ msgid "Already assigned"
 msgstr ""
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Лівий інструмент:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Інструмент, який встановлено для лівої кнопки миші"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Правий інструмент:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Інструмент, який встановлено для правої кнопки миші"
 
 msgid "Cannot find last project file."
 msgstr "Неможливо знайти останній файл проєкту."
@@ -1629,16 +1629,16 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Ви ще не зберегли та не відкрили в Pixelorama жодного проєкту!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Відкрити останній проєкт"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Відкрити останній проєкт..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Відкривати останній проєкт при запуску"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Відкривати проєкт, який було останнім відкрито, при запуску програми"
 
 msgid "Enable autosave"
 msgstr "Увімкнути автозбереження"
@@ -1647,7 +1647,7 @@ msgid "Autosave interval:"
 msgstr "Інтервал автозбереження:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "хв."
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1656,7 +1656,7 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 msgid "Delete"
 msgstr "Видалити"
@@ -1667,25 +1667,25 @@ msgstr "Знайдено автозбережену резервну копію 
 "Бажаєте її відкрити?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Завантажено резервну копію"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Видалити вибрану палітру"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Ви впевнені, що хочете видалити цю палітру? (Цю дію неможливо скасувати)"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Неможливо видалити більш палітр!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Неможливо видалити палітру, бо вона не існує!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
-msgstr ""
+msgstr "і"
 
 msgid "Move the selected frame to the left."
 msgstr ""
