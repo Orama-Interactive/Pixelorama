@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 11:19\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -770,9 +770,6 @@ msgstr "Desar i sortir"
 msgid "Exit without saving"
 msgstr "Sortir sense desar"
 
-msgid "Utility Tools"
-msgstr "Eines d'utilitat"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -800,9 +797,6 @@ msgstr "Selector de Color\n"
 "Triar un color de un pixel del sprite\n\n"
 "%s pel botó esquerre del ratolí\n"
 "%s pel botó dret del ratolí"
-
-msgid "Draw Tools"
-msgstr "Eines de dibuix"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
