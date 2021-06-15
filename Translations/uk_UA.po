@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 01:00\n"
+"PO-Revision-Date: 2021-06-15 01:10\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Повернути зображення"
 
 msgid "Clear"
-msgstr ""
+msgstr "Очистити"
 
 msgid "Invert"
-msgstr ""
+msgstr "Інвертувати"
 
 msgid "Flip"
 msgstr "Віддзеркалити"
@@ -181,16 +181,16 @@ msgid "Window Transparency"
 msgstr "Прозорість вікна"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Позиція панелей"
 
 msgid "Auto"
-msgstr ""
+msgstr "Автоматична"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Для широкого екрана"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Для високого екрана"
 
 msgid "Mirror View"
 msgstr "Дзеркальний перегляд"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Таблиця спрайтів (нова вкладка)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Таблиця спрайтів (новий шар)"
 
 msgid "New frame"
 msgstr "Новий кадр"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Замінити кадр"
 
 msgid "New layer"
 msgstr "Новий шар"
@@ -268,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Вертикальні кадри:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Початковий кадр:"
 
 msgid "At frame:"
 msgstr ""
 
 msgid "At layer:"
-msgstr ""
+msgstr "На шарі:"
 
 msgid "Brush type:"
 msgstr "Тип пензля:"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Полотно"
 
 msgid "Selection"
-msgstr ""
+msgstr "Виділення"
 
 msgid "Shortcuts"
 msgstr "Ярлики"
@@ -878,13 +878,13 @@ msgid "Left pixel indicator"
 msgstr ""
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Показати на полотні індикатор пікселя або пензель для лівої кнопки миші при малюванні"
 
 msgid "Right pixel indicator"
 msgstr ""
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Показати на полотні індикатор пікселя або пензель для правої кнопки миші при малюванні"
 
 msgid "Show left tool icon"
 msgstr ""
@@ -1022,7 +1022,7 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Анімовані межі виділення"
 
 msgid "Border color 1:"
 msgstr ""
@@ -1046,25 +1046,25 @@ msgid "If this is toggled on, when the application's window loses focus, the FPS
 msgstr "Якщо цей параметр увімкнено, то коли вікно додатку втратить фокус, обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
 
 msgid "Brush:"
-msgstr ""
+msgstr "Пензель:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Вибрати пензель"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Піксельний пензель"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Пензель-коло"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Пензель—заповнене коло"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Користувацький пензель"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Розмір пензля:"
 
 msgid "Overwrite Color"
 msgstr ""
@@ -1091,7 +1091,7 @@ msgid "Brush color from"
 msgstr ""
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Колір з самого пензля, 100: поточний колір"
 
 msgid "Fill area:"
 msgstr ""
@@ -1330,7 +1330,7 @@ msgid "Lock/unlock layer"
 msgstr ""
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Кадр: %s, шар: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1352,22 +1352,22 @@ msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Скасувати: малювання"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Повторити: малювання"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Скасувати: прямокутне виділення"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Повторити: прямокутне виділення"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Скасувати: масштабування"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Повторити: масштабування"
 
 msgid "Undo: Add Layer"
 msgstr ""
@@ -1646,7 +1646,7 @@ msgid "Close"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
