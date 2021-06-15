@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 02:21\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -770,9 +770,6 @@ msgstr "Зберегти та вийти"
 msgid "Exit without saving"
 msgstr "Вийти без збереження"
 
-msgid "Utility Tools"
-msgstr "Службові інструменти"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -804,9 +801,6 @@ msgstr "Піпетка\n"
 "Вибирає колір пікселю зі спрайта\n\n"
 "%s для лівої кнопки миші\n"
 "%s для правої кнопки миші"
-
-msgid "Draw Tools"
-msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
