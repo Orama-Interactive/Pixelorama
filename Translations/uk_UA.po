@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 12:10\n"
+"PO-Revision-Date: 2021-06-15 12:17\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -115,10 +115,10 @@ msgid "Quit"
 msgstr "Вийти"
 
 msgid "Undo"
-msgstr "Відмінити"
+msgstr "Скасувати"
 
 msgid "Redo"
-msgstr "Відновити"
+msgstr "Повторити"
 
 msgid "Copy"
 msgstr "Копіювати"
@@ -789,7 +789,7 @@ msgstr "Масштабування\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Прокручування\n\n"
+msgstr "Пересування\n\n"
 "%s для лівої кнопки миші\n"
 "%s для правої кнопки миші"
 
@@ -1096,7 +1096,7 @@ msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "Заливає намальовану фігуру кольором замість того, щоб малювати лише контур"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Колір пензля з"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Колір з самого пензля, 100: поточний колір"
@@ -1269,7 +1269,8 @@ msgstr ""
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Якщо вибрано цю опцію, анімація буде програватися тільки на кадрах з одним і тим же тегом.\n"
+"Якщо не вибрано, анімація буде програватися на всіх кадрах, ігноруючи теги."
 
 msgid "Blue-Red Mode"
 msgstr "Синьо-червоний режим"
@@ -1424,31 +1425,31 @@ msgid "Redo: Change Frame Order"
 msgstr "Повторити: зміна порядку кадрів"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Скасувати: видалення користувацького пензля"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Повторити: видалення користувацького пензля"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Скасувати: зміна тегу кадру"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Повторити: зміна тегу кадру"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Скасувати: видалення тегу кадру"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Повторити: видалення тегу кадру"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Скасувати: зміна тривалості кадру"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Повторити: зміна тривалості кадру"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Пересунути керівну"
 
 msgid "File saved"
 msgstr "Файл збережено"
@@ -1457,37 +1458,37 @@ msgid "File autosaved"
 msgstr "Файл автоматично збережено"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Не вдалося відкрити файл. Код помилки %s"
 
 msgid "File failed to save. Error code %s"
 msgstr "Не вдалося зберегти файл. Код помилки %s"
 
 msgid "File exported"
-msgstr ""
+msgstr "Файл експортовано"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Нова пуста палітра"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Імпортувати палітру"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Створити палітру з поточного спрайту"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Назва палітри:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Назва кольору:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Використовувати поточні лівий і правий кольори"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Створити нову пусту палітру?"
 
 msgid "Error"
-msgstr ""
+msgstr "Помилка"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -1523,40 +1524,40 @@ msgid "Become a Patron"
 msgstr "Стати меценатом"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Не показувати знов"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Опції зображення"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Стандартна ширина:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Стандартна ширина для нового зображення"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Стандартна висота:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Стандартна висота для нового зображення"
 
 msgid "Default fill color:"
 msgstr "Стандартний колір заливки:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Стандартний фоновий колір нового зображення"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Зафіксувати співвідношення сторін"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Вертикальна орієнтація"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Горизонтальна орієнтація"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Шаблони:"
 
 msgid "Preset"
 msgstr ""
@@ -1565,19 +1566,19 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Стандартно"
 
 msgid "Custom"
-msgstr ""
+msgstr "Користувацьке"
 
 msgid "Rectangular Selection"
 msgstr "Прямокутне виділення"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Масштаб"
 
 msgid "Pan"
-msgstr ""
+msgstr "Пересування"
 
 msgid "Color Picker"
 msgstr "Піпетка"
