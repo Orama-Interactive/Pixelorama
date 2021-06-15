@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -770,9 +770,6 @@ msgstr "Mentés és kilépés"
 msgid "Exit without saving"
 msgstr "Kilépés mentés nélkül"
 
-msgid "Utility Tools"
-msgstr "Segédprogramok"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -802,9 +799,6 @@ msgstr "Színválasztó\n"
 "Válasz egy színt egy pixeléből a sprite-nak\n\n"
 "%s a bal egérgombbal\n"
 "%s a jobb egérgombbal"
-
-msgid "Draw Tools"
-msgstr "Rajzeszözök"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
