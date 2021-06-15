@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 01:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -513,13 +513,13 @@ msgid "Icon color:"
 msgstr "Цвет значка:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Размер кнопок инструментов:"
 
 msgid "Small"
-msgstr ""
+msgstr "Маленький"
 
 msgid "Big"
-msgstr ""
+msgstr "Большой"
 
 msgid "Only affect selection"
 msgstr "Менять только выделенное"
@@ -1090,7 +1090,7 @@ msgid "Pixel Perfect"
 msgstr "Пиксельная точность"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Залить внутри"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
