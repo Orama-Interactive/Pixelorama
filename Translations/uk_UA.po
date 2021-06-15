@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 12:25\n"
+"PO-Revision-Date: 2021-06-15 13:17\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Редагувати"
 
 msgid "Select"
-msgstr ""
+msgstr "Виділення"
 
 msgid "View"
 msgstr "Перегляд"
@@ -997,37 +997,37 @@ msgid "A color of the pixel grid"
 msgstr "Колір піксельної сітки"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Прозорість"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Розмір шахового фону:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Розмір шахового узору для прозорого фону"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Шаховий колір 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Перший колір шахового узору для прозорого фону"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Шаховий колір 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Другий колір шахового узору для прозорого фону"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Рухати з полотном"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Шаховий фон рухається з полотном"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Міняти розмір за масштабом"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Шаховий фон міняє розмір за масштабом"
 
 msgid "Animated selection borders"
 msgstr "Анімовані межі виділення"
@@ -1605,7 +1605,7 @@ msgid "Press a key or a key combination to set the shortcut"
 msgstr ""
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Вже призначене"
 
 msgid "Left Tool:"
 msgstr "Лівий інструмент:"
@@ -1650,10 +1650,10 @@ msgid "minute(s)"
 msgstr "хв."
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Створити новий каталог для кожного тегу кадрів"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Ствоює декілька файлів, але кожен файл зберігатиметься в каталозі, який відповідає тегу кадрів"
 
 msgid "Close"
 msgstr "Закрити"
@@ -1682,13 +1682,13 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Неможливо видалити палітру, бо вона не існує!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Помилка при видаленні палітри! Код помилки: %s"
 
 msgid "and"
 msgstr "і"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Пересунути виділений кадр вліво."
 
 msgid "Move the selected frame to the right."
 msgstr ""
