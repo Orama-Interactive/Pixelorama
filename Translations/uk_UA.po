@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 01:28\n"
+"PO-Revision-Date: 2021-06-15 01:41\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -175,7 +175,7 @@ msgid "Preferences"
 msgstr "Налаштування"
 
 msgid "Tile Mode"
-msgstr "Режим плитки"
+msgstr "Тайловий режим"
 
 msgid "Window Transparency"
 msgstr "Прозорість вікна"
@@ -232,7 +232,7 @@ msgid "Import as:"
 msgstr "Імпортувати як:"
 
 msgid "Recent projects"
-msgstr "Нещодавні проекти"
+msgstr "Нещодавні проєкти"
 
 msgid "New tab"
 msgstr "Нова вкладка"
@@ -812,7 +812,10 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Олівець\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб намалювати лінію"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
@@ -855,7 +858,7 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Прямокутник"
 
 msgid "Ellipse"
 msgstr "Еліпс"
@@ -944,16 +947,16 @@ msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Вказує відлеглість поміж горизонтальними лініями прямокутної сітки"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Ширина меж ізометричної клітини:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Вказує ширину прямокутника навколо ізометричної клітини"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Висота меж ізометричної клітини:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Вказує висоту прямокутника навколо ізометричної клітини"
 
 msgid "Grid offset x:"
 msgstr "Зсув сітки за X:"
@@ -968,7 +971,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr "Вказує зсування сітки за віссю Y від початку координат (верхнього лівого краю зображення)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Малювати в тайловому режимі:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr "Якщо вимкнено, сітка буде показуватися тільки над оригінальним зображенням"
@@ -1082,16 +1085,16 @@ msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Заливка всередині"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Залити фігуру"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Заливає намальовану фігуру кольором замість того, щоб малювати лише контур"
 
 msgid "Brush color from"
 msgstr ""
@@ -1100,7 +1103,7 @@ msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Колір з самого пензля, 100: поточний колір"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Область заливки:"
 
 msgid "Same color area"
 msgstr ""
@@ -1109,7 +1112,7 @@ msgid "Same color pixels"
 msgstr ""
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Чим залити:"
 
 msgid "Selected Color"
 msgstr ""
@@ -1327,7 +1330,7 @@ msgid "Opacity:"
 msgstr ""
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Прозорість тайлового режиму:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -1535,7 +1538,7 @@ msgid "A default height of a new image"
 msgstr ""
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Стандартний колір заливки:"
 
 msgid "A default background color of a new image"
 msgstr ""
@@ -1613,13 +1616,13 @@ msgid "A tool assigned to the right mouse button"
 msgstr ""
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Неможливо знайти останній файл проєкту."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Неможливо знайти файл проєкту."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Ви ще не зберегли та не відкрили в Pixelorama жодного проєкту!"
 
 msgid "Open Last Project"
 msgstr ""
@@ -1689,13 +1692,13 @@ msgid "Frame duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Повтори по обидвох осях"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Повтори по осі X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Повтори по осі Y"
 
 msgid "Create a new palette"
 msgstr ""
