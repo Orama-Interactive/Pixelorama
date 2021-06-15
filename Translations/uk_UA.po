@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 13:24\n"
+"PO-Revision-Date: 2021-06-15 13:48\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -271,7 +271,7 @@ msgid "Start frame:"
 msgstr "Початковий кадр:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "До кадру:"
 
 msgid "At layer:"
 msgstr "На шарі:"
@@ -696,7 +696,7 @@ msgid "Catalan"
 msgstr "Каталанська"
 
 msgid "Esperanto"
-msgstr "Esperanto"
+msgstr "Есперанто"
 
 msgid "Indonesian"
 msgstr "Індонезійська"
@@ -729,13 +729,13 @@ msgid "Development Team"
 msgstr "Команда розробників"
 
 msgid "Lead Programmer"
-msgstr "Ведучий Програміст"
+msgstr "Головний програміст"
 
 msgid "UI Designer"
 msgstr "UI дизайнер"
 
 msgid "GitHub Contributors"
-msgstr "Помічники на Github"
+msgstr "Учасники на Github"
 
 msgid "Art by: %s"
 msgstr "Художник: %s"
@@ -830,7 +830,9 @@ msgstr "Заливка\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Інструмент світла/тіні\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -838,7 +840,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Лінія\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб зафіксувати кут лінії\n"
+"Утримуйте %s, щоб встановити центр лінії в місці початку малювання\n"
+"Утримуйте %s, щоб пересувати початкову точку фігури\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1039,7 +1046,7 @@ msgid "Border color 2:"
 msgstr "Колір рамки 2:"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Можна міняти тільки користувацький набір налаштувань"
 
 msgid "Set application FPS limit:"
 msgstr "Встановити обмеження FPS додатку:"
@@ -1105,10 +1112,10 @@ msgid "Fill area:"
 msgstr "Область заливки:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Область одного кольору"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Пікселі одного кольору"
 
 msgid "Fill with:"
 msgstr "Чим залити:"
@@ -1117,16 +1124,16 @@ msgid "Selected Color"
 msgstr "Вибраний колір"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Шаблон"
 
 msgid "Offset"
 msgstr "Зсування"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Просте світло"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Зсування відтінку"
 
 msgid "Lighten"
 msgstr "Освітлити"
@@ -1202,7 +1209,8 @@ msgstr "Відтворити анімацію зворотно (з кінця д
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Відтворити анімацію (з початку до кінця)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
@@ -1215,59 +1223,60 @@ msgstr "Перейти до останнього кадру\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Налаштування шлейфу сусідніх кадрів"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Увімкнути/вимкнути шлейф сусідніх кадрів"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Скільки кадрів у секунду показувати при програванні анімації?\n"
+"Чим більше кадрів у секунду, тим швидшою буде анімація."
 
 msgid "No loop"
-msgstr ""
+msgstr "Без зациклення"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Кругове зациклення"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Зациклення туди-назад"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Шлейф сусідніх кадрів:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Минулі кадри"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Майбутні кадри"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Керування тегами кадрів"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Властивості тегу кадрів"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Додати новий тег кадрів"
 
 msgid "Name:"
-msgstr ""
+msgstr "Назва:"
 
 msgid "From:"
-msgstr ""
+msgstr "З:"
 
 msgid "To:"
-msgstr ""
+msgstr "До:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Анімація відтворюється тільки на кадрах того ж тегу"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Тег %s (Кадр %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Тег %s (Кадри %s—%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1502,7 +1511,7 @@ msgid "Edit Palette"
 msgstr "Редагувати палітру"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Створювати кольори з альфа-компонентом"
 
 msgid "Get colors only from selection"
 msgstr "Брати кольори тільки з виділення"
@@ -1562,10 +1571,10 @@ msgid "Templates:"
 msgstr "Шаблони:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Набір налаштувань"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Набір налаштувань:"
 
 msgid "Default"
 msgstr "Стандартно"
@@ -1595,16 +1604,16 @@ msgid "Bucket"
 msgstr "Заливка"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Інструмент світла/тіні"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Поміняти кольори місцями"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Асоціювати клавішу"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Натисніть клавішу або комбінацію клавіш, щоб асоціювати її з дією"
 
 msgid "Already assigned"
 msgstr "Вже призначене"
@@ -1693,10 +1702,10 @@ msgid "Move the selected frame to the left."
 msgstr "Пересунути виділений кадр вліво."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Пересунути виділений кадр вправо."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Тривалість кадру"
 
 msgid "Tiled In Both Axis"
 msgstr "Повтори по обидвох осях"
@@ -1708,28 +1717,28 @@ msgid "Tiled In Y Axis"
 msgstr "Повтори по осі Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Створити нову палітру"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Коментар:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Пуста"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "З поточної палітри"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "З поточного спрайту"
 
 msgid "From Current Selection"
 msgstr "З поточного виділення"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Додати новий колір"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Видалити вибраний колір"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Палітра з такими ж назвою та шляхом вже існує!"
