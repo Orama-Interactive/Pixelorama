@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-15 00:32\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -770,9 +770,6 @@ msgstr "保存并退出"
 msgid "Exit without saving"
 msgstr "退出且不保存"
 
-msgid "Utility Tools"
-msgstr "实用工具"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -804,9 +801,6 @@ msgstr "拾色器\n"
 "从子画面像素选择颜色\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
-
-msgid "Draw Tools"
-msgstr "绘图工具"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
