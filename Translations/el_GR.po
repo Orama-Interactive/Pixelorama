@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -770,9 +770,6 @@ msgstr "Αποθήκευση & έξοδος"
 msgid "Exit without saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-msgid "Utility Tools"
-msgstr "Βοηθητικά Εργαλεία"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -804,9 +801,6 @@ msgstr "Επιλογέας χρωμάτων\n"
 "Επιλέξτε ένα χρώμα από ένα εικονοστοιχείο της εικόνας\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
-
-msgid "Draw Tools"
-msgstr "Εργαλεία Ζωγραφικής"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
