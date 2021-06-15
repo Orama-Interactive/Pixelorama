@@ -10,13 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 13:17\n"
+"PO-Revision-Date: 2021-06-15 13:24\n"
 
 msgid "OK"
 msgstr "Гаразд"
 
 msgid "Cancel"
-msgstr "Відмінити"
+msgstr "Скасувати"
 
 msgid "Open"
 msgstr "Відкрити"
@@ -1033,10 +1033,10 @@ msgid "Animated selection borders"
 msgstr "Анімовані межі виділення"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Колір рамки 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Колір рамки 2:"
 
 msgid "Only custom preset can be modified"
 msgstr ""
@@ -1075,10 +1075,10 @@ msgid "Brush size:"
 msgstr "Розмір пензля:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Переписувати колір"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Переписує колір замість змішування кольорів. Ця опція має сенс лише для частково прозорих кольорів"
 
 msgid "Pixel Perfect"
 msgstr "Піксельна точність"
@@ -1087,7 +1087,7 @@ msgid "Fill inside"
 msgstr "Заливка всередині"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Робить лінії гладкими, забираючи зайві пікселі по краях"
 
 msgid "Fill Shape"
 msgstr "Залити фігуру"
@@ -1114,13 +1114,13 @@ msgid "Fill with:"
 msgstr "Чим залити:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Вибраний колір"
 
 msgid "Pattern"
 msgstr ""
 
 msgid "Offset"
-msgstr ""
+msgstr "Зсування"
 
 msgid "Simple Shading"
 msgstr ""
@@ -1206,11 +1206,13 @@ msgstr ""
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до наступного кадру\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до останнього кадру\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -1730,11 +1732,11 @@ msgid "Remove a selected color"
 msgstr ""
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Палітра з такими ж назвою та шляхом вже існує!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Назва палітри обов’язкова!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Зміна розміру палітри призведе до пересування кольорів. Кольори, для яких не вистачить місця з новим розміром палітри, буде втрачено!"
 
