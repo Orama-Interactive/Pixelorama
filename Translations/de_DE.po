@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-06-15 06:02\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -769,9 +769,6 @@ msgstr "Speichern & Beenden"
 msgid "Exit without saving"
 msgstr "Verlassen ohne zu speichern"
 
-msgid "Utility Tools"
-msgstr "Dienstwerkzeuge"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -803,9 +800,6 @@ msgstr "Farbauswahl\n"
 "Wähle eine Farbe von einem Pixel des Sprites\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste"
-
-msgid "Draw Tools"
-msgstr "Zeichnenwerkzeuge"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
