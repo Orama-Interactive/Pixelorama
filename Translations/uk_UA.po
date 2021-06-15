@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 01:10\n"
+"PO-Revision-Date: 2021-06-15 01:20\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -483,7 +483,7 @@ msgid "Display Scale"
 msgstr "Масштаб екрану"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Затемнити інтерфейс під діалоговими вікнами"
 
 msgid "Dark"
 msgstr "Темна"
@@ -504,22 +504,22 @@ msgid "Purple"
 msgstr "Фіолетова"
 
 msgid "Theme"
-msgstr ""
+msgstr "Тема"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Колір значків з:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Колір значків:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Розмір кнопок інструментів:"
 
 msgid "Small"
-msgstr ""
+msgstr "Малий"
 
 msgid "Big"
-msgstr ""
+msgstr "Великий"
 
 msgid "Only affect selection"
 msgstr "Впливає лише на обране"
@@ -711,7 +711,7 @@ msgid "Turkish"
 msgstr "Турецька"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Норвезька (букмол)"
 
 msgid "Korean"
 msgstr "Корейська"
@@ -792,7 +792,9 @@ msgstr "Масштабування\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Прокручування\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -853,59 +855,60 @@ msgid "Rectangle"
 msgstr ""
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Еліпс"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Вибрати колір для лівого інструмента"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Вибрати колір для правого інструмента"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Поміняти лівий та правий колір місцями\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Скинути кольори до стандартних (зліва чорний, справа білий)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Лівий інструмент"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Правий інструмент"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Лівий індикатор пікселя"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Показати на полотні індикатор пікселя або пензель для лівої кнопки миші при малюванні"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Правий індикатор пікселя"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Показати на полотні індикатор пікселя або пензель для правої кнопки миші при малюванні"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Показувати значок лівого інструмента"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Показує значок вибраного лівого інструмента поруч з курсором на полотні"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Показувати значок правого інструмента"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Показує значок вибраного правого інструмента поруч з курсором на полотні"
 
 msgid "Guides"
-msgstr ""
+msgstr "Напрямні лінії"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Колір напрямних:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Колір напрямних ліній на полотні"
 
 msgid "Grid"
 msgstr "Сітка"
@@ -926,16 +929,16 @@ msgid "All"
 msgstr "Усі"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Ширина прямокутної сітки:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Вказує відлеглість поміж вертикальними лініями прямокутної сітки"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Висота прямокутної сітки:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Вказує відлеглість поміж горизонтальними лініями прямокутної сітки"
 
 msgid "Isometric cell bounds width:"
 msgstr ""
@@ -950,7 +953,7 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Зсув сітки за X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
@@ -1490,7 +1493,7 @@ msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Брати кольори тільки з виділення"
 
 msgid "Get colors from"
 msgstr ""
@@ -1559,7 +1562,7 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Прямокутне виділення"
 
 msgid "Zoom"
 msgstr ""
@@ -1707,7 +1710,7 @@ msgid "From Current Sprite"
 msgstr ""
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "З поточного виділення"
 
 msgid "Add a new color"
 msgstr ""
