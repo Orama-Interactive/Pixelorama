@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-06-15 03:10\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -769,9 +769,6 @@ msgstr "Zapisz i wyjdź"
 msgid "Exit without saving"
 msgstr "Wyjdź bez zapisywania"
 
-msgid "Utility Tools"
-msgstr "Narzędzia"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -803,9 +800,6 @@ msgstr "Próbnik\n"
 "Pobiera kolor wybranego piksela do wybranego narzędzia.\n\n"
 "%s dla lewego przycisku myszy\n"
 "%s dla prawego przycisku myszy"
-
-msgid "Draw Tools"
-msgstr "Narzędzia rysowania"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
