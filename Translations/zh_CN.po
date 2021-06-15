@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 00:32\n"
 
 msgid "OK"
 msgstr "确定"
@@ -513,13 +513,13 @@ msgid "Icon color:"
 msgstr "图标颜色："
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "工具按钮大小："
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 msgid "Only affect selection"
 msgstr "仅影响所选"
