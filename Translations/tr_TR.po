@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-06-13 23:19\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -770,9 +770,6 @@ msgstr "Kaydet & Çık"
 msgid "Exit without saving"
 msgstr "Kaydetmeden çık"
 
-msgid "Utility Tools"
-msgstr "Yardımcı araçlar"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -801,9 +798,6 @@ msgstr "Damlalık\n\n"
 "Sprite pikselinden bir renk seç\n\n"
 "%s için sol tıkla\n"
 "%s için sağ tıkla"
-
-msgid "Draw Tools"
-msgstr "Çizim Aletleri"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
