@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-15 11:20\n"
+"PO-Revision-Date: 2021-06-15 12:10\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -815,12 +815,17 @@ msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Гумка\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб стерти лінію"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Заливка\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
@@ -1076,7 +1081,7 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr ""
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Піксельна точність"
 
 msgid "Fill inside"
 msgstr "Заливка всередині"
@@ -1124,19 +1129,19 @@ msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "Освітлити"
 
 msgid "Darken"
-msgstr ""
+msgstr "Затемнити"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Сила:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Сила освітлення/затемнення"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Вибрати для:"
 
 msgid "Left Color"
 msgstr "Лівий колір"
@@ -1148,49 +1153,52 @@ msgid "Mode:"
 msgstr "Режим:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Збільшити масштаб"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Зменшити масштаб"
 
 msgid "Options:"
-msgstr ""
+msgstr "Опції:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "За розміром кадру"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% масштаб"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Віддзеркалення"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Горизонтально"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Увімкнути горизонтальне віддзеркалення для малювання"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Увімкнути вертикальне віддзеркалення для малювання"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Вертикально"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Поточний кадр:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до першого кадру\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до попереднього кадру\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Відтворити анімацію зворотно (з кінця до початку)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
@@ -1264,95 +1272,96 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Синьо-червоний режим"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Додати новий кадр"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Видалити кадр"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Клонувати кадр"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Перейти вліво"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Перейти вправо"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "З’єднати клітинки"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Від’єднати клітинки"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Властивості кадру"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Властивості кадру"
 
 msgid "Layer"
-msgstr ""
+msgstr "Шар"
 
 msgid "Layers"
-msgstr ""
+msgstr "Шари"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Створити новий шар"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Видалити поточний шар"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Підняти поточний шар"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Опустити поточний шар"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Клонувати поточний шар"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Об’єднати поточний шар з шаром під ним"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Непрозорість:"
 
 msgid "Tile mode opacity:"
 msgstr "Прозорість тайлового режиму:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Перемкнути видимість шару"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Заблокувати/розблокувати шар"
 
 msgid "Frame: %s, Layer: %s"
 msgstr "Кадр: %s, шар: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Дозволити/заборонити з’єднання клітинок\n\n"
+"З’єднані клітинки використовуються в декількох шарах"
 
 msgid "Palette"
-msgstr ""
+msgstr "Палітра"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Палітри"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Додати нову палітру"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Редагувати вибрану палітру"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Вибір палітри"
 
 msgid "Undo: Draw"
 msgstr "Скасувати: малювання"
@@ -1373,46 +1382,46 @@ msgid "Redo: Scale"
 msgstr "Повторити: масштабування"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Скасувати: додавання шару"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Повторити: додавання шару"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Скасувати: видалення шару"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Повторити: видалення шару"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Скасувати: об’єднання шару"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Повторити: об’єднання шару"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Скасувати: зміна порядку шарів"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Повторити: зміна порядку шарів"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Скасувати: додавання кадру"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Повторити: додавання кадру"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Скасувати: видалення кадру"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Повторити: видалення кадру"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Скасувати: зміна порядку кадрів"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Повторити: зміна порядку кадрів"
 
 msgid "Undo: Delete Custom Brush"
 msgstr ""
@@ -1442,16 +1451,16 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Файл збережено"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Файл автоматично збережено"
 
 msgid "File failed to open. Error code %s"
 msgstr ""
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Не вдалося зберегти файл. Код помилки %s"
 
 msgid "File exported"
 msgstr ""
@@ -1499,19 +1508,19 @@ msgid "Get colors from"
 msgstr ""
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Меценати:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Хочете, щоб ваше ім’я або назва вашої компанії була на екрані завантаження?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Стати платиновим спонсором"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Стати золотим спонсором"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Стати меценатом"
 
 msgid "Don't show again"
 msgstr ""
@@ -1577,10 +1586,10 @@ msgid "Pencil"
 msgstr ""
 
 msgid "Eraser"
-msgstr ""
+msgstr "Гумка"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Заливка"
 
 msgid "Shading Tool"
 msgstr ""
@@ -1631,10 +1640,10 @@ msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Увімкнути автозбереження"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Інтервал автозбереження:"
 
 msgid "minute(s)"
 msgstr ""
@@ -1653,7 +1662,8 @@ msgstr "Видалити"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Знайдено автозбережену резервну копію для %s.\n"
+"Бажаєте її відкрити?"
 
 msgid "Backup reloaded"
 msgstr ""
