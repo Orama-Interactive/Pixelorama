@@ -758,9 +758,6 @@ msgstr ""
 msgid "Exit without saving"
 msgstr ""
 
-msgid "Utility Tools"
-msgstr ""
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -781,9 +778,6 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
-
-msgid "Draw Tools"
 msgstr ""
 
 msgid "Pencil\n\n"
