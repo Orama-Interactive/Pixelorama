@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2021-06-13 23:20\n"
+"PO-Revision-Date: 2021-06-15 11:19\n"
 
 msgid "OK"
 msgstr ""
@@ -769,9 +769,6 @@ msgstr ""
 msgid "Exit without saving"
 msgstr ""
 
-msgid "Utility Tools"
-msgstr ""
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +789,6 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
-
-msgid "Draw Tools"
 msgstr ""
 
 msgid "Pencil\n\n"
