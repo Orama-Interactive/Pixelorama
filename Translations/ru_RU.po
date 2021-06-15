@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-15 01:28\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -770,9 +770,6 @@ msgstr "Сохранить и выйти"
 msgid "Exit without saving"
 msgstr "Выйти без сохранения"
 
-msgid "Utility Tools"
-msgstr "Сервисные инструменты"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -804,9 +801,6 @@ msgstr "Выбор цвета\n"
 "Выбрать цвет из пикселя спрайта\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши"
-
-msgid "Draw Tools"
-msgstr "Инструменты рисования"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
