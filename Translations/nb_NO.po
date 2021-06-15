@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-13 23:20\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -769,9 +769,6 @@ msgstr "Lagre & Avslutt"
 msgid "Exit without saving"
 msgstr "Avslutt uten å lagre"
 
-msgid "Utility Tools"
-msgstr "Verktøy"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -803,9 +800,6 @@ msgstr "Fargevelger\n"
 "Velg en farge fra en piksel på figuren\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
-
-msgid "Draw Tools"
-msgstr "Tegneverktøy"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
