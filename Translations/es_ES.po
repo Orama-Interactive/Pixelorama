@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-06-15 11:19\n"
+"PO-Revision-Date: 2021-06-15 13:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nombre del archivo:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nombre de proyecto:"
 
 msgid "Image Size"
 msgstr "Tamaño de la imagen"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Tamaño del marco"
 
 msgid "Size:"
-msgstr ""
+msgstr "Tamaño:"
 
 msgid "Width:"
 msgstr "Ancho:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "Select"
-msgstr ""
+msgstr "Selecciona"
 
 msgid "View"
 msgstr "Ver"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "Borrar"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nuevo Pincel"
 
 msgid "Scale Image"
 msgstr "Escalar imagen"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Rotar Imagen"
 
 msgid "Clear"
-msgstr ""
+msgstr "Limpiar"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertir"
 
 msgid "Flip"
 msgstr "Girar"
@@ -181,16 +181,16 @@ msgid "Window Transparency"
 msgstr "Transparencia de ventana"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Diseño del panel"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Pantalla ancha"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Pantalla alta"
 
 msgid "Mirror View"
 msgstr "Vista de espejo"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Hoja de sprites (nueva pestaña)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Hoja de sprites (nueva capa)"
 
 msgid "New frame"
 msgstr "Nuevo fotograma"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Reemplazar marco"
 
 msgid "New layer"
 msgstr "Nueva capa"
