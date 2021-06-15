@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-06-15 13:59\n"
+"PO-Revision-Date: 2021-06-15 14:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -271,10 +271,10 @@ msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "En el cuadro:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "En la capa:"
 
 msgid "Brush type:"
 msgstr "Tipo de pincel:"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Lienzo"
 
 msgid "Selection"
-msgstr ""
+msgstr "Selección"
 
 msgid "Shortcuts"
 msgstr "Teclas de acceso directo"
@@ -483,7 +483,7 @@ msgid "Display Scale"
 msgstr "Escala de interfaz"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Atenuar interface al abrir ventana emergente"
 
 msgid "Dark"
 msgstr "Oscuro"
@@ -504,7 +504,7 @@ msgid "Purple"
 msgstr "Morado"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
 msgstr ""
