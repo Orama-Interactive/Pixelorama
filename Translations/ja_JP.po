@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-06-09 13:49\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -59,6 +59,9 @@ msgstr "ファイル"
 
 msgid "Edit"
 msgstr "編集"
+
+msgid "Select"
+msgstr "選択"
 
 msgid "View"
 msgstr "表示"
@@ -509,6 +512,15 @@ msgstr "次のもののアイコンの色:"
 msgid "Icon color:"
 msgstr "アイコンの色:"
 
+msgid "Tool button size:"
+msgstr "ツールボタンのサイズ:"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Big"
+msgstr "大"
+
 msgid "Only affect selection"
 msgstr "選択範囲のみに影響"
 
@@ -758,9 +770,6 @@ msgstr "セーブして終了"
 msgid "Exit without saving"
 msgstr "保存せずに終了"
 
-msgid "Utility Tools"
-msgstr "ユーティリティツール"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +801,6 @@ msgstr "カラーピッカー\n"
 "スプライトのピクセルから色を選択してください。\n\n"
 "%sでマウスの左ボタンを カラーピッカー に変更\n"
 "%sでマウスの右ボタンを カラーピッカー に変更"
-
-msgid "Draw Tools"
-msgstr "描画ツール"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

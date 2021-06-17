@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-09 00:38\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -59,6 +59,9 @@ msgstr "文件"
 
 msgid "Edit"
 msgstr "编辑"
+
+msgid "Select"
+msgstr "选择"
 
 msgid "View"
 msgstr "视图"
@@ -509,6 +512,15 @@ msgstr "图标颜色从："
 msgid "Icon color:"
 msgstr "图标颜色："
 
+msgid "Tool button size:"
+msgstr "工具按钮大小："
+
+msgid "Small"
+msgstr "小"
+
+msgid "Big"
+msgstr "大"
+
 msgid "Only affect selection"
 msgstr "仅影响所选"
 
@@ -758,9 +770,6 @@ msgstr "保存并退出"
 msgid "Exit without saving"
 msgstr "退出且不保存"
 
-msgid "Utility Tools"
-msgstr "实用工具"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +801,6 @@ msgstr "拾色器\n"
 "从子画面像素选择颜色\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
-
-msgid "Draw Tools"
-msgstr "绘图工具"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

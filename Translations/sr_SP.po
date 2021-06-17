@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2021-06-08 17:01\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -59,6 +59,9 @@ msgstr "Фајл"
 
 msgid "Edit"
 msgstr "Уреди"
+
+msgid "Select"
+msgstr ""
 
 msgid "View"
 msgstr "Преглед"
@@ -508,6 +511,15 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr ""
 
@@ -757,9 +769,6 @@ msgstr "Сачувај & изађи"
 msgid "Exit without saving"
 msgstr "Изађи без чувања"
 
-msgid "Utility Tools"
-msgstr ""
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -780,9 +789,6 @@ msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
-
-msgid "Draw Tools"
 msgstr ""
 
 msgid "Pencil\n\n"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-06-08 17:00\n"
+"PO-Revision-Date: 2021-06-15 14:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nombre del archivo:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nombre de proyecto:"
 
 msgid "Image Size"
 msgstr "Tamaño de la imagen"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Tamaño del marco"
 
 msgid "Size:"
-msgstr ""
+msgstr "Tamaño:"
 
 msgid "Width:"
 msgstr "Ancho:"
@@ -59,6 +59,9 @@ msgstr "Archivo"
 
 msgid "Edit"
 msgstr "Editar"
+
+msgid "Select"
+msgstr "Selecciona"
 
 msgid "View"
 msgstr "Ver"
@@ -130,7 +133,7 @@ msgid "Delete"
 msgstr "Borrar"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nuevo Pincel"
 
 msgid "Scale Image"
 msgstr "Escalar imagen"
@@ -154,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Rotar Imagen"
 
 msgid "Clear"
-msgstr ""
+msgstr "Limpiar"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertir"
 
 msgid "Flip"
 msgstr "Girar"
@@ -178,16 +181,16 @@ msgid "Window Transparency"
 msgstr "Transparencia de ventana"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Diseño del panel"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Pantalla ancha"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Pantalla alta"
 
 msgid "Mirror View"
 msgstr "Vista de espejo"
@@ -238,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Hoja de sprites (nueva pestaña)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Hoja de sprites (nueva capa)"
 
 msgid "New frame"
 msgstr "Nuevo fotograma"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Reemplazar marco"
 
 msgid "New layer"
 msgstr "Nueva capa"
@@ -265,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Fotogramas verticales:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Fotograma inicial:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "En el cuadro:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "En la capa:"
 
 msgid "Brush type:"
 msgstr "Tipo de pincel:"
@@ -432,7 +435,7 @@ msgid "Canvas"
 msgstr "Lienzo"
 
 msgid "Selection"
-msgstr ""
+msgstr "Selección"
 
 msgid "Shortcuts"
 msgstr "Teclas de acceso directo"
@@ -480,7 +483,7 @@ msgid "Display Scale"
 msgstr "Escala de interfaz"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Atenuar interface al abrir ventana emergente"
 
 msgid "Dark"
 msgstr "Oscuro"
@@ -501,12 +504,21 @@ msgid "Purple"
 msgstr "Morado"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
+msgstr ""
+
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
 msgstr ""
 
 msgid "Only affect selection"
@@ -758,9 +770,6 @@ msgstr "Guardar y salir"
 msgid "Exit without saving"
 msgstr "Salir sin guardar"
 
-msgid "Utility Tools"
-msgstr "Utilidades"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -790,9 +799,6 @@ msgstr "Selector de color\n"
 "Seleccione un color de un píxel del sprite\n\n"
 "%s para el botón izquierdo del ratón\n"
 "%s para el botón derecho del ratón"
-
-msgid "Draw Tools"
-msgstr "Herramientas de Dibujo"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

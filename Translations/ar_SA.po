@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-06-08 17:00\n"
+"PO-Revision-Date: 2021-06-15 11:19\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -59,6 +59,9 @@ msgstr "الملف"
 
 msgid "Edit"
 msgstr "تعديل"
+
+msgid "Select"
+msgstr ""
 
 msgid "View"
 msgstr "عرض"
@@ -509,6 +512,15 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr ""
 
@@ -758,9 +770,6 @@ msgstr "حفظ وخروج"
 msgid "Exit without saving"
 msgstr "الخروج دون حفظ"
 
-msgid "Utility Tools"
-msgstr "أدوات مفيدة"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -790,9 +799,6 @@ msgstr "منتقي الألوان\n"
 "حدد لون من بكسل سبريت\n\n"
 "%s لزر الماوس الأيسر\n"
 "%s لزر الماوس الأيمن"
-
-msgid "Draw Tools"
-msgstr "أدوات الرسم"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-08 17:00\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Filnavn:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Prosjektnavn:"
 
 msgid "Image Size"
 msgstr "Bildestørrelse"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Bildestørrelse"
 
 msgid "Size:"
-msgstr ""
+msgstr "Størrelse:"
 
 msgid "Width:"
 msgstr "Bredde:"
@@ -59,6 +59,9 @@ msgstr "Fil"
 
 msgid "Edit"
 msgstr "Rediger"
+
+msgid "Select"
+msgstr "Velg"
 
 msgid "View"
 msgstr "Vis"
@@ -121,7 +124,7 @@ msgid "Copy"
 msgstr "Kopier"
 
 msgid "Cut"
-msgstr ""
+msgstr "Klipp"
 
 msgid "Paste"
 msgstr "Lim inn"
@@ -130,16 +133,16 @@ msgid "Delete"
 msgstr "Slett"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Ny Børste"
 
 msgid "Scale Image"
 msgstr "Skalér Bilde"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Piksler"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Prosentandel"
 
 msgid "Crop Image"
 msgstr "Beskjær Bilde"
@@ -148,16 +151,16 @@ msgid "Resize Canvas"
 msgstr "Forandre Størrelse på Lerret"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Sentrer Bildet"
 
 msgid "Rotate Image"
 msgstr "Rotér Bilde"
 
 msgid "Clear"
-msgstr ""
+msgstr "Nullstill"
 
 msgid "Invert"
-msgstr ""
+msgstr "Inverter"
 
 msgid "Flip"
 msgstr "Vend"
@@ -175,28 +178,28 @@ msgid "Tile Mode"
 msgstr "Flismodus"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Vindusgjennomsiktighet"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Paneloppsett"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatisk"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Widescreen"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Tallscreen"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Speilet Visning"
 
 msgid "Show Grid"
 msgstr "Vis Rutenett"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Vis Pikselrutenett"
 
 msgid "Show Rulers"
 msgstr "Vis Linjaler"
@@ -229,7 +232,7 @@ msgid "Import as:"
 msgstr "Importér som:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Siste prosjekter"
 
 msgid "New tab"
 msgstr "Ny fane"
@@ -238,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Tegneark (ny fane)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Tegneark (nytt lag)"
 
 msgid "New frame"
 msgstr "Nytt bilde"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Erstatt bilde"
 
 msgid "New layer"
 msgstr "Nytt lag"
@@ -265,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Vertikale bilder:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Startbilde:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "På bilde:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "På lag:"
 
 msgid "Brush type:"
 msgstr "Børstetype:"
@@ -371,7 +374,7 @@ msgid "Backwards"
 msgstr "Bakover"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
 msgstr "Kolonner"
@@ -422,7 +425,7 @@ msgid "Language"
 msgstr "Språk"
 
 msgid "Interface"
-msgstr ""
+msgstr "Grensesnitt"
 
 msgid "Themes"
 msgstr "Temaer"
@@ -431,7 +434,7 @@ msgid "Canvas"
 msgstr "Lerret"
 
 msgid "Selection"
-msgstr ""
+msgstr "Markert Område"
 
 msgid "Shortcuts"
 msgstr "Snarveier"
@@ -440,7 +443,7 @@ msgid "Backup"
 msgstr "Sikkerhetskopi"
 
 msgid "Performance"
-msgstr ""
+msgstr "Ytelse"
 
 msgid "Indicators"
 msgstr "Indikatorer"
@@ -476,10 +479,10 @@ msgid "System Language"
 msgstr "Systemspråk"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Skalering av Grensesnitt"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Mørklegg grensesnittet bak dialogvindu"
 
 msgid "Dark"
 msgstr "Mørk"
@@ -497,15 +500,24 @@ msgid "Light"
 msgstr "Lys"
 
 msgid "Purple"
-msgstr ""
+msgstr "Lilla"
 
 msgid "Theme"
-msgstr ""
+msgstr "Utseende"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Ikonfarge fra:"
 
 msgid "Icon color:"
+msgstr "Ikonfarge:"
+
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
 msgstr ""
 
 msgid "Only affect selection"
@@ -548,31 +560,31 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr "Justér Fargetone/Metning/Verdi"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradient"
 
 msgid "Adjust HSV"
 msgstr "Justér HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 msgid "Angle:"
 msgstr "Vinkel:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Fargetone:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Metning:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Verdi:"
 
 msgid "Apply"
 msgstr "Bruk"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
 msgstr "Plassér inne i bildet"
@@ -620,7 +632,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Utviklet av Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-nå av Orama Interaktive og bidragsytere"
 
 msgid "Website"
 msgstr "Nettside"
@@ -683,7 +695,7 @@ msgid "Catalan"
 msgstr "Katalansk"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
 msgstr "Indonesisk"
@@ -698,7 +710,7 @@ msgid "Turkish"
 msgstr "Tyrkisk"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norsk Bokmål"
 
 msgid "Korean"
 msgstr "Koreansk"
@@ -710,7 +722,7 @@ msgid "Romanian"
 msgstr "Rumensk"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japansk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
@@ -757,9 +769,6 @@ msgstr "Lagre & Avslutt"
 msgid "Exit without saving"
 msgstr "Avslutt uten å lagre"
 
-msgid "Utility Tools"
-msgstr "Verktøy"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -779,7 +788,9 @@ msgstr "Zoom\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Panorer\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -789,9 +800,6 @@ msgstr "Fargevelger\n"
 "Velg en farge fra en piksel på figuren\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
-
-msgid "Draw Tools"
-msgstr "Tegneverktøy"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -821,7 +829,9 @@ msgstr "Bøtte\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Skyggeleggeverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -829,7 +839,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Linjeverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å feste linjevinkelen\n"
+"Hold %s for å sentrere formen på klikkets opprinnelse\n"
+"Hold %s for å forskyve formens opprinnelse\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -837,7 +852,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Rektangelverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å lage et kvadrat\n"
+"Hold %s for å sentrere formen på klikkets opprinnelse\n"
+"Hold %s for å forskyve formens opprinnelse\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -845,13 +865,18 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Rektangelverktøy\n\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Hold %s for å lage en sirkel\n"
+"Hold %s for å sentrere formen på klikkets opprinnelse\n"
+"Hold %s for å forskyve formens opprinnelse\n"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rektangel"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Velg en farge for venstre verktøy"
@@ -925,46 +950,46 @@ msgid "All"
 msgstr "Alle"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Rektangulært rutenettbredde:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Angir hvor stort mellomrom det er mellom de vertikale linjene i det rektangulære rutenettet"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Rektangulært rutenetthøyde:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Angir hvor stort mellomrom det er mellom de horisontale linjene i det rektangulære rutenettet"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Isometrisk cellebredde:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Angir bredden på den isometriske cellens aksejusterte avgrensningsboks"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Isometrisk cellehøyde:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Angir høyden på den isometriske cellens aksejusterte avgrensningsboks"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Rutenettforskyvning x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Angir rutenettets x-forskyvning fra lerretets opprinnelse (øvert til venstre i bildet)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Rutenettforskyvning y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Angir rutenettets y-forskyvning fra lerretets opprinnelse (øvert til venstre i bildet)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Tegn over Flismodus:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Hvis deaktivert vil rutenettet bare bli tegnet over det opprinnelige bildet"
 
 msgid "Grid color:"
 msgstr "Rutenettfarge:"
@@ -973,76 +998,76 @@ msgid "A color of the grid"
 msgstr "En farge av rutenettet"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pikselrutenett"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Vis ved zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Angir minimal zoom som viser pikselrutenettet"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Pikselrutenettfarge:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "En farge av pikselrutenettet"
 
 msgid "Transparency"
 msgstr "Gjennomsiktighet"
 
 msgid "Checker size:"
-msgstr "Størrelse på sjekkere:"
+msgstr "Størrelse på sjakkbrett:"
 
 msgid "Size of the transparent checker background"
-msgstr "Størrelse på den gjennomsiktige bakgrunnen av sjekkere"
+msgstr "Størrelse på den gjennomsiktige sjakk-bakgrunnen"
 
 msgid "Checker color 1:"
-msgstr "Sjekkerfarge 1:"
+msgstr "Sjakkbrettfarge 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Første farge på den gjennomsiktige bakgrunnen av sjekkere"
+msgstr "Første farge på den gjennomsiktige sjakk-bakgrunnen"
 
 msgid "Checker color 2:"
-msgstr "Sjekkerfarge 2:"
+msgstr "Sjakkbrettfarge 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Andre farge på den gjennomsiktige bakgrunnen av sjekkere"
+msgstr "Andre farge på den gjennomsiktige sjakk-bakgrunnen"
 
 msgid "Follow Canvas Movement"
 msgstr "Følg lerretbevegelse"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Den gjennomsiktige sjakk-bakgrunnen følger lerretets bevegelse"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Følg lerretets forstørrelse"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Den gjennomsiktige sjakk-bakgrunnen følger zoom-nivået på lerretet"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Animerte markeringslinjer"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Kantfarge 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Kantfarge 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Sett prorgammets grense for bilder per sekund:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Begrens til ett bilde per sekund når programmet ikke har fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Hvis denne er påslått og programmet mister fokus vil programmet kun oppdateres i ett bilde per sekund. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
 
 msgid "Brush:"
 msgstr "Børste:"
@@ -1075,16 +1100,16 @@ msgid "Pixel Perfect"
 msgstr "Pikselperfekt"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Fyll inn"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Fyll Form"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Fyller den tegnede formen med farge i stedet for å tegne en hul form"
 
 msgid "Brush color from"
 msgstr "Børstefarge fra"
@@ -1114,10 +1139,10 @@ msgid "Offset"
 msgstr "Forskyvning"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Enkel Skyggelegging"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Fargetoneskifting"
 
 msgid "Lighten"
 msgstr "Lys opp"
@@ -1156,7 +1181,7 @@ msgid "Fit to frame"
 msgstr "Tilpass til bilde"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Zoom"
 
 msgid "Mirroring"
 msgstr "Speiling"
@@ -1293,10 +1318,10 @@ msgid "Unlink Cel"
 msgstr "Koble Fra Celle"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Bildeegenskaper"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Bildeegenskaper"
 
 msgid "Layer"
 msgstr "Lag"
@@ -1326,7 +1351,7 @@ msgid "Opacity:"
 msgstr "Gjennomsiktighet:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Flismodusgjennomsiktighet:"
 
 msgid "Toggle layer's visibility"
 msgstr "Vis/Skjul lag"
@@ -1436,10 +1461,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Gjør om: Slett Bildemerkelapp"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Angre: Endre bildevarighet"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Gjør om: Endre bildevarighet"
 
 msgid "Move Guide"
 msgstr "Flytteveiledning"
@@ -1451,10 +1476,10 @@ msgid "File autosaved"
 msgstr "Fil automatisk lagret"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Filen kunne ikke åpnes. Feilkode %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Filen kunne ikke lagres. Feilkode %s"
 
 msgid "File exported"
 msgstr "Fil eksportert"
@@ -1493,13 +1518,13 @@ msgid "Edit Palette"
 msgstr "Redigér Palett"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Opprett farger med alfa-komponent"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Hent farger kun fra valgt område"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Hent farger fra"
 
 msgid "Patrons:"
 msgstr "Abonnenter på Patreon:"
@@ -1541,13 +1566,13 @@ msgid "A default background color of a new image"
 msgstr "En standard bakgrunnsfarge for et nytt bilde"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Lås størrelsesforhold"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Portrett"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Landskap"
 
 msgid "Templates:"
 msgstr "Maler:"
@@ -1568,10 +1593,10 @@ msgid "Rectangular Selection"
 msgstr "Rektangulær Markering"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Pan"
-msgstr ""
+msgstr "Panorér"
 
 msgid "Color Picker"
 msgstr "Fargevelger"
@@ -1586,7 +1611,7 @@ msgid "Bucket"
 msgstr "Bøtte"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Skyggeleggingverktøy"
 
 msgid "Switch Colors"
 msgstr "Bytt Farger"
@@ -1616,7 +1641,7 @@ msgid "Cannot find last project file."
 msgstr "Finner ikke siste prosjektfil."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Kan ikke finne prosjektfil."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Du har ikke lagret eller åpnet et prosjekt i Pixelorama enda!"
@@ -1652,7 +1677,7 @@ msgid "Close"
 msgstr "Lukk"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1666,7 +1691,7 @@ msgid "Remove currently selected palette"
 msgstr "Fjern valgt palett"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Er du sikker på at du vil fjerne denne fargepaletten? (Dette kan ikke omgjøres)"
 
 msgid "You can't remove more palettes!"
 msgstr "Du kan ikke fjerne flere paletter!"
@@ -1681,53 +1706,53 @@ msgid "and"
 msgstr "og"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Flytt det merkede bildet til venstre."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Flytt det merkede bildet til høyre."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Bildevarighet"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Flislagt i begge Akser"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Flislagt I X-aksen"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Flislagt I Y-aksen"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Opprett en ny fargepalett"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Kommentar:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Fra Nåværende Palett"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Fra Nåværende Figur"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Fra Nåværende Markert Område"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Legg til en ny farge"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Fjern en valgt farge"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Palett med samme navn og bane finnes allerede!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Palettnavn er påkrevd!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Redusering av palettstørrelse vil nullstille fargenes lagrede posisjon. Farger som ikke passer inn i den nye palettstørrelsen vil gå tapt!"
 
