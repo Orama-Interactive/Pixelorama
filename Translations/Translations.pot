@@ -713,6 +713,9 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
+msgid "Ukrainian"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 
