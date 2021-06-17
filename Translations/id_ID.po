@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-06-15 11:20\n"
+"PO-Revision-Date: 2021-06-17 21:22\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -723,6 +723,9 @@ msgid "Romanian"
 msgstr "Bahasa Romania"
 
 msgid "Japanese"
+msgstr ""
+
+msgid "Ukrainian"
 msgstr ""
 
 msgid "Development Team"
