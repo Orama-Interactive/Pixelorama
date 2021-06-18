@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-17 21:22\n"
+"PO-Revision-Date: 2021-06-18 08:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -241,7 +241,7 @@ msgid "Spritesheet (new tab)"
 msgstr "Таблица спрайтов (новая вкладка)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Таблица спрайтов (новый слой)"
 
 msgid "New frame"
 msgstr "Новый кадр"
@@ -726,7 +726,7 @@ msgid "Japanese"
 msgstr "Японский"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украинский"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
@@ -1251,7 +1251,7 @@ msgid "Manage frame tags"
 msgstr ""
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Свойства метки кадров"
 
 msgid "Add a new frame tag"
 msgstr "Добавить новую метку"
@@ -1269,10 +1269,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Анимация воспроизводится только на фреймах одной и той же метки"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Метка %s (Кадр %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Метка %s (Кадры %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1436,7 +1436,7 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Повторить: Удаление своей кисти"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Отменить: Изменить метку кадра"
 
 msgid "Redo: Modify Frame Tag"
 msgstr "Повтор: Изменить метку кадра"
