@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-18 15:06\n"
+"PO-Revision-Date: 2021-06-19 09:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -978,16 +978,16 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Сдвиг сетки по X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Устанавливает смещение сетки по X от начала координат холста (верхнего левого угла изображения)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Сдвиг сетки по Y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Устанавливает смещение сетки по Y от начала координат холста (верхнего левого угла изображения)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Показывать в бесшовном режиме:"
@@ -1236,10 +1236,10 @@ msgstr "Перейти на последний кадр\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Настройки шлейфа соседних кадров"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Включить/выключить шлейф кадров"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1265,7 +1265,7 @@ msgid "Future Frames"
 msgstr "Последующие кадры"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Управление метками кадров"
 
 msgid "Frame Tag Properties"
 msgstr "Свойства метки кадров"
