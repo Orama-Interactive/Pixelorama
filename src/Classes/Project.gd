@@ -615,16 +615,16 @@ func is_empty() -> bool:
 	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
 
 
-func can_pixel_get_drawn(pixel : Vector2) -> bool:
+func can_pixel_get_drawn(pixel : Vector2, bitmap : BitMap = selection_bitmap, selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
-	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+
 	if selection_position.x < 0:
 		pixel.x -= selection_position.x
 	if selection_position.y < 0:
 		pixel.y -= selection_position.y
 	if has_selection:
-		return selection_bitmap.get_bit(pixel)
+		return bitmap.get_bit(pixel)
 	else:
 		return true
 

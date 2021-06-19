@@ -673,12 +673,13 @@ func update_recent_projects_submenu() -> void:
 	for project in recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
 
+
 func use_osx_shortcuts() -> void:
 	var inputmap := InputMap
 
 	for action in inputmap.get_actions():
 		var event : InputEvent = inputmap.get_action_list(action)[0]
-		
+
 		if event.is_action("show_pixel_grid"):
 			event.shift = true
 
