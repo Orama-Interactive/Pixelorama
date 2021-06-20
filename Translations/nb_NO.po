@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-17 21:22\n"
+"PO-Revision-Date: 2021-06-20 20:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -515,10 +515,10 @@ msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 msgid "Big"
-msgstr ""
+msgstr "Stor"
 
 msgid "Only affect selection"
 msgstr "Bare påvirk merket område"
@@ -725,7 +725,7 @@ msgid "Japanese"
 msgstr "Japansk"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainsk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
