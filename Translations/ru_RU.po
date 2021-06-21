@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-19 09:48\n"
+"PO-Revision-Date: 2021-06-21 14:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1071,7 +1071,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr ""
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Если этот параметр включён, при потере фокуса количество кадров в секунду будет установлено равным 1. Это позволяет снизить нагрузку на процессор при бездействии. Лимит количества кадров сбрасывается при движении мыши в окне приложения."
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -1293,7 +1293,8 @@ msgstr "Метка %s (Кадры %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Если этот параметр включён, при анимации будут проигрываться только кадры с той же меткой.\n"
+"Если выключен, анимация будет включать все кадры, независимо от меток."
 
 msgid "Blue-Red Mode"
 msgstr "Сине-красный режим"
