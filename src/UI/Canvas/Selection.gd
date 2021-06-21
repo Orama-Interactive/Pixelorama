@@ -469,7 +469,7 @@ func transform_content_confirm() -> void:
 		if frame < project.frames.size() and layer < project.layers.size():
 			var cel_image : Image = project.frames[frame].cels[layer].image
 			var src : Image = preview_image
-			if not (frame == project.current_frame and layer == project.current_layer):
+			if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
 				src = get_selected_image(cel_image)
 				src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
 				if temp_rect.size.x < 0:
