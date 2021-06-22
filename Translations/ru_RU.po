@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-21 14:27\n"
+"PO-Revision-Date: 2021-06-22 20:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -211,7 +211,7 @@ msgid "Show Animation Timeline"
 msgstr "Показать таймлайн анимации"
 
 msgid "Zen Mode"
-msgstr "Режим \"Дзен\""
+msgstr "Режим «Дзен»"
 
 msgid "Fullscreen Mode"
 msgstr "Во весь экран"
@@ -525,7 +525,7 @@ msgid "Only affect selection"
 msgstr "Менять только выделенное"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Текущая ячейка"
 
 msgid "Current frame"
 msgstr "Текущий кадр"
@@ -966,16 +966,16 @@ msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Ширина границ изометрической клетки:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Устанавливает ширину границ, в которые вписывается изометрическая клетка"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Высота границ изометрической клетки:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Устанавливает высоту границ, в которые вписывается изометрическая клетка"
 
 msgid "Grid offset x:"
 msgstr "Сдвиг сетки по X:"
@@ -1068,7 +1068,7 @@ msgid "Limit FPS to 1 when app loses focus"
 msgstr "Ограничить до 1 кадра в секунду, когда приложение в фоне"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Устанавливает лимит на количество кадров в секунду для программы. Чем ниже это число, тем меньше используется процессор, но приложение становится медленнее, дольше реагирует на действия, а движения будут менее плавными. 0 значит отсутствие лимита."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
 msgstr "Если этот параметр включён, при потере фокуса количество кадров в секунду будет установлено равным 1. Это позволяет снизить нагрузку на процессор при бездействии. Лимит количества кадров сбрасывается при движении мыши в окне приложения."
@@ -1318,10 +1318,10 @@ msgid "Add Frame Tag"
 msgstr "Добавить тег кадра"
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Соединить ячейки"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Разъединить ячейки"
 
 msgid "Frame Properties"
 msgstr "Свойства кадра"
@@ -1370,7 +1370,8 @@ msgstr "Кадр: %s, слой: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Включить/выключить соединение ячеек\n\n"
+"Соединённые ячейки используются в нескольких кадрах"
 
 msgid "Palette"
 msgstr "Палитра"
