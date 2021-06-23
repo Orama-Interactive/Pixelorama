@@ -85,6 +85,7 @@ func draw_start(position : Vector2) -> void:
 			_move_content = true
 			if Tools.alt: # Move the selection without cutting it from the original position / makes a quick copy of it
 				selection_node.transform_content_confirm()
+				selection_node.clear_in_selected_cels = false
 			selection_node.transform_content_start()
 			if Tools.alt: # Continuation of the above
 				var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image

@@ -63,6 +63,7 @@ var gizmos := [] # Array of Gizmos
 var dragged_gizmo : Gizmo = null
 var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
+var clear_in_selected_cels := true
 
 onready var marching_ants_outline : Sprite = $MarchingAntsOutline
 
@@ -470,7 +471,7 @@ func transform_content_confirm() -> void:
 			var cel_image : Image = project.frames[frame].cels[layer].image
 			var src : Image = preview_image
 			if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
-				src = get_selected_image(cel_image)
+				src = get_selected_image(cel_image, clear_in_selected_cels)
 				src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
 				if temp_rect.size.x < 0:
 					src.flip_x()
@@ -488,6 +489,7 @@ func transform_content_confirm() -> void:
 	original_bitmap = BitMap.new()
 	is_moving_content = false
 	is_pasting = false
+	clear_in_selected_cels = true
 	update()
 
 
@@ -766,7 +768,7 @@ func get_preview_image() -> void:
 	Global.canvas.update_texture(project.current_layer)
 
 
-func get_selected_image(cel_image : Image) -> Image:
+func get_selected_image(cel_image : Image, clear := true) -> Image:
 	var project : Project = Global.current_project
 	var image := Image.new()
 	image = cel_image.get_rect(original_big_bounding_rectangle)
@@ -782,9 +784,10 @@ func get_selected_image(cel_image : Image) -> Image:
 	if image.is_invisible():
 		return image
 
-	var clear_image := Image.new()
-	clear_image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
-	cel_image.blit_rect_mask(clear_image, image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), original_big_bounding_rectangle.position)
-	Global.canvas.update_texture(project.current_layer)
+	if clear:
+		var clear_image := Image.new()
+		clear_image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
+		cel_image.blit_rect_mask(clear_image, image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), original_big_bounding_rectangle.position)
+		Global.canvas.update_texture(project.current_layer)
 
 	return image
