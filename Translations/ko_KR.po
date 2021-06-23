@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-06-09 02:18\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "예"
@@ -59,6 +59,9 @@ msgstr "파일"
 
 msgid "Edit"
 msgstr "편집"
+
+msgid "Select"
+msgstr "선택"
 
 msgid "View"
 msgstr "보기"
@@ -509,6 +512,15 @@ msgstr ""
 msgid "Icon color:"
 msgstr "아이콘 색상:"
 
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr "선택 영역만 영향을 줌"
 
@@ -758,9 +770,6 @@ msgstr "저장 및 종료"
 msgid "Exit without saving"
 msgstr "저장하지 않고 종료"
 
-msgid "Utility Tools"
-msgstr "유틸리티 도구"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +801,6 @@ msgstr "색상 선택기\n"
 "스프라이트에 있는 픽셀의 색상을 선택\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
-
-msgid "Draw Tools"
-msgstr "그리기 툴"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-06-08 18:40\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -59,6 +59,9 @@ msgstr "Datei"
 
 msgid "Edit"
 msgstr "Bearbeiten"
+
+msgid "Select"
+msgstr "Auswählen"
 
 msgid "View"
 msgstr "Ansicht"
@@ -508,6 +511,15 @@ msgstr "Icon-Farbe von:"
 msgid "Icon color:"
 msgstr "Icon-Farbe:"
 
+msgid "Tool button size:"
+msgstr "Werkzeugbutton-Größe:"
+
+msgid "Small"
+msgstr "Klein"
+
+msgid "Big"
+msgstr "Groß"
+
 msgid "Only affect selection"
 msgstr "Nur Auswahl beeinflussen"
 
@@ -757,9 +769,6 @@ msgstr "Speichern & Beenden"
 msgid "Exit without saving"
 msgstr "Verlassen ohne zu speichern"
 
-msgid "Utility Tools"
-msgstr "Dienstwerkzeuge"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -791,9 +800,6 @@ msgstr "Farbauswahl\n"
 "Wähle eine Farbe von einem Pixel des Sprites\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste"
-
-msgid "Draw Tools"
-msgstr "Zeichnenwerkzeuge"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -833,7 +839,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Linienwerkzeug\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Halten Sie %s gedrückt, um den Winkel der Linie ein zurasten\n"
+"Halten Sie %s gedrückt, um die Form auf dem Klick-Ursprung zu zentrieren\n"
+"Halten Sie %s, um den Ursprung der Form zu verschieben\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"

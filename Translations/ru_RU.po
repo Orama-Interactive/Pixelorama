@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-06-08 17:00\n"
+"PO-Revision-Date: 2021-06-16 15:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Размер холста"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Размер кадра"
 
 msgid "Size:"
 msgstr "Размер:"
@@ -59,6 +59,9 @@ msgstr "Файл"
 
 msgid "Edit"
 msgstr "Редактировать"
+
+msgid "Select"
+msgstr "Выделить"
 
 msgid "View"
 msgstr "Просмотр"
@@ -509,6 +512,15 @@ msgstr "Цвет значка из:"
 msgid "Icon color:"
 msgstr "Цвет значка:"
 
+msgid "Tool button size:"
+msgstr "Размер кнопок инструментов:"
+
+msgid "Small"
+msgstr "Маленький"
+
+msgid "Big"
+msgstr "Большой"
+
 msgid "Only affect selection"
 msgstr "Менять только выделенное"
 
@@ -699,7 +711,7 @@ msgid "Turkish"
 msgstr "Турецкий"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Норвежский (букмол)"
 
 msgid "Korean"
 msgstr "Корейский"
@@ -758,9 +770,6 @@ msgstr "Сохранить и выйти"
 msgid "Exit without saving"
 msgstr "Выйти без сохранения"
 
-msgid "Utility Tools"
-msgstr "Сервисные инструменты"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +801,6 @@ msgstr "Выбор цвета\n"
 "Выбрать цвет из пикселя спрайта\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши"
-
-msgid "Draw Tools"
-msgstr "Инструменты рисования"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -934,7 +940,7 @@ msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr "Устанавливает расстояние между вертикальными линиями прямоугольной сетки"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Высота прямоугольной сетки:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
@@ -964,7 +970,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Показывать в бесшовном режиме:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr "Если отключено, сетка будет рисоваться только поверх исходного изображения"
@@ -1078,7 +1084,7 @@ msgid "Pixel Perfect"
 msgstr "Пиксельная точность"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Залить внутри"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
@@ -1120,7 +1126,7 @@ msgid "Simple Shading"
 msgstr "Простое затенение"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Сдвиг оттенка"
 
 msgid "Lighten"
 msgstr "Осветлить"
@@ -1248,7 +1254,7 @@ msgid "Add a new frame tag"
 msgstr "Добавить новую метку"
 
 msgid "Name:"
-msgstr ""
+msgstr "Название:"
 
 msgid "From:"
 msgstr "От:"
@@ -1693,13 +1699,13 @@ msgid "Frame duration"
 msgstr "Длительность кадра"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Повторять по обеим осям"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Повторять по оси X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Повторять по оси Y"
 
 msgid "Create a new palette"
 msgstr "Создать новую палитру"

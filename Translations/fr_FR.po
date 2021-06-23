@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-06-08 17:00\n"
+"PO-Revision-Date: 2021-06-15 11:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -59,6 +59,9 @@ msgstr "Fichier"
 
 msgid "Edit"
 msgstr "Édition"
+
+msgid "Select"
+msgstr ""
 
 msgid "View"
 msgstr "Affichage"
@@ -509,6 +512,15 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr "Affecter uniquement la sélection"
 
@@ -758,9 +770,6 @@ msgstr "Enregistrer et quitter"
 msgid "Exit without saving"
 msgstr "Quitter sans enregistrer"
 
-msgid "Utility Tools"
-msgstr "Outils utilitaires"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +801,6 @@ msgstr "Sélecteur de couleurs\n"
 "Sélectionnez la couleur d'un pixel de la sprite\n\n"
 "%s pour le bouton gauche de la souris\n"
 "%s pour le bouton droit de la souris"
-
-msgid "Draw Tools"
-msgstr "Outils de dessin"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

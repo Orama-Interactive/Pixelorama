@@ -10,13 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-08 17:01\n"
+"PO-Revision-Date: 2021-06-15 14:35\n"
 
 msgid "OK"
 msgstr "Гаразд"
 
 msgid "Cancel"
-msgstr "Відмінити"
+msgstr "Скасувати"
 
 msgid "Open"
 msgstr "Відкрити"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Ім'я файлу:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Назва проєкту:"
 
 msgid "Image Size"
 msgstr "Розмір зображення"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Розмір кадру"
 
 msgid "Size:"
-msgstr ""
+msgstr "Розмір:"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -59,6 +59,9 @@ msgstr "Файл"
 
 msgid "Edit"
 msgstr "Редагувати"
+
+msgid "Select"
+msgstr "Виділення"
 
 msgid "View"
 msgstr "Перегляд"
@@ -112,10 +115,10 @@ msgid "Quit"
 msgstr "Вийти"
 
 msgid "Undo"
-msgstr "Відмінити"
+msgstr "Скасувати"
 
 msgid "Redo"
-msgstr "Відновити"
+msgstr "Повторити"
 
 msgid "Copy"
 msgstr "Копіювати"
@@ -130,7 +133,7 @@ msgid "Delete"
 msgstr "Вилучити"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Новий пензель"
 
 msgid "Scale Image"
 msgstr "Масштабувати зображення"
@@ -154,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Повернути зображення"
 
 msgid "Clear"
-msgstr ""
+msgstr "Очистити"
 
 msgid "Invert"
-msgstr ""
+msgstr "Інвертувати"
 
 msgid "Flip"
 msgstr "Віддзеркалити"
@@ -172,22 +175,22 @@ msgid "Preferences"
 msgstr "Налаштування"
 
 msgid "Tile Mode"
-msgstr "Режим плитки"
+msgstr "Безшовний режим"
 
 msgid "Window Transparency"
 msgstr "Прозорість вікна"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Позиція панелей"
 
 msgid "Auto"
-msgstr ""
+msgstr "Автоматична"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Для широкого екрана"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Для високого екрана"
 
 msgid "Mirror View"
 msgstr "Дзеркальний перегляд"
@@ -229,7 +232,7 @@ msgid "Import as:"
 msgstr "Імпортувати як:"
 
 msgid "Recent projects"
-msgstr "Нещодавні проекти"
+msgstr "Нещодавні проєкти"
 
 msgid "New tab"
 msgstr "Нова вкладка"
@@ -238,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Таблиця спрайтів (нова вкладка)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Таблиця спрайтів (новий шар)"
 
 msgid "New frame"
 msgstr "Новий кадр"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Замінити кадр"
 
 msgid "New layer"
 msgstr "Новий шар"
@@ -253,7 +256,7 @@ msgid "New palette"
 msgstr "Нова палітра"
 
 msgid "New brush"
-msgstr "Нова щітка"
+msgstr "Новий пензель"
 
 msgid "New pattern"
 msgstr "Новий шаблон"
@@ -265,25 +268,25 @@ msgid "Vertical frames:"
 msgstr "Вертикальні кадри:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Початковий кадр:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "До кадру:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "На шарі:"
 
 msgid "Brush type:"
-msgstr "Тип пензлика:"
+msgstr "Тип пензля:"
 
 msgid "File brush"
 msgstr "Файл щітки"
 
 msgid "Project brush"
-msgstr "Пензль проекту"
+msgstr "Пензель проєкту"
 
 msgid "Random brush"
-msgstr "Випадковий пензлик"
+msgstr "Випадковий пензель"
 
 msgid "Save Sprite as .pxo"
 msgstr "Зберегти спрайт як .pxo"
@@ -432,7 +435,7 @@ msgid "Canvas"
 msgstr "Полотно"
 
 msgid "Selection"
-msgstr ""
+msgstr "Виділення"
 
 msgid "Shortcuts"
 msgstr "Ярлики"
@@ -465,7 +468,7 @@ msgid "None"
 msgstr "Нічого"
 
 msgid "Affect Brush's Alpha"
-msgstr "Вплив на альфу щітки"
+msgstr "Вплив на альфу пензля"
 
 msgid "Color:"
 msgstr "Колір:"
@@ -480,7 +483,7 @@ msgid "Display Scale"
 msgstr "Масштаб екрану"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Затемнити інтерфейс під діалоговими вікнами"
 
 msgid "Dark"
 msgstr "Темна"
@@ -501,13 +504,22 @@ msgid "Purple"
 msgstr "Фіолетова"
 
 msgid "Theme"
-msgstr ""
+msgstr "Тема"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Колір значків з:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Колір значків:"
+
+msgid "Tool button size:"
+msgstr "Розмір кнопок інструментів:"
+
+msgid "Small"
+msgstr "Малий"
+
+msgid "Big"
+msgstr "Великий"
 
 msgid "Only affect selection"
 msgstr "Впливає лише на обране"
@@ -684,7 +696,7 @@ msgid "Catalan"
 msgstr "Каталанська"
 
 msgid "Esperanto"
-msgstr "Esperanto"
+msgstr "Есперанто"
 
 msgid "Indonesian"
 msgstr "Індонезійська"
@@ -699,7 +711,7 @@ msgid "Turkish"
 msgstr "Турецька"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Норвезька (букмол)"
 
 msgid "Korean"
 msgstr "Корейська"
@@ -717,13 +729,13 @@ msgid "Development Team"
 msgstr "Команда розробників"
 
 msgid "Lead Programmer"
-msgstr "Ведучий Програміст"
+msgstr "Головний програміст"
 
 msgid "UI Designer"
 msgstr "UI дизайнер"
 
 msgid "GitHub Contributors"
-msgstr "Помічники на Github"
+msgstr "Учасники на Github"
 
 msgid "Art by: %s"
 msgstr "Художник: %s"
@@ -758,9 +770,6 @@ msgstr "Зберегти та вийти"
 msgid "Exit without saving"
 msgstr "Вийти без збереження"
 
-msgid "Utility Tools"
-msgstr "Службові інструменти"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -780,38 +789,50 @@ msgstr "Масштабування\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Пересування\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
-
-msgid "Draw Tools"
-msgstr ""
+msgstr "Піпетка\n"
+"Вибирає колір пікселю зі спрайта\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Олівець\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб намалювати лінію"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Гумка\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб стерти лінію"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Заливка\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Інструмент світла/тіні\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -819,7 +840,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Лінія\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб зафіксувати кут лінії\n"
+"Утримуйте %s, щоб встановити центр лінії в місці початку малювання\n"
+"Утримуйте %s, щоб пересувати початкову точку фігури\n"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -827,7 +853,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Прямокутник\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб створити квадрат 1:1\n"
+"Утримуйте %s, щоб встановити центр лінії в місці початку малювання\n"
+"Утримуйте %s, щоб пересувати початкову точку фігури\n"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -835,65 +866,71 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin\n"
-msgstr ""
+msgstr "Еліпс\n\n"
+"%s для лівої кнопки миші\n"
+"%s для правої кнопки миші\n\n"
+"Утримуйте %s, щоб створити круг 1:1\n"
+"Утримуйте %s, щоб встановити центр лінії в місці початку малювання\n"
+"Утримуйте %s, щоб пересувати початкову точку фігури\n"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Прямокутник"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Еліпс"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Вибрати колір для лівого інструмента"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Вибрати колір для правого інструмента"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Поміняти лівий та правий колір місцями\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Скинути кольори до стандартних (зліва чорний, справа білий)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Лівий інструмент"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Правий інструмент"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Лівий індикатор пікселя"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Показати на полотні індикатор пікселя або пензель для лівої кнопки миші при малюванні"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Правий індикатор пікселя"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Показати на полотні індикатор пікселя або пензель для правої кнопки миші при малюванні"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Показувати значок лівого інструмента"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Показує значок вибраного лівого інструмента поруч з курсором на полотні"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Показувати значок правого інструмента"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Показує значок вибраного правого інструмента поруч з курсором на полотні"
 
 msgid "Guides"
-msgstr ""
+msgstr "Напрямні лінії"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Колір напрямних:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Колір напрямних ліній на полотні"
 
 msgid "Grid"
 msgstr "Сітка"
@@ -914,52 +951,52 @@ msgid "All"
 msgstr "Усі"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Ширина прямокутної сітки:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Вказує відлеглість поміж вертикальними лініями прямокутної сітки"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Висота прямокутної сітки:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Вказує відлеглість поміж горизонтальними лініями прямокутної сітки"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Ширина меж ізометричної клітини:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Вказує ширину прямокутника навколо ізометричної клітини"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Висота меж ізометричної клітини:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Вказує висоту прямокутника навколо ізометричної клітини"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Зсув сітки за X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Вказує зсування сітки за віссю X від початку координат (верхнього лівого краю зображення)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Зсув сітки за Y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Вказує зсування сітки за віссю Y від початку координат (верхнього лівого краю зображення)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Малювати в безшовному режимі:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Якщо вимкнено, сітка буде показуватися тільки над оригінальним зображенням"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Колір сітки:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Колір, який матиме сітка"
 
 msgid "Pixel Grid"
 msgstr "Сітка пікселів"
@@ -977,49 +1014,49 @@ msgid "A color of the pixel grid"
 msgstr "Колір піксельної сітки"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Прозорість"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Розмір шахового фону:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Розмір шахового узору для прозорого фону"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Шаховий колір 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Перший колір шахового узору для прозорого фону"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Шаховий колір 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Другий колір шахового узору для прозорого фону"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Рухати з полотном"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Шаховий фон рухається з полотном"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Міняти розмір за масштабом"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Шаховий фон міняє розмір за масштабом"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Анімовані межі виділення"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Колір рамки 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Колір рамки 2:"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Можна міняти тільки користувацький набір налаштувань"
 
 msgid "Set application FPS limit:"
 msgstr "Встановити обмеження FPS додатку:"
@@ -1034,681 +1071,691 @@ msgid "If this is toggled on, when the application's window loses focus, the FPS
 msgstr "Якщо цей параметр увімкнено, то коли вікно додатку втратить фокус, обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
 
 msgid "Brush:"
-msgstr ""
+msgstr "Пензель:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Вибрати пензель"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Піксельний пензель"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Пензель-коло"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Пензель—заповнене коло"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Користувацький пензель"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Розмір пензля:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Переписувати колір"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Переписує колір замість змішування кольорів. Ця опція має сенс лише для частково прозорих кольорів"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Піксельна точність"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Заливка всередині"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Робить лінії гладкими, забираючи зайві пікселі по краях"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Залити фігуру"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Заливає намальовану фігуру кольором замість того, щоб малювати лише контур"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Колір пензля з"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Колір з самого пензля, 100: поточний колір"
 
 msgid "Fill area:"
-msgstr ""
+msgstr "Область заливки:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Область одного кольору"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Пікселі одного кольору"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Чим залити:"
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Вибраний колір"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Шаблон"
 
 msgid "Offset"
-msgstr ""
+msgstr "Зсування"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Просте світло"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Зсування відтінку"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Освітлити"
 
 msgid "Darken"
-msgstr ""
+msgstr "Затемнити"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Сила:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Сила освітлення/затемнення"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Вибрати для:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Лівий колір"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Правий колір"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Режим:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Збільшити масштаб"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Зменшити масштаб"
 
 msgid "Options:"
-msgstr ""
+msgstr "Опції:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "За розміром кадру"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% масштаб"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Віддзеркалення"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Горизонтально"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Увімкнути горизонтальне віддзеркалення для малювання"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Увімкнути вертикальне віддзеркалення для малювання"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Вертикально"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Поточний кадр:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до першого кадру\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до попереднього кадру\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Відтворити анімацію зворотно (з кінця до початку)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Відтворити анімацію (з початку до кінця)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до наступного кадру\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "Перейти до останнього кадру\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Налаштування шлейфу сусідніх кадрів"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Увімкнути/вимкнути шлейф сусідніх кадрів"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "Скільки кадрів у секунду показувати при програванні анімації?\n"
+"Чим більше кадрів у секунду, тим швидшою буде анімація."
 
 msgid "No loop"
-msgstr ""
+msgstr "Без зациклення"
 
 msgid "Cycle loop"
-msgstr ""
+msgstr "Кругове зациклення"
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Зациклення туди-назад"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Шлейф сусідніх кадрів:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Минулі кадри"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Майбутні кадри"
 
 msgid "Manage frame tags"
-msgstr ""
+msgstr "Керування тегами кадрів"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Властивості тегу кадрів"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Додати новий тег кадрів"
 
 msgid "Name:"
-msgstr ""
+msgstr "Назва:"
 
 msgid "From:"
-msgstr ""
+msgstr "З:"
 
 msgid "To:"
-msgstr ""
+msgstr "До:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "Анімація відтворюється тільки на кадрах того ж тегу"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Тег %s (Кадр %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Тег %s (Кадри %s—%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Якщо вибрано цю опцію, анімація буде програватися тільки на кадрах з одним і тим же тегом.\n"
+"Якщо не вибрано, анімація буде програватися на всіх кадрах, ігноруючи теги."
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Синьо-червоний режим"
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Додати новий кадр"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "Видалити кадр"
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Клонувати кадр"
 
 msgid "Move Left"
-msgstr ""
+msgstr "Перейти вліво"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Перейти вправо"
 
 msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "З’єднати клітинки"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Від’єднати клітинки"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Властивості кадру"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Властивості кадру"
 
 msgid "Layer"
-msgstr ""
+msgstr "Шар"
 
 msgid "Layers"
-msgstr ""
+msgstr "Шари"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Створити новий шар"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Видалити поточний шар"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Підняти поточний шар"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Опустити поточний шар"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Клонувати поточний шар"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Об’єднати поточний шар з шаром під ним"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Непрозорість:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Прозорість безшовного режиму:"
 
 msgid "Toggle layer's visibility"
-msgstr ""
+msgstr "Перемкнути видимість шару"
 
 msgid "Lock/unlock layer"
-msgstr ""
+msgstr "Заблокувати/розблокувати шар"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Кадр: %s, шар: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Дозволити/заборонити з’єднання клітинок\n\n"
+"З’єднані клітинки використовуються в декількох шарах"
 
 msgid "Palette"
-msgstr ""
+msgstr "Палітра"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Палітри"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Додати нову палітру"
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Редагувати вибрану палітру"
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Вибір палітри"
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Скасувати: малювання"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Повторити: малювання"
 
 msgid "Undo: Rectangle Select"
-msgstr ""
+msgstr "Скасувати: прямокутне виділення"
 
 msgid "Redo: Rectangle Select"
-msgstr ""
+msgstr "Повторити: прямокутне виділення"
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Скасувати: масштабування"
 
 msgid "Redo: Scale"
-msgstr ""
+msgstr "Повторити: масштабування"
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Скасувати: додавання шару"
 
 msgid "Redo: Add Layer"
-msgstr ""
+msgstr "Повторити: додавання шару"
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Скасувати: видалення шару"
 
 msgid "Redo: Remove Layer"
-msgstr ""
+msgstr "Повторити: видалення шару"
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Скасувати: об’єднання шару"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Повторити: об’єднання шару"
 
 msgid "Undo: Change Layer Order"
-msgstr ""
+msgstr "Скасувати: зміна порядку шарів"
 
 msgid "Redo: Change Layer Order"
-msgstr ""
+msgstr "Повторити: зміна порядку шарів"
 
 msgid "Undo: Add Frame"
-msgstr ""
+msgstr "Скасувати: додавання кадру"
 
 msgid "Redo: Add Frame"
-msgstr ""
+msgstr "Повторити: додавання кадру"
 
 msgid "Undo: Remove Frame"
-msgstr ""
+msgstr "Скасувати: видалення кадру"
 
 msgid "Redo: Remove Frame"
-msgstr ""
+msgstr "Повторити: видалення кадру"
 
 msgid "Undo: Change Frame Order"
-msgstr ""
+msgstr "Скасувати: зміна порядку кадрів"
 
 msgid "Redo: Change Frame Order"
-msgstr ""
+msgstr "Повторити: зміна порядку кадрів"
 
 msgid "Undo: Delete Custom Brush"
-msgstr ""
+msgstr "Скасувати: видалення користувацького пензля"
 
 msgid "Redo: Delete Custom Brush"
-msgstr ""
+msgstr "Повторити: видалення користувацького пензля"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Скасувати: зміна тегу кадру"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Повторити: зміна тегу кадру"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Скасувати: видалення тегу кадру"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Повторити: видалення тегу кадру"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Скасувати: зміна тривалості кадру"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Повторити: зміна тривалості кадру"
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Пересунути керівну"
 
 msgid "File saved"
-msgstr ""
+msgstr "Файл збережено"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Файл автоматично збережено"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Не вдалося відкрити файл. Код помилки %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Не вдалося зберегти файл. Код помилки %s"
 
 msgid "File exported"
-msgstr ""
+msgstr "Файл експортовано"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Нова пуста палітра"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Імпортувати палітру"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Створити палітру з поточного спрайту"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Назва палітри:"
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Назва кольору:"
 
 msgid "Use current left & right colors"
-msgstr ""
+msgstr "Використовувати поточні лівий і правий кольори"
 
 msgid "Create a new empty palette?"
-msgstr ""
+msgstr "Створити нову пусту палітру?"
 
 msgid "Error"
-msgstr ""
+msgstr "Помилка"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Помилка: у палітри має бути правильна назва."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Неправильний файл палітри!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Редагувати палітру"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Створювати кольори з альфа-компонентом"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Брати кольори тільки з виділення"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Брати кольори з"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Меценати:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr ""
+msgstr "Хочете, щоб ваше ім’я або назва вашої компанії була на екрані завантаження?"
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Стати платиновим спонсором"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Стати золотим спонсором"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Стати меценатом"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Не показувати знов"
 
 msgid "Image Options"
-msgstr ""
+msgstr "Опції зображення"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Стандартна ширина:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "Стандартна ширина для нового зображення"
 
 msgid "Default height:"
-msgstr ""
+msgstr "Стандартна висота:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "Стандартна висота для нового зображення"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Стандартний колір заливки:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "Стандартний фоновий колір нового зображення"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Зафіксувати співвідношення сторін"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Вертикальна орієнтація"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Горизонтальна орієнтація"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Шаблони:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Набір налаштувань"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Набір налаштувань:"
 
 msgid "Default"
-msgstr ""
+msgstr "Стандартно"
 
 msgid "Custom"
-msgstr ""
+msgstr "Користувацьке"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Прямокутне виділення"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Масштаб"
 
 msgid "Pan"
-msgstr ""
+msgstr "Пересування"
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Піпетка"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Олівець"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Гумка"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Заливка"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Інструмент світла/тіні"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "Поміняти кольори місцями"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "Асоціювати клавішу"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "Натисніть клавішу або комбінацію клавіш, щоб асоціювати її з дією"
 
 msgid "Already assigned"
-msgstr ""
+msgstr "Вже призначене"
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Лівий інструмент:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Інструмент, який встановлено для лівої кнопки миші"
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Правий інструмент:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Інструмент, який встановлено для правої кнопки миші"
 
 msgid "Cannot find last project file."
-msgstr ""
+msgstr "Неможливо знайти останній файл проєкту."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Неможливо знайти файл проєкту."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr ""
+msgstr "Ви ще не зберегли та не відкрили в Pixelorama жодного проєкту!"
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "Відкрити останній проєкт"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "Відкрити останній проєкт..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "Відкривати останній проєкт при запуску"
 
 msgid "Opens last opened project on startup"
-msgstr ""
+msgstr "Відкривати проєкт, який було останнім відкрито, при запуску програми"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Увімкнути автозбереження"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Інтервал автозбереження:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "хв."
 
 msgid "Create new directory for each frame tag"
-msgstr ""
+msgstr "Створити новий каталог для кожного тегу кадрів"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Ствоює декілька файлів, але кожен файл зберігатиметься в каталозі, який відповідає тегу кадрів"
 
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
-msgstr ""
+msgstr "Знайдено автозбережену резервну копію для %s.\n"
+"Бажаєте її відкрити?"
 
 msgid "Backup reloaded"
-msgstr ""
+msgstr "Завантажено резервну копію"
 
 msgid "Remove currently selected palette"
-msgstr ""
+msgstr "Видалити вибрану палітру"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Ви впевнені, що хочете видалити цю палітру? (Цю дію неможливо скасувати)"
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Неможливо видалити більш палітр!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Неможливо видалити палітру, бо вона не існує!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Помилка при видаленні палітри! Код помилки: %s"
 
 msgid "and"
-msgstr ""
+msgstr "і"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Пересунути виділений кадр вліво."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Пересунути виділений кадр вправо."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Тривалість кадру"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Повтори по обидвох осях"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Повтори по осі X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Повтори по осі Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Створити нову палітру"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Коментар:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Пуста"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "З поточної палітри"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "З поточного спрайту"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "З поточного виділення"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Додати новий колір"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Видалити вибраний колір"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Палітра з такими ж назвою та шляхом вже існує!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Назва палітри обов’язкова!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Зміна розміру палітри призведе до пересування кольорів. Кольори, для яких не вистачить місця з новим розміром палітри, буде втрачено!"
 

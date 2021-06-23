@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2021-06-08 17:01\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -59,6 +59,9 @@ msgstr "Fails"
 
 msgid "Edit"
 msgstr "Rediģēt"
+
+msgid "Select"
+msgstr ""
 
 msgid "View"
 msgstr "Skats"
@@ -509,6 +512,15 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Tool button size:"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Big"
+msgstr ""
+
 msgid "Only affect selection"
 msgstr ""
 
@@ -758,9 +770,6 @@ msgstr ""
 msgid "Exit without saving"
 msgstr ""
 
-msgid "Utility Tools"
-msgstr "Lietderības rīki"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -788,9 +797,6 @@ msgstr "Krāsu izvēlne\n"
 "Atzīmē krāsu no attēla pikseļa\n\n"
 "%s priekš kreisās peles pogas\n"
 "%s priekšlabās peles pogas"
-
-msgid "Draw Tools"
-msgstr "Zīmēšanas rīki"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

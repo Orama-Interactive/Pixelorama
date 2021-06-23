@@ -23,6 +23,7 @@ const languages_dict := {
 	"ko_KR" : ["한국어", "Korean"],
 	"tr_TR" : ["Türkçe", "Turkish"],
 	"ja_JP" : ["日本語", "Japanese"],
+	"uk_UA" : ["Українська", "Ukrainian"],
 }
 
 var loaded_locales : Array

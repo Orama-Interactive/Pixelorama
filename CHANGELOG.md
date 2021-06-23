@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.9] - Unreleased
 This update has been brought to you by the contributions of:
 
-DragonOfWar, novhack, Fayez Akhtar (Variable), Darshan Phaldesai (luiq54)
+DragonOfWar, novhack, Fayez Akhtar (Variable), Darshan Phaldesai (luiq54), Xenofon Konitsas (huskeee), Igor Santarek (jegor377), Álex Román Núñez (EIREXE)
 
 ### Added
 - A total of 9 new tools!
@@ -15,16 +15,31 @@ DragonOfWar, novhack, Fayez Akhtar (Variable), Darshan Phaldesai (luiq54)
 - A new move tool, that lets you move the content of the current cel, or the content of the selection, if there is any.
 - New rectangle and ellipse shape tools. [#456](https://github.com/Orama-Interactive/Pixelorama/pull/456)
 - A new line tool.
+- An installer for Windows will be available for v0.9 and future versions! [#486](https://github.com/Orama-Interactive/Pixelorama/pull/486)
+- You can now select multiple cels in the timeline and edit them all at once!
+- Frame numbers in the timeline above the cels are now clickable buttons that can be dragged and dropped to re-arrange the frames. Right clicking on these buttons brings up a frame-related menu with options that used to be on the cel right click menu.
+- You can now right click a cel to delete its contents.
+- Layer dragging and dropping is now also possible.
+- A new "fill inside" option has been added in the Pencil too. [#489](https://github.com/Orama-Interactive/Pixelorama/pull/489) and [#459](https://github.com/Orama-Interactive/Pixelorama/pull/459)
+- You can now name the project name on the "create new project" dialog. [#490](https://github.com/Orama-Interactive/Pixelorama/pull/490)
+- A tool button size option has been added in the Preferences. This lets you choose between small or big tool button sizes.
+- Added Norwegian Bokmål translations.
 
 ### Changed
 - The selection system has been completely changed and has become a lot more powerful. See [#129](https://github.com/Orama-Interactive/Pixelorama/issues/129#issuecomment-756799706) for more details.
 - The palette system has been completely replaced with a new one. See [#447](https://github.com/Orama-Interactive/Pixelorama/pull/447) for more details.
+- UI icons have been changed to single-color "symbolic" textures. This removes the need for multiple graphics for each theme type as these new textures can change their modulation on runtime.
 - Image color inverting, desaturation and HSV adjusting are now shader based. This improves the performance of these image effects and prevents crashes on large images. [#475](https://github.com/Orama-Interactive/Pixelorama/pull/475)
+- The lighten/darken tool has been renamed to Shading tool.
+- You now have to double click a layer button to rename a layer. Clicking it once just selects the layer.
 - The toolbar on the left can now be resized by the user.
+- The frame delay minimum value is now 0.01 instead of 0.
 
 ### Fixed
 - Zen mode now hides the animation timeline again. [#478](https://github.com/Orama-Interactive/Pixelorama/pull/478)
 - Pixelorama should no longer crash when loading a project and the symmetry axes fail to load. They will still fail to load, but the app will no longer crash. [e8b36bbc61154641ce9eec1f0a845a0061d3585d](https://github.com/Orama-Interactive/Pixelorama/commit/e8b36bbc61154641ce9eec1f0a845a0061d3585d)
+- Fixed gif exporting stuck on 0% on large projects. [#488](https://github.com/Orama-Interactive/Pixelorama/pull/488)
+- Fixed a rare division by zero crash when changing the display scale under Preferences.
 <br><br>
 
 ## [v0.8.3] - 2021-05-04

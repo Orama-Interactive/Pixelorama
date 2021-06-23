@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-06-09 00:00\n"
+"PO-Revision-Date: 2021-06-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -59,6 +59,9 @@ msgstr "File"
 
 msgid "Edit"
 msgstr "Modifica"
+
+msgid "Select"
+msgstr "Selezione"
 
 msgid "View"
 msgstr "Vista"
@@ -509,6 +512,15 @@ msgstr "Colore icona da:"
 msgid "Icon color:"
 msgstr "Colore dell'icona:"
 
+msgid "Tool button size:"
+msgstr "Dimensione del pulsante dello strumento:"
+
+msgid "Small"
+msgstr "Piccolo"
+
+msgid "Big"
+msgstr "Grande"
+
 msgid "Only affect selection"
 msgstr "Influire solo sulla selezione"
 
@@ -758,9 +770,6 @@ msgstr "Salva ed esci"
 msgid "Exit without saving"
 msgstr "Esci senza salvare"
 
-msgid "Utility Tools"
-msgstr "Strumenti di utilità"
-
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -792,9 +801,6 @@ msgstr "Selettore colore\n"
 "Seleziona un colore da un pixel dello sprite\n\n"
 "%s per il tasto sinistro del mouse\n"
 "%s per il tasto destro del mouse"
-
-msgid "Draw Tools"
-msgstr "Strumenti di disegno"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"

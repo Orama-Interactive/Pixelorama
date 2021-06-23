@@ -415,7 +415,6 @@ func select_rect(rect : Rect2, operation : int = SelectionOperation.ADD) -> void
 	self.big_bounding_rectangle = big_bounding_rectangle # call getter method
 
 
-
 func move_borders_start() -> void:
 	undo_data = _get_undo_data(false)
 
@@ -464,13 +463,25 @@ func transform_content_confirm() -> void:
 	if !is_moving_content:
 		return
 	var project : Project = Global.current_project
-	if project.current_frame < project.frames.size() and project.current_layer < project.layers.size():
-		var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		cel_image.blit_rect_mask(preview_image, preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
-		var selected_bitmap_copy = project.selection_bitmap.duplicate()
-		project.move_bitmap_values(selected_bitmap_copy)
-		project.selection_bitmap = selected_bitmap_copy
-		commit_undo("Move Selection", undo_data)
+	for cel_index in project.selected_cels:
+		var frame : int = cel_index[0]
+		var layer : int = cel_index[1]
+		if frame < project.frames.size() and layer < project.layers.size():
+			var cel_image : Image = project.frames[frame].cels[layer].image
+			var src : Image = preview_image
+			if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
+				src = get_selected_image(cel_image)
+				src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
+				if temp_rect.size.x < 0:
+					src.flip_x()
+				if temp_rect.size.y < 0:
+					src.flip_y()
+
+			cel_image.blit_rect_mask(src, src, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
+	var selected_bitmap_copy = project.selection_bitmap.duplicate()
+	project.move_bitmap_values(selected_bitmap_copy)
+	project.selection_bitmap = selected_bitmap_copy
+	commit_undo("Move Selection", undo_data)
 
 	original_preview_image = Image.new()
 	preview_image = Image.new()
@@ -506,7 +517,7 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 	if !_undo_data:
 		print("No undo data found!")
 		return
-	var redo_data = _get_undo_data("image_data" in _undo_data)
+	var redo_data = _get_undo_data(_undo_data["undo_image"])
 	var project := Global.current_project
 
 	project.undos += 1
@@ -520,13 +531,18 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 	project.undo_redo.add_undo_property(project, "selection_offset", _undo_data["outline_offset"])
 
 
-	if "image_data" in _undo_data:
-		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		project.undo_redo.add_do_property(image, "data", redo_data["image_data"])
-		project.undo_redo.add_undo_property(image, "data", _undo_data["image_data"])
-	project.undo_redo.add_do_method(Global, "redo", project.current_frame, project.current_layer)
+	if _undo_data["undo_image"]:
+		for image in redo_data:
+			if not image is Image:
+				continue
+			project.undo_redo.add_do_property(image, "data", redo_data[image])
+		for image in undo_data:
+			if not image is Image:
+				continue
+			project.undo_redo.add_undo_property(image, "data", _undo_data[image])
+	project.undo_redo.add_do_method(Global, "redo")
 	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
-	project.undo_redo.add_undo_method(Global, "undo", project.current_frame, project.current_layer)
+	project.undo_redo.add_undo_method(Global, "undo")
 	project.undo_redo.add_undo_method(project, "selection_bitmap_changed")
 	project.undo_redo.commit_action()
 
@@ -539,14 +555,25 @@ func _get_undo_data(undo_image : bool) -> Dictionary:
 	data["selection_bitmap"] = project.selection_bitmap
 	data["big_bounding_rectangle"] = big_bounding_rectangle
 	data["outline_offset"] = Global.current_project.selection_offset
+	data["undo_image"] = undo_image
 
 	if undo_image:
-		var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-		image.unlock()
-		data["image_data"] = image.data
-		image.lock()
+		var images := _get_selected_draw_images()
+		for image in images:
+			image.unlock()
+			data[image] = image.data
+			image.lock()
 
 	return data
+
+
+func _get_selected_draw_images() -> Array: # Array of Images
+	var images := []
+	var project : Project = Global.current_project
+	for cel_index in project.selected_cels:
+		var cel : Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+		images.append(cel.image)
+	return images
 
 
 func cut() -> void:
@@ -737,3 +764,27 @@ func get_preview_image() -> void:
 	clear_image.create(original_preview_image.get_width(), original_preview_image.get_height(), false, Image.FORMAT_RGBA8)
 	cel_image.blit_rect_mask(clear_image, original_preview_image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	Global.canvas.update_texture(project.current_layer)
+
+
+func get_selected_image(cel_image : Image) -> Image:
+	var project : Project = Global.current_project
+	var image := Image.new()
+	image = cel_image.get_rect(original_big_bounding_rectangle)
+	image.lock()
+	# For non-rectangular selections
+	for x in range(0, original_big_bounding_rectangle.size.x):
+		for y in range(0, original_big_bounding_rectangle.size.y):
+			var pos := Vector2(x, y)
+			if !project.can_pixel_get_drawn(pos + original_big_bounding_rectangle.position, original_bitmap, original_big_bounding_rectangle.position):
+				image.set_pixelv(pos, Color(0, 0, 0, 0))
+
+	image.unlock()
+	if image.is_invisible():
+		return image
+
+	var clear_image := Image.new()
+	clear_image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
+	cel_image.blit_rect_mask(clear_image, image, Rect2(Vector2.ZERO, Global.current_project.selection_bitmap.get_size()), original_big_bounding_rectangle.position)
+	Global.canvas.update_texture(project.current_layer)
+
+	return image
