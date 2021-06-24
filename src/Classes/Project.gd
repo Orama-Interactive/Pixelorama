@@ -484,8 +484,9 @@ func frame_changed(value : int) -> void:
 		var _current_layer : int = cel[1]
 		if _current_frame < Global.frame_ids.get_child_count():
 			Global.frame_ids.get_child(_current_frame).add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
-		if _current_frame < layers[_current_layer].frame_container.get_child_count():
-			layers[_current_layer].frame_container.get_child(_current_frame).pressed = true
+		if layers:
+			if _current_frame < layers[_current_layer].frame_container.get_child_count():
+				layers[_current_layer].frame_container.get_child(_current_frame).pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
