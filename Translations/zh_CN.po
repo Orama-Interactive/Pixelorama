@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-18 00:38\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "确定"
@@ -523,6 +523,9 @@ msgstr "大"
 
 msgid "Only affect selection"
 msgstr "仅影响所选"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "当前单元格"
