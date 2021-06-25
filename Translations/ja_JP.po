@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-06-19 06:29\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -523,6 +523,9 @@ msgstr "大"
 
 msgid "Only affect selection"
 msgstr "選択範囲のみに影響"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "現在のセル"
