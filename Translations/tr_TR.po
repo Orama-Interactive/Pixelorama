@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-06-17 21:22\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -523,6 +523,9 @@ msgstr ""
 
 msgid "Only affect selection"
 msgstr "Sadece seçilene uygula"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "Aktif kare"
