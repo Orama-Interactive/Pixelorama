@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-06-18 08:54\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -522,6 +522,9 @@ msgstr "Duży"
 
 msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "Bieżąca komórka"
