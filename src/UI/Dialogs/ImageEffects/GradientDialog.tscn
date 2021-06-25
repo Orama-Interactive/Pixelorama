@@ -113,8 +113,8 @@ margin_top = 76.0
 margin_right = 285.0
 margin_bottom = 100.0
 mouse_default_cursor_shape = 2
-text = "Current cel"
-items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+text = "Selected cels"
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
 [connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]

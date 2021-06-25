@@ -512,6 +512,9 @@ msgstr ""
 msgid "Only affect selection"
 msgstr ""
 
+msgid "Selected cels"
+msgstr ""
+
 msgid "Current cel"
 msgstr ""
 

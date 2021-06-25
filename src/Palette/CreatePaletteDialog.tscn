@@ -153,7 +153,7 @@ rect_min_size = Vector2( 0, 24 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Current frame"
-items = [ "Current frame", null, false, 0, null, "Current cel", null, false, 1, null, "All frames", null, false, 2, null ]
+items = [ "Current frame", null, false, 0, null, "Selected cels", null, false, 1, null, "All frames", null, false, 2, null ]
 selected = 0
 
 [node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]

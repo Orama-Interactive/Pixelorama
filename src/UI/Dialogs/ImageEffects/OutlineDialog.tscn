@@ -105,8 +105,8 @@ margin_top = 80.0
 margin_right = 312.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
-text = "Current cel"
-items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+text = "Selected cels"
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/ThickValue" to="." method="_on_ThickValue_value_changed"]

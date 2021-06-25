@@ -65,8 +65,9 @@ margin_top = 28.0
 margin_right = 267.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
-text = "Current cel"
-items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+text = "Selected cels"
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
+
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/FlipHorizontal" to="." method="_on_FlipHorizontal_toggled"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/FlipVertical" to="." method="_on_FlipVertical_toggled"]
