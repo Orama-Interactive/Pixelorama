@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-06-25 15:02\n"
+"PO-Revision-Date: 2021-06-25 17:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -524,7 +524,7 @@ msgid "Only affect selection"
 msgstr "Nur Auswahl beeinflussen"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Ausgewählte Cels"
 
 msgid "Current cel"
 msgstr "Aktuelle cel"
