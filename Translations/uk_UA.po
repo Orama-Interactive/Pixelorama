@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-06-18 08:54\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -523,6 +523,9 @@ msgstr "Великий"
 
 msgid "Only affect selection"
 msgstr "Впливає лише на обране"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "Поточна клітинка"
