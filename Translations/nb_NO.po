@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-06-20 20:38\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -522,6 +522,9 @@ msgstr "Stor"
 
 msgid "Only affect selection"
 msgstr "Bare påvirk merket område"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "Denne cellen"
