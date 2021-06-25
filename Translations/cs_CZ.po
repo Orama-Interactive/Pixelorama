@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-06-17 21:22\n"
+"PO-Revision-Date: 2021-06-25 15:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -523,6 +523,9 @@ msgstr ""
 
 msgid "Only affect selection"
 msgstr "Pouze ovlivňuje výběr"
+
+msgid "Selected cels"
+msgstr ""
 
 msgid "Current cel"
 msgstr "Současná buňka"
