@@ -35,7 +35,6 @@ func _ready() -> void:
 	handle_resize()
 	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
-
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"

@@ -14,10 +14,10 @@ onready var cjk_font = preload("res://assets/fonts/CJK/DroidSansFallback-Small.t
 
 
 func _on_SplashDialog_about_to_show() -> void:
-	var splash_art_texturerect : TextureRect = Global.find_node_by_name(self, "SplashArt")
-	var art_by_label : Button = Global.find_node_by_name(self, "ArtistName")
-	var show_on_startup_button : CheckBox = Global.find_node_by_name(self, "ShowOnStartup")
-	var copyright_label : Label = Global.find_node_by_name(self, "CopyrightLabel")
+	var splash_art_texturerect : TextureRect = find_node("SplashArt")
+	var art_by_label : Button = find_node("ArtistName")
+	var show_on_startup_button : CheckBox = find_node("ShowOnStartup")
+	var copyright_label : Label = find_node("CopyrightLabel")
 
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
