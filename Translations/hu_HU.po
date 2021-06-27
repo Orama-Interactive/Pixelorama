@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-06-25 15:02\n"
+"PO-Revision-Date: 2021-06-27 13:32\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Szerkeszt"
 
 msgid "Select"
-msgstr ""
+msgstr "Kiválasztás"
 
 msgid "View"
 msgstr "Nézet"
@@ -516,10 +516,10 @@ msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Kicsi"
 
 msgid "Big"
-msgstr ""
+msgstr "Nagy"
 
 msgid "Only affect selection"
 msgstr ""
@@ -1037,10 +1037,10 @@ msgid "Animated selection borders"
 msgstr ""
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Szegély szín 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Szegély szín 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Csak az egyedi beállítások módosíthatók"
