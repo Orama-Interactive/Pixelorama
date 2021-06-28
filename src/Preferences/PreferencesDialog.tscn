@@ -880,13 +880,13 @@ color = Color( 0, 0, 0, 0 )
 
 [node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 184.0
-margin_right = 506.0
-margin_bottom = 418.0
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 482.0
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
-margin_right = 506.0
+margin_right = 498.0
 margin_bottom = 20.0
 hint_tooltip = "Only custom preset can be modified"
 
@@ -898,7 +898,7 @@ text = "Preset:"
 
 [node name="PresetOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/HBoxContainer"]
 margin_left = 49.0
-margin_right = 506.0
+margin_right = 498.0
 margin_bottom = 20.0
 hint_tooltip = "Only custom preset can be modified"
 mouse_default_cursor_shape = 2
@@ -909,24 +909,24 @@ selected = 0
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_top = 24.0
-margin_right = 506.0
+margin_right = 498.0
 margin_bottom = 28.0
 
 [node name="Shortcuts" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_top = 32.0
-margin_right = 506.0
-margin_bottom = 234.0
+margin_right = 498.0
+margin_bottom = 454.0
 custom_constants/vseparation = 2
 custom_constants/hseparation = 5
 columns = 3
 
 [node name="Empty" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_right = 137.0
+margin_right = 151.0
 margin_bottom = 14.0
 
 [node name="LeftToolLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_right = 321.0
+margin_left = 156.0
+margin_right = 324.0
 margin_bottom = 14.0
 hint_tooltip = "A tool assigned to the left mouse button"
 mouse_filter = 0
@@ -934,8 +934,8 @@ text = "Left Tool:"
 align = 1
 
 [node name="RightToolLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_right = 505.0
+margin_left = 329.0
+margin_right = 497.0
 margin_bottom = 14.0
 hint_tooltip = "A tool assigned to the right mouse button"
 mouse_filter = 0
@@ -944,7 +944,7 @@ align = 1
 
 [node name="Empty2" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 16.0
-margin_right = 137.0
+margin_right = 151.0
 margin_bottom = 20.0
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
@@ -955,195 +955,369 @@ margin_right = 321.0
 margin_bottom = 20.0
 
 [node name="HSeparator2" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
+margin_left = 156.0
 margin_top = 16.0
-margin_right = 321.0
+margin_right = 324.0
 margin_bottom = 20.0
 
 [node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
+margin_left = 329.0
 margin_top = 16.0
-margin_right = 505.0
+margin_right = 497.0
 margin_bottom = 20.0
 
 [node name="RectSelectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 25.0
-margin_right = 137.0
+margin_right = 151.0
 margin_bottom = 39.0
 text = "Rectangular Selection"
 
 [node name="left_rectangle_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
+margin_left = 156.0
 margin_top = 22.0
-margin_right = 321.0
+margin_right = 324.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 
 [node name="right_rectangle_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
+margin_left = 329.0
 margin_top = 22.0
-margin_right = 505.0
+margin_right = 497.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 
-[node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+[node name="EllipseSelectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 47.0
-margin_right = 137.0
+margin_right = 151.0
 margin_bottom = 61.0
+text = "Elliptical Selection"
+
+[node name="left_ellipse_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 44.0
+margin_right = 324.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
+[node name="right_ellipse_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 44.0
+margin_right = 497.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
+[node name="PolygonalSelectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 69.0
+margin_right = 151.0
+margin_bottom = 83.0
+text = "Polygonal Selection"
+
+[node name="left_polygon_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 66.0
+margin_right = 324.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+
+[node name="right_polygon_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 66.0
+margin_right = 497.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+
+[node name="ColorSelectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 91.0
+margin_right = 151.0
+margin_bottom = 105.0
+text = "Select By Color"
+
+[node name="left_color_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 88.0
+margin_right = 324.0
+margin_bottom = 108.0
+size_flags_horizontal = 3
+
+[node name="right_color_select_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 88.0
+margin_right = 497.0
+margin_bottom = 108.0
+size_flags_horizontal = 3
+
+[node name="MagicWandLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 113.0
+margin_right = 151.0
+margin_bottom = 127.0
+text = "Magic Wand"
+
+[node name="left_magic_wand_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 110.0
+margin_right = 324.0
+margin_bottom = 130.0
+size_flags_horizontal = 3
+
+[node name="right_magic_wand_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 110.0
+margin_right = 497.0
+margin_bottom = 130.0
+size_flags_horizontal = 3
+
+[node name="LassoSelectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 135.0
+margin_right = 151.0
+margin_bottom = 149.0
+text = "Lasso / Free Select Tool"
+
+[node name="left_lasso_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 132.0
+margin_right = 324.0
+margin_bottom = 152.0
+size_flags_horizontal = 3
+
+[node name="right_lasso_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 132.0
+margin_right = 497.0
+margin_bottom = 152.0
+size_flags_horizontal = 3
+
+[node name="MoveLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 157.0
+margin_right = 151.0
+margin_bottom = 171.0
+text = "Move"
+
+[node name="left_move_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 154.0
+margin_right = 324.0
+margin_bottom = 174.0
+size_flags_horizontal = 3
+
+[node name="right_move_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 154.0
+margin_right = 497.0
+margin_bottom = 174.0
+size_flags_horizontal = 3
+
+[node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 179.0
+margin_right = 151.0
+margin_bottom = 193.0
 text = "Zoom"
 
 [node name="left_zoom_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 44.0
-margin_right = 321.0
-margin_bottom = 64.0
+margin_left = 156.0
+margin_top = 176.0
+margin_right = 324.0
+margin_bottom = 196.0
 size_flags_horizontal = 3
 
 [node name="right_zoom_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 44.0
-margin_right = 505.0
-margin_bottom = 64.0
+margin_left = 329.0
+margin_top = 176.0
+margin_right = 497.0
+margin_bottom = 196.0
 size_flags_horizontal = 3
 
 [node name="PanLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 47.0
-margin_right = 137.0
-margin_bottom = 61.0
+margin_top = 201.0
+margin_right = 151.0
+margin_bottom = 215.0
 text = "Pan"
 
 [node name="left_pan_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 44.0
-margin_right = 321.0
-margin_bottom = 64.0
+margin_left = 156.0
+margin_top = 198.0
+margin_right = 324.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 
 [node name="right_pan_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 44.0
-margin_right = 505.0
-margin_bottom = 64.0
+margin_left = 329.0
+margin_top = 198.0
+margin_right = 497.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 69.0
-margin_right = 137.0
-margin_bottom = 83.0
+margin_top = 223.0
+margin_right = 151.0
+margin_bottom = 237.0
 text = "Color Picker"
 
 [node name="left_colorpicker_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 66.0
-margin_right = 321.0
-margin_bottom = 86.0
+margin_left = 156.0
+margin_top = 220.0
+margin_right = 324.0
+margin_bottom = 240.0
 
 [node name="right_colorpicker_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 66.0
-margin_right = 505.0
-margin_bottom = 86.0
+margin_left = 329.0
+margin_top = 220.0
+margin_right = 497.0
+margin_bottom = 240.0
 
 [node name="PencilLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 91.0
-margin_right = 137.0
-margin_bottom = 105.0
+margin_top = 245.0
+margin_right = 151.0
+margin_bottom = 259.0
 text = "Pencil"
 
 [node name="left_pencil_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 88.0
-margin_right = 321.0
-margin_bottom = 108.0
+margin_left = 156.0
+margin_top = 242.0
+margin_right = 324.0
+margin_bottom = 262.0
 
 [node name="right_pencil_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 88.0
-margin_right = 505.0
-margin_bottom = 108.0
+margin_left = 329.0
+margin_top = 242.0
+margin_right = 497.0
+margin_bottom = 262.0
 
 [node name="EraserLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 113.0
-margin_right = 137.0
-margin_bottom = 127.0
+margin_top = 267.0
+margin_right = 151.0
+margin_bottom = 281.0
 text = "Eraser"
 
 [node name="left_eraser_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 110.0
-margin_right = 321.0
-margin_bottom = 130.0
+margin_left = 156.0
+margin_top = 264.0
+margin_right = 324.0
+margin_bottom = 284.0
 
 [node name="right_eraser_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 110.0
-margin_right = 505.0
-margin_bottom = 130.0
+margin_left = 329.0
+margin_top = 264.0
+margin_right = 497.0
+margin_bottom = 284.0
 
 [node name="BucketLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 135.0
-margin_right = 137.0
-margin_bottom = 149.0
+margin_top = 289.0
+margin_right = 151.0
+margin_bottom = 303.0
 text = "Bucket"
 
 [node name="left_fill_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 132.0
-margin_right = 321.0
-margin_bottom = 152.0
+margin_left = 156.0
+margin_top = 286.0
+margin_right = 324.0
+margin_bottom = 306.0
 
 [node name="right_fill_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 132.0
-margin_right = 505.0
-margin_bottom = 152.0
+margin_left = 329.0
+margin_top = 286.0
+margin_right = 497.0
+margin_bottom = 306.0
 
 [node name="ShadingLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 157.0
-margin_right = 137.0
-margin_bottom = 171.0
+margin_top = 311.0
+margin_right = 151.0
+margin_bottom = 325.0
 text = "Shading Tool"
 
 [node name="left_shading_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 154.0
-margin_right = 321.0
-margin_bottom = 174.0
+margin_left = 156.0
+margin_top = 308.0
+margin_right = 324.0
+margin_bottom = 328.0
 
 [node name="right_shading_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 154.0
-margin_right = 505.0
-margin_bottom = 174.0
+margin_left = 329.0
+margin_top = 308.0
+margin_right = 497.0
+margin_bottom = 328.0
+
+[node name="LineLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 333.0
+margin_right = 151.0
+margin_bottom = 347.0
+text = "Line Tool"
+
+[node name="left_linetool_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 330.0
+margin_right = 324.0
+margin_bottom = 350.0
+
+[node name="right_linetool_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 330.0
+margin_right = 497.0
+margin_bottom = 350.0
+
+[node name="RectangleLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 355.0
+margin_right = 151.0
+margin_bottom = 369.0
+text = "Rectangle Tool"
+
+[node name="left_rectangletool_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 352.0
+margin_right = 324.0
+margin_bottom = 372.0
+
+[node name="right_rectangletool_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 352.0
+margin_right = 497.0
+margin_bottom = 372.0
+
+[node name="EllipseLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 377.0
+margin_right = 151.0
+margin_bottom = 391.0
+text = "Ellipse Tool"
+
+[node name="left_ellipsetool_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 374.0
+margin_right = 324.0
+margin_bottom = 394.0
+
+[node name="right_ellipsetool_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 329.0
+margin_top = 374.0
+margin_right = 497.0
+margin_bottom = 394.0
 
 [node name="HSeparator4" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 176.0
-margin_right = 137.0
-margin_bottom = 180.0
+margin_top = 396.0
+margin_right = 151.0
+margin_bottom = 400.0
 
 [node name="HSeparator5" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 176.0
-margin_right = 321.0
-margin_bottom = 180.0
+margin_left = 156.0
+margin_top = 396.0
+margin_right = 324.0
+margin_bottom = 400.0
 
 [node name="HSeparator6" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 326.0
-margin_top = 176.0
-margin_right = 505.0
-margin_bottom = 180.0
+margin_left = 329.0
+margin_top = 396.0
+margin_right = 497.0
+margin_bottom = 400.0
 
 [node name="Switch Colors" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 185.0
-margin_right = 137.0
-margin_bottom = 199.0
+margin_top = 405.0
+margin_right = 151.0
+margin_bottom = 419.0
 text = "Switch Colors"
 
 [node name="switch_colors" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 142.0
-margin_top = 182.0
-margin_right = 321.0
-margin_bottom = 202.0
+margin_left = 156.0
+margin_top = 402.0
+margin_right = 324.0
+margin_bottom = 422.0
 
 [node name="Backup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
