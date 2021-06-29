@@ -482,6 +482,7 @@ func update_hint_tooltips() -> void:
 
 	var polygon_select : BaseButton = tool_buttons.find_node("PolygonSelect")
 	polygon_select.hint_tooltip = tr("""Polygonal Selection
+Double-click to connect the last point to the starting point
 
 %s for left mouse button
 %s for right mouse button""") % [InputMap.get_action_list("left_polygon_select_tool")[0].as_text(), InputMap.get_action_list("right_polygon_select_tool")[0].as_text()]
