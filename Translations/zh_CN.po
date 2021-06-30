@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-06-29 21:11\n"
+"PO-Revision-Date: 2021-06-30 00:29\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1614,19 +1614,19 @@ msgid "Rectangular Selection"
 msgstr "矩形选区"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "椭圆选区"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "多边形选区"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "按颜色选择"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "魔棒"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "套索/自由选择工具"
 
 msgid "Move"
 msgstr ""
