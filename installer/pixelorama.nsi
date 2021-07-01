@@ -111,7 +111,7 @@
         File "..\build\windows-32bit\pixelorama.exe"
         File "..\build\windows-32bit\pixelorama.pck"
       ${EndIf}
-      File "..\assets\pxo.ico"
+      File "..\assets\graphics\icons\pxo.ico"
 
       SetOutPath "$INSTDIR\pixelorama_data"
       File /nonfatal /r "..\build\pixelorama_data\*"
