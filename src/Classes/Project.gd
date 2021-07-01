@@ -620,11 +620,11 @@ func can_pixel_get_drawn(pixel : Vector2, bitmap : BitMap = selection_bitmap, se
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
-	if selection_position.x < 0:
-		pixel.x -= selection_position.x
-	if selection_position.y < 0:
-		pixel.y -= selection_position.y
 	if has_selection:
+		if selection_position.x < 0:
+			pixel.x -= selection_position.x
+		if selection_position.y < 0:
+			pixel.y -= selection_position.y
 		return bitmap.get_bit(pixel)
 	else:
 		return true
@@ -672,6 +672,7 @@ func bitmap_to_image(bitmap : BitMap, square := true) -> Image:
 	return image
 
 
+# Algorithm taken from Image.get_used_rect() -  https://github.com/godotengine/godot/blob/master/core/io/image.cpp
 func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
 	if bitmap.get_true_bit_count() == 0:
 		return Rect2()
