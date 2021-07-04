@@ -1024,7 +1024,6 @@ margin_right = 950.0
 margin_bottom = 692.0
 size_flags_horizontal = 3
 custom_constants/autohide = 0
-split_offset = 278
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="ToolsAndCanvas/CanvasAndTimeline"]
 margin_right = 890.0
@@ -1136,7 +1135,6 @@ script = ExtResource( 7 )
 margin_top = 492.0
 margin_right = 890.0
 margin_bottom = 692.0
-size_flags_vertical = 3
 custom_styles/panel = SubResource( 3 )
 
 [node name="TallscreenHSplitContainer" type="HSplitContainer" parent="ToolsAndCanvas/CanvasAndTimeline"]
