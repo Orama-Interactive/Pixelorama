@@ -125,7 +125,7 @@ func change_project() -> void:
 		# Create layer buttons
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.layer = i
-		if layers[i].name == tr("Layer") + " 0":
+		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
 		Global.layers_container.add_child(layer_container)
@@ -432,7 +432,7 @@ func layers_changed(value : Array) -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.layer = i
-		if layers[i].name == tr("Layer") + " 0":
+		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
 		Global.layers_container.add_child(layer_container)
