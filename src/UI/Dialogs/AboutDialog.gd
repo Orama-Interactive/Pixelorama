@@ -144,6 +144,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  ballerburg9005")
 	contributors.create_item(contributor_root).set_text(0, "  DragonOfWar")
 	contributors.create_item(contributor_root).set_text(0, "  kevinms")
+	contributors.create_item(contributor_root).set_text(0, "  Álex Román Núñez (EIREXE)")
 
 
 func create_translators() -> void:
