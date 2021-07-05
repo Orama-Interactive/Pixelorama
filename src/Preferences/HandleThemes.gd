@@ -80,10 +80,10 @@ func change_theme(ID : int) -> void:
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
 
 	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
-	var fake_vsplit_grabber : TextureRect = Global.find_node_by_name(Global.animation_timeline, "FakeVSplitContainerGrabber")
+	var fake_vsplit_grabber : TextureRect = Global.animation_timeline.find_node("FakeVSplitContainerGrabber")
 	fake_vsplit_grabber.texture = main_theme.get_icon("grabber", "VSplitContainer")
 
-	var layer_button_panel_container : PanelContainer = Global.find_node_by_name(Global.animation_timeline, "LayerButtonPanelContainer")
+	var layer_button_panel_container : PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
 	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
 
 	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")

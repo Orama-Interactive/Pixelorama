@@ -23,7 +23,7 @@ DragonOfWar, novhack, Fayez Akhtar (Variable), Darshan Phaldesai (luiq54), Xenof
 - A new "fill inside" option has been added in the Pencil too. [#489](https://github.com/Orama-Interactive/Pixelorama/pull/489) and [#459](https://github.com/Orama-Interactive/Pixelorama/pull/459)
 - You can now name the project name on the "create new project" dialog. [#490](https://github.com/Orama-Interactive/Pixelorama/pull/490)
 - A tool button size option has been added in the Preferences. This lets you choose between small or big tool button sizes.
-- Added Norwegian Bokmål translations.
+- Added Norwegian Bokmål and Ukrainian translations.
 
 ### Changed
 - The selection system has been completely changed and has become a lot more powerful. See [#129](https://github.com/Orama-Interactive/Pixelorama/issues/129#issuecomment-756799706) for more details.
@@ -40,6 +40,7 @@ DragonOfWar, novhack, Fayez Akhtar (Variable), Darshan Phaldesai (luiq54), Xenof
 - Pixelorama should no longer crash when loading a project and the symmetry axes fail to load. They will still fail to load, but the app will no longer crash. [e8b36bbc61154641ce9eec1f0a845a0061d3585d](https://github.com/Orama-Interactive/Pixelorama/commit/e8b36bbc61154641ce9eec1f0a845a0061d3585d)
 - Fixed gif exporting stuck on 0% on large projects. [#488](https://github.com/Orama-Interactive/Pixelorama/pull/488)
 - Fixed a rare division by zero crash when changing the display scale under Preferences.
+- Changed pixel grid shortcut on macOS because it conflicted with a system hotkey. [#494](https://github.com/Orama-Interactive/Pixelorama/pull/494)
 <br><br>
 
 ## [v0.8.3] - 2021-05-04

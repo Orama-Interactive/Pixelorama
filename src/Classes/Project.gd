@@ -125,7 +125,7 @@ func change_project() -> void:
 		# Create layer buttons
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.layer = i
-		if layers[i].name == tr("Layer") + " 0":
+		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
 		Global.layers_container.add_child(layer_container)
@@ -432,7 +432,7 @@ func layers_changed(value : Array) -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
 		layer_container.layer = i
-		if layers[i].name == tr("Layer") + " 0":
+		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
 		Global.layers_container.add_child(layer_container)
@@ -484,8 +484,9 @@ func frame_changed(value : int) -> void:
 		var _current_layer : int = cel[1]
 		if _current_frame < Global.frame_ids.get_child_count():
 			Global.frame_ids.get_child(_current_frame).add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
-		if _current_frame < layers[_current_layer].frame_container.get_child_count():
-			layers[_current_layer].frame_container.get_child(_current_frame).pressed = true
+		if layers:
+			if _current_frame < layers[_current_layer].frame_container.get_child_count():
+				layers[_current_layer].frame_container.get_child(_current_frame).pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
@@ -619,11 +620,11 @@ func can_pixel_get_drawn(pixel : Vector2, bitmap : BitMap = selection_bitmap, se
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
-	if selection_position.x < 0:
-		pixel.x -= selection_position.x
-	if selection_position.y < 0:
-		pixel.y -= selection_position.y
 	if has_selection:
+		if selection_position.x < 0:
+			pixel.x -= selection_position.x
+		if selection_position.y < 0:
+			pixel.y -= selection_position.y
 		return bitmap.get_bit(pixel)
 	else:
 		return true
@@ -671,6 +672,7 @@ func bitmap_to_image(bitmap : BitMap, square := true) -> Image:
 	return image
 
 
+# Algorithm taken from Image.get_used_rect() -  https://github.com/godotengine/godot/blob/master/core/io/image.cpp
 func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
 	if bitmap.get_true_bit_count() == 0:
 		return Rect2()

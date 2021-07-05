@@ -124,12 +124,15 @@ func drop_data(_pos, data) -> void:
 
 	Global.current_project.undo_redo.create_action("Change Frame Order")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-
-	if Global.current_project.current_frame == frame:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", new_frame)
-		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
-
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+
+	if Global.current_project.current_frame == new_frame:
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame)
+	else:
+		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+
 
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
 	Global.current_project.undo_redo.add_do_method(Global, "redo")

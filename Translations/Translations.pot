@@ -512,6 +512,9 @@ msgstr ""
 msgid "Only affect selection"
 msgstr ""
 
+msgid "Selected cels"
+msgstr ""
+
 msgid "Current cel"
 msgstr ""
 
@@ -763,8 +766,38 @@ msgstr ""
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button\n\n"
-"Press %s to move the content"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Elliptical Selection\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Polygonal Selection\n"
+"Double-click to connect the last point to the starting point\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Select By Color\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Magic Wand\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Lasso / Free Select Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
+msgid "Move\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Zoom\n\n"
@@ -810,7 +843,7 @@ msgid "Line Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
-"Hold %s to displace the shape's origin\n"
+"Hold %s to displace the shape's origin"
 msgstr ""
 
 msgid "Rectangle Tool\n\n"
@@ -818,7 +851,7 @@ msgid "Rectangle Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-"Hold %s to displace the shape's origin\n"
+"Hold %s to displace the shape's origin"
 msgstr ""
 
 msgid "Ellipse Tool\n\n"
@@ -826,7 +859,7 @@ msgid "Ellipse Tool\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
-"Hold %s to displace the shape's origin\n"
+"Hold %s to displace the shape's origin"
 msgstr ""
 
 msgid "Rectangle"
@@ -1541,6 +1574,24 @@ msgstr ""
 msgid "Rectangular Selection"
 msgstr ""
 
+msgid "Elliptical Selection"
+msgstr ""
+
+msgid "Polygonal Selection"
+msgstr ""
+
+msgid "Select By Color"
+msgstr ""
+
+msgid "Magic Wand"
+msgstr ""
+
+msgid "Lasso / Free Select Tool"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
 msgid "Zoom"
 msgstr ""
 
@@ -1560,6 +1611,15 @@ msgid "Bucket"
 msgstr ""
 
 msgid "Shading Tool"
+msgstr ""
+
+msgid "Line Tool"
+msgstr ""
+
+msgid "Rectangle Tool"
+msgstr ""
+
+msgid "Ellipse Tool"
 msgstr ""
 
 msgid "Switch Colors"

@@ -35,12 +35,9 @@ func _ready() -> void:
 	handle_resize()
 	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
-
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
-	Global.layers_container.get_child(0).label.text = Global.current_project.layers[0].name
-	Global.layers_container.get_child(0).line_edit.text = Global.current_project.layers[0].name
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())

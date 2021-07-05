@@ -225,7 +225,7 @@ func update_texture(layer_index : int, frame_index := -1, project : Project = Gl
 
 		if project == Global.current_project:
 			var frame_texture_rect : TextureRect
-			frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+			frame_texture_rect = project.layers[layer_index].frame_container.get_child(frame_index).find_node("CelTexture")
 			frame_texture_rect.texture = current_cel.image_texture
 
 
@@ -239,7 +239,7 @@ func update_selected_cels_textures(project : Project = Global.current_project) -
 
 			if project == Global.current_project:
 				var frame_texture_rect : TextureRect
-				frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+				frame_texture_rect = project.layers[layer_index].frame_container.get_child(frame_index).find_node("CelTexture")
 				frame_texture_rect.texture = current_cel.image_texture
 
 

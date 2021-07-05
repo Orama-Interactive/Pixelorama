@@ -94,8 +94,8 @@ margin_left = 164.0
 margin_right = 263.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-text = "Current cel"
-items = [ "Current cel", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+text = "Selected cels"
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/RButton" to="." method="_on_RButton_toggled"]

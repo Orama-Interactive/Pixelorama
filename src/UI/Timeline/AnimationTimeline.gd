@@ -15,8 +15,8 @@ var fps_spinbox : SpinBox
 
 
 func _ready() -> void:
-	timeline_scroll = Global.find_node_by_name(self, "TimelineScroll")
-	tag_scroll_container = Global.find_node_by_name(self, "TagScroll")
+	timeline_scroll = find_node("TimelineScroll")
+	tag_scroll_container = find_node("TagScroll")
 	fps_spinbox = find_node("FPSValue")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	yield(get_tree(), "idle_frame")
