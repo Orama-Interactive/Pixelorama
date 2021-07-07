@@ -37,6 +37,8 @@ func open(opened_current_palette: Palette) -> void:
 	# Stop all inputs in the rest of the app
 	Global.dialog_open(true)
 	popup_centered()
+	width_input.editable = true
+	height_input.editable = true
 
 
 # Resets all dialog values to default
