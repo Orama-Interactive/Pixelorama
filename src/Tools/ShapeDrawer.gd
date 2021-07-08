@@ -12,12 +12,27 @@ var _thickness := 1
 
 func _init() -> void:
 	_drawer.color_op = Drawer.ColorOp.new()
+	update_indicator()
+
+
+func update_brush() -> void:
+	pass
 
 
 func _on_Thickness_value_changed(value: int) -> void:
 	_thickness = value
+
+	update_indicator()
 	update_config()
 	save_config()
+
+
+func update_indicator() -> void:
+	var bitmap := BitMap.new()
+	bitmap.create(Vector2.ONE * _thickness)
+	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * _thickness), true)
+	_indicator = bitmap
+	_polylines = _create_polylines(_indicator)
 
 
 func _on_FillCheckbox_toggled(button_pressed: bool) -> void:
