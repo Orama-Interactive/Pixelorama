@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _button_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
+		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_frame : int = Global.current_project.current_frame
 		if Input.is_action_pressed("shift"):
 			var frame_diff_sign = sign(frame - prev_curr_frame)

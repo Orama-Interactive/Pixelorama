@@ -49,6 +49,7 @@ func _on_LayerContainer_gui_input(event : InputEvent) -> void:
 	var project := Global.current_project
 
 	if event is InputEventMouseButton:
+		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_layer : int = project.current_layer
 		if Input.is_action_pressed("shift"):
 			var layer_diff_sign = sign(layer - prev_curr_layer)

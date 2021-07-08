@@ -161,6 +161,7 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 
 
 func _on_CopyFrame_pressed(frame := -1) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	if frame == -1:
 		frame = Global.current_project.current_frame
 
@@ -272,6 +273,7 @@ func _on_AnimationTimer_timeout() -> void:
 		$AnimationTimer.stop()
 		return
 
+	Global.canvas.selection.transform_content_confirm()
 	var fps = Global.current_project.fps
 	if animation_forward:
 		if Global.current_project.current_frame < last_frame:
@@ -355,23 +357,27 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 
 
 func _on_NextFrame_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	if Global.current_project.current_frame < Global.current_project.frames.size() - 1:
 		Global.current_project.current_frame += 1
 
 
 func _on_PreviousFrame_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	if Global.current_project.current_frame > 0:
 		Global.current_project.current_frame -= 1
 
 
 func _on_LastFrame_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.current_frame = Global.current_project.frames.size() - 1
 
 
 func _on_FirstFrame_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.current_frame = 0
 
@@ -399,6 +405,7 @@ func _on_BlueRedMode_toggled(button_pressed : bool) -> void:
 # Layer buttons
 
 func add_layer(is_new := true) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	var new_layers : Array = Global.current_project.layers.duplicate()
 	var l := Layer.new()
 	if !is_new: # Clone layer
