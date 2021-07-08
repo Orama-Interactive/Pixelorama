@@ -28,10 +28,16 @@ func _on_Thickness_value_changed(value: int) -> void:
 
 
 func update_indicator() -> void:
-	var bitmap := BitMap.new()
-	bitmap.create(Vector2.ONE * _thickness)
-	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * _thickness), true)
-	_indicator = bitmap
+	var indicator := BitMap.new()
+	var rect := _get_result_rect(_start, _dest)
+	var points := _get_points(rect.size)
+	var t_offset := _thickness - 1
+	var t_offsetv := Vector2(t_offset, t_offset)
+	indicator.create(rect.size + t_offsetv * 2)
+	for point in points:
+		indicator.set_bit(point, 1)
+
+	_indicator = indicator
 	_polylines = _create_polylines(_indicator)
 
 
