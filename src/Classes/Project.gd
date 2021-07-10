@@ -387,6 +387,7 @@ func size_changed(value : Vector2) -> void:
 
 
 func frames_changed(value : Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	frames = value
 	selected_cels.clear()
 	remove_cel_buttons()

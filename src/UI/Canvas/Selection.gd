@@ -538,7 +538,7 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 			if not image is Image:
 				continue
 			project.undo_redo.add_do_property(image, "data", redo_data[image])
-		for image in undo_data:
+		for image in _undo_data:
 			if not image is Image:
 				continue
 			project.undo_redo.add_undo_property(image, "data", _undo_data[image])
@@ -655,7 +655,7 @@ func delete() -> void:
 		commit_undo("Draw", undo_data)
 		return
 
-	var _undo_data = _get_undo_data(true)
+	var _undo_data := _get_undo_data(true)
 	var image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 	for x in big_bounding_rectangle.size.x:
 		for y in big_bounding_rectangle.size.y:
