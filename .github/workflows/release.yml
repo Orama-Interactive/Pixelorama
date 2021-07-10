@@ -82,6 +82,7 @@ jobs:
         run: |
           butler push ./build/windows-64bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-64 --userversion ${{env.TAG}}
           butler push ./build/windows-32bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-32 --userversion ${{env.TAG}}
+          butler push ./build/installer ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-installer --userversion ${{env.TAG}}
 
   export-linux:
     name: Linux Export 🐧
