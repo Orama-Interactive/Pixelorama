@@ -174,9 +174,9 @@ func _flood_fill(position : Vector2) -> void:
 				continue
 			var west : Vector2 = n
 			var east : Vector2 = n
-			while west.x >= 0 && image.get_pixelv(west).is_equal_approx(color):
+			while project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(color):
 				west += Vector2.LEFT
-			while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(color):
+			while project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(color):
 				east += Vector2.RIGHT
 			for px in range(west.x + 1, east.x):
 				var p := Vector2(px, n.y)
@@ -184,9 +184,9 @@ func _flood_fill(position : Vector2) -> void:
 				processed.set_bit(p, true)
 				var north := p + Vector2.UP
 				var south := p + Vector2.DOWN
-				if north.y >= 0 && image.get_pixelv(north).is_equal_approx(color):
+				if project.can_pixel_get_drawn(north) && image.get_pixelv(north).is_equal_approx(color):
 					q.append(north)
-				if south.y < project.size.y && image.get_pixelv(south).is_equal_approx(color):
+				if project.can_pixel_get_drawn(south) && image.get_pixelv(south).is_equal_approx(color):
 					q.append(south)
 
 
