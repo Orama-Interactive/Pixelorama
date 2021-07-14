@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-06-29 21:11\n"
+"PO-Revision-Date: 2021-07-14 11:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Název souboru:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Název projektu:"
 
 msgid "Image Size"
 msgstr "Velikost obrázku"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Velikost snímku"
 
 msgid "Size:"
-msgstr ""
+msgstr "Velikost:"
 
 msgid "Width:"
 msgstr "Šířka:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Upravit"
 
 msgid "Select"
-msgstr ""
+msgstr "Výběr"
 
 msgid "View"
 msgstr "Zobrazit"
@@ -133,16 +133,16 @@ msgid "Delete"
 msgstr "Smazat"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nový štětec"
 
 msgid "Scale Image"
 msgstr "Škálovat obrázek"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixely"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Procenta"
 
 msgid "Crop Image"
 msgstr "Oříznout obrázek"
@@ -151,7 +151,7 @@ msgid "Resize Canvas"
 msgstr "Změnit velikost plátna"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Vycentrovat obrázek"
 
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
