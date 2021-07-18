@@ -99,6 +99,7 @@ func draw_move(position : Vector2) -> void:
 			_start += position - _offset
 		_dest = position
 		_offset = position
+		_set_cursor_text(_get_result_rect(_start, position))
 
 
 func draw_end(position : Vector2) -> void:
@@ -193,3 +194,10 @@ func _outline_point(p: Vector2, thickness: int = 1, include_p: bool = true) -> A
 					array.append(p + Vector2(x,y))
 
 		return array
+
+
+func _set_cursor_text(rect : Rect2) -> void:
+	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
+	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
+	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
+
