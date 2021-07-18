@@ -13,6 +13,7 @@ var preview_texture : ImageTexture
 var preview : TextureRect
 var selection_checkbox : CheckBox
 var affect_option_button : OptionButton
+var shrink_preview: bool = false
 
 
 func _ready() -> void:
@@ -112,6 +113,8 @@ func update_preview() -> void:
 			preview_image.copy_from(current_cel)
 		_:
 			preview_image.copy_from(current_frame)
+	if shrink_preview:
+		preview_image.resize(preview_image.get_width()/3, preview_image.get_height()/3,0)
 	commit_action(preview_image)
 	preview_image.unlock()
 	preview_texture.create_from_image(preview_image, 0)

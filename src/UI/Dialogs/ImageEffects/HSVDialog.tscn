@@ -4,6 +4,7 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="HSVDialog" type="ConfirmationDialog"]
+visible = true
 margin_left = 1.0
 margin_top = -1.0
 margin_right = 464.0
@@ -34,10 +35,23 @@ stretch_mode = 5
 [node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
 show_behind_parent = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ShrinkPreview" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 204.0
 margin_right = 447.0
-margin_bottom = 288.0
+margin_bottom = 228.0
+alignment = 2
+
+[node name="ShrinkPreviewCheckBox" type="CheckBox" parent="VBoxContainer/ShrinkPreview"]
+margin_left = 326.0
+margin_right = 447.0
+margin_bottom = 24.0
+hint_tooltip = "Shrinks preview by 3 times for fast updates. Not recommended for small Images."
+text = "Faster Preview"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 232.0
+margin_right = 447.0
+margin_bottom = 316.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -131,9 +145,9 @@ mouse_default_cursor_shape = 1
 min_value = -100.0
 
 [node name="AffectHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 292.0
+margin_top = 320.0
 margin_right = 447.0
-margin_bottom = 316.0
+margin_bottom = 344.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/AffectHBoxContainer"]
 margin_right = 160.0
@@ -144,13 +158,14 @@ text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/AffectHBoxContainer"]
 margin_left = 164.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
+[connection signal="toggled" from="VBoxContainer/ShrinkPreview/ShrinkPreviewCheckBox" to="." method="_on_ShrinkPreviewCheckBox_toggled"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
