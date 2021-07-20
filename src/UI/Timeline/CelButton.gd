@@ -43,7 +43,7 @@ func _on_CelButton_resized() -> void:
 
 
 func _on_CelButton_pressed() -> void:
-	var project := Global.current_project
+	var project = Global.current_project
 	if Input.is_action_just_released("left_mouse"):
 		Global.canvas.selection.transform_content_confirm()
 		var change_cel := true
@@ -128,6 +128,7 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				Global.current_project.undo_redo.add_undo_method(Global, "undo")
 				Global.current_project.undo_redo.add_do_method(Global, "redo")
 				Global.current_project.undo_redo.commit_action()
+
 			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
 				new_layers[layer].linked_cels.append(Global.current_project.frames[frame])
 				Global.current_project.undo_redo.create_action("Link Cel")

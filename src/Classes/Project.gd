@@ -40,6 +40,8 @@ var file_format : int = Export.FileFormat.PNG
 var was_exported := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
+var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
+var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
 
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
@@ -123,7 +125,7 @@ func change_project() -> void:
 	# Create new ones
 	for i in range(layers.size() - 1, -1, -1):
 		# Create layer buttons
-		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
+		var layer_container = layer_button_node.instance()
 		layer_container.layer = i
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
@@ -134,7 +136,7 @@ func change_project() -> void:
 
 		Global.frames_container.add_child(layers[i].frame_container)
 		for j in range(frames.size()): # Create Cel buttons
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
+			var cel_button = cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
@@ -407,7 +409,7 @@ func frames_changed(value : Array) -> void:
 		Global.frame_ids.add_child(button)
 
 		for i in range(layers.size() - 1, -1, -1):
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
+			var cel_button = cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
@@ -431,7 +433,7 @@ func layers_changed(value : Array) -> void:
 	remove_cel_buttons()
 
 	for i in range(layers.size() - 1, -1, -1):
-		var layer_container = load("res://src/UI/Timeline/LayerButton.tscn").instance()
+		var layer_container = layer_button_node.instance()
 		layer_container.layer = i
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
@@ -442,7 +444,7 @@ func layers_changed(value : Array) -> void:
 
 		Global.frames_container.add_child(layers[i].frame_container)
 		for j in range(frames.size()):
-			var cel_button = load("res://src/UI/Timeline/CelButton.tscn").instance()
+			var cel_button = cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
