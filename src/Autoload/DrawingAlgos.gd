@@ -258,12 +258,12 @@ func centralize() -> void:
 
 func crop_image() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	# Use first cel as a starting rectangle
-	var used_rect : Rect2 = Global.current_project.frames[0].cels[0].image.get_used_rect()
-
+	var used_rect := Rect2()
 	for f in Global.current_project.frames:
 		for cel in f.cels:
+			cel.image.unlock()
 			var cel_used_rect : Rect2 = cel.image.get_used_rect()
+			cel.image.lock()
 			if cel_used_rect == Rect2(0, 0, 0, 0): # If the cel has no content
 				continue
 
