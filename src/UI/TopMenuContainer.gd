@@ -445,7 +445,6 @@ func toggle_fullscreen() -> void:
 
 
 func image_menu_id_pressed(id : int) -> void:
-	var image : Image = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
 	match id:
 		ImageMenuId.SCALE_IMAGE:
 			show_scale_image_popup()
@@ -454,7 +453,7 @@ func image_menu_id_pressed(id : int) -> void:
 			DrawingAlgos.centralize()
 
 		ImageMenuId.CROP_IMAGE:
-			DrawingAlgos.crop_image(image)
+			DrawingAlgos.crop_image()
 
 		ImageMenuId.RESIZE_CANVAS:
 			show_resize_canvas_popup()

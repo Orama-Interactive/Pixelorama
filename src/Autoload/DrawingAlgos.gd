@@ -256,24 +256,21 @@ func centralize() -> void:
 	general_undo_centralize()
 
 
-func crop_image(image : Image) -> void:
+func crop_image() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	# Use first cel as a starting rectangle
-	var used_rect : Rect2 = image.get_used_rect()
+	var used_rect : Rect2 = Global.current_project.frames[0].cels[0].image.get_used_rect()
 
 	for f in Global.current_project.frames:
-		# However, if first cel is empty, loop through all cels until we find one that isn't
 		for cel in f.cels:
-			if used_rect != Rect2(0, 0, 0, 0):
-				break
-			else:
-				if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
-					used_rect = cel.image.get_used_rect()
+			var cel_used_rect : Rect2 = cel.image.get_used_rect()
+			if cel_used_rect == Rect2(0, 0, 0, 0): # If the cel has no content
+				continue
 
-		# Merge all layers with content
-		for cel in f.cels:
-				if cel.image.get_used_rect() != Rect2(0, 0, 0, 0):
-					used_rect = used_rect.merge(cel.image.get_used_rect())
+			if used_rect == Rect2(0, 0, 0, 0): # If we still haven't found the first cel with content
+				used_rect = cel_used_rect
+			else:
+				used_rect = used_rect.merge(cel_used_rect)
 
 	# If no layer has any content, just return
 	if used_rect == Rect2(0, 0, 0, 0):
@@ -282,12 +279,12 @@ func crop_image(image : Image) -> void:
 	var width := used_rect.size.x
 	var height := used_rect.size.y
 	general_do_scale(width, height)
+	# Loop through all the cels to crop them
 	for f in Global.current_project.frames:
-		# Loop through all the layers to crop them
-		for j in range(Global.current_project.layers.size() - 1, -1, -1):
-			var sprite : Image = f.cels[j].image.get_rect(used_rect)
-			Global.current_project.undo_redo.add_do_property(f.cels[j].image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(f.cels[j].image, "data", f.cels[j].image.data)
+		for cel in f.cels:
+			var sprite : Image = cel.image.get_rect(used_rect)
+			Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
+			Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
 
 	general_undo_scale()
 
