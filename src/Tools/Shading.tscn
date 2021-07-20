@@ -3,7 +3,6 @@
 [ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Tools/Shading.gd" type="Script" id=2]
 
-
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
@@ -154,7 +153,6 @@ margin_bottom = 42.0
 hint_tooltip = "Lighten/Darken amount"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-max_value = 100.0
 value = 10.0
 align = 1
 
@@ -169,7 +167,6 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-max_value = 100.0
 value = 10.0
 ticks_on_borders = true
 
@@ -194,7 +191,6 @@ margin_bottom = 42.0
 hint_tooltip = "Lighten/Darken amount"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-max_value = 100.0
 value = 10.0
 align = 1
 
@@ -209,7 +205,6 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-max_value = 100.0
 value = 10.0
 ticks_on_borders = true
 
@@ -247,6 +242,7 @@ margin_right = 40.0
 [node name="Vertical" parent="Mirror" index="1"]
 margin_left = 84.0
 margin_right = 101.0
+
 [connection signal="item_selected" from="ShadingMode" to="." method="_on_ShadingMode_item_selected"]
 [connection signal="item_selected" from="LightenDarken" to="." method="_on_LightenDarken_item_selected"]
 [connection signal="value_changed" from="Amount/Spinbox" to="." method="_on_LightenDarken_value_changed"]

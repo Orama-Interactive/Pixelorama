@@ -23,8 +23,8 @@ class LightenDarkenOp extends Drawer.ColorOp:
 	var sat_amount := 10.0
 	var value_amount := 10.0
 
-	var hue_lighten_limit := 60.0 / 359.0
-	var hue_darken_limit := 270.0 / 359.0
+	var hue_lighten_limit := 60.0 / 359.0 # A yellow color
+	var hue_darken_limit := 270.0 / 359.0 # A purple color
 
 	var sat_lighten_limit := 10.0 / 100.0
 	var value_darken_limit := 10.0 / 100.0
@@ -244,6 +244,12 @@ func draw_end(_position : Vector2) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(_image : Image, _src_rect: Rect2, _dst: Vector2) -> void:
+func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
-	draw_tool_pixel(_cursor.floor())
+	image.lock()
+	for xx in image.get_size().x:
+		for yy in image.get_size().y:
+			if image.get_pixel(xx, yy).a > 0:
+				var pos := Vector2(xx, yy) + dst - src_rect.position
+				_set_pixel(pos, true)
+	image.unlock()
