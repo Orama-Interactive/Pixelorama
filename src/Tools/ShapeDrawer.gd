@@ -110,6 +110,7 @@ func draw_end(position : Vector2) -> void:
 		_dest = Vector2.ZERO
 		_drawing = false
 		_displace_origin = false
+		cursor_text = ""
 
 
 func draw_preview() -> void:
