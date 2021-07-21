@@ -1,7 +1,7 @@
 extends BaseButton
 
 
-var pattern := Patterns.Pattern.new()
+var pattern = Global.patterns_popup.Pattern.new()
 
 
 func _on_PatternButton_pressed() -> void:

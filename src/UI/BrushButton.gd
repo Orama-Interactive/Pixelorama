@@ -1,7 +1,7 @@
 extends BaseButton
 
 
-var brush := Brushes.Brush.new()
+var brush = Global.brushes_popup.Brush.new()
 
 
 func _on_BrushButton_pressed() -> void:
@@ -13,17 +13,17 @@ func _on_BrushButton_pressed() -> void:
 
 
 func _on_DeleteButton_pressed() -> void:
-	if brush.type != Brushes.CUSTOM:
+	if brush.type != Global.brushes_popup.CUSTOM:
 		return
 
 	Global.brushes_popup.remove_brush(self)
 
 
 func _on_BrushButton_mouse_entered() -> void:
-	if brush.type == Brushes.CUSTOM:
+	if brush.type == Global.brushes_popup.CUSTOM:
 		$DeleteButton.visible = true
 
 
 func _on_BrushButton_mouse_exited() -> void:
-	if brush.type == Brushes.CUSTOM:
+	if brush.type == Global.brushes_popup.CUSTOM:
 		$DeleteButton.visible = false

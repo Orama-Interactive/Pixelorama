@@ -189,9 +189,9 @@ var palette_panel : PalettePanel
 var error_dialog : AcceptDialog
 var quit_dialog : ConfirmationDialog
 var quit_and_save_dialog : ConfirmationDialog
+var notification_label_node = preload("res://src/UI/NotificationLabel.tscn")
 
 onready var current_version : String = ProjectSettings.get_setting("application/config/Version")
-
 
 func _ready() -> void:
 	randomize()
@@ -327,7 +327,7 @@ func _ready() -> void:
 
 
 func notification_label(text : String) -> void:
-	var notification : Label = load("res://src/UI/NotificationLabel.tscn").instance()
+	var notification : Label = notification_label_node.instance()
 	notification.text = tr(text)
 	notification.rect_position = Vector2(70, OS.window_size.y - animation_timeline.rect_size.y - 20)
 	notification.theme = control.theme

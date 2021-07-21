@@ -42,6 +42,7 @@ var was_exported := false
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
 var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
+var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
@@ -564,7 +565,7 @@ func animation_tags_changed(value : Array) -> void:
 
 	for tag in animation_tags:
 		var tag_base_size = Global.animation_timeline.cel_size + 3
-		var tag_c : Container = load("res://src/UI/Timeline/AnimationTagUI.tscn").instance()
+		var tag_c : Container = animation_tag_node.instance()
 		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
 		var tag_position : int = Global.tag_container.get_child_count() - 1

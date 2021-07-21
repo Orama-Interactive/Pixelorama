@@ -8,7 +8,7 @@ var edited_swatch_index = -1
 
 onready var palette_select := $PaletteVBoxContainer/PaletteButtons/PaletteSelect
 onready var add_palette_button := $PaletteVBoxContainer/PaletteButtons/AddPalette
-onready var palette_grid := $PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/CenterContainer/HBoxContainer/PaletteGrid
+onready var palette_grid := find_node("PaletteGrid")
 onready var palette_scroll := $PaletteVBoxContainer/SwatchesContainer/PaletteScroll
 
 onready var add_color_button := $PaletteVBoxContainer/SwatchesContainer/ColorButtons/AddColor
