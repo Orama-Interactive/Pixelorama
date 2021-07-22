@@ -167,13 +167,28 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 	var new_frame := Frame.new()
 	var new_frames := Global.current_project.frames.duplicate()
+	var new_layers : Array = Global.current_project.layers.duplicate()
 	new_frames.insert(frame + 1, new_frame)
 
 	for cel in Global.current_project.frames[frame].cels: # Copy every cel
 		var sprite := Image.new()
 		sprite.copy_from(cel.image)
 		sprite.lock()
-		new_frame.cels.append(Cel.new(sprite, cel.opacity))
+		var sprite_texture := ImageTexture.new()
+		sprite_texture.create_from_image(sprite, 0)
+		new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
+
+	# Loop through the array to create new classes for each element, so that they
+	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+	for i in new_layers.size():
+		var new_linked_cels = new_layers[i].linked_cels.duplicate()
+		new_layers[i] = Layer.new(new_layers[i].name, new_layers[i].visible, new_layers[i].locked, new_layers[i].frame_container, new_layers[i].new_cels_linked, new_linked_cels)
+
+	for l_i in range(new_layers.size()):
+		if new_layers[l_i].new_cels_linked: # If the link button is pressed
+			new_layers[l_i].linked_cels.append(new_frame)
+			new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+			new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -193,10 +208,12 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame + 1)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "animation_tags", new_animation_tags)
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", frame)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "animation_tags", Global.current_project.animation_tags)
 	Global.current_project.undo_redo.commit_action()
 
