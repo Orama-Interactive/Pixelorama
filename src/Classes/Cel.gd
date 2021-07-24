@@ -14,7 +14,7 @@ func _init(_image := Image.new(), _opacity := 1.0, _image_texture : ImageTexture
 		image_texture = _image_texture
 	else:
 		image_texture = ImageTexture.new()
-	image = _image
+	self.image = _image
 	opacity = _opacity
 
 
