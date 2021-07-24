@@ -142,14 +142,6 @@ func update_line_polylines(start : Vector2, end : Vector2) -> void:
 	_line_polylines = _create_polylines(indicator)
 
 
-func restore_image() -> void:
-	var project : Project = Global.current_project
-	var image = project.frames[project.current_frame].cels[project.current_layer].image
-	image.unlock()
-	image.data = _undo_data[image]
-	image.lock()
-
-
 func prepare_undo() -> void:
 	_undo_data = _get_undo_data()
 
