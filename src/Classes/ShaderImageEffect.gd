@@ -41,5 +41,4 @@ func generate_image(_img : Image,_shaderpath: String, _params : Dictionary , siz
 	#Global.canvas.handle_undo("Draw")
 	_img.copy_from(viewport_texture)
 	#Global.canvas.handle_redo("Draw")
-	_img.lock()
 	emit_signal("done")

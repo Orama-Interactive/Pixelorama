@@ -116,7 +116,6 @@ func _on_PopupMenu_id_pressed(ID : int) -> void:
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
 				sprite.copy_from(f.cels[layer].image)
-				sprite.lock()
 				var sprite_texture := ImageTexture.new()
 				sprite_texture.create_from_image(sprite, 0)
 				new_cels[layer].image = sprite

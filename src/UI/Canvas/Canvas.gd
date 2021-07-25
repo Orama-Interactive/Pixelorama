@@ -132,7 +132,6 @@ func new_empty_frame(first_time := false, single_layer := false, size := Global.
 				fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		sprite.fill(fill_color)
-		sprite.lock()
 		frame.cels.append(Cel.new(sprite, 1))
 
 		if single_layer:

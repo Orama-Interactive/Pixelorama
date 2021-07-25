@@ -1,5 +1,6 @@
 extends Panel
 
+var is_animation_running := false
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
@@ -173,7 +174,6 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	for cel in Global.current_project.frames[frame].cels: # Copy every cel
 		var sprite := Image.new()
 		sprite.copy_from(cel.image)
-		sprite.lock()
 		var sprite_texture := ImageTexture.new()
 		sprite_texture.create_from_image(sprite, 0)
 		new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
@@ -304,6 +304,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_forward.pressed = false
 					Global.play_backwards.pressed = false
 					Global.animation_timer.stop()
+					is_animation_running = false
 				1: # Cycle loop
 					Global.current_project.selected_cels.clear()
 					Global.current_project.current_frame = first_frame
@@ -325,6 +326,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_backwards.pressed = false
 					Global.play_forward.pressed = false
 					Global.animation_timer.stop()
+					is_animation_running = false
 				1: # Cycle loop
 					Global.current_project.selected_cels.clear()
 					Global.current_project.current_frame = last_frame
@@ -371,6 +373,8 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 		animation_forward = forward_dir
 	else:
 		Global.animation_timer.stop()
+
+	is_animation_running = play
 
 
 func _on_NextFrame_pressed() -> void:
@@ -438,8 +442,6 @@ func add_layer(is_new := true) -> void:
 			new_layer.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 		else: # Clone layer
 			new_layer.copy_from(f.cels[Global.current_project.current_layer].image)
-
-		new_layer.lock()
 
 		var new_cels : Array = f.cels.duplicate()
 		new_cels.append(Cel.new(new_layer, 1))
@@ -524,7 +526,6 @@ func _on_MergeDownLayer_pressed() -> void:
 			new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
 		var selected_layer := Image.new()
 		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
-		selected_layer.lock()
 
 		if f.cels[Global.current_project.current_layer].opacity < 1: # If we have layer transparency
 			for xx in selected_layer.get_size().x:
@@ -535,7 +536,6 @@ func _on_MergeDownLayer_pressed() -> void:
 
 		var new_layer := Image.new()
 		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
-		new_layer.lock()
 		new_layer.blend_rect(selected_layer, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO)
 		new_cels.remove(Global.current_project.current_layer)
 		if !selected_layer.is_invisible() and Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels.size() > 1 and (f in Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels):

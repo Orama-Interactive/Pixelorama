@@ -538,6 +538,7 @@ func commit_undo(action : String, _undo_data : Dictionary) -> void:
 			if not image is Image:
 				continue
 			project.undo_redo.add_do_property(image, "data", redo_data[image])
+			image.unlock()
 		for image in _undo_data:
 			if not image is Image:
 				continue

@@ -63,7 +63,6 @@ func _on_ShaderEffect_confirmed() -> void:
 	Global.canvas.handle_undo("Draw")
 	current_cel.copy_from(viewport_texture)
 	Global.canvas.handle_redo("Draw")
-	current_cel.lock()
 
 
 func _on_ShaderEffect_popup_hide() -> void:

@@ -261,9 +261,8 @@ func crop_image() -> void:
 	var used_rect := Rect2()
 	for f in Global.current_project.frames:
 		for cel in f.cels:
-			cel.image.unlock()
+			cel.image.unlock() # May be unneeded now, but keep it just in case
 			var cel_used_rect : Rect2 = cel.image.get_used_rect()
-			cel.image.lock()
 			if cel_used_rect == Rect2(0, 0, 0, 0): # If the cel has no content
 				continue
 
@@ -586,7 +585,6 @@ func generate_gradient(image : Image, colors : Array, steps : int, direction : i
 		color = colors[-1].linear_interpolate(colors[0], t * i)
 		colors.insert(1, color)
 
-	image.unlock()
 	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
 		colors.invert()
 
@@ -623,3 +621,5 @@ func generate_gradient(image : Image, colors : Array, steps : int, direction : i
 					if selection and !project.selection_bitmap.get_bit(pos):
 						continue
 					image.set_pixelv(pos, colors[i])
+
+	image.unlock()
