@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-07-26 21:18\n"
+"PO-Revision-Date: 2021-07-26 21:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1128,7 +1128,7 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Rellena forma"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
@@ -1805,5 +1805,5 @@ msgid "Palette name is required!"
 msgstr ""
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de colores. ¡Los colores que no caben en el tamaño de la nueva paleta se perderán!"
 
