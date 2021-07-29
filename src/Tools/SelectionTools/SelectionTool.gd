@@ -77,19 +77,21 @@ func draw_start(position : Vector2) -> void:
 	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift and !_ongoing_selection:
 		# Move current selection
 		_move = true
-		if Tools.control and Tools.alt: # Move selection without content
-			selection_node.transform_content_confirm()
-			_move_content = false
-			selection_node.move_borders_start()
-		else:
-			_move_content = true
-			if Tools.alt: # Move the selection without cutting it from the original position / makes a quick copy of it
+		if Tools.alt: # Move selection without content
+			if Tools.control: # Move the selection without cutting it from the original position / makes a quick copy of it
+				_move_content = true
 				selection_node.transform_content_confirm()
 				selection_node.clear_in_selected_cels = false
-			selection_node.transform_content_start()
-			if Tools.alt: # Continuation of the above
+				selection_node.transform_content_start()
 				var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
 				cel_image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+			else:
+				selection_node.transform_content_confirm()
+				_move_content = false
+				selection_node.move_borders_start()
+		else:
+			_move_content = true
+			selection_node.transform_content_start()
 
 	else:
 		selection_node.transform_content_confirm()
