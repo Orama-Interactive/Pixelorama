@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-29 20:19\n"
+"PO-Revision-Date: 2021-07-29 20:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -64,7 +64,7 @@ msgid "Select"
 msgstr "Výběr"
 
 msgid "View"
-msgstr "Zobrazit"
+msgstr "Zobrazení"
 
 msgid "Image"
 msgstr "Obrázek"
@@ -1016,7 +1016,7 @@ msgid "Pixel Grid"
 msgstr ""
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Zobrazit při přiblížení:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
@@ -1586,10 +1586,10 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Na výšku"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Na šířku"
 
 msgid "Templates:"
 msgstr "Šablony:"
@@ -1622,16 +1622,16 @@ msgid "Magic Wand"
 msgstr ""
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Laso / volný výběr"
 
 msgid "Move"
-msgstr ""
+msgstr "Přesun"
 
 msgid "Zoom"
 msgstr "Přiblížení/oddálení"
 
 msgid "Pan"
-msgstr ""
+msgstr "Posun"
 
 msgid "Color Picker"
 msgstr "Kapátko"
@@ -1768,35 +1768,35 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Vytvořit novou paletu"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Komentář:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Prázdná"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Z aktuální palety"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Z aktuálního obrázku"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Z aktuálního výběru"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Přidat novou barvu"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Odstranit vybranou barvu"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Paleta s totožným jménem již existuje!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Název palety je povinný!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Zmenšení velikosti palety resetuje pozice barev. Barvy, které se nevejdou do nové velikosti palety budou ztraceny!"
 
