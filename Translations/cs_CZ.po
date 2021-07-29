@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-29 21:52\n"
+"PO-Revision-Date: 2021-07-29 22:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,10 +187,10 @@ msgid "Auto"
 msgstr "Automaticky"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Širokoúhlá obrazovka"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Vysoká obrazovka"
 
 msgid "Mirror View"
 msgstr "Zrcadlové zobrazení"
@@ -1017,7 +1017,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Kreslit přes režim dlaždic:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
@@ -1029,7 +1029,7 @@ msgid "A color of the grid"
 msgstr "Barva mřížky"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixelová mřížka"
 
 msgid "Show at zoom:"
 msgstr "Zobrazit při přiblížení:"
