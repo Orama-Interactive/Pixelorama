@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-14 11:35\n"
+"PO-Revision-Date: 2021-07-29 20:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
 msgid "Clear"
-msgstr ""
+msgstr "Vyčistit"
 
 msgid "Invert"
-msgstr ""
+msgstr "Převrátit"
 
 msgid "Flip"
 msgstr "Překlopit"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "Režim dlaždic"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Průhlednost okna"
 
 msgid "Panel Layout"
 msgstr ""
