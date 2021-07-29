@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-29 20:11\n"
+"PO-Revision-Date: 2021-07-29 20:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -181,10 +181,10 @@ msgid "Window Transparency"
 msgstr "Průhlednost okna"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Rozložení panelů"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automaticky"
 
 msgid "Widescreen"
 msgstr ""
@@ -193,13 +193,13 @@ msgid "Tallscreen"
 msgstr ""
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Zrcadlové zobrazení"
 
 msgid "Show Grid"
 msgstr "Zobrazit mřížku"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Zobrazit mřížku pixelů"
 
 msgid "Show Rulers"
 msgstr "Zobrazit pravítka"
@@ -232,7 +232,7 @@ msgid "Import as:"
 msgstr "Importovat jako:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Nedávné projekty"
 
 msgid "New tab"
 msgstr "Nová záložka"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nová záložka)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nová vrstva)"
 
 msgid "New frame"
 msgstr "Nový snímek"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Nahradit snímek"
 
 msgid "New layer"
 msgstr "Nová vrstva"
@@ -268,7 +268,7 @@ msgid "Vertical frames:"
 msgstr "Svislé snímky:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "První snímek:"
 
 msgid "At frame:"
 msgstr ""
@@ -426,7 +426,7 @@ msgid "Language"
 msgstr "Jazyk"
 
 msgid "Interface"
-msgstr ""
+msgstr "Rozhraní"
 
 msgid "Themes"
 msgstr "Motivy"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Plátno"
 
 msgid "Selection"
-msgstr ""
+msgstr "Výběr"
 
 msgid "Shortcuts"
 msgstr "Zkratky"
@@ -444,7 +444,7 @@ msgid "Backup"
 msgstr "Zálohování"
 
 msgid "Performance"
-msgstr ""
+msgstr "Výkon"
 
 msgid "Indicators"
 msgstr "Indikátory"
@@ -480,10 +480,10 @@ msgid "System Language"
 msgstr "Systémový jazyk"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Měřítko zobrazení"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Ztmavit rozhraní při vyskakovacím okně"
 
 msgid "Dark"
 msgstr "Tmavý"
@@ -504,28 +504,28 @@ msgid "Purple"
 msgstr "Fialová"
 
 msgid "Theme"
-msgstr ""
+msgstr "Téma"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Barvy ikony z:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Barva ikony:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Velkost tlačítek nástrojů:"
 
 msgid "Small"
-msgstr ""
+msgstr "Malá"
 
 msgid "Big"
-msgstr ""
+msgstr "Velká"
 
 msgid "Only affect selection"
 msgstr "Pouze ovlivňuje výběr"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Vybrané buňky"
 
 msgid "Current cel"
 msgstr "Současná buňka"
@@ -576,13 +576,13 @@ msgid "Angle:"
 msgstr "Úhel:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Odstín:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Sytost:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Hodnota:"
 
 msgid "Apply"
 msgstr "Použít"
@@ -636,7 +636,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Vyvinuto Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-současnost Orama Interactive a přispěvatelé"
 
 msgid "Website"
 msgstr "Webové stránky"
@@ -714,7 +714,7 @@ msgid "Turkish"
 msgstr "Turečtina"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norština Bokmål"
 
 msgid "Korean"
 msgstr "Korejština"
@@ -726,10 +726,10 @@ msgid "Romanian"
 msgstr "Rumunština"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonština"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrajinština"
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
@@ -888,10 +888,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Obdélník"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipsa"
 
 msgid "Choose a color for the left tool"
 msgstr "Vyberte barvu pro levý nástroj"
@@ -965,7 +965,7 @@ msgid "All"
 msgstr "Vše"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Šířka obdélníkové mřížky:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
