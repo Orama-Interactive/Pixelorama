@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 14:46\n"
+"PO-Revision-Date: 2021-07-30 14:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -175,10 +175,10 @@ msgid "Preferences"
 msgstr "Nastavení"
 
 msgid "Tile Mode"
-msgstr "Režim dlaždic"
+msgstr "Dlaždicový režim"
 
 msgid "Window Transparency"
-msgstr "Průhlednost okna"
+msgstr "Průhlednost plátna"
 
 msgid "Panel Layout"
 msgstr "Rozložení panelů"
@@ -208,7 +208,7 @@ msgid "Show Guides"
 msgstr "Zobrazit vodítka"
 
 msgid "Show Animation Timeline"
-msgstr "Zobrazit časovou osu animace"
+msgstr "Zobrazit animační panel"
 
 msgid "Zen Mode"
 msgstr "Zen režim"
@@ -621,7 +621,7 @@ msgid "Online Docs"
 msgstr "Online dokumentace"
 
 msgid "Issue Tracker"
-msgstr "Nahlášení potíží"
+msgstr "Nahlásit potíže"
 
 msgid "Changelog"
 msgstr "Seznam změn"
@@ -1792,13 +1792,13 @@ msgid "Frame duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
-msgstr "V obou osách"
+msgstr "Obě osy"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Osa X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Osa Y"
 
 msgid "Create a new palette"
 msgstr "Vytvořit novou paletu"
