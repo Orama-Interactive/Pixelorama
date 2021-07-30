@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 16:11\n"
+"PO-Revision-Date: 2021-07-30 16:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -157,7 +157,7 @@ msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
 msgid "Clear"
-msgstr "Zrušit výběr"
+msgstr "Zrušit"
 
 msgid "Invert"
 msgstr "Invertovat"
@@ -456,7 +456,7 @@ msgid "Restore default value"
 msgstr "Obnovit výchozí hodnotu"
 
 msgid "Smooth Zoom"
-msgstr "Hladké přiblížení/oddálení"
+msgstr "Vyhlazení přiblížení/oddálení"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Nastaví hladší přechod při přiblížení nebo přiblížení"
@@ -480,7 +480,7 @@ msgid "System Language"
 msgstr "Systémový jazyk"
 
 msgid "Display Scale"
-msgstr "Měřítko zobrazení"
+msgstr "Měřítko rozhraní"
 
 msgid "Dim interface on dialog popup"
 msgstr "Ztmavit rozhraní při vyskakovacím okně"
@@ -522,7 +522,7 @@ msgid "Big"
 msgstr "Velká"
 
 msgid "Only affect selection"
-msgstr "Pouze ovlivňuje výběr"
+msgstr "Pouze ovlivnit výběr"
 
 msgid "Selected cels"
 msgstr "Vybrané buňky"
@@ -588,7 +588,7 @@ msgid "Apply"
 msgstr "Použít"
 
 msgid "Diagonal"
-msgstr "Úhlopříčka"
+msgstr "Úhlopříčně"
 
 msgid "Place inside image"
 msgstr "Umístit uvnitř obrázku"
@@ -995,7 +995,7 @@ msgid "Isometric"
 msgstr "Isometrická"
 
 msgid "All"
-msgstr "Vybrat vše"
+msgstr "Vše"
 
 msgid "Rectangular grid width:"
 msgstr "Šířka obdélníkové mřížky:"
@@ -1010,31 +1010,31 @@ msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Nastaví, jak daleko od sebe jsou vodorovné čáry obdélníkové mřížky"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Šířka isometrických buněk:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Výška isometrických buněk:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Odsazení mřížky x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Odsazení mřížky y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr "Kreslit přes režim dlaždic:"
+msgstr "Vykreslit přes dlaždicový režim:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
@@ -1088,7 +1088,7 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr "Průhledná šachovnice následuje pohyb plátna"
 
 msgid "Follow Canvas Zoom Level"
-msgstr "Sledovat úroveň přiblížení plátna"
+msgstr "Sledovat přiblížení plátna"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Průhledná šachovnice následuje úroveň přiblížení plátna"
@@ -1733,7 +1733,7 @@ msgid "Open last project on startup"
 msgstr "Otevřít poslední projekt při spuštění"
 
 msgid "Opens last opened project on startup"
-msgstr "Otevřít naposledy otevřený projekt při spuštění"
+msgstr "Otevřít po spuštění naposledy otevřený projekt"
 
 msgid "Enable autosave"
 msgstr "Povolit automatické ukládání"
