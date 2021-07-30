@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-07-30 15:11\n"
+"PO-Revision-Date: 2021-07-30 15:34\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
@@ -25,12 +25,12 @@ msgstr "इनस्टॉल ${APPNAME}"
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "स्टार्ट मेनू शॉर्टकट बनाएं (अनिवार्य नहीं)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "डेस्कटॉप पर शॉर्टकट बनाएं (अनिवार्य नहीं)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
