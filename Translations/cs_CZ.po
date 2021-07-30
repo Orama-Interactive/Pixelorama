@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 18:01\n"
+"PO-Revision-Date: 2021-07-30 18:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1106,16 +1106,19 @@ msgid "Only custom preset can be modified"
 msgstr "Lze upravit pouze vlastní předvolbu"
 
 msgid "Set application FPS limit:"
-msgstr "Nastavit limit snímků obrazovky aplikace:"
+msgstr "Limit snímků za vteřinu:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limitovat snímky obrazovky na 1, když aplikace běží na pozadí"
+msgstr "Limitovat snímky za vteřinu na 1, když aplikace není v popředí"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Nastaví limit snímků za vteřinu aplikace. Čím nižší číslo, tím menší bude zatížení procesoru,\n"
+"ale může dojít ke snížení odezvy a zasekávání aplikace. 0 značí žádný limit."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Pokud zapnuto, tak je automaticky nastaven limit snímků za vteřinu na 1, pokud okno aplikace není v popředí. \n"
+"Toto nastavení snižuje zátěž procesoru pokud aplikace není používána. Limit je automaticky resetován na vyšší\n"
+"hodnotu, když kurzor myši vstoupí do oblasti okna aplikace."
 
 msgid "Brush:"
 msgstr "Štětec:"
@@ -1157,7 +1160,7 @@ msgid "Fill Shape"
 msgstr "Vyplnit tvar"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Vyplní nakreslený tvar barvou, jinak zůstane tvar dutý"
 
 msgid "Brush color from"
 msgstr "Barva štětce z"
@@ -1287,7 +1290,7 @@ msgstr "Povolit/zakázat onion skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Kolik snímků za sekundu by měl mít náhled animace?\n"
+msgstr "Kolik snímků za vteřinu by měl mít náhled animace?\n"
 "Čím více FPS, tím rychleji je animace přehrávána."
 
 msgid "No loop"
