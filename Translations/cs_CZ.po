@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 18:27\n"
+"PO-Revision-Date: 2021-07-30 23:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1835,4 +1835,7 @@ msgstr "Název palety je povinný!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr "Zmenšení velikosti palety resetuje pozice barev. Barvy, které se nevejdou do nové velikosti palety budou ztraceny!"
+
+msgid "Position:"
+msgstr ""
 
