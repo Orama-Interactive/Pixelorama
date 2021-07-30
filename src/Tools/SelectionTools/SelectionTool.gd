@@ -80,11 +80,23 @@ func draw_start(position : Vector2) -> void:
 		if Tools.alt: # Move selection without content
 			if Tools.control: # Move the selection without cutting it from the original position / makes a quick copy of it
 				_move_content = true
-				selection_node.transform_content_confirm()
-				selection_node.clear_in_selected_cels = false
-				selection_node.transform_content_start()
-				var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-				cel_image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+				if selection_node.is_moving_content:
+					for image in _get_selected_draw_images():
+						image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+
+					var selected_bitmap_copy = project.selection_bitmap.duplicate()
+					project.move_bitmap_values(selected_bitmap_copy)
+
+					project.selection_bitmap = selected_bitmap_copy
+					selection_node.commit_undo("Move Selection", selection_node.undo_data)
+					selection_node.undo_data = selection_node._get_undo_data(true)
+				else:
+					selection_node.transform_content_start()
+					selection_node.clear_in_selected_cels = false
+					for image in _get_selected_draw_images():
+						image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+					Global.canvas.update_selected_cels_textures()
+
 			else:
 				selection_node.transform_content_confirm()
 				_move_content = false
