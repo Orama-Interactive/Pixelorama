@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 15:17\n"
+"PO-Revision-Date: 2021-07-30 16:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -148,7 +148,7 @@ msgid "Crop Image"
 msgstr "Oříznout obrázek"
 
 msgid "Resize Canvas"
-msgstr "Změnit velikost plátna"
+msgstr "Upravit velikost plátna"
 
 msgid "Centralize Image"
 msgstr "Vycentrovat obrázek"
@@ -157,19 +157,19 @@ msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
 msgid "Clear"
-msgstr "Vyčistit"
+msgstr "Zrušit výběr"
 
 msgid "Invert"
-msgstr "Převrátit"
+msgstr "Invertovat"
 
 msgid "Flip"
-msgstr "Překlopit"
+msgstr "Převrátit obrázek"
 
 msgid "Flip Horizontal"
-msgstr "Překlopit vodorovně"
+msgstr "Převrátit vodorovně"
 
 msgid "Flip Vertical"
-msgstr "Překlopit svisle"
+msgstr "Převrátit svisle"
 
 msgid "Preferences"
 msgstr "Nastavení"
@@ -507,10 +507,10 @@ msgid "Theme"
 msgstr "Téma"
 
 msgid "Icon color from:"
-msgstr "Barvy ikony z:"
+msgstr "Barvy ikon z:"
 
 msgid "Icon color:"
-msgstr "Barva ikony:"
+msgstr "Barva ikon:"
 
 msgid "Tool button size:"
 msgstr "Velkost tlačítek nástrojů:"
@@ -540,7 +540,7 @@ msgid "All projects"
 msgstr "Všechny projekty"
 
 msgid "Invert Colors"
-msgstr "Převrátit barvy"
+msgstr "Invertovat barvy"
 
 msgid "Modify Red Channel"
 msgstr "Upravit červený kanál"
@@ -555,13 +555,13 @@ msgid "Modify Alpha Channel"
 msgstr "Upravit alfa kanál"
 
 msgid "Desaturation"
-msgstr "Odebrat saturaci"
+msgstr "Odstíny šedi"
 
 msgid "Outline"
 msgstr "Obrys"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Úprava Odstínu/Sytosti/Hodnoty"
+msgstr "Změna odstínu/sytosti/hodnoty"
 
 msgid "Gradient"
 msgstr "Gradient"
@@ -822,7 +822,7 @@ msgstr "Laso / volný výběr\n\n"
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Přesun\n\n"
+msgstr "Přesun obrázku\n\n"
 "%s pro levé tlačítko myši\n"
 "%s pro pravé tlačítko myši"
 
@@ -836,7 +836,7 @@ msgstr "Přiblížit/oddálit\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Posun\n\n"
+msgstr "Posun plátna\n\n"
 "%s pro levé tlačítko myši\n"
 "%s pro pravé tlačítko myši"
 
@@ -1001,13 +1001,13 @@ msgid "Rectangular grid width:"
 msgstr "Šířka obdélníkové mřížky:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Nastaví, jak daleko od sebe jsou vertikální čáry obdélníkové mřížky"
+msgstr "Nastaví, jak daleko od sebe jsou svislé čáry obdélníkové mřížky"
 
 msgid "Rectangular grid height:"
 msgstr "Výška obdélníkové mřížky:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Nastaví, jak daleko od sebe jsou horizontální čáry obdélníkové mřížky"
+msgstr "Nastaví, jak daleko od sebe jsou vodorovné čáry obdélníkové mřížky"
 
 msgid "Isometric cell bounds width:"
 msgstr ""
@@ -1052,13 +1052,13 @@ msgid "Show at zoom:"
 msgstr "Zobrazit při přiblížení:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Nastaví minimální přiblížení pro zobrazení pixelové mřížky"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Barva pixelové mřížky:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Barva, kterou se vykreslí čáry pixelové mřížky"
 
 msgid "Transparency"
 msgstr "Průhlednost"
@@ -1094,13 +1094,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Průhledná šachovnice následuje úroveň přiblížení plátna"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Animovat okraje rámečku výběru"
 
 msgid "Border color 1:"
-msgstr "Barva rámečku 1:"
+msgstr "První barva rámečku:"
 
 msgid "Border color 2:"
-msgstr "Barva rámečku 2:"
+msgstr "Druhá barva rámečku:"
 
 msgid "Only custom preset can be modified"
 msgstr "Lze upravit pouze vlastní předvolbu"
@@ -1658,13 +1658,13 @@ msgid "Lasso / Free Select Tool"
 msgstr "Laso / volný výběr"
 
 msgid "Move"
-msgstr "Přesun"
+msgstr "Přesun obrázku"
 
 msgid "Zoom"
 msgstr "Přiblížení/oddálení"
 
 msgid "Pan"
-msgstr "Posun"
+msgstr "Posun plátna"
 
 msgid "Color Picker"
 msgstr "Kapátko"
