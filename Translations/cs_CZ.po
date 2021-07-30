@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 16:24\n"
+"PO-Revision-Date: 2021-07-30 16:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -411,7 +411,7 @@ msgid "Bilinear"
 msgstr "Bilineární"
 
 msgid "Cubic"
-msgstr "Kubické"
+msgstr "Kubická"
 
 msgid "Trilinear"
 msgstr "Trilineární"
@@ -459,7 +459,7 @@ msgid "Smooth Zoom"
 msgstr "Vyhlazení přiblížení/oddálení"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "Nastaví hladší přechod při přiblížení nebo přiblížení"
+msgstr "Hladší přechod při přiblížení nebo přiblížení"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Citlivost tlaku na tabletu:"
@@ -504,7 +504,7 @@ msgid "Purple"
 msgstr "Fialová"
 
 msgid "Theme"
-msgstr "Téma"
+msgstr "Motiv"
 
 msgid "Icon color from:"
 msgstr "Barvy ikon z:"
@@ -522,7 +522,7 @@ msgid "Big"
 msgstr "Velká"
 
 msgid "Only affect selection"
-msgstr "Pouze ovlivnit výběr"
+msgstr "Ovlivnit pouze výběr"
 
 msgid "Selected cels"
 msgstr "Vybrané buňky"
@@ -561,13 +561,13 @@ msgid "Outline"
 msgstr "Obrys"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Změna odstínu/sytosti/hodnoty"
+msgstr "Upravit odstín/sytost/hodnotu"
 
 msgid "Gradient"
 msgstr "Gradient"
 
 msgid "Adjust HSV"
-msgstr "Upravit HSV"
+msgstr "Upravit odstín/sytost/hodnotu"
 
 msgid "Type:"
 msgstr "Typ:"
@@ -977,7 +977,7 @@ msgid "Guides color:"
 msgstr "Barva vodítek:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "Barva vodítek zobrazených na plátně"
+msgstr "Barva vodítkových čar zobrazených přes plátno"
 
 msgid "Grid"
 msgstr "Mřížka"
@@ -986,7 +986,7 @@ msgid "Grid type:"
 msgstr "Druh mřížky:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Nastaví druh mřížky mezi obdélníkovou, izometrickou nebo obojím"
+msgstr "Druh pomocné mřížky zobrazené přes plátno"
 
 msgid "Rectangular"
 msgstr "Obdélníková"
@@ -1001,13 +1001,13 @@ msgid "Rectangular grid width:"
 msgstr "Šířka obdélníkové mřížky:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Nastaví, jak daleko od sebe jsou svislé čáry obdélníkové mřížky"
+msgstr "Jak daleko od sebe jsou svislé čáry obdélníkové mřížky"
 
 msgid "Rectangular grid height:"
 msgstr "Výška obdélníkové mřížky:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Nastaví, jak daleko od sebe jsou vodorovné čáry obdélníkové mřížky"
+msgstr "Jak daleko od sebe jsou vodorovné čáry obdélníkové mřížky"
 
 msgid "Isometric cell bounds width:"
 msgstr "Šířka isometrických buněk:"
@@ -1052,7 +1052,7 @@ msgid "Show at zoom:"
 msgstr "Zobrazit při přiblížení:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr "Nastaví minimální přiblížení pro zobrazení pixelové mřížky"
+msgstr "Minimální přiblížení pro zobrazení pixelové mřížky"
 
 msgid "Pixel grid color:"
 msgstr "Barva pixelové mřížky:"
@@ -1730,7 +1730,7 @@ msgid "Open last project..."
 msgstr "Otevřít poslední projekt..."
 
 msgid "Open last project on startup"
-msgstr "Otevřít poslední projekt při spuštění"
+msgstr "Po spuštění otevřít poslední projekt"
 
 msgid "Opens last opened project on startup"
 msgstr "Otevřít po spuštění naposledy otevřený projekt"
