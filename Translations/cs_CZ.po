@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 14:32\n"
+"PO-Revision-Date: 2021-07-30 14:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -193,13 +193,13 @@ msgid "Tallscreen"
 msgstr "Vysoká obrazovka"
 
 msgid "Mirror View"
-msgstr "Zrcadlové zobrazení"
+msgstr "Převrátit plátno"
 
 msgid "Show Grid"
 msgstr "Zobrazit mřížku"
 
 msgid "Show Pixel Grid"
-msgstr "Zobrazit mřížku pixelů"
+msgstr "Zobrazit pixelovou mřížku"
 
 msgid "Show Rulers"
 msgstr "Zobrazit pravítka"
@@ -214,7 +214,7 @@ msgid "Zen Mode"
 msgstr "Zen režim"
 
 msgid "Fullscreen Mode"
-msgstr "Celoobrazovkový režim"
+msgstr "Celá obrazovka"
 
 msgid "Fill with color:"
 msgstr "Vyplnit barvou:"
@@ -555,13 +555,13 @@ msgid "Modify Alpha Channel"
 msgstr "Upravit alfa kanál"
 
 msgid "Desaturation"
-msgstr "Odbarvit"
+msgstr "Odebrat saturaci"
 
 msgid "Outline"
 msgstr "Obrys"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Úprava Odstínu/Nasycení/Hodnoty"
+msgstr "Úprava Odstínu/Sytosti/Hodnoty"
 
 msgid "Gradient"
 msgstr "Gradient"
@@ -615,7 +615,7 @@ msgid "Right to Left"
 msgstr "Zprava doleva"
 
 msgid "View Splash Screen"
-msgstr "Zobrazit uvítací obrazovku"
+msgstr "Zobrazit úvodní okno"
 
 msgid "Online Docs"
 msgstr "Online dokumentace"
@@ -1106,10 +1106,10 @@ msgid "Only custom preset can be modified"
 msgstr "Lze upravit pouze vlastní předvolbu"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Nastavit limit snímků obrazovky aplikace:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Limitovat snímky obrazovky na 1, když aplikace běží na pozadí"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
@@ -1187,10 +1187,10 @@ msgid "Offset"
 msgstr "Odsazení"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Jednoduché stínování"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Posun odstínu"
 
 msgid "Lighten"
 msgstr "Zesvětlení"
@@ -1792,7 +1792,7 @@ msgid "Frame duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "V obou osách"
 
 msgid "Tiled In X Axis"
 msgstr ""
