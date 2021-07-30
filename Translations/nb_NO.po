@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-07-04 12:11\n"
+"PO-Revision-Date: 2021-07-30 23:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1829,4 +1829,7 @@ msgstr "Palettnavn er påkrevd!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr "Redusering av palettstørrelse vil nullstille fargenes lagrede posisjon. Farger som ikke passer inn i den nye palettstørrelsen vil gå tapt!"
+
+msgid "Position:"
+msgstr ""
 
