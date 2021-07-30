@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 15:11\n"
+"PO-Revision-Date: 2021-07-30 15:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1154,7 +1154,7 @@ msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Vyhladí čáry odstraněním pixelů navíc na okrajích"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Vyplnit tvar"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
@@ -1401,7 +1401,7 @@ msgid "Opacity:"
 msgstr "Průhlednost:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Průhlednost dlaždicového režimu:"
 
 msgid "Toggle layer's visibility"
 msgstr "Přepnout viditelnost vrstvy"
@@ -1616,7 +1616,7 @@ msgid "A default background color of a new image"
 msgstr "Výchozí barva pozadí nového obrázku"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Uzamknout poměr stran"
 
 msgid "Portrait"
 msgstr "Na výšku"
@@ -1643,16 +1643,16 @@ msgid "Rectangular Selection"
 msgstr "Obdélníkový výběr"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Eliptický výber"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Polygonální výběr"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Výběr podle barvy"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Kouzelná hůlka"
 
 msgid "Lasso / Free Select Tool"
 msgstr "Laso / volný výběr"
@@ -1679,16 +1679,16 @@ msgid "Bucket"
 msgstr "Kbelík"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Stínování"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Čára"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Obdélník"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Elipsa"
 
 msgid "Switch Colors"
 msgstr "Prohodit barvy"
@@ -1718,7 +1718,7 @@ msgid "Cannot find last project file."
 msgstr "Nelze nalézt soubor posledního projektu."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Soubor projektu nebyl nalezen."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Zatím jste neuložili ani neotevřeli žádný projekt v Pixeloramě!"
@@ -1789,7 +1789,7 @@ msgid "Move the selected frame to the right."
 msgstr "Přesunout vybraný snímek doprava."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Trvání snímku"
 
 msgid "Tiled In Both Axis"
 msgstr "Obě osy"
