@@ -7,10 +7,10 @@
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=5]
 [ext_resource path="res://assets/graphics/timeline/play.png" type="Texture" id=7]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
 shader_param/size = 10.0
+shader_param/alpha = 1.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
 shader_param/offset = Vector2( 0, 0 )
@@ -20,10 +20,9 @@ shader_param/follow_movement = false
 shader_param/follow_scale = false
 
 [node name="CanvasPreviewContainer" type="PanelContainer"]
-margin_right = 278.0
+margin_right = 314.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource( 3 )
 __meta__ = {
@@ -33,7 +32,7 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 293.0
+margin_right = 307.0
 margin_bottom = 157.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
@@ -94,12 +93,12 @@ __meta__ = {
 
 [node name="PreviewViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
 margin_left = 24.0
-margin_right = 284.0
+margin_right = 304.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer/PreviewViewportContainer"]
-size = Vector2( 260, 150 )
+size = Vector2( 280, 150 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
@@ -114,5 +113,6 @@ offset = Vector2( 32, 32 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 4 )
+
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_toggled"]

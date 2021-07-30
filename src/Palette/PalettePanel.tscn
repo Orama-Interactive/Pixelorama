@@ -12,7 +12,7 @@
 margin_right = 324.0
 margin_bottom = 319.0
 rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource( 8 )
 __meta__ = {

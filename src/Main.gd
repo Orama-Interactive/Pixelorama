@@ -12,11 +12,11 @@ onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
 onready var tallscreen_hsplit_container : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer
 onready var bottom_panel : VSplitContainer = tallscreen_hsplit_container.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
-onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit
-onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
-onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/CanvasPreviewContainer
+onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit
+onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
+onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/CanvasPreviewContainer
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
-onready var scroll_container := $MenuAndUI/UI/RightPanel/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
+onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
