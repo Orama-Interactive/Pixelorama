@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-30 17:13\n"
+"PO-Revision-Date: 2021-07-30 18:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1013,31 +1013,31 @@ msgid "Isometric cell bounds width:"
 msgstr "Šířka isometrických buněk:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Šířka boxu který ohraničuje isometrickou buňku"
 
 msgid "Isometric cell bounds height:"
 msgstr "Výška isometrických buněk:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Výška boxu který ohraničuje isometrickou buňku"
 
 msgid "Grid offset x:"
 msgstr "Odsazení mřížky x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Odsazení mřížky na ose x od počátku plátna (levý horní roh obrázku)"
 
 msgid "Grid offset y:"
 msgstr "Odsazení mřížky y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Odsazení mřížky na ose y od počátku plátna (levý horní roh obrázku)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Vykreslit přes dlaždicový režim:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Pokud vypnuto, tak bude mřížka vykreslena pouze přes původní obrázek"
 
 msgid "Grid color:"
 msgstr "Barva mřížky:"
