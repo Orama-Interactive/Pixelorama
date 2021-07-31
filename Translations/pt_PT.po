@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2021-07-31 23:49\n"
+"PO-Revision-Date: 2021-07-31 23:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -408,13 +408,13 @@ msgid "Nearest"
 msgstr "Mais próximo"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 msgid "Cubic"
 msgstr "Cúbico"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilinear"
 
 msgid "General"
 msgstr "Geral"
@@ -426,7 +426,7 @@ msgid "Language"
 msgstr "Linguagem"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 msgid "Themes"
 msgstr "Temas"
@@ -444,7 +444,7 @@ msgid "Backup"
 msgstr "Cópia de Segurança"
 
 msgid "Performance"
-msgstr ""
+msgstr "Performance"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -576,7 +576,7 @@ msgid "Angle:"
 msgstr "Angulo:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Hue:"
 
 msgid "Saturation:"
 msgstr "Saturação:"
@@ -588,7 +588,7 @@ msgid "Apply"
 msgstr "Aplicar"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
 msgstr "Colocar dentro da imagem"
@@ -639,7 +639,7 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr "©2019-presente por Orama Interactive e contribuidores"
 
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 msgid "GitHub Repo"
 msgstr "Repositório de Github"
@@ -699,7 +699,7 @@ msgid "Catalan"
 msgstr "Catalão"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
 msgstr "Indonésio"
@@ -1223,13 +1223,13 @@ msgid "Fit to frame"
 msgstr "Preencher "
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Zoom"
 
 msgid "Mirroring"
 msgstr "Espelhar"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr "Habilitar o desenho espelhado horizontalmente"
@@ -1238,7 +1238,7 @@ msgid "Enable vertical mirrored drawing"
 msgstr "Habilitar o desenho espelhado verticalmente"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Frame atual:"
@@ -1620,10 +1620,10 @@ msgid "Templates:"
 msgstr "Modelo:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Preset"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Preset:"
 
 msgid "Default"
 msgstr "Padrão"
@@ -1653,7 +1653,7 @@ msgid "Move"
 msgstr "Mover"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Pan"
 msgstr "Mover"
@@ -1746,7 +1746,7 @@ msgid "Close"
 msgstr "Fechar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Apagar"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1826,5 +1826,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr "Reduzir o tamanho da palete vai resetar as posições das cores. Cores que não cabem na palete vão ser perdidas!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Posição:"
 
