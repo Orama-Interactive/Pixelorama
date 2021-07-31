@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-07-31 16:55\n"
+"PO-Revision-Date: 2021-07-31 17:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -148,19 +148,19 @@ msgid "Crop Image"
 msgstr "Beskær Billede"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Ændr størrelse på Lærred"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centralisér Billede"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotér Billede"
 
 msgid "Clear"
-msgstr ""
+msgstr "Ryd"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertér"
 
 msgid "Flip"
 msgstr ""
@@ -464,22 +464,22 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Påvirk Penslens Alfa"
 
 msgid "Color:"
-msgstr ""
+msgstr "Farve:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Guide farve:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Systemsprog"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Skærmskalering"
 
 msgid "Dim interface on dialog popup"
 msgstr ""
