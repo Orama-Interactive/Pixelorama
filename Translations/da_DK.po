@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-07-31 17:09\n"
+"PO-Revision-Date: 2021-07-31 17:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -482,76 +482,76 @@ msgid "Display Scale"
 msgstr "Skærmskalering"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Dæmp brugerflades lysstyrke ved popup-dialog"
 
 msgid "Dark"
-msgstr ""
+msgstr "Mørk"
 
 msgid "Gray"
-msgstr ""
+msgstr "Grå"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blå"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamel"
 
 msgid "Light"
-msgstr ""
+msgstr "Lys"
 
 msgid "Purple"
-msgstr ""
+msgstr "Lilla"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Ikonfarve fra:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Ikonfarve:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Værktøjsknap-størrelse:"
 
 msgid "Small"
-msgstr ""
+msgstr "Lille"
 
 msgid "Big"
-msgstr ""
+msgstr "Stor"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Påvirk kun det markerede"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Valgte cels"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Nuværende cel"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Nuværende ramme"
 
 msgid "All frames"
-msgstr ""
+msgstr "Alle rammer"
 
 msgid "All projects"
-msgstr ""
+msgstr "Alle projekter"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Invertér Farver"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Ændr Rød Kanal"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Ændr Grøn Kanal"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Ændr Blå Kanal"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Ændr Alpha Kanal"
 
 msgid "Desaturation"
 msgstr ""
