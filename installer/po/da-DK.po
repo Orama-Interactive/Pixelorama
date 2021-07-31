@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2021-07-31 16:19\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
@@ -20,27 +20,27 @@ msgstr ""
 #. SecInstall
 #: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Installér ${APPNAME}"
 
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Opret Startmenu-genveje (valgfrit)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Opret genvej på Skrivebord (valgfrit)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Afinstallér ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Fjern konfigurationsfiler (valgfrit)"
 
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200
