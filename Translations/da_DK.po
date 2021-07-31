@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-07-31 16:42\n"
+"PO-Revision-Date: 2021-07-31 16:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -43,109 +43,109 @@ msgid "Frame Size"
 msgstr "Rammestørrelse"
 
 msgid "Size:"
-msgstr ""
+msgstr "Størrelse:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Bredde:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Højde:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centrér"
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "Edit"
-msgstr ""
+msgstr "Redigér"
 
 msgid "Select"
-msgstr ""
+msgstr "Vælg"
 
 msgid "View"
-msgstr ""
+msgstr "Vis"
 
 msgid "Image"
-msgstr ""
+msgstr "Billede"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effekter"
 
 msgid "Help"
-msgstr ""
+msgstr "Hjælp"
 
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 msgid "New..."
-msgstr ""
+msgstr "Ny..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Åbn..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Gem..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Gem som..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Benyt ZSTD-Komprimering"
 
 msgid "Import"
-msgstr ""
+msgstr "Importér"
 
 msgid "Export"
-msgstr ""
+msgstr "Eksportér"
 
 msgid "Export..."
-msgstr ""
+msgstr "Eksportér..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Eksportér som..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Eksportér PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Eksportér PNG som..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Afslut"
 
 msgid "Undo"
-msgstr ""
+msgstr "Fortryd"
 
 msgid "Redo"
-msgstr ""
+msgstr "Gentag"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopiér"
 
 msgid "Cut"
-msgstr ""
+msgstr "Klip"
 
 msgid "Paste"
-msgstr ""
+msgstr "Indsæt"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Ny Pensel"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Skalér Billede"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Procentdel"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Beskær Billede"
 
 msgid "Resize Canvas"
 msgstr ""
