@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-07-31 15:59\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "बदलाव करें"
 
 msgid "Select"
-msgstr ""
+msgstr "चुनें"
 
 msgid "View"
 msgstr "देखें"
@@ -139,13 +139,13 @@ msgid "Scale Image"
 msgstr ""
 
 msgid "Pixels"
-msgstr ""
+msgstr "पिक्सेल"
 
 msgid "Percentage"
-msgstr ""
+msgstr "प्रतिशत"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "इमेज क्रॉप करें"
 
 msgid "Resize Canvas"
 msgstr ""
@@ -157,13 +157,13 @@ msgid "Rotate Image"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "साफ करें"
 
 msgid "Invert"
-msgstr ""
+msgstr "उल्टा"
 
 msgid "Flip"
-msgstr ""
+msgstr "पलटे"
 
 msgid "Flip Horizontal"
 msgstr ""
@@ -184,7 +184,7 @@ msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "ऑटो"
 
 msgid "Widescreen"
 msgstr ""
@@ -196,13 +196,13 @@ msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
-msgstr ""
+msgstr "ग्रिड दिखाएं"
 
 msgid "Show Pixel Grid"
 msgstr ""
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "मापक दिखाएँ"
 
 msgid "Show Guides"
 msgstr ""
