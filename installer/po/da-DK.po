@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-07-31 16:19\n"
+"PO-Revision-Date: 2021-07-31 16:29\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
@@ -45,25 +45,25 @@ msgstr "Fjern konfigurationsfiler (valgfrit)"
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Installerer ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Opretter Startmenu-genveje til ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Opretter en Skrivebords-genvej til ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: ..\pixelorama.nsi:203
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Afinstallerer ${APPNAME} ${APPVERSION} og fjerner alle genveje."
 
 #. DESC_un.SecConfig
 #: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Fjerner konfigurationsfiler for ${APPNAME}."
 
