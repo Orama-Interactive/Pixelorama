@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-07-31 17:21\n"
+"PO-Revision-Date: 2021-07-31 17:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -554,10 +554,10 @@ msgid "Modify Alpha Channel"
 msgstr "Ændr Alpha Kanal"
 
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturation"
 
 msgid "Outline"
-msgstr ""
+msgstr "Kontur"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
