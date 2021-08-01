@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:19\n"
+"PO-Revision-Date: 2021-08-01 11:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -585,34 +585,34 @@ msgid "Value:"
 msgstr "Værdi:"
 
 msgid "Apply"
-msgstr ""
+msgstr "Anvend"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Placér inde i billede"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Tykkelse:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Farver:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Trin:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Top til Bund"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Bund til Top"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Venstre mod Højre"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Højre mod Venstre"
 
 msgid "View Splash Screen"
 msgstr ""
@@ -747,19 +747,19 @@ msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "unavngivet"
 
 msgid "imported"
-msgstr ""
+msgstr "importeret"
 
 msgid "copy"
-msgstr ""
+msgstr "kopi"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Er du sikker på at du vil afslutte Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Billede er ikke gemt"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
