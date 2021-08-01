@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:09\n"
+"PO-Revision-Date: 2021-08-01 11:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -456,13 +456,13 @@ msgid "Restore default value"
 msgstr "Gendan standardværdi"
 
 msgid "Smooth Zoom"
-msgstr "Smooth Zoom"
+msgstr "Glat Zoom"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Tilføjer en glattere overgang når der zoomes ind eller ud"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Tablet-trykfølsomhed:"
 
 msgid "None"
 msgstr "Ingen"
@@ -561,28 +561,28 @@ msgid "Outline"
 msgstr "Kontur"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Justér Nuance/Mætning/Værdi"
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradient"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Justér HSV"
 
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Vinkel:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Nuance:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Mætning:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Værdi:"
 
 msgid "Apply"
 msgstr ""
