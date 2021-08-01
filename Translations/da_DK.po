@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:58\n"
+"PO-Revision-Date: 2021-08-01 12:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -765,26 +765,30 @@ msgid "You have unsaved changes. If you proceed, the progress you have made will
 msgstr "Du har ændringer, som ikke er gemt. Hvis du fortsætter vil ændringerne blive tabt."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Gem før programmet afslutter?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Du har ændringer, som ikke er gemt. Hvordan har du lyst at fortsætte?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Gem & Afslut"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Afslut uden at gemme"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Rektangulær Markering\n\n"
+"%s for venstre museknap\n"
+"%s for højre museknap"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Elliptisk Markering\n\n"
+"%s for venstre museknap\n"
+"%s for højre museknap"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
