@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 08:59\n"
+"PO-Revision-Date: 2021-08-01 09:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,67 +169,67 @@ msgid "Flip Horizontal"
 msgstr "Spejlvend vandret"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Spejlvend lodret"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Præferencer"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Felt-tilstand"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Gennemsigtighed af Vindue"
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Widescreen"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Tallscreen"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Spejlvisning"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Vis Gitter"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Vis Pixelgitter"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Vis Linealer"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Vis Guider"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Vis Animationstidslinje"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zen-Tilstand"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Fuldskærmsvisning"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Udfyld med farve:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Åbn en Fil"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Åbn Fil(er)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Importér Indstillinger"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importér som:"
 
 msgid "Recent projects"
 msgstr ""
