@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 10:49\n"
+"PO-Revision-Date: 2021-08-01 11:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,7 +336,7 @@ msgid "Frame:"
 msgstr "Ramme:"
 
 msgid "Orientation:"
-msgstr "Retning:"
+msgstr "Orientering:"
 
 msgid "Browse"
 msgstr "Browse"
@@ -354,70 +354,70 @@ msgid "Select Current Folder"
 msgstr "Vælg Nuværende Mappe"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Åbn en Mappe"
 
 msgid "All frames as multiple files"
-msgstr ""
+msgstr "Alle rammer som flere filer"
 
 msgid "All frames as a single file animation"
-msgstr ""
+msgstr "Alle rammer som en enkelt filanimation"
 
 msgid "Background:"
-msgstr ""
+msgstr "Baggrund:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Retning:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Frem"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Tilbage"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolonner"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolonner:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rækker"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Rækker:"
 
 msgid "Path:"
-msgstr ""
+msgstr "Sti:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Mapper & Filer:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Opret Mappe"
 
 msgid "File:"
-msgstr ""
+msgstr "Fil:"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolation:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Nærmest"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Kubisk"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Trilinear"
 
 msgid "General"
-msgstr ""
+msgstr "Generel"
 
 msgid "Startup"
 msgstr ""
