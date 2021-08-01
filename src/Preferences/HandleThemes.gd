@@ -83,6 +83,11 @@ func change_theme(ID : int) -> void:
 	var fake_vsplit_grabber : TextureRect = Global.animation_timeline.find_node("FakeVSplitContainerGrabber")
 	fake_vsplit_grabber.texture = main_theme.get_icon("grabber", "VSplitContainer")
 
+	# Theming for left tools panel
+	var fake_hsplit_grabber : TextureRect = Global.tool_panel.find_node("FakeHSplitGrabber")
+	fake_hsplit_grabber.texture = main_theme.get_icon("grabber", "HSplitContainer")
+	(Global.tool_panel.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
+
 	var layer_button_panel_container : PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
 	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
 

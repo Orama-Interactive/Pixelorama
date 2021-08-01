@@ -20,9 +20,9 @@ shader_param/follow_movement = false
 shader_param/follow_scale = false
 
 [node name="CanvasPreviewContainer" type="PanelContainer"]
-margin_right = 314.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 300, 0 )
+margin_right = 328.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 318, 0 )
 size_flags_vertical = 0
 script = ExtResource( 3 )
 __meta__ = {
@@ -32,12 +32,12 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 307.0
-margin_bottom = 157.0
+margin_right = 321.0
+margin_bottom = 167.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_right = 20.0
-margin_bottom = 150.0
+margin_bottom = 160.0
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 margin_left = 6.0
@@ -51,7 +51,7 @@ align = 1
 margin_left = 2.0
 margin_top = 18.0
 margin_right = 18.0
-margin_bottom = 108.0
+margin_bottom = 118.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -59,9 +59,9 @@ step = 0.01
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
 margin_left = 7.0
-margin_top = 112.0
+margin_top = 122.0
 margin_right = 12.0
-margin_bottom = 126.0
+margin_bottom = 136.0
 size_flags_horizontal = 4
 text = "-"
 align = 1
@@ -69,9 +69,9 @@ align = 1
 [node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer" groups=[
 "UIButtons",
 ]]
-margin_top = 130.0
+margin_top = 140.0
 margin_right = 20.0
-margin_bottom = 150.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -93,12 +93,12 @@ __meta__ = {
 
 [node name="PreviewViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
 margin_left = 24.0
-margin_right = 304.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 0, 150 )
+margin_right = 314.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 290, 160 )
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer/PreviewViewportContainer"]
-size = Vector2( 280, 150 )
+size = Vector2( 290, 160 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3

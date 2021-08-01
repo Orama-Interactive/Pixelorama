@@ -7,8 +7,9 @@
 [sub_resource type="ShortCut" id=1]
 
 [node name="ColorAndToolOptions" type="VBoxContainer"]
-margin_right = 330.0
+margin_right = 300.0
 margin_bottom = 255.0
+rect_min_size = Vector2( 318, 0 )
 size_flags_vertical = 3
 custom_constants/separation = 8
 script = ExtResource( 8 )
@@ -17,14 +18,14 @@ __meta__ = {
 }
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="."]
-margin_right = 330.0
+margin_right = 318.0
 margin_bottom = 32.0
 custom_constants/separation = 13
 alignment = 1
 
 [node name="LeftColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]
-margin_left = 75.0
-margin_right = 139.0
+margin_left = 69.0
+margin_right = 133.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "Choose a color for the left tool"
@@ -33,8 +34,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="ColorButtonsVertical" type="VBoxContainer" parent="ColorPickersHorizontal"]
-margin_left = 152.0
-margin_right = 177.0
+margin_left = 146.0
+margin_right = 171.0
 margin_bottom = 32.0
 custom_constants/separation = 2
 alignment = 1
@@ -73,8 +74,8 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 2 )
 
 [node name="RightColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]
-margin_left = 190.0
-margin_right = 254.0
+margin_left = 184.0
+margin_right = 248.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 64, 32 )
 hint_tooltip = "Choose a color for the right tool"
@@ -85,26 +86,26 @@ color = Color( 1, 1, 1, 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_top = 40.0
-margin_right = 330.0
+margin_right = 318.0
 margin_bottom = 255.0
 size_flags_vertical = 3
 
 [node name="ToolOptions" type="HBoxContainer" parent="ScrollContainer"]
-margin_right = 330.0
+margin_right = 318.0
 margin_bottom = 215.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 10
+custom_constants/separation = 8
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="ScrollContainer/ToolOptions"]
-margin_right = 160.0
+margin_right = 155.0
 margin_bottom = 215.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 
 [node name="RightPanelContainer" type="PanelContainer" parent="ScrollContainer/ToolOptions"]
-margin_left = 170.0
-margin_right = 330.0
+margin_left = 163.0
+margin_right = 318.0
 margin_bottom = 215.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3

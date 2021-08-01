@@ -100,7 +100,7 @@ func change_ui_layout(mode : String) -> void:
 		tools_and_canvas.split_offset = tallscreen_hsplit_container.split_offset
 		reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
-		reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
+		reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
 		color_and_tool_options.rect_min_size.x = 0
 		canvas_preview_container.visible = true
@@ -121,7 +121,7 @@ func change_ui_layout(mode : String) -> void:
 		scroll_container.rect_min_size = Vector2(0, 0)
 		color_and_tool_options.set("custom_constants/separation", 8)
 		if mode == "widescreen":
-			reparent_node_to(canvas_preview_container, right_panel.get_node("PreviewAndPalettes"), 0)
+			reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
 		else:
 			reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 

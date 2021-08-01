@@ -168,6 +168,8 @@ func set_button_size(button_size : int) -> void:
 
 	# It doesn't actually set the size to zero, it just resets it
 	_tool_buttons.get_parent().rect_size = Vector2.ZERO
+	_tool_buttons.columns = 1
+	_tool_buttons.get_parent().get_parent().get_parent().get_parent().split_offset = 0
 
 
 func update_tool_buttons() -> void:
