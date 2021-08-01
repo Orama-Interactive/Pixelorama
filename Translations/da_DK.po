@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 20:50\n"
+"PO-Revision-Date: 2021-08-01 20:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1059,7 +1059,7 @@ msgid "Pixel grid color:"
 msgstr "Pixelgitter farve:"
 
 msgid "A color of the pixel grid"
-msgstr "En farve fra pixelgitteret"
+msgstr "En farve på pixelgitteret"
 
 msgid "Transparency"
 msgstr "Transparens"
@@ -1194,7 +1194,7 @@ msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "Gør lysere"
 
 msgid "Darken"
 msgstr ""
@@ -1218,22 +1218,22 @@ msgid "Mode:"
 msgstr ""
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Zoom ind"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Zoom ud"
 
 msgid "Options:"
-msgstr ""
+msgstr "Indstillinger:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Tilpas til ramme"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% Zoom"
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Spejling"
 
 msgid "Horizontal"
 msgstr "Horisontal"
@@ -1248,15 +1248,17 @@ msgid "Vertical"
 msgstr "Vertikal"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Nuværende ramme:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "Gå til den første ramme\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "Gå til den forrige ramme\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
@@ -1285,7 +1287,7 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr ""
+msgstr "Ingen loop"
 
 msgid "Cycle loop"
 msgstr ""
@@ -1312,13 +1314,13 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 msgid "From:"
-msgstr ""
+msgstr "Fra:"
 
 msgid "To:"
-msgstr ""
+msgstr "Til:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1346,10 +1348,10 @@ msgid "Clone Frame"
 msgstr ""
 
 msgid "Move Left"
-msgstr ""
+msgstr "Flyt til Venstre"
 
 msgid "Move Right"
-msgstr ""
+msgstr "Flyt til Højre"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -1367,10 +1369,10 @@ msgid "Frame properties"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Lag"
 
 msgid "Layers"
-msgstr ""
+msgstr "Lag"
 
 msgid "Create a new layer"
 msgstr ""
@@ -1539,7 +1541,7 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
-msgstr ""
+msgstr "Farvenavn:"
 
 msgid "Use current left & right colors"
 msgstr ""
@@ -1548,7 +1550,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Fejl"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
