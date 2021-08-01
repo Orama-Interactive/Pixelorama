@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:39\n"
+"PO-Revision-Date: 2021-08-01 11:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -636,49 +636,49 @@ msgid "Developed by Orama Interactive"
 msgstr "Udviklet af Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-nutid af Orama Interactive og bidragsydere"
 
 msgid "Website"
-msgstr ""
+msgstr "Hjemmeside"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub Repo"
 
 msgid "Donate"
-msgstr ""
+msgstr "Donér"
 
 msgid "Developers"
-msgstr ""
+msgstr "Udviklere"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Bidragsydere"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donorer"
 
 msgid "Translators"
-msgstr ""
+msgstr "Oversættere"
 
 msgid "English"
-msgstr ""
+msgstr "Engelsk"
 
 msgid "Greek"
-msgstr ""
+msgstr "Græsk"
 
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasiliansk-Portugisisk"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 msgid "Chinese Simplified"
 msgstr ""
