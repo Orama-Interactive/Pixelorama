@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-07-31 17:28\n"
+"PO-Revision-Date: 2021-08-01 08:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,10 +163,10 @@ msgid "Invert"
 msgstr "Invertér"
 
 msgid "Flip"
-msgstr ""
+msgstr "Spejlvend"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Spejlvend vandret"
 
 msgid "Flip Vertical"
 msgstr ""
