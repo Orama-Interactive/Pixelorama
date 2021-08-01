@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 16:19\n"
+"PO-Revision-Date: 2021-08-01 20:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1008,7 +1008,7 @@ msgid "Rectangular grid height:"
 msgstr "Rektangulær gitter-højde:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Angiver hvor langt fra hinanden horisontale linjer er i det rektangulære gitter"
 
 msgid "Isometric cell bounds width:"
 msgstr ""
@@ -1047,7 +1047,7 @@ msgid "A color of the grid"
 msgstr ""
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixelgitter"
 
 msgid "Show at zoom:"
 msgstr ""
@@ -1056,13 +1056,13 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Pixelgitter farve:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "En farve fra pixelgitteret"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparens"
 
 msgid "Checker size:"
 msgstr ""
@@ -1098,10 +1098,10 @@ msgid "Animated selection borders"
 msgstr ""
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Kantfarve 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Kantfarve 2:"
 
 msgid "Only custom preset can be modified"
 msgstr ""
@@ -1119,16 +1119,16 @@ msgid "If this is toggled on, when the application's window loses focus, the FPS
 msgstr ""
 
 msgid "Brush:"
-msgstr ""
+msgstr "Pensel:"
 
 msgid "Select a brush"
 msgstr "Vælg en pensel"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Pixelpensel"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Cirkelpensel"
 
 msgid "Filled circle brush"
 msgstr ""
