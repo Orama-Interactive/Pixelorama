@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 16:09\n"
+"PO-Revision-Date: 2021-08-01 16:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,7 +166,7 @@ msgid "Flip"
 msgstr "Spejlvend"
 
 msgid "Flip Horizontal"
-msgstr "Spejlvend vandret"
+msgstr "Spejlvend Horisontalt"
 
 msgid "Flip Vertical"
 msgstr "Spejlvend vertikalt"
@@ -262,7 +262,7 @@ msgid "New pattern"
 msgstr "Nyt mønster"
 
 msgid "Horizontal frames:"
-msgstr "Vandrette rammer:"
+msgstr "Horisontale rammer:"
 
 msgid "Vertical frames:"
 msgstr "Vertikale rammer:"
@@ -1236,13 +1236,13 @@ msgid "Mirroring"
 msgstr ""
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horisontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Aktivér horisontal spejltegning"
 
 msgid "Enable vertical mirrored drawing"
-msgstr "Slå vertikal spejltegning til"
+msgstr "Aktivér vertikal spejltegning"
 
 msgid "Vertical"
 msgstr "Vertikal"
