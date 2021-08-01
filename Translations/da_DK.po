@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:28\n"
+"PO-Revision-Date: 2021-08-01 11:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -615,25 +615,25 @@ msgid "Right to Left"
 msgstr "Højre mod Venstre"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Vis Splash Screen"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Online Dokumentation"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problem-Tracker"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Ændringslog"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Om Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pixelate your dreams!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Udviklet af Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
@@ -759,10 +759,10 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Er du sikker på at du vil afslutte Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr "Billede er ikke gemt"
+msgstr "Ugemt Billede"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "Du har ændringer, som ikke er gemt. Hvis du fortsætter vil ændringerne blive tabt."
 
 msgid "Save before exiting?"
 msgstr ""
