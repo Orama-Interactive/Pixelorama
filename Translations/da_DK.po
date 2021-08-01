@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:48\n"
+"PO-Revision-Date: 2021-08-01 11:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -681,70 +681,70 @@ msgid "Russian"
 msgstr "Russisk"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Forenklet Kinesisk"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Traditionel Kinesisk"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lettisk"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Catalansk"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesisk"
 
 msgid "Czech"
-msgstr ""
+msgstr "Tjekkisk"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabisk"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Tyrkisk"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norsk Bokmål"
 
 msgid "Korean"
-msgstr ""
+msgstr "Koreansk"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungarsk"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumænsk"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japansk"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainsk"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Udviklingsteam"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Ledende Programmør"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "UI-designer"
 
 msgid "GitHub Contributors"
-msgstr ""
+msgstr "GitHub-bidragsydere"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Kunst af: %s"
 
 msgid "untitled"
 msgstr "unavngivet"
