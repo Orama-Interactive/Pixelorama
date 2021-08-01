@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 09:41\n"
+"PO-Revision-Date: 2021-08-01 10:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -315,31 +315,31 @@ msgstr "Kan ikke indlæse fil '%s'.\n"
 "Fejlkode: %s"
 
 msgid "Frame"
-msgstr ""
+msgstr "Ramme"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Rammer:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Alle Rammer"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animation"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Forhåndsvisning:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Ramme:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Retning:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Browse"
 
 msgid "Resize:"
 msgstr ""
