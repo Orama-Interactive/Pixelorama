@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 13:29\n"
+"PO-Revision-Date: 2021-08-01 13:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -908,40 +908,40 @@ msgid "Left pixel indicator"
 msgstr "Venstre pixel-indikator"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Vis venstre museknap pixel-indikator eller pensel på lærredet når der tegnes"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Højre pixel-indikator"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Vis højre museknap pixel-indikator eller pensel på lærredet når der tegnes"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Vis venstre værktøjsikon"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Fremviser det valgte venstre værktøjs ikon ved siden af markøren på lærredet"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Vis højre værktøjsikon"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Fremviser det valgte højre værktøjs ikon ved siden af markøren på lærredet"
 
 msgid "Guides"
-msgstr ""
+msgstr "Guider"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Guiders farve:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "En farve på linealguider, som vises på lærredet"
 
 msgid "Grid"
-msgstr ""
+msgstr "Gitter"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Gitter-type:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
