@@ -105,6 +105,7 @@ func commit_undo(action : String) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
+		image.unlock()
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
 	project.undo_redo.add_do_method(Global, "redo", frame, layer)

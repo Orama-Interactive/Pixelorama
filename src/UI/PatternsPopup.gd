@@ -17,7 +17,7 @@ func select_pattern(pattern : Pattern) -> void:
 
 
 static func create_button(image : Image) -> Node:
-	var button : BaseButton = load("res://src/UI/PatternButton.tscn").instance()
+	var button : BaseButton = preload("res://src/UI/PatternButton.tscn").instance()
 	var tex := ImageTexture.new()
 	tex.create_from_image(image, 0)
 	button.get_child(0).texture = tex

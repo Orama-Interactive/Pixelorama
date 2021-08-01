@@ -47,5 +47,6 @@ func flip_image(image : Image, affect_selection : bool, project : Project = Glob
 			selected_image.flip_x()
 		if flip_v.pressed:
 			selected_image.flip_y()
-
+		selected_image.unlock()
 		image.blit_rect_mask(selected_image, selected_image, Rect2(Vector2.ZERO, selected_image.get_size()), Vector2.ZERO)
+		image.unlock()

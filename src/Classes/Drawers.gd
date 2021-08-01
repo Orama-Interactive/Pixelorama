@@ -66,9 +66,11 @@ func set_pixel_perfect(value: bool) -> void:
 		drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
 
-func set_pixel(image: Image, position: Vector2, color: Color) -> void:
+func set_pixel(image: Image, position: Vector2, color: Color, ignore_mirroring := false) -> void:
 	var project : Project = Global.current_project
 	drawers[0].set_pixel(image, position, color, color_op)
+	if ignore_mirroring:
+		return
 
 	# Handle Mirroring
 	var mirror_x = project.x_symmetry_point - position.x

@@ -31,15 +31,21 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - UI icons have been changed to single-color "symbolic" textures. This removes the need for multiple graphics for each theme type as these new textures can change their modulation on runtime.
 - Image color inverting, desaturation and HSV adjusting are now shader based. This improves the performance of these image effects and prevents crashes on large images. [#475](https://github.com/Orama-Interactive/Pixelorama/pull/475)
 - The lighten/darken tool has been renamed to Shading tool.
+- Brushes now work with the Shading tool.
 - You now have to double click a layer button to rename a layer. Clicking it once just selects the layer.
 - Pixelorama's icon has been changed - proposed by creepertron95.
+- The color picker tool now works on the surrounding tiles when tile mode is enabled. [#506](https://github.com/Orama-Interactive/Pixelorama/issues/506)
 - The toolbar on the left can now be resized by the user.
 - The frame delay minimum value is now 0.01 instead of 0.
+- Cloning frames now create linked cels on layers where the cel linking button is enabled.
 
 ### Fixed
+- Issues such as not being able to create guides at random times, which are a result of PoolVectorArray locking issues, may have finally been solved. [#331](https://github.com/Orama-Interactive/Pixelorama/issues/331)
+- Cropping large images no longer crash the application.
 - Zen mode now hides the animation timeline again. [#478](https://github.com/Orama-Interactive/Pixelorama/pull/478)
 - Pixelorama should no longer crash when loading a project and the symmetry axes fail to load. They will still fail to load, but the app will no longer crash. [e8b36bbc61154641ce9eec1f0a845a0061d3585d](https://github.com/Orama-Interactive/Pixelorama/commit/e8b36bbc61154641ce9eec1f0a845a0061d3585d)
 - Fixed gif exporting stuck on 0% on large projects. [#488](https://github.com/Orama-Interactive/Pixelorama/pull/488)
+- Cropping images should now work as expected. Before, there were times when it did not crop the image at the correct size.
 - Fixed a rare division by zero crash when changing the display scale under Preferences.
 - Changed pixel grid shortcut on macOS because it conflicted with a system hotkey. [#494](https://github.com/Orama-Interactive/Pixelorama/pull/494)
 <br><br>

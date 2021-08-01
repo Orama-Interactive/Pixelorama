@@ -124,8 +124,6 @@ func fill_in_color(position : Vector2) -> void:
 			if tool_slot.color.is_equal_approx(color):
 				return
 
-		image.lock()
-
 		for x in Global.current_project.size.x:
 			for y in Global.current_project.size.y:
 				var pos := Vector2(x, y)
@@ -165,7 +163,6 @@ func _flood_fill(position : Vector2) -> void:
 			if tool_slot.color.is_equal_approx(color):
 				return
 
-		image.lock()
 		var processed := BitMap.new()
 		processed.create(image.get_size())
 		var q = [position]
@@ -203,6 +200,7 @@ func _set_pixel(image : Image, x : int, y : int, color : Color) -> void:
 		var px := int(x + _offset_x) % int(size.x)
 		var py := int(y + _offset_y) % int(size.y)
 		var pc := _pattern.image.get_pixel(px, py)
+		_pattern.image.unlock()
 		image.set_pixel(x, y, pc)
 
 
@@ -219,6 +217,7 @@ func commit_undo(action : String, undo_data : Dictionary) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
+		image.unlock()
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
 	project.undo_redo.add_do_method(Global, "redo", frame, layer)

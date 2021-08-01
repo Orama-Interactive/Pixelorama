@@ -189,7 +189,6 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 				cel_opacity = file.get_float()
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
-			image.lock()
 			frame_class.cels.append(Cel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
@@ -352,7 +351,6 @@ func open_image_as_new_tab(path : String, image : Image) -> void:
 
 	var frame := Frame.new()
 	image.convert(Image.FORMAT_RGBA8)
-	image.lock()
 	frame.cels.append(Cel.new(image, 1))
 
 	project.frames.append(frame)
@@ -374,14 +372,12 @@ func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : in
 			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			cropped_image.lock()
 			frame.cels.append(Cel.new(cropped_image, 1))
 
 			for _i in range(1, project.layers.size()):
 				var empty_sprite := Image.new()
 				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 				empty_sprite.fill(Color(0, 0, 0, 0))
-				empty_sprite.lock()
 				frame.cels.append(Cel.new(empty_sprite, 1))
 
 			project.frames.append(frame)
@@ -436,7 +432,6 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> v
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			image.lock()
 			frames[i].cels[layer_index] = (Cel.new(image, 1))
 			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
 			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
@@ -461,12 +456,10 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	for i in project.layers.size():
 		if i == layer_index:
 			image.convert(Image.FORMAT_RGBA8)
-			image.lock()
 			frame.cels.append(Cel.new(image, 1))
 		else:
 			var empty_image := Image.new()
 			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			empty_image.lock()
 			frame.cels.append(Cel.new(empty_image, 1))
 
 	new_frames.append(frame)
@@ -498,12 +491,10 @@ func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0
 		var new_cels : Array = project.frames[i].cels.duplicate(true)
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			image.lock()
 			new_cels.append(Cel.new(image, 1))
 		else:
 			var empty_image := Image.new()
 			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			empty_image.lock()
 			new_cels.append(Cel.new(empty_image, 1))
 
 		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)

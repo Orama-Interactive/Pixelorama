@@ -77,19 +77,33 @@ func draw_start(position : Vector2) -> void:
 	if offsetted_pos.x >= 0 and offsetted_pos.y >= 0 and project.selection_bitmap.get_bit(offsetted_pos) and (!Tools.control or Tools.alt) and !Tools.shift and !_ongoing_selection:
 		# Move current selection
 		_move = true
-		if Tools.control and Tools.alt: # Move selection without content
-			selection_node.transform_content_confirm()
-			_move_content = false
-			selection_node.move_borders_start()
+		if Tools.alt: # Move selection without content
+			if Tools.control: # Move the selection without cutting it from the original position / makes a quick copy of it
+				_move_content = true
+				if selection_node.is_moving_content:
+					for image in _get_selected_draw_images():
+						image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+
+					var selected_bitmap_copy = project.selection_bitmap.duplicate()
+					project.move_bitmap_values(selected_bitmap_copy)
+
+					project.selection_bitmap = selected_bitmap_copy
+					selection_node.commit_undo("Move Selection", selection_node.undo_data)
+					selection_node.undo_data = selection_node._get_undo_data(true)
+				else:
+					selection_node.transform_content_start()
+					selection_node.clear_in_selected_cels = false
+					for image in _get_selected_draw_images():
+						image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
+					Global.canvas.update_selected_cels_textures()
+
+			else:
+				selection_node.transform_content_confirm()
+				_move_content = false
+				selection_node.move_borders_start()
 		else:
 			_move_content = true
-			if Tools.alt: # Move the selection without cutting it from the original position / makes a quick copy of it
-				selection_node.transform_content_confirm()
-				selection_node.clear_in_selected_cels = false
 			selection_node.transform_content_start()
-			if Tools.alt: # Continuation of the above
-				var cel_image : Image = project.frames[project.current_frame].cels[project.current_layer].image
-				cel_image.blit_rect_mask(selection_node.preview_image, selection_node.preview_image, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), selection_node.big_bounding_rectangle.position)
 
 	else:
 		selection_node.transform_content_confirm()

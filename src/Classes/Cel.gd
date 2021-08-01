@@ -9,8 +9,11 @@ var image_texture : ImageTexture
 var opacity : float
 
 
-func _init(_image := Image.new(), _opacity := 1.0) -> void:
-	image_texture = ImageTexture.new()
+func _init(_image := Image.new(), _opacity := 1.0, _image_texture : ImageTexture = null) -> void:
+	if _image_texture:
+		image_texture = _image_texture
+	else:
+		image_texture = ImageTexture.new()
 	self.image = _image
 	opacity = _opacity
 

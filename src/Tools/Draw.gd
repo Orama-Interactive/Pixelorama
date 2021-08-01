@@ -142,14 +142,6 @@ func update_line_polylines(start : Vector2, end : Vector2) -> void:
 	_line_polylines = _create_polylines(indicator)
 
 
-func restore_image() -> void:
-	var project : Project = Global.current_project
-	var image = project.frames[project.current_frame].cels[project.current_layer].image
-	image.unlock()
-	image.data = _undo_data[image]
-	image.lock()
-
-
 func prepare_undo() -> void:
 	_undo_data = _get_undo_data()
 
@@ -167,6 +159,7 @@ func commit_undo(action : String) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
+		image.unlock()
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
 	project.undo_redo.add_do_method(Global, "redo", frame, layer)
@@ -339,7 +332,7 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func _set_pixel(position : Vector2) -> void:
+func _set_pixel(position : Vector2, ignore_mirroring := false) -> void:
 	var project : Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
@@ -353,9 +346,9 @@ func _set_pixel(position : Vector2) -> void:
 		if _mask.size() >= i + 1:
 			if _mask[i] < Tools.pen_pressure:
 				_mask[i] = Tools.pen_pressure
-				_drawer.set_pixel(image, position, tool_slot.color)
+				_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
 		else:
-			_drawer.set_pixel(image, position, tool_slot.color)
+			_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
 
 
 func _draw_brush_image(_image : Image, _src_rect: Rect2, _dst: Vector2) -> void:

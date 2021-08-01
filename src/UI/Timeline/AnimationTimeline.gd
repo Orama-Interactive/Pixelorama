@@ -1,5 +1,6 @@
 extends Panel
 
+var is_animation_running := false
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
@@ -167,13 +168,27 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 	var new_frame := Frame.new()
 	var new_frames := Global.current_project.frames.duplicate()
+	var new_layers : Array = Global.current_project.layers.duplicate()
 	new_frames.insert(frame + 1, new_frame)
 
 	for cel in Global.current_project.frames[frame].cels: # Copy every cel
 		var sprite := Image.new()
 		sprite.copy_from(cel.image)
-		sprite.lock()
-		new_frame.cels.append(Cel.new(sprite, cel.opacity))
+		var sprite_texture := ImageTexture.new()
+		sprite_texture.create_from_image(sprite, 0)
+		new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
+
+	# Loop through the array to create new classes for each element, so that they
+	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+	for i in new_layers.size():
+		var new_linked_cels = new_layers[i].linked_cels.duplicate()
+		new_layers[i] = Layer.new(new_layers[i].name, new_layers[i].visible, new_layers[i].locked, new_layers[i].frame_container, new_layers[i].new_cels_linked, new_linked_cels)
+
+	for l_i in range(new_layers.size()):
+		if new_layers[l_i].new_cels_linked: # If the link button is pressed
+			new_layers[l_i].linked_cels.append(new_frame)
+			new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+			new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -193,10 +208,12 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame + 1)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "animation_tags", new_animation_tags)
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", frame)
+	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "animation_tags", Global.current_project.animation_tags)
 	Global.current_project.undo_redo.commit_action()
 
@@ -287,6 +304,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_forward.pressed = false
 					Global.play_backwards.pressed = false
 					Global.animation_timer.stop()
+					is_animation_running = false
 				1: # Cycle loop
 					Global.current_project.selected_cels.clear()
 					Global.current_project.current_frame = first_frame
@@ -308,6 +326,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.play_backwards.pressed = false
 					Global.play_forward.pressed = false
 					Global.animation_timer.stop()
+					is_animation_running = false
 				1: # Cycle loop
 					Global.current_project.selected_cels.clear()
 					Global.current_project.current_frame = last_frame
@@ -354,6 +373,8 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 		animation_forward = forward_dir
 	else:
 		Global.animation_timer.stop()
+
+	is_animation_running = play
 
 
 func _on_NextFrame_pressed() -> void:
@@ -421,8 +442,6 @@ func add_layer(is_new := true) -> void:
 			new_layer.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 		else: # Clone layer
 			new_layer.copy_from(f.cels[Global.current_project.current_layer].image)
-
-		new_layer.lock()
 
 		var new_cels : Array = f.cels.duplicate()
 		new_cels.append(Cel.new(new_layer, 1))
@@ -507,7 +526,6 @@ func _on_MergeDownLayer_pressed() -> void:
 			new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
 		var selected_layer := Image.new()
 		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
-		selected_layer.lock()
 
 		if f.cels[Global.current_project.current_layer].opacity < 1: # If we have layer transparency
 			for xx in selected_layer.get_size().x:
@@ -518,7 +536,6 @@ func _on_MergeDownLayer_pressed() -> void:
 
 		var new_layer := Image.new()
 		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
-		new_layer.lock()
 		new_layer.blend_rect(selected_layer, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO)
 		new_cels.remove(Global.current_project.current_layer)
 		if !selected_layer.is_invisible() and Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels.size() > 1 and (f in Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels):
