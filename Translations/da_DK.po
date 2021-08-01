@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 12:10\n"
+"PO-Revision-Date: 2021-08-01 13:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -879,32 +879,33 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rektangel"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipse"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Vælg en farve til det venstre værktøj"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Vælg en farve til det højre værktøj"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Byt om på venstre og højre farver\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Nulstil farverne til deres standardindstilling (sort for venstre, hvid for højre)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Venstre værktøj"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Højre værktøj"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Venstre pixel-indikator"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
