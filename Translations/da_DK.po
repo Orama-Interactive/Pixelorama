@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 11:00\n"
+"PO-Revision-Date: 2021-08-01 11:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -420,43 +420,43 @@ msgid "General"
 msgstr "Generel"
 
 msgid "Startup"
-msgstr ""
+msgstr "Opstart"
 
 msgid "Language"
-msgstr ""
+msgstr "Sprog"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 msgid "Themes"
-msgstr ""
+msgstr "Temaer"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Lærred"
 
 msgid "Selection"
-msgstr ""
+msgstr "Markering"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Genveje"
 
 msgid "Backup"
-msgstr ""
+msgstr "Backup"
 
 msgid "Performance"
-msgstr ""
+msgstr "Ydeevne"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatorer"
 
 msgid "On"
-msgstr ""
+msgstr "Slået til"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Gendan standardværdi"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Smooth Zoom"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
