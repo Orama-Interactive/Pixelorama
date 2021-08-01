@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 13:50\n"
+"PO-Revision-Date: 2021-08-01 13:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1345,7 +1345,7 @@ msgid "Clone current layer"
 msgstr ""
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "Sammenflet nuværende lag med det nedenfor"
 
 msgid "Opacity:"
 msgstr ""
@@ -1382,7 +1382,7 @@ msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Fortryd: Penselstrøg"
 
 msgid "Redo: Draw"
 msgstr ""
@@ -1394,28 +1394,28 @@ msgid "Redo: Rectangle Select"
 msgstr ""
 
 msgid "Undo: Scale"
-msgstr ""
+msgstr "Fortryd: Skalering"
 
 msgid "Redo: Scale"
 msgstr ""
 
 msgid "Undo: Add Layer"
-msgstr ""
+msgstr "Fortryd: Tilføj Lag"
 
 msgid "Redo: Add Layer"
 msgstr ""
 
 msgid "Undo: Remove Layer"
-msgstr ""
+msgstr "Fortryd: Fjern Lag"
 
 msgid "Redo: Remove Layer"
 msgstr ""
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Fortryd: Sammenflet Lag"
 
 msgid "Redo: Merge Layer"
-msgstr ""
+msgstr "Gentag: Sammenflet Lag"
 
 msgid "Undo: Change Layer Order"
 msgstr ""
