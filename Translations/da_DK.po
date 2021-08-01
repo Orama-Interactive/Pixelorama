@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 13:42\n"
+"PO-Revision-Date: 2021-08-01 13:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,7 +169,7 @@ msgid "Flip Horizontal"
 msgstr "Spejlvend vandret"
 
 msgid "Flip Vertical"
-msgstr "Spejlvend lodret"
+msgstr "Spejlvend vertikalt"
 
 msgid "Preferences"
 msgstr "Præferencer"
@@ -265,7 +265,7 @@ msgid "Horizontal frames:"
 msgstr "Vandrette rammer:"
 
 msgid "Vertical frames:"
-msgstr "Lodrette rammer:"
+msgstr "Vertikale rammer:"
 
 msgid "Start frame:"
 msgstr "Startramme:"
@@ -944,25 +944,25 @@ msgid "Grid type:"
 msgstr "Gitter-type:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Angiver typen af gitteret mellem rektangulær, isometrisk eller begge"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rektangulær"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isometrisk"
 
 msgid "All"
 msgstr "Alle"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Rektangulær gitter-bredde:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Angiver hvor langt fra hinanden vertikale linjer er i det rektangulære gitter"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Rektangulær gitter-højde:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
@@ -1079,7 +1079,7 @@ msgid "Brush:"
 msgstr ""
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Vælg en pensel"
 
 msgid "Pixel brush"
 msgstr ""
@@ -1136,7 +1136,7 @@ msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Valgt Farve"
 
 msgid "Pattern"
 msgstr ""
@@ -1199,10 +1199,10 @@ msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Slå vertikal spejltegning til"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikal"
 
 msgid "Current frame:"
 msgstr ""
