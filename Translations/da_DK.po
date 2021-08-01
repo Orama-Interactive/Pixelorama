@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 09:19\n"
+"PO-Revision-Date: 2021-08-01 09:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -181,7 +181,7 @@ msgid "Window Transparency"
 msgstr "Gennemsigtighed af Vindue"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Sidelayout"
 
 msgid "Auto"
 msgstr "Auto"
@@ -274,40 +274,40 @@ msgid "At frame:"
 msgstr "Ved ramme:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Ved lag:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Penseltype:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Filpensel"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Projektpensel"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Tilfældig pensel"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Gem Sprite som .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksportér Sprite som .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksportér Sprite"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fil Eksisterer. Vil du overskrive?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Fil %s eksisterer allerede. Vil du overskrive?"
 
 msgid "Directory path or file name is not valid!"
-msgstr ""
+msgstr "Mappesti eller filnavn er ikke gyldigt!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Eksport er i gang..."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
