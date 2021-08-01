@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 09:10\n"
+"PO-Revision-Date: 2021-08-01 09:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -226,52 +226,52 @@ msgid "Open File(s)"
 msgstr "Åbn Fil(er)"
 
 msgid "Import Options"
-msgstr "Importér Indstillinger"
+msgstr "Importindstillinger"
 
 msgid "Import as:"
 msgstr "Importér som:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Seneste projekter"
 
 msgid "New tab"
-msgstr ""
+msgstr "Ny fane"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Spritesheet (ny fane)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nyt lag)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Ny ramme"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Erstat ramme"
 
 msgid "New layer"
-msgstr ""
+msgstr "Nyt lag"
 
 msgid "New palette"
-msgstr ""
+msgstr "Ny palet"
 
 msgid "New brush"
-msgstr ""
+msgstr "Ny Pensel"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nyt mønster"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Vandrette rammer:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Lodrette rammer:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Startramme:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Ved ramme:"
 
 msgid "At layer:"
 msgstr ""
