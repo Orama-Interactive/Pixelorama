@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-01 20:59\n"
+"PO-Revision-Date: 2021-08-02 11:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1041,16 +1041,16 @@ msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Gitterfarve:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "En farve på gitteret"
 
 msgid "Pixel Grid"
 msgstr "Pixelgitter"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Vis ved zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
