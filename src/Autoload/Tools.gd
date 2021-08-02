@@ -74,8 +74,8 @@ func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
-	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer")
-	_panels[BUTTON_RIGHT] = Global.control.find_node("RightPanelContainer")
+	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
+	_panels[BUTTON_RIGHT] = Global.control.find_node("RightPanelContainer", true, false)
 
 	var value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
 	if not value in _tools:

@@ -87,11 +87,19 @@ func change_ui_layout(mode : String) -> void:
 		tallscreen_hsplit_container.split_offset = tools_and_canvas.split_offset
 		reparent_node_to(Global.animation_timeline, tallscreen_hsplit_container.get_node("BottomPanel"), 0)
 		reparent_node_to(right_panel, bottom_panel, 0)
-		right_panel.rect_min_size.y = 300
+		right_panel.rect_min_size.y = 322
 		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
+		tool_and_palette_vsplit.set("custom_constants/separation", 8)
 		color_and_tool_options.rect_min_size.x = 280
 		reparent_node_to(tool_panel, tallscreen_hsplit_container, 0)
+
+		var right_panel_margin : MarginContainer = right_panel.find_node("MarginContainer", true, false)
+		right_panel_margin.set("custom_constants/margin_top", 8)
+		right_panel_margin.set("custom_constants/margin_left", 0)
+		right_panel_margin.set("custom_constants/margin_right", 0)
+		right_panel.find_node("PalettePanel", true, false).size_flags_horizontal = SIZE_FILL
+
 	elif mode == "widescreen" and tallscreen_is_active:
 		tallscreen_is_active = false
 		# Reparenting and hiding nodes to adjust wide-screen
@@ -105,6 +113,12 @@ func change_ui_layout(mode : String) -> void:
 		color_and_tool_options.rect_min_size.x = 0
 		canvas_preview_container.visible = true
 		reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
+
+		var right_panel_margin : MarginContainer = right_panel.find_node("MarginContainer", true, false)
+		right_panel_margin.set("custom_constants/margin_top", 0)
+		right_panel_margin.set("custom_constants/margin_left", 8)
+		right_panel_margin.set("custom_constants/margin_right", 8)
+		right_panel.find_node("PalettePanel", true, false).size_flags_horizontal = SIZE_EXPAND_FILL
 
 	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
 		canvas_preview_container.visible = false
@@ -121,7 +135,7 @@ func change_ui_layout(mode : String) -> void:
 		scroll_container.rect_min_size = Vector2(0, 0)
 		color_and_tool_options.set("custom_constants/separation", 8)
 		if mode == "widescreen":
-			reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
+			reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes",  true, false), 0)
 		else:
 			reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 
