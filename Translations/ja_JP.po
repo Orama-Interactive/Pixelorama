@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-06-30 09:48\n"
+"PO-Revision-Date: 2021-07-31 08:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1833,4 +1833,7 @@ msgstr "パレット名が必要です！"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr "パレットサイズを小さくすると、色の位置がリセットされます。新しいパレットサイズに合わない色は失われます！"
+
+msgid "Position:"
+msgstr "ポジション:"
 

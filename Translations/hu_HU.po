@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-06-29 21:11\n"
+"PO-Revision-Date: 2021-07-30 23:07\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Vászon"
 
 msgid "Selection"
-msgstr ""
+msgstr "Kijelölés"
 
 msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
@@ -525,7 +525,7 @@ msgid "Only affect selection"
 msgstr ""
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Kiválasztott cellák"
 
 msgid "Current cel"
 msgstr "Jelenlegi cella"
@@ -714,7 +714,7 @@ msgid "Turkish"
 msgstr "Török"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norvég Bokmål"
 
 msgid "Korean"
 msgstr "Koreai"
@@ -729,7 +729,7 @@ msgid "Japanese"
 msgstr "Japán"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrán"
 
 msgid "Development Team"
 msgstr "Fejlesztő csapat"
@@ -1798,5 +1798,8 @@ msgid "Palette name is required!"
 msgstr "Palettanév megadása szükséges!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr ""
+
+msgid "Position:"
 msgstr ""
 

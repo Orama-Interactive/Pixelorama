@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-06-29 21:11\n"
+"PO-Revision-Date: 2021-07-31 08:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Název souboru:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Název projektu:"
 
 msgid "Image Size"
 msgstr "Velikost obrázku"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Velikost snímku"
 
 msgid "Size:"
-msgstr ""
+msgstr "Velikost:"
 
 msgid "Width:"
 msgstr "Šířka:"
@@ -61,10 +61,10 @@ msgid "Edit"
 msgstr "Upravit"
 
 msgid "Select"
-msgstr ""
+msgstr "Výběr"
 
 msgid "View"
-msgstr "Zobrazit"
+msgstr "Zobrazení"
 
 msgid "Image"
 msgstr "Obrázek"
@@ -133,73 +133,73 @@ msgid "Delete"
 msgstr "Smazat"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nový štětec"
 
 msgid "Scale Image"
 msgstr "Škálovat obrázek"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixely"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Procenta"
 
 msgid "Crop Image"
 msgstr "Oříznout obrázek"
 
 msgid "Resize Canvas"
-msgstr "Změnit velikost plátna"
+msgstr "Upravit velikost plátna"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Vycentrovat obrázek"
 
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
 msgid "Clear"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertovat"
 
 msgid "Flip"
-msgstr "Překlopit"
+msgstr "Převrátit obrázek"
 
 msgid "Flip Horizontal"
-msgstr "Překlopit vodorovně"
+msgstr "Převrátit vodorovně"
 
 msgid "Flip Vertical"
-msgstr "Překlopit svisle"
+msgstr "Převrátit svisle"
 
 msgid "Preferences"
 msgstr "Nastavení"
 
 msgid "Tile Mode"
-msgstr "Režim dlaždic"
+msgstr "Dlaždicový režim"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Průhlednost plátna"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Rozložení panelů"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automaticky"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Širokoúhlá obrazovka"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Vysoká obrazovka"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Převrátit plátno"
 
 msgid "Show Grid"
 msgstr "Zobrazit mřížku"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Zobrazit pixelovou mřížku"
 
 msgid "Show Rulers"
 msgstr "Zobrazit pravítka"
@@ -208,13 +208,13 @@ msgid "Show Guides"
 msgstr "Zobrazit vodítka"
 
 msgid "Show Animation Timeline"
-msgstr "Zobrazit časovou osu animace"
+msgstr "Zobrazit animační panel"
 
 msgid "Zen Mode"
 msgstr "Zen režim"
 
 msgid "Fullscreen Mode"
-msgstr "Celoobrazovkový režim"
+msgstr "Celá obrazovka"
 
 msgid "Fill with color:"
 msgstr "Vyplnit barvou:"
@@ -232,7 +232,7 @@ msgid "Import as:"
 msgstr "Importovat jako:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Nedávné projekty"
 
 msgid "New tab"
 msgstr "Nová záložka"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nová záložka)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nová vrstva)"
 
 msgid "New frame"
 msgstr "Nový snímek"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Nahradit snímek"
 
 msgid "New layer"
 msgstr "Nová vrstva"
@@ -268,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Svislé snímky:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "První snímek:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Na snímku:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Na vrstvě:"
 
 msgid "Brush type:"
 msgstr "Druh štětce:"
@@ -411,7 +411,7 @@ msgid "Bilinear"
 msgstr "Bilineární"
 
 msgid "Cubic"
-msgstr "Kubické"
+msgstr "Kubická"
 
 msgid "Trilinear"
 msgstr "Trilineární"
@@ -426,7 +426,7 @@ msgid "Language"
 msgstr "Jazyk"
 
 msgid "Interface"
-msgstr ""
+msgstr "Rozhraní"
 
 msgid "Themes"
 msgstr "Motivy"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Plátno"
 
 msgid "Selection"
-msgstr ""
+msgstr "Výběr"
 
 msgid "Shortcuts"
 msgstr "Zkratky"
@@ -444,7 +444,7 @@ msgid "Backup"
 msgstr "Zálohování"
 
 msgid "Performance"
-msgstr ""
+msgstr "Výkon"
 
 msgid "Indicators"
 msgstr "Indikátory"
@@ -456,10 +456,10 @@ msgid "Restore default value"
 msgstr "Obnovit výchozí hodnotu"
 
 msgid "Smooth Zoom"
-msgstr "Hladké přiblížení/oddálení"
+msgstr "Vyhlazení přiblížení/oddálení"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "Nastaví hladší přechod při přiblížení nebo přiblížení"
+msgstr "Hladší přechod při přiblížení nebo přiblížení"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Citlivost tlaku na tabletu:"
@@ -480,10 +480,10 @@ msgid "System Language"
 msgstr "Systémový jazyk"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Měřítko rozhraní"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Ztmavit rozhraní při vyskakovacím okně"
 
 msgid "Dark"
 msgstr "Tmavý"
@@ -504,28 +504,28 @@ msgid "Purple"
 msgstr "Fialová"
 
 msgid "Theme"
-msgstr ""
+msgstr "Motiv"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Barvy ikon z:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Barva ikon:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Velkost tlačítek nástrojů:"
 
 msgid "Small"
-msgstr ""
+msgstr "Malá"
 
 msgid "Big"
-msgstr ""
+msgstr "Velká"
 
 msgid "Only affect selection"
-msgstr "Pouze ovlivňuje výběr"
+msgstr "Ovlivnit pouze výběr"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Vybrané buňky"
 
 msgid "Current cel"
 msgstr "Současná buňka"
@@ -540,7 +540,7 @@ msgid "All projects"
 msgstr "Všechny projekty"
 
 msgid "Invert Colors"
-msgstr "Převrátit barvy"
+msgstr "Invertovat barvy"
 
 msgid "Modify Red Channel"
 msgstr "Upravit červený kanál"
@@ -555,19 +555,19 @@ msgid "Modify Alpha Channel"
 msgstr "Upravit alfa kanál"
 
 msgid "Desaturation"
-msgstr "Odbarvit"
+msgstr "Odstíny šedi"
 
 msgid "Outline"
 msgstr "Obrys"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Úprava Odstínu/Nasycení/Hodnoty"
+msgstr "Upravit odstín/sytost/hodnotu"
 
 msgid "Gradient"
 msgstr "Gradient"
 
 msgid "Adjust HSV"
-msgstr "Upravit HSV"
+msgstr "Upravit odstín/sytost/hodnotu"
 
 msgid "Type:"
 msgstr "Typ:"
@@ -576,19 +576,19 @@ msgid "Angle:"
 msgstr "Úhel:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Odstín:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Sytost:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Hodnota:"
 
 msgid "Apply"
 msgstr "Použít"
 
 msgid "Diagonal"
-msgstr "Úhlopříčka"
+msgstr "Úhlopříčně"
 
 msgid "Place inside image"
 msgstr "Umístit uvnitř obrázku"
@@ -615,13 +615,13 @@ msgid "Right to Left"
 msgstr "Zprava doleva"
 
 msgid "View Splash Screen"
-msgstr "Zobrazit uvítací obrazovku"
+msgstr "Zobrazit úvodní okno"
 
 msgid "Online Docs"
 msgstr "Online dokumentace"
 
 msgid "Issue Tracker"
-msgstr "Nahlášení potíží"
+msgstr "Nahlásit potíže"
 
 msgid "Changelog"
 msgstr "Seznam změn"
@@ -636,7 +636,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Vyvinuto Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-současnost Orama Interactive a přispěvatelé"
 
 msgid "Website"
 msgstr "Webové stránky"
@@ -714,7 +714,7 @@ msgid "Turkish"
 msgstr "Turečtina"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norština Bokmål"
 
 msgid "Korean"
 msgstr "Korejština"
@@ -726,10 +726,10 @@ msgid "Romanian"
 msgstr "Rumunština"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonština"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrajinština"
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
@@ -779,38 +779,52 @@ msgstr "Ukončit bez uložení"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Obdelníkový výber\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Elipsový výběr\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Polygonální výběr\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Výběr podle barvy\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Kouzelná hůlka\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Laso/volný výběr\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Přesun obrázku\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -822,7 +836,9 @@ msgstr "Přiblížit/oddálit\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Posun plátna\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -861,7 +877,9 @@ msgstr "Kbelík\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Stínovací nástroj\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -869,7 +887,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Čára\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Podrž %s pro zaokrouhlení úhlu čáry\n"
+"Podrž %s pro vycentrování tvaru na místo kliku\n"
+"Podrž %s pro přesunutí počátku tvaru"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -877,7 +900,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Obdélník\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Podrž %s pro vytvoření 1:1 tvaru\n"
+"Podrž %s pro vycentrování tvaru na místo kliku\n"
+"Podrž %s pro přesunutí počátku tvaru"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -885,13 +913,18 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Elipsa\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Podrž %s pro vytvoření 1:1 tvaru\n"
+"Podrž %s pro vycentrování tvaru na místo kliku\n"
+"Podrž %s pro přesunutí počátku tvaru"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Obdélník"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipsa"
 
 msgid "Choose a color for the left tool"
 msgstr "Vyberte barvu pro levý nástroj"
@@ -944,7 +977,7 @@ msgid "Guides color:"
 msgstr "Barva vodítek:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "Barva vodítek zobrazených na plátně"
+msgstr "Barva vodítkových čar zobrazených přes plátno"
 
 msgid "Grid"
 msgstr "Mřížka"
@@ -953,7 +986,7 @@ msgid "Grid type:"
 msgstr "Druh mřížky:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Nastaví druh mřížky mezi obdélníkovou, izometrickou nebo obojím"
+msgstr "Druh pomocné mřížky zobrazené přes plátno"
 
 msgid "Rectangular"
 msgstr "Obdélníková"
@@ -965,46 +998,46 @@ msgid "All"
 msgstr "Vše"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Šířka obdélníkové mřížky:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Jak daleko od sebe jsou svislé čáry obdélníkové mřížky"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Výška obdélníkové mřížky:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Jak daleko od sebe jsou vodorovné čáry obdélníkové mřížky"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Šířka isometrických buněk:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Šířka boxu který ohraničuje isometrickou buňku"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Výška isometrických buněk:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Výška boxu který ohraničuje isometrickou buňku"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Odsazení mřížky x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Odsazení mřížky na ose x od počátku plátna (levý horní roh obrázku)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Odsazení mřížky y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Odsazení mřížky na ose y od počátku plátna (levý horní roh obrázku)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Vykreslit přes dlaždicový režim:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Pokud vypnuto, tak bude mřížka vykreslena pouze přes původní obrázek"
 
 msgid "Grid color:"
 msgstr "Barva mřížky:"
@@ -1013,19 +1046,19 @@ msgid "A color of the grid"
 msgstr "Barva mřížky"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pixelová mřížka"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Zobrazit při přiblížení:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Minimální přiblížení pro zobrazení pixelové mřížky"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Barva pixelové mřížky:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Barva, kterou se vykreslí čáry pixelové mřížky"
 
 msgid "Transparency"
 msgstr "Průhlednost"
@@ -1055,34 +1088,37 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr "Průhledná šachovnice následuje pohyb plátna"
 
 msgid "Follow Canvas Zoom Level"
-msgstr "Sledovat úroveň přiblížení plátna"
+msgstr "Sledovat přiblížení plátna"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Průhledná šachovnice následuje úroveň přiblížení plátna"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Animovat okraje rámečku"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "První barva rámečku:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Druhá barva rámečku:"
 
 msgid "Only custom preset can be modified"
 msgstr "Lze upravit pouze vlastní předvolbu"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Limit snímků za vteřinu:"
 
 msgid "Limit FPS to 1 when app loses focus"
-msgstr ""
+msgstr "Limitovat snímky za vteřinu na 1, když aplikace není v popředí"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Nastaví limit snímků za vteřinu aplikace. Čím nižší číslo, tím menší bude zatížení procesoru,\n"
+"ale může dojít ke snížení odezvy a zasekávání aplikace. 0 značí žádný limit."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Pokud zapnuto, tak je automaticky nastaven limit snímků za vteřinu na 1, pokud okno aplikace není v popředí. \n"
+"Toto nastavení snižuje zátěž procesoru pokud aplikace není používána. Limit je automaticky resetován na vyšší\n"
+"hodnotu, když kurzor myši vstoupí do oblasti okna aplikace."
 
 msgid "Brush:"
 msgstr "Štětec:"
@@ -1115,16 +1151,16 @@ msgid "Pixel Perfect"
 msgstr "Pixel perfekt"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Vyplnit uvnitř"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Vyhladí čáry odstraněním pixelů navíc na okrajích"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Vyplnit tvar"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Vyplní nakreslený tvar barvou, jinak zůstane tvar dutý"
 
 msgid "Brush color from"
 msgstr "Barva štětce z"
@@ -1154,10 +1190,10 @@ msgid "Offset"
 msgstr "Odsazení"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Jednoduché stínování"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Posun odstínu"
 
 msgid "Lighten"
 msgstr "Zesvětlení"
@@ -1254,7 +1290,7 @@ msgstr "Povolit/zakázat onion skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Kolik snímků za sekundu by měl mít náhled animace?\n"
+msgstr "Kolik snímků za vteřinu by měl mít náhled animace?\n"
 "Čím více FPS, tím rychleji je animace přehrávána."
 
 msgid "No loop"
@@ -1294,7 +1330,7 @@ msgid "To:"
 msgstr "Do:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "Animace hraje pouze na snímcích majících stejný štítek"
+msgstr "Animace se přehrává pouze na snímcích se stejným štítkem"
 
 msgid "Tag %s (Frame %s)"
 msgstr "Štítek %s (Snímek %s)"
@@ -1304,8 +1340,8 @@ msgstr "Štítek %s (Snímky %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Pokud je vybráno, animace hraje pouze na snímcích, které mají stejný štítek.\n"
-"Pokud ne, animace bude hrát pro všechny snímky a ignoruje štítky."
+msgstr "Pokud je vybráno, animace se přehrává pouze na snímcích, které mají stejný štítek.\n"
+"Pokud ne, animace bude přehrávána pro všechny snímky a ignoruje štítky."
 
 msgid "Blue-Red Mode"
 msgstr "Modro-červený režim"
@@ -1335,10 +1371,10 @@ msgid "Unlink Cel"
 msgstr "Odpojit buňku"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Vlastnosti snímku"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Vlastnosti snímku"
 
 msgid "Layer"
 msgstr "Vrstva"
@@ -1368,7 +1404,7 @@ msgid "Opacity:"
 msgstr "Průhlednost:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Průhlednost dlaždicového režimu:"
 
 msgid "Toggle layer's visibility"
 msgstr "Přepnout viditelnost vrstvy"
@@ -1478,10 +1514,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Vpřed: Odstranit snímkový štítek"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Zpět: Upravit délku snímku"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Znovu: Upravit délku snímku"
 
 msgid "Move Guide"
 msgstr "Přesunout vodítko"
@@ -1583,13 +1619,13 @@ msgid "A default background color of a new image"
 msgstr "Výchozí barva pozadí nového obrázku"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Uzamknout poměr stran"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Na výšku"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Na šířku"
 
 msgid "Templates:"
 msgstr "Šablony:"
@@ -1610,28 +1646,28 @@ msgid "Rectangular Selection"
 msgstr "Obdélníkový výběr"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Eliptický výber"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Polygonální výběr"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Výběr podle barvy"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Kouzelná hůlka"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Laso/volný výběr"
 
 msgid "Move"
-msgstr ""
+msgstr "Přesun obrázku"
 
 msgid "Zoom"
 msgstr "Přiblížení/oddálení"
 
 msgid "Pan"
-msgstr ""
+msgstr "Posun plátna"
 
 msgid "Color Picker"
 msgstr "Kapátko"
@@ -1646,16 +1682,16 @@ msgid "Bucket"
 msgstr "Kbelík"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Stínování"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Čára"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Obdélník"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Elipsa"
 
 msgid "Switch Colors"
 msgstr "Prohodit barvy"
@@ -1685,7 +1721,7 @@ msgid "Cannot find last project file."
 msgstr "Nelze nalézt soubor posledního projektu."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "Soubor projektu nebyl nalezen."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Zatím jste neuložili ani neotevřeli žádný projekt v Pixeloramě!"
@@ -1697,10 +1733,10 @@ msgid "Open last project..."
 msgstr "Otevřít poslední projekt..."
 
 msgid "Open last project on startup"
-msgstr "Otevřít poslední projekt při spuštění"
+msgstr "Po spuštění otevřít poslední projekt"
 
 msgid "Opens last opened project on startup"
-msgstr "Otevřít naposledy otevřený projekt při spuštění"
+msgstr "Otevřít po spuštění naposledy otevřený projekt"
 
 msgid "Enable autosave"
 msgstr "Povolit automatické ukládání"
@@ -1756,47 +1792,50 @@ msgid "Move the selected frame to the right."
 msgstr "Přesunout vybraný snímek doprava."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Délka snímku"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Obě osy"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Osa X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Osa Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Vytvořit novou paletu"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Komentář:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Prázdná"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Z aktuální palety"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Z aktuálního obrázku"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Z aktuálního výběru"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Přidat novou barvu"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Odstranit vybranou barvu"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Paleta s totožným jménem již existuje!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Název palety je povinný!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Zmenšení velikosti palety resetuje pozice barev. Barvy, které se nevejdou do nové velikosti palety budou ztraceny!"
+
+msgid "Position:"
+msgstr "Pozice:"
 
