@@ -36,7 +36,7 @@ jobs:
           add-apt-repository ppa:bhdouglass/clickable
           apt update
           apt install -y containerd docker.io runc clickable
-          useradd -m docker -g && echo "docker:docker" | chpasswd && adduser docker sudo
+          echo "docker:docker" | chpasswd && adduser docker sudo
       - name: Linux Build 🔧
         run: godot -v --export-pack "Clickable (Package Only)" ./clickable/Pixelorama.pck
       - name: Copy Pixelorama data files
