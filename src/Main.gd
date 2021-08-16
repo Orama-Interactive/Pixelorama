@@ -48,6 +48,14 @@ func _ready() -> void:
 	Global.open_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	Global.save_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
+	# OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
+	# The home folder doesn't change on Ubuntu Touch due to design specs, so
+	# we can safely point to /home/phablet unless/until a future OTA update
+	# changes this.
+	if OS.has_feature("clickable"):
+		Global.open_sprites_dialog.current_dir = "/home/phablet"
+		Global.save_sprites_dialog.current_dir = "/home/phablet"
+
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true
