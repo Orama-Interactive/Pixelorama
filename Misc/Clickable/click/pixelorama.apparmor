@@ -3,11 +3,7 @@
         "audio",
         "keep-display-on",
         "content_exchange",
-        "content_exchange_source",
-        "document_files",
-        "document_files_read",
-        "picture_files",
-        "picture_files_read"
+        "content_exchange_source"
     ],
     "policy_version": 16.04
 }

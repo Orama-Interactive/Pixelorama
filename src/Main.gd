@@ -48,13 +48,15 @@ func _ready() -> void:
 	Global.open_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	Global.save_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
-	# OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
-	# The home folder doesn't change on Ubuntu Touch due to design specs, so
-	# we can safely point to /home/phablet unless/until a future OTA update
-	# changes this.
+	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
+	# Additionally, AppArmor policies prevent the app from writing to the /home
+	# directory. Until the proper AppArmor policies are determined to write to these
+	# files accordingly, use the user data folder where cache.ini is stored.
+	# Ubuntu Touch users can access these files in the File Manager at the directory
+	# ~/.local/pixelorama.orama-interactive/godot/app_userdata/Pixelorama.
 	if OS.has_feature("clickable"):
-		Global.open_sprites_dialog.current_dir = "/home/phablet/Desktop"
-		Global.save_sprites_dialog.current_dir = "/home/phablet/Desktop"
+		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
+		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
 
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
