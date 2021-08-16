@@ -19,7 +19,7 @@
   "install_data": {
     "${BUILD_DIR}/godot": "${INSTALL_DIR}",
     "${ROOT}/click/*": "${INSTALL_DIR}",
-    "${ROOT}/pixelorama_data/*": "${INSTALL_DIR}",
+    "${ROOT}/pixelorama_data/*": "${INSTALL_DIR}/pixelorama_data",
     "${ROOT}/*.pck": "${INSTALL_DIR}"
   },
   "install_lib": [
