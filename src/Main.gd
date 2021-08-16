@@ -53,8 +53,8 @@ func _ready() -> void:
 	# we can safely point to /home/phablet unless/until a future OTA update
 	# changes this.
 	if OS.has_feature("clickable"):
-		Global.open_sprites_dialog.current_dir = "/home/phablet"
-		Global.save_sprites_dialog.current_dir = "/home/phablet"
+		Global.open_sprites_dialog.current_dir = "/home/phablet/Desktop"
+		Global.save_sprites_dialog.current_dir = "/home/phablet/Desktop"
 
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
