@@ -74,8 +74,8 @@ func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
-	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer")
-	_panels[BUTTON_RIGHT] = Global.control.find_node("RightPanelContainer")
+	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
+	_panels[BUTTON_RIGHT] = Global.control.find_node("RightPanelContainer", true, false)
 
 	var value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
 	if not value in _tools:
@@ -168,6 +168,8 @@ func set_button_size(button_size : int) -> void:
 
 	# It doesn't actually set the size to zero, it just resets it
 	_tool_buttons.get_parent().rect_size = Vector2.ZERO
+	_tool_buttons.columns = 1
+	_tool_buttons.get_parent().get_parent().get_parent().get_parent().split_offset = 0
 
 
 func update_tool_buttons() -> void:

@@ -28,6 +28,9 @@ func _ready() -> void:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
 	Global.update_hint_tooltips()
 
+	# Resize tools panel when window gets resized
+	get_tree().get_root().connect("size_changed", self, "_on_ToolsAndCanvas_dragged")
+
 
 func _input(event : InputEvent) -> void:
 	if not Global.has_focus:
@@ -50,9 +53,12 @@ func _on_Tool_pressed(tool_pressed : BaseButton) -> void:
 		Tools.assign_tool(tool_pressed.name, button)
 
 
-func _on_ToolsAndCanvas_dragged(_offset : int) -> void:
-	var tool_panel_size : Vector2 = get_parent().get_parent().rect_size
-	columns = clamp(tool_panel_size.x / 40, 1, 8)
+func _on_ToolsAndCanvas_dragged(_offset : int = 0) -> void:
+	var tool_panel_size : Vector2 = get_parent().get_parent().get_parent().rect_size
+	if Global.tool_button_size == Global.ButtonSize.SMALL:
+		columns = tool_panel_size.x / 28.5
+	else:
+		columns = tool_panel_size.x / 36.5
 
 	# It doesn't actually set the size to zero, it just resets it
 	get_parent().rect_size = Vector2.ZERO

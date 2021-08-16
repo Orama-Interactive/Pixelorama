@@ -1,8 +1,8 @@
 extends VBoxContainer
 
 
-onready var left_picker := $ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/LeftColorPickerButton
-onready var right_picker := $ColorButtonsVertical/ColorPickersCenter/ColorPickersHorizontal/RightColorPickerButton
+onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
+onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
 
 
 func _ready() -> void:
