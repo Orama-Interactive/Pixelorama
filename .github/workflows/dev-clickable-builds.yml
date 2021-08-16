@@ -39,11 +39,10 @@ jobs:
           # systemctl unmask docker.service
           # systemctl start docker.service
       - name: Linux Build 🔧
-        run: godot -v --export-pack "Clickable (Package Only)" ./build/linux-64bit-clickable/$EXPORT_NAME.x86_64
+        run: godot -v --export-pack "Clickable (Package Only)" ./clickable/Pixelorama.pck
       - name: Copy Pixelorama data files
         run: |
           cp -R ./pixelorama_data ./clickable
-          cp ./build/linux-64bit-clickable/*.pck clickable
       - name: Run Clickable
         run: |
           cd clickable
