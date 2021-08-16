@@ -15,11 +15,31 @@ env:
   EXPORT_NAME: Pixelorama
 
 jobs:
-  build:
-    name: Create clickable package
+  build_pck:
+    name: Create Pixelorama pack data
     runs-on: ubuntu-latest
     container:
       image: docker://barichello/godot-ci:3.3
+    steps:
+      - name: Clone source
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Linux Build 🔧
+        run: godot -v --export-pack "Clickable (Package Only)" ./clickable/Pixelorama.pck
+      - name: Copy Pixelorama data files
+        run: |
+          cp -R ./pixelorama_data ./clickable
+      - name: Upload click package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pixelorama_click_data
+          path: clickable/
+          retention-days: 14
+  build_click:
+    name: Create click packages
+    needs: build_pck
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         architectures:
@@ -28,20 +48,20 @@ jobs:
     steps:
       - name: Clone source
         uses: actions/checkout@v2
-        with:
-          submodules: true
       - name: Install clickable dependencies
         run: |
-          apt update && apt install -y software-properties-common sudo
-          add-apt-repository ppa:bhdouglass/clickable
-          apt update
-          apt install -y containerd docker.io runc clickable
-          adduser docker sudo
-      - name: Linux Build 🔧
-        run: godot -v --export-pack "Clickable (Package Only)" ./clickable/Pixelorama.pck
-      - name: Copy Pixelorama data files
-        run: |
-          cp -R ./pixelorama_data ./clickable
+          sudo add-apt-repository ppa:bhdouglass/clickable
+          sudo apt update
+          sudo apt install -y containerd docker.io runc clickable
+          sudo systemctl unmask docker.service
+          sudo systemctl start docker.service
+      - name: Remove existing click folder
+        run: rm -r ./clickable
+      - name: Download click data
+        uses: actions/download-artifact@v2
+        with:
+          name: pixelorama_click_data
+          path: ./clickable
       - name: Run Clickable
         run: |
           cd clickable
@@ -51,6 +71,5 @@ jobs:
       - name: Upload click package artifact
         uses: actions/upload-artifact@v2
         with:
-          name: pixelorama_click_package
+          name: costumemaster_reloaded_click
           path: clickable/build/**.click
-          retention-days: 14
