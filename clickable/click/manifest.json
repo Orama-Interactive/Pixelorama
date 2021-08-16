@@ -1,6 +1,6 @@
 {
     "architecture": "@CLICK_ARCH@",
-    "description": "A FOSS sprite editor written in Godot.",
+    "description": "A free & open-source 2D sprite editor, made with the Godot Engine!",
     "framework": "ubuntu-sdk-16.04.5",
     "hooks": {
         "pixelorama": {
@@ -11,5 +11,5 @@
     "maintainer": "Orama Interactive <soramagamestudios@gmail.com>",
     "name": "pixelorama.orama-interactive",
     "title": "Pixelorama",
-    "version": "0.8.3"
+    "version": "0.9-beta"
 }

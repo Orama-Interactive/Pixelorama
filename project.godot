@@ -181,6 +181,10 @@ window/per_pixel_transparency/allowed.HTML5=false
 window/per_pixel_transparency/enabled.HTML5=false
 window/handheld/orientation.clickable="sensor"
 
+[gui]
+
+theme/use_hidpi.clickable=true
+
 [importer_defaults]
 
 texture={
