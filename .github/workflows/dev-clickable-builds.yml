@@ -32,6 +32,7 @@ jobs:
           submodules: true
       - name: Install clickable dependencies
         run: |
+          apt update && apt install -y software-properties-common
           add-apt-repository ppa:bhdouglass/clickable
           apt update
           apt install -y containerd docker.io runc clickable
