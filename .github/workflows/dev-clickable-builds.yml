@@ -26,15 +26,15 @@ jobs:
         with:
           submodules: true
       - name: Linux Build 🔧
-        run: godot -v --export-pack "Clickable (Package Only)" ./clickable/Pixelorama.pck
+        run: godot -v --export-pack "Clickable (Package Only)" ./Misc/Clickable/Pixelorama.pck
       - name: Copy Pixelorama data files
         run: |
-          cp -R ./pixelorama_data ./clickable
+          cp -R ./pixelorama_data ./Misc/Clickable
       - name: Upload data files for click package
         uses: actions/upload-artifact@v2
         with:
           name: pixelorama_click_data
-          path: clickable/
+          path: Misc/Clickable/
           retention-days: 14
   build_click:
     name: Create click package
@@ -56,15 +56,15 @@ jobs:
           sudo systemctl unmask docker.service
           sudo systemctl start docker.service
       - name: Remove existing click folder
-        run: rm -r ./clickable
+        run: rm -r ./Misc/Clickable
       - name: Download click data
         uses: actions/download-artifact@v2
         with:
           name: pixelorama_click_data
-          path: ./clickable
+          path: ./Misc/Clickable
       - name: Run Clickable
         run: |
-          cd clickable
+          cd Misc/Clickable
           chmod +x build-ubports.sh
           clickable build
         env:
@@ -73,4 +73,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: pixelorama_click_packages
-          path: clickable/build/**.click
+          path: Misc/Clickable/build/**.click
