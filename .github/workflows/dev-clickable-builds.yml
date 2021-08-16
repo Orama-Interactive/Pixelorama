@@ -9,10 +9,17 @@ on:
     - "installer/*.pot"
     - "installer/po/*"
 
+env:
+  GODOT_VERSION: 3.3
+  GODOT_VERSION_MAC: 3.3
+  EXPORT_NAME: Pixelorama
+
 jobs:
   build:
     name: Create clickable package
     runs-on: ubuntu-latest
+    container:
+      image: docker://barichello/godot-ci:3.3
     strategy:
       matrix:
         architectures:
@@ -21,6 +28,8 @@ jobs:
     steps:
       - name: Clone source
         uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Install clickable dependencies
         run: |
           sudo add-apt-repository ppa:bhdouglass/clickable
@@ -28,16 +37,12 @@ jobs:
           sudo apt install -y containerd docker.io runc clickable
           sudo systemctl unmask docker.service
           sudo systemctl start docker.service
-      - name: Build Godot project
-        id: build_godot
-        uses: josephbmanley/build-godot-action@v1.4.1
-        with:
-          name: "pixelorama"
-          preset: "Linux/X11 64-bit (Ubuntu Touch)" 
-          debugMode: "false"
-      - name: Copy Pixelorama pack file
+      - name: Linux Build 🔧
+        run: godot -v --export "Linux/X11 64-bit (Ubuntu Touch)" ./build/linux-64bit-clickable/$EXPORT_NAME.x86_64
+      - name: Copy Pixelorama data files
         run: |
-          cp build/*.pck clickable
+          cp -R ./pixelorama_data ./clickable
+          cp ./build/linux-64bit-clickable/*.pck clickable
       - name: Run Clickable
         run: |
           cd clickable
@@ -49,3 +54,4 @@ jobs:
         with:
           name: pixelorama_click_package
           path: clickable/build/**.click
+          retention-days: 14
