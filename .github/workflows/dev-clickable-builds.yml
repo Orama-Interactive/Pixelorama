@@ -1,0 +1,51 @@
+name: "dev-clickable-builds"
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    paths-ignore: 
+    - "Translations/*"
+    - "installer/*.pot"
+    - "installer/po/*"
+
+jobs:
+  build:
+    name: Create clickable package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architectures:
+          - armhf
+          - arm64
+    steps:
+      - name: Clone source
+        uses: actions/checkout@v2
+      - name: Install clickable dependencies
+        run: |
+          sudo add-apt-repository ppa:bhdouglass/clickable
+          sudo apt update
+          sudo apt install -y containerd docker.io runc clickable
+          sudo systemctl unmask docker.service
+          sudo systemctl start docker.service
+      - name: Build Godot project
+        id: build_godot
+        uses: josephbmanley/build-godot-action@v1.4.1
+        with:
+          name: "pixelorama"
+          preset: "Linux/X11 64-bit (Ubuntu Touch)" 
+          debugMode: "false"
+      - name: Copy Pixelorama pack file
+        run: |
+          cp build/*.pck clickable
+      - name: Run Clickable
+        run: |
+          cd clickable
+          clickable build
+        env:
+          CLICKABLE_ARCH: ${{ matrix.architectures }}
+      - name: Upload click package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pixelorama_click_package
+          path: clickable/build/**.click
