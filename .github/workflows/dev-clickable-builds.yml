@@ -39,7 +39,7 @@ jobs:
           # systemctl unmask docker.service
           # systemctl start docker.service
       - name: Linux Build 🔧
-        run: godot -v --export "Linux/X11 64-bit (Ubuntu Touch)" ./build/linux-64bit-clickable/$EXPORT_NAME.x86_64
+        run: godot -v --export "Linux/X11 64-bit Clickable" ./build/linux-64bit-clickable/$EXPORT_NAME.x86_64
       - name: Copy Pixelorama data files
         run: |
           cp -R ./pixelorama_data ./clickable
