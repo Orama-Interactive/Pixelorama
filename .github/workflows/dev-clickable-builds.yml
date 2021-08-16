@@ -32,12 +32,11 @@ jobs:
           submodules: true
       - name: Install clickable dependencies
         run: |
-          apt update && apt install -y software-properties-common
+          apt update && apt install -y software-properties-common sudo
           add-apt-repository ppa:bhdouglass/clickable
           apt update
           apt install -y containerd docker.io runc clickable
-          # systemctl unmask docker.service
-          # systemctl start docker.service
+          useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
       - name: Linux Build 🔧
         run: godot -v --export-pack "Clickable (Package Only)" ./clickable/Pixelorama.pck
       - name: Copy Pixelorama data files
