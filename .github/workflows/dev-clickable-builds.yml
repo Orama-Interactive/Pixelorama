@@ -36,8 +36,8 @@ jobs:
           add-apt-repository ppa:bhdouglass/clickable
           apt update
           apt install -y containerd docker.io runc clickable
-          systemctl unmask docker.service
-          systemctl start docker.service
+          # systemctl unmask docker.service
+          # systemctl start docker.service
       - name: Linux Build 🔧
         run: godot -v --export "Linux/X11 64-bit (Ubuntu Touch)" ./build/linux-64bit-clickable/$EXPORT_NAME.x86_64
       - name: Copy Pixelorama data files
