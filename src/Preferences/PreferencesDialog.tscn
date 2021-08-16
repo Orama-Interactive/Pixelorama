@@ -8,7 +8,6 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-visible = true
 margin_left = -3.0
 margin_top = 9.0
 margin_right = 419.0
@@ -113,6 +112,7 @@ group = SubResource( 1 )
 text = "System Language"
 
 [node name="Interface" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+visible = false
 margin_top = 28.0
 margin_right = 498.0
 margin_bottom = 198.0
