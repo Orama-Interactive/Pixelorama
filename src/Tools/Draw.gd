@@ -341,13 +341,14 @@ func _set_pixel(position : Vector2, ignore_mirroring := false) -> void:
 		return
 
 	var images := _get_selected_draw_images()
-	for image in images:
-		var i := int(position.x + position.y * image.get_size().x)
-		if _mask.size() >= i + 1:
-			if _mask[i] < Tools.pen_pressure:
-				_mask[i] = Tools.pen_pressure
+	var i := int(position.x + position.y * project.size.x)
+	if _mask.size() >= i + 1:
+		if _mask[i] < Tools.pen_pressure:
+			_mask[i] = Tools.pen_pressure
+			for image in images:
 				_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
-		else:
+	else:
+		for image in images:
 			_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
 
 
