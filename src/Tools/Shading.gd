@@ -90,7 +90,7 @@ class LightenDarkenOp extends Drawer.ColorOp:
 
 		# Colors between yellow-purple
 		elif hue_shift < 0 and hue + hue_shift <= hue_lighten_limit:
-			hue_shift = 0
+			hue_shift = clamp(hue_shift, -(hue - hue_lighten_limit), 0)
 		return hue_shift
 
 
@@ -103,8 +103,8 @@ class LightenDarkenOp extends Drawer.ColorOp:
 					hue_shift = 0
 
 		# Colors between yellow-purple
-		elif hue_shift < 0 and hue + hue_shift <= hue_darken_limit:
-			hue_shift = 0
+		elif hue_shift < 0 and hue - hue_shift >= hue_darken_limit:
+			hue_shift = clamp(hue_shift, -(hue_darken_limit - hue), 0)
 		return hue_shift
 
 
