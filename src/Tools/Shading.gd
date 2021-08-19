@@ -56,20 +56,16 @@ class LightenDarkenOp extends Drawer.ColorOp:
 			if lighten_or_darken == LightenDarken.LIGHTEN:
 				hue_shift = hue_limit_lighten(dst.h, hue_shift)
 				dst.h += hue_shift
-				dst.s -= sat_shift
+				if dst.s > sat_lighten_limit:
+					dst.s = max(dst.s - min(sat_shift, dst.s), sat_lighten_limit)
 				dst.v += value_shift
-				if dst.s < sat_lighten_limit:
-					dst.v = prev_value
-					dst.s = prev_sat
-					dst.h = prev_hue
 
 			else:
 				hue_shift = hue_limit_darken(dst.h, hue_shift)
 				dst.h -= hue_shift
 				dst.s += sat_shift
-				dst.v -= value_shift
-				if dst.v < value_darken_limit:
-					dst.v = prev_value
+				if dst.v > value_darken_limit:
+					dst.v = max(dst.v - min(value_shift, dst.v), value_darken_limit)
 
 		return dst
 
