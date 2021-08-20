@@ -167,7 +167,9 @@ index = 31
 resource_name = "Default"
 script = ExtResource( 2 )
 name = "Default"
-comment = "Author: CheetoHead/greusser"
+comment = "Author: DawnBringer
+Found in Lospec by CheetoHead/greusser
+https://lospec.com/palette-list/dawnbringer-32"
 width = 8
 height = 4
 colors = {
