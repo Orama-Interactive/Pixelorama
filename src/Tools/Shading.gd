@@ -44,10 +44,6 @@ class LightenDarkenOp extends Drawer.ColorOp:
 			var sat_shift := sat_amount / 100.0
 			var value_shift := value_amount / 100.0
 
-			var prev_hue := dst.h
-			var prev_sat := dst.s
-			var prev_value := dst.v
-
 			# If the colors are roughly between yellow and purple,
 			# reverse hue direction
 			if !hue_range(dst.h):
@@ -56,20 +52,16 @@ class LightenDarkenOp extends Drawer.ColorOp:
 			if lighten_or_darken == LightenDarken.LIGHTEN:
 				hue_shift = hue_limit_lighten(dst.h, hue_shift)
 				dst.h += hue_shift
-				dst.s -= sat_shift
+				if dst.s > sat_lighten_limit:
+					dst.s = max(dst.s - min(sat_shift, dst.s), sat_lighten_limit)
 				dst.v += value_shift
-				if dst.s < sat_lighten_limit:
-					dst.v = prev_value
-					dst.s = prev_sat
-					dst.h = prev_hue
 
 			else:
 				hue_shift = hue_limit_darken(dst.h, hue_shift)
 				dst.h -= hue_shift
 				dst.s += sat_shift
-				dst.v -= value_shift
-				if dst.v < value_darken_limit:
-					dst.v = prev_value
+				if dst.v > value_darken_limit:
+					dst.v = max(dst.v - min(value_shift, dst.v), value_darken_limit)
 
 		return dst
 
@@ -90,7 +82,7 @@ class LightenDarkenOp extends Drawer.ColorOp:
 
 		# Colors between yellow-purple
 		elif hue_shift < 0 and hue + hue_shift <= hue_lighten_limit:
-			hue_shift = 0
+			hue_shift = clamp(hue_shift, -(hue - hue_lighten_limit), 0)
 		return hue_shift
 
 
@@ -103,8 +95,8 @@ class LightenDarkenOp extends Drawer.ColorOp:
 					hue_shift = 0
 
 		# Colors between yellow-purple
-		elif hue_shift < 0 and hue + hue_shift <= hue_darken_limit:
-			hue_shift = 0
+		elif hue_shift < 0 and hue - hue_shift >= hue_darken_limit:
+			hue_shift = clamp(hue_shift, -(hue_darken_limit - hue), 0)
 		return hue_shift
 
 

@@ -12,7 +12,7 @@ __meta__ = {
 }
 
 [node name="MenuItems" type="HBoxContainer" parent="."]
-margin_left = 2.0
+margin_left = 7.0
 margin_top = 4.0
 margin_right = 1010.0
 __meta__ = {

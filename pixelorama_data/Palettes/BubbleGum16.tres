@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.0862745, 0.0901961, 0.101961, 1 )
 index = 0
 
 [sub_resource type="Resource" id=2]
@@ -87,7 +87,9 @@ index = 15
 resource_name = "BubbleGum16"
 script = ExtResource( 1 )
 name = "BubbleGum16"
-comment = "Author: PineTreePizza/CheetoHead"
+comment = "Author: PineTreePizza
+Found in Lospec by CheetoHead/greusser
+https://lospec.com/palette-list/bubblegum-16"
 width = 8
 height = 2
 colors = {
