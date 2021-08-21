@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-07-31 08:29\n"
+"PO-Revision-Date: 2021-08-21 20:48\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr "オーケー"
 
 msgid "Cancel"
 msgstr "キャンセル"
