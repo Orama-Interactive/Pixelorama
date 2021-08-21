@@ -44,10 +44,6 @@ class LightenDarkenOp extends Drawer.ColorOp:
 			var sat_shift := sat_amount / 100.0
 			var value_shift := value_amount / 100.0
 
-			var prev_hue := dst.h
-			var prev_sat := dst.s
-			var prev_value := dst.v
-
 			# If the colors are roughly between yellow and purple,
 			# reverse hue direction
 			if !hue_range(dst.h):
