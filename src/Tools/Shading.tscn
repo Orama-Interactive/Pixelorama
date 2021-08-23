@@ -113,7 +113,7 @@ margin_bottom = 42.0
 hint_tooltip = "Lighten/Darken amount"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-max_value = 359.0
+max_value = 180.0
 value = 10.0
 align = 1
 
@@ -128,7 +128,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-max_value = 359.0
+max_value = 180.0
 value = 10.0
 ticks_on_borders = true
 
