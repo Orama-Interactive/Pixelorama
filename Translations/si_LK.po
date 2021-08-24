@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Sinhala\n"
 "Language: si_LK\n"
-"PO-Revision-Date: 2021-08-24 12:16\n"
+"PO-Revision-Date: 2021-08-24 12:29\n"
 
 msgid "OK"
 msgstr "හරි"
@@ -22,16 +22,16 @@ msgid "Open"
 msgstr "විවෘත"
 
 msgid "Save"
-msgstr ""
+msgstr "සුරකින්න"
 
 msgid "Please Confirm..."
 msgstr ""
 
 msgid "File Name:"
-msgstr ""
+msgstr "ගොනුවේ නම:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "ව්‍යාපෘතියේ නම:"
 
 msgid "Image Size"
 msgstr ""
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr ""
 
 msgid "Size:"
-msgstr ""
+msgstr "ප්‍රමාණය:"
 
 msgid "Width:"
 msgstr ""
@@ -73,34 +73,34 @@ msgid "Effects"
 msgstr ""
 
 msgid "Help"
-msgstr ""
+msgstr "උදව්"
 
 msgid "New"
-msgstr ""
+msgstr "නව"
 
 msgid "New..."
-msgstr ""
+msgstr "නව..."
 
 msgid "Open..."
-msgstr ""
+msgstr "විවෘත..."
 
 msgid "Save..."
-msgstr ""
+msgstr "සුරකින්න..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "ලෙස සුරකින්න..."
 
 msgid "Use ZSTD Compression"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "ආයාත කරන්න"
 
 msgid "Export"
-msgstr ""
+msgstr "නිර්යාත කරන්න"
 
 msgid "Export..."
-msgstr ""
+msgstr "නිර්යාත..."
 
 msgid "Export as..."
 msgstr ""
@@ -112,22 +112,22 @@ msgid "Export PNG as..."
 msgstr ""
 
 msgid "Quit"
-msgstr ""
+msgstr "ඉවත් වන්න"
 
 msgid "Undo"
-msgstr ""
+msgstr "පෙරසේ"
 
 msgid "Redo"
-msgstr ""
+msgstr "පසුසේ"
 
 msgid "Copy"
-msgstr ""
+msgstr "පිටපත්"
 
 msgid "Cut"
-msgstr ""
+msgstr "කපන්න"
 
 msgid "Paste"
-msgstr ""
+msgstr "අලවන්න"
 
 msgid "Delete"
 msgstr ""
@@ -329,7 +329,7 @@ msgid "Animation"
 msgstr ""
 
 msgid "Preview:"
-msgstr ""
+msgstr "පෙරදසුන:"
 
 msgid "Frame:"
 msgstr ""
@@ -338,7 +338,7 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "පිරික්සන්න"
 
 msgid "Resize:"
 msgstr ""
@@ -362,7 +362,7 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "පසුබිම:"
 
 msgid "Direction:"
 msgstr ""
@@ -377,7 +377,7 @@ msgid "Ping-Pong"
 msgstr ""
 
 msgid "Columns"
-msgstr ""
+msgstr "තීරු"
 
 msgid "Columns:"
 msgstr ""
@@ -398,7 +398,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr ""
+msgstr "ගොනුව:"
 
 msgid "Interpolation:"
 msgstr ""
@@ -422,13 +422,13 @@ msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "භාෂාව"
 
 msgid "Interface"
-msgstr ""
+msgstr "අතුරුමුහුණත"
 
 msgid "Themes"
-msgstr ""
+msgstr "තේමා"
 
 msgid "Canvas"
 msgstr ""
@@ -437,10 +437,10 @@ msgid "Selection"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "කෙටිමං"
 
 msgid "Backup"
-msgstr ""
+msgstr "උපස්ථය"
 
 msgid "Performance"
 msgstr ""
@@ -476,7 +476,7 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "පද්ධතියේ භාෂාව"
 
 msgid "Display Scale"
 msgstr ""
@@ -485,13 +485,13 @@ msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "අඳුරු"
 
 msgid "Gray"
-msgstr ""
+msgstr "අළු"
 
 msgid "Blue"
-msgstr ""
+msgstr "නිල්"
 
 msgid "Caramel"
 msgstr ""
@@ -500,10 +500,10 @@ msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr ""
+msgstr "දම්"
 
 msgid "Theme"
-msgstr ""
+msgstr "තේමාව"
 
 msgid "Icon color from:"
 msgstr ""
@@ -581,10 +581,10 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr ""
+msgstr "අගය:"
 
 msgid "Apply"
-msgstr ""
+msgstr "යොදන්න"
 
 msgid "Diagonal"
 msgstr ""
@@ -599,7 +599,7 @@ msgid "Colors:"
 msgstr ""
 
 msgid "Steps:"
-msgstr ""
+msgstr "පියවර:"
 
 msgid "Top to Bottom"
 msgstr ""
@@ -638,37 +638,37 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "වියමන අඩවිය"
 
 msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
-msgstr ""
+msgstr "පරිත්‍යාග"
 
 msgid "Developers"
-msgstr ""
+msgstr "සංවර්ධකයින්"
 
 msgid "Contributors"
-msgstr ""
+msgstr "දායකයින්"
 
 msgid "Donors"
 msgstr ""
 
 msgid "Translators"
-msgstr ""
+msgstr "පරිවර්තකයින්"
 
 msgid "English"
-msgstr ""
+msgstr "ඉංග්‍රීසි"
 
 msgid "Greek"
-msgstr ""
+msgstr "ග්‍රීක"
 
 msgid "French"
-msgstr ""
+msgstr "ප්‍රංශ"
 
 msgid "German"
-msgstr ""
+msgstr "ජර්මානු"
 
 msgid "Polish"
 msgstr ""
@@ -677,22 +677,22 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 msgid "Russian"
-msgstr ""
+msgstr "රුසියානු"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "සරල චීන"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "සාම්ප්‍රදායික චීන"
 
 msgid "Italian"
-msgstr ""
+msgstr "ඉතාලි"
 
 msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
-msgstr ""
+msgstr "ස්පාඤ්ඤ"
 
 msgid "Catalan"
 msgstr ""
@@ -701,31 +701,31 @@ msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr ""
+msgstr "ඉන්දුනීසියානු"
 
 msgid "Czech"
 msgstr ""
 
 msgid "Arabic"
-msgstr ""
+msgstr "අරාබි"
 
 msgid "Turkish"
-msgstr ""
+msgstr "තුර්කි"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "නෝර්වේජියානු බොක්මාල්"
 
 msgid "Korean"
-msgstr ""
+msgstr "කොරියානු"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "හංගේරියානු"
 
 msgid "Romanian"
 msgstr ""
 
 msgid "Japanese"
-msgstr ""
+msgstr "ජපන්"
 
 msgid "Ukrainian"
 msgstr ""
@@ -947,7 +947,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "සියල්ල"
 
 msgid "Rectangular grid width:"
 msgstr ""
