@@ -21,7 +21,7 @@ func apply_selection(position : Vector2) -> void:
 	cel_image.lock()
 	var color := cel_image.get_pixelv(position)
 	for x in cel_image.get_width():
-		for y in cel_image.get_width():
+		for y in cel_image.get_height():
 			var pos := Vector2(x, y)
 			if color.is_equal_approx(cel_image.get_pixelv(pos)):
 				if _intersect:
