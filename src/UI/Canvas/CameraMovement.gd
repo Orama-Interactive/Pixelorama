@@ -17,7 +17,7 @@ func _ready() -> void:
 	add_child(tween)
 	tween.connect("tween_step", self, "_on_tween_step")
 	update_transparent_checker_offset()
-	
+
 	# signals regarding zoom stats
 	Global.zoom_level_label.connect("gui_input",self,"zoom_label_clicked")
 	Global.zoom_level_spinbox.connect("value_changed", self, "zoom_value_changed")
