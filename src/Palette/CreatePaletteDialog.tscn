@@ -76,7 +76,7 @@ margin_left = 71.0
 margin_top = 56.0
 margin_right = 284.0
 margin_bottom = 106.0
-rect_min_size = Vector2( 0, 50 )
+rect_min_size = Vector2( 0, 75 )
 size_flags_horizontal = 3
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
