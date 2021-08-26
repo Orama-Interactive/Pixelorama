@@ -220,13 +220,23 @@ func nn_rotate(sprite : Image, angle : float, pivot : Vector2) -> void:
 
 
 func similarColors(c1 : Color, c2 : Color, tol : float = 100) -> bool:
-	var dist = colorDistance(c1, c2)
-	return dist <= tol
+	# Euclidean distance in gamma sRGB is not a reliable indicator
+	# of perceptual similarity and should only be used as a proxy
+	# for a formula like CIEDE2000, CIE76, etc. See
+	# https://en.wikipedia.org/wiki/Color_difference
+	var distSq : float = colorDistanceSq(c1, c2)
+	return distSq <= (tol * tol)
 
 
 func colorDistance(c1 : Color, c2 : Color) -> float:
-		return sqrt(pow((c1.r - c2.r)*255, 2) + pow((c1.g - c2.g)*255, 2)
-		+ pow((c1.b - c2.b)*255, 2) + pow((c1.a - c2.a)*255, 2))
+	return sqrt(colorDistanceSq(c1, c2))
+
+
+func colorDistanceSq(c1 : Color, c2 : Color) -> float:
+		var rd : float = (c1.r - c2.r) * 255
+		var gd : float = (c1.g - c2.g) * 255
+		var bd : float = (c1.b - c2.b) * 255
+		return rd * rd + gd * gd + bd * bd
 
 # Image effects
 
