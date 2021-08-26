@@ -57,7 +57,7 @@ margin_left = 71.0
 margin_top = 28.0
 margin_right = 393.0
 margin_bottom = 78.0
-rect_min_size = Vector2( 0, 50 )
+rect_min_size = Vector2( 0, 75 )
 size_flags_horizontal = 3
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
@@ -137,6 +137,7 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
 [connection signal="popup_hide" from="." to="." method="_on_EditPaletteDialog_popup_hide"]

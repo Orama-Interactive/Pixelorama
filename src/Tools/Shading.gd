@@ -23,8 +23,8 @@ class LightenDarkenOp extends Drawer.ColorOp:
 	var sat_amount := 10.0
 	var value_amount := 10.0
 
-	var hue_lighten_limit := 60.0 / 359.0 # A yellow color
-	var hue_darken_limit := 270.0 / 359.0 # A purple color
+	var hue_lighten_limit := 60.0 / 360.0 # A yellow color
+	var hue_darken_limit := 240.0 / 360.0 # A blue color
 
 	var sat_lighten_limit := 10.0 / 100.0
 	var value_darken_limit := 10.0 / 100.0
@@ -40,25 +40,25 @@ class LightenDarkenOp extends Drawer.ColorOp:
 			elif strength < 0:
 				dst = dst.darkened(-strength)
 		else:
-			var hue_shift := hue_amount / 359.0
+			var hue_shift := hue_amount / 360.0
 			var sat_shift := sat_amount / 100.0
 			var value_shift := value_amount / 100.0
 
-			# If the colors are roughly between yellow and purple,
+			# If the colors are roughly between yellow-green-blue,
 			# reverse hue direction
-			if !hue_range(dst.h):
+			if hue_range(dst.h):
 				hue_shift = -hue_shift
 
 			if lighten_or_darken == LightenDarken.LIGHTEN:
 				hue_shift = hue_limit_lighten(dst.h, hue_shift)
-				dst.h += hue_shift
+				dst.h = fposmod(dst.h + hue_shift, 1)
 				if dst.s > sat_lighten_limit:
 					dst.s = max(dst.s - min(sat_shift, dst.s), sat_lighten_limit)
 				dst.v += value_shift
 
 			else:
 				hue_shift = hue_limit_darken(dst.h, hue_shift)
-				dst.h -= hue_shift
+				dst.h = fposmod(dst.h - hue_shift, 1)
 				dst.s += sat_shift
 				if dst.v > value_darken_limit:
 					dst.v = max(dst.v - min(value_shift, dst.v), value_darken_limit)
@@ -66,37 +66,45 @@ class LightenDarkenOp extends Drawer.ColorOp:
 		return dst
 
 
-	# Returns true if the colors are roughly between red and yellow, and purple and red
-	# False when the colors are roughly between yellow and purple (includes green & blue)
+	# Returns true if the colors are roughly between yellow, green and blue
+	# False when the colors are roughly between red-orange-yellow, or blue-purple-red
 	func hue_range(hue : float) -> bool:
-		return hue < hue_lighten_limit or hue > hue_darken_limit
+		return hue > hue_lighten_limit and hue < hue_darken_limit
 
 
 	func hue_limit_lighten(hue : float, hue_shift : float) -> float:
-		# Colors between red-yellow and purple-red
+		# Colors between red-orange-yellow and blue-purple-red
 		if hue_shift > 0:
-			# Just colors between red-yellow
+			# Just colors between red-orange-yellow
 			if hue < hue_darken_limit:
 				if hue + hue_shift >= hue_lighten_limit:
-					hue_shift = 0
+					hue_shift = hue_lighten_limit - hue
+			# Just blue-purple-red
+			else:
+				if hue + hue_shift >= hue_lighten_limit + 1: # +1 looping around the color wheel
+					hue_shift = hue_lighten_limit - hue
 
-		# Colors between yellow-purple
+		# Colors between yellow-green-blue
 		elif hue_shift < 0 and hue + hue_shift <= hue_lighten_limit:
-			hue_shift = clamp(hue_shift, -(hue - hue_lighten_limit), 0)
+			hue_shift = hue_lighten_limit - hue
 		return hue_shift
 
 
 	func hue_limit_darken(hue : float, hue_shift : float) -> float:
-		# Colors between red-yellow and purple-red
+		# Colors between red-orange-yellow and blue-purple-red
 		if hue_shift > 0:
-			# Just colors between purple-red
-			if hue > hue_darken_limit:
-				if hue + hue_shift <= hue_darken_limit:
-					hue_shift = 0
+			# Just colors between red-orange-yellow
+			if hue < hue_darken_limit:
+				if hue - hue_shift <= hue_darken_limit - 1: # -1 looping backwards around the color wheel
+					hue_shift = hue - hue_darken_limit
+			# Just blue-purple-red
+			else:
+				if hue - hue_shift <= hue_darken_limit:
+					hue_shift = hue - hue_darken_limit
 
-		# Colors between yellow-purple
+		# Colors between yellow-green-blue
 		elif hue_shift < 0 and hue - hue_shift >= hue_darken_limit:
-			hue_shift = clamp(hue_shift, -(hue_darken_limit - hue), 0)
+			hue_shift = hue - hue_darken_limit
 		return hue_shift
 
 

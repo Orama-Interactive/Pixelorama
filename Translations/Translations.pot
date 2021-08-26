@@ -662,6 +662,9 @@ msgstr ""
 msgid "Polish"
 msgstr ""
 
+msgid "Portuguese"
+msgstr ""
+
 msgid "Brazilian Portuguese"
 msgstr ""
 

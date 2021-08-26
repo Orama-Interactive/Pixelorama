@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.9] - Unreleased
 This update has been brought to you by the contributions of:
 
-Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Igor Santarek ([@jegor377](https://github.com/jegor377)), Álex Román Núñez ([@EIREXE](https://github.com/EIREXE))
+Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Igor Santarek ([@jegor377](https://github.com/jegor377)), Álex Román Núñez ([@EIREXE](https://github.com/EIREXE)), [mrtripie](https://github.com/mrtripie)
 
 ### Added
 - A total of 9 new tools!
@@ -48,6 +48,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - Cropping images should now work as expected. Before, there were times when it did not crop the image at the correct size.
 - Fixed a rare division by zero crash when changing the display scale under Preferences.
 - Changed pixel grid shortcut on macOS because it conflicted with a system hotkey. [#494](https://github.com/Orama-Interactive/Pixelorama/pull/494)
+- The shading tool now has correct Hue, Saturation and Value changes, as well as some other tweaks, like limiting the darkening hue to 240 instead of 270. [#519](https://github.com/Orama-Interactive/Pixelorama/pull/519) and [#522](https://github.com/Orama-Interactive/Pixelorama/pull/522)
 <br><br>
 
 ## [v0.8.3] - 2021-05-04
