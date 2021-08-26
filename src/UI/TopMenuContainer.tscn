@@ -99,7 +99,6 @@ margin_bottom = 28.0
 min_value = 100.0
 max_value = 2000.0
 value = 100.0
-allow_greater = true
 suffix = "%"
 
 [node name="CursorPosition" type="Label" parent="TopLabels"]
