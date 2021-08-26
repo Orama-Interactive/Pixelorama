@@ -188,16 +188,33 @@ func nn_rotate(sprite : Image, angle : float, pivot : Vector2) -> void:
 	aux.copy_from(sprite)
 	sprite.lock()
 	aux.lock()
-	var ox: int
-	var oy: int
-	for x in range(sprite.get_width()):
-		for y in range(sprite.get_height()):
-			ox = (x - pivot.x)*cos(angle) + (y - pivot.y)*sin(angle) + pivot.x
-			oy = -(x - pivot.x)*sin(angle) + (y - pivot.y)*cos(angle) + pivot.y
-			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
-				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
+	
+	var sin_angle : float = sin(angle)
+	var cos_angle : float = cos(angle)
+	var x_pivot : float = pivot.x
+	var y_pivot : float = pivot.y
+
+	var sprite_height : int = sprite.get_height()
+	var sprite_width : int = sprite.get_width()
+	var pixel_range : Array = range(0, sprite_height * sprite_width, 1)
+
+	for i in pixel_range:
+		# warning-ignore:integer_division
+		var dy: int = i / sprite_width
+		var dx: int = i % sprite_width
+		var y_offset: int = dy - y_pivot
+		var x_offset: int = dx - x_pivot
+
+		var oy: int = y_pivot - x_offset * sin_angle + y_offset * cos_angle
+		if oy >= 0 && oy < sprite_height:
+			var ox: int = x_pivot + x_offset * cos_angle + y_offset * sin_angle
+			if ox >= 0 && ox < sprite_width:
+				sprite.set_pixel(dx, dy, aux.get_pixel(ox, oy))
 			else:
-				sprite.set_pixel(x, y, Color(0,0,0,0))
+				sprite.set_pixel(dx, dy, Color(0, 0, 0, 0))
+		else:
+			sprite.set_pixel(dx, dy, Color(0, 0, 0, 0))
+
 	sprite.unlock()
 	aux.unlock()
 
