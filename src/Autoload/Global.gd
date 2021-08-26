@@ -134,6 +134,7 @@ var transparent_checker : ColorRect
 
 var cursor_position_label : Label
 var zoom_level_label : Label
+var zoom_level_spinbox : SpinBox
 
 var tool_panel : Panel
 var right_panel : Panel
@@ -232,6 +233,7 @@ func _ready() -> void:
 
 	cursor_position_label = control.find_node("CursorPosition")
 	zoom_level_label = control.find_node("ZoomLevel")
+	zoom_level_spinbox = control.find_node("ZoomSpinbox")
 
 	tool_panel = control.find_node("ToolPanel")
 	right_panel = control.find_node("RightPanel")
