@@ -21,6 +21,7 @@ func _ready() -> void:
 	# signals regarding zoom stats
 	Global.zoom_level_label.connect("gui_input",self,"zoom_label_clicked")
 	Global.zoom_level_spinbox.connect("value_changed", self, "zoom_value_changed")
+	Global.zoom_level_spinbox.max_value = 100.0/zoom_min.x
 	Global.zoom_level_spinbox.get_child(0).connect("focus_exited", self, "zoom_focus_exited")
 
 
