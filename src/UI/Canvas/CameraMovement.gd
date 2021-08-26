@@ -17,6 +17,36 @@ func _ready() -> void:
 	add_child(tween)
 	tween.connect("tween_step", self, "_on_tween_step")
 	update_transparent_checker_offset()
+	
+	# signals regarding zoom stats
+	Global.zoom_level_label.connect("gui_input",self,"zoom_label_clicked")
+	Global.zoom_level_spinbox.connect("value_changed", self, "zoom_value_changed")
+	Global.zoom_level_spinbox.max_value = 100.0/zoom_min.x
+	Global.zoom_level_spinbox.get_child(0).connect("focus_exited", self, "zoom_focus_exited")
+
+
+func zoom_label_clicked(event :InputEvent):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+		if event.doubleclick:
+			Global.zoom_level_label.visible = false
+			Global.zoom_level_spinbox.visible = true
+			Global.zoom_level_spinbox.editable = true
+			Global.zoom_level_spinbox.value = str2var(Global.zoom_level_label.text.replace("%",""))
+			Global.zoom_level_spinbox.get_child(0).grab_focus() #since the actual lineedit is the first child of spinbox
+
+
+func zoom_value_changed(value):
+	if name == "Camera2D":
+		zoom_camera_percent(value)
+
+
+func zoom_focus_exited():
+	if Global.zoom_level_spinbox.value != round(100 / zoom.x): #If user pressed enter while editing
+		if name == "Camera2D":
+			zoom_camera_percent(Global.zoom_level_spinbox.value)
+	Global.zoom_level_label.visible = true
+	Global.zoom_level_spinbox.visible = false
+	Global.zoom_level_spinbox.editable = false
 
 
 func update_transparent_checker_offset() -> void:
@@ -175,6 +205,15 @@ func zoom_camera(dir : int) -> void:
 		offset = offset + (-0.5 * viewport_size + mouse_pos) * (prev_zoom - zoom)
 		zoom_changed()
 
+func zoom_camera_percent(value :float):
+	var percent :float = (100.0 / value)
+	var new_zoom = Vector2(percent, percent)
+	if Global.smooth_zoom:
+		tween.interpolate_property(self, "zoom", zoom, new_zoom, 0.05, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.start()
+	else:
+		zoom = new_zoom
+	zoom_changed()
 
 func zoom_changed() -> void:
 	update_transparent_checker_offset()
