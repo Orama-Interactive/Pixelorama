@@ -3,140 +3,140 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
 "X-Crowdin-Project-ID: 385497\n"
-"X-Crowdin-Language: nl\n"
+"X-Crowdin-Language: si-LK\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
 "X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language-Team: Dutch\n"
-"Language: nl_NL\n"
+"Language-Team: Sinhala\n"
+"Language: si_LK\n"
 "PO-Revision-Date: 2021-08-24 14:07\n"
 
 msgid "OK"
-msgstr "Oké"
+msgstr "හරි"
 
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "අවලංගු"
 
 msgid "Open"
-msgstr "Openen"
+msgstr "විවෘත"
 
 msgid "Save"
-msgstr "Opslaan"
+msgstr "සුරකින්න"
 
 msgid "Please Confirm..."
-msgstr "Bevestig..."
+msgstr ""
 
 msgid "File Name:"
-msgstr ""
+msgstr "ගොනුවේ නම:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "ව්‍යාපෘතියේ නම:"
 
 msgid "Image Size"
-msgstr "Afbeeldingsgrootte"
+msgstr ""
 
 msgid "Canvas Size"
-msgstr "Canvas grootte"
+msgstr ""
 
 msgid "Frame Size"
 msgstr ""
 
 msgid "Size:"
-msgstr ""
+msgstr "ප්‍රමාණය:"
 
 msgid "Width:"
-msgstr "Breedte:"
+msgstr ""
 
 msgid "Height:"
-msgstr "Hoogte:"
+msgstr ""
 
 msgid "Center"
 msgstr ""
 
 msgid "File"
-msgstr "Bestand"
+msgstr ""
 
 msgid "Edit"
-msgstr "Wijzigen"
+msgstr ""
 
 msgid "Select"
 msgstr ""
 
 msgid "View"
-msgstr "Tonen"
+msgstr ""
 
 msgid "Image"
-msgstr "Afbeelding"
+msgstr ""
 
 msgid "Effects"
-msgstr "Effecten"
+msgstr ""
 
 msgid "Help"
-msgstr "Help"
+msgstr "උදව්"
 
 msgid "New"
-msgstr "Nieuw"
+msgstr "නව"
 
 msgid "New..."
-msgstr "Nieuw..."
+msgstr "නව..."
 
 msgid "Open..."
-msgstr "Openen..."
+msgstr "විවෘත..."
 
 msgid "Save..."
-msgstr "Opslaan..."
+msgstr "සුරකින්න..."
 
 msgid "Save as..."
-msgstr "Opslaan als..."
+msgstr "ලෙස සුරකින්න..."
 
 msgid "Use ZSTD Compression"
 msgstr ""
 
 msgid "Import"
-msgstr "Importeren"
+msgstr "ආයාත කරන්න"
 
 msgid "Export"
-msgstr "Exporteren"
+msgstr "නිර්යාත කරන්න"
 
 msgid "Export..."
-msgstr "Exporteren..."
+msgstr "නිර්යාත..."
 
 msgid "Export as..."
-msgstr "Exporteren als..."
-
-msgid "Export PNG..."
-msgstr "Exporteer PNG..."
-
-msgid "Export PNG as..."
-msgstr "Exporteer PNG als..."
-
-msgid "Quit"
-msgstr "Afsluiten"
-
-msgid "Undo"
-msgstr "Ongedaan maken"
-
-msgid "Redo"
-msgstr "Opnieuw uitvoeren"
-
-msgid "Copy"
-msgstr "Kopiëren"
-
-msgid "Cut"
 msgstr ""
 
+msgid "Export PNG..."
+msgstr ""
+
+msgid "Export PNG as..."
+msgstr ""
+
+msgid "Quit"
+msgstr "ඉවත් වන්න"
+
+msgid "Undo"
+msgstr "පෙරසේ"
+
+msgid "Redo"
+msgstr "පසුසේ"
+
+msgid "Copy"
+msgstr "පිටපත්"
+
+msgid "Cut"
+msgstr "කපන්න"
+
 msgid "Paste"
-msgstr "Plakken"
+msgstr "අලවන්න"
 
 msgid "Delete"
-msgstr "Verwijderen"
+msgstr ""
 
 msgid "New Brush"
 msgstr ""
 
 msgid "Scale Image"
-msgstr "Afbeelding schalen"
+msgstr ""
 
 msgid "Pixels"
 msgstr ""
@@ -145,10 +145,10 @@ msgid "Percentage"
 msgstr ""
 
 msgid "Crop Image"
-msgstr "Afbeelding bijsnijden"
+msgstr ""
 
 msgid "Resize Canvas"
-msgstr "Canvas formaat aanpassen"
+msgstr ""
 
 msgid "Centralize Image"
 msgstr ""
@@ -211,7 +211,7 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr "Zen modus"
+msgstr ""
 
 msgid "Fullscreen Mode"
 msgstr ""
@@ -229,31 +229,31 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr "Importeer als:"
+msgstr ""
 
 msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
-msgstr "Nieuw tabblad"
+msgstr ""
 
 msgid "Spritesheet (new tab)"
-msgstr "Spritesheet (nieuw tabblad)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr "Nieuw frame"
+msgstr ""
 
 msgid "Replace frame"
 msgstr ""
 
 msgid "New layer"
-msgstr "Nieuwe laag"
+msgstr ""
 
 msgid "New palette"
-msgstr "Nieuw palet"
+msgstr ""
 
 msgid "New brush"
 msgstr ""
@@ -262,10 +262,10 @@ msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr "Horizontale frames:"
+msgstr ""
 
 msgid "Vertical frames:"
-msgstr "Verticale frames:"
+msgstr ""
 
 msgid "Start frame:"
 msgstr ""
@@ -329,7 +329,7 @@ msgid "Animation"
 msgstr ""
 
 msgid "Preview:"
-msgstr ""
+msgstr "පෙරදසුන:"
 
 msgid "Frame:"
 msgstr ""
@@ -338,7 +338,7 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "පිරික්සන්න"
 
 msgid "Resize:"
 msgstr ""
@@ -362,7 +362,7 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "පසුබිම:"
 
 msgid "Direction:"
 msgstr ""
@@ -377,7 +377,7 @@ msgid "Ping-Pong"
 msgstr ""
 
 msgid "Columns"
-msgstr ""
+msgstr "තීරු"
 
 msgid "Columns:"
 msgstr ""
@@ -398,7 +398,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr ""
+msgstr "ගොනුව:"
 
 msgid "Interpolation:"
 msgstr ""
@@ -422,13 +422,13 @@ msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "භාෂාව"
 
 msgid "Interface"
-msgstr ""
+msgstr "අතුරුමුහුණත"
 
 msgid "Themes"
-msgstr ""
+msgstr "තේමා"
 
 msgid "Canvas"
 msgstr ""
@@ -437,10 +437,10 @@ msgid "Selection"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "කෙටිමං"
 
 msgid "Backup"
-msgstr ""
+msgstr "උපස්ථය"
 
 msgid "Performance"
 msgstr ""
@@ -476,7 +476,7 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "පද්ධතියේ භාෂාව"
 
 msgid "Display Scale"
 msgstr ""
@@ -485,13 +485,13 @@ msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "අඳුරු"
 
 msgid "Gray"
-msgstr ""
+msgstr "අළු"
 
 msgid "Blue"
-msgstr ""
+msgstr "නිල්"
 
 msgid "Caramel"
 msgstr ""
@@ -500,10 +500,10 @@ msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr ""
+msgstr "දම්"
 
 msgid "Theme"
-msgstr ""
+msgstr "තේමාව"
 
 msgid "Icon color from:"
 msgstr ""
@@ -581,10 +581,10 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr ""
+msgstr "අගය:"
 
 msgid "Apply"
-msgstr ""
+msgstr "යොදන්න"
 
 msgid "Diagonal"
 msgstr ""
@@ -599,7 +599,7 @@ msgid "Colors:"
 msgstr ""
 
 msgid "Steps:"
-msgstr ""
+msgstr "පියවර:"
 
 msgid "Top to Bottom"
 msgstr ""
@@ -638,37 +638,37 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "වියමන අඩවිය"
 
 msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
-msgstr ""
+msgstr "පරිත්‍යාග"
 
 msgid "Developers"
-msgstr ""
+msgstr "සංවර්ධකයින්"
 
 msgid "Contributors"
-msgstr ""
+msgstr "දායකයින්"
 
 msgid "Donors"
 msgstr ""
 
 msgid "Translators"
-msgstr ""
+msgstr "පරිවර්තකයින්"
 
 msgid "English"
-msgstr ""
+msgstr "ඉංග්‍රීසි"
 
 msgid "Greek"
-msgstr ""
+msgstr "ග්‍රීක"
 
 msgid "French"
-msgstr ""
+msgstr "ප්‍රංශ"
 
 msgid "German"
-msgstr ""
+msgstr "ජර්මානු"
 
 msgid "Polish"
 msgstr ""
@@ -680,22 +680,22 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 msgid "Russian"
-msgstr ""
+msgstr "රුසියානු"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "සරල චීන"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "සාම්ප්‍රදායික චීන"
 
 msgid "Italian"
-msgstr ""
+msgstr "ඉතාලි"
 
 msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
-msgstr ""
+msgstr "ස්පාඤ්ඤ"
 
 msgid "Catalan"
 msgstr ""
@@ -704,31 +704,31 @@ msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr ""
+msgstr "ඉන්දුනීසියානු"
 
 msgid "Czech"
 msgstr ""
 
 msgid "Arabic"
-msgstr ""
+msgstr "අරාබි"
 
 msgid "Turkish"
-msgstr ""
+msgstr "තුර්කි"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "නෝර්වේජියානු බොක්මාල්"
 
 msgid "Korean"
-msgstr ""
+msgstr "කොරියානු"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "හංගේරියානු"
 
 msgid "Romanian"
 msgstr ""
 
 msgid "Japanese"
-msgstr ""
+msgstr "ජපන්"
 
 msgid "Ukrainian"
 msgstr ""
@@ -950,7 +950,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "සියල්ල"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1710,19 +1710,19 @@ msgid "Backup reloaded"
 msgstr ""
 
 msgid "Remove currently selected palette"
-msgstr "Verwijder geselecteerde palet"
+msgstr ""
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
 msgstr ""
 
 msgid "You can't remove more palettes!"
-msgstr "Je kunt geen paletten meer verwijderen!"
+msgstr ""
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr "Kan pallet niet verwijderen, omdat het niet bestaat!"
+msgstr ""
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Er is een fout opgetreden bij het verwijderen van het palet. Foutcode: %s"
+msgstr ""
 
 msgid "and"
 msgstr ""

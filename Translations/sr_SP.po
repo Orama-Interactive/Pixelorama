@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-08-24 14:07\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -672,6 +672,9 @@ msgstr "Њемачки"
 
 msgid "Polish"
 msgstr "Пољски"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "Бразилски португалски"
