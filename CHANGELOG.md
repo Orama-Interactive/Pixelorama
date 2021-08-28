@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v0.9] - Unreleased
 This update has been brought to you by the contributions of:
 
-Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Igor Santarek ([@jegor377](https://github.com/jegor377)), Álex Román Núñez ([@EIREXE](https://github.com/EIREXE)), [mrtripie](https://github.com/mrtripie)
+Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Igor Santarek ([@jegor377](https://github.com/jegor377)), Álex Román Núñez ([@EIREXE](https://github.com/EIREXE)), [@mrtripie](https://github.com/mrtripie)
 
 ### Added
 - A total of 9 new tools!
@@ -20,7 +20,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - Frame numbers in the timeline above the cels are now clickable buttons that can be dragged and dropped to re-arrange the frames. Right clicking on these buttons brings up a frame-related menu with options that used to be on the cel right click menu.
 - You can now right click a cel to delete its contents.
 - Layer dragging and dropping is now also possible.
-- A new "fill inside" option has been added in the Pencil too. [#489](https://github.com/Orama-Interactive/Pixelorama/pull/489), based off [#459](https://github.com/Orama-Interactive/Pixelorama/pull/459)
+- A new "fill inside" option has been added in the Pencil tool options. [#489](https://github.com/Orama-Interactive/Pixelorama/pull/489), based off [#459](https://github.com/Orama-Interactive/Pixelorama/pull/459)
 - You can now name the project name on the "create new project" dialog. [#490](https://github.com/Orama-Interactive/Pixelorama/pull/490)
 - A tool button size option has been added in the Preferences. This lets you choose between small or big tool button sizes.
 - Added Norwegian Bokmål and Ukrainian translations.
@@ -38,6 +38,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - The toolbar on the left can now be resized by the user.
 - The frame delay minimum value is now 0.01 instead of 0.
 - Cloning frames now create linked cels on layers where the cel linking button is enabled.
+- Window transparency has been temporarily disabled in macOS due to [#491](https://github.com/Orama-Interactive/Pixelorama/issues/491).
 
 ### Fixed
 - Issues such as not being able to create guides at random times, which are a result of PoolVectorArray locking issues, may have finally been solved. [#331](https://github.com/Orama-Interactive/Pixelorama/issues/331)

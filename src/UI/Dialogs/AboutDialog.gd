@@ -105,6 +105,7 @@ func create_donors() -> void:
 	donors.create_item(donors_root).set_text(0, "  MysteryStudio")
 	donors.create_item(donors_root).set_text(0, "  Ryan C. Gordon (icculus)")
 	donors.create_item(donors_root).set_text(0, "  Benedikt")
+	donors.create_item(donors_root).set_text(0, "  David Maziarka")
 
 
 func create_contributors() -> void:
@@ -145,6 +146,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Kawan Weege (DragonOfWar)")
 	contributors.create_item(contributor_root).set_text(0, "  kevinms")
 	contributors.create_item(contributor_root).set_text(0, "  Álex Román Núñez (EIREXE)")
+	contributors.create_item(contributor_root).set_text(0, "  mrtripie")
 
 
 func create_translators() -> void:
@@ -167,6 +169,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish"))
 	translators.create_item(translators_root).set_text(0, "  Serhiy Dmytryshyn (dies) - " + tr("Polish"))
 	translators.create_item(translators_root).set_text(0, "  Igor Santarek (jegor377) - " + tr("Polish"))
+	translators.create_item(translators_root).set_text(0, "  RainbowP - " + tr("Polish"))
 	translators.create_item(translators_root).set_text(0, "  Michael Alexsander (YeldhamDev) - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  Cedulio Cezar (ceduliocezar) - " + tr("Brazilian Portuguese"))
 	translators.create_item(translators_root).set_text(0, "  Alexandre Oliveira (rockytvbr) - " + tr("Brazilian Portuguese"))
@@ -191,6 +194,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  UncleFangs - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Jaime Arancibia Soto - " + tr("Spanish") + " " + tr("and") + " " + tr("Catalan"))
 	translators.create_item(translators_root).set_text(0, "  foralistico - " + tr("Spanish"))
+	translators.create_item(translators_root).set_text(0, "  Jose Callejas (satorikeiko) - " + tr("Spanish"))
 	translators.create_item(translators_root).set_text(0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian"))
 	translators.create_item(translators_root).set_text(0, "  Edgars Korns (Eddy11) - " + tr("Latvian"))
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
@@ -204,6 +208,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  daisuke osada (barlog) - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  Motomo.exe - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  hebekeg - " + tr("Japanese"))
+	translators.create_item(translators_root).set_text(0, "  Sorenwds - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  M. Gabriel Lup - " + tr("Romanian"))
 	translators.create_item(translators_root).set_text(0, "  ANormalKnife - " + tr("Turkish"))
 	translators.create_item(translators_root).set_text(0, "  kmsecer - " + tr("Turkish"))
