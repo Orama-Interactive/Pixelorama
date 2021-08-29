@@ -50,6 +50,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - Fixed a rare division by zero crash when changing the display scale under Preferences.
 - Changed pixel grid shortcut on macOS because it conflicted with a system hotkey. [#494](https://github.com/Orama-Interactive/Pixelorama/pull/494)
 - The shading tool now has correct Hue, Saturation and Value changes, as well as some other tweaks, like limiting the darkening hue to 240 instead of 270. [#519](https://github.com/Orama-Interactive/Pixelorama/pull/519) and [#522](https://github.com/Orama-Interactive/Pixelorama/pull/522)
+- The disabled buttons on the light theme are no longer invisible. [#518](https://github.com/Orama-Interactive/Pixelorama/issues/518)
 <br><br>
 
 ## [v0.8.3] - 2021-05-04
