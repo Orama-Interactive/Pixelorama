@@ -78,6 +78,10 @@ func change_theme(ID : int) -> void:
 	Global.control.theme.default_font = font
 	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
+	if Global.control.get_node_or_null("AlternateTransparentBackground"): #also change color of AlternateTransparentBackground as well "if it exists"
+		var new_color = Global.default_clear_color
+		new_color.a = Global.control.get_node("AlternateTransparentBackground").color.a
+		Global.control.get_node("AlternateTransparentBackground").color = new_color
 
 	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
 	var fake_vsplit_grabber : TextureRect = Global.animation_timeline.find_node("FakeVSplitContainerGrabber")
