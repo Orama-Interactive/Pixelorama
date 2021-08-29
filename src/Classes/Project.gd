@@ -317,6 +317,7 @@ func deserialize(dict : Dictionary) -> void:
 		size.x = dict.size_x
 		size.y = dict.size_y
 		update_tile_mode_rects()
+		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):
