@@ -367,8 +367,8 @@ func window_transparency(value :float) -> void:
 		get_node("../../AlternateTransparentBackground").visible = false
 	else:
 		get_node("../../AlternateTransparentBackground").visible = true
-	var checker :ColorRect = get_parent().get_node("UI/ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
-	var color :Color = Global.control.theme.get_stylebox("panel", "PanelContainer").bg_color
+	var checker :ColorRect = Global.transparent_checker
+	var color :Color = Global.default_clear_color
 	color.a = value
 	get_node("../../AlternateTransparentBackground").color = color
 	checker.transparency(value)
