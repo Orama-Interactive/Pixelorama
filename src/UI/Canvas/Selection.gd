@@ -105,6 +105,8 @@ func _input(event : InputEvent) -> void:
 				Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+			if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+				return
 			if event.pressed:
 				if gizmo:
 					Global.has_focus = false
@@ -165,6 +167,8 @@ func move_with_arrow_keys(event : InputEvent) -> void:
 		return
 
 	if Global.current_project.has_selection:
+		if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+			return
 		if is_action_direction_pressed(event) and !arrow_key_move:
 			arrow_key_move = true
 			if Input.is_key_pressed(KEY_ALT):
