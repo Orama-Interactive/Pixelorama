@@ -28,6 +28,8 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		return
 	_start_pos = position
 	_offset = position
 	_undo_data = _get_undo_data()
@@ -37,6 +39,8 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
 	# while the content is being moved
 	if _content_transformation_check != selection_node.is_moving_content:
@@ -59,6 +63,8 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(position : Vector2) -> void:
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		return
 	if _start_pos != Vector2.INF and _content_transformation_check == selection_node.is_moving_content:
 		if Tools.shift: # Snap to axis
 			var angle := position.angle_to_point(_start_pos)
