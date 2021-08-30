@@ -94,15 +94,18 @@ func save_layer_name(new_name : String) -> void:
 
 
 func _on_VisibilityButton_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
 
 
 func _on_LockButton_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 
 
 func _on_LinkButton_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].new_cels_linked = !Global.current_project.layers[layer].new_cels_linked
 	if Global.current_project.layers[layer].new_cels_linked && !Global.current_project.layers[layer].linked_cels:
 		# If button is pressed and there are no linked cels in the layer
