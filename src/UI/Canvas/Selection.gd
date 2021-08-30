@@ -472,17 +472,18 @@ func transform_content_confirm() -> void:
 		var frame : int = cel_index[0]
 		var layer : int = cel_index[1]
 		if frame < project.frames.size() and layer < project.layers.size():
-			var cel_image : Image = project.frames[frame].cels[layer].image
-			var src : Image = preview_image
-			if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
-				src = get_selected_image(cel_image, clear_in_selected_cels)
-				src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
-				if temp_rect.size.x < 0:
-					src.flip_x()
-				if temp_rect.size.y < 0:
-					src.flip_y()
+			if Global.current_project.layers[layer].can_layer_get_drawn():
+				var cel_image : Image = project.frames[frame].cels[layer].image
+				var src : Image = preview_image
+				if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
+					src = get_selected_image(cel_image, clear_in_selected_cels)
+					src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
+					if temp_rect.size.x < 0:
+						src.flip_x()
+					if temp_rect.size.y < 0:
+						src.flip_y()
 
-			cel_image.blit_rect_mask(src, src, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
+				cel_image.blit_rect_mask(src, src, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	var selected_bitmap_copy = project.selection_bitmap.duplicate()
 	project.move_bitmap_values(selected_bitmap_copy)
 	project.selection_bitmap = selected_bitmap_copy
