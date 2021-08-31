@@ -21,7 +21,7 @@ func _about_to_show():
 
 
 func set_nodes() -> void:
-	preview = $VBoxContainer/Preview
+	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/AffectHBoxContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
 

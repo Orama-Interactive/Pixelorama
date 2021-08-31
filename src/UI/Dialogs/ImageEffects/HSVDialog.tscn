@@ -8,6 +8,7 @@ margin_left = 1.0
 margin_top = -1.0
 margin_right = 464.0
 margin_bottom = 318.0
+rect_min_size = Vector2( 172, 60.2 )
 window_title = "Adjust HSV"
 resizable = true
 script = ExtResource( 1 )
@@ -21,18 +22,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_left = 123.0
-margin_right = 323.0
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+margin_right = 447.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+margin_left = 123.5
+margin_right = 323.5
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
-size_flags_horizontal = 4
-size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
 show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 204.0
@@ -144,7 +152,7 @@ text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/AffectHBoxContainer"]
 margin_left = 164.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 text = "Selected cels"
