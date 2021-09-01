@@ -39,6 +39,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - The frame delay minimum value is now 0.01 instead of 0.
 - Cloning frames now create linked cels on layers where the cel linking button is enabled.
 - Window transparency has been temporarily disabled in macOS due to [#491](https://github.com/Orama-Interactive/Pixelorama/issues/491).
+- The close button on tabs is always being displayed, which lets the user close projects other than the current one.
 
 ### Fixed
 - Issues such as not being able to create guides at random times, which are a result of PoolVectorArray locking issues, may have finally been solved. [#331](https://github.com/Orama-Interactive/Pixelorama/issues/331)
