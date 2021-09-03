@@ -1076,7 +1076,7 @@ margin_top = 7.0
 margin_right = 889.0
 margin_bottom = 31.0
 tab_align = 0
-tab_close_display_policy = 1
+tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource( 3 )
 

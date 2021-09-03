@@ -10,7 +10,7 @@ var project = Global.current_project
 
 
 func _ready() -> void:
-	width = Global.camera.zoom.x
+	width = Global.camera.zoom.x * 2
 	default_color = Global.guide_color
 	project.guides.append(self)
 

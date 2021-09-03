@@ -6,6 +6,7 @@
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 245.0
 margin_bottom = 241.0
+rect_min_size = Vector2( 172, 60.2 )
 window_title = "Rotate Image"
 resizable = true
 script = ExtResource( 1 )
@@ -24,22 +25,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer"]
-margin_left = 31.0
-margin_right = 231.0
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+margin_right = 278.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+margin_left = 39.0
+margin_right = 239.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
-size_flags_horizontal = 4
-size_flags_vertical = 3
 expand = true
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
 show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 204.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 224.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
@@ -50,7 +58,7 @@ text = "Type:"
 
 [node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 38.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -58,7 +66,7 @@ size_flags_vertical = 3
 
 [node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 228.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 252.0
 
 [node name="Label" type="Label" parent="VBoxContainer/AngleOptions"]
@@ -69,7 +77,7 @@ text = "Angle:"
 
 [node name="AngleHSlider" type="HSlider" parent="VBoxContainer/AngleOptions"]
 margin_left = 44.0
-margin_right = 185.0
+margin_right = 200.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -80,8 +88,8 @@ __meta__ = {
 }
 
 [node name="AngleSpinBox" type="SpinBox" parent="VBoxContainer/AngleOptions"]
-margin_left = 189.0
-margin_right = 263.0
+margin_left = 204.0
+margin_right = 278.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 359.0
@@ -89,7 +97,7 @@ suffix = "°"
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 256.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 280.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
@@ -101,7 +109,7 @@ text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
 margin_left = 164.0
-margin_right = 263.0
+margin_right = 278.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 text = "Selected cels"
