@@ -4,7 +4,8 @@ extends ImageEffect
 onready var type_option_button : OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var angle_hslider : HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox : SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
-
+onready var wait_apply_timer = $WaitApply
+onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 func _ready() -> void:
 	type_option_button.add_item("Rotxel")
@@ -20,6 +21,7 @@ func set_nodes() -> void:
 
 func _about_to_show() -> void:
 	._about_to_show()
+	wait_apply_timer.wait_time = wait_time_spinbox.value/1000.0
 	angle_hslider.value = 0
 
 
@@ -63,8 +65,8 @@ func _confirmed() -> void:
 
 
 func _on_HSlider_value_changed(_value : float) -> void:
-	update_preview()
 	angle_spinbox.value = angle_hslider.value
+	wait_apply_timer.start()
 
 
 func _on_SpinBox_value_changed(_value : float) -> void:
@@ -73,3 +75,11 @@ func _on_SpinBox_value_changed(_value : float) -> void:
 
 func _on_TypeOptionButton_item_selected(_id : int) -> void:
 	update_preview()
+
+
+func _on_WaitApply_timeout() -> void:
+	update_preview()
+
+
+func _on_WaitTime_value_changed(value: float) -> void:
+	wait_apply_timer.wait_time = value/1000.0
