@@ -7,6 +7,8 @@ onready var angle_spinbox : SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
 onready var wait_apply_timer = $WaitApply
 onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
+var live_preview :bool = true
+
 func _ready() -> void:
 	type_option_button.add_item("Rotxel")
 	type_option_button.add_item("Upscale, Rotate and Downscale")
@@ -66,7 +68,10 @@ func _confirmed() -> void:
 
 func _on_HSlider_value_changed(_value : float) -> void:
 	angle_spinbox.value = angle_hslider.value
-	wait_apply_timer.start()
+	if live_preview:
+		update_preview()
+	else:
+		wait_apply_timer.start()
 
 
 func _on_SpinBox_value_changed(_value : float) -> void:
@@ -83,3 +88,9 @@ func _on_WaitApply_timeout() -> void:
 
 func _on_WaitTime_value_changed(value: float) -> void:
 	wait_apply_timer.wait_time = value/1000.0
+
+
+func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
+	live_preview = button_pressed
+	wait_time_spinbox.editable = !live_preview
+	wait_time_spinbox.get_parent().visible = !live_preview

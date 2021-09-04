@@ -13,7 +13,9 @@ onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 var shaderPath : String = "res://src/Shaders/HSV.shader"
 
+var live_preview :bool = true
 var confirmed: bool = false
+ 
 func _about_to_show():
 	reset()
 	var sm : ShaderMaterial = ShaderMaterial.new()
@@ -94,19 +96,28 @@ func reconnect_signals() -> void:
 func _on_Hue_value_changed(value : float) -> void:
 	hue_spinbox.value = value
 	hue_slider.value = value
-	wait_apply_timer.start()
+	if live_preview:
+		update_preview()
+	else:
+		wait_apply_timer.start()
 
 
 func _on_Saturation_value_changed(value : float) -> void:
 	sat_spinbox.value = value
 	sat_slider.value = value
-	wait_apply_timer.start()
+	if live_preview:
+		update_preview()
+	else:
+		wait_apply_timer.start()
 
 
 func _on_Value_value_changed(value : float) -> void:
 	val_spinbox.value = value
 	val_slider.value = value
-	wait_apply_timer.start()
+	if live_preview:
+		update_preview()
+	else:
+		wait_apply_timer.start()
 
 
 func _on_WaitApply_timeout() -> void:
@@ -115,3 +126,9 @@ func _on_WaitApply_timeout() -> void:
 
 func _on_WaitTime_value_changed(value: float) -> void:
 	wait_apply_timer.wait_time = value/1000.0
+
+
+func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
+	live_preview = button_pressed
+	wait_time_spinbox.editable = !live_preview
+	wait_time_spinbox.get_parent().visible = !live_preview
