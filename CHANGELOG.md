@@ -23,6 +23,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - A new "fill inside" option has been added in the Pencil tool options. [#489](https://github.com/Orama-Interactive/Pixelorama/pull/489), based off [#459](https://github.com/Orama-Interactive/Pixelorama/pull/459)
 - You can now name the project name on the "create new project" dialog. [#490](https://github.com/Orama-Interactive/Pixelorama/pull/490)
 - A tool button size option has been added in the Preferences. This lets you choose between small or big tool button sizes.
+- Added a "Licenses" tab in the About menu, which displays Pixelorama's license as well as the software it depends on, such as Godot.
 - Added Norwegian Bokmål and Ukrainian translations.
 
 ### Changed

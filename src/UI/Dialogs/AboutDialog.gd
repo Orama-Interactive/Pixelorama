@@ -1,16 +1,60 @@
 extends WindowDialog
 
+
+enum License {PIXELORAMA, GODOT, FREETYPE, GODOT_GDGIFEXPORTER}
+
+const LICENSES := [
+"""MIT License
+
+Copyright (c) 2019-present Orama Interactive and contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+""",
+
+"""This software uses Godot Engine, available under the following license:
+
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur.
+Copyright (c) 2014-2021 Godot Engine contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+""",
+
+"Portions of this software are copyright © 2021 The FreeType Project (www.freetype.org). All rights reserved.",
+
+"""MIT License
+
+Copyright (c) 2020 Igor Santarek
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
+]
+
 onready var credits = $AboutUI/Credits
 onready var groups : Tree = $AboutUI/Credits/Groups
 onready var developer_container = $AboutUI/Credits/Developers
 onready var contributors_container = $AboutUI/Credits/Contributors
 onready var donors_container = $AboutUI/Credits/Donors
 onready var translators_container = $AboutUI/Credits/Translators
+onready var licenses_container = $AboutUI/Credits/Licenses
 
 onready var developers : Tree = $AboutUI/Credits/Developers/DeveloperTree
 onready var contributors : Tree = $AboutUI/Credits/Contributors/ContributorTree
 onready var donors : Tree = $AboutUI/Credits/Donors/DonorTree
 onready var translators : Tree = $AboutUI/Credits/Translators/TranslatorTree
+
+onready var license_text : TextEdit = $AboutUI/Credits/Licenses/LicenseText
 
 onready var slogan_label : Label = $AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan
 onready var copyright_label : Label = $AboutUI/Copyright
@@ -24,6 +68,9 @@ onready var cjk_font_small = preload("res://assets/fonts/CJK/DroidSansFallback-S
 func _ready() -> void:
 	create_donors()
 	create_contributors()
+	var license_buttons_container = $AboutUI/Credits/Licenses/LicenseButtonsContainer
+	for button in license_buttons_container.get_children():
+		button.connect("pressed", self, "_on_LicenseButton_pressed", [button.get_index()])
 
 
 func _on_AboutDialog_about_to_show() -> void:
@@ -41,6 +88,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	var contributors_button := groups.create_item(groups_root)
 	var donors_button := groups.create_item(groups_root)
 	var translators_button := groups.create_item(groups_root)
+	var licenses_button := groups.create_item(groups_root)
 
 	developers_button.set_text(0,  "  " + tr("Developers"))
 	# We use metadata to avoid being affected by translations
@@ -52,9 +100,12 @@ func _on_AboutDialog_about_to_show() -> void:
 	donors_button.set_metadata(0, "Donors")
 	translators_button.set_text(0,  "  " + tr("Translators"))
 	translators_button.set_metadata(0, "Translators")
+	licenses_button.set_text(0,  "  " + tr("Licenses"))
+	licenses_button.set_metadata(0, "Licenses")
 
 	create_developers()
 	create_translators()
+
 
 func _on_AboutDialog_popup_hide() -> void:
 	groups.clear()
@@ -76,6 +127,8 @@ func _on_Groups_item_selected() -> void:
 		donors_container.visible = true
 	elif "Translators" in selected:
 		translators_container.visible = true
+	elif "Licenses" in selected:
+		licenses_container.visible = true
 
 
 func _on_Website_pressed() -> void:
@@ -88,6 +141,10 @@ func _on_GitHub_pressed() -> void:
 
 func _on_Donate_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
+
+
+func _on_LicenseButton_pressed(index : int) -> void:
+	license_text.text = LICENSES[index]
 
 
 func create_developers() -> void:
@@ -147,6 +204,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  kevinms")
 	contributors.create_item(contributor_root).set_text(0, "  Álex Román Núñez (EIREXE)")
 	contributors.create_item(contributor_root).set_text(0, "  mrtripie")
+	contributors.create_item(contributor_root).set_text(0, "  Jeremy Behreandt (behreajj)")
 
 
 func create_translators() -> void:
