@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-08-24 18:43\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -658,6 +658,9 @@ msgstr "Спонсори"
 
 msgid "Translators"
 msgstr "Перекладачі"
+
+msgid "Licenses"
+msgstr ""
 
 msgid "English"
 msgstr "Англійська"
