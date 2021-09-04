@@ -235,6 +235,8 @@ func change_project() -> void:
 			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
 			Global.preview_zoom_slider.connect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")
 
+		if camera == Global.camera:
+			Global.zoom_level_spinbox.min_value = 100.0/camera.zoom_max.x
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
 		camera.zoom_changed()
