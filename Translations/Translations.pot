@@ -647,6 +647,9 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr ""
 

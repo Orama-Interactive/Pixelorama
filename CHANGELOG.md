@@ -23,6 +23,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - A new "fill inside" option has been added in the Pencil tool options. [#489](https://github.com/Orama-Interactive/Pixelorama/pull/489), based off [#459](https://github.com/Orama-Interactive/Pixelorama/pull/459)
 - You can now name the project name on the "create new project" dialog. [#490](https://github.com/Orama-Interactive/Pixelorama/pull/490)
 - A tool button size option has been added in the Preferences. This lets you choose between small or big tool button sizes.
+- Added a "Licenses" tab in the About menu, which displays Pixelorama's license as well as the software it depends on, such as Godot.
 - Added Norwegian Bokmål and Ukrainian translations.
 
 ### Changed
@@ -52,6 +53,7 @@ Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@n
 - Changed pixel grid shortcut on macOS because it conflicted with a system hotkey. [#494](https://github.com/Orama-Interactive/Pixelorama/pull/494)
 - The shading tool now has correct Hue, Saturation and Value changes, as well as some other tweaks, like limiting the darkening hue to 240 instead of 270. [#519](https://github.com/Orama-Interactive/Pixelorama/pull/519) and [#522](https://github.com/Orama-Interactive/Pixelorama/pull/522)
 - The disabled buttons on the light theme are no longer invisible. [#518](https://github.com/Orama-Interactive/Pixelorama/issues/518)
+- Fix the canvas preview having incorrect zoom when switching between projects.
 <br><br>
 
 ## [v0.8.3] - 2021-05-04

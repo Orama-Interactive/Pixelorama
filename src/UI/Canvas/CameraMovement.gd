@@ -273,9 +273,12 @@ func save_values_to_project() -> void:
 	if name == "Camera2D":
 		Global.current_project.cameras_zoom[0] = zoom
 		Global.current_project.cameras_offset[0] = offset
+		Global.current_project.cameras_zoom_max[0] = zoom_max
 	elif name == "Camera2D2":
 		Global.current_project.cameras_zoom[1] = zoom
 		Global.current_project.cameras_offset[1] = offset
+		Global.current_project.cameras_zoom_max[1] = zoom_max
 	elif name == "CameraPreview":
 		Global.current_project.cameras_zoom[2] = zoom
 		Global.current_project.cameras_offset[2] = offset
+		Global.current_project.cameras_zoom_max[2] = zoom_max

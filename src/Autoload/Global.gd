@@ -125,6 +125,7 @@ var tabs : Tabs
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var small_preview_viewport : ViewportContainer
+var canvas_preview_container : Container
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
@@ -223,7 +224,8 @@ func _ready() -> void:
 	tabs = control.find_node("Tabs")
 	main_viewport = control.find_node("ViewportContainer")
 	second_viewport = control.find_node("ViewportContainer2")
-	small_preview_viewport = control.find_node("PreviewViewportContainer")
+	canvas_preview_container = control.find_node("CanvasPreviewContainer")
+	small_preview_viewport = canvas_preview_container.find_node("PreviewViewportContainer")
 	camera = main_viewport.find_node("Camera2D")
 	camera2 = control.find_node("Camera2D2")
 	camera_preview = control.find_node("CameraPreview")
