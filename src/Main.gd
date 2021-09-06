@@ -276,6 +276,9 @@ func _notification(what : int) -> void:
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
 	OpenSave.handle_loading_files(_files)
+	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
+	if splash_dialog.visible:
+		splash_dialog.hide()
 
 
 func load_last_project() -> void:
