@@ -1,8 +1,6 @@
 extends WindowDialog
 
 
-enum License {PIXELORAMA, GODOT, FREETYPE, GODOT_GDGIFEXPORTER}
-
 const LICENSES := [
 """MIT License
 
