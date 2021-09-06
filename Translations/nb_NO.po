@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-08-27 09:43\n"
+"PO-Revision-Date: 2021-09-04 14:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -657,6 +657,9 @@ msgstr "Donorer"
 
 msgid "Translators"
 msgstr "Oversettere"
+
+msgid "Licenses"
+msgstr ""
 
 msgid "English"
 msgstr "Engelsk"
