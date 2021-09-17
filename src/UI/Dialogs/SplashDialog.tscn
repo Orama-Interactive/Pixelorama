@@ -220,6 +220,7 @@ text = "Don't show again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
 [connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]

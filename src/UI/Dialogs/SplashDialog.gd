@@ -2,8 +2,8 @@ extends WindowDialog
 
 
 var artworks := {
-	"Roroto Sic" : [preload("res://assets/graphics/splash_screen/artworks/roroto.png"), "https://www.instagram.com/roroto_sic/"],
-	"jess.mpz" : [preload("res://assets/graphics/splash_screen/artworks/jessmpz.png"), "https://www.instagram.com/jess.mpz/"],
+	"Roroto Sic" : [preload("res://assets/graphics/splash_screen/artworks/roroto.png"), "https://linktr.ee/Roroto_Sic"],
+	"Kamilayza" : [preload("res://assets/graphics/splash_screen/artworks/kamilayza.png"), "https://twitter.com/kamilayza"],
 	"Wishdream" : [preload("res://assets/graphics/splash_screen/artworks/wishdream.png"), "https://twitter.com/WishdreamStar"]
 }
 
