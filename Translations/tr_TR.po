@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-09-18 19:51\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Dosya Adı:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Proje Adı:"
 
 msgid "Image Size"
 msgstr "Resim Boyutu"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Çerçeve Boyutu"
 
 msgid "Size:"
-msgstr ""
+msgstr "Boyut:"
 
 msgid "Width:"
 msgstr "Genişlik:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Düzenle"
 
 msgid "Select"
-msgstr ""
+msgstr "Seçiniz"
 
 msgid "View"
 msgstr "Görüntü"
@@ -133,16 +133,16 @@ msgid "Delete"
 msgstr "Sil"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Yeni Fırça"
 
 msgid "Scale Image"
 msgstr "Resmi Ölçüle"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pikseller"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Yüzde"
 
 msgid "Crop Image"
 msgstr "Resmi Kes"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
 msgid "Clear"
-msgstr ""
+msgstr "Temizle"
 
 msgid "Invert"
-msgstr ""
+msgstr "Ters Çevir"
 
 msgid "Flip"
 msgstr "Döndür"
@@ -184,10 +184,10 @@ msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Otomatik"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Geniş ekran"
 
 msgid "Tallscreen"
 msgstr ""
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Tuval"
 
 msgid "Selection"
-msgstr ""
+msgstr "Seçim"
 
 msgid "Shortcuts"
 msgstr "Kısayollar"
@@ -444,7 +444,7 @@ msgid "Backup"
 msgstr "Yedekleme"
 
 msgid "Performance"
-msgstr ""
+msgstr "Performans"
 
 msgid "Indicators"
 msgstr "Göstergeler"
@@ -504,22 +504,22 @@ msgid "Purple"
 msgstr "Mor"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Simge rengi:"
 
 msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Küçük"
 
 msgid "Big"
-msgstr ""
+msgstr "Büyük"
 
 msgid "Only affect selection"
 msgstr "Sadece seçilene uygula"
@@ -678,7 +678,7 @@ msgid "Polish"
 msgstr "Lehçe"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portekizce"
 
 msgid "Brazilian Portuguese"
 msgstr "Brezilya Portekizcesi"
@@ -720,7 +720,7 @@ msgid "Turkish"
 msgstr "Türkçe"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Bokmal Norveççesi"
 
 msgid "Korean"
 msgstr "Korece"
@@ -735,7 +735,7 @@ msgid "Japanese"
 msgstr "Japonca"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraynaca"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -893,10 +893,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Dikdörtgen"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elips"
 
 msgid "Choose a color for the left tool"
 msgstr "Sol araç için bir renk seç"
