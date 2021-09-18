@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-09-18 22:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -524,7 +524,7 @@ msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Wybrane komórki"
 
 msgid "Current cel"
 msgstr "Bieżąca komórka"
@@ -659,7 +659,7 @@ msgid "Translators"
 msgstr "Tłumacze"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licencje"
 
 msgid "English"
 msgstr "Angielski"
@@ -677,7 +677,7 @@ msgid "Polish"
 msgstr "Polski"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugalski"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugalski - Brazylijski"
@@ -906,7 +906,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Prostokąt\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
+"Przytrzymaj %s aby stworzyć kształt 1:1\n"
+"Przytrzymaj %s aby wyśrodkować kształt na miejscu kliknięcia\n"
+"Przytrzymaj %s aby przemieścić pozycję źródłową kształtu"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -914,7 +919,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Elipsa\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
+"Przytrzymaj %s aby stworzyć kształt 1:1\n"
+"Przytrzymaj %s aby wyśrodkować kształt na miejscu kliknięcia\n"
+"Przytrzymaj %s aby przemieścić pozycję źródłową kształtu"
 
 msgid "Rectangle"
 msgstr "Prostokąt"
@@ -1639,22 +1649,22 @@ msgid "Rectangular Selection"
 msgstr "Zaznaczenie prostokątne"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Zaznaczenie eliptyczne"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Zaznaczenie poligonalne"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Wybierz według koloru"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Magiczna Różdżka"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lasso / Narzędzie wolnego zaznacznia"
 
 msgid "Move"
-msgstr ""
+msgstr "Przenieś"
 
 msgid "Zoom"
 msgstr "Przybliżenie"
@@ -1678,13 +1688,13 @@ msgid "Shading Tool"
 msgstr "Narzędzie cieniowania"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Linia"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Prostokąt"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Elipsa"
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
@@ -1830,5 +1840,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr "Zmniejszenie rozmiaru palety zresetuje pozycje kolorów. Kolory, które nie mieszczą się w nowym rozmiarze palety zostaną utracone!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Pozycja:"
 
