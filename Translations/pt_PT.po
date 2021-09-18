@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-09-18 13:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -289,7 +289,7 @@ msgid "Random brush"
 msgstr "Pincel aleatório"
 
 msgid "Save Sprite as .pxo"
-msgstr "Gravar Imagem como .pxo"
+msgstr "Gravar Imagem como \".pxo\""
 
 msgid "Export Sprite as .png"
 msgstr "Exportar Imagem como .png"
@@ -660,7 +660,7 @@ msgid "Translators"
 msgstr "Tradutores"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licenças"
 
 msgid "English"
 msgstr "Inglês"
@@ -678,7 +678,7 @@ msgid "Polish"
 msgstr "Polaco"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "português"
 
 msgid "Brazilian Portuguese"
 msgstr "Português do Brazil"
