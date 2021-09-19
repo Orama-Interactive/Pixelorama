@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-19 03:50\n"
+"PO-Revision-Date: 2021-09-19 18:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -905,10 +905,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rectángulo"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Elegir un color para la herramienta izquierda"
@@ -982,28 +982,28 @@ msgid "All"
 msgstr "Todo"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Ancho de la cuadrícula rectangular:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Altura de la cuadrícula rectangular:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Establece la distancia entre las líneas horizontales de la cuadrícula rectangular"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Ancho de los límites de la celda isométrica:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Altura de los límites de la celda isométrica:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Establece la altura del recuadro delimitador alineado con los ejes de la celda isométrica"
 
 msgid "Grid offset x:"
 msgstr ""
@@ -1081,16 +1081,16 @@ msgid "Animated selection borders"
 msgstr ""
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Color del borde 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Color del borde 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Sólo se puede modificar el ajuste preestablecido"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Establecer el límite de FPS de la aplicación:"
 
 msgid "Limit FPS to 1 when app loses focus"
 msgstr ""
@@ -1302,13 +1302,13 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 msgid "From:"
-msgstr ""
+msgstr "Desde:"
 
 msgid "To:"
-msgstr ""
+msgstr "Hasta:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "La animación sólo se reproduce en fotogramas de la misma etiqueta"
