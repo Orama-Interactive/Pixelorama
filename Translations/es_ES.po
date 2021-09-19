@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-18 19:20\n"
+"PO-Revision-Date: 2021-09-19 03:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1540,7 +1540,7 @@ msgid "Create a new empty palette?"
 msgstr "¿Crear una nueva paleta vacía?"
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: La paleta debe contener un nombre válido."
@@ -1633,16 +1633,16 @@ msgid "Polygonal Selection"
 msgstr ""
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Seleccionar Por Color"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Varita Mágica"
 
 msgid "Lasso / Free Select Tool"
 msgstr ""
 
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -1791,7 +1791,7 @@ msgid "Comment:"
 msgstr ""
 
 msgid "Empty"
-msgstr ""
+msgstr "Vacío"
 
 msgid "From Current Palette"
 msgstr ""
@@ -1803,20 +1803,20 @@ msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Añadir nuevo color"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Eliminar un color seleccionado"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "¡Ya existe una paleta con el mismo nombre y ruta!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "¡El nombre de la paleta es requerido!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de colores. ¡Los colores que no caben en el tamaño de la nueva paleta se perderán!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Posición:"
 
