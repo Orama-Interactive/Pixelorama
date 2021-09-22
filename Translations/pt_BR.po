@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-09-22 11:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -510,7 +510,7 @@ msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Cor do ícone:"
 
 msgid "Tool button size:"
 msgstr ""
