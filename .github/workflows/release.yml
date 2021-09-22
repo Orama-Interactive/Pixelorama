@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Setup WINE, rcedit and NSIS 🍷
         run: |
-          dpkg --add-architecture i386 && apt-get update && apt-get install -y wine-stable wine32 nsis
+          dpkg --add-architecture i386 && apt-get update && apt-get install -y wine-stable && apt-get install -y wine32 && apt-get install -y nsis
           chown root:root -R ~
           wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
           mkdir -v -p ~/.local/share/rcedit

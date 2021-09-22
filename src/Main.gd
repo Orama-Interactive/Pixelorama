@@ -83,7 +83,8 @@ func change_ui_layout(mode : String) -> void:
 	if mode == "tallscreen" and not tallscreen_is_active:
 		tallscreen_is_active = true
 		# changing visibility and re-parenting of nodes for tall screen
-		tallscreen_hsplit_container.visible = true
+		if !Global.top_menu_container.zen_mode:
+			tallscreen_hsplit_container.visible = true
 		tallscreen_hsplit_container.split_offset = tools_and_canvas.split_offset
 		reparent_node_to(Global.animation_timeline, tallscreen_hsplit_container.get_node("BottomPanel"), 0)
 		reparent_node_to(right_panel, bottom_panel, 0)
@@ -276,6 +277,9 @@ func _notification(what : int) -> void:
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
 	OpenSave.handle_loading_files(_files)
+	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
+	if splash_dialog.visible:
+		splash_dialog.hide()
 
 
 func load_last_project() -> void:

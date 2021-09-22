@@ -102,7 +102,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 		Global.projects.append(new_project)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	else:
-		if dict.result.has("fps"):
+		if dict.error == OK and dict.result.has("fps"):
 			Global.animation_timeline.fps_spinbox.value = dict.result.fps
 		new_project.frames = new_project.frames # Just to call frames_changed
 		new_project.layers = new_project.layers # Just to call layers_changed
