@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-09-23 23:30\n"
+"PO-Revision-Date: 2021-09-23 23:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1026,10 +1026,10 @@ msgid "Isometric cell bounds height:"
 msgstr "Altura dos limites da célula isométrica:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Define a altura do eixo da célula isométrica alinhado à caixa delimitadora"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Deslocamento da grade X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
 msgstr ""
@@ -1408,7 +1408,7 @@ msgid "Opacity:"
 msgstr "Opacidade:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Opacidade do modo ladrilho:"
 
 msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
@@ -1623,7 +1623,7 @@ msgid "A default background color of a new image"
 msgstr "Cor de fundo padrão de uma nova imagem"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Fixar proporção"
 
 msgid "Portrait"
 msgstr "Retrato"
@@ -1650,22 +1650,22 @@ msgid "Rectangular Selection"
 msgstr "Seleção Retangular"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Seleção Elíptica"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Seleção Poligonal"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Seleção por Cor"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Varinha Mágica"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Ferramenta de Seleção Livre / Laço"
 
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -1689,13 +1689,13 @@ msgid "Shading Tool"
 msgstr "Ferramenta de sombreamento"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Ferramenta Linha"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Ferramenta Retângulo"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Ferramenta Elipse"
 
 msgid "Switch Colors"
 msgstr "Trocar Cores"
@@ -1799,13 +1799,13 @@ msgid "Frame duration"
 msgstr "Duração do quadro"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Ladrilho em Ambos os Eixos"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Ladrilho no Eixo X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Ladrilho no Eixo Y"
 
 msgid "Create a new palette"
 msgstr "Criar uma nova paleta"
@@ -1841,5 +1841,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr "Reduzir o tamanho da paleta irá redefinir as posições de cores. Cores que não se encaixam em novo tamanho da paleta serão perdidas!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Posição:"
 
