@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-23 00:52\n"
+"PO-Revision-Date: 2021-09-23 01:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1357,7 +1357,7 @@ msgid "Frame Properties"
 msgstr ""
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Propiedades de los fotogramas"
 
 msgid "Layer"
 msgstr "Capa"
@@ -1775,7 +1775,7 @@ msgid "Move the selected frame to the right."
 msgstr "Mueve el marco seleccionado hacia la derecha."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Duración de los fotogramas"
 
 msgid "Tiled In Both Axis"
 msgstr "Mosaico en Ambos Ejes"
