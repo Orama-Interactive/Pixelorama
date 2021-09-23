@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.9] - Unreleased
+## [v0.9] - 2021-09-18
 This update has been brought to you by the contributions of:
 
 Kawan Weege ([@DragonOfWar](https://github.com/DragonOfWar)), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Igor Santarek ([@jegor377](https://github.com/jegor377)), Álex Román Núñez ([@EIREXE](https://github.com/EIREXE)), [@mrtripie](https://github.com/mrtripie)

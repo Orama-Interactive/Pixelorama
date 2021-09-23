@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jessmpz.png-dbccabb1c0fbf170a36de90e7a060bb2.stex"
+path="res://.import/kamilayza.png-90757c16a9bd6291dcf6fd5dce2db930.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screen/artworks/jessmpz.png"
-dest_files=[ "res://.import/jessmpz.png-dbccabb1c0fbf170a36de90e7a060bb2.stex" ]
+source_file="res://assets/graphics/splash_screen/artworks/kamilayza.png"
+dest_files=[ "res://.import/kamilayza.png-90757c16a9bd6291dcf6fd5dce2db930.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/splash_screen/artworks/wishdream.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
 [ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
@@ -12,6 +13,18 @@ bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_top = 20
 border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
 expand_margin_top = 20.0
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="SplashDialog" type="WindowDialog"]
 margin_right = 640.0
@@ -39,6 +52,75 @@ rect_min_size = Vector2( 640, 406 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
+
+[node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=[
+"UIButtons",
+]]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -10.0
+margin_right = 30.0
+margin_bottom = 10.0
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnLeft"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -7.0
+margin_right = 10.0
+margin_bottom = 7.0
+texture = ExtResource( 3 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" groups=[
+"UIButtons",
+]]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -30.0
+margin_top = -10.0
+margin_right = -5.0
+margin_bottom = 10.0
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnRight"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -7.0
+margin_right = 10.0
+margin_bottom = 7.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ArtBy" type="HBoxContainer" parent="Contents"]
 margin_top = 414.0
@@ -220,7 +302,10 @@ text = "Don't show again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
+[connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnLeft" to="." method="_on_ChangeArtBtnLeft_pressed"]
+[connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnRight" to="." method="_on_ChangeArtBtnRight_pressed"]
 [connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn__pressed"]
