@@ -63,19 +63,21 @@ visible = false
 margin_top = 232.0
 margin_right = 332.0
 margin_bottom = 256.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="VBoxContainer/WaitSettings"]
+margin_left = 3.0
 margin_top = 5.0
-margin_right = 254.0
+margin_right = 251.0
 margin_bottom = 19.0
-text = "Wait (in miliseconds) to update preview"
+text = "Update preview delay (in milliseconds)"
 
 [node name="WaitTime" type="SpinBox" parent="VBoxContainer/WaitSettings"]
-margin_left = 258.0
-margin_right = 332.0
+margin_left = 255.0
+margin_right = 329.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 1000.0
