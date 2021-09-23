@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-09-22 11:34\n"
+"PO-Revision-Date: 2021-09-23 23:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "Select"
-msgstr ""
+msgstr "Selecionar"
 
 msgid "View"
 msgstr "Ver"
@@ -504,28 +504,28 @@ msgid "Purple"
 msgstr "Roxo"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Cor do ícone de:"
 
 msgid "Icon color:"
 msgstr "Cor do ícone:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Tamanho do botão de ferramenta:"
 
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Células selecionadas"
 
 msgid "Current cel"
 msgstr "Parte Atual"
@@ -660,7 +660,7 @@ msgid "Translators"
 msgstr "Tradutores"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licenças"
 
 msgid "English"
 msgstr "Inglês"
