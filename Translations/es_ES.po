@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-19 18:58\n"
+"PO-Revision-Date: 2021-09-23 00:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -822,7 +822,9 @@ msgstr "Varita mágica\n\n"
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Lazo / Herramienta de Selección Libre\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1018,7 +1020,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Dibujar en el Modo Mosaico:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
@@ -1385,7 +1387,7 @@ msgid "Opacity:"
 msgstr "Opacidad:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Opacidad del modo mosaico:"
 
 msgid "Toggle layer's visibility"
 msgstr "Alternar visibilidad de capa(s)"
@@ -1558,7 +1560,7 @@ msgid "Get colors only from selection"
 msgstr ""
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Obtener colores de"
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1776,13 +1778,13 @@ msgid "Frame duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Mosaico en Ambos Ejes"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Mosaico en el Eje X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Mosaico en el Eje Y"
 
 msgid "Create a new palette"
 msgstr ""
