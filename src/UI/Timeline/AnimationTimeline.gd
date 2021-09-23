@@ -527,12 +527,14 @@ func _on_MergeDownLayer_pressed() -> void:
 		var selected_layer := Image.new()
 		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
 
+		selected_layer.lock()
 		if f.cels[Global.current_project.current_layer].opacity < 1: # If we have layer transparency
 			for xx in selected_layer.get_size().x:
 				for yy in selected_layer.get_size().y:
 					var pixel_color : Color = selected_layer.get_pixel(xx, yy)
 					var alpha : float = pixel_color.a * f.cels[Global.current_project.current_layer].opacity
 					selected_layer.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
+		selected_layer.unlock()
 
 		var new_layer := Image.new()
 		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
