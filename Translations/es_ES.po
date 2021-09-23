@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-23 01:02\n"
+"PO-Revision-Date: 2021-09-23 18:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1554,10 +1554,10 @@ msgid "Edit Palette"
 msgstr "Editar Paleta"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Crear colores con componente alfa"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Tomar colores sólo de la selección"
 
 msgid "Get colors from"
 msgstr "Obtener colores de"
