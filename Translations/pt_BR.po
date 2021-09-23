@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-09-23 23:40\n"
+"PO-Revision-Date: 2021-09-23 23:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1032,16 +1032,16 @@ msgid "Grid offset x:"
 msgstr "Deslocamento da grade X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Define o deslocamento X da grade à partir da origem da tela (canto superior esquerdo da imagem)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Deslocamento da grade Y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Define o deslocamento Y da grade à partir da origem da tela (canto superior esquerdo da imagem)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Desenhar sobre o Modo de Ladrilho:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr "Se desativado, a grade será desenhada somente sobre a imagem original"
