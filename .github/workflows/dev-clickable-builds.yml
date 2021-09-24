@@ -11,7 +11,6 @@ on:
 
 env:
   GODOT_VERSION: 3.3
-  GODOT_VERSION_MAC: 3.3
   EXPORT_NAME: Pixelorama
 
 jobs:
