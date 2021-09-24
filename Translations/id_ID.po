@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -659,6 +659,9 @@ msgstr "Donatur"
 msgid "Translators"
 msgstr "Penerjemah"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "Inggris"
 
@@ -673,6 +676,9 @@ msgstr "Jerman"
 
 msgid "Polish"
 msgstr "Polski"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "Portugis (Brasil)"

@@ -12,7 +12,7 @@ __meta__ = {
 }
 
 [node name="MenuItems" type="HBoxContainer" parent="."]
-margin_left = 2.0
+margin_left = 7.0
 margin_top = 4.0
 margin_right = 1010.0
 __meta__ = {
@@ -77,13 +77,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ZoomLevel" type="Label" parent="TopLabels"]
+[node name="ZoomStats" type="HBoxContainer" parent="TopLabels"]
+margin_right = 60.0
+margin_bottom = 28.0
+alignment = 1
+
+[node name="ZoomLevel" type="Label" parent="TopLabels/ZoomStats"]
 margin_top = 7.0
 margin_right = 60.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
 text = "781 %"
 align = 2
+
+[node name="ZoomSpinbox" type="SpinBox" parent="TopLabels/ZoomStats"]
+visible = false
+margin_left = 64.0
+margin_right = 138.0
+margin_bottom = 28.0
+min_value = 100.0
+max_value = 2000.0
+value = 100.0
+suffix = "%"
 
 [node name="CursorPosition" type="Label" parent="TopLabels"]
 margin_left = 80.0

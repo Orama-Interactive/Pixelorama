@@ -33,21 +33,9 @@
 [ext_resource path="res://assets/graphics/tools/magicwand.png" type="Texture" id=33]
 [ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=34]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 expand_margin_right = 20.0
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 9 )
-shader_param/size = 10.0
-shader_param/alpha = 1.0
-shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
-shader_param/color2 = Color( 1, 1, 1, 1 )
-shader_param/offset = Vector2( 0, 0 )
-shader_param/scale = Vector2( 0, 0 )
-shader_param/rect_size = Vector2( 0, 0 )
-shader_param/follow_movement = false
-shader_param/follow_scale = false
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 9 )
@@ -61,7 +49,19 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 9 )
+shader_param/size = 10.0
+shader_param/alpha = 1.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
+
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 expand_margin_top = 6.0
 
@@ -89,7 +89,7 @@ margin_right = 42.0
 margin_bottom = 692.0
 rect_min_size = Vector2( 42, 0 )
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="FakeHSplitGrabber" type="TextureRect" parent="ToolsAndCanvas/ToolPanel"]
 anchor_left = 1.0
@@ -109,6 +109,8 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="ToolsAndCanvas/ToolPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 8
 __meta__ = {
@@ -1059,7 +1061,7 @@ custom_constants/autohide = 0
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="ToolsAndCanvas/CanvasAndTimeline"]
 margin_right = 896.0
-margin_bottom = 480.0
+margin_bottom = 520.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -1074,7 +1076,7 @@ margin_top = 7.0
 margin_right = 889.0
 margin_bottom = 31.0
 tab_align = 0
-tab_close_display_policy = 1
+tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource( 3 )
 
@@ -1091,20 +1093,20 @@ script = ExtResource( 6 )
 [node name="HSplitContainer" type="HSplitContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers"]
 margin_top = 58.0
 margin_right = 896.0
-margin_bottom = 480.0
+margin_bottom = 520.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer"]
 margin_right = 884.0
-margin_bottom = 422.0
+margin_bottom = 462.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 422.0
+margin_bottom = 462.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -1116,7 +1118,7 @@ script = ExtResource( 4 )
 [node name="ViewportContainer" type="ViewportContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
 margin_right = 884.0
-margin_bottom = 422.0
+margin_bottom = 462.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -1125,13 +1127,13 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 868, 422 )
+size = Vector2( 868, 462 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
 [node name="TransparentChecker" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 5 )]
-material = SubResource( 1 )
+material = SubResource( 2 )
 
 [node name="Canvas" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
 
@@ -1143,18 +1145,18 @@ script = ExtResource( 7 )
 [node name="ViewportContainer2" type="ViewportContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer"]
 margin_left = 896.0
 margin_right = 896.0
-margin_bottom = 422.0
+margin_bottom = 462.0
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 422 )
+size = Vector2( 0, 462 )
 handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="TransparentChecker" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 5 )]
-material = SubResource( 2 )
+material = SubResource( 3 )
 
 [node name="CanvasPreview" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 
@@ -1164,10 +1166,10 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
 [node name="AnimationTimeline" parent="ToolsAndCanvas/CanvasAndTimeline" instance=ExtResource( 18 )]
-margin_top = 492.0
+margin_top = 532.0
 margin_right = 896.0
 margin_bottom = 692.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="TallscreenHSplitContainer" type="HSplitContainer" parent="ToolsAndCanvas/CanvasAndTimeline"]
 visible = false

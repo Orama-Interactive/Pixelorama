@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -659,6 +659,9 @@ msgstr "المتبرعون"
 msgid "Translators"
 msgstr "المترجمون"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "الإنجليزية"
 
@@ -673,6 +676,9 @@ msgstr "الألمانية"
 
 msgid "Polish"
 msgstr "اليولندية"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "البرتغالية البرازلية"

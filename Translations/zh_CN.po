@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-07-31 00:48\n"
+"PO-Revision-Date: 2021-09-06 00:37\n"
 
 msgid "OK"
 msgstr "确定"
@@ -659,6 +659,9 @@ msgstr "捐赠者"
 msgid "Translators"
 msgstr "翻译"
 
+msgid "Licenses"
+msgstr "许可证"
+
 msgid "English"
 msgstr "英语"
 
@@ -673,6 +676,9 @@ msgstr "德语"
 
 msgid "Polish"
 msgstr "波兰语"
+
+msgid "Portuguese"
+msgstr "葡萄牙文"
 
 msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙语"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2021-08-02 11:23\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -659,6 +659,9 @@ msgstr "Donorer"
 msgid "Translators"
 msgstr "Oversættere"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "Engelsk"
 
@@ -673,6 +676,9 @@ msgstr "Tysk"
 
 msgid "Polish"
 msgstr "Polsk"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "Brasiliansk-Portugisisk"

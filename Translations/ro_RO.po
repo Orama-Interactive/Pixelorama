@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-07-31 06:52\n"
+"PO-Revision-Date: 2021-09-04 15:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -659,6 +659,9 @@ msgstr "Donatori"
 msgid "Translators"
 msgstr "Traducători"
 
+msgid "Licenses"
+msgstr "Licențe"
+
 msgid "English"
 msgstr "Engleză"
 
@@ -673,6 +676,9 @@ msgstr "Germană"
 
 msgid "Polish"
 msgstr "Poloneză"
+
+msgid "Portuguese"
+msgstr "Portugheză"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugheză braziliană"

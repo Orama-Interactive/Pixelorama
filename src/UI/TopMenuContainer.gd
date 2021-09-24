@@ -126,7 +126,7 @@ func setup_view_menu() -> void:
 	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
-	if OS.get_name() == "HTML5":
+	if !ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed"):
 		view_menu.set_item_disabled(ViewMenuId.WINDOW_TRANSPARENCY, true)
 
 
@@ -367,8 +367,8 @@ func window_transparency(value :float) -> void:
 		get_node("../../AlternateTransparentBackground").visible = false
 	else:
 		get_node("../../AlternateTransparentBackground").visible = true
-	var checker :ColorRect = get_parent().get_node("UI/ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
-	var color :Color = Global.control.theme.get_stylebox("panel", "PanelContainer").bg_color
+	var checker :ColorRect = Global.transparent_checker
+	var color :Color = Global.default_clear_color
 	color.a = value
 	get_node("../../AlternateTransparentBackground").color = color
 	checker.transparency(value)
@@ -533,7 +533,7 @@ func help_menu_id_pressed(id : int) -> void:
 		HelpMenuId.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		HelpMenuId.CHANGELOG:
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v083---2021-05-04")
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v083---2021-09-18")
 		HelpMenuId.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)

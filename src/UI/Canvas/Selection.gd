@@ -105,6 +105,8 @@ func _input(event : InputEvent) -> void:
 				Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
 
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+			if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+				return
 			if event.pressed:
 				if gizmo:
 					Global.has_focus = false
@@ -165,6 +167,8 @@ func move_with_arrow_keys(event : InputEvent) -> void:
 		return
 
 	if Global.current_project.has_selection:
+		if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+			return
 		if is_action_direction_pressed(event) and !arrow_key_move:
 			arrow_key_move = true
 			if Input.is_key_pressed(KEY_ALT):
@@ -468,17 +472,18 @@ func transform_content_confirm() -> void:
 		var frame : int = cel_index[0]
 		var layer : int = cel_index[1]
 		if frame < project.frames.size() and layer < project.layers.size():
-			var cel_image : Image = project.frames[frame].cels[layer].image
-			var src : Image = preview_image
-			if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
-				src = get_selected_image(cel_image, clear_in_selected_cels)
-				src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
-				if temp_rect.size.x < 0:
-					src.flip_x()
-				if temp_rect.size.y < 0:
-					src.flip_y()
+			if Global.current_project.layers[layer].can_layer_get_drawn():
+				var cel_image : Image = project.frames[frame].cels[layer].image
+				var src : Image = preview_image
+				if not is_pasting and not (frame == project.current_frame and layer == project.current_layer):
+					src = get_selected_image(cel_image, clear_in_selected_cels)
+					src.resize(big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, Image.INTERPOLATE_NEAREST)
+					if temp_rect.size.x < 0:
+						src.flip_x()
+					if temp_rect.size.y < 0:
+						src.flip_y()
 
-			cel_image.blit_rect_mask(src, src, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
+				cel_image.blit_rect_mask(src, src, Rect2(Vector2.ZERO, project.selection_bitmap.get_size()), big_bounding_rectangle.position)
 	var selected_bitmap_copy = project.selection_bitmap.duplicate()
 	project.move_bitmap_values(selected_bitmap_copy)
 	project.selection_bitmap = selected_bitmap_copy

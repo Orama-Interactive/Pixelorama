@@ -14,7 +14,7 @@ content_margin_left = 6.0
 content_margin_right = 6.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
-bg_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 0.690196, 0.690196, 0.690196, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -890,7 +890,7 @@ content_margin_left = 6.0
 content_margin_right = 6.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
-bg_color = Color( 0.678431, 0.803922, 0.870588, 1 )
+bg_color = Color( 0.6786, 0.80301, 0.87, 1 )
 
 [sub_resource type="StyleBoxFlat" id=103]
 content_margin_left = 2.0
@@ -1509,7 +1509,7 @@ shadow_size = 4
 default_font = ExtResource( 5 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.25, 0.25, 0.25, 1 )
-Button/colors/font_color_disabled = Color( 0, 0, 0, 0.3 )
+Button/colors/font_color_disabled = Color( 0.2, 0.2, 0.2, 0.662745 )
 Button/colors/font_color_hover = Color( 0.15, 0.15, 0.15, 1 )
 Button/colors/font_color_pressed = Color( 0, 0.356863, 1, 1 )
 Button/colors/icon_color_hover = Color( 1.45, 1.45, 1.45, 1 )

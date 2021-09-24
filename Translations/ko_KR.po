@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-09-04 14:59\n"
 
 msgid "OK"
 msgstr "예"
@@ -659,6 +659,9 @@ msgstr "후원자들"
 msgid "Translators"
 msgstr "번역자들"
 
+msgid "Licenses"
+msgstr "저작권"
+
 msgid "English"
 msgstr "영어"
 
@@ -673,6 +676,9 @@ msgstr "독일어"
 
 msgid "Polish"
 msgstr "폴란드어"
+
+msgid "Portuguese"
+msgstr "포르투갈어"
 
 msgid "Brazilian Portuguese"
 msgstr "포르투갈어 (브라질)"
@@ -1834,5 +1840,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr "팔레트 크기를 줄이면 색상 위치가 재설정됩니다. 새로운 팔레트 크기에 맞지 않는 색상은 손실됩니다!"
 
 msgid "Position:"
-msgstr ""
+msgstr "위치:"
 

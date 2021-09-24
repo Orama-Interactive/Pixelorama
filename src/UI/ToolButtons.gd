@@ -26,7 +26,6 @@ onready var tools := [
 func _ready() -> void:
 	for t in tools:
 		t[0].connect("pressed", self, "_on_Tool_pressed", [t[0]])
-	Global.update_hint_tooltips()
 
 	# Resize tools panel when window gets resized
 	get_tree().get_root().connect("size_changed", self, "_on_ToolsAndCanvas_dragged")

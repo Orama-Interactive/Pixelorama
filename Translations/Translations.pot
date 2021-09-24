@@ -647,6 +647,9 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr ""
 
@@ -660,6 +663,9 @@ msgid "German"
 msgstr ""
 
 msgid "Polish"
+msgstr ""
+
+msgid "Portuguese"
 msgstr ""
 
 msgid "Brazilian Portuguese"

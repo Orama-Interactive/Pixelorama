@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-07-31 01:31\n"
+"PO-Revision-Date: 2021-09-04 14:38\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -659,6 +659,9 @@ msgstr "Δωρητές"
 msgid "Translators"
 msgstr "Μεταφραστές"
 
+msgid "Licenses"
+msgstr "Άδειες"
+
 msgid "English"
 msgstr "Αγγλικά"
 
@@ -673,6 +676,9 @@ msgstr "Γερμανικά"
 
 msgid "Polish"
 msgstr "Πολωνικά"
+
+msgid "Portuguese"
+msgstr "Πορτογαλικά"
 
 msgid "Brazilian Portuguese"
 msgstr "Πορτογαλικά Βραζιλίας"
@@ -1086,7 +1092,7 @@ msgid "Follow Canvas Movement"
 msgstr "Να ακολουθεί τη κίνηση του καμβά"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί τη κίνηση του καμβά"
+msgstr "Το διάφανο υπόβαθρο - σκακιέρα να ακολουθεί τη κίνηση του καμβά"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
@@ -1116,7 +1122,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Ορίζει το όριο των καρέ της εφαρμογής ανά δευτερόλεπτο. Όσο μικρότερος είναι ο αριθμός, τόσο χαμηλότερη είναι η χρήση της CPU, αλλά η εφαρμογή γίνεται πιο αργή, ασταθής και λιγότερο ανταποκρινόμενη. 0 σημαίνει ότι δεν υπάρχει όριο."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, το όριο FPS της εφαρμογής ορίζεται σε 1. Αυτό βοηθά στη μείωση της χρήσης του CPU όταν είναι αδράνης. Το όριο FPS επαναφέρεται όταν το ποντίκι εισέρχεται στο παράθυρο της εφαρμογής."
+msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, το όριο FPS της εφαρμογής ορίζεται σε 1. Αυτό βοηθά στη μείωση της χρήσης του CPU όταν είναι αδρανής. Το όριο FPS επαναφέρεται όταν το ποντίκι εισέρχεται στο παράθυρο της εφαρμογής."
 
 msgid "Brush:"
 msgstr "Πινέλο:"
@@ -1158,7 +1164,7 @@ msgid "Fill Shape"
 msgstr "Γέμισμα Σχήματος"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr "Γεμίζει το σχεδιασμένο σχήμα με χρώμα, αντί να σχεδιάστεί ένα άδειο σχήμα"
+msgstr "Γεμίζει το σχεδιασμένο σχήμα με χρώμα, αντί να σχεδιαστεί ένα άδειο σχήμα"
 
 msgid "Brush color from"
 msgstr "Χρώμα πινέλου από"

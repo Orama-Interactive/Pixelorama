@@ -149,7 +149,7 @@ boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/Version="v0.9-beta"
+config/Version="v0.9-stable"
 
 [audio]
 
@@ -179,7 +179,8 @@ window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/per_pixel_transparency/allowed.HTML5=false
 window/per_pixel_transparency/enabled.HTML5=false
-window/handheld/orientation.clickable="sensor"
+window/per_pixel_transparency/allowed.OSX=false
+window/per_pixel_transparency/enabled.OSX=false
 
 [gui]
 

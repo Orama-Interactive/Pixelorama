@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-09-04 14:29\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -659,6 +659,9 @@ msgstr "Támogatók"
 msgid "Translators"
 msgstr "Fordítók"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "Angol"
 
@@ -673,6 +676,9 @@ msgstr "Német"
 
 msgid "Polish"
 msgstr "Lengyel"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "Brazíliai Portugál"

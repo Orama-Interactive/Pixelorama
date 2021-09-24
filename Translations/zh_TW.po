@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-07-30 23:07\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -658,6 +658,9 @@ msgstr "捐款人"
 msgid "Translators"
 msgstr "翻譯人員"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "英文"
 
@@ -672,6 +675,9 @@ msgstr "德文"
 
 msgid "Polish"
 msgstr "波蘭文"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙文"

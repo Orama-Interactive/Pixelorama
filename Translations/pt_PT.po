@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2021-07-31 23:58\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -289,7 +289,7 @@ msgid "Random brush"
 msgstr "Pincel aleatório"
 
 msgid "Save Sprite as .pxo"
-msgstr "Gravar Imagem como .pxo "
+msgstr "Gravar Imagem como .pxo"
 
 msgid "Export Sprite as .png"
 msgstr "Exportar Imagem como .png"
@@ -642,7 +642,7 @@ msgid "Website"
 msgstr "Website"
 
 msgid "GitHub Repo"
-msgstr "Repositório de Github"
+msgstr "Repositório de GitΗub"
 
 msgid "Donate"
 msgstr "Doar"
@@ -659,6 +659,9 @@ msgstr "Doadores"
 msgid "Translators"
 msgstr "Tradutores"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "Inglês"
 
@@ -673,6 +676,9 @@ msgstr "Alemão"
 
 msgid "Polish"
 msgstr "Polaco"
+
+msgid "Portuguese"
+msgstr ""
 
 msgid "Brazilian Portuguese"
 msgstr "Português do Brazil"

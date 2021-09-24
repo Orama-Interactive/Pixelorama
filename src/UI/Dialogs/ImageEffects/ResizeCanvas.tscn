@@ -6,6 +6,7 @@
 [node name="ResizeCanvas" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 114.0
+rect_min_size = Vector2( 172, 60.2 )
 window_title = "Resize Canvas"
 resizable = true
 script = ExtResource( 2 )
@@ -114,18 +115,26 @@ margin_bottom = 150.0
 mouse_default_cursor_shape = 2
 text = "Center"
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 margin_top = 172.0
 margin_right = 200.0
 margin_bottom = 372.0
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
 expand = true
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/Preview" instance=ExtResource( 1 )]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 1 )]
 show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
 [connection signal="about_to_show" from="." to="." method="_on_ResizeCanvas_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_ResizeCanvas_popup_hide"]

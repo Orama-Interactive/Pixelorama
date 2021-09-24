@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-07-31 08:22\n"
+"PO-Revision-Date: 2021-09-04 14:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -659,6 +659,9 @@ msgstr "Dárci"
 msgid "Translators"
 msgstr "Překladatelé"
 
+msgid "Licenses"
+msgstr ""
+
 msgid "English"
 msgstr "Angličtina"
 
@@ -673,6 +676,9 @@ msgstr "Němčina"
 
 msgid "Polish"
 msgstr "Polština"
+
+msgid "Portuguese"
+msgstr "Portugalština"
 
 msgid "Brazilian Portuguese"
 msgstr "Brazilská portugalština"

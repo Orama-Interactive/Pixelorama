@@ -125,6 +125,7 @@ var tabs : Tabs
 var main_viewport : ViewportContainer
 var second_viewport : ViewportContainer
 var small_preview_viewport : ViewportContainer
+var canvas_preview_container : Container
 var camera : Camera2D
 var camera2 : Camera2D
 var camera_preview : Camera2D
@@ -134,6 +135,7 @@ var transparent_checker : ColorRect
 
 var cursor_position_label : Label
 var zoom_level_label : Label
+var zoom_level_spinbox : SpinBox
 
 var tool_panel : Panel
 var right_panel : Panel
@@ -222,7 +224,8 @@ func _ready() -> void:
 	tabs = control.find_node("Tabs")
 	main_viewport = control.find_node("ViewportContainer")
 	second_viewport = control.find_node("ViewportContainer2")
-	small_preview_viewport = control.find_node("PreviewViewportContainer")
+	canvas_preview_container = control.find_node("CanvasPreviewContainer")
+	small_preview_viewport = canvas_preview_container.find_node("PreviewViewportContainer")
 	camera = main_viewport.find_node("Camera2D")
 	camera2 = control.find_node("Camera2D2")
 	camera_preview = control.find_node("CameraPreview")
@@ -232,6 +235,7 @@ func _ready() -> void:
 
 	cursor_position_label = control.find_node("CursorPosition")
 	zoom_level_label = control.find_node("ZoomLevel")
+	zoom_level_spinbox = control.find_node("ZoomSpinbox")
 
 	tool_panel = control.find_node("ToolPanel")
 	right_panel = control.find_node("RightPanel")
