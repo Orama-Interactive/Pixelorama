@@ -1,0 +1,75 @@
+name: "dev-clickable-builds"
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    paths-ignore: 
+    - "Translations/*"
+    - "installer/*.pot"
+    - "installer/po/*"
+
+env:
+  GODOT_VERSION: 3.3
+  EXPORT_NAME: Pixelorama
+
+jobs:
+  build_pck:
+    name: Create Pixelorama pack data
+    runs-on: ubuntu-latest
+    container:
+      image: docker://barichello/godot-ci:3.3
+    steps:
+      - name: Clone source
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Linux Build 🔧
+        run: godot -v --export-pack "Clickable (Package Only)" ./Misc/Clickable/Pixelorama.pck
+      - name: Copy Pixelorama data files
+        run: |
+          cp -R ./pixelorama_data ./Misc/Clickable
+      - name: Upload data files for click package
+        uses: actions/upload-artifact@v2
+        with:
+          name: pixelorama_click_data
+          path: Misc/Clickable/
+          retention-days: 14
+  build_click:
+    name: Create click package
+    needs: build_pck
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architectures:
+          - armhf
+          - arm64
+    steps:
+      - name: Clone source
+        uses: actions/checkout@v2
+      - name: Install clickable dependencies
+        run: |
+          sudo add-apt-repository ppa:bhdouglass/clickable
+          sudo apt update
+          sudo apt install -y containerd docker.io runc clickable
+          sudo systemctl unmask docker.service
+          sudo systemctl start docker.service
+      - name: Remove existing click folder
+        run: rm -r ./Misc/Clickable
+      - name: Download click data
+        uses: actions/download-artifact@v2
+        with:
+          name: pixelorama_click_data
+          path: ./Misc/Clickable
+      - name: Run Clickable
+        run: |
+          cd Misc/Clickable
+          chmod +x build-ubports.sh
+          clickable build
+        env:
+          CLICKABLE_ARCH: ${{ matrix.architectures }}
+      - name: Upload click package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pixelorama_click_packages
+          path: Misc/Clickable/build/**.click
