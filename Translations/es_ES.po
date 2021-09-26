@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-23 18:56\n"
+"PO-Revision-Date: 2021-09-26 02:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Tamaño del lienzo"
 
 msgid "Frame Size"
-msgstr "Tamaño del marco"
+msgstr "Tamaño de los Fotogramas"
 
 msgid "Size:"
 msgstr "Tamaño:"
@@ -247,7 +247,7 @@ msgid "New frame"
 msgstr "Nuevo fotograma"
 
 msgid "Replace frame"
-msgstr "Reemplazar marco"
+msgstr "Reemplazar fotograma"
 
 msgid "New layer"
 msgstr "Nueva capa"
@@ -271,7 +271,7 @@ msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
 msgid "At frame:"
-msgstr "En el cuadro:"
+msgstr "En el fotograma:"
 
 msgid "At layer:"
 msgstr "En la capa:"
@@ -1032,19 +1032,19 @@ msgid "A color of the grid"
 msgstr "Un color de la cuadrícula"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Cuadrícula de Píxeles"
 
 msgid "Show at zoom:"
 msgstr "Mostrar con zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Establece el zoom mínimo con el que se mostrará la cuadrícula de píxeles"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Color de la cuadrícula de píxeles:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Un color de la cuadrícula de píxeles"
 
 msgid "Transparency"
 msgstr "Transparencia"
@@ -1101,7 +1101,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Si esta opción está activada, cuando la ventana de la aplicación pierde el foco, el límite de FPS de la aplicación se establece en 1. Esto ayuda a reducir el uso de la CPU cuando está inactiva. El límite de FPS se restablece cuando el mouse entra en la ventana de la aplicación."
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1289,10 +1289,10 @@ msgid "Onion Skinning:"
 msgstr "Piel de cebolla:"
 
 msgid "Past Frames"
-msgstr "Fotogramas pasados"
+msgstr "Fotogramas Anteriores"
 
 msgid "Future Frames"
-msgstr "Fotogramas futuros"
+msgstr "Fotogramas Posteriores"
 
 msgid "Manage frame tags"
 msgstr "Administrar etiquetas de fotogramas"
@@ -1316,10 +1316,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "La animación sólo se reproduce en fotogramas de la misma etiqueta"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Etiqueta %s (Fotograma %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Etiqueta %s (Fotogramas %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1336,7 +1336,7 @@ msgid "Remove Frame"
 msgstr "Eliminar fotograma"
 
 msgid "Clone Frame"
-msgstr "Clonar fotograma"
+msgstr "Clonar Fotograma"
 
 msgid "Move Left"
 msgstr "Mover a la izquierda"
@@ -1354,7 +1354,7 @@ msgid "Unlink Cel"
 msgstr "Desvincular celda"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Propiedades de los Fotogramas"
 
 msgid "Frame properties"
 msgstr "Propiedades de los fotogramas"
@@ -1396,7 +1396,7 @@ msgid "Lock/unlock layer"
 msgstr "Bloquear/desbloquear capa"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Fotograma: %s, Capa: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1497,10 +1497,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Rehacer: Eliminar la etiqueta del fotograma"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Deshacer: Cambiar la duración de los fotogramas"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Rehacer: Cambiar la duración de los fotogramas"
 
 msgid "Move Guide"
 msgstr "Mover Guía"
@@ -1512,10 +1512,10 @@ msgid "File autosaved"
 msgstr "Archivo guardado automáticamente"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "No se pudo abrir el archivo. Código de error %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "No se pudo guardar el archivo. Código de error %s"
 
 msgid "File exported"
 msgstr "Archivo exportado"
