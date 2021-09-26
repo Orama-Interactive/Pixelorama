@@ -10,58 +10,58 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-09-26 21:48\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Okej"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 msgid "Open"
-msgstr ""
+msgstr "Öppna"
 
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Vänligen bekräfta..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Filnamn:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Projektnamn:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Bildstorlek"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Canvas-storlek"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Ramstorlek"
 
 msgid "Size:"
-msgstr ""
+msgstr "Storlek:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Bredd:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Höjd:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centrera"
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 msgid "Select"
-msgstr ""
+msgstr "Välj"
 
 msgid "View"
 msgstr ""
