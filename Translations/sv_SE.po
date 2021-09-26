@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2021-09-26 21:48\n"
+"PO-Revision-Date: 2021-09-26 21:58\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -64,52 +64,52 @@ msgid "Select"
 msgstr "Välj"
 
 msgid "View"
-msgstr ""
+msgstr "Visa"
 
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 msgid "Effects"
-msgstr ""
+msgstr "Effekter"
 
 msgid "Help"
-msgstr ""
+msgstr "Hjälp"
 
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 msgid "New..."
-msgstr ""
+msgstr "Ny..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Öppna..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Spara..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Spara som..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Använd komprimering"
 
 msgid "Import"
-msgstr ""
+msgstr "Importera"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportera"
 
 msgid "Export..."
-msgstr ""
+msgstr "Exportera..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Exportera som..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Exportera PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Exportera PNG som..."
 
 msgid "Quit"
 msgstr ""
