@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-26 02:28\n"
+"PO-Revision-Date: 2021-09-26 20:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -987,7 +987,7 @@ msgid "Rectangular grid width:"
 msgstr "Ancho de la cuadrícula rectangular:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Establece la distancia entre las líneas verticales de la cuadrícula rectangular"
 
 msgid "Rectangular grid height:"
 msgstr "Altura de la cuadrícula rectangular:"
@@ -999,7 +999,7 @@ msgid "Isometric cell bounds width:"
 msgstr "Ancho de los límites de la celda isométrica:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Establece el ancho de la caja delimitadora alineada con el eje de la celda isométrica"
 
 msgid "Isometric cell bounds height:"
 msgstr "Altura de los límites de la celda isométrica:"
@@ -1008,16 +1008,16 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "Establece la altura del recuadro delimitador alineado con los ejes de la celda isométrica"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Desplazamiento de cuadrícula en x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Establece el desplazamiento en x de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Desplazamiento de cuadrícula en y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Establece el desfase en Y de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
+msgstr "Establece el desplazamiento en y de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Dibujar en el Modo Mosaico:"
