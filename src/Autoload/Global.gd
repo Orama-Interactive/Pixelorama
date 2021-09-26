@@ -333,7 +333,7 @@ func _ready() -> void:
 func notification_label(text : String) -> void:
 	var notification : Label = notification_label_node.instance()
 	notification.text = tr(text)
-	notification.rect_position = Vector2(70, OS.window_size.y - animation_timeline.rect_size.y - 20)
+	notification.rect_position = Vector2(70, animation_timeline.rect_position.y)
 	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
