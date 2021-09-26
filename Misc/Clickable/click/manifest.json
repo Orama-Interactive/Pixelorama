@@ -8,8 +8,8 @@
             "desktop": "pixelorama.desktop"
         }
     },
-    "maintainer": "Orama Interactive <soramagamestudios@gmail.com>",
+    "maintainer": "Orama Interactive <oramagamestudios@gmail.com>",
     "name": "pixelorama.orama-interactive",
     "title": "Pixelorama",
-    "version": "0.9-beta"
+    "version": "0.9-stable"
 }
