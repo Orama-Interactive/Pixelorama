@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-26 02:21\n"
+"PO-Revision-Date: 2021-09-26 02:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1017,13 +1017,13 @@ msgid "Grid offset y:"
 msgstr ""
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Establece el desfase en Y de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Dibujar en el Modo Mosaico:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Si está desactivado, la cuadrícula se dibujará sólo sobre la imagen original"
 
 msgid "Grid color:"
 msgstr "Color de cuadrícula:"
@@ -1298,10 +1298,10 @@ msgid "Manage frame tags"
 msgstr "Administrar etiquetas de fotogramas"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Propiedades de las Etiquetas de los Fotogramas"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Añadir nueva etiqueta de fotograma"
 
 msgid "Name:"
 msgstr "Nombre:"
