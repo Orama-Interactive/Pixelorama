@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-09-28 15:06\n"
+"PO-Revision-Date: 2021-09-28 15:18\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1599,7 +1599,7 @@ msgid "Become a Patron"
 msgstr "Стати меценатом"
 
 msgid "Don't show again"
-msgstr "Не показувати знов"
+msgstr "Не показувати знову"
 
 msgid "Image Options"
 msgstr "Опції зображення"
@@ -1832,7 +1832,7 @@ msgid "Remove a selected color"
 msgstr "Видалити вибраний колір"
 
 msgid "Palette with the same name and path already exists!"
-msgstr "Палітра з такими ж назвою та шляхом вже існує!"
+msgstr "Палітра з такою назвою та шляхом вже існує!"
 
 msgid "Palette name is required!"
 msgstr "Назва палітри обов’язкова!"
