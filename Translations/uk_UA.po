@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-09-04 22:38\n"
+"PO-Revision-Date: 2021-09-28 15:06\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -118,7 +118,7 @@ msgid "Undo"
 msgstr "Скасувати"
 
 msgid "Redo"
-msgstr "Повторити"
+msgstr "Відновити"
 
 msgid "Copy"
 msgstr "Копіювати"
@@ -438,7 +438,7 @@ msgid "Selection"
 msgstr "Виділення"
 
 msgid "Shortcuts"
-msgstr "Ярлики"
+msgstr "Комбінації клавіш"
 
 msgid "Backup"
 msgstr "Резервна копія"
@@ -456,7 +456,7 @@ msgid "Restore default value"
 msgstr "Відновити значення за замовчуванням"
 
 msgid "Smooth Zoom"
-msgstr "М'яке маштабування"
+msgstr "М'яке масштабування"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Додає більш плавний перехід при масштабуванні"
@@ -630,7 +630,7 @@ msgid "About Pixelorama"
 msgstr "Про Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr "Пікселорама - пікселізуйте свої мрії!"
+msgstr "Pixelorama - пікселізуйте свої мрії!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Розроблено Orama Interactive"
