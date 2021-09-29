@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2021-09-18 13:50\n"
+"PO-Revision-Date: 2021-09-29 15:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1108,14 +1108,14 @@ msgstr "Apenas presets personalizados podem ser modificados"
 msgid "Set application FPS limit:"
 msgstr "Define o limite de FPS da applicação:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limita os FPS para 1 quando a app perde o foco"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Define o limite de frames por segundo da aplicação. Quanto mais baixo, mais baixo o uso do CPU, mas a aplicação fica mais lenta, com cortes, e ineresponsiva. 0 significa que não tem limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Quando ligado, quando a janela da aplicação sai do foco, o limite de FPS da aplicação passa para 1. Isto ajuda a baixar a utilização do CPU quando em inatividade. O limite de FPS é restaurado quando a janela da aplicação ganha o foco."
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1833,4 +1833,10 @@ msgstr "Reduzir o tamanho da palete vai resetar as posições das cores. Cores q
 
 msgid "Position:"
 msgstr "Posição:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
