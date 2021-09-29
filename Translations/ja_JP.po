@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-09-06 06:21\n"
+"PO-Revision-Date: 2021-09-29 15:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1115,14 +1115,14 @@ msgstr "カスタムプリセットのみ変更できます"
 msgid "Set application FPS limit:"
 msgstr "アプリのFPS上限を設定:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "アプリがフォーカスを失った場合、FPSを1に制限する"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失った場合のアプリケーションのFPS制限が1に設定されます。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったときにFPS制限がリセットされます。"
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "ブラシ："
@@ -1842,4 +1842,10 @@ msgstr "パレットサイズを小さくすると、色の位置がリセット
 
 msgid "Position:"
 msgstr "ポジション:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
