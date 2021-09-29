@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-09-04 14:29\n"
+"PO-Revision-Date: 2021-09-29 15:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1113,14 +1113,14 @@ msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 msgid "Set application FPS limit:"
 msgstr "Sett prorgammets grense for bilder per sekund:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Begrens til ett bilde per sekund når programmet ikke har fokus"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Hvis denne er påslått og programmet mister fokus vil programmet kun oppdateres i ett bilde per sekund. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Børste:"
@@ -1838,4 +1838,10 @@ msgstr "Redusering av palettstørrelse vil nullstille fargenes lagrede posisjon.
 
 msgid "Position:"
 msgstr "Posisjon:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
