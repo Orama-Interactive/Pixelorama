@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-09-04 14:59\n"
+"PO-Revision-Date: 2021-09-29 15:04\n"
 
 msgid "OK"
 msgstr "예"
@@ -1114,14 +1114,14 @@ msgstr "커스텀 프리셋만 수정 가능함"
 msgid "Set application FPS limit:"
 msgstr "프로그램 FPS 제한 설정"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "프로그램이 관심을 잃었을때 FPS를 1로 제한합니다"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "프로그램의 FPS를 제한합니다. 숫자가 낮을수록, CPU 사용량은 낮아지지만 프로그램의 속도가 느려지고, 거칠어지고 응답하지 않습니다. 0은 제한이 없음을 의미합니다"
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "이 옵션을 켜면 프로그램 창의 관심이 없을때 프로그램의 FPS 제한이 1로 설정됩니다. 이렇게 하면 프로그램을 안 쓰고 있을때 CPU 사용량을 줄일 수 있습니다. 마우스가 프로그램의 창에 들어갈 때 FPS 제한이 재설정 됩니다"
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "브러시:"
@@ -1841,4 +1841,10 @@ msgstr "팔레트 크기를 줄이면 색상 위치가 재설정됩니다. 새�
 
 msgid "Position:"
 msgstr "위치:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
