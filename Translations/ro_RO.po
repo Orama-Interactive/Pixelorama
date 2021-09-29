@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-09-04 15:09\n"
+"PO-Revision-Date: 2021-09-29 15:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1115,14 +1115,14 @@ msgstr "Doar presetarea personalizată poate fi modificată"
 msgid "Set application FPS limit:"
 msgstr "Setează limita CPS a aplicației:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limitează CPS la 1 când aplicația pierde focalizarea"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Dacă această opțiune este activată, limita CPS a aplicației este setată la 1 în momentul în care fereastra aplicației pierde focalizarea. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Limita CPS se resetează când mausul intră în fereastra aplicației."
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pensulă:"
@@ -1842,4 +1842,10 @@ msgstr "Reducerea dimensiunii paletei va reseta pozițiile culorilor. Culorile c
 
 msgid "Position:"
 msgstr "Poziție:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
