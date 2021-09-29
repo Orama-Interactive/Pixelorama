@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-09-28 15:18\n"
+"PO-Revision-Date: 2021-09-29 15:05\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1115,14 +1115,14 @@ msgstr "Можна міняти тільки користувацький наб
 msgid "Set application FPS limit:"
 msgstr "Встановити обмеження FPS додатку:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Обмежити FPS до 1, коли змінити фокус програми"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Встановлює обмеження кадрів в секунду. Чим нижче значення, ти менше додаток використовує CPU, але програма починає працювати повільніше, стає менш стабільною і може не реагувати. 0 означає, що немає ніяких обмежень."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Якщо цей параметр увімкнено, то коли вікно додатку втратить фокус, обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Пензель:"
@@ -1842,4 +1842,10 @@ msgstr "Зміна розміру палітри призведе до пере�
 
 msgid "Position:"
 msgstr "Позиція:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
