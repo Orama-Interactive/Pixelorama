@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-09-04 14:38\n"
+"PO-Revision-Date: 2021-09-29 15:05\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1115,14 +1115,14 @@ msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί
 msgid "Set application FPS limit:"
 msgstr "Ορισμός ορίου FPS εφαρμογής:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Περιορισμός FPS (καρέ ανά δευτερόλεπτο) σε 1 όταν η εφαρμογή χάνει την εστίαση"
+msgid "Limit FPS to the idle FPS when app loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ορίζει το όριο των καρέ της εφαρμογής ανά δευτερόλεπτο. Όσο μικρότερος είναι ο αριθμός, τόσο χαμηλότερη είναι η χρήση της CPU, αλλά η εφαρμογή γίνεται πιο αργή, ασταθής και λιγότερο ανταποκρινόμενη. 0 σημαίνει ότι δεν υπάρχει όριο."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, το όριο FPS της εφαρμογής ορίζεται σε 1. Αυτό βοηθά στη μείωση της χρήσης του CPU όταν είναι αδρανής. Το όριο FPS επαναφέρεται όταν το ποντίκι εισέρχεται στο παράθυρο της εφαρμογής."
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Πινέλο:"
@@ -1842,4 +1842,10 @@ msgstr "Η μείωση του μεγέθους της παλέτας θα επ�
 
 msgid "Position:"
 msgstr "Θέση:"
+
+msgid "Set idle FPS:"
+msgstr ""
+
+msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
+msgstr ""
 
