@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-29 15:04\n"
+"PO-Revision-Date: 2021-09-29 20:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1116,13 +1116,13 @@ msgid "Set application FPS limit:"
 msgstr "Establecer el límite de FPS de la aplicación:"
 
 msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr ""
+msgstr "Limitar los FPS a los de reposo cuando la aplicación pierde el foco"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Si está activado, cuando la ventana de la aplicación pierde el foco, el límite de FPS de la aplicación se establece a los FPS en reposo. Esto ayuda a reducir el uso de la CPU cuando está inactivo. El límite de FPS se restablece cuando el ratón entra en la ventana de la aplicación."
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1844,8 +1844,8 @@ msgid "Position:"
 msgstr "Posición:"
 
 msgid "Set idle FPS:"
-msgstr ""
+msgstr "Establecer FPS en reposo:"
 
 msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr ""
+msgstr "Establece cuántos FPS utiliza Pixelorama cuando no tiene el foco. Cuanto menos sea, mejor será el rendimiento."
 
