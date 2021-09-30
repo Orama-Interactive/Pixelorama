@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-09-29 15:05\n"
+"PO-Revision-Date: 2021-09-30 00:37\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "اسم الملف:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "اسم المشروع:"
 
 msgid "Image Size"
 msgstr "حجم الصورة"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "حجم الإطار"
 
 msgid "Size:"
-msgstr ""
+msgstr "الحجم:"
 
 msgid "Width:"
 msgstr "العرض:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "تعديل"
 
 msgid "Select"
-msgstr ""
+msgstr "تحديد"
 
 msgid "View"
 msgstr "عرض"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "حذف"
 
 msgid "New Brush"
-msgstr ""
+msgstr "فرشاة جديدة"
 
 msgid "Scale Image"
 msgstr "تغيير مقياس الصورة"
@@ -142,7 +142,7 @@ msgid "Pixels"
 msgstr ""
 
 msgid "Percentage"
-msgstr ""
+msgstr "نسبة"
 
 msgid "Crop Image"
 msgstr "تقطيع الصورة"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "تدوير الصورة"
 
 msgid "Clear"
-msgstr ""
+msgstr "مسح"
 
 msgid "Invert"
-msgstr ""
+msgstr "عكس"
 
 msgid "Flip"
 msgstr "لف"
@@ -178,16 +178,16 @@ msgid "Tile Mode"
 msgstr "وضع البلاط"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "شفافية النافذة"
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "تلقائي"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "شاشة عريضة"
 
 msgid "Tallscreen"
 msgstr ""
@@ -199,7 +199,7 @@ msgid "Show Grid"
 msgstr "إظهار الشبكة"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "إظهار شبكة بكسل"
 
 msgid "Show Rulers"
 msgstr "إظهار المسطرة"
