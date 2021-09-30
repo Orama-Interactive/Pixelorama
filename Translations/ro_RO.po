@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-09-30 07:53\n"
+"PO-Revision-Date: 2021-09-30 08:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -762,7 +762,7 @@ msgid "copy"
 msgstr "copie"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "Ești sigur că dorești să ieși din Pixelorama?"
+msgstr "Sigur dorești să ieși din Pixelorama?"
 
 msgid "Unsaved Image"
 msgstr "Imagine nesalvată"
@@ -1002,7 +1002,7 @@ msgid "Isometric"
 msgstr "Izometrică"
 
 msgid "All"
-msgstr "Ambele"
+msgstr "Toate"
 
 msgid "Rectangular grid width:"
 msgstr "Lățimea grilei dreptunghiulare:"
@@ -1164,7 +1164,7 @@ msgid "Fill Shape"
 msgstr "Umplere formă"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr "Umple cu culoare forma desenată, în loc să deseneze o formă goală"
+msgstr "În locul desenării unei forme goale, forma desenată este umplută cu culoare"
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
@@ -1647,7 +1647,7 @@ msgid "Custom"
 msgstr "Personalizată"
 
 msgid "Rectangular Selection"
-msgstr "Selecție dreptunghiulară"
+msgstr "Selectare dreptunghiulară"
 
 msgid "Elliptical Selection"
 msgstr "Selectare eliptică"
