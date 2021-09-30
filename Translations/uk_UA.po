@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-09-29 15:05\n"
+"PO-Revision-Date: 2021-09-30 09:01\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1116,13 +1116,13 @@ msgid "Set application FPS limit:"
 msgstr "Встановити обмеження FPS додатку:"
 
 msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr ""
+msgstr "Обмежити FPS до FPS бездіяльності, коли програма не в фокусі"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Встановлює обмеження кадрів в секунду. Чим нижче значення, ти менше додаток використовує CPU, але програма починає працювати повільніше, стає менш стабільною і може не реагувати. 0 означає, що немає ніяких обмежень."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Якщо цей параметр увімкнено, під час втрати фокусу програмою FPS (кількість кадрів в секунду) буде обмежено вказаною FPS бездіяльності. Це дозволяє ощадити використання процесора, коли програма не активна. Ліміт FPS буде забиратися, коли миш повертається в вікно програми."
 
 msgid "Brush:"
 msgstr "Пензель:"
@@ -1844,8 +1844,8 @@ msgid "Position:"
 msgstr "Позиція:"
 
 msgid "Set idle FPS:"
-msgstr ""
+msgstr "Встановити FPS бездіяльності:"
 
 msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr ""
+msgstr "Вказує, скільки кадрів в секунду (FPS) Pixelorama буде використовувати, коли програма не в фокусі. Чим менше, тим більше ресурсів економиться."
 
