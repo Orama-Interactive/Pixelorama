@@ -123,6 +123,8 @@ jobs:
           rm ./build/mac/Pixelorama.zip
       - name: Fix application icon 🖼
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+      - name: Fix application attributes
+        run: xattr -cr ./build/mac/Pixelorama.app
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
