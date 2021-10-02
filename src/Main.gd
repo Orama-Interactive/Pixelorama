@@ -18,6 +18,7 @@ onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var alternate_transparent_background = ColorRect.new()
@@ -76,6 +77,9 @@ func _ready() -> void:
 	if OS.get_cmdline_args():
 		OpenSave.handle_loading_files(OS.get_cmdline_args())
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
+
+	if OS.get_name() == "Android":
+		OS.request_permissions()
 
 
 func handle_resize() -> void:

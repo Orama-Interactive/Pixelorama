@@ -161,7 +161,7 @@ func preference_update(prop : String) -> void:
 
 	if prop in ["fps_limit"]:
 		Engine.set_target_fps(Global.fps_limit)
-	
+
 	if prop in ["fps_limit_focus"]:
 		idle_fps_spinbox.editable = !idle_fps_spinbox.editable
 
