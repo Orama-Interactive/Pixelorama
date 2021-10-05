@@ -1376,11 +1376,11 @@ __meta__ = {
 [node name="Performance" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 28.0
-margin_right = 498.0
+margin_right = 553.0
 margin_bottom = 80.0
 
 [node name="PerformanceContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance"]
-margin_right = 498.0
+margin_right = 553.0
 margin_bottom = 52.0
 columns = 3
 
@@ -1408,22 +1408,49 @@ __meta__ = {
 }
 
 [node name="EnableLimitFPSFocusLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
-margin_left = 261.0
+margin_left = 324.0
 margin_top = 5.0
-margin_right = 490.0
+margin_right = 553.0
 margin_bottom = 19.0
-hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
 mouse_filter = 0
-text = "Limit FPS to 1 when app loses focus"
+text = "Limit FPS to the idle FPS when app loses focus"
 
 [node name="EnableLimitFPSFocus" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
 margin_top = 28.0
 margin_right = 158.0
 margin_bottom = 52.0
-hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
 mouse_default_cursor_shape = 2
 pressed = true
 text = "On"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IdleFPSLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_left = 162.0
+margin_top = 33.0
+margin_right = 320.0
+margin_bottom = 47.0
+hint_tooltip = "Sets how many FPS Pixelorama uses when out of focus."
+mouse_filter = 0
+size_flags_horizontal = 0
+text = "Set idle FPS:"
+
+[node name="IdleFPS" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_left = 324.0
+margin_top = 28.0
+margin_right = 419.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 95, 0 )
+hint_tooltip = "Sets how many FPS Pixelorama uses when out of focus."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+min_value = 1.0
+max_value = 60.0
+value = 1.0
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

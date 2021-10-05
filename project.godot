@@ -150,6 +150,7 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/Version="v0.9-stable"
+run/low_processor_mode.Android=false
 
 [audio]
 
@@ -181,6 +182,12 @@ window/per_pixel_transparency/allowed.HTML5=false
 window/per_pixel_transparency/enabled.HTML5=false
 window/per_pixel_transparency/allowed.OSX=false
 window/per_pixel_transparency/enabled.OSX=false
+window/per_pixel_transparency/allowed.Android=false
+window/per_pixel_transparency/enabled.Android=false
+
+[gui]
+
+theme/use_hidpi.clickable=true
 
 [importer_defaults]
 

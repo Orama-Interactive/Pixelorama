@@ -168,6 +168,8 @@ func _input(event : InputEvent) -> void:
 			else:
 				zoom_camera(-1)
 		elif event is InputEventPanGesture: # Pan Gesture on a Latop touchpad
+			if OS.get_name() == "Android":
+				return
 			offset = offset + event.delta * zoom * 7 # for moving the canvas
 		elif event is InputEventMouseMotion && drag:
 			offset = offset - event.relative * zoom

@@ -6,31 +6,34 @@
 [node name="HSVDialog" type="ConfirmationDialog"]
 margin_left = 1.0
 margin_top = -1.0
-margin_right = 464.0
-margin_bottom = 318.0
-rect_min_size = Vector2( 172, 60.2 )
+margin_right = 349.0
+margin_bottom = 415.0
+rect_min_size = Vector2( 348, 416 )
 window_title = "Adjust HSV"
 resizable = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 455.0
-margin_bottom = 324.0
+margin_right = 340.0
+margin_bottom = 380.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 447.0
-margin_bottom = 200.0
+margin_right = 332.0
+margin_bottom = 228.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 123.5
-margin_right = 323.5
-margin_bottom = 200.0
+margin_left = 52.0
+margin_right = 280.0
+margin_bottom = 228.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
@@ -42,45 +45,85 @@ anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 
+[node name="LiveSettings" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 232.0
+margin_right = 332.0
+margin_bottom = 256.0
+alignment = 1
+
+[node name="LiveCheckbox" type="CheckBox" parent="VBoxContainer/LiveSettings"]
+margin_left = 112.0
+margin_right = 220.0
+margin_bottom = 24.0
+pressed = true
+text = "Live Preview"
+
+[node name="WaitSettings" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 232.0
+margin_right = 332.0
+margin_bottom = 256.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/WaitSettings"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 251.0
+margin_bottom = 19.0
+text = "Update preview delay (in milliseconds)"
+
+[node name="WaitTime" type="SpinBox" parent="VBoxContainer/WaitSettings"]
+margin_left = 255.0
+margin_right = 329.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 1000.0
+value = 200.0
+editable = false
+suffix = "msec"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 204.0
-margin_right = 447.0
-margin_bottom = 288.0
+margin_top = 260.0
+margin_right = 332.0
+margin_bottom = 344.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Names" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 81.0
+margin_right = 68.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.9
 
 [node name="Hue" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
-margin_right = 81.0
+margin_right = 68.0
 margin_bottom = 14.0
 text = "Hue:"
 align = 2
 
 [node name="Saturation" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
 margin_top = 18.0
-margin_right = 81.0
+margin_right = 68.0
 margin_bottom = 32.0
 text = "Saturation:"
 align = 2
 
 [node name="Value" type="Label" parent="VBoxContainer/HBoxContainer/Names"]
 margin_top = 36.0
-margin_right = 81.0
+margin_right = 68.0
 margin_bottom = 50.0
 text = "Value:"
 align = 2
 
 [node name="Sliders" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 91.0
-margin_right = 362.0
+margin_left = 78.0
+margin_right = 248.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -89,7 +132,7 @@ alignment = 1
 
 [node name="Hue" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 8.0
-margin_right = 271.0
+margin_right = 170.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = -180.0
@@ -97,21 +140,21 @@ max_value = 180.0
 
 [node name="Saturation" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 34.0
-margin_right = 271.0
+margin_right = 170.0
 margin_bottom = 50.0
 mouse_default_cursor_shape = 2
 min_value = -100.0
 
 [node name="Value" type="HSlider" parent="VBoxContainer/HBoxContainer/Sliders"]
 margin_top = 60.0
-margin_right = 271.0
+margin_right = 170.0
 margin_bottom = 76.0
 mouse_default_cursor_shape = 2
 min_value = -100.0
 
 [node name="TextBoxes" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 372.0
-margin_right = 446.0
+margin_left = 258.0
+margin_right = 332.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
@@ -139,9 +182,9 @@ mouse_default_cursor_shape = 1
 min_value = -100.0
 
 [node name="AffectHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 292.0
-margin_right = 447.0
-margin_bottom = 316.0
+margin_top = 348.0
+margin_right = 332.0
+margin_bottom = 372.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/AffectHBoxContainer"]
 margin_right = 160.0
@@ -159,9 +202,16 @@ text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
+[node name="WaitApply" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="toggled" from="VBoxContainer/LiveSettings/LiveCheckbox" to="." method="_on_LiveCheckbox_toggled"]
+[connection signal="value_changed" from="VBoxContainer/WaitSettings/WaitTime" to="." method="_on_WaitTime_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Sliders/Value" to="." method="_on_Value_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/TextBoxes/Hue" to="." method="_on_Hue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/TextBoxes/Saturation" to="." method="_on_Saturation_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/TextBoxes/Value" to="." method="_on_Value_value_changed"]
+[connection signal="timeout" from="WaitApply" to="." method="_on_WaitApply_timeout"]

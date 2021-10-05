@@ -632,7 +632,9 @@ func paste() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = project.selection_offset
 
-	project.selection_bitmap = clipboard.selection_bitmap.duplicate()
+	var clip_bitmap : BitMap = clipboard.selection_bitmap.duplicate()
+
+	project.selection_bitmap = Global.current_project.resize_bitmap(clip_bitmap, project.selection_bitmap.get_size())
 	self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 	project.selection_offset = clipboard.selection_offset
 

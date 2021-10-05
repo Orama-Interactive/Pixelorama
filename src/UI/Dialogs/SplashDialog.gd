@@ -46,7 +46,7 @@ func change_artwork(var direction : int) -> void:
 		chosen_artwork = 0 if direction == 1 else artworks.size()-1
 	else:
 		chosen_artwork = chosen_artwork+direction
-	
+
 	splash_art_texturerect.texture = artworks[chosen_artwork][1]
 
 	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork][0]

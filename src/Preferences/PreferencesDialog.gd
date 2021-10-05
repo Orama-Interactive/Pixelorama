@@ -48,6 +48,7 @@ var preferences = [
 
 	["fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", Global.fps_limit],
 	["fps_limit_focus", "Performance/PerformanceContainer/EnableLimitFPSFocus", "pressed", Global.fps_limit_focus],
+	["idle_fps", "Performance/PerformanceContainer/IdleFPS", "value", Global.idle_fps]
 ]
 
 var selected_item := 0
@@ -58,6 +59,7 @@ onready var autosave_interval : SpinBox = $HSplitContainer/ScrollContainer/VBoxC
 onready var restore_default_button_scene = preload("res://src/Preferences/RestoreDefaultButton.tscn")
 onready var shrink_label : Label = $HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkLabel
 onready var themes : BoxContainer = $"HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"
+onready var idle_fps_spinbox : SpinBox = $HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer/IdleFPS
 
 
 func _ready() -> void:
@@ -159,6 +161,9 @@ func preference_update(prop : String) -> void:
 
 	if prop in ["fps_limit"]:
 		Engine.set_target_fps(Global.fps_limit)
+
+	if prop in ["fps_limit_focus"]:
+		idle_fps_spinbox.editable = !idle_fps_spinbox.editable
 
 	if prop in ["selection_animated_borders", "selection_border_color_1", "selection_border_color_2"]:
 		Global.canvas.selection.marching_ants_outline.material.set_shader_param("animated", Global.selection_animated_borders)

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Pixelorama
+Comment=A free & open-source 2D sprite editor, made with the Godot Engine!
+Exec=godot --main-pack Pixelorama.pck --maximized
+Icon=icon.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true

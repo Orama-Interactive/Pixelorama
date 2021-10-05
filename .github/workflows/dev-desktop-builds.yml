@@ -123,6 +123,9 @@ jobs:
           rm ./build/mac/Pixelorama.zip
       - name: Fix application icon 🖼
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+      - name: Add readme text
+        run: |
+          printf '%s\n' 'Before running Pixelorama for the first time, make sure to open a Terminal and run:' '' 'xattr -cr /path/to/Pixelorama.app' '' "If you don't, macOS will not let you run Pixelorama and claim it's damaged." "For more info, check disable-gatekeeper.github.io" > ./build/mac/ReadMeFirst.txt
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS

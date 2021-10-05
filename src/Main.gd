@@ -18,6 +18,7 @@ onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var alternate_transparent_background = ColorRect.new()
@@ -48,6 +49,16 @@ func _ready() -> void:
 	Global.open_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	Global.save_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
+	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
+	# Additionally, AppArmor policies prevent the app from writing to the /home
+	# directory. Until the proper AppArmor policies are determined to write to these
+	# files accordingly, use the user data folder where cache.ini is stored.
+	# Ubuntu Touch users can access these files in the File Manager at the directory
+	# ~/.local/pixelorama.orama-interactive/godot/app_userdata/Pixelorama.
+	if OS.has_feature("clickable"):
+		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
+		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
+
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true
@@ -66,6 +77,9 @@ func _ready() -> void:
 	if OS.get_cmdline_args():
 		OpenSave.handle_loading_files(OS.get_cmdline_args())
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
+
+	if OS.get_name() == "Android":
+		OS.request_permissions()
 
 
 func handle_resize() -> void:
@@ -266,13 +280,16 @@ func _notification(what : int) -> void:
 	match what:
 		MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
 			show_quit_dialog()
-		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when the mouse isn't in the window anymore
+		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when another program is currently focused
 			Global.has_focus = false
 			if Global.fps_limit_focus:
-				Engine.set_target_fps(1) # then set the fps to 1 to relieve the cpu
+				Engine.set_target_fps(Global.idle_fps) # then set the fps to the idle fps (by default 1) to facilitate the cpu
 		MainLoop.NOTIFICATION_WM_MOUSE_ENTER: # Opposite of the above
 			if Global.fps_limit_focus:
 				Engine.set_target_fps(Global.fps_limit) # 0 stands for maximum fps
+		MainLoop.NOTIFICATION_WM_MOUSE_EXIT: # if the mouse exits the window and another application has the focus set the fps to the idle fps
+			if !OS.is_window_focused() and Global.fps_limit_focus:
+				Engine.set_target_fps(Global.idle_fps)
 
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
