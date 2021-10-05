@@ -44,5 +44,8 @@ func delete_tab(tab : int) -> void:
 			Global.current_project_index -= 1
 		else:
 			Global.current_project_index = 0
+	else:
+		if tab < Global.current_project_index:
+			Global.current_project_index -= 1
 	if Global.unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
 		Global.unsaved_changes_dialog.disconnect("confirmed", self, "delete_tab")
