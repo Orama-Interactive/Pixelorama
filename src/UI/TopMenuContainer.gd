@@ -6,7 +6,7 @@ enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES}
 enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
-enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
+enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA}
 
 var file_menu_button : MenuButton
 var edit_menu_button : MenuButton
@@ -196,6 +196,7 @@ func setup_help_menu() -> void:
 		"View Splash Screen" : 0,
 		"Online Docs" : InputMap.get_action_list("open_docs")[0].get_scancode_with_modifiers(),
 		"Issue Tracker" : 0,
+		"Open Logs Folder" :0,
 		"Changelog" : 0,
 		"About Pixelorama" : 0
 		}
@@ -532,6 +533,10 @@ func help_menu_id_pressed(id : int) -> void:
 			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
 		HelpMenuId.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
+		HelpMenuId.OPEN_LOGS_FOLDER:
+			var dir = Directory.new()
+			dir.make_dir_recursive("user://logs") #incase someone deleted it
+			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		HelpMenuId.CHANGELOG:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v09---2021-09-18")
 		HelpMenuId.ABOUT_PIXELORAMA:
