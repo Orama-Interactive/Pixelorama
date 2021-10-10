@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2021-09-29 15:05\n"
+"PO-Revision-Date: 2021-10-10 18:49\n"
 
 msgid "OK"
 msgstr ""
@@ -620,6 +620,9 @@ msgid "Online Docs"
 msgstr ""
 
 msgid "Issue Tracker"
+msgstr ""
+
+msgid "Open Logs Folder"
 msgstr ""
 
 msgid "Changelog"
