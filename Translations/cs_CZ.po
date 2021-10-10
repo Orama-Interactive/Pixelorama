@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-09-29 15:05\n"
+"PO-Revision-Date: 2021-10-10 18:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -622,6 +622,9 @@ msgstr "Online dokumentace"
 
 msgid "Issue Tracker"
 msgstr "Nahlásit potíže"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Seznam změn"
