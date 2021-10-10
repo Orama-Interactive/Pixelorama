@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2021-10-10 09:37\n"
+"PO-Revision-Date: 2021-10-10 12:17\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -205,34 +205,34 @@ msgid "Show Rulers"
 msgstr "Linialen tonen"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Kantlijnen tonen"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Animatietijdlijn tonen"
 
 msgid "Zen Mode"
 msgstr "Zen modus"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Beeldvullende modus"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Opvullen met kleur:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Bestand openen"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Bestand(en) openen"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Importopties"
 
 msgid "Import as:"
 msgstr "Importeer als:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Recente projecten"
 
 msgid "New tab"
 msgstr "Nieuw tabblad"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nieuw tabblad)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (nieuwe laag)"
 
 msgid "New frame"
 msgstr "Nieuw frame"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Frame vervangen"
 
 msgid "New layer"
 msgstr "Nieuwe laag"
@@ -256,10 +256,10 @@ msgid "New palette"
 msgstr "Nieuw palet"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nieuwe kwast"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nieuw patroon"
 
 msgid "Horizontal frames:"
 msgstr "Horizontale frames:"
@@ -268,31 +268,31 @@ msgid "Vertical frames:"
 msgstr "Verticale frames:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Eerste frame:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Bij frame:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Bij laag:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Soort kwast:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Vijzelkwast"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Projectkwast"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Willekeurige kwast"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Sprite opslaan als .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Sprite exporteren als .png"
 
 msgid "Export Sprite"
 msgstr ""
@@ -446,16 +446,16 @@ msgid "Performance"
 msgstr ""
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatoren"
 
 msgid "On"
-msgstr ""
+msgstr "Aan"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Standaardwaarde herstellen"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Vloeiend zoomen"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr ""
